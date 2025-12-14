@@ -1,5 +1,4 @@
 import { BehaviorSubject, combineLatest, map, type Observable } from 'rxjs';
-import { readable } from 'svelte/store';
 
 /**
  * Creates in-memory infinite scroll pagination for an Observable array.
@@ -34,9 +33,10 @@ export function useInMemoryPagination<T>(
     }),
   );
 
-  const fetchNextPage = readable(async () => {
-    await Promise.resolve(page$.next(page$.value + 1));
-  });
+  const fetchNextPage = () => {
+    page$.next(page$.value + 1);
+    return Promise.resolve();
+  };
 
   return {
     list,

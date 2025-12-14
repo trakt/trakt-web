@@ -9,7 +9,7 @@ import { hideShowCalendarRequest } from '$lib/requests/queries/users/hideShowCal
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
 export type DropStoreProps = {
   id: number;
@@ -37,7 +37,7 @@ export function useDrop(
   props: DropStoreProps,
 ) {
   const { id, type } = props;
-  const isDropping = writable(false);
+  const isDropping = new BehaviorSubject(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
 
@@ -50,13 +50,13 @@ export function useDrop(
       return;
     }
 
-    isDropping.set(true);
+    isDropping.next(true);
     track({ type });
 
     await requestDrop({ id, type });
     await invalidate(InvalidateAction.Drop(type));
 
-    isDropping.set(false);
+    isDropping.next(false);
   };
 
   return {

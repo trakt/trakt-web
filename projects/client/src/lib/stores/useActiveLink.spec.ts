@@ -1,45 +1,62 @@
-import { afterNavigate } from '$app/navigation';
-import { describe, expect, it, type Mock, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useActiveLink } from './useActiveLink.ts';
 
+let pagePathname = '/initial';
 vi.mock('$app/state', () => ({
   page: {
-    url: {
-      pathname: '/initial',
+    get url() {
+      return { pathname: pagePathname };
     },
   },
 }));
 
+type NavEvent = { to?: { url: { pathname: string } } };
+let afterNavigateCallback: ((nav: NavEvent) => void) | undefined;
+vi.mock('$app/navigation', () => ({
+  afterNavigate: (cb: (nav: NavEvent) => void) => {
+    afterNavigateCallback = cb;
+  },
+}));
+
 describe('useActiveLink', () => {
+  beforeEach(() => {
+    pagePathname = '/initial';
+    afterNavigateCallback = undefined;
+  });
+
   it('should initialize with correct active state', () => {
     const { isActive } = useActiveLink('/initial');
     let value;
-    isActive.subscribe((v) => value = v)();
+    const sub = isActive.subscribe((v) => (value = v));
+    sub.unsubscribe();
     expect(value).toBe(true);
   });
 
   it('should initialize as inactive for non-matching route', () => {
     const { isActive } = useActiveLink('/other');
     let value;
-    isActive.subscribe((v) => value = v)();
+    const sub = isActive.subscribe((v) => (value = v));
+    sub.unsubscribe();
     expect(value).toBe(false);
   });
 
   it('should update active state on navigation', () => {
     const { isActive } = useActiveLink('/new');
-    const [[navigationCallback]] = (afterNavigate as Mock).mock.calls;
-
-    navigationCallback({ to: { url: { pathname: '/new' } } });
-
+    // Simulate navigation
+    if (afterNavigateCallback) {
+      afterNavigateCallback({ to: { url: { pathname: '/new' } } });
+    }
     let value;
-    isActive.subscribe((v) => value = v)();
+    const sub = isActive.subscribe((v) => (value = v));
+    sub.unsubscribe();
     expect(value).toBe(true);
   });
 
   it('should handle null href', () => {
     const { isActive } = useActiveLink(null);
     let value;
-    isActive.subscribe((v) => value = v)();
+    const sub = isActive.subscribe((v) => (value = v));
+    sub.unsubscribe();
     expect(value).toBe(false);
   });
 });

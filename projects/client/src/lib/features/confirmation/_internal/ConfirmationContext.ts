@@ -1,4 +1,4 @@
-import { type Writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import type { ConfirmationOperation } from '../models/ConfirmationOperation.ts';
 
 export type ConfirmationRequest = {
@@ -11,5 +11,5 @@ export type ConfirmationRequest = {
 export type ConfirmationContext = {
   showConfirmation: (request: ConfirmationRequest) => void;
   hideConfirmation: () => void;
-  activeConfirmation: Writable<ConfirmationRequest | Nil>;
+  activeConfirmation: BehaviorSubject<ConfirmationRequest | Nil>;
 };

@@ -70,7 +70,7 @@
       <SpoilerSwitch
         isReplying={$isCommenting}
         enabled={$isSpoiler}
-        onclick={() => isSpoiler.update((value) => !value)}
+        onclick={() => isSpoiler.next(!isSpoiler.value)}
       />
 
       <ActionButton
@@ -89,7 +89,7 @@
   {#if $error}
     <CommentError
       message={toTranslatedErrorComment($error)}
-      onDismiss={() => error.set(null)}
+      onDismiss={() => error.next(null)}
     />
   {/if}
 </trakt-comment-input>

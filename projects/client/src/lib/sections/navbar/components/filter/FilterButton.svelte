@@ -4,7 +4,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import FilterSidebar from "./FilterSidebar.svelte";
 
   const { isDisabled }: { isDisabled: boolean } = $props();

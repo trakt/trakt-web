@@ -9,7 +9,7 @@ import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { isSameDay } from 'date-fns/isSameDay';
-import { derived, type Readable } from 'svelte/store';
+import { combineLatest, map, type Observable } from 'rxjs';
 import type { DiscoverMode } from '../../discover/models/DiscoverMode.ts';
 import type { CalendarEntry } from '../models/CalendarEntry.ts';
 
@@ -22,8 +22,8 @@ type UseCalendarParams = {
 };
 
 type CalendarResult = {
-  isLoading: Readable<boolean>;
-  calendar: Readable<CalendarEntry[]>;
+  isLoading: Observable<boolean>;
+  calendar: Observable<CalendarEntry[]>;
 };
 
 function typeToQueries({ start, days, type }: UseCalendarParams) {
@@ -57,22 +57,22 @@ export function useCalendar(
   const queries = typeToQueries(props)
     .map((query) => useQuery(query));
 
-  const isLoading = derived(
-    queries,
-    ($queries) => $queries.some(toLoadingState),
+  const isLoading = combineLatest(queries).pipe(
+    map(($queries) => $queries.some(toLoadingState)),
   );
 
-  const allItems = derived(queries, ($queries) => {
-    return $queries.flatMap((query) => query.data ?? []).toSorted((a, b) => {
-      return new Date(a.airDate).getTime() - new Date(b.airDate).getTime();
-    });
-  });
+  const allItems = combineLatest(queries).pipe(
+    map(($queries) => {
+      return $queries.flatMap((query) => query.data ?? []).toSorted((a, b) => {
+        return new Date(a.airDate).getTime() - new Date(b.airDate).getTime();
+      });
+    }),
+  );
 
   return {
     isLoading,
-    calendar: derived(
-      allItems,
-      ($allItems) => {
+    calendar: allItems.pipe(
+      map(($allItems) => {
         return Array.from({ length: props.days }, (_, i) => {
           const date = new Date(props.start);
           date.setDate(props.start.getDate() + i);
@@ -83,7 +83,7 @@ export function useCalendar(
 
           return { date, items };
         });
-      },
+      }),
     ),
   };
 }

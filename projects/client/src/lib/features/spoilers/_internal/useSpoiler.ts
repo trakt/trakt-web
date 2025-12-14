@@ -1,20 +1,21 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { derived } from 'svelte/store';
+import { combineLatest, map } from 'rxjs';
 
 export function useSpoiler() {
   const { isAuthorized } = useAuth();
   const { user } = useUser();
 
-  const isSpoilerHidden = derived(
+  const isSpoilerHidden = combineLatest(
     [isAuthorized, user],
-    ([$isAuthorized, $user]) => {
+  ).pipe(
+    map(([$isAuthorized, $user]) => {
       if (!$isAuthorized) {
         return false;
       }
 
       return Boolean($user?.preferences.isSpoilerHidden);
-    },
+    }),
   );
 
   return {

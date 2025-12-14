@@ -1,4 +1,4 @@
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 import { useQuery } from '../../../features/query/useQuery.ts';
 import { userWatchingQuery } from '../../../requests/queries/users/userWatchingQuery.ts';
 
@@ -8,6 +8,6 @@ export function useCurrentUserNowWatching() {
   }));
 
   return {
-    nowWatching: derived(response, ($response) => $response.data ?? null),
+    nowWatching: response.pipe(map(($response) => $response.data ?? null)),
   };
 }

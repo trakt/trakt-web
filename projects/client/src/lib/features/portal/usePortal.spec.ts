@@ -1,7 +1,7 @@
 import { usePortal } from '$lib/features/portal/usePortal.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
-import { get } from 'svelte/store';
+import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { PORTAL_UNDERLAY_ID } from './_internal/constants.ts';
 
@@ -99,7 +99,7 @@ describe('action: usePortal', () => {
 
     vi.advanceTimersToNextFrame();
 
-    expect(get(isOpened)).toBe(false);
+    expect(await firstValueFrom(isOpened)).toBe(false);
     component.destroy();
   });
 

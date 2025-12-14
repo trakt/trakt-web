@@ -2,17 +2,20 @@
   import Dialog from "$lib/components/dialogs/Dialog.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { CommentsProps } from "$lib/sections/summary/components/comments/CommentsProps";
-  import { writable, type Writable } from "svelte/store";
+  import {
+    writable,
+    WritableSubject,
+  } from "$lib/utils/store/WritableSubject.ts";
   import CommentInput from "../comment-input/CommentInput.svelte";
   import type { ActiveComment } from "../models/ActiveComment";
 
   type PostCommentDialogProps = {
-    dialog: Writable<HTMLDialogElement>;
+    dialog: WritableSubject<HTMLDialogElement | undefined>;
     onCommentPost: (comment: ActiveComment) => void;
   } & CommentsProps;
 
   const {
-    dialog = writable(),
+    dialog = writable<HTMLDialogElement | undefined>(undefined),
     onCommentPost,
     media,
     ...props
@@ -30,7 +33,7 @@
       placeholder={m.textarea_placeholder_comment()}
       onCommentPost={(comment) => {
         onCommentPost(comment);
-        $dialog.close();
+        $dialog?.close();
       }}
     />
   </div>

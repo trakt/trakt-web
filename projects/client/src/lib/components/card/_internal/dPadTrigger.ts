@@ -1,6 +1,5 @@
 import { useNavigation } from '$lib/features/navigation/useNavigation.ts';
 import { onMount } from 'svelte';
-import { get } from 'svelte/store';
 
 export function dPadTrigger(
   element: HTMLElement,
@@ -22,7 +21,7 @@ export function dPadTrigger(
   };
 
   onMount(() => {
-    if (get(navigation) !== 'dpad') {
+    if (navigation.value !== 'dpad') {
       return;
     }
 

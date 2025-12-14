@@ -1,4 +1,4 @@
-import type { Writable } from 'svelte/store';
+import type { BehaviorSubject } from 'rxjs';
 import type { FeatureFlag } from '../models/FeatureFlag.ts';
 
 type FeatureFlags = {
@@ -6,5 +6,5 @@ type FeatureFlags = {
 };
 
 export type FeatureFlagContext = {
-  flags: Writable<FeatureFlags>;
+  flags: BehaviorSubject<FeatureFlags>;
 };

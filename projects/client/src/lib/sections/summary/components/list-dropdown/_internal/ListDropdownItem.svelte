@@ -5,6 +5,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { onMount } from "svelte";
   import { ListDropdownItemIntlProvider } from "./ListDropdownItemIntlProvider";
@@ -27,7 +28,7 @@
   const { addToList, removeFromList, isListUpdating } = $derived(
     useList({
       list,
-      type: media.type,
+      type: media.type as MediaType,
       media,
     }),
   );
@@ -35,13 +36,11 @@
   const isBelowLimit = $derived(list.count < $user.limits.lists.itemLimit);
 
   onMount(() => {
-    const unsubscribe = isListUpdating.subscribe((value) => {
-      isUpdating.set(value);
+    const subscription = isListUpdating.subscribe((value) => {
+      isUpdating.next(value);
     });
 
-    return {
-      destroy: unsubscribe,
-    };
+    return () => subscription.unsubscribe();
   });
 
   const { confirm } = useConfirm();

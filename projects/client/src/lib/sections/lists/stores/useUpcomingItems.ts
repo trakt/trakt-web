@@ -10,7 +10,7 @@ import { upcomingMediaQuery } from '$lib/requests/queries/calendars/upcomingMedi
 import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMoviesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 
 type UseUpcomingItemsProps = {
   type: DiscoverMode;
@@ -54,18 +54,15 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
 
   const query = useQuery(getUpcomingCalendarQuery(startDate, props));
 
-  const isLoading = derived(
-    [query],
-    ([$query]) => $query.isLoading,
-  );
+  const isLoading = query.pipe(map(($query) => $query.isLoading));
 
-  const upcoming = derived(
-    query,
-    ($query) =>
+  const upcoming = query.pipe(
+    map(($query) =>
       ($query.data ?? []).filter((d) => {
         const distanceFromNow = d.airDate.getTime() - Date.now();
         return distanceFromNow > 0;
-      }),
+      })
+    ),
   );
 
   return { upcoming, isLoading };

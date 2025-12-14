@@ -10,7 +10,7 @@ import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { isHttpError } from '@sveltejs/kit';
 import type { CommentPostParams } from '@trakt/api';
-import { get, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import type { CommentsProps } from '../../CommentsProps.ts';
 import { mapToCommentError } from './mapToCommentError.ts';
 
@@ -68,9 +68,9 @@ export function usePostComment(
   props: UseAddCommentProps,
 ) {
   const { user } = useUser();
-  const isCommenting = writable(false);
-  const isSpoiler = writable(false);
-  const error = writable<CommentError | null>(null);
+  const isCommenting = new BehaviorSubject(false);
+  const isSpoiler = new BehaviorSubject(false);
+  const error = new BehaviorSubject<CommentError | null>(null);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.AddComment);
 
@@ -85,7 +85,7 @@ export function usePostComment(
       return null;
     }
 
-    isCommenting.set(true);
+    isCommenting.next(true);
 
     /*
       FIXME: standardize errors we display in components.
@@ -94,22 +94,22 @@ export function usePostComment(
         For example: 422 + content_too_short
     */
     try {
-      error.set(null);
+      error.next(null);
 
       track({ action: props.commentType });
-      const result = await addCommentRequest(comment, get(isSpoiler), props);
+      const result = await addCommentRequest(comment, isSpoiler.value, props);
       await invalidate(invalidateAction);
 
-      isCommenting.set(false);
+      isCommenting.next(false);
       return result;
     } catch (commentError) {
-      isCommenting.set(false);
+      isCommenting.next(false);
 
       if (!isHttpError(commentError)) {
         throw error;
       }
 
-      error.set(mapToCommentError(commentError.status));
+      error.next(mapToCommentError(commentError.status));
       return null;
     }
   };

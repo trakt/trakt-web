@@ -1,7 +1,7 @@
 import { page } from '$app/state';
 import { useToggler } from '$lib/components/toggles/useToggler.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { derived } from 'svelte/store';
+import { combineLatest, map } from 'rxjs';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
 import { useSeasonalTheme } from '../theme/useSeasonalTheme.ts';
@@ -17,7 +17,7 @@ export function useDiscover() {
 
   const setMode = (value: DiscoverMode) => {
     track({ mode: value, source: page.route.id ?? 'unknown' });
-    mode.set(value);
+    mode.next(value);
     set(value);
   };
 
@@ -25,18 +25,19 @@ export function useDiscover() {
     options,
     setMode,
     mode,
-    useSeasonalFilters: derived(
+    useSeasonalFilters: combineLatest(
       [useSeasonalFilters, activeTheme],
-      ([$useSeasonalFilters, $activeTheme]) => {
+    ).pipe(
+      map(([$useSeasonalFilters, $activeTheme]) => {
         if ($activeTheme === null) {
           return false;
         }
 
         return $useSeasonalFilters;
-      },
+      }),
     ),
     setSeasonalFilters: (value: boolean) => {
-      useSeasonalFilters.set(value);
+      useSeasonalFilters.next(value);
       safeLocalStorage.setItem(SEASONAL_STORAGE_KEY, JSON.stringify(value));
     },
   };

@@ -3,8 +3,8 @@
   import { getToken } from "$lib/features/auth/token";
   import * as m from "$lib/features/i18n/messages.ts";
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
+  import { writable } from "$lib/utils/store/WritableSubject";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { writable } from "svelte/store";
   import { frameListener } from "./_internal/frameListener";
 
   const { user } = useUser();

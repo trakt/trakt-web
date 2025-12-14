@@ -1,6 +1,6 @@
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
+import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { writable } from 'svelte/store';
 import { FeatureFlag } from '../models/FeatureFlag.ts';
 import type { FeatureFlagContext } from './FeatureFlagContext.ts';
 import { FEATURE_FLAG_CONTEXT_KEY } from './FeatureFlagContextKey.ts';
@@ -22,7 +22,7 @@ export function createFeatureFlagContext() {
     FEATURE_FLAG_CONTEXT_KEY,
     getContext<FeatureFlagContext>(FEATURE_FLAG_CONTEXT_KEY) ??
       {
-        flags: writable(initializeFlags()),
+        flags: new BehaviorSubject(initializeFlags()),
       },
   );
 

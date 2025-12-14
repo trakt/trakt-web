@@ -1,10 +1,10 @@
 import { NOOP_FN } from '$lib/utils/constants.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
-import type { Writable } from 'svelte/store';
+import { WritableSubject } from '$lib/utils/store/WritableSubject.ts';
 
 type LineClampProps = {
   lines: number;
-  isClamped?: Writable<boolean>;
+  isClamped?: WritableSubject<boolean>;
 };
 
 export function lineClamp(node: HTMLElement, {

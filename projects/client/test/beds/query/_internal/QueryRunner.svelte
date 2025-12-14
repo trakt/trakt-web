@@ -1,6 +1,6 @@
 <script lang="ts">
   import { iffy } from "$lib/utils/function/iffy";
-  import { derived, type Readable } from "svelte/store";
+  import { map, type Observable } from "rxjs";
 
   const {
     factory,
@@ -8,19 +8,21 @@
     mapper = (response) => response,
     waitFor = (response) => !!response,
   }: {
-    factory: () => Readable<unknown>;
+    factory: () => Observable<unknown>;
     output: (value: unknown) => void;
     mapper?: (response: unknown) => unknown;
     waitFor?: (response: unknown) => boolean;
   } = $props();
 
   iffy(() =>
-    derived(factory(), mapper).subscribe((result) => {
-      if (!waitFor(result)) {
-        return;
-      }
+    factory()
+      .pipe(map(mapper))
+      .subscribe((result) => {
+        if (!waitFor(result)) {
+          return;
+        }
 
-      output(result);
-    }),
+        output(result);
+      }),
   );
 </script>

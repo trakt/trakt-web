@@ -15,7 +15,7 @@ export function trackWindowScrollDirection(
 
   const offset = useVarToPixels(props.offsetVar);
   let offsetValue = 0;
-  const unsubscribe = offset.subscribe((value) => {
+  const subscription = offset.subscribe((value) => {
     offsetValue = value;
   });
 
@@ -55,7 +55,7 @@ export function trackWindowScrollDirection(
 
   return {
     destroy() {
-      unsubscribe();
+      subscription.unsubscribe();
       unregister();
     },
   };

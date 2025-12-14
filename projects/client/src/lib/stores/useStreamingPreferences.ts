@@ -1,23 +1,31 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { getLanguageAndRegion } from '$lib/features/i18n/index.ts';
-import type { StreamingServiceOptions } from '$lib/requests/models/StreamingServiceOptions.ts';
-import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferredStreamingService.ts';
-import { derived, get } from 'svelte/store';
+import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
+import { BehaviorSubject, map, switchMap } from 'rxjs';
 
 export function useStreamingPreferences() {
   const { user } = useUser();
-  const { region } = getLanguageAndRegion();
 
-  const country = derived(user, ($user) => $user?.services?.country ?? region);
-  const favorites = derived(user, ($user) => $user?.services?.favorites ?? []);
+  const showOnlyFavorites = new BehaviorSubject(
+    Boolean(
+      JSON.parse(safeLocalStorage.getItem('show-only-favorites') ?? 'false'),
+    ),
+  );
 
   return {
-    country,
-    getPreferred: (services: StreamingServiceOptions) =>
-      findPreferredStreamingService({
-        services,
-        favorites: get(favorites),
-        countryCode: get(country),
-      }),
+    showOnlyFavorites: showOnlyFavorites.asObservable(),
+    favorites: user.pipe(
+      map((u) => u?.services.favorites ?? []),
+    ),
+    country: user.pipe(switchMap((u) => {
+      return new BehaviorSubject(u?.services.country || 'us').asObservable();
+    })),
+    toggleShowOnlyFavorites: () => {
+      const newValue = !showOnlyFavorites.value;
+      safeLocalStorage.setItem(
+        'show-only-favorites',
+        JSON.stringify(newValue),
+      );
+      showOnlyFavorites.next(newValue);
+    },
   };
 }

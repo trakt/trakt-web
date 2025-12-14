@@ -14,7 +14,7 @@
 </script>
 
 <Drawer {onClose} title={m.header_filters()} trapSelector=".trakt-filter">
-  {#each $filters as filter}
+  {#each filters as filter}
     {#if filter.type === "list"}
       <ListFilter {filter} />
     {/if}

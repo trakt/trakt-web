@@ -1,4 +1,4 @@
-import { get } from 'svelte/store';
+import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useContentObserver } from './useContentObserver.ts';
 
@@ -7,12 +7,12 @@ describe('action: useDynamicTextArea', () => {
     vi.useFakeTimers({ toFake: ['requestAnimationFrame'] });
   });
 
-  it('should initialize with no content', () => {
+  it('should initialize with no content', async () => {
     const { hasContent } = useContentObserver();
-    expect(get(hasContent)).toBe(false);
+    expect(await firstValueFrom(hasContent)).toBe(false);
   });
 
-  it('should detect content when text is added', () => {
+  it('should detect content when text is added', async () => {
     const textArea = document.createElement('textarea');
     const { contentObserver, hasContent } = useContentObserver();
     const action = contentObserver(textArea);
@@ -22,7 +22,7 @@ describe('action: useDynamicTextArea', () => {
 
     vi.advanceTimersToNextFrame();
 
-    expect(get(hasContent)).toBe(true);
+    expect(await firstValueFrom(hasContent)).toBe(true);
     action.destroy();
   });
 });

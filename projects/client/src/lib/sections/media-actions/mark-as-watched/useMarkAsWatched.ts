@@ -8,7 +8,7 @@ import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts
 import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import type { MarkAsWatchedAt } from '../../../models/MarkAsWatchedAt.ts';
 import { hasAired } from '../_internal/hasAired.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
@@ -23,7 +23,7 @@ export function useMarkAsWatched(
 ) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
-  const isMarkingAsWatched = writable(false);
+  const isMarkingAsWatched = new BehaviorSubject(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.MarkAsWatched);
@@ -39,7 +39,7 @@ export function useMarkAsWatched(
 
     const watchedAtDate = watchedAt ?? 'now';
 
-    isMarkingAsWatched.set(true);
+    isMarkingAsWatched.next(true);
     track({ action: 'add' });
 
     await markAsWatchedRequest({
@@ -48,11 +48,11 @@ export function useMarkAsWatched(
 
     await invalidate(InvalidateAction.MarkAsWatched(type));
 
-    isMarkingAsWatched.set(false);
+    isMarkingAsWatched.next(false);
   };
 
   const removeWatched = async () => {
-    isMarkingAsWatched.set(true);
+    isMarkingAsWatched.next(true);
     track({ action: 'remove' });
 
     await removeWatchedRequest({
@@ -61,7 +61,7 @@ export function useMarkAsWatched(
 
     await invalidate(InvalidateAction.MarkAsWatched(type));
 
-    isMarkingAsWatched.set(false);
+    isMarkingAsWatched.next(false);
   };
 
   const isWatchable = media.every((item) => {

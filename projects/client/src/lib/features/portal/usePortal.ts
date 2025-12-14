@@ -4,8 +4,8 @@ import { openPopupContainer } from '$lib/features/portal/_internal/openPopupCont
 import { usePopupHelpers } from '$lib/features/portal/_internal/usePopupHelpers.ts';
 import { clickOutside } from '$lib/utils/actions/clickOutside.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
+import { BehaviorSubject } from 'rxjs';
 import { onMount } from 'svelte';
-import { derived, get, readable, writable } from 'svelte/store';
 import { isTargetContained } from './_internal/isTargetContained.ts';
 import type { PopupPlacement } from './_internal/models/PopupPlacement.ts';
 
@@ -29,36 +29,36 @@ export function usePortal(props?: PortalProps) {
       portal: () => ({
         destroy: NOOP_FN,
       }),
-      isOpened: readable(false),
+      isOpened: new BehaviorSubject(false),
       close: NOOP_FN,
     };
   }
 
   const placement = props?.placement ?? DEFAULT_PLACEMENT;
 
-  const popupContainer = writable<HTMLElement | null>(null);
-  const popupTarget = writable<HTMLElement | null>(null);
-  const isPopupOpen = writable(false);
+  const popupContainer = new BehaviorSubject<HTMLElement | null>(null);
+  const popupTarget = new BehaviorSubject<HTMLElement | null>(null);
+  const isPopupOpen = new BehaviorSubject(false);
 
   const { addHelpers, removeHelpers } = usePopupHelpers(placement);
 
   const closeHandler = () => {
-    get(popupTarget)?.removeAttribute(POPUP_STATE_ATTRIBUTE);
-    removeHelpers(get(popupContainer));
-    popupTarget.set(null);
-    isPopupOpen.set(false);
+    popupTarget.value?.removeAttribute(POPUP_STATE_ATTRIBUTE);
+    removeHelpers(popupContainer.value);
+    popupTarget.next(null);
+    isPopupOpen.next(false);
   };
   const openHandler = (target: HTMLElement) => {
-    popupTarget.set(target);
+    popupTarget.next(target);
     target.setAttribute(POPUP_STATE_ATTRIBUTE, PopupState.Opened);
     addHelpers(target);
-    isPopupOpen.set(true);
+    isPopupOpen.next(true);
   };
 
   const portalTrigger = (targetNode: HTMLElement) => {
     const closeAroundTarget = (event: Event) => {
       const isPersistent = props?.type === 'persistent';
-      if (isPersistent && isTargetContained(get(popupContainer), event)) {
+      if (isPersistent && isTargetContained(popupContainer.value, event)) {
         return;
       }
 
@@ -77,18 +77,18 @@ export function usePortal(props?: PortalProps) {
         targetNode.removeEventListener('clickoutside', closeAroundTarget);
         targetNode.removeEventListener('click', openAroundTarget);
         removeHelpers(null);
-        get(popupContainer)?.remove();
+        popupContainer.value?.remove();
       },
     };
   };
 
   const portal = (node: HTMLElement) => {
-    const target = get(popupTarget);
-    if (!target || !get(isPopupOpen)) {
+    const target = popupTarget.value;
+    if (!target || !isPopupOpen.value) {
       return;
     }
 
-    popupContainer.set(node);
+    popupContainer.next(node);
     return openPopupContainer(
       node,
       target,
@@ -99,7 +99,7 @@ export function usePortal(props?: PortalProps) {
   return {
     portalTrigger,
     portal,
-    isOpened: derived(isPopupOpen, ($isOpened) => $isOpened),
+    isOpened: isPopupOpen.asObservable(),
     close: closeHandler,
   };
 }

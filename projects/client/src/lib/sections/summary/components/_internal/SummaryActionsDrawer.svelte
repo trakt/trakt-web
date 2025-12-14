@@ -3,7 +3,7 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
 
   const {
     children,

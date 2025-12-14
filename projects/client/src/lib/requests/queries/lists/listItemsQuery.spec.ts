@@ -3,9 +3,9 @@ import { ListedMoviesMappedMock } from '$mocks/data/lists/mapped/ListedMoviesMap
 import { ListedShowsMappedMock } from '$mocks/data/lists/mapped/ListedShowsMappedMock.ts';
 import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mapped/HereticListsMappedMock.ts';
 import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
+import { createTestBedInfiniteQuery } from '$test/beds/query/createTestBedInfiniteQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { mapToEntries } from '$test/utils/mapToEntries.ts';
-import { createInfiniteQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
 import { listItemsQuery } from './listItemsQuery.ts';
 
@@ -17,7 +17,7 @@ describe('listItemsQuery', () => {
   it('should query list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createInfiniteQuery(
+        createTestBedInfiniteQuery(
           listItemsQuery({
             listId: `${assertDefined(SiloListsMappedMock.at(0)).id}`,
             ...PAGINATION_PARAMS,
@@ -35,7 +35,7 @@ describe('listItemsQuery', () => {
   it('should query show list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createInfiniteQuery(
+        createTestBedInfiniteQuery(
           listItemsQuery({
             listId: `${assertDefined(SiloListsMappedMock.at(0)).id}`,
             type: 'show',
@@ -51,7 +51,7 @@ describe('listItemsQuery', () => {
   it('should query movie list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createInfiniteQuery(
+        createTestBedInfiniteQuery(
           listItemsQuery({
             listId: `${assertDefined(HereticListsMappedMock.at(0)).id}`,
             type: 'movie',

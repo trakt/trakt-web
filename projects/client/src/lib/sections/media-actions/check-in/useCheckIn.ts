@@ -9,7 +9,7 @@ import { checkinEpisodeRequest } from '$lib/requests/queries/checkin/checkinEpis
 import { checkinMovieRequest } from '$lib/requests/queries/checkin/checkinMovieRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { MovieCheckinRequest, ShowCheckinRequest } from '@trakt/api';
-import { derived, writable } from 'svelte/store';
+import { BehaviorSubject, map } from 'rxjs';
 import { hasAired } from '../_internal/hasAired.ts';
 
 type EpisodeProps = {
@@ -55,14 +55,14 @@ function mapToMoviePayload({ media }: MovieProps): MovieCheckinRequest {
 
 export function useCheckIn(props: UseCheckInProps) {
   const { type } = props;
-  const isCheckingIn = writable(false);
+  const isCheckingIn = new BehaviorSubject(false);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.CheckIn);
 
   const { nowPlaying } = useNowPlaying();
 
   const checkin = async () => {
-    isCheckingIn.set(true);
+    isCheckingIn.next(true);
 
     if (type === 'episode') {
       const payload = mapToEpisodePayload(props);
@@ -78,7 +78,7 @@ export function useCheckIn(props: UseCheckInProps) {
 
     await invalidate(InvalidateAction.CheckIn);
 
-    isCheckingIn.set(false);
+    isCheckingIn.next(false);
   };
 
   const isWatchable = type === 'episode'
@@ -92,7 +92,7 @@ export function useCheckIn(props: UseCheckInProps) {
       FIXME: when we can cancel a checkin, only return true if the
       now playing item is the same as the one we are checking in
     */
-    isCheckedIn: derived(nowPlaying, ($nowPlaying) => Boolean($nowPlaying)),
+    isCheckedIn: nowPlaying.pipe(map(($nowPlaying) => Boolean($nowPlaying))),
     isWatchable,
   };
 }

@@ -4,7 +4,6 @@ import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { debounce } from '$lib/utils/timing/debounce.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { onMount } from 'svelte';
-import { get } from 'svelte/store';
 import { NOOP_FN } from '../../../../utils/constants.ts';
 import { isPageFilling } from './isPageFilling.ts';
 import { isScrolledFarEnough } from './isScrolledFarEnough.ts';
@@ -33,7 +32,7 @@ export function useLazyLoader({ loadMore }: UseLazyLoaderProps) {
   }
 
   function loadMoreOnResize() {
-    const height = get(observedDimension);
+    const height = observedDimension.value;
     if (isPageFilling(height)) {
       return;
     }
@@ -45,7 +44,7 @@ export function useLazyLoader({ loadMore }: UseLazyLoaderProps) {
     const debouncedLoadOnResize = debounce(loadMoreOnResize, time.fps(10));
     const debouncedLoadOnScroll = debounce(loadMoreOnScroll, time.fps(10));
 
-    const unSubscribeObservedDimension = observedDimension.subscribe(
+    const subscription = observedDimension.subscribe(
       (dimension) => {
         if (dimension === 0) {
           return;
@@ -65,7 +64,7 @@ export function useLazyLoader({ loadMore }: UseLazyLoaderProps) {
     );
 
     return () => {
-      unSubscribeObservedDimension();
+      subscription.unsubscribe();
       unregisterScroll();
       unregisterResize();
     };

@@ -1,6 +1,6 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
-import { derived, get, readable } from 'svelte/store';
+import { map, of, shareReplay, switchMap } from 'rxjs';
 import {
   currentUserCommentReactionsQuery,
   type UserReactions,
@@ -89,92 +89,92 @@ function definedData<T>(data: T | undefined): T {
 export function useUser() {
   const { isAuthorized } = useAuth();
 
-  if (!get(isAuthorized)) {
-    return {
-      user: readable(ANONYMOUS_USER),
-      history: readable<UserHistory>({
-        movies: new Map(),
-        shows: new Map(),
-      }),
-      watchlist: readable<UserWatchlist>({
-        movies: new Map(),
-        shows: new Map(),
-      }),
-      ratings: readable<UserRatings>({
-        episodes: new Map(),
-        movies: new Map(),
-        shows: new Map(),
-      }),
-      reactions: readable<UserReactions>(new Map()),
-      favorites: readable({
-        movies: new Map(),
-        shows: new Map(),
-      }),
-      network: readable<UserNetwork>({
-        following: [],
-      }),
-      plexLibrary: readable<UserPlexLibrary>({
-        movieIds: [],
-        episodeIds: [],
-        showIds: [],
-      }),
-    };
-  }
-
-  const userQueryResponse = useQuery(currentUserSettingsQuery());
-  const historyQueryResponse = useQuery(currentUserHistoryQuery());
-  const watchlistQueryResponse = useQuery(currentUserWatchlistQuery());
-  const ratingsQueryResponse = useQuery(currentUserRatingsQuery());
-  const commentReactionsQueryResponse = useQuery(
+  const userQuerySignal = useQuery(currentUserSettingsQuery());
+  const historyQuerySignal = useQuery(currentUserHistoryQuery());
+  const watchlistQuerySignal = useQuery(currentUserWatchlistQuery());
+  const ratingsQuerySignal = useQuery(currentUserRatingsQuery());
+  const commentReactionsQuerySignal = useQuery(
     currentUserCommentReactionsQuery(),
   );
-  const favoritesQueryResponse = useQuery(currentUserFavoritesQuery());
-  const followingQueryResponse = useQuery(currentUserNetworkQuery());
-  const plexLibraryQueryResponse = useQuery(
+  const favoritesQuerySignal = useQuery(currentUserFavoritesQuery());
+  const followingQuerySignal = useQuery(currentUserNetworkQuery());
+  const plexLibraryQuerySignal = useQuery(
     currentUserPlexLibraryQuery(),
   );
 
-  const user = derived(
-    userQueryResponse,
-    ($query) => definedData($query.data),
-  );
-  const history = derived(
-    historyQueryResponse,
-    ($query) => $query.data,
-  );
-  const watchlist = derived(
-    watchlistQueryResponse,
-    ($watchlist) => $watchlist.data,
-  );
-  const ratings = derived(
-    ratingsQueryResponse,
-    ($ratings) => $ratings.data,
-  );
-  const reactions = derived(
-    commentReactionsQueryResponse,
-    ($reactions) => $reactions.data,
-  );
-  const favorites = derived(
-    favoritesQueryResponse,
-    ($favorites) => $favorites.data,
-  );
-  const network = derived(
-    followingQueryResponse,
-    ($network) => $network.data,
-  );
-  const plexLibrary = derived(
-    plexLibraryQueryResponse,
-    ($collection) => $collection.data,
+  // Create a stream that switches between authorized and anonymous state
+  const userContext$ = isAuthorized.pipe(
+    switchMap((authorized) => {
+      if (!authorized) {
+        return of({
+          user: of(ANONYMOUS_USER),
+          history: of<UserHistory>({
+            movies: new Map(),
+            shows: new Map(),
+          }),
+          watchlist: of<UserWatchlist>({
+            movies: new Map(),
+            shows: new Map(),
+          }),
+          ratings: of<UserRatings>({
+            episodes: new Map(),
+            movies: new Map(),
+            shows: new Map(),
+          }),
+          reactions: of<UserReactions>(new Map()),
+          favorites: of({
+            movies: new Map(),
+            shows: new Map(),
+          }),
+          network: of<UserNetwork>({
+            following: [],
+          }),
+          plexLibrary: of<UserPlexLibrary>({
+            movieIds: [],
+            episodeIds: [],
+            showIds: [],
+          }),
+        });
+      }
+
+      return of({
+        user: userQuerySignal.pipe(
+          map((query) => definedData(query.data)),
+        ),
+        history: historyQuerySignal.pipe(
+          map((query) => query.data),
+        ),
+        watchlist: watchlistQuerySignal.pipe(
+          map((watchlist) => watchlist.data),
+        ),
+        ratings: ratingsQuerySignal.pipe(
+          map((ratings) => ratings.data),
+        ),
+        reactions: commentReactionsQuerySignal.pipe(
+          map((reactions) => reactions.data),
+        ),
+        favorites: favoritesQuerySignal.pipe(
+          map((favorites) => favorites.data),
+        ),
+        network: followingQuerySignal.pipe(
+          map((network) => network.data),
+        ),
+        plexLibrary: plexLibraryQuerySignal.pipe(
+          map((collection) => collection.data),
+        ),
+      });
+    }),
+    shareReplay(1),
   );
 
   return {
-    user,
-    history,
-    watchlist,
-    ratings,
-    reactions,
-    favorites,
-    network,
-    plexLibrary,
+    user: userContext$.pipe(switchMap((ctx) => ctx.user)),
+    history: userContext$.pipe(switchMap((ctx) => ctx.history)),
+    watchlist: userContext$.pipe(switchMap((ctx) => ctx.watchlist)),
+    ratings: userContext$.pipe(switchMap((ctx) => ctx.ratings)),
+    reactions: userContext$.pipe(switchMap((ctx) => ctx.reactions)),
+    favorites: userContext$.pipe(switchMap((ctx) => ctx.favorites)),
+    network: userContext$.pipe(switchMap((ctx) => ctx.network)),
+    plexLibrary: userContext$.pipe(switchMap((ctx) => ctx.plexLibrary)),
   };
 }

@@ -1,9 +1,9 @@
 import { render } from '@testing-library/svelte';
-import type { Readable } from 'svelte/store';
+import type { Observable } from 'rxjs';
 import QueryTestBed from './QueryTestBed.svelte';
 
 type RunQueryProps<T> = {
-  factory: () => Readable<T>;
+  factory: () => Observable<T>;
   mapper?: (response: T) => unknown;
   waitFor?: (response: T) => boolean;
 };
@@ -19,7 +19,7 @@ export function runQuery<T>({
         factory,
         mapper,
         waitFor,
-        output: (value) => resolve(value as T),
+        output: (value: unknown) => resolve(value as T),
       },
     })
   );

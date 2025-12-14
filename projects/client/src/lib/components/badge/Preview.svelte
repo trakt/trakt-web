@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
   import StemTag from "../tags/StemTag.svelte";
   import Tooltip from "../tooltip/Tooltip.svelte";
 

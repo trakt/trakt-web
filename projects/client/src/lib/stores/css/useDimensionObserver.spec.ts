@@ -1,6 +1,5 @@
 import { renderStore } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
-import { get } from 'svelte/store';
 import { describe, expect, it, vi } from 'vitest';
 import { useDimensionObserver } from './useDimensionObserver.ts';
 
@@ -26,7 +25,7 @@ describe('useDimensionObserver', () => {
     );
 
     const component = await renderStore(() => observeDimension(node));
-    expect(get(observedDimension)).toBe(0);
+    expect(observedDimension.value).toBe(0);
 
     const width = 100;
     vi.spyOn(node, 'getBoundingClientRect')
@@ -45,7 +44,7 @@ describe('useDimensionObserver', () => {
     );
 
     const component = await renderStore(() => observeDimension(node));
-    expect(get(observedDimension)).toBe(0);
+    expect(observedDimension.value).toBe(0);
 
     const height = 120;
     vi.spyOn(node, 'getBoundingClientRect')
@@ -64,7 +63,7 @@ describe('useDimensionObserver', () => {
     );
 
     const component = await renderStore(() => observeDimension(node));
-    expect(get(observedDimension)).toBe(0);
+    expect(observedDimension.value).toBe(0);
 
     const bottom = 150;
     vi.spyOn(node, 'getBoundingClientRect')

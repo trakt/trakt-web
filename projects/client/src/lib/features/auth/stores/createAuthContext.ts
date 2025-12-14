@@ -1,20 +1,20 @@
+import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { type Writable, writable } from 'svelte/store';
 import type { Token } from '../token/index.ts';
 
 export const AUTH_CONTEXT_KEY = Symbol('auth-is-authorized');
 
 type AuthContextType = {
-  isAuthorized: Writable<boolean>;
-  token: Writable<Token | null>;
+  isAuthorized: BehaviorSubject<boolean>;
+  token: BehaviorSubject<Token | null>;
 };
 
 export function createAuthContext(initial: {
   isAuthorized: boolean;
   token: Token | Nil;
 }) {
-  const isAuthorized = writable(initial.isAuthorized);
-  const token = writable<Token | null>(initial.token);
+  const isAuthorized = new BehaviorSubject(initial.isAuthorized);
+  const token = new BehaviorSubject<Token | null>(initial.token ?? null);
 
   const ctx = setContext(
     AUTH_CONTEXT_KEY,

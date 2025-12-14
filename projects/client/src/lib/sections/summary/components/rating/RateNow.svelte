@@ -2,8 +2,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { slideFade } from "$lib/utils/transitions/slideFade";
-  import { writable } from "svelte/store";
   import { fade, slide } from "svelte/transition";
   import RatingStars from "./_internal/RatingStars.svelte";
   import StarsConfetti from "./_internal/StarsConfetti.svelte";

@@ -1,8 +1,8 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { time } from "$lib/utils/timing/time";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
   import { EMOJI_BASE_URL } from "./constants";
 
   const {

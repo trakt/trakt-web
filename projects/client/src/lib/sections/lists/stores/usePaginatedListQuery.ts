@@ -6,7 +6,7 @@ import {
   type InfiniteData,
   type QueryKey,
 } from '@tanstack/svelte-query';
-import { derived, type Readable } from 'svelte/store';
+import { firstValueFrom, map } from 'rxjs';
 
 export function usePaginatedListQuery<
   TOutput,
@@ -22,25 +22,26 @@ export function usePaginatedListQuery<
 ) {
   const query = useInfiniteQuery(props);
 
-  const isLoading = derived(
-    query,
-    ($query) => toLoadingState($query) || $query.isFetchingNextPage,
+  const isLoading = query.pipe(
+    map(($query) => toLoadingState($query) || $query.isFetchingNextPage),
   );
 
-  const list = derived(query, ($query) => {
-    if (!$query.data?.pages) {
-      return [];
-    }
+  const list = query.pipe(
+    map(($query) => {
+      if (!$query.data?.pages) {
+        return [];
+      }
 
-    return $query.data.pages.flatMap((page) => page.entries);
-  });
-
-  const hasNextPage = derived(query, ($query) => $query.hasNextPage);
-
-  const fetchNextPage: Readable<() => Promise<void>> = derived(
-    query,
-    ($query) => () => $query.fetchNextPage(),
+      return $query.data.pages.flatMap((page) => page.entries);
+    }),
   );
+
+  const hasNextPage = query.pipe(map(($query) => $query.hasNextPage));
+
+  const fetchNextPage = async () => {
+    const { fetchNextPage } = await firstValueFrom(query);
+    await fetchNextPage();
+  };
 
   return {
     list,

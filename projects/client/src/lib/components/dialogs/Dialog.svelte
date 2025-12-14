@@ -2,14 +2,14 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { writable, WritableSubject } from "$lib/utils/store/WritableSubject";
   import type { Snippet } from "svelte";
-  import { writable, type Writable } from "svelte/store";
   import { mobileAppleVisualViewportHack } from "./_internal/mobileAppleVisualViewportHack";
   import { useDialogState } from "./_internal/useDialogState.ts";
 
   type DialogProps = {
     title: string;
-    dialog: Writable<HTMLDialogElement>;
+    dialog: WritableSubject<HTMLDialogElement | undefined>;
     onClose?: () => void;
     badge?: Snippet;
     metaInfo?: string;
@@ -19,7 +19,7 @@
     title,
     children,
     onClose,
-    dialog = writable(),
+    dialog = writable<HTMLDialogElement | undefined>(undefined),
     badge,
     metaInfo,
   }: DialogProps = $props();
@@ -45,7 +45,7 @@
         {@render badge?.()}
       </div>
       <ActionButton
-        onclick={() => $dialog.close()}
+        onclick={() => $dialog?.close()}
         label={m.button_label_close()}
         style="ghost"
         --color-foreground-default="var(--color-text-secondary)"

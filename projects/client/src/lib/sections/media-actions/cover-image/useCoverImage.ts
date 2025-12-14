@@ -4,7 +4,7 @@ import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.t
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { setCoverImageRequest } from '$lib/requests/queries/users/setCoverImageRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { derived, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
 type UseCoverImageProps = {
   type: ExtendedMediaType;
@@ -12,26 +12,23 @@ type UseCoverImageProps = {
 };
 
 export function useCoverImage({ type, id }: UseCoverImageProps) {
-  const isSettingCoverImage = writable(false);
+  const isSettingCoverImage = new BehaviorSubject(false);
 
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.CoverImage);
 
   const setCoverImage = async () => {
-    isSettingCoverImage.set(true);
+    isSettingCoverImage.next(true);
 
     track({ type });
     await setCoverImageRequest({ type, id });
     await invalidate(InvalidateAction.User.CoverImage);
 
-    isSettingCoverImage.set(false);
+    isSettingCoverImage.next(false);
   };
 
   return {
     setCoverImage,
-    isSettingCoverImage: derived(
-      isSettingCoverImage,
-      ($isSettingCoverImage) => $isSettingCoverImage,
-    ),
+    isSettingCoverImage: isSettingCoverImage.asObservable(),
   };
 }

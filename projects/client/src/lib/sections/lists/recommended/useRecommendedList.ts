@@ -13,7 +13,6 @@ import {
 import { dailyOrderArray } from '$lib/sections/lists/stores/dailyOrderArray.ts';
 import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { toObservable } from '$lib/utils/store/toObservable.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { map, shareReplay } from 'rxjs';
 import { recommendedMediaQuery } from '../../../requests/queries/media/mediaRecommendedQuery.ts';
@@ -74,7 +73,7 @@ function getListKey(props: RecommendationListStoreProps) {
 
 export const useRecommendedList = (props: RecommendationListStoreProps) => {
   const query = typeToQuery(props);
-  const queryObservable = toObservable(useQuery(query)).pipe(shareReplay(1));
+  const queryObservable = useQuery(query).pipe(shareReplay(1));
 
   const listKey = getListKey(props);
 

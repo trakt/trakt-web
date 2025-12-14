@@ -32,7 +32,7 @@
           <LibraryDropdown
             libraries={$libraries}
             selectedLibrary={$activeLibrary}
-            onChange={(type) => activeLibrary.set(type)}
+            onChange={(type) => activeLibrary.next(type)}
           />
         {/if}
 

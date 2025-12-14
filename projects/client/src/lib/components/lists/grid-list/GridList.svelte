@@ -1,6 +1,6 @@
 <script lang="ts" generics="T extends { key: string }">
+  import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
-  import { writable } from "svelte/store";
   import "../_internal/list.css";
   import ListHeader from "../_internal/ListHeader.svelte";
   import type { ListProps } from "../ListProps";

@@ -4,7 +4,7 @@
   import FormInput from "$lib/components/form/FormInput.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { useCreateList } from "./useCreateList";
 
   const { onClose }: { onClose: () => void } = $props();

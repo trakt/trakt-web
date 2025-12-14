@@ -6,13 +6,13 @@ import { addToWatchlistRequest } from '$lib/requests/sync/addToWatchlistRequest.
 import { removeFromWatchlistRequest } from '$lib/requests/sync/removeFromWatchlistRequest.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import { useIsWatchlisted } from './useIsWatchlisted.ts';
 
 export function useWatchlist(props: MediaStoreProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
-  const isWatchlistUpdating = writable(false);
+  const isWatchlistUpdating = new BehaviorSubject(false);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Watchlist);
 
@@ -26,7 +26,7 @@ export function useWatchlist(props: MediaStoreProps) {
       return;
     }
 
-    isWatchlistUpdating.set(true);
+    isWatchlistUpdating.next(true);
     track({ action: 'add' });
 
     await addToWatchlistRequest({
@@ -35,7 +35,7 @@ export function useWatchlist(props: MediaStoreProps) {
 
     await invalidate(InvalidateAction.Watchlisted(type));
 
-    isWatchlistUpdating.set(false);
+    isWatchlistUpdating.next(false);
   };
 
   const removeFromWatchlist = async () => {
@@ -43,7 +43,7 @@ export function useWatchlist(props: MediaStoreProps) {
       return;
     }
 
-    isWatchlistUpdating.set(true);
+    isWatchlistUpdating.next(true);
     track({ action: 'remove' });
 
     await removeFromWatchlistRequest({
@@ -52,7 +52,7 @@ export function useWatchlist(props: MediaStoreProps) {
 
     await invalidate(InvalidateAction.Watchlisted(type));
 
-    isWatchlistUpdating.set(false);
+    isWatchlistUpdating.next(false);
   };
 
   return {

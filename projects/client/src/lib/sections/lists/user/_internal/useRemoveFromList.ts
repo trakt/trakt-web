@@ -5,7 +5,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { removeFromListRequest } from '$lib/requests/queries/users/removeFromListRequest.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 /*
   FIXME: this is here temporarily
   Will move to a more generic useList
@@ -18,7 +18,7 @@ type UseRemoveFromListProps = {
 export function useRemoveFromList(props: UseRemoveFromListProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
-  const isListUpdating = writable(false);
+  const isListUpdating = new BehaviorSubject(false);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.List);
 
@@ -31,7 +31,7 @@ export function useRemoveFromList(props: UseRemoveFromListProps) {
       return;
     }
 
-    isListUpdating.set(true);
+    isListUpdating.next(true);
     track({ action: 'remove' });
 
     await removeFromListRequest({
@@ -41,7 +41,7 @@ export function useRemoveFromList(props: UseRemoveFromListProps) {
 
     await invalidate(InvalidateAction.Listed(type));
 
-    isListUpdating.set(false);
+    isListUpdating.next(false);
   };
 
   return {

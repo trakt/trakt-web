@@ -1,8 +1,8 @@
 <script lang="ts">
   import { toHumanETA } from "$lib/utils/formatting/date/toHumanETA";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { time } from "$lib/utils/timing/time";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
 
   const { endDate }: { endDate: Date } = $props();
 

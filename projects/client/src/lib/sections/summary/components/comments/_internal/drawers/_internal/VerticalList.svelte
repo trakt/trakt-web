@@ -1,7 +1,7 @@
 <script lang="ts" generics="T extends { id: unknown }">
   import { useScrollHistoryAction } from "$lib/components/lists/_internal/useScrollHistoryAction";
+  import { BehaviorSubject } from "rxjs";
   import { onMount, type Snippet } from "svelte";
-  import { writable } from "svelte/store";
 
   const {
     id,
@@ -12,10 +12,10 @@
 
   const { scrollHistory } = useScrollHistoryAction("vertical");
 
-  const isMounted = writable(false);
+  const isMounted = new BehaviorSubject(false);
 
   onMount(() => {
-    isMounted.set(true);
+    isMounted.next(true);
   });
 </script>
 

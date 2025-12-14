@@ -3,7 +3,7 @@ import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
-import { derived } from 'svelte/store';
+import { combineLatest, map } from 'rxjs';
 
 export type UseWatchCountProps = {
   type: MediaType;
@@ -26,12 +26,9 @@ export function useWatchCount(props: UseWatchCountProps) {
     }
     : null;
 
-  const watchCount = derived(
-    history,
-    ($history) => {
-      if (!$history) {
-        return 0;
-      }
+  const watchCount = combineLatest([history]).pipe(
+    map(([$history]) => {
+      if (!$history) return 0;
 
       switch (props.type) {
         case 'movie':
@@ -50,7 +47,7 @@ export function useWatchCount(props: UseWatchCountProps) {
           return historyEpisode?.plays ?? 0;
         }
       }
-    },
+    }),
   );
 
   return { watchCount };

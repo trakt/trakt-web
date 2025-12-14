@@ -26,7 +26,7 @@
   class:has-items={itemCount > 0}
   class:is-active={isActiveDate}
   onclick={() => {
-    activeDate.set({ date: day.date, source: "navigation" });
+    activeDate.next({ date: day.date, source: "navigation" });
   }}
 >
   <span>

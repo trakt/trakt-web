@@ -14,7 +14,7 @@ import {
   upNextNitroQuery,
 } from '$lib/requests/queries/sync/upNextNitroQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
-import { derived } from 'svelte/store';
+import { combineLatest, map } from 'rxjs';
 import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 
 export type UpNextStoreProps =
@@ -59,22 +59,31 @@ export function useUpNextList(
     intent: 'continue',
   }));
 
-  const filteredList = derived(
+  const filteredList = combineLatest(
     [startQuery.list, continueQuery.list],
-    ([$startList, $continueList]) => {
-      const continueMovieIds = new Set($continueList.map((entry) => entry.key));
-      return $startList.filter((entry) =>
-        'show' in entry || !continueMovieIds.has(entry.key)
-      );
-    },
+  ).pipe(
+    map(
+      ([$startList, $continueList]) => {
+        const continueMovieIds = new Set(
+          $continueList.map((entry) => entry.key),
+        );
+        return $startList.filter((entry) =>
+          'show' in entry || !continueMovieIds.has(entry.key)
+        );
+      },
+    ),
   );
 
   return {
     ...startQuery,
     list: filteredList,
-    isLoading: derived(
+    isLoading: combineLatest(
       [startQuery.isLoading, continueQuery.isLoading],
-      ([$startLoading, $continueLoading]) => $startLoading || $continueLoading,
+    ).pipe(
+      map(
+        ([$startLoading, $continueLoading]) =>
+          $startLoading || $continueLoading,
+      ),
     ),
   };
 }

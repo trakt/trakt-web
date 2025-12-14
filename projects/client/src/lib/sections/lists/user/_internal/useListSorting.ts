@@ -1,6 +1,6 @@
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import { derived, type Readable, writable } from 'svelte/store';
+import { BehaviorSubject, map, type Observable } from 'rxjs';
 import { assertDefined } from '../../../../utils/assert/assertDefined.ts';
 import { getListUrl } from '../../components/list-summary/_internal/getListUrl.ts';
 import { LIST_SORT_OPTIONS } from '../constants/index.ts';
@@ -22,7 +22,7 @@ function mapToSortBy(value: string | Nil): SortBy | undefined {
 }
 
 type ListSorting = {
-  current: Readable<{
+  current: Observable<{
     sorting: Sorting;
     sortHow: SortDirection;
   }>;
@@ -35,31 +35,33 @@ export function useListSorting(
   list: MediaListSummary,
   type?: MediaType,
 ): ListSorting {
-  const params = writable<Record<string, string | null>>({
+  const params = new BehaviorSubject<Record<string, string | null>>({
     sort_by: null,
     sort_how: null,
   });
 
   function update(newParams: Record<string, string>) {
-    params.update((current) => ({ ...current, ...newParams }));
+    params.next({ ...params.value, ...newParams });
   }
 
   return {
     update,
     options: LIST_SORT_OPTIONS,
-    current: derived(params, ($params) => {
-      const sortBy = mapToSortBy($params.sort_by);
-      const sortHow = mapToDirection($params.sort_how) ?? list.sortHow;
+    current: params.pipe(
+      map(($params) => {
+        const sortBy = mapToSortBy($params.sort_by);
+        const sortHow = mapToDirection($params.sort_how) ?? list.sortHow;
 
-      const sorting = LIST_SORT_OPTIONS.find(
-        (option) => option.value === sortBy,
-      );
+        const sorting = LIST_SORT_OPTIONS.find(
+          (option) => option.value === sortBy,
+        );
 
-      return {
-        sorting: assertDefined(sorting, 'Expected valid sorting option'),
-        sortHow,
-      };
-    }),
+        return {
+          sorting: assertDefined(sorting, 'Expected valid sorting option'),
+          sortHow,
+        };
+      }),
+    ),
     urlBuilder: ({ sortBy, sortHow }: ListUrlBuilderParams) => {
       return getListUrl(list, { mode: type, sortBy, sortHow });
     },

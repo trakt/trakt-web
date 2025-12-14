@@ -6,8 +6,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useCollapsedSection } from "$lib/stores/useCollapsedSection";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
 
   const {
     id,

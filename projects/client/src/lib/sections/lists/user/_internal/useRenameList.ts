@@ -6,10 +6,10 @@ import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts'
 import { updateListRequest } from '$lib/requests/queries/users/updateListRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { derived, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
 export function useRenameList(list: MediaListSummary) {
-  const isRenaming = writable(false);
+  const isRenaming = new BehaviorSubject(false);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.ListRename);
 
@@ -29,7 +29,7 @@ export function useRenameList(list: MediaListSummary) {
       return;
     }
 
-    isRenaming.set(true);
+    isRenaming.next(true);
     track();
 
     await updateListRequest({
@@ -43,11 +43,11 @@ export function useRenameList(list: MediaListSummary) {
 
     await invalidate(InvalidateAction.List.Edited);
 
-    isRenaming.set(false);
+    isRenaming.next(false);
   };
 
   return {
-    isRenaming: derived(isRenaming, ($isRenaming) => $isRenaming),
+    isRenaming: isRenaming.asObservable(),
     renameList,
   };
 }

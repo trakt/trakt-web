@@ -5,7 +5,7 @@ import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMa
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { waitForValue } from '$test/readable/waitForValue.ts';
-import { get } from 'svelte/store';
+import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { useRatings } from './useRatings.ts';
 
@@ -33,7 +33,7 @@ describe('useRatings', () => {
     );
 
     addRating(2);
-    expect(get(pendingRating)).toBe(2);
+    expect(await firstValueFrom(pendingRating)).toBe(2);
   });
 
   it('should not indicate that rating is in progress', async () => {
@@ -44,7 +44,7 @@ describe('useRatings', () => {
       })
     );
 
-    expect(get(pendingRating)).toBe(null);
+    expect(await firstValueFrom(pendingRating)).toBe(null);
   });
 
   it('should return the current rating', async () => {

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { appendClassList } from "$lib/utils/actions/appendClassList";
+  import { writable } from "$lib/utils/store/WritableSubject";
   import { DragGesture } from "@use-gesture/vanilla";
   import type { Snippet } from "svelte";
-  import { get, writable } from "svelte/store";
 
   type SwipeXState = {
     progress: number;
@@ -86,7 +86,7 @@
 
         const isActive = Math.abs(x) > threshold * 0.9;
 
-        const { isActive: isPreviouslyActive } = get(swipeState);
+        const { isActive: isPreviouslyActive } = swipeState.getValue();
 
         const isTriggered = isPreviouslyActive && last;
 

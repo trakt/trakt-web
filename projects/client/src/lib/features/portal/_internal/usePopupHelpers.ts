@@ -5,7 +5,7 @@ import {
 } from '$lib/features/portal/_internal/constants.ts';
 import { createUnderlay } from '$lib/features/portal/_internal/createUnderlay.ts';
 import { PopupState } from '$lib/features/portal/_internal/models/PopupState.ts';
-import { get, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import { createSanitizedClone } from './createSanitizedClone.ts';
 import { getTargetArea } from './getTargetArea.ts';
 import type { PopupPlacement } from './models/PopupPlacement.ts';
@@ -17,22 +17,24 @@ const clearElement = (element: HTMLElement | null) => {
 
 export function usePopupHelpers(placement?: PopupPlacement) {
   const isTargetContained = placement?.mode === 'contain';
-  const underlay = writable<HTMLElement | null>(null);
-  const targetClone = writable<HTMLElement | null>(null);
+  const underlay = new BehaviorSubject<HTMLElement | null>(null);
+  const targetClone = new BehaviorSubject<HTMLElement | null>(null);
   const area = getTargetArea();
 
   const removeCloneAfterContainer = (popupContainer: HTMLElement) => {
-    targetClone.update((element) => {
-      element?.style.setProperty('pointer-events', 'none');
-      element?.setAttribute(POPUP_STATE_ATTRIBUTE, PopupState.Removing);
-      return element;
-    });
+    const element = targetClone.value;
+    if (element) {
+      element.style.setProperty('pointer-events', 'none');
+      element.setAttribute(POPUP_STATE_ATTRIBUTE, PopupState.Removing);
+      targetClone.next(element);
+    }
 
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         mutation.removedNodes.forEach((node) => {
-          if (node === popupContainer && get(targetClone)) {
-            targetClone.update(clearElement);
+          if (node === popupContainer && targetClone.value) {
+            clearElement(targetClone.value);
+            targetClone.next(null);
             observer.disconnect();
           }
         });
@@ -43,14 +45,16 @@ export function usePopupHelpers(placement?: PopupPlacement) {
   };
 
   const removeHelpers = (popupContainer: HTMLElement | null) => {
-    underlay.update(clearElement);
+    clearElement(underlay.value);
+    underlay.next(null);
 
     if (!isTargetContained) {
       return;
     }
 
     if (!popupContainer) {
-      targetClone.update(clearElement);
+      clearElement(targetClone.value);
+      targetClone.next(null);
       return;
     }
 
@@ -59,7 +63,7 @@ export function usePopupHelpers(placement?: PopupPlacement) {
 
   const addHelpers = (target: HTMLElement) => {
     const newUnderlay = createUnderlay();
-    underlay.set(newUnderlay);
+    underlay.next(newUnderlay);
 
     const underlayTarget = document.querySelector('dialog[open]') ??
       document.body;
@@ -69,7 +73,8 @@ export function usePopupHelpers(placement?: PopupPlacement) {
       return;
     }
 
-    targetClone.update(clearElement);
+    clearElement(targetClone.value);
+    targetClone.next(null);
 
     const clone = createSanitizedClone(target);
     const targetRect = target.getBoundingClientRect();
@@ -88,7 +93,7 @@ export function usePopupHelpers(placement?: PopupPlacement) {
       above the popup container.
     */
     clone.style.zIndex = 'calc(var(--layer-menu) + 1)';
-    targetClone.set(clone);
+    targetClone.next(clone);
   };
 
   return {

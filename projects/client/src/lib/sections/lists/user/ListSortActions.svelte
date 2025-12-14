@@ -5,7 +5,7 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import SortOptionsDrawer from "./_internal/SortOptionsDrawer.svelte";
   import type { ListUrlBuilder } from "./models/ListUrlBuilder";
   import type { SortDirection } from "./models/SortDirection";

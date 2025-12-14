@@ -1,6 +1,5 @@
 <script lang="ts">
   import { time } from "$lib/utils/timing/time";
-  import { get } from "svelte/store";
   import { createPlyr } from "./_internal/createPlyr.ts";
   import { createPlayerContext } from "./_internal/createYoutubePlayerContext.ts";
 
@@ -25,19 +24,19 @@
       },
     };
 
-    isLoading.set(true);
+    isLoading.next(true);
     const instance = createPlyr(node, options);
 
     const handlePauseVideo = () => {
-      shouldAutoplay.set(false);
+      shouldAutoplay.next(false);
     };
     const handleExitVideo = () => {
       instance.stop();
-      embedId.set(null);
+      embedId.next(null);
       handlePauseVideo();
     };
     const handleReady = () => {
-      isLoading.set(false);
+      isLoading.next(false);
 
       if (autoplay) {
         instance.fullscreen.enter();
@@ -50,7 +49,7 @@
       /**
        * On iOS the ready event might have not fired yet, so we need to wait
        */
-      while (get(isLoading)) {
+      while (isLoading.value) {
         await new Promise((resolve) => setTimeout(resolve, time.fps(24)));
       }
 
@@ -74,7 +73,7 @@
         instance.on("pause", handlePauseVideo);
         instance.on("ended", handleExitVideo);
         instance.off("ready", handleReady);
-        teardownPreloadPlay();
+        teardownPreloadPlay.unsubscribe();
 
         instance.destroy();
       },

@@ -2,8 +2,8 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { PLACEHOLDERS } from "$lib/utils/constants";
   import { isImageComplete } from "$lib/utils/image/isImageComplete";
+  import { writable } from "$lib/utils/store/WritableSubject";
   import { checksum } from "$lib/utils/string/checksum";
-  import { writable } from "svelte/store";
   import { lineClamp } from "../text/lineClamp";
   import type { CardCoverProps } from "./CardCoverProps";
 

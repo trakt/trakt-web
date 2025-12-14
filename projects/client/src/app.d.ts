@@ -5,9 +5,6 @@
 
 import type { CookieConsent } from '$lib/features/cookie-consent/models/CookieConsent.ts';
 import { Environment } from '@trakt/api';
-import type { Observable } from 'rxjs';
-import type { Readable } from 'svelte/store';
-
 declare global {
   // Only way to declare globalThis.install
   var install: BeforeInstallPromptEvent | Nil;
@@ -33,11 +30,6 @@ declare global {
   type BeforeInstallPromptEvent = Event & {
     prompt: () => Promise<{ outcome: 'accepted' | 'dismissed' }>;
   };
-
-  /**
-   * FIXME: remove once we migrate all state to rxjs
-   */
-  type ReadableOrObservable<T> = Readable<T> | Observable<T>;
 
   type Nil = null | undefined;
 

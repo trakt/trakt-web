@@ -1,6 +1,6 @@
 import { useAnalytics } from '$lib/features/analytics/useAnalytics.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { get } from 'svelte/store';
+import { firstValueFrom } from 'rxjs';
 import { getUserAnalyticsData } from './_internal/getUserAnalyticsData.ts';
 import type { AnalyticsEventDataMap } from './events/AnalyticsEventDataMap.ts';
 
@@ -9,13 +9,14 @@ export function useTrack<T extends keyof AnalyticsEventDataMap>(key: T) {
 
   const { record, setUser } = useAnalytics();
 
-  function track<D extends AnalyticsEventDataMap[T]>(
+  async function track<D extends AnalyticsEventDataMap[T]>(
     ...args: [D] extends [never] ? [] | [D?] : [D]
   ) {
-    const userId = get(user)?.id.toString() ?? null;
+    const currentUser = await firstValueFrom(user);
+    const userId = currentUser?.id.toString() ?? null;
     setUser(userId);
 
-    const userData = getUserAnalyticsData(get(user));
+    const userData = getUserAnalyticsData(currentUser);
     const eventData = {
       ...(args[0] ?? {}),
       ...userData,

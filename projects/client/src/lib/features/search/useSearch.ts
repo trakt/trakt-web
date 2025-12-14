@@ -5,7 +5,6 @@ import {
 } from '@tanstack/svelte-query';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { debounceTime, map, switchMap, tap } from 'rxjs/operators';
-import { writable } from 'svelte/store';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
 import {
   type MediaSearchResult,
@@ -21,7 +20,6 @@ import {
 } from '../../requests/queries/search/searchTrendingQuery.ts';
 import { dedupe } from '../../utils/array/dedupe.ts';
 import { DEFAULT_SEARCH_LIMIT } from '../../utils/constants.ts';
-import { toObservable } from '../../utils/store/toObservable.ts';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
@@ -73,13 +71,10 @@ export function useSearch() {
   const { track } = useTrack(AnalyticsEvent.Search);
 
   const searchTerm$ = new BehaviorSubject<string>('');
-  const modeStore = writable<SearchMode>('media');
-
-  const mode$ = toObservable<SearchMode>(mode);
 
   const results = client == null ? of(null) : combineLatest([
     searchTerm$,
-    mode$,
+    mode,
   ]).pipe(
     debounceTime(150),
     switchMap(([rawTerm, currentMode]) => {
@@ -89,7 +84,7 @@ export function useSearch() {
         return of(null);
       }
 
-      isSearching.set(true);
+      isSearching.next(true);
       track({ mode: currentMode });
 
       const searchQuery = client.fetchQuery(
@@ -114,17 +109,17 @@ export function useSearch() {
         })),
       );
     }),
-    tap(() => isSearching.set(false)),
+    tap(() => isSearching.next(false)),
   );
 
   function search(term: string, searchMode: SearchMode) {
-    modeStore.set(searchMode);
+    mode.next(searchMode);
     searchTerm$.next(term);
   }
 
   function clear() {
     searchTerm$.next('');
-    isSearching.set(false);
+    isSearching.next(false);
   }
 
   return {

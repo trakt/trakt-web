@@ -1,10 +1,9 @@
 import { OidcUserMock } from '$mocks/data/auth/OidcUserMock.ts';
-import { get } from 'svelte/store';
 import { vi } from 'vitest';
 import { isAuthorized } from '../beds/_internal/isAuthorized.ts';
 
 function getMockUser() {
-  return get(isAuthorized) ? OidcUserMock : null;
+  return isAuthorized.value ? OidcUserMock : null;
 }
 
 const mockUserManager = vi.fn(() => ({

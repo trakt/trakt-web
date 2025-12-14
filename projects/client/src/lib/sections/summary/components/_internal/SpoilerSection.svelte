@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler";
   import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import CollapsableContent from "./CollapsableContent.svelte";
 
   const { children, ...target }: ChildrenProps & MediaStoreProps = $props();

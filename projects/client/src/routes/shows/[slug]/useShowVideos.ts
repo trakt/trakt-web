@@ -1,6 +1,6 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { showVideosQuery } from '$lib/requests/queries/movies/showVideosQuery.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 
 export function useShowVideos({
   slug,
@@ -14,5 +14,5 @@ export function useShowVideos({
     seasons,
   }));
 
-  return derived(videos, ($videos) => $videos.data ?? []);
+  return videos.pipe(map(($videos) => $videos.data ?? []));
 }

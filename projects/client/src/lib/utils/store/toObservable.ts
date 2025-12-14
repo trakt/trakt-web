@@ -1,14 +1,18 @@
 import { Observable } from 'rxjs';
-import type { Readable } from 'svelte/store';
 
-export function toObservable<T>(readable: Readable<T>): Observable<T> {
-  return new Observable((subscriber) => {
-    const unsubscribe = readable.subscribe((value) => {
-      subscriber.next(value);
+interface Readable<T> {
+  subscribe(
+    run: (value: T) => void,
+    invalidate?: (value?: T) => void,
+  ): () => void;
+}
+
+export function toObservable<T>(store: Readable<T>): Observable<T> {
+  return new Observable((observer) => {
+    const unsubscribe = store.subscribe((value) => {
+      observer.next(value);
     });
 
-    return () => {
-      unsubscribe();
-    };
+    return unsubscribe;
   });
 }

@@ -1,13 +1,13 @@
 import { UserPlexLibraryMappedMock } from '$mocks/data/users/mapped/UserPlexLibraryMappedMock.ts';
+import { createTestBedQuery } from '$test/beds/query/createTestBedQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
 import { currentUserPlexLibraryQuery } from './currentUserPlexLibraryQuery.ts';
 
 describe('currentUserPlexLibraryQuery', () => {
   it('should query for user plex library', async () => {
     const result = await runQuery({
-      factory: () => createQuery(currentUserPlexLibraryQuery()),
+      factory: () => createTestBedQuery(currentUserPlexLibraryQuery()),
       mapper: (response) => response?.data,
     });
 

@@ -1,4 +1,3 @@
-import { get, readonly } from 'svelte/store';
 import { getPlayerContext } from '../_internal/getYoutubePlayerContext.ts';
 
 export function usePlayer() {
@@ -7,20 +6,20 @@ export function usePlayer() {
   const play = (url: string, autoplay = false) => {
     const key = new URL(url).searchParams.get('v');
 
-    embedId.set(key);
+    embedId.next(key);
     /**
      * Reset autoplay to ensure reactivity when playing the same video twice in a row
      * this is especially relevant on iOS for the native player
      */
-    if (get(shouldAutoplay)) {
-      shouldAutoplay.set(false);
+    if (shouldAutoplay.value) {
+      shouldAutoplay.next(false);
     }
-    shouldAutoplay.set(autoplay);
+    shouldAutoplay.next(autoplay);
   };
 
   return {
     preload: (url: string) => play(url, false),
     play: (url: string) => play(url, true),
-    isLoading: readonly(isLoading),
+    isLoading: isLoading.asObservable(),
   };
 }

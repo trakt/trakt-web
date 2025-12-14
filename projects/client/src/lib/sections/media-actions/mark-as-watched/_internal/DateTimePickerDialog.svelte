@@ -2,8 +2,8 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import DateTimePicker from "$lib/components/date-time/DateTimePicker.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import Modal from "flowbite-svelte/Modal.svelte";
-  import { writable } from "svelte/store";
 
   const {
     onConfirm,

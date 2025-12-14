@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject";
   import Button from "../Button.svelte";
   import type { MoreButtonIntl } from "./MoreButtonIntl";
 

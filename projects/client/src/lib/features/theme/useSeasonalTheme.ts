@@ -1,14 +1,14 @@
 import { asset } from '$app/paths';
+import { BehaviorSubject, map } from 'rxjs';
 import { onMount } from 'svelte';
-import { derived, writable } from 'svelte/store';
 import { SEASONAL_THEMES } from './constants.ts';
 
 export function useSeasonalTheme() {
-  const activeTheme = writable<string | null>(null);
+  const activeTheme = new BehaviorSubject<string | null>(null);
 
   const checkSeasonalTheme = () => {
     const theme = document.documentElement.getAttribute('data-seasonal-theme');
-    activeTheme.set(theme);
+    activeTheme.next(theme);
   };
 
   onMount(() => {
@@ -23,23 +23,27 @@ export function useSeasonalTheme() {
   });
 
   return {
-    activeTheme,
-    themeFilters: derived(activeTheme, ($activeTheme) => {
-      if (!$activeTheme) {
-        return;
-      }
+    activeTheme: activeTheme.asObservable(),
+    themeFilters: activeTheme.pipe(
+      map(($activeTheme) => {
+        if (!$activeTheme) {
+          return;
+        }
 
-      return SEASONAL_THEMES[$activeTheme]?.filters;
-    }),
-    actionBarImageSrc: derived(activeTheme, ($activeTheme) => {
-      if (!$activeTheme) {
-        return null;
-      }
+        return SEASONAL_THEMES[$activeTheme]?.filters;
+      }),
+    ),
+    actionBarImageSrc: activeTheme.pipe(
+      map(($activeTheme) => {
+        if (!$activeTheme) {
+          return null;
+        }
 
-      const config = SEASONAL_THEMES[$activeTheme];
-      return config?.actionBarImage
-        ? asset(`/seasonal/${config.actionBarImage}`)
-        : null;
-    }),
+        const config = SEASONAL_THEMES[$activeTheme];
+        return config?.actionBarImage
+          ? asset(`/seasonal/${config.actionBarImage}`)
+          : null;
+      }),
+    ),
   };
 }
