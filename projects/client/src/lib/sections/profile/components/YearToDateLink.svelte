@@ -26,7 +26,8 @@
   @use "$style/scss/mixins/index" as *;
 
   trakt-year-to-date-link {
-    :global(.trakt-link) {
+    :global(.trakt-link[data-color="default"]) {
+      color: inherit;
       text-decoration: none;
 
       display: flex;
