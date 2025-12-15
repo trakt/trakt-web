@@ -37,7 +37,11 @@
 </RenderFor>
 
 <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
-  <PopupMenu label={m.button_label_profile_options()} size="normal">
+  <PopupMenu
+    label={m.button_label_profile_options()}
+    size="normal"
+    mode="standalone"
+  >
     {#snippet icon()}
       <MoreIcon size="normal" />
     {/snippet}
