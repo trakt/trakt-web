@@ -20,6 +20,9 @@ export const manifest: Partial<ManifestOptions> = {
     {
       origin: 'https://app.trakt.tv',
     },
+    {
+      origin: 'https://trakt.tv',
+    },
   ],
   launch_handler: {
     client_mode: ['navigate-existing', 'auto'],
