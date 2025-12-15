@@ -78,6 +78,10 @@
         &:focus-visible {
           --color-background-action-button: #{$foreground-color};
           --color-foreground-action-button: #{$background-color};
+
+          &[data-style="ghost"][data-variant="secondary"] {
+            --color-foreground-action-button: var(--color-foreground);
+          }
         }
       }
 
@@ -178,6 +182,8 @@
             var(--color-foreground) 10%,
             transparent
           );
+          /* color: var(--color-background); */
+          /* color: var(--color-text-primary); */
         }
       }
     }
