@@ -79,7 +79,6 @@
     flex-direction: column;
     gap: var(--gap-xs);
 
-    color: var(--color-text-secondary);
     font-size: var(--font-size-text);
 
     :global(a) {
