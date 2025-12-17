@@ -28,9 +28,7 @@
   } & HTMLElementProps = $props();
 
   const { navigation } = useNavigation();
-  const hasHiddenActions = $derived(
-    $navigation === "dpad" && !navigationType,
-  );
+  const hasHiddenActions = $derived($navigation === "dpad" && !navigationType);
 </script>
 
 <div class="trakt-list-inset-title" {...props}>
@@ -81,7 +79,7 @@
   .trakt-list-header {
     display: flex;
     align-items: center;
-    gap: var(--gap-m);
+    gap: var(--gap-xs);
     min-height: var(--ni-40);
     height: var(--ni-40);
     user-select: none;
@@ -129,10 +127,6 @@
 
     @include for-mobile {
       gap: var(--gap-xs);
-    }
-
-    @include for-tablet-sm-and-below {
-      justify-content: space-between;
     }
   }
 </style>
