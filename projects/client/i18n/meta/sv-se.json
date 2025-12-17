@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "Är profilen privat?"
     },
+    "text_all_settings": {
+      "default": "Alla Inställningar"
+    },
     "text_display_name": {
       "default": "Visningsnamn"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "Om mig"
+    },
+    "text_automatic_tracking": {
+      "default": "Automatisk Spårning"
+    },
+    "text_streaming_sync": {
+      "default": "Strömmingssynkronisering"
     },
     "button_label_change_about": {
       "default": "Ändra om mig"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "Support"
+    },
+    "link_text_terms": {
+      "default": "Användarvillkor"
+    },
+    "link_text_policy": {
+      "default": "Integritetspolicy"
     },
     "header_calendar": {
       "default": "Kalender"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "Regi:"
+    },
     "text_created_by": {
       "default": "Skapad av <a>{name}</a>",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "Skapad av:"
     },
     "tag_text_watched": {
       "default": "Sedda"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "Strömningstjänst har kopplats."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Strömningstjänst har kopplats bort."
+    },
+    "button_text_younify_fix": {
+      "default": "Åtgärda"
+    },
+    "button_text_younify_unlink": {
+      "default": "Koppla bort"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Synkronisera befintlig data"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Ignorera befintlig data"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Skicka Loggar"
+    },
+    "text_younify_status_linked": {
+      "default": "Kopplad"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Inte kopplad"
+    },
+    "text_younify_status_broken": {
+      "default": "Bruten"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Är du säker på att du vill koppla bort {service}?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Synkronisera Befintlig Data"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Vill du importera din befintliga data till ditt Trakt-konto, eller bara synkronisera ny data från och med nu?"
     }
   }
 }

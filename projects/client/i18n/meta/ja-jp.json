@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "プロフィールを非公開にしますか？"
     },
+    "text_all_settings": {
+      "default": "すべての設定"
+    },
     "text_display_name": {
       "default": "表示名"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "自己紹介"
+    },
+    "text_automatic_tracking": {
+      "default": "自動追跡"
+    },
+    "text_streaming_sync": {
+      "default": "ストリーミング同期"
     },
     "button_label_change_about": {
       "default": "自己紹介を変更"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "サポート"
+    },
+    "link_text_terms": {
+      "default": "利用規約"
+    },
+    "link_text_policy": {
+      "default": "プライバシーポリシー"
     },
     "header_calendar": {
       "default": "カレンダー"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "監督:"
+    },
     "text_created_by": {
       "default": "<a>{name}</a> 制作",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "制作:"
     },
     "tag_text_watched": {
       "default": "視聴済み"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "ストリーミングサービスがリンクされました。"
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "ストリーミングサービスがリンク解除されました。"
+    },
+    "button_text_younify_fix": {
+      "default": "修正"
+    },
+    "button_text_younify_unlink": {
+      "default": "リンク解除"
+    },
+    "button_text_data_sync_yes": {
+      "default": "既存データを同期"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "既存データを無視"
+    },
+    "button_text_younify_send_logs": {
+      "default": "ログ送信"
+    },
+    "text_younify_status_linked": {
+      "default": "リンク済み"
+    },
+    "text_younify_status_unlinked": {
+      "default": "未リンク"
+    },
+    "text_younify_status_broken": {
+      "default": "破損"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "{service} のリンクを解除してもよろしいですか？",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "既存データの同期"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "既存のデータをTraktアカウントにインポートしますか、それとも今後新しいデータのみを同期しますか？"
     }
   }
 }

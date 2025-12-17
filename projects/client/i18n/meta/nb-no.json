@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "Er profilen privat?"
     },
+    "text_all_settings": {
+      "default": "Alle Innstillinger"
+    },
     "text_display_name": {
       "default": "Visningsnavn"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "Om meg"
+    },
+    "text_automatic_tracking": {
+      "default": "Automatisk Sporing"
+    },
+    "text_streaming_sync": {
+      "default": "Strømmingssynkronisering"
     },
     "button_label_change_about": {
       "default": "Endre om"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "Støtte"
+    },
+    "link_text_terms": {
+      "default": "Vilkår for bruk"
+    },
+    "link_text_policy": {
+      "default": "Personvernerklæring"
     },
     "header_calendar": {
       "default": "Kalender"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "Regi:"
+    },
     "text_created_by": {
       "default": "Laget av <a>{name}</a>",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "Skapt av:"
     },
     "tag_text_watched": {
       "default": "Sett"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "Strømmetjeneste er koblet til."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Strømmetjeneste er koblet fra."
+    },
+    "button_text_younify_fix": {
+      "default": "Fiks"
+    },
+    "button_text_younify_unlink": {
+      "default": "Koble fra"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Synkroniser eksisterende data"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Ignorer eksisterende data"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Send logger"
+    },
+    "text_younify_status_linked": {
+      "default": "Tilkoblet"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Ikke tilkoblet"
+    },
+    "text_younify_status_broken": {
+      "default": "Defekt"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Er du sikker på at du vil koble fra {service}?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Synkroniser Eksisterende Data"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Vil du importere dine eksisterende data til Trakt-kontoet ditt, eller bare synkronisere nye data fremover?"
     }
   }
 }

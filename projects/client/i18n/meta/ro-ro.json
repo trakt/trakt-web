@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "Profil privat?"
     },
+    "text_all_settings": {
+      "default": "Toate Setările"
+    },
     "text_display_name": {
       "default": "Nume afișat"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "Despre mine"
+    },
+    "text_automatic_tracking": {
+      "default": "Urmărire Automată"
+    },
+    "text_streaming_sync": {
+      "default": "Sincronizare Streaming"
     },
     "button_label_change_about": {
       "default": "Schimbă despre"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "Suport"
+    },
+    "link_text_terms": {
+      "default": "Termeni și Condiții"
+    },
+    "link_text_policy": {
+      "default": "Politica de Confidențialitate"
     },
     "header_calendar": {
       "default": "Calendar"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "Regizat de"
+    },
     "text_created_by": {
       "default": "Creat de <a>{name}</a>",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "Creat de"
     },
     "tag_text_watched": {
       "default": "Vizionat"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "Serviciul de streaming a fost conectat."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Serviciul de streaming a fost deconectat."
+    },
+    "button_text_younify_fix": {
+      "default": "Repară"
+    },
+    "button_text_younify_unlink": {
+      "default": "Deconectează"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Sincronizează datele existente"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Ignoră datele existente"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Trimite Jurnale"
+    },
+    "text_younify_status_linked": {
+      "default": "Conectat"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Neconectat"
+    },
+    "text_younify_status_broken": {
+      "default": "Defect"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Ești sigur că vrei să deconectezi {service}?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Sincronizare Date Existente"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Dorești să imporți datele tale existente în contul Trakt, sau doar să sincronizezi date noi de acum înainte?"
     }
   }
 }

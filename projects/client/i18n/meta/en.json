@@ -1021,7 +1021,6 @@
       "default": "Details",
       "description": "Header for a details section.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3556,7 +3555,6 @@
       "default": "Settings",
       "description": "Title for the settings page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4160,11 +4158,18 @@
         "ios"
       ]
     },
+    "text_all_settings": {
+      "default": "All Settings",
+      "description": "Text for the section that allows users to view all settings.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
     "text_display_name": {
       "default": "Display name",
       "description": "Text for the section that allows users to change their display name.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4180,7 +4185,6 @@
       "default": "Location",
       "description": "Text for the section that allows users to change their location.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4199,6 +4203,22 @@
         "ios"
       ]
     },
+    "text_automatic_tracking": {
+      "default": "Automatic Tracking",
+      "description": "Text for the section that allows users to manage automatic shows and movies tracking.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_streaming_sync": {
+      "default": "Streaming Sync",
+      "description": "Text for the section that allows users to sync with their streaming services.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "button_label_change_about": {
       "default": "Change about",
       "description": "Aria-label for the button that allows users to change their 'about me' description.",
@@ -4211,7 +4231,6 @@
       "default": "What should your display name be?",
       "description": "Message for the prompt that allows users to specify their display name.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4219,7 +4238,6 @@
       "default": "Where are you located?",
       "description": "Message for the prompt that allows users to specify their location.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4227,7 +4245,6 @@
       "default": "Tell us a bit about yourself.",
       "description": "Message for the prompt that allows users to specify their 'about me' description.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4534,7 +4551,6 @@
       "default": "Forums",
       "description": "Text for the link that takes users to the forums.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4542,8 +4558,23 @@
       "default": "Support",
       "description": "Text for the link that takes users to the support page or triggers a mailto url.",
       "exclude": [
-        "android",
         "ios"
+      ]
+    },
+    "link_text_terms": {
+      "default": "Terms of Use",
+      "description": "Text for the link that takes users to the support page or triggers a mailto url.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "link_text_policy": {
+      "default": "Privacy Policy",
+      "description": "Text for the link that takes users to the privacy policy page.",
+      "exclude": [
+        "ios",
+        "web"
       ]
     },
     "header_calendar": {
@@ -4990,7 +5021,6 @@
       "default": "Account details",
       "description": "Header for the section that allows users to change their account details.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5425,7 +5455,6 @@
       "default": "General",
       "description": "Text for the link to the general settings page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5903,7 +5932,6 @@
       "default": "Library",
       "description": "Title for lists containing movies and episodes in a users library. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5927,7 +5955,6 @@
       "default": "Custom",
       "description": "Value for the custom library name. This is the category for library items that are not in a specific category like Plex.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5970,7 +5997,15 @@
         }
       },
       "exclude": [
-        "android",
+        "ios",
+        "android"
+      ]
+    },
+    "text_directed_by_short": {
+      "default": "Directed by",
+      "description": "Text to indicate the director of a movie.",
+      "exclude": [
+        "web",
         "ios"
       ]
     },
@@ -5983,8 +6018,16 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "ios",
+        "android"
+      ]
+    },
+    "text_created_by_short": {
+      "default": "Created by",
+      "description": "Text to indicate the creator of a show.",
+      "exclude": [
+        "ios",
+        "web"
       ]
     },
     "tag_text_watched": {
@@ -6158,7 +6201,6 @@
       "default": "Default",
       "description": "Text for the button that allows users to sort items by the default sorting method.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6174,7 +6216,6 @@
       "default": "Date Added",
       "description": "Text for the button that allows users to sort items by the date they were added.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6190,7 +6231,6 @@
       "default": "Runtime",
       "description": "Text for the button that allows users to sort items by their runtime.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6206,7 +6246,6 @@
       "default": "Rating",
       "description": "Text for the button that allows users to sort items by their rating.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6222,7 +6261,6 @@
       "default": "Release Date",
       "description": "Text for the button that allows users to sort items by their release date.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6321,6 +6359,115 @@
       },
       "exclude": [
         "android",
+        "ios"
+      ]
+    },
+    "text_info_younify_service_linked": {
+      "default": "Streaming service has been linked.",
+      "description": "Text to indicate that linking a streaming service via Younify is completed.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Streaming service has been unlinked.",
+      "description": "Text to indicate that unlinking a streaming service via Younify is completed.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_younify_fix": {
+      "default": "Fix",
+      "description": "Text for the button that allows users to fix issues with their Younify linked streaming services.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_younify_unlink": {
+      "default": "Unlink",
+      "description": "Text for the button that allows users to unlink their Younify linked streaming services.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_data_sync_yes": {
+      "default": "Sync existing data",
+      "description": "Text for button that allows users to confirm syncing existing data when linking Younify streaming services.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Ignore existing data",
+      "description": "Text for button that allows users to ignore syncing existing data when linking Younify streaming services.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_younify_send_logs": {
+      "default": "Send Logs",
+      "description": "Text for the button that allows users to send logs for Younify troubleshooting.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_younify_status_linked": {
+      "default": "Linked",
+      "description": "Text indicating that a Younify streaming service is linked.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_younify_status_unlinked": {
+      "default": "Not linked",
+      "description": "Text indicating that a Younify streaming service is not linked.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_younify_status_broken": {
+      "default": "Broken",
+      "description": "Text indicating that a Younify streaming service link is broken.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Are you sure you want to unlink {service}?",
+      "description": "Text for the warning prompt that appears when a user attempts to unlink a Younify streaming service.",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Sync Existing Data",
+      "description": "Title for the dialog that appears when a user links a Younify streaming service.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Would you like to import your existing data to your Trakt account, or only sync new data from now on?",
+      "description": "Prompt text for the dialog that appears when a user links a Younify streaming service.",
+      "exclude": [
+        "web",
         "ios"
       ]
     }

@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "Votre profil est-il privé ?"
     },
+    "text_all_settings": {
+      "default": "Tous les paramètres"
+    },
     "text_display_name": {
       "default": "Nom d'affichage"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "À propos de moi"
+    },
+    "text_automatic_tracking": {
+      "default": "Suivi automatique"
+    },
+    "text_streaming_sync": {
+      "default": "Synchronisation des plateformes"
     },
     "button_label_change_about": {
       "default": "Modifier à propos"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "Support"
+    },
+    "link_text_terms": {
+      "default": "Conditions d'utilisation"
+    },
+    "link_text_policy": {
+      "default": "Politique de confidentialité"
     },
     "header_calendar": {
       "default": "Calendrier"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "Réalisé par"
+    },
     "text_created_by": {
       "default": "Créé par <a>{name}</a>",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "Créé par"
     },
     "tag_text_watched": {
       "default": "Vu"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "La plateforme de streaming a été liée."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "La plateforme de streaming a été déliée."
+    },
+    "button_text_younify_fix": {
+      "default": "Corriger"
+    },
+    "button_text_younify_unlink": {
+      "default": "Délier"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Synchroniser les données existantes"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Ignorer les données existantes"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Envoyer les journaux"
+    },
+    "text_younify_status_linked": {
+      "default": "Lié"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Non lié"
+    },
+    "text_younify_status_broken": {
+      "default": "Rompu"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Êtes-vous sûr de vouloir délier {service} ?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Synchronisation des données existantes"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Souhaitez-vous importer vos données existantes sur votre compte Trakt, ou seulement synchroniser les nouvelles données à partir de maintenant ?"
     }
   }
 }

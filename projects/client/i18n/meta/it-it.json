@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "Il profilo è privato?"
     },
+    "text_all_settings": {
+      "default": "Tutte le Impostazioni"
+    },
     "text_display_name": {
       "default": "Nome visualizzato"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "Su di me"
+    },
+    "text_automatic_tracking": {
+      "default": "Tracciamento Automatico"
+    },
+    "text_streaming_sync": {
+      "default": "Sincronizzazione Streaming"
     },
     "button_label_change_about": {
       "default": "Cambia informazioni"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "Supporto"
+    },
+    "link_text_terms": {
+      "default": "Termini di Servizio"
+    },
+    "link_text_policy": {
+      "default": "Informativa sulla Privacy"
     },
     "header_calendar": {
       "default": "Calendario"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "Diretto da"
+    },
     "text_created_by": {
       "default": "Creata da <a>{name}</a>",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "Creato da"
     },
     "tag_text_watched": {
       "default": "Visto"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "Servizio di streaming collegato."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Servizio di streaming scollegato."
+    },
+    "button_text_younify_fix": {
+      "default": "Correggi"
+    },
+    "button_text_younify_unlink": {
+      "default": "Scollega"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Sincronizza dati esistenti"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Ignora dati esistenti"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Invia Log"
+    },
+    "text_younify_status_linked": {
+      "default": "Collegato"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Non collegato"
+    },
+    "text_younify_status_broken": {
+      "default": "Rottura"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Sei sicuro di voler scollegare {service}?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Sincronizzazione Dati Esistenti"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Vuoi importare i tuoi dati esistenti nel tuo account Trakt, o sincronizzare solo i nuovi dati d'ora in poi?"
     }
   }
 }

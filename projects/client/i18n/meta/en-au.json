@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "Is profile private"
     },
+    "text_all_settings": {
+      "default": "All Settings"
+    },
     "text_display_name": {
       "default": "Display name"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "About me"
+    },
+    "text_automatic_tracking": {
+      "default": "Automatic Tracking"
+    },
+    "text_streaming_sync": {
+      "default": "Streaming Sync"
     },
     "button_label_change_about": {
       "default": "Change about"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "Support"
+    },
+    "link_text_terms": {
+      "default": "Terms of Use"
+    },
+    "link_text_policy": {
+      "default": "Privacy Policy"
     },
     "header_calendar": {
       "default": "Calendar"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "Directed by"
+    },
     "text_created_by": {
       "default": "Created by <a>{name}</a>",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "Created by"
     },
     "tag_text_watched": {
       "default": "Watched"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "Streaming service has been linked."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Streaming service has been unlinked."
+    },
+    "button_text_younify_fix": {
+      "default": "Fix"
+    },
+    "button_text_younify_unlink": {
+      "default": "Unlink"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Sync existing data"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Ignore existing data"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Send Logs"
+    },
+    "text_younify_status_linked": {
+      "default": "Linked"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Not linked"
+    },
+    "text_younify_status_broken": {
+      "default": "Broken"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Are you sure you want to unlink {service}?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Sync Existing Data"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Would you like to import your existing data to your Trakt account, or only sync new data from now on?"
     }
   }
 }
