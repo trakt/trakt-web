@@ -55,6 +55,7 @@
     disabled={$isMarkingAsWatched || !isWatchable}
     label={i18n.label({ title, isWatched: false, isRewatching: false })}
     onclick={handler}
+    variant={$isWatched ? "primary" : "secondary"}
     color="purple"
   >
     <TrackIcon state={$isWatched ? "watched" : "unwatched"} />

@@ -13,6 +13,6 @@
   <PostCreditsTag count={postCreditsCount} i18n={TagIntlProvider} />
 {/if}
 
-{#if watchCount > 0}
+{#if watchCount > 1}
   <WatchCountTag count={watchCount} i18n={TagIntlProvider} />
 {/if}
