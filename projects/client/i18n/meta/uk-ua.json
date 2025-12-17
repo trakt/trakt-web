@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "Чи профіль приватний?"
     },
+    "text_all_settings": {
+      "default": "Усі Налаштування"
+    },
     "text_display_name": {
       "default": "Відображуване ім'я"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "Про мене"
+    },
+    "text_automatic_tracking": {
+      "default": "Автоматичне Відстеження"
+    },
+    "text_streaming_sync": {
+      "default": "Синхронізація Стрімінгу"
     },
     "button_label_change_about": {
       "default": "Змінити про себе"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "Підтримка"
+    },
+    "link_text_terms": {
+      "default": "Умови Використання"
+    },
+    "link_text_policy": {
+      "default": "Політика Конфіденційності"
     },
     "header_calendar": {
       "default": "Календар"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "Режисер:"
+    },
     "text_created_by": {
       "default": "Створено <a>{name}</a>",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "Створено:"
     },
     "tag_text_watched": {
       "default": "Переглянуто"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "Стрімінговий сервіс було підключено."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Стрімінговий сервіс було відключено."
+    },
+    "button_text_younify_fix": {
+      "default": "Виправити"
+    },
+    "button_text_younify_unlink": {
+      "default": "Відключити"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Синхронізувати наявні дані"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Ігнорувати наявні дані"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Надіслати Логи"
+    },
+    "text_younify_status_linked": {
+      "default": "Підключено"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Не підключено"
+    },
+    "text_younify_status_broken": {
+      "default": "Пошкоджено"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Ви впевнені, що хочете відключити {service}?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Синхронізація Наявних Даних"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Бажаєте імпортувати наявні дані до свого облікового запису Trakt, чи синхронізувати лише нові дані відтепер?"
     }
   }
 }

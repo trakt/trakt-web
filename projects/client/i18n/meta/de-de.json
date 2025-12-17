@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "Ist das Profil privat?"
     },
+    "text_all_settings": {
+      "default": "Alle Einstellungen"
+    },
     "text_display_name": {
       "default": "Anzeigename"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "Über mich"
+    },
+    "text_automatic_tracking": {
+      "default": "Automatische Verfolgung"
+    },
+    "text_streaming_sync": {
+      "default": "Streaming-Synchronisation"
     },
     "button_label_change_about": {
       "default": "Über mich ändern"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "Support"
+    },
+    "link_text_terms": {
+      "default": "Nutzungsbedingungen"
+    },
+    "link_text_policy": {
+      "default": "Datenschutzrichtlinie"
     },
     "header_calendar": {
       "default": "Kalender"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "Regie:"
+    },
     "text_created_by": {
       "default": "Erstellt von <a>{name}</a>",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "Erstellt von:"
     },
     "tag_text_watched": {
       "default": "Gesehen"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "Streaming-Dienst wurde verknüpft."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Streaming-Dienst wurde entknüpft."
+    },
+    "button_text_younify_fix": {
+      "default": "Reparieren"
+    },
+    "button_text_younify_unlink": {
+      "default": "Entknüpfen"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Bestehende Daten synchronisieren"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Bestehende Daten ignorieren"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Logs senden"
+    },
+    "text_younify_status_linked": {
+      "default": "Verknüpft"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Nicht verknüpft"
+    },
+    "text_younify_status_broken": {
+      "default": "Defekt"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Möchten Sie {service} wirklich entknüpfen?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Bestehende Daten synchronisieren"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Möchten Sie Ihre vorhandenen Daten in Ihr Trakt-Konto importieren oder nur neue Daten ab jetzt synchronisieren?"
     }
   }
 }

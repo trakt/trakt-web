@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "Профилът е личен?"
     },
+    "text_all_settings": {
+      "default": "Всички Настройки"
+    },
     "text_display_name": {
       "default": "Показвано име"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "За мен"
+    },
+    "text_automatic_tracking": {
+      "default": "Автоматично Проследяване"
+    },
+    "text_streaming_sync": {
+      "default": "Синхронизация на Стриминг"
     },
     "button_label_change_about": {
       "default": "Промени за мен"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "Поддръжка"
+    },
+    "link_text_terms": {
+      "default": "Условия за Ползване"
+    },
+    "link_text_policy": {
+      "default": "Политика за Поверителност"
     },
     "header_calendar": {
       "default": "Календар"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "Режисьор:"
+    },
     "text_created_by": {
       "default": "Създадено от <a>{name}</a>",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "Създател:"
     },
     "tag_text_watched": {
       "default": "Гледано"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "Стрийминг услугата е свързана."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Стрийминг услугата е премахната."
+    },
+    "button_text_younify_fix": {
+      "default": "Поправи"
+    },
+    "button_text_younify_unlink": {
+      "default": "Премахни"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Синхронизирай съществуващи данни"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Игнорирай съществуващи данни"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Изпрати Логове"
+    },
+    "text_younify_status_linked": {
+      "default": "Свързано"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Не е свързано"
+    },
+    "text_younify_status_broken": {
+      "default": "Счупено"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Сигурни ли сте, че искате да премахнете {service}?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Синхронизация на Съществуващи Данни"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Искате ли да импортирате съществуващите си данни в профила си в Trakt, или само да синхронизирате нови данни отсега нататък?"
     }
   }
 }

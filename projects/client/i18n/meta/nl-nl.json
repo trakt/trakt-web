@@ -1525,6 +1525,9 @@
     "switch_label_private": {
       "default": "Is profiel privé?"
     },
+    "text_all_settings": {
+      "default": "Alle Instellingen"
+    },
     "text_display_name": {
       "default": "Weergavenaam"
     },
@@ -1539,6 +1542,12 @@
     },
     "text_about": {
       "default": "Over mij"
+    },
+    "text_automatic_tracking": {
+      "default": "Automatisch Volgen"
+    },
+    "text_streaming_sync": {
+      "default": "Streaming Synchronisatie"
     },
     "button_label_change_about": {
       "default": "Wijzig 'over mij'"
@@ -1675,6 +1684,12 @@
     },
     "link_text_support": {
       "default": "Support"
+    },
+    "link_text_terms": {
+      "default": "Gebruiksvoorwaarden"
+    },
+    "link_text_policy": {
+      "default": "Privacybeleid"
     },
     "header_calendar": {
       "default": "Kalender"
@@ -2245,6 +2260,9 @@
         }
       }
     },
+    "text_directed_by_short": {
+      "default": "Regie:"
+    },
     "text_created_by": {
       "default": "Gemaakt door <a>{name}</a>",
       "variables": {
@@ -2252,6 +2270,9 @@
           "type": "string"
         }
       }
+    },
+    "text_created_by_short": {
+      "default": "Gemaakt door:"
     },
     "tag_text_watched": {
       "default": "Bekeken"
@@ -2397,6 +2418,50 @@
           "type": "string"
         }
       }
+    },
+    "text_info_younify_service_linked": {
+      "default": "Streamingdienst is gekoppeld."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Streamingdienst is ontkoppeld."
+    },
+    "button_text_younify_fix": {
+      "default": "Repareren"
+    },
+    "button_text_younify_unlink": {
+      "default": "Ontkoppelen"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Bestaande gegevens synchroniseren"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Bestaande gegevens negeren"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Logs Verzenden"
+    },
+    "text_younify_status_linked": {
+      "default": "Gekoppeld"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Niet gekoppeld"
+    },
+    "text_younify_status_broken": {
+      "default": "Defect"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Weet u zeker dat u {service} wilt ontkoppelen?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Bestaande gegevens synchroniseren"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Wilt u uw bestaande gegevens importeren naar uw Trakt-account, of alleen nieuwe gegevens vanaf nu synchroniseren?"
     }
   }
 }
