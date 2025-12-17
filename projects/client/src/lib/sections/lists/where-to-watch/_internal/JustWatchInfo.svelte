@@ -22,6 +22,13 @@
       ...target,
     }),
   );
+
+  const delta = $derived.by(() => {
+    if (!rank?.delta) return null;
+
+    const absDelta = Math.abs(rank.delta);
+    return rank.delta > 0 ? `+${absDelta}` : `-${absDelta}`;
+  });
 </script>
 
 {#if !$isLoading && $url}
@@ -34,13 +41,12 @@
     </Link>
 
     {#if rank}
-      <span>{rank.current}</span>
-      <span
-        class:is-positive={rank.current > 0}
-        class:is-negative={rank.current < 0}
-      >
-        ({rank.delta})
-      </span>
+      <span class="secondary tag"> {rank.current}</span>
+      {#if delta}
+        <span class="secondary tag">
+          ({delta})
+        </span>
+      {/if}
     {/if}
   </div>
 {/if}
@@ -50,14 +56,6 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
-
-    .is-positive {
-      color: var(--color-rank-positive);
-    }
-
-    .is-negative {
-      color: var(--color-rank-negative);
-    }
 
     :global(.trakt-link) {
       display: flex;

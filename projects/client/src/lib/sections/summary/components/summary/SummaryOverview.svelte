@@ -10,9 +10,6 @@
   const { title, overview }: SummaryOverviewProps = $props();
 </script>
 
-<ClampedText
-  classList="secondary"
-  label={m.button_label_expand_media_overview({ title })}
->
+<ClampedText label={m.button_label_expand_media_overview({ title })}>
   {overview}
 </ClampedText>
