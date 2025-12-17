@@ -35,9 +35,7 @@
   const { isWatched } = $derived(useIsWatched({ type, media }));
   const { isWatchlisted } = $derived(useIsWatchlisted({ type, media }));
 
-  const isDeemphasized = $derived(
-    canDeemphasize && ($isWatched || $isWatchlisted),
-  );
+  const isDeemphasized = $derived(canDeemphasize && $isWatched);
 
   const isSummary = $derived(style === "summary");
 </script>
