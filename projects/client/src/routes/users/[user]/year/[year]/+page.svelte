@@ -3,6 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
@@ -17,6 +18,8 @@
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_year_to_date()}
 >
+  <NavbarStateSetter mode="minimal" />
+
   <TraktPageCoverSetter />
 
   <Frame
