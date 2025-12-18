@@ -17,6 +17,7 @@
   {audience}
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_month_in_review()}
+  mode="content-only"
 >
   <NavbarStateSetter mode="minimal" />
 
@@ -33,5 +34,6 @@
       );
     }}
     title={m.page_title_month_in_review()}
+    mode="cover"
   />
 </TraktPage>

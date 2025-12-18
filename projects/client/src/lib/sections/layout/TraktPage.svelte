@@ -18,6 +18,7 @@
       runtime: number;
     };
     hasDynamicContent?: boolean;
+    mode?: "default" | "content-only";
   };
 
   const {
@@ -28,6 +29,7 @@
     image: _image,
     info: _info,
     hasDynamicContent = false,
+    mode = "default",
   }: ChildrenProps & TraktPageProps & AudienceProps = $props();
 
   const websiteName = "Trakt Web";
@@ -107,13 +109,17 @@
 </svelte:head>
 
 <RenderFor {audience}>
-  <NavbarStateSetter mode="full" />
+  {#if mode === "default"}
+    <NavbarStateSetter mode="full" />
+  {/if}
 
   <div class="trakt-content" {...dynamicContentProps}>
     {@render children()}
   </div>
 
-  <Footer />
+  {#if mode === "default"}
+    <Footer />
+  {/if}
 </RenderFor>
 
 {#if audience === "authenticated"}
