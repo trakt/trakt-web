@@ -22,7 +22,7 @@
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
-  import SeasonalBackground from "$lib/features/theme/components/SeasonalBackground.svelte";
+  import SeasonalFlair from "$lib/features/theme/components/SeasonalFlair.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import { initializeSeasonalThemes } from "$lib/features/theme/initializeSeasonalThemes.js";
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
@@ -149,7 +149,7 @@
                                 <ConfirmationProvider>
                                   <MarkAsWatchedDrawerProvider />
                                   <CoverImage />
-                                  <SeasonalBackground />
+                                  <SeasonalFlair />
 
                                   <ThemeProvider theme={data.theme}>
                                     <ListScrollHistoryProvider>
