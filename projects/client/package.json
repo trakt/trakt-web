@@ -6,8 +6,8 @@
   "scripts": {
     "pre:dev": "deno task i18n:web:watch",
     "dev": "concurrently 'deno task pre:dev' 'vite dev'",
-    "dev:staging": "concurrently 'deno task pre:dev' 'IS_STAGING=true vite dev'",
-    "dev:contrib": "concurrently 'deno task pre:dev' 'IS_CONTRIB=true vite dev'",
+    "dev:staging": "concurrently 'deno task pre:dev' 'cross-env IS_STAGING=true vite dev'",
+    "dev:contrib": "concurrently 'deno task pre:dev' 'cross-env  IS_CONTRIB=true vite dev'",
     "prebuild": "deno task i18n:web",
     "build": "vite build",
     "prebuild:preview": "deno task prebuild",
@@ -47,6 +47,7 @@
     "@vite-pwa/sveltekit": "1.1.0",
     "@vitest/coverage-istanbul": "3.2.4",
     "concurrently": "9.2.1",
+    "cross-env": "10.1.0",
     "eslint": "9.39.1",
     "eslint-plugin-svelte": "3.13.1",
     "globals": "16.5.0",
