@@ -32,11 +32,20 @@ Want to contribute to Trakt Web? Great! Here's how to get set up:
 1. **Create a Trakt Application:** Go to
    [Trakt Settings](https://trakt.tv/oauth/applications) and create a new
    application.
-1. **Set the `Redirect uri:`:** Set this to `http://localhost:5173/` for local
-   development.
-1. **Set the `Javascript (cors) origins:`:** Also set this to
-   `http://localhost:5173/` to allow cross-origin requests.
+1. **Set the `Redirect uri:`:** Add the following URIs (one per line):
+   - `http://localhost:5173`
+   - `http://localhost:5173/callback`
+   - `http://localhost:4173`
+   - `http://localhost:4173/callback`
+1. **Set the `Javascript (cors) origins:`:** Add the following origins (one per
+   line):
+   - `http://localhost:5173`
+   - `http://localhost:5173/callback`
+   - `http://localhost:4173`
+   - `http://localhost:4173/callback`
 1. Use the Client ID and Client Secret in your development environment.
+
+> **Note:** Port 5173 is for development mode, while port 4173 is for production preview.
 
 ## Getting Started
 
