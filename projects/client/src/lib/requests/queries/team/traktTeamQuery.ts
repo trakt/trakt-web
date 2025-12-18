@@ -13,6 +13,16 @@ const traktTeamRequest = (
       query: {
         extended: 'full,images',
       },
+    }).then((response) => {
+      /**
+       * FIXME: @seferturan these should return 403 not 401
+       * talk to @rudf0rd about this
+       */
+      if (response.status === 401) {
+        return { status: 200, body: [], headers: response.headers };
+      }
+
+      return response;
     });
 
 export const traktTeamQuery = defineQuery({
