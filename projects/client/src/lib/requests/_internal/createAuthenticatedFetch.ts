@@ -2,6 +2,7 @@ import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
 import { getUserManager } from '../../features/auth/stores/userManager.ts';
+import { IS_DEV } from '../../utils/env/index.ts';
 import { safeSessionStorage } from '../../utils/storage/safeStorage.ts';
 
 const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
@@ -38,7 +39,11 @@ export function createAuthenticatedFetch<
           headers,
         } as Parameters<T>[1],
       ).then((response) => {
-        if (response.status === 401 && !hasRequestedRefresh()) {
+        /**
+         * FIXME: @seferturan these should return 403 not 401
+         * talk to @rudf0rd about this
+         */
+        if (!IS_DEV && response.status === 401 && !hasRequestedRefresh()) {
           setRefreshKey();
           getUserManager()?.removeUser().then(() =>
             globalThis.window.location.reload()
