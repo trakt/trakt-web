@@ -7,15 +7,28 @@
     $props();
 </script>
 
-<Switch
-  label={m.switch_label_toggle_christmas_filters()}
-  innerText={isEnabled ? "santa" : "grinch"}
-  checked={isEnabled}
-  color="red"
-  onclick={onToggle}
-  --custom-width="var(--ni-80)"
->
-  {#snippet icon()}
-    <ChristmasIcon />
-  {/snippet}
-</Switch>
+<div class="trakt-christmas-toggle">
+  <Switch
+    label={m.switch_label_toggle_christmas_filters()}
+    innerText={isEnabled ? "santa" : "grinch"}
+    checked={isEnabled}
+    color="red"
+    onclick={onToggle}
+  >
+    {#snippet icon()}
+      <ChristmasIcon />
+    {/snippet}
+  </Switch>
+</div>
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-christmas-toggle {
+    --custom-width: var(--ni-80);
+
+    @include for-tablet-sm-and-below {
+      --custom-width: var(--ni-74);
+    }
+  }
+</style>
