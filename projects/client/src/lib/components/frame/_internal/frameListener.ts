@@ -16,6 +16,9 @@ type FrameMessage = {
   pathname: string;
 } | {
   type: 'homeNavigation';
+} | {
+  type: 'scrollToSection';
+  y: number;
 };
 
 export function frameListener(element: HTMLIFrameElement, slug: string) {
@@ -40,6 +43,12 @@ export function frameListener(element: HTMLIFrameElement, slug: string) {
     if (event.data.type === 'homeNavigation') {
       goto(UrlBuilder.home(), {
         replaceState: true,
+      });
+    }
+
+    if (event.data.type === 'scrollToSection') {
+      globalThis.window.scrollTo({
+        top: event.data.y,
       });
     }
   };
