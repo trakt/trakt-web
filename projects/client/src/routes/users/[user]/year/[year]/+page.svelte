@@ -17,6 +17,7 @@
   {audience}
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_year_to_date()}
+  mode="content-only"
 >
   <NavbarStateSetter mode="minimal" />
 
@@ -28,5 +29,6 @@
       return UrlBuilder.og.frame.yearToDate(slug, params.year, token);
     }}
     title={m.page_title_year_to_date()}
+    mode="cover"
   />
 </TraktPage>
