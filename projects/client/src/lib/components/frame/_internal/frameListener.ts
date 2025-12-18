@@ -46,13 +46,23 @@ export function frameListener(element: HTMLIFrameElement, slug: string) {
 
   globalThis.window.addEventListener('message', handleMessage);
 
+  const postMessageToChild = <T>(message: T) => {
+    VALID_ORIGINS.forEach((origin) => {
+      element.contentWindow?.postMessage(message, origin);
+    });
+  };
+
   onMount(() => {
+    const sendScrollToChild = () => {
+      postMessageToChild({
+        type: 'parentScrollY',
+        scrollY: globalThis.window.scrollY,
+      });
+    };
     const sendHeightToChild = () => {
-      VALID_ORIGINS.forEach((origin) => {
-        element.contentWindow?.postMessage({
-          type: 'parentClientHeight',
-          height: globalThis.document.body.clientHeight,
-        }, origin);
+      postMessageToChild({
+        type: 'parentClientHeight',
+        height: globalThis.document.body.clientHeight,
       });
     };
 
@@ -62,9 +72,14 @@ export function frameListener(element: HTMLIFrameElement, slug: string) {
       .getInstance()
       .register('resize', sendHeightToChild);
 
+    const unregisterScroll = GlobalEventBus
+      .getInstance()
+      .register('scroll', sendScrollToChild);
+
     return () => {
       element.removeEventListener('load', sendHeightToChild);
       unregister();
+      unregisterScroll();
     };
   });
 
