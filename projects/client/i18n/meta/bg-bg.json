@@ -2462,6 +2462,21 @@
     },
     "dialog_prompt_younify_data_sync": {
       "default": "Искате ли да импортирате съществуващите си данни в профила си в Trakt, или само да синхронизирате нови данни отсега нататък?"
+    },
+    "list_title_trivia": {
+      "default": "Твъйвъ"
+    },
+    "button_label_trivia_no_spoilers": {
+      "default": "Без спойлери"
+    },
+    "button_text_trivia_no_spoilers": {
+      "default": "Без спойлери"
+    },
+    "button_label_trivia_spoilers": {
+      "default": "Със спойлери"
+    },
+    "button_text_trivia_spoilers": {
+      "default": "Със спойлери"
     }
   }
 }

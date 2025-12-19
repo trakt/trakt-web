@@ -2462,6 +2462,21 @@
     },
     "dialog_prompt_younify_data_sync": {
       "default": "Dorești să imporți datele tale existente în contul Trakt, sau doar să sincronizezi date noi de acum înainte?"
+    },
+    "list_title_trivia": {
+      "default": "Trivia"
+    },
+    "button_label_trivia_no_spoilers": {
+      "default": "Fără spoilere"
+    },
+    "button_text_trivia_no_spoilers": {
+      "default": "Fără spoilere"
+    },
+    "button_label_trivia_spoilers": {
+      "default": "Cu spoilere"
+    },
+    "button_text_trivia_spoilers": {
+      "default": "Cu spoilere"
     }
   }
 }

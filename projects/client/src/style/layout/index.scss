@@ -58,6 +58,9 @@
   --width-comment-card: min(var(--ni-480), 85vw);
   --height-comment-card: var(--ni-172);
 
+  --width-trivia-card: min(var(--ni-480), 85vw);
+  --height-trivia-card: var(--ni-172);
+
   --width-sentiments-card: min(var(--ni-480), 85vw);
   --height-sentiments-card: var(--ni-228);
 
@@ -94,6 +97,7 @@
   --height-poster-list: calc(var(--height-portrait-card) + var(--layout-scrollbar-width));
   --height-lists-list: calc(var(--height-list-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-comments-list: calc(var(--height-comment-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
+  --height-trivia-list: calc(var(--height-trivia-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-sentiments-list: calc(var(--height-sentiments-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-comment-thread-list: calc(var(--height-comment-thread-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-profile-list: calc(var(--height-profile-item) + var(--layout-scrollbar-width));

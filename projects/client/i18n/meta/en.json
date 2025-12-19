@@ -6470,6 +6470,45 @@
         "web",
         "ios"
       ]
+    },
+    "list_title_trivia": {
+      "default": "Trivia",
+      "description": "Title for lists containing trivia about a movie or show. This title should be as short and concise as possible.",
+      "exclude": [
+        "ios"
+      ]
+    },
+    "button_label_trivia_no_spoilers": {
+      "default": "No spoilers",
+      "description": "Aria-label for the button that allows users to only view spoiler free trivia.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_trivia_no_spoilers": {
+      "default": "No spoilers",
+      "description": "Text for the button that allows users to only view spoiler free trivia. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_trivia_spoilers": {
+      "default": "Spoilers",
+      "description": "Aria-label for the button that allows users to view trivia with spoilers.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_trivia_spoilers": {
+      "default": "Spoilers",
+      "description": "Text for the button that allows users to view trivia with spoilers. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

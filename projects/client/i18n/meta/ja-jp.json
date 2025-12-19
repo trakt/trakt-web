@@ -2462,6 +2462,21 @@
     },
     "dialog_prompt_younify_data_sync": {
       "default": "既存のデータをTraktアカウントにインポートしますか、それとも今後新しいデータのみを同期しますか？"
+    },
+    "list_title_trivia": {
+      "default": "トリビア"
+    },
+    "button_label_trivia_no_spoilers": {
+      "default": "ネタバレなし"
+    },
+    "button_text_trivia_no_spoilers": {
+      "default": "ネタバレなし"
+    },
+    "button_label_trivia_spoilers": {
+      "default": "ネタバレあり"
+    },
+    "button_text_trivia_spoilers": {
+      "default": "ネタバレあり"
     }
   }
 }

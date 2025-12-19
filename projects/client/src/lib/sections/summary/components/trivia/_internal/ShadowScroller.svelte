@@ -3,7 +3,7 @@
 
   const { children }: ChildrenProps = $props();
 
-  // FIXME: remove this component when getting rid of scrollable comment & sentiment cards
+  // FIXME: remove this component when getting rid of scrollable trivia cards cards
 </script>
 
 <div class="trakt-shadow-wrapper">

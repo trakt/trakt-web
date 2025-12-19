@@ -7,5 +7,6 @@
 <style>
   p {
     color: var(--list-meta-info-color);
+    width: var(--meta-info-width, auto);
   }
 </style>

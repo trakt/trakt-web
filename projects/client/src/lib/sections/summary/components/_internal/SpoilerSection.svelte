@@ -1,5 +1,5 @@
 <script lang="ts">
-  import DropIcon from "$lib/components/icons/DropIcon.svelte";
+  import SpoilerIcon from "$lib/components/icons/SpoilerIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler";
   import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
@@ -32,7 +32,7 @@
     {#snippet headerContent()}
       <p class="bold trakt-spoiler-alert">
         {m.text_spoiler_alert()}
-        <DropIcon />
+        <SpoilerIcon />
       </p>
     {/snippet}
   </CollapsableContent>

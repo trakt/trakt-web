@@ -1,6 +1,6 @@
-import { setScrollInfo } from '$lib/sections/summary/components/comments/_internal/setScrollInfo.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
 import { describe, expect, it, vi } from 'vitest';
+import { setScrollInfo } from './setScrollInfo.ts';
 
 describe('action: setScrollInfo', () => {
   function scrollTo(

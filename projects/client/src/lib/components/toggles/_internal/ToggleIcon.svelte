@@ -3,10 +3,12 @@
   import FollowingIcon from "$lib/components/icons/FollowingIcon.svelte";
   import MediaIcon from "$lib/components/icons/MediaIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
+  import NoSpoilerIcon from "$lib/components/icons/NoSpoilerIcon.svelte";
   import PeopleIcon from "$lib/components/icons/PeopleIcon.svelte";
   import PopularIcon from "$lib/components/icons/PopularIcon.svelte";
   import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
+  import SpoilerIcon from "$lib/components/icons/SpoilerIcon.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
 
@@ -51,4 +53,12 @@
 
 {#if option.value === "likes"}
   <PopularIcon />
+{/if}
+
+{#if option.value === "spoilers"}
+  <SpoilerIcon />
+{/if}
+
+{#if option.value === "no-spoilers"}
+  <NoSpoilerIcon />
 {/if}

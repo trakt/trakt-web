@@ -2462,6 +2462,21 @@
     },
     "dialog_prompt_younify_data_sync": {
       "default": "Vil du importere dine eksisterende data til Trakt-kontoet ditt, eller bare synkronisere nye data fremover?"
+    },
+    "list_title_trivia": {
+      "default": "Trivia"
+    },
+    "button_label_trivia_no_spoilers": {
+      "default": "Ingen spoiler"
+    },
+    "button_text_trivia_no_spoilers": {
+      "default": "Uten spoiler"
+    },
+    "button_label_trivia_spoilers": {
+      "default": "Med spoiler"
+    },
+    "button_text_trivia_spoilers": {
+      "default": "Med spoiler"
     }
   }
 }

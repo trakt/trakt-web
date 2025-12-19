@@ -2462,6 +2462,21 @@
     },
     "dialog_prompt_younify_data_sync": {
       "default": "Wilt u uw bestaande gegevens importeren naar uw Trakt-account, of alleen nieuwe gegevens vanaf nu synchroniseren?"
+    },
+    "list_title_trivia": {
+      "default": "Trivia"
+    },
+    "button_label_trivia_no_spoilers": {
+      "default": "Geen spoilers"
+    },
+    "button_text_trivia_no_spoilers": {
+      "default": "Zonder spoilers"
+    },
+    "button_label_trivia_spoilers": {
+      "default": "Met spoilers"
+    },
+    "button_text_trivia_spoilers": {
+      "default": "Met spoilers"
     }
   }
 }
