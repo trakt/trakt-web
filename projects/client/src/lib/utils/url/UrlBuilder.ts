@@ -221,6 +221,10 @@ export const UrlBuilder = {
     privacy: () => 'https://trakt.tv/privacy',
     support: (username?: string) => ogSupportFactory(username),
     forums: () => 'https://forums.trakt.tv/c/trakt/trakt-lite/31',
+    widgets: {
+      yir: (slug: string, year: string) =>
+        `https://widgets.trakt.tv/users/${slug}/yir.jpg?year=${year}`,
+    },
     frame: {
       settings: (token: string) =>
         ogIframeAccessTokenFactory(

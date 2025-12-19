@@ -1302,6 +1302,14 @@
     "page_title_year_to_date": {
       "default": "Ano até o momento"
     },
+    "page_title_year_in_review": {
+      "default": "Revisão do {year}",
+      "variables": {
+        "year": {
+          "type": "string"
+        }
+      }
+    },
     "page_title_month_in_review": {
       "default": "Resumo do mês"
     },

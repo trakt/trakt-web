@@ -15,7 +15,7 @@
     image: string | Nil;
     info?: {
       overview: string;
-      runtime: number;
+      runtime?: number;
     };
     hasDynamicContent?: boolean;
     mode?: "default" | "content-only";
@@ -95,7 +95,7 @@
   {#if info != null}
     <meta name="description" content={info.overview} />
     <meta property="og:description" content={info.overview} />
-    {#if info.runtime > 0}
+    {#if info.runtime && info.runtime > 0}
       <meta property="video:duration" content={`${info.runtime * 60}`} />
     {/if}
     <meta name="twitter:description" content={info.overview} />

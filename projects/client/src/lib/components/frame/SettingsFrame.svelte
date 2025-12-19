@@ -24,7 +24,7 @@
     class="trakt-settings-frame"
     title={m.page_title_settings()}
     src={UrlBuilder.og.frame.settings(token ?? "")}
-    use:frameListener={$user.slug}
+    use:frameListener={{ slug: $user.slug, source: "settings" }}
     onload={handleLoad}
   ></iframe>
 </div>

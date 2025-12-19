@@ -2,6 +2,7 @@ import { goto } from '$app/navigation';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { onMount } from 'svelte';
 import { UrlBuilder } from '../../../utils/url/UrlBuilder.ts';
+import { useShare } from '../../buttons/share/useShare.ts';
 
 const VALID_ORIGINS: string[] = [
   'https://trakt.tv',
@@ -19,9 +20,24 @@ type FrameMessage = {
 } | {
   type: 'scrollToSection';
   y: number;
+} | {
+  type: 'embeddedShare';
+  title: string;
+  url: string;
+  text: string;
 };
 
-export function frameListener(element: HTMLIFrameElement, slug: string) {
+type FrameListenerProps = {
+  slug: string;
+  source: string;
+};
+
+export function frameListener(
+  element: HTMLIFrameElement,
+  { slug, source }: FrameListenerProps,
+) {
+  const { share } = useShare({ id: source });
+
   const handleMessage = (event: MessageEvent<FrameMessage>) => {
     if (!VALID_ORIGINS.includes(event.origin)) {
       return;
@@ -50,6 +66,15 @@ export function frameListener(element: HTMLIFrameElement, slug: string) {
       globalThis.window.scrollTo({
         top: event.data.y,
       });
+    }
+
+    if (event.data.type === 'embeddedShare') {
+      const data = {
+        title: event.data.title,
+        url: event.data.url,
+        text: event.data.text,
+      };
+      share(data);
     }
   };
 
