@@ -94,6 +94,7 @@ module.exports = {
         'related',
         'requests',
         'safari',
+        'share',
         'search',
         'sentiment',
         'settings',
