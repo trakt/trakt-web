@@ -12,7 +12,7 @@ import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts'
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { combineLatest } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 type UseEpisodeParams = {
   slug: string;
@@ -41,12 +41,11 @@ export function useEpisode(
     showIntlQuery({ slug: params.slug, language, enabled: !isLocaleSkipped }),
   );
 
-  const streamOnQuery = country
-    .pipe(
-      switchMap((country) =>
-        useQuery(streamEpisodeQuery({ ...params, country }))
-      ),
-    );
+  const streamOnQuery = useQuery(
+    country.pipe(
+      map((country) => streamEpisodeQuery({ ...params, country })),
+    ),
+  );
 
   const queries = [
     episode,
