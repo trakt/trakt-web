@@ -1,7 +1,7 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { useStreamingServices } from "$lib/stores/useStreamingServices";
   import ServiceLogo from "./_internal/ServiceLogo.svelte";
+  import { useStreamingServiceLogo } from "./_internal/useStreamingServiceLogo";
   import type { StreamingServiceLogoIntl } from "./StreamingServiceLogoIntl";
 
   type StreamingServiceLogoProps = {
@@ -12,11 +12,9 @@
 
   const { source, i18n, country }: StreamingServiceLogoProps = $props();
 
-  const { sources } = $derived(useStreamingServices(country));
+  const logo = $derived(useStreamingServiceLogo({ country, source }));
 
-  const service = $derived($sources.find((s) => s.source === source));
-  const displayName = $derived(service?.name ?? "");
-
+  const displayName = $derived($logo?.name || "");
   /*
     TODO:
     - 4k tag
@@ -25,20 +23,14 @@
 
 <div
   class="trakt-streaming-service-logo"
-  class:has-channel-logo={!!service?.channelLogoUrl}
-  style="--logo-color: {service?.color ?? 'var(--color-text-primary)'};"
+  class:has-channel-logo={!!$logo?.channelUrl}
 >
-  {#if service?.logoUrl}
-    <ServiceLogo
-      source={service.source}
-      logoSrc={service.logoUrl}
-      {displayName}
-      {i18n}
-    />
-    {#if service?.channelLogoUrl}
+  {#if $logo?.url}
+    <ServiceLogo {source} logoSrc={$logo?.url} {displayName} {i18n} />
+    {#if $logo?.channelUrl}
       <div class="trakt-channel-separator"></div>
       <CrossOriginImage
-        src={service?.channelLogoUrl}
+        src={$logo?.channelUrl}
         alt={i18n.alt(displayName)}
         classList="trakt-channel-logo"
       />
