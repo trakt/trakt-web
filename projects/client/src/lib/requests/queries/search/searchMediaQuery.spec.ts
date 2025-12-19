@@ -15,9 +15,13 @@ describe('searchMediaQuery', () => {
           searchMediaQuery({
             query: MovieHereticResponseMock.title,
             limit: DEFAULT_SEARCH_LIMIT,
+            exact: false,
             config: {
               keys: {
-                media: '',
+                media: {
+                  default: '',
+                  exact: '',
+                },
                 people: '',
               },
               server: '',

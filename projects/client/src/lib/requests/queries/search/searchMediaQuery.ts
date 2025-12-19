@@ -16,6 +16,7 @@ type SearchParams = {
   config: TypesenseConfig;
   limit: number;
   type?: MediaType;
+  exact: boolean;
 } & ApiParams;
 
 const MediaResultSchema = z.object({
@@ -60,7 +61,7 @@ function mapToSearchResultEntry(
 }
 
 const searchRequest = async (
-  { query, type, config, limit }: SearchParams,
+  { query, type, config, limit, exact }: SearchParams,
 ) => {
   const queryParams = {
     query,
@@ -73,27 +74,30 @@ const searchRequest = async (
     ...queryParams,
     config,
     types: types.split(',') as MediaType[],
+    exact,
   })
     .then((body) => ({
       body,
       status: 200,
     }))
-    .catch(() =>
-      api({
+    .catch(() => {
+      const searchApi = api({
         fetch,
-        cancellable: true,
       })
-        .search
-        .query({
-          query: {
-            ...queryParams,
-            extended: 'full,images',
-          },
-          params: {
-            type: types,
-          },
-        })
-    );
+        .search;
+
+      const searchQuery = exact ? searchApi.exact : searchApi.query;
+
+      return searchQuery({
+        query: {
+          ...queryParams,
+          extended: 'full,images',
+        },
+        params: {
+          type: types,
+        },
+      });
+    });
 
   return response;
 };
@@ -103,7 +107,7 @@ export const searchMediaQuery = defineQuery({
   invalidations: [],
   dependencies: (
     params,
-  ) => [params.query, params.type, params.limit],
+  ) => [params.query, params.type, params.limit, params.exact],
   request: searchRequest,
   mapper: (response) => {
     return {

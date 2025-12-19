@@ -27,7 +27,12 @@ import { postRecentSearch } from './_internal/postRecentSearch.ts';
 
 type SearchResponse = MediaSearchResult | PeopleSearchResult;
 
-function modeToQuery(query: string, mode: SearchMode, config: TypesenseConfig) {
+function modeToQuery(
+  query: string,
+  mode: SearchMode,
+  config: TypesenseConfig,
+  exact: boolean,
+) {
   const limit = DEFAULT_SEARCH_LIMIT;
 
   switch (mode) {
@@ -40,6 +45,7 @@ function modeToQuery(query: string, mode: SearchMode, config: TypesenseConfig) {
         type,
         config,
         limit,
+        exact,
       }) as CreateQueryOptions<SearchResponse>;
     }
     case 'people':
@@ -88,7 +94,7 @@ export function useSearch() {
       track({ mode: currentMode });
 
       const searchQuery = client.fetchQuery(
-        modeToQuery(term, currentMode, config),
+        modeToQuery(term, currentMode, config, false),
       );
 
       if (currentMode === 'people') {
@@ -98,11 +104,16 @@ export function useSearch() {
       const trendingQuery = client.fetchQuery(
         modeToTrendingQuery(term, currentMode),
       );
-      return combineLatest([searchQuery, trendingQuery]).pipe(
-        map(([searchResults, trendingResults]) => ({
+
+      const exactQuery = client.fetchQuery(
+        modeToQuery(term, currentMode, config, true),
+      );
+      return combineLatest([exactQuery, searchQuery, trendingQuery]).pipe(
+        map(([exactResults, searchResults, trendingResults]) => ({
           type: 'media' as const,
           items: dedupe(
             (item) => item.key,
+            (exactResults as MediaSearchResult).items,
             trendingResults?.items ?? [],
             (searchResults as MediaSearchResult).items,
           ),

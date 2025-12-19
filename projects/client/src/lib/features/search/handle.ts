@@ -25,6 +25,14 @@ export const handle: Handle = ({ event, resolve }) => {
       expires_at,
     });
 
+  const mediaSearchExactKey = typesense
+    .keys()
+    .generateScopedSearchKey(typesenseKey, {
+      preset: 'search:media:exact',
+      limit_hits: DEFAULT_SEARCH_LIMIT,
+      expires_at,
+    });
+
   const peopleSearchKey = typesense
     .keys()
     .generateScopedSearchKey(typesenseKey, {
@@ -35,7 +43,10 @@ export const handle: Handle = ({ event, resolve }) => {
 
   event.locals.typesense = {
     keys: {
-      media: mediaSearchKey,
+      media: {
+        default: mediaSearchKey,
+        exact: mediaSearchExactKey,
+      },
       people: peopleSearchKey,
     },
     server: env.TYPESENSE_SERVER ?? '',

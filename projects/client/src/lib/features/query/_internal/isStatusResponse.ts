@@ -9,5 +9,5 @@ export function isStatusResponse<TInput>(
 ): response is SuccessResponse<TInput> {
   return Array.isArray(response)
     ? response.every((item) => item?.status === code)
-    : response.status === code;
+    : response?.status === code;
 }

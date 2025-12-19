@@ -9,7 +9,6 @@
     $props();
 
   const initialTarget = toSearchTarget(page.url.searchParams.get("m"));
-
   const { mode, query } = iffy(() =>
     createSearchContext({
       ...initialTarget,
