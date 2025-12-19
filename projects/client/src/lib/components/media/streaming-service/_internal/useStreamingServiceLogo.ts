@@ -43,7 +43,13 @@ export function useStreamingServiceLogo(
       const services = $query.data.get(countryCode) ?? [];
       const service = services.find((s) => s.source === source);
 
-      return service ? mapToLogo(service) : undefined;
+      if (service) {
+        return service ? mapToLogo(service) : undefined;
+      }
+
+      const allServices = Array.from($query.data.values() ?? []).flat();
+      const fallbackService = allServices.find((s) => s.source === source);
+      return fallbackService ? mapToLogo(fallbackService) : undefined;
     }),
   );
 }
