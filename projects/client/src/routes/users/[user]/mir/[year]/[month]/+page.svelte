@@ -35,5 +35,6 @@
     }}
     title={m.page_title_month_in_review()}
     mode="cover"
+    source="mir"
   />
 </TraktPage>

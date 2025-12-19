@@ -1302,6 +1302,14 @@
     "page_title_year_to_date": {
       "default": "Jaar tot nu toe"
     },
+    "page_title_year_in_review": {
+      "default": "Terugblik {year}",
+      "variables": {
+        "year": {
+          "type": "string"
+        }
+      }
+    },
     "page_title_month_in_review": {
       "default": "Maandoverzicht"
     },

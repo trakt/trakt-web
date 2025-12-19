@@ -1302,6 +1302,14 @@
     "page_title_year_to_date": {
       "default": "Anno in corso"
     },
+    "page_title_year_in_review": {
+      "default": "Riepilogo {year}",
+      "variables": {
+        "year": {
+          "type": "string"
+        }
+      }
+    },
     "page_title_month_in_review": {
       "default": "Mese in rassegna"
     },

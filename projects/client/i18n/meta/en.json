@@ -3543,6 +3543,19 @@
         "ios"
       ]
     },
+    "page_title_year_in_review": {
+      "default": "{year} in review",
+      "description": "Title for the year in review page.",
+      "variables": {
+        "year": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "page_title_month_in_review": {
       "default": "Month in review",
       "description": "Title for the month in review page.",

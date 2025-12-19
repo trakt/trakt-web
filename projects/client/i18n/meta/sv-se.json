@@ -1302,6 +1302,14 @@
     "page_title_year_to_date": {
       "default": "Hittills i år"
     },
+    "page_title_year_in_review": {
+      "default": "Året som gick {year}",
+      "variables": {
+        "year": {
+          "type": "string"
+        }
+      }
+    },
     "page_title_month_in_review": {
       "default": "Månadens överblick"
     },

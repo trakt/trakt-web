@@ -1302,6 +1302,14 @@
     "page_title_year_to_date": {
       "default": "Anul curent"
     },
+    "page_title_year_in_review": {
+      "default": "Recapitularea anului {year}",
+      "variables": {
+        "year": {
+          "type": "string"
+        }
+      }
+    },
     "page_title_month_in_review": {
       "default": "Luna în revistă"
     },

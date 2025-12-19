@@ -9,6 +9,7 @@
     title: string;
     urlBuilder: (slug: string, token: string | Nil) => HttpsUrl;
     mode?: "contain" | "cover";
+    source: string;
   };
 
   const {
@@ -16,6 +17,7 @@
     title,
     urlBuilder,
     mode = "contain",
+    source,
   }: FrameProps = $props();
 
   const { user } = useUser();
@@ -30,7 +32,7 @@
     class="trakt-og-frame"
     {title}
     src={urlBuilder(slug, token)}
-    use:frameListener={slug}
+    use:frameListener={{ slug, source }}
   ></iframe>
 
   <Footer />
