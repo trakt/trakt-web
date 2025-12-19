@@ -18,7 +18,7 @@ const movieTriviaRequest = async (
 
   return {
     body: body as TriviaResponse[],
-    status: response.status,
+    status: 200,
   };
 };
 
