@@ -2462,6 +2462,21 @@
     },
     "dialog_prompt_younify_data_sync": {
       "default": "Бажаєте імпортувати наявні дані до свого облікового запису Trakt, чи синхронізувати лише нові дані відтепер?"
+    },
+    "list_title_trivia": {
+      "default": "Цікавинки"
+    },
+    "button_label_trivia_no_spoilers": {
+      "default": "Без спойлерів"
+    },
+    "button_text_trivia_no_spoilers": {
+      "default": "Без спойлерів"
+    },
+    "button_label_trivia_spoilers": {
+      "default": "Спойлери"
+    },
+    "button_text_trivia_spoilers": {
+      "default": "Зі спойлерами"
     }
   }
 }

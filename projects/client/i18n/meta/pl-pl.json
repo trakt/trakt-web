@@ -2462,6 +2462,21 @@
     },
     "dialog_prompt_younify_data_sync": {
       "default": "Czy chcesz zaimportować swoje istniejące dane do konta Trakt, czy tylko synchronizować nowe dane od teraz?"
+    },
+    "list_title_trivia": {
+      "default": "Ciekawostki"
+    },
+    "button_label_trivia_no_spoilers": {
+      "default": "Bez spoilerów"
+    },
+    "button_text_trivia_no_spoilers": {
+      "default": "Bez spoilerów"
+    },
+    "button_label_trivia_spoilers": {
+      "default": "Ze spoilerami"
+    },
+    "button_text_trivia_spoilers": {
+      "default": "Ze spoilerami"
     }
   }
 }

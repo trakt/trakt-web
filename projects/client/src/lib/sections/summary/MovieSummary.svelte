@@ -17,6 +17,7 @@
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
   import CommunitySentiments from "./components/sentiment/CommunitySentiments.svelte";
+  import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
 
   const {
@@ -66,6 +67,8 @@
   <Lists slug={media.slug} title={media.title} type="movie" />
 
   <MediaWatchHistoryList title={m.list_title_history()} {media} type="movie" />
+
+  <TriviaList {media} />
 
   <MediaDetails {studios} {crew} {media} type="movie" />
 </RenderFor>
