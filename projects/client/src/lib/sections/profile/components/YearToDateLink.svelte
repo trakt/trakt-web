@@ -2,14 +2,20 @@
   import Link from "$lib/components/link/Link.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ExternalLinkIcon from "../../../components/icons/ExternalLinkIcon.svelte";
 
   const { slug, source }: { slug: string; source: string } = $props();
 
+  const { isMe } = $derived(useIsMe(slug));
+  const { user } = useUser();
+
   const currentYear = new Date().getFullYear();
 
-  const href = $derived(UrlBuilder.users(slug).yearToDate(currentYear));
+  const ytdSlug = $derived($isMe ? $user.slug : slug);
+  const href = $derived(UrlBuilder.users(ytdSlug).yearToDate(currentYear));
   const { track } = useTrack(AnalyticsEvent.Link);
 </script>
 
