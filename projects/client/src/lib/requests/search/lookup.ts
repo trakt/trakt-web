@@ -18,6 +18,7 @@ type SearchParams<T extends SearchCategory> = {
   query: string;
   limit: number;
   types: T[];
+  exact: boolean;
 };
 
 const COLLECTION_MAP: Record<SearchCategory, string> = {
@@ -32,13 +33,22 @@ const PRESET_MAP: Record<SearchCategory, string> = {
   person: 'search:people',
 };
 
+const EXACT_PRESET_MAP: Record<SearchCategory, string> = {
+  movie: 'search:media:exact',
+  show: 'search:media:exact',
+  person: 'search:people',
+};
+
 export function lookup<T extends SearchCategory>({
   key,
   server,
   query: q,
   limit,
   types,
+  exact,
 }: SearchParams<T>) {
+  const targetPresetMap = exact ? EXACT_PRESET_MAP : PRESET_MAP;
+
   return createSearcher({
     key,
     server,
@@ -47,12 +57,11 @@ export function lookup<T extends SearchCategory>({
     .perform<SchemaForCategory<T>[]>({
       searches: types.map((type) => ({
         collection: COLLECTION_MAP[type],
-        preset: PRESET_MAP[type],
+        preset: targetPresetMap[type],
       })),
       union: true,
     }, {
       q,
-      prioritize_exact_match: false,
       limit,
     })
     .then(({ hits, found }) => ({

@@ -172,7 +172,10 @@ declare global {
 
   export type TypesenseConfig = {
     keys: {
-      media: string;
+      media: {
+        default: string;
+        exact: string;
+      };
       people: string;
     };
     server: string;

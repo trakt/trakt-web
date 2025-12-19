@@ -24,7 +24,10 @@
         <SearchProvider
           config={{
             keys: {
-              media: "",
+              media: {
+                default: "",
+                exact: "",
+              },
               people: "",
             },
             server: "",
