@@ -46,7 +46,7 @@ export const UserSettingsSchema = z.object({
       }),
     }),
     watch: z.object({
-      action: z.enum(['now', 'released']),
+      action: z.enum(['now', 'released', 'unknown']),
     }),
     isSpoilerHidden: z.boolean().optional(),
   }),

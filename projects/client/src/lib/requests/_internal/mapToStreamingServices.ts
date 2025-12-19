@@ -49,7 +49,7 @@ function mapToStreamOnDemand(
   };
 }
 
-function mapToStreamingRank(rankResponse?: watchNowRankResponse) {
+function mapToStreamingRank(rankResponse?: watchNowRankResponse | Nil) {
   if (!rankResponse?.rank || !rankResponse?.delta) {
     return;
   }
