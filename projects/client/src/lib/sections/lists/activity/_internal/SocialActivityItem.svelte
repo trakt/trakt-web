@@ -84,7 +84,11 @@
       align-items: center;
 
       padding-left: var(--ni-12);
-      background: color-mix(in srgb, var(--color-background) 50%, transparent);
+      background: color-mix(
+        in srgb,
+        var(--color-card-background) 50%,
+        transparent
+      );
       border-radius: var(--border-radius-l);
       overflow: hidden;
 

@@ -51,5 +51,6 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
+    color: inherit;
   }
 </style>

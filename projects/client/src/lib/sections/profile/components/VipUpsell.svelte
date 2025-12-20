@@ -34,7 +34,7 @@
     flex-direction: column;
     gap: var(--gap-m);
 
-    background: var(--color-background);
+    background: var(--color-card-background);
 
     border: var(--ni-2) solid var(--color-foreground-red);
     border-radius: var(--border-radius-l);

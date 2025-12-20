@@ -127,14 +127,15 @@
     position: relative;
 
     transition: outline var(--transition-increment) ease-in-out;
+    outline: var(--border-thickness-xxs) solid var(--color-border);
+
+    &,
+    .trakt-search-input {
+      border-radius: var(--border-radius-l);
+    }
 
     &:focus-within {
       outline: var(--border-thickness-xs) solid var(--purple-500);
-
-      &,
-      .trakt-search-input {
-        border-radius: var(--border-radius-l);
-      }
     }
 
     .trakt-search-icon {
@@ -157,7 +158,7 @@
       box-sizing: border-box;
 
       border-radius: var(--border-radius-l);
-      background: color-mix(in srgb, var(--color-background) 25%, transparent);
+      background: var(--color-input-background);
 
       transition: var(--transition-increment) ease-in-out;
       transition-property:
@@ -170,7 +171,6 @@
       }
 
       &:focus-within {
-        outline-color: var(--purple-600);
         opacity: 1;
       }
 

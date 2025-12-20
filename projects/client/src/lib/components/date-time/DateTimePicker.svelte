@@ -98,11 +98,7 @@
     font-size: var(--font-size-text);
 
     color: var(--color-text-primary);
-    background-color: color-mix(
-      in srgb,
-      var(--color-background) 25%,
-      transparent
-    );
+    background-color: var(--color-input-background);
 
     border: var(--ni-1) solid var(--color-border);
     border-radius: var(--date-time-border-radius);

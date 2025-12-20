@@ -82,7 +82,7 @@
     padding: var(--ni-24);
     border-radius: var(--border-radius-l);
     border: none;
-    background-color: var(--color-card-background);
+    background-color: var(--color-dialog-background);
     color: var(--color-text-primary);
 
     max-width: var(--ni-480);

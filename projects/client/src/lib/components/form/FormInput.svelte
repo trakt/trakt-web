@@ -88,7 +88,7 @@
     box-sizing: border-box;
 
     border-radius: var(--border-radius-m);
-    background: color-mix(in srgb, var(--color-background) 25%, transparent);
+    background: var(--color-input-background);
 
     outline: var(--border-thickness-xxs) solid var(--color-border);
     outline-offset: calc(-1 * var(--border-thickness-xxs));
