@@ -33,6 +33,11 @@
   --list-poster-shadow: -4px 0px 16px 0px rgba(0, 0, 0, 0.25);
 
   /*
+    * Actions bar
+    */
+  --color-actions-bar-background: var(--shade-20);
+
+  /*
    * Cta
    */
   --color-cta-background-gradient: linear-gradient(258.73deg,
@@ -176,6 +181,11 @@
   --color-card-background: var(--shade-920);
   --color-official-list-background: var(--purple-800);
   --list-poster-shadow: -8px 0px 16px 0px rgba(0, 0, 0, 0.56);
+
+  /*
+    * Actions bar
+    */
+  --color-actions-bar-background: var(--shade-920);
 
   /*
    * Cta

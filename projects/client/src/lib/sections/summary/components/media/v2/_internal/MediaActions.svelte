@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import TrackAction from "$lib/sections/media-actions/mark-as-watched/TrackAction.svelte";
-  import SummaryActions from "../../../_internal/SummaryActions.svelte";
+  import SummaryActionsBar from "../../../_internal/SummaryActionsBar.svelte";
   import BookmarkAction from "./BookmarkAction.svelte";
   import MediaPopupActions from "./MediaPopupActions.svelte";
   import TrailerButton from "./TrailerButton.svelte";
@@ -19,8 +19,8 @@
   <MediaPopupActions {media} {title} />
 {/snippet}
 
-<SummaryActions popup={{ actions: popupActions, title }}>
+<SummaryActionsBar popup={{ actions: popupActions, title }}>
   <TrackAction {...targetProps} />
   <BookmarkAction {media} />
   <TrailerButton slug={media.slug} trailer={media.trailer} style="action" />
-</SummaryActions>
+</SummaryActionsBar>
