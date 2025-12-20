@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
-  import SummaryActions from "../../../_internal/SummaryActions.svelte";
+  import SummaryActionsBar from "../../../_internal/SummaryActionsBar.svelte";
   import SocialMediaAction from "./SocialMediaAction.svelte";
 
   const {
@@ -19,7 +19,7 @@
 
 <trakt-social-media-links data-variant={variant}>
   {#if hasSocialMediaLinks}
-    <SummaryActions>
+    <SummaryActionsBar>
       {#if facebookUsername}
         <SocialMediaAction username={facebookUsername} type="facebook" />
       {/if}
@@ -31,7 +31,7 @@
       {#if instagramUsername}
         <SocialMediaAction username={instagramUsername} type="instagram" />
       {/if}
-    </SummaryActions>
+    </SummaryActionsBar>
   {/if}
 </trakt-social-media-links>
 
