@@ -118,6 +118,7 @@
     border: var(--ni-2) var(--purple-50) solid;
 
     color: var(--color-text-primary);
+    background-color: var(--color-input-background);
 
     transition: border-color var(--transition-increment) ease-in-out;
 

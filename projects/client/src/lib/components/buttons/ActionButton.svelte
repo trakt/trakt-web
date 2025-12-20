@@ -182,8 +182,6 @@
             var(--color-foreground) 10%,
             transparent
           );
-          /* color: var(--color-background); */
-          /* color: var(--color-text-primary); */
         }
       }
     }

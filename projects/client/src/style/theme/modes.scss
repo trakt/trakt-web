@@ -5,37 +5,40 @@
   /**
    * Theme-able variables
    */
+  --color-floating-background: var(--shade-60);
   --color-shadow: var(--shade-800);
 
   --color-foreground: var(--shade-920);
-  --color-background: var(--shade-10);
+  --color-background: color-mix(in srgb, var(--shade-300) 70%, var(--purple-50));
 
-  --color-text-primary: var(--shade-800);
-  --color-text-secondary: var(--shade-500);
+  --color-text-primary: var(--shade-900);
+  --color-text-secondary: var(--shade-800);
   --color-text-emphasis: var(--purple-700);
+
+  --color-input-background: color-mix(in srgb, var(--shade-20) 25%, transparent);
 
   /**
    * Navbar
    */
-  --color-background-navbar-base: var(--shade-50);
+  --color-background-navbar-base: var(--color-floating-background);
   --color-background-navbar: color-mix(in srgb,
       var(--color-background-navbar-base) 90%,
       transparent);
   --color-foreground-navbar: var(--color-foreground);
   --color-border: var(--shade-300);
-  --color-background-side-navbar: var(--shade-70);
+  --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*
    * Card
    */
-  --color-card-background: var(--shade-20);
+  --color-card-background: var(--color-floating-background);
   --color-official-list-background: var(--purple-200);
   --list-poster-shadow: -4px 0px 16px 0px rgba(0, 0, 0, 0.25);
 
   /*
     * Actions bar
     */
-  --color-actions-bar-background: var(--shade-20);
+  --color-actions-bar-background: var(--color-floating-background);
 
   /*
    * Cta
@@ -75,7 +78,7 @@
   /*
    * Navbar
    */
-  --color-background-mobile-navbar: color-mix(in srgb, var(--color-background) 90%, transparent);
+  --color-background-mobile-navbar: color-mix(in srgb, var(--color-background-navbar-base) 90%, transparent);
 
   /*
    * Tooltip
@@ -119,7 +122,7 @@
   /**
     * Calendar
     */
-  --color-calendar-background: color-mix(in srgb, var(--color-background) 90%, transparent);
+  --color-calendar-background: color-mix(in srgb, var(--color-background-navbar-base) 90%, transparent);
   --color-calendar-inactive-background: var(--color-background-navbar-base);
   --color-calendar-active-background: var(--shade-200);
   --color-calendar-background-hover: var(--shade-100);
@@ -143,49 +146,51 @@
    * Where to watch
    */
   --streaming-service-logo-filter: brightness(0);
-  --color-just-watch: #c79a00;
-  --color-rank-positive: var(--green-700);
-  --color-rank-negative: var(--red-700);
+  --color-just-watch: var(--color-text-secondary);
 
   /*
-    * Cover image
-    */
-  --mix-blend-mode-cover-overlay: overlay;
+   * Dialogs & drawers
+   */
+  --color-drawer-background: color-mix(in srgb, var(--shade-70) 94%, transparent);
+  --color-dialog-background: var(--color-drawer-background);
 }
 
 // Define theme variables for dark mode
 @mixin dark-theme {
+  --color-floating-background: var(--shade-930);
   --color-shadow: var(--shade-940);
 
   --color-foreground: var(--shade-10);
-  --color-background: var(--shade-940);
+  --color-background: color-mix(in srgb, var(--shade-920) 90%, var(--purple-900));
 
   --color-text-primary: var(--shade-10);
   --color-text-secondary: var(--shade-300);
   --color-text-emphasis: var(--purple-300);
 
+  --color-input-background: color-mix(in srgb, var(--shade-800) 25%, transparent);
+
   /**
    * Navbar
    */
-  --color-background-navbar-base: var(--shade-920);
+  --color-background-navbar-base: var(--color-floating-background);
   --color-background-navbar: color-mix(in srgb,
       var(--color-background-navbar-base) 90%,
       transparent);
   --color-foreground-navbar: var(--shade-10);
   --color-border: var(--shade-700);
-  --color-background-side-navbar: var(--shade-900);
+  --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*
    * Card
    */
-  --color-card-background: var(--shade-920);
+  --color-card-background: var(--color-floating-background);
   --color-official-list-background: var(--purple-800);
   --list-poster-shadow: -8px 0px 16px 0px rgba(0, 0, 0, 0.56);
 
   /*
     * Actions bar
     */
-  --color-actions-bar-background: var(--shade-920);
+  --color-actions-bar-background: var(--color-floating-background);
 
   /*
    * Cta
@@ -297,9 +302,10 @@
   --color-just-watch: #fcc405;
 
   /*
-    * Cover image
-    */
-  --mix-blend-mode-cover-overlay: color-dodge;
+   * Dialogs & drawers
+   */
+  --color-drawer-background: color-mix(in srgb, var(--shade-920) 94%, transparent);
+  --color-dialog-background: var(--color-drawer-background);
 }
 
 // Apply themes to selectors
