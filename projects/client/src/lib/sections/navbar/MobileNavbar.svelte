@@ -161,12 +161,6 @@
     justify-content: center;
   }
 
-  :global(.trakt-link.trakt-link-active) {
-    .trakt-mobile-navbar-link {
-      color: var(--purple-400);
-    }
-  }
-
   .trakt-mobile-navbar-actions {
     display: flex;
     flex-direction: column;
