@@ -80,12 +80,6 @@
         &:visited {
           color: var(--color-link-active);
         }
-
-        @include for-mouse {
-          &:hover {
-            color: var(--color-foreground);
-          }
-        }
       }
     }
 

@@ -140,14 +140,6 @@
     gap: var(--gap-m);
 
     overflow: hidden;
-
-    :global(.trakt-link.trakt-link-active[data-color="default"]) {
-      @include for-mouse {
-        &:hover {
-          color: var(--color-link-active);
-        }
-      }
-    }
   }
 
   .trakt-side-navbar-top,
