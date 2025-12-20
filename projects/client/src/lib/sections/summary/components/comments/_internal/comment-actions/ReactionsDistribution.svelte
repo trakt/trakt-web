@@ -61,14 +61,14 @@
         opacity: 0.5;
       }
     }
+  }
 
-    @keyframes grow {
-      100% {
-        padding: var(--ni-16);
-        height: var(--ni-104);
-        margin: var(--ni-8);
-        opacity: 1;
-      }
+  @keyframes grow {
+    100% {
+      padding: var(--ni-16);
+      height: var(--ni-104);
+      margin: var(--ni-8);
+      opacity: 1;
     }
   }
 
