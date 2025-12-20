@@ -103,6 +103,8 @@
 {/if}
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   header {
     --navbar-item-width: var(--ni-24);
 
@@ -138,6 +140,14 @@
     gap: var(--gap-m);
 
     overflow: hidden;
+
+    :global(.trakt-link.trakt-link-active[data-color="default"]) {
+      @include for-mouse {
+        &:hover {
+          color: var(--color-link-active);
+        }
+      }
+    }
   }
 
   .trakt-side-navbar-top,
