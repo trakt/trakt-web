@@ -1,8 +1,17 @@
 <script lang="ts">
   import SeasonalActionBarImage from "$lib/features/theme/components/SeasonalActionBarImage.svelte";
   import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";
+  import type { Snippet } from "svelte";
+  import SummaryActionsDrawer from "./SummaryActionsDrawer.svelte";
 
-  const { children }: ChildrenProps = $props();
+  type SummaryPopupProps = {
+    actions: Snippet;
+    title: string;
+    metaInfo?: string;
+  };
+
+  const { children, popup }: ChildrenProps & { popup?: SummaryPopupProps } =
+    $props();
 
   const { activeTheme } = useSeasonalTheme();
 </script>
@@ -13,6 +22,12 @@
 >
   <SeasonalActionBarImage />
   {@render children()}
+
+  {#if popup}
+    <SummaryActionsDrawer title={popup.title} metaInfo={popup.metaInfo}>
+      {@render popup.actions()}
+    </SummaryActionsDrawer>
+  {/if}
 </div>
 
 <style lang="scss">
