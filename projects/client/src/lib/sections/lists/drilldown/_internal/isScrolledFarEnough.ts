@@ -6,7 +6,16 @@ function calculatePageScrollPercentage() {
   return globalThis.window.scrollY / (documentHeight - windowHeight);
 }
 
-export function isScrolledFarEnough() {
-  const scrollPercentage = calculatePageScrollPercentage();
+function calculateContainerScrollPercentage(element: HTMLElement) {
+  const scrollHeight = element.scrollHeight;
+  const clientHeight = element.clientHeight;
+  return element.scrollTop / (scrollHeight - clientHeight);
+}
+
+export function isScrolledFarEnough(container?: HTMLElement | Nil) {
+  const scrollPercentage = container
+    ? calculateContainerScrollPercentage(container)
+    : calculatePageScrollPercentage();
+
   return scrollPercentage > LOAD_MORE_AT_SCROLL_PERCENTAGE;
 }

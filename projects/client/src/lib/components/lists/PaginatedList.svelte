@@ -4,7 +4,13 @@
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants";
   import type { PaginatedListProps } from "./models/PaginatedListProps";
 
-  const { useList, type, filter, items }: PaginatedListProps<T, M> = $props();
+  const {
+    useList,
+    type,
+    filter,
+    items,
+    target = "default",
+  }: PaginatedListProps<T, M> = $props();
 
   const { list, hasNextPage, isLoading, fetchNextPage } = $derived(
     useList({
@@ -20,10 +26,10 @@
     }
   };
 
-  const { observeDimension } = $derived(useLazyLoader({ loadMore }));
+  const { lazyLoader } = $derived(useLazyLoader({ loadMore, target }));
 </script>
 
-<div use:observeDimension>
+<div use:lazyLoader class="trakt-paginated-list">
   {@render items($list)}
 </div>
 
