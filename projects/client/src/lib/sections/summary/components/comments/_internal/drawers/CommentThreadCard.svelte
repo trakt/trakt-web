@@ -11,6 +11,8 @@
   import CommentFooter from "../CommentFooter.svelte";
   import CommentHeader from "../CommentHeader.svelte";
   import CommentReplies from "./CommentReplies.svelte";
+  import { THREAD_LIST_CLASS } from "./constants";
+  import { scrollActiveCommentIntoView } from "./scrollActiveCommentIntoView";
 
   type CommentThreadCardProps = {
     comment: MediaComment;
@@ -19,6 +21,7 @@
     isReplying: boolean;
     setReplying: (comment: MediaComment, isReplying: boolean) => void;
     type: ExtendedMediaType;
+    shouldScrollIntoView: boolean;
   };
 
   const {
@@ -28,10 +31,24 @@
     setReplying,
     reset,
     type,
+    shouldScrollIntoView,
   }: CommentThreadCardProps = $props();
+
+  const scrollIntoView = (node: HTMLElement) => {
+    if (!shouldScrollIntoView) {
+      return;
+    }
+
+    return scrollActiveCommentIntoView(node, THREAD_LIST_CLASS);
+  };
 </script>
 
-<Card --width-card="100%" --height-card="fit-content">
+<Card
+  --width-card="100%"
+  --height-card="fit-content"
+  classList="trakt-comment-thread-card"
+  action={scrollIntoView}
+>
   <div class="trakt-comment-thread-container">
     <CommentHeader {comment} {type} />
 
@@ -63,9 +80,13 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  :global(.trakt-card.trakt-comment-thread-card .trakt-card-content),
   .trakt-comment-thread-container {
     --vertical-padding: var(--ni-16);
+    min-height: calc(var(--height-comment-card) - 2 * var(--vertical-padding));
+  }
 
+  .trakt-comment-thread-container {
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
@@ -73,7 +94,6 @@
 
     padding: var(--vertical-padding) var(--ni-20);
 
-    min-height: calc(var(--height-comment-card) - 2 * var(--vertical-padding));
     height: 100%;
     box-sizing: border-box;
 

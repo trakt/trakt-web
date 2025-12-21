@@ -1,16 +1,16 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
-  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
-  import { BehaviorSubject } from "rxjs";
+  import { COMMENTS_DRILL_SIZE } from "$lib/utils/constants";
+  import { writable } from "svelte/store";
   import type { CommentsProps } from "../../CommentsProps";
   import type { ActiveComment } from "../models/ActiveComment";
   import { useComments } from "../useComments";
-  import VerticalList from "./_internal/VerticalList.svelte";
   import CommentThreadCard from "./CommentThreadCard.svelte";
-  import { scrollActiveCommentIntoView } from "./scrollActiveCommentIntoView";
+  import { THREAD_LIST_CLASS } from "./constants";
   import { useActiveComment } from "./useActiveComment";
 
   type CommentsDrawerProps = {
@@ -22,34 +22,13 @@
 
   const { current: sortType, set, options } = useToggler("comment");
 
-  // FIXME: add support for pagination
-  const { comments, isLoading } = $derived(
-    useComments({
-      slug: media.slug,
-      limit: "all",
-      sort: $sortType.value,
-      ...props,
-    }),
-  );
-
   const { reset, setReplying, activeComment } = $derived(
     useActiveComment(source),
   );
   const isReplying = (id: number) =>
     $activeComment?.id === id && $activeComment?.isReplying;
 
-  const isOpened = new BehaviorSubject(false);
-  const hasScrolled = new BehaviorSubject(false);
-
-  const shouldScrollIntoView = $derived((id: number) => {
-    const isMatch = id === source?.id;
-    if ($hasScrolled || !isMatch) {
-      return false;
-    }
-
-    hasScrolled.next(true);
-    return isMatch;
-  });
+  const isOpened = writable(false);
 </script>
 
 <Drawer
@@ -57,38 +36,53 @@
   title={m.dialog_title_comment()}
   size="large"
   metaInfo={$sortType.text()}
-  onOpened={() => isOpened.next(true)}
+  onOpened={() => isOpened.set(true)}
 >
   {#if $isOpened}
-    <VerticalList
-      id={`comment-threads-list-${media.slug}-${$sortType.value}`}
-      items={$comments}
-    >
-      {#snippet item(comment)}
-        <div
-          class="trakt-comment-thread"
-          use:scrollActiveCommentIntoView={shouldScrollIntoView(comment.id)}
-        >
-          <CommentThreadCard
-            {comment}
-            {media}
-            {reset}
-            {setReplying}
-            type={props.type}
-            isReplying={isReplying(comment.id)}
-          />
-        </div>
-      {/snippet}
-
-      {#snippet empty()}
-        {#if $isLoading}
-          <LoadingIndicator />
-        {/if}
-      {/snippet}
-    </VerticalList>
+    <div class={THREAD_LIST_CLASS}>
+      <PaginatedList
+        type={`comments-${$sortType.value}`}
+        target="parent"
+        useList={() =>
+          useComments({
+            slug: media.slug,
+            limit: COMMENTS_DRILL_SIZE,
+            sort: $sortType.value,
+            ...props,
+          })}
+      >
+        {#snippet items(items)}
+          {#each items as comment (comment.id)}
+            <CommentThreadCard
+              {comment}
+              {media}
+              {reset}
+              {setReplying}
+              type={props.type}
+              isReplying={isReplying(comment.id)}
+              shouldScrollIntoView={comment.id === source?.id}
+            />
+          {/each}
+        {/snippet}
+      </PaginatedList>
+    </div>
   {/if}
 
   {#snippet badge()}
     <Toggler value={$sortType.value} onChange={set} {options} />
   {/snippet}
 </Drawer>
+
+<style>
+  .trakt-comment-threads-list {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    position: relative;
+
+    :global(.trakt-paginated-list) {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-s);
+    }
+  }
+</style>

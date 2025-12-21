@@ -1,42 +1,47 @@
-import { renderStore } from '$test/beds/store/renderStore.ts';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { scrollActiveCommentIntoView } from './scrollActiveCommentIntoView.ts';
 
+function createMockElement(
+  { offsetTop = 0, scrollTop = 0, className = '' } = {},
+) {
+  return {
+    offsetTop,
+    scrollTop,
+    className,
+    closest: vi.fn(),
+  } as unknown as HTMLElement;
+}
+
 describe('action: scrollActiveCommentIntoView', () => {
-  const node = document.createElement('div');
-  Object.defineProperty(node, 'offsetHeight', { value: 100 });
+  let container: HTMLElement;
+  let target: HTMLElement;
 
-  it('should scroll into view when isActiveComment is true', async () => {
-    const scrollIntoViewMock = vi.fn();
-    node.scrollIntoView = scrollIntoViewMock;
-
-    await renderStore(() => scrollActiveCommentIntoView(node, true));
-
-    expect(scrollIntoViewMock).toHaveBeenCalledWith({
-      behavior: 'smooth',
-    });
+  beforeEach(() => {
+    container = createMockElement({ scrollTop: 100, className: 'container' });
+    target = createMockElement({ offsetTop: 200 });
+    target.closest = vi.fn().mockReturnValue(container);
   });
 
-  it('should not scroll into view when isActiveComment is false', async () => {
-    const scrollIntoViewMock = vi.fn();
-    node.scrollIntoView = scrollIntoViewMock;
-
-    await renderStore(() => scrollActiveCommentIntoView(node, false));
-
-    expect(scrollIntoViewMock).not.toHaveBeenCalled();
+  afterEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('should update scroll position when isActiveComment changes', async () => {
-    const scrollIntoViewMock = vi.fn();
-    node.scrollIntoView = scrollIntoViewMock;
-
-    const action = await renderStore(() =>
-      scrollActiveCommentIntoView(node, false)
-    );
-    action.update(true);
-
-    expect(scrollIntoViewMock).toHaveBeenCalledWith({
-      behavior: 'smooth',
-    });
+  it('returns undefined if container is not found', () => {
+    target.closest = vi.fn().mockReturnValue(null);
+    const result = scrollActiveCommentIntoView(target, 'container');
+    expect(result).toBeUndefined();
   });
+
+  it('returns an object with destroy method', () => {
+    const result = scrollActiveCommentIntoView(target, 'container');
+    expect(result).toHaveProperty('destroy');
+    expect(typeof result?.destroy).toBe('function');
+  });
+
+  it('calls container.closest with correct selector', () => {
+    scrollActiveCommentIntoView(target, 'container');
+    expect(target.closest).toHaveBeenCalledWith('.container');
+  });
+
+  // FIXME: add test for actual scrolling behavior
 });

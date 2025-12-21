@@ -1,30 +1,42 @@
-import { debounce } from '$lib/utils/timing/debounce.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { onMount } from 'svelte';
+import { animationFrames, endWith, map, takeWhile } from 'rxjs';
+import { cubicOut } from 'svelte/easing';
 
+const SCROLL_DURATION = time.seconds(0.5);
+
+/*
+  Manually scroll comment into view to account for dynamic content height changes.
+*/
 export function scrollActiveCommentIntoView(
-  node: HTMLElement,
-  isActiveComment: boolean,
+  target: HTMLElement,
+  containerClass: string,
 ) {
-  const debouncedScroll = debounce(() => {
-    if (node.offsetHeight > 0) {
-      node.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, time.fps(30));
+  const container = target.closest<HTMLElement>(`.${containerClass}`);
+  if (!container) return;
 
-  const update = (isActive: boolean) => {
-    if (!isActive) {
-      return;
-    }
+  const startScrollTop = container.scrollTop;
 
-    if (node.offsetHeight > 0) {
-      node.scrollIntoView({ behavior: 'smooth' });
-      return;
-    }
+  const scrollSubscription = animationFrames()
+    .pipe(
+      map(({ elapsed }) => elapsed),
+      takeWhile((elapsed) => elapsed < SCROLL_DURATION),
+      endWith(SCROLL_DURATION),
+    )
+    .subscribe({
+      next: (elapsed) => {
+        const progress = Math.min(elapsed / SCROLL_DURATION, 1);
 
-    debouncedScroll();
+        const currentTargetPosition = target.offsetTop;
+        const totalDistance = currentTargetPosition - startScrollTop;
+
+        container.scrollTop = startScrollTop +
+          totalDistance * cubicOut(progress);
+      },
+    });
+
+  return {
+    destroy: () => {
+      scrollSubscription.unsubscribe();
+    },
   };
-
-  onMount(() => update(isActiveComment));
-  return { update };
 }
