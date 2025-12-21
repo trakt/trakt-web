@@ -1,48 +1,73 @@
 import { browser } from '$app/environment';
 import { useDimensionObserver } from '$lib/stores/css/useDimensionObserver.ts';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { debounce } from '$lib/utils/timing/debounce.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { onMount } from 'svelte';
-import { NOOP_FN } from '../../../../utils/constants.ts';
 import { isPageFilling } from './isPageFilling.ts';
 import { isScrolledFarEnough } from './isScrolledFarEnough.ts';
 
 type UseLazyLoaderProps = {
   loadMore: () => void;
+  target: 'default' | 'parent';
 };
 
-export function useLazyLoader({ loadMore }: UseLazyLoaderProps) {
+export function useLazyLoader({ loadMore, target }: UseLazyLoaderProps) {
   if (!browser) {
     return {
-      observeDimension: NOOP_FN,
+      lazyLoader: NOOP_FN,
     };
   }
 
-  const { observedDimension, observeDimension } = useDimensionObserver(
-    'height',
-  );
+  const lazyLoader = (node: HTMLElement) => {
+    const parent = target === 'parent' ? node.parentElement : null;
 
-  function loadMoreOnScroll() {
-    if (!isScrolledFarEnough()) {
-      return;
+    const { observedDimension, observeDimension } = useDimensionObserver(
+      'height',
+    );
+    observeDimension(node);
+
+    function loadMoreOnScroll() {
+      if (!isScrolledFarEnough(parent)) {
+        return;
+      }
+
+      loadMore();
     }
 
-    loadMore();
-  }
+    function loadMoreOnResize() {
+      const height = observedDimension.value;
+      if (isPageFilling(height, parent)) {
+        return;
+      }
 
-  function loadMoreOnResize() {
-    const height = observedDimension.value;
-    if (isPageFilling(height)) {
-      return;
+      loadMore();
     }
 
-    loadMore();
-  }
-
-  onMount(() => {
     const debouncedLoadOnResize = debounce(loadMoreOnResize, time.fps(10));
     const debouncedLoadOnScroll = debounce(loadMoreOnScroll, time.fps(10));
+
+    function registerEvents() {
+      const scrollHandler = () => debouncedLoadOnScroll();
+      const resizeHandler = () => debouncedLoadOnResize();
+
+      if (parent) {
+        parent.addEventListener('scroll', scrollHandler);
+
+        return () => {
+          parent.removeEventListener('scroll', scrollHandler);
+        };
+      }
+
+      const instance = GlobalEventBus.getInstance();
+      const unregisterScroll = instance.register('scroll', scrollHandler);
+      const unregisterResize = instance.register('resize', resizeHandler);
+
+      return () => {
+        unregisterScroll();
+        unregisterResize();
+      };
+    }
 
     const subscription = observedDimension.subscribe(
       (dimension) => {
@@ -53,24 +78,17 @@ export function useLazyLoader({ loadMore }: UseLazyLoaderProps) {
       },
     );
 
-    const unregisterScroll = GlobalEventBus.getInstance().register(
-      'scroll',
-      () => debouncedLoadOnScroll(),
-    );
+    const unregister = registerEvents();
 
-    const unregisterResize = GlobalEventBus.getInstance().register(
-      'resize',
-      () => debouncedLoadOnResize(),
-    );
-
-    return () => {
-      subscription.unsubscribe();
-      unregisterScroll();
-      unregisterResize();
+    return {
+      destroy() {
+        subscription.unsubscribe();
+        unregister();
+      },
     };
-  });
+  };
 
   return {
-    observeDimension,
+    lazyLoader,
   };
 }

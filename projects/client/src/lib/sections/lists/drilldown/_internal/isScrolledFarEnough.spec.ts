@@ -40,4 +40,37 @@ describe('isScrolledFarEnough', () => {
       .mockReturnValue(THRESHOLD + 1);
     expect(isScrolledFarEnough()).toBe(true);
   });
+
+  it('should return true when container is scrolled past threshold', () => {
+    const container = {
+      scrollHeight: SCROLL_HEIGHT,
+      clientHeight: INNER_HEIGHT,
+      scrollTop:
+        (SCROLL_HEIGHT - INNER_HEIGHT) * LOAD_MORE_AT_SCROLL_PERCENTAGE + 1,
+    } as HTMLElement;
+
+    expect(isScrolledFarEnough(container)).toBe(true);
+  });
+
+  it('should return false when container is not scrolled far enough', () => {
+    const container = {
+      scrollHeight: SCROLL_HEIGHT,
+      clientHeight: INNER_HEIGHT,
+      scrollTop:
+        (SCROLL_HEIGHT - INNER_HEIGHT) * LOAD_MORE_AT_SCROLL_PERCENTAGE - 1,
+    } as HTMLElement;
+
+    expect(isScrolledFarEnough(container)).toBe(false);
+  });
+
+  it('should return false when container is scrolled exactly at threshold', () => {
+    const container = {
+      scrollHeight: SCROLL_HEIGHT,
+      clientHeight: INNER_HEIGHT,
+      scrollTop: (SCROLL_HEIGHT - INNER_HEIGHT) *
+        LOAD_MORE_AT_SCROLL_PERCENTAGE,
+    } as HTMLElement;
+
+    expect(isScrolledFarEnough(container)).toBe(false);
+  });
 });

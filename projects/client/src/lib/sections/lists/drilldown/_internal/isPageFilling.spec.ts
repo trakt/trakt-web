@@ -25,4 +25,19 @@ describe('isPageFilling', () => {
   it('should return false when height is less than available height', () => {
     expect(isPageFilling(999)).toBe(false);
   });
+
+  it('should return true when height is greater than container height', () => {
+    const container = { clientHeight: 500 } as HTMLElement;
+    expect(isPageFilling(501, container)).toBe(true);
+  });
+
+  it('should return false when height is equal to container height', () => {
+    const container = { clientHeight: 500 } as HTMLElement;
+    expect(isPageFilling(500, container)).toBe(false);
+  });
+
+  it('should return false when height is less than container height', () => {
+    const container = { clientHeight: 500 } as HTMLElement;
+    expect(isPageFilling(499, container)).toBe(false);
+  });
 });
