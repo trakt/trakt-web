@@ -3,6 +3,7 @@
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
+  import { NOOP_FN } from "$lib/utils/constants";
   import { writable } from "$lib/utils/store/WritableSubject";
   import { dPadTrigger } from "./_internal/dPadTrigger";
 
@@ -10,13 +11,17 @@
     children,
     variant = "opaque",
     classList = "",
+    action,
   }: ChildrenProps & {
     variant?: "transparent" | "opaque";
     classList?: string;
+    action?: (element: HTMLElement) => void;
   } = $props();
 
   const isVisible = writable(false);
   const { navigation } = useNavigation();
+
+  const customAction = $derived(action ? action : NOOP_FN);
 </script>
 
 <div
@@ -26,6 +31,7 @@
   data-navigation-type={$navigation}
   data-dpad-navigation={DpadNavigationType.Item}
   use:appendClassList={classList}
+  use:customAction
 >
   <div
     class="trakt-card-content"
