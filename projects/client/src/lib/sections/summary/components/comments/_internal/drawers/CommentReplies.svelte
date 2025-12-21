@@ -7,7 +7,7 @@
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { BehaviorSubject } from "rxjs";
   import { slide } from "svelte/transition";
-  import UserComment from "../UserComment.svelte";
+  import CommentReply from "../CommentReply.svelte";
   import { useCommentReplies } from "./useCommentReplies";
 
   const {
@@ -49,7 +49,7 @@
   >
     {#each $list as reply}
       <div class="trakt-comment-container">
-        <UserComment comment={reply} {media} {type} />
+        <CommentReply comment={reply} {media} {type} />
       </div>
     {/each}
   </div>

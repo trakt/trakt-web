@@ -19,7 +19,7 @@
 
   const { current: sortType, set, options } = useToggler("comment");
 
-  const { isLoading, comments } = $derived(
+  const { isLoading, list: comments } = $derived(
     useComments({
       slug: media.slug,
       sort: $sortType.value,
@@ -78,7 +78,14 @@
     {/snippet}
 
     {#snippet badge()}
-      <Toggler value={$sortType.value} onChange={set} {options} />
+      <Toggler
+        value={$sortType.value}
+        onChange={(value) => {
+          drilldownSource.set(undefined);
+          set(value);
+        }}
+        {options}
+      />
     {/snippet}
   </SectionList>
 
