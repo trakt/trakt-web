@@ -36,6 +36,7 @@
   <div
     class="trakt-card-content"
     class:trakt-card-transparent={variant === "transparent"}
+    class:is-visible={$isVisible}
   >
     {#if $isVisible}
       {@render children()}
@@ -95,6 +96,13 @@
     height: var(--height-override-card, var(--height-card));
 
     border-radius: var(--border-radius-m);
+
+    opacity: 0;
+    transition: opacity var(--transition-increment) ease-in-out;
+
+    &.is-visible {
+      opacity: 1;
+    }
 
     &.trakt-card-transparent {
       :global(.trakt-card-cover) {
