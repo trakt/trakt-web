@@ -26,10 +26,17 @@
     }
   };
 
-  const { lazyLoader } = $derived(useLazyLoader({ loadMore, target }));
+  let listElement = $state<HTMLDivElement | null>(null);
+  const parentElement = $derived<HTMLElement | Nil>(
+    target === "parent" ? listElement?.parentElement : null,
+  );
+
+  const { observeDimension } = $derived(
+    useLazyLoader({ loadMore, parent: parentElement }),
+  );
 </script>
 
-<div use:lazyLoader class="trakt-paginated-list">
+<div bind:this={listElement} use:observeDimension class="trakt-paginated-list">
   {@render items($list)}
 </div>
 
