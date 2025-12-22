@@ -6,7 +6,7 @@
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
-    d="M17.0898 12.0005L7 18L7 6L17.0898 12.0005Z"
+    d="M19.0449 12.0007L5.04492 20L5.04492 4L19.0449 12.0007Z"
     stroke="currentColor"
     stroke-width="2"
   />
