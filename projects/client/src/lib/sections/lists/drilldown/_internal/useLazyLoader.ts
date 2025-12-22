@@ -4,46 +4,44 @@ import { NOOP_FN } from '$lib/utils/constants.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { debounce } from '$lib/utils/timing/debounce.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { onMount } from 'svelte';
 import { isPageFilling } from './isPageFilling.ts';
 import { isScrolledFarEnough } from './isScrolledFarEnough.ts';
 
 type UseLazyLoaderProps = {
   loadMore: () => void;
-  target: 'default' | 'parent';
+  parent: HTMLElement | Nil;
 };
 
-export function useLazyLoader({ loadMore, target }: UseLazyLoaderProps) {
+export function useLazyLoader({ loadMore, parent }: UseLazyLoaderProps) {
   if (!browser) {
     return {
-      lazyLoader: NOOP_FN,
+      observeDimension: NOOP_FN,
     };
   }
 
-  const lazyLoader = (node: HTMLElement) => {
-    const parent = target === 'parent' ? node.parentElement : null;
+  const { observedDimension, observeDimension } = useDimensionObserver(
+    'height',
+  );
 
-    const { observedDimension, observeDimension } = useDimensionObserver(
-      'height',
-    );
-    observeDimension(node);
-
-    function loadMoreOnScroll() {
-      if (!isScrolledFarEnough(parent)) {
-        return;
-      }
-
-      loadMore();
+  function loadMoreOnScroll() {
+    if (!isScrolledFarEnough(parent)) {
+      return;
     }
 
-    function loadMoreOnResize() {
-      const height = observedDimension.value;
-      if (isPageFilling(height, parent)) {
-        return;
-      }
+    loadMore();
+  }
 
-      loadMore();
+  function loadMoreOnResize() {
+    const height = observedDimension.value;
+    if (isPageFilling(height, parent)) {
+      return;
     }
 
+    loadMore();
+  }
+
+  onMount(() => {
     const debouncedLoadOnResize = debounce(loadMoreOnResize, time.fps(10));
     const debouncedLoadOnScroll = debounce(loadMoreOnScroll, time.fps(10));
 
@@ -80,15 +78,13 @@ export function useLazyLoader({ loadMore, target }: UseLazyLoaderProps) {
 
     const unregister = registerEvents();
 
-    return {
-      destroy() {
-        subscription.unsubscribe();
-        unregister();
-      },
+    return () => {
+      subscription.unsubscribe();
+      unregister();
     };
-  };
+  });
 
   return {
-    lazyLoader,
+    observeDimension,
   };
 }
