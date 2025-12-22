@@ -2,6 +2,7 @@
   import type { Promotion } from "$lib/features/promotions/models/Promotion";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { getDayKey } from "$lib/utils/date/getDayKey";
+  import YirUpsellBanner from "../year-in-review/YirUpsellBanner.svelte";
   import BlackFriday from "./../black-friday/BlackFriday.svelte";
   import BannerContainer from "./BannerContainer.svelte";
   import { useBannerDismissal } from "./useBannerDismissal";
@@ -18,6 +19,10 @@
     <BannerContainer>
       {#if promotion.id === "black-friday"}
         <BlackFriday onDismiss={dismiss} {promotion} />
+      {/if}
+
+      {#if promotion.id === "yir-2025"}
+        <YirUpsellBanner onDismiss={dismiss} {promotion} />
       {/if}
     </BannerContainer>
   {/if}

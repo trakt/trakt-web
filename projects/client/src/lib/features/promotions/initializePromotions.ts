@@ -19,6 +19,7 @@ export function initializePromotions() {
       set({
         id: config.id,
         end: utcToLocalDate(config.end),
+        start: utcToLocalDate(config.start),
         audience: config.audience,
       });
     },
