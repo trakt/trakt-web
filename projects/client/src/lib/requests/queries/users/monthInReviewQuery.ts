@@ -13,17 +13,21 @@ export type MonthInReviewParams = {
   year: number;
 } & ApiParams;
 
-export const UserMonthInReviewSchema = z.object({
+export const UserReviewSchema = z.object({
   playCount: z.number(),
   hoursWatched: z.number(),
   ratingsCount: z.number(),
   commentsCount: z.number(),
+  libraryCount: z.number(),
+  listsCount: z.number(),
   firstPlay: MediaEntrySchema.nullish(),
 });
 
-export type UserMonthInReview = z.infer<typeof UserMonthInReviewSchema>;
+export type UserReview = z.infer<typeof UserReviewSchema>;
 
-function mapToFirstPlay(response: MonthInReviewResponse): MediaEntry | null {
+export function mapToFirstPlay(
+  response: MonthInReviewResponse,
+): MediaEntry | null {
   if (!response.first_watched) {
     return null;
   }
@@ -33,14 +37,16 @@ function mapToFirstPlay(response: MonthInReviewResponse): MediaEntry | null {
     : mapToMovieEntry(response.first_watched.movie);
 }
 
-function mapToUserMonthInReview(
+export function mapToUserReview(
   response: MonthInReviewResponse,
-): UserMonthInReview {
+): UserReview {
   return {
     playCount: response.stats.all.play_counts.total,
     hoursWatched: Math.round(response.stats.all.minutes.total / 60),
     ratingsCount: response.stats.all.ratings_counts.total,
     commentsCount: response.stats.all.comments_counts.total,
+    libraryCount: response.stats.all.collected_counts.total,
+    listsCount: response.stats.all.lists_counts.total,
     firstPlay: mapToFirstPlay(response),
   };
 }
@@ -66,7 +72,7 @@ export const monthInReviewQuery = defineQuery({
   request: monthInReviewRequest,
   invalidations: [],
   dependencies: (params) => [params.slug, params.year, params.month],
-  mapper: (response) => mapToUserMonthInReview(response.body),
-  schema: UserMonthInReviewSchema,
+  mapper: (response) => mapToUserReview(response.body),
+  schema: UserReviewSchema,
   ttl: time.days(1),
 });
