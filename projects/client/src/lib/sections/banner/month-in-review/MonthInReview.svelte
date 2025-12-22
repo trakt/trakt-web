@@ -22,44 +22,42 @@
   );
 </script>
 
-<RenderFor audience="vip">
-  {#if $review}
-    <div class="trakt-month-in-review" transition:slide={{ duration: 150 }}>
-      <ReviewContent
-        coverSrc={$review.firstPlay?.cover.url.medium ?? DEFAULT_COVER}
-        variant="gradient"
-      >
-        {#snippet header()}
-          <div class="trakt-mir-header-container">
-            <div class="trakt-mir-header">
-              <CalendarIcon />
-              <p class="bold uppercase">Month in review</p>
-            </div>
-
-            <RenderFor audience="vip" device={["mobile", "tablet-sm"]}>
-              <DismissButton {onDismiss} />
-            </RenderFor>
+{#if $review}
+  <div class="trakt-month-in-review" transition:slide={{ duration: 150 }}>
+    <ReviewContent
+      coverSrc={$review.firstPlay?.cover.url.medium ?? DEFAULT_COVER}
+      variant="gradient"
+    >
+      {#snippet header()}
+        <div class="trakt-mir-header-container">
+          <div class="trakt-mir-header">
+            <CalendarIcon />
+            <p class="bold uppercase">Month in review</p>
           </div>
-        {/snippet}
 
-        <MonthInReviewStats review={$review} />
+          <RenderFor audience="vip" device={["mobile", "tablet-sm"]}>
+            <DismissButton {onDismiss} />
+          </RenderFor>
+        </div>
+      {/snippet}
 
-        {#snippet footer()}
-          <div class="trakt-mir-footer">
-            <MonthInReviewLink
-              slug={$user.slug}
-              date={month}
-              source="mir-banner"
-            />
-            <RenderFor audience="vip" device={["tablet-lg", "desktop"]}>
-              <DismissButton {onDismiss} />
-            </RenderFor>
-          </div>
-        {/snippet}
-      </ReviewContent>
-    </div>
-  {/if}
-</RenderFor>
+      <MonthInReviewStats review={$review} />
+
+      {#snippet footer()}
+        <div class="trakt-mir-footer">
+          <MonthInReviewLink
+            slug={$user.slug}
+            date={month}
+            source="mir-banner"
+          />
+          <RenderFor audience="vip" device={["tablet-lg", "desktop"]}>
+            <DismissButton {onDismiss} />
+          </RenderFor>
+        </div>
+      {/snippet}
+    </ReviewContent>
+  </div>
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

@@ -9,7 +9,7 @@
     coverSrc,
     variant = "default",
   }: {
-    coverSrc: HttpsUrl;
+    coverSrc?: HttpsUrl;
     header: Snippet;
     footer: Snippet;
     variant?: "default" | "gradient";
@@ -17,14 +17,16 @@
 </script>
 
 <div class="trakt-review-content" data-variant={variant}>
-  <div class="trakt-review-content-cover-image">
-    <CrossOriginImage
-      loading="eager"
-      src={coverSrc}
-      animate={false}
-      alt="Background image"
-    />
-  </div>
+  {#if coverSrc}
+    <div class="trakt-review-content-cover-image">
+      <CrossOriginImage
+        loading="eager"
+        src={coverSrc}
+        animate={false}
+        alt="Background image"
+      />
+    </div>
+  {/if}
 
   <div class="trakt-review-content-header">
     {@render header()}
