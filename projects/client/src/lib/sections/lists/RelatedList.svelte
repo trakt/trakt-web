@@ -21,6 +21,6 @@
   {title}
 >
   {#snippet item(media)}
-    <DefaultMediaItem {type} {media} source="related" />
+    <DefaultMediaItem {type} {media} source="related" canDeemphasize />
   {/snippet}
 </MediaList>
