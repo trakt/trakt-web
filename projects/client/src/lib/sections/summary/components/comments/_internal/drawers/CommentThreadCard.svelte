@@ -72,6 +72,7 @@
         onCommentPost={reset}
         placeholder={m.textarea_placeholder_reply()}
         label={m.button_label_post_reply()}
+        {type}
       />
     {/if}
   </div>

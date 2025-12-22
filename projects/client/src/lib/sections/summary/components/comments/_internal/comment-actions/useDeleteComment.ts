@@ -20,7 +20,7 @@ export function useDeleteComment(
   const { track } = useTrack(AnalyticsEvent.DeleteComment);
 
   const invalidateAction = comment.parentId > 0
-    ? InvalidateAction.Comment.Reply
+    ? InvalidateAction.Comment.Reply(type)
     : InvalidateAction.Comment.Post(type);
 
   const deleteComment = async () => {
