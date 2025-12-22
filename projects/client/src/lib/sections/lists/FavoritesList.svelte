@@ -1,5 +1,6 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
@@ -41,6 +42,8 @@
 
   const { isMe } = $derived(useIsMe(slug));
   const cta = $derived({ type: "favorites" as const, mediaType: type });
+
+  const listId = $derived(`favorites-list-${$selectedType.value}-${slug}`);
 </script>
 
 {#snippet metaInfo()}
@@ -48,7 +51,7 @@
 {/snippet}
 
 <SectionList
-  id={`favorites-list-${selectedType}-${slug}`}
+  id={listId}
   items={$list}
   {title}
   --height-list={mediaListHeightResolver($defaultVariant)}
@@ -87,6 +90,8 @@
           {placeholderMessage}
         </p>
       {/if}
+    {:else}
+      <SkeletonList id={listId} variant="portrait" />
     {/if}
   {/snippet}
 

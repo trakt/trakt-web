@@ -1,5 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -10,12 +12,19 @@
   import LibraryMediaItem from "./_internal/LibraryMediaItem.svelte";
   import { useLibraryList } from "./useLibraryList";
 
-  const { list, libraries, activeLibrary } = $derived(
+  const { list, libraries, activeLibrary, isLoading } = $derived(
     useLibraryList({ limit: DEFAULT_PAGE_SIZE }),
+  );
+
+  const { plexLibrary } = useUser();
+
+  const hasLibraryItems = $derived(
+    $plexLibrary &&
+      ($plexLibrary.movieIds.length > 0 || $plexLibrary.episodeIds.length > 0),
   );
 </script>
 
-{#if $list.length > 0}
+{#if hasLibraryItems}
   <div class="trakt-library-list" transition:slide={{ duration: 150 }}>
     <SectionList
       id="library-list"
@@ -41,6 +50,12 @@
           label={m.button_label_view_all_library_items()}
           source={{ id: "library" }}
         />
+      {/snippet}
+
+      {#snippet empty()}
+        {#if $isLoading}
+          <SkeletonList id="library-list" variant="portrait" />
+        {/if}
       {/snippet}
     </SectionList>
   </div>
