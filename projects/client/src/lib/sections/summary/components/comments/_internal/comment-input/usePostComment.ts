@@ -17,6 +17,7 @@ import { mapToCommentError } from './mapToCommentError.ts';
 type ReplyProps = {
   id: number;
   commentType: 'reply';
+  type: ExtendedMediaType;
 };
 
 type PostProps = {
@@ -75,7 +76,7 @@ export function usePostComment(
   const { track } = useTrack(AnalyticsEvent.AddComment);
 
   const invalidateAction = props.commentType === 'reply'
-    ? InvalidateAction.Comment.Reply
+    ? InvalidateAction.Comment.Reply(props.type)
     : InvalidateAction.Comment.Post(props.type);
 
   const postComment = async (comment: string) => {

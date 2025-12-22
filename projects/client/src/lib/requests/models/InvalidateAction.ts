@@ -28,7 +28,7 @@ type TypeDataMap = {
   'dropped': MediaType;
   'restored': 'show';
   'react': 'comment';
-  'comment': 'reply';
+  'comment_reply': ExtendedMediaType;
   'listed': MediaType;
   'user': UserType;
   'check_in': null;
@@ -72,7 +72,8 @@ export const InvalidateAction = {
 
   Comment: {
     Post: (type: ExtendedMediaType) => buildInvalidationKey('commented', type),
-    Reply: buildInvalidationKey('comment', 'reply'),
+    Reply: (type: ExtendedMediaType) =>
+      buildInvalidationKey('comment_reply', type),
   },
 
   User: {
