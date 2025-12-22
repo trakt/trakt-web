@@ -13,7 +13,10 @@ const setObservedDimension = (
   store: BehaviorSubject<number>,
 ): void => {
   const newValue = getDimension(node, dimension);
-  store.next(newValue);
+
+  if (store.value !== newValue) {
+    store.next(newValue);
+  }
 };
 
 export const useDimensionObserver = (dimension: Dimension) => {
