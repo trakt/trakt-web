@@ -12,4 +12,5 @@ export enum ConfirmationType {
   UnfollowUser = 'unfollow-user',
   StopCheckin = 'stop-checkin',
   DeleteComment = 'delete-comment',
+  SuppressRatingsToast = 'suppress-ratings-toast',
 }

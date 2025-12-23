@@ -2485,6 +2485,12 @@
     },
     "button_text_trivia_spoilers": {
       "default": "Avec spoilers"
+    },
+    "button_text_stop_asking": {
+      "default": "Arrête de demander"
+    },
+    "warning_prompt_suppress_ratings_toast": {
+      "default": "Veux-tu arrêter qu'on te demande d'évaluer ce que tu as vu récemment ?"
     }
   }
 }

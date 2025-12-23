@@ -1,6 +1,8 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages";
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import { useLastWatched } from "$lib/features/toast/useLastWatched";
@@ -10,7 +12,13 @@
 
   const { lastWatched }: { lastWatched: LastWatchedItem } = $props();
 
-  const { dismiss } = useLastWatched();
+  const { dismiss, suppress, isAtLimit } = useLastWatched();
+
+  const { confirm } = useConfirm();
+  const confirmSuppression = confirm({
+    type: ConfirmationType.SuppressRatingsToast,
+    onConfirm: suppress,
+  });
 
   const title = $derived(getToastTitle(lastWatched));
 </script>
@@ -22,7 +30,14 @@
     <div class="trakt-rate-now-header">
       <p class="ellipsis">{title}</p>
       <ActionButton
-        onclick={() => dismiss(lastWatched.media.id, lastWatched.type)}
+        onclick={() => {
+          dismiss(lastWatched.media.id, lastWatched.type, "manual");
+          if (!$isAtLimit) {
+            return;
+          }
+
+          confirmSuppression();
+        }}
         label={m.button_label_dismiss()}
         style="ghost"
         size="small"

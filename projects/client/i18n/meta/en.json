@@ -6522,6 +6522,22 @@
         "android",
         "ios"
       ]
+    },
+    "button_text_stop_asking": {
+      "default": "Stop asking",
+      "description": "Text for the button that allows a user to stop prompted, for example being asked to rate what they recently saw.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
+    },
+    "warning_prompt_suppress_ratings_toast": {
+      "default": "Do you want to stop being asked to rate what you recently watched?",
+      "description": "Text for the warning prompt that appears to ask a user to stop being asked to rate what they recently watched.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
     }
   }
 }

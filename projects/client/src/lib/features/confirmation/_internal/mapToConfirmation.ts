@@ -95,5 +95,11 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_delete_comment(),
         operation: 'destructive',
       };
+    case ConfirmationType.SuppressRatingsToast:
+      return {
+        buttonText: m.button_text_stop_asking(),
+        message: m.warning_prompt_suppress_ratings_toast(),
+        operation: 'destructive',
+      };
   }
 }

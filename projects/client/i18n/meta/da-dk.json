@@ -2485,6 +2485,12 @@
     },
     "button_text_trivia_spoilers": {
       "default": "Med spoilers"
+    },
+    "button_text_stop_asking": {
+      "default": "Stop med at spørge"
+    },
+    "warning_prompt_suppress_ratings_toast": {
+      "default": "Vil du stoppe med at blive spurgt om at bedømme det, du for nylig har set?"
     }
   }
 }
