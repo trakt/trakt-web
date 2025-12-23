@@ -1162,7 +1162,7 @@
       "default": "再試行"
     },
     "header_community_sentiment": {
-      "default": "コミュニティの評価"
+      "default": "センチメント"
     },
     "button_text_lists": {
       "default": "リスト"

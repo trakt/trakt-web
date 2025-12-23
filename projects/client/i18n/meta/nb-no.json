@@ -1162,7 +1162,7 @@
       "default": "Prøv igjen"
     },
     "header_community_sentiment": {
-      "default": "Felleskapsfølelse"
+      "default": "Sentiment"
     },
     "button_text_lists": {
       "default": "Lister"
