@@ -3,12 +3,12 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import { getLanguageAndRegion } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
-  import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
+  import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import LoadingIndicator from "../../drilldown/_internal/LoadingIndicator.svelte";
+  import { sortStreamingCountries } from "./sortStreamingCountries";
   import { toCountryFlag } from "./toCountryFlag";
   import { useAllStreamOn } from "./useAllStreamOn";
   import WhereToWatchItem from "./WhereToWatchItem.svelte";
@@ -19,16 +19,8 @@
   const isOpen = writable(false);
   const onClose = () => isOpen.set(false);
 
-  const { language } = getLanguageAndRegion();
-
-  const sortedList = $derived(
-    $list
-      .map((entry) => ({
-        ...entry,
-        countryName: toCountryName(entry.country, language),
-      }))
-      .sort((a, b) => a.countryName.localeCompare(b.countryName)),
-  );
+  const { country } = useStreamingPreferences();
+  const sortedList = $derived(sortStreamingCountries($list, $country));
 </script>
 
 <ActionButton
