@@ -49,10 +49,6 @@
       color-mix(in srgb, var(--color-background) 25%, transparent)
     );
 
-    @include for-tablet-sm-and-below {
-      opacity: 1;
-    }
-
     &[data-cover-type="main"] {
       --color-transparent-background: transparent;
 
@@ -117,7 +113,7 @@
         background: linear-gradient(
           180deg,
           var(--trakt-cover-primary-color-transparent) 0%,
-          var(--trakt-cover-primary-color-transparent) 75%,
+          var(--trakt-cover-primary-color-transparent) 50%,
           transparent 100%
         );
       }
