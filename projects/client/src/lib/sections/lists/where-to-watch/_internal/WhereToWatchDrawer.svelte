@@ -63,7 +63,7 @@
         <LoadingIndicator />
       {/if}
 
-      {#if $isLoading && $list.length === 0}
+      {#if !$isLoading && $list.length === 0}
         <p class="secondary">{m.button_text_no_services()}</p>
       {/if}
     </div>
