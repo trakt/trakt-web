@@ -22,7 +22,7 @@
     variant="transparent"
   >
     <div class="trakt-sentiments-container">
-      <SentimentsList {sentiments} />
+      <SentimentsList {sentiments} {isPartial} />
     </div>
   </Card>
 </div>
@@ -37,8 +37,6 @@
   }
 
   .trakt-sentiments-container {
-    border-radius: var(--border-radius-m);
-
     height: 100%;
     width: 100%;
 
