@@ -2485,6 +2485,12 @@
     },
     "button_text_trivia_spoilers": {
       "default": "Със спойлери"
+    },
+    "button_text_stop_asking": {
+      "default": "Спри да питаш"
+    },
+    "warning_prompt_suppress_ratings_toast": {
+      "default": "Искате ли да спрете да бъдете питани за оценка на това, което наскоро сте гледали?"
     }
   }
 }

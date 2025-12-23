@@ -55,6 +55,9 @@ interface ConfirmationParamsMap {
   [ConfirmationType.DeleteComment]: {
     type: ConfirmationType.DeleteComment;
   };
+  [ConfirmationType.SuppressRatingsToast]: {
+    type: ConfirmationType.SuppressRatingsToast;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

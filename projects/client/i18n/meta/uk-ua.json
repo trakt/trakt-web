@@ -2485,6 +2485,12 @@
     },
     "button_text_trivia_spoilers": {
       "default": "Зі спойлерами"
+    },
+    "button_text_stop_asking": {
+      "default": "Припинити запитувати"
+    },
+    "warning_prompt_suppress_ratings_toast": {
+      "default": "Чи бажаєте ви припинити запитання щодо оцінки того, що ви нещодавно переглянули?"
     }
   }
 }

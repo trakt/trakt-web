@@ -129,7 +129,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     await invalidate(InvalidateAction.Rated(type));
 
     pendingRating.next(null);
-    dismiss(id, type);
+    dismiss(id, type, 'rating');
   };
 
   return {

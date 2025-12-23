@@ -2485,6 +2485,12 @@
     },
     "button_text_trivia_spoilers": {
       "default": "Cu spoilere"
+    },
+    "button_text_stop_asking": {
+      "default": "Nu mai întreba"
+    },
+    "warning_prompt_suppress_ratings_toast": {
+      "default": "Dorești să nu mai fii întrebat să evaluezi ce ai urmărit recent?"
     }
   }
 }

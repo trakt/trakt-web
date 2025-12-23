@@ -2485,6 +2485,12 @@
     },
     "button_text_trivia_spoilers": {
       "default": "ネタバレあり"
+    },
+    "button_text_stop_asking": {
+      "default": "確認を停止"
+    },
+    "warning_prompt_suppress_ratings_toast": {
+      "default": "最近視聴したコンテンツの評価を求めるのをやめますか？"
     }
   }
 }
