@@ -6,30 +6,33 @@
 
   type SentimentProps = {
     sentiments: Sentiments;
+    isPartial: boolean;
   };
 
-  const { sentiments }: SentimentProps = $props();
+  const { sentiments, isPartial }: SentimentProps = $props();
 
+  // TODO light mode colors
   const mappedSentiments = $derived([
     {
       sentiments: sentiments.good.slice(0, SENTIMENT_LIMIT),
       sentiment: "good" as const,
-      backgroundColor: "var(--purple-600)",
+      sentimentColor: "var(--purple-200)",
     },
     {
       sentiments: sentiments.bad.slice(0, SENTIMENT_LIMIT),
       sentiment: "bad" as const,
-      backgroundColor: "var(--purple-900)",
+      sentimentColor: "var(--red-100)",
     },
   ]);
 </script>
 
 <div class="trakt-sentiment-body">
-  {#each mappedSentiments as { sentiment, sentiments, backgroundColor }}
+  {#each mappedSentiments as { sentiment, sentiments, sentimentColor }, index (sentiment)}
     {#if sentiments.length > 0}
       <div
         class="trakt-sentiment-container"
-        style="--sentiment-background-color: {backgroundColor}"
+        style="--sentiment-color: {sentimentColor}"
+        data-index={!isPartial ? index : undefined}
       >
         <SentimentIcon {sentiment} />
         <ul>
@@ -46,9 +49,10 @@
   .trakt-sentiment-body {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xxs);
+    gap: var(--gap-micro);
 
-    flex-grow: 1;
+    height: 100%;
+    width: 100%;
   }
 
   ul {
@@ -58,36 +62,39 @@
 
     margin: 0;
     padding: 0;
-    padding-left: var(--gap-m);
 
     font-size: var(--font-size-text);
 
     list-style-type: none;
-
-    border-left: 1px solid
-      color-mix(in srgb, var(--color-text-primary) 10%, transparent);
   }
 
   .trakt-sentiment-container {
     flex: 1 1 0;
 
     display: flex;
-    gap: var(--gap-m);
+    gap: var(--gap-s);
     align-items: center;
 
     color: var(--color-text-primary);
 
-    background-color: color-mix(
-      in srgb,
-      var(--sentiment-background-color) 35%,
-      var(--color-card-background)
-    );
-
-    padding: var(--gap-m);
     border-radius: var(--border-radius-m);
+
+    background-color: var(--color-card-background);
+    padding: var(--ni-16);
 
     :global(svg) {
       flex-shrink: 0;
+      color: var(--sentiment-color);
+    }
+
+    &[data-index="0"] {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &[data-index="1"] {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     }
   }
 </style>

@@ -61,8 +61,8 @@
   --width-trivia-card: min(var(--ni-480), 85vw);
   --height-trivia-card: var(--ni-172);
 
-  --width-sentiments-card: min(var(--ni-480), 85vw);
-  --height-sentiments-card: var(--ni-228);
+  --width-sentiments-card: min(var(--ni-320), 85vw);
+  --height-sentiments-card: var(--ni-208);
 
   --width-comment-thread-card: var(--width-comment-card);
   --height-comment-thread-card: var(--ni-480);
@@ -98,7 +98,7 @@
   --height-lists-list: calc(var(--height-list-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-comments-list: calc(var(--height-comment-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-trivia-list: calc(var(--height-trivia-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
-  --height-sentiments-list: calc(var(--height-sentiments-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
+  --height-sentiments-list: var(--height-sentiments-card);
   --height-comment-thread-list: calc(var(--height-comment-thread-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-profile-list: calc(var(--height-profile-item) + var(--layout-scrollbar-width));
   --height-where-to-watch-list: calc(var(--height-where-to-watch-item) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));

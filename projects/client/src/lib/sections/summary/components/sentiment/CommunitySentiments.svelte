@@ -1,10 +1,15 @@
 <script lang="ts">
+  import type { ListVariant } from "$lib/components/lists/section-list/ListVariant";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Sentiments } from "$lib/requests/models/Sentiments";
   import SentimentsCard from "./_internal/SentimentsCard.svelte";
 
-  const { sentiments, slug }: { sentiments: Sentiments | Nil; slug: string } =
+  const {
+    sentiments,
+    slug,
+    variant,
+  }: { sentiments: Sentiments | Nil; slug: string; variant?: ListVariant } =
     $props();
 
   const hasPartialSentiments = $derived.by(() => {
@@ -24,6 +29,7 @@
     id={`community-sentiments-${slug}`}
     items={[{ ...sentiments, key: "sentiment" }]}
     title={m.header_community_sentiment()}
+    {variant}
     --height-list={heightList}
   >
     {#snippet item(sentiments)}
