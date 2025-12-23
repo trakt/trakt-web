@@ -3129,7 +3129,7 @@
       ]
     },
     "header_community_sentiment": {
-      "default": "Community Sentiment",
+      "default": "Sentiment",
       "description": "Header for the section that shows the community sentiment for a movie, show, or episode.",
       "exclude": [
         "ios"
