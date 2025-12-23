@@ -1,13 +1,17 @@
 import type { WatchNowServiceResponse } from '@trakt/api';
 
-// This list matches the heuristic used in the tvOS app
+// This list matches the heuristic used in the android TV app
 const MOST_POPULAR_SOURCES: string[] = [
   'netflix',
+  'netflix_standard_with_ads',
   'apple_tv_plus',
+  'apple_tv',
   'disney_plus',
   'amazon_prime_video',
-  'max',
-  'apple_tv',
+  'amazon_prime_video_free_with_ads',
+  'hbo_max',
+  'hbo_max_amazon_channel',
+  'hulu',
 ] as const;
 
 function getServiceIndex(source: string): number {
