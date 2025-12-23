@@ -59,11 +59,20 @@
     {streamOn}
     {crew}
     posterSrc={$posterSrc}
-  />
+  >
+    {#snippet contextualContent()}
+      <RenderFor audience="authenticated" device={["desktop"]}>
+        <WhereToWatchList type="episode" {episode} media={show} {streamOn} />
+      </RenderFor>
+    {/snippet}
+  </EpisodeSummary>
 </RenderFor>
 
 <RenderFor audience="authenticated">
-  <RenderFor audience="authenticated">
+  <RenderFor
+    audience="authenticated"
+    device={["mobile", "tablet-sm", "tablet-lg"]}
+  >
     <WhereToWatchList type="episode" {episode} media={show} {streamOn} />
   </RenderFor>
 

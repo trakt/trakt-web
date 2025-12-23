@@ -42,7 +42,14 @@
   <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
 {/snippet}
 
-<CoverImageSetter src={media.cover.url.medium} colors={media.colors} {type} />
+<CoverImageSetter src={null} colors={media.colors} {type} />
+
+<!-- TODO extract. Or make part of CoverImage? -->
+<div
+  class="trakt-media-summary-spotlight-gradient"
+  style="--trakt-cover-primary-color: {media.colors?.at(0) ??
+    'var(--color-background)'};"
+></div>
 
 <SummaryContainer {contextualContent}>
   {#snippet poster()}
@@ -87,3 +94,25 @@
     </SummaryActions>
   </RenderFor>
 </SummaryContainer>
+
+<style>
+  .trakt-media-summary-spotlight-gradient {
+    z-index: var(--layer-background);
+    position: absolute;
+    overflow: hidden;
+
+    left: 0;
+    top: 0;
+    width: var(--ni-920);
+    height: var(--ni-920);
+
+    opacity: 0.35;
+
+    background: radial-gradient(
+      circle at top left,
+      var(--trakt-cover-primary-color) 0%,
+      color-mix(in srgb, var(--trakt-cover-primary-color) 80%, transparent) 20%,
+      transparent 70%
+    );
+  }
+</style>

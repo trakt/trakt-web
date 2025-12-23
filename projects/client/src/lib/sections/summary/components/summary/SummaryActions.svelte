@@ -22,14 +22,8 @@
 
   .trakt-summary-actions {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--gap-l);
-
-    @include for-tablet-lg {
-      flex-direction: column;
-      align-items: start;
-      gap: var(--gap-s);
-    }
+    flex-direction: column;
+    align-items: start;
+    gap: var(--gap-xs);
   }
 </style>
