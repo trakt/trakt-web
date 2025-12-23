@@ -191,7 +191,7 @@
 
       &:global(.is-fullscreen),
       &[data-size="large"] {
-        --mobile-drawer-height: calc(100vh - env(safe-area-inset-top, 0px));
+        --mobile-drawer-height: calc(100dvh - env(safe-area-inset-top, 0px));
       }
 
       &[data-size="auto"] {
