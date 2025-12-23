@@ -4,6 +4,7 @@
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
+  import type { Snippet } from "svelte";
   import EpisodeTitle from "../_internal/EpisodeTitle.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
@@ -25,7 +26,11 @@
     streamOn,
     crew,
     posterSrc,
-  }: Omit<EpisodeSummaryProps, "seasons"> & { posterSrc: string } = $props();
+    contextualContent,
+  }: Omit<EpisodeSummaryProps, "seasons"> & {
+    posterSrc: string;
+    contextualContent?: Snippet;
+  } = $props();
   const type = "episode";
 
   const title = $derived(episodeIntl.title ?? episode.title);
@@ -43,7 +48,7 @@
   <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
 {/snippet}
 
-<SummaryContainer>
+<SummaryContainer {contextualContent}>
   {#snippet poster()}
     <SummaryPoster
       src={posterSrc}

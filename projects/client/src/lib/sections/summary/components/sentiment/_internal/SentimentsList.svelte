@@ -52,6 +52,7 @@
     gap: var(--gap-micro);
 
     height: 100%;
+    width: 100%;
   }
 
   ul {

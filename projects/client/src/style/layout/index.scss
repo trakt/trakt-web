@@ -61,9 +61,6 @@
   --width-trivia-card: min(var(--ni-480), 85vw);
   --height-trivia-card: var(--ni-172);
 
-  --width-sentiments-card: min(var(--ni-320), 85vw);
-  --height-sentiments-card: var(--ni-208);
-
   --width-comment-thread-card: var(--width-comment-card);
   --height-comment-thread-card: var(--ni-480);
 
@@ -88,6 +85,10 @@
 
   --width-where-to-watch-item: var(--ni-96);
   --height-where-to-watch-item: var(--ni-96);
+
+  --preferred-sentiments-card-width: calc(3 * var(--width-where-to-watch-item) + 2 * var(--list-gap));
+  --width-sentiments-card: min(var(--preferred-sentiments-card-width), 85vw);
+  --height-sentiments-card: var(--ni-208);
 
   /**
    * List dimensions
