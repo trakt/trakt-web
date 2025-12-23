@@ -73,9 +73,9 @@
 
   <CommunitySentiments {sentiments} slug={media.slug} />
 
-  <Comments {media} type="show" />
-
   <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
+
+  <Comments {media} type="show" />
 
   <VideoList slug={media.slug} {videos} />
 
