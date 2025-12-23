@@ -54,12 +54,6 @@
       grid-column-start: 2;
     }
 
-    :global(.trakt-summary-poster-container),
-    :global(.trakt-summary-poster img) {
-      width: var(--summary-poster-width);
-      height: calc(var(--summary-poster-width) * 1.5);
-    }
-
     :global(.trakt-summary-poster img) {
       box-shadow:
         var(--ni-0) var(--ni-11) var(--ni-24) var(--ni-0)
