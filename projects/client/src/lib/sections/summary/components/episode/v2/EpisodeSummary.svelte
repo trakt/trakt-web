@@ -56,7 +56,7 @@
 
 <Summary>
   {#snippet poster()}
-    <SummaryPoster src={posterSrc} alt={title} {tags} />
+    <SummaryPoster src={posterSrc} alt={title} {tags} variant="landscape" />
   {/snippet}
 
   {#snippet sideActions()}

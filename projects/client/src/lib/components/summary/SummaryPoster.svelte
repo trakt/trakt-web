@@ -13,6 +13,7 @@
     hoverOverlay?: Snippet;
     actions?: Snippet;
     tags?: Snippet;
+    variant?: "portrait" | "landscape";
   };
 
   const {
@@ -23,12 +24,13 @@
     hoverOverlay,
     target = "_blank",
     tags,
+    variant = "portrait",
   }: SummaryPosterProps = $props();
 
   const activeOverlay = $derived(href && hoverOverlay);
 </script>
 
-<div class="trakt-summary-poster-container">
+<div class="trakt-summary-poster-container" data-variant={variant}>
   <div class="trakt-summary-poster" class:has-active-overlay={activeOverlay}>
     <Link {href} {target}>
       <CrossOriginImage {src} {alt} />
@@ -55,12 +57,20 @@
 <style>
   .trakt-summary-poster-container {
     --overlay-border-size: var(--ni-2);
+    --poster-aspect-ratio: 3 / 2;
 
-    width: var(--ni-320);
+    width: var(--summary-poster-width);
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
     position: relative;
+
+    &[data-variant="landscape"] {
+      .trakt-summary-poster :global(img),
+      .trakt-summary-poster-overlay {
+        --poster-aspect-ratio: 9 / 16;
+      }
+    }
   }
 
   .trakt-summary-poster :global(img),
@@ -69,8 +79,8 @@
 
     border-radius: var(--border-radius-xxl);
 
-    width: var(--ni-320);
-    height: var(--ni-480);
+    width: var(--summary-poster-width);
+    height: calc(var(--summary-poster-width) * var(--poster-aspect-ratio));
 
     object-fit: cover;
   }

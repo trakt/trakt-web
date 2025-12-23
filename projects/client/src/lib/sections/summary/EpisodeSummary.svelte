@@ -2,6 +2,7 @@
   import * as m from "$lib/features/i18n/messages";
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
+  import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import SeasonList from "$lib/sections/lists/season/SeasonList.svelte";
   import CastList from "../lists/CastList.svelte";
@@ -24,13 +25,7 @@
     crew,
   }: EpisodeSummaryProps = $props();
 
-  // FIXME: move this to the summary component when merged with v2
-  const currentSeason = $derived(
-    seasons.find((s) => s.number === episode.season),
-  );
-  const posterSrc = $derived(
-    currentSeason?.poster?.url.medium ?? show.poster.url.medium,
-  );
+  const posterSrc = $derived(useEpisodeSpoilerImage({ episode, show }));
 </script>
 
 <!-- 
@@ -51,7 +46,7 @@
     {showIntl}
     {episodeIntl}
     {crew}
-    {posterSrc}
+    posterSrc={$posterSrc}
   />
 </RenderFor>
 
@@ -63,7 +58,7 @@
     {episodeIntl}
     {streamOn}
     {crew}
-    {posterSrc}
+    posterSrc={$posterSrc}
   />
 </RenderFor>
 

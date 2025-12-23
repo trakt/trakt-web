@@ -50,6 +50,7 @@
       alt={title}
       href={streamOn?.preferred?.link}
       {tags}
+      variant="landscape"
     >
       {#snippet hoverOverlay()}
         <StreamOnOverlay service={streamOn?.preferred} />

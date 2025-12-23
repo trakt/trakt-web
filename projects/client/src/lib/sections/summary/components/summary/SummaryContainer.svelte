@@ -38,33 +38,13 @@
   {/if}
 </div>
 
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
+<style>
   .trakt-summary-container {
     display: grid;
     gap: var(--gap-xl);
     grid-template-columns: minmax(var(--ni-320), 1fr) 2fr 1fr;
     margin: 0 var(--layout-distance-side);
-
-    @include for-mobile {
-      /* Poster is hidden in mobile layout. */
-      gap: initial;
-    }
-
-    @include for-tablet-sm-and-below {
-      grid-template-columns: 1fr;
-
-      .trakt-summary-content {
-        grid-column: 1;
-      }
-
-      :global(.trakt-summary-poster) {
-        height: var(--ni-120);
-        visibility: hidden;
-        pointer-events: none;
-      }
-    }
+    min-height: var(--ni-380);
   }
 
   .trakt-summary-content {
@@ -92,5 +72,10 @@
 
   .trakt-summary-actions {
     margin-left: var(--ni-neg-16);
+  }
+
+  .trakt-summary-poster {
+    display: flex;
+    align-items: center;
   }
 </style>
