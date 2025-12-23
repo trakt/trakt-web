@@ -67,6 +67,8 @@
     <WhereToWatchList type="episode" {episode} media={show} {streamOn} />
   </RenderFor>
 
+  <CastList title={m.list_title_actors()} cast={crew.cast} slug={show.slug} />
+
   <Comments
     media={show}
     type="episode"
@@ -74,8 +76,6 @@
     episode={episode.number}
     id={episode.id}
   />
-
-  <CastList title={m.list_title_actors()} cast={crew.cast} slug={show.slug} />
 
   <SeasonList {show} {seasons} currentSeason={episode.season} />
 
