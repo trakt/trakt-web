@@ -66,7 +66,7 @@
 
   <SummaryHeader {title}>
     <SummaryTitle {title} {crew} {...target} />
-    <RatingList ratings={$ratings} airDate={media.airDate} />
+    <RatingList ratings={$ratings} airDate={media.airDate} {type} />
   </SummaryHeader>
 
   <Spoiler {media} {type}>

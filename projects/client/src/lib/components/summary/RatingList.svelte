@@ -1,6 +1,7 @@
 <script lang="ts">
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import { languageTag } from "$lib/features/i18n";
+  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
   import {
@@ -21,12 +22,14 @@
     i18n?: RatingIntl;
     ratings: MediaRating;
     airDate: Date;
+    type: ExtendedMediaType;
   };
 
   const {
     i18n = RatingIntlProvider,
     ratings,
     airDate,
+    type,
   }: RatingListProps = $props();
 
   const { trakt, imdb, rotten } = $derived(
@@ -54,19 +57,21 @@
     {/snippet}
   </RatingItem>
 
-  <RatingItem rating={toRottenPercentage(rotten?.critic)} url={rotten?.url}>
-    <RottenIcon style={toRottenCriticRating(rotten?.critic)} />
-    {#snippet superscript()}
-      {toRottenCriticRating(rotten?.critic ?? 0)}
-    {/snippet}
-  </RatingItem>
+  {#if type !== "episode"}
+    <RatingItem rating={toRottenPercentage(rotten?.critic)} url={rotten?.url}>
+      <RottenIcon style={toRottenCriticRating(rotten?.critic)} />
+      {#snippet superscript()}
+        {toRottenCriticRating(rotten?.critic ?? 0)}
+      {/snippet}
+    </RatingItem>
 
-  <RatingItem rating={toRottenPercentage(rotten?.audience)} url={rotten?.url}>
-    <PopcornIcon style={toRottenAudienceRating(rotten?.audience)} />
-    {#snippet superscript()}
-      {toRottenAudienceRating(rotten?.audience ?? 0)}
-    {/snippet}
-  </RatingItem>
+    <RatingItem rating={toRottenPercentage(rotten?.audience)} url={rotten?.url}>
+      <PopcornIcon style={toRottenAudienceRating(rotten?.audience)} />
+      {#snippet superscript()}
+        {toRottenAudienceRating(rotten?.audience ?? 0)}
+      {/snippet}
+    </RatingItem>
+  {/if}
 </div>
 
 <style lang="scss">

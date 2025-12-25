@@ -64,7 +64,7 @@
   {/snippet}
 
   {#snippet meta()}
-    <RatingList ratings={$ratings} airDate={episode.airDate} />
+    <RatingList ratings={$ratings} airDate={episode.airDate} {type} />
     <EpisodeTitle {episode} {show} {showIntl} />
     <SummaryTitle {title} {type} {crew} media={show} {episode} />
 
