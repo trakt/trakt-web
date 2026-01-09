@@ -33,9 +33,11 @@
       <span class="bold secondary">{m.header_height()}</span>
       <p>{(height / 100).toFixed(2)}cm</p>
     </div>
+    {#if birthday}
+      <div class="trakt-detail-separator"></div>
+    {/if}
   {/if}
   {#if birthday}
-    <div class="trakt-detail-separator"></div>
     <div class="trakt-person-detail">
       {#if isSameDayOfYear(birthday, today)}
         <Celebration />
