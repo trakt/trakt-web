@@ -5,6 +5,7 @@
   import { getYearsDifference } from "$lib/utils/date/getYearsDifference";
   import { isSameDayOfYear } from "$lib/utils/date/isSameDayOfYear";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
+  import { toMeasurement } from "$lib/utils/formatting/number/toMeasurement";
   import Celebration from "./Celebration.svelte";
 
   const {
@@ -31,7 +32,7 @@
   {#if height}
     <div class="trakt-person-detail">
       <span class="bold secondary">{m.header_height()}</span>
-      <p>{(height / 100).toFixed(2)}cm</p>
+      <p>{toMeasurement(height / 100, getLocale())}</p>
     </div>
     {#if birthday}
       <div class="trakt-detail-separator"></div>
