@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "Vista"
     },
+    "header_height": {
+      "default": "Altura"
+    },
     "header_birthday": {
       "default": "Cumpleaños"
     },

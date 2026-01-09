@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "Vizionat"
     },
+    "header_height": {
+      "default": "Înălțime"
+    },
     "header_birthday": {
       "default": "Zi de naștere"
     },

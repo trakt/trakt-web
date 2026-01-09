@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "Bekeken"
     },
+    "header_height": {
+      "default": "Lengte"
+    },
     "header_birthday": {
       "default": "Verjaardag"
     },

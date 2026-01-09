@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "Obejrzano"
     },
+    "header_height": {
+      "default": "Wzrost"
+    },
     "header_birthday": {
       "default": "Urodziny"
     },

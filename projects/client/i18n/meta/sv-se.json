@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "Sedda"
     },
+    "header_height": {
+      "default": "Längd"
+    },
     "header_birthday": {
       "default": "Födelsedag"
     },

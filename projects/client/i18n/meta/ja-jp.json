@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "視聴済み"
     },
+    "header_height": {
+      "default": "身長"
+    },
     "header_birthday": {
       "default": "誕生日"
     },
