@@ -6,8 +6,8 @@
   import PersonTitle from "../../_internal/PersonTitle.svelte";
   import Summary from "./../../_internal/Summary.svelte";
   import SummaryOverview from "./../../summary/SummaryOverview.svelte";
-  import BirthdayDetails from "./_internal/BirthdayDetails.svelte";
   import ImdbLink from "./_internal/ImdbLink.svelte";
+  import PersonDetails from "./_internal/PersonDetails.svelte";
   import SocialMediaLinks from "./_internal/SocialMediaLinks.svelte";
 
   const { person }: { person: PersonSummary } = $props();
@@ -37,12 +37,11 @@
 
     <SocialMediaLinks {person} />
 
-    {#if person.birthday}
-      <BirthdayDetails
-        birthday={person.birthday}
-        deathDate={person.deathDate}
-      />
-    {/if}
+    <PersonDetails
+      birthday={person.birthday}
+      deathDate={person.deathDate}
+      height={person.height}
+    />
   {/snippet}
 
   <SummaryOverview title={person.name} overview={person.biography} />
