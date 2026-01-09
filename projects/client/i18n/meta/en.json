@@ -6050,6 +6050,13 @@
         "ios"
       ]
     },
+    "header_height": {
+      "default": "Height",
+      "description": "Header for the section that displays the person's height.",
+      "exclude": [
+        "ios"
+      ]
+    },
     "header_birthday": {
       "default": "Birthday",
       "description": "Header for the section that displays the person's birthday.",

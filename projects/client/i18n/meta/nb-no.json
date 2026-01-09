@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "Sett"
     },
+    "header_height": {
+      "default": "Høyde"
+    },
     "header_birthday": {
       "default": "Bursdag"
     },

@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "Гледано"
     },
+    "header_height": {
+      "default": "Ръст"
+    },
     "header_birthday": {
       "default": "Рожден ден"
     },

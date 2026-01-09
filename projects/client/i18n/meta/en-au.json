@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "Watched"
     },
+    "header_height": {
+      "default": "Height"
+    },
     "header_birthday": {
       "default": "Birthday"
     },

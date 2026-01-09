@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "Переглянуто"
     },
+    "header_height": {
+      "default": "Зріст"
+    },
     "header_birthday": {
       "default": "День народження"
     },

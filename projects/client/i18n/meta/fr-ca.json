@@ -2285,6 +2285,9 @@
     "tag_text_watched": {
       "default": "Vu"
     },
+    "header_height": {
+      "default": "Taille"
+    },
     "header_birthday": {
       "default": "Date de naissance"
     },
