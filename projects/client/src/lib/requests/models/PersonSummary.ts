@@ -12,6 +12,7 @@ export const PersonSummarySchema = z.object({
   }),
   slug: z.string(),
   knownFor: crewPositionSchema.nullish(),
+  height: z.number().nullish(),
   birthday: z.date().nullish(),
   deathDate: z.date().nullish(),
   imdb: z.string().nullish(),

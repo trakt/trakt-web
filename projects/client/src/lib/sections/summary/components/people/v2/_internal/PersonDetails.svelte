@@ -10,10 +10,12 @@
   const {
     birthday,
     deathDate,
+    height,
     variant = "default",
   }: {
-    birthday: Date;
+    birthday: Date | Nil;
     deathDate: Date | Nil;
+    height: number | Nil;
     variant?: "default" | "compact";
   } = $props();
 
@@ -24,30 +26,40 @@
   );
 </script>
 
-<div class="trakt-birthday-details" data-variant={variant}>
-  <div class="trakt-birthday-detail">
-    {#if isSameDayOfYear(birthday, today)}
-      <Celebration />
-    {/if}
-    <span class="bold secondary">{m.header_birthday()}</span>
-    <p>{toHumanDay(birthday, getLocale(), "short")}</p>
-  </div>
-  <div class="trakt-detail-separator"></div>
-  <div class="trakt-birthday-detail">
-    <span class="bold secondary">{detailHeader}</span>
-    {#if deathDate}
-      <DateWithAnniversary date={deathDate} referenceDate={birthday} />
-    {/if}
-    {#if !deathDate}
-      <p>{getYearsDifference(birthday, today)}</p>
-    {/if}
-  </div>
+<!-- TODO: @seferturan let's discuss how to refactor this -->
+<div class="trakt-person-details" data-variant={variant}>
+  {#if height}
+    <div class="trakt-person-detail">
+      <span class="bold secondary">{m.header_height()}</span>
+      <p>{(height / 100).toFixed(2)}cm</p>
+    </div>
+  {/if}
+  {#if birthday}
+    <div class="trakt-detail-separator"></div>
+    <div class="trakt-person-detail">
+      {#if isSameDayOfYear(birthday, today)}
+        <Celebration />
+      {/if}
+      <span class="bold secondary">{m.header_birthday()}</span>
+      <p>{toHumanDay(birthday, getLocale(), "short")}</p>
+    </div>
+    <div class="trakt-detail-separator"></div>
+    <div class="trakt-person-detail">
+      <span class="bold secondary">{detailHeader}</span>
+      {#if deathDate}
+        <DateWithAnniversary date={deathDate} referenceDate={birthday} />
+      {/if}
+      {#if !deathDate}
+        <p>{getYearsDifference(birthday, today)}</p>
+      {/if}
+    </div>
+  {/if}
 </div>
 
 <style>
-  .trakt-birthday-details {
+  .trakt-person-details {
     --details-width: var(--ni-320);
-    --details-gap: var(--gap-l);
+    --details-gap: var(--gap-m);
 
     display: flex;
     gap: var(--details-gap);
@@ -58,7 +70,7 @@
     &[data-variant="compact"] {
       width: fit-content;
 
-      .trakt-birthday-detail {
+      .trakt-person-detail {
         width: fit-content;
         align-items: flex-end;
       }
@@ -71,7 +83,7 @@
     opacity: 0.25;
   }
 
-  .trakt-birthday-detail {
+  .trakt-person-detail {
     display: flex;
     flex-direction: column;
     align-items: center;

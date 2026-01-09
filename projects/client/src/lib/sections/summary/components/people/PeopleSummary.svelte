@@ -7,8 +7,8 @@
   import SummaryContainer from "./../summary/SummaryContainer.svelte";
   import SummaryHeader from "./../summary/SummaryHeader.svelte";
   import SummaryOverview from "./../summary/SummaryOverview.svelte";
-  import BirthdayDetails from "./v2/_internal/BirthdayDetails.svelte";
   import ImdbLink from "./v2/_internal/ImdbLink.svelte";
+  import PersonDetails from "./v2/_internal/PersonDetails.svelte";
   import SocialMediaLinks from "./v2/_internal/SocialMediaLinks.svelte";
 
   const { person }: { person: PersonSummary } = $props();
@@ -42,13 +42,12 @@
   <div class="person-meta-info">
     <SocialMediaLinks {person} variant="compact" />
 
-    {#if person.birthday}
-      <BirthdayDetails
-        birthday={person.birthday}
-        deathDate={person.deathDate}
-        variant="compact"
-      />
-    {/if}
+    <PersonDetails
+      height={person.height}
+      birthday={person.birthday}
+      deathDate={person.deathDate}
+      variant="compact"
+    />
   </div>
 </SummaryContainer>
 

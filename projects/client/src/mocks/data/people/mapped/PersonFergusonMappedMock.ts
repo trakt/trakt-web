@@ -11,6 +11,7 @@ export const PersonFergusonMappedMock: PersonSummary = {
         'https://walter-r2.trakt.tv/images/people/000/447/271/headshots/medium/d7e3e2fc64.jpg.webp',
     },
   },
+  height: undefined,
   name: 'Rebecca Ferguson',
   slug: 'rebecca-ferguson',
   knownFor: 'acting',

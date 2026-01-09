@@ -26,6 +26,10 @@ export const mapToPersonSummary = (
     biography: response.biography ?? '',
     knownFor: response.known_for_department,
     headshot: mapToHeadshot(response.images),
+    /**
+     * FIXME: @seferturan remove cast once @trakt/api is updated
+     */
+    height: (response as unknown as { height: number }).height,
     birthday: response.birthday ? new Date(response.birthday) : null,
     socialMedia: mapToSocialMedia(response),
     deathDate: response.death ? new Date(response.death) : null,
