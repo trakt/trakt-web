@@ -1,7 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
 
-  import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import SeasonList from "$lib/sections/lists/season/SeasonList.svelte";
@@ -9,6 +8,7 @@
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
+  import SummaryCover from "./components/_internal/SummaryCover.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import MediaDetails from "./components/details/MediaDetails.svelte";
   import EpisodeSummary from "./components/episode/EpisodeSummary.svelte";
@@ -33,11 +33,7 @@
   if available. This approach ensures visual consistency between a show and its
   episodes.
 -->
-<CoverImageSetter
-  src={episode.cover.url ?? ""}
-  colors={show.colors}
-  type="show"
-/>
+<SummaryCover src={episode.cover.url ?? ""} colors={show.colors} type="show" />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <EpisodeSummaryV2
@@ -59,11 +55,26 @@
     {streamOn}
     {crew}
     posterSrc={$posterSrc}
-  />
+  >
+    {#snippet contextualContent()}
+      <RenderFor audience="authenticated" device={["desktop"]}>
+        <WhereToWatchList
+          type="episode"
+          {episode}
+          media={show}
+          {streamOn}
+          variant="inline"
+        />
+      </RenderFor>
+    {/snippet}
+  </EpisodeSummary>
 </RenderFor>
 
 <RenderFor audience="authenticated">
-  <RenderFor audience="authenticated">
+  <RenderFor
+    audience="authenticated"
+    device={["mobile", "tablet-sm", "tablet-lg"]}
+  >
     <WhereToWatchList type="episode" {episode} media={show} {streamOn} />
   </RenderFor>
 

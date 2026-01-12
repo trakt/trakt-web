@@ -1,10 +1,10 @@
 <script lang="ts">
-  import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
+  import SummaryCover from "../_internal/SummaryCover.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
   import StreamOnOverlay from "../overlay/StreamOnOverlay.svelte";
@@ -42,7 +42,7 @@
   <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
 {/snippet}
 
-<CoverImageSetter src={media.cover.url.medium} colors={media.colors} {type} />
+<SummaryCover src={media.cover.url.medium} colors={media.colors} {type} />
 
 <SummaryContainer {contextualContent}>
   {#snippet poster()}
@@ -64,14 +64,16 @@
     </SummaryPoster>
   {/snippet}
 
-  <SummaryHeader {title}>
-    <SummaryTitle {title} {crew} {...target} />
-    <RatingList ratings={$ratings} airDate={media.airDate} {type} />
-  </SummaryHeader>
+  <div class="trakt-summary-main-content">
+    <SummaryHeader {title}>
+      <SummaryTitle {title} {crew} {...target} />
+      <RatingList ratings={$ratings} airDate={media.airDate} {type} />
+    </SummaryHeader>
 
-  <Spoiler {media} {type}>
-    <SummaryOverview {title} overview={intl.overview ?? media.overview} />
-  </Spoiler>
+    <Spoiler {media} {type}>
+      <SummaryOverview {title} overview={intl.overview ?? media.overview} />
+    </Spoiler>
+  </div>
 
   <RenderFor audience="authenticated">
     <SummaryActions>
@@ -87,3 +89,12 @@
     </SummaryActions>
   </RenderFor>
 </SummaryContainer>
+
+<style>
+  .trakt-summary-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-l);
+    flex: 1;
+  }
+</style>

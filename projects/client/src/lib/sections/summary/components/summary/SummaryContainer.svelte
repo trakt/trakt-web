@@ -15,7 +15,7 @@
   }: SummaryContainerProps = $props();
 </script>
 
-<div class="trakt-summary-container">
+<div class="trakt-summary-container" class:has-contextual-content={content}>
   {#if poster}
     <div class="trakt-summary-poster">
       {@render poster()}
@@ -38,13 +38,28 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-summary-container {
     display: grid;
     gap: var(--gap-xl);
-    grid-template-columns: minmax(var(--ni-320), 1fr) 2fr 1fr;
-    margin: 0 var(--layout-distance-side);
+    grid-template-columns: minmax(0, var(--summary-poster-width)) 1fr;
+
     min-height: var(--ni-380);
+    max-width: var(--ni-1280);
+
+    margin: 0 var(--layout-distance-side);
+    padding-top: var(--ni-38);
+
+    @include for-desktop {
+      &.has-contextual-content {
+        grid-template-columns:
+          minmax(0, var(--summary-poster-width))
+          1fr
+          var(--ni-320);
+      }
+    }
   }
 
   .trakt-summary-content {
@@ -52,6 +67,7 @@
     display: flex;
     flex-direction: column;
     justify-content: end;
+    align-items: center;
 
     &.has-actions {
       justify-content: space-between;
@@ -59,15 +75,18 @@
   }
 
   .trakt-summary-children {
+    flex-grow: 1;
+
     display: flex;
     flex-direction: column;
     gap: var(--gap-xl);
+    justify-content: space-between;
   }
 
   .trakt-summary-contextual-content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: end;
   }
 
   .trakt-summary-actions {
@@ -77,5 +96,10 @@
   .trakt-summary-poster {
     display: flex;
     align-items: center;
+
+    :global(img),
+    :global(.trakt-summary-poster-overlay) {
+      width: 100%;
+    }
   }
 </style>

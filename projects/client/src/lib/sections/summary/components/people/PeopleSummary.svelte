@@ -25,19 +25,21 @@
     <SummaryPoster src={person.headshot.url.medium} alt={person.name} {tags} />
   {/snippet}
 
-  <SummaryHeader title={person.name}>
-    {#snippet headerActions()}
-      <ShareButton
-        title={person.name}
-        textFactory={({ title: name }) => m.text_share_person({ name })}
-        source={{ id: "person" }}
-      />
-    {/snippet}
+  <div class="trakt-summary-main-content">
+    <SummaryHeader title={person.name}>
+      {#snippet headerActions()}
+        <ShareButton
+          title={person.name}
+          textFactory={({ title: name }) => m.text_share_person({ name })}
+          source={{ id: "person" }}
+        />
+      {/snippet}
 
-    <PersonTitle name={person.name} knownFor={person.knownFor} />
-  </SummaryHeader>
+      <PersonTitle name={person.name} knownFor={person.knownFor} />
+    </SummaryHeader>
 
-  <SummaryOverview title={person.name} overview={person.biography} />
+    <SummaryOverview title={person.name} overview={person.biography} />
+  </div>
 
   <div class="person-meta-info">
     <SocialMediaLinks {person} variant="compact" />
@@ -57,5 +59,12 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--gap-l);
+  }
+
+  .trakt-summary-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-l);
+    flex: 1;
   }
 </style>

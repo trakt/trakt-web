@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { ListVariant } from "$lib/components/lists/section-list/ListVariant";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
@@ -15,9 +16,11 @@
 
   const {
     streamOn,
+    variant,
     ...target
   }: MetaInfoProps & {
     streamOn?: StreamOn;
+    variant?: ListVariant;
   } = $props();
 
   const justWatchServices = $derived(mapToServices(streamOn));
@@ -61,6 +64,7 @@
       items={services}
       title={m.list_title_where_to_watch()}
       {metaInfo}
+      {variant}
       --height-list="var(--height-where-to-watch-list)"
     >
       {#snippet item(service)}

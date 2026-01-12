@@ -1,13 +1,12 @@
 <script lang="ts">
   import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
+  import ResponsiveTitle from "./ResponsiveTitle.svelte";
 
   const { name, knownFor }: { name: string; knownFor: string | Nil } = $props();
 </script>
 
 <div class="trakt-person-title">
-  <h1>
-    {name}
-  </h1>
+  <ResponsiveTitle title={name} />
 
   {#if knownFor}
     <p class="secondary">
@@ -25,12 +24,10 @@
 
     @include for-tablet-sm-and-below {
       align-items: center;
-    }
-  }
 
-  h1 {
-    @include for-tablet-sm-and-below {
-      text-align: center;
+      :global(.trakt-responsive-title) {
+        text-align: center;
+      }
     }
   }
 </style>

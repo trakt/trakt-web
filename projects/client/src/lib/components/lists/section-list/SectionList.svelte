@@ -3,7 +3,6 @@
   import Crossfade from "$lib/components/Crossfade.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
@@ -15,6 +14,7 @@
   import { useCollapsedList } from "./_internal/useCollapsedList";
   import CollapseIcon from "./CollapseIcon.svelte";
   import ExpandIcon from "./ExpandIcon.svelte";
+  import type { ListVariant } from "./ListVariant";
 
   const EMPTY_STATE_CLASS = "section-list-empty-state";
   const CTA_CUT_OFF = 4;
@@ -25,6 +25,7 @@
     metaInfo?: Snippet;
     headerNavigationType?: DpadNavigationType;
     subtitle?: string;
+    variant?: ListVariant;
   };
 
   const {
@@ -41,6 +42,7 @@
     drilldownLink,
     headerNavigationType,
     subtitle,
+    variant = "default",
   }: SectionListProps<T> = $props();
 
   const isHeaderVisible = $derived(Boolean(title));
@@ -48,30 +50,40 @@
   const { navigation } = useNavigation();
   const isVisible = writable($navigation === "dpad");
   const isMounted = writable(false);
-  const { isCollapsed, toggle } = $derived(useCollapsedList(id));
+  const { isCollapsed: isListCollapsed, toggle } = $derived(
+    useCollapsedList(id),
+  );
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
 
   onMount(() => {
     isMounted.set(true);
   });
+
+  const isCollapsed = $derived.by(() => {
+    if (variant !== "default") {
+      return false;
+    }
+
+    return $isListCollapsed;
+  });
 </script>
 
 {#snippet titleAction()}
-  <RenderFor audience="all">
+  {#if variant === "default"}
     <ActionButton
       onclick={toggle}
-      label={$isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
+      label={isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
       style="ghost"
       color="default"
     >
-      {#if $isCollapsed}
+      {#if isCollapsed}
         <ExpandIcon />
       {:else}
         <CollapseIcon />
       {/if}
     </ActionButton>
-  </RenderFor>
+  {/if}
 {/snippet}
 
 {#snippet actions()}
@@ -87,11 +99,12 @@
 <section
   use:whenInViewport={() => isVisible.set(true)}
   class="section-list-container"
-  class:section-list-container-collapsed={$isCollapsed}
+  class:section-list-container-collapsed={isCollapsed}
   class:section-list-container-mounted={$isMounted}
   class:section-list-container-no-header={!isHeaderVisible}
   class:section-list-has-drilldown={Boolean(drilldownLink)}
   data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${EMPTY_STATE_CLASS}:not(:empty)`}
+  data-variant={variant}
 >
   {#if $isVisible}
     {#if isHeaderVisible && title}
@@ -100,7 +113,7 @@
         {subtitle}
         {titleAction}
         {metaInfo}
-        actions={$isCollapsed ? undefined : actions}
+        actions={isCollapsed ? undefined : actions}
         {badge}
         navigationType={headerNavigationType}
         href={drilldownLink}
@@ -172,6 +185,18 @@
         transition:
           height var(--transition-increment) ease-in-out,
           min-height var(--transition-increment) ease-in-out;
+      }
+    }
+
+    &[data-variant="inline"] {
+      .trakt-list-item-container,
+      :global(.trakt-list-inset-title) {
+        margin: 0;
+        padding: 0;
+      }
+
+      .section-list-empty-state {
+        width: 100%;
       }
     }
   }

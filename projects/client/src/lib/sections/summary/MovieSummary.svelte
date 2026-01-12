@@ -41,15 +41,26 @@
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-  <MediaSummary {media} {intl} {streamOn} {crew} type="movie" />
+  <MediaSummary {media} {intl} {streamOn} {crew} type="movie">
+    {#snippet contextualContent()}
+      <RenderFor audience="authenticated" device={["desktop"]}>
+        <WhereToWatchList type="movie" {media} {streamOn} variant="inline" />
+
+        <CommunitySentiments {sentiments} slug={media.slug} variant="inline" />
+      </RenderFor>
+    {/snippet}
+  </MediaSummary>
 </RenderFor>
 
 <RenderFor audience="authenticated">
-  <RenderFor audience="authenticated">
+  <RenderFor
+    audience="authenticated"
+    device={["mobile", "tablet-sm", "tablet-lg"]}
+  >
     <WhereToWatchList type="movie" {media} {streamOn} />
-  </RenderFor>
 
-  <CommunitySentiments {sentiments} slug={media.slug} />
+    <CommunitySentiments {sentiments} slug={media.slug} />
+  </RenderFor>
 
   <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
 

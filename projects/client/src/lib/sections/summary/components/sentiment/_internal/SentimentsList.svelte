@@ -73,7 +73,7 @@
 
     display: flex;
     gap: var(--gap-s);
-    align-items: center;
+    align-items: flex-start;
 
     color: var(--color-text-primary);
 

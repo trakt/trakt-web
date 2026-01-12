@@ -5,6 +5,7 @@
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { mapToSummarySubtitle } from "./mapToSummarySubtitle";
+  import ResponsiveTitle from "./ResponsiveTitle.svelte";
   import type { SummaryTitleProps } from "./SummaryTitleProps";
 
   const { title, status, crew, ...target }: SummaryTitleProps = $props();
@@ -34,10 +35,8 @@
   });
 </script>
 
-<div class="trakt-summary-title">
-  <h1 data-testid={TestId.SummaryMediaTitle}>
-    {title}
-  </h1>
+<div class="trakt-summary-title" data-testid={TestId.SummaryMediaTitle}>
+  <ResponsiveTitle {title} />
 
   {#if mainCredit}
     <p class="tiny trakt-media-main-credit">
@@ -73,12 +72,10 @@
     @include for-tablet-sm-and-below {
       gap: var(--gap-micro);
       align-items: center;
-    }
-  }
 
-  h1 {
-    @include for-tablet-sm-and-below {
-      text-align: center;
+      :global(.trakt-responsive-title) {
+        text-align: center;
+      }
     }
   }
 

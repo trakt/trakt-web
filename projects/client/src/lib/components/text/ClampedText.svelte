@@ -5,15 +5,28 @@
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { writable } from "$lib/utils/store/WritableSubject";
 
+  const DEFAULT_LINE_COUNT = 3;
+
   type LineClampProps = {
     label: string;
     classList?: string;
+    lineCount?: number;
   } & ChildrenProps;
 
-  const { children, label, classList = "" }: LineClampProps = $props();
+  const {
+    children,
+    label,
+    classList = "",
+    lineCount = DEFAULT_LINE_COUNT,
+  }: LineClampProps = $props();
 
   const isClamped = writable(false);
-  const lines = writable(3);
+  const lines = writable(DEFAULT_LINE_COUNT);
+
+  $effect.pre(() => {
+    lines.set(lineCount);
+  });
+
   const isExpanded = $derived($lines === 1337);
 </script>
 
@@ -31,7 +44,7 @@
       i18n={MoreButtonIntlProvider}
       {label}
       count={undefined}
-      onCollapse={() => lines.set(3)}
+      onCollapse={() => lines.set(lineCount)}
       onExpand={() => lines.set(1337)}
     />
   {/if}
