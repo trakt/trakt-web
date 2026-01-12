@@ -7,8 +7,6 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { Sentiments } from "$lib/requests/models/Sentiments";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
-  import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
-  import { useShowProgress } from "$lib/stores/useShowProgress";
   import CastList from "../lists/CastList.svelte";
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
@@ -44,10 +42,6 @@
     currentSeason,
     sentiments,
   }: ShowSummaryProps = $props();
-
-  const { progress } = $derived(useShowProgress(media.slug));
-
-  const episode = $derived($progress);
 </script>
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
@@ -57,21 +51,24 @@
 <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
   <MediaSummary {media} {intl} {crew} {streamOn} type="show">
     {#snippet contextualContent()}
-      <RenderFor device={["desktop"]} audience="authenticated">
-        {#if episode != null && episode.remaining > 0}
-          <EpisodeItem {episode} show={media} variant="next" context="show" />
-        {/if}
+      <RenderFor audience="authenticated" device={["desktop"]}>
+        <WhereToWatchList type="show" {media} {streamOn} variant="inline" />
+
+        <CommunitySentiments {sentiments} slug={media.slug} variant="inline" />
       </RenderFor>
     {/snippet}
   </MediaSummary>
 </RenderFor>
 
 <RenderFor audience="authenticated">
-  <RenderFor audience="authenticated">
+  <RenderFor
+    audience="authenticated"
+    device={["mobile", "tablet-sm", "tablet-lg"]}
+  >
     <WhereToWatchList type="show" {media} {streamOn} />
-  </RenderFor>
 
-  <CommunitySentiments {sentiments} slug={media.slug} />
+    <CommunitySentiments {sentiments} slug={media.slug} />
+  </RenderFor>
 
   <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
 
