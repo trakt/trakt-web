@@ -613,7 +613,6 @@
       "default": "Discover",
       "description": "Header for the discover step.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -621,7 +620,6 @@
       "default": "movies and shows you will love and where they are streaming right now.",
       "description": "Description for the discover step. This should be a short and concise message that indicates what users can discover.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -629,15 +627,13 @@
       "default": "Track",
       "description": "Header for the track step.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
     "text_landing_track": {
-      "default": "every movie, episode, and season you’ve seen, all in one place.",
+      "default": "every movie, episode, and season you've seen, all in one place.",
       "description": "Description for the track step. This should be a short and concise message that indicates what users can track.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -645,15 +641,37 @@
       "default": "Share",
       "description": "Header for the share step.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
     "text_landing_share": {
-      "default": "opinions, ratings, and lists that others will love to follow.",
+      "default": "opinions, ratings and lists that others will love to follow.",
       "description": "Description for the share step. This should be a short and concise message that indicates what users can share.",
       "exclude": [
-        "android",
+        "ios"
+      ]
+    },
+    "text_landing_numbers_1": {
+      "default": "years of watching together",
+      "description": "Part of the promotion text for welcoming a new user. Example: 15 years of watching together",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_landing_numbers_2": {
+      "default": "mil. shows & movies lovers",
+      "description": "Part of the promotion text for welcoming a new user. Example: 15 mil. shows & movies lovers",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_landing_numbers_3": {
+      "default": "mil. titles tracked weekly",
+      "description": "Part of the promotion text for welcoming a new user. Example: 15 mil. titles tracked weekly",
+      "exclude": [
+        "web",
         "ios"
       ]
     },
@@ -4076,6 +4094,14 @@
         "web"
       ]
     },
+    "button_text_continue": {
+      "default": "Continue",
+      "description": "Text for the button that allows users to continue to next screen etc.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "button_label_create_list": {
       "default": "Create list",
       "description": "Aria-label for the button that allows users to create a new list.",
@@ -6365,7 +6391,6 @@
       "default": "From My History",
       "description": "Title for lists containing movies or shows a user has seen a person in. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6495,6 +6520,7 @@
       "default": "Trivia",
       "description": "Title for lists containing trivia about a movie or show. This title should be as short and concise as possible.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -6544,6 +6570,99 @@
       "exclude": [
         "ios",
         "android"
+      ]
+    },
+    "text_billing_month_for_free": {
+      "default": "Try 1 month for free and then:",
+      "description": "Text used to inform user about billing and subscription options.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_billing_no_payment_required": {
+      "default": "No immediate payment required.",
+      "description": "Text used to inform user about billing and subscription options.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_billing_try_for_free": {
+      "default": "Try now for free!",
+      "description": "Text used to inform user about billing and subscription options.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Upgrade to VIP",
+      "description": "Text used to inform user about billing and subscription options.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_billing_disclaimer": {
+      "default": "Payment starts at end of trial period. Subscription auto-renews, and is billed each {period} until canceled. Cancel any time via Google Play Subscription Center.",
+      "description": "Text used to inform user about billing and subscription options.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_billing_already_vip": {
+      "default": "You are now a Trakt VIP!\\nThank you for your support and enjoy.",
+      "description": "Text used to inform user about billing and subscription options.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_billing_period_month": {
+      "default": "month",
+      "description": "Text used to inform user about monthly billing period.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_vip_upsell_default": {
+      "default": "Enhance your Trakt experience",
+      "description": "Text used to promote a VIP package for the user.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Enhance your Trakt experience",
+      "description": "Upgrade to VIP and unlock the full Trakt experience, packed with features built for TV Shows and Movies lovers.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Enhance your Trakt experience",
+      "description": "Text used to promote a VIP package for the user.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Upgrade to VIP!",
+      "description": "Unlimited tracking and more.",
+      "exclude": [
+        "web",
+        "ios"
       ]
     }
   }
