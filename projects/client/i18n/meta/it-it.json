@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Opinioni, valutazioni e liste che gli altri adoreranno seguire."
     },
+    "text_landing_numbers_1": {
+      "default": "anni di visioni insieme"
+    },
+    "text_landing_numbers_2": {
+      "default": "milioni di amanti di serie TV e film"
+    },
+    "text_landing_numbers_3": {
+      "default": "milioni di titoli tracciati settimanalmente"
+    },
     "list_title_trending": {
       "default": "Tendenze"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Applica"
     },
+    "button_text_continue": {
+      "default": "Continua"
+    },
     "button_label_create_list": {
       "default": "Crea lista"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Vuoi smettere di ricevere richieste di valutazione per ciò che hai guardato di recente?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Prova 1 mese gratis e poi:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Nessun pagamento immediato richiesto."
+    },
+    "text_billing_try_for_free": {
+      "default": "Prova gratis ora!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Passa a VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Il pagamento inizierà alla fine del periodo di prova. L'abbonamento si rinnova automaticamente e viene fatturato ogni {period} fino alla cancellazione. Cancella in qualsiasi momento tramite il Centro Abbonamenti Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Ora sei un VIP Trakt!\nGrazie per il tuo supporto e goditi l'esperienza."
+    },
+    "text_billing_period_month": {
+      "default": "mese"
+    },
+    "text_vip_upsell_default": {
+      "default": "Migliora la tua esperienza Trakt"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Passa a VIP e sblocca l'esperienza Trakt completa, ricca di funzionalità per gli amanti di serie TV e film."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Passa a VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Tracciamento illimitato e altro ancora."
     }
   }
 }

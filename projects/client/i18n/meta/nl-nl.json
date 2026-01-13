@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Meningen, beoordelingen en lijsten die anderen graag zullen volgen."
     },
+    "text_landing_numbers_1": {
+      "default": "jaar samen kijken"
+    },
+    "text_landing_numbers_2": {
+      "default": "miljoen serie- & filmfans"
+    },
+    "text_landing_numbers_3": {
+      "default": "miljoen titels wekelijks gevolgd"
+    },
     "list_title_trending": {
       "default": "Trending"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Toepassen"
     },
+    "button_text_continue": {
+      "default": "Doorgaan"
+    },
     "button_label_create_list": {
       "default": "Lijst aanmaken"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Wil je niet meer gevraagd worden om te beoordelen wat je onlangs hebt bekeken?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Probeer 1 maand gratis en dan:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Geen directe betaling vereist."
+    },
+    "text_billing_try_for_free": {
+      "default": "Probeer nu gratis!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Upgrade naar VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Betaling start aan het einde van de proefperiode. Abonnement wordt automatisch verlengd en elke {period} gefactureerd totdat u annuleert. Annuleer op elk moment via het Google Play Abonnementscentrum.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Je bent nu Trakt VIP!\nDank je voor je steun en veel plezier."
+    },
+    "text_billing_period_month": {
+      "default": "maand"
+    },
+    "text_vip_upsell_default": {
+      "default": "Verbeter je Trakt-ervaring"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Upgrade naar VIP en ontgrendel de volledige Trakt-ervaring, boordevol functies voor fans van series en films."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Upgrade naar VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Onbeperkt volgen en meer."
     }
   }
 }

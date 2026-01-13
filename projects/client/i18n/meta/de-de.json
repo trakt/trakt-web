@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Meinungen, Bewertungen und Listen, denen andere gerne folgen werden."
     },
+    "text_landing_numbers_1": {
+      "default": "Jahre gemeinsames Schauen"
+    },
+    "text_landing_numbers_2": {
+      "default": "Mio. Serien & Film-Liebhaber"
+    },
+    "text_landing_numbers_3": {
+      "default": "Mio. Titel wöchentlich verfolgt"
+    },
     "list_title_trending": {
       "default": "Angesagt"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Anwenden"
     },
+    "button_text_continue": {
+      "default": "Weiter"
+    },
     "button_label_create_list": {
       "default": "Liste erstellen"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Möchten Sie nicht mehr gefragt werden, was Sie kürzlich gesehen haben?"
+    },
+    "text_billing_month_for_free": {
+      "default": "1 Monat gratis testen und dann:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Keine sofortige Zahlung erforderlich."
+    },
+    "text_billing_try_for_free": {
+      "default": "Jetzt kostenlos testen!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "VIP aufwerten"
+    },
+    "text_billing_disclaimer": {
+      "default": "Die Zahlung beginnt am Ende der Testphase. Das Abonnement verlängert sich automatisch und wird bis zur Kündigung alle {period} berechnet. Jederzeit über das Google Play Abonnement-Center kündbar.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Sie sind jetzt Trakt VIP!\nVielen Dank für Ihre Unterstützung und genießen Sie."
+    },
+    "text_billing_period_month": {
+      "default": "Monat"
+    },
+    "text_vip_upsell_default": {
+      "default": "Verbessern Sie Ihre Trakt-Erfahrung"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Werten Sie auf VIP auf und schalten Sie das volle Trakt-Erlebnis frei, vollgepackt mit Funktionen für Serien- und Filmliebhaber."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "VIP aufwerten!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Unbegrenztes Tracking und mehr."
     }
   }
 }

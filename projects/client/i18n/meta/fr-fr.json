@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Opinions, notes et listes que les autres adoreront suivre."
     },
+    "text_landing_numbers_1": {
+      "default": "années de visionnage ensemble"
+    },
+    "text_landing_numbers_2": {
+      "default": "millions d'amateurs de séries et films"
+    },
+    "text_landing_numbers_3": {
+      "default": "millions de titres suivis chaque semaine"
+    },
     "list_title_trending": {
       "default": "Tendances"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Appliquer"
     },
+    "button_text_continue": {
+      "default": "Continuer"
+    },
     "button_label_create_list": {
       "default": "Créer une liste"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Voulez-vous arrêter d'être sollicité pour noter ce que vous avez regardé récemment ?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Essayez 1 mois gratuitement, puis :"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Aucun paiement immédiat requis."
+    },
+    "text_billing_try_for_free": {
+      "default": "Essayez maintenant gratuitement !"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Passer VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Le paiement débutera à la fin de la période d'essai. L'abonnement se renouvelle automatiquement et est facturé chaque {period} jusqu'à annulation. Annulez à tout moment via le Centre d'abonnements Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Vous êtes maintenant un VIP Trakt !\nMerci pour votre soutien et profitez-en bien."
+    },
+    "text_billing_period_month": {
+      "default": "mois"
+    },
+    "text_vip_upsell_default": {
+      "default": "Améliorez votre expérience Trakt"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Passez VIP et débloquez l'expérience Trakt complète, riche en fonctionnalités conçues pour les passionnés de séries et de films."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Passez VIP !"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Suivi illimité et plus encore."
     }
   }
 }

@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Мнения, оценки и списъци, които другите ще харесат да следят."
     },
+    "text_landing_numbers_1": {
+      "default": "години гледане заедно"
+    },
+    "text_landing_numbers_2": {
+      "default": "милиона любители на сериали и филми"
+    },
+    "text_landing_numbers_3": {
+      "default": "милиона заглавия, следени седмично"
+    },
     "list_title_trending": {
       "default": "Популярно в моменра"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Приложи"
     },
+    "button_text_continue": {
+      "default": "Продължи"
+    },
     "button_label_create_list": {
       "default": "Създай списък"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Искате ли да спрете да бъдете питани за оценка на това, което наскоро сте гледали?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Опитайте 1 месец безплатно и след това:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Не се изисква незабавно плащане."
+    },
+    "text_billing_try_for_free": {
+      "default": "Опитайте безплатно сега!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Надграждане до VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Плащането започва в края на пробния период. Абонаментът се подновява автоматично и се таксува всеки {period}, докато не бъде отменен. Можете да отмените по всяко време чрез Центъра за абонаменти на Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Вече сте VIP на Trakt!\nБлагодарим ви за подкрепата и се наслаждавайте."
+    },
+    "text_billing_period_month": {
+      "default": "месец"
+    },
+    "text_vip_upsell_default": {
+      "default": "Подобрете вашето Trakt изживяване"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Надградете до VIP и отключете пълното Trakt изживяване, изпълнено с функции за любителите на сериали и филми."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Надграждане до VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Неограничено проследяване и още."
     }
   }
 }

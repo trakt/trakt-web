@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Opiniones, calificaciones y listas que a otros les encantará seguir."
     },
+    "text_landing_numbers_1": {
+      "default": "años de ver juntos"
+    },
+    "text_landing_numbers_2": {
+      "default": "millones de fans de series y pelis"
+    },
+    "text_landing_numbers_3": {
+      "default": "millones de títulos seguidos cada semana"
+    },
     "list_title_trending": {
       "default": "Tendencias"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Aplicar"
     },
+    "button_text_continue": {
+      "default": "Continuar"
+    },
     "button_label_create_list": {
       "default": "Crear lista"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "¿Quieres que dejemos de preguntarte para que califiques lo que viste recientemente?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Prueba 1 mes gratis y después:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "No necesitas pagar de inmediato."
+    },
+    "text_billing_try_for_free": {
+      "default": "¡Pruébalo gratis ya!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Ser VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "El pago inicia al final de tu prueba. Tu suscripción se renueva automáticamente y se cobra cada {period} hasta que la canceles. Puedes cancelar cuando quieras desde el Centro de Suscripciones de Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "¡Ya eres VIP de Trakt!\nGracias por tu apoyo, ¡disfrútalo!"
+    },
+    "text_billing_period_month": {
+      "default": "mes"
+    },
+    "text_vip_upsell_default": {
+      "default": "Mejora tu experiencia en Trakt"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Hazte VIP y desbloquea toda la experiencia Trakt, con funciones geniales para los amantes de las series y películas."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "¡Hazte VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Seguimiento ilimitado y más."
     }
   }
 }

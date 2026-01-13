@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Opinii, evaluări și liste pe care alții le vor adora să le urmărească."
     },
+    "text_landing_numbers_1": {
+      "default": "ani de vizionare împreună"
+    },
+    "text_landing_numbers_2": {
+      "default": "milioane de iubitori de seriale & filme"
+    },
+    "text_landing_numbers_3": {
+      "default": "milioane de titluri urmărite săptămânal"
+    },
     "list_title_trending": {
       "default": "Trending"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Aplică"
     },
+    "button_text_continue": {
+      "default": "Continuă"
+    },
     "button_label_create_list": {
       "default": "Crează listă"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Dorești să nu mai fii întrebat să evaluezi ce ai urmărit recent?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Încearcă 1 lună gratuit și apoi:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Nu este necesară plata imediată."
+    },
+    "text_billing_try_for_free": {
+      "default": "Încearcă acum gratuit!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Fă upgrade la VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Plata începe la sfârșitul perioadei de probă. Abonamentul se reînnoiește automat și este facturat fiecare {period} până la anulare. Anulează oricând prin Centrul de Abonamente Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Acum ești VIP Trakt!\nMulțumim pentru sprijin și bucură-te."
+    },
+    "text_billing_period_month": {
+      "default": "lună"
+    },
+    "text_vip_upsell_default": {
+      "default": "Îmbunătățește-ți experiența Trakt"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Fă upgrade la VIP și deblochează experiența Trakt completă, plină de funcții create pentru pasionații de seriale și filme."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Fă upgrade la VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Urmărire nelimitată și multe altele."
     }
   }
 }

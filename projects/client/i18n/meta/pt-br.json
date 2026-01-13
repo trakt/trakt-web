@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Opiniões, avaliações e listas que outros vão adorar seguir."
     },
+    "text_landing_numbers_1": {
+      "default": "anos de maratonas juntos"
+    },
+    "text_landing_numbers_2": {
+      "default": "milhões de amantes de séries e filmes"
+    },
+    "text_landing_numbers_3": {
+      "default": "milhões de títulos acompanhados semanalmente"
+    },
     "list_title_trending": {
       "default": "Tendências"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Aplicar"
     },
+    "button_text_continue": {
+      "default": "Continuar"
+    },
     "button_label_create_list": {
       "default": "Criar lista"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Você quer parar de ser perguntado para avaliar o que assistiu recentemente?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Experimente 1 mês grátis e depois:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Nenhum pagamento imediato é necessário."
+    },
+    "text_billing_try_for_free": {
+      "default": "Experimente grátis agora!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Upgrade para VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "O pagamento começa ao final do período de teste. A assinatura é renovada automaticamente e cobrada a cada {period} até o cancelamento. Cancele a qualquer momento pelo Centro de Assinaturas do Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Você agora é um VIP Trakt!\nObrigado pelo seu apoio e aproveite."
+    },
+    "text_billing_period_month": {
+      "default": "mês"
+    },
+    "text_vip_upsell_default": {
+      "default": "Turbine sua experiência Trakt"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Faça o upgrade para VIP e desbloqueie a experiência Trakt completa, repleta de recursos para fãs de séries e filmes."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Upgrade para VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Acompanhamento ilimitado e muito mais."
     }
   }
 }

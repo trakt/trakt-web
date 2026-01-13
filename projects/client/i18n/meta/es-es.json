@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Opiniones, valoraciones y listas que otros adorarán seguir."
     },
+    "text_landing_numbers_1": {
+      "default": "años de visionado juntos"
+    },
+    "text_landing_numbers_2": {
+      "default": "millones de amantes de series y películas"
+    },
+    "text_landing_numbers_3": {
+      "default": "millones de títulos seguidos semanalmente"
+    },
     "list_title_trending": {
       "default": "Tendencias"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Aplicar"
     },
+    "button_text_continue": {
+      "default": "Continuar"
+    },
     "button_label_create_list": {
       "default": "Crear lista"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "¿Quieres dejar de que te pregunten para valorar lo que has visto recientemente?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Prueba 1 mes gratis y luego:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "No se requiere pago inmediato."
+    },
+    "text_billing_try_for_free": {
+      "default": "¡Pruébalo gratis ahora!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Mejorar a VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "El pago comenzará al final del período de prueba. La suscripción se renueva automáticamente y se factura cada {period} hasta que se cancele. Cancela en cualquier momento a través del Centro de Suscripciones de Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "¡Ahora eres VIP de Trakt!\nGracias por tu apoyo y disfrútalo."
+    },
+    "text_billing_period_month": {
+      "default": "mes"
+    },
+    "text_vip_upsell_default": {
+      "default": "Mejora tu experiencia Trakt"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Mejora a VIP y desbloquea la experiencia Trakt completa, repleta de funciones para los amantes de series y películas."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "¡Mejorar a VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Seguimiento ilimitado y más."
     }
   }
 }

@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Opinie, oceny i listy, które inni pokochają obserwować."
     },
+    "text_landing_numbers_1": {
+      "default": "lata wspólnego oglądania"
+    },
+    "text_landing_numbers_2": {
+      "default": "mln. fanów seriali i filmów"
+    },
+    "text_landing_numbers_3": {
+      "default": "mln. tytułów śledzonych tygodniowo"
+    },
     "list_title_trending": {
       "default": "Teraz popularne"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Zastosuj"
     },
+    "button_text_continue": {
+      "default": "Kontynuuj"
+    },
     "button_label_create_list": {
       "default": "Utwórz listę"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Czy chcesz przestać być proszonym o ocenę tego, co ostatnio oglądałeś?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Wypróbuj 1 miesiąc za darmo, a potem:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Płatność nie jest wymagana od razu."
+    },
+    "text_billing_try_for_free": {
+      "default": "Wypróbuj teraz za darmo!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Uaktualnij do VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Płatność rozpoczyna się po zakończeniu okresu próbnego. Subskrypcja odnawia się automatycznie i jest fakturowana co {period} do momentu anulowania. Anuluj w dowolnym momencie w Centrum subskrypcji Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Jesteś teraz VIPem Trakt!\nDziękujemy za wsparcie i miłego korzystania."
+    },
+    "text_billing_period_month": {
+      "default": "miesiąc"
+    },
+    "text_vip_upsell_default": {
+      "default": "Wzbogać swoje doświadczenia z Trakt"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Uaktualnij do VIP i odblokuj pełne doświadczenie Trakt, pełne funkcji stworzonych dla miłośników seriali i filmów."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Uaktualnij do VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Nieograniczone śledzenie i więcej."
     }
   }
 }

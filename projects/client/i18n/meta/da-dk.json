@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Meninger, vurderinger og lister, som andre vil elske at følge."
     },
+    "text_landing_numbers_1": {
+      "default": "års seertid sammen"
+    },
+    "text_landing_numbers_2": {
+      "default": "mio. serie- & filmelskere"
+    },
+    "text_landing_numbers_3": {
+      "default": "mio. titler sporet ugentligt"
+    },
     "list_title_trending": {
       "default": "Populært"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Anvend"
     },
+    "button_text_continue": {
+      "default": "Fortsæt"
+    },
     "button_label_create_list": {
       "default": "Opret liste"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Vil du stoppe med at blive spurgt om at bedømme det, du for nylig har set?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Prøv 1 måned gratis og derefter:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Ingen øjeblikkelig betaling påkrævet."
+    },
+    "text_billing_try_for_free": {
+      "default": "Prøv gratis nu!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Opgrader til VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Betalingen påbegyndes ved afslutningen af prøveperioden. Abonnementet fornyes automatisk og faktureres hver {period}, indtil det opsiges. Opsig når som helst via Google Plays abonnementscenter.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Du er nu Trakt VIP!\nTak for din støtte, og god fornøjelse."
+    },
+    "text_billing_period_month": {
+      "default": "måned"
+    },
+    "text_vip_upsell_default": {
+      "default": "Forbedr din Trakt-oplevelse"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Opgrader til VIP og lås op for den fulde Trakt-oplevelse, fyldt med funktioner til fans af serier og film."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Opgrader til VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Ubegrænset sporing og meget mere."
     }
   }
 }
