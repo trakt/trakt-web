@@ -11,13 +11,13 @@ const movieTriviaRequest = async (
   { fetch, slug }: MovieTriviaParams,
 ) => {
   const response = await rawApiFetch(
-    { fetch, path: `/v3/media/movie/${slug}/info/1/version/1` },
+    { fetch, path: `/v3/media/movie/${slug}/info/5/version/1` },
   );
 
-  const body = response.ok ? await response.json() : [];
+  const body = response.ok ? await response.json() : { summary: [], items: [] };
 
   return {
-    body: body as TriviaResponse[],
+    body: body as TriviaResponse,
     status: 200,
   };
 };
@@ -28,8 +28,8 @@ export const movieTriviaQuery = defineQuery({
   dependencies: (params) => [params.slug],
   request: movieTriviaRequest,
   mapper: (response) =>
-    response.body.map((entry, index) =>
-      mapToTrivia(`movie_trivia_${index}`, entry)
+    response.body.items.map((entry) =>
+      mapToTrivia(`movie_trivia_${entry.fact_id}`, entry)
     ),
   schema: MediaTriviaSchema.array(),
   ttl: time.days(1),

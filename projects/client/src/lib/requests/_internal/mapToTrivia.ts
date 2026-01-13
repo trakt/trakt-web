@@ -3,7 +3,7 @@ import type { TriviaResponse } from '../models/TriviaResponse.ts';
 
 export function mapToTrivia(
   key: string,
-  response: TriviaResponse,
+  response: TriviaResponse['items'][0],
 ): MediaTrivia {
   return {
     key,

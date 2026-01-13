@@ -11,13 +11,13 @@ const showTriviaRequest = async (
   { fetch, slug }: ShowTriviaParams,
 ) => {
   const response = await rawApiFetch(
-    { fetch, path: `/v3/media/show/${slug}/info/1/version/1` },
+    { fetch, path: `/v3/media/show/${slug}/info/5/version/1` },
   );
 
-  const body = response.ok ? await response.json() : [];
+  const body = response.ok ? await response.json() : { summary: [], items: [] };
 
   return {
-    body: body as TriviaResponse[],
+    body: body as TriviaResponse,
     status: 200,
   };
 };
@@ -28,8 +28,8 @@ export const showTriviaQuery = defineQuery({
   dependencies: (params) => [params.slug],
   request: showTriviaRequest,
   mapper: (response) =>
-    response.body.map((entry, index) =>
-      mapToTrivia(`show_trivia_${index}`, entry)
+    response.body.items.map((entry) =>
+      mapToTrivia(`show_trivia_${entry.fact_id}`, entry)
     ),
   schema: MediaTriviaSchema.array(),
   ttl: time.days(1),
