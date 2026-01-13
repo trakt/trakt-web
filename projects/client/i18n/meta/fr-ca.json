@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Opinions, cotes et listes que les autres vont adorer suivre."
     },
+    "text_landing_numbers_1": {
+      "default": "années à regarder ensemble"
+    },
+    "text_landing_numbers_2": {
+      "default": "millions d'amateurs de films et séries"
+    },
+    "text_landing_numbers_3": {
+      "default": "millions de titres suivis chaque semaine"
+    },
     "list_title_trending": {
       "default": "Tendance"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Appliquer"
     },
+    "button_text_continue": {
+      "default": "Continuer"
+    },
     "button_label_create_list": {
       "default": "Créer une liste"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Veux-tu arrêter qu'on te demande d'évaluer ce que tu as vu récemment ?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Essaie 1 mois gratuit, puis :"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Aucun paiement demandé tout de suite."
+    },
+    "text_billing_try_for_free": {
+      "default": "Essaie gratuit maintenant !"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Devenir VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Le paiement commence à la fin de la période d'essai. L'abonnement se renouvelle automatiquement et est facturé chaque {period} jusqu'à annulation. Annulez en tout temps via le Centre d'abonnement Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Tu es maintenant un VIP Trakt !\nMerci pour ton soutien, profite bien."
+    },
+    "text_billing_period_month": {
+      "default": "mois"
+    },
+    "text_vip_upsell_default": {
+      "default": "Améliore ton expérience Trakt"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Deviens VIP et débloque toute l'expérience Trakt, remplie de fonctions pensées pour les fans de films et séries."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Deviens VIP !"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Suivi illimité et plus encore."
     }
   }
 }

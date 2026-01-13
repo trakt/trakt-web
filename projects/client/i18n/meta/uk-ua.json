@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Думки, оцінки та списки, які інші захочуть відстежувати."
     },
+    "text_landing_numbers_1": {
+      "default": "років спільних переглядів"
+    },
+    "text_landing_numbers_2": {
+      "default": "млн. шанувальників серіалів і фільмів"
+    },
+    "text_landing_numbers_3": {
+      "default": "млн. тайтлів відстежено щотижня"
+    },
     "list_title_trending": {
       "default": "Тренди"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Застосувати"
     },
+    "button_text_continue": {
+      "default": "Продовжити"
+    },
     "button_label_create_list": {
       "default": "Створити список"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Чи бажаєте ви припинити запитання щодо оцінки того, що ви нещодавно переглянули?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Спробуйте 1 місяць безкоштовно, а потім:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Негайна оплата не потрібна."
+    },
+    "text_billing_try_for_free": {
+      "default": "Спробуйте зараз безкоштовно!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Оновити до VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Оплата почнеться після завершення пробного періоду. Підписка автоматично поновлюється та виставляється що {period}, доки не буде скасована. Скасувати будь-коли можна через Центр підписок Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Ви тепер VIP Trakt!\nДякуємо за вашу підтримку та насолоджуйтесь."
+    },
+    "text_billing_period_month": {
+      "default": "місяць"
+    },
+    "text_vip_upsell_default": {
+      "default": "Покращте свій досвід Trakt"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Оновіться до VIP та розблокуйте повний досвід Trakt, наповнений функціями для любителів серіалів та фільмів."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Оновити до VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Необмежене відстеження та більше."
     }
   }
 }

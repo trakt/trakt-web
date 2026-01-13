@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "他の人がフォローしたくなるような意見、評価、リスト。"
     },
+    "text_landing_numbers_1": {
+      "default": "年間の視聴履歴"
+    },
+    "text_landing_numbers_2": {
+      "default": "百万人のドラマ＆映画ファン"
+    },
+    "text_landing_numbers_3": {
+      "default": "百万件のタイトルを毎週追跡"
+    },
     "list_title_trending": {
       "default": "話題の作品"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "適用"
     },
+    "button_text_continue": {
+      "default": "続ける"
+    },
     "button_label_create_list": {
       "default": "リストを作成"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "最近視聴したコンテンツの評価を求めるのをやめますか？"
+    },
+    "text_billing_month_for_free": {
+      "default": "まず1ヶ月無料でお試しください。その後:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "すぐにはお支払いは不要です。"
+    },
+    "text_billing_try_for_free": {
+      "default": "今すぐ無料でお試し！"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "VIPにアップグレード"
+    },
+    "text_billing_disclaimer": {
+      "default": "トライアル期間終了後に課金が開始されます。サブスクリプションは自動更新され、キャンセルされるまで{period}ごとに請求されます。Google Playのサブスクリプションセンターからいつでもキャンセルできます。",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "あなたはTrakt VIPになりました！\nサポートありがとうございます。お楽しみください。"
+    },
+    "text_billing_period_month": {
+      "default": "ヶ月"
+    },
+    "text_vip_upsell_default": {
+      "default": "Trakt体験をさらに豊かに"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "VIPにアップグレードして、テレビドラマや映画愛好家のために作られた機能満載のTrakt体験をアンロックしましょう。"
+    },
+    "text_vip_upsell_default_2": {
+      "default": "VIPにアップグレード！"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "無制限の追跡機能など。"
     }
   }
 }

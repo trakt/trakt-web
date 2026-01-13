@@ -257,6 +257,15 @@
     "text_landing_share": {
       "default": "Opinions, ratings, and lists that others will love to follow."
     },
+    "text_landing_numbers_1": {
+      "default": "years of watching together"
+    },
+    "text_landing_numbers_2": {
+      "default": "mil. shows & movies lovers"
+    },
+    "text_landing_numbers_3": {
+      "default": "mil. titles tracked weekly"
+    },
     "list_title_trending": {
       "default": "Trending"
     },
@@ -1497,6 +1506,9 @@
     "button_text_apply": {
       "default": "Apply"
     },
+    "button_text_continue": {
+      "default": "Continue"
+    },
     "button_label_create_list": {
       "default": "Create list"
     },
@@ -2494,6 +2506,44 @@
     },
     "warning_prompt_suppress_ratings_toast": {
       "default": "Do you want to stop being asked to rate what you recently watched?"
+    },
+    "text_billing_month_for_free": {
+      "default": "Try 1 month for free and then:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "No immediate payment required."
+    },
+    "text_billing_try_for_free": {
+      "default": "Try now for free!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Upgrade to VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Payment starts at end of trial period. Subscription auto-renews, and is billed each {period} until canceled. Cancel any time via Google Play Subscription Center.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "You are now a Trakt VIP!\nThank you for your support and enjoy."
+    },
+    "text_billing_period_month": {
+      "default": "month"
+    },
+    "text_vip_upsell_default": {
+      "default": "Enhance your Trakt experience"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Upgrade to VIP and unlock the full Trakt experience, packed with features built for TV Shows and Movies lovers."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Upgrade to VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Unlimited tracking and more."
     }
   }
 }
