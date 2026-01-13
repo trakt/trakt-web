@@ -645,7 +645,7 @@
       ]
     },
     "text_landing_share": {
-      "default": "opinions, ratings and lists that others will love to follow.",
+      "default": "opinions, ratings, and lists that others will love to follow.",
       "description": "Description for the share step. This should be a short and concise message that indicates what users can share.",
       "exclude": [
         "ios"
