@@ -6642,15 +6642,15 @@
       ]
     },
     "text_vip_upsell_default_description": {
-      "default": "Enhance your Trakt experience",
-      "description": "Upgrade to VIP and unlock the full Trakt experience, packed with features built for TV Shows and Movies lovers.",
+      "default": "Upgrade to VIP and unlock the full Trakt experience, packed with features built for TV Shows and Movies lovers.",
+      "description": "Description used to promote a VIP package for the user.",
       "exclude": [
         "web",
         "ios"
       ]
     },
     "text_vip_upsell_default_2": {
-      "default": "Enhance your Trakt experience",
+      "default": "Upgrade to VIP!",
       "description": "Text used to promote a VIP package for the user.",
       "exclude": [
         "web",
@@ -6658,8 +6658,8 @@
       ]
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Upgrade to VIP!",
-      "description": "Unlimited tracking and more.",
+      "default": "Unlimited tracking and more.",
+      "description": "Description used to promote a VIP package for the user.",
       "exclude": [
         "web",
         "ios"
