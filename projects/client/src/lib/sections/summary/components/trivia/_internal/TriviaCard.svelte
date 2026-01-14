@@ -52,5 +52,10 @@
     :global(.trakt-spoiler) {
       cursor: pointer;
     }
+
+    :global(p),
+    :global(li) {
+      font-size: inherit;
+    }
   }
 </style>
