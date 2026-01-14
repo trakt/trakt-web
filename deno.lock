@@ -35,7 +35,7 @@
     "npm:eslint@9.39.2": "9.39.2",
     "npm:firebase@12.7.0": "12.7.0_@firebase+app@0.14.6_@firebase+app-types@0.9.3_@firebase+app-compat@0.5.6",
     "npm:flowbite-svelte@^1.31.0": "1.31.0_svelte@5.46.3__acorn@8.15.0_tailwindcss@4.1.18_tailwind-merge@3.4.0",
-    "npm:globals@16.5.0": "16.5.0",
+    "npm:globals@17.0.0": "17.0.0",
     "npm:idb-keyval@6.2.2": "6.2.2",
     "npm:jsdom@26.1.0": "26.1.0",
     "npm:marked@^17.0.1": "17.0.1",
@@ -4617,6 +4617,9 @@
     "globals@16.5.0": {
       "integrity": "sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ=="
     },
+    "globals@17.0.0": {
+      "integrity": "sha512-gv5BeD2EssA793rlFWVPMMCqefTlpusw6/2TbAVMy0FzcG8wKJn4O+NqJ4+XWmmwrayJgw5TzrmWjFgmz1XPqw=="
+    },
     "globalthis@1.0.4": {
       "integrity": "sha512-DpLKbNU4WylpxJykQujfCcwYWiV/Jhm50Goo0wrVILAv5jOr9d+H+UR3PhSCD2rCCEIg0uc+G+muBTwD54JhDQ==",
       "dependencies": [
@@ -7490,7 +7493,7 @@
             "npm:eslint@9.39.2",
             "npm:firebase@12.7.0",
             "npm:flowbite-svelte@^1.31.0",
-            "npm:globals@16.5.0",
+            "npm:globals@17.0.0",
             "npm:idb-keyval@6.2.2",
             "npm:jsdom@26.1.0",
             "npm:marked@^17.0.1",
