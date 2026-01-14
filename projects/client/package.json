@@ -65,10 +65,10 @@
     "vitest": "3.2.4"
   },
   "dependencies": {
-    "@inlang/paraglide-js": "2.5.0",
+    "@inlang/paraglide-js": "2.8.0",
     "@libn/fuzzy": "npm:@jsr/libn__fuzzy@^0.4.0",
-    "@sentry/sveltekit": "10.27.0",
-    "@sveltejs/kit": "^2.49.1",
+    "@sentry/sveltekit": "10.33.0",
+    "@sveltejs/kit": "^2.49.4",
     "@tanstack/svelte-query": "5.90.2",
     "@tanstack/svelte-query-devtools": "5.90.2",
     "@tanstack/svelte-query-persist-client": "5.90.2",
@@ -76,15 +76,15 @@
     "@ts-rest/core": "3.52.1",
     "@use-gesture/vanilla": "10.3.1",
     "date-fns": "4.1.0",
-    "firebase": "12.6.0",
-    "flowbite-svelte": "^1.29.1",
+    "firebase": "12.7.0",
+    "flowbite-svelte": "^1.31.0",
     "idb-keyval": "6.2.2",
     "marked": "^17.0.1",
     "oidc-client-ts": "3.4.1",
-    "plyr": "^3.8.3",
+    "plyr": "^3.8.4",
     "resolve-accept-language": "3.1.15",
     "rxjs": "^7.8.2",
-    "svelte": "^5.45.2",
+    "svelte": "^5.46.3",
     "svelte-confetti": "^2.3.2",
     "ts-retry": "^6.0.0",
     "typesense": "^2.1.0",
@@ -93,6 +93,6 @@
     "workbox-routing": "7.4.0",
     "workbox-strategies": "7.4.0",
     "zod": "3.25.76",
-    "zod-to-json-schema": "3.25.0"
+    "zod-to-json-schema": "3.25.1"
   }
 }
