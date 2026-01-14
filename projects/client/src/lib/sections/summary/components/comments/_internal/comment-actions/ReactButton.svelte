@@ -37,7 +37,7 @@
   }
 
   const isDisabled = $derived($isReacting);
-  const hasDistribution = $derived($currentReaction ?? $isReacting);
+  const hasDistribution = $derived($summary.count > 0 || $isReacting);
 </script>
 
 {#snippet content()}
