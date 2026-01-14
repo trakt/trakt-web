@@ -86,7 +86,7 @@
   .trakt-summary-contextual-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .trakt-summary-actions {
