@@ -18,10 +18,13 @@
 
   const { plexLibrary } = useUser();
 
-  const hasLibraryItems = $derived(
+  const hasPlexItems = $derived(
     $plexLibrary &&
       ($plexLibrary.movieIds.length > 0 || $plexLibrary.episodeIds.length > 0),
   );
+
+  // FIXME: when we have native plex sync, always show skeleton + cta/upsell to sync plex
+  const hasLibraryItems = $derived($libraries.length > 0 || hasPlexItems);
 </script>
 
 {#if hasLibraryItems}
