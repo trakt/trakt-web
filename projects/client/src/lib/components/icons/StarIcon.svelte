@@ -12,7 +12,7 @@
     }
   });
 
-  const clipId = `starFill-${Math.random().toString(36).slice(2, 10)}`;
+  const clipId = `starFill-${crypto.randomUUID()}`;
 </script>
 
 <svg
