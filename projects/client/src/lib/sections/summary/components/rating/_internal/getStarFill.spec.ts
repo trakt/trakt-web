@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { getStarFillPercentage } from './getStarFillPercentage.ts';
+import { getStarFill } from './getStarFill.ts';
 
-describe('getStarFillPercentage', () => {
+describe('getStarFill', () => {
   it('returns 0 if rating is undefined', () => {
     const star = { index: 1, value: 2, range: { min: 0, max: 2 } };
-    expect(getStarFillPercentage(star)).toBe(0);
+    expect(getStarFill(star)).toBe('none');
   });
 
   it('returns 100 up to the current rating', () => {
@@ -13,9 +13,9 @@ describe('getStarFillPercentage', () => {
     const star4 = { index: 4, value: 8, range: { min: 6, max: 8 } };
 
     const rating = 6;
-    expect(getStarFillPercentage(star2, rating)).toBe(100);
-    expect(getStarFillPercentage(star3, rating)).toBe(100);
-    expect(getStarFillPercentage(star4, rating)).toBe(0);
+    expect(getStarFill(star2, rating)).toBe('full');
+    expect(getStarFill(star3, rating)).toBe('full');
+    expect(getStarFill(star4, rating)).toBe('none');
   });
 
   it('rounds to entire stars', () => {
@@ -24,8 +24,8 @@ describe('getStarFillPercentage', () => {
     const star4 = { index: 4, value: 8, range: { min: 6, max: 8 } };
 
     const rating = 7;
-    expect(getStarFillPercentage(star2, rating)).toBe(100);
-    expect(getStarFillPercentage(star3, rating)).toBe(100);
-    expect(getStarFillPercentage(star4, rating)).toBe(50);
+    expect(getStarFill(star2, rating)).toBe('full');
+    expect(getStarFill(star3, rating)).toBe('full');
+    expect(getStarFill(star4, rating)).toBe('half');
   });
 });

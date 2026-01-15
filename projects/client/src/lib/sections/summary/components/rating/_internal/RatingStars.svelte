@@ -6,10 +6,15 @@
     rating,
     isRating,
     onAddRating,
+    onRemoveRating,
+    variant = "half",
   }: {
     rating?: number;
     isRating: boolean;
     onAddRating: (rating: number, ev: MouseEvent) => void;
+    onRemoveRating: () => void;
+    // FIXME: remove when allowing half star filtering (https://github.com/trakt/trakt-web/issues/1466)
+    variant?: "full" | "half";
   } = $props();
 
   /*
@@ -20,9 +25,15 @@
   const reversedStars = $derived([...STAR_RATINGS].reverse());
 </script>
 
-<div class="trakt-rating-stars">
+<div class="trakt-rating-stars" data-variant={variant}>
   {#each reversedStars as star (star.index)}
-    <RateActionButton {rating} {star} isDisabled={isRating} {onAddRating} />
+    <RateActionButton
+      {rating}
+      {star}
+      isDisabled={isRating}
+      {onAddRating}
+      {onRemoveRating}
+    />
   {/each}
 </div>
 
@@ -36,16 +47,37 @@
 
     @include for-mouse() {
       :global(.trakt-rate-button) {
+        --star-hover-color: var(--orange-400);
+        --star-hover-width: 100%;
+
         &:hover,
         &:hover ~ :global(.trakt-rate-button) {
-          /* TODO extract css var for color */
           :global(.trakt-action-button:not([disabled])) {
-            color: var(--orange-400);
-          }
+            color: var(--star-hover-color);
 
-          :global(svg path) {
-            fill: currentColor;
+            :global(svg rect) {
+              width: var(--star-hover-width);
+              fill: currentColor;
+            }
           }
+        }
+      }
+    }
+  }
+
+  .trakt-rating-stars[data-variant="half"] {
+    @include for-mouse() {
+      :global(.trakt-rate-button.is-last-star[data-star-fill="half"]) {
+        &:hover,
+        &:hover ~ :global(.trakt-rate-button) {
+          --star-hover-color: var(--red-400);
+        }
+      }
+
+      :global(.trakt-rate-button.is-last-star[data-star-fill="full"]),
+      :global(.trakt-rate-button.is-last-star[data-star-fill="half"]) {
+        &:hover {
+          --star-hover-width: 50%;
         }
       }
     }

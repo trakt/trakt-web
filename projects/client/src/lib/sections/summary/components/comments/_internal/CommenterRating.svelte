@@ -25,7 +25,7 @@
 {#if !isOwnComment && rating}
   <div class="trakt-commenter-rating">
     <span>{toHumanNumber(rating, getLocale())}</span>
-    <StarIcon fillPercent={100} />
+    <StarIcon fill="full" />
   </div>
 {/if}
 

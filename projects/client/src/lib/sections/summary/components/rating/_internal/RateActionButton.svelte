@@ -4,46 +4,62 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { StarRating } from "../models/StarRating";
-  import { getStarFillPercentage } from "./getStarFillPercentage";
+  import { getStarFill } from "./getStarFill";
 
   const {
     star,
     rating,
     isDisabled,
     onAddRating,
+    onRemoveRating,
     isCurrentRating,
   }: {
     star: StarRating;
     rating?: number;
     isDisabled: boolean;
     onAddRating: (rating: number, ev: MouseEvent) => void;
+    onRemoveRating: () => void;
     isCurrentRating?: boolean;
   } = $props();
 
-  const fillPercent = $derived(
-    isCurrentRating ? 100 : getStarFillPercentage(star, rating),
+  const starFill = $derived(
+    isCurrentRating ? "full" : getStarFill(star, rating),
   );
 
-  const addRating = (ev: MouseEvent) => {
+  const handleRating = (ev: MouseEvent) => {
+    if (starFill === "half") {
+      onRemoveRating();
+      return;
+    }
+
     const value =
       star.value === rating
         ? (star.range.max + star.range.min) / 2
         : star.value;
     onAddRating(value, ev);
   };
+
+  const isLastStar = $derived(
+    rating && rating > star.range.min && rating <= star.value,
+  );
 </script>
 
-<div class="trakt-rate-button" class:has-disabled-button={isDisabled}>
+<div
+  class="trakt-rate-button"
+  class:has-disabled-button={isDisabled}
+  class:is-last-star={isLastStar}
+  data-star-fill={starFill}
+>
   <ActionButton
     disabled={isDisabled}
     label={m.button_label_star_rating({ stars: star.index })}
-    onclick={addRating}
+    onclick={handleRating}
     style="ghost"
     variant="primary"
     size="small"
     navigationType={DpadNavigationType.Item}
   >
-    <StarIcon {fillPercent} />
+    <StarIcon fill={starFill} />
   </ActionButton>
 </div>
 
@@ -60,14 +76,6 @@
       &:hover {
         :global(.trakt-action-button) {
           background: transparent;
-        }
-
-        :global(.trakt-action-button:not([disabled])) {
-          color: var(--orange-400);
-        }
-
-        :global(svg path) {
-          fill: currentColor;
         }
       }
     }

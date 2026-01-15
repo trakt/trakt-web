@@ -1,7 +1,16 @@
 <script lang="ts">
-  const { fillPercent }: { fillPercent: number } = $props();
+  const { fill }: { fill: "none" | "half" | "full" } = $props();
 
-  const fillWidth = $derived(Math.max(0, Math.min(100, fillPercent)) * 0.24);
+  const fillWidth = $derived.by(() => {
+    switch (fill) {
+      case "none":
+        return "0";
+      case "half":
+        return "50%";
+      case "full":
+        return "100%";
+    }
+  });
 
   const clipId = `starFill-${Math.random().toString(36).slice(2, 10)}`;
 </script>

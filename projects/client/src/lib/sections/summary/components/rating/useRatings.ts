@@ -6,8 +6,9 @@ import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.t
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import type { RatingsSyncRequest } from '@trakt/api';
 import { BehaviorSubject, combineLatest, firstValueFrom, map } from 'rxjs';
+import { removeRatingRequest } from '$lib/requests/sync/removeRatingRequest.ts';
+import type { RatingsSyncRequest, RemoveRatingsParams } from '@trakt/api';
 
 type RateableType = ExtendedMediaType;
 
@@ -16,30 +17,23 @@ export type WatchlistStoreProps = {
   id: number;
 };
 
-function toRatingPayload(
+function toAddPayload(
   type: RateableType,
   id: number,
   rating: number,
 ): RatingsSyncRequest {
-  const ratingPayload = {
-    ids: { trakt: id },
-    rating,
-  };
+  const payload = { ids: { trakt: id }, rating };
+  const key = `${type}s` as const;
+  return { [key]: [payload] };
+}
 
-  switch (type) {
-    case 'movie':
-      return {
-        movies: [ratingPayload],
-      };
-    case 'show':
-      return {
-        shows: [ratingPayload],
-      };
-    case 'episode':
-      return {
-        episodes: [ratingPayload],
-      };
-  }
+function toRemovePayload(
+  type: RateableType,
+  id: number,
+): RemoveRatingsParams {
+  const payload = { ids: { trakt: id } };
+  const key = `${type}s` as const;
+  return { [key]: [payload] };
 }
 
 export function useRatings({ type, id }: WatchlistStoreProps) {
@@ -124,7 +118,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     });
 
     await addRatingRequest({
-      body: toRatingPayload(type, id, newRating),
+      body: toAddPayload(type, id, newRating),
     });
     await invalidate(InvalidateAction.Rated(type));
 
@@ -132,9 +126,21 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     dismiss(id, type, 'rating');
   };
 
+  const removeRating = async () => {
+    pendingRating.next(0);
+
+    track({ action: 'removed' });
+    await removeRatingRequest({
+      body: toRemovePayload(type, id),
+    });
+    await invalidate(InvalidateAction.Rated(type));
+    pendingRating.next(null);
+  };
+
   return {
     pendingRating,
     current,
     addRating,
+    removeRating,
   };
 }
