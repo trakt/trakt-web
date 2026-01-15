@@ -47,10 +47,7 @@
     {/snippet}
   </RatingItem>
 
-  <RatingItem
-    rating={imdb?.rating && toPercentage(imdb.rating / 10, languageTag())}
-    url={imdb?.url}
-  >
+  <RatingItem rating={imdb?.rating} url={imdb?.url}>
     <IMDBIcon style={toVotesBasedRating(imdb?.votes)} />
     {#snippet superscript()}
       {i18n.voteText(imdb?.votes ?? 0)}
