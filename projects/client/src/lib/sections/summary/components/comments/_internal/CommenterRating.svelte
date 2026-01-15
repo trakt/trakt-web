@@ -3,10 +3,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { getLocale } from "$lib/features/i18n";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
-  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-  import { STAR_RATINGS } from "../../rating/constants";
-
-  const MAX_RATING = 10;
+  import { toTraktRating } from "$lib/utils/formatting/number/toTraktRating";
 
   const { comment }: { comment: MediaComment } = $props();
 
@@ -17,14 +14,13 @@
     const rating = comment.user.stats.rating;
     if (!rating) return;
 
-    const factor = MAX_RATING / STAR_RATINGS.length;
-    return rating / factor;
+    return toTraktRating(rating, getLocale());
   });
 </script>
 
 {#if !isOwnComment && rating}
   <div class="trakt-commenter-rating">
-    <span>{toHumanNumber(rating, getLocale())}</span>
+    <span>{rating}</span>
     <StarIcon fill="full" />
   </div>
 {/if}

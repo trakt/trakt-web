@@ -18,7 +18,7 @@ export const EpisodeSiloCommentReplyMappedMock: MediaComment[] = [
       'stats': {
         'completedCount': 11,
         'playCount': 11,
-        'rating': null,
+        'rating': undefined,
       },
     },
   },

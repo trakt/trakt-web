@@ -37,7 +37,7 @@ const userCommentRepliesRequest = (
     });
 
 export const commentRepliesQuery = defineInfiniteQuery({
-  key: 'commentReplies',
+  key: 'commentReplies:v2',
   invalidations: [
     InvalidateAction.Comment.Reply('movie'),
     InvalidateAction.Comment.Reply('show'),
