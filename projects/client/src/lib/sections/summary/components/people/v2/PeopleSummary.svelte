@@ -30,12 +30,11 @@
       textFactory={({ title: name }) => m.text_share_person({ name })}
       source={{ id: "person" }}
     />
+    <SocialMediaLinks {person} />
   {/snippet}
 
   {#snippet meta()}
     <PersonTitle name={person.name} knownFor={person.knownFor} />
-
-    <SocialMediaLinks {person} />
 
     <PersonDetails
       birthday={person.birthday}

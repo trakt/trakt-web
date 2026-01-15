@@ -42,7 +42,9 @@
   </div>
 
   <div class="person-meta-info">
-    <SocialMediaLinks {person} variant="compact" />
+    <div class="person-social-media-links">
+      <SocialMediaLinks {person} />
+    </div>
 
     <PersonDetails
       height={person.height}
@@ -66,5 +68,11 @@
     flex-direction: column;
     gap: var(--gap-l);
     flex: 1;
+  }
+
+  .person-social-media-links {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-s);
   }
 </style>
