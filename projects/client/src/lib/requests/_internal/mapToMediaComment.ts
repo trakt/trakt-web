@@ -1,5 +1,6 @@
 import type { CommentResponse } from '@trakt/api';
 import type { MediaComment } from '../models/MediaComment.ts';
+import { mapToTraktRating } from './mapToTraktRating.ts';
 import { mapToUserProfile } from './mapToUserProfile.ts';
 
 export function mapToMediaComment(
@@ -19,7 +20,7 @@ export function mapToMediaComment(
     user: {
       ...mapToUserProfile(commentResponse.user),
       stats: {
-        rating: commentResponse.user_stats.rating,
+        rating: mapToTraktRating(commentResponse.user_stats.rating),
         playCount: commentResponse.user_stats.play_count,
         completedCount: commentResponse.user_stats.completed_count,
       },

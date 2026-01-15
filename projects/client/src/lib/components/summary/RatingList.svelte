@@ -1,14 +1,14 @@
 <script lang="ts">
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
-  import { languageTag } from "$lib/features/i18n";
+  import { getLocale } from "$lib/features/i18n";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
-  import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
   import {
     toRottenAudienceRating,
     toRottenCriticRating,
     toRottenPercentage,
   } from "$lib/utils/formatting/number/toRottenTomatoRating";
+  import { toTraktRating } from "$lib/utils/formatting/number/toTraktRating";
   import { toVotesBasedRating } from "$lib/utils/formatting/number/toVotesBasedRating";
   import PopcornIcon from "../icons/PopcornIcon.svelte";
   import RatingIcon from "../icons/RatingIcon.svelte";
@@ -39,7 +39,7 @@
 
 <div class="trakt-summary-ratings">
   <RatingItem
-    rating={trakt?.rating && toPercentage(trakt.rating, languageTag())}
+    rating={trakt?.rating && toTraktRating(trakt.rating, getLocale())}
   >
     <RatingIcon style={toVotesBasedRating(trakt?.votes)} />
     {#snippet superscript()}

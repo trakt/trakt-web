@@ -19,7 +19,7 @@ export const ShowSiloCommentsMappedMock: MediaComment[] = [
       'stats': {
         'completedCount': 11,
         'playCount': 11,
-        'rating': null,
+        'rating': undefined,
       },
     },
   },

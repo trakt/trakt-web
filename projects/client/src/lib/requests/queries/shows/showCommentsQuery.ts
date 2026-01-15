@@ -32,7 +32,7 @@ const showCommentsRequest = (
     });
 
 export const showCommentsQuery = defineInfiniteQuery({
-  key: 'showComments',
+  key: 'showComments:v2',
   invalidations: [
     InvalidateAction.Comment.Post('show'),
     InvalidateAction.Comment.Reply('show'),
