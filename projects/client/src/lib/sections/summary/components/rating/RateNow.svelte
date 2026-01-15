@@ -21,7 +21,7 @@
   const type = $derived(props.type);
   const id = $derived(props.media.id);
 
-  const { pendingRating, current, addRating } = $derived(
+  const { pendingRating, current, addRating, removeRating } = $derived(
     useRatings({
       type,
       id,
@@ -63,6 +63,7 @@
       <RatingStars
         rating={$pendingRating ?? $current?.rating}
         isRating={$pendingRating !== null}
+        onRemoveRating={removeRating}
         onAddRating={(rating: number, ev: MouseEvent) => {
           if (rating === $current?.rating) {
             return;

@@ -1,21 +1,23 @@
 import type { StarRating } from '../models/StarRating.ts';
 
-export function getStarFillPercentage(
+type StarFill = 'none' | 'half' | 'full';
+
+export function getStarFill(
   star: StarRating,
   rating?: number,
-): number {
+): StarFill {
   if (!rating) {
-    return 0;
+    return 'none';
   }
 
   const { min, max } = star.range;
 
   if (rating >= max) {
-    return 100;
+    return 'full';
   }
   if (rating <= min) {
-    return 0;
+    return 'none';
   }
 
-  return ((rating - min) / (max - min)) * 100;
+  return 'half';
 }

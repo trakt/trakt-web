@@ -59,9 +59,11 @@
       <CloseIcon />
     </ActionButton>
     <RatingStars
+      variant="full"
       rating={currentRating}
       onAddRating={handler}
       isRating={false}
+      onRemoveRating={() => handler()}
     />
   </div>
 </Filter>
