@@ -2544,6 +2544,22 @@
     },
     "text_vip_upsell_default_description_2": {
       "default": "Ubegrenset sporing og mer."
+    },
+    "button_label_like_list": {
+      "default": "Liker {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_unlike_list": {
+      "default": "Slutt å like {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

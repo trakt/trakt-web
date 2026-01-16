@@ -11,6 +11,10 @@ import {
   type UserHistory,
 } from '../queries/currentUserHistoryQuery.ts';
 import {
+  currentUserLikesQuery,
+  type UserLikes,
+} from '../queries/currentUserLikesQuery.ts';
+import {
   currentUserNetworkQuery,
   type UserNetwork,
 } from '../queries/currentUserNetworkQuery.ts';
@@ -101,6 +105,7 @@ export function useUser() {
   const plexLibraryQuerySignal = useQuery(
     currentUserPlexLibraryQuery(),
   );
+  const likesQuerySignal = useQuery(currentUserLikesQuery());
 
   // Create a stream that switches between authorized and anonymous state
   const userContext$ = isAuthorized.pipe(
@@ -134,6 +139,9 @@ export function useUser() {
             episodeIds: [],
             showIds: [],
           }),
+          likes: of<UserLikes>({
+            lists: new Map(),
+          }),
         });
       }
 
@@ -162,6 +170,9 @@ export function useUser() {
         plexLibrary: plexLibraryQuerySignal.pipe(
           map((collection) => collection.data),
         ),
+        likes: likesQuerySignal.pipe(
+          map((likes) => likes.data),
+        ),
       });
     }),
     shareReplay(1),
@@ -176,5 +187,6 @@ export function useUser() {
     favorites: userContext$.pipe(switchMap((ctx) => ctx.favorites)),
     network: userContext$.pipe(switchMap((ctx) => ctx.network)),
     plexLibrary: userContext$.pipe(switchMap((ctx) => ctx.plexLibrary)),
+    likes: userContext$.pipe(switchMap((ctx) => ctx.likes)),
   };
 }

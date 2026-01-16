@@ -2544,6 +2544,22 @@
     },
     "text_vip_upsell_default_description_2": {
       "default": "Unlimited tracking and more."
+    },
+    "button_label_like_list": {
+      "default": "Like {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_unlike_list": {
+      "default": "Unlike {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

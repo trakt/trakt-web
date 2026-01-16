@@ -2544,6 +2544,22 @@
     },
     "text_vip_upsell_default_description_2": {
       "default": "無制限の追跡機能など。"
+    },
+    "button_label_like_list": {
+      "default": "{name} をいいね！",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_unlike_list": {
+      "default": "{name} のいいね！を取り消す",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }
