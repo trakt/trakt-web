@@ -18,6 +18,7 @@ import { FavoritedMoviesResponseMock } from '../data/users/response/FavoritedMov
 import { FavoritedShowsResponseMock } from '../data/users/response/FavoritedShowsResponseMock.ts';
 import { FilterResponseMock } from '../data/users/response/FilterResponseMock.ts';
 import { HiddenShowProgressResponseMock } from '../data/users/response/HiddenShowProgressResponseMock.ts';
+import { MinimalLikedListsResponseMock } from '../data/users/response/MinimalLikedListsResponseMock.ts';
 import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
 import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesResponseMock.ts';
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
@@ -163,4 +164,7 @@ export const users = [
       );
     },
   ),
+  http.get('http://localhost/users/likes/lists', () => {
+    return HttpResponse.json(MinimalLikedListsResponseMock);
+  }),
 ];
