@@ -2,6 +2,7 @@
   import { page } from "$app/state";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
@@ -23,6 +24,8 @@
 
   const { title, type, list }: UserListProps = $props();
 
+  const { user } = useUser();
+
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const style = $derived($isMobile ? "summary" : "cover");
 
@@ -40,6 +43,8 @@
     if (sortByParam) params.sort_by = sortByParam;
     update(params);
   });
+
+  const isListOwner = $derived($user.slug === list.user?.slug);
 
   const listCacheId = $derived.by(() => {
     const sortKey = `${$current.sorting.value}-${$current.sortHow}`;
@@ -89,11 +94,13 @@
   {/snippet}
 
   {#snippet actions()}
-    <ShareButton
-      {title}
-      textFactory={({ title: name }) => m.text_share_list({ name })}
-      source={{ id: "user-list", type }}
-    />
+    {#if !isListOwner}
+      <ShareButton
+        {title}
+        textFactory={({ title: name }) => m.text_share_list({ name })}
+        source={{ id: "user-list", type }}
+      />
+    {/if}
   {/snippet}
 </DrilledMediaList>
 
