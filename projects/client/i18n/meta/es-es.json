@@ -2544,6 +2544,22 @@
     },
     "text_vip_upsell_default_description_2": {
       "default": "Seguimiento ilimitado y más."
+    },
+    "button_label_like_list": {
+      "default": "Me gusta {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_unlike_list": {
+      "default": "Dejar de me gusta {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

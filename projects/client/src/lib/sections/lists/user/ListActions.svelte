@@ -10,17 +10,26 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
+  import LikeListAction from "./_internal/LikeListAction.svelte";
   import RenameListButton from "./_internal/RenameListButton.svelte";
   import { useDeleteList } from "./_internal/useDeleteList";
+  import { useLikeList } from "./_internal/useLikeList";
 
   const { list }: { list: MediaListSummary } = $props();
 
   const { deleteList, isDeleting, isDeleted } = $derived(useDeleteList(list));
 
   const { user } = useUser();
+  const { likeList, unlikeList, isUpdating, isLiked } = $derived(
+    useLikeList(list),
+  );
 
   const isListOwner = $derived($user.slug === list.user?.slug);
   const isOnListPage = $derived(getListUrl(list) === page.url.pathname);
+
+  const handleLike = $derived(() => {
+    $isLiked ? unlikeList() : likeList();
+  });
 </script>
 
 <RenderFor audience="authenticated">
@@ -48,5 +57,14 @@
         />
       {/snippet}
     </PopupMenu>
+  {/if}
+
+  {#if !isListOwner}
+    <LikeListAction
+      onToggle={handleLike}
+      isUpdating={$isUpdating}
+      state={$isLiked ? "liked" : "unliked"}
+      name={list.name}
+    />
   {/if}
 </RenderFor>

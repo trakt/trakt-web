@@ -54,6 +54,7 @@ export const AnalyticsEvent = {
   ListDelete: buildEventKey(LIST_ACTION_PREFIX, 'delete'),
   ListCreate: buildEventKey(LIST_ACTION_PREFIX, 'create'),
   ListSort: buildEventKey(LIST_ACTION_PREFIX, 'sort'),
+  ListLike: buildEventKey(LIST_ACTION_PREFIX, 'like'),
 
   CalendarPeriod: buildEventKey(CALENDAR_ACTION_PREFIX, 'period'),
 

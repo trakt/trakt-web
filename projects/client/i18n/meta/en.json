@@ -6664,6 +6664,32 @@
         "web",
         "ios"
       ]
+    },
+    "button_label_like_list": {
+      "default": "Like {name}",
+      "description": "Aria-label for the button that allows users to like a list.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_unlike_list": {
+      "default": "Unlike {name}",
+      "description": "Aria-label for the button that allows users to unlike a list.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

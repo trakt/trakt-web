@@ -2544,6 +2544,22 @@
     },
     "text_vip_upsell_default_description_2": {
       "default": "Ubegrænset sporing og meget mere."
+    },
+    "button_label_like_list": {
+      "default": "Synes godt om {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_unlike_list": {
+      "default": "Ansynes ikke godt om {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }
