@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
+  import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import Redirect from "$lib/components/router/Redirect.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -33,6 +34,12 @@
       mode="standalone"
     >
       {#snippet items()}
+        <ShareButton
+          title={list.name}
+          style="dropdown-item"
+          textFactory={({ title: name }) => m.text_share_list({ name })}
+          source={{ id: "user-list" }}
+        />
         <RenameListButton {list} isDeleting={$isDeleting} />
         <DeleteListButton
           {list}
