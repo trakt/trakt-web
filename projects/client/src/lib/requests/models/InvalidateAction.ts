@@ -2,7 +2,7 @@ import type { ExtendedMediaType } from './ExtendedMediaType.ts';
 import type { MediaType } from './MediaType.ts';
 
 type UserType = 'avatar' | 'settings' | 'follow' | 'cover';
-type ListType = 'edited' | 'deleted' | 'created';
+type ListType = 'edited' | 'deleted' | 'created' | 'like';
 
 const INVALIDATION_ID = 'invalidate' as const;
 
@@ -91,5 +91,6 @@ export const InvalidateAction = {
     Edited: buildInvalidationKey('list', 'edited'),
     Deleted: buildInvalidationKey('list', 'deleted'),
     Created: buildInvalidationKey('list', 'created'),
+    Like: buildInvalidationKey('list', 'like'),
   },
 };
