@@ -16,7 +16,7 @@
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { useIsWatchlisted } from "$lib/sections/media-actions/watchlist/useIsWatchlisted";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
-  import type { MediaCardProps } from "../components/MediaCardProps";
+  import type { MediaCardProps } from "../components/models/MediaCardProps";
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
 

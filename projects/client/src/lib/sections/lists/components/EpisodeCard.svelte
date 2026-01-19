@@ -14,7 +14,7 @@
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import type { EpisodeCardProps } from "./EpisodeCardProps";
+  import type { EpisodeCardProps } from "./models/EpisodeCardProps";
 
   const {
     popupActions,
@@ -22,7 +22,7 @@
     action,
     tag,
     episode,
-    show,
+    media: show,
     source,
     ...rest
   }: EpisodeCardProps = $props();

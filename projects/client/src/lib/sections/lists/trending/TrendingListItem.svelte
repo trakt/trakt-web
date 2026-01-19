@@ -3,7 +3,7 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import WatchersTag from "$lib/components/media/tags/WatchersTag.svelte";
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
-  import type { MediaCardProps } from "../components/MediaCardProps";
+  import type { MediaCardProps } from "../components/models/MediaCardProps";
   import type { TrendingEntry } from "./useTrendingList";
 
   const { type, media, style, mode }: MediaCardProps<TrendingEntry> = $props();

@@ -3,8 +3,8 @@
   import ProgressTag from "$lib/components/media/tags/ProgressTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import MediaCard from "./MediaCard.svelte";
-  import type { MediaCardProps } from "./MediaCardProps";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
+  import type { MediaCardProps } from "./models/MediaCardProps";
 
   const props: MediaCardProps = $props();
   const style = $derived(props.style ?? "cover");

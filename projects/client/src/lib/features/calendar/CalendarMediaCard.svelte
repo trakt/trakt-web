@@ -10,7 +10,7 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaCardProps } from "$lib/sections/lists/components/MediaCardProps";
+  import type { MediaCardProps } from "$lib/sections/lists/components/models/MediaCardProps";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";

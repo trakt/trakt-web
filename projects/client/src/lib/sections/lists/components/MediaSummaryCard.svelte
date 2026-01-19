@@ -20,7 +20,12 @@
   import SummaryCardBottomBar from "./_internal/SummaryCardBottomBar.svelte";
   import SummaryCardDetails from "./_internal/SummaryCardDetails.svelte";
   import SummaryCardRating from "./_internal/SummaryCardRating.svelte";
-  import type { EpisodeCardProps, MediaCardProps } from "./MediaCardProps";
+  import type { EpisodeCardProps } from "./models/EpisodeCardProps";
+  import type { MediaCardProps } from "./models/MediaCardProps";
+
+  type EpisodeSummaryProps = {
+    type: "episode";
+  } & EpisodeCardProps;
 
   const {
     tag,
@@ -29,9 +34,8 @@
     popupActions,
     media,
     source,
-    indicators,
     ...rest
-  }: MediaCardProps | EpisodeCardProps = $props();
+  }: MediaCardProps | EpisodeSummaryProps = $props();
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 
@@ -42,6 +46,14 @@
         : media.cover.url.thumb,
     poster: media.poster.url.thumb,
     title: rest.type === "episode" ? rest.episode.title : media.title,
+  });
+
+  const indicators = $derived.by(() => {
+    if (rest.type !== "movie" && rest.type !== "show") {
+      return;
+    }
+
+    return rest.indicators;
   });
 </script>
 

@@ -69,7 +69,7 @@
 
     <EpisodeItem
       {episode}
-      {show}
+      media={show}
       popupActions={hasBulkMarkAsWatched(episode) ? popupActions : undefined}
       variant={episode.airDate > new Date() ? "upcoming" : "default"}
       context="show"
