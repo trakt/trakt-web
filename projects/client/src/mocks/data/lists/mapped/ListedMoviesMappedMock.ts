@@ -1,7 +1,7 @@
-import type { ListedItem } from '$lib/requests/models/ListedItem.ts';
+import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 
-export const ListedMoviesMappedMock: ListedItem[] = [
+export const ListedMoviesMappedMock: ListItem[] = [
   {
     'entry': MovieHereticMappedMock,
     'id': 1146014560,

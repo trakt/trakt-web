@@ -4,16 +4,13 @@ import { mapToListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
-import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { z } from 'zod';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { typeToListMethod } from '../../_internal/typeToListMethod.ts';
+import { ListItemSchema } from '../../models/ListItem.ts';
 
 type UserListItemsParams =
   & {
@@ -26,12 +23,6 @@ type UserListItemsParams =
   & PaginationParams
   & ApiParams
   & FilterParams;
-
-const ListedItemSchema = ListItemSchemaFactory(
-  z.union([MovieEntrySchema, ShowEntrySchema]),
-);
-
-export type ListedItem = z.infer<typeof ListedItemSchema>;
 
 const userListItemsRequest = (
   {
@@ -91,6 +82,6 @@ export const userListItemsQuery = defineInfiniteQuery({
     entries: response.body.map(mapToListItem),
     page: extractPageMeta(response.headers),
   }),
-  schema: PaginatableSchemaFactory(ListedItemSchema),
+  schema: PaginatableSchemaFactory(ListItemSchema),
   ttl: time.minutes(30),
 });
