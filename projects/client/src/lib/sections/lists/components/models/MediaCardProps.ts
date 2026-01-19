@@ -1,11 +1,8 @@
-import type {
-  MediaInput,
-  MediaInputDefault,
-  ShowInput,
-} from '$lib/models/MediaInput.ts';
+import type { MediaInput, MediaInputDefault } from '$lib/models/MediaInput.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Snippet } from 'svelte';
+import type { BaseItemProps } from './BaseItemProps.ts';
 
 export type MediaItemVariant<T> =
   | { variant?: Nil } & MediaInput<T>
@@ -14,29 +11,16 @@ export type MediaItemVariant<T> =
   | { variant: 'start' } & MediaInput<T>
   | { variant: 'credit'; role: string } & MediaInput<T>;
 
-type BaseItemProps<T> = MediaItemVariant<T> & {
-  badge?: Snippet;
-  tag?: Snippet;
+type BaseMediaProps<T> = BaseItemProps & MediaItemVariant<T> & {
   coverTag?: Snippet;
-  action?: Snippet;
-  popupActions?: Snippet;
   indicators?: Snippet;
-  style?: 'cover' | 'summary';
-  source?: string;
   mode?: 'standalone' | 'mixed';
   onclick?: (item: T) => void;
 };
 
 export type MediaCardProps<T = MediaInputDefault> =
-  & BaseItemProps<T>
+  & BaseMediaProps<T>
   & (
     | { type: MediaType }
     | { variant: 'start'; type: 'show'; episode: EpisodeEntry }
   );
-
-export type EpisodeCardProps<T = ShowInput> =
-  & BaseItemProps<T>
-  & {
-    type: 'episode';
-    episode: EpisodeEntry;
-  };

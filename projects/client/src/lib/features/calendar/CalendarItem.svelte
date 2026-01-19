@@ -9,7 +9,7 @@
 {#if "show" in item}
   <EpisodeItem
     episode={item}
-    show={item.show}
+    media={item.show}
     variant="upcoming"
     source="calendar"
   />

@@ -18,7 +18,7 @@
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "../../../components/card/CardActionBar.svelte";
-  import type { MediaCardProps } from "./MediaCardProps";
+  import type { MediaCardProps } from "./models/MediaCardProps";
 
   const {
     type,

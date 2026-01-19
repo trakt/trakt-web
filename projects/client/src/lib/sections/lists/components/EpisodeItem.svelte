@@ -9,8 +9,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeCard from "./EpisodeCard.svelte";
-  import type { EpisodeCardProps } from "./EpisodeCardProps";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
+  import type { EpisodeCardProps } from "./models/EpisodeCardProps";
 
   const props: EpisodeCardProps = $props();
 
@@ -20,7 +20,7 @@
   const style = $derived(props.style ?? "cover");
 
   const runtime = $derived(
-    isNaN(props.episode.runtime) ? props.show.runtime : props.episode.runtime,
+    isNaN(props.episode.runtime) ? props.media.runtime : props.episode.runtime,
   );
 </script>
 
@@ -36,7 +36,7 @@
         size="small"
         title={props.episode.title}
         media={props.episode}
-        show={props.show}
+        show={props.media}
       />
     </RenderFor>
   {/if}
@@ -93,10 +93,11 @@
 {#snippet card()}
   {#if style === "summary"}
     <MediaSummaryCard
+      variant="default"
       episode={props.episode}
       source={props.source}
       media={{
-        ...props.show,
+        ...props.media,
         episode: {
           count: 0,
         },

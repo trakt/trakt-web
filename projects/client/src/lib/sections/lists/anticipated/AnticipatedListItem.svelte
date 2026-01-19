@@ -3,7 +3,7 @@
   import MediaIconTag from "$lib/components/media/tags/MediaIconTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
-  import type { MediaCardProps } from "../components/MediaCardProps";
+  import type { MediaCardProps } from "../components/models/MediaCardProps";
   import type { AnticipatedEntry } from "./useAnticipatedList";
 
   const { type, media, style, mode }: MediaCardProps<AnticipatedEntry> =

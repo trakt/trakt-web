@@ -1,6 +1,6 @@
 <script lang="ts">
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
-  import type { MediaCardProps } from "../components/MediaCardProps";
+  import type { MediaCardProps } from "../components/models/MediaCardProps";
   import type { PopularEntry } from "./usePopularList";
 
   const {

@@ -37,7 +37,7 @@
 >
   {#snippet item(season)}
     <SeasonItem
-      {show}
+      media={show}
       {season}
       isCurrentSeason={season.number === currentSeason}
       urlBuilder={() => UrlBuilder.show(show.slug, { season: season.number })}

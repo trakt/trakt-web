@@ -33,7 +33,7 @@
   <UpNextSwipe episode={props.episode} show={props.show} {style}>
     <EpisodeItem
       episode={props.episode}
-      show={props.show}
+      media={props.show}
       status={props.status}
       {style}
       source="continue-watching"
