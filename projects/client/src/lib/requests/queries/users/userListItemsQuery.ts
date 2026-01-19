@@ -4,13 +4,13 @@ import { mapToListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { ListItemSchema } from '$lib/requests/models/ListItem.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { typeToListMethod } from '../../_internal/typeToListMethod.ts';
-import { ListItemSchema } from '../../models/ListItem.ts';
 
 type UserListItemsParams =
   & {

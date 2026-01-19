@@ -5,15 +5,13 @@ import { mapToListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
-import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SortType } from '@trakt/api';
 import { z } from 'zod';
+import { ListItemSchema } from '../../models/ListItem.ts';
 
 type WatchlistParams =
   & {
@@ -24,10 +22,7 @@ type WatchlistParams =
   & ApiParams
   & FilterParams;
 
-const WatchlistItemSchema = ListItemSchemaFactory(
-  z.union([MovieEntrySchema, ShowEntrySchema]),
-);
-export type WatchlistedItem = z.infer<typeof WatchlistItemSchema>;
+export type WatchlistedItem = z.infer<typeof ListItemSchema>;
 
 function typeToWatchlistMethod(type?: MediaType) {
   if (!type) {
@@ -85,6 +80,6 @@ export const watchlistQuery = defineInfiniteQuery({
     entries: response.body.map(mapToListItem),
     page: extractPageMeta(response.headers),
   }),
-  schema: PaginatableSchemaFactory(WatchlistItemSchema),
+  schema: PaginatableSchemaFactory(ListItemSchema),
   ttl: time.hours(1),
 });

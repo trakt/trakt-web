@@ -9,9 +9,8 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
-  import PopularListItem from "../popular/PopularListItem.svelte";
-  import PopupActions from "./_internal/PopupActions.svelte";
   import { useListSorting } from "./_internal/useListSorting";
+  import UserListItem from "./_internal/UserListItem.svelte";
   import ListActions from "./ListActions.svelte";
   import ListSortActions from "./ListSortActions.svelte";
   import { useListItems } from "./useListItems";
@@ -82,11 +81,7 @@
     </div>
   {/snippet}
   {#snippet item(media)}
-    <PopularListItem type={media.type} media={media.entry} {style}>
-      {#snippet popupActions()}
-        <PopupActions {list} media={media.entry} />
-      {/snippet}
-    </PopularListItem>
+    <UserListItem listedItem={media} {style} {list} />
   {/snippet}
 
   {#snippet badge()}

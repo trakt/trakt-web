@@ -1,45 +1,89 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import type { ListedMediaResponse } from '@trakt/api';
+import type { ListedAllResponse } from '@trakt/api';
+import type { ListItem } from '../models/ListItem.ts';
+import { mapToSeason } from '../queries/shows/showSeasonsQuery.ts';
+import { mapToEpisodeEntry } from './mapToEpisodeEntry.ts';
 import { mapToMovieEntry } from './mapToMovieEntry.ts';
 import { mapToShowEntry } from './mapToShowEntry.ts';
 
 function mapListDetails(
-  listedItem: ListedMediaResponse,
+  listedItem: ListedAllResponse,
 ) {
   return {
     id: listedItem.id,
     key: `${listedItem.type}-${listedItem.id}`,
     rank: listedItem.rank,
     notes: listedItem.notes,
-    type: listedItem.type,
     listedAt: new Date(listedItem.listed_at),
   };
 }
 
-function mapToListEntry(listedItem: ListedMediaResponse) {
-  switch (listedItem.type) {
+function mapToListEntry(itemResponse: ListedAllResponse) {
+  switch (itemResponse.type) {
+    case 'season':
+      return {
+        type: 'season' as const,
+        entry: {
+          season: mapToSeason(
+            assertDefined(
+              itemResponse.season,
+              'Expected season in ListedMediaResponse',
+            ),
+          ),
+          show: mapToShowEntry(
+            assertDefined(
+              itemResponse.show,
+              'Expected show in ListedMediaResponse',
+            ),
+          ),
+        },
+      };
+    case 'episode':
+      return {
+        type: 'episode' as const,
+        entry: {
+          episode: mapToEpisodeEntry(
+            assertDefined(
+              itemResponse.episode,
+              'Expected episode in ListedMediaResponse',
+            ),
+          ),
+          show: mapToShowEntry(
+            assertDefined(
+              itemResponse.show,
+              'Expected show in ListedMediaResponse',
+            ),
+          ),
+        },
+      };
     case 'movie':
-      return mapToMovieEntry(
-        assertDefined(
-          listedItem.movie,
-          'Expected movie in ListedMediaResponse',
+      return {
+        type: 'movie' as const,
+        entry: mapToMovieEntry(
+          assertDefined(
+            itemResponse.movie,
+            'Expected movie in ListedMediaResponse',
+          ),
         ),
-      );
+      };
     case 'show':
-      return mapToShowEntry(
-        assertDefined(
-          listedItem.show,
-          'Expected show in ListedMediaResponse',
+      return {
+        type: 'show' as const,
+        entry: mapToShowEntry(
+          assertDefined(
+            itemResponse.show,
+            'Expected show in ListedMediaResponse',
+          ),
         ),
-      );
+      };
   }
 }
 
 export function mapToListItem(
-  listedItem: ListedMediaResponse,
-) {
+  itemResponse: ListedAllResponse,
+): ListItem {
   return {
-    ...mapListDetails(listedItem),
-    entry: mapToListEntry(listedItem),
+    ...mapListDetails(itemResponse),
+    ...mapToListEntry(itemResponse),
   };
 }
