@@ -6,10 +6,9 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { NOOP_FN } from "$lib/utils/constants";
   import { Marked } from "marked";
-  import {
-    createParagraphSpoilerRenderer,
-    spoilerExtension,
-  } from "./spoilerExtension";
+  import { createHeadingRenderer } from "./marked/createHeadingRenderer";
+  import { createParagraphRenderer } from "./marked/createParagraphRenderer";
+  import { spoilerExtension } from "./marked/spoilerExtension";
 
   const MAX_PREVIEW_LINES = 3;
 
@@ -26,10 +25,8 @@
     new Marked({
       extensions: [spoilerExtension()],
       renderer: {
-        paragraph: createParagraphSpoilerRenderer(comment.isSpoiler),
-        heading: (tokens) => {
-          return `<span class="bold trakt-comment-heading">${tokens.text}</span>`;
-        },
+        paragraph: createParagraphRenderer(comment.isSpoiler),
+        heading: createHeadingRenderer(),
       },
     }),
   );
