@@ -5,9 +5,12 @@
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import TagBar from "$lib/components/tags/TagBar.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
+  import SummaryCardRating from "./_internal/SummaryCardRating.svelte";
   import EpisodeCard from "./EpisodeCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
@@ -17,6 +20,7 @@
   const isFuture = $derived(props.episode.airDate > new Date());
   const isActivity = $derived(props.variant === "activity");
   const isHidden = $derived(props.status === "hidden");
+  const isListItem = $derived(props.variant === "list-item");
   const style = $derived(props.style ?? "cover");
 
   const runtime = $derived(
@@ -25,7 +29,7 @@
 </script>
 
 {#snippet action()}
-  {#if !isFuture && !isActivity && !isHidden}
+  {#if !isFuture && !isActivity && !isHidden && !isListItem}
     <RenderFor audience="authenticated">
       <MarkAsWatchedAction
         mode={props.variant === "next" && props.context !== "show"
@@ -39,6 +43,10 @@
         show={props.media}
       />
     </RenderFor>
+  {/if}
+
+  {#if style === "summary" && isListItem}
+    <SummaryCardRating item={props.episode} />
   {/if}
 {/snippet}
 
@@ -85,6 +93,24 @@
           activityDate={props.date}
           type="tag"
         />
+      {/if}
+
+      {#if isListItem}
+        <TagBar>
+          <AirDateTag
+            i18n={TagIntlProvider}
+            airDate={props.episode.airDate}
+            type="text"
+          />
+          <TextTag>
+            <p class="bold capitalize no-wrap">
+              {episodeNumberLabel({
+                seasonNumber: props.episode.season,
+                episodeNumber: props.episode.number,
+              })}
+            </p>
+          </TextTag>
+        </TagBar>
       {/if}
     </div>
   {/if}

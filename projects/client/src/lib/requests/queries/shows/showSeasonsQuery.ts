@@ -25,7 +25,7 @@ const showSeasonsRequest = (
       },
     });
 
-const mapToSeason = (item: SeasonsResponse[0]): Season => {
+export const mapToSeason = (item: SeasonsResponse[0]): Season => {
   const poster = findDefined(
     ...(item.images?.poster ?? []),
   );

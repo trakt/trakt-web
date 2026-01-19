@@ -6,8 +6,7 @@
   import { useListItems } from "$lib/sections/lists/user/useListItems";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
-  import PopularListItem from "../popular/PopularListItem.svelte";
-  import PopupActions from "./_internal/PopupActions.svelte";
+  import UserListItem from "./_internal/UserListItem.svelte";
   import ListActions from "./ListActions.svelte";
 
   const { list, type }: { list: MediaListSummary; type?: DiscoverMode } =
@@ -37,11 +36,7 @@
   title={list.name}
 >
   {#snippet item(media)}
-    <PopularListItem type={media.entry.type} media={media.entry}>
-      {#snippet popupActions()}
-        <PopupActions {list} media={media.entry} />
-      {/snippet}
-    </PopularListItem>
+    <UserListItem listedItem={media} style="cover" {list} />
   {/snippet}
 
   {#snippet badge()}

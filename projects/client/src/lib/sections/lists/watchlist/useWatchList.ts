@@ -25,7 +25,11 @@ export function useWatchList(params: WatchListStoreProps) {
 
   return {
     list: items.pipe(
-      map(($items) => $items.map((item) => item.entry)),
+      map(($items) =>
+        $items
+          .filter((item) => item.type === 'movie' || item.type === 'show')
+          .map((item) => item.entry)
+      ),
     ),
     ...rest,
   };

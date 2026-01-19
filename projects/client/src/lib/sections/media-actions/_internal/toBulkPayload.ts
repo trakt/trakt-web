@@ -1,14 +1,16 @@
-import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
+import type { ExtendedMediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 
 type TraktId = { ids: { trakt: number } };
+type BulkPayloadType = ExtendedMediaStoreProps['type'];
 
 type MediaTypeMap<T> = {
   movie: { movies: T[] };
   show: { shows: T[] };
   episode: { episodes: T[] };
+  season: { seasons: T[] };
 };
 
-export function toBulkPayload<K extends ExtendedMediaType>(
+export function toBulkPayload<K extends BulkPayloadType>(
   type: K,
   ids: number[],
 ): MediaTypeMap<TraktId>[K] {

@@ -1,6 +1,6 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
-import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
+import type { ExtendedMediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { removeFromListRequest } from '$lib/requests/queries/users/removeFromListRequest.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
@@ -13,7 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 
 type UseRemoveFromListProps = {
   listId: string;
-} & MediaStoreProps;
+} & ExtendedMediaStoreProps;
 
 export function useRemoveFromList(props: UseRemoveFromListProps) {
   const { type } = props;
@@ -27,10 +27,6 @@ export function useRemoveFromList(props: UseRemoveFromListProps) {
   const body = toBulkPayload(type, ids);
 
   const removeFromList = async () => {
-    if (type === 'episode') {
-      return;
-    }
-
     isListUpdating.next(true);
     track({ action: 'remove' });
 
@@ -39,7 +35,10 @@ export function useRemoveFromList(props: UseRemoveFromListProps) {
       listId: props.listId,
     });
 
-    await invalidate(InvalidateAction.Listed(type));
+    const invalidationType = type === 'episode' || type === 'season'
+      ? 'show'
+      : type;
+    await invalidate(InvalidateAction.Listed(invalidationType));
 
     isListUpdating.next(false);
   };

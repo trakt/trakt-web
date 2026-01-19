@@ -15,6 +15,7 @@
   import { toRelativeHumanDay } from "$lib/utils/formatting/date/toRelativeHumanDay";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
+  import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import SummaryCardBackgroundImage from "./_internal/SummaryCardBackgroundImage.svelte";
   import SummaryCardBottomBar from "./_internal/SummaryCardBottomBar.svelte";
@@ -22,10 +23,15 @@
   import SummaryCardRating from "./_internal/SummaryCardRating.svelte";
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
   import type { MediaCardProps } from "./models/MediaCardProps";
+  import type { SeasonCardProps } from "./models/SeasonCardProps";
 
   type EpisodeSummaryProps = {
     type: "episode";
   } & EpisodeCardProps;
+
+  type SeasonSummaryProps = {
+    type: "season";
+  } & SeasonCardProps;
 
   const {
     tag,
@@ -35,7 +41,7 @@
     media,
     source,
     ...rest
-  }: MediaCardProps | EpisodeSummaryProps = $props();
+  }: MediaCardProps | EpisodeSummaryProps | SeasonSummaryProps = $props();
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 
@@ -99,7 +105,14 @@
     </div>
 
     <SummaryCardDetails>
-      {#if rest.variant === "activity"}
+      {#if rest.type === "season"}
+        <p class="trakt-card-title ellipsis">
+          {media.title}
+        </p>
+        <p class="trakt-card-subtitle secondary ellipsis">
+          {seasonLabel(rest.season.number)}
+        </p>
+      {:else if rest.variant === "activity"}
         {#if rest.type === "episode"}
           <p class="trakt-card-title ellipsis">
             {episodeSubtitle(rest.episode)}
