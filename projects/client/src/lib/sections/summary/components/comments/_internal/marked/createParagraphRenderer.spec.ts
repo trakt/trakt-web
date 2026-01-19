@@ -9,6 +9,7 @@ describe('createParagraphRenderer', () => {
         return tokens.map((t) => {
           if (t.type === 'text') return t.raw;
           if (t.type === 'spoiler') return `<span>${t.text}</span>`;
+          if (t.type === 'em') return `<em>${t.text}</em>`;
           return t.raw;
         }).join('');
       },
@@ -56,5 +57,22 @@ describe('createParagraphRenderer', () => {
 
     const result = renderer.call(mockParser, paragraphToken);
     expect(result).to.equal('<p>only</p>');
+  });
+
+  it('createParagraphRenderer should render markdown formatting like italic', () => {
+    const renderer = createParagraphRenderer(false);
+    const paragraphToken: Tokens.Paragraph = {
+      raw: 'text with *italic* formatting',
+      type: 'paragraph',
+      text: 'text with italic formatting',
+      tokens: [
+        { type: 'text', raw: 'text with ' },
+        { type: 'em', text: 'italic', raw: '*italic*' },
+        { type: 'text', raw: ' formatting' },
+      ],
+    };
+
+    const result = renderer.call(mockParser, paragraphToken);
+    expect(result).to.equal('<p>text with <em>italic</em> formatting</p>');
   });
 });
