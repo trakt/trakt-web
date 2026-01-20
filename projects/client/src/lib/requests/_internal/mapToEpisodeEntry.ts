@@ -24,7 +24,7 @@ export function mapToEpisodeEntry(
     key: `episode-${episode.ids.trakt}`,
     type: episode.episode_type as EpisodeType ??
       EpisodeUnknownType.unknown,
-    title: episode.title,
+    title: episode.title ?? '',
     overview: episode.overview ?? '',
     season: episode.season,
     genres: [],
