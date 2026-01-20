@@ -119,6 +119,7 @@
     align-content: center;
 
     gap: var(--gap-s);
+    padding: 0 var(--layout-distance-side);
 
     :global(.trakt-search-icon) {
       z-index: calc(var(--layer-overlay) - 1);
