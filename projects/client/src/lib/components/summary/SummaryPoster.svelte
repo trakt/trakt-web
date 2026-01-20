@@ -57,7 +57,7 @@
 <style>
   .trakt-summary-poster-container {
     --overlay-border-size: var(--ni-2);
-    --poster-aspect-ratio: 2 / 3;
+    --poster-inverse-aspect-ratio: 3 / 2;
 
     width: var(--summary-poster-width);
     display: flex;
@@ -68,7 +68,7 @@
     &[data-variant="landscape"] {
       .trakt-summary-poster :global(img),
       .trakt-summary-poster-overlay {
-        --poster-aspect-ratio: 16 / 9;
+        --poster-inverse-aspect-ratio: 9 / 16;
       }
     }
   }
@@ -80,7 +80,10 @@
     border-radius: var(--border-radius-xxl);
 
     width: var(--summary-poster-width);
-    aspect-ratio: var(--poster-aspect-ratio);
+    /* Using aspect-ratio did not work in Safari, so we set the height explicitly */
+    height: calc(
+      var(--summary-poster-width) * var(--poster-inverse-aspect-ratio)
+    );
 
     object-fit: cover;
   }
