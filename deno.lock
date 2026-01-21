@@ -33,6 +33,7 @@
     "npm:date-fns@4.1.0": "4.1.0",
     "npm:eslint-plugin-svelte@3.14.0": "3.14.0_eslint@9.39.2_svelte@5.46.3__acorn@8.15.0_postcss@8.5.6",
     "npm:eslint@9.39.2": "9.39.2",
+    "npm:fflate@~0.8.2": "0.8.2",
     "npm:firebase@12.7.0": "12.7.0_@firebase+app@0.14.6_@firebase+app-types@0.9.3_@firebase+app-compat@0.5.6",
     "npm:flowbite-svelte@^1.31.0": "1.31.0_svelte@5.46.3__acorn@8.15.0_tailwindcss@4.1.18_tailwind-merge@3.4.0",
     "npm:globals@17.0.0": "17.0.0",
@@ -4309,6 +4310,9 @@
         "picomatch@4.0.3"
       ]
     },
+    "fflate@0.8.2": {
+      "integrity": "sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A=="
+    },
     "figures@3.2.0": {
       "integrity": "sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg==",
       "dependencies": [
@@ -7457,6 +7461,7 @@
             "npm:date-fns@4.1.0",
             "npm:eslint-plugin-svelte@3.14.0",
             "npm:eslint@9.39.2",
+            "npm:fflate@~0.8.2",
             "npm:firebase@12.7.0",
             "npm:flowbite-svelte@^1.31.0",
             "npm:globals@17.0.0",

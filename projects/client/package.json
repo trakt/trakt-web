@@ -76,6 +76,7 @@
     "@ts-rest/core": "3.52.1",
     "@use-gesture/vanilla": "10.3.1",
     "date-fns": "4.1.0",
+    "fflate": "^0.8.2",
     "firebase": "12.7.0",
     "flowbite-svelte": "^1.31.0",
     "idb-keyval": "6.2.2",
