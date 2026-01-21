@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+  - name: ℹ️ Ask a Question
+    url: https://forums.trakt.tv/
+    about: Have a Question? Ask the community.
