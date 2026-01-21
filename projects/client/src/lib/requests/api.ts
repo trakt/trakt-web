@@ -55,5 +55,10 @@ export const rawApiFetch = ({
   path,
 }: RawApiFetchParams) => {
   const authenticatedFetch = createAuthenticatedFetch(fetch);
-  return authenticatedFetch(`${environment}${path}`);
+  return authenticatedFetch(`${environment}${path}`, {
+    headers: {
+      'trakt-api-version': '2',
+      'trakt-api-key': TRAKT_CLIENT_ID,
+    },
+  });
 };
