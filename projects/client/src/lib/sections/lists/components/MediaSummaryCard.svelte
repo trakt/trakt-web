@@ -11,12 +11,14 @@
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { toRelativeHumanDay } from "$lib/utils/formatting/date/toRelativeHumanDay";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import SummaryCardBackgroundImage from "./_internal/SummaryCardBackgroundImage.svelte";
   import SummaryCardBottomBar from "./_internal/SummaryCardBottomBar.svelte";
   import SummaryCardDetails from "./_internal/SummaryCardDetails.svelte";
@@ -33,6 +35,10 @@
     type: "season";
   } & SeasonCardProps;
 
+  type SummaryCardProps = {
+    contextualTag?: Snippet;
+  } & (MediaCardProps | EpisodeSummaryProps | SeasonSummaryProps);
+
   const {
     tag,
     action,
@@ -40,10 +46,16 @@
     popupActions,
     media,
     source,
+    contextualTag,
     ...rest
-  }: MediaCardProps | EpisodeSummaryProps | SeasonSummaryProps = $props();
+  }: SummaryCardProps = $props();
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
+
+  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+
+  const hasMultiLineTitles = $derived($isTabletLarge || $isDesktop);
 
   const coverData = $derived({
     background:
@@ -90,6 +102,7 @@
   <Link
     href={UrlBuilder.media(media.type, media.slug)}
     onclick={() => source && track({ source, type: rest.type })}
+    color="inherit"
   >
     <div class="trakt-summary-poster">
       <CardCover
@@ -104,7 +117,10 @@
       {/if}
     </div>
 
-    <SummaryCardDetails>
+    <SummaryCardDetails
+      classList={hasMultiLineTitles ? "multi-line-titles" : ""}
+      {tag}
+    >
       {#if rest.type === "season"}
         <p class="trakt-card-title ellipsis">
           {media.title}
@@ -163,11 +179,7 @@
     </SummaryCardDetails>
   </Link>
 
-  <SummaryCardBottomBar>
-    <div class="trakt-summary-card-tags">
-      {@render tag?.()}
-    </div>
-
+  <SummaryCardBottomBar {contextualTag} {tag}>
     {#if action}
       {@render action()}
     {/if}
@@ -184,7 +196,9 @@
   </SummaryCardBottomBar>
 </Card>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   :global(.trakt-summary-card) {
     :global(p.trakt-card-subtitle) {
       color: var(--color-text-secondary);
@@ -199,6 +213,17 @@
 
     :global(.trakt-link) {
       width: 100%;
+
+      @include for-mouse() {
+        &:hover {
+          .trakt-card-title {
+            text-decoration: underline;
+            text-underline-offset: var(--ni-2);
+            text-decoration-thickness: var(--ni-2);
+            text-decoration-color: var(--color-link-active);
+          }
+        }
+      }
     }
   }
 
@@ -218,19 +243,43 @@
     }
   }
 
-  .trakt-summary-card-tags {
+  /* .trakt-summary-card-tags {
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
     flex-grow: 1;
+  } */
+
+  :global(.trakt-summary-card-titles) {
+    height: var(--ni-66);
   }
 
   .trakt-card-title,
-  .trakt-card-subtitle {
+  .trakt-card-subtitle,
+  :global(.trakt-card-subtitle) {
     padding-right: var(--ni-18);
   }
 
+  :global(.multi-line-titles) {
+    .trakt-card-title,
+    .trakt-card-subtitle,
+    :global(.trakt-card-subtitle) {
+      display: -webkit-box;
+
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+
+      white-space: initial;
+      overflow: hidden;
+    }
+  }
+
   .trakt-card-title {
-    font-size: var(--font-size-title);
+    font-size: var(--font-size-text);
+
+    @include for-tablet-sm-and-below {
+      font-size: var(--font-size-title);
+    }
   }
 </style>

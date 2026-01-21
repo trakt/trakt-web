@@ -7,7 +7,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { useListSorting } from "./_internal/useListSorting";
   import UserListItem from "./_internal/UserListItem.svelte";
@@ -24,9 +23,6 @@
   const { title, type, list }: UserListProps = $props();
 
   const { user } = useUser();
-
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const style = $derived($isMobile ? "summary" : "cover");
 
   const { filterMap } = useFilter();
   const { current, update, options, urlBuilder } = $derived(
@@ -81,7 +77,7 @@
     </div>
   {/snippet}
   {#snippet item(media)}
-    <UserListItem listedItem={media} {style} {list} />
+    <UserListItem listedItem={media} style="summary" {list} />
   {/snippet}
 
   {#snippet badge()}

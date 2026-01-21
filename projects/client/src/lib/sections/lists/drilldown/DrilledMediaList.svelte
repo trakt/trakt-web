@@ -2,7 +2,6 @@
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
   import type { Snippet } from "svelte";
-  import { mediaCardWidthResolver } from "../utils/mediaCardWidthResolver";
   import type { MediaListProps } from "./MediaListProps";
 
   type DrilledMediaListProps = MediaListProps<T, M> & {
@@ -32,7 +31,7 @@
       {actions}
       {items}
       {listActions}
-      --width-item={mediaCardWidthResolver(cardOrientation)}
+      --width-item="var(--width-summary-card)"
     >
       {#snippet empty()}
         {@render externalEmpty?.()}

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import MediaIconTag from "$lib/components/media/tags/MediaIconTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import WatchersTag from "$lib/components/media/tags/WatchersTag.svelte";
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
@@ -10,10 +9,6 @@
 </script>
 
 {#snippet tag()}
-  {#if mode === "mixed"}
-    <MediaIconTag mediaType={media.type} />
-  {/if}
-
   <WatchersTag i18n={TagIntlProvider} watchers={media.watchers} />
 {/snippet}
 
@@ -21,6 +16,7 @@
   {type}
   {media}
   {tag}
+  {mode}
   {style}
   source="trending"
   canDeemphasize

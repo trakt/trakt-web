@@ -39,11 +39,13 @@
   const isSummary = $derived(style === "summary");
 </script>
 
-{#snippet defaultTag()}
+{#snippet contextualTag()}
   {#if mode === "mixed"}
     <MediaIconTag mediaType={media.type} />
   {/if}
+{/snippet}
 
+{#snippet defaultTag()}
   {#if "episode" in media}
     <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
     <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
@@ -73,7 +75,16 @@
 
 {#snippet tag()}
   <TagBar>
+    {#if !isSummary}
+      {@render contextualTag()}
+    {/if}
+
     {#if isSummary}
+      {#if mode === "mixed"}
+        <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+          {@render contextualTag()}
+        </RenderFor>
+      {/if}
       {@render externalTag?.()}
       {@render defaultTag()}
     {:else if externalTag}
@@ -112,6 +123,7 @@
       {media}
       {style}
       tag={rest.variant !== "next" ? tag : undefined}
+      contextualTag={mode === "mixed" ? contextualTag : undefined}
       indicators={indicatorTags}
       {...rest}
       {popupActions}

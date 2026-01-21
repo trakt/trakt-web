@@ -1,7 +1,6 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { DEFAULT_ACTIVITY_PAGE_SIZE } from "$lib/utils/constants";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import SocialActivityItem from "./_internal/SocialActivityItem.svelte";
@@ -10,9 +9,6 @@
   type RecommendedListProps = { title: string };
 
   const { title }: RecommendedListProps = $props();
-
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const style = $derived($isMobile ? "summary" : "cover");
 
   const { mode } = useDiscover();
   const { filterMap } = useFilter();
@@ -31,6 +27,6 @@
     })}
 >
   {#snippet item(activity)}
-    <SocialActivityItem {activity} {style} />
+    <SocialActivityItem {activity} style="summary" />
   {/snippet}
 </DrilledMediaList>

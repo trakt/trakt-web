@@ -3,7 +3,6 @@
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
-  import MediaIconTag from "$lib/components/media/tags/MediaIconTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { type MediaInputDefault } from "$lib/models/MediaInput";
   import { type MediaEntry } from "$lib/requests/models/MediaEntry";
@@ -31,10 +30,6 @@
 </script>
 
 {#snippet mediaTag(item: MediaInputDefault)}
-  {#if $mode === "media"}
-    <MediaIconTag mediaType={item.type} />
-  {/if}
-
   <AirDateTag i18n={TagIntlProvider} airDate={item.airDate} />
 
   {#if $mode === "movie"}
@@ -66,6 +61,7 @@
           style="cover"
           source="search"
           tag={mediaResultTag}
+          mode={$mode === "media" ? "mixed" : "standalone"}
           {onclick}
         />
       {:else}

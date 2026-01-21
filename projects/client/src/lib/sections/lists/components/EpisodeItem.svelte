@@ -65,17 +65,20 @@
           progress={props.episode.completed}
           total={props.episode.total}
           {runtime}
+          {style}
         >
-          <TextTag>
-            <p class="bold capitalize ellipsis">
-              {EpisodeIntlProvider.remainingText(props.episode.remaining)}
-            </p>
-          </TextTag>
-          <TextTag>
-            <p class="bold capitalize no-wrap">
-              {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
-            </p>
-          </TextTag>
+          {#snippet tags()}
+            <TextTag>
+              <p class="bold capitalize ellipsis">
+                {EpisodeIntlProvider.remainingText(props.episode.remaining)}
+              </p>
+            </TextTag>
+            <TextTag>
+              <p class="bold capitalize no-wrap">
+                {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
+              </p>
+            </TextTag>
+          {/snippet}
         </ShowProgressTag>
       {/if}
 

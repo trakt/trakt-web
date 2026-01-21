@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
   import { toRecentlyWatchedType } from "./_internal/toRecentlyWatchedType";
@@ -10,9 +9,6 @@
   const { mode }: { mode?: DiscoverMode } = $props();
 
   const historyType = $derived(toRecentlyWatchedType(mode));
-
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const style = $derived($isMobile ? "summary" : "cover");
 </script>
 
 <DrilledMediaList
@@ -28,6 +24,6 @@
     })}
 >
   {#snippet item(media)}
-    <RecentlyWatchedItem {media} {style} isActionable />
+    <RecentlyWatchedItem {media} style="summary" isActionable />
   {/snippet}
 </DrilledMediaList>

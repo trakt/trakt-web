@@ -3,7 +3,6 @@
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import AnticipatedListItem from "./AnticipatedListItem.svelte";
   import { useAnticipatedList } from "./useAnticipatedList";
@@ -15,9 +14,6 @@
 
   const { title, type }: AnticipatedListProps = $props();
   const { filterMap } = useFilter();
-
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const style = $derived($isMobile ? "summary" : "cover");
 </script>
 
 <DrilledMediaList
@@ -31,7 +27,7 @@
     <AnticipatedListItem
       type={media.type}
       {media}
-      {style}
+      style="summary"
       mode={type === "media" ? "mixed" : "standalone"}
     />
   {/snippet}

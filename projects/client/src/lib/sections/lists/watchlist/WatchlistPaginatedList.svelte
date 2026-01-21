@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { useWatchList } from "./useWatchList";
@@ -13,8 +12,6 @@
 
   const { title, type }: WatchListProps = $props();
 
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const style = $derived($isMobile ? "summary" : "cover");
   const { filterMap } = useFilter();
 </script>
 
@@ -26,6 +23,11 @@
   useList={useWatchList}
 >
   {#snippet item(media)}
-    <DefaultMediaItem type={media.type} {media} {style} source="watchlist" />
+    <DefaultMediaItem
+      type={media.type}
+      {media}
+      style="summary"
+      source="watchlist"
+    />
   {/snippet}
 </DrilledMediaList>

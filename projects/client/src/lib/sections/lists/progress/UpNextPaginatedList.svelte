@@ -5,15 +5,11 @@
   import DrilledMediaList from "$lib/sections/lists/drilldown/DrilledMediaList.svelte";
   import { useUpNextList } from "$lib/sections/lists/progress/useUpNextList";
   import { useStablePaginated } from "$lib/sections/lists/stores/useStablePaginated";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import ContinueWatchingItem from "./_internal/ContinueWatchingItem.svelte";
   import StartWatchingItem from "./_internal/StartWatchingItem.svelte";
 
   const { intent }: { intent: "continue" | "start" } = $props();
 
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-
-  const style = $derived($isMobile ? "summary" : "cover");
   const { mode } = useDiscover();
   const { filterMap } = useFilter();
 </script>
@@ -42,9 +38,9 @@
 >
   {#snippet item(progressEntry)}
     {#if intent === "start"}
-      <StartWatchingItem {style} entry={progressEntry} />
+      <StartWatchingItem style="summary" entry={progressEntry} />
     {:else}
-      <ContinueWatchingItem {style} entry={progressEntry} />
+      <ContinueWatchingItem style="summary" entry={progressEntry} />
     {/if}
   {/snippet}
 </DrilledMediaList>
