@@ -2,11 +2,15 @@
   import ActivityTag from "$lib/components/media/tags/ActivityTag.svelte";
   import ProgressTag from "$lib/components/media/tags/ProgressTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import type { Snippet } from "svelte";
   import MediaCard from "./MediaCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { MediaCardProps } from "./models/MediaCardProps";
 
-  const props: MediaCardProps = $props();
+  const {
+    contextualTag,
+    ...props
+  }: MediaCardProps & { contextualTag?: Snippet } = $props();
   const style = $derived(props.style ?? "cover");
 
   const isCover = $derived(style === "cover");
@@ -46,6 +50,7 @@
   <MediaSummaryCard
     {...props}
     {style}
+    {contextualTag}
     action={props.action}
     popupActions={props.badge ? undefined : props.popupActions}
     tag={props.variant === "next" ? coverTag : props.tag}

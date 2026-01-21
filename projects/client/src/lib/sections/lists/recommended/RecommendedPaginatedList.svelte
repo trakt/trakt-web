@@ -2,7 +2,6 @@
   import { page } from "$app/state";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
   import RecommendedListItem from "./RecommendedListItem.svelte";
@@ -15,9 +14,6 @@
 
   const { title, type }: RecommendedListProps = $props();
   const { filterMap } = useFilter();
-
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const style = $derived($isMobile ? "summary" : "cover");
 </script>
 
 <DrilledMediaList
@@ -34,7 +30,7 @@
     <RecommendedListItem
       type={media.type}
       {media}
-      {style}
+      style="summary"
       mode={type === "media" ? "mixed" : "standalone"}
     />
   {/snippet}

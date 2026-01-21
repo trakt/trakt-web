@@ -48,8 +48,8 @@
   --height-person-card-cover: var(--ni-176);
   --height-person-card: calc(var(--height-person-card-cover) + var(--height-card-footer));
 
-  --width-summary-card: 100%;
-  --height-summary-card-cover: var(--ni-132);
+  --width-summary-card: var(--ni-276);
+  --height-summary-card-cover: var(--ni-208);
   --height-summary-card: var(--height-summary-card-cover);
 
   --width-list-card: var(--ni-480);
@@ -142,6 +142,11 @@
   @include for-mobile {
     --toggle-large-width: var(--ni-80);
     --font-size-text: var(--ni-12);
+  }
+
+  @include for-tablet-sm-and-below {
+    --width-summary-card: 100%;
+    --height-summary-card-cover: var(--ni-132);
   }
 
   --font-size-title: var(--ni-18);
