@@ -1230,11 +1230,11 @@
     "header_filters": {
       "default": "Filter"
     },
-    "header_ignore_watched": {
-      "default": "Gesehene ignorieren"
+    "header_hide_watched": {
+      "default": "Gesehene ausblenden"
     },
-    "header_ignore_watchlisted": {
-      "default": "Merkliste ignorieren"
+    "header_hide_watchlisted": {
+      "default": "Auf der Watchlist ausblenden"
     },
     "option_text_my_favorites": {
       "default": "Nur Favoriten"
@@ -1338,10 +1338,10 @@
       "default": "Spoiler anzeigen"
     },
     "button_text_save_filters": {
-      "default": "Speichern"
+      "default": "Als Standard festlegen"
     },
     "button_label_save_filters": {
-      "default": "Filter speichern"
+      "default": "Filter als Standard festlegen"
     },
     "page_title_account_locked": {
       "default": "Konto gesperrt"

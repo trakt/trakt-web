@@ -1230,11 +1230,11 @@
     "header_filters": {
       "default": "Filters"
     },
-    "header_ignore_watched": {
-      "default": "Bekeken negeren"
+    "header_hide_watched": {
+      "default": "Bekeken verbergen"
     },
-    "header_ignore_watchlisted": {
-      "default": "Op de lijst negeren"
+    "header_hide_watchlisted": {
+      "default": "Watchlist verbergen"
     },
     "option_text_my_favorites": {
       "default": "Alleen favorieten"
@@ -1338,10 +1338,10 @@
       "default": "Spoilers tonen"
     },
     "button_text_save_filters": {
-      "default": "Opslaan"
+      "default": "Instellen als standaard"
     },
     "button_label_save_filters": {
-      "default": "Filters opslaan"
+      "default": "Filters instellen als standaard"
     },
     "page_title_account_locked": {
       "default": "Account vergrendeld"

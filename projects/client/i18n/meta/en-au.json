@@ -1230,11 +1230,11 @@
     "header_filters": {
       "default": "Filters"
     },
-    "header_ignore_watched": {
-      "default": "Ignore Watched"
+    "header_hide_watched": {
+      "default": "Hide Watched"
     },
-    "header_ignore_watchlisted": {
-      "default": "Ignore Watchlisted"
+    "header_hide_watchlisted": {
+      "default": "Hide Watchlisted"
     },
     "option_text_my_favorites": {
       "default": "My favourites"
@@ -1338,10 +1338,10 @@
       "default": "Show spoilers"
     },
     "button_text_save_filters": {
-      "default": "Save"
+      "default": "Set as default"
     },
     "button_label_save_filters": {
-      "default": "Save filters"
+      "default": "Set filters as default"
     },
     "page_title_account_locked": {
       "default": "Account locked"

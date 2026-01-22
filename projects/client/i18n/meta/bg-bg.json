@@ -1230,11 +1230,11 @@
     "header_filters": {
       "default": "Филтри"
     },
-    "header_ignore_watched": {
-      "default": "Пренебрегвай гледаното"
+    "header_hide_watched": {
+      "default": "Скрий гледаните"
     },
-    "header_ignore_watchlisted": {
-      "default": "Пренебрегвай в списъка за гледане"
+    "header_hide_watchlisted": {
+      "default": "Скрий в списъка за гледане"
     },
     "option_text_my_favorites": {
       "default": "Само любими"
@@ -1338,10 +1338,10 @@
       "default": "Показвай спойлери"
     },
     "button_text_save_filters": {
-      "default": "Запази"
+      "default": "Задай като по подразбиране"
     },
     "button_label_save_filters": {
-      "default": "Запази филтрите"
+      "default": "Задай филтрите като подразбиращи се"
     },
     "page_title_account_locked": {
       "default": "Акаунтът е заключен"

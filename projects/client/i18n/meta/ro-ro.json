@@ -1230,11 +1230,11 @@
     "header_filters": {
       "default": "Filtre"
     },
-    "header_ignore_watched": {
-      "default": "Ignoră Văzute"
+    "header_hide_watched": {
+      "default": "Ascunde vizionate"
     },
-    "header_ignore_watchlisted": {
-      "default": "Ignoră de Vizionat"
+    "header_hide_watchlisted": {
+      "default": "Ascunde pe lista de dorințe"
     },
     "option_text_my_favorites": {
       "default": "Doar favoritele"
@@ -1338,10 +1338,10 @@
       "default": "Arată spoilere"
     },
     "button_text_save_filters": {
-      "default": "Salvează"
+      "default": "Setează ca implicit"
     },
     "button_label_save_filters": {
-      "default": "Salvează filtrele"
+      "default": "Setează filtrele ca implicite"
     },
     "page_title_account_locked": {
       "default": "Cont blocat"

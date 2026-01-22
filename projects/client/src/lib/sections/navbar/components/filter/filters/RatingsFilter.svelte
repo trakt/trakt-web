@@ -45,7 +45,7 @@
   };
 </script>
 
-<Filter title={filter.label}>
+<Filter title={filter.label} variant="inline">
   <div class="trakt-filter-ratings">
     <ActionButton
       color="red"

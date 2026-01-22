@@ -1230,11 +1230,11 @@
     "header_filters": {
       "default": "フィルター"
     },
-    "header_ignore_watched": {
-      "default": "視聴済みを無視"
+    "header_hide_watched": {
+      "default": "視聴済みを非表示"
     },
-    "header_ignore_watchlisted": {
-      "default": "ウォッチリストを無視"
+    "header_hide_watchlisted": {
+      "default": "ウォッチリストを非表示"
     },
     "option_text_my_favorites": {
       "default": "Favorites only"
@@ -1338,10 +1338,10 @@
       "default": "ネタバレを表示"
     },
     "button_text_save_filters": {
-      "default": "保存"
+      "default": "デフォルトに設定"
     },
     "button_label_save_filters": {
-      "default": "フィルターを保存"
+      "default": "フィルターをデフォルトに設定"
     },
     "page_title_account_locked": {
       "default": "アカウントがロックされています"
