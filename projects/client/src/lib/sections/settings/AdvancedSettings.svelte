@@ -1,19 +1,12 @@
 <script lang="ts">
   import SettingsFrame from "$lib/components/frame/SettingsFrame.svelte";
-  import RawExport from "./RawExport.svelte";
 </script>
 
 <div class="trakt-advanced-settings">
   <SettingsFrame />
-  <div class="export-section">
-    <RawExport />
-  </div>
 </div>
 
 <style>
-  .export-section {
-    margin-top: var(--ni-16);
-  }
   .trakt-advanced-settings {
     width: 100%;
     max-width: var(--ni-640);

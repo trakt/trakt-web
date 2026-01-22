@@ -2054,6 +2054,9 @@
     "link_text_general_settings": {
       "default": "Algemeen"
     },
+    "link_text_data_settings": {
+      "default": "Gegevens"
+    },
     "link_text_advanced_settings": {
       "default": "Geavanceerd"
     },
@@ -2560,6 +2563,46 @@
           "type": "string"
         }
       }
+    },
+    "header_export": {
+      "default": "Exporteren"
+    },
+    "description_export": {
+      "default": "Ontvang een export van je gegevens in één ZIP-bestand. Dit kan even duren."
+    },
+    "text_raw_export": {
+      "default": "Ruwe export"
+    },
+    "button_text_raw_export": {
+      "default": "Nu exporteren"
+    },
+    "button_label_raw_export": {
+      "default": "Exporteer een ZIP-bestand met je ruwe gegevens."
+    },
+    "text_exporting": {
+      "default": "Exporteren… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "Exporteren mislukt. Controleer de browserconsole."
+    },
+    "text_export_status_fetching": {
+      "default": "Bezig met ophalen van {item}…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "Bestanden zippen…"
+    },
+    "text_export_status_complete": {
+      "default": "Export voltooid."
     }
   }
 }

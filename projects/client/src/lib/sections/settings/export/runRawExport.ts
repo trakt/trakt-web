@@ -15,9 +15,14 @@ interface TraktList {
   };
 }
 
+type ExportStatus =
+  | { type: 'fetch'; item: string }
+  | { type: 'zip' }
+  | { type: 'complete' };
+
 interface ExportOptions {
   user: UserLike;
-  onStatus: (msg: string) => void;
+  onStatus: (status: ExportStatus) => void;
   onProgress: (msg: string) => void;
   onComplete: () => void;
   onError: (err: unknown) => void;
@@ -164,7 +169,7 @@ export async function runRawExport({
 
   try {
     // Fetch dynamic list endpoints
-    onStatus('Fetching lists...');
+    onStatus({ type: 'fetch', item: 'lists' });
 
     await processEndpoint(`users/${slug}/lists`, (data) => {
       const lists = data as TraktList[];
@@ -180,7 +185,7 @@ export async function runRawExport({
     for (const endpoint of endpoints) {
       count++;
       onProgress(`(${count}/${endpoints.length})`);
-      onStatus(`Fetching ${endpoint.file}...`);
+      onStatus({ type: 'fetch', item: endpoint.file });
 
       await processEndpoint(endpoint.path, (data, { page, pageCount }) => {
         const suffix = page > 1 || pageCount > 1 ? `-${page}` : '';
@@ -189,7 +194,7 @@ export async function runRawExport({
       });
     }
 
-    onStatus('Zipping files...');
+    onStatus({ type: 'zip' });
     zip(files, (err, out) => {
       if (err) {
         error('Zip failed', err);
@@ -201,7 +206,7 @@ export async function runRawExport({
       });
 
       downloadFile(blob, `trakt-export-${slug}.zip`);
-      onStatus('Export complete!');
+      onStatus({ type: 'complete' });
       onComplete();
     });
   } catch (e) {

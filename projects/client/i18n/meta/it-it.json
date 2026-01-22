@@ -2054,6 +2054,9 @@
     "link_text_general_settings": {
       "default": "Generale"
     },
+    "link_text_data_settings": {
+      "default": "Dati"
+    },
     "link_text_advanced_settings": {
       "default": "Avanzate"
     },
@@ -2560,6 +2563,46 @@
           "type": "string"
         }
       }
+    },
+    "header_export": {
+      "default": "Esporta"
+    },
+    "description_export": {
+      "default": "Ottieni un'esportazione dei tuoi dati utente in un unico file ZIP. Potrebbe richiedere del tempo."
+    },
+    "text_raw_export": {
+      "default": "Esportazione grezza"
+    },
+    "button_text_raw_export": {
+      "default": "Esporta ora"
+    },
+    "button_label_raw_export": {
+      "default": "Esporta un file ZIP con i tuoi dati grezzi."
+    },
+    "text_exporting": {
+      "default": "Esportazione in corso… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "Esportazione fallita. Controlla la console del browser."
+    },
+    "text_export_status_fetching": {
+      "default": "Recupero {item}…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "Compressione file…"
+    },
+    "text_export_status_complete": {
+      "default": "Esportazione completata."
     }
   }
 }
