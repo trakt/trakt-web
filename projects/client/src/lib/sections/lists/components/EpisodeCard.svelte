@@ -33,7 +33,9 @@
 
   const isShowContext = $derived("context" in rest && rest.context === "show");
 
-  const src = $derived(useEpisodeSpoilerImage({ episode, show }));
+  const src = $derived(
+    useEpisodeSpoilerImage({ episode, show, variant: rest.variant }),
+  );
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 </script>

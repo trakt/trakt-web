@@ -25,7 +25,9 @@
     crew,
   }: EpisodeSummaryProps = $props();
 
-  const posterSrc = $derived(useEpisodeSpoilerImage({ episode, show }));
+  const posterSrc = $derived(
+    useEpisodeSpoilerImage({ episode, show, variant: "default" }),
+  );
 </script>
 
 <!-- 
