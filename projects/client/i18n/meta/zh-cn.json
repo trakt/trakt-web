@@ -1,0 +1,2960 @@
+{
+  "$schema": "../schema/meta-messages.schema.json",
+  "meta": {
+    "locale": "zh-CN",
+    "direction": "ltr",
+    "generator": {
+      "inlang": {
+        "enabled": true,
+        "outputPath": "./messages/{locale}.json"
+      },
+      "android": {
+        "enabled": true,
+        "outputPath": "./android/values-{locale}/strings.xml",
+        "resourceName": "strings"
+      },
+      "ios": {
+        "enabled": true,
+        "outputPath": "./ios/Localizable.xcstrings"
+      }
+    }
+  },
+  "messages": {
+    "list_title_upcoming_schedule": {
+      "default": "播出时间表"
+    },
+    "tag_text_season_premiere": {
+      "default": "新季首播"
+    },
+    "tag_text_series_premiere": {
+      "default": "全剧首播"
+    },
+    "tag_text_mid_season_premiere": {
+      "default": "季中回归"
+    },
+    "tag_text_season_finale": {
+      "default": "季终"
+    },
+    "tag_text_series_finale": {
+      "default": "全剧终"
+    },
+    "tag_text_mid_season_finale": {
+      "default": "季中结局"
+    },
+    "header_profile_banner_greeting": {
+      "default": "你好，{name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_up_next": {
+      "default": "继续观看"
+    },
+    "tag_text_remaining_episodes": {
+      "default": "剩 {count} 集",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_recommended_movies": {
+      "default": "推荐电影"
+    },
+    "list_title_recommended_shows": {
+      "default": "推荐剧集"
+    },
+    "tag_text_number_of_episodes": {
+      "default": "共 {count} 集",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "page_title_error_404": {
+      "default": "404：一片虚无。"
+    },
+    "error_text_404": {
+      "default": "（别担心，这很正常！就连原力有时也会失去平衡。）"
+    },
+    "link_text_back_to_safety": {
+      "default": "回到安全地带..."
+    },
+    "input_prompt_mark_as_watched_date": {
+      "default": "你是什么时候看完的？ (YYYY-MM-DD HH:MM)"
+    },
+    "button_text_watchlist": {
+      "default": "待看清单"
+    },
+    "button_text_mark_as_watched": {
+      "default": "标记为已看"
+    },
+    "button_text_watched_until_here": {
+      "default": "看到这里"
+    },
+    "button_text_watch_again": {
+      "default": "重温"
+    },
+    "button_label_add_to_watchlist": {
+      "default": "将“{title}”加入待看清单",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_mark_as_watched": {
+      "default": "标记“{title}”为已看",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_watched_until_here": {
+      "default": "标记“{title}”看到这里",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "translated_value_genre_horror": {
+      "default": "恐怖"
+    },
+    "translated_value_genre_comedy": {
+      "default": "喜剧"
+    },
+    "translated_value_genre_action": {
+      "default": "动作"
+    },
+    "translated_value_genre_adventure": {
+      "default": "冒险"
+    },
+    "translated_value_genre_animation": {
+      "default": "动画"
+    },
+    "translated_value_genre_biography": {
+      "default": "传记"
+    },
+    "translated_value_genre_children": {
+      "default": "儿童"
+    },
+    "translated_value_genre_crime": {
+      "default": "犯罪"
+    },
+    "translated_value_genre_documentary": {
+      "default": "纪录片"
+    },
+    "translated_value_genre_drama": {
+      "default": "剧情"
+    },
+    "translated_value_genre_family": {
+      "default": "家庭"
+    },
+    "translated_value_genre_fantasy": {
+      "default": "奇幻"
+    },
+    "translated_value_genre_game_show": {
+      "default": "游戏真人秀"
+    },
+    "translated_value_genre_history": {
+      "default": "历史"
+    },
+    "translated_value_genre_home_and_garden": {
+      "default": "家居园艺"
+    },
+    "translated_value_genre_holiday": {
+      "default": "假日"
+    },
+    "translated_value_genre_music": {
+      "default": "音乐"
+    },
+    "translated_value_genre_musical": {
+      "default": "歌舞"
+    },
+    "translated_value_genre_mystery": {
+      "default": "悬疑"
+    },
+    "translated_value_genre_news": {
+      "default": "新闻"
+    },
+    "translated_value_genre_none": {
+      "default": "无"
+    },
+    "translated_value_genre_reality": {
+      "default": "真人秀"
+    },
+    "translated_value_genre_romance": {
+      "default": "爱情"
+    },
+    "translated_value_genre_short": {
+      "default": "短片"
+    },
+    "translated_value_genre_soap": {
+      "default": "肥皂剧"
+    },
+    "translated_value_genre_special_interest": {
+      "default": "特别兴趣"
+    },
+    "translated_value_genre_sporting_event": {
+      "default": "体育赛事"
+    },
+    "translated_value_genre_suspense": {
+      "default": "惊悚"
+    },
+    "translated_value_genre_talk_show": {
+      "default": "脱口秀"
+    },
+    "translated_value_genre_thriller": {
+      "default": "惊悚"
+    },
+    "translated_value_genre_war": {
+      "default": "战争"
+    },
+    "translated_value_genre_western": {
+      "default": "西部"
+    },
+    "translated_value_genre_anime": {
+      "default": "日本动画"
+    },
+    "translated_value_genre_superhero": {
+      "default": "超级英雄"
+    },
+    "translated_value_genre_donghua": {
+      "default": "国产动画"
+    },
+    "translated_value_genre_mini_series": {
+      "default": "迷你剧"
+    },
+    "translated_value_genre_science_fiction": {
+      "default": "科幻"
+    },
+    "button_label_remove_from_watchlist": {
+      "default": "将“{title}”从待看清单移除",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "input_placeholder_search": {
+      "default": "搜索剧集和电影..."
+    },
+    "input_placeholder_search_movies": {
+      "default": "搜索电影..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "搜索剧集..."
+    },
+    "button_text_join_trakt": {
+      "default": "加入 Trakt"
+    },
+    "button_text_meet_team": {
+      "default": "认识团队"
+    },
+    "button_label_join_trakt": {
+      "default": "加入 trakt.tv 记录你的观影历程"
+    },
+    "text_copyright_notice": {
+      "default": "版权所有。"
+    },
+    "text_copyright_crafted_by": {
+      "default": "由全球团队匠心打造"
+    },
+    "button_text_join_trakt_for_free": {
+      "default": "免费加入 Trakt"
+    },
+    "header_landing_discover": {
+      "default": "发现"
+    },
+    "text_landing_discover": {
+      "default": "你会爱上的影视作品，以及即刻观看的平台。"
+    },
+    "header_landing_track": {
+      "default": "记录"
+    },
+    "text_landing_track": {
+      "default": "你看过的每一部电影、每一集和每一季，都在这里。"
+    },
+    "header_landing_share": {
+      "default": "分享"
+    },
+    "text_landing_share": {
+      "default": "发布观点、评分和片单，成为他人的观影指南。"
+    },
+    "text_landing_numbers_1": {
+      "default": "年的共同观影时光"
+    },
+    "text_landing_numbers_2": {
+      "default": "百万影视爱好者"
+    },
+    "text_landing_numbers_3": {
+      "default": "百万每周记录条目"
+    },
+    "list_title_trending": {
+      "default": "趋势"
+    },
+    "list_title_recommended": {
+      "default": "推荐"
+    },
+    "list_title_most_anticipated": {
+      "default": "备受期待"
+    },
+    "button_text_get_vip": {
+      "default": "获取"
+    },
+    "badge_text_get_vip": {
+      "default": "获取 VIP"
+    },
+    "button_label_get_vip": {
+      "default": "解锁 VIP 功能"
+    },
+    "link_label_get_vip": {
+      "default": "解锁 VIP 功能"
+    },
+    "button_label_user_profile": {
+      "default": "用户个人资料"
+    },
+    "list_title_most_popular": {
+      "default": "热门"
+    },
+    "button_text_browse_movies": {
+      "default": "电影"
+    },
+    "button_label_browse_movies": {
+      "default": "浏览电影"
+    },
+    "page_title_movies": {
+      "default": "电影"
+    },
+    "button_text_browse_shows": {
+      "default": "剧集"
+    },
+    "button_label_browse_shows": {
+      "default": "浏览剧集"
+    },
+    "page_title_shows": {
+      "default": "剧集"
+    },
+    "button_label_home": {
+      "default": "返回首页"
+    },
+    "page_title_home": {
+      "default": "首页"
+    },
+    "tag_text_plays": {
+      "default": "{number} 次播放",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_logout": {
+      "default": "登出"
+    },
+    "button_label_logout": {
+      "default": "登出"
+    },
+    "list_title_coming_soon": {
+      "default": "即将上映"
+    },
+    "tag_text_tba": {
+      "default": "待定"
+    },
+    "list_title_related_movies": {
+      "default": "相关电影"
+    },
+    "list_title_related_shows": {
+      "default": "相关剧集"
+    },
+    "text_about_placeholder_1": {
+      "default": "这位用户很神秘，就像谜语人一样...（也可能只是太懒了？谁知道呢。）"
+    },
+    "text_about_placeholder_2": {
+      "default": "看来这位用户忙着看片，没空写简介。（合理，我也一样。）"
+    },
+    "text_about_placeholder_3": {
+      "default": "此用户的个人资料一片空白，如同虚空...（就像我的社交生活一样，唉。）"
+    },
+    "text_about_placeholder_4": {
+      "default": "揭开这位用户身份的秘密...（如果你敢的话）"
+    },
+    "text_about_placeholder_5": {
+      "default": "这空白的简介下隐藏着什么？（真相就在那里...）"
+    },
+    "text_about_placeholder_6": {
+      "default": "这位用户是网络幽灵...（或者他们只是忘了填这个？）"
+    },
+    "text_about_placeholder_7": {
+      "default": "帮帮这位用户！叫他们把简介填了。（说不定他们会给你个云击掌！）"
+    },
+    "text_about_placeholder_8": {
+      "default": "这份简介渴望被关注。给它点爱，让用户填满它。"
+    },
+    "text_about_placeholder_9": {
+      "default": "别害羞！鼓励这位用户分享他们的故事。（每个人都有故事，哪怕只是关于他们最爱的剧。）"
+    },
+    "text_about_placeholder_10": {
+      "default": "这位用户就像大卫·林奇电影里的角色：神秘莫测，可能只是他们自己想象出来的虚构人物。"
+    },
+    "text_about_placeholder_11": {
+      "default": "这份简介就像周五晚上的音像店一样空荡荡。（还记得那时候吗？美好的旧时光。）"
+    },
+    "text_about_placeholder_12": {
+      "default": "这位用户正在效仿泰勒·德顿：拒绝消费主义，拥抱虚无。（或者他们只是还没来得及填这玩意儿。）"
+    },
+    "text_about_placeholder_13": {
+      "default": "一张风格化的图片：一个侦探疑惑地挠头，或者风滚草滚过空荡荡的页面。"
+    },
+    "text_about_placeholder_14": {
+      "default": "互动元素：一个按钮，允许用户友好地提醒资料主人去完善简介。"
+    },
+    "text_about_placeholder_15": {
+      "default": "个性化消息：如果你知道该用户的信息（例如观影历史），可以生成个性化占位符，比如“这人爱看恐怖片，但讨厌写简介。（也许忙着躲僵尸呢？）”"
+    },
+    "button_text_find_movies": {
+      "default": "寻找电影"
+    },
+    "button_text_find_shows": {
+      "default": "寻找剧集"
+    },
+    "list_title_show_credits": {
+      "default": "参演剧集"
+    },
+    "text_episodes_watched": {
+      "default": "{count} 集",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_movie_credits": {
+      "default": "参演电影"
+    },
+    "text_movies_watched": {
+      "default": "{count} 部电影",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "header_details": {
+      "default": "详情"
+    },
+    "button_label_expand_category": {
+      "default": "展开 {category}",
+      "variables": {
+        "category": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_more": {
+      "default": "还有 {count} 个",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "header_premiered": {
+      "default": "首播日期"
+    },
+    "header_runtime": {
+      "default": "时长"
+    },
+    "header_country": {
+      "default": "国家/地区"
+    },
+    "header_language": {
+      "default": "语言"
+    },
+    "header_studio": {
+      "default": "制作公司"
+    },
+    "header_genre": {
+      "default": "类型"
+    },
+    "button_label_browse_lists": {
+      "default": "浏览你的片单"
+    },
+    "page_title_lists": {
+      "default": "片单"
+    },
+    "list_title_watchlist_shows": {
+      "default": "剧集待看清单"
+    },
+    "list_title_watchlist_movies": {
+      "default": "电影待看清单"
+    },
+    "image_alt_streaming_service_logo": {
+      "default": "{service} logo",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "header_director": {
+      "default": "导演"
+    },
+    "header_writer": {
+      "default": "编剧"
+    },
+    "header_creator": {
+      "default": "主创"
+    },
+    "translated_value_job_action_director": {
+      "default": "动作导演"
+    },
+    "translated_value_job_additional_second_assistant_director": {
+      "default": "额外第二副导演"
+    },
+    "translated_value_job_additional_third_assistant_director": {
+      "default": "额外第三副导演"
+    },
+    "translated_value_job_assistant_director": {
+      "default": "副导演"
+    },
+    "translated_value_job_assistant_director_trainee": {
+      "default": "见习副导演"
+    },
+    "translated_value_job_co_director": {
+      "default": "联合导演"
+    },
+    "translated_value_job_continuity": {
+      "default": "场记"
+    },
+    "translated_value_job_crowd_assistant_director": {
+      "default": "群演副导演"
+    },
+    "translated_value_job_director": {
+      "default": "导演"
+    },
+    "translated_value_job_field_director": {
+      "default": "现场导演"
+    },
+    "translated_value_job_first_assistant_director": {
+      "default": "第一副导演"
+    },
+    "translated_value_job_first_assistant_director_trainee_prep": {
+      "default": "第一副导演（筹备）"
+    },
+    "translated_value_job_first_assistant_director_trainee": {
+      "default": "见习第一副导演"
+    },
+    "translated_value_job_insert_unit_director": {
+      "default": "插拍组导演"
+    },
+    "translated_value_job_insert_unit_first_assistant_director": {
+      "default": "插拍组第一副导演"
+    },
+    "translated_value_job_layout": {
+      "default": "布局设计"
+    },
+    "translated_value_job_other": {
+      "default": "其他"
+    },
+    "translated_value_job_script_coordinator": {
+      "default": "剧本统筹"
+    },
+    "translated_value_job_script_supervisor": {
+      "default": "剧本指导"
+    },
+    "translated_value_job_second_assistant_director": {
+      "default": "第二副导演"
+    },
+    "translated_value_job_second_assistant_director_trainee": {
+      "default": "见习第二副导演"
+    },
+    "translated_value_job_second_second_assistant_director": {
+      "default": "第二第二副导演"
+    },
+    "translated_value_job_second_unit_director": {
+      "default": "第二组导演"
+    },
+    "translated_value_job_second_unit_first_assistant_director": {
+      "default": "第二组第一副导演"
+    },
+    "translated_value_job_series_director": {
+      "default": "剧集导演"
+    },
+    "translated_value_job_series_guest_director": {
+      "default": "特邀导演"
+    },
+    "translated_value_job_stage_director": {
+      "default": "舞台导演"
+    },
+    "translated_value_job_third_assistant_director": {
+      "default": "第三副导演"
+    },
+    "translated_value_job_adaptation": {
+      "default": "改编"
+    },
+    "translated_value_job_author": {
+      "default": "原著作者"
+    },
+    "translated_value_job_book": {
+      "default": "原著书籍"
+    },
+    "translated_value_job_characters": {
+      "default": "角色设定"
+    },
+    "translated_value_job_co_writer": {
+      "default": "联合编剧"
+    },
+    "translated_value_job_comic_book": {
+      "default": "原著漫画"
+    },
+    "translated_value_job_creative_producer": {
+      "default": "创意制片人"
+    },
+    "translated_value_job_dialogue": {
+      "default": "台词"
+    },
+    "translated_value_job_executive_story_editor": {
+      "default": "执行故事编辑"
+    },
+    "translated_value_job_graphic_novel": {
+      "default": "原著绘本小说"
+    },
+    "translated_value_job_head_of_story": {
+      "default": "故事总监"
+    },
+    "translated_value_job_idea": {
+      "default": "创意"
+    },
+    "translated_value_job_junior_story_editor": {
+      "default": "初级故事编辑"
+    },
+    "translated_value_job_lyricist": {
+      "default": "作词"
+    },
+    "translated_value_job_musical": {
+      "default": "原著音乐剧"
+    },
+    "translated_value_job_novel": {
+      "default": "原著小说"
+    },
+    "translated_value_job_opera": {
+      "default": "原著歌剧"
+    },
+    "translated_value_job_original_concept": {
+      "default": "原创概念"
+    },
+    "translated_value_job_original_film_writer": {
+      "default": "原创电影编剧"
+    },
+    "translated_value_job_original_series_creator": {
+      "default": "原创剧集主创"
+    },
+    "translated_value_job_original_original_story": {
+      "default": "原创故事"
+    },
+    "translated_value_job_scenario_writer": {
+      "default": "脚本家"
+    },
+    "translated_value_job_screenplay": {
+      "default": "剧本"
+    },
+    "translated_value_job_screenstory": {
+      "default": "影视故事"
+    },
+    "translated_value_job_script_consultant": {
+      "default": "剧本顾问"
+    },
+    "translated_value_job_script_editor": {
+      "default": "剧本编辑"
+    },
+    "translated_value_job_senior_story_editor": {
+      "default": "高级故事编辑"
+    },
+    "translated_value_job_series_composition": {
+      "default": "系列构成"
+    },
+    "translated_value_job_short_story": {
+      "default": "原著短篇小说"
+    },
+    "translated_value_job_staff_writer": {
+      "default": "专职编剧"
+    },
+    "translated_value_job_story": {
+      "default": "故事"
+    },
+    "translated_value_job_story_story_artist": {
+      "default": "故事板画师"
+    },
+    "translated_value_job_story_story_consultant": {
+      "default": "故事顾问"
+    },
+    "translated_value_job_story_story_coordinator": {
+      "default": "故事统筹"
+    },
+    "translated_value_job_story_story_developer": {
+      "default": "故事开发"
+    },
+    "translated_value_job_story_story_editor": {
+      "default": "故事编辑"
+    },
+    "translated_value_job_story_story_manager": {
+      "default": "故事经理"
+    },
+    "translated_value_job_story_story_supervisor": {
+      "default": "故事主管"
+    },
+    "translated_value_job_storyboard": {
+      "default": "分镜"
+    },
+    "translated_value_job_teleplay": {
+      "default": "电视剧本"
+    },
+    "translated_value_job_texte": {
+      "default": "文本"
+    },
+    "translated_value_job_theatre_play": {
+      "default": "原著戏剧"
+    },
+    "translated_value_job_writer": {
+      "default": "编剧"
+    },
+    "translated_value_job_writers_assistant": {
+      "default": "编剧助理"
+    },
+    "translated_value_job_writers_production": {
+      "default": "编剧制作"
+    },
+    "translated_value_job_creator": {
+      "default": "主创"
+    },
+    "button_text_remove_from_history": {
+      "default": "从已看记录中移除"
+    },
+    "button_label_remove_from_watched": {
+      "default": "将“{title}”从已看列表中移除",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_from_watched": {
+      "default": "确定要将“{title}”从已看列表中移除吗？所有播放记录都将被删除。",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_remove_from_history": {
+      "default": "从已看列表中移除“{title}”的这条播放记录",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_single_watched": {
+      "default": "确定要从已看列表中移除“{title}”的这条播放记录吗？",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_seasons": {
+      "default": "季"
+    },
+    "text_season_number": {
+      "default": "第 {number} 季",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "text_season_specials": {
+      "default": "特别篇"
+    },
+    "button_label_expand_media_overview": {
+      "default": "展开“{title}”简介",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_season_episode_number": {
+      "default": "第 {season} 季 • 第 {number} 集",
+      "variables": {
+        "season": {
+          "type": "number"
+        },
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_share": {
+      "default": "分享“{title}”",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_share": {
+      "default": "分享"
+    },
+    "button_text_trailer": {
+      "default": "预告片"
+    },
+    "header_status": {
+      "default": "状态"
+    },
+    "translated_value_status_released": {
+      "default": "已上映"
+    },
+    "translated_value_status_planned": {
+      "default": "计划中"
+    },
+    "translated_value_status_post_production": {
+      "default": "后期制作中"
+    },
+    "translated_value_status_canceled": {
+      "default": "已取消"
+    },
+    "translated_value_status_in_production": {
+      "default": "制作中"
+    },
+    "translated_value_status_rumored": {
+      "default": "传闻中"
+    },
+    "translated_value_status_ended": {
+      "default": "已完结"
+    },
+    "translated_value_status_returning_series": {
+      "default": "续订中"
+    },
+    "translated_value_status_pilot": {
+      "default": "试播集"
+    },
+    "translated_value_status_continuing": {
+      "default": "连载中"
+    },
+    "translated_value_status_upcoming": {
+      "default": "即将推出"
+    },
+    "translated_value_status_unknown": {
+      "default": "未知"
+    },
+    "header_expected_premiere": {
+      "default": "预计首播"
+    },
+    "image_alt_person_headshot": {
+      "default": "{person} 的头像",
+      "variables": {
+        "person": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_actors": {
+      "default": "演员"
+    },
+    "button_label_view_all_trending_movies": {
+      "default": "查看所有趋势电影"
+    },
+    "button_label_view_all_trending_shows": {
+      "default": "查看所有趋势剧集"
+    },
+    "list_title_trending_shows": {
+      "default": "趋势剧集"
+    },
+    "list_title_trending_movies": {
+      "default": "趋势电影"
+    },
+    "button_text_view_all": {
+      "default": "更多"
+    },
+    "tag_text_full_season": {
+      "default": "整季"
+    },
+    "warning_prompt_remove_from_watchlist": {
+      "default": "确定要将“{title}”从待看清单中移除吗？",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_view_all_recommended_movies": {
+      "default": "查看所有推荐电影"
+    },
+    "button_label_view_all_recommended_shows": {
+      "default": "查看所有推荐剧集"
+    },
+    "button_label_view_all_anticipated_movies": {
+      "default": "查看所有期待电影"
+    },
+    "button_label_view_all_anticipated_shows": {
+      "default": "查看所有期待剧集"
+    },
+    "list_title_anticipated_movies": {
+      "default": "备受期待的电影"
+    },
+    "list_title_anticipated_shows": {
+      "default": "备受期待的剧集"
+    },
+    "button_label_view_all_popular_movies": {
+      "default": "查看所有热门电影"
+    },
+    "button_label_view_all_popular_shows": {
+      "default": "查看所有热门剧集"
+    },
+    "list_title_popular_movies": {
+      "default": "热门电影"
+    },
+    "list_title_popular_shows": {
+      "default": "热门剧集"
+    },
+    "header_rate_now": {
+      "default": "评分"
+    },
+    "button_text_add_to_favorites": {
+      "default": "加入收藏"
+    },
+    "button_text_remove_from_favorites": {
+      "default": "移除收藏"
+    },
+    "button_label_add_to_favorites": {
+      "default": "将“{title}”加入收藏",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_remove_from_favorites": {
+      "default": "将“{title}”移除收藏",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_from_favorites": {
+      "default": "确定要将“{title}”从收藏夹移除吗？",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_favorite_movies": {
+      "default": "收藏的电影"
+    },
+    "list_title_favorite_shows": {
+      "default": "收藏的剧集"
+    },
+    "list_title_favorites": {
+      "default": "收藏夹"
+    },
+    "list_placeholder_favorite_movies": {
+      "default": "这里还没有收藏的电影。"
+    },
+    "list_placeholder_favorite_shows": {
+      "default": "这里还没有收藏的剧集。"
+    },
+    "list_placeholder_favorites": {
+      "default": "这里还没有收藏内容。"
+    },
+    "button_text_stream_on": {
+      "default": "观看平台"
+    },
+    "header_stream_on": {
+      "default": "观看平台"
+    },
+    "header_streaming": {
+      "default": "可用平台"
+    },
+    "button_label_popup_menu": {
+      "default": "“{title}”的弹出菜单",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_popular_lists": {
+      "default": "热门片单"
+    },
+    "list_placeholder_popular_lists": {
+      "default": "“{title}”未出现在任何热门片单中。",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_by": {
+      "default": "创建者："
+    },
+    "image_alt_user_avatar": {
+      "default": "{username} 的头像",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "image_alt_media_poster": {
+      "default": "“{title}”的海报",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_placeholder_comments": {
+      "default": "暂无评论。"
+    },
+    "list_placeholder_replies": {
+      "default": "暂无回复。"
+    },
+    "text_review_by": {
+      "default": "评论人"
+    },
+    "text_shout_by": {
+      "default": "喊话人"
+    },
+    "text_reply_by": {
+      "default": "回复人"
+    },
+    "text_deleted_username": {
+      "default": "已注销用户"
+    },
+    "list_title_social_activity": {
+      "default": "好友动态"
+    },
+    "button_label_view_all_social_activity": {
+      "default": "查看所有好友动态"
+    },
+    "dropdown_label_person_position": {
+      "default": "职位"
+    },
+    "translated_value_position_acting": {
+      "default": "表演"
+    },
+    "translated_value_position_self": {
+      "default": "本人"
+    },
+    "translated_value_position_narrator": {
+      "default": "旁白"
+    },
+    "translated_value_position_production": {
+      "default": "制作"
+    },
+    "translated_value_position_art": {
+      "default": "美术"
+    },
+    "translated_value_position_crew": {
+      "default": "剧组"
+    },
+    "translated_value_position_costume___make_up": {
+      "default": "服装与化妆"
+    },
+    "translated_value_position_directing": {
+      "default": "导演"
+    },
+    "translated_value_position_writing": {
+      "default": "编剧"
+    },
+    "translated_value_position_sound": {
+      "default": "音效"
+    },
+    "translated_value_position_camera": {
+      "default": "摄影"
+    },
+    "translated_value_position_lighting": {
+      "default": "灯光"
+    },
+    "translated_value_position_visual_effects": {
+      "default": "视觉特效"
+    },
+    "translated_value_position_editing": {
+      "default": "剪辑"
+    },
+    "translated_value_position_creator": {
+      "default": "主创"
+    },
+    "translated_value_position_created_by": {
+      "default": "主创"
+    },
+    "list_title_personal_lists": {
+      "default": "我的片单"
+    },
+    "list_title_collaborative_lists": {
+      "default": "协作片单"
+    },
+    "list_title_liked_lists": {
+      "default": "喜欢的片单"
+    },
+    "text_share_movie": {
+      "default": "刚发现《{title}》——你一定要看！🎬",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_show": {
+      "default": "发现了这部神剧：《{title}》！📺",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_episode": {
+      "default": "刚看完《{show}》S{season}E{episode} - {title}！🔥",
+      "variables": {
+        "show": {
+          "type": "string"
+        },
+        "season": {
+          "type": "number"
+        },
+        "episode": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_person": {
+      "default": "快来 Trakt 看看 {name}！🎭",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_profile": {
+      "default": "快来 Trakt 看看 {name}！🎭",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_recently_watched": {
+      "default": "最近观看"
+    },
+    "list_title_available_now": {
+      "default": "现已上线"
+    },
+    "tag_text_preview": {
+      "default": "预览"
+    },
+    "tooltip_text_preview_feature": {
+      "default": "此功能正如死星还在建造中。我们正在打磨体验，力求让它像天使合唱般完美（至少也要运行流畅，不让你感到存在主义危机）。"
+    },
+    "header_airs": {
+      "default": "播出时间"
+    },
+    "header_aired": {
+      "default": "已播出"
+    },
+    "warning_prompt_drop_show": {
+      "default": "确定要弃剧“{title}”吗？这将把它从你的“继续观看”列表中移除。",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_show": {
+      "default": "将剧集“{title}”标记为弃剧",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_show": {
+      "default": "弃剧"
+    },
+    "warning_prompt_drop_movie": {
+      "default": "确定要放弃“{title}”吗？这将把它从你的“继续观看”列表中移除。",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "将电影“{title}”标记为放弃",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "放弃电影"
+    },
+    "warning_prompt_restore_show": {
+      "default": "确定要恢复“{title}”吗？这将恢复它的进度和日历显示。",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_restore_show": {
+      "default": "恢复剧集“{title}”",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_restore_show": {
+      "default": "恢复剧集"
+    },
+    "warning_prompt_mark_as_watched_show": {
+      "default": "确定要将“{title}”标记为已看吗？这将把所有剧集标记为已看。",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_mark_as_watched_show_until": {
+      "default": "确定要将“{title}”第 {episode} 集之前的所有未看剧集标记为已看吗？这将标记 {count} 集。",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "episode": {
+          "type": "number"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "warning_prompt_mark_as_watched_multiple_episodes": {
+      "default": "确定要将 {count} 集标记为已看吗？",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "tag_text_watch_count": {
+      "default": "观看次数"
+    },
+    "list_placeholder_media_history": {
+      "default": "你还没有看过“{title}”",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_comment_likes": {
+      "default": "{count} 个赞",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_close": {
+      "default": "关闭"
+    },
+    "button_label_comment_replies": {
+      "default": "评论回复"
+    },
+    "button_text_comment_replies": {
+      "default": "{count} 条回复",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_comments": {
+      "default": "评论"
+    },
+    "dialog_title_comments": {
+      "default": "评论"
+    },
+    "dialog_title_comment": {
+      "default": "评论"
+    },
+    "button_text_add_review": {
+      "default": "添加评论"
+    },
+    "button_text_add_reply": {
+      "default": "添加回复"
+    },
+    "button_label_comment_reply": {
+      "default": "回复 {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
+    },
+    "textarea_placeholder_reply": {
+      "default": "回复..."
+    },
+    "button_label_add_new_comment": {
+      "default": "添加新评论"
+    },
+    "textarea_placeholder_comment": {
+      "default": "添加评论..."
+    },
+    "switch_label_mark_as_spoiler": {
+      "default": "标记为剧透"
+    },
+    "text_spoiler": {
+      "default": "剧透"
+    },
+    "button_label_close_error": {
+      "default": "关闭错误"
+    },
+    "button_label_post_reply": {
+      "default": "发布回复"
+    },
+    "translated_value_error_comment_invalid_content": {
+      "default": "评论至少需要 5 个字。"
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "回复至少需要 5 个字。"
+    },
+    "translated_value_error_comment_unknown": {
+      "default": "发布评论时发生错误。请稍后再试。"
+    },
+    "page_title_user_profile": {
+      "default": "{username} 的个人资料",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "header_private_profile": {
+      "default": "此个人资料是私密的"
+    },
+    "text_private_profile_description": {
+      "default": "秘密已经够多了。{username} 决定把他们的秘密留给自己。",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "header_original_title": {
+      "default": "原名"
+    },
+    "button_label_view_all_comments": {
+      "default": "查看所有评论"
+    },
+    "button_text_remove_from_list": {
+      "default": "从片单移除"
+    },
+    "button_label_remove_from_list": {
+      "default": "将“{title}”从片单移除",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_service_unavailable": {
+      "default": "无法连接 Trakt 服务"
+    },
+    "error_text_service_unavailable": {
+      "default": "连接...消失了。就像被遗忘的记忆。"
+    },
+    "link_text_service_status": {
+      "default": "Trakt 服务状态"
+    },
+    "button_text_retry": {
+      "default": "重试"
+    },
+    "button_label_retry": {
+      "default": "重试"
+    },
+    "header_community_sentiment": {
+      "default": "社区情绪"
+    },
+    "button_text_lists": {
+      "default": "片单"
+    },
+    "button_text_listed": {
+      "default": "已列入"
+    },
+    "dropdown_label_add_remove_from_lists": {
+      "default": "添加或移除“{title}”于片单",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_add_to_personal_list": {
+      "default": "将“{title}”添加到 {list}",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "list": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_remove_from_personal_list": {
+      "default": "将“{title}”从 {list} 移除",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "list": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_from_personal_list": {
+      "default": "确定要将“{title}”从 {list} 中移除吗？",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "list": {
+          "type": "string"
+        }
+      }
+    },
+    "option_text_theme_light": {
+      "default": "浅色"
+    },
+    "option_text_theme_dark": {
+      "default": "深色"
+    },
+    "option_text_theme_system": {
+      "default": "系统"
+    },
+    "button_label_filters": {
+      "default": "筛选"
+    },
+    "button_label_reset_filter": {
+      "default": "重置"
+    },
+    "text_search_results_for": {
+      "default": "“{query}”的搜索结果",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "translated_value_type_movie": {
+      "default": "电影"
+    },
+    "translated_value_type_show": {
+      "default": "剧集"
+    },
+    "header_device_auth_try_again": {
+      "default": "激活被拒绝、已过期或发生了不可预见的情况。请重试。"
+    },
+    "header_device_auth_qr_instruction": {
+      "default": "扫描二维码，或登录："
+    },
+    "header_device_auth_code_instruction": {
+      "default": "并输入以下代码："
+    },
+    "option_text_all": {
+      "default": "全部"
+    },
+    "header_filters": {
+      "default": "筛选"
+    },
+    "header_hide_watched": {
+      "default": "隐藏已看"
+    },
+    "header_hide_watchlisted": {
+      "default": "隐藏待看"
+    },
+    "option_text_my_favorites": {
+      "default": "我的收藏"
+    },
+    "option_text_all_digital_releases": {
+      "default": "所有数字发行"
+    },
+    "option_text_streaming_now": {
+      "default": "正在流媒体播放"
+    },
+    "header_decade": {
+      "default": "年代"
+    },
+    "header_ratings": {
+      "default": "评分"
+    },
+    "button_label_view_all_items_in": {
+      "default": "查看“{title}”中的所有项目",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_reset_all_filters": {
+      "default": "重置全部"
+    },
+    "button_label_reset_all_filters": {
+      "default": "重置所有筛选"
+    },
+    "translated_value_video_type_trailer": {
+      "default": "预告片"
+    },
+    "translated_value_video_type_clip": {
+      "default": "片段"
+    },
+    "translated_value_video_type_teaser": {
+      "default": "先行版预告"
+    },
+    "translated_value_video_type_featurette": {
+      "default": "特辑"
+    },
+    "translated_value_video_type_recap": {
+      "default": "回顾"
+    },
+    "translated_value_video_type_behind_the_scenes": {
+      "default": "幕后花絮"
+    },
+    "translated_value_video_type_bloopers": {
+      "default": "NG 镜头"
+    },
+    "header_now_playing": {
+      "default": "正在播放"
+    },
+    "text_remaining": {
+      "default": "剩余"
+    },
+    "button_text_checkin": {
+      "default": "正在观看"
+    },
+    "button_label_checkin": {
+      "default": "正在观看“{title}”",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_cookie_notice": {
+      "default": "Trakt 使用 C🍪🍪KIES 来增强您的体验。您可以在此<a>阅读更多信息</a>。"
+    },
+    "button_text_cookie_accept": {
+      "default": "全部接受"
+    },
+    "button_label_cookie_accept": {
+      "default": "接受所有 cookie"
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "仅功能性"
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "仅接受功能性 cookie"
+    },
+    "page_title_year_to_date": {
+      "default": "年初至今"
+    },
+    "page_title_year_in_review": {
+      "default": "{year} 年度回顾",
+      "variables": {
+        "year": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_month_in_review": {
+      "default": "月度回顾"
+    },
+    "page_title_settings": {
+      "default": "设置"
+    },
+    "button_label_settings": {
+      "default": "设置"
+    },
+    "header_spoilers": {
+      "default": "剧透"
+    },
+    "text_show_spoilers": {
+      "default": "显示剧透"
+    },
+    "switch_label_spoilers": {
+      "default": "显示剧透"
+    },
+    "button_text_save_filters": {
+      "default": "设为默认"
+    },
+    "button_label_save_filters": {
+      "default": "将筛选设为默认"
+    },
+    "page_title_account_locked": {
+      "default": "账户已锁定"
+    },
+    "error_text_locked_account": {
+      "default": "您的账户已被锁定，请<a>联系客服</a>解决此问题。"
+    },
+    "error_text_lists_limit": {
+      "default": "您的个人片单数量已达上限。升级到 VIP 即可创建无限片单！"
+    },
+    "text_first_play_this_month": {
+      "default": "本月首次观看"
+    },
+    "text_shows_watched": {
+      "default": "{count} 部剧集",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_follow": {
+      "default": "关注"
+    },
+    "button_label_follow": {
+      "default": "关注 {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_unfollow": {
+      "default": "取消关注"
+    },
+    "button_label_unfollow": {
+      "default": "取消关注 {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_unfollow_user": {
+      "default": "确定要取消关注 {username} 吗？",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_upsell": {
+      "default": "解锁 VIP 功能，提升 Trakt 体验"
+    },
+    "text_vip_upsell_description": {
+      "default": "想查看您的年度和月度回顾？并获得更多功能？注册 Trakt VIP。"
+    },
+    "list_title_social": {
+      "default": "社交"
+    },
+    "list_placeholder_followers": {
+      "default": "这里还没有人（暂时）。"
+    },
+    "list_placeholder_following": {
+      "default": "这里还没有人（暂时）。"
+    },
+    "button_label_read_more": {
+      "default": "阅读更多"
+    },
+    "button_label_add_comment": {
+      "default": "添加评论"
+    },
+    "input_prompt_rename_list": {
+      "default": "重命名你的片单"
+    },
+    "button_text_rename_list": {
+      "default": "重命名"
+    },
+    "button_label_rename_list": {
+      "default": "重命名你的片单 {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_view_all_hot_shows": {
+      "default": "查看所有热门剧集"
+    },
+    "button_label_view_all_hot_movies": {
+      "default": "查看所有热门电影"
+    },
+    "list_title_extras": {
+      "default": "花絮"
+    },
+    "page_title_up_next": {
+      "default": "继续观看"
+    },
+    "page_title_social_activity": {
+      "default": "好友动态"
+    },
+    "page_title_trending_shows": {
+      "default": "趋势剧集"
+    },
+    "page_title_recommended_shows": {
+      "default": "推荐剧集"
+    },
+    "page_title_popular_shows": {
+      "default": "热门剧集"
+    },
+    "page_title_anticipated_shows": {
+      "default": "备受期待的剧集"
+    },
+    "page_title_trending_movies": {
+      "default": "趋势电影"
+    },
+    "page_title_recommended_movies": {
+      "default": "推荐电影"
+    },
+    "page_title_popular_movies": {
+      "default": "热门电影"
+    },
+    "page_title_anticipated_movies": {
+      "default": "备受期待的电影"
+    },
+    "page_title_recently_watched": {
+      "default": "最近观看"
+    },
+    "page_title_profile": {
+      "default": "个人资料"
+    },
+    "page_title_search_results": {
+      "default": "“{query}”的搜索结果",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_search": {
+      "default": "搜索"
+    },
+    "dropdown_label_extras": {
+      "default": "花絮"
+    },
+    "button_label_star_rating": {
+      "default": "打分 {stars} 星。",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      }
+    },
+    "badge_text_more": {
+      "default": "还有 {count} 个",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_stop_playing": {
+      "default": "停止“{title}”的签到",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "link_text_view_profile": {
+      "default": "查看个人资料"
+    },
+    "button_label_search": {
+      "default": "搜索"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "“{title}”中条目的海报",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_delete_list": {
+      "default": "删除"
+    },
+    "button_label_delete_list": {
+      "default": "删除你的片单 {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "确定要删除片单 {name} 吗？",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "link_text_vip_list_upsell": {
+      "default": "以添加更多片单"
+    },
+    "button_text_create_list": {
+      "default": "片单"
+    },
+    "button_text_create": {
+      "default": "创建"
+    },
+    "button_text_apply": {
+      "default": "应用"
+    },
+    "button_text_continue": {
+      "default": "继续"
+    },
+    "button_label_create_list": {
+      "default": "创建片单"
+    },
+    "button_text_cta_create_list": {
+      "default": "创建片单"
+    },
+    "page_title_create_list": {
+      "default": "创建片单"
+    },
+    "page_description_create_list": {
+      "default": "为你的片单输入名称和描述。"
+    },
+    "page_description_edit_list": {
+      "default": "编辑你的片单详情。"
+    },
+    "page_title_edit_list": {
+      "default": "编辑片单"
+    },
+    "list_placeholder_personal_list_empty": {
+      "default": "此片单暂无内容。"
+    },
+    "list_placeholder_personal_list_empty_shows": {
+      "default": "此片单暂无剧集。"
+    },
+    "list_placeholder_personal_list_empty_movies": {
+      "default": "此片单暂无电影。"
+    },
+    "text_avatar": {
+      "default": "头像"
+    },
+    "text_private_account": {
+      "default": "私密账户"
+    },
+    "switch_label_private": {
+      "default": "个人资料是否私密"
+    },
+    "text_all_settings": {
+      "default": "所有设置"
+    },
+    "text_display_name": {
+      "default": "显示名称"
+    },
+    "button_label_change_display_name": {
+      "default": "更改显示名称"
+    },
+    "text_location": {
+      "default": "位置"
+    },
+    "button_label_change_location": {
+      "default": "更改位置"
+    },
+    "text_about": {
+      "default": "关于我"
+    },
+    "text_automatic_tracking": {
+      "default": "自动记录"
+    },
+    "text_streaming_sync": {
+      "default": "流媒体同步"
+    },
+    "button_label_change_about": {
+      "default": "更改关于"
+    },
+    "input_prompt_display_name": {
+      "default": "你的显示名称是什么？"
+    },
+    "input_prompt_location": {
+      "default": "你在哪里？"
+    },
+    "input_prompt_about": {
+      "default": "介绍一下你自己。"
+    },
+    "header_favorite_genres": {
+      "default": "喜爱的类型"
+    },
+    "button_label_toggle_genre": {
+      "default": "切换 {genre} 类型",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_list": {
+      "default": "快来 Trakt 看看这个“{name}”片单！📋",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_top_list": {
+      "default": "快来 Trakt 看看 {name}！🔥",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_watchlist": {
+      "default": "待看清单"
+    },
+    "list_title_watchlist": {
+      "default": "待看清单"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "查看所有待看条目"
+    },
+    "button_text_shows": {
+      "default": "剧集"
+    },
+    "button_label_shows": {
+      "default": "剧集"
+    },
+    "button_text_movies": {
+      "default": "电影"
+    },
+    "button_label_movies": {
+      "default": "电影"
+    },
+    "button_text_view_details": {
+      "default": "查看详情"
+    },
+    "button_text_hide_details": {
+      "default": "隐藏详情"
+    },
+    "episode_footer_season_episode": {
+      "default": "S{seasonNumber} • E{episodeNumber}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "episodeNumber": {
+          "type": "number"
+        }
+      }
+    },
+    "episode_footer_season_episode_range": {
+      "default": "S{seasonNumber} • E{startEpisode}-{endEpisode}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "startEpisode": {
+          "type": "number"
+        },
+        "endEpisode": {
+          "type": "number"
+        }
+      }
+    },
+    "translated_value_reaction_like": {
+      "default": "赞"
+    },
+    "translated_value_reaction_dislike": {
+      "default": "踩"
+    },
+    "translated_value_reaction_love": {
+      "default": "爱"
+    },
+    "translated_value_reaction_laugh": {
+      "default": "笑"
+    },
+    "translated_value_reaction_shocked": {
+      "default": "震惊"
+    },
+    "translated_value_reaction_bravo": {
+      "default": "精彩"
+    },
+    "translated_value_reaction_spoiler": {
+      "default": "剧透"
+    },
+    "button_label_popup_reactions": {
+      "default": "反应"
+    },
+    "button_label_react": {
+      "default": "回应 {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
+    },
+    "tag_text_movies": {
+      "default": "电影"
+    },
+    "tag_text_released": {
+      "default": "已上映"
+    },
+    "header_post_credits": {
+      "default": "片尾彩蛋"
+    },
+    "text_after_credits": {
+      "default": "字幕后"
+    },
+    "text_during_credits": {
+      "default": "字幕中"
+    },
+    "button_label_toggle_search_media": {
+      "default": "搜索影视"
+    },
+    "button_text_toggle_search_media": {
+      "default": "影视"
+    },
+    "button_label_toggle_search_people": {
+      "default": "搜索人物"
+    },
+    "button_text_toggle_search_people": {
+      "default": "人物"
+    },
+    "input_placeholder_search_people": {
+      "default": "搜索人物..."
+    },
+    "link_text_forums": {
+      "default": "论坛"
+    },
+    "link_text_support": {
+      "default": "支持"
+    },
+    "link_text_terms": {
+      "default": "使用条款"
+    },
+    "link_text_policy": {
+      "default": "隐私政策"
+    },
+    "header_calendar": {
+      "default": "日历"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "上一时段"
+    },
+    "button_label_next_calendar_period": {
+      "default": "下一时段"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "今天"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "今天"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "转到 {day}",
+      "variables": {
+        "day": {
+          "type": "number"
+        }
+      }
+    },
+    "text_calendar_placeholder_1": {
+      "default": "这天没有安排。休息一下，享受阳光吧。"
+    },
+    "text_calendar_placeholder_2": {
+      "default": "此日期未找到项目。要不换一天试试？"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "看来这天没什么安排。放松心情，歇会儿吧。"
+    },
+    "text_calendar_placeholder_4": {
+      "default": "这天你的日历是空的。正好补个觉。"
+    },
+    "text_calendar_placeholder_5": {
+      "default": "这天完全空闲。也许开始做点新事情？"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "没计划。即兴做点什么吧。"
+    },
+    "text_calendar_placeholder_7": {
+      "default": "无安排。享受自由时光。"
+    },
+    "text_calendar_placeholder_8": {
+      "default": "你的日程已清空。好好利用它。"
+    },
+    "text_calendar_placeholder_9": {
+      "default": "这天没有活动。也许重温一下旧爱？"
+    },
+    "text_calendar_placeholder_10": {
+      "default": "一切清空。去探索点不一样的东西吧。"
+    },
+    "page_title_calendar": {
+      "default": "日历"
+    },
+    "button_label_calendar": {
+      "default": "日历"
+    },
+    "text_cta_up_next_media": {
+      "default": "你的影视，你的节奏。无缝衔接上次进度。你最近在看什么？"
+    },
+    "text_cta_up_next": {
+      "default": "你的剧集，你的节奏。无缝衔接上次进度。你最近在看什么？"
+    },
+    "text_cta_up_next_movies": {
+      "default": "你的电影，你的节奏。无缝衔接上次进度。你最近在看什么？"
+    },
+    "text_cta_start_watching_media": {
+      "default": "你的队列已就绪。添加你期待已久的影视作品。接下来看什么？"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "你的队列已就绪。添加你期待已久的剧集。接下来看什么？"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "你的队列已就绪。添加你期待已久的电影。接下来看什么？"
+    },
+    "text_cta_watchlist_released": {
+      "default": "想看就存，稍后欣赏。开始打造你的私人电影队列。"
+    },
+    "text_cta_upcoming_media": {
+      "default": "你的时间线。通过你关注的即将播出的剧集和电影列表，掌握最新动态。"
+    },
+    "text_cta_upcoming": {
+      "default": "你的时间线。通过你关注的即将播出的剧集列表，掌握最新动态。"
+    },
+    "text_cta_upcoming_movies": {
+      "default": "你的时间线。通过你关注的即将上映的电影列表，掌握最新动态。"
+    },
+    "text_cta_watchlist_unreleased": {
+      "default": "灯光，摄像……没了？先把片名加入待看清单，坐等上线刷剧。"
+    },
+    "text_cta_activity": {
+      "default": "继续添加更多来自我们团队的内容。"
+    },
+    "text_cta_personal_activity": {
+      "default": "观看，记录。你的观影历史将在此实时更新。"
+    },
+    "text_cta_activity_list": {
+      "default": "关注 Trakt 团队，看看他们在看什么，快速结交新朋友。"
+    },
+    "text_cta_watchlist": {
+      "default": "想看就存，稍后欣赏。开始打造你的私人待看清单。"
+    },
+    "text_cta_watchlist_movies": {
+      "default": "想看就存，稍后欣赏。开始打造你的私人电影队列。"
+    },
+    "text_cta_watchlist_shows": {
+      "default": "想看就存，稍后欣赏。开始打造你的私人剧集队列。"
+    },
+    "text_cta_personal_lists": {
+      "default": "你的片单，你做主。按你的方式收集和整理影视作品。"
+    },
+    "text_cta_favorites": {
+      "default": "你的最爱，你的故事。展示那些让你印象深刻的影视作品。"
+    },
+    "text_cta_favorites_movies": {
+      "default": "你的最爱，你的故事。展示那些让你印象深刻的电影。"
+    },
+    "text_cta_favorites_shows": {
+      "default": "你的最爱，你的故事。展示那些让你印象深刻的剧集。"
+    },
+    "text_cta_favorites_list": {
+      "default": "你的最爱，你的精选。展示那些让你印象深刻的影视作品。那些让你大笑、哭泣或重新思考一切的作品。你所有的心头好，留给每一种心情和时刻。"
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "你的最爱，你的精选。展示那些让你印象深刻的电影。那些让你大笑、哭泣或重新思考一切的作品。你所有的心头好，留给每一种心情和时刻。"
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "你的最爱，你的精选。展示那些让你印象深刻的剧集。那些让你大笑、哭泣或重新思考一切的作品。你所有的心头好，留给每一种心情和时刻。"
+    },
+    "link_text_discover_more": {
+      "default": "发现更多"
+    },
+    "link_label_discover_more": {
+      "default": "发现更多"
+    },
+    "link_text_discover_media": {
+      "default": "发现影视"
+    },
+    "link_label_discover_media": {
+      "default": "发现影视"
+    },
+    "link_text_discover_shows": {
+      "default": "发现剧集"
+    },
+    "link_label_discover_shows": {
+      "default": "发现剧集"
+    },
+    "link_text_discover_movies": {
+      "default": "发现电影"
+    },
+    "link_label_discover_movies": {
+      "default": "发现电影"
+    },
+    "header_comment_reactions": {
+      "default": "评论反应"
+    },
+    "button_label_close_reaction": {
+      "default": "关闭"
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "确定要停止观看“{title}”吗？",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_manage_subscription": {
+      "default": "管理订阅"
+    },
+    "button_label_manage_subscription": {
+      "default": "管理订阅"
+    },
+    "header_account_details": {
+      "default": "账户详情"
+    },
+    "description_account_details": {
+      "default": "更改你的头像、名称和其他详情。"
+    },
+    "description_spoilers": {
+      "default": "为了那些喜欢保持神秘感的人。"
+    },
+    "description_genres": {
+      "default": "添加或移除你 {limit} 个最喜欢的类型。",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_activity": {
+      "default": "动态"
+    },
+    "button_text_social": {
+      "default": "社交"
+    },
+    "button_text_personal": {
+      "default": "个人"
+    },
+    "page_title_unexpected_error": {
+      "default": "出错了"
+    },
+    "error_text_unexpected_error": {
+      "default": "噢噢……这不在计划之内。如果问题持续存在，请<a>提交新问题</a>。"
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "哎呀，没找到。你的筛选条件可能太严格了。"
+    },
+    "error_text_unexpected_error_short": {
+      "default": "噢噢……这不在计划之内。如果问题持续存在，请联系 Trakt 支持。"
+    },
+    "page_title_where_to_watch": {
+      "default": "观看渠道"
+    },
+    "list_title_streaming_subscription": {
+      "default": "订阅"
+    },
+    "list_title_streaming_free": {
+      "default": "免费"
+    },
+    "list_title_streaming_purchase": {
+      "default": "购买"
+    },
+    "list_title_streaming_rent": {
+      "default": "租赁"
+    },
+    "list_title_streaming_favorite": {
+      "default": "收藏"
+    },
+    "list_title_recently_searched": {
+      "default": "最近搜索"
+    },
+    "list_title_recently_searched_shows": {
+      "default": "最近搜索的剧集"
+    },
+    "list_title_recently_searched_movies": {
+      "default": "最近搜索的电影"
+    },
+    "text_overview_placeholder": {
+      "default": "暂无简介。"
+    },
+    "text_info_signed_in": {
+      "default": "你已登录。"
+    },
+    "text_info_signed_out": {
+      "default": "你已登出。"
+    },
+    "text_info_history_added": {
+      "default": "已添加到观看历史。"
+    },
+    "text_info_history_removed": {
+      "default": "已从观看历史移除。"
+    },
+    "text_info_favorites_added": {
+      "default": "已加入收藏。"
+    },
+    "text_info_favorites_removed": {
+      "default": "已移除收藏。"
+    },
+    "text_info_list_added": {
+      "default": "已加入片单。"
+    },
+    "text_info_watchlist_added": {
+      "default": "已加入待看清单。"
+    },
+    "text_info_watchlist_removed": {
+      "default": "已从待看清单移除。"
+    },
+    "text_info_list_removed": {
+      "default": "已从片单移除。"
+    },
+    "text_info_show_dropped": {
+      "default": "已弃剧。"
+    },
+    "text_info_review_added": {
+      "default": "评论已添加。"
+    },
+    "text_info_review_deleted": {
+      "default": "评论已删除。"
+    },
+    "text_info_reply_added": {
+      "default": "回复已添加。"
+    },
+    "text_info_reply_deleted": {
+      "default": "回复已删除。"
+    },
+    "button_text_long_press_for_more": {
+      "default": "长按查看更多"
+    },
+    "list_placeholder_empty": {
+      "default": "此片单空空如也。"
+    },
+    "button_text_yes": {
+      "default": "是"
+    },
+    "button_text_cancel": {
+      "default": "取消"
+    },
+    "button_label_cancel": {
+      "default": "取消"
+    },
+    "button_text_where_to_watch": {
+      "default": "观看渠道"
+    },
+    "button_text_no_services": {
+      "default": "无服务"
+    },
+    "header_get_trakt_app": {
+      "default": "下载 Trakt App"
+    },
+    "text_trakt_apps_description": {
+      "default": "在我们的原生应用上探索功能更丰富的 Trakt 体验"
+    },
+    "button_label_login": {
+      "default": "登录"
+    },
+    "button_text_login": {
+      "default": "登录"
+    },
+    "button_label_all": {
+      "default": "全部"
+    },
+    "button_text_all": {
+      "default": "全部"
+    },
+    "button_label_following": {
+      "default": "正在关注"
+    },
+    "button_text_following": {
+      "default": "正在关注"
+    },
+    "button_label_followers": {
+      "default": "关注者"
+    },
+    "button_text_followers": {
+      "default": "关注者"
+    },
+    "button_label_dismiss": {
+      "default": "忽略"
+    },
+    "list_title_watch_history": {
+      "default": "观看历史"
+    },
+    "link_text_general_settings": {
+      "default": "常规"
+    },
+    "link_text_data_settings": {
+      "default": "数据"
+    },
+    "link_text_advanced_settings": {
+      "default": "高级"
+    },
+    "list_title_most_popular_searches": {
+      "default": "热门搜索"
+    },
+    "list_title_birthdays_this_month": {
+      "default": "本月寿星"
+    },
+    "text_season_activity": {
+      "default": "{title} 的 {rangeLabel}",
+      "variables": {
+        "rangeLabel": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_last_day": {
+      "default": "上{day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
+    },
+    "text_next_day": {
+      "default": "下{day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
+    },
+    "filter_label_this_year": {
+      "default": "今年"
+    },
+    "text_sort_recently_updated": {
+      "default": "最近更新"
+    },
+    "text_sort_recently_added": {
+      "default": "最近添加"
+    },
+    "text_sort_comments_popular": {
+      "default": "热门"
+    },
+    "text_sort_comments_recent": {
+      "default": "最新"
+    },
+    "text_info_list_created": {
+      "default": "片单已创建。"
+    },
+    "text_info_list_deleted": {
+      "default": "片单已删除。"
+    },
+    "text_info_list_updated": {
+      "default": "片单已更新。"
+    },
+    "input_placeholder_lists_name": {
+      "default": "名称"
+    },
+    "input_placeholder_lists_description": {
+      "default": "描述（可选）"
+    },
+    "button_text_view_description": {
+      "default": "查看描述"
+    },
+    "button_text_hide_description": {
+      "default": "隐藏描述"
+    },
+    "text_spoiler_alert": {
+      "default": "剧透预警"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "从待看清单移除"
+    },
+    "button_text_stop_check_in": {
+      "default": "停止签到"
+    },
+    "button_text_delete_comment": {
+      "default": "删除评论"
+    },
+    "button_text_delete_reply": {
+      "default": "删除回复"
+    },
+    "button_label_delete_comment": {
+      "default": "删除评论"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "确定要删除你的评论吗？"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "确定要删除你的回复吗？"
+    },
+    "warning_prompt_log_out": {
+      "default": "确定要登出吗？"
+    },
+    "page_title_discover": {
+      "default": "发现"
+    },
+    "list_title_start_watching": {
+      "default": "开始观看"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "查看所有可观看的待看条目"
+    },
+    "button_label_discover": {
+      "default": "发现电影和剧集"
+    },
+    "button_label_popular_comments": {
+      "default": "热门评论"
+    },
+    "button_text_popular_comments": {
+      "default": "热门"
+    },
+    "button_label_recent_comments": {
+      "default": "最新评论"
+    },
+    "button_text_recent_comments": {
+      "default": "最新"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "以设置封面图"
+    },
+    "button_text_set_cover_image": {
+      "default": "设为封面"
+    },
+    "button_label_set_cover_image": {
+      "default": "将“{title}”的图片设为你的封面图。",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_start_watching": {
+      "default": "开始观看"
+    },
+    "text_library": {
+      "default": "媒体库"
+    },
+    "text_stream": {
+      "default": "流媒体"
+    },
+    "text_rent": {
+      "default": "租赁"
+    },
+    "text_buy": {
+      "default": "购买"
+    },
+    "text_on_demand": {
+      "default": "点播"
+    },
+    "list_title_where_to_watch": {
+      "default": "观看渠道"
+    },
+    "page_title_anticipated_media": {
+      "default": "备受期待的影视"
+    },
+    "page_title_popular_media": {
+      "default": "热门影视"
+    },
+    "page_title_recommended_media": {
+      "default": "推荐影视"
+    },
+    "page_title_trending_media": {
+      "default": "趋势影视"
+    },
+    "button_text_media": {
+      "default": "影视"
+    },
+    "button_label_media": {
+      "default": "影视"
+    },
+    "header_appearance": {
+      "default": "外观"
+    },
+    "description_appearance": {
+      "default": "更改你的主题和语言设置。"
+    },
+    "text_theme": {
+      "default": "主题"
+    },
+    "text_language": {
+      "default": "语言"
+    },
+    "switch_label_toggle_halloween_filters": {
+      "default": "切换万圣节滤镜"
+    },
+    "switch_label_toggle_christmas_filters": {
+      "default": "切换圣诞节滤镜"
+    },
+    "list_title_library": {
+      "default": "媒体库"
+    },
+    "button_label_view_all_library_items": {
+      "default": "查看所有媒体库项目"
+    },
+    "dropdown_label_library": {
+      "default": "媒体库"
+    },
+    "translated_value_library_custom": {
+      "default": "自定义"
+    },
+    "page_title_library": {
+      "default": "媒体库"
+    },
+    "list_title_history": {
+      "default": "历史"
+    },
+    "button_label_view_all_history": {
+      "default": "查看所有历史"
+    },
+    "page_title_history": {
+      "default": "历史"
+    },
+    "text_directed_by": {
+      "default": "导演：<a>{name}</a>",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_directed_by_short": {
+      "default": "导演"
+    },
+    "text_created_by": {
+      "default": "主创：<a>{name}</a>",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by_short": {
+      "default": "主创"
+    },
+    "tag_text_watched": {
+      "default": "已看"
+    },
+    "header_height": {
+      "default": "身高"
+    },
+    "header_birthday": {
+      "default": "生日"
+    },
+    "header_age": {
+      "default": "年龄"
+    },
+    "header_date_of_death": {
+      "default": "逝世日期"
+    },
+    "button_label_view_all_where_to_watch": {
+      "default": "查看所有流媒体服务"
+    },
+    "button_text_mark_as_watched_now": {
+      "default": "刚才"
+    },
+    "button_label_mark_as_watched_now": {
+      "default": "刚才"
+    },
+    "button_text_mark_as_watched_release_date": {
+      "default": "发布日期"
+    },
+    "button_label_mark_as_watched_release_date": {
+      "default": "发布日期"
+    },
+    "button_text_mark_as_watched_other_date": {
+      "default": "其他日期"
+    },
+    "button_label_mark_as_watched_other_date": {
+      "default": "其他日期"
+    },
+    "button_text_mark_as_watched_unknown_date": {
+      "default": "未知日期"
+    },
+    "button_label_mark_as_watched_unknown_date": {
+      "default": "未知日期"
+    },
+    "text_this_month": {
+      "default": "本月"
+    },
+    "text_view_all": {
+      "default": "查看全部"
+    },
+    "text_play_count": {
+      "default": "{count} 次播放",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_hours_watched": {
+      "default": "{count} 小时",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "tag_text_remaining_duration": {
+      "default": "剩 {duration}",
+      "variables": {
+        "duration": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_user_lists": {
+      "default": "片单"
+    },
+    "button_label_view_all_lists": {
+      "default": "查看所有片单"
+    },
+    "button_text_sort_default": {
+      "default": "默认"
+    },
+    "button_label_sort_default": {
+      "default": "按默认顺序排序"
+    },
+    "button_text_sort_added_date": {
+      "default": "添加日期"
+    },
+    "button_label_sort_added_date": {
+      "default": "按添加日期排序"
+    },
+    "button_text_sort_runtime": {
+      "default": "时长"
+    },
+    "button_label_sort_runtime": {
+      "default": "按时长排序"
+    },
+    "button_text_sort_rating": {
+      "default": "评分"
+    },
+    "button_label_sort_rating": {
+      "default": "按评分排序"
+    },
+    "button_text_sort_release_date": {
+      "default": "发布日期"
+    },
+    "button_label_sort_release_date": {
+      "default": "按发布日期排序"
+    },
+    "button_label_sort_list": {
+      "default": "排序片单"
+    },
+    "button_label_sort_ascending": {
+      "default": "升序"
+    },
+    "button_label_sort_descending": {
+      "default": "降序"
+    },
+    "text_about_user": {
+      "default": "关于 {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_profile_options": {
+      "default": "个人资料选项"
+    },
+    "validation_text_list_name": {
+      "default": "名称必填"
+    },
+    "text_private": {
+      "default": "私密"
+    },
+    "switch_label_toggle_list_privacy": {
+      "default": "切换片单隐私"
+    },
+    "list_title_from_my_history": {
+      "default": "来自我的历史"
+    },
+    "list_placeholder_from_my_history": {
+      "default": "你还没看过 {name} 出演的任何作品。",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_info_younify_service_linked": {
+      "default": "流媒体服务已关联。"
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "流媒体服务已取消关联。"
+    },
+    "button_text_younify_fix": {
+      "default": "修复"
+    },
+    "button_text_younify_unlink": {
+      "default": "取消关联"
+    },
+    "button_text_data_sync_yes": {
+      "default": "同步现有数据"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "忽略现有数据"
+    },
+    "button_text_younify_send_logs": {
+      "default": "发送日志"
+    },
+    "text_younify_status_linked": {
+      "default": "已关联"
+    },
+    "text_younify_status_unlinked": {
+      "default": "未关联"
+    },
+    "text_younify_status_broken": {
+      "default": "已失效"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "确定要取消关联 {service} 吗？",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "同步现有数据"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "你是想将现有数据导入 Trakt 账户，还是从现在开始只同步新数据？"
+    },
+    "list_title_trivia": {
+      "default": "冷知识"
+    },
+    "button_label_trivia_no_spoilers": {
+      "default": "无剧透"
+    },
+    "button_text_trivia_no_spoilers": {
+      "default": "无剧透"
+    },
+    "button_label_trivia_spoilers": {
+      "default": "剧透"
+    },
+    "button_text_trivia_spoilers": {
+      "default": "剧透"
+    },
+    "button_text_stop_asking": {
+      "default": "不再询问"
+    },
+    "warning_prompt_suppress_ratings_toast": {
+      "default": "你要停止被询问最近观看内容的评分吗？"
+    },
+    "text_billing_month_for_free": {
+      "default": "免费试用 1 个月，之后："
+    },
+    "text_billing_no_payment_required": {
+      "default": "无需立即付款。"
+    },
+    "text_billing_try_for_free": {
+      "default": "立即免费试用！"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "升级到 VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "付款将在试用期结束后开始。订阅自动续期，每 {period} 收费一次，直至取消。随时通过 Google Play 订阅中心取消。",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "你现在是 Trakt VIP 了！\n感谢你的支持，祝你使用愉快。"
+    },
+    "text_billing_period_month": {
+      "default": "月"
+    },
+    "text_vip_upsell_default": {
+      "default": "提升你的 Trakt 体验"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "升级到 VIP 解锁完整 Trakt 体验，专为影视爱好者打造。"
+    },
+    "text_vip_upsell_default_2": {
+      "default": "升级到 VIP！"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "无限记录以及更多功能。"
+    },
+    "button_label_like_list": {
+      "default": "点赞 {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_unlike_list": {
+      "default": "取消点赞 {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "header_export": {
+      "default": "导出"
+    },
+    "description_export": {
+      "default": "将你的用户数据导出为一个 ZIP 文件。此过程可能需要一些时间。"
+    },
+    "text_raw_export": {
+      "default": "原始数据导出"
+    },
+    "button_text_raw_export": {
+      "default": "立即导出"
+    },
+    "button_label_raw_export": {
+      "default": "导出包含原始数据的 ZIP 文件。"
+    },
+    "text_exporting": {
+      "default": "正在导出… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "导出失败。请查看浏览器控制台了解详情。"
+    },
+    "text_export_status_fetching": {
+      "default": "正在获取 {item}…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "正在压缩文件…"
+    },
+    "text_export_status_complete": {
+      "default": "导出完成。"
+    },
+    "button_text_track": {
+      "default": "记录"
+    }
+  }
+}
