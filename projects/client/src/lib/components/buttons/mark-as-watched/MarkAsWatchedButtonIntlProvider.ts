@@ -16,8 +16,6 @@ export const MarkAsWatchedButtonIntlProvider: MarkAsWatchedButtonIntl = {
       return m.button_text_remove_from_history();
     }
 
-    return isRewatching
-      ? m.button_text_watch_again()
-      : m.button_text_mark_as_watched();
+    return isRewatching ? m.button_text_watch_again() : m.button_text_track();
   },
 };

@@ -23,10 +23,11 @@
 
   const isRemovable = $derived(isWatched && mode === "hybrid");
   const isRewatching = $derived(mode === "ask" && isWatched);
+  const shouldAsk = $derived(
+    mode === "ask" || (mode === "hybrid" && !isWatched),
+  );
 
   const handler = $derived.by(() => {
-    const shouldAsk = mode === "ask" || (mode === "hybrid" && !isWatched);
-
     if (shouldAsk) {
       return onAsk;
     }
@@ -54,6 +55,12 @@
     disabled: isMarkingAsWatched,
     ...events,
   });
+
+  const buttonText = $derived.by(() => {
+    const postFix = shouldAsk ? "…" : "";
+
+    return `${i18n.text({ title, isWatched, isRewatching })}${postFix}`;
+  });
 </script>
 
 {#if style === "normal"}
@@ -63,7 +70,7 @@
       {...props}
       navigationType={DpadNavigationType.Item}
     >
-      {i18n.text({ title, isWatched, isRewatching })}
+      {buttonText}
       {#snippet icon()}
         <MarkAsWatchedIcon {state} size="small" />
       {/snippet}
@@ -79,7 +86,7 @@
 
 {#if style === "dropdown-item"}
   <DropdownItem {...commonProps} style="flat">
-    {i18n.text({ title, isWatched, isRewatching })}
+    {buttonText}
     {#snippet icon()}
       <MarkAsWatchedIcon {state} />
     {/snippet}
