@@ -6788,6 +6788,14 @@
         "android",
         "ios"
       ]
+    },
+    "button_text_track": {
+      "default": "Track",
+      "description": "Do not translate this.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

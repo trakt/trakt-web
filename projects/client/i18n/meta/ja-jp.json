@@ -2608,6 +2608,9 @@
     },
     "text_export_status_complete": {
       "default": "エクスポートが完了しました。"
+    },
+    "button_text_track": {
+      "default": "Track"
     }
   }
 }
