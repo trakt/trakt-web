@@ -12,7 +12,9 @@
   const { episode, show }: { episode: EpisodeEntry; show: ShowEntry } =
     $props();
 
-  const src = $derived(useEpisodeSpoilerImage({ episode, show }));
+  const src = $derived(
+    useEpisodeSpoilerImage({ episode, show, variant: "activity" }),
+  );
   const title = $derived(episodeActivityTitle(episode, show));
 </script>
 
