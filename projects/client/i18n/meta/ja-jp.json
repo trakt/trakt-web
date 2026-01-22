@@ -2054,6 +2054,9 @@
     "link_text_general_settings": {
       "default": "一般"
     },
+    "link_text_data_settings": {
+      "default": "データ"
+    },
     "link_text_advanced_settings": {
       "default": "詳細"
     },
@@ -2560,6 +2563,46 @@
           "type": "string"
         }
       }
+    },
+    "header_export": {
+      "default": "エクスポート"
+    },
+    "description_export": {
+      "default": "ユーザーデータをZIPファイル1つにまとめてエクスポートできます。処理には時間がかかる場合があります。"
+    },
+    "text_raw_export": {
+      "default": "生データのエクスポート"
+    },
+    "button_text_raw_export": {
+      "default": "今すぐエクスポート"
+    },
+    "button_label_raw_export": {
+      "default": "生データを含むZIPファイルをエクスポートします。"
+    },
+    "text_exporting": {
+      "default": "エクスポート中… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "エクスポートに失敗しました。詳細についてはブラウザのコンソールをご確認ください。"
+    },
+    "text_export_status_fetching": {
+      "default": "{item} を取得中…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "ファイルを圧縮中…"
+    },
+    "text_export_status_complete": {
+      "default": "エクスポートが完了しました。"
     }
   }
 }

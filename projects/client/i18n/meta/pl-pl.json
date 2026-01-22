@@ -2054,6 +2054,9 @@
     "link_text_general_settings": {
       "default": "Ogólne"
     },
+    "link_text_data_settings": {
+      "default": "Dane"
+    },
     "link_text_advanced_settings": {
       "default": "Zaawansowane"
     },
@@ -2560,6 +2563,46 @@
           "type": "string"
         }
       }
+    },
+    "header_export": {
+      "default": "Eksportuj"
+    },
+    "description_export": {
+      "default": "Pobierz eksport swoich danych użytkownika w jednym pliku ZIP. Może to chwilę potrwać."
+    },
+    "text_raw_export": {
+      "default": "Eksport surowych danych"
+    },
+    "button_text_raw_export": {
+      "default": "Eksportuj teraz"
+    },
+    "button_label_raw_export": {
+      "default": "Wyeksportuj plik ZIP zawierający Twoje surowe dane."
+    },
+    "text_exporting": {
+      "default": "Eksportowanie… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "Eksport nie powiódł się. Sprawdź konsolę przeglądarki."
+    },
+    "text_export_status_fetching": {
+      "default": "Pobieranie {item}…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "Pakowanie plików…"
+    },
+    "text_export_status_complete": {
+      "default": "Eksport zakończony."
     }
   }
 }

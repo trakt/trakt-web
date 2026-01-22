@@ -2054,6 +2054,9 @@
     "link_text_general_settings": {
       "default": "Allmänt"
     },
+    "link_text_data_settings": {
+      "default": "Data"
+    },
     "link_text_advanced_settings": {
       "default": "Avancerat"
     },
@@ -2560,6 +2563,46 @@
           "type": "string"
         }
       }
+    },
+    "header_export": {
+      "default": "Exportera"
+    },
+    "description_export": {
+      "default": "Få en export av dina användardata i en enda ZIP-fil. Processen kan ta en stund."
+    },
+    "text_raw_export": {
+      "default": "Råexport"
+    },
+    "button_text_raw_export": {
+      "default": "Exportera nu"
+    },
+    "button_label_raw_export": {
+      "default": "Exportera en ZIP-fil med dina rådata."
+    },
+    "text_exporting": {
+      "default": "Exporterar… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "Exporten misslyckades. Kontrollera webbläsarkonsolen."
+    },
+    "text_export_status_fetching": {
+      "default": "Hämtar {item}…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "Packar filer…"
+    },
+    "text_export_status_complete": {
+      "default": "Export klar."
     }
   }
 }

@@ -2054,6 +2054,9 @@
     "link_text_general_settings": {
       "default": "Geral"
     },
+    "link_text_data_settings": {
+      "default": "Dados"
+    },
     "link_text_advanced_settings": {
       "default": "Avançado"
     },
@@ -2560,6 +2563,46 @@
           "type": "string"
         }
       }
+    },
+    "header_export": {
+      "default": "Exportar"
+    },
+    "description_export": {
+      "default": "Receba um arquivo ZIP com todos os seus dados. Pode demorar um pouquinho!"
+    },
+    "text_raw_export": {
+      "default": "Exportação bruta"
+    },
+    "button_text_raw_export": {
+      "default": "Exportar agora"
+    },
+    "button_label_raw_export": {
+      "default": "Exporta um arquivo ZIP com seus dados brutos."
+    },
+    "text_exporting": {
+      "default": "Exportando… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "Falha na exportação. Verifique o console do seu navegador."
+    },
+    "text_export_status_fetching": {
+      "default": "Buscando {item}…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "Compactando arquivos…"
+    },
+    "text_export_status_complete": {
+      "default": "Exportação concluída."
     }
   }
 }

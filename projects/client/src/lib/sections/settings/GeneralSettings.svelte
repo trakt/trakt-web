@@ -28,7 +28,6 @@
 
     min-width: 0;
     max-width: var(--ni-480);
-    padding: var(--ni-8);
 
     @include for-tablet-sm-and-below {
       padding: 0;

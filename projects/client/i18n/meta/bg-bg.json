@@ -2054,6 +2054,9 @@
     "link_text_general_settings": {
       "default": "Общи"
     },
+    "link_text_data_settings": {
+      "default": "Данни"
+    },
     "link_text_advanced_settings": {
       "default": "Разширени"
     },
@@ -2560,6 +2563,46 @@
           "type": "string"
         }
       }
+    },
+    "header_export": {
+      "default": "Експортиране"
+    },
+    "description_export": {
+      "default": "Изтеглете експорт на вашите потребителски данни в един ZIP файл. Процесът може да отнеме време."
+    },
+    "text_raw_export": {
+      "default": "Суров експорт"
+    },
+    "button_text_raw_export": {
+      "default": "Експортирай сега"
+    },
+    "button_label_raw_export": {
+      "default": "Експортирайте ZIP файл, съдържащ вашите сурови данни."
+    },
+    "text_exporting": {
+      "default": "Експортиране… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "Експортът е неуспешен. Проверете конзолата на браузъра си."
+    },
+    "text_export_status_fetching": {
+      "default": "Извличане на {item}…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "Пакетиране на файлове…"
+    },
+    "text_export_status_complete": {
+      "default": "Експортът е завършен."
     }
   }
 }

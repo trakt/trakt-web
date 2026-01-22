@@ -2054,6 +2054,9 @@
     "link_text_general_settings": {
       "default": "Загальне"
     },
+    "link_text_data_settings": {
+      "default": "Дані"
+    },
     "link_text_advanced_settings": {
       "default": "Розширене"
     },
@@ -2560,6 +2563,46 @@
           "type": "string"
         }
       }
+    },
+    "header_export": {
+      "default": "Експорт"
+    },
+    "description_export": {
+      "default": "Отримайте експорт ваших даних користувача в одному ZIP-архіві. Цей процес може зайняти деякий час."
+    },
+    "text_raw_export": {
+      "default": "Сирий експорт"
+    },
+    "button_text_raw_export": {
+      "default": "Експортувати зараз"
+    },
+    "button_label_raw_export": {
+      "default": "Експортуйте ZIP-файл із вашими сирими даними."
+    },
+    "text_exporting": {
+      "default": "Експортування… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "Помилка експорту. Перевірте консоль браузера."
+    },
+    "text_export_status_fetching": {
+      "default": "Отримання {item}…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "Пакування файлів…"
+    },
+    "text_export_status_complete": {
+      "default": "Експорт завершено."
     }
   }
 }

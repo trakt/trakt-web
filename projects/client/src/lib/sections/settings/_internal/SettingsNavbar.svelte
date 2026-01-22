@@ -11,6 +11,9 @@
     <Link href={UrlBuilder.settings.general()}>
       <span class="title">{m.link_text_general_settings()}</span>
     </Link>
+    <Link href={UrlBuilder.settings.data()}>
+      <span class="title">{m.link_text_data_settings()}</span>
+    </Link>
     <Link href={UrlBuilder.settings.advanced()}>
       <span class="title">{m.link_text_advanced_settings()}</span>
     </Link>

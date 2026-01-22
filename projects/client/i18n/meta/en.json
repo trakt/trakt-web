@@ -5497,6 +5497,14 @@
         "ios"
       ]
     },
+    "link_text_data_settings": {
+      "default": "Data",
+      "description": "Text for the link to the data settings page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "link_text_advanced_settings": {
       "default": "Advanced",
       "description": "Text for the link to the advanced settings page.",
@@ -6686,6 +6694,96 @@
           "type": "string"
         }
       },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_export": {
+      "default": "Export",
+      "description": "Header for the settings section that allows users to export their data.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_export": {
+      "default": "Get an export of your user data in a single ZIP file. This process may take a while.",
+      "description": "Description for the export settings section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_raw_export": {
+      "default": "Raw export",
+      "description": "Text for the section that allows users to export their raw data.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_raw_export": {
+      "default": "Export now",
+      "description": "Text for the button that allows users to export their raw data.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_raw_export": {
+      "default": "Export a ZIP file containing your raw data.",
+      "description": "Aria-label for the button that allows users to export their raw data.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_exporting": {
+      "default": "Exporting… {progress}",
+      "description": "Text shown to indicate that the user's data export is in progress.",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_export_status_fail": {
+      "default": "Export failed. Check your browser console for more details.",
+      "description": "Text shown to indicate that the user's data export has failed.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_export_status_fetching": {
+      "default": "Fetching {item}…",
+      "description": "Text shown to indicate that the user's data export is fetching a specific item.",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_export_status_zipping": {
+      "default": "Zipping files…",
+      "description": "Text shown to indicate that the user's data export is zipping files.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_export_status_complete": {
+      "default": "Export complete.",
+      "description": "Text shown to indicate that the user's data export is complete.",
       "exclude": [
         "android",
         "ios"

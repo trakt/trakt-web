@@ -2054,6 +2054,9 @@
     "link_text_general_settings": {
       "default": "General"
     },
+    "link_text_data_settings": {
+      "default": "Date"
+    },
     "link_text_advanced_settings": {
       "default": "Avansat"
     },
@@ -2560,6 +2563,46 @@
           "type": "string"
         }
       }
+    },
+    "header_export": {
+      "default": "Exportă"
+    },
+    "description_export": {
+      "default": "Primești un fișier ZIP cu datele tale. Poate dura puțin!"
+    },
+    "text_raw_export": {
+      "default": "Export brut"
+    },
+    "button_text_raw_export": {
+      "default": "Exportă acum"
+    },
+    "button_label_raw_export": {
+      "default": "Exportă un fișier ZIP cu datele tale brute."
+    },
+    "text_exporting": {
+      "default": "Se exportă… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "Exportarea a eșuat. Verifică consola browserului."
+    },
+    "text_export_status_fetching": {
+      "default": "Se caută {item}…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "Se comprimă fișierele…"
+    },
+    "text_export_status_complete": {
+      "default": "Exportare completă."
     }
   }
 }

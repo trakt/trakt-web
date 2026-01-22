@@ -250,6 +250,7 @@ export const UrlBuilder = {
   },
   settings: {
     general: () => '/settings',
+    data: () => '/settings/data',
     advanced: () => '/settings/advanced',
   },
   external: {
