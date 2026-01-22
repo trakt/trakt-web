@@ -1230,11 +1230,11 @@
     "header_filters": {
       "default": "Filtros"
     },
-    "header_ignore_watched": {
-      "default": "Ignorar Visto"
+    "header_hide_watched": {
+      "default": "Ocultar vistos"
     },
-    "header_ignore_watchlisted": {
-      "default": "Ignorar Por Ver"
+    "header_hide_watchlisted": {
+      "default": "Ocultar lista para ver"
     },
     "option_text_my_favorites": {
       "default": "Solo favoritos"
@@ -1338,10 +1338,10 @@
       "default": "Mostrar spoilers"
     },
     "button_text_save_filters": {
-      "default": "Guardar"
+      "default": "Establecer como predeterminado"
     },
     "button_label_save_filters": {
-      "default": "Guardar filtros"
+      "default": "Establecer filtros como predeterminados"
     },
     "page_title_account_locked": {
       "default": "Cuenta bloqueada"

@@ -1230,11 +1230,11 @@
     "header_filters": {
       "default": "Фільтри"
     },
-    "header_ignore_watched": {
-      "default": "Ігнорувати переглянуте"
+    "header_hide_watched": {
+      "default": "Приховати переглянуті"
     },
-    "header_ignore_watchlisted": {
-      "default": "Ігнорувати у списку"
+    "header_hide_watchlisted": {
+      "default": "Приховати у списку перегляду"
     },
     "option_text_my_favorites": {
       "default": "Тільки улюблене"
@@ -1338,10 +1338,10 @@
       "default": "Показати спойлери"
     },
     "button_text_save_filters": {
-      "default": "Зберегти"
+      "default": "Встановити за замовчуванням"
     },
     "button_label_save_filters": {
-      "default": "Зберегти фільтри"
+      "default": "Встановити фільтри за замовчуванням"
     },
     "page_title_account_locked": {
       "default": "Обліковий запис заблоковано"

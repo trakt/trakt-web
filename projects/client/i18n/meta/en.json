@@ -3335,17 +3335,17 @@
         "ios"
       ]
     },
-    "header_ignore_watched": {
-      "default": "Ignore Watched",
-      "description": "Header for the filter that allows users to ignore watched items in their lists.",
+    "header_hide_watched": {
+      "default": "Hide Watched",
+      "description": "Header for the filter that allows users to hide watched items in their lists.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "header_ignore_watchlisted": {
-      "default": "Ignore Watchlisted",
-      "description": "Header for the filter that allows users to ignore watchlisted items in their lists.",
+    "header_hide_watchlisted": {
+      "default": "Hide Watchlisted",
+      "description": "Header for the filter that allows users to hide watchlisted items in their lists.",
       "exclude": [
         "android",
         "ios"
@@ -3622,7 +3622,7 @@
       ]
     },
     "button_text_save_filters": {
-      "default": "Save",
+      "default": "Set as default",
       "description": "Text for the button that saves the current filters as the default filters.",
       "exclude": [
         "android",
@@ -3630,7 +3630,7 @@
       ]
     },
     "button_label_save_filters": {
-      "default": "Save filters",
+      "default": "Set filters as default",
       "description": "Aria-label for the button that saves the current filters as the default filters.",
       "exclude": [
         "android",

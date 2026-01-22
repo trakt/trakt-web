@@ -1230,11 +1230,11 @@
     "header_filters": {
       "default": "Filtre"
     },
-    "header_ignore_watched": {
-      "default": "Ignorer sett"
+    "header_hide_watched": {
+      "default": "Skjul sett"
     },
-    "header_ignore_watchlisted": {
-      "default": "Ignorer på huskeliste"
+    "header_hide_watchlisted": {
+      "default": "Skjul på \"vil se\"-listen"
     },
     "option_text_my_favorites": {
       "default": "Kun favoritter"
@@ -1338,10 +1338,10 @@
       "default": "Vis spoilere"
     },
     "button_text_save_filters": {
-      "default": "Lagre"
+      "default": "Angi som standard"
     },
     "button_label_save_filters": {
-      "default": "Lagre filtre"
+      "default": "Angi filtre som standard"
     },
     "page_title_account_locked": {
       "default": "Konto låst"
