@@ -1288,10 +1288,15 @@
       "default": "gjenstår"
     },
     "button_text_checkin": {
-      "default": "Sjekk inn"
+      "default": "Ser nå"
     },
     "button_label_checkin": {
-      "default": "Sjekk inn \"{title}\""
+      "default": "Ser nå \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Trakt bruker C🍪🍪KIES for å forbedre din totale opplevelse. Du kan <a>lese mer informasjon</a> her."

@@ -28,32 +28,33 @@
   });
 </script>
 
+{#snippet icon()}
+  <IconWrapper isLoading={isCheckingIn}>
+    <SquaredLogo />
+  </IconWrapper>
+{/snippet}
+
 {#if style === "normal"}
   <div data-dpad-navigation={DpadNavigationType.List} style="display: contents">
     <Button
       {...commonProps}
       {...props}
+      {icon}
       navigationType={DpadNavigationType.Item}
     >
       {i18n.text({ title })}
-      {#snippet icon()}
-        <SquaredLogo />
-      {/snippet}
     </Button>
   </div>
 {/if}
 
 {#if style === "action"}
   <ActionButton style="ghost" {...commonProps} {...props} variant="secondary">
-    <SquaredLogo />
+    {@render icon()}
   </ActionButton>
 {/if}
 
 {#if style === "dropdown-item"}
-  <DropdownItem {...commonProps} style="flat">
-    Check in
-    {#snippet icon()}
-      <SquaredLogo />
-    {/snippet}
+  <DropdownItem {...commonProps} {icon} style="flat">
+    {i18n.text({ title })}
   </DropdownItem>
 {/if}

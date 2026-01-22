@@ -12,6 +12,7 @@
   import type { MarkAsWatchedAt } from "$lib/models/MarkAsWatchedAt";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { onDestroy } from "svelte";
+  import CheckInAction from "../../check-in/CheckInAction.svelte";
   import {
     useMarkAsWatched,
     type MarkAsWatchedStoreProps,
@@ -40,6 +41,12 @@
     isDestroyed.set(true);
   });
 
+  const autoClose = () => {
+    if (!$isDestroyed) {
+      onClose();
+    }
+  };
+
   const handler = async (watchedAt: MarkAsWatchedAt) => {
     const confirmMarkAsWatched = confirm({
       type: ConfirmationType.MarkAsWatched,
@@ -48,10 +55,7 @@
       onConfirm: async () => {
         confirmedAction.set(watchedAt);
         await markAsWatched(watchedAt);
-
-        if (!$isDestroyed) {
-          onClose();
-        }
+        autoClose();
       },
     });
 
@@ -71,6 +75,16 @@
 
 <Drawer {onClose} {title} {metaInfo}>
   <div class="mark-as-watched-buttons">
+    {#if target.type === "episode" || target.type === "movie"}
+      <CheckInAction
+        {...target}
+        {title}
+        style="dropdown-item"
+        variant="primary"
+        onCheckIn={autoClose}
+      />
+    {/if}
+
     <DropdownItem
       onclick={() => handler("now")}
       label={m.button_label_mark_as_watched_now()}

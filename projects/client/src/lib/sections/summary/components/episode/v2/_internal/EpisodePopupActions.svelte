@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
-  import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
@@ -34,16 +33,6 @@
     {show}
   />
 {/if}
-
-<CheckInAction
-  {show}
-  {episode}
-  {title}
-  size="small"
-  style="dropdown-item"
-  type="episode"
-  variant="primary"
-/>
 
 <EpisodeSideActions
   {title}

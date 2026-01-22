@@ -11,7 +11,6 @@
   import TrackIcon from "$lib/components/TrackIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
-  import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { useIsWatchlisted } from "$lib/sections/media-actions/watchlist/useIsWatchlisted";
@@ -102,14 +101,6 @@
         type={media.type}
         {media}
       />
-      {#if media.type === "movie"}
-        <CheckInAction
-          style="dropdown-item"
-          title={media.title}
-          type={media.type}
-          {media}
-        />
-      {/if}
     </RenderFor>
   {/if}
 {/snippet}

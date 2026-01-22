@@ -1288,10 +1288,15 @@
       "default": "resterende"
     },
     "button_text_checkin": {
-      "default": "Tjek ind"
+      "default": "Ser nu"
     },
     "button_label_checkin": {
-      "default": "Tjek ind \"{title}\""
+      "default": "Ser nu \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Trakt bruger C🍪🍪KIES for at forbedre din samlede oplevelse. Du kan <a>læse mere information</a> her."

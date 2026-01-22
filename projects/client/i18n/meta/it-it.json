@@ -1288,10 +1288,15 @@
       "default": "rimanente"
     },
     "button_text_checkin": {
-      "default": "Registrati"
+      "default": "Sto guardando"
     },
     "button_label_checkin": {
-      "default": "Registrati \"{title}\""
+      "default": "Sto guardando \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Trakt utilizza C🍪🍪KIES per migliorare la tua esperienza complessiva. Puoi <a>leggere maggiori informazioni</a> qui."

@@ -1288,10 +1288,15 @@
       "default": "verbleibend"
     },
     "button_text_checkin": {
-      "default": "Einchecken"
+      "default": "Schaue gerade"
     },
     "button_label_checkin": {
-      "default": "Einchecken \"{title}\""
+      "default": "Schaue gerade \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Trakt verwendet C🍪🍪KIES, um Ihr Gesamterlebnis zu verbessern. Sie können <a>hier mehr Informationen lesen</a>."

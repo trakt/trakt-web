@@ -1288,10 +1288,15 @@
       "default": "rămase"
     },
     "button_text_checkin": {
-      "default": "Check-in"
+      "default": "Acum vizionez"
     },
     "button_label_checkin": {
-      "default": "Check-in \"{title}\""
+      "default": "Acum vizionez \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Trakt folosește C🍪🍪KIES pentru a-ți îmbunătăți experiența. Poți <a>citi mai multe informații</a> aici."

@@ -1288,10 +1288,15 @@
       "default": "resterend"
     },
     "button_text_checkin": {
-      "default": "Inchecken"
+      "default": "Nu aan het kijken"
     },
     "button_label_checkin": {
-      "default": "Inchecken \"{title}\""
+      "default": "Nu aan het kijken \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Trakt gebruikt C🍪🍪KIES om je algehele ervaring te verbeteren. Je kunt <a>hier meer informatie lezen</a>."

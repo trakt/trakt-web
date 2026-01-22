@@ -1288,10 +1288,15 @@
       "default": "återstår"
     },
     "button_text_checkin": {
-      "default": "Checka in"
+      "default": "Tittar på nu"
     },
     "button_label_checkin": {
-      "default": "Checka in \"{title}\""
+      "default": "Tittar på nu \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Trakt använder C🍪🍪KIES för att förbättra din upplevelse. Du kan <a>läsa mer information</a> här."

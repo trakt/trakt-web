@@ -8,12 +8,18 @@
     size = "normal",
     title,
     variant,
+    onCheckIn,
     ...target
   }: CheckInActionProps = $props();
 
   const { isCheckingIn, isCheckedIn, checkin, isWatchable } = $derived(
     useCheckIn(target),
   );
+
+  const checkinHandler = async () => {
+    await checkin();
+    onCheckIn?.();
+  };
 </script>
 
 {#if isWatchable}
@@ -24,6 +30,6 @@
     {variant}
     isCheckedIn={$isCheckedIn}
     isCheckingIn={$isCheckingIn}
-    {checkin}
+    checkin={checkinHandler}
   />
 {/if}

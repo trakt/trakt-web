@@ -1288,10 +1288,15 @@
       "default": "remaining"
     },
     "button_text_checkin": {
-      "default": "Check in"
+      "default": "Now watching"
     },
     "button_label_checkin": {
-      "default": "Check in \"{title}\""
+      "default": "Now watching \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Trakt uses C🍪🍪KIES in order to enhance your overall experience. You can <a>read more information</a> here."

@@ -1288,10 +1288,15 @@
       "default": "pozostało"
     },
     "button_text_checkin": {
-      "default": "Zameldować się"
+      "default": "Oglądam teraz"
     },
     "button_label_checkin": {
-      "default": "Zameldować się \"{title}\""
+      "default": "Oglądam teraz \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Trakt używa C🍪🍪KIES, aby poprawić jakość korzystania. Możesz <a>przeczytać więcej informacji</a> tutaj."

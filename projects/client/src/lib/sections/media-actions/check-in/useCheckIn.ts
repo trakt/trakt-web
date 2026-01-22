@@ -1,29 +1,25 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useNowPlaying } from '$lib/features/toast/useNowPlaying.ts';
-import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
-import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { checkinEpisodeRequest } from '$lib/requests/queries/checkin/checkinEpisodeRequest.ts';
 import { checkinMovieRequest } from '$lib/requests/queries/checkin/checkinMovieRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { MovieCheckinRequest, ShowCheckinRequest } from '@trakt/api';
 import { BehaviorSubject, map } from 'rxjs';
 import { hasAired } from '../_internal/hasAired.ts';
+import type { MarkAsWatchedStoreProps } from '../mark-as-watched/useMarkAsWatched.ts';
+
+export type UseCheckInProps = MarkAsWatchedStoreProps;
 
 type EpisodeProps = {
-  type: 'episode';
-  show: ShowEntry;
-  episode: EpisodeEntry;
+  episode: { season: number; number: number };
+  show: { id: number };
 };
 
 type MovieProps = {
-  type: 'movie';
-  media: MovieEntry;
+  id: number;
 };
-
-export type UseCheckInProps = EpisodeProps | MovieProps;
 
 function mapToEpisodePayload(
   { show, episode }: EpisodeProps,
@@ -32,7 +28,6 @@ function mapToEpisodePayload(
     show: {
       ids: {
         trakt: show.id,
-        slug: show.slug,
       },
     },
     episode: {
@@ -42,12 +37,11 @@ function mapToEpisodePayload(
   };
 }
 
-function mapToMoviePayload({ media }: MovieProps): MovieCheckinRequest {
+function mapToMoviePayload(media: MovieProps): MovieCheckinRequest {
   return {
     movie: {
       ids: {
         trakt: media.id,
-        slug: media.slug,
       },
     },
   };
@@ -61,19 +55,33 @@ export function useCheckIn(props: UseCheckInProps) {
 
   const { nowPlaying } = useNowPlaying();
 
-  const checkin = async () => {
-    isCheckingIn.next(true);
+  if (Array.isArray(props.media)) {
+    throw new Error('Cannot check in multiple media items at once.');
+  }
 
-    if (type === 'episode') {
-      const payload = mapToEpisodePayload(props);
-      track({ type: 'episode', action: 'start' });
-      await checkinEpisodeRequest({ body: payload });
+  const checkin = async () => {
+    if (Array.isArray(props.media)) return;
+    if (type === 'show') {
+      throw new Error('Cannot check in a show directly.');
     }
 
-    if (type === 'movie') {
-      const payload = mapToMoviePayload(props);
-      track({ type: 'movie', action: 'start' });
-      await checkinMovieRequest({ body: payload });
+    isCheckingIn.next(true);
+    track({ type, action: 'start' });
+
+    switch (type) {
+      case 'episode': {
+        const payload = mapToEpisodePayload({
+          episode: props.media,
+          show: props.show,
+        });
+        await checkinEpisodeRequest({ body: payload });
+        break;
+      }
+      case 'movie': {
+        const payload = mapToMoviePayload(props.media);
+        await checkinMovieRequest({ body: payload });
+        break;
+      }
     }
 
     await invalidate(InvalidateAction.CheckIn);
@@ -82,8 +90,8 @@ export function useCheckIn(props: UseCheckInProps) {
   };
 
   const isWatchable = type === 'episode'
-    ? hasAired({ type: 'episode', airDate: props.episode.airDate })
-    : hasAired({ type: 'movie', status: props.media.status });
+    ? hasAired({ type: 'episode', airDate: props.media.airDate })
+    : hasAired({ type: 'movie', status: props.media.status ?? 'unknown' });
 
   return {
     checkin,
