@@ -5,7 +5,6 @@
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
-  import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import MediaItem from "../../components/MediaItem.svelte";
@@ -61,21 +60,6 @@
     type={target.type}
     media={target.media}
   />
-
-  {#if target.type === "show"}
-    <CheckInAction
-      {...commonActionProps}
-      type="episode"
-      show={target.media}
-      episode={target.episode}
-    />
-  {:else}
-    <CheckInAction
-      {...commonActionProps}
-      type={target.type}
-      media={target.media}
-    />
-  {/if}
 {/snippet}
 
 {#snippet summaryTag()}

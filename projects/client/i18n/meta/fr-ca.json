@@ -1288,10 +1288,15 @@
       "default": "restant"
     },
     "button_text_checkin": {
-      "default": "S'enregistrer"
+      "default": "En train de regarder"
     },
     "button_label_checkin": {
-      "default": "S'enregistrer \"{title}\""
+      "default": "En train de regarder \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Trakt utilise des C🍪🍪KIES pour améliorer votre expérience globale. Vous pouvez <a>lire plus d'informations</a> ici."

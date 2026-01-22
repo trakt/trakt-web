@@ -3493,16 +3493,16 @@
       ]
     },
     "button_text_checkin": {
-      "default": "Check in",
-      "description": "Text for the button that allows users to check in to a movie or episode, indicating that a user is starting to watch it.",
+      "default": "Now watching",
+      "description": "Text for the button that allows users to indicate that they are starting to watch a movie or episode.",
       "exclude": [
         "android",
         "ios"
       ]
     },
     "button_label_checkin": {
-      "default": "Check in \"{title}\"",
-      "description": "Aria-label for the button that allows users to check in to a movie or episode.",
+      "default": "Now watching \"{title}\"",
+      "description": "Aria-label for the button that allows users to indicate that they are starting to watch a movie or episode.",
       "variables": {
         "title": {
           "type": "string"

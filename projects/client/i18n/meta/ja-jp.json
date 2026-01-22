@@ -1288,10 +1288,15 @@
       "default": "残り"
     },
     "button_text_checkin": {
-      "default": "チェックイン"
+      "default": "視聴中"
     },
     "button_label_checkin": {
-      "default": "チェックイン \"{title}\""
+      "default": "\"{title}\" を視聴中",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "text_cookie_notice": {
       "default": "Traktは、より良い体験のためにC🍪🍪KIESを使用しています。 <a>詳細はこちら</a>をご覧ください。"
