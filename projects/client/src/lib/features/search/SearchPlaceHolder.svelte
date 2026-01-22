@@ -1,6 +1,6 @@
 <script lang="ts">
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { useTrendingSearchesList } from "./_internal/useTrendingSearchesList.ts";
   import SearchResultsGrid from "./SearchResultsGrid.svelte";
   import { useSearch } from "./useSearch.ts";

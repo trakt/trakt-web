@@ -1,6 +1,6 @@
 <script>
-  import LoaderIcon from "$lib/components/icons/LoaderIcon.svelte";
   import { fade } from "svelte/transition";
+  import LoaderIcon from "./LoaderIcon.svelte";
 </script>
 
 <!-- FIXME: Add a proper crossfade component -->

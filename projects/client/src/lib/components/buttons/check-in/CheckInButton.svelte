@@ -1,5 +1,6 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import ActionButton from "../ActionButton.svelte";
   import Button from "../Button.svelte";

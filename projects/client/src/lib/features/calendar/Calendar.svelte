@@ -1,6 +1,6 @@
 <script lang="ts">
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useDiscover } from "$lib/features/discover/useDiscover";
-  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import { trackWindowScrollDirection } from "$lib/utils/actions/trackWindowScrollDirection";

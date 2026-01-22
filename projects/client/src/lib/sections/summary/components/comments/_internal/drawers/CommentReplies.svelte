@@ -1,11 +1,11 @@
 <script lang="ts">
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import CollapseIcon from "$lib/components/lists/section-list/CollapseIcon.svelte";
   import ExpandIcon from "$lib/components/lists/section-list/ExpandIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { BehaviorSubject } from "rxjs";
   import { slide } from "svelte/transition";
   import CommentReply from "../CommentReply.svelte";

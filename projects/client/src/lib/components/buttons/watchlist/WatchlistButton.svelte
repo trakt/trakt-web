@@ -2,8 +2,8 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import ActionButton from "../ActionButton.svelte";
   import { useDangerButton } from "../_internal/useDangerButton";
   import { WatchlistButtonIntlProvider } from "./WatchlistButtonIntlProvider";
