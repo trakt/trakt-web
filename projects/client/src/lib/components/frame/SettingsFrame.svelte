@@ -1,8 +1,8 @@
 <script lang="ts">
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { getToken } from "$lib/features/auth/token";
   import * as m from "$lib/features/i18n/messages.ts";
-  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { writable } from "$lib/utils/store/WritableSubject";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { frameListener } from "./_internal/frameListener";

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
+  import LoadingIndicator from "./LoadingIndicator.svelte";
 
   const { children, isLoading }: { isLoading: boolean } & ChildrenProps =
     $props();

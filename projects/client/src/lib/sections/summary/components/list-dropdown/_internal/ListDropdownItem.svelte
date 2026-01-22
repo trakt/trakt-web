@@ -2,11 +2,11 @@
   import { useDangerButton } from "$lib/components/buttons/_internal/useDangerButton";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { onMount } from "svelte";
   import { ListDropdownItemIntlProvider } from "./ListDropdownItemIntlProvider";
   import type { ListDropdownItemProps } from "./ListDropdownItemProps";

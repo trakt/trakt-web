@@ -2,6 +2,7 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
+  import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
   import QuestionIcon from "$lib/components/icons/QuestionIcon.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import TrackIcon from "$lib/components/TrackIcon.svelte";
@@ -16,7 +17,6 @@
     type MarkAsWatchedStoreProps,
   } from "../useMarkAsWatched";
   import DateTimePickerDialog from "./DateTimePickerDialog.svelte";
-  import IconWrapper from "./IconWrapper.svelte";
   import { toMarkAsWatchedMetaInfo } from "./toMarkAsWatchedMetaInfo";
 
   const {

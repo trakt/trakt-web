@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends { key: string }, M">
-  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useLazyLoader } from "$lib/sections/lists/drilldown/_internal/useLazyLoader";
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants";
   import type { PaginatedListProps } from "./models/PaginatedListProps";

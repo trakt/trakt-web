@@ -2,12 +2,12 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
-  import LoadingIndicator from "../../drilldown/_internal/LoadingIndicator.svelte";
   import { sortStreamingCountries } from "./sortStreamingCountries";
   import { toCountryFlag } from "./toCountryFlag";
   import { useAllStreamOn } from "./useAllStreamOn";
