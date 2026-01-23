@@ -80,35 +80,32 @@ export const sync = [
   ),
   http.get(
     'http://localhost/sync/collection/movies',
-    ({ request }) => {
-      const url = new URL(request.url);
-      const isMinRequest = url.searchParams.get('extended') === 'min';
-
-      return isMinRequest
-        ? HttpResponse.json(UserPlexMovieLibraryResponseMock)
-        : HttpResponse.json(MovieLibraryResponseMock);
+    () => {
+      return HttpResponse.json(MovieLibraryResponseMock);
     },
   ),
   http.get(
     'http://localhost/sync/collection/episodes',
-    ({ request }) => {
-      const url = new URL(request.url);
-      const isMinRequest = url.searchParams.get('extended') === 'min';
-
-      return isMinRequest
-        ? HttpResponse.json(UserPlexEpisodeLibraryResponseMock)
-        : HttpResponse.json(EpisodeLibraryResponseMock);
+    () => {
+      return HttpResponse.json(EpisodeLibraryResponseMock);
     },
   ),
   http.get(
-    'http://localhost/sync/collection/shows',
-    ({ request }) => {
-      const url = new URL(request.url);
-      const isMinRequest = url.searchParams.get('extended') === 'min';
-
-      return isMinRequest
-        ? HttpResponse.json(UserPlexShowLibraryResponseMock)
-        : HttpResponse.json([]);
+    'http://localhost/sync/collection/minimal/movies',
+    () => {
+      return HttpResponse.json(UserPlexMovieLibraryResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/sync/collection/minimal/episodes',
+    () => {
+      return HttpResponse.json(UserPlexEpisodeLibraryResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/sync/collection/minimal/shows',
+    () => {
+      return HttpResponse.json(UserPlexShowLibraryResponseMock);
     },
   ),
 ];
