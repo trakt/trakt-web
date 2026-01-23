@@ -2611,6 +2611,14 @@
     },
     "button_text_track": {
       "default": "Track"
+    },
+    "filter_label_runtime": {
+      "default": "{range} минути",
+      "variables": {
+        "range": {
+          "type": "string"
+        }
+      }
     }
   }
 }

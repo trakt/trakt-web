@@ -6796,6 +6796,19 @@
         "android",
         "ios"
       ]
+    },
+    "filter_label_runtime": {
+      "default": "{range} minutes",
+      "description": "Label for the 'runtime' filter which filters items that have runtimes falling in the range, e.g. '0-90 minutes'",
+      "variables": {
+        "range": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

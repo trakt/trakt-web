@@ -22,6 +22,7 @@ export enum FilterKey {
   Streaming = 'watchnow',
   Decade = 'years',
   Ratings = 'ratings',
+  Runtime = 'runtimes',
 }
 
 type BaseFilter = {
