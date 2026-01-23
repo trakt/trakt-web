@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
@@ -29,16 +28,6 @@
   const { current, update, options, urlBuilder } = $derived(
     useListSorting(list, type),
   );
-
-  const sortHowParam = $derived(page.url.searchParams.get("sort_how"));
-  const sortByParam = $derived(page.url.searchParams.get("sort_by"));
-
-  $effect(() => {
-    const params: Record<string, string> = {};
-    if (sortHowParam) params.sort_how = sortHowParam;
-    if (sortByParam) params.sort_by = sortByParam;
-    update(params);
-  });
 
   const isListOwner = $derived($user.slug === list.user?.slug);
 
@@ -74,7 +63,12 @@
         </Tooltip>
       {/if}
 
-      <ListSortActions {options} {urlBuilder} current={$current} />
+      <ListSortActions
+        {options}
+        {urlBuilder}
+        current={$current}
+        onUpdate={update}
+      />
     </div>
   {/snippet}
   {#snippet item(media)}

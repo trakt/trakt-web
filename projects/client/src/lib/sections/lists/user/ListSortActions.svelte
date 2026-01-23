@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import SortDirectionIcon from "$lib/components/icons/SortDirectionIcon.svelte";
@@ -15,15 +16,27 @@
     options,
     current,
     urlBuilder,
+    onUpdate,
   }: {
     options: Sorting[];
     current: { sortHow: SortDirection; sorting: Sorting };
     urlBuilder: ListUrlBuilder;
+    onUpdate: (params: Record<string, string>) => void;
   } = $props();
 
   const reversedDirection = $derived(
     current.sortHow === "asc" ? "desc" : "asc",
   );
+
+  const sortHowParam = $derived(page.url.searchParams.get("sort_how"));
+  const sortByParam = $derived(page.url.searchParams.get("sort_by"));
+
+  $effect(() => {
+    const params: Record<string, string> = {};
+    if (sortHowParam) params.sort_how = sortHowParam;
+    if (sortByParam) params.sort_by = sortByParam;
+    onUpdate(params);
+  });
 
   const isOpen = writable(false);
   const { track } = useTrack(AnalyticsEvent.ListSort);
