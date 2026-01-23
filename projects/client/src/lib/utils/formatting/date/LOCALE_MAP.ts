@@ -3,8 +3,8 @@ import {
   bg,
   da,
   de,
-  enUS,
   enAU,
+  enUS,
   es,
   fr,
   frCA,
@@ -17,6 +17,7 @@ import {
   ro,
   sv,
   uk,
+  zhCN,
 } from 'date-fns/locale';
 
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';
@@ -40,4 +41,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'sv-se': sv,
   'nb-no': nb,
   'da-dk': da,
+  'zh-cn': zhCN,
 };
