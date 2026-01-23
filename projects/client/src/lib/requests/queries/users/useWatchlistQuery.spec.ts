@@ -9,7 +9,7 @@ import { watchlistQuery } from './watchlistQuery.ts';
 
 const COMMON_PARAMS = {
   limit: 10,
-  sort: 'added',
+  sortBy: 'added' as const,
 };
 
 describe('watchlistQuery', () => {

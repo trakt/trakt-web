@@ -29,7 +29,7 @@
 
   const { filterMap } = useFilter();
   const { current, update, options, urlBuilder } = $derived(
-    useListSorting(list, type),
+    useListSorting({ list, type }),
   );
 
   const isListOwner = $derived($user.slug === list.user?.slug);
