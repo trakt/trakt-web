@@ -2955,6 +2955,14 @@
     },
     "button_text_track": {
       "default": "记录"
+    },
+    "filter_label_runtime": {
+      "default": "{range} 分钟",
+      "variables": {
+        "range": {
+          "type": "string"
+        }
+      }
     }
   }
 }
