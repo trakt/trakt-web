@@ -71,11 +71,19 @@
   const metaInfo = $derived(toMarkAsWatchedMetaInfo(target));
 
   const showDateTimePicker = writable(false);
+
+  const isSingleMedia = $derived.by(() => {
+    if (Array.isArray(target.media)) {
+      return false;
+    }
+
+    return target.type === "episode" || target.type === "movie";
+  });
 </script>
 
 <Drawer {onClose} {title} {metaInfo}>
   <div class="mark-as-watched-buttons">
-    {#if target.type === "episode" || target.type === "movie"}
+    {#if isSingleMedia}
       <CheckInAction
         {...target}
         {title}
