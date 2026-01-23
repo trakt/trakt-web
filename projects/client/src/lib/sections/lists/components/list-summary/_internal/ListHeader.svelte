@@ -22,7 +22,7 @@
 
   <div class="list-name-and-creator">
     <Link
-      href={getListUrl(list, { mode: type })}
+      href={getListUrl({ type: "user-list", list, mode: type })}
       onclick={() => track({ source: "list-summary" })}
     >
       <p class="secondary bold ellipsis">
