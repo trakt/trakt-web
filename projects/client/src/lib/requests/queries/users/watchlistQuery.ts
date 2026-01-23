@@ -9,13 +9,15 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { SortType } from '@trakt/api';
 import { z } from 'zod';
+import type { SortBy } from '../../../sections/lists/user/models/SortBy.ts';
+import type { SortDirection } from '../../../sections/lists/user/models/SortDirection.ts';
 import { ListItemSchema } from '../../models/ListItem.ts';
 
 type WatchlistParams =
   & {
-    sort: SortType;
+    sortBy: SortBy;
+    sortHow?: SortDirection | Nil;
     type?: MediaType;
   }
   & PaginationParams
@@ -38,7 +40,7 @@ function typeToWatchlistMethod(type?: MediaType) {
 }
 
 const watchlistRequest = (
-  { fetch, sort, type, limit, page, filter }: WatchlistParams,
+  { fetch, sortBy, sortHow, type, limit, page, filter }: WatchlistParams,
 ) => {
   const method = typeToWatchlistMethod(type);
 
@@ -47,12 +49,13 @@ const watchlistRequest = (
     .watchlist[method]({
       params: {
         id: 'me',
-        sort,
       },
       query: {
         extended: 'full,images,colors',
         page,
         limit,
+        sort_by: sortBy,
+        sort_how: sortHow,
         ...filter,
       },
     });
@@ -70,7 +73,8 @@ export const watchlistQuery = defineInfiniteQuery({
     params: WatchlistParams,
   ) => [
     params.type,
-    params.sort,
+    params.sortBy,
+    params.sortHow,
     params.limit,
     params.page,
     ...getGlobalFilterDependencies(params.filter),

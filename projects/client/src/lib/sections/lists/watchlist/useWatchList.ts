@@ -4,12 +4,14 @@ import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts'
 import { watchlistQuery } from '$lib/requests/queries/users/watchlistQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
-import type { SortType } from '@trakt/api';
 import { map } from 'rxjs';
+import type { SortBy } from '../user/models/SortBy.ts';
+import type { SortDirection } from '../user/models/SortDirection.ts';
 
 export type WatchListStoreProps = PaginationParams & FilterParams & {
   type?: DiscoverMode;
-  sort?: SortType;
+  sortBy?: SortBy;
+  sortHow?: SortDirection;
   limit?: number;
 };
 
@@ -18,7 +20,8 @@ export function useWatchList(params: WatchListStoreProps) {
     watchlistQuery({
       limit: params.limit ?? DEFAULT_PAGE_SIZE,
       type: params.type === 'media' ? undefined : params.type,
-      sort: params.sort ?? 'added',
+      sortBy: params.sortBy ?? 'added',
+      sortHow: params.sortHow,
       filter: params.filter,
     }),
   );
@@ -28,7 +31,6 @@ export function useWatchList(params: WatchListStoreProps) {
       map(($items) =>
         $items
           .filter((item) => item.type === 'movie' || item.type === 'show')
-          .map((item) => item.entry)
       ),
     ),
     ...rest,

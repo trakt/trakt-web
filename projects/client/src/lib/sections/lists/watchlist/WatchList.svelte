@@ -1,12 +1,11 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages.ts";
-
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
+  import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useWatchList } from "./useWatchList";
 
@@ -33,12 +32,12 @@
   {type}
   filter={$filterMap}
   useList={useWatchList}
-  urlBuilder={() => UrlBuilder.lists.watchlist("me")}
+  urlBuilder={() => getListUrl({ type: "watchlist" })}
 >
-  {#snippet item(media)}
+  {#snippet item(item)}
     <DefaultMediaItem
-      type={media.type}
-      {media}
+      type={item.type}
+      media={item.entry}
       mode={type === "media" ? "mixed" : "standalone"}
       source="watchlist"
     />
