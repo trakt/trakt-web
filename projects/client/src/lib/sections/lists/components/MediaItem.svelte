@@ -9,8 +9,9 @@
 
   const {
     contextualTag,
+    sortTag,
     ...props
-  }: MediaCardProps & { contextualTag?: Snippet } = $props();
+  }: MediaCardProps & { contextualTag?: Snippet; sortTag?: Snippet } = $props();
   const style = $derived(props.style ?? "cover");
 
   const isCover = $derived(style === "cover");
@@ -51,6 +52,7 @@
     {...props}
     {style}
     {contextualTag}
+    {sortTag}
     action={props.action}
     popupActions={props.badge ? undefined : props.popupActions}
     tag={props.variant === "next" ? coverTag : props.tag}

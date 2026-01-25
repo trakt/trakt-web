@@ -2,6 +2,7 @@
   import type { ListItem } from "$lib/requests/models/ListItem";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import DefaultMediaItem from "../../components/DefaultMediaItem.svelte";
   import EpisodeItem from "../../components/EpisodeItem.svelte";
   import SeasonItem from "../../components/SeasonItem.svelte";
@@ -11,15 +12,18 @@
     listedItem,
     style,
     list,
+    sortTag,
   }: {
     listedItem: ListItem;
     style: "summary" | "cover";
     list: MediaListSummary;
+    sortTag?: Snippet;
   } = $props();
 
   const commonProps = $derived({
     style,
     source: "user-list",
+    sortTag,
   });
 </script>
 

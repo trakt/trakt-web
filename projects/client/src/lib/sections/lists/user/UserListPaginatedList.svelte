@@ -8,6 +8,7 @@
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import SortValue from "./_internal/SortValue.svelte";
   import { useListSorting } from "./_internal/useListSorting";
   import UserListItem from "./_internal/UserListItem.svelte";
   import ListActions from "./ListActions.svelte";
@@ -77,7 +78,11 @@
     </div>
   {/snippet}
   {#snippet item(media)}
-    <UserListItem listedItem={media} style="summary" {list} />
+    <UserListItem listedItem={media} style="summary" {list}>
+      {#snippet sortTag()}
+        <SortValue item={media} sortBy={$current.sorting.value} />
+      {/snippet}
+    </UserListItem>
   {/snippet}
 
   {#snippet badge()}
