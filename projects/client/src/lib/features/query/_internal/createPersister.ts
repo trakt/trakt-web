@@ -2,8 +2,11 @@ import { browser } from '$app/environment';
 import { NOOP_FN } from '$lib/utils/constants.ts';
 import type { Persister } from '@tanstack/svelte-query-persist-client';
 import { createIdbPersister } from './createIdbPersister.ts';
+import { createMemoryPersister } from './createInMemoryPersister.ts';
 
-export function createPersister(): Persister {
+type PersisterType = 'idb' | 'memory';
+
+export function createPersister(persister: PersisterType): Persister {
   if (!browser) {
     return {
       persistClient: NOOP_FN,
@@ -12,5 +15,5 @@ export function createPersister(): Persister {
     };
   }
 
-  return createIdbPersister();
+  return persister === 'idb' ? createIdbPersister() : createMemoryPersister();
 }
