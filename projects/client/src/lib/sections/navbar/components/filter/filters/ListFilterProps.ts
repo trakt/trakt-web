@@ -5,4 +5,5 @@ export type ListFilterProps = {
   value: string | Nil;
   display: string;
   filter: ListFilter;
+  multiselect?: boolean;
 };

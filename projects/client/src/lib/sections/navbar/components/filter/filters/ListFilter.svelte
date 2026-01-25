@@ -8,7 +8,10 @@
   import SelectFilter from "./_internal/SelectFilter.svelte";
   import type { ListFilterProps } from "./ListFilterProps";
 
-  const { filter }: { filter: ListFilter } = $props();
+  const {
+    filter,
+    multiselect = false,
+  }: { filter: ListFilter; multiselect?: boolean } = $props();
 
   const { getFilterValue } = useFilter();
   const currentValue = $derived(getFilterValue(filter.key));
@@ -16,16 +19,33 @@
   const isFiltering = $derived(Boolean($currentValue));
 
   const color = $derived(isFiltering ? "blue" : "default");
-  const currentLabel = $derived(
-    filter.options.find((option) => option.value === $currentValue)?.label ??
-      m.option_text_all(),
-  );
+
+  // TODO deal better with multiselect
+  const currentLabel = $derived.by(() => {
+    if (!$currentValue) return m.option_text_all();
+
+    if (multiselect) {
+      const selectedValues = $currentValue.split(",");
+      const selectedLabels = filter.options
+        .filter((option) => selectedValues.includes(option.value))
+        .map((option) => option.label);
+
+      if (selectedLabels.length === 0) return m.option_text_all();
+      return selectedLabels.join(", ");
+    }
+
+    return (
+      filter.options.find((option) => option.value === $currentValue)?.label ??
+      m.option_text_all()
+    );
+  });
 
   const commonProps: ListFilterProps = $derived({
     color,
     value: $currentValue,
     display: currentLabel,
     filter: filter,
+    multiselect,
   });
 </script>
 
