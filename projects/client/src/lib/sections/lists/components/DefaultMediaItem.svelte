@@ -15,6 +15,7 @@
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { useIsWatchlisted } from "$lib/sections/media-actions/watchlist/useIsWatchlisted";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
+  import type { Snippet } from "svelte";
   import type { MediaCardProps } from "../components/models/MediaCardProps";
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
@@ -29,6 +30,7 @@
     ...rest
   }: MediaCardProps<MediaInputDefault> & {
     canDeemphasize?: boolean;
+    sortTag?: Snippet;
   } = $props();
 
   const { isWatched } = $derived(useIsWatched({ type, media }));

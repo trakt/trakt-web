@@ -10,12 +10,14 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
+  import type { Snippet } from "svelte";
   import SummaryCardRating from "./_internal/SummaryCardRating.svelte";
   import EpisodeCard from "./EpisodeCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
 
-  const props: EpisodeCardProps = $props();
+  const { sortTag, ...props }: EpisodeCardProps & { sortTag?: Snippet } =
+    $props();
 
   const isFuture = $derived(props.episode.airDate > new Date());
   const isActivity = $derived(props.variant === "activity");
@@ -136,6 +138,7 @@
       {action}
       type="episode"
       style="summary"
+      {sortTag}
     />
   {/if}
 

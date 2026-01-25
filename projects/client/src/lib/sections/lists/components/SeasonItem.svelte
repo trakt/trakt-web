@@ -12,6 +12,7 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
+  import type { Snippet } from "svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { SeasonCardProps } from "./models/SeasonCardProps";
 
@@ -26,9 +27,11 @@
     style = "cover",
     popupActions,
     source,
+    sortTag,
   }: {
     urlBuilder: () => string;
     isCurrentSeason?: boolean;
+    sortTag?: Snippet;
   } & SeasonCardProps = $props();
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
@@ -126,6 +129,7 @@
       {media}
       {style}
       {popupActions}
+      {sortTag}
     />
   {/if}
 </div>
