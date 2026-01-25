@@ -68,6 +68,8 @@ export const PAGE_UPPER_LIMIT = 3;
 export const DEFAULT_LISTS_PAGE_SIZE = 5;
 export const DEFAULT_LISTS_DRILL_SIZE = 10;
 
+export const DEFAULT_RELATED_LIMIT = 20;
+
 /**
  * This is the default we also have server-side.
  * We expose it to tinker around and fine-tune the default value.
