@@ -26,4 +26,11 @@ describe('spoilerExtension', () => {
 
     expect(renderedResult).to.equal('<span>test</span>');
   });
+
+  it('should match a multiline spoiler tag', () => {
+    const content = 'line 1\nline 2';
+    const match = matchSpoilerTag(`[spoiler]${content}[/spoiler]`);
+
+    expect(match?.at(1)).to.equal(content);
+  });
 });
