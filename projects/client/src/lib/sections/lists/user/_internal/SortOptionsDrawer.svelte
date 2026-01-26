@@ -7,6 +7,7 @@
   import type { ListUrlBuilder } from "../models/ListUrlBuilder";
   import type { SortDirection } from "../models/SortDirection";
   import type { Sorting } from "../models/Sorting";
+  import SortIcon from "./SortIcon.svelte";
 
   const {
     options,
@@ -26,6 +27,14 @@
 <Drawer {onClose} size="auto">
   <div class="sort-buttons">
     {#each options as option}
+      {#snippet icon()}
+        {#if option.value === current.sorting.value}
+          <CheckIcon />
+        {:else if option.value}
+          <SortIcon sortBy={option.value} />
+        {/if}
+      {/snippet}
+
       <DropdownItem
         replacestate
         style="flat"
@@ -33,6 +42,9 @@
         href={`${urlBuilder({ sortHow: current.sortHow, sortBy: option.value })}`}
         label={option.label()}
         disabled={option.value === current.sorting.value}
+        icon={Boolean(option.value) || option.value === current.sorting.value
+          ? icon
+          : undefined}
         onclick={() => {
           track({
             sortBy: option.value ?? "default",
@@ -41,11 +53,6 @@
         }}
       >
         {option.text()}
-        {#snippet icon()}
-          {#if option.value === current.sorting.value}
-            <CheckIcon />
-          {/if}
-        {/snippet}
       </DropdownItem>
     {/each}
   </div>
