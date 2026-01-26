@@ -1,10 +1,10 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import CheckInIcon from "$lib/components/icons/CheckInIcon.svelte";
   import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import ActionButton from "../ActionButton.svelte";
   import Button from "../Button.svelte";
-  import SquaredLogo from "./_internal/SquaredLogo.svelte";
   import { CheckInButtonIntlProvider } from "./CheckInButtonIntlProvider";
   import type { CheckInButtonProps } from "./CheckInButtonProps";
 
@@ -30,7 +30,7 @@
 
 {#snippet icon()}
   <IconWrapper isLoading={isCheckingIn}>
-    <SquaredLogo />
+    <CheckInIcon />
   </IconWrapper>
 {/snippet}
 
