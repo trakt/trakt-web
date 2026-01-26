@@ -41,11 +41,13 @@
   <ProgressTag progress={percentage} {total} {tags}>
     {i18n.toDuration(runtime)}
   </ProgressTag>
-  <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-    <div class="trakt-show-progress-tags">
-      {@render externalTags()}
-    </div>
-  </RenderFor>
+  {#if style === "summary"}
+    <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
+      <div class="trakt-show-progress-tags">
+        {@render externalTags()}
+      </div>
+    </RenderFor>
+  {/if}
 </div>
 
 <style>
