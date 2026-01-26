@@ -5,7 +5,7 @@ export function matchSpoilerTagStart(src: string) {
 }
 
 export function matchSpoilerTag(src: string) {
-  const rule = /^\[spoiler\](.*?)\[\/spoiler\]/;
+  const rule = /^\[spoiler\](.*?)\[\/spoiler\]/s;
   return rule.exec(src);
 }
 
