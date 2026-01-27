@@ -3,8 +3,10 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SeasonsResponse } from '@trakt/api';
 import { z } from 'zod';
+import { MAX_DATE } from '../../../utils/constants.ts';
 import { findDefined } from '../../../utils/string/findDefined.ts';
 import { mapToPoster } from '../../_internal/mapToPoster.ts';
+import { mapToTraktRating } from '../../_internal/mapToTraktRating.ts';
 import { type Season, SeasonSchema } from '../../models/Season.ts';
 
 type ShowSeasonsParams = {
@@ -38,6 +40,8 @@ export const mapToSeason = (item: SeasonsResponse[0]): Season => {
       count: item.episode_count ?? 0,
     },
     poster: poster ? mapToPoster(item.images) : undefined,
+    airDate: new Date(item.first_aired ?? MAX_DATE),
+    rating: mapToTraktRating(item.rating),
   };
 };
 
