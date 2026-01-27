@@ -196,8 +196,10 @@ export const UrlBuilder = {
 
       return categoryDrilldownFactory(`users/${user}/lists`)(params);
     },
-    watchlist: (user: string) => {
-      return `/users/${user}/watchlist`;
+    watchlist: (user: string, params: Record<string, string | number> = {}) => {
+      return `/users/${user}/watchlist${
+        buildParamString(sanitizeParams(params))
+      }`;
     },
     all: (user: string, type: PersonalListType) =>
       listsDrilldownFactory(user)(type),

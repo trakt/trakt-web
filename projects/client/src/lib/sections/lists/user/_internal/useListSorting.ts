@@ -2,7 +2,9 @@ import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts'
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { BehaviorSubject, map, type Observable } from 'rxjs';
 import { assertDefined } from '../../../../utils/assert/assertDefined.ts';
-import { getListUrl } from '../../components/list-summary/_internal/getListUrl.ts';
+import {
+  getListUrl,
+} from '../../components/list-summary/_internal/getListUrl.ts';
 import { LIST_SORT_OPTIONS } from '../constants/index.ts';
 import type {
   ListUrlBuilder,
@@ -31,9 +33,15 @@ type ListSorting = {
   urlBuilder: ListUrlBuilder;
 };
 
+type UseListSortingProps = {
+  list: MediaListSummary;
+  type?: MediaType;
+} | {
+  type: 'watchlist';
+};
+
 export function useListSorting(
-  list: MediaListSummary,
-  type?: MediaType,
+  props: UseListSortingProps,
 ): ListSorting {
   const params = new BehaviorSubject<Record<string, string | null>>({
     sort_by: null,
@@ -41,7 +49,7 @@ export function useListSorting(
   });
 
   function update(newParams: Record<string, string>) {
-    params.next({ ...params.value, ...newParams });
+    params.next({ ...newParams });
   }
 
   return {
@@ -49,8 +57,11 @@ export function useListSorting(
     options: LIST_SORT_OPTIONS,
     current: params.pipe(
       map(($params) => {
+        const defaultDirection = props.type === 'watchlist'
+          ? 'asc'
+          : props.list.sortHow;
         const sortBy = mapToSortBy($params.sort_by);
-        const sortHow = mapToDirection($params.sort_how) ?? list.sortHow;
+        const sortHow = mapToDirection($params.sort_how) ?? defaultDirection;
 
         const sorting = LIST_SORT_OPTIONS.find(
           (option) => option.value === sortBy,
@@ -63,7 +74,18 @@ export function useListSorting(
       }),
     ),
     urlBuilder: ({ sortBy, sortHow }: ListUrlBuilderParams) => {
-      return getListUrl(list, { mode: type, sortBy, sortHow });
+      if (props.type === 'watchlist') {
+        return getListUrl({ type: 'watchlist', sortBy, sortHow });
+      }
+
+      const { list, type } = props;
+      return getListUrl({
+        type: 'user-list',
+        list,
+        mode: type,
+        sortBy,
+        sortHow,
+      });
     },
   };
 }

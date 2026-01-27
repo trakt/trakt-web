@@ -24,7 +24,6 @@ const currentUserPlexLibraryRequest = (
     .collection
     .minimal[type]({
       query: {
-        extended: 'min',
         available_on: 'plex',
       },
     });

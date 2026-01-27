@@ -25,7 +25,9 @@
   );
 
   const isListOwner = $derived($user.slug === list.user?.slug);
-  const isOnListPage = $derived(getListUrl(list) === page.url.pathname);
+  const isOnListPage = $derived(
+    getListUrl({ type: "user-list", list }) === page.url.pathname,
+  );
 
   const handleLike = $derived(() => {
     $isLiked ? unlikeList() : likeList();

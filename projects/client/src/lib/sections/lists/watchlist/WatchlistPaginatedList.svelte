@@ -3,6 +3,8 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import { useListSorting } from "../user/_internal/useListSorting";
+  import ListSortActions from "../user/ListSortActions.svelte";
   import { useWatchList } from "./useWatchList";
 
   type WatchListProps = {
@@ -13,6 +15,10 @@
   const { title, type }: WatchListProps = $props();
 
   const { filterMap } = useFilter();
+
+  const { current, update, options, urlBuilder } = $derived(
+    useListSorting({ type: "watchlist" }),
+  );
 </script>
 
 <DrilledMediaList
@@ -20,8 +26,22 @@
   {title}
   {type}
   filter={$filterMap}
-  useList={useWatchList}
+  useList={(params) =>
+    useWatchList({
+      ...params,
+      sortBy: $current.sorting.value,
+      sortHow: $current.sortHow,
+    })}
 >
+  {#snippet listActions()}
+    <ListSortActions
+      {options}
+      {urlBuilder}
+      current={$current}
+      onUpdate={update}
+    />
+  {/snippet}
+
   {#snippet item(media)}
     <DefaultMediaItem
       type={media.type}
