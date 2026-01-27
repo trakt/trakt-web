@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Ajustes"
     },
-    "header_spoilers": {
-      "default": "Spoilers"
-    },
     "text_show_spoilers": {
       "default": "Mostrar spoilers"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Cambia tu foto, nombre y otros detalles."
-    },
-    "description_spoilers": {
-      "default": "Para los que les gusta el misterio."
     },
     "description_genres": {
       "default": "Agrega o quita tus {limit} géneros favoritos.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Comportamiento"
+    },
+    "description_behavior": {
+      "default": "Controla qué tanto aguantas los spoilers y tus ganas de volver a ver esa peli favorita mil veces."
+    },
+    "text_show_multiple_watches": {
+      "default": "Activar varios visionados"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Activar o desactivar varios visionados"
     }
   }
 }

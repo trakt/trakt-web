@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Ustawienia"
     },
-    "header_spoilers": {
-      "default": "Spoilery"
-    },
     "text_show_spoilers": {
       "default": "Pokaż spoilery"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Zmień swoje zdjęcie, imię i inne dane."
-    },
-    "description_spoilers": {
-      "default": "Dla tych, którzy lubią zachować tajemnicę."
     },
     "description_genres": {
       "default": "Dodaj lub usuń swoje {limit} ulubione gatunki.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Zachowanie"
+    },
+    "description_behavior": {
+      "default": "Zarządzaj tolerancją na spoilery i nawykami ponownego oglądania. Bo dobre kino nigdy się nie nudzi!"
+    },
+    "text_show_multiple_watches": {
+      "default": "Włącz wielokrotne oglądanie"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Włącz lub wyłącz wielokrotne oglądanie"
     }
   }
 }

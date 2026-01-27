@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Innstillinger"
     },
-    "header_spoilers": {
-      "default": "Spoilere"
-    },
     "text_show_spoilers": {
       "default": "Vis spoilere"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Endre bildet ditt, navnet ditt og andre detaljer."
-    },
-    "description_spoilers": {
-      "default": "For de som liker å holde det hemmelig."
     },
     "description_genres": {
       "default": "Legg til eller fjern dine {limit} favoritt sjangere.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Atferd"
+    },
+    "description_behavior": {
+      "default": "Administrer din spoilertoleranse og vaner for å se om igjen favorittene dine. Tid for hygge og serie-maraton!"
+    },
+    "text_show_multiple_watches": {
+      "default": "Aktiver flere visninger"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Aktiver eller deaktiver flere visningar"
     }
   }
 }

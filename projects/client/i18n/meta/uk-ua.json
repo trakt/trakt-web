@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Налаштування"
     },
-    "header_spoilers": {
-      "default": "Спойлери"
-    },
     "text_show_spoilers": {
       "default": "Показати спойлери"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Змініть своє фото, ім'я та інші дані."
-    },
-    "description_spoilers": {
-      "default": "Для тих, хто любить тримати все в таємниці."
     },
     "description_genres": {
       "default": "Додайте або видаліть ваші {limit} улюблені жанри.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Поведінка"
+    },
+    "description_behavior": {
+      "default": "Керуйте своєю толерантністю до спойлерів та звичками перегляду. Деякі фільми та серіали варті того, щоб їх передивитися!"
+    },
+    "text_show_multiple_watches": {
+      "default": "Увімкнути повторні перегляди"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Увімкнути або вимкнути повторні перегляди"
     }
   }
 }

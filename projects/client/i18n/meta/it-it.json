@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Impostazioni"
     },
-    "header_spoilers": {
-      "default": "Spoiler"
-    },
     "text_show_spoilers": {
       "default": "Mostra spoiler"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Cambia la tua foto, nome e altri dettagli."
-    },
-    "description_spoilers": {
-      "default": "Per chi ama il mistero."
     },
     "description_genres": {
       "default": "Aggiungi o rimuovi i tuoi {limit} generi preferiti.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Comportamento"
+    },
+    "description_behavior": {
+      "default": "Gestisci la tua tolleranza agli spoiler e le tue abitudini di re-watching. Certi capolavori meritano un bis!"
+    },
+    "text_show_multiple_watches": {
+      "default": "Abilita visioni multiple"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Abilita o disabilita visioni multiple"
     }
   }
 }

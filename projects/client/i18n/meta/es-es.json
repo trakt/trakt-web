@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Ajustes"
     },
-    "header_spoilers": {
-      "default": "Spoilers"
-    },
     "text_show_spoilers": {
       "default": "Mostrar spoilers"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Cambia tu foto, nombre y otros detalles."
-    },
-    "description_spoilers": {
-      "default": "Para aquellos que prefieren mantener el misterio."
     },
     "description_genres": {
       "default": "Añade o elimina tus {limit} géneros favoritos.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Comportamiento"
+    },
+    "description_behavior": {
+      "default": "Gestiona tu tolerancia a los spoilers y tus hábitos de visionado. Porque hay películas que merecen una segunda oportunidad."
+    },
+    "text_show_multiple_watches": {
+      "default": "Activar múltiples visionados"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Activar o desactivar múltiples visionados"
     }
   }
 }

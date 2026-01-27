@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Setări"
     },
-    "header_spoilers": {
-      "default": "Spoilere"
-    },
     "text_show_spoilers": {
       "default": "Arată spoilere"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Schimbați-vă fotografia, numele și alte detalii."
-    },
-    "description_spoilers": {
-      "default": "Pentru cei cărora le place să păstreze misterul."
     },
     "description_genres": {
       "default": "Adăugați sau eliminați cele {limit} genuri preferate.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Comportament"
+    },
+    "description_behavior": {
+      "default": "Gestionează-ți toleranța la spoilere și obiceiurile de revizionare. Unele povești merită savurate de mai multe ori!"
+    },
+    "text_show_multiple_watches": {
+      "default": "Activează vizionările multiple"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Activează sau dezactivează vizionările multiple"
     }
   }
 }

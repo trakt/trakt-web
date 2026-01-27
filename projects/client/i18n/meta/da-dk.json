@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Indstillinger"
     },
-    "header_spoilers": {
-      "default": "Spoilere"
-    },
     "text_show_spoilers": {
       "default": "Vis spoilers"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Skift dit foto, navn og andre detaljer."
-    },
-    "description_spoilers": {
-      "default": "For dem, der kan lide at holde det mystisk."
     },
     "description_genres": {
       "default": "Tilføj eller fjern dine {limit} yndlingsgenrer.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Adfærd"
+    },
+    "description_behavior": {
+      "default": "Administrer din spoilertolerance og dine vaner for at gense film og serier. Skab den perfekte filmaften!"
+    },
+    "text_show_multiple_watches": {
+      "default": "Aktiver flere visninger"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Aktiver eller deaktiver flere visninger"
     }
   }
 }
