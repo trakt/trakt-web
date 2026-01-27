@@ -49,6 +49,7 @@ export const UserSettingsSchema = z.object({
       action: z.enum(['now', 'released', 'unknown']),
     }),
     isSpoilerHidden: z.boolean().optional(),
+    hasWatchAgain: z.boolean(),
   }),
   genres: genreOptionSchema.array(),
   services: z.object({
@@ -127,6 +128,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
           ? 'now'
           : browsing?.watch_popup_action ?? 'now',
       },
+      hasWatchAgain: !(browsing?.watch_only_once ?? true),
       progress: {
         sort: {
           by: 'added',

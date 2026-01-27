@@ -36,6 +36,7 @@ export const ExtendedUserMappedMock: UserSettings = {
       'action': 'now',
     },
     'isSpoilerHidden': false,
+    'hasWatchAgain': true,
   },
   'services': {
     'country': 'us',

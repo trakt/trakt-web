@@ -1,5 +1,6 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import MarkAsWatchedIcon from "../../icons/MarkAsWatchedIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
@@ -20,6 +21,8 @@
     mode = "hybrid",
     ...props
   }: MarkAsWatchedButtonProps = $props();
+
+  const { user } = useUser();
 
   const isRemovable = $derived(isWatched && mode === "hybrid");
   const isRewatching = $derived(mode === "ask" && isWatched);
@@ -61,34 +64,43 @@
 
     return `${i18n.text({ title, isWatched, isRewatching })}${postFix}`;
   });
+
+  const allowMarkAsWatched = $derived(
+    !isRewatching || $user.preferences.hasWatchAgain,
+  );
 </script>
 
-{#if style === "normal"}
-  <div data-dpad-navigation={DpadNavigationType.List} style="display: contents">
-    <Button
-      {...commonProps}
-      {...props}
-      navigationType={DpadNavigationType.Item}
+{#if allowMarkAsWatched}
+  {#if style === "normal"}
+    <div
+      data-dpad-navigation={DpadNavigationType.List}
+      style="display: contents"
     >
+      <Button
+        {...commonProps}
+        {...props}
+        navigationType={DpadNavigationType.Item}
+      >
+        {buttonText}
+        {#snippet icon()}
+          <MarkAsWatchedIcon {state} size="small" />
+        {/snippet}
+      </Button>
+    </div>
+  {/if}
+
+  {#if style === "action"}
+    <ActionButton style="ghost" {...commonProps} {...props}>
+      <MarkAsWatchedIcon {state} />
+    </ActionButton>
+  {/if}
+
+  {#if style === "dropdown-item"}
+    <DropdownItem {...commonProps} style="flat">
       {buttonText}
       {#snippet icon()}
-        <MarkAsWatchedIcon {state} size="small" />
+        <MarkAsWatchedIcon {state} />
       {/snippet}
-    </Button>
-  </div>
-{/if}
-
-{#if style === "action"}
-  <ActionButton style="ghost" {...commonProps} {...props}>
-    <MarkAsWatchedIcon {state} />
-  </ActionButton>
-{/if}
-
-{#if style === "dropdown-item"}
-  <DropdownItem {...commonProps} style="flat">
-    {buttonText}
-    {#snippet icon()}
-      <MarkAsWatchedIcon {state} />
-    {/snippet}
-  </DropdownItem>
+    </DropdownItem>
+  {/if}
 {/if}
