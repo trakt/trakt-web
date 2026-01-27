@@ -69,6 +69,12 @@
   use:scrollToItem
 >
   {#if style === "cover"}
+    {#snippet tag()}
+      <TagBar>
+        <SeasonLabelTag seasonNumber={season.number} />
+      </TagBar>
+    {/snippet}
+
     <PortraitCard>
       {#if popupActions}
         <CardActionBar>
@@ -98,7 +104,7 @@
           alt={seasonLabel(season.number)}
         />
       </Link>
-      <CardFooter>
+      <CardFooter tag={variant === "list-item" ? tag : undefined}>
         {#if variant === "default"}
           <p
             use:lineClamp={{ lines: 2 }}
@@ -109,14 +115,6 @@
             {seasonLabel(season.number)}
           </p>
         {/if}
-
-        {#snippet tag()}
-          {#if variant === "list-item"}
-            <TagBar>
-              <SeasonLabelTag seasonNumber={season.number} />
-            </TagBar>
-          {/if}
-        {/snippet}
       </CardFooter>
     </PortraitCard>
   {/if}
