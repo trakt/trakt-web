@@ -40,6 +40,9 @@ declare global {
     [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : Partial<T[P]>;
   };
 
+  type DistributiveOmit<T, K extends keyof T> = T extends unknown ? Omit<T, K>
+    : never;
+
   type ChildrenProps = {
     children: import('svelte').Snippet;
   };

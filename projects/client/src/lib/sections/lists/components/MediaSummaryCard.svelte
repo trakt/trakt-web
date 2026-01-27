@@ -35,14 +35,19 @@
     type: "season";
   } & SeasonCardProps;
 
+  type ItemCardProps =
+    | MediaCardProps
+    | EpisodeSummaryProps
+    | SeasonSummaryProps;
+
   type SummaryCardProps = {
     contextualTag?: Snippet;
     sortTag?: Snippet;
-  } & (MediaCardProps | EpisodeSummaryProps | SeasonSummaryProps);
+    badge?: Snippet;
+  } & DistributiveOmit<ItemCardProps, "badge" | "action">;
 
   const {
     tag,
-    action,
     badge,
     popupActions,
     media,
@@ -187,15 +192,9 @@
   </Link>
 
   <SummaryCardBottomBar {contextualTag} {tag}>
-    {#if action}
-      {@render action()}
-    {/if}
+    {@render badge?.()}
 
-    {#if badge}
-      {@render badge()}
-    {/if}
-
-    {#if !action && rest.variant !== "activity" && rest.variant !== "next"}
+    {#if !badge && rest.variant !== "activity" && rest.variant !== "next"}
       <SummaryCardRating
         item={rest.type === "episode" ? rest.episode : media}
       />
