@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Settings"
     },
-    "header_spoilers": {
-      "default": "Spoilers"
-    },
     "text_show_spoilers": {
       "default": "Show spoilers"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Change your photo, name and other details."
-    },
-    "description_spoilers": {
-      "default": "For those who like to keep it a mystery."
     },
     "description_genres": {
       "default": "Add or remove your {limit} favourite genres.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Behaviour"
+    },
+    "description_behavior": {
+      "default": "Manage your spoiler tolerance and rewatching habits."
+    },
+    "text_show_multiple_watches": {
+      "default": "Enable multiple watches"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Enable or disable multiple watches"
     }
   }
 }

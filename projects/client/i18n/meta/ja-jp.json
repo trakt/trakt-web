@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "設定"
     },
-    "header_spoilers": {
-      "default": "ネタバレ"
-    },
     "text_show_spoilers": {
       "default": "ネタバレを表示"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "写真、名前、その他の詳細を変更します。"
-    },
-    "description_spoilers": {
-      "default": "ミステリーを保ちたい方のために。"
     },
     "description_genres": {
       "default": "{limit} 個のお気に入りのジャンルを追加または削除します。",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "動作設定"
+    },
+    "description_behavior": {
+      "default": "ネタバレ許容範囲や映画・ドラマの再視聴習慣を管理しましょう。お気に入りの名作を何度でも楽しむために！"
+    },
+    "text_show_multiple_watches": {
+      "default": "複数回の視聴を有効にする"
+    },
+    "switch_label_multiple_watches": {
+      "default": "複数回の視聴を有効または無効にする"
     }
   }
 }

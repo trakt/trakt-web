@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Instellingen"
     },
-    "header_spoilers": {
-      "default": "Spoilers"
-    },
     "text_show_spoilers": {
       "default": "Spoilers tonen"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Verander je foto, naam en andere details."
-    },
-    "description_spoilers": {
-      "default": "Voor degenen die het graag mysterieus houden."
     },
     "description_genres": {
       "default": "Voeg je {limit} favoriete genres toe of verwijder ze.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Gedrag"
+    },
+    "description_behavior": {
+      "default": "Beheer je spoilertolerantie en gewoonten voor het herbekijken van films en series. Ideaal voor de echte bingewatcher!"
+    },
+    "text_show_multiple_watches": {
+      "default": "Meerdere keren bekijken inschakelen"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Schakel het meerdere keren bekijken in of uit"
     }
   }
 }

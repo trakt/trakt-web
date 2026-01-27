@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Paramètres"
     },
-    "header_spoilers": {
-      "default": "Spoilers"
-    },
     "text_show_spoilers": {
       "default": "Afficher les spoilers"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Changez votre photo, votre nom et d'autres détails."
-    },
-    "description_spoilers": {
-      "default": "Pour ceux qui aiment garder le mystère."
     },
     "description_genres": {
       "default": "Ajoutez ou retirez vos {limit} genres favoris.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Comportement"
+    },
+    "description_behavior": {
+      "default": "Gère ta tolérance aux « spoilers » et tes habitudes de re-visionnement. Parce qu'un bon film ou une série locale se revoit sans fin!"
+    },
+    "text_show_multiple_watches": {
+      "default": "Activer les visionnages multiples"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Activer ou désactiver les visionnages multiples"
     }
   }
 }

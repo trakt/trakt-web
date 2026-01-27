@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Einstellungen"
     },
-    "header_spoilers": {
-      "default": "Spoiler"
-    },
     "text_show_spoilers": {
       "default": "Spoiler anzeigen"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Ändern Sie Ihr Foto, Ihren Namen und andere Details."
-    },
-    "description_spoilers": {
-      "default": "Für diejenigen, die es gerne geheimnisvoll mögen."
     },
     "description_genres": {
       "default": "Fügen Sie Ihre {limit} Lieblingsgenres hinzu oder entfernen Sie sie.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Verhalten"
+    },
+    "description_behavior": {
+      "default": "Verwalten Sie Ihre Spoiler-Toleranz und Ihre Gewohnheiten beim erneuten Anschauen. Großes Kino verdient ein Da Capo!"
+    },
+    "text_show_multiple_watches": {
+      "default": "Mehrfaches Ansehen aktivieren"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Mehrfaches Ansehen aktivieren oder deaktivieren"
     }
   }
 }

@@ -1599,9 +1599,6 @@
     "button_label_settings": {
       "default": "设置"
     },
-    "header_spoilers": {
-      "default": "剧透"
-    },
     "text_show_spoilers": {
       "default": "显示剧透"
     },
@@ -2235,9 +2232,6 @@
     },
     "description_account_details": {
       "default": "更改你的头像、名称和其他详情。"
-    },
-    "description_spoilers": {
-      "default": "为了那些喜欢保持神秘感的人。"
     },
     "description_genres": {
       "default": "添加或移除你 {limit} 个最喜欢的类型。",
@@ -2963,6 +2957,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "行为习惯"
+    },
+    "description_behavior": {
+      "default": "管理您的剧透容忍度和重复观看习惯。好剧值得二刷三刷！"
+    },
+    "text_show_multiple_watches": {
+      "default": "开启多次观看"
+    },
+    "switch_label_multiple_watches": {
+      "default": "开启或关闭多次观看"
     }
   }
 }

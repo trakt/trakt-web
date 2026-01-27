@@ -3597,14 +3597,6 @@
         "ios"
       ]
     },
-    "header_spoilers": {
-      "default": "Spoilers",
-      "description": "Header for the section that allows users to toggle spoilers.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "text_show_spoilers": {
       "default": "Show spoilers",
       "description": "Text for the section that allows users to toggle spoilers.",
@@ -5066,14 +5058,6 @@
     "description_account_details": {
       "default": "Change your photo, name and other details.",
       "description": "Description for the account details section.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "description_spoilers": {
-      "default": "For those who like to keep it a mystery.",
-      "description": "Description for the spoilers section.",
       "exclude": [
         "android",
         "ios"
@@ -6805,6 +6789,38 @@
           "type": "string"
         }
       },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_behavior": {
+      "default": "Behavior",
+      "description": "Header for the section that allows users to change the behavior, i.e. spoiler settings and watch again behavior.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_behavior": {
+      "default": "Manage your spoiler tolerance and rewatching habits.",
+      "description": "Description for the behavior section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_show_multiple_watches": {
+      "default": "Enable multiple watches",
+      "description": "Text for the section that allows users to enable or disable multiple watches.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "switch_label_multiple_watches": {
+      "default": "Enable or disable multiple watches",
+      "description": "Aria-label for the switch that allows users to enable or disable multiple watches.",
       "exclude": [
         "android",
         "ios"

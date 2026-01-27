@@ -1333,9 +1333,6 @@
     "button_label_settings": {
       "default": "Настройки"
     },
-    "header_spoilers": {
-      "default": "Спойлери"
-    },
     "text_show_spoilers": {
       "default": "Показвай спойлери"
     },
@@ -1891,9 +1888,6 @@
     },
     "description_account_details": {
       "default": "Променете снимката си, името и други данни."
-    },
-    "description_spoilers": {
-      "default": "За тези, които обичат да запазят мистерията."
     },
     "description_genres": {
       "default": "Добавете или премахнете своите {limit} любими жанрове.",
@@ -2619,6 +2613,18 @@
           "type": "string"
         }
       }
+    },
+    "header_behavior": {
+      "default": "Поведение"
+    },
+    "description_behavior": {
+      "default": "Управлявайте поносимостта си към спойлери и навиците си за повторно гледане на любими истории."
+    },
+    "text_show_multiple_watches": {
+      "default": "Разреши многократно гледане"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Разреши или забрани многократното гледане"
     }
   }
 }
