@@ -2,8 +2,7 @@
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
-  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
+  import WatchAgainAction from "../../../_internal/WatchAgainAction.svelte";
   import EpisodeSideActions from "./EpisodeSideActions.svelte";
 
   const {
@@ -17,22 +16,9 @@
     title: string;
     showTitle: string;
   } = $props();
-
-  const { isWatched } = $derived(
-    useIsWatched({ media: episode, show, type: "episode" }),
-  );
 </script>
 
-{#if $isWatched}
-  <MarkAsWatchedAction
-    style="dropdown-item"
-    type="episode"
-    media={episode}
-    mode="ask"
-    {title}
-    {show}
-  />
-{/if}
+<WatchAgainAction type="episode" media={episode} {show} {title} />
 
 <EpisodeSideActions
   {title}
