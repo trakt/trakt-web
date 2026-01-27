@@ -13,6 +13,7 @@ type HandleSettingsProps = {
   action: string;
 };
 
+// TODO update api
 type UserSettingsRequest = SettingsRequest['user'];
 
 function mapToDarkKnight(theme: Theme) {
@@ -106,5 +107,19 @@ export function useSettings() {
       },
     }))),
     theme: { set: setTheme },
+    preferences: user.pipe(map(($user) => ({
+      hasWatchAgain: $user.preferences.hasWatchAgain,
+
+      set: async ({ hasWatchAgain }: { hasWatchAgain: boolean }) => {
+        const payload = {
+          browsing: {
+            watch_only_once: !hasWatchAgain,
+          },
+        };
+
+        // TODO track specific preference changes
+        await handleSettingsChange({ payload, action: 'preferences' });
+      },
+    }))),
   };
 }
