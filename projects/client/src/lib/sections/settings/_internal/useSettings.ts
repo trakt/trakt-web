@@ -106,5 +106,18 @@ export function useSettings() {
       },
     }))),
     theme: { set: setTheme },
+    watchAgain: user.pipe(map(($user) => ({
+      hasWatchAgain: $user.preferences.hasWatchAgain,
+
+      set: async (hasWatchAgain: boolean) => {
+        const payload = {
+          browsing: {
+            watch_only_once: !hasWatchAgain,
+          },
+        };
+
+        await handleSettingsChange({ payload, action: 'watch_only_once' });
+      },
+    }))),
   };
 }

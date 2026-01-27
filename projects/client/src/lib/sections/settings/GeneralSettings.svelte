@@ -2,14 +2,14 @@
   import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Appearance from "./_internal/Appearance.svelte";
+  import Behavior from "./_internal/Behavior.svelte";
   import Genres from "./_internal/Genres.svelte";
   import Profile from "./_internal/Profile.svelte";
-  import Spoilers from "./_internal/Spoilers.svelte";
 </script>
 
 <div class="trakt-general-settings">
   <Profile />
-  <Spoilers />
+  <Behavior />
   <Genres />
   <Appearance />
 
