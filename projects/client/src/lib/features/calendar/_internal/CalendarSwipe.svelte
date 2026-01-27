@@ -1,11 +1,15 @@
 <script lang="ts">
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
-  import { useCalendarPeriod } from "../context/useCalendarPeriod";
   import CalendarSwipeIndicator from "./CalendarSwipeIndicator.svelte";
 
-  const { children }: ChildrenProps = $props();
-
-  const { next, previous } = useCalendarPeriod();
+  const {
+    children,
+    onNextPeriod,
+    onPreviousPeriod,
+  }: {
+    onNextPeriod: () => void;
+    onPreviousPeriod: () => void;
+  } & ChildrenProps = $props();
 </script>
 
 <SwipeX
@@ -14,11 +18,11 @@
   classList="trakt-calendar-swiper"
   onSwipe={(state) => {
     if (state.direction === "left") {
-      next();
+      onNextPeriod();
     }
 
     if (state.direction === "right") {
-      previous();
+      onPreviousPeriod();
     }
   }}
   --indicator-height="100%"

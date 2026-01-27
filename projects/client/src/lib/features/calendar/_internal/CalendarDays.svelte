@@ -1,16 +1,24 @@
 <script lang="ts">
+  import { useCalendarPeriod } from "../context/useCalendarPeriod";
   import type { CalendarEntry } from "../models/CalendarEntry";
   import CalendarSwipe from "./CalendarSwipe.svelte";
   import { dateKey } from "./dateKey";
   import Day from "./Day.svelte";
 
   const { calendar }: { calendar: CalendarEntry[] } = $props();
+
+  const { activeDate, next, previous } = useCalendarPeriod();
 </script>
 
-<CalendarSwipe>
+<CalendarSwipe onNextPeriod={next} onPreviousPeriod={previous}>
   <div class="trakt-calendar-days">
     {#each calendar as day (dateKey(day.date))}
-      <Day {day} />
+      <Day
+        {day}
+        isActiveDate={day.date.toDateString() ===
+          $activeDate.date.toDateString()}
+        onClick={(date) => activeDate.next(date)}
+      />
     {/each}
   </div>
 </CalendarSwipe>

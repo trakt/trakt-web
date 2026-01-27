@@ -4,18 +4,21 @@
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
-  import { useCalendarPeriod } from "../context/useCalendarPeriod";
+  import type { ActiveDate } from "../context/ActiveDate";
   import type { CalendarEntry } from "../models/CalendarEntry";
   import ContentIndicator from "./ContentIndicator.svelte";
 
-  const { day }: { day: CalendarEntry } = $props();
-
-  const { activeDate } = useCalendarPeriod();
+  const {
+    day,
+    onClick,
+    isActiveDate,
+  }: {
+    onClick: (date: ActiveDate) => void;
+    day: CalendarEntry;
+    isActiveDate: boolean;
+  } = $props();
 
   const itemCount = $derived(day.items.length);
-  const isActiveDate = $derived(
-    day.date.toDateString() === $activeDate.date.toDateString(),
-  );
 </script>
 
 <button
@@ -26,7 +29,7 @@
   class:has-items={itemCount > 0}
   class:is-active={isActiveDate}
   onclick={() => {
-    activeDate.next({ date: day.date, source: "navigation" });
+    onClick({ date: day.date, source: "navigation" });
   }}
 >
   <span>

@@ -34,7 +34,7 @@ export type EpisodeActivityHistory = z.infer<
   typeof EpisodeActivityHistorySchema
 >;
 
-function episodeActivityHistoryRequest(
+export function episodeActivityHistoryRequest(
   { fetch, slug, startDate, endDate, limit, id, page }:
     EpisodeActivityHistoryParams,
 ) {

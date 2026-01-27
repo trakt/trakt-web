@@ -29,7 +29,7 @@ export const MovieActivityHistorySchema = z.object({
 });
 export type MovieActivityHistory = z.infer<typeof MovieActivityHistorySchema>;
 
-const movieActivityHistoryRequest = (
+export const movieActivityHistoryRequest = (
   { fetch, slug, startDate, endDate, limit, id, page }:
     MovieActivityHistoryParams,
 ) => {
