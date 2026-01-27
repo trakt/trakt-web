@@ -80,6 +80,17 @@
 
     return rest.indicators;
   });
+  const ratedItem = $derived.by(() => {
+    switch (rest.type) {
+      case "movie":
+      case "show":
+        return media;
+      case "season":
+        return rest.season;
+      case "episode":
+        return rest.episode;
+    }
+  });
 </script>
 
 <Card
@@ -192,12 +203,10 @@
   </Link>
 
   <SummaryCardBottomBar {contextualTag} {tag}>
-    {@render badge?.()}
-
-    {#if !badge && rest.variant !== "activity" && rest.variant !== "next"}
-      <SummaryCardRating
-        item={rest.type === "episode" ? rest.episode : media}
-      />
+    {#if badge}
+      {@render badge()}
+    {:else if rest.variant !== "activity" && rest.variant !== "next"}
+      <SummaryCardRating item={ratedItem} />
     {/if}
   </SummaryCardBottomBar>
 </Card>

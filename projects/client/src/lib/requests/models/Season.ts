@@ -11,5 +11,7 @@ export const SeasonSchema = z.object({
   poster: z.object({
     url: ImageUrlsSchema,
   }).optional(),
+  airDate: z.date(),
+  rating: z.number().nullish(),
 });
 export type Season = z.infer<typeof SeasonSchema>;

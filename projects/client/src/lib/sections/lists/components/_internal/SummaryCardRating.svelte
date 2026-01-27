@@ -1,11 +1,14 @@
 <script lang="ts">
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import { getLocale } from "$lib/features/i18n";
-  import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { toTraktRating } from "$lib/utils/formatting/number/toTraktRating";
 
-  const { item }: { item: MediaEntry | EpisodeEntry } = $props();
+  type RatedItem = {
+    airDate: Date;
+    rating?: number | Nil;
+  };
+
+  const { item }: { item: RatedItem } = $props();
   const hasAired = $derived(!!item.airDate && item.airDate <= new Date());
 </script>
 
