@@ -75,22 +75,6 @@
 
     return rest.indicators;
   });
-
-  const href = $derived.by(() => {
-    switch (rest.type) {
-      case "movie":
-      case "show":
-        return UrlBuilder.media(media.type, media.slug);
-      case "season":
-        return UrlBuilder.show(media.slug, { season: rest.season.number });
-      case "episode":
-        return UrlBuilder.episode(
-          media.slug,
-          rest.episode.season,
-          rest.episode.number,
-        );
-    }
-  });
 </script>
 
 <Card
@@ -118,7 +102,7 @@
   />
 
   <Link
-    {href}
+    href={UrlBuilder.media(media.type, media.slug)}
     onclick={() => source && track({ source, type: rest.type })}
     color="inherit"
   >
