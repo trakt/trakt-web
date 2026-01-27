@@ -266,13 +266,6 @@
     }
   }
 
-  /* .trakt-summary-card-tags {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xs);
-    flex-grow: 1;
-  } */
-
   :global(.trakt-summary-card-titles) {
     height: var(--ni-66);
   }
