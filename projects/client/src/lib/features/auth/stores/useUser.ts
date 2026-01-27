@@ -69,6 +69,7 @@ const ANONYMOUS_USER: UserSettings = {
       action: 'now',
     },
     isSpoilerHidden: false,
+    hasWatchAgain: false,
   },
   genres: [],
   services: {
