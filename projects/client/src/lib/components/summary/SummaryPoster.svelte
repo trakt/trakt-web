@@ -1,6 +1,5 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
   import { fade } from "svelte/transition";
   import Link from "../link/Link.svelte";
@@ -35,15 +34,13 @@
     <Link {href} {target}>
       <CrossOriginImage {src} {alt} />
     </Link>
-  </div>
 
-  {#if activeOverlay}
-    <RenderFor audience="all">
+    {#if activeOverlay}
       <div class="trakt-summary-poster-overlay">
         {@render activeOverlay()}
       </div>
-    </RenderFor>
-  {/if}
+    {/if}
+  </div>
 
   {@render actions?.()}
 
@@ -57,7 +54,7 @@
 <style>
   .trakt-summary-poster-container {
     --overlay-border-size: var(--ni-2);
-    --poster-inverse-aspect-ratio: 3 / 2;
+    --poster-aspect-ratio: 2 / 3;
 
     width: var(--summary-poster-width);
     display: flex;
@@ -68,7 +65,7 @@
     &[data-variant="landscape"] {
       .trakt-summary-poster :global(img),
       .trakt-summary-poster-overlay {
-        --poster-inverse-aspect-ratio: 9 / 16;
+        --poster-aspect-ratio: 16 / 9;
       }
     }
   }
@@ -76,20 +73,20 @@
   .trakt-summary-poster :global(img),
   .trakt-summary-poster-overlay {
     overflow: hidden;
-
     border-radius: var(--border-radius-xxl);
-
-    width: var(--summary-poster-width);
-    /* Using aspect-ratio did not work in Safari, so we set the height explicitly */
-    height: calc(
-      var(--summary-poster-width) * var(--poster-inverse-aspect-ratio)
-    );
-
-    object-fit: cover;
   }
 
   .trakt-summary-poster {
+    position: relative;
+
     :global(img) {
+      display: block;
+
+      width: var(--summary-poster-width);
+      aspect-ratio: var(--poster-aspect-ratio);
+
+      object-fit: cover;
+
       align-self: stretch;
 
       box-shadow: 0px 7.673px 23.02px 0px rgba(0, 0, 0, 0.56);
@@ -102,13 +99,20 @@
 
   .trakt-summary-poster-overlay {
     position: absolute;
-    box-sizing: border-box;
+    z-index: var(--layer-raised);
+
+    --border-size: calc(2 * var(--overlay-border-size));
+    inset: 0;
+    margin: auto;
+    width: calc(100% - var(--border-size));
+    height: calc(100% - var(--border-size));
 
     opacity: 0;
     transition: opacity var(--transition-increment) ease-in-out;
 
     pointer-events: none;
 
+    box-sizing: border-box;
     border: var(--overlay-border-size) solid var(--color-overlay-foreground);
   }
 
@@ -118,7 +122,7 @@
       border: var(--overlay-border-size) solid transparent;
     }
 
-    & + .trakt-summary-poster-overlay {
+    .trakt-summary-poster-overlay {
       opacity: 1;
     }
   }

@@ -97,8 +97,7 @@
     display: flex;
     align-items: center;
 
-    :global(img),
-    :global(.trakt-summary-poster-overlay) {
+    :global(img) {
       width: 100%;
     }
   }
