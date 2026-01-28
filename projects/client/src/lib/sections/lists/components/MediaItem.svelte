@@ -52,8 +52,7 @@
     {...props}
     {style}
     {contextualTag}
-    {sortTag}
-    badge={props.action}
+    badge={sortTag ?? props.action}
     popupActions={props.badge ? undefined : props.popupActions}
     tag={props.variant === "next" ? coverTag : props.tag}
   />

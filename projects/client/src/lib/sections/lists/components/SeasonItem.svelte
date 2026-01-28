@@ -127,7 +127,7 @@
       {media}
       {style}
       {popupActions}
-      {sortTag}
+      badge={sortTag}
     />
   {/if}
 </div>

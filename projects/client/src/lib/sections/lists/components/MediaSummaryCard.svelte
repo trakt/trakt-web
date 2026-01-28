@@ -42,7 +42,6 @@
 
   type SummaryCardProps = {
     contextualTag?: Snippet;
-    sortTag?: Snippet;
     badge?: Snippet;
   } & DistributiveOmit<ItemCardProps, "badge" | "action">;
 
@@ -52,7 +51,6 @@
     popupActions,
     media,
     source,
-    sortTag,
     contextualTag,
     ...rest
   }: SummaryCardProps = $props();
@@ -193,11 +191,6 @@
           separator=", "
           genres={media.genres}
         />
-      {/if}
-      {#if sortTag}
-        <p class="trakt-card-subtitle">
-          {@render sortTag()}
-        </p>
       {/if}
     </SummaryCardDetails>
   </Link>
