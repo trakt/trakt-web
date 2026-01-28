@@ -14,7 +14,7 @@
     <SortIcon {sortBy} />
   {/if}
 
-  <p class="tag secondary bold ellipsis">
+  <p class="bold ellipsis">
     {valueText}
   </p>
 </div>
@@ -26,8 +26,8 @@
     gap: var(--gap-micro);
 
     :global(svg) {
-      width: var(--ni-12);
-      height: var(--ni-12);
+      width: var(--ni-16);
+      height: var(--ni-16);
     }
   }
 </style>

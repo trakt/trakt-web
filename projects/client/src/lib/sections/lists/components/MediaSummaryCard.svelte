@@ -42,18 +42,18 @@
 
   type SummaryCardProps = {
     contextualTag?: Snippet;
-    sortTag?: Snippet;
     badge?: Snippet;
+    sortTag?: Snippet;
   } & DistributiveOmit<ItemCardProps, "badge" | "action">;
 
   const {
-    tag,
+    tag: externalTag,
     badge,
     popupActions,
     media,
     source,
-    sortTag,
     contextualTag,
+    sortTag,
     ...rest
   }: SummaryCardProps = $props();
 
@@ -90,6 +90,14 @@
       case "episode":
         return rest.episode;
     }
+  });
+
+  const tag = $derived.by(() => {
+    if (sortTag) {
+      return;
+    }
+
+    return externalTag;
   });
 </script>
 
@@ -194,16 +202,13 @@
           genres={media.genres}
         />
       {/if}
-      {#if sortTag}
-        <p class="trakt-card-subtitle">
-          {@render sortTag()}
-        </p>
-      {/if}
     </SummaryCardDetails>
   </Link>
 
   <SummaryCardBottomBar {contextualTag} {tag}>
-    {#if badge}
+    {#if sortTag}
+      {@render sortTag()}
+    {:else if badge}
       {@render badge()}
     {:else if rest.variant !== "activity" && rest.variant !== "next"}
       <SummaryCardRating item={ratedItem} />

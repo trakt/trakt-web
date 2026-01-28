@@ -14,35 +14,44 @@ function getEntry(item: ListItem) {
       return item.entry;
     case 'episode':
       return item.entry.episode;
-    default:
-      throw new Error(`Unsupported item type: ${item.type}`);
+    case 'season':
+      return item.entry.season;
+  }
+}
+
+function getRuntime(item: ListItem) {
+  switch (item.type) {
+    case 'movie':
+      return item.entry.runtime;
+    case 'show':
+      return item.entry.runtime * item.entry.episode.count;
+    case 'episode':
+      return item.entry.episode.runtime;
+    case 'season':
+      return item.entry.show.runtime * item.entry.season.episodes.count;
   }
 }
 
 export function formatSortValue(item: ListItem, sortBy?: SortBy) {
-  if (sortBy === 'added') {
-    return toHumanDay(item.listedAt, getLocale(), 'short');
-  }
-
-  if (!sortBy || item.type === 'season') {
+  if (!sortBy) {
     return;
   }
 
-  const entry = getEntry(item);
   switch (sortBy) {
+    case 'added':
+      return toHumanDay(item.listedAt, getLocale(), 'short');
     case 'runtime': {
-      const runtime = item.type === 'show'
-        ? item.entry.episode.count * item.entry.runtime
-        : entry.runtime;
-
+      const runtime = getRuntime(item);
       return toHumanDuration({ minutes: runtime }, languageTag());
     }
     case 'released': {
+      const entry = getEntry(item);
       return isMaxDate(entry.airDate)
         ? m.tag_text_tba()
         : toHumanDay(entry.airDate, getLocale(), 'short');
     }
     case 'percentage': {
+      const entry = getEntry(item);
       return entry.rating
         ? `${toTraktRating(entry.rating, getLocale())}`
         : undefined;
