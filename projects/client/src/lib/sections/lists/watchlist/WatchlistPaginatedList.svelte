@@ -44,15 +44,16 @@
   {/snippet}
 
   {#snippet item(item)}
+    {#snippet sortTag()}
+      <SortValue {item} sortBy={$current.sorting.value} />
+    {/snippet}
+
     <DefaultMediaItem
       type={item.type}
       media={item.entry}
       style="summary"
       source="watchlist"
-    >
-      {#snippet sortTag()}
-        <SortValue {item} sortBy={$current.sorting.value} />
-      {/snippet}
-    </DefaultMediaItem>
+      sortTag={$current.sorting.value ? sortTag : undefined}
+    />
   {/snippet}
 </DrilledMediaList>

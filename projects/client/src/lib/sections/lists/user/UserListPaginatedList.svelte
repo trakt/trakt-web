@@ -71,12 +71,18 @@
       />
     </div>
   {/snippet}
+
   {#snippet item(media)}
-    <UserListItem listedItem={media} style="summary" {list}>
-      {#snippet sortTag()}
-        <SortValue item={media} sortBy={$current.sorting.value} />
-      {/snippet}
-    </UserListItem>
+    {#snippet sortTag()}
+      <SortValue item={media} sortBy={$current.sorting.value} />
+    {/snippet}
+
+    <UserListItem
+      listedItem={media}
+      style="summary"
+      {list}
+      sortTag={$current.sorting.value ? sortTag : undefined}
+    />
   {/snippet}
 
   {#snippet badge()}

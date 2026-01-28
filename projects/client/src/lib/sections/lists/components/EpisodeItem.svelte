@@ -136,9 +136,9 @@
       popupActions={props.popupActions}
       {tag}
       badge={action}
+      {sortTag}
       type="episode"
       style="summary"
-      {sortTag}
     />
   {/if}
 
