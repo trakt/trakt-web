@@ -76,6 +76,12 @@ export default defineConfig(({ mode }) => ({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/trakt/, ''),
       },
+      // TODO: REMOVE BEFORE PR
+      '/local-api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/local-api/, ''),
+      },
     },
     host: '0.0.0.0',
   },

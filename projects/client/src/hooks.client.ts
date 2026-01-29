@@ -24,6 +24,13 @@ Sentry.init({
     maskAllText: false,
     blockAllMedia: false,
   })],
+
+  // TODO: set targets properly
+  tracePropagationTargets: [
+    /^\/(?!local-api).*/,
+    /^https:\/\/.*\.trakt\.tv/,
+  ],
+
   // Strings for partial matches. Regex patterns for exact matches.
   ignoreErrors: [
     'CancelledError',
