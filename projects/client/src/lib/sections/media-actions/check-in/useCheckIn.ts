@@ -5,9 +5,9 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { checkinEpisodeRequest } from '$lib/requests/queries/checkin/checkinEpisodeRequest.ts';
 import { checkinMovieRequest } from '$lib/requests/queries/checkin/checkinMovieRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import { hasAired } from '$lib/utils/media/hasAired.ts';
 import type { MovieCheckinRequest, ShowCheckinRequest } from '@trakt/api';
 import { BehaviorSubject, map } from 'rxjs';
-import { hasAired } from '../_internal/hasAired.ts';
 import type { MarkAsWatchedStoreProps } from '../mark-as-watched/useMarkAsWatched.ts';
 
 export type UseCheckInProps = MarkAsWatchedStoreProps;

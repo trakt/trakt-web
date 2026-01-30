@@ -4,10 +4,10 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
-  import { hasAired } from "$lib/sections/media-actions/_internal/hasAired";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
+  import { hasAired } from "$lib/utils/media/hasAired";
   import { slide } from "svelte/transition";
   import JustWatchInfo from "./_internal/JustWatchInfo.svelte";
   import { mapToServices } from "./_internal/mapToServices";
