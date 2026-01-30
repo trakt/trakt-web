@@ -43,4 +43,14 @@ describe('getDisplayableRatings', () => {
       EMPTY_RATINGS,
     );
   });
+
+  it('should get the ratings if a movie is released before the air date', () => {
+    const entry = {
+      airDate: new Date(Date.now() + time.days(7)),
+      type: 'movie',
+      status: 'released',
+    } as unknown as MovieEntry;
+
+    expect(getDisplayableRatings({ ratings, entry })).to.deep.equal(ratings);
+  });
 });
