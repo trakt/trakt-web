@@ -1,5 +1,7 @@
+import * as m from '$lib/features/i18n/messages.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import { getLocale, languageTag } from '../../../../features/i18n/index.ts';
+import { isMaxDate } from '../../../../utils/date/isMaxDate.ts';
 import { toHumanDay } from '../../../../utils/formatting/date/toHumanDay.ts';
 import { toHumanDuration } from '../../../../utils/formatting/date/toHumanDuration.ts';
 import { toTraktRating } from '../../../../utils/formatting/number/toTraktRating.ts';
@@ -36,7 +38,9 @@ export function formatSortValue(item: ListItem, sortBy?: SortBy) {
       return toHumanDuration({ minutes: runtime }, languageTag());
     }
     case 'released': {
-      return toHumanDay(entry.airDate, getLocale(), 'short');
+      return isMaxDate(entry.airDate)
+        ? m.tag_text_tba()
+        : toHumanDay(entry.airDate, getLocale(), 'short');
     }
     case 'percentage': {
       return entry.rating
