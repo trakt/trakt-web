@@ -7,10 +7,10 @@ import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
 import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import { hasAired } from '$lib/utils/media/hasAired.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { BehaviorSubject } from 'rxjs';
 import type { MarkAsWatchedAt } from '../../../models/MarkAsWatchedAt.ts';
-import { hasAired } from '../_internal/hasAired.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
 
