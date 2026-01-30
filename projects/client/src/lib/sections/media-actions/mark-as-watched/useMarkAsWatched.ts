@@ -65,9 +65,10 @@ export function useMarkAsWatched(
   };
 
   const isWatchable = media.every((item) => {
-    return type === 'movie'
-      ? hasAired({ type, status: item.status ?? 'unknown' })
-      : hasAired({ type, airDate: item.airDate });
+    return hasAired({
+      ...item,
+      type,
+    });
   });
 
   return {
