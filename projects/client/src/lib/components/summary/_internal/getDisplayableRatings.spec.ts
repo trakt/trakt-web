@@ -1,6 +1,7 @@
 import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { describe, expect, it } from 'vitest';
+import type { MovieEntry } from '../../../requests/models/MovieEntry.ts';
 import {
   EMPTY_RATINGS,
   getDisplayableRatings,
@@ -24,15 +25,21 @@ describe('getDisplayableRatings', () => {
   };
 
   it('should get the ratings if it has aired items', () => {
-    const airDate = new Date(Date.now() - time.years(1));
+    const entry = {
+      airDate: new Date(Date.now() - time.years(1)),
+      type: 'movie',
+    } as unknown as MovieEntry;
 
-    expect(getDisplayableRatings({ ratings, airDate })).to.deep.equal(ratings);
+    expect(getDisplayableRatings({ ratings, entry })).to.deep.equal(ratings);
   });
 
   it('should get empty ratings for unaired items', () => {
-    const airDate = new Date(Date.now() + time.years(1));
+    const entry = {
+      airDate: new Date(Date.now() + time.years(1)),
+      type: 'movie',
+    } as unknown as MovieEntry;
 
-    expect(getDisplayableRatings({ ratings, airDate })).to.deep.equal(
+    expect(getDisplayableRatings({ ratings, entry })).to.deep.equal(
       EMPTY_RATINGS,
     );
   });

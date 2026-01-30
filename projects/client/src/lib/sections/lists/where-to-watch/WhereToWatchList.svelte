@@ -41,14 +41,10 @@
   const isAired = $derived.by(() => {
     switch (target.type) {
       case "movie":
-        return hasAired({ type: "movie", status: target.media.status });
       case "show":
-        return hasAired({ type: "show", airDate: target.media.airDate });
+        return hasAired(target.media);
       case "episode":
-        return hasAired({
-          type: target.type,
-          airDate: target.episode.airDate,
-        });
+        return hasAired(target.episode);
     }
   });
 </script>

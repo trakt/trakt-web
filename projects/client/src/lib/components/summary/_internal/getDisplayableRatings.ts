@@ -1,8 +1,11 @@
 import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
+import type { EpisodeEntry } from '../../../requests/models/EpisodeEntry.ts';
+import type { MediaEntry } from '../../../requests/models/MediaEntry.ts';
+import { hasAired } from '../../../utils/media/hasAired.ts';
 
 type GetDisplayableRatingsProps = {
   ratings: MediaRating;
-  airDate: Date;
+  entry: MediaEntry | EpisodeEntry;
 };
 
 export const EMPTY_RATINGS = Object.freeze({
@@ -13,9 +16,9 @@ export const EMPTY_RATINGS = Object.freeze({
 
 export function getDisplayableRatings({
   ratings,
-  airDate,
+  entry,
 }: GetDisplayableRatingsProps): MediaRating {
-  if (airDate < new Date()) {
+  if (hasAired(entry)) {
     return ratings;
   }
 

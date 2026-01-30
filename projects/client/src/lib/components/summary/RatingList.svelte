@@ -1,7 +1,8 @@
 <script lang="ts">
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import { getLocale } from "$lib/features/i18n";
-  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
+  import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
+  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
   import {
     toRottenAudienceRating,
@@ -21,19 +22,21 @@
   type RatingListProps = {
     i18n?: RatingIntl;
     ratings: MediaRating;
-    airDate: Date;
-    type: ExtendedMediaType;
+    entry: MediaEntry | EpisodeEntry;
   };
 
   const {
     i18n = RatingIntlProvider,
     ratings,
-    airDate,
-    type,
+    entry,
   }: RatingListProps = $props();
 
   const { trakt, imdb, rotten } = $derived(
-    getDisplayableRatings({ ratings, airDate }),
+    getDisplayableRatings({ ratings, entry }),
+  );
+
+  const isMediaEntry = $derived(
+    entry.type === "show" || entry.type === "movie",
   );
 </script>
 
@@ -54,7 +57,7 @@
     {/snippet}
   </RatingItem>
 
-  {#if type !== "episode"}
+  {#if isMediaEntry}
     <RatingItem rating={toRottenPercentage(rotten?.critic)} url={rotten?.url}>
       <RottenIcon style={toRottenCriticRating(rotten?.critic)} />
       {#snippet superscript()}

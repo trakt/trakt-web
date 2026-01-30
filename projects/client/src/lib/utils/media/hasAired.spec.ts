@@ -11,7 +11,9 @@ function addDays(date: Date, days: number): Date {
 describe('hasAired', () => {
   describe('for movies', () => {
     it('returns true for movies with status "released"', () => {
-      expect(hasAired({ status: 'released', type: 'movie' })).toBe(true);
+      expect(
+        hasAired({ status: 'released', type: 'movie', airDate: new Date() }),
+      ).toBe(true);
     });
 
     it('returns false for movies with status other than "released"', () => {
@@ -25,7 +27,9 @@ describe('hasAired', () => {
       ];
 
       nonReleasedStatuses.forEach((status) => {
-        expect(hasAired({ status, type: 'movie' })).toBe(false);
+        expect(hasAired({ status, type: 'movie', airDate: new Date() })).toBe(
+          false,
+        );
       });
     });
   });

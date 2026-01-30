@@ -67,7 +67,7 @@
   <div class="trakt-summary-main-content">
     <SummaryHeader {title}>
       <SummaryTitle {title} {crew} {...target} />
-      <RatingList ratings={$ratings} airDate={media.airDate} {type} />
+      <RatingList ratings={$ratings} entry={media} />
     </SummaryHeader>
 
     <Spoiler {media} {type}>

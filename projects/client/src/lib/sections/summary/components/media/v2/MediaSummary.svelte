@@ -79,7 +79,7 @@
   {/snippet}
 
   {#snippet meta()}
-    <RatingList ratings={$ratings} airDate={media.airDate} type={media.type} />
+    <RatingList ratings={$ratings} entry={media} />
     <SummaryTitle {title} {status} {crew} {...target} />
 
     <RenderFor audience="authenticated">
