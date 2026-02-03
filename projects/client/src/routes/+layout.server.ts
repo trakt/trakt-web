@@ -1,8 +1,7 @@
+import type { OidcAuthToken } from '$lib/features/auth/models/OidcAuthToken.ts';
 import { getDeviceType } from '$lib/utils/devices/getDeviceType.ts';
 import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
-
-import type { OidcAuthToken } from '$lib/features/auth/models/OidcAuthToken.ts';
-import type { LayoutServerLoad } from './$types.ts';
+import type { LayoutServerLoad } from '$types/$types.d.ts';
 
 const getAuth = (auth: Nil | OidcAuthToken) => {
   if (!auth) {
