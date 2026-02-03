@@ -22,12 +22,6 @@
   );
 </script>
 
-<ActionButton
-  {label}
-  style="ghost"
-  onclick={onToggle}
-  size="small"
-  disabled={isUpdating}
->
+<ActionButton {label} style="ghost" onclick={onToggle} disabled={isUpdating}>
   <LikeIcon style={state === "liked" ? "filled" : "open"} />
 </ActionButton>

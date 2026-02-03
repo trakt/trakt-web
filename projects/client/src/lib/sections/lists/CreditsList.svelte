@@ -49,7 +49,7 @@
     <CreditMediaItem mediaCredit={entry} source="credits" mode="standalone" />
   {/snippet}
 
-  {#snippet dynamicActions()}
+  {#snippet actions()}
     <DropdownList
       label={m.dropdown_label_person_position()}
       preferNative

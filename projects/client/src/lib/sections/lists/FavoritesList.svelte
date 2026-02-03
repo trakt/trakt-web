@@ -95,7 +95,7 @@
     {/if}
   {/snippet}
 
-  {#snippet badge()}
+  {#snippet actions()}
     <Toggler value={$selectedType.value} onChange={set} {options} />
   {/snippet}
 </SectionList>

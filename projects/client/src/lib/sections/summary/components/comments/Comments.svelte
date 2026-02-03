@@ -61,23 +61,7 @@
       {/if}
     {/snippet}
 
-    {#snippet dynamicActions()}
-      <AddCommentAction
-        onclick={() => {
-          $postCommentDialog?.showModal();
-        }}
-      />
-    {/snippet}
-
     {#snippet actions()}
-      <ViewAllButton
-        label={m.button_label_view_all_comments()}
-        onclick={() => onDrilldown()}
-        source={{ id: "comments" }}
-      />
-    {/snippet}
-
-    {#snippet badge()}
       <Toggler
         value={$sortType.value}
         onChange={(value) => {
@@ -85,6 +69,18 @@
           set(value);
         }}
         {options}
+      />
+
+      <AddCommentAction
+        onclick={() => {
+          $postCommentDialog?.showModal();
+        }}
+      />
+
+      <ViewAllButton
+        label={m.button_label_view_all_comments()}
+        onclick={() => onDrilldown()}
+        source={{ id: "comments" }}
       />
     {/snippet}
   </SectionList>

@@ -111,12 +111,6 @@
         <ListSummaryItem {list} isOfficial={false} type={mode} />
       {/snippet}
 
-      {#snippet dynamicActions()}
-        {#if isMine}
-          <CreateListAction />
-        {/if}
-      {/snippet}
-
       {#snippet empty()}
         {#if !$isLoading}
           {#if isMine}
@@ -128,6 +122,10 @@
       {/snippet}
 
       {#snippet actions()}
+        {#if isMine}
+          <CreateListAction />
+        {/if}
+
         <ViewAllButton
           href={UrlBuilder.lists.all(slug, type)}
           label={m.button_label_view_all_lists()}

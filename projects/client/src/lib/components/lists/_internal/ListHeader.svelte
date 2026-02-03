@@ -1,6 +1,7 @@
 <script lang="ts">
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { useNavigation } from "$lib/features/navigation/useNavigation";
+  import type { DeviceProps } from "$lib/guards/_internal/DeviceProps";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
   import ListTitle from "./ListTitle.svelte";
 
@@ -8,9 +9,8 @@
     title,
     subtitle,
     metaInfo,
-    titleAction,
+    titleAction: externalTitleAction,
     actions,
-    badge,
     navigationType,
     href,
     listActions,
@@ -21,40 +21,42 @@
     metaInfo?: Snippet;
     titleAction?: Snippet;
     actions?: Snippet;
-    badge?: Snippet;
     listActions?: Snippet;
     navigationType?: DpadNavigationType;
     href?: string;
   } & HTMLElementProps = $props();
-
-  const { navigation } = useNavigation();
-  const hasHiddenActions = $derived($navigation === "dpad" && !navigationType);
 </script>
+
+{#snippet titleAction({ device }: DeviceProps)}
+  {#if externalTitleAction}
+    <RenderFor audience="all" {device}>
+      {@render externalTitleAction()}
+    </RenderFor>
+  {/if}
+{/snippet}
 
 <div class="trakt-list-inset-title" {...props}>
   <div class="trakt-list-header">
-    <div class="trakt-list-title-container">
+    <div class="trakt-list-header-content">
       <div class="trakt-list-title">
-        {#if titleAction}
-          {@render titleAction()}
-        {/if}
+        {@render titleAction({ device: ["desktop", "tablet-lg"] })}
+
         {#if subtitle == null}
           <ListTitle {title} {href} {metaInfo} style="primary" />
         {:else}
           <ListTitle {title} {href} {metaInfo} style="secondary" />
           <ListTitle title={`/ ${subtitle}`} style="primary" />
         {/if}
-      </div>
-      {#if badge}
-        {@render badge()}
-      {/if}
-    </div>
 
-    {#if actions != null && !hasHiddenActions}
-      <div class="trakt-list-actions" data-dpad-navigation={navigationType}>
-        {@render actions()}
+        {#if actions}
+          <div class="trakt-list-actions" data-dpad-navigation={navigationType}>
+            {@render actions()}
+          </div>
+        {/if}
       </div>
-    {/if}
+
+      {@render titleAction({ device: ["mobile", "tablet-sm"] })}
+    </div>
   </div>
 
   {#if listActions}
@@ -91,7 +93,7 @@
     }
 
     .trakt-list-title,
-    .trakt-list-title-container {
+    .trakt-list-header-content {
       display: flex;
       align-items: center;
       gap: var(--gap-xs);
@@ -103,12 +105,12 @@
       }
     }
 
-    .trakt-list-title {
-      gap: var(--gap-micro);
+    .trakt-list-header-content {
+      justify-content: space-between;
+      width: 100%;
     }
 
-    .trakt-list-title,
-    .trakt-list-actions {
+    .trakt-list-header-content {
       :global(.trakt-action-button) {
         --button-size: var(--ni-32);
       }
@@ -123,10 +125,6 @@
           }
         }
       }
-    }
-
-    @include for-mobile {
-      gap: var(--gap-xs);
     }
   }
 </style>

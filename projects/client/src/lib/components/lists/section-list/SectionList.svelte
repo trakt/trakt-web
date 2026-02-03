@@ -34,10 +34,8 @@
     item,
     ctaItem,
     empty,
-    dynamicActions,
     metaInfo,
-    actions: externalActions,
-    badge,
+    actions,
     drilldownLink,
     headerNavigationType,
     subtitle,
@@ -81,16 +79,6 @@
   {/if}
 {/snippet}
 
-{#snippet actions()}
-  {#if dynamicActions != null}
-    {@render dynamicActions()}
-  {/if}
-
-  {#if externalActions != null}
-    {@render externalActions()}
-  {/if}
-{/snippet}
-
 <section
   use:whenInViewport={() => isVisible.set(true)}
   class="section-list-container"
@@ -109,7 +97,6 @@
         {titleAction}
         {metaInfo}
         actions={isCollapsed ? undefined : actions}
-        {badge}
         navigationType={headerNavigationType}
         href={drilldownLink}
       />
