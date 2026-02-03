@@ -13,7 +13,6 @@
   import { resetScroll } from "./_internal/resetScroll";
   import { useCollapsedList } from "./_internal/useCollapsedList";
   import CollapseIcon from "./CollapseIcon.svelte";
-  import ExpandIcon from "./ExpandIcon.svelte";
   import type { ListVariant } from "./ListVariant";
 
   const EMPTY_STATE_CLASS = "section-list-empty-state";
@@ -77,11 +76,7 @@
       style="ghost"
       color="default"
     >
-      {#if isCollapsed}
-        <ExpandIcon />
-      {:else}
-        <CollapseIcon />
-      {/if}
+      <CollapseIcon state={isCollapsed ? "collapsed" : "expanded"} />
     </ActionButton>
   {/if}
 {/snippet}
