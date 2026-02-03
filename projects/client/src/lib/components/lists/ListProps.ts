@@ -7,7 +7,5 @@ export type ListProps<T> = {
   item: Snippet<[T]>;
   ctaItem?: Snippet;
   actions?: Snippet;
-  dynamicActions?: Snippet;
-  badge?: Snippet;
   drilldownLink?: string;
 };

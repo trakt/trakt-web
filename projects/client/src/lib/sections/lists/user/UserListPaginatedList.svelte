@@ -85,11 +85,9 @@
     />
   {/snippet}
 
-  {#snippet badge()}
-    <ListActions {list} />
-  {/snippet}
-
   {#snippet actions()}
+    <ListActions {list} />
+
     {#if !isListOwner}
       <ShareButton
         {title}

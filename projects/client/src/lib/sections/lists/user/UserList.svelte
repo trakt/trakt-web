@@ -39,7 +39,7 @@
     <UserListItem listedItem={media} style="cover" {list} />
   {/snippet}
 
-  {#snippet badge()}
+  {#snippet actions()}
     <ListActions {list} />
   {/snippet}
 

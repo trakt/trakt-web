@@ -11,7 +11,6 @@ export type MediaListProps<T, M> = {
   useList: PaginatableStore<T, M>;
   actions?: Snippet<[T[], M]>;
   empty?: Snippet;
-  badge?: Snippet;
   metaInfo?: Snippet;
   drilldownLink?: string;
   variant?: 'portrait' | 'landscape';

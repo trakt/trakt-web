@@ -12,7 +12,6 @@
     id,
     title,
     empty: externalEmpty,
-    badge,
     type,
     item,
     ctaItem,
@@ -50,7 +49,6 @@
 <SectionList
   {id}
   items={$list}
-  {badge}
   {item}
   {ctaItem}
   {title}

@@ -53,7 +53,7 @@
       <ProfileItem {profile} />
     {/snippet}
 
-    {#snippet badge()}
+    {#snippet actions()}
       <Toggler value={$current.value} onChange={set} {options} />
     {/snippet}
   </SectionList>

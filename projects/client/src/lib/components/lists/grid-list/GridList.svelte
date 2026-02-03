@@ -21,7 +21,6 @@
     item,
     actions,
     empty,
-    badge,
     dimensionObserver,
     metaInfo,
     listActions,
@@ -45,7 +44,7 @@
 
 <section class="trakt-grid-list-container">
   {#if title}
-    <ListHeader {title} {metaInfo} {actions} {badge} {listActions} />
+    <ListHeader {title} {metaInfo} {actions} {listActions} />
   {/if}
 
   {#if uniqueItems.length > 0 || promotedItems.length > 0}

@@ -56,7 +56,7 @@
       {/if}
     {/snippet}
 
-    {#snippet badge()}
+    {#snippet actions()}
       <Preview />
     {/snippet}
   </SectionList>

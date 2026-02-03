@@ -46,7 +46,7 @@
         --height-list="var(--height-trivia-list)"
         metaInfo={$hasSpoilers ? metaInfo : undefined}
       >
-        {#snippet badge()}
+        {#snippet actions()}
           {#if $hasSpoilers}
             <Toggler value={$triviaType.value} onChange={set} {options} />
           {/if}
