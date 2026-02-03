@@ -1,7 +1,6 @@
 <script lang="ts">
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import CollapseIcon from "$lib/components/lists/section-list/CollapseIcon.svelte";
-  import ExpandIcon from "$lib/components/lists/section-list/ExpandIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
@@ -32,10 +31,10 @@
       {#if $isLoading}
         <LoadingIndicator />
       {:else}
-        <CollapseIcon />
+        <CollapseIcon state="collapsed" />
       {/if}
     {:else}
-      <ExpandIcon />
+      <CollapseIcon state="expanded" />
     {/if}
     <span class="bold">
       {m.button_text_comment_replies({ count: comment.replyCount })}

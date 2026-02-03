@@ -2,7 +2,6 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import ListHeader from "$lib/components/lists/_internal/ListHeader.svelte";
   import CollapseIcon from "$lib/components/lists/section-list/CollapseIcon.svelte";
-  import ExpandIcon from "$lib/components/lists/section-list/ExpandIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useCollapsedSection } from "$lib/stores/useCollapsedSection";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
@@ -39,11 +38,7 @@
       style="ghost"
       color="default"
     >
-      {#if $isCollapsed}
-        <ExpandIcon />
-      {:else}
-        <CollapseIcon />
-      {/if}
+      <CollapseIcon state={$isCollapsed ? "collapsed" : "expanded"} />
     </ActionButton>
   </RenderFor>
 {/snippet}
