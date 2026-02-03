@@ -65,5 +65,5 @@ export const userListsQuery = defineQuery({
   request: userListsRequest,
   mapper: (response) => response.body.map(mapToUserList),
   schema: UserListSchema.array(),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

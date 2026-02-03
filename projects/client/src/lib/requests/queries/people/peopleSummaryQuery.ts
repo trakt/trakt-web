@@ -27,5 +27,5 @@ export const peopleSummaryQuery = defineQuery({
   request: peopleSummaryRequest,
   mapper: (response) => mapToPersonSummary(response.body),
   schema: PersonSummarySchema,
-  ttl: time.days(30),
+  ttl: time.days(7),
 });

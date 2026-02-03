@@ -27,5 +27,5 @@ export const movieRatingQuery = defineQuery({
   request: movieRatingRequest,
   mapper: (response) => mapToMediaRating(response.body),
   schema: MediaRatingSchema,
-  ttl: time.days(1),
+  ttl: time.hours(6),
 });

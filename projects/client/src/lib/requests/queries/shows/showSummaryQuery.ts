@@ -27,5 +27,5 @@ export const showSummaryQuery = defineQuery({
   request: showSummaryRequest,
   mapper: (response) => mapToShowEntry(response.body),
   schema: ShowEntrySchema,
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

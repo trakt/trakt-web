@@ -42,5 +42,5 @@ export const peopleThisMonthQuery = defineQuery({
     items: response.body.map(mapToPersonSummary),
   }),
   schema: PersonResultSchema,
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

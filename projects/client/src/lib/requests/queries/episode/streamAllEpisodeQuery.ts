@@ -34,5 +34,5 @@ export const streamAllEpisodeQuery = defineQuery({
   request: streamAllEpisodeRequest,
   mapper: (response) => mapToCountryStreamingServices(response.body),
   schema: CountryStreamingServiceOptionsSchema.array(),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

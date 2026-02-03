@@ -67,5 +67,5 @@ export const mediaAnticipatedQuery = defineInfiniteQuery({
     };
   },
   schema: PaginatableSchemaFactory(AnticipatedMediaSchema),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

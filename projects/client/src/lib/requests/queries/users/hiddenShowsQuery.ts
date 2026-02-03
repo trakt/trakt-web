@@ -42,5 +42,5 @@ export const hiddenShowsQuery = defineQuery({
   request: hiddenShowsRequest,
   mapper: (response) => response.body.map(mapToHiddenShowItem),
   schema: HiddenShowSchema.array(),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

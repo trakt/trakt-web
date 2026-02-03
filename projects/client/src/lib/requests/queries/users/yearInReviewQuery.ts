@@ -30,5 +30,5 @@ export const yearInReviewQuery = defineQuery({
   dependencies: (params) => [params.slug, params.year],
   mapper: (response) => mapToUserReview(response.body),
   schema: UserReviewSchema,
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

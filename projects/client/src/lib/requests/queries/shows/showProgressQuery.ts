@@ -78,5 +78,5 @@ export const showProgressQuery = defineQuery({
   request: showProgressRequest,
   mapper: (response) => mapShowProgressResponse(response.body),
   schema: EpisodeProgressEntrySchema,
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

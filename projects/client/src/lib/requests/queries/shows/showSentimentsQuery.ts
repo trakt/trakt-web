@@ -24,5 +24,5 @@ export const showSentimentsQuery = defineQuery({
   request: showSentimentsRequest,
   mapper: (response) => mapToSentiments(response.body),
   schema: SentimentsSchema,
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

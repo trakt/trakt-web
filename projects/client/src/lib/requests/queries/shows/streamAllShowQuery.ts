@@ -26,5 +26,5 @@ export const streamAllShowQuery = defineQuery({
   request: showAllWatchNowRequest,
   mapper: (response) => mapToCountryStreamingServices(response.body),
   schema: CountryStreamingServiceOptionsSchema.array(),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

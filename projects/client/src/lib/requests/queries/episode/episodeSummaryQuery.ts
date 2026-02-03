@@ -35,5 +35,5 @@ export const episodeSummaryQuery = defineQuery({
   request: episodeSummaryRequest,
   mapper: (response) => mapToEpisodeEntry(response.body),
   schema: EpisodeEntrySchema,
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });
