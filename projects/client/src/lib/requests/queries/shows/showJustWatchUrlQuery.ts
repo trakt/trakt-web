@@ -30,5 +30,5 @@ export const showJustWatchUrlQuery = defineQuery({
   mapper: (response, params) =>
     mapToJustWatchUrl(response.body, params.country),
   schema: HttpsUrlSchema.nullable(),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

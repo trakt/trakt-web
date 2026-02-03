@@ -74,5 +74,5 @@ export const monthInReviewQuery = defineQuery({
   dependencies: (params) => [params.slug, params.year, params.month],
   mapper: (response) => mapToUserReview(response.body),
   schema: UserReviewSchema,
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

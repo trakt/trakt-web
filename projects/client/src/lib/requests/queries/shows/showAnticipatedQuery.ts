@@ -83,5 +83,5 @@ export const showAnticipatedQuery = defineInfiniteQuery({
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(AnticipatedShowSchema),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

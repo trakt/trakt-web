@@ -42,5 +42,5 @@ export const followingQuery = defineQuery({
     return uniqueProfiles;
   },
   schema: z.array(UserProfileSchema),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

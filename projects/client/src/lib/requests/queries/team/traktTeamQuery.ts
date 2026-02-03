@@ -22,5 +22,5 @@ export const traktTeamQuery = defineQuery({
   request: traktTeamRequest,
   mapper: (response) => response.body.map(({ user }) => mapToUserProfile(user)),
   schema: UserProfileSchema.array(),
-  ttl: time.days(30),
+  ttl: time.days(7),
 });

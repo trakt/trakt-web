@@ -27,5 +27,5 @@ export const personShowCreditsQuery = defineQuery({
   request: personShowCreditsRequest,
   mapper: (response) => mapToMediaCredits(response.body),
   schema: MediaCreditsSchema,
-  ttl: time.days(7),
+  ttl: time.days(1),
 });

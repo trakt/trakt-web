@@ -32,5 +32,5 @@ export const movieTriviaQuery = defineQuery({
       mapToTrivia(`movie_trivia_${entry.fact_id}`, entry)
     ),
   schema: MediaTriviaSchema.array(),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

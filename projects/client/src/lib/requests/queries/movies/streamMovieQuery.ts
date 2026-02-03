@@ -32,5 +32,5 @@ export const streamMovieQuery = defineQuery({
   mapper: (response, params) =>
     mapToStreamingServices(response.body, params.country),
   schema: StreamingServiceOptionsSchema,
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

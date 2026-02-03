@@ -34,6 +34,6 @@ export const movieIntlQuery = defineQuery({
   request: movieIntlRequest,
   mapper: (response) => response.body.map(mapToMediaIntl),
   schema: z.array(MediaIntlSchema),
-  ttl: time.days(7),
+  ttl: time.days(1),
   enabled: (params) => params.enabled,
 });

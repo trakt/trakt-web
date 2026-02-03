@@ -26,5 +26,5 @@ export const movieStudiosQuery = defineQuery({
   request: movieStudiosRequest,
   mapper: (response) => response.body.map(mapToMediaStudio),
   schema: MediaStudioSchema.array(),
-  ttl: time.days(30),
+  ttl: time.days(7),
 });

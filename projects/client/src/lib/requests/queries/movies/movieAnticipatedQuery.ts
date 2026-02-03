@@ -76,5 +76,5 @@ export const movieAnticipatedQuery = defineInfiniteQuery({
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(AnticipatedMovieSchema),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });

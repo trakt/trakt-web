@@ -29,5 +29,5 @@ export const moviePeopleQuery = defineQuery({
   request: moviePeopleRequest,
   mapper: (response) => mapToMediaCrew(response.body),
   schema: MediaCrewSchema,
-  ttl: time.days(30),
+  ttl: time.days(7),
 });

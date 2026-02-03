@@ -44,5 +44,5 @@ export const showRelatedQuery = defineInfiniteQuery({
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(RelatedShowSchema),
-  ttl: time.days(7),
+  ttl: time.days(1),
 });

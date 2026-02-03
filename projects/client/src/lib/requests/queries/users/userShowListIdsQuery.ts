@@ -34,5 +34,5 @@ export const userShowListIdsQuery = defineQuery({
   request: userShowListIdsRequest,
   mapper: (response) => response.body.map(mapToListId),
   schema: ListIdSchema.array(),
-  ttl: time.days(1),
+  ttl: time.hours(3),
 });
