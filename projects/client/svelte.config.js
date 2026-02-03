@@ -41,6 +41,7 @@ const config = {
       '$test': './test',
       '$style': 'src/style',
       '$e2e': './e2e',
+      '$types': './.svelte-kit/types/src/routes',
     },
   },
 };
