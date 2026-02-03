@@ -38,6 +38,7 @@
     "npm:flowbite-svelte@^1.31.0": "1.31.0_svelte@5.46.3__acorn@8.15.0_tailwindcss@4.1.18_tailwind-merge@3.4.0",
     "npm:globals@17.0.0": "17.0.0",
     "npm:idb-keyval@6.2.2": "6.2.2",
+    "npm:jose@^6.1.3": "6.1.3",
     "npm:jsdom@26.1.0": "26.1.0",
     "npm:marked@^17.0.1": "17.0.1",
     "npm:msw@2.12.7": "2.12.7_typescript@5.8.3",
@@ -5023,6 +5024,9 @@
       ],
       "bin": true
     },
+    "jose@6.1.3": {
+      "integrity": "sha512-0TpaTfihd4QMNwrz/ob2Bp7X04yuxJkjRGi4aKmOqwhov54i6u79oCv7T+C7lo70MKH6BesI3vscD1yb/yzKXQ=="
+    },
     "js-sha256@0.11.1": {
       "integrity": "sha512-o6WSo/LUvY2uC4j7mO50a2ms7E/EAdbP0swigLV+nzHKTTaYnaLIWJ02VdXrsJX0vGedDESQnLsOekr94ryfjg=="
     },
@@ -7466,6 +7470,7 @@
             "npm:flowbite-svelte@^1.31.0",
             "npm:globals@17.0.0",
             "npm:idb-keyval@6.2.2",
+            "npm:jose@^6.1.3",
             "npm:jsdom@26.1.0",
             "npm:marked@^17.0.1",
             "npm:msw@2.12.7",
