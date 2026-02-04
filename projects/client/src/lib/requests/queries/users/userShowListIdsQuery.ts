@@ -30,7 +30,7 @@ export const userShowListIdsQuery = defineQuery({
   invalidations: [
     InvalidateAction.Listed('show'),
   ],
-  dependencies: () => [],
+  dependencies: (params) => [params.slug],
   request: userShowListIdsRequest,
   mapper: (response) => response.body.map(mapToListId),
   schema: ListIdSchema.array(),

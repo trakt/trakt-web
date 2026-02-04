@@ -34,7 +34,7 @@ export const userMovieListIdsQuery = defineQuery({
   invalidations: [
     InvalidateAction.Listed('movie'),
   ],
-  dependencies: () => [],
+  dependencies: (params) => [params.slug],
   request: userMovieListIdsRequest,
   mapper: (response) => response.body.map(mapToListId),
   schema: ListIdSchema.array(),
