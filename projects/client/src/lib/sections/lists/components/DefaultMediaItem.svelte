@@ -11,12 +11,14 @@
   import TrackIcon from "$lib/components/TrackIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
+  import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
-  import { useIsWatchlisted } from "$lib/sections/media-actions/watchlist/useIsWatchlisted";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
+  import { useIsWatchlisted } from "$lib/stores/useIsWatchlisted";
   import type { Snippet } from "svelte";
   import type { MediaCardProps } from "../components/models/MediaCardProps";
+  import AddToListDropdownItem from "./_internal/AddToListDropdownItem.svelte";
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
 
@@ -39,6 +41,8 @@
   const isDeemphasized = $derived(canDeemphasize && $isWatched);
 
   const isSummary = $derived(style === "summary");
+
+  let isListsDrawerOpen = $state(false);
 </script>
 
 {#snippet contextualTag()}
@@ -114,6 +118,10 @@
         type={media.type}
         {media}
       />
+      <AddToListDropdownItem
+        {media}
+        onClick={() => (isListsDrawerOpen = true)}
+      />
     </RenderFor>
   {/if}
 {/snippet}
@@ -132,6 +140,14 @@
     />
   </trakt-default-media-item>
 </MediaSwipe>
+
+{#if isListsDrawerOpen}
+  <ListsDrawer
+    {media}
+    onClose={() => (isListsDrawerOpen = false)}
+    metaInfo={media.title}
+  />
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
