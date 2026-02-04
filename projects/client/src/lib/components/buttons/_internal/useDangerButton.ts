@@ -1,5 +1,5 @@
 import { BehaviorSubject, distinctUntilChanged } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
+import { debounceTime, map, startWith } from 'rxjs/operators';
 import { time } from '../../../utils/timing/time.ts';
 import type { TraktButtonProps } from '../TraktButtonProps.ts';
 
@@ -25,6 +25,7 @@ export function useDangerButton({
   return {
     color: color$.pipe(
       debounceTime(time.fps(60)),
+      startWith(seed),
       distinctUntilChanged(),
     ),
     variant,

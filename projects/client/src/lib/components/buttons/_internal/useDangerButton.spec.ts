@@ -1,5 +1,5 @@
 import { useMedia } from '$lib/stores/css/useMedia.ts';
-import { firstValueFrom, of } from 'rxjs';
+import { firstValueFrom, of, skip } from 'rxjs';
 import { describe, expect, it, vi } from 'vitest';
 import { useDangerButton } from './useDangerButton.ts';
 
@@ -11,7 +11,7 @@ describe('useDangerButton', () => {
     const button = useDangerButton({ color: 'blue', isActive: true });
 
     button.onmouseover();
-    const color = await firstValueFrom(button.color);
+    const color = await firstValueFrom(button.color.pipe(skip(1)));
     expect(color).toBe('red');
   });
 
@@ -44,7 +44,7 @@ describe('useDangerButton', () => {
     const button = useDangerButton({ color: 'blue', isActive: true });
 
     button.onfocusin();
-    let color = await firstValueFrom(button.color);
+    let color = await firstValueFrom(button.color.pipe(skip(1)));
     expect(color).toBe('red');
 
     await button.onfocusout();
