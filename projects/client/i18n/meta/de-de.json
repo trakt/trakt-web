@@ -2625,6 +2625,9 @@
     },
     "switch_label_multiple_watches": {
       "default": "Mehrfaches Ansehen aktivieren oder deaktivieren"
+    },
+    "header_add_to_list": {
+      "default": "Zur Liste hinzufügen"
     }
   }
 }

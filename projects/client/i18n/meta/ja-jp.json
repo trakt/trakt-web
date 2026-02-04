@@ -2625,6 +2625,9 @@
     },
     "switch_label_multiple_watches": {
       "default": "複数回の視聴を有効または無効にする"
+    },
+    "header_add_to_list": {
+      "default": "リストに追加"
     }
   }
 }

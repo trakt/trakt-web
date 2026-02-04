@@ -15,7 +15,7 @@
   const {
     title,
     list,
-    isUpdating,
+    onLoading,
     i18n = ListDropdownItemIntlProvider,
     media,
     listedOnIds,
@@ -36,8 +36,12 @@
   const isBelowLimit = $derived(list.count < $user.limits.lists.itemLimit);
 
   onMount(() => {
+    if (!onLoading) {
+      return;
+    }
+
     const subscription = isListUpdating.subscribe((value) => {
-      isUpdating.next(value);
+      onLoading(value);
     });
 
     return () => subscription.unsubscribe();

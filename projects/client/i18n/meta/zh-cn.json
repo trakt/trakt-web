@@ -2969,6 +2969,9 @@
     },
     "switch_label_multiple_watches": {
       "default": "开启或关闭多次观看"
+    },
+    "header_add_to_list": {
+      "default": "添加到列表"
     }
   }
 }

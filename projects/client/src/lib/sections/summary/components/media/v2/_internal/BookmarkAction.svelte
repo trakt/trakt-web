@@ -1,8 +1,9 @@
 <script lang="ts">
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
+  import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
-  import ListDropdown from "$lib/sections/summary/components/list-dropdown/ListDropdown.svelte";
-  import { useAllPersonalLists } from "$lib/sections/summary/components/list-dropdown/useAllPersonalLists";
+  import { useAllPersonalLists } from "$lib/stores/useAllPersonalLists";
 
   const { media }: { media: MediaEntry } = $props();
 
@@ -14,10 +15,28 @@
   });
 
   const { lists, isLoading } = useAllPersonalLists();
+
+  // FIXME: replace this when we store states in session storage
+  let isUpdating = $state(false);
+  let isListsDrawerOpen = $state(false);
 </script>
 
 {#if $lists.length === 0}
   <WatchlistAction {...listProps} isLoadingLists={$isLoading} />
 {:else}
-  <ListDropdown {...listProps} lists={$lists} isLoadingLists={$isLoading} />
+  <ListAction
+    {...listProps}
+    onClick={() => (isListsDrawerOpen = true)}
+    disabled={isUpdating}
+  />
+{/if}
+
+{#if isListsDrawerOpen}
+  <ListsDrawer
+    onClose={() => (isListsDrawerOpen = false)}
+    {media}
+    title={media.title}
+    mode="auto-watchlist"
+    onLoading={(loading) => (isUpdating = loading)}
+  />
 {/if}

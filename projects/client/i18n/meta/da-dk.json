@@ -2625,6 +2625,9 @@
     },
     "switch_label_multiple_watches": {
       "default": "Aktiver eller deaktiver flere visninger"
+    },
+    "header_add_to_list": {
+      "default": "Føj til liste"
     }
   }
 }
