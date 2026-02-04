@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import * as m from "$lib/features/i18n/messages";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import FavoritesList from "../lists/FavoritesList.svelte";
   import PersonalHistoryList from "../lists/history/PersonalHistoryList.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
@@ -21,20 +22,30 @@
   const hasUpsell = $derived($isMe && !profile.isVip);
 </script>
 
-<ProfileContainer>
+<ProfileContainer {profile} {slug}>
+  <ProfilePageBanner {profile} {slug} />
+
+  <RenderFor audience="all" device={["desktop", "tablet-lg"]}>
+    <ProfileAbout {profile} {slug} />
+  </RenderFor>
+
   {#snippet details()}
-    <ProfilePageBanner {profile} {slug} />
+    <RenderFor audience="all" device={["desktop", "tablet-lg"]}>
+      <p>Desktop version of stats</p>
+    </RenderFor>
+
+    <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+      {#if profile.isVip}
+        <MonthToDate {slug} />
+      {/if}
+
+      {#if hasUpsell}
+        <VipUpsell />
+      {/if}
+
+      <ProfileAbout {profile} {slug} />
+    </RenderFor>
   {/snippet}
-
-  {#if profile.isVip}
-    <MonthToDate {slug} />
-  {/if}
-
-  {#if hasUpsell}
-    <VipUpsell />
-  {/if}
-
-  <ProfileAbout {profile} {slug} />
 </ProfileContainer>
 
 {#if $isMe}

@@ -31,7 +31,7 @@
     isVip={profile.isVip}
   >
     {#snippet badge()}
-      <RenderFor audience="all" device={["tablet-sm", "desktop"]}>
+      <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
         {#if profile.isVip}
           <VipBadge isDirector={profile.isDirector} />
         {/if}
@@ -90,6 +90,7 @@
       align-items: center;
       flex-direction: row;
       gap: var(--gap-xs);
+      flex-grow: 1;
 
       :global(.profile-image-container) {
         --width: var(--ni-40);
