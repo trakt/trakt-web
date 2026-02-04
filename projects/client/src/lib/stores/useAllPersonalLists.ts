@@ -3,7 +3,6 @@ import { userListsQuery } from '$lib/requests/queries/users/userListsQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map } from 'rxjs';
 
-// TODO use loading state
 export function useAllPersonalLists() {
   const lists = useQuery(userListsQuery());
 

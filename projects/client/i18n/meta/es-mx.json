@@ -2625,6 +2625,9 @@
     },
     "switch_label_multiple_watches": {
       "default": "Activar o desactivar varios visionados"
+    },
+    "header_add_to_list": {
+      "default": "Agregar a la lista"
     }
   }
 }

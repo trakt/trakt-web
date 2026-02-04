@@ -2625,6 +2625,9 @@
     },
     "switch_label_multiple_watches": {
       "default": "Schakel het meerdere keren bekijken in of uit"
+    },
+    "header_add_to_list": {
+      "default": "Aan lijst toevoegen"
     }
   }
 }

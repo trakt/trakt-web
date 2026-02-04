@@ -2625,6 +2625,9 @@
     },
     "switch_label_multiple_watches": {
       "default": "Activer ou désactiver les visionnages multiples"
+    },
+    "header_add_to_list": {
+      "default": "Ajouter à la liste"
     }
   }
 }

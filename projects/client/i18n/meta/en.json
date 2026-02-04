@@ -6825,6 +6825,14 @@
         "android",
         "ios"
       ]
+    },
+    "header_add_to_list": {
+      "default": "Add to list",
+      "description": "Header for the section that allows users to add/remove a movie or show to/from a list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

@@ -2625,6 +2625,9 @@
     },
     "switch_label_multiple_watches": {
       "default": "Włącz lub wyłącz wielokrotne oglądanie"
+    },
+    "header_add_to_list": {
+      "default": "Dodaj do listy"
     }
   }
 }

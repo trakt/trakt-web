@@ -6,8 +6,8 @@ import { addToWatchlistRequest } from '$lib/requests/sync/addToWatchlistRequest.
 import { removeFromWatchlistRequest } from '$lib/requests/sync/removeFromWatchlistRequest.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import { useIsWatchlisted } from '$lib/stores/useIsWatchlisted.ts';
 import { BehaviorSubject } from 'rxjs';
-import { useIsWatchlisted } from './useIsWatchlisted.ts';
 
 export function useWatchlist(props: MediaStoreProps) {
   const { type } = props;
