@@ -24,7 +24,7 @@
         <CalendarIcon />
         <span class="bold uppercase">{m.text_this_month()}</span>
       </div>
-      <YearToDateLink {slug} source={SOURCE} />
+      <YearToDateLink {slug} source={SOURCE} variant="compact" />
     {/snippet}
 
     <WatchStats monthToDate={$monthToDate} isLoading={$isLoading} />

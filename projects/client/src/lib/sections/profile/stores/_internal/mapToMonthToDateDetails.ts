@@ -15,6 +15,7 @@ const NOTHING_WATCHED_DETAILS: MonthToDateDetails = {
   movieCount: 0,
   showCount: 0,
   episodeCount: 0,
+  totalPlays: 0,
   coverUrl: DEFAULT_COVER,
 } as const;
 
@@ -38,6 +39,7 @@ export function mapToMonthToDateDetails(
 
   const firstWatchActivity = assertDefined(allActivity.at(0));
   return {
+    totalPlays: movieCount + episodeCount,
     movieCount,
     showCount,
     episodeCount,
