@@ -29,7 +29,7 @@
 >
   <TraktPageCoverSetter />
 
-  {#if !$isLoading}
-    <UserListPaginatedList title={listName} list={$list!} {type} />
+  {#if $list}
+    <UserListPaginatedList title={listName} list={$list} {type} />
   {/if}
 </TraktPage>
