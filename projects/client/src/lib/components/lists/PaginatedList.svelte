@@ -37,7 +37,7 @@
 </script>
 
 <div bind:this={listElement} use:observeDimension class="trakt-paginated-list">
-  {@render items($list)}
+  {@render items($list, $isLoading)}
 </div>
 
 {#if $isLoading}

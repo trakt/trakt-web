@@ -24,7 +24,7 @@
 </script>
 
 <PaginatedList {type} {filter} {useList}>
-  {#snippet items(items)}
+  {#snippet items(items, isLoading)}
     <GridList
       {...props}
       {id}
@@ -34,7 +34,9 @@
       --width-item="var(--width-summary-card)"
     >
       {#snippet empty()}
-        {@render externalEmpty?.()}
+        {#if !isLoading}
+          {@render externalEmpty?.()}
+        {/if}
       {/snippet}
     </GridList>
   {/snippet}

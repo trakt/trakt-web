@@ -5,8 +5,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import { CUSTOM_LIBRARY_NAME } from "$lib/sections/lists/library/constants";
   import LibraryListPaginated from "$lib/sections/lists/library/LibraryListPaginated.svelte";
+  import type { Library } from "$lib/sections/lists/library/models/Library";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -14,8 +14,8 @@
 
   const { params }: PageProps = $props();
 
-  const library = $derived(
-    page.url.searchParams.get("library") ?? CUSTOM_LIBRARY_NAME,
+  const library: Library = $derived(
+    page.url.searchParams.get("library") === "other" ? "other" : "plex",
   );
 
   const isMe = $derived(params.user === "me");
