@@ -1,99 +1,19 @@
-import type { CollectionResponse } from '@trakt/api';
-import z from 'zod';
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { api, type ApiParams } from '$lib/requests/api.ts';
-import { mapToEpisodeEntry } from '../../_internal/mapToEpisodeEntry.ts';
-import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
-import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
-import { EpisodeEntrySchema } from '../../models/EpisodeEntry.ts';
-import { MovieEntrySchema } from '../../models/MovieEntry.ts';
-import { ShowEntrySchema } from '../../models/ShowEntry.ts';
+import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
+import { LibraryItemSchema } from '../../models/LibraryItem.ts';
+import { PaginatableSchemaFactory } from '../../models/Paginatable.ts';
+import type { LibraryParams } from './_internal/LibraryParams.ts';
+import { mapToLibraryItem } from './_internal/mapToLibraryItem.ts';
+import { episodeLibraryRequest } from './libraryEpisodesQuery.ts';
+import { movieLibraryRequest } from './libraryMoviesQuery.ts';
 
-type LibraryParams = ApiParams;
-
-const LibraryItemCommonSchema = z.object({
-  addedAt: z.date(),
-  availableOn: z.array(z.string()),
-  key: z.string(),
-});
-
-const LibraryMovieSchema = LibraryItemCommonSchema.extend({
-  type: z.literal('movie'),
-  media: MovieEntrySchema,
-});
-
-const LibraryEpisodeSchema = LibraryItemCommonSchema.extend({
-  type: z.literal('episode'),
-  media: ShowEntrySchema,
-  episode: EpisodeEntrySchema,
-});
-
-export const LibraryItemSchema = z.discriminatedUnion('type', [
-  LibraryMovieSchema,
-  LibraryEpisodeSchema,
-]);
-
-export type LibraryItem = z.infer<typeof LibraryItemSchema>;
-
-function mapToLibraryItem(item: CollectionResponse): LibraryItem {
-  if (item.type === 'show') {
-    throw new Error('Shows are not supported in libraryQuery.');
-  }
-
-  const common = {
-    availableOn: (item.available_on ?? []).map((service) => service.name),
-    addedAt: new Date(item.collected_at),
-  };
-
-  switch (item.type) {
-    case 'movie':
-      return {
-        ...common,
-        type: item.type,
-        media: mapToMovieEntry(item.movie),
-        key: `movie-${item.movie.ids.trakt}`,
-      };
-    case 'episode':
-      return {
-        ...common,
-        type: item.type,
-        media: mapToShowEntry(item.show),
-        episode: mapToEpisodeEntry(item.episode),
-        key: `episode-${item.episode.ids.trakt}`,
-      };
-  }
-}
-
-const movieLibraryRequest = (
-  { fetch }: LibraryParams,
-) =>
-  api({ fetch })
-    .sync
-    .collection
-    .movies({
-      query: {
-        extended: 'full,images,available_on',
-      },
-    });
-
-const episodeLibraryRequest = (
-  { fetch }: LibraryParams,
-) =>
-  api({ fetch })
-    .sync
-    .collection
-    .episodes({
-      query: {
-        extended: 'full,images,available_on',
-      },
-    });
-
-export const libraryQuery = defineQuery({
+export const libraryQuery = defineInfiniteQuery({
   key: 'libraryQuery',
   invalidations: [],
-  dependencies: [],
-  request: (params) =>
+  dependencies: (params) => [params.page, params.limit, params.availableOn],
+  // FIXME: replace with the 'all' endpoint when available
+  request: (params: LibraryParams) =>
     Promise.all([
       movieLibraryRequest(params),
       episodeLibraryRequest(params),
@@ -102,9 +22,14 @@ export const libraryQuery = defineQuery({
     const movies = movieResponse.body.map(mapToLibraryItem);
     const episodes = episodeResponse.body.map(mapToLibraryItem);
 
-    return [...movies, ...episodes] as LibraryItem[];
+    return {
+      entries: [...movies, ...episodes].toSorted((a, b) =>
+        b.addedAt.getTime() - a.addedAt.getTime()
+      ),
+      page: extractPageMeta(episodeResponse.headers),
+    };
   },
-  schema: z.array(LibraryItemSchema),
+  schema: PaginatableSchemaFactory(LibraryItemSchema),
   ttl: time.hours(3),
   refetchOnWindowFocus: true,
 });

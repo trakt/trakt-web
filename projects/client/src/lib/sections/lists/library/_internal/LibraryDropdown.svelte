@@ -4,15 +4,16 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { toTranslatedLibrary } from "$lib/utils/formatting/string/toTranslatedLibrary";
+  import type { Library } from "../models/Library";
 
   const {
     selectedLibrary,
     libraries,
     onChange,
   }: {
-    selectedLibrary: string;
-    libraries: string[];
-    onChange: (library: string) => void;
+    selectedLibrary: Library;
+    libraries: Library[];
+    onChange: (library: Library) => void;
   } = $props();
 </script>
 

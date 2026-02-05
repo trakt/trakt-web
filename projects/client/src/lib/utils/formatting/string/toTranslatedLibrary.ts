@@ -1,7 +1,7 @@
 import * as m from '$lib/features/i18n/messages.ts';
 
 const LIBRARY_MAP = {
-  custom: m.translated_value_library_custom,
+  other: m.translated_value_library_custom,
 } as const;
 
 export function toTranslatedLibrary(

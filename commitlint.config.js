@@ -69,6 +69,7 @@ module.exports = {
         'i18n',
         'landing',
         'layout',
+        'library',
         'link',
         'list',
         'mir',

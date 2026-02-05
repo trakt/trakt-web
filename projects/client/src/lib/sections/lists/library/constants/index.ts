@@ -1,1 +1,3 @@
-export const CUSTOM_LIBRARY_NAME = 'custom';
+import type { Library } from '../models/Library.ts';
+
+export const LIBRARIES: Library[] = ['plex', 'other'] as const;

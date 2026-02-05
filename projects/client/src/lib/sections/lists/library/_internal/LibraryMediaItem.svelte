@@ -1,7 +1,7 @@
 <script lang="ts">
   import DateTag from "$lib/components/media/tags/DateTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import type { LibraryItem } from "$lib/requests/queries/sync/libraryQuery";
+  import type { LibraryItem } from "$lib/requests/models/LibraryItem";
   import MediaItem from "../../components/MediaItem.svelte";
 
   const {

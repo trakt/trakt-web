@@ -5,6 +5,6 @@ import type { Snippet } from 'svelte';
 export type PaginatedListProps<T extends { key: string }, M> = {
   useList: PaginatableStore<T, M>;
   type: M;
-  items: Snippet<[T[]]>;
+  items: Snippet<[T[], boolean]>;
   target?: 'default' | 'parent';
 } & FilterParams;

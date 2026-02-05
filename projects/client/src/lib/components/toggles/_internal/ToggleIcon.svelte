@@ -31,7 +31,7 @@
   <MovieIcon />
 {/if}
 
-{#if option.value === "show"}
+{#if option.value === "show" || option.value === "episode"}
   <ShowIcon />
 {/if}
 
