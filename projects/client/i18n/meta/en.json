@@ -23,9 +23,7 @@
     "list_title_upcoming_schedule": {
       "default": "Upcoming Schedule",
       "description": "Title for lists containing upcoming episodes. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_season_premiere": {
       "default": "Season Premiere",
@@ -91,9 +89,7 @@
     "list_title_up_next": {
       "default": "Continue Watching",
       "description": "Title for lists containing the next episodes and in progress movies. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_remaining_episodes": {
       "default": "{count} remaining",
@@ -678,23 +674,17 @@
     "list_title_trending": {
       "default": "Trending",
       "description": "Title for lists containing trending movies or shows. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_recommended": {
       "default": "Recommended",
       "description": "Title for lists containing recommended movies or shows. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_most_anticipated": {
       "default": "Anticipated",
       "description": "Title for lists containing anticipated movies or shows. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_get_vip": {
       "default": "Get",
@@ -738,9 +728,7 @@
     "list_title_most_popular": {
       "default": "Popular",
       "description": "Title for lists containing popular movies or shows. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_browse_movies": {
       "default": "Movies",
@@ -2252,9 +2240,7 @@
     "list_title_favorites": {
       "default": "Favorites",
       "description": "Title for lists containing a user's favorite movies and/or shows. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_placeholder_favorite_movies": {
       "default": "There are no favorite movies here.",
@@ -2418,9 +2404,7 @@
     "list_title_social_activity": {
       "default": "Social Activity",
       "description": "Title for lists containing recently watched items of the profiles the user follows. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_view_all_social_activity": {
       "default": "View all social activity",
@@ -3480,8 +3464,7 @@
       "default": "Now Playing",
       "description": "Header for the 'now playing' toast that shows the movie or episode the user is currently watching.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_remaining": {
@@ -4337,8 +4320,7 @@
       "default": "Watchlist",
       "description": "Title for the user's watchlist.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_view_all_watchlist_items": {
@@ -5028,8 +5010,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_manage_subscription": {
@@ -5355,9 +5336,7 @@
     "button_text_cancel": {
       "default": "Cancel",
       "description": "Text for cancelling an action in confirmation dialogs.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_cancel": {
       "default": "Cancel",
@@ -5667,7 +5646,6 @@
       "default": "Stop check in",
       "description": "Text for the button that allows a user to stop the check in of a movie or episode.",
       "exclude": [
-        "ios",
         "android"
       ]
     },
@@ -6000,9 +5978,7 @@
     "list_title_history": {
       "default": "History",
       "description": "Title for lists containing a history of recently watched movies or episodes. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_view_all_history": {
       "default": "View all history",
@@ -6215,8 +6191,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "list_title_user_lists": {
