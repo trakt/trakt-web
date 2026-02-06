@@ -22,10 +22,9 @@
   title={m.list_title_history()}
   id="personal-history-list"
   type="episode"
-  useList={({ limit }: { limit: number }) =>
+  useList={() =>
     useRecentlyWatchedList({
       type: historyType,
-      limit,
       slug: "me",
     })}
   drilldownLabel={m.button_label_view_all_history()}

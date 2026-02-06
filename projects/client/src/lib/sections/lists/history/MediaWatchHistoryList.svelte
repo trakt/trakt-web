@@ -29,10 +29,9 @@
       id="media-watch-history-list-{target.type}-{targetItem.id}"
       {title}
       type="episode"
-      useList={({ limit }) =>
+      useList={() =>
         useRecentlyWatchedList({
           type: target.type,
-          limit,
           id: targetItem.id,
         })}
     >
