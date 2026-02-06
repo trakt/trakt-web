@@ -1,33 +1,34 @@
-<script lang="ts">
+<script lang="ts" generics="T extends { key: string }">
   import { getLocale, languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
-  import { useCalendarPeriod } from "../context/useCalendarPeriod";
-  import type { CalendarEntry } from "../models/CalendarEntry";
   import ContentIndicator from "./ContentIndicator.svelte";
+  import { dateKey } from "./dateKey";
 
-  const { day }: { day: CalendarEntry } = $props();
-
-  const { activeDate } = useCalendarPeriod();
+  const {
+    day,
+    isActiveDate,
+  }: {
+    day: { date: Date; items: T[] };
+    isActiveDate: boolean;
+  } = $props();
 
   const itemCount = $derived(day.items.length);
-  const isActiveDate = $derived(
-    day.date.toDateString() === $activeDate.date.toDateString(),
-  );
+
+  // TODO disable on empty days
 </script>
 
-<button
+<svelte:element
+  this={itemCount > 0 ? "a" : "div"}
+  href={itemCount > 0 ? `#${dateKey(day.date)}` : undefined}
   class="trakt-calendar-day-button"
   aria-label={m.button_label_go_to_calendar_day({
     day: toHumanDay(day.date, getLocale()),
   })}
   class:has-items={itemCount > 0}
   class:is-active={isActiveDate}
-  onclick={() => {
-    activeDate.next({ date: day.date, source: "navigation" });
-  }}
 >
   <span>
     {toHumanMonth(day.date, languageTag(), "short")}
@@ -36,7 +37,7 @@
   <span>{toHumanDayOfWeek(day.date, getLocale())}</span>
 
   <ContentIndicator {itemCount} />
-</button>
+</svelte:element>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -71,7 +72,7 @@
     }
 
     @include for-mouse() {
-      &:not(.is-active):hover {
+      &.has-items:not(.is-active):hover {
         cursor: pointer;
         background-color: var(--color-calendar-background-hover);
       }

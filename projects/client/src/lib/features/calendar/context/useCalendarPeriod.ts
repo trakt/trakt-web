@@ -29,19 +29,19 @@ export function useCalendarPeriod() {
     const date = startDate.value;
     const newStart = getNextOrPreviousPeriod(date, direction);
 
-    activeDate.next({ date: newStart, source: 'navigation' });
+    activeDate.next(newStart);
     startDate.next(newStart);
   };
 
   const reset = () => {
     track({ action: 'reset' });
     if (isCurrentWeek(startDate.value, getLocale())) {
-      activeDate.next({ date: new Date(), source: 'navigation' });
+      activeDate.next(new Date());
       return;
     }
 
     startDate.next(getStartOfWeek(new Date(), getLocale()));
-    activeDate.next({ date: new Date(), source: 'init' });
+    activeDate.next(new Date());
   };
 
   return {

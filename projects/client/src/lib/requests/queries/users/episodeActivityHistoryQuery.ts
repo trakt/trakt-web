@@ -10,7 +10,6 @@ import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { EpisodeActivityHistoryResponse } from '@trakt/api';
 import { z } from 'zod';
-import type { PaginationParams } from '../../models/PaginationParams.ts';
 
 type EpisodeActivityHistoryParams =
   & {
@@ -19,8 +18,7 @@ type EpisodeActivityHistoryParams =
     endDate?: Date;
     id?: number;
   }
-  & ApiParams
-  & PaginationParams;
+  & ApiParams;
 
 export const EpisodeActivityHistorySchema = z.object({
   id: z.number(),
@@ -34,16 +32,14 @@ export type EpisodeActivityHistory = z.infer<
   typeof EpisodeActivityHistorySchema
 >;
 
-function episodeActivityHistoryRequest(
-  { fetch, slug, startDate, endDate, limit, id, page }:
-    EpisodeActivityHistoryParams,
+export function episodeActivityHistoryRequest(
+  { fetch, slug, startDate, endDate, id }: EpisodeActivityHistoryParams,
 ) {
   const queryParams = {
     extended: 'full,images' as const,
     start_at: startDate?.toISOString(),
     end_at: endDate?.toISOString(),
-    limit,
-    page,
+    limit: 'all' as unknown as number,
   };
 
   return id
@@ -79,8 +75,6 @@ export const episodeActivityHistoryQuery = defineInfiniteQuery({
   dependencies: (params) => [
     params.startDate,
     params.endDate,
-    params.limit,
-    params.page,
     params.id,
     params.slug,
   ],

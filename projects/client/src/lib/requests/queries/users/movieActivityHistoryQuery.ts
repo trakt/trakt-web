@@ -8,7 +8,6 @@ import { time } from '$lib/utils/timing/time.ts';
 import type { MovieActivityHistoryResponse } from '@trakt/api';
 import { z } from 'zod';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
-import type { PaginationParams } from '../../models/PaginationParams.ts';
 
 type MovieActivityHistoryParams =
   & {
@@ -17,8 +16,7 @@ type MovieActivityHistoryParams =
     endDate?: Date;
     id?: number;
   }
-  & ApiParams
-  & PaginationParams;
+  & ApiParams;
 
 export const MovieActivityHistorySchema = z.object({
   id: z.number(),
@@ -29,16 +27,14 @@ export const MovieActivityHistorySchema = z.object({
 });
 export type MovieActivityHistory = z.infer<typeof MovieActivityHistorySchema>;
 
-const movieActivityHistoryRequest = (
-  { fetch, slug, startDate, endDate, limit, id, page }:
-    MovieActivityHistoryParams,
+export const movieActivityHistoryRequest = (
+  { fetch, slug, startDate, endDate, id }: MovieActivityHistoryParams,
 ) => {
   const queryParams = {
     extended: 'full,images' as const,
     start_at: startDate?.toISOString(),
     end_at: endDate?.toISOString(),
-    limit,
-    page,
+    limit: 'all' as unknown as number,
   };
 
   return id
@@ -68,8 +64,6 @@ export const movieActivityHistoryQuery = defineInfiniteQuery({
   dependencies: (params: MovieActivityHistoryParams) => [
     params.startDate,
     params.endDate,
-    params.limit,
-    params.page,
     params.id,
     params.slug,
   ],

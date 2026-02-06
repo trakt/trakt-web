@@ -1,11 +1,23 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import CalendarControls from "./CalendarControls.svelte";
+
+  const {
+    onNext,
+    onPrevious,
+    onReset,
+    activeDate,
+  }: {
+    onNext: () => void;
+    onPrevious: () => void;
+    onReset: () => void;
+    activeDate: Date;
+  } = $props();
 </script>
 
 <div class="calendar-header">
   <span class="title">{m.header_calendar()}</span>
-  <CalendarControls />
+  <CalendarControls {onNext} {onPrevious} {onReset} {activeDate} />
 </div>
 
 <style>

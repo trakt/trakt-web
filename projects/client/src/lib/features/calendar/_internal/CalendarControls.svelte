@@ -5,15 +5,24 @@
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { isToday } from "date-fns/isToday";
-  import { useCalendarPeriod } from "../context/useCalendarPeriod";
 
-  const { next, previous, reset, activeDate } = useCalendarPeriod();
+  const {
+    onNext,
+    onPrevious,
+    onReset,
+    activeDate,
+  }: {
+    onNext: () => void;
+    onPrevious: () => void;
+    onReset: () => void;
+    activeDate: Date;
+  } = $props();
 </script>
 
 <div class="calendar-controls">
   <ActionButton
     label={m.button_label_previous_calendar_period()}
-    onclick={previous}
+    onclick={onPrevious}
     style="ghost"
   >
     <CaretLeftIcon />
@@ -23,8 +32,8 @@
     color="custom"
     size="small"
     label={m.button_label_reset_calendar_period()}
-    disabled={isToday($activeDate.date)}
-    onclick={reset}
+    disabled={isToday(activeDate)}
+    onclick={onReset}
     --color-background-custom="transparent"
     --color-foreground-custom="var(--color-foreground)"
   >
@@ -33,7 +42,7 @@
 
   <ActionButton
     label={m.button_label_next_calendar_period()}
-    onclick={next}
+    onclick={onNext}
     style="ghost"
   >
     <CaretRightIcon />
