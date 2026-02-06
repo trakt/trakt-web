@@ -23,14 +23,12 @@ const movieTriviaRequest = async (
 };
 
 export const movieTriviaQuery = defineQuery({
-  key: 'movieSentiments',
+  key: 'movieTrivia',
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: movieTriviaRequest,
   mapper: (response) =>
-    response.body.items.map((entry) =>
-      mapToTrivia(`movie_trivia_${entry.fact_id}`, entry)
-    ),
+    response.body.items.map((entry) => mapToTrivia('movie_trivia', entry)),
   schema: MediaTriviaSchema.array(),
   ttl: time.hours(3),
 });
