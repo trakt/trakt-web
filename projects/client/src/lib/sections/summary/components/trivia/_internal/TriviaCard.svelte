@@ -53,9 +53,8 @@
       cursor: pointer;
     }
 
-    :global(p),
     :global(li) {
-      font-size: inherit;
+      font-size: var(--font-size-text);
     }
   }
 </style>
