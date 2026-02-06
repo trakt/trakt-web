@@ -23,14 +23,12 @@ const showTriviaRequest = async (
 };
 
 export const showTriviaQuery = defineQuery({
-  key: 'showSentiments',
+  key: 'showTrivia',
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: showTriviaRequest,
   mapper: (response) =>
-    response.body.items.map((entry) =>
-      mapToTrivia(`show_trivia_${entry.fact_id}`, entry)
-    ),
+    response.body.items.map((entry) => mapToTrivia('show_trivia', entry)),
   schema: MediaTriviaSchema.array(),
   ttl: time.hours(3),
 });
