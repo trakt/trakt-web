@@ -4,30 +4,31 @@
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
-  import { useCalendarPeriod } from "../context/useCalendarPeriod";
   import type { CalendarEntry } from "../models/CalendarEntry";
   import ContentIndicator from "./ContentIndicator.svelte";
+  import { dateKey } from "./dateKey";
 
-  const { day }: { day: CalendarEntry } = $props();
-
-  const { activeDate } = useCalendarPeriod();
+  const {
+    day,
+    isActiveDate,
+  }: {
+    day: CalendarEntry;
+    isActiveDate: boolean;
+  } = $props();
 
   const itemCount = $derived(day.items.length);
-  const isActiveDate = $derived(
-    day.date.toDateString() === $activeDate.date.toDateString(),
-  );
+
+  // TODO disable on empty days
 </script>
 
-<button
+<a
+  href={`#${dateKey(day.date)}`}
   class="trakt-calendar-day-button"
   aria-label={m.button_label_go_to_calendar_day({
     day: toHumanDay(day.date, getLocale()),
   })}
   class:has-items={itemCount > 0}
   class:is-active={isActiveDate}
-  onclick={() => {
-    activeDate.next({ date: day.date, source: "navigation" });
-  }}
 >
   <span>
     {toHumanMonth(day.date, languageTag(), "short")}
@@ -36,7 +37,7 @@
   <span>{toHumanDayOfWeek(day.date, getLocale())}</span>
 
   <ContentIndicator {itemCount} />
-</button>
+</a>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

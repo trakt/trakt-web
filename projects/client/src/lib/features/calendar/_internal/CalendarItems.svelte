@@ -6,27 +6,21 @@
   import type { CalendarEntry } from "../models/CalendarEntry";
   import { dateKey } from "./dateKey";
   import NoItems from "./NoItems.svelte";
-  import { syncScroll } from "./syncScroll";
 
   const {
     calendar,
-    safeAreaOffset,
   }: {
     calendar: CalendarEntry[];
-    safeAreaOffset: number;
   } = $props();
 </script>
 
-<div
-  class="trakt-calendar-items"
-  use:syncScroll={{ calendar, offset: safeAreaOffset }}
->
+<div class="trakt-calendar-items">
   {#each calendar as day (dateKey(day.date))}
-    <div id={dateKey(day.date)}>
+    <div id={dateKey(day.date)} class="calendar-day-anchor">
       <GridList
         title={toHumanDay(day.date, getLocale())}
         items={day.items}
-        id={dateKey(day.date)}
+        id={`calendar-${dateKey(day.date)}`}
       >
         {#snippet item(media)}
           <CalendarItem item={media} />
@@ -42,6 +36,10 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  .calendar-day-anchor {
+    scroll-margin-top: var(--calendar-nav-bottom, 0px);
+  }
 
   .trakt-calendar-items {
     display: flex;

@@ -4,13 +4,26 @@
   import { dateKey } from "./dateKey";
   import Day from "./Day.svelte";
 
-  const { calendar }: { calendar: CalendarEntry[] } = $props();
+  const {
+    calendar,
+    activeDate,
+    onNext,
+    onPrevious,
+  }: {
+    calendar: CalendarEntry[];
+    activeDate: Date;
+    onNext: () => void;
+    onPrevious: () => void;
+  } = $props();
 </script>
 
-<CalendarSwipe>
+<CalendarSwipe onNextPeriod={onNext} onPreviousPeriod={onPrevious}>
   <div class="trakt-calendar-days">
     {#each calendar as day (dateKey(day.date))}
-      <Day {day} />
+      <Day
+        {day}
+        isActiveDate={day.date.toDateString() === activeDate.toDateString()}
+      />
     {/each}
   </div>
 </CalendarSwipe>
