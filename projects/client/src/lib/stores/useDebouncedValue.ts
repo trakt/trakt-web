@@ -1,9 +1,25 @@
-import { BehaviorSubject, debounceTime } from 'rxjs';
+import {
+  BehaviorSubject,
+  concatMap,
+  debounceTime,
+  of,
+  pairwise,
+  startWith,
+} from 'rxjs';
+
+const INITIAL_VALUE = null;
 
 export function useDebouncedValue<T>(delay: number) {
-  const value = new BehaviorSubject<T | Nil>(null);
+  const value = new BehaviorSubject<T | Nil>(INITIAL_VALUE);
+
   const debounced = value.pipe(
-    debounceTime(delay),
+    startWith(INITIAL_VALUE),
+    pairwise(),
+    concatMap(([prevValue, newValue]) =>
+      prevValue === INITIAL_VALUE
+        ? of(newValue)
+        : of(newValue).pipe(debounceTime(delay))
+    ),
   );
 
   return {
