@@ -3094,17 +3094,9 @@
       "description": "Header for the section that shows the community sentiment for a movie, show, or episode.",
       "exclude": []
     },
-    "button_text_lists": {
-      "default": "Lists",
-      "description": "Text for the button that opens the lists dropdown. This is shown when a show or movie isn't on any lists.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "button_text_listed": {
-      "default": "Listed",
-      "description": "Text for the button that opens the lists dropdown. This is shown when a show or movie is on at least one list.",
+    "button_text_manage_lists": {
+      "default": "Manage lists",
+      "description": "Text for the button that opens the lists drawer. This allows users to add or remove a movie or show from their lists.",
       "exclude": [
         "android",
         "ios"

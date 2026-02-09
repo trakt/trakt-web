@@ -1173,11 +1173,8 @@
     "header_community_sentiment": {
       "default": "Sentiment"
     },
-    "button_text_lists": {
-      "default": "Lists"
-    },
-    "button_text_listed": {
-      "default": "Listed"
+    "button_text_manage_lists": {
+      "default": "Manage lists"
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "Add or remove \"{title}\" from lists"

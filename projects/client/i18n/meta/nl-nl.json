@@ -1173,11 +1173,8 @@
     "header_community_sentiment": {
       "default": "Sentiment"
     },
-    "button_text_lists": {
-      "default": "Lijsten"
-    },
-    "button_text_listed": {
-      "default": "In lijst"
+    "button_text_manage_lists": {
+      "default": "Lijsten beheren"
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "\"{title}\" toevoegen of verwijderen van lijsten"

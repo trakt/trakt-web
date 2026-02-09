@@ -1173,11 +1173,8 @@
     "header_community_sentiment": {
       "default": "Stimmung"
     },
-    "button_text_lists": {
-      "default": "Listen"
-    },
-    "button_text_listed": {
-      "default": "Gelistet"
+    "button_text_manage_lists": {
+      "default": "Listen verwalten"
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "\"{title}\" zu Listen hinzufügen oder entfernen"

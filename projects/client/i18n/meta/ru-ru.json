@@ -1401,11 +1401,8 @@
     "header_community_sentiment": {
       "default": "Настроение"
     },
-    "button_text_lists": {
-      "default": "Списки"
-    },
-    "button_text_listed": {
-      "default": "В списках"
+    "button_text_manage_lists": {
+      "default": "Управлять списками"
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "Добавить или удалить «{title}» из списков",

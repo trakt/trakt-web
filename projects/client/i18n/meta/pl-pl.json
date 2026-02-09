@@ -1173,11 +1173,8 @@
     "header_community_sentiment": {
       "default": "Odczucia społeczności"
     },
-    "button_text_lists": {
-      "default": "Listy"
-    },
-    "button_text_listed": {
-      "default": "Na liście"
+    "button_text_manage_lists": {
+      "default": "Zarządzaj listami"
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "Dodaj lub usuń \"{title}\" z list"

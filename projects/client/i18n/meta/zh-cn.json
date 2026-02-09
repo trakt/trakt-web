@@ -1400,11 +1400,8 @@
     "header_community_sentiment": {
       "default": "社区情绪"
     },
-    "button_text_lists": {
-      "default": "片单"
-    },
-    "button_text_listed": {
-      "default": "已列入"
+    "button_text_manage_lists": {
+      "default": "管理列表"
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "添加或移除“{title}”于片单",

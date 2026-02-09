@@ -1173,11 +1173,8 @@
     "header_community_sentiment": {
       "default": "Känsla"
     },
-    "button_text_lists": {
-      "default": "Listor"
-    },
-    "button_text_listed": {
-      "default": "Listad"
+    "button_text_manage_lists": {
+      "default": "Hantera listor"
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "Lägg till eller ta bort \"{title}\" från listor"
