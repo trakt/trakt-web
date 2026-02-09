@@ -60,36 +60,34 @@
   </MediaSummary>
 </RenderFor>
 
-<RenderFor audience="authenticated">
-  <RenderFor
-    audience="authenticated"
-    device={["mobile", "tablet-sm", "tablet-lg"]}
-  >
-    <WhereToWatchList type="show" {media} {streamOn} />
+<RenderFor
+  audience="authenticated"
+  device={["mobile", "tablet-sm", "tablet-lg"]}
+>
+  <WhereToWatchList type="show" {media} {streamOn} />
 
-    <CommunitySentiments {sentiments} slug={media.slug} />
-  </RenderFor>
-
-  <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
-
-  <Comments {media} type="show" />
-
-  <VideoList slug={media.slug} {videos} />
-
-  <SeasonList show={media} {seasons} {currentSeason} />
-
-  <RelatedList
-    title={m.list_title_related_shows()}
-    slug={media.slug}
-    type="show"
-  />
-
-  <!-- TODO: move back to designed position when we have faster queries -->
-  <Lists slug={media.slug} title={media.title} type="show" />
-
-  <MediaWatchHistoryList title={m.list_title_history()} {media} type="show" />
-
-  <TriviaList {media} />
-
-  <MediaDetails {studios} {crew} {media} type="show" />
+  <CommunitySentiments {sentiments} slug={media.slug} />
 </RenderFor>
+
+<CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
+
+<Comments {media} type="show" />
+
+<VideoList slug={media.slug} {videos} />
+
+<SeasonList show={media} {seasons} {currentSeason} />
+
+<RelatedList
+  title={m.list_title_related_shows()}
+  slug={media.slug}
+  type="show"
+/>
+
+<!-- TODO: move back to designed position when we have faster queries -->
+<Lists slug={media.slug} title={media.title} type="show" />
+
+<MediaWatchHistoryList title={m.list_title_history()} {media} type="show" />
+
+<TriviaList {media} />
+
+<MediaDetails {studios} {crew} {media} type="show" />
