@@ -9,15 +9,13 @@ export type TogglerId =
   | 'social'
   | 'discover'
   | 'comment'
-  | 'trivia'
-  | 'library';
+  | 'trivia';
 
 type DiscoverToggleType = DiscoverMode;
 type MediaToggleType = MediaType | 'all';
 type SocialToggleType = 'following' | 'followers';
 type CommentToggleType = CommentSortType;
 type TriviaToggleType = 'spoilers' | 'no-spoilers';
-type LibraryToggleType = 'movie' | 'episode';
 
 type Toggler<T, K> = {
   id: T;
@@ -31,7 +29,6 @@ export type TogglerValueMap = {
   discover: DiscoverToggleType;
   comment: CommentToggleType;
   trivia: TriviaToggleType;
-  library: LibraryToggleType;
 };
 
 type ToggleDefinition<K extends TogglerId> = Toggler<K, TogglerValueMap[K]>;
@@ -131,23 +128,6 @@ const trivia: ToggleDefinition<'trivia'> = {
   ],
 };
 
-const library: ToggleDefinition<'library'> = {
-  id: 'library',
-  default: 'movie',
-  options: [
-    {
-      value: 'movie',
-      text: m.button_text_movies,
-      label: m.button_label_movies,
-    },
-    {
-      value: 'episode',
-      text: m.button_text_shows,
-      label: m.button_label_shows,
-    },
-  ],
-};
-
 export const TOGGLERS: {
   [K in TogglerId]: Toggler<K, TogglerValueMap[K]>;
 } = {
@@ -156,5 +136,4 @@ export const TOGGLERS: {
   discover,
   comment,
   trivia,
-  library,
 } as const;

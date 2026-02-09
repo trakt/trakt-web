@@ -1,7 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-import { EpisodeLibraryResponseMock } from '../data/sync/response/EpisodeLibraryResponseMock.ts';
-import { MovieLibraryResponseMock } from '../data/sync/response/MovieLibraryResponseMock.ts';
+import { MediaLibraryResponseMock } from '../data/sync/response/MediaLibraryResponseMock.ts';
 import { UpNextResponseMock } from '../data/sync/response/UpNextResponseMock.ts';
 import { UserPlexEpisodeLibraryResponseMock } from '../data/users/response/UserPlexEpisodeLibraryResponseMock.ts';
 import { UserPlexMovieLibraryResponseMock } from '../data/users/response/UserPlexMovieLibraryResponseMock.ts';
@@ -79,15 +78,9 @@ export const sync = [
     },
   ),
   http.get(
-    'http://localhost/sync/collection/movies',
+    'http://localhost/sync/collection/media',
     () => {
-      return HttpResponse.json(MovieLibraryResponseMock);
-    },
-  ),
-  http.get(
-    'http://localhost/sync/collection/episodes',
-    () => {
-      return HttpResponse.json(EpisodeLibraryResponseMock);
+      return HttpResponse.json(MediaLibraryResponseMock);
     },
   ),
   http.get(
