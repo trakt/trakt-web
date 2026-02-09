@@ -5,6 +5,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type { MediaTrivia } from "$lib/requests/models/MediaTrivia";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { slide } from "svelte/transition";
   import TriviaCard from "./_internal/TriviaCard.svelte";
@@ -20,7 +21,7 @@
     Math.max(...options.map((option) => option.text().length)),
   );
 
-  const { list, hasSpoilers } = $derived(
+  const { list, summary, hasSpoilers } = $derived(
     useTrivia({
       slug: media.slug,
       type: media.type,
@@ -36,26 +37,37 @@
   />
 {/snippet}
 
-<RenderFor audience="authenticated">
-  {#if $list.length > 0}
+{#snippet triviaList(items: MediaTrivia[], isVip = false)}
+  {#snippet actions()}
+    <Toggler value={$triviaType.value} onChange={set} {options} />
+  {/snippet}
+
+  {#if items.length > 0}
     <div class="trivia-list-container" transition:slide={{ duration: 150 }}>
       <SectionList
         id={`trivia-list-${media.slug}-${media.type}`}
-        items={$list}
+        {items}
         title={m.list_title_trivia()}
         --height-list="var(--height-trivia-list)"
-        metaInfo={$hasSpoilers ? metaInfo : undefined}
+        metaInfo={isVip && $hasSpoilers ? metaInfo : undefined}
+        actions={isVip && $hasSpoilers ? actions : undefined}
       >
-        {#snippet actions()}
-          {#if $hasSpoilers}
-            <Toggler value={$triviaType.value} onChange={set} {options} />
-          {/if}
-        {/snippet}
-
         {#snippet item(trivia)}
-          <TriviaCard {trivia} {media} />
+          <TriviaCard
+            {trivia}
+            {media}
+            variant={isVip ? undefined : "summary"}
+          />
         {/snippet}
       </SectionList>
     </div>
   {/if}
+{/snippet}
+
+<RenderFor audience="free">
+  {@render triviaList($summary)}
+</RenderFor>
+
+<RenderFor audience="vip">
+  {@render triviaList($list, true)}
 </RenderFor>
