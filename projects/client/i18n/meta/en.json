@@ -836,16 +836,12 @@
     "list_title_related_movies": {
       "default": "Related Movies",
       "description": "Title for lists containing related movies. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_related_shows": {
       "default": "Related Shows",
       "description": "Title for lists containing related shows. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_about_placeholder_1": {
       "default": "This user is a mystery, shrouded in enigma... (or maybe just lazy? Who knows, this is the internet.)",
@@ -1026,9 +1022,7 @@
     "header_details": {
       "default": "Details",
       "description": "Header for a details section.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_expand_category": {
       "default": "Expand {category}",
@@ -1059,44 +1053,32 @@
     "header_premiered": {
       "default": "Premiered",
       "description": "Header for the premiered section.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "header_runtime": {
       "default": "Runtime",
       "description": "Header for the runtime section.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "header_country": {
       "default": "Country",
       "description": "Header for the country section.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "header_language": {
       "default": "Language",
       "description": "Header for the language section.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "header_studio": {
       "default": "Studio",
       "description": "Header for the studio section.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "header_genre": {
       "default": "Genre",
       "description": "Header for the genre section.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_browse_lists": {
       "default": "Browse your lists",
@@ -1146,24 +1128,21 @@
       "default": "Director",
       "description": "Header for the director section.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_writer": {
       "default": "Writer",
       "description": "Header for the writer section.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_creator": {
       "default": "Creator",
       "description": "Header for the creator section.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_action_director": {
@@ -1899,72 +1878,62 @@
     "header_status": {
       "default": "Status",
       "description": "Header for the status section.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "translated_value_status_released": {
       "default": "Released",
       "description": "Status value for released media items. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_status_planned": {
       "default": "Planned",
       "description": "Status value for planned media items. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_status_post_production": {
       "default": "Post-Production",
       "description": "Status value for media items that are in post-production. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_status_canceled": {
       "default": "Canceled",
       "description": "Status value for canceled media items. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_status_in_production": {
       "default": "In Production",
       "description": "Status value for media items that are currently in production. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_status_rumored": {
       "default": "Rumored",
       "description": "Status value for rumored media items. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_status_ended": {
       "default": "Ended",
       "description": "Status value for ended shows. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_status_returning_series": {
       "default": "Returning Series",
       "description": "Status value for returning shows. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_status_pilot": {
@@ -1987,8 +1956,7 @@
       "default": "Upcoming",
       "description": "Status value for upcoming media items. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_status_unknown": {
@@ -2003,8 +1971,7 @@
       "default": "Expected Premiere",
       "description": "Header for the expected premiere section.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "image_alt_person_headshot": {
@@ -2023,9 +1990,7 @@
     "list_title_actors": {
       "default": "Actors",
       "description": "Title for lists containing actors of a movie, show, or episode. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_view_all_trending_movies": {
       "default": "View all trending movies",
@@ -2678,16 +2643,14 @@
       "default": "Airs",
       "description": "Header for the section that shows when a show airs.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_aired": {
       "default": "Aired",
       "description": "Header for the section that shows when a show has aired.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "warning_prompt_drop_show": {
@@ -2897,9 +2860,7 @@
     "list_title_comments": {
       "default": "Reviews",
       "description": "Title for lists containing reviews on a movie, show, or episode. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "dialog_title_comments": {
       "default": "Reviews",
@@ -3059,9 +3020,7 @@
     "header_original_title": {
       "default": "Original Title",
       "description": "Header for the section that shows the original title of a movie or show",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_view_all_comments": {
       "default": "View all reviews",
@@ -3133,9 +3092,7 @@
     "header_community_sentiment": {
       "default": "Sentiment",
       "description": "Header for the section that shows the community sentiment for a movie, show, or episode.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_lists": {
       "default": "Lists",
@@ -3307,8 +3264,7 @@
       "default": "All",
       "description": "Text for the 'All' option in dropdowns or filters.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_filters": {
@@ -3408,56 +3364,49 @@
       "default": "Trailer",
       "description": "Value for the trailer video type. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_video_type_clip": {
       "default": "Clip",
       "description": "Value for the clip video type. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_video_type_teaser": {
       "default": "Teaser",
       "description": "Value for the teaser video type. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_video_type_featurette": {
       "default": "Featurette",
       "description": "Value for the featurette video type. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_video_type_recap": {
       "default": "Recap",
       "description": "Value for the recap video type. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_video_type_behind_the_scenes": {
       "default": "Behind the Scenes",
       "description": "Value for the behind the scenes video type. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_video_type_bloopers": {
       "default": "Bloopers",
       "description": "Value for the bloopers video type. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_now_playing": {
@@ -3814,9 +3763,7 @@
     "list_title_extras": {
       "default": "Extras",
       "description": "Title for lists containing extras (like trailers) for movies or shows. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "page_title_up_next": {
       "default": "Continue Watching",
@@ -4504,24 +4451,20 @@
     "header_post_credits": {
       "default": "Post Credits",
       "description": "Header text for the post credits section, to either denote the number of post credits scenes, or the types of post credits scenes.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_after_credits": {
       "default": "After credits",
       "description": "Text to denote that a movie or episode has a post credits scene.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_during_credits": {
       "default": "During credits",
       "description": "Text to denote that a movie or episode has a scene during the credits.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_toggle_search_media": {
@@ -5838,8 +5781,7 @@
       "default": "Where to Watch",
       "description": "Title for lists containing streaming services where a movie or show is available to watch. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "page_title_anticipated_media": {
