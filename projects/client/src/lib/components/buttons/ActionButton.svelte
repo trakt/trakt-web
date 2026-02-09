@@ -22,7 +22,7 @@
 
   const rest = $derived({ ...props, disabled: disabled || undefined });
 
-  const { guardedHref } = $derived(
+  const { guardedHref, originalHref } = $derived(
     useGuardedHref((rest as TraktActionButtonAnchorProps).href),
   );
 
@@ -32,7 +32,7 @@
   );
 
   const href = $guardedHref;
-  const { isActive } = $derived(useActiveLink(href));
+  const { isActive } = $derived(useActiveLink($originalHref));
 </script>
 
 {#if href != null}

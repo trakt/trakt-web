@@ -36,14 +36,14 @@
   const hasIcon = $derived(icon != null);
   const isDefaultAlignment = $derived(hasIcon);
   const alignment = $derived(isDefaultAlignment ? "default" : "centered");
-  const { guardedHref } = $derived(
+  const { guardedHref, originalHref } = $derived(
     useGuardedHref((rest as TraktButtonAnchorProps).href),
   );
   const noscroll = $derived((rest as TraktButtonAnchorProps).noscroll);
   const replacestate = $derived((rest as TraktButtonAnchorProps).replacestate);
 
   const href = $guardedHref;
-  const { isActive } = $derived(useActiveLink(href));
+  const { isActive } = $derived(useActiveLink($originalHref));
 
   const appendTestId = $derived((element: HTMLElement) => {
     onMount(() => {
