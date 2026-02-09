@@ -3409,6 +3409,13 @@
         "android"
       ]
     },
+    "translated_value_video_type_opening_credits": {
+      "default": "Opening Credits",
+      "description": "Value for the opening credits video type. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android"
+      ]
+    },
     "header_now_playing": {
       "default": "Now Playing",
       "description": "Header for the 'now playing' toast that shows the movie or episode the user is currently watching.",

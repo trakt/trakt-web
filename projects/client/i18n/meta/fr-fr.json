@@ -1281,6 +1281,9 @@
     "translated_value_video_type_bloopers": {
       "default": "Bêtisier"
     },
+    "translated_value_video_type_opening_credits": {
+      "default": "Générique de début"
+    },
     "header_now_playing": {
       "default": "En cours"
     },

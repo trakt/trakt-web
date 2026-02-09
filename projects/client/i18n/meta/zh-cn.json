@@ -1547,6 +1547,9 @@
     "translated_value_video_type_bloopers": {
       "default": "NG 镜头"
     },
+    "translated_value_video_type_opening_credits": {
+      "default": "片头字幕"
+    },
     "header_now_playing": {
       "default": "正在播放"
     },
