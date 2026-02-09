@@ -22,8 +22,6 @@
   <PeopleSummary {person} />
 </RenderFor>
 
-<RenderFor audience="authenticated">
-  <CreditsList title={m.list_title_movie_credits()} type="movie" {person} />
-  <CreditsList title={m.list_title_show_credits()} type="show" {person} />
-  <CreditsHistoryList {person} />
-</RenderFor>
+<CreditsList title={m.list_title_movie_credits()} type="movie" {person} />
+<CreditsList title={m.list_title_show_credits()} type="show" {person} />
+<CreditsHistoryList {person} />

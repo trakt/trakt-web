@@ -72,38 +72,36 @@
   </EpisodeSummary>
 </RenderFor>
 
-<RenderFor audience="authenticated">
-  <RenderFor
-    audience="authenticated"
-    device={["mobile", "tablet-sm", "tablet-lg"]}
-  >
-    <WhereToWatchList type="episode" {episode} media={show} {streamOn} />
-  </RenderFor>
-
-  <CastList title={m.list_title_actors()} cast={crew.cast} slug={show.slug} />
-
-  <Comments
-    media={show}
-    type="episode"
-    season={episode.season}
-    episode={episode.number}
-    id={episode.id}
-  />
-
-  <SeasonList {show} {seasons} currentSeason={episode.season} />
-
-  <RelatedList
-    title={m.list_title_related_shows()}
-    slug={show.slug}
-    type="show"
-  />
-
-  <MediaWatchHistoryList
-    title={m.list_title_history()}
-    {episode}
-    {show}
-    type="episode"
-  />
-
-  <MediaDetails {crew} {episode} type="episode" />
+<RenderFor
+  audience="authenticated"
+  device={["mobile", "tablet-sm", "tablet-lg"]}
+>
+  <WhereToWatchList type="episode" {episode} media={show} {streamOn} />
 </RenderFor>
+
+<CastList title={m.list_title_actors()} cast={crew.cast} slug={show.slug} />
+
+<Comments
+  media={show}
+  type="episode"
+  season={episode.season}
+  episode={episode.number}
+  id={episode.id}
+/>
+
+<SeasonList {show} {seasons} currentSeason={episode.season} />
+
+<RelatedList
+  title={m.list_title_related_shows()}
+  slug={show.slug}
+  type="show"
+/>
+
+<MediaWatchHistoryList
+  title={m.list_title_history()}
+  {episode}
+  {show}
+  type="episode"
+/>
+
+<MediaDetails {crew} {episode} type="episode" />

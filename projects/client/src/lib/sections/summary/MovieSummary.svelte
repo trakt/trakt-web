@@ -52,34 +52,32 @@
   </MediaSummary>
 </RenderFor>
 
-<RenderFor audience="authenticated">
-  <RenderFor
-    audience="authenticated"
-    device={["mobile", "tablet-sm", "tablet-lg"]}
-  >
-    <WhereToWatchList type="movie" {media} {streamOn} />
+<RenderFor
+  audience="authenticated"
+  device={["mobile", "tablet-sm", "tablet-lg"]}
+>
+  <WhereToWatchList type="movie" {media} {streamOn} />
 
-    <CommunitySentiments {sentiments} slug={media.slug} />
-  </RenderFor>
-
-  <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
-
-  <Comments {media} type="movie" />
-
-  <VideoList slug={media.slug} {videos} />
-
-  <RelatedList
-    title={m.list_title_related_movies()}
-    slug={media.slug}
-    type="movie"
-  />
-
-  <!-- TODO: move back to designed position when we have faster queries -->
-  <Lists slug={media.slug} title={media.title} type="movie" />
-
-  <MediaWatchHistoryList title={m.list_title_history()} {media} type="movie" />
-
-  <TriviaList {media} />
-
-  <MediaDetails {studios} {crew} {media} type="movie" />
+  <CommunitySentiments {sentiments} slug={media.slug} />
 </RenderFor>
+
+<CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
+
+<Comments {media} type="movie" />
+
+<VideoList slug={media.slug} {videos} />
+
+<RelatedList
+  title={m.list_title_related_movies()}
+  slug={media.slug}
+  type="movie"
+/>
+
+<!-- TODO: move back to designed position when we have faster queries -->
+<Lists slug={media.slug} title={media.title} type="movie" />
+
+<MediaWatchHistoryList title={m.list_title_history()} {media} type="movie" />
+
+<TriviaList {media} />
+
+<MediaDetails {studios} {crew} {media} type="movie" />
