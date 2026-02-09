@@ -11,6 +11,7 @@
   import TrackIcon from "$lib/components/TrackIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
+  import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
   import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
@@ -18,7 +19,6 @@
   import { useIsWatchlisted } from "$lib/stores/useIsWatchlisted";
   import type { Snippet } from "svelte";
   import type { MediaCardProps } from "../components/models/MediaCardProps";
-  import AddToListDropdownItem from "./_internal/AddToListDropdownItem.svelte";
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
 
@@ -118,8 +118,10 @@
         type={media.type}
         {media}
       />
-      <AddToListDropdownItem
+      <ListAction
+        style="dropdown-item"
         {media}
+        title={media.title}
         onClick={() => (isListsDrawerOpen = true)}
       />
     </RenderFor>

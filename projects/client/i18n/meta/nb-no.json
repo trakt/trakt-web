@@ -1173,11 +1173,8 @@
     "header_community_sentiment": {
       "default": "Sentiment"
     },
-    "button_text_lists": {
-      "default": "Lister"
-    },
-    "button_text_listed": {
-      "default": "Listet"
+    "button_text_manage_lists": {
+      "default": "Administrer lister"
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "Legg til eller fjern \"{title}\" fra lister"

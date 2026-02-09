@@ -1173,11 +1173,8 @@
     "header_community_sentiment": {
       "default": "センチメント"
     },
-    "button_text_lists": {
-      "default": "リスト"
-    },
-    "button_text_listed": {
-      "default": "登録済み"
+    "button_text_manage_lists": {
+      "default": "リストを管理"
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "\"{title}\" をリストに追加または削除"
