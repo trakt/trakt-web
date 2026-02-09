@@ -3,10 +3,10 @@
   import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
+  import { useGuardedHref } from "../../features/auth/stores/useGuardedHref";
 
   const {
     children,
-    href,
     target,
     color = "default",
     focusable = true,
@@ -23,11 +23,13 @@
       navigationType?: DpadNavigationType;
     } = $props();
 
-  const { isActive } = $derived(useActiveLink(href));
+  const { isActive } = $derived(useActiveLink(props.href));
+  const { guardedHref } = $derived(useGuardedHref(props.href));
+
+  const href = $guardedHref;
 </script>
 
 <a
-  {href}
   {target}
   use:triggerWithKeyboard
   use:appendGlobalParameters
@@ -42,6 +44,7 @@
   data-dpad-navigation={navigationType}
   class:trakt-no-link={!href}
   {...props}
+  {href}
 >
   {@render children?.()}
 </a>
