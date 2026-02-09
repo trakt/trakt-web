@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { beforeNavigate, goto } from "$app/navigation";
   import { iffy } from "$lib/utils/function/iffy";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { createAuthContext } from "../stores/createAuthContext";
   import { initializeUserManager } from "../stores/initializeUserManager";
   import { useUser } from "../stores/useUser";
@@ -26,20 +24,6 @@
 
   const { isInitializing } = iffy(() => initializeUserManager(accessToken));
   const { user } = useUser();
-
-  beforeNavigate(({ from, to }) => {
-    const isSamePage = from?.url.pathname === to?.url.pathname;
-
-    if (isAuthorized.value || isSamePage) {
-      return;
-    }
-
-    const isNavigatingToHomePage = to?.url.pathname === UrlBuilder.home();
-
-    if (!isNavigatingToHomePage) {
-      goto(UrlBuilder.home(), { replaceState: true });
-    }
-  });
 </script>
 
 {#if !$isInitializing && $user != null}

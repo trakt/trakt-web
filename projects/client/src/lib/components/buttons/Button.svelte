@@ -6,6 +6,7 @@
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
   import { onMount } from "svelte";
+  import { useGuardedHref } from "../../features/auth/stores/useGuardedHref";
   import type { TraktButtonProps } from "./TraktButtonProps";
 
   type TraktButtonAnchorProps = HTMLAnchorProps &
@@ -35,10 +36,13 @@
   const hasIcon = $derived(icon != null);
   const isDefaultAlignment = $derived(hasIcon);
   const alignment = $derived(isDefaultAlignment ? "default" : "centered");
-  const href = $derived((rest as TraktButtonAnchorProps).href);
+  const { guardedHref } = $derived(
+    useGuardedHref((rest as TraktButtonAnchorProps).href),
+  );
   const noscroll = $derived((rest as TraktButtonAnchorProps).noscroll);
   const replacestate = $derived((rest as TraktButtonAnchorProps).replacestate);
 
+  const href = $guardedHref;
   const { isActive } = $derived(useActiveLink(href));
 
   const appendTestId = $derived((element: HTMLElement) => {
@@ -91,6 +95,7 @@
     data-size={size}
     data-dpad-navigation={navigationType}
     {...rest}
+    {href}
   >
     {@render contents()}
   </a>

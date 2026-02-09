@@ -3,6 +3,7 @@
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { disableNavigation } from "$lib/utils/actions/disableNavigation";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
+  import { useGuardedHref } from "../../features/auth/stores/useGuardedHref";
   import type { TraktActionButtonProps } from "./TraktActionButtonProps";
 
   type TraktActionButtonAnchorProps = HTMLAnchorProps & TraktActionButtonProps;
@@ -21,12 +22,16 @@
 
   const rest = $derived({ ...props, disabled: disabled || undefined });
 
-  const href = $derived((rest as TraktActionButtonAnchorProps).href);
+  const { guardedHref } = $derived(
+    useGuardedHref((rest as TraktActionButtonAnchorProps).href),
+  );
+
   const noscroll = $derived((rest as TraktActionButtonAnchorProps).noscroll);
   const replacestate = $derived(
     (rest as TraktActionButtonAnchorProps).replacestate,
   );
 
+  const href = $guardedHref;
   const { isActive } = $derived(useActiveLink(href));
 </script>
 
@@ -47,6 +52,7 @@
     data-style={style}
     data-dpad-navigation={navigationType}
     {...rest}
+    {href}
   >
     {@render children()}
   </a>
