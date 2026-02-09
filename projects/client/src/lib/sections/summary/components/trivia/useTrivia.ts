@@ -29,7 +29,7 @@ export function useTrivia(props: UseTriviaProps) {
         return false;
       }
 
-      return $query.data.some((trivia) => trivia.isSpoiler);
+      return $query.data.items.some((trivia) => trivia.isSpoiler);
     }),
   );
 
@@ -40,7 +40,7 @@ export function useTrivia(props: UseTriviaProps) {
           return [];
         }
 
-        return $query.data.filter((trivia) => {
+        return $query.data.items.filter((trivia) => {
           if (!$hasSpoilers) {
             return true;
           }
@@ -50,6 +50,9 @@ export function useTrivia(props: UseTriviaProps) {
             : !trivia.isSpoiler;
         });
       }),
+    ),
+    summary: query.pipe(
+      map(($query) => $query.data ? [$query.data.summary] : []),
     ),
     hasSpoilers,
   };

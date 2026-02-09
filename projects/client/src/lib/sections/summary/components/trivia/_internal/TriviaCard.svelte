@@ -6,8 +6,15 @@
   import { Marked } from "marked";
   import ShadowScroller from "./ShadowScroller.svelte";
 
-  const { trivia, media }: { trivia: MediaTrivia; media: MediaEntry } =
-    $props();
+  const {
+    trivia,
+    media,
+    variant = "default",
+  }: {
+    trivia: MediaTrivia;
+    media: MediaEntry;
+    variant?: "summary" | "default";
+  } = $props();
 
   const marked = new Marked();
 </script>
@@ -20,7 +27,7 @@
   --width-card="var(--width-trivia-card)"
   --height-card="var(--height-trivia-card)"
 >
-  <div class="trakt-trivia-container">
+  <div class="trakt-trivia-container" data-variant={variant}>
     <ShadowScroller>
       {#if !trivia.isSpoiler}
         {@render content()}
@@ -55,6 +62,13 @@
 
     :global(li) {
       font-size: var(--font-size-text);
+    }
+
+    &[data-variant="summary"] {
+      :global(ul) {
+        margin: 0;
+        padding-left: var(--font-size-text);
+      }
     }
   }
 </style>

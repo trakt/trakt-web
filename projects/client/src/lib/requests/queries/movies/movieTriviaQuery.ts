@@ -1,7 +1,11 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { mapToTrivia } from '../../_internal/mapToTrivia.ts';
+import z from 'zod';
+import {
+  mapToTrivia,
+  mapToTriviaSummary,
+} from '../../_internal/mapToTrivia.ts';
 import { MediaTriviaSchema } from '../../models/MediaTrivia.ts';
 import { type TriviaResponse } from '../../models/TriviaResponse.ts';
 
@@ -27,8 +31,15 @@ export const movieTriviaQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: movieTriviaRequest,
-  mapper: (response) =>
-    response.body.items.map((entry) => mapToTrivia('movie_trivia', entry)),
-  schema: MediaTriviaSchema.array(),
+  mapper: (response) => ({
+    items: response.body.items.map((entry) =>
+      mapToTrivia('movie_trivia', entry)
+    ),
+    summary: mapToTriviaSummary('movie_trivia', response.body.summary),
+  }),
+  schema: z.object({
+    items: MediaTriviaSchema.array(),
+    summary: MediaTriviaSchema,
+  }),
   ttl: time.hours(3),
 });
