@@ -1281,6 +1281,9 @@
     "translated_value_video_type_bloopers": {
       "default": "NG集"
     },
+    "translated_value_video_type_opening_credits": {
+      "default": "オープニングクレジット"
+    },
     "header_now_playing": {
       "default": "再生中"
     },

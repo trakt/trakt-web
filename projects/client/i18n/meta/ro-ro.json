@@ -1281,6 +1281,9 @@
     "translated_value_video_type_bloopers": {
       "default": "Gafe"
     },
+    "translated_value_video_type_opening_credits": {
+      "default": "Generic de început"
+    },
     "header_now_playing": {
       "default": "Rulează acum"
     },

@@ -10,15 +10,15 @@ const VIDEO_TYPE_MAP = {
   recap: m.translated_value_video_type_recap,
   behind_the_scenes: m.translated_value_video_type_behind_the_scenes,
   bloopers: m.translated_value_video_type_bloopers,
+  opening_credits: m.translated_value_video_type_opening_credits,
 } as const;
 
 export function toTranslatedVideoType(
   videoType: string | (keyof typeof VIDEO_TYPE_MAP),
   data?: Record<string, unknown>,
 ): string {
-  const translationFn =
-    VIDEO_TYPE_MAP[
-      normalizeTranslationKey(videoType) as keyof typeof VIDEO_TYPE_MAP
-    ];
+  const translationFn = VIDEO_TYPE_MAP[
+    normalizeTranslationKey(videoType) as keyof typeof VIDEO_TYPE_MAP
+  ];
   return translationFn?.(data) ?? videoType;
 }

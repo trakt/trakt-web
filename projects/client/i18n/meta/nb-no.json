@@ -1281,6 +1281,9 @@
     "translated_value_video_type_bloopers": {
       "default": "Bloopers"
     },
+    "translated_value_video_type_opening_credits": {
+      "default": "Fortekster"
+    },
     "header_now_playing": {
       "default": "Spilles nå"
     },
