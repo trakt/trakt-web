@@ -43,21 +43,16 @@
 <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
   <MediaSummary {media} {intl} {streamOn} {crew} type="movie">
     {#snippet contextualContent()}
-      <RenderFor audience="authenticated" device={["desktop"]}>
+      <RenderFor audience="all" device={["desktop"]}>
         <WhereToWatchList type="movie" {media} {streamOn} variant="inline" />
-
         <CommunitySentiments {sentiments} slug={media.slug} variant="inline" />
       </RenderFor>
     {/snippet}
   </MediaSummary>
 </RenderFor>
 
-<RenderFor
-  audience="authenticated"
-  device={["mobile", "tablet-sm", "tablet-lg"]}
->
+<RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="movie" {media} {streamOn} />
-
   <CommunitySentiments {sentiments} slug={media.slug} />
 </RenderFor>
 
