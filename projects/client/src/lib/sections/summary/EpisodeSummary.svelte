@@ -59,7 +59,7 @@
     posterSrc={$posterSrc}
   >
     {#snippet contextualContent()}
-      <RenderFor audience="authenticated" device={["desktop"]}>
+      <RenderFor audience="all" device={["desktop"]}>
         <WhereToWatchList
           type="episode"
           {episode}
@@ -72,10 +72,7 @@
   </EpisodeSummary>
 </RenderFor>
 
-<RenderFor
-  audience="authenticated"
-  device={["mobile", "tablet-sm", "tablet-lg"]}
->
+<RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="episode" {episode} media={show} {streamOn} />
 </RenderFor>
 
