@@ -23,8 +23,8 @@
       navigationType?: DpadNavigationType;
     } = $props();
 
-  const { isActive } = $derived(useActiveLink(props.href));
-  const { guardedHref } = $derived(useGuardedHref(props.href));
+  const { guardedHref, originalHref } = $derived(useGuardedHref(props.href));
+  const { isActive } = $derived(useActiveLink($originalHref));
 
   const href = $guardedHref;
 </script>
