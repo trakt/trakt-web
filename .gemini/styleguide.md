@@ -3,15 +3,30 @@
 This style guide outlines coding standards and best practices for the Trakt Web
 project (SvelteKit + TypeScript with Svelte 5 in runes mode).
 
+## Commit Standards
+
+- **Follow Conventional Commits**: All commits must adhere to the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+  - Use types: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, `perf:`, etc.
+  - Example: `feat: add user profile component`
+  - Example: `fix: correct date formatting in calendar view`
+
 ## General Principles
+
+### Functional Programming
+
+- **Write functional code**: Prefer pure functions that avoid side effects when possible
+- Functions should return consistent output for the same input
+- Minimize state mutation and favor immutable data structures
+- Keep Svelte stores minimal; use `$derived()` for computed values
 
 ### Simplicity and Functionality
 
 - **Keep it simple**: Suggestions should be simple and functional
 - **Low visual complexity**: Avoid over-engineered solutions
-- **Function decomposition**: Split suggestions into smaller functions when
-  needed
+- **Function decomposition**: Split suggestions into smaller functions when needed
 - **Avoid over-engineering**: Solutions should not be unnecessarily complex
+- Favor readability over cleverness
+- If a solution feels complex, step back and reconsider the approach
 
 ### Response Style
 
@@ -45,6 +60,87 @@ project (SvelteKit + TypeScript with Svelte 5 in runes mode).
 - Components: PascalCase (e.g., `ClampedText.svelte`, `MoreButton.svelte`)
 - Utilities/helpers: camelCase (e.g., `lineClamp.ts`, `clickOutside.ts`)
 - Type definitions: PascalCase (e.g., `MediaStoreProps.ts`, `FilterParams.ts`)
+
+## Code Quality Principles
+
+### Immutability
+
+- **Prefer `const` over `let`**: Use `const` whenever possible typed
+- **Strict mode enabled**: `"strict": true` in tsconfig.json
+- **No `any` types**: Use specific types or appropriate utility types
+- **Use `readonly` types**: Enforce immutability at compile time with `Readonly<T>`, `ReadonlyArray<T>`, `ReadonlyMap`, `ReadonlySet``, `ReadonlyMap`, `ReadonlySet`
+
+**Bad:**
+```typescript
+let result = [];
+for (let i = 0; i < items.length; i++) {
+  result.push(transform(items[i]));
+}
+```
+
+**Good:**
+```typescript
+const result = items.map(transform);
+```
+
+### Early Exits
+
+- **Use guard clauses and early returns**: Check error conditions first and return early
+- Avoid deep nesting by handling edge cases at the start of functions
+
+**Bad:**
+```typescript
+function processData(data: Data | null) {
+  if (data) {
+    if (data.isValid) {
+      if (data.hasPermission) {
+        return transform(data);
+      }
+    }
+  }
+  return null;
+}
+```
+
+**Good:**
+```typescript
+function processData(data: Data | null) {
+  if (!data) return null;
+  if (!data.isValid) return null;
+  if (!data.hasPermission) return null;
+  
+  return transform(data);
+}
+```
+
+### Code Smells to Avoid
+
+- **No nested if statements**: Nested conditionals indicate poor architecture
+  - Refactor into separate functions with clear responsibilities
+  - Use guard clauses and early returns instead
+- **No abstraction leaks**: Ensure abstractions hide implementation details completely
+- **No "god functions"**: Each function should have a single, clear responsibility
+
+### Iteration Patterns
+
+- **Prefer functional methods over imperative loops**: Use `map`, `filter`, `reduce`
+- Avoid mutable loop counters when possible
+- Use recursion for complex accumulation patterns
+
+**Bad:**
+```typescript
+let acc = [];
+let i = 0;
+while (i < items.length) {
+  acc.push(transform(items[i]));
+  i++;
+}
+```
+
+**Good:**
+```typescript
+const acc = items.map(transform);
+```
 
 ## TypeScript Standards
 
@@ -233,14 +329,59 @@ const { isEnabled } = $derived(useFeatureFlag(flag));
 ```
 
 ## Styling
+- Use object parameters for functions with 3+ arguments
+- Pass dependencies as parameters (dependency injection)
 
-### SCSS with Mixins
+**Simple function:**
+```typescript
+export function findRegionalIntl(props: ToMediaOrEpisodeIntlProps) {
+  const { region } = getLanguageAndRegion();
+  // ... implementation
+  return result;
+}
+```
 
-```scss
-@use '$style/scss/mixins/index' as *;
+**Object parameters (3+ args):**
+```typescript
+// Bad
+function fetchData(url: string, token: string, retry: number, timeout: number) { }
 
-.component {
-  display: flex;
+// Good
+interface FetchDataParams {
+  url: string;
+  token: string;
+  retry: number;
+  timeout: number;
+}
+
+function fetchData({ url, token, retry, timeout }: FetchDataParams) { }
+```
+
+**Dependency injection:**
+```typescript
+// Bad - instantiates dependency inside
+export function fetchUser(id: string) {
+  const api = new ApiClient();
+  return api.get(`/users/${id}`);
+}
+
+// Good - dependency passed as parameter
+interface FetchUserParams {
+  api: ApiClient;
+  id: string;
+}
+
+export function fetchUser({ api, id }: FetchUserParams) {
+  return api.get(`/users/${id}`);
+}
+```
+
+### Separation of Concerns
+
+- **Push side effects to the edges**: Keep core logic pure and deterministic
+- API calls, local storage, and DOM manipulation are side effects
+- Pure functions should handle data transformation only
+- Side effects should live in the outer layers (components, server functions, hooks)isplay: flex;
   gap: var(--gap-xs);
 
   @include for-tablet-sm-and-below {
@@ -328,6 +469,26 @@ export function findRegionalIntl(props: ToMediaOrEpisodeIntlProps) {
 ### ESLint Configuration
 
 - Use TypeScript ESLint recommended rules
+
+## Summary Checklist
+
+Key principles for clean, maintainable code:
+
+1. ✅ Follow Conventional Commits
+2. ✅ Write functional, pure code when possible
+3. ✅ Avoid nested if statements (code smell)
+4. ✅ Use early exits with guard clauses
+5. ✅ Prefer `const` over `let` for immutability
+6. ✅ Keep solutions simple and readable
+7. ✅ Prevent abstraction leaks
+8. ✅ Single Responsibility Principle for functions
+9. ✅ Use dependency injection for testability
+10. ✅ Push side effects to the edges
+11. ✅ Use TypeScript readonly types
+12. ✅ Use object parameters for functions with 3+ arguments
+13. ✅ Prefer functional iteration over imperative loops
+14. ✅ Use `$derived()` for computed values in Svelte
+15. ✅ Keep components focused and single-purpose
 - Svelte plugin enabled
 - Unused variables prefixed with `_` are allowed:
 
