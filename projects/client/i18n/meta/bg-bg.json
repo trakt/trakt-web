@@ -1173,11 +1173,8 @@
     "header_community_sentiment": {
       "default": "Настроение"
     },
-    "button_text_lists": {
-      "default": "Списъци"
-    },
-    "button_text_listed": {
-      "default": "В списъка"
+    "button_text_manage_lists": {
+      "default": "Управление на списъци"
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "Добави или премахни \"{title}\" от списъци"

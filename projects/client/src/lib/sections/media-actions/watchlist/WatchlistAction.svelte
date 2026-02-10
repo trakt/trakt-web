@@ -9,7 +9,6 @@
     style = "action",
     size = "normal",
     title,
-    isLoadingLists,
     ...target
   }: WatchlistActionProps = $props();
 
@@ -35,7 +34,7 @@
   {title}
   {size}
   isWatchlisted={$isWatchlisted}
-  isWatchlistUpdating={$isWatchlistUpdating || Boolean(isLoadingLists)}
+  isWatchlistUpdating={$isWatchlistUpdating}
   onAdd={addToWatchlist}
   onRemove={confirmRemove}
 />
