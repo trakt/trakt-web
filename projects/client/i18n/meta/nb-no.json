@@ -1716,6 +1716,9 @@
     "link_text_policy": {
       "default": "Personvernerklæring"
     },
+    "button_text_delete_account": {
+      "default": "Slett konto"
+    },
     "header_calendar": {
       "default": "Kalender"
     },

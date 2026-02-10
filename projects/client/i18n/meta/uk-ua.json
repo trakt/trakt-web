@@ -1716,6 +1716,9 @@
     "link_text_policy": {
       "default": "Політика Конфіденційності"
     },
+    "button_text_delete_account": {
+      "default": "Видалити акаунт"
+    },
     "header_calendar": {
       "default": "Календар"
     },

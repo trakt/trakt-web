@@ -1716,6 +1716,9 @@
     "link_text_policy": {
       "default": "Privacybeleid"
     },
+    "button_text_delete_account": {
+      "default": "Account verwijderen"
+    },
     "header_calendar": {
       "default": "Kalender"
     },

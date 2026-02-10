@@ -1716,6 +1716,9 @@
     "link_text_policy": {
       "default": "Politica de Confidențialitate"
     },
+    "button_text_delete_account": {
+      "default": "Șterge contul"
+    },
     "header_calendar": {
       "default": "Calendar"
     },
