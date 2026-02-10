@@ -2056,6 +2056,9 @@
     "link_text_policy": {
       "default": "Приватность"
     },
+    "button_text_delete_account": {
+      "default": "Удалить аккаунт"
+    },
     "header_calendar": {
       "default": "Календарь"
     },

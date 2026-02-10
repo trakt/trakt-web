@@ -2055,6 +2055,9 @@
     "link_text_policy": {
       "default": "隐私政策"
     },
+    "button_text_delete_account": {
+      "default": "删除账户"
+    },
     "header_calendar": {
       "default": "日历"
     },

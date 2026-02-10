@@ -99,9 +99,7 @@
           "type": "number"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_recommended_movies": {
       "default": "Recommended Movies",
@@ -125,9 +123,7 @@
           "type": "number"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "page_title_error_404": {
       "default": "404: Nothingness. The void.",
@@ -541,9 +537,7 @@
     "input_placeholder_search": {
       "default": "Search shows & movies...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "input_placeholder_search_movies": {
       "default": "Search movies...",
@@ -785,9 +779,7 @@
     "page_title_home": {
       "default": "Home",
       "description": "Title for the homepage.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_plays": {
       "default": "{number} plays",
@@ -805,9 +797,7 @@
     "button_text_logout": {
       "default": "Log out",
       "description": "Text for the logout button.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_logout": {
       "default": "Logout",
@@ -1091,9 +1081,7 @@
     "page_title_lists": {
       "default": "Lists",
       "description": "Title for the lists page.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_watchlist_shows": {
       "default": "Shows Watchlist",
@@ -2517,24 +2505,20 @@
     "list_title_personal_lists": {
       "default": "My Lists",
       "description": "Title for lists containing the user's personal lists. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_collaborative_lists": {
       "default": "Collaborations",
       "description": "Title for lists containing collaborative lists the user is part of. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "list_title_liked_lists": {
       "default": "Liked",
       "description": "Title for lists containing the user's liked lists. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_share_movie": {
@@ -3616,8 +3600,7 @@
       "default": "Follow",
       "description": "Text for the button that allows users to follow a profile.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_follow": {
@@ -3637,8 +3620,7 @@
       "default": "Unfollow",
       "description": "Text for the button that allows users to unfollow a profile.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_unfollow": {
@@ -3686,9 +3668,7 @@
     "list_title_social": {
       "default": "Social",
       "description": "Title for lists containing the profiles the user follows or profiles that follow the user. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_placeholder_followers": {
       "default": "There is no one here (yet).",
@@ -3776,16 +3756,14 @@
       "default": "Continue Watching",
       "description": "Title for the Up Next page, which shows the next movie or episode a user should watch.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "page_title_social_activity": {
       "default": "Social activity",
       "description": "Title for the social activity page.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "page_title_trending_shows": {
@@ -3862,9 +3840,7 @@
     "page_title_profile": {
       "default": "Profile",
       "description": "Title for the current users profile page.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "page_title_search_results": {
       "default": "Results for {query}",
@@ -3882,9 +3858,7 @@
     "page_title_search": {
       "default": "Search",
       "description": "Title for the search page.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "dropdown_label_extras": {
       "default": "Extras",
@@ -4288,9 +4262,7 @@
     "button_text_shows": {
       "default": "Shows",
       "description": "Text for the button that allows users to toggle shows in the watchlist.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_shows": {
       "default": "Shows",
@@ -4303,9 +4275,7 @@
     "button_text_movies": {
       "default": "Movies",
       "description": "Text for the button that allows users to toggle movies in the watchlist.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_movies": {
       "default": "Movies",
@@ -4340,9 +4310,7 @@
           "type": "number"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "episode_footer_season_episode_range": {
       "default": "S{seasonNumber} • E{startEpisode}-{endEpisode}",
@@ -4513,22 +4481,17 @@
     "link_text_forums": {
       "default": "Forums",
       "description": "Text for the link that takes users to the forums.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "link_text_support": {
       "default": "Support",
       "description": "Text for the link that takes users to the support page or triggers a mailto url.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "link_text_terms": {
       "default": "Terms of Use",
       "description": "Text for the link that takes users to the support page or triggers a mailto url.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -4536,7 +4499,14 @@
       "default": "Privacy Policy",
       "description": "Text for the link that takes users to the privacy policy page.",
       "exclude": [
-        "ios",
+        "web"
+      ]
+    },
+    "button_text_delete_account": {
+      "default": "Delete Account",
+      "description": "Text for the button that allows users to delete their account (eg. via the web from a mobile app).",
+      "exclude": [
+        "android",
         "web"
       ]
     },
@@ -5338,9 +5308,7 @@
     "button_text_login": {
       "default": "Login",
       "description": "Text for the login button.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_all": {
       "default": "All",
@@ -5369,9 +5337,7 @@
     "button_text_following": {
       "default": "Following",
       "description": "Aria-label for the button that allows users to toggle the social list to view who they follow.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_followers": {
       "default": "Followers",
@@ -5384,9 +5350,7 @@
     "button_text_followers": {
       "default": "Followers",
       "description": "Aria-label for the button that allows users to toggle the social list to view who their followers are.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_dismiss": {
       "default": "Dismiss",
@@ -5429,16 +5393,12 @@
     "list_title_most_popular_searches": {
       "default": "Top Searches",
       "description": "Title for lists containing the top media, movies, or show searches.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_birthdays_this_month": {
       "default": "Birthdays This Month",
       "description": "Title for lists containing the birthdays this month.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_season_activity": {
       "default": "{rangeLabel} of {title}",
@@ -5641,23 +5601,18 @@
       "default": "Are you sure you want to log out?",
       "description": "Text for the warning prompt that appears when a user attempts to log out.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "page_title_discover": {
       "default": "Discover",
       "description": "Title for the discover page.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_start_watching": {
       "default": "Start Watching",
       "description": "Title for lists containing shows or movies a user should start watching. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_view_all_start_watching": {
       "default": "View all watchlist items available to watch",
@@ -5740,8 +5695,7 @@
       "default": "Start Watching",
       "description": "Title for the Start Watching page, which shows the movies or shows a user should start watching.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_library": {
@@ -5826,9 +5780,7 @@
     "button_text_media": {
       "default": "Media",
       "description": "Text for the button that allows users to toggle media to show both movies and shows. This should be short as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_media": {
       "default": "Media",
@@ -5842,8 +5794,7 @@
       "default": "Appearance",
       "description": "Header for the section that allows users to change the appearance, i.e. color theme and language.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "description_appearance": {
@@ -5866,8 +5817,7 @@
       "default": "Language",
       "description": "Text for the section that allows users to change the language.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "switch_label_toggle_halloween_filters": {
@@ -5889,9 +5839,7 @@
     "list_title_library": {
       "default": "Library",
       "description": "Title for lists containing movies and episodes in a users library. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_view_all_library_items": {
       "default": "View all library items",
@@ -6147,8 +6095,7 @@
       "default": "Lists",
       "description": "Title for lists containing a user's personal lists. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_view_all_lists": {
@@ -6162,9 +6109,7 @@
     "button_text_sort_default": {
       "default": "Default",
       "description": "Text for the button that allows users to sort items by the default sorting method.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_sort_default": {
       "default": "Sort by default order",
@@ -6177,9 +6122,7 @@
     "button_text_sort_added_date": {
       "default": "Date Added",
       "description": "Text for the button that allows users to sort items by the date they were added.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_sort_added_date": {
       "default": "Sort by date added",
@@ -6192,9 +6135,7 @@
     "button_text_sort_runtime": {
       "default": "Runtime",
       "description": "Text for the button that allows users to sort items by their runtime.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_sort_runtime": {
       "default": "Sort by runtime",
@@ -6207,9 +6148,7 @@
     "button_text_sort_rating": {
       "default": "Rating",
       "description": "Text for the button that allows users to sort items by their rating.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_sort_rating": {
       "default": "Sort by rating",
@@ -6222,9 +6161,7 @@
     "button_text_sort_release_date": {
       "default": "Release Date",
       "description": "Text for the button that allows users to sort items by their release date.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_sort_release_date": {
       "default": "Sort by release date",

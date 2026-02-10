@@ -1716,6 +1716,9 @@
     "link_text_policy": {
       "default": "Política de Privacidad"
     },
+    "button_text_delete_account": {
+      "default": "Eliminar cuenta"
+    },
     "header_calendar": {
       "default": "Calendario"
     },
