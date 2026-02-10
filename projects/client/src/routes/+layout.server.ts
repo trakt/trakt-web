@@ -25,6 +25,7 @@ export const load: LayoutServerLoad = (
   const defaultResponse = {
     theme: locals.theme,
     oidcAuth: getAuth(locals.oidcAuth),
+    isLegitimateBot: locals.isLegitimateBot,
     isBot: isBotAgent(request.headers.get('user-agent')),
     device: getDeviceType(request.headers.get('user-agent')),
     cookieConsent: locals.cookieConsent,

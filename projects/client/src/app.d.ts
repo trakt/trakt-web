@@ -193,6 +193,7 @@ declare global {
         | import('$lib/features/auth/models/OidcAuthToken.ts').OidcAuthToken
         | Nil;
       typesense: TypesenseConfig;
+      isLegitimateBot: boolean;
     }
     // interface PageData {}
     // interface PageState {}

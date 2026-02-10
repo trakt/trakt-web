@@ -8,6 +8,7 @@
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
+  import BotProvider from "$lib/features/bot-verification/BotProvider.svelte";
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
   import CookieConsentProvider from "$lib/features/cookie-consent/CookieConsentProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
@@ -129,84 +130,86 @@
 <ErrorProvider>
   <QueryClientProvider client={data.queryClient}>
     <GlobalParameterProvider>
-      <AuthProvider
-        isAuthorized={data.oidcAuth.isAuthorized}
-        accessToken={data.oidcAuth.token}
-      >
-        <WSInvalidator />
-        <FeatureFlagProvider>
-          <CookieConsentProvider consent={data.cookieConsent}>
-            <PlayerProvider>
-              <AnalyticsProvider>
-                <RedirectProvider>
-                  <NavigationProvider>
-                    <LocaleProvider>
-                      <SearchProvider config={data.typesense}>
-                        <FilterProvider>
-                          <CoverProvider>
-                            <ToastProvider>
-                              <DiscoverProvider>
-                                <ConfirmationProvider>
-                                  <MarkAsWatchedDrawerProvider />
-                                  <CoverImage />
-                                  <SeasonalFlair />
+      <BotProvider isLegitimateBot={data.isLegitimateBot}>
+        <AuthProvider
+          isAuthorized={data.oidcAuth.isAuthorized}
+          accessToken={data.oidcAuth.token}
+        >
+          <WSInvalidator />
+          <FeatureFlagProvider>
+            <CookieConsentProvider consent={data.cookieConsent}>
+              <PlayerProvider>
+                <AnalyticsProvider>
+                  <RedirectProvider>
+                    <NavigationProvider>
+                      <LocaleProvider>
+                        <SearchProvider config={data.typesense}>
+                          <FilterProvider>
+                            <CoverProvider>
+                              <ToastProvider>
+                                <DiscoverProvider>
+                                  <ConfirmationProvider>
+                                    <MarkAsWatchedDrawerProvider />
+                                    <CoverImage />
+                                    <SeasonalFlair />
 
-                                  <ThemeProvider theme={data.theme}>
-                                    <ListScrollHistoryProvider>
-                                      <!--
+                                    <ThemeProvider theme={data.theme}>
+                                      <ListScrollHistoryProvider>
+                                        <!--
                                         All navbars are added in the layout to make sure they can
                                         persist during navigation. The state is set on a page level.
                                       -->
-                                      <RenderFor
-                                        audience="all"
-                                        device={["mobile", "tablet-sm"]}
-                                      >
-                                        <TopNavbar />
-                                      </RenderFor>
+                                        <RenderFor
+                                          audience="all"
+                                          device={["mobile", "tablet-sm"]}
+                                        >
+                                          <TopNavbar />
+                                        </RenderFor>
 
-                                      <RenderFor
-                                        audience="all"
-                                        device={["desktop", "tablet-lg"]}
-                                      >
-                                        <SideNavbar />
-                                      </RenderFor>
+                                        <RenderFor
+                                          audience="all"
+                                          device={["desktop", "tablet-lg"]}
+                                        >
+                                          <SideNavbar />
+                                        </RenderFor>
 
-                                      {@render children()}
+                                        {@render children()}
 
-                                      <RenderFor
-                                        audience="all"
-                                        device={["mobile", "tablet-sm"]}
-                                      >
-                                        <MobileNavbar />
-                                      </RenderFor>
+                                        <RenderFor
+                                          audience="all"
+                                          device={["mobile", "tablet-sm"]}
+                                        >
+                                          <MobileNavbar />
+                                        </RenderFor>
 
-                                      <RenderFor audience="authenticated">
-                                        <NavbarToastContent />
-                                      </RenderFor>
-                                      <SvelteQueryDevtools
-                                        buttonPosition="bottom-right"
-                                        styleNonce="opacity: 0.5"
-                                      />
-                                    </ListScrollHistoryProvider>
-                                  </ThemeProvider>
-                                </ConfirmationProvider>
-                              </DiscoverProvider>
-                            </ToastProvider>
-                          </CoverProvider>
-                        </FilterProvider>
-                      </SearchProvider>
-                    </LocaleProvider>
-                  </NavigationProvider>
+                                        <RenderFor audience="authenticated">
+                                          <NavbarToastContent />
+                                        </RenderFor>
+                                        <SvelteQueryDevtools
+                                          buttonPosition="bottom-right"
+                                          styleNonce="opacity: 0.5"
+                                        />
+                                      </ListScrollHistoryProvider>
+                                    </ThemeProvider>
+                                  </ConfirmationProvider>
+                                </DiscoverProvider>
+                              </ToastProvider>
+                            </CoverProvider>
+                          </FilterProvider>
+                        </SearchProvider>
+                      </LocaleProvider>
+                    </NavigationProvider>
 
-                  {#key page.url.pathname}
-                    <PageView />
-                  {/key}
-                </RedirectProvider>
-              </AnalyticsProvider>
-            </PlayerProvider>
-          </CookieConsentProvider>
-        </FeatureFlagProvider>
-      </AuthProvider>
+                    {#key page.url.pathname}
+                      <PageView />
+                    {/key}
+                  </RedirectProvider>
+                </AnalyticsProvider>
+              </PlayerProvider>
+            </CookieConsentProvider>
+          </FeatureFlagProvider>
+        </AuthProvider>
+      </BotProvider>
     </GlobalParameterProvider>
   </QueryClientProvider>
 </ErrorProvider>
