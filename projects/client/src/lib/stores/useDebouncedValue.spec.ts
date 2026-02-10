@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useDebouncedValue } from './useDebouncedValue.ts';
 
-// FIXME: mock debounceTime(delay)
+// FIXME: make these tests also work with deno. For now manually verified with npm run.
 describe.skip('useDebouncedValue', () => {
   beforeEach(() => {
     vi.useFakeTimers();
@@ -16,7 +16,7 @@ describe.skip('useDebouncedValue', () => {
     expect(emitted).toBe(null);
   });
 
-  it('should set value and emit after debounce', async () => {
+  it('should emit first value immediately', () => {
     const store = useDebouncedValue<number>(100);
     let emitted: number | Nil = null;
     store.subscribe((v) => {
@@ -24,10 +24,6 @@ describe.skip('useDebouncedValue', () => {
     });
 
     store.set(5);
-    expect(emitted).toBe(null);
-
-    vi.advanceTimersByTime(100);
-    await Promise.resolve();
     expect(emitted).toBe(5);
   });
 
@@ -45,21 +41,6 @@ describe.skip('useDebouncedValue', () => {
     vi.advanceTimersByTime(100);
     await Promise.resolve();
     expect(emitted).toBe(3);
-  });
-
-  it('should handle update function correctly', async () => {
-    const store = useDebouncedValue<number>(100);
-    let emitted: number | Nil = null;
-    store.subscribe((v) => {
-      emitted = v;
-    });
-
-    store.set(1);
-    store.update((val) => (val as number) + 1);
-
-    vi.advanceTimersByTime(100);
-    await Promise.resolve();
-    expect(emitted).toBe(2);
   });
 
   it('should handle null values', async () => {
@@ -118,22 +99,6 @@ describe.skip('useDebouncedValue', () => {
     vi.advanceTimersByTime(100);
     await Promise.resolve();
 
-    expect(count).toBe(2);
-  });
-
-  it('should support rapid set and update calls', async () => {
-    const store = useDebouncedValue<number>(100);
-    let emitted: number | Nil = null;
-    store.subscribe((v) => {
-      emitted = v;
-    });
-
-    store.set(10);
-    store.update((v) => (v as number) * 2);
-    store.set(50);
-
-    vi.advanceTimersByTime(100);
-    await Promise.resolve();
-    expect(emitted).toBe(50);
+    expect(count).toBe(1);
   });
 });

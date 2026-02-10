@@ -1,32 +1,24 @@
 import {
-  BehaviorSubject,
-  concatMap,
   debounceTime,
-  of,
-  pairwise,
-  startWith,
+  distinctUntilChanged,
+  merge,
+  share,
+  skip,
+  Subject,
+  take,
 } from 'rxjs';
 
-const INITIAL_VALUE = null;
-
 export function useDebouncedValue<T>(delay: number) {
-  const value = new BehaviorSubject<T | Nil>(INITIAL_VALUE);
+  const value = new Subject<T | Nil>();
 
-  const debounced = value.pipe(
-    startWith(INITIAL_VALUE),
-    pairwise(),
-    concatMap(([prevValue, newValue]) =>
-      prevValue === INITIAL_VALUE
-        ? of(newValue)
-        : of(newValue).pipe(debounceTime(delay))
-    ),
-  );
+  const shared = value.pipe(share());
+  const debounced = merge(
+    shared.pipe(take(1)),
+    shared.pipe(skip(1), debounceTime(delay)),
+  ).pipe(distinctUntilChanged());
 
   return {
     subscribe: debounced.subscribe.bind(debounced),
     set: value.next.bind(value),
-    update: (fn: (current: T | Nil) => T) => {
-      value.next(fn(value.value));
-    },
   };
 }
