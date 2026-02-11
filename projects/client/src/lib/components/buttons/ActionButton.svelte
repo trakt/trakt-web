@@ -31,7 +31,7 @@
     (rest as TraktActionButtonAnchorProps).replacestate,
   );
 
-  const href = $guardedHref;
+  const href = $derived($guardedHref);
   const { isActive } = $derived(useActiveLink($originalHref));
 </script>
 
