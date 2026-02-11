@@ -1,9 +1,9 @@
 <script lang="ts">
-  import StarIcon from "$lib/components/icons/StarIcon.svelte";
+  import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { getLocale } from "$lib/features/i18n";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
-  import { toTraktRating } from "$lib/utils/formatting/number/toTraktRating";
+  import { toUserRating } from "$lib/utils/formatting/number/toUserRating";
 
   const { comment }: { comment: MediaComment } = $props();
 
@@ -14,14 +14,14 @@
     const rating = comment.user.stats.rating;
     if (!rating) return;
 
-    return toTraktRating(rating, getLocale());
+    return toUserRating(rating, getLocale());
   });
 </script>
 
 {#if !isOwnComment && rating}
   <div class="trakt-commenter-rating">
     <span>{rating}</span>
-    <StarIcon fill="full" />
+    <RatingIcon style="rated" variant="user" />
   </div>
 {/if}
 

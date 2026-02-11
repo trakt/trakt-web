@@ -11,7 +11,7 @@
 
 <div class="trakt-sort-value">
   {#if valueText && sortBy}
-    <SortIcon {sortBy} />
+    <SortIcon {sortBy} variant="value" />
   {/if}
 
   <p class="bold ellipsis">

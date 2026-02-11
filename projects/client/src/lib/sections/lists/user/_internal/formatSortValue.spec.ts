@@ -72,7 +72,7 @@ describe('formatSortValue', () => {
         type: 'movie',
         entry: { rating: 0.7 },
       } as unknown as ListItem;
-      expect(formatSortValue(ratedItem, 'percentage')).toBe('3.5');
+      expect(formatSortValue(ratedItem, 'percentage')).toBe('70%');
     });
 
     it('should return undefined if rating is missing', () => {
