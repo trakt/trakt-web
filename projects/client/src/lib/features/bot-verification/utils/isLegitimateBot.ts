@@ -5,10 +5,6 @@ const LEGITIMATE_BOT_PATTERNS = {
   googlebot: /\.google(bot)?\.com$/i,
   bingbot: /\.search\.msn\.com$/i,
   duckduckbot: /\.duckduckgo\.com$/i,
-  slackbot: /\.slack\.com$/i,
-  twitterbot: /\.twitter\.com$/i,
-  facebookexternalhit: /\.facebook\.com$/i,
-  linkedinbot: /\.linkedin\.com$/i,
 } as const;
 
 type BotType = keyof typeof LEGITIMATE_BOT_PATTERNS;
