@@ -42,7 +42,7 @@
   const noscroll = $derived((rest as TraktButtonAnchorProps).noscroll);
   const replacestate = $derived((rest as TraktButtonAnchorProps).replacestate);
 
-  const href = $guardedHref;
+  const href = $derived($guardedHref);
   const { isActive } = $derived(useActiveLink($originalHref));
 
   const appendTestId = $derived((element: HTMLElement) => {

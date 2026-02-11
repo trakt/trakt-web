@@ -26,7 +26,7 @@
   const { guardedHref, originalHref } = $derived(useGuardedHref(props.href));
   const { isActive } = $derived(useActiveLink($originalHref));
 
-  const href = $guardedHref;
+  const href = $derived($guardedHref);
 </script>
 
 <a
