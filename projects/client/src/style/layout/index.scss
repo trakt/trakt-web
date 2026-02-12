@@ -135,14 +135,8 @@
   /**
    * Font sizes
    */
-  --font-size-tag: var(--ni-10);
-
+  --font-size-tag: var(--ni-12);
   --font-size-text: var(--ni-14);
-
-  @include for-mobile {
-    --toggle-large-width: var(--ni-80);
-    --font-size-text: var(--ni-12);
-  }
 
   @include for-tablet-sm-and-below {
     --width-summary-card: 100%;
