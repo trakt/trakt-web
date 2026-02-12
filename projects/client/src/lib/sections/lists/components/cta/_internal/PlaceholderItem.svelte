@@ -1,6 +1,6 @@
 <script lang="ts">
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
-  import SearchIcon from "$lib/features/search/SearchIcon.svelte";
+  import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
