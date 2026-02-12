@@ -3,18 +3,15 @@
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import { useUser } from "$lib/features/auth/stores/useUser";
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { fade } from "svelte/transition";
-  import ProfileImage from "../profile-banner/ProfileImage.svelte";
+  import ProfileLink from "./components/ProfileLink.svelte";
   import { useNavbarState } from "./useNavbarState";
 
   const { state } = useNavbarState();
-
-  const { user } = useUser();
 
   // FIXME: remove when we have well defined dimensions for navbar contextual content
   const { observedDimension, observeDimension } =
@@ -47,42 +44,23 @@
 
     <div class="trakt-mobile-navbar-links">
       <Link href={UrlBuilder.home()}>
-        <div class="trakt-mobile-navbar-link">
-          <HomeIcon />
-        </div>
+        <HomeIcon />
       </Link>
 
       <RenderFor audience="authenticated">
         <Link href={UrlBuilder.discover()}>
-          <div class="trakt-mobile-navbar-link">
-            <DiscoverIcon />
-          </div>
+          <DiscoverIcon />
         </Link>
 
         <Link href={UrlBuilder.lists.user("me")}>
-          <div class="trakt-mobile-navbar-link">
-            <ListIcon />
-          </div>
+          <ListIcon />
         </Link>
 
         <Link href={UrlBuilder.search()}>
-          <div class="trakt-mobile-navbar-link">
-            <SearchIcon />
-          </div>
+          <SearchIcon />
         </Link>
 
-        <Link href={UrlBuilder.profile.me()}>
-          <div class="trakt-mobile-navbar-link">
-            <ProfileImage
-              --width="var(--ni-24)"
-              --height="var(--ni-24)"
-              --border-width="var(--border-thickness-xs)"
-              name={$user?.name?.first ?? ""}
-              src={$user?.avatar?.url ?? ""}
-              isVip={Boolean($user?.isVip)}
-            />
-          </div>
-        </Link>
+        <ProfileLink />
       </RenderFor>
     </div>
   </div>
@@ -149,16 +127,16 @@
     gap: var(--gap-s);
 
     height: var(--ni-32);
-  }
 
-  .trakt-mobile-navbar-link {
-    width: var(--ni-60);
-    transition: color var(--transition-increment) ease-in-out;
+    :global(.trakt-link) {
+      width: var(--ni-60);
+      transition: color var(--transition-increment) ease-in-out;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   .trakt-mobile-navbar-actions {
