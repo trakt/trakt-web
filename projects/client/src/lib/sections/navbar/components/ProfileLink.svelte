@@ -29,6 +29,12 @@
   @use "$style/scss/mixins/index" as *;
 
   trakt-profile-button {
+    :global(.profile-image) {
+      @include for-tablet-sm-and-below() {
+        --image-size: var(--ni-24);
+      }
+    }
+
     :global(.trakt-link) {
       height: var(--ni-40);
 
@@ -42,6 +48,12 @@
         border-radius: var(--border-radius-xs);
         outline: var(--border-thickness-xs) solid var(--color-link-active);
         outline-offset: var(--gap-xs);
+      }
+    }
+
+    :global(.trakt-link-active) {
+      :global(.profile-image) {
+        --color-border-avatar: var(--color-link-active);
       }
     }
   }
