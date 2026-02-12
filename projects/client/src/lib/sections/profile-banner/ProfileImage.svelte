@@ -92,8 +92,8 @@
 
   .profile-image {
     margin: 0;
-    width: var(--width);
-    height: var(--height);
+    width: var(--image-size);
+    height: var(--image-size);
 
     border-radius: 50%;
     outline: var(--border-width) solid var(--color-border-avatar);
