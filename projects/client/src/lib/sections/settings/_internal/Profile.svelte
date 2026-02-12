@@ -73,8 +73,7 @@
   <SettingsRow title={m.text_avatar()}>
     <ProfileImage
       isEditable
-      --width="var(--ni-52)"
-      --height="var(--ni-52)"
+      --image-size="var(--ni-52)"
       --border-width="var(--border-thickness-xs)"
       name={$user.name.first}
       src={$user.avatar.url}

@@ -16,8 +16,7 @@
     navigationType={DpadNavigationType.Item}
   >
     <ProfileImage
-      --width="var(--ni-32)"
-      --height="var(--ni-32)"
+      --image-size="var(--ni-32)"
       --border-width="var(--border-thickness-xs)"
       name={$user?.name?.first ?? ""}
       src={$user?.avatar?.url ?? ""}
