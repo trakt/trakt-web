@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Möchten Sie diese Wiedergabe von \"{title}\" wirklich von Ihrer Gesehen-Liste entfernen?"
     },
+    "list_title_episodes": {
+      "default": "Episoden"
+    },
     "list_title_seasons": {
       "default": "Staffeln"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Listen verwalten"
     },
+    "button_text_view_history": {
+      "default": "Verlauf anzeigen"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "\"{title}\" zu Listen hinzufügen oder entfernen"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Dekade"
+    },
+    "header_ratings": {
+      "default": "Bewertungen"
     },
     "button_label_view_all_items_in": {
       "default": "Alle \"{title}\" ansehen"
@@ -1261,6 +1270,9 @@
       "default": "Monatsrückblick"
     },
     "page_title_settings": {
+      "default": "Einstellungen"
+    },
+    "button_text_settings": {
       "default": "Einstellungen"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "Über mich"
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatisches Tracking"
+    },
     "text_automatic_tracking": {
       "default": "Automatische Verfolgung"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Konto löschen"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Diagnose & Cache"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Authentifizierungsprotokolle teilen"
+    },
+    "button_text_view_cache_size": {
+      "default": "Cache-Größe anzeigen"
+    },
+    "button_text_clear_cache": {
+      "default": "Cache leeren"
+    },
+    "text_analytics": {
+      "default": "Analysen"
     },
     "header_calendar": {
       "default": "Kalender"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "Dieses Jahr"
     },
+    "filter_label_before_year": {
+      "default": "Vor {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Kürzlich aktualisiert"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Check-in beenden"
+    },
+    "button_text_edit_comment": {
+      "default": "Bearbeiten"
     },
     "button_text_delete_comment": {
       "default": "Bewertung löschen"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Regie: <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Regie: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Regie:"
     },
     "text_created_by": {
       "default": "Erstellt von <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Erstellt von {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Erstellt von:"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Abgebrochen"
+    },
+    "tag_text_started": {
+      "default": "Begonnen"
     },
     "header_height": {
       "default": "Größe"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Möchten Sie nicht mehr gefragt werden, was Sie kürzlich gesehen haben?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Bewertungsaufforderungen wiederherstellen"
+    },
     "text_billing_month_for_free": {
       "default": "1 Monat gratis testen und dann:"
     },
@@ -2404,7 +2462,7 @@
       "default": "VIP aufwerten!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Unbegrenztes Tracking und mehr."
+      "default": "Jahresrückblick & mehr."
     },
     "button_label_like_list": {
       "default": "{name} gefällt mir"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Nutzungsbedingungen"
+    },
+    "button_text_block_comments": {
+      "default": "Kommentare von {user} blockieren"
+    },
+    "button_text_keyboard_done": {
+      "default": "Fertig"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Änderungen verwerfen?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Sind Sie sicher, dass Sie dies verwerfen möchten? Alle ungespeicherten Änderungen gehen verloren."
+    },
+    "button_text_discard": {
+      "default": "Verwerfen"
     }
   }
 }

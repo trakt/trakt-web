@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Weet je zeker dat je deze afspeelbeurt van \"{title}\" uit je Bekeken lijst wilt verwijderen?"
     },
+    "list_title_episodes": {
+      "default": "Afleveringen"
+    },
     "list_title_seasons": {
       "default": "Seizoenen"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Lijsten beheren"
     },
+    "button_text_view_history": {
+      "default": "Geschiedenis bekijken"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "\"{title}\" toevoegen of verwijderen van lijsten"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Decennium"
+    },
+    "header_ratings": {
+      "default": "Beoordelingen"
     },
     "button_label_view_all_items_in": {
       "default": "Bekijk alle items in \"{title}\""
@@ -1261,6 +1270,9 @@
       "default": "Maandoverzicht"
     },
     "page_title_settings": {
+      "default": "Instellingen"
+    },
+    "button_text_settings": {
       "default": "Instellingen"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "Over mij"
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatisch bijhouden"
+    },
     "text_automatic_tracking": {
       "default": "Automatisch Volgen"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Account verwijderen"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Diagnose & cache"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Verificatielogboeken delen"
+    },
+    "button_text_view_cache_size": {
+      "default": "Cachegrootte bekijken"
+    },
+    "button_text_clear_cache": {
+      "default": "Cache wissen"
+    },
+    "text_analytics": {
+      "default": "Analyses"
     },
     "header_calendar": {
       "default": "Kalender"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "Dit jaar"
     },
+    "filter_label_before_year": {
+      "default": "Vóór {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Recent bijgewerkt"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Check-in stoppen"
+    },
+    "button_text_edit_comment": {
+      "default": "Bewerken"
     },
     "button_text_delete_comment": {
       "default": "Beoordeling verwijderen"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Geregisseerd door <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Geregisseerd door {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Regie:"
     },
     "text_created_by": {
       "default": "Gemaakt door <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Gemaakt door {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Gemaakt door:"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Gestopt"
+    },
+    "tag_text_started": {
+      "default": "Begonnen"
     },
     "header_height": {
       "default": "Lengte"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Wil je niet meer gevraagd worden om te beoordelen wat je onlangs hebt bekeken?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Beoordelingsprompts herstellen"
+    },
     "text_billing_month_for_free": {
       "default": "Probeer 1 maand gratis en dan:"
     },
@@ -2404,7 +2462,7 @@
       "default": "Upgrade naar VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Onbeperkt volgen en meer."
+      "default": "Jaaroverzicht & meer."
     },
     "button_label_like_list": {
       "default": "Vind {name} leuk"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Gebruiksvoorwaarden"
+    },
+    "button_text_block_comments": {
+      "default": "Reacties van {user} blokkeren"
+    },
+    "button_text_keyboard_done": {
+      "default": "Klaar"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Wijzigingen negeren?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Weet je zeker dat je dit wilt negeren? Alle onopgeslagen wijzigingen gaan verloren."
+    },
+    "button_text_discard": {
+      "default": "Negeren"
     }
   }
 }

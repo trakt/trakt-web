@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Are you sure you want to remove this play of \"{title}\" from your Watched list?"
     },
+    "list_title_episodes": {
+      "default": "Episodes"
+    },
     "list_title_seasons": {
       "default": "Seasons"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Manage lists"
     },
+    "button_text_view_history": {
+      "default": "View History"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "Add or remove \"{title}\" from lists"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Decade"
+    },
+    "header_ratings": {
+      "default": "Ratings"
     },
     "button_label_view_all_items_in": {
       "default": "View all items in \"{title}\""
@@ -1261,6 +1270,9 @@
       "default": "Month in review"
     },
     "page_title_settings": {
+      "default": "Settings"
+    },
+    "button_text_settings": {
       "default": "Settings"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "About me"
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatic Tracking"
+    },
     "text_automatic_tracking": {
       "default": "Automatic Tracking"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Delete Account"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Diagnostics & Cache"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Share Authentication Logs"
+    },
+    "button_text_view_cache_size": {
+      "default": "View Cache Size"
+    },
+    "button_text_clear_cache": {
+      "default": "Clear Cache"
+    },
+    "text_analytics": {
+      "default": "Analytics"
     },
     "header_calendar": {
       "default": "Calendar"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "This year"
     },
+    "filter_label_before_year": {
+      "default": "Before {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Recently updated"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Stop check in"
+    },
+    "button_text_edit_comment": {
+      "default": "Edit"
     },
     "button_text_delete_comment": {
       "default": "Delete Review"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Directed by <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Directed by {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Directed by"
     },
     "text_created_by": {
       "default": "Created by <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Created by {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Created by"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Dropped"
+    },
+    "tag_text_started": {
+      "default": "Started"
     },
     "header_height": {
       "default": "Height"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Do you want to stop being asked to rate what you recently watched?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Restore Rating Prompts"
+    },
     "text_billing_month_for_free": {
       "default": "Try 1 month for free and then:"
     },
@@ -2404,7 +2462,7 @@
       "default": "Upgrade to VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Unlimited tracking and more."
+      "default": "Year in Review & more."
     },
     "button_label_like_list": {
       "default": "Like {name}"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Terms of Use"
+    },
+    "button_text_block_comments": {
+      "default": "Block comments from {user}"
+    },
+    "button_text_keyboard_done": {
+      "default": "Done"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Discard Changes?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Are you sure you want to discard this? Any unsaved changes will be lost."
+    },
+    "button_text_discard": {
+      "default": "Discard"
     }
   }
 }

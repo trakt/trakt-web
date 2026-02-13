@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "\"{title}\"の視聴記録を視聴済みリストから削除してもよろしいですか？"
     },
+    "list_title_episodes": {
+      "default": "エピソード"
+    },
     "list_title_seasons": {
       "default": "シーズン"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "リストを管理"
     },
+    "button_text_view_history": {
+      "default": "履歴を表示"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "\"{title}\" をリストに追加または削除"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "年代"
+    },
+    "header_ratings": {
+      "default": "評価"
     },
     "button_label_view_all_items_in": {
       "default": "\"{title}\" のアイテムをすべて表示"
@@ -1261,6 +1270,9 @@
       "default": "今月のレビュー"
     },
     "page_title_settings": {
+      "default": "設定"
+    },
+    "button_text_settings": {
       "default": "設定"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "自己紹介"
     },
+    "page_title_automatic_tracking": {
+      "default": "自動トラッキング"
+    },
     "text_automatic_tracking": {
       "default": "自動追跡"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "アカウントを削除する"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "診断とキャッシュ"
+    },
+    "button_text_share_auth_logs": {
+      "default": "認証ログを共有"
+    },
+    "button_text_view_cache_size": {
+      "default": "キャッシュサイズを表示"
+    },
+    "button_text_clear_cache": {
+      "default": "キャッシュをクリア"
+    },
+    "text_analytics": {
+      "default": "分析"
     },
     "header_calendar": {
       "default": "カレンダー"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "今年"
     },
+    "filter_label_before_year": {
+      "default": "{year}年より前"
+    },
     "text_sort_recently_updated": {
       "default": "最近更新"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "チェックインを停止"
+    },
+    "button_text_edit_comment": {
+      "default": "編集"
     },
     "button_text_delete_comment": {
       "default": "レビューを削除"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "<a>{name}</a> 監督"
     },
+    "text_directed_by_plain": {
+      "default": "監督: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "監督:"
     },
     "text_created_by": {
       "default": "<a>{name}</a> 制作"
+    },
+    "text_created_by_plain": {
+      "default": "制作：{name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "制作:"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "リタイア"
+    },
+    "tag_text_started": {
+      "default": "視聴中"
     },
     "header_height": {
       "default": "身長"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "最近視聴したコンテンツの評価を求めるのをやめますか？"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "評価プロンプトを復元"
+    },
     "text_billing_month_for_free": {
       "default": "まず1ヶ月無料でお試しください。その後:"
     },
@@ -2404,7 +2462,7 @@
       "default": "VIPにアップグレード！"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "無制限の追跡機能など。"
+      "default": "1年の振り返りとその他の特典。"
     },
     "button_label_like_list": {
       "default": "{name} をいいね！"
@@ -2443,7 +2501,7 @@
       "default": "エクスポートが完了しました。"
     },
     "button_text_track": {
-      "default": "追跡"
+      "default": "Track"
     },
     "filter_label_runtime": {
       "default": "{range} 分"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "利用規約"
+    },
+    "button_text_block_comments": {
+      "default": "{user} のコメントをブロック"
+    },
+    "button_text_keyboard_done": {
+      "default": "完了"
+    },
+    "dialog_title_discard_changes": {
+      "default": "変更を破棄しますか？"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "本当に破棄しますか？ 保存されていない変更はすべて失われます。"
+    },
+    "button_text_discard": {
+      "default": "破棄"
     }
   }
 }

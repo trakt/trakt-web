@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "¿Estás seguro de que quieres eliminar esta reproducción de \"{title}\" de tu lista de Vistos?"
     },
+    "list_title_episodes": {
+      "default": "Episodios"
+    },
     "list_title_seasons": {
       "default": "Temporadas"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Administrar listas"
     },
+    "button_text_view_history": {
+      "default": "Ver historial"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "Añadir o quitar \"{title}\" de listas"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Década"
+    },
+    "header_ratings": {
+      "default": "Calificaciones"
     },
     "button_label_view_all_items_in": {
       "default": "Ver todos en \"{title}\""
@@ -1261,6 +1270,9 @@
       "default": "Mes en revisión"
     },
     "page_title_settings": {
+      "default": "Configuración"
+    },
+    "button_text_settings": {
       "default": "Configuración"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "Acerca de mí"
     },
+    "page_title_automatic_tracking": {
+      "default": "Seguimiento automático"
+    },
     "text_automatic_tracking": {
       "default": "Seguimiento Automático"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Eliminar cuenta"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Diagnóstico y caché"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Compartir registros de autenticación"
+    },
+    "button_text_view_cache_size": {
+      "default": "Ver tamaño del caché"
+    },
+    "button_text_clear_cache": {
+      "default": "Limpiar caché"
+    },
+    "text_analytics": {
+      "default": "Análisis"
     },
     "header_calendar": {
       "default": "Calendario"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "Este año"
     },
+    "filter_label_before_year": {
+      "default": "Antes de {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Actualizado recientemente"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Detener el registro"
+    },
+    "button_text_edit_comment": {
+      "default": "Editar"
     },
     "button_text_delete_comment": {
       "default": "Eliminar reseña"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Dirigida por <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Dirigida por {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Dirigida por"
     },
     "text_created_by": {
       "default": "Creada por <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Creada por {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Creada por"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Abandonada"
+    },
+    "tag_text_started": {
+      "default": "Empezada"
     },
     "header_height": {
       "default": "Altura"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "¿Quieres que dejemos de preguntarte para que califiques lo que viste recientemente?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Restaurar avisos de calificación"
+    },
     "text_billing_month_for_free": {
       "default": "Prueba 1 mes gratis y después:"
     },
@@ -2404,7 +2462,7 @@
       "default": "¡Hazte VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Seguimiento ilimitado y más."
+      "default": "Resumen del año y más."
     },
     "button_label_like_list": {
       "default": "Me gusta {name}"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Términos de uso"
+    },
+    "button_text_block_comments": {
+      "default": "Bloquear comentarios de {user}"
+    },
+    "button_text_keyboard_done": {
+      "default": "Listo"
+    },
+    "dialog_title_discard_changes": {
+      "default": "¿Descartar cambios?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "¿Seguro que quieres descartar esto? Cualquier cambio no guardado se perderá."
+    },
+    "button_text_discard": {
+      "default": "Descartar"
     }
   }
 }

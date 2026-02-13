@@ -128,16 +128,12 @@
     "button_text_watchlist": {
       "default": "Watchlist",
       "description": "Text for the button that allows users to add/remove a movie or show to/from their watchlist.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_mark_as_watched": {
       "default": "Mark as Watched",
       "description": "Text for the button that allows users to mark a movie, episode, or show as watched.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_watched_until_here": {
       "default": "Watched until here",
@@ -150,9 +146,7 @@
     "button_text_watch_again": {
       "default": "Watch again",
       "description": "Text for the button that allows users to mark a movie, episode, or show as re-watched.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_add_to_watchlist": {
       "default": "Add \"{title}\" to your Watchlist",
@@ -210,296 +204,259 @@
       "default": "Horror",
       "description": "Text for the horror genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_comedy": {
       "default": "Comedy",
       "description": "Text for the comedy genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_action": {
       "default": "Action",
       "description": "Text for the action genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_adventure": {
       "default": "Adventure",
       "description": "Text for the adventure genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_animation": {
       "default": "Animation",
       "description": "Text for the animation genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_biography": {
       "default": "Biography",
       "description": "Text for the biography genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_children": {
       "default": "Children",
       "description": "Text for the children genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_crime": {
       "default": "Crime",
       "description": "Text for the crime genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_documentary": {
       "default": "Documentary",
       "description": "Text for the documentary genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_drama": {
       "default": "Drama",
       "description": "Text for the drama genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_family": {
       "default": "Family",
       "description": "Text for the family genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_fantasy": {
       "default": "Fantasy",
       "description": "Text for the fantasy genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_game_show": {
       "default": "Game Show",
       "description": "Text for the game show genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_history": {
       "default": "History",
       "description": "Text for the history genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_home_and_garden": {
       "default": "Home and Garden",
       "description": "Text for the home and garden genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_holiday": {
       "default": "Holiday",
       "description": "Text for the holiday genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_music": {
       "default": "Music",
       "description": "Text for the music genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_musical": {
       "default": "Musical",
       "description": "Text for the musical genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_mystery": {
       "default": "Mystery",
       "description": "Text for the mystery genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_news": {
       "default": "News",
       "description": "Text for the news genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_none": {
       "default": "None",
       "description": "Text for the none genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_reality": {
       "default": "Reality",
       "description": "Text for the reality genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_romance": {
       "default": "Romance",
       "description": "Text for the romance genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_short": {
       "default": "Short",
       "description": "Text for the short genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_soap": {
       "default": "Soap",
       "description": "Text for the soap genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_special_interest": {
       "default": "Special Interest",
       "description": "Text for the special interest genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_sporting_event": {
       "default": "Sporting Event",
       "description": "Text for the sporting event genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_suspense": {
       "default": "Suspense",
       "description": "Text for the suspense genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_talk_show": {
       "default": "Talk Show",
       "description": "Text for the talk show genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_thriller": {
       "default": "Thriller",
       "description": "Text for the thriller genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_war": {
       "default": "War",
       "description": "Text for the war genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_western": {
       "default": "Western",
       "description": "Text for the western genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_anime": {
       "default": "Anime",
       "description": "Text for the anime genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_superhero": {
       "default": "Superhero",
       "description": "Text for the superhero genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_donghua": {
       "default": "Donghua",
       "description": "Text for the donghua genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_mini_series": {
       "default": "Mini-Series",
       "description": "Text for the mini-series genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_science_fiction": {
       "default": "Science Fiction",
       "description": "Text for the science fiction genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_remove_from_watchlist": {
@@ -523,16 +480,12 @@
     "input_placeholder_search_movies": {
       "default": "Search movies...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "input_placeholder_search_shows": {
       "default": "Search shows...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_join_trakt": {
       "default": "Join Trakt",
@@ -672,9 +625,7 @@
     "badge_text_get_vip": {
       "default": "Get VIP",
       "description": "Text for the VIP upsell badge. This is shown in a badge and should be as short as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_get_vip": {
       "default": "Unlock VIP features",
@@ -800,8 +751,7 @@
       "default": "TBA",
       "description": "Text for the tag that indicates that something has no release date yet. This should be as short as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "list_title_related_movies": {
@@ -1118,600 +1068,524 @@
       "default": "Action Director",
       "description": "Job title for the action director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_additional_second_assistant_director": {
       "default": "Additional Second Assistant Director",
       "description": "Job title for the additional second assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_additional_third_assistant_director": {
       "default": "Additional Third Assistant Director",
       "description": "Job title for the additional third assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_assistant_director": {
       "default": "Assistant Director",
       "description": "Job title for the assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_assistant_director_trainee": {
       "default": "Assistant Director Trainee",
       "description": "Job title for the assistant director trainee. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_co_director": {
       "default": "Co-Director",
       "description": "Job title for the co-director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_continuity": {
       "default": "Continuity",
       "description": "Job title for the continuity supervisor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_crowd_assistant_director": {
       "default": "Crowd Assistant Director",
       "description": "Job title for the crowd assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_director": {
       "default": "Director",
       "description": "Job title for the director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_field_director": {
       "default": "Field Director",
       "description": "Job title for the field director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_first_assistant_director": {
       "default": "First Assistant Director",
       "description": "Job title for the first assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_first_assistant_director_trainee_prep": {
       "default": "First Assistant Director (Prep)",
       "description": "Job title for the first assistant director trainee (prep). The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_first_assistant_director_trainee": {
       "default": "First Assistant Director Trainee",
       "description": "Job title for the first assistant director trainee. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_insert_unit_director": {
       "default": "Insert Unit Director",
       "description": "Job title for the insert unit director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_insert_unit_first_assistant_director": {
       "default": "Insert Unit First Assistant Director",
       "description": "Job title for the insert unit first assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_layout": {
       "default": "Layout",
       "description": "Job title for the layout artist. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_other": {
       "default": "Other",
       "description": "Job title that is used when no specific job is known. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_script_coordinator": {
       "default": "Script Coordinator",
       "description": "Job title for the script coordinator. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_script_supervisor": {
       "default": "Script Supervisor",
       "description": "Job title for the script supervisor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_second_assistant_director": {
       "default": "Second Assistant Director",
       "description": "Job title for the second assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_second_assistant_director_trainee": {
       "default": "Second Assistant Director Trainee",
       "description": "Job title for the second assistant director trainee. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_second_second_assistant_director": {
       "default": "Second Second Assistant Director",
       "description": "Job title for the second second assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_second_unit_director": {
       "default": "Second Unit Director",
       "description": "Job title for the second unit director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_second_unit_first_assistant_director": {
       "default": "Second Unit First Assistant Director",
       "description": "Job title for the second unit first assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_series_director": {
       "default": "Series Director",
       "description": "Job title for the series director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_series_guest_director": {
       "default": "Special Guest Director",
       "description": "Job title for the special guest director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_stage_director": {
       "default": "Stage Director",
       "description": "Job title for the stage director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_third_assistant_director": {
       "default": "Third Assistant Director",
       "description": "Job title for the third assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_adaptation": {
       "default": "Adaptation",
       "description": "Job title for the person who adapted an existing work of literature. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_author": {
       "default": "Author",
       "description": "Job title for the author. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_book": {
       "default": "Book",
       "description": "Job title for the person who wrote the book a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_characters": {
       "default": "Characters",
       "description": "Job title for the person who wrote the characters. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_co_writer": {
       "default": "Co-Writer",
       "description": "Job title for the co-writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_comic_book": {
       "default": "Comic Book",
       "description": "Job title for the person who wrote the comic book a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_creative_producer": {
       "default": "Creative Producer",
       "description": "Job title for the creative producer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_dialogue": {
       "default": "Dialogue",
       "description": "Job title for the dialogue writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_executive_story_editor": {
       "default": "Executive Story Editor",
       "description": "Job title for the executive story editor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_graphic_novel": {
       "default": "Graphic Novel",
       "description": "Job title for the who wrote the graphic novel a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_head_of_story": {
       "default": "Head of Story",
       "description": "Job title for the head of story. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_idea": {
       "default": "Idea",
       "description": "Job title for the person who's idea a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_junior_story_editor": {
       "default": "Junior Story Editor",
       "description": "Job title for the junior story editor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_lyricist": {
       "default": "Lyricist",
       "description": "Job title for the lyricist. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_musical": {
       "default": "Musical",
       "description": "Job title for the person who made the musical a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_novel": {
       "default": "Novel",
       "description": "Job title for the person who wrote the novel a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_opera": {
       "default": "Opera",
       "description": "Job title for the person who made the opera a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_original_concept": {
       "default": "Original Concept",
       "description": "Job title for the person who came up with the original concept. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_original_film_writer": {
       "default": "Original Film Writer",
       "description": "Job title for the original film writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_original_series_creator": {
       "default": "Original Series Creator",
       "description": "Job title for the original series creator. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_original_original_story": {
       "default": "Original Story",
       "description": "Job title for the person who's story a media item is originally based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_scenario_writer": {
       "default": "Scenario Writer",
       "description": "Job title for the scenario writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_screenplay": {
       "default": "Screenplay",
       "description": "Job title for the screenplay writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_screenstory": {
       "default": "Screenstory",
       "description": "Job title for the screenstory writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_script_consultant": {
       "default": "Script Consultant",
       "description": "Job title for the script consultant. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_script_editor": {
       "default": "Script Editor",
       "description": "Job title for the script editor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_senior_story_editor": {
       "default": "Senior Story Editor",
       "description": "Job title for the senior story editor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_series_composition": {
       "default": "Series Composition",
       "description": "Job title for the person responsible for the series composition. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_short_story": {
       "default": "Short Story",
       "description": "Job title for the person who's short story a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_staff_writer": {
       "default": "Staff Writer",
       "description": "Job title for the staff writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story": {
       "default": "Story",
       "description": "Job title for the person who wrote the story. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_artist": {
       "default": "Story Artist",
       "description": "Job title for the story artist. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_consultant": {
       "default": "Story Consultant",
       "description": "Job title for the story consultant. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_coordinator": {
       "default": "Story Coordinator",
       "description": "Job title for the story coordinator. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_developer": {
       "default": "Story Developer",
       "description": "Job title for the story developer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_editor": {
       "default": "Story Editor",
       "description": "Job title for the story editor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_manager": {
       "default": "Story Manager",
       "description": "Job title for the story manager. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_supervisor": {
       "default": "Story Supervisor",
       "description": "Job title for the story supervisor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_storyboard": {
       "default": "Storyboard",
       "description": "Job title for the person who worked on the storyboard. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_teleplay": {
       "default": "Teleplay",
       "description": "Job title for the teleplay writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_texte": {
       "default": "Texte",
       "description": "Job title for the texte. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_theatre_play": {
       "default": "Theatre Play",
       "description": "Job title for the person who created theatre play a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_writer": {
       "default": "Writer",
       "description": "Job title for the writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_writers_assistant": {
       "default": "Writers' Assistant",
       "description": "Job title for the writers' assistant. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_writers_production": {
       "default": "Writers' Production",
       "description": "Job title for the writers' production. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_creator": {
       "default": "Creator",
       "description": "Job title for the creator. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_remove_from_history": {
       "default": "Remove from Watched",
       "description": "Text for the button that allows users to remove a movie or episode from their watch history.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_remove_from_watched": {
       "default": "Remove \"{title}\" from your Watched list",
@@ -1734,9 +1608,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_remove_from_history": {
       "default": "Remove this play of \"{title}\" from your Watched list",
@@ -1759,16 +1631,20 @@
           "type": "string"
         }
       },
+      "exclude": []
+    },
+    "list_title_episodes": {
+      "default": "Episodes",
+      "description": "Title for lists containing episodes of a season. This title should be as short and concise as possible.",
       "exclude": [
-        "ios"
+        "web",
+        "android"
       ]
     },
     "list_title_seasons": {
       "default": "Seasons",
       "description": "Title for lists containing seasons of a show. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_season_number": {
       "default": "Season {number}",
@@ -1778,16 +1654,12 @@
           "type": "number"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_season_specials": {
       "default": "Specials",
       "description": "Text for the specials season of a show. This should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_expand_media_overview": {
       "default": "Expand \"{title}\" overview",
@@ -1833,9 +1705,7 @@
     "button_text_share": {
       "default": "Share",
       "description": "Text for the button that allows users to share a movie, show, episode, person, profile, etc.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_trailer": {
       "default": "Trailer",
@@ -2006,9 +1876,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_view_all_recommended_movies": {
       "default": "View all recommended movies",
@@ -2090,8 +1958,7 @@
       "default": "Rate",
       "description": "Header for the section that allows users to rate a movie, show, or episode.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_add_to_favorites": {
@@ -2212,8 +2079,7 @@
       "default": "Availability",
       "description": "Header for the section that shows streaming services for a movie, show, or episode.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_popup_menu": {
@@ -2232,9 +2098,7 @@
     "list_title_popular_lists": {
       "default": "Popular Lists",
       "description": "Title for lists containing popular lists of movies or shows. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_placeholder_popular_lists": {
       "default": "\"{title}\" does not appear on any popular lists.",
@@ -2285,9 +2149,7 @@
     "list_placeholder_comments": {
       "default": "No reviews yet.",
       "description": "Placeholder text shown when there are no reviews in a list.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_placeholder_replies": {
       "default": "No replies yet.",
@@ -2616,9 +2478,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_drop_show": {
       "default": "Flag show \"{title}\" as dropped",
@@ -2636,9 +2496,7 @@
     "button_text_drop_show": {
       "default": "Drop show",
       "description": "Text for the button that allows a user to drop a show. Indicating that a user is no longer actively tracking this show.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "warning_prompt_drop_movie": {
       "default": "Are you sure you want to drop \"{title}\"? This will remove it from your Continue Watching list.",
@@ -2751,8 +2609,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
@@ -2824,9 +2681,7 @@
           "type": "number"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_comments": {
       "default": "Reviews",
@@ -2844,22 +2699,17 @@
     "dialog_title_comment": {
       "default": "Review",
       "description": "Title for the review dialog, which is used when a user is adding a new review.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_add_review": {
       "default": "Add Review",
       "description": "Button action label used when a user is submitting a review.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_add_reply": {
       "default": "Add Reply",
       "description": "Button action label used when a user is submitting a reply.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -2895,9 +2745,7 @@
     "textarea_placeholder_comment": {
       "default": "Add a review...",
       "description": "Placeholder text for the review textarea when adding a new review.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "switch_label_mark_as_spoiler": {
       "default": "Mark as spoiler",
@@ -2910,9 +2758,7 @@
     "text_spoiler": {
       "default": "Spoiler",
       "description": "Text used to indicate that something is a spoiler.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_close_error": {
       "default": "Close error",
@@ -2933,9 +2779,7 @@
     "translated_value_error_comment_invalid_content": {
       "default": "Reviews must be at least 5 words.",
       "description": "Error message shown when a review is invalid due to content length.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "translated_value_error_reply_invalid_content": {
       "default": "Replies must be at least 5 words.",
@@ -3047,9 +2891,7 @@
     "button_text_retry": {
       "default": "Retry",
       "description": "Text for the retry button. Used for things like error pages and failed authentications.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_retry": {
       "default": "Retry",
@@ -3068,8 +2910,15 @@
       "default": "Manage lists",
       "description": "Text for the button that opens the lists drawer. This allows users to add or remove a movie or show from their lists.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
+      ]
+    },
+    "button_text_view_history": {
+      "default": "View History",
+      "description": "Text for the button that opens the full page of the user's plays for a particular media item.",
+      "exclude": [
+        "web",
+        "android"
       ]
     },
     "dropdown_label_add_remove_from_lists": {
@@ -3136,24 +2985,21 @@
       "default": "Light",
       "description": "Text for the light theme option in the theme selection dropdown.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "option_text_theme_dark": {
       "default": "Dark",
       "description": "Text for the dark theme option in the theme selection dropdown.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "option_text_theme_system": {
       "default": "System",
       "description": "Text for the system theme option in the theme selection dropdown.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_filters": {
@@ -3168,8 +3014,7 @@
       "default": "Reset",
       "description": "Aria-label for the button that resets a single filter to its initial value.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_search_results_for": {
@@ -3241,48 +3086,50 @@
       "default": "Hide Watched",
       "description": "Header for the filter that allows users to hide watched items in their lists.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_hide_watchlisted": {
       "default": "Hide Watchlisted",
       "description": "Header for the filter that allows users to hide watchlisted items in their lists.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "option_text_my_favorites": {
       "default": "My favorites",
       "description": "Text for the option that filters items to show only those that are in the user's favorites.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "option_text_all_digital_releases": {
       "default": "All digital releases",
       "description": "Text for the option that filters items to show all digital releases.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "option_text_streaming_now": {
       "default": "Streaming now",
       "description": "Text for the option that filters items to show only those that are currently streaming.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_decade": {
       "default": "Decade",
       "description": "Header for the filter that allows users to select a decade.",
       "exclude": [
+        "android"
+      ]
+    },
+    "header_ratings": {
+      "default": "Ratings",
+      "description": "Header for the filter that allows users to select a rating.",
+      "exclude": [
         "android",
-        "ios"
+        "web"
       ]
     },
     "button_label_view_all_items_in": {
@@ -3302,8 +3149,7 @@
       "default": "Reset all",
       "description": "Text for the button that resets all filters to their initial values.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_reset_all_filters": {
@@ -3388,9 +3234,7 @@
     "button_text_checkin": {
       "default": "Now watching",
       "description": "Text for the button that allows users to indicate that they are starting to watch a movie or episode.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_checkin": {
       "default": "Now watching \"{title}\"",
@@ -3477,8 +3321,14 @@
     "page_title_settings": {
       "default": "Settings",
       "description": "Title for the settings page.",
+      "exclude": []
+    },
+    "button_text_settings": {
+      "default": "Settings",
+      "description": "Text for the button that allows users to open the settings page.",
       "exclude": [
-        "ios"
+        "android",
+        "web"
       ]
     },
     "button_label_settings": {
@@ -3493,8 +3343,7 @@
       "default": "Show spoilers",
       "description": "Text for the section that allows users to toggle spoilers.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "switch_label_spoilers": {
@@ -3938,16 +3787,12 @@
     "button_text_create": {
       "default": "Create",
       "description": "Text for the button that allows users to create a new list, review, rating etc.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_apply": {
       "default": "Apply",
       "description": "Text for the button that allows users to apply changes that are currently being edited.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_apply": {
       "default": "Apply changes",
@@ -3977,16 +3822,13 @@
       "default": "Create list",
       "description": "Text for the button that allows users to create a new list.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "page_title_create_list": {
       "default": "Create List",
       "description": "Title for a screen that allows users to create a new list.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "page_description_create_list": {
       "default": "Enter a name and description for your list.",
@@ -4007,9 +3849,7 @@
     "page_title_edit_list": {
       "default": "Edit List",
       "description": "Title for a screen that allows users to edit an existing list.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_placeholder_personal_list_empty": {
       "default": "There is nothing in this list yet.",
@@ -4124,9 +3964,7 @@
     "text_display_name": {
       "default": "Display name",
       "description": "Text for the section that allows users to change their display name.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_display_email": {
       "default": "Email",
@@ -4155,9 +3993,7 @@
     "text_location": {
       "default": "Location",
       "description": "Text for the section that allows users to change their location.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_change_location": {
       "default": "Change location",
@@ -4170,15 +4006,20 @@
     "text_about": {
       "default": "About me",
       "description": "Text for the section that allows users to change their 'about me' description.",
+      "exclude": []
+    },
+    "page_title_automatic_tracking": {
+      "default": "Automatic Tracking",
+      "description": "Title for the automatic tracking page.",
       "exclude": [
-        "ios"
+        "web",
+        "android"
       ]
     },
     "text_automatic_tracking": {
       "default": "Automatic Tracking",
       "description": "Text for the section that allows users to manage automatic shows and movies tracking.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -4231,8 +4072,7 @@
       "default": "Favorite genres",
       "description": "Header for the section that allows users to change their favorite genres.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_toggle_genre": {
@@ -4448,24 +4288,21 @@
       "default": "Movies",
       "description": "Text for the tag that indicates a movie.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "tag_text_shows": {
       "default": "Shows",
       "description": "Text for the tag that indicates a show. This should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "tag_text_episodes": {
       "default": "Episodes",
       "description": "Text for the tag that indicates an episode. This should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "tag_text_released": {
@@ -4506,9 +4343,7 @@
     "button_text_toggle_search_media": {
       "default": "Media",
       "description": "Text for the button that allows users to toggle the search mode to media.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_toggle_search_people": {
       "default": "Search for people",
@@ -4520,16 +4355,12 @@
     "button_text_toggle_search_people": {
       "default": "People",
       "description": "Text for the button that allows users to toggle the search mode to people.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "input_placeholder_search_people": {
       "default": "Search people...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_toggle_search_lists": {
       "default": "Search for lists",
@@ -4542,16 +4373,12 @@
     "button_text_toggle_search_lists": {
       "default": "Lists",
       "description": "Text for the button that allows users to toggle the search mode to lists.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "input_placeholder_search_lists": {
       "default": "Search lists...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "link_text_forums": {
       "default": "Forums",
@@ -4593,12 +4420,51 @@
         "web"
       ]
     },
+    "button_text_diagnostics_and_cache": {
+      "default": "Diagnostics & Cache",
+      "description": "Text for the button that allows users to diagnose some issues or clear some cached values.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
+    "button_text_share_auth_logs": {
+      "default": "Share Authentication Logs",
+      "description": "Text for the button that allows users to export their authentication logs for debugging.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
+    "button_text_view_cache_size": {
+      "default": "View Cache Size",
+      "description": "Text for the button that allows users to view the size of their cache.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
+    "button_text_clear_cache": {
+      "default": "Clear Cache",
+      "description": "Text for the button that allows users to clear their cache.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
+    "text_analytics": {
+      "default": "Analytics",
+      "description": "Text for the section where users can toggle their analytics setting.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
     "header_calendar": {
       "default": "Calendar",
       "description": "Header for the calendar section, where users can choose days/weeks to see what movies or episodes are available on their calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_previous_calendar_period": {
@@ -4620,9 +4486,7 @@
     "button_text_reset_calendar_period": {
       "default": "Today",
       "description": "Text for the button that resets the calendar view to today.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_reset_calendar_period": {
       "default": "Today",
@@ -4649,88 +4513,76 @@
       "default": "Nothing for you on this day. Take a day off, enjoy the weather.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_2": {
       "default": "No items found for this date. Maybe try another day?",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_3": {
       "default": "Looks like there's nothing scheduled for this day. Relax and take it easy.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_4": {
       "default": "Your calendar is empty on this day. Perfect time to catch up on some rest.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_5": {
       "default": "This day is wide open. Maybe start something new?",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_6": {
       "default": "No plans here. Time to do something spontaneous.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_7": {
       "default": "Nothing scheduled. Enjoy some free time.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_8": {
       "default": "Your schedule is clear. Make the most of it.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_9": {
       "default": "No events this day. Maybe revisit an old favorite.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_10": {
       "default": "All clear. Time to explore something different.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "page_title_calendar": {
       "default": "Calendar",
       "description": "Title for the calendar page, where users can see what movies or episodes are available on their calendar.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_calendar": {
       "default": "Calendar",
@@ -4744,47 +4596,40 @@
       "default": "Your shows and movies. Your pace. Jump back in exactly where you left off. What are you currently watching?",
       "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite shows and movies.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_cta_up_next": {
       "default": "Your shows. Your pace. Jump back in exactly where you left off. What are you currently watching?",
       "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite shows.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_cta_up_next_movies": {
       "default": "Your movies. Your pace. Jump back in exactly where you left off. What are you currently watching?",
       "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite movies.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_cta_start_watching_media": {
       "default": "Your queue awaits. Add the shows and movies you're excited to start watching. What's next?",
       "description": "Call to action text shown in the Start Watching list, encouraging users to add their favorite shows and movies.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_cta_start_watching_shows": {
       "default": "Your queue awaits. Add the shows you're excited to start watching. What's next?",
       "description": "Call to action text shown in the Start Watching list, encouraging users to add their favorite shows.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_cta_start_watching_movies": {
       "default": "Your queue awaits. Add the movies you're excited to start watching. What's next?",
       "description": "Call to action text shown in the Start Watching list, encouraging users to add their favorite movies.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_cta_watchlist_released": {
@@ -4798,23 +4643,19 @@
       "default": "Your timeline. See what's dropping next with a full list of upcoming episodes and movies you care about.",
       "description": "Call to action text shown in the Upcoming list, encouraging users to follow shows for upcoming episodes and movies.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_cta_upcoming": {
       "default": "Your timeline. See what's dropping next with a full list of upcoming episodes you care about.",
       "description": "Call to action text shown in the Upcoming list, encouraging users to follow shows for upcoming episodes.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_cta_upcoming_movies": {
       "default": "Your timeline. See what's dropping next with a full list of upcoming movies you care about.",
       "description": "Call to action text shown in the Upcoming list, encouraging users to follow movies for upcoming releases.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_cta_watchlist_unreleased": {
@@ -4837,23 +4678,19 @@
       "default": "Watch it. Track it. Your viewing history updates in real time, right here.",
       "description": "Call to action text shown in the personal activity list, encouraging users to mark their watched content.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_cta_activity_list": {
       "default": "Start making friends quickly by following the Trakt Team and explore what they are watching.",
       "description": "Call to action text shown in the social activity list, encouraging users to follow members of the Trakt Team.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_cta_watchlist": {
       "default": "See it. Save it. Watch it later. Start curating your personal watchlist.",
       "description": "Call to action text shown in the Watchlist, encouraging users to add movies and shows to their watchlist.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_cta_watchlist_movies": {
@@ -4875,9 +4712,7 @@
     "text_cta_personal_lists": {
       "default": "Your lists. Your rules. Collect and organize movies and shows your way.",
       "description": "Call to action text shown in the empty personal lists screen, encouraging users to create a custom list for organizing their shows and movies.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_cta_smart_lists": {
       "default": "Set the filters. Skip the curation. Your list builds and updates itself automatically.",
@@ -4951,8 +4786,7 @@
       "default": "Discover media",
       "description": "Link text for discovering media content. Meant to entice users to find new content.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "link_label_discover_media": {
@@ -4966,9 +4800,7 @@
     "link_text_discover_shows": {
       "default": "Discover shows",
       "description": "Link text for discovering shows. Meant to entice users to find new content.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "link_label_discover_shows": {
       "default": "Discover shows",
@@ -4981,9 +4813,7 @@
     "link_text_discover_movies": {
       "default": "Discover movies",
       "description": "Link text for discovering movies. Meant to entice users to find new content.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "link_label_discover_movies": {
       "default": "Discover movies",
@@ -4997,8 +4827,7 @@
       "default": "Review reactions",
       "description": "Header for the review reactions section.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_close_reaction": {
@@ -5038,9 +4867,7 @@
     "header_account_details": {
       "default": "Account details",
       "description": "Header for the section that allows users to change their account details.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "description_account_details": {
       "default": "Change your photo, name and other details.",
@@ -5103,8 +4930,7 @@
       "default": "Bummer, no hits. Your filter may have been a little too selective.",
       "description": "Placeholder text shown when there are no results for a filter.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "error_text_unexpected_error_short": {
@@ -5119,7 +4945,6 @@
       "default": "Where to Watch",
       "description": "Title for the all available streaming services page where user can see where to watch movie/show.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5127,7 +4952,6 @@
       "default": "Subscription",
       "description": "Text used to indicate the list of all streaming services where media is available to watch in subscription model.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5135,7 +4959,6 @@
       "default": "Free",
       "description": "Text used to indicate the list of all streaming services where media is available to watch for free.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5143,7 +4966,6 @@
       "default": "Purchase",
       "description": "Text used to indicate the list of all streaming services where media is available to watch for one time purchase.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5151,7 +4973,6 @@
       "default": "Rent",
       "description": "Text used to indicate the list of all streaming services where media is available to rent.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5159,7 +4980,6 @@
       "default": "Favorite",
       "description": "Text used to indicate the list of all favorite streaming services of a user.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5363,9 +5183,7 @@
     "button_text_no_services": {
       "default": "No services",
       "description": "Text for the button that indicates there are no streaming services available for a movie or show.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "header_get_trakt_app": {
       "default": "Get the trakt app",
@@ -5440,9 +5258,7 @@
     "link_text_general_settings": {
       "default": "General",
       "description": "Text for the link to the general settings page.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "link_text_data_settings": {
       "default": "Data",
@@ -5516,8 +5332,20 @@
       "default": "This year",
       "description": "Label for the 'this year' filter which filters items to only show those from the current year.",
       "exclude": [
+        "android"
+      ]
+    },
+    "filter_label_before_year": {
+      "default": "Before {year}",
+      "description": "Label for the filter which filters items to only show those from before the given year. e.g. 'Before 1960'.",
+      "variables": {
+        "year": {
+          "type": "number"
+        }
+      },
+      "exclude": [
         "android",
-        "ios"
+        "web"
       ]
     },
     "text_sort_recently_updated": {
@@ -5579,22 +5407,17 @@
     "input_placeholder_lists_name": {
       "default": "Name",
       "description": "Placeholder text for name input field. This is displayed when users opens a form and sees empty form fields to be filled in.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "input_placeholder_lists_description": {
       "default": "Description (optional)",
       "description": "Placeholder text for optional description input field. This is displayed when users opens a form and sees empty form fields to be filled in.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_view_description": {
       "default": "View Description",
       "description": "Text for the button that allows users to show full details of certain show or movie.",
       "exclude": [
-        "ios",
         "android"
       ]
     },
@@ -5602,7 +5425,6 @@
       "default": "Hide Description",
       "description": "Text for the button that allows users to hide full details of certain show or movie.",
       "exclude": [
-        "ios",
         "android"
       ]
     },
@@ -5610,7 +5432,6 @@
       "default": "Spoiler Alert",
       "description": "Text for the spoiler alert label that warns users about potential spoilers in the content they are about to see.",
       "exclude": [
-        "ios",
         "android"
       ]
     },
@@ -5618,7 +5439,6 @@
       "default": "Remove from watchlist",
       "description": "Text for the button that allows a user to remove a show or movie from their watchlist.",
       "exclude": [
-        "ios",
         "android"
       ]
     },
@@ -5629,12 +5449,18 @@
         "android"
       ]
     },
+    "button_text_edit_comment": {
+      "default": "Edit",
+      "description": "Text for the button that allows a user to edit a review.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
     "button_text_delete_comment": {
       "default": "Delete Review",
       "description": "Text for the button that allows a user to delete a review.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_delete_reply": {
       "default": "Delete Reply",
@@ -5655,9 +5481,7 @@
     "warning_prompt_delete_comment": {
       "default": "Are you sure you want to delete your review?",
       "description": "Text for the warning prompt that appears when a user attempts to delete a review.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "warning_prompt_delete_reply": {
       "default": "Are you sure you want to delete your reply?",
@@ -5778,32 +5602,28 @@
       "default": "Stream",
       "description": "Text label indicating that the media can be streamed. If there is no short translation available, Anglicism is fine.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_rent": {
       "default": "Rent",
       "description": "Text label indicating that the media can be rented.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_buy": {
       "default": "Buy",
       "description": "Text label indicating that the media can be bought.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_on_demand": {
       "default": "On demand",
       "description": "Text label indicating that the media can be streamed on demand.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "list_title_where_to_watch": {
@@ -5877,8 +5697,7 @@
       "default": "Theme",
       "description": "Text for the section that allows users to change the theme.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_language": {
@@ -5928,9 +5747,7 @@
     "translated_value_library_custom": {
       "default": "Custom",
       "description": "Value for the custom library name. This is the category for library items that are not in a specific category like Plex.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "page_title_library": {
       "default": "Library",
@@ -5973,6 +5790,19 @@
         "android"
       ]
     },
+    "text_directed_by_plain": {
+      "default": "Directed by {name}",
+      "description": "Text to indicate the director of a movie.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
     "text_directed_by_short": {
       "default": "Directed by",
       "description": "Text to indicate the director of a movie.",
@@ -5994,6 +5824,19 @@
         "android"
       ]
     },
+    "text_created_by_plain": {
+      "default": "Created by {name}",
+      "description": "Text to indicate the creator of a show.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
     "text_created_by_short": {
       "default": "Created by",
       "description": "Text to indicate the creator of a show.",
@@ -6005,16 +5848,21 @@
     "tag_text_watched": {
       "default": "Watched",
       "description": "Text for the tag that is shown before the movie or show watch count. This should be as short as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_dropped": {
       "default": "Dropped",
       "description": "Text for the tag that is shown for dropped shows. This should be as short as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
+      ]
+    },
+    "tag_text_started": {
+      "default": "Started",
+      "description": "Text for the tag that is shown to indicate a show is started but not completed. This should be as short as possible.",
+      "exclude": [
+        "web",
+        "android"
       ]
     },
     "header_height": {
@@ -6057,9 +5905,7 @@
     "button_text_mark_as_watched_now": {
       "default": "Just now",
       "description": "Text for the button that allows users to mark a movie or episode as watched just now.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_mark_as_watched_now": {
       "default": "Just now",
@@ -6072,9 +5918,7 @@
     "button_text_mark_as_watched_release_date": {
       "default": "Release date",
       "description": "Text for the button that allows users to mark a movie or episode as watched on the release date.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_mark_as_watched_release_date": {
       "default": "Release date",
@@ -6087,9 +5931,7 @@
     "button_text_mark_as_watched_other_date": {
       "default": "Other date",
       "description": "Text for the button that allows users to mark a movie or episode as watched on a custom date.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_mark_as_watched_other_date": {
       "default": "Other date",
@@ -6102,9 +5944,7 @@
     "button_text_mark_as_watched_unknown_date": {
       "default": "Unknown date",
       "description": "Text for the button that allows users to mark a movie or episode as watched on an unknown date.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_mark_as_watched_unknown_date": {
       "default": "Unknown date",
@@ -6117,9 +5957,7 @@
     "text_this_month": {
       "default": "This month",
       "description": "Text shown to indicate the users stats of the current month.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_this_year": {
       "default": "This year",
@@ -6286,8 +6124,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_profile_options": {
@@ -6310,8 +6147,7 @@
       "default": "Private",
       "description": "Text used to indicate that something is private.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "switch_label_toggle_list_privacy": {
@@ -6346,8 +6182,7 @@
       "default": "Streaming service has been linked.",
       "description": "Text to indicate that linking a streaming service via Younify is completed.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "text_info_younify_service_unlinked": {
@@ -6362,16 +6197,14 @@
       "default": "Fix",
       "description": "Text for the button that allows users to fix issues with their Younify linked streaming services.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "button_text_younify_unlink": {
       "default": "Unlink",
       "description": "Text for the button that allows users to unlink their Younify linked streaming services.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "button_text_data_sync_yes": {
@@ -6386,16 +6219,14 @@
       "default": "Ignore existing data",
       "description": "Text for button that allows users to ignore syncing existing data when linking Younify streaming services.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "button_text_younify_send_logs": {
       "default": "Send Logs",
       "description": "Text for the button that allows users to send logs for Younify troubleshooting.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "text_younify_status_linked": {
@@ -6439,8 +6270,7 @@
       "default": "Sync Existing Data",
       "description": "Title for the dialog that appears when a user links a Younify streaming service.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "dialog_prompt_younify_data_sync": {
@@ -6507,6 +6337,14 @@
         "android"
       ]
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Restore Rating Prompts",
+      "description": "Text for the button that allows users to reset their suppressed rating prompts.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
     "text_billing_month_for_free": {
       "default": "Try 1 month for free and then:",
       "description": "Text used to inform user about billing and subscription options.",
@@ -6535,8 +6373,7 @@
       "default": "Upgrade to VIP",
       "description": "Text used to inform user about billing and subscription options.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "text_billing_disclaimer": {
@@ -6571,31 +6408,25 @@
     "text_vip_upsell_default": {
       "default": "Enhance your Trakt experience",
       "description": "Text used to promote a VIP package for the user.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_vip_upsell_default_description": {
       "default": "Upgrade to VIP and unlock the full Trakt experience, packed with features built for TV Shows and Movies lovers.",
       "description": "Description used to promote a VIP package for the user.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_vip_upsell_default_2": {
       "default": "Upgrade to VIP!",
       "description": "Text used to promote a VIP package for the user.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Unlimited tracking and more.",
+      "default": "Year in Review & more.",
       "description": "Description used to promote a VIP package for the user.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "button_label_like_list": {
@@ -6717,9 +6548,7 @@
     "button_text_track": {
       "default": "Track",
       "description": "Do not translate this.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "filter_label_runtime": {
       "default": "{range} minutes",
@@ -6730,16 +6559,14 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_behavior": {
       "default": "Behavior",
       "description": "Header for the section that allows users to change the behavior, i.e. spoiler settings and watch again behavior.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "description_behavior": {
@@ -6754,8 +6581,7 @@
       "default": "Enable multiple watches",
       "description": "Text for the section that allows users to enable or disable multiple watches.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "switch_label_multiple_watches": {
@@ -6770,8 +6596,7 @@
       "default": "Add to list",
       "description": "Header for the section that allows users to add/remove a movie or show to/from a list.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_sentiment_highlight": {
@@ -7396,8 +7221,7 @@
       "default": "Notifications",
       "description": "Header for the section that allows users to manage their notification settings.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "text_settings_adjust_delivery": {
@@ -7793,16 +7617,14 @@
       "default": "Note",
       "description": "Title for the drawer that allows users to add a note to a movie or show. This should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_add_note": {
       "default": "Add Note",
       "description": "Button text for adding a note to a show or movie.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_add_note": {
@@ -7822,8 +7644,7 @@
       "default": "Why did you favorite this title?",
       "description": "Placeholder text for the input field when adding a note about why a user favorited a title.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "input_placeholder_note_drop": {
@@ -8265,6 +8086,51 @@
       "exclude": [
         "android",
         "ios"
+      ]
+    },
+    "button_text_block_comments": {
+      "default": "Block comments from {user}",
+      "description": "Text for the button that allows users to block comments from a particular user.",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
+    "button_text_keyboard_done": {
+      "default": "Done",
+      "description": "Text for the button that allows users to indicate they are done with the keyboard and want to dismiss it. This should be as short and concise as possible.",
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
+    "dialog_title_discard_changes": {
+      "default": "Discard Changes?",
+      "description": "Title for the alert dialog that appears when a user attempts to dismiss a view with unsaved changes.",
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Are you sure you want to discard this? Any unsaved changes will be lost.",
+      "description": "Text for the warning prompt that appears when a user attempts to dismiss a view with unsaved input, warning them of data loss.",
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
+    "button_text_discard": {
+      "default": "Discard",
+      "description": "Text for the destructive button that confirms the discarding of unsaved changes.",
+      "exclude": [
+        "web",
+        "android"
       ]
     }
   }

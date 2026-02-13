@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Сигурни ли сте, че искате да премахнете това гледне на \"{title}\" от наблюдавани?"
     },
+    "list_title_episodes": {
+      "default": "Епизоди"
+    },
     "list_title_seasons": {
       "default": "Сезони"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Управление на списъци"
     },
+    "button_text_view_history": {
+      "default": "Виж историята"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "Добави или премахни \"{title}\" от списъци"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Десетилетие"
+    },
+    "header_ratings": {
+      "default": "Оценки"
     },
     "button_label_view_all_items_in": {
       "default": "Виж всички в \"{title}\""
@@ -1261,6 +1270,9 @@
       "default": "Обзор на месеца"
     },
     "page_title_settings": {
+      "default": "Настройки"
+    },
+    "button_text_settings": {
       "default": "Настройки"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "За мен"
     },
+    "page_title_automatic_tracking": {
+      "default": "Автоматично проследяване"
+    },
     "text_automatic_tracking": {
       "default": "Автоматично Проследяване"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Изтриване на акаунт"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Диагностика и кеш"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Споделяне на логовете за автентикация"
+    },
+    "button_text_view_cache_size": {
+      "default": "Виж размера на кеша"
+    },
+    "button_text_clear_cache": {
+      "default": "Изчисти кеша"
+    },
+    "text_analytics": {
+      "default": "Анализ"
     },
     "header_calendar": {
       "default": "Календар"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "Тази година"
     },
+    "filter_label_before_year": {
+      "default": "Преди {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Наскоро актуализирани"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Спри проверка"
+    },
+    "button_text_edit_comment": {
+      "default": "Редактирай"
     },
     "button_text_delete_comment": {
       "default": "Изтрий ревюто"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Режисьор: <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Режисьор: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Режисьор:"
     },
     "text_created_by": {
       "default": "Създадено от <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Създадено от {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Създател:"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Прекратено"
+    },
+    "tag_text_started": {
+      "default": "Започнат"
     },
     "header_height": {
       "default": "Ръст"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Искате ли да спрете да бъдете питани за оценка на това, което наскоро сте гледали?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Възстанови подканите за оценка"
+    },
     "text_billing_month_for_free": {
       "default": "Опитайте 1 месец безплатно и след това:"
     },
@@ -2404,7 +2462,7 @@
       "default": "Надграждане до VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Неограничено проследяване и още."
+      "default": "Обзор на годината и още."
     },
     "button_label_like_list": {
       "default": "Харесва ми {name}"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Условия за ползване"
+    },
+    "button_text_block_comments": {
+      "default": "Блокиране на коментарите от {user}"
+    },
+    "button_text_keyboard_done": {
+      "default": "Готово"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Отхвърляне на промените?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Сигурни ли сте, че искате да отхвърлите това? Всички незапазени промени ще бъдат загубени."
+    },
+    "button_text_discard": {
+      "default": "Отхвърляне"
     }
   }
 }
