@@ -229,296 +229,259 @@
       "default": "Horror",
       "description": "Text for the horror genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_comedy": {
       "default": "Comedy",
       "description": "Text for the comedy genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_action": {
       "default": "Action",
       "description": "Text for the action genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_adventure": {
       "default": "Adventure",
       "description": "Text for the adventure genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_animation": {
       "default": "Animation",
       "description": "Text for the animation genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_biography": {
       "default": "Biography",
       "description": "Text for the biography genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_children": {
       "default": "Children",
       "description": "Text for the children genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_crime": {
       "default": "Crime",
       "description": "Text for the crime genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_documentary": {
       "default": "Documentary",
       "description": "Text for the documentary genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_drama": {
       "default": "Drama",
       "description": "Text for the drama genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_family": {
       "default": "Family",
       "description": "Text for the family genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_fantasy": {
       "default": "Fantasy",
       "description": "Text for the fantasy genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_game_show": {
       "default": "Game Show",
       "description": "Text for the game show genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_history": {
       "default": "History",
       "description": "Text for the history genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_home_and_garden": {
       "default": "Home and Garden",
       "description": "Text for the home and garden genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_holiday": {
       "default": "Holiday",
       "description": "Text for the holiday genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_music": {
       "default": "Music",
       "description": "Text for the music genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_musical": {
       "default": "Musical",
       "description": "Text for the musical genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_mystery": {
       "default": "Mystery",
       "description": "Text for the mystery genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_news": {
       "default": "News",
       "description": "Text for the news genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_none": {
       "default": "None",
       "description": "Text for the none genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_reality": {
       "default": "Reality",
       "description": "Text for the reality genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_romance": {
       "default": "Romance",
       "description": "Text for the romance genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_short": {
       "default": "Short",
       "description": "Text for the short genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_soap": {
       "default": "Soap",
       "description": "Text for the soap genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_special_interest": {
       "default": "Special Interest",
       "description": "Text for the special interest genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_sporting_event": {
       "default": "Sporting Event",
       "description": "Text for the sporting event genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_suspense": {
       "default": "Suspense",
       "description": "Text for the suspense genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_talk_show": {
       "default": "Talk Show",
       "description": "Text for the talk show genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_thriller": {
       "default": "Thriller",
       "description": "Text for the thriller genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_war": {
       "default": "War",
       "description": "Text for the war genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_western": {
       "default": "Western",
       "description": "Text for the western genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_anime": {
       "default": "Anime",
       "description": "Text for the anime genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_superhero": {
       "default": "Superhero",
       "description": "Text for the superhero genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_donghua": {
       "default": "Donghua",
       "description": "Text for the donghua genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_mini_series": {
       "default": "Mini-Series",
       "description": "Text for the mini-series genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_genre_science_fiction": {
       "default": "Science Fiction",
       "description": "Text for the science fiction genre. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_remove_from_watchlist": {
@@ -1137,592 +1100,518 @@
       "default": "Action Director",
       "description": "Job title for the action director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_additional_second_assistant_director": {
       "default": "Additional Second Assistant Director",
       "description": "Job title for the additional second assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_additional_third_assistant_director": {
       "default": "Additional Third Assistant Director",
       "description": "Job title for the additional third assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_assistant_director": {
       "default": "Assistant Director",
       "description": "Job title for the assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_assistant_director_trainee": {
       "default": "Assistant Director Trainee",
       "description": "Job title for the assistant director trainee. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_co_director": {
       "default": "Co-Director",
       "description": "Job title for the co-director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_continuity": {
       "default": "Continuity",
       "description": "Job title for the continuity supervisor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_crowd_assistant_director": {
       "default": "Crowd Assistant Director",
       "description": "Job title for the crowd assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_director": {
       "default": "Director",
       "description": "Job title for the director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_field_director": {
       "default": "Field Director",
       "description": "Job title for the field director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_first_assistant_director": {
       "default": "First Assistant Director",
       "description": "Job title for the first assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_first_assistant_director_trainee_prep": {
       "default": "First Assistant Director (Prep)",
       "description": "Job title for the first assistant director trainee (prep). The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_first_assistant_director_trainee": {
       "default": "First Assistant Director Trainee",
       "description": "Job title for the first assistant director trainee. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_insert_unit_director": {
       "default": "Insert Unit Director",
       "description": "Job title for the insert unit director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_insert_unit_first_assistant_director": {
       "default": "Insert Unit First Assistant Director",
       "description": "Job title for the insert unit first assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_layout": {
       "default": "Layout",
       "description": "Job title for the layout artist. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_other": {
       "default": "Other",
       "description": "Job title that is used when no specific job is known. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_script_coordinator": {
       "default": "Script Coordinator",
       "description": "Job title for the script coordinator. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_script_supervisor": {
       "default": "Script Supervisor",
       "description": "Job title for the script supervisor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_second_assistant_director": {
       "default": "Second Assistant Director",
       "description": "Job title for the second assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_second_assistant_director_trainee": {
       "default": "Second Assistant Director Trainee",
       "description": "Job title for the second assistant director trainee. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_second_second_assistant_director": {
       "default": "Second Second Assistant Director",
       "description": "Job title for the second second assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_second_unit_director": {
       "default": "Second Unit Director",
       "description": "Job title for the second unit director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_second_unit_first_assistant_director": {
       "default": "Second Unit First Assistant Director",
       "description": "Job title for the second unit first assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_series_director": {
       "default": "Series Director",
       "description": "Job title for the series director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_series_guest_director": {
       "default": "Special Guest Director",
       "description": "Job title for the special guest director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_stage_director": {
       "default": "Stage Director",
       "description": "Job title for the stage director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_third_assistant_director": {
       "default": "Third Assistant Director",
       "description": "Job title for the third assistant director. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_adaptation": {
       "default": "Adaptation",
       "description": "Job title for the person who adapted an existing work of literature. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_author": {
       "default": "Author",
       "description": "Job title for the author. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_book": {
       "default": "Book",
       "description": "Job title for the person who wrote the book a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_characters": {
       "default": "Characters",
       "description": "Job title for the person who wrote the characters. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_co_writer": {
       "default": "Co-Writer",
       "description": "Job title for the co-writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_comic_book": {
       "default": "Comic Book",
       "description": "Job title for the person who wrote the comic book a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_creative_producer": {
       "default": "Creative Producer",
       "description": "Job title for the creative producer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_dialogue": {
       "default": "Dialogue",
       "description": "Job title for the dialogue writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_executive_story_editor": {
       "default": "Executive Story Editor",
       "description": "Job title for the executive story editor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_graphic_novel": {
       "default": "Graphic Novel",
       "description": "Job title for the who wrote the graphic novel a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_head_of_story": {
       "default": "Head of Story",
       "description": "Job title for the head of story. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_idea": {
       "default": "Idea",
       "description": "Job title for the person who's idea a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_junior_story_editor": {
       "default": "Junior Story Editor",
       "description": "Job title for the junior story editor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_lyricist": {
       "default": "Lyricist",
       "description": "Job title for the lyricist. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_musical": {
       "default": "Musical",
       "description": "Job title for the person who made the musical a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_novel": {
       "default": "Novel",
       "description": "Job title for the person who wrote the novel a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_opera": {
       "default": "Opera",
       "description": "Job title for the person who made the opera a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_original_concept": {
       "default": "Original Concept",
       "description": "Job title for the person who came up with the original concept. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_original_film_writer": {
       "default": "Original Film Writer",
       "description": "Job title for the original film writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_original_series_creator": {
       "default": "Original Series Creator",
       "description": "Job title for the original series creator. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_original_original_story": {
       "default": "Original Story",
       "description": "Job title for the person who's story a media item is originally based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_scenario_writer": {
       "default": "Scenario Writer",
       "description": "Job title for the scenario writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_screenplay": {
       "default": "Screenplay",
       "description": "Job title for the screenplay writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_screenstory": {
       "default": "Screenstory",
       "description": "Job title for the screenstory writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_script_consultant": {
       "default": "Script Consultant",
       "description": "Job title for the script consultant. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_script_editor": {
       "default": "Script Editor",
       "description": "Job title for the script editor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_senior_story_editor": {
       "default": "Senior Story Editor",
       "description": "Job title for the senior story editor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_series_composition": {
       "default": "Series Composition",
       "description": "Job title for the person responsible for the series composition. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_short_story": {
       "default": "Short Story",
       "description": "Job title for the person who's short story a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_staff_writer": {
       "default": "Staff Writer",
       "description": "Job title for the staff writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story": {
       "default": "Story",
       "description": "Job title for the person who wrote the story. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_artist": {
       "default": "Story Artist",
       "description": "Job title for the story artist. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_consultant": {
       "default": "Story Consultant",
       "description": "Job title for the story consultant. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_coordinator": {
       "default": "Story Coordinator",
       "description": "Job title for the story coordinator. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_developer": {
       "default": "Story Developer",
       "description": "Job title for the story developer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_editor": {
       "default": "Story Editor",
       "description": "Job title for the story editor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_manager": {
       "default": "Story Manager",
       "description": "Job title for the story manager. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_story_story_supervisor": {
       "default": "Story Supervisor",
       "description": "Job title for the story supervisor. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_storyboard": {
       "default": "Storyboard",
       "description": "Job title for the person who worked on the storyboard. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_teleplay": {
       "default": "Teleplay",
       "description": "Job title for the teleplay writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_texte": {
       "default": "Texte",
       "description": "Job title for the texte. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_theatre_play": {
       "default": "Theatre Play",
       "description": "Job title for the person who created theatre play a media item is based on. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_writer": {
       "default": "Writer",
       "description": "Job title for the writer. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_writers_assistant": {
       "default": "Writers' Assistant",
       "description": "Job title for the writers' assistant. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_writers_production": {
       "default": "Writers' Production",
       "description": "Job title for the writers' production. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "translated_value_job_creator": {
       "default": "Creator",
       "description": "Job title for the creator. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_remove_from_history": {
@@ -2259,9 +2148,7 @@
     "list_title_popular_lists": {
       "default": "Popular Lists",
       "description": "Title for lists containing popular lists of movies or shows. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_placeholder_popular_lists": {
       "default": "\"{title}\" does not appear on any popular lists.",
@@ -4461,9 +4348,7 @@
     "button_text_toggle_search_media": {
       "default": "Media",
       "description": "Text for the button that allows users to toggle the search mode to media.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_toggle_search_people": {
       "default": "Search for people",
@@ -4475,9 +4360,7 @@
     "button_text_toggle_search_people": {
       "default": "People",
       "description": "Text for the button that allows users to toggle the search mode to people.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "input_placeholder_search_people": {
       "default": "Search people...",
@@ -4498,8 +4381,7 @@
       "default": "Lists",
       "description": "Text for the button that allows users to toggle the search mode to lists.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "input_placeholder_search_lists": {
@@ -4554,8 +4436,7 @@
       "default": "Calendar",
       "description": "Header for the calendar section, where users can choose days/weeks to see what movies or episodes are available on their calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_previous_calendar_period": {
@@ -4578,8 +4459,7 @@
       "default": "Today",
       "description": "Text for the button that resets the calendar view to today.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_reset_calendar_period": {
@@ -4607,88 +4487,77 @@
       "default": "Nothing for you on this day. Take a day off, enjoy the weather.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_2": {
       "default": "No items found for this date. Maybe try another day?",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_3": {
       "default": "Looks like there's nothing scheduled for this day. Relax and take it easy.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_4": {
       "default": "Your calendar is empty on this day. Perfect time to catch up on some rest.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_5": {
       "default": "This day is wide open. Maybe start something new?",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_6": {
       "default": "No plans here. Time to do something spontaneous.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_7": {
       "default": "Nothing scheduled. Enjoy some free time.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_8": {
       "default": "Your schedule is clear. Make the most of it.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_9": {
       "default": "No events this day. Maybe revisit an old favorite.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_calendar_placeholder_10": {
       "default": "All clear. Time to explore something different.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "page_title_calendar": {
       "default": "Calendar",
       "description": "Title for the calendar page, where users can see what movies or episodes are available on their calendar.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_calendar": {
@@ -5073,7 +4942,6 @@
       "default": "Where to Watch",
       "description": "Title for the all available streaming services page where user can see where to watch movie/show.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5750,32 +5618,28 @@
       "default": "Stream",
       "description": "Text label indicating that the media can be streamed. If there is no short translation available, Anglicism is fine.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_rent": {
       "default": "Rent",
       "description": "Text label indicating that the media can be rented.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_buy": {
       "default": "Buy",
       "description": "Text label indicating that the media can be bought.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_on_demand": {
       "default": "On demand",
       "description": "Text label indicating that the media can be streamed on demand.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "list_title_where_to_watch": {
