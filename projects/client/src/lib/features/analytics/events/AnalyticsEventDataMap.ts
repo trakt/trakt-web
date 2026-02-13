@@ -33,6 +33,7 @@ type LinkType = SourceType & { target: string };
 type BannerDismissType = { id: string; value: string };
 type SortType = { sortBy: string; sortHow: string };
 type LikeType = { action: 'like' | 'unlike' };
+type VipUpsellType = SourceType;
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -81,4 +82,6 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.SeasonalFilter]: SeasonalFilterType;
 
   [AnalyticsEvent.BannerDismiss]: BannerDismissType;
+
+  [AnalyticsEvent.VipUpsell]: VipUpsellType;
 };

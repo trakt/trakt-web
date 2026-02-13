@@ -33,7 +33,7 @@
           {@render $state.seasonalActions?.()}
           <FilterButton isDisabled={!$state.hasFilters} />
         </RenderFor>
-        <RenderFor audience="free"><GetVIPLink /></RenderFor>
+        <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>
       </div>
     </nav>
 

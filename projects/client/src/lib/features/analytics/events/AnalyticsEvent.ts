@@ -61,4 +61,5 @@ export const AnalyticsEvent = {
   SeasonalFilter: buildEventKey(SEASONAL_ACTION_PREFIX, 'filter'),
 
   BannerDismiss: buildEventKey(BANNER_ACTION_PREFIX, 'dismiss'),
+  VipUpsell: buildEventKey(ACTION_PREFIX, 'vip-upsell'),
 } as const;

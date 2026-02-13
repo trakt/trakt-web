@@ -3,12 +3,23 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { AnalyticsEvent } from "../analytics/events/AnalyticsEvent";
+  import { useTrack } from "../analytics/useTrack";
 
-  const { children }: ChildrenProps = $props();
+  const { children, source }: { source: string } & ChildrenProps = $props();
+
+  const { track } = useTrack(AnalyticsEvent.VipUpsell);
+
+  // FIXME: merge with GetVIPLink when redesigning upsells
 </script>
 
 <trakt-upsell-link>
-  <Link href={UrlBuilder.vip()} label={m.link_label_get_vip()} color="inherit">
+  <Link
+    href={UrlBuilder.vip()}
+    label={m.link_label_get_vip()}
+    color="inherit"
+    onclick={() => track({ source })}
+  >
     <VipUpsellBadge />
     {@render children()}
   </Link>
