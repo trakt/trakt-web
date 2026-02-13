@@ -25,6 +25,7 @@
     metaInfo?: string;
     onOpened?: () => void;
     classList?: string;
+    variant?: "default" | "vip";
   } & ChildrenProps;
 
   const {
@@ -38,6 +39,7 @@
     metaInfo,
     onOpened,
     classList = "",
+    variant = "default",
   }: DrawerProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -74,6 +76,10 @@
     onOpened?.();
   }}
 >
+  {#if variant === "vip"}
+    <div class="trakt-drawer-vip-background"></div>
+  {/if}
+
   <RenderFor audience="all" device={["mobile"]}>
     <div
       class="trakt-drawer-drag-handle"
@@ -261,5 +267,16 @@
   .trakt-drawer-content {
     padding-left: var(--drawer-padding);
     padding-right: var(--drawer-padding);
+  }
+
+  .trakt-drawer-vip-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: var(--background-vip-drawer);
+    z-index: var(--layer-background);
   }
 </style>
