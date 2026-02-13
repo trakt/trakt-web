@@ -18,7 +18,7 @@ type MoviePopularParams =
   & FilterParams
   & SearchParams;
 
-export const moviePopularRequest = (
+const moviePopularRequest = (
   { fetch, limit, page, filter, filterOverride, search }: MoviePopularParams,
 ) => {
   const filterParams = filterOverride?.movie ?? filter;

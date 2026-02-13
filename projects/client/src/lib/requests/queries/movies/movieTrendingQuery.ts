@@ -35,7 +35,7 @@ export function mapToTrendingMovie({
   };
 }
 
-export const movieTrendingRequest = (
+const movieTrendingRequest = (
   { fetch, limit, page, filter, filterOverride, search }: MovieTrendingParams,
 ) => {
   const filterParams = filterOverride?.movie ?? filter;
