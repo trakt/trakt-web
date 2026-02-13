@@ -1701,6 +1701,15 @@
     "input_placeholder_search_people": {
       "default": "人を探す..."
     },
+    "button_label_toggle_search_lists": {
+      "default": "リストを検索"
+    },
+    "button_text_toggle_search_lists": {
+      "default": "リスト"
+    },
+    "input_placeholder_search_lists": {
+      "default": "リストを検索..."
+    },
     "link_text_forums": {
       "default": "フォーラム"
     },

@@ -1701,6 +1701,15 @@
     "input_placeholder_search_people": {
       "default": "Chercher des personnalités..."
     },
+    "button_label_toggle_search_lists": {
+      "default": "Chercher des listes"
+    },
+    "button_text_toggle_search_lists": {
+      "default": "Listes"
+    },
+    "input_placeholder_search_lists": {
+      "default": "Chercher des listes..."
+    },
     "link_text_forums": {
       "default": "Forums"
     },

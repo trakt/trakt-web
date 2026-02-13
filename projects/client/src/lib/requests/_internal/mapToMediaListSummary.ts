@@ -1,20 +1,16 @@
 import type { ListResponse } from '@trakt/api';
-import type { ListType } from '../models/ListType.ts';
+import { type ListType, ListTypeSchema } from '../models/ListType.ts';
 import type { MediaListSummary } from '../models/MediaListSummary.ts';
 import { mapToPoster } from './mapToPoster.ts';
 import { mapToUserProfile } from './mapToUserProfile.ts';
 
 function mapToType(type: string): ListType {
-  switch (type) {
-    case 'all':
-    case 'personal':
-    case 'official':
-    case 'watchlist':
-    case 'favorites':
-      return type;
-    default:
-      return 'personal';
+  const parsed = ListTypeSchema.safeParse(type);
+  if (parsed.success) {
+    return parsed.data;
   }
+
+  return 'personal';
 }
 
 export function mapToMediaListSummary(

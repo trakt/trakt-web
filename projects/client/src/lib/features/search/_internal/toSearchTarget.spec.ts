@@ -36,4 +36,9 @@ describe('toSearchTarget', () => {
     const result = toSearchTarget('show');
     expect(result.mode).toBe('show');
   });
+
+  it('should return "media" mode when mode is "lists"', () => {
+    const result = toSearchTarget('lists');
+    expect(result.mode).toBe('lists');
+  });
 });

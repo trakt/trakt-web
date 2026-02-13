@@ -7,6 +7,10 @@ import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { debounceTime, map, switchMap, tap } from 'rxjs/operators';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
 import {
+  type ListsSearchResult,
+  searchListsQuery,
+} from '../../requests/queries/search/searchListsQuery.ts';
+import {
   type MediaSearchResult,
   searchMediaQuery,
 } from '../../requests/queries/search/searchMediaQuery.ts';
@@ -25,7 +29,10 @@ import { useTrack } from '../analytics/useTrack.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
 import { postRecentSearch } from './_internal/postRecentSearch.ts';
 
-type SearchResponse = MediaSearchResult | PeopleSearchResult;
+type SearchResponse =
+  | MediaSearchResult
+  | PeopleSearchResult
+  | ListsSearchResult;
 
 function modeToQuery(
   query: string,
@@ -50,6 +57,10 @@ function modeToQuery(
     }
     case 'people':
       return searchPeopleQuery({ query, config, limit }) as CreateQueryOptions<
+        SearchResponse
+      >;
+    case 'lists':
+      return searchListsQuery({ query, limit }) as CreateQueryOptions<
         SearchResponse
       >;
     default:
@@ -97,7 +108,7 @@ export function useSearch() {
         modeToQuery(term, currentMode, config, false),
       );
 
-      if (currentMode === 'people') {
+      if (currentMode === 'people' || currentMode === 'lists') {
         return searchQuery;
       }
 

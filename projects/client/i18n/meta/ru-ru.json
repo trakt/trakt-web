@@ -2041,6 +2041,15 @@
     "input_placeholder_search_people": {
       "default": "Поиск людей..."
     },
+    "button_label_toggle_search_lists": {
+      "default": "Поиск по спискам"
+    },
+    "button_text_toggle_search_lists": {
+      "default": "Списки"
+    },
+    "input_placeholder_search_lists": {
+      "default": "Искать списки..."
+    },
     "link_text_forums": {
       "default": "Форумы"
     },

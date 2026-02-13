@@ -2,6 +2,7 @@
   import FollowersIcon from "$lib/components/icons/FollowersIcon.svelte";
   import FollowingIcon from "$lib/components/icons/FollowingIcon.svelte";
   import MediaIcon from "$lib/components/icons/MediaIcon.svelte";
+  import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import NoSpoilerIcon from "$lib/components/icons/NoSpoilerIcon.svelte";
   import PeopleIcon from "$lib/components/icons/PeopleIcon.svelte";
@@ -61,4 +62,8 @@
 
 {#if option.value === "no-spoilers"}
   <NoSpoilerIcon />
+{/if}
+
+{#if option.value === "lists"}
+  <ListIcon />
 {/if}

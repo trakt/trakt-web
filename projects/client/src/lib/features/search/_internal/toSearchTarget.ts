@@ -14,6 +14,8 @@ function mapToSearchMode(value: string | null): SearchMode | undefined {
       return 'movie';
     case 'show':
       return 'show';
+    case 'lists':
+      return 'lists';
     default:
       return undefined;
   }

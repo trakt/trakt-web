@@ -2,14 +2,13 @@
   import * as m from "$lib/features/i18n/messages";
 
   import { page } from "$app/state";
+  import type { SearchItem } from "$lib/features/search/models/SearchItem";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
   import SearchPlaceHolder from "$lib/features/search/SearchPlaceHolder.svelte";
   import SearchResultsGrid from "$lib/features/search/SearchResultsGrid.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
@@ -30,7 +29,7 @@
   });
 
   const src = $derived.by(() => {
-    if (!$results) {
+    if (!$results || $results.type === "lists") {
       return;
     }
 
@@ -49,7 +48,7 @@
   // FIXME: deal with ios onscreen keyboard and move to mobile navbar
   const isMobileApple = isMobileAppleDevice();
 
-  const onResultClick = (item: PersonSummary | MediaEntry) => {
+  const onResultClick = (item: SearchItem) => {
     if (!query) {
       return;
     }
@@ -100,7 +99,11 @@
 
   <div class="trakt-search-results-container">
     {#if $results}
-      <SearchResultsGrid items={$results.items} onclick={onResultClick} />
+      <SearchResultsGrid
+        items={$results.items}
+        type={$results.type}
+        onclick={onResultClick}
+      />
     {:else if !query}
       <SearchPlaceHolder />
     {/if}

@@ -1,12 +1,21 @@
-import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
-import type { PersonSummary } from '$lib/requests/models/PersonSummary.ts';
+import {
+  type ListType,
+  ListTypeSchema,
+} from '$lib/requests/models/ListType.ts';
 import { recentSearchRequest } from '$lib/requests/queries/search/recentSearchRequest.ts';
+import type { SearchItem } from '../models/SearchItem.ts';
 
-type SearchItem = PersonSummary | MediaEntry;
+function isListType(value: unknown): value is ListType {
+  return ListTypeSchema.safeParse(value).success;
+}
 
 function mapToSearchType(item: SearchItem) {
   if ('biography' in item) {
     return 'people' as const;
+  }
+
+  if (isListType(item.type)) {
+    return 'lists' as const;
   }
 
   switch (item.type) {

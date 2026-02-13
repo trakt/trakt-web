@@ -1701,6 +1701,15 @@
     "input_placeholder_search_people": {
       "default": "Пошук людей..."
     },
+    "button_label_toggle_search_lists": {
+      "default": "Шукати списки"
+    },
+    "button_text_toggle_search_lists": {
+      "default": "Списки"
+    },
+    "input_placeholder_search_lists": {
+      "default": "Шукати у списках..."
+    },
     "link_text_forums": {
       "default": "Форуми"
     },

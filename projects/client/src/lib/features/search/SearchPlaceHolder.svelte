@@ -12,13 +12,23 @@
     switch ($mode) {
       case "people":
         return m.list_title_birthdays_this_month();
+      case "lists":
+        return m.list_title_popular_lists();
       default:
         return m.list_title_most_popular_searches();
     }
   });
+
+  const type = $derived.by(() => {
+    if ($mode === "show" || $mode === "movie") {
+      return "media";
+    }
+
+    return $mode;
+  });
 </script>
 
-<SearchResultsGrid {title} items={$list}>
+<SearchResultsGrid {title} items={$list} {type}>
   {#snippet empty()}
     {#if isLoading}
       <LoadingIndicator />

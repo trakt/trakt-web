@@ -2040,6 +2040,15 @@
     "input_placeholder_search_people": {
       "default": "搜索人物..."
     },
+    "button_label_toggle_search_lists": {
+      "default": "搜索列表"
+    },
+    "button_text_toggle_search_lists": {
+      "default": "列表"
+    },
+    "input_placeholder_search_lists": {
+      "default": "搜索列表..."
+    },
     "link_text_forums": {
       "default": "论坛"
     },

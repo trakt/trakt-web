@@ -1701,6 +1701,15 @@
     "input_placeholder_search_people": {
       "default": "Zoek naar personen..."
     },
+    "button_label_toggle_search_lists": {
+      "default": "Zoeken naar lijsten"
+    },
+    "button_text_toggle_search_lists": {
+      "default": "Lijsten"
+    },
+    "input_placeholder_search_lists": {
+      "default": "Lijsten zoeken..."
+    },
     "link_text_forums": {
       "default": "Forums"
     },
