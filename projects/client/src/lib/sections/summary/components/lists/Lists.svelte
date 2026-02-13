@@ -43,11 +43,7 @@
     --height-list="var(--height-lists-list)"
   >
     {#snippet item(list)}
-      <ListSummaryItem
-        {list}
-        {type}
-        isOfficial={$officialLists.includes(list)}
-      />
+      <ListSummaryItem {list} {type} />
     {/snippet}
 
     {#snippet empty()}
