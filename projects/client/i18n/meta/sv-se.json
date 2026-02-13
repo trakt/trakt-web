@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Är du säker på att du vill ta bort den här visningen av \"{title}\" från din Sedda-lista?"
     },
+    "list_title_episodes": {
+      "default": "Avsnitt"
+    },
     "list_title_seasons": {
       "default": "Säsonger"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Hantera listor"
     },
+    "button_text_view_history": {
+      "default": "Visa historik"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "Lägg till eller ta bort \"{title}\" från listor"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Årtionde"
+    },
+    "header_ratings": {
+      "default": "Betyg"
     },
     "button_label_view_all_items_in": {
       "default": "Visa alla i \"{title}\""
@@ -1261,6 +1270,9 @@
       "default": "Månadens överblick"
     },
     "page_title_settings": {
+      "default": "Inställningar"
+    },
+    "button_text_settings": {
       "default": "Inställningar"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "Om mig"
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatisk spårning"
+    },
     "text_automatic_tracking": {
       "default": "Automatisk Spårning"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Radera konto"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Diagnostik och cache"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Dela autentiseringsloggar"
+    },
+    "button_text_view_cache_size": {
+      "default": "Visa cachestorlek"
+    },
+    "button_text_clear_cache": {
+      "default": "Rensa cache"
+    },
+    "text_analytics": {
+      "default": "Analys"
     },
     "header_calendar": {
       "default": "Kalender"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "I år"
     },
+    "filter_label_before_year": {
+      "default": "Före {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Senast uppdaterad"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Stoppa check-in"
+    },
+    "button_text_edit_comment": {
+      "default": "Redigera"
     },
     "button_text_delete_comment": {
       "default": "Radera recension"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Regi: <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Regisserad av {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Regi:"
     },
     "text_created_by": {
       "default": "Skapad av <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Skapad av {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Skapad av:"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Avbruten"
+    },
+    "tag_text_started": {
+      "default": "Påbörjad"
     },
     "header_height": {
       "default": "Längd"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Vill du sluta bli ombedd att betygsätta det du nyligen har sett?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Återställ betygsförfrågningar"
+    },
     "text_billing_month_for_free": {
       "default": "Testa 1 månad gratis och sedan:"
     },
@@ -2404,7 +2462,7 @@
       "default": "Uppgradera till VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Obegränsad spårning och mer."
+      "default": "Årssammanfattning med mera."
     },
     "button_label_like_list": {
       "default": "Gilla {name}"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Användarvillkor"
+    },
+    "button_text_block_comments": {
+      "default": "Blockera kommentarer från {user}"
+    },
+    "button_text_keyboard_done": {
+      "default": "Klar"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Avbryt ändringar?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Är du säker på att du vill avbryta detta? Alla osparade ändringar kommer att gå förlorade."
+    },
+    "button_text_discard": {
+      "default": "Avbryt"
     }
   }
 }

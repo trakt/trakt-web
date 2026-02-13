@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Er du sikker på, at du vil fjerne denne afspilning af \"{title}\" fra din set-liste?"
     },
+    "list_title_episodes": {
+      "default": "Afsnit"
+    },
     "list_title_seasons": {
       "default": "Sæsoner"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Administrer lister"
     },
+    "button_text_view_history": {
+      "default": "Se historik"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "Tilføj eller fjern \"{title}\" fra lister"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Årti"
+    },
+    "header_ratings": {
+      "default": "Bedømmelser"
     },
     "button_label_view_all_items_in": {
       "default": "Se alle i \"{title}\""
@@ -1261,6 +1270,9 @@
       "default": "Månedens overblik"
     },
     "page_title_settings": {
+      "default": "Indstillinger"
+    },
+    "button_text_settings": {
       "default": "Indstillinger"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "Om mig"
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatisk sporing"
+    },
     "text_automatic_tracking": {
       "default": "Automatisk Sporing"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Slet konto"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Diagnosticering og cache"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Del godkendelseslogfiler"
+    },
+    "button_text_view_cache_size": {
+      "default": "Se cache-størrelse"
+    },
+    "button_text_clear_cache": {
+      "default": "Ryd cache"
+    },
+    "text_analytics": {
+      "default": "Analyse"
     },
     "header_calendar": {
       "default": "Kalender"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "I år"
     },
+    "filter_label_before_year": {
+      "default": "Før {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Senest opdateret"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Stop check-in"
+    },
+    "button_text_edit_comment": {
+      "default": "Rediger"
     },
     "button_text_delete_comment": {
       "default": "Slet anmeldelse"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Instrueret af <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Instrueret af {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Instrueret af"
     },
     "text_created_by": {
       "default": "Skabt af <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Skabt af {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Skabt af"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Droppet"
+    },
+    "tag_text_started": {
+      "default": "Påbegyndt"
     },
     "header_height": {
       "default": "Højde"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Vil du stoppe med at blive spurgt om at bedømme det, du for nylig har set?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Gendan vurderingsanmodninger"
+    },
     "text_billing_month_for_free": {
       "default": "Prøv 1 måned gratis og derefter:"
     },
@@ -2404,7 +2462,7 @@
       "default": "Opgrader til VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Ubegrænset sporing og meget mere."
+      "default": "Året der gik & meget mere."
     },
     "button_label_like_list": {
       "default": "Synes godt om {name}"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Brugsvilkår"
+    },
+    "button_text_block_comments": {
+      "default": "Bloker kommentarer fra {user}"
+    },
+    "button_text_keyboard_done": {
+      "default": "Færdig"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Annuller ændringer?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Er du sikker på, at du vil annullere dette? Alle ikke-gemte ændringer vil gå tabt."
+    },
+    "button_text_discard": {
+      "default": "Annuller"
     }
   }
 }

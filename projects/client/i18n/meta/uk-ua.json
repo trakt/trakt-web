@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Ви впевнені, що хочете видалити це відтворення \"{title}\" зі списку Переглянуто?"
     },
+    "list_title_episodes": {
+      "default": "Епізоди"
+    },
     "list_title_seasons": {
       "default": "Сезони"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Керувати списками"
     },
+    "button_text_view_history": {
+      "default": "Переглянути історію"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "Додати або видалити \"{title}\" зі списків"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Десятиліття"
+    },
+    "header_ratings": {
+      "default": "Рейтинги"
     },
     "button_label_view_all_items_in": {
       "default": "Переглянути все у \"{title}\""
@@ -1261,6 +1270,9 @@
       "default": "Огляд місяця"
     },
     "page_title_settings": {
+      "default": "Налаштування"
+    },
+    "button_text_settings": {
       "default": "Налаштування"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "Про мене"
     },
+    "page_title_automatic_tracking": {
+      "default": "Автоматичне відстеження"
+    },
     "text_automatic_tracking": {
       "default": "Автоматичне Відстеження"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Видалити акаунт"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Діагностика та кеш"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Поділитися журналами автентифікації"
+    },
+    "button_text_view_cache_size": {
+      "default": "Переглянути розмір кешу"
+    },
+    "button_text_clear_cache": {
+      "default": "Очистити кеш"
+    },
+    "text_analytics": {
+      "default": "Аналітика"
     },
     "header_calendar": {
       "default": "Календар"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "Цього року"
     },
+    "filter_label_before_year": {
+      "default": "До {year} року"
+    },
     "text_sort_recently_updated": {
       "default": "Нещодавно оновлено"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Зупинити відмітку перегляду"
+    },
+    "button_text_edit_comment": {
+      "default": "Редагувати"
     },
     "button_text_delete_comment": {
       "default": "Видалити відгук"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Режисер: <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Режисер: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Режисер:"
     },
     "text_created_by": {
       "default": "Створено <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Створено {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Створено:"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Кинуто"
+    },
+    "tag_text_started": {
+      "default": "Розпочато"
     },
     "header_height": {
       "default": "Зріст"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Чи бажаєте ви припинити запитання щодо оцінки того, що ви нещодавно переглянули?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Відновити запити оцінювання"
+    },
     "text_billing_month_for_free": {
       "default": "Спробуйте 1 місяць безкоштовно, а потім:"
     },
@@ -2404,7 +2462,7 @@
       "default": "Оновити до VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Необмежене відстеження та більше."
+      "default": "Підсумки року та багато іншого."
     },
     "button_label_like_list": {
       "default": "Сподобалось {name}"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Умови використання"
+    },
+    "button_text_block_comments": {
+      "default": "Заблокувати коментарі від {user}"
+    },
+    "button_text_keyboard_done": {
+      "default": "Готово"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Відкинути зміни?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Ви впевнені, що хочете відкинути це? Усі незбережені зміни буде втрачено."
+    },
+    "button_text_discard": {
+      "default": "Відкинути"
     }
   }
 }

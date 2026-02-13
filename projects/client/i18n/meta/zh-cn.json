@@ -674,6 +674,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "确定要从已看列表中移除“{title}”的这条播放记录吗？"
     },
+    "list_title_episodes": {
+      "default": "剧集"
+    },
     "list_title_seasons": {
       "default": "季"
     },
@@ -1121,6 +1124,9 @@
     "button_text_manage_lists": {
       "default": "管理列表"
     },
+    "button_text_view_history": {
+      "default": "查看历史"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "添加或移除“{title}”于片单"
     },
@@ -1189,6 +1195,9 @@
     },
     "header_decade": {
       "default": "年代"
+    },
+    "header_ratings": {
+      "default": "评分"
     },
     "button_label_view_all_items_in": {
       "default": "查看“{title}”中的所有项目"
@@ -1260,6 +1269,9 @@
       "default": "月度回顾"
     },
     "page_title_settings": {
+      "default": "设置"
+    },
+    "button_text_settings": {
       "default": "设置"
     },
     "button_label_settings": {
@@ -1490,6 +1502,9 @@
     "text_about": {
       "default": "关于我"
     },
+    "page_title_automatic_tracking": {
+      "default": "自动追踪"
+    },
     "text_automatic_tracking": {
       "default": "自动记录"
     },
@@ -1645,6 +1660,21 @@
     },
     "button_text_delete_account": {
       "default": "删除账户"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "诊断与缓存"
+    },
+    "button_text_share_auth_logs": {
+      "default": "分享身份验证日志"
+    },
+    "button_text_view_cache_size": {
+      "default": "查看缓存大小"
+    },
+    "button_text_clear_cache": {
+      "default": "清除缓存"
+    },
+    "text_analytics": {
+      "default": "分析"
     },
     "header_calendar": {
       "default": "日历"
@@ -1997,6 +2027,9 @@
     "filter_label_this_year": {
       "default": "今年"
     },
+    "filter_label_before_year": {
+      "default": "{year}年之前"
+    },
     "text_sort_recently_updated": {
       "default": "最近更新"
     },
@@ -2038,6 +2071,9 @@
     },
     "button_text_stop_check_in": {
       "default": "停止签到"
+    },
+    "button_text_edit_comment": {
+      "default": "编辑"
     },
     "button_text_delete_comment": {
       "default": "删除评论"
@@ -2174,11 +2210,27 @@
     "text_directed_by": {
       "default": "导演：<a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "导演：{name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "导演"
     },
     "text_created_by": {
       "default": "主创：<a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "由 {name} 创作",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "主创"
@@ -2188,6 +2240,9 @@
     },
     "tag_text_dropped": {
       "default": "已弃"
+    },
+    "tag_text_started": {
+      "default": "已开始"
     },
     "header_height": {
       "default": "身高"
@@ -2372,6 +2427,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "你要停止被询问最近观看内容的评分吗？"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "恢复评分提示"
+    },
     "text_billing_month_for_free": {
       "default": "免费试用 1 个月，之后："
     },
@@ -2403,7 +2461,7 @@
       "default": "升级到 VIP！"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "无限记录以及更多功能。"
+      "default": "年度回顾及更多专属特权。"
     },
     "button_label_like_list": {
       "default": "点赞 {name}"
@@ -2442,7 +2500,7 @@
       "default": "导出完成。"
     },
     "button_text_track": {
-      "default": "记录"
+      "default": "Track"
     },
     "filter_label_runtime": {
       "default": "{range} 分钟"
@@ -3004,6 +3062,21 @@
     },
     "link_text_terms_of_use": {
       "default": "使用条款"
+    },
+    "button_text_block_comments": {
+      "default": "屏蔽来自 {user} 的评论"
+    },
+    "button_text_keyboard_done": {
+      "default": "完成"
+    },
+    "dialog_title_discard_changes": {
+      "default": "要放弃更改吗？"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "确定要放弃这些更改吗？未保存的更改将会丢失。"
+    },
+    "button_text_discard": {
+      "default": "丢弃"
     }
   }
 }

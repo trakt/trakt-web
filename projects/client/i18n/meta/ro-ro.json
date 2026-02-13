@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Sigur vrei să ștergi această vizionare a \"{title}\" din lista ta de vizionate?"
     },
+    "list_title_episodes": {
+      "default": "Episoade"
+    },
     "list_title_seasons": {
       "default": "Sezoane"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Gestionează listele"
     },
+    "button_text_view_history": {
+      "default": "Vezi istoricul"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "Adaugă sau elimină \"{title}\" din liste"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Deceniu"
+    },
+    "header_ratings": {
+      "default": "Evaluări"
     },
     "button_label_view_all_items_in": {
       "default": "Vezi toate în \"{title}\""
@@ -1261,6 +1270,9 @@
       "default": "Luna în revistă"
     },
     "page_title_settings": {
+      "default": "Setări"
+    },
+    "button_text_settings": {
       "default": "Setări"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "Despre mine"
     },
+    "page_title_automatic_tracking": {
+      "default": "Monitorizare automată"
+    },
     "text_automatic_tracking": {
       "default": "Urmărire Automată"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Șterge contul"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Diagnostic și cache"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Partajează jurnalele de autentificare"
+    },
+    "button_text_view_cache_size": {
+      "default": "Vezi dimensiunea cache-ului"
+    },
+    "button_text_clear_cache": {
+      "default": "Șterge cache-ul"
+    },
+    "text_analytics": {
+      "default": "Analize"
     },
     "header_calendar": {
       "default": "Calendar"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "Anul acesta"
     },
+    "filter_label_before_year": {
+      "default": "Înainte de {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Actualizat recent"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Oprește check-in-ul"
+    },
+    "button_text_edit_comment": {
+      "default": "Editează"
     },
     "button_text_delete_comment": {
       "default": "Șterge Recenzia"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Regizat de <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Regizat de {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Regizat de"
     },
     "text_created_by": {
       "default": "Creat de <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Creat de {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Creat de"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Abandonat"
+    },
+    "tag_text_started": {
+      "default": "Început"
     },
     "header_height": {
       "default": "Înălțime"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Dorești să nu mai fii întrebat să evaluezi ce ai urmărit recent?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Restabilește solicitările de evaluare"
+    },
     "text_billing_month_for_free": {
       "default": "Încearcă 1 lună gratuit și apoi:"
     },
@@ -2404,7 +2462,7 @@
       "default": "Fă upgrade la VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Urmărire nelimitată și multe altele."
+      "default": "Retrospectiva anului și multe altele."
     },
     "button_label_like_list": {
       "default": "Apreciază {name}"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Termeni de utilizare"
+    },
+    "button_text_block_comments": {
+      "default": "Blochează comentariile de la {user}"
+    },
+    "button_text_keyboard_done": {
+      "default": "Gata"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Renunți la modificări?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Ești sigur că vrei să renunți la asta? Orice modificare nesalvată se va pierde."
+    },
+    "button_text_discard": {
+      "default": "Renunță"
     }
   }
 }

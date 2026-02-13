@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Вы уверены, что хотите удалить этот просмотр «{title}»?"
     },
+    "list_title_episodes": {
+      "default": "Эпизоды"
+    },
     "list_title_seasons": {
       "default": "Сезоны"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Управлять списками"
     },
+    "button_text_view_history": {
+      "default": "Посмотреть историю"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "Добавить или удалить «{title}» из списков"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Десятилетие"
+    },
+    "header_ratings": {
+      "default": "Рейтинги"
     },
     "button_label_view_all_items_in": {
       "default": "Посмотреть всё в «{title}»"
@@ -1261,6 +1270,9 @@
       "default": "Итоги месяца"
     },
     "page_title_settings": {
+      "default": "Настройки"
+    },
+    "button_text_settings": {
       "default": "Настройки"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "О себе"
     },
+    "page_title_automatic_tracking": {
+      "default": "Автоматическое отслеживание"
+    },
     "text_automatic_tracking": {
       "default": "Авто-трекинг"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Удалить аккаунт"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Диагностика и кэш"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Поделиться журналами аутентификации"
+    },
+    "button_text_view_cache_size": {
+      "default": "Размер кэша"
+    },
+    "button_text_clear_cache": {
+      "default": "Очистить кэш"
+    },
+    "text_analytics": {
+      "default": "Аналитика"
     },
     "header_calendar": {
       "default": "Календарь"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "В этом году"
     },
+    "filter_label_before_year": {
+      "default": "До {year} года"
+    },
     "text_sort_recently_updated": {
       "default": "Обновлено недавно"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Остановить отметку"
+    },
+    "button_text_edit_comment": {
+      "default": "Изменить"
     },
     "button_text_delete_comment": {
       "default": "Удалить отзыв"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Режиссер: <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Режиссёр: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Режиссер"
     },
     "text_created_by": {
       "default": "Создатель: <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Создатель: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Создатель"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Брошено"
+    },
+    "tag_text_started": {
+      "default": "Начато"
     },
     "header_height": {
       "default": "Рост"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Перестать предлагать оценку после просмотра?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Восстановить запросы оценки"
+    },
     "text_billing_month_for_free": {
       "default": "1 месяц бесплатно, затем:"
     },
@@ -2404,7 +2462,7 @@
       "default": "Стань VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Безлимитный трекинг и многое другое."
+      "default": "Итоги года и многое другое."
     },
     "button_label_like_list": {
       "default": "Лайк списку {name}"
@@ -2443,7 +2501,7 @@
       "default": "Готово."
     },
     "button_text_track": {
-      "default": "Отследить"
+      "default": "Track"
     },
     "filter_label_runtime": {
       "default": "{range} мин."
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Условия использования"
+    },
+    "button_text_block_comments": {
+      "default": "Заблокировать комментарии от {user}"
+    },
+    "button_text_keyboard_done": {
+      "default": "Готово"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Отменить изменения?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Вы уверены, что хотите отменить это? Все несохраненные изменения будут потеряны."
+    },
+    "button_text_discard": {
+      "default": "Отменить"
     }
   }
 }

@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Na pewno chcesz usunąć to odtworzenie \"{title}\" z listy Obejrzanych?"
     },
+    "list_title_episodes": {
+      "default": "Odcinki"
+    },
     "list_title_seasons": {
       "default": "Sezony"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Zarządzaj listami"
     },
+    "button_text_view_history": {
+      "default": "Zobacz historię"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "Dodaj lub usuń \"{title}\" z list"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Dekada"
+    },
+    "header_ratings": {
+      "default": "Oceny"
     },
     "button_label_view_all_items_in": {
       "default": "Zobacz wszystko w \"{title}\""
@@ -1261,6 +1270,9 @@
       "default": "Przegląd miesiąca"
     },
     "page_title_settings": {
+      "default": "Ustawienia"
+    },
+    "button_text_settings": {
       "default": "Ustawienia"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "O mnie"
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatyczne śledzenie"
+    },
     "text_automatic_tracking": {
       "default": "Automatyczne Śledzenie"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Usuń konto"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Diagnostyka i pamięć podręczna"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Udostępnij logi uwierzytelniania"
+    },
+    "button_text_view_cache_size": {
+      "default": "Zobacz rozmiar pamięci podręcznej"
+    },
+    "button_text_clear_cache": {
+      "default": "Wyczyść pamięć podręczną"
+    },
+    "text_analytics": {
+      "default": "Analityka"
     },
     "header_calendar": {
       "default": "Kalendarz"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "W tym roku"
     },
+    "filter_label_before_year": {
+      "default": "Przed {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Ostatnio zaktualizowane"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Zatrzymaj meldowanie"
+    },
+    "button_text_edit_comment": {
+      "default": "Edytuj"
     },
     "button_text_delete_comment": {
       "default": "Usuń recenzję"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Reżyseria: <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Reżyseria: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Reżyseria:"
     },
     "text_created_by": {
       "default": "Stworzone przez <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Twórca: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Twórca:"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Porzucone"
+    },
+    "tag_text_started": {
+      "default": "Rozpoczęte"
     },
     "header_height": {
       "default": "Wzrost"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Czy chcesz przestać być proszonym o ocenę tego, co ostatnio oglądałeś?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Przywróć prośby o ocenę"
+    },
     "text_billing_month_for_free": {
       "default": "Wypróbuj 1 miesiąc za darmo, a potem:"
     },
@@ -2404,7 +2462,7 @@
       "default": "Uaktualnij do VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Nieograniczone śledzenie i więcej."
+      "default": "Podsumowanie roku i wiele więcej."
     },
     "button_label_like_list": {
       "default": "Lubię {name}"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Regulamin"
+    },
+    "button_text_block_comments": {
+      "default": "Zablokuj komentarze od {user}"
+    },
+    "button_text_keyboard_done": {
+      "default": "Gotowe"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Odrzucić zmiany?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Czy na pewno chcesz to odrzucić? Wszelkie niezapisane zmiany zostaną utracone."
+    },
+    "button_text_discard": {
+      "default": "Odrzuć"
     }
   }
 }

@@ -675,6 +675,9 @@
     "warning_prompt_remove_single_watched": {
       "default": "Er du sikker på at du vil fjerne denne visningen av \"{title}\" fra din Sett-liste?"
     },
+    "list_title_episodes": {
+      "default": "Episoder"
+    },
     "list_title_seasons": {
       "default": "Sesonger"
     },
@@ -1122,6 +1125,9 @@
     "button_text_manage_lists": {
       "default": "Administrer lister"
     },
+    "button_text_view_history": {
+      "default": "Se historikk"
+    },
     "dropdown_label_add_remove_from_lists": {
       "default": "Legg til eller fjern \"{title}\" fra lister"
     },
@@ -1190,6 +1196,9 @@
     },
     "header_decade": {
       "default": "Tiår"
+    },
+    "header_ratings": {
+      "default": "Vurderinger"
     },
     "button_label_view_all_items_in": {
       "default": "Vis alle i \"{title}\""
@@ -1261,6 +1270,9 @@
       "default": "Månedens oversikt"
     },
     "page_title_settings": {
+      "default": "Innstillinger"
+    },
+    "button_text_settings": {
       "default": "Innstillinger"
     },
     "button_label_settings": {
@@ -1491,6 +1503,9 @@
     "text_about": {
       "default": "Om meg"
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatisk sporing"
+    },
     "text_automatic_tracking": {
       "default": "Automatisk Sporing"
     },
@@ -1646,6 +1661,21 @@
     },
     "button_text_delete_account": {
       "default": "Slett konto"
+    },
+    "button_text_diagnostics_and_cache": {
+      "default": "Diagnostikk og hurtigbuffer"
+    },
+    "button_text_share_auth_logs": {
+      "default": "Del autentiseringslogger"
+    },
+    "button_text_view_cache_size": {
+      "default": "Se størrelse på hurtigbuffer"
+    },
+    "button_text_clear_cache": {
+      "default": "Tøm hurtigbuffer"
+    },
+    "text_analytics": {
+      "default": "Analyse"
     },
     "header_calendar": {
       "default": "Kalender"
@@ -1998,6 +2028,9 @@
     "filter_label_this_year": {
       "default": "I år"
     },
+    "filter_label_before_year": {
+      "default": "Før {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Nylig oppdatert"
     },
@@ -2039,6 +2072,9 @@
     },
     "button_text_stop_check_in": {
       "default": "Stopp sjekk inn"
+    },
+    "button_text_edit_comment": {
+      "default": "Rediger"
     },
     "button_text_delete_comment": {
       "default": "Slett anmeldelse"
@@ -2175,11 +2211,27 @@
     "text_directed_by": {
       "default": "Regi: <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Regissert av {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Regi:"
     },
     "text_created_by": {
       "default": "Laget av <a>{name}</a>"
+    },
+    "text_created_by_plain": {
+      "default": "Skapt av {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "text_created_by_short": {
       "default": "Skapt av:"
@@ -2189,6 +2241,9 @@
     },
     "tag_text_dropped": {
       "default": "Droppet"
+    },
+    "tag_text_started": {
+      "default": "Påbegynt"
     },
     "header_height": {
       "default": "Høyde"
@@ -2373,6 +2428,9 @@
     "warning_prompt_suppress_ratings_toast": {
       "default": "Vil du slutte å bli spurt om å vurdere det du nylig har sett?"
     },
+    "button_text_restore_rating_prompts": {
+      "default": "Gjenopprett vurderingsmeldinger"
+    },
     "text_billing_month_for_free": {
       "default": "Prøv 1 måned gratis og deretter:"
     },
@@ -2404,7 +2462,7 @@
       "default": "Oppgrader til VIP!"
     },
     "text_vip_upsell_default_description_2": {
-      "default": "Ubegrenset sporing og mer."
+      "default": "Årsoppsummering og mer."
     },
     "button_label_like_list": {
       "default": "Liker {name}"
@@ -3005,6 +3063,21 @@
     },
     "link_text_terms_of_use": {
       "default": "Brukervilkår"
+    },
+    "button_text_block_comments": {
+      "default": "Blokker kommentarer fra {user}"
+    },
+    "button_text_keyboard_done": {
+      "default": "Ferdig"
+    },
+    "dialog_title_discard_changes": {
+      "default": "Forkast endringer?"
+    },
+    "warning_prompt_discard_changes": {
+      "default": "Er du sikker på at du vil forkaste dette? Alle ulagrede endringer vil gå tapt."
+    },
+    "button_text_discard": {
+      "default": "Forkast"
     }
   }
 }
