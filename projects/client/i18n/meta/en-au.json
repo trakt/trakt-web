@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Add to list"
+    },
+    "header_sentiment_highlight": {
+      "default": "Highlight"
+    },
+    "header_sentiment_aspects": {
+      "default": "Pros & Cons"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Dive deeper."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Upgrade to VIP to unlock more insights."
+    },
+    "text_sentiment_example": {
+      "default": "Example from \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

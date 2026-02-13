@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Zur Liste hinzufügen"
+    },
+    "header_sentiment_highlight": {
+      "default": "Highlight"
+    },
+    "header_sentiment_aspects": {
+      "default": "Pro & Contra"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Gehen Sie tiefer."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Upgrade auf VIP, um Einblicke freizuschalten, die jedes Kinoherz höher schlagen lassen."
+    },
+    "text_sentiment_example": {
+      "default": "Beispiel aus „{title}“",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

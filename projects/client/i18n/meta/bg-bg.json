@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Добави в списък"
+    },
+    "header_sentiment_highlight": {
+      "default": "Акцент"
+    },
+    "header_sentiment_aspects": {
+      "default": "Плюсове и минуси"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Потопете се."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Надградете до VIP, за да отключите детайли, които ще променят начина, по който гледате."
+    },
+    "text_sentiment_example": {
+      "default": "Пример от „{title}“",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

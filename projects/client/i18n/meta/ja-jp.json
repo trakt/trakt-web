@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "リストに追加"
+    },
+    "header_sentiment_highlight": {
+      "default": "ハイライト"
+    },
+    "header_sentiment_aspects": {
+      "default": "メリットとデメリット"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "さらに詳しく。"
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "VIPにアップグレードして、オタク魂を震わせる詳細なインサイトをアンロックしましょう。"
+    },
+    "text_sentiment_example": {
+      "default": "「{title}」からの例",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

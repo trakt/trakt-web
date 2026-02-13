@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Añadir a la lista"
+    },
+    "header_sentiment_highlight": {
+      "default": "Lo más destacado"
+    },
+    "header_sentiment_aspects": {
+      "default": "Pros y contras"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Profundiza más."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Pásate a VIP para desbloquear información digna de la alfombra roja."
+    },
+    "text_sentiment_example": {
+      "default": "Ejemplo de «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

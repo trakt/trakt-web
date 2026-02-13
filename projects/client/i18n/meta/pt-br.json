@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Adicionar à lista"
+    },
+    "header_sentiment_highlight": {
+      "default": "Destaque"
+    },
+    "header_sentiment_aspects": {
+      "default": "Prós e Contras"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Mergulhe fundo."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Vire VIP para liberar mais detalhes e debater como um verdadeiro cinéfilo."
+    },
+    "text_sentiment_example": {
+      "default": "Exemplo de \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -17,6 +17,10 @@
 
   --color-input-background: color-mix(in srgb, var(--shade-20) 25%, transparent);
 
+  --background-vip-drawer: radial-gradient(ellipse 80% 86% at 7.82% 100%,
+      var(--red-50) 0%,
+      var(--shade-70) 100%);
+
   /**
    * Navbar
    */
@@ -153,6 +157,16 @@
    */
   --color-drawer-background: color-mix(in srgb, var(--shade-70) 94%, transparent);
   --color-dialog-background: var(--color-drawer-background);
+
+  /*
+   * Sentiment
+   */
+  --color-sentiment-good: var(--purple-700);
+  --color-sentiment-bad: var(--red-800);
+  --color-sentiment-highlight-border: color-mix(in srgb, var(--shade-800) 10%, transparent);
+  --background-sentiment-highlight: linear-gradient(135deg,
+    color-mix(in srgb, var(--shade-800) 5%, transparent) 0%,
+    color-mix(in srgb, var(--shade-800) 2.5%, transparent) 100%);
 }
 
 // Define theme variables for dark mode
@@ -168,6 +182,10 @@
   --color-text-emphasis: var(--purple-300);
 
   --color-input-background: color-mix(in srgb, var(--shade-800) 25%, transparent);
+
+  --background-vip-drawer: radial-gradient(ellipse 80% 86% at 7.82% 100%,
+      var(--red-950) 0%,
+      var(--shade-920) 100%);
 
   /**
    * Navbar
@@ -306,6 +324,16 @@
    */
   --color-drawer-background: color-mix(in srgb, var(--shade-920) 94%, transparent);
   --color-dialog-background: var(--color-drawer-background);
+
+  /*
+   * Sentiment
+   */
+  --color-sentiment-good: var(--purple-200);
+  --color-sentiment-bad: var(--red-100);
+  --color-sentiment-highlight-border: color-mix(in srgb, var(--shade-10) 10%, transparent);
+  --background-sentiment-highlight: linear-gradient(135deg,
+      color-mix(in srgb, var(--shade-10) 5%, transparent) 0%,
+      color-mix(in srgb, var(--shade-10) 2.5%, transparent) 100%);
 }
 
 // Apply themes to selectors

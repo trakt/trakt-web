@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Legg til i liste"
+    },
+    "header_sentiment_highlight": {
+      "default": "Høydepunkt"
+    },
+    "header_sentiment_aspects": {
+      "default": "Fordeler og ulemper"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Gå dypere."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Oppgrader til VIP for mer innsikt – perfekt for en skikkelig hygge-kveld."
+    },
+    "text_sentiment_example": {
+      "default": "Eksempel fra «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

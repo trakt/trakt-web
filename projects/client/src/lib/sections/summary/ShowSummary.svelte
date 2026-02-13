@@ -5,7 +5,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
-  import type { Sentiments } from "$lib/requests/models/Sentiments";
+  import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import CastList from "../lists/CastList.svelte";
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
@@ -18,9 +18,10 @@
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
-  import CommunitySentiments from "./components/sentiment/CommunitySentiments.svelte";
+  import Sentiment from "./components/sentiment/Sentiment.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
+  import SummaryDrawer from "./SummaryDrawer.svelte";
 
   type ShowSummaryProps = {
     media: ShowEntry;
@@ -28,7 +29,7 @@
     seasons: Season[];
     videos: MediaVideo[];
     currentSeason: number;
-    sentiments: Sentiments | Nil;
+    sentiment: SentimentAnalysis | Nil;
   } & CommonMediaSummaryProps;
 
   const {
@@ -40,9 +41,11 @@
     streamOn,
     videos,
     currentSeason,
-    sentiments,
+    sentiment,
   }: ShowSummaryProps = $props();
 </script>
+
+<SummaryDrawer {sentiment} />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <MediaSummaryV2 {media} {studios} {intl} {crew} type="show" />
@@ -53,7 +56,7 @@
     {#snippet contextualContent()}
       <RenderFor audience="all" device={["desktop"]}>
         <WhereToWatchList type="show" {media} {streamOn} variant="inline" />
-        <CommunitySentiments {sentiments} slug={media.slug} variant="inline" />
+        <Sentiment {sentiment} slug={media.slug} variant="inline" />
       </RenderFor>
     {/snippet}
   </MediaSummary>
@@ -61,7 +64,7 @@
 
 <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="show" {media} {streamOn} />
-  <CommunitySentiments {sentiments} slug={media.slug} />
+  <Sentiment {sentiment} slug={media.slug} />
 </RenderFor>
 
 <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />

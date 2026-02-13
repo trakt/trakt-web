@@ -1,9 +1,10 @@
+import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showPeopleQuery } from '$lib/requests/queries/shows/showPeopleQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
-import { showSentimentsQuery } from '$lib/requests/queries/shows/showSentimentsQuery.ts';
+import { showSentimentQuery } from '$lib/requests/queries/shows/showSentimentQuery.ts';
 import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
 import { streamShowQuery } from '$lib/requests/queries/shows/streamShowQuery.ts';
@@ -12,7 +13,7 @@ import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts'
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { combineLatest, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 
 export function useShow(slug: string | undefined) {
   if (!slug) {
@@ -25,10 +26,11 @@ export function useShow(slug: string | undefined) {
       videos: of([]),
       intl: of(undefined),
       streamOn: of(undefined),
-      sentiments: of(undefined),
+      sentiment: of(undefined),
     };
   }
 
+  const { isAuthorized } = useAuth();
   const { country, favorites } = useStreamingPreferences();
 
   const show = useQuery(showSummaryQuery({ slug }));
@@ -42,7 +44,13 @@ export function useShow(slug: string | undefined) {
     ),
   );
 
-  const sentiments = useQuery(showSentimentsQuery({ slug }));
+  const sentiment = isAuthorized.pipe(
+    switchMap((authorized) => {
+      if (!authorized) return of(undefined);
+      return useQuery(showSentimentQuery({ slug }));
+    }),
+    shareReplay(1),
+  );
 
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
@@ -58,11 +66,16 @@ export function useShow(slug: string | undefined) {
     studios,
     crew,
     seasons,
-    sentiments,
   ];
 
-  const isLoading = combineLatest(queries).pipe(
+  const isQueriesLoading = combineLatest(queries).pipe(
     map(($queries) => $queries.some(toLoadingState)),
+  );
+  const isSentimentLoading = sentiment.pipe(
+    map((query) => query ? toLoadingState(query) : false),
+  );
+  const isLoading = combineLatest([isQueriesLoading, isSentimentLoading]).pipe(
+    map((states) => states.some(Boolean)),
   );
 
   return {
@@ -71,7 +84,7 @@ export function useShow(slug: string | undefined) {
     studios: studios.pipe(map(($studios) => $studios.data)),
     crew: crew.pipe(map(($crew) => $crew.data)),
     seasons: seasons.pipe(map(($seasons) => $seasons.data)),
-    sentiments: sentiments.pipe(map(($sentiments) => $sentiments.data)),
+    sentiment: sentiment.pipe(map(($sentiment) => $sentiment?.data)),
     intl: combineLatest([intl, show]).pipe(
       map(([$intl, $show]) =>
         findRegionalIntl({

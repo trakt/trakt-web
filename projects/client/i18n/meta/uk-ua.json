@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Додати до списку"
+    },
+    "header_sentiment_highlight": {
+      "default": "Основне"
+    },
+    "header_sentiment_aspects": {
+      "default": "Плюси та мінуси"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Зануртесь глибше."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Оновіть до VIP, щоб відчути справжню магію кіно та отримати більше аналітики."
+    },
+    "text_sentiment_example": {
+      "default": "Приклад із «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

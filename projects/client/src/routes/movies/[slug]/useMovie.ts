@@ -1,8 +1,9 @@
+import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
 import { moviePeopleQuery } from '$lib/requests/queries/movies/moviePeopleQuery.ts';
-import { movieSentimentsQuery } from '$lib/requests/queries/movies/movieSentimentsQuery.ts';
+import { movieSentimentQuery } from '$lib/requests/queries/movies/movieSentimentQuery.ts';
 import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuery.ts';
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
 import { movieVideosQuery } from '$lib/requests/queries/movies/movieVideosQuery.ts';
@@ -12,7 +13,7 @@ import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts'
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { combineLatest, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 
 /*
   FIXME: Fix the root cause.
@@ -31,10 +32,11 @@ export function useMovie(slug: string | undefined) {
       videos: of([]),
       intl: of(undefined),
       streamOn: of(undefined),
-      sentiments: of(undefined),
+      sentiment: of(undefined),
     };
   }
 
+  const { isAuthorized } = useAuth();
   const { country, favorites } = useStreamingPreferences();
 
   const movie = useQuery(movieSummaryQuery({
@@ -43,7 +45,14 @@ export function useMovie(slug: string | undefined) {
 
   const studios = useQuery(movieStudiosQuery({ slug }));
   const crew = useQuery(moviePeopleQuery({ slug }));
-  const sentiments = useQuery(movieSentimentsQuery({ slug }));
+
+  const sentiment = isAuthorized.pipe(
+    switchMap((authorized) => {
+      if (!authorized) return of(undefined);
+      return useQuery(movieSentimentQuery({ slug }));
+    }),
+    shareReplay(1),
+  );
 
   const videos = useQuery(movieVideosQuery({
     slug,
@@ -69,11 +78,16 @@ export function useMovie(slug: string | undefined) {
     crew,
     intl,
     videos,
-    sentiments,
   ];
 
-  const isLoading = combineLatest(queries).pipe(
+  const isQueriesLoading = combineLatest(queries).pipe(
     map(($queries) => $queries.some(toLoadingState)),
+  );
+  const isSentimentLoading = sentiment.pipe(
+    map((query) => query ? toLoadingState(query) : false),
+  );
+  const isLoading = combineLatest([isQueriesLoading, isSentimentLoading]).pipe(
+    map((states) => states.some(Boolean)),
   );
 
   return {
@@ -82,7 +96,7 @@ export function useMovie(slug: string | undefined) {
     studios: studios.pipe(map(($studios) => $studios.data)),
     crew: crew.pipe(map(($crew) => $crew.data)),
     videos: videos.pipe(map(($videos) => $videos.data ?? [])),
-    sentiments: sentiments.pipe(map(($sentiments) => $sentiments.data)),
+    sentiment: sentiment.pipe(map(($sentiment) => $sentiment?.data)),
     intl: combineLatest([intl, movie]).pipe(
       map(([$intl, $movie]) =>
         findRegionalIntl({

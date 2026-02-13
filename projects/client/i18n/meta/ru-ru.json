@@ -2985,6 +2985,26 @@
     },
     "header_add_to_list": {
       "default": "Добавить в список"
+    },
+    "header_sentiment_highlight": {
+      "default": "Главное"
+    },
+    "header_sentiment_aspects": {
+      "default": "Плюсы и минуси"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Узнать больше."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Перейдите на VIP, чтобы открыть подробную аналитику этого проекта."
+    },
+    "text_sentiment_example": {
+      "default": "Пример из «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Ajouter à la liste"
+    },
+    "header_sentiment_highlight": {
+      "default": "En vedette"
+    },
+    "header_sentiment_aspects": {
+      "default": "Les pours et les contres"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Allez plus loin."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Devenez VIP pour débloquer des secrets dignes d'une grande série d'ici."
+    },
+    "text_sentiment_example": {
+      "default": "Exemple tiré de « {title} »",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
