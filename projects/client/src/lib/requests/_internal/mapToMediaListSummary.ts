@@ -1,7 +1,21 @@
 import type { ListResponse } from '@trakt/api';
+import type { ListType } from '../models/ListType.ts';
 import type { MediaListSummary } from '../models/MediaListSummary.ts';
 import { mapToPoster } from './mapToPoster.ts';
 import { mapToUserProfile } from './mapToUserProfile.ts';
+
+function mapToType(type: string): ListType {
+  switch (type) {
+    case 'all':
+    case 'personal':
+    case 'official':
+    case 'watchlist':
+    case 'favorites':
+      return type;
+    default:
+      return 'personal';
+  }
+}
 
 export function mapToMediaListSummary(
   listResponse: ListResponse,
@@ -21,5 +35,6 @@ export function mapToMediaListSummary(
     sortHow: listResponse.sort_how,
     sortBy: listResponse.sort_by,
     posters,
+    type: mapToType(listResponse.type),
   };
 }

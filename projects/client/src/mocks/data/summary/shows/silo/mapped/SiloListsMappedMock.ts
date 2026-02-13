@@ -95,5 +95,6 @@ export const SiloListsMappedMock: MediaListSummary[] = [
         },
       },
     ],
+    'type': 'personal',
   },
 ];
