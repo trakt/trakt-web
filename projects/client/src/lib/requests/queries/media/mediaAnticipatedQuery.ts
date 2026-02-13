@@ -1,25 +1,22 @@
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { getRecordDependencies } from '$lib/requests/_internal/getRecordDependencies.ts';
-import { type ApiParams } from '$lib/requests/api.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
-import { weave } from '$lib/utils/array/weave.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
 import {
   AnticipatedMovieSchema,
   mapToAnticipatedMovie,
-  movieAnticipatedRequest,
 } from '../movies/movieAnticipatedQuery.ts';
 import {
   AnticipatedShowSchema,
   mapToAnticipatedShow,
-  showAnticipatedRequest,
 } from '../shows/showAnticipatedQuery.ts';
 
 type MediaAnticipatedParams =
@@ -32,6 +29,25 @@ const AnticipatedMediaSchema = z.union([
   AnticipatedMovieSchema,
   AnticipatedShowSchema,
 ]);
+
+const mediaAnticipatedRequest = (
+  { fetch, limit, page, filter, filterOverride, search }:
+    MediaAnticipatedParams,
+) => {
+  const filterParams = filterOverride?.show ?? filter;
+
+  return api({ fetch })
+    .media
+    .anticipated({
+      query: {
+        extended: 'full,images,colors',
+        page,
+        limit,
+        ...filterParams,
+        ...search,
+      },
+    });
+};
 
 export const mediaAnticipatedQuery = defineInfiniteQuery({
   key: 'mediaAnticipated',
@@ -52,20 +68,15 @@ export const mediaAnticipatedQuery = defineInfiniteQuery({
     ),
     ...getRecordDependencies(params.search),
   ],
-  request: (params) =>
-    Promise.all([
-      showAnticipatedRequest(params),
-      movieAnticipatedRequest(params),
-    ]),
-  mapper: ([showsResponse, moviesResponse]) => {
-    const shows = showsResponse.body.map(mapToAnticipatedShow);
-    const movies = moviesResponse.body.map(mapToAnticipatedMovie);
-
-    return {
-      entries: weave(shows, movies),
-      page: extractPageMeta(showsResponse.headers),
-    };
-  },
+  request: mediaAnticipatedRequest,
+  mapper: (response) => ({
+    entries: response.body.map((entry) =>
+      'show' in entry
+        ? mapToAnticipatedShow(entry)
+        : mapToAnticipatedMovie(entry)
+    ),
+    page: extractPageMeta(response.headers),
+  }),
   schema: PaginatableSchemaFactory(AnticipatedMediaSchema),
   ttl: time.hours(3),
 });

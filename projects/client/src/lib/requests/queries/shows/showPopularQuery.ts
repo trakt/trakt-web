@@ -18,7 +18,7 @@ type ShowPopularParams =
   & FilterParams
   & SearchParams;
 
-export const showPopularRequest = (
+const showPopularRequest = (
   { fetch, limit, page, filter, filterOverride, search }: ShowPopularParams,
 ) => {
   const filterParams = filterOverride?.show ?? filter;
