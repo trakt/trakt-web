@@ -86,9 +86,9 @@
   --width-where-to-watch-item: var(--ni-96);
   --height-where-to-watch-item: var(--ni-96);
 
-  --preferred-sentiments-card-width: calc(3 * var(--width-where-to-watch-item) + 2 * var(--list-gap));
-  --width-sentiments-card: min(var(--preferred-sentiments-card-width), 85vw);
-  --height-sentiments-card: var(--ni-208);
+  --preferred-sentiment-card-width: calc(3 * var(--width-where-to-watch-item) + 2 * var(--list-gap));
+  --width-sentiment-card: min(var(--preferred-sentiment-card-width), 85vw);
+  --height-sentiment-card: var(--ni-208);
 
   /**
    * List dimensions
@@ -99,7 +99,7 @@
   --height-lists-list: calc(var(--height-list-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-comments-list: calc(var(--height-comment-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-trivia-list: calc(var(--height-trivia-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
-  --height-sentiments-list: var(--height-sentiments-card);
+  --height-sentiment-list: var(--height-sentiment-card);
   --height-comment-thread-list: calc(var(--height-comment-thread-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-profile-list: calc(var(--height-profile-item) + var(--layout-scrollbar-width));
   --height-where-to-watch-list: calc(var(--height-where-to-watch-item) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));

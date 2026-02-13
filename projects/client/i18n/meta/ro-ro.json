@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Adaugă în listă"
+    },
+    "header_sentiment_highlight": {
+      "default": "Punct culminant"
+    },
+    "header_sentiment_aspects": {
+      "default": "Pro și Contra"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Explorează în profunzime."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Treci la VIP pentru a debloca analize demne de un critic de festival."
+    },
+    "text_sentiment_example": {
+      "default": "Exemplu din „{title}”",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

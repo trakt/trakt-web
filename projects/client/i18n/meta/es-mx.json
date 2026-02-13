@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Agregar a la lista"
+    },
+    "header_sentiment_highlight": {
+      "default": "Resumen"
+    },
+    "header_sentiment_aspects": {
+      "default": "Lo bueno y lo malo"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Échale un ojo."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Hazte VIP para ver más detalles y que no se te escape ningún chisme de la trama."
+    },
+    "text_sentiment_example": {
+      "default": "Ejemplo de \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

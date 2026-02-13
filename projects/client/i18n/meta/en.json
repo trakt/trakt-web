@@ -6710,6 +6710,51 @@
         "android",
         "ios"
       ]
+    },
+    "header_sentiment_highlight": {
+      "default": "Highlight",
+      "description": "Header for the section that displays the highlight of a movie or show sentiment analysis.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_sentiment_aspects": {
+      "default": "Pros & Cons",
+      "description": "Header for the section that displays the pros and cons of a movie or show sentiment analysis.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Dive deeper.",
+      "description": "Text shown to encourage non-VIP users to subscribe to explore more detailed features and results.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Upgrade to VIP to unlock more insights.",
+      "description": "Text shown to encourage non-VIP users to subscribe to explore a more detailed sentiment analysis of a movie or show.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_sentiment_example": {
+      "default": "Example from \"{title}\"",
+      "description": "Text used to indicate that a sentiment analysis example is from a specific movie or show.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

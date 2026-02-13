@@ -6,7 +6,7 @@ import { EpisodeSiloCommentsResponseMock } from '$mocks/data/summary/episodes/si
 import { EpisodeSiloPeopleResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloPeopleResponseMock.ts';
 import { EpisodeSiloWatchNowResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloWatchNowResponseMock.ts';
 import { ShowSiloCommentsResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloCommentsResponseMock.ts';
-import { ShowSiloSentimentsResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloSentimentsResponseMock.ts';
+import { ShowSiloSentimentResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloSentimentResponseMock.ts';
 import { ShowsAnticipatedResponseMock } from '../data/shows/response/ShowsAnticipatedResponseMock.ts';
 import { ShowsPopularResponseMock } from '../data/shows/response/ShowsPopularResponseMock.ts';
 import { ShowsTrendingResponseMock } from '../data/shows/response/ShowsTrendingResponseMock.ts';
@@ -215,9 +215,9 @@ export const shows = [
     },
   ),
   http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/sentiments`,
+    `http://localhost/v3/media/show/${ShowSiloResponseMock.ids.slug}/info/0/version/1`,
     () => {
-      return HttpResponse.json(ShowSiloSentimentsResponseMock);
+      return HttpResponse.json(ShowSiloSentimentResponseMock);
     },
   ),
   http.get(

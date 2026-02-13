@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Aan lijst toevoegen"
+    },
+    "header_sentiment_highlight": {
+      "default": "Hoogtepunt"
+    },
+    "header_sentiment_aspects": {
+      "default": "Plus- & minpunten"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Ga de diepte in."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Upgrade naar VIP voor inzichten die je niet wilt missen tijdens je volgende bingewatch."
+    },
+    "text_sentiment_example": {
+      "default": "Voorbeeld uit \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

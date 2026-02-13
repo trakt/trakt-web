@@ -2984,6 +2984,26 @@
     },
     "header_add_to_list": {
       "default": "添加到列表"
+    },
+    "header_sentiment_highlight": {
+      "default": "亮点"
+    },
+    "header_sentiment_aspects": {
+      "default": "优点与缺点"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "深度探索。"
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "升级至 VIP，解锁更多如同电影彩蛋般的深度见解。"
+    },
+    "text_sentiment_example": {
+      "default": "来自《{title}》的示例",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

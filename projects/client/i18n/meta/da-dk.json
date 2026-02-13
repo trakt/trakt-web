@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Føj til liste"
+    },
+    "header_sentiment_highlight": {
+      "default": "Højdepunkt"
+    },
+    "header_sentiment_aspects": {
+      "default": "Fordele og ulemper"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Gå i dybden."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Opgrader til VIP for at få indsigt, der gør din næste filmaften endnu bedre."
+    },
+    "text_sentiment_example": {
+      "default": "Eksempel fra \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

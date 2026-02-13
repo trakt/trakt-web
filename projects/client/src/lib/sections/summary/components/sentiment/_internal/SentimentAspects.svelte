@@ -1,34 +1,35 @@
 <script lang="ts">
   import SentimentIcon from "$lib/components/icons/SentimentIcon.svelte";
-  import type { Sentiments } from "$lib/requests/models/Sentiments";
 
-  const SENTIMENT_LIMIT = 2;
+  const KEYWORD_LIMIT = 3;
 
   type SentimentProps = {
-    sentiments: Sentiments;
-    isPartial: boolean;
+    pros: string[];
+    cons: string[];
+    limit?: number;
   };
 
-  const { sentiments, isPartial }: SentimentProps = $props();
+  const { pros, cons, limit = KEYWORD_LIMIT }: SentimentProps = $props();
 
-  // TODO light mode colors
+  const isPartial = $derived(pros.length === 0 || cons.length === 0);
+
   const mappedSentiments = $derived([
     {
-      sentiments: sentiments.good.slice(0, SENTIMENT_LIMIT),
+      aspects: pros.slice(0, limit),
       sentiment: "good" as const,
-      sentimentColor: "var(--purple-200)",
+      sentimentColor: "var(--color-sentiment-good)",
     },
     {
-      sentiments: sentiments.bad.slice(0, SENTIMENT_LIMIT),
+      aspects: cons.slice(0, limit),
       sentiment: "bad" as const,
-      sentimentColor: "var(--red-100)",
+      sentimentColor: "var(--color-sentiment-bad)",
     },
   ]);
 </script>
 
 <div class="trakt-sentiment-body">
-  {#each mappedSentiments as { sentiment, sentiments, sentimentColor }, index (sentiment)}
-    {#if sentiments.length > 0}
+  {#each mappedSentiments as { sentiment, aspects, sentimentColor }, index (sentiment)}
+    {#if aspects.length > 0}
       <div
         class="trakt-sentiment-container"
         style="--sentiment-color: {sentimentColor}"
@@ -36,8 +37,8 @@
       >
         <SentimentIcon {sentiment} />
         <ul>
-          {#each sentiments as sentiment}
-            <li><p>{sentiment}</p></li>
+          {#each aspects as aspect}
+            <li><p class="capitalize">{aspect}</p></li>
           {/each}
         </ul>
       </div>

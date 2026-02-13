@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Lägg till i lista"
+    },
+    "header_sentiment_highlight": {
+      "default": "Höjdpunkt"
+    },
+    "header_sentiment_aspects": {
+      "default": "För- och nackdelar"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Gå på djupet."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Uppgradera till VIP för att låsa upp insikter djupare än en Nordic Noir-mysterium."
+    },
+    "text_sentiment_example": {
+      "default": "Exempel från \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Aggiungi alla lista"
+    },
+    "header_sentiment_highlight": {
+      "default": "In primo piano"
+    },
+    "header_sentiment_aspects": {
+      "default": "Pro e Contro"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Approfondisci."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Passa a VIP per sbloccare segreti degni di Cinecittà."
+    },
+    "text_sentiment_example": {
+      "default": "Esempio da \"{title}\"",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

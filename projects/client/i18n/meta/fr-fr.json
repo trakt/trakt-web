@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Ajouter à la liste"
+    },
+    "header_sentiment_highlight": {
+      "default": "Point fort"
+    },
+    "header_sentiment_aspects": {
+      "default": "Points positifs et négatifs"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Approfondissez le sujet."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Passez à VIP pour débloquer des analyses dignes des plus grands critiques."
+    },
+    "text_sentiment_example": {
+      "default": "Exemple tiré de « {title} »",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

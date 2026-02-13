@@ -2640,6 +2640,26 @@
     },
     "header_add_to_list": {
       "default": "Dodaj do listy"
+    },
+    "header_sentiment_highlight": {
+      "default": "Najważniejsze"
+    },
+    "header_sentiment_aspects": {
+      "default": "Plusy i minusy"
+    },
+    "text_vip_upsell_dive_deeper": {
+      "default": "Zanurz się głębiej."
+    },
+    "text_vip_upsell_sentiment": {
+      "default": "Przejdź na VIP, aby odblokować analizy godne mistrzów światowego kina."
+    },
+    "text_sentiment_example": {
+      "default": "Przykład z „{title}”",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
