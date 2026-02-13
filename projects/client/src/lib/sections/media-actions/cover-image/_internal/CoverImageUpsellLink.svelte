@@ -3,7 +3,7 @@
   import UpsellLink from "$lib/features/upsell/UpsellLink.svelte";
 </script>
 
-<UpsellLink>
+<UpsellLink source="cover-image">
   <span class="bold">{m.link_text_vip_cover_image_upsell()}</span>
 </UpsellLink>
 

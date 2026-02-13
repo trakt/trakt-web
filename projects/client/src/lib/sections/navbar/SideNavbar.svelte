@@ -23,7 +23,7 @@
 {#if $state.mode !== "hidden"}
   <div class="trakt-navbar-actions" class:is-hidden={$state.mode === "minimal"}>
     <div class="trakt-navbar-actions-left">
-      <RenderFor audience="free"><GetVIPLink /></RenderFor>
+      <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>
     </div>
 
     <div class="trakt-navbar-actions-center">

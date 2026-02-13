@@ -11,7 +11,7 @@
       <p class="bold">{m.text_vip_upsell_dive_deeper()}</p>
       <p class="tag secondary">{m.text_vip_upsell_sentiment()}</p>
     </div>
-    <GetVIPLink />
+    <GetVIPLink source="sentiment" />
   </div>
 
   <div class="trakt-sentiment-example">

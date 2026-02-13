@@ -3,6 +3,6 @@
   import UpsellLink from "$lib/features/upsell/UpsellLink.svelte";
 </script>
 
-<UpsellLink>
+<UpsellLink source="lists">
   <span class="bold">{m.link_text_vip_list_upsell()}</span>
 </UpsellLink>
