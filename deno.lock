@@ -9,7 +9,7 @@
     "npm:@google/generative-ai@0.24.1": "0.24.1",
     "npm:@inlang/paraglide-js@2.8.0": "2.8.0",
     "npm:@jsr/libn__fuzzy@0.4": "0.4.0",
-    "npm:@jsr/trakt__api@0.3.8": "0.3.8_zod@3.25.76",
+    "npm:@jsr/trakt__api@0.3.10": "0.3.10_zod@3.25.76",
     "npm:@playwright/test@1.57.0": "1.57.0",
     "npm:@sentry/sveltekit@10.33.0": "10.33.0_@sveltejs+kit@2.49.4__@sveltejs+vite-plugin-svelte@6.2.4___svelte@5.46.3____acorn@8.15.0___vite@7.3.1____sass-embedded@1.97.2____picomatch@4.0.3___sass-embedded@1.97.2__svelte@5.46.3___acorn@8.15.0__typescript@5.8.3__vite@7.3.1___sass-embedded@1.97.2___picomatch@4.0.3__acorn@8.15.0__sass-embedded@1.97.2_vite@7.3.1__sass-embedded@1.97.2__picomatch@4.0.3_svelte@5.46.3__acorn@8.15.0_@sveltejs+vite-plugin-svelte@6.2.4__svelte@5.46.3___acorn@8.15.0__vite@7.3.1___sass-embedded@1.97.2___picomatch@4.0.3__sass-embedded@1.97.2_typescript@5.8.3_sass-embedded@1.97.2",
     "npm:@sveltejs/adapter-auto@7.0.0": "7.0.0_@sveltejs+kit@2.49.4__@sveltejs+vite-plugin-svelte@6.2.4___svelte@5.46.3____acorn@8.15.0___vite@7.3.1____sass-embedded@1.97.2____picomatch@4.0.3___sass-embedded@1.97.2__svelte@5.46.3___acorn@8.15.0__typescript@5.8.3__vite@7.3.1___sass-embedded@1.97.2___picomatch@4.0.3__acorn@8.15.0__sass-embedded@1.97.2_@sveltejs+vite-plugin-svelte@6.2.4__svelte@5.46.3___acorn@8.15.0__vite@7.3.1___sass-embedded@1.97.2___picomatch@4.0.3__sass-embedded@1.97.2_svelte@5.46.3__acorn@8.15.0_typescript@5.8.3_vite@7.3.1__sass-embedded@1.97.2__picomatch@4.0.3_sass-embedded@1.97.2",
@@ -2033,14 +2033,14 @@
       "integrity": "sha512-aD9yjW6CMt37S3AMTc95LeuRXcKor69Zkr0aWOhYvinTOEAhEIuaJhP4pQqyQGaAC9HIrQcKh1PtRTK85kkVjA==",
       "tarball": "https://npm.jsr.io/~/11/@jsr/libn__fuzzy/0.4.0.tgz"
     },
-    "@jsr/trakt__api@0.3.8_zod@3.25.76": {
-      "integrity": "sha512-yewKtpAbuKAJqix9RfjrdEZwlLrfGON5yXul6Yj5vAatYNcUt76HDAKdPLCXosra5egbRWdMxOx1/qJPDqrtPw==",
+    "@jsr/trakt__api@0.3.10_zod@3.25.76": {
+      "integrity": "sha512-+oMMVCcZrBybPjBaFhO6F/KKt7kWdNX9zHTqqSggsMaEeGccCrEb7gBWLISK3QNgsOXETrIdN6UhQi3eFvnabg==",
       "dependencies": [
         "@anatine/zod-openapi",
         "@ts-rest/core",
         "zod"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.3.8.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.3.10.tgz"
     },
     "@lix-js/sdk@0.4.7_kysely@0.27.6": {
       "integrity": "sha512-pRbW+joG12L0ULfMiWYosIW0plmW4AsUdiPCp+Z8rAsElJ+wJ6in58zhD3UwUcd4BNcpldEGjg6PdA7e0RgsDQ==",
@@ -7439,7 +7439,7 @@
             "npm:@google/generative-ai@0.24.1",
             "npm:@inlang/paraglide-js@2.8.0",
             "npm:@jsr/libn__fuzzy@0.4",
-            "npm:@jsr/trakt__api@0.3.8",
+            "npm:@jsr/trakt__api@0.3.10",
             "npm:@playwright/test@1.57.0",
             "npm:@sentry/sveltekit@10.33.0",
             "npm:@sveltejs/adapter-auto@7.0.0",
