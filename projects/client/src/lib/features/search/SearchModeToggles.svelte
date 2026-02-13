@@ -49,6 +49,11 @@
       text: m.button_text_toggle_search_people,
       label: m.button_label_toggle_search_people,
     },
+    {
+      value: "lists",
+      text: m.button_text_toggle_search_lists,
+      label: m.button_label_toggle_search_lists,
+    },
   ];
 </script>
 

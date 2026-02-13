@@ -1,5 +1,7 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
@@ -7,14 +9,30 @@
   import { getListUrl } from "./getListUrl.ts";
 
   const POSTER_LIMIT = 8;
-  const { list, type }: { list: MediaListSummary; type?: DiscoverMode } =
-    $props();
+  const {
+    list,
+    type,
+    source,
+    onclick,
+  }: {
+    list: MediaListSummary;
+    type?: DiscoverMode;
+    source?: string;
+    onclick?: () => void;
+  } = $props();
 
   const posters = $derived(list.posters.slice(0, POSTER_LIMIT));
+  const { track } = useTrack(AnalyticsEvent.Drilldown);
 </script>
 
 {#if posters}
-  <Link href={getListUrl({ type: "user-list", list, mode: type })}>
+  <Link
+    href={getListUrl({ type: "user-list", list, mode: type })}
+    onclick={() => {
+      onclick?.();
+      source && track({ source, type: "list" });
+    }}
+  >
     <div class="trakt-list-posters" style="--poster-count: {posters.length}">
       {#each posters as poster, index (`${list.id}_poster_${index}`)}
         <div class="poster-wrapper" style="--poster-index: {index}">

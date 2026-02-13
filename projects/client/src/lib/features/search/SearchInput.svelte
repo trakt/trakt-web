@@ -60,6 +60,8 @@
         return m.input_placeholder_search_shows();
       case "people":
         return m.input_placeholder_search_people();
+      case "lists":
+        return m.input_placeholder_search_lists();
     }
   });
 

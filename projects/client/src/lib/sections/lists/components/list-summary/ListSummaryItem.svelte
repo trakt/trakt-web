@@ -8,18 +8,30 @@
   const {
     list,
     type,
-    isOfficial,
-  }: { list: MediaListSummary; type?: DiscoverMode; isOfficial: boolean } =
-    $props();
+    source,
+    onclick,
+  }: {
+    list: MediaListSummary;
+    type?: DiscoverMode;
+    source?: string;
+    onclick?: (list: MediaListSummary) => void;
+  } = $props();
+
+  const handler = () => {
+    onclick?.(list);
+  };
 </script>
 
 <Card
   --width-card="min(var(--width-list-card), 85vw)"
   --height-card="var(--height-list-card)"
 >
-  <div class="trakt-list-summary" class:trakt-list-official={isOfficial}>
-    <ListHeader {list} {type} />
-    <ListPosters {list} {type} />
+  <div
+    class="trakt-list-summary"
+    class:trakt-list-official={list.type === "official"}
+  >
+    <ListHeader {list} {type} {source} onclick={handler} />
+    <ListPosters {list} {type} {source} onclick={handler} />
   </div>
 </Card>
 
@@ -27,7 +39,7 @@
   .trakt-list-summary {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
+    gap: var(--gap-xs);
 
     padding: var(--ni-12);
 

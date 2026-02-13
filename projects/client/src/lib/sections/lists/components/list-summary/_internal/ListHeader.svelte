@@ -10,8 +10,17 @@
   import ListActions from "$lib/sections/lists/user/ListActions.svelte";
   import { getListUrl } from "./getListUrl";
 
-  const { list, type }: { list: MediaListSummary; type?: DiscoverMode } =
-    $props();
+  const {
+    list,
+    type,
+    source,
+    onclick,
+  }: {
+    list: MediaListSummary;
+    type?: DiscoverMode;
+    source?: string;
+    onclick?: () => void;
+  } = $props();
 
   // In list summaries, clicking on the header is considered a drilldown action
   const { track } = useTrack(AnalyticsEvent.Drilldown);
@@ -23,7 +32,10 @@
   <div class="list-name-and-creator">
     <Link
       href={getListUrl({ type: "user-list", list, mode: type })}
-      onclick={() => track({ source: "list-summary" })}
+      onclick={() => {
+        onclick?.();
+        source && track({ source, type: "list" });
+      }}
     >
       <p class="secondary bold ellipsis">
         {list.name}

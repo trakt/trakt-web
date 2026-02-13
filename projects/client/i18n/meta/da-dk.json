@@ -1701,6 +1701,15 @@
     "input_placeholder_search_people": {
       "default": "Søg efter folk..."
     },
+    "button_label_toggle_search_lists": {
+      "default": "Søg efter lister"
+    },
+    "button_text_toggle_search_lists": {
+      "default": "Lister"
+    },
+    "input_placeholder_search_lists": {
+      "default": "Søg i lister..."
+    },
     "link_text_forums": {
       "default": "Forummer"
     },

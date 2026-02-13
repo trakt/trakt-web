@@ -4470,6 +4470,30 @@
         "ios"
       ]
     },
+    "button_label_toggle_search_lists": {
+      "default": "Search for lists",
+      "description": "Aria-label for the button that allows users to toggle the search mode to lists.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_toggle_search_lists": {
+      "default": "Lists",
+      "description": "Text for the button that allows users to toggle the search mode to lists.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "input_placeholder_search_lists": {
+      "default": "Search lists...",
+      "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "link_text_forums": {
       "default": "Forums",
       "description": "Text for the link that takes users to the forums.",

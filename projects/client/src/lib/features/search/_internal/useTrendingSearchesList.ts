@@ -7,6 +7,10 @@ import {
 } from '$lib/requests/queries/people/peopleThisMonthQuery.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import {
+  type ListsSearchResult,
+  searchListsQuery,
+} from '$lib/requests/queries/search/searchListsQuery.ts';
+import {
   searchTrendingQuery,
   type TrendingSearchesResult,
 } from '$lib/requests/queries/search/searchTrendingQuery.ts';
@@ -17,12 +21,19 @@ import { map } from 'rxjs/operators';
 
 const LIST_LIMIT = 50;
 
-type TrendingSearches = TrendingSearchesResult | PeopleThisMonthResult;
+type TrendingSearches =
+  | TrendingSearchesResult
+  | PeopleThisMonthResult
+  | ListsSearchResult;
 
 function modeToQuery(
   mode: SearchMode,
 ) {
   switch (mode) {
+    case 'lists':
+      return searchListsQuery({ limit: LIST_LIMIT }) as CreateQueryOptions<
+        TrendingSearches
+      >;
     case 'people':
       return peopleThisMonthQuery() as CreateQueryOptions<
         TrendingSearches
@@ -47,6 +58,10 @@ export function useTrendingSearchesList(mode: SearchMode) {
       map(($query) => {
         if (!$query.data) {
           return [];
+        }
+
+        if ($query.data.type === 'lists') {
+          return $query.data.items;
         }
 
         if ($query.data.type === 'people') {

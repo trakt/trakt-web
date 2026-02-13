@@ -1701,6 +1701,15 @@
     "input_placeholder_search_people": {
       "default": "Sök efter personer..."
     },
+    "button_label_toggle_search_lists": {
+      "default": "Sök efter listor"
+    },
+    "button_text_toggle_search_lists": {
+      "default": "Listor"
+    },
+    "input_placeholder_search_lists": {
+      "default": "Sök listor..."
+    },
     "link_text_forums": {
       "default": "Forum"
     },

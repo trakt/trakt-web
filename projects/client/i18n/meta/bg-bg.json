@@ -1701,6 +1701,15 @@
     "input_placeholder_search_people": {
       "default": "Търсене на хора..."
     },
+    "button_label_toggle_search_lists": {
+      "default": "Търсене на списъци"
+    },
+    "button_text_toggle_search_lists": {
+      "default": "Списъци"
+    },
+    "input_placeholder_search_lists": {
+      "default": "Търсене в списъци..."
+    },
     "link_text_forums": {
       "default": "Форуми"
     },

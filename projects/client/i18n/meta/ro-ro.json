@@ -1701,6 +1701,15 @@
     "input_placeholder_search_people": {
       "default": "Caută persoane..."
     },
+    "button_label_toggle_search_lists": {
+      "default": "Caută liste"
+    },
+    "button_text_toggle_search_lists": {
+      "default": "Liste"
+    },
+    "input_placeholder_search_lists": {
+      "default": "Caută în liste..."
+    },
     "link_text_forums": {
       "default": "Forumuri"
     },
