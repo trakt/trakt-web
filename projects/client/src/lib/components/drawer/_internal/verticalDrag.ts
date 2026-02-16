@@ -37,8 +37,16 @@ export function verticalDrag(
       const {
         last,
         active,
+        first,
         movement: [_, movementY],
       } = state;
+
+      if (first && !dragState.isFullScreen) {
+        parent.style.setProperty(
+          '--initial-height',
+          `${parent.clientHeight}px`,
+        );
+      }
 
       const gestureState: GestureState = { isStoppingDrag: last, movementY };
 
