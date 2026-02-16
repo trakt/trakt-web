@@ -202,6 +202,10 @@
 
       &[data-size="auto"] {
         --drawer-size: fit-content;
+
+        &:global(.is-dragging) {
+          --drawer-size: var(--initial-height);
+        }
       }
     }
   }
