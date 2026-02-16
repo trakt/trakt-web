@@ -14,16 +14,12 @@ const showSentimentRequest = async (
     { fetch, path: `/v3/media/show/${slug}/info/0/version/1` },
   );
 
-  if (!response.ok) {
-    throw new Error('Failed to fetch show sentiment');
-  }
-
-  const body = await response.json();
-
-  return {
-    body: body as SentimentResponse,
-    status: 200,
-  };
+  return response.ok
+    ? {
+      body: await response.json() as SentimentResponse,
+      status: 200,
+    }
+    : { body: undefined, status: 200 };
 };
 
 export const showSentimentQuery = defineQuery({
@@ -32,6 +28,6 @@ export const showSentimentQuery = defineQuery({
   dependencies: (params) => [params.slug],
   request: showSentimentRequest,
   mapper: (response) => mapToSentimentAnalysis(response.body),
-  schema: SentimentAnalysisSchema,
+  schema: SentimentAnalysisSchema.nullish(),
   ttl: time.hours(3),
 });

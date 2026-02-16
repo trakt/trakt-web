@@ -14,16 +14,12 @@ const movieSentimentRequest = async (
     { fetch, path: `/v3/media/movie/${slug}/info/0/version/1` },
   );
 
-  if (!response.ok) {
-    throw new Error('Failed to fetch movie sentiment');
-  }
-
-  const body = await response.json();
-
-  return {
-    body: body as SentimentResponse,
-    status: 200,
-  };
+  return response.ok
+    ? {
+      body: await response.json() as SentimentResponse,
+      status: 200,
+    }
+    : { body: undefined, status: 200 };
 };
 
 export const movieSentimentQuery = defineQuery({
@@ -32,6 +28,6 @@ export const movieSentimentQuery = defineQuery({
   dependencies: (params) => [params.slug],
   request: movieSentimentRequest,
   mapper: (response) => mapToSentimentAnalysis(response.body),
-  schema: SentimentAnalysisSchema,
+  schema: SentimentAnalysisSchema.nullish(),
   ttl: time.hours(3),
 });

@@ -6,11 +6,15 @@ function appendDot(text: string): string {
 }
 
 export function mapToSentimentAnalysis(
-  response: SentimentResponse,
-): SentimentAnalysis {
+  response?: SentimentResponse,
+): SentimentAnalysis | Nil {
+  if (!response) {
+    return null;
+  }
+
   return {
-    analysis: response.analysis,
-    highlight: response.highlight,
+    analysis: response?.analysis ?? '',
+    highlight: response?.highlight ?? '',
     aspect: {
       pros: response.aspect.pros.map((item) => appendDot(item.theme)),
       cons: response.aspect.cons.map((item) => appendDot(item.theme)),

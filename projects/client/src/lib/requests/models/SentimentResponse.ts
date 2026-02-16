@@ -6,6 +6,10 @@ const AspectItemSchema = z.object({
 });
 
 export const SentimentResponseSchema = z.object({
+  aspect: z.object({
+    pros: z.array(AspectItemSchema),
+    cons: z.array(AspectItemSchema),
+  }),
   sentiment: z.object({
     overall: z.enum(['positive', 'negative', 'mixed']),
     score: z.number(),
@@ -14,12 +18,8 @@ export const SentimentResponseSchema = z.object({
       cons: z.array(z.string()),
     }),
   }),
-  analysis: z.string(),
-  aspect: z.object({
-    pros: z.array(AspectItemSchema),
-    cons: z.array(AspectItemSchema),
-  }),
-  highlight: z.string(),
+  analysis: z.string().optional(),
+  highlight: z.string().optional(),
 });
 
 export type SentimentResponse = z.infer<
