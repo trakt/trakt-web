@@ -5,6 +5,7 @@ export const OfficialListsMappedMock: MediaListSummary[] = [
     'description': 'This is super official',
     'id': 1234,
     'key': 'list-1234',
+    'likeCount': 4161,
     'name': 'Official list',
     'slug': 'official-list',
     'count': 2,

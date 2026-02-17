@@ -65,5 +65,20 @@
     {onclick}
   />
 {:else}
-  <ListSummaryItem list={item} source="search" {onclick} />
+  <trakt-search-result-list>
+    <ListSummaryItem list={item} source="search" {onclick} />
+  </trakt-search-result-list>
 {/if}
+
+<style>
+  /* FIXME:
+    Temporarily disallow list likes in search results until
+    list search queries can be invalidated
+  */
+  trakt-search-result-list {
+    :global(trakt-list-like-action .trakt-button) {
+      pointer-events: none;
+      opacity: 0.75;
+    }
+  }
+</style>

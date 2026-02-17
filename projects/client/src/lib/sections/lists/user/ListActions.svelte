@@ -66,7 +66,7 @@
       onToggle={handleLike}
       isUpdating={$isUpdating}
       state={$isLiked ? "liked" : "unliked"}
-      name={list.name}
+      {list}
     />
   {/if}
 </RenderFor>

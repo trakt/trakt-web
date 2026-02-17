@@ -6,6 +6,7 @@ export const CollaborationListsMappedMock: MediaListSummary[] = [
     'description': 'We made this',
     'id': 5678,
     'key': 'list-5678',
+    'likeCount': 892,
     'name': 'Our collaborative list',
     'slug': 'our-list',
     'user': UserProfileHarryMappedMock,

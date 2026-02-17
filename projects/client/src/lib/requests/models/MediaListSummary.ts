@@ -11,6 +11,7 @@ export const MediaListSummarySchema = z.object({
   description: z.string(),
   user: UserProfileSchema,
   count: z.number(),
+  likeCount: z.number(),
   posters: z.array(z.object({
     url: ImageUrlsSchema,
   })),
