@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { mapToMediaListSummary } from '../../_internal/mapToMediaListSummary.ts';
+import { InvalidateAction } from '../../models/InvalidateAction.ts';
 import { MediaListSummarySchema } from '../../models/MediaListSummary.ts';
 
 type MovieListsParams = {
@@ -29,7 +30,7 @@ const movieListsRequest = (
 
 export const movieListsQuery = defineQuery({
   key: 'movieLists',
-  invalidations: [],
+  invalidations: [InvalidateAction.List.Like],
   dependencies: (params) => [params.slug, params.limit, params.type],
   request: movieListsRequest,
   mapper: (response) => response.body.map(mapToMediaListSummary),

@@ -6,6 +6,7 @@ export const SiloListsMappedMock: MediaListSummary[] = [
     'description': 'There is no escape from this list',
     'id': 5678,
     'key': 'list-5678',
+    'likeCount': 892,
     'name': 'Silos',
     'slug': 'silos',
     'user': UserProfileHarryMappedMock,

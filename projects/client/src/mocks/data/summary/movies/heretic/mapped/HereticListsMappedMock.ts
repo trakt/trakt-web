@@ -6,6 +6,7 @@ export const HereticListsMappedMock: MediaListSummary[] = [
     'description': 'This list contains Heretic',
     'id': 1234,
     'key': 'list-1234',
+    'likeCount': 4161,
     'name': 'Heretics only',
     'slug': 'heretics-only',
     'user': UserProfileHarryMappedMock,

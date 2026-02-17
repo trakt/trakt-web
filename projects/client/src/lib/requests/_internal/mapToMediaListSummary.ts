@@ -27,6 +27,7 @@ export function mapToMediaListSummary(
     description: listResponse.description ?? '',
     user: mapToUserProfile(listResponse.user),
     count: listResponse.item_count,
+    likeCount: listResponse.likes,
     updatedAt: new Date(listResponse.updated_at),
     sortHow: listResponse.sort_how,
     sortBy: listResponse.sort_by,
