@@ -29,8 +29,13 @@
   });
 
   const src = $derived.by(() => {
-    if (!$results || $results.type === "lists") {
+    if (!$results) {
       return;
+    }
+
+    if ($results.type === "lists") {
+      const item = $results.items.at(0);
+      return item?.posters.at(0)?.url.medium;
     }
 
     if ($results.type !== "people") {
