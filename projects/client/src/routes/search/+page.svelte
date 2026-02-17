@@ -17,7 +17,8 @@
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
-  const { search, clear, results, mode, postRecentSearch } = useSearch();
+  const { search, clear, results, mode, postRecentSearch, coverSrc } =
+    useSearch();
 
   $effect(() => {
     if (!query) {
@@ -26,24 +27,6 @@
     }
 
     search(query, $mode);
-  });
-
-  const src = $derived.by(() => {
-    if (!$results) {
-      return;
-    }
-
-    if ($results.type === "lists") {
-      const item = $results.items.at(0);
-      return item?.posters.at(0)?.url.medium;
-    }
-
-    if ($results.type !== "people") {
-      const item = $results.items.at(0);
-      return item?.cover?.url.medium;
-    }
-
-    return $results.items.at(0)?.headshot.url.medium;
   });
 
   const pageTitle = $derived(
@@ -100,7 +83,7 @@
     {/if}
   </RenderFor>
 
-  <TraktPageCoverSetter {src} />
+  <TraktPageCoverSetter src={$coverSrc} />
 
   <div class="trakt-search-results-container">
     {#if $results}

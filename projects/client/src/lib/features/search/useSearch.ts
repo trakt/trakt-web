@@ -4,10 +4,9 @@ import {
   useQueryClient,
 } from '@tanstack/svelte-query';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
-import { debounceTime, map, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
 import {
-  type ListsSearchResult,
   searchListsQuery,
 } from '../../requests/queries/search/searchListsQuery.ts';
 import {
@@ -15,7 +14,6 @@ import {
   searchMediaQuery,
 } from '../../requests/queries/search/searchMediaQuery.ts';
 import {
-  type PeopleSearchResult,
   searchPeopleQuery,
 } from '../../requests/queries/search/searchPeopleQuery.ts';
 import {
@@ -27,12 +25,9 @@ import { DEFAULT_SEARCH_LIMIT } from '../../utils/constants.ts';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
+import { mapToSearchCover } from './_internal/mapToSearchCover.ts';
 import { postRecentSearch } from './_internal/postRecentSearch.ts';
-
-type SearchResponse =
-  | MediaSearchResult
-  | PeopleSearchResult
-  | ListsSearchResult;
+import type { SearchResponse } from './models/SearchResponse.ts';
 
 function modeToQuery(
   query: string,
@@ -132,6 +127,11 @@ export function useSearch() {
       );
     }),
     tap(() => isSearching.next(false)),
+    shareReplay(1),
+  );
+
+  const coverSrc = results.pipe(
+    map(mapToSearchCover),
   );
 
   function search(term: string, searchMode: SearchMode) {
@@ -148,6 +148,7 @@ export function useSearch() {
     postRecentSearch,
     search,
     results,
+    coverSrc,
     clear,
     mode,
     isSearching,
