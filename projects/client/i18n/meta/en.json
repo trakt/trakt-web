@@ -2768,6 +2768,22 @@
         "ios"
       ]
     },
+    "warning_prompt_track_show_episode_count": {
+      "default": "Are you sure you want to mark \"{title}\" as watched? This will mark {count} episodes as watched.",
+      "description": "Warning prompt shown when a user tries to mark a show as watched.",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Are you sure you want to mark {count} episodes as watched?",
       "description": "Warning prompt shown when a user tries to mark multiple episodes as watched.",

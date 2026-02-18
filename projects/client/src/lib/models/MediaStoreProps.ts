@@ -8,6 +8,12 @@ type SeasonInfo = {
   }>;
 };
 
+type EpisodeCount = {
+  episode: {
+    count: number;
+  };
+};
+
 type SeasonProps<T> = {
   type: 'season';
   media: ArrayOrSingle<T & { number: number }>;
@@ -26,7 +32,9 @@ type MovieProps<T> = {
 
 type ShowProps<T> = {
   type: 'show';
-  media: ArrayOrSingle<T & Partial<SeasonInfo>>;
+  media: ArrayOrSingle<
+    T & Partial<SeasonInfo> & Partial<EpisodeCount>
+  >;
 };
 
 export type MediaStoreProps<T extends { id: number } = { id: number }> =

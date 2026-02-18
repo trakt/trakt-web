@@ -1050,6 +1050,17 @@
     "warning_prompt_mark_as_watched_show_until": {
       "default": "Ви впевнені, що хочете відмітити всі непроглянуті епізоди \"{title}\" як переглянуті до епізоду {episode}? Це позначить {count} епізоди як переглянуті."
     },
+    "warning_prompt_track_show_episode_count": {
+      "default": "Ви впевнені, що хочете позначити «{title}» як переглянутий? Це позначить відразу {count} серій як переглянуті.",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Впевнені, що хочете відмітити {count} серій як переглянуті?"
     },

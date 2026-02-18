@@ -1252,6 +1252,17 @@
         }
       }
     },
+    "warning_prompt_track_show_episode_count": {
+      "default": "确定要将“{title}”标记为已观看吗？这将一次性将 {count} 集标记为已观看。",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "确定要将 {count} 集标记为已看吗？",
       "variables": {

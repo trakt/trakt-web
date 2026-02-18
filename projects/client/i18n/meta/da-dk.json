@@ -1050,6 +1050,17 @@
     "warning_prompt_mark_as_watched_show_until": {
       "default": "Er du sikker på, at du vil markere alle usete afsnit af \"{title}\" som set indtil afsnit {episode}? Dette vil markere {count} afsnit som set."
     },
+    "warning_prompt_track_show_episode_count": {
+      "default": "Er du sikker på, at du vil markere \"{title}\" som set? Dette vil markere {count} episoder som set. Rigtig god filmaften!",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Er du sikker på, at du vil markere {count} afsnit som set?"
     },

@@ -18,7 +18,7 @@ export function mapToConfirmation<T extends ConfirmationType>(
       return {
         buttonText: m.button_text_mark_as_watched(),
         message: getWarningMessage(props.title, props.target),
-        operation: 'affirmative',
+        operation: 'destructive',
       };
     case ConfirmationType.RemoveFromWatched:
       return {
