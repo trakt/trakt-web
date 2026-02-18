@@ -1,6 +1,8 @@
 import * as m from '$lib/features/i18n/messages.ts';
 import type { MarkAsWatchedStoreProps } from '$lib/sections/media-actions/mark-as-watched/useMarkAsWatched.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber.ts';
+import { languageTag } from '../../i18n/index.ts';
 
 function getShowWarningMessage(
   title: string,
@@ -26,6 +28,13 @@ function getShowWarningMessage(
       title,
       episode: `${lastSeason.number}x${lastEpisode.number}`,
       count: episodeCount,
+    });
+  }
+
+  if (!Array.isArray(target.media) && target.media.episode) {
+    return m.warning_prompt_track_show_episode_count({
+      title,
+      count: toHumanNumber(target.media.episode.count, languageTag()),
     });
   }
 

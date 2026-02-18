@@ -1253,6 +1253,17 @@
         }
       }
     },
+    "warning_prompt_track_show_episode_count": {
+      "default": "Вы уверены, что хотите отметить «{title}» как просмотренный? Это отметит сразу {count} серий как просмотренные.",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Отметить {count} серий как просмотренные?",
       "variables": {

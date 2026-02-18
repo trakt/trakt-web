@@ -1050,6 +1050,17 @@
     "warning_prompt_mark_as_watched_show_until": {
       "default": "Сигурни ли сте, че искате да маркирате всички невидяни епизоди на \"{title}\" като гледани до епизод {episode}? Това ще отбележи {count} епизода като гледани."
     },
+    "warning_prompt_track_show_episode_count": {
+      "default": "Сигурни ли сте, че искате да отбележите „{title}“ като гледан? Това ще отбележи {count} епизода като гледани.",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Сигурни ли сте, че искате да отбележите {count} епизоди като гледани?"
     },

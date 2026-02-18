@@ -1050,6 +1050,17 @@
     "warning_prompt_mark_as_watched_show_until": {
       "default": "Êtes-vous certain de vouloir marquer tous les épisodes non vus de \"{title}\" comme visionnés jusqu'à l'épisode {episode} ? Cela marquera {count} épisodes comme visionnés."
     },
+    "warning_prompt_track_show_episode_count": {
+      "default": "Es-tu certain de vouloir marquer « {title} » comme vu? Ça va marquer {count} épisodes d'un coup, un vrai marathon!",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Êtes-vous certain de vouloir marquer {count} épisodes comme visionnés?"
     },

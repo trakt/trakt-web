@@ -1050,6 +1050,17 @@
     "warning_prompt_mark_as_watched_show_until": {
       "default": "Sigur doriți să marcați toate episoadele nevăzute din \"{title}\" ca fiind văzute până la episodul {episode}? Aceasta va marca {count} episoade ca fiind văzute."
     },
+    "warning_prompt_track_show_episode_count": {
+      "default": "Ești sigur că vrei să marchezi „{title}” ca vizionat? Această acțiune va marca {count} episoade ca vizionate dintr-o dată.",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Sigur vrei să marchezi {count} episoade ca vizionate?"
     },
