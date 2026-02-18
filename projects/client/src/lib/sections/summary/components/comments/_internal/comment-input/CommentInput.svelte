@@ -28,18 +28,22 @@
   }: CommentInputProps = $props();
 
   let textAreaElement: HTMLTextAreaElement;
+  let isSpoiler = $state(false);
 
   const { contentObserver, hasContent } = $derived(useContentObserver());
-  const { postComment, isCommenting, isSpoiler, error } = usePostComment({
-    ...props,
-  });
+  const { postComment, isCommenting, error } = usePostComment();
 
   const autoResizeArea = $derived(
     sizing === "auto" ? autoResizeAreaFn : NOOP_FN,
   );
 
   const postCommentHandler = async () => {
-    const response = await postComment(textAreaElement.value);
+    const response = await postComment({
+      comment: textAreaElement.value,
+      isSpoiler,
+      ...props,
+    });
+
     if (!response) {
       return;
     }
@@ -69,8 +73,8 @@
     <div class="trakt-comment-actions">
       <SpoilerSwitch
         isReplying={$isCommenting}
-        enabled={$isSpoiler}
-        onclick={() => isSpoiler.next(!isSpoiler.value)}
+        enabled={isSpoiler}
+        onclick={() => (isSpoiler = !isSpoiler)}
       />
 
       <ActionButton

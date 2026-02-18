@@ -26,6 +26,11 @@ type PostProps = {
 
 export type UseAddCommentProps = ReplyProps | PostProps;
 
+type PostCommentProps = {
+  comment: string;
+  isSpoiler: boolean;
+} & UseAddCommentProps;
+
 function toPostCommentPayload(type: ExtendedMediaType, id: number) {
   const ids = { ids: { trakt: id } };
 
@@ -39,52 +44,46 @@ function toPostCommentPayload(type: ExtendedMediaType, id: number) {
   }
 }
 
-function addCommentRequest(
-  comment: string,
-  isSpoiler: boolean,
-  props: UseAddCommentProps,
-) {
+function addCommentRequest(props: PostCommentProps) {
+  const commonProps = {
+    comment: props.comment,
+    spoiler: props.isSpoiler,
+  };
+
   if (props.commentType === 'reply') {
     return replyCommentRequest({
       id: props.id,
-      body: {
-        comment,
-        spoiler: isSpoiler,
-      },
+      body: commonProps,
     });
   }
 
   const traktId = props.type === 'episode' ? props.id : props.media.id;
   // FIXME: remove cast after updating @trakt/api
   const body = {
-    comment,
-    spoiler: isSpoiler,
+    ...commonProps,
     ...toPostCommentPayload(props.type, traktId),
   } as CommentPostParams;
 
   return postCommentRequest({ body });
 }
 
-export function usePostComment(
-  props: UseAddCommentProps,
-) {
+export function usePostComment() {
   const { user } = useUser();
   const isCommenting = new BehaviorSubject(false);
-  const isSpoiler = new BehaviorSubject(false);
   const error = new BehaviorSubject<CommentError | null>(null);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.AddComment);
 
-  const invalidateAction = props.commentType === 'reply'
-    ? InvalidateAction.Comment.Reply(props.type)
-    : InvalidateAction.Comment.Post(props.type);
-
-  const postComment = async (comment: string) => {
+  const postComment = async (props: PostCommentProps) => {
     const current = await resolve(user);
 
     if (!current) {
       return null;
     }
+
+    const invalidateAction = props.commentType === 'reply'
+      ? InvalidateAction.Comment.Reply(props.type)
+      : InvalidateAction.Comment.Post(props.type);
 
     isCommenting.next(true);
 
@@ -98,7 +97,7 @@ export function usePostComment(
       error.next(null);
 
       track({ action: props.commentType });
-      const result = await addCommentRequest(comment, isSpoiler.value, props);
+      const result = await addCommentRequest(props);
       await invalidate(invalidateAction);
 
       isCommenting.next(false);
@@ -118,7 +117,6 @@ export function usePostComment(
   return {
     postComment,
     isCommenting,
-    isSpoiler,
     error,
   };
 }
