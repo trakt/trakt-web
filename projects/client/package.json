@@ -88,7 +88,7 @@
     "svelte": "^5.51.3",
     "svelte-confetti": "^2.3.2",
     "ts-retry": "^6.0.0",
-    "typesense": "^2.1.0",
+    "typesense": "^3.0.1",
     "workbox-expiration": "7.4.0",
     "workbox-precaching": "7.4.0",
     "workbox-routing": "7.4.0",
