@@ -55,7 +55,7 @@
     "npm:ts-retry@6": "6.0.0",
     "npm:typescript-eslint@8.56.0": "8.56.0_eslint@9.39.2_typescript@5.8.3_@typescript-eslint+parser@8.56.0__eslint@9.39.2__typescript@5.8.3",
     "npm:typescript@5.8.3": "5.8.3",
-    "npm:typesense@^2.1.0": "2.1.0_@babel+runtime@7.28.6",
+    "npm:typesense@^3.0.1": "3.0.1_@babel+runtime@7.28.6",
     "npm:vite-plugin-pwa@1.2.0": "1.2.0_vite@7.3.1__sass-embedded@1.97.3__picomatch@4.0.3_workbox-build@7.4.0__ajv@8.17.1__@babel+core@7.28.6__rollup@2.79.2_workbox-window@7.4.0_sass-embedded@1.97.3",
     "npm:vite@7.3.1": "7.3.1_sass-embedded@1.97.3_picomatch@4.0.3",
     "npm:vitest@3.2.4": "3.2.4_jsdom@26.1.0_msw@2.12.10__typescript@5.8.3_vite@7.3.1__sass-embedded@1.97.3__picomatch@4.0.3_sass-embedded@1.97.3_typescript@5.8.3",
@@ -3589,8 +3589,8 @@
         "possible-typed-array-names"
       ]
     },
-    "axios@1.13.2": {
-      "integrity": "sha512-VPk9ebNqPcy5lRGuSlKx752IlDatOjT9paPlm8A7yOuW2Fbvp4X3JznJtT4f0GzGLLiWE9W8onz51SqLYwzGaA==",
+    "axios@1.13.5": {
+      "integrity": "sha512-cz4ur7Vb0xS4/KUN0tPWe44eqxrIu31me+fbang3ijiNscE129POzipJJA6zniq2C/Z6sJCjMimjS8Lc/GAs8Q==",
       "dependencies": [
         "follow-redirects",
         "form-data",
@@ -6787,8 +6787,8 @@
       "integrity": "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==",
       "bin": true
     },
-    "typesense@2.1.0_@babel+runtime@7.28.6": {
-      "integrity": "sha512-a/IRTL+dRXlpRDU4UodyGj8hl5xBz3nKihVRd/KfSFAfFPGcpdX6lxIgwdXy3O6VLNNiEsN8YwIsPHQPVT0vNw==",
+    "typesense@3.0.1_@babel+runtime@7.28.6": {
+      "integrity": "sha512-aRzuDQlwR7s2sWw+JiR3CufrMWpzH5UAJ4XlybYczD02QPy5jCsEQiueqUu0Wiai4zW/RGYRruF3XrdEXPgPJA==",
       "dependencies": [
         "@babel/runtime",
         "axios",
@@ -7496,7 +7496,7 @@
             "npm:ts-retry@6",
             "npm:typescript-eslint@8.56.0",
             "npm:typescript@5.8.3",
-            "npm:typesense@^2.1.0",
+            "npm:typesense@^3.0.1",
             "npm:vite-plugin-pwa@1.2.0",
             "npm:vite@7.3.1",
             "npm:vitest@3.2.4",
