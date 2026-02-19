@@ -137,6 +137,7 @@
     --drawer-size: var(--ni-380);
     --drawer-padding: var(--ni-16);
     --drawer-gap: var(--gap-m);
+    --drawer-border-radius: var(--border-radius-xxl);
 
     touch-action: none;
 
@@ -163,8 +164,10 @@
     flex-direction: column;
     gap: var(--drawer-gap);
 
-    border-top-left-radius: var(--border-radius-m);
-    border-bottom-left-radius: var(--border-radius-m);
+    overflow: hidden;
+    border-top-left-radius: var(--drawer-border-radius);
+    border-bottom-left-radius: var(--drawer-border-radius);
+    border-left: var(--ni-1) solid var(--color-drawer-border);
 
     backdrop-filter: blur(var(--ni-12));
 
@@ -186,7 +189,9 @@
       height: calc(var(--mobile-drawer-height) - var(--drag-offset, 0px));
 
       border-bottom-left-radius: initial;
-      border-top-right-radius: var(--border-radius-m);
+      border-top-right-radius: var(--drawer-border-radius);
+      border-left: none;
+      border-top: var(--ni-1) solid var(--color-drawer-border);
 
       box-shadow: var(--ni-8) var(--ni-0) var(--ni-8) var(--ni-0)
         color-mix(in srgb, var(--color-shadow) 25%, transparent);
