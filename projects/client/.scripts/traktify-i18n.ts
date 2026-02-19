@@ -281,10 +281,9 @@ function updateMetaFileWithTranslations(
         default: translations[key] || existingMeta.messages[key].default,
       };
     } else if (translations[key]) {
-      // Add new translated message
+      // Add new translated message (variables are only defined in en.json source of truth)
       updatedMeta.messages[key] = {
         default: translations[key],
-        variables: sourceMessage.variables,
       };
     }
   }

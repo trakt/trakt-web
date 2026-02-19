@@ -1108,10 +1108,10 @@
       "default": "すべてのレビューを見る"
     },
     "button_text_remove_from_list": {
-      "default": "Remove from list"
+      "default": "リストから削除"
     },
     "button_label_remove_from_list": {
-      "default": "Remove \"{title}\" from list"
+      "default": "「{title}」をリストから削除"
     },
     "page_title_service_unavailable": {
       "default": "Traktサービスに接続できません"

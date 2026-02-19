@@ -166,7 +166,7 @@
       "default": "Court-métrage"
     },
     "translated_value_genre_soap": {
-      "default": "Soap"
+      "default": "Soap opera"
     },
     "translated_value_genre_special_interest": {
       "default": "Intérêts spéciaux"
@@ -1078,7 +1078,7 @@
       "default": "Divulgâcheur"
     },
     "button_label_close_error": {
-      "default": "Close error"
+      "default": "Fermer l’erreur"
     },
     "button_label_post_reply": {
       "default": "Publier la réponse"
@@ -1114,16 +1114,16 @@
       "default": "Retirer \"{title}\" de la liste"
     },
     "page_title_service_unavailable": {
-      "default": "Trakt service unreachable"
+      "default": "Service Trakt inaccessible"
     },
     "error_text_service_unavailable": {
-      "default": "The connection is... absent. Like a forgotten memory."
+      "default": "La connexion est... absente. Comme un souvenir oublié."
     },
     "link_text_service_status": {
-      "default": "Trakt service status"
+      "default": "État du service Trakt"
     },
     "button_text_retry": {
-      "default": "Retry"
+      "default": "Réessayer"
     },
     "button_label_retry": {
       "default": "Réessayer"
@@ -1234,7 +1234,7 @@
       "default": "Coulisses"
     },
     "translated_value_video_type_bloopers": {
-      "default": "Bloopers"
+      "default": "Bêtisier"
     },
     "translated_value_video_type_opening_credits": {
       "default": "Générique d'ouverture"
