@@ -3,6 +3,11 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
+  import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
+  import {
+    Drawers,
+    summaryDrawerNavigation,
+  } from "../../_internal/summaryDrawerNavigation";
   import SentimentCard from "./_internal/SentimentCard.svelte";
 
   const {
@@ -27,6 +32,8 @@
       ? "calc(0.5 * var(--height-sentiment-list))"
       : "var(--height-sentiment-list)",
   );
+
+  const { buildDrawerLink } = summaryDrawerNavigation();
 </script>
 
 {#if sentiment}
@@ -39,6 +46,14 @@
   >
     {#snippet item(sentiment)}
       <SentimentCard {sentiment} isPartial={hasPartialSentiment} />
+    {/snippet}
+
+    {#snippet actions()}
+      <ViewAllButton
+        href={buildDrawerLink(Drawers.Sentiment)}
+        label={m.button_label_view_sentiment_analysis()}
+        source={{ id: "sentiment" }}
+      />
     {/snippet}
   </SectionList>
 {/if}
