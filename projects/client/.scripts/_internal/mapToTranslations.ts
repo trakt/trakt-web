@@ -38,8 +38,7 @@ export function mapToTranslations({
   response.forEach(
     (localeResponse: Record<string, TranslationMap>) => {
       for (const locale of locales) {
-        const localeTranslations = localeResponse[locale] ??
-          localeResponse[locale.split('-')[0]];
+        const localeTranslations = localeResponse[locale];
         if (!localeTranslations) {
           console.warn(`⚠️ Missing translations for locale: ${locale}`);
           continue;
