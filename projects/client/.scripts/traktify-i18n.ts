@@ -93,13 +93,13 @@ function generateMultiLocalePromptText({
           *   "Episode": A single episode, like "The Rains of Castamere" (Game of Thrones).
           *   "Watchlist": A user's "must-see" list.
 
-          Provide the translated JSON in a valid format, with a nested object for each language, like this:
+          Provide the translated JSON in a valid format, with a nested object for each language using the exact locale code provided (e.g. "fr-fr", "nl-nl", not just "fr", "nl"), like this:
 
           {
-            "fr": {
+            "fr-fr": {
               "translation_key": "translated text in French"
             },
-            "es": {
+            "es-es": {
               "translation_key": "translated text in Spanish"
             }
             // Additional languages...
@@ -271,9 +271,7 @@ function updateMetaFileWithTranslations(
   };
 
   // Iterate through source messages in their original order to preserve key ordering
-  for (
-    const [key, sourceMessage] of Object.entries(sourceMessagesWithContext)
-  ) {
+  for (const key of Object.keys(sourceMessagesWithContext)) {
     if (existingMeta.messages[key]) {
       // Keep existing message, update with translation if available
       updatedMeta.messages[key] = {
