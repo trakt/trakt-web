@@ -58,12 +58,7 @@
       "default": "Serii recomandate"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} ep.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} ep."
     },
     "page_title_error_404": {
       "default": "404: Nimic. Golul."
@@ -393,23 +388,13 @@
       "default": "Seriale"
     },
     "text_episodes_watched": {
-      "default": "{count} episoade",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} episoade"
     },
     "list_title_movie_credits": {
       "default": "Filme"
     },
     "text_movies_watched": {
-      "default": "{count} filme",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} filme"
     },
     "header_details": {
       "default": "Detalii"
@@ -1003,12 +988,7 @@
       "default": "S-a difuzat"
     },
     "warning_prompt_drop_show": {
-      "default": "Sigur dorești să renunți la serialul \"{title}\"? Acesta va fi eliminat din lista ta 'Continuă vizionarea'.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Sigur dorești să renunți la serialul \"{title}\"? Acesta va fi eliminat din lista ta 'Continuă vizionarea'."
     },
     "button_label_drop_show": {
       "default": "Marchează \"{title}\" ca eliminat"
@@ -1017,20 +997,10 @@
       "default": "Elimină"
     },
     "warning_prompt_drop_movie": {
-      "default": "Sigur doriți să renunțați la \"{title}\"? Acesta va fi eliminat din lista dumneavoastră 'Continuă vizionarea'.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Sigur doriți să renunțați la \"{title}\"? Acesta va fi eliminat din lista dumneavoastră 'Continuă vizionarea'."
     },
     "button_label_drop_movie": {
-      "default": "Marcați filmul \"{title}\" ca abandonat",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Marcați filmul \"{title}\" ca abandonat"
     },
     "button_text_drop_movie": {
       "default": "Renunță la film"
@@ -1051,15 +1021,7 @@
       "default": "Sigur doriți să marcați toate episoadele nevăzute din \"{title}\" ca fiind văzute până la episodul {episode}? Aceasta va marca {count} episoade ca fiind văzute."
     },
     "warning_prompt_track_show_episode_count": {
-      "default": "Ești sigur că vrei să marchezi „{title}” ca vizionat? Această acțiune va marca {count} episoade ca vizionate dintr-o dată.",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Ești sigur că vrei să marchezi „{title}” ca vizionat? Această acțiune va marca {count} episoade ca vizionate dintr-o dată."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Sigur vrei să marchezi {count} episoade ca vizionate?"
@@ -1071,12 +1033,7 @@
       "default": "Încă nu ai urmărit \"{title}\"!"
     },
     "button_text_comment_likes": {
-      "default": "{count} aprecieri",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} aprecieri"
     },
     "button_label_close": {
       "default": "Închide"
@@ -1085,12 +1042,7 @@
       "default": "Răspunsuri la recenzie"
     },
     "button_text_comment_replies": {
-      "default": "{count} răspunsuri",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} răspunsuri"
     },
     "list_title_comments": {
       "default": "Recenzii"
@@ -1108,12 +1060,7 @@
       "default": "Adaugă Răspuns"
     },
     "button_label_comment_reply": {
-      "default": "Răspunde lui {user}",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "Răspunde lui {user}"
     },
     "textarea_placeholder_reply": {
       "default": "Răspunde..."
@@ -1302,12 +1249,7 @@
       "default": "Acum vizionez"
     },
     "button_label_checkin": {
-      "default": "Acum vizionez \"{title}\"",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Acum vizionez \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt folosește C🍪🍪KIES pentru a-ți îmbunătăți experiența. Poți <a>citi mai multe informații</a> aici."
@@ -1328,12 +1270,7 @@
       "default": "Anul curent"
     },
     "page_title_year_in_review": {
-      "default": "Recapitularea anului {year}",
-      "variables": {
-        "year": {
-          "type": "string"
-        }
-      }
+      "default": "Recapitularea anului {year}"
     },
     "page_title_month_in_review": {
       "default": "Luna în revistă"
@@ -1369,12 +1306,7 @@
       "default": "Prima redare luna aceasta"
     },
     "text_shows_watched": {
-      "default": "{count} seriale",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} seriale"
     },
     "button_text_follow": {
       "default": "Urmărește"
@@ -1476,12 +1408,7 @@
       "default": "Extra"
     },
     "button_label_star_rating": {
-      "default": "Evaluează cu {stars} stele.",
-      "variables": {
-        "stars": {
-          "type": "number"
-        }
-      }
+      "default": "Evaluează cu {stars} stele."
     },
     "badge_text_more": {
       "default": "și încă {count}"
@@ -1637,18 +1564,7 @@
       "default": "S{seasonNumber} · E{episodeNumber}"
     },
     "episode_footer_season_episode_range": {
-      "default": "S{seasonNumber} · E{startEpisode}-{endEpisode}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "startEpisode": {
-          "type": "number"
-        },
-        "endEpisode": {
-          "type": "number"
-        }
-      }
+      "default": "S{seasonNumber} · E{startEpisode}-{endEpisode}"
     },
     "translated_value_reaction_like": {
       "default": "Îmi place"
@@ -1675,12 +1591,7 @@
       "default": "Reacții"
     },
     "button_label_react": {
-      "default": "Reacționează cu {reaction}",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "Reacționează cu {reaction}"
     },
     "tag_text_movies": {
       "default": "Filme"
@@ -1893,12 +1804,7 @@
       "default": "Închide"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Sigur dorești să oprești vizionarea \"{title}\"?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Sigur dorești să oprești vizionarea \"{title}\"?"
     },
     "button_text_manage_subscription": {
       "default": "Gestionați abonamentul"
@@ -1913,12 +1819,7 @@
       "default": "Schimbați-vă fotografia, numele și alte detalii."
     },
     "description_genres": {
-      "default": "Adăugați sau eliminați cele {limit} genuri preferate.",
-      "variables": {
-        "limit": {
-          "type": "number"
-        }
-      }
+      "default": "Adăugați sau eliminați cele {limit} genuri preferate."
     },
     "list_title_activity": {
       "default": "Activitate"
@@ -2089,31 +1990,13 @@
       "default": "Zile de naștere luna aceasta"
     },
     "text_season_activity": {
-      "default": "{rangeLabel} din {title}",
-      "variables": {
-        "rangeLabel": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{rangeLabel} din {title}"
     },
     "text_last_day": {
-      "default": "ultima {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "ultima {day}"
     },
     "text_next_day": {
-      "default": "următoarea {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "următoarea {day}"
     },
     "filter_label_this_year": {
       "default": "Anul acesta"
@@ -2209,12 +2092,7 @@
       "default": "Setează coperta"
     },
     "button_label_set_cover_image": {
-      "default": "Setează imaginea \"{title}\" ca imagine de copertă.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Setează imaginea \"{title}\" ca imagine de copertă."
     },
     "page_title_start_watching": {
       "default": "Începe vizionarea"
@@ -2298,23 +2176,13 @@
       "default": "Istoric"
     },
     "text_directed_by": {
-      "default": "Regizat de <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Regizat de <a>{name}</a>"
     },
     "text_directed_by_short": {
       "default": "Regizat de"
     },
     "text_created_by": {
-      "default": "Creat de <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Creat de <a>{name}</a>"
     },
     "text_created_by_short": {
       "default": "Creat de"
@@ -2368,28 +2236,13 @@
       "default": "Vezi tot"
     },
     "text_play_count": {
-      "default": "{count} vizionări",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} vizionări"
     },
     "text_hours_watched": {
-      "default": "{count} ore",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} ore"
     },
     "tag_text_remaining_duration": {
-      "default": "{duration} rămase",
-      "variables": {
-        "duration": {
-          "type": "string"
-        }
-      }
+      "default": "{duration} rămase"
     },
     "list_title_user_lists": {
       "default": "Liste"
@@ -2437,12 +2290,7 @@
       "default": "Ordonează descrescător"
     },
     "text_about_user": {
-      "default": "Despre {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Despre {username}"
     },
     "button_label_profile_options": {
       "default": "Opțiuni profil"
@@ -2460,12 +2308,7 @@
       "default": "Din Istoricul Meu"
     },
     "list_placeholder_from_my_history": {
-      "default": "Nu ai văzut încă nimic cu {name}.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Nu ai văzut încă nimic cu {name}."
     },
     "text_info_younify_service_linked": {
       "default": "Serviciul de streaming a fost conectat."
@@ -2498,12 +2341,7 @@
       "default": "Defect"
     },
     "warning_prompt_younify_unlink": {
-      "default": "Ești sigur că vrei să deconectezi {service}?",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "Ești sigur că vrei să deconectezi {service}?"
     },
     "dialog_title_younify_data_sync": {
       "default": "Sincronizare Date Existente"
@@ -2545,12 +2383,7 @@
       "default": "Fă upgrade la VIP"
     },
     "text_billing_disclaimer": {
-      "default": "Plata începe la sfârșitul perioadei de probă. Abonamentul se reînnoiește automat și este facturat fiecare {period} până la anulare. Anulează oricând prin Centrul de Abonamente Google Play.",
-      "variables": {
-        "period": {
-          "type": "string"
-        }
-      }
+      "default": "Plata începe la sfârșitul perioadei de probă. Abonamentul se reînnoiește automat și este facturat fiecare {period} până la anulare. Anulează oricând prin Centrul de Abonamente Google Play."
     },
     "text_billing_already_vip": {
       "default": "Acum ești VIP Trakt!\nMulțumim pentru sprijin și bucură-te."
@@ -2571,20 +2404,10 @@
       "default": "Urmărire nelimitată și multe altele."
     },
     "button_label_like_list": {
-      "default": "Apreciază {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Apreciază {name}"
     },
     "button_label_unlike_list": {
-      "default": "Nu mai apreciază {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Nu mai apreciază {name}"
     },
     "header_export": {
       "default": "Exportă"
@@ -2602,23 +2425,13 @@
       "default": "Exportă un fișier ZIP cu datele tale brute."
     },
     "text_exporting": {
-      "default": "Se exportă… {progress}",
-      "variables": {
-        "progress": {
-          "type": "string"
-        }
-      }
+      "default": "Se exportă… {progress}"
     },
     "text_export_status_fail": {
       "default": "Exportarea a eșuat. Verifică consola browserului."
     },
     "text_export_status_fetching": {
-      "default": "Se caută {item}…",
-      "variables": {
-        "item": {
-          "type": "string"
-        }
-      }
+      "default": "Se caută {item}…"
     },
     "text_export_status_zipping": {
       "default": "Se comprimă fișierele…"
@@ -2630,12 +2443,7 @@
       "default": "Track"
     },
     "filter_label_runtime": {
-      "default": "{range} minute",
-      "variables": {
-        "range": {
-          "type": "string"
-        }
-      }
+      "default": "{range} minute"
     },
     "header_behavior": {
       "default": "Comportament"
@@ -2665,12 +2473,7 @@
       "default": "Treci la VIP pentru a debloca analize demne de un critic de festival."
     },
     "text_sentiment_example": {
-      "default": "Exemplu din „{title}”",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Exemplu din „{title}”"
     },
     "button_label_view_sentiment_analysis": {
       "default": "Vezi analiza sentimentelor"

@@ -42,23 +42,13 @@
       "default": "季中结局"
     },
     "header_profile_banner_greeting": {
-      "default": "你好，{name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "你好，{name}"
     },
     "list_title_up_next": {
       "default": "继续观看"
     },
     "tag_text_remaining_episodes": {
-      "default": "剩 {count} 集",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "剩 {count} 集"
     },
     "list_title_recommended_movies": {
       "default": "推荐电影"
@@ -67,12 +57,7 @@
       "default": "推荐剧集"
     },
     "tag_text_number_of_episodes": {
-      "default": "共 {count} 集",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "共 {count} 集"
     },
     "page_title_error_404": {
       "default": "404：一片虚无。"
@@ -99,28 +84,13 @@
       "default": "重温"
     },
     "button_label_add_to_watchlist": {
-      "default": "将“{title}”加入待看清单",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "将“{title}”加入待看清单"
     },
     "button_label_mark_as_watched": {
-      "default": "标记“{title}”为已看",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "标记“{title}”为已看"
     },
     "button_label_watched_until_here": {
-      "default": "标记“{title}”看到这里",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "标记“{title}”看到这里"
     },
     "translated_value_genre_horror": {
       "default": "恐怖"
@@ -234,12 +204,7 @@
       "default": "科幻"
     },
     "button_label_remove_from_watchlist": {
-      "default": "将“{title}”从待看清单移除",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "将“{title}”从待看清单移除"
     },
     "input_placeholder_search": {
       "default": "搜索剧集和电影..."
@@ -347,12 +312,7 @@
       "default": "首页"
     },
     "tag_text_plays": {
-      "default": "{number} 次播放",
-      "variables": {
-        "number": {
-          "type": "number"
-        }
-      }
+      "default": "{number} 次播放"
     },
     "button_text_logout": {
       "default": "登出"
@@ -427,42 +387,22 @@
       "default": "参演剧集"
     },
     "text_episodes_watched": {
-      "default": "{count} 集",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} 集"
     },
     "list_title_movie_credits": {
       "default": "参演电影"
     },
     "text_movies_watched": {
-      "default": "{count} 部电影",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} 部电影"
     },
     "header_details": {
       "default": "详情"
     },
     "button_label_expand_category": {
-      "default": "展开 {category}",
-      "variables": {
-        "category": {
-          "type": "string"
-        }
-      }
+      "default": "展开 {category}"
     },
     "button_text_more": {
-      "default": "还有 {count} 个",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "还有 {count} 个"
     },
     "header_premiered": {
       "default": "首播日期"
@@ -495,12 +435,7 @@
       "default": "电影待看清单"
     },
     "image_alt_streaming_service_logo": {
-      "default": "{service} logo",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "{service} logo"
     },
     "header_director": {
       "default": "导演"
@@ -737,77 +672,34 @@
       "default": "从已看记录中移除"
     },
     "button_label_remove_from_watched": {
-      "default": "将“{title}”从已看列表中移除",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "将“{title}”从已看列表中移除"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "确定要将“{title}”从已看列表中移除吗？所有播放记录都将被删除。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "确定要将“{title}”从已看列表中移除吗？所有播放记录都将被删除。"
     },
     "button_label_remove_from_history": {
-      "default": "从已看列表中移除“{title}”的这条播放记录",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "从已看列表中移除“{title}”的这条播放记录"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "确定要从已看列表中移除“{title}”的这条播放记录吗？",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "确定要从已看列表中移除“{title}”的这条播放记录吗？"
     },
     "list_title_seasons": {
       "default": "季"
     },
     "text_season_number": {
-      "default": "第 {number} 季",
-      "variables": {
-        "number": {
-          "type": "number"
-        }
-      }
+      "default": "第 {number} 季"
     },
     "text_season_specials": {
       "default": "特别篇"
     },
     "button_label_expand_media_overview": {
-      "default": "展开“{title}”简介",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "展开“{title}”简介"
     },
     "text_season_episode_number": {
-      "default": "第 {season} 季 • 第 {number} 集",
-      "variables": {
-        "season": {
-          "type": "number"
-        },
-        "number": {
-          "type": "number"
-        }
-      }
+      "default": "第 {season} 季 • 第 {number} 集"
     },
     "button_label_share": {
-      "default": "分享“{title}”",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "分享“{title}”"
     },
     "button_text_share": {
       "default": "分享"
@@ -858,12 +750,7 @@
       "default": "预计首播"
     },
     "image_alt_person_headshot": {
-      "default": "{person} 的头像",
-      "variables": {
-        "person": {
-          "type": "string"
-        }
-      }
+      "default": "{person} 的头像"
     },
     "list_title_actors": {
       "default": "演员"
@@ -887,12 +774,7 @@
       "default": "整季"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "确定要将“{title}”从待看清单中移除吗？",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "确定要将“{title}”从待看清单中移除吗？"
     },
     "button_label_view_all_recommended_movies": {
       "default": "查看所有推荐电影"
@@ -934,28 +816,13 @@
       "default": "移除收藏"
     },
     "button_label_add_to_favorites": {
-      "default": "将“{title}”加入收藏",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "将“{title}”加入收藏"
     },
     "button_label_remove_from_favorites": {
-      "default": "将“{title}”移除收藏",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "将“{title}”移除收藏"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "确定要将“{title}”从收藏夹移除吗？",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "确定要将“{title}”从收藏夹移除吗？"
     },
     "list_title_favorite_movies": {
       "default": "收藏的电影"
@@ -985,42 +852,22 @@
       "default": "可用平台"
     },
     "button_label_popup_menu": {
-      "default": "“{title}”的弹出菜单",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "“{title}”的弹出菜单"
     },
     "list_title_popular_lists": {
       "default": "热门片单"
     },
     "list_placeholder_popular_lists": {
-      "default": "“{title}”未出现在任何热门片单中。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "“{title}”未出现在任何热门片单中。"
     },
     "text_by": {
       "default": "创建者："
     },
     "image_alt_user_avatar": {
-      "default": "{username} 的头像",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username} 的头像"
     },
     "image_alt_media_poster": {
-      "default": "“{title}”的海报",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "“{title}”的海报"
     },
     "list_placeholder_comments": {
       "default": "暂无评论。"
@@ -1107,53 +954,19 @@
       "default": "喜欢的片单"
     },
     "text_share_movie": {
-      "default": "刚发现《{title}》——你一定要看！🎬",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "刚发现《{title}》——你一定要看！🎬"
     },
     "text_share_show": {
-      "default": "发现了这部神剧：《{title}》！📺",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "发现了这部神剧：《{title}》！📺"
     },
     "text_share_episode": {
-      "default": "刚看完《{show}》S{season}E{episode} - {title}！🔥",
-      "variables": {
-        "show": {
-          "type": "string"
-        },
-        "season": {
-          "type": "number"
-        },
-        "episode": {
-          "type": "number"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "刚看完《{show}》S{season}E{episode} - {title}！🔥"
     },
     "text_share_person": {
-      "default": "快来 Trakt 看看 {name}！🎭",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "快来 Trakt 看看 {name}！🎭"
     },
     "text_share_profile": {
-      "default": "快来 Trakt 看看 {name}！🎭",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "快来 Trakt 看看 {name}！🎭"
     },
     "list_title_recently_watched": {
       "default": "最近观看"
@@ -1174,121 +987,52 @@
       "default": "已播出"
     },
     "warning_prompt_drop_show": {
-      "default": "确定要弃剧“{title}”吗？这将把它从你的“继续观看”列表中移除。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "确定要弃剧“{title}”吗？这将把它从你的“继续观看”列表中移除。"
     },
     "button_label_drop_show": {
-      "default": "将剧集“{title}”标记为弃剧",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "将剧集“{title}”标记为弃剧"
     },
     "button_text_drop_show": {
       "default": "弃剧"
     },
     "warning_prompt_drop_movie": {
-      "default": "确定要放弃“{title}”吗？这将把它从你的“继续观看”列表中移除。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "确定要放弃“{title}”吗？这将把它从你的“继续观看”列表中移除。"
     },
     "button_label_drop_movie": {
-      "default": "将电影“{title}”标记为放弃",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "将电影“{title}”标记为放弃"
     },
     "button_text_drop_movie": {
       "default": "放弃电影"
     },
     "warning_prompt_restore_show": {
-      "default": "确定要恢复“{title}”吗？这将恢复它的进度和日历显示。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "确定要恢复“{title}”吗？这将恢复它的进度和日历显示。"
     },
     "button_label_restore_show": {
-      "default": "恢复剧集“{title}”",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "恢复剧集“{title}”"
     },
     "button_text_restore_show": {
       "default": "恢复剧集"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "确定要将“{title}”标记为已看吗？这将把所有剧集标记为已看。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "确定要将“{title}”标记为已看吗？这将把所有剧集标记为已看。"
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "确定要将“{title}”第 {episode} 集之前的所有未看剧集标记为已看吗？这将标记 {count} 集。",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "episode": {
-          "type": "number"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "确定要将“{title}”第 {episode} 集之前的所有未看剧集标记为已看吗？这将标记 {count} 集。"
     },
     "warning_prompt_track_show_episode_count": {
-      "default": "确定要将“{title}”标记为已观看吗？这将一次性将 {count} 集标记为已观看。",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "确定要将“{title}”标记为已观看吗？这将一次性将 {count} 集标记为已观看。"
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
-      "default": "确定要将 {count} 集标记为已看吗？",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "确定要将 {count} 集标记为已看吗？"
     },
     "tag_text_watch_count": {
       "default": "观看次数"
     },
     "list_placeholder_media_history": {
-      "default": "你还没有看过“{title}”",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "你还没有看过“{title}”"
     },
     "button_text_comment_likes": {
-      "default": "{count} 个赞",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} 个赞"
     },
     "button_label_close": {
       "default": "关闭"
@@ -1297,12 +1041,7 @@
       "default": "评论回复"
     },
     "button_text_comment_replies": {
-      "default": "{count} 条回复",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} 条回复"
     },
     "list_title_comments": {
       "default": "评论"
@@ -1320,12 +1059,7 @@
       "default": "添加回复"
     },
     "button_label_comment_reply": {
-      "default": "回复 {user}",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "回复 {user}"
     },
     "textarea_placeholder_reply": {
       "default": "回复..."
@@ -1358,23 +1092,13 @@
       "default": "发布评论时发生错误。请稍后再试。"
     },
     "page_title_user_profile": {
-      "default": "{username} 的个人资料",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username} 的个人资料"
     },
     "header_private_profile": {
       "default": "此个人资料是私密的"
     },
     "text_private_profile_description": {
-      "default": "秘密已经够多了。{username} 决定把他们的秘密留给自己。",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "秘密已经够多了。{username} 决定把他们的秘密留给自己。"
     },
     "header_original_title": {
       "default": "原名"
@@ -1386,12 +1110,7 @@
       "default": "从片单移除"
     },
     "button_label_remove_from_list": {
-      "default": "将“{title}”从片单移除",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "将“{title}”从片单移除"
     },
     "page_title_service_unavailable": {
       "default": "无法连接 Trakt 服务"
@@ -1415,45 +1134,16 @@
       "default": "管理列表"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "添加或移除“{title}”于片单",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "添加或移除“{title}”于片单"
     },
     "button_label_add_to_personal_list": {
-      "default": "将“{title}”添加到 {list}",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "将“{title}”添加到 {list}"
     },
     "button_label_remove_from_personal_list": {
-      "default": "将“{title}”从 {list} 移除",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "将“{title}”从 {list} 移除"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "确定要将“{title}”从 {list} 中移除吗？",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "确定要将“{title}”从 {list} 中移除吗？"
     },
     "option_text_theme_light": {
       "default": "浅色"
@@ -1471,12 +1161,7 @@
       "default": "重置"
     },
     "text_search_results_for": {
-      "default": "“{query}”的搜索结果",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
+      "default": "“{query}”的搜索结果"
     },
     "translated_value_type_movie": {
       "default": "电影"
@@ -1521,12 +1206,7 @@
       "default": "评分"
     },
     "button_label_view_all_items_in": {
-      "default": "查看“{title}”中的所有项目",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "查看“{title}”中的所有项目"
     },
     "button_text_reset_all_filters": {
       "default": "重置全部"
@@ -1568,12 +1248,7 @@
       "default": "正在观看"
     },
     "button_label_checkin": {
-      "default": "正在观看“{title}”",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "正在观看“{title}”"
     },
     "text_cookie_notice": {
       "default": "Trakt 使用 C🍪🍪KIES 来增强您的体验。您可以在此<a>阅读更多信息</a>。"
@@ -1594,12 +1269,7 @@
       "default": "年初至今"
     },
     "page_title_year_in_review": {
-      "default": "{year} 年度回顾",
-      "variables": {
-        "year": {
-          "type": "string"
-        }
-      }
+      "default": "{year} 年度回顾"
     },
     "page_title_month_in_review": {
       "default": "月度回顾"
@@ -1635,42 +1305,22 @@
       "default": "本月首次观看"
     },
     "text_shows_watched": {
-      "default": "{count} 部剧集",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} 部剧集"
     },
     "button_text_follow": {
       "default": "关注"
     },
     "button_label_follow": {
-      "default": "关注 {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "关注 {username}"
     },
     "button_text_unfollow": {
       "default": "取消关注"
     },
     "button_label_unfollow": {
-      "default": "取消关注 {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "取消关注 {username}"
     },
     "warning_prompt_unfollow_user": {
-      "default": "确定要取消关注 {username} 吗？",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "确定要取消关注 {username} 吗？"
     },
     "text_vip_upsell": {
       "default": "解锁 VIP 功能，提升 Trakt 体验"
@@ -1700,12 +1350,7 @@
       "default": "重命名"
     },
     "button_label_rename_list": {
-      "default": "重命名你的片单 {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "重命名你的片单 {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "查看所有热门剧集"
@@ -1753,12 +1398,7 @@
       "default": "个人资料"
     },
     "page_title_search_results": {
-      "default": "“{query}”的搜索结果",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
+      "default": "“{query}”的搜索结果"
     },
     "page_title_search": {
       "default": "搜索"
@@ -1767,28 +1407,13 @@
       "default": "花絮"
     },
     "button_label_star_rating": {
-      "default": "打分 {stars} 星。",
-      "variables": {
-        "stars": {
-          "type": "number"
-        }
-      }
+      "default": "打分 {stars} 星。"
     },
     "badge_text_more": {
-      "default": "还有 {count} 个",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "还有 {count} 个"
     },
     "button_label_stop_playing": {
-      "default": "停止“{title}”的签到",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "停止“{title}”的签到"
     },
     "link_text_view_profile": {
       "default": "查看个人资料"
@@ -1797,31 +1422,16 @@
       "default": "搜索"
     },
     "image_alt_list_preview_poster": {
-      "default": "“{title}”中条目的海报",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "“{title}”中条目的海报"
     },
     "button_text_delete_list": {
       "default": "删除"
     },
     "button_label_delete_list": {
-      "default": "删除你的片单 {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "删除你的片单 {name}"
     },
     "warning_prompt_delete_list": {
-      "default": "确定要删除片单 {name} 吗？",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "确定要删除片单 {name} 吗？"
     },
     "link_text_vip_list_upsell": {
       "default": "以添加更多片单"
@@ -1914,28 +1524,13 @@
       "default": "喜爱的类型"
     },
     "button_label_toggle_genre": {
-      "default": "切换 {genre} 类型",
-      "variables": {
-        "genre": {
-          "type": "string"
-        }
-      }
+      "default": "切换 {genre} 类型"
     },
     "text_share_list": {
-      "default": "快来 Trakt 看看这个“{name}”片单！📋",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "快来 Trakt 看看这个“{name}”片单！📋"
     },
     "text_share_top_list": {
-      "default": "快来 Trakt 看看 {name}！🔥",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "快来 Trakt 看看 {name}！🔥"
     },
     "page_title_watchlist": {
       "default": "待看清单"
@@ -1965,29 +1560,10 @@
       "default": "隐藏详情"
     },
     "episode_footer_season_episode": {
-      "default": "S{seasonNumber} • E{episodeNumber}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "episodeNumber": {
-          "type": "number"
-        }
-      }
+      "default": "S{seasonNumber} • E{episodeNumber}"
     },
     "episode_footer_season_episode_range": {
-      "default": "S{seasonNumber} • E{startEpisode}-{endEpisode}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "startEpisode": {
-          "type": "number"
-        },
-        "endEpisode": {
-          "type": "number"
-        }
-      }
+      "default": "S{seasonNumber} • E{startEpisode}-{endEpisode}"
     },
     "translated_value_reaction_like": {
       "default": "赞"
@@ -2014,12 +1590,7 @@
       "default": "反应"
     },
     "button_label_react": {
-      "default": "回应 {reaction}",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "回应 {reaction}"
     },
     "tag_text_movies": {
       "default": "电影"
@@ -2091,12 +1662,7 @@
       "default": "今天"
     },
     "button_label_go_to_calendar_day": {
-      "default": "转到 {day}",
-      "variables": {
-        "day": {
-          "type": "number"
-        }
-      }
+      "default": "转到 {day}"
     },
     "text_calendar_placeholder_1": {
       "default": "这天没有安排。休息一下，享受阳光吧。"
@@ -2237,12 +1803,7 @@
       "default": "关闭"
     },
     "warning_prompt_stop_checkin": {
-      "default": "确定要停止观看“{title}”吗？",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "确定要停止观看“{title}”吗？"
     },
     "button_text_manage_subscription": {
       "default": "管理订阅"
@@ -2257,12 +1818,7 @@
       "default": "更改你的头像、名称和其他详情。"
     },
     "description_genres": {
-      "default": "添加或移除你 {limit} 个最喜欢的类型。",
-      "variables": {
-        "limit": {
-          "type": "number"
-        }
-      }
+      "default": "添加或移除你 {limit} 个最喜欢的类型。"
     },
     "list_title_activity": {
       "default": "动态"
@@ -2433,31 +1989,13 @@
       "default": "本月寿星"
     },
     "text_season_activity": {
-      "default": "{title} 的 {rangeLabel}",
-      "variables": {
-        "rangeLabel": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} 的 {rangeLabel}"
     },
     "text_last_day": {
-      "default": "上{day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "上{day}"
     },
     "text_next_day": {
-      "default": "下{day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "下{day}"
     },
     "filter_label_this_year": {
       "default": "今年"
@@ -2553,12 +2091,7 @@
       "default": "设为封面"
     },
     "button_label_set_cover_image": {
-      "default": "将“{title}”的图片设为你的封面图。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "将“{title}”的图片设为你的封面图。"
     },
     "page_title_start_watching": {
       "default": "开始观看"
@@ -2642,23 +2175,13 @@
       "default": "历史"
     },
     "text_directed_by": {
-      "default": "导演：<a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "导演：<a>{name}</a>"
     },
     "text_directed_by_short": {
       "default": "导演"
     },
     "text_created_by": {
-      "default": "主创：<a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "主创：<a>{name}</a>"
     },
     "text_created_by_short": {
       "default": "主创"
@@ -2712,28 +2235,13 @@
       "default": "查看全部"
     },
     "text_play_count": {
-      "default": "{count} 次播放",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} 次播放"
     },
     "text_hours_watched": {
-      "default": "{count} 小时",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} 小时"
     },
     "tag_text_remaining_duration": {
-      "default": "剩 {duration}",
-      "variables": {
-        "duration": {
-          "type": "string"
-        }
-      }
+      "default": "剩 {duration}"
     },
     "list_title_user_lists": {
       "default": "片单"
@@ -2781,12 +2289,7 @@
       "default": "降序"
     },
     "text_about_user": {
-      "default": "关于 {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "关于 {username}"
     },
     "button_label_profile_options": {
       "default": "个人资料选项"
@@ -2804,12 +2307,7 @@
       "default": "来自我的历史"
     },
     "list_placeholder_from_my_history": {
-      "default": "你还没看过 {name} 出演的任何作品。",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "你还没看过 {name} 出演的任何作品。"
     },
     "text_info_younify_service_linked": {
       "default": "流媒体服务已关联。"
@@ -2842,12 +2340,7 @@
       "default": "已失效"
     },
     "warning_prompt_younify_unlink": {
-      "default": "确定要取消关联 {service} 吗？",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "确定要取消关联 {service} 吗？"
     },
     "dialog_title_younify_data_sync": {
       "default": "同步现有数据"
@@ -2889,12 +2382,7 @@
       "default": "升级到 VIP"
     },
     "text_billing_disclaimer": {
-      "default": "付款将在试用期结束后开始。订阅自动续期，每 {period} 收费一次，直至取消。随时通过 Google Play 订阅中心取消。",
-      "variables": {
-        "period": {
-          "type": "string"
-        }
-      }
+      "default": "付款将在试用期结束后开始。订阅自动续期，每 {period} 收费一次，直至取消。随时通过 Google Play 订阅中心取消。"
     },
     "text_billing_already_vip": {
       "default": "你现在是 Trakt VIP 了！\n感谢你的支持，祝你使用愉快。"
@@ -2915,20 +2403,10 @@
       "default": "无限记录以及更多功能。"
     },
     "button_label_like_list": {
-      "default": "点赞 {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "点赞 {name}"
     },
     "button_label_unlike_list": {
-      "default": "取消点赞 {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "取消点赞 {name}"
     },
     "header_export": {
       "default": "导出"
@@ -2946,23 +2424,13 @@
       "default": "导出包含原始数据的 ZIP 文件。"
     },
     "text_exporting": {
-      "default": "正在导出… {progress}",
-      "variables": {
-        "progress": {
-          "type": "string"
-        }
-      }
+      "default": "正在导出… {progress}"
     },
     "text_export_status_fail": {
       "default": "导出失败。请查看浏览器控制台了解详情。"
     },
     "text_export_status_fetching": {
-      "default": "正在获取 {item}…",
-      "variables": {
-        "item": {
-          "type": "string"
-        }
-      }
+      "default": "正在获取 {item}…"
     },
     "text_export_status_zipping": {
       "default": "正在压缩文件…"
@@ -2974,12 +2442,7 @@
       "default": "记录"
     },
     "filter_label_runtime": {
-      "default": "{range} 分钟",
-      "variables": {
-        "range": {
-          "type": "string"
-        }
-      }
+      "default": "{range} 分钟"
     },
     "header_behavior": {
       "default": "行为习惯"
@@ -3009,12 +2472,7 @@
       "default": "升级至 VIP，解锁更多如同电影彩蛋般的深度见解。"
     },
     "text_sentiment_example": {
-      "default": "来自《{title}》的示例",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "来自《{title}》的示例"
     },
     "button_label_view_sentiment_analysis": {
       "default": "查看情感分析"

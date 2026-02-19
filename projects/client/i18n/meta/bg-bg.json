@@ -58,12 +58,7 @@
       "default": "Препоръчани предавания"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} еп.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} еп."
     },
     "page_title_error_404": {
       "default": "404: Нищото. Празнотата."
@@ -393,23 +388,13 @@
       "default": "Предавания"
     },
     "text_episodes_watched": {
-      "default": "{count} епизода",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} епизода"
     },
     "list_title_movie_credits": {
       "default": "Филми"
     },
     "text_movies_watched": {
-      "default": "{count} филма",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} филма"
     },
     "header_details": {
       "default": "Подробности"
@@ -1003,12 +988,7 @@
       "default": "Излъчено"
     },
     "warning_prompt_drop_show": {
-      "default": "Сигурни ли сте, че искате да премахнете сериал \"{title}\"? Това ще го премахне от списъка ви 'Продължаване на гледането'.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Сигурни ли сте, че искате да премахнете сериал \"{title}\"? Това ще го премахне от списъка ви 'Продължаване на гледането'."
     },
     "button_label_drop_show": {
       "default": "Отбележи \"{title}\" като отследвано"
@@ -1017,20 +997,10 @@
       "default": "Премахни следването"
     },
     "warning_prompt_drop_movie": {
-      "default": "Сигурни ли сте, че искате да премахнете \"{title}\"? Това ще го премахне от списъка ви 'Продължавам да гледам'.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Сигурни ли сте, че искате да премахнете \"{title}\"? Това ще го премахне от списъка ви 'Продължавам да гледам'."
     },
     "button_label_drop_movie": {
-      "default": "Отбележете филма \"{title}\" като премахнат",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Отбележете филма \"{title}\" като премахнат"
     },
     "button_text_drop_movie": {
       "default": "Премахни филма"
@@ -1051,15 +1021,7 @@
       "default": "Сигурни ли сте, че искате да маркирате всички невидяни епизоди на \"{title}\" като гледани до епизод {episode}? Това ще отбележи {count} епизода като гледани."
     },
     "warning_prompt_track_show_episode_count": {
-      "default": "Сигурни ли сте, че искате да отбележите „{title}“ като гледан? Това ще отбележи {count} епизода като гледани.",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Сигурни ли сте, че искате да отбележите „{title}“ като гледан? Това ще отбележи {count} епизода като гледани."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Сигурни ли сте, че искате да отбележите {count} епизоди като гледани?"
@@ -1071,12 +1033,7 @@
       "default": "Все още не сте гледали \"{title}\""
     },
     "button_text_comment_likes": {
-      "default": "{count} харесвания",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} харесвания"
     },
     "button_label_close": {
       "default": "Затвори"
@@ -1085,12 +1042,7 @@
       "default": "Отговори на ревюто"
     },
     "button_text_comment_replies": {
-      "default": "{count} отговора",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} отговора"
     },
     "list_title_comments": {
       "default": "Ревюта"
@@ -1108,12 +1060,7 @@
       "default": "Добави отговор"
     },
     "button_label_comment_reply": {
-      "default": "Отговор до {user}",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "Отговор до {user}"
     },
     "textarea_placeholder_reply": {
       "default": "Отговори..."
@@ -1302,12 +1249,7 @@
       "default": "Гледам в момента"
     },
     "button_label_checkin": {
-      "default": "Гледам в момента \"{title}\"",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Гледам в момента \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt използва C🍪🍪KIES, за да подобри цялостното ви изживяване. Можете да <a>прочетете повече информация</a> тук."
@@ -1328,12 +1270,7 @@
       "default": "Година до момента"
     },
     "page_title_year_in_review": {
-      "default": "Преглед на {year} г.",
-      "variables": {
-        "year": {
-          "type": "string"
-        }
-      }
+      "default": "Преглед на {year} г."
     },
     "page_title_month_in_review": {
       "default": "Обзор на месеца"
@@ -1369,12 +1306,7 @@
       "default": "Първо пускане този месец"
     },
     "text_shows_watched": {
-      "default": "{count} сериала",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} сериала"
     },
     "button_text_follow": {
       "default": "Следвай"
@@ -1476,12 +1408,7 @@
       "default": "Екстри"
     },
     "button_label_star_rating": {
-      "default": "Оценете с {stars} звезди.",
-      "variables": {
-        "stars": {
-          "type": "number"
-        }
-      }
+      "default": "Оценете с {stars} звезди."
     },
     "badge_text_more": {
       "default": "и още {count}"
@@ -1637,18 +1564,7 @@
       "default": "C{seasonNumber} · E{episodeNumber}"
     },
     "episode_footer_season_episode_range": {
-      "default": "S{seasonNumber} · E{startEpisode}-{endEpisode}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "startEpisode": {
-          "type": "number"
-        },
-        "endEpisode": {
-          "type": "number"
-        }
-      }
+      "default": "S{seasonNumber} · E{startEpisode}-{endEpisode}"
     },
     "translated_value_reaction_like": {
       "default": "Харесва ми"
@@ -1675,12 +1591,7 @@
       "default": "Реакции"
     },
     "button_label_react": {
-      "default": "Реагирай с {reaction}",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "Реагирай с {reaction}"
     },
     "tag_text_movies": {
       "default": "Филми"
@@ -1893,12 +1804,7 @@
       "default": "Затвори"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Сигурни ли сте, че искате да спрете да гледате \"{title}\"?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Сигурни ли сте, че искате да спрете да гледате \"{title}\"?"
     },
     "button_text_manage_subscription": {
       "default": "Управление на абонамента"
@@ -1913,12 +1819,7 @@
       "default": "Променете снимката си, името и други данни."
     },
     "description_genres": {
-      "default": "Добавете или премахнете своите {limit} любими жанрове.",
-      "variables": {
-        "limit": {
-          "type": "number"
-        }
-      }
+      "default": "Добавете или премахнете своите {limit} любими жанрове."
     },
     "list_title_activity": {
       "default": "Активност"
@@ -2089,31 +1990,13 @@
       "default": "Рождени дни този месец"
     },
     "text_season_activity": {
-      "default": "{rangeLabel} на {title}",
-      "variables": {
-        "rangeLabel": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{rangeLabel} на {title}"
     },
     "text_last_day": {
-      "default": "миналия {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "миналия {day}"
     },
     "text_next_day": {
-      "default": "следващия {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "следващия {day}"
     },
     "filter_label_this_year": {
       "default": "Тази година"
@@ -2209,12 +2092,7 @@
       "default": "Задай корица"
     },
     "button_label_set_cover_image": {
-      "default": "Задайте изображението на \"{title}\" като ваша корица.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Задайте изображението на \"{title}\" като ваша корица."
     },
     "page_title_start_watching": {
       "default": "Започнете гледането"
@@ -2298,23 +2176,13 @@
       "default": "История"
     },
     "text_directed_by": {
-      "default": "Режисьор: <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Режисьор: <a>{name}</a>"
     },
     "text_directed_by_short": {
       "default": "Режисьор:"
     },
     "text_created_by": {
-      "default": "Създадено от <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Създадено от <a>{name}</a>"
     },
     "text_created_by_short": {
       "default": "Създател:"
@@ -2368,28 +2236,13 @@
       "default": "Виж всички"
     },
     "text_play_count": {
-      "default": "{count} гледания",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} гледания"
     },
     "text_hours_watched": {
-      "default": "{count} часа",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} часа"
     },
     "tag_text_remaining_duration": {
-      "default": "{duration} оставащи",
-      "variables": {
-        "duration": {
-          "type": "string"
-        }
-      }
+      "default": "{duration} оставащи"
     },
     "list_title_user_lists": {
       "default": "Списъци"
@@ -2437,12 +2290,7 @@
       "default": "Сортиране в низходящ ред"
     },
     "text_about_user": {
-      "default": "Относно {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Относно {username}"
     },
     "button_label_profile_options": {
       "default": "Опции на профила"
@@ -2460,12 +2308,7 @@
       "default": "От Моята История"
     },
     "list_placeholder_from_my_history": {
-      "default": "Все още не сте гледали нищо с {name}.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Все още не сте гледали нищо с {name}."
     },
     "text_info_younify_service_linked": {
       "default": "Стрийминг услугата е свързана."
@@ -2498,12 +2341,7 @@
       "default": "Счупено"
     },
     "warning_prompt_younify_unlink": {
-      "default": "Сигурни ли сте, че искате да премахнете {service}?",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "Сигурни ли сте, че искате да премахнете {service}?"
     },
     "dialog_title_younify_data_sync": {
       "default": "Синхронизация на Съществуващи Данни"
@@ -2545,12 +2383,7 @@
       "default": "Надграждане до VIP"
     },
     "text_billing_disclaimer": {
-      "default": "Плащането започва в края на пробния период. Абонаментът се подновява автоматично и се таксува всеки {period}, докато не бъде отменен. Можете да отмените по всяко време чрез Центъра за абонаменти на Google Play.",
-      "variables": {
-        "period": {
-          "type": "string"
-        }
-      }
+      "default": "Плащането започва в края на пробния период. Абонаментът се подновява автоматично и се таксува всеки {period}, докато не бъде отменен. Можете да отмените по всяко време чрез Центъра за абонаменти на Google Play."
     },
     "text_billing_already_vip": {
       "default": "Вече сте VIP на Trakt!\nБлагодарим ви за подкрепата и се наслаждавайте."
@@ -2571,20 +2404,10 @@
       "default": "Неограничено проследяване и още."
     },
     "button_label_like_list": {
-      "default": "Харесва ми {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Харесва ми {name}"
     },
     "button_label_unlike_list": {
-      "default": "Вече не ми харесва {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Вече не ми харесва {name}"
     },
     "header_export": {
       "default": "Експортиране"
@@ -2602,23 +2425,13 @@
       "default": "Експортирайте ZIP файл, съдържащ вашите сурови данни."
     },
     "text_exporting": {
-      "default": "Експортиране… {progress}",
-      "variables": {
-        "progress": {
-          "type": "string"
-        }
-      }
+      "default": "Експортиране… {progress}"
     },
     "text_export_status_fail": {
       "default": "Експортът е неуспешен. Проверете конзолата на браузъра си."
     },
     "text_export_status_fetching": {
-      "default": "Извличане на {item}…",
-      "variables": {
-        "item": {
-          "type": "string"
-        }
-      }
+      "default": "Извличане на {item}…"
     },
     "text_export_status_zipping": {
       "default": "Пакетиране на файлове…"
@@ -2630,12 +2443,7 @@
       "default": "Track"
     },
     "filter_label_runtime": {
-      "default": "{range} минути",
-      "variables": {
-        "range": {
-          "type": "string"
-        }
-      }
+      "default": "{range} минути"
     },
     "header_behavior": {
       "default": "Поведение"
@@ -2665,12 +2473,7 @@
       "default": "Надградете до VIP, за да отключите детайли, които ще променят начина, по който гледате."
     },
     "text_sentiment_example": {
-      "default": "Пример от „{title}“",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Пример от „{title}“"
     },
     "button_label_view_sentiment_analysis": {
       "default": "Преглед на анализа на настроенията"

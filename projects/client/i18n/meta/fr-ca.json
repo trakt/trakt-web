@@ -58,12 +58,7 @@
       "default": "Recommandations"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} ép.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} ép."
     },
     "page_title_error_404": {
       "default": "404: Erreur !"
@@ -393,23 +388,13 @@
       "default": "Séries"
     },
     "text_episodes_watched": {
-      "default": "{count} épisodes",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} épisodes"
     },
     "list_title_movie_credits": {
       "default": "Films"
     },
     "text_movies_watched": {
-      "default": "{count} films",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} films"
     },
     "header_details": {
       "default": "Détails"
@@ -1003,12 +988,7 @@
       "default": "Diffusé"
     },
     "warning_prompt_drop_show": {
-      "default": "Êtes-vous certain de vouloir laisser tomber la série \"{title}\" ? Ça va l'enlever de votre liste 'Continuer à regarder'.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Êtes-vous certain de vouloir laisser tomber la série \"{title}\" ? Ça va l'enlever de votre liste 'Continuer à regarder'."
     },
     "button_label_drop_show": {
       "default": "Marquer \"{title}\" comme abandonné"
@@ -1017,20 +997,10 @@
       "default": "Abandonner"
     },
     "warning_prompt_drop_movie": {
-      "default": "Êtes-vous certain de vouloir abandonner \"{title}\" ? Ça va l'enlever de votre liste 'Continuer de visionner'.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Êtes-vous certain de vouloir abandonner \"{title}\" ? Ça va l'enlever de votre liste 'Continuer de visionner'."
     },
     "button_label_drop_movie": {
-      "default": "Marquer le film \"{title}\" comme abandonné",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Marquer le film \"{title}\" comme abandonné"
     },
     "button_text_drop_movie": {
       "default": "Abandonner le film"
@@ -1051,15 +1021,7 @@
       "default": "Êtes-vous certain de vouloir marquer tous les épisodes non vus de \"{title}\" comme visionnés jusqu'à l'épisode {episode} ? Cela marquera {count} épisodes comme visionnés."
     },
     "warning_prompt_track_show_episode_count": {
-      "default": "Es-tu certain de vouloir marquer « {title} » comme vu? Ça va marquer {count} épisodes d'un coup, un vrai marathon!",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Es-tu certain de vouloir marquer « {title} » comme vu? Ça va marquer {count} épisodes d'un coup, un vrai marathon!"
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Êtes-vous certain de vouloir marquer {count} épisodes comme visionnés?"
@@ -1071,12 +1033,7 @@
       "default": "Vous n'avez pas encore vu \"{title}\""
     },
     "button_text_comment_likes": {
-      "default": "{count} j'aime",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} j'aime"
     },
     "button_label_close": {
       "default": "Fermer"
@@ -1085,12 +1042,7 @@
       "default": "Réponses à l'avis"
     },
     "button_text_comment_replies": {
-      "default": "{count} réponses",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} réponses"
     },
     "list_title_comments": {
       "default": "Avis"
@@ -1108,12 +1060,7 @@
       "default": "Ajouter une réponse"
     },
     "button_label_comment_reply": {
-      "default": "Répondre à {user}",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "Répondre à {user}"
     },
     "textarea_placeholder_reply": {
       "default": "Réponds..."
@@ -1302,12 +1249,7 @@
       "default": "En train de regarder"
     },
     "button_label_checkin": {
-      "default": "En train de regarder \"{title}\"",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "En train de regarder \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt utilise des C🍪🍪KIES pour améliorer votre expérience globale. Vous pouvez <a>lire plus d'informations</a> ici."
@@ -1328,12 +1270,7 @@
       "default": "Année en cours"
     },
     "page_title_year_in_review": {
-      "default": "Bilan de {year}",
-      "variables": {
-        "year": {
-          "type": "string"
-        }
-      }
+      "default": "Bilan de {year}"
     },
     "page_title_month_in_review": {
       "default": "Bilan du mois"
@@ -1369,12 +1306,7 @@
       "default": "Première lecture ce mois-ci"
     },
     "text_shows_watched": {
-      "default": "{count} séries",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} séries"
     },
     "button_text_follow": {
       "default": "Suivre"
@@ -1476,12 +1408,7 @@
       "default": "Suppléments"
     },
     "button_label_star_rating": {
-      "default": "Noter avec {stars} étoiles.",
-      "variables": {
-        "stars": {
-          "type": "number"
-        }
-      }
+      "default": "Noter avec {stars} étoiles."
     },
     "badge_text_more": {
       "default": "pis {count} autres"
@@ -1637,18 +1564,7 @@
       "default": "S{seasonNumber} · É{episodeNumber}"
     },
     "episode_footer_season_episode_range": {
-      "default": "S{seasonNumber} · É{startEpisode}-{endEpisode}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "startEpisode": {
-          "type": "number"
-        },
-        "endEpisode": {
-          "type": "number"
-        }
-      }
+      "default": "S{seasonNumber} · É{startEpisode}-{endEpisode}"
     },
     "translated_value_reaction_like": {
       "default": "J'aime"
@@ -1675,12 +1591,7 @@
       "default": "Réactions"
     },
     "button_label_react": {
-      "default": "Réagir avec {reaction}",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "Réagir avec {reaction}"
     },
     "tag_text_movies": {
       "default": "Films"
@@ -1893,12 +1804,7 @@
       "default": "Fermer"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Êtes-vous certain de vouloir arrêter de regarder \"{title}\" ?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Êtes-vous certain de vouloir arrêter de regarder \"{title}\" ?"
     },
     "button_text_manage_subscription": {
       "default": "Gérer l'abonnement"
@@ -1913,12 +1819,7 @@
       "default": "Changez votre photo, votre nom et d'autres détails."
     },
     "description_genres": {
-      "default": "Ajoutez ou retirez vos {limit} genres favoris.",
-      "variables": {
-        "limit": {
-          "type": "number"
-        }
-      }
+      "default": "Ajoutez ou retirez vos {limit} genres favoris."
     },
     "list_title_activity": {
       "default": "Activité"
@@ -2089,31 +1990,13 @@
       "default": "Anniversaires ce mois-ci"
     },
     "text_season_activity": {
-      "default": "{rangeLabel} de {title}",
-      "variables": {
-        "rangeLabel": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{rangeLabel} de {title}"
     },
     "text_last_day": {
-      "default": "dernier {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "dernier {day}"
     },
     "text_next_day": {
-      "default": "prochain {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "prochain {day}"
     },
     "filter_label_this_year": {
       "default": "Cette année"
@@ -2209,12 +2092,7 @@
       "default": "Mettre en couverture"
     },
     "button_label_set_cover_image": {
-      "default": "Mettre l'image de \"{title}\" comme image de couverture.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Mettre l'image de \"{title}\" comme image de couverture."
     },
     "page_title_start_watching": {
       "default": "Commencer à regarder"
@@ -2298,23 +2176,13 @@
       "default": "Historique"
     },
     "text_directed_by": {
-      "default": "Réalisé par <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Réalisé par <a>{name}</a>"
     },
     "text_directed_by_short": {
       "default": "Réalisé par"
     },
     "text_created_by": {
-      "default": "Créé par <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Créé par <a>{name}</a>"
     },
     "text_created_by_short": {
       "default": "Créé par"
@@ -2368,28 +2236,13 @@
       "default": "Tout voir"
     },
     "text_play_count": {
-      "default": "{count} fois",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} fois"
     },
     "text_hours_watched": {
-      "default": "{count} heures",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} heures"
     },
     "tag_text_remaining_duration": {
-      "default": "{duration} restants",
-      "variables": {
-        "duration": {
-          "type": "string"
-        }
-      }
+      "default": "{duration} restants"
     },
     "list_title_user_lists": {
       "default": "Listes"
@@ -2437,12 +2290,7 @@
       "default": "Trier en ordre décroissant"
     },
     "text_about_user": {
-      "default": "À propos de {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "À propos de {username}"
     },
     "button_label_profile_options": {
       "default": "Options du profil"
@@ -2460,12 +2308,7 @@
       "default": "De Mon Historique"
     },
     "list_placeholder_from_my_history": {
-      "default": "Tu n'as encore rien vu de {name}.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Tu n'as encore rien vu de {name}."
     },
     "text_info_younify_service_linked": {
       "default": "La plateforme de streaming est connectée."
@@ -2498,12 +2341,7 @@
       "default": "Problème"
     },
     "warning_prompt_younify_unlink": {
-      "default": "Es-tu sûr de vouloir déconnecter {service} ?",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "Es-tu sûr de vouloir déconnecter {service} ?"
     },
     "dialog_title_younify_data_sync": {
       "default": "Synchronisation des données"
@@ -2545,12 +2383,7 @@
       "default": "Devenir VIP"
     },
     "text_billing_disclaimer": {
-      "default": "Le paiement commence à la fin de la période d'essai. L'abonnement se renouvelle automatiquement et est facturé chaque {period} jusqu'à annulation. Annulez en tout temps via le Centre d'abonnement Google Play.",
-      "variables": {
-        "period": {
-          "type": "string"
-        }
-      }
+      "default": "Le paiement commence à la fin de la période d'essai. L'abonnement se renouvelle automatiquement et est facturé chaque {period} jusqu'à annulation. Annulez en tout temps via le Centre d'abonnement Google Play."
     },
     "text_billing_already_vip": {
       "default": "Tu es maintenant un VIP Trakt !\nMerci pour ton soutien, profite bien."
@@ -2571,20 +2404,10 @@
       "default": "Suivi illimité et plus encore."
     },
     "button_label_like_list": {
-      "default": "Aimer {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Aimer {name}"
     },
     "button_label_unlike_list": {
-      "default": "Ne plus aimer {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Ne plus aimer {name}"
     },
     "header_export": {
       "default": "Exporter"
@@ -2602,23 +2425,13 @@
       "default": "Exportez un fichier ZIP de vos données brutes."
     },
     "text_exporting": {
-      "default": "On exporte… {progress}",
-      "variables": {
-        "progress": {
-          "type": "string"
-        }
-      }
+      "default": "On exporte… {progress}"
     },
     "text_export_status_fail": {
       "default": "L'exportation a échoué. Vérifiez la console de votre navigateur."
     },
     "text_export_status_fetching": {
-      "default": "On va chercher {item}…",
-      "variables": {
-        "item": {
-          "type": "string"
-        }
-      }
+      "default": "On va chercher {item}…"
     },
     "text_export_status_zipping": {
       "default": "On compresse les fichiers…"
@@ -2630,12 +2443,7 @@
       "default": "Track"
     },
     "filter_label_runtime": {
-      "default": "{range} minutes",
-      "variables": {
-        "range": {
-          "type": "string"
-        }
-      }
+      "default": "{range} minutes"
     },
     "header_behavior": {
       "default": "Comportement"
@@ -2665,12 +2473,7 @@
       "default": "Devenez VIP pour débloquer des secrets dignes d'une grande série d'ici."
     },
     "text_sentiment_example": {
-      "default": "Exemple tiré de « {title} »",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Exemple tiré de « {title} »"
     },
     "button_label_view_sentiment_analysis": {
       "default": "Voir l'analyse des sentiments"
