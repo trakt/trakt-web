@@ -32,4 +32,3 @@ vite.config.ts.timestamp-*
 
 # Vitest
 coverage
-package-lock.json
