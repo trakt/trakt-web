@@ -6771,6 +6771,14 @@
         "android",
         "ios"
       ]
+    },
+    "button_label_view_sentiment_analysis": {
+      "default": "View sentiment analysis",
+      "description": "Aria-label for the button that allows users to view a more detailed sentiment analysis for movies or shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

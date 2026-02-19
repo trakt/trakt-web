@@ -13,6 +13,8 @@
     isPartial,
   }: { sentiment: SentimentAnalysis; isPartial: boolean } = $props();
 
+  const ASPECTS_LIMIT = 3;
+
   const heightCard = $derived(
     isPartial
       ? "calc(0.5 * var(--height-sentiment-card))"
@@ -20,6 +22,9 @@
   );
 
   const { buildDrawerLink } = summaryDrawerNavigation();
+
+  const pros = $derived(sentiment.aspect.pros.slice(0, ASPECTS_LIMIT));
+  const cons = $derived(sentiment.aspect.cons.slice(0, ASPECTS_LIMIT));
 </script>
 
 <div class="trakt-sentiment-card">
@@ -30,10 +35,7 @@
       variant="transparent"
     >
       <div class="trakt-sentiment-container">
-        <SentimentAspects
-          pros={sentiment.aspect.pros}
-          cons={sentiment.aspect.cons}
-        />
+        <SentimentAspects {pros} {cons} />
       </div>
     </Card>
   </Link>
@@ -58,5 +60,11 @@
 
     position: relative;
     display: flex;
+
+    padding: var(--ni-16);
+    box-sizing: border-box;
+
+    border-radius: var(--border-radius-m);
+    background: var(--background-vip-drawer);
   }
 </style>

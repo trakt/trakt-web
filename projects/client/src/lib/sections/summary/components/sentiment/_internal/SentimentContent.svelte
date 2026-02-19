@@ -70,8 +70,12 @@
     flex-direction: column;
     gap: var(--gap-xs);
 
-    :global(.trakt-sentiment-container) {
+    :global(.trakt-sentiment-body) {
+      border-radius: var(--border-radius-m);
       background: var(--background-sentiment-highlight);
+
+      box-sizing: border-box;
+      padding: var(--ni-16);
     }
   }
 </style>

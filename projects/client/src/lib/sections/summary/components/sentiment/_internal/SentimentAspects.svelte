@@ -1,26 +1,23 @@
 <script lang="ts">
   import SentimentIcon from "$lib/components/icons/SentimentIcon.svelte";
 
-  const KEYWORD_LIMIT = 3;
-
   type SentimentProps = {
     pros: string[];
     cons: string[];
-    limit?: number;
   };
 
-  const { pros, cons, limit = KEYWORD_LIMIT }: SentimentProps = $props();
+  const { pros, cons }: SentimentProps = $props();
 
   const isPartial = $derived(pros.length === 0 || cons.length === 0);
 
   const mappedSentiments = $derived([
     {
-      aspects: pros.slice(0, limit),
+      aspects: pros,
       sentiment: "good" as const,
       sentimentColor: "var(--color-sentiment-good)",
     },
     {
-      aspects: cons.slice(0, limit),
+      aspects: cons,
       sentiment: "bad" as const,
       sentimentColor: "var(--color-sentiment-bad)",
     },
@@ -50,7 +47,7 @@
   .trakt-sentiment-body {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-micro);
+    gap: var(--gap-m);
 
     height: 100%;
     width: 100%;
@@ -63,10 +60,14 @@
 
     margin: 0;
     padding: 0;
+    padding-left: var(--ni-12);
 
     font-size: var(--font-size-text);
 
-    list-style-type: none;
+    color: color-mix(in srgb, var(--color-text-secondary) 50%, transparent);
+    p.capitalize {
+      color: var(--color-text-primary);
+    }
   }
 
   .trakt-sentiment-container {
@@ -77,11 +78,6 @@
     align-items: flex-start;
 
     color: var(--color-text-primary);
-
-    border-radius: var(--border-radius-m);
-
-    background-color: var(--color-card-background);
-    padding: var(--ni-16);
 
     :global(svg) {
       flex-shrink: 0;
