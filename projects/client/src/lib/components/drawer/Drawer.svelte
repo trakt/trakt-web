@@ -204,6 +204,7 @@
 
       &[data-size="auto"] {
         --drawer-size: fit-content;
+        max-height: calc(100dvh - env(safe-area-inset-top, 0px));
 
         &:global(.is-dragging) {
           --drawer-size: var(--initial-height);
