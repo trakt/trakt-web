@@ -1,6 +1,7 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { Snippet } from "svelte";
+  import { fade } from "svelte/transition";
 
   const {
     children,
@@ -18,14 +19,19 @@
 
 <div class="trakt-review-content" data-variant={variant}>
   {#if coverSrc}
-    <div class="trakt-review-content-cover-image">
-      <CrossOriginImage
-        loading="eager"
-        src={coverSrc}
-        animate={false}
-        alt="Background image"
-      />
-    </div>
+    {#key coverSrc}
+      <div
+        class="trakt-review-content-cover-image"
+        transition:fade={{ duration: 150 }}
+      >
+        <CrossOriginImage
+          loading="eager"
+          src={coverSrc}
+          animate={false}
+          alt="Background image"
+        />
+      </div>
+    {/key}
   {/if}
 
   <div class="trakt-review-content-header">

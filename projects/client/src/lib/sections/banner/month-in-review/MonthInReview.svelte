@@ -4,8 +4,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
-  import { slide } from "svelte/transition";
   import MonthInReviewLink from "../../components/MonthInReviewLink.svelte";
+  import BannerLoadingIndicator from "../_internal/BannerLoadingIndicator.svelte";
   import DismissButton from "../_internal/DismissButton.svelte";
   import MonthInReviewStats from "./_internal/MonthInReviewStats.svelte";
   import { useMonthInReview } from "./_internal/useMonthInReview";
@@ -13,7 +13,7 @@
   const { month, onDismiss }: { month: Date; onDismiss: () => void } = $props();
   const { user } = useUser();
 
-  const { review } = $derived(
+  const { review, isLoading } = $derived(
     useMonthInReview({
       slug: $user.slug,
       month: month.getMonth() + 1,
@@ -22,10 +22,10 @@
   );
 </script>
 
-{#if $review}
-  <div class="trakt-month-in-review" transition:slide={{ duration: 150 }}>
+{#if $isLoading || $review}
+  <div class="trakt-month-in-review">
     <ReviewContent
-      coverSrc={$review.firstPlay?.cover.url.medium ?? DEFAULT_COVER}
+      coverSrc={$review?.firstPlay?.cover.url.medium ?? DEFAULT_COVER}
       variant="gradient"
     >
       {#snippet header()}
@@ -41,7 +41,11 @@
         </div>
       {/snippet}
 
-      <MonthInReviewStats review={$review} />
+      {#if $isLoading}
+        <BannerLoadingIndicator />
+      {:else if $review}
+        <MonthInReviewStats review={$review} />
+      {/if}
 
       {#snippet footer()}
         <div class="trakt-mir-footer">

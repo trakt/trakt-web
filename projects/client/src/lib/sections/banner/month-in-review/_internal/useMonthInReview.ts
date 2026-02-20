@@ -1,5 +1,6 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { monthInReviewQuery } from '$lib/requests/queries/users/monthInReviewQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map } from 'rxjs';
 
 type UseMonthInReviewProps = {
@@ -13,5 +14,6 @@ export function useMonthInReview(props: UseMonthInReviewProps) {
 
   return {
     review: query.pipe(map(($query) => $query.data)),
+    isLoading: query.pipe(map(toLoadingState)),
   };
 }
