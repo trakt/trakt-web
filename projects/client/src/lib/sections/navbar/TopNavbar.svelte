@@ -54,8 +54,6 @@
     margin-top: env(safe-area-inset-top);
     margin-bottom: var(--ni-12);
 
-    transition: height calc(2 * var(--transition-increment)) ease-in-out;
-
     &.is-hidden {
       margin: 0;
       height: env(safe-area-inset-top);
@@ -91,8 +89,7 @@
     border-bottom-right-radius: var(--border-radius-xxl);
 
     transition: calc(2 * var(--transition-increment)) ease-in-out;
-    transition-property:
-      height, width, background-color, box-shadow, top, opacity;
+    transition-property: width, background-color, box-shadow, top, opacity;
 
     .trakt-navbar-links {
       display: flex;
