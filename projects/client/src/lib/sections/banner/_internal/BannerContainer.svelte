@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { slide } from "svelte/transition";
-
   const { children }: ChildrenProps = $props();
 </script>
 
-<div class="trakt-banner-container" out:slide={{ duration: 150 }}>
+<div class="trakt-banner-container">
   <div class="trakt-banner-content">
     {@render children()}
   </div>

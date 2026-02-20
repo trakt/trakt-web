@@ -3,7 +3,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
-  import { slide } from "svelte/transition";
+  import BannerLoadingIndicator from "../_internal/BannerLoadingIndicator.svelte";
   import DismissButton from "../_internal/DismissButton.svelte";
   import { useYearInReview } from "./_internal/useYearInReview";
   import YearInReviewLink from "./_internal/YearInReviewLink.svelte";
@@ -13,7 +13,7 @@
   const { year, onDismiss }: { year: number; onDismiss: () => void } = $props();
   const { user } = useUser();
 
-  const { review } = $derived(
+  const { review, isLoading } = $derived(
     useYearInReview({
       slug: $user.slug,
       year,
@@ -21,8 +21,8 @@
   );
 </script>
 
-{#if $review}
-  <div class="trakt-year-in-review" transition:slide={{ duration: 150 }}>
+{#if $isLoading || $review}
+  <div class="trakt-year-in-review">
     <ReviewContent variant="gradient">
       <YirBackground {year} />
 
@@ -47,7 +47,11 @@
         </div>
       {/snippet}
 
-      <YearInReviewStats review={$review} />
+      {#if $isLoading}
+        <BannerLoadingIndicator />
+      {:else if $review}
+        <YearInReviewStats review={$review} />
+      {/if}
 
       {#snippet footer()}
         <div class="trakt-yir-footer">
