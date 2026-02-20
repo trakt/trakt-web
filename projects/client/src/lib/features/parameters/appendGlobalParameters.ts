@@ -1,4 +1,7 @@
-import { WHITE_LISTED_PARAMS } from '$lib/features/parameters/_internal/constants.ts';
+import {
+  LOCAL_PARAMS,
+  WHITE_LISTED_PARAMS,
+} from '$lib/features/parameters/_internal/constants.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
 import { buildParamString } from '$lib/utils/url/buildParamString.ts';
 import { combineLatest } from 'rxjs';
@@ -22,8 +25,16 @@ export function appendGlobalParameters(
     if (isExternal) return;
 
     const url = new URL(anchor.href);
+    const currentUrl = new URL(globalThis.window.location.href);
+    const isSamePath = url.pathname === currentUrl.pathname;
+
+    const localParams = isSamePath
+      ? Array.from(currentUrl.searchParams.entries())
+        .filter(([key]) => LOCAL_PARAMS.includes(key))
+      : [];
 
     const params = Object.fromEntries([
+      ...localParams,
       ...Array.from(url.searchParams.entries())
         .filter(([key]) =>
           key === $override || !WHITE_LISTED_PARAMS.includes(key)
