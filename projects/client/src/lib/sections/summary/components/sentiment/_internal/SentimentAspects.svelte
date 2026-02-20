@@ -32,12 +32,14 @@
         style="--sentiment-color: {sentimentColor}"
         data-index={!isPartial ? index : undefined}
       >
-        <SentimentIcon {sentiment} />
-        <ul>
-          {#each aspects as aspect}
-            <li><p class="capitalize">{aspect}</p></li>
-          {/each}
-        </ul>
+        <div class="trakt-sentiment-aspects">
+          <SentimentIcon {sentiment} />
+          <ul>
+            {#each aspects as aspect}
+              <li><p class="capitalize">{aspect}</p></li>
+            {/each}
+          </ul>
+        </div>
       </div>
     {/if}
   {/each}
@@ -75,23 +77,18 @@
 
     display: flex;
     gap: var(--gap-s);
-    align-items: flex-start;
+    align-items: center;
+  }
+
+  .trakt-sentiment-aspects {
+    display: flex;
+    gap: var(--gap-s);
 
     color: var(--color-text-primary);
 
     :global(svg) {
       flex-shrink: 0;
       color: var(--sentiment-color);
-    }
-
-    &[data-index="0"] {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    &[data-index="1"] {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
     }
   }
 </style>
