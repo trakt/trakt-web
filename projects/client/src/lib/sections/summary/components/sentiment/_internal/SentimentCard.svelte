@@ -6,6 +6,7 @@
     Drawers,
     summaryDrawerNavigation,
   } from "../../../_internal/summaryDrawerNavigation.ts";
+  import { calculateAspectsLimit } from "./calculateAspectsLimit.ts";
   import SentimentAspects from "./SentimentAspects.svelte";
 
   const {
@@ -13,7 +14,7 @@
     isPartial,
   }: { sentiment: SentimentAnalysis; isPartial: boolean } = $props();
 
-  const ASPECTS_LIMIT = 3;
+  const aspectsLimit = $derived(calculateAspectsLimit(sentiment));
 
   const heightCard = $derived(
     isPartial
@@ -23,8 +24,8 @@
 
   const { buildDrawerLink } = summaryDrawerNavigation();
 
-  const pros = $derived(sentiment.aspect.pros.slice(0, ASPECTS_LIMIT));
-  const cons = $derived(sentiment.aspect.cons.slice(0, ASPECTS_LIMIT));
+  const pros = $derived(sentiment.aspect.pros.slice(0, aspectsLimit));
+  const cons = $derived(sentiment.aspect.cons.slice(0, aspectsLimit));
 </script>
 
 <div class="trakt-sentiment-card">

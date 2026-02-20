@@ -90,6 +90,10 @@
   --width-sentiment-card: min(var(--preferred-sentiment-card-width), 85vw);
   --height-sentiment-card: var(--ni-208);
 
+  @include for-mobile {
+    --height-sentiment-card: var(--ni-188);
+  }
+
   /**
    * List dimensions
    */
@@ -124,7 +128,7 @@
   --summary-side-action-bar-width: var(--ni-40);
   --summary-poster-gap: var(--gap-s);
   --summary-poster-width: min(calc(100dvw - 2 * (var(--layout-distance-side) + var(--summary-side-action-bar-width) + var(--summary-poster-gap))),
-      var(--ni-320));
+    var(--ni-320));
 
   --toggle-large-width: var(--ni-88);
 
