@@ -5,7 +5,6 @@
   import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
   import MonthInReviewLink from "../../components/MonthInReviewLink.svelte";
-  import BannerLoadingIndicator from "../_internal/BannerLoadingIndicator.svelte";
   import DismissButton from "../_internal/DismissButton.svelte";
   import MonthInReviewStats from "./_internal/MonthInReviewStats.svelte";
   import { useMonthInReview } from "./_internal/useMonthInReview";
@@ -22,46 +21,36 @@
   );
 </script>
 
-{#if $isLoading || $review}
-  <div class="trakt-month-in-review">
-    <ReviewContent
-      coverSrc={$review?.firstPlay?.cover.url.medium ?? DEFAULT_COVER}
-      variant="gradient"
-    >
-      {#snippet header()}
-        <div class="trakt-mir-header-container">
-          <div class="trakt-mir-header">
-            <CalendarIcon />
-            <p class="bold uppercase">Month in review</p>
-          </div>
-
-          <RenderFor audience="vip" device={["mobile", "tablet-sm"]}>
-            <DismissButton {onDismiss} />
-          </RenderFor>
+<div class="trakt-month-in-review">
+  <ReviewContent
+    coverSrc={$review?.firstPlay?.cover.url.medium ?? DEFAULT_COVER}
+    variant="gradient"
+  >
+    {#snippet header()}
+      <div class="trakt-mir-header-container">
+        <div class="trakt-mir-header">
+          <CalendarIcon />
+          <p class="bold uppercase">Month in review</p>
         </div>
-      {/snippet}
 
-      {#if $isLoading}
-        <BannerLoadingIndicator />
-      {:else if $review}
-        <MonthInReviewStats review={$review} />
-      {/if}
+        <RenderFor audience="vip" device={["mobile", "tablet-sm"]}>
+          <DismissButton {onDismiss} />
+        </RenderFor>
+      </div>
+    {/snippet}
 
-      {#snippet footer()}
-        <div class="trakt-mir-footer">
-          <MonthInReviewLink
-            slug={$user.slug}
-            date={month}
-            source="mir-banner"
-          />
-          <RenderFor audience="vip" device={["tablet-lg", "desktop"]}>
-            <DismissButton {onDismiss} />
-          </RenderFor>
-        </div>
-      {/snippet}
-    </ReviewContent>
-  </div>
-{/if}
+    <MonthInReviewStats review={$review} isLoading={$isLoading} />
+
+    {#snippet footer()}
+      <div class="trakt-mir-footer">
+        <MonthInReviewLink slug={$user.slug} date={month} source="mir-banner" />
+        <RenderFor audience="vip" device={["tablet-lg", "desktop"]}>
+          <DismissButton {onDismiss} />
+        </RenderFor>
+      </div>
+    {/snippet}
+  </ReviewContent>
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

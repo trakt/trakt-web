@@ -18,23 +18,21 @@
 </script>
 
 <div class="trakt-month-to-date">
-  {#if !$isLoading && $monthToDate}
-    <ReviewContent coverSrc={$monthToDate.coverUrl}>
-      {#snippet header()}
-        <div class="trakt-month-to-date-header-this-month">
-          <CalendarIcon />
-          <span class="bold uppercase">{m.text_this_month()}</span>
-        </div>
-        <YearToDateLink {slug} source={SOURCE} />
-      {/snippet}
+  <ReviewContent coverSrc={$monthToDate.coverUrl}>
+    {#snippet header()}
+      <div class="trakt-month-to-date-header-this-month">
+        <CalendarIcon />
+        <span class="bold uppercase">{m.text_this_month()}</span>
+      </div>
+      <YearToDateLink {slug} source={SOURCE} />
+    {/snippet}
 
-      <WatchStats monthToDate={$monthToDate} />
+    <WatchStats monthToDate={$monthToDate} isLoading={$isLoading} />
 
-      {#snippet footer()}
-        <MonthInReviewLink {slug} date={mirDate} source={SOURCE} />
-      {/snippet}
-    </ReviewContent>
-  {/if}
+    {#snippet footer()}
+      <MonthInReviewLink {slug} date={mirDate} source={SOURCE} />
+    {/snippet}
+  </ReviewContent>
 </div>
 
 <style>

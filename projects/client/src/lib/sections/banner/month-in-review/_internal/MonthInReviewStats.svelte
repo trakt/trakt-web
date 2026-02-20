@@ -5,22 +5,23 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { UserReview } from "$lib/requests/queries/users/monthInReviewQuery";
 
-  const { review }: { review: UserReview } = $props();
+  const { review, isLoading }: { review?: UserReview; isLoading: boolean } =
+    $props();
 </script>
 
 <div class="trakt-mir-stats">
-  <Stat>
+  <Stat {isLoading}>
     {#snippet icon()}
       <PlayIcon />
     {/snippet}
-    {m.text_play_count({ count: review.playCount })}
+    {m.text_play_count({ count: review?.playCount ?? 0 })}
   </Stat>
 
-  <Stat>
+  <Stat {isLoading}>
     {#snippet icon()}
       <ClockIcon />
     {/snippet}
-    {m.text_hours_watched({ count: review.hoursWatched })}
+    {m.text_hours_watched({ count: review?.hoursWatched ?? 0 })}
   </Stat>
 </div>
 
