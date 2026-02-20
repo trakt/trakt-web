@@ -157,8 +157,8 @@
 
     background: var(--color-drawer-background);
 
-    box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
-      color-mix(in srgb, var(--color-shadow) 25%, transparent);
+    box-shadow: var(--ni-0) var(--ni-0) var(--ni-24) var(--ni-12)
+      color-mix(in srgb, var(--color-shadow) 50%, transparent);
 
     display: flex;
     flex-direction: column;
@@ -192,9 +192,6 @@
       border-top-right-radius: var(--drawer-border-radius);
       border-left: none;
       border-top: var(--ni-1) solid var(--color-drawer-border);
-
-      box-shadow: var(--ni-8) var(--ni-0) var(--ni-8) var(--ni-0)
-        color-mix(in srgb, var(--color-shadow) 25%, transparent);
 
       &:global(:not(.is-dragging)) {
         transition: height var(--transition-increment) ease-in-out;
