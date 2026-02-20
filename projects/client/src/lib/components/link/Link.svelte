@@ -32,7 +32,7 @@
 <a
   {target}
   use:triggerWithKeyboard
-  use:appendGlobalParameters
+  use:appendGlobalParameters={href}
   data-sveltekit-keepfocus
   data-sveltekit-noscroll={noscroll}
   data-sveltekit-replacestate={replacestate}
