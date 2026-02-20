@@ -1,11 +1,21 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
+  import LoadingIndicator from "../icons/LoadingIndicator.svelte";
 
-  const { children, icon }: ChildrenProps & { icon: Snippet } = $props();
+  const {
+    children,
+    icon,
+    isLoading,
+  }: ChildrenProps & { icon: Snippet; isLoading: boolean } = $props();
 </script>
 
 <div class="trakt-stat">
-  {@render icon()}
+  {#if isLoading}
+    <LoadingIndicator />
+  {:else}
+    {@render icon()}
+  {/if}
+
   <p class="ellipsis bold">
     {@render children()}
   </p>

@@ -5,25 +5,28 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MonthToDateDetails } from "../../models/MonthToDateDetails";
 
-  const { monthToDate }: { monthToDate: MonthToDateDetails } = $props();
+  const {
+    monthToDate,
+    isLoading,
+  }: { monthToDate: MonthToDateDetails; isLoading: boolean } = $props();
 </script>
 
 <div class="trakt-watch-stats">
-  <Stat>
+  <Stat {isLoading}>
     {#snippet icon()}
       <ShowIcon />
     {/snippet}
     {m.text_episodes_watched({ count: monthToDate.episodeCount })}
   </Stat>
 
-  <Stat>
+  <Stat {isLoading}>
     {#snippet icon()}
       <ShowIcon />
     {/snippet}
     {m.text_shows_watched({ count: monthToDate.showCount })}
   </Stat>
 
-  <Stat>
+  <Stat {isLoading}>
     {#snippet icon()}
       <MovieIcon />
     {/snippet}
