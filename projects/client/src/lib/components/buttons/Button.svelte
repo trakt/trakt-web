@@ -79,7 +79,7 @@
     use:disableTransitionOn={"touch"}
     use:clickOutside
     use:triggerWithKeyboard
-    use:appendGlobalParameters
+    use:appendGlobalParameters={href}
     use:disableNavigation={rest.disabled}
     use:appendTestId
     data-sveltekit-keepfocus

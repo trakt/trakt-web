@@ -38,7 +38,7 @@
 {#if href != null}
   <a
     use:triggerWithKeyboard
-    use:appendGlobalParameters
+    use:appendGlobalParameters={href}
     use:disableNavigation={rest.disabled}
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
