@@ -58,7 +58,7 @@ export function useListSorting(
     current: params.pipe(
       map(($params) => {
         const defaultDirection = props.type === 'watchlist'
-          ? 'asc'
+          ? 'desc'
           : props.list.sortHow;
         const sortBy = mapToSortBy($params.sort_by);
         const sortHow = mapToDirection($params.sort_how) ?? defaultDirection;

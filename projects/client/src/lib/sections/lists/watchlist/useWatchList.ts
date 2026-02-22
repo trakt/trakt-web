@@ -21,7 +21,7 @@ export function useWatchList(params: WatchListStoreProps) {
       limit: params.limit ?? DEFAULT_PAGE_SIZE,
       type: params.type === 'media' ? undefined : params.type,
       sortBy: params.sortBy ?? 'added',
-      sortHow: params.sortHow,
+      sortHow: params.sortHow ?? 'desc',
       filter: params.filter,
     }),
   );

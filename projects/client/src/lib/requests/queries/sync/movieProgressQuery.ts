@@ -96,6 +96,7 @@ export const movieProgressRequest = (
         query: {
           extended: 'full,images,colors',
           hide: 'unreleased',
+          sort_how: 'desc',
           page,
           limit,
           ...filter,
