@@ -34,13 +34,13 @@
     <Link {href} {target}>
       <CrossOriginImage {src} {alt} />
     </Link>
-
-    {#if activeOverlay}
-      <div class="trakt-summary-poster-overlay">
-        {@render activeOverlay()}
-      </div>
-    {/if}
   </div>
+
+  {#if activeOverlay}
+    <div class="trakt-summary-poster-overlay">
+      {@render activeOverlay()}
+    </div>
+  {/if}
 
   {@render actions?.()}
 
@@ -122,7 +122,7 @@
       border: var(--overlay-border-size) solid transparent;
     }
 
-    .trakt-summary-poster-overlay {
+    + .trakt-summary-poster-overlay {
       opacity: 1;
     }
   }

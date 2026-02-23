@@ -17,7 +17,7 @@
 
 <div class="trakt-summary-container" class:has-contextual-content={content}>
   {#if poster}
-    <div class="trakt-summary-poster">
+    <div class="trakt-summary-poster-container">
       {@render poster()}
     </div>
   {/if}
@@ -93,11 +93,11 @@
     margin-left: var(--ni-neg-16);
   }
 
-  .trakt-summary-poster {
+  .trakt-summary-poster-container {
     display: flex;
     align-items: center;
 
-    :global(img) {
+    :global(.trakt-summary-poster img) {
       width: 100%;
     }
   }

@@ -33,9 +33,6 @@
 
 <style>
   .trakt-stream-on-overlay {
-    --source-shadow: var(--ni-2) var(--ni-2) var(--ni-4)
-      var(--color-background-purple);
-
     color: var(--color-overlay-foreground);
 
     width: 100%;
@@ -67,13 +64,16 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
-    text-shadow: var(--source-shadow);
     padding: var(--ni-8);
 
-    :global(.trakt-stream-on-service-logo img) {
-      filter: drop-shadow(var(--source-shadow));
+    :global(.trakt-streaming-service-logo img) {
       height: var(--ni-40);
       width: auto;
+    }
+
+    :global(.trakt-streaming-service-logo svg) {
+      height: auto;
+      width: var(--ni-80);
     }
   }
 
