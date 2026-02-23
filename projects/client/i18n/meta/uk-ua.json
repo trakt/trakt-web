@@ -58,12 +58,7 @@
       "default": "Рекомендовані серіали"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} сер.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} сер."
     },
     "page_title_error_404": {
       "default": "404: Ніщо. Пустота."
@@ -393,23 +388,13 @@
       "default": "Серіали"
     },
     "text_episodes_watched": {
-      "default": "{count} епізодів",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} епізодів"
     },
     "list_title_movie_credits": {
       "default": "Фільми"
     },
     "text_movies_watched": {
-      "default": "{count} фільмів",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} фільмів"
     },
     "header_details": {
       "default": "Деталі"
@@ -1003,12 +988,7 @@
       "default": "Виходило"
     },
     "warning_prompt_drop_show": {
-      "default": "Ви впевнені, що хочете видалити серіал \"{title}\"? Це видалить його зі списку 'Продовжити перегляд'.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Ви впевнені, що хочете видалити серіал \"{title}\"? Це видалить його зі списку 'Продовжити перегляд'."
     },
     "button_label_drop_show": {
       "default": "Позначити серіал \"{title}\" як відхилений"
@@ -1017,20 +997,10 @@
       "default": "Відхилити серіал"
     },
     "warning_prompt_drop_movie": {
-      "default": "Ви впевнені, що хочете видалити \"{title}\"? Це видалить його зі списку 'Продовжувати перегляд'.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Ви впевнені, що хочете видалити \"{title}\"? Це видалить його зі списку 'Продовжувати перегляд'."
     },
     "button_label_drop_movie": {
-      "default": "Позначити фільм \"{title}\" як видалений",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Позначити фільм \"{title}\" як видалений"
     },
     "button_text_drop_movie": {
       "default": "Видалити фільм"
@@ -1051,15 +1021,7 @@
       "default": "Ви впевнені, що хочете відмітити всі непроглянуті епізоди \"{title}\" як переглянуті до епізоду {episode}? Це позначить {count} епізоди як переглянуті."
     },
     "warning_prompt_track_show_episode_count": {
-      "default": "Ви впевнені, що хочете позначити «{title}» як переглянутий? Це позначить відразу {count} серій як переглянуті.",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Ви впевнені, що хочете позначити «{title}» як переглянутий? Це позначить відразу {count} серій як переглянуті."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Впевнені, що хочете відмітити {count} серій як переглянуті?"
@@ -1071,12 +1033,7 @@
       "default": "Ви ще не дивилися \"{title}\""
     },
     "button_text_comment_likes": {
-      "default": "{count} лайків",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} лайків"
     },
     "button_label_close": {
       "default": "Закрити"
@@ -1085,12 +1042,7 @@
       "default": "Відповіді на відгук"
     },
     "button_text_comment_replies": {
-      "default": "{count} відповідей",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} відповідей"
     },
     "list_title_comments": {
       "default": "Відгуки"
@@ -1108,12 +1060,7 @@
       "default": "Додати відповідь"
     },
     "button_label_comment_reply": {
-      "default": "Відповісти {user}",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "Відповісти {user}"
     },
     "textarea_placeholder_reply": {
       "default": "Відповісти..."
@@ -1302,12 +1249,7 @@
       "default": "Дивлюся зараз"
     },
     "button_label_checkin": {
-      "default": "Дивлюся зараз \"{title}\"",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Дивлюся зараз \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt використовує C🍪🍪KIES, щоб покращити ваш загальний досвід. Ви можете <a>прочитати більше інформації</a> тут."
@@ -1328,12 +1270,7 @@
       "default": "З початку року"
     },
     "page_title_year_in_review": {
-      "default": "Підсумки {year} року",
-      "variables": {
-        "year": {
-          "type": "string"
-        }
-      }
+      "default": "Підсумки {year} року"
     },
     "page_title_month_in_review": {
       "default": "Огляд місяця"
@@ -1369,12 +1306,7 @@
       "default": "Перший показ цього місяця"
     },
     "text_shows_watched": {
-      "default": "{count} серіалів",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} серіалів"
     },
     "button_text_follow": {
       "default": "Слідкувати"
@@ -1476,12 +1408,7 @@
       "default": "Додаткові матеріали"
     },
     "button_label_star_rating": {
-      "default": "Оцінити на {stars} зірки.",
-      "variables": {
-        "stars": {
-          "type": "number"
-        }
-      }
+      "default": "Оцінити на {stars} зірки."
     },
     "badge_text_more": {
       "default": "та ще {count}"
@@ -1637,18 +1564,7 @@
       "default": "С{seasonNumber} · С{episodeNumber}"
     },
     "episode_footer_season_episode_range": {
-      "default": "С{seasonNumber} · Е{startEpisode}-{endEpisode}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "startEpisode": {
-          "type": "number"
-        },
-        "endEpisode": {
-          "type": "number"
-        }
-      }
+      "default": "С{seasonNumber} · Е{startEpisode}-{endEpisode}"
     },
     "translated_value_reaction_like": {
       "default": "Подобається"
@@ -1675,12 +1591,7 @@
       "default": "Реакції"
     },
     "button_label_react": {
-      "default": "Реагувати з {reaction}",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "Реагувати з {reaction}"
     },
     "tag_text_movies": {
       "default": "Фільми"
@@ -1893,12 +1804,7 @@
       "default": "Закрити"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Ви впевнені, що хочете припинити перегляд \"{title}\"?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Ви впевнені, що хочете припинити перегляд \"{title}\"?"
     },
     "button_text_manage_subscription": {
       "default": "Керувати підпискою"
@@ -1913,12 +1819,7 @@
       "default": "Змініть своє фото, ім'я та інші дані."
     },
     "description_genres": {
-      "default": "Додайте або видаліть ваші {limit} улюблені жанри.",
-      "variables": {
-        "limit": {
-          "type": "number"
-        }
-      }
+      "default": "Додайте або видаліть ваші {limit} улюблені жанри."
     },
     "list_title_activity": {
       "default": "Активність"
@@ -2089,31 +1990,13 @@
       "default": "Дні народження цього місяця"
     },
     "text_season_activity": {
-      "default": "{rangeLabel} з {title}",
-      "variables": {
-        "rangeLabel": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{rangeLabel} з {title}"
     },
     "text_last_day": {
-      "default": "минулий {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "минулий {day}"
     },
     "text_next_day": {
-      "default": "наступний {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "наступний {day}"
     },
     "filter_label_this_year": {
       "default": "Цього року"
@@ -2209,12 +2092,7 @@
       "default": "Встановити обкладинку"
     },
     "button_label_set_cover_image": {
-      "default": "Встановити зображення \"{title}\" як обкладинку.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Встановити зображення \"{title}\" як обкладинку."
     },
     "page_title_start_watching": {
       "default": "Почати перегляд"
@@ -2298,23 +2176,13 @@
       "default": "Історія"
     },
     "text_directed_by": {
-      "default": "Режисер: <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Режисер: <a>{name}</a>"
     },
     "text_directed_by_short": {
       "default": "Режисер:"
     },
     "text_created_by": {
-      "default": "Створено <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Створено <a>{name}</a>"
     },
     "text_created_by_short": {
       "default": "Створено:"
@@ -2368,28 +2236,13 @@
       "default": "Переглянути всі"
     },
     "text_play_count": {
-      "default": "{count} відтворень",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} відтворень"
     },
     "text_hours_watched": {
-      "default": "{count} годин",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} годин"
     },
     "tag_text_remaining_duration": {
-      "default": "{duration} залишилося",
-      "variables": {
-        "duration": {
-          "type": "string"
-        }
-      }
+      "default": "{duration} залишилося"
     },
     "list_title_user_lists": {
       "default": "Списки"
@@ -2437,12 +2290,7 @@
       "default": "Сортувати за спаданням"
     },
     "text_about_user": {
-      "default": "Про {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Про {username}"
     },
     "button_label_profile_options": {
       "default": "Опції профілю"
@@ -2460,12 +2308,7 @@
       "default": "З Моєї Історії"
     },
     "list_placeholder_from_my_history": {
-      "default": "Ви ще нічого не бачили з {name}.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Ви ще нічого не бачили з {name}."
     },
     "text_info_younify_service_linked": {
       "default": "Стрімінговий сервіс було підключено."
@@ -2498,12 +2341,7 @@
       "default": "Пошкоджено"
     },
     "warning_prompt_younify_unlink": {
-      "default": "Ви впевнені, що хочете відключити {service}?",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "Ви впевнені, що хочете відключити {service}?"
     },
     "dialog_title_younify_data_sync": {
       "default": "Синхронізація Наявних Даних"
@@ -2545,12 +2383,7 @@
       "default": "Оновити до VIP"
     },
     "text_billing_disclaimer": {
-      "default": "Оплата почнеться після завершення пробного періоду. Підписка автоматично поновлюється та виставляється що {period}, доки не буде скасована. Скасувати будь-коли можна через Центр підписок Google Play.",
-      "variables": {
-        "period": {
-          "type": "string"
-        }
-      }
+      "default": "Оплата почнеться після завершення пробного періоду. Підписка автоматично поновлюється та виставляється що {period}, доки не буде скасована. Скасувати будь-коли можна через Центр підписок Google Play."
     },
     "text_billing_already_vip": {
       "default": "Ви тепер VIP Trakt!\nДякуємо за вашу підтримку та насолоджуйтесь."
@@ -2571,20 +2404,10 @@
       "default": "Необмежене відстеження та більше."
     },
     "button_label_like_list": {
-      "default": "Сподобалось {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Сподобалось {name}"
     },
     "button_label_unlike_list": {
-      "default": "Не подобається {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Не подобається {name}"
     },
     "header_export": {
       "default": "Експорт"
@@ -2602,23 +2425,13 @@
       "default": "Експортуйте ZIP-файл із вашими сирими даними."
     },
     "text_exporting": {
-      "default": "Експортування… {progress}",
-      "variables": {
-        "progress": {
-          "type": "string"
-        }
-      }
+      "default": "Експортування… {progress}"
     },
     "text_export_status_fail": {
       "default": "Помилка експорту. Перевірте консоль браузера."
     },
     "text_export_status_fetching": {
-      "default": "Отримання {item}…",
-      "variables": {
-        "item": {
-          "type": "string"
-        }
-      }
+      "default": "Отримання {item}…"
     },
     "text_export_status_zipping": {
       "default": "Пакування файлів…"
@@ -2630,12 +2443,7 @@
       "default": "Track"
     },
     "filter_label_runtime": {
-      "default": "{range} хвилин",
-      "variables": {
-        "range": {
-          "type": "string"
-        }
-      }
+      "default": "{range} хвилин"
     },
     "header_behavior": {
       "default": "Поведінка"
@@ -2665,12 +2473,7 @@
       "default": "Оновіть до VIP, щоб відчути справжню магію кіно та отримати більше аналітики."
     },
     "text_sentiment_example": {
-      "default": "Приклад із «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Приклад із «{title}»"
     },
     "button_label_view_sentiment_analysis": {
       "default": "Переглянути аналіз настроїв"

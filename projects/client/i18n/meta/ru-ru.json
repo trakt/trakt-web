@@ -43,23 +43,13 @@
       "default": "Финал мид-сезона"
     },
     "header_profile_banner_greeting": {
-      "default": "Привет, {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Привет, {name}"
     },
     "list_title_up_next": {
       "default": "Продолжить"
     },
     "tag_text_remaining_episodes": {
-      "default": "{count} осталось",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} осталось"
     },
     "list_title_recommended_movies": {
       "default": "Рекомендуемые фильмы"
@@ -68,12 +58,7 @@
       "default": "Рекомендуемые сериалы"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} сер.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} сер."
     },
     "page_title_error_404": {
       "default": "404: Пустота. Ничто."
@@ -100,28 +85,13 @@
       "default": "Посмотреть снова"
     },
     "button_label_add_to_watchlist": {
-      "default": "Добавить «{title}» в список",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Добавить «{title}» в список"
     },
     "button_label_mark_as_watched": {
-      "default": "Отметить «{title}» как просмотренное",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Отметить «{title}» как просмотренное"
     },
     "button_label_watched_until_here": {
-      "default": "Отметить «{title}» как просмотренное до этого момента",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Отметить «{title}» как просмотренное до этого момента"
     },
     "translated_value_genre_horror": {
       "default": "Ужасы"
@@ -235,12 +205,7 @@
       "default": "Фантастика"
     },
     "button_label_remove_from_watchlist": {
-      "default": "Удалить «{title}» из списка",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Удалить «{title}» из списка"
     },
     "input_placeholder_search": {
       "default": "Поиск сериалов и фильмов..."
@@ -348,12 +313,7 @@
       "default": "Главная"
     },
     "tag_text_plays": {
-      "default": "{number} просм.",
-      "variables": {
-        "number": {
-          "type": "number"
-        }
-      }
+      "default": "{number} просм."
     },
     "button_text_logout": {
       "default": "Выйти"
@@ -428,42 +388,22 @@
       "default": "Сериалы"
     },
     "text_episodes_watched": {
-      "default": "{count} серий",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} серий"
     },
     "list_title_movie_credits": {
       "default": "Фильмы"
     },
     "text_movies_watched": {
-      "default": "{count} фильмов",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} фильмов"
     },
     "header_details": {
       "default": "Детали"
     },
     "button_label_expand_category": {
-      "default": "Развернуть {category}",
-      "variables": {
-        "category": {
-          "type": "string"
-        }
-      }
+      "default": "Развернуть {category}"
     },
     "button_text_more": {
-      "default": "еще {count}",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "еще {count}"
     },
     "header_premiered": {
       "default": "Премьера"
@@ -496,12 +436,7 @@
       "default": "Фильмы в списке"
     },
     "image_alt_streaming_service_logo": {
-      "default": "логотип {service}",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "логотип {service}"
     },
     "header_director": {
       "default": "Режиссер"
@@ -738,77 +673,34 @@
       "default": "Удалить из просмотренного"
     },
     "button_label_remove_from_watched": {
-      "default": "Удалить «{title}» из истории просмотров",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Удалить «{title}» из истории просмотров"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Вы уверены, что хотите удалить «{title}» из просмотренного? Все отметки исчезнут.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Вы уверены, что хотите удалить «{title}» из просмотренного? Все отметки исчезнут."
     },
     "button_label_remove_from_history": {
-      "default": "Удалить этот просмотр «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Удалить этот просмотр «{title}»"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Вы уверены, что хотите удалить этот просмотр «{title}»?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Вы уверены, что хотите удалить этот просмотр «{title}»?"
     },
     "list_title_seasons": {
       "default": "Сезоны"
     },
     "text_season_number": {
-      "default": "Сезон {number}",
-      "variables": {
-        "number": {
-          "type": "number"
-        }
-      }
+      "default": "Сезон {number}"
     },
     "text_season_specials": {
       "default": "Спешлы"
     },
     "button_label_expand_media_overview": {
-      "default": "Развернуть описание «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Развернуть описание «{title}»"
     },
     "text_season_episode_number": {
-      "default": "Сезон {season} • Серия {number}",
-      "variables": {
-        "season": {
-          "type": "number"
-        },
-        "number": {
-          "type": "number"
-        }
-      }
+      "default": "Сезон {season} • Серия {number}"
     },
     "button_label_share": {
-      "default": "Поделиться «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Поделиться «{title}»"
     },
     "button_text_share": {
       "default": "Поделиться"
@@ -859,12 +751,7 @@
       "default": "Ожидаемая премьера"
     },
     "image_alt_person_headshot": {
-      "default": "Фото {person}",
-      "variables": {
-        "person": {
-          "type": "string"
-        }
-      }
+      "default": "Фото {person}"
     },
     "list_title_actors": {
       "default": "Актеры"
@@ -888,12 +775,7 @@
       "default": "Весь сезон"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "Удалить «{title}» из списка?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Удалить «{title}» из списка?"
     },
     "button_label_view_all_recommended_movies": {
       "default": "Все рекомендуемые фильмы"
@@ -935,28 +817,13 @@
       "default": "Из избранного"
     },
     "button_label_add_to_favorites": {
-      "default": "Добавить «{title}» в избранное",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Добавить «{title}» в избранное"
     },
     "button_label_remove_from_favorites": {
-      "default": "Удалить «{title}» из избранного",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Удалить «{title}» из избранного"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "Удалить «{title}» из избранного?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Удалить «{title}» из избранного?"
     },
     "list_title_favorite_movies": {
       "default": "Любимые фильмы"
@@ -986,42 +853,22 @@
       "default": "Доступность"
     },
     "button_label_popup_menu": {
-      "default": "Меню для «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Меню для «{title}»"
     },
     "list_title_popular_lists": {
       "default": "Популярные списки"
     },
     "list_placeholder_popular_lists": {
-      "default": "«{title}» не встречается в популярных списках.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "«{title}» не встречается в популярных списках."
     },
     "text_by": {
       "default": "от"
     },
     "image_alt_user_avatar": {
-      "default": "аватар {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "аватар {username}"
     },
     "image_alt_media_poster": {
-      "default": "постер «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "постер «{title}»"
     },
     "list_placeholder_comments": {
       "default": "Отзывов пока нет."
@@ -1108,53 +955,19 @@
       "default": "Понравилось"
     },
     "text_share_movie": {
-      "default": "Только что открыл для себя «{title}» — тебе стоит это увидеть! 🎬",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Только что открыл для себя «{title}» — тебе стоит это увидеть! 🎬"
     },
     "text_share_show": {
-      "default": "Нашел классный сериал: «{title}»! 📺",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Нашел классный сериал: «{title}»! 📺"
     },
     "text_share_episode": {
-      "default": "Смотрю {show} S{season}E{episode} — «{title}»! 🔥",
-      "variables": {
-        "show": {
-          "type": "string"
-        },
-        "season": {
-          "type": "number"
-        },
-        "episode": {
-          "type": "number"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Смотрю {show} S{season}E{episode} — «{title}»! 🔥"
     },
     "text_share_person": {
-      "default": "Зацени {name} на Trakt! 🎭",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Зацени {name} на Trakt! 🎭"
     },
     "text_share_profile": {
-      "default": "Зацени профиль {name} на Trakt! 🎭",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Зацени профиль {name} на Trakt! 🎭"
     },
     "list_title_recently_watched": {
       "default": "Недавно просмотрено"
@@ -1175,121 +988,52 @@
       "default": "Вышло"
     },
     "warning_prompt_drop_show": {
-      "default": "Вы уверены, что хотите бросить сериал «{title}»? Он исчезнет из списка «Продолжить».",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Вы уверены, что хотите бросить сериал «{title}»? Он исчезнет из списка «Продолжить»."
     },
     "button_label_drop_show": {
-      "default": "Отметить сериал «{title}» как брошенный",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Отметить сериал «{title}» как брошенный"
     },
     "button_text_drop_show": {
       "default": "Бросить сериал"
     },
     "warning_prompt_drop_movie": {
-      "default": "Уверены, что хотите бросить «{title}»?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Уверены, что хотите бросить «{title}»?"
     },
     "button_label_drop_movie": {
-      "default": "Отметить фильм «{title}» как брошенный",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Отметить фильм «{title}» как брошенный"
     },
     "button_text_drop_movie": {
       "default": "Бросить фильм"
     },
     "warning_prompt_restore_show": {
-      "default": "Восстановить сериал «{title}»? Он снова появится в прогрессе и календаре.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Восстановить сериал «{title}»? Он снова появится в прогрессе и календаре."
     },
     "button_label_restore_show": {
-      "default": "Восстановить сериал «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Восстановить сериал «{title}»"
     },
     "button_text_restore_show": {
       "default": "Восстановить"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "Отметить «{title}» как просмотренный? Все серии будут помечены.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Отметить «{title}» как просмотренный? Все серии будут помечены."
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "Отметить все непросмотренные серии «{title}» до {episode}? Это затронет {count} сер.",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "episode": {
-          "type": "number"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Отметить все непросмотренные серии «{title}» до {episode}? Это затронет {count} сер."
     },
     "warning_prompt_track_show_episode_count": {
-      "default": "Вы уверены, что хотите отметить «{title}» как просмотренный? Это отметит сразу {count} серий как просмотренные.",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Вы уверены, что хотите отметить «{title}» как просмотренный? Это отметит сразу {count} серий как просмотренные."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
-      "default": "Отметить {count} серий как просмотренные?",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Отметить {count} серий как просмотренные?"
     },
     "tag_text_watch_count": {
       "default": "Просмотры"
     },
     "list_placeholder_media_history": {
-      "default": "Вы еще не смотрели «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Вы еще не смотрели «{title}»"
     },
     "button_text_comment_likes": {
-      "default": "{count} лайков",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} лайков"
     },
     "button_label_close": {
       "default": "Закрыть"
@@ -1298,12 +1042,7 @@
       "default": "Ответы"
     },
     "button_text_comment_replies": {
-      "default": "{count} ответов",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} ответов"
     },
     "list_title_comments": {
       "default": "Отзывы"
@@ -1321,12 +1060,7 @@
       "default": "Ответить"
     },
     "button_label_comment_reply": {
-      "default": "Ответить {user}",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "Ответить {user}"
     },
     "textarea_placeholder_reply": {
       "default": "Ответить..."
@@ -1359,23 +1093,13 @@
       "default": "Ошибка при публикации отзыва. Попробуйте позже."
     },
     "page_title_user_profile": {
-      "default": "Профиль {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Профиль {username}"
     },
     "header_private_profile": {
       "default": "Это приватный профиль"
     },
     "text_private_profile_description": {
-      "default": "Как будто тут и так мало скрытого. Секреты {username} остаются при нем.",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Как будто тут и так мало скрытого. Секреты {username} остаются при нем."
     },
     "header_original_title": {
       "default": "Оригинальное название"
@@ -1387,12 +1111,7 @@
       "default": "Удалить из списка"
     },
     "button_label_remove_from_list": {
-      "default": "Удалить «{title}» из списка",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Удалить «{title}» из списка"
     },
     "page_title_service_unavailable": {
       "default": "Сервис Trakt недоступен"
@@ -1416,45 +1135,16 @@
       "default": "Управлять списками"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "Добавить или удалить «{title}» из списков",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Добавить или удалить «{title}» из списков"
     },
     "button_label_add_to_personal_list": {
-      "default": "Добавить «{title}» в {list}",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "Добавить «{title}» в {list}"
     },
     "button_label_remove_from_personal_list": {
-      "default": "Удалить «{title}» из {list}",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "Удалить «{title}» из {list}"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Удалить «{title}» из {list}?",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "Удалить «{title}» из {list}?"
     },
     "option_text_theme_light": {
       "default": "Светлая"
@@ -1472,12 +1162,7 @@
       "default": "Сбросить"
     },
     "text_search_results_for": {
-      "default": "Результаты для {query}",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
+      "default": "Результаты для {query}"
     },
     "translated_value_type_movie": {
       "default": "Фильм"
@@ -1522,12 +1207,7 @@
       "default": "Рейтинг"
     },
     "button_label_view_all_items_in": {
-      "default": "Посмотреть всё в «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Посмотреть всё в «{title}»"
     },
     "button_text_reset_all_filters": {
       "default": "Сбросить всё"
@@ -1569,12 +1249,7 @@
       "default": "Смотрю сейчас"
     },
     "button_label_checkin": {
-      "default": "Сейчас смотрю «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Сейчас смотрю «{title}»"
     },
     "text_cookie_notice": {
       "default": "Trakt использует печеньки (C🍪🍪KIES), чтобы вам было вкуснее. <a>Подробнее здесь</a>."
@@ -1595,12 +1270,7 @@
       "default": "С начала года"
     },
     "page_title_year_in_review": {
-      "default": "Итоги {year} года",
-      "variables": {
-        "year": {
-          "type": "string"
-        }
-      }
+      "default": "Итоги {year} года"
     },
     "page_title_month_in_review": {
       "default": "Итоги месяца"
@@ -1636,42 +1306,22 @@
       "default": "Первый просмотр в месяце"
     },
     "text_shows_watched": {
-      "default": "{count} сериалов",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} сериалов"
     },
     "button_text_follow": {
       "default": "Подписаться"
     },
     "button_label_follow": {
-      "default": "Подписаться на {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Подписаться на {username}"
     },
     "button_text_unfollow": {
       "default": "Отписаться"
     },
     "button_label_unfollow": {
-      "default": "Отписаться от {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Отписаться от {username}"
     },
     "warning_prompt_unfollow_user": {
-      "default": "Отписаться от {username}?",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Отписаться от {username}?"
     },
     "text_vip_upsell": {
       "default": "Станьте VIP, чтобы прокачать свой Trakt"
@@ -1701,12 +1351,7 @@
       "default": "Переименовать"
     },
     "button_label_rename_list": {
-      "default": "Переименовать список {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Переименовать список {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Все горячие сериалы"
@@ -1754,12 +1399,7 @@
       "default": "Профиль"
     },
     "page_title_search_results": {
-      "default": "Результаты для {query}",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
+      "default": "Результаты для {query}"
     },
     "page_title_search": {
       "default": "Поиск"
@@ -1768,28 +1408,13 @@
       "default": "Дополнительно"
     },
     "button_label_star_rating": {
-      "default": "Оценить на {stars} зв.",
-      "variables": {
-        "stars": {
-          "type": "number"
-        }
-      }
+      "default": "Оценить на {stars} зв."
     },
     "badge_text_more": {
-      "default": "и еще {count}",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "и еще {count}"
     },
     "button_label_stop_playing": {
-      "default": "Остановить отметку «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Остановить отметку «{title}»"
     },
     "link_text_view_profile": {
       "default": "В профиль"
@@ -1798,31 +1423,16 @@
       "default": "Поиск"
     },
     "image_alt_list_preview_poster": {
-      "default": "Постер для {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Постер для {title}"
     },
     "button_text_delete_list": {
       "default": "Удалить"
     },
     "button_label_delete_list": {
-      "default": "Удалить список {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Удалить список {name}"
     },
     "warning_prompt_delete_list": {
-      "default": "Вы уверены, что хотите удалить список {name}?",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Вы уверены, что хотите удалить список {name}?"
     },
     "link_text_vip_list_upsell": {
       "default": "чтобы добавить больше списков"
@@ -1915,28 +1525,13 @@
       "default": "Любимые жанры"
     },
     "button_label_toggle_genre": {
-      "default": "Переключить жанр {genre}",
-      "variables": {
-        "genre": {
-          "type": "string"
-        }
-      }
+      "default": "Переключить жанр {genre}"
     },
     "text_share_list": {
-      "default": "Зацени список «{name}» на Trakt! 📋",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Зацени список «{name}» на Trakt! 📋"
     },
     "text_share_top_list": {
-      "default": "Зацени {name} на Trakt! 🔥",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Зацени {name} на Trakt! 🔥"
     },
     "page_title_watchlist": {
       "default": "Список"
@@ -1966,29 +1561,10 @@
       "default": "Скрыть"
     },
     "episode_footer_season_episode": {
-      "default": "С{seasonNumber} • сер.{episodeNumber}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "episodeNumber": {
-          "type": "number"
-        }
-      }
+      "default": "С{seasonNumber} • сер.{episodeNumber}"
     },
     "episode_footer_season_episode_range": {
-      "default": "С{seasonNumber} • сер.{startEpisode}-{endEpisode}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "startEpisode": {
-          "type": "number"
-        },
-        "endEpisode": {
-          "type": "number"
-        }
-      }
+      "default": "С{seasonNumber} • сер.{startEpisode}-{endEpisode}"
     },
     "translated_value_reaction_like": {
       "default": "Нравится"
@@ -2015,12 +1591,7 @@
       "default": "Реакции"
     },
     "button_label_react": {
-      "default": "Реагировать: {reaction}",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "Реагировать: {reaction}"
     },
     "tag_text_movies": {
       "default": "Фильмы"
@@ -2092,12 +1663,7 @@
       "default": "Сегодня"
     },
     "button_label_go_to_calendar_day": {
-      "default": "На {day}",
-      "variables": {
-        "day": {
-          "type": "number"
-        }
-      }
+      "default": "На {day}"
     },
     "text_calendar_placeholder_1": {
       "default": "Сегодня ничего. Отдохните, насладитесь погодой."
@@ -2238,12 +1804,7 @@
       "default": "Закрыть"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Перестать смотреть «{title}»?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Перестать смотреть «{title}»?"
     },
     "button_text_manage_subscription": {
       "default": "Подписка"
@@ -2258,12 +1819,7 @@
       "default": "Изменить фото, имя и другие данные."
     },
     "description_genres": {
-      "default": "Добавьте или удалите {limit} любимых жанров.",
-      "variables": {
-        "limit": {
-          "type": "number"
-        }
-      }
+      "default": "Добавьте или удалите {limit} любимых жанров."
     },
     "list_title_activity": {
       "default": "Активность"
@@ -2434,31 +1990,13 @@
       "default": "Дни рождения месяца"
     },
     "text_season_activity": {
-      "default": "{rangeLabel} «{title}»",
-      "variables": {
-        "rangeLabel": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{rangeLabel} «{title}»"
     },
     "text_last_day": {
-      "default": "в прошлый {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "в прошлый {day}"
     },
     "text_next_day": {
-      "default": "в след. {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "в след. {day}"
     },
     "filter_label_this_year": {
       "default": "В этом году"
@@ -2554,12 +2092,7 @@
       "default": "На обложку"
     },
     "button_label_set_cover_image": {
-      "default": "Сделать «{title}» фоном вашего профиля.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Сделать «{title}» фоном вашего профиля."
     },
     "page_title_start_watching": {
       "default": "Начать просмотр"
@@ -2643,23 +2176,13 @@
       "default": "История"
     },
     "text_directed_by": {
-      "default": "Режиссер: <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Режиссер: <a>{name}</a>"
     },
     "text_directed_by_short": {
       "default": "Режиссер"
     },
     "text_created_by": {
-      "default": "Создатель: <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Создатель: <a>{name}</a>"
     },
     "text_created_by_short": {
       "default": "Создатель"
@@ -2713,28 +2236,13 @@
       "default": "Все"
     },
     "text_play_count": {
-      "default": "{count} просм.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} просм."
     },
     "text_hours_watched": {
-      "default": "{count} ч.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} ч."
     },
     "tag_text_remaining_duration": {
-      "default": "{duration} осталось",
-      "variables": {
-        "duration": {
-          "type": "string"
-        }
-      }
+      "default": "{duration} осталось"
     },
     "list_title_user_lists": {
       "default": "Списки"
@@ -2782,12 +2290,7 @@
       "default": "По убыванию"
     },
     "text_about_user": {
-      "default": "О {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "О {username}"
     },
     "button_label_profile_options": {
       "default": "Опции профиля"
@@ -2805,12 +2308,7 @@
       "default": "Из моей истории"
     },
     "list_placeholder_from_my_history": {
-      "default": "Вы еще не видели {name} в фильмах или сериалах.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Вы еще не видели {name} в фильмах или сериалах."
     },
     "text_info_younify_service_linked": {
       "default": "Сервис привязан."
@@ -2843,12 +2341,7 @@
       "default": "Ошибка связи"
     },
     "warning_prompt_younify_unlink": {
-      "default": "Отвязать {service}?",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "Отвязать {service}?"
     },
     "dialog_title_younify_data_sync": {
       "default": "Синхронизация данных"
@@ -2890,12 +2383,7 @@
       "default": "Перейти на VIP"
     },
     "text_billing_disclaimer": {
-      "default": "Оплата начнется после пробного периода. Подписка продлевается ежемесячно ({period}), пока не будет отменена в Google Play.",
-      "variables": {
-        "period": {
-          "type": "string"
-        }
-      }
+      "default": "Оплата начнется после пробного периода. Подписка продлевается ежемесячно ({period}), пока не будет отменена в Google Play."
     },
     "text_billing_already_vip": {
       "default": "Теперь вы Trakt VIP!\nСпасибо за поддержку."
@@ -2916,20 +2404,10 @@
       "default": "Безлимитный трекинг и многое другое."
     },
     "button_label_like_list": {
-      "default": "Лайк списку {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Лайк списку {name}"
     },
     "button_label_unlike_list": {
-      "default": "Убрать лайк со списка {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Убрать лайк со списка {name}"
     },
     "header_export": {
       "default": "Экспорт"
@@ -2947,23 +2425,13 @@
       "default": "Скачать ZIP со всеми данными."
     },
     "text_exporting": {
-      "default": "Экспорт… {progress}",
-      "variables": {
-        "progress": {
-          "type": "string"
-        }
-      }
+      "default": "Экспорт… {progress}"
     },
     "text_export_status_fail": {
       "default": "Ошибка экспорта. Подробности в консоли браузера."
     },
     "text_export_status_fetching": {
-      "default": "Загрузка {item}…",
-      "variables": {
-        "item": {
-          "type": "string"
-        }
-      }
+      "default": "Загрузка {item}…"
     },
     "text_export_status_zipping": {
       "default": "Архивация…"
@@ -2975,12 +2443,7 @@
       "default": "Отследить"
     },
     "filter_label_runtime": {
-      "default": "{range} мин.",
-      "variables": {
-        "range": {
-          "type": "string"
-        }
-      }
+      "default": "{range} мин."
     },
     "header_behavior": {
       "default": "Поведение"
@@ -3010,12 +2473,7 @@
       "default": "Перейдите на VIP, чтобы открыть подробную аналитику этого проекта."
     },
     "text_sentiment_example": {
-      "default": "Пример из «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Пример из «{title}»"
     },
     "button_label_view_sentiment_analysis": {
       "default": "Посмотреть анализ тональности"

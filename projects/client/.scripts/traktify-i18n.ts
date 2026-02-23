@@ -271,9 +271,7 @@ function updateMetaFileWithTranslations(
   };
 
   // Iterate through source messages in their original order to preserve key ordering
-  for (
-    const [key, sourceMessage] of Object.entries(sourceMessagesWithContext)
-  ) {
+  for (const key of Object.keys(sourceMessagesWithContext)) {
     if (existingMeta.messages[key]) {
       // Keep existing message, update with translation if available
       updatedMeta.messages[key] = {
@@ -281,10 +279,9 @@ function updateMetaFileWithTranslations(
         default: translations[key] || existingMeta.messages[key].default,
       };
     } else if (translations[key]) {
-      // Add new translated message
+      // Add new translated message (variables are only defined in en.json source of truth)
       updatedMeta.messages[key] = {
         default: translations[key],
-        variables: sourceMessage.variables,
       };
     }
   }

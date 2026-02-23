@@ -58,12 +58,7 @@
       "default": "Anbefalte Serier"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} epis.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} epis."
     },
     "page_title_error_404": {
       "default": "404: Intet. Tomrommet."
@@ -393,23 +388,13 @@
       "default": "Serier"
     },
     "text_episodes_watched": {
-      "default": "{count} episoder",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} episoder"
     },
     "list_title_movie_credits": {
       "default": "Filmer"
     },
     "text_movies_watched": {
-      "default": "{count} filmer",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} filmer"
     },
     "header_details": {
       "default": "Detaljer"
@@ -1003,12 +988,7 @@
       "default": "Sendt"
     },
     "warning_prompt_drop_show": {
-      "default": "Er du sikker på at du vil avslutte serien \"{title}\"? Dette vil fjerne den fra 'Fortsett å se'-listen din.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Er du sikker på at du vil avslutte serien \"{title}\"? Dette vil fjerne den fra 'Fortsett å se'-listen din."
     },
     "button_label_drop_show": {
       "default": "Merk serien \"{title}\" som droppet"
@@ -1017,20 +997,10 @@
       "default": "Dropp serie"
     },
     "warning_prompt_drop_movie": {
-      "default": "Er du sikker på at du vil droppe \"{title}\"? Dette vil fjerne den fra 'Fortsett å se'-listen din.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Er du sikker på at du vil droppe \"{title}\"? Dette vil fjerne den fra 'Fortsett å se'-listen din."
     },
     "button_label_drop_movie": {
-      "default": "Merk film \"{title}\" som droppet",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Merk film \"{title}\" som droppet"
     },
     "button_text_drop_movie": {
       "default": "Dropp film"
@@ -1051,15 +1021,7 @@
       "default": "Er du sikker på at du vil merke alle usett episoder av \"{title}\" som sett frem til episode {episode}? Dette vil merke {count} episoder som sett."
     },
     "warning_prompt_track_show_episode_count": {
-      "default": "Er du sikker på at du vil markere «{title}» som sett? Dette vil markere {count} episoder som sett. Gjør deg klar for hygge!",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Er du sikker på at du vil markere «{title}» som sett? Dette vil markere {count} episoder som sett. Gjør deg klar for hygge!"
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Er du sikker på at du vil markere {count} episoder som sett?"
@@ -1071,12 +1033,7 @@
       "default": "Du har ikke sett \"{title}\" ennå"
     },
     "button_text_comment_likes": {
-      "default": "{count} likerklikk",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} likerklikk"
     },
     "button_label_close": {
       "default": "Lukk"
@@ -1085,12 +1042,7 @@
       "default": "Svar på anmeldelse"
     },
     "button_text_comment_replies": {
-      "default": "{count} svar",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} svar"
     },
     "list_title_comments": {
       "default": "Anmeldelser"
@@ -1108,12 +1060,7 @@
       "default": "Legg til svar"
     },
     "button_label_comment_reply": {
-      "default": "Svar til {user}",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "Svar til {user}"
     },
     "textarea_placeholder_reply": {
       "default": "Svar..."
@@ -1302,12 +1249,7 @@
       "default": "Ser nå"
     },
     "button_label_checkin": {
-      "default": "Ser nå \"{title}\"",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Ser nå \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt bruker C🍪🍪KIES for å forbedre din totale opplevelse. Du kan <a>lese mer informasjon</a> her."
@@ -1328,12 +1270,7 @@
       "default": "År til dags dato"
     },
     "page_title_year_in_review": {
-      "default": "Året som gikk {year}",
-      "variables": {
-        "year": {
-          "type": "string"
-        }
-      }
+      "default": "Året som gikk {year}"
     },
     "page_title_month_in_review": {
       "default": "Månedens oversikt"
@@ -1369,12 +1306,7 @@
       "default": "Første visning denne måneden"
     },
     "text_shows_watched": {
-      "default": "{count} serier",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} serier"
     },
     "button_text_follow": {
       "default": "Følg"
@@ -1476,12 +1408,7 @@
       "default": "Ekstra"
     },
     "button_label_star_rating": {
-      "default": "Vurder med {stars} stjerner.",
-      "variables": {
-        "stars": {
-          "type": "number"
-        }
-      }
+      "default": "Vurder med {stars} stjerner."
     },
     "badge_text_more": {
       "default": "og {count} til"
@@ -1637,18 +1564,7 @@
       "default": "S{seasonNumber} · E{episodeNumber}"
     },
     "episode_footer_season_episode_range": {
-      "default": "S{seasonNumber} · E{startEpisode}-{endEpisode}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "startEpisode": {
-          "type": "number"
-        },
-        "endEpisode": {
-          "type": "number"
-        }
-      }
+      "default": "S{seasonNumber} · E{startEpisode}-{endEpisode}"
     },
     "translated_value_reaction_like": {
       "default": "Liker"
@@ -1675,12 +1591,7 @@
       "default": "Reaksjoner"
     },
     "button_label_react": {
-      "default": "Reager med {reaction}",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "Reager med {reaction}"
     },
     "tag_text_movies": {
       "default": "Filmer"
@@ -1893,12 +1804,7 @@
       "default": "Lukk"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Er du sikker på at du vil slutte å se \"{title}\"?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Er du sikker på at du vil slutte å se \"{title}\"?"
     },
     "button_text_manage_subscription": {
       "default": "Administrer abonnement"
@@ -1913,12 +1819,7 @@
       "default": "Endre bildet ditt, navnet ditt og andre detaljer."
     },
     "description_genres": {
-      "default": "Legg til eller fjern dine {limit} favoritt sjangere.",
-      "variables": {
-        "limit": {
-          "type": "number"
-        }
-      }
+      "default": "Legg til eller fjern dine {limit} favoritt sjangere."
     },
     "list_title_activity": {
       "default": "Aktivitet"
@@ -2089,31 +1990,13 @@
       "default": "Bursdager denne måneden"
     },
     "text_season_activity": {
-      "default": "{rangeLabel} av {title}",
-      "variables": {
-        "rangeLabel": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{rangeLabel} av {title}"
     },
     "text_last_day": {
-      "default": "siste {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "siste {day}"
     },
     "text_next_day": {
-      "default": "neste {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "neste {day}"
     },
     "filter_label_this_year": {
       "default": "I år"
@@ -2122,7 +2005,7 @@
       "default": "Nylig oppdatert"
     },
     "text_sort_recently_added": {
-      "default": "Recently added"
+      "default": "Nylig lagt til"
     },
     "text_sort_comments_popular": {
       "default": "Populære"
@@ -2209,12 +2092,7 @@
       "default": "Sett som forside"
     },
     "button_label_set_cover_image": {
-      "default": "Sett bildet av \"{title}\" som ditt forsidebilde.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Sett bildet av \"{title}\" som ditt forsidebilde."
     },
     "page_title_start_watching": {
       "default": "Start å se"
@@ -2298,23 +2176,13 @@
       "default": "Historikk"
     },
     "text_directed_by": {
-      "default": "Regi: <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Regi: <a>{name}</a>"
     },
     "text_directed_by_short": {
       "default": "Regi:"
     },
     "text_created_by": {
-      "default": "Laget av <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Laget av <a>{name}</a>"
     },
     "text_created_by_short": {
       "default": "Skapt av:"
@@ -2368,28 +2236,13 @@
       "default": "Se alle"
     },
     "text_play_count": {
-      "default": "{count} avspillinger",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} avspillinger"
     },
     "text_hours_watched": {
-      "default": "{count} timer",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} timer"
     },
     "tag_text_remaining_duration": {
-      "default": "{duration} igjen",
-      "variables": {
-        "duration": {
-          "type": "string"
-        }
-      }
+      "default": "{duration} igjen"
     },
     "list_title_user_lists": {
       "default": "Lister"
@@ -2437,12 +2290,7 @@
       "default": "Sorter synkende"
     },
     "text_about_user": {
-      "default": "Om {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Om {username}"
     },
     "button_label_profile_options": {
       "default": "Profilinnstillinger"
@@ -2460,12 +2308,7 @@
       "default": "Fra Min Historikk"
     },
     "list_placeholder_from_my_history": {
-      "default": "Du har ikke sett {name} i noe ennå.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Du har ikke sett {name} i noe ennå."
     },
     "text_info_younify_service_linked": {
       "default": "Strømmetjeneste er koblet til."
@@ -2498,12 +2341,7 @@
       "default": "Defekt"
     },
     "warning_prompt_younify_unlink": {
-      "default": "Er du sikker på at du vil koble fra {service}?",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "Er du sikker på at du vil koble fra {service}?"
     },
     "dialog_title_younify_data_sync": {
       "default": "Synkroniser Eksisterende Data"
@@ -2545,12 +2383,7 @@
       "default": "Oppgrader til VIP"
     },
     "text_billing_disclaimer": {
-      "default": "Betaling starter ved slutten av prøveperioden. Abonnementet fornyes automatisk og faktureres hver {period} til det kanselleres. Kanseller når som helst via Google Plays abonnementssenter.",
-      "variables": {
-        "period": {
-          "type": "string"
-        }
-      }
+      "default": "Betaling starter ved slutten av prøveperioden. Abonnementet fornyes automatisk og faktureres hver {period} til det kanselleres. Kanseller når som helst via Google Plays abonnementssenter."
     },
     "text_billing_already_vip": {
       "default": "Du er nå Trakt VIP!\nTakk for støtten og nyt det."
@@ -2571,20 +2404,10 @@
       "default": "Ubegrenset sporing og mer."
     },
     "button_label_like_list": {
-      "default": "Liker {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Liker {name}"
     },
     "button_label_unlike_list": {
-      "default": "Slutt å like {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Slutt å like {name}"
     },
     "header_export": {
       "default": "Eksporter"
@@ -2602,23 +2425,13 @@
       "default": "Eksporter en ZIP-fil med dine rådata."
     },
     "text_exporting": {
-      "default": "Eksporterer… {progress}",
-      "variables": {
-        "progress": {
-          "type": "string"
-        }
-      }
+      "default": "Eksporterer… {progress}"
     },
     "text_export_status_fail": {
       "default": "Eksporten feilet. Sjekk nettleserkonsollen."
     },
     "text_export_status_fetching": {
-      "default": "Henter {item}…",
-      "variables": {
-        "item": {
-          "type": "string"
-        }
-      }
+      "default": "Henter {item}…"
     },
     "text_export_status_zipping": {
       "default": "Komprimerer filer…"
@@ -2630,12 +2443,7 @@
       "default": "Track"
     },
     "filter_label_runtime": {
-      "default": "{range} minutter",
-      "variables": {
-        "range": {
-          "type": "string"
-        }
-      }
+      "default": "{range} minutter"
     },
     "header_behavior": {
       "default": "Atferd"
@@ -2665,12 +2473,7 @@
       "default": "Oppgrader til VIP for mer innsikt – perfekt for en skikkelig hygge-kveld."
     },
     "text_sentiment_example": {
-      "default": "Eksempel fra «{title}»",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Eksempel fra «{title}»"
     },
     "button_label_view_sentiment_analysis": {
       "default": "Se sentimentanalyse"

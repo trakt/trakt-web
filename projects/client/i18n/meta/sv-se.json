@@ -58,12 +58,7 @@
       "default": "Rekommenderade serier"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} avsn.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} avsn."
     },
     "page_title_error_404": {
       "default": "404: Ingenting. Tomrummet."
@@ -393,23 +388,13 @@
       "default": "Serier"
     },
     "text_episodes_watched": {
-      "default": "{count} avsnitt",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} avsnitt"
     },
     "list_title_movie_credits": {
       "default": "Filmer"
     },
     "text_movies_watched": {
-      "default": "{count} filmer",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} filmer"
     },
     "header_details": {
       "default": "Detaljer"
@@ -1003,12 +988,7 @@
       "default": "Sändes"
     },
     "warning_prompt_drop_show": {
-      "default": "Är du säker på att du vill ta bort serien \"{title}\"? Detta kommer att ta bort den från din 'Fortsätt titta'-lista.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Är du säker på att du vill ta bort serien \"{title}\"? Detta kommer att ta bort den från din 'Fortsätt titta'-lista."
     },
     "button_label_drop_show": {
       "default": "Markera serien \"{title}\" som avslutad"
@@ -1017,20 +997,10 @@
       "default": "Sluta följa"
     },
     "warning_prompt_drop_movie": {
-      "default": "Är du säker på att du vill släppa \"{title}\"? Detta kommer att ta bort den från din 'Fortsätt titta'-lista.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Är du säker på att du vill släppa \"{title}\"? Detta kommer att ta bort den från din 'Fortsätt titta'-lista."
     },
     "button_label_drop_movie": {
-      "default": "Markera filmen \"{title}\" som släppt",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Markera filmen \"{title}\" som släppt"
     },
     "button_text_drop_movie": {
       "default": "Släpp film"
@@ -1051,15 +1021,7 @@
       "default": "Är du säker på att du vill markera alla osedda avsnitt av \"{title}\" som sedda fram till avsnitt {episode}? Detta kommer att markera {count} avsnitt som sedda."
     },
     "warning_prompt_track_show_episode_count": {
-      "default": "Är du säker på att du vill markera \"{title}\" som sedd? Detta markerar {count} avsnitt som sedda. En rejäl sittning!",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Är du säker på att du vill markera \"{title}\" som sedd? Detta markerar {count} avsnitt som sedda. En rejäl sittning!"
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Är du säker på att du vill markera {count} avsnitt som sedda?"
@@ -1071,12 +1033,7 @@
       "default": "Du har inte sett \"{title}\" än"
     },
     "button_text_comment_likes": {
-      "default": "{count} gillanden",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} gillanden"
     },
     "button_label_close": {
       "default": "Stäng"
@@ -1085,12 +1042,7 @@
       "default": "Svar på recension"
     },
     "button_text_comment_replies": {
-      "default": "{count} svar",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} svar"
     },
     "list_title_comments": {
       "default": "Recensioner"
@@ -1108,12 +1060,7 @@
       "default": "Lägg till svar"
     },
     "button_label_comment_reply": {
-      "default": "Svara {user}",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "Svara {user}"
     },
     "textarea_placeholder_reply": {
       "default": "Svara..."
@@ -1302,12 +1249,7 @@
       "default": "Tittar på nu"
     },
     "button_label_checkin": {
-      "default": "Tittar på nu \"{title}\"",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Tittar på nu \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt använder C🍪🍪KIES för att förbättra din upplevelse. Du kan <a>läsa mer information</a> här."
@@ -1328,12 +1270,7 @@
       "default": "Hittills i år"
     },
     "page_title_year_in_review": {
-      "default": "Året som gick {year}",
-      "variables": {
-        "year": {
-          "type": "string"
-        }
-      }
+      "default": "Året som gick {year}"
     },
     "page_title_month_in_review": {
       "default": "Månadens överblick"
@@ -1369,12 +1306,7 @@
       "default": "Första visningen denna månad"
     },
     "text_shows_watched": {
-      "default": "{count} serier",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} serier"
     },
     "button_text_follow": {
       "default": "Följ"
@@ -1476,12 +1408,7 @@
       "default": "Extramaterial"
     },
     "button_label_star_rating": {
-      "default": "Betygsätt med {stars} stjärnor.",
-      "variables": {
-        "stars": {
-          "type": "number"
-        }
-      }
+      "default": "Betygsätt med {stars} stjärnor."
     },
     "badge_text_more": {
       "default": "och {count} till"
@@ -1637,18 +1564,7 @@
       "default": "S{seasonNumber} · A{episodeNumber}"
     },
     "episode_footer_season_episode_range": {
-      "default": "S{seasonNumber} · A{startEpisode}-{endEpisode}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "startEpisode": {
-          "type": "number"
-        },
-        "endEpisode": {
-          "type": "number"
-        }
-      }
+      "default": "S{seasonNumber} · A{startEpisode}-{endEpisode}"
     },
     "translated_value_reaction_like": {
       "default": "Gillar"
@@ -1675,12 +1591,7 @@
       "default": "Reaktioner"
     },
     "button_label_react": {
-      "default": "Reagera med {reaction}",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "Reagera med {reaction}"
     },
     "tag_text_movies": {
       "default": "Filmer"
@@ -1893,12 +1804,7 @@
       "default": "Stäng"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Är du säker på att du vill sluta titta på \"{title}\"?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Är du säker på att du vill sluta titta på \"{title}\"?"
     },
     "button_text_manage_subscription": {
       "default": "Hantera prenumeration"
@@ -1913,12 +1819,7 @@
       "default": "Ändra ditt foto, namn och andra uppgifter."
     },
     "description_genres": {
-      "default": "Lägg till eller ta bort dina {limit} favoritgenrer.",
-      "variables": {
-        "limit": {
-          "type": "number"
-        }
-      }
+      "default": "Lägg till eller ta bort dina {limit} favoritgenrer."
     },
     "list_title_activity": {
       "default": "Aktivitet"
@@ -2089,31 +1990,13 @@
       "default": "Födelsedagar denna månad"
     },
     "text_season_activity": {
-      "default": "{rangeLabel} av {title}",
-      "variables": {
-        "rangeLabel": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{rangeLabel} av {title}"
     },
     "text_last_day": {
-      "default": "senaste {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "senaste {day}"
     },
     "text_next_day": {
-      "default": "nästa {day}",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
+      "default": "nästa {day}"
     },
     "filter_label_this_year": {
       "default": "I år"
@@ -2122,7 +2005,7 @@
       "default": "Senast uppdaterad"
     },
     "text_sort_recently_added": {
-      "default": "Recently added"
+      "default": "Nyligen tillagt"
     },
     "text_sort_comments_popular": {
       "default": "Populära"
@@ -2209,12 +2092,7 @@
       "default": "Använd som omslag"
     },
     "button_label_set_cover_image": {
-      "default": "Använd bilden av \"{title}\" som ditt omslag.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Använd bilden av \"{title}\" som ditt omslag."
     },
     "page_title_start_watching": {
       "default": "Börja titta"
@@ -2298,23 +2176,13 @@
       "default": "Historik"
     },
     "text_directed_by": {
-      "default": "Regi: <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Regi: <a>{name}</a>"
     },
     "text_directed_by_short": {
       "default": "Regi:"
     },
     "text_created_by": {
-      "default": "Skapad av <a>{name}</a>",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Skapad av <a>{name}</a>"
     },
     "text_created_by_short": {
       "default": "Skapad av:"
@@ -2368,28 +2236,13 @@
       "default": "Visa alla"
     },
     "text_play_count": {
-      "default": "{count} spelade",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} spelade"
     },
     "text_hours_watched": {
-      "default": "{count} timmar",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} timmar"
     },
     "tag_text_remaining_duration": {
-      "default": "{duration} kvar",
-      "variables": {
-        "duration": {
-          "type": "string"
-        }
-      }
+      "default": "{duration} kvar"
     },
     "list_title_user_lists": {
       "default": "Listor"
@@ -2437,12 +2290,7 @@
       "default": "Sortera fallande"
     },
     "text_about_user": {
-      "default": "Om {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Om {username}"
     },
     "button_label_profile_options": {
       "default": "Profilalternativ"
@@ -2460,12 +2308,7 @@
       "default": "Från Min Historik"
     },
     "list_placeholder_from_my_history": {
-      "default": "Du har inte sett {name} i något än.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Du har inte sett {name} i något än."
     },
     "text_info_younify_service_linked": {
       "default": "Strömningstjänst har kopplats."
@@ -2498,12 +2341,7 @@
       "default": "Bruten"
     },
     "warning_prompt_younify_unlink": {
-      "default": "Är du säker på att du vill koppla bort {service}?",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "Är du säker på att du vill koppla bort {service}?"
     },
     "dialog_title_younify_data_sync": {
       "default": "Synkronisera Befintlig Data"
@@ -2545,12 +2383,7 @@
       "default": "Uppgradera till VIP"
     },
     "text_billing_disclaimer": {
-      "default": "Betalning påbörjas i slutet av provperioden. Prenumerationen förnyas automatiskt och faktureras varje {period} tills den sägs upp. Avsluta när som helst via Google Plays prenumerationscenter.",
-      "variables": {
-        "period": {
-          "type": "string"
-        }
-      }
+      "default": "Betalning påbörjas i slutet av provperioden. Prenumerationen förnyas automatiskt och faktureras varje {period} tills den sägs upp. Avsluta när som helst via Google Plays prenumerationscenter."
     },
     "text_billing_already_vip": {
       "default": "Du är nu Trakt VIP!\nTack för ditt stöd och njut."
@@ -2571,20 +2404,10 @@
       "default": "Obegränsad spårning och mer."
     },
     "button_label_like_list": {
-      "default": "Gilla {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Gilla {name}"
     },
     "button_label_unlike_list": {
-      "default": "Ogilla {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Ogilla {name}"
     },
     "header_export": {
       "default": "Exportera"
@@ -2602,23 +2425,13 @@
       "default": "Exportera en ZIP-fil med dina rådata."
     },
     "text_exporting": {
-      "default": "Exporterar… {progress}",
-      "variables": {
-        "progress": {
-          "type": "string"
-        }
-      }
+      "default": "Exporterar… {progress}"
     },
     "text_export_status_fail": {
       "default": "Exporten misslyckades. Kontrollera webbläsarkonsolen."
     },
     "text_export_status_fetching": {
-      "default": "Hämtar {item}…",
-      "variables": {
-        "item": {
-          "type": "string"
-        }
-      }
+      "default": "Hämtar {item}…"
     },
     "text_export_status_zipping": {
       "default": "Packar filer…"
@@ -2630,12 +2443,7 @@
       "default": "Track"
     },
     "filter_label_runtime": {
-      "default": "{range} minuter",
-      "variables": {
-        "range": {
-          "type": "string"
-        }
-      }
+      "default": "{range} minuter"
     },
     "header_behavior": {
       "default": "Beteende"
@@ -2665,12 +2473,7 @@
       "default": "Uppgradera till VIP för att låsa upp insikter djupare än en Nordic Noir-mysterium."
     },
     "text_sentiment_example": {
-      "default": "Exempel från \"{title}\"",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Exempel från \"{title}\""
     },
     "button_label_view_sentiment_analysis": {
       "default": "Visa sentimentsanalys"
