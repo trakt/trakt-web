@@ -55,9 +55,7 @@
       {#snippet hoverOverlay()}
         {#if streamOn?.preferred != null}
           <StreamOnOverlay service={streamOn.preferred} />
-        {/if}
-
-        {#if media.trailer != null}
+        {:else if media.trailer != null}
           <TrailerOverlay />
         {/if}
       {/snippet}
