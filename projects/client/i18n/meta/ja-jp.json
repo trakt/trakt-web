@@ -2181,6 +2181,14 @@
     "text_directed_by": {
       "default": "<a>{name}</a> 監督"
     },
+    "text_directed_by_plain": {
+      "default": "監督: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "監督:"
     },

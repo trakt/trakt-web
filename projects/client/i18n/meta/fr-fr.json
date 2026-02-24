@@ -2181,6 +2181,14 @@
     "text_directed_by": {
       "default": "Réalisé par <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Réalisé par {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Réalisé par"
     },

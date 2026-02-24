@@ -2181,6 +2181,14 @@
     "text_directed_by": {
       "default": "Режиссер: <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Режиссёр: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Режиссер"
     },
