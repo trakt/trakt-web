@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import UserRating from "$lib/sections/components/UserRating.svelte";
   import RemoveFromHistoryAction from "$lib/sections/media-actions/remove-from-history/RemoveFromHistoryAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import ActivityItem from "../components/ActivityItem.svelte";
@@ -17,6 +19,17 @@
     style = "cover",
     isActionable = false,
   }: RecentlyWatchedItemProps = $props();
+
+  const { ratings } = useUser();
+
+  const userRating = $derived.by(() => {
+    const data =
+      activity.type === "episode"
+        ? $ratings?.episodes.get(activity.episode.id)
+        : $ratings?.movies.get(activity.movie.id);
+
+    return data?.rating;
+  });
 </script>
 
 {#snippet popupActions()}
@@ -43,11 +56,18 @@
   </RenderFor>
 {/snippet}
 
+{#snippet action()}
+  {#if userRating}
+    <UserRating rating={userRating} />
+  {/if}
+{/snippet}
+
 {#if style === "cover"}
   <ActivityItem
     activityAt={activity.watchedAt}
     {activity}
     popupActions={isActionable ? popupActions : undefined}
+    action={isActionable ? action : undefined}
     source="watch-history"
   />
 {/if}
@@ -57,6 +77,7 @@
     activityAt={activity.watchedAt}
     {activity}
     popupActions={isActionable ? popupActions : undefined}
+    badge={isActionable ? action : undefined}
     source="watch-history"
   />
 {/if}

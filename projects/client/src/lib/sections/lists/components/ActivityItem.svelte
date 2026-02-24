@@ -11,6 +11,7 @@
     badge?: Snippet;
     popupActions?: Snippet;
     source?: string;
+    action?: Snippet;
   };
 
   const {
@@ -19,6 +20,7 @@
     badge,
     popupActions,
     source,
+    action,
   }: SocialActivityCardProps = $props();
 </script>
 
@@ -31,6 +33,7 @@
     {badge}
     {popupActions}
     {source}
+    {action}
   />
 {/if}
 
@@ -43,5 +46,6 @@
     {badge}
     {popupActions}
     {source}
+    {action}
   />
 {/if}
