@@ -670,19 +670,19 @@
       "default": "Ersteller"
     },
     "button_text_remove_from_history": {
-      "default": "Aus der Favoritenliste entfernen"
+      "default": "Aus Gesehen entfernen"
     },
     "button_label_remove_from_watched": {
-      "default": "\"{title}\" aus Ihrer Favoritenliste entfernen"
+      "default": "\"{title}\" aus Ihrer Gesehen-Liste entfernen"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Sind Sie sicher, dass Sie \"{title}\" von Ihrer Favoritenliste entfernen möchten? Alle Wiedergaben werden gelöscht."
+      "default": "Sind Sie sicher, dass Sie \"{title}\" von Ihrer Gesehen-Liste entfernen möchten? Alle Wiedergaben werden gelöscht."
     },
     "button_label_remove_from_history": {
-      "default": "Diese Wiedergabe von \"{title}\" aus deiner Gesehen-Liste entfernen"
+      "default": "Diese Wiedergabe von \"{title}\" aus Ihrer Gesehen-Liste entfernen"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Möchtest du diese Wiedergabe von \"{title}\" wirklich von deiner Gesehen-Liste entfernen?"
+      "default": "Möchten Sie diese Wiedergabe von \"{title}\" wirklich von Ihrer Gesehen-Liste entfernen?"
     },
     "list_title_seasons": {
       "default": "Staffeln"
