@@ -32,7 +32,7 @@ const movieCommentsRequest = (
     });
 
 export const movieCommentsQuery = defineInfiniteQuery({
-  key: 'movieComments:v2',
+  key: 'movieComments',
   invalidations: [
     InvalidateAction.Comment.Post('movie'),
     InvalidateAction.Comment.Reply('movie'),
