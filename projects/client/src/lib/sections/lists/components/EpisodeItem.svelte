@@ -31,24 +31,28 @@
 </script>
 
 {#snippet action()}
-  {#if !isFuture && !isActivity && !isHidden && !isListItem}
-    <RenderFor audience="authenticated">
-      <MarkAsWatchedAction
-        mode={props.variant === "next" && props.context !== "show"
-          ? "act"
-          : "hybrid"}
-        style="action"
-        type="episode"
-        size="small"
-        title={props.episode.title}
-        media={props.episode}
-        show={props.media}
-      />
-    </RenderFor>
-  {/if}
+  {#if props.action}
+    {@render props.action()}
+  {:else}
+    {#if !isFuture && !isActivity && !isHidden && !isListItem}
+      <RenderFor audience="authenticated">
+        <MarkAsWatchedAction
+          mode={props.variant === "next" && props.context !== "show"
+            ? "act"
+            : "hybrid"}
+          style="action"
+          type="episode"
+          size="small"
+          title={props.episode.title}
+          media={props.episode}
+          show={props.media}
+        />
+      </RenderFor>
+    {/if}
 
-  {#if style === "summary" && isListItem}
-    <SummaryCardRating item={props.episode} />
+    {#if style === "summary" && isListItem}
+      <SummaryCardRating item={props.episode} />
+    {/if}
   {/if}
 {/snippet}
 
