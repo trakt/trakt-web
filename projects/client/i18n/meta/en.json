@@ -5809,6 +5809,19 @@
         "android"
       ]
     },
+    "text_directed_by_plain": {
+      "default": "Directed by {name}",
+      "description": "Text to indicate the director of a movie.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
     "text_directed_by_short": {
       "default": "Directed by",
       "description": "Text to indicate the director of a movie.",

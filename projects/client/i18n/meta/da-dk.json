@@ -2181,6 +2181,14 @@
     "text_directed_by": {
       "default": "Instrueret af <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Instrueret af {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Instrueret af"
     },

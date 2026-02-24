@@ -2181,6 +2181,14 @@
     "text_directed_by": {
       "default": "Regie: <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Regie: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Regie:"
     },

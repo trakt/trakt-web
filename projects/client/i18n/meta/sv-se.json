@@ -2181,6 +2181,14 @@
     "text_directed_by": {
       "default": "Regi: <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Regisserad av {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Regi:"
     },

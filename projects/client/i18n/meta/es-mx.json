@@ -2181,6 +2181,14 @@
     "text_directed_by": {
       "default": "Dirigida por <a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "Dirigida por {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "Dirigida por"
     },

@@ -2180,6 +2180,14 @@
     "text_directed_by": {
       "default": "导演：<a>{name}</a>"
     },
+    "text_directed_by_plain": {
+      "default": "导演：{name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_directed_by_short": {
       "default": "导演"
     },
