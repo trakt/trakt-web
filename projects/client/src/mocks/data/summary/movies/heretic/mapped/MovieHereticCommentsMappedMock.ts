@@ -19,7 +19,7 @@ export const MovieHereticCommentsMappedMock: MediaComment[] = [
       'stats': {
         'completedCount': 1,
         'playCount': 1,
-        'rating': 0.8,
+        'rating': 8,
       },
     },
   },
