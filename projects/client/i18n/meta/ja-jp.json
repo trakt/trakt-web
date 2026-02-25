@@ -1638,6 +1638,9 @@
     "link_text_support": {
       "default": "サポート"
     },
+    "link_text_feedback": {
+      "default": "要望・感想"
+    },
     "link_text_terms": {
       "default": "利用規約"
     },

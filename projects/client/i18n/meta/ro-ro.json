@@ -1638,6 +1638,9 @@
     "link_text_support": {
       "default": "Suport"
     },
+    "link_text_feedback": {
+      "default": "Sugestii"
+    },
     "link_text_terms": {
       "default": "Termeni și Condiții"
     },

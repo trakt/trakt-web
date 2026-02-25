@@ -10,6 +10,10 @@
 
 <div class="trakt-page-links">
   <RenderFor audience="vip">
+    <Link href={UrlBuilder.feedback()} target="_blank">
+      <span class="bold">{m.link_text_feedback()}</span>
+    </Link>
+
     <Link href={UrlBuilder.og.support($user?.slug)} target="_blank">
       <span class="bold">{m.link_text_support()}</span>
     </Link>

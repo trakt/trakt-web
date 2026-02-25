@@ -1638,6 +1638,9 @@
     "link_text_support": {
       "default": "Wsparcie"
     },
+    "link_text_feedback": {
+      "default": "Sugestie"
+    },
     "link_text_terms": {
       "default": "Warunki Korzystania"
     },
