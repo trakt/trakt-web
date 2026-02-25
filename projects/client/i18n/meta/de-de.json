@@ -2585,6 +2585,42 @@
     },
     "text_vip_billing_cycle_year": {
       "default": "{years} Jahr"
+    },
+    "usage_title_personal_activity": {
+      "default": "Persönliche Aktivität"
+    },
+    "usage_title_lists": {
+      "default": "Listen"
+    },
+    "usage_title_library": {
+      "default": "Bibliothek"
+    },
+    "limit_title_watch_history": {
+      "default": "Verlauf"
+    },
+    "limit_title_ratings": {
+      "default": "Bewertungen"
+    },
+    "limit_title_personal_lists": {
+      "default": "Eigene Listen"
+    },
+    "limit_title_total_list_items": {
+      "default": "Listeneinträge"
+    },
+    "limit_title_watchlist_items": {
+      "default": "Watchlist"
+    },
+    "limit_title_digital_library": {
+      "default": "Digital-Archiv"
+    },
+    "limit_title_offline_library": {
+      "default": "Offline-Archiv"
+    },
+    "text_vip_track_more": {
+      "default": "Mehr tracken, mehr listen, mehr bewerten."
+    },
+    "button_label_see_more_limits": {
+      "default": "Mehr Limits anzeigen"
     }
   }
 }

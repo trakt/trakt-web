@@ -7087,6 +7087,102 @@
         "android",
         "ios"
       ]
+    },
+    "usage_title_personal_activity": {
+      "default": "Personal Activity",
+      "description": "Title for the section that shows a user's personal activity usage, such as their watch history and ratings counts and limits.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "usage_title_lists": {
+      "default": "Lists",
+      "description": "Title for the section that shows a user's lists usage, such as their list item counts and limits.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "usage_title_library": {
+      "default": "Library",
+      "description": "Title for the section that shows a user's library usage, such as their library item counts and limits.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "limit_title_watch_history": {
+      "default": "Watch History",
+      "description": "Title for the progress bar that shows a user's watch history usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "limit_title_ratings": {
+      "default": "Ratings",
+      "description": "Title for the progress bar that shows a user's ratings usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "limit_title_personal_lists": {
+      "default": "Personal Lists",
+      "description": "Title for the progress bar that shows a user's personal lists usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "limit_title_total_list_items": {
+      "default": "Total List Items",
+      "description": "Title for the progress bar that shows a user's total list items usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "limit_title_watchlist_items": {
+      "default": "Watchlist Items",
+      "description": "Title for the progress bar that shows a user's watchlist items usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "limit_title_digital_library": {
+      "default": "Digital Library",
+      "description": "Title for the progress bar that shows a user's digital library usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "limit_title_offline_library": {
+      "default": "Offline Library",
+      "description": "Title for the progress bar that shows a user's offline library usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_track_more": {
+      "default": "Track more, list more, rate more.",
+      "description": "Text shown to encourage non-VIP users to subscribe to gain higher limits on tracking, listing, and rating.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_see_more_limits": {
+      "default": "View more limits",
+      "description": "Aria-label for the button that allows users to view more of their limits.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

@@ -2585,6 +2585,42 @@
     },
     "text_vip_billing_cycle_year": {
       "default": "{years} jaar"
+    },
+    "usage_title_personal_activity": {
+      "default": "Persoonlijke activiteit"
+    },
+    "usage_title_lists": {
+      "default": "Lijsten"
+    },
+    "usage_title_library": {
+      "default": "Bibliotheek"
+    },
+    "limit_title_watch_history": {
+      "default": "Kijkgeschiedenis"
+    },
+    "limit_title_ratings": {
+      "default": "Beoordelingen"
+    },
+    "limit_title_personal_lists": {
+      "default": "Eigen lijsten"
+    },
+    "limit_title_total_list_items": {
+      "default": "Totaal items"
+    },
+    "limit_title_watchlist_items": {
+      "default": "Watchlist-items"
+    },
+    "limit_title_digital_library": {
+      "default": "Digitale bibliotheek"
+    },
+    "limit_title_offline_library": {
+      "default": "Offline bibliotheek"
+    },
+    "text_vip_track_more": {
+      "default": "Track meer, lijst meer, waardeer meer."
+    },
+    "button_label_see_more_limits": {
+      "default": "Meer limieten bekijken"
     }
   }
 }

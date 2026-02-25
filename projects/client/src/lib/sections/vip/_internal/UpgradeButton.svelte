@@ -9,10 +9,10 @@
     size = "normal",
   }: { plan: VipPlan; size?: "normal" | "small" } = $props();
 
-  const { startCheckout, isFetching } = $derived(useVip({ plan }));
+  const { startCheckout, isFetching } = useVip();
 
   const onStartCheckout = async () => {
-    const url = await startCheckout();
+    const url = await startCheckout(plan);
     if (url) {
       globalThis.window.location.href = url;
     }

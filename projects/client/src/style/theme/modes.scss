@@ -175,6 +175,11 @@
   --background-vip-content: linear-gradient(180deg,
     var(--shade-200) 0%,
     var(--shade-10) 100%);
+  --background-usage-limits-card: linear-gradient(180deg,
+    color-mix(in srgb, var(--shade-50) 80%, transparent) 0%,
+    color-mix(in srgb, var(--shade-100) 80%, transparent) 100%);
+  --color-usage-bar-background: var(--shade-300);
+  --color-usage-bar: var(--color-text-primary);
 }
 
 // Define theme variables for dark mode
@@ -350,6 +355,11 @@
   --background-vip-content: linear-gradient(180deg,
       var(--red-975) 0%,
       var(--shade-1000) 100%);
+  --background-usage-limits-card: linear-gradient(180deg,
+      color-mix(in srgb, var(--shade-930) 80%, transparent) 0%,
+      color-mix(in srgb, var(--shade-1000) 80%, transparent) 100%);
+  --color-usage-bar-background: var(--shade-800);
+  --color-usage-bar: var(--shade-100);
 }
 
 // Apply themes to selectors
