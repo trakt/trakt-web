@@ -2480,6 +2480,111 @@
     },
     "button_label_view_sentiment_analysis": {
       "default": "Se sentimentanalyse"
+    },
+    "text_vip_get_insights": {
+      "default": "Få dypere innsikt, smartere sporing og tidlig tilgang til fremtidens funksjoner."
+    },
+    "text_vip_mission_statement": {
+      "default": "VIP bidrar til å drive Trakt og låser opp funksjoner bygget for de som virkelig bryr seg om hva de ser på."
+    },
+    "text_vip_features_tagline": {
+      "default": "Ingen hype, bare funksjoner."
+    },
+    "vip_feature_title_yir": {
+      "default": "Året som gikk"
+    },
+    "vip_feature_description_yir": {
+      "default": "Massevis av statistikk for hvert år du har vært medlem."
+    },
+    "vip_feature_title_mir": {
+      "default": "Måneden som gikk"
+    },
+    "vip_feature_description_mir": {
+      "default": "Få en personlig oversikt over alt du har sett og vurdert hver måned."
+    },
+    "vip_feature_title_vip_status": {
+      "default": "VIP-status"
+    },
+    "vip_feature_description_vip_status": {
+      "default": "Vis frem VIP-statusen din i appene og på nettsiden."
+    },
+    "vip_feature_title_early_access": {
+      "default": "Tidlig tilgang"
+    },
+    "vip_feature_description_early_access": {
+      "default": "Få tidig tilgang til nye versjoner av Trakt-appene og helt nye funksjoner før alle andre."
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "Økte grenser"
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "Nyt høyere grenser for lister, vurderinger og andre funksjoner."
+    },
+    "vip_feature_title_sentiment": {
+      "default": "Stemningsanalyse"
+    },
+    "vip_feature_description_sentiment": {
+      "default": "Lås opp mer detaljert stemningsanalyse for serier og filmer."
+    },
+    "vip_feature_title_trivia": {
+      "default": "Trivia"
+    },
+    "vip_feature_description_trivia": {
+      "default": "Få mer trivia og innsikt om filmene og seriene du ser på."
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "Mer i vente"
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "Vi bygger stadig nye funksjoner eksklusivt for VIP-medlemmer."
+    },
+    "text_vip_built_to_last": {
+      "default": "Bygget for å vare"
+    },
+    "text_vip_costs": {
+      "default": "VIP bidrar til å dekke kostnadene ved å drive Trakt, inkludert:"
+    },
+    "text_vip_costs_team": {
+      "default": "Teamet som bygger og vedlikeholder plattformen."
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "Servere og infrastruktur som holder Trakt rask og pålitelig."
+    },
+    "text_vip_costs_moderation": {
+      "default": "Moderering og verktøy for å holde fellesskapet trygt."
+    },
+    "text_vip_costs_independence": {
+      "default": "Å holde Trakt uavhengig og fokusert på brukerne."
+    },
+    "text_vip_join_now": {
+      "default": "Bli en del av Trakt VIP og lås opp eksklusive funksjoner. Ikke la en eneste dag gå uten den fulle Trakt-opplevelsen."
+    },
+    "tag_text_most_popular": {
+      "default": "Populær"
+    },
+    "button_text_vip_upgrade": {
+      "default": "Oppgrader"
+    },
+    "button_label_vip_upgrade": {
+      "default": "Oppgrader til VIP"
+    },
+    "text_vip_subscription": {
+      "default": "abonnement"
+    },
+    "text_vip_billing_monthly": {
+      "default": "{price} per måned"
+    },
+    "text_vip_billing_yearly": {
+      "default": "{price} per år"
+    },
+    "text_vip_billing_biyearly": {
+      "default": "{price} annethvert år"
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1 måned"
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years} år"
     }
   }
 }

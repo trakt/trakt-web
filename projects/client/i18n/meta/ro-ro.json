@@ -2480,6 +2480,111 @@
     },
     "button_label_view_sentiment_analysis": {
       "default": "Vezi analiza sentimentelor"
+    },
+    "text_vip_get_insights": {
+      "default": "Obține analize mai profunde, monitorizare inteligentă și acces anticipat la noutăți."
+    },
+    "text_vip_mission_statement": {
+      "default": "VIP ajută la susținerea Trakt și deblochează funcții create special pentru cei care pun preț pe poveștile vizionate."
+    },
+    "text_vip_features_tagline": {
+      "default": "Fără reclamă, doar funcții."
+    },
+    "vip_feature_title_yir": {
+      "default": "Anul în Revistă"
+    },
+    "vip_feature_description_yir": {
+      "default": "O mulțime de statistici pentru fiecare an în care ai fost membru."
+    },
+    "vip_feature_title_mir": {
+      "default": "Luna în Revistă"
+    },
+    "vip_feature_description_mir": {
+      "default": "Primești o prezentare personalizată a tot ce ai vizionat și evaluat în fiecare lună."
+    },
+    "vip_feature_title_vip_status": {
+      "default": "Statut VIP"
+    },
+    "vip_feature_description_vip_status": {
+      "default": "Afișează-ți statutul VIP în aplicații și pe site."
+    },
+    "vip_feature_title_early_access": {
+      "default": "Acces Anticipat"
+    },
+    "vip_feature_description_early_access": {
+      "default": "Ai acces în premieră la noile versiuni de aplicații Trakt și la funcții noi înainte de oricine."
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "Limite Extinse"
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "Bucură-te de limite mai mari pentru liste, evaluări și alte funcții."
+    },
+    "vip_feature_title_sentiment": {
+      "default": "Sentiment"
+    },
+    "vip_feature_description_sentiment": {
+      "default": "Deblochează analize de sentiment mai detaliate pentru seriale și filme."
+    },
+    "vip_feature_title_trivia": {
+      "default": "Trivia"
+    },
+    "vip_feature_description_trivia": {
+      "default": "Află mai multe curiozități și detalii despre filmele și serialele pe care le urmărești."
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "Mai multe pe drum"
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "Construim constant funcții noi exclusiv pentru membrii VIP, cu actualizări palpitante deja pe drum."
+    },
+    "text_vip_built_to_last": {
+      "default": "Construit să dureze"
+    },
+    "text_vip_costs": {
+      "default": "VIP ajută la acoperirea costurilor reale de funcționare a Trakt, inclusiv:"
+    },
+    "text_vip_costs_team": {
+      "default": "Echipa care construiește și întreține platforma."
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "Serverele și infrastructura care mențin Trakt rapid și fiabil."
+    },
+    "text_vip_costs_moderation": {
+      "default": "Moderarea și instrumentele pentru a menține comunitatea sigură și primitoare."
+    },
+    "text_vip_costs_independence": {
+      "default": "Păstrarea Trakt independent, sustenabil și concentrat pe utilizatori."
+    },
+    "text_vip_join_now": {
+      "default": "Alătură-te membrilor Trakt VIP și deblochează funcțiile exclusive care îți lipsesc. Nu mai lăsa nicio zi să treacă fără experiența completă Trakt."
+    },
+    "tag_text_most_popular": {
+      "default": "Popular"
+    },
+    "button_text_vip_upgrade": {
+      "default": "Upgrade"
+    },
+    "button_label_vip_upgrade": {
+      "default": "Upgrade la VIP"
+    },
+    "text_vip_subscription": {
+      "default": "abonament"
+    },
+    "text_vip_billing_monthly": {
+      "default": "{price} pe lună"
+    },
+    "text_vip_billing_yearly": {
+      "default": "{price} pe an"
+    },
+    "text_vip_billing_biyearly": {
+      "default": "{price} la fiecare 2 ani"
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1 lună"
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years} an"
     }
   }
 }

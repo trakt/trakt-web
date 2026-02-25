@@ -2480,6 +2480,111 @@
     },
     "button_label_view_sentiment_analysis": {
       "default": "View sentiment analysis"
+    },
+    "text_vip_get_insights": {
+      "default": "Get deeper insights, smarter tracking, and early access to what's next."
+    },
+    "text_vip_mission_statement": {
+      "default": "VIP helps power Trakt and unlocks features built for people who really care about what they watch."
+    },
+    "text_vip_features_tagline": {
+      "default": "No hype, just features."
+    },
+    "vip_feature_title_yir": {
+      "default": "Year in Review"
+    },
+    "vip_feature_description_yir": {
+      "default": "Lots of stats for every year you've been a member."
+    },
+    "vip_feature_title_mir": {
+      "default": "Month in Review"
+    },
+    "vip_feature_description_mir": {
+      "default": "Get a personalised overview of everything you watched and rated each month."
+    },
+    "vip_feature_title_vip_status": {
+      "default": "VIP Status"
+    },
+    "vip_feature_description_vip_status": {
+      "default": "Show off your VIP status throughout the apps and website."
+    },
+    "vip_feature_title_early_access": {
+      "default": "Early Access"
+    },
+    "vip_feature_description_early_access": {
+      "default": "Get early access to new versions of Trakt apps and brand new features before anyone else."
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "Increased Limits"
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "Enjoy higher limits for your lists, ratings, and other features."
+    },
+    "vip_feature_title_sentiment": {
+      "default": "Sentiment"
+    },
+    "vip_feature_description_sentiment": {
+      "default": "Unlock more detailed sentiment analysis for shows and movies."
+    },
+    "vip_feature_title_trivia": {
+      "default": "Trivia"
+    },
+    "vip_feature_description_trivia": {
+      "default": "Get more trivia and insights about the movies and shows you watch."
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "More to Come"
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "We're constantly building new features exclusively for VIP members, with exciting updates already on the way."
+    },
+    "text_vip_built_to_last": {
+      "default": "Built to last"
+    },
+    "text_vip_costs": {
+      "default": "VIP helps cover the real costs of running Trakt, including:"
+    },
+    "text_vip_costs_team": {
+      "default": "The team building and maintaining the platform."
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "Servers and infrastructure that keep Trakt fast and reliable."
+    },
+    "text_vip_costs_moderation": {
+      "default": "Moderation and tooling to keep the community safe and welcoming."
+    },
+    "text_vip_costs_independence": {
+      "default": "Keeping Trakt independent, sustainable, and focused on users."
+    },
+    "text_vip_join_now": {
+      "default": "Join the many Trakt VIP members and unlock exclusive features you're missing out on. Don't let another day go by without the full Trakt experience."
+    },
+    "tag_text_most_popular": {
+      "default": "Most popular"
+    },
+    "button_text_vip_upgrade": {
+      "default": "Upgrade"
+    },
+    "button_label_vip_upgrade": {
+      "default": "Upgrade to VIP"
+    },
+    "text_vip_subscription": {
+      "default": "subscription"
+    },
+    "text_vip_billing_monthly": {
+      "default": "{price} billed monthly"
+    },
+    "text_vip_billing_yearly": {
+      "default": "{price} billed yearly"
+    },
+    "text_vip_billing_biyearly": {
+      "default": "{price} billed every 2 years"
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1 month"
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years} year"
     }
   }
 }

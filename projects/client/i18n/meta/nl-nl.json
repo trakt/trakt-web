@@ -2480,6 +2480,111 @@
     },
     "button_label_view_sentiment_analysis": {
       "default": "Sentimentanalyse bekijken"
+    },
+    "text_vip_get_insights": {
+      "default": "Krijg dieper inzicht, slimmere tracking en vroege toegang tot wat er komen gaat."
+    },
+    "text_vip_mission_statement": {
+      "default": "VIP helpt Trakt draaiende te houden en ontgrendelt functies voor mensen die echt geven om wat ze kijken."
+    },
+    "text_vip_features_tagline": {
+      "default": "Geen hype, alleen functies."
+    },
+    "vip_feature_title_yir": {
+      "default": "Jaaroverzicht"
+    },
+    "vip_feature_description_yir": {
+      "default": "Veel statistieken voor elk jaar dat je lid bent."
+    },
+    "vip_feature_title_mir": {
+      "default": "Maandoverzicht"
+    },
+    "vip_feature_description_mir": {
+      "default": "Krijg een gepersonaliseerd overzicht van alles wat je elke maand hebt gekeken en beoordeeld."
+    },
+    "vip_feature_title_vip_status": {
+      "default": "VIP Status"
+    },
+    "vip_feature_description_vip_status": {
+      "default": "Toon je VIP status overal in de apps en op de website."
+    },
+    "vip_feature_title_early_access": {
+      "default": "Vroege Toegang"
+    },
+    "vip_feature_description_early_access": {
+      "default": "Krijg als eerste toegang tot nieuwe versies van Trakt apps en gloednieuwe functies."
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "Hogere Limieten"
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "Geniet van hogere limieten voor je lijsten, beoordelingen en andere functies."
+    },
+    "vip_feature_title_sentiment": {
+      "default": "Sentiment"
+    },
+    "vip_feature_description_sentiment": {
+      "default": "Ontgrendel gedetailleerdere sentimentanalyse voor series en films."
+    },
+    "vip_feature_title_trivia": {
+      "default": "Trivia"
+    },
+    "vip_feature_description_trivia": {
+      "default": "Krijg meer trivia en inzichten over de films en series die je kijkt."
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "Meer op Komst"
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "We bouwen constant nieuwe functies exclusief voor VIP-leden, met spannende updates onderweg."
+    },
+    "text_vip_built_to_last": {
+      "default": "Gebouwd om te blijven"
+    },
+    "text_vip_costs": {
+      "default": "VIP helpt de werkelijke kosten van Trakt te dekken, inclusief:"
+    },
+    "text_vip_costs_team": {
+      "default": "Het team dat het platform bouwt en onderhoudt."
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "Servers en infrastructuur die Trakt snel en betrouwbaar houden."
+    },
+    "text_vip_costs_moderation": {
+      "default": "Moderatie en tools om de community veilig en gastvrij te houden."
+    },
+    "text_vip_costs_independence": {
+      "default": "Trakt onafhankelijk, duurzaam en gericht op gebruikers houden."
+    },
+    "text_vip_join_now": {
+      "default": "Sluit je aan bij de vele Trakt VIP-leden en ontgrendel exclusieve functies. Mis geen dag meer van de volledige Trakt-ervaring."
+    },
+    "tag_text_most_popular": {
+      "default": "Populairst"
+    },
+    "button_text_vip_upgrade": {
+      "default": "Upgrade"
+    },
+    "button_label_vip_upgrade": {
+      "default": "Upgrade naar VIP"
+    },
+    "text_vip_subscription": {
+      "default": "abonnement"
+    },
+    "text_vip_billing_monthly": {
+      "default": "{price} per maand"
+    },
+    "text_vip_billing_yearly": {
+      "default": "{price} per jaar"
+    },
+    "text_vip_billing_biyearly": {
+      "default": "{price} per 2 jaar"
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1 maand"
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years} jaar"
     }
   }
 }

@@ -2480,6 +2480,111 @@
     },
     "button_label_view_sentiment_analysis": {
       "default": "Ver análisis de sentimiento"
+    },
+    "text_vip_get_insights": {
+      "default": "Consigue análisis profundos, seguimiento inteligente y acceso anticipado a lo que vendrá."
+    },
+    "text_vip_mission_statement": {
+      "default": "VIP ayuda a mantener Trakt y desbloquea funciones creadas para personas que realmente se preocupan por lo que ven."
+    },
+    "text_vip_features_tagline": {
+      "default": "Sin rodeos, solo funciones."
+    },
+    "vip_feature_title_yir": {
+      "default": "Resumen del Año"
+    },
+    "vip_feature_description_yir": {
+      "default": "Montones de estadísticas de cada año que has sido miembro."
+    },
+    "vip_feature_title_mir": {
+      "default": "Resumen del Mes"
+    },
+    "vip_feature_description_mir": {
+      "default": "Obtén una visión general personalizada de todo lo que has visto y puntuado cada mes."
+    },
+    "vip_feature_title_vip_status": {
+      "default": "Estado VIP"
+    },
+    "vip_feature_description_vip_status": {
+      "default": "Presume de tu estado VIP en todas las apps y en la web."
+    },
+    "vip_feature_title_early_access": {
+      "default": "Acceso Anticipado"
+    },
+    "vip_feature_description_early_access": {
+      "default": "Accede a nuevas versiones de las apps de Trakt y a funciones exclusivas antes que nadie."
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "Límites Ampliados"
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "Disfruta de límites superiores en tus listas, valoraciones y otras funciones."
+    },
+    "vip_feature_title_sentiment": {
+      "default": "Sentimiento"
+    },
+    "vip_feature_description_sentiment": {
+      "default": "Desbloquea análisis de sentimiento más detallados para series y películas."
+    },
+    "vip_feature_title_trivia": {
+      "default": "Curiosidades"
+    },
+    "vip_feature_description_trivia": {
+      "default": "Obtén más curiosidades y detalles sobre las películas y series que ves."
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "Mucho más por venir"
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "Estamos creando constantemente nuevas funciones exclusivas para miembros VIP, con actualizaciones muy interesantes en camino."
+    },
+    "text_vip_built_to_last": {
+      "default": "Hecho para durar"
+    },
+    "text_vip_costs": {
+      "default": "VIP ayuda a cubrir los costes reales de funcionamiento de Trakt, incluyendo:"
+    },
+    "text_vip_costs_team": {
+      "default": "El equipo que construye y mantiene la plataforma."
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "Servidores e infraestructura que mantienen Trakt rápido y fiable."
+    },
+    "text_vip_costs_moderation": {
+      "default": "Moderación y herramientas para mantener la comunidad segura y acogedora."
+    },
+    "text_vip_costs_independence": {
+      "default": "Mantener Trakt independiente, sostenible y enfocado en los usuarios."
+    },
+    "text_vip_join_now": {
+      "default": "Únete a los muchos miembros VIP de Trakt y desbloquea funciones exclusivas. No dejes pasar otro día sin la experiencia completa de Trakt."
+    },
+    "tag_text_most_popular": {
+      "default": "Más popular"
+    },
+    "button_text_vip_upgrade": {
+      "default": "Mejorar"
+    },
+    "button_label_vip_upgrade": {
+      "default": "Pasar a VIP"
+    },
+    "text_vip_subscription": {
+      "default": "suscripción"
+    },
+    "text_vip_billing_monthly": {
+      "default": "{price} al mes"
+    },
+    "text_vip_billing_yearly": {
+      "default": "{price} al año"
+    },
+    "text_vip_billing_biyearly": {
+      "default": "{price} cada 2 años"
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1 mes"
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years} año"
     }
   }
 }

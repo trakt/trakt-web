@@ -116,6 +116,7 @@ module.exports = {
         'up-next',
         'upcoming',
         'user',
+        'vip',
         'watched',
         'watchlist',
         'worker',

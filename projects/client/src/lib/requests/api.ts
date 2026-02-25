@@ -7,6 +7,7 @@ type RawApiFetchParams = {
   environment?: HttpsUrl;
   fetch?: typeof fetch;
   path: string;
+  init?: Omit<RequestInit, 'headers'> & { headers?: Record<string, string> };
 };
 
 export type ApiParams = Omit<TraktApiOptions, 'apiKey' | 'environment'> & {
@@ -53,12 +54,16 @@ export const rawApiFetch = ({
   environment = ENV,
   fetch = globalThis.fetch,
   path,
+  init,
 }: RawApiFetchParams) => {
+  const { headers: additionalHeaders, ...restInit } = init ?? {};
   const authenticatedFetch = createAuthenticatedFetch(fetch);
   return authenticatedFetch(`${environment}${path}`, {
+    ...restInit,
     headers: {
       'trakt-api-version': '2',
       'trakt-api-key': TRAKT_CLIENT_ID,
+      ...additionalHeaders,
     },
   });
 };

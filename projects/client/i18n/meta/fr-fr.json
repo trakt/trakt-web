@@ -2480,6 +2480,111 @@
     },
     "button_label_view_sentiment_analysis": {
       "default": "Afficher l'analyse des sentiments"
+    },
+    "text_vip_get_insights": {
+      "default": "Obtenez des analyses approfondies, un suivi plus intelligent et un accès anticipé aux nouveautés."
+    },
+    "text_vip_mission_statement": {
+      "default": "Le statut VIP aide à soutenir Trakt et débloque des fonctionnalités conçues pour les passionnés qui accordent une réelle importance à ce qu'ils regardent."
+    },
+    "text_vip_features_tagline": {
+      "default": "Pas de fioritures, juste des fonctionnalités."
+    },
+    "vip_feature_title_yir": {
+      "default": "Rétrospective de l'année"
+    },
+    "vip_feature_description_yir": {
+      "default": "De nombreuses statistiques pour chaque année depuis que vous êtes membre."
+    },
+    "vip_feature_title_mir": {
+      "default": "Rétrospective du mois"
+    },
+    "vip_feature_description_mir": {
+      "default": "Obtenez un aperçu personnalisé de tout ce que vous avez regardé et noté chaque mois."
+    },
+    "vip_feature_title_vip_status": {
+      "default": "Statut VIP"
+    },
+    "vip_feature_description_vip_status": {
+      "default": "Affichez fièrement votre statut VIP sur toutes nos applications et notre site web."
+    },
+    "vip_feature_title_early_access": {
+      "default": "Accès anticipé"
+    },
+    "vip_feature_description_early_access": {
+      "default": "Accédez aux nouvelles versions des applications Trakt et aux nouvelles fonctionnalités avant tout le monde."
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "Limites augmentées"
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "Profitez de limites plus élevées pour vos listes, vos notes et d'autres fonctionnalités."
+    },
+    "vip_feature_title_sentiment": {
+      "default": "Sentiment"
+    },
+    "vip_feature_description_sentiment": {
+      "default": "Débloquez une analyse de sentiment plus détaillée pour vos films et séries."
+    },
+    "vip_feature_title_trivia": {
+      "default": "Anecdotes"
+    },
+    "vip_feature_description_trivia": {
+      "default": "Découvrez plus d'anecdotes et d'informations sur les œuvres que vous regardez."
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "À venir"
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "Nous développons constamment de nouvelles fonctionnalités exclusives pour les membres VIP, avec des mises à jour déjà en préparation."
+    },
+    "text_vip_built_to_last": {
+      "default": "Conçu pour durer"
+    },
+    "text_vip_costs": {
+      "default": "Le statut VIP aide à couvrir les coûts réels de fonctionnement de Trakt, notamment :"
+    },
+    "text_vip_costs_team": {
+      "default": "L'équipe qui construit et maintient la plateforme."
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "Les serveurs et l'infrastructure qui garantissent la rapidité et la fiabilité de Trakt."
+    },
+    "text_vip_costs_moderation": {
+      "default": "La modération et les outils pour garder la communauté sûre et accueillante."
+    },
+    "text_vip_costs_independence": {
+      "default": "Le maintien de l'indépendance et de la durabilité de Trakt, au service de ses utilisateurs."
+    },
+    "text_vip_join_now": {
+      "default": "Rejoignez les membres Trakt VIP et débloquez les fonctionnalités exclusives qui vous manquent. Ne laissez pas passer une autre journée sans vivre l'expérience Trakt intégrale."
+    },
+    "tag_text_most_popular": {
+      "default": "Populaire"
+    },
+    "button_text_vip_upgrade": {
+      "default": "Améliorer"
+    },
+    "button_label_vip_upgrade": {
+      "default": "Passer à VIP"
+    },
+    "text_vip_subscription": {
+      "default": "abonnement"
+    },
+    "text_vip_billing_monthly": {
+      "default": "{price} facturé mensuellement"
+    },
+    "text_vip_billing_yearly": {
+      "default": "{price} facturé annuellement"
+    },
+    "text_vip_billing_biyearly": {
+      "default": "{price} facturé tous les 2 ans"
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1 mois"
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years} an"
     }
   }
 }
