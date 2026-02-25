@@ -12,12 +12,14 @@ type UseMonthToDateProps = {
 
 export function useMonthToDate({ slug }: UseMonthToDateProps) {
   const now = new Date();
+  const year = now.getUTCFullYear();
+  const month = now.getUTCMonth();
 
   const params = {
     limit: HISTORY_LIMIT,
     slug,
-    startDate: new Date(now.getFullYear(), now.getMonth(), 1),
-    endDate: now,
+    startDate: new Date(Date.UTC(year, month, 1)),
+    endDate: new Date(Date.UTC(year, month, now.getUTCDate() + 1)),
   };
 
   const { list: movies, isLoading: isLoadingMovies } = usePaginatedListQuery(
