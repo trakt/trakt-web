@@ -22,9 +22,9 @@ import type { DefineQueryProps } from './models/DefineQueryProps.ts';
 function markerChecksum(
   invalidations: InvalidateActionOptions[],
 ): string | null {
-  return invalidations.length === 0
-    ? null
-    : checksum(invalidations.map(getMarker).join(':'));
+  if (invalidations.length === 0) return null;
+
+  return checksum(invalidations.map(getMarker).join(':'));
 }
 
 export function defineQuery<
