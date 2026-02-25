@@ -2585,6 +2585,42 @@
     },
     "text_vip_billing_cycle_year": {
       "default": "{years} an"
+    },
+    "usage_title_personal_activity": {
+      "default": "Activitate personală"
+    },
+    "usage_title_lists": {
+      "default": "Liste"
+    },
+    "usage_title_library": {
+      "default": "Bibliotecă"
+    },
+    "limit_title_watch_history": {
+      "default": "Istoric vizionări"
+    },
+    "limit_title_ratings": {
+      "default": "Evaluări"
+    },
+    "limit_title_personal_lists": {
+      "default": "Liste personale"
+    },
+    "limit_title_total_list_items": {
+      "default": "Elemente în liste"
+    },
+    "limit_title_watchlist_items": {
+      "default": "De vizionat"
+    },
+    "limit_title_digital_library": {
+      "default": "Bibliotecă digitală"
+    },
+    "limit_title_offline_library": {
+      "default": "Bibliotecă offline"
+    },
+    "text_vip_track_more": {
+      "default": "Urmărește mai mult, listează mai mult, evaluează mai mult."
+    },
+    "button_label_see_more_limits": {
+      "default": "Vezi mai multe limite"
     }
   }
 }

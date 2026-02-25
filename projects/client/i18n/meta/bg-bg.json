@@ -2585,6 +2585,42 @@
     },
     "text_vip_billing_cycle_year": {
       "default": "{years} година"
+    },
+    "usage_title_personal_activity": {
+      "default": "Лична активност"
+    },
+    "usage_title_lists": {
+      "default": "Списъци"
+    },
+    "usage_title_library": {
+      "default": "Библиотека"
+    },
+    "limit_title_watch_history": {
+      "default": "История"
+    },
+    "limit_title_ratings": {
+      "default": "Оценки"
+    },
+    "limit_title_personal_lists": {
+      "default": "Лични списъци"
+    },
+    "limit_title_total_list_items": {
+      "default": "Елементи в списъци"
+    },
+    "limit_title_watchlist_items": {
+      "default": "За гледане"
+    },
+    "limit_title_digital_library": {
+      "default": "Дигитална библиотека"
+    },
+    "limit_title_offline_library": {
+      "default": "Офлайн библиотека"
+    },
+    "text_vip_track_more": {
+      "default": "Следете повече, добавяйте повече, оценявайте повече."
+    },
+    "button_label_see_more_limits": {
+      "default": "Вижте още ограничения"
     }
   }
 }

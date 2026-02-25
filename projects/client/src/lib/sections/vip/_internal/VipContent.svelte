@@ -19,7 +19,10 @@
     gap: calc(2 * var(--gap-xxl));
 
     align-self: center;
+
     max-width: var(--ni-1280);
+    width: 100%;
+    box-sizing: border-box;
 
     padding: var(--top-bottom-padding) var(--layout-distance-side);
     transition:
@@ -28,7 +31,7 @@
 
     @include for-tablet-sm-and-below {
       --top-bottom-padding: var(--ni-36);
-      gap: var(--gap-xxl);
+      gap: calc(1.5 * var(--gap-xxl));
     }
 
     @include for-mobile {

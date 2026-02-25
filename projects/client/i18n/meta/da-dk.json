@@ -2585,6 +2585,42 @@
     },
     "text_vip_billing_cycle_year": {
       "default": "{years} år"
+    },
+    "usage_title_personal_activity": {
+      "default": "Personlig aktivitet"
+    },
+    "usage_title_lists": {
+      "default": "Lister"
+    },
+    "usage_title_library": {
+      "default": "Bibliotek"
+    },
+    "limit_title_watch_history": {
+      "default": "Sehistorik"
+    },
+    "limit_title_ratings": {
+      "default": "Bedømmelser"
+    },
+    "limit_title_personal_lists": {
+      "default": "Egne lister"
+    },
+    "limit_title_total_list_items": {
+      "default": "Listeemner"
+    },
+    "limit_title_watchlist_items": {
+      "default": "Skal ses"
+    },
+    "limit_title_digital_library": {
+      "default": "Digitalt bibliotek"
+    },
+    "limit_title_offline_library": {
+      "default": "Offline bibliotek"
+    },
+    "text_vip_track_more": {
+      "default": "Track mere, list mere, bedøm mere."
+    },
+    "button_label_see_more_limits": {
+      "default": "Se flere grænser"
     }
   }
 }

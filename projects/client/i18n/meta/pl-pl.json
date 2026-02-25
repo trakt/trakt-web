@@ -2585,6 +2585,42 @@
     },
     "text_vip_billing_cycle_year": {
       "default": "{years} rok"
+    },
+    "usage_title_personal_activity": {
+      "default": "Osobista aktywność"
+    },
+    "usage_title_lists": {
+      "default": "Listy"
+    },
+    "usage_title_library": {
+      "default": "Biblioteka"
+    },
+    "limit_title_watch_history": {
+      "default": "Historia"
+    },
+    "limit_title_ratings": {
+      "default": "Oceny"
+    },
+    "limit_title_personal_lists": {
+      "default": "Moje listy"
+    },
+    "limit_title_total_list_items": {
+      "default": "Elementy list"
+    },
+    "limit_title_watchlist_items": {
+      "default": "Do obejrzenia"
+    },
+    "limit_title_digital_library": {
+      "default": "Biblioteka cyfrowa"
+    },
+    "limit_title_offline_library": {
+      "default": "Biblioteka offline"
+    },
+    "text_vip_track_more": {
+      "default": "Śledź więcej, twórz więcej list, oceniaj więcej."
+    },
+    "button_label_see_more_limits": {
+      "default": "Zobacz więcej limitów"
     }
   }
 }

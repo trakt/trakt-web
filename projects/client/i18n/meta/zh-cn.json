@@ -2584,6 +2584,42 @@
     },
     "text_vip_billing_cycle_year": {
       "default": "{years} 年"
+    },
+    "usage_title_personal_activity": {
+      "default": "个人动态"
+    },
+    "usage_title_lists": {
+      "default": "列表"
+    },
+    "usage_title_library": {
+      "default": "媒体库"
+    },
+    "limit_title_watch_history": {
+      "default": "观看记录"
+    },
+    "limit_title_ratings": {
+      "default": "评分"
+    },
+    "limit_title_personal_lists": {
+      "default": "个人列表"
+    },
+    "limit_title_total_list_items": {
+      "default": "条目总数"
+    },
+    "limit_title_watchlist_items": {
+      "default": "待看条目"
+    },
+    "limit_title_digital_library": {
+      "default": "数字库"
+    },
+    "limit_title_offline_library": {
+      "default": "离线库"
+    },
+    "text_vip_track_more": {
+      "default": "追踪更多，列表更多，评分更多。"
+    },
+    "button_label_see_more_limits": {
+      "default": "查看更多限制"
     }
   }
 }

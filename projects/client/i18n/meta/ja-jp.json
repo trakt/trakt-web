@@ -2585,6 +2585,42 @@
     },
     "text_vip_billing_cycle_year": {
       "default": "{years}年"
+    },
+    "usage_title_personal_activity": {
+      "default": "個人アクティビティ"
+    },
+    "usage_title_lists": {
+      "default": "リスト"
+    },
+    "usage_title_library": {
+      "default": "ライブラリ"
+    },
+    "limit_title_watch_history": {
+      "default": "視聴履歴"
+    },
+    "limit_title_ratings": {
+      "default": "評価"
+    },
+    "limit_title_personal_lists": {
+      "default": "マイリスト"
+    },
+    "limit_title_total_list_items": {
+      "default": "全リスト項目"
+    },
+    "limit_title_watchlist_items": {
+      "default": "ウォッチリスト項目"
+    },
+    "limit_title_digital_library": {
+      "default": "デジタルライブラリ"
+    },
+    "limit_title_offline_library": {
+      "default": "オフラインライブラリ"
+    },
+    "text_vip_track_more": {
+      "default": "もっと記録、もっとリスト、もっと評価。"
+    },
+    "button_label_see_more_limits": {
+      "default": "制限をもっと見る"
     }
   }
 }

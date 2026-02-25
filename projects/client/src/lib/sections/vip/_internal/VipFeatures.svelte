@@ -9,6 +9,7 @@
   import TraktIcon from "./icons/TraktIcon.svelte";
   import TriviaIcon from "./icons/TriviaIcon.svelte";
   import YirIcon from "./icons/YirIcon.svelte";
+  import VipContentContainer from "./VipContentContainer.svelte";
   import VipFeature from "./VipFeature.svelte";
   import VipHeader from "./VipHeader.svelte";
 
@@ -56,14 +57,16 @@
   ] as const;
 </script>
 
-<div class="trakt-vip-features-content">
-  <VipHeader>
-    Here's what you get with <VipBadge />
+<VipContentContainer>
+  {#snippet header()}
+    <VipHeader>
+      Here's what you get with <VipBadge />
 
-    {#snippet description()}
-      <span class="secondary">{m.text_vip_features_tagline()}</span>
-    {/snippet}
-  </VipHeader>
+      {#snippet description()}
+        <span class="secondary">{m.text_vip_features_tagline()}</span>
+      {/snippet}
+    </VipHeader>
+  {/snippet}
 
   <div class="trakt-vip-features">
     {#each VIP_FEATURES as feature}
@@ -74,17 +77,10 @@
       </VipFeature>
     {/each}
   </div>
-</div>
+</VipContentContainer>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-
-  .trakt-vip-features-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--gap-xl);
-  }
 
   .trakt-vip-features {
     position: relative;
