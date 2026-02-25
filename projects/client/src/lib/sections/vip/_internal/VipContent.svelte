@@ -38,12 +38,22 @@
 
   .trakt-vip-content-background {
     position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    inset: 0;
     z-index: var(--layer-background);
 
-    background: var(--background-vip-page);
+    background-image: url("./assets/curtains.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    filter: blur(var(--ni-8)) grayscale(0.5);
+  }
+
+  .trakt-vip-content-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-color: var(--color-vip-background-overlay);
   }
 </style>

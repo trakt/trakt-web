@@ -2557,7 +2557,10 @@
       "default": "Trakt onafhankelijk, duurzaam en gericht op gebruikers houden."
     },
     "text_vip_join_now": {
-      "default": "Sluit je aan bij de vele Trakt VIP-leden en ontgrendel exclusieve functies. Mis geen dag meer van de volledige Trakt-ervaring."
+      "default": "Je hebt alleen de oppervlakte nog maar gezien, tijd voor het complete plaatje. Word lid van de gemeenschap van kijkers die elk seizoen en elke première als een mijlpaal zien. Verhoog je status en krijg de sleutels tot een verfijndere wereld van ontdekkingen."
+    },
+    "text_vip_make_it_official": {
+      "default": "Maak het officieel."
     },
     "tag_text_most_popular": {
       "default": "Populairst"

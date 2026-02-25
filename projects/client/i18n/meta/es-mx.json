@@ -2557,7 +2557,10 @@
       "default": "Mantener a Trakt independiente y enfocado en ti, el usuario."
     },
     "text_vip_join_now": {
-      "default": "Únete a los VIP de Trakt y desbloquea esas funciones que te faltan. ¡No te quedes sin la experiencia completa ni un día más!"
+      "default": "Solo has visto la superficie, ya es hora de ver la imagen completa. Únete a la comunidad de fans que ven cada temporada y cada estreno como un gran evento. Sube de nivel y consigue las llaves de un mundo de descubrimientos mucho más pro."
+    },
+    "text_vip_make_it_official": {
+      "default": "Hazlo oficial."
     },
     "tag_text_most_popular": {
       "default": "Más popular"

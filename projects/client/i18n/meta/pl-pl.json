@@ -2557,7 +2557,10 @@
       "default": "Utrzymanie niezależności Trakt i skupienie na potrzebach użytkowników."
     },
     "text_vip_join_now": {
-      "default": "Dołącz do grona VIP i odblokuj funkcje, których Ci brakuje. Niech każdy seans będzie wyjątkowy dzięki pełnej wersji Trakt."
+      "default": "Widziałeś tylko powierzchnię, czas zobaczyć pełny obraz. Dołącz do społeczności widzów, którzy każdy sezon i każdą premierę traktują jak święto. Podnieś swój status i zdobądź klucze do bardziej wyrafonowanego świata odkryć."
+    },
+    "text_vip_make_it_official": {
+      "default": "Zrób to oficjalnie."
     },
     "tag_text_most_popular": {
       "default": "Popularne"

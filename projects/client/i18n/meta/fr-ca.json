@@ -2557,7 +2557,10 @@
       "default": "Garder Trakt indépendant et axé sur les fans d'ici et d'ailleurs."
     },
     "text_vip_join_now": {
-      "default": "Rejoins la gang de VIP Trakt et débloque enfin l'expérience complète. C'est le temps de passer en mode Ciné-Cadeau à l'année!"
+      "default": "T'as juste vu la pointe de l'iceberg, c'est le temps de voir le portrait complet. Joins-toi à la gang de passionnés qui voient chaque saison et chaque première comme un grand moment. Monte de niveau et débloque un monde de découvertes encore plus tripant."
+    },
+    "text_vip_make_it_official": {
+      "default": "Rends ça officiel."
     },
     "tag_text_most_popular": {
       "default": "Le plus populaire"

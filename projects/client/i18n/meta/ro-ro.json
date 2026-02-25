@@ -2557,7 +2557,10 @@
       "default": "Păstrarea Trakt independent, sustenabil și concentrat pe utilizatori."
     },
     "text_vip_join_now": {
-      "default": "Alătură-te membrilor Trakt VIP și deblochează funcțiile exclusive care îți lipsesc. Nu mai lăsa nicio zi să treacă fără experiența completă Trakt."
+      "default": "Ai văzut doar suprafața, este timpul să vezi imaginea de ansamblu. Alătură-te comunității de spectatori care tratează fiecare sezon și fiecare premieră ca pe un eveniment istoric. Ridică-ți statutul și obține cheile unei lumi a descoperirilor mult mai rafinate."
+    },
+    "text_vip_make_it_official": {
+      "default": "Fă totul oficial."
     },
     "tag_text_most_popular": {
       "default": "Popular"

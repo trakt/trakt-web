@@ -1,5 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
+  import FeatureIcon from "./FeatureIcon.svelte";
+  import GlassCard from "./GlassCard.svelte";
 
   const {
     icon,
@@ -8,33 +10,26 @@
   }: { icon: Snippet; description: string; title: string } = $props();
 </script>
 
-<div class="trakt-vip-feature">
-  <div class="trakt-vip-feature-icon">{@render icon()}</div>
-  <h2 class="trakt-vip-feature-title">{title}</h2>
-  <p class="trakt-vip-feature-description secondary">{description}</p>
-</div>
+<GlassCard variant="plain">
+  <div class="trakt-vip-feature">
+    <FeatureIcon>{@render icon()}</FeatureIcon>
+    <h2 class="trakt-vip-feature-title">{title}</h2>
+    <p class="trakt-vip-feature-description">{description}</p>
+  </div>
+</GlassCard>
 
 <style>
   .trakt-vip-feature {
     display: grid;
     grid-template-columns: auto 1fr;
+    grid-template-rows: var(--ni-38) auto;
+    row-gap: var(--gap-xs);
     column-gap: var(--gap-s);
-
-    background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
-
-    border-radius: var(--border-radius-m);
-    border: var(--ni-1) solid var(--color-border);
-
-    padding: var(--ni-16);
+    align-items: start;
   }
 
-  .trakt-vip-feature-icon {
-    color: var(--color-text-secondary);
-
-    :global(svg) {
-      width: var(--ni-24);
-      height: var(--ni-24);
-    }
+  .trakt-vip-feature-title {
+    align-self: center;
   }
 
   .trakt-vip-feature-description {

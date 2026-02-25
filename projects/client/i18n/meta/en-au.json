@@ -2557,7 +2557,10 @@
       "default": "Keeping Trakt independent, sustainable, and focused on users."
     },
     "text_vip_join_now": {
-      "default": "Join the many Trakt VIP members and unlock exclusive features you're missing out on. Don't let another day go by without the full Trakt experience."
+      "default": "You've seen the surface, time to see the full picture. Join the society of viewers who treat every season and every premiere as a milestone. Elevate your status and gain the keys to a more sophisticated world of discovery."
+    },
+    "text_vip_make_it_official": {
+      "default": "Make it official."
     },
     "tag_text_most_popular": {
       "default": "Most popular"

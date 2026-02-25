@@ -2557,7 +2557,10 @@
       "default": "Å holde Trakt uavhengig og fokusert på brukerne."
     },
     "text_vip_join_now": {
-      "default": "Bli en del av Trakt VIP og lås opp eksklusive funksjoner. Ikke la en eneste dag gå uten den fulle Trakt-opplevelsen."
+      "default": "Du har bare sett overflaten, det er på tide å se hele bildet. Bli med i fellesskapet av seere som ser på hver sesong og premiere som en milepæl. Hev din status og få nøklene til en mer sofistikert verden av oppdagelser."
+    },
+    "text_vip_make_it_official": {
+      "default": "Gjør det offisielt."
     },
     "tag_text_most_popular": {
       "default": "Populær"

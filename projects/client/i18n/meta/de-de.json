@@ -2557,7 +2557,10 @@
       "default": "Trakt unabhängig, nachhaltig und nutzerzentriert zu halten."
     },
     "text_vip_join_now": {
-      "default": "Werden Sie VIP-Mitglied und schalten Sie exklusive Funktionen frei. Gönnen Sie sich das volle Trakt-Erlebnis – am besten noch heute!"
+      "default": "Sie haben bisher nur die Oberfläche gesehen – es ist Zeit, das gesamte Bild zu betrachten. Werden Sie Teil der Gemeinschaft von Zuschauern, für die jede Staffel und jede Premiere ein Meilenstein ist. Erhöhen Sie Ihren Status und erhalten Sie Zugang zu einer anspruchsvolleren Welt der Entdeckungen."
+    },
+    "text_vip_make_it_official": {
+      "default": "Machen Sie es offiziell."
     },
     "tag_text_most_popular": {
       "default": "Beliebt"

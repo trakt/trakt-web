@@ -29,7 +29,7 @@
     }
 
     @include for-mobile {
-      grid-template-columns: 75dvw;
+      grid-template-columns: var(--ni-280);
       gap: var(--gap-l);
     }
   }

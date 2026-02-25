@@ -2556,7 +2556,10 @@
       "default": "保持 Trakt 的独立性与可持续性，专注于用户需求。"
     },
     "text_vip_join_now": {
-      "default": "立即加入 Trakt VIP，解锁你期待已久的专属功能。开启你的完整 Trakt 影迷之旅。"
+      "default": "你只看到了冰山一角，是时候探索全貌了。加入由资深影迷组成的圈子，在这里，每一季和每一场首映都是重要的里程碑。提升你的等级，开启通往更精致发现世界的大门。"
+    },
+    "text_vip_make_it_official": {
+      "default": "正式加入。"
     },
     "tag_text_most_popular": {
       "default": "最受欢迎"
