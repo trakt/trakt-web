@@ -92,7 +92,9 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 1fr;
-    gap: var(--gap-xl);
+    gap: var(--gap-l);
+
+    transition: gap var(--transition-increment) ease-in-out;
 
     @include for-tablet-sm-and-below {
       grid-template-columns: repeat(2, 1fr);
@@ -100,6 +102,7 @@
 
     @include for-mobile {
       grid-template-columns: 1fr;
+      gap: var(--gap-m);
     }
   }
 </style>

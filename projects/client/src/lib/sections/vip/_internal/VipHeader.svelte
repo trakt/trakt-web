@@ -65,5 +65,9 @@
     flex-direction: column;
     align-items: center;
     gap: var(--gap-xs);
+
+    @include for-mobile {
+      max-width: 75dvw;
+    }
   }
 </style>

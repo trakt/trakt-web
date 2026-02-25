@@ -91,7 +91,7 @@
     }
 
     @include for-tablet-sm-and-below {
-      min-height: var(--ni-224);
+      min-height: var(--ni-204);
 
       &.is-popular {
         transform: translateY(calc(-1 * var(--ni-12)));
@@ -120,6 +120,15 @@
 
     padding: var(--ni-24);
     box-sizing: border-box;
+
+    transition:
+      padding,
+      gap var(--transition-increment) ease-in-out;
+
+    @include for-mobile {
+      padding: var(--ni-18);
+      gap: var(--gap-s);
+    }
   }
 
   .trakt-subscription-title {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
-  import PostersBackground from "./PostersBackground.svelte";
+  import GlassCard from "./GlassCard.svelte";
   import HeartIcon from "./icons/HeartIcon.svelte";
 
   const COST_DESCRIPTIONS = [
@@ -11,23 +11,23 @@
   ] as const;
 </script>
 
-<div class="trakt-vip-built-to-last">
-  <PostersBackground type="show" />
+<GlassCard>
+  <div class="trakt-vip-built-to-last">
+    <HeartIcon />
 
-  <HeartIcon />
+    <h2>{m.text_vip_built_to_last()}</h2>
 
-  <h2>{m.text_vip_built_to_last()}</h2>
+    <p class="bold">{m.text_vip_costs()}</p>
 
-  <p class="bold">{m.text_vip_costs()}</p>
-
-  <ul>
-    {#each COST_DESCRIPTIONS as description}
-      <li>
-        <p>{description}</p>
-      </li>
-    {/each}
-  </ul>
-</div>
+    <ul>
+      {#each COST_DESCRIPTIONS as description}
+        <li>
+          <p>{description}</p>
+        </li>
+      {/each}
+    </ul>
+  </div>
+</GlassCard>
 
 <style>
   .trakt-vip-built-to-last {
@@ -35,14 +35,6 @@
     flex-direction: column;
     align-items: center;
     gap: var(--gap-s);
-
-    position: relative;
-    overflow: hidden;
-
-    padding: var(--ni-24);
-
-    border-radius: var(--border-radius-m);
-    border: var(--ni-1) solid var(--red-700);
 
     ul {
       padding: 0;
