@@ -8,6 +8,7 @@ import type {
   QueryKey,
 } from '@tanstack/svelte-query';
 import { type z, type ZodType } from 'zod';
+import type { InvalidateActionOptions } from '../../requests/models/InvalidateAction.ts';
 import type { Paginatable } from '../../requests/models/Paginatable.ts';
 import { checksum } from '../../utils/string/checksum.ts';
 import { buildCommonOptions } from './_internal/buildCommonOptions.ts';
@@ -17,6 +18,14 @@ import { isValidResponse } from './_internal/isValidResponse.ts';
 import { schemaId } from './_internal/schemaId.ts';
 import { zodToHash } from './_internal/zodToHash.ts';
 import type { DefineQueryProps } from './models/DefineQueryProps.ts';
+
+function markerChecksum(
+  invalidations: InvalidateActionOptions[],
+): string | null {
+  return invalidations.length === 0
+    ? null
+    : checksum(invalidations.map(getMarker).join(':'));
+}
 
 export function defineQuery<
   TInput,
@@ -49,7 +58,7 @@ export function defineQuery<
       queryKey,
       queryFn: () => {
         // Get markers in queryFn to ensure they are up-to-date
-        const marker = checksum(invalidations.map(getMarker).join(':'));
+        const marker = markerChecksum(invalidations);
 
         return request({
           ...requestParams,
@@ -104,7 +113,7 @@ export function defineInfiniteQuery<
       queryKey,
       queryFn: ({ pageParam }: { pageParam: number }) => {
         // Get markers in queryFn to ensure they are up-to-date
-        const marker = checksum(invalidations.map(getMarker).join(':'));
+        const marker = markerChecksum(invalidations);
 
         return request({
           ...requestParams,

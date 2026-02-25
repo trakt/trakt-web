@@ -1,5 +1,5 @@
 export function createMarkerFetch<T extends typeof fetch>(
-  marker: string,
+  marker: string | null,
   baseFetch?: T,
 ): T {
   const fetchImpl = baseFetch || globalThis.fetch;
@@ -8,7 +8,7 @@ export function createMarkerFetch<T extends typeof fetch>(
     input: Parameters<T>[0],
     init?: Parameters<T>[1],
   ): Promise<Response> {
-    if (!(typeof input === 'string')) {
+    if (!(typeof input === 'string') || marker == null) {
       return fetchImpl(input, init);
     }
 
