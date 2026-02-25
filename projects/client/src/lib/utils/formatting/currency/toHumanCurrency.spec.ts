@@ -42,4 +42,24 @@ describe('toHumanCurrency', () => {
 
     expect(toHumanCurrency(currencyParams)).toBe('€ 3,50');
   });
+
+  it('will limit to max 2 decimals', () => {
+    const currencyParams = {
+      price: 6.789,
+      currency: 'usd',
+      locale: 'en' as AvailableLanguage,
+    };
+
+    expect(toHumanCurrency(currencyParams)).toBe('$6.79');
+  });
+
+  it('will omit decimals', () => {
+    const currencyParams = {
+      price: 6,
+      currency: 'usd',
+      locale: 'en' as AvailableLanguage,
+    };
+
+    expect(toHumanCurrency(currencyParams)).toBe('$6');
+  });
 });

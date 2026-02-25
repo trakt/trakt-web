@@ -11,9 +11,13 @@ export function toHumanCurrency({
   currency,
   locale,
 }: ToHumanCurrencyProps): string {
+  const hasDecimals = price % 1 !== 0;
+
   const inf = new Intl.NumberFormat(locale, {
     style: 'currency',
     currency: currency.toUpperCase(),
+    minimumFractionDigits: hasDecimals ? 2 : 0,
+    maximumFractionDigits: 2,
   });
 
   return inf.format(price);
