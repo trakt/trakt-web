@@ -1638,6 +1638,9 @@
     "link_text_support": {
       "default": "Støtte"
     },
+    "link_text_feedback": {
+      "default": "Feedback"
+    },
     "link_text_terms": {
       "default": "Vilkår for bruk"
     },

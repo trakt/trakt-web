@@ -1638,6 +1638,9 @@
     "link_text_support": {
       "default": "Підтримка"
     },
+    "link_text_feedback": {
+      "default": "Відгуки"
+    },
     "link_text_terms": {
       "default": "Умови Використання"
     },

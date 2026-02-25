@@ -4520,6 +4520,14 @@
       "description": "Text for the link that takes users to the support page or triggers a mailto url.",
       "exclude": []
     },
+    "link_text_feedback": {
+      "default": "Feedback",
+      "description": "Text for the link that takes users to the feedback page where they can make and vote on feature requests.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "link_text_terms": {
       "default": "Terms of Use",
       "description": "Text for the link that takes users to the support page or triggers a mailto url.",

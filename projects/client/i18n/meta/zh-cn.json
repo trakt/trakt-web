@@ -1637,6 +1637,9 @@
     "link_text_support": {
       "default": "支持"
     },
+    "link_text_feedback": {
+      "default": "反馈"
+    },
     "link_text_terms": {
       "default": "使用条款"
     },
