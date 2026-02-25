@@ -2477,6 +2477,111 @@
     },
     "button_label_view_sentiment_analysis": {
       "default": "Zobacz analizę nastrojów"
+    },
+    "text_vip_get_insights": {
+      "default": "Zyskaj głębsze analizy, inteligentne śledzenie i wczesny dostęp do nowości."
+    },
+    "text_vip_mission_statement": {
+      "default": "VIP wspiera rozwój Trakt i odblokowuje funkcje dla osób, którym naprawdę zależy na tym, co oglądają."
+    },
+    "text_vip_features_tagline": {
+      "default": "Bez zbędnego szumu, same funkcje."
+    },
+    "vip_feature_title_yir": {
+      "default": "Podsumowanie Roku"
+    },
+    "vip_feature_description_yir": {
+      "default": "Mnóstwo statystyk za każdy rok Twojej obecności w serwisie."
+    },
+    "vip_feature_title_mir": {
+      "default": "Podsumowanie Miesiąca"
+    },
+    "vip_feature_description_mir": {
+      "default": "Spersonalizowany przegląd wszystkiego, co obejrzałeś i oceniłeś w każdym miesiącu."
+    },
+    "vip_feature_title_vip_status": {
+      "default": "Status VIP"
+    },
+    "vip_feature_description_vip_status": {
+      "default": "Pochwal się statusem VIP w aplikacjach i na stronie internetowej."
+    },
+    "vip_feature_title_early_access": {
+      "default": "Wczesny Dostęp"
+    },
+    "vip_feature_description_early_access": {
+      "default": "Uzyskaj wczesny dostęp do nowych wersji aplikacji Trakt i funkcji przed innymi."
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "Zwiększone Limity"
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "Ciesz się wyższymi limitami dla list, ocen i innych funkcji."
+    },
+    "vip_feature_title_sentiment": {
+      "default": "Sentyment"
+    },
+    "vip_feature_description_sentiment": {
+      "default": "Odblokuj szczegółową analizę nastrojów dla seriali i filmów."
+    },
+    "vip_feature_title_trivia": {
+      "default": "Ciekawostki"
+    },
+    "vip_feature_description_trivia": {
+      "default": "Dowiedz się więcej ciekawostek o filmach i serialach, które oglądasz."
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "Więcej wkrótce"
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "Stale budujemy nowe, ekskluzywne funkcje dla członków VIP, a ekscytujące aktualizacje są już w drodze."
+    },
+    "text_vip_built_to_last": {
+      "default": "Zbudowane, by trwać"
+    },
+    "text_vip_costs": {
+      "default": "VIP pomaga pokryć realne koszty prowadzenia Trakt, w tym:"
+    },
+    "text_vip_costs_team": {
+      "default": "Zespół budujący i utrzymujący platformę."
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "Serwery i infrastrukturę, dzięki którym Trakt jest szybki i niezawodny."
+    },
+    "text_vip_costs_moderation": {
+      "default": "Moderację i narzędzia dbające o bezpieczeństwo społeczności."
+    },
+    "text_vip_costs_independence": {
+      "default": "Utrzymanie niezależności Trakt i skupienie na potrzebach użytkowników."
+    },
+    "text_vip_join_now": {
+      "default": "Dołącz do grona VIP i odblokuj funkcje, których Ci brakuje. Niech każdy seans będzie wyjątkowy dzięki pełnej wersji Trakt."
+    },
+    "tag_text_most_popular": {
+      "default": "Popularne"
+    },
+    "button_text_vip_upgrade": {
+      "default": "Ulepsz"
+    },
+    "button_label_vip_upgrade": {
+      "default": "Zostań VIP"
+    },
+    "text_vip_subscription": {
+      "default": "subskrypcja"
+    },
+    "text_vip_billing_monthly": {
+      "default": "{price} miesięcznie"
+    },
+    "text_vip_billing_yearly": {
+      "default": "{price} rocznie"
+    },
+    "text_vip_billing_biyearly": {
+      "default": "{price} co 2 lata"
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1 miesiąc"
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years} rok"
     }
   }
 }

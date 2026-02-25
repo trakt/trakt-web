@@ -6779,6 +6779,306 @@
         "android",
         "ios"
       ]
+    },
+    "text_vip_get_insights": {
+      "default": "Get deeper insights, smarter tracking, and early access to what's next.",
+      "description": "Text shown to encourage non-VIP users to subscribe to explore more detailed features and results.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_mission_statement": {
+      "default": "VIP helps power Trakt and unlocks features built for people who really care about what they watch.",
+      "description": "Text used to explain the benefits of subscribing to VIP and how it supports Trakt.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_features_tagline": {
+      "default": "No hype, just features.",
+      "description": "Text used to promote the features of a VIP package for the user.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_title_yir": {
+      "default": "Year in Review",
+      "description": "Title for the Year in Review VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_description_yir": {
+      "default": "Lots of stats for every year you've been a member.",
+      "description": "Description for the Year in Review VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_title_mir": {
+      "default": "Month in Review",
+      "description": "Title for the Month in Review VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_description_mir": {
+      "default": "Get a personalized overview of everything you watched and rated each month.",
+      "description": "Description for the Month in Review VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_title_vip_status": {
+      "default": "VIP Status",
+      "description": "Title for the VIP Status feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_description_vip_status": {
+      "default": "Show off your VIP status throughout the apps and website.",
+      "description": "Description for the VIP Status feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_title_early_access": {
+      "default": "Early Access",
+      "description": "Title for the Early Access VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_description_early_access": {
+      "default": "Get early access to new versions of Trakt apps and brand new features before anyone else.",
+      "description": "Description for the Early Access VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "Increased Limits",
+      "description": "Title for the Increased Limits VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "Enjoy higher limits for your lists, ratings, and other features.",
+      "description": "Description for the Increased Limits VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_title_sentiment": {
+      "default": "Sentiment",
+      "description": "Title for the Sentiment VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_description_sentiment": {
+      "default": "Unlock more detailed sentiment analysis for shows and movies.",
+      "description": "Description for the Sentiment VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_title_trivia": {
+      "default": "Trivia",
+      "description": "Title for the Trivia VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_description_trivia": {
+      "default": "Get more trivia and insights about the movies and shows you watch.",
+      "description": "Description for the Trivia VIP feature.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "More to Come",
+      "description": "Title for the More to Come VIP feature section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "We're constantly building new features exclusively for VIP members, with exciting updates already on the way.",
+      "description": "Description for the More to Come VIP feature section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_built_to_last": {
+      "default": "Built to last",
+      "description": "Text used to promote the long-term value of a VIP package for the user.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_costs": {
+      "default": "VIP helps cover the real costs of running Trakt, including:",
+      "description": "Text used to explain the costs covered by a VIP package.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_costs_team": {
+      "default": "The team building and maintaining the platform.",
+      "description": "Text used to explain the costs covered by a VIP package.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "Servers and infrastructure that keep Trakt fast and reliable.",
+      "description": "Text used to explain the costs covered by a VIP package.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_costs_moderation": {
+      "default": "Moderation and tooling to keep the community safe and welcoming.",
+      "description": "Text used to explain the costs covered by a VIP package.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_costs_independence": {
+      "default": "Keeping Trakt independent, sustainable, and focused on users.",
+      "description": "Text used to explain the costs covered by a VIP package.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_join_now": {
+      "default": "Join the many Trakt VIP members and unlock exclusive features you're missing out on. Don't let another day go by without the full Trakt experience.",
+      "description": "Text used to encourage users to join the VIP program.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_most_popular": {
+      "default": "Most popular",
+      "description": "Text for the tag that indicates the most popular item in a list or section. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_vip_upgrade": {
+      "default": "Upgrade",
+      "description": "Text for the button that allows users to upgrade to VIP. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_vip_upgrade": {
+      "default": "Upgrade to VIP",
+      "description": "Aria-label for the button that allows users to upgrade to VIP.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_subscription": {
+      "default": "subscription",
+      "description": "Text used to refer to a VIP subscription.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_billing_monthly": {
+      "default": "{price} billed monthly",
+      "description": "Text used to indicate the monthly billing option for VIP subscription. This should be as short as possible.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_billing_yearly": {
+      "default": "{price} billed yearly",
+      "description": "Text used to indicate the yearly billing option for VIP subscription. This should be as short as possible.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_billing_biyearly": {
+      "default": "{price} billed every 2 years",
+      "description": "Text used to indicate the biyearly billing option for VIP subscription. This should be as short as possible.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1 month",
+      "description": "Text used to indicate a monthly billing cycle for VIP subscription. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years} year",
+      "description": "Text used to indicate a yearly or multi-yearly billing cycle for VIP subscription. This should be as short as possible.",
+      "variables": {
+        "years": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

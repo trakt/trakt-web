@@ -2476,6 +2476,111 @@
     },
     "button_label_view_sentiment_analysis": {
       "default": "查看情感分析"
+    },
+    "text_vip_get_insights": {
+      "default": "获取深度洞察、智能追踪，并抢先体验下一代功能。"
+    },
+    "text_vip_mission_statement": {
+      "default": "VIP 助力 Trakt 持续运行，并为深度影迷解锁专属功能。"
+    },
+    "text_vip_features_tagline": {
+      "default": "拒绝虚头巴脑，只有纯粹功能。"
+    },
+    "vip_feature_title_yir": {
+      "default": "年度回顾"
+    },
+    "vip_feature_description_yir": {
+      "default": "为你记录入会以来每一年的详细统计数据。"
+    },
+    "vip_feature_title_mir": {
+      "default": "月度回顾"
+    },
+    "vip_feature_description_mir": {
+      "default": "获取每月观看和评分内容的个性化概览。"
+    },
+    "vip_feature_title_vip_status": {
+      "default": "VIP 身份"
+    },
+    "vip_feature_description_vip_status": {
+      "default": "在各移动端应用和网站上展示你的 VIP 标识。"
+    },
+    "vip_feature_title_early_access": {
+      "default": "抢先体验"
+    },
+    "vip_feature_description_early_access": {
+      "default": "先人一步体验 Trakt 新版本和全新功能。"
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "额度提升"
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "享受更高的列表数量、评分次数及其他功能上限。"
+    },
+    "vip_feature_title_sentiment": {
+      "default": "情感分析"
+    },
+    "vip_feature_description_sentiment": {
+      "default": "为影视剧解锁更详尽的情感倾向分析。"
+    },
+    "vip_feature_title_trivia": {
+      "default": "花絮趣闻"
+    },
+    "vip_feature_description_trivia": {
+      "default": "获取更多关于你所观看影视剧的背景知识和深度见解。"
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "敬请期待"
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "我们正在不断为 VIP 会员开发新的专属功能，更多更新即将到来。"
+    },
+    "text_vip_built_to_last": {
+      "default": "经久耐用"
+    },
+    "text_vip_costs": {
+      "default": "VIP 会费有助于支付 Trakt 的运行成本，包括："
+    },
+    "text_vip_costs_team": {
+      "default": "构建和维护平台的开发团队。"
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "确保 Trakt 快速稳定的服务器和基础设施。"
+    },
+    "text_vip_costs_moderation": {
+      "default": "维护社区安全与和谐的审核机制与工具。"
+    },
+    "text_vip_costs_independence": {
+      "default": "保持 Trakt 的独立性与可持续性，专注于用户需求。"
+    },
+    "text_vip_join_now": {
+      "default": "立即加入 Trakt VIP，解锁你期待已久的专属功能。开启你的完整 Trakt 影迷之旅。"
+    },
+    "tag_text_most_popular": {
+      "default": "最受欢迎"
+    },
+    "button_text_vip_upgrade": {
+      "default": "升级"
+    },
+    "button_label_vip_upgrade": {
+      "default": "升级到 VIP"
+    },
+    "text_vip_subscription": {
+      "default": "订阅"
+    },
+    "text_vip_billing_monthly": {
+      "default": "每月 {price}"
+    },
+    "text_vip_billing_yearly": {
+      "default": "每年 {price}"
+    },
+    "text_vip_billing_biyearly": {
+      "default": "每 2 年 {price}"
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1 个月"
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years} 年"
     }
   }
 }

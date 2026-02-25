@@ -2477,6 +2477,111 @@
     },
     "button_label_view_sentiment_analysis": {
       "default": "Посмотреть анализ тональности"
+    },
+    "text_vip_get_insights": {
+      "default": "Получайте глубокую аналитику, умное отслеживание и ранний доступ к новинкам."
+    },
+    "text_vip_mission_statement": {
+      "default": "VIP поддерживает работу Trakt и открывает функции для тех, кому действительно важно то, что они смотрят."
+    },
+    "text_vip_features_tagline": {
+      "default": "Никакого хайпа, только функции."
+    },
+    "vip_feature_title_yir": {
+      "default": "Итоги года"
+    },
+    "vip_feature_description_yir": {
+      "default": "Множество статистики за каждый год вашего участия."
+    },
+    "vip_feature_title_mir": {
+      "default": "Итоги месяца"
+    },
+    "vip_feature_description_mir": {
+      "default": "Персонализированный обзор всего, что вы посмотрели и оценили за месяц."
+    },
+    "vip_feature_title_vip_status": {
+      "default": "Статус VIP"
+    },
+    "vip_feature_description_vip_status": {
+      "default": "Демонстрируйте свой статус VIP в приложениях и на сайте."
+    },
+    "vip_feature_title_early_access": {
+      "default": "Ранний доступ"
+    },
+    "vip_feature_description_early_access": {
+      "default": "Получайте доступ к новым версиям Trakt и новым функциям раньше всех."
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "Увеличенные лимиты"
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "Наслаждайтесь расширенными лимитами для списков, рейтингов и других функций."
+    },
+    "vip_feature_title_sentiment": {
+      "default": "Анализ настроений"
+    },
+    "vip_feature_description_sentiment": {
+      "default": "Разблокируйте детальный анализ настроений для сериалов и фильмов."
+    },
+    "vip_feature_title_trivia": {
+      "default": "Интересные факты"
+    },
+    "vip_feature_description_trivia": {
+      "default": "Получайте больше фактов и инсайтов о фильмах и сериалах, которые вы смотрите."
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "Дальше — больше"
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "Мы постоянно создаем новые эксклюзивные функции для VIP-пользователей."
+    },
+    "text_vip_built_to_last": {
+      "default": "Создано надолго"
+    },
+    "text_vip_costs": {
+      "default": "VIP помогает покрыть реальные расходы на работу Trakt, включая:"
+    },
+    "text_vip_costs_team": {
+      "default": "Команду, создающую и поддерживающую платформу."
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "Серверы и инфраструктуру для быстрой работы Trakt."
+    },
+    "text_vip_costs_moderation": {
+      "default": "Модерацию для безопасности и уюта сообщества."
+    },
+    "text_vip_costs_independence": {
+      "default": "Независимость Trakt и фокус на пользователях."
+    },
+    "text_vip_join_now": {
+      "default": "Присоединяйтесь к числу VIP-пользователей Trakt. Не упускайте возможность получить полный доступ ко всем функциям."
+    },
+    "tag_text_most_popular": {
+      "default": "Популярно"
+    },
+    "button_text_vip_upgrade": {
+      "default": "Обновить"
+    },
+    "button_label_vip_upgrade": {
+      "default": "Обновить до VIP"
+    },
+    "text_vip_subscription": {
+      "default": "подписка"
+    },
+    "text_vip_billing_monthly": {
+      "default": "{price} в месяц"
+    },
+    "text_vip_billing_yearly": {
+      "default": "{price} в год"
+    },
+    "text_vip_billing_biyearly": {
+      "default": "{price} каждые 2 года"
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1 месяц"
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years} год"
     }
   }
 }

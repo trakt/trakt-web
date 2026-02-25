@@ -2477,6 +2477,111 @@
     },
     "button_label_view_sentiment_analysis": {
       "default": "センチメント分析を表示"
+    },
+    "text_vip_get_insights": {
+      "default": "より深い分析、スマートなトラッキング、そして最新機能への早期アクセスを。"
+    },
+    "text_vip_mission_statement": {
+      "default": "VIPはTraktの運営を支え、視聴体験を大切にするファンのための特別な機能を解放します。"
+    },
+    "text_vip_features_tagline": {
+      "default": "宣伝抜き、本物の機能だけを。"
+    },
+    "vip_feature_title_yir": {
+      "default": "年間振り返り"
+    },
+    "vip_feature_description_yir": {
+      "default": "メンバー登録以来、毎年の詳細な統計データをお届けします。"
+    },
+    "vip_feature_title_mir": {
+      "default": "月間振り返り"
+    },
+    "vip_feature_description_mir": {
+      "default": "毎月視聴した作品や評価したドラマのパーソナライズされた概要を表示します。"
+    },
+    "vip_feature_title_vip_status": {
+      "default": "VIPステータス"
+    },
+    "vip_feature_description_vip_status": {
+      "default": "アプリやウェブサイト全体でVIPバッジを表示しましょう。"
+    },
+    "vip_feature_title_early_access": {
+      "default": "早期アクセス"
+    },
+    "vip_feature_description_early_access": {
+      "default": "Traktアプリの新バージョンや最新機能を誰よりも早く体験できます。"
+    },
+    "vip_feature_title_increased_limits": {
+      "default": "上限の拡張"
+    },
+    "vip_feature_description_increased_limits": {
+      "default": "リスト作成、評価、その他の機能の上限がアップします。"
+    },
+    "vip_feature_title_sentiment": {
+      "default": "センチメント分析"
+    },
+    "vip_feature_description_sentiment": {
+      "default": "ドラマや映画に対するより詳細な感情分析データを解放します。"
+    },
+    "vip_feature_title_trivia": {
+      "default": "トリビア"
+    },
+    "vip_feature_description_trivia": {
+      "default": "視聴中の作品に関するより多くのトリビアや考察を入手できます。"
+    },
+    "vip_feature_title_more_to_come": {
+      "default": "今後の予定"
+    },
+    "vip_feature_description_more_to_come": {
+      "default": "VIP限定の刺激的な新機能を常に開発中です。アップデートをお楽しみに。"
+    },
+    "text_vip_built_to_last": {
+      "default": "末永いサービスのために"
+    },
+    "text_vip_costs": {
+      "default": "VIPの収益は、Traktを維持するための以下の費用に充てられます："
+    },
+    "text_vip_costs_team": {
+      "default": "プラットフォームを構築・維持するチーム。"
+    },
+    "text_vip_costs_infrastructure": {
+      "default": "高速で信頼性の高い環境を保つためのサーバーとインフラ。"
+    },
+    "text_vip_costs_moderation": {
+      "default": "安全で心地よいコミュニティを保つためのモデレーション。"
+    },
+    "text_vip_costs_independence": {
+      "default": "独立性を保ち、ユーザー中心の運営を継続すること。"
+    },
+    "text_vip_join_now": {
+      "default": "多くのVIPメンバーの仲間入りをして、未体験の限定機能を解放しましょう。Traktの真価を発揮する時が来ました。"
+    },
+    "tag_text_most_popular": {
+      "default": "人気"
+    },
+    "button_text_vip_upgrade": {
+      "default": "アップグレード"
+    },
+    "button_label_vip_upgrade": {
+      "default": "VIPにアップグレード"
+    },
+    "text_vip_subscription": {
+      "default": "サブスクリプション"
+    },
+    "text_vip_billing_monthly": {
+      "default": "{price} / 月"
+    },
+    "text_vip_billing_yearly": {
+      "default": "{price} / 年"
+    },
+    "text_vip_billing_biyearly": {
+      "default": "{price} / 2年"
+    },
+    "text_vip_billing_cycle_monthly": {
+      "default": "1ヶ月"
+    },
+    "text_vip_billing_cycle_year": {
+      "default": "{years}年"
     }
   }
 }
