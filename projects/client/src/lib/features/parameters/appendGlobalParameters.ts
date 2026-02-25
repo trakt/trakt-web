@@ -28,7 +28,7 @@ export function appendGlobalParameters(
     const currentUrl = new URL(globalThis.window.location.href);
     const isSamePath = url.pathname === currentUrl.pathname;
 
-    const localParams = isSamePath
+    const localParams = isSamePath && Boolean($override)
       ? Array.from(currentUrl.searchParams.entries())
         .filter(([key]) => LOCAL_PARAMS.includes(key))
       : [];
