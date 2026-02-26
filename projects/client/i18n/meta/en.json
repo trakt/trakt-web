@@ -5840,6 +5840,19 @@
         "android"
       ]
     },
+    "text_created_by_plain": {
+      "default": "Created by {name}",
+      "description": "Text to indicate the creator of a show.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
     "text_created_by_short": {
       "default": "Created by",
       "description": "Text to indicate the creator of a show.",

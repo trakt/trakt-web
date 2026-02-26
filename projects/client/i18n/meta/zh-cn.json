@@ -2194,6 +2194,14 @@
     "text_created_by": {
       "default": "主创：<a>{name}</a>"
     },
+    "text_created_by_plain": {
+      "default": "由 {name} 创作",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_created_by_short": {
       "default": "主创"
     },

@@ -2195,6 +2195,14 @@
     "text_created_by": {
       "default": "Skapad av <a>{name}</a>"
     },
+    "text_created_by_plain": {
+      "default": "Skapad av {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_created_by_short": {
       "default": "Skapad av:"
     },
