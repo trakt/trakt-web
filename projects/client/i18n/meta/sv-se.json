@@ -2209,6 +2209,9 @@
     "tag_text_watched": {
       "default": "Sedda"
     },
+    "tag_text_started": {
+      "default": "Påbörjad"
+    },
     "header_height": {
       "default": "Längd"
     },

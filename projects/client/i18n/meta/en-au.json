@@ -2209,6 +2209,9 @@
     "tag_text_watched": {
       "default": "Watched"
     },
+    "tag_text_started": {
+      "default": "Started"
+    },
     "header_height": {
       "default": "Height"
     },

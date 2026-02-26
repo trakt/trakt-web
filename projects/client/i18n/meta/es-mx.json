@@ -2209,6 +2209,9 @@
     "tag_text_watched": {
       "default": "Vista"
     },
+    "tag_text_started": {
+      "default": "Empezada"
+    },
     "header_height": {
       "default": "Altura"
     },

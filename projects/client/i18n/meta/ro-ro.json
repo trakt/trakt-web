@@ -2209,6 +2209,9 @@
     "tag_text_watched": {
       "default": "Vizionat"
     },
+    "tag_text_started": {
+      "default": "Început"
+    },
     "header_height": {
       "default": "Înălțime"
     },

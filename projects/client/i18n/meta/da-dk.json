@@ -2209,6 +2209,9 @@
     "tag_text_watched": {
       "default": "Set"
     },
+    "tag_text_started": {
+      "default": "Påbegyndt"
+    },
     "header_height": {
       "default": "Højde"
     },

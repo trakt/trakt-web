@@ -5866,6 +5866,14 @@
       "description": "Text for the tag that is shown before the movie or show watch count. This should be as short as possible.",
       "exclude": []
     },
+    "tag_text_started": {
+      "default": "Started",
+      "description": "Text for the tag that is shown to indicate a show is started but not completed. This should be as short as possible.",
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
     "header_height": {
       "default": "Height",
       "description": "Header for the section that displays the person's height.",

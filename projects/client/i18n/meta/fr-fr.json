@@ -2209,6 +2209,9 @@
     "tag_text_watched": {
       "default": "Vu"
     },
+    "tag_text_started": {
+      "default": "Commencée"
+    },
     "header_height": {
       "default": "Taille"
     },

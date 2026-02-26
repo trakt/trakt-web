@@ -2208,6 +2208,9 @@
     "tag_text_watched": {
       "default": "已看"
     },
+    "tag_text_started": {
+      "default": "已开始"
+    },
     "header_height": {
       "default": "身高"
     },

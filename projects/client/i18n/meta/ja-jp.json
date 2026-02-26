@@ -2209,6 +2209,9 @@
     "tag_text_watched": {
       "default": "視聴済み"
     },
+    "tag_text_started": {
+      "default": "視聴中"
+    },
     "header_height": {
       "default": "身長"
     },
