@@ -9,6 +9,6 @@
   const year = $derived(startDate.getFullYear());
 </script>
 
-<BannerLink href={UrlBuilder.vip()} target="_blank" source={promotion.id}>
+<BannerLink href={UrlBuilder.vip()} source={promotion.id}>
   Get VIP & reveal your {year}
 </BannerLink>

@@ -1,33 +1,29 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { VipPlan } from "./models/VipPlan";
-  import { useVip } from "./useVip";
 
   const {
     plan,
     size = "normal",
   }: { plan: VipPlan; size?: "normal" | "small" } = $props();
 
-  const { startCheckout, isFetching } = useVip();
-
-  const onStartCheckout = async () => {
-    const url = await startCheckout(plan);
-    if (url) {
-      globalThis.window.location.href = url;
-    }
-  };
+  const { track } = useTrack(AnalyticsEvent.VipUpgrade);
 </script>
 
 <trakt-vip-upgrade-button>
   <Button
     {size}
-    onclick={onStartCheckout}
-    disabled={$isFetching}
+    href={UrlBuilder.og.vip()}
+    target="_blank"
     label={m.button_label_vip_upgrade()}
     color="custom"
     variant="primary"
     style="flat"
+    onclick={() => track({ plan: plan.type })}
   >
     {m.button_text_vip_upgrade()}
   </Button>
