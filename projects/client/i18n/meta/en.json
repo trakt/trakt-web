@@ -5432,7 +5432,6 @@
       "default": "View Description",
       "description": "Text for the button that allows users to show full details of certain show or movie.",
       "exclude": [
-        "ios",
         "android"
       ]
     },
@@ -5440,7 +5439,6 @@
       "default": "Hide Description",
       "description": "Text for the button that allows users to hide full details of certain show or movie.",
       "exclude": [
-        "ios",
         "android"
       ]
     },
@@ -5448,7 +5446,6 @@
       "default": "Spoiler Alert",
       "description": "Text for the spoiler alert label that warns users about potential spoilers in the content they are about to see.",
       "exclude": [
-        "ios",
         "android"
       ]
     },
@@ -5854,9 +5851,7 @@
     "tag_text_watched": {
       "default": "Watched",
       "description": "Text for the tag that is shown before the movie or show watch count. This should be as short as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "header_height": {
       "default": "Height",
