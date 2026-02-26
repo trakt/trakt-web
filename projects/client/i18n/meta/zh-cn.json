@@ -1277,6 +1277,9 @@
     "page_title_settings": {
       "default": "设置"
     },
+    "button_text_settings": {
+      "default": "设置"
+    },
     "button_label_settings": {
       "default": "设置"
     },
