@@ -1505,6 +1505,9 @@
     "text_about": {
       "default": "关于我"
     },
+    "page_title_automatic_tracking": {
+      "default": "自动追踪"
+    },
     "text_automatic_tracking": {
       "default": "自动记录"
     },

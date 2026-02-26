@@ -1506,6 +1506,9 @@
     "text_about": {
       "default": "About me"
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatic Tracking"
+    },
     "text_automatic_tracking": {
       "default": "Automatic Tracking"
     },

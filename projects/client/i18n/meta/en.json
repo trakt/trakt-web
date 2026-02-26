@@ -4028,6 +4028,14 @@
         "ios"
       ]
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatic Tracking",
+      "description": "Title for the automatic tracking page.",
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
     "text_automatic_tracking": {
       "default": "Automatic Tracking",
       "description": "Text for the section that allows users to manage automatic shows and movies tracking.",

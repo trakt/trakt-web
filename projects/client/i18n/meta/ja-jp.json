@@ -1506,6 +1506,9 @@
     "text_about": {
       "default": "自己紹介"
     },
+    "page_title_automatic_tracking": {
+      "default": "自動トラッキング"
+    },
     "text_automatic_tracking": {
       "default": "自動追跡"
     },

@@ -1506,6 +1506,9 @@
     "text_about": {
       "default": "Over mij"
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatisch bijhouden"
+    },
     "text_automatic_tracking": {
       "default": "Automatisch Volgen"
     },

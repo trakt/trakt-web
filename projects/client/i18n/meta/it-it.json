@@ -1506,6 +1506,9 @@
     "text_about": {
       "default": "Su di me"
     },
+    "page_title_automatic_tracking": {
+      "default": "Monitoraggio automatico"
+    },
     "text_automatic_tracking": {
       "default": "Tracciamento Automatico"
     },

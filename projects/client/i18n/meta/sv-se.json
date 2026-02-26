@@ -1506,6 +1506,9 @@
     "text_about": {
       "default": "Om mig"
     },
+    "page_title_automatic_tracking": {
+      "default": "Automatisk spårning"
+    },
     "text_automatic_tracking": {
       "default": "Automatisk Spårning"
     },

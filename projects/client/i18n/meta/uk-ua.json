@@ -1506,6 +1506,9 @@
     "text_about": {
       "default": "Про мене"
     },
+    "page_title_automatic_tracking": {
+      "default": "Автоматичне відстеження"
+    },
     "text_automatic_tracking": {
       "default": "Автоматичне Відстеження"
     },
