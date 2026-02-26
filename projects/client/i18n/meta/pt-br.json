@@ -2209,6 +2209,9 @@
     "tag_text_watched": {
       "default": "Visto"
     },
+    "tag_text_started": {
+      "default": "Iniciada"
+    },
     "header_height": {
       "default": "Altura"
     },

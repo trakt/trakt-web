@@ -2209,6 +2209,9 @@
     "tag_text_watched": {
       "default": "Переглянуто"
     },
+    "tag_text_started": {
+      "default": "Розпочато"
+    },
     "header_height": {
       "default": "Зріст"
     },

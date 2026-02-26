@@ -2209,6 +2209,9 @@
     "tag_text_watched": {
       "default": "Гледано"
     },
+    "tag_text_started": {
+      "default": "Започнат"
+    },
     "header_height": {
       "default": "Ръст"
     },
