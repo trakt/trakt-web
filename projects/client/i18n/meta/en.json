@@ -782,8 +782,7 @@
       "default": "TBA",
       "description": "Text for the tag that indicates that something has no release date yet. This should be as short as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "list_title_related_movies": {
@@ -1741,9 +1740,7 @@
     "button_text_share": {
       "default": "Share",
       "description": "Text for the button that allows users to share a movie, show, episode, person, profile, etc.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_trailer": {
       "default": "Trailer",
