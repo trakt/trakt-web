@@ -11,7 +11,6 @@
     color="purple"
     size="small"
     variant="secondary"
-    target="_blank"
   >
     {m.button_text_manage_subscription()}
   </Button>

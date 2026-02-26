@@ -8,8 +8,12 @@
   const { user } = useUser();
 </script>
 
-<div class="trakt-page-links">
+<div class="trakt-page-links" class:is-vip={$user.isVip}>
   <RenderFor audience="vip">
+    <Link href={UrlBuilder.vip()}>
+      <span class="bold">VIP</span>
+    </Link>
+
     <Link href={UrlBuilder.feedback()} target="_blank">
       <span class="bold">{m.link_text_feedback()}</span>
     </Link>
@@ -33,6 +37,14 @@
 
     :global(.trakt-link) {
       text-decoration: none;
+    }
+
+    @include for-mobile() {
+      &.is-vip {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-row-gap: var(--gap-xxs);
+      }
     }
   }
 </style>

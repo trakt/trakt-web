@@ -216,9 +216,9 @@ export const UrlBuilder = {
     x: () => 'https://x.com/trakt',
     instagram: () => 'https://www.instagram.com/trakt_app',
   },
-  vip: () => 'https://trakt.tv/vip',
+  vip: () => '/vip',
   og: {
-    getVip: () => 'https://trakt.tv/vip',
+    vip: () => 'https://trakt.tv/vip',
     status: () => 'https://status.trakt.tv',
     privacy: () => 'https://trakt.tv/privacy',
     support: (username?: string) => ogSupportFactory(username),

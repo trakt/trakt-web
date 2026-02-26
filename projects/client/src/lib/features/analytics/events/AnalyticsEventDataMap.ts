@@ -34,6 +34,7 @@ type BannerDismissType = { id: string; value: string };
 type SortType = { sortBy: string; sortHow: string };
 type LikeType = { action: 'like' | 'unlike' };
 type VipUpsellType = SourceType;
+type VipUpgradeType = { plan: string };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -84,4 +85,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.BannerDismiss]: BannerDismissType;
 
   [AnalyticsEvent.VipUpsell]: VipUpsellType;
+
+  [AnalyticsEvent.VipUpgrade]: VipUpgradeType;
+  [AnalyticsEvent.VipManage]: never;
 };

@@ -17,7 +17,6 @@
     label={m.button_label_get_vip()}
     color="red"
     variant="secondary"
-    target="_blank"
   >
     {m.button_text_get_vip()}
     {#snippet icon()}
