@@ -2195,6 +2195,14 @@
     "text_created_by": {
       "default": "Creata da <a>{name}</a>"
     },
+    "text_created_by_plain": {
+      "default": "Creata da {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_created_by_short": {
       "default": "Creato da"
     },

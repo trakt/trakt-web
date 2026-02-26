@@ -2195,6 +2195,14 @@
     "text_created_by": {
       "default": "<a>{name}</a> 制作"
     },
+    "text_created_by_plain": {
+      "default": "制作：{name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "text_created_by_short": {
       "default": "制作:"
     },
