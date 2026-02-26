@@ -160,9 +160,7 @@
     "button_text_watchlist": {
       "default": "Watchlist",
       "description": "Text for the button that allows users to add/remove a movie or show to/from their watchlist.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_mark_as_watched": {
       "default": "Mark as Watched",
@@ -505,16 +503,12 @@
     "input_placeholder_search_movies": {
       "default": "Search movies...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "input_placeholder_search_shows": {
       "default": "Search shows...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_join_trakt": {
       "default": "Join Trakt",
@@ -2529,9 +2523,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_drop_show": {
       "default": "Flag show \"{title}\" as dropped",
@@ -2549,9 +2541,7 @@
     "button_text_drop_show": {
       "default": "Drop show",
       "description": "Text for the button that allows a user to drop a show. Indicating that a user is no longer actively tracking this show.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "warning_prompt_drop_movie": {
       "default": "Are you sure you want to drop \"{title}\"? This will remove it from your Continue Watching list.",
@@ -2982,8 +2972,7 @@
       "default": "Manage lists",
       "description": "Text for the button that opens the lists drawer. This allows users to add or remove a movie or show from their lists.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "dropdown_label_add_remove_from_lists": {
@@ -3050,24 +3039,21 @@
       "default": "Light",
       "description": "Text for the light theme option in the theme selection dropdown.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "option_text_theme_dark": {
       "default": "Dark",
       "description": "Text for the dark theme option in the theme selection dropdown.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "option_text_theme_system": {
       "default": "System",
       "description": "Text for the system theme option in the theme selection dropdown.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_filters": {
@@ -3311,8 +3297,7 @@
       "default": "Now watching",
       "description": "Text for the button that allows users to indicate that they are starting to watch a movie or episode.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_checkin": {
@@ -3400,9 +3385,7 @@
     "page_title_settings": {
       "default": "Settings",
       "description": "Title for the settings page.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_settings": {
       "default": "Settings",
@@ -4049,7 +4032,6 @@
       "default": "Automatic Tracking",
       "description": "Text for the section that allows users to manage automatic shows and movies tracking.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -4370,9 +4352,7 @@
     "input_placeholder_search_people": {
       "default": "Search people...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_toggle_search_lists": {
       "default": "Search for lists",
@@ -4393,8 +4373,7 @@
       "default": "Search lists...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "link_text_forums": {
@@ -5283,9 +5262,7 @@
     "link_text_general_settings": {
       "default": "General",
       "description": "Text for the link to the general settings page.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "link_text_data_settings": {
       "default": "Data",
@@ -5715,8 +5692,7 @@
       "default": "Theme",
       "description": "Text for the section that allows users to change the theme.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_language": {
@@ -5766,9 +5742,7 @@
     "translated_value_library_custom": {
       "default": "Custom",
       "description": "Value for the custom library name. This is the category for library items that are not in a specific category like Plex.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "page_title_library": {
       "default": "Library",
@@ -5919,9 +5893,7 @@
     "button_text_mark_as_watched_now": {
       "default": "Just now",
       "description": "Text for the button that allows users to mark a movie or episode as watched just now.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_mark_as_watched_now": {
       "default": "Just now",
@@ -5934,9 +5906,7 @@
     "button_text_mark_as_watched_release_date": {
       "default": "Release date",
       "description": "Text for the button that allows users to mark a movie or episode as watched on the release date.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_mark_as_watched_release_date": {
       "default": "Release date",
@@ -5949,9 +5919,7 @@
     "button_text_mark_as_watched_other_date": {
       "default": "Other date",
       "description": "Text for the button that allows users to mark a movie or episode as watched on a custom date.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_mark_as_watched_other_date": {
       "default": "Other date",
@@ -5964,9 +5932,7 @@
     "button_text_mark_as_watched_unknown_date": {
       "default": "Unknown date",
       "description": "Text for the button that allows users to mark a movie or episode as watched on an unknown date.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_mark_as_watched_unknown_date": {
       "default": "Unknown date",
@@ -6250,8 +6216,7 @@
       "default": "Send Logs",
       "description": "Text for the button that allows users to send logs for Younify troubleshooting.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "text_younify_status_linked": {
@@ -6576,8 +6541,7 @@
       "default": "Track",
       "description": "Do not translate this.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "filter_label_runtime": {
