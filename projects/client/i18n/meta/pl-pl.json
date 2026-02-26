@@ -2484,9 +2484,6 @@
     "text_vip_get_insights": {
       "default": "Zyskaj głębsze analizy, inteligentne śledzenie i wczesny dostęp do nowości."
     },
-    "text_vip_mission_statement": {
-      "default": "VIP wspiera rozwój Trakt i odblokowuje funkcje dla osób, którym naprawdę zależy na tym, co oglądają."
-    },
     "text_vip_features_tagline": {
       "default": "Bez zbędnego szumu, same funkcje."
     },
@@ -2538,11 +2535,8 @@
     "vip_feature_description_more_to_come": {
       "default": "Stale budujemy nowe, ekskluzywne funkcje dla członków VIP, a ekscytujące aktualizacje są już w drodze."
     },
-    "text_vip_built_to_last": {
-      "default": "Zbudowane, by trwać"
-    },
     "text_vip_costs": {
-      "default": "VIP pomaga pokryć realne koszty prowadzenia Trakt, w tym:"
+      "default": "VIP pomaga pokryć rzeczywiste koszty funkcjonowania Trakt."
     },
     "text_vip_costs_team": {
       "default": "Zespół budujący i utrzymujący platformę."
@@ -2556,8 +2550,11 @@
     "text_vip_costs_independence": {
       "default": "Utrzymanie niezależności Trakt i skupienie na potrzebach użytkowników."
     },
+    "text_vip_join_now_tagline": {
+      "default": "Widziałeś tylko powierzchnię."
+    },
     "text_vip_join_now": {
-      "default": "Widziałeś tylko powierzchnię, czas zobaczyć pełny obraz. Dołącz do społeczności widzów, którzy każdy sezon i każdą premierę traktują jak święto. Podnieś swój status i zdobądź klucze do bardziej wyrafonowanego świata odkryć."
+      "default": "Czas zobaczyć pełny obraz. Dołącz do społeczności widzów, którzy każdy sezon i każdą premierę traktują jak święto. Podnieś swój status i zdobądź klucze do bardziej wyrafinowanego świata odkryć."
     },
     "text_vip_make_it_official": {
       "default": "Zrób to oficjalnie."

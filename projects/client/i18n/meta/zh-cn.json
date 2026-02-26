@@ -2483,9 +2483,6 @@
     "text_vip_get_insights": {
       "default": "获取深度洞察、智能追踪，并抢先体验下一代功能。"
     },
-    "text_vip_mission_statement": {
-      "default": "VIP 助力 Trakt 持续运行，并为深度影迷解锁专属功能。"
-    },
     "text_vip_features_tagline": {
       "default": "拒绝虚头巴脑，只有纯粹功能。"
     },
@@ -2537,11 +2534,8 @@
     "vip_feature_description_more_to_come": {
       "default": "我们正在不断为 VIP 会员开发新的专属功能，更多更新即将到来。"
     },
-    "text_vip_built_to_last": {
-      "default": "经久耐用"
-    },
     "text_vip_costs": {
-      "default": "VIP 会费有助于支付 Trakt 的运行成本，包括："
+      "default": "VIP 会员帮助分担 Trakt 的运营成本。"
     },
     "text_vip_costs_team": {
       "default": "构建和维护平台的开发团队。"
@@ -2555,8 +2549,11 @@
     "text_vip_costs_independence": {
       "default": "保持 Trakt 的独立性与可持续性，专注于用户需求。"
     },
+    "text_vip_join_now_tagline": {
+      "default": "你目前看到的只是冰山一角。"
+    },
     "text_vip_join_now": {
-      "default": "你只看到了冰山一角，是时候探索全貌了。加入由资深影迷组成的圈子，在这里，每一季和每一场首映都是重要的里程碑。提升你的等级，开启通往更精致发现世界的大门。"
+      "default": "是时候揭开全貌了。加入我们，与那些将每一季、每一场首映都视为里程碑的观众们为伍。提升你的等级，获取开启更深层次探索世界的钥匙。"
     },
     "text_vip_make_it_official": {
       "default": "正式加入。"

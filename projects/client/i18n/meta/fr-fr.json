@@ -2484,9 +2484,6 @@
     "text_vip_get_insights": {
       "default": "Obtenez des analyses approfondies, un suivi plus intelligent et un accès anticipé aux nouveautés."
     },
-    "text_vip_mission_statement": {
-      "default": "Le statut VIP aide à soutenir Trakt et débloque des fonctionnalités conçues pour les passionnés qui accordent une réelle importance à ce qu'ils regardent."
-    },
     "text_vip_features_tagline": {
       "default": "Pas de fioritures, juste des fonctionnalités."
     },
@@ -2538,11 +2535,8 @@
     "vip_feature_description_more_to_come": {
       "default": "Nous développons constamment de nouvelles fonctionnalités exclusives pour les membres VIP, avec des mises à jour déjà en préparation."
     },
-    "text_vip_built_to_last": {
-      "default": "Conçu pour durer"
-    },
     "text_vip_costs": {
-      "default": "Le statut VIP aide à couvrir les coûts réels de fonctionnement de Trakt, notamment :"
+      "default": "Le VIP aide à couvrir les coûts réels de fonctionnement de Trakt."
     },
     "text_vip_costs_team": {
       "default": "L'équipe qui construit et maintient la plateforme."
@@ -2556,8 +2550,11 @@
     "text_vip_costs_independence": {
       "default": "Le maintien de l'indépendance et de la durabilité de Trakt, au service de ses utilisateurs."
     },
+    "text_vip_join_now_tagline": {
+      "default": "Vous n'avez vu que la surface."
+    },
     "text_vip_join_now": {
-      "default": "Vous n'avez vu que la surface, il est temps de découvrir l'œuvre complète. Rejoignez le cercle des spectateurs pour qui chaque saison et chaque avant-première est un événement. Élevez votre statut et obtenez les clés d'un univers de découverte plus sophistiqué."
+      "default": "Il est temps de voir l'image complète. Rejoignez le cercle des spectateurs pour qui chaque saison et chaque avant-première est un événement. Élevez votre statut et obtenez les clés d'un monde de découverte plus sophistiqué."
     },
     "text_vip_make_it_official": {
       "default": "Officialisez votre statut."

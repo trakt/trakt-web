@@ -4,7 +4,10 @@
   import type { VipPlan } from "./models/VipPlan";
   import { useVip } from "./useVip";
 
-  const { plan }: { plan: VipPlan } = $props();
+  const {
+    plan,
+    size = "normal",
+  }: { plan: VipPlan; size?: "normal" | "small" } = $props();
 
   const { startCheckout, isFetching } = $derived(useVip({ plan }));
 
@@ -18,13 +21,13 @@
 
 <trakt-vip-upgrade-button>
   <Button
+    {size}
     onclick={onStartCheckout}
     disabled={$isFetching}
     label={m.button_label_vip_upgrade()}
     color="custom"
     variant="primary"
     style="flat"
-    text="uppercase"
   >
     {m.button_text_vip_upgrade()}
   </Button>
@@ -33,10 +36,15 @@
 <style>
   trakt-vip-upgrade-button {
     :global(.trakt-button) {
-      --color-background-custom: var(--red-950);
+      --color-background-custom: color-mix(
+        in srgb,
+        var(--red-950) 25%,
+        transparent
+      );
       --color-foreground-custom: var(--shade-10);
 
-      border: var(--ni-1) solid var(--red-500);
+      border: var(--ni-1) solid
+        color-mix(in srgb, var(--red-500) 75%, transparent);
       padding: var(--ni-16) var(--ni-32);
 
       &:hover {
