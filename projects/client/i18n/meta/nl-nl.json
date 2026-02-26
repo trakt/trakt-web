@@ -2484,9 +2484,6 @@
     "text_vip_get_insights": {
       "default": "Krijg dieper inzicht, slimmere tracking en vroege toegang tot wat er komen gaat."
     },
-    "text_vip_mission_statement": {
-      "default": "VIP helpt Trakt draaiende te houden en ontgrendelt functies voor mensen die echt geven om wat ze kijken."
-    },
     "text_vip_features_tagline": {
       "default": "Geen hype, alleen functies."
     },
@@ -2538,11 +2535,8 @@
     "vip_feature_description_more_to_come": {
       "default": "We bouwen constant nieuwe functies exclusief voor VIP-leden, met spannende updates onderweg."
     },
-    "text_vip_built_to_last": {
-      "default": "Gebouwd om te blijven"
-    },
     "text_vip_costs": {
-      "default": "VIP helpt de werkelijke kosten van Trakt te dekken, inclusief:"
+      "default": "VIP helpt de werkelijke kosten van Trakt te dekken."
     },
     "text_vip_costs_team": {
       "default": "Het team dat het platform bouwt en onderhoudt."
@@ -2556,8 +2550,11 @@
     "text_vip_costs_independence": {
       "default": "Trakt onafhankelijk, duurzaam en gericht op gebruikers houden."
     },
+    "text_vip_join_now_tagline": {
+      "default": "Je hebt alleen het oppervlak nog maar gezien."
+    },
     "text_vip_join_now": {
-      "default": "Je hebt alleen de oppervlakte nog maar gezien, tijd voor het complete plaatje. Word lid van de gemeenschap van kijkers die elk seizoen en elke première als een mijlpaal zien. Verhoog je status en krijg de sleutels tot een verfijndere wereld van ontdekkingen."
+      "default": "Tijd om het volledige plaatje te zien. Sluit je aan bij de kring van kijkers die elk seizoen en elke première als een mijlpaal zien. Verhoog je status en krijg de sleutels tot een meer verfijnde wereld van ontdekkingen."
     },
     "text_vip_make_it_official": {
       "default": "Maak het officieel."

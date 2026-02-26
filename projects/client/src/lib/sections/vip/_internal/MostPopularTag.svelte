@@ -4,7 +4,7 @@
 </script>
 
 <trakt-most-popular-tag>
-  <TextTag><p class="uppercase bold">{m.tag_text_most_popular()}</p></TextTag>
+  <TextTag><p class="capitalize bold">{m.tag_text_most_popular()}</p></TextTag>
 </trakt-most-popular-tag>
 
 <style>

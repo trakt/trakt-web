@@ -2484,9 +2484,6 @@
     "text_vip_get_insights": {
       "default": "Få dypere innsikt, smartere sporing og tidlig tilgang til fremtidens funksjoner."
     },
-    "text_vip_mission_statement": {
-      "default": "VIP bidrar til å drive Trakt og låser opp funksjoner bygget for de som virkelig bryr seg om hva de ser på."
-    },
     "text_vip_features_tagline": {
       "default": "Ingen hype, bare funksjoner."
     },
@@ -2538,11 +2535,8 @@
     "vip_feature_description_more_to_come": {
       "default": "Vi bygger stadig nye funksjoner eksklusivt for VIP-medlemmer."
     },
-    "text_vip_built_to_last": {
-      "default": "Bygget for å vare"
-    },
     "text_vip_costs": {
-      "default": "VIP bidrar til å dekke kostnadene ved å drive Trakt, inkludert:"
+      "default": "VIP bidrar til å dekke de faktiske kostnadene ved å drive Trakt."
     },
     "text_vip_costs_team": {
       "default": "Teamet som bygger og vedlikeholder plattformen."
@@ -2556,8 +2550,11 @@
     "text_vip_costs_independence": {
       "default": "Å holde Trakt uavhengig og fokusert på brukerne."
     },
+    "text_vip_join_now_tagline": {
+      "default": "Du har bare sett overflaten."
+    },
     "text_vip_join_now": {
-      "default": "Du har bare sett overflaten, det er på tide å se hele bildet. Bli med i fellesskapet av seere som ser på hver sesong og premiere som en milepæl. Hev din status og få nøklene til en mer sofistikert verden av oppdagelser."
+      "default": "Tid for å se det fulle bildet. Bli med i fellesskapet av seere som behandler hver sesong og hver premiere som en milepæl. Hev din status og få nøklene til en mer sofistikert verden av oppdagelser."
     },
     "text_vip_make_it_official": {
       "default": "Gjør det offisielt."

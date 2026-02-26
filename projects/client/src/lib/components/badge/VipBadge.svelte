@@ -1,10 +1,13 @@
 <script lang="ts">
   import VipBadgeContent from "./_internal/VipBadgeContent.svelte";
 
-  const { isDirector = false }: { isDirector?: boolean } = $props();
+  const {
+    isDirector = false,
+    size,
+  }: { isDirector?: boolean; size?: "normal" | "large" } = $props();
   const badgeLabel = $derived(isDirector ? "DIRECTOR" : "VIP");
 </script>
 
-<VipBadgeContent>
+<VipBadgeContent {size}>
   {badgeLabel}
 </VipBadgeContent>

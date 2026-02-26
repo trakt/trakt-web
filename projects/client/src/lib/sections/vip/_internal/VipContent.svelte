@@ -41,12 +41,7 @@
     inset: 0;
     z-index: var(--layer-background);
 
-    background-image: url("./assets/curtains.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    filter: blur(var(--ni-8)) grayscale(0.5);
+    background: var(--background-vip-content);
   }
 
   .trakt-vip-content-background::after {
@@ -54,6 +49,11 @@
     position: absolute;
     inset: 0;
 
-    background-color: var(--color-vip-background-overlay);
+    background-image: url("./assets/theatre.jpg");
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    opacity: 0.3;
   }
 </style>

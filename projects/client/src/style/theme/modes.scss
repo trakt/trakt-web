@@ -172,9 +172,9 @@
   /*
    * VIP page
    */
-  --color-background-subscription-card: var(--shade-70);
-  --background-popular-subscription-card: radial-gradient(180112.68% 123.36% at 7.82% 100%, var(--red-50) 0%, var(--shade-70) 100%);
-  --color-vip-background-overlay: color-mix(in srgb, var(--shade-10) 60%, transparent);
+  --background-vip-content: linear-gradient(180deg,
+    var(--shade-200) 0%,
+    var(--shade-10) 100%);
 }
 
 // Define theme variables for dark mode
@@ -347,9 +347,9 @@
   /*
    * VIP page
    */
-  --color-background-subscription-card: var(--shade-950);
-  --background-popular-subscription-card: radial-gradient(112.68% 123.36% at 7.82% 100%, var(--red-975) 0%, var(--shade-1000) 100%);
-  --color-vip-background-overlay: color-mix(in srgb, var(--shade-1000) 20%, transparent);
+  --background-vip-content: linear-gradient(180deg,
+      var(--red-975) 0%,
+      var(--shade-1000) 100%);
 }
 
 // Apply themes to selectors

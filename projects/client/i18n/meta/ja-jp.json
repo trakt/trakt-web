@@ -2484,9 +2484,6 @@
     "text_vip_get_insights": {
       "default": "より深い分析、スマートなトラッキング、そして最新機能への早期アクセスを。"
     },
-    "text_vip_mission_statement": {
-      "default": "VIPはTraktの運営を支え、視聴体験を大切にするファンのための特別な機能を解放します。"
-    },
     "text_vip_features_tagline": {
       "default": "宣伝抜き、本物の機能だけを。"
     },
@@ -2538,11 +2535,8 @@
     "vip_feature_description_more_to_come": {
       "default": "VIP限定の刺激的な新機能を常に開発中です。アップデートをお楽しみに。"
     },
-    "text_vip_built_to_last": {
-      "default": "末永いサービスのために"
-    },
     "text_vip_costs": {
-      "default": "VIPの収益は、Traktを維持するための以下の費用に充てられます："
+      "default": "VIPはTraktの運営にかかる実費をサポートします。"
     },
     "text_vip_costs_team": {
       "default": "プラットフォームを構築・維持するチーム。"
@@ -2556,8 +2550,11 @@
     "text_vip_costs_independence": {
       "default": "独立性を保ち、ユーザー中心の運営を継続すること。"
     },
+    "text_vip_join_now_tagline": {
+      "default": "あなたはまだ表面を見たに過ぎません。"
+    },
     "text_vip_join_now": {
-      "default": "まだ表面しか見ていません。全貌を明かす時が来ました。毎シーズン、毎プレミアを重要な節目として楽しむ視聴者のコミュニティに参加しましょう。ステータスを上げ、より洗練された発見の世界への鍵を手に入れてください。"
+      "default": "全貌を目撃する時が来ました。すべてのシーズンやプレミアを人生の節目として大切にする、真の視聴者コミュニティに参加しましょう。ステータスを高め、より洗練された発見の世界への鍵を手に入れてください。"
     },
     "text_vip_make_it_official": {
       "default": "公式メンバーになろう。"

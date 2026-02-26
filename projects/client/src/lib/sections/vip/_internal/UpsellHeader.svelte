@@ -16,8 +16,5 @@
     <span class="secondary">
       {m.text_vip_get_insights()}
     </span>
-    <span class="secondary">
-      {m.text_vip_mission_statement()}
-    </span>
   {/snippet}
 </VipHeader>

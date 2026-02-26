@@ -70,24 +70,41 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-subscription-card {
+    --subscription-main-color: var(--shade-920);
+
     position: relative;
     display: flex;
     justify-content: center;
 
     min-height: var(--ni-272);
 
-    background: var(--color-background-subscription-card);
+    background: radial-gradient(
+      ellipse 110% 125% at 8% 100%,
+      var(--subscription-main-color) 0%,
+      var(--shade-1000) 100%
+    );
+
     box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
       color-mix(in srgb, var(--color-shadow) 25%, transparent);
 
     border-radius: var(--border-radius-xxl);
-    border: var(--ni-1) solid var(--shade-10);
+    border: var(--ni-1) solid
+      color-mix(in srgb, var(--shade-10) 10%, transparent);
+
+    span {
+      color: var(--shade-10);
+
+      &.secondary {
+        color: var(--shade-300);
+      }
+    }
 
     &.is-popular {
+      --subscription-main-color: var(--red-950);
       transform: translateY(calc(-1 * var(--ni-24)));
       transition: transform var(--transition-duration-short) ease-in-out;
 
-      background: var(--background-popular-subscription-card);
+      border: var(--ni-1) solid var(--shade-10);
     }
 
     @include for-tablet-sm-and-below {

@@ -2484,9 +2484,6 @@
     "text_vip_get_insights": {
       "default": "Erhalten Sie tiefere Einblicke, intelligenteres Tracking und Vorabzugang zu kommenden Features."
     },
-    "text_vip_mission_statement": {
-      "default": "VIP unterstützt den Betrieb von Trakt und schaltet Funktionen frei, die für echte Film- und Serienfans entwickelt wurden."
-    },
     "text_vip_features_tagline": {
       "default": "Kein Hype, nur Funktionen."
     },
@@ -2538,11 +2535,8 @@
     "vip_feature_description_more_to_come": {
       "default": "Wir entwickeln ständig neue Funktionen exklusiv für VIP-Mitglieder, spannende Updates sind bereits in Arbeit."
     },
-    "text_vip_built_to_last": {
-      "default": "Für die Ewigkeit gebaut"
-    },
     "text_vip_costs": {
-      "default": "VIP hilft dabei, die laufenden Kosten von Trakt zu decken, darunter:"
+      "default": "VIP hilft, die tatsächlichen Kosten für den Betrieb von Trakt zu decken."
     },
     "text_vip_costs_team": {
       "default": "Das Team, das die Plattform entwickelt und pflegt."
@@ -2556,8 +2550,11 @@
     "text_vip_costs_independence": {
       "default": "Trakt unabhängig, nachhaltig und nutzerzentriert zu halten."
     },
+    "text_vip_join_now_tagline": {
+      "default": "Sie haben bisher nur die Oberfläche gesehen."
+    },
     "text_vip_join_now": {
-      "default": "Sie haben bisher nur die Oberfläche gesehen – es ist Zeit, das gesamte Bild zu betrachten. Werden Sie Teil der Gemeinschaft von Zuschauern, für die jede Staffel und jede Premiere ein Meilenstein ist. Erhöhen Sie Ihren Status und erhalten Sie Zugang zu einer anspruchsvolleren Welt der Entdeckungen."
+      "default": "Zeit, das gesamte Bild zu sehen. Treten Sie der Gemeinschaft von Zuschauern bei, für die jede Staffel und jede Premiere ein Meilenstein ist. Erhöhen Sie Ihren Status und erhalten Sie Zugang zu einer anspruchsvolleren Welt der Entdeckungen."
     },
     "text_vip_make_it_official": {
       "default": "Machen Sie es offiziell."

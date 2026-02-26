@@ -1,8 +1,9 @@
 <script lang="ts">
-  const { children }: ChildrenProps = $props();
+  const { children, size }: { size?: "normal" | "large" } & ChildrenProps =
+    $props();
 </script>
 
-<div class="trakt-vip-badge">
+<div class="trakt-vip-badge" data-size={size}>
   <p class="uppercase">
     {@render children()}
   </p>
@@ -11,7 +12,7 @@
 <style>
   .trakt-vip-badge {
     display: flex;
-    padding: var(--ni-8) var(--ni-12) var(--ni-8) var(--ni-12);
+    padding: var(--ni-8) var(--ni-12);
     align-items: center;
     gap: var(--gap-xs);
 
@@ -25,6 +26,15 @@
     p {
       font-weight: 700;
       white-space: nowrap;
+    }
+
+    &[data-size="large"] {
+      padding: var(--ni-12) var(--ni-16);
+      height: var(--ni-40);
+
+      p {
+        font-size: var(--font-size-title);
+      }
     }
   }
 </style>

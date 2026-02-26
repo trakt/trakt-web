@@ -2484,9 +2484,6 @@
     "text_vip_get_insights": {
       "default": "Obține analize mai profunde, monitorizare inteligentă și acces anticipat la noutăți."
     },
-    "text_vip_mission_statement": {
-      "default": "VIP ajută la susținerea Trakt și deblochează funcții create special pentru cei care pun preț pe poveștile vizionate."
-    },
     "text_vip_features_tagline": {
       "default": "Fără reclamă, doar funcții."
     },
@@ -2538,11 +2535,8 @@
     "vip_feature_description_more_to_come": {
       "default": "Construim constant funcții noi exclusiv pentru membrii VIP, cu actualizări palpitante deja pe drum."
     },
-    "text_vip_built_to_last": {
-      "default": "Construit să dureze"
-    },
     "text_vip_costs": {
-      "default": "VIP ajută la acoperirea costurilor reale de funcționare a Trakt, inclusiv:"
+      "default": "VIP ajută la acoperirea costurilor reale pentru funcționarea Trakt."
     },
     "text_vip_costs_team": {
       "default": "Echipa care construiește și întreține platforma."
@@ -2556,8 +2550,11 @@
     "text_vip_costs_independence": {
       "default": "Păstrarea Trakt independent, sustenabil și concentrat pe utilizatori."
     },
+    "text_vip_join_now_tagline": {
+      "default": "Ai văzut doar suprafața."
+    },
     "text_vip_join_now": {
-      "default": "Ai văzut doar suprafața, este timpul să vezi imaginea de ansamblu. Alătură-te comunității de spectatori care tratează fiecare sezon și fiecare premieră ca pe un eveniment istoric. Ridică-ți statutul și obține cheile unei lumi a descoperirilor mult mai rafinate."
+      "default": "E timpul să vezi imaginea de ansamblu. Alătură-te societății cinefililor care tratează fiecare sezon și fiecare premieră ca pe un eveniment istoric. Ridică-ți statutul și obține cheile către o lume a descoperirilor mult mai sofisticată."
     },
     "text_vip_make_it_official": {
       "default": "Fă totul oficial."

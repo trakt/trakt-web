@@ -6796,14 +6796,6 @@
         "ios"
       ]
     },
-    "text_vip_mission_statement": {
-      "default": "VIP helps power Trakt and unlocks features built for people who really care about what they watch.",
-      "description": "Text used to explain the benefits of subscribing to VIP and how it supports Trakt.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "text_vip_features_tagline": {
       "default": "No hype, just features.",
       "description": "Text used to promote the features of a VIP package for the user.",
@@ -6940,16 +6932,8 @@
         "ios"
       ]
     },
-    "text_vip_built_to_last": {
-      "default": "Built to last",
-      "description": "Text used to promote the long-term value of a VIP package for the user.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "text_vip_costs": {
-      "default": "VIP helps cover the real costs of running Trakt, including:",
+      "default": "VIP helps cover the real costs of running Trakt.",
       "description": "Text used to explain the costs covered by a VIP package.",
       "exclude": [
         "android",
@@ -6988,8 +6972,16 @@
         "ios"
       ]
     },
+    "text_vip_join_now_tagline": {
+      "default": "You've seen the surface.",
+      "description": "Text used to encourage users to join the VIP program.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "text_vip_join_now": {
-      "default": "You've seen the surface, time to see the full picture. Join the society of viewers who treat every season and every premiere as a milestone. Elevate your status and gain the keys to a more sophisticated world of discovery.",
+      "default": "Time to see the full picture. Join the society of viewers who treat every season and every premiere as a milestone. Elevate your status and gain the keys to a more sophisticated world of discovery.",
       "description": "Text used to encourage users to join the VIP program.",
       "exclude": [
         "android",
