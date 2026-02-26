@@ -1500,6 +1500,9 @@
     "text_about": {
       "default": "О себе"
     },
+    "page_title_automatic_tracking": {
+      "default": "Автоматическое отслеживание"
+    },
     "text_automatic_tracking": {
       "default": "Авто-трекинг"
     },

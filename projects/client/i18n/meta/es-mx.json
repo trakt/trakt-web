@@ -1500,6 +1500,9 @@
     "text_about": {
       "default": "Acerca de mí"
     },
+    "page_title_automatic_tracking": {
+      "default": "Seguimiento automático"
+    },
     "text_automatic_tracking": {
       "default": "Seguimiento Automático"
     },

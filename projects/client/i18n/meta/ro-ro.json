@@ -1500,6 +1500,9 @@
     "text_about": {
       "default": "Despre mine"
     },
+    "page_title_automatic_tracking": {
+      "default": "Monitorizare automată"
+    },
     "text_automatic_tracking": {
       "default": "Urmărire Automată"
     },
