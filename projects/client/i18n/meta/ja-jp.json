@@ -1278,6 +1278,9 @@
     "page_title_settings": {
       "default": "設定"
     },
+    "button_text_settings": {
+      "default": "設定"
+    },
     "button_label_settings": {
       "default": "設定"
     },
