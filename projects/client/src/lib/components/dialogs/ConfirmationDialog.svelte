@@ -77,7 +77,7 @@
     color: var(--color-text-primary);
     max-width: var(--ni-380);
 
-    box-shadow: var(--popup-shadow);
+    box-shadow: var(--shadow-dialog);
 
     :global(form) {
       display: flex;

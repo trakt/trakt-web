@@ -57,7 +57,7 @@
         grid-template-columns:
           minmax(0, var(--summary-poster-width))
           1fr
-          var(--ni-320);
+          calc(var(--ni-320) + var(--layout-distance-side));
       }
     }
   }

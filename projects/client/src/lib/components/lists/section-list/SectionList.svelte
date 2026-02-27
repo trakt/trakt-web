@@ -171,11 +171,11 @@
     }
 
     &[data-variant="inline"] {
-      .trakt-list-item-container,
+      /* .trakt-list-item-container,
       :global(.trakt-list-inset-title) {
         margin: 0;
         padding: 0;
-      }
+      } */
 
       .section-list-empty-state {
         width: 100%;
@@ -212,7 +212,6 @@
 
   .section-list {
     position: relative;
-    overflow: hidden;
   }
 
   .section-list-container.section-list-container-collapsed {
@@ -229,11 +228,15 @@
 
   .section-list-horizontal-scroll,
   :global(.trakt-skeleton-list) {
+    --shadow-spacing: var(--ni-16);
+
     height: var(--height-list);
     display: flex;
     overflow-x: auto;
     transition: gap var(--transition-increment) ease-in-out;
     gap: var(--list-gap);
+    padding-block: var(--shadow-spacing);
+    margin-block: calc(var(--shadow-spacing) * -1);
 
     &[data-navigation-type="dpad"] {
       gap: var(--gap-xxs);

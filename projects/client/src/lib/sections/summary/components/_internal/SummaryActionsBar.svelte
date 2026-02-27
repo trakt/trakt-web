@@ -56,7 +56,7 @@
 
     background-color: var(--color-actions-bar-background);
     border-radius: var(--border-radius-l);
-    box-shadow: var(--popup-shadow);
+    box-shadow: var(--shadow-raised);
 
     transition: border-radius var(--popup-transition-duration) ease-in-out;
     transition-delay: calc(var(--popup-transition-duration) / 2);
@@ -81,6 +81,10 @@
 
     @include for-tablet-sm-and-below {
       width: var(--summary-poster-width);
+      &:global(:has(.trakt-media-actions-popup-button.is-opened)) {
+        border-radius: var(--border-radius-l);
+        clip-path: none;
+      }
     }
   }
 </style>

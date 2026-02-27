@@ -95,6 +95,8 @@
       background-color: var(--color-card-background);
       border-radius: 50%;
 
+      box-shadow: var(--shadow-base);
+
       :global(.profile-image) {
         transition: outline var(--transition-increment) ease-in-out;
       }

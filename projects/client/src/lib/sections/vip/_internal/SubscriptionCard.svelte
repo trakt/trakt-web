@@ -84,8 +84,7 @@
       var(--shade-1000) 100%
     );
 
-    box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
-      color-mix(in srgb, var(--color-shadow) 25%, transparent);
+    box-shadow: var(--shadow-raised);
 
     border-radius: var(--border-radius-xxl);
     border: var(--ni-1) solid

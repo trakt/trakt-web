@@ -154,7 +154,7 @@
     background-color: var(--shade-10);
 
     position: absolute;
-    box-shadow: var(--popup-shadow);
+    box-shadow: var(--shadow-menu);
 
     ul {
       all: unset;

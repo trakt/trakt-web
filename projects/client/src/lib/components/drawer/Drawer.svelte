@@ -157,8 +157,7 @@
 
     background: var(--color-drawer-background);
 
-    box-shadow: var(--ni-0) var(--ni-0) var(--ni-24) var(--ni-12)
-      color-mix(in srgb, var(--color-shadow) 50%, transparent);
+    box-shadow: var(--shadow-dialog);
 
     display: flex;
     flex-direction: column;

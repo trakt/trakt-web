@@ -48,8 +48,7 @@
   .trakt-card {
     all: unset;
 
-    contain: content;
-    content-visibility: auto;
+    contain: layout style;
 
     position: relative;
 
@@ -106,20 +105,11 @@
 
     &.trakt-card-transparent {
       :global(.trakt-card-cover) {
-        box-shadow:
-          0px var(--ni-16) var(--ni-8) 0px
-            color-mix(in srgb, var(--color-shadow) 2%, transparent),
-          0px var(--ni-8) var(--ni-4) 0px
-            color-mix(in srgb, var(--color-shadow) 4%, transparent),
-          0px var(--ni-4) var(--ni-4) 0px
-            color-mix(in srgb, var(--color-shadow) 8%, transparent),
-          0px var(--ni-1) var(--ni-2) 0px
-            color-mix(in srgb, var(--color-shadow) 8%, transparent);
+        box-shadow: var(--shadow-base);
       }
 
       :global(.trakt-tag) {
-        box-shadow: var(--ni-1) var(--ni-1) var(--ni-4) 0px
-          color-mix(in srgb, var(--color-shadow) 25%, transparent);
+        box-shadow: var(--shadow-floating);
       }
 
       :global(.trakt-action-button svg) {
@@ -128,18 +118,11 @@
             color-mix(in srgb, var(--color-shadow) 25%, transparent)
         );
       }
-
-      :global(.trakt-card-title),
-      :global(.trakt-card-subtitle) {
-        text-shadow: 0 var(--ni-1) var(--ni-2)
-          color-mix(in srgb, var(--color-shadow) 10%, transparent);
-      }
     }
 
     &:not(.trakt-card-transparent) {
       background: var(--color-card-background);
-      box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
-        color-mix(in srgb, var(--color-shadow) 25%, transparent);
+      box-shadow: var(--shadow-base);
     }
   }
 </style>

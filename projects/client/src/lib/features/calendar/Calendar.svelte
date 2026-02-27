@@ -63,6 +63,8 @@
   .calendar-navigation {
     --sticky-top: calc(env(safe-area-inset-top, 0) + var(--gap-m));
 
+    box-shadow: var(--shadow-raised);
+
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);

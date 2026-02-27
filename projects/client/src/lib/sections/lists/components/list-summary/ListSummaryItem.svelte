@@ -37,6 +37,9 @@
 
 <style>
   .trakt-list-summary {
+    height: var(--height-list-card);
+    box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);

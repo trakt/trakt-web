@@ -58,6 +58,8 @@
 
     background: var(--background-usage-limits-card);
 
+    box-shadow: var(--shadow-base);
+
     padding: var(--ni-32);
     box-sizing: border-box;
 

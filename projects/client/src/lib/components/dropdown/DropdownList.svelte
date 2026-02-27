@@ -249,8 +249,7 @@
 
     border-radius: var(--border-radius-m);
     background-color: var(--shade-10);
-    box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
-      color-mix(in srgb, var(--color-shadow) 25%, transparent);
+    box-shadow: var(--shadow-menu);
 
     div.spacer {
       height: calc(var(--ni-40) + var(--list-padding) * 2);

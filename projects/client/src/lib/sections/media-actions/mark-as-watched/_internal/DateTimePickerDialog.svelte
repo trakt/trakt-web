@@ -88,7 +88,7 @@
     max-width: var(--ni-480);
     min-width: var(--ni-320);
 
-    box-shadow: var(--popup-shadow);
+    box-shadow: var(--shadow-dialog);
 
     :global(form) {
       display: flex;

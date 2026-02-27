@@ -38,7 +38,6 @@
    */
   --color-card-background: var(--color-floating-background);
   --color-official-list-background: var(--purple-200);
-  --list-poster-shadow: -4px 0px 16px 0px rgba(0, 0, 0, 0.25);
 
   /*
     * Actions bar
@@ -48,13 +47,9 @@
   /*
    * Cta
    */
-  --color-cta-background-gradient: linear-gradient(258.73deg,
-      color-mix(in srgb,
-        color-mix(in srgb,
-          var(--purple-300) 80%,
-          transparent) 80%,
-        transparent) 0%,
-      var(--shade-100) 53.05%);
+  --color-cta-background-gradient: linear-gradient(260deg,
+      color-mix(in srgb, var(--shade-10) 60%, transparent) 0%,
+      var(--shade-10) 65%);
 
   /*
    * List
@@ -118,10 +113,10 @@
    */
   --color-current-reaction-hover: var(--red-100);
   --color-reaction-disabled-background: var(--shade-300);
-  --color-reaction-background: var(--shade-80);
-  --color-reaction-background-hover: var(--shade-200);
-  --color-current-reaction-background: var(--shade-300);
-  --color-reaction-distribution-background: var(--shade-100);
+  --color-reaction-background: var(--shade-20);
+  --color-reaction-background-hover: var(--shade-60);
+  --color-current-reaction-background: var(--shade-100);
+  --color-reaction-distribution-background: var(--shade-60);
 
 
   /**
@@ -141,7 +136,7 @@
   /*
    * Toggle
    */
-  --toggler-background-color: var(--shade-10);
+  --toggler-background-color: transparent;
   --toggler-tracker-color: var(--shade-700);
   --toggle-background-color: var(--shade-400);
   --toggle-background-hover-color: var(--shade-800);
@@ -180,6 +175,10 @@
     color-mix(in srgb, var(--shade-100) 80%, transparent) 100%);
   --color-usage-bar-background: var(--shade-300);
   --color-usage-bar: var(--color-text-primary);
+  --background-vip-glass-card: radial-gradient(circle at top left,
+    color-mix(in srgb, var(--shade-10) 30%, transparent) 0%,
+    color-mix(in srgb, var(--shade-10) 60%, transparent) 60%);
+  --background-vip-plain-glass-card: color-mix(in srgb, var(--shade-10) 60%, transparent);
 }
 
 // Define theme variables for dark mode
@@ -217,7 +216,6 @@
    */
   --color-card-background: var(--color-floating-background);
   --color-official-list-background: var(--purple-800);
-  --list-poster-shadow: -8px 0px 16px 0px rgba(0, 0, 0, 0.56);
 
   /*
     * Actions bar
@@ -227,13 +225,9 @@
   /*
    * Cta
    */
-  --color-cta-background-gradient: linear-gradient(258.73deg,
-      color-mix(in srgb,
-        color-mix(in srgb,
-          var(--purple-500) 80%,
-          transparent) 80%,
-        transparent) 0%,
-      var(--shade-900) 53.05%);
+  --color-cta-background-gradient: linear-gradient(260deg,
+      color-mix(in srgb, var(--shade-900) 60%, transparent) 0%,
+      var(--shade-900) 65%);
 
   /*
    * List
@@ -360,6 +354,10 @@
       color-mix(in srgb, var(--shade-1000) 80%, transparent) 100%);
   --color-usage-bar-background: var(--shade-800);
   --color-usage-bar: var(--shade-100);
+  --background-vip-glass-card: radial-gradient(circle at top left,
+      color-mix(in srgb, var(--red-900) 20%, transparent) 0%,
+      transparent 60%);
+  --background-vip-plain-glass-card: color-mix(in srgb, var(--shade-10) 10%, transparent);
 }
 
 // Apply themes to selectors

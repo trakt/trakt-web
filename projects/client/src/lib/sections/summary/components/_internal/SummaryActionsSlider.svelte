@@ -55,7 +55,9 @@
     width: 100%;
     left: 0;
 
-    box-shadow: var(--popup-shadow);
+    box-shadow: var(--shadow-raised);
+    clip-path: inset(0 -100vmax -100vmax -100vmax);
+
     background: var(--color-actions-bar-background);
     border-bottom-left-radius: var(--border-radius-l);
     border-bottom-right-radius: var(--border-radius-l);
