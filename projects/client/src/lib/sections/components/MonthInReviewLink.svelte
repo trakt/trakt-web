@@ -65,13 +65,15 @@
       gap: var(--gap-xs);
 
       color: var(--shade-10);
+
+      :global(svg) {
+        color: var(--shade-10);
+      }
     }
 
     :global(svg) {
       width: var(--ni-18);
       height: var(--ni-18);
-
-      color: var(--shade-10);
     }
 
     :global(.trakt-button-link) {

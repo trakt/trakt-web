@@ -111,11 +111,13 @@
     }
 
     @include for-tablet-sm-and-below {
+      overflow: visible;
+      gap: var(--gap-s);
+
       &:not(.is-vip),
       & {
         --details-column-count: 1;
       }
-      gap: var(--gap-s);
     }
   }
 

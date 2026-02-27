@@ -163,7 +163,7 @@
     background-color: var(--color-reaction-background);
     border-radius: var(--border-radius-xxl);
 
-    box-shadow: var(--popup-shadow);
+    box-shadow: var(--shadow-menu);
   }
 
   .trakt-reaction-popup {

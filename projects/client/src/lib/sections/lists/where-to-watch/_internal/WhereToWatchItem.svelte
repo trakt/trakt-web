@@ -68,6 +68,8 @@
   .where-to-watch-item-content {
     flex-shrink: 0;
 
+    box-shadow: var(--shadow-base);
+
     width: var(--width-where-to-watch-item);
     height: var(--height-where-to-watch-item);
 

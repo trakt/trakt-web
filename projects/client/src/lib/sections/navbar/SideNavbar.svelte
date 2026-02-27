@@ -138,8 +138,6 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--gap-m);
-
-    overflow: hidden;
   }
 
   .trakt-side-navbar-top,
@@ -169,6 +167,7 @@
     border-radius: var(--ni-60);
     transition: var(--transition-increment) ease-in-out;
     transition-property: background-color;
+    box-shadow: var(--shadow-navbar);
 
     padding: var(--ni-10) 0;
   }

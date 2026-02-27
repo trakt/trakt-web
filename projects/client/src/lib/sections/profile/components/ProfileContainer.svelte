@@ -31,6 +31,7 @@
 
     border-radius: var(--border-radius-l);
     background: var(--background-profile-details);
+    box-shadow: var(--shadow-raised);
 
     display: grid;
     grid-template-columns: 1fr;
@@ -55,7 +56,10 @@
       border-radius: 0;
 
       background: none;
+      box-shadow: none;
+
       height: auto;
+      overflow: visible;
 
       &.is-vip {
         background: none;

@@ -96,13 +96,7 @@
 
     width: min(var(--ni-480), 85%);
     background-color: var(--color-cookie-background);
-    box-shadow:
-      0px 280px 78px 0px transparent,
-      0px 179px 72px 0px
-        color-mix(in srgb, var(--color-shadow) 16%, transparent),
-      0px 101px 60px 0px color-mix(in srgb, var(--color-shadow) 8%, transparent),
-      0px 45px 45px 0px color-mix(in srgb, var(--color-shadow) 14%, transparent),
-      0px 11px 25px 0px color-mix(in srgb, var(--color-shadow) 16%, transparent);
+    box-shadow: var(--shadow-dialog);
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: bottom, right, width;

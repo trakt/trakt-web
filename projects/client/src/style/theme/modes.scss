@@ -5,17 +5,17 @@
   /**
    * Theme-able variables
    */
-  --color-floating-background: var(--shade-60);
-  --color-shadow: var(--shade-800);
+  --color-floating-background: var(--shade-10);
+  --color-shadow: var(--shade-900);
 
   --color-foreground: var(--shade-920);
-  --color-background: color-mix(in srgb, var(--shade-300) 80%, var(--purple-50));
+  --color-background: var(--shade-10);
 
   --color-text-primary: var(--shade-900);
   --color-text-secondary: var(--shade-800);
   --color-text-emphasis: var(--purple-700);
 
-  --color-input-background: color-mix(in srgb, var(--shade-20) 25%, transparent);
+  --color-input-background: var(--shade-10);
 
   --color-drawer-border: var(--shade-400);
   --background-vip-drawer: radial-gradient(ellipse 80% 86% at 7.82% 100%,
@@ -30,7 +30,7 @@
       var(--color-background-navbar-base) 90%,
       transparent);
   --color-foreground-navbar: var(--color-foreground);
-  --color-border: var(--shade-300);
+  --color-border: var(--shade-200);
   --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*
@@ -38,7 +38,6 @@
    */
   --color-card-background: var(--color-floating-background);
   --color-official-list-background: var(--purple-200);
-  --list-poster-shadow: -4px 0px 16px 0px rgba(0, 0, 0, 0.25);
 
   /*
     * Actions bar
@@ -118,10 +117,10 @@
    */
   --color-current-reaction-hover: var(--red-100);
   --color-reaction-disabled-background: var(--shade-300);
-  --color-reaction-background: var(--shade-80);
-  --color-reaction-background-hover: var(--shade-200);
-  --color-current-reaction-background: var(--shade-300);
-  --color-reaction-distribution-background: var(--shade-100);
+  --color-reaction-background: var(--shade-20);
+  --color-reaction-background-hover: var(--shade-60);
+  --color-current-reaction-background: var(--shade-100);
+  --color-reaction-distribution-background: var(--shade-60);
 
 
   /**
@@ -141,11 +140,11 @@
   /*
    * Toggle
    */
-  --toggler-background-color: var(--shade-70);
-  --toggler-tracker-color: var(--purple-300);
-  --toggle-background-color: var(--shade-100);
-  --toggle-background-hover-color: var(--shade-200);
-  --toggle-foreground-color: var(--shade-900);
+  --toggler-background-color: transparent;
+  --toggler-tracker-color: var(--shade-700);
+  --toggle-background-color: var(--shade-400);
+  --toggle-background-hover-color: var(--shade-800);
+  --toggle-foreground-color: var(--shade-50);
 
   /*
    * Where to watch
@@ -173,13 +172,28 @@
    * VIP page
    */
   --background-vip-content: linear-gradient(180deg,
-    var(--shade-200) 0%,
+    var(--shade-50) 0%,
     var(--shade-10) 100%);
   --background-usage-limits-card: linear-gradient(180deg,
     color-mix(in srgb, var(--shade-50) 80%, transparent) 0%,
     color-mix(in srgb, var(--shade-100) 80%, transparent) 100%);
   --color-usage-bar-background: var(--shade-300);
   --color-usage-bar: var(--color-text-primary);
+  --background-vip-glass-card: radial-gradient(circle at top left,
+    color-mix(in srgb, var(--shade-10) 30%, transparent) 0%,
+    color-mix(in srgb, var(--shade-10) 60%, transparent) 60%);
+  --background-vip-plain-glass-card: color-mix(in srgb, var(--shade-10) 60%, transparent);
+  --color-vip-upgrade-button: color-mix(in srgb,
+    var(--red-50) 25%,
+    transparent);
+  --background-subscription-card: radial-gradient(ellipse 110% 125% at 8% 100%,
+    var(--shade-20) 0%,
+    var(--shade-100) 100%);
+  --background-popular-subscription-card: radial-gradient(ellipse 110% 125% at 8% 100%,
+    var(--shade-20) 0%,
+    color-mix(in srgb,
+      var(--red-950) 10%,
+      var(--shade-10)) 100%);
 
   /*
    * Profile page
@@ -227,7 +241,6 @@
    */
   --color-card-background: var(--color-floating-background);
   --color-official-list-background: var(--purple-800);
-  --list-poster-shadow: -8px 0px 16px 0px rgba(0, 0, 0, 0.56);
 
   /*
     * Actions bar
@@ -370,6 +383,19 @@
       color-mix(in srgb, var(--shade-1000) 80%, transparent) 100%);
   --color-usage-bar-background: var(--shade-800);
   --color-usage-bar: var(--shade-100);
+  --background-vip-glass-card: radial-gradient(circle at top left,
+      color-mix(in srgb, var(--red-900) 20%, transparent) 0%,
+      transparent 60%);
+  --background-vip-plain-glass-card: color-mix(in srgb, var(--shade-10) 10%, transparent);
+  --color-vip-upgrade-button: color-mix(in srgb,
+      var(--red-950) 25%,
+      transparent);
+  --background-subscription-card: radial-gradient(ellipse 110% 125% at 8% 100%,
+      var(--shade-920) 0%,
+      var(--shade-1000) 100%);
+  --background-popular-subscription-card: radial-gradient(ellipse 110% 125% at 8% 100%,
+      var(--red-950) 0%,
+      var(--shade-1000) 100%);
 
   /*
    * Profile page
