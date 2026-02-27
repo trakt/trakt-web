@@ -2,6 +2,14 @@
   "name": "client",
   "version": "0.0.1",
   "type": "module",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss",
+    "./src/app.html",
+    "./src/worker/service-worker.ts",
+    "./src/lib/features/events/initializeEvents.ts",
+    "./src/lib/features/theme/initializeSeasonalThemes.ts"
+  ],
   "license": "MIT",
   "scripts": {
     "pre:dev": "deno task i18n:web:watch",
@@ -9,7 +17,7 @@
     "dev:staging": "concurrently 'deno task pre:dev' 'cross-env IS_STAGING=true vite dev'",
     "dev:contrib": "concurrently 'deno task pre:dev' 'cross-env  IS_CONTRIB=true vite dev'",
     "prebuild": "deno task i18n:web",
-    "build": "vite build",
+    "build": "NODE_OPTIONS=\"--max-old-space-size=8192\" DENO_V8_FLAGS=\"--max-old-space-size=8192\" vite build",
     "prebuild:preview": "deno task prebuild",
     "build:preview": "IS_PREVIEW=true vite build",
     "preview": "vite preview",

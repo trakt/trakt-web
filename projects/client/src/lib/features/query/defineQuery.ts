@@ -27,6 +27,7 @@ function markerChecksum(
   return checksum(invalidations.map(getMarker).join(':'));
 }
 
+/*@__NO_SIDE_EFFECTS__*/
 export function defineQuery<
   TInput,
   TOutput extends ZodType,
@@ -41,16 +42,22 @@ export function defineQuery<
     ...params
   }: DefineQueryProps<TInput, TOutput, TRequestParams>,
 ) {
-  const hash = schemaId(monitor(zodToHash, `${params.key} hashing`)(schema));
+  let cachedHash: string;
+  // const hash = schemaId(monitor(zodToHash, `${params.key} hashing`)(schema));
 
   return (
     requestParams: TRequestParams = {} as TRequestParams,
   ): CreateQueryOptions<z.infer<TOutput>, TError> => {
+    // 2. Lazily calculate the hash the very first time the query is called by a component
+    cachedHash ??= schemaId(
+      monitor(zodToHash, `${params.key} hashing`)(schema),
+    );
+
     const queryKey = buildQueryKeys({
       key: params.key,
       dependencies: params.dependencies,
       requestParams,
-      hash,
+      hash: cachedHash,
       invalidations,
     });
 
@@ -77,6 +84,8 @@ export function defineQuery<
 type PaginatedRequestParams = ApiParams & { page?: number };
 
 // FIXME: see if we can unify defineQuery and defineInfiniteQuery more
+
+/*@__NO_SIDE_EFFECTS__*/
 export function defineInfiniteQuery<
   TInput,
   TEntry,
@@ -90,7 +99,9 @@ export function defineInfiniteQuery<
   invalidations,
   ...params
 }: DefineQueryProps<TInput, TOutput, TRequestParams>) {
-  const hash = schemaId(monitor(zodToHash, `${params.key} hashing`)(schema));
+  let cachedHash: string;
+
+  // const hash = schemaId(monitor(zodToHash, `${params.key} hashing`)(schema));
 
   return (
     requestParams: TRequestParams = {} as TRequestParams,
@@ -101,11 +112,15 @@ export function defineInfiniteQuery<
     QueryKey,
     number
   > => {
+    // 2. Lazily calculate the hash the very first time the query is called by a component
+    cachedHash ??= schemaId(
+      monitor(zodToHash, `${params.key} hashing`)(schema),
+    );
     const queryKey = buildQueryKeys({
       key: params.key,
       dependencies: params.dependencies,
       requestParams,
-      hash,
+      hash: cachedHash,
       invalidations,
     });
 

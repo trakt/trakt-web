@@ -2,12 +2,9 @@ import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { Environment } from '@trakt/api';
-import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { defineConfig } from 'vitest/config';
 import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
-import { manifest } from './src/lib/pwa/manifest.ts';
 
-import { sentrySvelteKit } from '@sentry/sveltekit';
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -81,37 +78,46 @@ export default defineConfig(({ mode }) => ({
   },
 
   plugins: [
-    sentrySvelteKit({
-      sourceMapsUploadOptions: {
-        org: 'trakt-tv',
-        project: 'trakt-web',
-      },
-    }),
+    // sentrySvelteKit({
+    //   sourceMapsUploadOptions: {
+    //     org: 'trakt-tv',
+    //     project: 'trakt-web',
+    //   },
+    //   telemetry: false,
+    // }),
     sveltekit(),
     paraglideVitePlugin({
       project: './i18n/project.inlang',
       outdir: './src/lib/paraglide',
     }),
     denoSveltekitExit(),
-    SvelteKitPWA({
-      injectRegister: 'script-defer',
-      strategies: 'injectManifest',
-      srcDir: 'src',
-      filename: 'service-worker.ts',
-      manifest,
-      manifestFilename: 'manifest.webmanifest',
-      injectManifest: {
-        injectionPoint: 'self.__WB_MANIFEST',
-      },
-      devOptions: {
-        enabled: true,
-      },
-    }),
+    // SvelteKitPWA({
+    //   injectRegister: 'script-defer',
+    //   strategies: 'injectManifest',
+    //   srcDir: 'src',
+    //   filename: 'service-worker.ts',
+    //   manifest,
+    //   manifestFilename: 'manifest.webmanifest',
+    //   injectManifest: {
+    //     injectionPoint: 'self.__WB_MANIFEST',
+    //   },
+    //   devOptions: {
+    //     enabled: true,
+    //   },
+    // }),
     svelteTesting(),
   ],
 
   build: {
     sourcemap: true,
+    rollupOptions: {
+      treeshake: {
+        // Tells Rollup not to deeply traverse complex objects/schemas looking for side-effect getters
+        propertyReadSideEffects: false,
+        // Optional: speeds up traversal by assuming try/catch blocks don't contain hidden side-effects
+        tryCatchDeoptimization: false,
+      },
+    },
   },
 
   //TODO enable globals when typings are fixed
@@ -140,9 +146,27 @@ export default defineConfig(({ mode }) => ({
     reporters: process.env.GITHUB_ACTIONS ? ['dot', 'github-actions'] : ['dot'],
   },
 
-  resolve: process.env.VITEST
-    ? {
-      conditions: ['browser'],
-    }
-    : undefined,
+  resolve: {
+    alias: [
+      {
+        // 1. Intercepts Sass trying to resolve $style as a relative folder
+        find: /.*\$style\/(.*)/,
+        replacement: path.resolve(__dirname, './src/style/$1'),
+      },
+      {
+        // 2. Standard alias for normal JS/TS imports
+        find: '$style',
+        replacement: path.resolve(__dirname, './src/style'),
+      },
+    ],
+    conditions: process.env.VITEST ? ['browser'] : undefined,
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+        loadPaths: [path.resolve(__dirname, './src/style')],
+      },
+    },
+  },
 }));
