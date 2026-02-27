@@ -2630,6 +2630,120 @@
     },
     "button_label_month_in_review": {
       "default": "Bekijk je {month} in overzicht"
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "Weet je zeker dat je \"{list}\" wilt verwijderen uit je gelikete lijsten?"
+    },
+    "text_info_liked_added": {
+      "default": "Toegevoegd aan gelikete lijsten."
+    },
+    "text_info_liked_removed": {
+      "default": "Verwijderd uit gelikete lijsten."
+    },
+    "text_cta_liked_lists": {
+      "default": "Ontdek waar anderen van houden. Verken en bewaar lijsten van de community."
+    },
+    "button_text_hold_to_confirm": {
+      "default": "Houd vast om te bevestigen"
+    },
+    "header_notifications_rationale": {
+      "default": "Schakel meldingen in om op de hoogte te blijven van nieuwe releases en je huidige kijkactiviteit."
+    },
+    "header_get_notified": {
+      "default": "Blijf op de hoogte!"
+    },
+    "text_notification_episode_release": {
+      "default": "S{season} • E{episode} is nu beschikbaar."
+    },
+    "text_notification_episodes_release": {
+      "default": "S{season} • E{episodeStart}-{episodeEnd} zijn nu beschikbaar."
+    },
+    "text_notification_movie_release": {
+      "default": "De film is nu beschikbaar."
+    },
+    "text_settings_notification_time_now": {
+      "default": "Bij release"
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "30 minuten van tevoren"
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "1 uur van tevoren"
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "3 uur van tevoren"
+    },
+    "header_settings_tracking": {
+      "default": "Tracking"
+    },
+    "header_settings_notifications": {
+      "default": "Meldingen"
+    },
+    "text_settings_adjust_delivery": {
+      "default": "Meldingstijd"
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "Kies wanneer je een melding wilt ontvangen."
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "Meerdere keren bekijken"
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "Sta toe dat films en afleveringen vaker dan 1 keer als bekeken worden gemarkeerd."
+    },
+    "text_onboarding_1_title_1": {
+      "default": "Alles wat je kijkt."
+    },
+    "text_onboarding_1_title_2": {
+      "default": "Op één plek."
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Houd bij wat je kijkt en wat je nog wilt zien."
+    },
+    "text_onboarding_1_description_2": {
+      "default": "Ga verder waar je gebleven was, bewaar titels voor later en organiseer alles in slimme persoonlijke lijsten."
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Vind waar je kunt kijken."
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Druk op play."
+    },
+    "text_onboarding_2_description": {
+      "default": "Zie waar films en series te streamen, huren of kopen zijn bij al je favoriete diensten."
+    },
+    "text_onboarding_3_title_1": {
+      "default": "Deel je gevoel."
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Geef je mening."
+    },
+    "text_onboarding_3_description": {
+      "default": "Beoordeel wat je kijkt en praat mee over wat de moeite waard is, of wat je beter kunt overslaan."
+    },
+    "text_onboarding_4_title": {
+      "default": "Er is meer te ontdekken."
+    },
+    "text_onboarding_4_description_1": {
+      "default": "Je hebt nog maar het topje van de ijsberg gezien."
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Word gratis lid van Trakt en ontdek nog meer handige functies."
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "Weet je zeker dat je **alle {count} afleveringen** van \"{show}\" als bekeken wilt markeren?"
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "Streaming Sync"
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "Synchroniseer automatisch je kijkgeschiedenis en beoordelingen van je favoriete streamingdiensten."
+    },
+    "vip_feature_title_unlock": {
+      "default": "Ontgrendel alles met"
+    },
+    "text_settings_enable_notifications": {
+      "default": "Meldingen inschakelen"
     }
   }
 }

@@ -2630,6 +2630,120 @@
     },
     "button_label_month_in_review": {
       "default": "Виж своя обзор за {month}"
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "Сигурни ли сте, че искате да премахнете „{list}“ от любимите си списъци?"
+    },
+    "text_info_liked_added": {
+      "default": "Добавено към любимите списъци."
+    },
+    "text_info_liked_removed": {
+      "default": "Премахнато от любимите списъци."
+    },
+    "text_cta_liked_lists": {
+      "default": "Вижте какво обичат другите. Разгледайте и запазете списъци от общността."
+    },
+    "button_text_hold_to_confirm": {
+      "default": "Задръжте за потвърждение"
+    },
+    "header_notifications_rationale": {
+      "default": "Включете известията, за да следите новите заглавия и текущата си активност."
+    },
+    "header_get_notified": {
+      "default": "Бъдете информирани!"
+    },
+    "text_notification_episode_release": {
+      "default": "S{season} • E{episode} вече е наличен."
+    },
+    "text_notification_episodes_release": {
+      "default": "S{season} • E{episodeStart}-{episodeEnd} вече са налични."
+    },
+    "text_notification_movie_release": {
+      "default": "Филмът вече е наличен."
+    },
+    "text_settings_notification_time_now": {
+      "default": "При излизане"
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "30 минути преди"
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "1 час преди"
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "3 часа преди"
+    },
+    "header_settings_tracking": {
+      "default": "Проследяване"
+    },
+    "header_settings_notifications": {
+      "default": "Известия"
+    },
+    "text_settings_adjust_delivery": {
+      "default": "Време за известие"
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "Изберете кога да получавате известия."
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "Множество гледания"
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "Позволете отбелязването на филми и епизоди повече от веднъж."
+    },
+    "text_onboarding_1_title_1": {
+      "default": "Всичко, което гледате."
+    },
+    "text_onboarding_1_title_2": {
+      "default": "На едно място."
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Следете какво гледате и какво искате да гледате след това."
+    },
+    "text_onboarding_1_description_2": {
+      "default": "Продължете оттам, където сте спрели, запазете заглавия за по-късно и организирайте всичко в смарт списъци."
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Вижте къде да гледате."
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Просто натиснете Play."
+    },
+    "text_onboarding_2_description": {
+      "default": "Проверете къде филмите и сериалите се излъчват, отдават под наем или продават във вашите услуги."
+    },
+    "text_onboarding_3_title_1": {
+      "default": "Покажете чувствата си."
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Кажете мнението си."
+    },
+    "text_onboarding_3_description": {
+      "default": "Оценявайте гледаното и се включете в разговора за това какво си струва или какво да пропуснете."
+    },
+    "text_onboarding_4_title": {
+      "default": "Има още за откриване."
+    },
+    "text_onboarding_4_description_1": {
+      "default": "Това е само началото."
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Присъединете се към Trakt безплатно и открийте още функции."
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "Сигурни ли сте, че искате да отбележите **всичките {count} епизода** на „{show}“ като изгледани?"
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "Синхронизация"
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "Автоматично синхронизирайте историята и оценките си от любимите стрийминг услуги."
+    },
+    "vip_feature_title_unlock": {
+      "default": "Отключете пълния потенциал с"
+    },
+    "text_settings_enable_notifications": {
+      "default": "Включване на известия"
     }
   }
 }

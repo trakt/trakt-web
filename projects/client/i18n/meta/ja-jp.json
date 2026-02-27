@@ -2630,6 +2630,120 @@
     },
     "button_label_month_in_review": {
       "default": "{month}の振り返りを見る"
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "「{list}」をお気に入りから削除してもよろしいですか？"
+    },
+    "text_info_liked_added": {
+      "default": "お気に入りに追加しました。"
+    },
+    "text_info_liked_removed": {
+      "default": "お気に入りから削除しました。"
+    },
+    "text_cta_liked_lists": {
+      "default": "みんなのお気に入りを見つけよう。コミュニティのリストを探索して保存。"
+    },
+    "button_text_hold_to_confirm": {
+      "default": "長押しで確定"
+    },
+    "header_notifications_rationale": {
+      "default": "通知をオンにして、最新のリリースや視聴状況を常にチェックしましょう。"
+    },
+    "header_get_notified": {
+      "default": "最新情報を受け取る"
+    },
+    "text_notification_episode_release": {
+      "default": "第{season}期 第{episode}話が配信開始されました。"
+    },
+    "text_notification_episodes_release": {
+      "default": "第{season}期 第{episodeStart}話〜第{episodeEnd}話が配信開始されました。"
+    },
+    "text_notification_movie_release": {
+      "default": "映画が公開/配信されました。"
+    },
+    "text_settings_notification_time_now": {
+      "default": "リリース時"
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "30分前"
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "1時間前"
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "3時間前"
+    },
+    "header_settings_tracking": {
+      "default": "トラッキング"
+    },
+    "header_settings_notifications": {
+      "default": "通知設定"
+    },
+    "text_settings_adjust_delivery": {
+      "default": "通知タイミング"
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "通知を受け取る時間を選択します。"
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "複数回の視聴を有効化"
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "映画やエピソードの2回目以降の視聴記録を許可します。"
+    },
+    "text_onboarding_1_title_1": {
+      "default": "観たものすべてを、"
+    },
+    "text_onboarding_1_title_2": {
+      "default": "ひとつの場所に。"
+    },
+    "text_onboarding_1_description_1": {
+      "default": "今観ている作品も、これから観たい作品も、すべてトラッキング。"
+    },
+    "text_onboarding_1_description_2": {
+      "default": "続きから再生、気になる作品を保存、そして自分だけのスマートリストでコレクションを整理しましょう。"
+    },
+    "text_onboarding_2_title_1": {
+      "default": "どこで観られるか探す。"
+    },
+    "text_onboarding_2_title_2": {
+      "default": "あとは再生するだけ。"
+    },
+    "text_onboarding_2_description": {
+      "default": "お気に入りの配信サービスで、映画やドラマが配信・レンタル・購入可能か一目で確認できます。"
+    },
+    "text_onboarding_3_title_1": {
+      "default": "感動を表現する。"
+    },
+    "text_onboarding_3_title_2": {
+      "default": "想いを伝える。"
+    },
+    "text_onboarding_3_description": {
+      "default": "評価をつけて、観るべき名作やスルーすべき作品についてコミュニティで語り合いましょう。"
+    },
+    "text_onboarding_4_title": {
+      "default": "さらなる発見が待っています。"
+    },
+    "text_onboarding_4_description_1": {
+      "default": "これはまだ序の口にすぎません。"
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Traktに無料で登録して、あなたのエンタメライフを充実させる機能を体験しましょう。"
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "「{show}」の**全{count}話**を視聴済みとしてマークしますか？"
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "配信サービス同期"
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "お気に入りの配信サービスの視聴履歴や評価を自動的に同期します。"
+    },
+    "vip_feature_title_unlock": {
+      "default": "フル機能を解放："
+    },
+    "text_settings_enable_notifications": {
+      "default": "通知を有効にする"
     }
   }
 }

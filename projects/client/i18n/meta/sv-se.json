@@ -2630,6 +2630,120 @@
     },
     "button_label_month_in_review": {
       "default": "Visa din sammanfattning för {month}"
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "Är du säker på att du vill ta bort \"{list}\" från dina gillade listor?"
+    },
+    "text_info_liked_added": {
+      "default": "Tillagd i gillade listor."
+    },
+    "text_info_liked_removed": {
+      "default": "Borttagen från gillade listor."
+    },
+    "text_cta_liked_lists": {
+      "default": "Upptäck vad andra älskar. Utforska och spara listor från communityn."
+    },
+    "button_text_hold_to_confirm": {
+      "default": "Håll för att bekräfta"
+    },
+    "header_notifications_rationale": {
+      "default": "Aktivera aviseringar för att ha koll på premiärer och din aktuella aktivitet."
+    },
+    "header_get_notified": {
+      "default": "Bli meddelad!"
+    },
+    "text_notification_episode_release": {
+      "default": "S{season} • E{episode} är nu tillgänglig."
+    },
+    "text_notification_episodes_release": {
+      "default": "S{season} • E{episodeStart}-{episodeEnd} är nu tillgängliga."
+    },
+    "text_notification_movie_release": {
+      "default": "Filmen är nu tillgänglig."
+    },
+    "text_settings_notification_time_now": {
+      "default": "Vid släpp"
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "30 minuter innan"
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "1 timme innan"
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "3 timmar innan"
+    },
+    "header_settings_tracking": {
+      "default": "Tracking"
+    },
+    "header_settings_notifications": {
+      "default": "Aviseringar"
+    },
+    "text_settings_adjust_delivery": {
+      "default": "Aviseringstid"
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "Välj när du vill bli meddelad."
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "Tillåt flera visningar"
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "Tillåt att filmer och avsnitt markeras som sedda mer än en gång."
+    },
+    "text_onboarding_1_title_1": {
+      "default": "Allt du tittar på."
+    },
+    "text_onboarding_1_title_2": {
+      "default": "På ett ställe."
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Håll koll på vad du ser nu och vad du vill se härnäst."
+    },
+    "text_onboarding_1_description_2": {
+      "default": "Fortsätt där du slutade, spara titlar till senare och organisera allt i smarta listor."
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Hitta var det streamas."
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Tryck bara på Play."
+    },
+    "text_onboarding_2_description": {
+      "default": "Se var filmer och serier streamas, kan hyras eller köpas på dina favorittjänster."
+    },
+    "text_onboarding_3_title_1": {
+      "default": "Visa vad du känner."
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Säg vad du tycker."
+    },
+    "text_onboarding_3_description": {
+      "default": "Betygsätt det du ser och delta i samtalet om vad som är sevärt eller vad man kan hoppa över."
+    },
+    "text_onboarding_4_title": {
+      "default": "Det finns mer att upptäcka."
+    },
+    "text_onboarding_4_description_1": {
+      "default": "Du har bara skrapat på ytan."
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Gå med i Trakt gratis och upptäck fler funktioner som väntar på dig."
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "Är du säker på att du vill markera **alla {count} avsnitt** av \"{show}\" som sedda?"
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "Streaming-synk"
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "Synka automatiskt din historik och dina betyg från alla dina tjänster."
+    },
+    "vip_feature_title_unlock": {
+      "default": "Lås upp hela potentialen med"
+    },
+    "text_settings_enable_notifications": {
+      "default": "Aktivera aviseringar"
     }
   }
 }

@@ -2630,6 +2630,120 @@
     },
     "button_label_month_in_review": {
       "default": "View your {month} in review"
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "Are you sure you want to remove \"{list}\" from your liked lists?"
+    },
+    "text_info_liked_added": {
+      "default": "Added to liked lists."
+    },
+    "text_info_liked_removed": {
+      "default": "Removed from liked lists."
+    },
+    "text_cta_liked_lists": {
+      "default": "Discover what others love. Explore and save lists from the community."
+    },
+    "button_text_hold_to_confirm": {
+      "default": "Hold to Confirm"
+    },
+    "header_notifications_rationale": {
+      "default": "Enable notifications to stay on top of your media releases and current watching activity."
+    },
+    "header_get_notified": {
+      "default": "Get Notified!"
+    },
+    "text_notification_episode_release": {
+      "default": "S{season} • E{episode} is now available."
+    },
+    "text_notification_episodes_release": {
+      "default": "S{season} • E{episodeStart}-{episodeEnd} are now available."
+    },
+    "text_notification_movie_release": {
+      "default": "The movie is now available."
+    },
+    "text_settings_notification_time_now": {
+      "default": "On release"
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "30 minutes before"
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "1 hour before"
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "3 hours before"
+    },
+    "header_settings_tracking": {
+      "default": "Tracking"
+    },
+    "header_settings_notifications": {
+      "default": "Notifications"
+    },
+    "text_settings_adjust_delivery": {
+      "default": "Notification Time"
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "Choose when to be notified."
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "Enable Multiple Plays"
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "Allow more than 1 play for movies and episodes."
+    },
+    "text_onboarding_1_title_1": {
+      "default": "Everything you watch."
+    },
+    "text_onboarding_1_title_2": {
+      "default": "In one place."
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Track what you're watching and what you want to watch next."
+    },
+    "text_onboarding_1_description_2": {
+      "default": "Pick up right where you left off, save titles for later, and organise everything into smart and personal lists in one place."
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Find where to watch it."
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Just press play."
+    },
+    "text_onboarding_2_description": {
+      "default": "See where movies and shows are streaming, renting, or available to buy, across all your favourite services."
+    },
+    "text_onboarding_3_title_1": {
+      "default": "Show how you feel."
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Say what you think."
+    },
+    "text_onboarding_3_description": {
+      "default": "Rate what you watch and join the conversation around movies and TV shows that are worth watching, or skipping."
+    },
+    "text_onboarding_4_title": {
+      "default": "There's more to discover."
+    },
+    "text_onboarding_4_description_1": {
+      "default": "You've only scratched the surface."
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Join Trakt for free and discover more features waiting for you."
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "Are you sure you want to mark **all {count} episodes** of \"{show}\" as watched?"
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "Streaming Sync"
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "Automatically sync your watched history and ratings from all your favourite streaming services."
+    },
+    "vip_feature_title_unlock": {
+      "default": "Unlock full potential with"
+    },
+    "text_settings_enable_notifications": {
+      "default": "Enable Notifications"
     }
   }
 }

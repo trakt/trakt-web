@@ -2630,6 +2630,120 @@
     },
     "button_label_month_in_review": {
       "default": "Voir votre rétrospective de {month}"
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "Souhaitez-vous vraiment retirer « {list} » de vos listes favorites ?"
+    },
+    "text_info_liked_added": {
+      "default": "Ajouté aux listes favorites."
+    },
+    "text_info_liked_removed": {
+      "default": "Retiré des listes favorites."
+    },
+    "text_cta_liked_lists": {
+      "default": "Découvrez les pépites de la communauté. Explorez et sauvegardez les listes partagées."
+    },
+    "button_text_hold_to_confirm": {
+      "default": "Maintenir pour confirmer"
+    },
+    "header_notifications_rationale": {
+      "default": "Activez les notifications pour ne rien manquer de vos sorties et de vos activités de visionnage."
+    },
+    "header_get_notified": {
+      "default": "Restez informé !"
+    },
+    "text_notification_episode_release": {
+      "default": "S{season} • E{episode} est disponible."
+    },
+    "text_notification_episodes_release": {
+      "default": "S{season} • E{episodeStart}-{episodeEnd} sont disponibles."
+    },
+    "text_notification_movie_release": {
+      "default": "Le film est maintenant disponible."
+    },
+    "text_settings_notification_time_now": {
+      "default": "À la sortie"
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "30 minutes avant"
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "1 heure avant"
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "3 heures avant"
+    },
+    "header_settings_tracking": {
+      "default": "Suivi"
+    },
+    "header_settings_notifications": {
+      "default": "Notifications"
+    },
+    "text_settings_adjust_delivery": {
+      "default": "Heure de notification"
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "Choisissez quand recevoir vos notifications."
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "Visionnages multiples"
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "Autoriser plusieurs visionnages pour les films et épisodes."
+    },
+    "text_onboarding_1_title_1": {
+      "default": "Tout ce que vous regardez."
+    },
+    "text_onboarding_1_title_2": {
+      "default": "Au même endroit."
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Suivez vos visionnages actuels et planifiez vos prochaines séances."
+    },
+    "text_onboarding_1_description_2": {
+      "default": "Reprenez là où vous vous étiez arrêté, enregistrez vos titres et organisez votre cinémathèque personnelle intelligemment."
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Où regarder ?"
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Appuyez sur Lecture."
+    },
+    "text_onboarding_2_description": {
+      "default": "Trouvez où vos films et séries sont disponibles en streaming, en location ou à l'achat sur vos services préférés."
+    },
+    "text_onboarding_3_title_1": {
+      "default": "Partagez vos émotions."
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Donnez votre avis."
+    },
+    "text_onboarding_3_description": {
+      "default": "Notez vos œuvres et rejoignez la critique pour savoir ce qui mérite le détour ou ce qu'il faut zapper."
+    },
+    "text_onboarding_4_title": {
+      "default": "L'aventure continue."
+    },
+    "text_onboarding_4_description_1": {
+      "default": "Ce n'est que la partie émergée de l'iceberg."
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Rejoignez Trakt gratuitement et découvrez une multitude de fonctionnalités qui vous attendent."
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "Voulez-vous vraiment marquer les **{count} épisodes** de « {show} » comme vus ?"
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "Sync. Streaming"
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "Synchronisez automatiquement votre historique et vos notes depuis vos plateformes de streaming préférées."
+    },
+    "vip_feature_title_unlock": {
+      "default": "Libérez tout le potentiel avec"
+    },
+    "text_settings_enable_notifications": {
+      "default": "Activer les notifications"
     }
   }
 }

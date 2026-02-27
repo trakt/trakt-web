@@ -2630,6 +2630,120 @@
     },
     "button_label_month_in_review": {
       "default": "Rückblick für {month} ansehen"
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "Möchten Sie „{list}“ wirklich von Ihren geliebten Listen entfernen?"
+    },
+    "text_info_liked_added": {
+      "default": "Zu geliebten Listen hinzugefügt."
+    },
+    "text_info_liked_removed": {
+      "default": "Von geliebten Listen entfernt."
+    },
+    "text_cta_liked_lists": {
+      "default": "Entdecken Sie, was andere lieben. Stöbern und speichern Sie Listen aus der Community."
+    },
+    "button_text_hold_to_confirm": {
+      "default": "Gedrückt halten zum Bestätigen"
+    },
+    "header_notifications_rationale": {
+      "default": "Aktivieren Sie Benachrichtigungen, um über Veröffentlichungen und Ihre Sehgewohnheiten auf dem Laufenden zu bleiben."
+    },
+    "header_get_notified": {
+      "default": "Bleiben Sie informiert!"
+    },
+    "text_notification_episode_release": {
+      "default": "S{season} • E{episode} ist jetzt verfügbar."
+    },
+    "text_notification_episodes_release": {
+      "default": "S{season} • E{episodeStart}-{episodeEnd} sind jetzt verfügbar."
+    },
+    "text_notification_movie_release": {
+      "default": "Der Film ist jetzt verfügbar."
+    },
+    "text_settings_notification_time_now": {
+      "default": "Bei Veröffentlichung"
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "30 Minuten vorher"
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "1 Stunde vorher"
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "3 Stunden vorher"
+    },
+    "header_settings_tracking": {
+      "default": "Tracking"
+    },
+    "header_settings_notifications": {
+      "default": "Benachrichtigungen"
+    },
+    "text_settings_adjust_delivery": {
+      "default": "Benachrichtigungszeit"
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "Wählen Sie aus, wann Sie benachrichtigt werden möchten."
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "Mehrfaches Ansehen erlauben"
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "Erlauben Sie mehr als ein Mal Ansehen für Filme und Episoden."
+    },
+    "text_onboarding_1_title_1": {
+      "default": "Alles, was Sie sehen."
+    },
+    "text_onboarding_1_title_2": {
+      "default": "An einem Ort."
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Verfolgen Sie, was Sie gerade schauen und was als Nächstes ansteht."
+    },
+    "text_onboarding_1_description_2": {
+      "default": "Machen Sie dort weiter, wo Sie aufgehört haben, speichern Sie Titel für später und organisieren Sie alles in smarten Listen."
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Finden Sie den Stream."
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Einfach Play drücken."
+    },
+    "text_onboarding_2_description": {
+      "default": "Sehen Sie, wo Filme und Serien gestreamt, geliehen oder gekauft werden können, über alle Dienste hinweg."
+    },
+    "text_onboarding_3_title_1": {
+      "default": "Zeigen Sie Gefühle."
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Sagen Sie Ihre Meinung."
+    },
+    "text_onboarding_3_description": {
+      "default": "Bewerten Sie Gesehenes und diskutieren Sie mit, was man sehen muss oder besser überspringt."
+    },
+    "text_onboarding_4_title": {
+      "default": "Es gibt noch mehr zu entdecken."
+    },
+    "text_onboarding_4_description_1": {
+      "default": "Das war erst die Spitze des Eisbergs."
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Melden Sie sich kostenlos bei Trakt an und entdecken Sie weitere Funktionen."
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "Sind Sie sicher, dass Sie **alle {count} Episoden** von „{show}“ als gesehen markieren wollen?"
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "Streaming-Sync"
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "Synchronisieren Sie Ihren Verlauf und Ihre Bewertungen automatisch mit Ihren Streaming-Diensten."
+    },
+    "vip_feature_title_unlock": {
+      "default": "Volles Potenzial freischalten mit"
+    },
+    "text_settings_enable_notifications": {
+      "default": "Benachrichtigungen aktivieren"
     }
   }
 }
