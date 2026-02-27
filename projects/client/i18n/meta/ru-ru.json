@@ -2468,7 +2468,7 @@
       "default": "Готово."
     },
     "button_text_track": {
-      "default": "Отследить"
+      "default": "Track"
     },
     "filter_label_runtime": {
       "default": "{range} мин."
