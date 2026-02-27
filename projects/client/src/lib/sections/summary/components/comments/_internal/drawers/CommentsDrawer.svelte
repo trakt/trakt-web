@@ -79,6 +79,8 @@
     overscroll-behavior: contain;
     position: relative;
 
+    padding: var(--ni-4);
+
     :global(.trakt-paginated-list) {
       display: flex;
       flex-direction: column;

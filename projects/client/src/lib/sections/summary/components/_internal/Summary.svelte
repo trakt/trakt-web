@@ -55,16 +55,7 @@
     }
 
     :global(.trakt-summary-poster img) {
-      box-shadow:
-        var(--ni-0) var(--ni-11) var(--ni-24) var(--ni-0)
-          color-mix(in srgb, var(--main-color) 16%, transparent),
-        var(--ni-0) var(--ni-44) var(--ni-44) var(--ni-0)
-          color-mix(in srgb, var(--main-color) 14%, transparent),
-        var(--ni-0) var(--ni-104) var(--ni-60) var(--ni-0)
-          color-mix(in srgb, var(--main-color) 8%, transparent),
-        var(--ni-0) var(--ni-180) var(--ni-72) var(--ni-0)
-          color-mix(in srgb, var(--main-color) 2%, transparent),
-        var(--ni-0) var(--ni-280) var(--ni-80) var(--ni-0) transparent;
+      box-shadow: var(--shadow-raised);
     }
   }
 

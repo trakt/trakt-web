@@ -40,6 +40,7 @@
           items={entry.services}
           title={`${toCountryFlag(entry.country)} ${entry.countryName}`}
           --height-list="var(--height-where-to-watch-list)"
+          variant="inline"
         >
           {#snippet item(service)}
             <WhereToWatchItem {service} country={entry.country} />
@@ -65,8 +66,6 @@
 <style>
   .trakt-where-to-watch-lists {
     :global(.trakt-list-header) {
-      margin: 0;
-
       :global(.trakt-action-button) {
         display: none;
       }
@@ -75,11 +74,6 @@
     :global(.trakt-list-item-container),
     :global(.section-list-empty-state) {
       width: 100%;
-      padding: 0;
-    }
-
-    :global(.section-list) {
-      margin-left: 0;
     }
   }
 </style>

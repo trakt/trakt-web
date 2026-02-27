@@ -36,12 +36,8 @@
 <style>
   trakt-vip-upgrade-button {
     :global(.trakt-button) {
-      --color-background-custom: color-mix(
-        in srgb,
-        var(--red-950) 25%,
-        transparent
-      );
-      --color-foreground-custom: var(--shade-10);
+      --color-background-custom: var(--color-vip-upgrade-button);
+      --color-foreground-custom: var(--color-text-primary);
 
       border: var(--ni-1) solid
         color-mix(in srgb, var(--red-500) 75%, transparent);

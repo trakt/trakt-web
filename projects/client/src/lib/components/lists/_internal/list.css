@@ -5,4 +5,5 @@
 
 .section-list-empty-state:has(.trakt-skeleton-list) {
   padding-right: 0;
+  padding-left: 0;
 }

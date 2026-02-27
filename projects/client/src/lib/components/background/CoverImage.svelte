@@ -32,7 +32,7 @@
     width: 100%;
     background: var(--shade-900);
 
-    opacity: 0.5;
+    opacity: 0.25;
 
     @include color-mix-variable-with-fallback(
       --trakt-cover-primary-color-transparent,
@@ -51,8 +51,6 @@
 
     &[data-cover-type="main"] {
       --color-transparent-background: transparent;
-
-      opacity: 0.5;
 
       :global(img) {
         filter: grayscale(1);

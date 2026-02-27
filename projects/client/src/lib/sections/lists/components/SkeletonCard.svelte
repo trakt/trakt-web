@@ -44,6 +44,8 @@
 
     position: relative;
     overflow: hidden;
+
+    box-shadow: var(--shadow-base);
   }
 
   .trakt-skeleton-card-cover {

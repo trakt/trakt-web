@@ -56,6 +56,8 @@
   }
 
   .trakt-sentiment-container {
+    box-shadow: var(--shadow-base);
+
     height: 100%;
     width: 100%;
 

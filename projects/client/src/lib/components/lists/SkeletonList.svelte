@@ -22,6 +22,8 @@
   .trakt-skeleton-list {
     overflow: hidden;
 
+    padding-left: var(--layout-distance-side);
+
     mask-image: linear-gradient(
       to right,
       black calc(100% - var(--layout-distance-side)),

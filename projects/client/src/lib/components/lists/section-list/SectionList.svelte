@@ -171,10 +171,13 @@
     }
 
     &[data-variant="inline"] {
-      .trakt-list-item-container,
       :global(.trakt-list-inset-title) {
         margin: 0;
-        padding: 0;
+      }
+
+      .trakt-list-item-container {
+        padding-left: var(--ni-2);
+        padding-right: var(--ni-2);
       }
 
       .section-list-empty-state {
@@ -212,7 +215,6 @@
 
   .section-list {
     position: relative;
-    overflow: hidden;
   }
 
   .section-list-container.section-list-container-collapsed {
@@ -229,11 +231,17 @@
 
   .section-list-horizontal-scroll,
   :global(.trakt-skeleton-list) {
+    --shadow-offset: var(--ni-12);
+
     height: var(--height-list);
     display: flex;
     overflow-x: auto;
     transition: gap var(--transition-increment) ease-in-out;
     gap: var(--list-gap);
+
+    box-sizing: content-box;
+    padding-block: var(--shadow-offset);
+    margin-block: calc(var(--shadow-offset) * -1);
 
     &[data-navigation-type="dpad"] {
       gap: var(--gap-xxs);

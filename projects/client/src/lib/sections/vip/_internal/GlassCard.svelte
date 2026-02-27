@@ -16,23 +16,18 @@
     padding: var(--ni-24);
 
     backdrop-filter: blur(var(--ni-24));
-    background: radial-gradient(
-      circle at top left,
-      color-mix(in srgb, var(--red-900) 20%, transparent) 0%,
-      transparent 60%
-    );
+    background: var(--background-vip-glass-card);
 
     border: var(--ni-1) solid
       color-mix(in srgb, var(--shade-10) 15%, transparent);
     border-radius: var(--border-radius-xl);
 
-    box-shadow: var(--ni-0) var(--ni-8) var(--ni-16) var(--ni-0)
-      color-mix(in srgb, var(--color-shadow) 25%, transparent);
+    box-shadow: var(--shadow-base);
 
     &[data-variant="plain"] {
       border: none;
       backdrop-filter: blur(var(--ni-10));
-      background: color-mix(in srgb, var(--shade-10) 10%, transparent);
+      background: var(--background-vip-plain-glass-card);
       padding: var(--ni-16);
     }
   }
