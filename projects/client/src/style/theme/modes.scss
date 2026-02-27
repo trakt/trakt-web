@@ -5,17 +5,17 @@
   /**
    * Theme-able variables
    */
-  --color-floating-background: var(--shade-60);
-  --color-shadow: var(--shade-800);
+  --color-floating-background: var(--shade-10);
+  --color-shadow: var(--shade-900);
 
   --color-foreground: var(--shade-920);
-  --color-background: color-mix(in srgb, var(--shade-300) 80%, var(--purple-50));
+  --color-background: var(--shade-10);
 
   --color-text-primary: var(--shade-900);
   --color-text-secondary: var(--shade-800);
   --color-text-emphasis: var(--purple-700);
 
-  --color-input-background: color-mix(in srgb, var(--shade-20) 25%, transparent);
+  --color-input-background: var(--shade-10);
 
   --color-drawer-border: var(--shade-400);
   --background-vip-drawer: radial-gradient(ellipse 80% 86% at 7.82% 100%,
@@ -30,7 +30,7 @@
       var(--color-background-navbar-base) 90%,
       transparent);
   --color-foreground-navbar: var(--color-foreground);
-  --color-border: var(--shade-300);
+  --color-border: var(--shade-200);
   --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*
@@ -141,11 +141,11 @@
   /*
    * Toggle
    */
-  --toggler-background-color: var(--shade-70);
-  --toggler-tracker-color: var(--purple-300);
-  --toggle-background-color: var(--shade-100);
-  --toggle-background-hover-color: var(--shade-200);
-  --toggle-foreground-color: var(--shade-900);
+  --toggler-background-color: var(--shade-10);
+  --toggler-tracker-color: var(--shade-700);
+  --toggle-background-color: var(--shade-400);
+  --toggle-background-hover-color: var(--shade-800);
+  --toggle-foreground-color: var(--shade-50);
 
   /*
    * Where to watch
