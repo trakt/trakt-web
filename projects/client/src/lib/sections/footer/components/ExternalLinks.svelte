@@ -2,8 +2,8 @@
   import AndroidIcon from "$lib/components/icons/AndroidIcon.svelte";
   import AppleIcon from "$lib/components/icons/AppleIcon.svelte";
   import GithubIcon from "$lib/components/icons/GithubIcon.svelte";
-  import InstagramIcon from "$lib/components/icons/InstagramIcon.svelte";
   import InstallIcon from "$lib/components/icons/InstallIcon.svelte";
+  import RedditIcon from "$lib/components/icons/RedditIcon.svelte";
   import XIcon from "$lib/components/icons/XIcon.svelte";
 
   import Link from "$lib/components/link/Link.svelte";
@@ -76,11 +76,11 @@
       <XIcon />
     </Link>
     <Link
-      href={UrlBuilder.socialMedia.instagram()}
+      href={UrlBuilder.socialMedia.reddit()}
       target="_blank"
-      onclick={() => trackLink("instagram")}
+      onclick={() => trackLink("reddit")}
     >
-      <InstagramIcon />
+      <RedditIcon />
     </Link>
   </div>
 </div>
