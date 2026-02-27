@@ -165,9 +165,7 @@
     "button_text_mark_as_watched": {
       "default": "Mark as Watched",
       "description": "Text for the button that allows users to mark a movie, episode, or show as watched.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_watched_until_here": {
       "default": "Watched until here",
@@ -180,9 +178,7 @@
     "button_text_watch_again": {
       "default": "Watch again",
       "description": "Text for the button that allows users to mark a movie, episode, or show as re-watched.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_add_to_watchlist": {
       "default": "Add \"{title}\" to your Watchlist",
@@ -1610,9 +1606,7 @@
     "button_text_remove_from_history": {
       "default": "Remove from Watched",
       "description": "Text for the button that allows users to remove a movie or episode from their watch history.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_remove_from_watched": {
       "default": "Remove \"{title}\" from your Watched list",
@@ -1635,9 +1629,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_remove_from_history": {
       "default": "Remove this play of \"{title}\" from your Watched list",
@@ -1913,9 +1905,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_view_all_recommended_movies": {
       "default": "View all recommended movies",
@@ -2654,8 +2644,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
@@ -3141,16 +3130,14 @@
       "default": "Hide Watched",
       "description": "Header for the filter that allows users to hide watched items in their lists.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_hide_watchlisted": {
       "default": "Hide Watchlisted",
       "description": "Header for the filter that allows users to hide watchlisted items in their lists.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "option_text_my_favorites": {
@@ -5443,7 +5430,6 @@
       "default": "Remove from watchlist",
       "description": "Text for the button that allows a user to remove a show or movie from their watchlist.",
       "exclude": [
-        "ios",
         "android"
       ]
     },
