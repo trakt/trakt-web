@@ -12,10 +12,7 @@ export function escapeXml(text: string): string {
     .replace(/\.{3}/g, '…')
     // Below replacements are specific to Android string resources to allow certain formatting tags to be preserved
     // Example: <string name="example"><![CDATA[This is <b><u>example</u></b>]]></string>
-    .replace(/&lt;b&gt;/g, '<b>')
-    .replace(/&lt;u&gt;/g, '<u>')
-    .replace(/&lt;\/b&gt;/g, '</b>')
-    .replace(/&lt;\/u&gt;/g, '</u>')
+    .replace(/&lt;(\/?[bu])&gt;/g, '<$1>')
     .replace(/&lt;!/g, '<!')
     .replace(/]]&gt;/g, ']]>');
 }
