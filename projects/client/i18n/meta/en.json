@@ -7440,6 +7440,14 @@
         "ios",
         "web"
       ]
+    },
+    "text_settings_enable_notifications": {
+      "default": "Enable Notifications",
+      "description": "Text for the setting that allows users to enable notifications in the mobile app.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
     }
   }
 }
