@@ -214,7 +214,7 @@ export const UrlBuilder = {
   },
   socialMedia: {
     x: () => 'https://x.com/trakt',
-    instagram: () => 'https://www.instagram.com/trakt_app',
+    reddit: () => 'https://www.reddit.com/r/trakt',
   },
   vip: () => '/vip',
   og: {
