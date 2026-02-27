@@ -22,12 +22,15 @@
   /* toasts, alerts, notifications */
   --layer-top: 999;
 
+  /* Background image in coverimagesetter: 0.25 */
+
   /* For base elements like cards */
-  --shadow-base: var(--ni-0) var(--ni-6) var(--ni-8) var(--ni-2) color-mix(
+  /* --shadow-base: var(--ni-0) var(--ni-6) var(--ni-8) var(--ni-2) color-mix(
     in srgb,
     var(--color-shadow) 20%,
     transparent
-  );
+  ); */
+  --shadow-base: var(--ni-1) var(--ni-4) var(--ni-8) var(--ni-2) red;
 
   /* For elements floating on top of others, like tags on cards */
   --shadow-floating: var(--ni-neg-2) var(--ni-1) var(--ni-10) var(--ni-0)

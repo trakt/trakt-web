@@ -19,8 +19,6 @@
     border: var(--ni-1) solid
       color-mix(in srgb, var(--color-text-primary) 20%, transparent);
 
-    box-shadow: var(--shadow-floating);
-
     :global(svg) {
       width: var(--ni-20);
       height: var(--ni-20);

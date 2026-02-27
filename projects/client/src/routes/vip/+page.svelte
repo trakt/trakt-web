@@ -10,7 +10,7 @@
 <TraktPage audience="authenticated" image={DEFAULT_SHARE_COVER} title="VIP">
   <NavbarStateSetter mode="minimal" />
 
-  <RenderFor audience="free">
+  <RenderFor audience="vip">
     <VipUpsellContent />
   </RenderFor>
 

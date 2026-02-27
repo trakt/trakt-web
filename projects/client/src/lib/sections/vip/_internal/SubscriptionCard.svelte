@@ -70,7 +70,11 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-subscription-card {
-    --subscription-main-color: var(--shade-920);
+    /* --subscription-main-color: var(--shade-920);
+    --subscription-accent-color: var(--shade-1000); */
+
+    --subscription-main-color: var(--shade-20);
+    --subscription-accent-color: var(--shade-100);
 
     position: relative;
     display: flex;
@@ -81,7 +85,7 @@
     background: radial-gradient(
       ellipse 110% 125% at 8% 100%,
       var(--subscription-main-color) 0%,
-      var(--shade-1000) 100%
+      var(--subscription-accent-color) 100%
     );
 
     box-shadow: var(--shadow-raised);
@@ -90,16 +94,14 @@
     border: var(--ni-1) solid
       color-mix(in srgb, var(--shade-10) 10%, transparent);
 
-    span {
-      color: var(--shade-10);
-
-      &.secondary {
-        color: var(--shade-300);
-      }
-    }
-
     &.is-popular {
-      --subscription-main-color: var(--red-950);
+      /* --subscription-main-color: var(--red-950); */
+      --subscription-accent-color: color-mix(
+        in srgb,
+        var(--red-950) 10%,
+        var(--shade-10)
+      );
+
       transform: translateY(calc(-1 * var(--ni-24)));
       transition: transform var(--transition-duration-short) ease-in-out;
 
