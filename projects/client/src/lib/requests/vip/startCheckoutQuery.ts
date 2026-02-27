@@ -1,29 +1,40 @@
 import { rawApiFetch } from '$lib/requests/api.ts';
+import z from 'zod';
 import { isValidResponse } from '../../features/query/_internal/isValidResponse.ts';
+import type { VipPlanDuration } from '../models/VipPlanDuration.ts';
+
+const STRIPE_HOSTNAME = 'stripe.com';
 
 type StartCheckoutParams = {
-  type: string;
+  duration: VipPlanDuration;
   returnUrl: string;
 };
 
-type CheckoutResponse = {
-  url: string;
-};
+function isStripeCheckoutUrl(value: string) {
+  try {
+    const { protocol, hostname } = new URL(value);
+    return protocol === 'https:' && hostname.endsWith(`.${STRIPE_HOSTNAME}`);
+  } catch {
+    return false;
+  }
+}
 
-// FIXME: actual endpoint still to be added; this implementation is subject to change
+const StartCheckoutResponseSchema = z.object({
+  checkout_url: z.string().refine(isStripeCheckoutUrl, {
+    message: 'Checkout URL must be a valid Stripe URL',
+  }),
+});
 
 export async function startCheckoutQuery(
-  { type, returnUrl }: StartCheckoutParams,
+  { duration, returnUrl }: StartCheckoutParams,
 ): Promise<string | Nil> {
+  const url = encodeURIComponent(returnUrl);
+
   const response = await rawApiFetch({
-    path: '/vip/stripe/create',
+    path:
+      `/vip/stripe/create?duration=${duration}&success_url=${url}&cancel_url=${url}`,
     init: {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({ duration: type, return_to: returnUrl }),
     },
   });
 
@@ -31,6 +42,6 @@ export async function startCheckoutQuery(
     return;
   }
 
-  const body = await response.json();
-  return (body as CheckoutResponse).url;
+  const body = StartCheckoutResponseSchema.parse(await response.json());
+  return body.checkout_url;
 }
