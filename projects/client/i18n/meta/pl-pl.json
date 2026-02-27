@@ -2630,6 +2630,120 @@
     },
     "button_label_month_in_review": {
       "default": "Zobacz podsumowanie miesiąca: {month}"
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "Czy na pewno chcesz usunąć „{list}” ze swoich polubionych list?"
+    },
+    "text_info_liked_added": {
+      "default": "Dodano do polubionych list."
+    },
+    "text_info_liked_removed": {
+      "default": "Usunięto z polubionych list."
+    },
+    "text_cta_liked_lists": {
+      "default": "Odkryj, co kochają inni. Przeglądaj i zapisuj listy społeczności."
+    },
+    "button_text_hold_to_confirm": {
+      "default": "Przytrzymaj, aby potwierdzić"
+    },
+    "header_notifications_rationale": {
+      "default": "Włącz powiadomienia, aby być na bieżąco z premierami i swoją aktywnością."
+    },
+    "header_get_notified": {
+      "default": "Bądź na bieżąco!"
+    },
+    "text_notification_episode_release": {
+      "default": "Odcinek S{season} • E{episode} jest już dostępny."
+    },
+    "text_notification_episodes_release": {
+      "default": "Odcinki S{season} • E{episodeStart}-{episodeEnd} są już dostępne."
+    },
+    "text_notification_movie_release": {
+      "default": "Film jest już dostępny."
+    },
+    "text_settings_notification_time_now": {
+      "default": "W momencie premiery"
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "30 minut wcześniej"
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "1 godzinę wcześniej"
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "3 godziny wcześniej"
+    },
+    "header_settings_tracking": {
+      "default": "Śledzenie"
+    },
+    "header_settings_notifications": {
+      "default": "Powiadomienia"
+    },
+    "text_settings_adjust_delivery": {
+      "default": "Czas powiadomienia"
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "Wybierz, kiedy chcesz otrzymywać powiadomienia."
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "Włącz wielokrotne odtworzenia"
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "Pozwól na oznaczanie filmów i odcinków jako obejrzane więcej niż raz."
+    },
+    "text_onboarding_1_title_1": {
+      "default": "Wszystko, co oglądasz."
+    },
+    "text_onboarding_1_title_2": {
+      "default": "W jednym miejscu."
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Śledź to, co oglądasz i co planujesz obejrzeć wkrótce."
+    },
+    "text_onboarding_1_description_2": {
+      "default": "Wracaj do oglądania tam, gdzie skończyłeś, zapisuj tytuły na później i organizuj wszystko w inteligentne listy."
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Znajdź, gdzie obejrzeć."
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Po prostu włącz Play."
+    },
+    "text_onboarding_2_description": {
+      "default": "Sprawdź, gdzie filmy i seriale są dostępne w streamingu, wypożyczeniu lub sprzedaży."
+    },
+    "text_onboarding_3_title_1": {
+      "default": "Pokaż emocje."
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Powiedz, co myślisz."
+    },
+    "text_onboarding_3_description": {
+      "default": "Oceniaj produkcje i dołącz do dyskusji o tym, co warto zobaczyć, a co lepiej odpuścić."
+    },
+    "text_onboarding_4_title": {
+      "default": "Jest więcej do odkrycia."
+    },
+    "text_onboarding_4_description_1": {
+      "default": "To dopiero wierzchołek góry lodowej."
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Dołącz do Trakt za darmo i odkryj więcej funkcji, które na Ciebie czekają."
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "Czy na pewno chcesz oznaczyć **wszystkie {count} odcinki** serialu „{show}” jako obejrzane?"
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "Synchronizacja streamingu"
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "Automatycznie synchronizuj historię oglądania i oceny ze wszystkich swoich usług."
+    },
+    "vip_feature_title_unlock": {
+      "default": "Odblokuj pełen potencjał z"
+    },
+    "text_settings_enable_notifications": {
+      "default": "Włącz powiadomienia"
     }
   }
 }

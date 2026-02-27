@@ -2630,6 +2630,120 @@
     },
     "button_label_month_in_review": {
       "default": "Se din oppsummering for {month}"
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "Er du sikker på at du vil fjerne «{list}» fra dine likte lister?"
+    },
+    "text_info_liked_added": {
+      "default": "Lagt til i likte lister."
+    },
+    "text_info_liked_removed": {
+      "default": "Fjernet fra likte lister."
+    },
+    "text_cta_liked_lists": {
+      "default": "Oppdag hva andre elsker. Utforsk og lagre lister fra fellesskapet."
+    },
+    "button_text_hold_to_confirm": {
+      "default": "Hold for å bekrefte"
+    },
+    "header_notifications_rationale": {
+      "default": "Aktiver varslinger for å holde deg oppdatert på utgivelser og din seaktivitet."
+    },
+    "header_get_notified": {
+      "default": "Bli varslet!"
+    },
+    "text_notification_episode_release": {
+      "default": "S{season} • E{episode} er nå tilgjengelig."
+    },
+    "text_notification_episodes_release": {
+      "default": "S{season} • E{episodeStart}-{episodeEnd} er nå tilgjengelige."
+    },
+    "text_notification_movie_release": {
+      "default": "Filmen er nå tilgjengelig."
+    },
+    "text_settings_notification_time_now": {
+      "default": "Ved utgivelse"
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "30 minutter før"
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "1 time før"
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "3 timer før"
+    },
+    "header_settings_tracking": {
+      "default": "Sporing"
+    },
+    "header_settings_notifications": {
+      "default": "Varslinger"
+    },
+    "text_settings_adjust_delivery": {
+      "default": "Varslingstidspunkt"
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "Velg når du vil bli varslet."
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "Tillat flere visninger"
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "Tillat å markere filmer og episoder som sett mer enn én gang."
+    },
+    "text_onboarding_1_title_1": {
+      "default": "Alt du ser på."
+    },
+    "text_onboarding_1_title_2": {
+      "default": "På ett sted."
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Hold oversikt over hva du ser og hva du vil se neste gang."
+    },
+    "text_onboarding_1_description_2": {
+      "default": "Fortsett der du slapp, lagre titler til senere og organiser alt i smarte lister."
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Finn hvor du kan se det."
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Bare trykk Play."
+    },
+    "text_onboarding_2_description": {
+      "default": "Se hvor filmer og serier strømmes, leies eller kan kjøpes hos dine favorittjenester."
+    },
+    "text_onboarding_3_title_1": {
+      "default": "Vis hva du føler."
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Si hva du mener."
+    },
+    "text_onboarding_3_description": {
+      "default": "Vurder det du ser og delta i praten om hva som er verdt å se, eller hva man bør droppe."
+    },
+    "text_onboarding_4_title": {
+      "default": "Det er mer å oppdage."
+    },
+    "text_onboarding_4_description_1": {
+      "default": "Du har bare skrapt i overflaten."
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Bli med i Trakt gratis og oppdag flere funksjoner som venter på deg."
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "Er du sikker på at du vil markere **alle {count} episodene** av «{show}» som sett?"
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "Strømmesynkronisering"
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "Synkroniser historikk og vurderinger automatisk fra alle dine strømmetjenester."
+    },
+    "vip_feature_title_unlock": {
+      "default": "Lås opp potensialet med"
+    },
+    "text_settings_enable_notifications": {
+      "default": "Aktiver varslinger"
     }
   }
 }

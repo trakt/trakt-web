@@ -2630,6 +2630,120 @@
     },
     "button_label_month_in_review": {
       "default": "Переглянути підсумки за {month}"
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "Ви впевнені, що хочете видалити «{list}» зі вподобаних списків?"
+    },
+    "text_info_liked_added": {
+      "default": "Додано до вподобаних списків."
+    },
+    "text_info_liked_removed": {
+      "default": "Видалено зі вподобаних списків."
+    },
+    "text_cta_liked_lists": {
+      "default": "Дізнайтеся, що люблять інші. Досліджуйте та зберігайте списки спільноти."
+    },
+    "button_text_hold_to_confirm": {
+      "default": "Утримуйте для підтвердження"
+    },
+    "header_notifications_rationale": {
+      "default": "Увімкніть сповіщення, щоб бути в курсі релізів та своєї глядацької активності."
+    },
+    "header_get_notified": {
+      "default": "Будьте в курсі!"
+    },
+    "text_notification_episode_release": {
+      "default": "S{season} • E{episode} вже доступна."
+    },
+    "text_notification_episodes_release": {
+      "default": "S{season} • E{episodeStart}-{episodeEnd} вже доступні."
+    },
+    "text_notification_movie_release": {
+      "default": "Фільм вже доступний."
+    },
+    "text_settings_notification_time_now": {
+      "default": "Під час виходу"
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "За 30 хвилин"
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "За 1 годину"
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "За 3 години"
+    },
+    "header_settings_tracking": {
+      "default": "Відстеження"
+    },
+    "header_settings_notifications": {
+      "default": "Сповіщення"
+    },
+    "text_settings_adjust_delivery": {
+      "default": "Час сповіщення"
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "Оберіть, коли отримувати сповіщення."
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "Кілька переглядів"
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "Дозволити позначати фільми та серії переглянутими більше одного разу."
+    },
+    "text_onboarding_1_title_1": {
+      "default": "Усе, що ви дивитесь."
+    },
+    "text_onboarding_1_title_2": {
+      "default": "В одному місці."
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Відстежуйте те, що дивитесь зараз і плануєте глянути потім."
+    },
+    "text_onboarding_1_description_2": {
+      "default": "Продовжуйте з того місця, де зупинилися, зберігайте та впорядковуйте все у власні розумні списки."
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Знайдіть, де подивитись."
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Просто тисніть Play."
+    },
+    "text_onboarding_2_description": {
+      "default": "Дізнайтеся, де стрімити, орендувати або купити фільми та серіали на ваших улюблених сервісах."
+    },
+    "text_onboarding_3_title_1": {
+      "default": "Діліться емоціями."
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Скажіть, що думаєте."
+    },
+    "text_onboarding_3_description": {
+      "default": "Оцінюйте переглянуте та приєднуйтесь до обговорення того, що варто уваги, а що краще пропустити."
+    },
+    "text_onboarding_4_title": {
+      "default": "Попереду ще більше відкриттів."
+    },
+    "text_onboarding_4_description_1": {
+      "default": "Ви тільки почали знайомство."
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Приєднуйтесь до Trakt безкоштовно та відкрийте для себе ще більше можливостей."
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "Ви впевнені, що хочете позначити **усі {count} серій** серіалу «{show}» переглянутими?"
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "Синхронізація стрімінгів"
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "Автоматично синхронізуйте історію та оцінки з ваших улюблених сервісів."
+    },
+    "vip_feature_title_unlock": {
+      "default": "Розкрийте весь потенціал з"
+    },
+    "text_settings_enable_notifications": {
+      "default": "Увімкнути сповіщення"
     }
   }
 }
