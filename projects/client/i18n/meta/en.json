@@ -7337,25 +7337,49 @@
         "ios"
       ]
     },
-    "text_onboarding_1_title": {
-      "default": "Everything you watch.\\nIn one place.",
+    "text_onboarding_1_title_1": {
+      "default": "Everything you watch.",
       "description": "Text for the title of the first onboarding screen that introduces users to the main value proposition of Trakt.",
       "exclude": [
         "web",
         "ios"
       ]
     },
-    "text_onboarding_1_description": {
-      "default": "Track what you're watching and what you want to watch next.\\n\\nPick up right where you left off, save titles for later, and organise everything into smart watchlists or your own personal lists, in one place.",
+    "text_onboarding_1_title_2": {
+      "default": "In one place.",
+      "description": "Text for the title of the first onboarding screen that introduces users to the main value proposition of Trakt. A continuation of 'Everything you watch.'",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Track what you're watching and what you want to watch next.",
       "description": "Text for the description of the first onboarding screen that introduces users to the main value proposition of Trakt.",
       "exclude": [
         "web",
         "ios"
       ]
     },
-    "text_onboarding_2_title": {
-      "default": "Find where to watch it.\\nJust press play.",
+    "text_onboarding_1_description_2": {
+      "default": "Pick up right where you left off, save titles for later, and organise everything into smart and personal lists in one place.",
+      "description": "Text for the description of the first onboarding screen that introduces users to the main value proposition of Trakt. A continuation of 'Track what you're watching and what you want to watch next.'",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Find where to watch it.",
       "description": "Text for the title of the second onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Just press play.",
+      "description": "Text for the title of the second onboarding screen that introduces users to the main value proposition of Trakt. A continuation of 'Find where to watch it.'",
       "exclude": [
         "web",
         "ios"
@@ -7369,9 +7393,17 @@
         "ios"
       ]
     },
-    "text_onboarding_3_title": {
-      "default": "Show how you feel.\\nSay what you think.",
+    "text_onboarding_3_title_1": {
+      "default": "Show how you feel.",
       "description": "Text for the title of the third onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Say what you think.",
+      "description": "Text for the title of the third onboarding screen that introduces users to the main value proposition of Trakt. A continuation of 'Show how you feel.'",
       "exclude": [
         "web",
         "ios"
@@ -7386,16 +7418,24 @@
       ]
     },
     "text_onboarding_4_title": {
-      "default": "There's more to\\ndiscover.",
+      "default": "There's more to discover.",
       "description": "Text for the title of the fourth onboarding screen that introduces users to the main value proposition of Trakt.",
       "exclude": [
         "web",
         "ios"
       ]
     },
-    "text_onboarding_4_description": {
-      "default": "You've only scratched the surface.\\nJoin Trakt for free and discover more features waiting for you.",
+    "text_onboarding_4_description_1": {
+      "default": "You've only scratched the surface.",
       "description": "Text for the description of the fourth onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Join Trakt for free and discover more features waiting for you.",
+      "description": "Text for the description of the fourth onboarding screen that introduces users to the main value proposition of Trakt. A continuation of 'You've only scratched the surface.'",
       "exclude": [
         "web",
         "ios"
