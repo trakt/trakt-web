@@ -2517,9 +2517,7 @@
     "list_title_liked_lists": {
       "default": "Liked",
       "description": "Title for lists containing the user's liked lists. This title should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "text_share_movie": {
       "default": "Just discovered \"{title}\" - you need to see this! 🎬",
@@ -3427,7 +3425,6 @@
       "default": "Now watching",
       "description": "Text for the button that allows users to indicate that they are starting to watch a movie or episode.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4072,7 +4069,6 @@
       "default": "There are no shows in this list yet.",
       "description": "Placeholder text shown when there are no shows in a user's personal list.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4080,7 +4076,6 @@
       "default": "There are no movies in this list yet.",
       "description": "Placeholder text shown when there are no movies in a user's personal list.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4498,7 +4493,6 @@
       "default": "Lists",
       "description": "Text for the button that allows users to toggle the search mode to lists.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4506,7 +4500,6 @@
       "default": "Search lists...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4578,7 +4571,6 @@
       "default": "Today",
       "description": "Text for the button that resets the calendar view to today.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4687,7 +4679,6 @@
       "default": "Calendar",
       "description": "Title for the calendar page, where users can see what movies or episodes are available on their calendar.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4969,9 +4960,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "button_text_manage_subscription": {
       "default": "Manage subscription",
@@ -6127,9 +6116,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "list_title_user_lists": {
       "default": "Lists",
@@ -6678,7 +6665,6 @@
       "default": "Track",
       "description": "Do not translate this.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6808,7 +6794,6 @@
       "default": "Year in Review",
       "description": "Title for the Year in Review VIP feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6816,7 +6801,6 @@
       "default": "Lots of stats for every year you've been a member.",
       "description": "Description for the Year in Review VIP feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6824,7 +6808,6 @@
       "default": "Month in Review",
       "description": "Title for the Month in Review VIP feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6832,7 +6815,6 @@
       "default": "Get a personalized overview of everything you watched and rated each month.",
       "description": "Description for the Month in Review VIP feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6840,7 +6822,6 @@
       "default": "VIP Status",
       "description": "Title for the VIP Status feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6848,7 +6829,6 @@
       "default": "Show off your VIP status throughout the apps and website.",
       "description": "Description for the VIP Status feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6856,7 +6836,6 @@
       "default": "Early Access",
       "description": "Title for the Early Access VIP feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6864,7 +6843,6 @@
       "default": "Get early access to new versions of Trakt apps and brand new features before anyone else.",
       "description": "Description for the Early Access VIP feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6872,7 +6850,6 @@
       "default": "Increased Limits",
       "description": "Title for the Increased Limits VIP feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6880,7 +6857,6 @@
       "default": "Enjoy higher limits for your lists, ratings, and other features.",
       "description": "Description for the Increased Limits VIP feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6920,7 +6896,6 @@
       "default": "More to Come",
       "description": "Title for the More to Come VIP feature section.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6928,7 +6903,6 @@
       "default": "We're constantly building new features exclusively for VIP members, with exciting updates already on the way.",
       "description": "Description for the More to Come VIP feature section.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6936,7 +6910,6 @@
       "default": "VIP helps cover the real costs of running Trakt.",
       "description": "Text used to explain the costs covered by a VIP package.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6944,7 +6917,6 @@
       "default": "The team building and maintaining the platform.",
       "description": "Text used to explain the costs covered by a VIP package.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6952,7 +6924,6 @@
       "default": "Servers and infrastructure that keep Trakt fast and reliable.",
       "description": "Text used to explain the costs covered by a VIP package.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6960,7 +6931,6 @@
       "default": "Moderation and tooling to keep the community safe and welcoming.",
       "description": "Text used to explain the costs covered by a VIP package.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6968,7 +6938,6 @@
       "default": "Keeping Trakt independent, sustainable, and focused on users.",
       "description": "Text used to explain the costs covered by a VIP package.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -7182,6 +7151,342 @@
       "exclude": [
         "android",
         "ios"
+      ]
+    },
+    "warning_prompt_remove_from_liked_lists": {
+      "default": "Are you sure you want to remove \"{list}\" from your liked lists?",
+      "description": "Text for the warning prompt that appears when a user attempts to remove a list from their liked lists.",
+      "variables": {
+        "list": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_info_liked_added": {
+      "default": "Added to liked lists.",
+      "description": "Text shown when a user has added a list to their liked lists.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_liked_removed": {
+      "default": "Removed from liked lists.",
+      "description": "Text shown when a user has removed a list from their liked lists.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_cta_liked_lists": {
+      "default": "Discover what others love. Explore and save lists from the community.",
+      "description": "Call to action text shown to encourage users to explore and save lists from the community.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_hold_to_confirm": {
+      "default": "Hold to Confirm",
+      "description": "Text for the button that allows users to hold to confirm an action, such as deleting item.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "header_notifications_rationale": {
+      "default": "Enable notifications to stay on top of your media releases and current watching activity.",
+      "description": "Text used to encourage users to enable notifications in the mobile app. They would be shown notifications when a new movie releases or when they start watching an episode, for example.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "header_get_notified": {
+      "default": "Get Notified!",
+      "description": "Header for the section that encourages users to enable notifications in the mobile app.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_notification_episode_release": {
+      "default": "S{season} • E{episode} is now available.",
+      "description": "Text for the notification that alerts users that a new episode of a show is now available. This should be as short and concise as possible.",
+      "variables": {
+        "season": {
+          "type": "number"
+        },
+        "episode": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_notification_episodes_release": {
+      "default": "S{season} • E{episodeStart}-{episodeEnd} are now available.",
+      "description": "Text for the notification that alerts users that new episodes of a show are now available. This should be as short and concise as possible.",
+      "variables": {
+        "season": {
+          "type": "number"
+        },
+        "episodeStart": {
+          "type": "number"
+        },
+        "episodeEnd": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_notification_movie_release": {
+      "default": "The movie is now available.",
+      "description": "Text for the notification that alerts users that a new movie is now available.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_settings_notification_time_now": {
+      "default": "On release",
+      "description": "Text for the notification time setting that allows users to be notified at the time of release.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_settings_notification_time_30_min": {
+      "default": "30 minutes before",
+      "description": "Text for the notification time setting that allows users to be notified 30 minutes before the release.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_settings_notification_time_60_min": {
+      "default": "1 hour before",
+      "description": "Text for the notification time setting that allows users to be notified 1 hour before the release.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_settings_notification_time_180_min": {
+      "default": "3 hours before",
+      "description": "Text for the notification time setting that allows users to be notified 3 hours before the release.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "header_settings_tracking": {
+      "default": "Tracking",
+      "description": "Header for the section that allows users to manage their media tracking settings.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "header_settings_notifications": {
+      "default": "Notifications",
+      "description": "Header for the section that allows users to manage their notification settings.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_settings_adjust_delivery": {
+      "default": "Notification Time",
+      "description": "Text for the setting that allows users to adjust the delivery time of their notifications.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_settings_adjust_delivery_description": {
+      "default": "Choose when to be notified.",
+      "description": "Text for the description of the setting that allows users to adjust the delivery time of their notifications.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_settings_enable_multiple_plays": {
+      "default": "Enable Multiple Plays",
+      "description": "Text for the settings that allows users to mark movies and episodes as played more than once.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_settings_enable_multiple_plays_description": {
+      "default": "Allow more than 1 play for movies and episodes.",
+      "description": "Text for the description of the settings that allows users to mark movies and episodes as played more than once.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_1_title_1": {
+      "default": "Everything you watch.",
+      "description": "Text for the title of the first onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_1_title_2": {
+      "default": "In one place.",
+      "description": "Text for the title of the first onboarding screen that introduces users to the main value proposition of Trakt. A continuation of 'Everything you watch.'",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_1_description_1": {
+      "default": "Track what you're watching and what you want to watch next.",
+      "description": "Text for the description of the first onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_1_description_2": {
+      "default": "Pick up right where you left off, save titles for later, and organise everything into smart and personal lists in one place.",
+      "description": "Text for the description of the first onboarding screen that introduces users to the main value proposition of Trakt. A continuation of 'Track what you're watching and what you want to watch next.'",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_2_title_1": {
+      "default": "Find where to watch it.",
+      "description": "Text for the title of the second onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_2_title_2": {
+      "default": "Just press play.",
+      "description": "Text for the title of the second onboarding screen that introduces users to the main value proposition of Trakt. A continuation of 'Find where to watch it.'",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_2_description": {
+      "default": "See where movies and shows are streaming, renting, or available to buy, across all your favorite services.",
+      "description": "Text for the description of the second onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_3_title_1": {
+      "default": "Show how you feel.",
+      "description": "Text for the title of the third onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_3_title_2": {
+      "default": "Say what you think.",
+      "description": "Text for the title of the third onboarding screen that introduces users to the main value proposition of Trakt. A continuation of 'Show how you feel.'",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_3_description": {
+      "default": "Rate what you watch and join the conversation around movies and TV shows that are worth watching, or skipping.",
+      "description": "Text for the description of the third onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_4_title": {
+      "default": "There's more to discover.",
+      "description": "Text for the title of the fourth onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_4_description_1": {
+      "default": "You've only scratched the surface.",
+      "description": "Text for the description of the fourth onboarding screen that introduces users to the main value proposition of Trakt.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_onboarding_4_description_2": {
+      "default": "Join Trakt for free and discover more features waiting for you.",
+      "description": "Text for the description of the fourth onboarding screen that introduces users to the main value proposition of Trakt. A continuation of 'You've only scratched the surface.'",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "warning_prompt_mark_as_watched_show_android": {
+      "default": "<![CDATA[Are you sure you want to mark <b><u>all {count} episodes</u></b> of \"{show}\" as watched?]]>",
+      "description": "Text for the warning prompt that appears when a user attempts to mark all episodes of a show as watched. All html tags and CDATA in the default value are required and should not be removed or altered.",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "show": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "vip_feature_title_streaming_sync": {
+      "default": "Streaming Sync",
+      "description": "Title for the Streaming services Sync VIP feature.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "vip_feature_description_streaming_sync": {
+      "default": "Automatically sync your watched history and ratings from all your favorite streaming services.",
+      "description": "Description for the Streaming Sync VIP feature.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "vip_feature_title_unlock": {
+      "default": "Unlock full potential with",
+      "description": "Text used to promote a VIP package for the user. The full text would be 'Unlock full potential with Trakt VIP'",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_settings_enable_notifications": {
+      "default": "Enable Notifications",
+      "description": "Text for the setting that allows users to enable notifications in the mobile app.",
+      "exclude": [
+        "ios",
+        "web"
       ]
     }
   }
