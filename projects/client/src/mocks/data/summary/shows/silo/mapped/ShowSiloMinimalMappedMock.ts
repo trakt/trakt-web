@@ -48,4 +48,6 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   'episode': {
     'count': 20,
   },
+  'airs': undefined,
+  'network': undefined,
 };

@@ -156,6 +156,13 @@ function metaDetails(
   ];
 }
 
+function network(value: string | Nil) {
+  return {
+    title: m.header_network(),
+    values: value ? [value] : undefined,
+  };
+}
+
 type MediaDetail = {
   title: string;
   values?: Array<string | { label: string; link: string }>;
@@ -166,6 +173,7 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
     return [
       episodeAirDate(props.episode),
       runtime(props.episode),
+      network(props.network),
       ...mainCredits(props.type, props.crew),
       postCredits(props.episode),
     ];
@@ -175,6 +183,7 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
     mediaAirDate(props.media),
     mediaStatus(props.media),
     runtime(props.media),
+    network(props.network),
     ...mainCredits(props.type, props.crew),
     ...metaDetails(props.media, props.studios),
     postCredits(props.media),

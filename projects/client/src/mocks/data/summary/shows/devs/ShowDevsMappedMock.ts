@@ -65,4 +65,10 @@ export const ShowDevsMappedMock: ShowEntry = {
   'episode': {
     'count': 8,
   },
+  'airs': {
+    'day': 'Thursday',
+    'time': '00:00',
+    'timezone': 'America/New_York',
+  },
+  'network': 'Hulu',
 };

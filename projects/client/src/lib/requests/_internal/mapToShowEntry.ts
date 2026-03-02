@@ -59,5 +59,7 @@ export function mapToShowEntry(
       count: show.aired_episodes ?? NaN,
     },
     rating: mapToTraktRating(show.rating),
+    airs: show.airs ?? undefined,
+    network: show.network ?? undefined,
   };
 }

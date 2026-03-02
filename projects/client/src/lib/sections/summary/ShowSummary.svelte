@@ -88,4 +88,4 @@
 
 <TriviaList {media} />
 
-<MediaDetails {studios} {crew} {media} type="show" />
+<MediaDetails {studios} {crew} {media} type="show" network={media.network} />
