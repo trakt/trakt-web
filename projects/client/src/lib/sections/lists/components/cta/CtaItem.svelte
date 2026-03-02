@@ -3,9 +3,8 @@
   import ActivityCtaCard from "./_internal/ActivityCtaCard.svelte";
   import ActivityCtaPlaceholder from "./_internal/ActivityCtaPlaceholder.svelte";
   import ListCtaCard from "./_internal/ListCtaCard.svelte";
-  import ListCtaPlaceholder from "./_internal/ListCtaPlaceholder.svelte";
   import MediaCtaCard from "./_internal/MediaCtaCard.svelte";
-  import MediaCtaPlaceholder from "./_internal/MediaCtaPlaceholder.svelte";
+  import PlaceholderItem from "./_internal/PlaceholderItem.svelte";
   import { CtaItemIntlProvider } from "./CtaItemIntlProvider";
   import { CtaPlaceholderIntlProvider } from "./CtaPlaceholderIntlProvider";
   import type { Cta } from "./models/Cta";
@@ -37,10 +36,8 @@
     >
       {#if cta.type === "activity" || cta.type === "social"}
         <ActivityCtaPlaceholder intl={CtaPlaceholderIntlProvider} {cta} />
-      {:else if cta.type === "personal-list"}
-        <ListCtaPlaceholder intl={CtaPlaceholderIntlProvider} {cta} />
       {:else}
-        <MediaCtaPlaceholder {cta} intl={CtaPlaceholderIntlProvider} />
+        <PlaceholderItem {cta} intl={CtaPlaceholderIntlProvider} />
       {/if}
     </div>
   {/if}
