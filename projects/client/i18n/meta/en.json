@@ -5315,8 +5315,20 @@
       "default": "This year",
       "description": "Label for the 'this year' filter which filters items to only show those from the current year.",
       "exclude": [
+        "android"
+      ]
+    },
+    "filter_label_before_year": {
+      "default": "Before {year}",
+      "description": "Label for the filter which filters items to only show those from before the given year. e.g. 'Before 1960'.",
+      "variables": {
+        "year": {
+          "type": "number"
+        }
+      },
+      "exclude": [
         "android",
-        "ios"
+        "web"
       ]
     },
     "text_sort_recently_updated": {

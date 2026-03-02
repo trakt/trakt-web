@@ -2010,6 +2010,9 @@
     "filter_label_this_year": {
       "default": "Тази година"
     },
+    "filter_label_before_year": {
+      "default": "Преди {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Наскоро актуализирани"
     },

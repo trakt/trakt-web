@@ -2010,6 +2010,9 @@
     "filter_label_this_year": {
       "default": "Anul acesta"
     },
+    "filter_label_before_year": {
+      "default": "Înainte de {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Actualizat recent"
     },

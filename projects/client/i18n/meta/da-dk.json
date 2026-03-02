@@ -2010,6 +2010,9 @@
     "filter_label_this_year": {
       "default": "I år"
     },
+    "filter_label_before_year": {
+      "default": "Før {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Senest opdateret"
     },

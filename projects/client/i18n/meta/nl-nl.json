@@ -2010,6 +2010,9 @@
     "filter_label_this_year": {
       "default": "Dit jaar"
     },
+    "filter_label_before_year": {
+      "default": "Vóór {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Recent bijgewerkt"
     },

@@ -2010,6 +2010,9 @@
     "filter_label_this_year": {
       "default": "今年"
     },
+    "filter_label_before_year": {
+      "default": "{year}年より前"
+    },
     "text_sort_recently_updated": {
       "default": "最近更新"
     },

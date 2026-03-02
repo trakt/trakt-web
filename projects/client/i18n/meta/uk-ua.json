@@ -2010,6 +2010,9 @@
     "filter_label_this_year": {
       "default": "Цього року"
     },
+    "filter_label_before_year": {
+      "default": "До {year} року"
+    },
     "text_sort_recently_updated": {
       "default": "Нещодавно оновлено"
     },

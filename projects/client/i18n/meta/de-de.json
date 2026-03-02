@@ -2010,6 +2010,9 @@
     "filter_label_this_year": {
       "default": "Dieses Jahr"
     },
+    "filter_label_before_year": {
+      "default": "Vor {year}"
+    },
     "text_sort_recently_updated": {
       "default": "Kürzlich aktualisiert"
     },
