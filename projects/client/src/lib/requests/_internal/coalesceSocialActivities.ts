@@ -46,6 +46,7 @@ export function coalesceSocialActivities(
   activities: SocialActivity[],
 ): SocialActivity[] {
   const coalescedActivities = coalesceBinges(activities);
+  const ratingsMap = new Map<SocialActivity, number[]>();
 
   return coalescedActivities.reduce((acc, activity) => {
     const similarActivity = acc.find((currentActivity) =>
@@ -58,8 +59,22 @@ export function coalesceSocialActivities(
         allUsers.map((user) => [user.slug, user]),
       );
       similarActivity.users = Array.from(uniqueUsers.values());
+
+      const currentRatings = ratingsMap.get(similarActivity) ?? [];
+      const ratings = activity.rating != null
+        ? [...currentRatings, activity.rating]
+        : currentRatings;
+      ratingsMap.set(similarActivity, ratings);
+
+      similarActivity.rating = ratings.length > 0
+        ? ratings.reduce((sum, r) => sum + r, 0) / ratings.length
+        : similarActivity.rating;
+
       return acc;
     }
+
+    const initialRatings = activity.rating != null ? [activity.rating] : [];
+    ratingsMap.set(activity, initialRatings);
 
     acc.push(activity);
     return acc;

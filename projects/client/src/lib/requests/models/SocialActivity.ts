@@ -10,6 +10,7 @@ export const SocialActivityMovieSchema = z.object({
   type: z.literal('movie'),
   users: z.array(UserProfileSchema),
   movie: MovieEntrySchema,
+  rating: z.number().nullish(),
 });
 
 export const SocialActivityEpisodeSchema = z.object({
@@ -19,6 +20,7 @@ export const SocialActivityEpisodeSchema = z.object({
   users: z.array(UserProfileSchema),
   episode: EpisodeEntrySchema,
   show: ShowEntrySchema,
+  rating: z.number().nullish(),
 });
 
 export const SocialActivitySchema = z.discriminatedUnion('type', [

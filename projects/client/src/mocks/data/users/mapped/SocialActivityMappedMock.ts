@@ -11,6 +11,7 @@ export const SocialActivityMappedMock: SocialActivity[] = [
     users: [UserProfileHarryMappedMock],
     type: 'movie',
     movie: MovieHereticMappedMock,
+    rating: undefined,
   },
   {
     key: '2',
@@ -19,5 +20,6 @@ export const SocialActivityMappedMock: SocialActivity[] = [
     type: 'episode',
     episode: EpisodeSiloMappedMock,
     show: ShowSiloMappedMock,
+    rating: undefined,
   },
 ];

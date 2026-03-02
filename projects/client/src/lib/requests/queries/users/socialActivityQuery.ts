@@ -22,12 +22,13 @@ import type { FilterParams } from '../../models/FilterParams.ts';
 type SocialActivityParams = PaginationParams & ApiParams & FilterParams;
 
 function mapToSocialActivity(
-  response: SocialActivityResponse,
+  response: SocialActivityResponse & { user_rating?: number | null },
 ): SocialActivity {
   const common = {
     key: `${response.id}`,
     activityAt: new Date(response.activity_at),
     users: [mapToUserProfile(response.user)],
+    rating: response.user_rating,
   };
 
   switch (response.type) {
@@ -58,7 +59,8 @@ const socialActivityRequest = (
         type: 'following',
       },
       query: {
-        extended: 'full,images',
+        // FIXME: this is a temporary workaround; 'rating' should be part of the base response
+        extended: 'full,images,rating' as 'full,images',
         limit,
         page,
         ...filter,
