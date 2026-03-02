@@ -5640,9 +5640,7 @@
     "warning_prompt_log_out": {
       "default": "Are you sure you want to log out?",
       "description": "Text for the warning prompt that appears when a user attempts to log out.",
-      "exclude": [
-        "web"
-      ]
+      "exclude": []
     },
     "page_title_discover": {
       "default": "Discover",
