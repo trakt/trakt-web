@@ -89,7 +89,7 @@
     overflow: hidden;
 
     display: grid;
-    grid-template-columns: repeat(var(--details-column-count), 1fr);
+    grid-template-columns: repeat(var(--details-column-count), minmax(0, 1fr));
     gap: var(--profile-details-gap);
 
     &:not(.is-vip) {
@@ -125,6 +125,10 @@
     display: grid;
     grid-template-columns: auto 1fr;
     gap: var(--gap-m);
+
+    @include for-tablet-sm-and-below {
+      grid-template-columns: 1fr;
+    }
   }
 
   .trakt-profile-details-item {
