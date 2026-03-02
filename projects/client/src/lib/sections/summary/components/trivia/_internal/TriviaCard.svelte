@@ -3,8 +3,8 @@
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaTrivia } from "$lib/requests/models/MediaTrivia";
+  import ShadowScroller from "$lib/sections/components/ShadowScroller.svelte";
   import { Marked } from "marked";
-  import ShadowScroller from "./ShadowScroller.svelte";
 
   const {
     trivia,
