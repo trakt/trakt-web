@@ -174,8 +174,7 @@
 
   .trakt-navbar-actions {
     height: var(--side-navbar-actions-height);
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: height, opacity, padding;
+    transition: opacity var(--transition-increment) ease-in-out;
 
     display: flex;
     justify-content: space-between;
