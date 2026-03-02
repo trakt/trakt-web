@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { setScrollInfo } from "./setScrollInfo";
+  import { setScrollInfo } from "./_internal/setScrollInfo";
 
   const { children }: ChildrenProps = $props();
 
