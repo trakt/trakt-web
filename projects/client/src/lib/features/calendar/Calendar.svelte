@@ -3,7 +3,6 @@
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
-  import { trackWindowScrollDirection } from "$lib/utils/actions/trackWindowScrollDirection";
   import CalendarDays from "./_internal/CalendarDays.svelte";
   import CalendarHeader from "./_internal/CalendarHeader.svelte";
   import CalendarItems from "./_internal/CalendarItems.svelte";
@@ -30,11 +29,6 @@
     class="calendar-navigation"
     use:observeDimension
     use:trackWindowScroll={"is-scrolled"}
-    use:trackWindowScrollDirection={{
-      upClassName: "trakt-calendar-scroll-up",
-      downClassName: "trakt-calendar-scroll-down",
-      offsetVar: "var(--navbar-height)",
-    }}
   >
     <CalendarHeader />
     <CalendarDays calendar={$calendar} />
@@ -105,14 +99,6 @@
 
     @include for-tablet-sm-and-below {
       top: calc(var(--navbar-height) + var(--sticky-top));
-    }
-  }
-
-  .calendar-navigation {
-    &:global(.trakt-calendar-scroll-down) {
-      @include for-tablet-sm-and-below {
-        top: var(--sticky-top);
-      }
     }
   }
 </style>
