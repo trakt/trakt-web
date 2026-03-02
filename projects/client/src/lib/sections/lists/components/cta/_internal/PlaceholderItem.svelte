@@ -1,8 +1,6 @@
 <script lang="ts">
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { Snippet } from "svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
   import type { ListCta, MediaCta } from "../models/Cta";
   import CtaButton from "./CtaButton.svelte";
@@ -13,22 +11,14 @@
   const {
     cta,
     intl,
-    icon,
   }: {
     cta: MediaCta | ListCta;
     intl: CtaItemIntl;
-    icon: Snippet;
   } = $props();
 
   const defaultVariant = $derived(useCtaCardVariant(cta));
   const { cover } = $derived(usePlaceholderCover(cta));
 </script>
-
-{#snippet ctaIcon()}
-  <div class="trakt-cta-icon">
-    {@render icon()}
-  </div>
-{/snippet}
 
 {#snippet buttonIcon()}
   {#if cta.type === "personal-list"}
@@ -43,20 +33,10 @@
     <div class="trakt-cta-description">
       <div class="trakt-cta-list-text">
         <p>{intl.text({ cta })}</p>
-        <RenderFor audience="authenticated" device={["mobile"]}>
-          {@render ctaIcon()}
-        </RenderFor>
       </div>
 
       <CtaButton {cta} {intl} icon={buttonIcon} size="small" />
     </div>
-
-    <RenderFor
-      audience="authenticated"
-      device={["desktop", "tablet-lg", "tablet-sm"]}
-    >
-      {@render ctaIcon()}
-    </RenderFor>
   </div>
 </CtaListCard>
 

@@ -47,13 +47,9 @@
   /*
    * Cta
    */
-  --color-cta-background-gradient: linear-gradient(258.73deg,
-      color-mix(in srgb,
-        color-mix(in srgb,
-          var(--purple-300) 80%,
-          transparent) 80%,
-        transparent) 0%,
-      var(--shade-100) 53.05%);
+  --color-cta-background-gradient: linear-gradient(260deg,
+      color-mix(in srgb, var(--shade-10) 60%, transparent) 0%,
+      var(--shade-10) 65%);
 
   /*
    * List
@@ -250,13 +246,9 @@
   /*
    * Cta
    */
-  --color-cta-background-gradient: linear-gradient(258.73deg,
-      color-mix(in srgb,
-        color-mix(in srgb,
-          var(--purple-500) 80%,
-          transparent) 80%,
-        transparent) 0%,
-      var(--shade-900) 53.05%);
+  --color-cta-background-gradient: linear-gradient(260deg,
+      color-mix(in srgb, var(--shade-900) 60%, transparent) 0%,
+      var(--shade-900) 65%);
 
   /*
    * List

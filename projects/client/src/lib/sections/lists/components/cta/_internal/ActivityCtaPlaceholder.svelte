@@ -2,7 +2,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
   import type { CtaItemIntl } from "../CtaItemIntl";
-  import ActivityIcon from "../icons/ActivityIcon.svelte";
   import type { SocialCta } from "../models/Cta";
   import CtaListCard from "./CtaListCard.svelte";
   import TraktTeam from "./TraktTeam.svelte";
@@ -20,13 +19,6 @@
     </RenderFor>
     <RenderFor audience="all" device={["desktop"]}>
       <TraktTeam {intl} {cta} />
-    </RenderFor>
-
-    <RenderFor
-      audience="authenticated"
-      device={["desktop", "tablet-lg", "tablet-sm"]}
-    >
-      <ActivityIcon />
     </RenderFor>
   </div>
 </CtaListCard>
