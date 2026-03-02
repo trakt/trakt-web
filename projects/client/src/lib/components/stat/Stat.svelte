@@ -6,19 +6,30 @@
     children,
     icon,
     isLoading,
-  }: ChildrenProps & { icon: Snippet; isLoading: boolean } = $props();
+    tag,
+    variant = "default",
+  }: ChildrenProps & {
+    icon: Snippet;
+    isLoading: boolean;
+    tag?: Snippet;
+    variant?: "default" | "plain";
+  } = $props();
 </script>
 
-<div class="trakt-stat">
+<div class="trakt-stat" data-variant={variant}>
   {#if isLoading}
     <LoadingIndicator />
   {:else}
     {@render icon()}
   {/if}
 
-  <p class="ellipsis bold">
-    {@render children()}
-  </p>
+  <div class="stat-value">
+    <p class="ellipsis bold">
+      {@render children()}
+    </p>
+
+    {@render tag?.()}
+  </div>
 </div>
 
 <style>
@@ -37,6 +48,11 @@
     :global(svg) {
       width: var(--ni-18);
       height: var(--ni-18);
+    }
+
+    &[data-variant="plain"] {
+      background: transparent;
+      padding: 0;
     }
   }
 </style>

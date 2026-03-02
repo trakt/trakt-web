@@ -2,6 +2,8 @@
   import ClampedText from "$lib/components/text/ClampedText.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import * as m from "$lib/features/i18n/messages";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import ShadowScroller from "$lib/sections/components/ShadowScroller.svelte";
 
   import { shuffle } from "$lib/utils/array/shuffle";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
@@ -28,21 +30,28 @@
   ];
 
   const { isMe } = $derived(useIsMe(slug));
-  const aboutText = $derived(
+  const aboutHeader = $derived(
     $isMe
       ? m.text_about()
       : m.text_about_user({ username: toDisplayableName(profile) }),
   );
+
+  const aboutText = $derived(profile.about || shuffle(ABOUT_MESSAGES).at(0));
 </script>
 
 <div class="trakt-profile-about">
-  <span class="secondary bold">{aboutText}</span>
-  <ClampedText
-    classList="trakt-profile-about"
-    label={m.button_label_read_more()}
-  >
-    {profile.about ?? shuffle(ABOUT_MESSAGES).at(0)}
-  </ClampedText>
+  <span class="secondary bold">{aboutHeader}</span>
+  <RenderFor audience="all" device={["desktop", "tablet-lg"]}>
+    <ShadowScroller>
+      <p>{aboutText}</p>
+    </ShadowScroller>
+  </RenderFor>
+
+  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+    <ClampedText label={m.button_label_read_more()}>
+      {aboutText}
+    </ClampedText>
+  </RenderFor>
 </div>
 
 <style>
@@ -50,5 +59,10 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
+
+    :global(.trakt-shadow-wrapper) {
+      flex: 1 1 0;
+      min-height: 0;
+    }
   }
 </style>

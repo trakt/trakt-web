@@ -1322,12 +1322,6 @@
     "warning_prompt_unfollow_user": {
       "default": "确定要取消关注 {username} 吗？"
     },
-    "text_vip_upsell": {
-      "default": "解锁 VIP 功能，提升 Trakt 体验"
-    },
-    "text_vip_upsell_description": {
-      "default": "想查看您的年度和月度回顾？并获得更多功能？注册 Trakt VIP。"
-    },
     "list_title_social": {
       "default": "社交"
     },
@@ -1594,6 +1588,12 @@
     },
     "tag_text_movies": {
       "default": "电影"
+    },
+    "tag_text_shows": {
+      "default": "剧集"
+    },
+    "tag_text_episodes": {
+      "default": "分集"
     },
     "tag_text_released": {
       "default": "已上映"
@@ -2234,6 +2234,9 @@
     "text_this_month": {
       "default": "本月"
     },
+    "text_this_year": {
+      "default": "今年"
+    },
     "text_view_all": {
       "default": "查看全部"
     },
@@ -2620,6 +2623,12 @@
     },
     "button_label_see_more_limits": {
       "default": "查看更多限制"
+    },
+    "button_text_month_in_review": {
+      "default": "{month}月回顾"
+    },
+    "button_label_month_in_review": {
+      "default": "查看你的 {month} 回顾"
     }
   }
 }

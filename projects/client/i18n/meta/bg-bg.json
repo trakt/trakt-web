@@ -1323,12 +1323,6 @@
     "warning_prompt_unfollow_user": {
       "default": "Сигурни ли сте, че искате да се отпишете от {username}?"
     },
-    "text_vip_upsell": {
-      "default": "Отключете VIP функции, за да подобрите изживяването си с Trakt"
-    },
-    "text_vip_upsell_description": {
-      "default": "Искате ли да видите своя месечен и годишен преглед? И да получите достъп до много други функции? Регистрирайте се за Trakt VIP."
-    },
     "list_title_social": {
       "default": "Социални"
     },
@@ -1595,6 +1589,12 @@
     },
     "tag_text_movies": {
       "default": "Филми"
+    },
+    "tag_text_shows": {
+      "default": "Сериали"
+    },
+    "tag_text_episodes": {
+      "default": "Епизоди"
     },
     "tag_text_released": {
       "default": "Излязъл"
@@ -2235,6 +2235,9 @@
     "text_this_month": {
       "default": "Този месец"
     },
+    "text_this_year": {
+      "default": "Тази година"
+    },
     "text_view_all": {
       "default": "Виж всички"
     },
@@ -2621,6 +2624,12 @@
     },
     "button_label_see_more_limits": {
       "default": "Вижте още ограничения"
+    },
+    "button_text_month_in_review": {
+      "default": "{month} в преглед"
+    },
+    "button_label_month_in_review": {
+      "default": "Виж своя обзор за {month}"
     }
   }
 }

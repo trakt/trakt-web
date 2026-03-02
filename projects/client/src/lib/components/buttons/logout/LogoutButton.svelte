@@ -25,7 +25,6 @@
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: m.button_label_logout(),
-    color: "red",
     onclick: confirmLogout,
   });
 </script>
@@ -36,6 +35,7 @@
     style="flat"
     variant="secondary"
     navigationType={DpadNavigationType.Item}
+    color="red"
     {...commonProps}
   >
     {m.button_text_logout()}
@@ -43,7 +43,7 @@
 {/if}
 
 {#if style === "action"}
-  <ActionButton variant="secondary" {...commonProps}>
+  <ActionButton {...commonProps} style="ghost">
     <LogoutIcon />
   </ActionButton>
 {/if}

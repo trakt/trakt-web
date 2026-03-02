@@ -1323,12 +1323,6 @@
     "warning_prompt_unfollow_user": {
       "default": "Sigur dorești să nu mai urmărești pe {username}?"
     },
-    "text_vip_upsell": {
-      "default": "Deblocați funcțiile VIP pentru a vă îmbunătăți experiența Trakt"
-    },
-    "text_vip_upsell_description": {
-      "default": "Vrei să-ți vezi retrospectiva lunară și anuală? Și să accesezi multe alte funcții? Înscrie-te la Trakt VIP."
-    },
     "list_title_social": {
       "default": "Social"
     },
@@ -1595,6 +1589,12 @@
     },
     "tag_text_movies": {
       "default": "Filme"
+    },
+    "tag_text_shows": {
+      "default": "Seriale"
+    },
+    "tag_text_episodes": {
+      "default": "Episoade"
     },
     "tag_text_released": {
       "default": "Lansat"
@@ -2235,6 +2235,9 @@
     "text_this_month": {
       "default": "Luna aceasta"
     },
+    "text_this_year": {
+      "default": "Anul acesta"
+    },
     "text_view_all": {
       "default": "Vezi tot"
     },
@@ -2621,6 +2624,12 @@
     },
     "button_label_see_more_limits": {
       "default": "Vezi mai multe limite"
+    },
+    "button_text_month_in_review": {
+      "default": "Recapitularea lunii {month}"
+    },
+    "button_label_month_in_review": {
+      "default": "Vezi retrospectiva lunii {month}"
     }
   }
 }

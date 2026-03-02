@@ -6,35 +6,18 @@
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import LibraryList from "../lists/library/LibraryList.svelte";
   import PersonalLists from "../lists/user/PersonalLists.svelte";
-  import ProfilePageBanner from "../profile-banner/ProfilePageBanner.svelte";
-  import MonthToDate from "./components/MonthToDate.svelte";
-  import ProfileAbout from "./components/ProfileAbout.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
+  import ProfileDetails from "./components/ProfileDetails.svelte";
   import ProfilesList from "./components/ProfilesList.svelte";
-  import VipUpsell from "./components/VipUpsell.svelte";
   import type { DisplayableProfileProps } from "./DisplayableProfileProps";
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
   const { isMe } = $derived(useIsMe(slug));
-
-  const hasUpsell = $derived($isMe && !profile.isVip);
 </script>
 
-<ProfileContainer>
-  {#snippet details()}
-    <ProfilePageBanner {profile} {slug} />
-  {/snippet}
-
-  {#if profile.isVip}
-    <MonthToDate {slug} />
-  {/if}
-
-  {#if hasUpsell}
-    <VipUpsell />
-  {/if}
-
-  <ProfileAbout {profile} {slug} />
+<ProfileContainer {profile} {slug}>
+  <ProfileDetails {slug} {profile} />
 </ProfileContainer>
 
 {#if $isMe}
