@@ -58,6 +58,9 @@ interface ConfirmationParamsMap {
   [ConfirmationType.SuppressRatingsToast]: {
     type: ConfirmationType.SuppressRatingsToast;
   };
+  [ConfirmationType.Logout]: {
+    type: ConfirmationType.Logout;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

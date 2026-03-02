@@ -3,6 +3,8 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import LogoutIcon from "$lib/components/icons/LogoutIcon.svelte";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import ActionButton from "../ActionButton.svelte";
@@ -13,10 +15,18 @@
 
   const { logout } = useAuth();
 
+  const { confirm } = useConfirm();
+  const confirmLogout = $derived(
+    confirm({
+      type: ConfirmationType.Logout,
+      onConfirm: logout,
+    }),
+  );
+
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: m.button_label_logout(),
     color: "red",
-    onclick: logout,
+    onclick: confirmLogout,
   });
 </script>
 

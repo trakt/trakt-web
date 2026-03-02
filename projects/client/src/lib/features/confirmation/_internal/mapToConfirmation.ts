@@ -101,5 +101,11 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_suppress_ratings_toast(),
         operation: 'destructive',
       };
+    case ConfirmationType.Logout:
+      return {
+        buttonText: m.button_text_logout(),
+        message: m.warning_prompt_log_out(),
+        operation: 'destructive',
+      };
   }
 }
