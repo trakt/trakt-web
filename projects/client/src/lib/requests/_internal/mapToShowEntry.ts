@@ -59,5 +59,9 @@ export function mapToShowEntry(
       count: show.aired_episodes ?? NaN,
     },
     rating: mapToTraktRating(show.rating),
+    airs: show.airs?.day && show.airs.time && show.airs.timezone
+      ? { day: show.airs.day, time: show.airs.time, timezone: show.airs.timezone }
+      : undefined,
+    network: show.network,
   };
 }

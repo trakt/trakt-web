@@ -17,4 +17,5 @@ type MediaProps = {
 
 export type MediaDetailsProps = {
   crew: MediaCrew;
+  network?: string | Nil;
 } & (EpisodeProps | MediaProps);

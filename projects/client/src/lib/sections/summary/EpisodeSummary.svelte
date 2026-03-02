@@ -106,4 +106,4 @@
   type="episode"
 />
 
-<MediaDetails {crew} {episode} type="episode" />
+<MediaDetails {crew} {episode} type="episode" network={show.network} />

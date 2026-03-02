@@ -1,6 +1,9 @@
 <script lang="ts">
   import { TestId } from "$e2e/models/TestId";
+  import { languageTag } from "$lib/features/i18n/index.ts";
+  import * as m from "$lib/features/i18n/messages.ts";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
+  import { toHumanDayTime } from "$lib/utils/formatting/date/toHumanDayTime.ts";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { mapToMainCredit } from "./mapToMainCredit";
@@ -9,7 +12,19 @@
   import ResponsiveTitle from "./ResponsiveTitle.svelte";
   import type { SummaryTitleProps } from "./SummaryTitleProps";
 
+  const ENDED_STATUSES = ["ended", "canceled"];
+
   const { title, crew, ...target }: SummaryTitleProps = $props();
+
+  let now = $state(new Date());
+
+  $effect(() => {
+    const interval = setInterval(() => {
+      now = new Date();
+    }, 60_000);
+
+    return () => clearInterval(interval);
+  });
 
   const subtitle = $derived(mapToSummarySubtitle(target));
   const mainCredit = $derived(mapToMainCredit(target.type, crew));
@@ -19,8 +34,27 @@
       return;
     }
 
-    const now = new Date();
     return mapToSummaryStatus({ media: target.media, now });
+  });
+
+  const airsText = $derived.by(() => {
+    if (target.type !== "show") return;
+
+    const { airs, network, status: showStatus } = target.media;
+    if (!airs || ENDED_STATUSES.includes(showStatus)) return;
+
+    const local = toHumanDayTime(airs, languageTag());
+    if (!local) return;
+
+    const label = target.media.airDate > now
+      ? m.header_expected_premiere()
+      : m.header_airs();
+
+    const schedule = network
+      ? m.text_airs_day_time_network({ ...local, network })
+      : m.text_airs_day_time(local);
+
+    return `${label} ${schedule}`;
   });
 </script>
 
@@ -44,6 +78,12 @@
   {#if status}
     <p class="capitalize bold trakt-media-status">
       {toTranslatedStatus(status)}
+    </p>
+  {/if}
+
+  {#if airsText}
+    <p class="small secondary">
+      {airsText}
     </p>
   {/if}
 </div>
