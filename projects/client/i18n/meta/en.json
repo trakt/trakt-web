@@ -1652,9 +1652,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_seasons": {
       "default": "Seasons",
@@ -2109,8 +2107,7 @@
       "default": "Availability",
       "description": "Header for the section that shows streaming services for a movie, show, or episode.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_popup_menu": {
@@ -3055,8 +3052,7 @@
       "default": "Reset",
       "description": "Aria-label for the button that resets a single filter to its initial value.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_search_results_for": {
@@ -3142,40 +3138,35 @@
       "default": "My favorites",
       "description": "Text for the option that filters items to show only those that are in the user's favorites.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "option_text_all_digital_releases": {
       "default": "All digital releases",
       "description": "Text for the option that filters items to show all digital releases.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "option_text_streaming_now": {
       "default": "Streaming now",
       "description": "Text for the option that filters items to show only those that are currently streaming.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_decade": {
       "default": "Decade",
       "description": "Header for the filter that allows users to select a decade.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_ratings": {
       "default": "Ratings",
       "description": "Header for the filter that allows users to select a rating.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_view_all_items_in": {
@@ -3195,8 +3186,7 @@
       "default": "Reset all",
       "description": "Text for the button that resets all filters to their initial values.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_reset_all_filters": {
@@ -4049,8 +4039,7 @@
       "default": "Favorite genres",
       "description": "Header for the section that allows users to change their favorite genres.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_toggle_genre": {
@@ -4824,9 +4813,7 @@
     "header_account_details": {
       "default": "Account details",
       "description": "Header for the section that allows users to change their account details.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "description_account_details": {
       "default": "Change your photo, name and other details.",
@@ -6543,8 +6530,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_behavior": {
@@ -6567,8 +6553,7 @@
       "default": "Enable multiple watches",
       "description": "Text for the section that allows users to enable or disable multiple watches.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "switch_label_multiple_watches": {
