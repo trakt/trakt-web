@@ -34,7 +34,7 @@
   {#if !$isLoading && $user}
     <CoverImageSetter src={$user.cover?.url} type="main" />
     {#if $user.private}
-      <PrivateProfile profile={$user} />
+      <PrivateProfile profile={$user} slug={$user.slug ?? ""} />
     {:else}
       <Profile profile={$user} slug={$user.slug ?? ""} />
     {/if}

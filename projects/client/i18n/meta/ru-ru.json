@@ -1323,12 +1323,6 @@
     "warning_prompt_unfollow_user": {
       "default": "Отписаться от {username}?"
     },
-    "text_vip_upsell": {
-      "default": "Станьте VIP, чтобы прокачать свой Trakt"
-    },
-    "text_vip_upsell_description": {
-      "default": "Хотите видеть итоги года и месяца? Получите доступ к эксклюзивным функциям с Trakt VIP."
-    },
     "list_title_social": {
       "default": "Социальное"
     },
@@ -1595,6 +1589,12 @@
     },
     "tag_text_movies": {
       "default": "Фильмы"
+    },
+    "tag_text_shows": {
+      "default": "Сериалы"
+    },
+    "tag_text_episodes": {
+      "default": "Эпизоды"
     },
     "tag_text_released": {
       "default": "Вышел"
@@ -2235,6 +2235,9 @@
     "text_this_month": {
       "default": "В этом месяце"
     },
+    "text_this_year": {
+      "default": "В этом году"
+    },
     "text_view_all": {
       "default": "Все"
     },
@@ -2621,6 +2624,12 @@
     },
     "button_label_see_more_limits": {
       "default": "Показать больше лимитов"
+    },
+    "button_text_month_in_review": {
+      "default": "Итоги за {month}"
+    },
+    "button_label_month_in_review": {
+      "default": "Посмотреть итоги за {month}"
     }
   }
 }

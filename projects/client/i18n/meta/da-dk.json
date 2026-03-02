@@ -1323,12 +1323,6 @@
     "warning_prompt_unfollow_user": {
       "default": "Er du sikker på, at du vil holde op med at følge {username}?"
     },
-    "text_vip_upsell": {
-      "default": "Lås VIP-funktioner op for at forbedre din Trakt-oplevelse"
-    },
-    "text_vip_upsell_description": {
-      "default": "Vil du se din månedlige og årlige gennemgang? Og få adgang til mange andre funktioner? Tilmeld dig Trakt VIP."
-    },
     "list_title_social": {
       "default": "Socialt"
     },
@@ -1595,6 +1589,12 @@
     },
     "tag_text_movies": {
       "default": "Film"
+    },
+    "tag_text_shows": {
+      "default": "Serier"
+    },
+    "tag_text_episodes": {
+      "default": "Afsnit"
     },
     "tag_text_released": {
       "default": "Udgivet"
@@ -2235,6 +2235,9 @@
     "text_this_month": {
       "default": "Denne måned"
     },
+    "text_this_year": {
+      "default": "I år"
+    },
     "text_view_all": {
       "default": "Vis alle"
     },
@@ -2621,6 +2624,12 @@
     },
     "button_label_see_more_limits": {
       "default": "Se flere grænser"
+    },
+    "button_text_month_in_review": {
+      "default": "{month} i tilbageblik"
+    },
+    "button_label_month_in_review": {
+      "default": "Se dit tilbageblik på {month}"
     }
   }
 }

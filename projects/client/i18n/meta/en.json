@@ -3657,22 +3657,6 @@
         "ios"
       ]
     },
-    "text_vip_upsell": {
-      "default": "Unlock VIP features to enhance your Trakt experience",
-      "description": "Text shown to users who are not Trakt VIP members, encouraging them to sign up for VIP features.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "text_vip_upsell_description": {
-      "default": "Want to see your month and year in review? And get access to many other features? Sign up for Trakt VIP.",
-      "description": "Description text shown to users who are not Trakt VIP members, explaining the benefits of signing up for VIP features.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "list_title_social": {
       "default": "Social",
       "description": "Title for lists containing the profiles the user follows or profiles that follow the user. This title should be as short and concise as possible.",
@@ -4418,6 +4402,22 @@
     "tag_text_movies": {
       "default": "Movies",
       "description": "Text for the tag that indicates a movie.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_shows": {
+      "default": "Shows",
+      "description": "Text for the tag that indicates a show. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_episodes": {
+      "default": "Episodes",
+      "description": "Text for the tag that indicates an episode. This should be as short and concise as possible.",
       "exclude": [
         "android",
         "ios"
@@ -6083,6 +6083,14 @@
         "ios"
       ]
     },
+    "text_this_year": {
+      "default": "This year",
+      "description": "Text shown to indicate the users stats of the current year.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "text_view_all": {
       "default": "View all",
       "description": "Text for the button that allows users to view all items in a list.",
@@ -6528,7 +6536,6 @@
       "default": "Enhance your Trakt experience",
       "description": "Text used to promote a VIP package for the user.",
       "exclude": [
-        "web",
         "ios"
       ]
     },
@@ -6536,7 +6543,6 @@
       "default": "Upgrade to VIP and unlock the full Trakt experience, packed with features built for TV Shows and Movies lovers.",
       "description": "Description used to promote a VIP package for the user.",
       "exclude": [
-        "web",
         "ios"
       ]
     },
@@ -7177,6 +7183,32 @@
     "button_label_see_more_limits": {
       "default": "View more limits",
       "description": "Aria-label for the button that allows users to view more of their limits.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_month_in_review": {
+      "default": "{month} in review",
+      "description": "Text for the button that allows users to view their month in review.",
+      "variables": {
+        "month": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_month_in_review": {
+      "default": "View your {month} in review",
+      "description": "Aria-label for the button that allows users to view their month in review.",
+      "variables": {
+        "month": {
+          "type": "string"
+        }
+      },
       "exclude": [
         "android",
         "ios"

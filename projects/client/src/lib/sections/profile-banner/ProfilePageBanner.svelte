@@ -1,5 +1,7 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
+  import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
+  import SettingsButton from "$lib/components/buttons/settings/SettingsButton.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
@@ -30,7 +32,7 @@
     isVip={profile.isVip}
   >
     {#snippet badge()}
-      <RenderFor audience="all" device={["tablet-sm", "desktop"]}>
+      <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
         {#if profile.isVip}
           <VipBadge isDirector={profile.isDirector} />
         {/if}
@@ -39,10 +41,10 @@
   </ProfileImage>
   <div class="profile-info" data-hj-suppress data-sentry-mask>
     <div class="profile-user-details">
-      <span class="title">
+      <span class="title ellipsis">
         {toDisplayableName(profile)}
       </span>
-      <span class="user-location">{profile.location}</span>
+      <span class="user-location ellipsis">{profile.location}</span>
     </div>
     <div class="profile-actions">
       <ShareButton
@@ -56,7 +58,14 @@
           <FollowUserButton {profile} {slug} />
         {/if}
         {#if $isMe}
-          <ProfileOptionsButton />
+          <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
+            <ProfileOptionsButton />
+          </RenderFor>
+
+          <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
+            <SettingsButton style="action" />
+            <LogoutButton style="action" />
+          </RenderFor>
         {/if}
       </RenderFor>
     </div>
@@ -70,9 +79,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--gap-m);
+    gap: var(--gap-s);
 
     transition: gap var(--transition-increment) ease-in-out;
+
+    max-width: var(--ni-148);
+    overflow: hidden;
 
     :global(.profile-image-container) {
       display: flex;
@@ -86,9 +98,16 @@
     }
 
     @include for-tablet-sm-and-below {
+      max-width: none;
+
       align-items: center;
       flex-direction: row;
       gap: var(--gap-xs);
+      flex-grow: 1;
+
+      span.ellipsis {
+        white-space: normal;
+      }
 
       :global(.profile-image-container) {
         --width: var(--ni-40);
@@ -108,13 +127,13 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
+    width: 100%;
 
     .user-location {
       color: var(--color-text-secondary);
     }
 
     @include for-tablet-sm-and-below {
-      width: 100%;
       flex-direction: row;
       gap: var(--gap-xs);
       justify-content: space-between;

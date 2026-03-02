@@ -180,6 +180,16 @@
     color-mix(in srgb, var(--shade-100) 80%, transparent) 100%);
   --color-usage-bar-background: var(--shade-300);
   --color-usage-bar: var(--color-text-primary);
+
+  /*
+   * Profile page
+   */
+  --background-profile-details: radial-gradient(50% 40% at 50% 0%,
+    var(--purple-50) 0%,
+    var(--shade-50) 100%);
+  --background-vip-profile-details: radial-gradient(50% 40% at 50% 0%,
+    var(--red-20) 0%,
+    var(--shade-50) 100%);
 }
 
 // Define theme variables for dark mode
@@ -360,6 +370,16 @@
       color-mix(in srgb, var(--shade-1000) 80%, transparent) 100%);
   --color-usage-bar-background: var(--shade-800);
   --color-usage-bar: var(--shade-100);
+
+  /*
+   * Profile page
+   */
+  --background-profile-details: radial-gradient(50% 40% at 50% 0%,
+      var(--purple-950) 0%,
+      var(--purple-1000) 100%);
+  --background-vip-profile-details: radial-gradient(50% 40% at 50% 0%,
+      var(--red-950) 0%,
+      var(--red-1000) 100%);
 }
 
 // Apply themes to selectors

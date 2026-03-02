@@ -1323,12 +1323,6 @@
     "warning_prompt_unfollow_user": {
       "default": "Möchtest du {username} wirklich entfolgen?"
     },
-    "text_vip_upsell": {
-      "default": "Schalte VIP-Funktionen frei, um dein Trakt-Erlebnis zu verbessern"
-    },
-    "text_vip_upsell_description": {
-      "default": "Möchtest du deine Monats- und Jahresübersicht sehen? Und Zugriff auf viele weitere Funktionen erhalten? Melde dich für Trakt VIP an."
-    },
     "list_title_social": {
       "default": "Social"
     },
@@ -1595,6 +1589,12 @@
     },
     "tag_text_movies": {
       "default": "Filme"
+    },
+    "tag_text_shows": {
+      "default": "Serien"
+    },
+    "tag_text_episodes": {
+      "default": "Episoden"
     },
     "tag_text_released": {
       "default": "Veröffentlicht"
@@ -2235,6 +2235,9 @@
     "text_this_month": {
       "default": "Diesen Monat"
     },
+    "text_this_year": {
+      "default": "Dieses Jahr"
+    },
     "text_view_all": {
       "default": "Alle anzeigen"
     },
@@ -2621,6 +2624,12 @@
     },
     "button_label_see_more_limits": {
       "default": "Mehr Limits anzeigen"
+    },
+    "button_text_month_in_review": {
+      "default": "{month} im Rückblick"
+    },
+    "button_label_month_in_review": {
+      "default": "Rückblick für {month} ansehen"
     }
   }
 }

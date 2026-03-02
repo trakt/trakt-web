@@ -1323,12 +1323,6 @@
     "warning_prompt_unfollow_user": {
       "default": "{username} のフォローを解除してもよろしいですか？"
     },
-    "text_vip_upsell": {
-      "default": "Trakt体験を向上させるVIP機能をアンロック"
-    },
-    "text_vip_upsell_description": {
-      "default": "月間と年間のレビューを見たいですか？ 他の多くの機能にもアクセスできます。 Trakt VIPに登録しましょう。"
-    },
     "list_title_social": {
       "default": "ソーシャル"
     },
@@ -1595,6 +1589,12 @@
     },
     "tag_text_movies": {
       "default": "映画"
+    },
+    "tag_text_shows": {
+      "default": "ドラマ"
+    },
+    "tag_text_episodes": {
+      "default": "エピソード"
     },
     "tag_text_released": {
       "default": "公開済み"
@@ -2235,6 +2235,9 @@
     "text_this_month": {
       "default": "今月"
     },
+    "text_this_year": {
+      "default": "今年"
+    },
     "text_view_all": {
       "default": "すべて表示"
     },
@@ -2621,6 +2624,12 @@
     },
     "button_label_see_more_limits": {
       "default": "制限をもっと見る"
+    },
+    "button_text_month_in_review": {
+      "default": "{month}の振り返り"
+    },
+    "button_label_month_in_review": {
+      "default": "{month}の振り返りを見る"
     }
   }
 }

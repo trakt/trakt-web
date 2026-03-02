@@ -1323,12 +1323,6 @@
     "warning_prompt_unfollow_user": {
       "default": "Ви впевнені, що хочете відписатися від {username}?"
     },
-    "text_vip_upsell": {
-      "default": "Розблокуйте VIP-функції, щоб покращити свій досвід Trakt"
-    },
-    "text_vip_upsell_description": {
-      "default": "Хочете побачити свій місячний та річний огляд? Та отримати доступ до багатьох інших функцій? Підпишіться на Trakt VIP."
-    },
     "list_title_social": {
       "default": "Соціальне"
     },
@@ -1595,6 +1589,12 @@
     },
     "tag_text_movies": {
       "default": "Фільми"
+    },
+    "tag_text_shows": {
+      "default": "Серіали"
+    },
+    "tag_text_episodes": {
+      "default": "Епізоди"
     },
     "tag_text_released": {
       "default": "Вийшов"
@@ -2235,6 +2235,9 @@
     "text_this_month": {
       "default": "Цього місяця"
     },
+    "text_this_year": {
+      "default": "Цього року"
+    },
     "text_view_all": {
       "default": "Переглянути всі"
     },
@@ -2621,6 +2624,12 @@
     },
     "button_label_see_more_limits": {
       "default": "Переглянути більше лімітів"
+    },
+    "button_text_month_in_review": {
+      "default": "{month} у підсумку"
+    },
+    "button_label_month_in_review": {
+      "default": "Переглянути підсумки за {month}"
     }
   }
 }

@@ -1,50 +1,65 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
+  import type { DisplayableProfileProps } from "../DisplayableProfileProps";
 
-  type ProfileContainerProps = {
-    details?: Snippet;
-  } & ChildrenProps;
+  const { children, profile, slug }: ChildrenProps & DisplayableProfileProps =
+    $props();
 
-  const { details, children }: ProfileContainerProps = $props();
+  const { isMe } = $derived(useIsMe(slug));
+  const isFreeOtherProfile = $derived(!$isMe && !profile.isVip);
 </script>
 
-<div class="trakt-profile-container">
-  {#if details}
-    <div class="trakt-profile-details">
-      {@render details()}
-    </div>
-  {/if}
-  <div class="trakt-profile-content">
-    {@render children()}
-  </div>
+<div
+  class="trakt-profile-container"
+  class:is-vip={profile.isVip}
+  class:is-narrow={isFreeOtherProfile}
+>
+  {@render children()}
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
   .trakt-profile-container {
-    display: grid;
-    gap: var(--gap-xl);
-    grid-template-columns: 1fr 3fr;
-    margin: 0 var(--layout-distance-side);
+    width: calc(100% - 2 * var(--layout-distance-side));
+    max-width: var(--ni-1280);
+    height: var(--ni-232);
 
-    @include for-desktop {
-      max-width: 75dvw;
+    overflow: hidden;
+
+    align-self: center;
+
+    border-radius: var(--border-radius-l);
+    background: var(--background-profile-details);
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-m);
+
+    margin: 0 var(--layout-distance-side);
+    padding: var(--ni-24);
+    box-sizing: border-box;
+
+    transition: padding var(--transition-increment) ease-in-out;
+
+    &.is-vip {
+      background: var(--background-vip-profile-details);
+    }
+
+    &.is-narrow {
+      max-width: var(--ni-640);
     }
 
     @include for-tablet-sm-and-below {
-      grid-template-columns: 1fr;
-      margin: 0 var(--ni-16);
+      padding: 0;
+      border-radius: 0;
 
-      .trakt-profile-content {
-        grid-column: 1;
+      background: none;
+      height: auto;
+
+      &.is-vip {
+        background: none;
       }
     }
-  }
-
-  .trakt-profile-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-m);
   }
 </style>
