@@ -2,7 +2,7 @@
   import RemoveFromHistoryButton from "$lib/components/buttons/remove-from-history/RemoveFromHistoryButton.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
-  import type { HistoryEntry } from "$lib/sections/lists/stores/useRecentlyWatchedList";
+  import type { HistoryEntry } from "$lib/sections/lists/stores/models/HistoryEntry";
   import { useRemoveFromHistory } from "./useRemoveFromHistory";
 
   type RemoveFromHistoryActionProps = {

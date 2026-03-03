@@ -4,34 +4,41 @@
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import type { Snippet } from "svelte";
   import { dateKey } from "./dateKey";
-  import NoItems from "./NoItems.svelte";
+  import EmptyPeriod from "./EmptyPeriod.svelte";
 
   const {
     calendar,
     item,
     layout,
+    empty,
   }: {
     calendar: { date: Date; items: T[] }[];
     item: Snippet<[T]>;
     layout: "list" | "grid";
+    empty?: Snippet;
   } = $props();
+
+  const isEmpty = $derived(calendar.every((day) => day.items.length === 0));
 </script>
 
 <div class="trakt-calendar-items" data-layout={layout}>
-  {#each calendar as day (dateKey(day.date))}
-    <div id={dateKey(day.date)} class="calendar-day-anchor">
-      <GridList
-        title={toHumanDay(day.date, getLocale())}
-        items={day.items}
-        id={dateKey(day.date)}
-        {item}
-      >
-        {#snippet empty()}
-          <NoItems />
-        {/snippet}
-      </GridList>
-    </div>
-  {/each}
+  {#if isEmpty}
+    <EmptyPeriod />
+  {:else}
+    {#each calendar as day (dateKey(day.date))}
+      {#if empty ?? day.items.length > 0}
+        <div id={dateKey(day.date)} class="calendar-day-anchor">
+          <GridList
+            title={toHumanDay(day.date, getLocale())}
+            items={day.items}
+            id={dateKey(day.date)}
+            {item}
+            {empty}
+          />
+        </div>
+      {/if}
+    {/each}
+  {/if}
 </div>
 
 <style lang="scss">

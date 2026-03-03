@@ -3,13 +3,12 @@ import { getStartOfWeek } from '$lib/utils/date/getStartOfWeek.ts';
 import { isCurrentWeek } from '$lib/utils/date/isCurrentWeek.ts';
 import { addWeeks } from 'date-fns/addWeeks';
 import { subWeeks } from 'date-fns/subWeeks';
+import { map } from 'rxjs';
 import { AnalyticsEvent } from '../../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../../analytics/useTrack.ts';
 import { getCalendarContext } from './getCalendarContext.ts';
 
 type Direction = 'next' | 'previous';
-
-const PERIOD_DAYS = 7;
 
 function getNextOrPreviousPeriod(date: Date, direction: Direction) {
   const weekStart = getStartOfWeek(date, getLocale());
@@ -20,6 +19,7 @@ function getNextOrPreviousPeriod(date: Date, direction: Direction) {
   return getStartOfWeek(targetWeek, getLocale());
 }
 
+// FIXME: calendar navigation should be reflected in url
 export function useCalendarPeriod() {
   const { startDate, activeDate } = getCalendarContext();
   const { track } = useTrack(AnalyticsEvent.CalendarPeriod);
@@ -46,10 +46,10 @@ export function useCalendarPeriod() {
 
   return {
     startDate: startDate.asObservable(),
+    endDate: startDate.pipe(map((date) => addWeeks(date, 1))),
     next: () => switchPeriod('next'),
     previous: () => switchPeriod('previous'),
     activeDate,
     reset,
-    days: PERIOD_DAYS,
   };
 }

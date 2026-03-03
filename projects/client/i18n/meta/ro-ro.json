@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "Activează notificările"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "Ecranul este negru. Niciun film. Niciun episod. Doar tu și liniștea."
     }
   }
 }

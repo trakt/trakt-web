@@ -2,6 +2,7 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
+  import { isSameDayOfYear } from "$lib/utils/date/isSameDayOfYear";
   import CalendarDays from "./_internal/CalendarDays.svelte";
   import CalendarHeader from "./_internal/CalendarHeader.svelte";
   import CalendarItems from "./_internal/CalendarItems.svelte";
@@ -18,6 +19,8 @@
     onReset,
     item,
     layout = "grid",
+    empty,
+    maxDate,
   }: CalendarLayoutProps<T> = $props();
 
   let activeScrollDate = $state<Date | null>(null);
@@ -29,7 +32,13 @@
     }
   }
 
-  const displayActiveDate = $derived(activeScrollDate ?? activeDate);
+  const isInCurrentPeriod = $derived(
+    calendar.some(
+      (d) => activeScrollDate && isSameDayOfYear(d.date, activeScrollDate),
+    ),
+  );
+  const currentDate = $derived(activeScrollDate ?? activeDate);
+  const selectedDate = $derived(isInCurrentPeriod ? currentDate : activeDate);
 </script>
 
 <div class="calendar-layout-container">
@@ -42,13 +51,15 @@
       {onNext}
       {onPrevious}
       {onReset}
-      activeDate={displayActiveDate}
+      {maxDate}
+      activeDate={selectedDate}
     />
     <CalendarDays
       {calendar}
       {onNext}
       {onPrevious}
-      activeDate={displayActiveDate}
+      {maxDate}
+      activeDate={selectedDate}
     />
   </div>
 
@@ -62,7 +73,7 @@
       initialId={dateKey(activeDate)}
       onUpdate={handleScrollSpyUpdate}
     >
-      <CalendarItems {calendar} {item} {layout} />
+      <CalendarItems {calendar} {item} {layout} {empty} />
     </ScrollSpy>
   {/if}
 </div>
@@ -78,6 +89,8 @@
 
     margin-left: var(--layout-distance-side);
     margin-right: var(--layout-distance-side);
+
+    flex-grow: 1;
   }
 
   .calendar-navigation {

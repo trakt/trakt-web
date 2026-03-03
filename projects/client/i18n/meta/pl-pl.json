@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "Włącz powiadomienia"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "Ekran jest ciemny. Żadnych filmów. Żadnych odcinków. Tylko Ty i cisza."
     }
   }
 }

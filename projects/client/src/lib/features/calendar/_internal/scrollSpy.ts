@@ -31,7 +31,7 @@ export function scrollSpy(
 
   const observer = new IntersectionObserver(observerCallback, {
     threshold: [0, 0.25, 0.5, 0.75, 1.0],
-    rootMargin: '-10% 0px -10% 0px',
+    rootMargin: '-20% 0px 0% 0px',
   });
 
   function observeElements() {
@@ -41,22 +41,30 @@ export function scrollSpy(
     elements.forEach((el) => observer.observe(el));
   }
 
+  function scrollToId(id: string) {
+    requestAnimationFrame(() => {
+      node.querySelector(`#${id}`)?.scrollIntoView({
+        block: 'start',
+        behavior: 'auto',
+      });
+    });
+  }
+
   observeElements();
 
   if (currentParams.initialId) {
-    // Use requestAnimationFrame to ensure the DOM is fully rendered before scrolling
-    requestAnimationFrame(() => {
-      const el = node.querySelector(`#${currentParams.initialId}`);
-      if (el) {
-        el.scrollIntoView({ block: 'center', behavior: 'auto' });
-      }
-    });
+    scrollToId(currentParams.initialId);
   }
 
   return {
     update(newParams: typeof params) {
+      const previousId = currentParams.initialId;
       currentParams = newParams;
       observeElements();
+
+      if (newParams.initialId && newParams.initialId !== previousId) {
+        scrollToId(newParams.initialId);
+      }
     },
     destroy() {
       observer.disconnect();

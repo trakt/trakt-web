@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "Activer les notifications"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "L'écran est noir. Pas de film, pas de série. Juste toi et le silence."
     }
   }
 }

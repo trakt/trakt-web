@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "Meldingen inschakelen"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "Het scherm is donker. Geen films. Geen afleveringen. Alleen jij en de stilte."
     }
   }
 }

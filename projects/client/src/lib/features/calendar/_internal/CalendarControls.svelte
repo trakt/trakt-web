@@ -4,11 +4,21 @@
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { isSameWeek } from "date-fns";
   import { isToday } from "date-fns/isToday";
   import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
 
-  const { onNext, onPrevious, onReset, activeDate }: CalendarNavigationProps =
-    $props();
+  const {
+    onNext,
+    onPrevious,
+    onReset,
+    activeDate,
+    maxDate,
+  }: CalendarNavigationProps = $props();
+
+  const isNextDisabled = $derived(
+    maxDate ? isSameWeek(activeDate, maxDate) : false,
+  );
 </script>
 
 <div class="calendar-controls">
@@ -34,6 +44,7 @@
     label={m.button_label_next_calendar_period()}
     onclick={onNext}
     style="ghost"
+    disabled={isNextDisabled}
   >
     <CaretRightIcon />
   </ActionButton>

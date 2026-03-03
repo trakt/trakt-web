@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "Aktivera aviseringar"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "Skärmen är mörk. Inga filmer. Inga avsnitt. Bara du och tystnaden."
     }
   }
 }

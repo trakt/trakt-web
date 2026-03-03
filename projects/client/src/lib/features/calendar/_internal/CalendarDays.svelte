@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends { key: string }">
+  import type { SwipeDirection } from "$lib/components/gestures/models/SwipeDirection";
+  import { isSameWeek } from "date-fns";
   import type { Calendar } from "../models/Calendar";
   import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
   import CalendarSwipe from "./CalendarSwipe.svelte";
@@ -10,11 +12,23 @@
     "onReset"
   >;
 
-  const { calendar, activeDate, onNext, onPrevious }: CalendarDaysProps =
-    $props();
+  const {
+    calendar,
+    activeDate,
+    onNext,
+    onPrevious,
+    maxDate,
+  }: CalendarDaysProps = $props();
+
+  const isNextDisabled = $derived(
+    maxDate ? isSameWeek(activeDate, maxDate) : false,
+  );
+  const directions: SwipeDirection[] = $derived(
+    isNextDisabled ? ["right"] : ["left", "right"],
+  );
 </script>
 
-<CalendarSwipe onNextPeriod={onNext} onPreviousPeriod={onPrevious}>
+<CalendarSwipe onNextPeriod={onNext} onPreviousPeriod={onPrevious} {directions}>
   <div class="trakt-calendar-days">
     {#each calendar as day (dateKey(day.date))}
       <Day

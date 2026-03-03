@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "Enable Notifications"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "The screen is dark. No movies. No episodes. Just you and the silence."
     }
   }
 }

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { SwipeDirection } from "$lib/components/gestures/models/SwipeDirection";
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
   import CalendarSwipeIndicator from "./CalendarSwipeIndicator.svelte";
 
@@ -6,15 +7,17 @@
     children,
     onNextPeriod,
     onPreviousPeriod,
+    directions = ["left", "right"],
   }: {
     onNextPeriod: () => void;
     onPreviousPeriod: () => void;
+    directions?: SwipeDirection[];
   } & ChildrenProps = $props();
 </script>
 
 <SwipeX
   {children}
-  directions={["left", "right"]}
+  {directions}
   classList="trakt-calendar-swiper"
   onSwipe={(state) => {
     if (state.direction === "left") {

@@ -16,18 +16,24 @@
   } = $props();
 
   const itemCount = $derived(day.items.length);
-  const hasItems = $derived(itemCount > 0);
+
+  const scrollToDay = () => {
+    const key = dateKey(day.date);
+    const dayElement = document.getElementById(key);
+    if (!dayElement) return;
+
+    dayElement.scrollIntoView({ block: "start", behavior: "smooth" });
+  };
 </script>
 
-<svelte:element
-  this={hasItems ? "a" : "div"}
-  href={hasItems ? `#${dateKey(day.date)}` : undefined}
+<button
   class="trakt-calendar-day-button"
   aria-label={m.button_label_go_to_calendar_day({
     day: toHumanDay(day.date, getLocale()),
   })}
-  class:has-items={hasItems}
+  class:has-items={itemCount > 0}
   class:is-active={isActiveDate}
+  onclick={scrollToDay}
 >
   <span>
     {toHumanMonth(day.date, languageTag(), "short")}
@@ -36,7 +42,7 @@
   <span>{toHumanDayOfWeek(day.date, getLocale())}</span>
 
   <ContentIndicator {itemCount} />
-</svelte:element>
+</button>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -61,6 +67,8 @@
     gap: var(--gap-xs);
 
     &:not(.has-items) {
+      pointer-events: none;
+
       span {
         opacity: 0.5;
       }

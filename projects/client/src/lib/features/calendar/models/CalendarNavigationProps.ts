@@ -3,4 +3,5 @@ export type CalendarNavigationProps = {
   onNext: () => void;
   onPrevious: () => void;
   onReset: () => void;
+  maxDate?: Date;
 };

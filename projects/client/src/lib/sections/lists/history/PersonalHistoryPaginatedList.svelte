@@ -1,29 +1,45 @@
 <script lang="ts">
+  import CalendarLayout from "$lib/features/calendar/CalendarLayout.svelte";
+  import { useCalendarPeriod } from "$lib/features/calendar/context/useCalendarPeriod";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
-  import * as m from "$lib/features/i18n/messages";
-  import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import { HISTORY_UPPER_LIMIT } from "$lib/utils/constants";
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
   import { toRecentlyWatchedType } from "./_internal/toRecentlyWatchedType";
   import RecentlyWatchedItem from "./RecentlyWatchedItem.svelte";
 
   const { mode }: { mode?: DiscoverMode } = $props();
 
-  const historyType = $derived(toRecentlyWatchedType(mode));
-</script>
+  const { startDate, endDate, activeDate, next, previous, reset } =
+    useCalendarPeriod();
 
-<DrilledMediaList
-  title={m.list_title_history()}
-  id={`view-all-personal-history-list-${mode ?? "all"}`}
-  type="episode"
-  cardOrientation="landscape"
-  useList={({ limit }: { limit: number }) =>
+  const historyType = $derived(toRecentlyWatchedType(mode));
+
+  const { historyCalendar, isLoading } = $derived(
     useRecentlyWatchedList({
       type: historyType,
-      limit,
       slug: "me",
-    })}
+      range: {
+        startDate: $startDate,
+        endDate: $endDate,
+      },
+      limit: HISTORY_UPPER_LIMIT,
+    }),
+  );
+
+  const now = new Date();
+</script>
+
+<CalendarLayout
+  calendar={$historyCalendar}
+  activeDate={$activeDate}
+  isLoading={$isLoading}
+  onNext={next}
+  onPrevious={previous}
+  onReset={reset}
+  layout="list"
+  maxDate={now}
 >
   {#snippet item(media)}
     <RecentlyWatchedItem {media} style="summary" isActionable />
   {/snippet}
-</DrilledMediaList>
+</CalendarLayout>
