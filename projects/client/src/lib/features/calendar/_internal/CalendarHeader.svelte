@@ -1,11 +1,15 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
   import CalendarControls from "./CalendarControls.svelte";
+
+  const { onNext, onPrevious, onReset, activeDate }: CalendarNavigationProps =
+    $props();
 </script>
 
 <div class="calendar-header">
   <span class="title">{m.header_calendar()}</span>
-  <CalendarControls />
+  <CalendarControls {onNext} {onPrevious} {onReset} {activeDate} />
 </div>
 
 <style>
