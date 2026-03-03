@@ -34,7 +34,7 @@ export function getListUrl(props: ListUrlProps) {
         );
       }
 
-      return UrlBuilder.lists.official(props.list.id, params);
+      return UrlBuilder.lists.official(props.list.slug, params);
     }
   }
 }
