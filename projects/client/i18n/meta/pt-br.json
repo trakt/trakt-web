@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "Ativar Notificações"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "A tela está escura. Sem filmes. Sem episódios. Apenas você e o silêncio."
     }
   }
 }

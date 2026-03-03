@@ -7518,6 +7518,14 @@
         "ios",
         "web"
       ]
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "The screen is dark. No movies. No episodes. Just you and the silence.",
+      "description": "Text for the placeholder when there are no entries in a calendar period.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

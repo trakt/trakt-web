@@ -6,7 +6,7 @@
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import ActivityItem from "../components/ActivityItem.svelte";
   import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
-  import type { HistoryEntry } from "../stores/useRecentlyWatchedList";
+  import type { HistoryEntry } from "../stores/models/HistoryEntry";
 
   type RecentlyWatchedItemProps = {
     media: HistoryEntry;

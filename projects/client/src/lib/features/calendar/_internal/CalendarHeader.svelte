@@ -3,13 +3,12 @@
   import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
   import CalendarControls from "./CalendarControls.svelte";
 
-  const { onNext, onPrevious, onReset, activeDate }: CalendarNavigationProps =
-    $props();
+  const navigationProps: CalendarNavigationProps = $props();
 </script>
 
 <div class="calendar-header">
   <span class="title">{m.header_calendar()}</span>
-  <CalendarControls {onNext} {onPrevious} {onReset} {activeDate} />
+  <CalendarControls {...navigationProps} />
 </div>
 
 <style>

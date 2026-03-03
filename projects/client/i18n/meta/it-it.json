@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "Attiva Notifiche"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "Lo schermo è scuro. Niente film. Niente episodi. Solo tu e il silenzio."
     }
   }
 }

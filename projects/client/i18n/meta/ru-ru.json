@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "Включить уведомления"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "Экран пуст. Ни фильмов, ни серий. Только вы и тишина."
     }
   }
 }

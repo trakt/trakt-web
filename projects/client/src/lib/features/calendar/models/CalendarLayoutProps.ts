@@ -7,4 +7,5 @@ export type CalendarLayoutProps<T> = {
   isLoading: boolean;
   item: Snippet<[T]>;
   layout?: 'list' | 'grid';
+  empty?: Snippet;
 } & CalendarNavigationProps;

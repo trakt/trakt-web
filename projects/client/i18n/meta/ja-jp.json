@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "通知を有効にする"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "画面は暗いまま。映画もドラマもありません。あなたと静寂だけがそこにあります。"
     }
   }
 }

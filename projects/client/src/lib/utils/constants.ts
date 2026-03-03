@@ -65,6 +65,9 @@ export const COMMENTS_DRILL_SIZE = 25;
 export const DEFAULT_SEARCH_LIMIT = 50;
 export const PAGE_UPPER_LIMIT = 3;
 
+// FIXME: reduce limit when calendar layouts are paginated
+export const HISTORY_UPPER_LIMIT = 250;
+
 export const DEFAULT_LISTS_PAGE_SIZE = 5;
 export const DEFAULT_LISTS_DRILL_SIZE = 10;
 

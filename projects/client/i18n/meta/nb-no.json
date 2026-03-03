@@ -2744,6 +2744,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "Aktiver varslinger"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "Skjermen er mørk. Ingen filmer. Ingen episoder. Bare deg og stillheten."
     }
   }
 }

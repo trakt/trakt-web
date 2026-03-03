@@ -2743,6 +2743,9 @@
     },
     "text_settings_enable_notifications": {
       "default": "启用通知"
+    },
+    "text_calendar_placeholder_empty_period": {
+      "default": "屏幕是黑的。没有电影。没有剧集。只有你和寂静。"
     }
   }
 }

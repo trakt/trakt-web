@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { SocialActivity } from "$lib/requests/models/SocialActivity";
   import type { Snippet } from "svelte";
-  import type { HistoryEntry } from "../stores/useRecentlyWatchedList";
+  import type { HistoryEntry } from "../stores/models/HistoryEntry";
   import EpisodeItem from "./EpisodeItem.svelte";
   import MediaItem from "./MediaItem.svelte";
 
