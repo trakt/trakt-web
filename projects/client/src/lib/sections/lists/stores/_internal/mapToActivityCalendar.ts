@@ -33,7 +33,9 @@ function createHistoryCalendar(
 
       return {
         date,
-        items,
+        items: items.toSorted((a, b) =>
+          a.watchedAt.getTime() - b.watchedAt.getTime()
+        ),
       };
     })
     .sort((a, b) => a.date.getTime() - b.date.getTime());
