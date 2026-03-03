@@ -11,9 +11,10 @@ import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { isSameDay } from 'date-fns/isSameDay';
 import { combineLatest, map, type Observable } from 'rxjs';
 import type { DiscoverMode } from '../../discover/models/DiscoverMode.ts';
-import type { CalendarEntry } from '../models/CalendarEntry.ts';
+import type { Calendar } from '../models/Calendar.ts';
 
-type CalendarItems = Array<MediaEntry | UpcomingEpisodeEntry>;
+export type CalendarItem = UpcomingEpisodeEntry | MediaEntry;
+type CalendarItems = CalendarItem[];
 
 type UseCalendarParams = {
   start: Date;
@@ -23,7 +24,7 @@ type UseCalendarParams = {
 
 type CalendarResult = {
   isLoading: Observable<boolean>;
-  calendar: Observable<CalendarEntry[]>;
+  calendar: Observable<Calendar<CalendarItem>>;
 };
 
 function typeToQueries({ start, days, type }: UseCalendarParams) {
