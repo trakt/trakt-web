@@ -1,12 +1,9 @@
 import type {
-  WatchedMovie,
-  WatchedShow,
+  UserHistory,
 } from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
 
-export const UserHistoryMappedMock: {
-  movies: Map<number, WatchedMovie>;
-  shows: Map<number, WatchedShow>;
-} = {
+export const UserHistoryMappedMock: UserHistory = {
+  'lastWatchedAt': new Date('2024-12-27T16:28:32.000Z'),
   'movies': new Map([
     [916302, {
       'id': 916302,
