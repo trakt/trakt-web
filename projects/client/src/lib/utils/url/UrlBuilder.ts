@@ -185,8 +185,8 @@ export const UrlBuilder = {
     me: (library: string) => `/users/me/library?library=${library}`,
   },
   lists: {
-    official: (id: number, params: Record<string, string | number> = {}) =>
-      `/lists/official/${id}${
+    official: (slug: string, params: Record<string, string | number> = {}) =>
+      `/lists/official/${slug}${
         buildParamString({ ...sanitizeParams(params), type: params.type })
       }`,
     user: (user: string, params?: UrlBuilderParams) => {
