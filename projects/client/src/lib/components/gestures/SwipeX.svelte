@@ -3,19 +3,18 @@
   import { writable } from "$lib/utils/store/WritableSubject";
   import { DragGesture } from "@use-gesture/vanilla";
   import type { Snippet } from "svelte";
+  import type { SwipeDirection } from "./models/SwipeDirection";
 
   type SwipeXState = {
     progress: number;
-    direction: "left" | "right" | "inactive";
+    direction: SwipeDirection | "inactive";
     isActive: boolean;
   };
-
-  type Direction = "left" | "right";
 
   type SwipeXProps = {
     classList: string;
     indicator: Snippet<[SwipeXState]>;
-    directions: Direction[];
+    directions: SwipeDirection[];
     onSwipe: (state: SwipeXState) => void;
   };
 
