@@ -200,6 +200,13 @@
   --background-vip-profile-details: radial-gradient(50% 40% at 50% 0%,
     var(--red-20) 0%,
     var(--shade-50) 100%);
+
+  /*
+   * Tab view
+   */
+  --color-tablist-background: var(--shade-100);
+  --color-tab-background: var(--shade-10);
+  --color-tab-hover-background: var(--shade-70);
 }
 
 // Define theme variables for dark mode
@@ -398,6 +405,13 @@
   --background-vip-profile-details: radial-gradient(50% 40% at 50% 0%,
       var(--red-950) 0%,
       var(--red-1000) 100%);
+
+  /*
+   * Tab view
+   */
+  --color-tablist-background: var(--shade-800);
+  --color-tab-background: var(--shade-500);
+  --color-tab-hover-background: var(--shade-700);
 }
 
 // Apply themes to selectors
