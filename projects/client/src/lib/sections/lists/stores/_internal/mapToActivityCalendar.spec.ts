@@ -54,6 +54,17 @@ describe('mapToActivityCalendar', () => {
     expect(march2?.items).toEqual([entry1, entry2]);
   });
 
+  it('should sort items within the same day by the watched at timestamp', () => {
+    const startDate = new Date('2024-03-01');
+    const later = createHistoryEntry(new Date('2024-03-02T20:00:00'));
+    const earlier = createHistoryEntry(new Date('2024-03-02T10:00:00'));
+
+    const result = mapToActivityCalendar([later, earlier], startDate);
+
+    const day = result.find((day) => day.date.getDate() === 2);
+    expect(day?.items).toEqual([earlier, later]);
+  });
+
   it('should not include items outside the 7-day range', () => {
     const startDate = new Date('2024-03-01');
     const outsideEntry = createHistoryEntry(new Date('2024-03-10'));
