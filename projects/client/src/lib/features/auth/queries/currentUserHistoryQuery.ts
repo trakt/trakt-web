@@ -104,6 +104,7 @@ const currentUserWatchedShowsRequest = ({ fetch }: ApiParams) =>
 const UserHistorySchema = z.object({
   movies: z.map(z.number(), WatchMovieSchema),
   shows: z.map(z.number(), WatchedShowSchema),
+  lastWatchedAt: z.date().nullable(),
 });
 export type UserHistory = z.infer<typeof UserHistorySchema>;
 
@@ -120,18 +121,27 @@ export const currentUserHistoryQuery = defineQuery({
     InvalidateAction.MarkAsWatched('episode'),
   ],
   dependencies: [],
-  mapper: ([moviesResponse, showsResponse]) => ({
-    movies: toMap(
+  mapper: ([moviesResponse, showsResponse]) => {
+    const movies = toMap(
       Object.entries(moviesResponse.body),
       mapWatchedMovieResponse,
       (entry) => entry.id,
-    ),
-    shows: toMap(
+    );
+    const shows = toMap(
       showsResponse.body,
       mapWatchedShowResponse,
       (entry) => entry.id,
-    ),
-  }),
+    );
+
+    const lastWatchedAt = [...movies.values(), ...shows.values()].reduce<
+      Date | null
+    >(
+      (max, { watchedAt }) => max === null || watchedAt > max ? watchedAt : max,
+      null,
+    );
+
+    return { movies, shows, lastWatchedAt };
+  },
   schema: UserHistorySchema,
   ttl: Infinity,
 });
