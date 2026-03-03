@@ -69,7 +69,10 @@
   .trakt-grid-list-container {
     contain: layout;
 
-    overflow-x: hidden;
+    /* Clips horizontally the same way as hidden,
+    but without affecting overflow-y */
+    overflow-x: clip;
+
     display: flex;
     flex-direction: column;
 
