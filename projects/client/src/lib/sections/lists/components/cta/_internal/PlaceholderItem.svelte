@@ -93,13 +93,4 @@
       align-items: flex-start;
     }
   }
-
-  .trakt-cta-icon {
-    display: flex;
-    align-items: center;
-
-    opacity: 0.8;
-
-    z-index: var(--layer-raised);
-  }
 </style>
