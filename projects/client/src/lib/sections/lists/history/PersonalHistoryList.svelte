@@ -1,14 +1,17 @@
 <script lang="ts">
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import {
+    drawerNavigation,
+    Drawers,
+  } from "$lib/features/drawers/drawerNavigation";
   import * as m from "$lib/features/i18n/messages";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
   import { toRecentlyWatchedType } from "./_internal/toRecentlyWatchedType";
   import RecentlyWatchedItem from "./RecentlyWatchedItem.svelte";
 
-  const { mode }: { mode?: DiscoverMode } = $props();
+  const { mode }: { mode: DiscoverMode } = $props();
 
   const historyType = $derived(toRecentlyWatchedType(mode));
 
@@ -16,6 +19,8 @@
     type: "personal-activity" as const,
     mediaType: mode === "media" ? undefined : mode,
   });
+
+  const { buildDrawerLink } = drawerNavigation();
 </script>
 
 <DrillableMediaList
@@ -30,7 +35,7 @@
     })}
   drilldownLabel={m.button_label_view_all_history()}
   source={{ id: "personal-history" }}
-  urlBuilder={UrlBuilder.history.all}
+  urlBuilder={() => buildDrawerLink(Drawers.History)}
 >
   {#snippet item(media)}
     <RecentlyWatchedItem {media} isActionable />

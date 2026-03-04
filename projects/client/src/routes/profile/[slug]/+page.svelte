@@ -1,5 +1,6 @@
 <script lang="ts">
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
+  import CalendarDrawer from "$lib/features/drawers/CalendarDrawer.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
@@ -39,4 +40,6 @@
       <Profile profile={$user} slug={$user.slug ?? ""} />
     {/if}
   {/if}
+
+  <CalendarDrawer />
 </TraktPage>

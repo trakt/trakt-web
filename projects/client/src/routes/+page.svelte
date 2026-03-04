@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
+  import CalendarDrawer from "$lib/features/drawers/CalendarDrawer.svelte";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -50,6 +51,8 @@
   <UpcomingList />
   <PersonalHistoryList mode={$mode} />
   <ActivityList />
+
+  <CalendarDrawer />
 </TraktPage>
 
 <RenderFor audience="public">

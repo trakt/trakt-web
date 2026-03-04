@@ -1,15 +1,14 @@
 <script lang="ts">
   import CalendarLayout from "$lib/features/calendar/CalendarLayout.svelte";
   import { useCalendarPeriod } from "$lib/features/calendar/context/useCalendarPeriod";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import { HISTORY_UPPER_LIMIT } from "$lib/utils/constants";
   import SocialActivityItem from "./_internal/SocialActivityItem.svelte";
   import { useActivityList } from "./_internal/useActivityList";
 
-  type RecommendedListProps = { title: string };
+  const { mode }: { mode: DiscoverMode } = $props();
 
-  const { mode } = useDiscover();
   const { filterMap } = useFilter();
 
   const { startDate, endDate, activeDate, next, previous, reset } =
@@ -19,7 +18,7 @@
 
   const { activityCalendar, isLoading } = $derived(
     useActivityList({
-      type: $mode,
+      type: mode,
       filter: $filterMap,
       range: {
         startDate: $startDate,

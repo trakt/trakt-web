@@ -87,14 +87,15 @@
 
     gap: var(--gap-s);
 
-    margin-left: var(--layout-distance-side);
-    margin-right: var(--layout-distance-side);
+    /* margin-left: var(--layout-distance-side);
+    margin-right: var(--layout-distance-side); */
 
     flex-grow: 1;
   }
 
   .calendar-navigation {
-    --sticky-top: calc(env(safe-area-inset-top, 0) + var(--gap-m));
+    /* --sticky-top: calc(env(safe-area-inset-top, 0) + var(--gap-m)); */
+    --sticky-top: 0;
 
     box-shadow: var(--shadow-raised);
 
@@ -121,7 +122,7 @@
     backdrop-filter: blur(var(--ni-8));
 
     @include for-mobile {
-      --sticky-top: calc(env(safe-area-inset-top, 0) + var(--ni-4));
+      /* --sticky-top: calc(env(safe-area-inset-top, 0) + var(--ni-4)); */
 
       :global(.calendar-header) {
         transition: height var(--transition-increment) ease-in-out;

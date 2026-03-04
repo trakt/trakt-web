@@ -12,6 +12,8 @@
 
   const { mode } = useDiscover();
   const { history } = useUser();
+
+  // TODO redirect these pages
 </script>
 
 <TraktPage

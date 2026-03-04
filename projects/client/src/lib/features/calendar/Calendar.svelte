@@ -1,15 +1,16 @@
 <script lang="ts">
-  import { useDiscover } from "$lib/features/discover/useDiscover";
   import { getDaysDifference } from "$lib/utils/date/getDaysDifference";
+  import type { DiscoverMode } from "../discover/models/DiscoverMode";
   import NoItems from "./_internal/NoItems.svelte";
   import { useCalendar } from "./_internal/useCalendar";
   import CalendarItem from "./CalendarItem.svelte";
   import CalendarLayout from "./CalendarLayout.svelte";
   import { useCalendarPeriod } from "./context/useCalendarPeriod";
 
+  const { mode }: { mode: DiscoverMode } = $props();
+
   const { startDate, endDate, next, previous, reset, activeDate } =
     useCalendarPeriod();
-  const { mode } = useDiscover();
 
   const days = $derived(getDaysDifference($startDate, $endDate));
 
@@ -17,7 +18,7 @@
     useCalendar({
       start: $startDate,
       days,
-      type: $mode,
+      type: mode,
     }),
   );
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
+  import SummaryDrawer from "$lib/features/drawers/SummaryDrawer.svelte";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
@@ -19,7 +19,6 @@
   import CommunitySentiment from "./components/sentiment/Sentiment.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
-  import SummaryDrawer from "./SummaryDrawer.svelte";
 
   const {
     media,

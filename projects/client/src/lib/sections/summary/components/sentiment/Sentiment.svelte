@@ -1,13 +1,13 @@
 <script lang="ts">
   import type { ListVariant } from "$lib/components/lists/section-list/ListVariant";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import {
+    drawerNavigation,
+    Drawers,
+  } from "$lib/features/drawers/drawerNavigation";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
-  import {
-    Drawers,
-    summaryDrawerNavigation,
-  } from "../../_internal/summaryDrawerNavigation";
   import SentimentCard from "./_internal/SentimentCard.svelte";
 
   const {
@@ -33,7 +33,7 @@
       : "var(--height-sentiment-list)",
   );
 
-  const { buildDrawerLink } = summaryDrawerNavigation();
+  const { buildDrawerLink } = drawerNavigation();
 </script>
 
 {#if sentiment}

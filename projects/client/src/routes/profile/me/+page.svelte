@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import CalendarDrawer from "$lib/features/drawers/CalendarDrawer.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
@@ -26,4 +27,6 @@
   {#if $user !== null}
     <Profile profile={$user} slug="me" />
   {/if}
+
+  <CalendarDrawer />
 </TraktPage>

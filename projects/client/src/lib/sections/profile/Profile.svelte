@@ -21,7 +21,7 @@
 </ProfileContainer>
 
 {#if $isMe}
-  <PersonalHistoryList />
+  <PersonalHistoryList mode="media" />
 {:else}
   <RecentlyWatchedList title={m.list_title_history()} {slug} />
 {/if}

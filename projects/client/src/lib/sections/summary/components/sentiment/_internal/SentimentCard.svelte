@@ -1,11 +1,11 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import {
+    drawerNavigation,
     Drawers,
-    summaryDrawerNavigation,
-  } from "../../../_internal/summaryDrawerNavigation.ts";
+  } from "$lib/features/drawers/drawerNavigation.ts";
+  import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import { calculateAspectsLimit } from "./calculateAspectsLimit.ts";
   import SentimentAspects from "./SentimentAspects.svelte";
 
@@ -22,7 +22,7 @@
       : "var(--height-sentiment-card)",
   );
 
-  const { buildDrawerLink } = summaryDrawerNavigation();
+  const { buildDrawerLink } = drawerNavigation();
 
   const pros = $derived(sentiment.aspect.pros.slice(0, aspectsLimit));
   const cons = $derived(sentiment.aspect.cons.slice(0, aspectsLimit));
