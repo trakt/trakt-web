@@ -1,25 +1,32 @@
 import type { Calendar } from '$lib/features/calendar/models/Calendar.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
-import type { HistoryEntry } from '../models/HistoryEntry.ts';
 
 const DAYS_IN_WEEK = 7;
 
-type ActivityEntry = HistoryEntry;
+type ActivityEntry<T> = T & ({ watchedAt: Date } | { activityAt: Date });
 
-function groupHistoryByDay(items: ActivityEntry[]) {
+function getActivityTime<T>(entry: ActivityEntry<T>): Date {
+  if ('watchedAt' in entry) {
+    return entry.watchedAt;
+  }
+
+  return entry.activityAt;
+}
+
+function groupHistoryByDay<T>(items: ActivityEntry<T>[]) {
   return items.reduce((groups, item) => {
-    const key = getDayKey(item.watchedAt);
+    const key = getDayKey(getActivityTime(item));
     const group = groups.get(key) ?? [];
 
     group.push(item);
     groups.set(key, group);
 
     return groups;
-  }, new Map<string, ActivityEntry[]>());
+  }, new Map<string, ActivityEntry<T>[]>());
 }
 
-function createHistoryCalendar(
-  groups: Map<string, ActivityEntry[]>,
+function createHistoryCalendar<T>(
+  groups: Map<string, ActivityEntry<T>[]>,
   startDate: Date,
 ) {
   if (!startDate) return [];
@@ -34,17 +41,17 @@ function createHistoryCalendar(
       return {
         date,
         items: items.toSorted((a, b) =>
-          a.watchedAt.getTime() - b.watchedAt.getTime()
+          getActivityTime(a).getTime() - getActivityTime(b).getTime()
         ),
       };
     })
     .sort((a, b) => a.date.getTime() - b.date.getTime());
 }
 
-export function mapToActivityCalendar(
-  items: ActivityEntry[],
+export function mapToActivityCalendar<T>(
+  items: ActivityEntry<T>[],
   startDate?: Date,
-): Calendar<ActivityEntry> {
+): Calendar<ActivityEntry<T>> {
   if (!startDate) return [];
 
   const days = groupHistoryByDay(items);
