@@ -222,7 +222,7 @@ export const UrlBuilder = {
     status: () => 'https://status.trakt.tv',
     privacy: () => 'https://trakt.tv/privacy',
     support: (username?: string) => ogSupportFactory(username),
-    forums: () => 'https://forums.trakt.tv/c/trakt/trakt-lite/31',
+    forums: () => 'https://forums.trakt.tv/c/trakt',
     widgets: {
       yir: (slug: string, year: string) =>
         `https://widgets.trakt.tv/users/${slug}/yir.jpg?year=${year}`,
