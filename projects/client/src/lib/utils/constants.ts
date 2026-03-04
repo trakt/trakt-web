@@ -57,7 +57,6 @@ export const NOOP_FN = () => {
 };
 
 export const DEFAULT_PAGE_SIZE = 10;
-export const DEFAULT_ACTIVITY_PAGE_SIZE = 100;
 
 export const DEFAULT_DRILL_SIZE = 100;
 export const RECOMMENDED_UPPER_LIMIT = DEFAULT_DRILL_SIZE;

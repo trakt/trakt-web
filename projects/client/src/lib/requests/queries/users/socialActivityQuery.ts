@@ -19,7 +19,10 @@ import { coalesceSocialActivities } from '../../_internal/coalesceSocialActiviti
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
 
-type SocialActivityParams = PaginationParams & ApiParams & FilterParams;
+type SocialActivityParams = PaginationParams & ApiParams & FilterParams & {
+  startDate?: Date;
+  endDate?: Date;
+};
 
 function mapToSocialActivity(
   response: SocialActivityResponse & { user_rating?: number | null },
@@ -49,9 +52,13 @@ function mapToSocialActivity(
 }
 
 const socialActivityRequest = (
-  { fetch, limit, page, filter }: SocialActivityParams,
-) =>
-  api({ fetch })
+  { fetch, limit, page, filter, startDate, endDate }: SocialActivityParams,
+) => {
+  const rangeParams = startDate && endDate
+    ? { start_at: startDate.toISOString(), end_at: endDate.toISOString() }
+    : {};
+
+  return api({ fetch })
     .users
     .activities({
       params: {
@@ -63,9 +70,11 @@ const socialActivityRequest = (
         extended: 'full,images,rating' as 'full,images',
         limit,
         page,
+        ...rangeParams,
         ...filter,
       },
     });
+};
 
 export const socialActivityQuery = defineInfiniteQuery({
   key: 'socialActivity',
@@ -75,11 +84,12 @@ export const socialActivityQuery = defineInfiniteQuery({
   ) => [
     params.limit,
     params.page,
+    params.startDate,
+    params.endDate,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: socialActivityRequest,
   mapper: (response) => {
-    // FIXME: automatically fetch more if coalesced
     const activities = response.body.map(mapToSocialActivity);
     return {
       entries: coalesceSocialActivities(activities),

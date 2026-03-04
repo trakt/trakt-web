@@ -10,7 +10,7 @@ import {
   showActivityHistoryQuery,
 } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
-import { DEFAULT_ACTIVITY_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { map } from 'rxjs';
 import { mapToActivityCalendar } from './_internal/mapToActivityCalendar.ts';
 import type { HistoryEntry } from './models/HistoryEntry.ts';
@@ -34,7 +34,7 @@ function typeToQuery(
   { type, id, slug, range, limit }: RecentlyWatchedListStoreProps,
 ) {
   const params = {
-    limit: limit ?? DEFAULT_ACTIVITY_PAGE_SIZE,
+    limit: limit ?? DEFAULT_PAGE_SIZE,
     slug: slug ?? 'me',
     id,
     startDate: range?.startDate,
