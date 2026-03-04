@@ -2635,6 +2635,46 @@
         "android"
       ]
     },
+    "text_airs_day_time_network": {
+      "default": "{day} at {time} on {network}",
+      "description": "Formatted text showing the day, time, and network a show airs on.",
+      "exclude": [
+        "android"
+      ],
+      "variables": {
+        "day": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        },
+        "network": {
+          "type": "string"
+        }
+      }
+    },
+    "text_airs_day_time": {
+      "default": "{day} at {time}",
+      "description": "Formatted text showing the day and time a show airs.",
+      "exclude": [
+        "android"
+      ],
+      "variables": {
+        "day": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "header_network": {
+      "default": "Network",
+      "description": "Header label for the network a show airs on.",
+      "exclude": [
+        "android"
+      ]
+    },
     "warning_prompt_drop_show": {
       "default": "Are you sure you want to drop \"{title}\" show? This will remove it from your Continue Watching list.",
       "description": "Warning prompt shown when a user tries to drop a show.",

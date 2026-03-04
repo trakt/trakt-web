@@ -1,12 +1,16 @@
 <script lang="ts">
   import { TestId } from "$e2e/models/TestId";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
+  import { languageTag } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { toShowAirs } from "$lib/utils/formatting/date/toShowAirs.ts";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { mapToSummarySubtitle } from "./mapToSummarySubtitle";
   import ResponsiveTitle from "./ResponsiveTitle.svelte";
   import type { SummaryTitleProps } from "./SummaryTitleProps";
+
+  const ENDED_STATUSES = ["ended", "canceled"];
 
   const { title, status, crew, ...target }: SummaryTitleProps = $props();
 
@@ -33,6 +37,26 @@
       }
     );
   });
+
+  const airsText = $derived.by(() => {
+    if (target.type !== "show") return;
+
+    const { airs, network, status: showStatus } = target.media;
+    if (!airs || ENDED_STATUSES.includes(showStatus)) return;
+
+    const local = toShowAirs(airs, languageTag());
+    if (!local) return;
+
+    const label = target.media.airDate > new Date()
+      ? m.header_expected_premiere()
+      : m.header_airs();
+
+    const schedule = network
+      ? m.text_airs_day_time_network({ ...local, network })
+      : m.text_airs_day_time(local);
+
+    return `${label} ${schedule}`;
+  });
 </script>
 
 <div class="trakt-summary-title" data-testid={TestId.SummaryMediaTitle}>
@@ -55,6 +79,12 @@
   {#if status}
     <p class="capitalize bold trakt-media-status">
       {toTranslatedStatus(status)}
+    </p>
+  {/if}
+
+  {#if airsText}
+    <p class="small secondary trakt-media-airs">
+      {airsText}
     </p>
   {/if}
 </div>

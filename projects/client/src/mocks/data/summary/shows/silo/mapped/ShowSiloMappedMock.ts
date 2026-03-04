@@ -60,4 +60,10 @@ export const ShowSiloMappedMock: ShowEntry = {
   'episode': {
     'count': 15,
   },
+  'airs': {
+    'day': 'Thursday',
+    'time': '21:00',
+    'timezone': 'America/New_York',
+  },
+  'network': 'Apple TV+',
 };
