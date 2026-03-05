@@ -6,6 +6,15 @@
 
 <a href="https://github.com/trakt/trakt-web/actions/workflows/ci_cd.yml"><img src="https://github.com/trakt/trakt-web/actions/workflows/ci_cd.yml/badge.svg" /></a>
 
+---
+
+**Contributions are welcome!** Whether you want to fix a bug, improve a
+translation, or build something new - PRs are open and encouraged. No need to
+ask for permission first, just dive in. See
+[CONTRIBUTING.md](.github/CONTRIBUTING.md) for the details.
+
+---
+
 ## Project Structure
 
 This [workspace](https://docs.deno.com/runtime/fundamentals/workspaces/) is
@@ -45,7 +54,8 @@ Want to contribute to Trakt Web? Great! Here's how to get set up:
    - `http://localhost:4173/callback`
 1. Use the Client ID and Client Secret in your development environment.
 
-> **Note:** Port 5173 is for development mode, while port 4173 is for production preview.
+> **Note:** Port 5173 is for development mode, while port 4173 is for production
+> preview.
 
 ## Getting Started
 
