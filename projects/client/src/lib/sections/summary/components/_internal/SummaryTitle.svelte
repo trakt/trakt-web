@@ -4,11 +4,12 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { mapToSummaryStatus } from "./mapToSummaryStatus";
   import { mapToSummarySubtitle } from "./mapToSummarySubtitle";
   import ResponsiveTitle from "./ResponsiveTitle.svelte";
   import type { SummaryTitleProps } from "./SummaryTitleProps";
 
-  const { title, status, crew, ...target }: SummaryTitleProps = $props();
+  const { title, crew, ...target }: SummaryTitleProps = $props();
 
   const subtitle = $derived(mapToSummarySubtitle(target));
 
@@ -32,6 +33,15 @@
         key: director.key,
       }
     );
+  });
+
+  const status = $derived.by(() => {
+    if (target.type === "episode") {
+      return;
+    }
+
+    const now = new Date();
+    return mapToSummaryStatus({ media: target.media, now });
   });
 </script>
 

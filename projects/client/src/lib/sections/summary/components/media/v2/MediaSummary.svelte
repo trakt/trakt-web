@@ -37,17 +37,6 @@
   const { watchCount } = $derived(useWatchCount(target));
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
 
-  const status = $derived.by(() => {
-    if (media.status !== "released") {
-      return media.status;
-    }
-
-    const oneMonthAgo = new Date();
-    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-
-    return media.airDate > oneMonthAgo ? media.status : undefined;
-  });
-
   const { isRateable } = $derived(useIsRateable(target));
 </script>
 
@@ -80,7 +69,7 @@
 
   {#snippet meta()}
     <RatingList ratings={$ratings} entry={media} />
-    <SummaryTitle {title} {status} {crew} {...target} />
+    <SummaryTitle {title} {crew} {...target} />
 
     <RenderFor audience="authenticated">
       <MediaActions {media} {title} />
