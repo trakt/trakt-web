@@ -4,7 +4,7 @@ import { coerceTheme } from './coerceTheme.ts';
 
 describe('util: coerceTheme', () => {
   it('should return the default theme', () => {
-    expect(coerceTheme(undefined)).toBe(Theme.Dark);
+    expect(coerceTheme(undefined)).toBe(Theme.System);
   });
 
   it('should return the system theme', () => {
