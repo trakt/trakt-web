@@ -1,3 +1,4 @@
+import { afterNavigate } from '$app/navigation';
 import { createUnderlay } from '$lib/features/portal/_internal/createUnderlay.ts';
 import { onMount } from 'svelte';
 
@@ -25,6 +26,14 @@ export function useDrawerPortal({ hasAutoClose, onClose }: DrawerPortalProps) {
         newUnderlay.remove();
         element.remove();
       };
+    });
+
+    afterNavigate((navigation) => {
+      const isDifferentRoute =
+        navigation.from?.route.id !== navigation.to?.route.id;
+      if (hasAutoClose && isDifferentRoute) {
+        onClose();
+      }
     });
   };
 
