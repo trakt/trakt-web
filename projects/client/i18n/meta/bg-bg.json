@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "Екранът е тъмен. Няма филми. Няма епизоди. Само ти и тишината."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Превключването към обикновени филтри ще нулира всички ваши текущи настройки. Сигурни ли сте, че искате да продължите?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Прости"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Сложни"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Продължителност от {min} до {max} минути."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Издаден между {min} и {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Рейтинг от {min} до {max}"
     }
   }
 }

@@ -6,6 +6,7 @@
     FilterKey,
     type RatingsFilter,
   } from "$lib/features/filters/models/Filter";
+  import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
@@ -41,6 +42,7 @@
     gotoFilteredState({
       key: filter.key,
       value: ratingOption?.value ?? null,
+      mode: FilterMode.Simple,
     });
   };
 </script>

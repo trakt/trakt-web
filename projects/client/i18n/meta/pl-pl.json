@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "Ekran jest ciemny. Żadnych filmów. Żadnych odcinków. Tylko Ty i cisza."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Przełączenie na proste filtry zresetuje wszystkie Twoje obecne ustawienia. Czy na pewno chcesz kontynuować?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Proste"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Złożone"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Czas trwania od {min} do {max} minut."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Wydane w latach {min} – {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Ocena od {min} do {max}"
     }
   }
 }

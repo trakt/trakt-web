@@ -2746,6 +2746,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "屏幕是黑的。没有电影。没有剧集。只有你和寂静。"
+    },
+    "warning_prompt_simple_filters": {
+      "default": "切换到简单筛选将重置您当前的所有筛选条件。确定要继续吗？"
+    },
+    "tab_text_simple_filters": {
+      "default": "简单"
+    },
+    "tab_text_advanced_filters": {
+      "default": "高级"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "时长为 {min} 至 {max} 分钟。"
+    },
+    "advanced_filter_label_release_year": {
+      "default": "上映年份：{min} 至 {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "评分范围：{min} 至 {max}"
     }
   }
 }

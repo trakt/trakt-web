@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "Skjermen er mørk. Ingen filmer. Ingen episoder. Bare deg og stillheten."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Ved å bytte til enkle filtre vil alle dine nåværende filtre bli tilbakestilt. Er du sikker på at du vil fortsette?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Enkel"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Avansert"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Varighet fra {min} til {max} minutter."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Utgitt mellom {min} og {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Vurdering fra {min} til {max}"
     }
   }
 }

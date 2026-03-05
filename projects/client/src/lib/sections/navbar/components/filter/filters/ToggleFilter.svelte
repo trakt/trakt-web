@@ -1,6 +1,7 @@
 <script lang="ts">
   import Switch from "$lib/components/toggles/Switch.svelte";
-  import type { ToggleFilter } from "$lib/features/filters/models/Filter";
+  import { type ToggleFilter } from "$lib/features/filters/models/Filter";
+  import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import Filter from "./_internal/Filter.svelte";
@@ -18,6 +19,7 @@
     gotoFilteredState({
       key: filter.key,
       value: toggledValue === filter.defaultValue ? null : toggledValue,
+      mode: FilterMode.Simple,
     });
   };
 </script>

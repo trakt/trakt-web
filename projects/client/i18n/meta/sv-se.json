@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "Skärmen är mörk. Inga filmer. Inga avsnitt. Bara du och tystnaden."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Om du byter till enkla filter nollställs alla dina nuvarande filter. Är du säker på att du vill fortsätta?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Enkla"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Avancerade"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Längd från {min} till {max} minuter."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Släppt mellan {min} och {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Betyg från {min} till {max}"
     }
   }
 }

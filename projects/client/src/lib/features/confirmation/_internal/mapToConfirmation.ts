@@ -107,5 +107,11 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_log_out(),
         operation: 'destructive',
       };
+    case ConfirmationType.SimpleFilters:
+      return {
+        buttonText: m.button_text_reset_all_filters(),
+        message: m.warning_prompt_simple_filters(),
+        operation: 'destructive',
+      };
   }
 }

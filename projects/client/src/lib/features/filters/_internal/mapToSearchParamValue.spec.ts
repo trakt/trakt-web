@@ -58,6 +58,9 @@ describe('mapToSearchParamValue', () => {
         { label: 'Action', value: 'action' },
         { label: 'Comedy', value: 'comedy' },
       ],
+      advanced: {
+        type: 'multi-select',
+      },
     };
 
     it('should return mapped value when mapper exists', () => {
@@ -103,6 +106,11 @@ describe('mapToSearchParamValue', () => {
         { rating: highStarRating, value: '81-100' },
         { rating: lowStarRating, value: '0-20' },
       ],
+      advanced: {
+        type: 'slider',
+        range: { min: 0, max: 100 },
+        formatLabel: () => '',
+      },
     };
 
     it('should return original value for ratings filter', () => {

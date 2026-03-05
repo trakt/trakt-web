@@ -7526,6 +7526,78 @@
         "android",
         "ios"
       ]
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Switching to simple filters will reset all your current filters. Are you sure you want to proceed?",
+      "description": "Text for the warning prompt that appears when a user attempts to switch to simple filters, which would reset all their current filters.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tab_text_simple_filters": {
+      "default": "Simple",
+      "description": "Text for the tab that allows users to switch to simple filters.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tab_text_advanced_filters": {
+      "default": "Advanced",
+      "description": "Text for the tab that allows users to switch to advanced filters.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Runtime of {min} to {max} minutes.",
+      "description": "Label for the 'runtime' filter which filters items that have runtimes falling in the range.",
+      "variables": {
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Released in {min} to {max}",
+      "description": "Label for the 'release year' filter which filters items that have release years falling in the range.",
+      "variables": {
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Rating of {min} to {max}",
+      "description": "Label for the 'ratings' filter which filters items that have ratings falling in the range.",
+      "variables": {
+        "min": {
+          "type": "string"
+        },
+        "max": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

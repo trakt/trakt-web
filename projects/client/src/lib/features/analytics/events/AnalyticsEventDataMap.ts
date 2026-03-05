@@ -5,6 +5,7 @@ import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
 import type { DiscoverMode } from '../../discover/models/DiscoverMode.ts';
+import type { FilterMode } from '../../filters/models/FilterMode.ts';
 import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
 type SourceType = { source: string };
@@ -13,7 +14,7 @@ type ActionType = { action: 'add' | 'remove' };
 type RatingType = { action: 'added' | 'changed'; rating: number } | {
   action: 'removed';
 };
-type FilterType = { id: string; action: 'set' | 'reset' };
+type FilterType = { id: string; action: 'set' | 'reset'; mode: FilterMode };
 type FiltersType = { action: 'save' | 'reset' };
 type CheckInType = { type: 'episode' | 'movie'; action: 'start' | 'stop' };
 type FollowType = { action: 'follow' | 'unfollow' };

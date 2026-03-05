@@ -1,72 +1,112 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
+  import { page } from "$app/state";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import TabView from "$lib/components/tabs/TabView.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
+  import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import { useStoredFilters } from "$lib/features/filters/useStoredFilters.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import ResetAllButton from "./_internal/ResetAllButton.svelte";
-  import SaveFiltersButton from "./_internal/SaveFiltersButton.svelte";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import FilterGroup from "./filters/_internal/FilterGroup.svelte";
-  import ListFilter from "./filters/ListFilter.svelte";
-  import RatingsFilter from "./filters/RatingsFilter.svelte";
+  import AdvancedFilters from "./filters/AdvancedFilters.svelte";
+  import FiltersPopupMenu from "./filters/FiltersPopupMenu.svelte";
+  import SimpleFilters from "./filters/SimpleFilters.svelte";
   import ToggleFilter from "./filters/ToggleFilter.svelte";
 
   const { onClose }: { onClose: () => void } = $props();
-  const { filters } = useFilter();
 
-  const listTypeFilters = $derived(
-    filters.filter((filter) => filter.type === "list"),
-  );
-  const ratingTypeFilters = $derived(
-    filters.filter((filter) => filter.type === "ratings"),
-  );
+  const { user } = useUser();
+  const { filters, hasAnyAdvancedFilter } = useFilter();
+  const { activeMode, setActiveMode } = useStoredFilters();
+
   const toggleTypeFilters = $derived(
     filters.filter((filter) => filter.type === "toggle"),
   );
+
+  const { confirm } = useConfirm();
+
+  const canSwitchTab = (to: string) => {
+    if (!$user.isVip) return true;
+    if (to !== "simple" || !$hasAnyAdvancedFilter) return true;
+
+    return new Promise<boolean>((resolve) => {
+      confirm({
+        type: ConfirmationType.SimpleFilters,
+        onConfirm: () => {
+          // eslint-disable-next-line svelte/no-navigation-without-resolve
+          goto(page.url.pathname, { replaceState: true });
+          resolve(true);
+        },
+      })();
+    });
+  };
+
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const isSmallTablet = useMedia(WellKnownMediaQuery.tabletSmall);
+
+  const tabPosition = $derived($isMobile || $isSmallTablet ? "bottom" : "top");
 </script>
+
+{#snippet commonFilters()}
+  <FilterGroup>
+    {#each toggleTypeFilters as filter (filter.key)}
+      <ToggleFilter {filter} />
+    {/each}
+  </FilterGroup>
+{/snippet}
+
+{#snippet badge()}
+  {#if $activeMode === FilterMode.Simple}
+    <FiltersPopupMenu {onClose} />
+  {/if}
+{/snippet}
+
+{#snippet simpleFilters()}
+  <div class="trakt-filters-content">
+    <SimpleFilters />
+    {@render commonFilters()}
+  </div>
+{/snippet}
+
+{#snippet advancedFilters()}
+  <div class="trakt-filters-content">
+    <AdvancedFilters />
+    {@render commonFilters()}
+  </div>
+{/snippet}
 
 <Drawer
   {onClose}
+  {badge}
   title={m.header_filters()}
   trapSelector=".trakt-filter"
   size="auto"
 >
-  <div class="trakt-filters-content">
-    <FilterGroup>
-      {#each listTypeFilters as filter}
-        <ListFilter {filter} />
-      {/each}
-    </FilterGroup>
-
-    {#each ratingTypeFilters as filter}
-      <RatingsFilter {filter} />
-    {/each}
-
-    <FilterGroup>
-      {#each toggleTypeFilters as filter}
-        <ToggleFilter {filter} />
-      {/each}
-    </FilterGroup>
-
-    <div
-      class="trakt-filter-actions"
-      data-dpad-navigation={DpadNavigationType.List}
-    >
-      <ResetAllButton />
-      <SaveFiltersButton onSave={onClose} />
-    </div>
-  </div>
+  <TabView
+    {tabPosition}
+    value={$activeMode}
+    tabs={[
+      {
+        value: FilterMode.Simple,
+        label: m.tab_text_simple_filters(),
+        content: simpleFilters,
+      },
+      {
+        value: FilterMode.Advanced,
+        label: m.tab_text_advanced_filters(),
+        content: advancedFilters,
+      },
+    ]}
+    {canSwitchTab}
+    onChange={setActiveMode}
+  />
 </Drawer>
 
 <style>
-  .trakt-filter-actions {
-    display: flex;
-    gap: var(--gap-xs);
-
-    :global(.trakt-button) {
-      flex: 1;
-    }
-  }
-
   .trakt-filters-content {
     display: flex;
     flex-direction: column;

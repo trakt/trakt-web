@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "Der Bildschirm ist dunkel. Keine Filme. Keine Episoden. Nur Sie und die Stille."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Beim Wechsel zu einfachen Filtern werden alle Ihre aktuellen Filter zurückgesetzt. Sind Sie sicher, dass Sie fortfahren möchten?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Einfach"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Erweitert"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Laufzeit von {min} bis {max} Minuten."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Veröffentlicht von {min} bis {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Bewertung von {min} bis {max}"
     }
   }
 }

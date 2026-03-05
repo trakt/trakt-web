@@ -14,4 +14,5 @@ export enum ConfirmationType {
   DeleteComment = 'delete-comment',
   SuppressRatingsToast = 'suppress-ratings-toast',
   Logout = 'logout',
+  SimpleFilters = 'simple-filters',
 }

@@ -61,6 +61,9 @@ interface ConfirmationParamsMap {
   [ConfirmationType.Logout]: {
     type: ConfirmationType.Logout;
   };
+  [ConfirmationType.SimpleFilters]: {
+    type: ConfirmationType.SimpleFilters;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

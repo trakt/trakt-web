@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "Екран темний. Жодних фільмів. Жодних серій. Тільки ви і тиша."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Перехід до простих фільтрів скине всі ваші поточні налаштування. Ви впевнені, що хочете продовжити?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Прості"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Розширені"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Тривалість від {min} до {max} хвилин."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Вихід у {min} — {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Рейтинг від {min} до {max}"
     }
   }
 }
