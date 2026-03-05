@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "Lo schermo è scuro. Niente film. Niente episodi. Solo tu e il silenzio."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Passare ai filtri semplici resetterà tutti i filtri attuali. Sei sicuro di voler procedere?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Semplice"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Avanzati"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Durata da {min} a {max} minuti."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Rilasciato tra il {min} e il {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Valutazione da {min} a {max}"
     }
   }
 }

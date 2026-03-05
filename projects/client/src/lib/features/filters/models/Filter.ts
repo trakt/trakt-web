@@ -1,19 +1,10 @@
-import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
-import type { StarRating } from '$lib/sections/summary/components/rating/models/StarRating.ts';
-
-type FilterValueMapper = {
-  mapper?: (user: UserSettings) => string;
-};
-
-export type FilterOption = {
-  label: string;
-  value: string;
-} & FilterValueMapper;
-
-type RatingOption = {
-  rating: StarRating;
-  value: string;
-} & FilterValueMapper;
+import type {
+  AdvancedOption,
+  FilterOption,
+  MultiSelectOption,
+  RatingOption,
+  SliderOption,
+} from './FilterOptions.ts';
 
 export enum FilterKey {
   Genres = 'genres',
@@ -34,6 +25,7 @@ type BaseFilter = {
 export type ListFilter = BaseFilter & {
   type: 'list';
   options: Array<FilterOption>;
+  advanced: AdvancedOption;
 };
 
 export type ToggleFilter = BaseFilter & {
@@ -44,6 +36,17 @@ export type ToggleFilter = BaseFilter & {
 export type RatingsFilter = BaseFilter & {
   type: 'ratings';
   options: Array<RatingOption>;
+  advanced: SliderOption;
 };
 
 export type Filter = ListFilter | ToggleFilter | RatingsFilter;
+
+type AdvancedFilter = Extract<Filter, { advanced: AdvancedOption }>;
+
+export type AdvancedSliderFilter = AdvancedFilter & {
+  advanced: SliderOption;
+};
+
+export type AdvancedMultiSelectFilter = ListFilter & {
+  advanced: MultiSelectOption;
+};

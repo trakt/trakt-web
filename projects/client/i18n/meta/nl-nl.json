@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "Het scherm is donker. Geen films. Geen afleveringen. Alleen jij en de stilte."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Overschakelen naar eenvoudige filters zal al je huidige filters resetten. Weet je zeker dat je wilt doorgaan?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Simpel"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Geavanceerd"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Speelduur van {min} tot {max} minuten."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Uitgebracht tussen {min} en {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Score van {min} tot {max}"
     }
   }
 }

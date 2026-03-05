@@ -26,6 +26,8 @@
     flex-direction: column;
     gap: var(--gap-xs);
 
+    min-width: 0;
+
     &[data-variant="inline"] {
       flex-direction: row;
       align-items: center;

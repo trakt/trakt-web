@@ -1,4 +1,4 @@
-import type { FilterOption } from '$lib/features/filters/models/Filter.ts';
+import type { FilterOption } from '$lib/features/filters/models/FilterOptions.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 
 const RUNTIME_RANGES = [

@@ -1,5 +1,6 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { ListFilterProps } from "../ListFilterProps";
@@ -13,6 +14,7 @@
     gotoFilteredState({
       key: filter.key,
       value,
+      mode: FilterMode.Simple,
     });
   };
 </script>

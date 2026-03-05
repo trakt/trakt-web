@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "A tela está escura. Sem filmes. Sem episódios. Apenas você e o silêncio."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Mudar para filtros simples vai resetar todos os seus filtros atuais. Tem certeza que quer continuar?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Simples"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Avançado"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Duração de {min} a {max} minutos."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Lançado entre {min} e {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Nota de {min} a {max}"
     }
   }
 }

@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "Ecranul este negru. Niciun film. Niciun episod. Doar tu și liniștea."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Comutarea la filtrele simple va reseta toate filtrele tale actuale. Ești sigur că vrei să continui?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Simplu"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Avansat"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Durată între {min} și {max} minute."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Lansat între {min} și {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Rating între {min} și {max}"
     }
   }
 }

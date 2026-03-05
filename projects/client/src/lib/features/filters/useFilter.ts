@@ -52,6 +52,19 @@ export function useFilter() {
         return isDifferentFilterSet(defaultFilters, $search);
       }),
     ),
+    hasAnyAdvancedFilter: combineLatest(
+      [search, state],
+    ).pipe(
+      map(([$search, $state]) => {
+        if (!$state.hasFilters) {
+          return false;
+        }
+
+        return FILTERS
+          .filter((filter) => 'advanced' in filter)
+          .some((filter) => $search.has(filter.key));
+      }),
+    ),
     filterMap: combineLatest(
       [search, user, state],
     ).pipe(

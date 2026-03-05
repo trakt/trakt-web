@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "Экран пуст. Ни фильмов, ни серий. Только вы и тишина."
+    },
+    "warning_prompt_simple_filters": {
+      "default": "Переключение на простые фильтры сбросит все ваши текущие настройки. Вы уверены, что хотите продолжить?"
+    },
+    "tab_text_simple_filters": {
+      "default": "Простые"
+    },
+    "tab_text_advanced_filters": {
+      "default": "Сложные"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "Длительность от {min} до {max} минут."
+    },
+    "advanced_filter_label_release_year": {
+      "default": "Выпущен в период с {min} по {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "Рейтинг от {min} до {max}"
     }
   }
 }

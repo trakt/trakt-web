@@ -2747,6 +2747,24 @@
     },
     "text_calendar_placeholder_empty_period": {
       "default": "画面は暗いまま。映画もドラマもありません。あなたと静寂だけがそこにあります。"
+    },
+    "warning_prompt_simple_filters": {
+      "default": "シンプルなフィルターに切り替えると、現在の設定がすべてリセットされます。続行してもよろしいですか？"
+    },
+    "tab_text_simple_filters": {
+      "default": "シンプル"
+    },
+    "tab_text_advanced_filters": {
+      "default": "高度な設定"
+    },
+    "advanced_filter_label_runtime": {
+      "default": "再生時間：{min} 〜 {max} 分"
+    },
+    "advanced_filter_label_release_year": {
+      "default": "公開年：{min} 〜 {max}"
+    },
+    "advanced_filter_label_ratings": {
+      "default": "評価：{min} 〜 {max}"
     }
   }
 }
