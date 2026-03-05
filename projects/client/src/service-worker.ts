@@ -82,6 +82,11 @@ registerRoute(
     if (url.hostname === 'localhost') {
       return false;
     }
+    // Only cache same-origin assets to avoid intercepting third-party scripts,
+    // tracking pixels, etc. which fail CORS in strict browsers (e.g. Firefox).
+    if (url.origin !== self.location.origin) {
+      return false;
+    }
     return AssetPattern.static.test(url.pathname) ||
       AssetPattern.media.test(url.pathname) ||
       AssetPattern.documents.test(url.pathname);
