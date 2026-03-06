@@ -35,7 +35,7 @@ const MediaProgressSchema = z.union([
 ]);
 
 export const mediaProgressQuery = defineInfiniteQuery({
-  key: 'mediaProgress',
+  key: 'mediaProgress:v2',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.MarkAsWatched('episode'),

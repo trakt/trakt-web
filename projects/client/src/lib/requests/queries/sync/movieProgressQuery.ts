@@ -109,7 +109,7 @@ export const movieProgressRequest = (
 };
 
 export const movieProgressQuery = defineInfiniteQuery({
-  key: 'movieProgress',
+  key: 'movieProgress:v2',
   invalidations: [
     InvalidateAction.MarkAsWatched('movie'),
     InvalidateAction.Watchlisted('movie'),

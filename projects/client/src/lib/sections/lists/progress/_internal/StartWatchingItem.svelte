@@ -23,7 +23,20 @@
   } = $props();
 
   const markAsWatchedTarget = $derived(mapToMarkAsWatchedTarget(entry));
-  const episode = $derived("episode" in entry ? entry.episode : undefined);
+  const mediaEntry = $derived.by(() => {
+    if ("episode" in entry) {
+      return {
+        type: "show" as const,
+        episode: entry.episode,
+        media: entry,
+      };
+    }
+
+    return {
+      type: entry.type,
+      media: entry,
+    };
+  });
 
   const commonActionProps = $derived({
     style: "dropdown-item" as const,
@@ -55,8 +68,8 @@
   <TagBar>
     <AirDateTag i18n={TagIntlProvider} airDate={entry.airDate} />
 
-    {#if episode}
-      <EpisodeCountTag i18n={TagIntlProvider} count={episode.count} />
+    {#if "episode" in entry}
+      <EpisodeCountTag i18n={TagIntlProvider} count={entry.episode.count} />
     {:else}
       <DurationTag i18n={TagIntlProvider} runtime={entry.runtime} />
     {/if}
@@ -69,9 +82,7 @@
 
 {#snippet mediaItem()}
   <MediaItem
-    type={entry.type}
-    media={entry}
-    {episode}
+    {...mediaEntry}
     {style}
     {popupActions}
     {action}
