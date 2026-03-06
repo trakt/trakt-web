@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
@@ -16,16 +17,19 @@
     type: "personal-activity" as const,
     mediaType: mode === "media" ? undefined : mode,
   });
+
+  const { filterMap } = useFilter();
 </script>
 
 <DrillableMediaList
   title={m.list_title_history()}
   id="personal-history-list"
   type="episode"
-  useList={({ limit }: { limit: number }) =>
+  filter={$filterMap}
+  useList={(params) =>
     useRecentlyWatchedList({
+      ...params,
       type: historyType,
-      limit,
       slug: "me",
     })}
   drilldownLabel={m.button_label_view_all_history()}

@@ -14,7 +14,7 @@
     empty: externalEmpty,
     type,
     item,
-    ctaItem,
+    ctaItem: externalCtaItem,
     actions: externalActions,
     useList,
     filter,
@@ -50,7 +50,6 @@
   {id}
   items={$list}
   {item}
-  {ctaItem}
   {title}
   {metaInfo}
   {drilldownLink}
@@ -64,6 +63,12 @@
       <NoFilterResultsPlaceholder />
     {:else}
       {@render externalEmpty?.()}
+    {/if}
+  {/snippet}
+
+  {#snippet ctaItem()}
+    {#if !$hasActiveFilter}
+      {@render externalCtaItem?.()}
     {/if}
   {/snippet}
 </SectionList>

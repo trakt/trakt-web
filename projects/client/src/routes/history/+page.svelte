@@ -21,7 +21,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter>
+  <NavbarStateSetter hasFilters>
     {#snippet actions()}
       <DiscoverToggles />
     {/snippet}

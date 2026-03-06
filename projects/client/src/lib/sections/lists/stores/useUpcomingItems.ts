@@ -14,6 +14,7 @@ import { map } from 'rxjs';
 
 type UseUpcomingItemsProps = {
   type: DiscoverMode;
+  limit: number;
 } & FilterParams;
 
 type UpcomingList = Array<MediaEntry | UpcomingEpisodeEntry>;
@@ -56,14 +57,16 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
 
   const isLoading = query.pipe(map(($query) => $query.isLoading));
 
-  const upcoming = query.pipe(
+  const list = query.pipe(
     map(($query) =>
-      ($query.data ?? []).filter((d) => {
-        const distanceFromNow = d.airDate.getTime() - Date.now();
-        return distanceFromNow > 0;
-      })
+      ($query.data ?? [])
+        .filter((d) => {
+          const distanceFromNow = d.airDate.getTime() - Date.now();
+          return distanceFromNow > 0;
+        })
+        .slice(0, props.limit)
     ),
   );
 
-  return { upcoming, isLoading };
+  return { list, isLoading };
 }

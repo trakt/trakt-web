@@ -1,4 +1,5 @@
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { activityHistoryQuery } from '$lib/requests/queries/users/activityHistoryQuery.ts';
 import {
   episodeActivityHistoryQuery,
@@ -28,10 +29,10 @@ type RecentlyWatchedListStoreProps = {
   slug?: string;
   id?: number;
   range?: DateRange;
-};
+} & FilterParams;
 
 function typeToQuery(
-  { type, id, slug, range, limit }: RecentlyWatchedListStoreProps,
+  { type, id, slug, range, limit, filter }: RecentlyWatchedListStoreProps,
 ) {
   const params = {
     limit: limit ?? DEFAULT_PAGE_SIZE,
@@ -39,6 +40,7 @@ function typeToQuery(
     id,
     startDate: range?.startDate,
     endDate: range?.endDate,
+    filter,
   };
 
   switch (type) {

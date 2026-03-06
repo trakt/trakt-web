@@ -1,9 +1,7 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import Banner from "$lib/sections/banner/Banner.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
@@ -21,14 +19,6 @@
   const { mode } = useDiscover();
 </script>
 
-{#snippet navbarState(hasFilters: boolean)}
-  <NavbarStateSetter {hasFilters}>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-  </NavbarStateSetter>
-{/snippet}
-
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
@@ -37,12 +27,11 @@
 >
   <TraktPageCoverSetter />
 
-  <RenderForFeature flag={FeatureFlag.HomeFilter}>
-    {#snippet enabled()}
-      {@render navbarState(true)}
+  <NavbarStateSetter hasFilters>
+    {#snippet actions()}
+      <DiscoverToggles />
     {/snippet}
-    {@render navbarState(false)}
-  </RenderForFeature>
+  </NavbarStateSetter>
 
   <Banner />
   <UpNextList intent="continue" />

@@ -2,6 +2,7 @@
   import CalendarLayout from "$lib/features/calendar/CalendarLayout.svelte";
   import { useCalendarPeriod } from "$lib/features/calendar/context/useCalendarPeriod";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import { useFilter } from "$lib/features/filters/useFilter";
   import { HISTORY_UPPER_LIMIT } from "$lib/utils/constants";
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
   import { toRecentlyWatchedType } from "./_internal/toRecentlyWatchedType";
@@ -14,6 +15,8 @@
 
   const historyType = $derived(toRecentlyWatchedType(mode));
 
+  const { filterMap } = useFilter();
+
   const { historyCalendar, isLoading } = $derived(
     useRecentlyWatchedList({
       type: historyType,
@@ -23,6 +26,7 @@
         endDate: $endDate,
       },
       limit: HISTORY_UPPER_LIMIT,
+      filter: $filterMap,
     }),
   );
 
