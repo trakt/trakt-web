@@ -7,7 +7,10 @@ export function useConfirm() {
   const { showConfirmation } = getConfirmationContext();
 
   const confirm = <T extends ConfirmationType>(
-    props: ConfirmationParams<T> & { onConfirm: () => void },
+    props: ConfirmationParams<T> & {
+      onConfirm: () => void;
+      onCancel?: () => void;
+    },
   ) => {
     return (event?: MouseEvent) => {
       const confirmation = mapToConfirmation(props);
@@ -21,6 +24,7 @@ export function useConfirm() {
       showConfirmation({
         ...confirmation,
         onConfirm: props.onConfirm,
+        onCancel: props.onCancel,
       });
 
       // Mimic native confirm behavior

@@ -1,31 +1,10 @@
 <script lang="ts">
-  import { iffy } from "$lib/utils/function/iffy";
   import { Tabs } from "bits-ui";
   import type { TabViewProps } from "./models/TabViewProps";
 
-  const {
-    value,
-    tabs,
-    canSwitchTab,
-    onChange,
-    tabPosition = "top",
-  }: TabViewProps = $props();
+  const { value, tabs, onChange, tabPosition = "top" }: TabViewProps = $props();
 
-  const initialValue = iffy(() => value);
-
-  let activeValue = $state(initialValue);
-  const activeIndex = $derived(tabs.findIndex((t) => t.value === activeValue));
-
-  function getValue() {
-    return activeValue;
-  }
-
-  async function setValue(newValue: string) {
-    const canSwitch = await canSwitchTab?.(newValue);
-    if (canSwitch === false) return;
-    activeValue = newValue;
-    onChange?.(newValue);
-  }
+  const activeIndex = $derived(tabs.findIndex((t) => t.value === value));
 </script>
 
 <div
@@ -33,7 +12,7 @@
   data-tab-position={tabPosition}
   style="--tab-count: {tabs.length}; --active-index: {activeIndex}"
 >
-  <Tabs.Root bind:value={getValue, setValue} class="trakt-tabs-root">
+  <Tabs.Root {value} onValueChange={onChange} class="trakt-tabs-root">
     <Tabs.List class="trakt-tabs-list">
       <div class="trakt-tab-indicator"></div>
       {#each tabs as tab (tab.value)}
@@ -46,7 +25,7 @@
     {#each tabs as tab (tab.value)}
       <Tabs.Content value={tab.value}>
         {#snippet child({ props })}
-          {#if tab.value === activeValue}
+          {#if tab.value === value}
             <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
             <div {...props} class="trakt-tab-content" tabindex={-1}>
               {@render tab.content()}
