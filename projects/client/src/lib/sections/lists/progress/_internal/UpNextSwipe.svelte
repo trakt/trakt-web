@@ -2,28 +2,24 @@
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
-  import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import DropSwipeIndicator from "$lib/sections/media-actions/drop/DropSwipeIndicator.svelte";
   import { useDrop } from "$lib/sections/media-actions/drop/useDrop";
   import MarkAsWatchedSwipeIndicator from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedSwipeIndicator.svelte";
-  import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
+  import {
+    useMarkAsWatched,
+    type MarkAsWatchedStoreProps,
+  } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
 
   type UpNextEpisodeProps = {
-    episode: EpisodeProgressEntry;
+    target: MarkAsWatchedStoreProps;
     show: ShowEntry;
     style: "cover" | "summary";
   } & ChildrenProps;
 
-  const { episode, show, style, children }: UpNextEpisodeProps = $props();
+  const { target, show, style, children }: UpNextEpisodeProps = $props();
 
-  const { markAsWatched } = $derived(
-    useMarkAsWatched({
-      type: "episode",
-      media: episode,
-      show: show,
-    }),
-  );
+  const { markAsWatched } = $derived(useMarkAsWatched(target));
 
   const { drop } = $derived(
     useDrop({

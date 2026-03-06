@@ -57,7 +57,7 @@
   variant={intent === "start" ? "portrait" : "landscape"}
 >
   {#snippet item(progressEntry)}
-    {#if intent === "start"}
+    {#if progressEntry.intent === "start"}
       <StartWatchingItem entry={progressEntry} style="cover" />
     {:else}
       <ContinueWatchingItem entry={progressEntry} style="cover" />

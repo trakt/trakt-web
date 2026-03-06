@@ -1,21 +1,21 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
+import type { MovieProgressEntry } from '$lib/requests/models/MovieProgressEntry.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
+import type { UpNextEntry } from '$lib/requests/models/UpNextEntry.ts';
 import {
   type MediaProgressIntent,
   mediaProgressQuery,
 } from '$lib/requests/queries/sync/mediaProgressQuery.ts';
 import {
-  type MovieProgressEntry,
   movieProgressQuery,
 } from '$lib/requests/queries/sync/movieProgressQuery.ts';
 import {
-  type UpNextEntry,
   upNextNitroQuery,
 } from '$lib/requests/queries/sync/upNextNitroQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { combineLatest, map } from 'rxjs';
-import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 
 export type UpNextStoreProps =
   & PaginationParams
@@ -25,7 +25,7 @@ export type UpNextStoreProps =
     intent: MediaProgressIntent;
   };
 
-export type ProgressEntry = UpNextEntry | MovieProgressEntry;
+type ProgressEntry = UpNextEntry | MovieProgressEntry;
 
 function typeToQuery(props: UpNextStoreProps) {
   switch (props.type) {

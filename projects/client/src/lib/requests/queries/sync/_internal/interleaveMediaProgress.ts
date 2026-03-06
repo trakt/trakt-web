@@ -1,31 +1,29 @@
-import type { MediaProgressIntent } from '../mediaProgressQuery.ts';
-import type { MovieProgressEntry } from '../movieProgressQuery.ts';
-import type { UpNextEntry } from '../upNextNitroQuery.ts';
+import type { MovieProgressEntry } from '../../../models/MovieProgressEntry.ts';
+import type { UpNextEntry } from '../../../models/UpNextEntry.ts';
 
 type SortMediaProgressProps = {
-  intent: MediaProgressIntent;
   episodes: UpNextEntry[];
   movies: MovieProgressEntry[];
 };
 
-function getEpisodeDate(intent: MediaProgressIntent, episode: UpNextEntry) {
-  return intent === 'start' ? episode.show.airDate : episode.lastWatchedAt;
+function getEpisodeDate(episode: UpNextEntry) {
+  return episode.intent === 'start' ? episode.airDate : episode.lastWatchedAt;
 }
 
-function getMovieDate(intent: MediaProgressIntent, movie: MovieProgressEntry) {
-  return intent === 'start' ? movie.airDate : movie.lastWatchedAt;
+function getMovieDate(movie: MovieProgressEntry) {
+  return movie.intent === 'start' ? movie.airDate : movie.lastWatchedAt;
 }
 
 export function interleaveMediaProgress(props: SortMediaProgressProps) {
-  const { intent, episodes, movies } = props;
+  const { episodes, movies } = props;
 
   const { result, insertedKeys } = episodes.reduce(
     (acc, episode) => {
-      const episodeDate = getEpisodeDate(intent, episode);
+      const episodeDate = getEpisodeDate(episode);
 
       const moviesToInsert = movies
         .filter((movie) => {
-          const date = getMovieDate(intent, movie);
+          const date = getMovieDate(movie);
           if (acc.insertedKeys.has(movie.key) || !date) {
             return false;
           }

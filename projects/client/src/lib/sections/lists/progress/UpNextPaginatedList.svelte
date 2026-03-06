@@ -37,7 +37,7 @@
     : m.list_title_up_next()}
 >
   {#snippet item(progressEntry)}
-    {#if intent === "start"}
+    {#if progressEntry.intent === "start"}
       <StartWatchingItem style="summary" entry={progressEntry} />
     {:else}
       <ContinueWatchingItem style="summary" entry={progressEntry} />

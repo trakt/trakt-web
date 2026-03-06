@@ -10,21 +10,14 @@ import type {
   MovieProgressResponse,
   UpNextIntentRequest,
 } from '@trakt/api';
-import z from 'zod';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
-import { MovieEntrySchema } from '../../models/MovieEntry.ts';
+import {
+  type MovieProgressEntry,
+  MovieProgressSchema,
+} from '../../models/MovieProgressEntry.ts';
 import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
-
-export const MovieProgressSchema = MovieEntrySchema.merge(z.object({
-  progress: z.number(),
-  minutesElapsed: z.number(),
-  minutesLeft: z.number(),
-  playbackId: z.number(),
-  lastWatchedAt: z.date().nullable(),
-}));
-export type MovieProgressEntry = z.infer<typeof MovieProgressSchema>;
 
 type MovieProgressParams =
   & PaginationParams
@@ -32,11 +25,14 @@ type MovieProgressParams =
   & UpNextIntentRequest
   & FilterParams;
 
-const mapToInProgressMovie = (response: MovieProgressResponse) => {
+const mapToInProgressMovie = (
+  response: MovieProgressResponse,
+): MovieProgressEntry => {
   const runtime = response.movie.runtime ?? 0;
   const minutesElapsed = Math.floor((response.progress / 100) * runtime);
 
   return {
+    intent: 'continue',
     ...mapToMovieEntry(response.movie),
     playbackId: response.id,
     progress: response.progress,
@@ -47,16 +43,12 @@ const mapToInProgressMovie = (response: MovieProgressResponse) => {
   };
 };
 
-const mapToStartWatchingMovie = (response: ListedMovieResponse) => {
-  const movie = mapToMovieEntry(response.movie);
-
+const mapToStartWatchingMovie = (
+  response: ListedMovieResponse,
+): MovieProgressEntry => {
   return {
-    ...movie,
-    playbackId: 0,
-    progress: NaN,
-    minutesElapsed: 0,
-    minutesLeft: movie.runtime ?? 0,
-    lastWatchedAt: null,
+    intent: 'start',
+    ...mapToMovieEntry(response.movie),
   };
 };
 
@@ -83,7 +75,6 @@ export type MovieProgressResponseType = MovieProgressSuccessResponse | {
 export const movieProgressRequest = (
   { fetch, limit, page, intent, filter }: MovieProgressParams,
 ): Promise<MovieProgressResponseType> => {
-  // FIXME: switch to actual movie progress endpoints once available
   if (intent === 'start') {
     return api({ fetch })
       .users

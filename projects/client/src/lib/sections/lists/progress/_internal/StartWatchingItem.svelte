@@ -5,10 +5,12 @@
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
+  import type { MovieStartEntry } from "$lib/requests/models/MovieProgressEntry";
+  import type { UpNextStartEntry } from "$lib/requests/models/UpNextEntry";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import MediaItem from "../../components/MediaItem.svelte";
-  import { type ProgressEntry } from "../useUpNextList";
+  import { mapToMarkAsWatchedTarget } from "./mapToMarkAsWatchedTarget";
   import MovieStartWatchingSwipe from "./MovieStartWatchingSwipe.svelte";
   import UpNextSwipe from "./UpNextSwipe.svelte";
 
@@ -16,25 +18,16 @@
     entry,
     style,
   }: {
-    entry: ProgressEntry;
+    entry: MovieStartEntry | UpNextStartEntry;
     style: "summary" | "cover";
   } = $props();
 
-  const target = $derived(
-    "show" in entry
-      ? { type: "show" as const, media: entry.show, episode: entry }
-      : { type: "movie" as const, media: entry },
-  );
-
-  const markAsWatchedProps = $derived(
-    target.type === "show"
-      ? { type: "episode" as const, show: target.media, media: target.episode }
-      : { type: "movie" as const, media: target.media },
-  );
+  const markAsWatchedTarget = $derived(mapToMarkAsWatchedTarget(entry));
+  const episode = $derived("episode" in entry ? entry.episode : undefined);
 
   const commonActionProps = $derived({
     style: "dropdown-item" as const,
-    title: target.media.title,
+    title: entry.title,
   });
 </script>
 
@@ -44,7 +37,7 @@
     style="action"
     size="small"
     title={entry.title}
-    {...markAsWatchedProps}
+    {...markAsWatchedTarget}
   />
 {/snippet}
 
@@ -53,37 +46,32 @@
     style="dropdown-item"
     size="small"
     title={entry.title}
-    {...markAsWatchedProps}
+    {...markAsWatchedTarget}
   />
-  <WatchlistAction
-    {...commonActionProps}
-    type={target.type}
-    media={target.media}
-  />
+  <WatchlistAction {...commonActionProps} type={entry.type} media={entry} />
 {/snippet}
 
 {#snippet summaryTag()}
   <TagBar>
-    <AirDateTag i18n={TagIntlProvider} airDate={target.media.airDate} />
+    <AirDateTag i18n={TagIntlProvider} airDate={entry.airDate} />
 
-    {#if "episode" in target.media}
-      <EpisodeCountTag
-        i18n={TagIntlProvider}
-        count={target.media.episode.count}
-      />
+    {#if episode}
+      <EpisodeCountTag i18n={TagIntlProvider} count={episode.count} />
     {:else}
-      <DurationTag i18n={TagIntlProvider} runtime={target.media.runtime} />
+      <DurationTag i18n={TagIntlProvider} runtime={entry.runtime} />
     {/if}
 
-    {#if target.media.certification}
-      <CertificationTag certification={target.media.certification} />
+    {#if entry.certification}
+      <CertificationTag certification={entry.certification} />
     {/if}
   </TagBar>
 {/snippet}
 
 {#snippet mediaItem()}
   <MediaItem
-    {...target}
+    type={entry.type}
+    media={entry}
+    {episode}
     {style}
     {popupActions}
     {action}
@@ -93,8 +81,8 @@
   />
 {/snippet}
 
-{#if "show" in entry}
-  <UpNextSwipe episode={entry} show={entry.show} {style}>
+{#if "episode" in entry}
+  <UpNextSwipe target={markAsWatchedTarget} show={entry} {style}>
     {@render mediaItem()}
   </UpNextSwipe>
 {:else}

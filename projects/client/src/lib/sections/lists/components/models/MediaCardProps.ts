@@ -1,5 +1,4 @@
 import type { MediaInput, MediaInputDefault } from '$lib/models/MediaInput.ts';
-import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Snippet } from 'svelte';
 import type { BaseItemProps } from './BaseItemProps.ts';
@@ -22,5 +21,9 @@ export type MediaCardProps<T = MediaInputDefault> =
   & BaseMediaProps<T>
   & (
     | { type: MediaType }
-    | { variant: 'start'; type: 'show'; episode: EpisodeEntry }
+    | {
+      variant: 'start';
+      type: 'show';
+      episode: { season: number; number: number };
+    }
   );

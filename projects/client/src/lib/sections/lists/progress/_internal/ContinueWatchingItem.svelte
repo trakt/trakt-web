@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { type ProgressEntry } from "../useUpNextList";
+  import type { MovieContinueEntry } from "$lib/requests/models/MovieProgressEntry";
+  import type { UpNextContinueEntry } from "$lib/requests/models/UpNextEntry";
   import UpNextItem from "./UpNextItem.svelte";
   import { useHiddenShows } from "./useHiddenShows";
 
@@ -7,7 +8,7 @@
     entry,
     style,
   }: {
-    entry: ProgressEntry;
+    entry: UpNextContinueEntry | MovieContinueEntry;
     style: "summary" | "cover";
   } = $props();
 
