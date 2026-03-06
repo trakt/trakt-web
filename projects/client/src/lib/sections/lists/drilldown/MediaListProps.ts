@@ -1,6 +1,7 @@
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
-import type { PaginatableStore } from '$lib/sections/lists/drilldown/PaginatableStore.ts';
 import type { Snippet } from 'svelte';
+import type { LimitStore } from './LimitStore.ts';
+import type { PaginatableStore } from './PaginatableStore.ts';
 
 export type MediaListProps<T, M> = {
   id: string;
@@ -8,10 +9,19 @@ export type MediaListProps<T, M> = {
   type: M;
   item: Snippet<[T]>;
   ctaItem?: Snippet;
-  useList: PaginatableStore<T, M>;
+  useList: LimitStore<T, M>;
   actions?: Snippet<[T[], M]>;
   empty?: Snippet;
   metaInfo?: Snippet;
   drilldownLink?: string;
   variant?: 'portrait' | 'landscape';
 } & FilterParams;
+
+export type DrilledMediaListProps<T, M> =
+  & Omit<MediaListProps<T, M>, 'useList' | 'actions'>
+  & {
+    useList: PaginatableStore<T, M>;
+    actions?: Snippet<[]>;
+    cardOrientation?: 'landscape' | 'portrait';
+    listActions?: Snippet;
+  };

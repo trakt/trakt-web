@@ -10,6 +10,7 @@ import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { isSameDay } from 'date-fns/isSameDay';
 import { combineLatest, map, type Observable } from 'rxjs';
+import type { FilterParams } from '../../../requests/models/FilterParams.ts';
 import type { DiscoverMode } from '../../discover/models/DiscoverMode.ts';
 import type { Calendar } from '../models/Calendar.ts';
 
@@ -20,19 +21,20 @@ type UseCalendarParams = {
   start: Date;
   days: number;
   type: DiscoverMode;
-};
+} & FilterParams;
 
 type CalendarResult = {
   isLoading: Observable<boolean>;
   calendar: Observable<Calendar<CalendarItem>>;
 };
 
-function typeToQueries({ start, days, type }: UseCalendarParams) {
+function typeToQueries({ start, days, type, filter }: UseCalendarParams) {
   const [YYYY_MM_DD] = start.toISOString().split('T');
 
   const params = {
     startDate: assertDefined(YYYY_MM_DD, 'Could not extract start date.'),
     days,
+    filter,
   };
 
   switch (type) {

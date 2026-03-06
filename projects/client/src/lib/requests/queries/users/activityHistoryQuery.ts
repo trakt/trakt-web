@@ -5,6 +5,8 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
+import type { FilterParams } from '../../models/FilterParams.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 import {
   episodeActivityHistoryRequest,
@@ -24,7 +26,8 @@ type ActivityHistoryParams =
     endDate?: Date;
   }
   & ApiParams
-  & PaginationParams;
+  & PaginationParams
+  & FilterParams;
 
 const HistorySchema = z.discriminatedUnion('type', [
   EpisodeActivityHistorySchema,
@@ -45,6 +48,7 @@ export const activityHistoryQuery = defineInfiniteQuery({
     params.limit,
     params.page,
     params.slug,
+    ...getGlobalFilterDependencies(params.filter),
   ],
   request: (params) =>
     Promise.all([

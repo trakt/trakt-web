@@ -7,6 +7,8 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { MovieActivityHistoryResponse } from '@trakt/api';
 import { z } from 'zod';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
+import type { FilterParams } from '../../models/FilterParams.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
@@ -18,7 +20,8 @@ type MovieActivityHistoryParams =
     id?: number;
   }
   & ApiParams
-  & PaginationParams;
+  & PaginationParams
+  & FilterParams;
 
 export const MovieActivityHistorySchema = z.object({
   id: z.number(),
@@ -30,7 +33,7 @@ export const MovieActivityHistorySchema = z.object({
 export type MovieActivityHistory = z.infer<typeof MovieActivityHistorySchema>;
 
 export const movieActivityHistoryRequest = (
-  { fetch, slug, startDate, endDate, limit, id, page }:
+  { fetch, slug, startDate, endDate, limit, id, page, filter }:
     MovieActivityHistoryParams,
 ) => {
   const queryParams = {
@@ -39,6 +42,7 @@ export const movieActivityHistoryRequest = (
     end_at: endDate?.toISOString(),
     limit,
     page,
+    ...filter,
   };
 
   return id
@@ -72,6 +76,7 @@ export const movieActivityHistoryQuery = defineInfiniteQuery({
     params.page,
     params.id,
     params.slug,
+    ...getGlobalFilterDependencies(params.filter),
   ],
   request: movieActivityHistoryRequest,
   mapper: (response) => ({

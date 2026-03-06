@@ -56,7 +56,7 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
 
   const isLoading = query.pipe(map(($query) => $query.isLoading));
 
-  const upcoming = query.pipe(
+  const list = query.pipe(
     map(($query) =>
       ($query.data ?? []).filter((d) => {
         const distanceFromNow = d.airDate.getTime() - Date.now();
@@ -65,5 +65,5 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
     ),
   );
 
-  return { upcoming, isLoading };
+  return { list, isLoading };
 }

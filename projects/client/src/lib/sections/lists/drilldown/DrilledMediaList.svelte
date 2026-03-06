@@ -1,14 +1,7 @@
 <script lang="ts" generics="T extends { key: string }, M">
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
-  import type { Snippet } from "svelte";
-  import type { MediaListProps } from "./MediaListProps";
-
-  type DrilledMediaListProps = MediaListProps<T, M> & {
-    actions?: Snippet<[]>;
-    cardOrientation?: "landscape" | "portrait";
-    listActions?: Snippet;
-  };
+  import type { DrilledMediaListProps } from "./MediaListProps";
 
   const {
     type,
@@ -20,7 +13,7 @@
     id,
     listActions,
     ...props
-  }: DrilledMediaListProps = $props();
+  }: DrilledMediaListProps<T, M> = $props();
 </script>
 
 <PaginatedList {type} {filter} {useList}>

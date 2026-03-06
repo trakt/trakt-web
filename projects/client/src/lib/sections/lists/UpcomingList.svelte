@@ -1,5 +1,4 @@
 <script lang="ts">
-  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import CalendarItem from "$lib/features/calendar/CalendarItem.svelte";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
@@ -7,16 +6,12 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CalendarButton from "./components/CalendarButton.svelte";
   import CtaItem from "./components/cta/CtaItem.svelte";
+  import DrillableMediaList from "./drilldown/DrillableMediaList.svelte";
   import { useUpcomingItems } from "./stores/useUpcomingItems";
-  import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   const { mode } = useDiscover();
 
   const { filterMap } = useFilter();
-
-  const { upcoming, isLoading } = $derived(
-    useUpcomingItems({ type: $mode, filter: $filterMap }),
-  );
 
   const cta = $derived({
     type: "upcoming" as const,
@@ -24,12 +19,16 @@
   });
 </script>
 
-<SectionList
+<DrillableMediaList
   id="upcoming-list"
-  items={$upcoming}
+  source={{ id: "calendar" }}
+  type={$mode}
+  variant="landscape"
+  filter={$filterMap}
+  useList={useUpcomingItems}
+  urlBuilder={UrlBuilder.calendar}
+  drilldownLabel={m.button_label_calendar()}
   title={m.list_title_upcoming_schedule()}
-  --height-list={mediaListHeightResolver("landscape")}
-  drilldownLink={UrlBuilder.calendar()}
 >
   {#snippet item(entry)}
     <CalendarItem item={entry} />
@@ -40,12 +39,10 @@
   {/snippet}
 
   {#snippet empty()}
-    {#if !$isLoading}
-      <CtaItem {cta} variant="placeholder" />
-    {/if}
+    <CtaItem {cta} variant="placeholder" />
   {/snippet}
 
   {#snippet actions()}
     <CalendarButton />
   {/snippet}
-</SectionList>
+</DrillableMediaList>
