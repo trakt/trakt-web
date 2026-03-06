@@ -153,6 +153,7 @@
    */
   --color-drawer-background: color-mix(in srgb, var(--shade-70) 94%, transparent);
   --color-dialog-background: var(--color-drawer-background);
+  --color-modal-background: var(--color-card-background);
 
   /*
    * Sentiment
@@ -360,6 +361,7 @@
    */
   --color-drawer-background: color-mix(in srgb, var(--shade-920) 94%, transparent);
   --color-dialog-background: var(--color-drawer-background);
+  --color-modal-background: var(--color-card-background);
 
   /*
    * Sentiment
