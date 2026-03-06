@@ -9,7 +9,6 @@ type TabView = {
 export type TabViewProps = {
   value: string;
   tabs: TabView[];
-  canSwitchTab?: (to: string) => Promise<boolean> | boolean;
   onChange?: (value: string) => void;
   tabPosition?: 'top' | 'bottom';
 };

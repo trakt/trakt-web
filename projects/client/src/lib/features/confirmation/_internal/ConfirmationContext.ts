@@ -3,6 +3,7 @@ import type { ConfirmationOperation } from '../models/ConfirmationOperation.ts';
 
 export type ConfirmationRequest = {
   onConfirm: () => void;
+  onCancel?: () => void;
   message: string | Nil;
   buttonText: string;
   operation: ConfirmationOperation;

@@ -29,20 +29,22 @@
 
   const { confirm } = useConfirm();
 
-  const canSwitchTab = (to: string) => {
-    if (!$user.isVip) return true;
-    if (to !== "simple" || !$hasAnyAdvancedFilter) return true;
+  const onChange = (to: string) => {
+    const from = $activeMode;
+    setActiveMode(to);
 
-    return new Promise<boolean>((resolve) => {
-      confirm({
-        type: ConfirmationType.SimpleFilters,
-        onConfirm: () => {
-          // eslint-disable-next-line svelte/no-navigation-without-resolve
-          goto(page.url.pathname, { replaceState: true });
-          resolve(true);
-        },
-      })();
-    });
+    if (!$user.isVip || to !== FilterMode.Simple || !$hasAnyAdvancedFilter) {
+      return;
+    }
+
+    confirm({
+      type: ConfirmationType.SimpleFilters,
+      onConfirm: () => {
+        // eslint-disable-next-line svelte/no-navigation-without-resolve
+        goto(page.url.pathname, { replaceState: true });
+      },
+      onCancel: () => setActiveMode(from),
+    })();
   };
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -101,8 +103,7 @@
         content: advancedFilters,
       },
     ]}
-    {canSwitchTab}
-    onChange={setActiveMode}
+    {onChange}
   />
 </Drawer>
 

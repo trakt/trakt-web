@@ -19,6 +19,10 @@
         $activeConfirmation.onConfirm();
       }
 
+      if (action === "cancel") {
+        $activeConfirmation.onCancel?.();
+      }
+
       hideConfirmation();
     }}
   />
