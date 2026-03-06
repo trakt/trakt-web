@@ -11,11 +11,10 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toTranslatedType } from "$lib/utils/formatting/string/toTranslatedType";
-  import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
+  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "../../../components/card/CardActionBar.svelte";
   import type { MediaCardProps } from "./models/MediaCardProps";
@@ -125,10 +124,10 @@
         </p>
         <p class="trakt-card-subtitle ellipsis">
           {#if "episode" in rest}
-            {episodeSubtitle(rest.episode)}
-            <Spoiler media={rest.episode} show={media} type="episode">
-              - {rest.episode.title}
-            </Spoiler>
+            {episodeNumberLabel({
+              seasonNumber: rest.episode.season,
+              episodeNumber: rest.episode.number,
+            })}
           {:else}
             {toHumanDuration({ minutes: media.runtime }, languageTag())}
           {/if}

@@ -21,6 +21,11 @@ function getShowWarningMessage(
       (count, season) => count + season.episodes.length,
       0,
     );
+
+    if (episodeCount === 1) {
+      return null;
+    }
+
     const lastSeason = assertDefined(target.media.seasons.at(-1));
     const lastEpisode = assertDefined(lastSeason.episodes.at(-1));
 

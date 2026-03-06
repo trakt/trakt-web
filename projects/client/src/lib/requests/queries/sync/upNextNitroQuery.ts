@@ -1,26 +1,23 @@
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { EpisodeProgressEntrySchema } from '$lib/requests/models/EpisodeProgressEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
-import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { type UpNextIntentRequest, type UpNextResponse } from '@trakt/api';
-import { z } from 'zod';
+import {
+  type ListedShowResponse,
+  type UpNextIntentRequest,
+  type UpNextResponse,
+} from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { mapToEpisodeEntry } from '../../_internal/mapToEpisodeEntry.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
-
-export const UpNextEntryNitroSchema = EpisodeProgressEntrySchema.merge(
-  z.object({
-    show: ShowEntrySchema,
-    lastWatchedAt: z.date().nullable(),
-  }),
-);
-export type UpNextEntry = z.infer<typeof UpNextEntryNitroSchema>;
+import {
+  type UpNextEntry,
+  UpNextEntryNitroSchema,
+} from '../../models/UpNextEntry.ts';
 
 type UpNextParams =
   & PaginationParams
@@ -28,12 +25,13 @@ type UpNextParams =
   & UpNextIntentRequest
   & FilterParams;
 
-export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
+function mapUpNextContinueWatching(item: UpNextResponse): UpNextEntry {
   const show = mapToShowEntry(item.show);
   const episode = mapToEpisodeEntry(item.progress.next_episode);
   episode.runtime = isNaN(episode.runtime) ? show.runtime : episode.runtime;
 
   return {
+    intent: 'continue',
     show,
     ...episode,
     total: item.progress.aired,
@@ -46,8 +44,65 @@ export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   };
 }
 
-export const upNextNitroRequest = (params: UpNextParams) => {
+function mapUpNextStartWatching(response: ListedShowResponse): UpNextEntry {
+  const show = mapToShowEntry(response.show);
+
+  return {
+    intent: 'start',
+    ...show,
+    episode: {
+      ...show.episode,
+      season: 1,
+      number: 1,
+    },
+  };
+}
+
+export function mapUpNextResponse(
+  response: UpNextResponse | ListedShowResponse,
+) {
+  return 'listed_at' in response
+    ? mapUpNextStartWatching(response)
+    : mapUpNextContinueWatching(response);
+}
+
+export type UpNextSuccessResponse = {
+  status: 200;
+  body: UpNextResponse[] | ListedShowResponse[];
+  headers: Headers;
+};
+
+export type UpNextResponseType = UpNextSuccessResponse | {
+  status: number;
+  body: unknown;
+  headers: Headers;
+};
+
+export const upNextNitroRequest = (
+  params: UpNextParams,
+): Promise<UpNextResponseType> => {
   const { fetch, limit, page, intent, filter } = params;
+
+  if (intent === 'start') {
+    return api({ fetch })
+      .users
+      .watchlist
+      .shows({
+        params: {
+          id: 'me',
+          sort: 'released',
+        },
+        query: {
+          extended: 'full,images,colors',
+          // FIXME: update @trakt/api to allow comma separated values
+          hide: 'unreleased,watched,watching' as 'unreleased',
+          sort_how: 'desc',
+          page,
+          limit,
+          ...filter,
+        },
+      });
+  }
 
   return api({ fetch })
     .sync
@@ -81,10 +136,14 @@ export const upNextNitroQuery = defineInfiniteQuery({
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: upNextNitroRequest,
-  mapper: (response) => ({
-    entries: response.body.map(mapUpNextResponse),
-    page: extractPageMeta(response.headers),
-  }),
+  mapper: (queryResponse) => {
+    const response = queryResponse as UpNextSuccessResponse;
+
+    return {
+      entries: response.body.map(mapUpNextResponse),
+      page: extractPageMeta(response.headers),
+    };
+  },
   schema: PaginatableSchemaFactory(UpNextEntryNitroSchema),
   ttl: time.minutes(30),
   refetchOnWindowFocus: true,

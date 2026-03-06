@@ -184,9 +184,11 @@
             seasonNumber: rest.episode.season,
             episodeNumber: rest.episode.number,
           })}
-          <Spoiler media={rest.episode} show={media} type="episode">
-            - {rest.episode.title}
-          </Spoiler>
+          {#if rest.variant !== "start"}
+            <Spoiler media={rest.episode} show={media} type="episode">
+              - {rest.episode.title}
+            </Spoiler>
+          {/if}
         </p>
       {:else if rest.variant === "credit"}
         <p class="trakt-card-title ellipsis">

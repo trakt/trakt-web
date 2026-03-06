@@ -8,18 +8,19 @@ import { time } from '$lib/utils/timing/time.ts';
 import z from 'zod';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
+import { MovieProgressSchema } from '../../models/MovieProgressEntry.ts';
+import { UpNextEntryNitroSchema } from '../../models/UpNextEntry.ts';
 import { interleaveMediaProgress } from './_internal/interleaveMediaProgress.ts';
 import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
 import {
   mapToMovieProgressEntry,
   movieProgressRequest,
-  MovieProgressSchema,
   type MovieProgressSuccessResponse,
 } from './movieProgressQuery.ts';
 import {
   mapUpNextResponse,
-  UpNextEntryNitroSchema,
   upNextNitroRequest,
+  type UpNextSuccessResponse,
 } from './upNextNitroQuery.ts';
 
 export type MediaProgressIntent = 'continue' | 'start';
@@ -58,8 +59,9 @@ export const mediaProgressQuery = defineInfiniteQuery({
       upNextNitroRequest(params),
       movieProgressRequest(params),
     ]),
-  mapper: ([upNextResponse, movieProgressResponse], params) => {
-    const episodes = upNextResponse.body.map(mapUpNextResponse);
+  mapper: ([upNextResponse, movieProgressResponse]) => {
+    const upNextSuccessResponse = upNextResponse as UpNextSuccessResponse;
+    const episodes = upNextSuccessResponse.body.map(mapUpNextResponse);
 
     const movieResponse = movieProgressResponse as MovieProgressSuccessResponse;
     const movies = movieResponse.body
@@ -68,7 +70,6 @@ export const mediaProgressQuery = defineInfiniteQuery({
 
     return {
       entries: interleaveMediaProgress({
-        intent: params.intent,
         episodes,
         movies,
       }),

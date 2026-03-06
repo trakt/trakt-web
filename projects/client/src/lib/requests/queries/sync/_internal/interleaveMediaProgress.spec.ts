@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import type { MovieProgressEntry } from '../movieProgressQuery.ts';
-import type { UpNextEntry } from '../upNextNitroQuery.ts';
+import type { MovieProgressEntry } from '../../../models/MovieProgressEntry.ts';
+import type { UpNextEntry } from '../../../models/UpNextEntry.ts';
 import { interleaveMediaProgress } from './interleaveMediaProgress.ts';
 
-const createMovie = (
+const createContinueMovie = (
   key: string,
   airDate: Date,
   lastWatchedAt: Date | null = null,
@@ -11,25 +11,44 @@ const createMovie = (
   key,
   airDate,
   lastWatchedAt,
+  intent: 'continue',
 } as MovieProgressEntry);
 
-const createEpisode = (
+const createStartMovie = (
+  key: string,
+  airDate: Date,
+): MovieProgressEntry => ({
+  key,
+  airDate,
+  intent: 'start',
+} as MovieProgressEntry);
+
+const createContinueEpisode = (
   key: string,
   showAirDate: Date,
   lastWatchedAt: Date | null = null,
 ): UpNextEntry => ({
   key,
+  intent: 'continue',
   show: {
     airDate: showAirDate,
   },
   lastWatchedAt,
 } as UpNextEntry);
 
+const createStartEpisode = (
+  key: string,
+  airDate: Date,
+): UpNextEntry => ({
+  key,
+  intent: 'start',
+  airDate,
+} as UpNextEntry);
+
 describe('interleaveMediaProgress', () => {
   describe('with empty arrays', () => {
     it('should return an empty array', () => {
       const result = interleaveMediaProgress({
-        intent: 'start',
         episodes: [],
         movies: [],
       });
@@ -39,12 +58,11 @@ describe('interleaveMediaProgress', () => {
 
     it('should return only movies', () => {
       const movies = [
-        createMovie('movie-2', new Date('2024-01-02')),
-        createMovie('movie-1', new Date('2024-01-01')),
+        createContinueMovie('movie-2', new Date('2024-01-02')),
+        createContinueMovie('movie-1', new Date('2024-01-01')),
       ];
 
       const result = interleaveMediaProgress({
-        intent: 'start',
         episodes: [],
         movies,
       });
@@ -54,12 +72,11 @@ describe('interleaveMediaProgress', () => {
 
     it('should return only episodes', () => {
       const episodes = [
-        createEpisode('episode-2', new Date('2024-01-02')),
-        createEpisode('episode-1', new Date('2024-01-01')),
+        createContinueEpisode('episode-2', new Date('2024-01-02')),
+        createContinueEpisode('episode-1', new Date('2024-01-01')),
       ];
 
       const result = interleaveMediaProgress({
-        intent: 'start',
         episodes,
         movies: [],
       });
@@ -71,18 +88,17 @@ describe('interleaveMediaProgress', () => {
   describe('with "start" intent', () => {
     it('should interleave based on airDate', () => {
       const episodes = [
-        createEpisode('episode-2', new Date('2024-01-10')),
-        createEpisode('episode-1', new Date('2024-01-01')),
+        createStartEpisode('episode-2', new Date('2024-01-10')),
+        createStartEpisode('episode-1', new Date('2024-01-01')),
       ];
       const movies = [
-        createMovie('movie-4', new Date('2024-01-12')),
-        createMovie('movie-3', new Date('2024-01-11')),
-        createMovie('movie-2', new Date('2024-01-03')),
-        createMovie('movie-1', new Date('2024-01-02')),
+        createStartMovie('movie-4', new Date('2024-01-12')),
+        createStartMovie('movie-3', new Date('2024-01-11')),
+        createStartMovie('movie-2', new Date('2024-01-03')),
+        createStartMovie('movie-1', new Date('2024-01-02')),
       ];
 
       const result = interleaveMediaProgress({
-        intent: 'start',
         episodes,
         movies,
       });
@@ -100,24 +116,31 @@ describe('interleaveMediaProgress', () => {
   describe('with "continue" intent', () => {
     it('should interleave movies based on lastWatchedAt', () => {
       const episodes = [
-        createEpisode(
+        createContinueEpisode(
           'episode-2',
           new Date('2023-01-01'),
           new Date('2024-01-05'),
         ),
-        createEpisode(
+        createContinueEpisode(
           'episode-1',
           new Date('2023-01-01'),
           new Date('2024-01-01'),
         ),
       ];
       const movies = [
-        createMovie('movie-2', new Date('2023-01-01'), new Date('2024-01-07')),
-        createMovie('movie-1', new Date('2023-01-01'), new Date('2024-01-03')),
+        createContinueMovie(
+          'movie-2',
+          new Date('2023-01-01'),
+          new Date('2024-01-07'),
+        ),
+        createContinueMovie(
+          'movie-1',
+          new Date('2023-01-01'),
+          new Date('2024-01-03'),
+        ),
       ];
 
       const result = interleaveMediaProgress({
-        intent: 'continue',
         episodes,
         movies,
       });

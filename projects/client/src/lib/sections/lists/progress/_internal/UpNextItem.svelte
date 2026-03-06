@@ -1,8 +1,8 @@
 <script lang="ts">
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
+  import type { MovieContinueEntry } from "$lib/requests/models/MovieProgressEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
-  import type { MovieProgressEntry } from "$lib/requests/queries/sync/movieProgressQuery";
   import RestoreAction from "$lib/sections/media-actions/restore/RestoreAction.svelte";
   import DropAction from "../../../media-actions/drop/DropAction.svelte";
   import MarkAsWatchedAction from "../../../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
@@ -17,7 +17,7 @@
   };
 
   type UpNextMovieProps = {
-    movie: MovieProgressEntry;
+    movie: MovieContinueEntry;
     playbackId: number;
   };
 
@@ -29,7 +29,11 @@
 </script>
 
 {#if "episode" in props}
-  <UpNextSwipe episode={props.episode} show={props.show} {style}>
+  <UpNextSwipe
+    target={{ type: "episode", media: props.episode, show: props.show }}
+    show={props.show}
+    {style}
+  >
     <EpisodeItem
       episode={props.episode}
       media={props.show}
