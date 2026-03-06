@@ -79,7 +79,6 @@
     "date-fns": "4.1.0",
     "fflate": "^0.8.2",
     "firebase": "12.9.0",
-    "flowbite-svelte": "^1.31.0",
     "idb-keyval": "6.2.2",
     "marked": "^17.0.3",
     "oidc-client-ts": "3.4.1",
