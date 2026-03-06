@@ -11,6 +11,8 @@ import {
 } from '$lib/requests/queries/users/episodeActivityHistoryQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { ShowActivityHistoryResponse } from '@trakt/api';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
+import type { FilterParams } from '../../models/FilterParams.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
 type ShowActivityHistoryParams =
@@ -21,13 +23,14 @@ type ShowActivityHistoryParams =
     id?: number;
   }
   & ApiParams
-  & PaginationParams;
+  & PaginationParams
+  & FilterParams;
 
 // Show history responses are per episode
 export type ShowActivityHistory = EpisodeActivityHistory;
 
 const showHistoryRequest = (
-  { fetch, slug, startDate, endDate, limit, id, page }:
+  { fetch, slug, startDate, endDate, limit, id, page, filter }:
     ShowActivityHistoryParams,
 ) => {
   const queryParams = {
@@ -36,6 +39,7 @@ const showHistoryRequest = (
     end_at: endDate?.toISOString(),
     limit,
     page,
+    ...filter,
   };
 
   return id
@@ -73,6 +77,7 @@ export const showActivityHistoryQuery = defineInfiniteQuery({
     params.page,
     params.id,
     params.slug,
+    ...getGlobalFilterDependencies(params.filter),
   ],
   request: showHistoryRequest,
   mapper: (response) => ({

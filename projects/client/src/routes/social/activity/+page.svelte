@@ -1,9 +1,7 @@
 <script lang="ts">
   import CalendarProvider from "$lib/features/calendar/CalendarProvider.svelte";
   import { useDiscover } from "$lib/features/discover/useDiscover";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
@@ -23,14 +21,6 @@
   );
 </script>
 
-{#snippet navbarState(hasFilters: boolean)}
-  <NavbarStateSetter {hasFilters}>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-  </NavbarStateSetter>
-{/snippet}
-
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
@@ -38,12 +28,11 @@
 >
   <TraktPageCoverSetter />
 
-  <RenderForFeature flag={FeatureFlag.HomeFilter}>
-    {#snippet enabled()}
-      {@render navbarState(true)}
+  <NavbarStateSetter hasFilters>
+    {#snippet actions()}
+      <DiscoverToggles />
     {/snippet}
-    {@render navbarState(false)}
-  </RenderForFeature>
+  </NavbarStateSetter>
 
   {#if !$isLoading}
     <CalendarProvider initialDate={$list.at(0)?.activityAt}>

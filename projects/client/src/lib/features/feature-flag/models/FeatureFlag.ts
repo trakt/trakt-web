@@ -1,3 +1,2 @@
-export enum FeatureFlag {
-  HomeFilter = 'home-filter',
-}
+// deno-lint-ignore no-empty-enum
+export enum FeatureFlag {}
