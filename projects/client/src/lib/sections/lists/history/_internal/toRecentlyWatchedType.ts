@@ -5,7 +5,7 @@ export function toRecentlyWatchedType(
   mode?: DiscoverMode,
 ): RecentlyWatchedType {
   if (!mode || mode === 'media') {
-    return 'all';
+    return 'media';
   }
 
   return mode === 'movie' ? 'movie' : 'episode';

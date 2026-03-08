@@ -1956,12 +1956,6 @@
     "button_text_login": {
       "default": "Zaloguj się"
     },
-    "button_label_all": {
-      "default": "Wszystko"
-    },
-    "button_text_all": {
-      "default": "Wszystko"
-    },
     "button_label_following": {
       "default": "Obserwujesz"
     },

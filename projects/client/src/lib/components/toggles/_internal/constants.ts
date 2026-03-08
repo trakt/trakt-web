@@ -1,18 +1,15 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { ToggleOption } from '../ToggleOption.ts';
 
 export type TogglerId =
-  | 'media'
   | 'social'
   | 'discover'
   | 'comment'
   | 'trivia';
 
 type DiscoverToggleType = DiscoverMode;
-type MediaToggleType = MediaType | 'all';
 type SocialToggleType = 'following' | 'followers';
 type CommentToggleType = CommentSortType;
 type TriviaToggleType = 'spoilers' | 'no-spoilers';
@@ -24,7 +21,6 @@ type Toggler<T, K> = {
 };
 
 export type TogglerValueMap = {
-  media: MediaToggleType;
   social: SocialToggleType;
   discover: DiscoverToggleType;
   comment: CommentToggleType;
@@ -32,28 +28,6 @@ export type TogglerValueMap = {
 };
 
 type ToggleDefinition<K extends TogglerId> = Toggler<K, TogglerValueMap[K]>;
-
-const media: ToggleDefinition<'media'> = {
-  id: 'media',
-  default: 'all',
-  options: [
-    {
-      value: 'all',
-      text: m.button_text_all,
-      label: m.button_label_all,
-    },
-    {
-      value: 'show',
-      text: m.button_text_shows,
-      label: m.button_label_shows,
-    },
-    {
-      value: 'movie',
-      text: m.button_text_movies,
-      label: m.button_label_movies,
-    },
-  ],
-};
 
 const social: ToggleDefinition<'social'> = {
   id: 'social',
@@ -131,7 +105,6 @@ const trivia: ToggleDefinition<'trivia'> = {
 export const TOGGLERS: {
   [K in TogglerId]: Toggler<K, TogglerValueMap[K]>;
 } = {
-  media,
   social,
   discover,
   comment,

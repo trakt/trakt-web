@@ -3,6 +3,7 @@
   import Redirect from "$lib/components/router/Redirect.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import LibraryListPaginated from "$lib/sections/lists/library/LibraryListPaginated.svelte";
@@ -30,7 +31,11 @@
     title={m.page_title_library()}
   >
     <RenderFor audience="authenticated">
-      <NavbarStateSetter mode="minimal" />
+      <NavbarStateSetter>
+        {#snippet actions()}
+          <DiscoverToggles />
+        {/snippet}
+      </NavbarStateSetter>
     </RenderFor>
 
     <TraktPageCoverSetter />

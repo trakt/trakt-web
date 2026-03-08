@@ -1,36 +1,32 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { useToggler } from "$lib/components/toggles/useToggler";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
-  import ListMetaInfo from "../components/ListMetaInfo.svelte";
   import FavoriteAction from "../media-actions/favorite/FavoriteAction.svelte";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import { useFavoritesList } from "./stores/useFavoritesList";
 
-  const { title, slug }: { title: string; slug: string } = $props();
-
-  const { current: selectedType, set, options } = useToggler("media");
-
-  const type = $derived(
-    $selectedType.value === "all" ? undefined : $selectedType.value,
-  );
+  const {
+    title,
+    slug,
+    mode,
+  }: { title: string; slug: string; mode: DiscoverMode } = $props();
 
   const { list, isLoading } = $derived(
     useFavoritesList({
-      type,
+      type: mode,
       slug,
     }),
   );
-  const defaultVariant = $derived(useDefaultCardVariant(type));
+  const defaultVariant = $derived(useDefaultCardVariant(mode));
 
   const placeholderMessage = $derived.by(() => {
-    switch ($selectedType.value) {
+    switch (mode) {
       case "movie":
         return m.list_placeholder_favorite_movies();
       case "show":
@@ -41,28 +37,26 @@
   });
 
   const { isMe } = $derived(useIsMe(slug));
-  const cta = $derived({ type: "favorites" as const, mediaType: type });
+  const cta = $derived({
+    type: "favorites" as const,
+    mediaType: mode === "media" ? undefined : mode,
+  });
 
-  const listId = $derived(`favorites-list-${$selectedType.value}-${slug}`);
+  const listId = $derived(`favorites-list-${mode}-${slug}`);
 </script>
-
-{#snippet metaInfo()}
-  <ListMetaInfo text={$selectedType.text()} />
-{/snippet}
 
 <SectionList
   id={listId}
   items={$list}
   {title}
   --height-list={mediaListHeightResolver($defaultVariant)}
-  {metaInfo}
 >
   {#snippet item(media)}
     <DefaultMediaItem
       type={media.item.type}
       media={media.item}
       source="favorites"
-      mode={!type ? "mixed" : "standalone"}
+      mode={mode === "media" ? "mixed" : "standalone"}
     >
       {#snippet popupActions()}
         <FavoriteAction
@@ -93,9 +87,5 @@
     {:else}
       <SkeletonList id={listId} variant="portrait" />
     {/if}
-  {/snippet}
-
-  {#snippet actions()}
-    <Toggler value={$selectedType.value} onChange={set} {options} />
   {/snippet}
 </SectionList>

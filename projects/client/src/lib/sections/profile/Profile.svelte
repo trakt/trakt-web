@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages";
   import FavoritesList from "../lists/FavoritesList.svelte";
   import PersonalHistoryList from "../lists/history/PersonalHistoryList.svelte";
@@ -13,6 +14,8 @@
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
+  const { mode } = useDiscover();
+
   const { isMe } = $derived(useIsMe(slug));
 </script>
 
@@ -21,21 +24,21 @@
 </ProfileContainer>
 
 {#if $isMe}
-  <PersonalHistoryList />
+  <PersonalHistoryList mode={$mode} />
 {:else}
-  <RecentlyWatchedList title={m.list_title_history()} {slug} />
+  <RecentlyWatchedList title={m.list_title_history()} {slug} mode={$mode} />
 {/if}
 
-<FavoritesList {slug} title={m.list_title_favorites()} />
+<FavoritesList {slug} title={m.list_title_favorites()} mode={$mode} />
 
 {#if !$isMe}
-  <PersonalLists {slug} type="personal" />
-  <PersonalLists {slug} type="collaboration" />
+  <PersonalLists {slug} type="personal" mode={$mode} />
+  <PersonalLists {slug} type="collaboration" mode={$mode} />
 {/if}
 
 <!-- FIXME: add library support to view other users libraries -->
 {#if slug === "me"}
-  <LibraryList />
+  <LibraryList mode={$mode} />
 {/if}
 
 <ProfilesList {slug} />

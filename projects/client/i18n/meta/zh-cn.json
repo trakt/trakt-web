@@ -1955,12 +1955,6 @@
     "button_text_login": {
       "default": "登录"
     },
-    "button_label_all": {
-      "default": "全部"
-    },
-    "button_text_all": {
-      "default": "全部"
-    },
     "button_label_following": {
       "default": "正在关注"
     },

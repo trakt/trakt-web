@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import MediaList from "../drilldown/MediaList.svelte";
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
   import RecentlyWatchedItem from "./RecentlyWatchedItem.svelte";
@@ -6,9 +7,10 @@
   type RecentlyWatchedListProps = {
     title: string;
     slug: string;
+    mode: DiscoverMode;
   };
 
-  const { title, slug }: RecentlyWatchedListProps = $props();
+  const { title, slug, mode }: RecentlyWatchedListProps = $props();
 
   // FIXME: add drill down support
 </script>
@@ -19,7 +21,7 @@
   type="episode"
   useList={({ limit }: { limit: number }) =>
     useRecentlyWatchedList({
-      type: "all",
+      type: mode,
       limit,
       slug,
     })}

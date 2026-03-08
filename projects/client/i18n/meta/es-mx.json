@@ -1956,12 +1956,6 @@
     "button_text_login": {
       "default": "Iniciar sesión"
     },
-    "button_label_all": {
-      "default": "Todos"
-    },
-    "button_text_all": {
-      "default": "Todo"
-    },
     "button_label_following": {
       "default": "Siguiendo"
     },

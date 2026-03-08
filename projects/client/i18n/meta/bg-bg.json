@@ -1956,12 +1956,6 @@
     "button_text_login": {
       "default": "Вход"
     },
-    "button_label_all": {
-      "default": "Всички"
-    },
-    "button_text_all": {
-      "default": "Всички"
-    },
     "button_label_following": {
       "default": "Последвани"
     },
