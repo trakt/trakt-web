@@ -1,9 +1,9 @@
 <script lang="ts">
   import { TestId } from "$e2e/models/TestId";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { mapToMainCredit } from "./mapToMainCredit";
   import { mapToSummaryStatus } from "./mapToSummaryStatus";
   import { mapToSummarySubtitle } from "./mapToSummarySubtitle";
   import ResponsiveTitle from "./ResponsiveTitle.svelte";
@@ -12,28 +12,7 @@
   const { title, crew, ...target }: SummaryTitleProps = $props();
 
   const subtitle = $derived(mapToSummarySubtitle(target));
-
-  const mainCredit = $derived.by(() => {
-    if (target.type === "show") {
-      const creator = crew.creators?.at(0);
-      return (
-        creator && {
-          text: m.text_created_by({ name: creator.name }),
-          key: creator.key,
-        }
-      );
-    }
-
-    const director = crew.directors?.find((director) =>
-      director.jobs.map((job) => job.toLowerCase()).includes("director"),
-    );
-    return (
-      director && {
-        text: m.text_directed_by({ name: director.name }),
-        key: director.key,
-      }
-    );
-  });
+  const mainCredit = $derived(mapToMainCredit(target.type, crew));
 
   const status = $derived.by(() => {
     if (target.type === "episode") {
@@ -52,7 +31,7 @@
     <p class="tiny trakt-media-main-credit">
       <MessageWithLink
         message={mainCredit.text}
-        href={UrlBuilder.people(mainCredit.key)}
+        href={UrlBuilder.people(mainCredit.key, mainCredit.positions)}
         target="_self"
       />
     </p>

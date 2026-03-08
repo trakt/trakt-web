@@ -2,6 +2,7 @@ import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.t
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import type { PersonalListType } from '$lib/sections/lists/user/models/PersonalListType.ts';
+import type { CrewPositions } from '../../requests/models/CrewPosition.ts';
 import { buildParamString } from './buildParamString.ts';
 
 type TypeParams = {
@@ -165,7 +166,8 @@ export const UrlBuilder = {
     `/shows/${id}${buildParamString(params)}`,
   movies: () => '/movies',
   movie: (id: string) => `/movies/${id}`,
-  people: (id: string) => `/people/${id}`,
+  people: (id: string, positions?: CrewPositions) =>
+    `/people/${id}${buildParamString(positions ?? {})}`,
   episode: (id: string, season: number, episode: number) =>
     `/shows/${id}/seasons/${season}/episodes/${episode}`,
   profile: {

@@ -22,7 +22,9 @@ type EntryResponse = {
   show: ShowResponse;
 };
 
-const WELL_KNOWN_ROLES: Record<string, (value: string) => boolean> = {
+const WELL_KNOWN_ROLES: Partial<
+  Record<CrewPosition, (value: string) => boolean>
+> = {
   self: (value: string) => {
     const patterns = ['self (', 'self -'];
     return patterns.some((p) => value.startsWith(p));
@@ -56,7 +58,8 @@ export function mapToMediaCredits(
     const character = entry.character.toLowerCase();
 
     const wellKnownRole = Object.entries(WELL_KNOWN_ROLES)
-      .find(([role, isMatch]) => character === role || isMatch(character))?.[0];
+      .find(([role, isMatch]) => character === role || isMatch(character))
+      ?.[0] as CrewPosition | undefined;
 
     const key = wellKnownRole ?? 'acting';
     const entries = credits.get(key) ?? credits.set(key, []).get(key);

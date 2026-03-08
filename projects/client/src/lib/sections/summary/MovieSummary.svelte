@@ -59,7 +59,12 @@
   <CommunitySentiment {sentiment} slug={media.slug} />
 </RenderFor>
 
-<CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
+<CastList
+  title={m.list_title_actors()}
+  cast={crew.cast}
+  slug={media.slug}
+  type={media.type}
+/>
 
 <Comments {media} type="movie" />
 

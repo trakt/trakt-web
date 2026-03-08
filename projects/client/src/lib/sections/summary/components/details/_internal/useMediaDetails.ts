@@ -15,10 +15,9 @@ import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 import { toCountryName } from '$lib/utils/formatting/intl/toCountryName.ts';
 import { toLanguageName } from '$lib/utils/formatting/intl/toLanguageName.ts';
-import { toTranslatedJob } from '$lib/utils/formatting/string/toTranslatedJob.ts';
 import { toTranslatedStatus } from '$lib/utils/formatting/string/toTranslatedStatus.ts';
-import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { MediaDetailsProps } from '../MediaDetailsProps.ts';
+import { toCrewMemberWithJob } from './toCrewMemberWithJob.ts';
 
 function originalTitle(media: MediaEntry) {
   if (!media.originalTitle || media.originalTitle === media.title) {
@@ -84,14 +83,6 @@ function postCredits(entry: MediaEntry | EpisodeEntry) {
 }
 
 function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
-  const toCrewMemberWithJob = (person: CrewMember) => {
-    const jobs = person.jobs.map((job) => toTranslatedJob(job));
-    return {
-      label: `${person.name} (${jobs.join(', ')})`,
-      link: UrlBuilder.people(person.key),
-    };
-  };
-
   const onJob = (crewMember: CrewMember, job: Job) =>
     crewMember.jobs.includes(job);
 
@@ -103,14 +94,26 @@ function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
           title: m.header_director(),
           values: crew.directors
             .filter((director) => onJob(director, 'Director'))
-            .map(toCrewMemberWithJob),
+            .map((director) =>
+              toCrewMemberWithJob({
+                person: director,
+                position: 'directing',
+                type,
+              })
+            ),
         };
       case 'show':
         return {
           title: m.header_creator(),
           values: crew.creators
             .filter((creator) => onJob(creator, 'Creator'))
-            .map(toCrewMemberWithJob),
+            .map((creator) =>
+              toCrewMemberWithJob({
+                person: creator,
+                position: 'created by',
+                type,
+              })
+            ),
         };
     }
   };
@@ -119,7 +122,13 @@ function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
     creatorOrDirector(),
     {
       title: m.header_writer(),
-      values: crew.writers.map(toCrewMemberWithJob),
+      values: crew.writers.map((writer) =>
+        toCrewMemberWithJob({
+          person: writer,
+          position: 'writing',
+          type,
+        })
+      ),
     },
   ];
 }

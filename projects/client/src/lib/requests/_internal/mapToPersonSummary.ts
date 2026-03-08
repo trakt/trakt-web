@@ -1,4 +1,5 @@
 import type { PersonResponse } from '@trakt/api';
+import { crewPositionSchema } from '../models/CrewPosition.ts';
 import type { PersonSummary } from '../models/PersonSummary.ts';
 import { mapToHeadshot } from './mapToHeadshot.ts';
 
@@ -24,7 +25,8 @@ export const mapToPersonSummary = (
     imdb: response.ids.imdb,
     name: response.name,
     biography: response.biography ?? '',
-    knownFor: response.known_for_department,
+    knownFor:
+      crewPositionSchema.safeParse(response.known_for_department).data ?? null,
     headshot: mapToHeadshot(response.images),
     /**
      * FIXME: @seferturan remove cast once @trakt/api is updated

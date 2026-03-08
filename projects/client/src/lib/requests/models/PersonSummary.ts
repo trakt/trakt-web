@@ -1,5 +1,5 @@
-import { crewPositionSchema } from '@trakt/api';
 import { z } from 'zod';
+import { crewPositionSchema } from './CrewPosition.ts';
 import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
 
 export const PersonSummarySchema = z.object({

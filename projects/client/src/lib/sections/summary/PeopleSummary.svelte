@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import type { CrewPositions } from "$lib/requests/models/CrewPosition";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import CreditsList from "../lists/CreditsList.svelte";
   import CreditsHistoryList from "../lists/history/CreditsHistoryList.svelte";
@@ -9,8 +10,10 @@
 
   const {
     person,
+    positions,
   }: {
     person: PersonSummary;
+    positions?: CrewPositions;
   } = $props();
 </script>
 
@@ -22,6 +25,16 @@
   <PeopleSummary {person} />
 </RenderFor>
 
-<CreditsList title={m.list_title_movie_credits()} type="movie" {person} />
-<CreditsList title={m.list_title_show_credits()} type="show" {person} />
+<CreditsList
+  title={m.list_title_movie_credits()}
+  type="movie"
+  {person}
+  {positions}
+/>
+<CreditsList
+  title={m.list_title_show_credits()}
+  type="show"
+  {person}
+  {positions}
+/>
 <CreditsHistoryList {person} />
