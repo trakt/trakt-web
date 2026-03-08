@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Byt namn på din lista"
     },
-    "button_text_rename_list": {
-      "default": "Byt namn"
+    "button_text_edit_list": {
+      "default": "Redigera"
     },
-    "button_label_rename_list": {
-      "default": "Byt namn på din lista {name}"
+    "button_label_edit_list": {
+      "default": "Redigera din lista {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Se alla populära serier"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Använd"
+    },
+    "button_label_apply": {
+      "default": "Verkställ ändringar"
     },
     "button_text_continue": {
       "default": "Fortsätt"

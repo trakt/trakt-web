@@ -4,7 +4,7 @@
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
-  import CreateListDrawer from "./CreateListDrawer.svelte";
+  import SaveListDrawer from "./SaveListDrawer.svelte";
 
   const { isLoading }: { isLoading: boolean } = $props();
 
@@ -31,5 +31,5 @@
 </RenderFor>
 
 {#if $showCreateList}
-  <CreateListDrawer onClose={() => showCreateList.set(false)} />
+  <SaveListDrawer type="create" onClose={() => showCreateList.set(false)} />
 {/if}

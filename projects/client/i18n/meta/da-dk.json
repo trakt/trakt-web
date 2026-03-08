@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Omdøb din liste"
     },
-    "button_text_rename_list": {
-      "default": "Omdøb"
+    "button_text_edit_list": {
+      "default": "Rediger"
     },
-    "button_label_rename_list": {
-      "default": "Omdøb din liste {name}"
+    "button_label_edit_list": {
+      "default": "Rediger din liste {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Se alle populære serier"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Anvend"
+    },
+    "button_label_apply": {
+      "default": "Anvend ændringer"
     },
     "button_text_continue": {
       "default": "Fortsæt"

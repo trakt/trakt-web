@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Преименувайте списъка си"
     },
-    "button_text_rename_list": {
-      "default": "Преименуване"
+    "button_text_edit_list": {
+      "default": "Редактиране"
     },
-    "button_label_rename_list": {
-      "default": "Преименувайте списъка си {name}"
+    "button_label_edit_list": {
+      "default": "Редактиране на вашия списък {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Вижте всички активни сериали"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Приложи"
+    },
+    "button_label_apply": {
+      "default": "Прилагане на промените"
     },
     "button_text_continue": {
       "default": "Продължи"

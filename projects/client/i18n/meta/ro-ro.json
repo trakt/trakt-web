@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Redenumiți lista"
     },
-    "button_text_rename_list": {
-      "default": "Redenumi"
+    "button_text_edit_list": {
+      "default": "Editează"
     },
-    "button_label_rename_list": {
-      "default": "Redenumiți lista {name}"
+    "button_label_edit_list": {
+      "default": "Editează lista ta {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Vezi toate serialele în tendințe"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Aplică"
+    },
+    "button_label_apply": {
+      "default": "Aplică modificările"
     },
     "button_text_continue": {
       "default": "Continuă"

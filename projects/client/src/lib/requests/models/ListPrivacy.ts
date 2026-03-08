@@ -1,5 +1,10 @@
 import { z } from 'zod';
 
-const ListPrivacySchema = z.enum(['public', 'private']);
+export const ListPrivacySchema = z.enum([
+  'public',
+  'private',
+  'link',
+  'friends',
+]);
 
 export type ListPrivacy = z.infer<typeof ListPrivacySchema>;

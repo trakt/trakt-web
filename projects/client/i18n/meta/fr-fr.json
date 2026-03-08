@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Renommer votre liste"
     },
-    "button_text_rename_list": {
-      "default": "Renommer"
+    "button_text_edit_list": {
+      "default": "Modifier"
     },
-    "button_label_rename_list": {
-      "default": "Renommer votre liste {name}"
+    "button_label_edit_list": {
+      "default": "Modifier votre liste {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Voir toutes les séries populaires"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Appliquer"
+    },
+    "button_label_apply": {
+      "default": "Appliquer les modifications"
     },
     "button_text_continue": {
       "default": "Continuer"

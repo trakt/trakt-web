@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import { writable } from "$lib/utils/store/WritableSubject";
+  import { onMount } from "svelte";
   import Button from "../buttons/Button.svelte";
   import type { FormProps } from "./models/FormProps";
 
@@ -9,6 +10,7 @@
     onSubmit,
     onCancel,
     disabled,
+    isCancelDisabled = false,
     confirmButtonText,
     confirmButtonLabel,
   }: FormProps = $props();
@@ -21,6 +23,10 @@
     const isValid = formElement.checkValidity();
     isFormValid.set(isValid);
   };
+
+  onMount(() => {
+    checkFormValidity();
+  });
 </script>
 
 <form
@@ -38,8 +44,8 @@
       size="small"
       variant="secondary"
       color="default"
+      disabled={isCancelDisabled}
       onclick={onCancel}
-      {disabled}
       label={m.button_label_cancel()}
       type="button"
     >

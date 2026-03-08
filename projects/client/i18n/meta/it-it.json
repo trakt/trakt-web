@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Rinomina la tua lista"
     },
-    "button_text_rename_list": {
-      "default": "Rinomina"
+    "button_text_edit_list": {
+      "default": "Modifica"
     },
-    "button_label_rename_list": {
-      "default": "Rinomina la tua lista {name}"
+    "button_label_edit_list": {
+      "default": "Modifica la tua lista {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Guarda tutte le serie TV popolari"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Applica"
+    },
+    "button_label_apply": {
+      "default": "Applica modifiche"
     },
     "button_text_continue": {
       "default": "Continua"

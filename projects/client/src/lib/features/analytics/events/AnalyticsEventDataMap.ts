@@ -73,7 +73,7 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.Follow]: FollowType;
 
-  [AnalyticsEvent.ListRename]: never;
+  [AnalyticsEvent.ListEdit]: never;
   [AnalyticsEvent.ListDelete]: never;
   [AnalyticsEvent.ListCreate]: never;
   [AnalyticsEvent.ListSort]: SortType;
