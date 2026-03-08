@@ -33,7 +33,7 @@ function isGarbage(value: PersonSummary): boolean {
     'production',
   ];
 
-  return !relevantPositions.includes(value?.knownFor ?? '');
+  return !relevantPositions.includes(value?.knownFor ?? 'unknown');
 }
 
 function mapToSearchResultEntry(

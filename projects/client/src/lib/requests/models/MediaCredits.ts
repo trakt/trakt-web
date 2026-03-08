@@ -1,5 +1,6 @@
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
 import { z } from 'zod';
+import { crewPositionSchema } from './CrewPosition.ts';
 
 const BaseCreditSchema = z.object({
   media: MediaEntrySchema,
@@ -23,7 +24,7 @@ const MediaCreditSchema = z.discriminatedUnion('type', [
 
 export const MediaCreditsSchema = z
   .map(
-    z.string(),
+    crewPositionSchema,
     MediaCreditSchema.array(),
   );
 

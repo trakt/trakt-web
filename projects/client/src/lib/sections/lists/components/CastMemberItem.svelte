@@ -5,17 +5,23 @@
   import PersonCard from "$lib/components/people/card/PersonCard.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   type CastMemberCardProps = {
     castMember: CastMember;
+    type: MediaType;
   };
 
-  const { castMember }: CastMemberCardProps = $props();
+  const { castMember, type }: CastMemberCardProps = $props();
+
+  const params = $derived({
+    [`${type}s`]: "acting" as const,
+  });
 </script>
 
 <PersonCard>
-  <Link focusable={false} href={UrlBuilder.people(castMember.key)}>
+  <Link focusable={false} href={UrlBuilder.people(castMember.key, params)}>
     <CardCover
       title={castMember.name}
       src={castMember.headshot.url.thumb}
