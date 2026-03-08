@@ -1953,12 +1953,6 @@
     "button_text_login": {
       "default": "Connexion"
     },
-    "button_label_all": {
-      "default": "Tous"
-    },
-    "button_text_all": {
-      "default": "Tout"
-    },
     "button_label_following": {
       "default": "Abonnements"
     },

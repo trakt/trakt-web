@@ -1,31 +1,28 @@
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { movieFavoritesQuery } from '$lib/requests/queries/movies/movieFavoritesQuery.ts';
 import { showFavoritesQuery } from '$lib/requests/queries/shows/showFavoritesQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { combineLatest, map } from 'rxjs';
-
 type UseFavoritesProps = {
-  type?: MediaType;
+  type?: DiscoverMode;
   slug: string;
 } & FilterParams;
 
 function typeToQueries(
   { type, slug, filter }: UseFavoritesProps,
 ) {
-  if (!type) {
-    return [
-      movieFavoritesQuery({ slug, filter }),
-      showFavoritesQuery({ slug, filter }),
-    ];
-  }
-
   switch (type) {
     case 'movie':
       return [movieFavoritesQuery({ slug, filter })];
     case 'show':
       return [showFavoritesQuery({ slug, filter })];
+    default:
+      return [
+        movieFavoritesQuery({ slug, filter }),
+        showFavoritesQuery({ slug, filter }),
+      ];
   }
 }
 

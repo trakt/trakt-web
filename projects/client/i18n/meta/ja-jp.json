@@ -1953,12 +1953,6 @@
     "button_text_login": {
       "default": "ログイン"
     },
-    "button_label_all": {
-      "default": "すべて"
-    },
-    "button_text_all": {
-      "default": "すべて"
-    },
     "button_label_following": {
       "default": "フォロー中"
     },

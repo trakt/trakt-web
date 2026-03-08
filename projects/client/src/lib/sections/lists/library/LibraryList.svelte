@@ -1,6 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -12,6 +13,8 @@
   import type { Library } from "./models/Library";
   import { useLibraryList } from "./useLibraryList";
 
+  const { mode }: { mode: DiscoverMode } = $props();
+
   let activeLibrary: Library = $state("plex");
 
   const { list, isLoading } = $derived(
@@ -19,6 +22,7 @@
       limit: DEFAULT_PAGE_SIZE,
       page: 1,
       library: activeLibrary,
+      type: mode,
     }),
   );
 

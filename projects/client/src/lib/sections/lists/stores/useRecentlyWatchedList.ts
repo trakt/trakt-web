@@ -15,7 +15,7 @@ import { map } from 'rxjs';
 import { mapToActivityCalendar } from './_internal/mapToActivityCalendar.ts';
 import type { HistoryEntry } from './models/HistoryEntry.ts';
 
-export type RecentlyWatchedType = 'movie' | 'show' | 'episode' | 'all';
+export type RecentlyWatchedType = 'movie' | 'show' | 'episode' | 'media';
 
 type DateRange = {
   startDate: Date;
@@ -54,7 +54,7 @@ function typeToQuery(
       return showActivityHistoryQuery(params) as InfiniteQuery<
         HistoryEntry
       >;
-    case 'all':
+    default:
       return activityHistoryQuery(params) as InfiniteQuery<
         HistoryEntry
       >;

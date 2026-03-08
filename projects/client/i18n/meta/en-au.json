@@ -1953,12 +1953,6 @@
     "button_text_login": {
       "default": "Login"
     },
-    "button_label_all": {
-      "default": "All"
-    },
-    "button_text_all": {
-      "default": "All"
-    },
     "button_label_following": {
       "default": "Following"
     },

@@ -1953,12 +1953,6 @@
     "button_text_login": {
       "default": "Увійти"
     },
-    "button_label_all": {
-      "default": "Всі"
-    },
-    "button_text_all": {
-      "default": "Усі"
-    },
     "button_label_following": {
       "default": "Підписки"
     },

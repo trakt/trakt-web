@@ -2,6 +2,7 @@
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
@@ -28,7 +29,11 @@
   hasDynamicContent={true}
 >
   <RenderFor audience="authenticated">
-    <NavbarStateSetter mode="minimal" />
+    <NavbarStateSetter>
+      {#snippet actions()}
+        <DiscoverToggles />
+      {/snippet}
+    </NavbarStateSetter>
   </RenderFor>
 
   {#if !$isLoading && $user}
