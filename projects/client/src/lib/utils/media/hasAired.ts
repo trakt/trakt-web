@@ -9,9 +9,11 @@ type HasAiredProps = {
 };
 
 export function hasAired(props: HasAiredProps): boolean {
+  const hasAired = props.airDate <= new Date();
+
   if (props.type === 'movie' && Boolean(props.status)) {
-    return props.status === 'released';
+    return props.status === 'released' || hasAired;
   }
 
-  return props.airDate <= new Date();
+  return hasAired;
 }
