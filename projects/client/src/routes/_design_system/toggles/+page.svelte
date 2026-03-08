@@ -5,7 +5,7 @@
     { color: "purple" as const, checked: true, innerText: "Web" },
     { color: "red" as const, checked: false },
     { color: "blue" as const, checked: true },
-    { color: "orange" as const, checked: false },
+    { color: "orange" as const, indeterminate: true },
   ];
 </script>
 
@@ -15,9 +15,10 @@
   <div class="toggle-display">
     <section>
       <h2 class="capitalize">Switches</h2>
-      {#each props as { color, checked, innerText }}
+      {#each props as { color, checked, innerText, indeterminate }}
         <Switch
           {checked}
+          {indeterminate}
           label={`This is the ${color} switch`}
           {color}
           {innerText}

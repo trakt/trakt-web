@@ -8,6 +8,8 @@
     color = "purple",
     navigationType,
     icon,
+    checked,
+    indeterminate,
     ...props
   }: SwitchProps = $props();
 </script>
@@ -19,6 +21,8 @@
     data-color={color}
     aria-label={label}
     data-dpad-navigation={navigationType}
+    {checked}
+    {indeterminate}
     {...props}
   />
 
@@ -29,7 +33,7 @@
       <SwitchIcon />
     {/if}
   </span>
-  {#if innerText}
+  {#if innerText && !indeterminate}
     <span class="trakt-switch-text bold ellipsis">
       {innerText}
     </span>
@@ -43,7 +47,7 @@
     --color-foreground-switch: #{$background-color};
     --color-background-switch: #{$foreground-color};
 
-    &:has(input:not([disabled]):checked) {
+    &:has(input:not([disabled]):is(:checked):not(:indeterminate)) {
       --color-foreground-switch: #{$foreground-color};
       --color-background-switch: #{$background-color};
     }
@@ -53,7 +57,7 @@
         --color-foreground-switch: #{$foreground-color};
         --color-background-switch: #{$background-color};
 
-        &:has(input:checked) {
+        &:has(input:is(:checked)) {
           --color-foreground-switch: #{$background-color};
           --color-background-switch: #{$foreground-color};
         }
@@ -140,6 +144,12 @@
       cursor: not-allowed;
     }
 
+    &:has(input:indeterminate) {
+      .trakt-switch-tick {
+        opacity: 0.7;
+      }
+    }
+
     @include for-mouse {
       &:hover:has(input:not([disabled])) {
         .trakt-switch-tick {
@@ -169,6 +179,21 @@
 
         :global(svg) {
           transform: rotate(90deg);
+        }
+      }
+    }
+
+    &:has(input:indeterminate) {
+      .trakt-switch-tick {
+        transform: translateX(
+          calc(
+            (var(--button-width) - var(--tick-size) - 2 * var(--tick-offset)) /
+              2
+          )
+        );
+
+        :global(svg) {
+          transform: rotate(45deg);
         }
       }
     }
@@ -209,7 +234,8 @@
       color: var(--shade-10);
       border-radius: 50%;
 
-      transition: transform var(--transition-increment) ease-in-out;
+      transition: var(--transition-increment) ease-in-out;
+      transition-property: transform, opacity;
 
       :global(svg) {
         transition: transform var(--transition-increment) ease-in-out;
