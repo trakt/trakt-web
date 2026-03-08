@@ -99,6 +99,12 @@
 
     return externalTag;
   });
+
+  const hasDistinctOriginalTitle = $derived(
+    media.originalTitle
+      ? media.title.toLowerCase() !== media.originalTitle.toLowerCase()
+      : false,
+  );
 </script>
 
 <Card
@@ -201,6 +207,11 @@
         <p class="trakt-card-title ellipsis">
           {media.title}
         </p>
+        {#if hasDistinctOriginalTitle}
+          <p class="trakt-card-subtitle secondary ellipsis">
+            ({media.originalTitle})
+          </p>
+        {/if}
         <GenreList
           classList="trakt-card-subtitle smaller ellipsis secondary"
           separator=", "
