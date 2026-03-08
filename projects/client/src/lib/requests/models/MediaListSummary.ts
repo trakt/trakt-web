@@ -1,6 +1,7 @@
 import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
 import { z } from 'zod';
 import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
+import { ListPrivacySchema } from './ListPrivacy.ts';
 import { ListTypeSchema } from './ListType.ts';
 
 export const MediaListSummarySchema = z.object({
@@ -19,6 +20,7 @@ export const MediaListSummarySchema = z.object({
   sortHow: z.enum(['asc', 'desc']),
   sortBy: z.string(),
   type: ListTypeSchema,
+  privacy: ListPrivacySchema,
 });
 
 export type MediaListSummary = z.infer<typeof MediaListSummarySchema>;

@@ -10,14 +10,17 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
+  import EditListButton from "./_internal/EditListButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";
-  import RenameListButton from "./_internal/RenameListButton.svelte";
+  import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import { useDeleteList } from "./_internal/useDeleteList";
   import { useLikeList } from "./_internal/useLikeList";
 
   const { list }: { list: MediaListSummary } = $props();
 
   const { deleteList, isDeleting, isDeleted } = $derived(useDeleteList(list));
+
+  let showEditList = $state(false);
 
   const { user } = useUser();
   const { likeList, unlikeList, isUpdating, isLiked } = $derived(
@@ -51,7 +54,11 @@
           textFactory={({ title: name }) => m.text_share_list({ name })}
           source={{ id: "user-list" }}
         />
-        <RenameListButton {list} isDeleting={$isDeleting} />
+        <EditListButton
+          {list}
+          isDeleting={$isDeleting}
+          onClick={() => (showEditList = true)}
+        />
         <DeleteListButton
           {list}
           isDeleting={$isDeleting}
@@ -70,3 +77,7 @@
     />
   {/if}
 </RenderFor>
+
+{#if showEditList}
+  <SaveListDrawer type="update" onClose={() => (showEditList = false)} {list} />
+{/if}

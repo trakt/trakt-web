@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Rename your list"
     },
-    "button_text_rename_list": {
-      "default": "Rename"
+    "button_text_edit_list": {
+      "default": "Edit"
     },
-    "button_label_rename_list": {
-      "default": "Rename your list {name}"
+    "button_label_edit_list": {
+      "default": "Edit your list {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "View all hot shows"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Apply"
+    },
+    "button_label_apply": {
+      "default": "Apply changes"
     },
     "button_text_continue": {
       "default": "Continue"

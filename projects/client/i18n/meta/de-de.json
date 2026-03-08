@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Liste umbenennen"
     },
-    "button_text_rename_list": {
-      "default": "Umbenennen"
+    "button_text_edit_list": {
+      "default": "Bearbeiten"
     },
-    "button_label_rename_list": {
-      "default": "Liste {name} umbenennen"
+    "button_label_edit_list": {
+      "default": "Bearbeiten Sie Ihre Liste {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Alle Top Serien ansehen"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Anwenden"
+    },
+    "button_label_apply": {
+      "default": "Änderungen übernehmen"
     },
     "button_text_continue": {
       "default": "Weiter"

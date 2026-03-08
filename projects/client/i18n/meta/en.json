@@ -3699,17 +3699,17 @@
         "ios"
       ]
     },
-    "button_text_rename_list": {
-      "default": "Rename",
-      "description": "Aria-label for the button that allows users to rename a list.",
+    "button_text_edit_list": {
+      "default": "Edit",
+      "description": "Aria-label for the button that allows users to edit a list.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "button_label_rename_list": {
-      "default": "Rename your list {name}",
-      "description": "Aria-label for the button that allows users to rename a list.",
+    "button_label_edit_list": {
+      "default": "Edit your list {name}",
+      "description": "Aria-label for the button that allows users to edit a list.",
       "variables": {
         "name": {
           "type": "string"
@@ -3982,8 +3982,15 @@
       "default": "Apply",
       "description": "Text for the button that allows users to apply changes that are currently being edited.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
+      ]
+    },
+    "button_label_apply": {
+      "default": "Apply changes",
+      "description": "Aria-label for the button that allows users to apply changes that are currently being edited.",
+      "exclude": [
+        "android",
+        "ios"
       ]
     },
     "button_text_continue": {
@@ -4037,8 +4044,7 @@
       "default": "Edit List",
       "description": "Title for a screen that allows users to edit an existing list.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "list_placeholder_personal_list_empty": {

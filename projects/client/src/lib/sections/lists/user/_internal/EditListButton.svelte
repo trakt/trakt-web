@@ -3,23 +3,24 @@
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
-  import { useRenameList } from "./useRenameList.ts";
 
-  const { list, isDeleting }: { list: MediaListSummary; isDeleting: boolean } =
+  const {
+    list,
+    isDeleting,
+    onClick,
+  }: { list: MediaListSummary; isDeleting: boolean; onClick: () => void } =
     $props();
-
-  const { renameList, isRenaming } = $derived(useRenameList(list));
 </script>
 
 <DropdownItem
-  label={m.button_label_rename_list({ name: list.name })}
+  label={m.button_label_edit_list({ name: list.name })}
   style="flat"
   color="default"
   variant="secondary"
-  disabled={$isRenaming || isDeleting}
-  onclick={renameList}
+  disabled={isDeleting}
+  onclick={onClick}
 >
-  {m.button_text_rename_list()}
+  {`${m.button_text_edit_list()}…`}
 
   {#snippet icon()}
     <RenameIcon />

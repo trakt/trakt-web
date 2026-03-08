@@ -1,4 +1,5 @@
 import type { ListResponse } from '@trakt/api';
+import { type ListPrivacy, ListPrivacySchema } from '../models/ListPrivacy.ts';
 import { type ListType, ListTypeSchema } from '../models/ListType.ts';
 import type { MediaListSummary } from '../models/MediaListSummary.ts';
 import { mapToPoster } from './mapToPoster.ts';
@@ -11,6 +12,15 @@ function mapToType(type: string): ListType {
   }
 
   return 'personal';
+}
+
+function mapToPrivacy(privacy: string): ListPrivacy {
+  const parsed = ListPrivacySchema.safeParse(privacy);
+  if (parsed.success) {
+    return parsed.data;
+  }
+
+  return 'public';
 }
 
 export function mapToMediaListSummary(
@@ -33,5 +43,6 @@ export function mapToMediaListSummary(
     sortBy: listResponse.sort_by,
     posters,
     type: mapToType(listResponse.type),
+    privacy: mapToPrivacy(listResponse.privacy),
   };
 }

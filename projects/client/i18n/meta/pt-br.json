@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Renomear sua lista"
     },
-    "button_text_rename_list": {
-      "default": "Renomear"
+    "button_text_edit_list": {
+      "default": "Editar"
     },
-    "button_label_rename_list": {
-      "default": "Renomear sua lista {name}"
+    "button_label_edit_list": {
+      "default": "Editar sua lista {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Ver todas as séries em alta"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Aplicar"
+    },
+    "button_label_apply": {
+      "default": "Aplicar alterações"
     },
     "button_text_continue": {
       "default": "Continuar"

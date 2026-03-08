@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Переименовать список"
     },
-    "button_text_rename_list": {
-      "default": "Переименовать"
+    "button_text_edit_list": {
+      "default": "Редактировать"
     },
-    "button_label_rename_list": {
-      "default": "Переименовать список {name}"
+    "button_label_edit_list": {
+      "default": "Редактировать ваш список {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Все горячие сериалы"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Применить"
+    },
+    "button_label_apply": {
+      "default": "Применить изменения"
     },
     "button_text_continue": {
       "default": "Продолжить"

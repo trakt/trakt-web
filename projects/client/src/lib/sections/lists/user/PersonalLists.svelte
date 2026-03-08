@@ -13,8 +13,8 @@
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import ViewAllButton from "../components/ViewAllButton.svelte";
   import CreateListAction from "./_internal/CreateListAction.svelte";
-  import CreateListDrawer from "./_internal/CreateListDrawer.svelte";
   import ListsHeader from "./_internal/ListsHeader.svelte";
+  import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
@@ -138,7 +138,7 @@
 {/if}
 
 {#if $showCreateList}
-  <CreateListDrawer onClose={() => showCreateList.set(false)} />
+  <SaveListDrawer type="create" onClose={() => showCreateList.set(false)} />
 {/if}
 
 <style>

@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "Hernoem je lijst"
     },
-    "button_text_rename_list": {
-      "default": "Hernoemen"
+    "button_text_edit_list": {
+      "default": "Bewerken"
     },
-    "button_label_rename_list": {
-      "default": "Hernoem je lijst {name}"
+    "button_label_edit_list": {
+      "default": "Bewerk je lijst {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "Bekijk alle populaire series"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "Toepassen"
+    },
+    "button_label_apply": {
+      "default": "Wijzigingen toepassen"
     },
     "button_text_continue": {
       "default": "Doorgaan"

@@ -1341,11 +1341,11 @@
     "input_prompt_rename_list": {
       "default": "リストの名前を変更"
     },
-    "button_text_rename_list": {
-      "default": "名前を変更"
+    "button_text_edit_list": {
+      "default": "編集"
     },
-    "button_label_rename_list": {
-      "default": "リストの名前を変更 {name}"
+    "button_label_edit_list": {
+      "default": "リスト「{name}」を編集"
     },
     "button_label_view_all_hot_shows": {
       "default": "人気番組をすべて見る"
@@ -1439,6 +1439,9 @@
     },
     "button_text_apply": {
       "default": "適用"
+    },
+    "button_label_apply": {
+      "default": "変更を適用"
     },
     "button_text_continue": {
       "default": "続ける"

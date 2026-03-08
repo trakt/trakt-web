@@ -1340,11 +1340,11 @@
     "input_prompt_rename_list": {
       "default": "重命名你的片单"
     },
-    "button_text_rename_list": {
-      "default": "重命名"
+    "button_text_edit_list": {
+      "default": "编辑"
     },
-    "button_label_rename_list": {
-      "default": "重命名你的片单 {name}"
+    "button_label_edit_list": {
+      "default": "编辑你的列表 {name}"
     },
     "button_label_view_all_hot_shows": {
       "default": "查看所有热门剧集"
@@ -1438,6 +1438,9 @@
     },
     "button_text_apply": {
       "default": "应用"
+    },
+    "button_label_apply": {
+      "default": "应用更改"
     },
     "button_text_continue": {
       "default": "继续"
