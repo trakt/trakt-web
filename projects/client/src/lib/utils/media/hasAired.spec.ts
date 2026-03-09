@@ -26,11 +26,22 @@ describe('hasAired', () => {
         'unknown',
       ];
 
+      const futureDate = addDays(new Date(), 1);
       nonReleasedStatuses.forEach((status) => {
-        expect(hasAired({ status, type: 'movie', airDate: new Date() })).toBe(
+        expect(hasAired({ status, type: 'movie', airDate: futureDate })).toBe(
           false,
         );
       });
+    });
+
+    it('returns true for movies with a past air date and non-released status', () => {
+      expect(
+        hasAired({
+          status: 'post production',
+          type: 'movie',
+          airDate: new Date(),
+        }),
+      ).toBe(true);
     });
   });
 
