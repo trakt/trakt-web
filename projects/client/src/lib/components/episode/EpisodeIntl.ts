@@ -1,16 +1,4 @@
-import {
-  EpisodeFinaleType,
-  EpisodePremiereType,
-  type EpisodeType,
-} from '$lib/requests/models/EpisodeType.ts';
-
-export type PremiereMetadata = {
-  type: EpisodePremiereType;
-};
-
-export type FinaleMetadata = {
-  type: EpisodeFinaleType;
-};
+import { type EpisodeType } from '$lib/requests/models/EpisodeType.ts';
 
 type TimestampMetaData = {
   date: Date;
@@ -18,10 +6,9 @@ type TimestampMetaData = {
 };
 
 export type EpisodeIntl = {
-  premiereText: (metadata: PremiereMetadata) => string;
-  finaleText: (metadata: FinaleMetadata) => string;
+  premiereText: () => string;
+  finaleText: () => string;
   timestampText: (metadata: TimestampMetaData) => string;
   durationText: (duration: number) => string;
   remainingText: (remaining: number) => string;
-  fullSeasonText: () => string;
 };

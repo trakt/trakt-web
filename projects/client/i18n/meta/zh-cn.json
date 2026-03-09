@@ -23,23 +23,11 @@
     "list_title_upcoming_schedule": {
       "default": "播出时间表"
     },
-    "tag_text_season_premiere": {
-      "default": "新季首播"
+    "tag_text_premiere": {
+      "default": "首播"
     },
-    "tag_text_series_premiere": {
-      "default": "全剧首播"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "季中回归"
-    },
-    "tag_text_season_finale": {
-      "default": "季终"
-    },
-    "tag_text_series_finale": {
-      "default": "全剧终"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "季中结局"
+    "tag_text_finale": {
+      "default": "大结局"
     },
     "header_profile_banner_greeting": {
       "default": "你好，{name}"
@@ -769,9 +757,6 @@
     },
     "button_text_view_all": {
       "default": "更多"
-    },
-    "tag_text_full_season": {
-      "default": "整季"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "确定要将“{title}”从待看清单中移除吗？"

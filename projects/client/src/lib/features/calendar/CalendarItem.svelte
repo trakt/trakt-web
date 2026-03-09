@@ -14,7 +14,7 @@
     <EpisodeItem
       episode={item}
       media={item.show}
-      variant="upcoming"
+      variant={variant === "default" ? "upcoming" : "calendar"}
       source="calendar"
     />
   {/if}

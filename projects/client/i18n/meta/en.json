@@ -25,49 +25,17 @@
       "description": "Title for lists containing upcoming episodes. This title should be as short and concise as possible.",
       "exclude": []
     },
-    "tag_text_season_premiere": {
-      "default": "Season Premiere",
-      "description": "Text for the tag that indicates the premiere of a season of a show. This should be as short as possible.",
+    "tag_text_premiere": {
+      "default": "Premiere",
+      "description": "Text for the tag that indicates the premiere of a season or a show. This should be as short as possible.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "tag_text_series_premiere": {
-      "default": "Series Premiere",
-      "description": "Text for the tag that indicates the premiere of a series. This should be as short as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "Mid-Season Premiere",
-      "description": "Text for the tag that indicates the premiere of a mid-season of a show. This should be as short as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "tag_text_season_finale": {
-      "default": "Season Finale",
-      "description": "Text for the tag that indicates the finale of a season of a show. This should be as short as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "tag_text_series_finale": {
-      "default": "Series Finale",
-      "description": "Text for the tag that indicates the finale of a series. This should be as short as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "tag_text_mid_season_finale": {
-      "default": "Mid-Season Finale",
-      "description": "Text for the tag that indicates the finale of a mid-season of a show. This should be as short as possible.",
+    "tag_text_finale": {
+      "default": "Finale",
+      "description": "Text for the tag that indicates the finale of a season or a show. This should be as short as possible.",
       "exclude": [
         "android",
         "ios"
@@ -2014,14 +1982,6 @@
       "default": "More",
       "description": "Text for the button that allows users to drill down on lists to view all items in it.",
       "exclude": [
-        "ios"
-      ]
-    },
-    "tag_text_full_season": {
-      "default": "Full Season",
-      "description": "Text for the tag that indicates the entry is a placeholder for the entire season. This should be as short as possible.",
-      "exclude": [
-        "android",
         "ios"
       ]
     },

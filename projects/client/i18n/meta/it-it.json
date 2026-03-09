@@ -24,23 +24,11 @@
     "list_title_upcoming_schedule": {
       "default": "Prossima programmazione"
     },
-    "tag_text_season_premiere": {
-      "default": "Anteprima della stagione"
+    "tag_text_premiere": {
+      "default": "Première"
     },
-    "tag_text_series_premiere": {
-      "default": "Anteprima di serie"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "Anteprima di metà stagione"
-    },
-    "tag_text_season_finale": {
-      "default": "Finale di stagione"
-    },
-    "tag_text_series_finale": {
-      "default": "Finale di serie"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "Finale di metà stagione"
+    "tag_text_finale": {
+      "default": "Finale"
     },
     "header_profile_banner_greeting": {
       "default": "Ciao, {name}"
@@ -770,9 +758,6 @@
     },
     "button_text_view_all": {
       "default": "Altro"
-    },
-    "tag_text_full_season": {
-      "default": "Stagione completa"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Sei sicuro di voler rimuovere \"{title}\" dalla tua Watchlist?"

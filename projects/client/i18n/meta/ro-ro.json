@@ -24,23 +24,11 @@
     "list_title_upcoming_schedule": {
       "default": "Programare Iminentă"
     },
-    "tag_text_season_premiere": {
-      "default": "Premieră de sezon"
+    "tag_text_premiere": {
+      "default": "Premieră"
     },
-    "tag_text_series_premiere": {
-      "default": "Premieră de serie"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "Premieră de mid-sezon"
-    },
-    "tag_text_season_finale": {
-      "default": "Final de sezon"
-    },
-    "tag_text_series_finale": {
-      "default": "Final de serie"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "Final de mid-sezon"
+    "tag_text_finale": {
+      "default": "Finală"
     },
     "header_profile_banner_greeting": {
       "default": "Salut, {name}"
@@ -770,9 +758,6 @@
     },
     "button_text_view_all": {
       "default": "Mai mult"
-    },
-    "tag_text_full_season": {
-      "default": "Sezon complet"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Sigur vrei să elimini \"{title}\" din lista ta de vizionat?"

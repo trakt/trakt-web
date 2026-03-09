@@ -12,7 +12,7 @@
     align-items: center;
     gap: var(--gap-xxs);
 
-    :global(:not(:last-child))::after {
+    > :global(:not(:last-child))::after {
       content: "·";
 
       font-size: var(--font-size-separator);

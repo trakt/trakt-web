@@ -24,23 +24,11 @@
     "list_title_upcoming_schedule": {
       "default": "Kommende"
     },
-    "tag_text_season_premiere": {
-      "default": "Sesongpremiere"
+    "tag_text_premiere": {
+      "default": "Premiere"
     },
-    "tag_text_series_premiere": {
-      "default": "Seriepremiere"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "Midt-Sesongpremiere"
-    },
-    "tag_text_season_finale": {
-      "default": "Sesongavslutning"
-    },
-    "tag_text_series_finale": {
-      "default": "Serieavslutning"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "Midt-Sesongavslutning"
+    "tag_text_finale": {
+      "default": "Finale"
     },
     "header_profile_banner_greeting": {
       "default": "Hallo, {name}"
@@ -770,9 +758,6 @@
     },
     "button_text_view_all": {
       "default": "Mer"
-    },
-    "tag_text_full_season": {
-      "default": "Full Sesong"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Er du sikker på at du vil fjerne \"{title}\" fra din Watchlist?"
