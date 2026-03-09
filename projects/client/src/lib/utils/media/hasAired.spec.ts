@@ -34,7 +34,7 @@ describe('hasAired', () => {
       });
     });
 
-    it('returns true for released movies with status other than "released"', () => {
+    it('returns true for movies with a past air date and non-released status', () => {
       expect(
         hasAired({
           status: 'post production',
