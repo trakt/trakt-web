@@ -21,6 +21,7 @@
     color="red"
     style="ghost"
     variant="secondary"
+    type="button"
   >
     <CloseIcon />
   </ActionButton>
@@ -33,5 +34,7 @@
     justify-content: space-between;
 
     color: var(--red-500);
+
+    padding: var(--ni-2);
   }
 </style>

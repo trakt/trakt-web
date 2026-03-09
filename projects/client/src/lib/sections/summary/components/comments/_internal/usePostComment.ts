@@ -11,7 +11,7 @@ import { resolve } from '$lib/utils/store/resolve.ts';
 import { isHttpError } from '@sveltejs/kit';
 import type { CommentPostParams } from '@trakt/api';
 import { BehaviorSubject } from 'rxjs';
-import type { CommentsProps } from '../../CommentsProps.ts';
+import type { CommentsProps } from '../CommentsProps.ts';
 import { mapToCommentError } from './mapToCommentError.ts';
 
 type ReplyProps = {

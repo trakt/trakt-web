@@ -3,24 +3,24 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   type SpoilerSwitchProps = {
-    isReplying: boolean;
-    enabled: boolean;
+    isChecked: boolean;
     onclick: (e: MouseEvent) => void;
+    disabled?: boolean;
   };
 
-  const { isReplying, enabled, onclick }: SpoilerSwitchProps = $props();
+  const { isChecked, onclick, disabled }: SpoilerSwitchProps = $props();
 </script>
 
 <div class="trakt-comment-spoiler">
-  <p class="secondary bold" class:is-spoiler={enabled}>
+  <p class="secondary bold" class:is-spoiler={isChecked}>
     {m.text_spoiler()}
   </p>
   <Switch
     label={m.switch_label_mark_as_spoiler()}
     color="red"
-    disabled={isReplying}
-    checked={enabled}
+    checked={isChecked}
     {onclick}
+    {disabled}
   />
 </div>
 

@@ -9,7 +9,7 @@
   import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import AddCommentAction from "./_internal/comment-actions/AddCommentAction.svelte";
-  import PostCommentDialog from "./_internal/dialog/PostCommentDialog.svelte";
+  import AddReviewDrawer from "./_internal/drawers/AddReviewDrawer.svelte";
   import CommentsDrawer from "./_internal/drawers/CommentsDrawer.svelte";
   import type { ActiveComment } from "./_internal/models/ActiveComment";
   import { useComments } from "./_internal/useComments";
@@ -27,11 +27,13 @@
     }),
   );
 
-  const postCommentDialog = writable<HTMLDialogElement | undefined>(undefined);
   const drilldownSource = writable<ActiveComment | undefined>(undefined);
 
   const isOpen = writable(false);
   const onClose = () => isOpen.set(false);
+
+  const isPostReviewOpen = writable(false);
+  const onClosePostReview = () => isPostReviewOpen.set(false);
 
   const onDrilldown = (comment?: ActiveComment) => {
     isOpen.set(true);
@@ -73,7 +75,7 @@
 
       <AddCommentAction
         onclick={() => {
-          $postCommentDialog?.showModal();
+          isPostReviewOpen.set(true);
         }}
       />
 
@@ -85,12 +87,14 @@
     {/snippet}
   </SectionList>
 
-  <PostCommentDialog
-    dialog={postCommentDialog}
-    onCommentPost={onDrilldown}
-    {media}
-    {...props}
-  />
+  {#if $isPostReviewOpen}
+    <AddReviewDrawer
+      onClose={onClosePostReview}
+      onCommentPost={onDrilldown}
+      {media}
+      {...props}
+    />
+  {/if}
 
   {#if $isOpen}
     <CommentsDrawer {onClose} source={$drilldownSource} {media} {...props} />
