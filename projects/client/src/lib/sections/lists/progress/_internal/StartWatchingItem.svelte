@@ -80,6 +80,18 @@
   </TagBar>
 {/snippet}
 
+{#snippet coverTag()}
+  {#if "episode" in entry}
+    <EpisodeCountTag
+      i18n={TagIntlProvider}
+      count={entry.episode.count}
+      type="tag"
+    />
+  {:else}
+    <DurationTag i18n={TagIntlProvider} runtime={entry.runtime} type="tag" />
+  {/if}
+{/snippet}
+
 {#snippet mediaItem()}
   <MediaItem
     {...mediaEntry}
@@ -87,6 +99,7 @@
     {popupActions}
     {action}
     tag={style === "summary" ? summaryTag : undefined}
+    coverTag={style === "cover" ? coverTag : undefined}
     variant="start"
     source="start-watching"
   />

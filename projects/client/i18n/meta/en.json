@@ -60,7 +60,7 @@
       "exclude": []
     },
     "tag_text_remaining_episodes": {
-      "default": "{count} remaining",
+      "default": "{count} eps. left",
       "description": "Text for the tag that shows the number of remaining episodes in a show. This should be as short as possible.",
       "variables": {
         "count": {
@@ -6064,7 +6064,7 @@
       ]
     },
     "tag_text_remaining_duration": {
-      "default": "{duration} remaining",
+      "default": "{duration} left",
       "description": "Text for the tag that shows the remaining duration of an episode or movie. This should be as short as possible.",
       "variables": {
         "duration": {

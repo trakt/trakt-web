@@ -9,10 +9,8 @@
   import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
-  import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
-  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toTranslatedType } from "$lib/utils/formatting/string/toTranslatedType";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -104,11 +102,7 @@
         </p>
       </Link>
       <p class="trakt-card-subtitle ellipsis">
-        {#if variant === "activity"}
-          {toTranslatedType(media.type)}
-        {:else}
-          {toHumanDuration({ minutes: media.runtime }, languageTag())}
-        {/if}
+        {toTranslatedType(media.type)}
       </p>
     </CardFooter>
   </LandscapeCard>
@@ -129,7 +123,7 @@
               episodeNumber: rest.episode.number,
             })}
           {:else}
-            {toHumanDuration({ minutes: media.runtime }, languageTag())}
+            {toTranslatedType(media.type)}
           {/if}
         </p>
       </div>

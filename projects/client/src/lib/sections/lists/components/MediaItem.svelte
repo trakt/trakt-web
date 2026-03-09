@@ -2,6 +2,7 @@
   import ActivityTag from "$lib/components/media/tags/ActivityTag.svelte";
   import ProgressTag from "$lib/components/media/tags/ProgressTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import TextTag from "$lib/components/tags/TextTag.svelte";
   import type { Snippet } from "svelte";
   import MediaCard from "./MediaCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
@@ -28,7 +29,15 @@
     {/if}
     {#if props.variant === "next"}
       <ProgressTag progress={props.progress ?? 0}>
-        {TagIntlProvider.toRemainingDuration(props.minutesLeft)}
+        {TagIntlProvider.toDuration(props.media.runtime)}
+
+        {#snippet tags()}
+          <TextTag>
+            <p class="tag bold capitalize ellipsis">
+              {TagIntlProvider.toRemainingDuration(props.minutesLeft)}
+            </p>
+          </TextTag>
+        {/snippet}
       </ProgressTag>
     {/if}
     {#if props.coverTag}

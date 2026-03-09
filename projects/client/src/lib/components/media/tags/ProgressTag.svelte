@@ -1,12 +1,11 @@
 <script lang="ts">
-  import TagBar from "$lib/components/tags/TagBar.svelte";
   import TagContent from "$lib/components/tags/TagContent.svelte";
   import type { Snippet } from "svelte";
 
   type ProgressTagProps = {
     progress: number;
     total?: number;
-    tags?: Snippet;
+    tags: Snippet;
   } & ChildrenProps;
 
   const { children, progress, tags, total = 100 }: ProgressTagProps = $props();
@@ -26,18 +25,12 @@
         {@render children()}
       </p>
 
-      {#if tags}
-        <TagBar>
-          {@render tags()}
-        </TagBar>
-      {/if}
+      {@render tags()}
     </div>
   </TagContent>
 </div>
 
-<style lang="scss">
-  @use "$style/scss/mixins/index.scss" as *;
-
+<style>
   .tag-content {
     position: relative;
     width: 100%;

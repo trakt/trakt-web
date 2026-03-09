@@ -1,7 +1,6 @@
 <script lang="ts">
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import { getEpisodeStatus } from "$lib/components/episode/getEpisodeStatus";
-  import EpisodeDurationTag from "$lib/components/episode/tags/EpisodeDurationTag.svelte";
   import EpisodeRemainingTag from "$lib/components/episode/tags/EpisodeRemainingTag.svelte";
   import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
@@ -79,14 +78,10 @@
           />
         {/snippet}
 
-        {#snippet progressTags()}
+        {#snippet progressTag()}
           <EpisodeRemainingTag
             i18n={EpisodeIntlProvider}
             remaining={props.episode.remaining}
-          />
-          <EpisodeDurationTag
-            i18n={EpisodeIntlProvider}
-            minutesLeft={props.episode.minutesLeft}
           />
         {/snippet}
 
@@ -94,9 +89,8 @@
           i18n={TagIntlProvider}
           progress={props.episode.completed}
           total={props.episode.total}
-          tags={status ? statusTag : progressTags}
+          tags={status ? statusTag : progressTag}
           {runtime}
-          {style}
         />
       {/if}
 
