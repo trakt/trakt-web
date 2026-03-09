@@ -1,5 +1,9 @@
 <script lang="ts">
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
+  import { getEpisodeStatus } from "$lib/components/episode/getEpisodeStatus";
+  import EpisodeDurationTag from "$lib/components/episode/tags/EpisodeDurationTag.svelte";
+  import EpisodeRemainingTag from "$lib/components/episode/tags/EpisodeRemainingTag.svelte";
+  import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
   import ActivityTag from "$lib/components/media/tags/ActivityTag.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
@@ -28,6 +32,8 @@
   const runtime = $derived(
     isNaN(props.episode.runtime) ? props.media.runtime : props.episode.runtime,
   );
+
+  const status = $derived(getEpisodeStatus(props.episode.type));
 </script>
 
 {#snippet action()}
@@ -66,32 +72,51 @@
       {/if}
 
       {#if props.variant === "next"}
+        {#snippet statusTag()}
+          <EpisodeStatusTag
+            i18n={EpisodeIntlProvider}
+            episodeType={props.episode.type}
+          />
+        {/snippet}
+
+        {#snippet progressTags()}
+          <EpisodeRemainingTag
+            i18n={EpisodeIntlProvider}
+            remaining={props.episode.remaining}
+          />
+          <EpisodeDurationTag
+            i18n={EpisodeIntlProvider}
+            minutesLeft={props.episode.minutesLeft}
+          />
+        {/snippet}
+
         <ShowProgressTag
           i18n={TagIntlProvider}
           progress={props.episode.completed}
           total={props.episode.total}
+          tags={status ? statusTag : progressTags}
           {runtime}
           {style}
-        >
-          {#snippet tags()}
-            <TextTag>
-              <p class="bold capitalize ellipsis">
-                {EpisodeIntlProvider.remainingText(props.episode.remaining)}
-              </p>
-            </TextTag>
-            <TextTag>
-              <p class="bold capitalize no-wrap">
-                {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
-              </p>
-            </TextTag>
-          {/snippet}
-        </ShowProgressTag>
+        />
       {/if}
 
       {#if props.variant === "upcoming"}
         <AirDateTag
           i18n={TagIntlProvider}
           airDate={props.episode.airDate}
+          type="tag"
+        />
+        <EpisodeStatusTag
+          i18n={EpisodeIntlProvider}
+          episodeType={props.episode.type}
+          type="tag"
+        />
+      {/if}
+
+      {#if props.variant === "calendar"}
+        <EpisodeStatusTag
+          i18n={EpisodeIntlProvider}
+          episodeType={props.episode.type}
           type="tag"
         />
       {/if}

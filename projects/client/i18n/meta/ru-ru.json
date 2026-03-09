@@ -24,23 +24,11 @@
     "list_title_upcoming_schedule": {
       "default": "График"
     },
-    "tag_text_season_premiere": {
-      "default": "Премьера сезона"
+    "tag_text_premiere": {
+      "default": "Премьера"
     },
-    "tag_text_series_premiere": {
-      "default": "Премьера сериала"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "Мид-сезон"
-    },
-    "tag_text_season_finale": {
-      "default": "Финал сезона"
-    },
-    "tag_text_series_finale": {
-      "default": "Финал сериала"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "Финал мид-сезона"
+    "tag_text_finale": {
+      "default": "Финал"
     },
     "header_profile_banner_greeting": {
       "default": "Привет, {name}"
@@ -770,9 +758,6 @@
     },
     "button_text_view_all": {
       "default": "Еще"
-    },
-    "tag_text_full_season": {
-      "default": "Весь сезон"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Удалить «{title}» из списка?"

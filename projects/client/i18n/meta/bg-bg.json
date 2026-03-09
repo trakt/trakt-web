@@ -24,23 +24,11 @@
     "list_title_upcoming_schedule": {
       "default": "Предстоящо за гледане"
     },
-    "tag_text_season_premiere": {
-      "default": "Нов сезон"
+    "tag_text_premiere": {
+      "default": "Премиера"
     },
-    "tag_text_series_premiere": {
-      "default": "Премиера на предаването"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "Премиера в средата на сезона"
-    },
-    "tag_text_season_finale": {
-      "default": "Финал на сезона"
-    },
-    "tag_text_series_finale": {
-      "default": "Финал на предаването"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "Фонал на средата на сезона"
+    "tag_text_finale": {
+      "default": "Финал"
     },
     "header_profile_banner_greeting": {
       "default": "Здравей, {name}"
@@ -770,9 +758,6 @@
     },
     "button_text_view_all": {
       "default": "Още"
-    },
-    "tag_text_full_season": {
-      "default": "Завършил сезон"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Сигурни ли сте, че искате да премахнете \"{title}\" от вашия списък за наблюдение?"

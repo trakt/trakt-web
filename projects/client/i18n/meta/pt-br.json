@@ -24,23 +24,11 @@
     "list_title_upcoming_schedule": {
       "default": "Programação Futura"
     },
-    "tag_text_season_premiere": {
-      "default": "Estreia da Temporada"
+    "tag_text_premiere": {
+      "default": "Estreia"
     },
-    "tag_text_series_premiere": {
-      "default": "Estreia da Série"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "Estreia da 2ª Parte da Temporada"
-    },
-    "tag_text_season_finale": {
-      "default": "Final da Temporada"
-    },
-    "tag_text_series_finale": {
-      "default": "Final da Série"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "Final da 2ª Parte da Temporada"
+    "tag_text_finale": {
+      "default": "Final"
     },
     "header_profile_banner_greeting": {
       "default": "Olá, {name}!"
@@ -770,9 +758,6 @@
     },
     "button_text_view_all": {
       "default": "Mais"
-    },
-    "tag_text_full_season": {
-      "default": "Temporada Completa"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Tem certeza que quer remover \"{title}\" da sua lista para ver?"

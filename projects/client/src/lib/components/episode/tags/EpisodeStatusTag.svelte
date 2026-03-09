@@ -1,48 +1,67 @@
 <script lang="ts">
+  import type { TagType } from "$lib/components/media/tags/models/TagType";
   import StemTag from "$lib/components/tags/StemTag.svelte";
-  import {
-    EpisodeFinaleType,
-    EpisodePremiereType,
-    type EpisodeType,
-  } from "$lib/requests/models/EpisodeType";
+  import TextTag from "$lib/components/tags/TextTag.svelte";
+  import { type EpisodeType } from "$lib/requests/models/EpisodeType";
   import type { EpisodeIntl } from "../EpisodeIntl";
+  import { getEpisodeStatus } from "../getEpisodeStatus";
 
-  type EpisodeCoverProps = {
+  type EpisodeStatusProps = {
     i18n: EpisodeIntl;
-    type: EpisodeType;
+    episodeType: EpisodeType;
+    type?: TagType;
   };
 
-  const { i18n, type }: EpisodeCoverProps = $props();
+  const { i18n, episodeType, type = "text" }: EpisodeStatusProps = $props();
 
-  const isSeasonPremiere = $derived(
-    EpisodePremiereType.mid_season_premiere === (type as EpisodePremiereType) ||
-      EpisodePremiereType.season_premiere === (type as EpisodePremiereType),
-  );
-
-  const isPremiere = $derived(
-    EpisodePremiereType.series_premiere === (type as EpisodePremiereType),
-  );
-
-  const isFinale = $derived(
-    [
-      EpisodeFinaleType.mid_season_finale,
-      EpisodeFinaleType.season_finale,
-      EpisodeFinaleType.series_finale,
-    ].includes(type as EpisodeFinaleType),
-  );
-
-  const isFullSeason = $derived(type === "full_season");
+  const status = $derived(getEpisodeStatus(episodeType));
 </script>
 
-{#if isFullSeason}
-  <StemTag text={i18n.fullSeasonText()} />
+{#snippet tagContent(text: string)}
+  <div class="trakt-episode-status">
+    <div class="trakt-episode-status-indicator" data-status={status}></div>
+    <p class="bold capitalize ellipsis">
+      {text}
+    </p>
+  </div>
+{/snippet}
+
+{#snippet tag(text: string)}
+  {#if type === "text"}
+    <TextTag>{@render tagContent(text)}</TextTag>
+  {:else}
+    <StemTag>{@render tagContent(text)}</StemTag>
+  {/if}
+{/snippet}
+
+{#if status === "finale"}
+  {@render tag(i18n.finaleText())}
 {/if}
-{#if isFinale}
-  <StemTag text={i18n.finaleText({ type: type as EpisodeFinaleType })} />
+
+{#if status === "premiere"}
+  {@render tag(i18n.premiereText())}
 {/if}
-{#if isPremiere}
-  <StemTag text={i18n.premiereText({ type: type as EpisodePremiereType })} />
-{/if}
-{#if isSeasonPremiere}
-  <StemTag text={i18n.premiereText({ type: type as EpisodePremiereType })} />
-{/if}
+
+<style>
+  .trakt-episode-status {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xxs);
+  }
+
+  .trakt-episode-status-indicator {
+    --indicator-size: var(--ni-6);
+
+    width: var(--indicator-size);
+    height: var(--indicator-size);
+    border-radius: 50%;
+
+    &[data-status="finale"] {
+      background-color: var(--red-500);
+    }
+
+    &[data-status="premiere"] {
+      background-color: var(--green-500);
+    }
+  }
+</style>

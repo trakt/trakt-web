@@ -24,23 +24,11 @@
     "list_title_upcoming_schedule": {
       "default": "次回の予定"
     },
-    "tag_text_season_premiere": {
-      "default": "シーズン初公開"
+    "tag_text_premiere": {
+      "default": "プレミア"
     },
-    "tag_text_series_premiere": {
-      "default": "シリーズ初公開"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "シーズン中盤初公開"
-    },
-    "tag_text_season_finale": {
-      "default": "シーズン最終回"
-    },
-    "tag_text_series_finale": {
-      "default": "シリーズ最終回"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "シーズン中盤最終回"
+    "tag_text_finale": {
+      "default": "フィナーレ"
     },
     "header_profile_banner_greeting": {
       "default": "こんにちは、{name}さん！"
@@ -770,9 +758,6 @@
     },
     "button_text_view_all": {
       "default": "もっと"
-    },
-    "tag_text_full_season": {
-      "default": "フルシーズン"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "「\"{title}\"」をウォッチリストから削除してもよろしいですか？"

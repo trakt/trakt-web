@@ -24,23 +24,11 @@
     "list_title_upcoming_schedule": {
       "default": "Kommende Termine"
     },
-    "tag_text_season_premiere": {
-      "default": "Staffelpremiere"
+    "tag_text_premiere": {
+      "default": "Premiere"
     },
-    "tag_text_series_premiere": {
-      "default": "Serienpremiere"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "Staffelmittepremiere"
-    },
-    "tag_text_season_finale": {
-      "default": "Staffelfinale"
-    },
-    "tag_text_series_finale": {
-      "default": "Serienfinale"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "Staffelmittefinale"
+    "tag_text_finale": {
+      "default": "Finale"
     },
     "header_profile_banner_greeting": {
       "default": "Hallo, {name}"
@@ -770,9 +758,6 @@
     },
     "button_text_view_all": {
       "default": "Mehr"
-    },
-    "tag_text_full_season": {
-      "default": "Ganze Staffel"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Möchtest du \"{title}\" wirklich von deiner Liste zum Schauen entfernen?"

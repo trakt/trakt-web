@@ -24,23 +24,11 @@
     "list_title_upcoming_schedule": {
       "default": "Komende planning"
     },
-    "tag_text_season_premiere": {
-      "default": "Seizoen première"
+    "tag_text_premiere": {
+      "default": "Première"
     },
-    "tag_text_series_premiere": {
-      "default": "Serie première"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "Middenseizoen première"
-    },
-    "tag_text_season_finale": {
-      "default": "Seizoensfinale"
-    },
-    "tag_text_series_finale": {
-      "default": "Seriesfinale"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "Middenseizoensfinale"
+    "tag_text_finale": {
+      "default": "Finale"
     },
     "header_profile_banner_greeting": {
       "default": "Hallo, {name}"
@@ -770,9 +758,6 @@
     },
     "button_text_view_all": {
       "default": "Meer"
-    },
-    "tag_text_full_season": {
-      "default": "Volledig Seizoen"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Weet je zeker dat je \"{title}\" van je kijklijst wilt verwijderen?"

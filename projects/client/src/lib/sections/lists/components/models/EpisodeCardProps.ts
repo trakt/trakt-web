@@ -12,7 +12,7 @@ export type EpisodeItemVariant =
     context?: EpisodeContext;
   }
   | {
-    variant: 'default' | 'upcoming';
+    variant: 'default' | 'upcoming' | 'calendar';
     episode: EpisodeEntry;
     context?: EpisodeContext;
   }

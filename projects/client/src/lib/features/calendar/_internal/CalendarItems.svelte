@@ -61,12 +61,6 @@
       gap: var(--gap-s);
     }
 
-    :global(.trakt-card) {
-      :global(.trakt-card-cover-tag) {
-        display: none;
-      }
-    }
-
     @include for-mobile() {
       &[data-layout="grid"] {
         :global(.trakt-list-item-container) {

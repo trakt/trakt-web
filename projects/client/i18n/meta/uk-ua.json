@@ -24,23 +24,11 @@
     "list_title_upcoming_schedule": {
       "default": "Наступний розклад"
     },
-    "tag_text_season_premiere": {
-      "default": "Прем'єра сезону"
+    "tag_text_premiere": {
+      "default": "Прем’єра"
     },
-    "tag_text_series_premiere": {
-      "default": "Прем'єра серіалу"
-    },
-    "tag_text_mid_season_premiere": {
-      "default": "Прем'єра середини сезону"
-    },
-    "tag_text_season_finale": {
-      "default": "Фінал сезону"
-    },
-    "tag_text_series_finale": {
-      "default": "Фінал серіалу"
-    },
-    "tag_text_mid_season_finale": {
-      "default": "Фінал середини сезону"
+    "tag_text_finale": {
+      "default": "Фінал"
     },
     "header_profile_banner_greeting": {
       "default": "Привіт, {name}"
@@ -770,9 +758,6 @@
     },
     "button_text_view_all": {
       "default": "Більше"
-    },
-    "tag_text_full_season": {
-      "default": "Повний сезон"
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Ви впевнені, що хочете видалити \"{title}\" зі свого списку перегляду?"
