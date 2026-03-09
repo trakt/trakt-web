@@ -208,7 +208,7 @@
           {media.title}
         </p>
         {#if hasDistinctOriginalTitle}
-          <p class="trakt-card-subtitle secondary ellipsis">
+          <p class="secondary ellipsis">
             ({media.originalTitle})
           </p>
         {/if}
@@ -280,7 +280,7 @@
   }
 
   :global(.trakt-summary-card-titles) {
-    height: var(--ni-66);
+    min-height: var(--ni-66);
   }
 
   .trakt-card-title,
