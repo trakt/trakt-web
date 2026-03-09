@@ -5,12 +5,12 @@
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
+  import CommentError from "../CommentError.svelte";
   import type { ActiveComment } from "../models/ActiveComment";
+  import { usePostComment, type UseAddCommentProps } from "../usePostComment";
   import { autoResizeArea as autoResizeAreaFn } from "./autoResizeArea";
-  import CommentError from "./CommentError.svelte";
   import SpoilerSwitch from "./SpoilerSwitch.svelte";
   import { useContentObserver } from "./useContentObserver";
-  import { usePostComment, type UseAddCommentProps } from "./usePostComment";
 
   type CommentInputProps = {
     label: string;
@@ -58,6 +58,8 @@
   onMount(() => {
     textAreaElement.focus();
   });
+
+  // FIXME: merge with the component in the drawer
 </script>
 
 <trakt-comment-input>
@@ -72,8 +74,8 @@
 
     <div class="trakt-comment-actions">
       <SpoilerSwitch
-        isReplying={$isCommenting}
-        enabled={isSpoiler}
+        disabled={$isCommenting}
+        isChecked={isSpoiler}
         onclick={() => (isSpoiler = !isSpoiler)}
       />
 

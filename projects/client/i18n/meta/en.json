@@ -2879,8 +2879,7 @@
       "default": "Add Review",
       "description": "Button action label used when a user is submitting a review.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "button_text_add_reply": {

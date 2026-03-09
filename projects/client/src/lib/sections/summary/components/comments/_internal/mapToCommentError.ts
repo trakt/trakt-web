@@ -1,4 +1,4 @@
-import { CommentError } from '../models/CommentError.ts';
+import { CommentError } from './models/CommentError.ts';
 
 export function mapToCommentError(statusCode: number): CommentError {
   switch (statusCode) {
