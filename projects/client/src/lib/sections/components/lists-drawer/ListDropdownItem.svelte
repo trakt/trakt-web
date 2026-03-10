@@ -18,12 +18,10 @@
     onLoading,
     i18n = ListDropdownItemIntlProvider,
     media,
-    listedOnIds,
+    isListed,
   }: ListDropdownItemProps = $props();
 
   const { user } = useUser();
-
-  const isListed = $derived(listedOnIds.some((listId) => listId === list.id));
 
   const { addToList, removeFromList, isListUpdating } = $derived(
     useList({
