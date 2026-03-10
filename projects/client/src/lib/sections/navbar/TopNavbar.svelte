@@ -52,7 +52,6 @@
     height: var(--navbar-height);
 
     margin-top: env(safe-area-inset-top);
-    margin-bottom: var(--ni-12);
 
     &.is-hidden {
       margin: 0;

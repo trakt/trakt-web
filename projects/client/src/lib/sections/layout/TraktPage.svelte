@@ -132,7 +132,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-content {
-    --content-gap: var(--gap-xl);
+    --content-gap: var(--gap-m);
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: gap, margin;
@@ -155,7 +155,7 @@
     }
 
     @include for-mobile {
-      --content-gap: var(--gap-m);
+      --content-gap: var(--gap-xxs);
     }
   }
 </style>

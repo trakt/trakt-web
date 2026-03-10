@@ -149,8 +149,6 @@
     display: flex;
     flex-direction: column;
 
-    gap: var(--list-header-gap);
-
     &.section-list-container-no-header {
       --height-container: var(--height-list);
       --height-min-container: 0;

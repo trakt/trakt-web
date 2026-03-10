@@ -89,6 +89,7 @@
     grid-column-gap: var(--list-gap);
 
     @include for-mobile {
+      grid-row-gap: var(--gap-s);
       grid-template-columns: 1fr;
     }
   }

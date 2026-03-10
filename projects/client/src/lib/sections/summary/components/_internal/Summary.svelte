@@ -40,9 +40,7 @@
     flex-direction: column;
     gap: var(--gap-m);
 
-    padding-top: var(--gap-m);
-    padding-left: var(--layout-distance-side);
-    padding-right: var(--layout-distance-side);
+    padding: var(--gap-m) var(--layout-distance-side);
   }
 
   .trakt-summary-main {
