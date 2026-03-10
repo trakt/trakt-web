@@ -1,6 +1,5 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
-  import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
   import SettingsButton from "$lib/components/buttons/settings/SettingsButton.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
@@ -11,7 +10,6 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { DisplayableProfileProps } from "../profile/DisplayableProfileProps";
   import FollowUserButton from "./_internal/FollowUserButton.svelte";
-  import ProfileOptionsButton from "./_internal/ProfileOptionsButton.svelte";
   import ProfileImage from "./ProfileImage.svelte";
 
   const { profile, slug }: DisplayableProfileProps = $props();
@@ -58,14 +56,7 @@
           <FollowUserButton {profile} {slug} />
         {/if}
         {#if $isMe}
-          <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
-            <ProfileOptionsButton />
-          </RenderFor>
-
-          <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
-            <SettingsButton style="action" />
-            <LogoutButton style="action" />
-          </RenderFor>
+          <SettingsButton style="action" />
         {/if}
       </RenderFor>
     </div>
