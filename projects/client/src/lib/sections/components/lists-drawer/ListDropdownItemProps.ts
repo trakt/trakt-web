@@ -9,6 +9,6 @@ export type ListDropdownItemProps = {
   };
   onLoading?: (isLoading: boolean) => void;
   title: string;
-  listedOnIds: number[];
+  isListed: boolean;
   i18n?: ListDropdownItemIntl;
 };

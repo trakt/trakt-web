@@ -30,6 +30,16 @@
     useListedOnIds({ media }),
   );
 
+  const listedOnIdsSet = $derived(new Set($listedOnIds));
+  const sortedLists = $derived(
+    $lists.toSorted((a, b) => {
+      const aListed = listedOnIdsSet.has(a.id);
+      const bListed = listedOnIdsSet.has(b.id);
+      if (aListed === bListed) return 0;
+      return aListed ? -1 : 1;
+    }),
+  );
+
   const {
     addToWatchlist,
     isWatchlistUpdating,
@@ -69,13 +79,13 @@
     {#if isEmpty && isLoading}
       <LoadingIndicator />
     {:else}
-      {#each $lists as list}
+      {#each sortedLists as list (list.id)}
         <ListDropdownItem
           title={title ?? media.title}
           {list}
           {onLoading}
           {media}
-          listedOnIds={$listedOnIds}
+          isListed={listedOnIdsSet.has(list.id)}
         />
       {/each}
     {/if}
