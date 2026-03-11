@@ -2589,6 +2589,9 @@
     "limit_title_ratings": {
       "default": "Cotes"
     },
+    "limit_title_smart_lists": {
+      "default": "Listes intelligentes"
+    },
     "limit_title_personal_lists": {
       "default": "Mes listes"
     },
@@ -2750,6 +2753,30 @@
     },
     "advanced_filter_label_ratings": {
       "default": "Note de {min} à {max}"
+    },
+    "warning_smart_lists_limit": {
+      "default": "T'as atteint ta limite de listes intelligentes"
+    },
+    "header_create_smart_list": {
+      "default": "Créer une liste intelligente"
+    },
+    "header_target": {
+      "default": "Cible"
+    },
+    "text_vip_upsell_smart_lists": {
+      "default": "Deviens VIP pour débloquer de plus grandes limites!"
+    },
+    "text_vip_upsell_more_lists": {
+      "default": "Crée plus de listes."
+    },
+    "page_title_smart_lists": {
+      "default": "Listes intelligentes"
+    },
+    "page_title_create_smart_list": {
+      "default": "Créer une liste intelligente"
+    },
+    "tag_text_smart_list_preview": {
+      "default": "Aperçu de liste"
     }
   }
 }

@@ -7,6 +7,7 @@ const CALENDAR_ACTION_PREFIX = 'calendar-action';
 const SEASONAL_ACTION_PREFIX = 'seasonal-action';
 const BANNER_ACTION_PREFIX = 'banner-action';
 const VIP_ACTION_PREFIX = 'vip-action';
+const SMART_LIST_ACTION_PREFIX = 'smart-list-action';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -66,4 +67,7 @@ export const AnalyticsEvent = {
 
   VipUpgrade: buildEventKey(VIP_ACTION_PREFIX, 'vip-upgrade'),
   VipManage: buildEventKey(VIP_ACTION_PREFIX, 'vip-manage'),
+
+  SmartListDelete: buildEventKey(SMART_LIST_ACTION_PREFIX, 'delete'),
+  SmartListCreate: buildEventKey(SMART_LIST_ACTION_PREFIX, 'create'),
 } as const;

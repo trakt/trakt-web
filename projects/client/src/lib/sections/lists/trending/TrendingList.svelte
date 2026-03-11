@@ -3,7 +3,9 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { FilterOverrideParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import type { DrillListProps } from "../drilldown/DrillListProps";
   import TrendingListItem from "./TrendingListItem.svelte";
   import { useTrendingList } from "./useTrendingList";
 
@@ -13,7 +15,8 @@
     type: DiscoverMode;
     search?: Record<string, string>;
     filterOverride?: FilterOverrideParams;
-  };
+    actions?: Snippet;
+  } & Partial<DrillListProps<DiscoverMode>>;
 
   const {
     title,
@@ -21,6 +24,8 @@
     type,
     search,
     filterOverride,
+    actions,
+    urlBuilder,
   }: TrendingListProps = $props();
   const { filterMap } = useFilter();
 </script>
@@ -33,16 +38,18 @@
   {type}
   filter={$filterMap}
   {filterOverride}
+  {actions}
   useList={(params) =>
     useTrendingList({
       ...params,
       search,
     })}
-  urlBuilder={(params) =>
-    UrlBuilder.trending({
-      ...params,
-      search,
-    })}
+  urlBuilder={urlBuilder ??
+    ((params) =>
+      UrlBuilder.trending({
+        ...params,
+        search,
+      }))}
 >
   {#snippet item(media)}
     <TrendingListItem

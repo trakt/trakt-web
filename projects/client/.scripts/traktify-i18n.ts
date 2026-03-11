@@ -92,6 +92,7 @@ function generateMultiLocalePromptText({
           *   "Show": A TV series like "Breaking Bad" or "Stranger Things."
           *   "Episode": A single episode, like "The Rains of Castamere" (Game of Thrones).
           *   "Watchlist": A user's "must-see" list.
+          *   "Smart list": A user-created list with dynamic filters, like "Top Rated Sci-Fi Movies. This should never be translated in the same way as watchlist."
 
           Provide the translated JSON in a valid format, with a nested object for each language, like this:
 

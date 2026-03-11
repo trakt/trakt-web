@@ -2,7 +2,7 @@ import * as m from '$lib/features/i18n/messages.ts';
 import type { UserLimits } from '$lib/requests/models/UserLimits.ts';
 import type { UsageCategoryItem } from './mapToUsageCategories.ts';
 
-// FIXME: add notes & smart list limits when features are available
+// FIXME: add notes when feature is available
 export function mapToUpsellLimits(limits: UserLimits): UsageCategoryItem[] {
   return [
     {
@@ -20,6 +20,10 @@ export function mapToUpsellLimits(limits: UserLimits): UsageCategoryItem[] {
     {
       title: m.limit_title_ratings,
       limits: limits.ratings,
+    },
+    {
+      title: m.limit_title_smart_lists,
+      limits: limits.dynamicLists,
     },
     {
       title: m.limit_title_personal_lists,

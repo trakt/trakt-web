@@ -15,7 +15,7 @@ export type UsageCategory = {
   items: UsageCategoryItem[];
 };
 
-// FIXME: add notes & smart list limits when features are available
+// FIXME: add notes when feature are available
 export function mapToUsageCategories(limits: UserLimits): UsageCategory[] {
   return [
     {
@@ -34,6 +34,10 @@ export function mapToUsageCategories(limits: UserLimits): UsageCategory[] {
     {
       title: m.usage_title_lists,
       items: [
+        {
+          title: m.limit_title_smart_lists,
+          limits: limits.dynamicLists,
+        },
         {
           title: m.limit_title_personal_lists,
           limits: limits.staticLists,

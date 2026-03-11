@@ -1,5 +1,7 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
+import { type UserLimits } from '$lib/requests/models/UserLimits.ts';
+import { userLimitsQuery } from '$lib/requests/queries/vip/userLimitsQuery.ts';
 import { map, of, shareReplay, switchMap } from 'rxjs';
 import {
   currentUserCommentReactionsQuery,
@@ -107,6 +109,7 @@ export function useUser() {
     currentUserPlexLibraryQuery(),
   );
   const likesQuerySignal = useQuery(currentUserLikesQuery());
+  const limitsQuerySignal = useQuery(userLimitsQuery());
 
   // Create a stream that switches between authorized and anonymous state
   const userContext$ = isAuthorized.pipe(
@@ -144,6 +147,7 @@ export function useUser() {
           likes: of<UserLikes>({
             lists: new Map(),
           }),
+          limits: of<UserLimits | null>(null),
         });
       }
 
@@ -175,6 +179,9 @@ export function useUser() {
         likes: likesQuerySignal.pipe(
           map((likes) => likes.data),
         ),
+        limits: limitsQuerySignal.pipe(
+          map((limits) => limits.data),
+        ),
       });
     }),
     shareReplay(1),
@@ -190,5 +197,6 @@ export function useUser() {
     network: userContext$.pipe(switchMap((ctx) => ctx.network)),
     plexLibrary: userContext$.pipe(switchMap((ctx) => ctx.plexLibrary)),
     likes: userContext$.pipe(switchMap((ctx) => ctx.likes)),
+    limits: userContext$.pipe(switchMap((ctx) => ctx.limits)),
   };
 }

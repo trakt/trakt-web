@@ -2589,6 +2589,9 @@
     "limit_title_ratings": {
       "default": "Oceny"
     },
+    "limit_title_smart_lists": {
+      "default": "Inteligentne listy"
+    },
     "limit_title_personal_lists": {
       "default": "Moje listy"
     },
@@ -2750,6 +2753,30 @@
     },
     "advanced_filter_label_ratings": {
       "default": "Ocena od {min} do {max}"
+    },
+    "warning_smart_lists_limit": {
+      "default": "Osiągnięto limit inteligentnych list"
+    },
+    "header_create_smart_list": {
+      "default": "Utwórz inteligentną listę"
+    },
+    "header_target": {
+      "default": "Cel"
+    },
+    "text_vip_upsell_smart_lists": {
+      "default": "Przejdź na VIP, aby zwiększyć limity."
+    },
+    "text_vip_upsell_more_lists": {
+      "default": "Twórz więcej list."
+    },
+    "page_title_smart_lists": {
+      "default": "Inteligentne listy"
+    },
+    "page_title_create_smart_list": {
+      "default": "Utwórz inteligentną listę"
+    },
+    "tag_text_smart_list_preview": {
+      "default": "Podgląd"
     }
   }
 }

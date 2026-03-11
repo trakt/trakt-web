@@ -6,6 +6,7 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { FilterResponse } from '@trakt/api';
 import { z } from 'zod';
+import { InvalidateAction } from '../../models/InvalidateAction.ts';
 import { type MediaType, MediaTypeSchema } from '../../models/MediaType.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
@@ -28,6 +29,8 @@ const SmartListSchema = z.object({
   target: SmartListTargetSchema,
   type: MediaTypeSchema,
   params: z.record(z.string(), z.string()),
+  id: z.number(),
+  updatedAt: z.date(),
 });
 
 function mapToType(
@@ -67,6 +70,8 @@ function mapToSmartList(
     type: mapToType(entry.section),
     target: mapToTarget(entry.path),
     params: Object.fromEntries(new URLSearchParams(entry.query)),
+    id: entry.id,
+    updatedAt: new Date(entry.updated_at),
   };
 }
 
@@ -86,7 +91,10 @@ const smartListRequest = (
 
 export const smartListQuery = defineInfiniteQuery({
   key: (params: SavedFilterParams) => `${params.type}SavedFilters`,
-  invalidations: [],
+  invalidations: [
+    InvalidateAction.SmartList.Created,
+    InvalidateAction.SmartList.Deleted,
+  ],
   dependencies: (
     params: SavedFilterParams,
   ) => [
