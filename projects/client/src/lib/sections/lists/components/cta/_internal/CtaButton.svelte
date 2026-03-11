@@ -25,6 +25,8 @@
     switch (cta.type) {
       case "personal-list":
         return undefined;
+      case "smart-list":
+        return UrlBuilder.lists.smart.create();
       default:
         return UrlBuilder.discover();
     }

@@ -4794,6 +4794,13 @@
         "ios"
       ]
     },
+    "text_cta_smart_lists": {
+      "default": "Set the filters. Skip the curation. Your list builds and updates itself automatically.",
+      "description": "Call to action text shown in the empty smart lists screen, encouraging users to create a smart list.",
+      "exclude": [
+        "ios"
+      ]
+    },
     "text_cta_favorites": {
       "default": "Your faves. Your story. Spotlight the movies and shows that left a mark.",
       "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite movies and shows.",

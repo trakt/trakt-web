@@ -21,7 +21,7 @@
 </script>
 
 {#snippet buttonIcon()}
-  {#if cta.type === "personal-list"}
+  {#if cta.type === "personal-list" || cta.type === "smart-list"}
     <PlusIcon />
   {:else}
     <SearchIcon />

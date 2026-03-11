@@ -1746,6 +1746,9 @@
     "text_cta_personal_lists": {
       "default": "Dina listor. Dina regler. Samla och organisera filmer och serier på ditt sätt."
     },
+    "text_cta_smart_lists": {
+      "default": "Ställ in filtren. Slipp det manuella arbetet. Din lista skapas och uppdateras helt automatiskt."
+    },
     "text_cta_favorites": {
       "default": "Dina favoriter. Din historia. Spotlights de filmer och serier som gjort ett avtryck."
     },

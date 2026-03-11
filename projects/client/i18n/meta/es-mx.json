@@ -1746,6 +1746,9 @@
     "text_cta_personal_lists": {
       "default": "Tus listas. Tus reglas. ¡Colecciona y organiza tus películas y series como quieras!"
     },
+    "text_cta_smart_lists": {
+      "default": "Ajusta los filtros. Olvídate de la talacha de armar todo. Tu lista se arma y se actualiza solita."
+    },
     "text_cta_favorites": {
       "default": "Tus favs. Tu historia. Destaca las películas y series que te volaron la cabeza."
     },
