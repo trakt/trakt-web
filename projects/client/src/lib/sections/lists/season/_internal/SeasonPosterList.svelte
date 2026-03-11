@@ -4,7 +4,6 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
-  import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import SeasonPopupMenu from "./SeasonPopupMenu.svelte";
 
@@ -32,7 +31,8 @@
   {subtitle}
   id={`season-poster-list-${show.slug}`}
   items={seasons}
-  --height-list={mediaListHeightResolver("portrait")}
+  --height-list="var(--height-poster-list-sm)"
+  --height-override-card="var(--height-portrait-card-sm)"
 >
   {#snippet item(season)}
     <SeasonItem

@@ -31,6 +31,8 @@
 </script>
 
 <DrillableMediaList
+  --height-override-card="var(--height-portrait-card-sm)"
+  --height-override-list="var(--height-poster-list-sm)"
   id="popular-list-{type}"
   source={{ id: "popular", type }}
   {title}

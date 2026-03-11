@@ -27,6 +27,7 @@
    * Card dimensions
    */
   --height-card-footer: var(--ni-40);
+  --height-card-footer-sm: var(--ni-28);
 
   --width-portrait-card: var(--min-portrait-card-width);
   @include dynamic-card-width(--width-portrait-card,
@@ -35,6 +36,7 @@
   );
   --height-portrait-card-cover: calc(var(--width-portrait-card) * 1.5);
   --height-portrait-card: calc(var(--height-portrait-card-cover) + var(--height-card-footer));
+  --height-portrait-card-sm: calc(var(--height-portrait-card-cover) + var(--height-card-footer-sm));
 
   --width-landscape-card: var(--min-landscape-card-width);
   @include dynamic-card-width(--width-landscape-card,
@@ -100,10 +102,11 @@
   --height-landscape-list: calc(var(--height-landscape-card) + var(--layout-scrollbar-width));
   --height-person-list: calc(var(--height-person-card) + var(--layout-scrollbar-width));
   --height-poster-list: calc(var(--height-portrait-card) + var(--layout-scrollbar-width));
+  --height-poster-list-sm: calc(var(--height-portrait-card-sm) + var(--layout-scrollbar-width));
   --height-lists-list: calc(var(--height-list-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-comments-list: calc(var(--height-comment-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-trivia-list: calc(var(--height-trivia-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
-  --height-sentiment-list: var(--height-sentiment-card);
+  --height-sentiment-list: calc(var(--height-sentiment-card) + var(--layout-footer-less-padding));
   --height-comment-thread-list: calc(var(--height-comment-thread-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
   --height-profile-list: calc(var(--height-profile-item) + var(--layout-scrollbar-width));
   --height-where-to-watch-list: calc(var(--height-where-to-watch-item) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
@@ -119,9 +122,9 @@
   --footer-bar-padding: var(--ni-40);
 
   --layout-scrollbar-width: var(--ni-8);
-  --layout-footer-less-padding: var(--ni-16);
+  --layout-footer-less-padding: var(--ni-8);
 
-  --list-header-gap: var(--gap-s);
+  --list-header-gap: var(--gap-micro);
   --list-gap: var(--gap-s);
   @include adaptive-gap(--list-gap);
 

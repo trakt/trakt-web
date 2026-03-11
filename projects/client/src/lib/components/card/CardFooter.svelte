@@ -28,7 +28,7 @@
 <style>
   :global(.trakt-card-transparent) {
     .trakt-card-footer {
-      padding: var(--ni-8) 0;
+      padding: var(--ni-8) 0 0;
     }
   }
 

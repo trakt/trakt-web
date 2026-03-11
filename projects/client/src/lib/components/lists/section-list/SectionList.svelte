@@ -139,9 +139,14 @@
   @use "$style/scss/mixins/index" as *;
 
   .section-list-container {
+    --shadow-spacing: var(--ni-2);
+
     --height-min-container: var(--ni-40);
+    --section-list-height: calc(
+      var(--height-override-list, var(--height-list)) + var(--shadow-spacing)
+    );
     --height-container: calc(
-      var(--height-list) + var(--ni-40) + var(--list-header-gap)
+      var(--section-list-height) + var(--ni-40) + var(--list-header-gap)
     );
 
     contain: layout;
@@ -149,8 +154,10 @@
     display: flex;
     flex-direction: column;
 
+    gap: var(--list-header-gap);
+
     &.section-list-container-no-header {
-      --height-container: var(--height-list);
+      --height-container: var(--section-list-height);
       --height-min-container: 0;
       gap: 0;
     }
@@ -191,8 +198,8 @@
 
   .section-list,
   .section-list-empty-state {
-    min-height: var(--height-list);
-    height: var(--height-list);
+    min-height: var(--section-list-height);
+    height: var(--section-list-height);
   }
 
   .section-list-empty-state:not(:has(:global(.trakt-skeleton-list))) {
@@ -229,17 +236,13 @@
 
   .section-list-horizontal-scroll,
   :global(.trakt-skeleton-list) {
-    --shadow-offset: var(--ni-12);
-
-    height: var(--height-list);
+    height: var(--section-list-height);
     display: flex;
     overflow-x: auto;
     transition: gap var(--transition-increment) ease-in-out;
     gap: var(--list-gap);
 
-    box-sizing: content-box;
-    padding-block: var(--shadow-offset);
-    margin-block: calc(var(--shadow-offset) * -1);
+    padding-top: var(--shadow-spacing);
 
     &[data-navigation-type="dpad"] {
       gap: var(--gap-xxs);

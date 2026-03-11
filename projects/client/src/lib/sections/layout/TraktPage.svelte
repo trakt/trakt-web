@@ -155,7 +155,8 @@
     }
 
     @include for-mobile {
-      --content-gap: var(--gap-xxs);
+      margin-top: var(--gap-xxs);
+      --content-gap: var(--gap-s);
     }
   }
 </style>

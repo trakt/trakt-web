@@ -11,18 +11,32 @@
   const { mode } = useDiscover();
 </script>
 
-<PaginatedList
-  {type}
-  useList={(params) =>
-    usePersonalListsSummary({
-      ...params,
-      slug,
-      limit: DEFAULT_LISTS_DRILL_SIZE,
-    })}
->
-  {#snippet items(items)}
-    {#each items as list (list.id)}
-      <UserList {list} type={$mode} />
-    {/each}
-  {/snippet}
-</PaginatedList>
+<div class="trakt-paginated-lists">
+  <PaginatedList
+    {type}
+    useList={(params) =>
+      usePersonalListsSummary({
+        ...params,
+        slug,
+        limit: DEFAULT_LISTS_DRILL_SIZE,
+      })}
+  >
+    {#snippet items(items)}
+      {#each items as list (list.id)}
+        <UserList {list} type={$mode} />
+      {/each}
+    {/snippet}
+  </PaginatedList>
+</div>
+
+<style>
+  .trakt-paginated-lists {
+    display: contents;
+
+    :global(.trakt-paginated-list) {
+      display: flex;
+      flex-direction: column;
+      gap: var(--content-gap);
+    }
+  }
+</style>
