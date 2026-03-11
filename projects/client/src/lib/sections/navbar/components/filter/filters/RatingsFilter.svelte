@@ -57,6 +57,7 @@
       style={$currentValue ? "flat" : "ghost"}
       size="small"
       navigationType={DpadNavigationType.Item}
+      type="button"
     >
       <CloseIcon />
     </ActionButton>
