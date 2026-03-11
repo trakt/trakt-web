@@ -1746,6 +1746,9 @@
     "text_cta_personal_lists": {
       "default": "Your lists. Your rules. Collect and organise movies and shows your way."
     },
+    "text_cta_smart_lists": {
+      "default": "Set the filters. Skip the curation. Your list builds and updates itself automatically."
+    },
     "text_cta_favorites": {
       "default": "Your faves. Your story. Spotlight the movies and shows that left a mark."
     },

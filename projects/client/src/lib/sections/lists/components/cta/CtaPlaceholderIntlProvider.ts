@@ -23,6 +23,7 @@ export const CtaPlaceholderIntlProvider: CtaItemIntl = {
   cta: {
     text: ({ cta }: CtaLinkMeta) => {
       switch (cta.type) {
+        case 'smart-list':
         case 'personal-list':
           return CtaItemIntlProvider.cta.text({ cta });
         default: {
@@ -39,6 +40,7 @@ export const CtaPlaceholderIntlProvider: CtaItemIntl = {
     label: ({ cta }: CtaLinkMeta) => {
       switch (cta.type) {
         case 'personal-list':
+        case 'smart-list':
           return CtaItemIntlProvider.cta.label({ cta });
         default: {
           if ('mediaType' in cta && cta.mediaType) {

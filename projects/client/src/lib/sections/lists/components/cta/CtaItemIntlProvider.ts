@@ -54,6 +54,8 @@ export const CtaItemIntlProvider: CtaItemIntl = {
           ? m.text_cta_favorites_shows()
           : m.text_cta_favorites_movies();
       }
+      case 'smart-list':
+        return m.text_cta_smart_lists();
       case 'personal-list': {
         return m.text_cta_personal_lists();
       }
@@ -62,6 +64,7 @@ export const CtaItemIntlProvider: CtaItemIntl = {
   cta: {
     text: ({ cta }: CtaLinkMeta) => {
       switch (cta.type) {
+        case 'smart-list':
         case 'personal-list':
           return m.button_text_cta_create_list();
         default:
@@ -70,6 +73,7 @@ export const CtaItemIntlProvider: CtaItemIntl = {
     },
     label: ({ cta }: CtaLinkMeta) => {
       switch (cta.type) {
+        case 'smart-list':
         case 'personal-list':
           return m.button_label_create_list();
         default:

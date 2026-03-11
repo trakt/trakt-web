@@ -1746,6 +1746,9 @@
     "text_cta_personal_lists": {
       "default": "Listele tale. Regulile tale. Colecționează și organizează filmele și serialele așa cum dorești."
     },
+    "text_cta_smart_lists": {
+      "default": "Setează filtrele. Sari peste sortarea manuală. Lista ta se construiește și se actualizează automat, ca un montaj perfect."
+    },
     "text_cta_favorites": {
       "default": "Preferatele tale. Povestea ta. Pune în lumina reflectoarelor filmele și serialele care te-au marcat."
     },

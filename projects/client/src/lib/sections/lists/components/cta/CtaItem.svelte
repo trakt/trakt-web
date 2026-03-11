@@ -22,7 +22,7 @@
   {#if variant === "card"}
     {#if cta.type === "activity" || cta.type === "social"}
       <ActivityCtaCard intl={CtaItemIntlProvider} {cta} />
-    {:else if cta.type === "personal-list"}
+    {:else if cta.type === "personal-list" || cta.type === "smart-list"}
       <ListCtaCard intl={CtaItemIntlProvider} {cta} />
     {:else}
       <MediaCtaCard {cta} intl={CtaItemIntlProvider} />
@@ -36,7 +36,7 @@
     >
       {#if cta.type === "activity" || cta.type === "social"}
         <ActivityCtaPlaceholder intl={CtaPlaceholderIntlProvider} {cta} />
-      {:else}
+      {:else if cta.type === "personal-list" || cta.type === "smart-list"}
         <PlaceholderItem {cta} intl={CtaPlaceholderIntlProvider} />
       {/if}
     </div>

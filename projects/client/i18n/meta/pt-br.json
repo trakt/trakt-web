@@ -1746,6 +1746,9 @@
     "text_cta_personal_lists": {
       "default": "Suas listas. Suas regras. Colecione e organize filmes e séries do seu jeito!"
     },
+    "text_cta_smart_lists": {
+      "default": "Defina os filtros. Esqueça a curadoria manual. Sua lista é montada e atualizada automaticamente, sem precisar de roteiro!"
+    },
     "text_cta_favorites": {
       "default": "Seus favoritos. Sua história. Destaque os filmes e séries que te marcaram."
     },

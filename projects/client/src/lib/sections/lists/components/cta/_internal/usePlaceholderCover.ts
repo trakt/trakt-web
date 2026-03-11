@@ -68,6 +68,7 @@ function ctaToQuery(cta: MediaCta | ListCta) {
     case 'favorites':
     case 'personal-list':
     case 'upcoming':
+    case 'smart-list':
       return mediaTypeToQuery(cta.mediaType ?? 'show', cta.type === 'upcoming');
   }
 }

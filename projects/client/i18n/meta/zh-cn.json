@@ -1745,6 +1745,9 @@
     "text_cta_personal_lists": {
       "default": "你的片单，你做主。按你的方式收集和整理影视作品。"
     },
+    "text_cta_smart_lists": {
+      "default": "设置筛选。无需手动整理。您的列表将自动创建并更新。"
+    },
     "text_cta_favorites": {
       "default": "你的最爱，你的故事。展示那些让你印象深刻的影视作品。"
     },

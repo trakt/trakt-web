@@ -10,7 +10,8 @@ export type CtaType =
   | 'watchlist'
   | 'favorites'
   | 'social'
-  | 'personal-list';
+  | 'personal-list'
+  | 'smart-list';
 
 type CtaAction = {
   disabled: boolean;
@@ -25,6 +26,7 @@ type MediaTypeCta = Extract<
   | 'upcoming'
   | 'start-watching'
   | 'personal-activity'
+  | 'smart-list'
 >;
 
 type CtaMap = {
@@ -40,8 +42,13 @@ export type Cta = CtaMap[CtaType];
 
 export type MediaCta = Exclude<
   Cta,
-  { type: 'activity' } | { type: 'social' } | { type: 'personal-list' }
+  { type: 'activity' } | { type: 'social' } | { type: 'personal-list' } | {
+    type: 'smart-list';
+  }
 >;
 
-export type ListCta = Extract<Cta, { type: 'personal-list' }>;
+export type ListCta = Extract<
+  Cta,
+  { type: 'personal-list' } | { type: 'smart-list' }
+>;
 export type SocialCta = Extract<Cta, { type: 'activity' } | { type: 'social' }>;
