@@ -66,6 +66,7 @@
   .search-results-grid:not([data-variant="lists"]) {
     @include for-mobile {
       @include responsive-layout(3, var(--gap-xxs));
+      --footer-height: var(--height-card-footer-sm);
 
       --card-aspect-ratio: calc(
         var(--height-portrait-card-cover) / var(--width-portrait-card)
@@ -74,8 +75,12 @@
         var(--width-override-card) * var(--card-aspect-ratio)
       );
       --height-override-card: calc(
-        var(--height-override-card-cover) + var(--height-card-footer)
+        var(--height-override-card-cover) + var(--footer-height)
       );
+
+      &[data-variant="people"] {
+        --footer-height: var(--height-card-footer);
+      }
     }
   }
 

@@ -88,6 +88,8 @@
     gap: var(--gap-xs);
     align-items: center;
 
+    padding: var(--ni-4) 0;
+
     :global(.trakt-button) {
       padding: var(--ni-6) var(--ni-12);
       --button-height: var(--ni-32);

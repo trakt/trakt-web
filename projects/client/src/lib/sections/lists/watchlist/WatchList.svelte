@@ -25,6 +25,8 @@
 </script>
 
 <DrillableMediaList
+  --height-override-card="var(--height-portrait-card-sm)"
+  --height-override-list="var(--height-poster-list-sm)"
   id={`watch-list-${type ?? "media"}`}
   source={{ id: "watchlist", type }}
   title={m.list_title_watchlist()}

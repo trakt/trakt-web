@@ -19,6 +19,8 @@
   useList={(params) => useRelatedList({ ...params, slug })}
   {type}
   {title}
+  --height-override-card="var(--height-portrait-card-sm)"
+  --height-override-list="var(--height-poster-list-sm)"
 >
   {#snippet item(media)}
     <DefaultMediaItem {type} {media} source="related" canDeemphasize />

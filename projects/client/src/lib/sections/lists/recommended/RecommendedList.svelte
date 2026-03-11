@@ -26,6 +26,8 @@
 </script>
 
 <DrillableMediaList
+  --height-override-card="var(--height-portrait-card-sm)"
+  --height-override-list="var(--height-poster-list-sm)"
   id="recommended-list-{type}"
   source={{ id: "recommended", type }}
   {title}
