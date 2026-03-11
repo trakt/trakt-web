@@ -1,23 +1,13 @@
 import type { FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { BehaviorSubject, combineLatest, map } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 import { useNavbarState } from '../../sections/navbar/useNavbarState.ts';
 import { useUser } from '../auth/stores/useUser.ts';
 import { FILTERS } from './_internal/constants.ts';
 import { isDifferentFilterSet } from './_internal/isDifferentFilterSet.ts';
 import { mapToSearchParamValue } from './_internal/mapToSearchParamValue.ts';
 import { useStoredFilters } from './useStoredFilters.ts';
-
-export function useFilterStore(initialValue: string | Nil = null) {
-  const filter = new BehaviorSubject<string | Nil>(initialValue);
-
-  return {
-    filter: filter.asObservable(),
-    reset: () => filter.next(initialValue),
-    set: (value: string | Nil) => filter.next(value),
-  };
-}
 
 export function useFilter() {
   const { search } = useParameters();
