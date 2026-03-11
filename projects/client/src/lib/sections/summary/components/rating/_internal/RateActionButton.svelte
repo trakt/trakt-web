@@ -58,6 +58,7 @@
     variant="primary"
     size="small"
     navigationType={DpadNavigationType.Item}
+    type="button"
   >
     <StarIcon fill={starFill} />
   </ActionButton>

@@ -24,6 +24,7 @@
   class:text-variant={variant === "text"}
   data-dpad-navigation={DpadNavigationType.Item}
   aria-label={label}
+  type="button"
   {onclick}
 >
   {@render icon()}
