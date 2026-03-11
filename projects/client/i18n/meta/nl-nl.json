@@ -2589,6 +2589,9 @@
     "limit_title_ratings": {
       "default": "Beoordelingen"
     },
+    "limit_title_smart_lists": {
+      "default": "Smart lists"
+    },
     "limit_title_personal_lists": {
       "default": "Eigen lijsten"
     },
@@ -2750,6 +2753,30 @@
     },
     "advanced_filter_label_ratings": {
       "default": "Score van {min} tot {max}"
+    },
+    "warning_smart_lists_limit": {
+      "default": "Je hebt je limiet voor smart lists bereikt"
+    },
+    "header_create_smart_list": {
+      "default": "Smart-lijst maken"
+    },
+    "header_target": {
+      "default": "Doel"
+    },
+    "text_vip_upsell_smart_lists": {
+      "default": "Upgrade naar VIP voor hogere limieten."
+    },
+    "text_vip_upsell_more_lists": {
+      "default": "Maak meer lijsten."
+    },
+    "page_title_smart_lists": {
+      "default": "Smart lists"
+    },
+    "page_title_create_smart_list": {
+      "default": "Smart list maken"
+    },
+    "tag_text_smart_list_preview": {
+      "default": "Voorbeeld"
     }
   }
 }

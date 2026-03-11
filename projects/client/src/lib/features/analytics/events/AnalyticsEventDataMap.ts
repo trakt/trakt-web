@@ -89,4 +89,7 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.VipUpgrade]: VipUpgradeType;
   [AnalyticsEvent.VipManage]: never;
+
+  [AnalyticsEvent.SmartListDelete]: never;
+  [AnalyticsEvent.SmartListCreate]: never;
 };

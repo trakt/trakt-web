@@ -2589,6 +2589,9 @@
     "limit_title_ratings": {
       "default": "Betyg"
     },
+    "limit_title_smart_lists": {
+      "default": "Smarta listor"
+    },
     "limit_title_personal_lists": {
       "default": "Egna listor"
     },
@@ -2750,6 +2753,30 @@
     },
     "advanced_filter_label_ratings": {
       "default": "Betyg från {min} till {max}"
+    },
+    "warning_smart_lists_limit": {
+      "default": "Du har nått gränsen för smarta listor"
+    },
+    "header_create_smart_list": {
+      "default": "Skapa smart lista"
+    },
+    "header_target": {
+      "default": "Mål"
+    },
+    "text_vip_upsell_smart_lists": {
+      "default": "Uppgradera till VIP för högre gränser."
+    },
+    "text_vip_upsell_more_lists": {
+      "default": "Skapa fler listor."
+    },
+    "page_title_smart_lists": {
+      "default": "Smarta listor"
+    },
+    "page_title_create_smart_list": {
+      "default": "Skapa smart lista"
+    },
+    "tag_text_smart_list_preview": {
+      "default": "Förhandsvisning"
     }
   }
 }

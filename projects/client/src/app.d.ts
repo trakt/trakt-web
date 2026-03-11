@@ -196,7 +196,9 @@ declare global {
       isLegitimateBot: boolean;
     }
     // interface PageData {}
-    // interface PageState {}
+    interface PageState {
+      preservedFilters?: Record<string, string>;
+    }
     // interface Platform {}
   }
 

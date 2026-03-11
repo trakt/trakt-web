@@ -2589,6 +2589,9 @@
     "limit_title_ratings": {
       "default": "評価"
     },
+    "limit_title_smart_lists": {
+      "default": "スマートリスト"
+    },
     "limit_title_personal_lists": {
       "default": "マイリスト"
     },
@@ -2750,6 +2753,30 @@
     },
     "advanced_filter_label_ratings": {
       "default": "評価：{min} 〜 {max}"
+    },
+    "warning_smart_lists_limit": {
+      "default": "スマートリストの作成制限に達しました"
+    },
+    "header_create_smart_list": {
+      "default": "スマートリストを作成"
+    },
+    "header_target": {
+      "default": "ターゲット"
+    },
+    "text_vip_upsell_smart_lists": {
+      "default": "VIPにアップグレードして制限を解除しましょう。"
+    },
+    "text_vip_upsell_more_lists": {
+      "default": "リストをさらに作成する。"
+    },
+    "page_title_smart_lists": {
+      "default": "スマートリスト"
+    },
+    "page_title_create_smart_list": {
+      "default": "スマートリストを作成"
+    },
+    "tag_text_smart_list_preview": {
+      "default": "プレビュー"
     }
   }
 }

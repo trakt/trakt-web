@@ -77,6 +77,8 @@ export const userLimitsQuery = defineQuery({
     InvalidateAction.MarkAsWatched('episode'),
     InvalidateAction.List.Created,
     InvalidateAction.List.Deleted,
+    InvalidateAction.SmartList.Created,
+    InvalidateAction.SmartList.Deleted,
   ],
   dependencies: [],
   request: userLimitsRequest,

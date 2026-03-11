@@ -18,6 +18,7 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:user:${UserType}`
   | `${typeof INVALIDATION_ID}:check_in`
   | `${typeof INVALIDATION_ID}:list:${ListType}`
+  | `${typeof INVALIDATION_ID}:smart_list:${ListType}`
   | `${typeof INVALIDATION_ID}:commented:${ExtendedMediaType}`;
 
 type TypeDataMap = {
@@ -35,6 +36,7 @@ type TypeDataMap = {
   'favorited': MediaType;
   'commented': ExtendedMediaType;
   'list': ListType;
+  'smart_list': ListType;
 };
 
 export function invalidationId(key?: string) {
@@ -92,5 +94,10 @@ export const InvalidateAction = {
     Deleted: buildInvalidationKey('list', 'deleted'),
     Created: buildInvalidationKey('list', 'created'),
     Like: buildInvalidationKey('list', 'like'),
+  },
+
+  SmartList: {
+    Created: buildInvalidationKey('smart_list', 'created'),
+    Deleted: buildInvalidationKey('smart_list', 'deleted'),
   },
 };

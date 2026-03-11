@@ -7057,6 +7057,14 @@
         "ios"
       ]
     },
+    "limit_title_smart_lists": {
+      "default": "Smart Lists",
+      "description": "Title for the progress bar that shows a user's smart lists usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "limit_title_personal_lists": {
       "default": "Personal Lists",
       "description": "Title for the progress bar that shows a user's personal lists usage. This should be as short as possible.",
@@ -7550,6 +7558,70 @@
           "type": "string"
         }
       },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "warning_smart_lists_limit": {
+      "default": "You've reached your smart list limit",
+      "description": "Warning text shown when a user has reached their smart list limit and attempts to create a new smart list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_create_smart_list": {
+      "default": "Create Smart List",
+      "description": "Header for the section that allows users to create a smart list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_target": {
+      "default": "Target",
+      "description": "Header for the section that allows users to select a target for their smart lists, such as anticipated movies, popular shows, etc.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_upsell_smart_lists": {
+      "default": "Upgrade to VIP to unlock higher limits.",
+      "description": "Text shown to encourage non-VIP users to subscribe to enjoy higher limits for smart lists. This should be short and concise.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_upsell_more_lists": {
+      "default": "Create more lists.",
+      "description": "Text shown to encourage non-VIP users to subscribe to get a higher limit on how many lists they can have.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "page_title_smart_lists": {
+      "default": "Smart Lists",
+      "description": "Title for the smart lists page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "page_title_create_smart_list": {
+      "default": "Create Smart List",
+      "description": "Title for the page where users can create a smart list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_smart_list_preview": {
+      "default": "List preview",
+      "description": "Text for the tag that indicates a preview of a smart list. This should be as short as possible.",
       "exclude": [
         "android",
         "ios"

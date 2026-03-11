@@ -11,5 +11,7 @@ export const MovieSmartListMappedMock = [
     title: '[Smart] Top Adventure Movies',
     target: 'trending',
     type: 'movie',
+    id: 21229,
+    updatedAt: new Date('2025-04-30T12:39:22.000Z'),
   },
 ];

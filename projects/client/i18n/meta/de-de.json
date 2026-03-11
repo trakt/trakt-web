@@ -2589,6 +2589,9 @@
     "limit_title_ratings": {
       "default": "Bewertungen"
     },
+    "limit_title_smart_lists": {
+      "default": "Smart Lists"
+    },
     "limit_title_personal_lists": {
       "default": "Eigene Listen"
     },
@@ -2750,6 +2753,30 @@
     },
     "advanced_filter_label_ratings": {
       "default": "Bewertung von {min} bis {max}"
+    },
+    "warning_smart_lists_limit": {
+      "default": "Limit für Smart Lists erreicht"
+    },
+    "header_create_smart_list": {
+      "default": "Smart List erstellen"
+    },
+    "header_target": {
+      "default": "Ziel"
+    },
+    "text_vip_upsell_smart_lists": {
+      "default": "Upgrade auf VIP für höhere Limits."
+    },
+    "text_vip_upsell_more_lists": {
+      "default": "Mehr Listen erstellen."
+    },
+    "page_title_smart_lists": {
+      "default": "Smart Lists"
+    },
+    "page_title_create_smart_list": {
+      "default": "Smart List erstellen"
+    },
+    "tag_text_smart_list_preview": {
+      "default": "Vorschau"
     }
   }
 }

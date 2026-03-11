@@ -3,17 +3,20 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { FilterOverrideParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import type { DrillListProps } from "../drilldown/DrillListProps";
   import AnticipatedListItem from "./AnticipatedListItem.svelte";
   import { useAnticipatedList } from "./useAnticipatedList";
 
-  type TrendingListProps = {
+  type AnticipatedListProps = {
     title: string;
     drilldownLabel: string;
     type: DiscoverMode;
     search?: Record<string, string>;
     filterOverride?: FilterOverrideParams;
-  };
+    actions?: Snippet;
+  } & Partial<DrillListProps<DiscoverMode>>;
 
   const {
     title,
@@ -21,7 +24,9 @@
     type,
     search,
     filterOverride,
-  }: TrendingListProps = $props();
+    actions,
+    urlBuilder,
+  }: AnticipatedListProps = $props();
   const { filterMap } = useFilter();
 </script>
 
@@ -33,16 +38,18 @@
   {type}
   filter={$filterMap}
   {filterOverride}
+  {actions}
   useList={(params) =>
     useAnticipatedList({
       ...params,
       search,
     })}
-  urlBuilder={(params) =>
-    UrlBuilder.anticipated({
-      ...params,
-      search,
-    })}
+  urlBuilder={urlBuilder ??
+    ((params) =>
+      UrlBuilder.anticipated({
+        ...params,
+        search,
+      }))}
 >
   {#snippet item(media)}
     <AnticipatedListItem

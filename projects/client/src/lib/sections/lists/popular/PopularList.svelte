@@ -3,7 +3,9 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { FilterOverrideParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import type { DrillListProps } from "../drilldown/DrillListProps";
   import PopularListItem from "./PopularListItem.svelte";
   import { usePopularList } from "./usePopularList";
 
@@ -13,7 +15,8 @@
     type: DiscoverMode;
     search?: Record<string, string>;
     filterOverride?: FilterOverrideParams;
-  };
+    actions?: Snippet;
+  } & Partial<DrillListProps<DiscoverMode>>;
 
   const {
     title,
@@ -21,6 +24,8 @@
     type,
     search,
     filterOverride,
+    actions,
+    urlBuilder,
   }: PopularListProps = $props();
   const { filterMap } = useFilter();
 </script>
@@ -33,16 +38,18 @@
   {type}
   filter={$filterMap}
   {filterOverride}
+  {actions}
   useList={(params) =>
     usePopularList({
       ...params,
       search,
     })}
-  urlBuilder={(params) =>
-    UrlBuilder.popular({
-      ...params,
-      search,
-    })}
+  urlBuilder={urlBuilder ??
+    ((params) =>
+      UrlBuilder.popular({
+        ...params,
+        search,
+      }))}
 >
   {#snippet item(media)}
     <PopularListItem
