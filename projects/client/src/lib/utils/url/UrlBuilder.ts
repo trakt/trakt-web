@@ -237,7 +237,7 @@ export const UrlBuilder = {
     frame: {
       settings: (token: string) =>
         ogIframeAccessTokenFactory(
-          'https://trakt.tv/settings/data',
+          'https://trakt.tv/settings',
           token,
         ),
       yearToDate: (slug: string, year: string, token: string | Nil) =>
