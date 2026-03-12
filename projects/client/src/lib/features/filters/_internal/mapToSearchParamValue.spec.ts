@@ -20,7 +20,6 @@ describe('mapToSearchParamValue', () => {
       key: FilterKey.IgnoreWatched,
       label: 'Ignore Watched',
       type: 'toggle',
-      defaultValue: 'true',
     };
 
     it('should return provided value for toggle filter', () => {
@@ -33,14 +32,14 @@ describe('mapToSearchParamValue', () => {
       expect(result).toBe('false');
     });
 
-    it('should return default value when value is undefined for toggle filter', () => {
-      const result = mapToSearchParamValue({
-        filter: toggleFilter,
-        value: undefined,
-        user: mockUser,
-      });
-
-      expect(result).toBe('true');
+    it('should throw error when value is undefined for toggle filter', () => {
+      expect(() => {
+        mapToSearchParamValue({
+          filter: toggleFilter,
+          value: undefined,
+          user: mockUser,
+        });
+      }).toThrow('Toggle filter value is required');
     });
   });
 

@@ -14,7 +14,7 @@ export function mapToSearchParamValue({
   user,
 }: mapToSearchParamValueProps): string {
   if (filter.type === 'toggle') {
-    return value ?? filter.defaultValue;
+    return assertDefined(value, 'Toggle filter value is required');
   }
 
   const filterValue = assertDefined(value, 'Filter value is required');

@@ -1,6 +1,5 @@
 import type { FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
-import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { combineLatest, map } from 'rxjs';
 import { useNavbarState } from '../../sections/navbar/useNavbarState.ts';
 import { useUser } from '../auth/stores/useUser.ts';
@@ -18,15 +17,9 @@ export function useFilter() {
   return {
     filters: FILTERS,
     getFilterValue: (key: FilterKey) => {
-      const filter = assertDefined(
-        FILTERS.find((filter) => filter.key === key),
-      );
       return search.pipe(
         map(($search) => {
-          const defaultValue = filter.type === 'toggle'
-            ? filter.defaultValue
-            : undefined;
-          return $search.get(key) ?? defaultValue;
+          return $search.get(key);
         }),
       );
     },
@@ -64,12 +57,7 @@ export function useFilter() {
         }
 
         return FILTERS
-          .filter((filter) => {
-            const hasParameter = Boolean($search.get(filter.key));
-            const isToggle = filter.type === 'toggle';
-
-            return hasParameter || isToggle;
-          })
+          .filter((filter) => Boolean($search.get(filter.key)))
           .reduce((filterMap, filter) => {
             filterMap[filter.key] = mapToSearchParamValue({
               filter,

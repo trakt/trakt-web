@@ -14,20 +14,21 @@
   const currentValue = $derived(getFilterValue(filter.key));
 
   const handler = () => {
-    const toggledValue = $currentValue === "true" ? "false" : "true";
-
     gotoFilteredState({
       key: filter.key,
-      value: toggledValue === filter.defaultValue ? null : toggledValue,
+      value: $currentValue === "true" ? "false" : "true",
       mode: FilterMode.Simple,
     });
   };
+
+  // FIXME: either add explicit clear, or make indeterminate state selectable
 </script>
 
 <Filter title={filter.label}>
   <Switch
     label={filter.label}
     checked={$currentValue === "true"}
+    indeterminate={$currentValue == null}
     color="blue"
     onclick={handler}
     navigationType={DpadNavigationType.Item}
