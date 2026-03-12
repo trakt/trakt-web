@@ -1188,9 +1188,6 @@
     "header_decade": {
       "default": "Décennie"
     },
-    "header_ratings": {
-      "default": "Cotes"
-    },
     "button_label_view_all_items_in": {
       "default": "Voir tous les titres dans \"{title}\""
     },
@@ -2750,6 +2747,9 @@
     },
     "advanced_filter_label_release_year": {
       "default": "Sortie entre {min} et {max}"
+    },
+    "filter_label_ratings": {
+      "default": "Note Trakt entre {min} et {max}"
     },
     "advanced_filter_label_ratings": {
       "default": "Note de {min} à {max}"

@@ -1188,9 +1188,6 @@
     "header_decade": {
       "default": "Årtionde"
     },
-    "header_ratings": {
-      "default": "Betyg"
-    },
     "button_label_view_all_items_in": {
       "default": "Visa alla i \"{title}\""
     },
@@ -2750,6 +2747,9 @@
     },
     "advanced_filter_label_release_year": {
       "default": "Släppt mellan {min} och {max}"
+    },
+    "filter_label_ratings": {
+      "default": "Trakt-betyg från {min} till {max}"
     },
     "advanced_filter_label_ratings": {
       "default": "Betyg från {min} till {max}"

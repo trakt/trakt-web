@@ -1187,9 +1187,6 @@
     "header_decade": {
       "default": "年代"
     },
-    "header_ratings": {
-      "default": "评分"
-    },
     "button_label_view_all_items_in": {
       "default": "查看“{title}”中的所有项目"
     },
@@ -2749,6 +2746,9 @@
     },
     "advanced_filter_label_release_year": {
       "default": "上映年份：{min} 至 {max}"
+    },
+    "filter_label_ratings": {
+      "default": "Trakt 评分 {min} 到 {max}"
     },
     "advanced_filter_label_ratings": {
       "default": "评分范围：{min} 至 {max}"

@@ -39,7 +39,7 @@ describe('mapToSearchParamValue', () => {
           value: undefined,
           user: mockUser,
         });
-      }).toThrow('Toggle filter value is required');
+      }).toThrow('Filter value is required');
     });
   });
 
@@ -94,17 +94,11 @@ describe('mapToSearchParamValue', () => {
   });
 
   describe('ratings filters', () => {
-    const lowStarRating = { index: 1, value: 2, range: { min: 0, max: 2 } };
-    const highStarRating = { index: 2, value: 10, range: { min: 8, max: 10 } };
-
     const ratingsFilter: RatingsFilter = {
       key: FilterKey.Ratings,
-      label: 'Ratings',
-      type: 'ratings',
-      options: [
-        { rating: highStarRating, value: '81-100' },
-        { rating: lowStarRating, value: '0-20' },
-      ],
+      type: 'slider',
+      range: { min: 0, max: 100 },
+      formatLabel: () => '',
       advanced: {
         type: 'slider',
         range: { min: 0, max: 100 },

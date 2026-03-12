@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import FilterGroup from "./_internal/FilterGroup.svelte";
   import { isMultiSelectFilter } from "./_internal/isMultiSelectFilter";
@@ -19,5 +20,9 @@
 </FilterGroup>
 
 {#each sliderFilters as filter (filter.key)}
-  <SliderFilter {filter} />
+  <SliderFilter
+    key={filter.key}
+    sliderOptions={filter.advanced}
+    mode={FilterMode.Advanced}
+  />
 {/each}

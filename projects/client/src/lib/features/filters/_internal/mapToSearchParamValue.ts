@@ -13,12 +13,12 @@ export function mapToSearchParamValue({
   value,
   user,
 }: mapToSearchParamValueProps): string {
-  if (filter.type === 'toggle') {
-    return assertDefined(value, 'Toggle filter value is required');
+  const filterValue = assertDefined(value, 'Filter value is required');
+
+  if ('options' in filter) {
+    const option = filter.options.find((opt) => opt.value === filterValue);
+    return option?.mapper ? option.mapper(user) : filterValue;
   }
 
-  const filterValue = assertDefined(value, 'Filter value is required');
-  const option = filter.options.find((opt) => opt.value === filterValue);
-
-  return option?.mapper ? option.mapper(user) : filterValue;
+  return filterValue;
 }

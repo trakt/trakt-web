@@ -6,12 +6,10 @@ import {
 import { type Filter, FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
-import { STAR_RATINGS } from '$lib/sections/summary/components/rating/constants/index.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
 import { toPercentage } from '../../../utils/formatting/number/toPercentage.ts';
 import { generateRuntimeOptions } from './generateRuntimeOptions.ts';
 import { GENRES } from './genres.ts';
-import { getRatingFilterRange } from './getRatingFilterRange.ts';
 
 const GENRE_FILTER: Filter = {
   label: m.header_genre(),
@@ -81,21 +79,25 @@ const STREAMING_FILTER: Filter = {
 const toRatingPercentage = (value: number) =>
   toPercentage(value / 100, languageTag());
 
+const RATING_OPTION = {
+  type: 'slider' as const,
+  range: { min: 0, max: 100 },
+  ticks: {
+    count: 6,
+    formatter: toRatingPercentage,
+  },
+};
+
 const RATINGS_FILTER: Filter = {
-  label: m.header_ratings(),
   key: FilterKey.Ratings,
-  type: 'ratings',
-  options: STAR_RATINGS.map((rating) => ({
-    rating,
-    value: getRatingFilterRange(rating),
-  })),
+  ...RATING_OPTION,
+  formatLabel: ({ min, max }) =>
+    m.filter_label_ratings({
+      min: toRatingPercentage(min),
+      max: toRatingPercentage(max),
+    }),
   advanced: {
-    type: 'slider',
-    range: { min: 0, max: 100 },
-    ticks: {
-      count: 6,
-      formatter: toRatingPercentage,
-    },
+    ...RATING_OPTION,
     formatLabel: ({ min, max }) =>
       m.advanced_filter_label_ratings({
         min: toRatingPercentage(min),
