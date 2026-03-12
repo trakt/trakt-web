@@ -108,14 +108,12 @@ const IGNORE_WATCHED_FILTER: Filter = {
   label: m.header_hide_watched(),
   key: FilterKey.IgnoreWatched,
   type: 'toggle',
-  defaultValue: 'false',
 };
 
 const IGNORE_WATCHLISTED_FILTER: Filter = {
   label: m.header_hide_watchlisted(),
   key: FilterKey.IgnoreWatchlisted,
   type: 'toggle',
-  defaultValue: 'false',
 };
 
 export const FILTERS = [

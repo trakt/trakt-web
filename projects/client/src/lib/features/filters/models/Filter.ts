@@ -30,7 +30,6 @@ export type ListFilter = BaseFilter & {
 
 export type ToggleFilter = BaseFilter & {
   type: 'toggle';
-  defaultValue: 'true' | 'false';
 };
 
 export type RatingsFilter = BaseFilter & {
