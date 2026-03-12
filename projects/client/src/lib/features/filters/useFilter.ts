@@ -1,6 +1,7 @@
 import type { FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
 import { combineLatest, map } from 'rxjs';
+import { getAdditionalKeys } from '../../sections/navbar/components/filter/filters/_internal/getAdditionalKeys.ts';
 import { useNavbarState } from '../../sections/navbar/useNavbarState.ts';
 import { useUser } from '../auth/stores/useUser.ts';
 import { FILTERS } from './_internal/constants.ts';
@@ -64,6 +65,13 @@ export function useFilter() {
               value: $search.get(filter.key),
               user: $user,
             });
+
+            getAdditionalKeys(filter).forEach(({ key }) => {
+              const value = $search.get(key);
+              if (!value) return;
+              filterMap[key] = value;
+            });
+
             return filterMap;
           }, {} as Record<string, string>);
       }),

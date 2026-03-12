@@ -1,5 +1,6 @@
 import type {
   AdvancedOption,
+  AdvancedSliderOption,
   FilterOption,
   MultiSelectOption,
   SliderOption,
@@ -13,6 +14,9 @@ export enum FilterKey {
   Decade = 'years',
   Ratings = 'ratings',
   Runtime = 'runtimes',
+  ImdbRatings = 'imdb_ratings',
+  RtMeter = 'rt_meters',
+  RtUserMeter = 'rt_user_meters',
 }
 
 type BaseFilter = {
@@ -35,7 +39,7 @@ export type RatingsFilter =
   & Omit<BaseFilter, 'label'>
   & SliderOption
   & {
-    advanced: SliderOption;
+    advanced: AdvancedSliderOption;
   };
 
 export type Filter = ListFilter | ToggleFilter | RatingsFilter;
@@ -43,7 +47,7 @@ export type Filter = ListFilter | ToggleFilter | RatingsFilter;
 type AdvancedFilter = Extract<Filter, { advanced: AdvancedOption }>;
 
 export type AdvancedSliderFilter = AdvancedFilter & {
-  advanced: SliderOption;
+  advanced: AdvancedSliderOption;
 };
 
 export type AdvancedMultiSelectFilter = ListFilter & {

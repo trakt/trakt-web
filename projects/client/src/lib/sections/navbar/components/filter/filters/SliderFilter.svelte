@@ -3,7 +3,10 @@
   import Slider from "$lib/components/slider/Slider.svelte";
   import type { FilterKey } from "$lib/features/filters/models/Filter";
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
-  import type { SliderOption } from "$lib/features/filters/models/FilterOptions";
+  import type {
+    AdditionalKey,
+    SliderOption,
+  } from "$lib/features/filters/models/FilterOptions";
   import { useFilter } from "$lib/features/filters/useFilter";
   import { useFilterSetter } from "./_internal/useFilterSetter";
 
@@ -11,11 +14,13 @@
     key,
     sliderOptions,
     mode,
+    additionalKeys = [],
     disabled = false,
   }: {
     key: FilterKey;
     sliderOptions: SliderOption;
     mode: FilterMode;
+    additionalKeys?: AdditionalKey[];
     disabled?: boolean;
   } = $props();
 
@@ -51,8 +56,9 @@
 
     gotoFilteredState({
       key,
-      value: isDefaultValue ? null : `${newValue.min}-${newValue.max}`,
+      range: isDefaultValue ? null : newValue,
       mode,
+      additionalKeys,
     });
   };
 </script>

@@ -103,6 +103,14 @@ const RATINGS_FILTER: Filter = {
         min: toRatingPercentage(min),
         max: toRatingPercentage(max),
       }),
+    additionalKeys: [
+      {
+        key: FilterKey.ImdbRatings,
+        mapper: ({ min, max }) => `${min / 10}-${max / 10}`,
+      },
+      { key: FilterKey.RtMeter },
+      { key: FilterKey.RtUserMeter },
+    ],
   },
 };
 

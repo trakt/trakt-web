@@ -9,6 +9,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
   import FilterGroup from "./filters/_internal/FilterGroup.svelte";
+  import { useFilterSetter } from "./filters/_internal/useFilterSetter";
   import AdvancedFilters from "./filters/AdvancedFilters.svelte";
   import SimpleFilters from "./filters/SimpleFilters.svelte";
   import ToggleFilter from "./filters/ToggleFilter.svelte";
@@ -25,17 +26,23 @@
     tabPosition?: "top" | "bottom";
   } = $props();
 
-  const { filters, hasAnyAdvancedFilter } = useFilter();
+  const { filters, hasAnyAdvancedFilter, filterMap } = useFilter();
 
   const toggleTypeFilters = $derived(
     filters.filter((filter) => filter.type === "toggle"),
   );
 
   const { confirm } = useConfirm();
+  const { syncAdditionalKeys } = useFilterSetter();
 
   const onChange = (to: string) => {
     const from = activeMode;
     setActiveMode(to);
+
+    if (to === FilterMode.Advanced) {
+      syncAdditionalKeys($filterMap);
+      return;
+    }
 
     if (to !== FilterMode.Simple || !$hasAnyAdvancedFilter) {
       return;
