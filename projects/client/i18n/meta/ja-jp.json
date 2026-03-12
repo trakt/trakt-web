@@ -1188,9 +1188,6 @@
     "header_decade": {
       "default": "年代"
     },
-    "header_ratings": {
-      "default": "評価"
-    },
     "button_label_view_all_items_in": {
       "default": "\"{title}\" のアイテムをすべて表示"
     },
@@ -2750,6 +2747,9 @@
     },
     "advanced_filter_label_release_year": {
       "default": "公開年：{min} 〜 {max}"
+    },
+    "filter_label_ratings": {
+      "default": "Trakt 評価: {min} 〜 {max}"
     },
     "advanced_filter_label_ratings": {
       "default": "評価：{min} 〜 {max}"

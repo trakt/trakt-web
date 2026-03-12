@@ -2,7 +2,6 @@ import type {
   AdvancedOption,
   FilterOption,
   MultiSelectOption,
-  RatingOption,
   SliderOption,
 } from './FilterOptions.ts';
 
@@ -19,7 +18,7 @@ export enum FilterKey {
 type BaseFilter = {
   key: FilterKey;
   label: string;
-  type: 'list' | 'toggle' | 'ratings';
+  type: 'list' | 'toggle' | 'slider';
 };
 
 export type ListFilter = BaseFilter & {
@@ -32,11 +31,12 @@ export type ToggleFilter = BaseFilter & {
   type: 'toggle';
 };
 
-export type RatingsFilter = BaseFilter & {
-  type: 'ratings';
-  options: Array<RatingOption>;
-  advanced: SliderOption;
-};
+export type RatingsFilter =
+  & Omit<BaseFilter, 'label'>
+  & SliderOption
+  & {
+    advanced: SliderOption;
+  };
 
 export type Filter = ListFilter | ToggleFilter | RatingsFilter;
 

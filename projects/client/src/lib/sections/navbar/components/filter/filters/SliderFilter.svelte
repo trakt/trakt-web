@@ -1,20 +1,26 @@
 <script lang="ts">
   import type { SliderRange } from "$lib/components/slider/models/SliderRange";
   import Slider from "$lib/components/slider/Slider.svelte";
-  import { type AdvancedSliderFilter } from "$lib/features/filters/models/Filter";
+  import type { FilterKey } from "$lib/features/filters/models/Filter";
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
+  import type { SliderOption } from "$lib/features/filters/models/FilterOptions";
   import { useFilter } from "$lib/features/filters/useFilter";
   import { useFilterSetter } from "./_internal/useFilterSetter";
 
   const {
-    filter,
+    key,
+    sliderOptions,
+    mode,
     disabled = false,
-  }: { filter: AdvancedSliderFilter; disabled?: boolean } = $props();
-
-  const config = $derived(filter.advanced);
+  }: {
+    key: FilterKey;
+    sliderOptions: SliderOption;
+    mode: FilterMode;
+    disabled?: boolean;
+  } = $props();
 
   const { getFilterValue } = useFilter();
-  const currentValueRaw = $derived(getFilterValue(filter.key));
+  const currentValueRaw = $derived(getFilterValue(key));
 
   const value = $derived.by(() => {
     if ($currentValueRaw) {
@@ -22,7 +28,7 @@
       return { min: Number(min), max: Number(max) };
     }
 
-    return config.range;
+    return sliderOptions.range;
   });
 
   const { gotoFilteredState } = useFilterSetter();
@@ -40,22 +46,23 @@
     previewValue = null;
 
     const isDefaultValue =
-      newValue.min === config.range.min && newValue.max === config.range.max;
+      newValue.min === sliderOptions.range.min &&
+      newValue.max === sliderOptions.range.max;
 
     gotoFilteredState({
-      key: filter.key,
+      key,
       value: isDefaultValue ? null : `${newValue.min}-${newValue.max}`,
-      mode: FilterMode.Advanced,
+      mode,
     });
   };
 </script>
 
 <div class="slider-container">
-  <p>{config.formatLabel(labelValue)}</p>
+  <p>{sliderOptions.formatLabel(labelValue)}</p>
   <Slider
-    range={config.range}
+    range={sliderOptions.range}
     {value}
-    ticks={config.ticks}
+    ticks={sliderOptions.ticks}
     onChange={onChangeHandler}
     onCommit={onCommitHandler}
     {disabled}

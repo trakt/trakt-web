@@ -1,5 +1,4 @@
 import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
-import type { StarRating } from '$lib/sections/summary/components/rating/models/StarRating.ts';
 
 type FilterValueMapper = {
   mapper?: (user: UserSettings) => string;
@@ -7,11 +6,6 @@ type FilterValueMapper = {
 
 export type FilterOption = {
   label: string;
-  value: string;
-} & FilterValueMapper;
-
-export type RatingOption = {
-  rating: StarRating;
   value: string;
 } & FilterValueMapper;
 

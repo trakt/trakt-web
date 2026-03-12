@@ -1188,9 +1188,6 @@
     "header_decade": {
       "default": "Dekade"
     },
-    "header_ratings": {
-      "default": "Bewertungen"
-    },
     "button_label_view_all_items_in": {
       "default": "Alle \"{title}\" ansehen"
     },
@@ -2750,6 +2747,9 @@
     },
     "advanced_filter_label_release_year": {
       "default": "Veröffentlicht von {min} bis {max}"
+    },
+    "filter_label_ratings": {
+      "default": "Trakt-Bewertung von {min} bis {max}"
     },
     "advanced_filter_label_ratings": {
       "default": "Bewertung von {min} bis {max}"

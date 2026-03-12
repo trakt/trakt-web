@@ -3272,14 +3272,6 @@
         "ios"
       ]
     },
-    "header_ratings": {
-      "default": "Ratings",
-      "description": "Header for the filter that allows users to select a rating.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_view_all_items_in": {
       "default": "View all items in \"{title}\"",
       "description": "Aria-label for the button that allows users to view all items in a specific category or list.",
@@ -7540,6 +7532,22 @@
         },
         "max": {
           "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "filter_label_ratings": {
+      "default": "Trakt Rating of {min} to {max}",
+      "description": "Label for the 'ratings' filter which filters items that have Trakt ratings falling in the range.",
+      "variables": {
+        "min": {
+          "type": "string"
+        },
+        "max": {
+          "type": "string"
         }
       },
       "exclude": [

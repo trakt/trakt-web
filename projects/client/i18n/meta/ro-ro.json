@@ -1188,9 +1188,6 @@
     "header_decade": {
       "default": "Deceniu"
     },
-    "header_ratings": {
-      "default": "Evaluări"
-    },
     "button_label_view_all_items_in": {
       "default": "Vezi toate în \"{title}\""
     },
@@ -2750,6 +2747,9 @@
     },
     "advanced_filter_label_release_year": {
       "default": "Lansat între {min} și {max}"
+    },
+    "filter_label_ratings": {
+      "default": "Evaluare Trakt între {min} și {max}"
     },
     "advanced_filter_label_ratings": {
       "default": "Rating între {min} și {max}"
