@@ -24,5 +24,6 @@
     key={filter.key}
     sliderOptions={filter.advanced}
     mode={FilterMode.Advanced}
+    additionalKeys={filter.advanced.additionalKeys}
   />
 {/each}

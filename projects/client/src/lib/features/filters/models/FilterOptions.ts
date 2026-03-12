@@ -1,7 +1,17 @@
 import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
+import type { FilterKey } from './Filter.ts';
 
 type FilterValueMapper = {
   mapper?: (user: UserSettings) => string;
+};
+
+export type AdditionalKey = {
+  key: FilterKey;
+  mapper?: (range: { min: number; max: number }) => string;
+};
+
+type MultiKeyFilter = {
+  additionalKeys?: AdditionalKey[];
 };
 
 export type FilterOption = {
@@ -19,8 +29,10 @@ export type SliderOption = {
   };
 };
 
+export type AdvancedSliderOption = SliderOption & MultiKeyFilter;
+
 export type MultiSelectOption = {
   type: 'multi-select';
 };
 
-export type AdvancedOption = SliderOption | MultiSelectOption;
+export type AdvancedOption = AdvancedSliderOption | MultiSelectOption;
