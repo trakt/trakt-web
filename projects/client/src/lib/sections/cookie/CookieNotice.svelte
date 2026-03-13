@@ -110,7 +110,7 @@
       left: calc(-1 * var(--cookie-half-size));
       top: var(--cookie-quarter-size);
 
-      font-size: 60px;
+      font-size: var(--cookie-size);
       line-height: 1;
     }
 
