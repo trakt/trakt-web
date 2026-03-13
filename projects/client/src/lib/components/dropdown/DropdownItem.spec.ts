@@ -98,7 +98,7 @@ describe('DropdownItem', () => {
     });
 
     await waitFor(() => {
-      const listItemElement = screen.getByRole('listitem');
+      const listItemElement = screen.getByRole('button');
       expect(listItemElement).toHaveAttribute('tabindex', '0');
     });
   });

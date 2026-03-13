@@ -37,7 +37,7 @@
     class="trakt-cookie-notice"
     transition:slide={{ duration: NOTICE_TRANSITION_DURATION }}
   >
-    <div class="trakt-cookie">🍪</div>
+    <div class="trakt-cookie" aria-hidden="true">🍪</div>
     <p>
       <MessageWithLink
         message={m.text_cookie_notice()}

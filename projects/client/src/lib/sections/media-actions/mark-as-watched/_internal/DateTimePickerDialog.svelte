@@ -5,15 +5,15 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
 
-  const {
-    onConfirm,
-    onCancel,
-    buttonText,
-  }: {
+  type DateTimePickerDialogProps = {
     onConfirm: (date: Date) => void;
     onCancel: () => void;
     buttonText: string;
-  } = $props();
+    title: string;
+  };
+
+  const { onConfirm, onCancel, buttonText, title }: DateTimePickerDialogProps =
+    $props();
 
   const now = new Date();
 
@@ -31,6 +31,7 @@
     value={$selectedDate}
     maxDate={now}
     onChange={(date) => selectedDate.set(date)}
+    label={m.date_time_label_watched({ title })}
   />
 
   {#snippet footer()}

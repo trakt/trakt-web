@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "Marker \"{title}\" som set indtil her"
     },
+    "date_time_label_watched": {
+      "default": "Vælg dato og tidspunkt for, hvornår du så \"{title}\""
+    },
     "translated_value_genre_horror": {
       "default": "Gyser"
     },

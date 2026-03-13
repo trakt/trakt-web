@@ -29,6 +29,7 @@
   );
   const tabIndex = $derived(hasHandler ? 0 : -1);
   const href = $derived((props as DropdownItemAnchorProps).href);
+  const itemRole = $derived(hasHandler && !href ? "button" : undefined);
   const noscroll = $derived((props as DropdownItemAnchorProps).noscroll);
   const replacestate = $derived(
     (props as DropdownItemAnchorProps).replacestate,
@@ -46,6 +47,7 @@
 <li
   use:triggerWithKeyboard
   use:disableNavigation={props.disabled}
+  role={itemRole}
   tabindex={tabIndex}
   data-color={color}
   data-style={style}

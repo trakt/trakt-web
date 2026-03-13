@@ -6,5 +6,6 @@ export type FormInputProps = {
   value?: string;
   disabled: boolean;
   placeholder: string;
+  required?: boolean;
   validation?: ValidationProps;
 };

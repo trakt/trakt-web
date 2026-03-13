@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "Markera \"{title}\" som sett hit"
     },
+    "date_time_label_watched": {
+      "default": "Välj datum och tid när du såg \"{title}\""
+    },
     "translated_value_genre_horror": {
       "default": "Skräck"
     },

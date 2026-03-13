@@ -118,6 +118,7 @@
         disabled={$isSaving}
         value={$name}
         autofocus
+        required
         validation={{
           isValid: (value) => value.trim().length > 0,
           errorText: m.validation_text_list_name(),

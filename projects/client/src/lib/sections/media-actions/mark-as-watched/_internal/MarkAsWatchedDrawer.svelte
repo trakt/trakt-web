@@ -149,6 +149,7 @@
 
 {#if $showDateTimePicker}
   <DateTimePickerDialog
+    {title}
     buttonText={m.button_text_mark_as_watched()}
     onCancel={() => showDateTimePicker.set(false)}
     onConfirm={(date) => {

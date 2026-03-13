@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "Отбележи \"{title}\" като гледано дотук"
     },
+    "date_time_label_watched": {
+      "default": "Изберете дата и час, на които сте гледали „{title}“"
+    },
     "translated_value_genre_horror": {
       "default": "Хорър"
     },

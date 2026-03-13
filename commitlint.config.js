@@ -30,6 +30,7 @@ module.exports = {
       RuleConfigSeverity.Error,
       'always',
       [
+        'a11y',
         'activity',
         'analytics',
         'anticipated',

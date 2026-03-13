@@ -4,6 +4,7 @@
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -43,20 +44,23 @@
     {/if}
 
     <div class="trakt-mobile-navbar-links">
-      <Link href={UrlBuilder.home()}>
+      <Link href={UrlBuilder.home()} label={m.button_label_home()}>
         <HomeIcon />
       </Link>
 
       <RenderFor audience="authenticated">
-        <Link href={UrlBuilder.discover()}>
+        <Link href={UrlBuilder.discover()} label={m.button_label_discover()}>
           <DiscoverIcon />
         </Link>
 
-        <Link href={UrlBuilder.lists.user("me")}>
+        <Link
+          href={UrlBuilder.lists.user("me")}
+          label={m.button_label_browse_lists()}
+        >
           <ListIcon />
         </Link>
 
-        <Link href={UrlBuilder.search()}>
+        <Link href={UrlBuilder.search()} label={m.button_label_search()}>
           <SearchIcon />
         </Link>
 

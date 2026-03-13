@@ -193,6 +193,19 @@
         "ios"
       ]
     },
+    "date_time_label_watched": {
+      "default": "Pick a date and time when you watched \"{title}\"",
+      "description": "Aria-label for the button that allows users to pick a date and time when they watched a movie, episode, or show.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "translated_value_genre_horror": {
       "default": "Horror",
       "description": "Text for the horror genre. The value is sent back from the Trakt API.",

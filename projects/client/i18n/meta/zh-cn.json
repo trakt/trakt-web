@@ -80,6 +80,9 @@
     "button_label_watched_until_here": {
       "default": "标记“{title}”看到这里"
     },
+    "date_time_label_watched": {
+      "default": "选择您观看“{title}”的日期和时间"
+    },
     "translated_value_genre_horror": {
       "default": "恐怖"
     },

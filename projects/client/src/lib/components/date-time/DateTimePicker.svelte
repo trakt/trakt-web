@@ -3,12 +3,14 @@
   import CalendarIcon from "../icons/CalendarIcon.svelte";
   import { toDateTimeLocal } from "./_internal/toDateTimeLocal";
 
-  const {
-    value,
-    maxDate,
-    onChange,
-  }: { value?: Date; maxDate?: Date; onChange: (date?: Date) => void } =
-    $props();
+  type DateTimePickerProps = {
+    value?: Date;
+    maxDate?: Date;
+    label: string;
+    onChange: (date?: Date) => void;
+  };
+
+  const { value, maxDate, label, onChange }: DateTimePickerProps = $props();
 
   const { language } = getLanguageAndRegion();
 
@@ -38,6 +40,7 @@
     bind:this={inputElement}
     class="trakt-date-time-input"
     type="datetime-local"
+    aria-label={label}
     value={toDateTimeLocal(value)}
     max={toDateTimeLocal(maxDate)}
     lang={language}
