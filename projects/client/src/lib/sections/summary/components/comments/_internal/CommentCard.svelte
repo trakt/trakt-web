@@ -1,9 +1,13 @@
 <script lang="ts">
-  import Card from "$lib/components/card/Card.svelte";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import CommentPreview from "./CommentPreview.svelte";
+  import TextCard from "../../_internal/TextCard.svelte";
+  import ReactAction from "./comment-actions/ReactAction.svelte";
+  import ViewRepliesAction from "./comment-actions/ViewRepliesAction.svelte";
+  import CommentBody from "./CommentBody.svelte";
+  import CommentFooter from "./CommentFooter.svelte";
+  import CommentHeader from "./CommentHeader.svelte";
   import type { ActiveComment } from "./models/ActiveComment";
 
   type CommentProps = {
@@ -16,33 +20,29 @@
   const { comment, media, onDrilldown, type }: CommentProps = $props();
 </script>
 
-<Card
+<TextCard
   --width-card="var(--width-comment-card)"
   --height-card="var(--height-comment-card)"
 >
-  <div class="trakt-comment-container">
-    <CommentPreview {comment} {media} {onDrilldown} {type} />
-  </div>
-</Card>
+  {#snippet header()}
+    <CommentHeader {comment} {type} />
+  {/snippet}
 
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
+  <CommentBody
+    {comment}
+    {media}
+    type="preview"
+    onClick={() =>
+      onDrilldown?.({
+        id: comment.id,
+        isReplying: false,
+      })}
+  />
 
-  .trakt-comment-container {
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-s);
-    justify-content: space-between;
-
-    padding: var(--ni-16) var(--ni-20);
-
-    height: 100%;
-    box-sizing: border-box;
-
-    :global(.trakt-spoiler) {
-      cursor: pointer;
-    }
-  }
-</style>
+  {#snippet footer()}
+    <CommentFooter>
+      <ReactAction {comment} />
+      <ViewRepliesAction {comment} {onDrilldown} />
+    </CommentFooter>
+  {/snippet}
+</TextCard>
