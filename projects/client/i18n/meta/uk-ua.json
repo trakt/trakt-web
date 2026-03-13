@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "Відмітити \"{title}\" як переглянуте до цього місця"
     },
+    "date_time_label_watched": {
+      "default": "Оберіть дату та час, коли ви подивилися «{title}»"
+    },
     "translated_value_genre_horror": {
       "default": "Жахи"
     },

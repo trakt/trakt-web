@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "\"{title}\"をここまで視聴済みにする"
     },
+    "date_time_label_watched": {
+      "default": "「{title}」を鑑賞した日時を選択してください"
+    },
     "translated_value_genre_horror": {
       "default": "ホラー"
     },

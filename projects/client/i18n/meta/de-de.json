@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "\"{title}\" bis hier als gesehen markieren"
     },
+    "date_time_label_watched": {
+      "default": "Wählen Sie Datum und Uhrzeit, zu denen Sie „{title}“ gesehen haben"
+    },
     "translated_value_genre_horror": {
       "default": "Horror"
     },

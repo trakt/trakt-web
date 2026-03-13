@@ -10,6 +10,9 @@
 
 <div
   class="trakt-toast"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
   style="--distance-from-bottom: {$distanceFromBottom}px; --footer-height: {$footerHeight}px"
   transition:fade={{ duration: 300 }}
 >

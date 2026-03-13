@@ -25,8 +25,7 @@
       </RenderFor>
     </div>
 
-    <!-- svelte-ignore a11y_img_redundant_alt -->
-    <img src={gift} class="trakt-black-friday-gift" alt="Gift image" />
+    <img src={gift} class="trakt-black-friday-gift" alt="" />
   </div>
 </RenderFor>
 

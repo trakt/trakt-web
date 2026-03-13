@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "Marcar \"{title}\" como visto hasta aquí"
     },
+    "date_time_label_watched": {
+      "default": "Seleccione la fecha y la hora en la que vio «{title}»"
+    },
     "translated_value_genre_horror": {
       "default": "Terror"
     },

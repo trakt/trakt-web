@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "Oznacz \"{title}\" jako obejrzane do tego miejsca"
     },
+    "date_time_label_watched": {
+      "default": "Wybierz datę i godzinę, kiedy obejrzałeś „{title}”"
+    },
     "translated_value_genre_horror": {
       "default": "Horror"
     },

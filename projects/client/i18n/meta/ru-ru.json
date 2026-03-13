@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "Отметить «{title}» как просмотренное до этого момента"
     },
+    "date_time_label_watched": {
+      "default": "Выберите дату и время, когда вы посмотрели «{title}»"
+    },
     "translated_value_genre_horror": {
       "default": "Ужасы"
     },

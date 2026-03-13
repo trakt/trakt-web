@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "Marquer \"{title}\" comme vu jusqu'ici"
     },
+    "date_time_label_watched": {
+      "default": "Choisissez la date et l'heure où vous avez écouté « {title} »"
+    },
     "translated_value_genre_horror": {
       "default": "Horreur"
     },

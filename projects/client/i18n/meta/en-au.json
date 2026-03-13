@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "Mark \"{title}\" as watched until here"
     },
+    "date_time_label_watched": {
+      "default": "Pick a date and time when you watched \"{title}\""
+    },
     "translated_value_genre_horror": {
       "default": "Horror"
     },

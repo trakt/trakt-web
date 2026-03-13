@@ -13,6 +13,7 @@
     placeholder,
     value,
     autofocus = false,
+    required,
     validation,
   }: FormInputProps = $props();
 
@@ -51,6 +52,7 @@
     type="text"
     {placeholder}
     {disabled}
+    {required}
     {value}
     oninput={handleInput}
     aria-invalid={hasError ? "true" : "false"}

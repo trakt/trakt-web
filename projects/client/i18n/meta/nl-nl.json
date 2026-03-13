@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "\"{title}\" tot hier als bekeken markeren"
     },
+    "date_time_label_watched": {
+      "default": "Kies de datum en tijd waarop je naar \"{title}\" hebt gekeken"
+    },
     "translated_value_genre_horror": {
       "default": "Horror"
     },

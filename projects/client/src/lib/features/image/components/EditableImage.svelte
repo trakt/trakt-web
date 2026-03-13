@@ -37,6 +37,7 @@
 <div
   tabindex="0"
   role="button"
+  aria-label={alt}
   class="trakt-editable-image"
   use:dropzone
   onfiles={(ev) => readImage(ev.detail.files)}

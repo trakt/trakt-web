@@ -81,6 +81,9 @@
     "button_label_watched_until_here": {
       "default": "Marchează \"{title}\" ca urmărit până aici"
     },
+    "date_time_label_watched": {
+      "default": "Alege data și ora la care ai vizionat „{title}”"
+    },
     "translated_value_genre_horror": {
       "default": "Horror"
     },
