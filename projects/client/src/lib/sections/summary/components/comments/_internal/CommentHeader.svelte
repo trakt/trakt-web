@@ -5,6 +5,7 @@
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
+  import TextCardHeader from "../../_internal/TextCardHeader.svelte";
   import DeleteCommentButton from "./comment-actions/DeleteCommentButton.svelte";
   import CommenterRating from "./CommenterRating.svelte";
 
@@ -13,40 +14,22 @@
 </script>
 
 <div class="trakt-comment-header">
-  <div class="trakt-comment-header-content">
-    <UserAvatar user={comment.user} size="small" />
+  <TextCardHeader subTitle={toHumanDay(comment.createdAt, getLocale())}>
+    {#snippet icon()}
+      <UserAvatar user={comment.user} size="small" />
+    {/snippet}
 
-    <div class="trakt-comment-details">
-      <div class="trakt-comment-user">
-        <UserProfileLink user={comment.user} />
-      </div>
-      <p class="secondary">
-        {toHumanDay(comment.createdAt, getLocale())}
-      </p>
-    </div>
-  </div>
+    {#snippet actions()}
+      <CommenterRating {comment} />
+      <DeleteCommentButton {comment} {type} />
+    {/snippet}
 
-  <div>
-    <CommenterRating {comment} />
-    <DeleteCommentButton {comment} {type} />
-  </div>
+    <UserProfileLink user={comment.user} />
+  </TextCardHeader>
 </div>
 
 <style>
   .trakt-comment-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: var(--gap-s);
-  }
-
-  .trakt-comment-header-content {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-s);
-    height: var(--ni-32);
-
     :global(.trakt-user-avatar) {
       position: relative;
     }
@@ -56,23 +39,5 @@
       top: var(--ni-neg-4);
       right: var(--ni-neg-10);
     }
-  }
-
-  .trakt-comment-details {
-    display: flex;
-    flex-direction: column;
-
-    :global(.trakt-vip-badge) {
-      transform: scale(0.6);
-      margin-left: var(--ni-neg-12);
-    }
-  }
-
-  .trakt-comment-user {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xxs);
-
-    height: var(--ni-18);
   }
 </style>
