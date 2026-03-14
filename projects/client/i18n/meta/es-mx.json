@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Listas inteligentes"
     },
+    "limit_title_notes": {
+      "default": "Notas"
+    },
     "limit_title_personal_lists": {
       "default": "Mis listas"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Deja una nota la próxima vez que marques como favorita o le des ‘drop’ a un título."
+    },
+    "drawer_title_add_note": {
+      "default": "Nota"
+    },
+    "button_text_add_note": {
+      "default": "Agregar nota"
+    },
+    "button_label_add_note": {
+      "default": "Agregar una nota a {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "¿Por qué pusiste este título en tus favoritos?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "¿Por qué abandonaste este título?"
+    },
+    "validation_text_note": {
+      "default": "La nota es obligatoria"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Excede el límite de {limit} caracteres"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Algo salió mal al publicar tu nota. Si esto sigue pasando, por favor <a>envía un reporte</a>."
     }
   }
 }

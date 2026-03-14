@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Listas inteligentes"
     },
+    "limit_title_notes": {
+      "default": "Notas"
+    },
     "limit_title_personal_lists": {
       "default": "Listas personales"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Deje una nota la próxima vez que marque como favorita o abandone una película o serie."
+    },
+    "drawer_title_add_note": {
+      "default": "Nota"
+    },
+    "button_text_add_note": {
+      "default": "Añadir nota"
+    },
+    "button_label_add_note": {
+      "default": "Añadir una nota a {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "¿Por qué ha marcado esta película o serie como favorita?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "¿Por qué ha dejado de ver este título?"
+    },
+    "validation_text_note": {
+      "default": "Es necesario escribir una nota"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Supera el límite de {limit} caracteres"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Se ha producido un error inesperado al publicar su nota. Si esto sigue fallando, <a>envíe una incidencia</a>."
     }
   }
 }

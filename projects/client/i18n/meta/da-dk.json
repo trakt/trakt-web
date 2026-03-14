@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Smarte lister"
     },
+    "limit_title_notes": {
+      "default": "Notater"
+    },
     "limit_title_personal_lists": {
       "default": "Egne lister"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Efterlad en note næste gang du tilføjer en favorit eller dropper en film til din næste filmaften."
+    },
+    "drawer_title_add_note": {
+      "default": "Notat"
+    },
+    "button_text_add_note": {
+      "default": "Tilføj notat"
+    },
+    "button_label_add_note": {
+      "default": "Tilføj et notat til {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Hvorfor er dette en favorit?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Hvorfor stoppede du med at se denne?"
+    },
+    "validation_text_note": {
+      "default": "Notat er påkrævet"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Overskrider grænsen på {limit} tegn"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Der skete en fejl da din note skulle gemmes. Hvis det fortsat driller, så <a>indsend en fejlmelding</a>."
     }
   }
 }

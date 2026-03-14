@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Smart Lists"
     },
+    "limit_title_notes": {
+      "default": "Notes"
+    },
     "limit_title_personal_lists": {
       "default": "Personal Lists"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Leave a note the next time you favourite or drop a title."
+    },
+    "drawer_title_add_note": {
+      "default": "Note"
+    },
+    "button_text_add_note": {
+      "default": "Add Note"
+    },
+    "button_label_add_note": {
+      "default": "Add a note to {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Why did you favourite this title?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Why did you drop this title?"
+    },
+    "validation_text_note": {
+      "default": "Note is required"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Exceeds {limit} character limit"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Something went wrong while posting your note. If this keeps happening, please <a>submit a new issue</a>."
     }
   }
 }

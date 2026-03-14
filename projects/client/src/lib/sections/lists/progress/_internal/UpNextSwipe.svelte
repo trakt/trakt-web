@@ -25,6 +25,7 @@
     useDrop({
       id: show.id,
       type: "show",
+      title: show.title,
     }),
   );
 

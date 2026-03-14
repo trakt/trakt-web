@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Inteligentne listy"
     },
+    "limit_title_notes": {
+      "default": "Notatki"
+    },
     "limit_title_personal_lists": {
       "default": "Moje listy"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Zostaw notatkę, gdy następnym razem dodasz film do ulubionych lub porzucisz serial."
+    },
+    "drawer_title_add_note": {
+      "default": "Notatka"
+    },
+    "button_text_add_note": {
+      "default": "Dodaj notatkę"
+    },
+    "button_label_add_note": {
+      "default": "Dodaj notatkę do {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Dlaczego dodałeś ten tytuł do ulubionych?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Dlaczego przerwałeś oglądanie tego tytułu?"
+    },
+    "validation_text_note": {
+      "default": "Notatka jest wymagana"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Przekroczono limit {limit} znaków"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Coś poszło nie tak podczas publikowania notatki. Jeśli problem będzie się powtarzał, <a>zgłoś błąd</a>."
     }
   }
 }

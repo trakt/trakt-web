@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Смарт-списки"
     },
+    "limit_title_notes": {
+      "default": "Заметки"
+    },
     "limit_title_personal_lists": {
       "default": "Личные списки"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Оставьте заметку, когда в следующий раз добавите фильм или сериал в избранное или бросите просмотр."
+    },
+    "drawer_title_add_note": {
+      "default": "Заметка"
+    },
+    "button_text_add_note": {
+      "default": "Добавить заметку"
+    },
+    "button_label_add_note": {
+      "default": "Добавить заметку к {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Почему вы добавили этот фильм или сериал в избранное?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Почему вы бросили просмотр?"
+    },
+    "validation_text_note": {
+      "default": "Заметка обязательна"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Превышен лимит в {limit} символов"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Что-то пошло не так при публикации заметки. Если ошибка повторится, пожалуйста, <a>создайте обращение</a>."
     }
   }
 }

@@ -70,4 +70,6 @@ export const AnalyticsEvent = {
 
   SmartListDelete: buildEventKey(SMART_LIST_ACTION_PREFIX, 'delete'),
   SmartListCreate: buildEventKey(SMART_LIST_ACTION_PREFIX, 'create'),
+
+  AddNote: buildEventKey(MEDIA_ACTION_PREFIX, 'add-note'),
 } as const;

@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "スマートリスト"
     },
+    "limit_title_notes": {
+      "default": "メモ"
+    },
     "limit_title_personal_lists": {
       "default": "マイリスト"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "次にお気に入りのドラマや映画を追加したり、視聴を中断（ドロップ）したりする際に、あなたのオタク魂を込めたメモを残しましょう！"
+    },
+    "drawer_title_add_note": {
+      "default": "メモ"
+    },
+    "button_text_add_note": {
+      "default": "メモを追加"
+    },
+    "button_label_add_note": {
+      "default": "{title} にメモを追加"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "この作品をお気に入りに追加した理由は何ですか？"
+    },
+    "input_placeholder_note_drop": {
+      "default": "この作品の視聴を中断した理由は何ですか？"
+    },
+    "validation_text_note": {
+      "default": "メモの入力が必要です"
+    },
+    "validation_text_note_character_limit": {
+      "default": "文字数が {limit} 文字を超えています"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "メモの投稿中にエラーが発生しました。問題が解決しない場合は、<a>新しい課題を報告</a>してください。"
     }
   }
 }

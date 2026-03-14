@@ -26,8 +26,10 @@
 
   const { drop } = $derived(
     useDrop({
-      id: playbackId,
+      playbackId,
+      id: movie.id,
       type: "movie",
+      title: movie.title,
     }),
   );
 

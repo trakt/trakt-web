@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Listes intelligentes"
     },
+    "limit_title_notes": {
+      "default": "Notes"
+    },
     "limit_title_personal_lists": {
       "default": "Mes listes"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Laisse une note la prochaine fois que tu ajoutes un coup de cœur ou que tu laisses tomber un film ou une série."
+    },
+    "drawer_title_add_note": {
+      "default": "Note"
+    },
+    "button_text_add_note": {
+      "default": "Ajouter une note"
+    },
+    "button_label_add_note": {
+      "default": "Ajouter une note à {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Pourquoi as-tu mis ce film ou cette série dans tes coups de cœur ?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Pourquoi as-tu abandonné ce titre ?"
+    },
+    "validation_text_note": {
+      "default": "La note est obligatoire"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Dépasse la limite de {limit} caractères"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Oups, il y a un pépin technique avec ta note. Si ça continue de boguer, <a>soumettez un nouveau problème</a>."
     }
   }
 }

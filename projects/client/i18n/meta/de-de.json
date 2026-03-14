@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Smart Lists"
     },
+    "limit_title_notes": {
+      "default": "Notizen"
+    },
     "limit_title_personal_lists": {
       "default": "Eigene Listen"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Hinterlassen Sie eine Notiz, wenn Sie das nächste Mal einen Film oder eine Serie zu Ihren Favoriten hinzufügen oder abbrechen."
+    },
+    "drawer_title_add_note": {
+      "default": "Notiz"
+    },
+    "button_text_add_note": {
+      "default": "Notiz hinzufügen"
+    },
+    "button_label_add_note": {
+      "default": "Eine Notiz zu {title} hinzufügen"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Warum haben Sie diesen Titel zu Ihren Favoriten hinzugefügt?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Warum haben Sie diesen Titel abgebrochen?"
+    },
+    "validation_text_note": {
+      "default": "Notiz ist erforderlich"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Limit von {limit} Zeichen überschritten"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Etwas ist beim Posten Ihrer Notiz schiefgelaufen. Wenn dieser Fehler im Skript bleibt, bitte <a>erstellen Sie ein Ticket</a>."
     }
   }
 }
