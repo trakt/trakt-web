@@ -7647,6 +7647,19 @@
         "android",
         "ios"
       ]
+    },
+    "validation_text_settings_field": {
+      "default": "{name} is required",
+      "description": "Validation text shown when the user inputs an invalid value for a setting.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

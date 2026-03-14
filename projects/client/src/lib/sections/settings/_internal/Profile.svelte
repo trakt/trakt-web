@@ -9,6 +9,7 @@
   import ManageSubscriptionButton from "./components/ManageSubscriptionButton.svelte";
   import { getSwitchInnerText } from "./getSwitchInnerText";
   import LargeSettingsRow from "./LargeSettingsRow.svelte";
+  import SettingInputDrawer from "./SettingInputDrawer.svelte";
   import SettingsBlock from "./SettingsBlock.svelte";
   import SettingsRow from "./SettingsRow.svelte";
   import { useSettings } from "./useSettings";
@@ -25,32 +26,31 @@
       prompt: m.input_prompt_display_name(),
       label: m.button_label_change_display_name(),
       currentValue: $profile.displayName,
+      name: m.text_display_name(),
     },
     location: {
       prompt: m.input_prompt_location(),
       label: m.button_label_change_location(),
       currentValue: $profile.location,
+      name: m.text_location(),
     },
     about: {
       prompt: m.input_prompt_about(),
       label: m.button_label_change_about(),
       currentValue: $profile.about,
+      name: m.text_about(),
     },
   });
 
-  // FIXME: change to input/text area elements
+  let activeField = $state<keyof typeof promptMap | undefined>(undefined);
+
   const handleFieldChange = (field: keyof typeof promptMap) => {
-    // skipcq: JS-0052
-    const enteredValue = prompt(
-      promptMap[field].prompt,
-      promptMap[field].currentValue,
-    );
+    activeField = field;
+  };
 
-    if (!enteredValue || enteredValue.trim() === "") {
-      return;
-    }
-
-    $profile.set({ [field]: enteredValue.trim() });
+  const handleSaveField = async (value: string) => {
+    if (!activeField) return;
+    await $profile.set({ [activeField]: value });
   };
 </script>
 
@@ -123,6 +123,19 @@
     {/snippet}
   </SettingsRow>
 </SettingsBlock>
+
+{#if activeField}
+  <SettingInputDrawer
+    isRequired={activeField !== "about"}
+    type={activeField === "about" ? "textarea" : "input"}
+    title={promptMap[activeField].prompt}
+    name={promptMap[activeField].name}
+    currentValue={promptMap[activeField].currentValue}
+    onClose={() => (activeField = undefined)}
+    onSave={handleSaveField}
+    isSaving={$isSavingSettings}
+  />
+{/if}
 
 <style>
   /* FIXME: find out why the initial values set in lineClamp are not applied */
