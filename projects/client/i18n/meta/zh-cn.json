@@ -2779,6 +2779,9 @@
     },
     "tag_text_smart_list_preview": {
       "default": "列表预览"
+    },
+    "validation_text_settings_field": {
+      "default": "{name}是必填项"
     }
   }
 }

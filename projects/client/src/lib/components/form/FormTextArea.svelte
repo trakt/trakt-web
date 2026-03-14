@@ -15,6 +15,7 @@
     autofocus = false,
     validation,
     rows = 5,
+    required,
   }: FormInputProps & {
     rows?: number;
   } = $props();
@@ -53,6 +54,7 @@
     {placeholder}
     {value}
     {rows}
+    {required}
     oninput={handleInput}
     aria-invalid={hasError ? "true" : "false"}
     aria-describedby={hasError ? ERROR_LABEL_ID : undefined}

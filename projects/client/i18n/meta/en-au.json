@@ -2780,6 +2780,9 @@
     },
     "tag_text_smart_list_preview": {
       "default": "List preview"
+    },
+    "validation_text_settings_field": {
+      "default": "{name} is required"
     }
   }
 }

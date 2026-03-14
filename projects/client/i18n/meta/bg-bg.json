@@ -2780,6 +2780,9 @@
     },
     "tag_text_smart_list_preview": {
       "default": "Преглед"
+    },
+    "validation_text_settings_field": {
+      "default": "{name} е задължително"
     }
   }
 }
