@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Smarte lister"
     },
+    "limit_title_notes": {
+      "default": "Notater"
+    },
     "limit_title_personal_lists": {
       "default": "Personlige lister"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Legg igjen et notat neste gang du legger til en favoritt eller dropper en serie midt i binge-watchingen."
+    },
+    "drawer_title_add_note": {
+      "default": "Notat"
+    },
+    "button_text_add_note": {
+      "default": "Legg til notat"
+    },
+    "button_label_add_note": {
+      "default": "Legg til et notat for {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Hvorfor er dette en av dine favoritter?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Hvorfor sluttet du å se på denne?"
+    },
+    "validation_text_note": {
+      "default": "Notat er påkrevd"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Overstiger grensen på {limit} tegn"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Noe gikk galt da notatet ditt skulle publiseres. Hvis det er krøll på linja, vennligst <a>rapporter et problem</a>."
     }
   }
 }

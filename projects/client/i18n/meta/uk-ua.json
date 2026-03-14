@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Смарт-списки"
     },
+    "limit_title_notes": {
+      "default": "Нотатки"
+    },
     "limit_title_personal_lists": {
       "default": "Мої списки"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Залиште нотатку наступного разу, коли додасте фільм в обране або вирішите припинити перегляд серіалу."
+    },
+    "drawer_title_add_note": {
+      "default": "Нотатка"
+    },
+    "button_text_add_note": {
+      "default": "Додати нотатку"
+    },
+    "button_label_add_note": {
+      "default": "Додати нотатку до {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Чому ви додали цей тайтл в обране?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Чому ви покинули перегляд цього тайтлу?"
+    },
+    "validation_text_note": {
+      "default": "Нотатка є обов'язковою"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Перевищено ліміт у {limit} символів"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Щось пішло не так під час публікації вашої нотатки. Якщо це повторюється, будь ласка, <a>повідомте про проблему</a>."
     }
   }
 }

@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Liste intelligenti"
     },
+    "limit_title_notes": {
+      "default": "Note"
+    },
     "limit_title_personal_lists": {
       "default": "Liste personali"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Lascia una nota la prossima volta che aggiungi un titolo ai preferiti o decidi di abbandonarlo."
+    },
+    "drawer_title_add_note": {
+      "default": "Nota"
+    },
+    "button_text_add_note": {
+      "default": "Aggiungi nota"
+    },
+    "button_label_add_note": {
+      "default": "Aggiungi una nota a {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Perché hai aggiunto questo titolo ai preferiti?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Perché hai interrotto la visione di questo titolo?"
+    },
+    "validation_text_note": {
+      "default": "La nota è obbligatoria"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Supera il limite di {limit} caratteri"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Qualcosa è andato storto durante l'invio della nota. Se l'errore persiste, per favore <a>segnala il problema</a>."
     }
   }
 }

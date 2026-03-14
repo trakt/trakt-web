@@ -1,6 +1,7 @@
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { NoteType } from '$lib/requests/models/NoteType.ts';
+import { isValidResponse } from '../../../features/query/_internal/isValidResponse.ts';
 
 type PostNoteParams = {
   body: {
@@ -21,6 +22,10 @@ export async function postNoteRequest(
       body: JSON.stringify(body),
     },
   });
+
+  if (!isValidResponse(response, 'postNoteRequest')) {
+    return false;
+  }
 
   return response.ok;
 }

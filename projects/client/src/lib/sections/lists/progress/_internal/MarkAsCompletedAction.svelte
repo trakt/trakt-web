@@ -26,8 +26,10 @@
 
   const { drop, isDropping } = $derived(
     useDrop({
-      id: playbackId,
-      type: media.type,
+      playbackId,
+      id: media.id,
+      type: "movie",
+      title: media.title,
     }),
   );
 

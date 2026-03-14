@@ -7070,6 +7070,14 @@
         "ios"
       ]
     },
+    "limit_title_notes": {
+      "default": "Notes",
+      "description": "Title for the progress bar that shows a user's notes usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "limit_title_personal_lists": {
       "default": "Personal Lists",
       "description": "Title for the progress bar that shows a user's personal lists usage. This should be as short as possible.",
@@ -7688,6 +7696,80 @@
     "notes_placeholder_text": {
       "default": "Leave a note the next time you favorite or drop a title.",
       "description": "Text shown when there are no notes for a movie or show.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "drawer_title_add_note": {
+      "default": "Note",
+      "description": "Title for the drawer that allows users to add a note to a movie or show. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_add_note": {
+      "default": "Add Note",
+      "description": "Button text for adding a note to a show or movie.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_add_note": {
+      "default": "Add a note to {title}",
+      "description": "Aria-label for the button that allows users to add a note to a show or movie.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Why did you favorite this title?",
+      "description": "Placeholder text for the input field when adding a note about why a user favorited a title.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "input_placeholder_note_drop": {
+      "default": "Why did you drop this title?",
+      "description": "Placeholder text for the input field when adding a note about why a user dropped a title.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "validation_text_note": {
+      "default": "Note is required",
+      "description": "Validation text shown when the user inputs an empty note.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "validation_text_note_character_limit": {
+      "default": "Exceeds {limit} character limit",
+      "description": "Validation text shown when the user inputs a note that exceeds the character limit.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Something went wrong while posting your note. If this keeps happening, please <a>submit a new issue</a>.",
+      "description": "Text shown when posting a note fails unexpectedly, informing the user that something went wrong and providing a link to create a new issue.",
       "exclude": [
         "android",
         "ios"

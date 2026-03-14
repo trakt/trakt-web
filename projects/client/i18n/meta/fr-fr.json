@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Listes intelligentes"
     },
+    "limit_title_notes": {
+      "default": "Notes"
+    },
     "limit_title_personal_lists": {
       "default": "Listes personnelles"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Laissez une note la prochaine fois que vous ajouterez un titre à vos favoris ou que vous l'abandonnerez."
+    },
+    "drawer_title_add_note": {
+      "default": "Note"
+    },
+    "button_text_add_note": {
+      "default": "Ajouter une note"
+    },
+    "button_label_add_note": {
+      "default": "Ajouter une note à {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Pourquoi avez-vous ajouté ce titre à vos favoris ?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Pourquoi avez-vous abandonné ce titre ?"
+    },
+    "validation_text_note": {
+      "default": "Une note est requise"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Dépasse la limite de {limit} caractères"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Un problème est survenu lors de l'enregistrement de votre note. Si cette erreur de scénario persiste, veuillez <a>signaler un nouveau problème</a>."
     }
   }
 }

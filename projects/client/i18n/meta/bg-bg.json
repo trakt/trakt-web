@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Смарт списъци"
     },
+    "limit_title_notes": {
+      "default": "Бележки"
+    },
     "limit_title_personal_lists": {
       "default": "Лични списъци"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Оставете бележка следващия път, когато добавите филм към любими или спрете да гледате някой сериал."
+    },
+    "drawer_title_add_note": {
+      "default": "Бележка"
+    },
+    "button_text_add_note": {
+      "default": "Добави бележка"
+    },
+    "button_label_add_note": {
+      "default": "Добави бележка към {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Защо добавихте това заглавие в любими?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Защо спряхте да гледате това заглавие?"
+    },
+    "validation_text_note": {
+      "default": "Бележката е задължителна"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Надвишава лимита от {limit} символа"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Нещо се обърка при публикуването на бележката ви. Ако това продължи, моля <a>изпратете сигнал</a>."
     }
   }
 }

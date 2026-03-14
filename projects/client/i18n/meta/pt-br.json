@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Listas Inteligentes"
     },
+    "limit_title_notes": {
+      "default": "Notas"
+    },
     "limit_title_personal_lists": {
       "default": "Listas Pessoais"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Deixe uma nota na próxima vez que favoritar aquele filme imperdível ou desistir de uma série."
+    },
+    "drawer_title_add_note": {
+      "default": "Nota"
+    },
+    "button_text_add_note": {
+      "default": "Adicionar Nota"
+    },
+    "button_label_add_note": {
+      "default": "Adicionar uma nota a {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Por que você favoritou este título?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Por que você parou de assistir este título?"
+    },
+    "validation_text_note": {
+      "default": "A nota é obrigatória"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Excedeu o limite de {limit} caracteres"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Algo deu errado ao postar sua nota. Se esse erro persistir no próximo episódio, por favor <a>envie um novo problema</a>."
     }
   }
 }

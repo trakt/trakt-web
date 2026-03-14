@@ -31,8 +31,9 @@
   <DropAction
     style="dropdown-item"
     title={movie.title}
-    id={playbackId}
+    id={movie.id}
     type="movie"
+    {playbackId}
   />
 {/snippet}
 

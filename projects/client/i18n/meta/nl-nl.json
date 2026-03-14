@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Smart lists"
     },
+    "limit_title_notes": {
+      "default": "Notities"
+    },
     "limit_title_personal_lists": {
       "default": "Eigen lijsten"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Laat een notitie achter de volgende keer dat je een titel als favoriet markeert of stopt met kijken."
+    },
+    "drawer_title_add_note": {
+      "default": "Notitie"
+    },
+    "button_text_add_note": {
+      "default": "Notitie toevoegen"
+    },
+    "button_label_add_note": {
+      "default": "Voeg een notitie toe aan {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Waarom is dit een van je favorieten?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Waarom ben je gestopt met kijken?"
+    },
+    "validation_text_note": {
+      "default": "Notitie is verplicht"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Overschrijdt de limiet van {limit} tekens"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Er ging iets mis bij het plaatsen van je notitie. Als dit blijft gebeuren, <a>meld dan een probleem</a>."
     }
   }
 }

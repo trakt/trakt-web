@@ -3,7 +3,7 @@ import type { Observable, Subscription } from 'rxjs';
 export function resolve<T>(
   stream: Observable<T>,
   timeout = 1000,
-): Promise<T> {
+): Promise<Exclude<T, Nil>> {
   return new Promise((resolve, reject) => {
     let subscription: Subscription | Nil = null;
 
@@ -15,7 +15,7 @@ export function resolve<T>(
     subscription = stream.subscribe((value) => {
       if (value !== undefined) {
         clearTimeout(timeoutId);
-        resolve(value);
+        resolve(value as Exclude<T, Nil>);
         queueMicrotask(() => subscription?.unsubscribe());
       }
     });

@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Liste inteligente"
     },
+    "limit_title_notes": {
+      "default": "Notițe"
+    },
     "limit_title_personal_lists": {
       "default": "Liste personale"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Lasă o notă data viitoare când adaugi la favorite sau renunți la un titlu de poveste."
+    },
+    "drawer_title_add_note": {
+      "default": "Notiță"
+    },
+    "button_text_add_note": {
+      "default": "Adaugă notiță"
+    },
+    "button_label_add_note": {
+      "default": "Adaugă o notiță pentru {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "De ce ai adăugat acest titlu la favorite?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "De ce ai abandonat acest titlu?"
+    },
+    "validation_text_note": {
+      "default": "Notița este obligatorie"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Depășește limita de {limit} caractere"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Ceva nu a funcționat la postarea notiței tale. Dacă povestea se repetă, te rugăm să <a>trimiți o sesizare</a>."
     }
   }
 }

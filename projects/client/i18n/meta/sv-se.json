@@ -2592,6 +2592,9 @@
     "limit_title_smart_lists": {
       "default": "Smarta listor"
     },
+    "limit_title_notes": {
+      "default": "Anteckn."
+    },
     "limit_title_personal_lists": {
       "default": "Egna listor"
     },
@@ -2795,6 +2798,30 @@
     },
     "notes_placeholder_text": {
       "default": "Lämna en anteckning nästa gång du favoritmarkerar eller avbryter en filmkväll."
+    },
+    "drawer_title_add_note": {
+      "default": "Anteckning"
+    },
+    "button_text_add_note": {
+      "default": "Lägg till"
+    },
+    "button_label_add_note": {
+      "default": "Lägg till en anteckning om {title}"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "Varför blev det här en favorit?"
+    },
+    "input_placeholder_note_drop": {
+      "default": "Varför slutade du titta på detta?"
+    },
+    "validation_text_note": {
+      "default": "Anteckning krävs"
+    },
+    "validation_text_note_character_limit": {
+      "default": "Överskrider gränsen på {limit} tecken"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "Hoppsan, något gick fel när din anteckning skulle sparas. Om felet kvarstår, <a>skapa ett ärende</a>."
     }
   }
 }

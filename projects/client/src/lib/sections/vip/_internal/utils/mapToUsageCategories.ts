@@ -15,7 +15,6 @@ export type UsageCategory = {
   items: UsageCategoryItem[];
 };
 
-// FIXME: add notes when feature are available
 export function mapToUsageCategories(limits: UserLimits): UsageCategory[] {
   return [
     {
@@ -28,6 +27,10 @@ export function mapToUsageCategories(limits: UserLimits): UsageCategory[] {
         {
           title: m.limit_title_ratings,
           limits: limits.ratings,
+        },
+        {
+          title: m.limit_title_notes,
+          limits: limits.totalNotes,
         },
       ],
     },

@@ -2591,6 +2591,9 @@
     "limit_title_smart_lists": {
       "default": "智能列表"
     },
+    "limit_title_notes": {
+      "default": "备注"
+    },
     "limit_title_personal_lists": {
       "default": "个人列表"
     },
@@ -2794,6 +2797,30 @@
     },
     "notes_placeholder_text": {
       "default": "下次将电影或剧集收藏或弃剧时，留下一条笔记吧。"
+    },
+    "drawer_title_add_note": {
+      "default": "备注"
+    },
+    "button_text_add_note": {
+      "default": "添加备注"
+    },
+    "button_label_add_note": {
+      "default": "为 {title} 添加备注"
+    },
+    "input_placeholder_note_favorite": {
+      "default": "为什么你最喜欢这部作品？"
+    },
+    "input_placeholder_note_drop": {
+      "default": "为什么你弃追了这部作品？"
+    },
+    "validation_text_note": {
+      "default": "备注不能为空"
+    },
+    "validation_text_note_character_limit": {
+      "default": "超过 {limit} 个字符限制"
+    },
+    "error_text_unexpected_notes_error": {
+      "default": "发布备注时出了点问题。如果错误持续出现，请<a>提交新问题</a>。"
     }
   }
 }

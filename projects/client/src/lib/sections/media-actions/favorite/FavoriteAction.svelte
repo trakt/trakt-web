@@ -32,7 +32,7 @@
     isFavorited,
     addToFavorites,
     removeFromFavorites,
-  } = $derived(useFavorites({ type, id }));
+  } = $derived(useFavorites({ type, id, title }));
 
   const { confirm } = useConfirm();
   const confirmRemove = $derived(

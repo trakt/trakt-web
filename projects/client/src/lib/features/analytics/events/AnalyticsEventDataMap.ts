@@ -2,6 +2,7 @@ import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
+import type { NoteType } from '$lib/requests/models/NoteType.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
 import type { DiscoverMode } from '../../discover/models/DiscoverMode.ts';
@@ -92,4 +93,6 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.SmartListDelete]: never;
   [AnalyticsEvent.SmartListCreate]: never;
+
+  [AnalyticsEvent.AddNote]: { type: NoteType };
 };

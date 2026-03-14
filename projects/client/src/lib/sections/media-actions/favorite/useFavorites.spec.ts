@@ -1,3 +1,4 @@
+import { useAddNoteDrawer } from '$lib/features/notes/useAddNoteDrawer.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
@@ -11,6 +12,7 @@ import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { type FavoritesStoreProps, useFavorites } from './useFavorites.ts';
 
 vi.mock('$lib/stores/useInvalidator.ts');
+vi.mock('$lib/features/notes/useAddNoteDrawer.ts');
 
 describe('useFavorites', () => {
   const invalidate = vi.fn(() => {});
@@ -22,6 +24,8 @@ describe('useFavorites', () => {
     (useInvalidator as Mock)
       .mockReturnValueOnce({ invalidate }) // 1: useFavorites
       .mockReturnValueOnce({ invalidate }); // 2: useFavorites -> useUser
+
+    (useAddNoteDrawer as Mock).mockReturnValue({ open: vi.fn() });
   });
 
   const runCommonTests = (props: FavoritesStoreProps, invalidation: string) => {
@@ -95,6 +99,7 @@ describe('useFavorites', () => {
   describe('media type: movie', () => {
     const props = {
       type: 'movie' as const,
+      title: 'Some Movie',
       id: 1,
     };
 
@@ -121,6 +126,7 @@ describe('useFavorites', () => {
     const props = {
       type: 'show' as const,
       id: 1,
+      title: 'Some Show',
     };
 
     runCommonTests(props, InvalidateAction.Favorited('show'));
