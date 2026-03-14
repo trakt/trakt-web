@@ -3,13 +3,14 @@ import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { changeEmailRequest } from '$lib/requests/queries/users/changeEmailRequest.ts';
 import { saveSettingsRequest } from '$lib/requests/queries/users/saveSettingsRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { SettingsRequest } from '@trakt/api';
 import { BehaviorSubject, map } from 'rxjs';
 
 type HandleSettingsProps = {
-  payload: SettingsRequest;
+  request: () => Promise<boolean>;
   action: string;
 };
 
@@ -33,19 +34,20 @@ export function useSettings() {
   const isSavingSettings = new BehaviorSubject(false);
 
   const handleSettingsChange = async (
-    { payload, action }: HandleSettingsProps,
-  ) => {
+    { request, action }: HandleSettingsProps,
+  ): Promise<boolean> => {
     isSavingSettings.next(true);
 
-    const success = await saveSettingsRequest({ body: payload });
+    const success = await request();
     if (!success) {
       isSavingSettings.next(false);
-      return;
+      return false;
     }
 
     track({ settings: action });
     await invalidate(InvalidateAction.User.Settings);
     isSavingSettings.next(false);
+    return true;
   };
 
   const setTheme = async (theme: Theme) => {
@@ -55,7 +57,10 @@ export function useSettings() {
       },
     };
 
-    await handleSettingsChange({ payload, action: 'theme' });
+    await handleSettingsChange({
+      request: () => saveSettingsRequest({ body: payload }),
+      action: 'theme',
+    });
   };
 
   return {
@@ -75,7 +80,21 @@ export function useSettings() {
           },
         };
 
-        await handleSettingsChange({ payload, action: 'spoilers' });
+        await handleSettingsChange({
+          request: () => saveSettingsRequest({ body: payload }),
+          action: 'spoilers',
+        });
+      },
+    }))),
+    email: user.pipe(map(($user) => ({
+      value: $user.email,
+      set: (email: string) => {
+        if (!$user.email) return Promise.resolve(false);
+
+        return handleSettingsChange({
+          request: () => changeEmailRequest({ email }),
+          action: 'email',
+        });
       },
     }))),
     profile: user.pipe(map(($user) => ({
@@ -88,7 +107,10 @@ export function useSettings() {
           user: { ...settings },
         };
 
-        await handleSettingsChange({ payload, action: 'profile' });
+        await handleSettingsChange({
+          request: () => saveSettingsRequest({ body: payload }),
+          action: 'profile',
+        });
       },
     }))),
     genres: user.pipe(map(($user) => ({
@@ -102,7 +124,10 @@ export function useSettings() {
           },
         };
 
-        await handleSettingsChange({ payload, action: 'genres' });
+        await handleSettingsChange({
+          request: () => saveSettingsRequest({ body: payload }),
+          action: 'genres',
+        });
       },
     }))),
     theme: { set: setTheme },
@@ -116,7 +141,10 @@ export function useSettings() {
           },
         };
 
-        await handleSettingsChange({ payload, action: 'watch_only_once' });
+        await handleSettingsChange({
+          request: () => saveSettingsRequest({ body: payload }),
+          action: 'watch_only_once',
+        });
       },
     }))),
   };

@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Nome de exibição"
     },
+    "text_display_email": {
+      "default": "E-mail"
+    },
     "button_label_change_display_name": {
       "default": "Alterar nome de exibição"
+    },
+    "button_label_change_email": {
+      "default": "Alterar e-mail"
     },
     "text_location": {
       "default": "Localização"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Qual deve ser seu nome de exibição?"
+    },
+    "input_prompt_email": {
+      "default": "Qual é o seu e-mail?"
     },
     "input_prompt_location": {
       "default": "Onde você está?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Algo deu errado ao postar sua nota. Se esse erro persistir no próximo episódio, por favor <a>envie um novo problema</a>."
+    },
+    "error_text_email": {
+      "default": "A atualização falhou. Verifique se o endereço é válido, como um spoiler que ninguém quer receber por engano!"
     }
   }
 }

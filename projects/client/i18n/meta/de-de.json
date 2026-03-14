@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Anzeigename"
     },
+    "text_display_email": {
+      "default": "E-Mail"
+    },
     "button_label_change_display_name": {
       "default": "Anzeigename ändern"
+    },
+    "button_label_change_email": {
+      "default": "E-Mail ändern"
     },
     "text_location": {
       "default": "Standort"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Wie soll dein Name angezeigt werden?"
+    },
+    "input_prompt_email": {
+      "default": "Wie lautet Ihre E-Mail-Adresse?"
     },
     "input_prompt_location": {
       "default": "Wo bist du?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Etwas ist beim Posten Ihrer Notiz schiefgelaufen. Wenn dieser Fehler im Skript bleibt, bitte <a>erstellen Sie ein Ticket</a>."
+    },
+    "error_text_email": {
+      "default": "Update fehlgeschlagen. Stellen Sie sicher, dass die Adresse gültig ist – so präzise wie ein Schnitt im Director's Cut."
     }
   }
 }

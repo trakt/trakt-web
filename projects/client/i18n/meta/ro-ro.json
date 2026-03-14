@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Nume afișat"
     },
+    "text_display_email": {
+      "default": "E-mail"
+    },
     "button_label_change_display_name": {
       "default": "Schimbă numele afișat"
+    },
+    "button_label_change_email": {
+      "default": "Schimbă e-mailul"
     },
     "text_location": {
       "default": "Locație"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Cum vrei să fii afișat?"
+    },
+    "input_prompt_email": {
+      "default": "Care este adresa ta de e-mail?"
     },
     "input_prompt_location": {
       "default": "Unde te afli?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Ceva nu a funcționat la postarea notiței tale. Dacă povestea se repetă, te rugăm să <a>trimiți o sesizare</a>."
+    },
+    "error_text_email": {
+      "default": "Actualizarea a eșuat. Verifică să fie o adresă validă, la fel de importantă ca biletul la o premieră de gală!"
     }
   }
 }

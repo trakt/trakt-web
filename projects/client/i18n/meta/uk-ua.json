@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Відображуване ім'я"
     },
+    "text_display_email": {
+      "default": "Електронна пошта"
+    },
     "button_label_change_display_name": {
       "default": "Змінити ім'я для відображення"
+    },
+    "button_label_change_email": {
+      "default": "Змінити пошту"
     },
     "text_location": {
       "default": "Місцезнаходження"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Як вас відображати?"
+    },
+    "input_prompt_email": {
+      "default": "Яка ваша електронна адреса?"
     },
     "input_prompt_location": {
       "default": "Де ви знаходитесь?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Щось пішло не так під час публікації вашої нотатки. Якщо це повторюється, будь ласка, <a>повідомте про проблему</a>."
+    },
+    "error_text_email": {
+      "default": "Помилка оновлення. Переконайтеся, що адреса правильна, як назва культового фільму в титрах."
     }
   }
 }

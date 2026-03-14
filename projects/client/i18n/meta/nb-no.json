@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Visningsnavn"
     },
+    "text_display_email": {
+      "default": "E-post"
+    },
     "button_label_change_display_name": {
       "default": "Endre visningsnavn"
+    },
+    "button_label_change_email": {
+      "default": "Endre e-post"
     },
     "text_location": {
       "default": "Sted"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Hva skal visningsnavnet ditt være?"
+    },
+    "input_prompt_email": {
+      "default": "Hva er e-postadressen din?"
     },
     "input_prompt_location": {
       "default": "Hvor er du?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Noe gikk galt da notatet ditt skulle publiseres. Hvis det er krøll på linja, vennligst <a>rapporter et problem</a>."
+    },
+    "error_text_email": {
+      "default": "Oppdateringen mislyktes. Sjekk at adressen er gyldig, akkurat som billetten til en utsolgt kinopremiere!"
     }
   }
 }

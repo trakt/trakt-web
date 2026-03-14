@@ -6,6 +6,7 @@ export const ExtendedUserMappedMock: UserSettings = {
   'key': 'user-41152',
   'slug': 'tequila_sunset',
   'username': 'harrier_dubois',
+  'email': 'harry@example.com',
   'token': null,
   'joinedAt': new Date('2021-03-15T08:00:00.000Z'),
   'avatar': {

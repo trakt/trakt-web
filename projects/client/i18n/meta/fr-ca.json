@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Nom d'affichage"
     },
+    "text_display_email": {
+      "default": "Courriel"
+    },
     "button_label_change_display_name": {
       "default": "Changer le nom d'affichage"
+    },
+    "button_label_change_email": {
+      "default": "Changer le courriel"
     },
     "text_location": {
       "default": "Lieu"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Comment tu veux t'appeler ?"
+    },
+    "input_prompt_email": {
+      "default": "C'est quoi ton courriel ?"
     },
     "input_prompt_location": {
       "default": "Où es-tu situé(e) ?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Oups, il y a un pépin technique avec ta note. Si ça continue de boguer, <a>soumettez un nouveau problème</a>."
+    },
+    "error_text_email": {
+      "default": "La mise à jour a échoué. Assure-toi que c'est une adresse valide, plus authentique qu'un film québécois à Cannes !"
     }
   }
 }

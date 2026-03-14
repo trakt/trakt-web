@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Visningsnamn"
     },
+    "text_display_email": {
+      "default": "E-post"
+    },
     "button_label_change_display_name": {
       "default": "Ändra visningsnamn"
+    },
+    "button_label_change_email": {
+      "default": "Ändra e-post"
     },
     "text_location": {
       "default": "Plats"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Vad ska ditt visningsnamn vara?"
+    },
+    "input_prompt_email": {
+      "default": "Vad är din e-postadress?"
     },
     "input_prompt_location": {
       "default": "Var befinner du dig?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Hoppsan, något gick fel när din anteckning skulle sparas. Om felet kvarstår, <a>skapa ett ärende</a>."
+    },
+    "error_text_email": {
+      "default": "Uppdateringen misslyckades. Se till att det är en giltig adress, så du inte missar nästa stora säsongspremiär."
     }
   }
 }

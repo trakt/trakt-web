@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Показвано име"
     },
+    "text_display_email": {
+      "default": "Имейл"
+    },
     "button_label_change_display_name": {
       "default": "Промяна на показваното име"
+    },
+    "button_label_change_email": {
+      "default": "Промяна на имейл"
     },
     "text_location": {
       "default": "Местоположение"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Как искате да се показвате?"
+    },
+    "input_prompt_email": {
+      "default": "Какъв е вашият имейл?"
     },
     "input_prompt_location": {
       "default": "Къде се намирате?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Нещо се обърка при публикуването на бележката ви. Ако това продължи, моля <a>изпратете сигнал</a>."
+    },
+    "error_text_email": {
+      "default": "Неуспешно обновяване. Увери се, че адресът е валиден, за да не пропуснеш следващия голям епизод!"
     }
   }
 }

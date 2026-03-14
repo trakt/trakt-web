@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Nom d'affichage"
     },
+    "text_display_email": {
+      "default": "Adresse e-mail"
+    },
     "button_label_change_display_name": {
       "default": "Modifier le nom d'affichage"
+    },
+    "button_label_change_email": {
+      "default": "Modifier l'adresse e-mail"
     },
     "text_location": {
       "default": "Lieu"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Quel doit être votre nom d'affichage ?"
+    },
+    "input_prompt_email": {
+      "default": "Quelle est votre adresse e-mail ?"
     },
     "input_prompt_location": {
       "default": "Où êtes-vous situé(e) ?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Un problème est survenu lors de l'enregistrement de votre note. Si cette erreur de scénario persiste, veuillez <a>signaler un nouveau problème</a>."
+    },
+    "error_text_email": {
+      "default": "Échec de la mise à jour. Assurez-vous d'utiliser une adresse valide, aussi précise qu'un cadrage de chef-opérateur !"
     }
   }
 }

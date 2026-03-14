@@ -1472,8 +1472,14 @@
     "text_display_name": {
       "default": "显示名称"
     },
+    "text_display_email": {
+      "default": "电子邮箱"
+    },
     "button_label_change_display_name": {
       "default": "更改显示名称"
+    },
+    "button_label_change_email": {
+      "default": "更改邮箱"
     },
     "text_location": {
       "default": "位置"
@@ -1495,6 +1501,9 @@
     },
     "input_prompt_display_name": {
       "default": "你的显示名称是什么？"
+    },
+    "input_prompt_email": {
+      "default": "您的电子邮箱是什么？"
     },
     "input_prompt_location": {
       "default": "你在哪里？"
@@ -2821,6 +2830,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "发布备注时出了点问题。如果错误持续出现，请<a>提交新问题</a>。"
+    },
+    "error_text_email": {
+      "default": "更新失败。请确保地址有效，就像确保电影首映礼的门票没有过期一样。"
     }
   }
 }
