@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} є обов’язковим"
+    },
+    "text_personal_note": {
+      "default": "Особиста нотатка"
+    },
+    "drawer_title_notes": {
+      "default": "Нотатки"
+    },
+    "header_notes_placeholder": {
+      "default": "Нотаток поки немає."
+    },
+    "notes_placeholder_text": {
+      "default": "Залиште нотатку наступного разу, коли додасте фільм в обране або вирішите припинити перегляд серіалу."
     }
   }
 }

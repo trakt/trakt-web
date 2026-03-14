@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} is required"
+    },
+    "text_personal_note": {
+      "default": "Personal Note"
+    },
+    "drawer_title_notes": {
+      "default": "Notes"
+    },
+    "header_notes_placeholder": {
+      "default": "No notes yet."
+    },
+    "notes_placeholder_text": {
+      "default": "Leave a note the next time you favourite or drop a title."
     }
   }
 }

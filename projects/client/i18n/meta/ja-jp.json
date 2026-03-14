@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name}は必須項目です"
+    },
+    "text_personal_note": {
+      "default": "個人メモ"
+    },
+    "drawer_title_notes": {
+      "default": "メモ"
+    },
+    "header_notes_placeholder": {
+      "default": "まだメモはありません。"
+    },
+    "notes_placeholder_text": {
+      "default": "次にお気に入りのドラマや映画を追加したり、視聴を中断（ドロップ）したりする際に、あなたのオタク魂を込めたメモを残しましょう！"
     }
   }
 }

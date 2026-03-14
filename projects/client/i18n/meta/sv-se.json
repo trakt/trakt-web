@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} krävs"
+    },
+    "text_personal_note": {
+      "default": "Personlig anteckning"
+    },
+    "drawer_title_notes": {
+      "default": "Noteringar"
+    },
+    "header_notes_placeholder": {
+      "default": "Inga anteckningar än."
+    },
+    "notes_placeholder_text": {
+      "default": "Lämna en anteckning nästa gång du favoritmarkerar eller avbryter en filmkväll."
     }
   }
 }

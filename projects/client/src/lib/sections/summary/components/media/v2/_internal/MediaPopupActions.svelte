@@ -36,6 +36,7 @@
   style="dropdown-item"
   variant="primary"
   type={media.type}
+  {media}
 />
 
 <SetCoverImageAction

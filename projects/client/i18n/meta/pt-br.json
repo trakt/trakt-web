@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} é obrigatório"
+    },
+    "text_personal_note": {
+      "default": "Nota pessoal"
+    },
+    "drawer_title_notes": {
+      "default": "Notas"
+    },
+    "header_notes_placeholder": {
+      "default": "Sem notas ainda."
+    },
+    "notes_placeholder_text": {
+      "default": "Deixe uma nota na próxima vez que favoritar aquele filme imperdível ou desistir de uma série."
     }
   }
 }

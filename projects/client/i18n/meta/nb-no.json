@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} er påkrevd"
+    },
+    "text_personal_note": {
+      "default": "Personlig notat"
+    },
+    "drawer_title_notes": {
+      "default": "Notater"
+    },
+    "header_notes_placeholder": {
+      "default": "Ingen notater ennå."
+    },
+    "notes_placeholder_text": {
+      "default": "Legg igjen et notat neste gang du legger til en favoritt eller dropper en serie midt i binge-watchingen."
     }
   }
 }

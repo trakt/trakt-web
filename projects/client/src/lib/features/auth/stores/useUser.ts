@@ -21,6 +21,10 @@ import {
   type UserNetwork,
 } from '../queries/currentUserNetworkQuery.ts';
 import {
+  currentUserNotesQuery,
+  type UserNotesHistory,
+} from '../queries/currentUserNotesQuery.ts';
+import {
   currentUserPlexLibraryQuery,
   type UserPlexLibrary,
 } from '../queries/currentUserPlexLibraryQuery.ts';
@@ -110,6 +114,7 @@ export function useUser() {
   );
   const likesQuerySignal = useQuery(currentUserLikesQuery());
   const limitsQuerySignal = useQuery(userLimitsQuery());
+  const notesQuerySignal = useQuery(currentUserNotesQuery());
 
   // Create a stream that switches between authorized and anonymous state
   const userContext$ = isAuthorized.pipe(
@@ -148,6 +153,10 @@ export function useUser() {
             lists: new Map(),
           }),
           limits: of<UserLimits | null>(null),
+          notes: of<UserNotesHistory>({
+            movies: new Map(),
+            shows: new Map(),
+          }),
         });
       }
 
@@ -182,6 +191,9 @@ export function useUser() {
         limits: limitsQuerySignal.pipe(
           map((limits) => limits.data),
         ),
+        notes: notesQuerySignal.pipe(
+          map((notes) => notes.data),
+        ),
       });
     }),
     shareReplay(1),
@@ -198,5 +210,6 @@ export function useUser() {
     plexLibrary: userContext$.pipe(switchMap((ctx) => ctx.plexLibrary)),
     likes: userContext$.pipe(switchMap((ctx) => ctx.likes)),
     limits: userContext$.pipe(switchMap((ctx) => ctx.limits)),
+    notes: userContext$.pipe(switchMap((ctx) => ctx.notes)),
   };
 }

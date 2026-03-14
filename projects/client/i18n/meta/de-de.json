@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} ist erforderlich"
+    },
+    "text_personal_note": {
+      "default": "Persönliche Notiz"
+    },
+    "drawer_title_notes": {
+      "default": "Notizen"
+    },
+    "header_notes_placeholder": {
+      "default": "Noch keine Notizen."
+    },
+    "notes_placeholder_text": {
+      "default": "Hinterlassen Sie eine Notiz, wenn Sie das nächste Mal einen Film oder eine Serie zu Ihren Favoriten hinzufügen oder abbrechen."
     }
   }
 }

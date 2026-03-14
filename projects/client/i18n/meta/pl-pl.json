@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} jest wymagane"
+    },
+    "text_personal_note": {
+      "default": "Notatka osobista"
+    },
+    "drawer_title_notes": {
+      "default": "Notatki"
+    },
+    "header_notes_placeholder": {
+      "default": "Brak notatek."
+    },
+    "notes_placeholder_text": {
+      "default": "Zostaw notatkę, gdy następnym razem dodasz film do ulubionych lub porzucisz serial."
     }
   }
 }

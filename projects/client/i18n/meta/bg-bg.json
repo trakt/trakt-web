@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} е задължително"
+    },
+    "text_personal_note": {
+      "default": "Лична бележка"
+    },
+    "drawer_title_notes": {
+      "default": "Бележки"
+    },
+    "header_notes_placeholder": {
+      "default": "Все още няма бележки."
+    },
+    "notes_placeholder_text": {
+      "default": "Оставете бележка следващия път, когато добавите филм към любими или спрете да гледате някой сериал."
     }
   }
 }

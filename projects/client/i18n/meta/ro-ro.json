@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} este obligatoriu"
+    },
+    "text_personal_note": {
+      "default": "Notă personală"
+    },
+    "drawer_title_notes": {
+      "default": "Note"
+    },
+    "header_notes_placeholder": {
+      "default": "Nicio notă momentan."
+    },
+    "notes_placeholder_text": {
+      "default": "Lasă o notă data viitoare când adaugi la favorite sau renunți la un titlu de poveste."
     }
   }
 }

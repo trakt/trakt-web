@@ -36,7 +36,7 @@
   }
 
   :global(.trakt-tooltip) {
-    z-index: var(--layer-overlay);
+    z-index: var(--layer-top);
     max-width: var(--ni-276);
 
     background-color: var(--color-tooltip-background);
