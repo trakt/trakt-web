@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "表示名"
     },
+    "text_display_email": {
+      "default": "メールアドレス"
+    },
     "button_label_change_display_name": {
       "default": "表示名を変更"
+    },
+    "button_label_change_email": {
+      "default": "メールアドレスを変更"
     },
     "text_location": {
       "default": "場所"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "表示名は？"
+    },
+    "input_prompt_email": {
+      "default": "メールアドレスを教えてください。"
     },
     "input_prompt_location": {
       "default": "どこにいますか？"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "メモの投稿中にエラーが発生しました。問題が解決しない場合は、<a>新しい課題を報告</a>してください。"
+    },
+    "error_text_email": {
+      "default": "更新に失敗しました。映画のチケットを予約するように、正しいアドレスか確認してくださいね！"
     }
   }
 }

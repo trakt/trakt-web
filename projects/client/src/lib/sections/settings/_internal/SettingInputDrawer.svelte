@@ -1,5 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DismissibleError from "$lib/components/errors/DismissibleError.svelte";
   import Form from "$lib/components/form/Form.svelte";
   import FormInput from "$lib/components/form/FormInput.svelte";
   import FormTextArea from "$lib/components/form/FormTextArea.svelte";
@@ -8,7 +9,9 @@
 
   type SettingInputDrawerProps = {
     onClose: () => void;
-    onSave: (value: string) => void | Promise<void>;
+    onSave: (value: string) => Promise<void | {
+      error: string;
+    }>;
     title: string;
     currentValue: string;
     isSaving?: boolean;
@@ -29,13 +32,20 @@
   }: SettingInputDrawerProps = $props();
 
   let value = $state(iffy(() => currentValue));
+  let saveError = $state<string | undefined>(undefined);
 
   async function handleSubmit() {
-    await onSave(value.trim());
+    const result = await onSave(value.trim());
+    if (result?.error) {
+      saveError = result.error;
+      return;
+    }
+
     onClose();
   }
 
   const handleValueChange = (newValue: string) => {
+    saveError = undefined;
     value = newValue;
   };
 
@@ -60,26 +70,43 @@
     confirmButtonText={m.button_text_apply()}
     confirmButtonLabel={m.button_label_apply()}
   >
-    {#if type === "textarea"}
-      <FormTextArea
-        placeholder={title}
-        onChange={handleValueChange}
-        disabled={isSaving}
-        {value}
-        autofocus
-        required={isRequired}
-        {validation}
-      />
-    {:else}
-      <FormInput
-        placeholder={title}
-        onChange={handleValueChange}
-        disabled={isSaving}
-        {value}
-        autofocus
-        required={isRequired}
-        {validation}
-      />
-    {/if}
+    <div class="trakt-setting-input-content">
+      {#if type === "textarea"}
+        <FormTextArea
+          placeholder={title}
+          onChange={handleValueChange}
+          disabled={isSaving}
+          {value}
+          autofocus
+          required={isRequired}
+          {validation}
+        />
+      {:else}
+        <FormInput
+          placeholder={title}
+          onChange={handleValueChange}
+          disabled={isSaving}
+          {value}
+          autofocus
+          required={isRequired}
+          {validation}
+        />
+      {/if}
+
+      {#if saveError}
+        <DismissibleError
+          message={saveError}
+          onDismiss={() => (saveError = undefined)}
+        />
+      {/if}
+    </div>
   </Form>
 </Drawer>
+
+<style>
+  .trakt-setting-input-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+  }
+</style>

@@ -4072,9 +4072,25 @@
         "ios"
       ]
     },
+    "text_display_email": {
+      "default": "Email",
+      "description": "Text for the section that allows users to change their email.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "button_label_change_display_name": {
       "default": "Change display name",
       "description": "Aria-label for the button that allows users to change their display name.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_change_email": {
+      "default": "Change email",
+      "description": "Aria-label for the button that allows users to change their email.",
       "exclude": [
         "android",
         "ios"
@@ -4130,6 +4146,14 @@
       "default": "What should your display name be?",
       "description": "Message for the prompt that allows users to specify their display name.",
       "exclude": [
+        "ios"
+      ]
+    },
+    "input_prompt_email": {
+      "default": "What is your email?",
+      "description": "Message for the prompt that allows users to specify their email.",
+      "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -7770,6 +7794,14 @@
     "error_text_unexpected_notes_error": {
       "default": "Something went wrong while posting your note. If this keeps happening, please <a>submit a new issue</a>.",
       "description": "Text shown when posting a note fails unexpectedly, informing the user that something went wrong and providing a link to create a new issue.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "error_text_email": {
+      "default": "Email update failed. Make sure it's a valid address.",
+      "description": "Error text shown when a user attempts to update their email with an invalid email address.",
       "exclude": [
         "android",
         "ios"

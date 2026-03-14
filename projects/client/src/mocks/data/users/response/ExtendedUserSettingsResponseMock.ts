@@ -1,9 +1,12 @@
 import type { SettingsResponse } from '@trakt/api';
 
-export const ExtendedUsersResponseMock: SettingsResponse = {
+export const ExtendedUsersResponseMock: SettingsResponse & {
+  user: { email: string };
+} = {
   'user': {
     'username': 'harrier_dubois',
     'private': false,
+    'email': 'harry@example.com',
     'name': 'Harry Du Bois',
     'vip': true,
     'vip_ep': true,

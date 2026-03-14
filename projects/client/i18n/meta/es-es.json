@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Nombre mostrado"
     },
+    "text_display_email": {
+      "default": "Correo electrónico"
+    },
     "button_label_change_display_name": {
       "default": "Cambiar nombre visible"
+    },
+    "button_label_change_email": {
+      "default": "Cambiar correo electrónico"
     },
     "text_location": {
       "default": "Ubicación"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "¿Cómo quieres que te llamen?"
+    },
+    "input_prompt_email": {
+      "default": "¿Cuál es su correo electrónico?"
     },
     "input_prompt_location": {
       "default": "¿Dónde estás?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Se ha producido un error inesperado al publicar su nota. Si esto sigue fallando, <a>envíe una incidencia</a>."
+    },
+    "error_text_email": {
+      "default": "Fallo al actualizar el correo. Asegúrate de que sea una dirección válida, tan real como un giro de guion inesperado."
     }
   }
 }

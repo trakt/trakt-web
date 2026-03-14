@@ -21,6 +21,7 @@ import { Theme } from '../../theme/models/Theme.ts';
 
 export const UserSettingsSchema = z.object({
   id: z.union([z.number(), z.string()]),
+  email: z.string().email().optional(),
   key: z.string(),
   slug: z.string(),
   token: z.string().nullish(),
@@ -90,8 +91,15 @@ function mapToPreferredTheme(themeResponse?: string | Nil) {
   return Theme.Light;
 }
 
+const InternalSettingsSchema = z.object({
+  user: z.object({
+    email: z.string().email().optional(),
+  }),
+});
+
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
+  const email = InternalSettingsSchema.parse(response).user.email;
 
   const id = assertDefined(
     user.ids.trakt ?? user.ids.uuid,
@@ -105,6 +113,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
     token: account.token,
     name: toUserName(user.name),
     username: user.username,
+    email,
     about: user.about,
     location: user.location ?? '',
     joinedAt: new Date(user.joined_at),

@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Nazwa wyświetlana"
     },
+    "text_display_email": {
+      "default": "E-mail"
+    },
     "button_label_change_display_name": {
       "default": "Zmień nazwę wyświetlaną"
+    },
+    "button_label_change_email": {
+      "default": "Zmień e-mail"
     },
     "text_location": {
       "default": "Lokalizacja"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Jak chcesz być wyświetlany?"
+    },
+    "input_prompt_email": {
+      "default": "Jaki jest Twój adres e-mail?"
     },
     "input_prompt_location": {
       "default": "Gdzie się znajdujesz?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Coś poszło nie tak podczas publikowania notatki. Jeśli problem będzie się powtarzał, <a>zgłoś błąd</a>."
+    },
+    "error_text_email": {
+      "default": "Aktualizacja nieudana. Upewnij się, że adres jest poprawny, jak w oscarowym scenariuszu!"
     }
   }
 }

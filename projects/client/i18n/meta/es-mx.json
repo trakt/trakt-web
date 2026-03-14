@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Nombre para mostrar"
     },
+    "text_display_email": {
+      "default": "Correo"
+    },
     "button_label_change_display_name": {
       "default": "Cambiar nombre para mostrar"
+    },
+    "button_label_change_email": {
+      "default": "Cambiar correo"
     },
     "text_location": {
       "default": "Ubicación"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "¿Cómo quieres que te digan?"
+    },
+    "input_prompt_email": {
+      "default": "¿Cuál es tu correo?"
     },
     "input_prompt_location": {
       "default": "¿Dónde te encuentras?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Algo salió mal al publicar tu nota. Si esto sigue pasando, por favor <a>envía un reporte</a>."
+    },
+    "error_text_email": {
+      "default": "No se pudo actualizar. Checa que sea una dirección válida, como la que usarías para entrar al set de tu serie favorita."
     }
   }
 }

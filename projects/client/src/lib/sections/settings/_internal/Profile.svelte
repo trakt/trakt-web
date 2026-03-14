@@ -17,7 +17,7 @@
   const ABOUT_LINE_CLAMP = 3;
 
   const { user } = useUser();
-  const { profile, isSavingSettings } = useSettings();
+  const { profile, email, isSavingSettings } = useSettings();
 
   const innerText = $derived(getSwitchInnerText($profile.isPrivate, "yes-no"));
 
@@ -27,6 +27,12 @@
       label: m.button_label_change_display_name(),
       currentValue: $profile.displayName,
       name: m.text_display_name(),
+    },
+    email: {
+      prompt: m.input_prompt_email(),
+      label: m.button_label_change_email(),
+      currentValue: $email.value ?? "",
+      name: m.text_display_email(),
     },
     location: {
       prompt: m.input_prompt_location(),
@@ -42,23 +48,27 @@
     },
   });
 
-  let activeField = $state<keyof typeof promptMap | undefined>(undefined);
-
-  const handleFieldChange = (field: keyof typeof promptMap) => {
-    activeField = field;
-  };
+  type ProfileField = keyof typeof promptMap;
+  let activeField = $state<ProfileField>();
 
   const handleSaveField = async (value: string) => {
     if (!activeField) return;
-    await $profile.set({ [activeField]: value });
+
+    if (activeField === "email") {
+      return (await $email.set(value))
+        ? undefined
+        : { error: m.error_text_email() };
+    }
+
+    return $profile.set({ [activeField]: value });
   };
 </script>
 
-{#snippet renameField(field: keyof typeof promptMap)}
+{#snippet renameField(field: ProfileField)}
   <ActionButton
     style="ghost"
     label={promptMap[field].label}
-    onclick={() => handleFieldChange(field)}
+    onclick={() => (activeField = field)}
     disabled={$isSavingSettings}
     size="small"
   >
@@ -87,6 +97,15 @@
       {@render renameField("name")}
     {/snippet}
   </SettingsRow>
+
+  {#if Boolean($email.value)}
+    <SettingsRow title={m.text_display_email()}>
+      <p class="ellipsis">{$email.value}</p>
+      {#snippet action()}
+        {@render renameField("email")}
+      {/snippet}
+    </SettingsRow>
+  {/if}
 
   <SettingsRow title={m.text_location()}>
     <p class="ellipsis">{$profile.location}</p>

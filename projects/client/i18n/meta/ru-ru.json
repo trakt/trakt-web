@@ -1473,8 +1473,14 @@
     "text_display_name": {
       "default": "Имя"
     },
+    "text_display_email": {
+      "default": "Эл. почта"
+    },
     "button_label_change_display_name": {
       "default": "Изменить имя"
+    },
+    "button_label_change_email": {
+      "default": "Изменить почту"
     },
     "text_location": {
       "default": "Местоположение"
@@ -1496,6 +1502,9 @@
     },
     "input_prompt_display_name": {
       "default": "Как вас называть?"
+    },
+    "input_prompt_email": {
+      "default": "Какой у вас адрес эл. почты?"
     },
     "input_prompt_location": {
       "default": "Откуда вы?"
@@ -2822,6 +2831,9 @@
     },
     "error_text_unexpected_notes_error": {
       "default": "Что-то пошло не так при публикации заметки. Если ошибка повторится, пожалуйста, <a>создайте обращение</a>."
+    },
+    "error_text_email": {
+      "default": "Ошибка обновления. Убедитесь, что адрес указан верно, как имя главного героя в сценарии."
     }
   }
 }
