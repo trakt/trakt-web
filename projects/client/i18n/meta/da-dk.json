@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} er påkrævet"
+    },
+    "text_personal_note": {
+      "default": "Personlig note"
+    },
+    "drawer_title_notes": {
+      "default": "Noter"
+    },
+    "header_notes_placeholder": {
+      "default": "Ingen noter endnu."
+    },
+    "notes_placeholder_text": {
+      "default": "Efterlad en note næste gang du tilføjer en favorit eller dropper en film til din næste filmaften."
     }
   }
 }

@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} è obbligatorio"
+    },
+    "text_personal_note": {
+      "default": "Nota personale"
+    },
+    "drawer_title_notes": {
+      "default": "Note"
+    },
+    "header_notes_placeholder": {
+      "default": "Ancora nessuna nota."
+    },
+    "notes_placeholder_text": {
+      "default": "Lascia una nota la prossima volta che aggiungi un titolo ai preferiti o decidi di abbandonarlo."
     }
   }
 }

@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} is verplicht"
+    },
+    "text_personal_note": {
+      "default": "Persoonlijke notitie"
+    },
+    "drawer_title_notes": {
+      "default": "Notities"
+    },
+    "header_notes_placeholder": {
+      "default": "Nog geen notities."
+    },
+    "notes_placeholder_text": {
+      "default": "Laat een notitie achter de volgende keer dat je een titel als favoriet markeert of stopt met kijken."
     }
   }
 }

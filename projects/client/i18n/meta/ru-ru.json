@@ -2783,6 +2783,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name} обязательно"
+    },
+    "text_personal_note": {
+      "default": "Личная заметка"
+    },
+    "drawer_title_notes": {
+      "default": "Заметки"
+    },
+    "header_notes_placeholder": {
+      "default": "Заметок пока нет."
+    },
+    "notes_placeholder_text": {
+      "default": "Оставьте заметку, когда в следующий раз добавите фильм или сериал в избранное или бросите просмотр."
     }
   }
 }

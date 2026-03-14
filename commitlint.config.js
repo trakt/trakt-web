@@ -78,6 +78,7 @@ module.exports = {
         'msw',
         'navbar',
         'navigation',
+        'notes',
         'out-now',
         'parameter',
         'player',

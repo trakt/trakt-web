@@ -2782,6 +2782,18 @@
     },
     "validation_text_settings_field": {
       "default": "{name}是必填项"
+    },
+    "text_personal_note": {
+      "default": "个人笔记"
+    },
+    "drawer_title_notes": {
+      "default": "笔记"
+    },
+    "header_notes_placeholder": {
+      "default": "暂无笔记。"
+    },
+    "notes_placeholder_text": {
+      "default": "下次将电影或剧集收藏或弃剧时，留下一条笔记吧。"
     }
   }
 }

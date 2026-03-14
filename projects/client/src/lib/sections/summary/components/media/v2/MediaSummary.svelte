@@ -64,7 +64,7 @@
   {/snippet}
 
   {#snippet sideActions()}
-    <SideActions {title} type={target.type} />
+    <SideActions {title} type={target.type} {media} />
   {/snippet}
 
   {#snippet meta()}

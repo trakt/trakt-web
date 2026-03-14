@@ -7660,6 +7660,38 @@
         "android",
         "ios"
       ]
+    },
+    "text_personal_note": {
+      "default": "Personal Note",
+      "description": "Text to denote that a note is a users personal note.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "drawer_title_notes": {
+      "default": "Notes",
+      "description": "Title for the drawer containing a user's notes on a show or movie. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_notes_placeholder": {
+      "default": "No notes yet.",
+      "description": "Header for the placeholder text shown when there are no notes for a movie or show. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "notes_placeholder_text": {
+      "default": "Leave a note the next time you favorite or drop a title.",
+      "description": "Text shown when there are no notes for a movie or show.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
