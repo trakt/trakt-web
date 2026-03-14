@@ -1,12 +1,12 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DismissibleError from "$lib/components/errors/DismissibleError.svelte";
   import Form from "$lib/components/form/Form.svelte";
   import FormTextArea from "$lib/components/form/FormTextArea.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment";
   import type { CommentsProps } from "../../CommentsProps";
   import SpoilerSwitch from "../comment-input/SpoilerSwitch.svelte";
-  import CommentError from "../CommentError.svelte";
   import type { ActiveComment } from "../models/ActiveComment";
   import { usePostComment } from "../usePostComment";
   import { isReviewValid } from "./isReviewValid";
@@ -85,7 +85,7 @@
       />
 
       {#if $error}
-        <CommentError
+        <DismissibleError
           message={toTranslatedErrorComment($error)}
           onDismiss={() => error.next(null)}
         />

@@ -1,11 +1,11 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import DismissibleError from "$lib/components/errors/DismissibleError.svelte";
   import PostMessageIcon from "$lib/components/icons/PostMessageIcon.svelte";
   import { NOOP_FN } from "$lib/utils/constants";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
-  import CommentError from "../CommentError.svelte";
   import type { ActiveComment } from "../models/ActiveComment";
   import { usePostComment, type UseAddCommentProps } from "../usePostComment";
   import { autoResizeArea as autoResizeAreaFn } from "./autoResizeArea";
@@ -93,7 +93,7 @@
     </div>
   </div>
   {#if $error}
-    <CommentError
+    <DismissibleError
       message={toTranslatedErrorComment($error)}
       onDismiss={() => error.next(null)}
     />

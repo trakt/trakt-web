@@ -12,7 +12,7 @@
   const { message, onDismiss }: CommentErrorProps = $props();
 </script>
 
-<div class="trakt-comment-error" transition:slide={{ duration: 150 }}>
+<div class="trakt-dismissible-error" transition:slide={{ duration: 150 }}>
   <p class="bold">{message}</p>
   <ActionButton
     size="small"
@@ -28,7 +28,7 @@
 </div>
 
 <style>
-  .trakt-comment-error {
+  .trakt-dismissible-error {
     display: flex;
     align-items: center;
     justify-content: space-between;
