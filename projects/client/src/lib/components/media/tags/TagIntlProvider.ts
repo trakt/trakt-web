@@ -32,4 +32,5 @@ export const TagIntlProvider: TagIntl = {
     m.tag_text_remaining_duration({
       duration: toHumanDuration({ minutes: duration }, languageTag()),
     }),
+  droppedLabel: () => m.tag_text_dropped(),
 };

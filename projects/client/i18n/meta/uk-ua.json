@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Переглянуто"
     },
+    "tag_text_dropped": {
+      "default": "Кинуто"
+    },
     "header_height": {
       "default": "Зріст"
     },

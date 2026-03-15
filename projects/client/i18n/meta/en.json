@@ -5953,6 +5953,14 @@
         "ios"
       ]
     },
+    "tag_text_dropped": {
+      "default": "Dropped",
+      "description": "Text for the tag that is shown for dropped shows. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "header_height": {
       "default": "Height",
       "description": "Header for the section that displays the person's height.",

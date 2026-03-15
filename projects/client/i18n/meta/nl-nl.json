@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Bekeken"
     },
+    "tag_text_dropped": {
+      "default": "Gestopt"
+    },
     "header_height": {
       "default": "Lengte"
     },

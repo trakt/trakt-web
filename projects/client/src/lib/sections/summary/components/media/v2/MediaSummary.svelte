@@ -14,6 +14,7 @@
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import SummaryTitle from "../../_internal/SummaryTitle.svelte";
   import { useIsRateable } from "../../rating/_internal/useIsRateable";
+  import { useIsDropped } from "../_internal/useIsDropped";
   import type { MediaSummaryEntry } from "../models/MediaSummaryEntry";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
@@ -38,10 +39,15 @@
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
 
   const { isRateable } = $derived(useIsRateable(target));
+  const { isDropped } = $derived(useIsDropped(media));
 </script>
 
 {#snippet tags()}
-  <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
+  <SummaryPosterTags
+    {postCreditsCount}
+    watchCount={$watchCount}
+    isDropped={$isDropped}
+  />
 {/snippet}
 
 <CoverImageSetter
