@@ -3,6 +3,7 @@ import type { MediaType } from './MediaType.ts';
 
 type UserType = 'avatar' | 'settings' | 'follow' | 'cover';
 type ListType = 'edited' | 'deleted' | 'created' | 'like';
+type VipType = 'canceled';
 
 const INVALIDATION_ID = 'invalidate' as const;
 
@@ -20,7 +21,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:list:${ListType}`
   | `${typeof INVALIDATION_ID}:smart_list:${ListType}`
   | `${typeof INVALIDATION_ID}:commented:${ExtendedMediaType}`
-  | `${typeof INVALIDATION_ID}:notes:${MediaType}`;
+  | `${typeof INVALIDATION_ID}:notes:${MediaType}`
+  | `${typeof INVALIDATION_ID}:vip:${VipType}`;
 
 type TypeDataMap = {
   'auth': null;
@@ -39,6 +41,7 @@ type TypeDataMap = {
   'list': ListType;
   'smart_list': ListType;
   'notes': MediaType;
+  'vip': VipType;
 };
 
 export function invalidationId(key?: string) {
@@ -105,5 +108,9 @@ export const InvalidateAction = {
 
   Note: {
     Add: (type: MediaType) => buildInvalidationKey('notes', type),
+  },
+
+  Vip: {
+    Canceled: buildInvalidationKey('vip', 'canceled'),
   },
 };
