@@ -2,25 +2,15 @@ import { rawApiFetch } from '$lib/requests/api.ts';
 import z from 'zod';
 import { isValidResponse } from '../../features/query/_internal/isValidResponse.ts';
 import type { VipPlanDuration } from '../models/VipPlanDuration.ts';
-
-const STRIPE_HOSTNAME = 'stripe.com';
+import { isStripeUrl } from './_internal/isStripeUrl.ts';
 
 type StartCheckoutParams = {
   duration: VipPlanDuration;
   returnUrl: string;
 };
 
-function isStripeCheckoutUrl(value: string) {
-  try {
-    const { protocol, hostname } = new URL(value);
-    return protocol === 'https:' && hostname.endsWith(`.${STRIPE_HOSTNAME}`);
-  } catch {
-    return false;
-  }
-}
-
 const StartCheckoutResponseSchema = z.object({
-  checkout_url: z.string().refine(isStripeCheckoutUrl, {
+  checkout_url: z.string().refine(isStripeUrl, {
     message: 'Checkout URL must be a valid Stripe URL',
   }),
 });
