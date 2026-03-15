@@ -8,4 +8,5 @@ export type CalendarLayoutProps<T> = {
   item: Snippet<[T]>;
   layout?: 'list' | 'grid';
   empty?: Snippet;
+  order?: 'chronological' | 'reverse-chronological';
 } & CalendarNavigationProps;
