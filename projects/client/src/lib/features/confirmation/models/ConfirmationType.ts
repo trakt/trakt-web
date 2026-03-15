@@ -15,4 +15,5 @@ export enum ConfirmationType {
   SuppressRatingsToast = 'suppress-ratings-toast',
   Logout = 'logout',
   SimpleFilters = 'simple-filters',
+  CancelVip = 'cancel-vip',
 }

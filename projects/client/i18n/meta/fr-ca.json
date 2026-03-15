@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "La mise à jour a échoué. Assure-toi que c'est une adresse valide, plus authentique qu'un film québécois à Cannes !"
+    },
+    "button_text_cancel_vip": {
+      "default": "Annuler l'abonnement"
+    },
+    "button_label_cancel_vip": {
+      "default": "Annuler l'abonnement"
+    },
+    "button_text_renew_vip": {
+      "default": "Renouveler"
+    },
+    "button_label_renew_vip": {
+      "default": "Renouveler l'abonnement"
+    },
+    "button_text_manage_vip": {
+      "default": "Gérer"
+    },
+    "button_label_manage_vip": {
+      "default": "Gérer l'abonnement"
+    },
+    "text_member_since": {
+      "default": "Membre depuis {date}"
+    },
+    "header_renewal_date": {
+      "default": "Date de renouvellement"
+    },
+    "header_expiration_date": {
+      "default": "Date d'expiration"
+    },
+    "header_current_plan": {
+      "default": "Forfait actuel"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Voulez-vous vraiment annuler votre abonnement VIP ? Vous perdrez l'accès aux fonctionnalités VIP à la fin du cycle. C'est comme un générique de fin qui arrive trop vite !"
     }
   }
 }

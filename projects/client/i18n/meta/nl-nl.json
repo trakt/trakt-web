@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Update mislukt. Zorg voor een geldig adres, zodat je geen enkele aflevering van je favoriete serie mist!"
+    },
+    "button_text_cancel_vip": {
+      "default": "Opzeggen"
+    },
+    "button_label_cancel_vip": {
+      "default": "Abonnement opzeggen"
+    },
+    "button_text_renew_vip": {
+      "default": "Vernieuwen"
+    },
+    "button_label_renew_vip": {
+      "default": "Abonnement vernieuwen"
+    },
+    "button_text_manage_vip": {
+      "default": "Beheren"
+    },
+    "button_label_manage_vip": {
+      "default": "Abonnement beheren"
+    },
+    "text_member_since": {
+      "default": "Sinds {date}"
+    },
+    "header_renewal_date": {
+      "default": "Verlengdatum"
+    },
+    "header_expiration_date": {
+      "default": "Vervaldatum"
+    },
+    "header_current_plan": {
+      "default": "Huidig pakket"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Weet je zeker dat je je VIP-abonnement wilt opzeggen? Je verliest de toegang tot VIP-functies aan het einde van de huidige facturatieperiode. Wat een cliffhanger!"
     }
   }
 }

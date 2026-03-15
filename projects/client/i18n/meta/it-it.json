@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Aggiornamento fallito. Assicurati che sia un indirizzo valido, come un invito esclusivo per Cinecittà!"
+    },
+    "button_text_cancel_vip": {
+      "default": "Annulla"
+    },
+    "button_label_cancel_vip": {
+      "default": "Annulla abbonamento VIP"
+    },
+    "button_text_renew_vip": {
+      "default": "Rinnova"
+    },
+    "button_label_renew_vip": {
+      "default": "Rinnova abbonamento VIP"
+    },
+    "button_text_manage_vip": {
+      "default": "Gestisci"
+    },
+    "button_label_manage_vip": {
+      "default": "Gestisci abbonamento VIP"
+    },
+    "text_member_since": {
+      "default": "Dal {date}"
+    },
+    "header_renewal_date": {
+      "default": "Data di rinnovo"
+    },
+    "header_expiration_date": {
+      "default": "Data di scadenza"
+    },
+    "header_current_plan": {
+      "default": "Piano attuale"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Sei sicuro di voler annullare il tuo abbonamento VIP? Perderai l'accesso alle funzioni VIP al termine del ciclo di fatturazione corrente. Non far calare il sipario così presto!"
     }
   }
 }

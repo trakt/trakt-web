@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Ошибка обновления. Убедитесь, что адрес указан верно, как имя главного героя в сценарии."
+    },
+    "button_text_cancel_vip": {
+      "default": "Отменить подписку"
+    },
+    "button_label_cancel_vip": {
+      "default": "Отменить VIP-подписку"
+    },
+    "button_text_renew_vip": {
+      "default": "Обновить подписку"
+    },
+    "button_label_renew_vip": {
+      "default": "Обновить VIP-подписку"
+    },
+    "button_text_manage_vip": {
+      "default": "Управление"
+    },
+    "button_label_manage_vip": {
+      "default": "Управление VIP-подпиской"
+    },
+    "text_member_since": {
+      "default": "С {date}"
+    },
+    "header_renewal_date": {
+      "default": "Дата продления"
+    },
+    "header_expiration_date": {
+      "default": "Дата окончания"
+    },
+    "header_current_plan": {
+      "default": "Текущий тариф"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Вы уверены, что хотите отменить VIP-подписку? Вы потеряете доступ к VIP-функциям в конце текущего расчетного периода."
     }
   }
 }

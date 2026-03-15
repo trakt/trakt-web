@@ -67,6 +67,7 @@ export const AnalyticsEvent = {
 
   VipUpgrade: buildEventKey(VIP_ACTION_PREFIX, 'vip-upgrade'),
   VipManage: buildEventKey(VIP_ACTION_PREFIX, 'vip-manage'),
+  VipCancel: buildEventKey(VIP_ACTION_PREFIX, 'vip-cancel'),
 
   SmartListDelete: buildEventKey(SMART_LIST_ACTION_PREFIX, 'delete'),
   SmartListCreate: buildEventKey(SMART_LIST_ACTION_PREFIX, 'create'),

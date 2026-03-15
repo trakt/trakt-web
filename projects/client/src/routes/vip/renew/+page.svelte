@@ -1,20 +1,23 @@
 <script lang="ts">
-  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import Redirect from "$lib/components/router/Redirect.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import VipManage from "$lib/sections/vip/VipManage.svelte";
+  import { useVip } from "$lib/sections/vip/_internal/useVip";
   import VipSubscribe from "$lib/sections/vip/VipSubscribe.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+
+  const { subscription, isLoading } = useVip();
 </script>
+
+{#if $subscription && !$subscription.isCancelled}
+  <Redirect to={UrlBuilder.vip()} />
+{/if}
 
 <TraktPage audience="authenticated" image={DEFAULT_SHARE_COVER} title="VIP">
   <NavbarStateSetter mode="minimal" />
 
-  <RenderFor audience="free">
+  {#if !$isLoading && $subscription?.isCancelled}
     <VipSubscribe />
-  </RenderFor>
-
-  <RenderFor audience="vip">
-    <VipManage />
-  </RenderFor>
+  {/if}
 </TraktPage>
