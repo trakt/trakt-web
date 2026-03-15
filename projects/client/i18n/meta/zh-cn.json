@@ -2186,6 +2186,9 @@
     "tag_text_watched": {
       "default": "已看"
     },
+    "tag_text_dropped": {
+      "default": "已弃"
+    },
     "header_height": {
       "default": "身高"
     },

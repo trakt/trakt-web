@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Vu"
     },
+    "tag_text_dropped": {
+      "default": "Abandonné"
+    },
     "header_height": {
       "default": "Taille"
     },

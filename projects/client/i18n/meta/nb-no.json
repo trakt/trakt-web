@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Sett"
     },
+    "tag_text_dropped": {
+      "default": "Droppet"
+    },
     "header_height": {
       "default": "Høyde"
     },

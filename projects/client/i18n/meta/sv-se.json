@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Sedda"
     },
+    "tag_text_dropped": {
+      "default": "Avbruten"
+    },
     "header_height": {
       "default": "Längd"
     },

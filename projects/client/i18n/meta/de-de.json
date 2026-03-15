@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Gesehen"
     },
+    "tag_text_dropped": {
+      "default": "Abgebrochen"
+    },
     "header_height": {
       "default": "Größe"
     },

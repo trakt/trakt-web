@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Vizionat"
     },
+    "tag_text_dropped": {
+      "default": "Abandonat"
+    },
     "header_height": {
       "default": "Înălțime"
     },

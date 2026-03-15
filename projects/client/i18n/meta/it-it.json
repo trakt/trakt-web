@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Visto"
     },
+    "tag_text_dropped": {
+      "default": "Abbandonato"
+    },
     "header_height": {
       "default": "Altezza"
     },

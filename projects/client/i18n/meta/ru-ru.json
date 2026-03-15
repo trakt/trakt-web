@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Просмотрено"
     },
+    "tag_text_dropped": {
+      "default": "Брошено"
+    },
     "header_height": {
       "default": "Рост"
     },

@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "視聴済み"
     },
+    "tag_text_dropped": {
+      "default": "リタイア"
+    },
     "header_height": {
       "default": "身長"
     },

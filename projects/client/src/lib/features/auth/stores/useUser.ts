@@ -7,6 +7,10 @@ import {
   currentUserCommentReactionsQuery,
   type UserReactions,
 } from '../queries/currentUserCommentReactionsQuery.ts';
+import {
+  currentUserDroppedQuery,
+  type UserDroppedHistory,
+} from '../queries/currentUserDroppedQuery.ts';
 import { currentUserFavoritesQuery } from '../queries/currentUserFavoritesQuery.ts';
 import {
   currentUserHistoryQuery,
@@ -116,6 +120,7 @@ export function useUser() {
   const likesQuerySignal = useQuery(currentUserLikesQuery());
   const limitsQuerySignal = useQuery(userLimitsQuery());
   const notesQuerySignal = useQuery(currentUserNotesQuery());
+  const droppedQuerySignal = useQuery(currentUserDroppedQuery());
 
   // Create a stream that switches between authorized and anonymous state
   const userContext$ = isAuthorized.pipe(
@@ -158,6 +163,9 @@ export function useUser() {
             movies: new Map(),
             shows: new Map(),
           }),
+          dropped: of<UserDroppedHistory>({
+            shows: new Set(),
+          }),
         });
       }
 
@@ -195,6 +203,9 @@ export function useUser() {
         notes: notesQuerySignal.pipe(
           map((notes) => notes.data),
         ),
+        dropped: droppedQuerySignal.pipe(
+          map((dropped) => dropped.data),
+        ),
       });
     }),
     shareReplay(1),
@@ -212,5 +223,6 @@ export function useUser() {
     likes: userContext$.pipe(switchMap((ctx) => ctx.likes)),
     limits: userContext$.pipe(switchMap((ctx) => ctx.limits)),
     notes: userContext$.pipe(switchMap((ctx) => ctx.notes)),
+    dropped: userContext$.pipe(switchMap((ctx) => ctx.dropped)),
   };
 }

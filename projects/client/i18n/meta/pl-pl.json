@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Obejrzano"
     },
+    "tag_text_dropped": {
+      "default": "Porzucone"
+    },
     "header_height": {
       "default": "Wzrost"
     },

@@ -2187,6 +2187,9 @@
     "tag_text_watched": {
       "default": "Гледано"
     },
+    "tag_text_dropped": {
+      "default": "Прекратено"
+    },
     "header_height": {
       "default": "Ръст"
     },
