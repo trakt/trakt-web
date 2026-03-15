@@ -21,6 +21,7 @@
     layout = "grid",
     empty,
     maxDate,
+    order = "chronological",
   }: CalendarLayoutProps<T> = $props();
 
   let activeScrollDate = $state<Date | null>(null);
@@ -39,6 +40,10 @@
   );
   const currentDate = $derived(activeScrollDate ?? activeDate);
   const selectedDate = $derived(isInCurrentPeriod ? currentDate : activeDate);
+
+  const orderedCalendar = $derived(
+    order === "chronological" ? calendar : calendar.toReversed(),
+  );
 </script>
 
 <div class="calendar-layout-container">
@@ -73,7 +78,7 @@
       initialId={dateKey(activeDate)}
       onUpdate={handleScrollSpyUpdate}
     >
-      <CalendarItems {calendar} {item} {layout} {empty} />
+      <CalendarItems calendar={orderedCalendar} {item} {layout} {empty} />
     </ScrollSpy>
   {/if}
 </div>

@@ -42,6 +42,7 @@
   onReset={reset}
   layout="list"
   maxDate={now}
+  order="reverse-chronological"
 >
   {#snippet item(media)}
     <RecentlyWatchedItem {media} style="summary" isActionable />

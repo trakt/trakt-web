@@ -7,8 +7,6 @@
   import SocialActivityItem from "./_internal/SocialActivityItem.svelte";
   import { useActivityList } from "./_internal/useActivityList";
 
-  type RecommendedListProps = { title: string };
-
   const { mode } = useDiscover();
   const { filterMap } = useFilter();
 
@@ -39,6 +37,7 @@
   onReset={reset}
   layout="list"
   maxDate={now}
+  order="reverse-chronological"
 >
   {#snippet item(activity)}
     <SocialActivityItem {activity} style="summary" />
