@@ -30,6 +30,7 @@ import { UserMonthInReviewResponseMock } from '../data/users/response/UserMonthI
 import { UserWatchingResponseMock } from '../data/users/response/UserWatchingResponseMock.ts';
 import { WatchedMoviesResponseMock } from '../data/users/response/WatchedMoviesResponseMock.ts';
 import { WatchedShowsResponseMock } from '../data/users/response/WatchedShowsResponseMock.ts';
+import { WatchlistMinimalResponseMock } from '../data/users/response/WatchlistMinimalResponseMock.ts';
 import { WatchlistMoviesResponseMock } from '../data/users/response/WatchlistMoviesResponseMock.ts';
 import { WatchlistShowsResponseMock } from '../data/users/response/WatchlistShowsResponseMock.ts';
 
@@ -59,6 +60,9 @@ export const users = [
   }),
   http.get('http://localhost/users/me/watchlist/shows*', () => {
     return HttpResponse.json(WatchlistShowsResponseMock);
+  }),
+  http.get('http://localhost/v3/users/me/watchlist/minimal', () => {
+    return HttpResponse.json(WatchlistMinimalResponseMock);
   }),
   http.get('http://localhost/users/me/ratings/movies', () => {
     return HttpResponse.json(RatedMoviesResponseMock);

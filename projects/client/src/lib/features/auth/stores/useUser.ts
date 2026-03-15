@@ -134,8 +134,8 @@ export function useUser() {
             lastWatchedAt: null,
           }),
           watchlist: of<UserWatchlist>({
-            movies: new Map(),
-            shows: new Map(),
+            movies: new Set(),
+            shows: new Set(),
           }),
           ratings: of<UserRatings>({
             episodes: new Map(),
