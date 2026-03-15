@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Aktualizacja nieudana. Upewnij się, że adres jest poprawny, jak w oscarowym scenariuszu!"
+    },
+    "button_text_cancel_vip": {
+      "default": "Anuluj"
+    },
+    "button_label_cancel_vip": {
+      "default": "Anuluj subskrypcję VIP"
+    },
+    "button_text_renew_vip": {
+      "default": "Odnów"
+    },
+    "button_label_renew_vip": {
+      "default": "Odnów subskrypcję VIP"
+    },
+    "button_text_manage_vip": {
+      "default": "Zarządzaj"
+    },
+    "button_label_manage_vip": {
+      "default": "Zarządzaj subskrypcją VIP"
+    },
+    "text_member_since": {
+      "default": "Od {date}"
+    },
+    "header_renewal_date": {
+      "default": "Data odnowienia"
+    },
+    "header_expiration_date": {
+      "default": "Data wygaśnięcia"
+    },
+    "header_current_plan": {
+      "default": "Bieżący plan"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Czy na pewno chcesz anulować subskrypcję VIP? Stracisz dostęp do funkcji VIP z końcem obecnego okresu rozliczeniowego. To smutniejsze niż finał sezonu z cliffhangerem!"
     }
   }
 }

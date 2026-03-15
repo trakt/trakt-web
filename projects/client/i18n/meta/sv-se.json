@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Uppdateringen misslyckades. Se till att det är en giltig adress, så du inte missar nästa stora säsongspremiär."
+    },
+    "button_text_cancel_vip": {
+      "default": "Avsluta"
+    },
+    "button_label_cancel_vip": {
+      "default": "Avsluta VIP-prenumeration"
+    },
+    "button_text_renew_vip": {
+      "default": "Förnya"
+    },
+    "button_label_renew_vip": {
+      "default": "Förnya VIP-prenumeration"
+    },
+    "button_text_manage_vip": {
+      "default": "Hantera"
+    },
+    "button_label_manage_vip": {
+      "default": "Hantera VIP-prenumeration"
+    },
+    "text_member_since": {
+      "default": "Sedan {date}"
+    },
+    "header_renewal_date": {
+      "default": "Förnyelsedatum"
+    },
+    "header_expiration_date": {
+      "default": "Utgångsdatum"
+    },
+    "header_current_plan": {
+      "default": "Nuvarande plan"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Är du säker på att du vill avsluta din VIP-prenumeration? Du förlorar tillgången till VIP-funktionerna vid slutet av din nuvarande period. Låt inte eftertexterna rulla än!"
     }
   }
 }

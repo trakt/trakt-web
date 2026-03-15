@@ -113,5 +113,11 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_simple_filters(),
         operation: 'destructive',
       };
+    case ConfirmationType.CancelVip:
+      return {
+        buttonText: m.button_text_cancel_vip(),
+        message: m.warning_prompt_cancel_vip(),
+        operation: 'destructive',
+      };
   }
 }

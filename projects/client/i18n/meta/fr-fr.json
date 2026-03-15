@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Échec de la mise à jour. Assurez-vous d'utiliser une adresse valide, aussi précise qu'un cadrage de chef-opérateur !"
+    },
+    "button_text_cancel_vip": {
+      "default": "Annuler l'abonnement"
+    },
+    "button_label_cancel_vip": {
+      "default": "Annuler l'abonnement"
+    },
+    "button_text_renew_vip": {
+      "default": "Renouveler l'abonnement"
+    },
+    "button_label_renew_vip": {
+      "default": "Renouveler l'abonnement"
+    },
+    "button_text_manage_vip": {
+      "default": "Gérer l'abonnement"
+    },
+    "button_label_manage_vip": {
+      "default": "Gérer l'abonnement"
+    },
+    "text_member_since": {
+      "default": "Depuis le {date}"
+    },
+    "header_renewal_date": {
+      "default": "Date de renouvellement"
+    },
+    "header_expiration_date": {
+      "default": "Date d'expiration"
+    },
+    "header_current_plan": {
+      "default": "Forfait actuel"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Êtes-vous sûr de vouloir annuler votre abonnement VIP ? Vous perdrez l'accès aux fonctionnalités VIP à la fin de votre cycle de facturation actuel. Une fin de saison inattendue ?"
     }
   }
 }

@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Помилка оновлення. Переконайтеся, що адреса правильна, як назва культового фільму в титрах."
+    },
+    "button_text_cancel_vip": {
+      "default": "Скасувати"
+    },
+    "button_label_cancel_vip": {
+      "default": "Скасувати VIP-підписку"
+    },
+    "button_text_renew_vip": {
+      "default": "Поновити"
+    },
+    "button_label_renew_vip": {
+      "default": "Поновити VIP-підписку"
+    },
+    "button_text_manage_vip": {
+      "default": "Керувати"
+    },
+    "button_label_manage_vip": {
+      "default": "Керувати VIP-підпискою"
+    },
+    "text_member_since": {
+      "default": "З {date}"
+    },
+    "header_renewal_date": {
+      "default": "Дата поновлення"
+    },
+    "header_expiration_date": {
+      "default": "Дата закінчення"
+    },
+    "header_current_plan": {
+      "default": "Поточний план"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Ви впевнені, що хочете скасувати VIP-підписку? Ви втратите доступ до VIP-функцій наприкінці поточного розрахункового періоду. Повертайтеся швидше до перегляду!"
     }
   }
 }

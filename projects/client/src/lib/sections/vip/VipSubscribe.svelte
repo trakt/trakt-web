@@ -1,21 +1,19 @@
 <script lang="ts">
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import Subscriptions from "./_internal/Subscriptions.svelte";
   import UpsellFooter from "./_internal/UpsellFooter.svelte";
   import UpsellLimits from "./_internal/UpsellLimits.svelte";
-  import { useVip } from "./_internal/useVip";
   import VipContent from "./_internal/VipContent.svelte";
   import VipFeatures from "./_internal/VipFeatures.svelte";
 
-  const { limits, isLoadingLimits } = useVip();
+  const { limits } = useUser();
 </script>
 
 <VipContent>
-  {#if !$isLoadingLimits}
+  {#if $limits}
     <Subscriptions />
 
-    {#if $limits}
-      <UpsellLimits limits={$limits} />
-    {/if}
+    <UpsellLimits limits={$limits} />
 
     <VipFeatures />
     <UpsellFooter />

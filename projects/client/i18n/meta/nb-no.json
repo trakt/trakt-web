@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Oppdateringen mislyktes. Sjekk at adressen er gyldig, akkurat som billetten til en utsolgt kinopremiere!"
+    },
+    "button_text_cancel_vip": {
+      "default": "Avbryt"
+    },
+    "button_label_cancel_vip": {
+      "default": "Avbryt VIP-abonnement"
+    },
+    "button_text_renew_vip": {
+      "default": "Forny"
+    },
+    "button_label_renew_vip": {
+      "default": "Forny VIP-abonnement"
+    },
+    "button_text_manage_vip": {
+      "default": "Administrer"
+    },
+    "button_label_manage_vip": {
+      "default": "Administrer VIP-abonnement"
+    },
+    "text_member_since": {
+      "default": "Siden {date}"
+    },
+    "header_renewal_date": {
+      "default": "Fornyelsesdato"
+    },
+    "header_expiration_date": {
+      "default": "Utløpsdato"
+    },
+    "header_current_plan": {
+      "default": "Nåværende plan"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Er du sikker på at du vil kansellere VIP-abonnementet ditt? Du mister tilgangen til VIP-funksjonene ved slutten av gjeldende periode. Det blir en kjedelig sesongavslutning!"
     }
   }
 }

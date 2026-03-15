@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "No se pudo actualizar. Checa que sea una dirección válida, como la que usarías para entrar al set de tu serie favorita."
+    },
+    "button_text_cancel_vip": {
+      "default": "Cancelar suscripción"
+    },
+    "button_label_cancel_vip": {
+      "default": "Cancelar suscripción VIP"
+    },
+    "button_text_renew_vip": {
+      "default": "Renovar suscripción"
+    },
+    "button_label_renew_vip": {
+      "default": "Renovar suscripción VIP"
+    },
+    "button_text_manage_vip": {
+      "default": "Administrar"
+    },
+    "button_label_manage_vip": {
+      "default": "Administrar suscripción VIP"
+    },
+    "text_member_since": {
+      "default": "Desde el {date}"
+    },
+    "header_renewal_date": {
+      "default": "Fecha de renovación"
+    },
+    "header_expiration_date": {
+      "default": "Fecha de vencimiento"
+    },
+    "header_current_plan": {
+      "default": "Plan actual"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "¿Seguro que quieres cancelar tu suscripción VIP? Perderás el acceso a las funciones VIP al terminar tu ciclo de facturación. ¡Es un final de temporada que nadie quiere ver!"
     }
   }
 }

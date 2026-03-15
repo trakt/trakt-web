@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "更新に失敗しました。映画のチケットを予約するように、正しいアドレスか確認してくださいね！"
+    },
+    "button_text_cancel_vip": {
+      "default": "サブスクを解約"
+    },
+    "button_label_cancel_vip": {
+      "default": "サブスクリプションを解約する"
+    },
+    "button_text_renew_vip": {
+      "default": "サブスクを更新"
+    },
+    "button_label_renew_vip": {
+      "default": "サブスクリプションを更新する"
+    },
+    "button_text_manage_vip": {
+      "default": "サブスクを管理"
+    },
+    "button_label_manage_vip": {
+      "default": "サブスクリプションを管理する"
+    },
+    "text_member_since": {
+      "default": "{date} からのメンバー"
+    },
+    "header_renewal_date": {
+      "default": "更新日"
+    },
+    "header_expiration_date": {
+      "default": "有効期限"
+    },
+    "header_current_plan": {
+      "default": "現在のプラン"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "VIPサブスクリプションを解約してもよろしいですか？現在の請求期間が終了すると、VIP限定機能が利用できなくなります。まるで映画の続きが観られないような寂しさですが、よろしいですか？"
     }
   }
 }

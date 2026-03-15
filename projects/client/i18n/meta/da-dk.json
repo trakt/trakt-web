@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Opdateringen mislykkedes. Sørg for at adressen er gyldig, den er vigtigere end den sidste brik i et plot-twist!"
+    },
+    "button_text_cancel_vip": {
+      "default": "Annuller"
+    },
+    "button_label_cancel_vip": {
+      "default": "Annuller VIP-abonnement"
+    },
+    "button_text_renew_vip": {
+      "default": "Forny"
+    },
+    "button_label_renew_vip": {
+      "default": "Forny VIP-abonnement"
+    },
+    "button_text_manage_vip": {
+      "default": "Administrer"
+    },
+    "button_label_manage_vip": {
+      "default": "Administrer VIP-abonnement"
+    },
+    "text_member_since": {
+      "default": "Siden {date}"
+    },
+    "header_renewal_date": {
+      "default": "Fornyelsesdato"
+    },
+    "header_expiration_date": {
+      "default": "Udløbsdato"
+    },
+    "header_current_plan": {
+      "default": "Nuværende abonnement"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Er du sikker på, at du vil annullere dit VIP-abonnement? Du mister adgangen til VIP-funktionerne ved udgangen af din nuværende faktureringsperiode. Hyggen er bedre med VIP!"
     }
   }
 }

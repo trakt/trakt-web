@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Actualizarea a eșuat. Verifică să fie o adresă validă, la fel de importantă ca biletul la o premieră de gală!"
+    },
+    "button_text_cancel_vip": {
+      "default": "Anulează abonamentul"
+    },
+    "button_label_cancel_vip": {
+      "default": "Anulează abonamentul VIP"
+    },
+    "button_text_renew_vip": {
+      "default": "Reînnoiește"
+    },
+    "button_label_renew_vip": {
+      "default": "Reînnoiește abonamentul VIP"
+    },
+    "button_text_manage_vip": {
+      "default": "Gestionează"
+    },
+    "button_label_manage_vip": {
+      "default": "Gestionează abonamentul VIP"
+    },
+    "text_member_since": {
+      "default": "Din {date}"
+    },
+    "header_renewal_date": {
+      "default": "Data reînnoirii"
+    },
+    "header_expiration_date": {
+      "default": "Data expirării"
+    },
+    "header_current_plan": {
+      "default": "Planul curent"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Sigur vrei să anulezi abonamentul VIP? Vei pierde accesul la funcțiile VIP la finalul ciclului de facturare curent. Povestea merge mai departe, te așteptăm oricând înapoi în fotoliul de spectator!"
     }
   }
 }

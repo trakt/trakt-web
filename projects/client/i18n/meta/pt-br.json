@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "A atualização falhou. Verifique se o endereço é válido, como um spoiler que ninguém quer receber por engano!"
+    },
+    "button_text_cancel_vip": {
+      "default": "Cancelar Assinatura"
+    },
+    "button_label_cancel_vip": {
+      "default": "Cancelar assinatura VIP"
+    },
+    "button_text_renew_vip": {
+      "default": "Renovar Assinatura"
+    },
+    "button_label_renew_vip": {
+      "default": "Renovar assinatura VIP"
+    },
+    "button_text_manage_vip": {
+      "default": "Gerenciar"
+    },
+    "button_label_manage_vip": {
+      "default": "Gerenciar assinatura VIP"
+    },
+    "text_member_since": {
+      "default": "Desde {date}"
+    },
+    "header_renewal_date": {
+      "default": "Data de Renovação"
+    },
+    "header_expiration_date": {
+      "default": "Data de Expiração"
+    },
+    "header_current_plan": {
+      "default": "Plano Atual"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Tem certeza de que deseja cancelar sua assinatura VIP? Você perderá o acesso aos recursos VIP ao final do seu ciclo de cobrança. Não deixe esse roteiro acabar agora!"
     }
   }
 }

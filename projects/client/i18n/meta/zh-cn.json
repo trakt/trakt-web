@@ -2833,6 +2833,39 @@
     },
     "error_text_email": {
       "default": "更新失败。请确保地址有效，就像确保电影首映礼的门票没有过期一样。"
+    },
+    "button_text_cancel_vip": {
+      "default": "取消订阅"
+    },
+    "button_label_cancel_vip": {
+      "default": "取消 VIP 订阅"
+    },
+    "button_text_renew_vip": {
+      "default": "续订"
+    },
+    "button_label_renew_vip": {
+      "default": "续订 VIP 订阅"
+    },
+    "button_text_manage_vip": {
+      "default": "管理订阅"
+    },
+    "button_label_manage_vip": {
+      "default": "管理 VIP 订阅"
+    },
+    "text_member_since": {
+      "default": "自 {date}"
+    },
+    "header_renewal_date": {
+      "default": "续订日期"
+    },
+    "header_expiration_date": {
+      "default": "到期日期"
+    },
+    "header_current_plan": {
+      "default": "当前方案"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "您确定要取消 VIP 订阅吗？您将在当前计费周期结束时失去 VIP 功能的访问权限。精彩故事仍在继续，欢迎随时回归！"
     }
   }
 }

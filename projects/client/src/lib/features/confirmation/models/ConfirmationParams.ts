@@ -64,6 +64,9 @@ interface ConfirmationParamsMap {
   [ConfirmationType.SimpleFilters]: {
     type: ConfirmationType.SimpleFilters;
   };
+  [ConfirmationType.CancelVip]: {
+    type: ConfirmationType.CancelVip;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

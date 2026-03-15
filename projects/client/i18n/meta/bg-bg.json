@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Неуспешно обновяване. Увери се, че адресът е валиден, за да не пропуснеш следващия голям епизод!"
+    },
+    "button_text_cancel_vip": {
+      "default": "Отказ"
+    },
+    "button_label_cancel_vip": {
+      "default": "Отказ от VIP абонамент"
+    },
+    "button_text_renew_vip": {
+      "default": "Подновяване"
+    },
+    "button_label_renew_vip": {
+      "default": "Подновяване на VIP абонамент"
+    },
+    "button_text_manage_vip": {
+      "default": "Управление"
+    },
+    "button_label_manage_vip": {
+      "default": "Управление на VIP абонамент"
+    },
+    "text_member_since": {
+      "default": "От {date}"
+    },
+    "header_renewal_date": {
+      "default": "Дата на подновяване"
+    },
+    "header_expiration_date": {
+      "default": "Крайна дата"
+    },
+    "header_current_plan": {
+      "default": "Текущ план"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Сигурни ли сте, че искате да прекратите своя VIP абонамент? Ще загубите достъп до VIP екстрите в края на текущия период. Филмът е по-хубав с VIP!"
     }
   }
 }

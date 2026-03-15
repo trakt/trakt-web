@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Fallo al actualizar el correo. Asegúrate de que sea una dirección válida, tan real como un giro de guion inesperado."
+    },
+    "button_text_cancel_vip": {
+      "default": "Cancelar suscripción"
+    },
+    "button_label_cancel_vip": {
+      "default": "Cancelar suscripción VIP"
+    },
+    "button_text_renew_vip": {
+      "default": "Renovar suscripción"
+    },
+    "button_label_renew_vip": {
+      "default": "Renovar suscripción VIP"
+    },
+    "button_text_manage_vip": {
+      "default": "Gestionar"
+    },
+    "button_label_manage_vip": {
+      "default": "Gestionar suscripción VIP"
+    },
+    "text_member_since": {
+      "default": "Desde {date}"
+    },
+    "header_renewal_date": {
+      "default": "Fecha de renovación"
+    },
+    "header_expiration_date": {
+      "default": "Fecha de expiración"
+    },
+    "header_current_plan": {
+      "default": "Plan actual"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "¿Está seguro de que desea cancelar su suscripción VIP? Perderá el acceso a las funciones VIP al finalizar su ciclo de facturación actual. ¡No se pierda el próximo gran estreno!"
     }
   }
 }

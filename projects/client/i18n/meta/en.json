@@ -7806,6 +7806,99 @@
         "android",
         "ios"
       ]
+    },
+    "button_text_cancel_vip": {
+      "default": "Cancel Subscription",
+      "description": "Text for the button that allows users to cancel their VIP subscription. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_cancel_vip": {
+      "default": "Cancel Subscription",
+      "description": "Aria-label for the button that allows users to cancel their VIP subscription.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_renew_vip": {
+      "default": "Renew Subscription",
+      "description": "Text for the button that allows users to renew their VIP subscription. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_renew_vip": {
+      "default": "Renew Subscription",
+      "description": "Aria-label for the button that allows users to renew their VIP subscription.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_manage_vip": {
+      "default": "Manage Subscription",
+      "description": "Text for the button that allows users to manage their VIP subscription. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_manage_vip": {
+      "default": "Manage Subscription",
+      "description": "Aria-label for the button that allows users to manage their VIP subscription.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_member_since": {
+      "default": "Since {date}",
+      "description": "Text indicating the date when the user became a member.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_renewal_date": {
+      "default": "Renewal Date",
+      "description": "Header for the renewal date section, which indicates the date on when a VIP subscription renews.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_expiration_date": {
+      "default": "Expiration Date",
+      "description": "Header for the expiration date section, which indicates the date on when a VIP subscription expires.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_current_plan": {
+      "default": "Current Plan",
+      "description": "Header for the current plan section, which indicates the user's current VIP subscription plan.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Are you sure you want to cancel your VIP subscription? You will lose access to VIP features at the end of your current billing cycle.",
+      "description": "Text for the warning prompt that appears when a user attempts to cancel their VIP subscription.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Update fehlgeschlagen. Stellen Sie sicher, dass die Adresse gültig ist – so präzise wie ein Schnitt im Director's Cut."
+    },
+    "button_text_cancel_vip": {
+      "default": "Abo kündigen"
+    },
+    "button_label_cancel_vip": {
+      "default": "VIP-Abonnement kündigen"
+    },
+    "button_text_renew_vip": {
+      "default": "Verlängern"
+    },
+    "button_label_renew_vip": {
+      "default": "VIP-Abonnement verlängern"
+    },
+    "button_text_manage_vip": {
+      "default": "Verwalten"
+    },
+    "button_label_manage_vip": {
+      "default": "VIP-Abonnement verwalten"
+    },
+    "text_member_since": {
+      "default": "Seit {date}"
+    },
+    "header_renewal_date": {
+      "default": "Verlängerungsdatum"
+    },
+    "header_expiration_date": {
+      "default": "Ablaufdatum"
+    },
+    "header_current_plan": {
+      "default": "Aktueller Plan"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Sind Sie sicher, dass Sie Ihr VIP-Abonnement kündigen möchten? Sie verlieren am Ende Ihres aktuellen Abrechnungszeitraums den Zugriff auf die VIP-Funktionen. Das wäre ein trauriges Finale!"
     }
   }
 }

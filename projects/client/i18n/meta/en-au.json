@@ -2834,6 +2834,39 @@
     },
     "error_text_email": {
       "default": "Email update failed. Make sure it's a valid address."
+    },
+    "button_text_cancel_vip": {
+      "default": "Cancel Subscription"
+    },
+    "button_label_cancel_vip": {
+      "default": "Cancel Subscription"
+    },
+    "button_text_renew_vip": {
+      "default": "Renew Subscription"
+    },
+    "button_label_renew_vip": {
+      "default": "Renew Subscription"
+    },
+    "button_text_manage_vip": {
+      "default": "Manage Subscription"
+    },
+    "button_label_manage_vip": {
+      "default": "Manage Subscription"
+    },
+    "text_member_since": {
+      "default": "Since {date}"
+    },
+    "header_renewal_date": {
+      "default": "Renewal Date"
+    },
+    "header_expiration_date": {
+      "default": "Expiration Date"
+    },
+    "header_current_plan": {
+      "default": "Current Plan"
+    },
+    "warning_prompt_cancel_vip": {
+      "default": "Are you sure you want to cancel your VIP subscription? You will lose access to VIP features at the end of your current billing cycle."
     }
   }
 }

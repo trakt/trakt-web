@@ -224,6 +224,7 @@ export const UrlBuilder = {
     reddit: () => 'https://www.reddit.com/r/trakt',
   },
   vip: () => '/vip',
+  renewVip: () => 'vip/renew',
   og: {
     vip: () => 'https://trakt.tv/vip',
     status: () => 'https://status.trakt.tv',
