@@ -14,17 +14,37 @@
       <span class="bold">VIP</span>
     </Link>
 
-    <Link href={UrlBuilder.feedback()} target="_blank">
+    <Link href={UrlBuilder.feedback()} target="_blank" rel="noopener noreferrer">
       <span class="bold">{m.link_text_feedback()}</span>
     </Link>
 
-    <Link href={UrlBuilder.og.support($user?.slug)} target="_blank">
+    <Link href={UrlBuilder.og.support($user?.slug)} target="_blank" rel="noopener noreferrer">
       <span class="bold">{m.link_text_support()}</span>
     </Link>
   </RenderFor>
 
-  <Link href={UrlBuilder.og.forums()} target="_blank">
+  <Link href={UrlBuilder.og.forums()} target="_blank" rel="noopener noreferrer">
     <span class="bold">{m.link_text_forums()}</span>
+  </Link>
+
+  <Link href={UrlBuilder.og.about()} target="_blank" rel="noopener noreferrer">
+    <span class="bold">{m.link_text_about()}</span>
+  </Link>
+
+  <Link
+    href={UrlBuilder.og.branding()}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <span class="bold">{m.link_text_branding()}</span>
+  </Link>
+
+  <Link href={UrlBuilder.terms()}>
+    <span class="bold">{m.link_text_terms()}</span>
+  </Link>
+
+  <Link href={UrlBuilder.privacy()}>
+    <span class="bold">{m.link_text_privacy()}</span>
   </Link>
 </div>
 
@@ -37,14 +57,6 @@
 
     :global(.trakt-link) {
       text-decoration: none;
-    }
-
-    @include for-mobile() {
-      &.is-vip {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-row-gap: var(--gap-xxs);
-      }
     }
   }
 </style>

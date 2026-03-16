@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Voulez-vous vraiment annuler votre abonnement VIP ? Vous perdrez l'accès aux fonctionnalités VIP à la fin du cycle. C'est comme un générique de fin qui arrive trop vite !"
+    },
+    "page_title_terms": {
+      "default": "Conditions d'utilisation"
+    },
+    "page_title_privacy": {
+      "default": "Politique de confidentialité"
+    },
+    "link_text_about": {
+      "default": "À propos"
+    },
+    "link_text_branding": {
+      "default": "Image"
+    },
+    "link_text_privacy": {
+      "default": "Vie privée"
     }
   }
 }

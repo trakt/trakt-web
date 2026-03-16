@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Weet je zeker dat je je VIP-abonnement wilt opzeggen? Je verliest de toegang tot VIP-functies aan het einde van de huidige facturatieperiode. Wat een cliffhanger!"
+    },
+    "page_title_terms": {
+      "default": "Gebruiksvoorwaarden"
+    },
+    "page_title_privacy": {
+      "default": "Privacybeleid"
+    },
+    "link_text_about": {
+      "default": "Over"
+    },
+    "link_text_branding": {
+      "default": "Branding"
+    },
+    "link_text_privacy": {
+      "default": "Privacy"
     }
   }
 }

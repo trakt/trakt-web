@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Sei sicuro di voler annullare il tuo abbonamento VIP? Perderai l'accesso alle funzioni VIP al termine del ciclo di fatturazione corrente. Non far calare il sipario così presto!"
+    },
+    "page_title_terms": {
+      "default": "Termini di utilizzo"
+    },
+    "page_title_privacy": {
+      "default": "Privacy policy"
+    },
+    "link_text_about": {
+      "default": "Chi siamo"
+    },
+    "link_text_branding": {
+      "default": "Branding"
+    },
+    "link_text_privacy": {
+      "default": "Privacy"
     }
   }
 }

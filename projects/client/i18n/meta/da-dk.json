@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Er du sikker på, at du vil annullere dit VIP-abonnement? Du mister adgangen til VIP-funktionerne ved udgangen af din nuværende faktureringsperiode. Hyggen er bedre med VIP!"
+    },
+    "page_title_terms": {
+      "default": "Brugervilkår"
+    },
+    "page_title_privacy": {
+      "default": "Privatlivspolitik"
+    },
+    "link_text_about": {
+      "default": "Om"
+    },
+    "link_text_branding": {
+      "default": "Profil"
+    },
+    "link_text_privacy": {
+      "default": "Privatliv"
     }
   }
 }

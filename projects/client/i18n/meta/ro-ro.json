@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Sigur vrei să anulezi abonamentul VIP? Vei pierde accesul la funcțiile VIP la finalul ciclului de facturare curent. Povestea merge mai departe, te așteptăm oricând înapoi în fotoliul de spectator!"
+    },
+    "page_title_terms": {
+      "default": "Termeni de utilizare"
+    },
+    "page_title_privacy": {
+      "default": "Politică de confidențialitate"
+    },
+    "link_text_about": {
+      "default": "Despre"
+    },
+    "link_text_branding": {
+      "default": "Branding"
+    },
+    "link_text_privacy": {
+      "default": "Confidențial"
     }
   }
 }

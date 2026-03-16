@@ -2869,6 +2869,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "您确定要取消 VIP 订阅吗？您将在当前计费周期结束时失去 VIP 功能的访问权限。精彩故事仍在继续，欢迎随时回归！"
+    },
+    "page_title_terms": {
+      "default": "使用条款"
+    },
+    "page_title_privacy": {
+      "default": "隐私政策"
+    },
+    "link_text_about": {
+      "default": "关于"
+    },
+    "link_text_branding": {
+      "default": "品牌"
+    },
+    "link_text_privacy": {
+      "default": "隐私"
     }
   }
 }

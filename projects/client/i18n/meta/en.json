@@ -7907,6 +7907,54 @@
         "android",
         "ios"
       ]
+    },
+    "page_title_terms": {
+      "default": "Terms of Use",
+      "description": "Title for the terms of use page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "page_title_privacy": {
+      "default": "Privacy Policy",
+      "description": "Title for the privacy policy page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_text_about": {
+      "default": "About",
+      "description": "Text for the about link in the footer.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_text_branding": {
+      "default": "Branding",
+      "description": "Text for the branding link in the footer.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_text_terms": {
+      "default": "Terms",
+      "description": "Text for the terms link in the footer.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_text_privacy": {
+      "default": "Privacy",
+      "description": "Text for the privacy link in the footer.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
