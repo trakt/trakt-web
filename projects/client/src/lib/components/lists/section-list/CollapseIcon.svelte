@@ -19,9 +19,10 @@
 <style>
   .trakt-collapse-icon {
     transition: transform var(--transition-increment) ease-in-out;
+    transform: rotate(-180deg);
   }
 
   .trakt-collapse-icon.is-collapsed {
-    transform: rotate(-180deg);
+    transform: rotate(0deg);
   }
 </style>
