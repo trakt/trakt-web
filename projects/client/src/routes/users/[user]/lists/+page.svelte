@@ -9,6 +9,7 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import SmartLists from "$lib/sections/lists/smart/SmartLists.svelte";
   import PersonalLists from "$lib/sections/lists/user/PersonalLists.svelte";
+  import PinnedList from "$lib/sections/lists/user/PinnedList.svelte";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
@@ -21,6 +22,8 @@
   const { user } = useUser();
 
   const { isMe } = $derived(useIsMe(params.user));
+
+  const showOscarsList = new Date() < new Date("2026-04-01");
 </script>
 
 <TraktPage
@@ -44,6 +47,11 @@
     drilldownLabel={m.button_label_view_all_watchlist_items()}
     type={$mode}
   />
+
+  <!-- TODO: improve / make dynamic -->
+  {#if showOscarsList}
+    <PinnedList mode={$mode} userId="visualcortex" listId="2026-oscar-winners" />
+  {/if}
 
   <SmartLists mode={$mode} />
 
