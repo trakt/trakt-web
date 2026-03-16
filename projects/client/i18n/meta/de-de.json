@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Sind Sie sicher, dass Sie Ihr VIP-Abonnement kündigen möchten? Sie verlieren am Ende Ihres aktuellen Abrechnungszeitraums den Zugriff auf die VIP-Funktionen. Das wäre ein trauriges Finale!"
+    },
+    "page_title_terms": {
+      "default": "Nutzungsbedingungen"
+    },
+    "page_title_privacy": {
+      "default": "Datenschutzerklärung"
+    },
+    "link_text_about": {
+      "default": "Über uns"
+    },
+    "link_text_branding": {
+      "default": "Branding"
+    },
+    "link_text_privacy": {
+      "default": "Datenschutz"
     }
   }
 }

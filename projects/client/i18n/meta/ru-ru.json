@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Вы уверены, что хотите отменить VIP-подписку? Вы потеряете доступ к VIP-функциям в конце текущего расчетного периода."
+    },
+    "page_title_terms": {
+      "default": "Условия использования"
+    },
+    "page_title_privacy": {
+      "default": "Конфиденциальность"
+    },
+    "link_text_about": {
+      "default": "О нас"
+    },
+    "link_text_branding": {
+      "default": "Брендинг"
+    },
+    "link_text_privacy": {
+      "default": "Инфо"
     }
   }
 }

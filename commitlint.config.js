@@ -70,6 +70,7 @@ module.exports = {
         'i18n',
         'landing',
         'layout',
+        'legal',
         'library',
         'link',
         'list',

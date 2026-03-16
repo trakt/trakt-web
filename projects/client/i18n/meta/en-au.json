@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Are you sure you want to cancel your VIP subscription? You will lose access to VIP features at the end of your current billing cycle."
+    },
+    "page_title_terms": {
+      "default": "Terms of Use"
+    },
+    "page_title_privacy": {
+      "default": "Privacy Policy"
+    },
+    "link_text_about": {
+      "default": "About"
+    },
+    "link_text_branding": {
+      "default": "Branding"
+    },
+    "link_text_privacy": {
+      "default": "Privacy"
     }
   }
 }

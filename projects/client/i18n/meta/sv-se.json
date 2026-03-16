@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Är du säker på att du vill avsluta din VIP-prenumeration? Du förlorar tillgången till VIP-funktionerna vid slutet av din nuvarande period. Låt inte eftertexterna rulla än!"
+    },
+    "page_title_terms": {
+      "default": "Användarvillkor"
+    },
+    "page_title_privacy": {
+      "default": "Integritetspolicy"
+    },
+    "link_text_about": {
+      "default": "Om oss"
+    },
+    "link_text_branding": {
+      "default": "Profil"
+    },
+    "link_text_privacy": {
+      "default": "Integritet"
     }
   }
 }

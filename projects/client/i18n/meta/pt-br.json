@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Tem certeza de que deseja cancelar sua assinatura VIP? Você perderá o acesso aos recursos VIP ao final do seu ciclo de cobrança. Não deixe esse roteiro acabar agora!"
+    },
+    "page_title_terms": {
+      "default": "Termos de Uso"
+    },
+    "page_title_privacy": {
+      "default": "Política de Privacidade"
+    },
+    "link_text_about": {
+      "default": "Sobre"
+    },
+    "link_text_branding": {
+      "default": "Marca"
+    },
+    "link_text_privacy": {
+      "default": "Privacidade"
     }
   }
 }

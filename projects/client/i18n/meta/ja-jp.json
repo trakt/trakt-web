@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "VIPサブスクリプションを解約してもよろしいですか？現在の請求期間が終了すると、VIP限定機能が利用できなくなります。まるで映画の続きが観られないような寂しさですが、よろしいですか？"
+    },
+    "page_title_terms": {
+      "default": "利用規約"
+    },
+    "page_title_privacy": {
+      "default": "プライバシーポリシー"
+    },
+    "link_text_about": {
+      "default": "Traktについて"
+    },
+    "link_text_branding": {
+      "default": "ブランド"
+    },
+    "link_text_privacy": {
+      "default": "個人情報"
     }
   }
 }

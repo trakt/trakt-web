@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Czy na pewno chcesz anulować subskrypcję VIP? Stracisz dostęp do funkcji VIP z końcem obecnego okresu rozliczeniowego. To smutniejsze niż finał sezonu z cliffhangerem!"
+    },
+    "page_title_terms": {
+      "default": "Regulamin"
+    },
+    "page_title_privacy": {
+      "default": "Polityka prywatności"
+    },
+    "link_text_about": {
+      "default": "O nas"
+    },
+    "link_text_branding": {
+      "default": "Branding"
+    },
+    "link_text_privacy": {
+      "default": "Prywatność"
     }
   }
 }

@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "¿Está seguro de que desea cancelar su suscripción VIP? Perderá el acceso a las funciones VIP al finalizar su ciclo de facturación actual. ¡No se pierda el próximo gran estreno!"
+    },
+    "page_title_terms": {
+      "default": "Términos de uso"
+    },
+    "page_title_privacy": {
+      "default": "Política de privacidad"
+    },
+    "link_text_about": {
+      "default": "Sobre"
+    },
+    "link_text_branding": {
+      "default": "Marca"
+    },
+    "link_text_privacy": {
+      "default": "Privacidad"
     }
   }
 }

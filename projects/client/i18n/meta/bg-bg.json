@@ -2870,6 +2870,21 @@
     },
     "warning_prompt_cancel_vip": {
       "default": "Сигурни ли сте, че искате да прекратите своя VIP абонамент? Ще загубите достъп до VIP екстрите в края на текущия период. Филмът е по-хубав с VIP!"
+    },
+    "page_title_terms": {
+      "default": "Условия за ползване"
+    },
+    "page_title_privacy": {
+      "default": "Поверителност"
+    },
+    "link_text_about": {
+      "default": "Относно"
+    },
+    "link_text_branding": {
+      "default": "Брандинг"
+    },
+    "link_text_privacy": {
+      "default": "Данни"
     }
   }
 }

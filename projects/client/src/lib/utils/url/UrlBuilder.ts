@@ -3,6 +3,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import type { PersonalListType } from '$lib/sections/lists/user/models/PersonalListType.ts';
 import type { CrewPositions } from '../../requests/models/CrewPosition.ts';
+import { SUPPORT_EMAIL } from '../constants.ts';
 import { buildParamString } from './buildParamString.ts';
 
 type TypeParams = {
@@ -112,7 +113,7 @@ const ogSupportFactory = (username?: string): HttpsUrl | MailToUrl => {
   );
 
   if (!username) {
-    return `mailto:support@trakt.tv?subject=${supportSubject}&body=${encodedBody}`;
+    return `mailto:${SUPPORT_EMAIL}?subject=${supportSubject}&body=${encodedBody}`;
   }
 
   return `https://forums.trakt.tv/new-message?username=support&title=${supportSubject}&body=${encodedBody}`;
@@ -224,10 +225,14 @@ export const UrlBuilder = {
     reddit: () => 'https://www.reddit.com/r/trakt',
   },
   vip: () => '/vip',
+  terms: () => '/terms',
+  privacy: () => '/privacy',
   renewVip: () => 'vip/renew',
   og: {
     vip: () => 'https://trakt.tv/vip',
     status: () => 'https://status.trakt.tv',
+    about: () => 'https://trakt.tv/about',
+    branding: () => 'https://trakt.tv/branding',
     privacy: () => 'https://trakt.tv/privacy',
     support: (username?: string) => ogSupportFactory(username),
     forums: () => 'https://forums.trakt.tv/c/trakt',
