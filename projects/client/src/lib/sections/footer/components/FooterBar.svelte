@@ -22,5 +22,10 @@
     @include for-tablet-sm-and-below {
       padding: var(--ni-12);
     }
+
+    @include for-mobile {
+      flex-direction: column;
+      gap: var(--gap-m);
+    }
   }
 </style>
