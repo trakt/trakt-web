@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Privacidad"
+    },
+    "page_title_about": {
+      "default": "Acerca de"
+    },
+    "heading_what_is_trakt": {
+      "default": "¿Qué es Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Conoce al equipo"
+    },
+    "text_about_tagline": {
+      "default": "Trakt hace las cosas fáciles para ti. Rastreamos automáticamente lo que ves en todos tus dispositivos y apps, dándote un solo lugar para ver tu historial, descubrir qué sigue y conectar con millones de fans de las pelis y series en todo el mundo."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Rastrea Pelis y Series"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Haz scrobble automático de lo que ves en Plex, Kodi, Emby, Infuse y más. No pierdas el hilo de tus historias."
+    },
+    "about_feature_title_any_device": {
+      "default": "Cualquier dispositivo"
+    },
+    "about_feature_description_any_device": {
+      "default": "Funciona con streaming, Blu-ray, compras digitales y discos físicos. iOS, Android, Apple TV, Fire TV y Roku."
+    },
+    "about_feature_title_discover": {
+      "default": "Descubre qué ver"
+    },
+    "about_feature_description_discover": {
+      "default": "Recibe recomendaciones personalizadas según tus gustos. Explora lo que es tendencia y las listas de la comunidad Trakt."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Califica y Reseña"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Comparte lo que piensas con calificaciones y comentarios. Mira si tus gustos coinciden con los de millones de personas."
+    },
+    "about_feature_title_calendar": {
+      "default": "Ni un episodio menos"
+    },
+    "about_feature_description_calendar": {
+      "default": "Sigue tus series y recibe avisos cuando salgan episodios nuevos. Tu calendario personal te mantiene al tanto de todo."
+    },
+    "about_feature_title_community": {
+      "default": "Comunidad de fans"
+    },
+    "about_feature_description_community": {
+      "default": "Sigue a tus amigos, mira qué ve el equipo y descubre favoritos compartidos. Ver contenido juntos es más chido."
     }
   }
 }

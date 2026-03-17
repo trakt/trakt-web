@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "個人情報"
+    },
+    "page_title_about": {
+      "default": "概要"
+    },
+    "heading_what_is_trakt": {
+      "default": "Traktとは？"
+    },
+    "heading_meet_the_team": {
+      "default": "チーム紹介"
+    },
+    "text_about_tagline": {
+      "default": "Traktは複雑な視聴管理をシンプルにします。あらゆるデバイスやアプリでの視聴履歴を自動的に記録。全履歴の確認、次に見るべき作品の発見、そして世界中の映画・ドラマファンとの交流を、この一つの場所で。まさに『君の膵臓を食べたい』ならぬ『君の履歴を管理したい』究極のツールです。"
+    },
+    "about_feature_title_scrobble": {
+      "default": "映画とドラマを記録"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Plex、Kodi、Emby、Infuseなど、数百のアプリから視聴データを自動収集。進捗を見失うことはもうありません。"
+    },
+    "about_feature_title_any_device": {
+      "default": "あらゆるデバイスで"
+    },
+    "about_feature_description_any_device": {
+      "default": "配信サービス、Blu-ray、デジタル購入、物理メディアに対応。iOS、Android、Apple TV、Rokuなどで動作します。"
+    },
+    "about_feature_title_discover": {
+      "default": "次の一本を探す"
+    },
+    "about_feature_description_discover": {
+      "default": "あなたの好みに合わせたパーソナライズ推薦。トレンド作品やコミュニティ厳選のリストをチェックしましょう。"
+    },
+    "about_feature_title_rate_review": {
+      "default": "評価・レビュー"
+    },
+    "about_feature_description_rate_review": {
+      "default": "評価やコメントで感想をシェア。あなたの感性と、世界中の数百万人の視聴者の好みを比較してみましょう。"
+    },
+    "about_feature_title_calendar": {
+      "default": "最新回を逃さない"
+    },
+    "about_feature_description_calendar": {
+      "default": "お気に入りのドラマをフォローして、新エピソードの放送通知を受け取りましょう。あなた専用のTVカレンダーです。"
+    },
+    "about_feature_title_community": {
+      "default": "ファンコミュニティ"
+    },
+    "about_feature_description_community": {
+      "default": "友達をフォローしたり、運営チームの視聴リストを覗いたり。お気に入りを共有して、エンタメをもっと楽しみましょう。"
     }
   }
 }

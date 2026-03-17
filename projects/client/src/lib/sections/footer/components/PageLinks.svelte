@@ -14,11 +14,19 @@
       <span class="bold">VIP</span>
     </Link>
 
-    <Link href={UrlBuilder.feedback()} target="_blank" rel="noopener noreferrer">
+    <Link
+      href={UrlBuilder.feedback()}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <span class="bold">{m.link_text_feedback()}</span>
     </Link>
 
-    <Link href={UrlBuilder.og.support($user?.slug)} target="_blank" rel="noopener noreferrer">
+    <Link
+      href={UrlBuilder.og.support($user?.slug)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <span class="bold">{m.link_text_support()}</span>
     </Link>
   </RenderFor>
@@ -27,7 +35,7 @@
     <span class="bold">{m.link_text_forums()}</span>
   </Link>
 
-  <Link href={UrlBuilder.og.about()} target="_blank" rel="noopener noreferrer">
+  <Link href={UrlBuilder.about()}>
     <span class="bold">{m.link_text_about()}</span>
   </Link>
 

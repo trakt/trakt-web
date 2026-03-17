@@ -227,6 +227,7 @@ export const UrlBuilder = {
   vip: () => '/vip',
   terms: () => '/terms',
   privacy: () => '/privacy',
+  about: () => '/about',
   renewVip: () => 'vip/renew',
   og: {
     vip: () => 'https://trakt.tv/vip',

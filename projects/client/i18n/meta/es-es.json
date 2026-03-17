@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Privacidad"
+    },
+    "page_title_about": {
+      "default": "Sobre nosotros"
+    },
+    "heading_what_is_trakt": {
+      "default": "¿Qué es Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Conoce al equipo"
+    },
+    "text_about_tagline": {
+      "default": "Trakt es una plataforma que hace que lo complejo sea sencillo. Registra automáticamente lo que ve en todos sus dispositivos, ofreciéndole un lugar único para ver su historial, descubrir su próxima película favorita y conectar con millones de cinéfilos en todo el mundo."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Seguimiento de Contenido"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Haga scrobbling automático de lo que ve en cientos de apps: Plex, Kodi, Emby, Infuse y más. No pierda nunca el progreso de sus series."
+    },
+    "about_feature_title_any_device": {
+      "default": "Cualquier dispositivo"
+    },
+    "about_feature_description_any_device": {
+      "default": "Funciona con servicios de streaming, Blu-ray, compras digitales y formato físico. iOS, Android, Apple TV y otros."
+    },
+    "about_feature_title_discover": {
+      "default": "Descubrir qué ver"
+    },
+    "about_feature_description_discover": {
+      "default": "Obtenga recomendaciones personalizadas según sus gustos. Explore títulos tendencia y listas comisariadas por la comunidad."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Valorar y Opinar"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Comparta sus opiniones con notas y comentarios. Compare sus gustos con los de millones de otros espectadores."
+    },
+    "about_feature_title_calendar": {
+      "default": "Sin perder episodios"
+    },
+    "about_feature_description_calendar": {
+      "default": "Siga sus series y reciba notificaciones cuando se emitan nuevos episodios. Su calendario personal le mantendrá al día."
+    },
+    "about_feature_title_community": {
+      "default": "Comunidad de espectadores"
+    },
+    "about_feature_description_community": {
+      "default": "Siga a sus amigos, vea qué está viendo el equipo y descubra favoritos compartidos. Ver cine en compañía es mejor."
     }
   }
 }

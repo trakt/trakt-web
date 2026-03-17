@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Confidențial"
+    },
+    "page_title_about": {
+      "default": "Despre"
+    },
+    "heading_what_is_trakt": {
+      "default": "Ce este Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Fă cunoștință cu echipa"
+    },
+    "text_about_tagline": {
+      "default": "Trakt este o platformă care face lucrurile complexe să pară simple. Trakt urmărește automat tot ce vizionezi pe toate dispozitivele tale — oferindu-ți un singur loc unde să-ți vezi istoricul, să descoperi ce urmează și să te conectezi cu o comunitate de milioane de iubitori de cinema."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Urmărește Seriale și Filme"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Înregistrează automat (scrobble) ce vizionezi în sute de aplicații — Plex, Kodi, Emby, Infuse și altele. Nu pierde niciodată firul acțiunii."
+    },
+    "about_feature_title_any_device": {
+      "default": "Orice Dispozitiv"
+    },
+    "about_feature_description_any_device": {
+      "default": "Funcționează cu streaming, Blu-ray, achiziții digitale și suport fizic. iOS, Android, Apple TV, Fire TV, Roku și altele."
+    },
+    "about_feature_title_discover": {
+      "default": "Descoperă ce să Vezi"
+    },
+    "about_feature_description_discover": {
+      "default": "Primești recomandări personalizate bazate pe gusturile tale. Explorează titluri în vogă și liste create de comunitatea Trakt."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Evaluează și Recenzează"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Împărtășește-ți opiniile prin note și comentarii. Vezi cum se compară gusturile tale cu ale milioanelor de alți spectatori."
+    },
+    "about_feature_title_calendar": {
+      "default": "Nu Rata niciun Episod"
+    },
+    "about_feature_description_calendar": {
+      "default": "Urmărește-ți serialele și primește notificări când apar episoade noi. Calendarul tău personal te ține la curent cu tot."
+    },
+    "about_feature_title_community": {
+      "default": "Comunitatea Spectatorilor"
+    },
+    "about_feature_description_community": {
+      "default": "Urmărește prietenii, vezi ce urmărește echipa și descoperă titluri preferate la comun. Vizionarea e mai frumoasă împreună."
     }
   }
 }

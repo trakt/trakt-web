@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Данни"
+    },
+    "page_title_about": {
+      "default": "Относно"
+    },
+    "heading_what_is_trakt": {
+      "default": "Какво е Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Запознайте се с екипа"
+    },
+    "text_about_tagline": {
+      "default": "Trakt е платформа, която прави сложните неща лесни. Автоматично следим какво гледате на всичките ви устройства — едно място, където да виждате историята си, да откривате нови заглавия и да се свързвате с милиони фенове на киното."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Следете Филми и Сериали"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Автоматично отчитане на гледанията (scrobble) от стотици приложения — Plex, Kodi, Emby, Infuse и др. Никога не губете прогреса си."
+    },
+    "about_feature_title_any_device": {
+      "default": "Всяко Устройство"
+    },
+    "about_feature_description_any_device": {
+      "default": "Работи със стрийминг услуги, Blu-ray и дигитални покупки. iOS, Android, Apple TV, Fire TV, Roku и др."
+    },
+    "about_feature_title_discover": {
+      "default": "Открийте какво да гледате"
+    },
+    "about_feature_description_discover": {
+      "default": "Персонализирани препоръки според вашия вкус. Разгледайте трендове и списъци от общността на Trakt."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Оценяване и Ревюта"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Споделяйте мнения с оценки и коментари. Вижте как вашият вкус се сравнява с този на милиони други."
+    },
+    "about_feature_title_calendar": {
+      "default": "Не пропускайте епизод"
+    },
+    "about_feature_description_calendar": {
+      "default": "Следете сериалите си и получавайте известия за нови епизоди. Вашият личен календар ви държи в течение."
+    },
+    "about_feature_title_community": {
+      "default": "Общност от зрители"
+    },
+    "about_feature_description_community": {
+      "default": "Последвайте приятели, вижте какво гледа екипът и открийте споделени любими заглавия. Гледането заедно е по-добро."
     }
   }
 }

@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Privacy"
+    },
+    "page_title_about": {
+      "default": "Chi siamo"
+    },
+    "heading_what_is_trakt": {
+      "default": "Cos'è Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Incontra il team"
+    },
+    "text_about_tagline": {
+      "default": "Trakt è la piattaforma che rende semplice la complessità. Tracciamo automaticamente ciò che guardi su ogni dispositivo — un unico posto per vederli tutti, consultare la tua cronologia, scoprire nuove storie e unirti a milioni di amanti del cinema e della TV."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Segui Film e Serie"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Scrobbling automatico da centinaia di app — Plex, Kodi, Emby, Infuse e altre. Non perdere mai il segno."
+    },
+    "about_feature_title_any_device": {
+      "default": "Ogni Dispositivo"
+    },
+    "about_feature_description_any_device": {
+      "default": "Compatibile con streaming, Blu-ray e acquisti digitali. iOS, Android, Apple TV, Fire TV, Roku e altro ancora."
+    },
+    "about_feature_title_discover": {
+      "default": "Scopri cosa Vedere"
+    },
+    "about_feature_description_discover": {
+      "default": "Ricevi consigli personalizzati in base ai tuoi gusti. Esplora i titoli di tendenza e le liste della community."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Vota e Recensisci"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Condividi la tua opinione con voti e commenti. Confronta i tuoi gusti con quelli di milioni di altri spettatori."
+    },
+    "about_feature_title_calendar": {
+      "default": "Mai un Episodio in meno"
+    },
+    "about_feature_description_calendar": {
+      "default": "Segui le tue serie TV e ricevi notifiche per i nuovi episodi. Il tuo calendario personale tiene tutto in ordine."
+    },
+    "about_feature_title_community": {
+      "default": "Community di Spettatori"
+    },
+    "about_feature_description_community": {
+      "default": "Segui gli amici, guarda cosa segue il team e scopri i preferiti comuni. Guardare insieme è più bello."
     }
   }
 }

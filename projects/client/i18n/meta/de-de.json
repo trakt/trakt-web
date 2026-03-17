@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Datenschutz"
+    },
+    "page_title_about": {
+      "default": "Über uns"
+    },
+    "heading_what_is_trakt": {
+      "default": "Was ist Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Das Team"
+    },
+    "text_about_tagline": {
+      "default": "Trakt macht Komplexes einfach. Wir tracken automatisch, was Sie auf all Ihren Geräten sehen – ein Ort, um sie alle zu finden, Ihre gesamte Historie zu sehen und sich mit Millionen von Filmfans weltweit zu vernetzen. Schau mir in die Augen, Kleines, und entdecke dein nächstes Highlight!"
+    },
+    "about_feature_title_scrobble": {
+      "default": "Filme & Serien tracken"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Scrobbeln Sie automatisch Ihre Inhalte über hunderte Apps wie Plex, Kodi, Emby oder Infuse. Verlieren Sie nie den Anschluss."
+    },
+    "about_feature_title_any_device": {
+      "default": "Jedes Gerät & System"
+    },
+    "about_feature_description_any_device": {
+      "default": "Kompatibel mit Streaming, Blu-ray und digitalen Käufen. iOS, Android, Apple TV, Fire TV, Roku und mehr."
+    },
+    "about_feature_title_discover": {
+      "default": "Was Sie sehen sollten"
+    },
+    "about_feature_description_discover": {
+      "default": "Personalisierte Empfehlungen basierend auf Ihrem Geschmack. Entdecken Sie Trends und kuratierte Listen der Community."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Bewerten & Rezensieren"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Teilen Sie Ihre Meinung mit Bewertungen. Vergleichen Sie Ihren Geschmack mit Millionen anderen Usern weltweit."
+    },
+    "about_feature_title_calendar": {
+      "default": "Keine Folge verpassen"
+    },
+    "about_feature_description_calendar": {
+      "default": "Folgen Sie Serien und erhalten Sie Infos zu neuen Episoden. Ihr persönlicher Kalender hält Sie immer auf dem Laufenden."
+    },
+    "about_feature_title_community": {
+      "default": "Echte Fan-Community"
+    },
+    "about_feature_description_community": {
+      "default": "Folge Freunden, sieh was das Team schaut und entdecke gemeinsame Favoriten. Zusammen schaut es sich besser."
     }
   }
 }

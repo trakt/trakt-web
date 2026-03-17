@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Privacy"
+    },
+    "page_title_about": {
+      "default": "About"
+    },
+    "heading_what_is_trakt": {
+      "default": "What is Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Meet the Team"
+    },
+    "text_about_tagline": {
+      "default": "Trakt is a platform that does many complex things. We try to make it simple. Trakt automatically tracks what you're watching across all your devices and apps — giving you a single place to find them all, see your entire watch history, discover what's next, and connect with a community of millions of movie and TV lovers around the world."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Track Shows & Movies"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Automatically scrobble what you watch across hundreds of apps — Plex, Kodi, Emby, Infuse, and more. Never lose track of your progress."
+    },
+    "about_feature_title_any_device": {
+      "default": "Any Device, Any Platform"
+    },
+    "about_feature_description_any_device": {
+      "default": "Works with streaming services, Blu-ray, digital purchases, and physical media. iOS, Android, Apple TV, Fire TV, Roku, and more."
+    },
+    "about_feature_title_discover": {
+      "default": "Discover What to Watch"
+    },
+    "about_feature_description_discover": {
+      "default": "Get personalised recommendations based on your taste. Explore trending titles and curated lists from the Trakt community."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Rate & Review"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Share your opinions with ratings and comments. See how your taste compares to millions of other watchers."
+    },
+    "about_feature_title_calendar": {
+      "default": "Never Miss an Episode"
+    },
+    "about_feature_description_calendar": {
+      "default": "Follow your shows and get notified when new episodes air. Your personal TV calendar keeps you on top of everything."
+    },
+    "about_feature_title_community": {
+      "default": "A Community of Watchers"
+    },
+    "about_feature_description_community": {
+      "default": "Follow friends, see what the team is watching, and discover shared favourites. Watching together is better."
     }
   }
 }

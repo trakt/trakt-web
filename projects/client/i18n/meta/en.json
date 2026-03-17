@@ -7955,6 +7955,134 @@
         "android",
         "ios"
       ]
+    },
+    "page_title_about": {
+      "default": "About",
+      "description": "Title for the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "heading_what_is_trakt": {
+      "default": "What is Trakt?",
+      "description": "Section heading for the 'What is Trakt?' section on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "heading_meet_the_team": {
+      "default": "Meet the Team",
+      "description": "Section heading for the 'Meet the Team' section on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_about_tagline": {
+      "default": "Trakt is a platform that does many complex things. We try to make it simple. Trakt automatically tracks what you're watching across all your devices and apps — giving you a single place to see your entire watch history, discover what's next, and connect with a community of millions of movie and TV lovers around the world.",
+      "description": "Tagline paragraph on the About page describing what Trakt is.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_title_scrobble": {
+      "default": "Track Shows & Movies",
+      "description": "Title for the scrobbling/tracking feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_description_scrobble": {
+      "default": "Automatically scrobble what you watch across hundreds of apps — Plex, Kodi, Emby, Infuse, and more. Never lose track of your progress.",
+      "description": "Description for the scrobbling/tracking feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_title_any_device": {
+      "default": "Any Device, Any Platform",
+      "description": "Title for the multi-device/platform feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_description_any_device": {
+      "default": "Works with streaming services, Blu-ray, digital purchases, and physical media. iOS, Android, Apple TV, Fire TV, Roku, and more.",
+      "description": "Description for the multi-device/platform feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_title_discover": {
+      "default": "Discover What to Watch",
+      "description": "Title for the discovery feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_description_discover": {
+      "default": "Get personalized recommendations based on your taste. Explore trending titles and curated lists from the Trakt community.",
+      "description": "Description for the discovery feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_title_rate_review": {
+      "default": "Rate & Review",
+      "description": "Title for the ratings and reviews feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_description_rate_review": {
+      "default": "Share your opinions with ratings and comments. See how your taste compares to millions of other watchers.",
+      "description": "Description for the ratings and reviews feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_title_calendar": {
+      "default": "Never Miss an Episode",
+      "description": "Title for the calendar/scheduling feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_description_calendar": {
+      "default": "Follow your shows and get notified when new episodes air. Your personal TV calendar keeps you on top of everything.",
+      "description": "Description for the calendar/scheduling feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_title_community": {
+      "default": "A Community of Watchers",
+      "description": "Title for the social/community feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "about_feature_description_community": {
+      "default": "Follow friends, see what the team is watching, and discover shared favourites. Watching together is better.",
+      "description": "Description for the social/community feature card on the About page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

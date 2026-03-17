@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Privatliv"
+    },
+    "page_title_about": {
+      "default": "Om"
+    },
+    "heading_what_is_trakt": {
+      "default": "Hvad er Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Mød teamet"
+    },
+    "text_about_tagline": {
+      "default": "Trakt gør det komplekse enkelt. Vi tracker automatisk det, du ser på alle dine enheder — ét sted til at se din historik, finde din næste store oplevelse og møde millioner af film- og TV-elskere verden over."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Track Film & Serier"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Scrobble automatisk hvad du ser via hundredvis af apps som Plex, Kodi, Emby og Infuse. Mist aldrig overblikket."
+    },
+    "about_feature_title_any_device": {
+      "default": "Alle enheder"
+    },
+    "about_feature_description_any_device": {
+      "default": "Virker med streaming, Blu-ray og digitale køb. iOS, Android, Apple TV, Fire TV, Roku og mere."
+    },
+    "about_feature_title_discover": {
+      "default": "Find hvad du skal se"
+    },
+    "about_feature_description_discover": {
+      "default": "Få personlige anbefalinger baseret på din smag. Udforsk trends og lister kurateret af Trakt-communityet."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Bedøm & Anmeld"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Del din mening med ratings og kommentarer. Se hvordan din smag matcher millioner af andre seere."
+    },
+    "about_feature_title_calendar": {
+      "default": "Gå aldrig glip af et afsnit"
+    },
+    "about_feature_description_calendar": {
+      "default": "Følg dine serier og få besked, når nye afsnit udkommer. Din personlige TV-kalender holder dig opdateret."
+    },
+    "about_feature_title_community": {
+      "default": "Et community for seere"
+    },
+    "about_feature_description_community": {
+      "default": "Følg venner, se hvad teamet ser, og find fælles favoritter. God filmhygge er bedst sammen."
     }
   }
 }

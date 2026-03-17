@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Integritet"
+    },
+    "page_title_about": {
+      "default": "Om oss"
+    },
+    "heading_what_is_trakt": {
+      "default": "Vad är Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Möt teamet"
+    },
+    "text_about_tagline": {
+      "default": "Trakt är plattformen som gör det komplexa enkelt. Vi håller automatiskt koll på vad du ser på alla dina enheter — en plats för att se din historik, hitta ditt nästa favoritverk och möta miljontals andra som älskar film och TV."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Håll koll på allt"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Scrobbla automatiskt det du ser via hundratals appar — Plex, Kodi, Emby, Infuse med flera. Tappa aldrig bort var du är i serien."
+    },
+    "about_feature_title_any_device": {
+      "default": "Alla Enheter"
+    },
+    "about_feature_description_any_device": {
+      "default": "Fungerar med streaming, Blu-ray och digitala köp. iOS, Android, Apple TV, Fire TV, Roku och mer."
+    },
+    "about_feature_title_discover": {
+      "default": "Hitta nästa film"
+    },
+    "about_feature_description_discover": {
+      "default": "Få personliga rekommendationer baserat på din smak. Utforska trender och listor skapade av Trakt-communityt."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Betygsätt & Recensera"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Dela dina åsikter. Se hur din smak står sig mot miljontals andra tittare världen över."
+    },
+    "about_feature_title_calendar": {
+      "default": "Missa aldrig ett avsnitt"
+    },
+    "about_feature_description_calendar": {
+      "default": "Följ dina serier och få notiser när nya avsnitt sänds. Din personliga TV-kalender har full koll."
+    },
+    "about_feature_title_community": {
+      "default": "En gemenskap för tittare"
+    },
+    "about_feature_description_community": {
+      "default": "Följ vänner, se vad teamet tittar på och hitta gemensamma favoriter. Film är bäst tillsammans."
     }
   }
 }

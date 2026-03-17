@@ -2884,6 +2884,54 @@
     },
     "link_text_privacy": {
       "default": "隐私"
+    },
+    "page_title_about": {
+      "default": "关于"
+    },
+    "heading_what_is_trakt": {
+      "default": "什么是 Trakt？"
+    },
+    "heading_meet_the_team": {
+      "default": "团队介绍"
+    },
+    "text_about_tagline": {
+      "default": "Trakt 是一个将复杂变得简单的平台。它能自动追踪你在所有设备和应用上的观看记录——让你在一个地方就能掌控全局，查看观看历史，发现下一部佳作，并与全球数百万影视爱好者建立联系。"
+    },
+    "about_feature_title_scrobble": {
+      "default": "追踪电影与剧集"
+    },
+    "about_feature_description_scrobble": {
+      "default": "自动记录（Scrobble）你在 Plex、Kodi、Emby、Infuse 等数百个应用中的观看内容。再也不会忘记看哪了。"
+    },
+    "about_feature_title_any_device": {
+      "default": "任何设备，任何平台"
+    },
+    "about_feature_description_any_device": {
+      "default": "支持流媒体、蓝光、数字购买及实体介质。兼容 iOS、Android、Apple TV、Roku 等。"
+    },
+    "about_feature_title_discover": {
+      "default": "发现好片"
+    },
+    "about_feature_description_discover": {
+      "default": "根据你的口味获取个性化推荐。探索热门趋势和来自 Trakt 社区的精选清单。"
+    },
+    "about_feature_title_rate_review": {
+      "default": "评分与评论"
+    },
+    "about_feature_description_rate_review": {
+      "default": "通过评分和评论分享你的观点。看看你的品味与全球数百万观众相比如何。"
+    },
+    "about_feature_title_calendar": {
+      "default": "追剧不掉队"
+    },
+    "about_feature_description_calendar": {
+      "default": "关注你的剧集并在新集播出时获得通知。你的专属电视日历让你掌控一切。"
+    },
+    "about_feature_title_community": {
+      "default": "影视爱好者社区"
+    },
+    "about_feature_description_community": {
+      "default": "关注好友，看看团队在看什么，发现共同的爱好。一起看才更有意思。"
     }
   }
 }

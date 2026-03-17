@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Privacidade"
+    },
+    "page_title_about": {
+      "default": "Sobre"
+    },
+    "heading_what_is_trakt": {
+      "default": "O que é o Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Conheça a Equipe"
+    },
+    "text_about_tagline": {
+      "default": "Trakt é uma plataforma que simplifica o complexo. Rastreamos automaticamente o que você assiste em todos os seus aparelhos — um lugar único para ver seu histórico, descobrir o próximo sucesso e se conectar com milhões de apaixonados por cinema e novelas pelo mundo."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Rastrear Filmes e Séries"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Faça scrobble automático do que assiste em centenas de apps como Plex, Kodi, Emby e Infuse. Nunca perca o fio da meada."
+    },
+    "about_feature_title_any_device": {
+      "default": "Qualquer Dispositivo"
+    },
+    "about_feature_description_any_device": {
+      "default": "Funciona com streaming, Blu-ray e mídia física. Disponível para iOS, Android, Apple TV, Fire TV, Roku e muito mais."
+    },
+    "about_feature_title_discover": {
+      "default": "Descobrir o que Ver"
+    },
+    "about_feature_description_discover": {
+      "default": "Receba recomendações personalizadas baseadas no seu gosto. Explore títulos em alta e listas criadas pela comunidade Trakt."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Avaliar e Resenhar"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Compartilhe sua opinião com notas e comentários. Veja como seu gosto se compara ao de milhões de outros cinéfilos."
+    },
+    "about_feature_title_calendar": {
+      "default": "Não Perca Episódios"
+    },
+    "about_feature_description_calendar": {
+      "default": "Siga suas séries e seja notificado sobre novos episódios. Seu calendário pessoal mantém tudo sob controle."
+    },
+    "about_feature_title_community": {
+      "default": "Comunidade de Fãs"
+    },
+    "about_feature_description_community": {
+      "default": "Siga amigos, veja o que a equipe está assistindo e descubra favoritos em comum. Assistir junto é muito melhor."
     }
   }
 }

@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Приватність"
+    },
+    "page_title_about": {
+      "default": "Про нас"
+    },
+    "heading_what_is_trakt": {
+      "default": "Що таке Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Познайомтеся з командою"
+    },
+    "text_about_tagline": {
+      "default": "Trakt — це платформа, що робить складне простим. Ми автоматично відстежуємо ваші перегляди на всіх пристроях, створюючи єдиний простір для всієї історії переглядів, нових відкриттів та спілкування з мільйонами кіноманів з усього світу."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Відстежуйте контент"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Автоматично скробліть перегляди через сотні додатків — Plex, Kodi, Emby, Infuse та інші. Більше жодних втрачених серій."
+    },
+    "about_feature_title_any_device": {
+      "default": "Будь-який пристрій"
+    },
+    "about_feature_description_any_device": {
+      "default": "Працює зі стрімінгом, Blu-ray та цифровими покупками. iOS, Android, Apple TV, Fire TV, Roku тощо."
+    },
+    "about_feature_title_discover": {
+      "default": "Що подивитися?"
+    },
+    "about_feature_description_discover": {
+      "default": "Персоналізовані рекомендації на ваш смак. Тренди та кураторські списки від спільноти Trakt."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Оцінки та відгуки"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Діліться думками через оцінки та коментарі. Порівнюйте свій смак із мільйонами інших глядачів."
+    },
+    "about_feature_title_calendar": {
+      "default": "Не пропустіть серію"
+    },
+    "about_feature_description_calendar": {
+      "default": "Стежте за серіалами та отримуйте сповіщення про вихід нових серій. Ваш особистий календар завжди під рукою."
+    },
+    "about_feature_title_community": {
+      "default": "Спільнота глядачів"
+    },
+    "about_feature_description_community": {
+      "default": "Стежте за друзями та командою, знаходьте спільні вподобання. Дивитися разом — набагато цікавіше."
     }
   }
 }
