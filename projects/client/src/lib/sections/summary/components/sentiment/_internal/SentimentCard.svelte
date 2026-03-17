@@ -1,6 +1,8 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import {
     Drawers,
@@ -26,10 +28,17 @@
 
   const pros = $derived(sentiment.aspect.pros.slice(0, aspectsLimit));
   const cons = $derived(sentiment.aspect.cons.slice(0, aspectsLimit));
+
+  const { track } = useTrack(AnalyticsEvent.Drilldown);
 </script>
 
 <div class="trakt-sentiment-card">
-  <Link href={buildDrawerLink(Drawers.Sentiment)} noscroll color="inherit">
+  <Link
+    href={buildDrawerLink(Drawers.Sentiment)}
+    noscroll
+    color="inherit"
+    onclick={() => track({ source: "sentiment" })}
+  >
     <Card
       --width-card="var(--width-sentiment-card)"
       --height-card={heightCard}
