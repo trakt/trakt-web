@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Sigue a tus amigos, mira qué ve el equipo y descubre favoritos compartidos. Ver contenido juntos es más chido."
+    },
+    "page_title_branding": {
+      "default": "Identidad visual"
+    },
+    "heading_branding_requirements": {
+      "default": "Requisitos de marca"
+    },
+    "text_branding_req_1": {
+      "default": "Puedes usar el nombre y el logo de Trakt para referirte a nuestro servicio siguiendo estas guías. ¡Haz que luzca como de película!"
+    },
+    "text_branding_req_2": {
+      "default": "No alteres, modifiques, gires ni cambies el color del logo para nada."
+    },
+    "text_branding_req_3": {
+      "default": "No uses el logo como parte de tu propio logo, marca o servicio."
+    },
+    "text_branding_req_4": {
+      "default": "Mantén un espacio libre alrededor del logo igual a la altura de la 'T' de Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "No uses el logo para sugerir patrocinio o que Trakt te dio el 'visto bueno' oficialmente."
+    },
+    "text_branding_req_6": {
+      "default": "Usa solo las versiones aprobadas que están aquí; no intentes recrearlas ni editarlas."
+    },
+    "heading_branding_default_logos": {
+      "default": "Fondo claro"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Usa estos logos para que se note que tu app tiene todo el poder de Trakt. No le cambies los colores ni el diseño, porfa."
+    },
+    "heading_branding_dark_background": {
+      "default": "Fondo oscuro"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Usa estos logos si tu app tiene modo oscuro, ideal para ver series de noche."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Logos alternativos"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Usa estos cuando los logos normales no se lleven bien con el diseño de tu app."
+    },
+    "heading_branding_questions": {
+      "default": "¿Tienes dudas?"
+    },
+    "text_branding_questions_intro": {
+      "default": "¿Alguna pregunta sobre el uso de nuestra marca? Escríbenos."
     }
   }
 }

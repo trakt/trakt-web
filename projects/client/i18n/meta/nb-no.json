@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Følg venner, se hva teamet ser på og finn felles favoritter. Hygge er best når den deles."
+    },
+    "page_title_branding": {
+      "default": "Merkevare"
+    },
+    "heading_branding_requirements": {
+      "default": "Krav for merkevare"
+    },
+    "text_branding_req_1": {
+      "default": "Du kan bruke Trakt-navnet og logoen for å henvise til tjenesten vår, i samsvar med disse retningslinjene."
+    },
+    "text_branding_req_2": {
+      "default": "Ikke endre, modifiser, roter eller fargelegg logoen på noen måte."
+    },
+    "text_branding_req_3": {
+      "default": "Ikke bruk logoen som en del av din egen logo, merkenavn eller tjeneste."
+    },
+    "text_branding_req_4": {
+      "default": "Oppretthold et fritt område rundt logoen tilsvarende høyden på 'T'-en i Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "Ikke bruk logoen for å antyde sponsing, støtte eller tilknytning til Trakt."
+    },
+    "text_branding_req_6": {
+      "default": "Bruk kun de godkjente logo-versjonene som er tilgjengelige her; ikke gjenskap eller modifiser dem."
+    },
+    "heading_branding_default_logos": {
+      "default": "Lys bakgrunn"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Bruk disse Trakt-logoene for å tydelig identifisere at appen din er drevet av Trakt. Vennligst ikke endre logoer eller farger."
+    },
+    "heading_branding_dark_background": {
+      "default": "Mørk bakgrunn"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Bruk disse logoene i appens mørke tema, perfekt for hyggelige seriekvelder."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Alternative logoer"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Bruk disse logoene når standardlogoene ikke passer godt med appens design."
+    },
+    "heading_branding_questions": {
+      "default": "Spørsmål?"
+    },
+    "text_branding_questions_intro": {
+      "default": "Har du spørsmål om bruk av merkevaren vår? Ta kontakt."
     }
   }
 }

@@ -2932,6 +2932,54 @@
     },
     "about_feature_description_community": {
       "default": "关注好友，看看团队在看什么，发现共同的爱好。一起看才更有意思。"
+    },
+    "page_title_branding": {
+      "default": "品牌资产"
+    },
+    "heading_branding_requirements": {
+      "default": "品牌使用规范"
+    },
+    "text_branding_req_1": {
+      "default": "您可以根据这些指南使用 Trakt 的名称和徽标来引用我们的服务。"
+    },
+    "text_branding_req_2": {
+      "default": "请勿以任何方式更改、修改、旋转徽标或重新着色。"
+    },
+    "text_branding_req_3": {
+      "default": "请勿将此徽标作为您自有徽标、品牌名称或服务的一部分。"
+    },
+    "text_branding_req_4": {
+      "default": "徽标周围应保持等于 Trakt 中“T”高度的空白区域。"
+    },
+    "text_branding_req_5": {
+      "default": "请勿使用徽标暗示 Trakt 的赞助、认可或附属关系。"
+    },
+    "text_branding_req_6": {
+      "default": "仅使用此处提供的核准徽标版本；请勿自行重新制作或修改。"
+    },
+    "heading_branding_default_logos": {
+      "default": "浅色背景"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "使用这些 Trakt 徽标来明确标识您的应用由 Trakt 提供支持。请勿更改徽标或颜色。"
+    },
+    "heading_branding_dark_background": {
+      "default": "深色背景"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "在应用的深色主题中使用这些徽标。"
+    },
+    "heading_branding_alternative_logos": {
+      "default": "备用徽标"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "当默认徽标与您的应用设计不协调时，请使用这些徽标。"
+    },
+    "heading_branding_questions": {
+      "default": "有疑问？"
+    },
+    "text_branding_questions_intro": {
+      "default": "对使用我们的品牌有疑问？请联系我们。"
     }
   }
 }

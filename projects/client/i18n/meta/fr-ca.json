@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Suis tes amis, regarde ce que l'équipe écoute et découvre des coups de cœur. C'est bien mieux quand on écoute ensemble."
+    },
+    "page_title_branding": {
+      "default": "Image de marque"
+    },
+    "heading_branding_requirements": {
+      "default": "Critères de marque"
+    },
+    "text_branding_req_1": {
+      "default": "Vous pouvez utiliser le nom et le logo de Trakt pour parler de notre service, en suivant ces règles, tout comme on respecte les crédits d'un bon film."
+    },
+    "text_branding_req_2": {
+      "default": "Ne pas changer, modifier, faire tourner ou recolorer le logo."
+    },
+    "text_branding_req_3": {
+      "default": "N'utilisez pas le logo dans votre propre logo, nom de marque ou service."
+    },
+    "text_branding_req_4": {
+      "default": "Gardez un espace libre autour du logo équivalent à la hauteur du « T » de Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "N'utilisez pas le logo pour laisser croire à un partenariat ou une affiliation officielle avec Trakt."
+    },
+    "text_branding_req_6": {
+      "default": "Utilisez seulement les versions approuvées ici; pas de bidouillage ou de recréation maison."
+    },
+    "heading_branding_default_logos": {
+      "default": "Fond clair"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Utilisez ces logos pour montrer que votre app est fièrement propulsée par Trakt. On ne touche pas aux couleurs ni au design, s'il vous plaît!"
+    },
+    "heading_branding_dark_background": {
+      "default": "Fond sombre"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Utilisez ces logos pour le thème sombre de votre app, idéal pour les soirées de séries."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Logos alternatifs"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Utilisez ceux-ci si les logos standards ne font pas 'match' avec votre design."
+    },
+    "heading_branding_questions": {
+      "default": "Des questions?"
+    },
+    "text_branding_questions_intro": {
+      "default": "Besoin d'aide avec notre image de marque? Écrivez-nous."
     }
   }
 }

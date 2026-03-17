@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Obserwuj znajomych, sprawdzaj co ogląda ekipa i znajduj wspólne hity. Oglądanie razem smakuje lepiej."
+    },
+    "page_title_branding": {
+      "default": "Branding"
+    },
+    "heading_branding_requirements": {
+      "default": "Wymagania dotyczące marki"
+    },
+    "text_branding_req_1": {
+      "default": "Możesz używać nazwy i logo Trakt w odniesieniu do naszych usług, zgodnie z niniejszymi wytycznymi – dbając o detale jak przy dobrej produkcji filmowej."
+    },
+    "text_branding_req_2": {
+      "default": "Nie wolno zmieniać, modyfikować, obracać ani zmieniać kolorystyki logo w jakikolwiek sposób."
+    },
+    "text_branding_req_3": {
+      "default": "Nie używaj logo jako części własnego logo, nazwy marki lub usługi."
+    },
+    "text_branding_req_4": {
+      "default": "Zachowaj wokół logo wolną przestrzeń równą wysokości litery „T” w słowie Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "Nie używaj logo, aby sugerować sponsoring, poparcie lub powiązanie z Trakt."
+    },
+    "text_branding_req_6": {
+      "default": "Używaj wyłącznie zatwierdzonych wersji logo dostępnych tutaj; nie odtwarzaj ich ani nie modyfikuj."
+    },
+    "heading_branding_default_logos": {
+      "default": "Jasne tło"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Użyj tych logo Trakt, aby wyraźnie wskazać, że Twoja aplikacja jest wspierana przez Trakt. Prosimy nie zmieniać logo ani kolorów."
+    },
+    "heading_branding_dark_background": {
+      "default": "Ciemne tło"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Użyj tych logo w ciemnym motywie swojej aplikacji, idealnym na nocny seans serialu."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Alternatywne logo"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Użyj tych logo, gdy domyślne wersje nie pasują do projektu Twojej aplikacji."
+    },
+    "heading_branding_questions": {
+      "default": "Pytania?"
+    },
+    "text_branding_questions_intro": {
+      "default": "Masz pytania dotyczące korzystania z naszej marki? Skontaktuj się z nami."
     }
   }
 }

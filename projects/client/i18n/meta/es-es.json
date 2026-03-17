@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Siga a sus amigos, vea qué está viendo el equipo y descubra favoritos compartidos. Ver cine en compañía es mejor."
+    },
+    "page_title_branding": {
+      "default": "Imagen de marca"
+    },
+    "heading_branding_requirements": {
+      "default": "Requisitos de marca"
+    },
+    "text_branding_req_1": {
+      "default": "Puede utilizar el nombre y el logotipo de Trakt para referirse a nuestro servicio, de acuerdo con estas directrices, como si fuera el título de un gran estreno."
+    },
+    "text_branding_req_2": {
+      "default": "No altere, modifique, rote ni cambie el color del logotipo de ninguna manera."
+    },
+    "text_branding_req_3": {
+      "default": "No utilice el logotipo como parte de su propio logotipo, nombre de marca o servicio."
+    },
+    "text_branding_req_4": {
+      "default": "Mantenga un espacio libre alrededor del logotipo igual a la altura de la 'T' de Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "No utilice el logotipo para dar a entender patrocinio, respaldo o afiliación con Trakt."
+    },
+    "text_branding_req_6": {
+      "default": "Utilice únicamente las versiones aprobadas del logotipo que se proporcionan aquí; no las recree ni las modifique."
+    },
+    "heading_branding_default_logos": {
+      "default": "Fondo claro"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Utilice estos logotipos para identificar claramente que su aplicación funciona gracias a Trakt. Por favor, no altere los logotipos ni los colores."
+    },
+    "heading_branding_dark_background": {
+      "default": "Fondo oscuro"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Utilice estos logotipos en el tema oscuro de su aplicación, ideal para una sesión de cine en casa."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Logotipos alternativos"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Utilice estos logotipos cuando los predeterminados no encajen bien con el diseño de su aplicación."
+    },
+    "heading_branding_questions": {
+      "default": "¿Preguntas?"
+    },
+    "text_branding_questions_intro": {
+      "default": "¿Tiene alguna duda sobre el uso de nuestra marca? Contacte con nosotros."
     }
   }
 }

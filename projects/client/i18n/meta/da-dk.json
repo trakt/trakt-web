@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Følg venner, se hvad teamet ser, og find fælles favoritter. God filmhygge er bedst sammen."
+    },
+    "page_title_branding": {
+      "default": "Branding"
+    },
+    "heading_branding_requirements": {
+      "default": "Krav til branding"
+    },
+    "text_branding_req_1": {
+      "default": "Du må bruge Trakt-navnet og logoet til at henvise til vores tjeneste i overensstemmelse med disse retningslinjer."
+    },
+    "text_branding_req_2": {
+      "default": "Logoet må ikke ændres, modificeres, roteres eller farves om på nogen måde."
+    },
+    "text_branding_req_3": {
+      "default": "Brug ikke logoet som en del af dit eget logo, brandnavn eller tjeneste."
+    },
+    "text_branding_req_4": {
+      "default": "Sørg for friplads omkring logoet svarende til højden på 'T'-et i Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "Brug ikke logoet til at antyde sponsorering, støtte eller tilknytning til Trakt."
+    },
+    "text_branding_req_6": {
+      "default": "Brug kun de godkendte logoversioner, der findes her; lad være med at genskabe eller ændre dem."
+    },
+    "heading_branding_default_logos": {
+      "default": "Lys baggrund"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Brug disse Trakt-logoer til tydeligt at identificere, at din app er drevet af Trakt. Undlad venligst at ændre logoer eller farver."
+    },
+    "heading_branding_dark_background": {
+      "default": "Mørk baggrund"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Brug disse logoer i din apps mørke tema, perfekt til en hyggelig filmaften."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Alternative logoer"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Brug disse logoer, når standardlogoerne ikke passer ind i din apps design."
+    },
+    "heading_branding_questions": {
+      "default": "Spørgsmål?"
+    },
+    "text_branding_questions_intro": {
+      "default": "Har du spørgsmål om brugen af vores brand? Kontakt os endelig."
     }
   }
 }

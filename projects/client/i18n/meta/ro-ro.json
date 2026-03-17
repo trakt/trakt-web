@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Urmărește prietenii, vezi ce urmărește echipa și descoperă titluri preferate la comun. Vizionarea e mai frumoasă împreună."
+    },
+    "page_title_branding": {
+      "default": "Branding"
+    },
+    "heading_branding_requirements": {
+      "default": "Cerințe de Branding"
+    },
+    "text_branding_req_1": {
+      "default": "Poți folosi numele și logo-ul Trakt pentru a te referi la serviciul nostru, respectând aceste reguli, la fel cum respecți creditele unui film bun."
+    },
+    "text_branding_req_2": {
+      "default": "Nu altera, modifica, roti sau recolora logo-ul în niciun fel."
+    },
+    "text_branding_req_3": {
+      "default": "Nu folosi logo-ul ca parte din propriul tău logo, nume de brand sau serviciu."
+    },
+    "text_branding_req_4": {
+      "default": "Păstrează un spațiu liber în jurul logo-ului egal cu înălțimea literei „T” din Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "Nu folosi logo-ul pentru a sugera sponsorizare, susținere sau afiliere cu Trakt."
+    },
+    "text_branding_req_6": {
+      "default": "Folosește doar versiunile de logo aprobate oferite aici; nu le recrea și nu le modifica."
+    },
+    "heading_branding_default_logos": {
+      "default": "Fundal deschis"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Folosește aceste logo-uri Trakt pentru a arăta clar că aplicația ta este „powered by Trakt”. Te rugăm să nu modifici logo-urile sau culorile."
+    },
+    "heading_branding_dark_background": {
+      "default": "Fundal întunecat"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Folosește aceste logo-uri pentru tema întunecată a aplicației tale, ideală pentru maratoane de seriale."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Logo-uri alternative"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Folosește aceste logo-uri atunci când cele implicite nu se potrivesc cu designul aplicației tale."
+    },
+    "heading_branding_questions": {
+      "default": "Întrebări?"
+    },
+    "text_branding_questions_intro": {
+      "default": "Ai întrebări despre utilizarea brandului nostru? Contactează-ne."
     }
   }
 }

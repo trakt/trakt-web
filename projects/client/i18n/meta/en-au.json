@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Follow friends, see what the team is watching, and discover shared favourites. Watching together is better."
+    },
+    "page_title_branding": {
+      "default": "Branding"
+    },
+    "heading_branding_requirements": {
+      "default": "Branding Requirements"
+    },
+    "text_branding_req_1": {
+      "default": "You may use the Trakt name and logo to refer to our service, in accordance with these guidelines."
+    },
+    "text_branding_req_2": {
+      "default": "Do not alter, modify, rotate, or recolour the logo in any way."
+    },
+    "text_branding_req_3": {
+      "default": "Do not use the logo as part of your own logo, brand name, or service."
+    },
+    "text_branding_req_4": {
+      "default": "Maintain clear space around the logo equal to the height of the 'T' in Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "Do not use the logo to imply sponsorship, endorsement, or affiliation with Trakt."
+    },
+    "text_branding_req_6": {
+      "default": "Use only the approved logo versions provided here; do not recreate or modify them."
+    },
+    "heading_branding_default_logos": {
+      "default": "Light Background"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Use these Trakt logos to clearly identify your app is powered by Trakt. Please don't alter the logos or colours."
+    },
+    "heading_branding_dark_background": {
+      "default": "Dark Background"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Use these logos in your app's dark theme."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Alternative Logos"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Use these logos when the default logos don't work well with your app's design."
+    },
+    "heading_branding_questions": {
+      "default": "Questions?"
+    },
+    "text_branding_questions_intro": {
+      "default": "Have questions about using our brand? Reach out."
     }
   }
 }
