@@ -1,17 +1,14 @@
 <script lang="ts">
   import { SUPPORT_EMAIL } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import LegalPage from "$lib/components/legal/LegalPage.svelte";
 </script>
 
-<div class="privacy-page">
-  <header class="legal-header">
-    <h1>Trakt Privacy Policy</h1>
-    <p class="last-updated">
-      Last Updated &mdash; <strong>August 20, 2024</strong>
-    </p>
-  </header>
-
-  <div class="legal-content">
+<LegalPage 
+  title="Trakt Privacy Policy"
+  lastUpdated="August 20, 2024"
+>
+  <svelte:fragment slot="intro">
     <p>
       Welcome to Trakt! This Privacy Policy explains how we at trakt, inc. (<b
         >"Trakt,"</b
@@ -26,9 +23,9 @@
       <u><b>does not</b></u> apply to any third-party platforms, such as the third-party
       content streaming services you may use in conjunction with our Services.
     </p>
-  </div>
+  </svelte:fragment>
 
-  <div class="legal-summary">
+  <svelte:fragment slot="summary">
     <h2>Let's Get Right To The Point</h2>
     <p>
       Trakt wants you to have a clear understanding of how we collect, protect,
@@ -56,9 +53,7 @@
         Trakt welcomes your questions and comments about our privacy practices.
       </li>
     </ul>
-  </div>
-
-  <div class="legal-content">
+  </svelte:fragment>
     <p>
       Please read this Privacy Policy carefully to fully understand our privacy
       practices. Our Privacy Policy may be updated from time to time, and we
@@ -827,40 +822,13 @@
         All changes are effective immediately when posted and apply to all
         access to and use of our Services. Your continued use of our Services
         following the posting of changes constitutes your acceptance of such
-        changes.
+            changes.
       </p>
     </div>
-  </div>
-</div>
+</LegalPage>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-  @use "$style/scss/components/legal" as *;
-
-  .privacy-page {
-    @include legal-page;
-  }
-
-  .legal-header {
-    @include legal-header;
-  }
-
-  .legal-summary {
-    @include legal-summary;
-  }
-
-  .legal-content {
-    @include legal-content;
-  }
-
-  .legal-section {
-    @include legal-section;
-
-    > ol > p {
-      margin: var(--gap-s) 0 var(--gap-m) 0;
-      padding-left: var(--gap-l);
-    }
-  }
 
   .table-wrapper {
     overflow-x: auto;
