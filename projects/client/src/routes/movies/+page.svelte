@@ -7,7 +7,7 @@
   import PopularList from "$lib/sections/lists/popular/PopularList.svelte";
   import RecommendedList from "$lib/sections/lists/recommended/RecommendedList.svelte";
   import TrendingList from "$lib/sections/lists/trending/TrendingList.svelte";
-  import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
 
   const type = "movie";
 </script>

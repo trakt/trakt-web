@@ -9,7 +9,7 @@
   import LibraryListPaginated from "$lib/sections/lists/library/LibraryListPaginated.svelte";
   import type { Library } from "$lib/sections/lists/library/models/Library";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
 

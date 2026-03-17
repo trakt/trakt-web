@@ -12,7 +12,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
+  import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
   import { toRelativeHumanDay } from "$lib/utils/formatting/date/toRelativeHumanDay";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";

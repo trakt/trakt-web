@@ -1,6 +1,6 @@
 <script lang="ts">
   import { appendClassList } from "$lib/utils/actions/appendClassList";
-  import { PLACEHOLDERS } from "$lib/utils/constants";
+  import { PLACEHOLDERS } from "$lib/utils/assets";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import type { ImageProps } from "./ImageProps";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";

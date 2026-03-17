@@ -1,7 +1,7 @@
 import {
   MEDIA_COVER_LARGE_PLACEHOLDER,
   MEDIA_COVER_THUMB_PLACEHOLDER,
-} from '$lib/utils/constants.ts';
+} from '$lib/utils/assets.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { MovieResponse, ShowResponse } from '@trakt/api';

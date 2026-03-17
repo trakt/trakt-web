@@ -6,7 +6,7 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import WatchlistPaginatedList from "$lib/sections/lists/watchlist/WatchlistPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
 
   const { mode } = useDiscover();
 </script>

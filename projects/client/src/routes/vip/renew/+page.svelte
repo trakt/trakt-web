@@ -4,7 +4,7 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useVip } from "$lib/sections/vip/_internal/useVip";
   import VipSubscribe from "$lib/sections/vip/VipSubscribe.svelte";
-  import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   const { subscription, isLoading } = useVip();
