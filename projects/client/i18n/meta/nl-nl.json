@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Privacy"
+    },
+    "page_title_about": {
+      "default": "Over"
+    },
+    "heading_what_is_trakt": {
+      "default": "Wat is Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Ontmoet het team"
+    },
+    "text_about_tagline": {
+      "default": "Trakt maakt het bijhouden van je media simpel. We tracken automatisch wat je kijkt op al je apparaten — één plek om je hele geschiedenis te zien, je volgende verslaving te ontdekken en contact te leggen met miljoenen andere film- en serieliefhebbers."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Films & Series Tracken"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Scrobble automatisch wat je kijkt via honderden apps zoals Plex, Kodi en Infuse. Verlies nooit meer je voortgang."
+    },
+    "about_feature_title_any_device": {
+      "default": "Elk Apparaat"
+    },
+    "about_feature_description_any_device": {
+      "default": "Werkt met streaming, Blu-ray en digitale aankopen. iOS, Android, Apple TV, Fire TV, Roku en meer."
+    },
+    "about_feature_title_discover": {
+      "default": "Ontdek wat te kijken"
+    },
+    "about_feature_description_discover": {
+      "default": "Krijg persoonlijke aanbevelingen. Verken trending titels en lijsten samengesteld door de Trakt-community."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Beoordeel & Review"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Deel je mening met ratings en reacties. Vergelijk je smaak met miljoenen andere kijkers."
+    },
+    "about_feature_title_calendar": {
+      "default": "Mis nooit een aflevering"
+    },
+    "about_feature_description_calendar": {
+      "default": "Volg je series en krijg een seintje bij nieuwe afleveringen. Je persoonlijke agenda houdt je scherp."
+    },
+    "about_feature_title_community": {
+      "default": "Een Community van Kijkers"
+    },
+    "about_feature_description_community": {
+      "default": "Volg vrienden, bekijk wat het team kijkt en ontdek gedeelde favorieten. Samen kijken is leuker."
     }
   }
 }

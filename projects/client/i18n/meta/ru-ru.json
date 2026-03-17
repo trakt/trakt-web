@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Инфо"
+    },
+    "page_title_about": {
+      "default": "О нас"
+    },
+    "heading_what_is_trakt": {
+      "default": "Что такое Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Наша команда"
+    },
+    "text_about_tagline": {
+      "default": "Trakt — это платформа, которая упрощает сложное. Мы автоматически отслеживаем ваши просмотры на всех устройствах, предоставляя единое место для всей истории, поиска новинок и общения с миллионами любителей кино и сериалов по всему миру."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Фильмы и сериалы"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Автоматический скробблинг через сотни приложений — Plex, Kodi, Emby, Infuse и другие. Не теряйте прогресс просмотра."
+    },
+    "about_feature_title_any_device": {
+      "default": "Любое устройство"
+    },
+    "about_feature_description_any_device": {
+      "default": "Работает со стримингом, Blu-ray и цифровыми покупками. iOS, Android, Apple TV, Fire TV, Roku и не только."
+    },
+    "about_feature_title_discover": {
+      "default": "Что посмотреть"
+    },
+    "about_feature_description_discover": {
+      "default": "Персональные рекомендации на основе вашего вкуса. Тренды и списки от сообщества Trakt."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Рейтинги и отзывы"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Делитесь мнением, ставьте оценки и пишите комментарии. Сравните свой вкус с миллионами других зрителей."
+    },
+    "about_feature_title_calendar": {
+      "default": "Не пропустите серию"
+    },
+    "about_feature_description_calendar": {
+      "default": "Следите за сериалами и получайте уведомления о новых сериях. Ваш личный календарь всегда под рукой."
+    },
+    "about_feature_title_community": {
+      "default": "Сообщество зрителей"
+    },
+    "about_feature_description_community": {
+      "default": "Подписывайтесь на друзей, следите за выбором команды и находите общее. Смотреть вместе интереснее."
     }
   }
 }

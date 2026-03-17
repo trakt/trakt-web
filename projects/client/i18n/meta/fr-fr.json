@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Vie privée"
+    },
+    "page_title_about": {
+      "default": "À propos"
+    },
+    "heading_what_is_trakt": {
+      "default": "Qu'est-ce que Trakt ?"
+    },
+    "heading_meet_the_team": {
+      "default": "Rencontrez l'équipe"
+    },
+    "text_about_tagline": {
+      "default": "Trakt est une plateforme complexe rendue simple. Elle enregistre automatiquement ce que vous regardez sur tous vos appareils — un lieu unique pour les gouverner tous, consulter votre historique complet, découvrir vos futurs coups de cœur et rejoindre une communauté de millions de passionnés de septième art et de télévision."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Suivi Films & Séries"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Scrobblez automatiquement vos visionnages sur des centaines d'applications — Plex, Kodi, Emby, Infuse, et bien d'autres."
+    },
+    "about_feature_title_any_device": {
+      "default": "Tout support, partout"
+    },
+    "about_feature_description_any_device": {
+      "default": "Compatible avec les services de streaming, Blu-ray, achats numériques et supports physiques. iOS, Apple TV, et plus encore."
+    },
+    "about_feature_title_discover": {
+      "default": "Quoi regarder ?"
+    },
+    "about_feature_description_discover": {
+      "default": "Obtenez des recommandations personnalisées. Explorez les tendances et les listes organisées par la communauté Trakt."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Noter & Critiquer"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Partagez vos avis. Comparez vos goûts avec ceux de millions d'autres spectateurs à travers le monde."
+    },
+    "about_feature_title_calendar": {
+      "default": "Ne manquez rien"
+    },
+    "about_feature_description_calendar": {
+      "default": "Suivez vos séries et soyez alerté des nouveaux épisodes. Votre calendrier personnel vous permet de rester à jour."
+    },
+    "about_feature_title_community": {
+      "default": "Communauté de cinéphiles"
+    },
+    "about_feature_description_community": {
+      "default": "Suivez vos amis, voyez ce que l'équipe regarde et découvrez vos favoris communs. Le cinéma est plus beau partagé."
     }
   }
 }

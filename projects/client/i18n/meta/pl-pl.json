@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Prywatność"
+    },
+    "page_title_about": {
+      "default": "O nas"
+    },
+    "heading_what_is_trakt": {
+      "default": "Czym jest Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Poznaj zespół"
+    },
+    "text_about_tagline": {
+      "default": "Trakt to platforma, która czyni skomplikowane rzeczy prostymi. Automatycznie śledzi to, co oglądasz na wszystkich urządzeniach — dając Ci jedno miejsce, by wszystkimi rządzić, przeglądać historię, odkrywać nowości i łączyć się z milionami kinomanów."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Śledź Filmy i Seriale"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Automatycznie skrobuj to, co oglądasz w setkach aplikacji — Plex, Kodi, Emby, Infuse i innych. Nigdy nie trać postępu."
+    },
+    "about_feature_title_any_device": {
+      "default": "Dowolne Urządzenie"
+    },
+    "about_feature_description_any_device": {
+      "default": "Działa ze streamingiem, Blu-ray i zakupami cyfrowymi. iOS, Android, Apple TV, Fire TV, Roku i więcej."
+    },
+    "about_feature_title_discover": {
+      "default": "Odkryj co Obejrzeć"
+    },
+    "about_feature_description_discover": {
+      "default": "Spersonalizowane rekomendacje oparte na Twoim guście. Eksploruj trendy i listy kuratorowane przez społeczność."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Oceń i Recenzuj"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Dziel się opiniami. Zobacz, jak Twój gust wypada na tle milionów innych widzów na całym świecie."
+    },
+    "about_feature_title_calendar": {
+      "default": "Nie Przegap Odcinka"
+    },
+    "about_feature_description_calendar": {
+      "default": "Obserwuj seriale i dostawaj powiadomienia o nowych odcinkach. Twój osobisty kalendarz ogarnia wszystko."
+    },
+    "about_feature_title_community": {
+      "default": "Społeczność Widzów"
+    },
+    "about_feature_description_community": {
+      "default": "Obserwuj znajomych, sprawdzaj co ogląda ekipa i znajduj wspólne hity. Oglądanie razem smakuje lepiej."
     }
   }
 }

@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Personvern"
+    },
+    "page_title_about": {
+      "default": "Om oss"
+    },
+    "heading_what_is_trakt": {
+      "default": "Hva er Trakt?"
+    },
+    "heading_meet_the_team": {
+      "default": "Møt teamet"
+    },
+    "text_about_tagline": {
+      "default": "Trakt gjør det kompliserte enkelt. Vi sporer automatisk hva du ser på alle enhetene dine — ett sted for å se hele historikken, oppdage nye perler og koble deg til millioner av film- og TV-entusiaster verden over."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Spor filmer og serier"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Scrobble automatisk fra hundrevis av apper som Plex, Kodi, Emby og Infuse. Hold alltid kontroll på fremdriften din."
+    },
+    "about_feature_title_any_device": {
+      "default": "Alle enheter og plattformer"
+    },
+    "about_feature_description_any_device": {
+      "default": "Fungerer med strømming, Blu-ray og digitale kjøp. iOS, Android, Apple TV, Fire TV, Roku og mer."
+    },
+    "about_feature_title_discover": {
+      "default": "Oppdag noe nytt"
+    },
+    "about_feature_description_discover": {
+      "default": "Få personlige anbefalinger basert på din smak. Utforsk trender og lister kuratert av Trakt-fellesskapet."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Vurder og anmeld"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Del din mening med karakterer og kommentarer. Se hvordan din smak er sammenlignet med millioner av andre."
+    },
+    "about_feature_title_calendar": {
+      "default": "Gå aldri glipp av en episode"
+    },
+    "about_feature_description_calendar": {
+      "default": "Følg seriene dine og få varsel om nye episoder. Din personlige TV-kalender holder deg oppdatert."
+    },
+    "about_feature_title_community": {
+      "default": "Et fellesskap av seere"
+    },
+    "about_feature_description_community": {
+      "default": "Følg venner, se hva teamet ser på og finn felles favoritter. Hygge er best når den deles."
     }
   }
 }

@@ -2885,6 +2885,54 @@
     },
     "link_text_privacy": {
       "default": "Vie privée"
+    },
+    "page_title_about": {
+      "default": "À propos"
+    },
+    "heading_what_is_trakt": {
+      "default": "C'est quoi Trakt ?"
+    },
+    "heading_meet_the_team": {
+      "default": "Voici l'équipe"
+    },
+    "text_about_tagline": {
+      "default": "Trakt simplifie ta vie de téléphage. On suit automatiquement ce que tu regardes sur tous tes appareils — le spot idéal pour voir ton historique, dénicher ta prochaine série culte et placoter avec des millions de fans de films et de télé d'ici et d'ailleurs."
+    },
+    "about_feature_title_scrobble": {
+      "default": "Suivi Films & Séries"
+    },
+    "about_feature_description_scrobble": {
+      "default": "Scrobble tes visionnages automatiquement sur Plex, Kodi, Emby, Infuse et plus. Perds plus jamais le fil de tes séries."
+    },
+    "about_feature_title_any_device": {
+      "default": "Partout, tout le temps"
+    },
+    "about_feature_description_any_device": {
+      "default": "Ça marche avec le streaming, les Blu-ray et tes achats numériques. Sur iOS, Android, Apple TV, Roku et plus."
+    },
+    "about_feature_title_discover": {
+      "default": "Quoi écouter ?"
+    },
+    "about_feature_description_discover": {
+      "default": "Recommandations sur mesure selon tes goûts. Explore les tendances et les listes créées par le monde sur Trakt."
+    },
+    "about_feature_title_rate_review": {
+      "default": "Cote & Critique"
+    },
+    "about_feature_description_rate_review": {
+      "default": "Partage ton opinion. Regarde comment tes goûts se comparent à ceux de millions d'autres fans."
+    },
+    "about_feature_title_calendar": {
+      "default": "Manque rien"
+    },
+    "about_feature_description_calendar": {
+      "default": "Suis tes séries et reçois une alerte quand un épisode sort. Ton calendrier télé perso s'occupe de tout."
+    },
+    "about_feature_title_community": {
+      "default": "Gang de fans"
+    },
+    "about_feature_description_community": {
+      "default": "Suis tes amis, regarde ce que l'équipe écoute et découvre des coups de cœur. C'est bien mieux quand on écoute ensemble."
     }
   }
 }
