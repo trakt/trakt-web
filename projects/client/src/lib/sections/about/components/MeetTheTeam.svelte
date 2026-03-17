@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useTraktTeam } from "$lib/features/team/useTraktTeam.ts";
   import TeamMemberCard from "./TeamMemberCard.svelte";
 
-  const { network } = useUser();
-  const { isLoading, team } = $derived(useTraktTeam($network?.following ?? []));
+  const { isLoading, team } = useTraktTeam([]);
+
+  const TEAM_SIZE = 10;
 </script>
 
 <section class="trakt-meet-the-team">
@@ -19,7 +19,7 @@
     </div>
   {:else}
     <div class="team-grid">
-      {#each { length: 6 } as _, i (i)}
+      {#each { length: TEAM_SIZE } as _, i (i)}
         <div class="team-member-skeleton"></div>
       {/each}
     </div>
@@ -58,8 +58,8 @@
   }
 
   .team-member-skeleton {
-    height: var(--ni-248);
-    border-radius: var(--border-radius-xxl);
+    height: var(--ni-160);
+    border-radius: var(--border-radius-xl);
     background: color-mix(
       in srgb,
       var(--color-card-background) 60%,
