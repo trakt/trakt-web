@@ -11,6 +11,6 @@
     height: var(--ni-48);
     display: flex;
     /* Safari 🥲 */
-    width: 100%;
+    width: 35%;
   }
 </style>
