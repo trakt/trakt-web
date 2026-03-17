@@ -73,6 +73,10 @@
       : _info,
   );
 
+  const canonicalUrl = $derived(
+    `${page.url.origin}${page.url.pathname}`,
+  );
+
   const dynamicContentProps = $derived(
     hasDynamicContent
       ? {
@@ -84,9 +88,10 @@
 
 <svelte:head>
   <title>{displayTitle}</title>
+  <link rel="canonical" href={canonicalUrl} />
   <meta property="og:site_name" content={websiteName} />
   <meta property="og:type" content={ogType} />
-  <meta property="og:url" content={page.url.toString()} />
+  <meta property="og:url" content={canonicalUrl} />
   <meta property="og:image" content={image} />
   <meta property="og:title" content={ogTitle} />
   <meta property="og:locale" content="en_US" />
