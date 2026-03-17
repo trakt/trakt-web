@@ -1,5 +1,7 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { retry } from '$lib/utils/retry/retry.ts';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { parseArgs } from '@std/cli';
 import type { MetaMessageDefinition } from '../i18n/generator/model/MetaMessageDefinition.ts';
 import type { MetaMessages } from '../i18n/generator/model/MetaMessages.ts';
 import { I18N_META_DIR } from './_internal/constants.ts';
@@ -7,6 +9,8 @@ import { loadMetaFile, type TranslationMap } from './_internal/loadMetaFile.ts';
 import { locales } from './_internal/locales.ts';
 import { mapToTranslations } from './_internal/mapToTranslations.ts';
 import { writeJsonFile } from './_internal/writeJsonFile.ts';
+
+const BATCH_SIZE = 50;
 
 function extractTranslationKeys(
   messages: Record<string, MetaMessageDefinition>,
@@ -26,13 +30,12 @@ const genAi = new GoogleGenerativeAI(
 );
 
 const model = genAi.getGenerativeModel({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-flash-latest',
   generationConfig: {
     responseMimeType: 'application/json',
   },
 });
 
-// Add this function to generate a prompt for multiple locales with enhanced context
 function generateMultiLocalePromptText({
   messages,
   locales,
@@ -110,49 +113,69 @@ function generateMultiLocalePromptText({
           ${contextualData.join('\n          ')}`;
 }
 
-async function translateMessages(
+async function translateBatch(
   messages: Record<string, MetaMessageDefinition>,
   locales: string[],
   localeInstructions: Record<string, string | undefined>,
 ): Promise<Record<string, TranslationMap>> {
-  const result = await model.generateContent(
-    generateMultiLocalePromptText({
+  return await retry(async () => {
+    const result = await model.generateContent(
+      generateMultiLocalePromptText({
+        messages,
+        locales,
+        localeInstructions,
+      }),
+    );
+
+    const text = result.response.text();
+    const response = JSON.parse(text);
+
+    // Handle responses by normalizing to an array
+    const normalizedResponse = Array.isArray(response) ? response : [response];
+
+    return mapToTranslations({
       messages,
       locales,
-      localeInstructions,
-    }),
-  );
-
-  const response = JSON.parse(result.response.text());
-
-  // Handle responses by normalizing to an array
-  const normalizedResponse = Array.isArray(response) ? response : [response];
-
-  return mapToTranslations({
-    messages,
-    locales,
-    response: normalizedResponse,
+      response: normalizedResponse,
+    });
   });
 }
 
 async function translateAllLocales(): Promise<void> {
+  const args = parseArgs(Deno.args, {
+    string: ['locales'],
+    alias: { locales: 'l' },
+  });
+
   try {
     // Load English source from meta file
     const sourceMeta = await loadMetaFile('en');
     const sourceMessages = extractTranslationKeys(sourceMeta.messages);
 
     // Get non-English locales
-    const targetLocales = locales.filter((l) => l !== 'en');
+    let targetLocales = locales.filter((l) => l !== 'en');
 
-    // Find new keys for each locale
-    const localeNewKeys: Record<string, string[]> = {};
-    const localeInstructions: Record<string, string | undefined> = {};
-    const allNewKeysSet = new Set<string>();
+    // Filter locales if provided via CLI
+    if (args.locales) {
+      const requestedLocales = args.locales.split(',').map((l: string) =>
+        l.trim()
+      );
+      targetLocales = targetLocales.filter((l) => requestedLocales.includes(l));
+      console.log(
+        `Filtering to requested locales: ${targetLocales.join(', ')}`,
+      );
+    }
+
+    if (targetLocales.length === 0) {
+      console.log('No valid target locales found');
+      return;
+    }
 
     for (const locale of targetLocales) {
+      console.log(`\n--- Processing locale: ${locale} ---`);
+
       // Load existing meta file or create template
       const existingMeta = await loadMetaFileOrCreateTemplate(locale);
-      localeInstructions[locale] = existingMeta.meta.guidance;
       const existingTranslations = extractTranslationKeys(
         existingMeta.messages,
       );
@@ -161,77 +184,64 @@ async function translateAllLocales(): Promise<void> {
       const newKeys = Object.keys(sourceMessages).filter((key) =>
         !(key in existingTranslations)
       );
-      localeNewKeys[locale] = newKeys;
 
-      // Add to set of all keys that need translation
-      newKeys.forEach((key: string) => allNewKeysSet.add(key));
-    }
-
-    const allNewKeys = Array.from(allNewKeysSet);
-
-    if (allNewKeys.length === 0) {
-      console.log('No new keys to translate for any locale');
-      return;
-    }
-
-    // Prepare the data to translate with context
-    const keysToTranslate: Record<string, MetaMessageDefinition> = {};
-    for (const key of allNewKeys) {
-      if (sourceMeta.messages[key]) {
-        keysToTranslate[key] = sourceMeta.messages[key];
-      }
-    }
-
-    console.log(
-      `Translating ${allNewKeys.length} unique keys for ${targetLocales.length} locales`,
-    );
-
-    // Translate all new keys for all locales in one request
-    const allTranslations = await translateMessages(
-      keysToTranslate,
-      targetLocales,
-      localeInstructions,
-    );
-
-    // Process and save results for each locale
-    for (const locale of targetLocales) {
-      // Load existing meta file or create template
-      const existingMeta = await loadMetaFileOrCreateTemplate(locale);
-
-      // Filter translations to only include keys needed for this locale
-      const newTranslations: TranslationMap = {};
-      const localeTranslations = allTranslations[locale] || {};
-      const neededKeys = localeNewKeys[locale] || [];
-
-      for (const key of neededKeys) {
-        if (localeTranslations[key]) {
-          newTranslations[key] = localeTranslations[key];
-        }
-      }
-
-      if (Object.keys(newTranslations).length === 0) {
-        console.log(`No new translations for ${locale}`);
+      if (newKeys.length === 0) {
+        console.log(`No new keys to translate for ${locale}`);
         continue;
       }
 
-      // Update meta file with new translations
-      const updatedMeta = updateMetaFileWithTranslations(
-        existingMeta,
-        newTranslations,
-        sourceMeta.messages,
-      );
+      console.log(`Found ${newKeys.length} new keys for ${locale}`);
 
-      // Save updated meta file
-      await writeJsonFile(
-        `${I18N_META_DIR}/${locale}.json`,
-        updatedMeta as unknown as Record<string, unknown>,
-      );
+      // Split new keys into batches
+      const batches: string[][] = [];
+      for (let i = 0; i < newKeys.length; i += BATCH_SIZE) {
+        batches.push(newKeys.slice(i, i + BATCH_SIZE));
+      }
 
-      console.log(
-        `Updated ${locale} meta file with ${
-          Object.keys(newTranslations).length
-        } new translations`,
-      );
+      let updatedMeta = existingMeta;
+
+      for (let i = 0; i < batches.length; i++) {
+        const batchKeys = batches[i] ?? [];
+        console.log(
+          `Translating batch ${
+            i + 1
+          }/${batches.length} (${batchKeys.length} keys)...`,
+        );
+
+        // Prepare context for the batch
+        const keysToTranslate: Record<string, MetaMessageDefinition> = {};
+        for (const key of batchKeys) {
+          if (sourceMeta.messages[key]) {
+            keysToTranslate[key] = sourceMeta.messages[key];
+          }
+        }
+
+        const localeInstructions: Record<string, string | undefined> = {
+          [locale]: existingMeta.meta.guidance,
+        };
+
+        // Translate the batch
+        const batchTranslations = await translateBatch(
+          keysToTranslate,
+          [locale],
+          localeInstructions,
+        );
+
+        // Update meta with translations from this batch
+        updatedMeta = updateMetaFileWithTranslations(
+          updatedMeta,
+          batchTranslations[locale] || {},
+          sourceMeta.messages,
+        );
+
+        // Save progress after each batch to avoid data loss
+        await writeJsonFile(
+          `${I18N_META_DIR}/${locale}.json`,
+          updatedMeta as unknown as Record<string, unknown>,
+        );
+      }
+
+      console.log(`Successfully updated ${locale}`);
     }
   } catch (error) {
     console.error('Translation error:', error);
@@ -268,29 +278,17 @@ function updateMetaFileWithTranslations(
 ): MetaMessages {
   const updatedMeta: MetaMessages = {
     ...existingMeta,
-    messages: {},
+    messages: { ...existingMeta.messages },
   };
 
   // Iterate through source messages in their original order to preserve key ordering
   for (const key of Object.keys(sourceMessagesWithContext)) {
-    if (existingMeta.messages[key]) {
-      // Keep existing message, update with translation if available
+    if (translations[key]) {
+      // Add new translated message or update existing one
       updatedMeta.messages[key] = {
-        ...existingMeta.messages[key],
-        default: translations[key] || existingMeta.messages[key].default,
-      };
-    } else if (translations[key]) {
-      // Add new translated message (variables are only defined in en.json source of truth)
-      updatedMeta.messages[key] = {
+        ...(updatedMeta.messages[key] || {}),
         default: translations[key],
       };
-    }
-  }
-
-  // Add any existing messages that aren't in the source (shouldn't happen but safety net)
-  for (const [key, existingMessage] of Object.entries(existingMeta.messages)) {
-    if (!updatedMeta.messages[key]) {
-      updatedMeta.messages[key] = existingMessage;
     }
   }
 
