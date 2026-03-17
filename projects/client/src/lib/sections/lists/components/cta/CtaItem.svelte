@@ -36,7 +36,7 @@
     >
       {#if cta.type === "activity" || cta.type === "social"}
         <ActivityCtaPlaceholder intl={CtaPlaceholderIntlProvider} {cta} />
-      {:else if cta.type === "personal-list" || cta.type === "smart-list"}
+      {:else}
         <PlaceholderItem {cta} intl={CtaPlaceholderIntlProvider} />
       {/if}
     </div>
