@@ -38,6 +38,7 @@ module.exports = {
         'auth',
         'badge',
         'banner',
+        'branding',
         'button',
         'calendar',
         'card',

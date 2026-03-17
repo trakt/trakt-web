@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Folge Freunden, sieh was das Team schaut und entdecke gemeinsame Favoriten. Zusammen schaut es sich besser."
+    },
+    "page_title_branding": {
+      "default": "Branding"
+    },
+    "heading_branding_requirements": {
+      "default": "Branding-Anforderungen"
+    },
+    "text_branding_req_1": {
+      "default": "Sie dürfen den Namen und das Logo von Trakt verwenden, um auf unseren Service zu verweisen, sofern Sie diese Richtlinien einhalten – wie bei einem korrekten Abspann."
+    },
+    "text_branding_req_2": {
+      "default": "Das Logo darf in keiner Weise verändert, modifiziert, gedreht oder umgefärbt werden."
+    },
+    "text_branding_req_3": {
+      "default": "Verwenden Sie das Logo nicht als Teil Ihres eigenen Logos, Markennamens oder Dienstes."
+    },
+    "text_branding_req_4": {
+      "default": "Halten Sie um das Logo herum einen Freiraum ein, der der Höhe des „T“ in Trakt entspricht."
+    },
+    "text_branding_req_5": {
+      "default": "Verwenden Sie das Logo nicht, um Sponsoring, Unterstützung oder eine Zugehörigkeit zu Trakt zu implizieren."
+    },
+    "text_branding_req_6": {
+      "default": "Verwenden Sie nur die hier bereitgestellten, genehmigten Logo-Versionen; erstellen Sie diese nicht neu."
+    },
+    "heading_branding_default_logos": {
+      "default": "Heller Hintergrund"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Verwenden Sie diese Trakt-Logos, um deutlich zu machen, dass Ihre App von Trakt unterstützt wird. Bitte ändern Sie weder Logos noch Farben."
+    },
+    "heading_branding_dark_background": {
+      "default": "Dunkler Hintergrund"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Verwenden Sie diese Logos für das dunkle Design Ihrer App, passend zur Kino-Atmosphäre."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Alternative Logos"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Verwenden Sie diese Logos, wenn die Standardlogos nicht gut zum Design Ihrer App passen."
+    },
+    "heading_branding_questions": {
+      "default": "Fragen?"
+    },
+    "text_branding_questions_intro": {
+      "default": "Haben Sie Fragen zur Verwendung unserer Marke? Kontaktieren Sie uns."
     }
   }
 }

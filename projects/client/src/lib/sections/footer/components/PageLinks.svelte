@@ -39,11 +39,7 @@
     <span class="bold">{m.link_text_about()}</span>
   </Link>
 
-  <Link
-    href={UrlBuilder.og.branding()}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
+  <Link href={UrlBuilder.branding()}>
     <span class="bold">{m.link_text_branding()}</span>
   </Link>
 

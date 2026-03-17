@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Suivez vos amis, voyez ce que l'équipe regarde et découvrez vos favoris communs. Le cinéma est plus beau partagé."
+    },
+    "page_title_branding": {
+      "default": "Image de marque"
+    },
+    "heading_branding_requirements": {
+      "default": "Exigences relatives à l'image de marque"
+    },
+    "text_branding_req_1": {
+      "default": "Vous pouvez utiliser le nom et le logo Trakt pour faire référence à notre service, conformément à ces directives, comme on citerait un classique du cinéma."
+    },
+    "text_branding_req_2": {
+      "default": "Veuillez ne pas altérer, modifier, faire pivoter ou recolorer le logo de quelque manière que ce soit."
+    },
+    "text_branding_req_3": {
+      "default": "N'utilisez pas le logo comme faisant partie de votre propre logo, nom de marque ou service."
+    },
+    "text_branding_req_4": {
+      "default": "Maintenez un espace libre autour du logo égal à la hauteur du « T » de Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "N'utilisez pas le logo pour suggérer un parrainage, une approbation ou une affiliation avec Trakt."
+    },
+    "text_branding_req_6": {
+      "default": "Utilisez uniquement les versions approuvées du logo fournies ici ; ne les recréez pas et ne les modifiez pas."
+    },
+    "heading_branding_default_logos": {
+      "default": "Fond clair"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Utilisez ces logos Trakt pour identifier clairement que votre application est propulsée par Trakt. Merci de ne pas modifier les logos ou les couleurs."
+    },
+    "heading_branding_dark_background": {
+      "default": "Fond sombre"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Utilisez ces logos pour le mode sombre de votre application, parfait pour une ambiance cinéma."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Logos alternatifs"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Utilisez ces logos lorsque les versions par défaut ne s'intègrent pas bien au design de votre application."
+    },
+    "heading_branding_questions": {
+      "default": "Des questions ?"
+    },
+    "text_branding_questions_intro": {
+      "default": "Vous avez des questions sur l'utilisation de notre marque ? Contactez-nous."
     }
   }
 }

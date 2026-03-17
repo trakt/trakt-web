@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "友達をフォローしたり、運営チームの視聴リストを覗いたり。お気に入りを共有して、エンタメをもっと楽しみましょう。"
+    },
+    "page_title_branding": {
+      "default": "ブランディング"
+    },
+    "heading_branding_requirements": {
+      "default": "使用ガイドライン"
+    },
+    "text_branding_req_1": {
+      "default": "本ガイドラインに従い、Traktの名称とロゴを使用して当サービスに言及することができます。名作映画のように正しく引用しましょう。"
+    },
+    "text_branding_req_2": {
+      "default": "ロゴの改変、加工、回転、色の変更は一切行わないでください。"
+    },
+    "text_branding_req_3": {
+      "default": "ロゴをあなた自身のロゴ、ブランド名、またはサービスの一部として使用しないでください。"
+    },
+    "text_branding_req_4": {
+      "default": "ロゴの周囲には、Traktの「T」の高さと同じだけのクリアスペースを確保してください。"
+    },
+    "text_branding_req_5": {
+      "default": "Traktによる後援、承認、または提携を示唆するような形でロゴを使用しないでください。"
+    },
+    "text_branding_req_6": {
+      "default": "ここで提供されている承認済みのバージョンのみを使用し、独自に作り直したり改変したりしないでください。"
+    },
+    "heading_branding_default_logos": {
+      "default": "ライト背景用"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "アプリがTraktによって強化されていることを示すために、これらのロゴを使用してください。アニメの作画のように、色や形の変更は厳禁です。"
+    },
+    "heading_branding_dark_background": {
+      "default": "ダーク背景用"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "アプリのダークテーマに合わせて、これらのロゴを使用してください。映画館の照明のような落ち着いた背景に最適です。"
+    },
+    "heading_branding_alternative_logos": {
+      "default": "代替ロゴ"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "デフォルトのロゴがデザインに合わない場合は、こちらの代替ロゴをご検討ください。"
+    },
+    "heading_branding_questions": {
+      "default": "ご質問ですか？"
+    },
+    "text_branding_questions_intro": {
+      "default": "ブランドの使用についてご不明な点がありますか？ぜひお問い合わせください。"
     }
   }
 }

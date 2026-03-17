@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Volg vrienden, bekijk wat het team kijkt en ontdek gedeelde favorieten. Samen kijken is leuker."
+    },
+    "page_title_branding": {
+      "default": "Branding"
+    },
+    "heading_branding_requirements": {
+      "default": "Branding-vereisten"
+    },
+    "text_branding_req_1": {
+      "default": "Je mag de naam en het logo van Trakt gebruiken om naar onze service te verwijzen, in overeenstemming met deze richtlijnen."
+    },
+    "text_branding_req_2": {
+      "default": "Het logo mag op geen enkele wijze worden aangepast, gewijzigd, gedraaid of van kleur worden veranderd."
+    },
+    "text_branding_req_3": {
+      "default": "Gebruik het logo niet als onderdeel van je eigen logo, merknaam of service."
+    },
+    "text_branding_req_4": {
+      "default": "Houd een vrije ruimte rond het logo aan die gelijk is aan de hoogte van de 'T' in Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "Gebruik het logo niet om sponsoring, goedkeuring of gelieerdheid met Trakt te suggereren."
+    },
+    "text_branding_req_6": {
+      "default": "Gebruik alleen de goedgekeurde logo-versies die hier worden aangeboden; maak ze niet zelf na."
+    },
+    "heading_branding_default_logos": {
+      "default": "Lichte achtergrond"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Gebruik deze Trakt-logo's om duidelijk aan te geven dat je app wordt aangedreven door Trakt. Pas de logo's of kleuren niet aan."
+    },
+    "heading_branding_dark_background": {
+      "default": "Donkere achtergrond"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Gebruik deze logo's voor het donkere thema van je app, perfect voor een filmavond."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Alternatieve logo's"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Gebruik deze logo's wanneer de standaardlogo's niet goed passen bij het ontwerp van je app."
+    },
+    "heading_branding_questions": {
+      "default": "Vragen?"
+    },
+    "text_branding_questions_intro": {
+      "default": "Heb je vragen over het gebruik van ons merk? Neem contact op."
     }
   }
 }

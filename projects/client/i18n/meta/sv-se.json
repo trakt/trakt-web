@@ -2933,6 +2933,54 @@
     },
     "about_feature_description_community": {
       "default": "Följ vänner, se vad teamet tittar på och hitta gemensamma favoriter. Film är bäst tillsammans."
+    },
+    "page_title_branding": {
+      "default": "Varumärke"
+    },
+    "heading_branding_requirements": {
+      "default": "Riktlinjer för varumärket"
+    },
+    "text_branding_req_1": {
+      "default": "Du får använda Trakt-namnet och logotypen för att referera till vår tjänst, i enlighet med dessa riktlinjer."
+    },
+    "text_branding_req_2": {
+      "default": "Ändra, modifiera, rotera eller färga inte om logotypen på något sätt."
+    },
+    "text_branding_req_3": {
+      "default": "Använd inte logotypen som en del av din egen logotyp, varumärke eller tjänst."
+    },
+    "text_branding_req_4": {
+      "default": "Håll ett fritt utrymme runt logotypen som motsvarar höjden på 'T' i Trakt."
+    },
+    "text_branding_req_5": {
+      "default": "Använd inte logotypen för att antyda sponsring, stöd eller anslutning till Trakt."
+    },
+    "text_branding_req_6": {
+      "default": "Använd endast de godkända logotypversionerna som tillhandahålls här; återskapa eller modifiera dem inte."
+    },
+    "heading_branding_default_logos": {
+      "default": "Ljus bakgrund"
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Använd dessa Trakt-logotyper för att tydligt visa att din app drivs av Trakt. Vänligen ändra inte logotyperna eller färgerna."
+    },
+    "heading_branding_dark_background": {
+      "default": "Mörk bakgrund"
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Använd dessa logotyper i din apps mörka tema, perfekt för en mysig filmkväll."
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Alternativa logotyper"
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Använd dessa logotyper när standardlogotyperna inte passar din apps design."
+    },
+    "heading_branding_questions": {
+      "default": "Frågor?"
+    },
+    "text_branding_questions_intro": {
+      "default": "Har du frågor om hur du använder vårt varumärke? Hör av dig."
     }
   }
 }

@@ -8083,6 +8083,134 @@
         "android",
         "ios"
       ]
+    },
+    "page_title_branding": {
+      "default": "Branding",
+      "description": "Page title for the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "heading_branding_requirements": {
+      "default": "Branding Requirements",
+      "description": "Section heading for the Branding Requirements section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_branding_req_1": {
+      "default": "You may use the Trakt name and logo to refer to our service, in accordance with these guidelines.",
+      "description": "First branding requirement on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_branding_req_2": {
+      "default": "Do not alter, modify, rotate, or recolor the logo in any way.",
+      "description": "Second branding requirement on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_branding_req_3": {
+      "default": "Do not use the logo as part of your own logo, brand name, or service.",
+      "description": "Third branding requirement on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_branding_req_4": {
+      "default": "Maintain clear space around the logo equal to the height of the \"T\" in Trakt.",
+      "description": "Fourth branding requirement on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_branding_req_5": {
+      "default": "Do not use the logo to imply sponsorship, endorsement, or affiliation with Trakt.",
+      "description": "Fifth branding requirement on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_branding_req_6": {
+      "default": "Use only the approved logo versions provided here; do not recreate or modify them.",
+      "description": "Sixth branding requirement on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "heading_branding_default_logos": {
+      "default": "Light Background",
+      "description": "Section heading for the Light Background logos section on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_branding_default_logos_desc": {
+      "default": "Use these Trakt logos to clearly identify your app is powered by Trakt. Please don't alter the logos or colors.",
+      "description": "Description text under the Default Logos heading on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "heading_branding_dark_background": {
+      "default": "Dark Background",
+      "description": "Section heading for the Dark Background logos section on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_branding_dark_background_desc": {
+      "default": "Use these logos in your app's dark theme.",
+      "description": "Description text under the Dark Background heading on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "heading_branding_alternative_logos": {
+      "default": "Alternative Logos",
+      "description": "Section heading for the Alternative Logos section on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_branding_alt_logos_desc": {
+      "default": "Use these logos when the default logos don't work well with your app's design.",
+      "description": "Description text under the Alternative Logos heading on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "heading_branding_questions": {
+      "default": "Questions?",
+      "description": "Heading for the questions/contact section on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_branding_questions_intro": {
+      "default": "Have questions about using our brand? Reach out.",
+      "description": "Intro text for the questions/contact section on the Branding page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
