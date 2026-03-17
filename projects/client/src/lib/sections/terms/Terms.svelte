@@ -1,5 +1,6 @@
 <script lang="ts">
   import LegalPage from "$lib/components/legal/LegalPage.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import { COPYRIGHT_EMAIL, SUPPORT_EMAIL } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
@@ -63,7 +64,7 @@
       </li>
       <li>
         If you have questions about these Terms, please contact us at
-        <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>.
+        <Link href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</Link>.
       </li>
     </ul>
   </svelte:fragment>
@@ -133,7 +134,7 @@
         subscription begin anew with each renewal, and that Trakt owes you no
         obligations beyond each successive Subscription Term. You may cancel
         your subscription at any time by contacting
-        <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>.
+        <Link href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</Link>.
       </li>
     </ol>
   </div>
@@ -616,10 +617,10 @@
       on our Services infringes the copyright in your work, a notification of
       the alleged copyright infringement should be emailed to our Copyright
       Agent at:
-      <a href="mailto:{COPYRIGHT_EMAIL}">{COPYRIGHT_EMAIL}</a> (subject Line: "DMCA
-      Takedown Request"). To be effective, the notification must be in writing and
-      contain (a) a physical or electronic signature of a person authorized to act
-      on behalf of the owner of the copyrighted work that is allegedly infringed;
+      <Link href="mailto:{COPYRIGHT_EMAIL}">{COPYRIGHT_EMAIL}</Link> (subject Line:
+      "DMCA Takedown Request"). To be effective, the notification must be in writing
+      and contain (a) a physical or electronic signature of a person authorized to
+      act on behalf of the owner of the copyrighted work that is allegedly infringed;
       (b) identification of the copyrighted work claimed to have been infringed; (c)
       identification of the material that is claimed to be infringing, and information
       reasonably sufficient to permit us to locate the material; (d) information reasonably
@@ -748,10 +749,10 @@
         <b>Informal Dispute Resolution.</b> We want to address your concerns
         without the necessity of a formal legal case. Before filing a claim
         against Trakt, you agree to try to resolve the Dispute informally by
-        contacting <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>. Trakt
-        will contact you by email as part of a good faith effort to resolve the
-        Dispute informally. If a Dispute is not resolved within 30 days after
-        submission, you or Trakt may bring a formal proceeding.
+        contacting <Link href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</Link>.
+        Trakt will contact you by email as part of a good faith effort to
+        resolve the Dispute informally. If a Dispute is not resolved within 30
+        days after submission, you or Trakt may bring a formal proceeding.
       </li>
       <li>
         <b>Arbitration Agreement.</b> You and Trakt each agree to resolve any Disputes
@@ -804,8 +805,8 @@
     <p>
       You acknowledge that you have read and understand our Privacy Policy. As
       described in more detail in our
-      <a href={UrlBuilder.privacy()}>Privacy Policy</a>, Trakt may use your
-      contact information to communicate with you about your use of our
+      <Link href={UrlBuilder.privacy()}>Privacy Policy</Link>, Trakt may use
+      your contact information to communicate with you about your use of our
       Services. For example, we may send you service announcements or
       administrative communications by email or other means. We may also send
       you marketing communications in accordance with applicable law. While you
@@ -846,10 +847,12 @@
       immediately, which may result in the forfeiture and destruction of all
       information associated with your membership. If you wish to terminate your
       Account, you may do so at
-      <a href={UrlBuilder.settings.general()}>https://trakt.tv/settings</a> by clicking
-      "Delete Account". All provisions of the Terms of Use which by their nature should
-      survive termination shall survive termination, including, without limitation,
-      ownership provisions, warranty disclaimers, indemnity and limitations of liability.
+      <Link href={UrlBuilder.settings.general()}
+        >https://app.trakt.tv/settings/advanced</Link
+      > by clicking "Delete Account". All provisions of the Terms of Use which by
+      their nature should survive termination shall survive termination, including,
+      without limitation, ownership provisions, warranty disclaimers, indemnity and
+      limitations of liability.
     </p>
   </div>
 
@@ -876,7 +879,7 @@
       If you require assistance with your Records or if you wish to receive
       Records in paper format or to withdraw your consent to receiving
       electronic records from us, please contact us at
-      <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>. Agreements and
+      <Link href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</Link>. Agreements and
       transactions executed prior to this request will remain valid and
       enforceable.
     </p>
