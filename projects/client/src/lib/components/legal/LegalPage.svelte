@@ -28,56 +28,27 @@
   @use "$style/scss/mixins/index" as *;
 
   .legal-page {
+    --width-max-page: var(--ni-920);
+    --number-width: var(--ni-32);
+
     margin: 0 auto;
-    max-width: var(--ni-920);
+    max-width: var(--width-max-page);
     padding: var(--gap-s) var(--gap-l);
     color: var(--color-text-primary);
     line-height: 1.7;
-    font-size: var(--ni-14);
-  }
-
-  .legal-header {
-    margin-bottom: var(--gap-xl);
-
-    h1 {
-      font-size: var(--ni-28);
-      font-weight: 700;
-      margin: 0 0 var(--gap-xs);
-
-      @include for-mobile {
-        font-size: var(--ni-24);
-      }
-    }
-
-    .last-updated {
-      color: var(--color-text-secondary);
-      font-size: var(--ni-14);
-      margin: 0;
-    }
-  }
-
-  .legal-summary {
-    background-color: var(--color-border);
-    border-radius: var(--ni-8);
-    padding: var(--gap-l);
-    margin: var(--gap-xl) 0;
-
-    @include for-mobile {
-      padding: var(--gap-m);
-    }
+    font-size: var(--font-size-text);
 
     :global(h2) {
-      font-size: var(--ni-20);
-      font-weight: 700;
       margin: 0 0 var(--gap-s);
     }
 
     :global(p) {
-      margin: 0 0 var(--gap-s);
+      margin: 0 0 var(--gap-m);
     }
 
-    :global(ul) {
-      margin: 0;
+    :global(ul),
+    :global(ol) {
+      margin: 0 0 var(--gap-m);
       padding-left: var(--gap-l);
 
       :global(li) {
@@ -86,71 +57,63 @@
     }
   }
 
-  .legal-content {
-    margin-bottom: var(--gap-l);
+  .legal-header {
+    margin-bottom: var(--gap-xl);
 
-    :global(> p) {
-      margin: 0 0 var(--gap-m);
+    h1 {
+      margin: 0 0 var(--gap-xs);
     }
 
-    :global(a) {
-      color: var(--color-link-active);
-      text-decoration: underline;
-
-      @include for-mouse {
-        &:hover,
-        &:focus-visible {
-          opacity: 0.8;
-        }
-      }
+    .last-updated {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-text);
+      margin: 0;
     }
   }
 
-  // Target the sections inside the default slot
-  .legal-content :global(.legal-section) {
-    margin-bottom: var(--gap-xl);
+  .legal-summary {
+    background-color: var(--color-card-background);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-base);
+    border-radius: var(--border-radius-s);
+    padding: var(--gap-l);
+    margin: var(--gap-xl) 0;
 
-    :global(h2) {
-      display: flex;
-      align-items: center;
-      gap: var(--gap-s);
-      font-size: var(--ni-18);
-      font-weight: 700;
-      margin: 0 0 var(--gap-m);
-      padding-left: calc(var(--ni-32) + var(--gap-s));
-      position: relative;
+    @include for-mobile {
+      padding: var(--gap-m);
+    }
+  }
 
-      @include for-mobile {
-        font-size: var(--ni-16);
+  .legal-content {
+    margin-bottom: var(--gap-l);
+
+    // Target the sections inside the default slot
+    :global(.legal-section) {
+      margin-bottom: var(--gap-xl);
+
+      :global(h2) {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-s);
+        margin: 0 0 var(--gap-m);
+        padding-left: calc(var(--number-width) + var(--gap-s));
+        position: relative;
       }
-    }
 
-    :global(.number) {
-      position: absolute;
-      left: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: var(--ni-32);
-      height: var(--ni-32);
-      border-radius: 50%;
-      background-color: var(--color-border);
-      font-size: var(--ni-14);
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-
-    :global(p) {
-      margin: 0 0 var(--gap-m);
-    }
-
-    :global(ol) {
-      margin: 0 0 var(--gap-m);
-      padding-left: var(--gap-l);
-
-      :global(li) {
-        margin-bottom: var(--gap-s);
-        padding-left: var(--gap-xxs);
+      :global(.number) {
+        position: absolute;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--number-width);
+        height: var(--number-width);
+        border-radius: 50%;
+        background-color: var(--color-card-background);
+        border: 1px solid var(--color-border);
+        font-size: var(--font-size-text);
+        font-weight: 600;
+        flex-shrink: 0;
       }
     }
   }
