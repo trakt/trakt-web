@@ -5,7 +5,7 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import PersonalListsPaginated from "$lib/sections/lists/user/PersonalListsPaginated.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import type { PageProps } from "./$types";
 
   const { params }: PageProps = $props();

@@ -4,7 +4,7 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import VipManage from "$lib/sections/vip/VipManage.svelte";
   import VipSubscribe from "$lib/sections/vip/VipSubscribe.svelte";
-  import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 </script>
 
 <TraktPage audience="authenticated" image={DEFAULT_SHARE_COVER} title="VIP">

@@ -3,7 +3,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Redirect from "../../components/router/Redirect.svelte";
   import Footer from "../footer/Footer.svelte";

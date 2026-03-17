@@ -5,7 +5,7 @@
   import UserListPaginatedList from "$lib/sections/lists/user/UserListPaginatedList.svelte";
   import { useUserListSummary } from "$lib/sections/lists/user/useUserListSummary.ts";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import type { PageProps } from "./$types";
   import { mapToMediaType } from "./_internal/mapToMediaType";
 

@@ -1,4 +1,4 @@
-import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
+import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/assets.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { PersonResponse } from '@trakt/api';

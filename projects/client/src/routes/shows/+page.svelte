@@ -9,7 +9,7 @@
   import TrendingList from "$lib/sections/lists/trending/TrendingList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
 
-  import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
 
   const type = "show";
 </script>

@@ -12,7 +12,7 @@
   import { usePopularList } from "$lib/sections/lists/popular/usePopularList";
   import { useTrendingList } from "$lib/sections/lists/trending/useTrendingList";
   import { shuffle } from "$lib/utils/array/shuffle";
-  import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import DownloadIcon from "./DownloadIcon.svelte";
 
   const total = $derived(parseInt(page.url.searchParams.get("limit") ?? "70"));

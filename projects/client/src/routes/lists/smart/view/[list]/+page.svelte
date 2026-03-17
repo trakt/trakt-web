@@ -6,10 +6,8 @@
   import SmartListPaginatedRenderer from "$lib/sections/lists/smart/SmartListPaginatedRenderer.svelte";
   import { useSmartLists } from "$lib/sections/lists/smart/useSmartLists.ts";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import {
-    DEFAULT_SHARE_COVER,
-    UPPER_SMART_LIST_LIMIT,
-  } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
+  import { UPPER_SMART_LIST_LIMIT } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import type { PageProps } from "./$types";
 

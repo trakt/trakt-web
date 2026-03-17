@@ -7,7 +7,7 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
   import Profile from "$lib/sections/profile/Profile.svelte";
-  import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import type { PageProps } from "./$types";
   import { useProfile } from "./useProfile";
 

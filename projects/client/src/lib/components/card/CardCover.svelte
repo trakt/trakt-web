@@ -1,6 +1,6 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { PLACEHOLDERS } from "$lib/utils/constants";
+  import { PLACEHOLDERS } from "$lib/utils/assets";
   import { isImageComplete } from "$lib/utils/image/isImageComplete";
   import { checksum } from "$lib/utils/string/checksum";
   import { lineClamp } from "../text/lineClamp";

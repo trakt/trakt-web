@@ -14,7 +14,7 @@
   import {
     EPISODE_COVER_PLACEHOLDER,
     MEDIA_POSTER_PLACEHOLDER,
-  } from "$lib/utils/constants";
+  } from "$lib/utils/assets";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";

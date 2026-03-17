@@ -5,7 +5,7 @@
 
   import AnticipatedPaginatedList from "$lib/sections/lists/anticipated/AnticipatedPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
 </script>
 
 <TraktPage
