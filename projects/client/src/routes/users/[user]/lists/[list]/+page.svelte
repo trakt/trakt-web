@@ -3,16 +3,16 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import UserListPaginatedList from "$lib/sections/lists/user/UserListPaginatedList.svelte";
+  import { useUserListSummary } from "$lib/sections/lists/user/useUserListSummary.ts";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import type { PageProps } from "./$types";
   import { mapToMediaType } from "./_internal/mapToMediaType";
-  import { userListSummary } from "./userListSummary.ts";
 
   const { params }: PageProps = $props();
 
   const { list } = $derived(
-    userListSummary({
+    useUserListSummary({
       userId: params.user,
       listId: params.list,
     }),

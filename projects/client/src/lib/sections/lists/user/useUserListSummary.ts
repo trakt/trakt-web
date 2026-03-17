@@ -9,7 +9,7 @@ type UseUserListSummaryProps = {
   listId: string;
 };
 
-export function userListSummary(props: UseUserListSummaryProps) {
+export function useUserListSummary(props: UseUserListSummaryProps) {
   const query = useQuery(userListSummaryQuery(props));
 
   return {

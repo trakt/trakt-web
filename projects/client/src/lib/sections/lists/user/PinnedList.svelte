@@ -1,8 +1,7 @@
 <script lang="ts">
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
-  import { useQuery } from "$lib/features/query/useQuery.ts";
-  import { userListSummaryQuery } from "$lib/requests/queries/users/userListSummaryQuery.ts";
   import UserList from "./UserList.svelte";
+  import { useUserListSummary } from "./useUserListSummary.ts";
 
   type PinnedListProps = {
     userId: string;
@@ -10,14 +9,19 @@
     mode?: DiscoverMode;
   };
 
-  const { userId, listId, mode }: PinnedListProps = $props();
+  const { userId, listId, mode = "media" }: PinnedListProps = $props();
 
-  const query = useQuery(userListSummaryQuery({ userId, listId }));
+  const { list, isLoading } = $derived(
+    useUserListSummary({
+      userId,
+      listId,
+    }),
+  );
 </script>
 
-{#if $query && $query.data}
+{#if !$isLoading && $list}
   <div class="trakt-pinned-list">
-    <UserList list={$query.data} type={mode} />
+    <UserList list={$list} type={mode} />
   </div>
 {/if}
 
