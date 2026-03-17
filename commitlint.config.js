@@ -31,6 +31,7 @@ module.exports = {
       'always',
       [
         'a11y',
+        'about',
         'activity',
         'analytics',
         'anticipated',
