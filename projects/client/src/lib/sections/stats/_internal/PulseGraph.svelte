@@ -1,29 +1,21 @@
 <script lang="ts">
-  import type { PulseGraphData } from "./useWeeklyPulse.ts";
+  import type { PulseGraphData } from "./useWeeklyPulse";
 
-  type GraphType =
-    | "dailyBars"
-    | "weekTrend"
-    | "watchClock"
-    | "showsMovies"
-    | "bingeTimeline";
+  type GraphType = "dailyBars" | "weekTrend" | "watchClock" | "showsMovies";
 
-  const { type, data }: { type: GraphType; data: PulseGraphData } = $props();
+  const { kind, data }: { kind: GraphType; data: PulseGraphData } = $props();
 
   const TITLES: Record<GraphType, string> = {
     dailyBars: "Daily Activity",
     weekTrend: "4-Week Trend",
     watchClock: "Peak Hours",
     showsMovies: "Shows vs Movies",
-    bingeTimeline: "Week Timeline",
   };
 
-  const title = $derived(TITLES[type]);
+  const title = $derived(TITLES[kind]);
 
   // Daily bars derived data
-  const dailyMax = $derived(
-    Math.max(...data.dailyBars.thisWeek, 1),
-  );
+  const dailyMax = $derived(Math.max(...data.dailyBars.thisWeek, 1));
 
   // Week trend SVG coordinates
   const trendPoints = $derived.by(() => {
@@ -72,10 +64,11 @@
 <div class="trakt-pulse-graph">
   <p class="trakt-pulse-graph-title">{title}</p>
 
-  {#if type === "dailyBars"}
+  {#if kind ==="dailyBars"}
     <div class="graph-daily-bars">
-      {#each data.dailyBars.dayLabels as dayLabel, i}
-        {@const twHeight = dailyMax > 0 ? (data.dailyBars.thisWeek[i]! / dailyMax) * 48 : 0}
+      {#each data.dailyBars.dayLabels as dayLabel, i (i)}
+        {@const twHeight =
+          dailyMax > 0 ? ((data.dailyBars.thisWeek[i] ?? 0) / dailyMax) * 48 : 0}
         {@const isToday = i === data.dailyBars.todayIndex}
         <div class="daily-bar-col">
           <div class="daily-bar-track">
@@ -89,18 +82,12 @@
         </div>
       {/each}
     </div>
-  {:else if type === "weekTrend"}
+  {:else if kind ==="weekTrend"}
     <div class="graph-week-trend">
       <svg viewBox="0 0 240 96" class="trend-svg">
-        <polygon
-          points={trendPolygon}
-          class="trend-area"
-        />
-        <polyline
-          points={trendPolyline}
-          class="trend-line"
-        />
-        {#each trendPoints as point, i}
+        <polygon points={trendPolygon} class="trend-area" />
+        <polyline points={trendPolyline} class="trend-line" />
+        {#each trendPoints as point, i (i)}
           {@const isLast = i === trendPoints.length - 1}
           <circle
             cx={point.x}
@@ -110,23 +97,21 @@
             class:trend-point-current={isLast}
           />
           {#if isLast}
-            <text
-              x={point.x}
-              y={point.y - 8}
-              class="trend-value"
-            >{point.plays}</text>
+            <text x={point.x} y={point.y - 8} class="trend-value"
+              >{point.plays}</text
+            >
           {/if}
         {/each}
       </svg>
       <div class="trend-labels">
-        {#each trendPoints as point}
+        {#each trendPoints as point (point.label)}
           <span class="trend-label">{point.label}</span>
         {/each}
       </div>
     </div>
-  {:else if type === "watchClock"}
+  {:else if kind ==="watchClock"}
     <div class="graph-watch-clock">
-      {#each data.watchClock.buckets as bucket}
+      {#each data.watchClock.buckets as bucket (bucket.label)}
         <div class="clock-row">
           <span class="clock-label">{bucket.label}</span>
           <div class="clock-bar-track">
@@ -139,7 +124,7 @@
         </div>
       {/each}
     </div>
-  {:else if type === "showsMovies"}
+  {:else if kind ==="showsMovies"}
     <div class="graph-shows-movies">
       <div class="sm-bar-track">
         <div class="sm-bar-shows" style:width="{showsPct}%"></div>
@@ -148,32 +133,14 @@
       <div class="sm-legends">
         <div class="sm-legend">
           <span class="sm-dot sm-dot-shows"></span>
-          <span class="sm-legend-text">{data.showsMovies.episodes} Episodes</span>
+          <span class="sm-legend-text"
+            >{data.showsMovies.episodes} Episodes</span
+          >
         </div>
         <div class="sm-legend">
           <span class="sm-dot sm-dot-movies"></span>
           <span class="sm-legend-text">{data.showsMovies.movies} Movies</span>
         </div>
-      </div>
-    </div>
-  {:else if type === "bingeTimeline"}
-    <div class="graph-binge-timeline">
-      <div class="binge-track">
-        <div class="binge-line"></div>
-        {#each data.bingeTimeline.days as day}
-          {@const size = day.count > 0 ? Math.max(8, (day.count / data.bingeTimeline.maxCount) * 32) : 4}
-          {@const opacity = day.count > 0 ? Math.max(0.4, day.count / data.bingeTimeline.maxCount) : 0.2}
-          <div class="binge-node">
-            <div
-              class="binge-dot"
-              class:binge-dot-empty={day.count === 0}
-              style:width="{size}px"
-              style:height="{size}px"
-              style:opacity={opacity}
-            ></div>
-            <span class="binge-label">{day.label}</span>
-          </div>
-        {/each}
       </div>
     </div>
   {/if}
@@ -220,24 +187,24 @@
   .daily-bar-track {
     position: relative;
     width: 100%;
-    height: 48px;
+    height: var(--ni-48);
     display: flex;
     align-items: flex-end;
     justify-content: center;
   }
 
-
   .daily-bar-fill {
     position: relative;
     width: 70%;
     background: var(--purple-500);
-    border-radius: 2px;
+    border-radius: var(--ni-2);
     min-height: 1px;
     z-index: 1;
 
     &.is-today {
       background: var(--purple-400);
-      box-shadow: 0 0 6px color-mix(in srgb, var(--purple-400) 40%, transparent);
+      box-shadow: 0 0 var(--ni-6)
+        color-mix(in srgb, var(--purple-400) 40%, transparent);
     }
   }
 
@@ -284,7 +251,7 @@
 
   .trend-value {
     fill: var(--shade-400);
-    font-size: 10px;
+    font-size: var(--ni-10);
     text-anchor: middle;
     font-weight: 600;
   }
@@ -318,30 +285,30 @@
   .clock-label {
     font-size: var(--ni-11);
     color: var(--shade-400);
-    width: 72px;
+    width: var(--ni-72);
     flex-shrink: 0;
     text-align: right;
   }
 
   .clock-bar-track {
     flex: 1;
-    height: 6px;
+    height: var(--ni-6);
     background: var(--shade-950);
-    border-radius: 3px;
+    border-radius: var(--ni-4);
     overflow: hidden;
   }
 
   .clock-bar-fill {
     height: 100%;
     background: var(--purple-500);
-    border-radius: 3px;
+    border-radius: var(--ni-4);
     min-width: 2px;
   }
 
   .clock-count {
     font-size: var(--ni-11);
     color: var(--shade-600);
-    width: 28px;
+    width: var(--ni-28);
     text-align: right;
     flex-shrink: 0;
   }
@@ -357,8 +324,8 @@
 
   .sm-bar-track {
     display: flex;
-    height: 8px;
-    border-radius: 4px;
+    height: var(--ni-8);
+    border-radius: var(--ni-4);
     overflow: hidden;
   }
 
@@ -384,8 +351,8 @@
   }
 
   .sm-dot {
-    width: 8px;
-    height: 8px;
+    width: var(--ni-8);
+    height: var(--ni-8);
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -401,55 +368,5 @@
   .sm-legend-text {
     font-size: var(--ni-11);
     color: var(--shade-400);
-  }
-
-  /* ── Binge Timeline ─────────────────────────────────── */
-  .graph-binge-timeline {
-    display: flex;
-    flex: 1;
-    align-items: center;
-  }
-
-  .binge-track {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    position: relative;
-  }
-
-  .binge-line {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--shade-900);
-    transform: translateY(calc(-1 * var(--ni-8)));
-  }
-
-  .binge-node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--ni-4);
-    z-index: 1;
-    flex: 1;
-  }
-
-  .binge-dot {
-    border-radius: 50%;
-    background: var(--purple-500);
-    flex-shrink: 0;
-  }
-
-  .binge-dot-empty {
-    background: var(--shade-900);
-  }
-
-  .binge-label {
-    font-size: var(--ni-10);
-    color: var(--shade-600);
-    line-height: 1;
   }
 </style>

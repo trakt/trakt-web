@@ -1,15 +1,9 @@
 import type { MovieActivityHistory } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
-import {
-  movieActivityHistoryQuery,
-} from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import type { ShowActivityHistory } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
-import {
-  showActivityHistoryQuery,
-} from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
-import { useMonthInReview } from '$lib/sections/banner/month-in-review/_internal/useMonthInReview.ts';
+import { languageTag } from '$lib/features/i18n/index.ts';
 import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber.ts';
 import { combineLatest, map, type Observable } from 'rxjs';
-import { usePaginatedListQuery } from '../../lists/stores/usePaginatedListQuery.ts';
+import { useActivityHistory } from './activityHistoryParams.ts';
 
 export type PulseStat = {
   key: string;
@@ -23,13 +17,11 @@ export type PulseGraphType =
   | 'dailyBars'
   | 'weekTrend'
   | 'watchClock'
-  | 'showsMovies'
-  | 'bingeTimeline';
+  | 'showsMovies';
 
 export type PulseGraphData = {
   dailyBars: {
     thisWeek: number[];
-    lastWeek: number[];
     dayLabels: string[];
     todayIndex: number;
   };
@@ -43,10 +35,6 @@ export type PulseGraphData = {
     episodes: number;
     movies: number;
   };
-  bingeTimeline: {
-    days: { label: string; count: number }[];
-    maxCount: number;
-  };
 };
 
 type UseWeeklyPulseProps = {
@@ -54,8 +42,6 @@ type UseWeeklyPulseProps = {
 };
 
 type DateRange = { start: Date; end: Date };
-
-const HISTORY_LIMIT = 1000;
 
 const DAY_NAMES = [
   'Sunday',
@@ -67,11 +53,21 @@ const DAY_NAMES = [
   'Saturday',
 ];
 
+const DAY_LABELS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+
 function getDateRange(startDaysAgo: number, endDaysAgo: number): DateRange {
   const now = new Date();
   return {
-    start: new Date(now.getFullYear(), now.getMonth(), now.getDate() - startDaysAgo),
-    end: new Date(now.getFullYear(), now.getMonth(), now.getDate() - endDaysAgo + 1),
+    start: new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() - startDaysAgo,
+    ),
+    end: new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() - endDaysAgo + 1,
+    ),
   };
 }
 
@@ -79,7 +75,9 @@ function filterEntries<T extends { watchedAt: Date }>(
   entries: T[],
   range: DateRange,
 ): T[] {
-  return entries.filter((e) => e.watchedAt >= range.start && e.watchedAt < range.end);
+  return entries.filter((e) =>
+    e.watchedAt >= range.start && e.watchedAt < range.end
+  );
 }
 
 function sumHours(
@@ -142,10 +140,10 @@ function maxPlaysInSingleDay(dates: Date[]): number {
 }
 
 function fmt(n: number): string {
-  return toHumanNumber(n, 'en');
+  return toHumanNumber(n, languageTag());
 }
 
-function delta(thisWeek: number, lastWeek: number): number {
+function computeDelta(thisWeek: number, lastWeek: number): number {
   return thisWeek - lastWeek;
 }
 
@@ -222,12 +220,20 @@ function pickGraph(graphData: PulseGraphData): PulseGraphType | null {
   const maxWeek = Math.max(...weekPlays);
   const minWeek = Math.min(...weekPlays);
   if (maxWeek > 0 && (maxWeek - minWeek) / maxWeek > 0.25) {
-    candidates.push({ type: 'weekTrend', score: (maxWeek - minWeek) / maxWeek * 10 });
+    candidates.push({
+      type: 'weekTrend',
+      score: (maxWeek - minWeek) / maxWeek * 10,
+    });
   }
 
   // watchClock: compelling if a clear peak (one bucket > 40% of total)
-  const clockTotal = graphData.watchClock.buckets.reduce((s, b) => s + b.count, 0);
-  const clockPeak = Math.max(...graphData.watchClock.buckets.map((b) => b.count));
+  const clockTotal = graphData.watchClock.buckets.reduce(
+    (s, b) => s + b.count,
+    0,
+  );
+  const clockPeak = Math.max(
+    ...graphData.watchClock.buckets.map((b) => b.count),
+  );
   if (clockTotal > 0 && clockPeak / clockTotal > 0.4) {
     candidates.push({ type: 'watchClock', score: clockPeak / clockTotal * 10 });
   }
@@ -235,35 +241,39 @@ function pickGraph(graphData: PulseGraphData): PulseGraphType | null {
   // showsMovies: only if both > 0
   const { episodes, movies: movieCount } = graphData.showsMovies;
   if (episodes > 0 && movieCount > 0) {
-    const balance = Math.min(episodes, movieCount) / Math.max(episodes, movieCount);
+    const balance = Math.min(episodes, movieCount) /
+      Math.max(episodes, movieCount);
     candidates.push({ type: 'showsMovies', score: balance * 10 });
   }
-
-  // bingeTimeline: skip (redundant with dailyBars)
 
   if (candidates.length === 0) return null;
   candidates.sort((a, b) => b.score - a.score);
   return candidates[0]!.type;
 }
 
-function dedup(candidates: PulseStat[]): PulseStat[] {
-  const byKey = new Map(candidates.map((c) => [c.key, c]));
-
-  const plays = byKey.get('totalPlays');
-  const episodes = byKey.get('episodes');
-  const moviesItem = byKey.get('movies');
+// Dedup uses raw counts to avoid compact notation collisions (1000 and 1040 both → "1K")
+function dedup(
+  candidates: PulseStat[],
+  rawCounts: Map<string, number>,
+): PulseStat[] {
+  const playsRaw = rawCounts.get('totalPlays') ?? 0;
+  const episodesRaw = rawCounts.get('episodes') ?? 0;
+  const moviesRaw = rawCounts.get('movies') ?? 0;
 
   // If plays == episodes (no movies), drop episodes
-  if (plays && episodes && plays.value === episodes.value) {
+  if (playsRaw === episodesRaw && playsRaw > 0) {
     candidates = candidates.filter((c) => c.key !== 'episodes');
   }
   // If plays == movies (no episodes), drop movies
-  if (plays && moviesItem && plays.value === moviesItem.value) {
+  if (playsRaw === moviesRaw && playsRaw > 0) {
     candidates = candidates.filter((c) => c.key !== 'movies');
   }
-  // If movies == 0 and not already removed, drop
-  if (moviesItem && moviesItem.value === '0' && moviesItem.delta === 0) {
-    candidates = candidates.filter((c) => c.key !== 'movies');
+  // If movies == 0 with no change, not interesting
+  if (moviesRaw === 0) {
+    const moviesItem = candidates.find((c) => c.key === 'movies');
+    if (moviesItem && moviesItem.delta === 0) {
+      candidates = candidates.filter((c) => c.key !== 'movies');
+    }
   }
 
   return candidates;
@@ -275,49 +285,15 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
   selectedGraph: Observable<PulseGraphType | null>;
   isLoading: Observable<boolean>;
 } {
-  // Cache-aligned params — identical to useStreak.ts:88-117
-  const now = new Date();
-  const startDate = new Date(
-    Date.UTC(
-      now.getUTCFullYear() - 1,
-      now.getUTCMonth(),
-      now.getUTCDate(),
-    ),
-  );
-  const endDate = new Date(
-    Date.UTC(
-      now.getUTCFullYear(),
-      now.getUTCMonth(),
-      now.getUTCDate() + 1,
-    ),
-  );
-
-  const params = {
-    limit: HISTORY_LIMIT,
+  const { movies, shows, isLoadingMovies, isLoadingShows } = useActivityHistory(
     slug,
-    startDate,
-    endDate,
-  };
-
-  const { list: movies, isLoading: isLoadingMovies } = usePaginatedListQuery(
-    movieActivityHistoryQuery(params),
   );
-  const { list: shows, isLoading: isLoadingShows } = usePaginatedListQuery(
-    showActivityHistoryQuery(params),
-  );
-
-  // Cache-aligned params — identical to StatChips.svelte:22-28
-  const { review, isLoading: isLoadingReview } = useMonthInReview({
-    slug,
-    month: now.getUTCMonth() + 1,
-    year: now.getUTCFullYear(),
-  });
 
   const thisWeekRange = getDateRange(6, 0);
   const lastWeekRange = getDateRange(13, 7);
 
-  const stats = combineLatest([movies, shows, review]).pipe(
-    map(([$movies, $shows, $review]) => {
+  const stats = combineLatest([movies, shows]).pipe(
+    map(([$movies, $shows]) => {
       const twMovies = filterEntries($movies, thisWeekRange);
       const lwMovies = filterEntries($movies, lastWeekRange);
       const twShows = filterEntries($shows, thisWeekRange);
@@ -346,36 +322,43 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
       const twBingeMax = maxPlaysInSingleDay(twAllDates);
       const lwBingeMax = maxPlaysInSingleDay(lwAllDates);
 
+      // Track raw counts for dedup comparison (avoids compact notation collisions)
+      const rawCounts = new Map<string, number>([
+        ['totalPlays', twAllDates.length],
+        ['episodes', twShows.length],
+        ['movies', twMovies.length],
+      ]);
+
       const candidates: PulseStat[] = [
         {
           key: 'totalPlays',
           value: fmt(twAllDates.length),
           label: 'Plays',
-          delta: delta(twAllDates.length, lwAllDates.length),
+          delta: computeDelta(twAllDates.length, lwAllDates.length),
         },
         {
           key: 'episodes',
           value: fmt(twShows.length),
           label: 'Episodes',
-          delta: delta(twShows.length, lwShows.length),
+          delta: computeDelta(twShows.length, lwShows.length),
         },
         {
           key: 'movies',
           value: fmt(twMovies.length),
           label: 'Movies',
-          delta: delta(twMovies.length, lwMovies.length),
+          delta: computeDelta(twMovies.length, lwMovies.length),
         },
         {
           key: 'shows',
           value: fmt(twShowSlugs.size),
           label: 'Shows',
-          delta: delta(twShowSlugs.size, lwShowSlugs.size),
+          delta: computeDelta(twShowSlugs.size, lwShowSlugs.size),
         },
         {
           key: 'activeDays',
           value: fmt(countUniqueDays(twAllDates)),
           label: 'Active Days',
-          delta: delta(
+          delta: computeDelta(
             countUniqueDays(twAllDates),
             countUniqueDays(lwAllDates),
           ),
@@ -393,42 +376,18 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
           key: 'longestBinge',
           value: fmt(twBingeMax),
           label: 'Best Day',
-          delta: delta(twBingeMax, lwBingeMax),
+          delta: computeDelta(twBingeMax, lwBingeMax),
         },
         {
           key: 'hours',
           value: fmt(twHours),
           label: 'Hours',
-          delta: delta(twHours, lwHours),
+          delta: computeDelta(twHours, lwHours),
         },
       ];
 
-      // Month-in-review stats (no deltas — API lacks date range filtering)
-      if ($review) {
-        candidates.push(
-          {
-            key: 'ratings',
-            value: fmt($review.ratingsCount),
-            label: 'Ratings',
-            delta: null,
-          },
-          {
-            key: 'comments',
-            value: fmt($review.commentsCount),
-            label: 'Comments',
-            delta: null,
-          },
-          {
-            key: 'lists',
-            value: fmt($review.listsCount),
-            label: 'List Items',
-            delta: null,
-          },
-        );
-      }
-
       // Sort: abs(delta) descending, zero-value+zero-delta to back,
-      // null-delta (month-in-review) after history stats
+      // null-delta after history stats
       const sorted = candidates.sort((a, b) => {
         const aIsZero = a.value === '0' && a.delta === 0;
         const bIsZero = b.value === '0' && b.delta === 0;
@@ -441,60 +400,32 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         return Math.abs(b.delta ?? 0) - Math.abs(a.delta ?? 0);
       });
 
-      return dedup(sorted);
+      return dedup(sorted, rawCounts);
     }),
   );
-
-  const DAY_LABELS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-  const DAY_LABELS_FULL = [
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-    'Sun',
-  ];
 
   const graphData = combineLatest([movies, shows]).pipe(
     map(([$movies, $shows]) => {
       const twMovies = filterEntries($movies, thisWeekRange);
-      const lwMovies = filterEntries($movies, lastWeekRange);
       const twShows = filterEntries($shows, thisWeekRange);
-      const lwShows = filterEntries($shows, lastWeekRange);
 
       const twAllDates = [
         ...twMovies.map((m) => m.watchedAt),
         ...twShows.map((s) => s.watchedAt),
       ];
-      const lwAllDates = [
-        ...lwMovies.map((m) => m.watchedAt),
-        ...lwShows.map((s) => s.watchedAt),
-      ];
 
       // All dates for the last 4 weeks
       const fourWeekRange = getDateRange(27, 0);
-      const allRecentMovieDates = filterEntries($movies, fourWeekRange)
-        .map((m) => m.watchedAt);
-      const allRecentShowDates = filterEntries($shows, fourWeekRange)
-        .map((s) => s.watchedAt);
-      const allRecentDates = [...allRecentMovieDates, ...allRecentShowDates];
+      const allRecentDates = [
+        ...filterEntries($movies, fourWeekRange).map((m) => m.watchedAt),
+        ...filterEntries($shows, fourWeekRange).map((s) => s.watchedAt),
+      ];
 
       const todayDow = (new Date().getDay() + 6) % 7;
 
-      const thisWeekByDay = countByWeekday(twAllDates);
-      const lastWeekByDay = countByWeekday(lwAllDates);
-
-      const bingeTimeline = thisWeekByDay.map((count, i) => ({
-        label: DAY_LABELS_FULL[i]!,
-        count,
-      }));
-      const maxCount = Math.max(...thisWeekByDay, 1);
-
       return {
         dailyBars: {
-          thisWeek: thisWeekByDay,
-          lastWeek: lastWeekByDay,
+          thisWeek: countByWeekday(twAllDates),
           dayLabels: DAY_LABELS,
           todayIndex: todayDow,
         },
@@ -508,10 +439,6 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
           episodes: twShows.length,
           movies: twMovies.length,
         },
-        bingeTimeline: {
-          days: bingeTimeline,
-          maxCount,
-        },
       } satisfies PulseGraphData;
     }),
   );
@@ -520,12 +447,8 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
     map(($graphData) => pickGraph($graphData)),
   );
 
-  const isLoading = combineLatest([
-    isLoadingMovies,
-    isLoadingShows,
-    isLoadingReview,
-  ]).pipe(
-    map(([$m, $s, $r]) => $m || $s || $r),
+  const isLoading = combineLatest([isLoadingMovies, isLoadingShows]).pipe(
+    map(([$m, $s]) => $m || $s),
   );
 
   return { stats, graphData, selectedGraph, isLoading };

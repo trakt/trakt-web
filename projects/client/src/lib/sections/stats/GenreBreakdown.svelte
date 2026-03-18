@@ -16,7 +16,7 @@
 
   const midDate = $derived.by(() => {
     if (!$data) return "";
-    const mid = $data.days[6];
+    const mid = $data.days[7];
     if (!mid) return "";
     return mid.date.toLocaleString(languageTag(), { month: "short", day: "numeric" });
   });
@@ -42,12 +42,12 @@
     <div class="trakt-genre-body">
       <div class="trakt-genre-chart-area">
         <div class="trakt-genre-bars">
-          {#each $data!.days as day}
+          {#each $data!.days as day, di (di)}
             <div class="trakt-genre-bar-col">
               <div class="trakt-genre-bar" style:height="{$data!.maxDayTotal > 0 ? (day.total / $data!.maxDayTotal) * 100 : 0}%">
-                {#each [...day.segments].reverse() as segment}
+                {#each [...day.segments].reverse() as segment, ri (ri)}
                   {#if segment.count > 0}
-                    {@const segIndex = day.segments.indexOf(segment)}
+                    {@const segIndex = day.segments.length - 1 - ri}
                     {@const legendEntry = $data!.legend[segIndex]}
                     <div
                       class="trakt-genre-segment"
@@ -69,7 +69,7 @@
       </div>
 
       <div class="trakt-genre-legend">
-        {#each $data!.legend as entry}
+        {#each $data!.legend as entry (entry.genre)}
           <div class="trakt-genre-legend-item">
             <span class="trakt-genre-legend-dot" style:background-color={entry.color}></span>
             <span class="trakt-genre-legend-label">{entry.label}</span>
@@ -156,7 +156,7 @@
   }
 
   .trakt-genre-segment {
-    min-height: 2px;
+    min-height: var(--ni-2);
   }
 
   .trakt-genre-date-labels {
@@ -176,7 +176,7 @@
     gap: var(--ni-8);
     justify-content: center;
     flex-shrink: 0;
-    min-width: 120px;
+    min-width: var(--ni-120);
   }
 
   .trakt-genre-legend-item {

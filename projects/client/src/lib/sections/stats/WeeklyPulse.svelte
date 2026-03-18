@@ -1,14 +1,11 @@
 <script lang="ts">
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
-  import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
-  import RatingsIcon from "$lib/components/icons/RatingsIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import TrendIcon from "$lib/components/icons/TrendIcon.svelte";
-  import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { languageTag } from "$lib/features/i18n";
   import PulseCell from "./_internal/PulseCell.svelte";
@@ -58,12 +55,6 @@
               <TrendIcon direction="up" />
             {:else if stat.key === "longestBinge"}
               <PlayIcon />
-            {:else if stat.key === "ratings"}
-              <RatingsIcon />
-            {:else if stat.key === "comments"}
-              <CommentIcon />
-            {:else if stat.key === "lists"}
-              <ListIcon />
             {:else if stat.key === "hours"}
               <ClockIcon />
             {/if}
@@ -72,7 +63,7 @@
       {/each}
 
       {#if $selectedGraph && $graphData}
-        <PulseGraph type={$selectedGraph} data={$graphData} />
+        <PulseGraph kind={$selectedGraph} data={$graphData} />
       {/if}
     </div>
   </div>

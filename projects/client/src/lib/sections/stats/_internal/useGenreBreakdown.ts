@@ -1,13 +1,7 @@
 import type { MovieActivityHistory } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
-import {
-  movieActivityHistoryQuery,
-} from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import type { ShowActivityHistory } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
-import {
-  showActivityHistoryQuery,
-} from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
 import { combineLatest, map, type Observable } from 'rxjs';
-import { usePaginatedListQuery } from '../../lists/stores/usePaginatedListQuery.ts';
+import { useActivityHistory } from './activityHistoryParams.ts';
 
 type UseGenreBreakdownProps = { slug: string };
 
@@ -39,9 +33,9 @@ const GENRE_COLORS = [
   '#555555', // gray - "Other"
 ];
 
-const HISTORY_LIMIT = 1000;
 const TOP_GENRE_COUNT = 5;
 const DAY_COUNT = 14;
+const GENRES_PER_ENTRY = 2;
 
 function genreLabel(slug: string): string {
   return slug
@@ -76,17 +70,18 @@ function computeGenreBreakdown(
     today.getDate() + 1,
   );
 
-  // Collect all entries within the 14-day range, using up to 3 genres each
-  const GENRES_PER_ENTRY = 2;
-  type GenreEntry = { watchedAt: Date; genre: string };
+  // Collect genre entries, weighting each genre as 1/numGenres to avoid
+  // inflating bar heights for multi-genre titles
+  type GenreEntry = { watchedAt: Date; genre: string; weight: number };
   const genreEntries: GenreEntry[] = [];
 
   for (const entry of movies) {
     if (entry.watchedAt >= rangeStart && entry.watchedAt < rangeEnd) {
       const genres = entry.movie.genres.slice(0, GENRES_PER_ENTRY);
       if (genres.length === 0) genres.push('other');
+      const weight = 1 / genres.length;
       for (const genre of genres) {
-        genreEntries.push({ watchedAt: entry.watchedAt, genre });
+        genreEntries.push({ watchedAt: entry.watchedAt, genre, weight });
       }
     }
   }
@@ -95,16 +90,17 @@ function computeGenreBreakdown(
     if (entry.watchedAt >= rangeStart && entry.watchedAt < rangeEnd) {
       const genres = entry.show.genres.slice(0, GENRES_PER_ENTRY);
       if (genres.length === 0) genres.push('other');
+      const weight = 1 / genres.length;
       for (const genre of genres) {
-        genreEntries.push({ watchedAt: entry.watchedAt, genre });
+        genreEntries.push({ watchedAt: entry.watchedAt, genre, weight });
       }
     }
   }
 
-  // Count genres globally to find top 5
+  // Count genres globally (weighted) to find top 5
   const globalCounts = new Map<string, number>();
-  for (const { genre } of genreEntries) {
-    globalCounts.set(genre, (globalCounts.get(genre) ?? 0) + 1);
+  for (const { genre, weight } of genreEntries) {
+    globalCounts.set(genre, (globalCounts.get(genre) ?? 0) + weight);
   }
 
   const sortedGenres = [...globalCounts.entries()]
@@ -124,19 +120,22 @@ function computeGenreBreakdown(
     genreOrder.push('other');
   }
 
-  // Group entries by day
+  // Group entries by day (weighted)
   const dayGenreCounts = new Map<string, Map<string, number>>();
   for (const day of days) {
     dayGenreCounts.set(getDayKey(day), new Map());
   }
 
-  for (const { watchedAt, genre } of genreEntries) {
+  for (const { watchedAt, genre, weight } of genreEntries) {
     const key = getDayKey(watchedAt);
     const dayCounts = dayGenreCounts.get(key);
     if (!dayCounts) continue;
 
     const effectiveGenre = topGenreSet.has(genre) ? genre : 'other';
-    dayCounts.set(effectiveGenre, (dayCounts.get(effectiveGenre) ?? 0) + 1);
+    dayCounts.set(
+      effectiveGenre,
+      (dayCounts.get(effectiveGenre) ?? 0) + weight,
+    );
   }
 
   // Build day data
@@ -153,7 +152,7 @@ function computeGenreBreakdown(
   });
 
   // Build legend
-  const totalEntries = genreEntries.length;
+  const totalWeight = genreEntries.reduce((s, e) => s + e.weight, 0);
   const legend: GenreLegendEntry[] = genreOrder.map((genre, i) => {
     const count = genre === 'other'
       ? sortedGenres
@@ -165,7 +164,7 @@ function computeGenreBreakdown(
     return {
       genre,
       label: genre === 'other' ? 'Other' : genreLabel(genre),
-      percentage: totalEntries > 0 ? Math.round((count / totalEntries) * 100) : 0,
+      percentage: totalWeight > 0 ? Math.round((count / totalWeight) * 100) : 0,
       color: GENRE_COLORS[Math.min(i, GENRE_COLORS.length - 1)] ?? '#555555',
     };
   });
@@ -177,35 +176,8 @@ export function useGenreBreakdown({ slug }: UseGenreBreakdownProps): {
   data: Observable<GenreBreakdownData>;
   isLoading: Observable<boolean>;
 } {
-  // Cache-aligned params — identical to useStreak.ts:88-117
-  const now = new Date();
-  const startDate = new Date(
-    Date.UTC(
-      now.getUTCFullYear() - 1,
-      now.getUTCMonth(),
-      now.getUTCDate(),
-    ),
-  );
-  const endDate = new Date(
-    Date.UTC(
-      now.getUTCFullYear(),
-      now.getUTCMonth(),
-      now.getUTCDate() + 1,
-    ),
-  );
-
-  const params = {
-    limit: HISTORY_LIMIT,
+  const { movies, shows, isLoadingMovies, isLoadingShows } = useActivityHistory(
     slug,
-    startDate,
-    endDate,
-  };
-
-  const { list: movies, isLoading: isLoadingMovies } = usePaginatedListQuery(
-    movieActivityHistoryQuery(params),
-  );
-  const { list: shows, isLoading: isLoadingShows } = usePaginatedListQuery(
-    showActivityHistoryQuery(params),
   );
 
   const data = combineLatest([movies, shows]).pipe(

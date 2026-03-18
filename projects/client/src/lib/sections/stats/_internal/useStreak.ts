@@ -1,15 +1,5 @@
-import {
-  movieActivityHistoryQuery,
-} from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
-import {
-  showActivityHistoryQuery,
-} from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
-import { combineLatest, map } from 'rxjs';
-import { usePaginatedListQuery } from '../../lists/stores/usePaginatedListQuery.ts';
-
-// Uses two separate queries (matching useMonthToDate pattern) rather than the
-// combined activityHistoryQuery, since useMonthToDate already establishes this
-// pattern and the queries may already be cached from other components.
+import { combineLatest, map, shareReplay } from 'rxjs';
+import { useActivityHistory } from './activityHistoryParams.ts';
 
 export type StreakState = 'active' | 'broken' | 'none';
 
@@ -17,8 +7,6 @@ type StreakResult = {
   count: number;
   state: StreakState;
 };
-
-const STREAK_HISTORY_LIMIT = 1000;
 
 type UseStreakProps = {
   slug: string;
@@ -34,8 +22,7 @@ function computeStreak(
   // Collect unique calendar days (local time) with watch activity
   const daysWithActivity = new Set<string>();
   for (const date of watchedDates) {
-    const dayKey =
-      `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    const dayKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
     daysWithActivity.add(dayKey);
   }
 
@@ -86,34 +73,8 @@ function computeStreak(
 }
 
 export function useStreak({ slug }: UseStreakProps) {
-  const now = new Date();
-  const startDate = new Date(
-    Date.UTC(
-      now.getUTCFullYear() - 1,
-      now.getUTCMonth(),
-      now.getUTCDate(),
-    ),
-  );
-  const endDate = new Date(
-    Date.UTC(
-      now.getUTCFullYear(),
-      now.getUTCMonth(),
-      now.getUTCDate() + 1,
-    ),
-  );
-
-  const params = {
-    limit: STREAK_HISTORY_LIMIT,
+  const { movies, shows, isLoadingMovies, isLoadingShows } = useActivityHistory(
     slug,
-    startDate,
-    endDate,
-  };
-
-  const { list: movies, isLoading: isLoadingMovies } = usePaginatedListQuery(
-    movieActivityHistoryQuery(params),
-  );
-  const { list: shows, isLoading: isLoadingShows } = usePaginatedListQuery(
-    showActivityHistoryQuery(params),
   );
 
   const streak = combineLatest([movies, shows]).pipe(
@@ -124,6 +85,7 @@ export function useStreak({ slug }: UseStreakProps) {
       ];
       return computeStreak(allDates);
     }),
+    shareReplay(1),
   );
 
   return {
