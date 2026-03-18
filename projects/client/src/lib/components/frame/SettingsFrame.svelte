@@ -34,7 +34,7 @@
     position: relative;
     width: 100%;
     height: fit-content;
-    min-height: var(--ni-480);
+    min-height: var(--ni-208);
 
     :global(.loading-indicator) {
       display: none;
