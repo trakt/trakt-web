@@ -14,6 +14,7 @@
   import UpNextList from "$lib/sections/lists/progress/UpNextList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import GenreBreakdown from "$lib/sections/stats/GenreBreakdown.svelte";
   import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
   import WeeklyPulse from "$lib/sections/stats/WeeklyPulse.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
@@ -48,6 +49,7 @@
     <StreakCallout />
     <UpcomingList />
     <PersonalHistoryList mode={$mode} />
+    <GenreBreakdown />
     <ActivityList />
   </RenderFor>
 
