@@ -32,6 +32,12 @@ type UseWeeklyPulseProps = {
 
 type DateRange = { readonly start: Date; readonly end: Date };
 
+const DAYS_IN_WEEK = 7;
+const THIS_WEEK_START = DAYS_IN_WEEK - 1;
+const LAST_WEEK_START = DAYS_IN_WEEK * 2 - 1;
+const LAST_WEEK_END = DAYS_IN_WEEK;
+const FOUR_WEEK_LOOKBACK = DAYS_IN_WEEK * 4 - 1;
+
 function getDateRange(startDaysAgo: number, endDaysAgo: number, now: Date): DateRange {
   return {
     start: new Date(
@@ -72,8 +78,8 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
   const now = new Date();
   const locale = getLocale();
 
-  const thisWeekRange = getDateRange(6, 0, now);
-  const lastWeekRange = getDateRange(13, 7, now);
+  const thisWeekRange = getDateRange(THIS_WEEK_START, 0, now);
+  const lastWeekRange = getDateRange(LAST_WEEK_START, LAST_WEEK_END, now);
 
   const stats = combineLatest([movies, shows]).pipe(
     map(([$movies, $shows]) => {
@@ -203,7 +209,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         ...twShows.map((e) => e.watchedAt),
       ];
 
-      const fourWeekRange = getDateRange(27, 0, now);
+      const fourWeekRange = getDateRange(FOUR_WEEK_LOOKBACK, 0, now);
       const allRecentDates = [
         ...filterEntries($movies, fourWeekRange).map((e) => e.watchedAt),
         ...filterEntries($shows, fourWeekRange).map((e) => e.watchedAt),

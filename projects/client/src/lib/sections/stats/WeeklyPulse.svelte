@@ -19,14 +19,17 @@
     useWeeklyPulse({ slug: $user.slug }),
   );
 
+  const WEEK_RANGE_OFFSET = 6;
+  const CELLS_WITH_GRAPH = 4;
+  const CELLS_WITHOUT_GRAPH = 6;
+
   const dateRange = $derived.by(() => {
     const now = new Date();
-    const weekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+    const weekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - WEEK_RANGE_OFFSET);
     return `${weekStart.toLocaleString(languageTag(), { month: "short", day: "numeric" })} – ${now.toLocaleString(languageTag(), { month: "short", day: "numeric" })}`;
   });
 
-  // Graph takes 2 cell slots, so show 4 cells + graph. No graph = 6 cells.
-  const cellCount = $derived($selectedGraph ? 4 : 6);
+  const cellCount = $derived($selectedGraph ? CELLS_WITH_GRAPH : CELLS_WITHOUT_GRAPH);
   const visibleStats = $derived(($stats ?? []).slice(0, cellCount));
   const shouldShow = $derived(!$isLoading && visibleStats.length > 0);
 </script>

@@ -2,14 +2,16 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { useGenreBreakdown } from "./_internal/useGenreBreakdown";
+  import { DAY_COUNT, useGenreBreakdown } from "./_internal/useGenreBreakdown";
+
+  const GENRE_MID_INDEX = Math.floor(DAY_COUNT / 2);
 
   const { user } = useUser();
   const { data, isLoading } = $derived(useGenreBreakdown({ slug: $user.slug }));
 
   const dateRange = $derived.by(() => {
     const now = new Date();
-    const rangeStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 13);
+    const rangeStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (DAY_COUNT - 1));
     return `${rangeStart.toLocaleString(languageTag(), { month: "short", day: "numeric" })} – ${now.toLocaleString(languageTag(), { month: "short", day: "numeric" })}`;
   });
 
@@ -17,7 +19,7 @@
 
   const midDate = $derived.by(() => {
     if (!$data) return "";
-    const mid = $data.days[7];
+    const mid = $data.days[GENRE_MID_INDEX];
     if (!mid) return "";
     return mid.date.toLocaleString(languageTag(), { month: "short", day: "numeric" });
   });
@@ -85,40 +87,48 @@
 <style lang="scss">
   .trakt-genre-breakdown {
     margin: 0 var(--layout-distance-side);
-    padding: var(--ni-16) var(--ni-24);
-    background: var(--shade-930);
-    border: 1px solid var(--shade-910);
-    border-radius: var(--border-radius-l);
+    padding: var(--ni-24) var(--ni-28);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
   .trakt-genre-header {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    margin-bottom: var(--ni-16);
+    margin-bottom: var(--ni-20);
   }
 
   .trakt-genre-title {
     display: flex;
     align-items: center;
-    gap: var(--ni-8);
-    color: var(--shade-400);
-    font-size: var(--ni-12);
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: var(--ni-13);
     font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .trakt-genre-dot {
-    width: var(--ni-8);
-    height: var(--ni-8);
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: var(--green-500);
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.5);
     flex-shrink: 0;
   }
 
   .trakt-genre-range {
-    color: var(--shade-500);
+    color: rgba(255, 255, 255, 0.25);
     font-size: var(--ni-12);
   }
 
@@ -135,7 +145,7 @@
   .trakt-genre-bars {
     display: flex;
     align-items: flex-end;
-    gap: var(--ni-4);
+    gap: 6px;
     height: var(--ni-120);
   }
 
@@ -150,14 +160,16 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    border-radius: var(--ni-2) var(--ni-2) 0 0;
+    border-radius: 6px 6px 0 0;
     overflow: hidden;
-    gap: 1px;
+    gap: 2px;
     min-height: 0;
   }
 
   .trakt-genre-segment {
     min-height: var(--ni-2);
+    border-radius: 1px;
+    opacity: 0.85;
   }
 
   .trakt-genre-date-labels {
@@ -167,40 +179,41 @@
   }
 
   .trakt-genre-date-label {
-    color: var(--shade-500);
-    font-size: var(--ni-12);
+    color: rgba(255, 255, 255, 0.2);
+    font-size: var(--ni-11);
   }
 
   .trakt-genre-legend {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-8);
+    gap: 10px;
     justify-content: center;
     flex-shrink: 0;
-    min-width: var(--ni-120);
+    min-width: 130px;
   }
 
   .trakt-genre-legend-item {
     display: flex;
     align-items: center;
-    gap: var(--ni-8);
+    gap: 10px;
   }
 
   .trakt-genre-legend-dot {
-    width: var(--ni-8);
-    height: var(--ni-8);
-    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 4px;
+    opacity: 0.85;
     flex-shrink: 0;
   }
 
   .trakt-genre-legend-label {
-    color: var(--shade-400);
+    color: rgba(255, 255, 255, 0.45);
     font-size: var(--ni-12);
     flex: 1;
   }
 
   .trakt-genre-legend-pct {
-    color: var(--shade-300);
+    color: rgba(255, 255, 255, 0.7);
     font-size: var(--ni-12);
     font-weight: 600;
   }

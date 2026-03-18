@@ -37,7 +37,7 @@ const GENRE_COLORS = [
 ];
 
 const TOP_GENRE_COUNT = 5;
-const DAY_COUNT = 14;
+export const DAY_COUNT = 14;
 const GENRES_PER_ENTRY = 2;
 
 export function computeGenreBreakdown(

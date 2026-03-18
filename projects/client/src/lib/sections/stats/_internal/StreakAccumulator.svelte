@@ -1,12 +1,15 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
 
+  const DAYS_PER_MONTH = 30;
+  const DAYS_PER_WEEK = 7;
+
   const { days }: { days: number } = $props();
 
-  const monthCount = $derived(Math.floor(days / 30));
-  const remainingAfterMonths = $derived(days % 30);
-  const weekCount = $derived(Math.floor(remainingAfterMonths / 7));
-  const dayCount = $derived(remainingAfterMonths % 7);
+  const monthCount = $derived(Math.floor(days / DAYS_PER_MONTH));
+  const remainingAfterMonths = $derived(days % DAYS_PER_MONTH);
+  const weekCount = $derived(Math.floor(remainingAfterMonths / DAYS_PER_WEEK));
+  const dayCount = $derived(remainingAfterMonths % DAYS_PER_WEEK);
 </script>
 
 <div class="trakt-streak-accumulator">

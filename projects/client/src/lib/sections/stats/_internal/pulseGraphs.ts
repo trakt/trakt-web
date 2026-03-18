@@ -3,6 +3,17 @@ import * as m from '$lib/features/i18n/messages.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { toHumanDayOfWeek } from '$lib/utils/formatting/date/toHumanDayOfWeek.ts';
 
+const DAYS_IN_WEEK = 7;
+const TREND_WEEK_COUNT = 4;
+const MORNING_START_HOUR = 5;
+const AFTERNOON_START_HOUR = 12;
+const EVENING_START_HOUR = 17;
+const LATE_NIGHT_START_HOUR = 22;
+
+const MIN_ACTIVE_DAYS_FOR_DAILY = 3;
+const WEEK_TREND_VARIANCE_THRESHOLD = 0.25;
+const CLOCK_PEAK_THRESHOLD = 0.4;
+
 export type PulseGraphType =
   | 'dailyBars'
   | 'weekTrend'
@@ -32,8 +43,8 @@ export function countByCalendarDay(
   locale: AvailableLocale,
 ): { readonly days: readonly number[]; readonly labels: readonly string[] } {
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const dayRange = Array.from({ length: 7 }, (_, idx) => {
-    const offset = 6 - idx;
+  const dayRange = Array.from({ length: DAYS_IN_WEEK }, (_, idx) => {
+    const offset = DAYS_IN_WEEK - 1 - idx;
     return new Date(
       today.getFullYear(),
       today.getMonth(),
@@ -47,7 +58,7 @@ export function countByCalendarDay(
   });
 
   const labels = dayRange.map((day, idx) =>
-    idx === 6 ? m.text_stats_today() : toHumanDayOfWeek(day, locale),
+    idx === DAYS_IN_WEEK - 1 ? m.text_stats_today() : toHumanDayOfWeek(day, locale),
   );
 
   return { days, labels };
@@ -88,17 +99,17 @@ export function computeWeekTrend(
     m.text_stats_this_week(),
   ];
 
-  return Array.from({ length: 4 }, (_, idx) => {
-    const i = 3 - idx;
+  return Array.from({ length: TREND_WEEK_COUNT }, (_, idx) => {
+    const i = TREND_WEEK_COUNT - 1 - idx;
     const start = new Date(
       today.getFullYear(),
       today.getMonth(),
-      today.getDate() - (i * 7 + 6),
+      today.getDate() - (i * DAYS_IN_WEEK + DAYS_IN_WEEK - 1),
     );
     const end = new Date(
       today.getFullYear(),
       today.getMonth(),
-      today.getDate() - (i * 7) + 1,
+      today.getDate() - (i * DAYS_IN_WEEK) + 1,
     );
     const count = dates.filter((d) => d >= start && d < end).length;
     return { label: labels[idx] ?? '', plays: count };
@@ -112,14 +123,14 @@ export function pickGraph(
   const candidates: Candidate[] = [];
 
   const activeDays = graphData.dailyBars.days.filter((c) => c > 0).length;
-  if (activeDays >= 3) {
+  if (activeDays >= MIN_ACTIVE_DAYS_FOR_DAILY) {
     candidates.push({ type: 'dailyBars', score: activeDays });
   }
 
   const weekPlays = graphData.weekTrend.weeks.map((w) => w.plays);
   const maxWeek = Math.max(...weekPlays);
   const minWeek = Math.min(...weekPlays);
-  if (maxWeek > 0 && (maxWeek - minWeek) / maxWeek > 0.25) {
+  if (maxWeek > 0 && (maxWeek - minWeek) / maxWeek > WEEK_TREND_VARIANCE_THRESHOLD) {
     candidates.push({
       type: 'weekTrend',
       score: ((maxWeek - minWeek) / maxWeek) * 10,
@@ -133,7 +144,7 @@ export function pickGraph(
   const clockPeak = Math.max(
     ...graphData.watchClock.buckets.map((b) => b.count),
   );
-  if (clockTotal > 0 && clockPeak / clockTotal > 0.4) {
+  if (clockTotal > 0 && clockPeak / clockTotal > CLOCK_PEAK_THRESHOLD) {
     candidates.push({
       type: 'watchClock',
       score: (clockPeak / clockTotal) * 10,
