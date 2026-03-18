@@ -2980,6 +2980,27 @@
     },
     "text_branding_questions_intro": {
       "default": "对使用我们的品牌有疑问？请联系我们。"
+    },
+    "button_text_view_photo": {
+      "default": "查看照片"
+    },
+    "button_text_upload_photo": {
+      "default": "上传照片"
+    },
+    "button_text_remove_photo": {
+      "default": "移除照片"
+    },
+    "button_label_view_photo": {
+      "default": "查看您的个人资料照片"
+    },
+    "button_label_upload_photo": {
+      "default": "上传新的个人资料照片"
+    },
+    "button_label_remove_photo": {
+      "default": "移除您的个人资料照片"
+    },
+    "label_drag_image_to_adjust": {
+      "default": "拖动图像以调整位置"
     }
   }
 }

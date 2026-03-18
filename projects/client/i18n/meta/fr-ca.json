@@ -2981,6 +2981,27 @@
     },
     "text_branding_questions_intro": {
       "default": "Besoin d'aide avec notre image de marque? Écrivez-nous."
+    },
+    "button_text_view_photo": {
+      "default": "Voir la photo"
+    },
+    "button_text_upload_photo": {
+      "default": "Téléverser"
+    },
+    "button_text_remove_photo": {
+      "default": "Supprimer"
+    },
+    "button_label_view_photo": {
+      "default": "Voir votre photo de profil"
+    },
+    "button_label_upload_photo": {
+      "default": "Téléverser une nouvelle photo de profil"
+    },
+    "button_label_remove_photo": {
+      "default": "Supprimer votre photo de profil"
+    },
+    "label_drag_image_to_adjust": {
+      "default": "Glissez l'image pour ajuster le cadrage, comme au cinéma d'ici !"
     }
   }
 }

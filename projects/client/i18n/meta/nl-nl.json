@@ -2981,6 +2981,27 @@
     },
     "text_branding_questions_intro": {
       "default": "Heb je vragen over het gebruik van ons merk? Neem contact op."
+    },
+    "button_text_view_photo": {
+      "default": "Bekijk foto"
+    },
+    "button_text_upload_photo": {
+      "default": "Foto uploaden"
+    },
+    "button_text_remove_photo": {
+      "default": "Foto verwijderen"
+    },
+    "button_label_view_photo": {
+      "default": "Bekijk je profielfoto"
+    },
+    "button_label_upload_photo": {
+      "default": "Upload een nieuwe profielfoto"
+    },
+    "button_label_remove_photo": {
+      "default": "Verwijder je profielfoto"
+    },
+    "label_drag_image_to_adjust": {
+      "default": "Sleep de afbeelding om aan te passen"
     }
   }
 }

@@ -2981,6 +2981,27 @@
     },
     "text_branding_questions_intro": {
       "default": "Har du frågor om hur du använder vårt varumärke? Hör av dig."
+    },
+    "button_text_view_photo": {
+      "default": "Visa bild"
+    },
+    "button_text_upload_photo": {
+      "default": "Ladda upp bild"
+    },
+    "button_text_remove_photo": {
+      "default": "Ta bort bild"
+    },
+    "button_label_view_photo": {
+      "default": "Visa din profilbild"
+    },
+    "button_label_upload_photo": {
+      "default": "Ladda upp en ny profilbild"
+    },
+    "button_label_remove_photo": {
+      "default": "Ta bort din profilbild"
+    },
+    "label_drag_image_to_adjust": {
+      "default": "Dra i bilden för att justera"
     }
   }
 }

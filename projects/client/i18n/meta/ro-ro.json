@@ -2981,6 +2981,27 @@
     },
     "text_branding_questions_intro": {
       "default": "Ai întrebări despre utilizarea brandului nostru? Contactează-ne."
+    },
+    "button_text_view_photo": {
+      "default": "Vezi fotografia"
+    },
+    "button_text_upload_photo": {
+      "default": "Încarcă fotografia"
+    },
+    "button_text_remove_photo": {
+      "default": "Elimină fotografia"
+    },
+    "button_label_view_photo": {
+      "default": "Vezi fotografia de profil"
+    },
+    "button_label_upload_photo": {
+      "default": "Încarcă o nouă fotografie de profil"
+    },
+    "button_label_remove_photo": {
+      "default": "Elimină fotografia de profil"
+    },
+    "label_drag_image_to_adjust": {
+      "default": "Trage imaginea pentru a fixa cadrul perfect, exact ca un regizor!"
     }
   }
 }

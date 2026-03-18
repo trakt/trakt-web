@@ -2981,6 +2981,27 @@
     },
     "text_branding_questions_intro": {
       "default": "Har du spørsmål om bruk av merkevaren vår? Ta kontakt."
+    },
+    "button_text_view_photo": {
+      "default": "Se bilde"
+    },
+    "button_text_upload_photo": {
+      "default": "Last opp bilde"
+    },
+    "button_text_remove_photo": {
+      "default": "Fjern bilde"
+    },
+    "button_label_view_photo": {
+      "default": "Se profilbildet ditt"
+    },
+    "button_label_upload_photo": {
+      "default": "Last opp et nytt profilbilde"
+    },
+    "button_label_remove_photo": {
+      "default": "Fjern profilbildet ditt"
+    },
+    "label_drag_image_to_adjust": {
+      "default": "Dra i bildet for å tilpasse – finn din beste vinkel før kveldens premiere!"
     }
   }
 }
