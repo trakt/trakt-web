@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Træk i billedet for at justere det – så er du helt klar til din næste hyggelige filmaften."
+    },
+    "link_text_terms_of_use": {
+      "default": "Brugsvilkår"
     }
   }
 }

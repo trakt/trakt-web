@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Sleep de afbeelding om aan te passen"
+    },
+    "link_text_terms_of_use": {
+      "default": "Gebruiksvoorwaarden"
     }
   }
 }

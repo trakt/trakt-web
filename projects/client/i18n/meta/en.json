@@ -4571,9 +4571,9 @@
         "ios"
       ]
     },
-    "link_text_terms": {
+    "link_text_terms_of_use": {
       "default": "Terms of Use",
-      "description": "Text for the link that takes users to the support page or triggers a mailto url.",
+      "description": "Text for the link that takes users to the terms of use page.",
       "exclude": [
         "web"
       ]
@@ -8000,7 +8000,6 @@
       "default": "Terms",
       "description": "Text for the terms link in the footer.",
       "exclude": [
-        "android",
         "ios"
       ]
     },

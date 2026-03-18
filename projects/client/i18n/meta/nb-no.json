@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Dra i bildet for å tilpasse – finn din beste vinkel før kveldens premiere!"
+    },
+    "link_text_terms_of_use": {
+      "default": "Brukervilkår"
     }
   }
 }

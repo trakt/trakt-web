@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Faites glisser l'image pour l'ajuster"
+    },
+    "link_text_terms_of_use": {
+      "default": "Terms of Use"
     }
   }
 }

@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Trage imaginea pentru a fixa cadrul perfect, exact ca un regizor!"
+    },
+    "link_text_terms_of_use": {
+      "default": "Termeni de utilizare"
     }
   }
 }

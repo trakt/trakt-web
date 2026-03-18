@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Przeciągnij obraz, aby dopasować kadr przed premierą!"
+    },
+    "link_text_terms_of_use": {
+      "default": "Regulamin"
     }
   }
 }

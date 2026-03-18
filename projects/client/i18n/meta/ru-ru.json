@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Перетащите изображение, чтобы настроить"
+    },
+    "link_text_terms_of_use": {
+      "default": "Условия использования"
     }
   }
 }
