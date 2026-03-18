@@ -2981,6 +2981,27 @@
     },
     "text_branding_questions_intro": {
       "default": "Har du spørgsmål om brugen af vores brand? Kontakt os endelig."
+    },
+    "button_text_view_photo": {
+      "default": "Se billede"
+    },
+    "button_text_upload_photo": {
+      "default": "Upload billede"
+    },
+    "button_text_remove_photo": {
+      "default": "Fjern billede"
+    },
+    "button_label_view_photo": {
+      "default": "Se dit profilbillede"
+    },
+    "button_label_upload_photo": {
+      "default": "Upload et nyt profilbillede"
+    },
+    "button_label_remove_photo": {
+      "default": "Fjern dit profilbillede"
+    },
+    "label_drag_image_to_adjust": {
+      "default": "Træk i billedet for at justere det – så er du helt klar til din næste hyggelige filmaften."
     }
   }
 }

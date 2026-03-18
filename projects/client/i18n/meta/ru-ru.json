@@ -2981,6 +2981,27 @@
     },
     "text_branding_questions_intro": {
       "default": "Есть вопросы по использованию нашего бренда? Свяжитесь с нами."
+    },
+    "button_text_view_photo": {
+      "default": "Посмотреть фото"
+    },
+    "button_text_upload_photo": {
+      "default": "Загрузить фото"
+    },
+    "button_text_remove_photo": {
+      "default": "Удалить фото"
+    },
+    "button_label_view_photo": {
+      "default": "Посмотреть фото профиля"
+    },
+    "button_label_upload_photo": {
+      "default": "Загрузить новое фото профиля"
+    },
+    "button_label_remove_photo": {
+      "default": "Удалить ваше фото профиля"
+    },
+    "label_drag_image_to_adjust": {
+      "default": "Перетащите изображение, чтобы настроить"
     }
   }
 }

@@ -4041,6 +4041,62 @@
         "ios"
       ]
     },
+    "button_text_view_photo": {
+      "default": "View photo",
+      "description": "Text for the menu item that allows users to view their current profile photo.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_upload_photo": {
+      "default": "Upload photo",
+      "description": "Text for the menu item and confirm button that allows users to upload a new profile photo.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_remove_photo": {
+      "default": "Remove photo",
+      "description": "Text for the menu item that allows users to remove their current profile photo.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_view_photo": {
+      "default": "View your profile photo",
+      "description": "Aria-label for the button that opens the full-size profile photo viewer.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_upload_photo": {
+      "default": "Upload a new profile photo",
+      "description": "Aria-label for the button that opens the photo upload and crop dialog.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_remove_photo": {
+      "default": "Remove your profile photo",
+      "description": "Aria-label for the button that removes the current profile photo.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_drag_image_to_adjust": {
+      "default": "Drag the image to adjust",
+      "description": "Hint label in the profile photo crop dialog instructing users to drag to reposition.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "text_private_account": {
       "default": "Private account",
       "description": "Text for the section that allows users to toggle privacy.",

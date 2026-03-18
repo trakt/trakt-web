@@ -2981,6 +2981,27 @@
     },
     "text_branding_questions_intro": {
       "default": "Haben Sie Fragen zur Verwendung unserer Marke? Kontaktieren Sie uns."
+    },
+    "button_text_view_photo": {
+      "default": "Foto ansehen"
+    },
+    "button_text_upload_photo": {
+      "default": "Foto hochladen"
+    },
+    "button_text_remove_photo": {
+      "default": "Foto entfernen"
+    },
+    "button_label_view_photo": {
+      "default": "Ihr Profilfoto ansehen"
+    },
+    "button_label_upload_photo": {
+      "default": "Ein neues Profilfoto hochladen"
+    },
+    "button_label_remove_photo": {
+      "default": "Ihr Profilfoto entfernen"
+    },
+    "label_drag_image_to_adjust": {
+      "default": "Bild zum Anpassen ziehen"
     }
   }
 }

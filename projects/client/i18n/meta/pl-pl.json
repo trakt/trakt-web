@@ -2981,6 +2981,27 @@
     },
     "text_branding_questions_intro": {
       "default": "Masz pytania dotyczące korzystania z naszej marki? Skontaktuj się z nami."
+    },
+    "button_text_view_photo": {
+      "default": "Zobacz zdjęcie"
+    },
+    "button_text_upload_photo": {
+      "default": "Prześlij zdjęcie"
+    },
+    "button_text_remove_photo": {
+      "default": "Usuń zdjęcie"
+    },
+    "button_label_view_photo": {
+      "default": "Zobacz swoje zdjęcie profilowe"
+    },
+    "button_label_upload_photo": {
+      "default": "Prześlij nowe zdjęcie profilowe"
+    },
+    "button_label_remove_photo": {
+      "default": "Usuń swoje zdjęcie profilowe"
+    },
+    "label_drag_image_to_adjust": {
+      "default": "Przeciągnij obraz, aby dopasować kadr przed premierą!"
     }
   }
 }
