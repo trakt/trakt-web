@@ -37,5 +37,9 @@
     gap: var(--ni-8);
 
     width: fit-content;
+
+    @include for-mobile() {
+      align-items: center;
+    }
   }
 </style>

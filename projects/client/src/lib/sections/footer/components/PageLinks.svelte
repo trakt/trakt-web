@@ -59,6 +59,12 @@
     display: flex;
     gap: var(--gap-l);
 
+    @include for-mobile() {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: var(--gap-s);
+    }
+
     :global(.trakt-link) {
       text-decoration: none;
     }
