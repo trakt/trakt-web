@@ -103,6 +103,7 @@ module.exports = {
         'share',
         'search',
         'sentiment',
+        'seo',
         'settings',
         'show',
         'smart-list',
