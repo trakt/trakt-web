@@ -1639,7 +1639,7 @@
       "default": "Feedback"
     },
     "link_text_terms": {
-      "default": "Terms of Use"
+      "default": "Terms"
     },
     "link_text_policy": {
       "default": "Privacy Policy"
@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Drag the image to adjust"
+    },
+    "link_text_terms_of_use": {
+      "default": "Terms of Use"
     }
   }
 }

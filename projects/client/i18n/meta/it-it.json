@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Trascina l'immagine per l'inquadratura perfetta"
+    },
+    "link_text_terms_of_use": {
+      "default": "Condizioni d'uso"
     }
   }
 }

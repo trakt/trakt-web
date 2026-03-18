@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Glissez l'image pour ajuster le cadrage, comme au cinéma d'ici !"
+    },
+    "link_text_terms_of_use": {
+      "default": "Conditions d'utilisation"
     }
   }
 }

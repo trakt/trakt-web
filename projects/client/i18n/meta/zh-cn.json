@@ -3001,6 +3001,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "拖动图像以调整位置"
+    },
+    "link_text_terms_of_use": {
+      "default": "使用条款"
     }
   }
 }

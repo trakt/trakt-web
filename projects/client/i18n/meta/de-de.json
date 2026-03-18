@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Bild zum Anpassen ziehen"
+    },
+    "link_text_terms_of_use": {
+      "default": "Nutzungsbedingungen"
     }
   }
 }

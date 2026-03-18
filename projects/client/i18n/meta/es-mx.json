@@ -3002,6 +3002,9 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Arrastra la imagen para ajustarla, ¡que quede de película!"
+    },
+    "link_text_terms_of_use": {
+      "default": "Términos de uso"
     }
   }
 }
