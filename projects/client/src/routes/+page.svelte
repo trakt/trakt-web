@@ -20,35 +20,38 @@
 </script>
 
 <TraktPage
-  audience="authenticated"
+  audience="all"
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_home()}
   type="home"
+  mode="content-only"
 >
-  <TraktPageCoverSetter />
+  <RenderFor audience="authenticated">
+    <TraktPageCoverSetter />
 
-  <NavbarStateSetter hasFilters>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-  </NavbarStateSetter>
+    <NavbarStateSetter hasFilters>
+      {#snippet actions()}
+        <DiscoverToggles />
+      {/snippet}
+    </NavbarStateSetter>
 
-  <Banner />
-  <UpNextList intent="continue" />
-  <UpNextList intent="start" />
-  <UpcomingList />
-  <PersonalHistoryList mode={$mode} />
-  <ActivityList />
+    <Banner />
+    <UpNextList intent="continue" />
+    <UpNextList intent="start" />
+    <UpcomingList />
+    <PersonalHistoryList mode={$mode} />
+    <ActivityList />
+  </RenderFor>
+
+  <RenderFor audience="public">
+    <NavbarStateSetter mode="hidden" />
+
+    <RenderFor audience="public" device={["tablet-sm", "tablet-lg", "desktop"]}>
+      <Landing />
+    </RenderFor>
+
+    <RenderFor audience="public" device={["mobile"]}>
+      <MobileLanding />
+    </RenderFor>
+  </RenderFor>
 </TraktPage>
-
-<RenderFor audience="public">
-  <NavbarStateSetter mode="hidden" />
-
-  <RenderFor audience="public" device={["tablet-sm", "tablet-lg", "desktop"]}>
-    <Landing />
-  </RenderFor>
-
-  <RenderFor audience="public" device={["mobile"]}>
-    <MobileLanding />
-  </RenderFor>
-</RenderFor>
