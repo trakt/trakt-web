@@ -81,7 +81,16 @@
     return `${language}_${region.toUpperCase()}`;
   });
 
-  const isIndexable = $derived(audience === "all" || audience === "public");
+  const AUDIENCE_ROBOTS: Record<AudienceProps["audience"], string> = {
+    all: "index, follow",
+    public: "index, follow",
+    free: "noindex, nofollow",
+    vip: "noindex, nofollow",
+    authenticated: "noindex, nofollow",
+    director: "noindex, nofollow",
+  };
+
+  const robots = $derived(AUDIENCE_ROBOTS[audience]);
 
   const createWebsiteLd = (url: string) =>
     JSON.stringify({
@@ -134,10 +143,7 @@
 <svelte:head>
   <title>{displayTitle}</title>
   <link rel="canonical" href={canonicalUrl} />
-  <meta
-    name="robots"
-    content={isIndexable ? "index, follow" : "noindex, nofollow"}
-  />
+  <meta name="robots" content={robots} />
   <meta property="og:site_name" content={websiteName} />
   <meta property="og:type" content={ogType} />
   <meta property="og:url" content={canonicalUrl} />

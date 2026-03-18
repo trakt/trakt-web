@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -17,38 +18,44 @@
 
   // FIXME: move to PersonalHistoryList when Profile also supports discover mode
   const { mode } = useDiscover();
+  const { isAuthorized } = useAuth();
+  const audience = $derived($isAuthorized ? "authenticated" : "public");
+  const pageMode = $derived($isAuthorized ? "default" : "content-only");
 </script>
 
 <TraktPage
-  audience="authenticated"
+  {audience}
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_home()}
   type="home"
+  mode={pageMode}
 >
-  <TraktPageCoverSetter />
+  <RenderFor audience="authenticated">
+    <TraktPageCoverSetter />
 
-  <NavbarStateSetter hasFilters>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-  </NavbarStateSetter>
+    <NavbarStateSetter hasFilters>
+      {#snippet actions()}
+        <DiscoverToggles />
+      {/snippet}
+    </NavbarStateSetter>
 
-  <Banner />
-  <UpNextList intent="continue" />
-  <UpNextList intent="start" />
-  <UpcomingList />
-  <PersonalHistoryList mode={$mode} />
-  <ActivityList />
+    <Banner />
+    <UpNextList intent="continue" />
+    <UpNextList intent="start" />
+    <UpcomingList />
+    <PersonalHistoryList mode={$mode} />
+    <ActivityList />
+  </RenderFor>
+
+  <RenderFor audience="public">
+    <NavbarStateSetter mode="hidden" />
+
+    <RenderFor audience="public" device={["tablet-sm", "tablet-lg", "desktop"]}>
+      <Landing />
+    </RenderFor>
+
+    <RenderFor audience="public" device={["mobile"]}>
+      <MobileLanding />
+    </RenderFor>
+  </RenderFor>
 </TraktPage>
-
-<RenderFor audience="public">
-  <NavbarStateSetter mode="hidden" />
-
-  <RenderFor audience="public" device={["tablet-sm", "tablet-lg", "desktop"]}>
-    <Landing />
-  </RenderFor>
-
-  <RenderFor audience="public" device={["mobile"]}>
-    <MobileLanding />
-  </RenderFor>
-</RenderFor>
