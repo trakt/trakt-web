@@ -11,7 +11,7 @@
   const { filterMap } = useFilter();
 
   const { startDate, endDate, activeDate, next, previous, reset } =
-    useCalendarPeriod();
+    useCalendarPeriod({ order: 'reverse-chronological' });
 
   const now = new Date();
 

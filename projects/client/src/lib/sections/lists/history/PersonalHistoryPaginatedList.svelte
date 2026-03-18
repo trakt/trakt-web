@@ -11,7 +11,7 @@
   const { mode }: { mode?: DiscoverMode } = $props();
 
   const { startDate, endDate, activeDate, next, previous, reset } =
-    useCalendarPeriod();
+    useCalendarPeriod({ order: 'reverse-chronological' });
 
   const historyType = $derived(toRecentlyWatchedType(mode));
 
