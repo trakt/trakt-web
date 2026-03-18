@@ -5,6 +5,8 @@
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import CoverImageIcon from "$lib/components/icons/CoverImageIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { fromEvent, merge, Subject } from "rxjs";
+  import { map, pairwise, scan, startWith, tap } from "rxjs/operators";
 
   const {
     src,
@@ -23,6 +25,8 @@
   const WHEEL_ZOOM_SENSITIVITY = 0.005;
   const WHEEL_ZOOM_LINE_HEIGHT_PX = 20;
   const WHEEL_ZOOM_MAX_DELTA = 0.2;
+  const PINCH_ZOOM_SENSITIVITY = 0.85;
+  const TRACKPAD_PINCH_SENSITIVITY = 0.02;
 
   const refs = $state<{ canvas?: HTMLCanvasElement; img?: HTMLImageElement }>(
     {},
@@ -37,7 +41,21 @@
     zoomTransition: false,
   });
 
-  const dragAnchor = { x: 0, y: 0, offsetX: 0, offsetY: 0 };
+  type Vec2 = { readonly x: number; readonly y: number };
+  type PointerMap = ReadonlyMap<number, Vec2>;
+  type PointerAction =
+    | { readonly type: "down"; readonly id: number; readonly pos: Vec2 }
+    | { readonly type: "move"; readonly id: number; readonly pos: Vec2 }
+    | { readonly type: "remove"; readonly id: number };
+
+  type CropEvent =
+    | { readonly kind: "pan"; readonly dx: number; readonly dy: number }
+    | { readonly kind: "zoom"; readonly delta: number; readonly transition: boolean }
+    | { readonly kind: "dragging"; readonly active: boolean };
+
+  const pinchDistance = (a: Vec2, b: Vec2) => Math.hypot(b.x - a.x, b.y - a.y);
+
+  const zoomButton$ = new Subject<number>();
 
   function clampOffsets(x: number, y: number, currentScale: number) {
     const { img } = refs;
@@ -90,55 +108,117 @@
     draw();
   }
 
-  function onPointerDown(ev: PointerEvent) {
-    crop.isDragging = true;
-    dragAnchor.x = ev.clientX;
-    dragAnchor.y = ev.clientY;
-    dragAnchor.offsetX = crop.offsetX;
-    dragAnchor.offsetY = crop.offsetY;
-    (ev.target as HTMLElement).setPointerCapture(ev.pointerId);
-  }
+  const applyCropEvent = (event: CropEvent) => {
+    if (event.kind === "dragging") {
+      crop.isDragging = event.active;
+      return;
+    }
 
-  function onPointerMove(ev: PointerEvent) {
-    if (!crop.isDragging) return;
+    if (event.kind === "pan") {
+      const clamped = clampOffsets(
+        crop.offsetX + event.dx,
+        crop.offsetY + event.dy,
+        crop.scale,
+      );
+      crop.offsetX = clamped.x;
+      crop.offsetY = clamped.y;
+      return;
+    }
 
-    const dx = ev.clientX - dragAnchor.x;
-    const dy = ev.clientY - dragAnchor.y;
-    const clamped = clampOffsets(
-      dragAnchor.offsetX + dx,
-      dragAnchor.offsetY + dy,
-      crop.scale,
-    );
-    crop.offsetX = clamped.x;
-    crop.offsetY = clamped.y;
-  }
-
-  const onPointerUp = () => {
-    crop.isDragging = false;
-  };
-
-  function onWheel(ev: WheelEvent) {
-    ev.preventDefault();
-    crop.zoomTransition = false;
-    const rawPixels =
-      ev.deltaMode === 1 ? ev.deltaY * WHEEL_ZOOM_LINE_HEIGHT_PX : ev.deltaY;
-    const delta = Math.max(
-      -WHEEL_ZOOM_MAX_DELTA,
-      Math.min(WHEEL_ZOOM_MAX_DELTA, -(rawPixels * WHEEL_ZOOM_SENSITIVITY)),
-    );
-    zoom(delta);
-  }
-
-  function zoom(delta: number) {
+    crop.zoomTransition = event.transition;
     const newScale = Math.min(
       MAX_ZOOM_SCALE,
-      Math.max(MIN_ZOOM_SCALE, crop.scale + delta),
+      Math.max(MIN_ZOOM_SCALE, crop.scale + event.delta),
     );
     const clamped = clampOffsets(crop.offsetX, crop.offsetY, newScale);
     crop.scale = newScale;
     crop.offsetX = clamped.x;
     crop.offsetY = clamped.y;
-  }
+  };
+
+  const updatePointers = (ptrs: PointerMap, action: PointerAction): PointerMap => {
+    const next = new Map(ptrs);
+    if (action.type === "remove") next.delete(action.id);
+    else if (action.type === "down") next.set(action.id, action.pos);
+    else if (next.has(action.id)) next.set(action.id, action.pos);
+    return next as PointerMap;
+  };
+
+  const toCropEvent = ([prev, curr]: [PointerMap, PointerMap]): CropEvent => {
+    const prevPtrs = [...prev.values()];
+    const currPtrs = [...curr.values()];
+
+    if (prevPtrs.length === 2 && currPtrs.length === 2) {
+      const ratio = pinchDistance(currPtrs[0], currPtrs[1]) / pinchDistance(prevPtrs[0], prevPtrs[1]);
+      return {
+        kind: "zoom",
+        delta: crop.scale * (1 + (ratio - 1) * PINCH_ZOOM_SENSITIVITY) - crop.scale,
+        transition: false,
+      };
+    }
+
+    if (prevPtrs.length === 1 && currPtrs.length === 1)
+      return {
+        kind: "pan",
+        dx: currPtrs[0].x - prevPtrs[0].x,
+        dy: currPtrs[0].y - prevPtrs[0].y,
+      };
+
+    return { kind: "dragging", active: currPtrs.length === 1 };
+  };
+
+  $effect(() => {
+    const canvas = refs.canvas;
+    if (!canvas) return;
+
+    const gesture$ = merge(
+      fromEvent<PointerEvent>(canvas, "pointerdown").pipe(
+        tap((ev) => canvas.setPointerCapture(ev.pointerId)),
+        map((ev): PointerAction => ({ type: "down", id: ev.pointerId, pos: { x: ev.clientX, y: ev.clientY } })),
+      ),
+      fromEvent<PointerEvent>(canvas, "pointermove").pipe(
+        map((ev): PointerAction => ({ type: "move", id: ev.pointerId, pos: { x: ev.clientX, y: ev.clientY } })),
+      ),
+      merge(
+        fromEvent<PointerEvent>(canvas, "pointerup"),
+        fromEvent<PointerEvent>(canvas, "pointercancel"),
+      ).pipe(map((ev): PointerAction => ({ type: "remove", id: ev.pointerId }))),
+    ).pipe(
+      scan(updatePointers, new Map<number, Vec2>()),
+      startWith(new Map<number, Vec2>() as PointerMap),
+      pairwise(),
+      map(toCropEvent),
+    );
+
+    const wheel$ = fromEvent<WheelEvent>(canvas, "wheel").pipe(
+      tap((ev) => ev.preventDefault()),
+      map((ev): CropEvent => {
+        // macOS trackpad pinch fires wheel events with ctrlKey
+        if (ev.ctrlKey) {
+          const delta = -ev.deltaY * TRACKPAD_PINCH_SENSITIVITY * PINCH_ZOOM_SENSITIVITY;
+          return { kind: "zoom", delta, transition: false };
+        }
+        const rawPixels =
+          ev.deltaMode === 1 ? ev.deltaY * WHEEL_ZOOM_LINE_HEIGHT_PX : ev.deltaY;
+        return {
+          kind: "zoom",
+          delta: Math.max(
+            -WHEEL_ZOOM_MAX_DELTA,
+            Math.min(WHEEL_ZOOM_MAX_DELTA, -(rawPixels * WHEEL_ZOOM_SENSITIVITY)),
+          ),
+          transition: false,
+        };
+      }),
+    );
+
+    const buttonZoom$ = zoomButton$.pipe(
+      map((step): CropEvent => ({ kind: "zoom", delta: step, transition: true })),
+    );
+
+    const sub = merge(gesture$, wheel$, buttonZoom$).subscribe(applyCropEvent);
+
+    return () => sub.unsubscribe();
+  });
 
   const exportCroppedBase64 = () =>
     refs.canvas?.toDataURL("image/jpeg", 0.9) ?? "";
@@ -190,11 +270,6 @@
         height={CANVAS_DIMENSION}
         class="crop-canvas"
         class:is-dragging={crop.isDragging}
-        onpointerdown={onPointerDown}
-        onpointermove={onPointerMove}
-        onpointerup={onPointerUp}
-        onpointercancel={onPointerUp}
-        onwheel={onWheel}
         style="touch-action: none;"
       ></canvas>
     </div>
@@ -203,10 +278,7 @@
       <button
         class="zoom-btn"
         aria-label="Zoom out"
-        onclick={() => {
-          crop.zoomTransition = true;
-          zoom(-ZOOM_SCALE_STEP);
-        }}
+        onclick={() => zoomButton$.next(-ZOOM_SCALE_STEP)}
         disabled={crop.scale <= MIN_ZOOM_SCALE}
       >
         &minus;
@@ -223,10 +295,7 @@
       <button
         class="zoom-btn"
         aria-label="Zoom in"
-        onclick={() => {
-          crop.zoomTransition = true;
-          zoom(ZOOM_SCALE_STEP);
-        }}
+        onclick={() => zoomButton$.next(ZOOM_SCALE_STEP)}
         disabled={crop.scale >= MAX_ZOOM_SCALE}
       >
         +
