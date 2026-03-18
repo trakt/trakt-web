@@ -1,21 +1,22 @@
 <script lang="ts">
-  import type { PulseGraphData } from "./useWeeklyPulse";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import type { PulseGraphData } from "./pulseGraphs";
 
   type GraphType = "dailyBars" | "weekTrend" | "watchClock" | "showsMovies";
 
   const { kind, data }: { kind: GraphType; data: PulseGraphData } = $props();
 
   const TITLES: Record<GraphType, string> = {
-    dailyBars: "Daily Activity",
-    weekTrend: "4-Week Trend",
-    watchClock: "Peak Hours",
-    showsMovies: "Shows vs Movies",
+    dailyBars: m.header_stats_graph_daily(),
+    weekTrend: m.header_stats_graph_trend(),
+    watchClock: m.header_stats_graph_peak(),
+    showsMovies: m.header_stats_graph_shows_movies(),
   };
 
   const title = $derived(TITLES[kind]);
 
   // Daily bars derived data
-  const dailyMax = $derived(Math.max(...data.dailyBars.thisWeek, 1));
+  const dailyMax = $derived(Math.max(...data.dailyBars.days, 1));
 
   // Week trend SVG coordinates
   const trendPoints = $derived.by(() => {
@@ -66,19 +67,19 @@
 
   {#if kind ==="dailyBars"}
     <div class="graph-daily-bars">
-      {#each data.dailyBars.dayLabels as dayLabel, i (i)}
-        {@const twHeight =
-          dailyMax > 0 ? ((data.dailyBars.thisWeek[i] ?? 0) / dailyMax) * 48 : 0}
-        {@const isToday = i === data.dailyBars.todayIndex}
+      {#each data.dailyBars.labels as label, i (i)}
+        {@const barHeight =
+          dailyMax > 0 ? ((data.dailyBars.days[i] ?? 0) / dailyMax) * 48 : 0}
+        {@const isToday = label === m.text_stats_today()}
         <div class="daily-bar-col">
           <div class="daily-bar-track">
             <div
               class="daily-bar-fill"
               class:is-today={isToday}
-              style:height="{twHeight}px"
+              style:height="{barHeight}px"
             ></div>
           </div>
-          <span class="daily-bar-label">{dayLabel}</span>
+          <span class="daily-bar-label">{label}</span>
         </div>
       {/each}
     </div>
@@ -134,12 +135,12 @@
         <div class="sm-legend">
           <span class="sm-dot sm-dot-shows"></span>
           <span class="sm-legend-text"
-            >{data.showsMovies.episodes} Episodes</span
+            >{m.text_stats_episodes_count({ count: String(data.showsMovies.episodes) })}</span
           >
         </div>
         <div class="sm-legend">
           <span class="sm-dot sm-dot-movies"></span>
-          <span class="sm-legend-text">{data.showsMovies.movies} Movies</span>
+          <span class="sm-legend-text">{m.text_stats_movies_count({ count: String(data.showsMovies.movies) })}</span>
         </div>
       </div>
     </div>

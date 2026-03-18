@@ -1,4 +1,5 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
 
   const {
@@ -37,11 +38,11 @@
   {:else if delta != null && direction}
     <div class="trakt-pulse-cell-pill" data-direction={direction}>
       {#if delta > 0}
-        ▲ {delta} vs last week
+        {m.text_stats_delta_up({ count: String(delta) })}
       {:else if delta < 0}
-        ▼ {Math.abs(delta)} vs last week
+        {m.text_stats_delta_down({ count: String(Math.abs(delta)) })}
       {:else}
-        — same
+        {m.text_stats_delta_same()}
       {/if}
     </div>
   {/if}

@@ -8,6 +8,7 @@
   import TrendIcon from "$lib/components/icons/TrendIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { languageTag } from "$lib/features/i18n";
+  import * as m from "$lib/features/i18n/messages.ts";
   import PulseCell from "./_internal/PulseCell.svelte";
   import PulseGraph from "./_internal/PulseGraph.svelte";
   import { useWeeklyPulse } from "./_internal/useWeeklyPulse";
@@ -33,7 +34,7 @@
 {#if shouldShow}
   <div class="trakt-weekly-pulse">
     <div class="trakt-weekly-pulse-header">
-      <p class="trakt-weekly-pulse-title bold">This Week</p>
+      <p class="trakt-weekly-pulse-title bold">{m.header_stats_this_week()}</p>
       <p class="trakt-weekly-pulse-range tag secondary">{dateRange}</p>
     </div>
 

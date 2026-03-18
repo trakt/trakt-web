@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { languageTag } from "$lib/features/i18n";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useGenreBreakdown } from "./_internal/useGenreBreakdown";
 
   const { user } = useUser();
@@ -34,7 +35,7 @@
     <div class="trakt-genre-header">
       <p class="trakt-genre-title">
         <span class="trakt-genre-dot"></span>
-        LAST 14 DAYS — GENRE BREAKDOWN
+        {m.header_stats_genre_breakdown()}
       </p>
       <p class="trakt-genre-range">{dateRange}</p>
     </div>
@@ -64,7 +65,7 @@
         <div class="trakt-genre-date-labels">
           <span class="trakt-genre-date-label">{startLabel}</span>
           <span class="trakt-genre-date-label">{midDate}</span>
-          <span class="trakt-genre-date-label">Today</span>
+          <span class="trakt-genre-date-label">{m.text_stats_today()}</span>
         </div>
       </div>
 

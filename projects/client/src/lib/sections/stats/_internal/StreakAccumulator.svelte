@@ -1,4 +1,6 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
+
   const { days }: { days: number } = $props();
 
   const monthCount = $derived(Math.floor(days / 30));
@@ -11,8 +13,9 @@
   {#if monthCount > 0}
     <div class="trakt-streak-group">
       <div class="trakt-streak-tooltip">
-        {monthCount}
-        {monthCount === 1 ? "month" : "months"}
+        {monthCount === 1
+          ? m.text_stats_streak_month({ count: String(monthCount) })
+          : m.text_stats_streak_months({ count: String(monthCount) })}
       </div>
       {#each Array.from({ length: monthCount }) as _, i (i)}
         <div class="trakt-streak-square month"></div>
@@ -23,8 +26,9 @@
   {#if weekCount > 0}
     <div class="trakt-streak-group">
       <div class="trakt-streak-tooltip">
-        {weekCount}
-        {weekCount === 1 ? "week" : "weeks"}
+        {weekCount === 1
+          ? m.text_stats_streak_week({ count: String(weekCount) })
+          : m.text_stats_streak_weeks({ count: String(weekCount) })}
       </div>
       {#each Array.from({ length: weekCount }) as _, i (i)}
         <div class="trakt-streak-square week"></div>
@@ -35,8 +39,9 @@
   {#if dayCount > 0}
     <div class="trakt-streak-group">
       <div class="trakt-streak-tooltip">
-        {dayCount}
-        {dayCount === 1 ? "day" : "days"}
+        {dayCount === 1
+          ? m.text_stats_streak_day({ count: String(dayCount) })
+          : m.text_stats_streak_days({ count: String(dayCount) })}
       </div>
       {#each Array.from({ length: dayCount }) as _, i (i)}
         <div
