@@ -28,22 +28,22 @@ const WHITELISTED_HEADERS = new Set([
 export const handleCacheControl: Handle = async ({ event, resolve }) => {
   const response = await resolve(event);
 
-  if (response.headers.get('content-type')?.includes('text/html')) {
-    const clonedHeaders = new Headers(response.headers);
-
-    clonedHeaders.set(
-      'Cache-Control',
-      'private, no-store, no-cache, must-revalidate',
-    );
-
-    return new Response(response.body, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: clonedHeaders,
-    });
+  if (!response.headers.get('content-type')?.includes('text/html')) {
+    return response;
   }
 
-  return response;
+  const clonedHeaders = new Headers(response.headers);
+  const cacheControl = event.locals.isLegitimateBot
+    ? 'public, max-age=3600, s-maxage=3600'
+    : 'private, no-store, no-cache, must-revalidate';
+
+  clonedHeaders.set('Cache-Control', cacheControl);
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers: clonedHeaders,
+  });
 };
 
 export const handle: Handle = sequence(

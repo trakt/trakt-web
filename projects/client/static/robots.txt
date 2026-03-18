@@ -1,2 +1,12 @@
 User-agent: *
 Allow: /
+Disallow: /calendar
+Disallow: /history
+Disallow: /settings
+Disallow: /social
+Disallow: /callback
+Disallow: /silent-redirect
+Disallow: /api/
+Disallow: /_design_system
+
+Sitemap: https://app.trakt.tv/sitemap.xml

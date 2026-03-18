@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import { getLanguageAndRegion } from "$lib/features/i18n";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
@@ -73,9 +74,53 @@
       : _info,
   );
 
-  const canonicalUrl = $derived(
-    `${page.url.origin}${page.url.pathname}`,
-  );
+  const canonicalUrl = $derived(`${page.url.origin}${page.url.pathname}`);
+
+  const ogLocale = $derived.by(() => {
+    const { language, region } = getLanguageAndRegion();
+    return `${language}_${region.toUpperCase()}`;
+  });
+
+  const isIndexable = $derived(audience === "all" || audience === "public");
+
+  const createWebsiteLd = (url: string) =>
+    JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: websiteName,
+      url,
+      description: websiteTitle,
+    });
+
+  const createMovieLd = (title: string, url: string) => {
+    const duration = _info?.runtime;
+    return JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Movie",
+      name: title,
+      description: _info?.overview,
+      image: _image,
+      url,
+      ...(duration && duration > 0 ? { duration: `PT${duration}M` } : {}),
+    });
+  };
+
+  const createShowLd = (title: string, url: string) =>
+    JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TVSeries",
+      name: title,
+      description: _info?.overview,
+      image: _image,
+      url,
+    });
+
+  const jsonLd = $derived.by(() => {
+    if (type === "home") return createWebsiteLd(canonicalUrl);
+    if (type === "movie" && _title) return createMovieLd(_title, canonicalUrl);
+    if (type === "show" && _title) return createShowLd(_title, canonicalUrl);
+    return null;
+  });
 
   const dynamicContentProps = $derived(
     hasDynamicContent
@@ -89,12 +134,17 @@
 <svelte:head>
   <title>{displayTitle}</title>
   <link rel="canonical" href={canonicalUrl} />
+  <meta
+    name="robots"
+    content={isIndexable ? "index, follow" : "noindex, nofollow"}
+  />
   <meta property="og:site_name" content={websiteName} />
   <meta property="og:type" content={ogType} />
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:image" content={image} />
+  <meta property="og:image:alt" content={ogTitle} />
   <meta property="og:title" content={ogTitle} />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content={ogLocale} />
   <meta property="og:updated_time" content={new Date().toISOString()} />
 
   {#if info != null}
@@ -111,6 +161,10 @@
   <meta name="twitter:title" content={ogTitle} />
   <meta name="twitter:image" content={image} />
   <meta name="twitter:creator" content={twitterHandle} />
+
+  {#if jsonLd != null}
+    {@html `<script type="application/ld+json">${jsonLd}</script>`}
+  {/if}
 </svelte:head>
 
 <RenderFor {audience}>
