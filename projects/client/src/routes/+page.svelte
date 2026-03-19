@@ -44,12 +44,16 @@
 
     <Banner />
     <UpNextList intent="continue" />
-    <WeeklyPulse />
+    <RenderFor audience="authenticated" device={["tablet-sm", "tablet-lg", "desktop"]}>
+      <WeeklyPulse />
+    </RenderFor>
     <UpNextList intent="start" />
     <StreakCallout />
     <UpcomingList />
     <PersonalHistoryList mode={$mode} />
-    <GenreBreakdown />
+    <RenderFor audience="authenticated" device={["tablet-sm", "tablet-lg", "desktop"]}>
+      <GenreBreakdown />
+    </RenderFor>
     <ActivityList />
   </RenderFor>
 
