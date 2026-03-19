@@ -3069,6 +3069,12 @@
     },
     "button_text_discard": {
       "default": "Відкинути"
+    },
+    "button_label_history": {
+      "default": "Історія"
+    },
+    "button_label_library": {
+      "default": "Бібліотека"
     }
   }
 }

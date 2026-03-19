@@ -121,6 +121,7 @@ const ogSupportFactory = (username?: string): HttpsUrl | MailToUrl => {
 
 export const UrlBuilder = {
   history: {
+    home: () => '/history',
     category: (params: UrlBuilderParams) => {
       return categoryDrilldownFactory('history')(params);
     },
@@ -185,6 +186,7 @@ export const UrlBuilder = {
       `/users/${id}/mir/${year}/${month}`,
   }),
   library: {
+    home: () => '/users/me/library',
     me: (library: string) => `/users/me/library?library=${library}`,
   },
   lists: {

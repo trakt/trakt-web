@@ -3069,6 +3069,12 @@
     },
     "button_text_discard": {
       "default": "破棄"
+    },
+    "button_label_history": {
+      "default": "履歴"
+    },
+    "button_label_library": {
+      "default": "ライブラリ"
     }
   }
 }

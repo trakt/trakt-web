@@ -3069,6 +3069,12 @@
     },
     "button_text_discard": {
       "default": "Отхвърляне"
+    },
+    "button_label_history": {
+      "default": "История"
+    },
+    "button_label_library": {
+      "default": "Библиотека"
     }
   }
 }

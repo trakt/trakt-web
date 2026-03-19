@@ -3069,6 +3069,12 @@
     },
     "button_text_discard": {
       "default": "Forkast"
+    },
+    "button_label_history": {
+      "default": "Historikk"
+    },
+    "button_label_library": {
+      "default": "Bibliotek"
     }
   }
 }
