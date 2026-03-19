@@ -3075,6 +3075,15 @@
     },
     "button_label_library": {
       "default": "Бібліотека"
+    },
+    "text_stats_today": {
+      "default": "Сьогодні"
+    },
+    "text_stats_genre_other": {
+      "default": "Інше"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Жанровий розподіл"
     }
   }
 }

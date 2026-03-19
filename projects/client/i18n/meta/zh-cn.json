@@ -3074,6 +3074,15 @@
     },
     "button_label_library": {
       "default": "库"
+    },
+    "text_stats_today": {
+      "default": "今天"
+    },
+    "text_stats_genre_other": {
+      "default": "其他"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "类型分布"
     }
   }
 }

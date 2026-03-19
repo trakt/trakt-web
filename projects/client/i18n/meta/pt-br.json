@@ -3075,6 +3075,15 @@
     },
     "button_label_library": {
       "default": "Coleção"
+    },
+    "text_stats_today": {
+      "default": "Hoje"
+    },
+    "text_stats_genre_other": {
+      "default": "Outro"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Divisão por Gênero"
     }
   }
 }
