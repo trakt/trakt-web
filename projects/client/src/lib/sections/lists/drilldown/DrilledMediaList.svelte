@@ -24,6 +24,7 @@
       {actions}
       {items}
       {listActions}
+      sizing="auto"
       --width-item="var(--width-summary-card)"
     >
       {#snippet empty()}
