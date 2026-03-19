@@ -209,7 +209,7 @@
   }
 
   .trakt-side-navbar-content {
-    gap: var(--gap-xl);
+    gap: var(--gap-l);
 
     background-color: var(--color-background-side-navbar);
 
