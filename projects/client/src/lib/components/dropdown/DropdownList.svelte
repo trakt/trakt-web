@@ -59,7 +59,8 @@
       );
 
       if (item) {
-        item.click();
+        const anchor = item.querySelector<HTMLElement>("a");
+        (anchor ?? item).click();
       }
     });
 
