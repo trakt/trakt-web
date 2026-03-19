@@ -5,6 +5,7 @@
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -71,26 +72,58 @@
 
       <div class="trakt-side-navbar-content">
         <RenderFor audience="authenticated">
-          <Link href={UrlBuilder.search()} label={m.button_label_search()}>
-            <SearchIcon />
-          </Link>
+          <Tooltip
+            content={m.page_title_search()}
+            variant="compact"
+            side="right"
+            delayDuration={0}
+            sideOffset={16}
+          >
+            <Link href={UrlBuilder.search()} label={m.button_label_search()}>
+              <SearchIcon />
+            </Link>
+          </Tooltip>
         </RenderFor>
 
-        <Link href={UrlBuilder.home()} label={m.button_label_home()}>
-          <HomeIcon />
-        </Link>
+        <Tooltip
+          content={m.page_title_home()}
+          variant="compact"
+          side="right"
+          delayDuration={0}
+          sideOffset={16}
+        >
+          <Link href={UrlBuilder.home()} label={m.button_label_home()}>
+            <HomeIcon />
+          </Link>
+        </Tooltip>
 
         <RenderFor audience="authenticated">
-          <Link href={UrlBuilder.discover()} label={m.button_label_discover()}>
-            <DiscoverIcon />
-          </Link>
-
-          <Link
-            href={UrlBuilder.lists.user("me")}
-            label={m.button_label_browse_lists()}
+          <Tooltip
+            content={m.page_title_discover()}
+            variant="compact"
+            side="right"
+            delayDuration={0}
+            sideOffset={16}
           >
-            <ListIcon />
-          </Link>
+            <Link href={UrlBuilder.discover()} label={m.button_label_discover()}>
+              <DiscoverIcon />
+            </Link>
+          </Tooltip>
+
+          <Tooltip
+            content={m.page_title_lists()}
+            variant="compact"
+            side="right"
+            delayDuration={0}
+            sideOffset={16}
+          >
+            <Link
+              href={UrlBuilder.lists.user("me")}
+              label={m.button_label_browse_lists()}
+            >
+              <ListIcon />
+            </Link>
+          </Tooltip>
         </RenderFor>
       </div>
 
