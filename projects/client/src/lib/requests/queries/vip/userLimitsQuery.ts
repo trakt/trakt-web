@@ -18,7 +18,6 @@ export const UserLimitsResponseSchema = z.object({
   total_list_items: LimitsSchema,
   static_lists: LimitsSchema,
   dynamic_lists: LimitsSchema,
-  offline_library: LimitsSchema,
   digital_library: LimitsSchema,
   total_notes: LimitsSchema,
 });
@@ -41,7 +40,6 @@ function mapToUserLimits(
     totalListItems: response.total_list_items,
     staticLists: response.static_lists,
     dynamicLists: response.dynamic_lists,
-    offlineLibrary: response.offline_library,
     digitalLibrary: response.digital_library,
     totalNotes: response.total_notes,
   };

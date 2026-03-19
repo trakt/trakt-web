@@ -2653,12 +2653,6 @@
     "usage_title_library": {
       "default": "Bibliotek"
     },
-    "limit_title_watch_history": {
-      "default": "Sehistorik"
-    },
-    "limit_title_ratings": {
-      "default": "Bedømmelser"
-    },
     "limit_title_smart_lists": {
       "default": "Smarte lister"
     },
@@ -2676,9 +2670,6 @@
     },
     "limit_title_digital_library": {
       "default": "Digitalt bibliotek"
-    },
-    "limit_title_offline_library": {
-      "default": "Offline bibliotek"
     },
     "text_vip_track_more": {
       "default": "Track mere, list mere, bedøm mere."

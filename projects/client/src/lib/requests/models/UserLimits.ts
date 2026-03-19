@@ -13,7 +13,6 @@ export const UserLimitsSchema = z.object({
   totalListItems: LimitsSchema,
   staticLists: LimitsSchema,
   dynamicLists: LimitsSchema,
-  offlineLibrary: LimitsSchema,
   digitalLibrary: LimitsSchema,
   totalNotes: LimitsSchema,
 });

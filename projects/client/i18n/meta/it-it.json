@@ -2653,12 +2653,6 @@
     "usage_title_library": {
       "default": "Biblioteca"
     },
-    "limit_title_watch_history": {
-      "default": "Cronologia"
-    },
-    "limit_title_ratings": {
-      "default": "Valutazioni"
-    },
     "limit_title_smart_lists": {
       "default": "Liste intelligenti"
     },
@@ -2676,9 +2670,6 @@
     },
     "limit_title_digital_library": {
       "default": "Cineteca digitale"
-    },
-    "limit_title_offline_library": {
-      "default": "Cineteca offline"
     },
     "text_vip_track_more": {
       "default": "Segui di più, crea più liste, vota di più."

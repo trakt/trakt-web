@@ -2653,12 +2653,6 @@
     "usage_title_library": {
       "default": "Biblioteka"
     },
-    "limit_title_watch_history": {
-      "default": "Historia"
-    },
-    "limit_title_ratings": {
-      "default": "Oceny"
-    },
     "limit_title_smart_lists": {
       "default": "Inteligentne listy"
     },
@@ -2676,9 +2670,6 @@
     },
     "limit_title_digital_library": {
       "default": "Biblioteka cyfrowa"
-    },
-    "limit_title_offline_library": {
-      "default": "Biblioteka offline"
     },
     "text_vip_track_more": {
       "default": "Śledź więcej, twórz więcej list, oceniaj więcej."

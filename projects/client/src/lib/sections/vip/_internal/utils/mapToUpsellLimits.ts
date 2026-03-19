@@ -5,20 +5,12 @@ import type { UsageCategoryItem } from './mapToUsageCategories.ts';
 export function mapToUpsellLimits(limits: UserLimits): UsageCategoryItem[] {
   return [
     {
-      title: m.limit_title_watch_history,
-      limits: limits.history,
-    },
-    {
       title: m.limit_title_total_list_items,
       limits: limits.totalListItems,
     },
     {
       title: m.limit_title_watchlist_items,
       limits: limits.watchlistItems,
-    },
-    {
-      title: m.limit_title_ratings,
-      limits: limits.ratings,
     },
     {
       title: m.limit_title_notes,
@@ -35,10 +27,6 @@ export function mapToUpsellLimits(limits: UserLimits): UsageCategoryItem[] {
     {
       title: m.limit_title_digital_library,
       limits: limits.digitalLibrary,
-    },
-    {
-      title: m.limit_title_offline_library,
-      limits: limits.offlineLibrary,
     },
   ];
 }
