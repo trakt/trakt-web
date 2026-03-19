@@ -15,7 +15,7 @@ vi.mock('$lib/stores/useInvalidator.ts');
 vi.mock('$lib/features/notes/useAddNoteDrawer.ts');
 
 describe('useFavorites', () => {
-  const invalidate = vi.fn(() => {});
+  const invalidate = vi.fn(function () {});
 
   beforeEach(() => {
     setAuthorization(true);

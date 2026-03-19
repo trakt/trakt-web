@@ -2,9 +2,9 @@ import { describe, expect, it, vi } from 'vitest';
 import { createMarkerFetch } from './createMarkerFetch.ts';
 
 describe('createMarkerFetch', () => {
-  const mockFetch = vi.fn(() =>
-    Promise.resolve(new Response())
-  ) as unknown as typeof fetch;
+  const mockFetch = vi.fn(function () {
+    return Promise.resolve(new Response());
+  }) as unknown as typeof fetch;
 
   it('should add marker to GET requests', async () => {
     const markerFetch = createMarkerFetch('12345', mockFetch);

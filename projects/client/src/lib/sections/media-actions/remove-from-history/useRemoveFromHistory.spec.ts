@@ -11,7 +11,7 @@ import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 vi.mock('$lib/stores/useInvalidator.ts');
 
 describe('useRemoveFromHistory', () => {
-  const invalidate = vi.fn(() => {});
+  const invalidate = vi.fn(function () {});
 
   beforeEach(() => {
     invalidate.mockReset();

@@ -15,7 +15,7 @@ import {
 vi.mock('$lib/stores/useInvalidator.ts');
 
 describe('useMarkAsWatched', () => {
-  const invalidate = vi.fn(() => {});
+  const invalidate = vi.fn(function () {});
 
   beforeEach(() => {
     setAuthorization(true);

@@ -71,19 +71,29 @@ export function mockRequestEvent({
   return {
     url: new URL(url),
     cookies: {
-      getAll: vi.fn(() => cookies.getAll()),
-      get: vi.fn((name: string) => cookieHandler?.(name) ?? cookies.get(name)),
-      set: vi.fn((
+      getAll: vi.fn(function () {
+        return cookies.getAll();
+      }),
+      get: vi.fn(function (name: string) {
+        return cookieHandler?.(name) ?? cookies.get(name);
+      }),
+      set: vi.fn(function (
         name: string,
         value: string,
         options: Record<string, unknown>,
-      ) => cookies.set(name, value, options)),
-      delete: vi.fn((name: string) => cookies.delete(name)),
-      serialize: vi.fn((
+      ) {
+        return cookies.set(name, value, options);
+      }),
+      delete: vi.fn(function (name: string) {
+        return cookies.delete(name);
+      }),
+      serialize: vi.fn(function (
         name: string,
         value: string,
         options: Record<string, unknown>,
-      ) => cookies.serialize(name, value, options)),
+      ) {
+        return cookies.serialize(name, value, options);
+      }),
     },
     locals: {},
     request,
