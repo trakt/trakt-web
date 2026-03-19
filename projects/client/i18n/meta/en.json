@@ -5770,6 +5770,22 @@
         "ios"
       ]
     },
+    "button_label_history": {
+      "default": "History",
+      "description": "Aria-label for the history navigation link in the user menu.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_library": {
+      "default": "Library",
+      "description": "Aria-label for the library navigation link in the user menu.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "page_title_history": {
       "default": "History",
       "description": "Title for the history page, containing a history of watched movies and episodes.",

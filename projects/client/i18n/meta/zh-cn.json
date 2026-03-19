@@ -3068,6 +3068,12 @@
     },
     "button_text_discard": {
       "default": "丢弃"
+    },
+    "button_label_history": {
+      "default": "历史"
+    },
+    "button_label_library": {
+      "default": "库"
     }
   }
 }

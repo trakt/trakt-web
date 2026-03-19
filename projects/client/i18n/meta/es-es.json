@@ -3069,6 +3069,12 @@
     },
     "button_text_discard": {
       "default": "Descartar"
+    },
+    "button_label_history": {
+      "default": "Historial"
+    },
+    "button_label_library": {
+      "default": "Biblioteca"
     }
   }
 }

@@ -2,15 +2,36 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { Tooltip } from "bits-ui";
 
-  const { children, content }: { content: string } & ChildrenProps = $props();
+  const {
+    children,
+    content,
+    variant = "default",
+    side = "top",
+    delayDuration = 150,
+    sideOffset = 8,
+  }: {
+    content: string;
+    variant?: "default" | "compact";
+    side?: "top" | "right" | "bottom" | "left";
+    delayDuration?: number;
+    sideOffset?: number;
+  } & ChildrenProps = $props();
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
   let open = $state(false);
+
+  const tooltipClass = $derived(
+    variant === "compact" ? "trakt-tooltip-compact" : "trakt-tooltip",
+  );
+
+  const arrowClass = $derived(
+    variant === "compact" ? "trakt-tooltip-compact-arrow" : undefined,
+  );
 </script>
 
 <Tooltip.Provider>
-  <Tooltip.Root delayDuration={150} bind:open>
+  <Tooltip.Root {delayDuration} bind:open>
     <Tooltip.Trigger>
       {#snippet child({ props })}
         <div
@@ -23,8 +44,15 @@
       {/snippet}
     </Tooltip.Trigger>
     <Tooltip.Portal>
-      <Tooltip.Content class="trakt-tooltip" sideOffset={8}>
-        <p>{content}</p>
+      <Tooltip.Content class={tooltipClass} {side} {sideOffset}>
+        {#if arrowClass}
+          <Tooltip.Arrow class={arrowClass} />
+        {/if}
+        {#if variant === "default"}
+          <p>{content}</p>
+        {:else}
+          {content}
+        {/if}
       </Tooltip.Content>
     </Tooltip.Portal>
   </Tooltip.Root>
@@ -46,5 +74,28 @@
     padding: var(--ni-10);
 
     box-shadow: var(--shadow-menu);
+  }
+
+  :global(.trakt-tooltip-compact) {
+    z-index: var(--layer-top);
+
+    white-space: nowrap;
+
+    background-color: var(--color-tooltip-background);
+    color: var(--color-tooltip-text);
+
+    font-size: var(--ni-12);
+    line-height: 1;
+    font-weight: 500;
+
+    border-radius: var(--border-radius-xs);
+    padding: var(--ni-6) var(--ni-8);
+    margin-left: var(--ni-neg-7);
+
+    box-shadow: var(--shadow-menu);
+  }
+
+  :global(.trakt-tooltip-compact-arrow) {
+    color: var(--color-tooltip-background);
   }
 </style>

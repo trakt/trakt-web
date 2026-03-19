@@ -15,6 +15,7 @@
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
   import ProfileLink from "./components/ProfileLink.svelte";
   import TraktLogo from "./components/TraktLogo.svelte";
+  import UserMenu from "./components/UserMenu.svelte";
   import { useNavbarState } from "./useNavbarState";
 
   const { state } = useNavbarState();
@@ -95,7 +96,9 @@
 
       <div class="trakt-side-navbar-bottom">
         <RenderFor audience="authenticated">
-          <ProfileLink />
+          <UserMenu>
+            <ProfileLink />
+          </UserMenu>
         </RenderFor>
       </div>
     </nav>
