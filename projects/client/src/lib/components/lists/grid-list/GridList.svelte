@@ -12,6 +12,7 @@
     promotedItems?: T[];
     dimensionObserver?: (node: HTMLElement) => void;
     listActions?: Snippet;
+    sizing?: "default" | "auto";
   };
 
   const {
@@ -24,6 +25,7 @@
     dimensionObserver,
     metaInfo,
     listActions,
+    sizing = "default",
   }: PageListProps<T> = $props();
 
   const customAction = (node: HTMLElement) => dimensionObserver?.(node);
@@ -42,7 +44,7 @@
   });
 </script>
 
-<section class="trakt-grid-list-container">
+<section class="trakt-grid-list-container" data-sizing={sizing}>
   {#if title}
     <ListHeader {title} {metaInfo} {actions} {listActions} />
   {/if}
@@ -77,12 +79,25 @@
     flex-direction: column;
 
     gap: var(--list-header-gap);
+
+    &[data-sizing="auto"] {
+      .trakt-list-items {
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(var(--width-item), 1fr)
+        );
+
+        :global(.trakt-card) {
+          --width-override-card: 100%;
+        }
+      }
+    }
   }
 
   .trakt-list-items {
     display: grid;
     grid-template-columns: repeat(auto-fill, var(--width-item));
-    /* TODO: investigate how we can better distribute empty spaces (@anodpixels) */
+
     justify-content: center;
     transition: gap var(--transition-increment) ease-in-out;
     grid-row-gap: var(--gap-l);
