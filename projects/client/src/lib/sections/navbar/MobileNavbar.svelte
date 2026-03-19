@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
@@ -51,6 +52,10 @@
       <RenderFor audience="authenticated">
         <Link href={UrlBuilder.discover()} label={m.button_label_discover()}>
           <DiscoverIcon />
+        </Link>
+
+        <Link href={UrlBuilder.calendar()} label={m.button_label_calendar()}>
+          <CalendarIcon />
         </Link>
 
         <Link
