@@ -141,7 +141,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--gap-xl);
+    gap: var(--gap-l);
 
     padding: var(--ni-10) 0;
 
