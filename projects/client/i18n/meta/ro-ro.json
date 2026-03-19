@@ -3002,6 +3002,204 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Trage imaginea pentru a fixa cadrul perfect, exact ca un regizor!"
+    },
+    "text_stats_today": {
+      "default": "Astăzi"
+    },
+    "text_stats_time_morning": {
+      "default": "Dimineață"
+    },
+    "text_stats_time_afternoon": {
+      "default": "După-amiază"
+    },
+    "text_stats_time_evening": {
+      "default": "Seară"
+    },
+    "text_stats_time_late_night": {
+      "default": "Noapte târziu"
+    },
+    "text_stats_weeks_ago": {
+      "default": "acum {count} săpt."
+    },
+    "text_stats_weeks_short": {
+      "default": "{count} săpt."
+    },
+    "text_stats_this_week": {
+      "default": "Săptămâna aceasta"
+    },
+    "text_stats_was_last_week": {
+      "default": "a fost {day} săptămâna trecută"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "la fel"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} episoade"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} filme"
+    },
+    "text_stats_day_count": {
+      "default": "{count} zi"
+    },
+    "text_stats_days_count": {
+      "default": "{count} zile"
+    },
+    "text_stats_watching_streak": {
+      "default": "serie consecutivă"
+    },
+    "text_stats_watch_today": {
+      "default": "Vizionează ceva azi"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "pentru a menține seria activă!"
+    },
+    "text_stats_genre_other": {
+      "default": "Altele"
+    },
+    "text_stats_streak_tier_eternal": {
+      "default": "Etern"
+    },
+    "text_stats_streak_tier_mythical": {
+      "default": "Mitic"
+    },
+    "text_stats_streak_tier_legendary": {
+      "default": "Legendar"
+    },
+    "text_stats_streak_tier_obsessed": {
+      "default": "Obsedat"
+    },
+    "text_stats_streak_tier_inferno": {
+      "default": "Infern"
+    },
+    "text_stats_streak_tier_blazing": {
+      "default": "Arzător"
+    },
+    "text_stats_streak_tier_on_fire": {
+      "default": "În flăcări"
+    },
+    "text_stats_streak_tier_warm_up": {
+      "default": "Încălzire"
+    },
+    "text_stats_streak_tier_spark": {
+      "default": "Scânteie"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "În. Fiecare. Zi."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Alții pot doar să viseze"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "E deja un stil de viață"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Fără zile de pauză"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Conectat total"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Ține flacăra aprinsă"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Se formează un obicei"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Continuă tot așa"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Un an întreg de povești!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "O jumătate de an!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 de zile neîntrerupte!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 de zile neîntrerupte!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "O lună întreagă!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Două săptămâni în forță!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "O săptămână plină!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Deja de trei zile!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "A început!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} lună"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} luni"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} săptămână"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} săptămâni"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} zi"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} zile"
+    },
+    "label_stats_plays": {
+      "default": "Vizionări"
+    },
+    "label_stats_episodes": {
+      "default": "Episoade"
+    },
+    "label_stats_movies": {
+      "default": "Filme"
+    },
+    "label_stats_shows": {
+      "default": "Seriale"
+    },
+    "label_stats_active_days": {
+      "default": "Zile active"
+    },
+    "label_stats_busiest_day": {
+      "default": "Cea mai plină zi"
+    },
+    "label_stats_best_day": {
+      "default": "Cea mai bună zi"
+    },
+    "label_stats_hours": {
+      "default": "Ore"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Distribuția pe genuri"
+    },
+    "header_stats_this_week": {
+      "default": "Săptămâna aceasta"
+    },
+    "header_stats_graph_daily": {
+      "default": "Activitate zilnică"
+    },
+    "header_stats_graph_trend": {
+      "default": "Evoluția săptămânii"
+    },
+    "header_stats_graph_peak": {
+      "default": "Ore de vârf"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Seriale vs Filme"
     }
   }
 }

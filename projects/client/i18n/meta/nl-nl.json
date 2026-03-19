@@ -3002,6 +3002,204 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Sleep de afbeelding om aan te passen"
+    },
+    "text_stats_today": {
+      "default": "Vandaag"
+    },
+    "text_stats_time_morning": {
+      "default": "Ochtend"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Middag"
+    },
+    "text_stats_time_evening": {
+      "default": "Avond"
+    },
+    "text_stats_time_late_night": {
+      "default": "Nacht"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}w geleden"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}w"
+    },
+    "text_stats_this_week": {
+      "default": "Deze week"
+    },
+    "text_stats_was_last_week": {
+      "default": "was vorige week {day}"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "gelijk"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} afleveringen"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} films"
+    },
+    "text_stats_day_count": {
+      "default": "{count} dag"
+    },
+    "text_stats_days_count": {
+      "default": "{count} dagen"
+    },
+    "text_stats_watching_streak": {
+      "default": "kijk-streak"
+    },
+    "text_stats_watch_today": {
+      "default": "Kijk vandaag nog"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "om je streak levend te houden!"
+    },
+    "text_stats_genre_other": {
+      "default": "Overig"
+    },
+    "text_stats_streak_tier_eternal": {
+      "default": "Eeuwig"
+    },
+    "text_stats_streak_tier_mythical": {
+      "default": "Mythisch"
+    },
+    "text_stats_streak_tier_legendary": {
+      "default": "Legendarisch"
+    },
+    "text_stats_streak_tier_obsessed": {
+      "default": "Geobsedeerd"
+    },
+    "text_stats_streak_tier_inferno": {
+      "default": "Inferno"
+    },
+    "text_stats_streak_tier_blazing": {
+      "default": "Laaiend"
+    },
+    "text_stats_streak_tier_on_fire": {
+      "default": "In vuur en vlam"
+    },
+    "text_stats_streak_tier_warm_up": {
+      "default": "Opwarmertje"
+    },
+    "text_stats_streak_tier_spark": {
+      "default": "Vonk"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Elke. Dag. Weer."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Anderen kunnen er alleen van dromen"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Het is nu een lifestyle"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Geen rustdagen"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Helemaal in de zone"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Houd het vuur brandend"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Een echte gewoonte"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Lekker bezig"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Een heel jaar!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Een half jaar!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 dagen op rij!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 dagen op rij!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Een volle maand!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Al twee weken!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Een volle week!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Drie dagen onderweg!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Het begin is er!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} maand"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} maanden"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} week"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} weken"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} dag"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} dagen"
+    },
+    "label_stats_plays": {
+      "default": "Kijkbeurten"
+    },
+    "label_stats_episodes": {
+      "default": "Afleveringen"
+    },
+    "label_stats_movies": {
+      "default": "Films"
+    },
+    "label_stats_shows": {
+      "default": "Series"
+    },
+    "label_stats_active_days": {
+      "default": "Actieve dagen"
+    },
+    "label_stats_busiest_day": {
+      "default": "Drukste dag"
+    },
+    "label_stats_best_day": {
+      "default": "Beste dag"
+    },
+    "label_stats_hours": {
+      "default": "Uren"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Genreoverzicht"
+    },
+    "header_stats_this_week": {
+      "default": "Deze week"
+    },
+    "header_stats_graph_daily": {
+      "default": "Dagelijkse activiteit"
+    },
+    "header_stats_graph_trend": {
+      "default": "Weektrend"
+    },
+    "header_stats_graph_peak": {
+      "default": "Piektijden"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Series vs. Films"
     }
   }
 }

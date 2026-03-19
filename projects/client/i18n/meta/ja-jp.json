@@ -3002,6 +3002,204 @@
     },
     "label_drag_image_to_adjust": {
       "default": "画像をドラッグして位置を調整"
+    },
+    "text_stats_today": {
+      "default": "今日"
+    },
+    "text_stats_time_morning": {
+      "default": "朝"
+    },
+    "text_stats_time_afternoon": {
+      "default": "午後"
+    },
+    "text_stats_time_evening": {
+      "default": "夜"
+    },
+    "text_stats_time_late_night": {
+      "default": "深夜"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}週間前"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}週"
+    },
+    "text_stats_this_week": {
+      "default": "今週"
+    },
+    "text_stats_was_last_week": {
+      "default": "先週は{day}が最多でした"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "変化なし"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} エピソード"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} 映画"
+    },
+    "text_stats_day_count": {
+      "default": "{count}日"
+    },
+    "text_stats_days_count": {
+      "default": "{count}日"
+    },
+    "text_stats_watching_streak": {
+      "default": "連続視聴"
+    },
+    "text_stats_watch_today": {
+      "default": "今日も観よう"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "連続記録を更新しよう！"
+    },
+    "text_stats_genre_other": {
+      "default": "その他"
+    },
+    "text_stats_streak_tier_eternal": {
+      "default": "エターナル"
+    },
+    "text_stats_streak_tier_mythical": {
+      "default": "神話級"
+    },
+    "text_stats_streak_tier_legendary": {
+      "default": "伝説級"
+    },
+    "text_stats_streak_tier_obsessed": {
+      "default": "夢中"
+    },
+    "text_stats_streak_tier_inferno": {
+      "default": "インフェルノ"
+    },
+    "text_stats_streak_tier_blazing": {
+      "default": "ブレイジング"
+    },
+    "text_stats_streak_tier_on_fire": {
+      "default": "絶好調"
+    },
+    "text_stats_streak_tier_warm_up": {
+      "default": "ウォームアップ"
+    },
+    "text_stats_streak_tier_spark": {
+      "default": "スパーク"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "毎日、欠かさず。"
+    },
+    "text_stats_streak_others_dream": {
+      "default": "誰もが憧れる境地"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "もはや生活の一部"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "365日休みなし"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "全集中で視聴中"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "その調子でいこう"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "習慣化してきた！"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "継続は力なり"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "丸1年達成！"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "半年達成！"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90日連続！"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60日連続！"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "丸1ヶ月！"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "2週間突破！"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "丸1週間！"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "3日目突入！"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "全てはここから！"
+    },
+    "text_stats_streak_month": {
+      "default": "{count}ヶ月"
+    },
+    "text_stats_streak_months": {
+      "default": "{count}ヶ月"
+    },
+    "text_stats_streak_week": {
+      "default": "{count}週間"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count}週間"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} 日"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} 日"
+    },
+    "label_stats_plays": {
+      "default": "視聴数"
+    },
+    "label_stats_episodes": {
+      "default": "エピソード"
+    },
+    "label_stats_movies": {
+      "default": "映画"
+    },
+    "label_stats_shows": {
+      "default": "ドラマ"
+    },
+    "label_stats_active_days": {
+      "default": "アクティブ日数"
+    },
+    "label_stats_busiest_day": {
+      "default": "最多視聴日"
+    },
+    "label_stats_best_day": {
+      "default": "ベスト視聴日"
+    },
+    "label_stats_hours": {
+      "default": "時間"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "ジャンル内訳"
+    },
+    "header_stats_this_week": {
+      "default": "今週"
+    },
+    "header_stats_graph_daily": {
+      "default": "日別アクティビティ"
+    },
+    "header_stats_graph_trend": {
+      "default": "週間トレンド"
+    },
+    "header_stats_graph_peak": {
+      "default": "ピーク時間帯"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "ドラマ vs 映画"
     }
   }
 }

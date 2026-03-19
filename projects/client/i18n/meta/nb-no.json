@@ -3002,6 +3002,204 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Dra i bildet for å tilpasse – finn din beste vinkel før kveldens premiere!"
+    },
+    "text_stats_today": {
+      "default": "I dag"
+    },
+    "text_stats_time_morning": {
+      "default": "Morgen"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Ettermiddag"
+    },
+    "text_stats_time_evening": {
+      "default": "Kveld"
+    },
+    "text_stats_time_late_night": {
+      "default": "Natt"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count} u. siden"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}u"
+    },
+    "text_stats_this_week": {
+      "default": "Denne uken"
+    },
+    "text_stats_was_last_week": {
+      "default": "var {day} forrige uke"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "likt"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} episoder"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} filmer"
+    },
+    "text_stats_day_count": {
+      "default": "{count} dag"
+    },
+    "text_stats_days_count": {
+      "default": "{count} dager"
+    },
+    "text_stats_watching_streak": {
+      "default": "seerekke"
+    },
+    "text_stats_watch_today": {
+      "default": "Se noe i dag"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "for å holde seerekken (og hyggen) i live!"
+    },
+    "text_stats_genre_other": {
+      "default": "Annet"
+    },
+    "text_stats_streak_tier_eternal": {
+      "default": "Evig"
+    },
+    "text_stats_streak_tier_mythical": {
+      "default": "Mytisk"
+    },
+    "text_stats_streak_tier_legendary": {
+      "default": "Legendarisk"
+    },
+    "text_stats_streak_tier_obsessed": {
+      "default": "Besatt"
+    },
+    "text_stats_streak_tier_inferno": {
+      "default": "Inferno"
+    },
+    "text_stats_streak_tier_blazing": {
+      "default": "Brennende"
+    },
+    "text_stats_streak_tier_on_fire": {
+      "default": "I fyr og flamme"
+    },
+    "text_stats_streak_tier_warm_up": {
+      "default": "Oppvarming"
+    },
+    "text_stats_streak_tier_spark": {
+      "default": "Gnist"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Hver. Eneste. Dag."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Andre kan bare drømme"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Det er en livsstil nå"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Ingen fridager"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Helt fokusert"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Hold fyr i peisen"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "En god vane"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Fortsett slik"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Et helt år!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Et halvt år!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 dager på rad!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 dager på rad!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "En hel måned!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "To sterke uker!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "En hel uke!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Tre dager i boks!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Det begynner!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} måned"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} måneder"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} uke"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} uker"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} dag"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} dager"
+    },
+    "label_stats_plays": {
+      "default": "Avspillinger"
+    },
+    "label_stats_episodes": {
+      "default": "Episoder"
+    },
+    "label_stats_movies": {
+      "default": "Filmer"
+    },
+    "label_stats_shows": {
+      "default": "Serier"
+    },
+    "label_stats_active_days": {
+      "default": "Aktive dager"
+    },
+    "label_stats_busiest_day": {
+      "default": "Travleste dag"
+    },
+    "label_stats_best_day": {
+      "default": "Beste dag"
+    },
+    "label_stats_hours": {
+      "default": "Timer"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Sjangerfordeling"
+    },
+    "header_stats_this_week": {
+      "default": "Denne uken"
+    },
+    "header_stats_graph_daily": {
+      "default": "Daglig aktivitet"
+    },
+    "header_stats_graph_trend": {
+      "default": "Ukestrend"
+    },
+    "header_stats_graph_peak": {
+      "default": "Topptimer"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Serier vs. filmer"
     }
   }
 }

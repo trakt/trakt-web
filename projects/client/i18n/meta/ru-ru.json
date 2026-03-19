@@ -3002,6 +3002,204 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Перетащите изображение, чтобы настроить"
+    },
+    "text_stats_today": {
+      "default": "Сегодня"
+    },
+    "text_stats_time_morning": {
+      "default": "Утро"
+    },
+    "text_stats_time_afternoon": {
+      "default": "День"
+    },
+    "text_stats_time_evening": {
+      "default": "Вечер"
+    },
+    "text_stats_time_late_night": {
+      "default": "Ночь"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}н назад"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}н"
+    },
+    "text_stats_this_week": {
+      "default": "На этой неделе"
+    },
+    "text_stats_was_last_week": {
+      "default": "был в {day} на прошлой неделе"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "так же"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} эпизодов"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} фильмов"
+    },
+    "text_stats_day_count": {
+      "default": "{count} день"
+    },
+    "text_stats_days_count": {
+      "default": "{count} дней"
+    },
+    "text_stats_watching_streak": {
+      "default": "серия просмотров"
+    },
+    "text_stats_watch_today": {
+      "default": "Посмотри что-нибудь сегодня"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "чтобы не прерывать серию!"
+    },
+    "text_stats_genre_other": {
+      "default": "Другое"
+    },
+    "text_stats_streak_tier_eternal": {
+      "default": "Вечность"
+    },
+    "text_stats_streak_tier_mythical": {
+      "default": "Мифический"
+    },
+    "text_stats_streak_tier_legendary": {
+      "default": "Легендарный"
+    },
+    "text_stats_streak_tier_obsessed": {
+      "default": "Одержимый"
+    },
+    "text_stats_streak_tier_inferno": {
+      "default": "Инферно"
+    },
+    "text_stats_streak_tier_blazing": {
+      "default": "Пылающий"
+    },
+    "text_stats_streak_tier_on_fire": {
+      "default": "В огне"
+    },
+    "text_stats_streak_tier_warm_up": {
+      "default": "Разминка"
+    },
+    "text_stats_streak_tier_spark": {
+      "default": "Искра"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Каждый. Божий. День."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Другим такое только снится"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Это уже стиль жизни"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Без выходных"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Полное погружение"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Поддерживай огонь"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Привычка формируется"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Так держать"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Целый год!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Полгода!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 дней подряд!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 дней подряд!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Целый месяц!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Две недели в ударе!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Целая неделя!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Три дня позади!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Начало положено!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} месяц"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} мес."
+    },
+    "text_stats_streak_week": {
+      "default": "{count} неделя"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} нед."
+    },
+    "text_stats_streak_day": {
+      "default": "{count} день"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} дн."
+    },
+    "label_stats_plays": {
+      "default": "Просмотры"
+    },
+    "label_stats_episodes": {
+      "default": "Серии"
+    },
+    "label_stats_movies": {
+      "default": "Фильмы"
+    },
+    "label_stats_shows": {
+      "default": "Сериалы"
+    },
+    "label_stats_active_days": {
+      "default": "Активные дни"
+    },
+    "label_stats_busiest_day": {
+      "default": "Пиковый день"
+    },
+    "label_stats_best_day": {
+      "default": "Лучший день"
+    },
+    "label_stats_hours": {
+      "default": "Часы"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Статистика по жанрам"
+    },
+    "header_stats_this_week": {
+      "default": "На этой неделе"
+    },
+    "header_stats_graph_daily": {
+      "default": "Дневная активность"
+    },
+    "header_stats_graph_trend": {
+      "default": "Тренд недели"
+    },
+    "header_stats_graph_peak": {
+      "default": "Часы пик"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Сериалы vs фильмы"
     }
   }
 }

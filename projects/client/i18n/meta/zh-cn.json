@@ -3001,6 +3001,204 @@
     },
     "label_drag_image_to_adjust": {
       "default": "拖动图像以调整位置"
+    },
+    "text_stats_today": {
+      "default": "今天"
+    },
+    "text_stats_time_morning": {
+      "default": "上午"
+    },
+    "text_stats_time_afternoon": {
+      "default": "下午"
+    },
+    "text_stats_time_evening": {
+      "default": "晚上"
+    },
+    "text_stats_time_late_night": {
+      "default": "深夜"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}周前"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}周"
+    },
+    "text_stats_this_week": {
+      "default": "本周"
+    },
+    "text_stats_was_last_week": {
+      "default": "上周是{day}"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "持平"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} 集"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} 部电影"
+    },
+    "text_stats_day_count": {
+      "default": "{count} 天"
+    },
+    "text_stats_days_count": {
+      "default": "{count} 天"
+    },
+    "text_stats_watching_streak": {
+      "default": "连胜记录"
+    },
+    "text_stats_watch_today": {
+      "default": "今天开看"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "让你的连胜记录延续下去！"
+    },
+    "text_stats_genre_other": {
+      "default": "其他"
+    },
+    "text_stats_streak_tier_eternal": {
+      "default": "永恒"
+    },
+    "text_stats_streak_tier_mythical": {
+      "default": "神话"
+    },
+    "text_stats_streak_tier_legendary": {
+      "default": "传奇"
+    },
+    "text_stats_streak_tier_obsessed": {
+      "default": "痴迷"
+    },
+    "text_stats_streak_tier_inferno": {
+      "default": "烈焰"
+    },
+    "text_stats_streak_tier_blazing": {
+      "default": "炽热"
+    },
+    "text_stats_streak_tier_on_fire": {
+      "default": "火热"
+    },
+    "text_stats_streak_tier_warm_up": {
+      "default": "热身"
+    },
+    "text_stats_streak_tier_spark": {
+      "default": "星火"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "日。复。一。日。"
+    },
+    "text_stats_streak_others_dream": {
+      "default": "他人梦寐以求"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "这已经是一种生活方式"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "全年无休"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "全身心投入"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "保持那股火热"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "习惯成自然"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "继续前进"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "整整一年！"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "半年了！"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "连续 90 天！"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "连续 60 天！"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "整整一个月！"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "坚持了两周！"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "足足一周！"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "连续三天！"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "开始了！"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} 个月"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} 个月"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} 周"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} 周"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} 天"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} 天"
+    },
+    "label_stats_plays": {
+      "default": "观看次数"
+    },
+    "label_stats_episodes": {
+      "default": "分集"
+    },
+    "label_stats_movies": {
+      "default": "电影"
+    },
+    "label_stats_shows": {
+      "default": "剧集"
+    },
+    "label_stats_active_days": {
+      "default": "活跃天数"
+    },
+    "label_stats_busiest_day": {
+      "default": "最忙碌的一天"
+    },
+    "label_stats_best_day": {
+      "default": "表现最佳的一天"
+    },
+    "label_stats_hours": {
+      "default": "小时"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "类型分布"
+    },
+    "header_stats_this_week": {
+      "default": "本周"
+    },
+    "header_stats_graph_daily": {
+      "default": "每日动态"
+    },
+    "header_stats_graph_trend": {
+      "default": "周趋势图"
+    },
+    "header_stats_graph_peak": {
+      "default": "高峰时段"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "剧集 vs 电影"
     }
   }
 }

@@ -3002,6 +3002,204 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Перетягніть зображення для налаштування"
+    },
+    "text_stats_today": {
+      "default": "Сьогодні"
+    },
+    "text_stats_time_morning": {
+      "default": "Ранок"
+    },
+    "text_stats_time_afternoon": {
+      "default": "День"
+    },
+    "text_stats_time_evening": {
+      "default": "Вечір"
+    },
+    "text_stats_time_late_night": {
+      "default": "Пізня ніч"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}т. тому"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}т."
+    },
+    "text_stats_this_week": {
+      "default": "Цього тижня"
+    },
+    "text_stats_was_last_week": {
+      "default": "був у {day} минулого тижня"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "без змін"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} серій"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} фільмів"
+    },
+    "text_stats_day_count": {
+      "default": "{count} день"
+    },
+    "text_stats_days_count": {
+      "default": "{count} днів"
+    },
+    "text_stats_watching_streak": {
+      "default": "днів поспіль"
+    },
+    "text_stats_watch_today": {
+      "default": "Подивіться щось сьогодні"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "щоб вогонь не згас!"
+    },
+    "text_stats_genre_other": {
+      "default": "Інше"
+    },
+    "text_stats_streak_tier_eternal": {
+      "default": "Вічний"
+    },
+    "text_stats_streak_tier_mythical": {
+      "default": "Міфічний"
+    },
+    "text_stats_streak_tier_legendary": {
+      "default": "Легендарний"
+    },
+    "text_stats_streak_tier_obsessed": {
+      "default": "Одержимий"
+    },
+    "text_stats_streak_tier_inferno": {
+      "default": "Пекельний"
+    },
+    "text_stats_streak_tier_blazing": {
+      "default": "Палкий"
+    },
+    "text_stats_streak_tier_on_fire": {
+      "default": "У вогні"
+    },
+    "text_stats_streak_tier_warm_up": {
+      "default": "Розігрів"
+    },
+    "text_stats_streak_tier_spark": {
+      "default": "Іскра"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Кожен. Божий. День."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Інші лише мріють про таке"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Тепер це ваш стиль життя"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Жодних вихідних"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Повне занурення"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Не збавляйте темп"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Звичка формується"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Тільки вперед"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Цілий рік кіномарафону!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Пів року історій!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 днів незламності!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 днів у ритмі Trakt!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Цілий місяць разом!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Два тижні витримки!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Цілий тиждень!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Вже три дні!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Пригоди починаються!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} місяць"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} місяців"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} тиждень"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} тижні"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} день"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} днів"
+    },
+    "label_stats_plays": {
+      "default": "Перегляди"
+    },
+    "label_stats_episodes": {
+      "default": "Серії"
+    },
+    "label_stats_movies": {
+      "default": "Фільми"
+    },
+    "label_stats_shows": {
+      "default": "Серіали"
+    },
+    "label_stats_active_days": {
+      "default": "Активні дні"
+    },
+    "label_stats_busiest_day": {
+      "default": "Найактивніший день"
+    },
+    "label_stats_best_day": {
+      "default": "Найкращий день"
+    },
+    "label_stats_hours": {
+      "default": "Години"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Жанровий розподіл"
+    },
+    "header_stats_this_week": {
+      "default": "Цього тижня"
+    },
+    "header_stats_graph_daily": {
+      "default": "Щоденна активність"
+    },
+    "header_stats_graph_trend": {
+      "default": "Тижневий тренд"
+    },
+    "header_stats_graph_peak": {
+      "default": "Пікові години"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Серіали та фільми"
     }
   }
 }

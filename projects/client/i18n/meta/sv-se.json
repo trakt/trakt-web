@@ -3002,6 +3002,204 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Dra i bilden för att justera"
+    },
+    "text_stats_today": {
+      "default": "Idag"
+    },
+    "text_stats_time_morning": {
+      "default": "Morgon"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Eftermiddag"
+    },
+    "text_stats_time_evening": {
+      "default": "Kväll"
+    },
+    "text_stats_time_late_night": {
+      "default": "Sen natt"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}v sedan"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}v"
+    },
+    "text_stats_this_week": {
+      "default": "Denna vecka"
+    },
+    "text_stats_was_last_week": {
+      "default": "var {day} förra veckan"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "samma"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} avsnitt"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} filmer"
+    },
+    "text_stats_day_count": {
+      "default": "{count} dag"
+    },
+    "text_stats_days_count": {
+      "default": "{count} dagar"
+    },
+    "text_stats_watching_streak": {
+      "default": "tittarsvit"
+    },
+    "text_stats_watch_today": {
+      "default": "Se något idag"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "för att hålla din svit vid liv!"
+    },
+    "text_stats_genre_other": {
+      "default": "Övrigt"
+    },
+    "text_stats_streak_tier_eternal": {
+      "default": "Evig"
+    },
+    "text_stats_streak_tier_mythical": {
+      "default": "Mytisk"
+    },
+    "text_stats_streak_tier_legendary": {
+      "default": "Legendarisk"
+    },
+    "text_stats_streak_tier_obsessed": {
+      "default": "Besatt"
+    },
+    "text_stats_streak_tier_inferno": {
+      "default": "Inferno"
+    },
+    "text_stats_streak_tier_blazing": {
+      "default": "Glödande"
+    },
+    "text_stats_streak_tier_on_fire": {
+      "default": "Brinnande"
+    },
+    "text_stats_streak_tier_warm_up": {
+      "default": "Uppvärmning"
+    },
+    "text_stats_streak_tier_spark": {
+      "default": "Gnistra"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Varje. Endaste. Dag."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Andra kan bara drömma"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Det är en livsstil nu"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Inga lediga dagar"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Fokuserad"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Håll elden vid liv"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Vanebildande"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Fortsätt så"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Ett helt år!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Ett halvår!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 dagar i sträck!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 dagar i sträck!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "En hel månad!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Två starka veckor!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "En hel vecka!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Tre dagar avklarade!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Det börjar!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} månad"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} månader"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} vecka"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} veckor"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} dag"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} dagar"
+    },
+    "label_stats_plays": {
+      "default": "Tittningar"
+    },
+    "label_stats_episodes": {
+      "default": "Avsnitt"
+    },
+    "label_stats_movies": {
+      "default": "Filmer"
+    },
+    "label_stats_shows": {
+      "default": "Serier"
+    },
+    "label_stats_active_days": {
+      "default": "Aktiva dagar"
+    },
+    "label_stats_busiest_day": {
+      "default": "Mest aktiv"
+    },
+    "label_stats_best_day": {
+      "default": "Bästa dagen"
+    },
+    "label_stats_hours": {
+      "default": "Timmar"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Genrefördelning"
+    },
+    "header_stats_this_week": {
+      "default": "Denna vecka"
+    },
+    "header_stats_graph_daily": {
+      "default": "Daglig aktivitet"
+    },
+    "header_stats_graph_trend": {
+      "default": "Veckotrend"
+    },
+    "header_stats_graph_peak": {
+      "default": "Topptider"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Serier vs Filmer"
     }
   }
 }

@@ -3002,6 +3002,204 @@
     },
     "label_drag_image_to_adjust": {
       "default": "Glissez l'image pour ajuster le cadrage, comme au cinéma d'ici !"
+    },
+    "text_stats_today": {
+      "default": "Aujourd'hui"
+    },
+    "text_stats_time_morning": {
+      "default": "Matin"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Après-midi"
+    },
+    "text_stats_time_evening": {
+      "default": "Soirée"
+    },
+    "text_stats_time_late_night": {
+      "default": "Fin de soirée"
+    },
+    "text_stats_weeks_ago": {
+      "default": "Il y a {count} s."
+    },
+    "text_stats_weeks_short": {
+      "default": "{count} s."
+    },
+    "text_stats_this_week": {
+      "default": "Cette semaine"
+    },
+    "text_stats_was_last_week": {
+      "default": "était {day} dernier"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "identique"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} épisodes"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} films"
+    },
+    "text_stats_day_count": {
+      "default": "{count} jour"
+    },
+    "text_stats_days_count": {
+      "default": "{count} jours"
+    },
+    "text_stats_watching_streak": {
+      "default": "de visionnage consécutif"
+    },
+    "text_stats_watch_today": {
+      "default": "Regarde quelque chose"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "pour garder ta séquence en vie!"
+    },
+    "text_stats_genre_other": {
+      "default": "Autre"
+    },
+    "text_stats_streak_tier_eternal": {
+      "default": "Éternel"
+    },
+    "text_stats_streak_tier_mythical": {
+      "default": "Mythique"
+    },
+    "text_stats_streak_tier_legendary": {
+      "default": "Légendaire"
+    },
+    "text_stats_streak_tier_obsessed": {
+      "default": "Accro"
+    },
+    "text_stats_streak_tier_inferno": {
+      "default": "Brasier"
+    },
+    "text_stats_streak_tier_blazing": {
+      "default": "En feu"
+    },
+    "text_stats_streak_tier_on_fire": {
+      "default": "En flammes"
+    },
+    "text_stats_streak_tier_warm_up": {
+      "default": "Échauffement"
+    },
+    "text_stats_streak_tier_spark": {
+      "default": "Étincelle"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Chaque. Saint. Jour."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Un rêve pour les autres"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "C'est rendu un mode de vie"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Pas de congé"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Bien concentré"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Lâche pas la patate!"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Une vraie habitude"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Continue comme ça"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Un an pile!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Six mois déjà!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 jours d'affilée!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 jours d'affilée!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Un mois complet!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Deux semaines de feu!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Une semaine entière!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Trois jours de faits!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Ça commence!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} mois"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} mois"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} semaine"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} semaines"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} jour"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} jours"
+    },
+    "label_stats_plays": {
+      "default": "Visionnements"
+    },
+    "label_stats_episodes": {
+      "default": "Épisodes"
+    },
+    "label_stats_movies": {
+      "default": "Films"
+    },
+    "label_stats_shows": {
+      "default": "Séries"
+    },
+    "label_stats_active_days": {
+      "default": "Jours actifs"
+    },
+    "label_stats_busiest_day": {
+      "default": "Journée record"
+    },
+    "label_stats_best_day": {
+      "default": "Meilleure journée"
+    },
+    "label_stats_hours": {
+      "default": "Heures"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Répartition par genre"
+    },
+    "header_stats_this_week": {
+      "default": "Cette semaine"
+    },
+    "header_stats_graph_daily": {
+      "default": "Activité quotidienne"
+    },
+    "header_stats_graph_trend": {
+      "default": "Tendance hebdo"
+    },
+    "header_stats_graph_peak": {
+      "default": "Heures de pointe"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Séries vs Films"
     }
   }
 }
