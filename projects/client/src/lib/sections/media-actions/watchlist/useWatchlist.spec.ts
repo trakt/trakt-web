@@ -13,7 +13,7 @@ import { useWatchlist } from './useWatchlist.ts';
 vi.mock('$lib/stores/useInvalidator.ts');
 
 describe('useWatchlist', () => {
-  const invalidate = vi.fn(() => {});
+  const invalidate = vi.fn(function () {});
 
   beforeEach(() => {
     setAuthorization(true);

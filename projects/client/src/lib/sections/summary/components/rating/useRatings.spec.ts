@@ -12,7 +12,7 @@ import { useRatings } from './useRatings.ts';
 vi.mock('$lib/stores/useInvalidator.ts');
 
 describe('useRatings', () => {
-  const invalidate = vi.fn(() => {});
+  const invalidate = vi.fn(function () {});
 
   beforeEach(() => {
     setAuthorization(true);

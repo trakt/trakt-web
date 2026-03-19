@@ -1,17 +1,16 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
+import { sentrySvelteKit } from '@sentry/sveltekit';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { Environment } from '@trakt/api';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
-import { defineConfig } from 'vitest/config';
-import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
-import { manifest } from './src/lib/pwa/manifest.ts';
-
-import { sentrySvelteKit } from '@sentry/sveltekit';
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { defineConfig } from 'vite';
+import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
+import { manifest } from './src/lib/pwa/manifest.ts';
 
 function findGitRoot(dir: string): string {
   if (fs.existsSync(path.join(dir, '.git'))) {
