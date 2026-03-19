@@ -91,6 +91,14 @@
     if (!success) return;
     invalidate(InvalidateAction.User.Avatar);
   }
+
+  /*
+    TODO:
+    -confirmation on remove
+    -edit badge position in combination with vip badge
+    -dialog title + close position?
+    -upload button in dialog footer?
+  */
 </script>
 
 <div class="profile-image-container" class:is-vip={isVip}>
@@ -191,18 +199,6 @@
     &.is-vip {
       --color-border-avatar: var(--color-border-vip-avatar);
     }
-
-    :global(.vip-badge) {
-      position: absolute;
-
-      width: var(--ni-24);
-      height: var(--ni-24);
-
-      top: var(--ni-neg-8);
-      right: var(--ni-neg-8);
-
-      z-index: var(--layer-raised);
-    }
   }
 
   .profile-image {
@@ -240,16 +236,21 @@
   }
 
   .edit-badge {
+    --edit-badge-size: var(--ni-24);
+    --edit-badge-offset: calc(0.3 * var(--edit-badge-size));
+
     position: absolute;
     bottom: 0;
     right: 0;
-    transform: translate(15%, 15%);
+    transform: translate(var(--edit-badge-offset), var(--edit-badge-offset));
 
-    width: var(--ni-24);
-    height: var(--ni-24);
+    z-index: var(--layer-raised);
+
+    width: var(--edit-badge-size);
+    height: var(--edit-badge-size);
     border-radius: 50%;
     background-color: var(--color-modal-background);
-    box-shadow: var(--shadow-dialog);
+    box-shadow: var(--shadow-floating);
 
     display: flex;
     align-items: center;
@@ -268,11 +269,13 @@
     }
   }
 
-  .profile-image-container:has(.editable-image-wrapper:hover) .edit-badge,
-  .profile-image-container:has(.editable-image-wrapper:focus-visible)
+  .profile-image-container:has(.editable-image-wrapper:hover),
+  .profile-image-container:has(.editable-image-wrapper:focus-visible) {
     .edit-badge {
-    opacity: 1;
-    transform: translate(15%, 15%) scale(1.1);
+      opacity: 1;
+      transform: translate(var(--edit-badge-offset), var(--edit-badge-offset))
+        scale(1.1);
+    }
   }
 
   .upload-overlay {

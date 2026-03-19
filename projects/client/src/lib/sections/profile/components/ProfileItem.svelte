@@ -101,20 +101,10 @@
         transition: outline var(--transition-increment) ease-in-out;
       }
 
-      :global(.vip-badge) {
-        transition: var(--transition-increment) ease-in-out;
-        transition-property: transform;
-        transform-origin: center;
-      }
-
       @include for-mouse {
         &:hover {
           :global(.profile-image) {
             outline: var(--border-thickness-s) solid var(--color-border-avatar);
-          }
-
-          :global(.vip-badge) {
-            transform: scale(1.15);
           }
 
           &::before {
