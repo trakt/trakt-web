@@ -2652,12 +2652,6 @@
     "usage_title_library": {
       "default": "媒体库"
     },
-    "limit_title_watch_history": {
-      "default": "观看记录"
-    },
-    "limit_title_ratings": {
-      "default": "评分"
-    },
     "limit_title_smart_lists": {
       "default": "智能列表"
     },
@@ -2675,9 +2669,6 @@
     },
     "limit_title_digital_library": {
       "default": "数字库"
-    },
-    "limit_title_offline_library": {
-      "default": "离线库"
     },
     "text_vip_track_more": {
       "default": "追踪更多，列表更多，评分更多。"

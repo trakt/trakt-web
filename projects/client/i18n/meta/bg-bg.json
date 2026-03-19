@@ -2653,12 +2653,6 @@
     "usage_title_library": {
       "default": "Библиотека"
     },
-    "limit_title_watch_history": {
-      "default": "История"
-    },
-    "limit_title_ratings": {
-      "default": "Оценки"
-    },
     "limit_title_smart_lists": {
       "default": "Смарт списъци"
     },
@@ -2676,9 +2670,6 @@
     },
     "limit_title_digital_library": {
       "default": "Дигитална библиотека"
-    },
-    "limit_title_offline_library": {
-      "default": "Офлайн библиотека"
     },
     "text_vip_track_more": {
       "default": "Следете повече, добавяйте повече, оценявайте повече."

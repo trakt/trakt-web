@@ -21,14 +21,6 @@ export function mapToUsageCategories(limits: UserLimits): UsageCategory[] {
       title: m.usage_title_personal_activity,
       items: [
         {
-          title: m.limit_title_watch_history,
-          limits: limits.history,
-        },
-        {
-          title: m.limit_title_ratings,
-          limits: limits.ratings,
-        },
-        {
           title: m.limit_title_notes,
           limits: limits.totalNotes,
         },
@@ -61,10 +53,6 @@ export function mapToUsageCategories(limits: UserLimits): UsageCategory[] {
         {
           title: m.limit_title_digital_library,
           limits: limits.digitalLibrary,
-        },
-        {
-          title: m.limit_title_offline_library,
-          limits: limits.offlineLibrary,
         },
       ],
     },

@@ -6959,22 +6959,6 @@
         "ios"
       ]
     },
-    "limit_title_watch_history": {
-      "default": "Watch History",
-      "description": "Title for the progress bar that shows a user's watch history usage. This should be as short as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "limit_title_ratings": {
-      "default": "Ratings",
-      "description": "Title for the progress bar that shows a user's ratings usage. This should be as short as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "limit_title_smart_lists": {
       "default": "Smart Lists",
       "description": "Title for the progress bar that shows a user's smart lists usage. This should be as short as possible.",
@@ -7018,14 +7002,6 @@
     "limit_title_digital_library": {
       "default": "Digital Library",
       "description": "Title for the progress bar that shows a user's digital library usage. This should be as short as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "limit_title_offline_library": {
-      "default": "Offline Library",
-      "description": "Title for the progress bar that shows a user's offline library usage. This should be as short as possible.",
       "exclude": [
         "android",
         "ios"

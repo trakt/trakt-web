@@ -2653,12 +2653,6 @@
     "usage_title_library": {
       "default": "Bibliothèque"
     },
-    "limit_title_watch_history": {
-      "default": "Historique"
-    },
-    "limit_title_ratings": {
-      "default": "Évaluations"
-    },
     "limit_title_smart_lists": {
       "default": "Listes intelligentes"
     },
@@ -2676,9 +2670,6 @@
     },
     "limit_title_digital_library": {
       "default": "Bibliothèque numérique"
-    },
-    "limit_title_offline_library": {
-      "default": "Bibliothèque hors ligne"
     },
     "text_vip_track_more": {
       "default": "Suivez plus, listez plus, notez plus."

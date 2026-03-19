@@ -2653,12 +2653,6 @@
     "usage_title_library": {
       "default": "Biblioteca"
     },
-    "limit_title_watch_history": {
-      "default": "Histórico"
-    },
-    "limit_title_ratings": {
-      "default": "Avaliações"
-    },
     "limit_title_smart_lists": {
       "default": "Listas Inteligentes"
     },
@@ -2676,9 +2670,6 @@
     },
     "limit_title_digital_library": {
       "default": "Acervo Digital"
-    },
-    "limit_title_offline_library": {
-      "default": "Acervo Offline"
     },
     "text_vip_track_more": {
       "default": "Acompanhe mais, liste mais, avalie mais."
