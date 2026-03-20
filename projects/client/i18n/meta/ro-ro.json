@@ -3369,6 +3369,126 @@
     },
     "header_total_runtime": {
       "default": "Durată totală"
+    },
+    "tooltip_stats_plays": {
+      "default": "Total de filme și episoade vizionate — povestea ta continuă!"
+    },
+    "tooltip_stats_episodes": {
+      "default": "Episoade vizionate săptămâna aceasta. Un capitol după altul!"
+    },
+    "tooltip_stats_movies": {
+      "default": "Filme vizionate săptămâna aceasta. O pasiune pentru marele ecran!"
+    },
+    "tooltip_stats_shows": {
+      "default": "Seriale unice vizionate. Diversitate în storytelling!"
+    },
+    "tooltip_stats_active_days": {
+      "default": "Zile cu cel puțin o vizionare. Trăiește fiecare cadru!"
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "Ziua din săptămână cu cele mai multe vizionări. Un maraton de neoprit!"
+    },
+    "tooltip_stats_best_day": {
+      "default": "Record de vizionări într-o singură zi. Momentul tău de glorie!"
+    },
+    "tooltip_stats_hours": {
+      "default": "Total ore de conținut vizionate. Timp bine investit în artă!"
+    },
+    "tooltip_stats_ratings": {
+      "default": "Titluri evaluate săptămâna aceasta. Vocea ta contează!"
+    },
+    "tooltip_stats_comments": {
+      "default": "Comentarii scrise săptămâna aceasta. Împarte pasiunea pentru cinema!"
+    },
+    "label_stats_plays": {
+      "default": "Vizionări"
+    },
+    "label_stats_episodes": {
+      "default": "Episoade"
+    },
+    "label_stats_movies": {
+      "default": "Filme"
+    },
+    "label_stats_shows": {
+      "default": "Seriale"
+    },
+    "label_stats_active_days": {
+      "default": "Zile active"
+    },
+    "label_stats_busiest_day": {
+      "default": "Vârf săptăm."
+    },
+    "label_stats_best_day": {
+      "default": "Cea mai bună zi"
+    },
+    "label_stats_hours": {
+      "default": "Ore"
+    },
+    "label_stats_ratings": {
+      "default": "Note"
+    },
+    "label_stats_comments": {
+      "default": "Comentarii"
+    },
+    "text_stats_today": {
+      "default": "Azi"
+    },
+    "text_stats_time_morning": {
+      "default": "Dimineață"
+    },
+    "text_stats_time_afternoon": {
+      "default": "După-amiază"
+    },
+    "text_stats_time_evening": {
+      "default": "Seară"
+    },
+    "text_stats_time_late_night": {
+      "default": "Noapte"
+    },
+    "text_stats_weeks_ago": {
+      "default": "acum {count}s"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}s"
+    },
+    "text_stats_this_week": {
+      "default": "Săpt. asta"
+    },
+    "text_stats_was_last_week": {
+      "default": "a fost {day} trecută"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "la fel"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} episoade"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} filme"
+    },
+    "header_stats_this_week": {
+      "default": "Săptămâna aceasta"
+    },
+    "header_stats_graph_daily": {
+      "default": "Activitate zilnică"
+    },
+    "header_stats_graph_trend": {
+      "default": "Evoluție săptămânală"
+    },
+    "header_stats_graph_peak": {
+      "default": "Ore de vârf"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Seriale vs Filme"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Distribuție note"
     }
   }
 }

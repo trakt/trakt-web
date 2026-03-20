@@ -3369,6 +3369,126 @@
     },
     "header_total_runtime": {
       "default": "総再生時間"
+    },
+    "tooltip_stats_plays": {
+      "default": "視聴した映画とエピソードの合計。目指せ全作品コンプリート！"
+    },
+    "tooltip_stats_episodes": {
+      "default": "今週視聴したエピソード数です。"
+    },
+    "tooltip_stats_movies": {
+      "default": "今週視聴した映画の数です。"
+    },
+    "tooltip_stats_shows": {
+      "default": "視聴したドラマやアニメの作品数です。"
+    },
+    "tooltip_stats_active_days": {
+      "default": "1回以上視聴した、推し活に励んだ日数です。"
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "1週間の中で最も視聴回数が多かった曜日です。"
+    },
+    "tooltip_stats_best_day": {
+      "default": "1日で最も多く視聴した日の記録です。"
+    },
+    "tooltip_stats_hours": {
+      "default": "コンテンツに没頭した合計時間。至福のひとときですね！"
+    },
+    "tooltip_stats_ratings": {
+      "default": "今週あなたが評価を付けたアイテム数です。"
+    },
+    "tooltip_stats_comments": {
+      "default": "今週あなたが熱く語ったコメントの数です。"
+    },
+    "label_stats_plays": {
+      "default": "再生数"
+    },
+    "label_stats_episodes": {
+      "default": "エピソード"
+    },
+    "label_stats_movies": {
+      "default": "映画"
+    },
+    "label_stats_shows": {
+      "default": "ドラマ"
+    },
+    "label_stats_active_days": {
+      "default": "アクティブ日数"
+    },
+    "label_stats_busiest_day": {
+      "default": "最多視聴曜日"
+    },
+    "label_stats_best_day": {
+      "default": "最多視聴日"
+    },
+    "label_stats_hours": {
+      "default": "視聴時間"
+    },
+    "label_stats_ratings": {
+      "default": "評価数"
+    },
+    "label_stats_comments": {
+      "default": "コメント数"
+    },
+    "text_stats_today": {
+      "default": "今日"
+    },
+    "text_stats_time_morning": {
+      "default": "朝"
+    },
+    "text_stats_time_afternoon": {
+      "default": "昼"
+    },
+    "text_stats_time_evening": {
+      "default": "夕方・夜"
+    },
+    "text_stats_time_late_night": {
+      "default": "深夜"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}週間前"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}週"
+    },
+    "text_stats_this_week": {
+      "default": "今週"
+    },
+    "text_stats_was_last_week": {
+      "default": "先週は{day}でした"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "変動なし"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} エピソード"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} 映画"
+    },
+    "header_stats_this_week": {
+      "default": "今週の記録"
+    },
+    "header_stats_graph_daily": {
+      "default": "デイリー活動"
+    },
+    "header_stats_graph_trend": {
+      "default": "週次トレンド"
+    },
+    "header_stats_graph_peak": {
+      "default": "ピークタイム"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "ドラマ vs 映画"
+    },
+    "header_stats_graph_ratings": {
+      "default": "評価分布"
     }
   }
 }

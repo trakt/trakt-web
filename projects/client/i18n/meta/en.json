@@ -8485,7 +8485,99 @@
     },
     "limit_title_watch_history": {
       "default": "Watch History",
-      "description": "Title for the progress bar that shows a user's watch history usage. This should be as short as possible.",
+      "description": "Title for the progress bar that shows a user's watch history usage. This should be as short as possible."
+    },
+    "tooltip_stats_plays": {
+      "default": "Total movies and episodes watched",
+      "description": "Tooltip for total plays stat icon in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_episodes": {
+      "default": "Episodes watched this week",
+      "description": "Tooltip for episodes stat icon in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_movies": {
+      "default": "Movies watched this week",
+      "description": "Tooltip for movies stat icon in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_shows": {
+      "default": "Unique shows watched",
+      "description": "Tooltip for unique shows stat icon in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_active_days": {
+      "default": "Days with at least one watch",
+      "description": "Tooltip for active days stat icon in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "Day of week with the most watches",
+      "description": "Tooltip for busiest day stat icon in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_best_day": {
+      "default": "Most watches in a single day",
+      "description": "Tooltip for best day stat icon in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_hours": {
+      "default": "Total hours of content watched",
+      "description": "Tooltip for hours stat icon in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_ratings": {
+      "default": "Items rated this week",
+      "description": "Tooltip for ratings stat icon in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_comments": {
+      "default": "Comments written this week",
+      "description": "Tooltip for comments stat icon in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_average": {
+      "default": "Avg",
+      "description": "Short label for average rating in ratings distribution graph.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_plays": {
+      "default": "Plays",
+      "description": "Label for total plays stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8497,7 +8589,11 @@
     },
     "limit_title_ratings": {
       "default": "Ratings",
-      "description": "Title for the progress bar that shows a user's ratings usage. This should be as short as possible.",
+      "description": "Title for the progress bar that shows a user's ratings usage. This should be as short as possible."
+    },
+    "label_stats_episodes": {
+      "default": "Episodes",
+      "description": "Label for episodes stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8509,7 +8605,11 @@
     },
     "limit_title_offline_library": {
       "default": "Offline Library",
-      "description": "Title for the progress bar that shows a user's offline library usage. This should be as short as possible.",
+      "description": "Title for the progress bar that shows a user's offline library usage. This should be as short as possible."
+    },
+    "label_stats_movies": {
+      "default": "Movies",
+      "description": "Label for movies stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8521,7 +8621,11 @@
     },
     "text_stats_day_count": {
       "default": "{count}-day",
-      "description": "Day count for watching streak, used as compound adjective (e.g. '16-day watching streak').",
+      "description": "Day count for watching streak, used as compound adjective (e.g. '16-day watching streak')."
+    },
+    "label_stats_shows": {
+      "default": "Shows",
+      "description": "Label for shows stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8533,7 +8637,11 @@
     },
     "text_stats_days_count": {
       "default": "{count}-day",
-      "description": "Plural day count for watching streak, used as compound adjective (e.g. '16-day watching streak').",
+      "description": "Plural day count for watching streak, used as compound adjective (e.g. '16-day watching streak')."
+    },
+    "label_stats_active_days": {
+      "default": "Active Days",
+      "description": "Label for active days stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8550,7 +8658,11 @@
     },
     "text_stats_watching_streak": {
       "default": "watching streak",
-      "description": "Label following the streak count, e.g. '5 days watching streak'.",
+      "description": "Label following the streak count, e.g. '5 days watching streak'."
+    },
+    "label_stats_busiest_day": {
+      "default": "Busiest Day",
+      "description": "Label for busiest day of week stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8558,7 +8670,11 @@
     },
     "text_stats_watch_today": {
       "default": "Watch today",
-      "description": "Call to action when streak is at risk.",
+      "description": "Call to action when streak is at risk."
+    },
+    "label_stats_best_day": {
+      "default": "Best Day",
+      "description": "Label for best performing day stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8566,7 +8682,11 @@
     },
     "text_stats_keep_streak_alive": {
       "default": "to keep your streak alive!",
-      "description": "Motivational text following 'Watch today' when streak is at risk.",
+      "description": "Motivational text following 'Watch today' when streak is at risk."
+    },
+    "label_stats_hours": {
+      "default": "Hours",
+      "description": "Label for total hours watched stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8574,7 +8694,11 @@
     },
     "text_stats_streak_every_single_day": {
       "default": "Every. Single. Day.",
-      "description": "Motivational message for 180+ day streak tiers.",
+      "description": "Motivational message for 180+ day streak tiers."
+    },
+    "label_stats_ratings": {
+      "default": "Ratings",
+      "description": "Label for items rated stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8582,7 +8706,11 @@
     },
     "text_stats_streak_others_dream": {
       "default": "Others can only dream",
-      "description": "Motivational message for 90+ day streak tier.",
+      "description": "Motivational message for 90+ day streak tier."
+    },
+    "label_stats_comments": {
+      "default": "Comments",
+      "description": "Label for comments written stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8590,7 +8718,11 @@
     },
     "text_stats_streak_lifestyle": {
       "default": "It's a lifestyle now",
-      "description": "Motivational message for 60+ day streak tier.",
+      "description": "Motivational message for 60+ day streak tier."
+    },
+    "text_stats_today": {
+      "default": "Today",
+      "description": "Label for the current day in stats charts.",
       "exclude": [
         "android",
         "ios"
@@ -8598,7 +8730,11 @@
     },
     "text_stats_streak_no_days_off": {
       "default": "No days off",
-      "description": "Motivational message for 30+ day streak tier.",
+      "description": "Motivational message for 30+ day streak tier."
+    },
+    "text_stats_time_morning": {
+      "default": "Morning",
+      "description": "Label for morning time bucket (5am-12pm) in watch clock chart.",
       "exclude": [
         "android",
         "ios"
@@ -8606,7 +8742,11 @@
     },
     "text_stats_streak_locked_in": {
       "default": "Locked in",
-      "description": "Motivational message for 14+ day streak tier.",
+      "description": "Motivational message for 14+ day streak tier."
+    },
+    "text_stats_time_afternoon": {
+      "default": "Afternoon",
+      "description": "Label for afternoon time bucket (12pm-5pm) in watch clock chart.",
       "exclude": [
         "android",
         "ios"
@@ -8614,7 +8754,11 @@
     },
     "text_stats_streak_keep_fire": {
       "default": "Keep that fire going",
-      "description": "Motivational message for 7+ day streak tier.",
+      "description": "Motivational message for 7+ day streak tier."
+    },
+    "text_stats_time_evening": {
+      "default": "Evening",
+      "description": "Label for evening time bucket (5pm-10pm) in watch clock chart.",
       "exclude": [
         "android",
         "ios"
@@ -8622,7 +8766,11 @@
     },
     "text_stats_streak_habit_forming": {
       "default": "Habit forming",
-      "description": "Motivational message for 3+ day streak tier.",
+      "description": "Motivational message for 3+ day streak tier."
+    },
+    "text_stats_time_late_night": {
+      "default": "Late Night",
+      "description": "Label for late night time bucket (10pm-5am) in watch clock chart.",
       "exclude": [
         "android",
         "ios"
@@ -8630,7 +8778,11 @@
     },
     "text_stats_streak_keep_going": {
       "default": "Keep going",
-      "description": "Motivational message for 1 day streak tier.",
+      "description": "Motivational message for 1 day streak tier."
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}w ago",
+      "description": "Week trend label for weeks in the past, e.g. '4w ago'.",
       "exclude": [
         "android",
         "ios"
@@ -8638,7 +8790,11 @@
     },
     "text_stats_streak_exact_year": {
       "default": "A full year!",
-      "description": "Message shown when streak is exactly 365 days.",
+      "description": "Message shown when streak is exactly 365 days."
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}w",
+      "description": "Abbreviated week trend label, e.g. '3w'.",
       "exclude": [
         "android",
         "ios"
@@ -8646,7 +8802,11 @@
     },
     "text_stats_streak_exact_half_year": {
       "default": "Half a year!",
-      "description": "Message shown when streak is exactly 180 days.",
+      "description": "Message shown when streak is exactly 180 days."
+    },
+    "text_stats_this_week": {
+      "default": "This week",
+      "description": "Label for the current week in week trend chart.",
       "exclude": [
         "android",
         "ios"
@@ -8654,7 +8814,11 @@
     },
     "text_stats_streak_exact_90": {
       "default": "90 days straight!",
-      "description": "Message shown when streak is exactly 90 days.",
+      "description": "Message shown when streak is exactly 90 days."
+    },
+    "text_stats_was_last_week": {
+      "default": "was {day} last week",
+      "description": "Note indicating the busiest day last week, e.g. 'was Monday last week'.",
       "exclude": [
         "android",
         "ios"
@@ -8662,7 +8826,11 @@
     },
     "text_stats_streak_exact_60": {
       "default": "60 days straight!",
-      "description": "Message shown when streak is exactly 60 days.",
+      "description": "Message shown when streak is exactly 60 days."
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}",
+      "description": "Positive delta indicator for week-over-week change.",
       "exclude": [
         "android",
         "ios"
@@ -8670,7 +8838,11 @@
     },
     "text_stats_streak_exact_month": {
       "default": "A full month!",
-      "description": "Message shown when streak is exactly 30 days.",
+      "description": "Message shown when streak is exactly 30 days."
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}",
+      "description": "Negative delta indicator for week-over-week change.",
       "exclude": [
         "android",
         "ios"
@@ -8678,7 +8850,11 @@
     },
     "text_stats_streak_exact_two_weeks": {
       "default": "Two weeks strong!",
-      "description": "Message shown when streak is exactly 14 days.",
+      "description": "Message shown when streak is exactly 14 days."
+    },
+    "text_stats_delta_same": {
+      "default": "same",
+      "description": "Label shown when week-over-week change is zero.",
       "exclude": [
         "android",
         "ios"
@@ -8686,7 +8862,11 @@
     },
     "text_stats_streak_exact_week": {
       "default": "A whole week!",
-      "description": "Message shown when streak is exactly 7 days.",
+      "description": "Message shown when streak is exactly 7 days."
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} episodes",
+      "description": "Episode count label in shows vs movies breakdown.",
       "exclude": [
         "android",
         "ios"
@@ -8694,7 +8874,11 @@
     },
     "text_stats_streak_exact_three_days": {
       "default": "Three days in!",
-      "description": "Message shown when streak is exactly 3 days.",
+      "description": "Message shown when streak is exactly 3 days."
+    },
+    "text_stats_movies_count": {
+      "default": "{count} movies",
+      "description": "Movie count label in shows vs movies breakdown.",
       "exclude": [
         "android",
         "ios"
@@ -8702,7 +8886,11 @@
     },
     "text_stats_streak_exact_it_begins": {
       "default": "It begins!",
-      "description": "Message shown when streak is exactly 1 day.",
+      "description": "Message shown when streak is exactly 1 day."
+    },
+    "header_stats_this_week": {
+      "default": "This Week",
+      "description": "Section header for the weekly pulse stats block.",
       "exclude": [
         "android",
         "ios"
@@ -8710,7 +8898,11 @@
     },
     "text_stats_streak_month": {
       "default": "{count} month",
-      "description": "Singular month label in streak accumulator.",
+      "description": "Singular month label in streak accumulator."
+    },
+    "header_stats_graph_daily": {
+      "default": "Daily Activity",
+      "description": "Title for the daily bars graph in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8718,7 +8910,11 @@
     },
     "text_stats_streak_months": {
       "default": "{count} months",
-      "description": "Plural months label in streak accumulator.",
+      "description": "Plural months label in streak accumulator."
+    },
+    "header_stats_graph_trend": {
+      "default": "Week Trend",
+      "description": "Title for the week-over-week trend graph in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8726,7 +8922,11 @@
     },
     "text_stats_streak_week": {
       "default": "{count} week",
-      "description": "Singular week label in streak accumulator.",
+      "description": "Singular week label in streak accumulator."
+    },
+    "header_stats_graph_peak": {
+      "default": "Peak Hours",
+      "description": "Title for the watch clock graph in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8734,7 +8934,11 @@
     },
     "text_stats_streak_weeks": {
       "default": "{count} weeks",
-      "description": "Plural weeks label in streak accumulator.",
+      "description": "Plural weeks label in streak accumulator."
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Shows vs Movies",
+      "description": "Title for the shows/movies breakdown graph in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -8934,7 +9138,11 @@
     },
     "list_title_smart_lists": {
       "default": "Smart Lists",
-      "description": "Title for smart lists. This should be as short and concise as possible.",
+      "description": "Title for smart lists. This should be as short and concise as possible."
+    },
+    "header_stats_graph_ratings": {
+      "default": "Ratings",
+      "description": "Title for the ratings distribution graph in weekly pulse.",
       "exclude": [
         "android",
         "ios"
