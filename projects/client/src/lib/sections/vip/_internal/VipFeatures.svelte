@@ -13,7 +13,7 @@
   import VipFeature from "./VipFeature.svelte";
   import VipHeader from "./VipHeader.svelte";
 
-  const VIP_FEATURES = [
+  const vipFeatures = [
     {
       title: m.vip_feature_title_yir,
       description: m.vip_feature_description_yir,
@@ -69,7 +69,7 @@
   {/snippet}
 
   <div class="trakt-vip-features">
-    {#each VIP_FEATURES as feature}
+    {#each vipFeatures as feature}
       <VipFeature title={feature.title()} description={feature.description()}>
         {#snippet icon()}
           <svelte:component this={feature.icon} />

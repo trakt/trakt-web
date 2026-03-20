@@ -7,7 +7,7 @@
   import UserAvatar from "../../components/UserAvatar.svelte";
   import UserProfileLink from "../../components/UserProfileLink.svelte";
 
-  const MAX_USERS = 10;
+  const maxUsers = 10;
 
   type SocialActivityItemProps = {
     activity: SocialActivity;
@@ -17,7 +17,7 @@
   const { activity, style = "cover" }: SocialActivityItemProps = $props();
 
   const hasMultipleUsers = $derived(activity.users.length > 1);
-  const cappedUsers = $derived(activity.users.slice(0, MAX_USERS));
+  const cappedUsers = $derived(activity.users.slice(0, maxUsers));
   const remainingUsersCount = $derived(
     activity.users.length - cappedUsers.length,
   );

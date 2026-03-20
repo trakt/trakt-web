@@ -11,7 +11,7 @@
   import { workerRequest } from "$worker/workerRequest";
   import { fade, slide } from "svelte/transition";
 
-  const NOTICE_TRANSITION_DURATION = 150;
+  const noticeTransitionDuration = 150;
 
   const { consent, setConsent } = useCookieConsent();
 
@@ -31,11 +31,11 @@
 {#if !$consent || $consent === "none"}
   <div
     class="trakt-cookie-underlay"
-    transition:fade={{ duration: NOTICE_TRANSITION_DURATION }}
+    transition:fade={{ duration: noticeTransitionDuration }}
   ></div>
   <div
     class="trakt-cookie-notice"
-    transition:slide={{ duration: NOTICE_TRANSITION_DURATION }}
+    transition:slide={{ duration: noticeTransitionDuration }}
   >
     <div class="trakt-cookie" aria-hidden="true">🍪</div>
     <p>

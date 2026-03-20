@@ -50,12 +50,12 @@
       document.body.classList.add("trakt-pwa");
     }
 
-    const ACTIVE_SHA = TRAKT_GIT_SHA;
-    const DEPLOYED_SHA = await fetch(DeploymentEndpoint.Get).then((res) =>
+    const activeSha = TRAKT_GIT_SHA;
+    const deployedSha = await fetch(DeploymentEndpoint.Get).then((res) =>
       res.text(),
     );
 
-    if (ACTIVE_SHA === DEPLOYED_SHA) {
+    if (activeSha === deployedSha) {
       return;
     }
 

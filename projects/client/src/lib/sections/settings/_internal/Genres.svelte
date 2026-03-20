@@ -7,13 +7,13 @@
   import SettingsBlock from "./SettingsBlock.svelte";
   import { useSettings } from "./useSettings";
 
-  const GENRE_LIMIT = 5;
+  const genreLimit = 5;
 
   const { genres, isSavingSettings } = useSettings();
 
   // FIXME: use local writable and allow for faster clicks without disabling
   const favorites = $derived($genres.favorites);
-  const isAtLimit = $derived(favorites.length >= GENRE_LIMIT);
+  const isAtLimit = $derived(favorites.length >= genreLimit);
 
   const toggleFavoriteGenre = (genre: string) => {
     if (favorites.includes(genre)) {
@@ -35,7 +35,7 @@
 
 <SettingsBlock
   title={m.header_favorite_genres()}
-  description={m.description_genres({ limit: GENRE_LIMIT })}
+  description={m.description_genres({ limit: genreLimit })}
 >
   <div class="trakt-genres" role="group">
     {#each GENRES as genre}

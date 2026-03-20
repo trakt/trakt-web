@@ -1,11 +1,11 @@
 <script lang="ts">
   const { itemCount }: { itemCount: number } = $props();
 
-  const MAX_PREVIEW_ITEMS = 2;
+  const maxPreviewItems = 2;
 
-  const indicators = $derived(Array(Math.min(itemCount, MAX_PREVIEW_ITEMS)));
-  const diff = $derived(itemCount - MAX_PREVIEW_ITEMS);
-  const hasMoreThanMax = $derived(itemCount > MAX_PREVIEW_ITEMS);
+  const indicators = $derived(Array(Math.min(itemCount, maxPreviewItems)));
+  const diff = $derived(itemCount - maxPreviewItems);
+  const hasMoreThanMax = $derived(itemCount > maxPreviewItems);
 </script>
 
 <div class="content-indicator">

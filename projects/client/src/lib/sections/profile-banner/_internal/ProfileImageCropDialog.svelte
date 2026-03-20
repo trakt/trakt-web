@@ -18,15 +18,15 @@
     onClose: () => void;
   } = $props();
 
-  const CANVAS_DIMENSION = 440;
-  const MIN_ZOOM_SCALE = 1;
-  const MAX_ZOOM_SCALE = 4;
-  const ZOOM_SCALE_STEP = 0.3;
-  const WHEEL_ZOOM_SENSITIVITY = 0.005;
-  const WHEEL_ZOOM_LINE_HEIGHT_PX = 20;
-  const WHEEL_ZOOM_MAX_DELTA = 0.2;
-  const PINCH_ZOOM_SENSITIVITY = 0.85;
-  const TRACKPAD_PINCH_SENSITIVITY = 0.02;
+  const canvasDimension = 440;
+  const minZoomScale = 1;
+  const maxZoomScale = 4;
+  const zoomScaleStep = 0.3;
+  const wheelZoomSensitivity = 0.005;
+  const wheelZoomLineHeightPx = 20;
+  const wheelZoomMaxDelta = 0.2;
+  const pinchZoomSensitivity = 0.85;
+  const trackpadPinchSensitivity = 0.02;
 
   const refs = $state<{ canvas?: HTMLCanvasElement; img?: HTMLImageElement }>(
     {},
@@ -63,8 +63,8 @@
 
     const renderedW = img.naturalWidth * currentScale;
     const renderedH = img.naturalHeight * currentScale;
-    const maxX = Math.max(0, (renderedW - CANVAS_DIMENSION) / 2);
-    const maxY = Math.max(0, (renderedH - CANVAS_DIMENSION) / 2);
+    const maxX = Math.max(0, (renderedW - canvasDimension) / 2);
+    const maxY = Math.max(0, (renderedH - canvasDimension) / 2);
 
     return {
       x: Math.min(maxX, Math.max(-maxX, x)),
@@ -79,18 +79,18 @@
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    ctx.clearRect(0, 0, CANVAS_DIMENSION, CANVAS_DIMENSION);
+    ctx.clearRect(0, 0, canvasDimension, canvasDimension);
 
     const naturalAspect = img.naturalWidth / img.naturalHeight;
     const [baseW, baseH] =
       naturalAspect >= 1
-        ? [CANVAS_DIMENSION * naturalAspect, CANVAS_DIMENSION]
-        : [CANVAS_DIMENSION, CANVAS_DIMENSION / naturalAspect];
+        ? [canvasDimension * naturalAspect, canvasDimension]
+        : [canvasDimension, canvasDimension / naturalAspect];
 
     const drawW = baseW * crop.scale;
     const drawH = baseH * crop.scale;
-    const drawX = (CANVAS_DIMENSION - drawW) / 2 + crop.offsetX;
-    const drawY = (CANVAS_DIMENSION - drawH) / 2 + crop.offsetY;
+    const drawX = (canvasDimension - drawW) / 2 + crop.offsetX;
+    const drawY = (canvasDimension - drawH) / 2 + crop.offsetY;
 
     ctx.drawImage(img, drawX, drawY, drawW, drawH);
   }
@@ -127,8 +127,8 @@
 
     crop.zoomTransition = event.transition;
     const newScale = Math.min(
-      MAX_ZOOM_SCALE,
-      Math.max(MIN_ZOOM_SCALE, crop.scale + event.delta),
+      maxZoomScale,
+      Math.max(minZoomScale, crop.scale + event.delta),
     );
     const clamped = clampOffsets(crop.offsetX, crop.offsetY, newScale);
     crop.scale = newScale;
@@ -152,7 +152,7 @@
       const ratio = pinchDistance(currPtrs[0], currPtrs[1]) / pinchDistance(prevPtrs[0], prevPtrs[1]);
       return {
         kind: "zoom",
-        delta: crop.scale * (1 + (ratio - 1) * PINCH_ZOOM_SENSITIVITY) - crop.scale,
+        delta: crop.scale * (1 + (ratio - 1) * pinchZoomSensitivity) - crop.scale,
         transition: false,
       };
     }
@@ -195,16 +195,16 @@
       map((ev): CropEvent => {
         // macOS trackpad pinch fires wheel events with ctrlKey
         if (ev.ctrlKey) {
-          const delta = -ev.deltaY * TRACKPAD_PINCH_SENSITIVITY * PINCH_ZOOM_SENSITIVITY;
+          const delta = -ev.deltaY * trackpadPinchSensitivity * pinchZoomSensitivity;
           return { kind: "zoom", delta, transition: false };
         }
         const rawPixels =
-          ev.deltaMode === 1 ? ev.deltaY * WHEEL_ZOOM_LINE_HEIGHT_PX : ev.deltaY;
+          ev.deltaMode === 1 ? ev.deltaY * wheelZoomLineHeightPx : ev.deltaY;
         return {
           kind: "zoom",
           delta: Math.max(
-            -WHEEL_ZOOM_MAX_DELTA,
-            Math.min(WHEEL_ZOOM_MAX_DELTA, -(rawPixels * WHEEL_ZOOM_SENSITIVITY)),
+            -wheelZoomMaxDelta,
+            Math.min(wheelZoomMaxDelta, -(rawPixels * wheelZoomSensitivity)),
           ),
           transition: false,
         };
@@ -266,8 +266,8 @@
     <div class="crop-canvas-wrapper">
       <canvas
         bind:this={refs.canvas}
-        width={CANVAS_DIMENSION}
-        height={CANVAS_DIMENSION}
+        width={canvasDimension}
+        height={canvasDimension}
         class="crop-canvas"
         class:is-dragging={crop.isDragging}
         style="touch-action: none;"
@@ -278,8 +278,8 @@
       <button
         class="zoom-btn"
         aria-label="Zoom out"
-        onclick={() => zoomButton$.next(-ZOOM_SCALE_STEP)}
-        disabled={crop.scale <= MIN_ZOOM_SCALE}
+        onclick={() => zoomButton$.next(-zoomScaleStep)}
+        disabled={crop.scale <= minZoomScale}
       >
         &minus;
       </button>
@@ -287,16 +287,16 @@
         <div
           class="zoom-fill"
           class:animated={crop.zoomTransition}
-          style="width: {((crop.scale - MIN_ZOOM_SCALE) /
-            (MAX_ZOOM_SCALE - MIN_ZOOM_SCALE)) *
+          style="width: {((crop.scale - minZoomScale) /
+            (maxZoomScale - minZoomScale)) *
             100}%"
         ></div>
       </div>
       <button
         class="zoom-btn"
         aria-label="Zoom in"
-        onclick={() => zoomButton$.next(ZOOM_SCALE_STEP)}
-        disabled={crop.scale >= MAX_ZOOM_SCALE}
+        onclick={() => zoomButton$.next(zoomScaleStep)}
+        disabled={crop.scale >= maxZoomScale}
       >
         +
       </button>

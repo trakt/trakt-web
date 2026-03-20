@@ -13,7 +13,7 @@
   import { useDrawerPortal } from "./_internal/useDrawerPortal";
   import { verticalDrag } from "./_internal/verticalDrag";
 
-  const DRAWER_CLASS = "trakt-drawer";
+  const drawerClass = "trakt-drawer";
 
   type DrawerProps = {
     onClose: () => void;
@@ -64,7 +64,7 @@
 </script>
 
 <div
-  class={DRAWER_CLASS}
+  class={drawerClass}
   data-size={size}
   transition:slide={{ duration: 150, axis: slideAxis }}
   use:portal
@@ -85,7 +85,7 @@
       class="trakt-drawer-drag-handle"
       use:verticalDrag={{
         onClose,
-        parentClass: DRAWER_CLASS,
+        parentClass: drawerClass,
         fullscreenClass: "is-fullscreen",
         dragClass: "is-dragging",
         offsetVariable: "--drag-offset",

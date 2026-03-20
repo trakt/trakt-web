@@ -8,11 +8,11 @@ import { forceOnScreen } from './forceOnScreen.ts';
 import { openPopupContainer } from './openPopupContainer.ts';
 
 describe('action: usePortal', () => {
-  const POPUP_WIDTH = 110;
-  const POPUP_RECT = {
+  const popupWidth = 110;
+  const popupRect = {
     left: -10,
     right: 100,
-    width: POPUP_WIDTH,
+    width: popupWidth,
     top: 0,
     bottom: 0,
     x: 0,
@@ -25,7 +25,7 @@ describe('action: usePortal', () => {
     vi.useFakeTimers({ toFake: ['requestAnimationFrame'] });
 
     Object.defineProperty(window, 'innerWidth', {
-      value: POPUP_WIDTH - 20,
+      value: popupWidth - 20,
       configurable: true,
     });
   });
@@ -33,7 +33,7 @@ describe('action: usePortal', () => {
   it('should set the position attributes', async () => {
     const targetNode = document.createElement('div');
     const popupNode = document.createElement('div');
-    popupNode.getBoundingClientRect = () => POPUP_RECT;
+    popupNode.getBoundingClientRect = () => popupRect;
 
     const component = await renderStore(() =>
       openPopupContainer(popupNode, targetNode, { position: 'right' })
@@ -51,7 +51,7 @@ describe('action: usePortal', () => {
   it('should reset the position attributes', async () => {
     const targetNode = document.createElement('div');
     const popupNode = document.createElement('div');
-    popupNode.getBoundingClientRect = () => POPUP_RECT;
+    popupNode.getBoundingClientRect = () => popupRect;
 
     const component = await renderStore(() =>
       openPopupContainer(popupNode, targetNode, { position: 'right' })

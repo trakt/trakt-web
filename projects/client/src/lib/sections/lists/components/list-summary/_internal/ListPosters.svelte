@@ -8,7 +8,7 @@
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import { getListUrl } from "./getListUrl.ts";
 
-  const POSTER_LIMIT = 8;
+  const posterLimit = 8;
   const {
     list,
     type,
@@ -21,7 +21,7 @@
     onclick?: () => void;
   } = $props();
 
-  const posters = $derived(list.posters.slice(0, POSTER_LIMIT));
+  const posters = $derived(list.posters.slice(0, posterLimit));
   const { track } = useTrack(AnalyticsEvent.Drilldown);
 </script>
 

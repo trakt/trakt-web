@@ -5,7 +5,7 @@
   import type { FormInputProps } from "./models/FormInputProps";
 
   const randomId = crypto.randomUUID().slice(0, 8);
-  const ERROR_LABEL_ID = `trakt-input-error-${randomId}`;
+  const errorLabelId = `trakt-input-error-${randomId}`;
 
   const {
     onChange,
@@ -56,7 +56,7 @@
     {value}
     oninput={handleInput}
     aria-invalid={hasError ? "true" : "false"}
-    aria-describedby={hasError ? ERROR_LABEL_ID : undefined}
+    aria-describedby={hasError ? errorLabelId : undefined}
   />
 </FormElementWrapper>
 

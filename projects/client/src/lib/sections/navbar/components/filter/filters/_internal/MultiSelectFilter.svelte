@@ -7,7 +7,7 @@
   import Filter from "./Filter.svelte";
   import { useFilterSetter } from "./useFilterSetter";
 
-  const RESET_VALUE = "__reset_filter__";
+  const resetValue = "__reset_filter__";
 
   const {
     filter,
@@ -24,7 +24,7 @@
   const { gotoFilteredState } = useFilterSetter();
 
   const onChange = (values: string[]) => {
-    const hasReset = values.includes(RESET_VALUE);
+    const hasReset = values.includes(resetValue);
     const hasValues = values.length > 0;
 
     const value = !hasReset && hasValues ? values.join(",") : null;
@@ -39,7 +39,7 @@
   // FIXME: this is a temporary solution, to be followed up by
   // making this a feature of the MultiSelect
   const optionsWithAll = $derived([
-    { label: m.button_label_reset_filter(), value: RESET_VALUE },
+    { label: m.button_label_reset_filter(), value: resetValue },
     ...filter.options,
   ]);
 </script>

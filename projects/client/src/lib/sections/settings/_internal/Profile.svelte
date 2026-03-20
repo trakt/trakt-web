@@ -14,7 +14,7 @@
   import SettingsRow from "./SettingsRow.svelte";
   import { useSettings } from "./useSettings";
 
-  const ABOUT_LINE_CLAMP = 3;
+  const aboutLineClamp = 3;
 
   const { user } = useUser();
   const { profile, email, isSavingSettings } = useSettings();
@@ -120,8 +120,8 @@
     {/snippet}
     <p
       class="trakt-about-text"
-      style="--line-clamp-lines: {ABOUT_LINE_CLAMP}"
-      use:lineClamp={{ lines: ABOUT_LINE_CLAMP }}
+      style="--line-clamp-lines: {aboutLineClamp}"
+      use:lineClamp={{ lines: aboutLineClamp }}
     >
       {$profile.about}
     </p>

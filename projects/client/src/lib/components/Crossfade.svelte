@@ -3,7 +3,7 @@
   import { cubicInOut } from "svelte/easing";
   import { fade } from "svelte/transition";
 
-  const FADE_DURATION_MS = 500;
+  const fadeDurationMs = 500;
 
   const {
     childrenA,
@@ -20,14 +20,14 @@
   {#if showA}
     <div
       class="crossfade-content"
-      transition:fade={{ duration: FADE_DURATION_MS, easing: cubicInOut }}
+      transition:fade={{ duration: fadeDurationMs, easing: cubicInOut }}
     >
       {@render childrenA()}
     </div>
   {:else}
     <div
       class="crossfade-content"
-      transition:fade={{ duration: FADE_DURATION_MS, easing: cubicInOut }}
+      transition:fade={{ duration: fadeDurationMs, easing: cubicInOut }}
     >
       {@render childrenB()}
     </div>

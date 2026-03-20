@@ -11,7 +11,7 @@
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
-  const ABOUT_MESSAGES = [
+  const aboutMessages = [
     m.text_about_placeholder_1(),
     m.text_about_placeholder_2(),
     m.text_about_placeholder_3(),
@@ -36,7 +36,7 @@
       : m.text_about_user({ username: toDisplayableName(profile) }),
   );
 
-  const aboutText = $derived(profile.about || shuffle(ABOUT_MESSAGES).at(0));
+  const aboutText = $derived(profile.about || shuffle(aboutMessages).at(0));
 </script>
 
 <div class="trakt-profile-about">

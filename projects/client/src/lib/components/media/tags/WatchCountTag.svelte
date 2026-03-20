@@ -6,7 +6,7 @@
 
   const { i18n, count }: { i18n: TagIntl; count: number } = $props();
 
-  const TRANSITION_DURATION = 300;
+  const transitionDuration = 300;
 </script>
 
 <watch-count-tag>
@@ -31,7 +31,7 @@
         transition:slide={{
           easing: linear,
           axis: "y",
-          duration: TRANSITION_DURATION,
+          duration: transitionDuration,
         }}
       >
         {count}

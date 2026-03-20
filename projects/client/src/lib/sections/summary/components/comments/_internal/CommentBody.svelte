@@ -10,7 +10,7 @@
   import { createParagraphRenderer } from "./marked/createParagraphRenderer";
   import { spoilerExtension } from "./marked/spoilerExtension";
 
-  const MAX_PREVIEW_LINES = 3;
+  const maxPreviewLines = 3;
 
   type CommentBodyProps = {
     media: MediaEntry;
@@ -57,8 +57,8 @@
     <Spoiler {media} type={media.type} variant="persistent">
       <div
         class="trakt-comment trakt-comment-preview-content"
-        use:lineClamp={{ lines: MAX_PREVIEW_LINES }}
-        style="--max-lines: {MAX_PREVIEW_LINES}"
+        use:lineClamp={{ lines: maxPreviewLines }}
+        style="--max-lines: {maxPreviewLines}"
         class:trakt-spoiler={comment.isSpoiler}
         use:spoilAction
       >
