@@ -3075,6 +3075,126 @@
     },
     "button_label_library": {
       "default": "Biblioteka"
+    },
+    "tooltip_stats_plays": {
+      "default": "Suma obejrzanych filmów i odcinków — Twój osobisty Dekalog seansów."
+    },
+    "tooltip_stats_episodes": {
+      "default": "Liczba odcinków obejrzanych w tym tygodniu."
+    },
+    "tooltip_stats_movies": {
+      "default": "Filmy, które przyciągnęły Twoją uwagę w tym tygodniu."
+    },
+    "tooltip_stats_shows": {
+      "default": "Unikalne seriale, które wciągnęły Cię w tym tygodniu."
+    },
+    "tooltip_stats_active_days": {
+      "default": "Dni, w których nie zabrakło czasu na choć jeden seans."
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "Dzień tygodnia z największą liczbą obejrzanych pozycji."
+    },
+    "tooltip_stats_best_day": {
+      "default": "Dzień, w którym pobiłeś swój rekord oglądania."
+    },
+    "tooltip_stats_hours": {
+      "default": "Łączny czas spędzony przed ekranem w godzinach."
+    },
+    "tooltip_stats_ratings": {
+      "default": "Pozycje, które otrzymały od Ciebie ocenę w tym tygodniu."
+    },
+    "tooltip_stats_comments": {
+      "default": "Twoje recenzje i przemyślenia spisane w tym tygodniu."
+    },
+    "label_stats_plays": {
+      "default": "Odtworzenia"
+    },
+    "label_stats_episodes": {
+      "default": "Odcinki"
+    },
+    "label_stats_movies": {
+      "default": "Filmy"
+    },
+    "label_stats_shows": {
+      "default": "Seriale"
+    },
+    "label_stats_active_days": {
+      "default": "Aktywne dni"
+    },
+    "label_stats_busiest_day": {
+      "default": "Szczyt"
+    },
+    "label_stats_best_day": {
+      "default": "Najlepszy"
+    },
+    "label_stats_hours": {
+      "default": "Godziny"
+    },
+    "label_stats_ratings": {
+      "default": "Oceny"
+    },
+    "label_stats_comments": {
+      "default": "Komentarze"
+    },
+    "text_stats_today": {
+      "default": "Dzisiaj"
+    },
+    "text_stats_time_morning": {
+      "default": "Rano"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Popołudnie"
+    },
+    "text_stats_time_evening": {
+      "default": "Wieczór"
+    },
+    "text_stats_time_late_night": {
+      "default": "Późna noc"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count} tyg. temu"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count} tyg."
+    },
+    "text_stats_this_week": {
+      "default": "W tym tyg."
+    },
+    "text_stats_was_last_week": {
+      "default": "to {day} w zeszłym tygodniu"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "bez zmian"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} odcinków"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} filmów"
+    },
+    "header_stats_this_week": {
+      "default": "W tym tygodniu"
+    },
+    "header_stats_graph_daily": {
+      "default": "Aktywność dzienna"
+    },
+    "header_stats_graph_trend": {
+      "default": "Trend tygodniowy"
+    },
+    "header_stats_graph_peak": {
+      "default": "Godziny szczytu"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Seriale vs Filmy"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Rozkład ocen"
     }
   }
 }

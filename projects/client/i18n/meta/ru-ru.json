@@ -3075,6 +3075,126 @@
     },
     "button_label_library": {
       "default": "Библиотека"
+    },
+    "tooltip_stats_plays": {
+      "default": "Всего просмотрено фильмов и серий"
+    },
+    "tooltip_stats_episodes": {
+      "default": "Серий просмотрено на этой неделе"
+    },
+    "tooltip_stats_movies": {
+      "default": "Фильмов просмотрено на этой неделе"
+    },
+    "tooltip_stats_shows": {
+      "default": "Уникальных сериалов просмотрено"
+    },
+    "tooltip_stats_active_days": {
+      "default": "Дни с хотя бы одним просмотром"
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "День недели с наибольшим числом просмотров"
+    },
+    "tooltip_stats_best_day": {
+      "default": "Рекорд просмотров за один день"
+    },
+    "tooltip_stats_hours": {
+      "default": "Общее количество часов просмотра"
+    },
+    "tooltip_stats_ratings": {
+      "default": "Оценки, поставленные на этой неделе"
+    },
+    "tooltip_stats_comments": {
+      "default": "Комментарии, написанные на этой неделе"
+    },
+    "label_stats_plays": {
+      "default": "Просмотры"
+    },
+    "label_stats_episodes": {
+      "default": "Серии"
+    },
+    "label_stats_movies": {
+      "default": "Фильмы"
+    },
+    "label_stats_shows": {
+      "default": "Сериалы"
+    },
+    "label_stats_active_days": {
+      "default": "Активные дни"
+    },
+    "label_stats_busiest_day": {
+      "default": "Пиковый день"
+    },
+    "label_stats_best_day": {
+      "default": "Лучший день"
+    },
+    "label_stats_hours": {
+      "default": "Часы"
+    },
+    "label_stats_ratings": {
+      "default": "Оценки"
+    },
+    "label_stats_comments": {
+      "default": "Отзывы"
+    },
+    "text_stats_today": {
+      "default": "Сегодня"
+    },
+    "text_stats_time_morning": {
+      "default": "Утро"
+    },
+    "text_stats_time_afternoon": {
+      "default": "День"
+    },
+    "text_stats_time_evening": {
+      "default": "Вечер"
+    },
+    "text_stats_time_late_night": {
+      "default": "Ночь"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count} нед. назад"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}н"
+    },
+    "text_stats_this_week": {
+      "default": "Эта неделя"
+    },
+    "text_stats_was_last_week": {
+      "default": "на прошлой неделе: {day}"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "без изменений"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} серий"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} фильмов"
+    },
+    "header_stats_this_week": {
+      "default": "На этой неделе"
+    },
+    "header_stats_graph_daily": {
+      "default": "Активность за день"
+    },
+    "header_stats_graph_trend": {
+      "default": "Тренд недели"
+    },
+    "header_stats_graph_peak": {
+      "default": "Пиковые часы"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Сериалы и фильмы"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Оценки"
     }
   }
 }

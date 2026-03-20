@@ -3075,6 +3075,126 @@
     },
     "button_label_library": {
       "default": "Colección"
+    },
+    "tooltip_stats_plays": {
+      "default": "Total de pelis y episodios que te has aventado."
+    },
+    "tooltip_stats_episodes": {
+      "default": "Episodios que viste esta semana."
+    },
+    "tooltip_stats_movies": {
+      "default": "Películas que viste esta semana."
+    },
+    "tooltip_stats_shows": {
+      "default": "Series distintas que has maratoneado."
+    },
+    "tooltip_stats_active_days": {
+      "default": "Días en los que no pudiste soltar el control remoto."
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "Día de la semana en que te aplicas con los maratones."
+    },
+    "tooltip_stats_best_day": {
+      "default": "Tu récord personal de más contenido en un solo día."
+    },
+    "tooltip_stats_hours": {
+      "default": "Horas totales que has pasado frente a la pantalla."
+    },
+    "tooltip_stats_ratings": {
+      "default": "Cosas a las que les diste calificación esta semana."
+    },
+    "tooltip_stats_comments": {
+      "default": "Comentarios que armaste esta semana."
+    },
+    "label_stats_plays": {
+      "default": "Vistas"
+    },
+    "label_stats_episodes": {
+      "default": "Episodios"
+    },
+    "label_stats_movies": {
+      "default": "Películas"
+    },
+    "label_stats_shows": {
+      "default": "Series"
+    },
+    "label_stats_active_days": {
+      "default": "Días activos"
+    },
+    "label_stats_busiest_day": {
+      "default": "Día pico"
+    },
+    "label_stats_best_day": {
+      "default": "Mejor día"
+    },
+    "label_stats_hours": {
+      "default": "Horas"
+    },
+    "label_stats_ratings": {
+      "default": "Ratings"
+    },
+    "label_stats_comments": {
+      "default": "Comentarios"
+    },
+    "text_stats_today": {
+      "default": "Hoy"
+    },
+    "text_stats_time_morning": {
+      "default": "Mañana"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Tarde"
+    },
+    "text_stats_time_evening": {
+      "default": "Noche"
+    },
+    "text_stats_time_late_night": {
+      "default": "Madrugada"
+    },
+    "text_stats_weeks_ago": {
+      "default": "Hace {count} sem"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count} sem"
+    },
+    "text_stats_this_week": {
+      "default": "Esta semana"
+    },
+    "text_stats_was_last_week": {
+      "default": "fue {day} la semana pasada"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "igual"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} episodios"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} pelis"
+    },
+    "header_stats_this_week": {
+      "default": "Esta semana"
+    },
+    "header_stats_graph_daily": {
+      "default": "Actividad diaria"
+    },
+    "header_stats_graph_trend": {
+      "default": "Tendencia semanal"
+    },
+    "header_stats_graph_peak": {
+      "default": "Horas pico"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Series vs Pelis"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Ratings"
     }
   }
 }

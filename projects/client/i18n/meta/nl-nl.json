@@ -3075,6 +3075,126 @@
     },
     "button_label_library": {
       "default": "Collectie"
+    },
+    "tooltip_stats_plays": {
+      "default": "Totaal aantal films en afleveringen bekeken"
+    },
+    "tooltip_stats_episodes": {
+      "default": "Afleveringen bekeken deze week"
+    },
+    "tooltip_stats_movies": {
+      "default": "Films bekeken deze week"
+    },
+    "tooltip_stats_shows": {
+      "default": "Unieke series bekeken"
+    },
+    "tooltip_stats_active_days": {
+      "default": "Dagen met minstens één kijkbeurt"
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "Dag van de week met de meeste kijkbeurten"
+    },
+    "tooltip_stats_best_day": {
+      "default": "Meeste kijkbeurten op één dag"
+    },
+    "tooltip_stats_hours": {
+      "default": "Totaal aantal uren content bekeken"
+    },
+    "tooltip_stats_ratings": {
+      "default": "Items beoordeeld deze week"
+    },
+    "tooltip_stats_comments": {
+      "default": "Reacties geschreven deze week"
+    },
+    "label_stats_plays": {
+      "default": "Kijkbeurten"
+    },
+    "label_stats_episodes": {
+      "default": "Afleveringen"
+    },
+    "label_stats_movies": {
+      "default": "Films"
+    },
+    "label_stats_shows": {
+      "default": "Series"
+    },
+    "label_stats_active_days": {
+      "default": "Actieve dagen"
+    },
+    "label_stats_busiest_day": {
+      "default": "Drukste dag"
+    },
+    "label_stats_best_day": {
+      "default": "Beste dag"
+    },
+    "label_stats_hours": {
+      "default": "Uren"
+    },
+    "label_stats_ratings": {
+      "default": "Beoordelingen"
+    },
+    "label_stats_comments": {
+      "default": "Reacties"
+    },
+    "text_stats_today": {
+      "default": "Vandaag"
+    },
+    "text_stats_time_morning": {
+      "default": "Ochtend"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Middag"
+    },
+    "text_stats_time_evening": {
+      "default": "Avond"
+    },
+    "text_stats_time_late_night": {
+      "default": "Nacht"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}w geleden"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}w"
+    },
+    "text_stats_this_week": {
+      "default": "Deze week"
+    },
+    "text_stats_was_last_week": {
+      "default": "was vorige week {day}"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "gelijk"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} afleveringen"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} films"
+    },
+    "header_stats_this_week": {
+      "default": "Deze week"
+    },
+    "header_stats_graph_daily": {
+      "default": "Dagelijkse activiteit"
+    },
+    "header_stats_graph_trend": {
+      "default": "Weektrend"
+    },
+    "header_stats_graph_peak": {
+      "default": "Piektijden"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Series vs Films"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Beoordelingen"
     }
   }
 }

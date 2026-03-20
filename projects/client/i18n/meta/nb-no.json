@@ -3075,6 +3075,126 @@
     },
     "button_label_library": {
       "default": "Bibliotek"
+    },
+    "tooltip_stats_plays": {
+      "default": "Totalt antall filmer og episoder sett"
+    },
+    "tooltip_stats_episodes": {
+      "default": "Episoder sett denne uken"
+    },
+    "tooltip_stats_movies": {
+      "default": "Filmer sett denne uken"
+    },
+    "tooltip_stats_shows": {
+      "default": "Unike serier sett"
+    },
+    "tooltip_stats_active_days": {
+      "default": "Dager med minst én titting"
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "Ukedagen med aller mest titting"
+    },
+    "tooltip_stats_best_day": {
+      "default": "Flest antall tittinger på én enkelt dag"
+    },
+    "tooltip_stats_hours": {
+      "default": "Totalt antall timer med innhold sett"
+    },
+    "tooltip_stats_ratings": {
+      "default": "Titler vurdert denne uken"
+    },
+    "tooltip_stats_comments": {
+      "default": "Kommentarer skrevet denne uken"
+    },
+    "label_stats_plays": {
+      "default": "Sett"
+    },
+    "label_stats_episodes": {
+      "default": "Episoder"
+    },
+    "label_stats_movies": {
+      "default": "Filmer"
+    },
+    "label_stats_shows": {
+      "default": "Serier"
+    },
+    "label_stats_active_days": {
+      "default": "Aktive dager"
+    },
+    "label_stats_busiest_day": {
+      "default": "Travelste dag"
+    },
+    "label_stats_best_day": {
+      "default": "Beste dag"
+    },
+    "label_stats_hours": {
+      "default": "Timer"
+    },
+    "label_stats_ratings": {
+      "default": "Vurderinger"
+    },
+    "label_stats_comments": {
+      "default": "Kommentarer"
+    },
+    "text_stats_today": {
+      "default": "I dag"
+    },
+    "text_stats_time_morning": {
+      "default": "Morgen"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Ettermiddag"
+    },
+    "text_stats_time_evening": {
+      "default": "Kveld"
+    },
+    "text_stats_time_late_night": {
+      "default": "Natt"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}u siden"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}u"
+    },
+    "text_stats_this_week": {
+      "default": "Denne uken"
+    },
+    "text_stats_was_last_week": {
+      "default": "var {day} forrige uke"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "samme"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} episoder"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} filmer"
+    },
+    "header_stats_this_week": {
+      "default": "Denne uken"
+    },
+    "header_stats_graph_daily": {
+      "default": "Daglig aktivitet"
+    },
+    "header_stats_graph_trend": {
+      "default": "Uketrend"
+    },
+    "header_stats_graph_peak": {
+      "default": "Topptider"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Serier vs filmer"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Vurderinger"
     }
   }
 }
