@@ -109,6 +109,7 @@ module.exports = {
         'smart-list',
         'social',
         'spoiler',
+        'stats',
         'streaming',
         'summary',
         'tags',
