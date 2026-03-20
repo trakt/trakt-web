@@ -3102,6 +3102,126 @@
     },
     "button_label_details": {
       "default": "Детайли за „{title}“"
+    },
+    "tooltip_stats_plays": {
+      "default": "Общо изгледани филми и епизоди"
+    },
+    "tooltip_stats_episodes": {
+      "default": "Епизоди, изгледани тази седмица"
+    },
+    "tooltip_stats_movies": {
+      "default": "Филми, изгледани тази седмица"
+    },
+    "tooltip_stats_shows": {
+      "default": "Уникални сериали, които си следил"
+    },
+    "tooltip_stats_active_days": {
+      "default": "Дни с поне едно гледане"
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "Денят с най-много гледания тази седмица"
+    },
+    "tooltip_stats_best_day": {
+      "default": "Най-много гледания в рамките на един ден"
+    },
+    "tooltip_stats_hours": {
+      "default": "Общо часове пред екрана"
+    },
+    "tooltip_stats_ratings": {
+      "default": "Заглавия, оценени тази седмица"
+    },
+    "tooltip_stats_comments": {
+      "default": "Коментари, написани тази седмица"
+    },
+    "label_stats_plays": {
+      "default": "Гледания"
+    },
+    "label_stats_episodes": {
+      "default": "Епизоди"
+    },
+    "label_stats_movies": {
+      "default": "Филми"
+    },
+    "label_stats_shows": {
+      "default": "Сериали"
+    },
+    "label_stats_active_days": {
+      "default": "Активни дни"
+    },
+    "label_stats_busiest_day": {
+      "default": "Пиков ден"
+    },
+    "label_stats_best_day": {
+      "default": "Най-добър ден"
+    },
+    "label_stats_hours": {
+      "default": "Часове"
+    },
+    "label_stats_ratings": {
+      "default": "Оценки"
+    },
+    "label_stats_comments": {
+      "default": "Коментари"
+    },
+    "text_stats_today": {
+      "default": "Днес"
+    },
+    "text_stats_time_morning": {
+      "default": "Сутрин"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Следобед"
+    },
+    "text_stats_time_evening": {
+      "default": "Вечер"
+    },
+    "text_stats_time_late_night": {
+      "default": "Късно вечер"
+    },
+    "text_stats_weeks_ago": {
+      "default": "преди {count} с."
+    },
+    "text_stats_weeks_short": {
+      "default": "{count} с."
+    },
+    "text_stats_this_week": {
+      "default": "Тази седмица"
+    },
+    "text_stats_was_last_week": {
+      "default": "беше {day} миналата седмица"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "същото"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} епизода"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} филма"
+    },
+    "header_stats_this_week": {
+      "default": "Тази седмица"
+    },
+    "header_stats_graph_daily": {
+      "default": "Дневна активност"
+    },
+    "header_stats_graph_trend": {
+      "default": "Седмичен тренд"
+    },
+    "header_stats_graph_peak": {
+      "default": "Пикови часове"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Сериали vs Филми"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Оценки"
     }
   }
 }

@@ -3102,6 +3102,126 @@
     },
     "button_label_details": {
       "default": "Details for \"{title}\""
+    },
+    "tooltip_stats_plays": {
+      "default": "Total movies and episodes watched"
+    },
+    "tooltip_stats_episodes": {
+      "default": "Episodes watched this week"
+    },
+    "tooltip_stats_movies": {
+      "default": "Movies watched this week"
+    },
+    "tooltip_stats_shows": {
+      "default": "Unique shows watched"
+    },
+    "tooltip_stats_active_days": {
+      "default": "Days with at least one watch"
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "Day of week with the most watches"
+    },
+    "tooltip_stats_best_day": {
+      "default": "Most watches in a single day"
+    },
+    "tooltip_stats_hours": {
+      "default": "Total hours of content watched"
+    },
+    "tooltip_stats_ratings": {
+      "default": "Items rated this week"
+    },
+    "tooltip_stats_comments": {
+      "default": "Comments written this week"
+    },
+    "label_stats_plays": {
+      "default": "Plays"
+    },
+    "label_stats_episodes": {
+      "default": "Episodes"
+    },
+    "label_stats_movies": {
+      "default": "Movies"
+    },
+    "label_stats_shows": {
+      "default": "Shows"
+    },
+    "label_stats_active_days": {
+      "default": "Active Days"
+    },
+    "label_stats_busiest_day": {
+      "default": "Busiest Day"
+    },
+    "label_stats_best_day": {
+      "default": "Best Day"
+    },
+    "label_stats_hours": {
+      "default": "Hours"
+    },
+    "label_stats_ratings": {
+      "default": "Ratings"
+    },
+    "label_stats_comments": {
+      "default": "Comments"
+    },
+    "text_stats_today": {
+      "default": "Today"
+    },
+    "text_stats_time_morning": {
+      "default": "Morning"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Afternoon"
+    },
+    "text_stats_time_evening": {
+      "default": "Evening"
+    },
+    "text_stats_time_late_night": {
+      "default": "Late Night"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}w ago"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}w"
+    },
+    "text_stats_this_week": {
+      "default": "This week"
+    },
+    "text_stats_was_last_week": {
+      "default": "was {day} last week"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "same"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} episodes"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} movies"
+    },
+    "header_stats_this_week": {
+      "default": "This Week"
+    },
+    "header_stats_graph_daily": {
+      "default": "Daily Activity"
+    },
+    "header_stats_graph_trend": {
+      "default": "Week Trend"
+    },
+    "header_stats_graph_peak": {
+      "default": "Peak Hours"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Shows vs Movies"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Ratings"
     }
   }
 }

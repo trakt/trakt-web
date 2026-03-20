@@ -3102,6 +3102,126 @@
     },
     "button_label_details": {
       "default": "Details zu „{title}“"
+    },
+    "tooltip_stats_plays": {
+      "default": "Gesamtzahl Ihrer gesehenen Filme und Episoden – Ihr persönliches Archiv."
+    },
+    "tooltip_stats_episodes": {
+      "default": "Episoden, die Sie diese Woche gesehene haben."
+    },
+    "tooltip_stats_movies": {
+      "default": "Filme, die diese Woche über Ihren Bildschirm liefen."
+    },
+    "tooltip_stats_shows": {
+      "default": "Anzahl der verschiedenen Serien, die Sie geschaut haben."
+    },
+    "tooltip_stats_active_days": {
+      "default": "Tage, an denen Sie mindestens eine Wiedergabe gestartet haben."
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "Der Wochentag, an dem Ihre Wiedergabeliste am längsten war."
+    },
+    "tooltip_stats_best_day": {
+      "default": "Der Tag mit der höchsten Anzahl an Wiedergaben."
+    },
+    "tooltip_stats_hours": {
+      "default": "Die gesamte Zeit, die Sie in filmische Welten eingetaucht sind."
+    },
+    "tooltip_stats_ratings": {
+      "default": "Titel, die Sie diese Woche kritisch gewürdigt haben."
+    },
+    "tooltip_stats_comments": {
+      "default": "Kommentare, die Sie diese Woche verfasst haben."
+    },
+    "label_stats_plays": {
+      "default": "Wiedergaben"
+    },
+    "label_stats_episodes": {
+      "default": "Episoden"
+    },
+    "label_stats_movies": {
+      "default": "Filme"
+    },
+    "label_stats_shows": {
+      "default": "Serien"
+    },
+    "label_stats_active_days": {
+      "default": "Aktive Tage"
+    },
+    "label_stats_busiest_day": {
+      "default": "Haupttag"
+    },
+    "label_stats_best_day": {
+      "default": "Top-Tag"
+    },
+    "label_stats_hours": {
+      "default": "Stunden"
+    },
+    "label_stats_ratings": {
+      "default": "Bewertungen"
+    },
+    "label_stats_comments": {
+      "default": "Kommentare"
+    },
+    "text_stats_today": {
+      "default": "Heute"
+    },
+    "text_stats_time_morning": {
+      "default": "Vormittag"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Nachmittag"
+    },
+    "text_stats_time_evening": {
+      "default": "Abend"
+    },
+    "text_stats_time_late_night": {
+      "default": "Nachts"
+    },
+    "text_stats_weeks_ago": {
+      "default": "vor {count} W."
+    },
+    "text_stats_weeks_short": {
+      "default": "{count} W."
+    },
+    "text_stats_this_week": {
+      "default": "Diese Woche"
+    },
+    "text_stats_was_last_week": {
+      "default": "war letzte Woche am {day}"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "gleich"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} Episoden"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} Filme"
+    },
+    "header_stats_this_week": {
+      "default": "Diese Woche"
+    },
+    "header_stats_graph_daily": {
+      "default": "Tägliche Aktivität"
+    },
+    "header_stats_graph_trend": {
+      "default": "Wochentrend"
+    },
+    "header_stats_graph_peak": {
+      "default": "Stoßzeiten"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Serien vs. Filme"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Bewertungen"
     }
   }
 }
