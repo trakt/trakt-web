@@ -6,6 +6,7 @@
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import type { TooltipProps } from "$lib/components/tooltip/TooltipProps";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -20,6 +21,13 @@
   import { useNavbarState } from "./useNavbarState";
 
   const { state } = useNavbarState();
+
+  const tooltipConfig: Omit<TooltipProps, "content"> = {
+    variant: "compact",
+    side: "right",
+    delayDuration: 0,
+    sideOffset: 16,
+  };
 </script>
 
 {#if $state.mode !== "hidden"}
@@ -72,13 +80,7 @@
 
       <div class="trakt-side-navbar-content">
         <RenderFor audience="authenticated">
-          <Tooltip
-            content={m.page_title_search()}
-            variant="compact"
-            side="right"
-            delayDuration={0}
-            sideOffset={16}
-          >
+          <Tooltip content={m.page_title_search()} {...tooltipConfig}>
             <Link href={UrlBuilder.search()} label={m.button_label_search()}>
               <SearchIcon />
             </Link>
@@ -98,25 +100,16 @@
         </Tooltip>
 
         <RenderFor audience="authenticated">
-          <Tooltip
-            content={m.page_title_discover()}
-            variant="compact"
-            side="right"
-            delayDuration={0}
-            sideOffset={16}
-          >
-            <Link href={UrlBuilder.discover()} label={m.button_label_discover()}>
+          <Tooltip content={m.page_title_discover()} {...tooltipConfig}>
+            <Link
+              href={UrlBuilder.discover()}
+              label={m.button_label_discover()}
+            >
               <DiscoverIcon />
             </Link>
           </Tooltip>
 
-          <Tooltip
-            content={m.page_title_lists()}
-            variant="compact"
-            side="right"
-            delayDuration={0}
-            sideOffset={16}
-          >
+          <Tooltip content={m.page_title_lists()} {...tooltipConfig}>
             <Link
               href={UrlBuilder.lists.user("me")}
               label={m.button_label_browse_lists()}
