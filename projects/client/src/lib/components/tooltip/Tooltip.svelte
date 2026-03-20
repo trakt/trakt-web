@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { Tooltip } from "bits-ui";
+  import type { TooltipProps } from "./TooltipProps";
 
   const {
     children,
@@ -9,13 +10,7 @@
     side = "top",
     delayDuration = 150,
     sideOffset = 8,
-  }: {
-    content: string;
-    variant?: "default" | "compact";
-    side?: "top" | "right" | "bottom" | "left";
-    delayDuration?: number;
-    sideOffset?: number;
-  } & ChildrenProps = $props();
+  }: TooltipProps & ChildrenProps = $props();
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
