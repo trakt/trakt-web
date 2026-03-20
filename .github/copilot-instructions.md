@@ -9,7 +9,7 @@ applyTo: "**"
 ## Naming Conventions
 - Use PascalCase for component names, interfaces, and type aliases.
 - Use camelCase for variables, functions, and methods.
-- Use ALL_CAPS for constants.
+- Use ALL_CAPS for global constants only (not local constants).
 
 ## Commit Standards
 - **Follow Conventional Commits**: All commits must adhere to the [Conventional Commits](https://www.conventionalcommits.org/) specification.

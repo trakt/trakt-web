@@ -23,7 +23,7 @@ applyTo: "**"
 
 - **PascalCase**: Component names, interfaces, and type aliases
 - **camelCase**: Variables, functions, and methods
-- **ALL_CAPS**: Constants
+- **ALL_CAPS**: Global constants only (not local constants)
 - Components: PascalCase files (e.g., `ClampedText.svelte`, `MoreButton.svelte`)
 - Utilities/helpers: camelCase files (e.g., `lineClamp.ts`, `clickOutside.ts`)
 - Type definitions: PascalCase files (e.g., `MediaStoreProps.ts`, `FilterParams.ts`)
