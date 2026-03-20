@@ -106,6 +106,9 @@
       items={$lists}
       {title}
       --height-list="var(--height-lists-list)"
+      --height-override-list={$lists.length === 0
+        ? "var(--height-poster-list-sm)"
+        : undefined}
     >
       {#snippet item(list)}
         <ListSummaryItem {list} type={mode} />

@@ -32,7 +32,7 @@
     id="smart-lists"
     items={[]}
     title="Smart Lists"
-    --height-list="var(--height-lists-list)"
+    --height-list="var(--height-poster-list-sm)"
     {actions}
   >
     {#snippet item(_)}{/snippet}
