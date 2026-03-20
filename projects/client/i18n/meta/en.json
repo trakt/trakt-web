@@ -2055,8 +2055,7 @@
       "default": "There are no favorites here.",
       "description": "Placeholder text shown when there are no favorites in the user's favorites list.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_stream_on": {
@@ -3476,16 +3475,14 @@
       "default": "There is no one here (yet).",
       "description": "Placeholder text shown when there are no followers for a profile.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "list_placeholder_following": {
       "default": "There is no one here (yet).",
       "description": "Placeholder text shown when there are no profiles followed by the user.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_read_more": {
@@ -3740,9 +3737,7 @@
     "button_text_delete_list": {
       "default": "Delete",
       "description": "Aria-label for the button that allows users to delete a list.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_delete_list": {
       "default": "Delete your list {name}",
@@ -3765,9 +3760,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "link_text_vip_list_upsell": {
       "default": "Get VIP to add more lists.",
@@ -3855,8 +3848,7 @@
       "default": "There is nothing in this list yet.",
       "description": "Placeholder text shown when there are no shows or movies in a user's personal list.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "list_placeholder_personal_list_empty_shows": {
@@ -4394,8 +4386,7 @@
       "default": "Feedback",
       "description": "Text for the link that takes users to the feedback page where they can make and vote on feature requests.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "link_text_terms_of_use": {
@@ -4746,8 +4737,7 @@
       "default": "Your faves. Your playlist. Spotlight the movies and shows that left a mark. The ones that made you laugh, cry, or rethink everything. Your all-time favorites, saved for every mood and moment.",
       "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite movies and shows.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_cta_favorites_list_movies": {
@@ -4937,7 +4927,6 @@
       "default": "Uh oh... this wasn't planned. If this keeps happening, please contact Trakt support.",
       "description": "Short text shown on the unexpected error page, informing the user that something went wrong.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5147,7 +5136,6 @@
       "default": "There is nothing in this list.",
       "description": "Placeholder text shown when there are no movies or shows in the user's watchlist.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5384,7 +5372,6 @@
       "default": "List has been created.",
       "description": "Text to indicate that the creation of a user's list is completed.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5392,7 +5379,6 @@
       "default": "List has been deleted.",
       "description": "Text to indicate that the deletion of a user's list is completed.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5400,7 +5386,6 @@
       "default": "List has been updated.",
       "description": "Text to indicate that the editing of a user's list is completed.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -6301,8 +6286,7 @@
       "default": "Trivia",
       "description": "Title for lists containing trivia about a movie or show. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_trivia_no_spoilers": {
@@ -6317,8 +6301,7 @@
       "default": "No spoilers",
       "description": "Text for the button that allows users to only view spoiler free trivia. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_trivia_spoilers": {
@@ -6333,8 +6316,7 @@
       "default": "Spoilers",
       "description": "Text for the button that allows users to view trivia with spoilers. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_stop_asking": {
@@ -6619,32 +6601,28 @@
       "default": "Highlight",
       "description": "Header for the section that displays the highlight of a movie or show sentiment analysis.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_sentiment_aspects": {
       "default": "Pros & Cons",
       "description": "Header for the section that displays the pros and cons of a movie or show sentiment analysis.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_vip_upsell_dive_deeper": {
       "default": "Dive deeper.",
       "description": "Text shown to encourage non-VIP users to subscribe to explore more detailed features and results.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_vip_upsell_sentiment": {
       "default": "Upgrade to VIP to unlock more insights.",
       "description": "Text shown to encourage non-VIP users to subscribe to explore a more detailed sentiment analysis of a movie or show.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_sentiment_example": {
