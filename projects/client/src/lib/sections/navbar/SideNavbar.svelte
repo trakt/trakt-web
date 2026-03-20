@@ -1,5 +1,4 @@
 <script lang="ts">
-  import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
@@ -108,18 +107,6 @@
           >
             <Link href={UrlBuilder.discover()} label={m.button_label_discover()}>
               <DiscoverIcon />
-            </Link>
-          </Tooltip>
-
-          <Tooltip
-            content={m.page_title_calendar()}
-            variant="compact"
-            side="right"
-            delayDuration={0}
-            sideOffset={16}
-          >
-            <Link href={UrlBuilder.calendar()} label={m.button_label_calendar()}>
-              <CalendarIcon />
             </Link>
           </Tooltip>
 
