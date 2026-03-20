@@ -3369,6 +3369,126 @@
     },
     "header_total_runtime": {
       "default": "Duración total"
+    },
+    "tooltip_stats_plays": {
+      "default": "Total de películas y episodios vistos. ¡Una maratón digna de un Oscar!"
+    },
+    "tooltip_stats_episodes": {
+      "default": "Episodios vistos esta semana"
+    },
+    "tooltip_stats_movies": {
+      "default": "Películas vistas esta semana"
+    },
+    "tooltip_stats_shows": {
+      "default": "Series distintas vistas"
+    },
+    "tooltip_stats_active_days": {
+      "default": "Días con al menos un visionado"
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "Día de la semana con mayor actividad"
+    },
+    "tooltip_stats_best_day": {
+      "default": "Mayor número de visionados en un solo día"
+    },
+    "tooltip_stats_hours": {
+      "default": "Total de horas de contenido vistas. ¡Más tiempo que el montaje del director!"
+    },
+    "tooltip_stats_ratings": {
+      "default": "Títulos puntuados esta semana"
+    },
+    "tooltip_stats_comments": {
+      "default": "Comentarios escritos esta semana"
+    },
+    "label_stats_plays": {
+      "default": "Reproducciones"
+    },
+    "label_stats_episodes": {
+      "default": "Episodios"
+    },
+    "label_stats_movies": {
+      "default": "Películas"
+    },
+    "label_stats_shows": {
+      "default": "Series"
+    },
+    "label_stats_active_days": {
+      "default": "Días activos"
+    },
+    "label_stats_busiest_day": {
+      "default": "Día más activo"
+    },
+    "label_stats_best_day": {
+      "default": "Mejor día"
+    },
+    "label_stats_hours": {
+      "default": "Horas"
+    },
+    "label_stats_ratings": {
+      "default": "Puntuaciones"
+    },
+    "label_stats_comments": {
+      "default": "Comentarios"
+    },
+    "text_stats_today": {
+      "default": "Hoy"
+    },
+    "text_stats_time_morning": {
+      "default": "Mañana"
+    },
+    "text_stats_time_afternoon": {
+      "default": "Tarde"
+    },
+    "text_stats_time_evening": {
+      "default": "Noche"
+    },
+    "text_stats_time_late_night": {
+      "default": "Madrugada"
+    },
+    "text_stats_weeks_ago": {
+      "default": "hace {count} sem."
+    },
+    "text_stats_weeks_short": {
+      "default": "{count} sem."
+    },
+    "text_stats_this_week": {
+      "default": "Esta semana"
+    },
+    "text_stats_was_last_week": {
+      "default": "fue el {day} pasado"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "igual"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} episodios"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} películas"
+    },
+    "header_stats_this_week": {
+      "default": "Esta semana"
+    },
+    "header_stats_graph_daily": {
+      "default": "Actividad diaria"
+    },
+    "header_stats_graph_trend": {
+      "default": "Tendencia semanal"
+    },
+    "header_stats_graph_peak": {
+      "default": "Horas punta"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Series vs Películas"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Puntuaciones"
     }
   }
 }

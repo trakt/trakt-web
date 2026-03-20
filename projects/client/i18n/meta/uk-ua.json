@@ -3369,6 +3369,126 @@
     },
     "header_total_runtime": {
       "default": "Загальна тривалість"
+    },
+    "tooltip_stats_plays": {
+      "default": "Загальна кількість переглянутих фільмів та епізодів"
+    },
+    "tooltip_stats_episodes": {
+      "default": "Епізоди, переглянуті за цей тиждень"
+    },
+    "tooltip_stats_movies": {
+      "default": "Фільми, переглянуті за цей тиждень"
+    },
+    "tooltip_stats_shows": {
+      "default": "Унікальні серіали, які ви дивилися"
+    },
+    "tooltip_stats_active_days": {
+      "default": "Дні, коли ви знаходили час для чудових історій"
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "День тижня з найбільшою кількістю переглядів"
+    },
+    "tooltip_stats_best_day": {
+      "default": "Рекордна кількість переглядів за одну добу"
+    },
+    "tooltip_stats_hours": {
+      "default": "Загальна кількість годин, присвячена кіномистецтву"
+    },
+    "tooltip_stats_ratings": {
+      "default": "Оцінки, які ви поставили цього тижня"
+    },
+    "tooltip_stats_comments": {
+      "default": "Коментарі, які ви написали цього тижня"
+    },
+    "label_stats_plays": {
+      "default": "Перегляди"
+    },
+    "label_stats_episodes": {
+      "default": "Епізоди"
+    },
+    "label_stats_movies": {
+      "default": "Фільми"
+    },
+    "label_stats_shows": {
+      "default": "Серіали"
+    },
+    "label_stats_active_days": {
+      "default": "Активні дні"
+    },
+    "label_stats_busiest_day": {
+      "default": "Пік тижня"
+    },
+    "label_stats_best_day": {
+      "default": "Кращий день"
+    },
+    "label_stats_hours": {
+      "default": "Години"
+    },
+    "label_stats_ratings": {
+      "default": "Оцінки"
+    },
+    "label_stats_comments": {
+      "default": "Коментарі"
+    },
+    "text_stats_today": {
+      "default": "Сьогодні"
+    },
+    "text_stats_time_morning": {
+      "default": "Ранок"
+    },
+    "text_stats_time_afternoon": {
+      "default": "День"
+    },
+    "text_stats_time_evening": {
+      "default": "Вечір"
+    },
+    "text_stats_time_late_night": {
+      "default": "Ніч"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count} т. тому"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count} т."
+    },
+    "text_stats_this_week": {
+      "default": "Цей тиждень"
+    },
+    "text_stats_was_last_week": {
+      "default": "було у {day} минулого тижня"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "без змін"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} епіз."
+    },
+    "text_stats_movies_count": {
+      "default": "{count} фільмів"
+    },
+    "header_stats_this_week": {
+      "default": "Цього тижня"
+    },
+    "header_stats_graph_daily": {
+      "default": "Активність"
+    },
+    "header_stats_graph_trend": {
+      "default": "Тренди"
+    },
+    "header_stats_graph_peak": {
+      "default": "Пікові години"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "Серіали vs Фільми"
+    },
+    "header_stats_graph_ratings": {
+      "default": "Оцінки"
     }
   }
 }
