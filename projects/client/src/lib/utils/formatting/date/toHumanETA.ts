@@ -5,13 +5,13 @@ export function toHumanETA(
   targetDate: Date,
   locale: AvailableLocale = 'en',
 ): string {
-  const MS_PER_HOUR = 1000 * 60 * 60;
-  const MS_PER_DAY = MS_PER_HOUR * 24;
+  const msPerHour = 1000 * 60 * 60;
+  const msPerDay = msPerHour * 24;
 
   const timeDiff = targetDate.getTime() - today.getTime();
   const minutes = Math.round(timeDiff / (1000 * 60));
-  const days = Math.round(timeDiff / MS_PER_DAY);
-  const hours = Math.round(timeDiff / MS_PER_HOUR);
+  const days = Math.round(timeDiff / msPerDay);
+  const hours = Math.round(timeDiff / msPerHour);
 
   const isPastDate = timeDiff < 0;
 
@@ -52,7 +52,7 @@ export function toHumanETA(
       targetDate.getDate(),
     );
     const actualDaysDiff = Math.round(
-      (targetStart.getTime() - todayStart.getTime()) / MS_PER_DAY,
+      (targetStart.getTime() - todayStart.getTime()) / msPerDay,
     );
 
     return rtf.format(actualDaysDiff, 'day');

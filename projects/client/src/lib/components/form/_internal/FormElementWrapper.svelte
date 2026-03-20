@@ -2,7 +2,7 @@
   import type { ValidationProps } from "../models/ValidationProps";
 
   const randomId = crypto.randomUUID().slice(0, 8);
-  const ERROR_LABEL_ID = `trakt-input-error-${randomId}`;
+  const errorLabelId = `trakt-input-error-${randomId}`;
 
   const {
     children,
@@ -17,7 +17,7 @@
 
   {#if validation}
     <p
-      id={ERROR_LABEL_ID}
+      id={errorLabelId}
       class="trakt-input-error secondary tag"
       class:has-error={hasError}
     >

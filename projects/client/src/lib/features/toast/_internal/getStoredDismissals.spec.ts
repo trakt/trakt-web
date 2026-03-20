@@ -11,11 +11,11 @@ import type {
 import { getStoredDismissals } from './getStoredDismissals.ts';
 
 describe('getStoredDismissals', () => {
-  const NOW = 1_700_000_000_000;
+  const now = 1_700_000_000_000;
 
   beforeEach(() => {
     localStorage.clear();
-    vi.spyOn(Date, 'now').mockReturnValue(NOW);
+    vi.spyOn(Date, 'now').mockReturnValue(now);
   });
 
   it('should return the default structure when nothing is stored', () => {
@@ -57,11 +57,11 @@ describe('getStoredDismissals', () => {
       isSuppressed: false,
       dismissalCount: 0,
       items: [
-        { id: '1', type: 'movie', dismissedAt: NOW - 1 },
+        { id: '1', type: 'movie', dismissedAt: now - 1 },
         {
           id: '2',
           type: 'movie',
-          dismissedAt: NOW - RECENTLY_WATCHED_WINDOW - 1,
+          dismissedAt: now - RECENTLY_WATCHED_WINDOW - 1,
         },
       ],
     };
@@ -70,7 +70,7 @@ describe('getStoredDismissals', () => {
 
     expect(getStoredDismissals()).toEqual({
       version: 2,
-      items: [{ id: '1', type: 'movie', dismissedAt: NOW - 1 }],
+      items: [{ id: '1', type: 'movie', dismissedAt: now - 1 }],
       isSuppressed: false,
       dismissalCount: 0,
     });
@@ -80,7 +80,7 @@ describe('getStoredDismissals', () => {
     const v1: StoredDismissalsV1 = {
       id: 1,
       type: 'movie',
-      dismissedAt: NOW - 10_000,
+      dismissedAt: now - 10_000,
     };
     localStorage.setItem(DISMISSAL_STORAGE_KEY, JSON.stringify(v1));
 
@@ -99,7 +99,7 @@ describe('getStoredDismissals', () => {
     const v1TooOld: StoredDismissalsV1 = {
       id: 1,
       type: 'movie',
-      dismissedAt: NOW - RECENTLY_WATCHED_WINDOW - 1,
+      dismissedAt: now - RECENTLY_WATCHED_WINDOW - 1,
     };
 
     localStorage.setItem(DISMISSAL_STORAGE_KEY, JSON.stringify(v1TooOld));

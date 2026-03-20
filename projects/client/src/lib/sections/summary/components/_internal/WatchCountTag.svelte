@@ -7,7 +7,7 @@
 
   const { count, i18n }: { count: number; i18n: TagIntl } = $props();
 
-  const TRANSITION_DURATION = 300;
+  const transitionDuration = 300;
   // FIXME: replace the one in the tags folder when new design is leading
 </script>
 
@@ -28,7 +28,7 @@
             transition:slide={{
               easing: linear,
               axis: "y",
-              duration: TRANSITION_DURATION,
+              duration: transitionDuration,
             }}
           >
             {count}

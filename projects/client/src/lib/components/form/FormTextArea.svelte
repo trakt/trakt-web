@@ -5,7 +5,7 @@
   import type { FormInputProps } from "./models/FormInputProps";
 
   const randomId = crypto.randomUUID().slice(0, 8);
-  const ERROR_LABEL_ID = `trakt-textarea-error-${randomId}`;
+  const errorLabelId = `trakt-textarea-error-${randomId}`;
 
   const {
     onChange,
@@ -57,7 +57,7 @@
     {required}
     oninput={handleInput}
     aria-invalid={hasError ? "true" : "false"}
-    aria-describedby={hasError ? ERROR_LABEL_ID : undefined}
+    aria-describedby={hasError ? errorLabelId : undefined}
     class="trakt-form-textarea"
   ></textarea>
 </FormElementWrapper>

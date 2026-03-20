@@ -4,7 +4,7 @@
   import { PersistQueryClientProvider } from "@tanstack/svelte-query-persist-client";
   import { createPersister } from "./_internal/createPersister";
 
-  const BUSTER_VERSION = "v2";
+  const busterVersion = "v2";
 
   const { children, client }: ChildrenProps & { client: QueryClient } =
     $props();
@@ -16,7 +16,7 @@
   {client}
   persistOptions={{
     persister: createPersister(persisterType),
-    buster: BUSTER_VERSION,
+    buster: busterVersion,
   }}
 >
   {@render children()}

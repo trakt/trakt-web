@@ -5,7 +5,7 @@
 
   const { isLoading, team } = useTraktTeam([]);
 
-  const TEAM_SIZE = 10;
+  const teamSize = 10;
 </script>
 
 <section class="trakt-meet-the-team">
@@ -19,7 +19,7 @@
     </div>
   {:else}
     <div class="team-grid">
-      {#each { length: TEAM_SIZE } as _, i (i)}
+      {#each { length: teamSize } as _, i (i)}
         <div class="team-member-skeleton"></div>
       {/each}
     </div>

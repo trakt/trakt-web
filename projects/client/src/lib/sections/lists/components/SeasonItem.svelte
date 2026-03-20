@@ -16,7 +16,7 @@
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { SeasonCardProps } from "./models/SeasonCardProps";
 
-  const SCROLL_OFFSET = 8;
+  const scrollOffset = 8;
 
   const {
     season,
@@ -55,7 +55,7 @@
 
     requestAnimationFrame(() => {
       parent.scrollTo({
-        left: elementLeft - SCROLL_OFFSET,
+        left: elementLeft - scrollOffset,
         behavior: "instant",
       });
     });

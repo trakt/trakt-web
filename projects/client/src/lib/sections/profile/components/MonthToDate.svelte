@@ -8,7 +8,7 @@
   import WatchStats from "./_internal/WatchStats.svelte";
   import YearToDateLink from "./YearToDateLink.svelte";
 
-  const SOURCE = "month-to-date";
+  const source = "month-to-date";
 
   const { slug }: { slug: string } = $props();
 
@@ -24,13 +24,13 @@
         <CalendarIcon />
         <span class="bold uppercase">{m.text_this_month()}</span>
       </div>
-      <YearToDateLink {slug} source={SOURCE} />
+      <YearToDateLink {slug} {source} />
     {/snippet}
 
     <WatchStats monthToDate={$monthToDate} isLoading={$isLoading} />
 
     {#snippet footer()}
-      <MonthInReviewLink {slug} date={mirDate} source={SOURCE} />
+      <MonthInReviewLink {slug} date={mirDate} {source} />
     {/snippet}
   </ReviewContent>
 </div>

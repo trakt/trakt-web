@@ -4,7 +4,7 @@
   import type { Snippet } from "svelte";
   import SummaryActionsPopup from "./SummaryActionsPopup.svelte";
 
-  const SLIDER_TRANSITION_MS = 150;
+  const sliderTransitionMs = 150;
 
   type SummaryPopupProps = {
     actions: Snippet;
@@ -21,7 +21,7 @@
 <div
   class="trakt-summary-actions-bar"
   class:has-seasonal-theme={$activeTheme !== null}
-  style="--popup-transition-duration: {SLIDER_TRANSITION_MS}ms"
+  style="--popup-transition-duration: {sliderTransitionMs}ms"
 >
   <SeasonalActionBarImage />
   {@render children()}
@@ -30,7 +30,7 @@
     <SummaryActionsPopup
       title={popup.title}
       metaInfo={popup.metaInfo}
-      transitionDuration={SLIDER_TRANSITION_MS}
+      transitionDuration={sliderTransitionMs}
     >
       {@render popup.actions()}
     </SummaryActionsPopup>

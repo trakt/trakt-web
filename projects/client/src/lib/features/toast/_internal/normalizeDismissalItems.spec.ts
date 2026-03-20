@@ -5,17 +5,17 @@ import type { DismissedItem } from '../models/DismissedItem.ts';
 import { normalizeDismissalItems } from './normalizeDismissalItems.ts';
 
 describe('normalizeDismissalItems', () => {
-  const NOW = 1_700_000_000_000;
+  const now = 1_700_000_000_000;
 
   beforeEach(() => {
-    vi.spyOn(Date, 'now').mockReturnValue(NOW);
+    vi.spyOn(Date, 'now').mockReturnValue(now);
   });
 
   it('should keep items dismissed within the recently watched window', () => {
     const withinWindow: DismissedItem = {
       id: '1',
       type: 'movie',
-      dismissedAt: NOW - RECENTLY_WATCHED_WINDOW + 1,
+      dismissedAt: now - RECENTLY_WATCHED_WINDOW + 1,
     };
 
     expect(normalizeDismissalItems([withinWindow])).toEqual([withinWindow]);
@@ -25,7 +25,7 @@ describe('normalizeDismissalItems', () => {
     const tooOld: DismissedItem = {
       id: '1',
       type: 'movie',
-      dismissedAt: NOW - RECENTLY_WATCHED_WINDOW - 1,
+      dismissedAt: now - RECENTLY_WATCHED_WINDOW - 1,
     };
 
     expect(normalizeDismissalItems([tooOld])).toEqual([]);
@@ -35,7 +35,7 @@ describe('normalizeDismissalItems', () => {
     const atCutoff: DismissedItem = {
       id: '1',
       type: 'movie',
-      dismissedAt: NOW - RECENTLY_WATCHED_WINDOW,
+      dismissedAt: now - RECENTLY_WATCHED_WINDOW,
     };
 
     expect(normalizeDismissalItems([atCutoff])).toEqual([atCutoff]);
@@ -45,13 +45,13 @@ describe('normalizeDismissalItems', () => {
     const valid: DismissedItem = {
       id: '1',
       type: 'movie',
-      dismissedAt: NOW - 60_000,
+      dismissedAt: now - 60_000,
     };
 
     const invalid: DismissedItem = {
       id: '2',
       type: 'movie',
-      dismissedAt: NOW - RECENTLY_WATCHED_WINDOW - 1,
+      dismissedAt: now - RECENTLY_WATCHED_WINDOW - 1,
     };
 
     expect(normalizeDismissalItems([invalid, valid])).toEqual([valid]);

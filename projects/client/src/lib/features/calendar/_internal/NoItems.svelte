@@ -2,7 +2,7 @@
   import * as m from "$lib/features/i18n/messages";
   import { shuffle } from "$lib/utils/array/shuffle";
 
-  const NO_ITEMS_MESSAGES = [
+  const noItemsMessages = [
     m.text_calendar_placeholder_1(),
     m.text_calendar_placeholder_2(),
     m.text_calendar_placeholder_3(),
@@ -17,7 +17,7 @@
 </script>
 
 <p class="bold secondary no-content">
-  {shuffle(NO_ITEMS_MESSAGES).at(0)}
+  {shuffle(noItemsMessages).at(0)}
 </p>
 
 <style>

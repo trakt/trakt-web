@@ -3,9 +3,9 @@
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import JoinForFreeButton from "./JoinForFreeButton.svelte";
 
-  const PROFILE_COUNT = 3;
+  const profileCount = 3;
 
-  const { isLoading, team } = useTraktTeam([], PROFILE_COUNT);
+  const { isLoading, team } = useTraktTeam([], profileCount);
 </script>
 
 <div class="trakt-join-for-free">
@@ -20,7 +20,7 @@
     </div>
     <div
       class="trakt-landing-profiles"
-      style="--profile-count: {PROFILE_COUNT}"
+      style="--profile-count: {profileCount}"
     >
       {#if !$isLoading}
         {#each $team as member, index (member.username)}

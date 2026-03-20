@@ -7,7 +7,7 @@
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import type { Snippet } from "svelte";
 
-  const MAX_ITEMS = 2;
+  const maxItems = 2;
 
   type CollapsableValuesProps<T> = {
     category: string;
@@ -18,8 +18,8 @@
   const { category, values, value, children }: CollapsableValuesProps<T> =
     $props();
 
-  const displayableValues = $derived(values.slice(0, MAX_ITEMS));
-  const omittedValues = $derived(values.slice(MAX_ITEMS));
+  const displayableValues = $derived(values.slice(0, maxItems));
+  const omittedValues = $derived(values.slice(maxItems));
 
   const expanded = writable(false);
 </script>
@@ -33,7 +33,7 @@
       <div class="trakt-displayable-value">
         {@render value(v)}
 
-        {#if omittedValues.length > 0 && index === MAX_ITEMS - 1}
+        {#if omittedValues.length > 0 && index === maxItems - 1}
           <RenderFor audience="all">
             <MoreButton
               i18n={MoreButtonIntlProvider}

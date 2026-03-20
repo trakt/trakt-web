@@ -15,8 +15,8 @@
   import CollapseIcon from "./CollapseIcon.svelte";
   import type { ListVariant } from "./ListVariant";
 
-  const EMPTY_STATE_CLASS = "section-list-empty-state";
-  const CTA_CUT_OFF = 4;
+  const emptyStateClass = "section-list-empty-state";
+  const ctaCutOff = 4;
 
   type SectionListProps<T> = ListProps<T> & {
     id: string;
@@ -86,7 +86,7 @@
   class:section-list-container-mounted={$isMounted}
   class:section-list-container-no-header={!isHeaderVisible}
   class:section-list-has-drilldown={Boolean(drilldownLink)}
-  data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${EMPTY_STATE_CLASS}:not(:empty)`}
+  data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
   data-variant={variant}
 >
   {#if $isVisible}
@@ -115,7 +115,7 @@
               {@render item(i)}
             {/each}
 
-            {#if ctaItem && items.length <= CTA_CUT_OFF}
+            {#if ctaItem && items.length <= ctaCutOff}
               {#key `section-list-${id}_cta`}
                 {@render ctaItem()}
               {/key}
@@ -125,7 +125,7 @@
 
         {#snippet childrenB()}
           {#if empty != null && $isMounted}
-            <div class={EMPTY_STATE_CLASS}>
+            <div class={emptyStateClass}>
               {@render empty()}
             </div>
           {/if}

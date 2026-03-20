@@ -3,7 +3,7 @@
   import FooterCard from "./FooterCard.svelte";
   import HeartIcon from "./icons/HeartIcon.svelte";
 
-  const COST_DESCRIPTIONS = [
+  const costDescriptions = [
     m.text_vip_costs_team(),
     m.text_vip_costs_infrastructure(),
     m.text_vip_costs_moderation(),
@@ -18,7 +18,7 @@
 
   <div class="trakt-vip-cost-descriptions">
     <ul>
-      {#each COST_DESCRIPTIONS as description}
+      {#each costDescriptions as description}
         <li>
           <p>{description}</p>
         </li>

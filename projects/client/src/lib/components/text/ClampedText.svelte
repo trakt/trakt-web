@@ -5,7 +5,7 @@
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { writable } from "$lib/utils/store/WritableSubject";
 
-  const DEFAULT_LINE_COUNT = 3;
+  const defaultLineCount = 3;
 
   type LineClampProps = {
     label: string;
@@ -17,11 +17,11 @@
     children,
     label,
     classList = "",
-    lineCount = DEFAULT_LINE_COUNT,
+    lineCount = defaultLineCount,
   }: LineClampProps = $props();
 
   const isClamped = writable(false);
-  const lines = writable(DEFAULT_LINE_COUNT);
+  const lines = writable(defaultLineCount);
 
   $effect.pre(() => {
     lines.set(lineCount);

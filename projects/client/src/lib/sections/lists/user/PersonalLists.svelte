@@ -19,7 +19,7 @@
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
 
-  const PREVIEW_LIMIT = 3;
+  const previewLimit = 3;
 
   const {
     type,
@@ -37,7 +37,7 @@
 
   const variant = $derived.by(() => {
     const shouldShowSummary =
-      $hasNextPage || $lists.length === 0 || $lists.length > PREVIEW_LIMIT;
+      $hasNextPage || $lists.length === 0 || $lists.length > previewLimit;
     return shouldShowSummary ? "summary" : "preview";
   });
 

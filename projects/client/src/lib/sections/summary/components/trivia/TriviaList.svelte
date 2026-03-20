@@ -11,7 +11,7 @@
   import TriviaCard from "./_internal/TriviaCard.svelte";
   import { useTrivia } from "./useTrivia";
 
-  const CHARACTER_WIDTH_FACTOR = 0.85;
+  const characterWidthFactor = 0.85;
 
   const { media }: { media: MediaEntry } = $props();
 
@@ -33,7 +33,7 @@
 {#snippet metaInfo()}
   <ListMetaInfo
     text={$triviaType.text()}
-    --meta-info-width={`${longestOptionLength * CHARACTER_WIDTH_FACTOR}ch`}
+    --meta-info-width={`${longestOptionLength * characterWidthFactor}ch`}
   />
 {/snippet}
 

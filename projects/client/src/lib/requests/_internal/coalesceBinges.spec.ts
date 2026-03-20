@@ -8,8 +8,8 @@ import type {
 import { coalesceBinges } from './coalesceBinges.ts';
 
 describe('coalesceBinges', () => {
-  const USER_SLUG_ALICE = 'alice';
-  const USER_SLUG_BOB = 'bob';
+  const userSlugAlice = 'alice';
+  const userSlugBob = 'bob';
 
   function makeUserProfile(slug: string, username?: string) {
     return {
@@ -89,21 +89,21 @@ describe('coalesceBinges', () => {
         id: 1,
         showId: 1,
         episodeId: 1,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01'),
       }),
       makeEpisodeActivity({
         id: 2,
         showId: 1,
         episodeId: 2,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01'),
       }),
       makeEpisodeActivity({
         id: 3,
         showId: 1,
         episodeId: 3,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01'),
       }),
     ];
@@ -122,14 +122,14 @@ describe('coalesceBinges', () => {
         id: 1,
         showId: 1,
         episodeId: 1,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01'),
       }),
       makeEpisodeActivity({
         id: 2,
         showId: 1,
         episodeId: 2,
-        userSlugs: [USER_SLUG_BOB],
+        userSlugs: [userSlugBob],
         activityAt: new Date('2024-01-01'),
       }),
     ];
@@ -143,14 +143,14 @@ describe('coalesceBinges', () => {
         id: 1,
         showId: 1,
         episodeId: 1,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01'),
       }),
       makeEpisodeActivity({
         id: 2,
         showId: 1,
         episodeId: 2,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-02'),
       }),
     ];
@@ -163,21 +163,21 @@ describe('coalesceBinges', () => {
       makeMovieActivity({
         id: 1,
         movieId: 1,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-02'),
       }),
       makeEpisodeActivity({
         id: 2,
         showId: 1,
         episodeId: 1,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01'),
       }),
       makeEpisodeActivity({
         id: 3,
         showId: 1,
         episodeId: 2,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01'),
       }),
     ];
@@ -192,7 +192,7 @@ describe('coalesceBinges', () => {
         id: 1,
         showId: 1,
         episodeId: 1,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01'),
       }),
     ];
@@ -210,21 +210,21 @@ describe('coalesceBinges', () => {
         id: 1,
         showId: 1,
         episodeId: 3,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01T05:00:00'),
       }),
       makeEpisodeActivity({
         id: 2,
         showId: 1,
         episodeId: 2,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01T04:00:00'),
       }),
       makeEpisodeActivity({
         id: 3,
         showId: 1,
         episodeId: 1,
-        userSlugs: [USER_SLUG_ALICE],
+        userSlugs: [userSlugAlice],
         activityAt: new Date('2024-01-01T03:00:00'),
       }),
     ];

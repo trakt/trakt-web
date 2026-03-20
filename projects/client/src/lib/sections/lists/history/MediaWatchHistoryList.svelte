@@ -9,7 +9,7 @@
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
   import RecentlyWatchedItem from "./RecentlyWatchedItem.svelte";
 
-  const MINIMUM_WATCH_COUNT = 2;
+  const minimumWatchCount = 2;
 
   type RecentlyWatchedListProps = {
     title: string;
@@ -24,7 +24,7 @@
 </script>
 
 <RenderFor audience="authenticated">
-  {#if $watchCount >= MINIMUM_WATCH_COUNT}
+  {#if $watchCount >= minimumWatchCount}
     <MediaList
       id="media-watch-history-list-{target.type}-{targetItem.id}"
       {title}

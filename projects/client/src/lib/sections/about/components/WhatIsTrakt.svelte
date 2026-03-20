@@ -8,7 +8,7 @@
   import LogoMark from "$lib/components/logo/LogoMark.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
 
-  const FEATURES = [
+  const features = [
     {
       icon: ShowIcon,
       title: m.about_feature_title_scrobble,
@@ -57,7 +57,7 @@
   </div>
 
   <div class="what-is-trakt-features">
-    {#each FEATURES as feature, i (i)}
+    {#each features as feature, i (i)}
       {@const Icon = feature.icon}
       <div class="trakt-feature-card">
         <div class="trakt-feature-icon">

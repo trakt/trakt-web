@@ -3,7 +3,7 @@
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import { calculateLimitProgress } from "./utils/calculateLimitProgress";
 
-  const LOW_PERCENTAGE_THRESHOLD = 5;
+  const lowPercentageThreshold = 5;
 
   const {
     current,
@@ -25,7 +25,7 @@
   );
 
   const isLowPercentage = $derived(
-    progress > 0 && progress < LOW_PERCENTAGE_THRESHOLD,
+    progress > 0 && progress < lowPercentageThreshold,
   );
 </script>
 

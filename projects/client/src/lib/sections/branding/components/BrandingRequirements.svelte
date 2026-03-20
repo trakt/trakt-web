@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
 
-  const REQUIREMENTS = [
+  const requirements = [
     m.text_branding_req_1,
     m.text_branding_req_2,
     m.text_branding_req_3,
@@ -14,7 +14,7 @@
 <section class="branding-requirements">
   <h2 class="branding-section-heading">{m.heading_branding_requirements()}</h2>
   <ul class="branding-requirements-list">
-    {#each REQUIREMENTS as req, i (i)}
+    {#each requirements as req, i (i)}
       <li>{req()}</li>
     {/each}
   </ul>

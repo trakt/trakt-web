@@ -28,7 +28,7 @@
       : labelFn({ count: value });
   };
 
-  const WATCH_STATS = $derived([
+  const watchStats = $derived([
     {
       label: getMainLabel(monthToDate.episodeCount, m.text_episodes_watched),
       tagLabel: m.tag_text_episodes(),
@@ -48,7 +48,7 @@
 </script>
 
 <div class="trakt-watch-stats" data-size={size}>
-  {#each WATCH_STATS as stat}
+  {#each watchStats as stat}
     <Stat {isLoading} variant={statVariant}>
       {#snippet icon()}
         {@const Icon = stat.icon}

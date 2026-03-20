@@ -5,7 +5,7 @@
   import WatchNowIcon from "$lib/components/icons/WatchNowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
 
-  const EXTERNAL_LINK = "https://trakt.tv";
+  const externalLink = "https://trakt.tv";
 </script>
 
 <main>
@@ -14,10 +14,10 @@
   <div class="link-display">
     <section>
       <h2>External</h2>
-      <Link href={EXTERNAL_LINK} target="_blank">Trakt.tv</Link>
+      <Link href={externalLink} target="_blank">Trakt.tv</Link>
 
       <Button
-        href={EXTERNAL_LINK}
+        href={externalLink}
         target="_blank"
         label="This is the primary textured link"
         style="textured"
@@ -30,7 +30,7 @@
       </Button>
 
       <Button
-        href={EXTERNAL_LINK}
+        href={externalLink}
         target="_blank"
         label="This is the primary textured link"
         style="flat"
@@ -40,7 +40,7 @@
       </Button>
 
       <Button
-        href={EXTERNAL_LINK}
+        href={externalLink}
         target="_blank"
         label="This is the primary textured link in a disabled"
         style="ghost"
