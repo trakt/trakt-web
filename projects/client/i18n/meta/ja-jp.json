@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "{title} の詳細"
+    },
+    "limit_title_watch_history": {
+      "default": "視聴履歴"
+    },
+    "limit_title_ratings": {
+      "default": "評価"
+    },
+    "limit_title_offline_library": {
+      "default": "オフラインライブラリ"
+    },
+    "text_stats_watching_streak": {
+      "default": "連続視聴"
+    },
+    "text_stats_watch_today": {
+      "default": "今日も観よう"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "連続記録を更新しよう！"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "毎日、欠かさず。"
+    },
+    "text_stats_streak_others_dream": {
+      "default": "誰もが憧れる境地"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "もはや生活の一部"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "365日休みなし"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "全集中で視聴中"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "その調子でいこう"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "習慣化してきた！"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "継続は力なり"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "丸1年達成！"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "半年達成！"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90日連続！"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60日連続！"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "丸1ヶ月！"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "2週間突破！"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "丸1週間！"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "3日目突入！"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "全てはここから！"
+    },
+    "text_stats_streak_month": {
+      "default": "{count}ヶ月"
+    },
+    "text_stats_streak_months": {
+      "default": "{count}ヶ月"
+    },
+    "text_stats_streak_week": {
+      "default": "{count}週間"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count}週間"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} 日"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} 日"
+    },
+    "text_stats_day_count": {
+      "default": "{count}日間"
+    },
+    "text_stats_days_count": {
+      "default": "{count}日間"
     }
   }
 }

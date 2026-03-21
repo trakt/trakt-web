@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Détails pour « {title} »"
+    },
+    "limit_title_watch_history": {
+      "default": "Historique de visionnement"
+    },
+    "limit_title_ratings": {
+      "default": "Cotes"
+    },
+    "limit_title_offline_library": {
+      "default": "Bibliothèque physique"
+    },
+    "text_stats_watching_streak": {
+      "default": "de visionnage consécutif"
+    },
+    "text_stats_watch_today": {
+      "default": "Regarde quelque chose"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "pour garder ta séquence en vie!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Chaque. Saint. Jour."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Un rêve pour les autres"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "C'est rendu un mode de vie"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Pas de congé"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Bien concentré"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Lâche pas la patate!"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Une vraie habitude"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Continue comme ça"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Un an pile!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Six mois déjà!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 jours d'affilée!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 jours d'affilée!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Un mois complet!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Deux semaines de feu!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Une semaine entière!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Trois jours de faits!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Ça commence!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} mois"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} mois"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} semaine"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} semaines"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} jour"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} jours"
+    },
+    "text_stats_day_count": {
+      "default": "{count} jour"
+    },
+    "text_stats_days_count": {
+      "default": "{count} jours"
     }
   }
 }

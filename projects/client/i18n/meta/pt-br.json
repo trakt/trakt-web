@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Detalhes de \"{title}\""
+    },
+    "limit_title_watch_history": {
+      "default": "Histórico"
+    },
+    "limit_title_ratings": {
+      "default": "Avaliações"
+    },
+    "limit_title_offline_library": {
+      "default": "Acervo Offline"
+    },
+    "text_stats_watching_streak": {
+      "default": "em sequência"
+    },
+    "text_stats_watch_today": {
+      "default": "Assista hoje"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "para manter sua maratona viva!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Todo. Santo. Dia."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "O resto só sonha com isso"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Virou estilo de vida"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Sem folga da telinha"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Foco total"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Mantém essa chama acesa"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Virando hábito"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Continua assim"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Um ano inteirinho!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Meio ano de maratona!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 dias sem parar!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 dias seguidos!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Um mês completo!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Duas semanas firmes!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Uma semana cheia!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Três dias já!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Começou!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} mês"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} meses"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} semana"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} semanas"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} dia"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} dias"
+    },
+    "text_stats_day_count": {
+      "default": "{count} dia"
+    },
+    "text_stats_days_count": {
+      "default": "{count} dias"
     }
   }
 }

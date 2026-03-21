@@ -14,6 +14,7 @@
   import UpNextList from "$lib/sections/lists/progress/UpNextList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   // FIXME: move to PersonalHistoryList when Profile also supports discover mode
@@ -42,6 +43,7 @@
     <Banner />
     <UpNextList intent="continue" />
     <UpNextList intent="start" />
+    <StreakCallout />
     <UpcomingList />
     <PersonalHistoryList mode={$mode} />
     <ActivityList />
