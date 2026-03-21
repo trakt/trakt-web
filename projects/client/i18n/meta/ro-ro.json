@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Detalii despre {title}"
+    },
+    "limit_title_watch_history": {
+      "default": "Istoric vizionări"
+    },
+    "limit_title_ratings": {
+      "default": "Evaluări"
+    },
+    "limit_title_offline_library": {
+      "default": "Bibliotecă offline"
+    },
+    "text_stats_watching_streak": {
+      "default": "serie consecutivă"
+    },
+    "text_stats_watch_today": {
+      "default": "Vizionează ceva azi"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "pentru a menține seria activă!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "În. Fiecare. Zi."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Alții pot doar să viseze"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "E deja un stil de viață"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Fără zile de pauză"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Conectat total"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Ține flacăra aprinsă"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Se formează un obicei"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Continuă tot așa"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Un an întreg de povești!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "O jumătate de an!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 de zile neîntrerupte!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 de zile neîntrerupte!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "O lună întreagă!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Două săptămâni în forță!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "O săptămână plină!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Deja de trei zile!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "A început!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} lună"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} luni"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} săptămână"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} săptămâni"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} zi"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} zile"
+    },
+    "text_stats_day_count": {
+      "default": "de {count} zi"
+    },
+    "text_stats_days_count": {
+      "default": "de {count} zile"
     }
   }
 }

@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Detaljer for \"{title}\""
+    },
+    "limit_title_watch_history": {
+      "default": "Sehistorikk"
+    },
+    "limit_title_ratings": {
+      "default": "Vurderinger"
+    },
+    "limit_title_offline_library": {
+      "default": "Offline-bibliotek"
+    },
+    "text_stats_watching_streak": {
+      "default": "seerekke"
+    },
+    "text_stats_watch_today": {
+      "default": "Se noe i dag"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "for å holde seerekken (og hyggen) i live!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Hver. Eneste. Dag."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Andre kan bare drømme"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Det er en livsstil nå"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Ingen fridager"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Helt fokusert"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Hold fyr i peisen"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "En god vane"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Fortsett slik"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Et helt år!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Et halvt år!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 dager på rad!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 dager på rad!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "En hel måned!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "To sterke uker!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "En hel uke!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Tre dager i boks!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Det begynner!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} måned"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} måneder"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} uke"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} uker"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} dag"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} dager"
+    },
+    "text_stats_day_count": {
+      "default": "{count}-dagers"
+    },
+    "text_stats_days_count": {
+      "default": "{count}-dagers"
     }
   }
 }

@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Детайли за „{title}“"
+    },
+    "limit_title_watch_history": {
+      "default": "История"
+    },
+    "limit_title_ratings": {
+      "default": "Оценки"
+    },
+    "limit_title_offline_library": {
+      "default": "Офлайн библиотека"
+    },
+    "text_stats_watching_streak": {
+      "default": "поредица"
+    },
+    "text_stats_watch_today": {
+      "default": "Гледай днес,"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "за да продължиш лентата!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Всеки. Един. Ден."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Другите само мечтаят"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Това вече е начин на живот"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Без почивни дни"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "В зоната"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Поддържай огъня жив"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Става ти навик"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Продължавай напред"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Цяла година!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Половин година!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 поредни дни!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 поредни дни!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Цял месец!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Две силни седмици!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Цяла седмица!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Трети пореден ден!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Започва се!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} месец"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} месеца"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} седмица"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} седмици"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} ден"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} дни"
+    },
+    "text_stats_day_count": {
+      "default": "{count}-дневен"
+    },
+    "text_stats_days_count": {
+      "default": "{count}-дневен"
     }
   }
 }

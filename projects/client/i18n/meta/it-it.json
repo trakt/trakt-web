@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Dettagli per \"{title}\""
+    },
+    "limit_title_watch_history": {
+      "default": "Cronologia"
+    },
+    "limit_title_ratings": {
+      "default": "Valutazioni"
+    },
+    "limit_title_offline_library": {
+      "default": "Cineteca offline"
+    },
+    "text_stats_watching_streak": {
+      "default": "di fila"
+    },
+    "text_stats_watch_today": {
+      "default": "Guarda oggi"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "per non interrompere la serie!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Ogni. Singolo. Giorno."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Un sogno per gli altri"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Ormai è uno stile di vita"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Senza sosta"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Sintonizzato"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Mantieni vivo il fuoco"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Sta diventando un'abitudine"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Continua così"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Un anno intero!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Mezzo anno!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 giorni di fila!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 giorni di fila!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Un mese intero!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Due settimane alla grande!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Una settimana intera!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Tre giorni fatti!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Si comincia!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} mese"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} mesi"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} settimana"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} settimane"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} giorno"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} giorni"
+    },
+    "text_stats_day_count": {
+      "default": "di {count} giorno"
+    },
+    "text_stats_days_count": {
+      "default": "di {count} giorni"
     }
   }
 }

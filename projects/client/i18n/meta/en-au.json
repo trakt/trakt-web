@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Details for \"{title}\""
+    },
+    "limit_title_watch_history": {
+      "default": "Watch History"
+    },
+    "limit_title_ratings": {
+      "default": "Ratings"
+    },
+    "limit_title_offline_library": {
+      "default": "Offline Library"
+    },
+    "text_stats_watching_streak": {
+      "default": "watching streak"
+    },
+    "text_stats_watch_today": {
+      "default": "Watch today"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "to keep your streak alive!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Every. Single. Day."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Others can only dream"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "It's a lifestyle now"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "No days off"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Locked in"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Keep that fire going"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Habit forming"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Keep going"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "A full year!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Half a year!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 days straight!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 days straight!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "A full month!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Two weeks strong!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "A whole week!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Three days in!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "It begins!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} month"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} months"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} week"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} weeks"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} day"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} days"
+    },
+    "text_stats_day_count": {
+      "default": "{count}-day"
+    },
+    "text_stats_days_count": {
+      "default": "{count}-day"
     }
   }
 }

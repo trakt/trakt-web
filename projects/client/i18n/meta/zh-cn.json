@@ -3101,6 +3101,99 @@
     },
     "button_label_details": {
       "default": "\"{title}\" 的详情"
+    },
+    "limit_title_watch_history": {
+      "default": "观看记录"
+    },
+    "limit_title_ratings": {
+      "default": "评分"
+    },
+    "limit_title_offline_library": {
+      "default": "离线库"
+    },
+    "text_stats_watching_streak": {
+      "default": "连胜记录"
+    },
+    "text_stats_watch_today": {
+      "default": "今天开看"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "让你的连胜记录延续下去！"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "日。复。一。日。"
+    },
+    "text_stats_streak_others_dream": {
+      "default": "他人梦寐以求"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "这已经是一种生活方式"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "全年无休"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "全身心投入"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "保持那股火热"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "习惯成自然"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "继续前进"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "整整一年！"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "半年了！"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "连续 90 天！"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "连续 60 天！"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "整整一个月！"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "坚持了两周！"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "足足一周！"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "连续三天！"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "开始了！"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} 个月"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} 个月"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} 周"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} 周"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} 天"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} 天"
+    },
+    "text_stats_day_count": {
+      "default": "{count} 天"
+    },
+    "text_stats_days_count": {
+      "default": "{count} 天"
     }
   }
 }

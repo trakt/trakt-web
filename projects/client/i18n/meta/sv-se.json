@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Detaljer för \"{title}\""
+    },
+    "limit_title_watch_history": {
+      "default": "Historik"
+    },
+    "limit_title_ratings": {
+      "default": "Betyg"
+    },
+    "limit_title_offline_library": {
+      "default": "Offline-bibliotek"
+    },
+    "text_stats_watching_streak": {
+      "default": "tittarsvit"
+    },
+    "text_stats_watch_today": {
+      "default": "Se något idag"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "för att hålla din svit vid liv!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Varje. Endaste. Dag."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Andra kan bara drömma"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Det är en livsstil nu"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Inga lediga dagar"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Fokuserad"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Håll elden vid liv"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Vanebildande"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Fortsätt så"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Ett helt år!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Ett halvår!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 dagar i sträck!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 dagar i sträck!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "En hel månad!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Två starka veckor!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "En hel vecka!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Tre dagar avklarade!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Det börjar!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} månad"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} månader"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} vecka"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} veckor"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} dag"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} dagar"
+    },
+    "text_stats_day_count": {
+      "default": "{count}-dagars"
+    },
+    "text_stats_days_count": {
+      "default": "{count}-dagars"
     }
   }
 }

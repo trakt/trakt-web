@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Подробнее о «{title}»"
+    },
+    "limit_title_watch_history": {
+      "default": "История"
+    },
+    "limit_title_ratings": {
+      "default": "Оценки"
+    },
+    "limit_title_offline_library": {
+      "default": "Офлайн библиотека"
+    },
+    "text_stats_watching_streak": {
+      "default": "серия просмотров"
+    },
+    "text_stats_watch_today": {
+      "default": "Посмотри что-нибудь сегодня"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "чтобы не прерывать серию!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Каждый. Божий. День."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Другим такое только снится"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Это уже стиль жизни"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Без выходных"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Полное погружение"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Поддерживай огонь"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Привычка формируется"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Так держать"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Целый год!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Полгода!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 дней подряд!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 дней подряд!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Целый месяц!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Две недели в ударе!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Целая неделя!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Три дня позади!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Начало положено!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} месяц"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} мес."
+    },
+    "text_stats_streak_week": {
+      "default": "{count} неделя"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} нед."
+    },
+    "text_stats_streak_day": {
+      "default": "{count} день"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} дн."
+    },
+    "text_stats_day_count": {
+      "default": "{count}-дневная"
+    },
+    "text_stats_days_count": {
+      "default": "{count}-дневная"
     }
   }
 }

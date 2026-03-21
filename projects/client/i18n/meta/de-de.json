@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Details zu „{title}“"
+    },
+    "limit_title_watch_history": {
+      "default": "Verlauf"
+    },
+    "limit_title_ratings": {
+      "default": "Bewertungen"
+    },
+    "limit_title_offline_library": {
+      "default": "Offline-Archiv"
+    },
+    "text_stats_watching_streak": {
+      "default": "Watching-Streak"
+    },
+    "text_stats_watch_today": {
+      "default": "Schauen Sie heute etwas,"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "um die Streak am Leben zu halten!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Jeden. Einzelnen. Tag."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Davon träumt Hollywood nur"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Filmreifer Lifestyle"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Keine Drehpause"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Fokus wie ein Regisseur"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Licht aus, Spot an!"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Gewohnheitssache"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Dranbleiben"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Ein ganzes Jahr im Kinosessel!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Ein halbes Jahr Cineastik!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 Tage am Stück!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 Tage am Stück!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Ein voller Monat!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Zwei Wochen stark!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Eine ganze Woche!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Drei Tage geschafft!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Es beginnt!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} Monat"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} Monate"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} Woche"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} Wochen"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} Tag"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} Tage"
+    },
+    "text_stats_day_count": {
+      "default": "{count}-Tage"
+    },
+    "text_stats_days_count": {
+      "default": "{count}-Tage"
     }
   }
 }

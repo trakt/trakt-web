@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Деталі про «{title}»"
+    },
+    "limit_title_watch_history": {
+      "default": "Історія"
+    },
+    "limit_title_ratings": {
+      "default": "Рейтинги"
+    },
+    "limit_title_offline_library": {
+      "default": "Офлайн колекція"
+    },
+    "text_stats_watching_streak": {
+      "default": "днів поспіль"
+    },
+    "text_stats_watch_today": {
+      "default": "Подивіться щось сьогодні"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "щоб вогонь не згас!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Кожен. Божий. День."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Інші лише мріють про таке"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "Тепер це ваш стиль життя"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Жодних вихідних"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Повне занурення"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Не збавляйте темп"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Звичка формується"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Тільки вперед"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Цілий рік кіномарафону!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Пів року історій!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 днів незламності!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 днів у ритмі Trakt!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Цілий місяць разом!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Два тижні витримки!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Цілий тиждень!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Вже три дні!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Пригоди починаються!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} місяць"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} місяців"
+    },
+    "text_stats_streak_week": {
+      "default": "{count} тиждень"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} тижні"
+    },
+    "text_stats_streak_day": {
+      "default": "{count} день"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} днів"
+    },
+    "text_stats_day_count": {
+      "default": "{count}-денна"
+    },
+    "text_stats_days_count": {
+      "default": "{count}-денна"
     }
   }
 }

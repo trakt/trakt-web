@@ -3102,6 +3102,99 @@
     },
     "button_label_details": {
       "default": "Szczegóły dla {title}"
+    },
+    "limit_title_watch_history": {
+      "default": "Historia"
+    },
+    "limit_title_ratings": {
+      "default": "Oceny"
+    },
+    "limit_title_offline_library": {
+      "default": "Biblioteka offline"
+    },
+    "text_stats_watching_streak": {
+      "default": "oglądania z rzędu"
+    },
+    "text_stats_watch_today": {
+      "default": "Obejrzyj coś dziś"
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "aby podtrzymać swoją serię!"
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Dzień. Po. Dniu."
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Inni mogą tylko pomarzyć"
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "To już styl życia"
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "Bez dni wolnych"
+    },
+    "text_stats_streak_locked_in": {
+      "default": "W trybie maratonu"
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Podtrzymuj ten ogień"
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "To wchodzi w krew"
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Tak trzymaj"
+    },
+    "text_stats_streak_exact_year": {
+      "default": "Okrągły rok!"
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Pół roku za Tobą!"
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 dni z rzędu!"
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 dni z rzędu!"
+    },
+    "text_stats_streak_exact_month": {
+      "default": "Pełny miesiąc!"
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Mocne dwa tygodnie!"
+    },
+    "text_stats_streak_exact_week": {
+      "default": "Cały tydzień!"
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Trzeci dzień!"
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "Zaczyna się!"
+    },
+    "text_stats_streak_month": {
+      "default": "{count} miesiąc"
+    },
+    "text_stats_streak_months": {
+      "default": "{count} mies."
+    },
+    "text_stats_streak_week": {
+      "default": "{count} tydzień"
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} tyg."
+    },
+    "text_stats_streak_day": {
+      "default": "{count} dzień"
+    },
+    "text_stats_streak_days": {
+      "default": "{count} dni"
+    },
+    "text_stats_day_count": {
+      "default": "{count}-dniowy"
+    },
+    "text_stats_days_count": {
+      "default": "{count}-dniowy"
     }
   }
 }

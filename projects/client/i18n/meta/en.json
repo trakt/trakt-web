@@ -8129,7 +8129,11 @@
     },
     "stat_text_plays": {
       "default": "Plays",
-      "description": "Text for the plays stat, indicating the number of times a movie, show, or episode was watched. This should be as short and concise as possible.",
+      "description": "Text for the plays stat, indicating the number of times a movie, show, or episode was watched. This should be as short and concise as possible."
+    },
+    "limit_title_watch_history": {
+      "default": "Watch History",
+      "description": "Title for the progress bar that shows a user's watch history usage. This should be as short as possible.",
       "exclude": [
         "android",
         "ios"
@@ -8137,7 +8141,11 @@
     },
     "stat_text_watchers": {
       "default": "Watchers",
-      "description": "Text for the watchers stat, indicating the number of users who are watching a movie, show, or episode. This should be as short and concise as possible.",
+      "description": "Text for the watchers stat, indicating the number of users who are watching a movie, show, or episode. This should be as short and concise as possible."
+    },
+    "limit_title_ratings": {
+      "default": "Ratings",
+      "description": "Title for the progress bar that shows a user's ratings usage. This should be as short as possible.",
       "exclude": [
         "android",
         "ios"
@@ -8145,7 +8153,11 @@
     },
     "stat_text_lists": {
       "default": "Lists",
-      "description": "Text for the lists stat, indicating the number of lists that contain a movie, show, or episode. This should be as short and concise as possible.",
+      "description": "Text for the lists stat, indicating the number of lists that contain a movie, show, or episode. This should be as short and concise as possible."
+    },
+    "limit_title_offline_library": {
+      "default": "Offline Library",
+      "description": "Title for the progress bar that shows a user's offline library usage. This should be as short as possible.",
       "exclude": [
         "android",
         "ios"
@@ -8153,7 +8165,11 @@
     },
     "stat_text_favorited": {
       "default": "Favorites",
-      "description": "Text for the favorites stat, indicating the number of times a movie, or show has been favorited. This should be as short and concise as possible.",
+      "description": "Text for the favorites stat, indicating the number of times a movie, or show has been favorited. This should be as short and concise as possible."
+    },
+    "text_stats_day_count": {
+      "default": "{count}-day",
+      "description": "Day count for watching streak, used as compound adjective (e.g. '16-day watching streak').",
       "exclude": [
         "android",
         "ios"
@@ -8161,7 +8177,11 @@
     },
     "button_text_details": {
       "default": "Details",
-      "description": "Text for the button that allows users to view details of a movie, show, or episode.",
+      "description": "Text for the button that allows users to view details of a movie, show, or episode."
+    },
+    "text_stats_days_count": {
+      "default": "{count}-day",
+      "description": "Plural day count for watching streak, used as compound adjective (e.g. '16-day watching streak').",
       "exclude": [
         "android",
         "ios"
@@ -8174,7 +8194,211 @@
         "title": {
           "type": "string"
         }
-      },
+      }
+    },
+    "text_stats_watching_streak": {
+      "default": "watching streak",
+      "description": "Label following the streak count, e.g. '5 days watching streak'.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_watch_today": {
+      "default": "Watch today",
+      "description": "Call to action when streak is at risk.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_keep_streak_alive": {
+      "default": "to keep your streak alive!",
+      "description": "Motivational text following 'Watch today' when streak is at risk.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_every_single_day": {
+      "default": "Every. Single. Day.",
+      "description": "Motivational message for 180+ day streak tiers.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_others_dream": {
+      "default": "Others can only dream",
+      "description": "Motivational message for 90+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_lifestyle": {
+      "default": "It's a lifestyle now",
+      "description": "Motivational message for 60+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_no_days_off": {
+      "default": "No days off",
+      "description": "Motivational message for 30+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_locked_in": {
+      "default": "Locked in",
+      "description": "Motivational message for 14+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_keep_fire": {
+      "default": "Keep that fire going",
+      "description": "Motivational message for 7+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_habit_forming": {
+      "default": "Habit forming",
+      "description": "Motivational message for 3+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_keep_going": {
+      "default": "Keep going",
+      "description": "Motivational message for 1 day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_exact_year": {
+      "default": "A full year!",
+      "description": "Message shown when streak is exactly 365 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_exact_half_year": {
+      "default": "Half a year!",
+      "description": "Message shown when streak is exactly 180 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_exact_90": {
+      "default": "90 days straight!",
+      "description": "Message shown when streak is exactly 90 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_exact_60": {
+      "default": "60 days straight!",
+      "description": "Message shown when streak is exactly 60 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_exact_month": {
+      "default": "A full month!",
+      "description": "Message shown when streak is exactly 30 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_exact_two_weeks": {
+      "default": "Two weeks strong!",
+      "description": "Message shown when streak is exactly 14 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_exact_week": {
+      "default": "A whole week!",
+      "description": "Message shown when streak is exactly 7 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_exact_three_days": {
+      "default": "Three days in!",
+      "description": "Message shown when streak is exactly 3 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_exact_it_begins": {
+      "default": "It begins!",
+      "description": "Message shown when streak is exactly 1 day.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_month": {
+      "default": "{count} month",
+      "description": "Singular month label in streak accumulator.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_months": {
+      "default": "{count} months",
+      "description": "Plural months label in streak accumulator.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_week": {
+      "default": "{count} week",
+      "description": "Singular week label in streak accumulator.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_weeks": {
+      "default": "{count} weeks",
+      "description": "Plural weeks label in streak accumulator.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_day": {
+      "default": "{count} day",
+      "description": "Singular day label in streak accumulator.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_streak_days": {
+      "default": "{count} days",
+      "description": "Plural days label in streak accumulator.",
       "exclude": [
         "android",
         "ios"
