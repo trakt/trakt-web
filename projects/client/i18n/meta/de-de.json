@@ -3195,6 +3195,24 @@
     },
     "text_stats_days_count": {
       "default": "{count}-Tage"
+    },
+    "header_certification": {
+      "default": "Altersfreigabe"
+    },
+    "option_text_certification_all_ages": {
+      "default": "Alle Altersstufen"
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "Elternempfehlung"
+    },
+    "option_text_certification_teens": {
+      "default": "Jugendliche"
+    },
+    "option_text_certification_mature": {
+      "default": "Für Erwachsene"
+    },
+    "option_text_certification_unrated": {
+      "default": "Ohne Bewertung"
     }
   }
 }

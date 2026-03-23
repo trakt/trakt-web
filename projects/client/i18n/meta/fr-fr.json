@@ -3195,6 +3195,24 @@
     },
     "text_stats_days_count": {
       "default": "{count}-day"
+    },
+    "header_certification": {
+      "default": "Classement"
+    },
+    "option_text_certification_all_ages": {
+      "default": "Pour tous"
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "Accord parental"
+    },
+    "option_text_certification_teens": {
+      "default": "Ados"
+    },
+    "option_text_certification_mature": {
+      "default": "Public averti"
+    },
+    "option_text_certification_unrated": {
+      "default": "Non classé"
     }
   }
 }

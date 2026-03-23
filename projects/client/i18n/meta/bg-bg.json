@@ -3195,6 +3195,24 @@
     },
     "text_stats_days_count": {
       "default": "{count}-дневен"
+    },
+    "header_certification": {
+      "default": "Възрастов рейтинг"
+    },
+    "option_text_certification_all_ages": {
+      "default": "За всички възрасти"
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "Родителски контрол"
+    },
+    "option_text_certification_teens": {
+      "default": "За тийнейджъри"
+    },
+    "option_text_certification_mature": {
+      "default": "За възрастни"
+    },
+    "option_text_certification_unrated": {
+      "default": "Без рейтинг"
     }
   }
 }

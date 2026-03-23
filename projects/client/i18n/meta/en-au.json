@@ -3195,6 +3195,24 @@
     },
     "text_stats_days_count": {
       "default": "{count}-day"
+    },
+    "header_certification": {
+      "default": "Certification"
+    },
+    "option_text_certification_all_ages": {
+      "default": "All Ages"
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "Parental Guidance"
+    },
+    "option_text_certification_teens": {
+      "default": "Teens"
+    },
+    "option_text_certification_mature": {
+      "default": "Mature"
+    },
+    "option_text_certification_unrated": {
+      "default": "Unrated"
     }
   }
 }

@@ -8403,6 +8403,54 @@
         "android",
         "ios"
       ]
+    },
+    "header_certification": {
+      "default": "Certification",
+      "description": "Header for the filter that allows users to filter by content certification/rating.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_certification_all_ages": {
+      "default": "All Ages",
+      "description": "Text for the certification filter option that includes content suitable for all ages (G, TV-Y, TV-Y7, TV-G).",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "Parental Guidance",
+      "description": "Text for the certification filter option that includes content requiring parental guidance (PG, TV-PG).",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_certification_teens": {
+      "default": "Teens",
+      "description": "Text for the certification filter option that includes content suitable for teens (PG-13, TV-14).",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_certification_mature": {
+      "default": "Mature",
+      "description": "Text for the certification filter option that includes mature content (R, TV-MA).",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_certification_unrated": {
+      "default": "Unrated",
+      "description": "Text for the certification filter option that includes unrated content.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

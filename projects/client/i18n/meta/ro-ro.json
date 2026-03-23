@@ -3195,6 +3195,24 @@
     },
     "text_stats_days_count": {
       "default": "de {count} zile"
+    },
+    "header_certification": {
+      "default": "Clasificare"
+    },
+    "option_text_certification_all_ages": {
+      "default": "Toate vârstele"
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "Acord parental"
+    },
+    "option_text_certification_teens": {
+      "default": "Adolescenți"
+    },
+    "option_text_certification_mature": {
+      "default": "Adulți"
+    },
+    "option_text_certification_unrated": {
+      "default": "Neclasificat"
     }
   }
 }

@@ -3195,6 +3195,24 @@
     },
     "text_stats_days_count": {
       "default": "{count}-daagse"
+    },
+    "header_certification": {
+      "default": "Certificering"
+    },
+    "option_text_certification_all_ages": {
+      "default": "Alle leeftijden"
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "Ouderlijk toezicht"
+    },
+    "option_text_certification_teens": {
+      "default": "Tieners"
+    },
+    "option_text_certification_mature": {
+      "default": "Volwassenen"
+    },
+    "option_text_certification_unrated": {
+      "default": "Zonder rating"
     }
   }
 }
