@@ -2536,6 +2536,15 @@
     "text_vip_get_insights": {
       "default": "Obtenez des analyses approfondies, un suivi plus intelligent et un accès anticipé aux nouveautés."
     },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Positif"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Négatif"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Mitigé"
+    },
     "text_vip_features_tagline": {
       "default": "Pas de fioritures, juste des fonctionnalités."
     },

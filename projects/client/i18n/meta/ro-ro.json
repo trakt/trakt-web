@@ -3075,6 +3075,15 @@
     },
     "link_text_vip_cover_image_upsell": {
       "default": "Devino VIP pentru imagini de copertă."
+    },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Pozitiv"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Negativ"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Mixt"
     }
   }
 }

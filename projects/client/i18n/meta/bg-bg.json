@@ -2536,6 +2536,15 @@
     "text_vip_get_insights": {
       "default": "Вземете задълбочени анализи, по-умно проследяване и ранен достъп до новостите."
     },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Положителен"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Отрицателен"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Смесен"
+    },
     "text_vip_features_tagline": {
       "default": "Без излишен шум, само функции."
     },

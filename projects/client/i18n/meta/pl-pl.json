@@ -2536,6 +2536,15 @@
     "text_vip_get_insights": {
       "default": "Zyskaj głębsze analizy, inteligentne śledzenie i wczesny dostęp do nowości."
     },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Pozytywny"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Negatywny"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Mieszany"
+    },
     "text_vip_features_tagline": {
       "default": "Bez zbędnego szumu, same funkcje."
     },

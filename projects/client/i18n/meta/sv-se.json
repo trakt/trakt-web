@@ -2536,6 +2536,15 @@
     "text_vip_get_insights": {
       "default": "Få djupare insikter, smartare spårning och tidig tillgång till vad som kommer härnäst."
     },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Positiv"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Negativ"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Blandad"
+    },
     "text_vip_features_tagline": {
       "default": "Ingen hype, bara funktioner."
     },

@@ -2535,6 +2535,15 @@
     "text_vip_get_insights": {
       "default": "获取深度洞察、智能追踪，并抢先体验下一代功能。"
     },
+    "translated_value_overall_sentiment_positive": {
+      "default": "积极"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "消极"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "混合"
+    },
     "text_vip_features_tagline": {
       "default": "拒绝虚头巴脑，只有纯粹功能。"
     },
