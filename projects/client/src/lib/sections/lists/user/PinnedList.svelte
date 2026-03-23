@@ -28,32 +28,16 @@
 </script>
 
 {#if !$isLoading && $list && !$isDismissed}
-  <div class="trakt-pinned-list">
-    <UserList list={$list} type={mode} />
-    <div class="trakt-pinned-list-dismiss">
-      <ActionButton
-        onclick={dismiss}
-        label={m.button_label_dismiss()}
-        size="small"
-        style="ghost"
-      >
-        <CloseIcon />
-      </ActionButton>
-    </div>
-  </div>
+  {#snippet dismissAction()}
+    <ActionButton
+      onclick={dismiss}
+      label={m.button_label_dismiss()}
+      style="ghost"
+      color="default"
+    >
+      <CloseIcon />
+    </ActionButton>
+  {/snippet}
+
+  <UserList list={$list} type={mode} titleAction={dismissAction} />
 {/if}
-
-<style>
-  .trakt-pinned-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-micro);
-    position: relative;
-  }
-
-  .trakt-pinned-list-dismiss {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-</style>

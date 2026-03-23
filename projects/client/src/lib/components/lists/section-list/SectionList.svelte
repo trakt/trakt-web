@@ -25,6 +25,7 @@
     headerNavigationType?: DpadNavigationType;
     subtitle?: string;
     variant?: ListVariant;
+    titleAction?: Snippet;
   };
 
   const {
@@ -40,6 +41,7 @@
     headerNavigationType,
     subtitle,
     variant = "default",
+    titleAction: externalTitleAction,
   }: SectionListProps<T> = $props();
 
   const isHeaderVisible = $derived(Boolean(title));
@@ -67,7 +69,9 @@
 </script>
 
 {#snippet titleAction()}
-  {#if variant === "default"}
+  {#if externalTitleAction}
+    {@render externalTitleAction()}
+  {:else if variant === "default"}
     <ActionButton
       onclick={toggle}
       label={isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}

@@ -8,8 +8,13 @@
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import UserListItem from "./_internal/UserListItem.svelte";
   import ListActions from "./ListActions.svelte";
+  import type { Snippet } from "svelte";
 
-  const { list, type }: { list: MediaListSummary; type?: DiscoverMode } =
+  const {
+    list,
+    type,
+    titleAction,
+  }: { list: MediaListSummary; type?: DiscoverMode; titleAction?: Snippet } =
     $props();
   const { filterMap } = useFilter();
 
@@ -36,6 +41,7 @@
   useList={(params) => useListItems({ list, ...params })}
   urlBuilder={() => getListUrl({ type: "user-list", list, mode: type })}
   title={list.name}
+  {titleAction}
 >
   {#snippet item(media)}
     <UserListItem listedItem={media} style="cover" {list} />

@@ -15,6 +15,7 @@ export type MediaListProps<T, M> = {
   metaInfo?: Snippet;
   drilldownLink?: string;
   variant?: 'portrait' | 'landscape';
+  titleAction?: Snippet;
 } & FilterParams;
 
 export type DrilledMediaListProps<T, M> =
