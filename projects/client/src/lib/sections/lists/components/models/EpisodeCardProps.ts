@@ -1,3 +1,4 @@
+import type { ActivityType } from '$lib/models/ActivityType.ts';
 import type { ShowInput } from '$lib/models/MediaInput.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry.ts';
@@ -16,7 +17,12 @@ export type EpisodeItemVariant =
     episode: EpisodeEntry;
     context?: EpisodeContext;
   }
-  | { variant: 'activity'; episode: EpisodeEntry; date: Date }
+  | {
+    variant: 'activity';
+    episode: EpisodeEntry;
+    date: Date;
+    activityType: ActivityType;
+  }
   | { variant: 'list-item'; episode: EpisodeEntry };
 
 export type EpisodeCardProps = BaseItemProps & EpisodeItemVariant & {

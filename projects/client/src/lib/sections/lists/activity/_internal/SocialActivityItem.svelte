@@ -64,6 +64,7 @@
     badge={profileBadges}
     source="social-activity"
     action={activityRating}
+    activityType="social"
   />
 {/if}
 
@@ -73,6 +74,7 @@
     activityAt={activity.activityAt}
     badge={summaryBadge}
     source="social-activity"
+    activityType="social"
   />
 {/if}
 

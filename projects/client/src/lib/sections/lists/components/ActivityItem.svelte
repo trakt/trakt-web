@@ -1,18 +1,8 @@
 <script lang="ts">
-  import type { SocialActivity } from "$lib/requests/models/SocialActivity";
   import type { Snippet } from "svelte";
-  import type { HistoryEntry } from "../stores/models/HistoryEntry";
   import EpisodeItem from "./EpisodeItem.svelte";
   import MediaItem from "./MediaItem.svelte";
-
-  type SocialActivityCardProps = {
-    activity: SocialActivity | HistoryEntry;
-    activityAt: Date;
-    badge?: Snippet;
-    popupActions?: Snippet;
-    source?: string;
-    action?: Snippet;
-  };
+  import type { ActivityItemProps } from "./_internal/ActivityItemProps";
 
   const {
     activity,
@@ -21,7 +11,10 @@
     popupActions,
     source,
     action,
-  }: SocialActivityCardProps = $props();
+    activityType,
+  }: ActivityItemProps & {
+    action?: Snippet;
+  } = $props();
 </script>
 
 {#if activity.type === "episode"}
@@ -34,6 +27,7 @@
     {popupActions}
     {source}
     {action}
+    {activityType}
   />
 {/if}
 
@@ -47,5 +41,6 @@
     {popupActions}
     {source}
     {action}
+    {activityType}
   />
 {/if}

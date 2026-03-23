@@ -13,6 +13,7 @@
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
+  import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { toRelativeHumanDay } from "$lib/utils/formatting/date/toRelativeHumanDay";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
@@ -178,8 +179,12 @@
             {media.title}
           </p>
         {/if}
-        <p class="trakt-card-subtitle secondary ellipsis">
-          {toRelativeHumanDay(new Date(), rest.date, getLocale())}
+        <p class="trakt-card-subtitle secondary ellipsis capitalize">
+          {#if rest.activityType === "social"}
+            {toRelativeHumanDay(new Date(), rest.date, getLocale())}
+          {:else}
+            {toHumanDate(new Date(), rest.date, getLocale())}
+          {/if}
         </p>
       {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
         <p class="trakt-card-title ellipsis">
