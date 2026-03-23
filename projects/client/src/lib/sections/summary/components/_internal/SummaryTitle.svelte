@@ -1,5 +1,6 @@
 <script lang="ts">
   import { TestId } from "$e2e/models/TestId";
+  import Link from "$lib/components/link/Link.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -34,6 +35,13 @@
         href={UrlBuilder.people(mainCredit.key, mainCredit.positions)}
         target="_self"
       />
+      {#each mainCredit.others ?? [] as person}
+        {', '}
+        <Link
+          href={UrlBuilder.people(person.key, mainCredit.positions)}
+          target="_self">{person.name}</Link
+        >
+      {/each}
     </p>
   {/if}
 
