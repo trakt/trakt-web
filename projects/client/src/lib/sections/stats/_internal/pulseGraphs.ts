@@ -3,7 +3,7 @@ import * as m from '$lib/features/i18n/messages.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { toHumanDayOfWeek } from '$lib/utils/formatting/date/toHumanDayOfWeek.ts';
 
-const daysInWeek = 7;
+export const daysInWeek = 7;
 const trendWeekCount = 4;
 const morningStartHour = 5;
 const afternoonStartHour = 12;
@@ -136,9 +136,11 @@ export function computeRatingsDistribution(
   return { buckets, average };
 }
 
-export function pickGraph(
+export const graphScoreMax = 10;
+
+export function pickGraphs(
   graphData: PulseGraphData,
-): PulseGraphType | null {
+): ReadonlyArray<{ type: PulseGraphType; score: number }> {
   type Candidate = { type: PulseGraphType; score: number };
   const candidates: Candidate[] = [];
 
@@ -190,7 +192,7 @@ export function pickGraph(
     candidates.push({ type: 'ratingsDistribution', score: Math.min(cv * 10, 10) });
   }
 
-  if (candidates.length === 0) return null;
   candidates.sort((a, b) => b.score - a.score);
-  return candidates[0]?.type ?? null;
+  return candidates;
 }
+

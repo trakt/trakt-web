@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Card from "$lib/components/card/Card.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { PulseGraphData, PulseGraphType } from "./pulseGraphs";
 
@@ -17,21 +18,23 @@
   // Daily bars derived data
   const dailyMax = $derived(Math.max(...data.dailyBars.days, 1));
 
-  // Week trend SVG coordinates
+  // Week trend SVG layout
+  const trendViewboxWidth = 240;
+  const trendViewboxHeight = 96;
+  const trendPadX = 4;
+  const trendPadTop = 16;
+  const trendDotRadius = 2.5;
+  const trendDotCurrentRadius = 4;
+
   const trendPoints = $derived.by(() => {
     const weeks = data.weekTrend.weeks;
     const maxPlays = Math.max(...weeks.map((w) => w.plays), 1);
-    const viewboxWidth = 240;
-    const graphAreaHeight = 96;
-    const padX = 8;
-    const padTop = 20;
-    const padBottom = 0;
-    const width = viewboxWidth - padX * 2;
-    const height = graphAreaHeight - padTop - padBottom;
+    const width = trendViewboxWidth - trendPadX * 2;
+    const height = trendViewboxHeight - trendPadTop;
 
     return weeks.map((w, i) => ({
-      x: padX + (i / Math.max(weeks.length - 1, 1)) * width,
-      y: padTop + height - (w.plays / maxPlays) * height,
+      x: trendPadX + (i / Math.max(weeks.length - 1, 1)) * width,
+      y: trendPadTop + height - (w.plays / maxPlays) * height,
       plays: w.plays,
       label: w.label,
     }));
@@ -46,7 +49,7 @@
     const first = trendPoints[0]!;
     const last = trendPoints[trendPoints.length - 1]!;
     const linePoints = trendPoints.map((p) => `${p.x},${p.y}`).join(" ");
-    return `${linePoints} ${last.x},96 ${first.x},96`;
+    return `${linePoints} ${last.x},${trendViewboxHeight} ${first.x},${trendViewboxHeight}`;
   });
 
   // Watch clock max
@@ -79,8 +82,9 @@
   ];
 </script>
 
-<div class="trakt-pulse-graph">
-  <p class="trakt-pulse-graph-title">{title}</p>
+<Card --height-card="var(--height-pulse-card)">
+  <div class="trakt-pulse-graph">
+    <p class="trakt-pulse-graph-title">{title}</p>
 
   {#if kind ==="dailyBars"}
     <div class="graph-daily-bars">
@@ -101,7 +105,7 @@
     </div>
   {:else if kind ==="weekTrend"}
     <div class="graph-week-trend">
-      <svg viewBox="0 0 240 96" class="trend-svg">
+      <svg viewBox="0 0 {trendViewboxWidth} {trendViewboxHeight}" preserveAspectRatio="none" class="trend-svg">
         <polygon points={trendPolygon} class="trend-area" />
         <polyline points={trendPolyline} class="trend-line" />
         {#each trendPoints as point, i (i)}
@@ -109,7 +113,7 @@
           <circle
             cx={point.x}
             cy={point.y}
-            r={isLast ? 4 : 2.5}
+            r={isLast ? trendDotCurrentRadius : trendDotRadius}
             class="trend-point"
             class:trend-point-current={isLast}
           />
@@ -183,20 +187,19 @@
       </div>
     </div>
   {/if}
-</div>
+  </div>
+</Card>
 
 <style lang="scss">
   .trakt-pulse-graph {
-    grid-column: span 2;
     display: flex;
     flex-direction: column;
     gap: var(--ni-8);
     padding: var(--ni-16);
-    background: var(--shade-930);
-    border: 1px solid var(--shade-910);
-    border-radius: var(--border-radius-m);
     overflow: hidden;
     position: relative;
+    height: 100%;
+    box-sizing: border-box;
   }
 
   .trakt-pulse-graph-title {
@@ -260,11 +263,13 @@
     gap: var(--ni-4);
     flex: 1;
     justify-content: flex-end;
+    min-height: 0;
   }
 
   .trend-svg {
     width: 100%;
-    height: auto;
+    flex: 1;
+    min-height: 0;
   }
 
   .trend-area {
@@ -299,7 +304,6 @@
   .trend-labels {
     display: flex;
     justify-content: space-between;
-    padding: 0 var(--ni-8);
   }
 
   .trend-label {
