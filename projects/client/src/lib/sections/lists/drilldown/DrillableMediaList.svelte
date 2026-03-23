@@ -12,6 +12,7 @@
       empty?: Snippet;
       badge?: Snippet;
       source: DrilldownSource;
+      titleAction?: Snippet;
     };
 
   const {
@@ -19,13 +20,14 @@
     source,
     urlBuilder,
     actions: externalActions,
+    titleAction,
     ...props
   }: DrillableList<T, M> = $props();
 
   const href = $derived(urlBuilder({ type: props.type, ...props.filter }));
 </script>
 
-<MediaList {...props} drilldownLink={href}>
+<MediaList {...props} drilldownLink={href} {titleAction}>
   {#snippet actions(items)}
     {@render externalActions?.(items, props.type)}
     {#if !props.filterOverride}
