@@ -1,68 +1,90 @@
-import { I18N_MESSAGES_DIR } from './_internal/constants.ts';
+import { I18N_META_DIR } from './_internal/constants.ts';
 import { writeJsonFile } from './_internal/writeJsonFile.ts';
 
-const CONFLICT_HEAD_REGEX = /<<<<<<< HEAD\n([\s\S]*?)=======/;
-const INCOMING_CHANGE_REGEX = /[=]======\n([\s\S]*?)>>>>>>> [^\n]+\n/;
-const END_CONFLICT_MARKER_REGEX = />>>>>>> [^\n]+\n([\s\S]*)/;
-
-function cleanup(data: string | undefined): string {
-  if (!data) {
-    return '';
-  }
-
-  const trailingCommaRegex = /,$/;
-  return data.trim()
-    .replace(
-      trailingCommaRegex,
-      '',
-    );
-}
+const CONFLICT_RE =
+  /<<<<<<< HEAD\n([\s\S]*?)=======\n([\s\S]*?)>>>>>>> [^\n]+\n/g;
 
 export function resolveJSONConflicts(input: string): Record<string, string> {
-  const data = input.trim().replace(/^{|}$/g, '');
+  let resolved = input;
 
-  const [, mineMatch] = data.match(CONFLICT_HEAD_REGEX) ?? [];
-  const [, theirsMatch] = data.match(INCOMING_CHANGE_REGEX) ?? [];
-  const [beforeConflict] = data.split(
-    CONFLICT_HEAD_REGEX,
-  );
-  const [_, afterConflict] = data.split(
-    END_CONFLICT_MARKER_REGEX,
-  );
+  while (CONFLICT_RE.test(resolved)) {
+    resolved = resolved.replace(CONFLICT_RE, (match, mine, theirs) => {
+      let m = mine.trim();
+      let t = theirs.trim();
 
-  if (mineMatch && theirsMatch) {
-    const mine = cleanup(mineMatch);
-    const theirs = cleanup(theirsMatch);
-    const before = cleanup(beforeConflict);
-    const after = cleanup(afterConflict);
+      let openCount = 0;
+      for (let i = 0; i < m.length; i++) {
+        if (m[i] === '{') openCount++;
+        else if (m[i] === '}') openCount--;
+      }
+      while (openCount > 0) {
+        m += '\n  }';
+        openCount--;
+      }
 
-    // Parse the conflicting sections as JSON objects
-    const mineObj = JSON.parse(`{${mine}}`);
-    const theirsObj = JSON.parse(`{${theirs}}`);
-    const beforeObj = JSON.parse(`{${before}}`);
-    const afterObj = JSON.parse(`{${after}}`);
+      if (m.endsWith(',')) m = m.slice(0, -1);
+      if (t.endsWith(',')) t = t.slice(0, -1);
 
-    return { ...beforeObj, ...mineObj, ...theirsObj, ...afterObj };
+      if (!m) return t ? t + ',\n' : '';
+      if (!t) return m ? m + ',\n' : '';
+
+      return m + ',\n' + t + ',\n';
+    });
   }
 
-  return JSON.parse(input);
+  resolved = resolved.replace(/,\s*,/g, ',');
+  resolved = resolved.replace(/,\s*}/g, '\n}');
+
+  // In case any markers are leftover from broken nesting, completely remove them to allow parsing
+  resolved = resolved.replace(/^<<<<<<<.*\n?/gm, '');
+  resolved = resolved.replace(/^=======\n?/gm, ',\n');
+  resolved = resolved.replace(/^>>>>>>>.*\n?/gm, '');
+  resolved = resolved.replace(/,\s*,/g, ',');
+  resolved = resolved.replace(/,\s*}/g, '\n}');
+
+  let obj;
+  let currentStr = resolved;
+  let success = false;
+  let parseError = null;
+
+  for (let i = 0; i < 15; i++) {
+    try {
+      obj = JSON.parse(currentStr);
+      success = true;
+      break;
+    } catch (e) {
+      parseError = e;
+      currentStr += '\n}';
+    }
+  }
+
+  if (!success) {
+    throw new Error(
+      'Failed to parse resolved JSON: ' + parseError?.message + '\n\n' +
+        resolved.substring(0, 500),
+    );
+  }
+
+  return obj;
 }
 
 if (import.meta.main) {
-  for await (const dirEntry of Deno.readDir(I18N_MESSAGES_DIR)) {
-    if (dirEntry.isFile) {
-      const filePath = `${I18N_MESSAGES_DIR}/${dirEntry.name}`;
-      try {
-        const data = await Deno.readTextFile(filePath);
-        const resolvedData = resolveJSONConflicts(data);
-        await writeJsonFile(
-          filePath,
-          resolvedData,
-        );
-        console.log(`Conflicts resolved in file: ${dirEntry.name}`);
-      } catch (err) {
-        console.error(`Error processing file ${dirEntry.name}:`, err);
-        break;
+  for (const dir of [I18N_META_DIR]) {
+    for await (const dirEntry of Deno.readDir(dir)) {
+      if (dirEntry.isFile) {
+        const filePath = `${dir}/${dirEntry.name}`;
+        try {
+          const data = await Deno.readTextFile(filePath);
+          const resolvedData = resolveJSONConflicts(data);
+          await writeJsonFile(
+            filePath,
+            resolvedData,
+          );
+          console.log(`Conflicts resolved in file: ${dirEntry.name}`);
+        } catch (err) {
+          console.error(`Error processing file ${dirEntry.name}:`, err);
+          // continue processing other files
+        }
       }
     }
   }
