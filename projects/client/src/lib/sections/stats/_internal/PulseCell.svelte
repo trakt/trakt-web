@@ -1,17 +1,18 @@
 <script lang="ts">
+  import Card from "$lib/components/card/Card.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { Snippet } from "svelte";
+  import PulseIcon from "./PulseIcon.svelte";
 
   const {
-    icon,
+    key,
     value,
     label,
     tooltip,
     delta = null,
     note,
   }: {
-    icon: Snippet;
+    key: string;
     value: string;
     label: string;
     tooltip?: string;
@@ -24,52 +25,49 @@
   );
 </script>
 
-<div class="trakt-pulse-cell">
-  {#if tooltip}
-    <Tooltip content={tooltip} variant="compact" side="right">
+<Card --width-card="var(--width-pulse-card)" --height-card="var(--height-pulse-card)">
+  <div class="trakt-pulse-cell">
+    {#if tooltip}
+      <Tooltip content={tooltip} variant="compact" side="right">
+        <div class="trakt-pulse-cell-icon">
+          <PulseIcon {key} />
+        </div>
+      </Tooltip>
+    {:else}
       <div class="trakt-pulse-cell-icon">
-        {@render icon()}
+        <PulseIcon {key} />
       </div>
-    </Tooltip>
-  {:else}
-    <div class="trakt-pulse-cell-icon">
-      {@render icon()}
-    </div>
-  {/if}
+    {/if}
 
-  <div class="trakt-pulse-cell-body">
-    <p class="trakt-pulse-cell-value">{value}</p>
-    <p class="trakt-pulse-cell-label">{label}</p>
+    <div class="trakt-pulse-cell-body">
+      <p class="trakt-pulse-cell-value">{value}</p>
+      <p class="trakt-pulse-cell-label">{label}</p>
+    </div>
+
+    {#if note}
+      <div class="trakt-pulse-cell-pill" data-direction="neutral">
+        {note}
+      </div>
+    {:else if delta != null && direction}
+      <div class="trakt-pulse-cell-pill" data-direction={direction}>
+        {#if delta > 0}
+          {m.text_stats_delta_up({ count: String(delta) })}
+        {:else if delta < 0}
+          {m.text_stats_delta_down({ count: String(Math.abs(delta)) })}
+        {:else}
+          {m.text_stats_delta_same()}
+        {/if}
+      </div>
+    {/if}
   </div>
-
-  {#if note}
-    <div class="trakt-pulse-cell-pill" data-direction="neutral">
-      {note}
-    </div>
-  {:else if delta != null && direction}
-    <div class="trakt-pulse-cell-pill" data-direction={direction}>
-      {#if delta > 0}
-        {m.text_stats_delta_up({ count: String(delta) })}
-      {:else if delta < 0}
-        {m.text_stats_delta_down({ count: String(Math.abs(delta)) })}
-      {:else}
-        {m.text_stats_delta_same()}
-      {/if}
-    </div>
-  {/if}
-</div>
+</Card>
 
 <style lang="scss">
   .trakt-pulse-cell {
-    flex: 1 0 var(--ni-148);
     display: flex;
     flex-direction: column;
     gap: var(--ni-10);
     padding: var(--ni-16);
-
-    background: var(--shade-930);
-    border: 1px solid var(--shade-910);
-    border-radius: var(--border-radius-m);
     overflow: hidden;
   }
 

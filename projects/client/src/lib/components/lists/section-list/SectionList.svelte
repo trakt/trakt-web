@@ -3,6 +3,7 @@
   import Crossfade from "$lib/components/Crossfade.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
+  import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
@@ -26,6 +27,7 @@
     subtitle?: string;
     variant?: ListVariant;
     titleAction?: Snippet;
+    classList?: string;
   };
 
   const {
@@ -43,6 +45,7 @@
     subtitle,
     variant = "default",
     titleAction: externalTitleAction,
+    classList = "",
   }: SectionListProps<T> = $props();
 
   const isHeaderVisible = $derived(Boolean(title));
@@ -94,6 +97,7 @@
   class:section-list-has-multiple-items={items.length > 1}
   data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
   data-variant={variant}
+  use:appendClassList={classList}
 >
   {#if $isVisible}
     {#if isHeaderVisible && title}

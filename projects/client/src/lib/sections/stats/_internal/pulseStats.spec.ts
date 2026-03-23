@@ -34,7 +34,6 @@ describe('sumHours', () => {
   });
 
   it('combines both and rounds', () => {
-    // 150 min → 2.5 → rounds to 3
     expect(sumHours([movieEntry(100)], [showEntry(50)])).toBe(3);
   });
 });
@@ -72,13 +71,13 @@ describe('getBusiestDay', () => {
 
 describe('dayOfWeekDate', () => {
   it('returns a date matching the given day of week', () => {
-    const now = new Date('2024-01-17T12:00:00Z'); // Wednesday
-    const result = dayOfWeekDate(1, now); // Monday
+    const now = new Date('2024-01-17T12:00:00Z');
+    const result = dayOfWeekDate(1, now);
     expect(result.getDay()).toBe(1);
   });
 
   it('returns same day when dayIndex matches now', () => {
-    const now = new Date('2024-01-17T12:00:00Z'); // Wednesday (3)
+    const now = new Date('2024-01-17T12:00:00Z');
     const result = dayOfWeekDate(3, now);
     expect(result.getDay()).toBe(3);
   });
@@ -117,60 +116,11 @@ describe('rankStats', () => {
     note,
   });
 
-  it('drops totalPlays when all plays are episodes', () => {
-    const candidates = [
-      stat('totalPlays', 35, 9),
-      stat('episodes', 35, 9),
-      stat('shows', 18, -1),
-    ];
-    const rawCounts = new Map([['totalPlays', 35], ['episodes', 35], ['movies', 0]]);
-    const result = rankStats(candidates, rawCounts);
-    expect(result.map((r) => r.key)).not.toContain('totalPlays');
-    expect(result.map((r) => r.key)).toContain('episodes');
-  });
-
-  it('drops totalPlays when all plays are movies', () => {
-    const candidates = [
-      stat('totalPlays', 10, 3),
-      stat('movies', 10, 3),
-      stat('episodes', 0, 0),
-    ];
-    const rawCounts = new Map([['totalPlays', 10], ['episodes', 0], ['movies', 10]]);
-    const result = rankStats(candidates, rawCounts);
-    expect(result.map((r) => r.key)).not.toContain('totalPlays');
-    expect(result.map((r) => r.key)).toContain('movies');
-  });
-
-  it('drops zero movies with zero delta', () => {
-    const candidates = [
-      stat('totalPlays', 20, 5),
-      stat('movies', 0, 0),
-    ];
-    const rawCounts = new Map([['totalPlays', 20], ['episodes', 20], ['movies', 0]]);
-    const result = rankStats(candidates, rawCounts);
-    expect(result.map((r) => r.key)).not.toContain('movies');
-  });
-
-  it('keeps movies when delta is non-zero even if value is 0', () => {
-    const candidates = [
-      stat('movies', 0, -3),
-      stat('shows', 5, 2),
-    ];
-    const rawCounts = new Map([['totalPlays', 5], ['episodes', 5], ['movies', 0]]);
-    const result = rankStats(candidates, rawCounts);
-    expect(result.map((r) => r.key)).toContain('movies');
-  });
-
-  it('keeps all items when both episodes and movies have plays', () => {
-    const candidates = [
-      stat('totalPlays', 10, 2),
-      stat('episodes', 7, 1),
-      stat('movies', 3, 1),
-    ];
-    const rawCounts = new Map([['totalPlays', 10], ['episodes', 7], ['movies', 3]]);
-    const result = rankStats(candidates, rawCounts);
-    expect(result).toHaveLength(3);
-  });
+  const emptyCounts = new Map<string, number>([
+    ['totalPlays', 0],
+    ['episodes', 0],
+    ['movies', 0],
+  ]);
 
   it('ranks higher delta stats first', () => {
     const candidates = [
@@ -178,8 +128,7 @@ describe('rankStats', () => {
       stat('shows', 10, 8),
       stat('activeDays', 3, 0),
     ];
-    const rawCounts = new Map([['totalPlays', 20], ['episodes', 20], ['movies', 0]]);
-    const result = rankStats(candidates, rawCounts);
+    const result = rankStats(candidates, emptyCounts);
     expect(result[0]!.key).toBe('shows');
   });
 
@@ -188,9 +137,34 @@ describe('rankStats', () => {
       stat('busiestDay', 0, null, 'was Thu last week'),
       stat('movies', 0, 0),
     ];
+    const result = rankStats(candidates, emptyCounts);
+    expect(result[0]!.key).toBe('busiestDay');
+  });
+
+  it('keeps all candidates but deprioritizes redundant ones', () => {
+    const candidates = [
+      stat('totalPlays', 35, 9),
+      stat('episodes', 35, 9),
+      stat('movies', 0, 0),
+    ];
+    const rawCounts = new Map([['totalPlays', 35], ['episodes', 35], ['movies', 0]]);
+    const result = rankStats(candidates, rawCounts);
+    expect(result).toHaveLength(3);
+    // episodes is not redundant, should be first
+    expect(result[0]!.key).toBe('episodes');
+    // totalPlays and movies are both redundant — totalPlays has higher base score
+    expect(result[1]!.key).toBe('totalPlays');
+    expect(result[2]!.key).toBe('movies');
+  });
+
+  it('deprioritizes zero-value zero-delta stats', () => {
+    const candidates = [
+      stat('shows', 5, 2),
+      stat('movies', 0, 0),
+    ];
     const rawCounts = new Map([['totalPlays', 5], ['episodes', 5], ['movies', 0]]);
     const result = rankStats(candidates, rawCounts);
-    // movies gets filtered by redundancy rule, busiestDay survives
-    expect(result[0]!.key).toBe('busiestDay');
+    expect(result[0]!.key).toBe('shows');
+    expect(result[1]!.key).toBe('movies');
   });
 });
