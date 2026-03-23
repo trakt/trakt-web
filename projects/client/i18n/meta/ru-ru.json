@@ -1425,9 +1425,6 @@
     "warning_prompt_delete_list": {
       "default": "Вы уверены, что хотите удалить список {name}?"
     },
-    "link_text_vip_list_upsell": {
-      "default": "чтобы добавить больше списков"
-    },
     "button_text_create_list": {
       "default": "Список"
     },
@@ -2117,9 +2114,6 @@
     },
     "button_text_recent_comments": {
       "default": "Новые"
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "чтобы менять обложки"
     },
     "button_text_set_cover_image": {
       "default": "На обложку"
@@ -3075,6 +3069,12 @@
     },
     "button_label_library": {
       "default": "Библиотека"
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Стать VIP для новых списков"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Стать VIP для смены обложек"
     }
   }
 }

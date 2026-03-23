@@ -1425,9 +1425,6 @@
     "warning_prompt_delete_list": {
       "default": "Czy na pewno chcesz usunąć listę {name}?"
     },
-    "link_text_vip_list_upsell": {
-      "default": "Po więcej list"
-    },
     "button_text_create_list": {
       "default": "Lista"
     },
@@ -2117,9 +2114,6 @@
     },
     "button_text_recent_comments": {
       "default": "Najnowsze"
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "Ustaw obrazy okładki"
     },
     "button_text_set_cover_image": {
       "default": "Ustaw jako okładkę"
@@ -3075,6 +3069,12 @@
     },
     "button_label_library": {
       "default": "Biblioteka"
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Zyskaj VIP, by dodać więcej list."
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Zyskaj VIP, by ustawić okładki."
     }
   }
 }

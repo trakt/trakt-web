@@ -1425,9 +1425,6 @@
     "warning_prompt_delete_list": {
       "default": "Er du sikker på, at du vil slette listen {name}?"
     },
-    "link_text_vip_list_upsell": {
-      "default": "For flere lister"
-    },
     "button_text_create_list": {
       "default": "Liste"
     },
@@ -2117,9 +2114,6 @@
     },
     "button_text_recent_comments": {
       "default": "Nyeste"
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "Indstil coverbilleder"
     },
     "button_text_set_cover_image": {
       "default": "Indstil som cover"
@@ -3075,6 +3069,12 @@
     },
     "button_label_library": {
       "default": "Bibliotek"
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Få VIP for flere lister."
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Få VIP til coverbilleder."
     }
   }
 }

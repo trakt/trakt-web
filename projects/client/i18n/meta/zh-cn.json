@@ -1424,9 +1424,6 @@
     "warning_prompt_delete_list": {
       "default": "确定要删除片单 {name} 吗？"
     },
-    "link_text_vip_list_upsell": {
-      "default": "以添加更多片单"
-    },
     "button_text_create_list": {
       "default": "片单"
     },
@@ -2116,9 +2113,6 @@
     },
     "button_text_recent_comments": {
       "default": "最新"
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "以设置封面图"
     },
     "button_text_set_cover_image": {
       "default": "设为封面"
@@ -3074,6 +3068,12 @@
     },
     "button_label_library": {
       "default": "库"
+    },
+    "link_text_vip_list_upsell": {
+      "default": "获取 VIP 以添加更多列表"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "升级 VIP 以设置封面图"
     }
   }
 }

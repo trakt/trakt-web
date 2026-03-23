@@ -1425,9 +1425,6 @@
     "warning_prompt_delete_list": {
       "default": "Tem certeza que deseja apagar a lista {name}?"
     },
-    "link_text_vip_list_upsell": {
-      "default": "Mais listas"
-    },
     "button_text_create_list": {
       "default": "Lista"
     },
@@ -2117,9 +2114,6 @@
     },
     "button_text_recent_comments": {
       "default": "Recentes"
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "Definir imagens de capa"
     },
     "button_text_set_cover_image": {
       "default": "Definir como capa"
@@ -3075,6 +3069,12 @@
     },
     "button_label_library": {
       "default": "Coleção"
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Seja VIP para adicionar mais listas."
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Seja VIP para definir imagens de capa."
     }
   }
 }

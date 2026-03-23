@@ -1425,9 +1425,6 @@
     "warning_prompt_delete_list": {
       "default": "Sigur dorești să ștergi lista {name}?"
     },
-    "link_text_vip_list_upsell": {
-      "default": "Pentru mai multe liste"
-    },
     "button_text_create_list": {
       "default": "Listă"
     },
@@ -2117,9 +2114,6 @@
     },
     "button_text_recent_comments": {
       "default": "Recente"
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "Setează imagini de copertă"
     },
     "button_text_set_cover_image": {
       "default": "Setează coperta"
@@ -3075,6 +3069,12 @@
     },
     "button_label_library": {
       "default": "Bibliotecă"
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Devino VIP pentru mai multe liste."
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Devino VIP pentru imagini de copertă."
     }
   }
 }

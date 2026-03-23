@@ -3770,7 +3770,7 @@
       ]
     },
     "link_text_vip_list_upsell": {
-      "default": "to add more lists",
+      "default": "Get VIP to add more lists.",
       "description": "Text for the link that takes users to the VIP upsell page. This should be as short as possible and be translated as if it starts with 'get vip'.",
       "exclude": [
         "android",
@@ -5555,7 +5555,7 @@
       ]
     },
     "link_text_vip_cover_image_upsell": {
-      "default": "to set cover images",
+      "default": "Upgrade to VIP to set cover images.",
       "description": "Text for the link that takes users to the VIP upsell page. This should be as short as possible and be translated as if it starts with 'get vip' (without it being part of the translation).",
       "exclude": [
         "android",

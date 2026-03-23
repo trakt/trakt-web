@@ -1425,9 +1425,6 @@
     "warning_prompt_delete_list": {
       "default": "Weet je zeker dat je de lijst {name} wilt verwijderen?"
     },
-    "link_text_vip_list_upsell": {
-      "default": "Voor meer lijsten"
-    },
     "button_text_create_list": {
       "default": "Lijst"
     },
@@ -2117,9 +2114,6 @@
     },
     "button_text_recent_comments": {
       "default": "Recent"
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "Coverafbeeldingen instellen"
     },
     "button_text_set_cover_image": {
       "default": "Instellen als cover"
@@ -3075,6 +3069,12 @@
     },
     "button_label_library": {
       "default": "Collectie"
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Word VIP voor meer lijsten."
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Upgrade naar VIP voor omslagfoto's."
     }
   }
 }
