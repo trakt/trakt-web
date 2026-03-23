@@ -30,6 +30,8 @@
 
     return data?.rating;
   });
+
+  const activityType = $derived(isActionable ? "personal" : "social");
 </script>
 
 {#snippet popupActions()}
@@ -69,6 +71,7 @@
     popupActions={isActionable ? popupActions : undefined}
     action={isActionable ? action : undefined}
     source="watch-history"
+    {activityType}
   />
 {/if}
 
@@ -79,5 +82,6 @@
     popupActions={isActionable ? popupActions : undefined}
     badge={isActionable ? action : undefined}
     source="watch-history"
+    {activityType}
   />
 {/if}

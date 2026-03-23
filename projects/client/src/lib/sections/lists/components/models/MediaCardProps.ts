@@ -1,3 +1,4 @@
+import type { ActivityType } from '$lib/models/ActivityType.ts';
 import type { MediaInput, MediaInputDefault } from '$lib/models/MediaInput.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Snippet } from 'svelte';
@@ -5,7 +6,8 @@ import type { BaseItemProps } from './BaseItemProps.ts';
 
 export type MediaItemVariant<T> =
   | { variant?: Nil } & MediaInput<T>
-  | { variant: 'activity'; date: Date } & MediaInput<T>
+  | { variant: 'activity'; date: Date; activityType: ActivityType }
+    & MediaInput<T>
   | { variant: 'next'; progress: number; minutesLeft: number } & MediaInput<T>
   | { variant: 'start' } & MediaInput<T>
   | { variant: 'credit'; role: string } & MediaInput<T>;
