@@ -26,22 +26,24 @@
   });
 </script>
 
-{#if style === "action"}
-  <ActionButton style="ghost" label="Notes" {variant} onclick={onClick}>
-    <NotesIcon active={hasNotes} />
-  </ActionButton>
-{/if}
-
-{#if style === "dropdown-item"}
-  <DropdownItem
-    style="flat"
-    color="default"
-    variant={variant ?? "primary"}
-    onclick={onClick}
-  >
-    Notes
-    {#snippet icon()}
+{#if hasNotes}
+  {#if style === "action"}
+    <ActionButton style="ghost" label="Notes" {variant} onclick={onClick}>
       <NotesIcon active={hasNotes} />
-    {/snippet}
-  </DropdownItem>
+    </ActionButton>
+  {/if}
+
+  {#if style === "dropdown-item"}
+    <DropdownItem
+      style="flat"
+      color="default"
+      variant={variant ?? "primary"}
+      onclick={onClick}
+    >
+      Notes
+      {#snippet icon()}
+        <NotesIcon active={hasNotes} />
+      {/snippet}
+    </DropdownItem>
+  {/if}
 {/if}
