@@ -2536,6 +2536,15 @@
     "text_vip_get_insights": {
       "default": "Получайте глубокую аналитику, умное отслеживание и ранний доступ к новинкам."
     },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Положительный"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Отрицательный"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Смешанный"
+    },
     "text_vip_features_tagline": {
       "default": "Никакого хайпа, только функции."
     },

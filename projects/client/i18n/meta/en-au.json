@@ -3075,6 +3075,15 @@
     },
     "link_text_vip_cover_image_upsell": {
       "default": "Get VIP to set cover images."
+    },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Positive"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Negative"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Mixed"
     }
   }
 }

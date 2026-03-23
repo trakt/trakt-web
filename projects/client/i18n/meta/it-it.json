@@ -2536,6 +2536,15 @@
     "text_vip_get_insights": {
       "default": "Ottieni analisi approfondite, monitoraggio intelligente e accesso anticipato alle novità."
     },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Positivo"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Negativo"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Misto"
+    },
     "text_vip_features_tagline": {
       "default": "Niente fumo, solo arrosto."
     },

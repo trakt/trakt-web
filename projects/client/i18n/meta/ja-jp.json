@@ -3075,6 +3075,15 @@
     },
     "link_text_vip_cover_image_upsell": {
       "default": "VIPにアップグレードしてカバー画像を設定"
+    },
+    "translated_value_overall_sentiment_positive": {
+      "default": "好評"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "不評"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "賛否両論"
     }
   }
 }

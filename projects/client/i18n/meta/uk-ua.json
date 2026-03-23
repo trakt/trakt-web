@@ -2536,6 +2536,15 @@
     "text_vip_get_insights": {
       "default": "Отримуйте глибшу аналітику, розумніше відстеження та ранній доступ до новинок."
     },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Позитивний"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Негативний"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Змішаний"
+    },
     "text_vip_features_tagline": {
       "default": "Жодного хайпу, тільки функції."
     },

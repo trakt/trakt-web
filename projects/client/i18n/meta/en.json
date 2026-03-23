@@ -6654,6 +6654,30 @@
         "ios"
       ]
     },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Positive",
+      "description": "Text used to indicate that a movie or show has an overall positive sentiment analysis result.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Negative",
+      "description": "Text used to indicate that a movie or show has an overall negative sentiment analysis result.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Mixed",
+      "description": "Text used to indicate that a movie or show has an overall mixed sentiment analysis result.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
     "text_vip_features_tagline": {
       "default": "No hype, just features.",
       "description": "Text used to promote the features of a VIP package for the user.",

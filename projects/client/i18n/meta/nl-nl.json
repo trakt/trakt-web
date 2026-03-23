@@ -2536,6 +2536,15 @@
     "text_vip_get_insights": {
       "default": "Krijg dieper inzicht, slimmere tracking en vroege toegang tot wat er komen gaat."
     },
+    "translated_value_overall_sentiment_positive": {
+      "default": "Positief"
+    },
+    "translated_value_overall_sentiment_negative": {
+      "default": "Negatief"
+    },
+    "translated_value_overall_sentiment_mixed": {
+      "default": "Gemengd"
+    },
     "text_vip_features_tagline": {
       "default": "Geen hype, alleen functies."
     },
