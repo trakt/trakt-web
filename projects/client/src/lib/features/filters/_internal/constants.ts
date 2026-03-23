@@ -126,12 +126,49 @@ const IGNORE_WATCHLISTED_FILTER: Filter = {
   type: 'toggle',
 };
 
+const CERTIFICATION_FILTER: Filter = {
+  label: m.header_certification(),
+  key: FilterKey.Certifications,
+  type: 'list',
+  options: [
+    {
+      label: m.option_text_certification_all_ages(),
+      value: 'all_ages',
+      mapper: () => 'g,tv-y,tv-y7,tv-g',
+    },
+    {
+      label: m.option_text_certification_parental_guidance(),
+      value: 'parental_guidance',
+      mapper: () => 'pg,tv-pg',
+    },
+    {
+      label: m.option_text_certification_teens(),
+      value: 'teens',
+      mapper: () => 'pg-13,tv-14',
+    },
+    {
+      label: m.option_text_certification_mature(),
+      value: 'mature',
+      mapper: () => 'r,tv-ma',
+    },
+    {
+      label: m.option_text_certification_unrated(),
+      value: 'unrated',
+      mapper: () => 'nr',
+    },
+  ],
+  advanced: {
+    type: 'multi-select',
+  },
+};
+
 export const FILTERS = [
   GENRE_FILTER,
   STREAMING_FILTER,
   DECADE_FILTER,
   RUNTIME_FILTER,
   RATINGS_FILTER,
+  CERTIFICATION_FILTER,
   IGNORE_WATCHED_FILTER,
   IGNORE_WATCHLISTED_FILTER,
 ] as const;

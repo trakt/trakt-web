@@ -82,6 +82,26 @@ describe('mapToSearchParamValue', () => {
       expect(result).toBe('action');
     });
 
+    it('should map multiple comma-separated values individually', () => {
+      const result = mapToSearchParamValue({
+        filter: listFilter,
+        value: 'action,comedy',
+        user: mockUser,
+      });
+
+      expect(result).toBe('action,comedy');
+    });
+
+    it('should expand mappers for each value in a multi-select', () => {
+      const result = mapToSearchParamValue({
+        filter: listFilter,
+        value: 'favorites,action',
+        user: mockUser,
+      });
+
+      expect(result).toBe('action,comedy,drama,action');
+    });
+
     it('should throw error when value is undefined for list filter', () => {
       expect(() => {
         mapToSearchParamValue({

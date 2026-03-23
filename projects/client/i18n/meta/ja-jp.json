@@ -3195,6 +3195,24 @@
     },
     "text_stats_days_count": {
       "default": "{count}日間"
+    },
+    "header_certification": {
+      "default": "レイティング"
+    },
+    "option_text_certification_all_ages": {
+      "default": "全年齢"
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "要保護者指導"
+    },
+    "option_text_certification_teens": {
+      "default": "ティーン"
+    },
+    "option_text_certification_mature": {
+      "default": "成人向け"
+    },
+    "option_text_certification_unrated": {
+      "default": "レーティングなし"
     }
   }
 }

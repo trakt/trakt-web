@@ -3195,6 +3195,24 @@
     },
     "text_stats_days_count": {
       "default": "{count}-dages"
+    },
+    "header_certification": {
+      "default": "Aldersgrænse"
+    },
+    "option_text_certification_all_ages": {
+      "default": "Alle aldre"
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "Forældreopsyn"
+    },
+    "option_text_certification_teens": {
+      "default": "Teenagere"
+    },
+    "option_text_certification_mature": {
+      "default": "Voksne"
+    },
+    "option_text_certification_unrated": {
+      "default": "Ikke klassificeret"
     }
   }
 }

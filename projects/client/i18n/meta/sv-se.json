@@ -3195,6 +3195,24 @@
     },
     "text_stats_days_count": {
       "default": "{count}-dagars"
+    },
+    "header_certification": {
+      "default": "Åldersgräns"
+    },
+    "option_text_certification_all_ages": {
+      "default": "Alla åldrar"
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "Föräldrars sällskap"
+    },
+    "option_text_certification_teens": {
+      "default": "Tonåringar"
+    },
+    "option_text_certification_mature": {
+      "default": "Vuxna"
+    },
+    "option_text_certification_unrated": {
+      "default": "Ej klassificerad"
     }
   }
 }

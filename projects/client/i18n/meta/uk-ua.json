@@ -3195,6 +3195,24 @@
     },
     "text_stats_days_count": {
       "default": "{count}-денна"
+    },
+    "header_certification": {
+      "default": "Віковий рейтинг"
+    },
+    "option_text_certification_all_ages": {
+      "default": "Для будь-якого віку"
+    },
+    "option_text_certification_parental_guidance": {
+      "default": "Під наглядом батьків"
+    },
+    "option_text_certification_teens": {
+      "default": "Для підлітків"
+    },
+    "option_text_certification_mature": {
+      "default": "Для дорослих"
+    },
+    "option_text_certification_unrated": {
+      "default": "Без рейтингу"
     }
   }
 }

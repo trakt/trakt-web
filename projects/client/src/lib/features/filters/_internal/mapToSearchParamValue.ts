@@ -16,8 +16,12 @@ export function mapToSearchParamValue({
   const filterValue = assertDefined(value, 'Filter value is required');
 
   if ('options' in filter) {
-    const option = filter.options.find((opt) => opt.value === filterValue);
-    return option?.mapper ? option.mapper(user) : filterValue;
+    const mapValue = (v: string) => {
+      const option = filter.options.find((opt) => opt.value === v);
+      return option?.mapper ? option.mapper(user).split(',') : [v];
+    };
+
+    return filterValue.split(',').flatMap(mapValue).join(',');
   }
 
   return filterValue;
