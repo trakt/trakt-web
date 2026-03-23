@@ -3075,6 +3075,15 @@
     },
     "button_label_library": {
       "default": "ライブラリ"
+    },
+    "text_stats_today": {
+      "default": "今日"
+    },
+    "text_stats_genre_other": {
+      "default": "その他"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "ジャンル内訳"
     }
   }
 }

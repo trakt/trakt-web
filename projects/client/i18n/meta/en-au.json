@@ -3075,6 +3075,15 @@
     },
     "button_label_library": {
       "default": "Library"
+    },
+    "text_stats_today": {
+      "default": "Today"
+    },
+    "text_stats_genre_other": {
+      "default": "Other"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Genre Breakdown"
     }
   }
 }

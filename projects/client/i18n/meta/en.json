@@ -8124,6 +8124,30 @@
         "web",
         "android"
       ]
+    },
+    "text_stats_today": {
+      "default": "Today",
+      "description": "Label for the current day in stats charts.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_genre_other": {
+      "default": "Other",
+      "description": "Label for the 'other' genre bucket in genre breakdown.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Genre Breakdown",
+      "description": "Section header for the 14-day genre breakdown chart.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

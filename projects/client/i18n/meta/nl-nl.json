@@ -3075,6 +3075,15 @@
     },
     "button_label_library": {
       "default": "Collectie"
+    },
+    "text_stats_today": {
+      "default": "Vandaag"
+    },
+    "text_stats_genre_other": {
+      "default": "Overig"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Genreoverzicht"
     }
   }
 }

@@ -3075,6 +3075,15 @@
     },
     "button_label_library": {
       "default": "Colección"
+    },
+    "text_stats_today": {
+      "default": "Hoy"
+    },
+    "text_stats_genre_other": {
+      "default": "Otro"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Desglose de géneros"
     }
   }
 }

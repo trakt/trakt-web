@@ -3075,6 +3075,15 @@
     },
     "button_label_library": {
       "default": "Cineteca"
+    },
+    "text_stats_today": {
+      "default": "Oggi"
+    },
+    "text_stats_genre_other": {
+      "default": "Altro"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Analisi generi"
     }
   }
 }

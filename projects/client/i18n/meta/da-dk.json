@@ -3075,6 +3075,15 @@
     },
     "button_label_library": {
       "default": "Bibliotek"
+    },
+    "text_stats_today": {
+      "default": "I dag"
+    },
+    "text_stats_genre_other": {
+      "default": "Andet"
+    },
+    "header_stats_genre_breakdown": {
+      "default": "Genrefordeling"
     }
   }
 }
