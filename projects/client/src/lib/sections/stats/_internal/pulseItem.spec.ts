@@ -1,0 +1,99 @@
+import { describe, expect, it } from 'vitest';
+import {
+  interleaveByScore,
+  normalizeScore,
+  type PulseGraphItem,
+  type PulseStatItem,
+} from './pulseItem.ts';
+
+function stat(key: string, score: number): PulseStatItem {
+  return { type: 'stat', key, score, value: '0', label: key, delta: 0 };
+}
+
+function graph(key: string, score: number): PulseGraphItem {
+  return {
+    type: 'graph',
+    key,
+    kind: 'dailyBars',
+    data: {} as PulseGraphItem['data'],
+    score,
+    span: 2,
+  };
+}
+
+describe('normalizeScore', () => {
+  it('normalizes to 0-100 range', () => {
+    expect(normalizeScore(65, 130)).toBe(50);
+    expect(normalizeScore(130, 130)).toBe(100);
+    expect(normalizeScore(0, 130)).toBe(0);
+  });
+
+  it('clamps to 100', () => {
+    expect(normalizeScore(200, 130)).toBe(100);
+  });
+
+  it('returns 0 for zero max', () => {
+    expect(normalizeScore(10, 0)).toBe(0);
+  });
+});
+
+describe('interleaveByScore', () => {
+  it('sorts all items by score descending', () => {
+    const result = interleaveByScore(
+      [stat('a', 90), stat('b', 50)],
+      [graph('g1', 70)],
+    );
+    expect(result.map((r) => r.key)).toEqual(['a', 'g1', 'b']);
+  });
+
+  it('enforces max 2 consecutive graphs when stats available', () => {
+    const result = interleaveByScore(
+      [stat('a', 100), stat('b', 30), stat('c', 10)],
+      [graph('g1', 90), graph('g2', 80), graph('g3', 60), graph('g4', 20)],
+    );
+    const types = result.map((r) => r.type);
+    for (let i = 0; i < types.length - 2; i++) {
+      const threeConsecutive =
+        types[i] === 'graph' &&
+        types[i + 1] === 'graph' &&
+        types[i + 2] === 'graph';
+      expect(threeConsecutive).toBe(false);
+    }
+  });
+
+  it('appends remaining graphs at tail when no stats left to break them up', () => {
+    const result = interleaveByScore(
+      [stat('a', 100)],
+      [graph('g1', 90), graph('g2', 80), graph('g3', 70)],
+    );
+    expect(result.map((r) => r.key)).toEqual(['a', 'g1', 'g2', 'g3']);
+  });
+
+  it('interleaves deferred graphs after next stat', () => {
+    const result = interleaveByScore(
+      [stat('a', 100), stat('b', 40)],
+      [graph('g1', 90), graph('g2', 80), graph('g3', 60)],
+    );
+    expect(result.map((r) => r.key)).toEqual(['a', 'g1', 'g2', 'b', 'g3']);
+  });
+
+  it('returns empty for no items', () => {
+    expect(interleaveByScore([], [])).toEqual([]);
+  });
+
+  it('works with stats only', () => {
+    const result = interleaveByScore(
+      [stat('a', 90), stat('b', 50)],
+      [],
+    );
+    expect(result.map((r) => r.key)).toEqual(['a', 'b']);
+  });
+
+  it('works with graphs only', () => {
+    const result = interleaveByScore(
+      [],
+      [graph('g1', 90), graph('g2', 80), graph('g3', 70)],
+    );
+    expect(result.map((r) => r.key)).toEqual(['g1', 'g2', 'g3']);
+  });
+});

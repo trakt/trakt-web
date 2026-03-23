@@ -9,10 +9,18 @@ import {
   computeRatingsDistribution,
   computeWeekTrend,
   countByCalendarDay,
-  pickGraph,
+  daysInWeek,
+  graphScoreMax,
+  pickGraphs,
   type PulseGraphData,
-  type PulseGraphType,
 } from './pulseGraphs.ts';
+import {
+  interleaveByScore,
+  normalizeScore,
+  type PulseGraphItem,
+  type PulseItem,
+  type PulseStatItem,
+} from './pulseItem.ts';
 import { useUserComments } from './useUserComments.ts';
 import { useUserRatings } from './useUserRatings.ts';
 import {
@@ -22,12 +30,13 @@ import {
   getBusiestDay,
   maxPlaysInSingleDay,
   rankStats,
+  scoreStatWithContext,
+  statScoreMax,
   sumHours,
   type PulseStat,
 } from './pulseStats.ts';
 
-export type { PulseGraphData, PulseGraphType } from './pulseGraphs.ts';
-export type { PulseStat } from './pulseStats.ts';
+export type { PulseItem, PulseStatItem, PulseGraphItem } from './pulseItem.ts';
 
 type UseWeeklyPulseProps = {
   readonly slug: string;
@@ -35,7 +44,6 @@ type UseWeeklyPulseProps = {
 
 type DateRange = { readonly start: Date; readonly end: Date };
 
-const daysInWeek = 7;
 const thisWeekStart = daysInWeek - 1;
 const lastWeekStart = daysInWeek * 2 - 1;
 const lastWeekEnd = daysInWeek;
@@ -72,9 +80,7 @@ function fmt(n: number): string {
 }
 
 export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
-  stats: Observable<readonly PulseStat[]>;
-  graphData: Observable<PulseGraphData>;
-  selectedGraph: Observable<PulseGraphType | null>;
+  items: Observable<readonly PulseItem[]>;
   isLoading: Observable<boolean>;
 } {
   const { movies, shows, isLoadingMovies, isLoadingShows } =
@@ -88,7 +94,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
   const thisWeekRange = getDateRange({ startDaysAgo: thisWeekStart, endDaysAgo: 0, now });
   const lastWeekRange = getDateRange({ startDaysAgo: lastWeekStart, endDaysAgo: lastWeekEnd, now });
 
-  const stats = combineLatest([movies, shows, ratingsEntries, commentsEntries]).pipe(
+  const items = combineLatest([movies, shows, ratingsEntries, commentsEntries]).pipe(
     map(([$movies, $shows, $ratings, $comments]) => {
       const twMovies = filterEntries($movies, thisWeekRange);
       const lwMovies = filterEntries($movies, lastWeekRange);
@@ -128,12 +134,6 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
             ),
           })
         : undefined;
-
-      const rawCounts = new Map<string, number>([
-        ['totalPlays', twAllDates.length],
-        ['episodes', twShows.length],
-        ['movies', twMovies.length],
-      ]);
 
       const candidates: PulseStat[] = [
         {
@@ -198,7 +198,6 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         },
       ];
 
-      // Filter ratings/comments by week ranges
       const twRatings = $ratings.filter(r => r.ratedAt >= thisWeekRange.start && r.ratedAt < thisWeekRange.end);
       const lwRatings = $ratings.filter(r => r.ratedAt >= lastWeekRange.start && r.ratedAt < lastWeekRange.end);
       const twComments = $comments.filter(c => c.createdAt >= thisWeekRange.start && c.createdAt < thisWeekRange.end);
@@ -223,31 +222,30 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         });
       }
 
-      return rankStats(candidates, rawCounts);
-    }),
-  );
+      // Score and rank stats — redundant stats get deprioritized, not removed
+      const rawCounts = new Map<string, number>([
+        ['totalPlays', twAllDates.length],
+        ['episodes', twShows.length],
+        ['movies', twMovies.length],
+      ]);
 
-  const graphData = combineLatest([movies, shows, ratingsEntries]).pipe(
-    map(([$movies, $shows, $ratings]) => {
-      const twMovies = filterEntries($movies, thisWeekRange);
-      const twShows = filterEntries($shows, thisWeekRange);
+      const rankedStats = rankStats(candidates, rawCounts);
+      const statItems: PulseStatItem[] = rankedStats.map((stat) => ({
+        type: 'stat',
+        ...stat,
+        score: normalizeScore(scoreStatWithContext(stat, rawCounts), statScoreMax),
+      }));
 
-      const twAllDates = [
-        ...twMovies.map((e) => e.watchedAt),
-        ...twShows.map((e) => e.watchedAt),
-      ];
-
+      // Build graph data and score graphs
       const fourWeekRange = getDateRange({ startDaysAgo: fourWeekLookback, endDaysAgo: 0, now });
       const allRecentDates = [
         ...filterEntries($movies, fourWeekRange).map((e) => e.watchedAt),
         ...filterEntries($shows, fourWeekRange).map((e) => e.watchedAt),
       ];
 
-      const twRatingScores = $ratings
-        .filter(r => r.ratedAt >= thisWeekRange.start && r.ratedAt < thisWeekRange.end)
-        .map(r => r.score);
+      const twRatingScores = twRatings.map(r => r.score);
 
-      return {
+      const graphData: PulseGraphData = {
         dailyBars: countByCalendarDay({ dates: twAllDates, now, locale }),
         weekTrend: {
           weeks: computeWeekTrend(allRecentDates, now),
@@ -260,17 +258,24 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
           movies: twMovies.length,
         },
         ratingsDistribution: computeRatingsDistribution(twRatingScores),
-      } satisfies PulseGraphData;
-    }),
-  );
+      };
 
-  const selectedGraph = graphData.pipe(
-    map((data) => pickGraph(data)),
+      const qualifiedGraphs = pickGraphs(graphData);
+      const graphItems: PulseGraphItem[] = qualifiedGraphs.map((g) => ({
+        type: 'graph',
+        key: g.type,
+        kind: g.type,
+        data: graphData,
+        score: normalizeScore(g.score, graphScoreMax),
+      }));
+
+      return interleaveByScore(statItems, graphItems);
+    }),
   );
 
   const isLoading = combineLatest([
     isLoadingMovies, isLoadingShows, isLoadingRatings, isLoadingComments,
   ]).pipe(map((states) => states.some(Boolean)));
 
-  return { stats, graphData, selectedGraph, isLoading };
+  return { items, isLoading };
 }

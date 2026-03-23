@@ -97,6 +97,24 @@
   }
 
   /**
+   * Pulse card dimensions
+   */
+  --min-pulse-card-width: var(--ni-148);
+  --max-pulse-item-count: 12;
+
+  @include dynamic-item-count(--pulse-item-count,
+    var(--min-pulse-card-width),
+    var(--max-pulse-item-count),
+  );
+  @include dynamic-card-width(--width-pulse-card,
+    var(--min-pulse-card-width),
+    var(--pulse-item-count),
+  );
+
+  --height-pulse-card: var(--ni-156);
+  --height-pulse-list: calc(var(--height-pulse-card) + var(--layout-scrollbar-width));
+
+  /**
    * List dimensions
    */
   --height-landscape-list: calc(var(--height-landscape-card) + var(--layout-scrollbar-width));

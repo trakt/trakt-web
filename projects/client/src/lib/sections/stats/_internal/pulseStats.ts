@@ -70,30 +70,6 @@ export function computeDelta(thisWeek: number, lastWeek: number): number {
   return thisWeek - lastWeek;
 }
 
-/**
- * Hard redundancy filter — removes stats that duplicate information.
- * When all plays are one type, keep the specific type and drop the generic.
- */
-function filterRedundant(
-  candidates: ReadonlyArray<PulseStat>,
-  rawCounts: ReadonlyMap<string, number>,
-): readonly PulseStat[] {
-  const plays = rawCounts.get('totalPlays') ?? 0;
-  const episodes = rawCounts.get('episodes') ?? 0;
-  const movies = rawCounts.get('movies') ?? 0;
-
-  return candidates.filter((c) => {
-    // All plays are episodes → drop totalPlays (keep the more specific "Episodes")
-    if (c.key === 'totalPlays' && plays === episodes && plays > 0) return false;
-    // All plays are movies → drop totalPlays (keep the more specific "Movies")
-    if (c.key === 'totalPlays' && plays === movies && plays > 0) return false;
-    // Zero movies with no change → not interesting
-    if (c.key === 'movies' && movies === 0 && c.delta === 0) return false;
-    // Zero episodes with no change → not interesting
-    return !(c.key === 'episodes' && episodes === 0 && c.delta === 0);
-  });
-}
-
 const scoreWeights = {
   delta: 4,
   richness: 3,
@@ -118,7 +94,10 @@ function infoScore(numValue: number, delta: number | null, note?: string): numbe
   return note ? 7 : 5;
 }
 
-function scoreStat(stat: PulseStat): number {
+// (10 * 4) + (10 * 3) + (7 * 3) = 130
+export const statScoreMax = 130;
+
+export function scoreStat(stat: PulseStat): number {
   const numValue = Number(stat.value.replace(/,/g, '')) || 0;
 
   return (
@@ -128,13 +107,36 @@ function scoreStat(stat: PulseStat): number {
   );
 }
 
-/**
- * Rank stats by relevance: filter redundant, score, sort descending.
- */
+const redundancyPenalty = 0.01;
+
+function isRedundant(
+  stat: PulseStat,
+  rawCounts: ReadonlyMap<string, number>,
+): boolean {
+  const plays = rawCounts.get('totalPlays') ?? 0;
+  const episodes = rawCounts.get('episodes') ?? 0;
+  const movies = rawCounts.get('movies') ?? 0;
+
+  return (
+    (stat.key === 'totalPlays' && plays > 0 && (plays === episodes || plays === movies)) ||
+    (stat.key === 'movies' && movies === 0 && stat.delta === 0) ||
+    (stat.key === 'episodes' && episodes === 0 && stat.delta === 0)
+  );
+}
+
+export function scoreStatWithContext(
+  stat: PulseStat,
+  rawCounts: ReadonlyMap<string, number>,
+): number {
+  const base = scoreStat(stat);
+  return isRedundant(stat, rawCounts) ? base * redundancyPenalty : base;
+}
+
 export function rankStats(
   candidates: ReadonlyArray<PulseStat>,
   rawCounts: ReadonlyMap<string, number>,
 ): readonly PulseStat[] {
-  const filtered = filterRedundant(candidates, rawCounts);
-  return [...filtered].sort((a, b) => scoreStat(b) - scoreStat(a));
+  return [...candidates].sort(
+    (a, b) => scoreStatWithContext(b, rawCounts) - scoreStatWithContext(a, rawCounts),
+  );
 }
