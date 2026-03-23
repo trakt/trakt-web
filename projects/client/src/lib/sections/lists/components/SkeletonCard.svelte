@@ -6,10 +6,12 @@
     variant = "portrait",
     index,
     listIndex,
+    type,
   }: {
     variant?: "portrait" | "landscape";
     index: number;
     listIndex: number;
+    type: "full" | "compact";
   } = $props();
 </script>
 
@@ -19,7 +21,9 @@
     style="--index: {index}; --list-index: {listIndex}"
   >
     <div class="trakt-skeleton-card-cover"></div>
-    <div class="trakt-skeleton-card-footer"></div>
+    {#if type === "full"}
+      <div class="trakt-skeleton-card-footer"></div>
+    {/if}
   </div>
 {/snippet}
 
@@ -49,12 +53,12 @@
   }
 
   .trakt-skeleton-card-cover {
-    width: var(--width-card);
-    height: var(--height-card-cover);
+    width: var(--width-override-card, var(--width-card));
+    height: var(--height-override-card-cover, var(--height-card-cover));
   }
 
   .trakt-skeleton-card-footer {
-    width: calc(var(--width-card) * 0.5);
+    width: calc(var(--width-override-card, var(--width-card)) * 0.5);
     height: var(--ni-12);
 
     padding: var(--ni-4) var(--ni-8);

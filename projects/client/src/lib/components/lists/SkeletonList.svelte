@@ -5,14 +5,21 @@
   const {
     id,
     variant = "portrait",
-  }: { id: string; variant?: "portrait" | "landscape" } = $props();
+    type = "full",
+    limit = DEFAULT_PAGE_SIZE,
+  }: {
+    id: string;
+    variant?: "portrait" | "landscape";
+    limit?: number;
+    type?: "full" | "compact";
+  } = $props();
 
   const randomListIndex = Math.floor(Math.random() * 6) + 1;
 </script>
 
 <div class="trakt-skeleton-list">
-  {#each Array(DEFAULT_PAGE_SIZE) as _, index (`skeleton_${id}_${index}`)}
-    <SkeletonCard {variant} {index} listIndex={randomListIndex} />
+  {#each Array(limit) as _, index (`skeleton_${id}_${index}`)}
+    <SkeletonCard {variant} {index} listIndex={randomListIndex} {type} />
   {/each}
 </div>
 

@@ -1,8 +1,10 @@
 <script lang="ts">
+  import Card from "$lib/components/card/Card.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { PulseGraphData, PulseGraphType } from "./pulseGraphs";
 
-  const { kind, data }: { kind: PulseGraphType; data: PulseGraphData } = $props();
+  const { kind, data }: { kind: PulseGraphType; data: PulseGraphData } =
+    $props();
 
   const titles: Record<PulseGraphType, string> = {
     dailyBars: m.header_stats_graph_daily(),
@@ -66,124 +68,133 @@
   const ratingsAvg = $derived(data.ratingsDistribution.average.toFixed(1));
 
   const ratingColors: readonly string[] = [
-    'var(--red-500)',     // 1
-    'var(--red-400)',     // 2
-    'var(--orange-500)',  // 3
-    'var(--orange-400)',  // 4
-    'var(--purple-500)',  // 5
-    'var(--purple-400)',  // 6
-    'var(--green-500)',   // 7
-    'var(--green-400)',   // 8
-    'var(--blue-500)',    // 9
-    'var(--blue-400)',    // 10
+    "var(--red-500)", // 1
+    "var(--red-400)", // 2
+    "var(--orange-500)", // 3
+    "var(--orange-400)", // 4
+    "var(--purple-500)", // 5
+    "var(--purple-400)", // 6
+    "var(--green-500)", // 7
+    "var(--green-400)", // 8
+    "var(--blue-500)", // 9
+    "var(--blue-400)", // 10
   ];
 </script>
 
-<div class="trakt-pulse-graph">
-  <p class="trakt-pulse-graph-title">{title}</p>
+<Card --width-card="var(--ni-148)" --height-card="var(--ni-156)">
+  <div class="trakt-pulse-graph">
+    <p class="trakt-pulse-graph-title">{title}</p>
 
-  {#if kind ==="dailyBars"}
-    <div class="graph-daily-bars">
-      {#each data.dailyBars.labels as label, i (i)}
-        {@const barPct = dailyMax > 0 ? ((data.dailyBars.days[i] ?? 0) / dailyMax) * 100 : 0}
-        {@const isToday = label === m.text_stats_today()}
-        <div class="daily-bar-col">
-          <div class="daily-bar-track">
-            <div
-              class="daily-bar-fill"
-              class:is-today={isToday}
-              style:height="{barPct}%"
-            ></div>
-          </div>
-          <span class="daily-bar-label">{label}</span>
-        </div>
-      {/each}
-    </div>
-  {:else if kind ==="weekTrend"}
-    <div class="graph-week-trend">
-      <svg viewBox="0 0 240 96" class="trend-svg">
-        <polygon points={trendPolygon} class="trend-area" />
-        <polyline points={trendPolyline} class="trend-line" />
-        {#each trendPoints as point, i (i)}
-          {@const isLast = i === trendPoints.length - 1}
-          <circle
-            cx={point.x}
-            cy={point.y}
-            r={isLast ? 4 : 2.5}
-            class="trend-point"
-            class:trend-point-current={isLast}
-          />
-          {#if isLast}
-            <text x={point.x} y={point.y - 8} class="trend-value"
-              >{point.plays}</text
-            >
-          {/if}
-        {/each}
-      </svg>
-      <div class="trend-labels">
-        {#each trendPoints as point (point.label)}
-          <span class="trend-label">{point.label}</span>
-        {/each}
-      </div>
-    </div>
-  {:else if kind ==="watchClock"}
-    <div class="graph-watch-clock">
-      {#each data.watchClock.buckets as bucket (bucket.label)}
-        <div class="clock-row">
-          <span class="clock-label">{bucket.label}</span>
-          <div class="clock-bar-track">
-            <div
-              class="clock-bar-fill"
-              style:width="{(bucket.count / clockMax) * 100}%"
-            ></div>
-          </div>
-          <span class="clock-count">{bucket.count}</span>
-        </div>
-      {/each}
-    </div>
-  {:else if kind ==="showsMovies"}
-    <div class="graph-shows-movies">
-      <div class="sm-counts">
-        <div class="sm-count">
-          <span class="sm-count-value sm-color-shows">{data.showsMovies.episodes}</span>
-          <span class="sm-count-label">{m.label_stats_episodes()}</span>
-        </div>
-        <div class="sm-count">
-          <span class="sm-count-value sm-color-movies">{data.showsMovies.movies}</span>
-          <span class="sm-count-label">{m.label_stats_movies()}</span>
-        </div>
-      </div>
-      <div class="sm-bar-track">
-        <div class="sm-bar-shows" style:width="{showsPct}%"></div>
-        <div class="sm-bar-movies" style:width="{100 - showsPct}%"></div>
-      </div>
-    </div>
-  {:else if kind === "ratingsDistribution"}
-    <div class="graph-ratings-dist">
-      <div class="ratings-bars">
-        {#each { length: 10 } as _, i (i)}
-          {@const score = i + 1}
-          {@const count = ratingsBuckets[i] ?? 0}
-          {@const isPeak = count === ratingsMax && count > 0}
-          <div class="rating-bar-col" class:is-peak={isPeak}>
-            <div class="rating-bar-track">
+    {#if kind === "dailyBars"}
+      <div class="graph-daily-bars">
+        {#each data.dailyBars.labels as label, i (i)}
+          {@const barPct =
+            dailyMax > 0 ? ((data.dailyBars.days[i] ?? 0) / dailyMax) * 100 : 0}
+          {@const isToday = label === m.text_stats_today()}
+          <div class="daily-bar-col">
+            <div class="daily-bar-track">
               <div
-                class="rating-bar-fill"
-                style:height="{ratingsMax > 0 ? (count / ratingsMax) * 100 : 0}%"
-                style:background={ratingColors[i]}
+                class="daily-bar-fill"
+                class:is-today={isToday}
+                style:height="{barPct}%"
               ></div>
             </div>
-            <span class="rating-score">{score}</span>
+            <span class="daily-bar-label">{label}</span>
           </div>
         {/each}
       </div>
-      <div class="ratings-avg">
-        <span class="ratings-avg-label">{m.label_stats_average()}</span>
-        <span class="ratings-avg-value">{ratingsAvg} ★</span>
+    {:else if kind === "weekTrend"}
+      <div class="graph-week-trend">
+        <svg viewBox="0 0 240 96" class="trend-svg">
+          <polygon points={trendPolygon} class="trend-area" />
+          <polyline points={trendPolyline} class="trend-line" />
+          {#each trendPoints as point, i (i)}
+            {@const isLast = i === trendPoints.length - 1}
+            <circle
+              cx={point.x}
+              cy={point.y}
+              r={isLast ? 4 : 2.5}
+              class="trend-point"
+              class:trend-point-current={isLast}
+            />
+            {#if isLast}
+              <text x={point.x} y={point.y - 8} class="trend-value"
+                >{point.plays}</text
+              >
+            {/if}
+          {/each}
+        </svg>
+        <div class="trend-labels">
+          {#each trendPoints as point (point.label)}
+            <span class="trend-label">{point.label}</span>
+          {/each}
+        </div>
       </div>
-    </div>
-  {/if}
-</div>
+    {:else if kind === "watchClock"}
+      <div class="graph-watch-clock">
+        {#each data.watchClock.buckets as bucket (bucket.label)}
+          <div class="clock-row">
+            <span class="clock-label">{bucket.label}</span>
+            <div class="clock-bar-track">
+              <div
+                class="clock-bar-fill"
+                style:width="{(bucket.count / clockMax) * 100}%"
+              ></div>
+            </div>
+            <span class="clock-count">{bucket.count}</span>
+          </div>
+        {/each}
+      </div>
+    {:else if kind === "showsMovies"}
+      <div class="graph-shows-movies">
+        <div class="sm-counts">
+          <div class="sm-count">
+            <span class="sm-count-value sm-color-shows"
+              >{data.showsMovies.episodes}</span
+            >
+            <span class="sm-count-label">{m.label_stats_episodes()}</span>
+          </div>
+          <div class="sm-count">
+            <span class="sm-count-value sm-color-movies"
+              >{data.showsMovies.movies}</span
+            >
+            <span class="sm-count-label">{m.label_stats_movies()}</span>
+          </div>
+        </div>
+        <div class="sm-bar-track">
+          <div class="sm-bar-shows" style:width="{showsPct}%"></div>
+          <div class="sm-bar-movies" style:width="{100 - showsPct}%"></div>
+        </div>
+      </div>
+    {:else if kind === "ratingsDistribution"}
+      <div class="graph-ratings-dist">
+        <div class="ratings-bars">
+          {#each { length: 10 } as _, i (i)}
+            {@const score = i + 1}
+            {@const count = ratingsBuckets[i] ?? 0}
+            {@const isPeak = count === ratingsMax && count > 0}
+            <div class="rating-bar-col" class:is-peak={isPeak}>
+              <div class="rating-bar-track">
+                <div
+                  class="rating-bar-fill"
+                  style:height="{ratingsMax > 0
+                    ? (count / ratingsMax) * 100
+                    : 0}%"
+                  style:background={ratingColors[i]}
+                ></div>
+              </div>
+              <span class="rating-score">{score}</span>
+            </div>
+          {/each}
+        </div>
+        <div class="ratings-avg">
+          <span class="ratings-avg-label">{m.label_stats_average()}</span>
+          <span class="ratings-avg-value">{ratingsAvg} ★</span>
+        </div>
+      </div>
+    {/if}
+  </div>
+</Card>
 
 <style lang="scss">
   .trakt-pulse-graph {
@@ -192,11 +203,11 @@
     flex-direction: column;
     gap: var(--ni-8);
     padding: var(--ni-16);
-    background: var(--shade-930);
-    border: 1px solid var(--shade-910);
-    border-radius: var(--border-radius-m);
-    overflow: hidden;
-    position: relative;
+    /* background: var(--shade-930); */
+    /* border: 1px solid var(--shade-910); */
+    /* border-radius: var(--border-radius-m); */
+    /* overflow: hidden; */
+    /* position: relative; */
   }
 
   .trakt-pulse-graph-title {
