@@ -3,10 +3,16 @@ import type { CrewPositions } from '$lib/requests/models/CrewPosition.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { MediaCrew } from '$lib/requests/models/MediaCrew.ts';
 
+type AdditionalPerson = {
+  name: string;
+  key: string;
+};
+
 type MainCredit = {
   text: string;
   key: string;
   positions?: CrewPositions;
+  others?: ReadonlyArray<AdditionalPerson>;
 };
 
 function mapToCreator(crew: MediaCrew): MainCredit | null {
@@ -24,19 +30,24 @@ function mapToDirector(
   type: 'movie' | 'episode',
   crew: MediaCrew,
 ): MainCredit | null {
-  const director = crew.directors?.find((person) =>
+  const directors = crew.directors?.filter((person) =>
     person.jobs.some((job) => job.toLowerCase() === 'director')
   );
-  if (!director) return null;
+
+  const [first, ...rest] = directors ?? [];
+  if (!first) return null;
 
   const positions = type === 'movie'
     ? { movies: 'directing' as const }
     : { shows: 'directing' as const };
 
   return {
-    text: m.text_directed_by({ name: director.name }),
-    key: director.key,
+    text: m.text_directed_by({ name: first.name }),
+    key: first.key,
     positions,
+    others: rest.length > 0
+      ? rest.map(({ name, key }) => ({ name, key }))
+      : undefined,
   };
 }
 
