@@ -1,14 +1,8 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
-  import UpsellLink from "$lib/features/upsell/UpsellLink.svelte";
+  import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
 </script>
 
-<UpsellLink source="cover-image">
-  <span class="bold">{m.link_text_vip_cover_image_upsell()}</span>
-</UpsellLink>
-
-<style>
-  span {
-    max-width: var(--ni-96);
-  }
-</style>
+<UpsellCta source="cover-image" variant="small">
+  {m.link_text_vip_cover_image_upsell()}
+</UpsellCta>

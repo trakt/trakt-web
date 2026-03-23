@@ -1425,9 +1425,6 @@
     "warning_prompt_delete_list": {
       "default": "Are you sure you want to delete the list {name}?"
     },
-    "link_text_vip_list_upsell": {
-      "default": "to add more lists"
-    },
     "button_text_create_list": {
       "default": "List"
     },
@@ -2117,9 +2114,6 @@
     },
     "button_text_recent_comments": {
       "default": "Recent"
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "Set cover images"
     },
     "button_text_set_cover_image": {
       "default": "Set cover"
@@ -3075,6 +3069,12 @@
     },
     "button_label_library": {
       "default": "Library"
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Get VIP to add more lists."
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Get VIP to set cover images."
     }
   }
 }

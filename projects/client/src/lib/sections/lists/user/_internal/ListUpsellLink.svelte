@@ -1,8 +1,24 @@
 <script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
+  import Popover from "$lib/components/popover/Popover.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import UpsellLink from "$lib/features/upsell/UpsellLink.svelte";
+  import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
 </script>
 
-<UpsellLink source="lists">
-  <span class="bold">{m.link_text_vip_list_upsell()}</span>
-</UpsellLink>
+<Popover>
+  <ActionButton
+    label={m.button_label_create_list()}
+    color="default"
+    variant="primary"
+    style="ghost"
+  >
+    <PlusIcon />
+  </ActionButton>
+
+  {#snippet content()}
+    <UpsellCta source="lists">
+      {m.link_text_vip_list_upsell()}
+    </UpsellCta>
+  {/snippet}
+</Popover>

@@ -1425,9 +1425,6 @@
     "warning_prompt_delete_list": {
       "default": "Sind Sie sicher, dass Sie die Liste {name} löschen möchten?"
     },
-    "link_text_vip_list_upsell": {
-      "default": "Für mehr Listen"
-    },
     "button_text_create_list": {
       "default": "Liste"
     },
@@ -2117,9 +2114,6 @@
     },
     "button_text_recent_comments": {
       "default": "Neueste"
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "Cover-Bilder festlegen"
     },
     "button_text_set_cover_image": {
       "default": "Als Cover festlegen"
@@ -3075,6 +3069,12 @@
     },
     "button_label_library": {
       "default": "Bibliothek"
+    },
+    "link_text_vip_list_upsell": {
+      "default": "VIP für mehr Listen"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "VIP für Titelbilder"
     }
   }
 }

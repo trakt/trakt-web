@@ -1425,9 +1425,6 @@
     "warning_prompt_delete_list": {
       "default": "Sei sicuro di voler eliminare la lista {name}?"
     },
-    "link_text_vip_list_upsell": {
-      "default": "Per più liste"
-    },
     "button_text_create_list": {
       "default": "Lista"
     },
@@ -2117,9 +2114,6 @@
     },
     "button_text_recent_comments": {
       "default": "Recenti"
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "Imposta immagini di copertina"
     },
     "button_text_set_cover_image": {
       "default": "Imposta come copertina"
@@ -3075,6 +3069,12 @@
     },
     "button_label_library": {
       "default": "Cineteca"
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Passa a VIP per più liste."
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Passa a VIP per le copertine."
     }
   }
 }
