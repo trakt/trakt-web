@@ -4,6 +4,7 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import NotesDrawer from "../../../notes/NotesDrawer.svelte";
+  import DetailsButton from "./DetailsButton.svelte";
   import NotesButton from "./NotesButton.svelte";
 
   const {
@@ -44,6 +45,8 @@
   onClick={() => (showNotesDrawer = true)}
   {media}
 />
+
+<DetailsButton {style} {variant} {title} />
 
 {#if showNotesDrawer}
   <NotesDrawer onClose={() => (showNotesDrawer = false)} {media} />

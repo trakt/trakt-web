@@ -5,15 +5,14 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import SeasonList from "$lib/sections/lists/season/SeasonList.svelte";
   import CastList from "../lists/CastList.svelte";
-  import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
   import SummaryCover from "./components/_internal/SummaryCover.svelte";
   import Comments from "./components/comments/Comments.svelte";
-  import MediaDetails from "./components/details/MediaDetails.svelte";
   import EpisodeSummary from "./components/episode/EpisodeSummary.svelte";
   import EpisodeSummaryV2 from "./components/episode/v2/EpisodeSummary.svelte";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
+  import SummaryDrawer from "./SummaryDrawer.svelte";
 
   const {
     episode,
@@ -99,11 +98,4 @@
   type="show"
 />
 
-<MediaWatchHistoryList
-  title={m.list_title_history()}
-  {episode}
-  {show}
-  type="episode"
-/>
-
-<MediaDetails {crew} {episode} type="episode" />
+<SummaryDrawer {crew} {episode} {show} type="episode" />

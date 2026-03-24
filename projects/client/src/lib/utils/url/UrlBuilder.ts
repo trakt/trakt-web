@@ -128,6 +128,10 @@ export const UrlBuilder = {
     all: ({ page }: UrlBuilderParams) => {
       return `/history${buildParamString({ page })}`;
     },
+    movie: (slug: string) => `/history/movies/${slug}`,
+    show: (slug: string) => `/history/shows/${slug}`,
+    episode: (showSlug: string, seasonNumber: number, episodeNumber: number) =>
+      `/history/shows/${showSlug}/seasons/${seasonNumber}/episodes/${episodeNumber}`,
   },
   watched: (params: UrlBuilderParams) => {
     return categoryDrilldownFactory('watched')(params);

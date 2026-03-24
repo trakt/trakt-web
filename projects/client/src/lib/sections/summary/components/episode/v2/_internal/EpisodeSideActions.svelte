@@ -2,6 +2,7 @@
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
+  import DetailsButton from "../../../media/v2/_internal/DetailsButton.svelte";
 
   const {
     title,
@@ -31,3 +32,5 @@
     })}
   source={{ id: "episode" }}
 />
+
+<DetailsButton {style} {variant} {title} />

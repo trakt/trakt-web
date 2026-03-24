@@ -8126,6 +8126,59 @@
         "web",
         "android"
       ]
+    },
+    "stat_text_plays": {
+      "default": "Plays",
+      "description": "Text for the plays stat, indicating the number of times a movie, show, or episode was watched. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "stat_text_watchers": {
+      "default": "Watchers",
+      "description": "Text for the watchers stat, indicating the number of users who are watching a movie, show, or episode. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "stat_text_lists": {
+      "default": "Lists",
+      "description": "Text for the lists stat, indicating the number of lists that contain a movie, show, or episode. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "stat_text_favorited": {
+      "default": "Favorites",
+      "description": "Text for the favorites stat, indicating the number of times a movie, or show has been favorited. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_details": {
+      "default": "Details",
+      "description": "Text for the button that allows users to view details of a movie, show, or episode.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_details": {
+      "default": "Details for \"{title}\"",
+      "description": "Text for the button that allows users to view details of a movie, show, or episode.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

@@ -8,13 +8,11 @@
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import CastList from "../lists/CastList.svelte";
-  import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import SeasonList from "../lists/season/SeasonList.svelte";
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
-  import MediaDetails from "./components/details/MediaDetails.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
@@ -45,7 +43,7 @@
   }: ShowSummaryProps = $props();
 </script>
 
-<SummaryDrawer {sentiment} />
+<SummaryDrawer {sentiment} {studios} {crew} {media} type="show" />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <MediaSummaryV2 {media} {studios} {intl} {crew} type="show" />
@@ -89,8 +87,4 @@
 <!-- TODO: move back to designed position when we have faster queries -->
 <Lists slug={media.slug} title={media.title} type="show" />
 
-<MediaWatchHistoryList title={m.list_title_history()} {media} type="show" />
-
 <TriviaList {media} />
-
-<MediaDetails {studios} {crew} {media} type="show" />

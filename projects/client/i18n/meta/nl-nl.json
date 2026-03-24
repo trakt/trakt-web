@@ -3084,6 +3084,24 @@
     },
     "link_text_vip_cover_image_upsell": {
       "default": "Upgrade naar VIP voor omslagfoto's."
+    },
+    "stat_text_plays": {
+      "default": "Kijkbeurten"
+    },
+    "stat_text_watchers": {
+      "default": "Kijkers"
+    },
+    "stat_text_lists": {
+      "default": "Lijsten"
+    },
+    "stat_text_favorited": {
+      "default": "Favorieten"
+    },
+    "button_text_details": {
+      "default": "Details"
+    },
+    "button_label_details": {
+      "default": "Details voor \"{title}\""
     }
   }
 }

@@ -2,8 +2,10 @@
   import { TestId } from "$e2e/models/TestId";
   import Link from "$lib/components/link/Link.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import DetailsButton from "../media/v2/_internal/DetailsButton.svelte";
   import { mapToMainCredit } from "./mapToMainCredit";
   import { mapToSummaryStatus } from "./mapToSummaryStatus";
   import { mapToSummarySubtitle } from "./mapToSummarySubtitle";
@@ -35,8 +37,8 @@
         href={UrlBuilder.people(mainCredit.key, mainCredit.positions)}
         target="_self"
       />
-      {#each mainCredit.others ?? [] as person}
-        {', '}
+      {#each mainCredit.others ?? [] as person (person.key)}
+        {", "}
         <Link
           href={UrlBuilder.people(person.key, mainCredit.positions)}
           target="_self">{person.name}</Link
@@ -45,9 +47,15 @@
     </p>
   {/if}
 
-  <p class="secondary">
-    {subtitle}
-  </p>
+  <div class="trakt-summary-subtitle">
+    <p class="secondary">
+      {subtitle}
+    </p>
+
+    <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
+      <DetailsButton style="action" size="small" {title} />
+    </RenderFor>
+  </div>
 
   {#if status}
     <p class="capitalize bold trakt-media-status">
@@ -74,6 +82,12 @@
         text-align: center;
       }
     }
+  }
+
+  .trakt-summary-subtitle {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
   }
 
   .trakt-media-status {

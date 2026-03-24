@@ -3084,6 +3084,24 @@
     },
     "link_text_vip_cover_image_upsell": {
       "default": "Zyskaj VIP, by ustawić okładki."
+    },
+    "stat_text_plays": {
+      "default": "Odtworzenia"
+    },
+    "stat_text_watchers": {
+      "default": "Widzowie"
+    },
+    "stat_text_lists": {
+      "default": "Listy"
+    },
+    "stat_text_favorited": {
+      "default": "Ulubione"
+    },
+    "button_text_details": {
+      "default": "Szczegóły"
+    },
+    "button_label_details": {
+      "default": "Szczegóły dla {title}"
     }
   }
 }

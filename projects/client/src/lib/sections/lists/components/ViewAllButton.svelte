@@ -9,15 +9,17 @@
 
   type ViewAllElementProps = HTMLElementProps;
 
-  type ViewAllButtonProps = { label: string; source: DrilldownSource } & (
-    | ViewAllElementProps
-    | ViewAllLinkProps
-  );
+  type ViewAllButtonProps = {
+    label: string;
+    source: DrilldownSource;
+    size?: "normal" | "small";
+  } & (ViewAllElementProps | ViewAllLinkProps);
 
   const {
     label,
     source,
     onclick: externalOnclick,
+    size,
     ...rest
   }: ViewAllButtonProps = $props();
 
@@ -26,6 +28,7 @@
 
 <ActionButton
   {label}
+  {size}
   {...rest}
   style="ghost"
   onclick={(e) => {
