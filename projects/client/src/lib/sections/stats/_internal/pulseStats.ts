@@ -97,7 +97,7 @@ function infoScore(numValue: number, delta: number | null, note?: string): numbe
 // (10 * 4) + (10 * 3) + (7 * 3) = 130
 export const statScoreMax = 130;
 
-export function scoreStat(stat: PulseStat): number {
+function scoreStat(stat: PulseStat): number {
   const numValue = Number(stat.value.replace(/,/g, '')) || 0;
 
   return (

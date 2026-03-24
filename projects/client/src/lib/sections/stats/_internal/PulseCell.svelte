@@ -1,7 +1,7 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
+  import PulseDeltaTag from "./PulseDeltaTag.svelte";
   import PulseIcon from "./PulseIcon.svelte";
 
   const {
@@ -19,24 +19,22 @@
     delta?: number | null;
     note?: string;
   } = $props();
-
-  const direction = $derived(
-    delta == null ? null : delta > 0 ? "up" : delta < 0 ? "down" : "flat",
-  );
 </script>
 
-<Card --width-card="var(--width-pulse-card)" --height-card="var(--height-pulse-card)">
+{#snippet iconEl()}
+  <div class="trakt-pulse-cell-icon">
+    <PulseIcon {key} />
+  </div>
+{/snippet}
+
+<Card --width-card="var(--min-pulse-card-width)" --height-card="var(--height-pulse-card)">
   <div class="trakt-pulse-cell">
     {#if tooltip}
       <Tooltip content={tooltip} variant="compact" side="right">
-        <div class="trakt-pulse-cell-icon">
-          <PulseIcon {key} />
-        </div>
+        {@render iconEl()}
       </Tooltip>
     {:else}
-      <div class="trakt-pulse-cell-icon">
-        <PulseIcon {key} />
-      </div>
+      {@render iconEl()}
     {/if}
 
     <div class="trakt-pulse-cell-body">
@@ -44,21 +42,7 @@
       <p class="trakt-pulse-cell-label">{label}</p>
     </div>
 
-    {#if note}
-      <div class="trakt-pulse-cell-pill" data-direction="neutral">
-        {note}
-      </div>
-    {:else if delta != null && direction}
-      <div class="trakt-pulse-cell-pill" data-direction={direction}>
-        {#if delta > 0}
-          {m.text_stats_delta_up({ count: String(delta) })}
-        {:else if delta < 0}
-          {m.text_stats_delta_down({ count: String(Math.abs(delta)) })}
-        {:else}
-          {m.text_stats_delta_same()}
-        {/if}
-      </div>
-    {/if}
+    <PulseDeltaTag {delta} {note} />
   </div>
 </Card>
 
@@ -83,12 +67,12 @@
     width: var(--ni-28);
     height: var(--ni-28);
     border-radius: var(--border-radius-s);
-    background: color-mix(in srgb, var(--purple-900) 50%, transparent);
+    background: var(--color-official-list-background);
 
     :global(svg) {
       width: var(--ni-16);
       height: var(--ni-16);
-      color: var(--purple-400);
+      color: var(--color-text-emphasis);
     }
   }
 
@@ -111,32 +95,5 @@
   .trakt-pulse-cell-label {
     font-size: var(--ni-13);
     color: var(--shade-400);
-  }
-
-  .trakt-pulse-cell-pill {
-    display: inline-flex;
-    align-self: flex-start;
-    padding: var(--ni-4) var(--ni-8);
-    border-radius: var(--border-radius-s);
-    font-size: var(--ni-11);
-    font-weight: 600;
-    line-height: 1;
-    white-space: nowrap;
-
-    &[data-direction="up"] {
-      color: var(--green-500);
-      background: color-mix(in srgb, var(--green-900) 40%, transparent);
-    }
-
-    &[data-direction="down"] {
-      color: var(--red-500);
-      background: color-mix(in srgb, var(--red-900) 40%, transparent);
-    }
-
-    &[data-direction="flat"],
-    &[data-direction="neutral"] {
-      color: var(--shade-500);
-      background: color-mix(in srgb, var(--shade-900) 50%, transparent);
-    }
   }
 </style>
