@@ -3084,6 +3084,24 @@
     },
     "link_text_vip_cover_image_upsell": {
       "default": "VIP für Titelbilder"
+    },
+    "stat_text_plays": {
+      "default": "Wiedergaben"
+    },
+    "stat_text_watchers": {
+      "default": "Zuschauer"
+    },
+    "stat_text_lists": {
+      "default": "Listen"
+    },
+    "stat_text_favorited": {
+      "default": "Favoriten"
+    },
+    "button_text_details": {
+      "default": "Details"
+    },
+    "button_label_details": {
+      "default": "Details zu „{title}“"
     }
   }
 }

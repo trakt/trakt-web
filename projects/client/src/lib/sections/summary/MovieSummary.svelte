@@ -7,12 +7,10 @@
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import CastList from "../lists/CastList.svelte";
-  import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
-  import MediaDetails from "./components/details/MediaDetails.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
@@ -37,7 +35,7 @@
   } & CommonMediaSummaryProps = $props();
 </script>
 
-<SummaryDrawer {sentiment} />
+<SummaryDrawer {sentiment} {studios} {crew} {media} type="movie" />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <MediaSummaryV2 {media} {studios} {crew} {intl} type="movie" />
@@ -79,8 +77,4 @@
 <!-- TODO: move back to designed position when we have faster queries -->
 <Lists slug={media.slug} title={media.title} type="movie" />
 
-<MediaWatchHistoryList title={m.list_title_history()} {media} type="movie" />
-
 <TriviaList {media} />
-
-<MediaDetails {studios} {crew} {media} type="movie" />

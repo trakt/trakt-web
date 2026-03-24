@@ -3083,6 +3083,24 @@
     },
     "link_text_vip_cover_image_upsell": {
       "default": "升级 VIP 以设置封面图"
+    },
+    "stat_text_plays": {
+      "default": "播放"
+    },
+    "stat_text_watchers": {
+      "default": "观众"
+    },
+    "stat_text_lists": {
+      "default": "清单"
+    },
+    "stat_text_favorited": {
+      "default": "收藏"
+    },
+    "button_text_details": {
+      "default": "详情"
+    },
+    "button_label_details": {
+      "default": "\"{title}\" 的详情"
     }
   }
 }

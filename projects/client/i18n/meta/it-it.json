@@ -3084,6 +3084,24 @@
     },
     "link_text_vip_cover_image_upsell": {
       "default": "Passa a VIP per le copertine."
+    },
+    "stat_text_plays": {
+      "default": "Visioni"
+    },
+    "stat_text_watchers": {
+      "default": "Spettatori"
+    },
+    "stat_text_lists": {
+      "default": "Liste"
+    },
+    "stat_text_favorited": {
+      "default": "Preferiti"
+    },
+    "button_text_details": {
+      "default": "Dettagli"
+    },
+    "button_label_details": {
+      "default": "Dettagli per \"{title}\""
     }
   }
 }

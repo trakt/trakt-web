@@ -11,8 +11,8 @@ import { ShowSiloStudiosMappedMock } from '$mocks/data/summary/shows/silo/mapped
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { screen, waitFor } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
+import type { MediaDetailsProps } from '../MediaDetailsProps.ts';
 import MediaDetails from './MediaDetails.svelte';
-import type { MediaDetailsProps } from './MediaDetailsProps.ts';
 
 describe('MediaDetails', () => {
   const mediaTests = (props: MediaDetailsProps & { type: MediaType }) => {
@@ -208,6 +208,7 @@ describe('MediaDetails', () => {
       episode: EpisodeSiloMappedMock,
       crew: EpisodeSiloPeopleMappedMock,
       type: 'episode',
+      show: ShowSiloMappedMock,
     };
 
     it('should display the episode details', async () => {

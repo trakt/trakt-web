@@ -5,12 +5,15 @@ const VIEW_PARAM = 'view';
 
 export enum Drawers {
   Sentiment = 'sentiment',
+  Details = 'details',
 }
 
 function mapToDrawer(value: string | Nil) {
   switch (value) {
     case Drawers.Sentiment:
       return Drawers.Sentiment;
+    case Drawers.Details:
+      return Drawers.Details;
     default:
       return null;
   }

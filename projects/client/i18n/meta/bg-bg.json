@@ -3084,6 +3084,24 @@
     },
     "link_text_vip_cover_image_upsell": {
       "default": "Вземи VIP за корици"
+    },
+    "stat_text_plays": {
+      "default": "Гледания"
+    },
+    "stat_text_watchers": {
+      "default": "Зрители"
+    },
+    "stat_text_lists": {
+      "default": "Списъци"
+    },
+    "stat_text_favorited": {
+      "default": "Любими"
+    },
+    "button_text_details": {
+      "default": "Детайли"
+    },
+    "button_label_details": {
+      "default": "Детайли за „{title}“"
     }
   }
 }

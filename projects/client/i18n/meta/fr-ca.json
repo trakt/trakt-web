@@ -3084,6 +3084,24 @@
     },
     "translated_value_overall_sentiment_mixed": {
       "default": "Mitigé"
+    },
+    "stat_text_plays": {
+      "default": "Écoutes"
+    },
+    "stat_text_watchers": {
+      "default": "Membres"
+    },
+    "stat_text_lists": {
+      "default": "Listes"
+    },
+    "stat_text_favorited": {
+      "default": "Favoris"
+    },
+    "button_text_details": {
+      "default": "Détails"
+    },
+    "button_label_details": {
+      "default": "Détails pour « {title} »"
     }
   }
 }

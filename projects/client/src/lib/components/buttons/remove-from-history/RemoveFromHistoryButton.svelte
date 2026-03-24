@@ -1,5 +1,6 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import DeleteIcon from "$lib/components/icons/DeleteIcon.svelte";
   import MarkAsWatchedIcon from "../../icons/MarkAsWatchedIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
   import Button from "../Button.svelte";
@@ -44,8 +45,8 @@
 {/if}
 
 {#if style === "action"}
-  <ActionButton {...commonProps} {...props}>
-    <MarkAsWatchedIcon state="watched" />
+  <ActionButton {...commonProps} {...props} style="ghost">
+    <DeleteIcon />
   </ActionButton>
 {/if}
 
