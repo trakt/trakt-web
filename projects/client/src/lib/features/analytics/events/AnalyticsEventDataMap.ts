@@ -41,6 +41,7 @@ type VipUpgradeType = { plan: string };
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
   [AnalyticsEvent.PublicRedirect]: never;
+  [AnalyticsEvent.NonVipRedirect]: never;
   [AnalyticsEvent.Cta]: CtaDataType;
   [AnalyticsEvent.DiscoverMode]: DiscoverType;
 
