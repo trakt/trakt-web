@@ -6,12 +6,24 @@ import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 
 const PARAM_NAME = 'ref';
-const AUTO_SIGNIN_REF = 'trakt-og-switch';
-const PUBLIC_REDIRECT_REF = 'trakt-og-autoredirect';
+
+enum RedirectRef {
+  AutoSignin = 'trakt-og-switch',
+  PublicRedirect = 'trakt-og-autoredirect',
+  NonVipRedirect = 'trakt-og-autoredirect-non-vip',
+  NonVipPublicRedirect = 'trakt-og-autoredirect-non-vip-public',
+}
 
 function mapToAnalyticsEvent(ref: string | null) {
-  if (ref === PUBLIC_REDIRECT_REF) {
+  if (
+    ref === RedirectRef.PublicRedirect ||
+    ref === RedirectRef.NonVipPublicRedirect
+  ) {
     return AnalyticsEvent.PublicRedirect;
+  }
+
+  if (ref === RedirectRef.NonVipRedirect) {
+    return AnalyticsEvent.NonVipRedirect;
   }
 
   return AnalyticsEvent.EnterLite;
@@ -21,15 +33,19 @@ export function useRedirect() {
   const { isAuthorized, login } = useAuth();
 
   const ref = page.url.searchParams.get(PARAM_NAME);
-  const isAutoSignin = ref === AUTO_SIGNIN_REF;
-  const isPublicRedirect = ref === PUBLIC_REDIRECT_REF;
+  const isValidRef = Object.values(RedirectRef).includes(ref as RedirectRef);
 
   const { track } = useTrack(mapToAnalyticsEvent(ref));
 
   const redirect = () => {
     track();
 
-    if (isAutoSignin && !isAuthorized.value) {
+    const shouldAutoSignin = [
+      RedirectRef.AutoSignin,
+      RedirectRef.NonVipRedirect,
+    ].includes(ref as RedirectRef);
+
+    if (shouldAutoSignin && !isAuthorized.value) {
       login();
       return;
     }
@@ -43,7 +59,7 @@ export function useRedirect() {
   };
 
   return {
-    isOgRedirect: browser && (isAutoSignin || isPublicRedirect),
+    isOgRedirect: browser && isValidRef,
     redirect,
   };
 }
