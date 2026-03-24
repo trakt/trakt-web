@@ -28,6 +28,7 @@
     variant?: ListVariant;
     titleAction?: Snippet;
     classList?: string;
+    layout?: "scroll" | "flex-wrap";
   };
 
   const {
@@ -45,6 +46,7 @@
     variant = "default",
     titleAction: externalTitleAction,
     classList = "",
+    layout = "scroll",
   }: SectionListProps<T> = $props();
 
   const isHeaderVisible = $derived(Boolean(title));
@@ -95,6 +97,7 @@
   class:section-list-has-drilldown={Boolean(drilldownLink)}
   data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
   data-variant={variant}
+  data-layout={layout}
   use:appendClassList={classList}
 >
   {#if $isVisible}
@@ -120,7 +123,17 @@
             data-navigation-type={$navigation}
           >
             {#each items as i (i.key)}
-              {@render item(i)}
+              {#if layout === "flex-wrap"}
+                {@const span = 'span' in i && typeof i.span === 'number' ? i.span : 1}
+                <div
+                  class="section-list-flex-item"
+                  style="--flex-grow: {span}; --flex-basis: calc({span} * var(--item-min-width, var(--width-card)));"
+                >
+                  {@render item(i)}
+                </div>
+              {:else}
+                {@render item(i)}
+              {/if}
             {/each}
 
             {#if ctaItem && items.length <= ctaCutOff}
@@ -254,6 +267,25 @@
 
     &[data-navigation-type="dpad"] {
       gap: var(--gap-xxs);
+    }
+  }
+
+  .section-list-container[data-layout="flex-wrap"] {
+    .section-list-horizontal-scroll {
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+
+    .section-list-flex-item {
+      flex: var(--flex-grow, 1) 0 var(--flex-basis, var(--item-min-width, var(--width-card)));
+
+      :global(.trakt-card) {
+        min-width: 100%;
+      }
+
+      :global(.trakt-card-content) {
+        width: 100%;
+      }
     }
   }
 
