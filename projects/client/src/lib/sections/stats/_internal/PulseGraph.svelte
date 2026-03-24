@@ -205,8 +205,6 @@
   .trakt-pulse-graph-title {
     font-size: var(--ni-11);
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
     color: var(--shade-400);
   }
 
@@ -436,8 +434,6 @@
   .ratings-avg-label {
     font-size: var(--ni-10);
     color: var(--shade-600);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 
   .ratings-avg-value {
