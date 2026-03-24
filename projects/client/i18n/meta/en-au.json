@@ -3205,9 +3205,6 @@
     "text_stats_movies_count": {
       "default": "{count} movies"
     },
-    "header_stats_this_week": {
-      "default": "This Week"
-    },
     "header_stats_graph_daily": {
       "default": "Daily Activity"
     },
@@ -3222,6 +3219,12 @@
     },
     "header_stats_graph_ratings": {
       "default": "Ratings"
+    },
+    "label_stats_average": {
+      "default": "Avg"
+    },
+    "header_stats_this_week": {
+      "default": "Your Week"
     }
   }
 }

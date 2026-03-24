@@ -3205,9 +3205,6 @@
     "text_stats_movies_count": {
       "default": "{count} filmes"
     },
-    "header_stats_this_week": {
-      "default": "Esta Semana"
-    },
     "header_stats_graph_daily": {
       "default": "Atividade Diária"
     },
@@ -3222,6 +3219,12 @@
     },
     "header_stats_graph_ratings": {
       "default": "Avaliações"
+    },
+    "label_stats_average": {
+      "default": "Média"
+    },
+    "header_stats_this_week": {
+      "default": "Sua Semana"
     }
   }
 }

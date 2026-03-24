@@ -3205,9 +3205,6 @@
     "text_stats_movies_count": {
       "default": "{count} фільмів"
     },
-    "header_stats_this_week": {
-      "default": "Цього тижня"
-    },
     "header_stats_graph_daily": {
       "default": "Активність"
     },
@@ -3222,6 +3219,12 @@
     },
     "header_stats_graph_ratings": {
       "default": "Оцінки"
+    },
+    "label_stats_average": {
+      "default": "Сер."
+    },
+    "header_stats_this_week": {
+      "default": "Ваш тиждень"
     }
   }
 }

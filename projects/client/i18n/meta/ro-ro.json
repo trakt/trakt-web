@@ -3205,9 +3205,6 @@
     "text_stats_movies_count": {
       "default": "{count} filme"
     },
-    "header_stats_this_week": {
-      "default": "Săptămâna aceasta"
-    },
     "header_stats_graph_daily": {
       "default": "Activitate zilnică"
     },
@@ -3222,6 +3219,12 @@
     },
     "header_stats_graph_ratings": {
       "default": "Distribuție note"
+    },
+    "label_stats_average": {
+      "default": "Medie"
+    },
+    "header_stats_this_week": {
+      "default": "Săptămâna ta"
     }
   }
 }

@@ -3204,9 +3204,6 @@
     "text_stats_movies_count": {
       "default": "{count} 部电影"
     },
-    "header_stats_this_week": {
-      "default": "本周概览"
-    },
     "header_stats_graph_daily": {
       "default": "每日活动"
     },
@@ -3221,6 +3218,12 @@
     },
     "header_stats_graph_ratings": {
       "default": "评分分布"
+    },
+    "label_stats_average": {
+      "default": "平均"
+    },
+    "header_stats_this_week": {
+      "default": "本周动态"
     }
   }
 }

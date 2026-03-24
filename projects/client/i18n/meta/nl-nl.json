@@ -3205,9 +3205,6 @@
     "text_stats_movies_count": {
       "default": "{count} films"
     },
-    "header_stats_this_week": {
-      "default": "Deze week"
-    },
     "header_stats_graph_daily": {
       "default": "Dagelijkse activiteit"
     },
@@ -3222,6 +3219,12 @@
     },
     "header_stats_graph_ratings": {
       "default": "Beoordelingen"
+    },
+    "label_stats_average": {
+      "default": "Gem."
+    },
+    "header_stats_this_week": {
+      "default": "Jouw week"
     }
   }
 }
