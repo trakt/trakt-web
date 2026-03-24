@@ -42,7 +42,7 @@
 
     <Banner />
     <UpNextList intent="continue" />
-    <RenderFor audience="authenticated" device={["tablet-sm", "tablet-lg", "desktop"]}>
+    <RenderFor audience="authenticated">
       <WeeklyPulse />
     </RenderFor>
     <UpNextList intent="start" />

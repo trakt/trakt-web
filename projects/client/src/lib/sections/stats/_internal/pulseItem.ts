@@ -5,6 +5,7 @@ export type PulseStatItem = {
   readonly type: 'stat';
   readonly key: string;
   readonly score: number;
+  readonly span?: number;
 } & PulseStat;
 
 export type PulseGraphItem = {
@@ -13,6 +14,7 @@ export type PulseGraphItem = {
   readonly kind: PulseGraphType;
   readonly data: PulseGraphData;
   readonly score: number;
+  readonly span: number;
 };
 
 export type PulseItem = PulseStatItem | PulseGraphItem;
