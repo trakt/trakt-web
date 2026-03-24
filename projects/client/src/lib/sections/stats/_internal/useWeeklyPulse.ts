@@ -261,12 +261,14 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
       };
 
       const qualifiedGraphs = pickGraphs(graphData);
+      const graphSpan = 2;
       const graphItems: PulseGraphItem[] = qualifiedGraphs.map((g) => ({
         type: 'graph',
         key: g.type,
         kind: g.type,
         data: graphData,
         score: normalizeScore(g.score, graphScoreMax),
+        span: graphSpan,
       }));
 
       return interleaveByScore(statItems, graphItems);
