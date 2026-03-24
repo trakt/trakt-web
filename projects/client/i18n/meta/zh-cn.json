@@ -3101,6 +3101,129 @@
     },
     "button_label_details": {
       "default": "\"{title}\" 的详情"
+    },
+    "tooltip_stats_plays": {
+      "default": "观看的电影与剧集总数"
+    },
+    "tooltip_stats_episodes": {
+      "default": "本周观看的剧集集数"
+    },
+    "tooltip_stats_movies": {
+      "default": "本周观看的电影部数"
+    },
+    "tooltip_stats_shows": {
+      "default": "观看的不同剧集数量"
+    },
+    "tooltip_stats_active_days": {
+      "default": "至少有一次观看记录的天数"
+    },
+    "tooltip_stats_busiest_day": {
+      "default": "一周中观看最频繁的一天"
+    },
+    "tooltip_stats_best_day": {
+      "default": "单日最高观看量"
+    },
+    "tooltip_stats_hours": {
+      "default": "累计观看时长（小时）"
+    },
+    "tooltip_stats_ratings": {
+      "default": "本周评分的项目数"
+    },
+    "tooltip_stats_comments": {
+      "default": "本周发表的评论数"
+    },
+    "label_stats_plays": {
+      "default": "播放次数"
+    },
+    "label_stats_episodes": {
+      "default": "剧集"
+    },
+    "label_stats_movies": {
+      "default": "电影"
+    },
+    "label_stats_shows": {
+      "default": "剧集"
+    },
+    "label_stats_active_days": {
+      "default": "活跃天数"
+    },
+    "label_stats_busiest_day": {
+      "default": "最忙碌日"
+    },
+    "label_stats_best_day": {
+      "default": "最佳表现日"
+    },
+    "label_stats_hours": {
+      "default": "小时"
+    },
+    "label_stats_ratings": {
+      "default": "评分"
+    },
+    "label_stats_comments": {
+      "default": "评论"
+    },
+    "text_stats_today": {
+      "default": "今天"
+    },
+    "text_stats_time_morning": {
+      "default": "上午"
+    },
+    "text_stats_time_afternoon": {
+      "default": "下午"
+    },
+    "text_stats_time_evening": {
+      "default": "晚上"
+    },
+    "text_stats_time_late_night": {
+      "default": "深夜"
+    },
+    "text_stats_weeks_ago": {
+      "default": "{count}周前"
+    },
+    "text_stats_weeks_short": {
+      "default": "{count}周"
+    },
+    "text_stats_this_week": {
+      "default": "本周"
+    },
+    "text_stats_was_last_week": {
+      "default": "上周是{day}"
+    },
+    "text_stats_delta_up": {
+      "default": "+{count}"
+    },
+    "text_stats_delta_down": {
+      "default": "-{count}"
+    },
+    "text_stats_delta_same": {
+      "default": "持平"
+    },
+    "text_stats_episodes_count": {
+      "default": "{count} 集剧集"
+    },
+    "text_stats_movies_count": {
+      "default": "{count} 部电影"
+    },
+    "header_stats_graph_daily": {
+      "default": "每日活动"
+    },
+    "header_stats_graph_trend": {
+      "default": "每周趋势"
+    },
+    "header_stats_graph_peak": {
+      "default": "高峰时段"
+    },
+    "header_stats_graph_shows_movies": {
+      "default": "剧集与电影"
+    },
+    "header_stats_graph_ratings": {
+      "default": "评分分布"
+    },
+    "label_stats_average": {
+      "default": "平均"
+    },
+    "header_stats_this_week": {
+      "default": "本周动态"
     }
   }
 }
