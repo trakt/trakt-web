@@ -3472,9 +3472,6 @@
     "text_stats_movies_count": {
       "default": "{count} филма"
     },
-    "header_stats_this_week": {
-      "default": "Тази седмица"
-    },
     "header_stats_graph_daily": {
       "default": "Дневна активност"
     },
@@ -3489,6 +3486,12 @@
     },
     "header_stats_graph_ratings": {
       "default": "Оценки"
+    },
+    "label_stats_average": {
+      "default": "Средно"
+    },
+    "header_stats_this_week": {
+      "default": "Твоята седмица"
     }
   }
 }

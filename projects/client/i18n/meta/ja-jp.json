@@ -3472,9 +3472,6 @@
     "text_stats_movies_count": {
       "default": "{count} 映画"
     },
-    "header_stats_this_week": {
-      "default": "今週の記録"
-    },
     "header_stats_graph_daily": {
       "default": "デイリー活動"
     },
@@ -3489,6 +3486,12 @@
     },
     "header_stats_graph_ratings": {
       "default": "評価分布"
+    },
+    "label_stats_average": {
+      "default": "平均"
+    },
+    "header_stats_this_week": {
+      "default": "今週の記録"
     }
   }
 }
