@@ -3472,9 +3472,6 @@
     "text_stats_movies_count": {
       "default": "{count} pelis"
     },
-    "header_stats_this_week": {
-      "default": "Esta semana"
-    },
     "header_stats_graph_daily": {
       "default": "Actividad diaria"
     },
@@ -3489,6 +3486,12 @@
     },
     "header_stats_graph_ratings": {
       "default": "Ratings"
+    },
+    "label_stats_average": {
+      "default": "Prom."
+    },
+    "header_stats_this_week": {
+      "default": "Tu semana"
     }
   }
 }

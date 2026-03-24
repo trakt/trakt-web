@@ -3472,9 +3472,6 @@
     "text_stats_movies_count": {
       "default": "{count} filmer"
     },
-    "header_stats_this_week": {
-      "default": "Denne uken"
-    },
     "header_stats_graph_daily": {
       "default": "Daglig aktivitet"
     },
@@ -3489,6 +3486,12 @@
     },
     "header_stats_graph_ratings": {
       "default": "Vurderinger"
+    },
+    "label_stats_average": {
+      "default": "Snitt"
+    },
+    "header_stats_this_week": {
+      "default": "Uken din"
     }
   }
 }

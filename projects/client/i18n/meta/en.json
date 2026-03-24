@@ -8889,7 +8889,7 @@
       "description": "Message shown when streak is exactly 1 day."
     },
     "header_stats_this_week": {
-      "default": "This Week",
+      "default": "Your Week",
       "description": "Section header for the weekly pulse stats block.",
       "exclude": [
         "android",
