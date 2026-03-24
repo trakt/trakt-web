@@ -139,8 +139,7 @@
       "default": "Watched until here",
       "description": "Text for the button that allows users to mark a show as watched until a specific point.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_watch_again": {
@@ -674,9 +673,7 @@
     "page_title_movies": {
       "default": "Movies",
       "description": "Title for the movies page.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_text_browse_shows": {
       "default": "Shows",
@@ -696,9 +693,7 @@
     "page_title_shows": {
       "default": "Shows",
       "description": "Title for the shows page.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_home": {
       "default": "Go back to the homepage",
@@ -2448,16 +2443,14 @@
       "default": "Preview",
       "description": "Text for the tag that indicates a preview feature. This should be as short as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "tooltip_text_preview_feature": {
       "default": "This feature's still getting a fresh coat of paint, citizen. We're hammering away at the UX, making it sing like a choir of angels (or at least, function smoothly without inducing existential dread).",
       "description": "Tooltip text for a preview feature, explaining that it is still being worked on and may not be fully polished yet.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_airs": {
@@ -2578,9 +2571,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "warning_prompt_mark_as_watched_show_until": {
       "default": "Are you sure you want to mark all unseen episodes of \"{title}\" as watched until episode {episode}? This will mark {count} episodes as watched.",
@@ -2597,8 +2588,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "warning_prompt_track_show_episode_count": {
@@ -3082,8 +3072,7 @@
       "default": "Filters",
       "description": "Header for the filters panel.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_hide_watched": {
@@ -4713,9 +4702,7 @@
     "text_cta_smart_lists": {
       "default": "Set the filters. Skip the curation. Your list builds and updates itself automatically.",
       "description": "Call to action text shown in the empty smart lists screen, encouraging users to create a smart list.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "text_cta_favorites": {
       "default": "Your faves. Your story. Spotlight the movies and shows that left a mark.",
@@ -6158,8 +6145,7 @@
       "default": "Name is required",
       "description": "Validation text shown when the user inputs an invalid list name.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_private": {
@@ -7432,24 +7418,21 @@
       "default": "Switching to simple filters will reset all your current filters. Are you sure you want to proceed?",
       "description": "Text for the warning prompt that appears when a user attempts to switch to simple filters, which would reset all their current filters.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "tab_text_simple_filters": {
       "default": "Simple",
       "description": "Text for the tab that allows users to switch to simple filters.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "tab_text_advanced_filters": {
       "default": "Advanced",
       "description": "Text for the tab that allows users to switch to advanced filters.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "advanced_filter_label_runtime": {
@@ -7464,8 +7447,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "advanced_filter_label_release_year": {
@@ -7480,8 +7462,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "filter_label_ratings": {
@@ -7496,8 +7477,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "advanced_filter_label_ratings": {
@@ -7520,56 +7500,49 @@
       "default": "You've reached your smart list limit",
       "description": "Warning text shown when a user has reached their smart list limit and attempts to create a new smart list.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_create_smart_list": {
       "default": "Create Smart List",
       "description": "Header for the section that allows users to create a smart list.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_target": {
       "default": "Target",
       "description": "Header for the section that allows users to select a target for their smart lists, such as anticipated movies, popular shows, etc.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_vip_upsell_smart_lists": {
       "default": "Upgrade to VIP to unlock higher limits.",
       "description": "Text shown to encourage non-VIP users to subscribe to enjoy higher limits for smart lists. This should be short and concise.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_vip_upsell_more_lists": {
       "default": "Create more lists.",
       "description": "Text shown to encourage non-VIP users to subscribe to get a higher limit on how many lists they can have.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "page_title_smart_lists": {
       "default": "Smart Lists",
       "description": "Title for the smart lists page.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "page_title_create_smart_list": {
       "default": "Create Smart List",
       "description": "Title for the page where users can create a smart list.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "tag_text_smart_list_preview": {
@@ -7605,8 +7578,7 @@
       "default": "Notes",
       "description": "Title for the drawer containing a user's notes on a show or movie. This should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_notes_placeholder": {
@@ -7621,8 +7593,7 @@
       "default": "Leave a note the next time you favorite or drop a title.",
       "description": "Text shown when there are no notes for a movie or show.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "drawer_title_add_note": {
