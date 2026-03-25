@@ -36,7 +36,12 @@
     });
   };
 
-  const advancedOptions = $derived(filter.advanced.options ?? filter.options);
+  const advancedOptions = $derived(
+    (filter.advanced.options ?? filter.options).map((option) => ({
+      label: option.label(),
+      value: option.value,
+    })),
+  );
 
   // FIXME: this is a temporary solution, to be followed up by
   // making this a feature of the MultiSelect
@@ -46,7 +51,7 @@
   ]);
 </script>
 
-<Filter title={filter.advanced.label ?? filter.label}>
+<Filter title={filter.advanced.label?.() ?? filter.label()}>
   <MultiSelect
     options={optionsWithAll}
     value={selectedValues}

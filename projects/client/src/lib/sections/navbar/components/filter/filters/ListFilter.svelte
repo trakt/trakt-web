@@ -17,7 +17,7 @@
 
   const color = $derived(isFiltering ? "blue" : "default");
   const currentLabel = $derived(
-    filter.options.find((option) => option.value === $currentValue)?.label ??
+    filter.options.find((option) => option.value === $currentValue)?.label() ??
       m.option_text_all(),
   );
 
@@ -29,7 +29,7 @@
   });
 </script>
 
-<Filter title={filter.label}>
+<Filter title={filter.label()}>
   <RenderFor
     audience="authenticated"
     device={["tablet-sm", "tablet-lg", "desktop"]}

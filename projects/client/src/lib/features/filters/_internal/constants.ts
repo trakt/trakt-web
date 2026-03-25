@@ -14,12 +14,12 @@ import { generateRuntimeOptions } from './generateRuntimeOptions.ts';
 import { GENRES } from './genres.ts';
 
 const GENRE_FILTER: Filter = {
-  label: m.header_genre(),
+  label: m.header_genre,
   key: FilterKey.Genres,
   type: 'list',
   options: [
     {
-      label: m.option_text_my_favorites(),
+      label: m.option_text_my_favorites,
       value: 'favorites',
       mapper: (settings: UserSettings) => {
         return settings.genres.join(',');
@@ -27,10 +27,10 @@ const GENRE_FILTER: Filter = {
     },
     ...GENRES
       .map((genre) => ({
-        label: toTranslatedGenre(genre),
+        label: () => toTranslatedGenre(genre),
         value: genre,
       }))
-      .toSorted((a, b) => a.label.localeCompare(b.label, languageTag())),
+      .toSorted((a, b) => a.label().localeCompare(b.label(), languageTag())),
   ],
   advanced: {
     type: 'multi-select',
@@ -38,7 +38,7 @@ const GENRE_FILTER: Filter = {
 };
 
 const DECADE_FILTER: Filter = {
-  label: m.header_decade(),
+  label: m.header_decade,
   key: FilterKey.Decade,
   type: 'list',
   options: generateDecadeOptions(),
@@ -50,7 +50,7 @@ const DECADE_FILTER: Filter = {
 };
 
 const RUNTIME_FILTER: Filter = {
-  label: m.header_runtime(),
+  label: m.header_runtime,
   key: FilterKey.Runtime,
   type: 'list',
   options: generateRuntimeOptions(),
@@ -62,16 +62,16 @@ const RUNTIME_FILTER: Filter = {
 };
 
 const STREAMING_FILTER: Filter = {
-  label: m.header_streaming(),
+  label: m.header_streaming,
   key: FilterKey.Streaming,
   type: 'list',
   options: [
-    { label: m.option_text_my_favorites(), value: 'favorites' },
+    { label: m.option_text_my_favorites, value: 'favorites' },
     {
-      label: m.option_text_streaming_now(),
+      label: m.option_text_streaming_now,
       value: 'subscriptions',
     },
-    { label: m.option_text_all_digital_releases(), value: 'any' },
+    { label: m.option_text_all_digital_releases, value: 'any' },
   ],
   advanced: {
     type: 'multi-select',
@@ -117,44 +117,44 @@ const RATINGS_FILTER: Filter = {
 };
 
 const IGNORE_WATCHED_FILTER: Filter = {
-  label: m.header_hide_watched(),
+  label: m.header_hide_watched,
   key: FilterKey.IgnoreWatched,
   type: 'toggle',
 };
 
 const IGNORE_WATCHLISTED_FILTER: Filter = {
-  label: m.header_hide_watchlisted(),
+  label: m.header_hide_watchlisted,
   key: FilterKey.IgnoreWatchlisted,
   type: 'toggle',
 };
 
 const CERTIFICATION_FILTER: Filter = {
-  label: m.header_certification(),
+  label: m.header_certification,
   key: FilterKey.Certifications,
   type: 'list',
   options: [
     {
-      label: m.option_text_certification_all_ages(),
+      label: m.option_text_certification_all_ages,
       value: 'all_ages',
       mapper: () => 'g,tv-y,tv-y7,tv-g',
     },
     {
-      label: m.option_text_certification_parental_guidance(),
+      label: m.option_text_certification_parental_guidance,
       value: 'parental_guidance',
       mapper: () => 'pg,tv-pg',
     },
     {
-      label: m.option_text_certification_teens(),
+      label: m.option_text_certification_teens,
       value: 'teens',
       mapper: () => 'pg-13,tv-14',
     },
     {
-      label: m.option_text_certification_mature(),
+      label: m.option_text_certification_mature,
       value: 'mature',
       mapper: () => 'r,tv-ma',
     },
     {
-      label: m.option_text_certification_unrated(),
+      label: m.option_text_certification_unrated,
       value: 'unrated',
       mapper: () => 'nr',
     },
@@ -165,13 +165,13 @@ const CERTIFICATION_FILTER: Filter = {
 };
 
 const COUNTRY_FILTER: Filter = {
-  label: m.header_region(),
+  label: m.header_region,
   key: FilterKey.Countries,
   type: 'list',
   options: generateRegionOptions(),
   advanced: {
     type: 'multi-select',
-    label: m.header_country(),
+    label: m.header_country,
     options: generateCountryOptions(),
   },
 };

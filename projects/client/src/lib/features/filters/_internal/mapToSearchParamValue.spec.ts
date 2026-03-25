@@ -18,7 +18,7 @@ describe('mapToSearchParamValue', () => {
   describe('toggle filters', () => {
     const toggleFilter: ToggleFilter = {
       key: FilterKey.IgnoreWatched,
-      label: 'Ignore Watched',
+      label: () => 'Ignore Watched',
       type: 'toggle',
     };
 
@@ -46,16 +46,16 @@ describe('mapToSearchParamValue', () => {
   describe('list filters', () => {
     const listFilter: ListFilter = {
       key: FilterKey.Genres,
-      label: 'Genres',
+      label: () => 'Genres',
       type: 'list',
       options: [
         {
-          label: 'My Favorites',
+          label: () => 'My Favorites',
           value: 'favorites',
           mapper: (user) => user.genres.join(','),
         },
-        { label: 'Action', value: 'action' },
-        { label: 'Comedy', value: 'comedy' },
+        { label: () => 'Action', value: 'action' },
+        { label: () => 'Comedy', value: 'comedy' },
       ],
       advanced: {
         type: 'multi-select',
