@@ -208,6 +208,28 @@
   --color-tablist-background: var(--shade-100);
   --color-tab-background: var(--shade-10);
   --color-tab-hover-background: var(--shade-70);
+
+  /*
+   * Streak
+   */
+  --color-streak-surface: var(--shade-10);
+  --color-streak-surface-accent: var(--shade-10);
+  --color-streak-border: var(--shade-80);
+  --shadow-streak:
+    0 1px 2px color-mix(in srgb, var(--shade-300) 25%, transparent),
+    0 4px 12px color-mix(in srgb, var(--shade-300) 15%, transparent);
+  --color-streak-accent: var(--purple-600);
+  --color-streak-flame-background: var(--purple-50);
+  --color-streak-subtitle: var(--shade-400);
+  --color-streak-warning: var(--orange-700);
+  --color-streak-warning-background: color-mix(in srgb, var(--orange-100) 60%, transparent);
+  --color-streak-day: var(--purple-600);
+  --color-streak-day-glow: color-mix(in srgb, var(--purple-600) 25%, transparent);
+  --color-streak-day-border: var(--purple-600);
+  --color-streak-week: var(--blue-700);
+  --color-streak-week-glow: color-mix(in srgb, var(--blue-700) 25%, transparent);
+  --color-streak-month: var(--orange-600);
+  --color-streak-month-glow: color-mix(in srgb, var(--orange-600) 25%, transparent);
 }
 
 // Define theme variables for dark mode
@@ -415,6 +437,26 @@
   --color-tablist-background: var(--shade-800);
   --color-tab-background: var(--shade-500);
   --color-tab-hover-background: var(--shade-700);
+
+  /*
+   * Streak
+   */
+  --color-streak-surface: var(--shade-940);
+  --color-streak-surface-accent: color-mix(in srgb, var(--purple-900) 50%, var(--shade-940));
+  --color-streak-border: color-mix(in srgb, var(--purple-800) 20%, var(--shade-920));
+  --shadow-streak: none;
+  --color-streak-accent: var(--purple-200);
+  --color-streak-flame-background: color-mix(in srgb, var(--purple-800) 40%, transparent);
+  --color-streak-subtitle: var(--purple-300);
+  --color-streak-warning: var(--orange-400);
+  --color-streak-warning-background: color-mix(in srgb, var(--orange-900) 35%, transparent);
+  --color-streak-day: var(--purple-400);
+  --color-streak-day-glow: color-mix(in srgb, var(--purple-400) 25%, transparent);
+  --color-streak-day-border: var(--purple-400);
+  --color-streak-week: var(--blue-500);
+  --color-streak-week-glow: color-mix(in srgb, var(--blue-500) 25%, transparent);
+  --color-streak-month: var(--orange-500);
+  --color-streak-month-glow: color-mix(in srgb, var(--orange-500) 25%, transparent);
 }
 
 // Apply themes to selectors
