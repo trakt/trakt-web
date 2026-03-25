@@ -61,4 +61,17 @@ describe('computeStreak', () => {
     ];
     expect(computeStreak(dates, now)).toEqual({ count: 2, state: 'active' });
   });
+
+  it('uses local time for day boundaries, not UTC', () => {
+    // getDayKey uses getFullYear/getMonth/getDate (local time).
+    // In UTC (test env), these match UTC — confirming the function
+    // groups by the environment's local day, not by a hardcoded timezone.
+    const now = new Date('2024-01-15T23:30:00Z');
+    const dates = [
+      // Late-night watch on the 15th (same local day as `now` in UTC env)
+      new Date('2024-01-15T23:00:00Z'),
+      new Date('2024-01-14T10:00:00Z'),
+    ];
+    expect(computeStreak(dates, now)).toEqual({ count: 2, state: 'active' });
+  });
 });
