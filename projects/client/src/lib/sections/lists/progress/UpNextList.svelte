@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
@@ -24,6 +25,10 @@
   });
 
   const { filterMap } = useFilter();
+
+  const watchedProgressUrl = $derived(
+    `${UrlBuilder.progress($user?.slug ?? "me")}/watched`,
+  );
 </script>
 
 <DrillableMediaList
@@ -56,6 +61,49 @@
     : m.list_title_up_next()}
   variant={intent === "start" ? "portrait" : "landscape"}
 >
+  {#snippet actions(_items, _type)}
+    {#if intent === "continue"}
+      <ActionButton
+        style="ghost"
+        href={watchedProgressUrl}
+        label="View watched progress"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            x="1"
+            y="9"
+            width="3"
+            height="6"
+            rx="0.5"
+            fill="currentColor"
+          />
+          <rect
+            x="6.5"
+            y="5"
+            width="3"
+            height="10"
+            rx="0.5"
+            fill="currentColor"
+          />
+          <rect
+            x="12"
+            y="1"
+            width="3"
+            height="14"
+            rx="0.5"
+            fill="currentColor"
+          />
+        </svg>
+      </ActionButton>
+    {/if}
+  {/snippet}
+
   {#snippet item(progressEntry)}
     {#if progressEntry.intent === "start"}
       <StartWatchingItem entry={progressEntry} style="cover" />

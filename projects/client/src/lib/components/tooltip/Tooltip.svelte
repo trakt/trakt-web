@@ -7,6 +7,7 @@
     children,
     content,
     variant = "default",
+    html = false,
     side = "top",
     delayDuration = 150,
     sideOffset = 8,
@@ -43,7 +44,9 @@
         {#if arrowClass}
           <Tooltip.Arrow class={arrowClass} />
         {/if}
-        {#if variant === "default"}
+        {#if html}
+          {@html content}
+        {:else if variant === "default"}
           <p>{content}</p>
         {:else}
           {content}

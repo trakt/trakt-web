@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trakt — Watched Progress Design Variations</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Dark backgrounds */
+      --bg-darkest: #08080d;
+      --bg-darker: #0f0f17;
+      --bg-dark: #161622;
+      --bg-card: #1a1a28;
+      --bg-card-hover: #1f1f2e;
+
+      /* Purple spectrum */
+      --purple-primary: #7b2ff2;
+      --purple-light: #a855f7;
+      --purple-deep: #5b21b6;
+      --purple-dim: #3d1570;
+
+      /* Grays */
+      --gray-100: #f5f5f7;
+      --gray-200: #e5e5ea;
+      --gray-300: #d1d1d6;
+      --gray-400: #8e8e93;
+      --gray-500: #636366;
+      --gray-600: #48484a;
+
+      /* Typography */
+      --font-display: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-display);
+      background: var(--bg-darkest);
+      color: var(--gray-100);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Noise texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' /%3E%3C/svg%3E");
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(8, 8, 13, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(123, 47, 242, 0.1);
+      z-index: 1000;
+      padding: 1rem 2rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--gray-300);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      font-family: var(--font-mono);
+      letter-spacing: -0.02em;
+    }
+
+    nav a:hover {
+      color: var(--purple-light);
+      background: rgba(123, 47, 242, 0.1);
+    }
+
+    nav a.active {
+      color: var(--purple-primary);
+      background: rgba(123, 47, 242, 0.15);
+    }
+
+    /* Section base */
+    section {
+      min-height: 100vh;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--purple-primary), transparent);
+      opacity: 0.3;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--purple-light), var(--purple-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-400);
+      margin-bottom: 3rem;
+      font-weight: 400;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* =============================================
+       VARIATION 1: Current Baseline
+       ============================================= */
+
+    #variation-1 {
+      background: var(--bg-darkest);
+    }
+
+    .v1-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .v1-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 300px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .v1-poster {
+      width: 140px;
+      height: 210px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .v1-poster::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--purple-deep) 0%, var(--bg-dark) 100%);
+      opacity: 0.3;
+    }
+
+    .v1-main-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(123, 47, 242, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .v1-main-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(123, 47, 242, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .v1-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .v1-year {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-400);
+      margin-bottom: 1rem;
+    }
+
+    .v1-progress-bar {
+      height: 8px;
+      background: var(--bg-darker);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .v1-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple-deep), var(--purple-primary));
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .v1-stats {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .v1-stat-pill {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.375rem 0.75rem;
+      background: rgba(123, 47, 242, 0.15);
+      color: var(--purple-light);
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .v1-last-watched {
+      font-size: 0.875rem;
+      color: var(--gray-400);
+      margin-bottom: 1rem;
+    }
+
+    .v1-expand-toggle {
+      background: none;
+      border: 1px solid var(--gray-600);
+      color: var(--gray-300);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+    }
+
+    .v1-expand-toggle:hover {
+      border-color: var(--purple-primary);
+      color: var(--purple-light);
+    }
+
+    .v1-next-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(123, 47, 242, 0.1);
+      height: fit-content;
+    }
+
+    .v1-next-thumb {
+      width: 100%;
+      height: 170px;
+      background: linear-gradient(135deg, var(--purple-dim) 0%, var(--bg-dark) 100%);
+      position: relative;
+    }
+
+    .v1-next-thumb::after {
+      content: 'NEXT';
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: var(--purple-primary);
+      color: white;
+      padding: 0.25rem 0.625rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .v1-next-info {
+      padding: 1rem;
+    }
+
+    .v1-next-episode {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .v1-next-title {
+      font-size: 0.875rem;
+      color: var(--gray-400);
+    }
+
+    .v1-completed .v1-next-card {
+      opacity: 0.5;
+    }
+
+    .v1-completed .v1-next-thumb::after {
+      content: 'COMPLETE';
+      background: var(--gray-600);
+    }
+
+    /* =============================================
+       VARIATION 2: Cinematic Hero Rows
+       ============================================= */
+
+    #variation-2 {
+      background: var(--bg-darker);
+    }
+
+    .v2-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .v2-row {
+      position: relative;
+      height: 280px;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .v2-row:hover {
+      transform: scale(1.02);
+    }
+
+    .v2-row:hover .v2-poster {
+      transform: translateZ(40px) rotateY(-5deg);
+    }
+
+    .v2-row:hover .v2-overlay {
+      backdrop-filter: blur(10px);
+    }
+
+    .v2-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.4;
+      transition: opacity 0.5s ease;
+    }
+
+    .v2-row:hover .v2-bg {
+      opacity: 0.6;
+    }
+
+    .v2-row[data-show="breaking-bad"] .v2-bg {
+      background: linear-gradient(120deg, #1a3a1a 0%, #0f1f0f 40%, var(--bg-dark) 100%);
+    }
+
+    .v2-row[data-show="severance"] .v2-bg {
+      background: linear-gradient(120deg, #1a2a3a 0%, #0f1520 40%, var(--bg-dark) 100%);
+    }
+
+    .v2-row[data-show="the-bear"] .v2-bg {
+      background: linear-gradient(120deg, #3a1a1a 0%, #200f0f 40%, var(--bg-dark) 100%);
+    }
+
+    .v2-row[data-show="succession"] .v2-bg {
+      background: linear-gradient(120deg, #2a2a1a 0%, #18180f 40%, var(--bg-dark) 100%);
+    }
+
+    .v2-row[data-show="shogun"] .v2-bg {
+      background: linear-gradient(120deg, #3a1a2a 0%, #200f18 40%, var(--bg-dark) 100%);
+    }
+
+    .v2-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(8, 8, 13, 0.95) 0%, rgba(8, 8, 13, 0.7) 50%, rgba(8, 8, 13, 0.9) 100%);
+      backdrop-filter: blur(2px);
+      transition: backdrop-filter 0.5s ease;
+    }
+
+    .v2-content {
+      position: relative;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      padding: 2rem;
+      perspective: 1000px;
+    }
+
+    .v2-poster {
+      width: 200px;
+      height: 240px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      align-self: center;
+    }
+
+    .v2-poster::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--purple-primary) 0%, transparent 100%);
+      opacity: 0.2;
+      border-radius: 8px;
+    }
+
+    .v2-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .v2-title {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .v2-meta {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-400);
+      display: flex;
+      gap: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .v2-progress-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .v2-progress-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .v2-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple-primary), var(--purple-light));
+      border-radius: 2px;
+    }
+
+    .v2-percentage {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--purple-light);
+      min-width: 4rem;
+      text-align: right;
+    }
+
+    .v2-stats {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-300);
+    }
+
+    /* =============================================
+       VARIATION 3: Magazine Editorial Grid
+       ============================================= */
+
+    #variation-3 {
+      background: var(--bg-darkest);
+    }
+
+    .v3-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      grid-auto-flow: dense;
+    }
+
+    .v3-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(123, 47, 242, 0.1);
+    }
+
+    .v3-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(123, 47, 242, 0.4);
+      box-shadow: 0 20px 60px rgba(123, 47, 242, 0.2);
+    }
+
+    .v3-card[data-size="hero"] {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .v3-card[data-size="large"] {
+      grid-column: span 2;
+    }
+
+    .v3-progress-ring {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      width: 80px;
+      height: 80px;
+    }
+
+    .v3-progress-ring circle {
+      fill: none;
+      stroke-width: 4;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+
+    .v3-progress-ring .v3-ring-bg {
+      stroke: rgba(255, 255, 255, 0.1);
+    }
+
+    .v3-progress-ring .v3-ring-progress {
+      stroke: var(--purple-primary);
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+
+    .v3-ring-text {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 700;
+      fill: var(--purple-light);
+    }
+
+    .v3-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .v3-card[data-size="small"] .v3-title {
+      font-size: 1.75rem;
+    }
+
+    .v3-year {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-400);
+      margin-bottom: 2rem;
+    }
+
+    .v3-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+
+    .v3-stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+
+    .v3-stat-label {
+      color: var(--gray-400);
+      font-weight: 500;
+    }
+
+    .v3-stat-value {
+      font-family: var(--font-mono);
+      color: var(--gray-100);
+      font-weight: 600;
+    }
+
+    .v3-next {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.875rem;
+      color: var(--gray-400);
+    }
+
+    .v3-next strong {
+      color: var(--purple-light);
+      font-weight: 600;
+    }
+
+    /* =============================================
+       VARIATION 4: Minimal Data Table
+       ============================================= */
+
+    #variation-4 {
+      background: var(--bg-darker);
+    }
+
+    .v4-table {
+      background: var(--bg-card);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(123, 47, 242, 0.1);
+    }
+
+    .v4-header {
+      display: grid;
+      grid-template-columns: 2fr 80px 1fr 100px 120px 140px;
+      padding: 1rem 1.5rem;
+      background: rgba(123, 47, 242, 0.05);
+      border-bottom: 1px solid rgba(123, 47, 242, 0.1);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-400);
+    }
+
+    .v4-row {
+      display: grid;
+      grid-template-columns: 2fr 80px 1fr 100px 120px 140px;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      align-items: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .v4-row:hover {
+      background: rgba(123, 47, 242, 0.05);
+    }
+
+    .v4-row:last-child {
+      border-bottom: none;
+    }
+
+    .v4-show-name {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .v4-year {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-400);
+    }
+
+    .v4-progress-bar {
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 1px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .v4-progress-fill {
+      height: 100%;
+      background: var(--purple-primary);
+      border-radius: 1px;
+    }
+
+    .v4-percentage {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--purple-light);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .v4-episodes {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-300);
+      text-align: right;
+    }
+
+    .v4-last-watched {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-400);
+      text-align: right;
+    }
+
+    .v4-expand {
+      display: grid;
+      grid-column: 1 / -1;
+      padding: 1.5rem;
+      background: rgba(123, 47, 242, 0.03);
+      border-top: 1px solid rgba(123, 47, 242, 0.1);
+      gap: 1rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .v4-row.expanded .v4-expand {
+      max-height: 500px;
+      padding: 1.5rem;
+    }
+
+    .v4-season {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .v4-season-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gray-400);
+      min-width: 80px;
+    }
+
+    .v4-season-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .v4-season-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple-deep), var(--purple-primary));
+      border-radius: 3px;
+    }
+
+    .v4-season-count {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gray-300);
+      min-width: 60px;
+      text-align: right;
+    }
+
+    /* =============================================
+       VARIATION 5: Timeline River
+       ============================================= */
+
+    #variation-5 {
+      background: var(--bg-darkest);
+    }
+
+    .v5-timeline {
+      position: relative;
+      padding-left: 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .v5-line {
+      position: absolute;
+      left: 2rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--purple-primary), var(--purple-deep));
+      box-shadow: 0 0 20px var(--purple-primary);
+    }
+
+    .v5-node {
+      position: relative;
+      margin-bottom: 4rem;
+      animation: fadeInUp 0.6s ease backwards;
+    }
+
+    .v5-node:nth-child(1) { animation-delay: 0.1s; }
+    .v5-node:nth-child(2) { animation-delay: 0.2s; }
+    .v5-node:nth-child(3) { animation-delay: 0.3s; }
+    .v5-node:nth-child(4) { animation-delay: 0.4s; }
+    .v5-node:nth-child(5) { animation-delay: 0.5s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .v5-node::before {
+      content: '';
+      position: absolute;
+      left: -4.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--purple-primary);
+      border: 3px solid var(--bg-darkest);
+      box-shadow: 0 0 0 4px rgba(123, 47, 242, 0.2), 0 0 20px var(--purple-primary);
+      z-index: 2;
+    }
+
+    .v5-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(123, 47, 242, 0.1);
+      transition: all 0.3s ease;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+    }
+
+    .v5-card:hover {
+      transform: translateX(10px);
+      border-color: rgba(123, 47, 242, 0.4);
+      box-shadow: 0 10px 40px rgba(123, 47, 242, 0.2);
+    }
+
+    .v5-progress-arc {
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+
+    .v5-arc-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .v5-arc-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 12;
+    }
+
+    .v5-arc-progress {
+      fill: none;
+      stroke: var(--purple-primary);
+      stroke-width: 12;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s ease;
+      filter: drop-shadow(0 0 8px var(--purple-primary));
+    }
+
+    .v5-arc-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .v5-arc-percentage {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--purple-light);
+    }
+
+    .v5-arc-label {
+      font-size: 0.75rem;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .v5-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .v5-title {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .v5-meta {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-400);
+    }
+
+    .v5-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .v5-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .v5-stat-label {
+      font-size: 0.75rem;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .v5-stat-value {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--gray-100);
+    }
+
+    .v5-next {
+      margin-top: 0.5rem;
+      padding: 1rem;
+      background: rgba(123, 47, 242, 0.1);
+      border-radius: 8px;
+      border-left: 3px solid var(--purple-primary);
+      font-size: 0.875rem;
+    }
+
+    .v5-next strong {
+      color: var(--purple-light);
+    }
+
+    /* =============================================
+       VARIATION 6: Stacked Vinyl
+       ============================================= */
+
+    #variation-6 {
+      background: var(--bg-darker);
+    }
+
+    .v6-stack {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 3rem;
+      padding: 2rem;
+    }
+
+    .v6-record {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .v6-record:hover {
+      transform: translateY(-20px) scale(1.05);
+      z-index: 10;
+    }
+
+    .v6-record:hover .v6-vinyl {
+      box-shadow: 0 30px 80px rgba(123, 47, 242, 0.4);
+    }
+
+    .v6-record:hover .v6-stats {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .v6-vinyl {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, var(--bg-card) 0%, var(--bg-card) 30%, transparent 30%),
+        repeating-conic-gradient(from 0deg, rgba(123, 47, 242, 0.1) 0deg, rgba(123, 47, 242, 0.05) 2deg, rgba(123, 47, 242, 0.1) 4deg);
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      transition: all 0.5s ease;
+      border: 1px solid rgba(123, 47, 242, 0.2);
+    }
+
+    .v6-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--bg-darker);
+      border: 2px solid var(--purple-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 0 20px rgba(123, 47, 242, 0.3);
+    }
+
+    .v6-label-title {
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.2;
+      padding: 0 0.5rem;
+    }
+
+    .v6-label-year {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gray-400);
+    }
+
+    .v6-progress-track {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+
+    .v6-progress-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .v6-track-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.05);
+      stroke-width: 8;
+    }
+
+    .v6-track-progress {
+      fill: none;
+      stroke: var(--purple-primary);
+      stroke-width: 8;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s ease;
+      filter: drop-shadow(0 0 10px var(--purple-primary));
+    }
+
+    .v6-stats {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, 10px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 200px;
+    }
+
+    .v6-percentage {
+      font-family: var(--font-mono);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--purple-light);
+    }
+
+    .v6-episodes {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-300);
+    }
+
+    .v6-next {
+      font-size: 0.875rem;
+      color: var(--gray-400);
+      text-align: center;
+    }
+
+    /* =============================================
+       VARIATION 7: Brutalist Blocks
+       ============================================= */
+
+    #variation-7 {
+      background: var(--bg-darkest);
+    }
+
+    .v7-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .v7-block {
+      border: 3px solid var(--gray-600);
+      background: var(--bg-card);
+      position: relative;
+      padding: 2rem;
+      transition: all 0.2s ease;
+    }
+
+    .v7-block:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--purple-primary);
+      margin-left: 20px;
+    }
+
+    .v7-block:nth-child(odd) {
+      margin-left: 40px;
+    }
+
+    .v7-block:nth-child(even) {
+      margin-left: 80px;
+    }
+
+    .v7-title {
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .v7-year {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gray-400);
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      border: 2px solid var(--gray-600);
+      padding: 0.25rem 0.5rem;
+    }
+
+    .v7-progress-container {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin: 1.5rem 0;
+      height: 40px;
+    }
+
+    .v7-progress-chunk {
+      background: var(--gray-600);
+      border-right: 2px solid var(--bg-card);
+      flex: 1;
+      transition: all 0.2s ease;
+    }
+
+    .v7-progress-chunk.filled {
+      background: var(--purple-primary);
+    }
+
+    .v7-block:hover .v7-progress-chunk.filled {
+      background: var(--purple-light);
+    }
+
+    .v7-stats-brutal {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      gap: 2rem;
+      justify-content: start;
+    }
+
+    .v7-stat {
+      position: relative;
+    }
+
+    .v7-stat-value {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--purple-primary);
+    }
+
+    .v7-stat-label {
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      letter-spacing: 0.1em;
+      margin-top: 0.25rem;
+    }
+
+    .v7-next {
+      margin-top: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--gray-300);
+      border-left: 4px solid var(--purple-primary);
+      padding-left: 1rem;
+    }
+
+    /* =============================================
+       Responsive
+       ============================================= */
+
+    @media (max-width: 1200px) {
+      .v1-row {
+        grid-template-columns: 120px 1fr;
+        gap: 1rem;
+      }
+
+      .v1-next-card {
+        grid-column: 1 / -1;
+        margin-top: 1rem;
+      }
+
+      .v2-content {
+        grid-template-columns: 160px 1fr;
+        gap: 1.5rem;
+      }
+
+      .v2-poster {
+        width: 160px;
+        height: 200px;
+      }
+
+      .v2-title {
+        font-size: 2rem;
+      }
+
+      .v3-card[data-size="hero"],
+      .v3-card[data-size="large"] {
+        grid-column: span 1;
+      }
+
+      .v4-header,
+      .v4-row {
+        grid-template-columns: 2fr 1fr 100px;
+      }
+
+      .v4-header > *:nth-child(2),
+      .v4-header > *:nth-child(5),
+      .v4-header > *:nth-child(6),
+      .v4-row > *:nth-child(2),
+      .v4-row > *:nth-child(5),
+      .v4-row > *:nth-child(6) {
+        display: none;
+      }
+
+      .v5-card {
+        grid-template-columns: 1fr;
+      }
+
+      .v6-stack {
+        gap: 2rem;
+      }
+
+      .v6-record {
+        width: 240px;
+        height: 240px;
+      }
+
+      .v6-vinyl {
+        width: 240px;
+        height: 240px;
+      }
+
+      .v7-title {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem;
+      }
+
+      nav ul {
+        gap: 0.25rem;
+      }
+
+      nav a {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.75rem;
+      }
+
+      section {
+        padding: 5rem 1rem 3rem;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+      }
+
+      .v1-row {
+        grid-template-columns: 1fr;
+      }
+
+      .v1-poster {
+        width: 100%;
+        height: 300px;
+      }
+
+      .v2-content {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+
+      .v2-poster {
+        width: 120px;
+        height: 160px;
+      }
+
+      .v2-title {
+        font-size: 1.5rem;
+      }
+
+      .v3-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .v3-card[data-size="hero"],
+      .v3-card[data-size="large"] {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+
+      .v5-timeline {
+        padding-left: 2rem;
+      }
+
+      .v5-card {
+        grid-template-columns: 1fr;
+      }
+
+      .v5-progress-arc {
+        width: 160px;
+        height: 160px;
+      }
+
+      .v7-block:nth-child(odd),
+      .v7-block:nth-child(even) {
+        margin-left: 0;
+      }
+
+      .v7-block:hover {
+        margin-left: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#variation-1" data-target="variation-1">01_Current</a></li>
+      <li><a href="#variation-2" data-target="variation-2">02_Cinematic</a></li>
+      <li><a href="#variation-3" data-target="variation-3">03_Editorial</a></li>
+      <li><a href="#variation-4" data-target="variation-4">04_DataTable</a></li>
+      <li><a href="#variation-5" data-target="variation-5">05_Timeline</a></li>
+      <li><a href="#variation-6" data-target="variation-6">06_Vinyl</a></li>
+      <li><a href="#variation-7" data-target="variation-7">07_Brutalist</a></li>
+    </ul>
+  </nav>
+
+  <!-- =============================================
+       VARIATION 1: Current Baseline
+       ============================================= -->
+  <section id="variation-1">
+    <div class="container">
+      <h2 class="section-title">Current Baseline</h2>
+      <p class="section-subtitle">Three-column layout — poster, stats card, next episode</p>
+
+      <div class="v1-list">
+        <!-- Breaking Bad -->
+        <div class="v1-row v1-completed">
+          <div class="v1-poster"></div>
+          <div class="v1-main-card">
+            <h3 class="v1-title">Breaking Bad</h3>
+            <div class="v1-year">2008</div>
+            <div class="v1-progress-bar">
+              <div class="v1-progress-fill" style="width: 100%"></div>
+            </div>
+            <div class="v1-stats">
+              <div class="v1-stat-pill">100%</div>
+              <div class="v1-stat-pill">62/62 episodes</div>
+              <div class="v1-stat-pill">5 seasons</div>
+            </div>
+            <div class="v1-last-watched">Last watched: S5E16 "Felina"</div>
+            <button class="v1-expand-toggle">View Seasons</button>
+          </div>
+          <div class="v1-next-card">
+            <div class="v1-next-thumb"></div>
+            <div class="v1-next-info">
+              <div class="v1-next-episode">Series Complete</div>
+              <div class="v1-next-title">Congratulations!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Severance -->
+        <div class="v1-row">
+          <div class="v1-poster"></div>
+          <div class="v1-main-card">
+            <h3 class="v1-title">Severance</h3>
+            <div class="v1-year">2022</div>
+            <div class="v1-progress-bar">
+              <div class="v1-progress-fill" style="width: 100%"></div>
+            </div>
+            <div class="v1-stats">
+              <div class="v1-stat-pill">100%</div>
+              <div class="v1-stat-pill">19/19 episodes</div>
+              <div class="v1-stat-pill">2 seasons</div>
+            </div>
+            <div class="v1-last-watched">Last watched: S2E10 "The Directives"</div>
+            <button class="v1-expand-toggle">View Seasons</button>
+          </div>
+          <div class="v1-next-card">
+            <div class="v1-next-thumb"></div>
+            <div class="v1-next-info">
+              <div class="v1-next-episode">Awaiting S3</div>
+              <div class="v1-next-title">Up to date</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Bear -->
+        <div class="v1-row">
+          <div class="v1-poster"></div>
+          <div class="v1-main-card">
+            <h3 class="v1-title">The Bear</h3>
+            <div class="v1-year">2022</div>
+            <div class="v1-progress-bar">
+              <div class="v1-progress-fill" style="width: 50%"></div>
+            </div>
+            <div class="v1-stats">
+              <div class="v1-stat-pill">50%</div>
+              <div class="v1-stat-pill">14/28 episodes</div>
+              <div class="v1-stat-pill">3 seasons</div>
+            </div>
+            <div class="v1-last-watched">Last watched: S2E04 "Honeydew"</div>
+            <button class="v1-expand-toggle">View Seasons</button>
+          </div>
+          <div class="v1-next-card">
+            <div class="v1-next-thumb"></div>
+            <div class="v1-next-info">
+              <div class="v1-next-episode">S2E05</div>
+              <div class="v1-next-title">Pop</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Succession -->
+        <div class="v1-row">
+          <div class="v1-poster"></div>
+          <div class="v1-main-card">
+            <h3 class="v1-title">Succession</h3>
+            <div class="v1-year">2018</div>
+            <div class="v1-progress-bar">
+              <div class="v1-progress-fill" style="width: 74%"></div>
+            </div>
+            <div class="v1-stats">
+              <div class="v1-stat-pill">74%</div>
+              <div class="v1-stat-pill">29/39 episodes</div>
+              <div class="v1-stat-pill">4 seasons</div>
+            </div>
+            <div class="v1-last-watched">Last watched: S3E09 "All the Bells Say"</div>
+            <button class="v1-expand-toggle">View Seasons</button>
+          </div>
+          <div class="v1-next-card">
+            <div class="v1-next-thumb"></div>
+            <div class="v1-next-info">
+              <div class="v1-next-episode">S3E10</div>
+              <div class="v1-next-title">All the Bells Say</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shogun -->
+        <div class="v1-row">
+          <div class="v1-poster"></div>
+          <div class="v1-main-card">
+            <h3 class="v1-title">Shōgun</h3>
+            <div class="v1-year">2024</div>
+            <div class="v1-progress-bar">
+              <div class="v1-progress-fill" style="width: 30%"></div>
+            </div>
+            <div class="v1-stats">
+              <div class="v1-stat-pill">30%</div>
+              <div class="v1-stat-pill">3/10 episodes</div>
+              <div class="v1-stat-pill">1 season</div>
+            </div>
+            <div class="v1-last-watched">Last watched: S1E03 "Tomorrow is Tomorrow"</div>
+            <button class="v1-expand-toggle">View Seasons</button>
+          </div>
+          <div class="v1-next-card">
+            <div class="v1-next-thumb"></div>
+            <div class="v1-next-info">
+              <div class="v1-next-episode">S1E04</div>
+              <div class="v1-next-title">The Eightfold Fence</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       VARIATION 2: Cinematic Hero Rows
+       ============================================= -->
+  <section id="variation-2">
+    <div class="container">
+      <h2 class="section-title">Cinematic Hero Rows</h2>
+      <p class="section-subtitle">Full-width cinematic backgrounds with 3D poster tilt</p>
+
+      <div class="v2-list">
+        <div class="v2-row" data-show="breaking-bad">
+          <div class="v2-bg"></div>
+          <div class="v2-overlay"></div>
+          <div class="v2-content">
+            <div class="v2-poster"></div>
+            <div class="v2-info">
+              <h3 class="v2-title">Breaking Bad</h3>
+              <div class="v2-meta">
+                <span>2008</span>
+                <span>5 Seasons</span>
+                <span>Complete</span>
+              </div>
+              <div class="v2-progress-container">
+                <div class="v2-progress-bar">
+                  <div class="v2-progress-fill" style="width: 100%"></div>
+                </div>
+                <div class="v2-percentage">100%</div>
+              </div>
+              <div class="v2-stats">62/62 episodes watched • Last: S5E16 "Felina"</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="v2-row" data-show="severance">
+          <div class="v2-bg"></div>
+          <div class="v2-overlay"></div>
+          <div class="v2-content">
+            <div class="v2-poster"></div>
+            <div class="v2-info">
+              <h3 class="v2-title">Severance</h3>
+              <div class="v2-meta">
+                <span>2022</span>
+                <span>2 Seasons</span>
+                <span>Awaiting S3</span>
+              </div>
+              <div class="v2-progress-container">
+                <div class="v2-progress-bar">
+                  <div class="v2-progress-fill" style="width: 100%"></div>
+                </div>
+                <div class="v2-percentage">100%</div>
+              </div>
+              <div class="v2-stats">19/19 episodes watched • Last: S2E10 "The Directives"</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="v2-row" data-show="the-bear">
+          <div class="v2-bg"></div>
+          <div class="v2-overlay"></div>
+          <div class="v2-content">
+            <div class="v2-poster"></div>
+            <div class="v2-info">
+              <h3 class="v2-title">The Bear</h3>
+              <div class="v2-meta">
+                <span>2022</span>
+                <span>3 Seasons</span>
+                <span>In Progress</span>
+              </div>
+              <div class="v2-progress-container">
+                <div class="v2-progress-bar">
+                  <div class="v2-progress-fill" style="width: 50%"></div>
+                </div>
+                <div class="v2-percentage">50%</div>
+              </div>
+              <div class="v2-stats">14/28 episodes watched • Next: S2E05 "Pop"</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="v2-row" data-show="succession">
+          <div class="v2-bg"></div>
+          <div class="v2-overlay"></div>
+          <div class="v2-content">
+            <div class="v2-poster"></div>
+            <div class="v2-info">
+              <h3 class="v2-title">Succession</h3>
+              <div class="v2-meta">
+                <span>2018</span>
+                <span>4 Seasons</span>
+                <span>In Progress</span>
+              </div>
+              <div class="v2-progress-container">
+                <div class="v2-progress-bar">
+                  <div class="v2-progress-fill" style="width: 74%"></div>
+                </div>
+                <div class="v2-percentage">74%</div>
+              </div>
+              <div class="v2-stats">29/39 episodes watched • Next: S3E10 "All the Bells Say"</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="v2-row" data-show="shogun">
+          <div class="v2-bg"></div>
+          <div class="v2-overlay"></div>
+          <div class="v2-content">
+            <div class="v2-poster"></div>
+            <div class="v2-info">
+              <h3 class="v2-title">Shōgun</h3>
+              <div class="v2-meta">
+                <span>2024</span>
+                <span>1 Season</span>
+                <span>In Progress</span>
+              </div>
+              <div class="v2-progress-container">
+                <div class="v2-progress-bar">
+                  <div class="v2-progress-fill" style="width: 30%"></div>
+                </div>
+                <div class="v2-percentage">30%</div>
+              </div>
+              <div class="v2-stats">3/10 episodes watched • Next: S1E04 "The Eightfold Fence"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       VARIATION 3: Magazine Editorial Grid
+       ============================================= -->
+  <section id="variation-3">
+    <div class="container">
+      <h2 class="section-title">Magazine Editorial Grid</h2>
+      <p class="section-subtitle">Masonry cards with circular progress rings</p>
+
+      <div class="v3-grid">
+        <!-- Breaking Bad - Hero size -->
+        <div class="v3-card" data-size="hero">
+          <svg class="v3-progress-ring" viewBox="0 0 80 80">
+            <circle class="v3-ring-bg" cx="40" cy="40" r="36"></circle>
+            <circle class="v3-ring-progress" cx="40" cy="40" r="36"
+                    stroke-dasharray="226.19" stroke-dashoffset="0"></circle>
+            <text class="v3-ring-text" x="40" y="45" text-anchor="middle">100</text>
+          </svg>
+          <h3 class="v3-title">Breaking Bad</h3>
+          <div class="v3-year">2008</div>
+          <div class="v3-stats">
+            <div class="v3-stat-row">
+              <span class="v3-stat-label">Episodes</span>
+              <span class="v3-stat-value">62/62</span>
+            </div>
+            <div class="v3-stat-row">
+              <span class="v3-stat-label">Seasons</span>
+              <span class="v3-stat-value">5</span>
+            </div>
+            <div class="v3-stat-row">
+              <span class="v3-stat-label">Status</span>
+              <span class="v3-stat-value">Complete</span>
+            </div>
+          </div>
+          <div class="v3-next">Last watched: <strong>S5E16 "Felina"</strong></div>
+        </div>
+
+        <!-- Severance - Large -->
+        <div class="v3-card" data-size="large">
+          <svg class="v3-progress-ring" viewBox="0 0 80 80">
+            <circle class="v3-ring-bg" cx="40" cy="40" r="36"></circle>
+            <circle class="v3-ring-progress" cx="40" cy="40" r="36"
+                    stroke-dasharray="226.19" stroke-dashoffset="0"></circle>
+            <text class="v3-ring-text" x="40" y="45" text-anchor="middle">100</text>
+          </svg>
+          <h3 class="v3-title">Severance</h3>
+          <div class="v3-year">2022</div>
+          <div class="v3-stats">
+            <div class="v3-stat-row">
+              <span class="v3-stat-label">Episodes</span>
+              <span class="v3-stat-value">19/19</span>
+            </div>
+            <div class="v3-stat-row">
+              <span class="v3-stat-label">Seasons</span>
+              <span class="v3-stat-value">2</span>
+            </div>
+          </div>
+          <div class="v3-next">Awaiting: <strong>Season 3</strong></div>
+        </div>
+
+        <!-- The Bear -->
+        <div class="v3-card" data-size="small">
+          <svg class="v3-progress-ring" viewBox="0 0 80 80">
+            <circle class="v3-ring-bg" cx="40" cy="40" r="36"></circle>
+            <circle class="v3-ring-progress" cx="40" cy="40" r="36"
+                    stroke-dasharray="226.19" stroke-dashoffset="113.1"></circle>
+            <text class="v3-ring-text" x="40" y="45" text-anchor="middle">50</text>
+          </svg>
+          <h3 class="v3-title">The Bear</h3>
+          <div class="v3-year">2022</div>
+          <div class="v3-stats">
+            <div class="v3-stat-row">
+              <span class="v3-stat-label">Episodes</span>
+              <span class="v3-stat-value">14/28</span>
+            </div>
+          </div>
+          <div class="v3-next">Next: <strong>S2E05 "Pop"</strong></div>
+        </div>
+
+        <!-- Succession -->
+        <div class="v3-card" data-size="small">
+          <svg class="v3-progress-ring" viewBox="0 0 80 80">
+            <circle class="v3-ring-bg" cx="40" cy="40" r="36"></circle>
+            <circle class="v3-ring-progress" cx="40" cy="40" r="36"
+                    stroke-dasharray="226.19" stroke-dashoffset="58.8"></circle>
+            <text class="v3-ring-text" x="40" y="45" text-anchor="middle">74</text>
+          </svg>
+          <h3 class="v3-title">Succession</h3>
+          <div class="v3-year">2018</div>
+          <div class="v3-stats">
+            <div class="v3-stat-row">
+              <span class="v3-stat-label">Episodes</span>
+              <span class="v3-stat-value">29/39</span>
+            </div>
+          </div>
+          <div class="v3-next">Next: <strong>S3E10</strong></div>
+        </div>
+
+        <!-- Shogun -->
+        <div class="v3-card" data-size="small">
+          <svg class="v3-progress-ring" viewBox="0 0 80 80">
+            <circle class="v3-ring-bg" cx="40" cy="40" r="36"></circle>
+            <circle class="v3-ring-progress" cx="40" cy="40" r="36"
+                    stroke-dasharray="226.19" stroke-dashoffset="158.3"></circle>
+            <text class="v3-ring-text" x="40" y="45" text-anchor="middle">30</text>
+          </svg>
+          <h3 class="v3-title">Shōgun</h3>
+          <div class="v3-year">2024</div>
+          <div class="v3-stats">
+            <div class="v3-stat-row">
+              <span class="v3-stat-label">Episodes</span>
+              <span class="v3-stat-value">3/10</span>
+            </div>
+          </div>
+          <div class="v3-next">Next: <strong>S1E04</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       VARIATION 4: Minimal Data Table
+       ============================================= -->
+  <section id="variation-4">
+    <div class="container">
+      <h2 class="section-title">Minimal Data Table</h2>
+      <p class="section-subtitle">Clean spreadsheet aesthetic with expandable season rows</p>
+
+      <div class="v4-table">
+        <div class="v4-header">
+          <div>Show</div>
+          <div>Year</div>
+          <div>Progress</div>
+          <div>Complete</div>
+          <div>Episodes</div>
+          <div>Last Watched</div>
+        </div>
+
+        <!-- Breaking Bad -->
+        <div class="v4-row" onclick="this.classList.toggle('expanded')">
+          <div class="v4-show-name">Breaking Bad</div>
+          <div class="v4-year">2008</div>
+          <div class="v4-progress-bar">
+            <div class="v4-progress-fill" style="width: 100%"></div>
+          </div>
+          <div class="v4-percentage">100%</div>
+          <div class="v4-episodes">62/62</div>
+          <div class="v4-last-watched">2024-03-15</div>
+          <div class="v4-expand">
+            <div class="v4-season">
+              <div class="v4-season-label">Season 1</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 100%"></div>
+              </div>
+              <div class="v4-season-count">7/7</div>
+            </div>
+            <div class="v4-season">
+              <div class="v4-season-label">Season 2</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 100%"></div>
+              </div>
+              <div class="v4-season-count">13/13</div>
+            </div>
+            <div class="v4-season">
+              <div class="v4-season-label">Season 3</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 100%"></div>
+              </div>
+              <div class="v4-season-count">13/13</div>
+            </div>
+            <div class="v4-season">
+              <div class="v4-season-label">Season 4</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 100%"></div>
+              </div>
+              <div class="v4-season-count">13/13</div>
+            </div>
+            <div class="v4-season">
+              <div class="v4-season-label">Season 5</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 100%"></div>
+              </div>
+              <div class="v4-season-count">16/16</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Severance -->
+        <div class="v4-row" onclick="this.classList.toggle('expanded')">
+          <div class="v4-show-name">Severance</div>
+          <div class="v4-year">2022</div>
+          <div class="v4-progress-bar">
+            <div class="v4-progress-fill" style="width: 100%"></div>
+          </div>
+          <div class="v4-percentage">100%</div>
+          <div class="v4-episodes">19/19</div>
+          <div class="v4-last-watched">2024-03-20</div>
+          <div class="v4-expand">
+            <div class="v4-season">
+              <div class="v4-season-label">Season 1</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 100%"></div>
+              </div>
+              <div class="v4-season-count">9/9</div>
+            </div>
+            <div class="v4-season">
+              <div class="v4-season-label">Season 2</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 100%"></div>
+              </div>
+              <div class="v4-season-count">10/10</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Bear -->
+        <div class="v4-row" onclick="this.classList.toggle('expanded')">
+          <div class="v4-show-name">The Bear</div>
+          <div class="v4-year">2022</div>
+          <div class="v4-progress-bar">
+            <div class="v4-progress-fill" style="width: 50%"></div>
+          </div>
+          <div class="v4-percentage">50%</div>
+          <div class="v4-episodes">14/28</div>
+          <div class="v4-last-watched">2024-03-18</div>
+          <div class="v4-expand">
+            <div class="v4-season">
+              <div class="v4-season-label">Season 1</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 100%"></div>
+              </div>
+              <div class="v4-season-count">8/8</div>
+            </div>
+            <div class="v4-season">
+              <div class="v4-season-label">Season 2</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 60%"></div>
+              </div>
+              <div class="v4-season-count">6/10</div>
+            </div>
+            <div class="v4-season">
+              <div class="v4-season-label">Season 3</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 0%"></div>
+              </div>
+              <div class="v4-season-count">0/10</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Succession -->
+        <div class="v4-row" onclick="this.classList.toggle('expanded')">
+          <div class="v4-show-name">Succession</div>
+          <div class="v4-year">2018</div>
+          <div class="v4-progress-bar">
+            <div class="v4-progress-fill" style="width: 74%"></div>
+          </div>
+          <div class="v4-percentage">74%</div>
+          <div class="v4-episodes">29/39</div>
+          <div class="v4-last-watched">2024-03-10</div>
+          <div class="v4-expand">
+            <div class="v4-season">
+              <div class="v4-season-label">Season 1</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 100%"></div>
+              </div>
+              <div class="v4-season-count">10/10</div>
+            </div>
+            <div class="v4-season">
+              <div class="v4-season-label">Season 2</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 100%"></div>
+              </div>
+              <div class="v4-season-count">10/10</div>
+            </div>
+            <div class="v4-season">
+              <div class="v4-season-label">Season 3</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 90%"></div>
+              </div>
+              <div class="v4-season-count">9/10</div>
+            </div>
+            <div class="v4-season">
+              <div class="v4-season-label">Season 4</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 0%"></div>
+              </div>
+              <div class="v4-season-count">0/10</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shogun -->
+        <div class="v4-row" onclick="this.classList.toggle('expanded')">
+          <div class="v4-show-name">Shōgun</div>
+          <div class="v4-year">2024</div>
+          <div class="v4-progress-bar">
+            <div class="v4-progress-fill" style="width: 30%"></div>
+          </div>
+          <div class="v4-percentage">30%</div>
+          <div class="v4-episodes">3/10</div>
+          <div class="v4-last-watched">2024-03-22</div>
+          <div class="v4-expand">
+            <div class="v4-season">
+              <div class="v4-season-label">Season 1</div>
+              <div class="v4-season-bar">
+                <div class="v4-season-fill" style="width: 30%"></div>
+              </div>
+              <div class="v4-season-count">3/10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       VARIATION 5: Timeline River
+       ============================================= -->
+  <section id="variation-5">
+    <div class="container">
+      <h2 class="section-title">Timeline River</h2>
+      <p class="section-subtitle">Vertical timeline with radial progress indicators</p>
+
+      <div class="v5-timeline">
+        <div class="v5-line"></div>
+
+        <!-- Severance -->
+        <div class="v5-node">
+          <div class="v5-card">
+            <div class="v5-progress-arc">
+              <svg class="v5-arc-svg" viewBox="0 0 200 200">
+                <circle class="v5-arc-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="v5-arc-progress" cx="100" cy="100" r="90"
+                        stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+              </svg>
+              <div class="v5-arc-center">
+                <div class="v5-arc-percentage">100%</div>
+                <div class="v5-arc-label">Complete</div>
+              </div>
+            </div>
+            <div class="v5-info">
+              <h3 class="v5-title">Severance</h3>
+              <div class="v5-meta">2022 • 2 Seasons</div>
+              <div class="v5-stats">
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Episodes</div>
+                  <div class="v5-stat-value">19/19</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Progress</div>
+                  <div class="v5-stat-value">100%</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Last Watched</div>
+                  <div class="v5-stat-value">2024-03-20</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Status</div>
+                  <div class="v5-stat-value">Awaiting S3</div>
+                </div>
+              </div>
+              <div class="v5-next">
+                <strong>Last episode:</strong> S2E10 "The Directives"
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Bear -->
+        <div class="v5-node">
+          <div class="v5-card">
+            <div class="v5-progress-arc">
+              <svg class="v5-arc-svg" viewBox="0 0 200 200">
+                <circle class="v5-arc-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="v5-arc-progress" cx="100" cy="100" r="90"
+                        stroke-dasharray="565.48" stroke-dashoffset="282.74"></circle>
+              </svg>
+              <div class="v5-arc-center">
+                <div class="v5-arc-percentage">50%</div>
+                <div class="v5-arc-label">In Progress</div>
+              </div>
+            </div>
+            <div class="v5-info">
+              <h3 class="v5-title">The Bear</h3>
+              <div class="v5-meta">2022 • 3 Seasons</div>
+              <div class="v5-stats">
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Episodes</div>
+                  <div class="v5-stat-value">14/28</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Progress</div>
+                  <div class="v5-stat-value">50%</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Last Watched</div>
+                  <div class="v5-stat-value">2024-03-18</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Season</div>
+                  <div class="v5-stat-value">Season 2</div>
+                </div>
+              </div>
+              <div class="v5-next">
+                <strong>Next episode:</strong> S2E05 "Pop"
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breaking Bad -->
+        <div class="v5-node">
+          <div class="v5-card">
+            <div class="v5-progress-arc">
+              <svg class="v5-arc-svg" viewBox="0 0 200 200">
+                <circle class="v5-arc-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="v5-arc-progress" cx="100" cy="100" r="90"
+                        stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+              </svg>
+              <div class="v5-arc-center">
+                <div class="v5-arc-percentage">100%</div>
+                <div class="v5-arc-label">Complete</div>
+              </div>
+            </div>
+            <div class="v5-info">
+              <h3 class="v5-title">Breaking Bad</h3>
+              <div class="v5-meta">2008 • 5 Seasons</div>
+              <div class="v5-stats">
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Episodes</div>
+                  <div class="v5-stat-value">62/62</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Progress</div>
+                  <div class="v5-stat-value">100%</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Last Watched</div>
+                  <div class="v5-stat-value">2024-03-15</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Status</div>
+                  <div class="v5-stat-value">Finished</div>
+                </div>
+              </div>
+              <div class="v5-next">
+                <strong>Series complete:</strong> S5E16 "Felina"
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Succession -->
+        <div class="v5-node">
+          <div class="v5-card">
+            <div class="v5-progress-arc">
+              <svg class="v5-arc-svg" viewBox="0 0 200 200">
+                <circle class="v5-arc-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="v5-arc-progress" cx="100" cy="100" r="90"
+                        stroke-dasharray="565.48" stroke-dashoffset="147.02"></circle>
+              </svg>
+              <div class="v5-arc-center">
+                <div class="v5-arc-percentage">74%</div>
+                <div class="v5-arc-label">In Progress</div>
+              </div>
+            </div>
+            <div class="v5-info">
+              <h3 class="v5-title">Succession</h3>
+              <div class="v5-meta">2018 • 4 Seasons</div>
+              <div class="v5-stats">
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Episodes</div>
+                  <div class="v5-stat-value">29/39</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Progress</div>
+                  <div class="v5-stat-value">74%</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Last Watched</div>
+                  <div class="v5-stat-value">2024-03-10</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Season</div>
+                  <div class="v5-stat-value">Season 3</div>
+                </div>
+              </div>
+              <div class="v5-next">
+                <strong>Next episode:</strong> S3E10 "All the Bells Say"
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shogun -->
+        <div class="v5-node">
+          <div class="v5-card">
+            <div class="v5-progress-arc">
+              <svg class="v5-arc-svg" viewBox="0 0 200 200">
+                <circle class="v5-arc-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="v5-arc-progress" cx="100" cy="100" r="90"
+                        stroke-dasharray="565.48" stroke-dashoffset="395.84"></circle>
+              </svg>
+              <div class="v5-arc-center">
+                <div class="v5-arc-percentage">30%</div>
+                <div class="v5-arc-label">In Progress</div>
+              </div>
+            </div>
+            <div class="v5-info">
+              <h3 class="v5-title">Shōgun</h3>
+              <div class="v5-meta">2024 • 1 Season</div>
+              <div class="v5-stats">
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Episodes</div>
+                  <div class="v5-stat-value">3/10</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Progress</div>
+                  <div class="v5-stat-value">30%</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Last Watched</div>
+                  <div class="v5-stat-value">2024-03-22</div>
+                </div>
+                <div class="v5-stat">
+                  <div class="v5-stat-label">Season</div>
+                  <div class="v5-stat-value">Season 1</div>
+                </div>
+              </div>
+              <div class="v5-next">
+                <strong>Next episode:</strong> S1E04 "The Eightfold Fence"
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       VARIATION 6: Stacked Vinyl
+       ============================================= -->
+  <section id="variation-6">
+    <div class="container">
+      <h2 class="section-title">Stacked Vinyl</h2>
+      <p class="section-subtitle">Shows as vinyl records with circular progress tracks</p>
+
+      <div class="v6-stack">
+        <!-- Breaking Bad -->
+        <div class="v6-record">
+          <div class="v6-vinyl">
+            <div class="v6-label">
+              <div class="v6-label-title">Breaking Bad</div>
+              <div class="v6-label-year">2008</div>
+            </div>
+            <div class="v6-progress-track">
+              <svg class="v6-progress-svg" viewBox="0 0 280 280">
+                <circle class="v6-track-bg" cx="140" cy="140" r="136"></circle>
+                <circle class="v6-track-progress" cx="140" cy="140" r="136"
+                        stroke-dasharray="854.51" stroke-dashoffset="0"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="v6-stats">
+            <div class="v6-percentage">100%</div>
+            <div class="v6-episodes">62/62 episodes</div>
+            <div class="v6-next">Complete</div>
+          </div>
+        </div>
+
+        <!-- Severance -->
+        <div class="v6-record">
+          <div class="v6-vinyl">
+            <div class="v6-label">
+              <div class="v6-label-title">Severance</div>
+              <div class="v6-label-year">2022</div>
+            </div>
+            <div class="v6-progress-track">
+              <svg class="v6-progress-svg" viewBox="0 0 280 280">
+                <circle class="v6-track-bg" cx="140" cy="140" r="136"></circle>
+                <circle class="v6-track-progress" cx="140" cy="140" r="136"
+                        stroke-dasharray="854.51" stroke-dashoffset="0"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="v6-stats">
+            <div class="v6-percentage">100%</div>
+            <div class="v6-episodes">19/19 episodes</div>
+            <div class="v6-next">Awaiting S3</div>
+          </div>
+        </div>
+
+        <!-- The Bear -->
+        <div class="v6-record">
+          <div class="v6-vinyl">
+            <div class="v6-label">
+              <div class="v6-label-title">The Bear</div>
+              <div class="v6-label-year">2022</div>
+            </div>
+            <div class="v6-progress-track">
+              <svg class="v6-progress-svg" viewBox="0 0 280 280">
+                <circle class="v6-track-bg" cx="140" cy="140" r="136"></circle>
+                <circle class="v6-track-progress" cx="140" cy="140" r="136"
+                        stroke-dasharray="854.51" stroke-dashoffset="427.26"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="v6-stats">
+            <div class="v6-percentage">50%</div>
+            <div class="v6-episodes">14/28 episodes</div>
+            <div class="v6-next">Next: S2E05 "Pop"</div>
+          </div>
+        </div>
+
+        <!-- Succession -->
+        <div class="v6-record">
+          <div class="v6-vinyl">
+            <div class="v6-label">
+              <div class="v6-label-title">Succession</div>
+              <div class="v6-label-year">2018</div>
+            </div>
+            <div class="v6-progress-track">
+              <svg class="v6-progress-svg" viewBox="0 0 280 280">
+                <circle class="v6-track-bg" cx="140" cy="140" r="136"></circle>
+                <circle class="v6-track-progress" cx="140" cy="140" r="136"
+                        stroke-dasharray="854.51" stroke-dashoffset="222.17"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="v6-stats">
+            <div class="v6-percentage">74%</div>
+            <div class="v6-episodes">29/39 episodes</div>
+            <div class="v6-next">Next: S3E10</div>
+          </div>
+        </div>
+
+        <!-- Shogun -->
+        <div class="v6-record">
+          <div class="v6-vinyl">
+            <div class="v6-label">
+              <div class="v6-label-title">Shōgun</div>
+              <div class="v6-label-year">2024</div>
+            </div>
+            <div class="v6-progress-track">
+              <svg class="v6-progress-svg" viewBox="0 0 280 280">
+                <circle class="v6-track-bg" cx="140" cy="140" r="136"></circle>
+                <circle class="v6-track-progress" cx="140" cy="140" r="136"
+                        stroke-dasharray="854.51" stroke-dashoffset="598.16"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="v6-stats">
+            <div class="v6-percentage">30%</div>
+            <div class="v6-episodes">3/10 episodes</div>
+            <div class="v6-next">Next: S1E04</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       VARIATION 7: Brutalist Blocks
+       ============================================= -->
+  <section id="variation-7">
+    <div class="container">
+      <h2 class="section-title">Brutalist Blocks</h2>
+      <p class="section-subtitle">Anti-design aesthetic with intentional misalignment</p>
+
+      <div class="v7-blocks">
+        <!-- Breaking Bad -->
+        <div class="v7-block">
+          <div class="v7-year">2008</div>
+          <h3 class="v7-title">BREAKING<br>BAD</h3>
+          <div class="v7-progress-container">
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+          </div>
+          <div class="v7-stats-brutal">
+            <div class="v7-stat">
+              <div class="v7-stat-value">100</div>
+              <div class="v7-stat-label">Percent</div>
+            </div>
+            <div class="v7-stat">
+              <div class="v7-stat-value">62</div>
+              <div class="v7-stat-label">Episodes</div>
+            </div>
+            <div class="v7-stat">
+              <div class="v7-stat-value">5</div>
+              <div class="v7-stat-label">Seasons</div>
+            </div>
+          </div>
+          <div class="v7-next">COMPLETE // S5E16 FELINA</div>
+        </div>
+
+        <!-- Severance -->
+        <div class="v7-block">
+          <div class="v7-year">2022</div>
+          <h3 class="v7-title">SEVER<br>ANCE</h3>
+          <div class="v7-progress-container">
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+          </div>
+          <div class="v7-stats-brutal">
+            <div class="v7-stat">
+              <div class="v7-stat-value">100</div>
+              <div class="v7-stat-label">Percent</div>
+            </div>
+            <div class="v7-stat">
+              <div class="v7-stat-value">19</div>
+              <div class="v7-stat-label">Episodes</div>
+            </div>
+            <div class="v7-stat">
+              <div class="v7-stat-value">2</div>
+              <div class="v7-stat-label">Seasons</div>
+            </div>
+          </div>
+          <div class="v7-next">AWAITING // SEASON 3</div>
+        </div>
+
+        <!-- The Bear -->
+        <div class="v7-block">
+          <div class="v7-year">2022</div>
+          <h3 class="v7-title">THE<br>BEAR</h3>
+          <div class="v7-progress-container">
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+          </div>
+          <div class="v7-stats-brutal">
+            <div class="v7-stat">
+              <div class="v7-stat-value">50</div>
+              <div class="v7-stat-label">Percent</div>
+            </div>
+            <div class="v7-stat">
+              <div class="v7-stat-value">14</div>
+              <div class="v7-stat-label">Episodes</div>
+            </div>
+            <div class="v7-stat">
+              <div class="v7-stat-value">3</div>
+              <div class="v7-stat-label">Seasons</div>
+            </div>
+          </div>
+          <div class="v7-next">NEXT // S2E05 POP</div>
+        </div>
+
+        <!-- Succession -->
+        <div class="v7-block">
+          <div class="v7-year">2018</div>
+          <h3 class="v7-title">SUCCES<br>SION</h3>
+          <div class="v7-progress-container">
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+          </div>
+          <div class="v7-stats-brutal">
+            <div class="v7-stat">
+              <div class="v7-stat-value">74</div>
+              <div class="v7-stat-label">Percent</div>
+            </div>
+            <div class="v7-stat">
+              <div class="v7-stat-value">29</div>
+              <div class="v7-stat-label">Episodes</div>
+            </div>
+            <div class="v7-stat">
+              <div class="v7-stat-value">4</div>
+              <div class="v7-stat-label">Seasons</div>
+            </div>
+          </div>
+          <div class="v7-next">NEXT // S3E10 ALL THE BELLS SAY</div>
+        </div>
+
+        <!-- Shogun -->
+        <div class="v7-block">
+          <div class="v7-year">2024</div>
+          <h3 class="v7-title">SHŌ<br>GUN</h3>
+          <div class="v7-progress-container">
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk filled"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+            <div class="v7-progress-chunk"></div>
+          </div>
+          <div class="v7-stats-brutal">
+            <div class="v7-stat">
+              <div class="v7-stat-value">30</div>
+              <div class="v7-stat-label">Percent</div>
+            </div>
+            <div class="v7-stat">
+              <div class="v7-stat-value">3</div>
+              <div class="v7-stat-label">Episodes</div>
+            </div>
+            <div class="v7-stat">
+              <div class="v7-stat-value">1</div>
+              <div class="v7-stat-label">Season</div>
+            </div>
+          </div>
+          <div class="v7-next">NEXT // S1E04 THE EIGHTFOLD FENCE</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Navigation active state with Intersection Observer
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-50% 0px -50% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-target') === id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+
+</body>
+</html>

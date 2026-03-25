@@ -3563,6 +3563,117 @@
         "android"
       ]
     },
+    "page_title_watched_progress": {
+      "default": "Watched Progress",
+      "description": "Title for the Watched Progress page, which shows detailed per-show watched statistics.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "watched_progress_show_stats": {
+      "default": "Watched {completed} of {total} episodes ({duration}) — {remaining} left ({remainingDuration})",
+      "description": "Per-show text showing watched episode count and duration stats.",
+      "variables": {
+        "completed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        },
+        "duration": {
+          "type": "string"
+        },
+        "remaining": {
+          "type": "number"
+        },
+        "remainingDuration": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "watched_progress_last_watched": {
+      "default": "Last watched {episodeLabel} \"{title}\" {relativeDate}",
+      "description": "Text showing when the last episode was watched with relative date.",
+      "variables": {
+        "episodeLabel": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "relativeDate": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "watched_progress_next_episode": {
+      "default": "Next: {episodeLabel} \"{title}\"",
+      "description": "Text showing the next episode to watch for a show.",
+      "variables": {
+        "episodeLabel": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "watched_progress_season_stats": {
+      "default": "{completed}/{total} episodes — {remaining} remaining",
+      "description": "Per-season summary showing completed vs total episodes.",
+      "variables": {
+        "completed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        },
+        "remaining": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "watched_progress_view_seasons": {
+      "default": "view seasons",
+      "description": "Button label to expand and view per-season details.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "watched_progress_hide_seasons": {
+      "default": "hide seasons",
+      "description": "Button label to collapse per-season details.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "watched_progress_returns_next_season": {
+      "default": "Returns next season!",
+      "description": "Label shown on completed shows that are still airing.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "page_title_social_activity": {
       "default": "Social activity",
       "description": "Title for the social activity page.",
