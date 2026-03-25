@@ -5,13 +5,13 @@ import { RecommendedShowsResponseMock } from '../data/recommendations/response/R
 
 export const recommendations = [
   http.get(
-    'http://localhost/recommendations/shows/*',
+    'http://localhost/shows/recommendations',
     () => {
       return HttpResponse.json(RecommendedShowsResponseMock);
     },
   ),
   http.get(
-    'http://localhost/recommendations/movies/*',
+    'http://localhost/movies/recommendations',
     () => {
       return HttpResponse.json(RecommendedMoviesResponseMock);
     },

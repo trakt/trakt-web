@@ -1,10 +1,10 @@
+import type { RecommendationsMovieResponse } from '$lib/requests/models/RecommendationsResponse.ts';
 import { MovieHereticResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
-import type { RecommendedMovieResponse } from '@trakt/api';
 
-export const RecommendedMoviesResponseMock: RecommendedMovieResponse = [
+export const RecommendedMoviesResponseMock: RecommendationsMovieResponse = [
   {
-    ...MovieHereticResponseMock,
-    'favorited_by': [],
-    'recommended_by': [],
+    movie: MovieHereticResponseMock,
+    score: 8.5,
+    sources: [],
   },
 ];

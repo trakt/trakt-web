@@ -1,10 +1,10 @@
+import type { RecommendationsShowResponse } from '$lib/requests/models/RecommendationsResponse.ts';
 import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock.ts';
-import type { RecommendedShowResponse } from '@trakt/api';
 
-export const RecommendedShowsResponseMock: RecommendedShowResponse = [
+export const RecommendedShowsResponseMock: RecommendationsShowResponse = [
   {
-    ...ShowSiloResponseMock,
-    'favorited_by': [],
-    'recommended_by': [],
+    show: ShowSiloResponseMock,
+    score: 8.5,
+    sources: [],
   },
 ];
