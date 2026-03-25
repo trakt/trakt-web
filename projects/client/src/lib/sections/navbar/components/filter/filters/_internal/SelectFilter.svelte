@@ -23,7 +23,7 @@
   <Button
     style="flat"
     size="small"
-    label={filter.label}
+    label={filter.label()}
     variant="secondary"
     text="capitalize"
     {color}
@@ -46,9 +46,9 @@
       <option
         selected={value === option.value}
         value={option.value}
-        aria-label={option.label}
+        aria-label={option.label()}
       >
-        {option.label}
+        {option.label()}
       </option>
     {/each}
   </select>

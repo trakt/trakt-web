@@ -17,6 +17,6 @@ export function generateCountryOptions(): FilterOption[] {
   const allCodes = Object.values(COUNTRY_REGIONS).flat();
 
   return allCodes
-    .map((code) => ({ label: getCountryLabel(code), value: code }))
-    .toSorted((a, b) => a.label.localeCompare(b.label, languageTag()));
+    .map((code) => ({ label: () => getCountryLabel(code), value: code }))
+    .toSorted((a, b) => a.label().localeCompare(b.label(), languageTag()));
 }

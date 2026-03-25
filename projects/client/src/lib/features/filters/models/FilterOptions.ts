@@ -15,7 +15,7 @@ type MultiKeyFilter = {
 };
 
 export type FilterOption = {
-  label: string;
+  label: () => string;
   value: string;
 } & FilterValueMapper;
 
@@ -33,7 +33,7 @@ export type AdvancedSliderOption = SliderOption & MultiKeyFilter;
 
 export type MultiSelectOption = {
   type: 'multi-select';
-  label?: string;
+  label?: () => string;
   options?: ReadonlyArray<FilterOption>;
 };
 

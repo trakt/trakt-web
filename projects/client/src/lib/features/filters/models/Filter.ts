@@ -23,7 +23,7 @@ export enum FilterKey {
 
 type BaseFilter = {
   key: FilterKey;
-  label: string;
+  label: () => string;
   type: 'list' | 'toggle' | 'slider';
 };
 

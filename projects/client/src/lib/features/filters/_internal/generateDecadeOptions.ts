@@ -23,14 +23,14 @@ export function generateDecadeOptions(): FilterOption[] {
     const decadeEnd = decadeStart + DECADE_YEARS - 1;
 
     return {
-      label: `${decadeStart}`,
+      label: () => `${decadeStart}`,
       value: `${decadeStart}-${decadeEnd}`,
     };
   }).reverse();
 
   return [
     {
-      label: m.filter_label_this_year(),
+      label: m.filter_label_this_year,
       value: `${currentYear}`,
     },
     ...decades,

@@ -24,9 +24,9 @@
   // FIXME: either add explicit clear, or make indeterminate state selectable
 </script>
 
-<Filter title={filter.label}>
+<Filter title={filter.label()}>
   <Switch
-    label={filter.label}
+    label={filter.label()}
     checked={$currentValue === "true"}
     indeterminate={$currentValue == null}
     color="blue"

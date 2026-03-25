@@ -16,7 +16,7 @@
 
 <GlobalParameterSetter parameter={filter.key}>
   <DropdownList
-    label={filter.label}
+    label={filter.label()}
     variant="secondary"
     size="small"
     style="flat"
@@ -42,7 +42,7 @@
             track({ id: filter.key, action: "set", mode: FilterMode.Simple })}
           replacestate
         >
-          {option.label}
+          {option.label()}
         </DropdownItem>
       {/each}
     {/snippet}
