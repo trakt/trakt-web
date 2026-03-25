@@ -36,15 +36,17 @@
     });
   };
 
+  const advancedOptions = $derived(filter.advanced.options ?? filter.options);
+
   // FIXME: this is a temporary solution, to be followed up by
   // making this a feature of the MultiSelect
   const optionsWithAll = $derived([
     { label: m.button_label_reset_filter(), value: resetValue },
-    ...filter.options,
+    ...advancedOptions,
   ]);
 </script>
 
-<Filter title={filter.label}>
+<Filter title={filter.advanced.label ?? filter.label}>
   <MultiSelect
     options={optionsWithAll}
     value={selectedValues}

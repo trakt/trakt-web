@@ -50,27 +50,37 @@ export function useFilterSetter() {
       goto(url, { keepFocus: true, replaceState: true });
     },
     syncAdditionalKeys: (filterMap: Record<string, string>) => {
-      const additionalFilters: ApplyFilterToUrlProps[] = [];
+      const filtersToApply: ApplyFilterToUrlProps[] = [];
 
       Object.entries(filterMap).forEach(([key, rawValue]) => {
         const filter = filters.find((f) => f.key === key);
         if (!filter) return;
 
         const additionalKeys = getAdditionalKeys(filter);
-        if (additionalKeys.length === 0) return;
+        const hasAdditionalKeys = additionalKeys.length > 0;
+        const isAdvancedMultiSelect = 'advanced' in filter &&
+          filter.advanced.type === 'multi-select' &&
+          filter.advanced.options != null;
 
-        additionalFilters.push({
-          key: filter.key,
-          additionalKeys,
-          ...parseRawValue(rawValue),
-        });
+        if (!hasAdditionalKeys && !isAdvancedMultiSelect) return;
+
+        if (hasAdditionalKeys) {
+          filtersToApply.push({
+            key: filter.key,
+            additionalKeys,
+            ...parseRawValue(rawValue),
+          });
+          return;
+        }
+
+        filtersToApply.push({ key: filter.key, value: rawValue });
       });
 
-      if (additionalFilters.length === 0) return;
+      if (filtersToApply.length === 0) return;
 
       const url = applyFilterToUrl(
         new URL(globalThis.window.location.href),
-        additionalFilters,
+        filtersToApply,
       );
       goto(url, { keepFocus: true, replaceState: true });
     },

@@ -8451,6 +8451,70 @@
         "android",
         "ios"
       ]
+    },
+    "header_region": {
+      "default": "Region",
+      "description": "Header for the filter that allows users to filter by region such as a continent.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_north_america": {
+      "default": "North America",
+      "description": "Text for the region filter option that includes content from North America.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_europe": {
+      "default": "Europe",
+      "description": "Text for the region filter option that includes content from Europe.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_asia": {
+      "default": "Asia",
+      "description": "Text for the region filter option that includes content from Asia.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_middle_east": {
+      "default": "Middle East",
+      "description": "Text for the region filter option that includes content from the Middle East.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_oceania": {
+      "default": "Oceania",
+      "description": "Text for the region filter option that includes content from Oceania.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_latin_america": {
+      "default": "Latin America",
+      "description": "Text for the region filter option that includes content from Latin America.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "option_text_africa": {
+      "default": "Africa",
+      "description": "Text for the region filter option that includes content from Africa.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

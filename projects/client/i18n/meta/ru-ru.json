@@ -3213,6 +3213,30 @@
     },
     "option_text_certification_unrated": {
       "default": "Без рейтинга"
+    },
+    "header_region": {
+      "default": "Регион"
+    },
+    "option_text_north_america": {
+      "default": "Северная Америка"
+    },
+    "option_text_europe": {
+      "default": "Европа"
+    },
+    "option_text_asia": {
+      "default": "Азия"
+    },
+    "option_text_middle_east": {
+      "default": "Ближний Восток"
+    },
+    "option_text_oceania": {
+      "default": "Океания"
+    },
+    "option_text_latin_america": {
+      "default": "Латинская Америка"
+    },
+    "option_text_africa": {
+      "default": "Африка"
     }
   }
 }

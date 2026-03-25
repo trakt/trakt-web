@@ -9,6 +9,7 @@ import type {
 export enum FilterKey {
   Genres = 'genres',
   Certifications = 'certifications',
+  Countries = 'countries',
   IgnoreWatched = 'ignore_watched',
   IgnoreWatchlisted = 'ignore_watchlisted',
   Streaming = 'watchnow',
