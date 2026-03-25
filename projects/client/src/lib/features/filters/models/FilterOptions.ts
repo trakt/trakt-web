@@ -33,6 +33,8 @@ export type AdvancedSliderOption = SliderOption & MultiKeyFilter;
 
 export type MultiSelectOption = {
   type: 'multi-select';
+  label?: string;
+  options?: ReadonlyArray<FilterOption>;
 };
 
 export type AdvancedOption = AdvancedSliderOption | MultiSelectOption;

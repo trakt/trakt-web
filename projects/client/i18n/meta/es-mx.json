@@ -3213,6 +3213,30 @@
     },
     "option_text_certification_unrated": {
       "default": "Sin clasificación"
+    },
+    "header_region": {
+      "default": "Región"
+    },
+    "option_text_north_america": {
+      "default": "Norteamérica"
+    },
+    "option_text_europe": {
+      "default": "Europa"
+    },
+    "option_text_asia": {
+      "default": "Asia"
+    },
+    "option_text_middle_east": {
+      "default": "Medio Oriente"
+    },
+    "option_text_oceania": {
+      "default": "Oceanía"
+    },
+    "option_text_latin_america": {
+      "default": "Latinoamérica"
+    },
+    "option_text_africa": {
+      "default": "África"
     }
   }
 }

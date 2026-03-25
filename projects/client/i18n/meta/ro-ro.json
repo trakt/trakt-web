@@ -3213,6 +3213,30 @@
     },
     "option_text_certification_unrated": {
       "default": "Neclasificat"
+    },
+    "header_region": {
+      "default": "Regiune"
+    },
+    "option_text_north_america": {
+      "default": "America de Nord"
+    },
+    "option_text_europe": {
+      "default": "Europa"
+    },
+    "option_text_asia": {
+      "default": "Asia"
+    },
+    "option_text_middle_east": {
+      "default": "Orientul Mijlociu"
+    },
+    "option_text_oceania": {
+      "default": "Oceania"
+    },
+    "option_text_latin_america": {
+      "default": "America Latină"
+    },
+    "option_text_africa": {
+      "default": "Africa"
     }
   }
 }

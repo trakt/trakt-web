@@ -8,6 +8,8 @@ import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
 import { toPercentage } from '../../../utils/formatting/number/toPercentage.ts';
+import { generateCountryOptions } from './generateCountryOptions.ts';
+import { generateRegionOptions } from './generateRegionOptions.ts';
 import { generateRuntimeOptions } from './generateRuntimeOptions.ts';
 import { GENRES } from './genres.ts';
 
@@ -162,6 +164,18 @@ const CERTIFICATION_FILTER: Filter = {
   },
 };
 
+const COUNTRY_FILTER: Filter = {
+  label: m.header_region(),
+  key: FilterKey.Countries,
+  type: 'list',
+  options: generateRegionOptions(),
+  advanced: {
+    type: 'multi-select',
+    label: m.header_country(),
+    options: generateCountryOptions(),
+  },
+};
+
 export const FILTERS = [
   GENRE_FILTER,
   STREAMING_FILTER,
@@ -169,6 +183,7 @@ export const FILTERS = [
   RUNTIME_FILTER,
   RATINGS_FILTER,
   CERTIFICATION_FILTER,
+  COUNTRY_FILTER,
   IGNORE_WATCHED_FILTER,
   IGNORE_WATCHLISTED_FILTER,
 ] as const;

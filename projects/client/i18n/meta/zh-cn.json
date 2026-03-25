@@ -3212,6 +3212,30 @@
     },
     "option_text_certification_unrated": {
       "default": "未分级"
+    },
+    "header_region": {
+      "default": "地区"
+    },
+    "option_text_north_america": {
+      "default": "北美"
+    },
+    "option_text_europe": {
+      "default": "欧洲"
+    },
+    "option_text_asia": {
+      "default": "亚洲"
+    },
+    "option_text_middle_east": {
+      "default": "中东"
+    },
+    "option_text_oceania": {
+      "default": "大洋洲"
+    },
+    "option_text_latin_america": {
+      "default": "拉美"
+    },
+    "option_text_africa": {
+      "default": "非洲"
     }
   }
 }
