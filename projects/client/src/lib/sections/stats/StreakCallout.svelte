@@ -8,9 +8,7 @@
 
   const { user } = useUser();
 
-  const { streakCount, streakState, isLoading } = $derived(
-    useStreak({ slug: $user.slug }),
-  );
+  const { streakCount, streakState, isLoading } = $derived(useStreak());
 
   type Tier = {
     emoji: string;
@@ -24,15 +22,51 @@
   };
 
   const tiers: ReadonlyArray<TierDef> = [
-    { threshold: 365, tier: { emoji: "👑", message: m.text_stats_streak_every_single_day() }, exactMessage: m.text_stats_streak_exact_year() },
-    { threshold: 180, tier: { emoji: "🌟", message: m.text_stats_streak_every_single_day() }, exactMessage: m.text_stats_streak_exact_half_year() },
-    { threshold: 90, tier: { emoji: "⚡", message: m.text_stats_streak_others_dream() }, exactMessage: m.text_stats_streak_exact_90() },
-    { threshold: 60, tier: { emoji: "💥", message: m.text_stats_streak_lifestyle() }, exactMessage: m.text_stats_streak_exact_60() },
-    { threshold: 30, tier: { emoji: "💥", message: m.text_stats_streak_no_days_off() }, exactMessage: m.text_stats_streak_exact_month() },
-    { threshold: 14, tier: { emoji: "🔥", message: m.text_stats_streak_locked_in() }, exactMessage: m.text_stats_streak_exact_two_weeks() },
-    { threshold: 7, tier: { emoji: "🔥", message: m.text_stats_streak_keep_fire() }, exactMessage: m.text_stats_streak_exact_week() },
-    { threshold: 3, tier: { emoji: "🔥", message: m.text_stats_streak_habit_forming() }, exactMessage: m.text_stats_streak_exact_three_days() },
-    { threshold: 1, tier: { emoji: "🕯️", message: m.text_stats_streak_keep_going() }, exactMessage: m.text_stats_streak_exact_it_begins() },
+    {
+      threshold: 365,
+      tier: { emoji: "👑", message: m.text_stats_streak_every_single_day() },
+      exactMessage: m.text_stats_streak_exact_year(),
+    },
+    {
+      threshold: 180,
+      tier: { emoji: "🌟", message: m.text_stats_streak_every_single_day() },
+      exactMessage: m.text_stats_streak_exact_half_year(),
+    },
+    {
+      threshold: 90,
+      tier: { emoji: "⚡", message: m.text_stats_streak_others_dream() },
+      exactMessage: m.text_stats_streak_exact_90(),
+    },
+    {
+      threshold: 60,
+      tier: { emoji: "💥", message: m.text_stats_streak_lifestyle() },
+      exactMessage: m.text_stats_streak_exact_60(),
+    },
+    {
+      threshold: 30,
+      tier: { emoji: "💥", message: m.text_stats_streak_no_days_off() },
+      exactMessage: m.text_stats_streak_exact_month(),
+    },
+    {
+      threshold: 14,
+      tier: { emoji: "🔥", message: m.text_stats_streak_locked_in() },
+      exactMessage: m.text_stats_streak_exact_two_weeks(),
+    },
+    {
+      threshold: 7,
+      tier: { emoji: "🔥", message: m.text_stats_streak_keep_fire() },
+      exactMessage: m.text_stats_streak_exact_week(),
+    },
+    {
+      threshold: 3,
+      tier: { emoji: "🔥", message: m.text_stats_streak_habit_forming() },
+      exactMessage: m.text_stats_streak_exact_three_days(),
+    },
+    {
+      threshold: 1,
+      tier: { emoji: "🕯️", message: m.text_stats_streak_keep_going() },
+      exactMessage: m.text_stats_streak_exact_it_begins(),
+    },
   ];
 
   const currentTier = $derived.by(() => {
@@ -44,7 +78,8 @@
     const { threshold, tier, exactMessage } = tierDef;
     return {
       ...tier,
-      message: count === threshold && exactMessage ? exactMessage : tier.message,
+      message:
+        count === threshold && exactMessage ? exactMessage : tier.message,
     };
   });
 
@@ -54,8 +89,8 @@
       : m.text_stats_days_count({ count: String($streakCount) }),
   );
 
-  const hasStreak = $derived(!$isLoading && $streakState !== 'none');
-  const isAtRisk = $derived($streakState === 'at_risk');
+  const hasStreak = $derived(!$isLoading && $streakState !== "none");
+  const isAtRisk = $derived($streakState === "at_risk");
 </script>
 
 {#if $isLoading}
@@ -72,11 +107,15 @@
 
         <div class="trakt-streak-info">
           <p class="trakt-streak-title">
-            <span class="trakt-streak-count">{streakLabel}</span> {m.text_stats_watching_streak()}
+            <span class="trakt-streak-count">{streakLabel}</span>
+            {m.text_stats_watching_streak()}
           </p>
           <p class="trakt-streak-subtitle secondary">
             {#if isAtRisk}
-              <span class="trakt-streak-warning">{m.text_stats_watch_today()}</span> {m.text_stats_keep_streak_alive()}
+              <span class="trakt-streak-warning"
+                >{m.text_stats_watch_today()}</span
+              >
+              {m.text_stats_keep_streak_alive()}
             {:else}
               {currentTier.message}
             {/if}
