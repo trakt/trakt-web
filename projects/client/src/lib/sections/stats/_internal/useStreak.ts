@@ -1,6 +1,6 @@
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { combineLatest, map, shareReplay } from 'rxjs';
-import { useActivityHistory } from './activityHistoryParams.ts';
+import { useActivityHistory } from './useActivityHistory.ts';
 
 export type StreakState = 'active' | 'at_risk' | 'none';
 
