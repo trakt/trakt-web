@@ -110,6 +110,7 @@ module.exports = {
         'social',
         'spoiler',
         'streaming',
+        'stats',
         'summary',
         'tags',
         'team',
