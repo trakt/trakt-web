@@ -29,7 +29,7 @@ function toSubscription(
     renewsAt: mapToDate(response.renewal?.date),
     expiresAt: mapToDate(response.expires_at),
     type: response.type,
-    gateway: response.gateway,
+    gateway: response.gateway === '' ? null : response.gateway,
     isCancelled: response.cancelled,
   };
 }

@@ -12,6 +12,8 @@ const VipTransactionTypeSchema = z.enum([
   'kaleforjustin',
 ]);
 
+const responseGateWaySchema = z.enum([...VipGatewaySchema.options, '']);
+
 const VipRenewalSchema = z.object({
   date: z.string().datetime(),
   plan: z.string().nullable(),
@@ -45,7 +47,7 @@ export const VipSubscriptionResponseSchema = z.object({
   transactions: z.array(VipTransactionSchema),
   vip_signed_up_at: z.string().datetime().nullable(),
   expires_at: z.string().datetime().nullable(),
-  gateway: VipGatewaySchema.nullable(),
+  gateway: responseGateWaySchema.nullable(),
   type: VipTypeSchema.nullable(),
   plan: z.string().nullable(),
   renewal: VipRenewalSchema.optional(),
