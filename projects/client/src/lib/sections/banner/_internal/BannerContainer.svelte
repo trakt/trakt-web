@@ -1,8 +1,11 @@
 <script lang="ts">
-  const { children }: ChildrenProps = $props();
+  const {
+    children,
+    variant = "default",
+  }: ChildrenProps & { variant?: "default" | "fluid" } = $props();
 </script>
 
-<div class="trakt-banner-container">
+<div class="trakt-banner-container" data-variant={variant}>
   <div class="trakt-banner-content">
     {@render children()}
   </div>
@@ -20,5 +23,9 @@
   .trakt-banner-content {
     width: 100%;
     max-width: var(--ni-920);
+  }
+
+  .trakt-banner-container[data-variant="fluid"] .trakt-banner-content {
+    max-width: none;
   }
 </style>
