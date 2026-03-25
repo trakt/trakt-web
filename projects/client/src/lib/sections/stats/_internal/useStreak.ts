@@ -1,6 +1,6 @@
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
-import { combineLatest, map, shareReplay } from 'rxjs';
-import { useActivityHistory } from './useActivityHistory.ts';
+import { map, shareReplay } from 'rxjs';
 
 export type StreakState = 'active' | 'at_risk' | 'none';
 
@@ -9,8 +9,9 @@ type StreakResult = {
   readonly state: StreakState;
 };
 
-type UseStreakProps = {
-  readonly slug: string;
+const emptyStreak: StreakResult = {
+  count: 0,
+  state: 'none',
 };
 
 export function computeStreak(
@@ -18,7 +19,7 @@ export function computeStreak(
   now: Date,
 ): StreakResult {
   if (watchedDates.length === 0) {
-    return { count: 0, state: 'none' };
+    return emptyStreak;
   }
 
   const daysWithActivity = new Set(watchedDates.map(getDayKey));
@@ -29,36 +30,36 @@ export function computeStreak(
     now.getDate(),
   );
 
+  const yesterday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() - 1,
+  );
+
   const hasActivityToday = daysWithActivity.has(getDayKey(today));
+  const hasActivityYesterday = daysWithActivity.has(getDayKey(yesterday));
 
-  let startDate: Date;
-  if (!hasActivityToday) {
-    const yesterday = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate() - 1,
-    );
-
-    if (!daysWithActivity.has(getDayKey(yesterday))) {
-      return { count: 0, state: 'none' };
-    }
-
-    startDate = yesterday;
-  } else {
-    startDate = today;
+  if (!hasActivityToday && !hasActivityYesterday) {
+    return emptyStreak;
   }
 
-  let streakCount = 0;
-  let checkDate = new Date(startDate);
-  for (let i = 0; i < daysWithActivity.size; i++) {
-    if (!daysWithActivity.has(getDayKey(checkDate))) break;
-    streakCount++;
-    checkDate = new Date(
-      checkDate.getFullYear(),
-      checkDate.getMonth(),
-      checkDate.getDate() - 1,
+  const startDate = hasActivityToday ? today : yesterday;
+
+  const sortedDays = [...daysWithActivity].sort().reverse();
+  const previousDays = sortedDays.slice(
+    sortedDays.indexOf(getDayKey(startDate)),
+  );
+
+  const breakIndex = previousDays.findIndex((day, i) => {
+    const expected = new Date(
+      startDate.getFullYear(),
+      startDate.getMonth(),
+      startDate.getDate() - i,
     );
-  }
+    return day !== getDayKey(expected);
+  });
+
+  const streakCount = breakIndex === -1 ? previousDays.length : breakIndex;
 
   return {
     count: streakCount,
@@ -66,29 +67,28 @@ export function computeStreak(
   };
 }
 
-export function useStreak({ slug }: UseStreakProps) {
-  const { movies, shows, isLoadingMovies, isLoadingShows } = useActivityHistory(
-    slug,
-  );
+export function useStreak() {
+  const { history } = useUser();
 
   const now = new Date();
 
-  const streak = combineLatest([movies, shows]).pipe(
-    map(([$movies, $shows]) => {
-      const allDates = [
-        ...$movies.map((m) => m.watchedAt),
-        ...$shows.map((s) => s.watchedAt),
+  const streak = history.pipe(
+    map(($history) => {
+      if (!$history) return null;
+
+      const watchedDates = [
+        ...[...$history.movies.values()].flatMap((m) => m.watchedDates),
+        ...[...$history.shows.values()].flatMap((s) => s.watchedDates),
       ];
-      return computeStreak(allDates, now);
+
+      return computeStreak(watchedDates, now);
     }),
     shareReplay(1),
   );
 
   return {
-    streakCount: streak.pipe(map(($s) => $s.count)),
-    streakState: streak.pipe(map(($s) => $s.state)),
-    isLoading: combineLatest([isLoadingMovies, isLoadingShows]).pipe(
-      map(([$m, $s]) => $m || $s),
-    ),
+    streakCount: streak.pipe(map(($s) => $s?.count ?? 0)),
+    streakState: streak.pipe(map(($s) => $s?.state ?? 'none' as StreakState)),
+    isLoading: streak.pipe(map(($s) => $s === null)),
   };
 }

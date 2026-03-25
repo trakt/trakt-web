@@ -16,7 +16,9 @@ const WatchedMediaSchema = MediaPlayHistorySchema.extend({
   id: z.number(),
 });
 
-const WatchMovieSchema = WatchedMediaSchema;
+const WatchMovieSchema = WatchedMediaSchema.extend({
+  watchedDates: z.array(z.date()),
+});
 export type WatchedMovie = z.infer<typeof WatchMovieSchema>;
 
 function mapWatchedMovieResponse(
@@ -28,6 +30,7 @@ function mapWatchedMovieResponse(
     id: Number(id),
     watchedAt: new Date(lastWatchedAt ?? MAX_DATE),
     plays: timestamps.length,
+    watchedDates: timestamps.map((t) => new Date(t)),
   };
 }
 
@@ -53,6 +56,7 @@ export const WatchedShowSchema = WatchedMediaSchema.extend({
   episodes: z.array(WatchedEpisodeSchema),
   isWatched: z.boolean(),
   isPartiallyWatched: z.boolean(),
+  watchedDates: z.array(z.date()),
 });
 export type WatchedShow = z.infer<typeof WatchedShowSchema>;
 
@@ -89,6 +93,7 @@ function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
     isWatched,
     plays,
     episodes,
+    watchedDates: episodes.map((e) => e.watchedAt),
   };
 }
 

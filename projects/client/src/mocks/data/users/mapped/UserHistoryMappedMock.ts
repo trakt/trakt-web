@@ -9,6 +9,7 @@ export const UserHistoryMappedMock: UserHistory = {
       'id': 916302,
       'plays': 1,
       'watchedAt': new Date('2024-12-27T16:15:28.000Z'),
+      'watchedDates': [new Date('2024-12-27T16:15:28.000Z')],
     }],
   ]),
   shows: new Map([
@@ -74,6 +75,17 @@ export const UserHistoryMappedMock: UserHistory = {
       'isPartiallyWatched': false,
       'plays': 1,
       'watchedAt': new Date('2024-12-27T16:28:32.000Z'),
+      'watchedDates': [
+        new Date('2024-12-27T16:28:32.000Z'),
+        new Date('2024-12-27T16:28:32.000Z'),
+        new Date('2024-12-27T16:28:32.000Z'),
+        new Date('2024-12-27T16:28:32.000Z'),
+        new Date('2024-12-27T16:28:32.000Z'),
+        new Date('2024-12-27T16:28:32.000Z'),
+        new Date('2024-12-27T16:28:32.000Z'),
+        new Date('2024-12-27T16:28:32.000Z'),
+        new Date('2024-12-27T16:28:32.000Z'),
+      ],
     }],
     [180770, {
       episodes: [
@@ -89,6 +101,7 @@ export const UserHistoryMappedMock: UserHistory = {
       'isPartiallyWatched': true,
       'plays': 0,
       'watchedAt': new Date('2024-12-27T16:13:42.000Z'),
+      'watchedDates': [new Date('2024-12-27T16:13:42.000Z')],
     }],
   ]),
 };
