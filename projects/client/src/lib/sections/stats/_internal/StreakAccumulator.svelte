@@ -31,39 +31,25 @@
   );
 </script>
 
-<div class="trakt-streak-accumulator">
-  {#if monthCount > 0}
-    <Tooltip content={monthLabel} variant="compact">
+{#snippet streakGroup(count: number, label: string, type: "month" | "week" | "day")}
+  {#if count > 0}
+    <Tooltip content={label} variant="compact">
       <div class="trakt-streak-group">
-        {#each Array.from({ length: monthCount }) as _, i (i)}
-          <div class="trakt-streak-square month"></div>
-        {/each}
-      </div>
-    </Tooltip>
-  {/if}
-
-  {#if weekCount > 0}
-    <Tooltip content={weekLabel} variant="compact">
-      <div class="trakt-streak-group">
-        {#each Array.from({ length: weekCount }) as _, i (i)}
-          <div class="trakt-streak-square week"></div>
-        {/each}
-      </div>
-    </Tooltip>
-  {/if}
-
-  {#if dayCount > 0}
-    <Tooltip content={dayLabel} variant="compact">
-      <div class="trakt-streak-group">
-        {#each Array.from({ length: dayCount }) as _, i (i)}
+        {#each Array.from({ length: count }) as _, i (i)}
           <div
-            class="trakt-streak-square day"
-            class:today={active && i === dayCount - 1}
+            class="trakt-streak-square {type}"
+            class:today={type === "day" && active && i === count - 1}
           ></div>
         {/each}
       </div>
     </Tooltip>
   {/if}
+{/snippet}
+
+<div class="trakt-streak-accumulator">
+  {@render streakGroup(monthCount, monthLabel, "month")}
+  {@render streakGroup(weekCount, weekLabel, "week")}
+  {@render streakGroup(dayCount, dayLabel, "day")}
 
   {#if !active}
     <Tooltip content={m.text_stats_watch_today()} variant="compact">
