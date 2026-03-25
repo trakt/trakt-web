@@ -1,4 +1,4 @@
-type FilterParam = {
+export type FilterParam = {
   /*
       FIXME:
       -split up and have strongly typed key/value pairs
