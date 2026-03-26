@@ -14,6 +14,14 @@ import './test/mocks/scrollTo.mock.ts';
 import './test/mocks/state.mock.ts';
 import './test/mocks/variables.mock.ts';
 
+// jsdom does not implement Blob.prototype.arrayBuffer
+// (used by file-based parsers before passing the buffer to mocked unzipSync)
+if (!Blob.prototype.arrayBuffer) {
+  Blob.prototype.arrayBuffer = function () {
+    return Promise.resolve(new ArrayBuffer(0));
+  };
+}
+
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import process from 'node:process';
 import { afterAll, afterEach, beforeAll, vi } from 'vitest';
