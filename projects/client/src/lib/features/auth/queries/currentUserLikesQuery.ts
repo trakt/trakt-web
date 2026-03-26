@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { z } from 'zod';
 
 const UserLikesSchema = z.object({
@@ -31,15 +32,18 @@ export const currentUserLikesQuery = defineQuery({
   request: currentUserListLikesRequest,
   invalidations: [InvalidateAction.List.Like],
   dependencies: [],
-  mapper: (response) => {
-    return {
-      lists: toMap(
-        response.body,
-        (entry) => ({ id: entry.list.id }),
-        (entry) => entry.id,
-      ),
-    };
-  },
+  mapper: (response) => ({
+    lists: toMap(
+      response.body,
+      (entry) => ({
+        id: assertDefined(
+          'id' in entry.list ? entry.list.id : undefined,
+          'List id is missing in likes response.',
+        ),
+      }),
+      (mapped) => mapped.id,
+    ),
+  }),
   schema: UserLikesSchema,
   ttl: Infinity,
 });

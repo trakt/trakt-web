@@ -9,7 +9,7 @@ export function checkinEpisodeRequest(
 ): Promise<boolean> {
   return api({ fetch })
     .checkin
-    .show({
+    .start({
       body,
     })
     .then(({ status }) => status === 201);
