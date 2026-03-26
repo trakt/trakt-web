@@ -11,6 +11,7 @@ import {
 } from '$lib/requests/models/NowPlayingItem.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { WatchingResponse } from '@trakt/api';
+import { assertDefined } from '../../../utils/assert/assertDefined.ts';
 
 type UserProfileParams = { slug: string } & ApiParams;
 
@@ -32,17 +33,30 @@ function mapToNowPlayingItem(response: WatchingResponse): NowPlayingItem {
   };
 
   if (response.type === 'episode') {
+    const show = assertDefined(
+      response.show,
+      'Show entry is missing in watching response.',
+    );
+    const episode = assertDefined(
+      response.episode,
+      'Episode entry is missing in watching response.',
+    );
     return {
       ...commonProps,
-      show: mapToShowEntry(response.show),
-      media: mapToEpisodeEntry(response.episode),
+      show: mapToShowEntry(show),
+      media: mapToEpisodeEntry(episode),
       type: 'episode',
     };
   }
 
   return {
     ...commonProps,
-    media: mapToMovieEntry(response.movie),
+    media: mapToMovieEntry(
+      assertDefined(
+        response.movie,
+        'Movie entry is missing in watching response.',
+      ),
+    ),
     type: 'movie',
   };
 }

@@ -10,7 +10,7 @@ export function checkinMovieRequest(
 ): Promise<boolean> {
   return api({ fetch })
     .checkin
-    .movie({
+    .start({
       body,
     })
     .then(({ status }) => status === 201);
