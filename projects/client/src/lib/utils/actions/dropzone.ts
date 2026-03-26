@@ -1,7 +1,13 @@
-export function dropzone(element: HTMLElement) {
+interface DropzoneParams {
+  accept?: string;
+  multiple?: boolean;
+}
+
+export function dropzone(element: HTMLElement, params?: DropzoneParams) {
   const input = document.createElement('input');
   input.type = 'file';
-  input.accept = 'image/*';
+  input.accept = params?.accept ?? 'image/*';
+  input.multiple = params?.multiple ?? false;
   input.style.display = 'none';
   input.setAttribute('aria-hidden', 'true');
 
@@ -64,6 +70,10 @@ export function dropzone(element: HTMLElement) {
   element.addEventListener('drop', handleDrop);
 
   return {
+    update(newParams?: DropzoneParams) {
+      input.accept = newParams?.accept ?? 'image/*';
+      input.multiple = newParams?.multiple ?? false;
+    },
     destroy() {
       input.removeEventListener('change', propagateChangeEvent);
       element.removeEventListener('click', triggerFileInput);
