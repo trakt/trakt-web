@@ -18,12 +18,7 @@
   const { show, intl, studios, crew, seasons, streamOn, isLoading, sentiment } =
     $derived(useShow(params.slug));
 
-  const videos = $derived(
-    useShowVideos({
-      slug: params.slug,
-      seasons: ($seasons ?? []).map((season) => season.number),
-    }),
-  );
+  const videos = $derived(useShowVideos({ slug: params.slug }));
 
   const currentSeason = $derived(
     parseInt(page.url.searchParams.get("season") ?? ""),

@@ -3,6 +3,6 @@
  *
  * This function is a workaround for the issue where ts-rest ignores falsy path params.
  */
-export function castNumberAsString(value: number): number {
+export function castNumberAsString(value: number | 'all'): number {
   return `${value}` as unknown as number;
 }
