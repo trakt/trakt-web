@@ -89,7 +89,7 @@ describe('createMarkerFetch', () => {
     await markerFetch('https://api.example.com/data');
 
     expect(mockFetch).toHaveBeenCalledWith(
-      'https://api.example.com/data',
+      'https://api.example.com/data?marker=12345',
       undefined,
     );
   });
