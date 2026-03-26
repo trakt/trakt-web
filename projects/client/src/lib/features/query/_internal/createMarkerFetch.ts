@@ -1,3 +1,5 @@
+const defaultMethod = 'GET';
+
 export function createMarkerFetch<T extends typeof fetch>(
   marker: string | null,
   baseFetch?: T,
@@ -12,7 +14,7 @@ export function createMarkerFetch<T extends typeof fetch>(
       return fetchImpl(input, init);
     }
 
-    const method = init?.method?.toUpperCase();
+    const method = (init?.method ?? defaultMethod).toUpperCase();
 
     if (method === 'GET') {
       const [path, queryString] = input.split('?');
