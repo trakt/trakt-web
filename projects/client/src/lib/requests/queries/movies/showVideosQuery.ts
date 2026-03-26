@@ -1,18 +1,17 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaVideoSchema } from '$lib/requests/models/MediaVideo.ts';
-import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { VideoResponse } from '@trakt/api';
+import { castNumberAsString } from '../../../utils/requests/castNumberAsString.ts';
 import { mapToMediaVideo } from '../../_internal/mapToMediaVideo.ts';
 
 type ShowVideosParams = {
   slug: string;
-  seasons: number[];
 } & ApiParams;
 
 const showVideoRequest = (
-  { fetch, slug, seasons }: ShowVideosParams,
+  { fetch, slug }: ShowVideosParams,
 ) => {
   const showVideos = api({ fetch })
     .shows
@@ -22,27 +21,20 @@ const showVideoRequest = (
       },
     });
 
-  const seasonVideos = seasons.map((season) =>
-    api({ fetch })
-      .shows
-      .season
-      .videos({
-        params: {
-          id: slug,
-          season: castNumberAsString(season),
-        },
-      })
-  );
+  const allSeasonVideos = api({ fetch })
+    .shows
+    .season
+    .videos({
+      params: {
+        id: slug,
+        season: castNumberAsString('all'),
+      },
+    });
 
-  return Promise.all([showVideos, ...seasonVideos])
-    .then((responses) => {
-      const [showResponse, ...seasonResponses] = responses;
-
+  return Promise.all([showVideos, allSeasonVideos])
+    .then(([showResponse, seasonResponse]) => {
       if (
-        showResponse.status !== 200 ||
-        seasonResponses.some((response) =>
-          response.status !== 200 && response.status !== 404
-        )
+        showResponse.status !== 200 || seasonResponse.status !== 200
       ) {
         return {
           body: [],
@@ -53,7 +45,7 @@ const showVideoRequest = (
       return {
         body: [
           showResponse.body,
-          ...seasonResponses.map((response) => response.body),
+          seasonResponse.body,
         ].flat() as VideoResponse[],
         status: 200,
       };
@@ -63,10 +55,7 @@ const showVideoRequest = (
 export const showVideosQuery = defineQuery({
   key: 'showVideos',
   invalidations: [],
-  dependencies: (params) => [
-    params.slug,
-    ...params.seasons,
-  ],
+  dependencies: (params) => [params.slug],
   request: showVideoRequest,
   mapper: (response) => {
     const seen = new Set<string>();

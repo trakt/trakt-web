@@ -227,21 +227,12 @@ export const shows = [
     },
   ),
   http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/videos`,
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/all/videos`,
     () => {
-      return HttpResponse.json(ShowSiloVideoResponseMock);
-    },
-  ),
-  http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/1/videos`,
-    () => {
-      return HttpResponse.json(ShowSiloVideoSeason1ResponseMock);
-    },
-  ),
-  http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/2/videos`,
-    () => {
-      return HttpResponse.json(ShowSiloVideoSeason2ResponseMock);
+      return HttpResponse.json([
+        ...ShowSiloVideoSeason1ResponseMock,
+        ...ShowSiloVideoSeason2ResponseMock,
+      ]);
     },
   ),
 ];
