@@ -6541,6 +6541,246 @@
         "ios"
       ]
     },
+    "header_import": {
+      "default": "Import",
+      "description": "Header for the settings section that allows users to import their data from third-party services.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_import": {
+      "default": "Import your data from other services directly in your browser.",
+      "description": "Description for the import settings section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_source_imdb": {
+      "default": "IMDb",
+      "description": "Import source label for IMDb.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_source_letterboxd": {
+      "default": "Letterboxd",
+      "description": "Import source label for Letterboxd.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_source_tvtime": {
+      "default": "TV Time",
+      "description": "Import source label for TV Time.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_source_json": {
+      "default": "JSON File",
+      "description": "Import source label for a generic Trakt JSON export file.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_source_csv": {
+      "default": "CSV File",
+      "description": "Import source label for a generic Trakt CSV export file.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_drop_csv": {
+      "default": "Drop CSV files here or click to upload.",
+      "description": "Prompt shown in the dropzone to upload CSV files for import.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_drop_json": {
+      "default": "Drop a JSON file here or click to upload.",
+      "description": "Prompt shown in the dropzone to upload a JSON file for import.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_drop_zip": {
+      "default": "Drop a ZIP file here or click to upload.",
+      "description": "Prompt shown in the dropzone to upload a ZIP file for import.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_max_files": {
+      "default": "(max {count} files allowed)",
+      "description": "Hint shown below the dropzone indicating the maximum number of files allowed.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_status_parsing": {
+      "default": "Parsing your data\u2026",
+      "description": "Status text shown while the import file is being parsed.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_status_syncing": {
+      "default": "Syncing {processed} / {total} items\u2026",
+      "description": "Status text shown while items are being synced to Trakt.",
+      "variables": {
+        "processed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_status_error": {
+      "default": "Import failed: {message}",
+      "description": "Status text shown when the import encounters a fatal error.",
+      "variables": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_summary_history": {
+      "default": "{count} items for History",
+      "description": "Summary line showing the number of history items found in the import file.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_summary_watchlist": {
+      "default": "{count} items for Watchlist",
+      "description": "Summary line showing the number of watchlist items found in the import file.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_summary_ratings": {
+      "default": "{count} ratings",
+      "description": "Summary line showing the number of ratings found in the import file.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_complete_synced": {
+      "default": "{count} items synced successfully.",
+      "description": "Text shown at the end of a successful import showing the count of synced items.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_complete_errors": {
+      "default": "{count} items failed.",
+      "description": "Text shown at the end of an import to indicate a partial failure count.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_start_import": {
+      "default": "Start Import",
+      "description": "Text for the button that begins the import process.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_start_import": {
+      "default": "Start importing your data into Trakt.",
+      "description": "Aria-label for the start import button.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_import_more": {
+      "default": "Import more",
+      "description": "Text for the button that resets the import flow to start a new import.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_import_more": {
+      "default": "Reset and start a new import.",
+      "description": "Aria-label for the import more button.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Your import exceeds the free tier limit. Upgrade to VIP to import all {count} items.",
+      "description": "Warning shown when a non-VIP user tries to import more items than the free tier allows.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "button_text_track": {
       "default": "Track",
       "description": "Do not translate this.",

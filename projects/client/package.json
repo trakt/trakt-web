@@ -49,6 +49,7 @@
     "@vitest/coverage-istanbul": "4.1.0",
     "concurrently": "9.2.1",
     "cross-env": "10.1.0",
+    "@types/papaparse": "^5.3.15",
     "esbuild": "^0.27.4",
     "eslint": "10.0.0",
     "eslint-plugin-svelte": "3.15.0",
@@ -97,6 +98,7 @@
     "workbox-routing": "7.4.0",
     "workbox-strategies": "7.4.0",
     "zod": "3.25.76",
-    "zod-to-json-schema": "3.25.1"
+    "zod-to-json-schema": "3.25.1",
+    "papaparse": "^5.4.1"
   }
 }
