@@ -1,6 +1,7 @@
 <script lang="ts">
   import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import { useActiveLink } from "$lib/stores/useActiveLink";
+  import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { disableNavigation } from "$lib/utils/actions/disableNavigation";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
   import { useGuardedHref } from "../../features/auth/stores/useGuardedHref";
@@ -17,6 +18,7 @@
     style = "flat",
     navigationType,
     disabled,
+    classList = "",
     ...props
   }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
 
@@ -40,6 +42,7 @@
     use:triggerWithKeyboard
     use:appendGlobalParameters={href}
     use:disableNavigation={rest.disabled}
+    use:appendClassList={classList}
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     data-sveltekit-replacestate={replacestate}
@@ -58,6 +61,7 @@
   </a>
 {:else}
   <button
+    use:appendClassList={classList}
     class="trakt-action-button trakt-button-link"
     aria-label={label}
     data-color={color}

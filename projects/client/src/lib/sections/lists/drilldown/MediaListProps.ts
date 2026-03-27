@@ -14,6 +14,7 @@ export type MediaListProps<T, M> = {
   empty?: Snippet;
   metaInfo?: Snippet;
   drilldownLink?: string;
+  noscroll?: boolean;
   variant?: 'portrait' | 'landscape';
   titleAction?: Snippet;
 } & FilterParams;

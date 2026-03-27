@@ -29,6 +29,7 @@
 
   const commonProps = $derived({
     href: buildDrawerLink(Drawers.Details),
+    noscroll: true,
     label: m.button_label_details({ title }),
     onclick,
   });

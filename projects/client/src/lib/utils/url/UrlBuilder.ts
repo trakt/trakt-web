@@ -176,6 +176,16 @@ export const UrlBuilder = {
     `/people/${id}${buildParamString(positions ?? {})}`,
   episode: (id: string, season: number, episode: number) =>
     `/shows/${id}/seasons/${season}/episodes/${episode}`,
+  related: {
+    movie: (slug: string) => `/movies/${slug}/related`,
+    show: (slug: string) => `/shows/${slug}/related`,
+    episode: (slug: string, season: number, episode: number) =>
+      `/shows/${slug}/seasons/${season}/episodes/${episode}/related`,
+  },
+  popularLists: {
+    movie: (slug: string) => `/movies/${slug}/lists`,
+    show: (slug: string) => `/shows/${slug}/lists`,
+  },
   profile: {
     user: (username: string) => `/profile/${username}`,
     me: () => UrlBuilder.profile.user('me'),

@@ -4,9 +4,14 @@
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import SeasonList from "$lib/sections/lists/season/SeasonList.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
+  import {
+    Drawers,
+    summaryDrawerNavigation,
+  } from "./_internal/summaryDrawerNavigation";
   import SummaryCover from "./components/_internal/SummaryCover.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import EpisodeSummary from "./components/episode/EpisodeSummary.svelte";
@@ -24,16 +29,25 @@
     crew,
   }: EpisodeSummaryProps = $props();
 
+  const { buildDrawerLink } = summaryDrawerNavigation();
+  const castDrawerLink = $derived(buildDrawerLink(Drawers.Cast));
+  const relatedLink = $derived(
+    UrlBuilder.related.episode(show.slug, episode.season, episode.number),
+  );
+
   const posterSrc = $derived(
     useEpisodeSpoilerImage({ episode, show, variant: "default" }),
   );
 
-  const networks = $derived((() => {
-    const seasonNetwork = seasons
-      .find((s) => s.number === episode.season)?.network;
-    const name = seasonNetwork ?? show.network;
-    return name ? [{ name }] : [];
-  })());
+  const networks = $derived(
+    (() => {
+      const seasonNetwork = seasons.find(
+        (s) => s.number === episode.season,
+      )?.network;
+      const name = seasonNetwork ?? show.network;
+      return name ? [{ name }] : [];
+    })(),
+  );
 </script>
 
 <!-- 
@@ -87,6 +101,7 @@
   cast={crew.cast}
   slug={show.slug}
   type="show"
+  drilldownLink={castDrawerLink}
 />
 
 <Comments
@@ -103,6 +118,7 @@
   title={m.list_title_related_shows()}
   slug={show.slug}
   type="show"
+  drilldownLink={relatedLink}
 />
 
 <SummaryDrawer {crew} {episode} {show} {networks} type="episode" />
