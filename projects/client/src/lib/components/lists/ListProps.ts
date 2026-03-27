@@ -8,4 +8,5 @@ export type ListProps<T> = {
   ctaItem?: Snippet;
   actions?: Snippet;
   drilldownLink?: string;
+  noscroll?: boolean;
 };

@@ -38,6 +38,7 @@
     metaInfo,
     actions,
     drilldownLink,
+    noscroll,
     headerNavigationType,
     subtitle,
     variant = "default",
@@ -100,6 +101,7 @@
         {subtitle}
         {titleAction}
         {metaInfo}
+        {noscroll}
         actions={isCollapsed ? undefined : actions}
         navigationType={headerNavigationType}
         href={drilldownLink}

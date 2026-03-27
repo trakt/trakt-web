@@ -6,6 +6,9 @@ const VIEW_PARAM = 'view';
 export enum Drawers {
   Sentiment = 'sentiment',
   Details = 'details',
+  Cast = 'cast',
+  Videos = 'videos',
+  Related = 'related',
 }
 
 function mapToDrawer(value: string | Nil) {
@@ -14,6 +17,12 @@ function mapToDrawer(value: string | Nil) {
       return Drawers.Sentiment;
     case Drawers.Details:
       return Drawers.Details;
+    case Drawers.Cast:
+      return Drawers.Cast;
+    case Drawers.Videos:
+      return Drawers.Videos;
+    case Drawers.Related:
+      return Drawers.Related;
     default:
       return null;
   }

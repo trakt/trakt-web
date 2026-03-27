@@ -10,6 +10,10 @@
   import RelatedList from "../lists/RelatedList.svelte";
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
+  import {
+    Drawers,
+    summaryDrawerNavigation,
+  } from "./_internal/summaryDrawerNavigation";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
@@ -18,6 +22,11 @@
   import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
   import SummaryDrawer from "./SummaryDrawer.svelte";
+
+  const { buildDrawerLink } = summaryDrawerNavigation();
+  const castDrawerLink = $derived(buildDrawerLink(Drawers.Cast));
+  const videosDrawerLink = $derived(buildDrawerLink(Drawers.Videos));
+  const relatedDrawerLink = $derived(buildDrawerLink(Drawers.Related));
 
   const {
     media,
@@ -35,7 +44,7 @@
   } & CommonMediaSummaryProps = $props();
 </script>
 
-<SummaryDrawer {sentiment} {studios} {crew} {media} type="movie" />
+<SummaryDrawer {sentiment} {studios} {crew} {media} {videos} type="movie" />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <MediaSummaryV2 {media} {studios} {crew} {intl} type="movie" />
@@ -62,16 +71,18 @@
   cast={crew.cast}
   slug={media.slug}
   type={media.type}
+  drilldownLink={castDrawerLink}
 />
 
 <Comments {media} type="movie" />
 
-<VideoList slug={media.slug} {videos} />
+<VideoList slug={media.slug} {videos} drilldownLink={videosDrawerLink} />
 
 <RelatedList
   title={m.list_title_related_movies()}
   slug={media.slug}
   type="movie"
+  drilldownLink={relatedDrawerLink}
 />
 
 <!-- TODO: move back to designed position when we have faster queries -->

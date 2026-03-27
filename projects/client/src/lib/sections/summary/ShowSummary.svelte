@@ -12,6 +12,10 @@
   import SeasonList from "../lists/season/SeasonList.svelte";
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
+  import {
+    Drawers,
+    summaryDrawerNavigation,
+  } from "./_internal/summaryDrawerNavigation";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
@@ -42,15 +46,31 @@
     sentiment,
   }: ShowSummaryProps = $props();
 
+  const { buildDrawerLink } = summaryDrawerNavigation();
+  const castDrawerLink = $derived(buildDrawerLink(Drawers.Cast));
+  const videosDrawerLink = $derived(buildDrawerLink(Drawers.Videos));
+  const relatedDrawerLink = $derived(buildDrawerLink(Drawers.Related));
+
   const networks = $derived(
-    [...new Set(
-      [media.network, ...seasons.map((s) => s.network)]
-        .filter((n): n is string => n != null),
-    )].map((name) => ({ name })),
+    [
+      ...new Set(
+        [media.network, ...seasons.map((s) => s.network)].filter(
+          (n): n is string => n != null,
+        ),
+      ),
+    ].map((name) => ({ name })),
   );
 </script>
 
-<SummaryDrawer {sentiment} {studios} {crew} {media} {networks} type="show" />
+<SummaryDrawer
+  {sentiment}
+  {studios}
+  {crew}
+  {media}
+  {networks}
+  {videos}
+  type="show"
+/>
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <MediaSummaryV2 {media} {studios} {intl} {crew} type="show" />
@@ -77,11 +97,12 @@
   cast={crew.cast}
   slug={media.slug}
   type={media.type}
+  drilldownLink={castDrawerLink}
 />
 
 <Comments {media} type="show" />
 
-<VideoList slug={media.slug} {videos} />
+<VideoList slug={media.slug} {videos} drilldownLink={videosDrawerLink} />
 
 <SeasonList show={media} {seasons} {currentSeason} />
 
@@ -89,6 +110,7 @@
   title={m.list_title_related_shows()}
   slug={media.slug}
   type="show"
+  drilldownLink={relatedDrawerLink}
 />
 
 <!-- TODO: move back to designed position when we have faster queries -->

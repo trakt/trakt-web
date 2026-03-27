@@ -52,6 +52,7 @@
       <ViewAllButton
         href={buildDrawerLink(Drawers.Sentiment)}
         label={m.button_label_view_sentiment_analysis()}
+        noscroll
         source={{ id: "sentiment" }}
       />
     {/snippet}
