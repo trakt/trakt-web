@@ -3378,6 +3378,9 @@
     },
     "text_vip_recurring_biyearly": {
       "default": "以降は2年ごとに{price}"
+    },
+    "header_total_runtime": {
+      "default": "総再生時間"
     }
   }
 }

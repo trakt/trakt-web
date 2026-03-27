@@ -3378,6 +3378,9 @@
     },
     "text_vip_recurring_biyearly": {
       "default": "далее по {price} каждые 2 года"
+    },
+    "header_total_runtime": {
+      "default": "Общая продолжительность"
     }
   }
 }

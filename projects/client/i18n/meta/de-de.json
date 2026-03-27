@@ -3291,6 +3291,9 @@
     },
     "vip_feature_title_profile_customisation": {
       "default": "Mehr Anpassung: Profil-Header"
+    },
+    "header_total_runtime": {
+      "default": "Gesamtlaufzeit"
     }
   },
   "vip_feature_description_profile_customisation": {

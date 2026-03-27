@@ -3378,6 +3378,9 @@
     },
     "text_vip_recurring_biyearly": {
       "default": "{price} hvert 2. år derefter"
+    },
+    "header_total_runtime": {
+      "default": "Samlet spilletid"
     }
   }
 }

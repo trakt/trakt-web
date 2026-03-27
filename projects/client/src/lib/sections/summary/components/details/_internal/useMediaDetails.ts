@@ -11,6 +11,7 @@ import type {
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { MediaNetwork } from '$lib/requests/models/MediaNetwork.ts';
 import type { MediaStudio } from '$lib/requests/models/MediaStudio.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { isMaxDate } from '$lib/utils/date/isMaxDate.ts';
 import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
@@ -75,6 +76,23 @@ function networks(entries: MediaNetwork[] | undefined) {
   return {
     title: m.header_network(),
     values: entries?.map((network) => network.name),
+  };
+}
+
+function totalRuntime(show: ShowEntry): MediaDetail {
+  const totalMinutes = show.totalRuntime;
+
+  if (!Number.isFinite(totalMinutes) || totalMinutes <= 0) {
+    return { title: m.header_total_runtime() };
+  }
+
+  const duration = toHumanDuration({ minutes: totalMinutes }, languageTag());
+  const count = show.episode.count;
+  const episodes = m.tag_text_number_of_episodes({ count });
+
+  return {
+    title: m.header_total_runtime(),
+    values: [`${duration} (${episodes})`],
   };
 }
 
@@ -189,10 +207,15 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
     ];
   }
 
+  const totalRuntimeDetails = props.type === 'show'
+    ? [totalRuntime(props.media as ShowEntry)]
+    : [];
+
   return [
     mediaAirDate(props.media),
     mediaStatus(props.media),
     runtime(props.media),
+    ...totalRuntimeDetails,
     networks(props.networks),
     ...mainCredits(props.type, props.crew),
     ...metaDetails(props.media, props.studios),

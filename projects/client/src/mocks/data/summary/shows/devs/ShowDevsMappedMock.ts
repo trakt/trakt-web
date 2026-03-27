@@ -66,4 +66,5 @@ export const ShowDevsMappedMock: ShowEntry = {
   'episode': {
     'count': 8,
   },
+  'totalRuntime': 416,
 };

@@ -61,4 +61,5 @@ export const ShowSiloMappedMock: ShowEntry = {
   'episode': {
     'count': 15,
   },
+  'totalRuntime': 900,
 };

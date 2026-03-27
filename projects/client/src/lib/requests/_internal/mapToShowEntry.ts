@@ -20,6 +20,10 @@ export function mapToShowEntry(
     ...(show.images?.thumb ?? []),
   );
 
+  const runtime = show.runtime ?? NaN;
+  const episodeCount = show.aired_episodes ?? NaN;
+  const totalRuntime = show.total_runtime ?? (runtime * episodeCount);
+
   return {
     id: show.ids.trakt,
     key: `show-${show.ids.trakt}`,
@@ -27,7 +31,7 @@ export function mapToShowEntry(
     type: 'show',
     title: show.title,
     originalTitle: show.original_title,
-    runtime: show.runtime ?? NaN,
+    runtime,
     year: show.year,
     tagline: show.tagline ?? '',
     country: show.country,
@@ -56,8 +60,9 @@ export function mapToShowEntry(
     plexSlug: show.ids.plex?.slug,
     postCredits: [],
     episode: {
-      count: show.aired_episodes ?? NaN,
+      count: episodeCount,
     },
+    totalRuntime,
     rating: mapToTraktRating(show.rating),
     network: show.network,
   };

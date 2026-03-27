@@ -3378,6 +3378,9 @@
     },
     "text_vip_recurring_biyearly": {
       "default": "далі {price} кожні 2 роки"
+    },
+    "header_total_runtime": {
+      "default": "Загальна тривалість"
     }
   }
 }

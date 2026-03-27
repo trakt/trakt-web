@@ -6,8 +6,8 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPeopleMappedMock.ts';
 import { MovieHereticStudiosMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticStudiosMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
-import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
 import { ShowSiloNetworksMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloNetworksMappedMock.ts';
+import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
 import { ShowSiloStudiosMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloStudiosMappedMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { screen, waitFor } from '@testing-library/svelte';
@@ -199,6 +199,41 @@ describe('MediaDetails', () => {
 
         expect(networkLabel).toBeInTheDocument();
         expect(networkValue).toBeInTheDocument();
+      });
+    });
+
+    it('should display the total runtime for a show', async () => {
+      renderComponent(
+        MediaDetails,
+        { props: defaultProps },
+      );
+
+      await waitFor(() => {
+        const totalRuntimeLabel = screen.getByText('Total Runtime');
+        const totalRuntimeValue = screen.getByText('15h (15 eps.)');
+
+        expect(totalRuntimeLabel).toBeInTheDocument();
+        expect(totalRuntimeValue).toBeInTheDocument();
+      });
+    });
+
+    it('should hide total runtime when data is unavailable', async () => {
+      renderComponent(
+        MediaDetails,
+        {
+          props: {
+            ...defaultProps,
+            media: {
+              ...defaultProps.media,
+              totalRuntime: NaN,
+            },
+          },
+        },
+      );
+
+      await waitFor(() => {
+        const totalRuntimeLabel = screen.queryByText('Total Runtime');
+        expect(totalRuntimeLabel).not.toBeInTheDocument();
       });
     });
 
