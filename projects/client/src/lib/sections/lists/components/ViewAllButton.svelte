@@ -30,6 +30,7 @@
   {label}
   {size}
   {...rest}
+  classList="trakt-view-all-button"
   style="ghost"
   onclick={(e) => {
     track({ source: source.id, type: source.type });

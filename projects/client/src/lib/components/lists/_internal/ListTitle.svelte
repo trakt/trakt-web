@@ -7,10 +7,12 @@
     metaInfo,
     style,
     href,
+    noscroll,
   }: {
     title: string;
     metaInfo?: Snippet;
     href?: string;
+    noscroll?: boolean;
     style: "primary" | "secondary";
   } = $props();
 </script>
@@ -23,7 +25,7 @@
 
 <div class="trakt-list-title">
   {#if href}
-    <Link {href}>{@render content()}</Link>
+    <Link {href} {noscroll}>{@render content()}</Link>
   {:else}
     {@render content()}
   {/if}

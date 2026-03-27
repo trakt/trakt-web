@@ -46,8 +46,19 @@
   --height-landscape-card-cover: calc(var(--width-landscape-card) / 1.786);
   --height-landscape-card: calc(var(--height-landscape-card-cover) + var(--height-card-footer));
 
-  --width-person-card: var(--ni-120);
-  --height-person-card-cover: var(--ni-176);
+  --min-person-card-width: var(--ni-120);
+  --max-list-person-item-count: 15;
+
+  --list-person-item-count: var(--max-list-person-item-count);
+  @include dynamic-item-count(--list-person-item-count,
+    var(--min-person-card-width),
+    var(--max-list-person-item-count));
+
+  --width-person-card: var(--min-person-card-width);
+  @include dynamic-card-width(--width-person-card,
+    var(--min-person-card-width),
+    var(--list-person-item-count));
+  --height-person-card-cover: calc(var(--width-person-card) * 176 / 120);
   --height-person-card: calc(var(--height-person-card-cover) + var(--height-card-footer));
 
   --width-summary-card: var(--ni-276);
@@ -69,7 +80,18 @@
 
   --height-list-card: var(--ni-256);
 
-  --width-comment-card: min(var(--ni-480), 85vw);
+  --min-comment-card-width: var(--ni-340);
+  --max-list-comment-item-count: 5;
+
+  --list-comment-item-count: var(--max-list-comment-item-count);
+  @include dynamic-item-count(--list-comment-item-count,
+    var(--min-comment-card-width),
+    var(--max-list-comment-item-count));
+
+  --width-comment-card: var(--min-comment-card-width);
+  @include dynamic-card-width(--width-comment-card,
+    var(--min-comment-card-width),
+    var(--list-comment-item-count));
   --height-comment-card: var(--ni-172);
 
   --width-trivia-card: min(var(--ni-480), 85vw);
@@ -101,20 +123,16 @@
     Profile items use gap: 0, so item count and width are calculated
     without subtracting list-gap (unlike media card lists).
   */
-  --list-profile-item-count: clamp(
-    1,
-    round(down, var(--list-inner-width) / var(--min-profile-item-width), 1),
-    var(--max-list-profile-item-count)
-  );
+  --list-profile-item-count: clamp(1,
+      round(down, var(--list-inner-width) / var(--min-profile-item-width), 1),
+      var(--max-list-profile-item-count));
 
   @supports (-moz-appearance: none) {
     --list-profile-item-count: var(--max-list-profile-item-count);
   }
 
-  --width-profile-item: max(
-    calc(var(--list-inner-width) / var(--list-profile-item-count)),
-    var(--min-profile-item-width)
-  );
+  --width-profile-item: max(calc(var(--list-inner-width) / var(--list-profile-item-count)),
+    var(--min-profile-item-width));
   --height-profile-item: calc(var(--width-profile-item) * 1.2);
 
   @include for-tablet-sm-and-below {

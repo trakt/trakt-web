@@ -38,6 +38,7 @@
     metaInfo,
     actions,
     drilldownLink,
+    noscroll,
     headerNavigationType,
     subtitle,
     variant = "default",
@@ -90,6 +91,7 @@
   class:section-list-container-mounted={$isMounted}
   class:section-list-container-no-header={!isHeaderVisible}
   class:section-list-has-drilldown={Boolean(drilldownLink)}
+  class:section-list-has-multiple-items={items.length > 1}
   data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
   data-variant={variant}
 >
@@ -100,6 +102,7 @@
         {subtitle}
         {titleAction}
         {metaInfo}
+        {noscroll}
         actions={isCollapsed ? undefined : actions}
         navigationType={headerNavigationType}
         href={drilldownLink}
@@ -253,7 +256,8 @@
     }
   }
 
-  .section-list-container.section-list-has-drilldown {
+  .section-list-has-multiple-items.section-list-has-drilldown,
+  .section-list-has-multiple-items:has(:global(.trakt-view-all-button)) {
     .section-list-horizontal-scroll {
       overflow-x: hidden;
       mask-image: linear-gradient(

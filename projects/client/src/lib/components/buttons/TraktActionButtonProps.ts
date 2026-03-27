@@ -6,4 +6,5 @@ export type TraktActionButtonProps = ButtonProps & {
   size?: 'normal' | 'small';
   style?: 'flat' | 'ghost';
   navigationType?: DpadNavigationType;
+  classList?: string;
 };

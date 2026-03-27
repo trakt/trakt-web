@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Preview from "$lib/components/badge/Preview.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import ListSummaryItem from "$lib/sections/lists/components/list-summary/ListSummaryItem.svelte";
+  import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import UserList from "$lib/sections/lists/user/UserList.svelte";
   import { MAX_LISTS } from "./_internal/constants.ts";
   import { useListSummary } from "./useListSummary.ts";
@@ -13,19 +13,14 @@
     slug,
     type,
     title,
-  }: { slug: string; type: MediaType; title: string } = $props();
+    drilldownLink,
+  }: { slug: string; type: MediaType; title: string; drilldownLink?: string } =
+    $props();
 
   // Due to slow performance, we fetch the lists here instead of useMovie/useShow
-  const { isLoading, personalLists, officialLists } = $derived(
-    useListSummary({
-      slug,
-      type,
-    }),
-  );
+  const { isLoading, list } = $derived(useListSummary({ slug, type }));
 
-  const lists = $derived(
-    [...$officialLists, ...$personalLists].slice(0, MAX_LISTS),
-  );
+  const lists = $derived($list.slice(0, MAX_LISTS));
   const topList = $derived(lists.at(0));
 </script>
 
@@ -40,6 +35,7 @@
     id={`popular-lists-list-${slug}`}
     items={lists}
     title={m.list_title_popular_lists()}
+    {drilldownLink}
     --height-list="var(--height-lists-list)"
   >
     {#snippet item(list)}
@@ -53,7 +49,12 @@
     {/snippet}
 
     {#snippet actions()}
-      <Preview />
+      <ViewAllButton
+        href={drilldownLink}
+        label={m.button_text_view_all()}
+        source={{ id: "popular-lists" }}
+        disabled={lists.length === 0}
+      />
     {/snippet}
   </SectionList>
 </RenderFor>
