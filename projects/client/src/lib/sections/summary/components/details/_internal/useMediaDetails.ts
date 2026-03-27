@@ -182,6 +182,7 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
   if (props.type === 'episode') {
     return [
       episodeAirDate(props.episode),
+      networks(props.networks),
       runtime(props.episode),
       ...mainCredits(props.type, props.crew),
       postCredits(props.episode),

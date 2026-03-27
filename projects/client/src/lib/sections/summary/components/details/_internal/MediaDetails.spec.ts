@@ -224,6 +224,7 @@ describe('MediaDetails', () => {
     const defaultProps: MediaDetailsProps = {
       episode: EpisodeSiloMappedMock,
       crew: EpisodeSiloPeopleMappedMock,
+      networks: ShowSiloNetworksMappedMock,
       type: 'episode',
       show: ShowSiloMappedMock,
     };
@@ -246,6 +247,21 @@ describe('MediaDetails', () => {
         expect(creatorLabel).not.toBeInTheDocument();
         expect(airedLabel).toBeInTheDocument();
         expect(runtimeLabel).toBeInTheDocument();
+      });
+    });
+
+    it('should display the network from the show', async () => {
+      renderComponent(
+        MediaDetails,
+        { props: defaultProps },
+      );
+
+      await waitFor(() => {
+        const networkLabel = screen.getByText('Network');
+        const networkValue = screen.getByText('Apple TV+');
+
+        expect(networkLabel).toBeInTheDocument();
+        expect(networkValue).toBeInTheDocument();
       });
     });
 
