@@ -54,7 +54,19 @@
   --height-summary-card-cover: var(--ni-208);
   --height-summary-card: var(--height-summary-card-cover);
 
-  --width-list-card: var(--ni-480);
+  --min-list-card-width: var(--ni-340);
+  --max-list-summary-item-count: 5;
+
+  --list-summary-item-count: var(--max-list-summary-item-count);
+  @include dynamic-item-count(--list-summary-item-count,
+    var(--min-list-card-width),
+    var(--max-list-summary-item-count));
+
+  --width-list-card: var(--min-list-card-width);
+  @include dynamic-card-width(--width-list-card,
+    var(--min-list-card-width),
+    var(--list-summary-item-count));
+
   --height-list-card: var(--ni-256);
 
   --width-comment-card: min(var(--ni-480), 85vw);
