@@ -105,6 +105,7 @@
       id={`personal-lists-${type}-list`}
       items={$lists}
       {title}
+      drilldownLink={UrlBuilder.lists.all(slug, type)}
       --height-list="var(--height-lists-list)"
       --height-override-list={$lists.length === 0
         ? "var(--height-poster-list-sm)"
