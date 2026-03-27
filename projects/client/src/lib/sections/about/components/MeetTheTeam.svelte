@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import { useTraktTeam } from "$lib/features/team/useTraktTeam.ts";
-  import TeamMemberCard from "./TeamMemberCard.svelte";
+  import ProfileCard from "$lib/sections/profile/components/ProfileCard.svelte";
 
   const { isLoading, team } = useTraktTeam([]);
 
@@ -14,7 +14,7 @@
   {#if !$isLoading}
     <div class="team-grid">
       {#each $team as member (member.username)}
-        <TeamMemberCard {member} />
+        <ProfileCard profile={member} />
       {/each}
     </div>
   {:else}
