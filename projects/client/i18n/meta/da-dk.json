@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "Netværk"
+    },
+    "header_total_runtime": {
+      "default": "Samlet spilletid"
+    },
+    "text_episode_count_one": {
+      "default": "{count} afsnit"
+    },
+    "text_episode_count_other": {
+      "default": "{count} afsnit"
     }
   }
 }

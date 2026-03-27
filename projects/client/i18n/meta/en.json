@@ -986,6 +986,31 @@
       "description": "Header for the network section.",
       "exclude": []
     },
+    "header_total_runtime": {
+      "default": "Total Runtime",
+      "description": "Header for the total runtime section. Shows the total time to watch all aired episodes of a show.",
+      "exclude": []
+    },
+    "text_episode_count_one": {
+      "default": "{count} episode",
+      "description": "Singular text for the number of episodes (exactly 1).",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": []
+    },
+    "text_episode_count_other": {
+      "default": "{count} episodes",
+      "description": "Plural text for the number of episodes (0 or more than 1).",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": []
+    },
     "header_country": {
       "default": "Country",
       "description": "Header for the country section.",

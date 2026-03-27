@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "Мрежа"
+    },
+    "header_total_runtime": {
+      "default": "Общо времетраене"
+    },
+    "text_episode_count_one": {
+      "default": "{count} епизод"
+    },
+    "text_episode_count_other": {
+      "default": "{count} епизода"
     }
   }
 }

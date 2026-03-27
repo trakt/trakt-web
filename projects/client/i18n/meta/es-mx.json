@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "Red"
+    },
+    "header_total_runtime": {
+      "default": "Duración total"
+    },
+    "text_episode_count_one": {
+      "default": "{count} episodio"
+    },
+    "text_episode_count_other": {
+      "default": "{count} episodios"
     }
   }
 }

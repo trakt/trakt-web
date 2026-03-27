@@ -202,6 +202,41 @@ describe('MediaDetails', () => {
       });
     });
 
+    it('should display the total runtime for a show', async () => {
+      renderComponent(
+        MediaDetails,
+        { props: defaultProps },
+      );
+
+      await waitFor(() => {
+        const totalRuntimeLabel = screen.getByText('Total Runtime');
+        const totalRuntimeValue = screen.getByText('15h (15 episodes)');
+
+        expect(totalRuntimeLabel).toBeInTheDocument();
+        expect(totalRuntimeValue).toBeInTheDocument();
+      });
+    });
+
+    it('should hide total runtime when data is unavailable', async () => {
+      renderComponent(
+        MediaDetails,
+        {
+          props: {
+            ...defaultProps,
+            media: {
+              ...defaultProps.media,
+              totalRuntime: NaN,
+            },
+          },
+        },
+      );
+
+      await waitFor(() => {
+        const totalRuntimeLabel = screen.queryByText('Total Runtime');
+        expect(totalRuntimeLabel).not.toBeInTheDocument();
+      });
+    });
+
     it('should display the creator instead of director', async () => {
       renderComponent(
         MediaDetails,
