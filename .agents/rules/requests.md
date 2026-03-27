@@ -289,8 +289,7 @@ Leave `invalidations: []` for queries that never need external cache busting.
 
 | Data freshness                    | Value                                    |
 | --------------------------------- | ---------------------------------------- |
-| Very stable (people, studios)     | `time.days(7)`                           |
-| Stable (summaries, translations)  | `time.days(1)`                           |
+| Stable (summaries, translations)  | `time.hours(12)`                         |
 | Normal (lists, ratings)           | `time.hours(3)` or `time.hours(6)`       |
 | Frequently changing               | `time.minutes(30)` or `time.minutes(15)` |
 | Real-time (watchers, now playing) | `time.minutes(5)` or lower               |

@@ -5,6 +5,7 @@ import type { ReactedCommentResponse } from '@trakt/api';
 import { reactionsSchema } from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
+import { time } from '../../../utils/timing/time.ts';
 
 const UserReactionsSchema = z.map(
   z.number(),
@@ -46,5 +47,5 @@ export const currentUserCommentReactionsQuery = defineQuery({
       (entry) => entry.id,
     ),
   schema: UserReactionsSchema,
-  ttl: Infinity,
+  ttl: time.hours(12),
 });

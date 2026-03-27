@@ -79,5 +79,5 @@ export const showVideosQuery = defineQuery({
       });
   },
   schema: MediaVideoSchema.array(),
-  ttl: time.days(1),
+  ttl: time.hours(12),
 });

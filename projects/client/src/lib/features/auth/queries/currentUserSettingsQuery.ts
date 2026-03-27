@@ -17,6 +17,7 @@ import {
   upNextSortOptionSchema,
 } from '@trakt/api';
 import { z } from 'zod';
+import { time } from '../../../utils/timing/time.ts';
 import { Theme } from '../../theme/models/Theme.ts';
 
 export const UserSettingsSchema = z.object({
@@ -191,5 +192,5 @@ export const currentUserSettingsQuery = defineQuery({
   request: currentUserRequest,
   mapper: (response) => mapUserSettingsResponse(response.body),
   schema: UserSettingsSchema,
-  ttl: Infinity,
+  ttl: time.hours(12),
 });

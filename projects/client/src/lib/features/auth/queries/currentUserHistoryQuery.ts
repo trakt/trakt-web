@@ -5,6 +5,7 @@ import type { WatchedShowsResponse } from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
 import { MAX_DATE } from '../../../utils/constants.ts';
+import { time } from '../../../utils/timing/time.ts';
 
 export const MediaPlayHistorySchema = z.object({
   watchedAt: z.date(),
@@ -148,5 +149,5 @@ export const currentUserHistoryQuery = defineQuery({
     return { movies, shows, lastWatchedAt };
   },
   schema: UserHistorySchema,
-  ttl: Infinity,
+  ttl: time.hours(12),
 });

@@ -4,6 +4,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { z } from 'zod';
+import { time } from '../../../utils/timing/time.ts';
 
 const UserLikesSchema = z.object({
   lists: z.map(
@@ -45,5 +46,5 @@ export const currentUserLikesQuery = defineQuery({
     ),
   }),
   schema: UserLikesSchema,
-  ttl: Infinity,
+  ttl: time.hours(12),
 });

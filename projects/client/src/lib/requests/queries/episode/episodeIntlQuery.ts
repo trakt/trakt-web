@@ -55,6 +55,6 @@ export const episodeIntlQuery = defineQuery({
   request: episodeIntlRequest,
   mapper: (response) => response.body.map(mapEpisodeIntlResponse),
   schema: z.array(EpisodeIntlSchema),
-  ttl: time.days(1),
+  ttl: time.hours(12),
   enabled: (params) => params.enabled,
 });

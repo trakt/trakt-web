@@ -5,6 +5,7 @@ import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { WatchNowSourceResponse } from '@trakt/api';
 import { z } from 'zod';
+import { time } from '../../../utils/timing/time.ts';
 import {
   type StreamingSource,
   StreamingSourceSchema,
@@ -67,5 +68,5 @@ export const streamingSourcesQuery = defineQuery({
       return countrySources?.map(mapStreamingSourceResponse) ?? [];
     }, (_, entry) => extractCountryCode(entry)),
   schema: StreamingSourceListSchema,
-  ttl: Infinity,
+  ttl: time.hours(12),
 });
