@@ -3240,6 +3240,18 @@
     },
     "header_network": {
       "default": "Мрежа"
+    },
+    "page_title_favorites": {
+      "default": "Любими"
+    },
+    "page_title_social": {
+      "default": "Социални"
+    },
+    "button_label_view_all_favorites": {
+      "default": "Виж всички любими"
+    },
+    "button_label_view_all_social": {
+      "default": "Виж всички социални връзки"
     }
   }
 }

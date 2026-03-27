@@ -73,10 +73,10 @@ export const users = [
   http.get('http://localhost/users/me/ratings/episodes', () => {
     return HttpResponse.json(RatedEpisodesResponseMock);
   }),
-  http.get('http://localhost/users/me/favorites/movies/rank', () => {
+  http.get('http://localhost/users/me/favorites/movies*', () => {
     return HttpResponse.json(FavoritedMoviesResponseMock);
   }),
-  http.get('http://localhost/users/me/favorites/shows/rank', () => {
+  http.get('http://localhost/users/me/favorites/shows*', () => {
     return HttpResponse.json(FavoritedShowsResponseMock);
   }),
   http.get('http://localhost/users/me/history/shows*', () => {

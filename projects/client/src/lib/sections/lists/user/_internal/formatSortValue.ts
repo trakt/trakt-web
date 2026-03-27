@@ -1,4 +1,5 @@
 import * as m from '$lib/features/i18n/messages.ts';
+import type { FavoritedEntry } from '$lib/requests/models/FavoritedEntry.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import { getLocale, languageTag } from '../../../../features/i18n/index.ts';
 import { isMaxDate } from '../../../../utils/date/isMaxDate.ts';
@@ -7,7 +8,17 @@ import { toHumanDuration } from '../../../../utils/formatting/date/toHumanDurati
 import { toTraktRating } from '../../../../utils/formatting/number/toTraktRating.ts';
 import type { SortBy } from '../models/SortBy.ts';
 
-function getEntry(item: ListItem) {
+export type SortInput = ListItem | FavoritedEntry;
+
+function isFavorited(item: SortInput): item is FavoritedEntry {
+  return 'favoritedAt' in item;
+}
+
+function getAddedAt(item: SortInput): Date {
+  return isFavorited(item) ? item.favoritedAt : item.listedAt;
+}
+
+function getListItemEntry(item: ListItem) {
   switch (item.type) {
     case 'movie':
     case 'show':
@@ -19,7 +30,14 @@ function getEntry(item: ListItem) {
   }
 }
 
-function getRuntime(item: ListItem) {
+function getRuntimeMinutes(item: SortInput): number {
+  if (isFavorited(item)) {
+    const { item: media } = item;
+    return 'episode' in media
+      ? media.runtime * media.episode.count
+      : media.runtime;
+  }
+
   switch (item.type) {
     case 'movie':
       return item.entry.runtime;
@@ -32,29 +50,37 @@ function getRuntime(item: ListItem) {
   }
 }
 
-export function formatSortValue(item: ListItem, sortBy?: SortBy) {
+function getAirDate(item: SortInput): Date {
+  if (isFavorited(item)) return item.item.airDate;
+  return getListItemEntry(item).airDate;
+}
+
+function getRating(item: SortInput): number | null | undefined {
+  if (isFavorited(item)) return item.item.rating;
+  return getListItemEntry(item).rating;
+}
+
+export function formatSortValue(item: SortInput, sortBy?: SortBy) {
   if (!sortBy) {
     return;
   }
 
   switch (sortBy) {
     case 'added':
-      return toHumanDay(item.listedAt, getLocale(), 'short');
+      return toHumanDay(getAddedAt(item), getLocale(), 'short');
     case 'runtime': {
-      const runtime = getRuntime(item);
+      const runtime = getRuntimeMinutes(item);
       return toHumanDuration({ minutes: runtime }, languageTag());
     }
     case 'released': {
-      const entry = getEntry(item);
-      return isMaxDate(entry.airDate)
+      const airDate = getAirDate(item);
+      return isMaxDate(airDate)
         ? m.tag_text_tba()
-        : toHumanDay(entry.airDate, getLocale(), 'short');
+        : toHumanDay(airDate, getLocale(), 'short');
     }
     case 'percentage': {
-      const entry = getEntry(item);
-      return entry.rating
-        ? `${toTraktRating(entry.rating, getLocale())}`
-        : undefined;
+      const rating = getRating(item);
+      return rating ? `${toTraktRating(rating, getLocale())}` : undefined;
     }
   }
 }

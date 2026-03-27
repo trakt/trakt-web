@@ -38,6 +38,9 @@ type UseListSortingProps = {
   type?: MediaType;
 } | {
   type: 'watchlist';
+} | {
+  type: 'favorites';
+  slug: string;
 };
 
 export function useListSorting(
@@ -57,9 +60,10 @@ export function useListSorting(
     options: LIST_SORT_OPTIONS,
     current: params.pipe(
       map(($params) => {
-        const defaultDirection = props.type === 'watchlist'
-          ? 'desc'
-          : props.list.sortHow;
+        const defaultDirection =
+          props.type === 'watchlist' || props.type === 'favorites'
+            ? 'desc'
+            : props.list.sortHow;
         const sortBy = mapToSortBy($params.sort_by);
         const sortHow = mapToDirection($params.sort_how) ?? defaultDirection;
 
@@ -76,6 +80,15 @@ export function useListSorting(
     urlBuilder: ({ sortBy, sortHow }: ListUrlBuilderParams) => {
       if (props.type === 'watchlist') {
         return getListUrl({ type: 'watchlist', sortBy, sortHow });
+      }
+
+      if (props.type === 'favorites') {
+        return getListUrl({
+          type: 'favorites',
+          slug: props.slug,
+          sortBy,
+          sortHow,
+        });
       }
 
       const { list, type } = props;

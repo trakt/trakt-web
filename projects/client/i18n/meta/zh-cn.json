@@ -3239,6 +3239,18 @@
     },
     "header_network": {
       "default": "电视网"
+    },
+    "page_title_favorites": {
+      "default": "最爱"
+    },
+    "page_title_social": {
+      "default": "社交"
+    },
+    "button_label_view_all_favorites": {
+      "default": "查看所有最爱"
+    },
+    "button_label_view_all_social": {
+      "default": "查看所有社交联系"
     }
   }
 }

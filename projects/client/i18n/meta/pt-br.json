@@ -3240,6 +3240,18 @@
     },
     "header_network": {
       "default": "Rede"
+    },
+    "page_title_favorites": {
+      "default": "Favoritos"
+    },
+    "page_title_social": {
+      "default": "Social"
+    },
+    "button_label_view_all_favorites": {
+      "default": "Ver todos os favoritos dignos de maratona!"
+    },
+    "button_label_view_all_social": {
+      "default": "Ver todas as suas conexões e parças!"
     }
   }
 }

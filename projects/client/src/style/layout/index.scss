@@ -82,8 +82,33 @@
 
   --width-cta-list-placeholder-card: calc(100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance));
 
-  --width-profile-item: var(--ni-80);
-  --height-profile-item: var(--ni-96);
+  --min-profile-item-width: var(--ni-80);
+  --max-list-profile-item-count: 20;
+
+  /*
+    Profile items use gap: 0, so item count and width are calculated
+    without subtracting list-gap (unlike media card lists).
+  */
+  --list-profile-item-count: clamp(
+    1,
+    round(down, var(--list-inner-width) / var(--min-profile-item-width), 1),
+    var(--max-list-profile-item-count)
+  );
+
+  @supports (-moz-appearance: none) {
+    --list-profile-item-count: var(--max-list-profile-item-count);
+  }
+
+  --width-profile-item: max(
+    calc(var(--list-inner-width) / var(--list-profile-item-count)),
+    var(--min-profile-item-width)
+  );
+  --height-profile-item: calc(var(--width-profile-item) * 1.2);
+
+  @include for-tablet-sm-and-below {
+    --width-profile-item: var(--min-profile-item-width);
+    --height-profile-item: calc(var(--min-profile-item-width) * 1.2);
+  }
 
   --width-where-to-watch-item: var(--ni-96);
   --height-where-to-watch-item: var(--ni-96);

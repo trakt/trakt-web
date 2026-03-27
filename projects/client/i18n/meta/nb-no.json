@@ -3240,6 +3240,18 @@
     },
     "header_network": {
       "default": "Nettverk"
+    },
+    "page_title_favorites": {
+      "default": "Favoritter"
+    },
+    "page_title_social": {
+      "default": "Sosialt"
+    },
+    "button_label_view_all_favorites": {
+      "default": "Se alle favoritter"
+    },
+    "button_label_view_all_social": {
+      "default": "Se alle sosiale forbindelser"
     }
   }
 }

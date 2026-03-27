@@ -26,7 +26,7 @@
     color="inherit"
   >
     <ProfileImage
-      --image-size="var(--ni-64)"
+      --image-size="calc(var(--width-profile-item) * 0.8)"
       --border-width="var(--border-thickness-xs)"
       name={profile.name.first}
       src={profile.avatar.url}

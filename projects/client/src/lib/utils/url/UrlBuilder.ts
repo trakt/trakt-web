@@ -179,6 +179,12 @@ export const UrlBuilder = {
   profile: {
     user: (username: string) => `/profile/${username}`,
     me: () => UrlBuilder.profile.user('me'),
+    favorites: (username: string, params: Record<string, string> = {}) =>
+      `/profile/${username}/favorites${
+        buildParamString(sanitizeParams(params))
+      }`,
+    history: (username: string) => `/profile/${username}/history`,
+    social: (username: string) => `/profile/${username}/social`,
   },
   users: (id: string) => ({
     lists: (slug: string, params: Record<string, string> = {}) =>

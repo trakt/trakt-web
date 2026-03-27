@@ -3240,6 +3240,18 @@
     },
     "header_network": {
       "default": "Red"
+    },
+    "page_title_favorites": {
+      "default": "Favoritos"
+    },
+    "page_title_social": {
+      "default": "Social"
+    },
+    "button_label_view_all_favorites": {
+      "default": "Ver todos los favoritos"
+    },
+    "button_label_view_all_social": {
+      "default": "Ver todas las conexiones sociales"
     }
   }
 }
