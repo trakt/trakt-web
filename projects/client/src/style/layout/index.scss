@@ -124,7 +124,7 @@
   --layout-scrollbar-width: var(--ni-8);
   --layout-footer-less-padding: var(--ni-8);
 
-  --list-header-gap: var(--gap-micro);
+  --list-header-gap: var(--gap-xs);
   --list-gap: var(--gap-s);
   @include adaptive-gap(--list-gap);
 
