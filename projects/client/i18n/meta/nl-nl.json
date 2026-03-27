@@ -2605,12 +2605,6 @@
     "text_vip_costs_infrastructure": {
       "default": "Servers en infrastructuur die Trakt snel en betrouwbaar houden."
     },
-    "text_vip_costs_moderation": {
-      "default": "Moderatie en tools om de community veilig en gastvrij te houden."
-    },
-    "text_vip_costs_independence": {
-      "default": "Trakt onafhankelijk, duurzaam en gericht op gebruikers houden."
-    },
     "text_vip_join_now_tagline": {
       "default": "Je hebt alleen het oppervlak nog maar gezien."
     },
@@ -3276,6 +3270,114 @@
     },
     "button_label_sort_title": {
       "default": "Sorteer alfabetisch"
+    },
+    "text_vip_powers_trakt": {
+      "default": "helpt Trakt draaiende te houden en ontgrendelt functies voor mensen die echt geven om wat ze kijken."
+    },
+    "vip_feature_title_recaps": {
+      "default": "Meer overzichten: maandelijks & jaarlijks"
+    },
+    "vip_feature_description_recaps": {
+      "default": "Krijg diepere inzichten met uitgebreide maand- en jaaroverzichten van alles wat je hebt gezien, beoordeeld en ontdekt."
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "Wereldwijd 'Waar te kijken'"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "Zie waar series en films overal ter wereld beschikbaar zijn om te streamen, niet alleen in jouw regio."
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "Grotere Watchlist"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "Breid je watchlist uit om zonder beperkingen alles bij te houden wat je nog wilt zien."
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "Grotere Bibliotheek"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "Sla meer van je kijkgeschiedenis op met uitgebreide limieten die een leven lang meegaan."
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "Meer aanpassingen: Profielbanner"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "Personaliseer je profiel met eigen banners en maak je Trakt-profiel uniek."
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "Plex vaker synchroniseren"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "Houd je Plex-bibliotheek perfect synchroon met frequentere automatische updates gedurende de dag."
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "Meer streamingdiensten synchroniseren"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "Koppel en synchroniseer met extra streamingplatforms om je voortgang op alle diensten bij te houden."
+    },
+    "vip_feature_title_more_lists": {
+      "default": "Meer lijsten"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "Maak nog meer persoonlijke lijsten om je series en films precies zo te organiseren als jij wilt."
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "Meer info: Sentiment + Trivia"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "Ontgrendel gedetailleerde sentimentanalyses en boeiende trivia over de films en series die je kijkt."
+    },
+    "vip_feature_title_api_apps": {
+      "default": "Meer API-apps gekoppeld"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "Koppel meer apps en diensten van derden via de Trakt-API voor een nog betere ervaring."
+    },
+    "vip_feature_title_private_notes": {
+      "default": "Meer privénotities"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "Voeg veel meer persoonlijke notities toe aan je series en films om je gedachten en aanbevelingen nooit te vergeten."
+    },
+    "vip_feature_title_support": {
+      "default": "Betere support: Forum & Feedback"
+    },
+    "vip_feature_description_support": {
+      "default": "Krijg prioriteitstoegang tot onze supportforums en zorg dat je feedback direct door het team wordt gehoord."
+    },
+    "text_vip_built_to_last": {
+      "default": "Gebouwd voor de lange termijn"
+    },
+    "text_vip_costs_metadata": {
+      "default": "Actuele metadata, afbeeldingen en ondertiteling"
+    },
+    "text_vip_costs_clients": {
+      "default": "Ondersteuning voor alle officiële en externe Trakt-apps"
+    },
+    "text_vip_billing_now": {
+      "default": "{price} nu gefactureerd"
+    },
+    "text_vip_discount_then_price": {
+      "default": "daarna {price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "{price} voor de 1e maand, daarna"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "{price} voor het 1e jaar, daarna"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "{price} voor de eerste 2 jaar, daarna"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "daarna elke maand {price}"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "daarna elk jaar {price}"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "daarna elke 2 jaar {price}"
     }
   }
 }

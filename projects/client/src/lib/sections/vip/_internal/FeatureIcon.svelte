@@ -13,11 +13,10 @@
     width: var(--ni-36);
     height: var(--ni-36);
 
-    background: color-mix(in srgb, var(--color-text-primary) 15%, transparent);
+    background: color-mix(in srgb, var(--red-500) 15%, transparent);
 
-    border-radius: 50%;
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--color-text-primary) 20%, transparent);
+    border-radius: var(--border-radius-m);
+    border: var(--ni-1) solid color-mix(in srgb, var(--red-500) 25%, transparent);
 
     :global(svg) {
       width: var(--ni-20);

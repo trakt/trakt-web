@@ -2605,12 +2605,6 @@
     "text_vip_costs_infrastructure": {
       "default": "Serwery i infrastrukturę, dzięki którym Trakt jest szybki i niezawodny."
     },
-    "text_vip_costs_moderation": {
-      "default": "Moderację i narzędzia dbające o bezpieczeństwo społeczności."
-    },
-    "text_vip_costs_independence": {
-      "default": "Utrzymanie niezależności Trakt i skupienie na potrzebach użytkowników."
-    },
     "text_vip_join_now_tagline": {
       "default": "Widziałeś tylko powierzchnię."
     },
@@ -3276,6 +3270,114 @@
     },
     "button_label_sort_title": {
       "default": "Sortuj alfabetycznie"
+    },
+    "text_vip_powers_trakt": {
+      "default": "wspiera rozwój Trakta i odblokowuje funkcje dla tych, którzy naprawdę żyją tym, co oglądają."
+    },
+    "vip_feature_title_recaps": {
+      "default": "Więcej podsumowań: miesiąc i rok"
+    },
+    "vip_feature_description_recaps": {
+      "default": "Zyskaj wgląd w swoją historię dzięki szczegółowym podsumowaniom. Zobacz wszystko, co udało Ci się obejrzeć, ocenić i odkryć – od niszowych perełek po blockbustery."
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "Globalne „Gdzie obejrzeć”"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "Sprawdź, gdzie seriale i filmy są dostępne na całym świecie. Twoje poszukiwania nie kończą się na lokalnym podwórku."
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "Większe „Do obejrzenia”"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "Powiększ swoją listę do obejrzenia i śledź wszystko bez żadnych limitów. Twoja kolejka nigdy nie była tak długa!"
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "Większa Biblioteka"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "Zapisz jeszcze więcej historii oglądania. Rozszerzone limity biblioteki pomieszczą Twoje seanse na całe lata."
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "Nagłówek profilu"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "Spersonalizuj swój profil dzięki własnym nagłówkom. Niech Twój profil wygląda tak stylowo, jak kadry u Kieślowskiego."
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "Częstsza synchronizacja Plex"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "Utrzymuj bibliotekę Plex w idealnym porządku dzięki częstszym automatycznym aktualizacjom w ciągu dnia."
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "Więcej serwisów VOD"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "Łącz się i synchronizuj z dodatkowymi platformami, aby śledzić postępy we wszystkich serwisach naraz."
+    },
+    "vip_feature_title_more_lists": {
+      "default": "Więcej list"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "Twórz jeszcze więcej własnych list, aby porządkować swoje seriale i filmy dokładnie tak, jak lubisz."
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "Nastroje i ciekawostki"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "Odblokuj szczegółową analizę nastrojów oraz fascynujące ciekawostki o filmach i serialach, które oglądasz."
+    },
+    "vip_feature_title_api_apps": {
+      "default": "Więcej aplikacji API"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "Połącz więcej zewnętrznych aplikacji i usług poprzez API Trakt, aby jeszcze bardziej ułatwić sobie życie kinomana."
+    },
+    "vip_feature_title_private_notes": {
+      "default": "Prywatne notatki"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "Dodawaj mnóstwo osobistych notatek do seriali i filmów, by zapamiętać swoje wrażenia i polecenia dla znajomych."
+    },
+    "vip_feature_title_support": {
+      "default": "Priorytetowe wsparcie"
+    },
+    "vip_feature_description_support": {
+      "default": "Zyskaj priorytetowy dostęp do forum i spraw, by Twój głos dotarł bezpośrednio do twórców aplikacji."
+    },
+    "text_vip_built_to_last": {
+      "default": "Stworzone na lata"
+    },
+    "text_vip_costs_metadata": {
+      "default": "Aktualne metadane, zdjęcia i napisy"
+    },
+    "text_vip_costs_clients": {
+      "default": "Wsparcie dla wszystkich aplikacji Trakt (oficjalnych i zewnętrznych)"
+    },
+    "text_vip_billing_now": {
+      "default": "{price} płatne teraz"
+    },
+    "text_vip_discount_then_price": {
+      "default": "potem {price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "{price} za 1. miesiąc, potem"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "{price} za 1. rok, potem"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "{price} za 2 lata, potem"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "{price} miesięcznie w kolejnych okresach"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "{price} rocznie w kolejnych okresach"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "{price} co 2 lata w kolejnych okresach"
     }
   }
 }

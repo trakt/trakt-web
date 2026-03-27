@@ -2605,12 +2605,6 @@
     "text_vip_costs_infrastructure": {
       "default": "Серверы и инфраструктуру для быстрой работы Trakt."
     },
-    "text_vip_costs_moderation": {
-      "default": "Модерацию для безопасности и уюта сообщества."
-    },
-    "text_vip_costs_independence": {
-      "default": "Независимость Trakt и фокус на пользователях."
-    },
     "text_vip_join_now_tagline": {
       "default": "Вы видели только поверхность."
     },
@@ -3276,6 +3270,114 @@
     },
     "button_label_sort_title": {
       "default": "Сортировать по алфавиту"
+    },
+    "text_vip_powers_trakt": {
+      "default": "помогает развивать Trakt и открывает функции для тех, кто серьезно относится к просмотру."
+    },
+    "vip_feature_title_recaps": {
+      "default": "Больше итогов: месяц и год"
+    },
+    "vip_feature_description_recaps": {
+      "default": "Погрузитесь в детали с полными итогами месяца и года: всё, что вы смотрели, оценивали и открывали для себя. Никаких спойлеров к вашей жизни!"
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "Где смотреть: по всему миру"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "Узнайте, где доступны сериалы и фильмы по всему миру, а не только в вашем регионе. Настоящая мультивселенная стриминга."
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "Расширенный Watchlist"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "Расширьте свой список «к просмотру», чтобы следить за всем интересным без ограничений."
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "Огромная библиотека"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "Сохраняйте еще больше истории просмотров с расширенными лимитами библиотеки, которых хватит на всю жизнь."
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "Кастомизация: шапка профиля"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "Сделайте профиль уникальным с помощью кастомных обложек — пусть ваш Trakt выглядит как настоящий постер."
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "Частая синхронизация Plex"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "Поддерживайте библиотеку Plex в идеальном порядке благодаря частым автоматическим обновлениям в течение дня."
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "Синхронизация сервисов"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "Подключайте и синхронизируйте данные с другими платформами, чтобы учитывать просмотры на всех сервисах."
+    },
+    "vip_feature_title_more_lists": {
+      "default": "Больше списков"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "Создавайте ещё больше списков, чтобы упорядочить сериалы и фильмы именно так, как вам удобно."
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "Больше инфо: Тренды и Факты"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "Откройте детальный анализ настроений и любопытные факты о фильмах и сериалах, которые вы смотрите."
+    },
+    "vip_feature_title_api_apps": {
+      "default": "Больше API-приложений"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "Подключайте больше сторонних приложений и сервисов через API Trakt для расширения возможностей."
+    },
+    "vip_feature_title_private_notes": {
+      "default": "Больше личных заметок"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "Добавляйте гораздо больше личных заметок к сериалам и фильмам, чтобы не забыть свои мысли и рекомендации."
+    },
+    "vip_feature_title_support": {
+      "default": "Поддержка: Форум и Отзывы"
+    },
+    "vip_feature_description_support": {
+      "default": "Получите приоритетный доступ к форумам поддержки, чтобы команда услышала ваши отзывы напрямую."
+    },
+    "text_vip_built_to_last": {
+      "default": "Создано надолго"
+    },
+    "text_vip_costs_metadata": {
+      "default": "Актуальные метаданные, постеры и субтитры"
+    },
+    "text_vip_costs_clients": {
+      "default": "Поддержка всех официальных и сторонних клиентов Trakt"
+    },
+    "text_vip_billing_now": {
+      "default": "{price} к оплате сейчас"
+    },
+    "text_vip_discount_then_price": {
+      "default": "затем {price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "{price} за 1-й месяц, затем"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "{price} за 1-й год, затем"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "{price} за 2 года, затем"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "далее по {price} каждый месяц"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "далее по {price} каждый год"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "далее по {price} каждые 2 года"
     }
   }
 }

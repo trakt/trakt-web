@@ -4,7 +4,7 @@
 </script>
 
 <trakt-most-popular-tag>
-  <TextTag><p class="capitalize bold">{m.tag_text_most_popular()}</p></TextTag>
+  <TextTag><p>{m.tag_text_most_popular()}</p></TextTag>
 </trakt-most-popular-tag>
 
 <style>
@@ -16,10 +16,15 @@
     transform: translateY(-50%);
 
     :global(.trakt-text-tag) {
-      background-color: #fdc700;
+      background-color: var(--color-vip-popular-tag);
       color: var(--shade-900);
-      border-radius: var(--ni-24);
+      border-radius: var(--border-radius-xxl);
       padding: var(--ni-4) var(--ni-12);
+    }
+
+    p {
+      text-transform: uppercase;
+      font-weight: bold;
     }
   }
 </style>

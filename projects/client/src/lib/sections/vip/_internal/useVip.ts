@@ -5,6 +5,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { cancelSubscriptionQuery } from '$lib/requests/vip/cancelSubscriptionQuery.ts';
 import { manageSubscriptionQuery } from '$lib/requests/vip/manageSubscriptionQuery.ts';
 import { startCheckoutQuery } from '$lib/requests/vip/startCheckoutQuery.ts';
+import { vipPlansQuery } from '$lib/requests/vip/vipPlansQuery.ts';
 import { vipSubscriptionQuery } from '$lib/requests/vip/vipSubscriptionQuery.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
@@ -12,6 +13,9 @@ import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { BehaviorSubject, map } from 'rxjs';
 import type { VipPlan } from './models/VipPlan.ts';
+import type { VipPlanDuration } from '$lib/requests/models/VipPlanDuration.ts';
+
+const elevatedPlanType = new BehaviorSubject<VipPlanDuration>('yearly');
 
 function getReturnUrl() {
   const url = new URL(UrlBuilder.vip(), globalThis.window.location.origin);
@@ -28,8 +32,10 @@ export function useVip() {
   const isFetching = new BehaviorSubject(false);
 
   const subscription = useQuery(vipSubscriptionQuery());
+  const plansResult = useQuery(vipPlansQuery());
 
   return {
+    plans: plansResult.pipe(map(($plans) => $plans.data ?? [])),
     startCheckout: async (plan: VipPlan) => {
       trackUpgrade({ plan: plan.type });
 
@@ -69,5 +75,8 @@ export function useVip() {
     isFetching: isFetching.asObservable(),
     subscription: subscription.pipe(map(($details) => $details.data)),
     isLoading: subscription.pipe(map(toLoadingState)),
+    elevatedPlanType: elevatedPlanType.asObservable(),
+    setElevatedPlanType: (type: VipPlanDuration) =>
+      elevatedPlanType.next(type),
   };
 }

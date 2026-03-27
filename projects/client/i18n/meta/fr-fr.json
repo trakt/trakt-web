@@ -2605,12 +2605,6 @@
     "text_vip_costs_infrastructure": {
       "default": "Les serveurs et l'infrastructure qui garantissent la rapidité et la fiabilité de Trakt."
     },
-    "text_vip_costs_moderation": {
-      "default": "La modération et les outils pour garder la communauté sûre et accueillante."
-    },
-    "text_vip_costs_independence": {
-      "default": "Le maintien de l'indépendance et de la durabilité de Trakt, au service de ses utilisateurs."
-    },
     "text_vip_join_now_tagline": {
       "default": "Vous n'avez vu que la surface."
     },
@@ -3276,6 +3270,114 @@
     },
     "button_label_sort_title": {
       "default": "Trier par ordre alphabétique"
+    },
+    "text_vip_powers_trakt": {
+      "default": "helps power Trakt and unlocks features built for people who really care about what they watch."
+    },
+    "vip_feature_title_recaps": {
+      "default": "More Recaps: Monthly & Yearly"
+    },
+    "vip_feature_description_recaps": {
+      "default": "Get deeper insights with comprehensive month and year recaps showing everything you watched, rated, and discovered."
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "Global Where to Watch"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "See where shows and movies are available to stream anywhere in the world, not just your region."
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "Bigger Watchlist"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "Expand your watchlist capacity to keep track of everything you want to watch without limits."
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "Bigger Library"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "Store more of your viewing history with expanded library limits designed to last a lifetime."
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "More Customisation: Profile Header"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "Personalize your profile with custom headers and make your Trakt presence uniquely yours."
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "Sync Plex more frequently"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "Keep your Plex library perfectly synced with more frequent automatic updates throughout the day."
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "Sync more Streaming Services"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "Connect and sync with additional streaming platforms to track your viewing across all services."
+    },
+    "vip_feature_title_more_lists": {
+      "default": "More Lists"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "Create even more custom lists to organize your shows and movies exactly the way you want."
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "More info: Sentiment + Trivia"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "Unlock detailed sentiment analysis and fascinating trivia about the movies and shows you watch."
+    },
+    "vip_feature_title_api_apps": {
+      "default": "More API APPs Connected"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "Connect more third-party apps and services through the Trakt API to enhance your experience."
+    },
+    "vip_feature_title_private_notes": {
+      "default": "More Private Notes"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "Add tons more personal notes to your shows and movies to remember your thoughts and recommendations."
+    },
+    "vip_feature_title_support": {
+      "default": "Better Support: Forum & Feedback"
+    },
+    "vip_feature_description_support": {
+      "default": "Get priority access to our support forums and have your feedback heard directly by the team."
+    },
+    "text_vip_built_to_last": {
+      "default": "Built to last"
+    },
+    "text_vip_costs_metadata": {
+      "default": "Up-to-date metadata, images, and subtitles"
+    },
+    "text_vip_costs_clients": {
+      "default": "Support for all first and third party Trakt clients"
+    },
+    "text_vip_billing_now": {
+      "default": "{price} billed now"
+    },
+    "text_vip_discount_then_price": {
+      "default": "then {price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "{price} for month 1, then"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "{price} for year 1, then"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "{price} for 2 years, then"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "{price} every month after that"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "{price} every year after that"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "{price} every 2 years after that"
     }
   }
 }

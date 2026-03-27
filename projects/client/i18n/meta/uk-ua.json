@@ -2605,12 +2605,6 @@
     "text_vip_costs_infrastructure": {
       "default": "Сервери та інфраструктуру, що забезпечують швидкість і надійність Trakt."
     },
-    "text_vip_costs_moderation": {
-      "default": "Модерацію та інструменти для безпеки та затишку спільноти."
-    },
-    "text_vip_costs_independence": {
-      "default": "Збереження незалежності Trakt та орієнтацію на користувачів."
-    },
     "text_vip_join_now_tagline": {
       "default": "Ви бачили лише поверхню."
     },
@@ -3276,6 +3270,114 @@
     },
     "button_label_sort_title": {
       "default": "Сортувати за алфавітом"
+    },
+    "text_vip_powers_trakt": {
+      "default": "допомагає розвивати Trakt та відкриває функції для справжніх поціновувачів кіно, які дбають про кожен свій перегляд."
+    },
+    "vip_feature_title_recaps": {
+      "default": "Більше підсумків: місяць та рік"
+    },
+    "vip_feature_description_recaps": {
+      "default": "Отримуйте глибшу аналітику з розгорнутими підсумками, що показують усе, що ви подивилися, оцінили та відкрили для себе."
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "Де подивитися: весь світ"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "Дізнавайтеся, де стрімити серіали та фільми в будь-якій точці світу, а не лише у вашому регіоні."
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "Більший список до перегляду"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "Розширюйте можливості свого списку, щоб без жодних обмежень відстежувати все, що прагне побачити ваша душа."
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "Більша медіатека"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "Зберігайте більше історії переглядів завдяки розширеним лімітам, створеним для того, щоб служити вам все життя."
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "Кастомізація: шапка профілю"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "Зробіть свій профіль унікальним, додавши власні зображення у шапку — нехай ваш Trakt відображає вашу особистість."
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "Частіша синхронізація з Plex"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "Підтримуйте медіатеку Plex в ідеальному порядку завдяки частішим автоматичним оновленням протягом дня."
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "Синхронізація стрімінгів"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "Підключайте додаткові стрімінгові платформи, щоб зручно відстежувати перегляди на всіх сервісах."
+    },
+    "vip_feature_title_more_lists": {
+      "default": "Більше списків"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "Створюйте ще більше власних списків, щоб впорядкувати серіали та фільми саме так, як забажаєте."
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "Більше даних: настрій та факти"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "Відкрийте для себе детальний аналіз настрою та захопливі факти про фільми й серіали, які ви переглядаєте."
+    },
+    "vip_feature_title_api_apps": {
+      "default": "Більше API-застосунків"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "Підключайте більше сторонніх застосунків та сервісів через API Trakt для максимально комфортного досвіду."
+    },
+    "vip_feature_title_private_notes": {
+      "default": "Більше приватних нотаток"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "Додавайте безліч особистих нотаток до серіалів та фільмів, щоб зберегти свої думки та враження."
+    },
+    "vip_feature_title_support": {
+      "default": "Краща підтримка: форум та відгуки"
+    },
+    "vip_feature_description_support": {
+      "default": "Отримуйте пріоритетний доступ до форумів підтримки, де ваші відгуки почує безпосередньо команда розробників."
+    },
+    "text_vip_built_to_last": {
+      "default": "Створено на віки"
+    },
+    "text_vip_costs_metadata": {
+      "default": "Актуальні метадані, обкладинки та субтитри"
+    },
+    "text_vip_costs_clients": {
+      "default": "Підтримка всіх офіційних та сторонніх клієнтів Trakt"
+    },
+    "text_vip_billing_now": {
+      "default": "{price} до сплати зараз"
+    },
+    "text_vip_discount_then_price": {
+      "default": "далі {price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "{price} за 1-й місяць, далі"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "{price} за 1-й рік, далі"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "{price} за 2 роки, далі"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "далі {price} щомісяця"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "далі {price} щороку"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "далі {price} кожні 2 роки"
     }
   }
 }
