@@ -9,6 +9,9 @@ type ListProps = {
 } | {
   type: 'user-list';
   list: MediaListSummary;
+} | {
+  type: 'favorites';
+  slug: string;
 };
 
 type ListUrlProps = {
@@ -26,6 +29,8 @@ export function getListUrl(props: ListUrlProps) {
   switch (props.type) {
     case 'watchlist':
       return UrlBuilder.lists.watchlist('me', params);
+    case 'favorites':
+      return UrlBuilder.profile.favorites(props.slug, params);
     case 'user-list': {
       if (props.list.user.slug) {
         return UrlBuilder.users(props.list.user.slug).lists(

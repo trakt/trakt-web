@@ -2,7 +2,7 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages";
-  import FavoritesList from "../lists/FavoritesList.svelte";
+  import FavoritesList from "../lists/favorites/FavoritesList.svelte";
   import PersonalHistoryList from "../lists/history/PersonalHistoryList.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import LibraryList from "../lists/library/LibraryList.svelte";

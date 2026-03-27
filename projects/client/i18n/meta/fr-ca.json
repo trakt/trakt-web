@@ -3240,6 +3240,18 @@
     },
     "header_network": {
       "default": "Réseau"
+    },
+    "page_title_favorites": {
+      "default": "Favoris"
+    },
+    "page_title_social": {
+      "default": "Social"
+    },
+    "button_label_view_all_favorites": {
+      "default": "Voir tous les favoris"
+    },
+    "button_label_view_all_social": {
+      "default": "Voir tout mon réseau"
     }
   }
 }

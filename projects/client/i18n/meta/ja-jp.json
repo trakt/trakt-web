@@ -3240,6 +3240,18 @@
     },
     "header_network": {
       "default": "ネットワーク"
+    },
+    "page_title_favorites": {
+      "default": "お気に入り"
+    },
+    "page_title_social": {
+      "default": "ソーシャル"
+    },
+    "button_label_view_all_favorites": {
+      "default": "お気に入りをすべて表示"
+    },
+    "button_label_view_all_social": {
+      "default": "すべてのつながりを表示"
     }
   }
 }

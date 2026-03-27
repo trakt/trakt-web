@@ -1,10 +1,12 @@
 <script lang="ts">
+  import type { FavoritedEntry } from "$lib/requests/models/FavoritedEntry";
   import type { ListItem } from "$lib/requests/models/ListItem";
   import type { SortBy } from "../models/SortBy";
   import { formatSortValue } from "./formatSortValue";
   import SortIcon from "./SortIcon.svelte";
 
-  const { item, sortBy }: { item: ListItem; sortBy?: SortBy } = $props();
+  const { item, sortBy }: { item: ListItem | FavoritedEntry; sortBy?: SortBy } =
+    $props();
 
   const valueText = $derived(formatSortValue(item, sortBy));
 </script>

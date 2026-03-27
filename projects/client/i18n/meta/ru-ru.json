@@ -3240,6 +3240,18 @@
     },
     "header_network": {
       "default": "Сеть"
+    },
+    "page_title_favorites": {
+      "default": "Избранное"
+    },
+    "page_title_social": {
+      "default": "Соцсети"
+    },
+    "button_label_view_all_favorites": {
+      "default": "Посмотреть все избранное"
+    },
+    "button_label_view_all_social": {
+      "default": "Посмотреть все социальные связи"
     }
   }
 }

@@ -1,6 +1,5 @@
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import {
   type FavoritedEntry,
@@ -13,10 +12,12 @@ import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts'
 import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
 import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { FavoriteMovieResponse } from '@trakt/api';
+import type { FavoriteMovieResponse, FavoriteShowResponse } from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
+import { mapToFavoriteMovie } from '../movies/movieFavoritesQuery.ts';
+import { mapToFavoriteShow } from '../shows/showFavoritesQuery.ts';
 
-type FavoriteMoviesParams =
+type FavoriteMediaParams =
   & {
     slug: string;
     sortBy?: SortBy;
@@ -26,13 +27,13 @@ type FavoriteMoviesParams =
   & ApiParams
   & FilterParams;
 
-const favoritedMoviesRequest = (
-  { fetch, slug, limit, page, filter, sortBy, sortHow }: FavoriteMoviesParams,
+const favoritedMediaRequest = (
+  { fetch, slug, limit, page, filter, sortBy, sortHow }: FavoriteMediaParams,
 ) =>
   api({ fetch })
     .users
     .favorites
-    .movies({
+    .media({
       params: {
         id: slug,
       },
@@ -46,20 +47,20 @@ const favoritedMoviesRequest = (
       },
     });
 
-export function mapToFavoriteMovie(
-  entry: FavoriteMovieResponse,
+function mapToFavoriteEntry(
+  entry: FavoriteMovieResponse | FavoriteShowResponse,
 ): FavoritedEntry {
-  return {
-    key: `movie-${entry.movie.ids.trakt}`,
-    favoritedAt: new Date(entry.listed_at),
-    rank: entry.rank,
-    item: mapToMovieEntry(entry.movie),
-  };
+  return 'movie' in entry
+    ? mapToFavoriteMovie(entry)
+    : mapToFavoriteShow(entry);
 }
 
-export const movieFavoritesQuery = defineInfiniteQuery({
-  key: 'movieFavorites',
-  invalidations: [InvalidateAction.Favorited('movie')],
+export const mediaFavoritesQuery = defineInfiniteQuery({
+  key: 'mediaFavorites',
+  invalidations: [
+    InvalidateAction.Favorited('movie'),
+    InvalidateAction.Favorited('show'),
+  ],
   dependencies: (params) => [
     params.slug,
     params.limit,
@@ -68,9 +69,9 @@ export const movieFavoritesQuery = defineInfiniteQuery({
     params.sortHow,
     ...getGlobalFilterDependencies(params.filter),
   ],
-  request: favoritedMoviesRequest,
+  request: favoritedMediaRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapToFavoriteMovie),
+    entries: response.body.map(mapToFavoriteEntry),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(FavoritedEntrySchema),

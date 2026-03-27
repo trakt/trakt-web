@@ -8520,6 +8520,38 @@
         "android",
         "ios"
       ]
+    },
+    "page_title_favorites": {
+      "default": "Favorites",
+      "description": "Title for the page containing a user's favorite movies and/or shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "page_title_social": {
+      "default": "Social",
+      "description": "Title for the page containing a user's social connections. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_view_all_favorites": {
+      "default": "View all favorites",
+      "description": "Aria-label for the button that allows users to view all favorite movies and/or shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_view_all_social": {
+      "default": "View all social connections",
+      "description": "Aria-label for the button that allows users to view all social connections.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

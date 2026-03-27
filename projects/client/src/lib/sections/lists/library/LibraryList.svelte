@@ -35,6 +35,7 @@
     items={$list}
     title={m.list_title_library()}
     --height-list={mediaListHeightResolver("portrait")}
+    drilldownLink={UrlBuilder.library.me(activeLibrary)}
   >
     {#snippet item(item)}
       <LibraryMediaItem {item} />
