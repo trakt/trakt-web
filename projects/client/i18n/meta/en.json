@@ -2590,7 +2590,7 @@
           "type": "string"
         },
         "episode": {
-          "type": "number"
+          "type": "string"
         },
         "count": {
           "type": "number"
