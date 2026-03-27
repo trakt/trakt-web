@@ -981,6 +981,11 @@
       "description": "Header for the runtime section.",
       "exclude": []
     },
+    "header_network": {
+      "default": "Network",
+      "description": "Header for the network section.",
+      "exclude": []
+    },
     "header_country": {
       "default": "Country",
       "description": "Header for the country section.",

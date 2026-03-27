@@ -50,6 +50,7 @@ export const ShowSiloMappedMock: ShowEntry = {
   'trailer': 'https://youtube.com/watch?v=8ZYhuvIv1pA',
   'airDate': new Date('2023-05-05T01:00:00.000Z'),
   'certification': 'TV-MA',
+  'network': 'Apple TV+',
   'country': 'us',
   'languages': [
     'en',

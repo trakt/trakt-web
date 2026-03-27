@@ -3236,6 +3236,9 @@
     },
     "option_text_africa": {
       "default": "非洲"
+    },
+    "header_network": {
+      "default": "电视网"
     }
   }
 }

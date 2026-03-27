@@ -9,6 +9,7 @@ import type {
   MediaCrew,
 } from '$lib/requests/models/MediaCrew.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type { MediaNetwork } from '$lib/requests/models/MediaNetwork.ts';
 import type { MediaStudio } from '$lib/requests/models/MediaStudio.ts';
 import { isMaxDate } from '$lib/utils/date/isMaxDate.ts';
 import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
@@ -67,6 +68,13 @@ function runtime(entry: MediaEntry | EpisodeEntry) {
   return {
     title: m.header_runtime(),
     values: [toHumanDuration({ minutes: entry.runtime }, languageTag())],
+  };
+}
+
+function networks(entries: MediaNetwork[] | undefined) {
+  return {
+    title: m.header_network(),
+    values: entries?.map((network) => network.name),
   };
 }
 
@@ -184,6 +192,7 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
     mediaAirDate(props.media),
     mediaStatus(props.media),
     runtime(props.media),
+    networks(props.networks),
     ...mainCredits(props.type, props.crew),
     ...metaDetails(props.media, props.studios),
     postCredits(props.media),

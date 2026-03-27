@@ -10,6 +10,7 @@ export const ShowDevsMappedMock: ShowEntry = {
   'runtime': 52,
   'year': 2020,
   'tagline': 'Reality is stranger than dreams.',
+  'network': 'Hulu',
   'country': 'us',
   'status': 'ended',
   'rating': 0.7527,
