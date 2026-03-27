@@ -16,9 +16,9 @@ type MediaProps = {
   type: MediaType;
   media: MediaEntry;
   studios: MediaStudio[];
-  networks?: MediaNetwork[];
 };
 
 export type MediaDetailsProps = {
   crew: MediaCrew;
+  networks?: MediaNetwork[];
 } & (EpisodeProps | MediaProps);

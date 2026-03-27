@@ -27,6 +27,13 @@
   const posterSrc = $derived(
     useEpisodeSpoilerImage({ episode, show, variant: "default" }),
   );
+
+  const networks = $derived((() => {
+    const seasonNetwork = seasons
+      .find((s) => s.number === episode.season)?.network;
+    const name = seasonNetwork ?? show.network;
+    return name ? [{ name }] : [];
+  })());
 </script>
 
 <!-- 
@@ -98,4 +105,4 @@
   type="show"
 />
 
-<SummaryDrawer {crew} {episode} {show} type="episode" />
+<SummaryDrawer {crew} {episode} {show} {networks} type="episode" />
