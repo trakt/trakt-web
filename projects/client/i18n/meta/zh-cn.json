@@ -2604,12 +2604,6 @@
     "text_vip_costs_infrastructure": {
       "default": "确保 Trakt 快速稳定的服务器和基础设施。"
     },
-    "text_vip_costs_moderation": {
-      "default": "维护社区安全与和谐的审核机制与工具。"
-    },
-    "text_vip_costs_independence": {
-      "default": "保持 Trakt 的独立性与可持续性，专注于用户需求。"
-    },
     "text_vip_join_now_tagline": {
       "default": "你目前看到的只是冰山一角。"
     },
@@ -3275,6 +3269,114 @@
     },
     "button_label_sort_title": {
       "default": "按字母顺序排序"
+    },
+    "text_vip_powers_trakt": {
+      "default": "助力 Trakt 运行，并为真正热爱观影的用户解锁专属功能。"
+    },
+    "vip_feature_title_recaps": {
+      "default": "更多回顾：月度与年度"
+    },
+    "vip_feature_description_recaps": {
+      "default": "通过详尽的月度和年度回顾深入了解你的观影足迹，涵盖所有看过、评分和发现的内容。"
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "全球观看渠道"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "无论是好莱坞大片还是小众影集，随时查看全球各地的流媒体播放平台，而不局限于你所在的地区。"
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "更大的待看列表"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "扩容你的待看列表，随心所欲标记所有想看的精彩内容，不再受限。"
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "更大的媒体库"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "扩容媒体库上限，让你的观影史如同经典电影般永恒流传，记录更多精彩。"
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "更多自定义：主页页眉"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "使用自定义页眉个性化你的个人资料，在 Trakt 社区展示你独特的影迷品味。"
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "更频繁同步 Plex"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "全天候频繁自动更新，确保你的 Plex 媒体库与 Trakt 完美同步，不留遗憾。"
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "同步更多流媒体服务"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "连接并同步更多流媒体平台，跨服务追踪你的所有观影动态。"
+    },
+    "vip_feature_title_more_lists": {
+      "default": "更多列表"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "创建更多自定义列表，随心所欲地整理你的剧集和电影，就像导演剪辑版一样完美。"
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "更多信息：评价与花絮"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "解锁详尽的大众评价分析和有趣的幕后花絮，深入挖掘每一部作品背后的故事。"
+    },
+    "vip_feature_title_api_apps": {
+      "default": "连接更多 API 应用"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "通过 Trakt API 连接更多第三方应用和服务，开启更强大的观影体验。"
+    },
+    "vip_feature_title_private_notes": {
+      "default": "更多私人笔记"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "为你的收藏添加海量私人笔记，像影评人一样记录心得与推荐。"
+    },
+    "vip_feature_title_support": {
+      "default": "更优支持：论坛与反馈"
+    },
+    "vip_feature_description_support": {
+      "default": "获得支持论坛的优先访问权，让你的反馈直接传递给核心团队。"
+    },
+    "text_vip_built_to_last": {
+      "default": "为长久运行而生"
+    },
+    "text_vip_costs_metadata": {
+      "default": "最新的元数据、剧照及字幕"
+    },
+    "text_vip_costs_clients": {
+      "default": "支持所有第一方及第三方 Trakt 客户端"
+    },
+    "text_vip_billing_now": {
+      "default": "立即支付 {price}"
+    },
+    "text_vip_discount_then_price": {
+      "default": "随后为 {price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "首月 {price}，随后"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "首年 {price}，随后"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "前 2 年 {price}，随后"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "此后每月 {price}"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "此后每年 {price}"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "此后每 2 年 {price}"
     }
   }
 }

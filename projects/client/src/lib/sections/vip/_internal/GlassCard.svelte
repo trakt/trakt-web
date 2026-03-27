@@ -2,7 +2,7 @@
   const {
     children,
     variant = "default",
-  }: { variant?: "default" | "plain" } & ChildrenProps = $props();
+  }: { variant?: "default" | "plain" | "bordered" } & ChildrenProps = $props();
 </script>
 
 <div class="trakt-vip-glass-card" data-variant={variant}>
@@ -29,6 +29,11 @@
       backdrop-filter: blur(var(--ni-10));
       background: var(--background-vip-plain-glass-card);
       padding: var(--ni-16);
+    }
+
+    &[data-variant="bordered"] {
+      border: var(--ni-1) solid var(--color-vip-border-accent);
+      padding: var(--ni-32);
     }
   }
 </style>

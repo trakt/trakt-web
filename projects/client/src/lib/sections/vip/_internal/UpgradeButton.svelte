@@ -4,14 +4,12 @@
   import type { VipPlan } from "./models/VipPlan";
   import { useVip } from "./useVip";
 
-  const {
-    plan,
-    size = "normal",
-  }: { plan: VipPlan; size?: "normal" | "small" } = $props();
+  const { plan }: { plan: VipPlan } = $props();
 
   const { startCheckout, isFetching } = useVip();
 
   const onStartCheckout = async () => {
+    if (!plan) return;
     const url = await startCheckout(plan);
     if (url) {
       globalThis.window.location.href = url;
@@ -21,11 +19,12 @@
 
 <trakt-vip-upgrade-button>
   <Button
-    {size}
+    size="small"
     label={m.button_label_vip_upgrade()}
     color="custom"
     variant="primary"
     style="flat"
+    text="uppercase"
     onclick={onStartCheckout}
     disabled={$isFetching}
   >
@@ -36,17 +35,12 @@
 <style>
   trakt-vip-upgrade-button {
     :global(.trakt-button) {
-      --color-background-custom: var(--color-vip-upgrade-button);
-      --color-foreground-custom: var(--color-text-primary);
+      --color-background-custom: var(--red-500);
+      --color-foreground-custom: var(--shade-10);
+      --button-height: var(--ni-40);
 
-      border: var(--ni-1) solid
-        color-mix(in srgb, var(--red-500) 75%, transparent);
-      padding: var(--ni-16) var(--ni-32);
-
-      &:hover {
-        --color-background-custom: var(--shade-10);
-        --color-foreground-custom: var(--red-600);
-      }
+      border: none;
+      transition: background-color var(--transition-duration-short) ease-in-out;
     }
   }
 </style>

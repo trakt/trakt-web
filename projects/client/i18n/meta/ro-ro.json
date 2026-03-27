@@ -2596,12 +2596,6 @@
     "text_vip_costs_infrastructure": {
       "default": "Serverele și infrastructura care mențin Trakt rapid și fiabil."
     },
-    "text_vip_costs_moderation": {
-      "default": "Moderarea și instrumentele pentru a menține comunitatea sigură și primitoare."
-    },
-    "text_vip_costs_independence": {
-      "default": "Păstrarea Trakt independent, sustenabil și concentrat pe utilizatori."
-    },
     "text_vip_join_now_tagline": {
       "default": "Ai văzut doar suprafața."
     },
@@ -3276,6 +3270,114 @@
     },
     "button_label_sort_title": {
       "default": "Sortează alfabetic"
+    },
+    "text_vip_powers_trakt": {
+      "default": "susține Trakt și deblochează funcții create special pentru cei care trăiesc prin poveștile pe care le urmăresc."
+    },
+    "vip_feature_title_recaps": {
+      "default": "Recapitulări: Lunare și Anuale"
+    },
+    "vip_feature_description_recaps": {
+      "default": "Obține analize detaliate cu recapitulări complete care îți arată tot ce ai vizionat, evaluat și descoperit. Ești protagonistul propriului tău an cinematografic!"
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "Unde poți vedea: Global"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "Vezi unde sunt disponibile serialele și filmele preferate oriunde în lume, nu doar în regiunea ta."
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "Watchlist extins"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "Extinde-ți capacitatea listei „de văzut” pentru a ține evidența tuturor titlurilor dorite, fără limite de scenariu."
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "Colecție mai mare"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "Păstrează mai mult din istoricul tău de vizionare cu limite extinse ale colecției, concepute să dureze o viață întreagă."
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "Personalizare: Header Profil"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "Personalizează-ți profilul cu headere custom și fă-ți prezența pe Trakt la fel de unică precum un film de autor."
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "Sincronizare Plex frecventă"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "Păstrează biblioteca Plex perfect sincronizată cu actualizări automate mai dese pe parcursul zilei."
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "Mai multe servicii streaming"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "Conectează și sincronizează mai multe platforme pentru a-ți urmări vizionările pe toate serviciile."
+    },
+    "vip_feature_title_more_lists": {
+      "default": "Mai multe liste"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "Creează și mai multe liste personalizate pentru a-ți organiza serialele și filmele exact așa cum dictează regia ta."
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "Mai multe info: Opinii + Trivia"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "Deblochează analize de sentiment detaliate și curiozități fascinante despre filmele și serialele pe care le urmărești."
+    },
+    "vip_feature_title_api_apps": {
+      "default": "Mai multe aplicații API"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "Conectează mai multe aplicații și servicii prin API-ul Trakt pentru o experiență îmbunătățită."
+    },
+    "vip_feature_title_private_notes": {
+      "default": "Mai multe notițe private"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "Adaugă mult mai multe note personale serialelor și filmelor tale pentru a-ți aminti impresiile și recomandările."
+    },
+    "vip_feature_title_support": {
+      "default": "Suport: Forum și Feedback"
+    },
+    "vip_feature_description_support": {
+      "default": "Primești acces prioritar la forumurile noastre și feedback-ul tău va fi ascultat direct de către echipa de producție."
+    },
+    "text_vip_built_to_last": {
+      "default": "Construit să dureze"
+    },
+    "text_vip_costs_metadata": {
+      "default": "Metadate, imagini și subtitrări la zi"
+    },
+    "text_vip_costs_clients": {
+      "default": "Suport pentru toți clienții Trakt (proprii sau terți)"
+    },
+    "text_vip_billing_now": {
+      "default": "{price} achitați acum"
+    },
+    "text_vip_discount_then_price": {
+      "default": "apoi {price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "{price} pentru prima lună, apoi"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "{price} pentru primul an, apoi"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "{price} pentru primii 2 ani, apoi"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "{price} în fiecare lună după aceea"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "{price} în fiecare an după aceea"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "{price} la fiecare 2 ani după aceea"
     }
   }
 }

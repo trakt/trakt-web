@@ -2596,12 +2596,6 @@
     "text_vip_costs_infrastructure": {
       "default": "高速で信頼性の高い環境を保つためのサーバーとインフラ。"
     },
-    "text_vip_costs_moderation": {
-      "default": "安全で心地よいコミュニティを保つためのモデレーション。"
-    },
-    "text_vip_costs_independence": {
-      "default": "独立性を保ち、ユーザー中心の運営を継続すること。"
-    },
     "text_vip_join_now_tagline": {
       "default": "あなたはまだ表面を見たに過ぎません。"
     },
@@ -3276,6 +3270,114 @@
     },
     "button_label_sort_title": {
       "default": "タイトル順に並べ替え"
+    },
+    "text_vip_powers_trakt": {
+      "default": "Traktの運営を支え、視聴体験を究めたいファンのための限定機能を解放します。"
+    },
+    "vip_feature_title_recaps": {
+      "default": "振り返り機能の充実：月間＆年間"
+    },
+    "vip_feature_description_recaps": {
+      "default": "視聴履歴や評価、新たに出会った作品を網羅した月間・年間レポートで、あなたの「オタ活」をより深く分析しましょう。"
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "グローバル配信情報"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "お住まいの地域だけでなく、世界中のどこでドラマや映画が配信されているかを確認できます。"
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "ウォッチリストの拡張"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "ウォッチリストの容量を増やして、気になる作品を無制限にストックしましょう。"
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "ライブラリの拡張"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "一生分の視聴履歴を記録できるよう、ライブラリの保存上限を大幅にアップします。"
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "カスタマイズの充実：ヘッダー"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "プロフィールにカスタムヘッダーを設定して、Traktでの存在感を自分らしく彩りましょう。"
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "Plexとの同期頻度アップ"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "1日を通して自動更新の頻度を高め、Plexライブラリを常に最新の状態に保ちます。"
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "配信サービスの同期追加"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "より多くの配信プラットフォームと連携して、あらゆるサービスでの視聴を一元管理しましょう。"
+    },
+    "vip_feature_title_more_lists": {
+      "default": "リスト作成数の増加"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "カスタムリストをさらに作成して、ドラマや映画を自分好みに整理・分類しましょう。"
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "詳細情報：評判＆トリビア"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "視聴した映画やドラマの感情分析データや、思わず「へぇ〜」と言いたくなるような制作秘話をチェック。"
+    },
+    "vip_feature_title_api_apps": {
+      "default": "API連携アプリの拡張"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "Trakt APIを通じてより多くの外部アプリやサービスと連携し、体験をさらに向上させましょう。"
+    },
+    "vip_feature_title_private_notes": {
+      "default": "プライベートメモの増量"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "作品に個人的なメモをたっぷり残して、自分の感想やおすすめポイントを忘れずに記録しましょう。"
+    },
+    "vip_feature_title_support": {
+      "default": "サポートの優先対応"
+    },
+    "vip_feature_description_support": {
+      "default": "サポートフォーラムへの優先アクセス権を得て、あなたのフィードバックをチームに直接届けましょう。"
+    },
+    "text_vip_built_to_last": {
+      "default": "末永く愛されるサービスのために"
+    },
+    "text_vip_costs_metadata": {
+      "default": "最新のメタデータ、画像、字幕"
+    },
+    "text_vip_costs_clients": {
+      "default": "全ての公式・サードパーティ製アプリへの対応"
+    },
+    "text_vip_billing_now": {
+      "default": "今すぐお支払い：{price}"
+    },
+    "text_vip_discount_then_price": {
+      "default": "以降、{price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "初月は{price}、その後は"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "初年度は{price}、その後は"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "最初の2年間は{price}、その後は"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "以降は毎月{price}"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "以降は毎年{price}"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "以降は2年ごとに{price}"
     }
   }
 }

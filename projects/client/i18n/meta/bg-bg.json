@@ -2605,12 +2605,6 @@
     "text_vip_costs_infrastructure": {
       "default": "Сървъри и инфраструктура за бърз и надежден достъп."
     },
-    "text_vip_costs_moderation": {
-      "default": "Модерация за сигурна и приятелска общност."
-    },
-    "text_vip_costs_independence": {
-      "default": "Независимост и фокус върху потребителите на Trakt."
-    },
     "text_vip_join_now_tagline": {
       "default": "Видели сте само повърхността."
     },
@@ -3276,6 +3270,114 @@
     },
     "button_label_sort_title": {
       "default": "Сортирай по азбучен ред"
+    },
+    "text_vip_powers_trakt": {
+      "default": "помага за развитието на Trakt и отключва функции, създадени за истинските ценители на киното и телевизията."
+    },
+    "vip_feature_title_recaps": {
+      "default": "Още резюмета: Месечни и годишни"
+    },
+    "vip_feature_description_recaps": {
+      "default": "Потопете се в детайлите с подробни месечни и годишни обзори на всичко, което сте гледали, оценили и открили. Като истински режисьорски монтаж на вашата година!"
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "Къде да гледаме по света"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "Разберете къде се излъчват любимите ви сериали и филми навсякъде по света, без граници за вашето кино пътешествие."
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "По-голям списък за гледане"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "Увеличете капацитета на списъка си, за да следите всичко, което планирате да гледате. Списъкът ви ще е по-дълъг и от финалните надписи на блокбъстър!"
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "По-голяма библиотека"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "Съхранявайте по-голяма част от историята си на гледане с разширени лимити на библиотеката, създадени да траят вечно."
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "Персонализиране: Хедър на профила"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "Персонализирайте профила си с лични заглавни изображения и направете присъствието си в Trakt уникално."
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "По-честа синхронизация с Plex"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "Поддържайте библиотеката си в Plex перфектно синхронизирана с по-чести автоматични актуализации през целия ден."
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "Синхронизиране на още услуги"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "Свържете и синхронизирайте с допълнителни стрийминг платформи, за да следите всичко, което гледате, на едно място."
+    },
+    "vip_feature_title_more_lists": {
+      "default": "Повече списъци"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "Създавайте още повече лични списъци, за да организирате вашите сериали и филми точно както пожелаете."
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "Още инфо: Мнения и факти"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "Отключете детайлен анализ на настроенията и интересни факти за филмите и сериалите, които гледате."
+    },
+    "vip_feature_title_api_apps": {
+      "default": "Повече API приложения"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "Свържете повече външни приложения и услуги чрез Trakt API, за да подобрите преживяването си."
+    },
+    "vip_feature_title_private_notes": {
+      "default": "Повече лични бележки"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "Добавяйте още много лични бележки към сериалите и филмите си, за да не забравяте мислите и препоръките си."
+    },
+    "vip_feature_title_support": {
+      "default": "По-добра поддръжка"
+    },
+    "vip_feature_description_support": {
+      "default": "Получете приоритетен достъп до нашите форуми за поддръжка и споделете мнението си директно с екипа ни."
+    },
+    "text_vip_built_to_last": {
+      "default": "Създаден да трае"
+    },
+    "text_vip_costs_metadata": {
+      "default": "Актуални метаданни, изображения и субтитри"
+    },
+    "text_vip_costs_clients": {
+      "default": "Поддръжка за всички официални и външни приложения"
+    },
+    "text_vip_billing_now": {
+      "default": "{price} се таксуват сега"
+    },
+    "text_vip_discount_then_price": {
+      "default": "след това {price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "{price} за първия месец, след това"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "{price} за първата година, след това"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "{price} за първите 2 години, след това"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "{price} всеки месец след това"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "{price} всяка година след това"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "{price} на всеки 2 години след това"
     }
   }
 }

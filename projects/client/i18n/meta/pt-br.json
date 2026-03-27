@@ -2596,12 +2596,6 @@
     "text_vip_costs_infrastructure": {
       "default": "Servidores e infraestrutura que mantêm o Trakt rápido e confiável."
     },
-    "text_vip_costs_moderation": {
-      "default": "Moderação e ferramentas para manter a comunidade segura e acolhedora."
-    },
-    "text_vip_costs_independence": {
-      "default": "Manter o Trakt independente, sustentável e focado nos usuários."
-    },
     "text_vip_join_now_tagline": {
       "default": "Você só viu a superfície."
     },
@@ -3276,6 +3270,114 @@
     },
     "button_label_sort_title": {
       "default": "Ordenar em ordem alfabética"
+    },
+    "text_vip_powers_trakt": {
+      "default": "ajuda a manter o Trakt e libera recursos feitos para quem é apaixonado pelo que assiste."
+    },
+    "vip_feature_title_recaps": {
+      "default": "Mais Retrospectivas: Mensais e Anuais"
+    },
+    "vip_feature_description_recaps": {
+      "default": "Tenha insights profundos com retrospectivas completas de mês e ano. Relembre tudo o que você assistiu, avaliou e descobriu naquela maratona inesquecível."
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "Onde Assistir: Global"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "Veja onde séries e filmes estão disponíveis em qualquer lugar do mundo, indo muito além do catálogo da sua região."
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "Watchlist turbinada"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "Aumente a capacidade da sua lista para acompanhar tudo o que você quer ver, sem limites para a sua vontade de maratonar."
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "Biblioteca ampliada"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "Guarde todo o seu histórico com limites de biblioteca expandidos, feitos para durar tanto quanto um clássico do cinema nacional."
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "Mais Personalização: Cabeçalho"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "Deixe seu perfil com a sua cara usando cabeçalhos personalizados e mostre sua identidade cinéfila para a comunidade."
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "Sincronia Plex frequente"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "Mantenha sua biblioteca do Plex perfeitamente sincronizada com atualizações automáticas mais frequentes durante o dia."
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "Sincronize mais streamings"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "Conecte e sincronize com outras plataformas de streaming para registrar o que assiste em todos os serviços."
+    },
+    "vip_feature_title_more_lists": {
+      "default": "Mais Listas"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "Crie ainda mais listas personalizadas para organizar suas séries e filmes do seu jeito, melhor que roteiro de novela das nove."
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "Mais info: Curiosidades"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "Libere análises detalhadas e curiosidades fascinantes sobre os filmes e séries que você acompanha."
+    },
+    "vip_feature_title_api_apps": {
+      "default": "Mais apps conectados"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "Conecte mais aplicativos e serviços de terceiros via API do Trakt para turbinar sua experiência."
+    },
+    "vip_feature_title_private_notes": {
+      "default": "Mais Notas Privadas"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "Adicione muito mais notas pessoais às suas séries e filmes para não esquecer suas impressões e recomendações."
+    },
+    "vip_feature_title_support": {
+      "default": "Suporte VIP: Fórum e Feedback"
+    },
+    "vip_feature_description_support": {
+      "default": "Tenha acesso prioritário aos nossos fóruns de suporte e faça seu feedback ser ouvido diretamente pela nossa equipe."
+    },
+    "text_vip_built_to_last": {
+      "default": "Feito para durar"
+    },
+    "text_vip_costs_metadata": {
+      "default": "Metadados, imagens e legendas sempre atualizados"
+    },
+    "text_vip_costs_clients": {
+      "default": "Suporte para todos os apps Trakt oficiais e de terceiros"
+    },
+    "text_vip_billing_now": {
+      "default": "{price} cobrados agora"
+    },
+    "text_vip_discount_then_price": {
+      "default": "depois {price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "{price} no 1º mês, depois"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "{price} no 1º ano, depois"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "{price} por 2 anos, depois"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "{price} por mês após esse período"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "{price} por ano após esse período"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "{price} a cada 2 anos após esse período"
     }
   }
 }

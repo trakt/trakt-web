@@ -6,14 +6,16 @@
     children,
     icon,
     title,
-  }: { icon: Snippet; title: string } & ChildrenProps = $props();
+  }: { icon: Snippet; title?: string } & ChildrenProps = $props();
 </script>
 
-<GlassCard>
+<GlassCard variant="bordered">
   <div class="trakt-vip-footer-card-content">
     {@render icon()}
 
-    <p class="bold">{title}</p>
+    {#if title}
+      <h3>{title}</h3>
+    {/if}
 
     {@render children()}
   </div>
@@ -25,5 +27,15 @@
     flex-direction: column;
     align-items: center;
     gap: var(--gap-m);
+
+    color: var(--color-text-secondary);
+    font-size: var(--ni-14);
+    line-height: var(--ni-20);
+
+    h3 {
+      font-size: var(--ni-20);
+      margin: 0;
+      color: var(--color-text-primary);
+    }
   }
 </style>

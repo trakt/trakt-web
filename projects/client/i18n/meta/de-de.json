@@ -2605,12 +2605,6 @@
     "text_vip_costs_infrastructure": {
       "default": "Server und Infrastruktur, die Trakt schnell und zuverlässig halten."
     },
-    "text_vip_costs_moderation": {
-      "default": "Moderation und Tools, um die Community sicher und einladend zu halten."
-    },
-    "text_vip_costs_independence": {
-      "default": "Trakt unabhängig, nachhaltig und nutzerzentriert zu halten."
-    },
     "text_vip_join_now_tagline": {
       "default": "Sie haben bisher nur die Oberfläche gesehen."
     },
@@ -3241,14 +3235,14 @@
     "header_network": {
       "default": "Netzwerk"
     },
-    "page_title_favorites": {
-      "default": "Favoriten"
+    "text_vip_powers_trakt": {
+      "default": "unterstützt den Betrieb von Trakt und schaltet Funktionen für alle frei, denen ihre Filmerlebnisse wirklich am Herzen liegen."
     },
-    "page_title_social": {
-      "default": "Social"
+    "vip_feature_title_recaps": {
+      "default": "Mehr Rückblicke: Monatlich & Jährlich"
     },
-    "button_label_view_all_favorites": {
-      "default": "Alle Favoriten ansehen"
+    "vip_feature_description_recaps": {
+      "default": "Erhalten Sie tiefere Einblicke mit umfassenden Monats- und Jahresrückblicken – wie ein Best-of Ihrer eigenen Filmgeschichte."
     },
     "button_label_view_all_social": {
       "default": "Alle sozialen Kontakte ansehen"
@@ -3276,6 +3270,117 @@
     },
     "button_label_sort_title": {
       "default": "Alphabetisch sortieren"
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "Globales „Wo streamen?“"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "Sehen Sie weltweit, wo Serien und Filme verfügbar sind – grenzenloser Genuss über Ihre Region hinaus."
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "Größere Watchlist"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "Erweitern Sie Ihre Watchlist-Kapazität, um alles, was Sie sehen möchten, ohne Limits im Auge zu behalten."
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "Größere Mediathek"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "Speichern Sie mehr von Ihrer Historie mit erweiterten Limits – eine Sammlung, die für die Ewigkeit gebaut ist."
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "Mehr Anpassung: Profil-Header"
     }
+  },
+  "vip_feature_description_profile_customisation": {
+    "default": "Personalisieren Sie Ihr Profil mit eigenen Header-Bildern und machen Sie Ihren Trakt-Auftritt zu einem Unikat."
+  },
+  "vip_feature_title_plex_sync": {
+    "default": "Plex öfter synchronisieren"
+  },
+  "vip_feature_description_plex_sync": {
+    "default": "Halten Sie Ihre Plex-Mediathek perfekt synchronisiert mit häufigeren automatischen Updates über den Tag verteilt."
+  },
+  "vip_feature_title_streaming_services": {
+    "default": "Mehr Streaming-Dienste syncen"
+  },
+  "vip_feature_description_streaming_services": {
+    "default": "Verbinden und synchronisieren Sie zusätzliche Plattformen, um Ihren Konsum über alle Dienste hinweg zu erfassen."
+  },
+  "vip_feature_title_more_lists": {
+    "default": "Mehr Listen"
+  },
+  "vip_feature_description_more_lists": {
+    "default": "Erstellen Sie noch mehr eigene Listen, um Ihre Serien und Filme exakt nach Ihrem Geschmack zu organisieren."
+  },
+  "vip_feature_title_sentiment_trivia": {
+    "default": "Mehr Infos: Stimmung & Trivia"
+  },
+  "vip_feature_description_sentiment_trivia": {
+    "default": "Schalten Sie detaillierte Stimmungsanalysen und faszinierendes Hintergrundwissen zu Ihren Lieblingsproduktionen frei."
+  },
+  "vip_feature_title_api_apps": {
+    "default": "Mehr API-Apps verbinden"
+  },
+  "vip_feature_description_api_apps": {
+    "default": "Verbinden Sie mehr Drittanbieter-Apps und Dienste über die Trakt-API für ein noch besseres Erlebnis."
+  },
+  "vip_feature_title_private_notes": {
+    "default": "Mehr private Notizen"
+  },
+  "vip_feature_description_private_notes": {
+    "default": "Fügen Sie Ihren Serien und Filmen viel mehr persönliche Notizen hinzu, um Gedanken und Empfehlungen festzuhalten."
+  },
+  "vip_feature_title_support": {
+    "default": "Besserer Support: Forum & Feedback"
+  },
+  "vip_feature_description_support": {
+    "default": "Erhalten Sie bevorzugten Zugang zu unseren Support-Foren und bringen Sie Ihr Feedback direkt beim Team ein."
+  },
+  "text_vip_built_to_last": {
+    "default": "Für die Ewigkeit gebaut"
+  },
+  "text_vip_costs_metadata": {
+    "default": "Aktuelle Metadaten, Bilder und Untertitel"
+  },
+  "text_vip_costs_clients": {
+    "default": "Support für alle Trakt-Clients von uns und Drittanbietern"
+  },
+  "text_vip_billing_now": {
+    "default": "{price} werden jetzt abgerechnet"
+  },
+  "text_vip_discount_then_price": {
+    "default": "danach {price}"
+  },
+  "text_vip_discount_first_term_monthly": {
+    "default": "{price} im 1. Monat, danach"
+  },
+  "text_vip_discount_first_term_yearly": {
+    "default": "{price} im 1. Jahr, danach"
+  },
+  "text_vip_discount_first_term_biyearly": {
+    "default": "{price} für 2 Jahre, danach"
+  },
+  "text_vip_recurring_monthly": {
+    "default": "danach {price} jeden Monat"
+  },
+  "text_vip_recurring_yearly": {
+    "default": "danach {price} jedes Jahr"
+  },
+  "text_vip_recurring_biyearly": {
+    "default": "danach {price} alle 2 Jahre"
+  },
+  "page_title_favorites": {
+    "default": "Favoriten"
+  },
+  "page_title_social": {
+    "default": "Social"
+  },
+  "button_label_view_all_favorites": {
+    "default": "Alle Favoriten ansehen"
+  },
+  "button_label_view_all_social": {
+    "default": "Alle sozialen Kontakte ansehen"
   }
 }

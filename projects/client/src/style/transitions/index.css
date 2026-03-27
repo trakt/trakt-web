@@ -3,8 +3,10 @@
    * Animation transition variables
    */
   --transition-increment: 150ms;
+  --transition-duration-short: 300ms;
 
   @media (prefers-reduced-motion: reduce) {
     --transition-increment: 0ms;
+    --transition-duration-short: 0ms;
   }
 }

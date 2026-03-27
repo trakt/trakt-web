@@ -46,17 +46,4 @@
 
     background: var(--background-vip-content);
   }
-
-  .trakt-vip-content-background::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background-image: url("./assets/theatre.jpg");
-    background-position: top;
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    opacity: 0.3;
-  }
 </style>

@@ -2605,12 +2605,6 @@
     "text_vip_costs_infrastructure": {
       "default": "Servrar och infrastruktur som håller Trakt snabbt och pålitligt."
     },
-    "text_vip_costs_moderation": {
-      "default": "Moderering och verktyg för att hålla communityn säker."
-    },
-    "text_vip_costs_independence": {
-      "default": "Att hålla Trakt oberoende och fokuserat på användarna."
-    },
     "text_vip_join_now_tagline": {
       "default": "Du har bara sett ytan."
     },
@@ -3276,6 +3270,114 @@
     },
     "button_label_sort_title": {
       "default": "Sortera alfabetiskt"
+    },
+    "text_vip_powers_trakt": {
+      "default": "hjälper till att driva Trakt och låser upp funktioner för dig som verkligen bryr dig om vad du ser på."
+    },
+    "vip_feature_title_recaps": {
+      "default": "Fler sammanfattningar: Månad & År"
+    },
+    "vip_feature_description_recaps": {
+      "default": "Få djupare insikter med omfattande sammanfattningar för varje månad och år som visar allt du sett, betygsatt och upptäckt."
+    },
+    "vip_feature_title_global_wtw": {
+      "default": "Globalt: Var man kan se"
+    },
+    "vip_feature_description_global_wtw": {
+      "default": "Se var serier och filmer finns tillgängliga världen över, inte bara i din region – perfekt när du letar efter nästa stora nordiska deckare."
+    },
+    "vip_feature_title_bigger_watchlist": {
+      "default": "Större Watchlist"
+    },
+    "vip_feature_description_bigger_watchlist": {
+      "default": "Utöka din watchlist och håll koll på allt du vill se utan begränsningar."
+    },
+    "vip_feature_title_bigger_library": {
+      "default": "Större bibliotek"
+    },
+    "vip_feature_description_bigger_library": {
+      "default": "Spara mer av din historik med utökade biblioteksgränser skapade för att räcka en livstid."
+    },
+    "vip_feature_title_profile_customisation": {
+      "default": "Mer anpassning: Profilhuvud"
+    },
+    "vip_feature_description_profile_customisation": {
+      "default": "Gör din profil personlig med unika bakgrundsbilder och skapa din egen atmosfär på Trakt."
+    },
+    "vip_feature_title_plex_sync": {
+      "default": "Synka Plex oftare"
+    },
+    "vip_feature_description_plex_sync": {
+      "default": "Håll ditt Plex-bibliotek perfekt synkroniserat med tätare automatiska uppdateringar under dagen."
+    },
+    "vip_feature_title_streaming_services": {
+      "default": "Synka fler tjänster"
+    },
+    "vip_feature_description_streaming_services": {
+      "default": "Anslut och synka med fler streamingplattformar för att hålla koll på allt du ser, oavsett tjänst."
+    },
+    "vip_feature_title_more_lists": {
+      "default": "Fler listor"
+    },
+    "vip_feature_description_more_lists": {
+      "default": "Skapa ännu fler anpassade listor för att organisera dina serier och filmer precis som du vill ha dem."
+    },
+    "vip_feature_title_sentiment_trivia": {
+      "default": "Mer info: Sentiment & Trivia"
+    },
+    "vip_feature_description_sentiment_trivia": {
+      "default": "Lås upp detaljerad sentimentanalys och fascinerande kuriosa om filmerna och serierna du ser."
+    },
+    "vip_feature_title_api_apps": {
+      "default": "Fler API-appar anslutna"
+    },
+    "vip_feature_description_api_apps": {
+      "default": "Anslut fler tredjepartsappar och tjänster via Trakt API för att förhöja din upplevelse."
+    },
+    "vip_feature_title_private_notes": {
+      "default": "Fler privata anteckningar"
+    },
+    "vip_feature_description_private_notes": {
+      "default": "Lägg till betydligt fler personliga anteckningar för att minnas dina tankar och rekommendationer."
+    },
+    "vip_feature_title_support": {
+      "default": "Bättre support: Forum & Feedback"
+    },
+    "vip_feature_description_support": {
+      "default": "Få förtur till våra supportforum och se till att din feedback når fram direkt till teamet."
+    },
+    "text_vip_built_to_last": {
+      "default": "Byggt för att hålla"
+    },
+    "text_vip_costs_metadata": {
+      "default": "Uppdaterad metadata, bilder och undertexter"
+    },
+    "text_vip_costs_clients": {
+      "default": "Stöd för alla Trakt-klienter från oss och tredjepart"
+    },
+    "text_vip_billing_now": {
+      "default": "{price} debiteras nu"
+    },
+    "text_vip_discount_then_price": {
+      "default": "därefter {price}"
+    },
+    "text_vip_discount_first_term_monthly": {
+      "default": "{price} första månaden, därefter"
+    },
+    "text_vip_discount_first_term_yearly": {
+      "default": "{price} första året, därefter"
+    },
+    "text_vip_discount_first_term_biyearly": {
+      "default": "{price} för 2 år, därefter"
+    },
+    "text_vip_recurring_monthly": {
+      "default": "{price} varje månad därefter"
+    },
+    "text_vip_recurring_yearly": {
+      "default": "{price} varje år därefter"
+    },
+    "text_vip_recurring_biyearly": {
+      "default": "{price} vartannat år därefter"
     }
   }
 }
