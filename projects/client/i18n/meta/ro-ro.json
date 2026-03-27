@@ -3378,6 +3378,9 @@
     },
     "text_vip_recurring_biyearly": {
       "default": "{price} la fiecare 2 ani după aceea"
+    },
+    "header_total_runtime": {
+      "default": "Durată totală"
     }
   }
 }

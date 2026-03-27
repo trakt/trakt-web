@@ -3378,6 +3378,9 @@
     },
     "text_vip_recurring_biyearly": {
       "default": "{price} vartannat år därefter"
+    },
+    "header_total_runtime": {
+      "default": "Total speltid"
     }
   }
 }

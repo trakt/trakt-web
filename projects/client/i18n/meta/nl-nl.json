@@ -3378,6 +3378,9 @@
     },
     "text_vip_recurring_biyearly": {
       "default": "daarna elke 2 jaar {price}"
+    },
+    "header_total_runtime": {
+      "default": "Totale speelduur"
     }
   }
 }

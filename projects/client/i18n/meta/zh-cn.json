@@ -3377,6 +3377,9 @@
     },
     "text_vip_recurring_biyearly": {
       "default": "此后每 2 年 {price}"
+    },
+    "header_total_runtime": {
+      "default": "总时长"
     }
   }
 }

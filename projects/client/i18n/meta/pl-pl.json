@@ -3378,6 +3378,9 @@
     },
     "text_vip_recurring_biyearly": {
       "default": "{price} co 2 lata w kolejnych okresach"
+    },
+    "header_total_runtime": {
+      "default": "Łączny czas trwania"
     }
   }
 }

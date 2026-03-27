@@ -3378,6 +3378,9 @@
     },
     "text_vip_recurring_biyearly": {
       "default": "{price} на всеки 2 години след това"
+    },
+    "header_total_runtime": {
+      "default": "Общо времетраене"
     }
   }
 }

@@ -986,6 +986,14 @@
       "description": "Header for the network section.",
       "exclude": []
     },
+    "header_total_runtime": {
+      "default": "Total Runtime",
+      "description": "Header for the total runtime section. Shows the total time to watch all aired episodes of a show.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "header_country": {
       "default": "Country",
       "description": "Header for the country section.",
