@@ -4,6 +4,7 @@ import { toMap } from '$lib/utils/array/toMap.ts';
 import type { FavoriteMovieResponse, FavoriteShowResponse } from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
+import { time } from '../../../utils/timing/time.ts';
 
 const UserFavoritedMediaSchema = z.object({
   favoritedAt: z.date(),
@@ -88,5 +89,5 @@ export const currentUserFavoritesQuery = defineQuery({
     };
   },
   schema: UserFavoritesSchema,
-  ttl: Infinity,
+  ttl: time.hours(12),
 });

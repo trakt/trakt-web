@@ -33,5 +33,5 @@ export const episodePeopleQuery = defineQuery({
   request: episodePeopleRequest,
   mapper: (response) => mapToMediaCrew(response.body),
   schema: MediaCrewSchema,
-  ttl: time.days(7),
+  ttl: time.hours(12),
 });
