@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "Мережа"
+    },
+    "header_total_runtime": {
+      "default": "Загальна тривалість"
+    },
+    "text_episode_count_one": {
+      "default": "{count} серія"
+    },
+    "text_episode_count_other": {
+      "default": "{count} серій"
     }
   }
 }

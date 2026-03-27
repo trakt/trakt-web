@@ -3239,6 +3239,15 @@
     },
     "header_network": {
       "default": "电视网"
+    },
+    "header_total_runtime": {
+      "default": "总时长"
+    },
+    "text_episode_count_one": {
+      "default": "{count} 集"
+    },
+    "text_episode_count_other": {
+      "default": "{count} 集"
     }
   }
 }

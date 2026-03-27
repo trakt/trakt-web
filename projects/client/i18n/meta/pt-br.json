@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "Rede"
+    },
+    "header_total_runtime": {
+      "default": "Duração Total"
+    },
+    "text_episode_count_one": {
+      "default": "{count} episódio"
+    },
+    "text_episode_count_other": {
+      "default": "{count} episódios"
     }
   }
 }

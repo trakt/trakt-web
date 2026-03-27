@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "Rețea"
+    },
+    "header_total_runtime": {
+      "default": "Durată totală"
+    },
+    "text_episode_count_one": {
+      "default": "{count} episod"
+    },
+    "text_episode_count_other": {
+      "default": "{count} episoade"
     }
   }
 }

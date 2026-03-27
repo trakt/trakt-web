@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "Сеть"
+    },
+    "header_total_runtime": {
+      "default": "Общая продолжительность"
+    },
+    "text_episode_count_one": {
+      "default": "{count} эпизод"
+    },
+    "text_episode_count_other": {
+      "default": "{count} эпизодов"
     }
   }
 }

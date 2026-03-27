@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "Sieć"
+    },
+    "header_total_runtime": {
+      "default": "Łączny czas trwania"
+    },
+    "text_episode_count_one": {
+      "default": "{count} odcinek"
+    },
+    "text_episode_count_other": {
+      "default": "{count} odcinków"
     }
   }
 }

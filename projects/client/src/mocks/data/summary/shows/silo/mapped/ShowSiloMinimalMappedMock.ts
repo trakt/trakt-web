@@ -49,4 +49,5 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   'episode': {
     'count': 20,
   },
+  'totalRuntime': NaN,
 };

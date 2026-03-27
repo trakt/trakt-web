@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "Netwerk"
+    },
+    "header_total_runtime": {
+      "default": "Totale speelduur"
+    },
+    "text_episode_count_one": {
+      "default": "{count} aflevering"
+    },
+    "text_episode_count_other": {
+      "default": "{count} afleveringen"
     }
   }
 }

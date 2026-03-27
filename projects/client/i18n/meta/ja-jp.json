@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "ネットワーク"
+    },
+    "header_total_runtime": {
+      "default": "総再生時間"
+    },
+    "text_episode_count_one": {
+      "default": "{count} エピソード"
+    },
+    "text_episode_count_other": {
+      "default": "{count} エピソード"
     }
   }
 }

@@ -58,6 +58,8 @@ export function mapToShowEntry(
     episode: {
       count: show.aired_episodes ?? NaN,
     },
+    totalRuntime: show.total_runtime
+      ?? (show.runtime ?? NaN) * (show.aired_episodes ?? NaN),
     rating: mapToTraktRating(show.rating),
     network: show.network,
   };

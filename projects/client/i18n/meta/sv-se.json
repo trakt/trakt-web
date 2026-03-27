@@ -3240,6 +3240,15 @@
     },
     "header_network": {
       "default": "Nätverk"
+    },
+    "header_total_runtime": {
+      "default": "Total speltid"
+    },
+    "text_episode_count_one": {
+      "default": "{count} avsnitt"
+    },
+    "text_episode_count_other": {
+      "default": "{count} avsnitt"
     }
   }
 }
