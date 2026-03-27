@@ -3237,6 +3237,9 @@
     },
     "option_text_africa": {
       "default": "Afrika"
+    },
+    "header_network": {
+      "default": "Netværk"
     }
   }
 }

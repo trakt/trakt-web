@@ -19,6 +19,7 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     },
     'airDate': new Date('2023-05-05T01:00:00.000Z'),
     'rating': 0.8054,
+    'network': 'Apple TV+',
   },
   {
     'id': 402288,
@@ -37,6 +38,7 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     },
     'airDate': new Date('2024-11-15T02:00:00.000Z'),
     'rating': 0.7406,
+    'network': 'Apple TV+',
   },
   {
     'id': 456019,
@@ -48,5 +50,6 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     'poster': undefined,
     'airDate': MAX_DATE,
     'rating': 0.5,
+    'network': 'Apple TV+',
   },
 ];

@@ -58,6 +58,7 @@ export const LibraryMappedMock: LibraryItem[] = [
             'https://walter-r2.trakt.tv/images/shows/000/002/177/logos/thumb/477fd31928.png.webp',
         },
       },
+      'network': 'Comedy Central',
       'originalTitle': 'South Park',
       'overview':
         'Follow the misadventures of four irreverent grade-schoolers in the quiet, dysfunctional town of South Park, Colorado.',
@@ -276,6 +277,7 @@ export const LibraryMappedMock: LibraryItem[] = [
             'https://walter-r2.trakt.tv/images/shows/000/004/215/logos/thumb/9e761a7a93.png.webp',
         },
       },
+      'network': 'FOX',
       'originalTitle': 'Married... with Children',
       'overview':
         "This Fox comedy broke the mold of unbelievably selfless family characters which had become the norm in American sitcoms of the 1980's. Al Bundy, shoe salesman, fears the frequent amorous advances of his ditsy wife Peggy, who henpecks him and frivolously spends all of his money, reliving his 4 touchdowns in a single game at high school. Supporting characters include their two shallow, self-serving teenage children Kelly and Bud, as well as nosy neighbor Marcy and her husband.",

@@ -41,9 +41,16 @@
     currentSeason,
     sentiment,
   }: ShowSummaryProps = $props();
+
+  const networks = $derived(
+    [...new Set(
+      [media.network, ...seasons.map((s) => s.network)]
+        .filter((n): n is string => n != null),
+    )].map((name) => ({ name })),
+  );
 </script>
 
-<SummaryDrawer {sentiment} {studios} {crew} {media} type="show" />
+<SummaryDrawer {sentiment} {studios} {crew} {media} {networks} type="show" />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <MediaSummaryV2 {media} {studios} {intl} {crew} type="show" />

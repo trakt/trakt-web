@@ -7,6 +7,7 @@ import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic
 import { MovieHereticStudiosMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticStudiosMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
+import { ShowSiloNetworksMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloNetworksMappedMock.ts';
 import { ShowSiloStudiosMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloStudiosMappedMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { screen, waitFor } from '@testing-library/svelte';
@@ -180,10 +181,26 @@ describe('MediaDetails', () => {
       media: ShowSiloMappedMock,
       studios: ShowSiloStudiosMappedMock,
       crew: ShowSiloPeopleMappedMock,
+      networks: ShowSiloNetworksMappedMock,
       type: 'show',
     };
 
     mediaTests(defaultProps);
+
+    it('should display the network', async () => {
+      renderComponent(
+        MediaDetails,
+        { props: defaultProps },
+      );
+
+      await waitFor(() => {
+        const networkLabel = screen.getByText('Network');
+        const networkValue = screen.getByText('Apple TV+');
+
+        expect(networkLabel).toBeInTheDocument();
+        expect(networkValue).toBeInTheDocument();
+      });
+    });
 
     it('should display the creator instead of director', async () => {
       renderComponent(
