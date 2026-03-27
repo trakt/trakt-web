@@ -5,34 +5,34 @@
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
 
-  const { member }: { member: UserProfile } = $props();
+  const { profile }: { profile: UserProfile } = $props();
 
-  const displayName = $derived(toDisplayableName(member));
-  const profileUrl = $derived(UrlBuilder.profile.user(member.slug!));
+  const displayName = $derived(toDisplayableName(profile));
+  const profileUrl = $derived(UrlBuilder.profile.user(profile.slug!));
 </script>
 
-<div class="team-member-card">
-  <div class="team-member-avatar-wrapper">
+<div class="trakt-profile-card">
+  <div class="trakt-profile-avatar-wrapper">
     <Link href={profileUrl}>
       <ProfileImage
         --image-size="var(--ni-80)"
         --border-width="var(--border-thickness-xs)"
-        name={member.name.first}
-        src={member.avatar.url}
-        isVip={member.isVip}
+        name={profile.name.first}
+        src={profile.avatar.url}
+        isVip={profile.isVip}
       />
     </Link>
   </div>
 
-  <div class="team-member-info">
-    <div class="team-member-names">
+  <div class="trakt-profile-info">
+    <div class="trakt-profile-names">
       <Link href={profileUrl}>
-        <span class="team-member-name">{displayName}</span>
+        <span class="trakt-profile-name">{displayName}</span>
       </Link>
     </div>
 
-    {#if member.location}
-      <span class="secondary team-member-location">{member.location}</span>
+    {#if profile.location}
+      <span class="secondary trakt-profile-location">{profile.location}</span>
     {/if}
   </div>
 </div>
@@ -40,7 +40,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .team-member-card {
+  .trakt-profile-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,7 +49,7 @@
     text-align: center;
   }
 
-  .team-member-avatar-wrapper {
+  .trakt-profile-avatar-wrapper {
     :global(.trakt-link) {
       display: block;
       border-radius: 50%;
@@ -63,7 +63,7 @@
     }
   }
 
-  .team-member-info {
+  .trakt-profile-info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,14 +72,14 @@
     width: 100%;
   }
 
-  .team-member-names {
+  .trakt-profile-names {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--gap-micro);
   }
 
-  .team-member-name {
+  .trakt-profile-name {
     font-weight: 600;
     font-size: var(--font-size-title);
 
@@ -92,7 +92,7 @@
     }
   }
 
-  .team-member-location {
+  .trakt-profile-location {
     font-size: var(--ni-12);
     color: var(--color-text-secondary);
 
