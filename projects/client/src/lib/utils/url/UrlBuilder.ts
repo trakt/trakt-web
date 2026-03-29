@@ -233,7 +233,6 @@ export const UrlBuilder = {
     reportIssue: () => 'https://github.com/trakt/trakt-web/issues/new',
   },
   socialMedia: {
-    x: () => 'https://x.com/trakt',
     reddit: () => 'https://www.reddit.com/r/trakt',
   },
   vip: () => '/vip',
