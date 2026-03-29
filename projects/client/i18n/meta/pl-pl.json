@@ -3264,6 +3264,9 @@
     },
     "header_sentiment_mixed": {
       "default": "Mieszane"
+    },
+    "button_label_view_trivia": {
+      "default": "Zobacz ciekawostki"
     }
   }
 }

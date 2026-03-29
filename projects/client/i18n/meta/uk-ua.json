@@ -3264,6 +3264,9 @@
     },
     "header_sentiment_mixed": {
       "default": "Змішані"
+    },
+    "button_label_view_trivia": {
+      "default": "Переглянути цікаві факти"
     }
   }
 }
