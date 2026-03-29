@@ -22,7 +22,7 @@
     trapSelector?: string;
     size?: "normal" | "large" | "auto";
     badge?: Snippet;
-    metaInfo?: string;
+    metaInfo?: string | Snippet;
     onOpened?: () => void;
     classList?: string;
     variant?: "default" | "vip";
@@ -105,7 +105,11 @@
         <div class="trakt-drawer-title">
           <h1 class="ellipsis">{title}</h1>
           {#if metaInfo}
-            <p class="title-meta-info bold ellipsis">{metaInfo}</p>
+            {#if typeof metaInfo === "string"}
+              <p class="title-meta-info bold ellipsis">{metaInfo}</p>
+            {:else}
+              {@render metaInfo()}
+            {/if}
           {/if}
         </div>
         {@render badge?.()}

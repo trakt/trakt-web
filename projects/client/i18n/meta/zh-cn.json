@@ -3263,6 +3263,9 @@
     },
     "header_sentiment_mixed": {
       "default": "褒贬不一"
+    },
+    "button_label_view_trivia": {
+      "default": "查看趣闻"
     }
   }
 }

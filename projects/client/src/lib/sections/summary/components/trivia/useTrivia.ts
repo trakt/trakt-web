@@ -52,7 +52,7 @@ export function useTrivia(props: UseTriviaProps) {
       }),
     ),
     summary: query.pipe(
-      map(($query) => $query.data ? [$query.data.summary] : []),
+      map(($query) => $query.data ? $query.data.summary : []),
     ),
     hasSpoilers,
   };

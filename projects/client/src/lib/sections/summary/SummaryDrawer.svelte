@@ -11,6 +11,7 @@
   import type { MediaDetailsProps } from "./components/details/MediaDetailsProps";
   import SentimentDrawer from "./components/sentiment/SentimentDrawer.svelte";
   import VideoDrawer from "./components/videos/VideoDrawer.svelte";
+  import TriviaDrawer from "./components/trivia/TriviaDrawer.svelte";
 
   const {
     sentiment,
@@ -32,6 +33,8 @@
   const relatedType = $derived(
     details.type === "episode" ? "show" : details.type,
   );
+
+  const media = $derived("media" in details ? details.media : undefined);
 </script>
 
 {#if drawer === Drawers.Sentiment && sentiment}
@@ -52,4 +55,8 @@
 
 {#if drawer === Drawers.Videos && videos}
   <VideoDrawer {videos} slug={mediaSlug} onClose={close} />
+{/if}
+
+{#if drawer === Drawers.Trivia && media}
+  <TriviaDrawer {media} onClose={close} />
 {/if}
