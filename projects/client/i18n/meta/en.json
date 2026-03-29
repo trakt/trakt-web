@@ -8552,6 +8552,14 @@
         "android",
         "ios"
       ]
+    },
+    "drawer_title_sort": {
+      "default": "Sort By",
+      "description": "Title for the drawer containing sorting options for a user's list items. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

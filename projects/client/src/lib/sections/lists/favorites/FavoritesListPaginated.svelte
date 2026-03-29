@@ -4,21 +4,21 @@
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { useFavoritesList } from "../stores/useFavoritesList";
   import SortValue from "../user/_internal/SortValue.svelte";
-  import { useListSorting } from "../user/_internal/useListSorting";
-  import ListSortActions from "../user/ListSortActions.svelte";
+  import type { SortBy } from "../user/models/SortBy";
+  import type { SortDirection } from "../user/models/SortDirection";
   import FavoriteMediaItem from "./_internal/FavoriteMediaItem.svelte";
 
-  const {
-    title,
-    slug,
-    mode,
-  }: { title: string; slug: string; mode: DiscoverMode } = $props();
+  type FavoritesProps = {
+    title: string;
+    slug: string;
+    mode: DiscoverMode;
+    sortBy?: SortBy;
+    sortHow?: SortDirection;
+  };
+
+  const { title, slug, mode, sortBy, sortHow }: FavoritesProps = $props();
 
   const { isMe } = $derived(useIsMe(slug));
-
-  const { current, update, options, urlBuilder } = $derived(
-    useListSorting({ type: "favorites", slug }),
-  );
 </script>
 
 <DrilledMediaList
@@ -29,22 +29,13 @@
     useFavoritesList({
       ...params,
       slug,
-      sortBy: $current.sorting.value,
-      sortHow: $current.sortHow,
+      sortBy,
+      sortHow,
     })}
 >
-  {#snippet listActions()}
-    <ListSortActions
-      {options}
-      {urlBuilder}
-      current={$current}
-      onUpdate={update}
-    />
-  {/snippet}
-
   {#snippet item(media)}
     {#snippet sortTag()}
-      <SortValue item={media} sortBy={$current.sorting.value} />
+      <SortValue item={media} {sortBy} />
     {/snippet}
 
     <FavoriteMediaItem
@@ -52,7 +43,7 @@
       {mode}
       isActionable={$isMe}
       style="summary"
-      sortTag={$current.sorting.value ? sortTag : undefined}
+      sortTag={sortBy ? sortTag : undefined}
     />
   {/snippet}
 </DrilledMediaList>

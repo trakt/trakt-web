@@ -34,7 +34,7 @@ type ListSorting = {
 };
 
 type UseListSortingProps = {
-  list: MediaListSummary;
+  list: MediaListSummary | undefined;
   type?: MediaType;
 } | {
   type: 'watchlist';
@@ -42,6 +42,14 @@ type UseListSortingProps = {
   type: 'favorites';
   slug: string;
 };
+
+function getDefaultDirection(props: UseListSortingProps): SortDirection {
+  if (props.type === 'watchlist' || props.type === 'favorites' || !props.list) {
+    return 'desc';
+  }
+
+  return props.list.sortHow;
+}
 
 export function useListSorting(
   props: UseListSortingProps,
@@ -60,10 +68,7 @@ export function useListSorting(
     options: LIST_SORT_OPTIONS,
     current: params.pipe(
       map(($params) => {
-        const defaultDirection =
-          props.type === 'watchlist' || props.type === 'favorites'
-            ? 'desc'
-            : props.list.sortHow;
+        const defaultDirection = getDefaultDirection(props);
         const sortBy = mapToSortBy($params.sort_by);
         const sortHow = mapToDirection($params.sort_how) ?? defaultDirection;
 
@@ -89,6 +94,10 @@ export function useListSorting(
           sortBy,
           sortHow,
         });
+      }
+
+      if (!props.list) {
+        return '#';
       }
 
       const { list, type } = props;

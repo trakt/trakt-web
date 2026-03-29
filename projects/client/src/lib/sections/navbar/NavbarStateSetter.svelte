@@ -9,6 +9,7 @@
     toastActions,
     mode,
     hasFilters,
+    sortActions,
   }: {
     actions?: Snippet;
     seasonalActions?: Snippet;
@@ -16,6 +17,7 @@
     toastActions?: Snippet | Nil;
     mode?: NavbarMode;
     hasFilters?: boolean;
+    sortActions?: Snippet;
   } = $props();
 
   const { set, globalSet, reset } = useNavbarState();
@@ -26,6 +28,7 @@
       seasonalActions,
       contextualActions,
       hasFilters,
+      sortActions,
     });
   });
 

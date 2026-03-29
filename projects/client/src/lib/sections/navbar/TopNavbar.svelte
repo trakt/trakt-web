@@ -30,6 +30,7 @@
           </JoinTraktButton>
         </RenderFor>
         <RenderFor audience="authenticated">
+          {@render $state.sortActions?.()}
           {@render $state.seasonalActions?.()}
           <FilterButton isDisabled={!$state.hasFilters} />
         </RenderFor>

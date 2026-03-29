@@ -9,6 +9,7 @@ type NavbarState = {
   seasonalActions: Snippet | undefined;
   contextualActions: Snippet | undefined;
   hasFilters: boolean;
+  sortActions?: Snippet;
 };
 
 type GlobalNavbarState = {
@@ -26,6 +27,7 @@ const initialNavbarState: NavbarState = {
   seasonalActions: undefined,
   contextualActions: undefined,
   hasFilters: false,
+  sortActions: undefined,
 };
 
 const navbarStateStore = new BehaviorSubject<NavbarState>(

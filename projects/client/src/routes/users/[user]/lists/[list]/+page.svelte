@@ -2,6 +2,8 @@
   import { page } from "$app/state";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
+  import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting";
+  import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
   import UserListPaginatedList from "$lib/sections/lists/user/UserListPaginatedList.svelte";
   import { useUserListSummary } from "$lib/sections/lists/user/useUserListSummary.ts";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
@@ -11,7 +13,7 @@
 
   const { params }: PageProps = $props();
 
-  const { list } = $derived(
+  const { list, isLoading } = $derived(
     useUserListSummary({
       userId: params.user,
       listId: params.list,
@@ -20,6 +22,10 @@
 
   const type = $derived(mapToMediaType(page.url.searchParams));
   const listName = $derived($list?.name ?? "");
+
+  const { current, update, options, urlBuilder } = $derived(
+    useListSorting({ list: $list, type }),
+  );
 </script>
 
 <TraktPage
@@ -28,11 +34,27 @@
   title={listName}
   hasDynamicContent={true}
 >
-  <NavbarStateSetter hasFilters />
+  <NavbarStateSetter hasFilters>
+    {#snippet sortActions()}
+      <ListSortActions
+        {options}
+        {urlBuilder}
+        current={$current}
+        onUpdate={update}
+        disabled={$isLoading}
+      />
+    {/snippet}
+  </NavbarStateSetter>
 
   <TraktPageCoverSetter />
 
   {#if $list}
-    <UserListPaginatedList title={listName} list={$list} {type} />
+    <UserListPaginatedList
+      title={listName}
+      list={$list}
+      {type}
+      sortBy={$current.sorting.value}
+      sortHow={$current.sortHow}
+    />
   {/if}
 </TraktPage>

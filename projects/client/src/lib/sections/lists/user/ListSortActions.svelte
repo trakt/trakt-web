@@ -1,10 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import Button from "$lib/components/buttons/Button.svelte";
-  import SortDirectionIcon from "$lib/components/icons/SortDirectionIcon.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
+  import SortIcon from "$lib/components/icons/SortIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import SortOptionsDrawer from "./_internal/SortOptionsDrawer.svelte";
@@ -17,16 +14,14 @@
     current,
     urlBuilder,
     onUpdate,
+    disabled,
   }: {
     options: Sorting[];
     current: { sortHow: SortDirection; sorting: Sorting };
     urlBuilder: ListUrlBuilder;
     onUpdate: (params: Record<string, string>) => void;
+    disabled?: boolean;
   } = $props();
-
-  const reversedDirection = $derived(
-    current.sortHow === "asc" ? "desc" : "asc",
-  );
 
   const sortHowParam = $derived(page.url.searchParams.get("sort_how"));
   const sortByParam = $derived(page.url.searchParams.get("sort_by"));
@@ -39,39 +34,16 @@
   });
 
   const isOpen = writable(false);
-  const { track } = useTrack(AnalyticsEvent.ListSort);
 </script>
 
-<div class="trakt-list-sort-actions">
-  <Button
-    style="flat"
-    size="small"
-    color="default"
-    label={m.button_label_sort_list()}
-    onclick={() => isOpen.set(true)}
-  >
-    {current.sorting.text()}
-  </Button>
-
-  <ActionButton
-    replacestate
-    style="flat"
-    color="default"
-    size="small"
-    label={reversedDirection === "asc"
-      ? m.button_label_sort_ascending()
-      : m.button_label_sort_descending()}
-    href={`${urlBuilder({ sortHow: reversedDirection, sortBy: current.sorting.value })}`}
-    onclick={() => {
-      track({
-        sortBy: current.sorting.value ?? "default",
-        sortHow: reversedDirection,
-      });
-    }}
-  >
-    <SortDirectionIcon direction={current.sortHow} />
-  </ActionButton>
-</div>
+<ActionButton
+  style="ghost"
+  label={m.button_label_sort_list()}
+  onclick={() => isOpen.set(true)}
+  {disabled}
+>
+  <SortIcon />
+</ActionButton>
 
 {#if $isOpen}
   <SortOptionsDrawer
@@ -81,23 +53,3 @@
     onClose={() => isOpen.set(false)}
   />
 {/if}
-
-<style>
-  .trakt-list-sort-actions {
-    display: flex;
-    gap: var(--gap-xs);
-    align-items: center;
-
-    padding: var(--ni-4) 0;
-
-    :global(.trakt-button) {
-      padding: var(--ni-6) var(--ni-12);
-      --button-height: var(--ni-32);
-    }
-
-    :global(.trakt-action-button svg) {
-      width: var(--ni-16);
-      height: var(--ni-16);
-    }
-  }
-</style>
