@@ -3255,6 +3255,15 @@
     },
     "drawer_title_sort": {
       "default": "並べ替え"
+    },
+    "header_sentiment_positive": {
+      "default": "ポジティブ"
+    },
+    "header_sentiment_negative": {
+      "default": "ネガティブ"
+    },
+    "header_sentiment_mixed": {
+      "default": "賛否両論"
     }
   }
 }

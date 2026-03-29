@@ -3255,6 +3255,15 @@
     },
     "drawer_title_sort": {
       "default": "Сортиране"
+    },
+    "header_sentiment_positive": {
+      "default": "Положително"
+    },
+    "header_sentiment_negative": {
+      "default": "Отрицателно"
+    },
+    "header_sentiment_mixed": {
+      "default": "Смесено"
     }
   }
 }

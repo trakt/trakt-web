@@ -3255,6 +3255,15 @@
     },
     "drawer_title_sort": {
       "default": "Сортувати за"
+    },
+    "header_sentiment_positive": {
+      "default": "Позитивні"
+    },
+    "header_sentiment_negative": {
+      "default": "Негативні"
+    },
+    "header_sentiment_mixed": {
+      "default": "Змішані"
     }
   }
 }

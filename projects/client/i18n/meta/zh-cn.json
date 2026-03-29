@@ -3254,6 +3254,15 @@
     },
     "drawer_title_sort": {
       "default": "排序"
+    },
+    "header_sentiment_positive": {
+      "default": "正面"
+    },
+    "header_sentiment_negative": {
+      "default": "负面"
+    },
+    "header_sentiment_mixed": {
+      "default": "褒贬不一"
     }
   }
 }

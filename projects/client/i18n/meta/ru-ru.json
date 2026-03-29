@@ -3255,6 +3255,15 @@
     },
     "drawer_title_sort": {
       "default": "Сортировка"
+    },
+    "header_sentiment_positive": {
+      "default": "Положительные"
+    },
+    "header_sentiment_negative": {
+      "default": "Отрицательные"
+    },
+    "header_sentiment_mixed": {
+      "default": "Смешанные"
     }
   }
 }

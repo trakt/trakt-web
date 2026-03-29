@@ -1,11 +1,9 @@
-import type { SentimentAnalysis } from '$lib/requests/models/SentimentAnalysis.ts';
-
 const CHARACTER_COUNT_THRESHOLD = 35;
-const SHORT_ASPECTS_LIMIT = 3;
-const LONG_ASPECTS_LIMIT = 2;
+const SHORT_ASPECTS_LIMIT = 4;
+const LONG_ASPECTS_LIMIT = 3;
 
-export function calculateAspectsLimit(sentiment: SentimentAnalysis): number {
-  const allAspects = [...sentiment.aspect.pros, ...sentiment.aspect.cons];
+export function calculateAspectsLimit(pros: string[], cons: string[]): number {
+  const allAspects = [...pros, ...cons];
   if (allAspects.length === 0) return SHORT_ASPECTS_LIMIT;
 
   const averageLength =
