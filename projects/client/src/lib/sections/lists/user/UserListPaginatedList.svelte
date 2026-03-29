@@ -1,9 +1,6 @@
 <script lang="ts">
-  import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
-  import { useUser } from "$lib/features/auth/stores/useUser";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
@@ -24,11 +21,7 @@
 
   const { title, type, list, sortBy, sortHow }: UserListProps = $props();
 
-  const { user } = useUser();
-
   const { filterMap } = useFilter();
-
-  const isListOwner = $derived($user.slug === list.user?.slug);
 
   const listCacheId = $derived.by(() => {
     const sortKey = `${sortBy}-${sortHow}`;
@@ -43,7 +36,6 @@
 
 <DrilledMediaList
   id={`user-paginated-list-${listCacheId}`}
-  {title}
   {type}
   filter={$filterMap}
   useList={(params) =>
@@ -75,18 +67,6 @@
       {list}
       sortTag={sortBy ? sortTag : undefined}
     />
-  {/snippet}
-
-  {#snippet actions()}
-    <ListActions {list} />
-
-    {#if !isListOwner}
-      <ShareButton
-        {title}
-        textFactory={({ title: name }) => m.text_share_list({ name })}
-        source={{ id: "user-list", type }}
-      />
-    {/if}
   {/snippet}
 </DrilledMediaList>
 

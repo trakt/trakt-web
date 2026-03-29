@@ -3,6 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
+  import SmartListActions from "$lib/sections/lists/smart/_internal/SmartListActions.svelte";
   import SmartListPaginatedRenderer from "$lib/sections/lists/smart/SmartListPaginatedRenderer.svelte";
   import { useSmartLists } from "$lib/sections/lists/smart/useSmartLists.ts";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
@@ -22,13 +23,24 @@
   const list = $derived($collection?.find((list) => list.id === listId));
 </script>
 
+{#snippet actions()}
+  {#if list}
+    <SmartListActions {list} />
+  {/if}
+{/snippet}
+
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
   title={list?.title || m.page_title_smart_lists()}
   hasDynamicContent={true}
 >
-  <NavbarStateSetter mode="minimal" />
+  <NavbarStateSetter
+    header={{
+      title: list?.title ?? "",
+      actions,
+    }}
+  />
 
   <TraktPageCoverSetter />
 

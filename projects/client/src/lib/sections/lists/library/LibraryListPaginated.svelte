@@ -14,7 +14,6 @@
 
 <DrilledMediaList
   id="view-all-library"
-  title={m.list_title_library()}
   type={$mode}
   useList={(params) => useLibraryList({ ...params, library })}
 >

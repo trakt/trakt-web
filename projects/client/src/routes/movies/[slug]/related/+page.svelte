@@ -14,11 +14,11 @@
   title={m.list_title_related_movies()}
   image={DEFAULT_SHARE_MOVIE_COVER}
 >
-  <NavbarStateSetter mode="minimal" />
-
-  <RelatedPaginatedList
-    title={m.list_title_related_movies()}
-    type="movie"
-    slug={params.slug}
+  <NavbarStateSetter
+    header={{
+      title: m.list_title_related_movies(),
+    }}
   />
+
+  <RelatedPaginatedList type="movie" slug={params.slug} />
 </TraktPage>

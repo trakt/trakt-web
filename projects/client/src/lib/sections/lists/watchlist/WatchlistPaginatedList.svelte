@@ -9,20 +9,18 @@
   import { useWatchList } from "./useWatchList";
 
   type WatchListProps = {
-    title: string;
     type?: DiscoverMode;
     sortBy?: SortBy;
     sortHow?: SortDirection;
   };
 
-  const { title, type, sortBy, sortHow }: WatchListProps = $props();
+  const { type, sortBy, sortHow }: WatchListProps = $props();
 
   const { filterMap } = useFilter();
 </script>
 
 <DrilledMediaList
   id="view-all-watchlist-${type}"
-  {title}
   {type}
   filter={$filterMap}
   useList={(params) =>

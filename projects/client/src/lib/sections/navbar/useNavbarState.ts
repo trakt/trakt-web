@@ -10,6 +10,11 @@ type NavbarState = {
   contextualActions: Snippet | undefined;
   hasFilters: boolean;
   sortActions?: Snippet;
+  header?: {
+    title: string;
+    metaInfo?: string | Snippet;
+    actions?: Snippet;
+  };
 };
 
 type GlobalNavbarState = {
@@ -28,6 +33,7 @@ const initialNavbarState: NavbarState = {
   contextualActions: undefined,
   hasFilters: false,
   sortActions: undefined,
+  header: undefined,
 };
 
 const navbarStateStore = new BehaviorSubject<NavbarState>(

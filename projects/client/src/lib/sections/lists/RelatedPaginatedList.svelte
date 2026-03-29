@@ -5,17 +5,15 @@
   import { useRelatedList } from "./stores/useRelatedList";
 
   type RelatedPaginatedListProps = {
-    title: string;
     type: MediaType;
     slug: string;
   };
 
-  const { title, type, slug }: RelatedPaginatedListProps = $props();
+  const { type, slug }: RelatedPaginatedListProps = $props();
 </script>
 
 <DrilledMediaList
   id={`related-list-${type}-${slug}`}
-  {title}
   {type}
   useList={(params) => useRelatedList({ ...params, slug })}
 >

@@ -3,14 +3,13 @@
   import CalendarProvider from "$lib/features/calendar/CalendarProvider.svelte";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import PersonalHistoryPaginatedList from "$lib/sections/lists/history/PersonalHistoryPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
-  const { mode } = useDiscover();
+  const { mode, current } = useDiscover();
   const { history } = useUser();
 </script>
 
@@ -21,11 +20,10 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter hasFilters>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-  </NavbarStateSetter>
+  <NavbarStateSetter
+    hasFilters
+    header={{ title: m.list_title_history(), metaInfo: $current.text() }}
+  />
 
   {#if $history}
     <CalendarProvider initialDate={$history.lastWatchedAt}>

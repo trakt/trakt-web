@@ -3267,6 +3267,9 @@
     },
     "button_label_view_trivia": {
       "default": "Visa kuriosa"
+    },
+    "list_title_smart_lists": {
+      "default": "Smarta listor"
     }
   }
 }

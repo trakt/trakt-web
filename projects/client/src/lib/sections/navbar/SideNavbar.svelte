@@ -12,6 +12,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Toast from "../toast/Toast.svelte";
+  import NavbarHeader from "./_internal/NavbarHeader.svelte";
   import FilterButton from "./components/filter/FilterButton.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
@@ -34,6 +35,7 @@
   <div class="trakt-navbar-actions" class:is-hidden={$state.mode === "minimal"}>
     <div class="trakt-navbar-actions-left">
       <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>
+      <NavbarHeader />
     </div>
 
     <div class="trakt-navbar-actions-center">
@@ -226,6 +228,10 @@
       padding-bottom: 0;
       pointer-events: none;
     }
+  }
+
+  .trakt-navbar-actions-left {
+    min-width: 0;
   }
 
   .trakt-navbar-actions-right {

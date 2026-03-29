@@ -2,6 +2,7 @@
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
+  import NavbarHeader from "./_internal/NavbarHeader.svelte";
   import FilterButton from "./components/filter/FilterButton.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
@@ -17,7 +18,8 @@
       class:is-hidden={$state.mode === "minimal"}
       use:trackWindowScroll={"trakt-navbar-scroll"}
     >
-      <div class="trakt-navbar-actions">
+      <div class="trakt-navbar-left">
+        <NavbarHeader />
         {@render $state.actions?.()}
       </div>
 
@@ -90,6 +92,10 @@
 
     transition: calc(2 * var(--transition-increment)) ease-in-out;
     transition-property: width, background-color, box-shadow, top, opacity;
+
+    .trakt-navbar-left {
+      min-width: 0;
+    }
 
     .trakt-navbar-links {
       display: flex;

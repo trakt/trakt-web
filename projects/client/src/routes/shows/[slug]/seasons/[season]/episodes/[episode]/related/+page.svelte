@@ -14,11 +14,11 @@
   title={m.list_title_related_shows()}
   image={DEFAULT_SHARE_SHOW_COVER}
 >
-  <NavbarStateSetter mode="minimal" />
-
-  <RelatedPaginatedList
-    title={m.list_title_related_shows()}
-    type="show"
-    slug={params.slug}
+  <NavbarStateSetter
+    header={{
+      title: m.list_title_related_shows(),
+    }}
   />
+
+  <RelatedPaginatedList type="show" slug={params.slug} />
 </TraktPage>

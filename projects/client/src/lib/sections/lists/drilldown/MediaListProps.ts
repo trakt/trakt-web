@@ -5,7 +5,7 @@ import type { PaginatableStore } from './PaginatableStore.ts';
 
 export type MediaListProps<T, M> = {
   id: string;
-  title: string;
+  title?: string;
   type: M;
   item: Snippet<[T]>;
   ctaItem?: Snippet;

@@ -13,11 +13,14 @@
   image={DEFAULT_SHARE_SHOW_COVER}
   title={m.page_title_recommended_shows()}
 >
-  <NavbarStateSetter hasFilters />
+  <NavbarStateSetter
+    hasFilters
+    header={{
+      title: m.list_title_recommended(),
+      metaInfo: m.button_text_shows(),
+    }}
+  />
   <TraktPageCoverSetter />
 
-  <RecommendedPaginatedList
-    title={m.list_title_recommended_shows()}
-    type="show"
-  />
+  <RecommendedPaginatedList type="show" />
 </TraktPage>

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import * as m from "$lib/features/i18n/messages.ts";
   import DrilledMediaList from "$lib/sections/lists/drilldown/DrilledMediaList.svelte";
   import { useUpNextList } from "$lib/sections/lists/progress/useUpNextList";
   import { useStablePaginated } from "$lib/sections/lists/stores/useStablePaginated";
@@ -32,9 +31,6 @@
         return isComparingEpisodes ? l.show.id === r.show.id : l.id === r.id;
       },
     })}
-  title={intent === "start"
-    ? m.list_title_start_watching()
-    : m.list_title_up_next()}
 >
   {#snippet item(progressEntry)}
     {#if progressEntry.intent === "start"}

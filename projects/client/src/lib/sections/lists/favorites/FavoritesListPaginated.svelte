@@ -9,21 +9,19 @@
   import FavoriteMediaItem from "./_internal/FavoriteMediaItem.svelte";
 
   type FavoritesProps = {
-    title: string;
     slug: string;
     mode: DiscoverMode;
     sortBy?: SortBy;
     sortHow?: SortDirection;
   };
 
-  const { title, slug, mode, sortBy, sortHow }: FavoritesProps = $props();
+  const { slug, mode, sortBy, sortHow }: FavoritesProps = $props();
 
   const { isMe } = $derived(useIsMe(slug));
 </script>
 
 <DrilledMediaList
   id="favorites-list-paginated-{mode}-{slug}"
-  {title}
   type={mode}
   useList={(params) =>
     useFavoritesList({

@@ -14,7 +14,11 @@
   title={m.list_title_popular_lists()}
   image={DEFAULT_SHARE_MOVIE_COVER}
 >
-  <NavbarStateSetter mode="minimal" />
+  <NavbarStateSetter
+    header={{
+      title: m.list_title_popular_lists(),
+    }}
+  />
 
   <ListsPaginated type="movie" slug={params.slug} />
 </TraktPage>

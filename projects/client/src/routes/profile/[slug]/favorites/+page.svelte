@@ -1,7 +1,6 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import FavoritesListPaginated from "$lib/sections/lists/favorites/FavoritesListPaginated.svelte";
@@ -13,7 +12,7 @@
 
   const { params }: PageProps = $props();
 
-  const { mode } = useDiscover();
+  const { mode, current: currentDiscoverMode } = useDiscover();
 
   const { current, update, options, urlBuilder } = $derived(
     useListSorting({ type: "favorites", slug: params.slug }),
@@ -27,11 +26,12 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-
+  <NavbarStateSetter
+    header={{
+      title: m.list_title_favorites(),
+      metaInfo: $currentDiscoverMode.text(),
+    }}
+  >
     {#snippet sortActions()}
       <ListSortActions
         {options}
@@ -42,11 +42,5 @@
     {/snippet}
   </NavbarStateSetter>
 
-  <FavoritesListPaginated
-    slug={params.slug}
-    title={m.list_title_favorites()}
-    mode={$mode}
-    sortBy={$current.sorting.value}
-    sortHow={$current.sortHow}
-  />
+  <FavoritesListPaginated slug={params.slug} mode={$mode} />
 </TraktPage>
