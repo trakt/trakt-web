@@ -2,6 +2,7 @@ import { FilterKey } from '$lib/features/filters/models/Filter.ts';
 
 export const WHITE_LISTED_PARAMS: readonly string[] = [
   'navigation',
+  'mode',
   ...Object.values(FilterKey),
 ];
 
