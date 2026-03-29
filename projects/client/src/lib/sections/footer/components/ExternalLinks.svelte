@@ -4,7 +4,6 @@
   import GithubIcon from "$lib/components/icons/GithubIcon.svelte";
   import InstallIcon from "$lib/components/icons/InstallIcon.svelte";
   import RedditIcon from "$lib/components/icons/RedditIcon.svelte";
-  import XIcon from "$lib/components/icons/XIcon.svelte";
 
   import Link from "$lib/components/link/Link.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
@@ -45,13 +44,6 @@
     {/if}
 
     <Link
-      href={UrlBuilder.github.web()}
-      target="_blank"
-      onclick={() => trackLink("github-web")}
-    >
-      <GithubIcon />
-    </Link>
-    <Link
       href={UrlBuilder.app.ios()}
       target="_blank"
       onclick={() => trackLink("ios-app")}
@@ -67,13 +59,13 @@
     </Link>
   </div>
 
-  <div class="trakt-social-media-links">
+  <div class="trakt-footer-links">
     <Link
-      href={UrlBuilder.socialMedia.x()}
+      href={UrlBuilder.github.web()}
       target="_blank"
-      onclick={() => trackLink("x")}
+      onclick={() => trackLink("github-web")}
     >
-      <XIcon />
+      <GithubIcon />
     </Link>
     <Link
       href={UrlBuilder.socialMedia.reddit()}
@@ -106,7 +98,7 @@
   }
 
   .trakt-app-links,
-  .trakt-social-media-links {
+  .trakt-footer-links {
     display: flex;
     align-items: center;
     gap: var(--gap-s);
