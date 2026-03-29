@@ -10,6 +10,7 @@
     mode,
     hasFilters,
     sortActions,
+    header,
   }: {
     actions?: Snippet;
     seasonalActions?: Snippet;
@@ -18,6 +19,11 @@
     mode?: NavbarMode;
     hasFilters?: boolean;
     sortActions?: Snippet;
+    header?: {
+      title: string;
+      metaInfo?: string | Snippet;
+      actions?: Snippet;
+    };
   } = $props();
 
   const { set, globalSet, reset } = useNavbarState();
@@ -29,6 +35,7 @@
       contextualActions,
       hasFilters,
       sortActions,
+      header,
     });
   });
 

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting";
@@ -10,7 +9,7 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
 
-  const { mode } = useDiscover();
+  const { mode, current: currentDiscoverMode } = useDiscover();
 
   const { current, update, options, urlBuilder } = $derived(
     useListSorting({ type: "watchlist" }),
@@ -24,11 +23,13 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter hasFilters>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-
+  <NavbarStateSetter
+    hasFilters
+    header={{
+      title: m.list_title_watchlist(),
+      metaInfo: $currentDiscoverMode.text(),
+    }}
+  >
     {#snippet sortActions()}
       <ListSortActions
         {options}
@@ -40,7 +41,6 @@
   </NavbarStateSetter>
 
   <WatchlistPaginatedList
-    title={m.list_title_watchlist()}
     type={$mode}
     sortBy={$current.sorting.value}
     sortHow={$current.sortHow}

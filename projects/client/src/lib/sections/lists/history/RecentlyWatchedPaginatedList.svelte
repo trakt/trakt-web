@@ -4,16 +4,11 @@
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
   import RecentlyWatchedItem from "./RecentlyWatchedItem.svelte";
 
-  const {
-    title,
-    slug,
-    mode,
-  }: { title: string; slug: string; mode: DiscoverMode } = $props();
+  const { slug, mode }: { slug: string; mode: DiscoverMode } = $props();
 </script>
 
 <DrilledMediaList
   id="recently-watched-list-paginated-{mode}-{slug}"
-  {title}
   type={mode}
   useList={({ limit }: { limit: number }) =>
     useRecentlyWatchedList({

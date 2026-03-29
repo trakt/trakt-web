@@ -2,8 +2,8 @@
   import Redirect from "$lib/components/router/Redirect.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import PersonalListsPaginated from "$lib/sections/lists/user/PersonalListsPaginated.svelte";
@@ -15,6 +15,8 @@
   const { params }: PageProps = $props();
   const { user } = useUser();
   const { isMe } = $derived(useIsMe(params.user));
+
+  const { current } = useDiscover();
 </script>
 
 <TraktPage
@@ -28,11 +30,10 @@
 
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter hasFilters>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-  </NavbarStateSetter>
+  <NavbarStateSetter
+    hasFilters
+    header={{ title: m.list_title_liked_lists(), metaInfo: $current.text() }}
+  />
 
   <PersonalListsPaginated type="liked" slug={$user.slug} />
 </TraktPage>

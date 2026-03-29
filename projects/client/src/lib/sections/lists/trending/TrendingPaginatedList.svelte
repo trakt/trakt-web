@@ -1,40 +1,21 @@
 <script lang="ts">
-  import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import TrendingListItem from "./TrendingListItem.svelte";
   import { useTrendingList } from "./useTrendingList";
 
   type TrendingListProps = {
-    title: string;
+    title?: string;
     type: DiscoverMode;
     actions?: Snippet;
     search?: Record<string, string>;
   };
 
-  const {
-    title,
-    type,
-    actions: externalActions,
-    search,
-  }: TrendingListProps = $props();
+  const { title, type, actions, search }: TrendingListProps = $props();
   const { filterMap } = useFilter();
 </script>
-
-{#snippet actions()}
-  {#if externalActions}
-    {@render externalActions()}
-  {:else}
-    <ShareButton
-      {title}
-      textFactory={({ title: name }) => m.text_share_top_list({ name })}
-      source={{ id: "trending", type }}
-    />
-  {/if}
-{/snippet}
 
 <DrilledMediaList
   id="view-all-trending-${type}"

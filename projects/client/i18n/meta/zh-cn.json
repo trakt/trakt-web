@@ -3266,6 +3266,9 @@
     },
     "button_label_view_trivia": {
       "default": "查看趣闻"
+    },
+    "list_title_smart_lists": {
+      "default": "智能列表"
     }
   }
 }

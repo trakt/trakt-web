@@ -10,7 +10,7 @@ import { getDiscoverContext } from './_internal/getDiscoverContext.ts';
 import type { DiscoverMode } from './models/DiscoverMode.ts';
 
 export function useDiscover() {
-  const { options, set } = useToggler('discover');
+  const { options, set, current } = useToggler('discover');
   const { mode, useSeasonalFilters } = getDiscoverContext();
   const { track } = useTrack(AnalyticsEvent.DiscoverMode);
   const { activeTheme } = useSeasonalTheme();
@@ -23,6 +23,7 @@ export function useDiscover() {
 
   return {
     options,
+    current,
     setMode,
     mode,
     useSeasonalFilters: combineLatest(

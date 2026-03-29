@@ -8,17 +8,15 @@
   import { useRecommendedList } from "./useRecommendedList";
 
   type RecommendedListProps = {
-    title: string;
     type: DiscoverMode;
   };
 
-  const { title, type }: RecommendedListProps = $props();
+  const { type }: RecommendedListProps = $props();
   const { filterMap } = useFilter();
 </script>
 
 <DrilledMediaList
   id="view-all-recommended-${type}"
-  {title}
   {type}
   filter={{
     ...$filterMap,

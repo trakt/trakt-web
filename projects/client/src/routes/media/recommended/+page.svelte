@@ -13,8 +13,14 @@
   image={DEFAULT_SHARE_MOVIE_COVER}
   title={m.page_title_recommended_media()}
 >
-  <NavbarStateSetter hasFilters />
+  <NavbarStateSetter
+    hasFilters
+    header={{
+      title: m.list_title_recommended(),
+      metaInfo: m.button_text_media(),
+    }}
+  />
   <TraktPageCoverSetter />
 
-  <RecommendedPaginatedList title={m.list_title_recommended()} type="media" />
+  <RecommendedPaginatedList type="media" />
 </TraktPage>

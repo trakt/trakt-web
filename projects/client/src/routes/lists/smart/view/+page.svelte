@@ -1,7 +1,6 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import SmartListRenderer from "$lib/sections/lists/smart/SmartListRenderer.svelte";
@@ -18,11 +17,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-  </NavbarStateSetter>
+  <NavbarStateSetter header={{ title: m.list_title_smart_lists() }} />
 
   <SmartListRenderer mode={$mode} limit={100} />
 </TraktPage>

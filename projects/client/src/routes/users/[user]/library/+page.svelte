@@ -1,9 +1,8 @@
 <script lang="ts">
   import { page } from "$app/state";
   import Redirect from "$lib/components/router/Redirect.svelte";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import LibraryListPaginated from "$lib/sections/lists/library/LibraryListPaginated.svelte";
@@ -20,6 +19,8 @@
   );
 
   const isMe = $derived(params.user === "me");
+
+  const { current } = useDiscover();
 </script>
 
 {#if !isMe}
@@ -30,13 +31,9 @@
     image={DEFAULT_SHARE_MOVIE_COVER}
     title={m.page_title_library()}
   >
-    <RenderFor audience="authenticated">
-      <NavbarStateSetter>
-        {#snippet actions()}
-          <DiscoverToggles />
-        {/snippet}
-      </NavbarStateSetter>
-    </RenderFor>
+    <NavbarStateSetter
+      header={{ title: m.list_title_library(), metaInfo: $current.text() }}
+    />
 
     <TraktPageCoverSetter />
 

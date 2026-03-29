@@ -1,7 +1,6 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import RecentlyWatchedPaginatedList from "$lib/sections/lists/history/RecentlyWatchedPaginatedList.svelte";
@@ -11,7 +10,7 @@
 
   const { params }: PageProps = $props();
 
-  const { mode } = useDiscover();
+  const { mode, current } = useDiscover();
 </script>
 
 <TraktPage
@@ -21,15 +20,9 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-  </NavbarStateSetter>
-
-  <RecentlyWatchedPaginatedList
-    title={m.list_title_history()}
-    slug={params.slug}
-    mode={$mode}
+  <NavbarStateSetter
+    header={{ title: m.list_title_history(), metaInfo: $current.text() }}
   />
+
+  <RecentlyWatchedPaginatedList slug={params.slug} mode={$mode} />
 </TraktPage>

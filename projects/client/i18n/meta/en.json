@@ -8583,7 +8583,11 @@
     },
     "button_label_view_trivia": {
       "default": "View trivia",
-      "description": "Aria-label for the button that allows users to view trivia for movies or shows.",
+      "description": "Aria-label for the button that allows users to view trivia for movies or shows."
+    },
+    "list_title_smart_lists": {
+      "default": "Smart Lists",
+      "description": "Title for smart lists. This should be as short and concise as possible.",
       "exclude": [
         "android",
         "ios"
