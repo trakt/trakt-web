@@ -7,10 +7,7 @@
   import { useSearch } from "$lib/features/search/useSearch";
   import type { SearchMode } from "$lib/requests/queries/search/models/SearchMode";
   import { assertDefined } from "$lib/utils/assert/assertDefined";
-  import { buildParamString } from "$lib/utils/url/buildParamString";
   import { BehaviorSubject } from "rxjs";
-
-  const query = $derived(page.url.searchParams.get("q")?.trim());
 
   const { pathName, mode } = useSearch();
 
@@ -20,9 +17,10 @@
     selectedType.next(value);
 
     const newMode = assertDefined(value);
-    const params = buildParamString({ m: newMode, q: query });
+    const url = new URL(page.url.href);
+    url.searchParams.set("m", newMode);
 
-    goto(`${pathName}${params}`, {
+    goto(url, {
       replaceState: page.url.pathname === pathName,
       keepFocus: true,
     });
