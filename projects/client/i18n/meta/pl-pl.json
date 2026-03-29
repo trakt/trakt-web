@@ -3255,6 +3255,15 @@
     },
     "drawer_title_sort": {
       "default": "Sortuj wg"
+    },
+    "header_sentiment_positive": {
+      "default": "Pozytywne"
+    },
+    "header_sentiment_negative": {
+      "default": "Negatywne"
+    },
+    "header_sentiment_mixed": {
+      "default": "Mieszane"
     }
   }
 }

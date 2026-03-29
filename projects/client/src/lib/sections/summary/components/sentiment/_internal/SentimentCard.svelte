@@ -3,31 +3,20 @@
   import Link from "$lib/components/link/Link.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import {
     Drawers,
     summaryDrawerNavigation,
   } from "../../../_internal/summaryDrawerNavigation.ts";
-  import { calculateAspectsLimit } from "./calculateAspectsLimit.ts";
-  import SentimentAspects from "./SentimentAspects.svelte";
+  import SentimentSummary from "./SentimentSummary.svelte";
 
-  const {
-    sentiment,
-    isPartial,
-  }: { sentiment: SentimentAnalysis; isPartial: boolean } = $props();
-
-  const aspectsLimit = $derived(calculateAspectsLimit(sentiment));
-
-  const heightCard = $derived(
-    isPartial
-      ? "calc(0.5 * var(--height-sentiment-card))"
-      : "var(--height-sentiment-card)",
-  );
+  const { sentiment }: { sentiment: SentimentAnalysis } = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
 
-  const pros = $derived(sentiment.aspect.pros.slice(0, aspectsLimit));
-  const cons = $derived(sentiment.aspect.cons.slice(0, aspectsLimit));
+  const pros = $derived(sentiment.aspect.pros);
+  const cons = $derived(sentiment.aspect.cons);
 
   const { track } = useTrack(AnalyticsEvent.Drilldown);
 </script>
@@ -35,17 +24,18 @@
 <div class="trakt-sentiment-card">
   <Link
     href={buildDrawerLink(Drawers.Sentiment)}
+    label={m.button_label_view_sentiment_analysis()}
     noscroll
     color="inherit"
     onclick={() => track({ source: "sentiment" })}
   >
     <Card
       --width-card="var(--width-sentiment-card)"
-      --height-card={heightCard}
+      --height-card="var(--height-sentiment-card)"
       variant="transparent"
     >
       <div class="trakt-sentiment-container">
-        <SentimentAspects {pros} {cons} />
+        <SentimentSummary {pros} {cons} />
       </div>
     </Card>
   </Link>

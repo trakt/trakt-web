@@ -8555,7 +8555,27 @@
     },
     "drawer_title_sort": {
       "default": "Sort By",
-      "description": "Title for the drawer containing sorting options for a user's list items. This should be as short and concise as possible.",
+      "description": "Title for the drawer containing sorting options for a user's list items. This should be as short and concise as possible."
+    },
+    "header_sentiment_positive": {
+      "default": "Positive",
+      "description": "Text for the header that indicates a positive sentiment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_sentiment_negative": {
+      "default": "Negative",
+      "description": "Text for the header that indicates a negative sentiment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_sentiment_mixed": {
+      "default": "Mixed",
+      "description": "Text for the header that indicates a mixed sentiment.",
       "exclude": [
         "android",
         "ios"

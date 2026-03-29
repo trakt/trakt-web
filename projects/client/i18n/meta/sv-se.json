@@ -3255,6 +3255,15 @@
     },
     "drawer_title_sort": {
       "default": "Sortera efter"
+    },
+    "header_sentiment_positive": {
+      "default": "Positivt"
+    },
+    "header_sentiment_negative": {
+      "default": "Negativt"
+    },
+    "header_sentiment_mixed": {
+      "default": "Blandat"
     }
   }
 }
