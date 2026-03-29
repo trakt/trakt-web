@@ -1,9 +1,12 @@
 <script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
+  import SortDirectionIcon from "$lib/components/icons/SortDirectionIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import { m } from "$lib/features/i18n/messages";
   import type { ListUrlBuilder } from "../models/ListUrlBuilder";
   import type { SortDirection } from "../models/SortDirection";
   import type { Sorting } from "../models/Sorting";
@@ -22,9 +25,34 @@
   } = $props();
 
   const { track } = useTrack(AnalyticsEvent.ListSort);
+
+  const reversedDirection = $derived(
+    current.sortHow === "asc" ? "desc" : "asc",
+  );
 </script>
 
-<Drawer {onClose} size="auto">
+{#snippet badge()}
+  <ActionButton
+    replacestate
+    style="ghost"
+    color="default"
+    size="small"
+    label={reversedDirection === "asc"
+      ? m.button_label_sort_ascending()
+      : m.button_label_sort_descending()}
+    href={`${urlBuilder({ sortHow: reversedDirection, sortBy: current.sorting.value })}`}
+    onclick={() => {
+      track({
+        sortBy: current.sorting.value ?? "default",
+        sortHow: reversedDirection,
+      });
+    }}
+  >
+    <SortDirectionIcon direction={current.sortHow} />
+  </ActionButton>
+{/snippet}
+
+<Drawer {onClose} {badge} size="auto" title={m.drawer_title_sort()}>
   <div class="sort-buttons">
     {#each options as option}
       {#snippet icon()}

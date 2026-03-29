@@ -8,31 +8,30 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import SortValue from "./_internal/SortValue.svelte";
-  import { useListSorting } from "./_internal/useListSorting";
   import UserListItem from "./_internal/UserListItem.svelte";
   import ListActions from "./ListActions.svelte";
-  import ListSortActions from "./ListSortActions.svelte";
+  import type { SortBy } from "./models/SortBy";
+  import type { SortDirection } from "./models/SortDirection";
   import { useListItems } from "./useListItems";
 
   type UserListProps = {
     title: string;
     type?: MediaType;
     list: MediaListSummary;
+    sortBy?: SortBy;
+    sortHow?: SortDirection;
   };
 
-  const { title, type, list }: UserListProps = $props();
+  const { title, type, list, sortBy, sortHow }: UserListProps = $props();
 
   const { user } = useUser();
 
   const { filterMap } = useFilter();
-  const { current, update, options, urlBuilder } = $derived(
-    useListSorting({ list, type }),
-  );
 
   const isListOwner = $derived($user.slug === list.user?.slug);
 
   const listCacheId = $derived.by(() => {
-    const sortKey = `${$current.sorting.value}-${$current.sortHow}`;
+    const sortKey = `${sortBy}-${sortHow}`;
 
     if (list.user?.slug) {
       return `${list.user.slug}-${list.slug}-${sortKey}`;
@@ -50,8 +49,8 @@
   useList={(params) =>
     useListItems({
       list,
-      sortBy: $current.sorting.value,
-      sortHow: $current.sortHow,
+      sortBy,
+      sortHow,
       ...params,
     })}
 >
@@ -62,26 +61,19 @@
           <span class="secondary ellipsis">{list.description}</span>
         </Tooltip>
       {/if}
-
-      <ListSortActions
-        {options}
-        {urlBuilder}
-        current={$current}
-        onUpdate={update}
-      />
     </div>
   {/snippet}
 
   {#snippet item(media)}
     {#snippet sortTag()}
-      <SortValue item={media} sortBy={$current.sorting.value} />
+      <SortValue item={media} {sortBy} />
     {/snippet}
 
     <UserListItem
       listedItem={media}
       style="summary"
       {list}
-      sortTag={$current.sorting.value ? sortTag : undefined}
+      sortTag={sortBy ? sortTag : undefined}
     />
   {/snippet}
 

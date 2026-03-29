@@ -3252,6 +3252,9 @@
     },
     "button_label_view_all_social": {
       "default": "Ver todas as suas conexões e parças!"
+    },
+    "drawer_title_sort": {
+      "default": "Ordenar por"
     }
   }
 }

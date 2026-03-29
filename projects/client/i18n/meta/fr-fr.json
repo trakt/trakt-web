@@ -3252,6 +3252,9 @@
     },
     "button_label_view_all_social": {
       "default": "Voir toutes les connexions sociales"
+    },
+    "drawer_title_sort": {
+      "default": "Trier par"
     }
   }
 }

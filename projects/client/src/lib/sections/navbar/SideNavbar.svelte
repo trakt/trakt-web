@@ -44,6 +44,7 @@
 
     <div class="trakt-navbar-actions-right">
       <RenderFor audience="authenticated">
+        {@render $state.sortActions?.()}
         {#if $state.seasonalActions}
           {@render $state.seasonalActions?.()}
         {/if}
