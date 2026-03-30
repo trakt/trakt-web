@@ -14,5 +14,6 @@ export const SeasonSchema = z.object({
   airDate: z.date(),
   rating: z.number().nullish(),
   network: z.string().nullish(),
+  totalRuntime: z.number(),
 });
 export type Season = z.infer<typeof SeasonSchema>;

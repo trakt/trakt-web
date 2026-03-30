@@ -33,20 +33,20 @@ function getListItemEntry(item: ListItem) {
 function getRuntimeMinutes(item: SortInput): number {
   if (isFavorited(item)) {
     const { item: media } = item;
-    return 'episode' in media
-      ? media.runtime * media.episode.count
-      : media.runtime;
+    return 'totalRuntime' in media ? media.totalRuntime : media.runtime;
   }
 
   switch (item.type) {
     case 'movie':
       return item.entry.runtime;
     case 'show':
-      return item.entry.runtime * item.entry.episode.count;
+      return item.entry.totalRuntime;
     case 'episode':
       return item.entry.episode.runtime;
     case 'season':
-      return item.entry.show.runtime * item.entry.season.episodes.count;
+      return isNaN(item.entry.season.totalRuntime)
+        ? item.entry.show.runtime * item.entry.season.episodes.count
+        : item.entry.season.totalRuntime;
   }
 }
 

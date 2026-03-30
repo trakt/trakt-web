@@ -26,6 +26,7 @@ export const ShowSiloSeasonsResponseMock: SeasonsResponse = [
         'walter-r2.trakt.tv/images/seasons/000/257/490/thumbs/medium/ef1893a5e9.jpg.webp',
       ],
     },
+    'total_runtime': 600,
   },
   {
     'number': 2,
@@ -52,6 +53,7 @@ export const ShowSiloSeasonsResponseMock: SeasonsResponse = [
         'walter-r2.trakt.tv/images/seasons/000/402/288/thumbs/medium/7b1183feff.jpg.webp',
       ],
     },
+    'total_runtime': 600,
   },
   {
     'number': 3,
@@ -73,5 +75,6 @@ export const ShowSiloSeasonsResponseMock: SeasonsResponse = [
       'poster': [],
       'thumb': [],
     },
+    'total_runtime': 60,
   },
 ];
