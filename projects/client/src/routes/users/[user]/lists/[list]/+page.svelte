@@ -64,7 +64,6 @@
 
   {#if $list}
     <UserListPaginatedList
-      title={listName}
       list={$list}
       {type}
       sortBy={$current.sorting.value}
