@@ -22,7 +22,11 @@ export function computeStreak(
     return emptyStreak;
   }
 
-  const daysWithActivity = new Set(watchedDates.map(getDayKey));
+  const daysWithActivity = new Set(
+    watchedDates
+      .toSorted((a, b) => b.getTime() - a.getTime())
+      .map(getDayKey),
+  );
 
   const today = new Date(
     now.getFullYear(),
@@ -45,7 +49,7 @@ export function computeStreak(
 
   const startDate = hasActivityToday ? today : yesterday;
 
-  const sortedDays = [...daysWithActivity].sort().reverse();
+  const sortedDays = [...daysWithActivity];
   const previousDays = sortedDays.slice(
     sortedDays.indexOf(getDayKey(startDate)),
   );
