@@ -1,12 +1,9 @@
 <script lang="ts">
-  import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import BannerContainer from "$lib/sections/banner/_internal/BannerContainer.svelte";
   import StreakAccumulator from "./_internal/StreakAccumulator.svelte";
   import { useStreak } from "./_internal/useStreak";
-
-  const { user } = useUser();
 
   const { streakCount, streakState, isLoading } = $derived(useStreak());
 
