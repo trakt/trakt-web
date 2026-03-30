@@ -52,6 +52,7 @@
       onclick={() => handleChange(index)}
       isPressed={$trackerIndex === index}
       label={option.label()}
+      href={option.href}
       {variant}
     >
       {#snippet icon()}
