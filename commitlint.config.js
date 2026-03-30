@@ -120,6 +120,7 @@ module.exports = {
         'tooltip',
         'transition',
         'trending',
+        'trivia',
         'up-next',
         'upcoming',
         'user',
