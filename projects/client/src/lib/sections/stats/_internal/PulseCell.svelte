@@ -30,7 +30,7 @@
 <Card --width-card="var(--min-pulse-card-width)" --height-card="var(--height-pulse-card)">
   <div class="trakt-pulse-cell">
     {#if tooltip}
-      <Tooltip content={tooltip} variant="compact" side="right">
+      <Tooltip content={tooltip} side="right">
         {@render iconEl()}
       </Tooltip>
     {:else}
@@ -50,13 +50,10 @@
   .trakt-pulse-cell {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: var(--ni-10);
     padding: var(--ni-16);
     overflow: hidden;
-  }
-
-  .trakt-pulse-cell :global(.trakt-tooltip-trigger) {
-    align-self: flex-start;
   }
 
   .trakt-pulse-cell-icon {
