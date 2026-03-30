@@ -74,4 +74,31 @@ describe('computeStreak', () => {
     ];
     expect(computeStreak(dates, now)).toEqual({ count: 2, state: 'active' });
   });
+
+  it('correctly sorts days when single-digit and double-digit values coexist', () => {
+    // getDayKey returns unpadded strings like "2026-3-19".
+    // String sort places "2026-3-19" before "2026-3-3" ("1" < "3" at pos 7),
+    // which breaks streak detection — the sort must be numeric, not lexicographic.
+    const now = new Date('2026-03-30T12:00:00');
+    const dates = [
+      // Continuous streak: March 22–30 (9 days)
+      new Date('2026-03-30'),
+      new Date('2026-03-29'),
+      new Date('2026-03-28'),
+      new Date('2026-03-27'),
+      new Date('2026-03-26'),
+      new Date('2026-03-25'),
+      new Date('2026-03-24'),
+      new Date('2026-03-23'),
+      new Date('2026-03-22'),
+      // Gap on March 21
+      new Date('2026-03-20'),
+      new Date('2026-03-19'),
+      new Date('2026-03-18'),
+      new Date('2026-03-16'),
+      // Older entries that trigger the string-sort bug (single-digit day "3")
+      new Date('2026-03-03'),
+    ];
+    expect(computeStreak(dates, now)).toEqual({ count: 9, state: 'active' });
+  });
 });
