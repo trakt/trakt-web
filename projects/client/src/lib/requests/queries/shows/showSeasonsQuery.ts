@@ -43,6 +43,7 @@ export const mapToSeason = (item: SeasonsResponse[0]): Season => {
     airDate: new Date(item.first_aired ?? MAX_DATE),
     rating: mapToTraktRating(item.rating),
     network: item.network,
+    totalRuntime: item.total_runtime ?? NaN,
   };
 };
 

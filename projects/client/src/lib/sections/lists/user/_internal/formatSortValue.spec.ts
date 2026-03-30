@@ -19,8 +19,7 @@ describe('formatSortValue', () => {
       const showItem = {
         type: 'show',
         entry: {
-          episode: { count: 10 },
-          runtime: 30,
+          totalRuntime: 300,
         },
       } as unknown as ListItem;
 
