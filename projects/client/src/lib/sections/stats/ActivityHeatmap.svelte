@@ -1,16 +1,17 @@
 <script lang="ts">
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import { languageTag } from "$lib/features/i18n";
   import { useActivityHeatmap } from "./_internal/useActivityHeatmap.ts";
 
   const { mode }: { mode: DiscoverMode } = $props();
 
   const { heatmap, isLoading } = $derived(useActivityHeatmap({ mode }));
 
-  const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
+  const locale = $derived(languageTag());
 
   function formatTooltip(date: Date, count: number): string {
-    const label = date.toLocaleDateString(undefined, {
+    const label = date.toLocaleDateString(locale, {
       weekday: "short",
       month: "short",
       day: "numeric",
@@ -25,7 +26,7 @@
     <div class="trakt-activity-heatmap-skeleton"></div>
   </div>
 {:else if $heatmap}
-  {@const { cells, monthLabel, totalRows } = $heatmap}
+  {@const { cells, monthLabel, dayLabels, totalRows } = $heatmap}
   <div class="trakt-activity-heatmap-section">
     <div class="trakt-activity-heatmap">
       <p class="trakt-heatmap-title secondary">{monthLabel}</p>
@@ -36,7 +37,7 @@
         role="grid"
         aria-label="Activity heatmap for {monthLabel}"
       >
-        {#each DAYS as day, col (col)}
+        {#each dayLabels as day, col (col)}
           <span
             class="trakt-heatmap-day-label"
             style="grid-column: {col + 1}; grid-row: 1">{day}</span
@@ -64,7 +65,7 @@
                 style="grid-column: {cell.col + 1}; grid-row: {cell.row + 2}"
                 role="gridcell"
                 aria-label={formatTooltip(cell.date, cell.count)}
-                aria-current={cell.isToday ? 'date' : undefined}
+                aria-current={cell.isToday ? "date" : undefined}
               ></div>
             </Tooltip>
           {/if}

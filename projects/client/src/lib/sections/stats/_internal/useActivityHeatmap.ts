@@ -1,6 +1,7 @@
-import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { UserHistory } from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { languageTag } from '$lib/features/i18n/index.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { map, shareReplay } from 'rxjs';
 
@@ -19,23 +20,9 @@ export type HeatmapCell = {
 export type HeatmapData = {
   readonly cells: ReadonlyArray<HeatmapCell>;
   readonly monthLabel: string;
+  readonly dayLabels: ReadonlyArray<string>;
   readonly totalRows: number;
 };
-
-const MONTH_NAMES = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-] as const;
 
 function toIntensity(count: number): HeatmapIntensity {
   if (count === 0) return 0;
@@ -48,6 +35,7 @@ function toIntensity(count: number): HeatmapIntensity {
 export function computeActivityHeatmap(
   watchedDates: ReadonlyArray<Date>,
   now: Date,
+  locale: string,
 ): HeatmapData {
   const activityMap = new Map<string, number>();
   for (const date of watchedDates) {
@@ -85,9 +73,23 @@ export function computeActivityHeatmap(
 
   const totalRows = Math.ceil((startCol + daysInMonth) / 7);
 
+  const monthLabel = new Intl.DateTimeFormat(locale, {
+    month: 'long',
+    year: 'numeric',
+  }).format(new Date(year, month, 1));
+
+  const dayLabels = Array.from(
+    { length: 7 },
+    (_, i) =>
+      new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(
+        new Date(2023, 0, 1 + i), // 2023-01-01 is a Sunday
+      ),
+  );
+
   return {
     cells,
-    monthLabel: `${MONTH_NAMES[month]!} ${year}`,
+    monthLabel,
+    dayLabels,
     totalRows,
   };
 }
@@ -109,6 +111,7 @@ export function useActivityHeatmap({ mode }: { mode: DiscoverMode }) {
   const { history } = useUser();
 
   const now = new Date();
+  const locale = languageTag();
 
   const heatmap = history.pipe(
     map(($history) => {
@@ -116,7 +119,7 @@ export function useActivityHeatmap({ mode }: { mode: DiscoverMode }) {
 
       const watchedDates = filterWatchedDates($history, mode);
 
-      return computeActivityHeatmap(watchedDates, now);
+      return computeActivityHeatmap(watchedDates, now, locale);
     }),
     shareReplay(1),
   );
