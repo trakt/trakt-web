@@ -1,4 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import type { UserHistory } from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { map, shareReplay } from 'rxjs';
 
@@ -11,6 +13,7 @@ export type HeatmapCell = {
   readonly col: number; // 0–6, day of week (Sun=0)
   readonly row: number; // 0–5, week of month
   readonly isFuture: boolean;
+  readonly isToday: boolean;
 };
 
 export type HeatmapData = {
@@ -76,6 +79,7 @@ export function computeActivityHeatmap(
       col,
       row,
       isFuture,
+      isToday: cellDate.getTime() === today.getTime(),
     });
   }
 
@@ -88,7 +92,20 @@ export function computeActivityHeatmap(
   };
 }
 
-export function useActivityHeatmap() {
+function filterWatchedDates(
+  history: UserHistory,
+  mode: DiscoverMode,
+): ReadonlyArray<Date> {
+  const movies = mode !== 'show'
+    ? [...history.movies.values()].flatMap((m) => m.watchedDates)
+    : [];
+  const shows = mode !== 'movie'
+    ? [...history.shows.values()].flatMap((s) => s.watchedDates)
+    : [];
+  return [...movies, ...shows];
+}
+
+export function useActivityHeatmap({ mode }: { mode: DiscoverMode }) {
   const { history } = useUser();
 
   const now = new Date();
@@ -97,10 +114,7 @@ export function useActivityHeatmap() {
     map(($history) => {
       if (!$history) return null;
 
-      const watchedDates = [
-        ...[...$history.movies.values()].flatMap((m) => m.watchedDates),
-        ...[...$history.shows.values()].flatMap((s) => s.watchedDates),
-      ];
+      const watchedDates = filterWatchedDates($history, mode);
 
       return computeActivityHeatmap(watchedDates, now);
     }),

@@ -1,8 +1,11 @@
 <script lang="ts">
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import { useActivityHeatmap } from "./_internal/useActivityHeatmap.ts";
 
-  const { heatmap, isLoading } = $derived(useActivityHeatmap());
+  const { mode }: { mode: DiscoverMode } = $props();
+
+  const { heatmap, isLoading } = $derived(useActivityHeatmap({ mode }));
 
   const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
 
@@ -57,9 +60,11 @@
               <div
                 class="trakt-heatmap-cell"
                 data-intensity={cell.intensity}
+                data-today={cell.isToday || undefined}
                 style="grid-column: {cell.col + 1}; grid-row: {cell.row + 2}"
                 role="gridcell"
                 aria-label={formatTooltip(cell.date, cell.count)}
+                aria-current={cell.isToday ? 'date' : undefined}
               ></div>
             </Tooltip>
           {/if}
@@ -161,6 +166,11 @@
     &[data-future] {
       background: var(--color-heatmap-empty);
       opacity: 0.35;
+    }
+
+    &[data-today] {
+      outline: 2px solid var(--color-text-emphasis);
+      outline-offset: 1px;
     }
 
     @include for-mouse {

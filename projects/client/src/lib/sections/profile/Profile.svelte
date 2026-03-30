@@ -25,7 +25,7 @@
 </ProfileContainer>
 
 {#if $isMe}
-  <ActivityHeatmap />
+  <ActivityHeatmap mode={$mode} />
   <PersonalHistoryList mode={$mode} />
 {:else}
   <RecentlyWatchedList title={m.list_title_history()} {slug} mode={$mode} />
