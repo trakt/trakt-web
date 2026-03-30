@@ -66,6 +66,7 @@
     "vitest": "4.1.0"
   },
   "dependencies": {
+    "@ethercorps/sveltekit-og": "4.2.1",
     "@inlang/paraglide-js": "2.12.0",
     "@libn/fuzzy": "npm:@jsr/libn__fuzzy@^0.4.0",
     "@sentry/sveltekit": "10.45.0",
