@@ -223,9 +223,8 @@
   --color-streak-surface: var(--shade-10);
   --color-streak-surface-accent: var(--shade-10);
   --color-streak-border: var(--shade-80);
-  --shadow-streak:
-    0 1px 2px color-mix(in srgb, var(--shade-300) 25%, transparent),
-    0 4px 12px color-mix(in srgb, var(--shade-300) 15%, transparent);
+  --shadow-streak: 0 1px 2px color-mix(in srgb, var(--shade-300) 25%, transparent),
+  0 4px 12px color-mix(in srgb, var(--shade-300) 15%, transparent);
   --color-streak-accent: var(--purple-600);
   --color-streak-flame-background: var(--purple-50);
   --color-streak-subtitle: var(--shade-400);
@@ -238,6 +237,15 @@
   --color-streak-week-glow: color-mix(in srgb, var(--blue-700) 25%, transparent);
   --color-streak-month: var(--orange-600);
   --color-streak-month-glow: color-mix(in srgb, var(--orange-600) 25%, transparent);
+
+  /*
+   * Activity heatmap
+   */
+  --color-heatmap-empty: var(--shade-100);
+  --color-heatmap-l1: var(--purple-100);
+  --color-heatmap-l2: var(--purple-300);
+  --color-heatmap-l3: var(--purple-500);
+  --color-heatmap-l4: var(--purple-700);
 }
 
 // Define theme variables for dark mode
@@ -473,6 +481,15 @@
   --color-streak-week-glow: color-mix(in srgb, var(--blue-500) 25%, transparent);
   --color-streak-month: var(--orange-500);
   --color-streak-month-glow: color-mix(in srgb, var(--orange-500) 25%, transparent);
+
+  /*
+   * Activity heatmap
+   */
+  --color-heatmap-empty: var(--shade-800);
+  --color-heatmap-l1: color-mix(in srgb, var(--purple-900) 80%, transparent);
+  --color-heatmap-l2: var(--purple-700);
+  --color-heatmap-l3: var(--purple-500);
+  --color-heatmap-l4: var(--purple-300);
 }
 
 // Apply themes to selectors
