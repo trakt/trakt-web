@@ -49,7 +49,7 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
 export const handle: Handle = sequence(
   initCloudflareSentryHandle({
     dsn: SENTRY_DSN,
-    tracesSampleRate: 1,
+    tracesSampleRate: 0.1,
     enableLogs: true,
   }),
   sentryHandle(),
