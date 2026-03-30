@@ -1,3 +1,4 @@
+import { sveltekitOG } from '@ethercorps/sveltekit-og/plugin';
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { sentrySvelteKit } from '@sentry/sveltekit';
 import { sveltekit } from '@sveltejs/kit/vite';
@@ -87,6 +88,7 @@ export default defineConfig(({ mode }) => ({
       },
     }),
     sveltekit(),
+    sveltekitOG(),
     paraglideVitePlugin({
       project: './i18n/project.inlang',
       outdir: './src/lib/paraglide',
