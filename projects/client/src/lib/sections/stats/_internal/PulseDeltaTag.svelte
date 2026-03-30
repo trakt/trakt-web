@@ -31,17 +31,9 @@
 </script>
 
 {#if text && direction}
-  <div class="trakt-pulse-delta-tag">
-    <StemTag
-      {text}
-      --color-background-stem-tag="var(--color-background-trend-{direction}-background-tag)"
-      --color-foreground-stem-tag="var(--color-text-trend-tag)"
-    />
-  </div>
+  <StemTag
+    {text}
+    --color-background-stem-tag="var(--color-background-trend-{direction}-background-tag)"
+    --color-foreground-stem-tag="var(--color-text-trend-tag)"
+  />
 {/if}
-
-<style>
-  .trakt-pulse-delta-tag {
-    align-self: flex-start;
-  }
-</style>

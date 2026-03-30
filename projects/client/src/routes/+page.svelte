@@ -43,9 +43,7 @@
 
     <Banner />
     <UpNextList intent="continue" />
-    <RenderFor audience="authenticated">
-      <WeeklyPulse />
-    </RenderFor>
+    <WeeklyPulse />
     <UpNextList intent="start" />
     <StreakCallout />
     <UpcomingList />
