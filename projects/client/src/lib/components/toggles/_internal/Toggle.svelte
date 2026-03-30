@@ -1,5 +1,6 @@
 <script lang="ts">
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import type { Snippet } from "svelte";
 
   const {
@@ -7,31 +8,56 @@
     icon,
     isPressed,
     onclick,
+    href,
     variant = "icon",
     label,
   }: {
     icon: Snippet;
     isPressed: boolean;
     onclick: () => void;
+    href?: string;
     variant?: "icon" | "text";
     label: string;
   } & ChildrenProps = $props();
 </script>
 
-<button
-  class="trakt-toggler-toggle"
-  class:is-pressed={isPressed}
-  class:text-variant={variant === "text"}
-  data-dpad-navigation={DpadNavigationType.Item}
-  aria-label={label}
-  type="button"
-  {onclick}
->
+{#snippet content()}
   {@render icon()}
   {#if variant === "text"}
     <p class="bold ellipsis">{@render children()}</p>
   {/if}
-</button>
+{/snippet}
+
+{#if href}
+  <a
+    use:appendGlobalParameters={href}
+    class="trakt-toggler-toggle"
+    class:is-pressed={isPressed}
+    class:text-variant={variant === "text"}
+    data-dpad-navigation={DpadNavigationType.Item}
+    aria-label={label}
+    aria-current={isPressed ? "page" : undefined}
+    data-sveltekit-replacestate
+    data-sveltekit-keepfocus
+    data-sveltekit-noscroll
+    {href}
+    {onclick}
+  >
+    {@render content()}
+  </a>
+{:else}
+  <button
+    class="trakt-toggler-toggle"
+    class:is-pressed={isPressed}
+    class:text-variant={variant === "text"}
+    data-dpad-navigation={DpadNavigationType.Item}
+    aria-label={label}
+    type="button"
+    {onclick}
+  >
+    {@render content()}
+  </button>
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
