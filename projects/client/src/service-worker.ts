@@ -26,6 +26,23 @@ declare let self: ServiceWorkerGlobalScope;
  */
 self.__WB_DISABLE_DEV_LOGS = true;
 
+/**
+ * Activate new SW immediately without waiting for existing tabs to close.
+ * This prevents Safari from getting stuck on a stale/zombied SW that serves
+ * assets incompatible with a fresh Cloudflare deployment.
+ */
+addEventListener('install', (event) => {
+  event.waitUntil(self.skipWaiting());
+});
+
+/**
+ * Claim all open clients so the new SW takes control without a page reload
+ * being required on the old tab.
+ */
+addEventListener('activate', (event) => {
+  event.waitUntil(self.clients.claim());
+});
+
 function removeNavigationCache() {
   caches.delete(CacheKey.navigation);
 }
