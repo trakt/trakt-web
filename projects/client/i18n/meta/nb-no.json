@@ -3270,6 +3270,12 @@
     },
     "list_title_smart_lists": {
       "default": "Smarte lister"
+    },
+    "button_text_sort_title": {
+      "default": "Tittel"
+    },
+    "button_label_sort_title": {
+      "default": "Sorter alfabetisk"
     }
   }
 }

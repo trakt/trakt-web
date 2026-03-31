@@ -3269,6 +3269,12 @@
     },
     "list_title_smart_lists": {
       "default": "智能列表"
+    },
+    "button_text_sort_title": {
+      "default": "标题"
+    },
+    "button_label_sort_title": {
+      "default": "按字母顺序排序"
     }
   }
 }

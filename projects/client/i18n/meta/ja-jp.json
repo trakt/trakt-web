@@ -3270,6 +3270,12 @@
     },
     "list_title_smart_lists": {
       "default": "スマートリスト"
+    },
+    "button_text_sort_title": {
+      "default": "タイトル"
+    },
+    "button_label_sort_title": {
+      "default": "タイトル順に並べ替え"
     }
   }
 }

@@ -55,6 +55,20 @@ function getAirDate(item: SortInput): Date {
   return getListItemEntry(item).airDate;
 }
 
+function getTitle(item: SortInput): string {
+  if (isFavorited(item)) return item.item.title;
+
+  switch (item.type) {
+    case 'movie':
+    case 'show':
+      return item.entry.title;
+    case 'episode':
+      return item.entry.episode.title;
+    case 'season':
+      return item.entry.show.title;
+  }
+}
+
 function getRating(item: SortInput): number | null | undefined {
   if (isFavorited(item)) return item.item.rating;
   return getListItemEntry(item).rating;
@@ -82,5 +96,7 @@ export function formatSortValue(item: SortInput, sortBy?: SortBy) {
       const rating = getRating(item);
       return rating ? `${toTraktRating(rating, getLocale())}` : undefined;
     }
+    case 'title':
+      return getTitle(item)[0]?.toUpperCase();
   }
 }

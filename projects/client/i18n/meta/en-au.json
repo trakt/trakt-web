@@ -3270,6 +3270,12 @@
     },
     "list_title_smart_lists": {
       "default": "Smart Lists"
+    },
+    "button_text_sort_title": {
+      "default": "Title"
+    },
+    "button_label_sort_title": {
+      "default": "Sort alphabetically"
     }
   }
 }

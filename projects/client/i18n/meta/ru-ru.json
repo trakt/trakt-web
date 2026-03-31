@@ -3270,6 +3270,12 @@
     },
     "list_title_smart_lists": {
       "default": "Умные списки"
+    },
+    "button_text_sort_title": {
+      "default": "Название"
+    },
+    "button_label_sort_title": {
+      "default": "Сортировать по алфавиту"
     }
   }
 }

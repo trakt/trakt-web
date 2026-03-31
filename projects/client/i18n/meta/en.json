@@ -6097,6 +6097,19 @@
         "ios"
       ]
     },
+    "button_text_sort_title": {
+      "default": "Title",
+      "description": "Text for the button that allows users to sort items alphabetically by title.",
+      "exclude": []
+    },
+    "button_label_sort_title": {
+      "default": "Sort alphabetically",
+      "description": "Aria-label for the button that allows users to sort items alphabetically by title.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "button_label_sort_list": {
       "default": "Sort list",
       "description": "Aria-label for the button that allows users to sort items in their list.",
