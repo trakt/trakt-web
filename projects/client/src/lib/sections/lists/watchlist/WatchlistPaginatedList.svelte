@@ -6,6 +6,7 @@
   import SortValue from "../user/_internal/SortValue.svelte";
   import type { SortBy } from "../user/models/SortBy";
   import type { SortDirection } from "../user/models/SortDirection";
+  import { useSort } from "../user/useSort";
   import { useWatchList } from "./useWatchList";
 
   type WatchListProps = {
@@ -17,6 +18,7 @@
   const { type, sortBy, sortHow }: WatchListProps = $props();
 
   const { filterMap } = useFilter();
+  const sort = $derived(useSort(sortBy));
 </script>
 
 <DrilledMediaList
@@ -29,6 +31,7 @@
       sortBy,
       sortHow,
     })}
+  groupBy={sort.groupBy}
 >
   {#snippet item(item)}
     {#snippet sortTag()}
@@ -40,7 +43,7 @@
       media={item.entry}
       style="summary"
       source="watchlist"
-      sortTag={sortBy ? sortTag : undefined}
+      sortTag={sort.toTag(sortTag)}
     />
   {/snippet}
 </DrilledMediaList>

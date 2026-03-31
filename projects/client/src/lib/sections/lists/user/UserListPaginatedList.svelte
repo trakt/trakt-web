@@ -8,6 +8,7 @@
   import UserListItem from "./_internal/UserListItem.svelte";
   import type { SortBy } from "./models/SortBy";
   import type { SortDirection } from "./models/SortDirection";
+  import { useSort } from "./useSort";
   import { useListItems } from "./useListItems";
 
   type UserListProps = {
@@ -20,6 +21,7 @@
   const { type, list, sortBy, sortHow }: UserListProps = $props();
 
   const { filterMap } = useFilter();
+  const sort = $derived(useSort(sortBy));
 
   const listCacheId = $derived.by(() => {
     const sortKey = `${sortBy}-${sortHow}`;
@@ -43,6 +45,7 @@
       sortHow,
       ...params,
     })}
+  groupBy={sort.groupBy}
 >
   {#snippet listActions()}
     <div class="trakt-list-actions">
@@ -63,12 +66,14 @@
       listedItem={media}
       style="summary"
       {list}
-      sortTag={sortBy ? sortTag : undefined}
+      sortTag={sort.toTag(sortTag)}
     />
   {/snippet}
 </DrilledMediaList>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-list-actions {
     display: flex;
     flex-direction: column;
