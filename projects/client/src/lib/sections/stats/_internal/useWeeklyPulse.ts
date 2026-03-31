@@ -176,6 +176,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
       const candidates: PulseStat[] = [
         {
           key: 'totalPlays',
+          rawValue: twAllDates.length,
           value: fmt(twAllDates.length),
           label: m.label_stats_plays(),
           tooltip: m.tooltip_stats_plays(),
@@ -183,6 +184,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         },
         {
           key: 'episodes',
+          rawValue: twShowDates.length,
           value: fmt(twShowDates.length),
           label: m.label_stats_episodes(),
           tooltip: m.tooltip_stats_episodes(),
@@ -190,6 +192,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         },
         {
           key: 'movies',
+          rawValue: twMovieDates.length,
           value: fmt(twMovieDates.length),
           label: m.label_stats_movies(),
           tooltip: m.tooltip_stats_movies(),
@@ -197,6 +200,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         },
         {
           key: 'shows',
+          rawValue: twUniqueShows,
           value: fmt(twUniqueShows),
           label: m.label_stats_shows(),
           tooltip: m.tooltip_stats_shows(),
@@ -204,6 +208,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         },
         {
           key: 'activeDays',
+          rawValue: twActiveDays,
           value: fmt(twActiveDays),
           label: m.label_stats_active_days(),
           tooltip: m.tooltip_stats_active_days(),
@@ -214,6 +219,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         },
         {
           key: 'busiestDay',
+          rawValue: twBusiest?.count ?? 0,
           value: busiestValue,
           label: m.label_stats_busiest_day(),
           tooltip: m.tooltip_stats_busiest_day(),
@@ -222,6 +228,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         },
         {
           key: 'longestBinge',
+          rawValue: twBingeMax,
           value: fmt(twBingeMax),
           label: m.label_stats_best_day(),
           tooltip: m.tooltip_stats_best_day(),
@@ -254,6 +261,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
       if (twRatings.length > 0 || lwRatings.length > 0) {
         candidates.push({
           key: 'ratings',
+          rawValue: twRatings.length,
           value: fmt(twRatings.length),
           label: m.label_stats_ratings(),
           tooltip: m.tooltip_stats_ratings(),
@@ -263,6 +271,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
       if (twComments.length > 0 || lwComments.length > 0) {
         candidates.push({
           key: 'comments',
+          rawValue: twComments.length,
           value: fmt(twComments.length),
           label: m.label_stats_comments(),
           tooltip: m.tooltip_stats_comments(),
