@@ -7,7 +7,15 @@ import {
 } from './pulseItem.ts';
 
 function stat(key: string, score: number): PulseStatItem {
-  return { type: 'stat', key, score, value: '0', label: key, delta: 0 };
+  return {
+    type: 'stat',
+    key,
+    score,
+    rawValue: 0,
+    value: '0',
+    label: key,
+    delta: 0,
+  };
 }
 
 function graph(key: string, score: number): PulseGraphItem {
@@ -53,8 +61,7 @@ describe('interleaveByScore', () => {
     );
     const types = result.map((r) => r.type);
     for (let i = 0; i < types.length - 2; i++) {
-      const threeConsecutive =
-        types[i] === 'graph' &&
+      const threeConsecutive = types[i] === 'graph' &&
         types[i + 1] === 'graph' &&
         types[i + 2] === 'graph';
       expect(threeConsecutive).toBe(false);

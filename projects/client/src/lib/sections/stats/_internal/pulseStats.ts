@@ -2,6 +2,7 @@ import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 
 export type PulseStat = {
   readonly key: string;
+  readonly rawValue: number;
   readonly value: string;
   readonly label: string;
   readonly tooltip?: string;
@@ -85,12 +86,10 @@ function infoScore(
 export const statScoreMax = 130;
 
 function scoreStat(stat: PulseStat): number {
-  const numValue = Number(stat.value.replace(/,/g, '')) || 0;
-
   return (
-    deltaScore(stat.delta, numValue) * scoreWeights.delta +
-    richnessScore(numValue, stat.delta) * scoreWeights.richness +
-    infoScore(numValue, stat.delta, stat.note) * scoreWeights.info
+    deltaScore(stat.delta, stat.rawValue) * scoreWeights.delta +
+    richnessScore(stat.rawValue, stat.delta) * scoreWeights.richness +
+    infoScore(stat.rawValue, stat.delta, stat.note) * scoreWeights.info
   );
 }
 

@@ -86,6 +86,7 @@ describe('rankStats', () => {
     note?: string,
   ): PulseStat => ({
     key,
+    rawValue: value,
     value: String(value),
     label: key,
     delta,
