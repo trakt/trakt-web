@@ -35,12 +35,21 @@
   const handleLike = $derived(() => {
     $isLiked ? unlikeList() : likeList();
   });
+
+  const isDisabled = $derived($isUpdating || isListOwner);
 </script>
 
 <RenderFor audience="authenticated">
   {#if $isDeleted && isOnListPage}
     <Redirect to={UrlBuilder.lists.user("me")} />
   {/if}
+
+  <LikeListAction
+    onToggle={handleLike}
+    disabled={isDisabled}
+    state={$isLiked ? "liked" : "unliked"}
+    {list}
+  />
 
   {#if isListOwner}
     <PopupMenu
@@ -66,15 +75,6 @@
         />
       {/snippet}
     </PopupMenu>
-  {/if}
-
-  {#if !isListOwner}
-    <LikeListAction
-      onToggle={handleLike}
-      isUpdating={$isUpdating}
-      state={$isLiked ? "liked" : "unliked"}
-      {list}
-    />
   {/if}
 </RenderFor>
 
