@@ -4,7 +4,7 @@ import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { toHumanDayOfWeek } from '$lib/utils/formatting/date/toHumanDayOfWeek.ts';
 import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber.ts';
-import { combineLatest, map, type Observable } from 'rxjs';
+import { combineLatest, map, type Observable, shareReplay } from 'rxjs';
 import {
   bucketByTimeOfDay,
   computeRatingsDistribution,
@@ -335,6 +335,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
 
       return interleaveByScore(statItems, graphItems);
     }),
+    shareReplay(1),
   );
 
   const isLoading = combineLatest([

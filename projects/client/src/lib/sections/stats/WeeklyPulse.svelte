@@ -59,7 +59,7 @@
     items={visibleItems}
     title={m.header_stats_this_week()}
     layout="flex-wrap"
-    --height-list="var(--height-pulse-card)"
+    --height-list="var(--height-pulse-list)"
     --item-min-width="var(--min-pulse-card-width)"
   >
     {#snippet metaInfo()}
