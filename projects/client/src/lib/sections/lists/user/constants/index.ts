@@ -27,4 +27,9 @@ export const LIST_SORT_OPTIONS: Sorting[] = [
     text: m.button_text_sort_release_date,
     label: m.button_label_sort_release_date,
   },
+  {
+    value: 'title',
+    text: m.button_text_sort_title,
+    label: m.button_label_sort_title,
+  },
 ] as const;

@@ -100,11 +100,11 @@ function generateMultiLocalePromptText({
           Provide the translated JSON in a valid format, with a nested object for each language, like this:
 
           {
-            "fr": {
-              "translation_key": "translated text in French"
+            "fr-fr": {
+              "translation_key": "texte traduit en français"
             },
-            "es": {
-              "translation_key": "translated text in Spanish"
+            "es-es": {
+              "translation_key": "texto traducido al español"
             }
             // Additional languages...
           }

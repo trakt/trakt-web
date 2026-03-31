@@ -83,4 +83,44 @@ describe('formatSortValue', () => {
       expect(formatSortValue(unratedItem, 'percentage')).toBeUndefined();
     });
   });
+
+  describe('sortBy: title', () => {
+    it('should return first letter of movie title', () => {
+      const movieItem = {
+        type: 'movie',
+        entry: { title: 'Inception' },
+      } as unknown as ListItem;
+      expect(formatSortValue(movieItem, 'title')).toBe('I');
+    });
+
+    it('should return first letter of show title', () => {
+      const showItem = {
+        type: 'show',
+        entry: { title: 'Breaking Bad' },
+      } as unknown as ListItem;
+      expect(formatSortValue(showItem, 'title')).toBe('B');
+    });
+
+    it('should return first letter of episode title', () => {
+      const episodeItem = {
+        type: 'episode',
+        entry: {
+          episode: { title: 'Ozymandias' },
+          show: { title: 'Breaking Bad' },
+        },
+      } as unknown as ListItem;
+      expect(formatSortValue(episodeItem, 'title')).toBe('O');
+    });
+
+    it('should return first letter of show title for season', () => {
+      const seasonItem = {
+        type: 'season',
+        entry: {
+          season: { number: 1 },
+          show: { title: 'The Wire' },
+        },
+      } as unknown as ListItem;
+      expect(formatSortValue(seasonItem, 'title')).toBe('T');
+    });
+  });
 });
