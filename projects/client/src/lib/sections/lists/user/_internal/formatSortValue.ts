@@ -100,3 +100,7 @@ export function formatSortValue(item: SortInput, sortBy?: SortBy) {
       return getTitle(item)[0]?.toUpperCase();
   }
 }
+
+export function groupByFirstLetter(item: SortInput): string {
+  return formatSortValue(item, 'title') ?? '#';
+}

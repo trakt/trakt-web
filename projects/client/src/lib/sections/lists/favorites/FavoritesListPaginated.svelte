@@ -6,6 +6,7 @@
   import SortValue from "../user/_internal/SortValue.svelte";
   import type { SortBy } from "../user/models/SortBy";
   import type { SortDirection } from "../user/models/SortDirection";
+  import { useSort } from "../user/useSort";
   import FavoriteMediaItem from "./_internal/FavoriteMediaItem.svelte";
 
   type FavoritesProps = {
@@ -18,6 +19,7 @@
   const { slug, mode, sortBy, sortHow }: FavoritesProps = $props();
 
   const { isMe } = $derived(useIsMe(slug));
+  const sort = $derived(useSort(sortBy));
 </script>
 
 <DrilledMediaList
@@ -30,6 +32,7 @@
       sortBy,
       sortHow,
     })}
+  groupBy={sort.groupBy}
 >
   {#snippet item(media)}
     {#snippet sortTag()}
@@ -41,7 +44,7 @@
       {mode}
       isActionable={$isMe}
       style="summary"
-      sortTag={sortBy ? sortTag : undefined}
+      sortTag={sort.toTag(sortTag)}
     />
   {/snippet}
 </DrilledMediaList>
