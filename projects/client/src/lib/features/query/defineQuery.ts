@@ -45,7 +45,9 @@ export function defineQuery<
 
   return (
     requestParams: TRequestParams = {} as TRequestParams,
-  ): CreateQueryOptions<z.infer<TOutput>, TError> => {
+  ): CreateQueryOptions<z.infer<TOutput>, TError> & {
+    execute: () => Promise<z.infer<TOutput> | Nil>;
+  } => {
     const queryKey = buildQueryKeys({
       key: params.key,
       dependencies: params.dependencies,
@@ -54,21 +56,22 @@ export function defineQuery<
       invalidations,
     });
 
+    const execute = async (): Promise<z.infer<TOutput> | Nil> => {
+      // Get markers in execute to ensure they are up-to-date
+      const marker = markerChecksum(invalidations);
+
+      const response = await request({
+        ...requestParams,
+        fetch: createMarkerFetch(marker, requestParams.fetch),
+      });
+      const isValid = isValidResponse(response, queryKey.at(0));
+      return !isValid ? null : mapper(response, requestParams);
+    };
+
     return {
       queryKey,
-      queryFn: () => {
-        // Get markers in queryFn to ensure they are up-to-date
-        const marker = markerChecksum(invalidations);
-
-        return request({
-          ...requestParams,
-          fetch: createMarkerFetch(marker, requestParams.fetch),
-        })
-          .then((response) => {
-            const isValid = isValidResponse(response, queryKey.at(0));
-            return !isValid ? null : mapper(response, requestParams);
-          });
-      },
+      queryFn: execute,
+      execute,
       ...buildCommonOptions(params, requestParams),
     };
   };

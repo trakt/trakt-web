@@ -18,7 +18,7 @@ class FetchError<TInput> extends Error {
     // FIXME: see if we can leverage window.onerror
     const responses = Array.isArray(response) ? response : [response];
     responses.forEach(({ status, body }) => {
-      globalThis.window.dispatchEvent(
+      globalThis.window?.dispatchEvent(
         new CustomEvent<CustomFetchError>(FETCH_ERROR_EVENT, {
           detail: {
             status,
