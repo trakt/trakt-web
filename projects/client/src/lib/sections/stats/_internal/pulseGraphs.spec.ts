@@ -117,7 +117,10 @@ describe('pickGraphs selection', () => {
       buckets: Array.from({ length: 4 }, () => ({ label: '', count: 0 })),
     },
     showsMovies: { episodes: 0, movies: 0 },
-    ratingsDistribution: { buckets: Array.from({ length: 10 }, () => 0), average: 0 },
+    ratingsDistribution: {
+      buckets: Array.from({ length: 10 }, () => 0),
+      average: 0,
+    },
   };
 
   it('returns empty when no graph qualifies', () => {
@@ -160,7 +163,9 @@ describe('pickGraphs selection', () => {
       ...emptyGraphData,
       ratingsDistribution: computeRatingsDistribution([7, 8, 9]),
     };
-    expect(pickGraphs(data).map((g) => g.type)).not.toContain('ratingsDistribution');
+    expect(pickGraphs(data).map((g) => g.type)).not.toContain(
+      'ratingsDistribution',
+    );
   });
 
   it('includes ratingsDistribution with 5+ ratings and 3+ distinct scores', () => {
@@ -168,7 +173,9 @@ describe('pickGraphs selection', () => {
       ...emptyGraphData,
       ratingsDistribution: computeRatingsDistribution([5, 6, 7, 8, 9]),
     };
-    expect(pickGraphs(data).map((g) => g.type)).toContain('ratingsDistribution');
+    expect(pickGraphs(data).map((g) => g.type)).toContain(
+      'ratingsDistribution',
+    );
   });
 });
 
@@ -193,7 +200,10 @@ describe('pickGraphs', () => {
         ],
       },
       showsMovies: { episodes: 10, movies: 8 },
-      ratingsDistribution: { buckets: Array.from({ length: 10 }, () => 0), average: 0 },
+      ratingsDistribution: {
+        buckets: Array.from({ length: 10 }, () => 0),
+        average: 0,
+      },
     };
     const result = pickGraphs(data);
     expect(result.length).toBeGreaterThan(1);
@@ -212,7 +222,10 @@ describe('pickGraphs', () => {
         buckets: Array.from({ length: 4 }, () => ({ label: '', count: 0 })),
       },
       showsMovies: { episodes: 0, movies: 0 },
-      ratingsDistribution: { buckets: Array.from({ length: 10 }, () => 0), average: 0 },
+      ratingsDistribution: {
+        buckets: Array.from({ length: 10 }, () => 0),
+        average: 0,
+      },
     };
     expect(pickGraphs(data)).toEqual([]);
   });

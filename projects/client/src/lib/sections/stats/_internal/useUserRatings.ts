@@ -16,20 +16,32 @@ export function flattenAndFilterRatings(
 ): readonly RatingEntry[] {
   if (!data) return [];
 
-  const cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate() - lookbackDays);
+  const cutoff = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() - lookbackDays,
+  );
   const entries: RatingEntry[] = [];
 
   for (const entry of data.movies.values()) {
-    entries.push({ ratedAt: entry.ratedAt, score: entry.rating, type: 'movie' });
+    entries.push({
+      ratedAt: entry.ratedAt,
+      score: entry.rating,
+      type: 'movie',
+    });
   }
   for (const entry of data.shows.values()) {
     entries.push({ ratedAt: entry.ratedAt, score: entry.rating, type: 'show' });
   }
   for (const entry of data.episodes.values()) {
-    entries.push({ ratedAt: entry.ratedAt, score: entry.rating, type: 'episode' });
+    entries.push({
+      ratedAt: entry.ratedAt,
+      score: entry.rating,
+      type: 'episode',
+    });
   }
 
-  return entries.filter(e => e.ratedAt >= cutoff);
+  return entries.filter((e) => e.ratedAt >= cutoff);
 }
 
 export function useUserRatings(): {

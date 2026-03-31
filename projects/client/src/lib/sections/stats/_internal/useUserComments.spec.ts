@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { filterCommentEntries, type CommentEntry } from './useUserComments.ts';
+import { type CommentEntry, filterCommentEntries } from './useUserComments.ts';
 
 describe('filterCommentEntries', () => {
   const now = new Date('2026-03-19T12:00:00Z');
