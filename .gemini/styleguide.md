@@ -7,8 +7,8 @@
 
 ### General Rules
 - **PascalCase**: Component names, interfaces, and type aliases
-- **camelCase**: Variables, functions, and methods
-- **ALL_CAPS**: Constants
+- **camelCase**: Variables, functions, methods, and local constants.
+- **ALL_CAPS**: Use for global/module-level constants only (e.g., env vars, shared config). Local constants use camelCase.
 
 ### File Naming
 - Components: PascalCase (e.g., `ClampedText.svelte`, `MoreButton.svelte`)
