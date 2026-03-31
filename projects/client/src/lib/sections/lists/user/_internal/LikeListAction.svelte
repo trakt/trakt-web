@@ -8,12 +8,12 @@
 
   const {
     onToggle,
-    isUpdating,
+    disabled,
     state,
     list,
   }: {
     onToggle: () => void;
-    isUpdating: boolean;
+    disabled: boolean;
     state: "liked" | "unliked";
     list: MediaListSummary;
   } = $props();
@@ -26,7 +26,7 @@
 </script>
 
 <trakt-list-like-action>
-  <Button {label} style="ghost" onclick={onToggle} disabled={isUpdating}>
+  <Button {label} style="ghost" onclick={onToggle} {disabled}>
     {toHumanNumber(list.likeCount, languageTag())}
     {#snippet icon()}
       <LikeIcon style={state === "liked" ? "filled" : "open"} />
