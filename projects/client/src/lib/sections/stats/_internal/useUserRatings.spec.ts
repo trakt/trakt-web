@@ -6,17 +6,33 @@ describe('flattenAndFilterRatings', () => {
 
   it('flattens all three Maps into a single array', () => {
     const result = flattenAndFilterRatings({
-      movies: new Map([[1, { rating: 8, ratedAt: new Date('2026-03-18'), id: 1 }]]),
-      shows: new Map([[2, { rating: 7, ratedAt: new Date('2026-03-17'), id: 2 }]]),
-      episodes: new Map([[3, { rating: 9, ratedAt: new Date('2026-03-16'), id: 3 }]]),
+      movies: new Map([[1, {
+        rating: 8,
+        ratedAt: new Date('2026-03-18'),
+        id: 1,
+      }]]),
+      shows: new Map([[2, {
+        rating: 7,
+        ratedAt: new Date('2026-03-17'),
+        id: 2,
+      }]]),
+      episodes: new Map([[3, {
+        rating: 9,
+        ratedAt: new Date('2026-03-16'),
+        id: 3,
+      }]]),
     }, now);
     expect(result).toHaveLength(3);
-    expect(result.map(r => r.type)).toEqual(['movie', 'show', 'episode']);
+    expect(result.map((r) => r.type)).toEqual(['movie', 'show', 'episode']);
   });
 
   it('maps rating to score', () => {
     const result = flattenAndFilterRatings({
-      movies: new Map([[1, { rating: 8, ratedAt: new Date('2026-03-18'), id: 1 }]]),
+      movies: new Map([[1, {
+        rating: 8,
+        ratedAt: new Date('2026-03-18'),
+        id: 1,
+      }]]),
       shows: new Map(),
       episodes: new Map(),
     }, now);

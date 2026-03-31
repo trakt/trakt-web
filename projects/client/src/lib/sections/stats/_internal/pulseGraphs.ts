@@ -29,10 +29,14 @@ export type PulseGraphData = {
     readonly labels: readonly string[];
   };
   readonly weekTrend: {
-    readonly weeks: ReadonlyArray<{ readonly label: string; readonly plays: number }>;
+    readonly weeks: ReadonlyArray<
+      { readonly label: string; readonly plays: number }
+    >;
   };
   readonly watchClock: {
-    readonly buckets: ReadonlyArray<{ readonly label: string; readonly count: number }>;
+    readonly buckets: ReadonlyArray<
+      { readonly label: string; readonly count: number }
+    >;
   };
   readonly showsMovies: {
     readonly episodes: number;
@@ -45,7 +49,11 @@ export type PulseGraphData = {
 };
 
 export function countByCalendarDay(
-  { dates, now, locale }: { dates: ReadonlyArray<Date>; now: Date; locale: AvailableLocale },
+  { dates, now, locale }: {
+    dates: ReadonlyArray<Date>;
+    now: Date;
+    locale: AvailableLocale;
+  },
 ): { readonly days: readonly number[]; readonly labels: readonly string[] } {
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const dayRange = Array.from({ length: daysInWeek }, (_, idx) => {
@@ -63,7 +71,9 @@ export function countByCalendarDay(
   });
 
   const labels = dayRange.map((day, idx) =>
-    idx === daysInWeek - 1 ? m.text_stats_today() : toHumanDayOfWeek(day, locale),
+    idx === daysInWeek - 1
+      ? m.text_stats_today()
+      : toHumanDayOfWeek(day, locale)
   );
 
   return { days, labels };
@@ -152,7 +162,9 @@ export function pickGraphs(
   const weekPlays = graphData.weekTrend.weeks.map((w) => w.plays);
   const maxWeek = Math.max(...weekPlays);
   const minWeek = Math.min(...weekPlays);
-  if (maxWeek > 0 && (maxWeek - minWeek) / maxWeek > weekTrendVarianceThreshold) {
+  if (
+    maxWeek > 0 && (maxWeek - minWeek) / maxWeek > weekTrendVarianceThreshold
+  ) {
     candidates.push({
       type: 'weekTrend',
       score: ((maxWeek - minWeek) / maxWeek) * 10,
@@ -175,8 +187,8 @@ export function pickGraphs(
 
   const { episodes, movies: movieCount } = graphData.showsMovies;
   if (episodes > 0 && movieCount > 0) {
-    const balance =
-      Math.min(episodes, movieCount) / Math.max(episodes, movieCount);
+    const balance = Math.min(episodes, movieCount) /
+      Math.max(episodes, movieCount);
     candidates.push({ type: 'showsMovies', score: balance * 10 });
   }
 
@@ -184,15 +196,21 @@ export function pickGraphs(
   const totalRatings = ratingsBuckets.reduce((s, c) => s + c, 0);
   const distinctScores = ratingsBuckets.filter((c) => c > 0).length;
 
-  if (totalRatings >= minRatingsForDistribution && distinctScores >= minDistinctScores) {
+  if (
+    totalRatings >= minRatingsForDistribution &&
+    distinctScores >= minDistinctScores
+  ) {
     const nonZero = ratingsBuckets.filter((c) => c > 0);
     const mean = nonZero.reduce((s, c) => s + c, 0) / nonZero.length;
-    const variance = nonZero.reduce((s, c) => s + (c - mean) ** 2, 0) / nonZero.length;
+    const variance = nonZero.reduce((s, c) => s + (c - mean) ** 2, 0) /
+      nonZero.length;
     const cv = mean > 0 ? Math.sqrt(variance) / mean : 0;
-    candidates.push({ type: 'ratingsDistribution', score: Math.min(cv * 10, 10) });
+    candidates.push({
+      type: 'ratingsDistribution',
+      score: Math.min(cv * 10, 10),
+    });
   }
 
   candidates.sort((a, b) => b.score - a.score);
   return candidates;
 }
-

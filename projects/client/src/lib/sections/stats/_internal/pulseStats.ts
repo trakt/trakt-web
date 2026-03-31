@@ -1,5 +1,3 @@
-import type { MovieActivityHistory } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
-import type { ShowActivityHistory } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 
 export type PulseStat = {
@@ -10,21 +8,6 @@ export type PulseStat = {
   readonly delta: number | null;
   readonly note?: string;
 };
-
-export function sumHours(
-  movieEntries: ReadonlyArray<MovieActivityHistory>,
-  showEntries: ReadonlyArray<ShowActivityHistory>,
-): number {
-  const movieMinutes = movieEntries.reduce(
-    (sum, m) => sum + m.movie.runtime,
-    0,
-  );
-  const showMinutes = showEntries.reduce(
-    (sum, s) => sum + s.episode.runtime,
-    0,
-  );
-  return Math.round((movieMinutes + showMinutes) / 60);
-}
 
 export function countUniqueDays(dates: ReadonlyArray<Date>): number {
   return new Set(dates.map(getDayKey)).size;
@@ -89,7 +72,11 @@ function richnessScore(numValue: number, delta: number | null): number {
   return 0;
 }
 
-function infoScore(numValue: number, delta: number | null, note?: string): number {
+function infoScore(
+  numValue: number,
+  delta: number | null,
+  note?: string,
+): number {
   if (numValue === 0 && (delta ?? 0) === 0) return 0;
   return note ? 7 : 5;
 }
@@ -118,7 +105,8 @@ function isRedundant(
   const movies = rawCounts.get('movies') ?? 0;
 
   return (
-    (stat.key === 'totalPlays' && plays > 0 && (plays === episodes || plays === movies)) ||
+    (stat.key === 'totalPlays' && plays > 0 &&
+      (plays === episodes || plays === movies)) ||
     (stat.key === 'movies' && movies === 0 && stat.delta === 0) ||
     (stat.key === 'episodes' && episodes === 0 && stat.delta === 0)
   );
@@ -137,6 +125,7 @@ export function rankStats(
   rawCounts: ReadonlyMap<string, number>,
 ): readonly PulseStat[] {
   return [...candidates].sort(
-    (a, b) => scoreStatWithContext(b, rawCounts) - scoreStatWithContext(a, rawCounts),
+    (a, b) =>
+      scoreStatWithContext(b, rawCounts) - scoreStatWithContext(a, rawCounts),
   );
 }

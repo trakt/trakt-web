@@ -1,42 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import type { MovieActivityHistory } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
-import type { ShowActivityHistory } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
 import {
   computeDelta,
   countUniqueDays,
   dayOfWeekDate,
   getBusiestDay,
   maxPlaysInSingleDay,
-  rankStats,
-  sumHours,
   type PulseStat,
+  rankStats,
 } from './pulseStats.ts';
-
-function movieEntry(runtime: number): MovieActivityHistory {
-  return { movie: { runtime } } as unknown as MovieActivityHistory;
-}
-
-function showEntry(runtime: number): ShowActivityHistory {
-  return { episode: { runtime } } as unknown as ShowActivityHistory;
-}
-
-describe('sumHours', () => {
-  it('returns 0 for empty arrays', () => {
-    expect(sumHours([], [])).toBe(0);
-  });
-
-  it('sums movie runtimes and converts to hours', () => {
-    expect(sumHours([movieEntry(120), movieEntry(60)], [])).toBe(3);
-  });
-
-  it('sums show runtimes and converts to hours', () => {
-    expect(sumHours([], [showEntry(45), showEntry(45)])).toBe(2);
-  });
-
-  it('combines both and rounds', () => {
-    expect(sumHours([movieEntry(100)], [showEntry(50)])).toBe(3);
-  });
-});
 
 describe('countUniqueDays', () => {
   it('returns 0 for empty array', () => {
@@ -108,7 +79,12 @@ describe('computeDelta', () => {
 });
 
 describe('rankStats', () => {
-  const stat = (key: string, value: number, delta: number | null, note?: string): PulseStat => ({
+  const stat = (
+    key: string,
+    value: number,
+    delta: number | null,
+    note?: string,
+  ): PulseStat => ({
     key,
     value: String(value),
     label: key,
@@ -147,7 +123,10 @@ describe('rankStats', () => {
       stat('episodes', 35, 9),
       stat('movies', 0, 0),
     ];
-    const rawCounts = new Map([['totalPlays', 35], ['episodes', 35], ['movies', 0]]);
+    const rawCounts = new Map([['totalPlays', 35], ['episodes', 35], [
+      'movies',
+      0,
+    ]]);
     const result = rankStats(candidates, rawCounts);
     expect(result).toHaveLength(3);
     // episodes is not redundant, should be first
@@ -162,7 +141,10 @@ describe('rankStats', () => {
       stat('shows', 5, 2),
       stat('movies', 0, 0),
     ];
-    const rawCounts = new Map([['totalPlays', 5], ['episodes', 5], ['movies', 0]]);
+    const rawCounts = new Map([['totalPlays', 5], ['episodes', 5], [
+      'movies',
+      0,
+    ]]);
     const result = rankStats(candidates, rawCounts);
     expect(result[0]!.key).toBe('shows');
     expect(result[1]!.key).toBe('movies');
