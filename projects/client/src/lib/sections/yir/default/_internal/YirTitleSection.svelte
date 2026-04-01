@@ -1,0 +1,185 @@
+<script lang="ts">
+  import { useQuery } from "$lib/features/query/useQuery";
+  import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
+  import { map } from "rxjs";
+  import { m } from "$lib/paraglide/messages";
+
+  const {
+    slug,
+    year,
+    coverImage,
+  }: {
+    slug: string;
+    year: number;
+    coverImage: string | Nil;
+  } = $props();
+
+  const profileQuery = $derived(
+    useQuery(userProfileQuery({ slug })),
+  );
+  const profile = $derived(
+    profileQuery.pipe(map(($q) => $q.data)),
+  );
+
+  const now = new Date();
+  const isCurrentYear = $derived(year === now.getFullYear());
+  const subtitle = $derived(isCurrentYear ? m.yir_title_year_to_date() : m.yir_title_year_in_review());
+</script>
+
+<section class="yir-title-page">
+  {#if $profile?.cover?.url}
+    <img
+      class="yir-cover-bg"
+      src={$profile.cover.url}
+      alt=""
+    />
+  {:else if coverImage}
+    <img
+      class="yir-cover-bg"
+      src={coverImage}
+      alt=""
+    />
+  {/if}
+  <div class="yir-titles-wrapper">
+    <div class="yir-titles">
+      {#if $profile}
+        <div class="yir-user">
+          <a href="/users/{slug}" class="yir-avatar-link">
+            <img
+              class="yir-avatar"
+              src={$profile.avatar.url}
+              alt={$profile.name.full ?? slug}
+            />
+          </a>
+          <span class="yir-display-name">
+            <a href="/users/{slug}">{$profile.name.full || $profile.username}</a>
+          </span>
+        </div>
+        <div class="yir-under-user"></div>
+      {/if}
+
+      <h1 class="yir-year">{year}</h1>
+      <h2 class="yir-subtitle">{subtitle}</h2>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .yir-title-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: #0c0c0c;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .yir-cover-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .yir-titles-wrapper {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .yir-titles {
+    display: inline-block;
+    background: radial-gradient(circle, #222 20%, var(--shade-950) 80%);
+    padding: var(--ni-20);
+    box-shadow: 0 0 50px #000;
+
+    @include for-mobile {
+      max-width: 80%;
+    }
+  }
+
+  .yir-user {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ni-10);
+  }
+
+  .yir-avatar-link {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .yir-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: #fff;
+    object-fit: cover;
+    display: block;
+
+    @include for-mobile {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .yir-display-name {
+    display: inline-block;
+    font-size: 26px;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    @include for-mobile {
+      font-size: 20px;
+    }
+  }
+
+  .yir-under-user {
+    width: 370px;
+    max-width: 100%;
+    border-bottom: 1px dashed #666;
+    margin: 25px auto 5px auto;
+
+    @include for-mobile {
+      width: 250px;
+    }
+  }
+
+  .yir-year {
+    font-size: 180px;
+    font-weight: normal;
+    margin: 0;
+    line-height: 1;
+    color: #fff;
+
+    @include for-mobile {
+      font-size: 100px;
+    }
+  }
+
+  .yir-subtitle {
+    background-color: #fff;
+    color: var(--shade-950);
+    display: block;
+    text-transform: uppercase;
+    padding: 8px var(--ni-16);
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    margin: 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1;
+  }
+</style>

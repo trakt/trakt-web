@@ -1,0 +1,89 @@
+@use "$style/scss/mixins/index" as *;
+
+// Common section header styles
+.yir-section-header {
+  text-align: center;
+  padding: 70px 0 20px 0;
+
+  h2 {
+    text-transform: uppercase;
+    display: inline-block;
+    letter-spacing: 1px;
+    border: solid 1px #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 16px;
+    line-height: 1;
+    text-align: center;
+    margin: 0;
+  }
+
+  @include for-mobile {
+    padding: 40px 0 20px 0;
+  }
+}
+
+.yir-header-text {
+  display: inline-block;
+  padding: 6px 8px;
+}
+
+// Common page inner container
+.yir-page-inner {
+  padding: 0 0 20px 0;
+  position: relative;
+  max-width: 1170px;
+  margin: 0 auto;
+
+  @include for-tablet-sm-and-below {
+    max-width: 750px;
+  }
+
+  @include for-mobile {
+    max-width: 100%;
+  }
+}
+
+// Bubble chart tooltip styles (shared between networks and studios)
+:global(.cds--tooltip),
+:global(.cds--cc--tooltip),
+:global(.cds--cc--tooltip-container) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+:global(.cds--cc--tooltip .content-box .title-tooltip) {
+  max-width: none !important;
+}
+
+:global(.cds--cc--tooltip),
+:global(.cds--cc--tooltip *) {
+  max-width: none !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+:global(.yir-chart-tooltip) {
+  background: rgba(0, 0, 0, 0.92);
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #fff;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+:global(.yir-chart-tooltip-name) {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+:global(.yir-chart-tooltip-plays) {
+  font-size: 11px;
+  opacity: 0.85;
+}

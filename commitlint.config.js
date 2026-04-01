@@ -130,6 +130,7 @@ module.exports = {
         'watchlist',
         'worker',
         'ws',
+        'yir',
       ],
     ],
     'type-case': [RuleConfigSeverity.Error, 'always', 'lower-case'],

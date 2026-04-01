@@ -1,0 +1,192 @@
+<script lang="ts">
+  import type { YirTopRatedItem } from "$lib/requests/models/YirDetail";
+  import { m } from "$lib/paraglide/messages";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+
+  const {
+    type,
+    items,
+  }: {
+    type: "shows" | "movies";
+    items: YirTopRatedItem[];
+  } = $props();
+
+  const sectionTitle = $derived(
+    type === "shows" ? m.yir_section_title_highest_rated_shows() : m.yir_section_title_highest_rated_movies(),
+  );
+
+  let activeIndex = $state(-1);
+
+  function itemUrl(item: YirTopRatedItem): string {
+    return UrlBuilder.media(type === "shows" ? "show" : "movie", item.entry.slug);
+  }
+</script>
+
+<section class="yir-rated-section" id="section-{type}-ratings">
+  {#each items as item, index}
+    <div
+      class="yir-fanart-bg"
+      class:current={index === activeIndex}
+      style:background-image="url({item.entry.cover?.url?.medium ?? ''})"
+    ></div>
+  {/each}
+
+  <div class="yir-page-inner">
+    <div class="yir-section-header">
+      <h2>
+        <span class="yir-header-text">{sectionTitle}</span>
+      </h2>
+    </div>
+
+    <div class="yir-posters">
+      {#each items as item, index}
+        <a
+          href={itemUrl(item)}
+          class="yir-grid-item"
+          title={item.entry.title}
+          onmouseenter={() => { activeIndex = index; }}
+          onmouseleave={() => { activeIndex = -1; }}
+        >
+          <div class="yir-poster">
+            <div class="yir-corner-rating">
+              <span>{item.rating}</span>
+            </div>
+            <img
+              class="yir-poster-img"
+              src={item.entry.poster.url.thumb}
+              alt={item.entry.title}
+            />
+          </div>
+        </a>
+      {/each}
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+  @use "./shared" as *;
+
+  .yir-rated-section {
+    text-align: center;
+    position: relative;
+    background-color: var(--shade-950);
+  }
+
+  .yir-fanart-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: all 0.5s;
+
+    &.current {
+      opacity: 1;
+    }
+  }
+
+  .yir-page-inner {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding-bottom: 70px;
+    max-width: none;
+
+    @include for-mobile {
+      padding-bottom: 40px;
+    }
+  }
+
+  .yir-section-header {
+    padding: 70px 0;
+
+    @include for-mobile {
+      padding: 40px 0;
+    }
+  }
+
+  .yir-posters {
+    margin: 0 auto;
+    max-width: 1170px;
+    text-align: center;
+
+    @include for-tablet-sm-and-below {
+      max-width: 750px;
+    }
+
+    @include for-mobile {
+      max-width: 100%;
+    }
+
+    &:hover {
+      .yir-poster {
+        .yir-poster-img,
+        .yir-corner-rating {
+          opacity: 0.3;
+        }
+      }
+    }
+  }
+
+  .yir-grid-item {
+    width: 10%;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+
+    &:hover {
+      .yir-poster-img,
+      .yir-corner-rating {
+        opacity: 1 !important;
+      }
+    }
+
+    @include for-mobile {
+      width: 20%;
+    }
+  }
+
+  .yir-poster {
+    border: none;
+    background-color: #000;
+    box-shadow: 0 0 20px #000;
+    position: relative;
+
+    .yir-poster-img,
+    .yir-corner-rating {
+      transition: all 0.5s;
+    }
+  }
+
+  .yir-corner-rating {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 40px 40px 0;
+    border-color: transparent var(--red-500) transparent transparent;
+    font-size: 10px;
+    font-weight: bold;
+    color: #fff;
+
+    span {
+      position: absolute;
+      top: 4px;
+      right: -37px;
+      width: 30px;
+      text-align: center;
+    }
+  }
+
+  .yir-poster-img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+  }
+</style>
