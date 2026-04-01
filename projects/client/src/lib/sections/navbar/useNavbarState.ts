@@ -15,6 +15,9 @@ type NavbarState = {
     metaInfo?: string | Snippet;
     actions?: Snippet;
   };
+  sidebar: {
+    mode: 'default' | 'fixed';
+  };
 };
 
 type GlobalNavbarState = {
@@ -34,6 +37,9 @@ const initialNavbarState: NavbarState = {
   showFilters: true,
   headerActions: undefined,
   header: undefined,
+  sidebar: {
+    mode: 'default',
+  },
 };
 
 const navbarStateStore = new BehaviorSubject<NavbarState>(
