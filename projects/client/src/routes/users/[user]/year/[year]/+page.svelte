@@ -1,10 +1,13 @@
 <script lang="ts">
   import Frame from "$lib/components/frame/Frame.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import YirPage from "$lib/sections/yir/YirPage.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
 
@@ -37,13 +40,19 @@
 
   <TraktPageCoverSetter />
 
-  <Frame
-    slug={params.user}
-    urlBuilder={(slug: string, token: string | Nil) => {
-      return UrlBuilder.og.frame.yearToDate(slug, params.year, token);
-    }}
-    title={pageTitle}
-    mode="cover"
-    source="yir"
-  />
+  <RenderForFeature flag={FeatureFlag.YearInReview}>
+    {#snippet enabled()}
+      <YirPage slug={params.user} {year} />
+    {/snippet}
+
+    <Frame
+      slug={params.user}
+      urlBuilder={(slug: string, token: string | Nil) => {
+        return UrlBuilder.og.frame.yearToDate(slug, params.year, token);
+      }}
+      title={pageTitle}
+      mode="cover"
+      source="yir"
+    />
+  </RenderForFeature>
 </TraktPage>

@@ -20,11 +20,13 @@ type NavbarState = {
 type GlobalNavbarState = {
   toastActions: Snippet | Nil;
   mode: NavbarMode;
+  forceCollapsed: boolean;
 };
 
 const globalNavbarStateStore = new BehaviorSubject<GlobalNavbarState>({
   toastActions: null,
   mode: 'hidden',
+  forceCollapsed: false,
 });
 
 const initialNavbarState: NavbarState = {
