@@ -16,7 +16,7 @@ const userProfileRequest = (
         id: slug,
       },
       query: {
-        extended: 'full,vip',
+        extended: 'full,vip,images' as 'full,vip',
       },
     });
 

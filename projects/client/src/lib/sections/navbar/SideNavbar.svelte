@@ -10,14 +10,22 @@
   import NavbarActions from "./_internal/NavbarActions.svelte";
   import SideNavbarContent from "./_internal/SideNavbarContent.svelte";
   import ProfileLink from "./components/ProfileLink.svelte";
+  import TraktLogo from "./components/TraktLogo.svelte";
   import UserMenu from "./components/UserMenu.svelte";
   import { useNavbarState } from "./useNavbarState";
 
   const { state } = useNavbarState();
-  const { isCollapsed, toggle } = useCollapsedSection("side-navbar", true);
+  const { isCollapsed: storedIsCollapsed, toggle } = useCollapsedSection(
+    "side-navbar",
+    true,
+  );
+
+  const isCollapsed = $derived(
+    $state.sidebar?.mode === "fixed" ? true : $storedIsCollapsed,
+  );
 
   $effect(() => {
-    const width = $isCollapsed
+    const width = isCollapsed
       ? "var(--side-navbar-width-collapsed)"
       : "var(--side-navbar-width-expanded)";
     document.documentElement.style.setProperty("--side-navbar-width", width);
@@ -36,17 +44,21 @@
       class="trakt-side-navbar"
       data-dpad-navigation={DpadNavigationType.Navbar}
     >
-      <div class="trakt-side-navbar-top">
-        <button
-          class="nav-menu-button"
-          onclick={toggle}
-          aria-label={$isCollapsed
-            ? m.button_label_expand_navbar()
-            : m.button_label_collapse_navbar()}
-        >
-          <MenuIcon state={$isCollapsed ? "closed" : "open"} />
-        </button>
-        {#if !$isCollapsed}
+      <div class="trakt-side-navbar-top" class:is-expanded={!isCollapsed}>
+        {#if $state.sidebar?.mode === "fixed"}
+          <TraktLogo />
+        {:else}
+          <button
+            class="nav-menu-button"
+            onclick={toggle}
+            aria-label={isCollapsed
+              ? m.button_label_expand_navbar()
+              : m.button_label_collapse_navbar()}
+          >
+            <MenuIcon state={isCollapsed ? "closed" : "open"} />
+          </button>
+        {/if}
+        {#if !isCollapsed}
           <div class="nav-logo-link" transition:slide={{ duration: 150 }}>
             <Link href="/" label="Trakt">
               <Logo />
@@ -55,12 +67,12 @@
         {/if}
       </div>
 
-      <SideNavbarContent isCollapsed={$isCollapsed} />
+      <SideNavbarContent {isCollapsed} />
 
-      <div class="trakt-side-navbar-bottom" class:is-expanded={!$isCollapsed}>
+      <div class="trakt-side-navbar-bottom" class:is-expanded={!isCollapsed}>
         <RenderFor audience="authenticated">
-          <UserMenu isExpanded={!$isCollapsed}>
-            <ProfileLink isExpanded={!$isCollapsed} />
+          <UserMenu isExpanded={!isCollapsed}>
+            <ProfileLink isExpanded={!isCollapsed} />
           </UserMenu>
         </RenderFor>
       </div>
@@ -124,9 +136,12 @@
     height: auto;
   }
 
+  .trakt-side-navbar-top.is-expanded {
+    justify-content: flex-start;
+  }
+
   .trakt-side-navbar-top {
     flex-direction: row;
-    justify-content: flex-start;
     gap: var(--gap-xxs);
     align-self: stretch;
 

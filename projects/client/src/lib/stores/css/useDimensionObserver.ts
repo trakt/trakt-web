@@ -1,3 +1,4 @@
+import { debounce } from '$lib/utils/timing/debounce.ts';
 import { BehaviorSubject } from 'rxjs';
 export type Dimension = 'width' | 'height' | 'bottom';
 
@@ -19,23 +20,30 @@ const setObservedDimension = (
   }
 };
 
-export const useDimensionObserver = (dimension: Dimension) => {
+export const useDimensionObserver = (
+  dimension: Dimension,
+  debounceMs?: number,
+) => {
   const observedDimension = new BehaviorSubject(0);
 
   const observeDimension = (node: HTMLElement) => {
+    const update = () =>
+      setObservedDimension(node, dimension, observedDimension);
+    const debouncedUpdate = debounceMs != null
+      ? debounce(update, debounceMs)
+      : update;
+
     // Initial size
-    setObservedDimension(node, dimension, observedDimension);
+    update();
 
     // Mutation observer for DOM changes
-    const mutationObserver = new MutationObserver(() => {
-      setObservedDimension(node, dimension, observedDimension);
-    });
+    const mutationObserver = new MutationObserver(() => debouncedUpdate());
 
     // Resize observer for explicit size changes
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         if (entry.target === node) {
-          setObservedDimension(node, dimension, observedDimension);
+          debouncedUpdate();
         }
       }
     });
