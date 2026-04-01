@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.0.1",
   "type": "module",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "pre:dev": "deno task i18n:web:watch",
     "dev": "concurrently 'deno task pre:dev' 'vite dev'",
