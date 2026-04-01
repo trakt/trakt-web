@@ -4,17 +4,14 @@
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { useFavoritesList } from "../stores/useFavoritesList";
   import SortValue from "../user/_internal/SortValue.svelte";
-  import type { SortBy } from "../user/models/SortBy";
-  import type { SortDirection } from "../user/models/SortDirection";
+  import type { ListSortProps } from "../user/models/ListSortProps";
   import { useSort } from "../user/useSort";
   import FavoriteMediaItem from "./_internal/FavoriteMediaItem.svelte";
 
   type FavoritesProps = {
     slug: string;
     mode: DiscoverMode;
-    sortBy?: SortBy;
-    sortHow?: SortDirection;
-  };
+  } & ListSortProps;
 
   const { slug, mode, sortBy, sortHow }: FavoritesProps = $props();
 
