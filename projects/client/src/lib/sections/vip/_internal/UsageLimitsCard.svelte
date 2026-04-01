@@ -9,10 +9,12 @@
     title,
     items,
     variant = "vip",
+    isLoading = false,
   }: {
     title?: string;
     items: UsageCategoryItem[];
     variant?: "free" | "vip";
+    isLoading?: boolean;
   } = $props();
 
   let isExpanded = $state(false);
@@ -28,7 +30,7 @@
 
   <div class="trakt-usage-limits">
     {#each displayableItems as item}
-      <UsageLimitItem {item} {variant} />
+      <UsageLimitItem {item} {variant} {isLoading} />
     {/each}
   </div>
 

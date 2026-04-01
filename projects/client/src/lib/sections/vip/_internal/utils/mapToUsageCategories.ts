@@ -1,6 +1,23 @@
 import * as m from '$lib/features/i18n/messages.ts';
 import type { UserLimits } from '$lib/requests/models/UserLimits.ts';
 
+const emptyLimit = {
+  current: 0,
+  free: 0,
+  vip: 0,
+};
+
+const placeholderLimits: UserLimits = {
+  history: emptyLimit,
+  ratings: emptyLimit,
+  watchlistItems: emptyLimit,
+  totalListItems: emptyLimit,
+  staticLists: emptyLimit,
+  dynamicLists: emptyLimit,
+  digitalLibrary: emptyLimit,
+  totalNotes: emptyLimit,
+};
+
 export type UsageCategoryItem = {
   title: () => string;
   limits: {
@@ -15,7 +32,11 @@ export type UsageCategory = {
   items: UsageCategoryItem[];
 };
 
-export function mapToUsageCategories(limits: UserLimits): UsageCategory[] {
+export function mapToUsageCategories(
+  props: UserLimits | Nil,
+): UsageCategory[] {
+  const limits = props ?? placeholderLimits;
+
   return [
     {
       title: m.usage_title_personal_activity,
