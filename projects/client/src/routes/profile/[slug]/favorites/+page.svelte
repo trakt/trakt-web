@@ -42,5 +42,10 @@
     {/snippet}
   </NavbarStateSetter>
 
-  <FavoritesListPaginated slug={params.slug} mode={$mode} />
+  <FavoritesListPaginated
+    slug={params.slug}
+    mode={$mode}
+    sortBy={$current.sorting.value}
+    sortHow={$current.sortHow}
+  />
 </TraktPage>
