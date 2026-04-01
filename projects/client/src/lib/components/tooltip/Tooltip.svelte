@@ -44,7 +44,9 @@
         {#if arrowClass}
           <Tooltip.Arrow class={arrowClass} />
         {/if}
-        {#if variant === "default"}
+        {#if typeof content === "function"}
+          {@render content()}
+        {:else if variant === "default"}
           <p>{content}</p>
         {:else}
           {content}

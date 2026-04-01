@@ -11,6 +11,7 @@
     showFilters,
     headerActions,
     header,
+    sidebar,
   }: {
     actions?: Snippet;
     contextualActions?: Snippet;
@@ -24,6 +25,9 @@
       metaInfo?: string | Snippet;
       actions?: Snippet;
     };
+    sidebar?: {
+      mode: "default" | "fixed";
+    };
   } = $props();
 
   const { set, globalSet, reset } = useNavbarState();
@@ -36,6 +40,7 @@
       showFilters,
       headerActions,
       header,
+      sidebar,
     });
   });
 

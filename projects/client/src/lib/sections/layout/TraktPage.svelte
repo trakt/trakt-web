@@ -193,7 +193,7 @@
     <NavbarStateSetter mode="full" />
   {/if}
 
-  <div class="trakt-content" {...dynamicContentProps}>
+  <div class="trakt-content" data-mode={mode} {...dynamicContentProps}>
     {@render children()}
   </div>
 
@@ -237,6 +237,12 @@
     @include for-mobile {
       margin-top: var(--gap-xxs);
       --content-gap: var(--gap-s);
+    }
+
+    &[data-mode="content-only"] {
+      padding-left: 0;
+      margin-top: 0;
+      gap: 0;
     }
   }
 </style>
