@@ -10,11 +10,13 @@
     freeLimit,
     vipLimit,
     variant: externalVariant = "vip",
+    isLoading = false,
   }: {
     current: number;
     freeLimit: number;
     vipLimit: number;
     variant?: "vip" | "free";
+    isLoading?: boolean;
   } = $props();
 
   const isEqualLimit = $derived(freeLimit === vipLimit);
@@ -46,7 +48,7 @@
     class="trakt-progress-bar"
     class:is-over-limit={isOverLimit}
     class:is-low-percentage={isLowPercentage}
-    style:--progress="{progress}%"
+    style:--progress="{isLoading ? 0 : progress}%"
   ></div>
 </div>
 
@@ -121,6 +123,8 @@
     background-color: var(--color-usage-bar);
 
     border-radius: var(--border-radius-xxl);
+
+    transition: width var(--transition-increment) ease-in-out;
 
     &.is-low-percentage {
       width: var(--ni-14);

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import UsageBar from "./UsageBar.svelte";
@@ -7,7 +8,12 @@
   const {
     item,
     variant = "vip",
-  }: { item: UsageCategoryItem; variant?: "vip" | "free" } = $props();
+    isLoading = false,
+  }: {
+    item: UsageCategoryItem;
+    variant?: "vip" | "free";
+    isLoading?: boolean;
+  } = $props();
 
   const limit = $derived(
     variant === "vip" ? item.limits.vip : item.limits.free,
@@ -18,13 +24,17 @@
   <div class="trakt-limit-header">
     <span>{item.title()}</span>
     <div class="trakt-limit-values">
-      <span>
-        {toHumanNumber(item.limits.current, languageTag())}
-      </span>
-      <span class="secondary">/</span>
-      <span class="secondary">
-        {toHumanNumber(limit, languageTag())}
-      </span>
+      {#if isLoading}
+        <LoadingIndicator />
+      {:else}
+        <span>
+          {toHumanNumber(item.limits.current, languageTag())}
+        </span>
+        <span class="secondary">/</span>
+        <span class="secondary">
+          {toHumanNumber(limit, languageTag())}
+        </span>
+      {/if}
     </div>
   </div>
 
@@ -33,6 +43,7 @@
     freeLimit={item.limits.free}
     vipLimit={item.limits.vip}
     {variant}
+    {isLoading}
   />
 </div>
 
@@ -71,5 +82,10 @@
     align-items: center;
     gap: var(--gap-micro);
     justify-content: flex-end;
+
+    :global(.loading-indicator svg) {
+      width: var(--ni-16);
+      height: var(--ni-16);
+    }
   }
 </style>

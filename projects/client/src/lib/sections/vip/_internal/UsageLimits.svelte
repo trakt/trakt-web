@@ -1,18 +1,22 @@
 <script lang="ts">
-  import type { UserLimits } from "$lib/requests/models/UserLimits";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import UsageLimitsCard from "./UsageLimitsCard.svelte";
   import { mapToUsageCategories } from "./utils/mapToUsageCategories";
   import VipContentContainer from "./VipContentContainer.svelte";
 
-  const { limits }: { limits: UserLimits } = $props();
+  const { limits } = useUser();
 
-  const categories = $derived(mapToUsageCategories(limits));
+  const categories = $derived(mapToUsageCategories($limits));
 </script>
 
 <VipContentContainer>
   <div class="trakt-vip-usage-limits">
-    {#each categories as category}
-      <UsageLimitsCard items={category.items} title={category.title()} />
+    {#each categories as category, index (index)}
+      <UsageLimitsCard
+        items={category.items}
+        title={category.title()}
+        isLoading={!$limits}
+      />
     {/each}
   </div>
 </VipContentContainer>
