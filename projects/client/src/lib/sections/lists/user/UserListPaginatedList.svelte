@@ -6,17 +6,14 @@
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import SortValue from "./_internal/SortValue.svelte";
   import UserListItem from "./_internal/UserListItem.svelte";
-  import type { SortBy } from "./models/SortBy";
-  import type { SortDirection } from "./models/SortDirection";
-  import { useSort } from "./useSort";
+  import type { ListSortProps } from "./models/ListSortProps";
   import { useListItems } from "./useListItems";
+  import { useSort } from "./useSort";
 
   type UserListProps = {
     type?: MediaType;
     list: MediaListSummary;
-    sortBy?: SortBy;
-    sortHow?: SortDirection;
-  };
+  } & ListSortProps;
 
   const { type, list, sortBy, sortHow }: UserListProps = $props();
 

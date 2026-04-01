@@ -4,16 +4,13 @@
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import SortValue from "../user/_internal/SortValue.svelte";
-  import type { SortBy } from "../user/models/SortBy";
-  import type { SortDirection } from "../user/models/SortDirection";
+  import type { ListSortProps } from "../user/models/ListSortProps";
   import { useSort } from "../user/useSort";
   import { useWatchList } from "./useWatchList";
 
   type WatchListProps = {
     type?: DiscoverMode;
-    sortBy?: SortBy;
-    sortHow?: SortDirection;
-  };
+  } & ListSortProps;
 
   const { type, sortBy, sortHow }: WatchListProps = $props();
 
