@@ -52,6 +52,10 @@ const TRAKT_TARGET_ENVIRONMENT = (() => {
   return Environment.production_private;
 })();
 
+const TRAKT_API_PROXY_TARGET = process.env.IS_LOCAL
+  ? 'http://localhost:8787'
+  : TRAKT_TARGET_ENVIRONMENT;
+
 export default defineConfig(({ mode }) => ({
   define: {
     'TRAKT_CLIENT_ID': `"${process.env.TRAKT_CLIENT_ID}"`,
@@ -72,7 +76,7 @@ export default defineConfig(({ mode }) => ({
     },
     proxy: {
       '/api/trakt': {
-        target: TRAKT_TARGET_ENVIRONMENT,
+        target: TRAKT_API_PROXY_TARGET,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/trakt/, ''),
       },

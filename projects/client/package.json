@@ -8,6 +8,7 @@
     "dev": "concurrently 'deno task pre:dev' 'vite dev'",
     "dev:staging": "concurrently 'deno task pre:dev' 'cross-env IS_STAGING=true vite dev'",
     "dev:contrib": "concurrently 'deno task pre:dev' 'cross-env  IS_CONTRIB=true vite dev'",
+    "dev:local": "concurrently 'deno task pre:dev' 'cross-env IS_LOCAL=true vite dev'",
     "prebuild": "deno task i18n:web",
     "build": "vite build",
     "prebuild:preview": "deno task prebuild",
