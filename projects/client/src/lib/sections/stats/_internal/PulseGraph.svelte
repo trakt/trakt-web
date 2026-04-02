@@ -1,9 +1,10 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { PulseGraphData } from "./models/PulseGraphData";
+  import type { PulseGraphType } from "./models/PulseGraphType";
   import PulseGraphDailyBars from "./PulseGraphDailyBars.svelte";
   import PulseGraphRatings from "./PulseGraphRatings.svelte";
-  import type { PulseGraphData, PulseGraphType } from "./pulseGraphs";
   import PulseGraphShowsMovies from "./PulseGraphShowsMovies.svelte";
   import PulseGraphWatchClock from "./PulseGraphWatchClock.svelte";
   import PulseGraphWeekTrend from "./PulseGraphWeekTrend.svelte";

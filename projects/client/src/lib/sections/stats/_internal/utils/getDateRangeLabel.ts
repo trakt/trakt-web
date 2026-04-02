@@ -1,6 +1,6 @@
 import { getLocale } from '$lib/features/i18n/index.ts';
 import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
-import type { DateRange } from './useWeeklyPulse.ts';
+import type { DateRange } from '../models/DateRange.ts';
 
 export function getDateRangeLabel(range: DateRange) {
   const locale = getLocale();

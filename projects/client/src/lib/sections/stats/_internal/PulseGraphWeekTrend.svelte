@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PulseGraphData } from "./pulseGraphs";
+  import type { PulseGraphData } from "./models/PulseGraphData";
 
   const { data }: { data: PulseGraphData["weekTrend"] } = $props();
 

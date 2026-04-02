@@ -7,10 +7,10 @@
     DashboardDrawers,
   } from "../dashboard/_internal/dashboardDrawerNavigation";
   import ViewAllButton from "../lists/components/ViewAllButton.svelte";
-  import { getDateRangeLabel } from "./_internal/getDateRangeLabel";
   import PulseCell from "./_internal/PulseCell.svelte";
   import PulseGraph from "./_internal/PulseGraph.svelte";
   import { useWeeklyPulse } from "./_internal/useWeeklyPulse";
+  import { getDateRangeLabel } from "./_internal/utils/getDateRangeLabel";
   import { pairStatRuns } from "./_internal/utils/pairStatRuns.ts";
 
   const { buildDrawerLink } = dashboardDrawerNavigation();

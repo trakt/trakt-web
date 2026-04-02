@@ -5,7 +5,7 @@
   import PulseGraph from "$lib/sections/stats/_internal/PulseGraph.svelte";
   import { useWeeklyPulse } from "$lib/sections/stats/_internal/useWeeklyPulse";
   import { fade } from "svelte/transition";
-  import { getDateRangeLabel } from "./_internal/getDateRangeLabel";
+  import { getDateRangeLabel } from "./_internal/utils/getDateRangeLabel";
 
   const { onClose }: { onClose: () => void } = $props();
 

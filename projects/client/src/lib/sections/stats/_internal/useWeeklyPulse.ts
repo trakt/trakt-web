@@ -1,43 +1,16 @@
 import type { UserHistory } from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
 import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
-import * as m from '$lib/features/i18n/messages.ts';
+
 import { addDays } from '$lib/utils/date/addDays.ts';
 import { getStartOfDay } from '$lib/utils/date/getStartOfDay.ts';
 import { subtractDays } from '$lib/utils/date/subtractDays.ts';
-import { toHumanDayOfWeek } from '$lib/utils/formatting/date/toHumanDayOfWeek.ts';
-import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber.ts';
 import { combineLatest, map, type Observable, shareReplay } from 'rxjs';
-import {
-  bucketByTimeOfDay,
-  computeRatingsDistribution,
-  computeWeekTrend,
-  countByCalendarDay,
-  graphScoreMax,
-  pickGraphs,
-  type PulseGraphData,
-} from './pulseGraphs.ts';
-import {
-  interleaveByScore,
-  normalizeScore,
-  type PulseGraphItem,
-  type PulseItem,
-  type PulseStatItem,
-} from './pulseItem.ts';
-import {
-  computeDelta,
-  countUniqueDays,
-  dayOfWeekDate,
-  getBusiestDay,
-  maxPlaysInSingleDay,
-  type PulseStat,
-  rankStats,
-  scoreStatWithContext,
-  statScoreMax,
-} from './pulseStats.ts';
-
-export type DateRange = { readonly start: Date; readonly end: Date };
+import { getGraphItems } from './getGraphItems.ts';
+import { getStatItems } from './getStatItems.ts';
+import type { DateRange } from './models/DateRange.ts';
+import type { PulseItem } from './models/PulseItem.ts';
+import { interleaveByScore } from './utils/interleaveByScore.ts';
 
 function filterDates(
   dates: ReadonlyArray<Date>,
@@ -76,10 +49,6 @@ function countShowsInRange(
   return count;
 }
 
-function fmt(n: number): string {
-  return toHumanNumber(n, languageTag());
-}
-
 function getRatingsInRange(
   data: UserRatings,
   range: DateRange,
@@ -99,7 +68,6 @@ export function useWeeklyPulse(): {
   const { history, ratings } = useUser();
 
   const now = new Date();
-  const locale = getLocale();
 
   const today = getStartOfDay(now);
   const tomorrow = addDays(today, 1);
@@ -120,7 +88,7 @@ export function useWeeklyPulse(): {
 
   const items = combineLatest([history, ratings]).pipe(
     map(([$history, $ratings]) => {
-      if (!$history) return [];
+      if (!$history || !$ratings) return [];
 
       const { movieDates, showDates, showIds } = extractDates($history);
 
@@ -129,164 +97,35 @@ export function useWeeklyPulse(): {
       const twShowDates = filterDates(showDates, thisWeekRange);
       const lwShowDates = filterDates(showDates, lastWeekRange);
 
-      const twAllDates = [...twMovieDates, ...twShowDates];
-      const lwAllDates = [...lwMovieDates, ...lwShowDates];
+      const thisWeek = {
+        movieDates: twMovieDates,
+        showDates: twShowDates,
+        uniqueShows: countShowsInRange(showIds, thisWeekRange),
+        ratings: getRatingsInRange($ratings, thisWeekRange),
+      };
 
-      const twUniqueShows = countShowsInRange(showIds, thisWeekRange);
-      const lwUniqueShows = countShowsInRange(showIds, lastWeekRange);
+      const lastWeek = {
+        movieDates: lwMovieDates,
+        showDates: lwShowDates,
+        uniqueShows: countShowsInRange(showIds, lastWeekRange),
+        ratings: getRatingsInRange($ratings, lastWeekRange),
+      };
 
-      const twBusiest = getBusiestDay(twAllDates);
-      const lwBusiest = getBusiestDay(lwAllDates);
-
-      const twBingeMax = maxPlaysInSingleDay(twAllDates);
-      const lwBingeMax = maxPlaysInSingleDay(lwAllDates);
-
-      const busiestValue = twBusiest
-        ? toHumanDayOfWeek(dayOfWeekDate(twBusiest.dayIndex, now), locale)
-        : '—';
-
-      const busiestNote = lwBusiest
-        ? m.text_stats_was_last_week({
-          day: toHumanDayOfWeek(
-            dayOfWeekDate(lwBusiest.dayIndex, now),
-            locale,
-          ),
-        })
-        : undefined;
-
-      const twActiveDays = countUniqueDays(twAllDates);
-
-      const candidates: PulseStat[] = [
-        {
-          key: 'totalPlays',
-          rawValue: twAllDates.length,
-          value: fmt(twAllDates.length),
-          label: m.label_stats_plays(),
-          tooltip: m.tooltip_stats_plays(),
-          delta: computeDelta(twAllDates.length, lwAllDates.length),
-        },
-        {
-          key: 'episodes',
-          rawValue: twShowDates.length,
-          value: fmt(twShowDates.length),
-          label: m.label_stats_episodes(),
-          tooltip: m.tooltip_stats_episodes(),
-          delta: computeDelta(twShowDates.length, lwShowDates.length),
-        },
-        {
-          key: 'movies',
-          rawValue: twMovieDates.length,
-          value: fmt(twMovieDates.length),
-          label: m.label_stats_movies(),
-          tooltip: m.tooltip_stats_movies(),
-          delta: computeDelta(twMovieDates.length, lwMovieDates.length),
-        },
-        {
-          key: 'shows',
-          rawValue: twUniqueShows,
-          value: fmt(twUniqueShows),
-          label: m.label_stats_shows(),
-          tooltip: m.tooltip_stats_shows(),
-          delta: computeDelta(twUniqueShows, lwUniqueShows),
-        },
-        {
-          key: 'activeDays',
-          rawValue: twActiveDays,
-          value: fmt(twActiveDays),
-          label: m.label_stats_active_days(),
-          tooltip: m.tooltip_stats_active_days(),
-          delta: computeDelta(
-            twActiveDays,
-            countUniqueDays(lwAllDates),
-          ),
-        },
-        {
-          key: 'busiestDay',
-          rawValue: twBusiest?.count ?? 0,
-          value: busiestValue,
-          label: m.label_stats_busiest_day(),
-          tooltip: m.tooltip_stats_busiest_day(),
-          delta: null,
-          note: busiestNote,
-        },
-        {
-          key: 'longestBinge',
-          rawValue: twBingeMax,
-          value: fmt(twBingeMax),
-          label: m.label_stats_best_day(),
-          tooltip: m.tooltip_stats_best_day(),
-          delta: computeDelta(twBingeMax, lwBingeMax),
-        },
-      ];
-
-      const twRatings = $ratings
-        ? getRatingsInRange($ratings, thisWeekRange)
-        : [];
-      const lwRatings = $ratings
-        ? getRatingsInRange($ratings, lastWeekRange)
-        : [];
-
-      if (twRatings.length > 0 || lwRatings.length > 0) {
-        candidates.push({
-          key: 'ratings',
-          rawValue: twRatings.length,
-          value: fmt(twRatings.length),
-          label: m.label_stats_ratings(),
-          tooltip: m.tooltip_stats_ratings(),
-          delta: computeDelta(twRatings.length, lwRatings.length),
-        });
-      }
-
-      const rawCounts = new Map<string, number>([
-        ['totalPlays', twAllDates.length],
-        ['episodes', twShowDates.length],
-        ['movies', twMovieDates.length],
-      ]);
-
-      const rankedStats = rankStats(candidates, rawCounts);
-      const statItems: PulseStatItem[] = rankedStats.map((stat) => ({
-        type: 'stat',
-        ...stat,
-        score: normalizeScore(
-          scoreStatWithContext(stat, rawCounts),
-          statScoreMax,
-        ),
-      }));
+      const statItems = getStatItems({ thisWeek, lastWeek, now });
 
       const fourWeekRange: DateRange = {
         start: subtractDays(today, 27),
         end: tomorrow,
       };
-      const allRecentDates = [
-        ...filterDates(movieDates, fourWeekRange),
-        ...filterDates(showDates, fourWeekRange),
-      ];
 
-      const twRatingScores = twRatings.map((r) => r.rating);
-
-      const graphData: PulseGraphData = {
-        dailyBars: countByCalendarDay({ dates: twAllDates, now, locale }),
-        weekTrend: {
-          weeks: computeWeekTrend(allRecentDates, now),
-        },
-        watchClock: {
-          buckets: bucketByTimeOfDay(twAllDates),
-        },
-        showsMovies: {
-          episodes: twShowDates.length,
-          movies: twMovieDates.length,
-        },
-        ratingsDistribution: computeRatingsDistribution(twRatingScores),
-      };
-
-      const qualifiedGraphs = pickGraphs(graphData);
-      const graphItems: PulseGraphItem[] = qualifiedGraphs.map((g) => ({
-        type: 'graph',
-        key: g.type,
-        kind: g.type,
-        data: graphData,
-        score: normalizeScore(g.score, graphScoreMax),
-      }));
+      const graphItems = getGraphItems({
+        thisWeek,
+        recentDates: [
+          ...filterDates(movieDates, fourWeekRange),
+          ...filterDates(showDates, fourWeekRange),
+        ],
+        now,
+      });
 
       return interleaveByScore(statItems, graphItems);
     }),
