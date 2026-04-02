@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "レビューはありません。"
     },
-    "list_placeholder_replies": {
-      "default": "返信はありません。"
-    },
     "text_review_by": {
       "default": "レビュー:"
     },
     "text_shout_by": {
       "default": "シャウト:"
-    },
-    "text_reply_by": {
-      "default": "返信："
     },
     "text_deleted_username": {
       "default": "削除済み"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "お気に入り"
     },
-    "list_title_recently_searched": {
-      "default": "最近検索した作品"
-    },
     "list_title_recently_searched_shows": {
       "default": "最近検索されたドラマ"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "{year}年より前"
-    },
-    "text_sort_recently_updated": {
-      "default": "最近更新"
     },
     "text_sort_recently_added": {
       "default": "最近追加"

@@ -863,17 +863,11 @@
     "list_placeholder_comments": {
       "default": "暂无评论。"
     },
-    "list_placeholder_replies": {
-      "default": "暂无回复。"
-    },
     "text_review_by": {
       "default": "评论人"
     },
     "text_shout_by": {
       "default": "喊话人"
-    },
-    "text_reply_by": {
-      "default": "回复人"
     },
     "text_deleted_username": {
       "default": "已注销用户"
@@ -1889,9 +1883,6 @@
     "list_title_streaming_favorite": {
       "default": "收藏"
     },
-    "list_title_recently_searched": {
-      "default": "最近搜索"
-    },
     "list_title_recently_searched_shows": {
       "default": "最近搜索的剧集"
     },
@@ -2026,9 +2017,6 @@
     },
     "filter_label_before_year": {
       "default": "{year}年之前"
-    },
-    "text_sort_recently_updated": {
-      "default": "最近更新"
     },
     "text_sort_recently_added": {
       "default": "最近添加"

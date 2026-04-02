@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "Отзывов пока нет."
     },
-    "list_placeholder_replies": {
-      "default": "Ответов пока нет."
-    },
     "text_review_by": {
       "default": "Отзыв от"
     },
     "text_shout_by": {
       "default": "Мнение от"
-    },
-    "text_reply_by": {
-      "default": "Ответ от"
     },
     "text_deleted_username": {
       "default": "Удалено"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "Избранное"
     },
-    "list_title_recently_searched": {
-      "default": "Недавние поиски"
-    },
     "list_title_recently_searched_shows": {
       "default": "Недавние сериалы"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "До {year} года"
-    },
-    "text_sort_recently_updated": {
-      "default": "Обновлено недавно"
     },
     "text_sort_recently_added": {
       "default": "Добавлено недавно"

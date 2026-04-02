@@ -73,6 +73,7 @@
       "default": "Recommended Movies",
       "description": "Title for lists containing recommended movies. This title should be as short and concise as possible.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -80,6 +81,7 @@
       "default": "Recommended Shows",
       "description": "Title for lists containing recommended shows. This title should be as short and concise as possible.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -529,6 +531,7 @@
       "default": "Join Trakt for Free",
       "description": "Text for the button that takes users to the Trakt login page, keep the text as short as possible (always as short or shorter than the english version).",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -667,6 +670,7 @@
       "default": "Browse Movies",
       "description": "Aria-label for the button that allows users to browse movies.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -687,6 +691,7 @@
       "default": "Browse Shows",
       "description": "Aria-label for the button that allows users to browse shows.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -1719,6 +1724,7 @@
       "default": "Trailer",
       "description": "Text for the button that allows users to watch a movie or show trailer.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -1922,6 +1928,7 @@
       "default": "Anticipated Movies",
       "description": "Title for lists containing anticipated movies. This title should be as short and concise as possible.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -1929,6 +1936,7 @@
       "default": "Anticipated Shows",
       "description": "Title for lists containing anticipated shows. This title should be as short and concise as possible.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -1952,6 +1960,7 @@
       "default": "Popular Movies",
       "description": "Title for lists containing popular movies. This title should be as short and concise as possible.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -1959,6 +1968,7 @@
       "default": "Popular Shows",
       "description": "Title for lists containing popular shows. This title should be as short and concise as possible.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -2158,18 +2168,11 @@
       "description": "Placeholder text shown when there are no reviews in a list.",
       "exclude": []
     },
-    "list_placeholder_replies": {
-      "default": "No replies yet.",
-      "description": "Placeholder text shown when there are no replies for a given review.",
-      "exclude": [
-        "ios",
-        "web"
-      ]
-    },
     "text_review_by": {
       "default": "Review by",
       "description": "Text used to indicate the author of a review.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -2177,15 +2180,8 @@
       "default": "Shout by",
       "description": "Text used to indicate the author of a shout.",
       "exclude": [
+        "android",
         "ios"
-      ]
-    },
-    "text_reply_by": {
-      "default": "Reply by",
-      "description": "Text used to indicate the author of a reply to a review.",
-      "exclude": [
-        "ios",
-        "web"
       ]
     },
     "text_deleted_username": {
@@ -2370,7 +2366,8 @@
         }
       },
       "exclude": [
-        "ios"
+        "ios",
+        "android"
       ]
     },
     "text_share_show": {
@@ -2382,6 +2379,7 @@
         }
       },
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -2437,6 +2435,7 @@
       "default": "Recently Watched",
       "description": "Title for lists containing recently watched movies or episodes. This title should be as short and concise as possible.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -2623,6 +2622,7 @@
         }
       },
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -3043,6 +3043,7 @@
       "default": "Show",
       "description": "Value for the show type. The value is sent back from the Trakt API.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -3635,6 +3636,7 @@
       "default": "Recently Watched",
       "description": "Title for the recently watched page.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -4160,6 +4162,7 @@
       "default": "View Details",
       "description": "Text for the button that allows users to show full details of certain show or movie.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -4167,6 +4170,7 @@
       "default": "Hide Details",
       "description": "Text for the button that allows users to hide full details of certain show or movie.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -4343,6 +4347,7 @@
       "default": "Search for people",
       "description": "Aria-label for the button that allows users to toggle the search mode to people.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -4884,6 +4889,7 @@
       "default": "Activity",
       "description": "Title for lists containing recently watched items of the profiles the user follows or their own recently watched items. This title should be as short and concise as possible.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -4891,6 +4897,7 @@
       "default": "Social",
       "description": "Text for the button that allows users to view social activity.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -4969,14 +4976,6 @@
       "default": "Favorite",
       "description": "Text used to indicate the list of all favorite streaming services of a user.",
       "exclude": [
-        "web"
-      ]
-    },
-    "list_title_recently_searched": {
-      "default": "Recently Searched",
-      "description": "Text used to indicate the list of recently searched generic media items.",
-      "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5240,6 +5239,7 @@
       "default": "Watch History",
       "description": "Title for lists containing the watch history of movies or episodes. This title should be as short and concise as possible.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -5333,14 +5333,6 @@
       },
       "exclude": [
         "android",
-        "web"
-      ]
-    },
-    "text_sort_recently_updated": {
-      "default": "Recently updated",
-      "description": "Label used for sorting type where items are sorted with the most recently updated ones being first.",
-      "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -5653,7 +5645,9 @@
     "button_text_media": {
       "default": "Media",
       "description": "Text for the button that allows users to toggle media to show both movies and shows. This should be short as possible.",
-      "exclude": []
+      "exclude": [
+        "android"
+      ]
     },
     "button_label_media": {
       "default": "Media",
@@ -5775,6 +5769,7 @@
       "default": "History",
       "description": "Title for the history page, containing a history of watched movies and episodes.",
       "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -5870,6 +5865,7 @@
       "default": "Height",
       "description": "Header for the section that displays the person's height.",
       "exclude": [
+        "android",
         "ios"
       ]
     },

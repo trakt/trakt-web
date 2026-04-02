@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "Inga recensioner än."
     },
-    "list_placeholder_replies": {
-      "default": "Inga svar än."
-    },
     "text_review_by": {
       "default": "Recension av"
     },
     "text_shout_by": {
       "default": "Rop av"
-    },
-    "text_reply_by": {
-      "default": "Svar från"
     },
     "text_deleted_username": {
       "default": "Raderad"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "Favoriter"
     },
-    "list_title_recently_searched": {
-      "default": "Senast sökta"
-    },
     "list_title_recently_searched_shows": {
       "default": "Nyligen sökta serier"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "Före {year}"
-    },
-    "text_sort_recently_updated": {
-      "default": "Senast uppdaterad"
     },
     "text_sort_recently_added": {
       "default": "Nyligen tillagt"

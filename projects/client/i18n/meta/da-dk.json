@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "Ingen anmeldelser endnu."
     },
-    "list_placeholder_replies": {
-      "default": "Ingen svar endnu."
-    },
     "text_review_by": {
       "default": "Anmeldelse af"
     },
     "text_shout_by": {
       "default": "Skrig af"
-    },
-    "text_reply_by": {
-      "default": "Svar fra"
     },
     "text_deleted_username": {
       "default": "Slettet"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "Favoritter"
     },
-    "list_title_recently_searched": {
-      "default": "Senest søgt"
-    },
     "list_title_recently_searched_shows": {
       "default": "Nyligt søgte serier"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "Før {year}"
-    },
-    "text_sort_recently_updated": {
-      "default": "Senest opdateret"
     },
     "text_sort_recently_added": {
       "default": "Senest tilføjet"

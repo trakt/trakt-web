@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "Încă nu există recenzii."
     },
-    "list_placeholder_replies": {
-      "default": "Încă nu există răspunsuri."
-    },
     "text_review_by": {
       "default": "Recenzie de"
     },
     "text_shout_by": {
       "default": "Strigăt de"
-    },
-    "text_reply_by": {
-      "default": "Răspuns de"
     },
     "text_deleted_username": {
       "default": "Șters"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "Favorite"
     },
-    "list_title_recently_searched": {
-      "default": "Căutări recente"
-    },
     "list_title_recently_searched_shows": {
       "default": "Seriale căutate recent"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "Înainte de {year}"
-    },
-    "text_sort_recently_updated": {
-      "default": "Actualizat recent"
     },
     "text_sort_recently_added": {
       "default": "Adăugat recent"
