@@ -1,8 +1,10 @@
 <script lang="ts">
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import Banner from "$lib/sections/banner/Banner.svelte";
   import DashboardDrawer from "$lib/sections/dashboard/DashboardDrawer.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
@@ -44,7 +46,13 @@
 
     <Banner />
     <UpNextList intent="continue" />
-    <WeeklyPulse />
+
+    <RenderForFeature flag={FeatureFlag.ThisWeek}>
+      {#snippet enabled()}
+        <WeeklyPulse />
+      {/snippet}
+    </RenderForFeature>
+
     <UpNextList intent="start" />
     <StreakCallout />
     <UpcomingList />
