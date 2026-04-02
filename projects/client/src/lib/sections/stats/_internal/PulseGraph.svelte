@@ -1,14 +1,15 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { PulseGraphData, PulseGraphType } from "./pulseGraphs";
   import PulseGraphDailyBars from "./PulseGraphDailyBars.svelte";
   import PulseGraphRatings from "./PulseGraphRatings.svelte";
+  import type { PulseGraphData, PulseGraphType } from "./pulseGraphs";
   import PulseGraphShowsMovies from "./PulseGraphShowsMovies.svelte";
   import PulseGraphWatchClock from "./PulseGraphWatchClock.svelte";
   import PulseGraphWeekTrend from "./PulseGraphWeekTrend.svelte";
 
-  const { kind, data }: { kind: PulseGraphType; data: PulseGraphData } = $props();
+  const { kind, data }: { kind: PulseGraphType; data: PulseGraphData } =
+    $props();
 
   const titles: Record<PulseGraphType, string> = {
     dailyBars: m.header_stats_graph_daily(),
@@ -21,7 +22,10 @@
   const title = $derived(titles[kind]);
 </script>
 
-<Card --height-card="var(--height-pulse-card)">
+<Card
+  --width-card="calc(2 * var(--width-pulse-card) + var(--list-gap))"
+  --height-card="var(--height-pulse-card)"
+>
   <div class="trakt-pulse-graph">
     <p class="trakt-pulse-graph-title">{title}</p>
 

@@ -3,8 +3,11 @@
 
   const { data }: { data: PulseGraphData["weekTrend"] } = $props();
 
-  const viewboxWidth = 240;
-  const viewboxHeight = 96;
+  let containerWidth = $state(0);
+  let containerHeight = $state(0);
+
+  const viewboxWidth = $derived(containerWidth || 240);
+  const viewboxHeight = $derived(containerHeight || 96);
   const padX = 4;
   const padTop = 16;
   const dotRadius = 2.5;
@@ -24,9 +27,7 @@
     }));
   });
 
-  const polyline = $derived(
-    points.map((p) => `${p.x},${p.y}`).join(" "),
-  );
+  const polyline = $derived(points.map((p) => `${p.x},${p.y}`).join(" "));
 
   const polygon = $derived.by(() => {
     if (points.length === 0) return "";
@@ -38,25 +39,31 @@
 </script>
 
 <div class="graph-week-trend">
-  <svg viewBox="0 0 {viewboxWidth} {viewboxHeight}" preserveAspectRatio="none" class="trend-svg">
-    <polygon points={polygon} class="trend-area" />
-    <polyline points={polyline} class="trend-line" />
-    {#each points as point, i (i)}
-      {@const isLast = i === points.length - 1}
-      <circle
-        cx={point.x}
-        cy={point.y}
-        r={isLast ? dotCurrentRadius : dotRadius}
-        class="trend-point"
-        class:trend-point-current={isLast}
-      />
-      {#if isLast}
-        <text x={point.x} y={point.y - 8} class="trend-value"
-          >{point.plays}</text
-        >
-      {/if}
-    {/each}
-  </svg>
+  <div
+    class="trend-svg-container"
+    bind:clientWidth={containerWidth}
+    bind:clientHeight={containerHeight}
+  >
+    <svg viewBox="0 0 {viewboxWidth} {viewboxHeight}" class="trend-svg">
+      <polygon points={polygon} class="trend-area" />
+      <polyline points={polyline} class="trend-line" />
+      {#each points as point, i (i)}
+        {@const isLast = i === points.length - 1}
+        <circle
+          cx={point.x}
+          cy={point.y}
+          r={isLast ? dotCurrentRadius : dotRadius}
+          class="trend-point"
+          class:trend-point-current={isLast}
+        />
+        {#if isLast}
+          <text x={point.x} y={point.y - 8} class="trend-value">
+            {point.plays}
+          </text>
+        {/if}
+      {/each}
+    </svg>
+  </div>
   <div class="trend-labels">
     {#each points as point (point.label)}
       <span class="trend-label">{point.label}</span>
@@ -74,10 +81,15 @@
     min-height: 0;
   }
 
-  .trend-svg {
-    width: 100%;
+  .trend-svg-container {
     flex: 1;
     min-height: 0;
+  }
+
+  .trend-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   .trend-area {

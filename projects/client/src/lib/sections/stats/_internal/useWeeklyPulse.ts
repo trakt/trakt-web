@@ -1,5 +1,5 @@
-import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { UserHistory } from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { toHumanDayOfWeek } from '$lib/utils/formatting/date/toHumanDayOfWeek.ts';
@@ -22,8 +22,6 @@ import {
   type PulseItem,
   type PulseStatItem,
 } from './pulseItem.ts';
-import { useUserComments } from './useUserComments.ts';
-import { useUserRatings } from './useUserRatings.ts';
 import {
   computeDelta,
   countUniqueDays,
@@ -35,6 +33,8 @@ import {
   scoreStatWithContext,
   statScoreMax,
 } from './pulseStats.ts';
+import { useUserComments } from './useUserComments.ts';
+import { useUserRatings } from './useUserRatings.ts';
 
 export type { PulseGraphItem, PulseItem, PulseStatItem } from './pulseItem.ts';
 
@@ -112,7 +112,7 @@ function fmt(n: number): string {
 }
 
 export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
-  items: Observable<readonly PulseItem[]>;
+  items: Observable<PulseItem[]>;
   isLoading: Observable<boolean>;
 } {
   const { history } = useUser();
@@ -234,15 +234,6 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
           tooltip: m.tooltip_stats_best_day(),
           delta: computeDelta(twBingeMax, lwBingeMax),
         },
-        // TODO: hours stat needs runtime data not available from useUser().history.
-        // Requires a dedicated endpoint or extending the history query with runtime info.
-        // {
-        //   key: 'hours',
-        //   value: fmt(hours),
-        //   label: m.label_stats_hours(),
-        //   tooltip: m.tooltip_stats_hours(),
-        //   delta: computeDelta(twHours, lwHours),
-        // },
       ];
 
       const twRatings = $ratings.filter((r) =>
@@ -323,14 +314,12 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
       };
 
       const qualifiedGraphs = pickGraphs(graphData);
-      const graphSpan = 2;
       const graphItems: PulseGraphItem[] = qualifiedGraphs.map((g) => ({
         type: 'graph',
         key: g.type,
         kind: g.type,
         data: graphData,
         score: normalizeScore(g.score, graphScoreMax),
-        span: graphSpan,
       }));
 
       return interleaveByScore(statItems, graphItems);

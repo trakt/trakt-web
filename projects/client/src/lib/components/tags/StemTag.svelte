@@ -22,7 +22,7 @@
     {#if children}
       {@render children()}
     {:else if text}
-      <p class="bold tag">
+      <p class="bold tag capitalize">
         {text}
       </p>
     {/if}

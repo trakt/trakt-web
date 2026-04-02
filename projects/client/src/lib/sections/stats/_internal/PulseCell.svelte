@@ -27,7 +27,10 @@
   </div>
 {/snippet}
 
-<Card --width-card="var(--min-pulse-card-width)" --height-card="var(--height-pulse-card)">
+<Card
+  --width-card="var(--width-pulse-card)"
+  --height-card="var(--height-pulse-card)"
+>
   <div class="trakt-pulse-cell">
     {#if tooltip}
       <Tooltip content={tooltip} side="right">
