@@ -1,9 +1,11 @@
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
+import { getStartOfDay } from '$lib/utils/date/getStartOfDay.ts';
+import { subtractDays } from '$lib/utils/date/subtractDays.ts';
 import { toHumanDayOfWeek } from '$lib/utils/formatting/date/toHumanDayOfWeek.ts';
 
-export const daysInWeek = 7;
+const daysInWeek = 7;
 const trendWeekCount = 4;
 const morningStartHour = 5;
 const afternoonStartHour = 12;
@@ -55,15 +57,11 @@ export function countByCalendarDay(
     locale: AvailableLocale;
   },
 ): { readonly days: readonly number[]; readonly labels: readonly string[] } {
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const dayRange = Array.from({ length: daysInWeek }, (_, idx) => {
-    const offset = daysInWeek - 1 - idx;
-    return new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate() - offset,
-    );
-  });
+  const today = getStartOfDay(now);
+  const dayRange = Array.from(
+    { length: daysInWeek },
+    (_, idx) => subtractDays(today, daysInWeek - 1 - idx),
+  );
 
   const days = dayRange.map((day) => {
     const key = getDayKey(day);
@@ -106,7 +104,7 @@ export function computeWeekTrend(
   dates: ReadonlyArray<Date>,
   now: Date,
 ): ReadonlyArray<{ readonly label: string; readonly plays: number }> {
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const today = getStartOfDay(now);
   const labels = [
     m.text_stats_weeks_ago({ count: '4' }),
     m.text_stats_weeks_short({ count: '3' }),
@@ -116,16 +114,8 @@ export function computeWeekTrend(
 
   return Array.from({ length: trendWeekCount }, (_, idx) => {
     const i = trendWeekCount - 1 - idx;
-    const start = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate() - (i * daysInWeek + daysInWeek - 1),
-    );
-    const end = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate() - (i * daysInWeek) + 1,
-    );
+    const start = subtractDays(today, i * daysInWeek + daysInWeek - 1);
+    const end = subtractDays(today, i * daysInWeek - 1);
     const count = dates.filter((d) => d >= start && d < end).length;
     return { label: labels[idx] ?? '', plays: count };
   });

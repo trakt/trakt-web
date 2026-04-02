@@ -1,10 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import {
-  interleaveByScore,
-  normalizeScore,
-  type PulseGraphItem,
-  type PulseStatItem,
-} from './pulseItem.ts';
+import type { PulseGraphItem } from './models/PulseGraphItem.ts';
+import type { PulseStatItem } from './models/PulseStatItem.ts';
+import { interleaveByScore, normalizeScore } from './pulseItem.ts';
 
 function stat(key: string, score: number): PulseStatItem {
   return {
