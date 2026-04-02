@@ -1,4 +1,5 @@
 import type { UserHistory } from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
+import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
@@ -33,14 +34,8 @@ import {
   scoreStatWithContext,
   statScoreMax,
 } from './pulseStats.ts';
-import { useUserComments } from './useUserComments.ts';
-import { useUserRatings } from './useUserRatings.ts';
 
 export type { PulseGraphItem, PulseItem, PulseStatItem } from './pulseItem.ts';
-
-type UseWeeklyPulseProps = {
-  readonly slug: string;
-};
 
 export type DateRange = { readonly start: Date; readonly end: Date };
 
@@ -111,16 +106,23 @@ function fmt(n: number): string {
   return toHumanNumber(n, languageTag());
 }
 
-export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
+function getRatingsInRange(
+  data: UserRatings,
+  range: DateRange,
+): ReadonlyArray<{ readonly rating: number }> {
+  return [
+    ...data.movies.values(),
+    ...data.shows.values(),
+    ...data.episodes.values(),
+  ].filter((e) => e.ratedAt >= range.start && e.ratedAt < range.end);
+}
+
+export function useWeeklyPulse(): {
   items: Observable<PulseItem[]>;
   isLoading: Observable<boolean>;
   dateRange: DateRange;
 } {
-  const { history } = useUser();
-  const { ratings: ratingsEntries, isLoadingRatings } = useUserRatings();
-  const { comments: commentsEntries, isLoadingComments } = useUserComments(
-    slug,
-  );
+  const { history, ratings } = useUser();
 
   const now = new Date();
   const locale = getLocale();
@@ -141,8 +143,8 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
     end: now,
   };
 
-  const items = combineLatest([history, ratingsEntries, commentsEntries]).pipe(
-    map(([$history, $ratings, $comments]) => {
+  const items = combineLatest([history, ratings]).pipe(
+    map(([$history, $ratings]) => {
       if (!$history) return [];
 
       const { movieDates, showDates, showIds } = extractDates($history);
@@ -242,18 +244,12 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         },
       ];
 
-      const twRatings = $ratings.filter((r) =>
-        r.ratedAt >= thisWeekRange.start && r.ratedAt < thisWeekRange.end
-      );
-      const lwRatings = $ratings.filter((r) =>
-        r.ratedAt >= lastWeekRange.start && r.ratedAt < lastWeekRange.end
-      );
-      const twComments = $comments.filter((c) =>
-        c.createdAt >= thisWeekRange.start && c.createdAt < thisWeekRange.end
-      );
-      const lwComments = $comments.filter((c) =>
-        c.createdAt >= lastWeekRange.start && c.createdAt < lastWeekRange.end
-      );
+      const twRatings = $ratings
+        ? getRatingsInRange($ratings, thisWeekRange)
+        : [];
+      const lwRatings = $ratings
+        ? getRatingsInRange($ratings, lastWeekRange)
+        : [];
 
       if (twRatings.length > 0 || lwRatings.length > 0) {
         candidates.push({
@@ -263,16 +259,6 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
           label: m.label_stats_ratings(),
           tooltip: m.tooltip_stats_ratings(),
           delta: computeDelta(twRatings.length, lwRatings.length),
-        });
-      }
-      if (twComments.length > 0 || lwComments.length > 0) {
-        candidates.push({
-          key: 'comments',
-          rawValue: twComments.length,
-          value: fmt(twComments.length),
-          label: m.label_stats_comments(),
-          tooltip: m.tooltip_stats_comments(),
-          delta: computeDelta(twComments.length, lwComments.length),
         });
       }
 
@@ -302,7 +288,7 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
         ...filterDates(showDates, fourWeekRange),
       ];
 
-      const twRatingScores = twRatings.map((r) => r.score);
+      const twRatingScores = twRatings.map((r) => r.rating);
 
       const graphData: PulseGraphData = {
         dailyBars: countByCalendarDay({ dates: twAllDates, now, locale }),
@@ -334,9 +320,8 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
   );
 
   const isLoading = combineLatest([
-    history.pipe(map(($h) => !$h)),
-    isLoadingRatings,
-    isLoadingComments,
+    history.pipe(map(($history) => !$history)),
+    ratings.pipe(map(($ratings) => !$ratings)),
   ]).pipe(map((states) => states.some(Boolean)));
 
   return { items, isLoading, dateRange: displayRange };

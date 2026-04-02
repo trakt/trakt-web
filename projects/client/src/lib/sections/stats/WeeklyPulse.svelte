@@ -1,7 +1,6 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
-  import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import {
     dashboardDrawerNavigation,
@@ -17,11 +16,7 @@
   const { buildDrawerLink } = dashboardDrawerNavigation();
   const drilldownLink = $derived(buildDrawerLink(DashboardDrawers.WeeklyPulse));
 
-  const { user } = useUser();
-
-  const { items, isLoading, dateRange } = $derived(
-    useWeeklyPulse({ slug: $user.slug }),
-  );
+  const { items, isLoading, dateRange } = useWeeklyPulse();
 
   const hasItems = $derived($items.length > 0);
 
