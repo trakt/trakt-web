@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "Nog geen beoordelingen."
     },
-    "list_placeholder_replies": {
-      "default": "Nog geen reacties."
-    },
     "text_review_by": {
       "default": "Review door"
     },
     "text_shout_by": {
       "default": "Geschreeuwd door"
-    },
-    "text_reply_by": {
-      "default": "Reactie van"
     },
     "text_deleted_username": {
       "default": "Verwijderd"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "Favorieten"
     },
-    "list_title_recently_searched": {
-      "default": "Recent gezocht"
-    },
     "list_title_recently_searched_shows": {
       "default": "Recent gezochte series"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "Vóór {year}"
-    },
-    "text_sort_recently_updated": {
-      "default": "Recent bijgewerkt"
     },
     "text_sort_recently_added": {
       "default": "Recent toegevoegd"

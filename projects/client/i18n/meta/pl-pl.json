@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "Brak recenzji."
     },
-    "list_placeholder_replies": {
-      "default": "Brak odpowiedzi."
-    },
     "text_review_by": {
       "default": "Recenzja od"
     },
     "text_shout_by": {
       "default": "Krzyknął"
-    },
-    "text_reply_by": {
-      "default": "Odpowiedź od"
     },
     "text_deleted_username": {
       "default": "Usunięto"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "Ulubione"
     },
-    "list_title_recently_searched": {
-      "default": "Ostatnio wyszukiwane"
-    },
     "list_title_recently_searched_shows": {
       "default": "Ostatnio wyszukiwane seriale"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "Przed {year}"
-    },
-    "text_sort_recently_updated": {
-      "default": "Ostatnio zaktualizowane"
     },
     "text_sort_recently_added": {
       "default": "Ostatnio dodane"

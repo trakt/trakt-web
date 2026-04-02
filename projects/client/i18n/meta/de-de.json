@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "Noch keine Bewertungen."
     },
-    "list_placeholder_replies": {
-      "default": "Noch keine Antworten."
-    },
     "text_review_by": {
       "default": "Review von"
     },
     "text_shout_by": {
       "default": "Shout von"
-    },
-    "text_reply_by": {
-      "default": "Antwort von"
     },
     "text_deleted_username": {
       "default": "Gelöscht"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "Favoriten"
     },
-    "list_title_recently_searched": {
-      "default": "Kürzlich gesucht"
-    },
     "list_title_recently_searched_shows": {
       "default": "Zuletzt gesuchte Serien"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "Vor {year}"
-    },
-    "text_sort_recently_updated": {
-      "default": "Kürzlich aktualisiert"
     },
     "text_sort_recently_added": {
       "default": "Kürzlich hinzugefügt"

@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "No reviews yet."
     },
-    "list_placeholder_replies": {
-      "default": "No replies yet."
-    },
     "text_review_by": {
       "default": "Review by"
     },
     "text_shout_by": {
       "default": "Shout by"
-    },
-    "text_reply_by": {
-      "default": "Reply by"
     },
     "text_deleted_username": {
       "default": "Deleted"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "Favourite"
     },
-    "list_title_recently_searched": {
-      "default": "Recently Searched"
-    },
     "list_title_recently_searched_shows": {
       "default": "Recently Searched Shows"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "Before {year}"
-    },
-    "text_sort_recently_updated": {
-      "default": "Recently updated"
     },
     "text_sort_recently_added": {
       "default": "Recently added"

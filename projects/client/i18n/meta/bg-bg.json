@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "Все още няма ревюта."
     },
-    "list_placeholder_replies": {
-      "default": "Все още няма отговори."
-    },
     "text_review_by": {
       "default": "Прегледай по"
     },
     "text_shout_by": {
       "default": "Вик от"
-    },
-    "text_reply_by": {
-      "default": "Отговор от"
     },
     "text_deleted_username": {
       "default": "Изтрит"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "Любими"
     },
-    "list_title_recently_searched": {
-      "default": "Последно търсени"
-    },
     "list_title_recently_searched_shows": {
       "default": "Наскоро търсени сериали"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "Преди {year}"
-    },
-    "text_sort_recently_updated": {
-      "default": "Наскоро актуализирани"
     },
     "text_sort_recently_added": {
       "default": "Наскоро добавени"

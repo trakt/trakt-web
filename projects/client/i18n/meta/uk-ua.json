@@ -864,17 +864,11 @@
     "list_placeholder_comments": {
       "default": "Відгуків ще немає."
     },
-    "list_placeholder_replies": {
-      "default": "Відповідей ще немає."
-    },
     "text_review_by": {
       "default": "Огляд від"
     },
     "text_shout_by": {
       "default": "Вигук від"
-    },
-    "text_reply_by": {
-      "default": "Відповідь від"
     },
     "text_deleted_username": {
       "default": "Видалено"
@@ -1890,9 +1884,6 @@
     "list_title_streaming_favorite": {
       "default": "Улюблені"
     },
-    "list_title_recently_searched": {
-      "default": "Нещодавно шукали"
-    },
     "list_title_recently_searched_shows": {
       "default": "Нещодавно шукані серіали"
     },
@@ -2027,9 +2018,6 @@
     },
     "filter_label_before_year": {
       "default": "До {year} року"
-    },
-    "text_sort_recently_updated": {
-      "default": "Нещодавно оновлено"
     },
     "text_sort_recently_added": {
       "default": "Нещодавно додано"
