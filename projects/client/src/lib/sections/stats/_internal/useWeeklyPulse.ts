@@ -42,7 +42,7 @@ type UseWeeklyPulseProps = {
   readonly slug: string;
 };
 
-type DateRange = { readonly start: Date; readonly end: Date };
+export type DateRange = { readonly start: Date; readonly end: Date };
 
 const thisWeekStart = daysInWeek - 1;
 const lastWeekStart = daysInWeek * 2 - 1;
@@ -114,6 +114,7 @@ function fmt(n: number): string {
 export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
   items: Observable<PulseItem[]>;
   isLoading: Observable<boolean>;
+  dateRange: DateRange;
 } {
   const { history } = useUser();
   const { ratings: ratingsEntries, isLoadingRatings } = useUserRatings();
@@ -134,6 +135,11 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
     endDaysAgo: lastWeekEnd,
     now,
   });
+
+  const displayRange: DateRange = {
+    start: thisWeekRange.start,
+    end: now,
+  };
 
   const items = combineLatest([history, ratingsEntries, commentsEntries]).pipe(
     map(([$history, $ratings, $comments]) => {
@@ -333,5 +339,5 @@ export function useWeeklyPulse({ slug }: UseWeeklyPulseProps): {
     isLoadingComments,
   ]).pipe(map((states) => states.some(Boolean)));
 
-  return { items, isLoading };
+  return { items, isLoading, dateRange: displayRange };
 }
