@@ -157,10 +157,18 @@
   --min-pulse-card-width: var(--ni-148);
   --max-pulse-item-count: 12;
 
-  @include dynamic-item-count(--pulse-item-count,
-    var(--min-pulse-card-width),
-    var(--max-pulse-item-count),
-  );
+  /*
+    Pulse graphs occupy 2 slots, so we round down to the nearest
+    even number to prevent a graph from half-overflowing at the edge.
+  */
+  --pulse-item-count: clamp(2,
+    calc(2 * round(down, var(--list-inner-width) / (2 * (var(--min-pulse-card-width) + var(--list-gap))), 1)),
+    var(--max-pulse-item-count));
+
+  @supports (-moz-appearance: none) {
+    --pulse-item-count: var(--max-pulse-item-count);
+  }
+
   @include dynamic-card-width(--width-pulse-card,
     var(--min-pulse-card-width),
     var(--pulse-item-count),

@@ -1,11 +1,10 @@
-import type { PulseStat } from './pulseStats.ts';
 import type { PulseGraphData, PulseGraphType } from './pulseGraphs.ts';
+import type { PulseStat } from './pulseStats.ts';
 
 export type PulseStatItem = {
   readonly type: 'stat';
   readonly key: string;
   readonly score: number;
-  readonly span?: number;
 } & PulseStat;
 
 export type PulseGraphItem = {
@@ -14,7 +13,6 @@ export type PulseGraphItem = {
   readonly kind: PulseGraphType;
   readonly data: PulseGraphData;
   readonly score: number;
-  readonly span: number;
 };
 
 export type PulseItem = PulseStatItem | PulseGraphItem;
@@ -32,7 +30,7 @@ export function normalizeScore(
 export function interleaveByScore(
   stats: ReadonlyArray<PulseStatItem>,
   graphs: ReadonlyArray<PulseGraphItem>,
-): readonly PulseItem[] {
+): PulseItem[] {
   const all: PulseItem[] = [...stats, ...graphs]
     .sort((a, b) => b.score - a.score);
 
