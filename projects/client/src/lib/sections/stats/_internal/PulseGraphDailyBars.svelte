@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { PulseGraphData } from "./pulseGraphs";
+  import type { PulseGraphData } from "./models/PulseGraphData";
 
   const { data }: { data: PulseGraphData["dailyBars"] } = $props();
 

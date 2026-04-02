@@ -1,20 +1,8 @@
-export type { PulseGraphItem } from './models/PulseGraphItem.ts';
-export type { PulseItem } from './models/PulseItem.ts';
-export type { PulseStatItem } from './models/PulseStatItem.ts';
-
-import type { PulseGraphItem } from './models/PulseGraphItem.ts';
-import type { PulseItem } from './models/PulseItem.ts';
-import type { PulseStatItem } from './models/PulseStatItem.ts';
+import type { PulseGraphItem } from '../models/PulseGraphItem.ts';
+import type { PulseItem } from '../models/PulseItem.ts';
+import type { PulseStatItem } from '../models/PulseStatItem.ts';
 
 const maxConsecutiveGraphs = 2;
-
-export function normalizeScore(
-  raw: number,
-  maxPossible: number,
-): number {
-  if (maxPossible <= 0) return 0;
-  return Math.min((raw / maxPossible) * 100, 100);
-}
 
 export function interleaveByScore(
   stats: ReadonlyArray<PulseStatItem>,

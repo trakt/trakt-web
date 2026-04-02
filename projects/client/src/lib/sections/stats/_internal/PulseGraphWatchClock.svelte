@@ -1,11 +1,9 @@
 <script lang="ts">
-  import type { PulseGraphData } from "./pulseGraphs";
+  import type { PulseGraphData } from "./models/PulseGraphData";
 
   const { data }: { data: PulseGraphData["watchClock"] } = $props();
 
-  const max = $derived(
-    Math.max(...data.buckets.map((b) => b.count), 1),
-  );
+  const max = $derived(Math.max(...data.buckets.map((b) => b.count), 1));
 </script>
 
 <div class="graph-watch-clock">

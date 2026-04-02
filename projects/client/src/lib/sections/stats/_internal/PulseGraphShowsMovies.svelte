@@ -1,13 +1,11 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { PulseGraphData } from "./pulseGraphs";
+  import type { PulseGraphData } from "./models/PulseGraphData";
 
   const { data }: { data: PulseGraphData["showsMovies"] } = $props();
 
   const total = $derived(data.episodes + data.movies);
-  const showsPct = $derived(
-    total > 0 ? (data.episodes / total) * 100 : 50,
-  );
+  const showsPct = $derived(total > 0 ? (data.episodes / total) * 100 : 50);
 </script>
 
 <div class="graph-shows-movies">

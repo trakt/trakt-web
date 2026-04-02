@@ -1,4 +1,4 @@
-import type { PulseStat } from '../pulseStats.ts';
+import type { PulseStat } from './PulseStat.ts';
 
 export type PulseStatItem = {
   readonly type: 'stat';

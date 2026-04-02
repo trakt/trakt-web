@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import type { PulseGraphItem } from './models/PulseGraphItem.ts';
-import type { PulseStatItem } from './models/PulseStatItem.ts';
-import { interleaveByScore, normalizeScore } from './pulseItem.ts';
+import type { PulseGraphItem } from '../models/PulseGraphItem.ts';
+import type { PulseStatItem } from '../models/PulseStatItem.ts';
+import { interleaveByScore } from './interleaveByScore.ts';
 
 function stat(key: string, score: number): PulseStatItem {
   return {
@@ -22,25 +22,8 @@ function graph(key: string, score: number): PulseGraphItem {
     kind: 'dailyBars',
     data: {} as PulseGraphItem['data'],
     score,
-    span: 2,
   };
 }
-
-describe('normalizeScore', () => {
-  it('normalizes to 0-100 range', () => {
-    expect(normalizeScore(65, 130)).toBe(50);
-    expect(normalizeScore(130, 130)).toBe(100);
-    expect(normalizeScore(0, 130)).toBe(0);
-  });
-
-  it('clamps to 100', () => {
-    expect(normalizeScore(200, 130)).toBe(100);
-  });
-
-  it('returns 0 for zero max', () => {
-    expect(normalizeScore(10, 0)).toBe(0);
-  });
-});
 
 describe('interleaveByScore', () => {
   it('sorts all items by score descending', () => {
