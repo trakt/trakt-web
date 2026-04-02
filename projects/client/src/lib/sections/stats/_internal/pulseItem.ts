@@ -1,21 +1,10 @@
-import type { PulseGraphData, PulseGraphType } from './pulseGraphs.ts';
-import type { PulseStat } from './pulseStats.ts';
+export type { PulseGraphItem } from './models/PulseGraphItem.ts';
+export type { PulseItem } from './models/PulseItem.ts';
+export type { PulseStatItem } from './models/PulseStatItem.ts';
 
-export type PulseStatItem = {
-  readonly type: 'stat';
-  readonly key: string;
-  readonly score: number;
-} & PulseStat;
-
-export type PulseGraphItem = {
-  readonly type: 'graph';
-  readonly key: string;
-  readonly kind: PulseGraphType;
-  readonly data: PulseGraphData;
-  readonly score: number;
-};
-
-export type PulseItem = PulseStatItem | PulseGraphItem;
+import type { PulseGraphItem } from './models/PulseGraphItem.ts';
+import type { PulseItem } from './models/PulseItem.ts';
+import type { PulseStatItem } from './models/PulseStatItem.ts';
 
 const maxConsecutiveGraphs = 2;
 

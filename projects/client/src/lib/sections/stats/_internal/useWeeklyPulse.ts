@@ -3,6 +3,9 @@ import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQ
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
+import { addDays } from '$lib/utils/date/addDays.ts';
+import { getStartOfDay } from '$lib/utils/date/getStartOfDay.ts';
+import { subtractDays } from '$lib/utils/date/subtractDays.ts';
 import { toHumanDayOfWeek } from '$lib/utils/formatting/date/toHumanDayOfWeek.ts';
 import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber.ts';
 import { combineLatest, map, type Observable, shareReplay } from 'rxjs';
@@ -11,7 +14,6 @@ import {
   computeRatingsDistribution,
   computeWeekTrend,
   countByCalendarDay,
-  daysInWeek,
   graphScoreMax,
   pickGraphs,
   type PulseGraphData,
@@ -35,35 +37,7 @@ import {
   statScoreMax,
 } from './pulseStats.ts';
 
-export type { PulseGraphItem, PulseItem, PulseStatItem } from './pulseItem.ts';
-
 export type DateRange = { readonly start: Date; readonly end: Date };
-
-const thisWeekStart = daysInWeek - 1;
-const lastWeekStart = daysInWeek * 2 - 1;
-const lastWeekEnd = daysInWeek;
-const fourWeekLookback = daysInWeek * 4 - 1;
-
-function getDateRange(
-  { startDaysAgo, endDaysAgo, now }: {
-    startDaysAgo: number;
-    endDaysAgo: number;
-    now: Date;
-  },
-): DateRange {
-  return {
-    start: new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate() - startDaysAgo,
-    ),
-    end: new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate() - endDaysAgo + 1,
-    ),
-  };
-}
 
 function filterDates(
   dates: ReadonlyArray<Date>,
@@ -127,16 +101,17 @@ export function useWeeklyPulse(): {
   const now = new Date();
   const locale = getLocale();
 
-  const thisWeekRange = getDateRange({
-    startDaysAgo: thisWeekStart,
-    endDaysAgo: 0,
-    now,
-  });
-  const lastWeekRange = getDateRange({
-    startDaysAgo: lastWeekStart,
-    endDaysAgo: lastWeekEnd,
-    now,
-  });
+  const today = getStartOfDay(now);
+  const tomorrow = addDays(today, 1);
+
+  const thisWeekRange: DateRange = {
+    start: subtractDays(today, 6),
+    end: tomorrow,
+  };
+  const lastWeekRange: DateRange = {
+    start: subtractDays(today, 13),
+    end: thisWeekRange.start,
+  };
 
   const displayRange: DateRange = {
     start: thisWeekRange.start,
@@ -278,11 +253,10 @@ export function useWeeklyPulse(): {
         ),
       }));
 
-      const fourWeekRange = getDateRange({
-        startDaysAgo: fourWeekLookback,
-        endDaysAgo: 0,
-        now,
-      });
+      const fourWeekRange: DateRange = {
+        start: subtractDays(today, 27),
+        end: tomorrow,
+      };
       const allRecentDates = [
         ...filterDates(movieDates, fourWeekRange),
         ...filterDates(showDates, fourWeekRange),
