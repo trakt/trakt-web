@@ -9,9 +9,10 @@
   import CastDrawer from "./components/cast/CastDrawer.svelte";
   import DetailsDrawer from "./components/details/DetailsDrawer.svelte";
   import type { MediaDetailsProps } from "./components/details/MediaDetailsProps";
+  import HistoryDrawer from "./components/history/HistoryDrawer.svelte";
   import SentimentDrawer from "./components/sentiment/SentimentDrawer.svelte";
-  import VideoDrawer from "./components/videos/VideoDrawer.svelte";
   import TriviaDrawer from "./components/trivia/TriviaDrawer.svelte";
+  import VideoDrawer from "./components/videos/VideoDrawer.svelte";
 
   const {
     sentiment,
@@ -59,4 +60,8 @@
 
 {#if drawer === Drawers.Trivia && media}
   <TriviaDrawer {media} onClose={close} />
+{/if}
+
+{#if drawer === Drawers.History}
+  <HistoryDrawer {...details} onClose={close} />
 {/if}

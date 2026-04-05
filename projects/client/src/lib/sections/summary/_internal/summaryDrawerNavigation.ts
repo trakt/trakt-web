@@ -9,6 +9,7 @@ export enum Drawers {
   Cast = 'cast',
   Videos = 'videos',
   Trivia = 'trivia',
+  History = 'history',
 }
 
 function mapToDrawer(value: string | Nil) {
@@ -23,6 +24,8 @@ function mapToDrawer(value: string | Nil) {
       return Drawers.Videos;
     case Drawers.Trivia:
       return Drawers.Trivia;
+    case Drawers.History:
+      return Drawers.History;
     default:
       return null;
   }

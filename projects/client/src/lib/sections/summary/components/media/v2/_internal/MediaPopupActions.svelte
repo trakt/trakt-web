@@ -5,6 +5,7 @@
   import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
+  import HistoryButton from "$lib/sections/summary/components/history/HistoryButton.svelte";
   import SideActions from "./SideActions.svelte";
 
   const { media, title }: { media: MediaEntry; title: string } = $props();
@@ -46,6 +47,8 @@
   variant="primary"
   {title}
 />
+
+<HistoryButton />
 
 {#if isListsDrawerOpen}
   <ListsDrawer
