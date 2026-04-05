@@ -1,11 +1,9 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { fade } from "svelte/transition";
   import MediaDetails from "./_internal/MediaDetails.svelte";
   import MediaStats from "./_internal/MediaStats.svelte";
-  import MediaWatchHistory from "./_internal/MediaWatchHistory.svelte";
   import type { MediaDetailsProps } from "./MediaDetailsProps";
 
   const { onClose, ...props }: { onClose: () => void } & MediaDetailsProps =
@@ -27,10 +25,6 @@
     >
       <MediaStats {...props} />
       <MediaDetails {...props} />
-
-      <RenderFor audience="authenticated">
-        <MediaWatchHistory {...props} />
-      </RenderFor>
     </div>
   {/if}
 </Drawer>
