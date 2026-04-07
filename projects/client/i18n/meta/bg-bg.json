@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "Твоята седмица"
+    },
+    "tag_text_discount_monthly": {
+      "default": "Отстъпка за първия месец"
+    },
+    "tag_text_discount_yearly": {
+      "default": "Отстъпка за първата година"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "Отстъпка за първите 2 години"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Месечно таксуване"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Годишно таксуване"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Таксуване на всеки 2 години"
     }
   }
 }

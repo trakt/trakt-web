@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "Ваш тиждень"
+    },
+    "tag_text_discount_monthly": {
+      "default": "Знижка на перший місяць"
+    },
+    "tag_text_discount_yearly": {
+      "default": "Знижка на перший рік"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "Знижка на перші 2 роки"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Оплата щомісяця"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Оплата щороку"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Оплата кожні 2 роки"
     }
   }
 }

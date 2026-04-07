@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "今週の記録"
+    },
+    "tag_text_discount_monthly": {
+      "default": "初月割引"
+    },
+    "tag_text_discount_yearly": {
+      "default": "初年度割引"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "最初 2 年間割引"
+    },
+    "text_vip_billed_monthly": {
+      "default": "月額払い"
+    },
+    "text_vip_billed_yearly": {
+      "default": "年額払い"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "2 年ごとの請求"
     }
   }
 }

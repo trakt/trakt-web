@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "Uken din"
+    },
+    "tag_text_discount_monthly": {
+      "default": "Rabatt første måned"
+    },
+    "tag_text_discount_yearly": {
+      "default": "Rabatt første år"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "Rabatt første 2 år"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Faktureres månedlig"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Faktureres årlig"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Faktureres hvert 2. år"
     }
   }
 }

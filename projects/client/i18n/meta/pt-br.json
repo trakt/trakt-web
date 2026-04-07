@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "Sua Semana"
+    },
+    "tag_text_discount_monthly": {
+      "default": "Desconto no 1º mês"
+    },
+    "tag_text_discount_yearly": {
+      "default": "Desconto no 1º ano"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "Desconto nos primeiros 2 anos"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Cobrança mensal"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Cobrança anual"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Cobrança a cada 2 anos"
     }
   }
 }

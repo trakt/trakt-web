@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "La tua settimana"
+    },
+    "tag_text_discount_monthly": {
+      "default": "Sconto primo mese"
+    },
+    "tag_text_discount_yearly": {
+      "default": "Sconto primo anno"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "Sconto primi 2 anni"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Fatturato mensilmente"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Fatturato annualmente"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Fatturato ogni 2 anni"
     }
   }
 }

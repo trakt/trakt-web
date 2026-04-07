@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "Săptămâna ta"
+    },
+    "tag_text_discount_monthly": {
+      "default": "Reducere prima lună"
+    },
+    "tag_text_discount_yearly": {
+      "default": "Reducere primul an"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "Reducere primii 2 ani"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Facturat lunar"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Facturat anual"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Facturat la 2 ani"
     }
   }
 }

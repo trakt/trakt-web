@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "Twój Tydzień"
+    },
+    "tag_text_discount_monthly": {
+      "default": "Zniżka na pierwszy miesiąc"
+    },
+    "tag_text_discount_yearly": {
+      "default": "Zniżka na pierwszy rok"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "Zniżka na pierwsze 2 lata"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Rozliczane co miesiąc"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Rozliczane co rok"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Rozliczane co 2 lata"
     }
   }
 }

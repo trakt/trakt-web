@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "Jouw week"
+    },
+    "tag_text_discount_monthly": {
+      "default": "Korting eerste maand"
+    },
+    "tag_text_discount_yearly": {
+      "default": "Korting eerste jaar"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "Korting eerste 2 jaar"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Maandelijks gefactureerd"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Jaarlijks gefactureerd"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Per 2 jaar gefactureerd"
     }
   }
 }

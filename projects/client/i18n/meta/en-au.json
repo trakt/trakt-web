@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "Your Week"
+    },
+    "tag_text_discount_monthly": {
+      "default": "First month discount"
+    },
+    "tag_text_discount_yearly": {
+      "default": "First year discount"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "First 2 years discount"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Billed monthly"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Billed yearly"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Billed every 2 years"
     }
   }
 }

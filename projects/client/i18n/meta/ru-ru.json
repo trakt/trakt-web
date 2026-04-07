@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "Ваша неделя"
+    },
+    "tag_text_discount_monthly": {
+      "default": "Скидка на первый месяц"
+    },
+    "tag_text_discount_yearly": {
+      "default": "Скидка на первый год"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "Скидка на первые 2 года"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Оплата ежемесячно"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Оплата ежегодно"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Оплата каждые 2 года"
     }
   }
 }
