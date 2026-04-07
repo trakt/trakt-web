@@ -44,7 +44,7 @@ addEventListener('activate', (event) => {
 });
 
 function removeNavigationCache() {
-  caches.delete(CacheKey.navigation);
+  return caches.delete(CacheKey.navigation);
 }
 
 addEventListener('message', (event) => {
@@ -72,7 +72,10 @@ registerRoute(
 
       // Remove _cb param and redirect
       url.searchParams.delete('_cb');
-      return Response.redirect(url.toString(), 302);
+      return new Response(
+        `<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=${url.toString()}"></head><body></body></html>`,
+        { headers: { 'Content-Type': 'text/html' } },
+      );
     }
 
     return await navigationHandler.handle(context);
