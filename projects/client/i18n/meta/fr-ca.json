@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Facturé aux 2 ans"
+    },
+    "link_text_preview_settings": {
+      "default": "Aperçu"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Passez à VIP pour débloquer les fonctionnalités en aperçu."
+    },
+    "header_preview_features": {
+      "default": "Fonctions en aperçu"
+    },
+    "description_preview_features": {
+      "default": "Activez ou désactivez les fonctions en plein développement. Comme sur un plateau de tournage, ces nouveautés peuvent être instables ou changer sans préavis."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Il n'y a pas de fonctions en aperçu pour le moment. Revenez faire un tour plus tard."
     }
   }
 }

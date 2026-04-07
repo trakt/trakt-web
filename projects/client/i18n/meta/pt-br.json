@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Cobrança a cada 2 anos"
+    },
+    "link_text_preview_settings": {
+      "default": "Prévia"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Faça o upgrade para VIP para desbloquear recursos em prévia e sair na frente!"
+    },
+    "header_preview_features": {
+      "default": "Recursos em Prévia"
+    },
+    "description_preview_features": {
+      "default": "Ative ou desative funções que ainda estão em fase de teste. Como um roteiro original em desenvolvimento, elas podem ser instáveis e mudar a qualquer momento!"
+    },
+    "text_placeholder_preview_features": {
+      "default": "No momento não temos recursos em prévia por aqui. Fique de olho nas cenas dos próximos capítulos!"
     }
   }
 }

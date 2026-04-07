@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Fatturato ogni 2 anni"
+    },
+    "link_text_preview_settings": {
+      "default": "Anteprima"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Passa a VIP per sbloccare le funzioni in anteprima."
+    },
+    "header_preview_features": {
+      "default": "Funzioni in Anteprima"
+    },
+    "description_preview_features": {
+      "default": "Attiva o disattiva le funzioni ancora in fase di montaggio. Queste novità potrebbero essere instabili e cambiare all'improvviso, proprio come un colpo di scena di Hitchcock!"
+    },
+    "text_placeholder_preview_features": {
+      "default": "Al momento non ci sono funzioni in anteprima. Torna a trovarci più tardi per il prossimo grande debutto."
     }
   }
 }

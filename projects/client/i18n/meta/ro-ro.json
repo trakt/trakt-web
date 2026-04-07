@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Facturat la 2 ani"
+    },
+    "link_text_preview_settings": {
+      "default": "Previzualizare"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Treci la VIP pentru a debloca funcțiile în avanpremieră."
+    },
+    "header_preview_features": {
+      "default": "Funcții în avanpremieră"
+    },
+    "description_preview_features": {
+      "default": "Activează sau dezactivează funcțiile aflate în dezvoltare. Acestea pot fi instabile și se pot schimba oricând – privește-le ca pe un „director’s cut” aflat încă în montaj."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Momentan nu există funcții în avanpremieră. Revino mai târziu pentru noutăți din culise."
     }
   }
 }

@@ -3510,6 +3510,21 @@
     },
     "button_label_view_all_favorites": {
       "default": "Alle Favoriten anzeigen"
+    },
+    "link_text_preview_settings": {
+      "default": "Vorschau"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Werden Sie VIP, um exklusive Vorschau-Funktionen freizuschalten."
+    },
+    "header_preview_features": {
+      "default": "Vorschau-Funktionen"
+    },
+    "description_preview_features": {
+      "default": "Aktivieren oder deaktivieren Sie Funktionen, die sich noch in der Entwicklung befinden. Diese können noch instabil sein – fast wie ein Cliffhanger am Ende der Staffel."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Aktuell gibt es keine neuen Vorschauen. Kommen Sie für die nächste Vorstellung wieder vorbei!"
     }
   },
   "vip_feature_description_profile_customisation": {

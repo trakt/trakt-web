@@ -290,6 +290,7 @@ export const UrlBuilder = {
     general: () => '/settings',
     data: () => '/settings/data',
     advanced: () => '/settings/advanced',
+    preview: () => '/settings/preview',
   },
   external: {
     imdb: {

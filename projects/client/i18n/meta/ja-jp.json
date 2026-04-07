@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "2 年ごとの請求"
+    },
+    "link_text_preview_settings": {
+      "default": "プレビュー"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "VIPにアップグレードして、プレビュー機能をアンロックしましょう。"
+    },
+    "header_preview_features": {
+      "default": "プレビュー機能"
+    },
+    "description_preview_features": {
+      "default": "開発中のプレビュー機能を設定します。これらは製作途中の作品のように不安定な場合があり、予告なく変更されることがあります。"
+    },
+    "text_placeholder_preview_features": {
+      "default": "現在、公開可能なプレビュー機能はありません。次のエピソードを待つように、また後でチェックしてみてください。"
     }
   }
 }

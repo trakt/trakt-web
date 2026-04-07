@@ -3509,6 +3509,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "每两年计费"
+    },
+    "link_text_preview_settings": {
+      "default": "预览"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "升级 VIP 以解锁预览功能。"
+    },
+    "header_preview_features": {
+      "default": "预览功能"
+    },
+    "description_preview_features": {
+      "default": "开启或关闭开发中的预览功能。就像还在剪辑室里的预览片段，这些功能可能尚不稳定，且随时可能发生变动。"
+    },
+    "text_placeholder_preview_features": {
+      "default": "目前没有预览功能。稍后再回来看看有没有什么新花絮。"
     }
   }
 }

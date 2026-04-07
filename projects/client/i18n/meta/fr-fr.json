@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Facturation tous les 2 ans"
+    },
+    "link_text_preview_settings": {
+      "default": "Aperçu"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Devenez VIP pour débloquer les fonctionnalités en avant-première."
+    },
+    "header_preview_features": {
+      "default": "Fonctionnalités en avant-première"
+    },
+    "description_preview_features": {
+      "default": "Activez ou désactivez des fonctionnalités encore en plein montage. Ces options, tel un premier jet de scénario, peuvent s'avérer instables et être modifiées à tout moment."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Il n'y a actuellement aucune fonctionnalité en avant-première. Revenez plus tard pour la suite du programme !"
     }
   }
 }

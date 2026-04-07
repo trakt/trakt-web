@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Оплата кожні 2 роки"
+    },
+    "link_text_preview_settings": {
+      "default": "Прев'ю"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Станьте VIP, щоб розблокувати доступ до прев'ю-функцій."
+    },
+    "header_preview_features": {
+      "default": "Прев'ю-функції"
+    },
+    "description_preview_features": {
+      "default": "Керуйте функціями, що перебувають у розробці. Як і справжній кіношедевр у процесі монтажу, вони можуть бути дещо нестабільними та змінюватися будь-якої миті."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Зараз на знімальному майданчику затишшя — нових прев'ю-функцій поки немає. Завітайте до нас згодом!"
     }
   }
 }

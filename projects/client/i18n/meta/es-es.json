@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Facturación cada 2 años"
+    },
+    "link_text_preview_settings": {
+      "default": "Avances"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Hazte VIP para desbloquear las funciones en avance."
+    },
+    "header_preview_features": {
+      "default": "Funciones en avance"
+    },
+    "description_preview_features": {
+      "default": "Activa o desactiva funciones en desarrollo. Como un montaje del director antes del estreno, pueden ser inestables y cambiar en cualquier momento."
+    },
+    "text_placeholder_preview_features": {
+      "default": "De momento no hay funciones en avance. Vuelve pronto, ¡como si esperaras el próximo episodio!"
     }
   }
 }

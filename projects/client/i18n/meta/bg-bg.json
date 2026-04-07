@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Таксуване на всеки 2 години"
+    },
+    "link_text_preview_settings": {
+      "default": "Преглед"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Надградете до VIP, за да отключите функциите в аванс."
+    },
+    "header_preview_features": {
+      "default": "Функции в аванс"
+    },
+    "description_preview_features": {
+      "default": "Включете или изключете функциите, които все още се подготвят зад кулисите. Тези нововъведения може да са нестабилни и да се променят по всяко време."
+    },
+    "text_placeholder_preview_features": {
+      "default": "В момента няма функции за ранен достъп. Елате пак по-късно за следващата премиера!"
     }
   }
 }

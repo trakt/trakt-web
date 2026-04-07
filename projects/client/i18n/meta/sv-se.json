@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Faktureras vartannat år"
+    },
+    "link_text_preview_settings": {
+      "default": "Förhandstitt"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Uppgradera till VIP för att få tillgång till nya funktioner."
+    },
+    "header_preview_features": {
+      "default": "Förhandsvisning"
+    },
+    "description_preview_features": {
+      "default": "Aktivera eller inaktivera funktioner under utveckling. Precis som i en tät Nordic Noir kan läget vara instabilt och ändras utan förvarning."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Just nu finns inga funktioner att förhandsvisa. Kom tillbaka senare, som en efterlängtad uppföljare."
     }
   }
 }

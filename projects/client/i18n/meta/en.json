@@ -9147,6 +9147,46 @@
         "android",
         "ios"
       ]
+    },
+    "link_text_preview_settings": {
+      "default": "Preview",
+      "description": "Text for the link to the preview settings page, where users can enable preview features.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Upgrade to VIP to unlock preview features.",
+      "description": "Text shown to encourage non-VIP users to subscribe to unlock enabling preview features.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_preview_features": {
+      "default": "Preview Features",
+      "description": "Header for the section that allows users to enable or disable preview features.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_preview_features": {
+      "default": "Enable or disable preview features that are in development. These features may be unstable and can be changed at any time.",
+      "description": "Description for the preview features section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_placeholder_preview_features": {
+      "default": "Currently there aren't any preview features. Check back later.",
+      "description": "Placeholder text for when there are no preview features available.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

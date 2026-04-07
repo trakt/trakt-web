@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Rozliczane co 2 lata"
+    },
+    "link_text_preview_settings": {
+      "default": "Podgląd"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Zostań VIP-em, aby odblokować funkcje testowe i poczuć się jak na pokazie przedpremierowym."
+    },
+    "header_preview_features": {
+      "default": "Funkcje testowe"
+    },
+    "description_preview_features": {
+      "default": "Włączaj i wyłączaj funkcje w fazie rozwoju. Pamiętaj, że są one jak wczesne wersje montażowe – bywają niestabilne i mogą zmienić się szybciej niż zwrot akcji w dobrym kryminale."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Obecnie nie ma żadnych funkcji testowych. Zajrzyj tu później – jak to mówią, na dobre rzeczy warto poczekać!"
     }
   }
 }
