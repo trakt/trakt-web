@@ -3491,6 +3491,24 @@
     },
     "header_stats_this_week": {
       "default": "本周动态"
+    },
+    "tag_text_discount_monthly": {
+      "default": "首月优惠"
+    },
+    "tag_text_discount_yearly": {
+      "default": "首年优惠"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "前两年优惠"
+    },
+    "text_vip_billed_monthly": {
+      "default": "按月计费"
+    },
+    "text_vip_billed_yearly": {
+      "default": "按年计费"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "每两年计费"
     }
   }
 }

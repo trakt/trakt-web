@@ -3492,6 +3492,24 @@
     },
     "header_stats_this_week": {
       "default": "Din vecka"
+    },
+    "tag_text_discount_monthly": {
+      "default": "Rabatt första månaden"
+    },
+    "tag_text_discount_yearly": {
+      "default": "Rabatt första året"
+    },
+    "tag_text_discount_biyearly": {
+      "default": "Rabatt första 2 åren"
+    },
+    "text_vip_billed_monthly": {
+      "default": "Faktureras månadsvis"
+    },
+    "text_vip_billed_yearly": {
+      "default": "Faktureras årsvis"
+    },
+    "text_vip_billed_biyearly": {
+      "default": "Faktureras vartannat år"
     }
   }
 }
