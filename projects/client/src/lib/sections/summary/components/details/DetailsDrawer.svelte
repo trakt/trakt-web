@@ -36,10 +36,5 @@
     display: flex;
     flex-direction: column;
     gap: var(--details-gap);
-
-    :global(> *:not(:last-child)) {
-      padding-bottom: var(--details-gap);
-      border-bottom: 1px solid var(--color-border);
-    }
   }
 </style>
