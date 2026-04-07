@@ -34,7 +34,6 @@
 {#if $state.mode !== "hidden"}
   <div class="trakt-navbar-actions" class:is-hidden={$state.mode === "minimal"}>
     <div class="trakt-navbar-actions-left">
-      <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>
       <NavbarHeader />
     </div>
 
@@ -52,6 +51,7 @@
         {/if}
         <FilterButton isDisabled={!$state.hasFilters} />
       </RenderFor>
+      <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>
       <RenderFor audience="public">
         <JoinTraktButton size="small">
           {#snippet icon()}
