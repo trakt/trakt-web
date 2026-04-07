@@ -6,6 +6,13 @@ import type {
 import type { CastResponse, CrewResponse, PeopleResponse } from '@trakt/api';
 import { mapToHeadshot } from './mapToHeadshot.ts';
 
+export const EMPTY_CREW: Readonly<MediaCrew> = {
+  directors: [],
+  writers: [],
+  creators: [],
+  cast: [],
+};
+
 function toCrewMember(
   crewResponse: CrewResponse,
 ): CrewMember {

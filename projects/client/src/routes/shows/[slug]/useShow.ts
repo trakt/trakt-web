@@ -1,6 +1,7 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showPeopleQuery } from '$lib/requests/queries/shows/showPeopleQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
@@ -20,8 +21,8 @@ export function useShow(slug: string | undefined) {
     return {
       isLoading: of(true),
       show: of(undefined),
-      studios: of(undefined),
-      crew: of(undefined),
+      studios: of([]),
+      crew: of(EMPTY_CREW),
       seasons: of(undefined),
       videos: of([]),
       intl: of(undefined),
@@ -81,8 +82,8 @@ export function useShow(slug: string | undefined) {
   return {
     isLoading,
     show: show.pipe(map(($show) => $show.data)),
-    studios: studios.pipe(map(($studios) => $studios.data)),
-    crew: crew.pipe(map(($crew) => $crew.data)),
+    studios: studios.pipe(map(($studios) => $studios.data ?? [])),
+    crew: crew.pipe(map(($crew) => $crew.data ?? EMPTY_CREW)),
     seasons: seasons.pipe(map(($seasons) => $seasons.data)),
     sentiment: sentiment.pipe(map(($sentiment) => $sentiment?.data)),
     intl: combineLatest([intl, show]).pipe(

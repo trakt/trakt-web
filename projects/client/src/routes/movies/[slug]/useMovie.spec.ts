@@ -46,6 +46,7 @@ describe('store: useMovie', () => {
     it('should return studios', async () => {
       const result = await runQuery({
         factory: () => useMovie(MovieHereticMappedMock.slug).studios,
+        waitFor: (result) => result.length !== 0,
       });
 
       expect(result).to.deep.equal(MovieHereticStudiosMappedMock);
@@ -54,6 +55,7 @@ describe('store: useMovie', () => {
     it('should return crew', async () => {
       const result = await runQuery({
         factory: () => useMovie(MovieHereticMappedMock.slug).crew,
+        waitFor: (result) => result.cast.length !== 0,
       });
 
       expect(result).to.deep.equal(MovieHereticPeopleMappedMock);
