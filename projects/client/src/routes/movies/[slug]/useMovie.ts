@@ -1,6 +1,7 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
 import { moviePeopleQuery } from '$lib/requests/queries/movies/moviePeopleQuery.ts';
 import { movieSentimentQuery } from '$lib/requests/queries/movies/movieSentimentQuery.ts';
@@ -27,8 +28,8 @@ export function useMovie(slug: string | undefined) {
     return {
       isLoading: of(true),
       movie: of(undefined),
-      studios: of(undefined),
-      crew: of(undefined),
+      studios: of([]),
+      crew: of(EMPTY_CREW),
       videos: of([]),
       intl: of(undefined),
       streamOn: of(undefined),
@@ -93,8 +94,8 @@ export function useMovie(slug: string | undefined) {
   return {
     isLoading,
     movie: movie.pipe(map(($movie) => $movie.data)),
-    studios: studios.pipe(map(($studios) => $studios.data)),
-    crew: crew.pipe(map(($crew) => $crew.data)),
+    studios: studios.pipe(map(($studios) => $studios.data ?? [])),
+    crew: crew.pipe(map(($crew) => $crew.data ?? EMPTY_CREW)),
     videos: videos.pipe(map(($videos) => $videos.data ?? [])),
     sentiment: sentiment.pipe(map(($sentiment) => $sentiment?.data)),
     intl: combineLatest([intl, movie]).pipe(

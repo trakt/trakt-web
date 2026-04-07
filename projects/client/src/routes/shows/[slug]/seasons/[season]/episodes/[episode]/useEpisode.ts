@@ -1,5 +1,6 @@
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { episodeIntlQuery } from '$lib/requests/queries/episode/episodeIntlQuery.ts';
 import { episodePeopleQuery } from '$lib/requests/queries/episode/episodePeopleQuery.ts';
 import { episodeSummaryQuery } from '$lib/requests/queries/episode/episodeSummaryQuery.ts';
@@ -71,7 +72,7 @@ export function useEpisode(
         )
       ),
     ),
-    crew: crew.pipe(map(($crew) => $crew.data)),
+    crew: crew.pipe(map(($crew) => $crew.data ?? EMPTY_CREW)),
     intl: combineLatest([intl, episode]).pipe(
       map(([$intl, $episode]) =>
         findRegionalIntl({
