@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Cobro cada 2 años"
+    },
+    "link_text_preview_settings": {
+      "default": "Vistas previas"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Pásate a VIP para desbloquear las funciones de vista previa."
+    },
+    "header_preview_features": {
+      "default": "Funciones de vista previa"
+    },
+    "description_preview_features": {
+      "default": "Activa o desactiva funciones que todavía están en el horno. Toma en cuenta que pueden ser inestables y cambiar en cualquier momento, ¡como un giro de trama inesperado!"
+    },
+    "text_placeholder_preview_features": {
+      "default": "Por ahora no hay nada nuevo para probar. Date una vuelta después."
     }
   }
 }

@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Faktureres hvert 2. år"
+    },
+    "link_text_preview_settings": {
+      "default": "Smugkig"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Opgrader til VIP for at låse op for smugkig-funktioner."
+    },
+    "header_preview_features": {
+      "default": "Smugkig-funktioner"
+    },
+    "description_preview_features": {
+      "default": "Aktiver eller deaktiver funktioner under udvikling. De kan være ustabile og ændre sig – præcis som et manuskript under optagelse."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Der er ingen smugkig lige nu. Kig forbi igen senere for næste akt."
     }
   }
 }

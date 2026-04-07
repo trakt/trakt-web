@@ -10,10 +10,11 @@
   }: { flag: FeatureFlag; enabled: Snippet } & Partial<ChildrenProps> =
     $props();
 
-  const { isEnabled } = $derived(useFeatureFlag(flag));
+  const { isEnabled } = useFeatureFlag();
+  const isFlagEnabled = $derived(isEnabled(flag));
 </script>
 
-{#if $isEnabled}
+{#if $isFlagEnabled}
   {@render enabled()}
 {:else}
   {@render children?.()}

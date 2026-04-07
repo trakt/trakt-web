@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Per 2 jaar gefactureerd"
+    },
+    "link_text_preview_settings": {
+      "default": "Preview"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Upgrade naar VIP om preview-functies te ontgrendelen."
+    },
+    "header_preview_features": {
+      "default": "Preview-functies"
+    },
+    "description_preview_features": {
+      "default": "Schakel functies in die nog in ontwikkeling zijn. Net als een onverwachte plot-twist in een spannende serie kunnen deze functies onstabiel zijn en op elk moment veranderen."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Er zijn momenteel geen preview-functies. Kom later terug voor de volgende scène!"
     }
   }
 }

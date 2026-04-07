@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Billed every 2 years"
+    },
+    "link_text_preview_settings": {
+      "default": "Preview"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Upgrade to VIP to unlock preview features."
+    },
+    "header_preview_features": {
+      "default": "Preview Features"
+    },
+    "description_preview_features": {
+      "default": "Enable or disable preview features that are in development. Much like a pilot episode, these features may be unstable and can be changed at any time."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Currently there aren't any preview features. Check back later for the next instalment."
     }
   }
 }

@@ -3510,6 +3510,21 @@
     },
     "text_vip_billed_biyearly": {
       "default": "Оплата каждые 2 года"
+    },
+    "link_text_preview_settings": {
+      "default": "Предпросмотр"
+    },
+    "text_vip_upsell_preview_features": {
+      "default": "Станьте VIP, чтобы разблокировать функции предпросмотра."
+    },
+    "header_preview_features": {
+      "default": "Функции предпросмотра"
+    },
+    "description_preview_features": {
+      "default": "Включайте или отключайте функции в разработке. Учтите: они могут быть нестабильны и меняться чаще, чем напарники Доктора Кто."
+    },
+    "text_placeholder_preview_features": {
+      "default": "Сейчас функций для предпросмотра нет. Загляните позже."
     }
   }
 }
