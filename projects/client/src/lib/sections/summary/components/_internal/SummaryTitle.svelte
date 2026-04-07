@@ -2,7 +2,6 @@
   import { TestId } from "$e2e/models/TestId";
   import Link from "$lib/components/link/Link.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DetailsButton from "../media/v2/_internal/DetailsButton.svelte";
@@ -52,9 +51,7 @@
       {subtitle}
     </p>
 
-    <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-      <DetailsButton style="action" size="small" {title} />
-    </RenderFor>
+    <DetailsButton style="action" size="small" {title} />
   </div>
 
   {#if status}
@@ -88,6 +85,13 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
+
+    @include for-tablet-sm-and-below {
+      :global(.trakt-action-button) {
+        width: var(--ni-32);
+        height: var(--ni-32);
+      }
+    }
   }
 
   .trakt-media-status {
