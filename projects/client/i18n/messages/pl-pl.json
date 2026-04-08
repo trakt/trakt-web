@@ -1,0 +1,9 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "list_title_upcoming_schedule": "Nadchodzące",
+  "tag_text_premiere": "Premiera",
+  "tag_text_finale": "Finał",
+  "list_title_up_next": "Oglądaj dalej",
+  "tag_text_remaining_episodes": "Pozostało {count}",
+  "page_title_up_next": "Oglądaj dalej"
+}
