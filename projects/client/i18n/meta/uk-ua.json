@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Інші посилання"
+    },
+    "header_import": {
+      "default": "Імпорт"
+    },
+    "description_import": {
+      "default": "Імпортуйте свої дані з інших сервісів прямо у браузері, щоб жодна історія не загубилася."
+    },
+    "import_source_json": {
+      "default": "Файл JSON"
+    },
+    "import_source_csv": {
+      "default": "Файл CSV"
+    },
+    "import_drop_csv": {
+      "default": "Перетягніть файли CSV сюди або натисніть для завантаження."
+    },
+    "import_drop_json": {
+      "default": "Перетягніть файл JSON сюди або натисніть для завантаження."
+    },
+    "import_drop_zip": {
+      "default": "Перетягніть файл ZIP сюди або натисніть для завантаження."
+    },
+    "import_max_files": {
+      "default": "(макс. {count} файлів)"
+    },
+    "import_status_parsing": {
+      "default": "Обробка ваших даних…"
+    },
+    "import_status_syncing": {
+      "default": "Синхронізація {processed} / {total} пунктів…"
+    },
+    "import_status_error": {
+      "default": "Помилка імпорту: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} пунктів для Історії"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} пунктів для Списку перегляду"
+    },
+    "import_summary_ratings": {
+      "default": "{count} оцінок"
+    },
+    "import_complete_synced": {
+      "default": "{count} пунктів успішно синхронізовано."
+    },
+    "import_complete_errors": {
+      "default": "Не вдалося імпортувати {count} пунктів."
+    },
+    "button_text_start_import": {
+      "default": "Почати"
+    },
+    "button_label_start_import": {
+      "default": "Почати імпорт ваших даних у Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Ще імпорт"
+    },
+    "button_label_import_more": {
+      "default": "Очистити та почати новий імпорт."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Ваш імпорт перевищує ліміт безкоштовного плану. Станьте VIP, щоб зберегти всі {count} скарбів вашої кіноколекції."
     }
   }
 }

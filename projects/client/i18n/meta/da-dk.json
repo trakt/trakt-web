@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Andre links"
+    },
+    "header_import": {
+      "default": "Import"
+    },
+    "description_import": {
+      "default": "Importér dine data fra andre tjenester direkte i din browser."
+    },
+    "import_source_json": {
+      "default": "JSON-fil"
+    },
+    "import_source_csv": {
+      "default": "CSV-fil"
+    },
+    "import_drop_csv": {
+      "default": "Træk CSV-filer hertil, eller klik for at uploade."
+    },
+    "import_drop_json": {
+      "default": "Træk en JSON-fil hertil, eller klik for at uploade."
+    },
+    "import_drop_zip": {
+      "default": "Træk en ZIP-fil hertil, eller klik for at uploade."
+    },
+    "import_max_files": {
+      "default": "(maks. {count} filer tilladt)"
+    },
+    "import_status_parsing": {
+      "default": "Analyserer dine data..."
+    },
+    "import_status_syncing": {
+      "default": "Synkroniserer {processed} / {total} elementer..."
+    },
+    "import_status_error": {
+      "default": "Import fejlede: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} elementer til historik"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} elementer til Watchlist"
+    },
+    "import_summary_ratings": {
+      "default": "{count} bedømmelser"
+    },
+    "import_complete_synced": {
+      "default": "{count} elementer blev synkroniseret."
+    },
+    "import_complete_errors": {
+      "default": "{count} elementer fejlede."
+    },
+    "button_text_start_import": {
+      "default": "Start import"
+    },
+    "button_label_start_import": {
+      "default": "Start importen af dine data til Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Importér mere"
+    },
+    "button_label_import_more": {
+      "default": "Nulstil og start en ny import."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Din import overskrider grænsen for gratis-brugere. Gør din filmaften komplet med VIP for at importere alle {count} elementer."
     }
   }
 }

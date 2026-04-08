@@ -13,5 +13,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xxl);
+
+    max-width: var(--ni-920);
   }
 </style>

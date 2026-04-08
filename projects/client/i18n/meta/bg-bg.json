@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Други връзки"
+    },
+    "header_import": {
+      "default": "Импортиране"
+    },
+    "description_import": {
+      "default": "Пренесете своята история от други услуги директно във вашия браузър – време е за нов дубъл!"
+    },
+    "import_source_json": {
+      "default": "JSON файл"
+    },
+    "import_source_csv": {
+      "default": "CSV файл"
+    },
+    "import_drop_csv": {
+      "default": "Пуснете CSV файлове тук или кликнете за качване."
+    },
+    "import_drop_json": {
+      "default": "Пуснете JSON файл тук или кликнете за качване."
+    },
+    "import_drop_zip": {
+      "default": "Пуснете ZIP файл тук или кликнете за качване."
+    },
+    "import_max_files": {
+      "default": "(разрешени са макс. {count} файла)"
+    },
+    "import_status_parsing": {
+      "default": "Обработка на данните…"
+    },
+    "import_status_syncing": {
+      "default": "Синхронизиране на {processed} / {total} елемента…"
+    },
+    "import_status_error": {
+      "default": "Импортирането неуспешно: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} елемента за История"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} елемента за Списък за гледане"
+    },
+    "import_summary_ratings": {
+      "default": "{count} оценки"
+    },
+    "import_complete_synced": {
+      "default": "{count} елемента бяха синхронизирани успешно."
+    },
+    "import_complete_errors": {
+      "default": "{count} елемента не бяха импортирани."
+    },
+    "button_text_start_import": {
+      "default": "Импорт"
+    },
+    "button_label_start_import": {
+      "default": "Започнете импортирането на вашите данни в Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Още"
+    },
+    "button_label_import_more": {
+      "default": "Нулиране и започване на нов импорт."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Вашият импорт надвишава лимита за безплатен акаунт. Станете VIP, за да импортирате всички {count} елемента и да не изпускате нито един кадър!"
     }
   }
 }

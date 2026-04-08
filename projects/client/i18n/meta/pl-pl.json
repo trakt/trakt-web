@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Inne linki"
+    },
+    "header_import": {
+      "default": "Import"
+    },
+    "description_import": {
+      "default": "Przenieś swoją historię z innych serwisów bezpośrednio w przeglądarce. Prawdziwe kino moralnego niepokoju byłoby, gdyby te dane przepadły!"
+    },
+    "import_source_json": {
+      "default": "Plik JSON"
+    },
+    "import_source_csv": {
+      "default": "Plik CSV"
+    },
+    "import_drop_csv": {
+      "default": "Upuść pliki CSV tutaj lub kliknij, aby przesłać."
+    },
+    "import_drop_json": {
+      "default": "Upuść plik JSON tutaj lub kliknij, aby przesłać."
+    },
+    "import_drop_zip": {
+      "default": "Upuść plik ZIP tutaj lub kliknij, aby przesłać."
+    },
+    "import_max_files": {
+      "default": "(maks. {count} plików)"
+    },
+    "import_status_parsing": {
+      "default": "Analizowanie danych..."
+    },
+    "import_status_syncing": {
+      "default": "Synchronizacja {processed} z {total}..."
+    },
+    "import_status_error": {
+      "default": "Import nieudany: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} wpisów w historii"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} pozycji do obejrzenia"
+    },
+    "import_summary_ratings": {
+      "default": "{count} ocen"
+    },
+    "import_complete_synced": {
+      "default": "{count} elementów pomyślnie zsynchronizowanych."
+    },
+    "import_complete_errors": {
+      "default": "Liczba błędów: {count}"
+    },
+    "button_text_start_import": {
+      "default": "Importuj"
+    },
+    "button_label_start_import": {
+      "default": "Rozpocznij importowanie swoich danych do Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Importuj więcej"
+    },
+    "button_label_import_more": {
+      "default": "Zresetuj i rozpocznij nowy import."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Twój import przekracza limit darmowego konta. Przejdź na VIP, aby zaimportować wszystkie {count} elementy i poczuć się jak na wielkim pokazie przedpremierowym!"
     }
   }
 }

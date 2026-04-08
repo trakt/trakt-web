@@ -3530,6 +3530,69 @@
     },
     "header_other_links": {
       "default": "其他链接"
+    },
+    "header_import": {
+      "default": "导入"
+    },
+    "description_import": {
+      "default": "直接在浏览器中从其他服务导入您的数据。"
+    },
+    "import_source_json": {
+      "default": "JSON 文件"
+    },
+    "import_source_csv": {
+      "default": "CSV 文件"
+    },
+    "import_drop_csv": {
+      "default": "将 CSV 文件拖到此处或点击上传。"
+    },
+    "import_drop_json": {
+      "default": "将 JSON 文件拖到此处或点击上传。"
+    },
+    "import_drop_zip": {
+      "default": "将 ZIP 文件拖到此处或点击上传。"
+    },
+    "import_max_files": {
+      "default": "（最多允许 {count} 个文件）"
+    },
+    "import_status_parsing": {
+      "default": "正在解析数据，请稍候..."
+    },
+    "import_status_syncing": {
+      "default": "正在同步 {processed} / {total} 项..."
+    },
+    "import_status_error": {
+      "default": "导入失败：{message}"
+    },
+    "import_summary_history": {
+      "default": "历史记录共计 {count} 项"
+    },
+    "import_summary_watchlist": {
+      "default": "待看列表中包含 {count} 项"
+    },
+    "import_summary_ratings": {
+      "default": "{count} 条评分"
+    },
+    "import_complete_synced": {
+      "default": "{count} 项已成功同步。"
+    },
+    "import_complete_errors": {
+      "default": "{count} 项导入失败。"
+    },
+    "button_text_start_import": {
+      "default": "开始导入"
+    },
+    "button_label_start_import": {
+      "default": "开始将您的数据导入 Trakt。"
+    },
+    "button_text_import_more": {
+      "default": "继续导入"
+    },
+    "button_label_import_more": {
+      "default": "重置并开始新的导入。"
+    },
+    "import_vip_limit_exceeded": {
+      "default": "您的导入超出了免费额度。升级 VIP 就像获得了全通证，可以立即导入全部 {count} 项内容。"
     }
   }
 }

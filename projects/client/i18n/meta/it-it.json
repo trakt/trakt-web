@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Altri Link"
+    },
+    "header_import": {
+      "default": "Importa"
+    },
+    "description_import": {
+      "default": "Importa i tuoi dati da altri servizi direttamente nel tuo browser, proprio come in un montaggio da grande cinema."
+    },
+    "import_source_json": {
+      "default": "File JSON"
+    },
+    "import_source_csv": {
+      "default": "File CSV"
+    },
+    "import_drop_csv": {
+      "default": "Trascina i file CSV qui o clicca per caricarli."
+    },
+    "import_drop_json": {
+      "default": "Trascina un file JSON qui o clicca per caricarlo."
+    },
+    "import_drop_zip": {
+      "default": "Trascina un file ZIP qui o clicca per caricarlo."
+    },
+    "import_max_files": {
+      "default": "(massimo {count} file consentiti)"
+    },
+    "import_status_parsing": {
+      "default": "Analisi dei dati in corso…"
+    },
+    "import_status_syncing": {
+      "default": "Sincronizzazione di {processed} / {total} elementi…"
+    },
+    "import_status_error": {
+      "default": "Importazione fallita: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} elementi per la Cronologia"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} elementi per la Lista da vedere"
+    },
+    "import_summary_ratings": {
+      "default": "{count} valutazioni"
+    },
+    "import_complete_synced": {
+      "default": "{count} elementi sincronizzati con successo. Un vero capolavoro!"
+    },
+    "import_complete_errors": {
+      "default": "{count} elementi non riusciti."
+    },
+    "button_text_start_import": {
+      "default": "Importa"
+    },
+    "button_label_start_import": {
+      "default": "Inizia a importare i tuoi dati su Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Altro"
+    },
+    "button_label_import_more": {
+      "default": "Ripristina e inizia una nuova importazione."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Questa produzione supera i limiti gratuiti. Passa a VIP per importare tutti i {count} elementi e goderti la tua Dolce Vita su Trakt senza interruzioni."
     }
   }
 }

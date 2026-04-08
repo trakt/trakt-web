@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Other Links"
+    },
+    "header_import": {
+      "default": "Import"
+    },
+    "description_import": {
+      "default": "Import your data from other services directly in your browser."
+    },
+    "import_source_json": {
+      "default": "JSON File"
+    },
+    "import_source_csv": {
+      "default": "CSV File"
+    },
+    "import_drop_csv": {
+      "default": "Drop CSV files here or click to upload."
+    },
+    "import_drop_json": {
+      "default": "Drop a JSON file here or click to upload."
+    },
+    "import_drop_zip": {
+      "default": "Drop a ZIP file here or click to upload."
+    },
+    "import_max_files": {
+      "default": "(max {count} files allowed)"
+    },
+    "import_status_parsing": {
+      "default": "Parsing your data…"
+    },
+    "import_status_syncing": {
+      "default": "Syncing {processed} / {total} items…"
+    },
+    "import_status_error": {
+      "default": "Import failed: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} items for History"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} items for Watchlist"
+    },
+    "import_summary_ratings": {
+      "default": "{count} ratings"
+    },
+    "import_complete_synced": {
+      "default": "{count} items synced successfully."
+    },
+    "import_complete_errors": {
+      "default": "{count} items failed."
+    },
+    "button_text_start_import": {
+      "default": "Start Import"
+    },
+    "button_label_start_import": {
+      "default": "Start importing your data into Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Import more"
+    },
+    "button_label_import_more": {
+      "default": "Reset and start a new import."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Your import exceeds the free tier limit. Upgrade to VIP to import all {count} items."
     }
   }
 }

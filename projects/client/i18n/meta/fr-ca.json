@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Autres liens"
+    },
+    "header_import": {
+      "default": "Importation"
+    },
+    "description_import": {
+      "default": "Importez vos données d'autres services directement dans votre navigateur."
+    },
+    "import_source_json": {
+      "default": "Fichier JSON"
+    },
+    "import_source_csv": {
+      "default": "Fichier CSV"
+    },
+    "import_drop_csv": {
+      "default": "Déposez vos fichiers CSV ici ou cliquez pour téléverser."
+    },
+    "import_drop_json": {
+      "default": "Déposez un fichier JSON ici ou cliquez pour téléverser."
+    },
+    "import_drop_zip": {
+      "default": "Déposez un fichier ZIP ici ou cliquez pour téléverser."
+    },
+    "import_max_files": {
+      "default": "(max {count} fichiers permis)"
+    },
+    "import_status_parsing": {
+      "default": "Analyse de vos données…"
+    },
+    "import_status_syncing": {
+      "default": "Synchronisation de {processed} / {total} éléments…"
+    },
+    "import_status_error": {
+      "default": "Échec de l'importation : {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} éléments pour l'historique"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} éléments à voir"
+    },
+    "import_summary_ratings": {
+      "default": "{count} cotes"
+    },
+    "import_complete_synced": {
+      "default": "{count} éléments synchronisés avec succès."
+    },
+    "import_complete_errors": {
+      "default": "{count} échecs."
+    },
+    "button_text_start_import": {
+      "default": "Lancer l'importation"
+    },
+    "button_label_start_import": {
+      "default": "Commencez à importer vos données dans Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Importer plus"
+    },
+    "button_label_import_more": {
+      "default": "Réinitialiser et commencer une nouvelle importation."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Votre importation dépasse la limite gratuite. Passez à VIP pour importer les {count} éléments. Ne restez pas dans les coulisses, devenez VIP pour que votre collection soit la vedette !"
     }
   }
 }

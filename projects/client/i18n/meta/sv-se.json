@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Övriga länkar"
+    },
+    "header_import": {
+      "default": "Importera"
+    },
+    "description_import": {
+      "default": "Importera din data från andra tjänster direkt i din webbläsare."
+    },
+    "import_source_json": {
+      "default": "JSON-fil"
+    },
+    "import_source_csv": {
+      "default": "CSV-fil"
+    },
+    "import_drop_csv": {
+      "default": "Släpp CSV-filer här eller klicka för att ladda upp."
+    },
+    "import_drop_json": {
+      "default": "Släpp en JSON-fil här eller klicka för att ladda upp."
+    },
+    "import_drop_zip": {
+      "default": "Släpp en ZIP-fil här eller klicka för att ladda upp."
+    },
+    "import_max_files": {
+      "default": "(max {count} filer tillåtna)"
+    },
+    "import_status_parsing": {
+      "default": "Analyserar din data…"
+    },
+    "import_status_syncing": {
+      "default": "Synkar {processed} / {total} objekt…"
+    },
+    "import_status_error": {
+      "default": "Importen misslyckades: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} objekt till historiken"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} objekt till din Watchlist"
+    },
+    "import_summary_ratings": {
+      "default": "{count} betyg"
+    },
+    "import_complete_synced": {
+      "default": "{count} objekt har synkats."
+    },
+    "import_complete_errors": {
+      "default": "{count} objekt misslyckades."
+    },
+    "button_text_start_import": {
+      "default": "Starta import"
+    },
+    "button_label_start_import": {
+      "default": "Börja importera din data till Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Importera mer"
+    },
+    "button_label_import_more": {
+      "default": "Återställ och påbörja en ny import."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Din import överskrider gratisgränsen. Precis som i en välregisserad serie krävs rätt behörighet för hela upplevelsen – uppgradera till VIP för att importera alla {count} objekt."
     }
   }
 }

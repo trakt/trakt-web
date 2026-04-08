@@ -1,25 +1,36 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
+  import { slide } from "svelte/transition";
   import type { ImportCounts } from "../../import/ImportTypes.ts";
 
-  const {
-    counts,
-    isVipLimitExceeded,
-    totalItems,
-    onstart,
-    onreset,
-  }: {
+  type ImportSummaryProps = {
     counts: ImportCounts;
-    isVipLimitExceeded: boolean;
     totalItems: number;
     onstart: () => void;
     onreset: () => void;
-  } = $props();
+  };
+
+  const { counts, totalItems, onstart, onreset }: ImportSummaryProps = $props();
+
+  const { user, limits } = useUser();
+
+  const isVipLimitExceeded = $derived.by(() => {
+    if ($user?.isVip) return false;
+    if (!$limits) return false;
+
+    const watchlistFreeLimit = $limits.watchlistItems.free;
+    const historyFreeLimit = $limits.history.free;
+
+    return (
+      counts.watchlist > watchlistFreeLimit || counts.history > historyFreeLimit
+    );
+  });
 </script>
 
-<div class="import-summary">
+<div class="import-summary" transition:slide={{ duration: 150, axis: "y" }}>
   <div class="import-summary-counts">
     {#if counts.history > 0}
       <p class="secondary">
@@ -65,7 +76,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style>
   .import-summary {
     display: flex;
     flex-direction: column;

@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { useUser } from "$lib/features/auth/stores/useUser.ts";
+  import TabView from "$lib/components/tabs/TabView.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { slide } from "svelte/transition";
   import {
     IMPORT_SOURCE_CONFIGS,
     type ImportCounts,
     type ImportSource,
+    type ImportSourceConfig,
     type ImportStatus,
     type UniversalImportItem,
   } from "../import/ImportTypes.ts";
@@ -13,12 +14,11 @@
   import { syncToTrakt } from "../import/syncToTrakt.ts";
   import ImportComplete from "./import/ImportComplete.svelte";
   import ImportDropzone from "./import/ImportDropzone.svelte";
+  import ImportError from "./import/ImportError.svelte";
   import ImportProgress from "./import/ImportProgress.svelte";
   import ImportSummary from "./import/ImportSummary.svelte";
   import SettingsBlock from "./SettingsBlock.svelte";
   import SettingsRow from "./SettingsRow.svelte";
-
-  const { user, limits } = useUser();
 
   let selectedSource = $state<ImportSource>("imdb");
   let status = $state<ImportStatus>("idle");
@@ -33,23 +33,11 @@
     ratings: parsedItems.filter((i) => i.action === "ratings").length,
   });
 
-  const isVipLimitExceeded = $derived.by(() => {
-    if ($user?.isVip) return false;
-    if (!$limits) return false;
-
-    const watchlistFreeLimit = $limits.watchlistItems.free;
-    const historyFreeLimit = $limits.history.free;
-
-    return (
-      counts.watchlist > watchlistFreeLimit || counts.history > historyFreeLimit
-    );
-  });
-
   const sourceConfig = $derived(IMPORT_SOURCE_CONFIGS[selectedSource]);
 
   function getDropPrompt(): string {
-    if (sourceConfig.accept === ".zip") return m.import_drop_zip();
-    if (sourceConfig.accept === ".json") return m.import_drop_json();
+    if (sourceConfig.accept.includes(".zip")) return m.import_drop_zip();
+    if (sourceConfig.accept.includes(".json")) return m.import_drop_json();
     return m.import_drop_csv();
   }
 
@@ -57,7 +45,7 @@
     parseError = null;
     status = "reading";
 
-    const fileArray = Array.from(files);
+    const fileArray = Array.from(files).slice(0, sourceConfig.maxFiles);
     const parser = getParser(selectedSource);
 
     status = "parsing";
@@ -81,8 +69,9 @@
         onProgress: (count) => {
           processedCount = count;
         },
-        onError: () => {
-          errorCount += 1;
+        onError: (message) => {
+          // FIXME: properly deal with this when tackling https://github.com/trakt/trakt-web/issues/2055
+          console.error(message);
         },
       });
 
@@ -101,159 +90,74 @@
     errorCount = 0;
     parseError = null;
   }
+
+  function onSourceChange(value: string) {
+    selectedSource = value as ImportSource;
+    reset();
+  }
+
+  const getTabLabel = (config: ImportSourceConfig) => {
+    switch (config.id) {
+      case "trakt-json":
+        return m.import_source_json();
+      case "trakt-csv":
+        return m.import_source_csv();
+      default:
+        return config.name;
+    }
+  };
 </script>
 
-<SettingsBlock title={m.header_import()} description={m.description_import()}>
-  <SettingsRow title={m.header_import()}>
-    <div class="trakt-raw-import">
-      <div class="import-source-tabs" role="tablist">
-        {#each Object.values(IMPORT_SOURCE_CONFIGS) as config (config.id)}
-          <button
-            role="tab"
-            aria-selected={selectedSource === config.id}
-            class="import-source-tab"
-            class:active={selectedSource === config.id}
-            onclick={() => {
-              selectedSource = config.id;
-              reset();
-            }}
-          >
-            {#if config.id === "imdb"}
-              {m.import_source_imdb()}
-            {:else if config.id === "letterboxd"}
-              {m.import_source_letterboxd()}
-            {:else if config.id === "tvtime"}
-              {m.import_source_tvtime()}
-            {:else if config.id === "trakt-json"}
-              {m.import_source_json()}
-            {:else}
-              {m.import_source_csv()}
-            {/if}
-          </button>
-        {/each}
-      </div>
-
-      <div class="import-body">
-        {#if status === "idle" || status === "reading" || status === "parsing"}
-          <div
-            class="import-idle"
-            transition:slide={{ duration: 150, axis: "y" }}
-          >
-            {#if status === "parsing"}
-              <p
-                class="secondary"
-                transition:slide={{ duration: 150, axis: "y" }}
-              >
-                {m.import_status_parsing()}
-              </p>
-            {:else}
-              <ImportDropzone
-                accept={sourceConfig.accept}
-                maxFiles={sourceConfig.maxFiles}
-                prompt={getDropPrompt()}
-                onfiles={handleFiles}
-              />
-            {/if}
-          </div>
-        {:else if status === "review"}
-          <div transition:slide={{ duration: 150, axis: "y" }}>
-            <ImportSummary
-              {counts}
-              totalItems={parsedItems.length}
-              {isVipLimitExceeded}
-              onstart={startImport}
-              onreset={reset}
-            />
-          </div>
-        {:else if status === "syncing"}
-          <div transition:slide={{ duration: 150, axis: "y" }}>
-            <ImportProgress {processedCount} totalCount={parsedItems.length} />
-          </div>
-        {:else if status === "complete"}
-          <div transition:slide={{ duration: 150, axis: "y" }}>
-            <ImportComplete {processedCount} {errorCount} onreset={reset} />
-          </div>
-        {:else if status === "error"}
-          <div
-            class="import-error"
-            transition:slide={{ duration: 150, axis: "y" }}
-          >
-            <p class="secondary">
-              {m.import_status_error({ message: parseError ?? "" })}
-            </p>
-            <button class="import-retry-link secondary" onclick={reset}>
-              {m.button_text_cancel()}
-            </button>
-          </div>
-        {/if}
-      </div>
+{#snippet importRow()}
+  <SettingsRow title={getTabLabel(sourceConfig)}>
+    <div class="import-body">
+      {#if status === "parsing"}
+        <p class="secondary" transition:slide={{ duration: 150, axis: "y" }}>
+          {m.import_status_parsing()}
+        </p>
+      {:else if status === "idle" || status === "reading"}
+        <ImportDropzone
+          accept={sourceConfig.accept}
+          maxFiles={sourceConfig.maxFiles}
+          prompt={getDropPrompt()}
+          onfiles={handleFiles}
+        />
+      {:else if status === "review"}
+        <ImportSummary
+          {counts}
+          totalItems={parsedItems.length}
+          onstart={startImport}
+          onreset={reset}
+        />
+      {:else if status === "syncing"}
+        <ImportProgress {processedCount} totalCount={parsedItems.length} />
+      {:else if status === "complete"}
+        <ImportComplete {processedCount} {errorCount} onreset={reset} />
+      {:else if status === "error"}
+        <ImportError error={parseError ?? ""} onreset={reset} />
+      {/if}
     </div>
   </SettingsRow>
+{/snippet}
+
+<SettingsBlock title={m.header_import()} description={m.description_import()}>
+  <TabView
+    value={selectedSource}
+    tabs={Object.values(IMPORT_SOURCE_CONFIGS).map((config) => ({
+      value: config.id,
+      label: getTabLabel(config),
+      content: importRow,
+    }))}
+    onChange={onSourceChange}
+  />
 </SettingsBlock>
 
-<style lang="scss">
-  .trakt-raw-import {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-m);
-    width: 100%;
-  }
-
-  .import-source-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--gap-xs);
-  }
-
-  .import-source-tab {
-    padding: var(--ni-8) var(--ni-16);
-    border-radius: var(--border-radius-s);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--color-border) 60%, transparent);
-    background: transparent;
-    color: var(--color-foreground-secondary);
-    cursor: pointer;
-    font-size: var(--font-size-s);
-    transition:
-      border-color var(--transition-increment) ease-in-out,
-      color var(--transition-increment) ease-in-out,
-      background-color var(--transition-increment) ease-in-out;
-
-    &:hover {
-      border-color: var(--color-border);
-      color: var(--color-foreground);
-    }
-
-    &.active {
-      border-color: var(--color-background-purple);
-      color: var(--color-background-purple);
-      background-color: color-mix(
-        in srgb,
-        var(--color-background-purple) 8%,
-        transparent
-      );
-    }
-  }
-
+<style>
   .import-body {
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
-  }
 
-  .import-error {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xs);
-  }
-
-  .import-retry-link {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    text-decoration: underline;
-    font-size: inherit;
-    text-align: left;
+    width: 100%;
   }
 </style>
