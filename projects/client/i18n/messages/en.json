@@ -587,6 +587,11 @@
   "page_title_unexpected_error": "Something went wrong",
   "error_text_unexpected_error": "Uh oh... this wasn't planned. If this keeps happening, please <a>submit a new issue</a>.",
   "list_placeholder_no_filter_results": "Bummer, no hits. Your filter may have been a little too selective.",
+  "list_title_streaming_subscription": "Subscription",
+  "list_title_streaming_free": "Free",
+  "list_title_streaming_purchase": "Purchase",
+  "list_title_streaming_rent": "Rent",
+  "list_title_streaming_favorite": "Favorite",
   "button_text_cancel": "Cancel",
   "button_label_cancel": "Cancel",
   "button_text_no_services": "No services",
@@ -1014,10 +1019,5 @@
   "text_vip_upsell_preview_features": "Upgrade to VIP to unlock preview features.",
   "header_preview_features": "Preview Features",
   "description_preview_features": "Enable or disable preview features that are in development. These features may be unstable and can be changed at any time.",
-  "text_placeholder_preview_features": "Currently there aren't any preview features. Check back later.",
-  "list_title_streaming_subscription": "Subscription",
-  "list_title_streaming_free": "Free",
-  "list_title_streaming_purchase": "Purchase",
-  "list_title_streaming_rent": "Rent",
-  "list_title_streaming_favorite": "Favorite"
+  "text_placeholder_preview_features": "Currently there aren't any preview features. Check back later."
 }
