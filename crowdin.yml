@@ -1,5 +1,6 @@
 files:
   - source: /projects/client/i18n/meta/en.json
+    translation: /projects/client/i18n/messages/%locale%.json
 pull_request_title: 'feat(l10n): localization updates'
 pull_request_assignees:
   - vladjerca
