@@ -1,0 +1,3 @@
+files:
+  - source: /projects/client/i18n/meta/en.json
+    translation: /projects/client/i18n/mesages/%locale%.%file_extension%
