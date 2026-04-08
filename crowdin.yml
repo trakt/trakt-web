@@ -1,11 +1,11 @@
 files:
   - source: /projects/client/i18n/meta/en.json
     translation: /projects/client/i18n/messages/%locale%.json
-pull_request_title: 'feat(l10n): localization updates'
+pull_request_title: 'feat(i18n): localization updates'
 pull_request_assignees:
   - vladjerca
   - seferturan
-commit_message: 'feat(l10n): update %original_file_name%'
-append_commit_message: 
+commit_message: 'feat(i18n): update %original_file_name%'
+append_commit_message:
 bundles:
   - 6
