@@ -44,6 +44,10 @@
   }
 
   .trakt-navbar-header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xxs);
+
     :global(.trakt-action-button) {
       :global(svg) {
         width: var(--ni-24);
