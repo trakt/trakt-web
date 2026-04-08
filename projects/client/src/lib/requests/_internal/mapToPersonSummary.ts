@@ -2,18 +2,7 @@ import type { PersonResponse } from '@trakt/api';
 import { crewPositionSchema } from '../models/CrewPosition.ts';
 import type { PersonSummary } from '../models/PersonSummary.ts';
 import { mapToHeadshot } from './mapToHeadshot.ts';
-
-function mapToSocialMedia(response: PersonResponse) {
-  if (!response.social_ids) {
-    return;
-  }
-
-  return {
-    x: response.social_ids.twitter,
-    instagram: response.social_ids.instagram,
-    facebook: response.social_ids.facebook,
-  };
-}
+import { mapToSocialMedia } from './mapToSocialMedia.ts';
 
 export const mapToPersonSummary = (
   response: PersonResponse,
