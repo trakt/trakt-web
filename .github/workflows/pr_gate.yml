@@ -27,7 +27,7 @@ jobs:
           skip-checkout: true
 
   merge:
-    if: github.event.pull_request.draft == false
+    if: github.event.pull_request.draft == false && github.event.pull_request.base.ref == 'main'
     name: The Convergence of Realms (Enable Auto Merge)
     runs-on: ubuntu-latest
     steps:
