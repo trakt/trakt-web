@@ -990,8 +990,7 @@
       "default": "Total Runtime",
       "description": "Header for the total runtime section. Shows the total time to watch all aired episodes of a show.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_country": {
@@ -1698,9 +1697,7 @@
           "type": "number"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_share": {
       "default": "Share \"{title}\"",
@@ -2849,9 +2846,7 @@
     "button_text_remove_from_list": {
       "default": "Remove from list",
       "description": "Text for the button that allows users to remove a movie or show from a list.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_remove_from_list": {
       "default": "Remove \"{title}\" from list",
@@ -2979,9 +2974,7 @@
           "type": "string"
         }
       },
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "option_text_theme_light": {
       "default": "Light",
@@ -6812,48 +6805,42 @@
       "default": "More Recaps: Monthly & Yearly",
       "description": "Title for the VIP feature that provides monthly and yearly recap reports.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_description_recaps": {
       "default": "Get deeper insights with comprehensive month and year recaps showing everything you watched, rated, and discovered.",
       "description": "Description for the VIP feature that provides monthly and yearly recap reports.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_title_global_wtw": {
       "default": "Global Where to Watch",
       "description": "Title for the VIP feature that shows global streaming availability.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_description_global_wtw": {
       "default": "See where shows and movies are available to stream anywhere in the world, not just your region.",
       "description": "Description for the VIP feature that shows global streaming availability.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_title_bigger_watchlist": {
       "default": "Bigger Watchlist",
       "description": "Title for the VIP feature that expands watchlist capacity.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_description_bigger_watchlist": {
       "default": "Expand your watchlist capacity to keep track of everything you want to watch without limits.",
       "description": "Description for the VIP feature that expands watchlist capacity.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_title_bigger_library": {
@@ -6876,64 +6863,56 @@
       "default": "More Customisation: Profile Header",
       "description": "Title for the VIP feature that allows profile header customisation.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_description_profile_customisation": {
       "default": "Personalize your profile with custom headers and make your Trakt presence uniquely yours.",
       "description": "Description for the VIP feature that allows profile header customisation.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_title_plex_sync": {
       "default": "Sync Plex more frequently",
       "description": "Title for the VIP feature that increases Plex sync frequency.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_description_plex_sync": {
       "default": "Keep your Plex library perfectly synced with more frequent automatic updates throughout the day.",
       "description": "Description for the VIP feature that increases Plex sync frequency.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_title_streaming_services": {
       "default": "Sync more Streaming Services",
       "description": "Title for the VIP feature that allows syncing more streaming services.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_description_streaming_services": {
       "default": "Connect and sync with additional streaming platforms to track your viewing across all services.",
       "description": "Description for the VIP feature that allows syncing more streaming services.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_title_more_lists": {
       "default": "More Lists",
       "description": "Title for the VIP feature that allows creating more custom lists.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_description_more_lists": {
       "default": "Create even more custom lists to organize your shows and movies exactly the way you want.",
       "description": "Description for the VIP feature that allows creating more custom lists.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_title_sentiment_trivia": {
@@ -6948,56 +6927,49 @@
       "default": "Unlock detailed sentiment analysis and fascinating trivia about the movies and shows you watch.",
       "description": "Description for the VIP feature that provides sentiment analysis and trivia.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_title_api_apps": {
       "default": "More API APPs Connected",
       "description": "Title for the VIP feature that allows connecting more API apps.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_description_api_apps": {
       "default": "Connect more third-party apps and services through the Trakt API to enhance your experience.",
       "description": "Description for the VIP feature that allows connecting more API apps.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_title_private_notes": {
       "default": "More Private Notes",
       "description": "Title for the VIP feature that allows more private notes.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_description_private_notes": {
       "default": "Add tons more personal notes to your shows and movies to remember your thoughts and recommendations.",
       "description": "Description for the VIP feature that allows more private notes.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_title_support": {
       "default": "Better Support: Forum & Feedback",
       "description": "Title for the VIP feature that provides better support access.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "vip_feature_description_support": {
       "default": "Get priority access to our support forums and have your feedback heard directly by the team.",
       "description": "Description for the VIP feature that provides better support access.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_vip_built_to_last": {
@@ -8471,11 +8443,18 @@
     },
     "stat_text_plays": {
       "default": "Plays",
-      "description": "Text for the plays stat, indicating the number of times a movie, show, or episode was watched. This should be as short and concise as possible."
+      "description": "Text for the plays stat, indicating the number of times a movie, show, or episode was watched. This should be as short and concise as possible.",
+      "exclude": [
+        "android"
+      ]
     },
     "limit_title_watch_history": {
       "default": "Watch History",
-      "description": "Title for the progress bar that shows a user's watch history usage. This should be as short as possible."
+      "description": "Title for the progress bar that shows a user's watch history usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tooltip_stats_plays": {
       "default": "Total movies and episodes watched",
@@ -8575,11 +8554,18 @@
     },
     "stat_text_watchers": {
       "default": "Watchers",
-      "description": "Text for the watchers stat, indicating the number of users who are watching a movie, show, or episode. This should be as short and concise as possible."
+      "description": "Text for the watchers stat, indicating the number of users who are watching a movie, show, or episode. This should be as short and concise as possible.",
+      "exclude": [
+        "android"
+      ]
     },
     "limit_title_ratings": {
       "default": "Ratings",
-      "description": "Title for the progress bar that shows a user's ratings usage. This should be as short as possible."
+      "description": "Title for the progress bar that shows a user's ratings usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "label_stats_episodes": {
       "default": "Episodes",
@@ -8591,11 +8577,18 @@
     },
     "stat_text_lists": {
       "default": "Lists",
-      "description": "Text for the lists stat, indicating the number of lists that contain a movie, show, or episode. This should be as short and concise as possible."
+      "description": "Text for the lists stat, indicating the number of lists that contain a movie, show, or episode. This should be as short and concise as possible.",
+      "exclude": [
+        "android"
+      ]
     },
     "limit_title_offline_library": {
       "default": "Offline Library",
-      "description": "Title for the progress bar that shows a user's offline library usage. This should be as short as possible."
+      "description": "Title for the progress bar that shows a user's offline library usage. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "label_stats_movies": {
       "default": "Movies",
@@ -8607,11 +8600,18 @@
     },
     "stat_text_favorited": {
       "default": "Favorites",
-      "description": "Text for the favorites stat, indicating the number of times a movie, or show has been favorited. This should be as short and concise as possible."
+      "description": "Text for the favorites stat, indicating the number of times a movie, or show has been favorited. This should be as short and concise as possible.",
+      "exclude": [
+        "android"
+      ]
     },
     "text_stats_day_count": {
       "default": "{count}-day",
-      "description": "Day count for watching streak, used as compound adjective (e.g. '16-day watching streak')."
+      "description": "Day count for watching streak, used as compound adjective (e.g. '16-day watching streak').",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "label_stats_shows": {
       "default": "Shows",
@@ -8623,11 +8623,18 @@
     },
     "button_text_details": {
       "default": "Details",
-      "description": "Text for the button that allows users to view details of a movie, show, or episode."
+      "description": "Text for the button that allows users to view details of a movie, show, or episode.",
+      "exclude": [
+        "android"
+      ]
     },
     "text_stats_days_count": {
       "default": "{count}-day",
-      "description": "Plural day count for watching streak, used as compound adjective (e.g. '16-day watching streak')."
+      "description": "Plural day count for watching streak, used as compound adjective (e.g. '16-day watching streak').",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "label_stats_active_days": {
       "default": "Active Days",
@@ -8644,11 +8651,19 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_watching_streak": {
       "default": "watching streak",
-      "description": "Label following the streak count, e.g. '5 days watching streak'."
+      "description": "Label following the streak count, e.g. '5 days watching streak'.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "label_stats_busiest_day": {
       "default": "Busiest Day",
@@ -8660,7 +8675,11 @@
     },
     "text_stats_watch_today": {
       "default": "Watch today",
-      "description": "Call to action when streak is at risk."
+      "description": "Call to action when streak is at risk.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "label_stats_best_day": {
       "default": "Best Day",
@@ -8672,7 +8691,11 @@
     },
     "text_stats_keep_streak_alive": {
       "default": "to keep your streak alive!",
-      "description": "Motivational text following 'Watch today' when streak is at risk."
+      "description": "Motivational text following 'Watch today' when streak is at risk.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "label_stats_hours": {
       "default": "Hours",
@@ -8684,7 +8707,11 @@
     },
     "text_stats_streak_every_single_day": {
       "default": "Every. Single. Day.",
-      "description": "Motivational message for 180+ day streak tiers."
+      "description": "Motivational message for 180+ day streak tiers.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "label_stats_ratings": {
       "default": "Ratings",
@@ -8696,7 +8723,11 @@
     },
     "text_stats_streak_others_dream": {
       "default": "Others can only dream",
-      "description": "Motivational message for 90+ day streak tier."
+      "description": "Motivational message for 90+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "label_stats_comments": {
       "default": "Comments",
@@ -8708,7 +8739,11 @@
     },
     "text_stats_streak_lifestyle": {
       "default": "It's a lifestyle now",
-      "description": "Motivational message for 60+ day streak tier."
+      "description": "Motivational message for 60+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_today": {
       "default": "Today",
@@ -8720,7 +8755,11 @@
     },
     "text_stats_streak_no_days_off": {
       "default": "No days off",
-      "description": "Motivational message for 30+ day streak tier."
+      "description": "Motivational message for 30+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_time_morning": {
       "default": "Morning",
@@ -8732,7 +8771,11 @@
     },
     "text_stats_streak_locked_in": {
       "default": "Locked in",
-      "description": "Motivational message for 14+ day streak tier."
+      "description": "Motivational message for 14+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_time_afternoon": {
       "default": "Afternoon",
@@ -8744,7 +8787,11 @@
     },
     "text_stats_streak_keep_fire": {
       "default": "Keep that fire going",
-      "description": "Motivational message for 7+ day streak tier."
+      "description": "Motivational message for 7+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_time_evening": {
       "default": "Evening",
@@ -8756,7 +8803,11 @@
     },
     "text_stats_streak_habit_forming": {
       "default": "Habit forming",
-      "description": "Motivational message for 3+ day streak tier."
+      "description": "Motivational message for 3+ day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_time_late_night": {
       "default": "Late Night",
@@ -8768,7 +8819,11 @@
     },
     "text_stats_streak_keep_going": {
       "default": "Keep going",
-      "description": "Motivational message for 1 day streak tier."
+      "description": "Motivational message for 1 day streak tier.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_weeks_ago": {
       "default": "{count}w ago",
@@ -8780,7 +8835,11 @@
     },
     "text_stats_streak_exact_year": {
       "default": "A full year!",
-      "description": "Message shown when streak is exactly 365 days."
+      "description": "Message shown when streak is exactly 365 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_weeks_short": {
       "default": "{count}w",
@@ -8792,7 +8851,11 @@
     },
     "text_stats_streak_exact_half_year": {
       "default": "Half a year!",
-      "description": "Message shown when streak is exactly 180 days."
+      "description": "Message shown when streak is exactly 180 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_this_week": {
       "default": "This week",
@@ -8804,7 +8867,11 @@
     },
     "text_stats_streak_exact_90": {
       "default": "90 days straight!",
-      "description": "Message shown when streak is exactly 90 days."
+      "description": "Message shown when streak is exactly 90 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_was_last_week": {
       "default": "was {day} last week",
@@ -8816,7 +8883,11 @@
     },
     "text_stats_streak_exact_60": {
       "default": "60 days straight!",
-      "description": "Message shown when streak is exactly 60 days."
+      "description": "Message shown when streak is exactly 60 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_delta_up": {
       "default": "+{count}",
@@ -8828,7 +8899,11 @@
     },
     "text_stats_streak_exact_month": {
       "default": "A full month!",
-      "description": "Message shown when streak is exactly 30 days."
+      "description": "Message shown when streak is exactly 30 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_delta_down": {
       "default": "-{count}",
@@ -8840,7 +8915,11 @@
     },
     "text_stats_streak_exact_two_weeks": {
       "default": "Two weeks strong!",
-      "description": "Message shown when streak is exactly 14 days."
+      "description": "Message shown when streak is exactly 14 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_delta_same": {
       "default": "same",
@@ -8852,7 +8931,11 @@
     },
     "text_stats_streak_exact_week": {
       "default": "A whole week!",
-      "description": "Message shown when streak is exactly 7 days."
+      "description": "Message shown when streak is exactly 7 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_episodes_count": {
       "default": "{count} episodes",
@@ -8864,7 +8947,11 @@
     },
     "text_stats_streak_exact_three_days": {
       "default": "Three days in!",
-      "description": "Message shown when streak is exactly 3 days."
+      "description": "Message shown when streak is exactly 3 days.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_stats_movies_count": {
       "default": "{count} movies",
@@ -8876,7 +8963,11 @@
     },
     "text_stats_streak_exact_it_begins": {
       "default": "It begins!",
-      "description": "Message shown when streak is exactly 1 day."
+      "description": "Message shown when streak is exactly 1 day.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_stats_this_week": {
       "default": "Your Week",
@@ -8888,7 +8979,11 @@
     },
     "text_stats_streak_month": {
       "default": "{count} month",
-      "description": "Singular month label in streak accumulator."
+      "description": "Singular month label in streak accumulator.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_stats_graph_daily": {
       "default": "Daily Activity",
@@ -8900,7 +8995,11 @@
     },
     "text_stats_streak_months": {
       "default": "{count} months",
-      "description": "Plural months label in streak accumulator."
+      "description": "Plural months label in streak accumulator.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_stats_graph_trend": {
       "default": "Week Trend",
@@ -8912,7 +9011,11 @@
     },
     "text_stats_streak_week": {
       "default": "{count} week",
-      "description": "Singular week label in streak accumulator."
+      "description": "Singular week label in streak accumulator.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_stats_graph_peak": {
       "default": "Peak Hours",
@@ -8924,7 +9027,11 @@
     },
     "text_stats_streak_weeks": {
       "default": "{count} weeks",
-      "description": "Plural weeks label in streak accumulator."
+      "description": "Plural weeks label in streak accumulator.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_stats_graph_shows_movies": {
       "default": "Shows vs Movies",
@@ -9096,7 +9203,10 @@
     },
     "drawer_title_sort": {
       "default": "Sort By",
-      "description": "Title for the drawer containing sorting options for a user's list items. This should be as short and concise as possible."
+      "description": "Title for the drawer containing sorting options for a user's list items. This should be as short and concise as possible.",
+      "exclude": [
+        "android"
+      ]
     },
     "header_sentiment_positive": {
       "default": "Positive",
@@ -9124,11 +9234,19 @@
     },
     "button_label_view_trivia": {
       "default": "View trivia",
-      "description": "Aria-label for the button that allows users to view trivia for movies or shows."
+      "description": "Aria-label for the button that allows users to view trivia for movies or shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_smart_lists": {
       "default": "Smart Lists",
-      "description": "Title for smart lists. This should be as short and concise as possible."
+      "description": "Title for smart lists. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_stats_graph_ratings": {
       "default": "Ratings",
@@ -9182,16 +9300,14 @@
       "default": "Official Links",
       "description": "Header for the official links section, with official links for a show or movie, like the official site, instagram, etc..",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_other_links": {
       "default": "Other Links",
       "description": "Header for the other links section, with additional links for a show or movie, like imdb, wikipedia, etc..",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     }
   }
