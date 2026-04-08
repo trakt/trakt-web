@@ -7,6 +7,7 @@ import { mapToColors } from './mapToColors.ts';
 import { mapToCover } from './mapToCover.ts';
 import { mapToLogo } from './mapToLogo.ts';
 import { mapToPoster } from './mapToPoster.ts';
+import { mapToSocialMedia } from './mapToSocialMedia.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
 
 export function mapToShowEntry(
@@ -65,5 +66,7 @@ export function mapToShowEntry(
     totalRuntime,
     rating: mapToTraktRating(show.rating),
     network: show.network,
+    homepage: prependHttps(show.homepage),
+    socialMedia: mapToSocialMedia(show),
   };
 }
