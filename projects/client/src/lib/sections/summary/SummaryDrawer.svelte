@@ -2,6 +2,7 @@
   import { page } from "$app/state";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
+  import WhereToWatchDrawer from "$lib/sections/lists/where-to-watch/_internal/WhereToWatchDrawer.svelte";
   import {
     Drawers,
     summaryDrawerNavigation,
@@ -31,11 +32,17 @@
     details.type === "episode" ? details.show.slug : details.media.slug,
   );
 
-  const relatedType = $derived(
-    details.type === "episode" ? "show" : details.type,
-  );
-
   const media = $derived("media" in details ? details.media : undefined);
+
+  const whereToWatchTarget = $derived(
+    details.type === "episode"
+      ? {
+          type: "episode" as const,
+          media: details.show,
+          episode: details.episode,
+        }
+      : { type: details.type, media: details.media },
+  );
 </script>
 
 {#if drawer === Drawers.Sentiment && sentiment}
@@ -64,4 +71,8 @@
 
 {#if drawer === Drawers.History}
   <HistoryDrawer {...details} onClose={close} />
+{/if}
+
+{#if drawer === Drawers.WhereToWatch}
+  <WhereToWatchDrawer {...whereToWatchTarget} onClose={close} />
 {/if}
