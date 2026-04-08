@@ -4947,37 +4947,27 @@
     "list_title_streaming_subscription": {
       "default": "Subscription",
       "description": "Text used to indicate the list of all streaming services where media is available to watch in subscription model.",
-      "exclude": [
-        "web"
-      ]
+      "exclude": []
     },
     "list_title_streaming_free": {
       "default": "Free",
       "description": "Text used to indicate the list of all streaming services where media is available to watch for free.",
-      "exclude": [
-        "web"
-      ]
+      "exclude": []
     },
     "list_title_streaming_purchase": {
       "default": "Purchase",
       "description": "Text used to indicate the list of all streaming services where media is available to watch for one time purchase.",
-      "exclude": [
-        "web"
-      ]
+      "exclude": []
     },
     "list_title_streaming_rent": {
       "default": "Rent",
       "description": "Text used to indicate the list of all streaming services where media is available to rent.",
-      "exclude": [
-        "web"
-      ]
+      "exclude": []
     },
     "list_title_streaming_favorite": {
       "default": "Favorite",
       "description": "Text used to indicate the list of all favorite streaming services of a user.",
-      "exclude": [
-        "web"
-      ]
+      "exclude": []
     },
     "list_title_recently_searched_shows": {
       "default": "Recently Searched Shows",

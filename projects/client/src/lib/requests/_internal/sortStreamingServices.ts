@@ -1,5 +1,3 @@
-import type { WatchNowServiceResponse } from '@trakt/api';
-
 // This list matches the heuristic used in the android TV app
 const MOST_POPULAR_SOURCES: string[] = [
   'netflix',
@@ -19,7 +17,13 @@ function getServiceIndex(source: string): number {
   return index === -1 ? MOST_POPULAR_SOURCES.length : index;
 }
 
-export function sortStreamingServices(sources: WatchNowServiceResponse[]) {
+type Source = {
+  source: string;
+};
+
+export function sortStreamingServices<T extends Source>(
+  sources: ReadonlyArray<T>,
+): T[] {
   return sources
     .toSorted((a, b) => a.source.localeCompare(b.source))
     .toSorted((a, b) => getServiceIndex(a.source) - getServiceIndex(b.source));
