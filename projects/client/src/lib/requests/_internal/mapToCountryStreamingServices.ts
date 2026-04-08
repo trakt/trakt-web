@@ -12,7 +12,11 @@ export function mapToCountryStreamingServices(
 
     return {
       country,
-      services: [...streamOn.streaming, ...streamOn.onDemand],
+      services: [
+        ...streamOn.streaming,
+        ...streamOn.onDemand,
+        ...streamOn.free,
+      ],
     };
   });
 }

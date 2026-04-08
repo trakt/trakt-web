@@ -5,7 +5,7 @@ import { findPreferredStreamingService } from './findPreferredStreamingService.t
 describe('findPreferredStreamingService', () => {
   it('should return undefined if there are no subscription services', () => {
     expect(findPreferredStreamingService({
-      services: { streaming: [], onDemand: [] },
+      services: { streaming: [], onDemand: [], free: [] },
       favorites: ['netflix'],
       countryCode: 'nl',
     })).toBe(undefined);
@@ -22,6 +22,7 @@ describe('findPreferredStreamingService', () => {
           key: 'streaming-netflix',
         }],
         onDemand: [],
+        free: [],
       },
       favorites: ['us-netflix'],
       countryCode: 'nl',
@@ -47,6 +48,7 @@ describe('findPreferredStreamingService', () => {
       services: {
         streaming: [subscription],
         onDemand: [],
+        free: [],
       },
       favorites: ['nl-netflix'],
       countryCode: 'nl',

@@ -29,6 +29,7 @@ describe('mapToServices', () => {
       services: {
         streaming: [streamingService],
         onDemand: [],
+        free: [],
       },
     };
 
@@ -56,6 +57,7 @@ describe('mapToServices', () => {
       services: {
         streaming: [],
         onDemand: [onDemandService],
+        free: [],
       },
     };
 
@@ -99,6 +101,7 @@ describe('mapToServices', () => {
       services: {
         streaming: [preferredService, otherStreamingService],
         onDemand: [onDemandService],
+        free: [],
       },
       preferred: preferredService,
     };
@@ -161,6 +164,7 @@ describe('mapToServices', () => {
       services: {
         streaming: [preferredService, streamingService],
         onDemand: [onDemandService1, onDemandService2],
+        free: [],
       },
       preferred: preferredService,
     };
