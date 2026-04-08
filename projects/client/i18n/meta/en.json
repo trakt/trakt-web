@@ -9177,6 +9177,22 @@
         "android",
         "ios"
       ]
+    },
+    "header_official_links": {
+      "default": "Official Links",
+      "description": "Header for the official links section, with official links for a show or movie, like the official site, instagram, etc..",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_other_links": {
+      "default": "Other Links",
+      "description": "Header for the other links section, with additional links for a show or movie, like imdb, wikipedia, etc..",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

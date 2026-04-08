@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
-  import SocialMediaAction from "./SocialMediaAction.svelte";
+  import ExternalLinkAction from "../../../_internal/ExternalLinkAction.svelte";
 
   const { person }: { person: PersonSummary } = $props();
 
@@ -11,18 +11,20 @@
   const hasSocialMediaLinks = $derived(
     facebookUsername || xUsername || instagramUsername,
   );
+
+  const source = "person-summary";
 </script>
 
 {#if hasSocialMediaLinks}
   {#if facebookUsername}
-    <SocialMediaAction username={facebookUsername} type="facebook" />
+    <ExternalLinkAction id={facebookUsername} type="facebook" {source} />
   {/if}
 
   {#if xUsername}
-    <SocialMediaAction username={xUsername} type="x" />
+    <ExternalLinkAction id={xUsername} type="x" {source} />
   {/if}
 
   {#if instagramUsername}
-    <SocialMediaAction username={instagramUsername} type="instagram" />
+    <ExternalLinkAction id={instagramUsername} type="instagram" {source} />
   {/if}
 {/if}

@@ -3,7 +3,7 @@ import type { DpadNavigationType } from '$lib/features/navigation/models/DpadNav
 export type TraktActionButtonProps = ButtonProps & {
   color?: 'purple' | 'red' | 'blue' | 'orange' | 'default';
   variant?: 'primary' | 'secondary';
-  size?: 'normal' | 'small';
+  size?: 'normal' | 'small' | 'large';
   style?: 'flat' | 'ghost';
   navigationType?: DpadNavigationType;
   classList?: string;

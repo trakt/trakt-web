@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Momentan nu există funcții în avanpremieră. Revino mai târziu pentru noutăți din culise."
+    },
+    "header_official_links": {
+      "default": "Linkuri oficiale"
+    },
+    "header_other_links": {
+      "default": "Alte linkuri"
     }
   }
 }

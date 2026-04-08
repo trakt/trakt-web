@@ -182,6 +182,11 @@
       margin: var(--ni-neg-8);
     }
 
+    &[data-size="large"] {
+      scale: 1.2;
+      margin: var(--ni-4);
+    }
+
     &[data-style="ghost"] {
       background-color: transparent;
 

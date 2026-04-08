@@ -30,6 +30,8 @@ export function mapToMovieEntry(
 
   return {
     id: movie.ids.trakt,
+    imdbId: movie.ids.imdb,
+    tmdbId: movie.ids.tmdb,
     key: `movie-${movie.ids.trakt}`,
     slug: movie.ids.slug,
     type: 'movie',

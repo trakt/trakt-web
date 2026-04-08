@@ -3,6 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { fade } from "svelte/transition";
   import MediaDetails from "./_internal/MediaDetails.svelte";
+  import MediaLinks from "./_internal/MediaLinks.svelte";
   import MediaStats from "./_internal/MediaStats.svelte";
   import type { MediaDetailsProps } from "./MediaDetailsProps";
 
@@ -25,6 +26,10 @@
     >
       <MediaStats {...props} />
       <MediaDetails {...props} />
+
+      {#if props.type !== "episode"}
+        <MediaLinks media={props.media} />
+      {/if}
     </div>
   {/if}
 </Drawer>

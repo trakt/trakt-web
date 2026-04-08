@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "De momento no hay funciones en avance. Vuelve pronto, ¡como si esperaras el próximo episodio!"
+    },
+    "header_official_links": {
+      "default": "Enlaces oficiales"
+    },
+    "header_other_links": {
+      "default": "Otros enlaces"
     }
   }
 }

@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "В момента няма функции за ранен достъп. Елате пак по-късно за следващата премиера!"
+    },
+    "header_official_links": {
+      "default": "Официални връзки"
+    },
+    "header_other_links": {
+      "default": "Други връзки"
     }
   }
 }

@@ -3524,6 +3524,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "目前没有预览功能。稍后再回来看看有没有什么新花絮。"
+    },
+    "header_official_links": {
+      "default": "官方链接"
+    },
+    "header_other_links": {
+      "default": "其他链接"
     }
   }
 }

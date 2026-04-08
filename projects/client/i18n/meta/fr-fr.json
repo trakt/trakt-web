@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Il n'y a actuellement aucune fonctionnalité en avant-première. Revenez plus tard pour la suite du programme !"
+    },
+    "header_official_links": {
+      "default": "Liens officiels"
+    },
+    "header_other_links": {
+      "default": "Autres liens"
     }
   }
 }

@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "No momento não temos recursos em prévia por aqui. Fique de olho nas cenas dos próximos capítulos!"
+    },
+    "header_official_links": {
+      "default": "Links Oficiais"
+    },
+    "header_other_links": {
+      "default": "Outros Links"
     }
   }
 }

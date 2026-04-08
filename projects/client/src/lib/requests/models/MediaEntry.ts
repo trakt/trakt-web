@@ -13,6 +13,8 @@ const ImageUrlsSchema = z.object({
 
 export const MediaEntrySchema = z.object({
   id: z.number(),
+  imdbId: z.string().nullish(),
+  tmdbId: z.number().nullish(),
   key: z.string(),
   slug: z.string(),
   type: MediaTypeSchema,

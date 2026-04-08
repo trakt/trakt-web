@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Por ahora no hay nada nuevo para probar. Date una vuelta después."
+    },
+    "header_official_links": {
+      "default": "Links oficiales"
+    },
+    "header_other_links": {
+      "default": "Otros links"
     }
   }
 }

@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Det er ingen forhåndsvisninger tilgjengelige akkurat nå. Sjekk igjen senere!"
+    },
+    "header_official_links": {
+      "default": "Offisielle lenker"
+    },
+    "header_other_links": {
+      "default": "Andre lenker"
     }
   }
 }
