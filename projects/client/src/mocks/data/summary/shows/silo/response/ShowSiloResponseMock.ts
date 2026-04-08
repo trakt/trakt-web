@@ -30,7 +30,7 @@ export const ShowSiloResponseMock: ShowResponse = {
   'network': 'Apple TV+',
   'country': 'us',
   'trailer': 'https://youtube.com/watch?v=8ZYhuvIv1pA',
-  'homepage': 'http://tv.apple.com/show/umc.cmc.3yksgc857px0k0rqe5zd4jice',
+  'homepage': 'https://tv.apple.com/show/umc.cmc.3yksgc857px0k0rqe5zd4jice',
   'status': 'returning series',
   'rating': 8.161225370343736,
   'votes': 6953,
@@ -113,5 +113,11 @@ export const ShowSiloResponseMock: ShowResponse = {
       '#D29D40',
       '#1E2E2F',
     ],
+  },
+  'social_ids': {
+    'twitter': null,
+    'facebook': null,
+    'instagram': null,
+    'wikipedia': 'Silo_(TV_series)',
   },
 };

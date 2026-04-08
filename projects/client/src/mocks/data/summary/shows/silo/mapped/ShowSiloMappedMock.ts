@@ -62,4 +62,13 @@ export const ShowSiloMappedMock: ShowEntry = {
     'count': 15,
   },
   'totalRuntime': 900,
+  'imdbId': 'tt14688458',
+  'tmdbId': 125988,
+  'homepage': 'https://tv.apple.com/show/umc.cmc.3yksgc857px0k0rqe5zd4jice',
+  'socialMedia': {
+    'x': null,
+    'facebook': null,
+    'instagram': null,
+    'wikipedia': 'Silo_(TV_series)',
+  },
 };

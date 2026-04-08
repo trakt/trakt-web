@@ -30,7 +30,7 @@ export const ShowDevsResponseMock: ShowResponse = {
   'network': 'Hulu',
   'country': 'us',
   'trailer': 'https://youtube.com/watch?v=Fp9LMsI6uJ8',
-  'homepage': 'http://www.fxnetworks.com/shows/devs',
+  'homepage': 'https://www.fxnetworks.com/shows/devs',
   'status': 'ended',
   'rating': 7.52669,
   'votes': 3522,

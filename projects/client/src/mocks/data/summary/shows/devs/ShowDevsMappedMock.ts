@@ -67,4 +67,8 @@ export const ShowDevsMappedMock: ShowEntry = {
     'count': 8,
   },
   'totalRuntime': 416,
+  'imdbId': 'tt8134186',
+  'tmdbId': 81349,
+  'homepage': 'https://www.fxnetworks.com/shows/devs',
+  'socialMedia': undefined,
 };

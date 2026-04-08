@@ -63,7 +63,7 @@ export const MediaLibraryResponseMock: CollectionResponse[] = [
       'votes': 21868,
       'comment_count': 50,
       'trailer': null,
-      'homepage': 'http://southpark.cc.com/',
+      'homepage': 'https://southpark.cc.com/',
       'network': 'Comedy Central',
       'updated_at': '2025-11-05T07:43:05.000Z',
       'language': 'en',
@@ -237,7 +237,7 @@ export const MediaLibraryResponseMock: CollectionResponse[] = [
       'comment_count': 100,
       'trailer': 'https://youtube.com/watch?v=XsS1yE2f-hE',
       'homepage':
-        'http://www.starwars.com/films/star-wars-episode-iv-a-new-hope',
+        'https://www.starwars.com/films/star-wars-episode-iv-a-new-hope',
       'updated_at': '2025-11-04T08:13:15.000Z',
       'language': 'en',
       'languages': [

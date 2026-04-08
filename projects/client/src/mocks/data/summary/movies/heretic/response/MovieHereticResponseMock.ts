@@ -21,7 +21,7 @@ export const MovieHereticResponseMock: MovieResponse = {
   'runtime': 111,
   'country': 'us',
   'trailer': 'https://youtube.com/watch?v=jpWUOxRozZg',
-  'homepage': 'http://a24films.com/films/heretic',
+  'homepage': 'https://a24films.com/films/heretic',
   'status': 'released',
   'rating': 7.218434949591935,
   'votes': 2083,

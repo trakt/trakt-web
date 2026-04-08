@@ -61,4 +61,8 @@ export const MovieHereticMappedMock: MovieEntry = {
   'votes': 2083,
   'plexSlug': 'heretic-2024',
   'postCredits': [],
+  'imdbId': 'tt28015403',
+  'tmdbId': 1138194,
+  'homepage': 'https://a24films.com/films/heretic',
+  'socialMedia': undefined,
 };

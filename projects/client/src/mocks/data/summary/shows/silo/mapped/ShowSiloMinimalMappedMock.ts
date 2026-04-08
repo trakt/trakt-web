@@ -50,4 +50,8 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
     'count': 20,
   },
   'totalRuntime': NaN,
+  'imdbId': 'tt14688458',
+  'tmdbId': 125988,
+  'homepage': undefined,
+  'socialMedia': undefined,
 };
