@@ -6,7 +6,7 @@
 
   type StreamingServiceLogoProps = {
     source: string;
-    country: string;
+    country?: string;
     i18n: StreamingServiceLogoIntl;
   };
 

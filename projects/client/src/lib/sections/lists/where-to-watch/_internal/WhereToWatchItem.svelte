@@ -1,30 +1,54 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
-  import StreamingServiceLogo from "$lib/components/media/streaming-service/StreamingServiceLogo.svelte";
-  import { StreamingServiceLogoIntlProvider } from "$lib/components/media/streaming-service/StreamingServiceLogoIntlProvider";
+  import { lineClamp } from "$lib/components/text/lineClamp";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { StreamingServiceOption } from "$lib/requests/models/StreamingServiceOptions";
   import type { LibraryOption } from "../models/LibraryOption";
-  import { getMediaCost } from "./getMediaCost";
+  import { getMediaCost, type CostType } from "./getMediaCost";
+  import { toCountryFlag } from "./toCountryFlag";
+  import WhereToWatchLogo from "./WhereToWatchLogo.svelte";
+
+  type WhereToWatchItemProps = {
+    service: StreamingServiceOption | LibraryOption;
+    country: string;
+    variant?: "service" | "country";
+    type?: CostType;
+    countryName?: string;
+  };
 
   const {
     service,
     country,
-  }: { service: StreamingServiceOption | LibraryOption; country: string } =
-    $props();
+    variant = "service",
+    type = "any",
+    countryName,
+  }: WhereToWatchItemProps = $props();
 
   const { track } = useTrack(AnalyticsEvent.StreamOn);
 
   const text = $derived.by(() => {
+    if (variant === "country") {
+      if (service.type !== "on-demand") {
+        return;
+      }
+
+      const costText = getMediaCost(service, type);
+      if (!costText) {
+        return;
+      }
+
+      return costText;
+    }
+
     switch (service.type) {
       case "library":
         return m.text_library();
       case "streaming":
         return m.text_stream();
       case "on-demand": {
-        const costText = getMediaCost(service);
+        const costText = getMediaCost(service, type);
         if (!costText) {
           return m.text_on_demand();
         }
@@ -34,6 +58,11 @@
       }
     }
   });
+
+  const hasSmallLogo = $derived(
+    service.type === "on-demand" && variant === "service",
+  );
+  const nameLines = $derived(text ? 1 : 2);
 </script>
 
 <div class="where-to-watch-item">
@@ -42,13 +71,24 @@
     target="_blank"
     onclick={() => track({ source: service.source })}
   >
-    <div class="where-to-watch-item-content">
-      <StreamingServiceLogo
-        source={service.source}
-        {country}
-        i18n={StreamingServiceLogoIntlProvider}
-      />
-      <p>{text}</p>
+    <div class="where-to-watch-item-content" data-variant={variant}>
+      {#if variant === "country"}
+        <div class="trakt-country">
+          <span class="trakt-country-flag">{toCountryFlag(country)}</span>
+          <span class="trakt-country-name" use:lineClamp={{ lines: nameLines }}>
+            {countryName ?? country.toUpperCase()}
+          </span>
+        </div>
+      {:else}
+        <WhereToWatchLogo
+          source={service.source}
+          {country}
+          size={hasSmallLogo ? "small" : "default"}
+        />
+      {/if}
+      {#if text}
+        <p>{text}</p>
+      {/if}
     </div>
   </Link>
 </div>
@@ -85,53 +125,42 @@
 
     p {
       text-align: center;
-      flex-grow: 1;
+      flex-shrink: 0;
+      min-height: var(--ni-18);
       display: flex;
       align-items: center;
     }
 
-    :global(.trakt-streaming-service-logo) {
-      width: var(--ni-60);
-      height: var(--ni-60);
-
+    &[data-variant="country"] {
       justify-content: center;
-      text-align: center;
-
-      color: var(--color-text-primary);
-
-      :global(img),
-      :global(svg) {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-
-      :global(img) {
-        transition: filter var(--transition-increment) ease-in-out;
-        filter: var(--streaming-service-logo-filter);
-      }
     }
 
-    :global(.trakt-streaming-service-logo.has-channel-logo) {
-      flex-direction: column;
+    &[data-variant="service"] {
+      justify-content: center;
+      overflow: hidden;
 
-      :global(img) {
-        height: 45%;
+      p {
+        flex-grow: 1;
       }
+    }
+  }
 
-      :global(img.trakt-channel-logo) {
-        width: 75%;
-        height: auto;
-        max-height: 45%;
+  .trakt-country {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-items: center;
+    flex-grow: 1;
+    gap: var(--gap-micro);
 
-        transition: filter var(--transition-increment) ease-in-out;
-        filter: var(--streaming-service-logo-filter);
-      }
+    .trakt-country-name {
+      text-align: center;
+      min-height: calc(2lh);
+    }
 
-      :global(.trakt-channel-separator) {
-        width: 50%;
-        height: var(--ni-1);
-      }
+    .trakt-country-flag {
+      align-self: center;
+      font-size: var(--ni-32);
+      line-height: var(--ni-24);
     }
   }
 </style>

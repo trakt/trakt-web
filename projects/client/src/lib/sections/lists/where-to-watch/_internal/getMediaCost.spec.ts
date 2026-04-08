@@ -14,7 +14,7 @@ describe('getMediaCost', () => {
       key: 'on-demand-example',
     };
 
-    expect(getMediaCost(onDemandService)).toEqual('');
+    expect(getMediaCost(onDemandService, 'any')).toEqual('');
   });
 
   it('should prioritize the rent price over the purchase price', () => {
@@ -28,7 +28,7 @@ describe('getMediaCost', () => {
       key: 'on-demand-example',
     };
 
-    expect(getMediaCost(onDemandService)).toEqual('$3.99');
+    expect(getMediaCost(onDemandService, 'any')).toEqual('$3.99');
   });
 
   it('should get the purchase price if there is no rent price', () => {
@@ -42,6 +42,34 @@ describe('getMediaCost', () => {
       key: 'on-demand-example',
     };
 
-    expect(getMediaCost(onDemandService)).toEqual('$9.99');
+    expect(getMediaCost(onDemandService, 'any')).toEqual('$9.99');
+  });
+
+  it('should return the rent price', () => {
+    const onDemandService: StreamOnDemand = {
+      link: 'https://example.com',
+      source: 'source',
+      is4k: false,
+      currency: 'usd',
+      prices: { rent: 3.99, purchase: 9.99 },
+      type: 'on-demand',
+      key: 'on-demand-example',
+    };
+
+    expect(getMediaCost(onDemandService, 'rent')).toEqual('$3.99');
+  });
+
+  it('should return the purchase price', () => {
+    const onDemandService: StreamOnDemand = {
+      link: 'https://example.com',
+      source: 'source',
+      is4k: false,
+      currency: 'usd',
+      prices: { rent: 3.99, purchase: 9.99 },
+      type: 'on-demand',
+      key: 'on-demand-example',
+    };
+
+    expect(getMediaCost(onDemandService, 'purchase')).toEqual('$9.99');
   });
 });
