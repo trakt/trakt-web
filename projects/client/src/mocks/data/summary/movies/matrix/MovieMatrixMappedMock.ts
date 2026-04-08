@@ -60,4 +60,13 @@ export const MovieMatrixMappedMock: MovieEntry = {
   'votes': 65943,
   'plexSlug': 'the-matrix-1999',
   'postCredits': [],
+  'imdbId': 'tt0133093',
+  'tmdbId': 603,
+  'homepage': 'https://www.warnerbros.com/matrix',
+  'socialMedia': {
+    'x': null,
+    'facebook': 'TheMatrixMovie',
+    'instagram': null,
+    'wikipedia': 'The_Matrix',
+  },
 };

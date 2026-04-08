@@ -21,7 +21,7 @@ export const MovieMatrixResponseMock: MovieResponse = {
   'runtime': 136,
   'country': 'us',
   'trailer': 'https://youtube.com/watch?v=d0XTFAMmhrE',
-  'homepage': 'http://www.warnerbros.com/matrix',
+  'homepage': 'https://www.warnerbros.com/matrix',
   'status': 'released',
   'rating': 8.755000530761416,
   'votes': 65943,
@@ -110,5 +110,11 @@ export const MovieMatrixResponseMock: MovieResponse = {
       '#9AAAB4',
       '#141A2A',
     ],
+  },
+  'social_ids': {
+    'twitter': null,
+    'facebook': 'TheMatrixMovie',
+    'instagram': null,
+    'wikipedia': 'The_Matrix',
   },
 };

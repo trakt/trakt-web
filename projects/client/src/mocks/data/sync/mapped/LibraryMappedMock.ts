@@ -47,6 +47,10 @@ export const LibraryMappedMock: LibraryItem[] = [
       ],
       'id': 2177,
       'key': 'show-2177',
+      'homepage': 'https://southpark.cc.com/',
+      'imdbId': 'tt0121955',
+      'socialMedia': undefined,
+      'tmdbId': 2190,
       'languages': [
         'en',
       ],
@@ -113,6 +117,10 @@ export const LibraryMappedMock: LibraryItem[] = [
         'action',
       ],
       'id': 1153578,
+      'homepage': undefined,
+      'imdbId': 'tt31022851',
+      'socialMedia': undefined,
+      'tmdbId': 1409850,
       'key': 'movie-1153578',
       'languages': [
         'en',
@@ -178,6 +186,11 @@ export const LibraryMappedMock: LibraryItem[] = [
         'science-fiction',
       ],
       'id': 7,
+      'homepage':
+        'https://www.starwars.com/films/star-wars-episode-iv-a-new-hope',
+      'imdbId': 'tt0076759',
+      'socialMedia': undefined,
+      'tmdbId': 11,
       'key': 'movie-7',
       'languages': [
         'en',
@@ -266,6 +279,10 @@ export const LibraryMappedMock: LibraryItem[] = [
         'comedy',
       ],
       'id': 4215,
+      'homepage': undefined,
+      'imdbId': 'tt0092400',
+      'socialMedia': undefined,
+      'tmdbId': 4239,
       'key': 'show-4215',
       'languages': [
         'en',
