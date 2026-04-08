@@ -6,5 +6,6 @@ pull_request_assignees:
   - vladjerca
   - seferturan
 commit_message: 'feat(l10n): update %original_file_name%'
+append_commit_message: false
 bundles:
   - 6
