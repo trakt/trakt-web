@@ -27,6 +27,8 @@ export function mapToShowEntry(
 
   return {
     id: show.ids.trakt,
+    imdbId: show.ids.imdb,
+    tmdbId: show.ids.tmdb,
     key: `show-${show.ids.trakt}`,
     slug: show.ids.slug,
     type: 'show',

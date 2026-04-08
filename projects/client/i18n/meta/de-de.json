@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Aktuell gibt es keine neuen Vorschauen. Kommen Sie für die nächste Vorstellung wieder vorbei!"
+    },
+    "header_official_links": {
+      "default": "Offizielle Links"
+    },
+    "header_other_links": {
+      "default": "Weitere Links"
     }
   },
   "vip_feature_description_profile_customisation": {

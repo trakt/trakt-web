@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Il n'y a pas de fonctions en aperçu pour le moment. Revenez faire un tour plus tard."
+    },
+    "header_official_links": {
+      "default": "Liens officiels"
+    },
+    "header_other_links": {
+      "default": "Autres liens"
     }
   }
 }

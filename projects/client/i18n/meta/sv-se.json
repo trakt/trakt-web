@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Just nu finns inga funktioner att förhandsvisa. Kom tillbaka senare, som en efterlängtad uppföljare."
+    },
+    "header_official_links": {
+      "default": "Officiella länkar"
+    },
+    "header_other_links": {
+      "default": "Övriga länkar"
     }
   }
 }

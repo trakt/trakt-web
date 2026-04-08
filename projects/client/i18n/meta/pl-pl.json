@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Obecnie nie ma żadnych funkcji testowych. Zajrzyj tu później – jak to mówią, na dobre rzeczy warto poczekać!"
+    },
+    "header_official_links": {
+      "default": "Oficjalne linki"
+    },
+    "header_other_links": {
+      "default": "Inne linki"
     }
   }
 }

@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Der er ingen smugkig lige nu. Kig forbi igen senere for næste akt."
+    },
+    "header_official_links": {
+      "default": "Officielle links"
+    },
+    "header_other_links": {
+      "default": "Andre links"
     }
   }
 }

@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Зараз на знімальному майданчику затишшя — нових прев'ю-функцій поки немає. Завітайте до нас згодом!"
+    },
+    "header_official_links": {
+      "default": "Офіційні посилання"
+    },
+    "header_other_links": {
+      "default": "Інші посилання"
     }
   }
 }

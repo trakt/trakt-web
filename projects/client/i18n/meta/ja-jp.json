@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "現在、公開可能なプレビュー機能はありません。次のエピソードを待つように、また後でチェックしてみてください。"
+    },
+    "header_official_links": {
+      "default": "公式リンク"
+    },
+    "header_other_links": {
+      "default": "その他のリンク"
     }
   }
 }

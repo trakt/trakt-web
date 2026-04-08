@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Er zijn momenteel geen preview-functies. Kom later terug voor de volgende scène!"
+    },
+    "header_official_links": {
+      "default": "Officiële links"
+    },
+    "header_other_links": {
+      "default": "Overige links"
     }
   }
 }

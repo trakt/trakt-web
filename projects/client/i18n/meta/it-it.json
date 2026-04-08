@@ -3525,6 +3525,12 @@
     },
     "text_placeholder_preview_features": {
       "default": "Al momento non ci sono funzioni in anteprima. Torna a trovarci più tardi per il prossimo grande debutto."
+    },
+    "header_official_links": {
+      "default": "Link Ufficiali"
+    },
+    "header_other_links": {
+      "default": "Altri Link"
     }
   }
 }

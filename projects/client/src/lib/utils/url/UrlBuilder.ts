@@ -295,10 +295,16 @@ export const UrlBuilder = {
   external: {
     imdb: {
       person: (imdbId: string) => `https://www.imdb.com/name/${imdbId}`,
+      media: (imdbId: string) => `https://www.imdb.com/title/${imdbId}`,
     },
-    x: (username: string) => `https://x.com/${username}`,
-    instagram: (username: string) => `https://www.instagram.com/${username}`,
-    facebook: (username: string) => `https://www.facebook.com/${username}`,
+    tmdb: {
+      media: (tmdbId: string, type: 'tv' | 'movie') =>
+        `https://www.themoviedb.org/${type}/${tmdbId}`,
+    },
+    x: (id: string) => `https://x.com/${id}`,
+    instagram: (id: string) => `https://www.instagram.com/${id}`,
+    facebook: (id: string) => `https://www.facebook.com/${id}`,
+    wikipedia: (id: string) => `https://en.wikipedia.org/wiki/${id}`,
   },
   feedback: () => 'https://roadmap.trakt.tv',
 };
