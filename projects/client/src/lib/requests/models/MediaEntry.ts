@@ -4,6 +4,7 @@ import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 import { MediaStatusSchema } from './MediaStatus.ts';
 import { MediaTypeSchema } from './MediaType.ts';
 import { PostCreditsSchema } from './PostCreditsSchema.ts';
+import { socialMediaSchema } from './SocialMedia.ts';
 
 const ImageUrlsSchema = z.object({
   medium: HttpsUrlSchema,
@@ -45,6 +46,8 @@ export const MediaEntrySchema = z.object({
   plexSlug: z.string().nullish(),
   postCredits: PostCreditsSchema.array(),
   rating: z.number().nullish(),
+  homepage: HttpsUrlSchema.nullish(),
+  socialMedia: socialMediaSchema.optional(),
 });
 
 export type MediaEntry = z.infer<typeof MediaEntrySchema>;

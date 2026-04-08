@@ -7,6 +7,7 @@ import { mapToCover } from './mapToCover.ts';
 import { mapToLogo } from './mapToLogo.ts';
 import { mapToPostCredits } from './mapToPostCredits.ts';
 import { mapToPoster } from './mapToPoster.ts';
+import { mapToSocialMedia } from './mapToSocialMedia.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
 
 function mapMovieCertificationResponse(
@@ -58,5 +59,7 @@ export function mapToMovieEntry(
     plexSlug: movie.ids.plex?.slug,
     postCredits: mapToPostCredits(movie),
     rating: mapToTraktRating(movie.rating),
+    homepage: prependHttps(movie.homepage),
+    socialMedia: mapToSocialMedia(movie),
   };
 }
