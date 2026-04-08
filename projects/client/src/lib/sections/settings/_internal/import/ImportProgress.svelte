@@ -1,20 +1,20 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import { slide } from "svelte/transition";
 
-  const {
-    processedCount,
-    totalCount,
-  }: {
+  type ImportProgressProps = {
     processedCount: number;
     totalCount: number;
-  } = $props();
+  };
+
+  const { processedCount, totalCount }: ImportProgressProps = $props();
 
   const percentage = $derived(
     totalCount > 0 ? Math.round((processedCount / totalCount) * 100) : 0,
   );
 </script>
 
-<div class="import-progress">
+<div class="import-progress" transition:slide={{ duration: 150, axis: "y" }}>
   <p class="secondary">
     {m.import_status_syncing({ processed: processedCount, total: totalCount })}
   </p>
@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style>
   .import-progress {
     display: flex;
     flex-direction: column;
@@ -39,15 +39,15 @@
 
   .import-progress-bar-track {
     height: var(--ni-6);
-    border-radius: var(--border-radius-full);
+    border-radius: var(--border-radius-xs);
     background-color: color-mix(in srgb, var(--color-border) 50%, transparent);
     overflow: hidden;
   }
 
   .import-progress-bar-fill {
     height: 100%;
-    border-radius: var(--border-radius-full);
+    border-radius: var(--border-radius-xs);
     background-color: var(--color-background-purple);
-    transition: width 300ms ease-in-out;
+    transition: width var(--transition-increment) ease-in-out;
   }
 </style>

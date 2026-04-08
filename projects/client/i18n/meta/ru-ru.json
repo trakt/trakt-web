@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Другие ссылки"
+    },
+    "header_import": {
+      "default": "Импорт"
+    },
+    "description_import": {
+      "default": "Перенесите свои данные из других сервисов прямо в браузере."
+    },
+    "import_source_json": {
+      "default": "JSON-файл"
+    },
+    "import_source_csv": {
+      "default": "CSV-файл"
+    },
+    "import_drop_csv": {
+      "default": "Перетащите CSV-файлы сюда или нажмите для загрузки."
+    },
+    "import_drop_json": {
+      "default": "Перетащите JSON-файл сюда или нажмите для загрузки."
+    },
+    "import_drop_zip": {
+      "default": "Перетащите ZIP-файл сюда или нажмите для загрузки."
+    },
+    "import_max_files": {
+      "default": "(макс. {count} файлов)"
+    },
+    "import_status_parsing": {
+      "default": "Обработка данных…"
+    },
+    "import_status_syncing": {
+      "default": "Синхронизация {processed} / {total}…"
+    },
+    "import_status_error": {
+      "default": "Ошибка импорта: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} записей в истории"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} в списке к просмотру"
+    },
+    "import_summary_ratings": {
+      "default": "{count} оценок"
+    },
+    "import_complete_synced": {
+      "default": "{count} элементов успешно синхронизировано."
+    },
+    "import_complete_errors": {
+      "default": "Ошибка в {count} элементах."
+    },
+    "button_text_start_import": {
+      "default": "Импорт"
+    },
+    "button_label_start_import": {
+      "default": "Начать импорт ваших данных в Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Ещё"
+    },
+    "button_label_import_more": {
+      "default": "Сбросить и начать новый импорт."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Ваш импорт превышает лимит бесплатной версии. Прямо как в «Миссия невыполнима», но VIP-статус поможет импортировать все {count} элементов без лишних хлопот."
     }
   }
 }

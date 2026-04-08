@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Alte linkuri"
+    },
+    "header_import": {
+      "default": "Import"
+    },
+    "description_import": {
+      "default": "Importă-ți datele din alte servicii direct în browser. Aduce toate poveștile și maratoanele tale de film și serial într-un singur loc!"
+    },
+    "import_source_json": {
+      "default": "Fișier JSON"
+    },
+    "import_source_csv": {
+      "default": "Fișier CSV"
+    },
+    "import_drop_csv": {
+      "default": "Trage fișierele CSV aici sau dă click pentru a le încărca."
+    },
+    "import_drop_json": {
+      "default": "Trage un fișier JSON aici sau dă click pentru a-l încărca."
+    },
+    "import_drop_zip": {
+      "default": "Trage un fișier ZIP aici sau dă click pentru a-l încărca."
+    },
+    "import_max_files": {
+      "default": "(maxim {count} fișiere permise)"
+    },
+    "import_status_parsing": {
+      "default": "Analizăm datele..."
+    },
+    "import_status_syncing": {
+      "default": "Sincronizăm {processed} / {total} elemente..."
+    },
+    "import_status_error": {
+      "default": "Import eșuat: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} elemente pentru Istoric"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} elemente pentru Watchlist"
+    },
+    "import_summary_ratings": {
+      "default": "{count} evaluări"
+    },
+    "import_complete_synced": {
+      "default": "{count} elemente sincronizate cu succes. Să înceapă proiecția!"
+    },
+    "import_complete_errors": {
+      "default": "{count} elemente au eșuat."
+    },
+    "button_text_start_import": {
+      "default": "Începe"
+    },
+    "button_label_start_import": {
+      "default": "Începe importul datelor tale în Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Mai mult"
+    },
+    "button_label_import_more": {
+      "default": "Resetează și începe un nou import."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Importul tău depășește limita contului gratuit. Treci la VIP pentru a importa toate cele {count} elemente și a nu pierde niciun capitol din povestea ta!"
     }
   }
 }

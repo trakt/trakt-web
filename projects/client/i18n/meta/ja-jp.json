@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "その他のリンク"
+    },
+    "header_import": {
+      "default": "インポート"
+    },
+    "description_import": {
+      "default": "ブラウザから直接、他のサービスのデータをインポートできます。"
+    },
+    "import_source_json": {
+      "default": "JSONファイル"
+    },
+    "import_source_csv": {
+      "default": "CSVファイル"
+    },
+    "import_drop_csv": {
+      "default": "CSVファイルをここにドロップするか、クリックしてアップロードしてください。"
+    },
+    "import_drop_json": {
+      "default": "JSONファイルをここにドロップするか、クリックしてアップロードしてください。"
+    },
+    "import_drop_zip": {
+      "default": "ZIPファイルをここにドロップするか、クリックしてアップロードしてください。"
+    },
+    "import_max_files": {
+      "default": "(最大{count}ファイルまで)"
+    },
+    "import_status_parsing": {
+      "default": "データを解析中…"
+    },
+    "import_status_syncing": {
+      "default": "{processed} / {total} アイテムを同期中…"
+    },
+    "import_status_error": {
+      "default": "インポートに失敗しました: {message}"
+    },
+    "import_summary_history": {
+      "default": "視聴履歴：{count}件"
+    },
+    "import_summary_watchlist": {
+      "default": "ウォッチリスト：{count}件"
+    },
+    "import_summary_ratings": {
+      "default": "評価：{count}件"
+    },
+    "import_complete_synced": {
+      "default": "{count}件の同期が完了しました！"
+    },
+    "import_complete_errors": {
+      "default": "{count}件のインポートに失敗しました。"
+    },
+    "button_text_start_import": {
+      "default": "インポートを開始"
+    },
+    "button_label_start_import": {
+      "default": "Traktへのデータインポートを開始します。"
+    },
+    "button_text_import_more": {
+      "default": "さらにインポート"
+    },
+    "button_label_import_more": {
+      "default": "リセットして新しいインポートを開始します。"
+    },
+    "import_vip_limit_exceeded": {
+      "default": "インポート件数が無料プランの制限を超えています。VIPにアップグレードして、全{count}件のコレクションを完璧に同期しましょう！"
     }
   }
 }

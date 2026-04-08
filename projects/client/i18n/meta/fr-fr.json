@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Autres liens"
+    },
+    "header_import": {
+      "default": "Importation"
+    },
+    "description_import": {
+      "default": "Importez vos données depuis d'autres services directement dans votre navigateur. Préparez votre propre version finale en toute simplicité."
+    },
+    "import_source_json": {
+      "default": "Fichier JSON"
+    },
+    "import_source_csv": {
+      "default": "Fichier CSV"
+    },
+    "import_drop_csv": {
+      "default": "Déposez vos fichiers CSV ici ou cliquez pour les télécharger."
+    },
+    "import_drop_json": {
+      "default": "Déposez un fichier JSON ici ou cliquez pour le télécharger."
+    },
+    "import_drop_zip": {
+      "default": "Déposez un fichier ZIP ici ou cliquez pour le télécharger."
+    },
+    "import_max_files": {
+      "default": "({count} fichiers maximum autorisés)"
+    },
+    "import_status_parsing": {
+      "default": "Analyse de vos données en cours…"
+    },
+    "import_status_syncing": {
+      "default": "Synchronisation de {processed} / {total} éléments…"
+    },
+    "import_status_error": {
+      "default": "Échec de l'importation : {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} éléments pour l'Historique"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} éléments pour la Liste à voir"
+    },
+    "import_summary_ratings": {
+      "default": "{count} notes"
+    },
+    "import_complete_synced": {
+      "default": "{count} éléments synchronisés avec succès."
+    },
+    "import_complete_errors": {
+      "default": "Échec pour {count} éléments."
+    },
+    "button_text_start_import": {
+      "default": "Importer"
+    },
+    "button_label_start_import": {
+      "default": "Lancez l'importation de vos données vers Trakt."
+    },
+    "button_text_import_more": {
+      "default": "En ajouter"
+    },
+    "button_label_import_more": {
+      "default": "Réinitialisez pour lancer une nouvelle importation."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Votre importation dépasse la limite du forfait gratuit. Passez VIP pour importer l'intégralité des {count} éléments et éviter le générique de fin prématuré."
     }
   }
 }

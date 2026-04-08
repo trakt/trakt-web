@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Weitere Links"
+    },
+    "header_import": {
+      "default": "Import"
+    },
+    "description_import": {
+      "default": "Importieren Sie Ihre Daten von anderen Diensten direkt in Ihrem Browser."
+    },
+    "import_source_json": {
+      "default": "JSON-Datei"
+    },
+    "import_source_csv": {
+      "default": "CSV-Datei"
+    },
+    "import_drop_csv": {
+      "default": "CSV-Dateien hier ablegen oder zum Hochladen klicken."
+    },
+    "import_drop_json": {
+      "default": "JSON-Datei hier ablegen oder zum Hochladen klicken."
+    },
+    "import_drop_zip": {
+      "default": "ZIP-Datei hier ablegen oder zum Hochladen klicken."
+    },
+    "import_max_files": {
+      "default": "(max. {count} Dateien erlaubt)"
+    },
+    "import_status_parsing": {
+      "default": "Daten werden analysiert…"
+    },
+    "import_status_syncing": {
+      "default": "Synchronisiere {processed} / {total} Einträge…"
+    },
+    "import_status_error": {
+      "default": "Import fehlgeschlagen: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} Einträge für den Verlauf"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} Einträge für die Watchlist"
+    },
+    "import_summary_ratings": {
+      "default": "{count} Bewertungen"
+    },
+    "import_complete_synced": {
+      "default": "{count} Einträge erfolgreich synchronisiert."
+    },
+    "import_complete_errors": {
+      "default": "{count} Einträge fehlgeschlagen."
+    },
+    "button_text_start_import": {
+      "default": "Import starten"
+    },
+    "button_label_start_import": {
+      "default": "Starten Sie den Import Ihrer Daten zu Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Mehr importieren"
+    },
+    "button_label_import_more": {
+      "default": "Zurücksetzen und neuen Import starten."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Ihr Import sprengt den Rahmen der kostenlosen Version. Gönnen Sie sich das VIP-Backstage-Ticket, um alle {count} Einträge zu importieren!"
     }
   },
   "vip_feature_description_profile_customisation": {

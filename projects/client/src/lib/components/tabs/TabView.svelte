@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Tabs } from "bits-ui";
+  import { lineClamp } from "../text/lineClamp";
   import type { TabViewProps } from "./models/TabViewProps";
 
   const { value, tabs, onChange, tabPosition = "top" }: TabViewProps = $props();
@@ -17,7 +18,9 @@
       <div class="trakt-tab-indicator"></div>
       {#each tabs as tab (tab.value)}
         <Tabs.Trigger class="trakt-tab-trigger" value={tab.value}>
-          <span class="capitalize">{tab.label}</span>
+          <span class="capitalize ellipsis" use:lineClamp={{ lines: 2 }}>
+            {tab.label}
+          </span>
         </Tabs.Trigger>
       {/each}
     </Tabs.List>

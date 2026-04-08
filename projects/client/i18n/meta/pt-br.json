@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Outros Links"
+    },
+    "header_import": {
+      "default": "Importar"
+    },
+    "description_import": {
+      "default": "Importe seus dados de outros serviços diretamente no seu navegador. Tão fácil quanto maratonar sua série favorita!"
+    },
+    "import_source_json": {
+      "default": "Arquivo JSON"
+    },
+    "import_source_csv": {
+      "default": "Arquivo CSV"
+    },
+    "import_drop_csv": {
+      "default": "Arraste arquivos CSV aqui ou clique para enviar."
+    },
+    "import_drop_json": {
+      "default": "Arraste um arquivo JSON aqui ou clique para enviar."
+    },
+    "import_drop_zip": {
+      "default": "Arraste um arquivo ZIP aqui ou clique para enviar."
+    },
+    "import_max_files": {
+      "default": "(máximo de {count} arquivos permitidos)"
+    },
+    "import_status_parsing": {
+      "default": "Analisando seus dados…"
+    },
+    "import_status_syncing": {
+      "default": "Sincronizando {processed} / {total} itens…"
+    },
+    "import_status_error": {
+      "default": "A importação falhou: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} itens para o Histórico"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} itens para a Watchlist"
+    },
+    "import_summary_ratings": {
+      "default": "{count} avaliações"
+    },
+    "import_complete_synced": {
+      "default": "{count} itens sincronizados com sucesso. Tudo pronto para a próxima maratona!"
+    },
+    "import_complete_errors": {
+      "default": "{count} itens falharam."
+    },
+    "button_text_start_import": {
+      "default": "Importar"
+    },
+    "button_label_start_import": {
+      "default": "Comece a importar seus dados para o Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Importar +"
+    },
+    "button_label_import_more": {
+      "default": "Redefinir e começar uma nova importação."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Sua importação excede o limite gratuito. Vire VIP para importar todos os {count} itens e não perder nenhum capítulo dessa história!"
     }
   }
 }

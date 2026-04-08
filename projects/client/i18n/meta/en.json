@@ -6557,30 +6557,6 @@
         "ios"
       ]
     },
-    "import_source_imdb": {
-      "default": "IMDb",
-      "description": "Import source label for IMDb.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "import_source_letterboxd": {
-      "default": "Letterboxd",
-      "description": "Import source label for Letterboxd.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "import_source_tvtime": {
-      "default": "TV Time",
-      "description": "Import source label for TV Time.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "import_source_json": {
       "default": "JSON File",
       "description": "Import source label for a generic Trakt JSON export file.",

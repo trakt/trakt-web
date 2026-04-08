@@ -1,18 +1,16 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import { dropzone } from "$lib/utils/actions/dropzone.ts";
+  import { slide } from "svelte/transition";
 
-  const {
-    accept,
-    maxFiles,
-    prompt,
-    onfiles,
-  }: {
+  type ImportDropzoneProps = {
     accept: string;
     maxFiles: number;
     prompt: string;
     onfiles: (files: FileList) => void;
-  } = $props();
+  };
+
+  const { accept, maxFiles, prompt, onfiles }: ImportDropzoneProps = $props();
 
   function handleFiles(ev: Event) {
     const { files } = (ev as CustomEvent<{ files: FileList }>).detail;
@@ -22,6 +20,7 @@
 
 <div
   class="import-dropzone"
+  transition:slide={{ duration: 150, axis: "y" }}
   use:dropzone={{ accept, multiple: maxFiles > 1 }}
   onfiles={handleFiles}
 >
@@ -31,13 +30,15 @@
   </p>
 </div>
 
-<style lang="scss">
+<style>
   .import-dropzone {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: var(--gap-xs);
+
+    -webkit-tap-highlight-color: transparent;
 
     padding: var(--ni-24) var(--ni-20);
     min-height: var(--ni-104);
@@ -53,7 +54,7 @@
 
     &:hover,
     &:focus-visible,
-    &.dragover {
+    &:global(.dragover) {
       border-color: var(--color-primary);
       background-color: color-mix(
         in srgb,

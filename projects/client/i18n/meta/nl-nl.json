@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Overige links"
+    },
+    "header_import": {
+      "default": "Importeren"
+    },
+    "description_import": {
+      "default": "Importeer je data van andere diensten direct in je browser – een vliegende start voor je kijkavontuur!"
+    },
+    "import_source_json": {
+      "default": "JSON-bestand"
+    },
+    "import_source_csv": {
+      "default": "CSV-bestand"
+    },
+    "import_drop_csv": {
+      "default": "Sleep CSV-bestanden hierheen of klik om te uploaden."
+    },
+    "import_drop_json": {
+      "default": "Sleep een JSON-bestand hierheen of klik om te uploaden."
+    },
+    "import_drop_zip": {
+      "default": "Sleep een ZIP-bestand hierheen of klik om te uploaden."
+    },
+    "import_max_files": {
+      "default": "(max {count} bestanden toegestaan)"
+    },
+    "import_status_parsing": {
+      "default": "Je data wordt verwerkt..."
+    },
+    "import_status_syncing": {
+      "default": "{processed} / {total} items synchroniseren..."
+    },
+    "import_status_error": {
+      "default": "Import mislukt: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} items voor Geschiedenis"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} items voor Watchlist"
+    },
+    "import_summary_ratings": {
+      "default": "{count} beoordelingen"
+    },
+    "import_complete_synced": {
+      "default": "{count} items succesvol gesynchroniseerd."
+    },
+    "import_complete_errors": {
+      "default": "{count} items mislukt."
+    },
+    "button_text_start_import": {
+      "default": "Start import"
+    },
+    "button_label_start_import": {
+      "default": "Begin met het importeren van je data naar Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Meer"
+    },
+    "button_label_import_more": {
+      "default": "Reset en start een nieuwe import."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Je import overschrijdt de gratis limiet. Upgrade naar VIP om alle {count} items te importeren en word de regisseur van je eigen bibliotheek!"
     }
   }
 }

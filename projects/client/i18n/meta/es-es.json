@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Otros enlaces"
+    },
+    "header_import": {
+      "default": "Importar"
+    },
+    "description_import": {
+      "default": "Importa tus datos desde otros servicios directamente en tu navegador."
+    },
+    "import_source_json": {
+      "default": "Archivo JSON"
+    },
+    "import_source_csv": {
+      "default": "Archivo CSV"
+    },
+    "import_drop_csv": {
+      "default": "Arrastra archivos CSV aquí o haz clic para subirlos."
+    },
+    "import_drop_json": {
+      "default": "Arrastra un archivo JSON aquí o haz clic para subirlo."
+    },
+    "import_drop_zip": {
+      "default": "Arrastra un archivo ZIP aquí o haz clic para subirlo."
+    },
+    "import_max_files": {
+      "default": "(máx. {count} archivos)"
+    },
+    "import_status_parsing": {
+      "default": "Analizando tus datos…"
+    },
+    "import_status_syncing": {
+      "default": "Sincronizando {processed} / {total} elementos…"
+    },
+    "import_status_error": {
+      "default": "Error en la importación: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} elementos para tu historial"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} elementos por ver"
+    },
+    "import_summary_ratings": {
+      "default": "{count} valoraciones"
+    },
+    "import_complete_synced": {
+      "default": "{count} elementos sincronizados. ¡Misión cumplida!"
+    },
+    "import_complete_errors": {
+      "default": "{count} elementos han fallado."
+    },
+    "button_text_start_import": {
+      "default": "Importar"
+    },
+    "button_label_start_import": {
+      "default": "Empieza a importar tus datos a Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Importar más"
+    },
+    "button_label_import_more": {
+      "default": "Reiniciar y comenzar una nueva importación."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Tu importación supera el límite gratuito. Pásate a VIP para importar los {count} elementos y que no se pierdan como lágrimas en la lluvia."
     }
   }
 }

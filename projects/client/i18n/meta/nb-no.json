@@ -3531,6 +3531,69 @@
     },
     "header_other_links": {
       "default": "Andre lenker"
+    },
+    "header_import": {
+      "default": "Importer"
+    },
+    "description_import": {
+      "default": "Importer data fra andre tjenester direkte i nettleseren. Gjør deg klar for din neste store maraton!"
+    },
+    "import_source_json": {
+      "default": "JSON-fil"
+    },
+    "import_source_csv": {
+      "default": "CSV-fil"
+    },
+    "import_drop_csv": {
+      "default": "Slipp CSV-filer her eller klikk for å laste opp."
+    },
+    "import_drop_json": {
+      "default": "Slipp en JSON-fil her eller klikk for å laste opp."
+    },
+    "import_drop_zip": {
+      "default": "Slipp en ZIP-fil her eller klikk for å laste opp."
+    },
+    "import_max_files": {
+      "default": "(maks {count} filer tillatt)"
+    },
+    "import_status_parsing": {
+      "default": "Analyserer dataene dine..."
+    },
+    "import_status_syncing": {
+      "default": "Synkroniserer {processed} / {total} elementer..."
+    },
+    "import_status_error": {
+      "default": "Import mislyktes: {message}"
+    },
+    "import_summary_history": {
+      "default": "{count} elementer til historikk"
+    },
+    "import_summary_watchlist": {
+      "default": "{count} elementer til Watchlist"
+    },
+    "import_summary_ratings": {
+      "default": "{count} vurderinger"
+    },
+    "import_complete_synced": {
+      "default": "{count} elementer ble synkronisert."
+    },
+    "import_complete_errors": {
+      "default": "{count} elementer feilet."
+    },
+    "button_text_start_import": {
+      "default": "Start import"
+    },
+    "button_label_start_import": {
+      "default": "Begynn å importere dine data til Trakt."
+    },
+    "button_text_import_more": {
+      "default": "Importer mer"
+    },
+    "button_label_import_more": {
+      "default": "Nullstill og start en ny import."
+    },
+    "import_vip_limit_exceeded": {
+      "default": "Importen din overskrider gratiskvoten. Oppgrader til VIP for å importere alle {count} elementene, slik at din neste hygge-kveld er helt synkronisert!"
     }
   }
 }
