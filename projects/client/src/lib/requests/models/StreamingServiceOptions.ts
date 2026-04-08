@@ -34,13 +34,23 @@ export const OnDemandStreamingSchema = z.object({
 });
 export type StreamOnDemand = z.infer<typeof OnDemandStreamingSchema>;
 
+export const FreeStreamingSchema = z.object({
+  link: HttpsUrlSchema,
+  source: z.string(),
+  is4k: z.boolean(),
+  type: z.literal('free'),
+  key: z.string(),
+});
+export type StreamFree = z.infer<typeof FreeStreamingSchema>;
+
 export const StreamingServiceOptionsSchema = z.object({
   streaming: StreamingSubscriptionSchema.array(),
   onDemand: OnDemandStreamingSchema.array(),
+  free: FreeStreamingSchema.array(),
   streamingRank: StreamingRankSchema.optional(),
 });
 
-export type StreamingServiceOption = StreamNow | StreamOnDemand;
+export type StreamingServiceOption = StreamNow | StreamOnDemand | StreamFree;
 export type StreamingServiceOptions = z.infer<
   typeof StreamingServiceOptionsSchema
 >;

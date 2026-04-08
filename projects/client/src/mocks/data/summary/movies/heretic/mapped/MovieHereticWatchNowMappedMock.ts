@@ -82,6 +82,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
     },
   ],
   'streaming': [],
+  'free': [],
   'streamingRank': {
     'current': 142,
     'delta': 35,
