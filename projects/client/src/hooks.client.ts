@@ -70,28 +70,5 @@ if (typeof document !== 'undefined') {
   }
 }
 
-/**
- * When a new Service Worker takes over (skipWaiting + clients.claim), reload
- * the page so the browser picks up fresh assets instead of serving stale
- * cached responses from the previous deployment — the primary fix for the
- * Safari zombie SW hang.
- *
- * Guards:
- * - Only reloads when the page was already controlled (skips the very first
- *   registration on a new visitor's session to avoid a redundant double load).
- * - A flag prevents multiple reload attempts if the event fires in quick
- *   succession.
- */
-if (typeof navigator !== 'undefined' && navigator.serviceWorker) {
-  const wasControlled = navigator.serviceWorker.controller !== null;
-  const guard = { reloading: false };
-
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (!wasControlled || guard.reloading) return;
-    guard.reloading = true;
-    window.location.reload();
-  });
-}
-
 // If you have a custom error handler, pass it to `handleErrorWithSentry`
 export const handleError = handleErrorWithSentry();
