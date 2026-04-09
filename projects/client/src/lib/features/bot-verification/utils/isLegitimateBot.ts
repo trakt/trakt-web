@@ -1,5 +1,4 @@
 import { error } from '$lib/utils/console/print.ts';
-import { promises as dns } from 'node:dns';
 
 const LEGITIMATE_BOT_PATTERNS = {
   googlebot: /\.google(bot)?\.com$/i,
@@ -8,6 +7,8 @@ const LEGITIMATE_BOT_PATTERNS = {
 } as const;
 
 type BotType = keyof typeof LEGITIMATE_BOT_PATTERNS;
+
+const DOH_ENDPOINT = 'https://cloudflare-dns.com/dns-query';
 
 function identifyBotType(userAgent: string): BotType | null {
   const ua = userAgent.toLowerCase();
@@ -21,19 +22,36 @@ function identifyBotType(userAgent: string): BotType | null {
 }
 
 async function reverseIpLookup(ip: string): Promise<string> {
-  const hostnames = await dns.reverse(ip);
-  const hostname = hostnames.at(0);
+  const ptr = ip.split('.').reverse().join('.') + '.in-addr.arpa';
+  const url = `${DOH_ENDPOINT}?name=${ptr}&type=PTR`;
+
+  const response = await fetch(url, {
+    headers: { accept: 'application/dns-json' },
+  });
+  const data = await response.json<{ Answer?: { data: string }[] }>();
+  const hostname = data.Answer?.at(0)?.data?.replace(/\.$/, '');
 
   if (!hostname) {
-    throw new Error(`No hostname found for IP: ${ip}`);
+    throw new Error(`No PTR record found for IP: ${ip}`);
   }
 
   return hostname;
 }
 
 async function forwardDnsLookup(hostname: string): Promise<string> {
-  const result = await dns.lookup(hostname);
-  return result.address;
+  const url = `${DOH_ENDPOINT}?name=${hostname}&type=A`;
+
+  const response = await fetch(url, {
+    headers: { accept: 'application/dns-json' },
+  });
+  const data = await response.json<{ Answer?: { data: string }[] }>();
+  const address = data.Answer?.at(0)?.data;
+
+  if (!address) {
+    throw new Error(`No A record found for hostname: ${hostname}`);
+  }
+
+  return address;
 }
 
 export async function isLegitimateBot(
