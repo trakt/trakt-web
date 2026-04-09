@@ -33,7 +33,7 @@ async function reverseIpLookup(ip: string): Promise<string> {
     throw new Error(`DNS PTR query failed: ${response.status}`);
   }
 
-  const data = await response.json<{ Answer?: { data: string }[] }>();
+  const data = (await response.json()) as { Answer?: { data: string }[] };
   const hostname = data.Answer?.at(0)?.data?.replace(/\.$/, '');
 
   if (!hostname) {
@@ -54,7 +54,7 @@ async function forwardDnsLookup(hostname: string): Promise<string> {
     throw new Error(`DNS A query failed: ${response.status}`);
   }
 
-  const data = await response.json<{ Answer?: { data: string }[] }>();
+  const data = (await response.json()) as { Answer?: { data: string }[] };
   const address = data.Answer?.at(0)?.data;
 
   if (!address) {
