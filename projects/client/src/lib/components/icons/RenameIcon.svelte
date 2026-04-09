@@ -8,20 +8,20 @@
   <path
     d="M3 22H21"
     stroke="currentColor"
-    stroke-width="2"
+    stroke-width="3"
     stroke-linecap="square"
     stroke-linejoin="round"
   />
   <path
     d="M5 17V13L15 3L19 7L9 17H5Z"
     stroke="currentColor"
-    stroke-width="2"
+    stroke-width="2.5"
     stroke-linecap="round"
   />
   <path
     d="M12 6L16 10"
     stroke="currentColor"
-    stroke-width="2"
+    stroke-width="2.5"
     stroke-linecap="round"
     stroke-linejoin="round"
   />

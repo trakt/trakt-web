@@ -612,6 +612,7 @@
   "text_spoiler_alert": "¡Alerta de spoiler!",
   "button_text_remove_from_watchlist": "Quitar de la lista",
   "button_text_stop_check_in": "Detener el registro",
+  "button_text_edit_comment": "Editar",
   "button_text_delete_comment": "Eliminar reseña",
   "button_label_delete_comment": "Eliminar reseña",
   "warning_prompt_delete_comment": "¿Estás seguro de que quieres eliminar tu reseña?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Comienza a importar tus datos a Trakt.",
   "button_text_import_more": "Importar más",
   "button_label_import_more": "Reiniciar y empezar una nueva importación.",
-  "import_vip_limit_exceeded": "Tu importación se pasa de la raya del plan gratuito. Súbete a VIP para importar los {count} elementos."
+  "import_vip_limit_exceeded": "Tu importación se pasa de la raya del plan gratuito. Súbete a VIP para importar los {count} elementos.",
+  "button_label_edit_comment": "Editar reseña"
 }

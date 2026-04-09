@@ -54,7 +54,7 @@
     {metaInfo}
   >
     {#snippet item(comment)}
-      <CommentCard {comment} {media} {onDrilldown} type={props.type} />
+      <CommentCard {comment} {media} {onDrilldown} {...props} />
     {/snippet}
 
     {#snippet empty()}
@@ -91,6 +91,7 @@
     <AddReviewDrawer
       onClose={onClosePostReview}
       onCommentPost={onDrilldown}
+      mode="post"
       {media}
       {...props}
     />

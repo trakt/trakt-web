@@ -2,20 +2,23 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import CollapseIcon from "$lib/components/lists/section-list/CollapseIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { BehaviorSubject } from "rxjs";
   import { slide } from "svelte/transition";
+  import type {
+    EpisodeCommentProps,
+    MediaCommentProps,
+  } from "../../CommentsProps";
   import CommentReply from "../CommentReply.svelte";
   import { useCommentReplies } from "./useCommentReplies";
 
-  const {
-    comment,
-    media,
-    type,
-  }: { comment: MediaComment; media: MediaEntry; type: ExtendedMediaType } =
-    $props();
+  type CommentRepliesProps = {
+    comment: MediaComment;
+    media: MediaEntry;
+  } & (MediaCommentProps | EpisodeCommentProps);
+
+  const { comment, media, ...typeProps }: CommentRepliesProps = $props();
 
   const showReplies = new BehaviorSubject(false);
 
@@ -49,7 +52,7 @@
   >
     {#each $list as reply}
       <div class="trakt-comment-container">
-        <CommentReply comment={reply} {media} {type} />
+        <CommentReply comment={reply} {media} {...typeProps} />
       </div>
     {/each}
   </div>

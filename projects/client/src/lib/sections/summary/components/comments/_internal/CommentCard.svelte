@@ -1,8 +1,7 @@
 <script lang="ts">
-  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import TextCard from "../../_internal/TextCard.svelte";
+  import type { CommentsProps } from "../CommentsProps";
   import ReactAction from "./comment-actions/ReactAction.svelte";
   import ViewRepliesAction from "./comment-actions/ViewRepliesAction.svelte";
   import CommentBody from "./CommentBody.svelte";
@@ -10,14 +9,13 @@
   import CommentHeader from "./CommentHeader.svelte";
   import type { ActiveComment } from "./models/ActiveComment";
 
-  type CommentProps = {
-    media: MediaEntry;
+  type CommentCardProps = {
     comment: MediaComment;
     onDrilldown: (comment: ActiveComment) => void;
-    type: ExtendedMediaType;
-  };
+  } & CommentsProps;
 
-  const { comment, media, onDrilldown, type }: CommentProps = $props();
+  const { comment, onDrilldown, media, ...typeProps }: CommentCardProps =
+    $props();
 </script>
 
 <TextCard
@@ -25,7 +23,7 @@
   --height-card="var(--height-comment-card)"
 >
   {#snippet header()}
-    <CommentHeader {comment} {type} />
+    <CommentHeader {comment} {media} {...typeProps} />
   {/snippet}
 
   <CommentBody

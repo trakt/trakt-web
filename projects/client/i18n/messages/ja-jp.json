@@ -612,6 +612,7 @@
   "text_spoiler_alert": "ネタバレ注意",
   "button_text_remove_from_watchlist": "ウォッチリストから削除",
   "button_text_stop_check_in": "チェックインを停止",
+  "button_text_edit_comment": "編集",
   "button_text_delete_comment": "レビューを削除",
   "button_label_delete_comment": "レビューを削除",
   "warning_prompt_delete_comment": "本当にレビューを削除しますか？",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Traktへのデータインポートを開始します。",
   "button_text_import_more": "さらにインポート",
   "button_label_import_more": "リセットして新しいインポートを開始します。",
-  "import_vip_limit_exceeded": "インポート件数が無料プランの制限を超えています。VIPにアップグレードして、全{count}件のコレクションを完璧に同期しましょう！"
+  "import_vip_limit_exceeded": "インポート件数が無料プランの制限を超えています。VIPにアップグレードして、全{count}件のコレクションを完璧に同期しましょう！",
+  "button_label_edit_comment": "レビューを編集"
 }

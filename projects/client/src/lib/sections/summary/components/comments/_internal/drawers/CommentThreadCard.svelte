@@ -1,9 +1,12 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type {
+    EpisodeCommentProps,
+    MediaCommentProps,
+  } from "../../CommentsProps";
   import ReactAction from "../comment-actions/ReactAction.svelte";
   import ReplyButton from "../comment-actions/ReplyButton.svelte";
   import CommentInput from "../comment-input/CommentInput.svelte";
@@ -20,9 +23,8 @@
     reset: () => void;
     isReplying: boolean;
     setReplying: (comment: MediaComment, isReplying: boolean) => void;
-    type: ExtendedMediaType;
     shouldScrollIntoView: boolean;
-  };
+  } & (MediaCommentProps | EpisodeCommentProps);
 
   const {
     comment,
@@ -30,8 +32,8 @@
     isReplying,
     setReplying,
     reset,
-    type,
     shouldScrollIntoView,
+    ...typeProps
   }: CommentThreadCardProps = $props();
 
   const scrollIntoView = (node: HTMLElement) => {
@@ -50,11 +52,11 @@
   action={scrollIntoView}
 >
   <div class="trakt-comment-thread-container">
-    <CommentHeader {comment} {type} />
+    <CommentHeader {comment} {media} {...typeProps} />
 
     <div class="trakt-comment-thread">
       <CommentBody {comment} {media} type="full" />
-      <CommentReplies {comment} {media} {type} />
+      <CommentReplies {comment} {media} {...typeProps} />
     </div>
 
     <CommentFooter>
@@ -72,7 +74,7 @@
         onCommentPost={reset}
         placeholder={m.textarea_placeholder_reply()}
         label={m.button_label_post_reply()}
-        {type}
+        type={typeProps.type}
       />
     {/if}
   </div>

@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Spoiler Alert",
   "button_text_remove_from_watchlist": "Remove from watchlist",
   "button_text_stop_check_in": "Stop check in",
+  "button_text_edit_comment": "Edit",
   "button_text_delete_comment": "Delete Review",
   "button_label_delete_comment": "Delete Review",
   "warning_prompt_delete_comment": "Are you sure you want to delete your review?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Start importing your data into Trakt.",
   "button_text_import_more": "Import more",
   "button_label_import_more": "Reset and start a new import.",
-  "import_vip_limit_exceeded": "Your import exceeds the free tier limit. Upgrade to VIP to import all {count} items."
+  "import_vip_limit_exceeded": "Your import exceeds the free tier limit. Upgrade to VIP to import all {count} items.",
+  "button_label_edit_comment": "Edit Review"
 }

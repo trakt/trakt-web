@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Осторожно, спойлер!",
   "button_text_remove_from_watchlist": "Удалить из списка",
   "button_text_stop_check_in": "Остановить отметку",
+  "button_text_edit_comment": "Изменить",
   "button_text_delete_comment": "Удалить отзыв",
   "button_label_delete_comment": "Удалить отзыв",
   "warning_prompt_delete_comment": "Удалить ваш отзыв?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Начать импорт ваших данных в Trakt.",
   "button_text_import_more": "Ещё",
   "button_label_import_more": "Сбросить и начать новый импорт.",
-  "import_vip_limit_exceeded": "Ваш импорт превышает лимит бесплатной версии. Прямо как в «Миссия невыполнима», но VIP-статус поможет импортировать все {count} элементов без лишних хлопот."
+  "import_vip_limit_exceeded": "Ваш импорт превышает лимит бесплатной версии. Прямо как в «Миссия невыполнима», но VIP-статус поможет импортировать все {count} элементов без лишних хлопот.",
+  "button_label_edit_comment": "Редактировать отзыв"
 }

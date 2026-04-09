@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Uwaga: spoiler!",
   "button_text_remove_from_watchlist": "Usuń z listy do obejrzenia",
   "button_text_stop_check_in": "Zatrzymaj meldowanie",
+  "button_text_edit_comment": "Edytuj",
   "button_text_delete_comment": "Usuń recenzję",
   "button_label_delete_comment": "Usuń recenzję",
   "warning_prompt_delete_comment": "Czy na pewno chcesz usunąć swoją recenzję?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Rozpocznij importowanie swoich danych do Trakt.",
   "button_text_import_more": "Importuj więcej",
   "button_label_import_more": "Zresetuj i rozpocznij nowy import.",
-  "import_vip_limit_exceeded": "Twój import przekracza limit darmowego konta. Przejdź na VIP, aby zaimportować wszystkie {count} elementy i poczuć się jak na wielkim pokazie przedpremierowym!"
+  "import_vip_limit_exceeded": "Twój import przekracza limit darmowego konta. Przejdź na VIP, aby zaimportować wszystkie {count} elementy i poczuć się jak na wielkim pokazie przedpremierowym!",
+  "button_label_edit_comment": "Edytuj recenzję"
 }

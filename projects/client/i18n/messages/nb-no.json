@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Spoiler-varsel",
   "button_text_remove_from_watchlist": "Fjern fra listen",
   "button_text_stop_check_in": "Stopp sjekk inn",
+  "button_text_edit_comment": "Rediger",
   "button_text_delete_comment": "Slett anmeldelse",
   "button_label_delete_comment": "Slett anmeldelse",
   "warning_prompt_delete_comment": "Er du sikker på at du vil slette anmeldelsen din?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Begynn å importere dine data til Trakt.",
   "button_text_import_more": "Importer mer",
   "button_label_import_more": "Nullstill og start en ny import.",
-  "import_vip_limit_exceeded": "Importen din overskrider gratiskvoten. Oppgrader til VIP for å importere alle {count} elementene, slik at din neste hygge-kveld er helt synkronisert!"
+  "import_vip_limit_exceeded": "Importen din overskrider gratiskvoten. Oppgrader til VIP for å importere alle {count} elementene, slik at din neste hygge-kveld er helt synkronisert!",
+  "button_label_edit_comment": "Rediger anmeldelse"
 }

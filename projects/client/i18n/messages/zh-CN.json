@@ -612,6 +612,7 @@
   "text_spoiler_alert": "剧透预警",
   "button_text_remove_from_watchlist": "从待看清单移除",
   "button_text_stop_check_in": "停止签到",
+  "button_text_edit_comment": "编辑",
   "button_text_delete_comment": "删除评论",
   "button_label_delete_comment": "删除评论",
   "warning_prompt_delete_comment": "确定要删除你的评论吗？",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "开始将您的数据导入 Trakt。",
   "button_text_import_more": "继续导入",
   "button_label_import_more": "重置并开始新的导入。",
-  "import_vip_limit_exceeded": "您的导入超出了免费额度。升级 VIP 就像获得了全通证，可以立即导入全部 {count} 项内容。"
+  "import_vip_limit_exceeded": "您的导入超出了免费额度。升级 VIP 就像获得了全通证，可以立即导入全部 {count} 项内容。",
+  "button_label_edit_comment": "编辑评论"
 }

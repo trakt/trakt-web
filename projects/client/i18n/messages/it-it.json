@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Allerta spoiler",
   "button_text_remove_from_watchlist": "Rimuovi dalla lista",
   "button_text_stop_check_in": "Interrompi il check-in",
+  "button_text_edit_comment": "Modifica",
   "button_text_delete_comment": "Elimina recensione",
   "button_label_delete_comment": "Elimina recensione",
   "warning_prompt_delete_comment": "Sei sicuro di voler eliminare la tua recensione?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Inizia a importare i tuoi dati su Trakt.",
   "button_text_import_more": "Altro",
   "button_label_import_more": "Ripristina e inizia una nuova importazione.",
-  "import_vip_limit_exceeded": "Questa produzione supera i limiti gratuiti. Passa a VIP per importare tutti i {count} elementi e goderti la tua Dolce Vita su Trakt senza interruzioni."
+  "import_vip_limit_exceeded": "Questa produzione supera i limiti gratuiti. Passa a VIP per importare tutti i {count} elementi e goderti la tua Dolce Vita su Trakt senza interruzioni.",
+  "button_label_edit_comment": "Modifica recensione"
 }

@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Alerte divulgâcheur",
   "button_text_remove_from_watchlist": "Retirer de la liste à visionner",
   "button_text_stop_check_in": "Arrêter l'enregistrement",
+  "button_text_edit_comment": "Modifier",
   "button_text_delete_comment": "Supprimer l'avis",
   "button_label_delete_comment": "Supprimer l'avis",
   "warning_prompt_delete_comment": "Es-tu sûr de vouloir supprimer ton avis ?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Commencez à importer vos données dans Trakt.",
   "button_text_import_more": "Importer plus",
   "button_label_import_more": "Réinitialiser et commencer une nouvelle importation.",
-  "import_vip_limit_exceeded": "Votre importation dépasse la limite gratuite. Passez à VIP pour importer les {count} éléments. Ne restez pas dans les coulisses, devenez VIP pour que votre collection soit la vedette !"
+  "import_vip_limit_exceeded": "Votre importation dépasse la limite gratuite. Passez à VIP pour importer les {count} éléments. Ne restez pas dans les coulisses, devenez VIP pour que votre collection soit la vedette !",
+  "button_label_edit_comment": "Modifier la critique"
 }

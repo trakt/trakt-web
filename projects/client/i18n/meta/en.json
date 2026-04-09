@@ -5411,8 +5411,15 @@
       "default": "Edit",
       "description": "Text for the button that allows a user to edit a review.",
       "exclude": [
+        "android"
+      ]
+    },
+    "button_label_edit_comment": {
+      "default": "Edit Review",
+      "description": "Aria-label for the button that allows a user to edit a review.",
+      "exclude": [
         "android",
-        "web"
+        "ios"
       ]
     },
     "button_text_delete_comment": {

@@ -58,7 +58,7 @@
               {media}
               {reset}
               {setReplying}
-              type={props.type}
+              {...props}
               isReplying={isReplying(comment.id)}
               shouldScrollIntoView={comment.id === source?.id}
             />

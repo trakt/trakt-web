@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Спойлер!",
   "button_text_remove_from_watchlist": "Премахни от списъка",
   "button_text_stop_check_in": "Спри проверка",
+  "button_text_edit_comment": "Редактирай",
   "button_text_delete_comment": "Изтрий ревюто",
   "button_label_delete_comment": "Изтрий ревюто",
   "warning_prompt_delete_comment": "Сигурни ли сте, че искате да изтриете ревюто си?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Започнете импортирането на вашите данни в Trakt.",
   "button_text_import_more": "Още",
   "button_label_import_more": "Нулиране и започване на нов импорт.",
-  "import_vip_limit_exceeded": "Вашият импорт надвишава лимита за безплатен акаунт. Станете VIP, за да импортирате всички {count} елемента и да не изпускате нито един кадър!"
+  "import_vip_limit_exceeded": "Вашият импорт надвишава лимита за безплатен акаунт. Станете VIP, за да импортирате всички {count} елемента и да не изпускате нито един кадър!",
+  "button_label_edit_comment": "Редактиране на ревю"
 }

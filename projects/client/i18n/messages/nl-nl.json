@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Spoilerwaarschuwing",
   "button_text_remove_from_watchlist": "Verwijderen van de watchlist",
   "button_text_stop_check_in": "Check-in stoppen",
+  "button_text_edit_comment": "Bewerken",
   "button_text_delete_comment": "Beoordeling verwijderen",
   "button_label_delete_comment": "Beoordeling verwijderen",
   "warning_prompt_delete_comment": "Weet je zeker dat je je beoordeling wilt verwijderen?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Begin met het importeren van je data naar Trakt.",
   "button_text_import_more": "Meer",
   "button_label_import_more": "Reset en start een nieuwe import.",
-  "import_vip_limit_exceeded": "Je import overschrijdt de gratis limiet. Upgrade naar VIP om alle {count} items te importeren en word de regisseur van je eigen bibliotheek!"
+  "import_vip_limit_exceeded": "Je import overschrijdt de gratis limiet. Upgrade naar VIP om alle {count} items te importeren en word de regisseur van je eigen bibliotheek!",
+  "button_label_edit_comment": "Recensie bewerken"
 }
