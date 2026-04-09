@@ -1,0 +1,54 @@
+name: 🎨 Suggest a Design Improvement
+description: Share a visual or UX improvement you'd like to see
+labels: ["design"]
+assignees:
+  - ElMagnea
+body:
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: This project has a Code of Conduct that all participants are expected to understand and follow.
+      options:
+        - label: I have read and agree to the project's [Code of Conduct](https://github.com/trakt/trakt-web/blob/main/.github/CODE_OF_CONDUCT.md)
+          required: true
+
+  - type: textarea
+    attributes:
+      label: Where did you notice the design improvement?
+      description: Please link to the page, section, or flow you have in mind.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: What do you see as an improvement?
+      description: |
+        - Describe what could look, feel, or work better.
+        - Focus on the design or UX improvement you would like to see.
+        - Share what feels unclear, outdated, inconsistent, or visually off to you.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: How should it ideally feel or look instead?
+      description: A clear and concise description of the direction, experience, or visual outcome you would prefer.
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Screenshots or visual references
+      description: |
+        - If possible, add screenshots, mockups, or links to visual references here.
+        - Before/after examples are especially helpful.
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Add any other context that could help explain the improvement idea.
+    validations:
+      required: false
