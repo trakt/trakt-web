@@ -17,6 +17,7 @@ function makeFetchMock(
     const urlStr = String(url);
     if (urlStr.includes('type=PTR')) {
       return Promise.resolve({
+        ok: true,
         json: () =>
           Promise.resolve({
             Answer: ptrHostname
@@ -26,6 +27,7 @@ function makeFetchMock(
       });
     }
     return Promise.resolve({
+      ok: true,
       json: () =>
         Promise.resolve({
           Answer: aAddress ? [{ data: aAddress }] : undefined,
@@ -111,6 +113,14 @@ describe('isLegitimateBot', () => {
     vi.stubGlobal(
       'fetch',
       vi.fn().mockRejectedValue(new Error('Network error')),
+    );
+    expect(await isLegitimateBot(GOOGLEBOT_UA, '66.249.77.140')).toBe(false);
+  });
+
+  it('should return false when the DoH endpoint returns a non-OK response', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({ ok: false, status: 503 }),
     );
     expect(await isLegitimateBot(GOOGLEBOT_UA, '66.249.77.140')).toBe(false);
   });

@@ -23,11 +23,16 @@ function identifyBotType(userAgent: string): BotType | null {
 
 async function reverseIpLookup(ip: string): Promise<string> {
   const ptr = ip.split('.').reverse().join('.') + '.in-addr.arpa';
-  const url = `${DOH_ENDPOINT}?name=${ptr}&type=PTR`;
+  const url = `${DOH_ENDPOINT}?name=${encodeURIComponent(ptr)}&type=PTR`;
 
   const response = await fetch(url, {
     headers: { accept: 'application/dns-json' },
   });
+
+  if (!response.ok) {
+    throw new Error(`DNS PTR query failed: ${response.status}`);
+  }
+
   const data = await response.json<{ Answer?: { data: string }[] }>();
   const hostname = data.Answer?.at(0)?.data?.replace(/\.$/, '');
 
@@ -39,11 +44,16 @@ async function reverseIpLookup(ip: string): Promise<string> {
 }
 
 async function forwardDnsLookup(hostname: string): Promise<string> {
-  const url = `${DOH_ENDPOINT}?name=${hostname}&type=A`;
+  const url = `${DOH_ENDPOINT}?name=${encodeURIComponent(hostname)}&type=A`;
 
   const response = await fetch(url, {
     headers: { accept: 'application/dns-json' },
   });
+
+  if (!response.ok) {
+    throw new Error(`DNS A query failed: ${response.status}`);
+  }
+
   const data = await response.json<{ Answer?: { data: string }[] }>();
   const address = data.Answer?.at(0)?.data;
 
