@@ -49,36 +49,36 @@ function removeNavigationCache() {
 
 addEventListener('message', (event) => {
   if (event.data?.type === WorkerMessage.CacheBust) {
-    removeNavigationCache();
+    event.waitUntil(removeNavigationCache());
   }
 });
 
 // Precache static assets
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Navigation routes
+// Navigation routes — StaleWhileRevalidate serves from cache immediately,
+// eliminating any risk of a navigation fetch stalling the browser (e.g. Safari).
 const navigationHandler = new StaleWhileRevalidate({
   cacheName: CacheKey.navigation,
 });
 
 registerRoute(
   new NavigationRoute(async (context) => {
-    const url = new URL(context.request.url);
-    const hasCacheParam = url.searchParams.has('_cb');
+    try {
+      const url = new URL(context.request.url);
+      const hasCacheParam = url.searchParams.has('_cb');
 
-    if (hasCacheParam) {
-      // Delete the entire navigation cache
-      await removeNavigationCache();
+      if (hasCacheParam) {
+        await removeNavigationCache();
+        url.searchParams.delete('_cb');
+        return Response.redirect(url.toString(), 302);
+      }
 
-      // Remove _cb param and redirect
-      url.searchParams.delete('_cb');
-      return new Response(
-        `<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=${url.toString()}"></head><body></body></html>`,
-        { headers: { 'Content-Type': 'text/html' } },
-      );
+      return await navigationHandler.handle(context);
+    } catch {
+      // Fallback to a direct network fetch so the browser never hangs.
+      return fetch(context.request);
     }
-
-    return await navigationHandler.handle(context);
   }),
 );
 
