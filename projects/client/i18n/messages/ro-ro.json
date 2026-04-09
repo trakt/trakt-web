@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Alertă spoiler",
   "button_text_remove_from_watchlist": "Elimină din lista de urmărire",
   "button_text_stop_check_in": "Oprește check-in-ul",
+  "button_text_edit_comment": "Editează",
   "button_text_delete_comment": "Șterge Recenzia",
   "button_label_delete_comment": "Șterge Recenzia",
   "warning_prompt_delete_comment": "Ești sigur că vrei să ștergi recenzia?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Începe importul datelor tale în Trakt.",
   "button_text_import_more": "Mai mult",
   "button_label_import_more": "Resetează și începe un nou import.",
-  "import_vip_limit_exceeded": "Importul tău depășește limita contului gratuit. Treci la VIP pentru a importa toate cele {count} elemente și a nu pierde niciun capitol din povestea ta!"
+  "import_vip_limit_exceeded": "Importul tău depășește limita contului gratuit. Treci la VIP pentru a importa toate cele {count} elemente și a nu pierde niciun capitol din povestea ta!",
+  "button_label_edit_comment": "Editează recenzia"
 }

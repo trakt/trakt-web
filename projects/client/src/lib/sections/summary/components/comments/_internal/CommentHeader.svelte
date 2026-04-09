@@ -1,16 +1,32 @@
 <script lang="ts">
-  import { getLocale } from "$lib/features/i18n";
-  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
-  import type { MediaComment } from "$lib/requests/models/MediaComment";
+  import { useUser } from "$lib/features/auth/stores/useUser.ts";
+  import { getLocale } from "$lib/features/i18n/index.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import type { MediaComment } from "$lib/requests/models/MediaComment.ts";
+  import type { MediaEntry } from "$lib/requests/models/MediaEntry.ts";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
-  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
+  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay.ts";
   import TextCardHeader from "../../_internal/TextCardHeader.svelte";
-  import DeleteCommentButton from "./comment-actions/DeleteCommentButton.svelte";
+  import type {
+    EpisodeCommentProps,
+    MediaCommentProps,
+  } from "../CommentsProps.ts";
+  import CommentActions from "./comment-actions/CommentActions.svelte";
   import CommenterRating from "./CommenterRating.svelte";
+  import AddReviewDrawer from "./drawers/AddReviewDrawer.svelte";
 
-  const { comment, type }: { comment: MediaComment; type: ExtendedMediaType } =
-    $props();
+  type CommentHeaderProps = {
+    comment: MediaComment;
+    media: MediaEntry;
+  } & (MediaCommentProps | EpisodeCommentProps);
+
+  const { comment, media, ...typeProps }: CommentHeaderProps = $props();
+
+  let isEditOpen = $state(false);
+
+  const { user } = useUser();
+  const isOwnComment = $derived(comment.user.id === $user.id);
 </script>
 
 <div class="trakt-comment-header">
@@ -21,12 +37,36 @@
 
     {#snippet actions()}
       <CommenterRating {comment} />
-      <DeleteCommentButton {comment} {type} />
+
+      <RenderFor audience="authenticated">
+        {#if isOwnComment}
+          <CommentActions
+            {comment}
+            type={typeProps.type}
+            onEdit={() => (isEditOpen = true)}
+          />
+        {/if}
+      </RenderFor>
     {/snippet}
 
     <UserProfileLink user={comment.user} />
   </TextCardHeader>
 </div>
+
+{#if isEditOpen}
+  <AddReviewDrawer
+    onClose={() => {
+      isEditOpen = false;
+    }}
+    onCommentPost={() => {
+      isEditOpen = false;
+    }}
+    mode="edit"
+    {comment}
+    {media}
+    {...typeProps}
+  />
+{/if}
 
 <style>
   .trakt-comment-header {

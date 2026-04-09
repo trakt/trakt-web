@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Спойлер!",
   "button_text_remove_from_watchlist": "Видалити зі списку перегляду",
   "button_text_stop_check_in": "Зупинити відмітку перегляду",
+  "button_text_edit_comment": "Редагувати",
   "button_text_delete_comment": "Видалити відгук",
   "button_label_delete_comment": "Видалити відгук",
   "warning_prompt_delete_comment": "Ви впевнені, що хочете видалити свій відгук?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Почати імпорт ваших даних у Trakt.",
   "button_text_import_more": "Ще імпорт",
   "button_label_import_more": "Очистити та почати новий імпорт.",
-  "import_vip_limit_exceeded": "Ваш імпорт перевищує ліміт безкоштовного плану. Станьте VIP, щоб зберегти всі {count} скарбів вашої кіноколекції."
+  "import_vip_limit_exceeded": "Ваш імпорт перевищує ліміт безкоштовного плану. Станьте VIP, щоб зберегти всі {count} скарбів вашої кіноколекції.",
+  "button_label_edit_comment": "Редагувати відгук"
 }

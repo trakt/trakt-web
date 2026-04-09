@@ -3,6 +3,7 @@ import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { editCommentRequest } from '$lib/requests/queries/comments/editCommentRequest.ts';
 import { postCommentRequest } from '$lib/requests/queries/comments/postCommentRequest.ts';
 import { replyCommentRequest } from '$lib/requests/queries/comments/replyCommentRequest.ts';
 import { CommentError } from '$lib/sections/summary/components/comments/_internal/models/CommentError.ts';
@@ -24,7 +25,13 @@ type PostProps = {
   commentType: 'post';
 } & CommentsProps;
 
-export type UseAddCommentProps = ReplyProps | PostProps;
+type EditProps = {
+  id: number;
+  commentType: 'edit';
+  type: ExtendedMediaType;
+};
+
+export type UseAddCommentProps = ReplyProps | PostProps | EditProps;
 
 type PostCommentProps = {
   comment: string;
@@ -50,6 +57,13 @@ function addCommentRequest(props: PostCommentProps) {
     spoiler: props.isSpoiler,
   };
 
+  if (props.commentType === 'edit') {
+    return editCommentRequest({
+      id: props.id,
+      body: commonProps,
+    });
+  }
+
   if (props.commentType === 'reply') {
     return replyCommentRequest({
       id: props.id,
@@ -67,6 +81,20 @@ function addCommentRequest(props: PostCommentProps) {
   return postCommentRequest({ body });
 }
 
+function toInvalidations(props: PostCommentProps) {
+  switch (props.commentType) {
+    case 'post':
+      return [InvalidateAction.Comment.Post(props.type)];
+    case 'reply':
+      return [InvalidateAction.Comment.Reply(props.type)];
+    case 'edit':
+      return [
+        InvalidateAction.Comment.Post(props.type),
+        InvalidateAction.Comment.Reply(props.type),
+      ];
+  }
+}
+
 export function usePostComment() {
   const { user } = useUser();
   const isCommenting = new BehaviorSubject(false);
@@ -81,9 +109,7 @@ export function usePostComment() {
       return null;
     }
 
-    const invalidateAction = props.commentType === 'reply'
-      ? InvalidateAction.Comment.Reply(props.type)
-      : InvalidateAction.Comment.Post(props.type);
+    const invalidateActions = toInvalidations(props);
 
     isCommenting.next(true);
 
@@ -98,7 +124,7 @@ export function usePostComment() {
 
       track({ action: props.commentType });
       const result = await addCommentRequest(props);
-      await invalidate(invalidateAction);
+      await Promise.all(invalidateActions.map(invalidate));
 
       isCommenting.next(false);
       return result;

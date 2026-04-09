@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Alerta de spoiler",
   "button_text_remove_from_watchlist": "Remover da lista",
   "button_text_stop_check_in": "Parar check-in",
+  "button_text_edit_comment": "Editar",
   "button_text_delete_comment": "Excluir Avaliação",
   "button_label_delete_comment": "Excluir Avaliação",
   "warning_prompt_delete_comment": "Tem certeza de que deseja excluir sua avaliação?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Comece a importar seus dados para o Trakt.",
   "button_text_import_more": "Importar +",
   "button_label_import_more": "Redefinir e começar uma nova importação.",
-  "import_vip_limit_exceeded": "Sua importação excede o limite gratuito. Vire VIP para importar todos os {count} itens e não perder nenhum capítulo dessa história!"
+  "import_vip_limit_exceeded": "Sua importação excede o limite gratuito. Vire VIP para importar todos os {count} itens e não perder nenhum capítulo dessa história!",
+  "button_label_edit_comment": "Editar Resenha"
 }

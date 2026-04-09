@@ -32,7 +32,10 @@
 <form
   bind:this={formElement}
   class="trakt-form"
-  onsubmit={onSubmit}
+  onsubmit={(e) => {
+    e.preventDefault();
+    onSubmit();
+  }}
   oninput={checkFormValidity}
 >
   <div class="trakt-form-content">

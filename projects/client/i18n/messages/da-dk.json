@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Spoileradvarsel",
   "button_text_remove_from_watchlist": "Fjern fra listen",
   "button_text_stop_check_in": "Stop check-in",
+  "button_text_edit_comment": "Rediger",
   "button_text_delete_comment": "Slet anmeldelse",
   "button_label_delete_comment": "Slet anmeldelse",
   "warning_prompt_delete_comment": "Er du sikker på, at du vil slette din anmeldelse?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Start importen af dine data til Trakt.",
   "button_text_import_more": "Importér mere",
   "button_label_import_more": "Nulstil og start en ny import.",
-  "import_vip_limit_exceeded": "Din import overskrider grænsen for gratis-brugere. Gør din filmaften komplet med VIP for at importere alle {count} elementer."
+  "import_vip_limit_exceeded": "Din import overskrider grænsen for gratis-brugere. Gør din filmaften komplet med VIP for at importere alle {count} elementer.",
+  "button_label_edit_comment": "Rediger anmeldelse"
 }

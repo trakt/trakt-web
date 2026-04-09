@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Spoiler-varning",
   "button_text_remove_from_watchlist": "Ta bort från listan",
   "button_text_stop_check_in": "Stoppa check-in",
+  "button_text_edit_comment": "Redigera",
   "button_text_delete_comment": "Radera recension",
   "button_label_delete_comment": "Radera recension",
   "warning_prompt_delete_comment": "Är du säker på att du vill radera din recension?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Börja importera din data till Trakt.",
   "button_text_import_more": "Importera mer",
   "button_label_import_more": "Återställ och påbörja en ny import.",
-  "import_vip_limit_exceeded": "Din import överskrider gratisgränsen. Precis som i en välregisserad serie krävs rätt behörighet för hela upplevelsen – uppgradera till VIP för att importera alla {count} objekt."
+  "import_vip_limit_exceeded": "Din import överskrider gratisgränsen. Precis som i en välregisserad serie krävs rätt behörighet för hela upplevelsen – uppgradera till VIP för att importera alla {count} objekt.",
+  "button_label_edit_comment": "Redigera recension"
 }

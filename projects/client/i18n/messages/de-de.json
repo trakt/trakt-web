@@ -612,6 +612,7 @@
   "text_spoiler_alert": "Spoiler-Warnung",
   "button_text_remove_from_watchlist": "Von der Watchlist entfernen",
   "button_text_stop_check_in": "Check-in beenden",
+  "button_text_edit_comment": "Bearbeiten",
   "button_text_delete_comment": "Bewertung löschen",
   "button_label_delete_comment": "Bewertung löschen",
   "warning_prompt_delete_comment": "Möchtest du deine Bewertung wirklich löschen?",
@@ -1042,5 +1043,6 @@
   "button_label_start_import": "Starten Sie den Import Ihrer Daten zu Trakt.",
   "button_text_import_more": "Mehr importieren",
   "button_label_import_more": "Zurücksetzen und neuen Import starten.",
-  "import_vip_limit_exceeded": "Ihr Import sprengt den Rahmen der kostenlosen Version. Gönnen Sie sich das VIP-Backstage-Ticket, um alle {count} Einträge zu importieren!"
+  "import_vip_limit_exceeded": "Ihr Import sprengt den Rahmen der kostenlosen Version. Gönnen Sie sich das VIP-Backstage-Ticket, um alle {count} Einträge zu importieren!",
+  "button_label_edit_comment": "Rezension bearbeiten"
 }
