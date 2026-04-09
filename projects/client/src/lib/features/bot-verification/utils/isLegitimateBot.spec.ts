@@ -13,7 +13,7 @@ function makeFetchMock(
   ptrHostname: string | null,
   aAddress: string | null,
 ): typeof fetch {
-  return vi.fn().mockImplementation((url: string) => {
+  return vi.fn().mockImplementation((url: RequestInfo | URL) => {
     const urlStr = String(url);
     if (urlStr.includes('type=PTR')) {
       return Promise.resolve({
