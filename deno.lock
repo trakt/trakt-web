@@ -7,7 +7,6 @@
     "npm:@cucumber/cucumber@12.6.0": "12.6.0_@cucumber+gherkin@37.0.1_@cucumber+message-streams@4.0.1__@cucumber+messages@31.2.0_@cucumber+messages@31.2.0",
     "npm:@eslint/js@^10.0.1": "10.0.1_eslint@10.0.0",
     "npm:@ethercorps/sveltekit-og@4.2.1": "4.2.1_@sveltejs+kit@2.55.0__@sveltejs+vite-plugin-svelte@7.0.0___svelte@5.51.3____acorn@8.15.0___vite@8.0.1____esbuild@0.27.4____sass-embedded@1.97.3__svelte@5.51.3___acorn@8.15.0__typescript@5.8.3__vite@8.0.1___esbuild@0.27.4___sass-embedded@1.97.3",
-    "npm:@google/generative-ai@0.24.1": "0.24.1",
     "npm:@inlang/paraglide-js@2.12.0": "2.12.0",
     "npm:@jsr/libn__fuzzy@0.4": "0.4.0",
     "npm:@jsr/trakt__api@0.4.4": "0.4.4_openapi3-ts@4.5.0",
@@ -5749,15 +5748,15 @@
     "pako@0.2.9": {
       "integrity": "sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA=="
     },
+    "papaparse@5.5.3": {
+      "integrity": "sha512-5QvjGxYVjxO59MGU2lHVYpRWBBtKHnlIAcSe1uNFCkkptUh63NFRj0FJQm7nR67puEruUci/ZkjmEFrjCAyP4A=="
+    },
     "parse-css-color@0.2.1": {
       "integrity": "sha512-bwS/GGIFV3b6KS4uwpzCFj4w297Yl3uqnSgIPsoQkx7GMLROXfMnWvxfNkL0oh8HVhZA4hvJoEoEIqonfJ3BWg==",
       "dependencies": [
         "color-name",
         "hex-rgb"
       ]
-    },
-    "papaparse@5.5.3": {
-      "integrity": "sha512-5QvjGxYVjxO59MGU2lHVYpRWBBtKHnlIAcSe1uNFCkkptUh63NFRj0FJQm7nR67puEruUci/ZkjmEFrjCAyP4A=="
     },
     "parse-json@8.3.0": {
       "integrity": "sha512-ybiGyvspI+fAoRQbIPRddCcSTV9/LsJbf0e/S85VLowVGzRmokfneg2kwVW/KU5rOXrPSbF1qAKPMgNTqqROQQ==",
@@ -7721,7 +7720,6 @@
             "npm:@cucumber/cucumber@12.6.0",
             "npm:@eslint/js@^10.0.1",
             "npm:@ethercorps/sveltekit-og@4.2.1",
-            "npm:@google/generative-ai@0.24.1",
             "npm:@inlang/paraglide-js@2.12.0",
             "npm:@jsr/libn__fuzzy@0.4",
             "npm:@jsr/trakt__api@0.4.4",
