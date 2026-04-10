@@ -1,13 +1,19 @@
 import type { Handle } from '@sveltejs/kit';
-import { isLegitimateBot } from './utils/isLegitimateBot.ts';
 
-export const handle: Handle = async ({ event, resolve }) => {
-  const userAgent = event.request.headers.get('user-agent') || '';
-  const ipAddress = event.getClientAddress();
+/**
+ * Checks if the request comes from a Search Engine Crawler using
+ * Cloudflare's bot category detection.
+ *
+ * @see https://developers.cloudflare.com/bots/concepts/bot/verified-bots/
+ */
+function isLegitimateBot(request: Request): boolean {
+  const verifiedBotCategory = (request as { cf?: { verifiedBotCategory?: string } })
+    .cf?.verifiedBotCategory;
+  return verifiedBotCategory === 'Search Engine Crawler';
+}
 
-  // Verify if this is a legitimate bot via reverse DNS
-  const legitimate = await isLegitimateBot(userAgent, ipAddress);
-  event.locals.isLegitimateBot = legitimate;
+export const handle: Handle = ({ event, resolve }) => {
+  event.locals.isLegitimateBot = isLegitimateBot(event.request);
 
   return resolve(event);
 };
