@@ -22,6 +22,7 @@ jobs:
       cancel-in-progress: true
     outputs:
       client_source: ${{ steps.changes.outputs.client_source }}
+      i18n_source: ${{ steps.changes.outputs.i18n_source }}
       workflows: ${{ steps.changes.outputs.workflows }}
     steps:
       - name: Unveiling the Repository
@@ -34,23 +35,89 @@ jobs:
           filters: |
             client_source:
               - 'projects/client/src/**'
-              - 'projects/client/i18n/**'
               - 'projects/client/static/**'
+              - 'projects/client/i18n/generator/**'
+              - 'projects/client/i18n/schema/**'
+              - 'projects/client/i18n/messages/**'
+              - 'projects/client/i18n/project.inlang/**'
               - 'projects/client/e2e/**'
               - 'projects/client/package.json'
               - 'projects/client/deno.json'
               - 'projects/client/svelte.config.js'
               - 'projects/client/vite.config.ts'
               - 'projects/client/wrangler.jsonc'
+            i18n_source:
+              - 'projects/client/i18n/meta/**'
             workflows:
               - '.github/workflows/**'
               - '.github/actions/**'
 
-  test:
+  localize:
     needs: files-changed
     if: ${{
-      needs.files-changed.outputs.client_source == 'true' ||
-      needs.files-changed.outputs.workflows == 'true'
+      github.ref == 'refs/heads/main' &&
+      github.head_ref != 'i18n_crowdin_main' &&
+      needs.files-changed.outputs.i18n_source == 'true'
+      }}
+    name: The Translation Pit (Localize)
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ci-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Summoning the GitHub App Token
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ secrets.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-contents: write
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+
+      - name: Upload Sources to Crowdin
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: true
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Pre-Translate
+        uses: crowdin/github-action@v2
+        with:
+          command: 'pre-translate'
+          command_args: '--method ai --ai-prompt=${{ secrets.CROWDIN_AI_PROMPT_ID }}'
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Download Bundles
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: false
+          upload_translations: false
+          download_translations: false
+          # Bundle ID 6 refers to our 'Web' export bundle in CrowdIn
+          download_bundle: 6
+          skip_untranslated_strings: true
+          create_pull_request: false
+          localization_branch_name: main
+          commit_message: 'feat(i18n): update translations [skip ci]'
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+  test:
+    needs: [files-changed, localize]
+    if: ${{ always() &&
+      needs.localize.result != 'failure' &&
+      (needs.files-changed.outputs.client_source == 'true' ||
+      needs.files-changed.outputs.workflows == 'true')
       }}
     name: "The Interrogation Room (Test) [${{ matrix.shard }}/4]"
     runs-on: ubuntu-latest
@@ -87,8 +154,9 @@ jobs:
           retention-days: 1
 
   typecheck:
-    needs: files-changed
-    if: ${{
+    needs: [files-changed, localize]
+    if: ${{ always() &&
+      needs.localize.result != 'failure' &&
       needs.files-changed.outputs.client_source == 'true' ||
       needs.files-changed.outputs.workflows == 'true'
       }}
@@ -152,11 +220,11 @@ jobs:
   e2e:
     needs: files-changed
     if: ${{
-      github.ref != 'refs/heads/main' &&
-        (
-          needs.files-changed.outputs.client_source == 'true' ||
-          needs.files-changed.outputs.workflows == 'true'
-        )
+      github.ref != 'refs/heads/main' && github.head_ref != 'i18n_crowdin_main' &&
+      (
+      needs.files-changed.outputs.client_source == 'true' ||
+      needs.files-changed.outputs.workflows == 'true'
+      )
       }}
     name: The Trials of Interface (E2E)
     runs-on: ubuntu-latest
