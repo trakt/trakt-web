@@ -32,7 +32,7 @@ export function expandIPv6(ip: string): string {
     const left = halves[0] ? halves[0].split(':') : [];
     const right = halves[1] ? halves[1].split(':') : [];
     const missing = 8 - left.length - right.length;
-    const middle = Array<string>(missing).fill('0000');
+    const middle = Array(missing).fill('0000') as string[];
     return [...left, ...middle, ...right].map((g) => g.padStart(4, '0')).join(
       ':',
     );
@@ -112,11 +112,9 @@ export async function isLegitimateBot(
     const ipv6 = isIPv6(ipAddress);
     const resolvedIp = await forwardDnsLookup(hostname, ipv6 ? 'AAAA' : 'A');
 
-    if (ipv6) {
-      return expandIPv6(resolvedIp) === expandIPv6(ipAddress);
-    }
-
-    return resolvedIp === ipAddress;
+    return ipv6
+      ? expandIPv6(resolvedIp) === expandIPv6(ipAddress)
+      : resolvedIp === ipAddress;
   } catch (e) {
     // If DNS lookups fail, assume not a legitimate bot
     error('Bot verification failed:', { userAgent, ipAddress, error: e });
