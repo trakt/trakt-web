@@ -4,36 +4,39 @@
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import type { Snippet } from "svelte";
   import { dateKey } from "./dateKey";
-  import EmptyPeriod from "./EmptyPeriod.svelte";
 
   const {
     calendar,
     item,
     layout,
+    order = "chronological",
     empty,
   }: {
     calendar: { date: Date; items: T[] }[];
     item: Snippet<[T]>;
+    empty: Snippet;
     layout: "list" | "grid";
-    empty?: Snippet;
+    order?: "chronological" | "reverse-chronological";
   } = $props();
 
   const isEmpty = $derived(calendar.every((day) => day.items.length === 0));
+  const orderedCalendar = $derived(
+    order === "chronological" ? calendar : calendar.toReversed(),
+  );
 </script>
 
 <div class="trakt-calendar-items" data-layout={layout}>
   {#if isEmpty}
-    <EmptyPeriod />
+    {@render empty()}
   {:else}
-    {#each calendar as day (dateKey(day.date))}
-      {#if empty ?? day.items.length > 0}
+    {#each orderedCalendar as day (dateKey(day.date))}
+      {#if day.items.length > 0}
         <div id={dateKey(day.date)} class="calendar-day-anchor">
           <GridList
             title={toHumanDay(day.date, getLocale())}
             items={day.items}
             id={dateKey(day.date)}
             {item}
-            {empty}
           />
         </div>
       {/if}

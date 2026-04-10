@@ -43,7 +43,7 @@ export function scrollSpy(
 
   function scrollToId(id: string) {
     requestAnimationFrame(() => {
-      node.querySelector(`#${id}`)?.scrollIntoView({
+      document.getElementById(id)?.scrollIntoView({
         block: 'start',
         behavior: 'auto',
       });
@@ -55,6 +55,12 @@ export function scrollSpy(
   if (currentParams.initialId) {
     scrollToId(currentParams.initialId);
   }
+
+  const mutationObserver = new MutationObserver(() => {
+    observeElements();
+  });
+
+  mutationObserver.observe(node, { childList: true, subtree: true });
 
   return {
     update(newParams: typeof params) {
@@ -68,6 +74,7 @@ export function scrollSpy(
     },
     destroy() {
       observer.disconnect();
+      mutationObserver.disconnect();
       visibilityMap.clear();
     },
   };
