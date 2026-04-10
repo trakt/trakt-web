@@ -21,8 +21,31 @@ function identifyBotType(userAgent: string): BotType | null {
   return null;
 }
 
+export function isIPv6(ip: string): boolean {
+  return ip.includes(':');
+}
+
+export function expandIPv6(ip: string): string {
+  const halves = ip.split('::');
+
+  if (halves.length === 2) {
+    const left = halves[0] ? halves[0].split(':') : [];
+    const right = halves[1] ? halves[1].split(':') : [];
+    const missing = 8 - left.length - right.length;
+    const middle = Array<string>(missing).fill('0000');
+    return [...left, ...middle, ...right].map((g) => g.padStart(4, '0')).join(
+      ':',
+    );
+  }
+
+  return ip.split(':').map((g) => g.padStart(4, '0')).join(':');
+}
+
 async function reverseIpLookup(ip: string): Promise<string> {
-  const ptr = ip.split('.').reverse().join('.') + '.in-addr.arpa';
+  const ptr = isIPv6(ip)
+    ? expandIPv6(ip).replace(/:/g, '').split('').reverse().join('.') +
+      '.ip6.arpa'
+    : ip.split('.').reverse().join('.') + '.in-addr.arpa';
   const url = `${DOH_ENDPOINT}?name=${encodeURIComponent(ptr)}&type=PTR`;
 
   const response = await fetch(url, {
@@ -43,22 +66,26 @@ async function reverseIpLookup(ip: string): Promise<string> {
   return hostname;
 }
 
-async function forwardDnsLookup(hostname: string): Promise<string> {
-  const url = `${DOH_ENDPOINT}?name=${encodeURIComponent(hostname)}&type=A`;
+async function forwardDnsLookup(
+  hostname: string,
+  recordType: 'A' | 'AAAA',
+): Promise<string> {
+  const url =
+    `${DOH_ENDPOINT}?name=${encodeURIComponent(hostname)}&type=${recordType}`;
 
   const response = await fetch(url, {
     headers: { accept: 'application/dns-json' },
   });
 
   if (!response.ok) {
-    throw new Error(`DNS A query failed: ${response.status}`);
+    throw new Error(`DNS ${recordType} query failed: ${response.status}`);
   }
 
   const data = (await response.json()) as { Answer?: { data: string }[] };
   const address = data.Answer?.at(0)?.data;
 
   if (!address) {
-    throw new Error(`No A record found for hostname: ${hostname}`);
+    throw new Error(`No ${recordType} record found for hostname: ${hostname}`);
   }
 
   return address;
@@ -82,7 +109,13 @@ export async function isLegitimateBot(
     }
 
     // Step 3: Forward DNS lookup to verify hostname resolves back to original IP
-    const resolvedIp = await forwardDnsLookup(hostname);
+    const ipv6 = isIPv6(ipAddress);
+    const resolvedIp = await forwardDnsLookup(hostname, ipv6 ? 'AAAA' : 'A');
+
+    if (ipv6) {
+      return expandIPv6(resolvedIp) === expandIPv6(ipAddress);
+    }
+
     return resolvedIp === ipAddress;
   } catch (e) {
     // If DNS lookups fail, assume not a legitimate bot
