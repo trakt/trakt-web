@@ -16,15 +16,6 @@ export interface MetaMessages {
         enabled: boolean;
         outputPath: string;
       };
-      android?: {
-        enabled: boolean;
-        outputPath: string;
-        resourceName: string;
-      };
-      ios?: {
-        enabled: boolean;
-        outputPath: string;
-      };
     };
   };
   messages: Record<string, MetaMessageDefinition>;

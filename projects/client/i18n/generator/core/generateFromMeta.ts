@@ -9,6 +9,7 @@ import { GeneratorFactory } from '../factory/GeneratorFactory.ts';
 import type { GenerationResult } from '../model/GenerationResult.ts';
 import type { MetaMessages } from '../model/MetaMessages.ts';
 import { Platform } from '../model/Platform.ts';
+import { writeFile } from '../utils/writeFile.ts';
 import { I18nGenerator } from './I18nGenerator.ts';
 
 async function readMetaFile(
@@ -17,9 +18,40 @@ async function readMetaFile(
 ): Promise<MetaMessages> {
   const filePath = path.join(inputPath, file);
   const content = await fs.promises.readFile(filePath, 'utf-8');
-  const metaMessages: MetaMessages = JSON.parse(content);
+  return JSON.parse(content);
+}
 
-  return metaMessages;
+async function pruneStaleLocaleMessages(
+  outputDir: string,
+  validKeys: ReadonlySet<string>,
+): Promise<void> {
+  const messagesDir = path.join(outputDir, 'messages');
+
+  let files: string[];
+  try {
+    files = await fs.promises.readdir(messagesDir);
+  } catch {
+    return;
+  }
+
+  const localeFiles = files.filter(
+    (f) => f.endsWith('.json') && f !== 'en.json',
+  );
+
+  for (const file of localeFiles) {
+    const filePath = path.join(messagesDir, file);
+    const content = await fs.promises.readFile(filePath, 'utf-8');
+    const messages: Record<string, string> = JSON.parse(content);
+
+    const pruned = Object.fromEntries(
+      Object.entries(messages).filter(
+        ([key]) => key === '$schema' || validKeys.has(key),
+      ),
+    );
+
+    await writeFile(filePath, JSON.stringify(pruned, null, 2));
+    console.log(`Pruned stale keys from: ${path.basename(filePath)}`);
+  }
 }
 
 export async function generateFromMeta(
@@ -48,53 +80,26 @@ export async function generateFromMeta(
     );
   }
 
-  // Load all meta files
-  const metaMessagesList: MetaMessages[] = [];
   const englishMeta = await readMetaFile(inputPath, englishFile);
 
+  const metaMessagesList: MetaMessages[] = [];
   for (const file of metaFiles) {
-    const metaMessages = await readMetaFile(inputPath, file);
-    metaMessagesList.push(metaMessages);
+    metaMessagesList.push(await readMetaFile(inputPath, file));
   }
 
-  if (!englishMeta) {
-    throw new Error(
-      'en.json could not be read',
-    );
-  }
-
-  // Augment non-English locale files with platform configuration from en.json
-  for (const metaMessages of metaMessagesList) {
-    if (metaMessages === englishMeta) {
-      continue; // Skip en.json, it already has the configuration
-    }
-
-    // For each message in the current locale, copy platform configuration from en.json
-    for (const [key, definition] of Object.entries(metaMessages.messages)) {
-      const englishDefinition = englishMeta.messages[key];
-      if (englishDefinition && typeof englishDefinition === 'object') {
-        // Copy exclude, platforms, and variables configuration from English to this locale
-        if (typeof definition === 'object') {
-          if (englishDefinition.exclude) {
-            definition.exclude = [...englishDefinition.exclude];
-          }
-
-          if (englishDefinition.platforms) {
-            definition.platforms = { ...englishDefinition.platforms };
-          }
-
-          if (englishDefinition.variables) {
-            definition.variables = { ...englishDefinition.variables };
-          }
-        }
-      }
-    }
-  }
-
-  // Generate for all platforms with all locales
   const generator = new I18nGenerator(metaMessagesList);
-  const targetPlatforms = platforms ||
+  const targetPlatforms = platforms ??
     GeneratorFactory.getEnabledPlatforms(firstItem(metaMessagesList));
 
-  return generator.generatePlatforms(targetPlatforms, outputDir);
+  const results = await generator.generatePlatforms(targetPlatforms, outputDir);
+
+  const validKeys = new Set(
+    Object.entries(englishMeta.messages)
+      .filter(([_, def]) => !def.exclude?.includes(Platform.WEB))
+      .map(([key]) => key),
+  );
+  await pruneStaleLocaleMessages(outputDir, validKeys);
+
+  return results;
 }
+

@@ -10,8 +10,4 @@ export interface MetaMessageDefinition {
   description?: string;
   exclude?: Platform[];
   variables?: Record<string, MetaMessageVariable>;
-  platforms?: {
-    android?: { key?: string };
-    ios?: { key?: string };
-  };
 }

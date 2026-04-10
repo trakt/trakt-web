@@ -39,21 +39,6 @@
                 "enabled": { "type": "boolean" },
                 "outputPath": { "type": "string" }
               }
-            },
-            "android": {
-              "type": "object",
-              "properties": {
-                "enabled": { "type": "boolean" },
-                "outputPath": { "type": "string" },
-                "resourceName": { "type": "string" }
-              }
-            },
-            "ios": {
-              "type": "object",
-              "properties": {
-                "enabled": { "type": "boolean" },
-                "outputPath": { "type": "string" }
-              }
             }
           }
         }
@@ -87,38 +72,9 @@
                   "description": "Platforms to exclude this message from",
                   "items": {
                     "type": "string",
-                    "enum": ["web", "android", "ios"]
+                    "enum": ["android", "ios", "web"]
                   },
                   "uniqueItems": true
-                },
-                "platforms": {
-                  "type": "object",
-                  "description": "Platform-specific key overrides (web uses default key)",
-                  "properties": {
-                    "android": {
-                      "type": "object",
-                      "description": "Android platform overrides",
-                      "properties": {
-                        "key": {
-                          "type": "string",
-                          "description": "Custom key name for Android"
-                        }
-                      },
-                      "additionalProperties": false
-                    },
-                    "ios": {
-                      "type": "object",
-                      "description": "iOS platform overrides",
-                      "properties": {
-                        "key": {
-                          "type": "string",
-                          "description": "Custom key name for iOS"
-                        }
-                      },
-                      "additionalProperties": false
-                    }
-                  },
-                  "additionalProperties": false
                 },
                 "variables": {
                   "type": "object",
