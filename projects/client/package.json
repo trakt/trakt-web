@@ -24,18 +24,13 @@
     "test:e2e": "cucumber-js -c ./cucumber.mjs",
     "i18n:web": "deno task i18n:generate ./i18n --platforms web",
     "i18n:web:watch": "deno task i18n:generate:watch ./i18n --platforms web",
-    "i18n:sync": "deno run --allow-read --allow-write .scripts/sync-i18n.ts",
     "i18n:resolve": "deno run --allow-read --allow-write .scripts/resolve-i18n.ts",
-    "i18n:traktify": "deno run --allow-read --allow-write --allow-net --allow-env .scripts/traktify-i18n.ts",
-    "i18n:cleanse": "deno run --allow-read --allow-write --allow-env .scripts/cleanse-i18n.ts",
     "i18n:generate": "deno run --allow-read --allow-write i18n/generator/cli.ts -i i18n/meta/ -o i18n/",
-    "i18n:l10n": "deno run --allow-read --allow-write i18n/generator/l10n.ts -i i18n/ios/Localizable.xcstrings -o i18n/ios/L10n.swift",
     "i18n:generate:watch": "deno run --allow-read --allow-write i18n/generator/cli.ts -i i18n/meta/ -o i18n/ --watch"
   },
   "devDependencies": {
     "@cucumber/cucumber": "12.6.0",
     "@eslint/js": "^10.0.1",
-    "@google/generative-ai": "0.24.1",
     "@playwright/test": "1.58.2",
     "@sveltejs/adapter-auto": "7.0.1",
     "@sveltejs/adapter-cloudflare": "7.2.7",

@@ -42,15 +42,6 @@ describe('generateFromMeta', () => {
             enabled: true,
             outputPath: `./messages/${locale}.json`,
           },
-          android: {
-            enabled: true,
-            outputPath: `./android/values-${locale}/strings.xml`,
-            resourceName: 'strings',
-          },
-          ios: {
-            enabled: true,
-            outputPath: './ios/Localizable.xcstrings',
-          },
         },
       },
       messages,
@@ -104,7 +95,7 @@ describe('generateFromMeta', () => {
   });
 
   describe('successful generation', () => {
-    it('should generate resources for single locale', async () => {
+    it('should generate web resource for single locale', async () => {
       await createMetaFile('en', {
         hello: { default: 'Hello World' },
         greeting: {
@@ -117,14 +108,11 @@ describe('generateFromMeta', () => {
 
       const results = await generateFromMeta(metaDir, tempDir);
 
-      // Should generate for all enabled platforms (web, android, ios)
-      expect(results).toHaveLength(3);
-      expect(results.map((r) => r.platform)).toContain(Platform.WEB);
-      expect(results.map((r) => r.platform)).toContain(Platform.ANDROID);
-      expect(results.map((r) => r.platform)).toContain(Platform.IOS);
+      expect(results).toHaveLength(1);
+      expect(firstItem(results).platform).toBe(Platform.WEB);
     });
 
-    it('should generate resources for multiple locales', async () => {
+    it('should generate web resources for multiple locales', async () => {
       await createMetaFile('en', {
         hello: { default: 'Hello World' },
         goodbye: { default: 'Goodbye' },
@@ -136,18 +124,8 @@ describe('generateFromMeta', () => {
 
       const results = await generateFromMeta(metaDir, tempDir);
 
-      // Web: 2 files (en, es), Android: 2 files (en, es), iOS: 1 file (unified)
-      expect(results).toHaveLength(5);
-
-      const webResults = results.filter((r) => r.platform === Platform.WEB);
-      const androidResults = results.filter((r) =>
-        r.platform === Platform.ANDROID
-      );
-      const iosResults = results.filter((r) => r.platform === Platform.IOS);
-
-      expect(webResults).toHaveLength(2);
-      expect(androidResults).toHaveLength(2);
-      expect(iosResults).toHaveLength(1);
+      expect(results).toHaveLength(2);
+      expect(results.every((r) => r.platform === Platform.WEB)).toBe(true);
     });
 
     it('should use specified platforms when provided', async () => {
@@ -160,7 +138,6 @@ describe('generateFromMeta', () => {
     });
 
     it('should use enabled platforms from meta when no platforms specified', async () => {
-      // Create meta file with only web enabled
       const metaMessages: MetaMessages = {
         meta: {
           locale: 'en',
@@ -168,15 +145,6 @@ describe('generateFromMeta', () => {
             inlang: {
               enabled: true,
               outputPath: './messages/en.json',
-            },
-            android: {
-              enabled: false,
-              outputPath: './android/values-en/strings.xml',
-              resourceName: 'strings',
-            },
-            ios: {
-              enabled: false,
-              outputPath: './ios/Localizable.xcstrings',
             },
           },
         },
@@ -200,7 +168,6 @@ describe('generateFromMeta', () => {
       const outputDir = path.join(tempDir, 'output');
       const results = await generateFromMeta(metaDir, outputDir);
 
-      // Check that files were actually created
       for (const result of results) {
         expect(fs.existsSync(result.filePath)).toBe(true);
         expect(result.filePath.startsWith(outputDir)).toBe(true);
@@ -213,46 +180,112 @@ describe('generateFromMeta', () => {
         complex: {
           default: 'Complex {type} with {count} items',
           description: 'A complex message with variables',
-          platforms: {
-            android: { key: 'complex_android' },
-            ios: { key: 'complexIOS' },
-          },
           variables: {
             type: { type: 'string', description: 'Item type' },
             count: { type: 'number', description: 'Item count' },
           },
         },
         excluded: {
-          default: 'Should not appear in Android',
-          exclude: [Platform.ANDROID],
+          default: 'Should not appear in web',
+          exclude: [Platform.WEB],
         },
       });
 
       const results = await generateFromMeta(metaDir, tempDir);
 
-      expect(results).toHaveLength(3);
-
-      // Check web content
+      expect(results).toHaveLength(1);
       const webResult = results.find((r) => r.platform === Platform.WEB);
       expect(webResult).toBeDefined();
       const webContent = JSON.parse(assertDefined(webResult).content);
       expect(webContent.complex).toBe('Complex {type} with {count} items');
-      expect(webContent.excluded).toBe('Should not appear in Android');
+      expect(webContent.excluded).toBeUndefined();
+    });
+  });
 
-      // Check android content (should not contain excluded message)
-      const androidResult = results.find((r) =>
-        r.platform === Platform.ANDROID
+  describe('stale key pruning', () => {
+    it('should prune keys removed from en.json from locale message files', async () => {
+      await createMetaFile('en', { hello: { default: 'Hello World' } });
+
+      const messagesDir = path.join(tempDir, 'messages');
+      await fs.promises.mkdir(messagesDir, { recursive: true });
+      await fs.promises.writeFile(
+        path.join(messagesDir, 'fr-fr.json'),
+        JSON.stringify({
+          '$schema': 'https://inlang.com/schema/inlang-message-format',
+          'hello': 'Bonjour le monde',
+          'stale_key': 'Ce texte est périmé',
+        }),
       );
-      expect(androidResult).toBeDefined();
-      expect(assertDefined(androidResult).content).toContain('complex_android');
-      expect(assertDefined(androidResult).content).not.toContain('excluded');
 
-      // Check iOS content
-      const iosResult = results.find((r) => r.platform === Platform.IOS);
-      expect(iosResult).toBeDefined();
-      const iosContent = JSON.parse(assertDefined(iosResult).content);
-      expect(iosContent.strings.complexIOS).toBeDefined();
-      expect(iosContent.strings.excluded).toBeDefined(); // iOS should have it
+      await generateFromMeta(metaDir, tempDir);
+
+      const content = JSON.parse(
+        await fs.promises.readFile(
+          path.join(messagesDir, 'fr-fr.json'),
+          'utf-8',
+        ),
+      );
+      expect(content.hello).toBe('Bonjour le monde');
+      expect(content.stale_key).toBeUndefined();
+      expect(content.$schema).toBeDefined();
+    });
+
+    it('should not modify en.json during pruning', async () => {
+      await createMetaFile('en', { hello: { default: 'Hello World' } });
+
+      await generateFromMeta(metaDir, tempDir);
+
+      const messagesDir = path.join(tempDir, 'messages');
+      const enContent = JSON.parse(
+        await fs.promises.readFile(
+          path.join(messagesDir, 'en.json'),
+          'utf-8',
+        ),
+      );
+      expect(enContent.hello).toBe('Hello World');
+    });
+
+    it('should be a no-op when messages directory does not exist', async () => {
+      await createMetaFile('en', { hello: { default: 'Hello World' } });
+
+      const outputDir = path.join(tempDir, 'fresh-output');
+      await expect(
+        generateFromMeta(metaDir, outputDir),
+      ).resolves.not.toThrow();
+    });
+
+    it('should prune web-excluded keys from locale message files', async () => {
+      await createMetaFile('en', {
+        hello: { default: 'Hello World' },
+        android_only: {
+          default: 'Android only',
+          exclude: [Platform.WEB],
+        },
+      });
+
+      const messagesDir = path.join(tempDir, 'messages');
+      await fs.promises.mkdir(messagesDir, { recursive: true });
+      await fs.promises.writeFile(
+        path.join(messagesDir, 'fr-fr.json'),
+        JSON.stringify({
+          '$schema': 'https://inlang.com/schema/inlang-message-format',
+          'hello': 'Bonjour',
+          'android_only': 'Android uniquement',
+        }),
+      );
+
+      await generateFromMeta(metaDir, tempDir);
+
+      const content = JSON.parse(
+        await fs.promises.readFile(
+          path.join(messagesDir, 'fr-fr.json'),
+          'utf-8',
+        ),
+      );
+      expect(content.hello).toBe('Bonjour');
+      expect(content.android_only).toBeUndefined();
     });
   });
 });
+
+

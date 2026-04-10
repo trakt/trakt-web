@@ -3,7 +3,7 @@
  */
 
 export enum Platform {
-  WEB = 'web',
   ANDROID = 'android',
   IOS = 'ios',
+  WEB = 'web',
 }

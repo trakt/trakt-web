@@ -7,15 +7,6 @@
       "inlang": {
         "enabled": true,
         "outputPath": "./messages/{locale}.json"
-      },
-      "android": {
-        "enabled": true,
-        "outputPath": "./android/values-{locale}/strings.xml",
-        "resourceName": "strings"
-      },
-      "ios": {
-        "enabled": true,
-        "outputPath": "./ios/Localizable.xcstrings"
       }
     }
   },
