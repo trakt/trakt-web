@@ -12,6 +12,8 @@ import {
 import { time } from './lib/utils/timing/time.ts';
 import { CacheKey } from './worker/CacheKey.ts';
 
+const NAVIGATION_TIMEOUT_MS = time.seconds(4);
+
 declare global {
   interface ServiceWorkerGlobalScope {
     __WB_DISABLE_DEV_LOGS: boolean;
@@ -74,7 +76,15 @@ registerRoute(
         return Response.redirect(url.toString(), 302);
       }
 
-      return await navigationHandler.handle(context);
+      const navigationPromise = navigationHandler.handle(context);
+      const timeoutPromise = new Promise<Response>((_, reject) =>
+        setTimeout(
+          () => reject(new Error('Navigation timeout')),
+          NAVIGATION_TIMEOUT_MS,
+        )
+      );
+
+      return await Promise.race([navigationPromise, timeoutPromise]);
     } catch {
       // Fallback to a direct network fetch so the browser never hangs.
       return fetch(context.request);
