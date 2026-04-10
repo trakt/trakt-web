@@ -22,6 +22,7 @@ export function createCalendarContext(
           getStartOfWeek(resolvedDate, getLocale()),
         ),
         activeDate: new BehaviorSubject<Date>(resolvedDate),
+        visibleDate: new BehaviorSubject<Date | null>(null),
       },
   );
 

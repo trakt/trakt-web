@@ -7,6 +7,7 @@ import { subWeeks } from 'date-fns/subWeeks';
 import { map } from 'rxjs';
 import { AnalyticsEvent } from '../../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../../analytics/useTrack.ts';
+import { createCalendarAccumulator } from '../_internal/createCalendarAccumulator.ts';
 import type { CalendarOrder } from '../models/CalendarOrder.ts';
 import { getCalendarContext } from './getCalendarContext.ts';
 
@@ -36,34 +37,56 @@ export function useCalendarPeriod(
   options?: { order?: CalendarOrder },
 ) {
   const { order = 'chronological' } = options ?? {};
-  const { startDate, activeDate } = getCalendarContext();
+  const { startDate, activeDate, visibleDate } = getCalendarContext();
   const { track } = useTrack(AnalyticsEvent.CalendarPeriod);
+  const { accumulate, clear, canLoadMore } = createCalendarAccumulator(order);
 
-  const switchPeriod = (direction: Direction) => {
+  const navigate = (direction: Direction) => {
     track({ action: direction });
-    const date = startDate.value;
-    const newStart = getNextOrPreviousPeriod(date, direction);
+    const referenceDate = visibleDate.value ?? startDate.value;
+    const newStart = getNextOrPreviousPeriod(referenceDate, direction);
 
+    clear(newStart);
+    visibleDate.next(null);
     activeDate.next(getActiveDate(newStart, order));
+    startDate.next(newStart);
+  };
+
+  const loadMore = () => {
+    if (!canLoadMore()) {
+      return;
+    }
+
+    const direction: Direction = order === 'chronological'
+      ? 'next'
+      : 'previous';
+    const newStart = getNextOrPreviousPeriod(startDate.value, direction);
     startDate.next(newStart);
   };
 
   const reset = () => {
     track({ action: 'reset' });
-    if (isCurrentWeek(startDate.value, getLocale())) {
+    const referenceDate = visibleDate.value ?? startDate.value;
+
+    if (isCurrentWeek(referenceDate, getLocale())) {
       activeDate.next(new Date());
       return;
     }
 
-    startDate.next(getStartOfWeek(new Date(), getLocale()));
+    const newStart = getStartOfWeek(new Date(), getLocale());
+    clear(newStart);
+    visibleDate.next(null);
+    startDate.next(newStart);
     activeDate.next(new Date());
   };
 
   return {
     startDate: startDate.asObservable(),
     endDate: startDate.pipe(map((date) => addWeeks(date, 1))),
-    next: () => switchPeriod('next'),
-    previous: () => switchPeriod('previous'),
+    next: () => navigate('next'),
+    previous: () => navigate('previous'),
+    loadMore,
+    accumulate,
     activeDate,
     reset,
   };
