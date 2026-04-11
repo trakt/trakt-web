@@ -10,7 +10,7 @@
 
   type MediaSwipeProps = BaseMediaInput &
     ChildrenProps & {
-      style?: "cover" | "summary";
+      style?: "cover" | "summary" | "compact";
     };
 
   const { type, media, style, children }: MediaSwipeProps = $props();

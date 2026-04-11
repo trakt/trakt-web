@@ -1,7 +1,9 @@
 <script lang="ts">
   import { page } from "$app/state";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
+  import type { Season } from "$lib/requests/models/Season";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
+  import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import WhereToWatchDrawer from "$lib/sections/lists/where-to-watch/_internal/WhereToWatchDrawer.svelte";
   import {
     Drawers,
@@ -11,6 +13,7 @@
   import DetailsDrawer from "./components/details/DetailsDrawer.svelte";
   import type { MediaDetailsProps } from "./components/details/MediaDetailsProps";
   import HistoryDrawer from "./components/history/HistoryDrawer.svelte";
+  import SeasonsDrawer from "./components/seasons/SeasonsDrawer.svelte";
   import SentimentDrawer from "./components/sentiment/SentimentDrawer.svelte";
   import TriviaDrawer from "./components/trivia/TriviaDrawer.svelte";
   import VideoDrawer from "./components/videos/VideoDrawer.svelte";
@@ -18,10 +21,16 @@
   const {
     sentiment,
     videos,
+    seasons,
+    currentSeason,
+    showEntry,
     ...details
   }: {
     sentiment?: SentimentAnalysis | Nil;
     videos?: MediaVideo[];
+    seasons?: Season[];
+    currentSeason?: number;
+    showEntry?: ShowEntry;
   } & MediaDetailsProps = $props();
 
   const { drawer, close } = $derived(
@@ -75,4 +84,8 @@
 
 {#if drawer === Drawers.WhereToWatch}
   <WhereToWatchDrawer {...whereToWatchTarget} onClose={close} />
+{/if}
+
+{#if drawer === Drawers.Seasons && seasons && currentSeason != null && showEntry}
+  <SeasonsDrawer show={showEntry} {seasons} {currentSeason} onClose={close} />
 {/if}

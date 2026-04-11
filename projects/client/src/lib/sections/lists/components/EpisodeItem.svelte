@@ -28,6 +28,10 @@
   const isHidden = $derived(props.status === "hidden");
   const isListItem = $derived(props.variant === "list-item");
   const style = $derived(props.style ?? "cover");
+  const isCompact = $derived(style === "compact");
+  const resolvedStyle: "cover" | "summary" = $derived(
+    style === "compact" ? "summary" : style,
+  );
 
   const runtime = $derived(
     isNaN(props.episode.runtime) ? props.media.runtime : props.episode.runtime,
@@ -96,7 +100,7 @@
           total={props.episode.total}
           tags={status ? statusTag : progressTags}
           {runtime}
-          {style}
+          style={resolvedStyle}
         />
       {/if}
 
@@ -151,7 +155,7 @@
 {/snippet}
 
 {#snippet card()}
-  {#if style === "summary"}
+  {#if style === "summary" || style === "compact"}
     <MediaSummaryCard
       variant="default"
       episode={props.episode}
@@ -163,11 +167,11 @@
         },
       }}
       popupActions={props.popupActions}
+      layout={isCompact ? "compact" : "default"}
       {tag}
       badge={action}
       {sortTag}
       type="episode"
-      style="summary"
     />
   {/if}
 

@@ -269,6 +269,7 @@
     gap: var(--gap-m);
 
     overflow-y: auto;
+    scrollbar-gutter: stable;
     padding-bottom: var(--ni-8);
     overscroll-behavior: contain;
   }

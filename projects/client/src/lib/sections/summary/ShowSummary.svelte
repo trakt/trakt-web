@@ -71,6 +71,9 @@
   {media}
   {networks}
   {videos}
+  {seasons}
+  {currentSeason}
+  showEntry={media}
   type="show"
 />
 
