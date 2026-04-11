@@ -3,7 +3,11 @@ import { Domain } from '$worker/Domain.ts';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute } from 'workbox-precaching';
-import { NavigationRoute, registerRoute } from 'workbox-routing';
+import {
+  NavigationRoute,
+  registerRoute,
+  setCatchHandler
+} from 'workbox-routing';
 import {
   CacheFirst,
   NetworkFirst,
@@ -11,8 +15,6 @@ import {
 } from 'workbox-strategies';
 import { time } from './lib/utils/timing/time.ts';
 import { CacheKey } from './worker/CacheKey.ts';
-
-const NAVIGATION_TIMEOUT_MS = time.seconds(4);
 
 declare global {
   interface ServiceWorkerGlobalScope {
@@ -28,21 +30,26 @@ declare let self: ServiceWorkerGlobalScope;
  */
 self.__WB_DISABLE_DEV_LOGS = true;
 
-/**
- * Activate new SW immediately without waiting for existing tabs to close.
- * This prevents Safari from getting stuck on a stale/zombied SW that serves
- * assets incompatible with a fresh Cloudflare deployment.
- */
-addEventListener('install', (event) => {
-  event.waitUntil(self.skipWaiting());
-});
+// Global Workbox catch handler: log the failure and fall back to network
+setCatchHandler(async ({ event, request, url }) => {
+  console.error('Workbox route handler failed for:', {
+    url: request?.url ?? url?.toString(),
+    method: request?.method,
+    type: request?.destination,
+  });
 
-/**
- * Claim all open clients so the new SW takes control without a page reload
- * being required on the old tab.
- */
-addEventListener('activate', (event) => {
-  event.waitUntil(self.clients.claim());
+  // Try network as a safe fallback so the page still loads
+  try {
+    return await fetch(request || event.request);
+  } catch (err) {
+    console.error('Network fallback also failed:', err);
+    // Return a 503 response rather than letting respondWith reject.
+    return new Response('Service worker fetch failed', {
+      status: 503,
+      statusText: 'Service Worker Error',
+      headers: { 'Content-Type': 'text/plain' },
+    });
+  }
 });
 
 function removeNavigationCache() {
@@ -58,37 +65,26 @@ addEventListener('message', (event) => {
 // Precache static assets
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Navigation routes — StaleWhileRevalidate serves from cache immediately,
-// eliminating any risk of a navigation fetch stalling the browser (e.g. Safari).
+// Navigation routes
 const navigationHandler = new StaleWhileRevalidate({
   cacheName: CacheKey.navigation,
 });
 
 registerRoute(
   new NavigationRoute(async (context) => {
-    try {
-      const url = new URL(context.request.url);
-      const hasCacheParam = url.searchParams.has('_cb');
+    const url = new URL(context.request.url);
+    const hasCacheParam = url.searchParams.has('_cb');
 
-      if (hasCacheParam) {
-        await removeNavigationCache();
-        url.searchParams.delete('_cb');
-        return Response.redirect(url.toString(), 302);
-      }
+    if (hasCacheParam) {
+      // Delete the entire navigation cache
+      await removeNavigationCache();
 
-      const navigationPromise = navigationHandler.handle(context);
-      const timeoutPromise = new Promise<Response>((_, reject) =>
-        setTimeout(
-          () => reject(new Error('Navigation timeout')),
-          NAVIGATION_TIMEOUT_MS,
-        )
-      );
-
-      return await Promise.race([navigationPromise, timeoutPromise]);
-    } catch {
-      // Fallback to a direct network fetch so the browser never hangs.
-      return fetch(context.request);
+      // Remove _cb param and redirect
+      url.searchParams.delete('_cb');
+      return Response.redirect(url.toString(), 302);
     }
+
+    return await navigationHandler.handle(context);
   }),
 );
 
