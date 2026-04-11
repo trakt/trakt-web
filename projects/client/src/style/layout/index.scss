@@ -226,9 +226,13 @@
   --font-size-tag: var(--ni-10);
   --font-size-text: var(--ni-14);
 
+  --width-summary-card-compact: 100%;
+  --height-summary-card-cover-compact: var(--ni-112);
+  --height-summary-card-compact: var(--height-summary-card-cover-compact);
+
   @include for-tablet-sm-and-below {
-    --width-summary-card: 100%;
-    --height-summary-card-cover: var(--ni-112);
+    --width-summary-card: var(--width-summary-card-compact);
+    --height-summary-card-cover: var(--height-summary-card-cover-compact);
   }
 
   --font-size-title: var(--ni-18);

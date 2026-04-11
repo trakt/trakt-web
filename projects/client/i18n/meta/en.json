@@ -1627,7 +1627,6 @@
       "default": "Episodes",
       "description": "Title for lists containing episodes of a season. This title should be as short and concise as possible.",
       "exclude": [
-        "web",
         "android"
       ]
     },

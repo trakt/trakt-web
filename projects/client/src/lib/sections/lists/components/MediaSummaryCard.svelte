@@ -45,6 +45,7 @@
     contextualTag?: Snippet;
     badge?: Snippet;
     sortTag?: Snippet;
+    layout?: "default" | "compact";
   } & DistributiveOmit<ItemCardProps, "badge" | "action">;
 
   const {
@@ -55,6 +56,7 @@
     source,
     contextualTag,
     sortTag,
+    layout = "default",
     ...rest
   }: SummaryCardProps = $props();
 
@@ -63,7 +65,11 @@
   const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
-  const hasMultiLineTitles = $derived($isTabletLarge || $isDesktop);
+  const isCompact = $derived(layout === "compact");
+
+  const hasMultiLineTitles = $derived(
+    !isCompact && ($isTabletLarge || $isDesktop),
+  );
 
   const coverData = $derived({
     background:
@@ -106,13 +112,29 @@
       ? media.title.toLowerCase() !== media.originalTitle.toLowerCase()
       : false,
   );
+
+  const dimensions = $derived.by(() => {
+    if (layout === "default") {
+      return {
+        width: "var(--width-summary-card)",
+        height: "var(--height-summary-card)",
+        heightCover: "var(--height-summary-card-cover)",
+      };
+    }
+
+    return {
+      width: "var(--width-summary-card-compact)",
+      height: "var(--height-summary-card-compact)",
+      heightCover: "var(--height-summary-card-cover-compact)",
+    };
+  });
 </script>
 
 <Card
-  classList="trakt-summary-card"
-  --height-card="var(--height-summary-card)"
-  --height-card-cover="var(--height-summary-card-cover)"
-  --width-card="var(--width-summary-card)"
+  classList="trakt-summary-card trakt-summary-card-{layout}"
+  --height-card={dimensions.height}
+  --height-card-cover={dimensions.heightCover}
+  --width-card={dimensions.width}
   --poster-aspect-ratio="0.6667"
 >
   {#if popupActions}
@@ -156,6 +178,7 @@
     <SummaryCardDetails
       classList={hasMultiLineTitles ? "multi-line-titles" : ""}
       {tag}
+      {layout}
     >
       {#if rest.type === "season"}
         <p class="trakt-card-title ellipsis">
@@ -226,7 +249,7 @@
     </SummaryCardDetails>
   </Link>
 
-  <SummaryCardBottomBar {contextualTag} {tag}>
+  <SummaryCardBottomBar {contextualTag} {tag} {layout}>
     {#if sortTag}
       {@render sortTag()}
     {:else if badge}
@@ -314,6 +337,20 @@
 
     @include for-tablet-sm-and-below {
       font-size: var(--font-size-title);
+    }
+  }
+
+  :global(.trakt-summary-card-compact) {
+    .trakt-card-title {
+      font-size: var(--font-size-title);
+    }
+
+    .trakt-summary-poster {
+      --poster-width: calc(
+        var(--height-summary-card-cover-compact) * var(--poster-aspect-ratio)
+      );
+
+      height: var(--height-summary-card-cover-compact);
     }
   }
 </style>

@@ -7,25 +7,39 @@
     children,
     tag,
     contextualTag,
-  }: ChildrenProps & { tag?: Snippet; contextualTag?: Snippet } = $props();
+    layout = "default",
+  }: ChildrenProps & {
+    tag?: Snippet;
+    contextualTag?: Snippet;
+    layout?: "default" | "compact";
+  } = $props();
+
+  const isCompact = $derived(layout === "compact");
 </script>
 
 <div
   class="trakt-summary-card-bottom-bar"
   class:has-contextualTag={Boolean(contextualTag)}
+  data-layout={layout}
 >
-  {#if contextualTag}
+  {#if contextualTag && !isCompact}
     <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
       {@render contextualTag()}
     </RenderFor>
   {/if}
 
   {#if tag}
-    <RenderFor audience="all" device={["tablet-sm", "mobile"]}>
+    {#if isCompact}
       <div class="trakt-summary-bottom-bar-tags" in:fade={{ duration: 150 }}>
         {@render tag()}
       </div>
-    </RenderFor>
+    {:else}
+      <RenderFor audience="all" device={["tablet-sm", "mobile"]}>
+        <div class="trakt-summary-bottom-bar-tags" in:fade={{ duration: 150 }}>
+          {@render tag()}
+        </div>
+      </RenderFor>
+    {/if}
   {/if}
 
   {@render children()}
@@ -54,6 +68,12 @@
 
     &.has-contextualTag {
       justify-content: space-between;
+    }
+
+    &[data-layout="compact"] {
+      --poster-width: calc(
+        var(--height-summary-card-cover-compact) * var(--poster-aspect-ratio, 0)
+      );
     }
   }
 

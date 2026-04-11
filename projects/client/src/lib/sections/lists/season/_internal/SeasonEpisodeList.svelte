@@ -1,21 +1,25 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { m } from "$lib/features/i18n/messages.ts";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
-  import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
-  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import { getEpisodesUntil } from "./getEpisodesUntil";
-  import { WatchedUntilHereIntlProvider } from "./WatchedUntilHereIntlProvider";
+  import {
+    Drawers,
+    summaryDrawerNavigation,
+  } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
+  import type { Snippet } from "svelte";
+  import ViewAllButton from "../../components/ViewAllButton.svelte";
+  import SeasonEpisodeItem from "./SeasonEpisodeItem.svelte";
 
   type SeasonEpisodeListProps = {
     show: ShowEntry;
     previousSeasons: Season[];
     episodes: EpisodeEntry[];
     title?: string;
+    headerActions?: Snippet;
     subtitle?: string;
   };
 
@@ -25,17 +29,16 @@
     episodes,
     title,
     subtitle,
+    headerActions,
   }: SeasonEpisodeListProps = $props();
 
   const { history } = useUser();
 
   const showProgress = $derived($history?.shows.get(show.id));
   const watchedEpisodes = $derived(showProgress?.episodes);
-
   const hasUnseenEpisodes = $derived(!showProgress?.isWatched);
 
-  const hasBulkMarkAsWatched = (episode: EpisodeEntry) =>
-    hasUnseenEpisodes && episode.airDate && episode.airDate <= new Date();
+  const { buildDrawerLink } = summaryDrawerNavigation();
 </script>
 
 <SectionList
@@ -44,36 +47,30 @@
   {title}
   {subtitle}
   --height-list={mediaListHeightResolver("landscape")}
+  drilldownLink={buildDrawerLink(Drawers.Seasons)}
+  noscroll
 >
   {#snippet item(episode)}
-    {#snippet popupActions()}
-      <RenderFor audience="authenticated">
-        <MarkAsWatchedAction
-          style="dropdown-item"
-          type="show"
-          size="small"
-          i18n={WatchedUntilHereIntlProvider}
-          title={show.title}
-          media={{
-            id: show.id,
-            airDate: show.airDate,
-            seasons: getEpisodesUntil({
-              previousSeasons,
-              episode,
-              watchedEpisodes,
-            }),
-          }}
-        />
-      </RenderFor>
-    {/snippet}
-
-    <EpisodeItem
+    <SeasonEpisodeItem
+      {show}
       {episode}
-      media={show}
-      popupActions={hasBulkMarkAsWatched(episode) ? popupActions : undefined}
-      variant={episode.airDate > new Date() ? "upcoming" : "default"}
-      context="show"
+      {previousSeasons}
+      {watchedEpisodes}
+      {hasUnseenEpisodes}
       source="season-episode-list"
+    />
+  {/snippet}
+
+  {#snippet actions()}
+    {#if headerActions}
+      {@render headerActions()}
+    {/if}
+
+    <ViewAllButton
+      href={buildDrawerLink(Drawers.Seasons)}
+      label={m.button_text_view_all()}
+      noscroll
+      source={{ id: "seasons" }}
     />
   {/snippet}
 </SectionList>

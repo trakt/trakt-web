@@ -8,7 +8,14 @@
     children,
     tag,
     classList = "",
-  }: { tag?: Snippet; classList?: string } & ChildrenProps = $props();
+    layout = "default",
+  }: {
+    tag?: Snippet;
+    classList?: string;
+    layout?: "default" | "compact";
+  } & ChildrenProps = $props();
+
+  const isCompact = $derived(layout === "compact");
 </script>
 
 <div class="trakt-summary-card-details" use:appendClassList={classList}>
@@ -16,7 +23,7 @@
     {@render children()}
   </div>
 
-  {#if tag}
+  {#if tag && !isCompact}
     <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
       <div class="trakt-summary-card-tags" in:fade={{ duration: 150 }}>
         {@render tag()}

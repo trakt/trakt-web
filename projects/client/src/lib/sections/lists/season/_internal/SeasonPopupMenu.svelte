@@ -9,12 +9,17 @@
     title: string;
     episodes: EpisodeEntry[];
     show: ShowEntry;
+    disabled?: boolean;
   };
 
-  const { title, episodes, show }: SeasonPopupMenuProps = $props();
+  const { title, episodes, show, disabled }: SeasonPopupMenuProps = $props();
 </script>
 
-<PopupMenu label={m.button_label_popup_menu({ title })} mode="standalone">
+<PopupMenu
+  label={m.button_label_popup_menu({ title })}
+  mode="standalone"
+  {disabled}
+>
   {#snippet items()}
     <MarkAsWatchedAction
       style="dropdown-item"
