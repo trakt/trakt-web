@@ -71,9 +71,8 @@ jobs:
   test:
     needs: files-changed
     if: ${{
-      needs.files-changed.outputs.i18n_source != 'true' &&
-      (needs.files-changed.outputs.client_source == 'true' ||
-      needs.files-changed.outputs.workflows == 'true')
+      needs.files-changed.outputs.client_source == 'true' ||
+      needs.files-changed.outputs.workflows == 'true'
       }}
     name: "The Interrogation Room (Shard) [${{ matrix.shard }}/4]"
     runs-on: ubuntu-latest
@@ -127,9 +126,8 @@ jobs:
   typecheck:
     needs: files-changed
     if: ${{
-      needs.files-changed.outputs.i18n_source != 'true' &&
-      (needs.files-changed.outputs.client_source == 'true' ||
-      needs.files-changed.outputs.workflows == 'true')
+      needs.files-changed.outputs.client_source == 'true' ||
+      needs.files-changed.outputs.workflows == 'true'
       }}
     name: Consulting the Oracles of Type (Type Check)
     runs-on: ubuntu-latest
