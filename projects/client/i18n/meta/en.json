@@ -5000,8 +5000,7 @@
       "default": "Added to favorites.",
       "description": "Text shown when a user has added a media item to their favorites.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "text_info_favorites_removed": {
@@ -5048,8 +5047,15 @@
       "default": "Show has been dropped.",
       "description": "Text shown when a user has dropped a tv show (meaning he abandons watching it after few episodes).",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
+      ]
+    },
+    "text_info_movie_dropped": {
+      "default": "Movie has been dropped.",
+      "description": "Text shown when a user has dropped a movie (meaning he abandons watching it after few minutes).",
+      "exclude": [
+        "android",
+        "ios"
       ]
     },
     "text_info_review_added": {

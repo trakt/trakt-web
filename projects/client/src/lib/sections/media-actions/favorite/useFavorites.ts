@@ -1,5 +1,4 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { useAddNoteDrawer } from '$lib/features/notes/useAddNoteDrawer.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { addToFavoritesRequest } from '$lib/requests/sync/addToFavoritesRequest.ts';
@@ -24,11 +23,10 @@ function getFavoritesPayload(
   }
 }
 
-export function useFavorites({ type, id, title }: FavoritesStoreProps) {
+export function useFavorites({ type, id }: FavoritesStoreProps) {
   const isUpdatingFavorite = new BehaviorSubject(false);
   const { favorites } = useUser();
   const { invalidate } = useInvalidator();
-  const { open: openNoteDrawer } = useAddNoteDrawer();
 
   const isFavorited = favorites.pipe(
     map(($favorites) => {
@@ -57,10 +55,6 @@ export function useFavorites({ type, id, title }: FavoritesStoreProps) {
       case 'remove':
         await removeFromFavoritesRequest({ body: payload });
         break;
-    }
-
-    if (action === 'add') {
-      openNoteDrawer({ type: 'favorites', mediaType: type, title, id });
     }
 
     await invalidate(InvalidateAction.Favorited(type));
