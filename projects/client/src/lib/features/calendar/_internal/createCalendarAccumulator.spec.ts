@@ -280,5 +280,43 @@ describe('createCalendarAccumulator', () => {
       accumulate({ calendar: newEmptyPeriod, fingerprint: 'b' });
       expect(canLoadMore()).toBe(true);
     });
+
+    it('should reset empty periods count when an empty period is updated with data', () => {
+      const { accumulate, canLoadMore } = createCalendarAccumulator(
+        'chronological',
+      );
+
+      for (let i = 0; i < 5; i++) {
+        const emptyPeriod = mockCalendar(`2024-01-0${i + 1}`, 1);
+        accumulate({ calendar: emptyPeriod, fingerprint: 'a' });
+      }
+
+      expect(canLoadMore()).toBe(false);
+
+      const updatedPeriod = mockCalendar('2024-01-05', 1);
+      if (updatedPeriod[0]) {
+        updatedPeriod[0].items.push({ key: 'item' });
+      }
+
+      accumulate({ calendar: updatedPeriod, fingerprint: 'a' });
+      expect(canLoadMore()).toBe(true);
+    });
+
+    it('should not reset empty periods count when an empty period is updated but remains empty', () => {
+      const { accumulate, canLoadMore } = createCalendarAccumulator(
+        'chronological',
+      );
+
+      for (let i = 0; i < 5; i++) {
+        const emptyPeriod = mockCalendar(`2024-01-0${i + 1}`, 1);
+        accumulate({ calendar: emptyPeriod, fingerprint: 'a' });
+      }
+
+      expect(canLoadMore()).toBe(false);
+
+      const updatedEmptyPeriod = mockCalendar('2024-01-05', 1);
+      accumulate({ calendar: updatedEmptyPeriod, fingerprint: 'a' });
+      expect(canLoadMore()).toBe(false);
+    });
   });
 });
