@@ -55,6 +55,9 @@ interface ConfirmationParamsMap {
   [ConfirmationType.DeleteComment]: {
     type: ConfirmationType.DeleteComment;
   };
+  [ConfirmationType.DeleteNote]: {
+    type: ConfirmationType.DeleteNote;
+  };
   [ConfirmationType.SuppressRatingsToast]: {
     type: ConfirmationType.SuppressRatingsToast;
   };

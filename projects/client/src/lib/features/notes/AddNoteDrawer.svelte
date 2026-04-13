@@ -4,22 +4,44 @@
   import Form from "$lib/components/form/Form.svelte";
   import FormTextArea from "$lib/components/form/FormTextArea.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { UserNote } from "$lib/requests/models/UserNote.ts";
+  import { iffy } from "$lib/utils/function/iffy.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { getNoteValidation } from "./_internal/getNoteValidation";
   import { mapToNoteType } from "./_internal/mapToNoteType";
+  import { useEditNote } from "./_internal/useEditNote";
   import { usePostNote } from "./_internal/usePostNote";
   import type { NoteDrawerProps } from "./models/NoteDrawerProps";
 
-  type AddNoteDrawerProps = NoteDrawerProps & {
-    onClose: () => void;
+  type PostMode = {
+    mode?: "post";
   };
 
-  const { type, onClose, title, id, mediaType }: AddNoteDrawerProps = $props();
+  type EditMode = {
+    mode: "edit";
+    note: UserNote;
+  };
 
-  let notes = $state("");
+  type AddNoteDrawerProps = NoteDrawerProps & {
+    onClose: () => void;
+  } & (PostMode | EditMode);
+
+  const { type, onClose, title, id, mediaType, ...rest }: AddNoteDrawerProps =
+    $props();
+
+  const isEditing = $derived(rest.mode === "edit");
+
+  const initialNotes = iffy(() =>
+    rest.mode === "edit" ? rest.note.notes : "",
+  );
+
+  let notes = $state(initialNotes);
   let hasUnexpectedError = $state(false);
 
   const { postNote, isPosting } = usePostNote();
+  const { editNote, isEditing: isEditingNote } = useEditNote();
+
+  const isBusy = $derived($isPosting || $isEditingNote);
 
   const placeholder = $derived.by(() => {
     switch (type) {
@@ -35,15 +57,29 @@
   const handleSubmit = async () => {
     hasUnexpectedError = false;
 
-    const result = await postNote({
-      notes,
-      type: mapToNoteType(type),
-      media: { type: mediaType, id },
-    });
+    if (rest.mode === "edit") {
+      const result = await editNote({
+        id: rest.note.id,
+        notes,
+        media: { type: mediaType, id },
+        type: mapToNoteType(type),
+      });
 
-    if (!result) {
-      hasUnexpectedError = true;
-      return;
+      if (!result) {
+        hasUnexpectedError = true;
+        return;
+      }
+    } else {
+      const result = await postNote({
+        notes,
+        type: mapToNoteType(type),
+        media: { type: mediaType, id },
+      });
+
+      if (!result) {
+        hasUnexpectedError = true;
+        return;
+      }
     }
 
     onClose();
@@ -59,15 +95,20 @@
   <Form
     onSubmit={handleSubmit}
     onCancel={onClose}
-    disabled={notes.trim().length === 0 || $isPosting}
-    confirmButtonText={m.button_text_add_note()}
-    confirmButtonLabel={m.button_label_add_note({ title })}
+    disabled={notes.trim().length === 0 || isBusy}
+    confirmButtonText={isEditing
+      ? m.button_text_edit_note()
+      : m.button_text_add_note()}
+    confirmButtonLabel={isEditing
+      ? m.button_label_edit_note({ title })
+      : m.button_label_add_note({ title })}
   >
     <div class="trakt-note-properties">
       <FormTextArea
         {placeholder}
+        value={initialNotes}
         onChange={(value) => (notes = value)}
-        disabled={$isPosting}
+        disabled={isBusy}
         autofocus
         {validation}
       />

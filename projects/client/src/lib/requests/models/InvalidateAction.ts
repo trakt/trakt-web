@@ -22,6 +22,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:smart_list:${ListType}`
   | `${typeof INVALIDATION_ID}:commented:${ExtendedMediaType}`
   | `${typeof INVALIDATION_ID}:notes:${MediaType}`
+  | `${typeof INVALIDATION_ID}:notes_edit:${MediaType}`
+  | `${typeof INVALIDATION_ID}:notes_delete:${MediaType}`
   | `${typeof INVALIDATION_ID}:vip:${VipType}`;
 
 type TypeDataMap = {
@@ -41,6 +43,8 @@ type TypeDataMap = {
   'list': ListType;
   'smart_list': ListType;
   'notes': MediaType;
+  'notes_edit': MediaType;
+  'notes_delete': MediaType;
   'vip': VipType;
 };
 
@@ -108,6 +112,8 @@ export const InvalidateAction = {
 
   Note: {
     Add: (type: MediaType) => buildInvalidationKey('notes', type),
+    Edit: (type: MediaType) => buildInvalidationKey('notes_edit', type),
+    Delete: (type: MediaType) => buildInvalidationKey('notes_delete', type),
   },
 
   Vip: {
