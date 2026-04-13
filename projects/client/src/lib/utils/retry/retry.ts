@@ -1,7 +1,7 @@
 import { retryAsync as tsRetry } from 'ts-retry';
 import { retryDelay } from './retryDelay.ts';
 
-const MAX_RETRIES = 5;
+const MAX_RETRIES = 3;
 
 export function retry<T>(fn: () => Promise<T>): Promise<T> {
   return tsRetry<T>(
