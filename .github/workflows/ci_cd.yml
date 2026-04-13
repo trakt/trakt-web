@@ -260,10 +260,9 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: projects/client
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          preCommands: |
+            printf '{"TRAKT_CLIENT_ID":"%s","TRAKT_CLIENT_SECRET":"%s"}' "$TRAKT_CLIENT_ID" "$TRAKT_CLIENT_SECRET" | npx wrangler versions secret bulk --message "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           command: deploy --message "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" --tag "${{ steps.vars.outputs.short_sha }}"
-          secrets: |
-            TRAKT_CLIENT_ID
-            TRAKT_CLIENT_SECRET
         env:
           TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
           TRAKT_CLIENT_SECRET: ${{ secrets.TRAKT_CLIENT_SECRET }}
