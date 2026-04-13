@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Localize Workflow
-        run: gh workflow run i18n_translate.yml --ref main
+        run: gh workflow run i18n_translate.yml --ref main --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
