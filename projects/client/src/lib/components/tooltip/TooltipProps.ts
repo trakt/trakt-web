@@ -4,4 +4,5 @@ export type TooltipProps = {
   side?: 'top' | 'right' | 'bottom' | 'left';
   delayDuration?: number;
   sideOffset?: number;
+  disabled?: boolean;
 };

@@ -3311,6 +3311,22 @@
         "ios"
       ]
     },
+    "button_label_collapse_navbar": {
+      "default": "Collapse",
+      "description": "Label for the button that collapses the side navigation bar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_expand_navbar": {
+      "default": "Expand",
+      "description": "Label for the button that expands the side navigation bar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "text_show_spoilers": {
       "default": "Show spoilers",
       "description": "Text for the section that allows users to toggle spoilers.",
