@@ -107,6 +107,7 @@ module.exports = {
         'settings',
         'show',
         'smart-list',
+        'snackbar',
         'social',
         'spoiler',
         'streaming',

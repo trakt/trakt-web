@@ -1,8 +1,8 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import { autoDismiss } from "$lib/utils/actions/autoDismiss.ts";
   import { fade } from "svelte/transition";
-  import { autoDismiss } from "./autoDismiss";
 
   const {
     children,
