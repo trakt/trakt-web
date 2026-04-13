@@ -176,7 +176,7 @@ jobs:
 
       - name: Merging the Testimony aka Merge Reports & Coverage
         working-directory: projects/client
-        run: 'deno run -A npm:vitest --merge-reports .vitest-reports'
+        run: 'deno run -A npm:vitest --merge-reports .vitest-reports --coverage'
 
       - name: Trial by Deep Source
         uses: deepsourcelabs/test-coverage-action@master
