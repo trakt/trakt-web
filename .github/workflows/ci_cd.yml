@@ -52,10 +52,50 @@ jobs:
       needs.files-changed.outputs.client_source == 'true' ||
       needs.files-changed.outputs.workflows == 'true'
       }}
-    name: The Interrogation Room (Test)
+    name: "The Interrogation Room (Test) [${{ matrix.shard }}/4]"
     runs-on: ubuntu-latest
     concurrency:
-      group: ci-${{ github.ref }}
+      group: ci-test-${{ github.ref }}-${{ matrix.shard }}
+      cancel-in-progress: true
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+
+    steps:
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
+
+      - name: Forging the Artifacts aka Prebuild
+        working-directory: projects/client
+        run: 'deno task prebuild'
+
+      - name: "Probe the Client's Mind aka Run Tests [${{ matrix.shard }}/4]"
+        working-directory: projects/client
+        run: 'deno run -A npm:vitest --coverage --shard=${{ matrix.shard }}/4 --reporter=blob --reporter=dot --reporter=github-actions'
+
+      - name: Sealing the Evidence aka Upload Blob Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: blob-report-${{ matrix.shard }}
+          path: projects/client/.vitest-reports
+          include-hidden-files: true
+          retention-days: 1
+
+  typecheck:
+    needs: files-changed
+    if: ${{
+      needs.files-changed.outputs.client_source == 'true' ||
+      needs.files-changed.outputs.workflows == 'true'
+      }}
+    name: Consulting the Oracles of Type (Type Check)
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ci-typecheck-${{ github.ref }}
       cancel-in-progress: true
 
     steps:
@@ -65,13 +105,41 @@ jobs:
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
 
-      - name: Probe the Client's Mind aka Run Tests
+      - name: Summoning the Ancient Tongues aka Generate i18n
         working-directory: projects/client
-        run: 'deno task test:cov'
+        run: 'deno task i18n:web'
+
+      - name: Forging the Paraglide Runes aka Compile Paraglide
+        working-directory: projects/client
+        run: 'deno run -A npm:@inlang/paraglide-js compile --project ./i18n/project.inlang --outdir ./src/lib/paraglide'
 
       - name: Consulting the Oracles of Type aka Type Check
         working-directory: projects/client
         run: 'deno task check'
+
+  coverage:
+    needs: [test]
+    if: ${{ always() && needs.test.result != 'cancelled' && needs.test.result != 'skipped' }}
+    name: The Inquisition's Verdict (Coverage)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
+
+      - name: Assembling the Shards of Evidence aka Download Blob Reports
+        uses: actions/download-artifact@v4
+        with:
+          pattern: blob-report-*
+          path: projects/client/.vitest-reports
+          merge-multiple: true
+
+      - name: Merging the Testimony aka Merge Reports & Coverage
+        working-directory: projects/client
+        run: 'deno run -A npm:vitest --merge-reports .vitest-reports'
 
       - name: Trial by Deep Source
         uses: deepsourcelabs/test-coverage-action@master
@@ -145,13 +213,14 @@ jobs:
     concurrency:
       group: ci-${{ github.ref }}
       cancel-in-progress: true
-    needs: [test]
+    needs: [test, typecheck]
     permissions:
       contents: read
       deployments: write
     if: |
       always() &&
       needs.test.result == 'success' &&
+      needs.typecheck.result == 'success' &&
       github.ref == 'refs/heads/main'
 
     steps:
