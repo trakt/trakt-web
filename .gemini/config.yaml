@@ -10,4 +10,7 @@ code_review:
     summary: true
     code_review: true
     include_drafts: true
-ignore_patterns: ['projects/client/src/mocks/data/**/*.ts']
+ignore_patterns: [
+  'projects/client/src/mocks/data/**/*.ts',
+  'projects/client/i18n/messages/**'
+]
