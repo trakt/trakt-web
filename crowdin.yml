@@ -1,0 +1,15 @@
+project_id_env: 'CROWDIN_PROJECT_ID'
+api_token_env: 'CROWDIN_PERSONAL_TOKEN'
+
+files:
+  - source: /projects/client/i18n/meta/en.json
+    translation: /projects/client/i18n/messages/%locale%.json
+pull_request_title: 'feat(i18n): localization updates'
+pull_request_assignees:
+  - vladjerca
+  - seferturan
+commit_message: 'feat(i18n): update %original_file_name%'
+append_commit_message:
+bundles:
+  # Bundle ID 6 refers to our 'Web' export bundle in CrowdIn
+  - 6

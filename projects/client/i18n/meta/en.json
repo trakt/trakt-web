@@ -32,19 +32,6 @@
         "ios"
       ]
     },
-    "header_profile_banner_greeting": {
-      "default": "Hello, {name}",
-      "description": "Greeting shown in the profile banner below the avatar. This should be a short and friendly greeting.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      },
-      "exclude": [
-        "ios",
-        "web"
-      ]
-    },
     "list_title_up_next": {
       "default": "Continue Watching",
       "description": "Title for lists containing the next episodes and in progress movies. This title should be as short and concise as possible.",

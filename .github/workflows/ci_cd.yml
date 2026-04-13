@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  actions: write
 
 jobs:
   files-changed:
@@ -22,6 +23,7 @@ jobs:
       cancel-in-progress: true
     outputs:
       client_source: ${{ steps.changes.outputs.client_source }}
+      i18n_source: ${{ steps.changes.outputs.i18n_source }}
       workflows: ${{ steps.changes.outputs.workflows }}
     steps:
       - name: Unveiling the Repository
@@ -34,23 +36,44 @@ jobs:
           filters: |
             client_source:
               - 'projects/client/src/**'
-              - 'projects/client/i18n/**'
               - 'projects/client/static/**'
+              - 'projects/client/i18n/generator/**'
+              - 'projects/client/i18n/schema/**'
+              - 'projects/client/i18n/messages/**'
+              - 'projects/client/i18n/project.inlang/**'
               - 'projects/client/e2e/**'
               - 'projects/client/package.json'
               - 'projects/client/deno.json'
               - 'projects/client/svelte.config.js'
               - 'projects/client/vite.config.ts'
               - 'projects/client/wrangler.jsonc'
+            i18n_source:
+              - 'projects/client/i18n/meta/**'
             workflows:
               - '.github/workflows/**'
               - '.github/actions/**'
 
+  localize:
+    needs: files-changed
+    if: ${{
+      github.ref == 'refs/heads/main' &&
+      github.head_ref != 'i18n_crowdin_main' &&
+      needs.files-changed.outputs.i18n_source == 'true'
+      }}
+    name: Release the Translation Fiends (Localize)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Localize Workflow
+        run: gh workflow run i18n_translate.yml --ref main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   test:
     needs: files-changed
     if: ${{
-      needs.files-changed.outputs.client_source == 'true' ||
-      needs.files-changed.outputs.workflows == 'true'
+      needs.files-changed.outputs.i18n_source != 'true' &&
+      (needs.files-changed.outputs.client_source == 'true' ||
+      needs.files-changed.outputs.workflows == 'true')
       }}
     name: "The Interrogation Room (Shard) [${{ matrix.shard }}/4]"
     runs-on: ubuntu-latest
@@ -104,8 +127,9 @@ jobs:
   typecheck:
     needs: files-changed
     if: ${{
-      needs.files-changed.outputs.client_source == 'true' ||
-      needs.files-changed.outputs.workflows == 'true'
+      needs.files-changed.outputs.i18n_source != 'true' &&
+      (needs.files-changed.outputs.client_source == 'true' ||
+      needs.files-changed.outputs.workflows == 'true')
       }}
     name: Consulting the Oracles of Type (Type Check)
     runs-on: ubuntu-latest
@@ -167,11 +191,11 @@ jobs:
   e2e:
     needs: files-changed
     if: ${{
-      github.ref != 'refs/heads/main' &&
-        (
-          needs.files-changed.outputs.client_source == 'true' ||
-          needs.files-changed.outputs.workflows == 'true'
-        )
+      github.ref != 'refs/heads/main' && github.head_ref != 'i18n_crowdin_main' &&
+      (
+      needs.files-changed.outputs.client_source == 'true' ||
+      needs.files-changed.outputs.workflows == 'true'
+      )
       }}
     name: The Trials of Interface (E2E)
     runs-on: ubuntu-latest
