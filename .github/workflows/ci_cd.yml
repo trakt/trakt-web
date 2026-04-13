@@ -247,7 +247,11 @@ jobs:
           cp .npmrc projects/client/
           echo "THE SCROLL OF KNOWLEDGE HAS BEEN TRANSCRIBED:"
           cat projects/client/.npmrc
-          
+
+      - name: Divining the Commit Runes aka Extract Short SHA
+        id: vars
+        run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - name: Invoking the Cloudflare Spirits
         if: github.ref == 'refs/heads/main'
         uses: cloudflare/wrangler-action@v3
@@ -256,7 +260,7 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: projects/client
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          command: deploy --message "sha=${{ github.sha }} run=${{ github.run_number }}" --tag "${{ github.sha }}"
+          command: deploy --message "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" --tag "${{ steps.vars.outputs.short_sha }}"
           secrets: |
             TRAKT_CLIENT_ID
             TRAKT_CLIENT_SECRET
