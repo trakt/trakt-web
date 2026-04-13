@@ -7946,7 +7946,7 @@
     },
     "vip_feature_title_unlock": {
       "default": "Unlock full potential with",
-      "description": "Text used to promote a VIP package for the user. The full text would be 'Unlock full potential with Trakt VIP'",
+      "description": "Text used to promote a VIP package for the users. The full text would be 'Unlock full potential with Trakt VIP'",
       "exclude": [
         "ios",
         "web"
