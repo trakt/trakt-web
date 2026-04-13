@@ -5,6 +5,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { onMount } from "svelte";
+  import NotePrompt from "../_internal/NotePrompt.svelte";
   import { useFavorites } from "./useFavorites";
 
   type FavoriteActionProps = {
@@ -27,12 +28,23 @@
     navigationType,
   }: FavoriteActionProps = $props();
 
+  let showNotePrompt = $state(false);
+
   const {
     isUpdatingFavorite,
     isFavorited,
-    addToFavorites,
+    addToFavorites: doAddToFavorites,
     removeFromFavorites,
   } = $derived(useFavorites({ type, id, title }));
+
+  const addToFavorites = async () => {
+    await doAddToFavorites();
+    showNotePrompt = true;
+  };
+
+  const closePrompt = () => {
+    showNotePrompt = false;
+  };
 
   const { confirm } = useConfirm();
   const confirmRemove = $derived(
@@ -48,13 +60,25 @@
   });
 </script>
 
-<FavoriteButton
-  {style}
+<NotePrompt
+  open={showNotePrompt}
+  onOpenChange={(open) => {
+    if (!open) showNotePrompt = false;
+  }}
+  onDismiss={closePrompt}
   {title}
-  {navigationType}
-  {size}
-  isFavorited={$isFavorited}
-  isFavoriteUpdating={$isUpdatingFavorite}
-  onAdd={addToFavorites}
-  onRemove={confirmRemove}
-/>
+  {type}
+  {id}
+  noteType="favorites"
+>
+  <FavoriteButton
+    {style}
+    {title}
+    {navigationType}
+    {size}
+    isFavorited={$isFavorited}
+    isFavoriteUpdating={$isUpdatingFavorite}
+    onAdd={addToFavorites}
+    onRemove={confirmRemove}
+  />
+</NotePrompt>

@@ -1,7 +1,6 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { useAddNoteDrawer } from '$lib/features/notes/useAddNoteDrawer.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { dropMovieRequest } from '$lib/requests/queries/users/dropMovieRequest.ts';
@@ -11,6 +10,7 @@ import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPaylo
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { BehaviorSubject } from 'rxjs';
+import { useDropNotePrompt } from './_internal/useDropNotePrompt.ts';
 
 type DropProps = {
   id: number;
@@ -45,7 +45,7 @@ export function useDrop(
   const isDropping = new BehaviorSubject(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
-  const { open: openNoteDrawer } = useAddNoteDrawer();
+  const dropNote = useDropNotePrompt();
 
   const { track } = useTrack(AnalyticsEvent.Drop);
 
@@ -61,12 +61,7 @@ export function useDrop(
 
     await requestDrop(target);
 
-    openNoteDrawer({
-      type: 'drop',
-      mediaType: target.type,
-      title,
-      id: target.id,
-    });
+    dropNote?.show({ title, type: target.type, id: target.id });
 
     await invalidate(InvalidateAction.Drop(target.type));
 
