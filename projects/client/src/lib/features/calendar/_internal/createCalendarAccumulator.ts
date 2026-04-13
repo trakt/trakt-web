@@ -70,8 +70,9 @@ export function createCalendarAccumulator(order: CalendarOrder) {
 
       clearedToKey = undefined;
 
-      if (!accumulatedMap.has(key)) {
-        const isEmpty = calendar.every((day) => day.items.length === 0);
+      const isEmpty = calendar.every((day) => day.items.length === 0);
+
+      if (!accumulatedMap.has(key) || !isEmpty) {
         setPeriodCount(isEmpty);
       }
 
