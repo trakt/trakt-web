@@ -2,10 +2,29 @@
   import { Popover } from "bits-ui";
   import type { Snippet } from "svelte";
 
-  const { children, content }: { content: Snippet } & ChildrenProps = $props();
+  type PopoverProps = {
+    content: Snippet;
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
+  } & ChildrenProps;
+
+  const { children, content, open, onOpenChange }: PopoverProps = $props();
+
+  const isControlled = $derived(open !== undefined);
+
+  let internalOpen = $state(false);
+
+  const getOpen = () => (isControlled ? open! : internalOpen);
+  const setOpen = (value: boolean) => {
+    if (isControlled) {
+      onOpenChange?.(value);
+    } else {
+      internalOpen = value;
+    }
+  };
 </script>
 
-<Popover.Root>
+<Popover.Root bind:open={getOpen, setOpen}>
   <Popover.Trigger class="trakt-popover-trigger">
     {@render children()}
   </Popover.Trigger>
