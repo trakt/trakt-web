@@ -32,19 +32,6 @@
         "ios"
       ]
     },
-    "header_profile_banner_greeting": {
-      "default": "How are you, {name}",
-      "description": "Greeting shown in the profile banner below the avatar. This should be a short and friendly greeting.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      },
-      "exclude": [
-        "ios",
-        "web"
-      ]
-    },
     "list_title_up_next": {
       "default": "Continue Watching",
       "description": "Title for lists containing the next episodes and in progress movies. This title should be as short and concise as possible.",
@@ -87,7 +74,7 @@
       "exclude": []
     },
     "page_title_error_404": {
-      "default": "404: Nothing. Just void.",
+      "default": "404: Nothingness. The void.",
       "description": "Title for the 404 error page.",
       "exclude": [
         "android",
@@ -2866,7 +2853,7 @@
       ]
     },
     "error_text_service_unavailable": {
-      "default": "The connection is... gone! Like a forgotten memory.",
+      "default": "The connection is... absent. Like a forgotten memory.",
       "description": "Text shown on the error page when the Trakt service is unreachable.",
       "exclude": [
         "android",

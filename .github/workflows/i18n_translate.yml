@@ -1,0 +1,63 @@
+name: The Translation Pit (Localize)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  localize:
+    name: The Translation Pit (Localize)
+    runs-on: ubuntu-latest
+    concurrency:
+      group: localize
+      cancel-in-progress: true
+
+    steps:
+      - name: Summoning the GitHub App Token
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ secrets.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-contents: write
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+
+      - name: Upload Sources to Crowdin
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: true
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Pre-Translate
+        uses: crowdin/github-action@v2
+        with:
+          command: 'pre-translate'
+          command_args: '--method ai --ai-prompt=${{ secrets.CROWDIN_AI_PROMPT_ID }}'
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Download Bundles
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: false
+          upload_translations: false
+          download_translations: false
+          # Bundle ID 6 refers to our 'Web' export bundle in CrowdIn
+          download_bundle: 6
+          skip_untranslated_strings: true
+          create_pull_request: false
+          localization_branch_name: main
+          commit_message: 'feat(i18n): update translations'
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
