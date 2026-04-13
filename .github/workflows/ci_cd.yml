@@ -146,6 +146,9 @@ jobs:
       group: ci-${{ github.ref }}
       cancel-in-progress: true
     needs: [test]
+    permissions:
+      contents: read
+      deployments: write
     if: |
       always() &&
       needs.test.result == 'success' &&
@@ -183,8 +186,11 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: projects/client
-          wranglerVersion: latest
-          command: deploy
-          preCommands: |
-            echo "${{ secrets.TRAKT_CLIENT_ID }}" | npx wrangler secret put TRAKT_CLIENT_ID
-            echo "${{ secrets.TRAKT_CLIENT_SECRET }}" | npx wrangler secret put TRAKT_CLIENT_SECRET
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: deploy --message "sha=${{ github.sha }} run=${{ github.run_number }}" --tag "${{ github.sha }}"
+          secrets: |
+            TRAKT_CLIENT_ID
+            TRAKT_CLIENT_SECRET
+        env:
+          TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
+          TRAKT_CLIENT_SECRET: ${{ secrets.TRAKT_CLIENT_SECRET }}
