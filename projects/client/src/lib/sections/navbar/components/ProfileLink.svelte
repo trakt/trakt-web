@@ -6,6 +6,8 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../../profile-banner/ProfileImage.svelte";
 
+  const { isExpanded = false }: { isExpanded?: boolean } = $props();
+
   const { user } = useUser();
 </script>
 
@@ -22,6 +24,9 @@
       src={$user?.avatar?.url ?? ""}
       isVip={Boolean($user?.isVip)}
     />
+    {#if isExpanded}
+      <span class="trakt-profile-link-username">{$user?.username}</span>
+    {/if}
   </Link>
 </trakt-profile-button>
 
@@ -56,5 +61,12 @@
         --color-border-avatar: var(--color-link-active);
       }
     }
+  }
+
+  .trakt-profile-link-username {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
   }
 </style>

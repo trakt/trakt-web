@@ -1,76 +1,35 @@
 <script lang="ts">
-  import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
-  import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
-  import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
-  import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
-  import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
+  import MenuIcon from "$lib/components/icons/MenuIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
-  import type { TooltipProps } from "$lib/components/tooltip/TooltipProps";
+  import Logo from "$lib/components/logo/Logo.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import Toast from "../toast/Toast.svelte";
-  import NavbarHeader from "./_internal/NavbarHeader.svelte";
-  import FilterButton from "./components/filter/FilterButton.svelte";
-  import GetVIPLink from "./components/GetVIPLink.svelte";
-  import JoinTraktButton from "./components/JoinTraktButton.svelte";
+  import { useCollapsedSection } from "$lib/stores/useCollapsedSection";
+  import { slide } from "svelte/transition";
+  import NavbarActions from "./_internal/NavbarActions.svelte";
+  import SideNavbarContent from "./_internal/SideNavbarContent.svelte";
   import ProfileLink from "./components/ProfileLink.svelte";
-  import TraktLogo from "./components/TraktLogo.svelte";
   import UserMenu from "./components/UserMenu.svelte";
   import { useNavbarState } from "./useNavbarState";
 
   const { state } = useNavbarState();
+  const { isCollapsed, toggle } = useCollapsedSection("side-navbar", true);
 
-  const tooltipConfig: Omit<TooltipProps, "content"> = {
-    variant: "compact",
-    side: "right",
-    delayDuration: 0,
-    sideOffset: 16,
-  };
+  $effect(() => {
+    const width = $isCollapsed
+      ? "var(--side-navbar-width-collapsed)"
+      : "var(--side-navbar-width-expanded)";
+    document.documentElement.style.setProperty("--side-navbar-width", width);
+
+    return () => {
+      document.documentElement.style.removeProperty("--side-navbar-width");
+    };
+  });
 </script>
 
 {#if $state.mode !== "hidden"}
-  <div class="trakt-navbar-actions" class:is-hidden={$state.mode === "minimal"}>
-    <div class="trakt-navbar-actions-left">
-      <NavbarHeader />
-    </div>
-
-    <div class="trakt-navbar-actions-center">
-      {#if $state.actions}
-        {@render $state.actions?.()}
-      {/if}
-    </div>
-
-    <div class="trakt-navbar-actions-right">
-      <RenderFor audience="authenticated">
-        {@render $state.sortActions?.()}
-        {#if $state.seasonalActions}
-          {@render $state.seasonalActions?.()}
-        {/if}
-        <FilterButton isDisabled={!$state.hasFilters} />
-      </RenderFor>
-      <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>
-      <RenderFor audience="public">
-        <JoinTraktButton size="small">
-          {#snippet icon()}
-            <CircularLogo />
-          {/snippet}
-        </JoinTraktButton>
-      </RenderFor>
-    </div>
-  </div>
-
-  {#if $state.toastActions || $state.contextualActions}
-    <Toast>
-      {#if $state.contextualActions}
-        {@render $state.contextualActions()}
-      {:else}
-        {@render $state.toastActions?.()}
-      {/if}
-    </Toast>
-  {/if}
+  <NavbarActions />
 
   <header>
     <nav
@@ -78,55 +37,30 @@
       data-dpad-navigation={DpadNavigationType.Navbar}
     >
       <div class="trakt-side-navbar-top">
-        <TraktLogo />
-      </div>
-
-      <div class="trakt-side-navbar-content">
-        <RenderFor audience="authenticated">
-          <Tooltip content={m.page_title_search()} {...tooltipConfig}>
-            <Link href={UrlBuilder.search()} label={m.button_label_search()}>
-              <SearchIcon />
-            </Link>
-          </Tooltip>
-        </RenderFor>
-
-        <Tooltip
-          content={m.page_title_home()}
-          variant="compact"
-          side="right"
-          delayDuration={0}
-          sideOffset={16}
+        <button
+          class="nav-menu-button"
+          onclick={toggle}
+          aria-label={$isCollapsed
+            ? m.button_label_expand_navbar()
+            : m.button_label_collapse_navbar()}
         >
-          <Link href={UrlBuilder.home()} label={m.button_label_home()}>
-            <HomeIcon />
-          </Link>
-        </Tooltip>
-
-        <RenderFor audience="authenticated">
-          <Tooltip content={m.page_title_discover()} {...tooltipConfig}>
-            <Link
-              href={UrlBuilder.discover()}
-              label={m.button_label_discover()}
-            >
-              <DiscoverIcon />
+          <MenuIcon state={$isCollapsed ? "closed" : "open"} />
+        </button>
+        {#if !$isCollapsed}
+          <div class="nav-logo-link" transition:slide={{ duration: 150 }}>
+            <Link href="/" label="Trakt">
+              <Logo />
             </Link>
-          </Tooltip>
-
-          <Tooltip content={m.page_title_lists()} {...tooltipConfig}>
-            <Link
-              href={UrlBuilder.lists.user("me")}
-              label={m.button_label_browse_lists()}
-            >
-              <ListIcon />
-            </Link>
-          </Tooltip>
-        </RenderFor>
+          </div>
+        {/if}
       </div>
 
-      <div class="trakt-side-navbar-bottom">
+      <SideNavbarContent isCollapsed={$isCollapsed} />
+
+      <div class="trakt-side-navbar-bottom" class:is-expanded={!$isCollapsed}>
         <RenderFor audience="authenticated">
-          <UserMenu>
-            <ProfileLink />
+          <UserMenu isExpanded={!$isCollapsed}>
+            <ProfileLink isExpanded={!$isCollapsed} />
           </UserMenu>
         </RenderFor>
       </div>
@@ -134,25 +68,22 @@
   </header>
 {/if}
 
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
+<style>
   header {
-    --navbar-item-width: var(--ni-24);
-
     --navbar-margin: var(--gap-s);
     --navbar-margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
     --navbar-margin-bottom: calc(var(--gap-m) + env(safe-area-inset-bottom));
+    --nav-icon-size: var(--ni-24);
   }
 
   .trakt-side-navbar {
     contain: layout;
 
     z-index: var(--layer-overlay);
+
     position: fixed;
     top: 0;
     left: 0;
-
     width: var(--side-navbar-width);
     height: calc(
       100dvh - var(--navbar-margin-top) - var(--navbar-margin-bottom)
@@ -170,73 +101,82 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--gap-m);
+
+    &:has(.is-expanded) {
+      width: var(--side-navbar-width-expanded);
+    }
   }
 
   .trakt-side-navbar-top,
-  .trakt-side-navbar-content,
   .trakt-side-navbar-bottom {
     display: flex;
     flex-direction: column;
     align-items: center;
     align-self: center;
-
+    justify-content: center;
     gap: var(--gap-m);
 
     width: var(--side-navbar-width);
-  }
-
-  .trakt-side-navbar-top,
-  .trakt-side-navbar-bottom {
     height: var(--side-navbar-actions-height);
-    justify-content: center;
   }
 
-  .trakt-side-navbar-content {
-    gap: var(--gap-l);
-
-    background-color: var(--color-background-side-navbar);
-
-    border-radius: var(--ni-60);
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: background-color;
-    box-shadow: var(--shadow-navbar);
-
-    padding: var(--ni-10) 0;
+  .trakt-side-navbar-bottom.is-expanded {
+    height: auto;
   }
 
-  .trakt-navbar-actions {
-    height: var(--side-navbar-actions-height);
-    transition: opacity var(--transition-increment) ease-in-out;
+  .trakt-side-navbar-top {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: var(--gap-xxs);
+    align-self: stretch;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    :global(.nav-logo-link) {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      height: var(--nav-icon-size);
+    }
 
-    gap: var(--gap-m);
+    :global(.nav-logo-link .trakt-link) {
+      display: flex;
 
-    padding: var(--gap-m);
-    margin-top: env(safe-area-inset-top);
+      &:focus-visible :global(svg) {
+        color: var(--color-link-active);
+      }
+    }
 
-    padding-left: calc(
-      var(--layout-distance-side) + var(--layout-sidebar-distance)
-    );
-
-    &.is-hidden {
-      height: 0;
-      opacity: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-      pointer-events: none;
+    :global(.nav-logo-link svg) {
+      height: var(--nav-icon-size);
+      width: auto;
+      color: var(--color-text-primary);
     }
   }
 
-  .trakt-navbar-actions-left {
-    min-width: 0;
-  }
-
-  .trakt-navbar-actions-right {
+  .nav-menu-button {
     display: flex;
     align-items: center;
-    gap: var(--gap-s);
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: var(--side-navbar-width-collapsed);
+    height: var(--side-navbar-width-collapsed);
+
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: inherit;
+
+    :global(svg) {
+      width: var(--nav-icon-size);
+      height: var(--nav-icon-size);
+    }
+
+    &:focus-visible {
+      border-radius: var(--border-radius-m);
+      outline: var(--border-thickness-xs) solid var(--color-link-active);
+      outline-offset: var(--ni-neg-8);
+    }
   }
 </style>

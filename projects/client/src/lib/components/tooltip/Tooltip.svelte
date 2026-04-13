@@ -10,6 +10,7 @@
     side = "top",
     delayDuration = 150,
     sideOffset = 8,
+    disabled = false,
   }: TooltipProps & ChildrenProps = $props();
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
@@ -26,7 +27,7 @@
 </script>
 
 <Tooltip.Provider>
-  <Tooltip.Root {delayDuration} bind:open>
+  <Tooltip.Root {delayDuration} bind:open disabled={disabled ?? false}>
     <Tooltip.Trigger>
       {#snippet child({ props })}
         <div
