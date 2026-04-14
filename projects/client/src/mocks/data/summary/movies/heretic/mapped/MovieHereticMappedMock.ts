@@ -52,6 +52,7 @@ export const MovieHereticMappedMock: MovieEntry = {
   'originalTitle': 'Heretic',
   'trailer': 'https://youtube.com/watch?v=jpWUOxRozZg',
   'airDate': new Date('2024-11-08T00:00:00.000Z'),
+  'releaseDate': new Date('2024-11-08T00:00:00.000Z'),
   'certification': 'R',
   'country': 'us',
   'languages': [

@@ -16,6 +16,7 @@ const BaseEpisodeEntrySchema = z.object({
   }),
   genres: genreOptionSchema.array(),
   airDate: z.date(),
+  releaseDate: z.date(),
   type: EpisodeTypeSchema,
   runtime: z.number(),
   year: z.number(),

@@ -27,6 +27,7 @@ export function mapToMovieEntry(
   const poster = mapToPoster(movie.images);
   const cover = mapToCover(movie.images);
   const logo = mapToLogo(movie.images);
+  const releaseDate = new Date(movie.released ?? MAX_DATE);
 
   return {
     id: movie.ids.trakt,
@@ -55,7 +56,11 @@ export function mapToMovieEntry(
     trailer: prependHttps(
       movie.trailer,
     ),
-    airDate: new Date(movie.released ?? MAX_DATE),
+    /**
+     * Duplicate for compat with other entities.
+     */
+    airDate: releaseDate,
+    releaseDate,
     certification: mapMovieCertificationResponse(movie.certification),
     votes: movie.votes ?? 0,
     plexSlug: movie.ids.plex?.slug,

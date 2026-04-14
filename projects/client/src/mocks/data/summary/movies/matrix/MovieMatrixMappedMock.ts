@@ -56,6 +56,7 @@ export const MovieMatrixMappedMock: MovieEntry = {
     'Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth.',
   'trailer': 'https://youtube.com/watch?v=d0XTFAMmhrE',
   'airDate': new Date('1999-03-31T00:00:00.000Z'),
+  'releaseDate': new Date('1999-03-31T00:00:00.000Z'),
   'certification': 'R',
   'votes': 65943,
   'plexSlug': 'the-matrix-1999',

@@ -6,6 +6,7 @@ export const LibraryMappedMock: LibraryItem[] = [
     'availableOn': [],
     'episode': {
       'airDate': new Date('2025-09-04T02:00:00.000Z'),
+      'releaseDate': new Date('2025-09-04T02:00:00.000Z'),
       'cover': {
         'url':
           'https://walter-r2.trakt.tv/images/episodes/013/352/063/screenshots/thumb/60214573bb.jpg.webp',
@@ -27,6 +28,7 @@ export const LibraryMappedMock: LibraryItem[] = [
     'key': 'episode-13352063',
     'media': {
       'airDate': new Date('1997-08-14T02:00:00.000Z'),
+      'releaseDate': new Date('1997-08-14T02:00:00.000Z'),
       'certification': 'TV-MA',
       'colors': undefined,
       'country': 'us',
@@ -100,6 +102,7 @@ export const LibraryMappedMock: LibraryItem[] = [
     'key': 'movie-1153578',
     'media': {
       'airDate': new Date('2025-05-02T00:00:00.000Z'),
+      'releaseDate': new Date('2025-05-02T00:00:00.000Z'),
       'certification': undefined,
       'colors': undefined,
       'country': 'us',
@@ -169,6 +172,7 @@ export const LibraryMappedMock: LibraryItem[] = [
     'key': 'movie-7',
     'media': {
       'airDate': new Date('1977-05-25T00:00:00.000Z'),
+      'releaseDate': new Date('1977-05-25T00:00:00.000Z'),
       'certification': 'PG',
       'colors': undefined,
       'country': 'us',
@@ -240,6 +244,7 @@ export const LibraryMappedMock: LibraryItem[] = [
     ],
     'episode': {
       'airDate': new Date('1987-04-05T05:00:00.000Z'),
+      'releaseDate': new Date('1987-04-05T05:00:00.000Z'),
       'cover': {
         'url':
           'https://walter-r2.trakt.tv/images/episodes/000/298/461/screenshots/thumb/d5459747f8.jpg.webp',
@@ -261,6 +266,7 @@ export const LibraryMappedMock: LibraryItem[] = [
     'key': 'episode-298461',
     'media': {
       'airDate': new Date('1987-04-05T05:00:00.000Z'),
+      'releaseDate': new Date('1987-04-05T05:00:00.000Z'),
       'certification': 'TV-PG',
       'colors': undefined,
       'country': 'us',

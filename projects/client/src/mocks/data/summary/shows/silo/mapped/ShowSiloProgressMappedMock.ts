@@ -16,6 +16,7 @@ export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
       'https://walter-r2.trakt.tv/images/episodes/012/105/048/screenshots/medium/2f894ac614.jpg.webp',
   },
   'airDate': new Date('2024-11-22T02:00:00.000Z'),
+  'releaseDate': new Date('2024-11-22T02:00:00.000Z'),
   'total': 17,
   'completed': 11,
   'remaining': 6,

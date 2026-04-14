@@ -209,6 +209,7 @@ export const ShowSiloProgressResponseMock: ShowProgressResponse = {
     'votes': 1838,
     'comment_count': 21,
     'first_aired': '2024-11-22T02:00:00.000Z',
+    'released': '2024-11-22T02:00:00.000Z',
     'updated_at': '2024-12-27T19:32:56.000Z',
     'available_translations': [
       'ar',

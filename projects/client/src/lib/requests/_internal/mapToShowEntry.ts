@@ -24,6 +24,7 @@ export function mapToShowEntry(
   const runtime = show.runtime ?? NaN;
   const episodeCount = show.aired_episodes ?? NaN;
   const totalRuntime = show.total_runtime ?? (runtime * episodeCount);
+  const releaseDate = new Date(show.first_aired ?? MAX_DATE);
 
   return {
     id: show.ids.trakt,
@@ -57,7 +58,11 @@ export function mapToShowEntry(
     trailer: prependHttps(
       show.trailer,
     ),
-    airDate: new Date(show.first_aired ?? MAX_DATE),
+    /**
+     * Duplicate for compat with other entities.
+     */
+    airDate: releaseDate,
+    releaseDate,
     certification: show.certification,
     votes: show.votes ?? 0,
     plexSlug: show.ids.plex?.slug,

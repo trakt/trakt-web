@@ -18,6 +18,7 @@ export function mapToEpisodeEntry(
   const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));
 
   const airDate = new Date(episode.first_aired ?? MAX_DATE);
+  const releaseDate = new Date(episode.released ?? MAX_DATE);
 
   return {
     id: episode.ids.trakt,
@@ -36,7 +37,11 @@ export function mapToEpisodeEntry(
       ),
     },
     airDate,
-    year: airDate.getFullYear(),
+    releaseDate,
+    year: Math.min(
+      airDate.getFullYear(),
+      releaseDate.getFullYear(),
+    ),
     postCredits: mapToPostCredits(episode),
     rating: mapToTraktRating(episode.rating),
   };

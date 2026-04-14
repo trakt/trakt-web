@@ -3,6 +3,7 @@ import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   {
     'airDate': new Date('2023-05-05T01:00:00.000Z'),
+    'releaseDate': new Date('2023-05-05T01:00:00.000Z'),
     'cover': {
       'url':
         'https://walter-r2.trakt.tv/images/episodes/005/165/667/screenshots/thumb/e035db5f06.jpg.webp',
@@ -23,6 +24,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   },
   {
     'airDate': new Date('2023-05-05T01:00:00.000Z'),
+    'releaseDate': new Date('2023-05-05T01:00:00.000Z'),
     'cover': {
       'url':
         'https://walter-r2.trakt.tv/images/episodes/007/374/195/screenshots/thumb/34fd1da36a.jpg.webp',
@@ -43,6 +45,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   },
   {
     'airDate': new Date('2023-05-12T01:00:00.000Z'),
+    'releaseDate': new Date('2023-05-12T01:00:00.000Z'),
     'cover': {
       'url':
         'https://walter-r2.trakt.tv/images/episodes/007/374/298/screenshots/thumb/ab930b719e.jpg.webp',
@@ -63,6 +66,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   },
   {
     'airDate': new Date('2023-05-19T01:00:00.000Z'),
+    'releaseDate': new Date('2023-05-19T01:00:00.000Z'),
     'cover': {
       'url':
         'https://walter-r2.trakt.tv/images/episodes/007/374/307/screenshots/thumb/b1d7a96ac8.jpg.webp',
@@ -83,6 +87,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   },
   {
     'airDate': new Date('2023-05-26T01:00:00.000Z'),
+    'releaseDate': new Date('2023-05-26T01:00:00.000Z'),
     'cover': {
       'url':
         'https://walter-r2.trakt.tv/images/episodes/007/374/308/screenshots/thumb/19c2c320bc.jpg.webp',
@@ -103,6 +108,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   },
   {
     'airDate': new Date('2023-06-02T01:00:00.000Z'),
+    'releaseDate': new Date('2023-06-02T01:00:00.000Z'),
     'cover': {
       'url':
         'https://walter-r2.trakt.tv/images/episodes/007/374/309/screenshots/thumb/8fd4b52a0a.jpg.webp',
@@ -123,6 +129,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   },
   {
     'airDate': new Date('2023-06-09T01:00:00.000Z'),
+    'releaseDate': new Date('2023-06-09T01:00:00.000Z'),
     'cover': {
       'url':
         'https://walter-r2.trakt.tv/images/episodes/007/374/310/screenshots/thumb/daaa0c7509.jpg.webp',
@@ -143,6 +150,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   },
   {
     'airDate': new Date('2023-06-16T01:00:00.000Z'),
+    'releaseDate': new Date('2023-06-16T01:00:00.000Z'),
     'cover': {
       'url':
         'https://walter-r2.trakt.tv/images/episodes/007/374/312/screenshots/thumb/0a23d84196.jpg.webp',
@@ -163,6 +171,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   },
   {
     'airDate': new Date('2023-06-23T01:00:00.000Z'),
+    'releaseDate': new Date('2023-06-23T01:00:00.000Z'),
     'cover': {
       'url':
         'https://walter-r2.trakt.tv/images/episodes/007/374/313/screenshots/thumb/0671601160.jpg.webp',
@@ -183,6 +192,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   },
   {
     'airDate': new Date('2023-06-30T01:00:00.000Z'),
+    'releaseDate': new Date('2023-06-30T01:00:00.000Z'),
     'cover': {
       'url':
         'https://walter-r2.trakt.tv/images/episodes/007/374/314/screenshots/thumb/8f3f471d79.jpg.webp',

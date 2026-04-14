@@ -18,6 +18,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'votes': 4288,
     'comment_count': 31,
     'first_aired': '2023-05-05T01:00:00.000Z',
+    'released': '2023-05-05T01:00:00.000Z',
     'updated_at': '2025-02-02T09:20:35.000Z',
     'available_translations': [
       'ar',
@@ -77,6 +78,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'votes': 3937,
     'comment_count': 16,
     'first_aired': '2023-05-05T01:00:00.000Z',
+    'released': '2023-05-05T01:00:00.000Z',
     'updated_at': '2025-02-02T10:10:19.000Z',
     'available_translations': [
       'ar',
@@ -136,6 +138,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'votes': 3808,
     'comment_count': 32,
     'first_aired': '2023-05-12T01:00:00.000Z',
+    'released': '2023-05-12T01:00:00.000Z',
     'updated_at': '2025-02-02T11:15:55.000Z',
     'available_translations': [
       'ar',
@@ -195,6 +198,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'votes': 3535,
     'comment_count': 13,
     'first_aired': '2023-05-19T01:00:00.000Z',
+    'released': '2023-05-19T01:00:00.000Z',
     'updated_at': '2025-02-02T05:20:57.000Z',
     'available_translations': [
       'ar',
@@ -254,6 +258,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'votes': 3489,
     'comment_count': 21,
     'first_aired': '2023-05-26T01:00:00.000Z',
+    'released': '2023-05-26T01:00:00.000Z',
     'updated_at': '2025-02-02T06:16:14.000Z',
     'available_translations': [
       'ar',
@@ -313,6 +318,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'votes': 3417,
     'comment_count': 12,
     'first_aired': '2023-06-02T01:00:00.000Z',
+    'released': '2023-06-02T01:00:00.000Z',
     'updated_at': '2025-02-02T07:28:57.000Z',
     'available_translations': [
       'ar',
@@ -372,6 +378,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'votes': 3394,
     'comment_count': 18,
     'first_aired': '2023-06-09T01:00:00.000Z',
+    'released': '2023-06-09T01:00:00.000Z',
     'updated_at': '2025-02-02T09:03:56.000Z',
     'available_translations': [
       'ar',
@@ -431,6 +438,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'votes': 3402,
     'comment_count': 18,
     'first_aired': '2023-06-16T01:00:00.000Z',
+    'released': '2023-06-16T01:00:00.000Z',
     'updated_at': '2025-02-02T10:45:05.000Z',
     'available_translations': [
       'ar',
@@ -490,6 +498,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'votes': 3368,
     'comment_count': 17,
     'first_aired': '2023-06-23T01:00:00.000Z',
+    'released': '2023-06-23T01:00:00.000Z',
     'updated_at': '2025-02-02T03:02:20.000Z',
     'available_translations': [
       'ar',
@@ -549,6 +558,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'votes': 3710,
     'comment_count': 56,
     'first_aired': '2023-06-30T01:00:00.000Z',
+    'released': '2023-06-30T01:00:00.000Z',
     'updated_at': '2025-02-02T11:24:21.000Z',
     'available_translations': [
       'ar',

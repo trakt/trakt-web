@@ -17,6 +17,7 @@ export const EpisodeSiloResponseMock: EpisodeResponse = {
   'votes': 4186,
   'comment_count': 31,
   'first_aired': '2023-05-05T01:00:00.000Z',
+  'released': '2023-05-05T01:00:00.000Z',
   'updated_at': '2025-01-20T03:49:10.000Z',
   'available_translations': [
     'ar',

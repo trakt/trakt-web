@@ -11,6 +11,7 @@ export function mapToMarkAsWatchedTarget(
       media: {
         id: entry.id,
         airDate: entry.airDate,
+        releaseDate: entry.releaseDate,
         seasons: [
           {
             number: entry.episode.season,
