@@ -9,7 +9,7 @@
     "npm:@ethercorps/sveltekit-og@4.2.1": "4.2.1_@sveltejs+kit@2.55.0__@sveltejs+vite-plugin-svelte@7.0.0___svelte@5.51.3____acorn@8.15.0___vite@8.0.1____esbuild@0.27.4____sass-embedded@1.97.3__svelte@5.51.3___acorn@8.15.0__typescript@5.8.3__vite@8.0.1___esbuild@0.27.4___sass-embedded@1.97.3",
     "npm:@inlang/paraglide-js@2.12.0": "2.12.0",
     "npm:@jsr/libn__fuzzy@0.4": "0.4.0",
-    "npm:@jsr/trakt__api@0.4.4": "0.4.4_openapi3-ts@4.5.0",
+    "npm:@jsr/trakt__api@0.4.5": "0.4.5_openapi3-ts@4.5.0",
     "npm:@playwright/test@1.58.2": "1.58.2",
     "npm:@sentry/sveltekit@10.45.0": "10.45.0_@sveltejs+kit@2.55.0__@sveltejs+vite-plugin-svelte@7.0.0___svelte@5.51.3____acorn@8.15.0___vite@8.0.1____esbuild@0.27.4____sass-embedded@1.97.3__svelte@5.51.3___acorn@8.15.0__typescript@5.8.3__vite@8.0.1___esbuild@0.27.4___sass-embedded@1.97.3_vite@8.0.1__esbuild@0.27.4__sass-embedded@1.97.3_@sveltejs+vite-plugin-svelte@7.0.0__svelte@5.51.3___acorn@8.15.0__vite@8.0.1___esbuild@0.27.4___sass-embedded@1.97.3_svelte@5.51.3__acorn@8.15.0_typescript@5.8.3",
     "npm:@sveltejs/adapter-auto@7.0.1": "7.0.1_@sveltejs+kit@2.55.0__@sveltejs+vite-plugin-svelte@7.0.0___svelte@5.51.3____acorn@8.15.0___vite@8.0.1____esbuild@0.27.4____sass-embedded@1.97.3__svelte@5.51.3___acorn@8.15.0__typescript@5.8.3__vite@8.0.1___esbuild@0.27.4___sass-embedded@1.97.3_@sveltejs+vite-plugin-svelte@7.0.0__svelte@5.51.3___acorn@8.15.0__vite@8.0.1___esbuild@0.27.4___sass-embedded@1.97.3_svelte@5.51.3__acorn@8.15.0_typescript@5.8.3_vite@8.0.1__esbuild@0.27.4__sass-embedded@1.97.3",
@@ -1836,9 +1836,6 @@
     "@floating-ui/utils@0.2.10": {
       "integrity": "sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ=="
     },
-    "@google/generative-ai@0.24.1": {
-      "integrity": "sha512-MqO+MLfM6kjxcKoy0p1wRzG3b4ZZXtPI+z2IE26UogS2Cm/XHO+7gGRBh6gcJsOiIVoH93UwKvW4HdgiOZCy9Q=="
-    },
     "@grpc/grpc-js@1.9.15": {
       "integrity": "sha512-nqE7Hc0AzI+euzUwDAy0aY5hCp10r734gMGRdU+qOPX0XSceI2ULrcXB5U2xSc5VkWwalCj4M7GzCAygZl2KoQ==",
       "dependencies": [
@@ -2142,14 +2139,14 @@
       "integrity": "sha512-aD9yjW6CMt37S3AMTc95LeuRXcKor69Zkr0aWOhYvinTOEAhEIuaJhP4pQqyQGaAC9HIrQcKh1PtRTK85kkVjA==",
       "tarball": "https://npm.jsr.io/~/11/@jsr/libn__fuzzy/0.4.0.tgz"
     },
-    "@jsr/trakt__api@0.4.4_openapi3-ts@4.5.0": {
-      "integrity": "sha512-pFgQnXQJ1b8uY0P/tZFT8IFJ2OIm9KR8pIoR7HF5O31JJNFkUeKcCmSClX2BlM+tqhh5F/LRu3c1nWI2q3ugNg==",
+    "@jsr/trakt__api@0.4.5_openapi3-ts@4.5.0": {
+      "integrity": "sha512-hk+8h39G9+OFlVEb50rXzubZl8/LmkUiK00M1Hkkt+LUviqB1fF3FXLta7h9GTuMeIvk13/HM4UJ8pZTtyDJ9Q==",
       "dependencies": [
         "@anatine/zod-openapi",
         "@ts-rest/core",
         "zod"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.4.4.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.4.5.tgz"
     },
     "@lix-js/sdk@0.4.7_kysely@0.27.6": {
       "integrity": "sha512-pRbW+joG12L0ULfMiWYosIW0plmW4AsUdiPCp+Z8rAsElJ+wJ6in58zhD3UwUcd4BNcpldEGjg6PdA7e0RgsDQ==",
@@ -7722,7 +7719,7 @@
             "npm:@ethercorps/sveltekit-og@4.2.1",
             "npm:@inlang/paraglide-js@2.12.0",
             "npm:@jsr/libn__fuzzy@0.4",
-            "npm:@jsr/trakt__api@0.4.4",
+            "npm:@jsr/trakt__api@0.4.5",
             "npm:@playwright/test@1.58.2",
             "npm:@sentry/sveltekit@10.45.0",
             "npm:@sveltejs/adapter-auto@7.0.1",
