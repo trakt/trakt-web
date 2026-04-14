@@ -23,7 +23,10 @@
   const { sortTag, ...props }: EpisodeCardProps & { sortTag?: Snippet } =
     $props();
 
-  const isFuture = $derived(props.episode.airDate > new Date());
+  const isFuture = $derived(
+    props.episode.airDate > new Date() &&
+      props.episode.releaseDate > new Date(),
+  );
   const isActivity = $derived(props.variant === "activity");
   const isHidden = $derived(props.status === "hidden");
   const isListItem = $derived(props.variant === "list-item");

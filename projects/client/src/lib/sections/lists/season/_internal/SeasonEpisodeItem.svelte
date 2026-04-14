@@ -49,6 +49,7 @@
       media={{
         id: show.id,
         airDate: show.airDate,
+        releaseDate: show.releaseDate,
         seasons: getEpisodesUntil({
           previousSeasons,
           episode,

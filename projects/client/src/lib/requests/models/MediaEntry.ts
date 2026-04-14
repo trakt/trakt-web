@@ -42,6 +42,7 @@ export const MediaEntrySchema = z.object({
   overview: z.string(),
   trailer: HttpsUrlSchema.nullish(),
   airDate: z.date(),
+  releaseDate: z.date(),
   certification: z.string().nullish(),
   votes: z.number(),
   colors: z.tuple([z.string(), z.string()]).optional(),

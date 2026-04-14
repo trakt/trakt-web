@@ -59,6 +59,7 @@ export const ShowDevsMappedMock: ShowEntry = {
     'Young computer engineer Lily Chan investigates the secretive development division of her employer, a cutting-edge tech company based in San Francisco, which she believes is behind the murder of her boyfriend.',
   'trailer': 'https://youtube.com/watch?v=Fp9LMsI6uJ8',
   'airDate': new Date('2020-03-05T05:00:00.000Z'),
+  'releaseDate': new Date('2020-03-05T05:00:00.000Z'),
   'certification': 'TV-MA',
   'votes': 3522,
   'plexSlug': 'devs',

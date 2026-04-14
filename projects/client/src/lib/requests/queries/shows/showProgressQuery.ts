@@ -42,6 +42,7 @@ function mapShowProgressResponse(
   const posterCandidate = findDefined(...(episode?.images?.screenshot ?? []));
 
   const airDate = new Date(episode?.first_aired ?? MAX_DATE);
+  const releaseDate = new Date(episode?.released ?? MAX_DATE);
 
   const key = `episode-${episode?.ids.trakt ?? crypto.randomUUID()}`;
 
@@ -56,6 +57,7 @@ function mapShowProgressResponse(
       url: prependHttps(posterCandidate),
     },
     airDate,
+    releaseDate,
     total: item.aired,
     completed: item.completed,
     remaining: item.aired - item.completed,
