@@ -275,6 +275,11 @@
         overflow-x: auto;
         mask-image: none;
       }
+
+      @include for-touch {
+        overflow-x: auto;
+        mask-image: none;
+      }
     }
   }
 
