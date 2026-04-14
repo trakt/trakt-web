@@ -196,3 +196,15 @@ merge the translations properly.
 
 For more details about infrastructure, see:
 [INFRASTRUCTURE.md](INFRASTRUCTURE.md).
+
+## Acknowledgements
+
+Trakt Web is made possible by these amazing tools and services:
+
+<a href="https://svelte.dev/"><img src="https://img.shields.io/badge/Built_with-SvelteKit-FF3E00?logo=svelte&logoColor=white" alt="Built with SvelteKit" /></a>
+<a href="https://sentry.io/"><img src="https://img.shields.io/badge/Monitoring_by-Sentry-362D59?logo=sentry&logoColor=white" alt="Monitoring by Sentry" /></a>
+<a href="https://crowdin.com/"><img src="https://img.shields.io/badge/Localized_with-Crowdin-2E3340?logo=crowdin&logoColor=white" alt="Localized with Crowdin" /></a>
+
+Special thanks to [Sentry](https://sentry.io/) and
+[Crowdin](https://crowdin.com/) for supporting open source projects with free
+licenses.
