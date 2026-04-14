@@ -71,13 +71,27 @@
     !isCompact && ($isTabletLarge || $isDesktop),
   );
 
-  const coverData = $derived({
-    background:
-      rest.type === "episode"
-        ? (rest.episode.cover.url ?? EPISODE_COVER_PLACEHOLDER)
-        : media.cover.url.thumb,
-    poster: media.poster.url.thumb,
-    title: rest.type === "episode" ? rest.episode.title : media.title,
+  const isShowContext = $derived(
+    rest.type === "episode" && "context" in rest && rest.context === "show",
+  );
+
+  const coverData = $derived.by(() => {
+    if (rest.type === "episode") {
+      const episodeCover = rest.episode.cover.url ?? EPISODE_COVER_PLACEHOLDER;
+      const posterOverride = "coverUrl" in rest ? rest.coverUrl : undefined;
+
+      return {
+        background: episodeCover,
+        poster: posterOverride ?? media.poster.url.thumb,
+        title: rest.episode.title,
+      };
+    }
+
+    return {
+      background: media.cover.url.thumb,
+      poster: media.poster.url.thumb,
+      title: media.title,
+    };
   });
 
   const indicators = $derived.by(() => {
@@ -128,6 +142,12 @@
       heightCover: "var(--height-summary-card-cover-compact)",
     };
   });
+
+  const href = $derived(
+    isShowContext && rest.type === "episode"
+      ? UrlBuilder.episode(media.slug, rest.episode.season, rest.episode.number)
+      : UrlBuilder.media(media.type, media.slug),
+  );
 </script>
 
 <Card
@@ -158,7 +178,7 @@
   />
 
   <Link
-    href={UrlBuilder.media(media.type, media.slug)}
+    {href}
     onclick={() => source && track({ source, type: rest.type })}
     color="inherit"
   >
@@ -208,6 +228,15 @@
           {:else}
             {toHumanDate(new Date(), rest.date, getLocale())}
           {/if}
+        </p>
+      {:else if isShowContext && rest.type === "episode"}
+        <p class="trakt-card-title ellipsis">
+          <Spoiler media={rest.episode} show={media} type="episode">
+            {rest.episode.title}
+          </Spoiler>
+        </p>
+        <p class="trakt-card-subtitle secondary ellipsis">
+          {episodeSubtitle(rest.episode)}
         </p>
       {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
         <p class="trakt-card-title ellipsis">

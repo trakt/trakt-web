@@ -42,6 +42,10 @@
     seasons.filter((s) => s.number > 0 && s.number < currentSeason),
   );
 
+  const seasonPosterUrl = $derived(
+    seasons.find((s) => s.number === currentSeason)?.poster?.url.thumb,
+  );
+
   const buildSeasonLink = (seasonNumber: number) => {
     const url = new URL(page.url);
     url.searchParams.set("season", String(seasonNumber));
@@ -111,6 +115,7 @@
                 {previousSeasons}
                 {watchedEpisodes}
                 {hasUnseenEpisodes}
+                coverUrl={seasonPosterUrl}
                 style="compact"
                 source="seasons-drawer"
               />

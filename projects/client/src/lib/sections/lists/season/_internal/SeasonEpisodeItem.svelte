@@ -18,6 +18,7 @@
     hasUnseenEpisodes: boolean;
     style?: BaseItemProps["style"];
     source: string;
+    coverUrl?: string;
   };
 
   const {
@@ -28,6 +29,7 @@
     hasUnseenEpisodes,
     style,
     source,
+    coverUrl,
   }: SeasonEpisodeItemProps = $props();
 
   const isFuture = $derived(episode.airDate > new Date());
@@ -61,6 +63,7 @@
   {episode}
   media={show}
   {style}
+  {coverUrl}
   popupActions={hasBulkMarkAsWatched ? popupActions : undefined}
   variant={isFuture ? "upcoming" : "default"}
   context="show"

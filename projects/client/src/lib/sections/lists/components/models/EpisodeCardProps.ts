@@ -11,11 +11,13 @@ export type EpisodeItemVariant =
     variant: 'next';
     episode: EpisodeProgressEntry;
     context?: EpisodeContext;
+    coverUrl?: string;
   }
   | {
     variant: 'default' | 'upcoming' | 'calendar';
     episode: EpisodeEntry;
     context?: EpisodeContext;
+    coverUrl?: string;
   }
   | {
     variant: 'activity';
