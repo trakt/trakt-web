@@ -51,7 +51,7 @@ describe('mapToActivityCalendar', () => {
     const result = mapToActivityCalendar([entry1, entry2], startDate);
 
     const march2 = result.find((day) => day.date.getDate() === 2);
-    expect(march2?.items).toEqual([entry1, entry2]);
+    expect(march2?.items).toEqual([entry2, entry1]);
   });
 
   it('should sort items within the same day by the watched at timestamp', () => {
@@ -59,10 +59,10 @@ describe('mapToActivityCalendar', () => {
     const later = createHistoryEntry(new Date('2024-03-02T20:00:00'));
     const earlier = createHistoryEntry(new Date('2024-03-02T10:00:00'));
 
-    const result = mapToActivityCalendar([later, earlier], startDate);
+    const result = mapToActivityCalendar([earlier, later], startDate);
 
     const day = result.find((day) => day.date.getDate() === 2);
-    expect(day?.items).toEqual([earlier, later]);
+    expect(day?.items).toEqual([later, earlier]);
   });
 
   it('should not include items outside the 7-day range', () => {

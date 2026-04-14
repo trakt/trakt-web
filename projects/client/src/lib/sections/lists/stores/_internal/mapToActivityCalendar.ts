@@ -41,7 +41,7 @@ function createHistoryCalendar<T>(
       return {
         date,
         items: items.toSorted((a, b) =>
-          getActivityTime(a).getTime() - getActivityTime(b).getTime()
+          getActivityTime(b).getTime() - getActivityTime(a).getTime()
         ),
       };
     })
