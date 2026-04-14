@@ -35,6 +35,10 @@
     seasons.filter((s) => s.number > 0 && s.number < currentSeason),
   );
 
+  const seasonPosterUrl = $derived(
+    seasons.find((s) => s.number === currentSeason)?.poster?.url.thumb,
+  );
+
   const episodeProps = $derived.by(() => {
     if (hasSingleSeason) return { title, subtitle };
     return isLargeScreen ? { title } : {};
@@ -62,6 +66,7 @@
   {show}
   {previousSeasons}
   episodes={$episodes}
+  coverUrl={seasonPosterUrl}
   headerActions={isLargeScreen && !hasSingleSeason ? headerActions : undefined}
   {...episodeProps}
 />
