@@ -23,14 +23,12 @@
     videos,
     seasons,
     currentSeason,
-    showEntry,
     ...details
   }: {
     sentiment?: SentimentAnalysis | Nil;
     videos?: MediaVideo[];
     seasons?: Season[];
     currentSeason?: number;
-    showEntry?: ShowEntry;
   } & MediaDetailsProps = $props();
 
   const { drawer, close } = $derived(
@@ -42,6 +40,11 @@
   );
 
   const media = $derived("media" in details ? details.media : undefined);
+
+  const showEntry = $derived.by(() => {
+    if (details.type === "episode") return details.show;
+    if (details.media.type === "show") return details.media as ShowEntry;
+  });
 
   const whereToWatchTarget = $derived(
     details.type === "episode"

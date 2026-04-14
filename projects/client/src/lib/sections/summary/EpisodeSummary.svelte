@@ -121,4 +121,12 @@
   drilldownLink={relatedLink}
 />
 
-<SummaryDrawer {crew} {episode} {show} {networks} type="episode" />
+<SummaryDrawer
+  {crew}
+  {episode}
+  {seasons}
+  currentSeason={episode.season}
+  {show}
+  {networks}
+  type="episode"
+/>
