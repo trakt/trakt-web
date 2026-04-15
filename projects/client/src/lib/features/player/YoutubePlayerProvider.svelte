@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { asset } from "$app/paths";
   import { time } from "$lib/utils/timing/time";
   import { createPlyr } from "./_internal/createPlyr.ts";
   import { createPlayerContext } from "./_internal/createYoutubePlayerContext.ts";
@@ -11,6 +12,7 @@
 
     const options: Plyr.Options = {
       controls: ["play", "progress", "current-time", "mute", "fullscreen"],
+      iconUrl: asset("/plyr/plyr.svg"),
       autoplay,
       fullscreen: {
         enabled: true,
