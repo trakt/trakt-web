@@ -87,7 +87,6 @@ jobs:
           # Bundle ID 6 refers to our 'Web' export bundle in CrowdIn
           download_bundle: 6
           skip_untranslated_strings: true
-          export_only_approved: true
           create_pull_request: false
           localization_branch_name: main
           commit_message: 'feat(i18n): update translations'
