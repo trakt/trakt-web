@@ -70,4 +70,16 @@ describe('isReviewValid', () => {
   it('should return false for fewer than 5 emoji-free words with surrounding emojis', () => {
     expect(isReviewValid('😀🎉🔥 one two three four 🌟💯')).toBe(false);
   });
+
+  it('should count Japanese words correctly without spaces', () => {
+    expect(isReviewValid('このアニメは本当に素晴らしかった')).toBe(true);
+  });
+
+  it('should return false for too few Japanese characters', () => {
+    expect(isReviewValid('すごい')).toBe(false);
+  });
+
+  it('should count mixed Japanese and English words correctly', () => {
+    expect(isReviewValid('この映画は really amazing')).toBe(true);
+  });
 });
