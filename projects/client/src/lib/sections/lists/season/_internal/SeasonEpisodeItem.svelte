@@ -48,8 +48,7 @@
       title={show.title}
       media={{
         id: show.id,
-        airDate: show.airDate,
-        releaseDate: show.releaseDate,
+        effectiveReleaseDate: show.effectiveReleaseDate,
         seasons: getEpisodesUntil({
           previousSeasons,
           episode,

@@ -15,7 +15,7 @@ import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
 
 export type MarkAsWatchedStoreProps = MediaStoreProps<
-  { id: number; airDate: Date; releaseDate: Date; status?: MediaStatus }
+  { id: number; effectiveReleaseDate: Date; status?: MediaStatus }
 >;
 
 export function useMarkAsWatched(

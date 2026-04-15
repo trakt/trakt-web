@@ -19,6 +19,12 @@ export function mapToEpisodeEntry(
 
   const airDate = new Date(episode.first_aired ?? MAX_DATE);
   const releaseDate = new Date(episode.released ?? MAX_DATE);
+  const effectiveReleaseDate = new Date(
+    Math.min(
+      airDate.getTime(),
+      releaseDate.getTime(),
+    ),
+  );
 
   return {
     id: episode.ids.trakt,
@@ -38,10 +44,8 @@ export function mapToEpisodeEntry(
     },
     airDate,
     releaseDate,
-    year: Math.min(
-      airDate.getFullYear(),
-      releaseDate.getFullYear(),
-    ),
+    effectiveReleaseDate,
+    year: effectiveReleaseDate.getFullYear(),
     postCredits: mapToPostCredits(episode),
     rating: mapToTraktRating(episode.rating),
   };

@@ -19,6 +19,7 @@ export const EpisodeSiloMappedMock: EpisodeEntry = {
   },
   'airDate': new Date('2023-05-05T01:00:00.000Z'),
   'releaseDate': new Date('2023-05-05T01:00:00.000Z'),
+  'effectiveReleaseDate': new Date('2023-05-05T01:00:00.000Z'),
   'year': 2023,
   'postCredits': [],
 };

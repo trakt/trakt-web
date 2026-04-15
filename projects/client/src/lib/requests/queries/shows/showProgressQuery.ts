@@ -43,6 +43,9 @@ function mapShowProgressResponse(
 
   const airDate = new Date(episode?.first_aired ?? MAX_DATE);
   const releaseDate = new Date(episode?.released ?? MAX_DATE);
+  const effectiveReleaseDate = new Date(
+    Math.min(airDate.getTime(), releaseDate.getTime()),
+  );
 
   const key = `episode-${episode?.ids.trakt ?? crypto.randomUUID()}`;
 
@@ -58,6 +61,7 @@ function mapShowProgressResponse(
     },
     airDate,
     releaseDate,
+    effectiveReleaseDate,
     total: item.aired,
     completed: item.completed,
     remaining: item.aired - item.completed,
