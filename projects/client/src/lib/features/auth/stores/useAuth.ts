@@ -21,6 +21,8 @@ export function useAuth() {
 
     await invalidate(InvalidateAction.Auth);
     await workerRequest(WorkerMessage.CacheBust);
+
+    globalThis.window.location.href = 'https://trakt.tv/logout';
   };
 
   const login = async () => {
