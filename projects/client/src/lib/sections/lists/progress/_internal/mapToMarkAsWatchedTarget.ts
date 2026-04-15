@@ -10,8 +10,7 @@ export function mapToMarkAsWatchedTarget(
       type: 'show' as const,
       media: {
         id: entry.id,
-        airDate: entry.airDate,
-        releaseDate: entry.releaseDate,
+        effectiveReleaseDate: entry.effectiveReleaseDate,
         seasons: [
           {
             number: entry.episode.season,

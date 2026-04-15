@@ -17,6 +17,7 @@ export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
   },
   'airDate': new Date('2024-11-22T02:00:00.000Z'),
   'releaseDate': new Date('2024-11-22T02:00:00.000Z'),
+  'effectiveReleaseDate': new Date('2024-11-22T02:00:00.000Z'),
   'total': 17,
   'completed': 11,
   'remaining': 6,

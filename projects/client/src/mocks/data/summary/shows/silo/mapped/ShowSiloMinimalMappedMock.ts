@@ -4,6 +4,7 @@ import { MAX_DATE } from '$lib/utils/constants.ts';
 export const ShowSiloMinimalMappedMock: ShowEntry = {
   'airDate': MAX_DATE,
   'releaseDate': MAX_DATE,
+  'effectiveReleaseDate': MAX_DATE,
   'certification': undefined,
   'country': undefined,
   'cover': {

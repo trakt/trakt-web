@@ -57,6 +57,7 @@ export const MovieMatrixMappedMock: MovieEntry = {
   'trailer': 'https://youtube.com/watch?v=d0XTFAMmhrE',
   'airDate': new Date('1999-03-31T00:00:00.000Z'),
   'releaseDate': new Date('1999-03-31T00:00:00.000Z'),
+  'effectiveReleaseDate': new Date('1999-03-31T00:00:00.000Z'),
   'certification': 'R',
   'votes': 65943,
   'plexSlug': 'the-matrix-1999',

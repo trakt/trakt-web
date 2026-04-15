@@ -26,7 +26,7 @@ describe('getDisplayableRatings', () => {
 
   it('should get the ratings if it has aired items', () => {
     const entry = {
-      airDate: new Date(Date.now() - time.years(1)),
+      effectiveReleaseDate: new Date(Date.now() - time.years(1)),
       type: 'movie',
     } as unknown as MovieEntry;
 
@@ -35,7 +35,7 @@ describe('getDisplayableRatings', () => {
 
   it('should get empty ratings for unaired items', () => {
     const entry = {
-      airDate: new Date(Date.now() + time.years(1)),
+      effectiveReleaseDate: new Date(Date.now() + time.years(1)),
       type: 'movie',
     } as unknown as MovieEntry;
 
@@ -46,7 +46,7 @@ describe('getDisplayableRatings', () => {
 
   it('should get the ratings if a movie is released before the air date', () => {
     const entry = {
-      airDate: new Date(Date.now() + time.days(7)),
+      effectiveReleaseDate: new Date(Date.now() + time.days(7)),
       type: 'movie',
       status: 'released',
     } as unknown as MovieEntry;

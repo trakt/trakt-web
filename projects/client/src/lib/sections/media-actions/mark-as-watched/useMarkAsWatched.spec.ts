@@ -104,7 +104,7 @@ describe('useMarkAsWatched', () => {
   describe('media type: movie', () => {
     const props = {
       type: 'movie' as const,
-      media: { id: 1, airDate: new Date(), releaseDate: new Date() },
+      media: { id: 1, effectiveReleaseDate: new Date() },
     };
 
     runCommonTests(props, InvalidateAction.MarkAsWatched('movie'));
@@ -121,7 +121,7 @@ describe('useMarkAsWatched', () => {
   describe('media type: show', () => {
     const props = {
       type: 'show' as const,
-      media: { id: 1, airDate: new Date(), releaseDate: new Date() },
+      media: { id: 1, effectiveReleaseDate: new Date() },
     };
 
     runCommonTests(props, InvalidateAction.MarkAsWatched('show'));
@@ -150,8 +150,7 @@ describe('useMarkAsWatched', () => {
         id: 1,
         season: 1,
         number: 1,
-        airDate: new Date(),
-        releaseDate: new Date(),
+        effectiveReleaseDate: new Date(),
       },
       show: { id: 3, title: 'show' },
     };
@@ -166,8 +165,7 @@ describe('useMarkAsWatched', () => {
             id: 1,
             season: 1,
             number: 1,
-            airDate: new Date(),
-            releaseDate: new Date(),
+            effectiveReleaseDate: new Date(),
           },
           show: ShowSiloMappedMock,
         })
@@ -185,36 +183,31 @@ describe('useMarkAsWatched', () => {
               id: 1,
               season: 1,
               number: 1,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 2,
               season: 1,
               number: 2,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 3,
               season: 1,
               number: 3,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 4,
               season: 1,
               number: 4,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 5,
               season: 1,
               number: 5,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
           ],
           show: ShowSiloMappedMock,
@@ -232,8 +225,7 @@ describe('useMarkAsWatched', () => {
             id: 1,
             season: 1,
             number: 2,
-            airDate: new Date(),
-            releaseDate: new Date(),
+            effectiveReleaseDate: new Date(),
           },
           show: ShowSiloMappedMock,
         })
@@ -251,57 +243,49 @@ describe('useMarkAsWatched', () => {
               id: 1,
               season: 1,
               number: 1,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 2,
               season: 1,
               number: 2,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 3,
               season: 1,
               number: 3,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 4,
               season: 1,
               number: 4,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 5,
               season: 1,
               number: 5,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 6,
               season: 1,
               number: 6,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 7,
               season: 1,
               number: 7,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
             {
               id: 8,
               season: 1,
               number: 8,
-              airDate: new Date(),
-              releaseDate: new Date(),
+              effectiveReleaseDate: new Date(),
             },
           ],
           show: ShowDevsMappedMock,

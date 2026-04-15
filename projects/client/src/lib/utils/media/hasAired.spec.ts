@@ -15,8 +15,7 @@ describe('hasAired', () => {
         hasAired({
           status: 'released',
           type: 'movie',
-          airDate: new Date(),
-          releaseDate: new Date(),
+          effectiveReleaseDate: new Date(),
         }),
       ).toBe(true);
     });
@@ -37,8 +36,7 @@ describe('hasAired', () => {
           hasAired({
             status,
             type: 'movie',
-            airDate: futureDate,
-            releaseDate: futureDate,
+            effectiveReleaseDate: futureDate,
           }),
         ).toBe(false);
       });
@@ -49,33 +47,28 @@ describe('hasAired', () => {
         hasAired({
           status: 'post production',
           type: 'movie',
-          airDate: new Date(),
-          releaseDate: new Date(),
+          effectiveReleaseDate: new Date(),
         }),
       ).toBe(true);
     });
 
     it('returns true for movies released on streaming with a future air date', () => {
       const yesterday = addDays(new Date(), -1);
-      const tomorrow = addDays(new Date(), 1);
       expect(
         hasAired({
           type: 'movie',
-          airDate: tomorrow,
-          releaseDate: yesterday,
+          effectiveReleaseDate: yesterday,
         }),
       ).toBe(true);
     });
 
     it('returns true for movies released on streaming with a future air date and non-released status', () => {
       const yesterday = addDays(new Date(), -1);
-      const tomorrow = addDays(new Date(), 1);
       expect(
         hasAired({
           status: 'post production',
           type: 'movie',
-          airDate: tomorrow,
-          releaseDate: yesterday,
+          effectiveReleaseDate: yesterday,
         }),
       ).toBe(true);
     });
@@ -84,42 +77,41 @@ describe('hasAired', () => {
   const runCommonTests = (type: 'show' | 'episode') => {
     it('returns true for items that aired today', () => {
       const today = new Date();
-      expect(hasAired({ airDate: today, releaseDate: today, type })).toBe(true);
+      expect(hasAired({ effectiveReleaseDate: today, type })).toBe(true);
     });
 
     it('returns true for items that aired yesterday', () => {
       const yesterday = addDays(new Date(), -1);
       expect(
-        hasAired({ airDate: yesterday, releaseDate: yesterday, type }),
+        hasAired({ effectiveReleaseDate: yesterday, type }),
       ).toBe(true);
     });
 
     it('returns true for items that aired 1 week ago', () => {
       const oneWeekAgo = addDays(new Date(), -7);
       expect(
-        hasAired({ airDate: oneWeekAgo, releaseDate: oneWeekAgo, type }),
+        hasAired({ effectiveReleaseDate: oneWeekAgo, type }),
       ).toBe(true);
     });
 
     it('returns false for items that will air tomorrow', () => {
       const tomorrow = addDays(new Date(), 1);
       expect(
-        hasAired({ airDate: tomorrow, releaseDate: tomorrow, type }),
+        hasAired({ effectiveReleaseDate: tomorrow, type }),
       ).toBe(false);
     });
 
     it('returns false for items that will air in 7 days', () => {
       const sevenDaysFromNow = addDays(new Date(), 7);
       expect(
-        hasAired({ airDate: sevenDaysFromNow, releaseDate: sevenDaysFromNow, type }),
+        hasAired({ effectiveReleaseDate: sevenDaysFromNow, type }),
       ).toBe(false);
     });
 
     it('returns true for items released on streaming with a future air date', () => {
       const yesterday = addDays(new Date(), -1);
-      const tomorrow = addDays(new Date(), 1);
       expect(
-        hasAired({ airDate: tomorrow, releaseDate: yesterday, type }),
+        hasAired({ effectiveReleaseDate: yesterday, type }),
       ).toBe(true);
     });
   };

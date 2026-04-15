@@ -23,10 +23,7 @@
   const { sortTag, ...props }: EpisodeCardProps & { sortTag?: Snippet } =
     $props();
 
-  const isFuture = $derived(
-    props.episode.airDate > new Date() &&
-      props.episode.releaseDate > new Date(),
-  );
+  const isFuture = $derived(props.episode.effectiveReleaseDate > new Date());
   const isActivity = $derived(props.variant === "activity");
   const isHidden = $derived(props.status === "hidden");
   const isListItem = $derived(props.variant === "list-item");
@@ -110,7 +107,7 @@
       {#if props.variant === "upcoming"}
         <AirDateTag
           i18n={TagIntlProvider}
-          airDate={props.episode.airDate}
+          airDate={props.episode.effectiveReleaseDate}
           type="tag"
         />
         <EpisodeStatusTag
