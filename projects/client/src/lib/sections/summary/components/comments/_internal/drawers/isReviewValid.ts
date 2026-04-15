@@ -1,9 +1,9 @@
-const WORD_COUNT_THRESHOLD = 5;
+const wordCountThreshold = 5;
+const segmenter = new Intl.Segmenter(undefined, { granularity: 'word' });
 
 export function isReviewValid(review: string): boolean {
-  const words = review
-    .split(/\s+/)
-    .filter((word) => /[\p{L}\p{N}]/u.test(word));
+  const words = [...segmenter.segment(review)]
+    .filter((segment) => segment.isWordLike);
 
-  return words.length >= WORD_COUNT_THRESHOLD;
+  return words.length >= wordCountThreshold;
 }
