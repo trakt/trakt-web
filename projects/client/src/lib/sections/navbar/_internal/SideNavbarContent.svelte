@@ -4,6 +4,7 @@
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -14,6 +15,8 @@
   }: {
     isCollapsed: boolean;
   } = $props();
+
+  const { current } = useToggler("discover");
 </script>
 
 {#snippet iconSearch()}<SearchIcon />{/snippet}
@@ -60,19 +63,19 @@
       {isCollapsed}
     >
       {@render navSubLink(
-        UrlBuilder.trending({ type: "movie" }),
+        UrlBuilder.trending({ type: $current.value }),
         m.list_title_trending(),
       )}
       {@render navSubLink(
-        UrlBuilder.recommended({ type: "movie" }),
+        UrlBuilder.recommended({ type: $current.value }),
         m.list_title_recommended(),
       )}
       {@render navSubLink(
-        UrlBuilder.anticipated({ type: "movie" }),
+        UrlBuilder.anticipated({ type: $current.value }),
         m.list_title_most_anticipated(),
       )}
       {@render navSubLink(
-        UrlBuilder.popular({ type: "movie" }),
+        UrlBuilder.popular({ type: $current.value }),
         m.list_title_most_popular(),
       )}
     </NavGroup>
