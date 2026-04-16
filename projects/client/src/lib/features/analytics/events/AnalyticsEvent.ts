@@ -8,6 +8,8 @@ const SEASONAL_ACTION_PREFIX = 'seasonal-action';
 const BANNER_ACTION_PREFIX = 'banner-action';
 const VIP_ACTION_PREFIX = 'vip-action';
 const SMART_LIST_ACTION_PREFIX = 'smart-list-action';
+const DATA_IMPORT_ACTION_PREFIX = 'data-import';
+const DATA_EXPORT_ACTION_PREFIX = 'data-export';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -74,4 +76,14 @@ export const AnalyticsEvent = {
   SmartListCreate: buildEventKey(SMART_LIST_ACTION_PREFIX, 'create'),
 
   AddNote: buildEventKey(MEDIA_ACTION_PREFIX, 'add-note'),
+
+  // Data Import
+  ImportInitiated: buildEventKey(DATA_IMPORT_ACTION_PREFIX, 'initiated'),
+  ImportCompleted: buildEventKey(DATA_IMPORT_ACTION_PREFIX, 'completed'),
+  ImportFailed: buildEventKey(DATA_IMPORT_ACTION_PREFIX, 'failed'),
+
+  // Data Export
+  ExportInitiated: buildEventKey(DATA_EXPORT_ACTION_PREFIX, 'initiated'),
+  ExportCompleted: buildEventKey(DATA_EXPORT_ACTION_PREFIX, 'completed'),
+  ExportFailed: buildEventKey(DATA_EXPORT_ACTION_PREFIX, 'failed'),
 } as const;

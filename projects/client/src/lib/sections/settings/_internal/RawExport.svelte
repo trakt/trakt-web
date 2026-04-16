@@ -1,5 +1,7 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useAnalytics } from "$lib/features/analytics/useAnalytics";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import { time } from "$lib/utils/timing/time.ts";
@@ -9,15 +11,24 @@
   import SettingsRow from "./SettingsRow.svelte";
 
   const { user } = useUser();
+  const { record } = useAnalytics();
 
   let isExporting = $state(false);
   let statusText = $state("");
   let progress = $state("");
+  let exportStartTime = $state<number | null>(null);
+  let endpointCount = $state(0);
 
   async function startExport() {
     if (!$user) return;
 
     isExporting = true;
+    exportStartTime = Date.now();
+    endpointCount = 0;
+
+    record(AnalyticsEvent.ExportInitiated, {
+      isVip: $user.isVip ? "true" : "false",
+    });
 
     await runRawExport({
       user: { slug: $user.slug, isVip: $user.isVip },
@@ -31,18 +42,28 @@
             break;
           case "fetch":
             statusText = m.text_export_status_fetching({ item: status.item });
+            endpointCount += 1;
             break;
         }
       },
       onProgress: (msg) => (progress = msg),
       onComplete: () => {
+        const exportDuration = Date.now() - (exportStartTime || 0);
+        record(AnalyticsEvent.ExportCompleted, {
+          duration: exportDuration,
+          endpointCount,
+        });
+
         setTimeout(() => {
           isExporting = false;
           statusText = "";
           progress = "";
         }, time.seconds(3));
       },
-      onError: () => {
+      onError: (err) => {
+        const errorMessage = err instanceof Error ? err.message : String(err);
+        record(AnalyticsEvent.ExportFailed, { error: errorMessage });
+
         statusText = m.text_export_status_fail();
         isExporting = false;
       },

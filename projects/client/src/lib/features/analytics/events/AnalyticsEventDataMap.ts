@@ -37,6 +37,21 @@ type SortType = { sortBy: string; sortHow: string };
 type LikeType = { action: 'like' | 'unlike' };
 type VipUpsellType = SourceType;
 type VipUpgradeType = { plan: string };
+type ImportInitiatedType = { source: string };
+type ImportCompletedType = {
+  source: string;
+  totalItems: number;
+  historyCount: number;
+  watchlistCount: number;
+  ratingsCount: number;
+  successCount: number;
+  failedCount: number;
+  duration: number;
+};
+type ImportFailedType = { source: string; error: string };
+type ExportInitiatedType = { isVip: string };
+type ExportCompletedType = { duration: number; endpointCount: number };
+type ExportFailedType = { error: string };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -97,4 +112,14 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.SmartListCreate]: never;
 
   [AnalyticsEvent.AddNote]: { type: NoteType };
+
+  // Data Import
+  [AnalyticsEvent.ImportInitiated]: ImportInitiatedType;
+  [AnalyticsEvent.ImportCompleted]: ImportCompletedType;
+  [AnalyticsEvent.ImportFailed]: ImportFailedType;
+
+  // Data Export
+  [AnalyticsEvent.ExportInitiated]: ExportInitiatedType;
+  [AnalyticsEvent.ExportCompleted]: ExportCompletedType;
+  [AnalyticsEvent.ExportFailed]: ExportFailedType;
 };

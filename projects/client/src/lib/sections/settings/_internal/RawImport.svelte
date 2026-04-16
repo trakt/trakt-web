@@ -4,6 +4,8 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useAnalytics } from "$lib/features/analytics/useAnalytics";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -41,9 +43,11 @@
   let processedCount = $state(0);
   let errorCount = $state(0);
   let parseError = $state<string | null>(null);
+  let importStartTime = $state<number | null>(null);
 
   const { importInProgress } = useImportInProgress();
   const { invalidate } = useInvalidator();
+  const { record } = useAnalytics();
 
   const counts = $derived<ImportCounts>({
     history: parsedItems.filter((i) => i.action === "history").length,
@@ -62,6 +66,7 @@
   async function handleFiles(files: FileList) {
     parseError = null;
     status = "reading";
+    importStartTime = Date.now();
 
     const fileArray = Array.from(files).slice(0, sourceConfig.maxFiles);
     const parser = getParser(selectedSource);
@@ -72,8 +77,14 @@
       parsedItems = await parser.parse(fileArray);
       status = "review";
     } catch (err) {
-      parseError = err instanceof Error ? err.message : String(err);
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      parseError = errorMessage;
       status = "error";
+
+      record(AnalyticsEvent.ImportFailed, {
+        source: selectedSource,
+        error: errorMessage,
+      });
     }
   }
 
@@ -109,10 +120,30 @@
       });
 
       errorCount = failed;
+      const duration = Date.now() - (importStartTime || 0);
+      const successCount = parsedItems.length - failed;
+
+      record(AnalyticsEvent.ImportCompleted, {
+        source: selectedSource,
+        totalItems: parsedItems.length,
+        historyCount: counts.history,
+        watchlistCount: counts.watchlist,
+        ratingsCount: counts.ratings,
+        successCount,
+        failedCount: failed,
+        duration,
+      });
+
       status = "complete";
     } catch (err) {
-      parseError = err instanceof Error ? err.message : String(err);
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      parseError = errorMessage;
       status = "error";
+
+      record(AnalyticsEvent.ImportFailed, {
+        source: selectedSource,
+        error: errorMessage,
+      });
     }
   }
 
@@ -127,6 +158,7 @@
   $effect(() => {
     const source = toImportSource(page.url.searchParams.get("source"));
     if (selectedSource !== source) {
+      record(AnalyticsEvent.ImportInitiated, { source });
       selectedSource = source;
       reset();
     }
