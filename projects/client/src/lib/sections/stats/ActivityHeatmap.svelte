@@ -29,7 +29,7 @@
   {@const { cells, monthLabel, dayLabels, totalRows } = $heatmap}
   <div class="trakt-activity-heatmap-section">
     <div class="trakt-activity-heatmap">
-      <p class="trakt-heatmap-title secondary">{monthLabel}</p>
+      <span class="bold">{monthLabel}</span>
 
       <div
         class="trakt-heatmap-grid"
@@ -56,13 +56,13 @@
           {:else}
             <Tooltip
               content={formatTooltip(cell.date, cell.count)}
-              variant="compact"
+              --cell-col={cell.col + 1}
+              --cell-row={cell.row + 2}
             >
               <div
                 class="trakt-heatmap-cell"
                 data-intensity={cell.intensity}
                 data-today={cell.isToday || undefined}
-                style="grid-column: {cell.col + 1}; grid-row: {cell.row + 2}"
                 role="gridcell"
                 aria-label={formatTooltip(cell.date, cell.count)}
                 aria-current={cell.isToday ? "date" : undefined}
@@ -86,12 +86,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  $cell-size: var(--ni-32);
   $cell-gap: var(--ni-4);
-
-  .trakt-activity-heatmap-section {
-    margin: 0 var(--layout-distance-side);
-  }
 
   .trakt-activity-heatmap-skeleton {
     height: var(--ni-200);
@@ -118,19 +113,18 @@
   .trakt-activity-heatmap {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-8);
-  }
-
-  .trakt-heatmap-title {
-    font-size: var(--font-size-text);
-    font-weight: 500;
+    gap: var(--gap-s);
   }
 
   .trakt-heatmap-grid {
     display: grid;
-    grid-template-columns: repeat(7, #{$cell-size});
-    grid-template-rows: auto repeat(var(--total-rows), #{$cell-size});
+    grid-template-columns: repeat(7, 1fr);
     gap: $cell-gap;
+
+    :global(.trakt-tooltip-trigger) {
+      grid-column: var(--cell-col);
+      grid-row: var(--cell-row);
+    }
   }
 
   .trakt-heatmap-day-label {
@@ -142,8 +136,8 @@
   }
 
   .trakt-heatmap-cell {
-    width: #{$cell-size};
-    height: #{$cell-size};
+    width: 100%;
+    aspect-ratio: 1;
     border-radius: var(--border-radius-s);
     transition: transform calc(0.5 * var(--transition-increment)) ease-in-out;
     cursor: default;
