@@ -16,4 +16,5 @@ export enum ConfirmationType {
   Logout = 'logout',
   SimpleFilters = 'simple-filters',
   CancelVip = 'cancel-vip',
+  CancelImport = 'cancel-import',
 }

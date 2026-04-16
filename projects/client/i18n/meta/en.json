@@ -9531,6 +9531,22 @@
       "exclude": [
         "android"
       ]
+    },
+    "button_text_cancel_import": {
+      "default": "Stop Import",
+      "description": "Text for the button that stops an in-progress import when navigating away.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "warning_prompt_cancel_import": {
+      "default": "Your import is in progress. Navigating away will stop it. Are you sure?",
+      "description": "Warning message shown when a user tries to navigate away while an import is in progress.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

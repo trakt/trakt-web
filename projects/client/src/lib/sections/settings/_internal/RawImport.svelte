@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { beforeNavigate, goto } from "$app/navigation";
   import TabView from "$lib/components/tabs/TabView.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { slide } from "svelte/transition";
   import {
@@ -95,6 +98,37 @@
     selectedSource = value as ImportSource;
     reset();
   }
+
+  const { confirm } = useConfirm();
+
+  beforeNavigate((nav) => {
+    if (status !== "syncing") return;
+    if (nav.willUnload) return;
+
+    nav.cancel();
+
+    confirm({
+      type: ConfirmationType.CancelImport,
+      onConfirm: () => {
+        reset();
+        // eslint-disable-next-line svelte/no-navigation-without-resolve
+        goto(nav.to!.url);
+      },
+    })();
+  });
+
+  $effect(() => {
+    if (status !== "syncing") return;
+
+    const onBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+    };
+
+    globalThis.window.addEventListener("beforeunload", onBeforeUnload);
+    return () => {
+      globalThis.window.removeEventListener("beforeunload", onBeforeUnload);
+    };
+  });
 
   const getTabLabel = (config: ImportSourceConfig) => {
     switch (config.id) {

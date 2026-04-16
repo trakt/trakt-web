@@ -119,5 +119,11 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_cancel_vip(),
         operation: 'destructive',
       };
+    case ConfirmationType.CancelImport:
+      return {
+        buttonText: m.button_text_cancel_import(),
+        message: m.warning_prompt_cancel_import(),
+        operation: 'destructive',
+      };
   }
 }
