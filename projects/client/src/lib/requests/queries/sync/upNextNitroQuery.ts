@@ -13,6 +13,7 @@ import {
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { mapToEpisodeEntry } from '../../_internal/mapToEpisodeEntry.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
+import { mapToShowProgress } from '../../_internal/mapToShowProgress.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
 import {
   type UpNextEntry,
@@ -30,17 +31,13 @@ function mapUpNextContinueWatching(item: UpNextResponse): UpNextEntry {
   const episode = mapToEpisodeEntry(item.progress.next_episode);
   episode.runtime = isNaN(episode.runtime) ? show.runtime : episode.runtime;
 
+  const progress = mapToShowProgress(item.progress);
+
   return {
     intent: 'continue',
     show,
     ...episode,
-    total: item.progress.aired,
-    completed: item.progress.completed,
-    remaining: item.progress.aired - item.progress.completed,
-    minutesLeft: item.progress.stats?.minutes_left ?? 0,
-    lastWatchedAt: item.progress.last_watched_at
-      ? new Date(item.progress.last_watched_at)
-      : null,
+    ...progress,
   };
 }
 
