@@ -57,7 +57,7 @@ jobs:
     needs: files-changed
     if: ${{
       github.ref == 'refs/heads/main' &&
-      github.head_ref != 'i18n_crowdin_main' &&
+      github.head_ref != 'i18n_crowdin_updates' &&
       needs.files-changed.outputs.i18n_source == 'true'
       }}
     name: Release the Translation Fiends (Localize)
@@ -189,7 +189,7 @@ jobs:
   e2e:
     needs: files-changed
     if: ${{
-      github.ref != 'refs/heads/main' && github.head_ref != 'i18n_crowdin_main' &&
+      github.ref != 'refs/heads/main' && github.head_ref != 'i18n_crowdin_updates' &&
       (
       needs.files-changed.outputs.client_source == 'true' ||
       needs.files-changed.outputs.workflows == 'true'
