@@ -8,6 +8,9 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
+  import { useImportInProgress } from "$lib/stores/useImportInProgress.ts";
+  import { useInvalidator } from "$lib/stores/useInvalidator";
   import { slide } from "svelte/transition";
   import {
     IMPORT_SOURCE_CONFIGS,
@@ -38,6 +41,9 @@
   let processedCount = $state(0);
   let errorCount = $state(0);
   let parseError = $state<string | null>(null);
+
+  const { importInProgress } = useImportInProgress();
+  const { invalidate } = useInvalidator();
 
   const counts = $derived<ImportCounts>({
     history: parsedItems.filter((i) => i.action === "history").length,
@@ -84,6 +90,21 @@
         onError: (message) => {
           // FIXME: properly deal with this when tackling https://github.com/trakt/trakt-web/issues/2055
           console.error(message);
+        },
+        onStart: () => {
+          importInProgress.next(true);
+        },
+        onComplete: async (success) => {
+          importInProgress.next(false);
+
+          if (success) {
+            await invalidate(InvalidateAction.Watchlisted("show"));
+            await invalidate(InvalidateAction.Watchlisted("movie"));
+            await invalidate(InvalidateAction.MarkAsWatched("show"));
+            await invalidate(InvalidateAction.MarkAsWatched("movie"));
+            await invalidate(InvalidateAction.Rated("show"));
+            await invalidate(InvalidateAction.Rated("movie"));
+          }
         },
       });
 

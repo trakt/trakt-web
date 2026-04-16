@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getAuthContext } from "$lib/features/auth/stores/getAuthContext.ts";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
+  import { useImportInProgress } from "$lib/stores/useImportInProgress.ts";
   import { useInvalidator } from "$lib/stores/useInvalidator";
   import { LogLevel, print } from "$lib/utils/console/print";
   import { onDestroy } from "svelte";
@@ -10,10 +11,13 @@
 
   const { token } = getAuthContext();
   const { invalidate } = useInvalidator();
+  const { importInProgress } = useImportInProgress();
 
   let socket = $state<WebSocket | Nil>(null);
 
   function wsInvalidate(event: MessageEvent) {
+    if (importInProgress.getValue()) return;
+
     try {
       const data: WebSocketData = JSON.parse(event.data);
 

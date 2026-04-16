@@ -11,63 +11,73 @@ const CHUNK_SIZE = 50;
 export type SyncEngineCallbacks = {
   onProgress: (processed: number) => void;
   onError: (message: string) => void;
+  onStart?: () => void;
+  onComplete?: (success: boolean) => void;
 };
 
 export async function syncToTrakt(
   items: ReadonlyArray<UniversalImportItem>,
-  { onProgress, onError }: SyncEngineCallbacks,
+  { onProgress, onError, onStart, onComplete }: SyncEngineCallbacks,
 ): Promise<number> {
-  const historyItems = items.filter((i) => i.action === 'history');
-  const watchlistItems = items.filter((i) => i.action === 'watchlist');
-  const ratingItems = items.filter((i) => i.action === 'ratings');
+  onStart?.();
 
-  let processedCount = 0;
-  let errorCount = 0;
+  try {
+    const historyItems = items.filter((i) => i.action === 'history');
+    const watchlistItems = items.filter((i) => i.action === 'watchlist');
+    const ratingItems = items.filter((i) => i.action === 'ratings');
 
-  const processChunks = async <TItem, TPayload, TResponse>(
-    chunks: TItem[][],
-    buildPayload: (chunk: TItem[]) => TPayload,
-    sendRequest: (payload: TPayload) => Promise<TResponse>,
-  ) => {
-    for (const chunk of chunks) {
-      try {
-        const payload = buildPayload(chunk);
-        await retryWithRateLimit(() => sendRequest(payload));
-      } catch (err) {
-        errorCount += chunk.length;
-        onError(err instanceof Error ? err.message : String(err));
-      } finally {
-        processedCount += chunk.length;
-        onProgress(processedCount);
+    let processedCount = 0;
+    let errorCount = 0;
+
+    const processChunks = async <TItem, TPayload, TResponse>(
+      chunks: TItem[][],
+      buildPayload: (chunk: TItem[]) => TPayload,
+      sendRequest: (payload: TPayload) => Promise<TResponse>,
+    ) => {
+      for (const chunk of chunks) {
+        try {
+          const payload = buildPayload(chunk);
+          await retryWithRateLimit(() => sendRequest(payload));
+        } catch (err) {
+          errorCount += chunk.length;
+          onError(err instanceof Error ? err.message : String(err));
+        } finally {
+          processedCount += chunk.length;
+          onProgress(processedCount);
+        }
       }
+    };
+
+    const client = api();
+
+    if (historyItems.length > 0) {
+      await processChunks(
+        chunk(historyItems, CHUNK_SIZE),
+        buildHistoryPayload,
+        (payload) => client.sync.history.add({ body: payload }),
+      );
     }
-  };
 
-  const client = api();
+    if (watchlistItems.length > 0) {
+      await processChunks(
+        chunk(watchlistItems, CHUNK_SIZE),
+        buildWatchlistPayload,
+        (payload) => client.sync.watchlist.add({ body: payload }),
+      );
+    }
 
-  if (historyItems.length > 0) {
-    await processChunks(
-      chunk(historyItems, CHUNK_SIZE),
-      buildHistoryPayload,
-      (payload) => client.sync.history.add({ body: payload }),
-    );
+    if (ratingItems.length > 0) {
+      await processChunks(
+        chunk(ratingItems, CHUNK_SIZE),
+        buildRatingsPayload,
+        (payload) => client.sync.ratings.add({ body: payload }),
+      );
+    }
+
+    onComplete?.(true);
+    return errorCount;
+  } catch (err) {
+    onComplete?.(false);
+    throw err;
   }
-
-  if (watchlistItems.length > 0) {
-    await processChunks(
-      chunk(watchlistItems, CHUNK_SIZE),
-      buildWatchlistPayload,
-      (payload) => client.sync.watchlist.add({ body: payload }),
-    );
-  }
-
-  if (ratingItems.length > 0) {
-    await processChunks(
-      chunk(ratingItems, CHUNK_SIZE),
-      buildRatingsPayload,
-      (payload) => client.sync.ratings.add({ body: payload }),
-    );
-  }
-
-  return errorCount;
 }
