@@ -22,6 +22,7 @@
   import ImportComplete from "./import/ImportComplete.svelte";
   import ImportDropzone from "./import/ImportDropzone.svelte";
   import ImportError from "./import/ImportError.svelte";
+  import ImportGuide from "./import/ImportGuide.svelte";
   import ImportProgress from "./import/ImportProgress.svelte";
   import ImportSummary from "./import/ImportSummary.svelte";
   import SettingsBlock from "./SettingsBlock.svelte";
@@ -103,8 +104,11 @@
   }
 
   $effect(() => {
-    selectedSource = toImportSource(page.url.searchParams.get("source"));
-    reset();
+    const source = toImportSource(page.url.searchParams.get("source"));
+    if (selectedSource !== source) {
+      selectedSource = source;
+      reset();
+    }
   });
 
   function onSourceChange(value: string) {
@@ -126,8 +130,11 @@
       type: ConfirmationType.CancelImport,
       onConfirm: () => {
         reset();
-        // eslint-disable-next-line svelte/no-navigation-without-resolve
-        goto(nav.to!.url);
+
+        if (nav.to) {
+          // eslint-disable-next-line svelte/no-navigation-without-resolve
+          goto(nav.to.url);
+        }
       },
     })();
   });
@@ -137,6 +144,11 @@
 
     const onBeforeUnload = (event: BeforeUnloadEvent) => {
       event.preventDefault();
+      /*
+        Many browsers ignore event.preventDefault() for the
+        beforeunload event unless returnValue is also set
+      */
+      event.returnValue = "";
     };
 
     globalThis.window.addEventListener("beforeunload", onBeforeUnload);
@@ -159,6 +171,7 @@
 
 {#snippet importRow()}
   <div class="trakt-import-row">
+    <ImportGuide config={sourceConfig} />
     <div class="import-body">
       {#if status === "parsing"}
         <p class="secondary" transition:slide={{ duration: 150, axis: "y" }}>

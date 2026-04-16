@@ -22,7 +22,8 @@ span.title {
 }
 
 span,
-p {
+p,
+code {
   font-size: var(--font-size-text);
   font-style: normal;
   font-weight: 400;
@@ -45,7 +46,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+code {
   &.secondary {
     color: var(--color-text-secondary);
   }

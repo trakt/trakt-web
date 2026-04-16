@@ -9563,6 +9563,54 @@
         "android",
         "ios"
       ]
+    },
+    "button_text_view_import_guidelines": {
+      "default": "View guidelines",
+      "description": "Text for the button that takes users to the import guidelines page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_view_import_guidelines": {
+      "default": "View guidelines",
+      "description": "Aria-label for the button that takes users to the import guidelines page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_import_json_guidelines": {
+      "default": "JSON Guidelines",
+      "description": "Title for the drawer that shows JSON import format guidelines.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_import_csv_guidelines": {
+      "default": "CSV Guidelines",
+      "description": "Title for the drawer that shows CSV import format guidelines.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_import_fields": {
+      "default": "Fields",
+      "description": "Section header for the fields list in the import guidelines drawer.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_import_example": {
+      "default": "Example",
+      "description": "Section header for the example code block in the import guidelines drawer.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
