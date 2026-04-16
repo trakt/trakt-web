@@ -4,6 +4,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
   'cast': [
     {
       'characterName': 'Juliette Nichols',
+      'episodeCount': 19,
       'headshot': {
         'url': {
           'thumb':
@@ -17,6 +18,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Robert Sims',
+      'episodeCount': 19,
       'headshot': {
         'url': {
           'thumb':
@@ -30,6 +32,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Martha Walker',
+      'episodeCount': 19,
       'headshot': {
         'url': {
           'thumb':
@@ -43,6 +46,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Paul Billings',
+      'episodeCount': 19,
       'headshot': {
         'url': {
           'thumb':
@@ -56,6 +60,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Lukas Kyle',
+      'episodeCount': 19,
       'headshot': {
         'url': {
           'thumb':
@@ -69,6 +74,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Patrick Kennedy',
+      'episodeCount': 19,
       'headshot': {
         'url': {
           'thumb':
@@ -82,6 +88,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Bernard Holland',
+      'episodeCount': 19,
       'headshot': {
         'url': {
           'thumb':
@@ -95,6 +102,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Knox',
+      'episodeCount': 9,
       'headshot': {
         'url': {
           'thumb':
@@ -108,6 +116,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Hank',
+      'episodeCount': 9,
       'headshot': {
         'url': {
           'thumb':
@@ -121,6 +130,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Shirley',
+      'episodeCount': 9,
       'headshot': {
         'url': {
           'thumb':
@@ -134,6 +144,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Camille Sims',
+      'episodeCount': 9,
       'headshot': {
         'url': {
           'thumb':
@@ -147,6 +158,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Carla McLain',
+      'episodeCount': 9,
       'headshot': {
         'url': {
           'thumb':
@@ -160,6 +172,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'characterName': 'Solo',
+      'episodeCount': 9,
       'headshot': {
         'url': {
           'thumb':
@@ -175,6 +188,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
   'directors': [
     {
       'key': 'rhiannon-preece-towey',
+      'episodeCount': 10,
       'jobs': [
         'Script Supervisor',
       ],
@@ -182,6 +196,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'bert',
+      'episodeCount': 5,
       'jobs': [
         'Director',
       ],
@@ -189,6 +204,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'michael-dinner',
+      'episodeCount': 4,
       'jobs': [
         'Director',
       ],
@@ -196,6 +212,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'morten-tyldum',
+      'episodeCount': 3,
       'jobs': [
         'Director',
       ],
@@ -203,6 +220,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'adam-bernstein-5c662b3b-7930-4ca7-82a4-b0342f518e01',
+      'episodeCount': 3,
       'jobs': [
         'Director',
       ],
@@ -210,6 +228,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'david-semel',
+      'episodeCount': 2,
       'jobs': [
         'Director',
       ],
@@ -217,6 +236,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'bertie',
+      'episodeCount': 2,
       'jobs': [
         'Director',
       ],
@@ -224,6 +244,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'aric-avelino',
+      'episodeCount': 2,
       'jobs': [
         'Director',
       ],
@@ -233,6 +254,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
   'writers': [
     {
       'key': 'hugh-howey',
+      'episodeCount': 17,
       'jobs': [
         'Book',
       ],
@@ -240,6 +262,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'graham-yost',
+      'episodeCount': 3,
       'jobs': [
         'Writer',
       ],
@@ -247,6 +270,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'cassie-pappas',
+      'episodeCount': 2,
       'jobs': [
         'Writer',
       ],
@@ -254,6 +278,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'jessica-blaire-c7557156-391c-48b4-b128-8f7ef2d2a94b',
+      'episodeCount': 2,
       'jobs': [
         'Writer',
       ],
@@ -261,6 +286,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'ingrid-escajeda',
+      'episodeCount': 2,
       'jobs': [
         'Writer',
       ],
@@ -268,6 +294,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'jeffery-wang',
+      'episodeCount': 2,
       'jobs': [
         'Writer',
       ],
@@ -275,6 +302,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'fred-golan',
+      'episodeCount': 2,
       'jobs': [
         'Writer',
       ],
@@ -282,6 +310,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'remi-aubuchon',
+      'episodeCount': 1,
       'jobs': [
         'Writer',
       ],
@@ -289,6 +318,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'aric-avelino',
+      'episodeCount': 1,
       'jobs': [
         'Writer',
       ],
@@ -296,6 +326,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'lekethia-dalcoe',
+      'episodeCount': 1,
       'jobs': [
         'Writer',
       ],
@@ -303,6 +334,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'sal-calleros',
+      'episodeCount': 1,
       'jobs': [
         'Writer',
       ],
@@ -310,6 +342,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'jenny-dearmitt',
+      'episodeCount': 1,
       'jobs': [
         'Writer',
       ],
@@ -317,6 +350,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
     },
     {
       'key': 'katherine-disavino',
+      'episodeCount': 1,
       'jobs': [
         'Writer',
       ],
@@ -326,6 +360,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
   'creators': [
     {
       'key': 'graham-yost',
+      'episodeCount': 17,
       'jobs': [
         'Creator',
       ],

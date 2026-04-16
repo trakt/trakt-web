@@ -11,6 +11,7 @@ import type {
   PeopleShowCreditsResponse,
   ShowResponse,
 } from '@trakt/api';
+import type { MediaEntry } from '../models/MediaEntry.ts';
 
 type MediaCreditsResponse =
   | PeopleMovieCreditsResponse
@@ -49,6 +50,19 @@ function mapToMediaEntry(entryResponse: EntryResponse) {
 type CrewResponse = NonNullable<MediaCreditsResponse['crew']>;
 type CrewEntry = CrewResponse[string][number];
 
+type CastResponse = NonNullable<MediaCreditsResponse['cast']>;
+type CastEntry = CastResponse[number];
+
+function toCredit(media: MediaEntry, entry: CrewEntry | CastEntry) {
+  return {
+    media,
+    key: media.key,
+    ...('episode_count' in entry && entry.episode_count != null
+      ? { episodeCount: entry.episode_count }
+      : {}),
+  };
+}
+
 export function mapToMediaCredits(
   response: MediaCreditsResponse,
 ): MediaCredits {
@@ -66,10 +80,9 @@ export function mapToMediaCredits(
     const media = mapToMediaEntry(entry);
 
     entries?.push({
-      media,
+      ...toCredit(media, entry),
       type: 'cast',
       character: entry.character,
-      key: media.key,
     });
   });
 
@@ -78,10 +91,9 @@ export function mapToMediaCredits(
     const mediaEntries = entries.map((entry: CrewEntry) => {
       const media = mapToMediaEntry(entry);
       return {
-        media,
+        ...toCredit(media, entry),
         type: 'crew',
         job: entry.job,
-        key: media.key,
       };
     });
 

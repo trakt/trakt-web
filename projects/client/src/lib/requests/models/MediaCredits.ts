@@ -5,6 +5,7 @@ import { crewPositionSchema } from './CrewPosition.ts';
 const BaseCreditSchema = z.object({
   media: MediaEntrySchema,
   key: z.string(),
+  episodeCount: z.number().optional(),
 });
 
 const CharacterSchema = BaseCreditSchema.extend({
