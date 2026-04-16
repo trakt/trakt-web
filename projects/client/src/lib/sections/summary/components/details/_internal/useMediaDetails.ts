@@ -60,7 +60,9 @@ function episodeAirDate(episode: EpisodeEntry) {
   return {
     title: isUpcomingItem ? m.header_airs() : m.header_aired(),
     values: [
-      isTba ? m.tag_text_tba() : toHumanDay(episode.airDate, getLocale()),
+      isTba
+        ? m.tag_text_tba()
+        : toHumanDay(episode.airDate, getLocale(), 'long-with-time'),
     ],
   };
 }
