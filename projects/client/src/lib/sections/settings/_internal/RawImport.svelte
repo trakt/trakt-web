@@ -37,25 +37,35 @@
     return "imdb";
   }
 
-  let selectedSource = $state<ImportSource>("imdb");
-  let status = $state<ImportStatus>("idle");
-  let parsedItems = $state<UniversalImportItem[]>([]);
-  let processedCount = $state(0);
-  let errorCount = $state(0);
-  let parseError = $state<string | null>(null);
-  let importStartTime = $state<number | null>(null);
-
   const { importInProgress } = useImportInProgress();
   const { invalidate } = useInvalidator();
   const { record } = useAnalytics();
 
-  const counts = $derived<ImportCounts>({
-    history: parsedItems.filter((i) => i.action === "history").length,
-    watchlist: parsedItems.filter((i) => i.action === "watchlist").length,
-    ratings: parsedItems.filter((i) => i.action === "ratings").length,
+  type ImportUIState = {
+    selectedSource: ImportSource;
+    status: ImportStatus;
+    parsedItems: ReadonlyArray<UniversalImportItem>;
+    processedCount: number;
+    errorCount: number;
+    parseError: string | null;
+  };
+
+  const state = $state<ImportUIState>({
+    selectedSource: "imdb",
+    status: "idle",
+    parsedItems: [],
+    processedCount: 0,
+    errorCount: 0,
+    parseError: null,
   });
 
-  const sourceConfig = $derived(IMPORT_SOURCE_CONFIGS[selectedSource]);
+  const counts = $derived<ImportCounts>({
+    history: state.parsedItems.filter((i) => i.action === "history").length,
+    watchlist: state.parsedItems.filter((i) => i.action === "watchlist").length,
+    ratings: state.parsedItems.filter((i) => i.action === "ratings").length,
+  });
+
+  const sourceConfig = $derived(IMPORT_SOURCE_CONFIGS[state.selectedSource]);
 
   function getDropPrompt(): string {
     if (sourceConfig.accept.includes(".zip")) return m.import_drop_zip();
@@ -64,39 +74,37 @@
   }
 
   async function handleFiles(files: FileList) {
-    parseError = null;
-    status = "reading";
-    importStartTime = Date.now();
-
     const fileArray = Array.from(files).slice(0, sourceConfig.maxFiles);
-    const parser = getParser(selectedSource);
+    const parser = getParser(state.selectedSource);
 
-    status = "parsing";
+    state.parseError = null;
+    state.status = "parsing";
 
     try {
-      parsedItems = await parser.parse(fileArray);
-      status = "review";
+      state.parsedItems = await parser.parse(fileArray);
+      state.status = "review";
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : String(err);
-      parseError = errorMessage;
-      status = "error";
+      state.parseError = errorMessage;
+      state.status = "error";
 
       record(AnalyticsEvent.ImportFailed, {
-        source: selectedSource,
+        source: state.selectedSource,
         error: errorMessage,
       });
     }
   }
 
   async function startImport() {
-    processedCount = 0;
-    errorCount = 0;
-    status = "syncing";
+    const startTime = Date.now();
+    state.processedCount = 0;
+    state.errorCount = 0;
+    state.status = "syncing";
 
     try {
-      const failed = await syncToTrakt(parsedItems, {
+      const failed = await syncToTrakt(state.parsedItems, {
         onProgress: (count) => {
-          processedCount = count;
+          state.processedCount = count;
         },
         onError: (message) => {
           // FIXME: properly deal with this when tackling https://github.com/trakt/trakt-web/issues/2055
@@ -119,13 +127,14 @@
         },
       });
 
-      errorCount = failed;
-      const duration = Date.now() - (importStartTime || 0);
-      const successCount = parsedItems.length - failed;
+      const duration = Date.now() - startTime;
+      const successCount = state.parsedItems.length - failed;
+
+      state.errorCount = failed;
 
       record(AnalyticsEvent.ImportCompleted, {
-        source: selectedSource,
-        totalItems: parsedItems.length,
+        source: state.selectedSource,
+        totalItems: state.parsedItems.length,
         historyCount: counts.history,
         watchlistCount: counts.watchlist,
         ratingsCount: counts.ratings,
@@ -134,32 +143,32 @@
         duration,
       });
 
-      status = "complete";
+      state.status = "complete";
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : String(err);
-      parseError = errorMessage;
-      status = "error";
+      state.parseError = errorMessage;
+      state.status = "error";
 
       record(AnalyticsEvent.ImportFailed, {
-        source: selectedSource,
+        source: state.selectedSource,
         error: errorMessage,
       });
     }
   }
 
   function reset() {
-    status = "idle";
-    parsedItems = [];
-    processedCount = 0;
-    errorCount = 0;
-    parseError = null;
+    state.status = "idle";
+    state.parsedItems = [];
+    state.processedCount = 0;
+    state.errorCount = 0;
+    state.parseError = null;
   }
 
   $effect(() => {
     const source = toImportSource(page.url.searchParams.get("source"));
-    if (selectedSource !== source) {
+    if (state.selectedSource !== source) {
       record(AnalyticsEvent.ImportInitiated, { source });
-      selectedSource = source;
+      state.selectedSource = source;
       reset();
     }
   });
@@ -174,7 +183,7 @@
   const { confirm } = useConfirm();
 
   beforeNavigate((nav) => {
-    if (status !== "syncing") return;
+    if (state.status !== "syncing") return;
     if (nav.willUnload) return;
 
     nav.cancel();
@@ -193,7 +202,7 @@
   });
 
   $effect(() => {
-    if (status !== "syncing") return;
+    if (state.status !== "syncing") return;
 
     const onBeforeUnload = (event: BeforeUnloadEvent) => {
       event.preventDefault();
@@ -226,30 +235,30 @@
   <div class="trakt-import-row">
     <ImportGuide config={sourceConfig} />
     <div class="import-body">
-      {#if status === "parsing"}
+      {#if state.status === "parsing"}
         <p class="secondary" transition:slide={{ duration: 150, axis: "y" }}>
           {m.import_status_parsing()}
         </p>
-      {:else if status === "idle" || status === "reading"}
+      {:else if state.status === "idle" || state.status === "reading"}
         <ImportDropzone
           accept={sourceConfig.accept}
           maxFiles={sourceConfig.maxFiles}
           prompt={getDropPrompt()}
           onfiles={handleFiles}
         />
-      {:else if status === "review"}
+      {:else if state.status === "review"}
         <ImportSummary
           {counts}
-          totalItems={parsedItems.length}
+          totalItems={state.parsedItems.length}
           onstart={startImport}
           onreset={reset}
         />
-      {:else if status === "syncing"}
-        <ImportProgress {processedCount} totalCount={parsedItems.length} />
-      {:else if status === "complete"}
-        <ImportComplete {processedCount} {errorCount} onreset={reset} />
-      {:else if status === "error"}
-        <ImportError error={parseError ?? ""} onreset={reset} />
+      {:else if state.status === "syncing"}
+        <ImportProgress processedCount={state.processedCount} totalCount={state.parsedItems.length} />
+      {:else if state.status === "complete"}
+        <ImportComplete processedCount={state.processedCount} errorCount={state.errorCount} onreset={reset} />
+      {:else if state.status === "error"}
+        <ImportError error={state.parseError ?? ""} onreset={reset} />
       {/if}
     </div>
   </div>
@@ -258,7 +267,7 @@
 <SettingsBlock title={m.header_import()} description={m.description_import()}>
   <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
     <TabView
-      value={selectedSource}
+      value={state.selectedSource}
       tabs={Object.values(IMPORT_SOURCE_CONFIGS).map((config) => ({
         value: config.id,
         label: getTabLabel(config),
@@ -282,7 +291,7 @@
         {#snippet items()}
           {#each Object.values(IMPORT_SOURCE_CONFIGS) as config (config.id)}
             <DropdownItem
-              disabled={config.id === selectedSource}
+              disabled={config.id === state.selectedSource}
               onclick={() => onSourceChange(config.id)}
             >
               {getTabLabel(config)}
