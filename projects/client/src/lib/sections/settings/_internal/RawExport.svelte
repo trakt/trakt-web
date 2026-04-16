@@ -13,18 +13,26 @@
   const { user } = useUser();
   const { record } = useAnalytics();
 
-  let isExporting = $state(false);
-  let statusText = $state("");
-  let progress = $state("");
-  let exportStartTime = $state<number | null>(null);
-  let endpointCount = $state(0);
+  type ExportState = {
+    isExporting: boolean;
+    statusText: string;
+    progress: string;
+    endpointCount: number;
+  };
+
+  const state = $state<ExportState>({
+    isExporting: false,
+    statusText: "",
+    progress: "",
+    endpointCount: 0,
+  });
 
   async function startExport() {
     if (!$user) return;
 
-    isExporting = true;
-    exportStartTime = Date.now();
-    endpointCount = 0;
+    const startTime = Date.now();
+    state.isExporting = true;
+    state.endpointCount = 0;
 
     record(AnalyticsEvent.ExportInitiated, {
       isVip: $user.isVip ? "true" : "false",
@@ -35,37 +43,39 @@
       onStatus: (status) => {
         switch (status.type) {
           case "complete":
-            statusText = m.text_export_status_complete();
+            state.statusText = m.text_export_status_complete();
             break;
           case "zip":
-            statusText = m.text_export_status_zipping();
+            state.statusText = m.text_export_status_zipping();
             break;
           case "fetch":
-            statusText = m.text_export_status_fetching({ item: status.item });
-            endpointCount += 1;
+            state.statusText = m.text_export_status_fetching({ item: status.item });
+            state.endpointCount += 1;
             break;
         }
       },
-      onProgress: (msg) => (progress = msg),
+      onProgress: (msg) => {
+        state.progress = msg;
+      },
       onComplete: () => {
-        const exportDuration = Date.now() - (exportStartTime || 0);
+        const exportDuration = Date.now() - startTime;
         record(AnalyticsEvent.ExportCompleted, {
           duration: exportDuration,
-          endpointCount,
+          endpointCount: state.endpointCount,
         });
 
         setTimeout(() => {
-          isExporting = false;
-          statusText = "";
-          progress = "";
+          state.isExporting = false;
+          state.statusText = "";
+          state.progress = "";
         }, time.seconds(3));
       },
       onError: (err) => {
         const errorMessage = err instanceof Error ? err.message : String(err);
         record(AnalyticsEvent.ExportFailed, { error: errorMessage });
 
-        statusText = m.text_export_status_fail();
-        isExporting = false;
+        state.statusText = m.text_export_status_fail();
+        state.isExporting = false;
       },
     });
   }
@@ -82,7 +92,7 @@
     <div class="trakt-raw-export">
       <Button
         label={m.button_label_raw_export()}
-        disabled={isExporting}
+        disabled={state.isExporting}
         onclick={startExport}
         color="default"
         size="small"
@@ -90,11 +100,11 @@
         {m.button_text_raw_export()}
       </Button>
       <div>
-        {#if isExporting}
-          {@render exportLabel(m.text_exporting({ progress }))}
+        {#if state.isExporting}
+          {@render exportLabel(m.text_exporting({ progress: state.progress }))}
         {/if}
-        {#if statusText}
-          {@render exportLabel(statusText)}
+        {#if state.statusText}
+          {@render exportLabel(state.statusText)}
         {/if}
       </div>
     </div>
