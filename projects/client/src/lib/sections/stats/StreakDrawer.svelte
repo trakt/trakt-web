@@ -20,6 +20,7 @@
   });
 </script>
 
+<!-- FIXME: fix animations; no content move, animate appearance -->
 <Drawer
   {onClose}
   title={m.drawer_title_streak_activity()}

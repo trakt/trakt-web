@@ -10,6 +10,7 @@
   const { heatmap, isLoading } = $derived(useActivityHeatmap({ mode }));
 
   const locale = $derived(languageTag());
+  const now = new Date();
 </script>
 
 {#if $isLoading}
@@ -50,6 +51,7 @@
                 date: cell.date,
                 count: cell.count,
                 locale,
+                now,
               })}
               --cell-col={cell.col + 1}
               --cell-row={cell.row + 2}
@@ -63,6 +65,7 @@
                   date: cell.date,
                   count: cell.count,
                   locale,
+                  now,
                 })}
                 aria-current={cell.isToday ? "date" : undefined}
               ></div>
