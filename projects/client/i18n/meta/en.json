@@ -9547,6 +9547,22 @@
         "android",
         "ios"
       ]
+    },
+    "text_source": {
+      "default": "Source",
+      "description": "Text for the section that allows users to select a source, e.g. when importing data, etc.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "dropdown_label_import_source": {
+      "default": "Source",
+      "description": "Aria-label for the dropdown that allows users to select a source when importing data.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
