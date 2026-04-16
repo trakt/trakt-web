@@ -1,9 +1,9 @@
-import type { UserHistory } from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { map, shareReplay } from 'rxjs';
+import { filterWatchedDates } from './filterWatchedDates.ts';
 
 export type HeatmapIntensity = 0 | 1 | 2 | 3 | 4;
 
@@ -92,19 +92,6 @@ export function computeActivityHeatmap(
     dayLabels,
     totalRows,
   };
-}
-
-function filterWatchedDates(
-  history: UserHistory,
-  mode: DiscoverMode,
-): ReadonlyArray<Date> {
-  const movies = mode !== 'show'
-    ? [...history.movies.values()].flatMap((m) => m.watchedDates)
-    : [];
-  const shows = mode !== 'movie'
-    ? [...history.shows.values()].flatMap((s) => s.watchedDates)
-    : [];
-  return [...movies, ...shows];
 }
 
 export function useActivityHeatmap({ mode }: { mode: DiscoverMode }) {

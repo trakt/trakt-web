@@ -12,8 +12,10 @@
   import { useActivityHeatmap } from "./_internal/useActivityHeatmap.ts";
   import { useStreak } from "./_internal/useStreak";
 
-  const { streakCount, streakState, isLoading } = $derived(useStreak());
   const { mode } = useDiscover();
+  const { streakCount, streakState, isLoading } = $derived(
+    useStreak({ mode: $mode }),
+  );
   const { heatmap } = $derived(useActivityHeatmap({ mode: $mode }));
   const { buildDrawerLink } = dashboardDrawerNavigation();
   const drilldownLink = $derived(buildDrawerLink(DashboardDrawers.Streak));
