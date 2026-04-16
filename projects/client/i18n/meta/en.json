@@ -9214,25 +9214,9 @@
         "ios"
       ]
     },
-    "text_stats_streak_month": {
-      "default": "{count} month",
-      "description": "Singular month label in streak accumulator.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "header_stats_graph_daily": {
       "default": "Daily Activity",
       "description": "Title for the daily bars graph in weekly pulse.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "text_stats_streak_months": {
-      "default": "{count} months",
-      "description": "Plural months label in streak accumulator.",
       "exclude": [
         "android",
         "ios"
@@ -9246,14 +9230,6 @@
         "ios"
       ]
     },
-    "text_stats_streak_week": {
-      "default": "{count} week",
-      "description": "Singular week label in streak accumulator.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "header_stats_graph_peak": {
       "default": "Peak Hours",
       "description": "Title for the watch clock graph in weekly pulse.",
@@ -9262,33 +9238,9 @@
         "ios"
       ]
     },
-    "text_stats_streak_weeks": {
-      "default": "{count} weeks",
-      "description": "Plural weeks label in streak accumulator.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "header_stats_graph_shows_movies": {
       "default": "Shows vs Movies",
       "description": "Title for the shows/movies breakdown graph in weekly pulse.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "text_stats_streak_day": {
-      "default": "{count} day",
-      "description": "Singular day label in streak accumulator.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "text_stats_streak_days": {
-      "default": "{count} days",
-      "description": "Plural days label in streak accumulator.",
       "exclude": [
         "android",
         "ios"

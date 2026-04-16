@@ -3,22 +3,13 @@
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { languageTag } from "$lib/features/i18n";
   import { useActivityHeatmap } from "./_internal/useActivityHeatmap.ts";
+  import { formatActivityTooltip } from "./_internal/utils/formatActivityTooltip.ts";
 
   const { mode }: { mode: DiscoverMode } = $props();
 
   const { heatmap, isLoading } = $derived(useActivityHeatmap({ mode }));
 
   const locale = $derived(languageTag());
-
-  function formatTooltip(date: Date, count: number): string {
-    const label = date.toLocaleDateString(locale, {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-    });
-    if (count === 0) return label;
-    return `${label} · ${count} ${count === 1 ? "watch" : "watches"}`;
-  }
 </script>
 
 {#if $isLoading}
@@ -55,7 +46,11 @@
             ></div>
           {:else}
             <Tooltip
-              content={formatTooltip(cell.date, cell.count)}
+              content={formatActivityTooltip({
+                date: cell.date,
+                count: cell.count,
+                locale,
+              })}
               --cell-col={cell.col + 1}
               --cell-row={cell.row + 2}
             >
@@ -64,7 +59,11 @@
                 data-intensity={cell.intensity}
                 data-today={cell.isToday || undefined}
                 role="gridcell"
-                aria-label={formatTooltip(cell.date, cell.count)}
+                aria-label={formatActivityTooltip({
+                  date: cell.date,
+                  count: cell.count,
+                  locale,
+                })}
                 aria-current={cell.isToday ? "date" : undefined}
               ></div>
             </Tooltip>
