@@ -13,13 +13,20 @@ export const EMPTY_CREW: Readonly<MediaCrew> = {
   cast: [],
 };
 
+function toMember(response: CrewResponse | CastResponse) {
+  return ({
+    name: response.person.name,
+    key: response.person.ids.slug,
+    ...(response.episode_count != null ? { episodeCount: response.episode_count } : {}),
+  });
+}
+
 function toCrewMember(
   crewResponse: CrewResponse,
 ): CrewMember {
   return ({
+    ...toMember(crewResponse),
     jobs: crewResponse.jobs,
-    name: crewResponse.person.name,
-    key: crewResponse.person.ids.slug,
   });
 }
 
@@ -27,9 +34,8 @@ function toCastMember(
   castResponse: CastResponse,
 ): CastMember {
   return ({
-    name: castResponse.person.name,
+    ...toMember(castResponse),
     characterName: castResponse.characters.at(0) ?? '',
-    key: castResponse.person.ids.slug,
     headshot: mapToHeadshot(castResponse.person.images),
   });
 }

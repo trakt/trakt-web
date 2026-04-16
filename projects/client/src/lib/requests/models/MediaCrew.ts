@@ -3,17 +3,19 @@ import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
 
 export type Job = string;
 
-export const CrewMemberSchema = z.object({
-  jobs: z.array(z.string()),
+const baseSchema = z.object({
   name: z.string(),
   key: z.string(),
+  episodeCount: z.number().optional(),
+});
+
+export const CrewMemberSchema = baseSchema.extend({
+  jobs: z.array(z.string()),
 });
 export type CrewMember = z.infer<typeof CrewMemberSchema>;
 
-export const CastMemberSchema = z.object({
-  name: z.string(),
+export const CastMemberSchema = baseSchema.extend({
   characterName: z.string(),
-  key: z.string(),
   headshot: z.object({
     url: ImageUrlsSchema,
   }),
