@@ -1,9 +1,13 @@
 <script lang="ts">
   import { beforeNavigate, goto } from "$app/navigation";
+  import { page } from "$app/state";
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { slide } from "svelte/transition";
   import {
     IMPORT_SOURCE_CONFIGS,
@@ -21,7 +25,11 @@
   import ImportProgress from "./import/ImportProgress.svelte";
   import ImportSummary from "./import/ImportSummary.svelte";
   import SettingsBlock from "./SettingsBlock.svelte";
-  import SettingsRow from "./SettingsRow.svelte";
+
+  function toImportSource(value: string | null): ImportSource {
+    if (value && value in IMPORT_SOURCE_CONFIGS) return value as ImportSource;
+    return "imdb";
+  }
 
   let selectedSource = $state<ImportSource>("imdb");
   let status = $state<ImportStatus>("idle");
@@ -94,9 +102,16 @@
     parseError = null;
   }
 
-  function onSourceChange(value: string) {
-    selectedSource = value as ImportSource;
+  $effect(() => {
+    selectedSource = toImportSource(page.url.searchParams.get("source"));
     reset();
+  });
+
+  function onSourceChange(value: string) {
+    const url = new URL(page.url);
+    url.searchParams.set("source", value);
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
+    goto(url, { replaceState: true, noScroll: true, keepFocus: true });
   }
 
   const { confirm } = useConfirm();
@@ -143,7 +158,7 @@
 </script>
 
 {#snippet importRow()}
-  <SettingsRow title={getTabLabel(sourceConfig)}>
+  <div class="trakt-import-row">
     <div class="import-body">
       {#if status === "parsing"}
         <p class="secondary" transition:slide={{ duration: 150, axis: "y" }}>
@@ -171,19 +186,47 @@
         <ImportError error={parseError ?? ""} onreset={reset} />
       {/if}
     </div>
-  </SettingsRow>
+  </div>
 {/snippet}
 
 <SettingsBlock title={m.header_import()} description={m.description_import()}>
-  <TabView
-    value={selectedSource}
-    tabs={Object.values(IMPORT_SOURCE_CONFIGS).map((config) => ({
-      value: config.id,
-      label: getTabLabel(config),
-      content: importRow,
-    }))}
-    onChange={onSourceChange}
-  />
+  <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
+    <TabView
+      value={selectedSource}
+      tabs={Object.values(IMPORT_SOURCE_CONFIGS).map((config) => ({
+        value: config.id,
+        label: getTabLabel(config),
+        content: importRow,
+      }))}
+      onChange={onSourceChange}
+    />
+  </RenderFor>
+  <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
+    <div class="trakt-import-source">
+      <span>{m.text_source()}</span>
+      <DropdownList
+        label={m.dropdown_label_import_source()}
+        style="flat"
+        size="small"
+        variant="secondary"
+        color="default"
+        preferNative
+      >
+        {getTabLabel(sourceConfig)}
+        {#snippet items()}
+          {#each Object.values(IMPORT_SOURCE_CONFIGS) as config (config.id)}
+            <DropdownItem
+              disabled={config.id === selectedSource}
+              onclick={() => onSourceChange(config.id)}
+            >
+              {getTabLabel(config)}
+            </DropdownItem>
+          {/each}
+        {/snippet}
+      </DropdownList>
+    </div>
+    {@render importRow()}
+  </RenderFor>
 </SettingsBlock>
 
 <style>
@@ -193,5 +236,17 @@
     gap: var(--gap-s);
 
     width: 100%;
+  }
+
+  .trakt-import-source {
+    display: flex;
+    gap: var(--gap-m);
+    align-items: center;
+  }
+
+  .trakt-import-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
   }
 </style>
