@@ -1,5 +1,4 @@
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
-import { computeStreak } from './../useStreak.ts';
 
 export type MonthlyStats = {
   readonly currentStreak: number;
@@ -11,47 +10,63 @@ export type MonthlyStats = {
 };
 
 type StreakSegment = {
-  readonly end: string;
+  readonly end: Date;
   readonly length: number;
 };
 
-function parseDayKey(key: string): Date {
-  const [year, month, day] = key.split('-').map(Number);
-  return new Date(year!, month! - 1, day!);
+function toMidnight(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
-function areConsecutiveDays(dayKeyA: string, dayKeyB: string): boolean {
-  const dateA = parseDayKey(dayKeyA);
+function areConsecutiveDays(dateA: Date, dateB: Date): boolean {
   const nextDay = new Date(
     dateA.getFullYear(),
     dateA.getMonth(),
     dateA.getDate() + 1,
   );
-  return getDayKey(parseDayKey(dayKeyB)) === getDayKey(nextDay);
+  return nextDay.getTime() === dateB.getTime();
+}
+
+function deduplicateAndSort(
+  dates: ReadonlyArray<Date>,
+): ReadonlyArray<Date> {
+  const uniqueByDay = new Map(
+    dates.map((date) => {
+      const normalized = toMidnight(date);
+      return [getDayKey(normalized), normalized];
+    }),
+  );
+  return [...uniqueByDay.values()].sort(
+    (a, b) => a.getTime() - b.getTime(),
+  );
 }
 
 function buildStreakSegments(
-  sortedDayKeys: ReadonlyArray<string>,
+  sortedDays: ReadonlyArray<Date>,
 ): ReadonlyArray<StreakSegment> {
-  if (sortedDayKeys.length === 0) return [];
+  if (sortedDays.length === 0) return [];
 
-  const [first, ...rest] = sortedDayKeys;
+  const [first, ...rest] = sortedDays;
+
+  if (!first) return [];
 
   return rest.reduce<ReadonlyArray<StreakSegment>>(
-    (segments, key, index) => {
-      const previousKey = sortedDayKeys[index]!;
-      const lastSegment = segments.at(-1)!;
+    (segments, day, index) => {
+      const previousDay = sortedDays[index];
+      const lastSegment = segments.at(-1);
 
-      if (!areConsecutiveDays(previousKey, key)) {
-        return [...segments, { end: key, length: 1 }];
+      if (
+        !previousDay || !lastSegment || !areConsecutiveDays(previousDay, day)
+      ) {
+        return [...segments, { end: day, length: 1 }];
       }
 
       return [
         ...segments.slice(0, -1),
-        { end: key, length: lastSegment.length + 1 },
+        { end: day, length: lastSegment.length + 1 },
       ];
     },
-    [{ end: first!, length: 1 }],
+    [{ end: first, length: 1 }],
   );
 }
 
@@ -59,47 +74,42 @@ export function computeMonthlyStats(
   watchedDates: ReadonlyArray<Date>,
   now: Date,
 ): MonthlyStats {
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const today = toMidnight(now);
   const currentMonth = today.getMonth();
   const currentYear = today.getFullYear();
   const monthStart = new Date(currentYear, currentMonth, 1);
+  const yesterday = new Date(currentYear, currentMonth, today.getDate() - 1);
 
-  const daysWithActivity = new Set(watchedDates.map(getDayKey));
-  const sortedDayKeys = [...daysWithActivity].sort(
-    (a, b) => parseDayKey(a).getTime() - parseDayKey(b).getTime(),
-  );
-
-  const { count: currentStreak } = computeStreak(watchedDates, now);
+  const sortedDays = deduplicateAndSort(watchedDates);
   const totalElapsedDaysThisMonth = today.getDate();
 
-  const activeDaysThisMonth = sortedDayKeys
-    .filter((key) => {
-      const d = parseDayKey(key);
-      return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
-    }).length;
+  const activeDaysThisMonth = sortedDays
+    .filter((d) =>
+      d.getMonth() === currentMonth && d.getFullYear() === currentYear
+    ).length;
 
-  const activeDaysThisYear = sortedDayKeys
-    .filter((key) => parseDayKey(key).getFullYear() === currentYear).length;
+  const activeDaysThisYear = sortedDays
+    .filter((d) => d.getFullYear() === currentYear).length;
 
-  const segments = buildStreakSegments(sortedDayKeys);
-
-  const todayKey = getDayKey(today);
-  const yesterdayKey = getDayKey(
-    new Date(currentYear, currentMonth, today.getDate() - 1),
-  );
+  const segments = buildStreakSegments(sortedDays);
 
   const activeSegmentIndex = segments.findIndex(
-    (segment) => segment.end === todayKey || segment.end === yesterdayKey,
+    (segment) =>
+      segment.end.getTime() === today.getTime() ||
+      segment.end.getTime() === yesterday.getTime(),
   );
 
+  const currentStreak = activeSegmentIndex >= 0
+    ? segments[activeSegmentIndex]?.length ?? 0
+    : 0;
+
   const previousStreak = activeSegmentIndex > 0
-    ? segments[activeSegmentIndex - 1]!.length
+    ? segments[activeSegmentIndex - 1]?.length ?? 0
     : 0;
 
   const droppedStreaksThisMonth = segments.filter((segment, index) => {
     if (index === activeSegmentIndex) return false;
-    const endDate = parseDayKey(segment.end);
-    return endDate >= monthStart && endDate < today;
+    return segment.end >= monthStart && segment.end < today;
   }).length;
 
   return {
