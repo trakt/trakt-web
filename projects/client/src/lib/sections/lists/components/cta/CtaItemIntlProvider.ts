@@ -4,7 +4,8 @@ import type { CtaItemIntl, CtaItemMeta, CtaLinkMeta } from './CtaItemIntl.ts';
 export const CtaItemIntlProvider: CtaItemIntl = {
   text: ({ cta }: CtaItemMeta) => {
     switch (cta.type) {
-      case 'up-next': {
+      case 'up-next':
+      case 'progress': {
         if (!cta.mediaType) {
           return m.text_cta_up_next_media();
         }

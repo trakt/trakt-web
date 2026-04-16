@@ -91,6 +91,19 @@
   </LandscapeCard>
 {/if}
 
+{#if variant === "progress"}
+  <PortraitCard>
+    {@render content(media.poster.url.thumb)}
+    <CardFooter {action} {tag}>
+      <Link href={UrlBuilder.media(type, media.slug)}>
+        <p class="trakt-card-title ellipsis">
+          {media.title}
+        </p>
+      </Link>
+    </CardFooter>
+  </PortraitCard>
+{/if}
+
 {#if variant === "activity" || variant === "next"}
   <LandscapeCard>
     {@render content(media.thumb.url)}

@@ -11,7 +11,8 @@ export type CtaType =
   | 'favorites'
   | 'social'
   | 'personal-list'
-  | 'smart-list';
+  | 'smart-list'
+  | 'progress';
 
 type CtaAction = {
   disabled: boolean;
@@ -27,6 +28,7 @@ type MediaTypeCta = Extract<
   | 'start-watching'
   | 'personal-activity'
   | 'smart-list'
+  | 'progress'
 >;
 
 type CtaMap = {

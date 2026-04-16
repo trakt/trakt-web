@@ -1,6 +1,8 @@
 <script lang="ts" generics="T">
+  import DropIcon from "$lib/components/icons/DropIcon.svelte";
   import FollowersIcon from "$lib/components/icons/FollowersIcon.svelte";
   import FollowingIcon from "$lib/components/icons/FollowingIcon.svelte";
+  import HourglassIcon from "$lib/components/icons/HourglassIcon.svelte";
   import MediaIcon from "$lib/components/icons/MediaIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
@@ -11,16 +13,13 @@
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import SpoilerIcon from "$lib/components/icons/SpoilerIcon.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
-  import { useUser } from "$lib/features/auth/stores/useUser.ts";
+  import TrackIcon from "$lib/components/TrackIcon.svelte";
 
   interface ToggleIconProps {
     option: ToggleOption<T>;
   }
 
   const { option }: ToggleIconProps = $props();
-
-  const { user } = useUser();
-
   // FIXME: make the icon a prop of ToggleOption
 </script>
 
@@ -66,4 +65,16 @@
 
 {#if option.value === "lists"}
   <ListIcon />
+{/if}
+
+{#if option.value === "in-progress"}
+  <HourglassIcon />
+{/if}
+
+{#if option.value === "completed"}
+  <TrackIcon />
+{/if}
+
+{#if option.value === "dropped"}
+  <DropIcon />
 {/if}
