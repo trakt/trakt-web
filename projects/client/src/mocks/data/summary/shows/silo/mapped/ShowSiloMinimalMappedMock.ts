@@ -56,4 +56,5 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   'tmdbId': 125988,
   'homepage': undefined,
   'socialMedia': undefined,
+  'airs': undefined,
 };

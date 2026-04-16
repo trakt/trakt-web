@@ -29,7 +29,7 @@
 <button
   class="trakt-calendar-day-button"
   aria-label={m.button_label_go_to_calendar_day({
-    day: toHumanDay(day.date, getLocale()),
+    day: toHumanDay({ date: day.date, locale: getLocale() }),
   })}
   class:has-items={itemCount > 0}
   class:is-active={isActiveDate}

@@ -2441,6 +2441,21 @@
         "android"
       ]
     },
+    "text_airs_day_time": {
+      "default": "{day}s at {time}",
+      "description": "Formatted text showing the recurring day and time a show airs.",
+      "exclude": [
+        "android"
+      ],
+      "variables": {
+        "day": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    },
     "header_aired": {
       "default": "Aired",
       "description": "Header for the section that shows when a show has aired.",

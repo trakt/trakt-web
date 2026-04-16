@@ -74,6 +74,13 @@ export function mapToShowEntry(
     totalRuntime,
     rating: mapToTraktRating(show.rating),
     network: show.network,
+    airs: show.airs?.day && show.airs.time && show.airs.timezone
+      ? {
+        day: show.airs.day,
+        time: show.airs.time,
+        timezone: show.airs.timezone,
+      }
+      : undefined,
     homepage: prependHttps(show.homepage),
     socialMedia: mapToSocialMedia(show),
   };

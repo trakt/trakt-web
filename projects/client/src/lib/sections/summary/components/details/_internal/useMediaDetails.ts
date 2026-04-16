@@ -14,12 +14,21 @@ import type { MediaStudio } from '$lib/requests/models/MediaStudio.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { isMaxDate } from '$lib/utils/date/isMaxDate.ts';
 import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
+import { toHumanDayTime } from '$lib/utils/formatting/date/toHumanDayTime.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 import { toCountryName } from '$lib/utils/formatting/intl/toCountryName.ts';
 import { toLanguageName } from '$lib/utils/formatting/intl/toLanguageName.ts';
 import { toTranslatedStatus } from '$lib/utils/formatting/string/toTranslatedStatus.ts';
 import type { MediaDetailsProps } from '../MediaDetailsProps.ts';
 import { toCrewMemberWithJob } from './toCrewMemberWithJob.ts';
+
+const ENDED_STATUSES = new Set(['ended', 'canceled']);
+
+function isCurrentlyAiring(show: ShowEntry, now: Date): boolean {
+  return !isMaxDate(show.airDate) &&
+    show.airDate <= now &&
+    !ENDED_STATUSES.has(show.status);
+}
 
 function originalTitle(media: MediaEntry) {
   if (!media.originalTitle || media.originalTitle === media.title) {
@@ -40,7 +49,7 @@ function mediaAirDate(media: MediaEntry) {
   const isUpcomingItem = media.airDate > new Date();
   return {
     title: isUpcomingItem ? m.header_expected_premiere() : m.header_premiered(),
-    values: [toHumanDay(media.airDate, getLocale())],
+    values: [toHumanDay({ date: media.airDate, locale: getLocale() })],
   };
 }
 
@@ -60,9 +69,11 @@ function episodeAirDate(episode: EpisodeEntry) {
   return {
     title: isUpcomingItem ? m.header_airs() : m.header_aired(),
     values: [
-      isTba
-        ? m.tag_text_tba()
-        : toHumanDay(episode.airDate, getLocale(), 'long-with-time'),
+      isTba ? m.tag_text_tba() : toHumanDay({
+        date: episode.airDate,
+        locale: getLocale(),
+        format: 'long-with-time',
+      }),
     ],
   };
 }
@@ -78,6 +89,22 @@ function networks(entries: MediaNetwork[] | undefined) {
   return {
     title: m.header_network(),
     values: entries?.map((network) => network.name),
+  };
+}
+
+function showAirs(show: ShowEntry, now: Date): MediaDetail {
+  if (!show.airs || !isCurrentlyAiring(show, now)) {
+    return { title: m.header_airs() };
+  }
+
+  const local = toHumanDayTime({ ...show.airs, locale: languageTag() });
+  if (!local) {
+    return { title: m.header_airs() };
+  }
+
+  return {
+    title: m.header_airs(),
+    values: [m.text_airs_day_time(local)],
   };
 }
 
@@ -209,11 +236,16 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
     ];
   }
 
+  const now = new Date();
+  const showAirsDetails = props.type === 'show'
+    ? [showAirs(props.media, now)]
+    : [];
   const totalRuntimeDetails = props.type === 'show'
-    ? [totalRuntime(props.media as ShowEntry)]
+    ? [totalRuntime(props.media)]
     : [];
 
   return [
+    ...showAirsDetails,
     mediaAirDate(props.media),
     mediaStatus(props.media),
     runtime(props.media),

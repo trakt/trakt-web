@@ -29,6 +29,11 @@ export const LibraryMappedMock: LibraryItem[] = [
     'key': 'episode-13352063',
     'media': {
       'airDate': new Date('1997-08-14T02:00:00.000Z'),
+      'airs': {
+        'day': 'Wednesday',
+        'time': '22:00',
+        'timezone': 'America/New_York',
+      },
       'releaseDate': new Date('1997-08-14T02:00:00.000Z'),
       'effectiveReleaseDate': new Date('1997-08-14T02:00:00.000Z'),
       'certification': 'TV-MA',
@@ -271,6 +276,11 @@ export const LibraryMappedMock: LibraryItem[] = [
     'key': 'episode-298461',
     'media': {
       'airDate': new Date('1987-04-05T05:00:00.000Z'),
+      'airs': {
+        'day': 'Sunday',
+        'time': '00:00',
+        'timezone': 'America/New_York',
+      },
       'releaseDate': new Date('1987-04-05T05:00:00.000Z'),
       'effectiveReleaseDate': new Date('1987-04-05T05:00:00.000Z'),
       'certification': 'TV-PG',

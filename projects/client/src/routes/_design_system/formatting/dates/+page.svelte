@@ -208,7 +208,7 @@
           <TableRow highlight={isToday(date)}>
             <TableCell>{getDateLabel(date)}</TableCell>
             <TableCell>{toHumanDate(today, date, getLocale())}</TableCell>
-            <TableCell>{toHumanDay(date, getLocale())}</TableCell>
+            <TableCell>{toHumanDay({ date, locale: getLocale() })}</TableCell>
             <TableCell>{toHumanMonth(date, languageTag())}</TableCell>
             <TableCell>{toHumanETA(today, date, getLocale())}</TableCell>
           </TableRow>

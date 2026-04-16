@@ -7,6 +7,6 @@
 </script>
 
 <p class="no-wrap ellipsis">
-  {toHumanDay(date, getLocale(), "short")}
+  {toHumanDay({ date, locale: getLocale(), format: "short" })}
   ({getYearsDifference(date, referenceDate)})
 </p>

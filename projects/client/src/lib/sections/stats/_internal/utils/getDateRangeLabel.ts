@@ -4,7 +4,7 @@ import type { DateRange } from '../models/DateRange.ts';
 
 export function getDateRangeLabel(range: DateRange) {
   const locale = getLocale();
-  return `${toHumanDay(range.start, locale, 'short')} - ${
-    toHumanDay(range.end, locale, 'short')
+  return `${toHumanDay({ date: range.start, locale, format: 'short' })} - ${
+    toHumanDay({ date: range.end, locale, format: 'short' })
   }`;
 }

@@ -11,7 +11,7 @@ import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/
 import { ShowSiloStudiosMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloStudiosMappedMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { screen, waitFor } from '@testing-library/svelte';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { MediaDetailsProps } from '../MediaDetailsProps.ts';
 import MediaDetails from './MediaDetails.svelte';
 
@@ -251,6 +251,95 @@ describe('MediaDetails', () => {
 
         expect(directorLabel).not.toBeInTheDocument();
         expect(creatorLabel).toBeInTheDocument();
+      });
+    });
+
+    describe('airs', () => {
+      beforeEach(() => {
+        vi.useFakeTimers();
+        vi.setSystemTime(new Date('2025-01-15T00:00:00Z'));
+      });
+
+      afterEach(() => {
+        vi.useRealTimers();
+      });
+
+      it('should display the airs day and time for a currently airing show', async () => {
+        renderComponent(
+          MediaDetails,
+          { props: defaultProps },
+        );
+
+        await waitFor(() => {
+          const airsLabel = screen.getByText('Airs');
+          const airsValue = screen.getByText('Fridays at 2:00 AM');
+
+          expect(airsLabel).toBeInTheDocument();
+          expect(airsValue).toBeInTheDocument();
+        });
+      });
+
+      it('should hide airs for an ended show', async () => {
+        renderComponent(
+          MediaDetails,
+          {
+            props: {
+              ...defaultProps,
+              media: {
+                ...defaultProps.media,
+                status: 'ended',
+              },
+            },
+          },
+        );
+
+        await waitFor(() => {
+          const airsLabel = screen.queryByText('Airs');
+          expect(airsLabel).not.toBeInTheDocument();
+        });
+      });
+
+      it('should hide airs for an upcoming show', async () => {
+        const nextYear = new Date();
+        nextYear.setFullYear(nextYear.getFullYear() + 1);
+
+        renderComponent(
+          MediaDetails,
+          {
+            props: {
+              ...defaultProps,
+              media: {
+                ...defaultProps.media,
+                airDate: nextYear,
+              },
+            },
+          },
+        );
+
+        await waitFor(() => {
+          const airsLabel = screen.queryByText('Airs');
+          expect(airsLabel).not.toBeInTheDocument();
+        });
+      });
+
+      it('should hide airs when airs data is missing', async () => {
+        renderComponent(
+          MediaDetails,
+          {
+            props: {
+              ...defaultProps,
+              media: {
+                ...defaultProps.media,
+                airs: undefined,
+              },
+            },
+          },
+        );
+
+        await waitFor(() => {
+          const airsLabel = screen.queryByText('Airs');
+          expect(airsLabel).not.toBeInTheDocument();
+        });
       });
     });
   });

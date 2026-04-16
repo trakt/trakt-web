@@ -37,7 +37,7 @@
           {#if subscription?.memberSince}
             <p>
               {m.text_member_since({
-                date: toHumanDay(subscription.memberSince, getLocale()),
+                date: toHumanDay({ date: subscription.memberSince, locale: getLocale() }),
               })}
             </p>
           {/if}
