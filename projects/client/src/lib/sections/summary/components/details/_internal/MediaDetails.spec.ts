@@ -55,7 +55,7 @@ describe('MediaDetails', () => {
               ...props.media,
               airDate: nextYear,
             },
-          },
+          } as MediaDetailsProps,
         },
       );
 
@@ -76,7 +76,7 @@ describe('MediaDetails', () => {
               year: undefined,
               airDate: MAX_DATE,
             },
-          },
+          } as MediaDetailsProps,
         },
       );
 
@@ -99,7 +99,7 @@ describe('MediaDetails', () => {
               ...props.media,
               country: undefined,
             },
-          },
+          } as MediaDetailsProps,
         },
       );
 
@@ -119,7 +119,7 @@ describe('MediaDetails', () => {
               ...props.media,
               originalTitle: props.media.title,
             },
-          },
+          } as MediaDetailsProps,
         },
       );
 
@@ -139,7 +139,7 @@ describe('MediaDetails', () => {
               ...props.media,
               originalTitle: 'random media title',
             },
-          },
+          } as MediaDetailsProps,
         },
       );
 
@@ -227,7 +227,7 @@ describe('MediaDetails', () => {
               ...defaultProps.media,
               totalRuntime: NaN,
             },
-          },
+          } as MediaDetailsProps,
         },
       );
 
@@ -289,7 +289,7 @@ describe('MediaDetails', () => {
                 ...defaultProps.media,
                 status: 'ended',
               },
-            },
+            } as MediaDetailsProps,
           },
         );
 
@@ -312,7 +312,7 @@ describe('MediaDetails', () => {
                 ...defaultProps.media,
                 airDate: nextYear,
               },
-            },
+            } as MediaDetailsProps,
           },
         );
 
@@ -332,7 +332,7 @@ describe('MediaDetails', () => {
                 ...defaultProps.media,
                 airs: undefined,
               },
-            },
+            } as MediaDetailsProps,
           },
         );
 
@@ -402,7 +402,7 @@ describe('MediaDetails', () => {
               ...defaultProps.episode,
               airDate: nextYear,
             },
-          },
+          } as MediaDetailsProps,
         },
       );
 
