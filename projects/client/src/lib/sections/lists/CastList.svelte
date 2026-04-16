@@ -1,8 +1,8 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import {
     Drawers,
     summaryDrawerNavigation,
@@ -14,7 +14,7 @@
     title: string;
     cast: CastMember[];
     slug: string;
-    type: MediaType;
+    type: ExtendedMediaType;
     drilldownLink?: string;
   };
 

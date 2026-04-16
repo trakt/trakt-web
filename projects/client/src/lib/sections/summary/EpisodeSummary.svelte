@@ -100,7 +100,7 @@
   title={m.list_title_actors()}
   cast={crew.cast}
   slug={show.slug}
-  type="show"
+  type="episode"
   drilldownLink={castDrawerLink}
 />
 

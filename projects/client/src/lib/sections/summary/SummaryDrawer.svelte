@@ -68,7 +68,7 @@
 {#if drawer === Drawers.Cast}
   <CastDrawer
     cast={details.crew.cast}
-    type={details.type === "episode" ? "show" : details.type}
+    type={details.type}
     onClose={close}
   />
 {/if}

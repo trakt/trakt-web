@@ -6,13 +6,13 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import PersonCard from "$lib/components/people/card/PersonCard.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   type CastMemberCardProps = {
     castMember: CastMember;
-    type: MediaType;
+    type: ExtendedMediaType;
   };
 
   const { castMember, type }: CastMemberCardProps = $props();

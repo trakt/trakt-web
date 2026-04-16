@@ -2,8 +2,8 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { fade } from "svelte/transition";
   import CastMemberItem from "../../../lists/components/CastMemberItem.svelte";
 
@@ -13,7 +13,7 @@
     type,
   }: {
     cast: CastMember[];
-    type: MediaType;
+    type: ExtendedMediaType;
     onClose: () => void;
   } = $props();
 
