@@ -1,6 +1,8 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { map, shareReplay } from 'rxjs';
+import { filterWatchedDates } from './filterWatchedDates.ts';
 
 export type StreakState = 'active' | 'at_risk' | 'none';
 
@@ -71,7 +73,7 @@ export function computeStreak(
   };
 }
 
-export function useStreak() {
+export function useStreak({ mode }: { mode: DiscoverMode }) {
   const { history } = useUser();
 
   const now = new Date();
@@ -80,10 +82,7 @@ export function useStreak() {
     map(($history) => {
       if (!$history) return null;
 
-      const watchedDates = [
-        ...[...$history.movies.values()].flatMap((m) => m.watchedDates),
-        ...[...$history.shows.values()].flatMap((s) => s.watchedDates),
-      ];
+      const watchedDates = filterWatchedDates($history, mode);
 
       return computeStreak(watchedDates, now);
     }),
