@@ -32,9 +32,9 @@
     coverUrl,
   }: SeasonEpisodeItemProps = $props();
 
-  const isFuture = $derived(episode.airDate > new Date());
+  const isFuture = $derived(episode.effectiveReleaseDate > new Date());
   const hasBulkMarkAsWatched = $derived(
-    hasUnseenEpisodes && episode.airDate && !isFuture,
+    hasUnseenEpisodes && episode.effectiveReleaseDate && !isFuture,
   );
 </script>
 

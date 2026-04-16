@@ -401,6 +401,7 @@ describe('MediaDetails', () => {
             episode: {
               ...defaultProps.episode,
               airDate: nextYear,
+              effectiveReleaseDate: nextYear,
             },
           } as MediaDetailsProps,
         },

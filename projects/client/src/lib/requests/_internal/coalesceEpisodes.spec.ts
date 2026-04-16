@@ -22,6 +22,7 @@ describe('coalesceEpisodes', () => {
           episode: 1,
           type: premiereType,
           airDate: new Date('2024-01-01'),
+          effectiveReleaseDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
         {
           show,
@@ -29,6 +30,7 @@ describe('coalesceEpisodes', () => {
           episode: 10,
           type: finaleType,
           airDate: new Date('2024-01-01'),
+          effectiveReleaseDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
       ];
 
@@ -52,6 +54,7 @@ describe('coalesceEpisodes', () => {
           episode: 1,
           type: premiereType,
           airDate: new Date('2024-01-01'),
+          effectiveReleaseDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
         {
           show,
@@ -59,6 +62,7 @@ describe('coalesceEpisodes', () => {
           episode: 2,
           type: 'regular',
           airDate: new Date('2024-03-01'),
+          effectiveReleaseDate: new Date('2024-03-01'),
         } as unknown as UpcomingEpisodeEntry,
       ];
 
@@ -77,6 +81,7 @@ describe('coalesceEpisodes', () => {
           episode: 1,
           type: premiereType,
           airDate: new Date('2024-01-01'),
+          effectiveReleaseDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
         {
           show: show2,
@@ -84,6 +89,7 @@ describe('coalesceEpisodes', () => {
           episode: 10,
           type: finaleType,
           airDate: new Date('2024-03-01'),
+          effectiveReleaseDate: new Date('2024-03-01'),
         } as unknown as UpcomingEpisodeEntry,
       ];
 
@@ -102,6 +108,7 @@ describe('coalesceEpisodes', () => {
           episode: 1,
           type: premiereType,
           airDate: new Date('2024-01-01'),
+          effectiveReleaseDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
         {
           show: show2,
@@ -109,6 +116,7 @@ describe('coalesceEpisodes', () => {
           episode: 1,
           type: premiereType,
           airDate: new Date('2024-01-01'),
+          effectiveReleaseDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
         {
           show: show1,
@@ -116,6 +124,7 @@ describe('coalesceEpisodes', () => {
           episode: 10,
           type: finaleType,
           airDate: new Date('2024-01-01'),
+          effectiveReleaseDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
         {
           show: show2,
@@ -123,6 +132,7 @@ describe('coalesceEpisodes', () => {
           episode: 10,
           type: finaleType,
           airDate: new Date('2024-01-01'),
+          effectiveReleaseDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
       ];
 
@@ -153,6 +163,7 @@ describe('coalesceEpisodes', () => {
         episode: 1,
         type: 'regular',
         airDate: new Date('2024-01-01'),
+        effectiveReleaseDate: new Date('2024-01-01'),
       } as unknown as UpcomingEpisodeEntry,
 
       {
@@ -161,6 +172,7 @@ describe('coalesceEpisodes', () => {
         episode: 2,
         type: 'regular',
         airDate: new Date('2024-01-08'),
+        effectiveReleaseDate: new Date('2024-01-08'),
       } as unknown as UpcomingEpisodeEntry,
     ];
 
@@ -169,7 +181,7 @@ describe('coalesceEpisodes', () => {
     expect(result).toEqual(episodes);
   });
 
-  it('should sort episodes by air date', () => {
+  it('should sort episodes by effective release date', () => {
     const show = { id: 1, title: 'Test Show' };
     const episodes = [
       {
@@ -178,6 +190,7 @@ describe('coalesceEpisodes', () => {
         episode: 2,
         type: 'regular',
         airDate: new Date('2024-01-08'),
+        effectiveReleaseDate: new Date('2024-01-08'),
       } as unknown as UpcomingEpisodeEntry,
       {
         show,
@@ -185,13 +198,18 @@ describe('coalesceEpisodes', () => {
         episode: 1,
         type: 'regular',
         airDate: new Date('2024-01-01'),
+        effectiveReleaseDate: new Date('2024-01-01'),
       } as unknown as UpcomingEpisodeEntry,
     ];
 
     const result = coalesceEpisodes(episodes);
 
-    expect(assertDefined(result[0]).airDate).toEqual(new Date('2024-01-01'));
-    expect(assertDefined(result[1]).airDate).toEqual(new Date('2024-01-08'));
+    expect(assertDefined(result[0]).effectiveReleaseDate).toEqual(
+      new Date('2024-01-01'),
+    );
+    expect(assertDefined(result[1]).effectiveReleaseDate).toEqual(
+      new Date('2024-01-08'),
+    );
   });
 
   describe('coalesce: season premiere and season finale', () => {
@@ -219,6 +237,7 @@ describe('coalesceEpisodes', () => {
         episode: 1,
         type: 'season_premiere',
         airDate: new Date('2024-01-01'),
+        effectiveReleaseDate: new Date('2024-01-01'),
       } as unknown as UpcomingEpisodeEntry,
       {
         show,
@@ -226,6 +245,7 @@ describe('coalesceEpisodes', () => {
         episode: 2,
         type: 'standard',
         airDate: new Date('2024-01-01'),
+        effectiveReleaseDate: new Date('2024-01-01'),
       } as unknown as UpcomingEpisodeEntry,
     ];
 
