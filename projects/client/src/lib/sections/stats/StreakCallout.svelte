@@ -5,9 +5,10 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import BannerContainer from "$lib/sections/banner/_internal/BannerContainer.svelte";
   import {
-    dashboardDrawerNavigation,
-    DashboardDrawers,
+      dashboardDrawerNavigation,
+      DashboardDrawers,
   } from "../dashboard/_internal/dashboardDrawerNavigation";
+  import StreakIcon from "./_internal/icons/StreakIcon.svelte";
   import StreakAccumulator from "./_internal/StreakAccumulator.svelte";
   import { useActivityHeatmap } from "./_internal/useActivityHeatmap.ts";
   import { useStreak } from "./_internal/useStreak";
@@ -21,76 +22,67 @@
   const drilldownLink = $derived(buildDrawerLink(DashboardDrawers.Streak));
 
   type Tier = {
-    emoji: string;
-    message: string;
-  };
-
-  type TierDef = {
     threshold: number;
-    tier: Tier;
-    exactMessage?: string;
+    message: string;
+    exactMessage: string;
   };
 
-  const tiers: ReadonlyArray<TierDef> = [
+  const tiers: ReadonlyArray<Tier> = [
     {
       threshold: 365,
-      tier: { emoji: "👑", message: m.text_stats_streak_every_single_day() },
+      message: m.text_stats_streak_every_single_day(),
       exactMessage: m.text_stats_streak_exact_year(),
     },
     {
       threshold: 180,
-      tier: { emoji: "🌟", message: m.text_stats_streak_every_single_day() },
+      message: m.text_stats_streak_every_single_day(),
       exactMessage: m.text_stats_streak_exact_half_year(),
     },
     {
       threshold: 90,
-      tier: { emoji: "⚡", message: m.text_stats_streak_others_dream() },
+      message: m.text_stats_streak_others_dream(),
       exactMessage: m.text_stats_streak_exact_90(),
     },
     {
       threshold: 60,
-      tier: { emoji: "💥", message: m.text_stats_streak_lifestyle() },
+      message: m.text_stats_streak_lifestyle(),
       exactMessage: m.text_stats_streak_exact_60(),
     },
     {
       threshold: 30,
-      tier: { emoji: "💥", message: m.text_stats_streak_no_days_off() },
+      message: m.text_stats_streak_no_days_off(),
       exactMessage: m.text_stats_streak_exact_month(),
     },
     {
       threshold: 14,
-      tier: { emoji: "🔥", message: m.text_stats_streak_locked_in() },
+      message: m.text_stats_streak_locked_in(),
       exactMessage: m.text_stats_streak_exact_two_weeks(),
     },
     {
       threshold: 7,
-      tier: { emoji: "🔥", message: m.text_stats_streak_keep_fire() },
+      message: m.text_stats_streak_keep_fire(),
       exactMessage: m.text_stats_streak_exact_week(),
     },
     {
       threshold: 3,
-      tier: { emoji: "🔥", message: m.text_stats_streak_habit_forming() },
+      message: m.text_stats_streak_habit_forming(),
       exactMessage: m.text_stats_streak_exact_three_days(),
     },
     {
       threshold: 1,
-      tier: { emoji: "🕯️", message: m.text_stats_streak_keep_going() },
+      message: m.text_stats_streak_keep_going(),
       exactMessage: m.text_stats_streak_exact_it_begins(),
     },
   ];
 
-  const currentTier = $derived.by(() => {
+  const tierMessage = $derived.by(() => {
     const count = $streakCount;
-    const tierDef = tiers.find(({ threshold }) => count >= threshold);
+    const tier = tiers.find(({ threshold }) => count >= threshold);
 
-    if (!tierDef) return tiers[tiers.length - 1]!.tier;
+    if (!tier) return m.text_stats_streak_keep_going();
 
-    const { threshold, tier, exactMessage } = tierDef;
-    return {
-      ...tier,
-      message:
-        count === threshold && exactMessage ? exactMessage : tier.message,
-    };
+    const { threshold, message, exactMessage } = tier;
+    return count === threshold && exactMessage ? exactMessage : message;
   });
 
   const streakLabel = $derived(
@@ -110,34 +102,41 @@
   <BannerContainer variant="fluid">
     <trakt-streak-callout>
       <Link href={drilldownLink} noscroll>
-        <div class="trakt-streak-callout" data-at-risk={isAtRisk || undefined}>
+        <div class="trakt-streak-callout">
           <div class="trakt-streak-left">
             <div class="trakt-streak-flame">
-              {currentTier.emoji}
+              <StreakIcon count={$streakCount} />
             </div>
 
             <div class="trakt-streak-info">
-              <p class="trakt-streak-title">
-                <span class="trakt-streak-count">{streakLabel}</span>
+              <p class="trakt-streak-title bold">
+                <span class="trakt-streak-count bold">{streakLabel}</span>
                 {m.text_stats_watching_streak()}
               </p>
-              <p class="trakt-streak-subtitle secondary">
-                {#if isAtRisk}
-                  <span class="trakt-streak-warning"
-                    >{m.text_stats_watch_today()}</span
-                  >
-                  {m.text_stats_keep_streak_alive()}
+              <p class="secondary">
+                {#if isAtRisk || $streakCount === 0}
+                  <span class="secondary bold">
+                    {m.text_stats_watch_today()}
+                  </span>
+                  {#if $streakCount > 0}
+                    {m.text_stats_keep_streak_alive()}
+                  {:else}
+                    {m.text_stats_start_streak()}
+                  {/if}
                 {:else}
-                  {currentTier.message}
+                  {tierMessage}
                 {/if}
               </p>
             </div>
           </div>
 
-          <StreakAccumulator cells={$heatmap?.cells ?? []} />
-
-          <div class="trakt-streak-footer">
-            <ArrowRightIcon />
+          <div class="trakt-streak-right">
+            <div class="trakt-streak-accumulator">
+              <StreakAccumulator cells={$heatmap?.cells ?? []} />
+            </div>
+            <div class="trakt-streak-footer">
+              <ArrowRightIcon />
+            </div>
           </div>
         </div>
       </Link>
@@ -151,10 +150,6 @@
   trakt-streak-callout,
   .trakt-streak-skeleton {
     height: var(--ni-80);
-
-    @include for-tablet-sm-and-below {
-      height: var(--ni-128);
-    }
   }
 
   trakt-streak-callout {
@@ -162,6 +157,10 @@
 
     :global(.trakt-link) {
       text-decoration: none;
+
+      :global(.secondary) {
+        color: var(--color-text-secondary);
+      }
     }
   }
 
@@ -193,32 +192,21 @@
   }
 
   .trakt-streak-callout {
-    padding: var(--ni-16) var(--ni-24);
+    background: var(--color-streak-surface);
+
+    padding: var(--ni-18);
 
     display: flex;
     align-items: center;
     gap: var(--gap-l);
 
-    background: linear-gradient(
-      135deg,
-      var(--color-streak-surface-accent) 0%,
-      var(--color-streak-surface) 100%
-    );
-    border: 1px solid var(--color-streak-border);
+    border: var(--ni-1) solid var(--color-streak-border);
     border-radius: var(--border-radius-l);
-    box-shadow: var(--shadow-streak);
 
     @include for-tablet-sm-and-below {
-      display: grid;
-      grid-template-columns: 1fr auto;
       gap: var(--gap-m);
-      align-items: center;
-
       padding: var(--ni-12);
-    }
-
-    &[data-at-risk] {
-      opacity: 0.8;
+      padding-right: var(--ni-18);
     }
   }
 
@@ -227,66 +215,55 @@
     align-items: center;
     gap: var(--gap-m);
     min-width: 0;
-    flex-shrink: 0;
-
-    @include for-tablet-sm-and-below {
-      grid-column: 1;
-      grid-row: 1;
-      flex-shrink: 1;
-    }
+    flex: 1;
   }
 
-  :global(.trakt-streak-accumulator) {
+  .trakt-streak-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-l);
+    flex: 1;
+
     @include for-tablet-sm-and-below {
-      grid-column: 1 / -1;
-      grid-row: 2;
-      overflow: hidden;
+      flex-direction: column;
+      flex: none;
+      align-items: flex-end;
+      align-self: stretch;
+      gap: 0;
     }
   }
 
   .trakt-streak-flame {
     width: var(--ni-48);
     height: var(--ni-48);
-    border-radius: var(--border-radius-m);
-    background: var(--color-streak-flame-background);
 
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--ni-28);
     flex-shrink: 0;
   }
 
   .trakt-streak-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+
     min-width: 0;
   }
 
-  .trakt-streak-title {
-    font-size: var(--ni-18);
-    font-weight: 600;
-  }
-
+  .trakt-streak-title,
   .trakt-streak-count {
-    font-size: var(--ni-22);
-    color: var(--color-streak-accent);
+    font-size: var(--ni-18);
+  }
 
-    @include for-mobile {
-      display: block;
+  .trakt-streak-accumulator {
+    display: flex;
+    flex: 1;
+
+    @include for-tablet-sm-and-below {
+      align-items: center;
     }
-  }
-
-  .trakt-streak-subtitle {
-    font-size: var(--font-size-text);
-    margin-top: var(--ni-4);
-    color: var(--color-streak-subtitle);
-  }
-
-  .trakt-streak-warning {
-    color: var(--color-streak-warning);
-    background: var(--color-streak-warning-background);
-    padding: var(--ni-1) var(--ni-6);
-    border-radius: var(--ni-4);
-    font-weight: 600;
   }
 
   .trakt-streak-footer {
@@ -297,11 +274,6 @@
     :global(svg) {
       width: var(--ni-16);
       height: var(--ni-16);
-    }
-
-    @include for-tablet-sm-and-below {
-      grid-column: 2;
-      grid-row: 1;
     }
   }
 </style>

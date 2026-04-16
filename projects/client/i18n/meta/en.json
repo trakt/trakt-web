@@ -8934,6 +8934,14 @@
         "ios"
       ]
     },
+    "text_stats_start_streak": {
+      "default": "to start your streak!",
+      "description": "Motivational text following 'Watch today' when starting a new streak.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "label_stats_hours": {
       "default": "Hours",
       "description": "Label for total hours watched stat in weekly pulse.",
@@ -9723,6 +9731,19 @@
     "button_label_progress_dropped": {
       "default": "View dropped shows",
       "description": "Aria-label for the button that allows users to filter the list to only display shows that are dropped.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_text_future_activity": {
+      "default": "{day}, the future is unwritten",
+      "description": "Tooltip text for an activity item in a week or month overview. A fun and whimsical way to denote that there is no activity yet. Should be a short sentence.",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      },
       "exclude": [
         "android",
         "ios"
