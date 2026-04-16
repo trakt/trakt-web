@@ -1,11 +1,19 @@
 <script lang="ts">
+  import ArrowRightIcon from "$lib/components/icons/ArrowRightIcon.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import BannerContainer from "$lib/sections/banner/_internal/BannerContainer.svelte";
+  import {
+    dashboardDrawerNavigation,
+    DashboardDrawers,
+  } from "../dashboard/_internal/dashboardDrawerNavigation";
   import StreakAccumulator from "./_internal/StreakAccumulator.svelte";
   import { useStreak } from "./_internal/useStreak";
 
   const { streakCount, streakState, isLoading } = $derived(useStreak());
+  const { buildDrawerLink } = dashboardDrawerNavigation();
+  const drilldownLink = $derived(buildDrawerLink(DashboardDrawers.Streak));
 
   type Tier = {
     emoji: string;
@@ -96,39 +104,58 @@
   </BannerContainer>
 {:else if hasStreak}
   <BannerContainer variant="fluid">
-    <div class="trakt-streak-callout" data-at-risk={isAtRisk || undefined}>
-      <div class="trakt-streak-left">
-        <div class="trakt-streak-flame">
-          {currentTier.emoji}
-        </div>
+    <trakt-streak-callout>
+      <Link href={drilldownLink} noscroll>
+        <div class="trakt-streak-callout" data-at-risk={isAtRisk || undefined}>
+          <div class="trakt-streak-left">
+            <div class="trakt-streak-flame">
+              {currentTier.emoji}
+            </div>
 
-        <div class="trakt-streak-info">
-          <p class="trakt-streak-title">
-            <span class="trakt-streak-count">{streakLabel}</span>
-            {m.text_stats_watching_streak()}
-          </p>
-          <p class="trakt-streak-subtitle secondary">
-            {#if isAtRisk}
-              <span class="trakt-streak-warning"
-                >{m.text_stats_watch_today()}</span
-              >
-              {m.text_stats_keep_streak_alive()}
-            {:else}
-              {currentTier.message}
-            {/if}
-          </p>
-        </div>
-      </div>
+            <div class="trakt-streak-info">
+              <p class="trakt-streak-title">
+                <span class="trakt-streak-count">{streakLabel}</span>
+                {m.text_stats_watching_streak()}
+              </p>
+              <p class="trakt-streak-subtitle secondary">
+                {#if isAtRisk}
+                  <span class="trakt-streak-warning"
+                    >{m.text_stats_watch_today()}</span
+                  >
+                  {m.text_stats_keep_streak_alive()}
+                {:else}
+                  {currentTier.message}
+                {/if}
+              </p>
+            </div>
+          </div>
 
-      <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-        <StreakAccumulator days={$streakCount} active={!isAtRisk} />
-      </RenderFor>
-    </div>
+          <RenderFor
+            audience="all"
+            device={["tablet-sm", "tablet-lg", "desktop"]}
+          >
+            <StreakAccumulator days={$streakCount} active={!isAtRisk} />
+          </RenderFor>
+
+          <div class="trakt-streak-footer">
+            <ArrowRightIcon />
+          </div>
+        </div>
+      </Link>
+    </trakt-streak-callout>
   </BannerContainer>
 {/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  trakt-streak-callout {
+    display: contents;
+
+    :global(.trakt-link) {
+      text-decoration: none;
+    }
+  }
 
   // TODO: extract shared skeleton shimmer mixin (see also SkeletonCard.svelte)
   .trakt-streak-skeleton {
@@ -181,6 +208,7 @@
   }
 
   .trakt-streak-left {
+    flex: 1;
     display: flex;
     align-items: center;
     gap: var(--gap-m);
@@ -230,5 +258,16 @@
     padding: var(--ni-1) var(--ni-6);
     border-radius: var(--ni-4);
     font-weight: 600;
+  }
+
+  .trakt-streak-footer {
+    display: flex;
+    flex-shrink: 0;
+    color: var(--color-text-secondary);
+
+    :global(svg) {
+      width: var(--ni-16);
+      height: var(--ni-16);
+    }
   }
 </style>

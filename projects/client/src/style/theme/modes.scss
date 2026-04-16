@@ -194,8 +194,7 @@
   --color-vip-popular-tag: #fdc700;
   --color-vip-border-accent: var(--red-600);
   --color-vip-surface-muted: var(--red-50);
-  --background-vip-elevated-card: radial-gradient(
-    167.08% 143.09% at 7.82% 100%,
+  --background-vip-elevated-card: radial-gradient(167.08% 143.09% at 7.82% 100%,
     var(--color-vip-surface-muted) 0%,
     var(--shade-100) 100%);
   --color-vip-discount-pill: var(--red-700);
@@ -241,7 +240,7 @@
   /*
    * Activity heatmap
    */
-  --color-heatmap-empty: var(--shade-100);
+  --color-heatmap-empty: var(--shade-200);
   --color-heatmap-l1: var(--purple-100);
   --color-heatmap-l2: var(--purple-300);
   --color-heatmap-l3: var(--purple-500);
@@ -439,8 +438,7 @@
   --color-vip-popular-tag: #fdc700;
   --color-vip-border-accent: #b31818;
   --color-vip-surface-muted: #490105;
-  --background-vip-elevated-card: radial-gradient(
-      167.08% 143.09% at 7.82% 100%,
+  --background-vip-elevated-card: radial-gradient(167.08% 143.09% at 7.82% 100%,
       var(--color-vip-surface-muted) 0%,
       var(--shade-1000) 100%);
   --color-vip-discount-pill: var(--red-100);
