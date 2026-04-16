@@ -1,17 +1,20 @@
 <script lang="ts">
   import ArrowRightIcon from "$lib/components/icons/ArrowRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import BannerContainer from "$lib/sections/banner/_internal/BannerContainer.svelte";
   import {
     dashboardDrawerNavigation,
     DashboardDrawers,
   } from "../dashboard/_internal/dashboardDrawerNavigation";
   import StreakAccumulator from "./_internal/StreakAccumulator.svelte";
+  import { useActivityHeatmap } from "./_internal/useActivityHeatmap.ts";
   import { useStreak } from "./_internal/useStreak";
 
   const { streakCount, streakState, isLoading } = $derived(useStreak());
+  const { mode } = useDiscover();
+  const { heatmap } = $derived(useActivityHeatmap({ mode: $mode }));
   const { buildDrawerLink } = dashboardDrawerNavigation();
   const drilldownLink = $derived(buildDrawerLink(DashboardDrawers.Streak));
 
@@ -130,12 +133,7 @@
             </div>
           </div>
 
-          <RenderFor
-            audience="all"
-            device={["tablet-sm", "tablet-lg", "desktop"]}
-          >
-            <StreakAccumulator days={$streakCount} active={!isAtRisk} />
-          </RenderFor>
+          <StreakAccumulator cells={$heatmap?.cells ?? []} />
 
           <div class="trakt-streak-footer">
             <ArrowRightIcon />
@@ -149,6 +147,15 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  trakt-streak-callout,
+  .trakt-streak-skeleton {
+    height: var(--ni-80);
+
+    @include for-tablet-sm-and-below {
+      height: var(--ni-128);
+    }
+  }
+
   trakt-streak-callout {
     display: contents;
 
@@ -159,7 +166,6 @@
 
   // TODO: extract shared skeleton shimmer mixin (see also SkeletonCard.svelte)
   .trakt-streak-skeleton {
-    height: var(--ni-80);
     border-radius: var(--border-radius-l);
     background: var(--color-streak-surface);
     position: relative;
@@ -190,7 +196,6 @@
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: var(--gap-l);
 
     background: linear-gradient(
@@ -202,17 +207,40 @@
     border-radius: var(--border-radius-l);
     box-shadow: var(--shadow-streak);
 
+    @include for-tablet-sm-and-below {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--gap-m);
+      align-items: center;
+
+      padding: var(--ni-12);
+    }
+
     &[data-at-risk] {
       opacity: 0.8;
     }
   }
 
   .trakt-streak-left {
-    flex: 1;
     display: flex;
     align-items: center;
     gap: var(--gap-m);
     min-width: 0;
+    flex-shrink: 0;
+
+    @include for-tablet-sm-and-below {
+      grid-column: 1;
+      grid-row: 1;
+      flex-shrink: 1;
+    }
+  }
+
+  :global(.trakt-streak-accumulator) {
+    @include for-tablet-sm-and-below {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      overflow: hidden;
+    }
   }
 
   .trakt-streak-flame {
@@ -268,6 +296,11 @@
     :global(svg) {
       width: var(--ni-16);
       height: var(--ni-16);
+    }
+
+    @include for-tablet-sm-and-below {
+      grid-column: 2;
+      grid-row: 1;
     }
   }
 </style>
