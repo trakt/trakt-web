@@ -99,7 +99,6 @@
       : m.text_stats_days_count({ count: String($streakCount) }),
   );
 
-  const hasStreak = $derived(!$isLoading && $streakState !== "none");
   const isAtRisk = $derived($streakState === "at_risk");
 </script>
 
@@ -107,7 +106,7 @@
   <BannerContainer variant="fluid">
     <div class="trakt-streak-skeleton"></div>
   </BannerContainer>
-{:else if hasStreak}
+{:else}
   <BannerContainer variant="fluid">
     <trakt-streak-callout>
       <Link href={drilldownLink} noscroll>
