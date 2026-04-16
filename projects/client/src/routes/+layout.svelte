@@ -30,6 +30,7 @@
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
   import WSInvalidator from "$lib/features/websocket/WSInvalidator.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import BrowserSupportWarning from "$lib/sections/banner/BrowserSupportWarning.svelte";
   import MarkAsWatchedDrawerProvider from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedDrawerProvider.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
@@ -181,6 +182,8 @@
                                         >
                                           <SideNavbar />
                                         </RenderFor>
+
+                                        <BrowserSupportWarning />
 
                                         {@render children()}
 
