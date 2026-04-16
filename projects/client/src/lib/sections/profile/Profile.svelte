@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
-  import * as m from "$lib/features/i18n/messages";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
+  import { useDiscover } from "$lib/features/discover/useDiscover.ts";
+  import { m } from "$lib/features/i18n/messages.ts";
   import FavoritesList from "../lists/favorites/FavoritesList.svelte";
   import PersonalHistoryList from "../lists/history/PersonalHistoryList.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
@@ -10,7 +10,8 @@
   import ProfileContainer from "./components/ProfileContainer.svelte";
   import ProfileDetails from "./components/ProfileDetails.svelte";
   import ProfilesList from "./components/ProfilesList.svelte";
-  import type { DisplayableProfileProps } from "./DisplayableProfileProps";
+  import ProgressList from "./components/ProgressList.svelte";
+  import type { DisplayableProfileProps } from "./DisplayableProfileProps.ts";
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
@@ -25,6 +26,7 @@
 
 {#if $isMe}
   <PersonalHistoryList mode={$mode} />
+  <ProgressList mode={$mode} />
 {:else}
   <RecentlyWatchedList title={m.list_title_history()} {slug} mode={$mode} />
 {/if}

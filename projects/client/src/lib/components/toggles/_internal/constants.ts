@@ -7,12 +7,14 @@ export type TogglerId =
   | 'social'
   | 'discover'
   | 'comment'
-  | 'trivia';
+  | 'trivia'
+  | 'progress';
 
 type DiscoverToggleType = DiscoverMode;
 type SocialToggleType = 'following' | 'followers';
 type CommentToggleType = CommentSortType;
 type TriviaToggleType = 'spoilers' | 'no-spoilers';
+type ProgressToggleType = 'in-progress' | 'dropped' | 'completed';
 
 type Toggler<T, K> = {
   id: T;
@@ -25,6 +27,7 @@ export type TogglerValueMap = {
   discover: DiscoverToggleType;
   comment: CommentToggleType;
   trivia: TriviaToggleType;
+  progress: ProgressToggleType;
 };
 
 type ToggleDefinition<K extends TogglerId> = Toggler<K, TogglerValueMap[K]>;
@@ -102,6 +105,28 @@ const trivia: ToggleDefinition<'trivia'> = {
   ],
 };
 
+const progress: ToggleDefinition<'progress'> = {
+  id: 'progress',
+  default: 'in-progress',
+  options: [
+    {
+      value: 'in-progress',
+      text: m.button_text_progress_in_progress,
+      label: m.button_label_progress_in_progress,
+    },
+    {
+      value: 'completed',
+      text: m.button_text_progress_completed,
+      label: m.button_label_progress_completed,
+    },
+    {
+      value: 'dropped',
+      text: m.button_text_progress_dropped,
+      label: m.button_label_progress_dropped,
+    },
+  ],
+};
+
 export const TOGGLERS: {
   [K in TogglerId]: Toggler<K, TogglerValueMap[K]>;
 } = {
@@ -109,4 +134,5 @@ export const TOGGLERS: {
   discover,
   comment,
   trivia,
+  progress,
 } as const;

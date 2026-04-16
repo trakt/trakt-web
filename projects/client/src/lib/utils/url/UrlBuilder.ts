@@ -195,6 +195,7 @@ export const UrlBuilder = {
       }`,
     history: (username: string) => `/profile/${username}/history`,
     social: (username: string) => `/profile/${username}/social`,
+    progress: (username: string) => `/profile/${username}/progress`,
   },
   users: (id: string) => ({
     lists: (slug: string, params: Record<string, string> = {}) =>

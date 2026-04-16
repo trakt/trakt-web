@@ -10,6 +10,7 @@ export type MediaItemVariant<T> =
     & MediaInput<T>
   | { variant: 'next'; progress: number; minutesLeft: number } & MediaInput<T>
   | { variant: 'start' } & MediaInput<T>
+  | { variant: 'progress' } & MediaInput<T>
   | { variant: 'credit'; role: string } & MediaInput<T>;
 
 type BaseMediaProps<T> = BaseItemProps & MediaItemVariant<T> & {

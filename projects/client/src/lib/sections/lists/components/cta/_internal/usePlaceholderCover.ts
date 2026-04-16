@@ -62,6 +62,7 @@ function ctaToQuery(cta: MediaCta | ListCta) {
     case 'released':
       return mediaTypeToQuery('movie');
     case 'up-next':
+    case 'progress':
     case 'start-watching':
     case 'personal-activity':
     case 'watchlist':

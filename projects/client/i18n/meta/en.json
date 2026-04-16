@@ -9680,6 +9680,86 @@
         "android",
         "ios"
       ]
+    },
+    "list_title_progress": {
+      "default": "Progress",
+      "description": "Title for lists containing progress information for shows, e.g. in progress, completed, or dropped shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_view_all_progress": {
+      "default": "View all progress",
+      "description": "Aria-label for the button that allows users to view all progress items.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_placeholder_dropped_shows": {
+      "default": "You haven't dropped any shows.",
+      "description": "Placeholder text shown when there are no dropped shows in the user's progress list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "page_title_progress": {
+      "default": "Progress",
+      "description": "Title for the progress page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_progress_in_progress": {
+      "default": "In Progress",
+      "description": "Text for the button that allows users to filter the list to only display shows that are in progress. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_progress_completed": {
+      "default": "Completed",
+      "description": "Text for the button that allows users to filter the list to only display shows that are completed. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_progress_dropped": {
+      "default": "Dropped",
+      "description": "Text for the button that allows users to filter the list to only display shows that are dropped. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_progress_in_progress": {
+      "default": "View in progress shows",
+      "description": "Aria-label for the button that allows users to filter the list to only display shows that are in progress.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_progress_completed": {
+      "default": "View completed shows",
+      "description": "Aria-label for the button that allows users to filter the list to only display shows that are completed.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_progress_dropped": {
+      "default": "View dropped shows",
+      "description": "Aria-label for the button that allows users to filter the list to only display shows that are dropped.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
