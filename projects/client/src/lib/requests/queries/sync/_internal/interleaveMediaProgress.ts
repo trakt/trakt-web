@@ -7,7 +7,9 @@ type SortMediaProgressProps = {
 };
 
 function getEpisodeDate(episode: UpNextEntry) {
-  return episode.intent === 'start' ? episode.airDate : episode.lastWatchedAt;
+  return episode.intent === 'start'
+    ? episode.effectiveReleaseDate
+    : episode.lastWatchedAt;
 }
 
 function getMovieDate(movie: MovieProgressEntry) {

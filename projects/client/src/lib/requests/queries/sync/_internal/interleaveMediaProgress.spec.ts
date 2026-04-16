@@ -38,11 +38,11 @@ const createContinueEpisode = (
 
 const createStartEpisode = (
   key: string,
-  airDate: Date,
+  effectiveReleaseDate: Date,
 ): UpNextEntry => ({
   key,
   intent: 'start',
-  airDate,
+  effectiveReleaseDate,
 } as UpNextEntry);
 
 describe('interleaveMediaProgress', () => {

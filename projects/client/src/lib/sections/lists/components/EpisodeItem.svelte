@@ -137,7 +137,7 @@
         <TagBar>
           <AirDateTag
             i18n={TagIntlProvider}
-            airDate={props.episode.airDate}
+            airDate={props.episode.effectiveReleaseDate}
             type="text"
           />
           <TextTag>

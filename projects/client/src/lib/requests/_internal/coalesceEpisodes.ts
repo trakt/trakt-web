@@ -12,7 +12,7 @@ export function coalesceEpisodes(
     (acc, episode) => {
       const dateKey = dateKeyFn
         ? dateKeyFn(episode)
-        : getDayKey(episode.airDate);
+        : getDayKey(episode.effectiveReleaseDate);
       const key = `${episode.show.id}-${episode.season}-${dateKey}`;
       acc[key] ??= {
         episodes: [],
@@ -66,6 +66,6 @@ export function coalesceEpisodes(
   });
 
   return coalesced.toSorted((a, b) =>
-    a.airDate.getTime() - b.airDate.getTime()
+    a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime()
   );
 }

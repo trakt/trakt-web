@@ -63,14 +63,14 @@ function mediaStatus(media: MediaEntry) {
 }
 
 function episodeAirDate(episode: EpisodeEntry) {
-  const isUpcomingItem = episode.airDate > new Date();
-  const isTba = isMaxDate(episode.airDate);
+  const isUpcomingItem = episode.effectiveReleaseDate > new Date();
+  const isTba = isMaxDate(episode.effectiveReleaseDate);
 
   return {
     title: isUpcomingItem ? m.header_airs() : m.header_aired(),
     values: [
       isTba ? m.tag_text_tba() : toHumanDay({
-        date: episode.airDate,
+        date: episode.effectiveReleaseDate,
         locale: getLocale(),
         format: 'long-with-time',
       }),
