@@ -4,7 +4,7 @@ files:
   - source: /projects/client/i18n/meta/en.json
     translation: /projects/client/i18n/messages/%locale%.json
 pull_request_title: 'feat(i18n): localization updates'
-pull_request_assignees:
+pull_request_reviewers:
   - vladjerca
   - seferturan
 commit_message: 'feat(i18n): update %original_file_name%'

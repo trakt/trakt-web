@@ -1,0 +1,55 @@
+name: The CrowdIn Sync
+
+# Schedule the workflow to run every day at 14:00 UTC.
+# The workflow can also be triggered manually if needed too.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 14 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  sync-crowdin:
+    name: CrowdIn Sync
+    runs-on: ubuntu-latest
+    concurrency:
+      group: sync-crowdin
+      cancel-in-progress: true
+
+    steps:
+      - name: Summoning the GitHub App Token
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ secrets.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+
+      - name: Sync and PR with updates if needed
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: false
+          upload_translations: false
+          download_translations: false
+          # Bundle ID 6 refers to our 'Web' export bundle in CrowdIn
+          download_bundle: 6
+          skip_untranslated_strings: true
+          export_only_approved: true
+          localization_branch_name: i18n_crowdin_updates
+          commit_message: 'feat(i18n): updates from CrowdIn'
+          create_pull_request: true
+          pull_request_base_branch_name: 'main'
+          pull_request_title: 'feat(i18n): updates from CrowdIn'
+          pull_request_reviewers: 'seferturan,vladjerca'
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
