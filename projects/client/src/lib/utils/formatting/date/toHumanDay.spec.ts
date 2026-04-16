@@ -5,31 +5,41 @@ describe('toHumanDay', () => {
   it('will display September 19th, 2023', () => {
     const day = new Date('2023-09-19');
 
-    expect(toHumanDay(day, 'en')).toBe('September 19th, 2023');
+    expect(toHumanDay({ date: day, locale: 'en' })).toBe(
+      'September 19th, 2023',
+    );
   });
 
   it('will display 19 september 2023', () => {
     const day = new Date('2023-09-19');
 
-    expect(toHumanDay(day, 'nl-nl')).toBe('19 september 2023');
+    expect(toHumanDay({ date: day, locale: 'nl-nl' })).toBe(
+      '19 september 2023',
+    );
   });
 
   it('will display the day only', () => {
     const day = new Date('December 17, 1995 03:24:00');
 
-    expect(toHumanDay(day, 'en')).toBe('December 17th, 1995');
+    expect(toHumanDay({ date: day, locale: 'en' })).toBe(
+      'December 17th, 1995',
+    );
   });
 
   it('will display September 19th, 2023', () => {
     const day = new Date('2023-09-19');
 
-    expect(toHumanDay(day, 'en', 'short')).toBe('Sep 19, 2023');
+    expect(toHumanDay({ date: day, locale: 'en', format: 'short' })).toBe(
+      'Sep 19, 2023',
+    );
   });
 
   it('will display September 19th, 2023 9:00 PM (long-with-time)', () => {
     const day = new Date('September 19, 2023 21:00:00');
 
-    expect(toHumanDay(day, 'en', 'long-with-time')).toBe(
+    expect(
+      toHumanDay({ date: day, locale: 'en', format: 'long-with-time' }),
+    ).toBe(
       'September 19th, 2023 9:00 PM',
     );
   });

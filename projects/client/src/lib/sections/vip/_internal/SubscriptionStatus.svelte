@@ -27,7 +27,7 @@
       {#snippet icon()}
         <CalendarIcon />
       {/snippet}
-      {toHumanDay(subscription.renewsAt, getLocale())}
+      {toHumanDay({ date: subscription.renewsAt, locale: getLocale() })}
     </SubscriptionDetail>
   {/if}
 
@@ -36,7 +36,7 @@
       {#snippet icon()}
         <CalendarIcon />
       {/snippet}
-      {toHumanDay(subscription.expiresAt, getLocale())}
+      {toHumanDay({ date: subscription.expiresAt, locale: getLocale() })}
     </SubscriptionDetail>
   {/if}
 

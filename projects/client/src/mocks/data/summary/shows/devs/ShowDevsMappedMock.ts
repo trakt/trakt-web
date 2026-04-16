@@ -69,6 +69,11 @@ export const ShowDevsMappedMock: ShowEntry = {
     'count': 8,
   },
   'totalRuntime': 416,
+  'airs': {
+    'day': 'Thursday',
+    'time': '00:00',
+    'timezone': 'America/New_York',
+  },
   'imdbId': 'tt8134186',
   'tmdbId': 81349,
   'homepage': 'https://www.fxnetworks.com/shows/devs',

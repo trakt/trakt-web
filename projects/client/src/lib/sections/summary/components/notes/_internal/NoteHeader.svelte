@@ -9,7 +9,7 @@
   const { note }: { note: UserNote } = $props();
 </script>
 
-<TextCardHeader subTitle={toHumanDay(note.updatedAt, getLocale())}>
+<TextCardHeader subTitle={toHumanDay({ date: note.updatedAt, locale: getLocale() })}>
   {#snippet icon()}
     <NoteIcon {note} />
   {/snippet}

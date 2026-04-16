@@ -3,7 +3,6 @@ import type { MediaCrew } from '$lib/requests/models/MediaCrew.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { MediaNetwork } from '$lib/requests/models/MediaNetwork.ts';
 import type { MediaStudio } from '$lib/requests/models/MediaStudio.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 
 type EpisodeProps = {
@@ -12,8 +11,14 @@ type EpisodeProps = {
   show: ShowEntry;
 };
 
-type MediaProps = {
-  type: MediaType;
+type ShowProps = {
+  type: 'show';
+  media: ShowEntry;
+  studios: MediaStudio[];
+};
+
+type MovieProps = {
+  type: 'movie';
   media: MediaEntry;
   studios: MediaStudio[];
 };
@@ -21,4 +26,4 @@ type MediaProps = {
 export type MediaDetailsProps = {
   crew: MediaCrew;
   networks?: MediaNetwork[];
-} & (EpisodeProps | MediaProps);
+} & (EpisodeProps | ShowProps | MovieProps);

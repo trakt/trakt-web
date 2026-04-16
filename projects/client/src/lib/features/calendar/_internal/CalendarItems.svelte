@@ -33,7 +33,7 @@
       {#if day.items.length > 0}
         <div id={dateKey(day.date)} class="calendar-day-anchor">
           <GridList
-            title={toHumanDay(day.date, getLocale())}
+            title={toHumanDay({ date: day.date, locale: getLocale() })}
             items={day.items}
             id={dateKey(day.date)}
             {item}

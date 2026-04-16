@@ -30,7 +30,7 @@
 </script>
 
 <div class="trakt-comment-header">
-  <TextCardHeader subTitle={toHumanDay(comment.createdAt, getLocale())}>
+  <TextCardHeader subTitle={toHumanDay({ date: comment.createdAt, locale: getLocale() })}>
     {#snippet icon()}
       <UserAvatar user={comment.user} size="small" />
     {/snippet}

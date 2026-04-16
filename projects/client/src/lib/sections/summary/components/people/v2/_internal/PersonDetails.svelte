@@ -44,7 +44,7 @@
         <Celebration />
       {/if}
       <span class="bold secondary">{m.header_birthday()}</span>
-      <p>{toHumanDay(birthday, getLocale(), "short")}</p>
+      <p>{toHumanDay({ date: birthday, locale: getLocale(), format: "short" })}</p>
     </div>
     <div class="trakt-detail-separator"></div>
     <div class="trakt-person-detail">

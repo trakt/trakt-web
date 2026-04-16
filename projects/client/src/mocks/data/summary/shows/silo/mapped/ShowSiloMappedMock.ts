@@ -64,6 +64,11 @@ export const ShowSiloMappedMock: ShowEntry = {
     'count': 15,
   },
   'totalRuntime': 900,
+  'airs': {
+    'day': 'Thursday',
+    'time': '21:00',
+    'timezone': 'America/New_York',
+  },
   'imdbId': 'tt14688458',
   'tmdbId': 125988,
   'homepage': 'https://tv.apple.com/show/umc.cmc.3yksgc857px0k0rqe5zd4jice',

@@ -81,7 +81,11 @@ export function formatSortValue(item: SortInput, sortBy?: SortBy) {
 
   switch (sortBy) {
     case 'added':
-      return toHumanDay(getAddedAt(item), getLocale(), 'short');
+      return toHumanDay({
+        date: getAddedAt(item),
+        locale: getLocale(),
+        format: 'short',
+      });
     case 'runtime': {
       const runtime = getRuntimeMinutes(item);
       return toHumanDuration({ minutes: runtime }, languageTag());
@@ -90,7 +94,7 @@ export function formatSortValue(item: SortInput, sortBy?: SortBy) {
       const airDate = getAirDate(item);
       return isMaxDate(airDate)
         ? m.tag_text_tba()
-        : toHumanDay(airDate, getLocale(), 'short');
+        : toHumanDay({ date: airDate, locale: getLocale(), format: 'short' });
     }
     case 'percentage': {
       const rating = getRating(item);

@@ -26,7 +26,7 @@ export const TagIntlProvider: TagIntl = {
     delta ? toHumanNumber(Math.abs(delta), languageTag()) : '—',
   postCredits: (count) =>
     `${m.header_post_credits()} · ${toHumanNumber(count, languageTag())}`,
-  toDay: (date) => toHumanDay(date, getLocale()),
+  toDay: (date) => toHumanDay({ date, locale: getLocale() }),
   watchedLabel: () => m.tag_text_watched(),
   toRemainingDuration: (duration) =>
     m.tag_text_remaining_duration({
