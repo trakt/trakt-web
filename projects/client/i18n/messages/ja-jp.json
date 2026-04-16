@@ -642,6 +642,7 @@
   "text_about_tagline": "Traktは多くの複雑なことを行うプラットフォームです。私たちはそれをシンプルにするよう努めています。Traktは、すべてのデバイスとアプリで視聴しているものを自動的に追跡し、あなたの全視聴履歴を1か所で確認し、次に観るべきものを見つけ、世界中の何百万人もの映画やTV番組愛好家のコミュニティとつながる場を提供します。",
   "text_about_user": "{username}について",
   "text_after_credits": "クレジット後",
+  "text_airs_day_time": "毎週{day}の{time}",
   "text_avatar": "プロフィール画像",
   "text_branding_alt_logos_desc": "デフォルトのロゴがアプリのデザインに合わない場合は、これらのロゴを使用してください。",
   "text_branding_dark_background_desc": "アプリのダークテーマではこれらのロゴを使用してください。",

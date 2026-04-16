@@ -642,6 +642,7 @@
   "text_about_tagline": "Trakt ist eine Plattform, die viele komplexe Dinge tut. Wir versuchen, es einfach zu machen. Trakt verfolgt automatisch, was Sie auf all Ihren Geräten und Apps ansehen – und bietet Ihnen einen einzigen Ort, um Ihre gesamte Seh-Historie zu sehen, Neues zu entdecken und sich mit einer Community von Millionen Film- und Serienliebhabern weltweit zu verbinden.",
   "text_about_user": "Über {username}",
   "text_after_credits": "Nach dem Abspann",
+  "text_airs_day_time": "{day}s um {time}",
   "text_avatar": "Profilbild",
   "text_branding_alt_logos_desc": "Verwenden Sie diese Logos, wenn die Standard-Logos nicht gut zum Design Ihrer App passen.",
   "text_branding_dark_background_desc": "Verwenden Sie diese Logos im dunklen Theme Ihrer App.",
