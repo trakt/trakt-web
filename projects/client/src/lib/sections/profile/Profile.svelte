@@ -7,7 +7,6 @@
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import LibraryList from "../lists/library/LibraryList.svelte";
   import PersonalLists from "../lists/user/PersonalLists.svelte";
-  import ActivityHeatmap from "../stats/ActivityHeatmap.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
   import ProfileDetails from "./components/ProfileDetails.svelte";
   import ProfilesList from "./components/ProfilesList.svelte";
@@ -25,7 +24,6 @@
 </ProfileContainer>
 
 {#if $isMe}
-  <ActivityHeatmap mode={$mode} />
   <PersonalHistoryList mode={$mode} />
 {:else}
   <RecentlyWatchedList title={m.list_title_history()} {slug} mode={$mode} />
