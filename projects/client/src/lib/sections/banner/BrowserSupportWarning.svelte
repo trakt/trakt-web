@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { browser } from "$app/environment";
   import { onMount } from "svelte";
   import { getUnsupportedCssFeatures } from "$lib/utils/devices/getUnsupportedCssFeatures.ts";
   import BannerContainer from "./_internal/BannerContainer.svelte";
@@ -10,10 +9,6 @@
   const unsupportedFeatureList = $derived(unsupportedFeatures.join(", "));
 
   onMount(() => {
-    if (!browser) {
-      return;
-    }
-
     unsupportedFeatures = getUnsupportedCssFeatures();
   });
 </script>
