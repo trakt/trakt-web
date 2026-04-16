@@ -84,7 +84,7 @@
   />
   <link rel="preconnect" href="https://cdn.plyr.io" crossorigin="anonymous" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&family=Roboto+Mono:wght@400;600&display=swap"
     rel="stylesheet"
   />
   <!-- Plyr CSS -->
@@ -119,6 +119,13 @@
       background-color: var(--color-background);
       color: var(--color-foreground);
       font-family: "Roboto", Arial, sans-serif;
+    }
+
+    code,
+    pre,
+    kbd,
+    samp {
+      font-family: "Roboto Mono", "Courier New", monospace;
     }
 
     body:has(dialog[open]),
