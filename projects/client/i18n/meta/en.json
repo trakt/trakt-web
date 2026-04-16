@@ -9611,6 +9611,75 @@
         "android",
         "ios"
       ]
+    },
+    "drawer_title_streak_activity": {
+      "default": "Daily Streak Activity",
+      "description": "Title for the drawer showing a user's daily streak activity and heatmap.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_stats_monthly": {
+      "default": "Monthly Stats",
+      "description": "Section header for the monthly stats block in the streak drawer.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_previous_streak": {
+      "default": "Previous Streak",
+      "description": "Label for the previous streak stat in the monthly stats block.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_current_streak": {
+      "default": "Current Streak",
+      "description": "Label for the current streak stat in the monthly stats block.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_dropped_streaks": {
+      "default": "Dropped Streaks",
+      "description": "Label for the number of streaks dropped this month.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_days_active": {
+      "default": "Days Active",
+      "description": "Label for the percentage of days active stat in the monthly stats block.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_keep_it_going": {
+      "default": "Keep it going!",
+      "description": "Motivational sub-label shown below the previous streak stat.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stats_out_of": {
+      "default": "Out of {count}",
+      "description": "Sub-label showing how many days in the month the user was active out of the total, e.g. 'Out of 30'.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

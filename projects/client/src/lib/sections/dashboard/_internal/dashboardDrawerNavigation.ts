@@ -5,12 +5,15 @@ const VIEW_PARAM = 'view';
 
 export enum DashboardDrawers {
   WeeklyPulse = 'weekly-pulse',
+  Streak = 'streak',
 }
 
 function mapToDrawer(value: string | Nil) {
   switch (value) {
     case DashboardDrawers.WeeklyPulse:
       return DashboardDrawers.WeeklyPulse;
+    case DashboardDrawers.Streak:
+      return DashboardDrawers.Streak;
     default:
       return null;
   }
