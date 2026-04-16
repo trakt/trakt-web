@@ -21,7 +21,7 @@
               <p class="capitalize ellipsis">{value.label}</p>
             </Link>
           {:else}
-            <p class="capitalize ellipsis">{value}</p>
+            <p class="capitalize">{value}</p>
           {/if}
         {/snippet}
       </CollapsableValues>

@@ -25,4 +25,12 @@ describe('toHumanDay', () => {
 
     expect(toHumanDay(day, 'en', 'short')).toBe('Sep 19, 2023');
   });
+
+  it('will display September 19th, 2023 9:00 PM (long-with-time)', () => {
+    const day = new Date('September 19, 2023 21:00:00');
+
+    expect(toHumanDay(day, 'en', 'long-with-time')).toBe(
+      'September 19th, 2023 9:00 PM',
+    );
+  });
 });
