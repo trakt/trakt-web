@@ -11,7 +11,7 @@
 </script>
 
 <DetailsGrid>
-  {#each mediaDetails as { title, values }}
+  {#each mediaDetails as { title, values } (title)}
     {#if values && values.length > 0}
       <CollapsableValues category={title} {values}>
         <p class="bold secondary">{title}</p>
