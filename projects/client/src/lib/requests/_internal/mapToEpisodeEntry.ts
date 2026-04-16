@@ -20,10 +20,7 @@ export function mapToEpisodeEntry(
   const airDate = new Date(episode.first_aired ?? MAX_DATE);
   const releaseDate = new Date(episode.released ?? MAX_DATE);
   const effectiveReleaseDate = new Date(
-    Math.min(
-      airDate.getTime(),
-      releaseDate.getTime(),
-    ),
+    episode.effective_release_date ?? MAX_DATE,
   );
 
   return {
