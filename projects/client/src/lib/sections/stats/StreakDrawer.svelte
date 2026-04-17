@@ -94,7 +94,7 @@
   .trakt-streak-drawer-content {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-l);
+    gap: var(--gap-m);
   }
 
   .trakt-monthly-stats {
@@ -113,9 +113,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--ni-4);
+    gap: var(--gap-micro);
 
-    padding: var(--ni-16);
+    padding: var(--ni-12);
 
     border-radius: var(--border-radius-l);
     background: var(--color-card-background);
@@ -128,7 +128,7 @@
   }
 
   .trakt-monthly-stat-value {
-    font-size: var(--ni-28);
+    font-size: var(--ni-22);
     color: var(--color-text-emphasis);
   }
 </style>
