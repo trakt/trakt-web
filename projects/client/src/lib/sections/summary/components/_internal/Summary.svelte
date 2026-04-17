@@ -1,4 +1,5 @@
 <script lang="ts">
+  import BackButton from "$lib/components/buttons/BackButton.svelte";
   import type { Snippet } from "svelte";
   import SummarySideActions from "./SummarySideActions.svelte";
 
@@ -20,6 +21,10 @@
 
 <div class="trakt-summary">
   <div class="trakt-summary-main" style={`--main-color: ${mainColor}`}>
+    <SummarySideActions>
+      <BackButton />
+    </SummarySideActions>
+
     {@render poster()}
 
     <SummarySideActions>

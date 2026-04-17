@@ -2687,6 +2687,14 @@
         "ios"
       ]
     },
+    "button_label_back": {
+      "default": "Back",
+      "description": "Aria-label for the back button on summary pages that returns to the previous page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "button_label_comment_replies": {
       "default": "Review Replies",
       "description": "Aria-label for the button that opens the review replies dialog.",
