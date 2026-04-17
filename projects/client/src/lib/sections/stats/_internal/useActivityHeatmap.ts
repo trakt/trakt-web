@@ -1,7 +1,10 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
-import { languageTag } from '$lib/features/i18n/index.ts';
+import type { AvailableLocale } from '$lib/features/i18n/index.ts';
+import { getLocale } from '$lib/features/i18n/index.ts';
+import { addDays } from '$lib/utils/date/addDays.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
+import { getStartOfWeek } from '$lib/utils/date/getStartOfWeek.ts';
 import { map, shareReplay } from 'rxjs';
 import { filterWatchedDates } from './filterWatchedDates.ts';
 
@@ -35,7 +38,7 @@ function toIntensity(count: number): HeatmapIntensity {
 export function computeActivityHeatmap(
   watchedDates: ReadonlyArray<Date>,
   now: Date,
-  locale: string,
+  locale: AvailableLocale,
 ): HeatmapData {
   const activityMap = new Map<string, number>();
   for (const date of watchedDates) {
@@ -48,7 +51,9 @@ export function computeActivityHeatmap(
   const month = today.getMonth();
 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const startCol = new Date(year, month, 1).getDay();
+  const monthFirst = new Date(year, month, 1);
+  const weekStart = getStartOfWeek(monthFirst, locale);
+  const startCol = (monthFirst.getDay() - weekStart.getDay() + 7) % 7;
 
   const cells: HeatmapCell[] = [];
 
@@ -78,11 +83,12 @@ export function computeActivityHeatmap(
     year: 'numeric',
   }).format(new Date(year, month, 1));
 
+  const labelWeekStart = getStartOfWeek(now, locale);
   const dayLabels = Array.from(
     { length: 7 },
     (_, i) =>
       new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(
-        new Date(2023, 0, 1 + i), // 2023-01-01 is a Sunday
+        addDays(labelWeekStart, i),
       ),
   );
 
@@ -98,7 +104,7 @@ export function useActivityHeatmap({ mode }: { mode: DiscoverMode }) {
   const { history } = useUser();
 
   const now = new Date();
-  const locale = languageTag();
+  const locale = getLocale();
 
   const heatmap = history.pipe(
     map(($history) => {
