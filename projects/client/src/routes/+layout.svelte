@@ -18,6 +18,7 @@
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
+  import NavigationHistoryProvider from "$lib/features/navigation-history/NavigationHistoryProvider.svelte";
   import AddNoteDrawerProvider from "$lib/features/notes/AddNoteDrawerProvider.svelte";
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
   import PlayerProvider from "$lib/features/player/YoutubePlayerProvider.svelte";
@@ -151,7 +152,8 @@
                 <AnalyticsProvider>
                   <RedirectProvider>
                     <NavigationProvider>
-                      <LocaleProvider>
+                      <NavigationHistoryProvider>
+                        <LocaleProvider>
                         <SearchProvider config={data.typesense}>
                           <FilterProvider>
                             <CoverProvider>
@@ -206,8 +208,9 @@
                               </ToastProvider>
                             </CoverProvider>
                           </FilterProvider>
-                        </SearchProvider>
-                      </LocaleProvider>
+                          </SearchProvider>
+                        </LocaleProvider>
+                      </NavigationHistoryProvider>
                     </NavigationProvider>
 
                     {#key page.url.pathname}
