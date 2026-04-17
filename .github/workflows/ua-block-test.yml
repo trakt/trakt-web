@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # --- BLOCKED: Chrome regex r"Chrome/([1-9][0-9]|1[0-3][0-9])\\." ---
+          # --- BLOCKED: Chrome regex r"Chrome/([1-9][0-9]|1[0-3][0-9])\." ---
           - name: "Chrome 90 (Lower Match Boundary)"
             ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"
             expected: 403
@@ -20,7 +20,7 @@ jobs:
             ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
             expected: 403
 
-          # --- BLOCKED: Firefox regex r"Firefox/([1-9][0-9]|1[0-2][0-9]|130)\\." ---
+          # --- BLOCKED: Firefox regex r"Firefox/([1-9][0-9]|1[0-2][0-9]|130)\." ---
           - name: "Firefox 90 (Lower Match Boundary)"
             ua: "Mozilla/5.0 (Macintosh; Intel Mac OS X 14.0; rv:90.0) Gecko/20100101 Firefox/90.0"
             expected: 403
@@ -28,7 +28,7 @@ jobs:
             ua: "Mozilla/5.0 (Macintosh; Intel Mac OS X 14.0; rv:130.0) Gecko/20100101 Firefox/130.0"
             expected: 403
 
-          # --- BLOCKED: Safari regex r"Version/([1-9]|1[0-7])\\..*Safari/" ---
+          # --- BLOCKED: Safari regex r"Version/([1-9]|1[0-7])\..*Safari/" ---
           - name: "Safari 1 (Lower Match Boundary)"
             ua: "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/1.0 Safari/605.1.15"
             expected: 403
@@ -59,6 +59,37 @@ jobs:
           - name: "Trakt iOS App"
             ua: "Trakt/2.4.1 (iPhone; iOS 19.0.1; Scale/3.00)"
             expected: 200
+
+          # --- ALLOWED: WAF Exceptions (The patched rule fixes) ---
+          - name: "Samsung Browser (Exception to Chrome Rule)"
+            ua: "Mozilla/5.0 (Linux; Android 14; SM-S928B) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/25.0 Chrome/121.0.0.0 Mobile Safari/537.36"
+            expected: 200
+          - name: "iOS Chrome / CriOS (Exception to Safari Rule)"
+            ua: "Mozilla/5.0 (iPad; CPU OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 CriOS/147.0.7727.99 Mobile/15E148 Safari/604.1"
+            expected: 200
+          - name: "iOS Edge / EdgiOS (Exception to Safari Rule)"
+            ua: "Mozilla/5.0 (iPad; CPU OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 EdgiOS/147.3912.71 Mobile/15E148 Safari/604.1"
+            expected: 200
+
+            # --- THE "GOOD" BOTS & PREVIEWS (Should be Allowed) ---
+          - name: "Googlebot Crawler"
+            ua: "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6723.58 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+            expected: 200
+          - name: "Applebot (iMessage Link Previews)"
+            ua: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15 (Applebot/0.1; +http://www.apple.com/go/applebot)"
+            expected: 200
+          - name: "Slack Link Expander"
+            ua: "Slackbot-LinkExpanding 1.0 (+https://api.slack.com/robots)"
+            expected: 200
+
+          # --- THE SMART TV CASUALTIES (Expected 403) ---
+          # Enforcing the rule that anyone using a built-in TV browser deserves what they get.
+          - name: "LG Smart TV (WebOS - Chrome 79 Engine)"
+            ua: "Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36 WebAppManager"
+            expected: 403
+          - name: "Samsung Smart TV (Tizen - Chrome 69 Engine)"
+            ua: "Mozilla/5.0 (SMART-TV; Linux; Tizen 5.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.106 TV Safari/537.36"
+            expected: 403
 
     name: Test ${{ matrix.name }}
     steps:
