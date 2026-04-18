@@ -30,6 +30,10 @@ Sentry.init({
     'AbortError',
     'Failed to register a ServiceWorker',
     'service-worker.js load failed',
+    'Failed to fetch dynamically imported module',
+    'error loading dynamically imported module',
+    'Importing a module script failed',
+    'Unable to preload CSS for',
   ],
   beforeSend(event) {
     const isWellKnownRejection = event.exception?.values?.some(
@@ -70,5 +74,31 @@ if (typeof document !== 'undefined') {
   }
 }
 
+const DYNAMIC_IMPORT_RELOAD_KEY = 'dynamic-import-reload';
+
+const DYNAMIC_IMPORT_ERROR_PATTERNS = [
+  'Failed to fetch dynamically imported module',
+  'error loading dynamically imported module',
+  'Importing a module script failed',
+  'Unable to preload CSS for',
+];
+
+function isDynamicImportError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error);
+  return DYNAMIC_IMPORT_ERROR_PATTERNS.some((pattern) =>
+    message.includes(pattern)
+  );
+}
+
+function reloadOnceForStaleDeploy(error: unknown): void {
+  if (!isDynamicImportError(error)) return;
+  if (sessionStorage.getItem(DYNAMIC_IMPORT_RELOAD_KEY)) return;
+
+  sessionStorage.setItem(DYNAMIC_IMPORT_RELOAD_KEY, '1');
+  window.location.reload();
+}
+
 // If you have a custom error handler, pass it to `handleErrorWithSentry`
-export const handleError = handleErrorWithSentry();
+export const handleError = handleErrorWithSentry(({ error }: { error: unknown }) => {
+  reloadOnceForStaleDeploy(error);
+});
