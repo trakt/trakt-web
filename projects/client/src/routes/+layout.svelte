@@ -36,6 +36,7 @@
   import TopNavbar from "$lib/sections/navbar/TopNavbar.svelte";
   import NavbarToastContent from "$lib/sections/toast/NavbarToastContent.svelte";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
+  import { retry } from "$lib/utils/retry/retry.js";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
@@ -51,8 +52,8 @@
     }
 
     const activeSha = TRAKT_GIT_SHA;
-    const deployedSha = await fetch(DeploymentEndpoint.Get).then((res) =>
-      res.text(),
+    const deployedSha = await retry(() => fetch(DeploymentEndpoint.Get)).then(
+      (res) => res.text(),
     );
 
     if (activeSha === deployedSha) {
