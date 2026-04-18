@@ -21,7 +21,8 @@ function createMarkAsWatchedDrawerStore() {
       subject.next({ ...state, isOpen: true });
     },
     close: () => {
-      subject.next(null);
+      const current = subject.getValue();
+      if (current) subject.next({ ...current, isOpen: false });
     },
   };
 }
