@@ -8845,6 +8845,11 @@
     "text_stats_day_count": {
       "default": "{count}-day",
       "description": "Day count for watching streak, used as compound adjective (e.g. '16-day watching streak').",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
       "exclude": [
         "android",
         "ios"
@@ -8868,6 +8873,11 @@
     "text_stats_days_count": {
       "default": "{count}-day",
       "description": "Plural day count for watching streak, used as compound adjective (e.g. '16-day watching streak').",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
       "exclude": [
         "android",
         "ios"
@@ -9073,6 +9083,11 @@
     "text_stats_weeks_ago": {
       "default": "{count}w ago",
       "description": "Week trend label for weeks in the past, e.g. '4w ago'.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
       "exclude": [
         "android",
         "ios"
@@ -9089,6 +9104,11 @@
     "text_stats_weeks_short": {
       "default": "{count}w",
       "description": "Abbreviated week trend label, e.g. '3w'.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
       "exclude": [
         "android",
         "ios"
@@ -9121,6 +9141,11 @@
     "text_stats_was_last_week": {
       "default": "was {day} last week",
       "description": "Note indicating the busiest day last week, e.g. 'was Monday last week'.",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      },
       "exclude": [
         "android",
         "ios"
@@ -9137,6 +9162,11 @@
     "text_stats_delta_up": {
       "default": "+{count}",
       "description": "Positive delta indicator for week-over-week change.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
       "exclude": [
         "android",
         "ios"
@@ -9153,6 +9183,11 @@
     "text_stats_delta_down": {
       "default": "-{count}",
       "description": "Negative delta indicator for week-over-week change.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
       "exclude": [
         "android",
         "ios"
@@ -9185,6 +9220,11 @@
     "text_stats_episodes_count": {
       "default": "{count} episodes",
       "description": "Episode count label in shows vs movies breakdown.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
       "exclude": [
         "android",
         "ios"
@@ -9201,6 +9241,11 @@
     "text_stats_movies_count": {
       "default": "{count} movies",
       "description": "Movie count label in shows vs movies breakdown.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
       "exclude": [
         "android",
         "ios"
