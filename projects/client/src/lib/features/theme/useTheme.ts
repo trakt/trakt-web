@@ -2,6 +2,7 @@ import { browser } from '$app/environment';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { computeVariable } from '$lib/stores/css/computeVariable.ts';
+import { retry } from '$lib/utils/retry/retry.ts';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { getContext } from 'svelte';
 import { THEME_COOKIE_NAME } from './constants.ts';
@@ -19,13 +20,15 @@ export function useTheme() {
 
     track({ theme: value });
     theme.next(value);
-    await fetch(ThemeEndpoint.Set, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ theme: value }),
-    }).then((res) => res.json() as Promise<ThemeResponse>);
+    await retry(() =>
+      fetch(ThemeEndpoint.Set, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ theme: value }),
+      })
+    ).then((res) => res.json() as Promise<ThemeResponse>);
   }
 
   if (browser) {
