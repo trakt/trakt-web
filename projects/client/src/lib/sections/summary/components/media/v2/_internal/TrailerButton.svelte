@@ -36,7 +36,6 @@
 {#if style === "action"}
   <ActionButton
     style="ghost"
-    href="javascript:void(0);"
     label={m.translated_value_video_type_trailer()}
     disabled={$isLoading || !trailer}
     {onclick}
@@ -50,7 +49,6 @@
     color="default"
     variant="secondary"
     style="flat"
-    href="javascript:void(0);"
     {onclick}
     disabled={$isLoading}
   >
