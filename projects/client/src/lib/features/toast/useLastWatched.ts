@@ -22,6 +22,10 @@ export function useLastWatched() {
         return;
       }
 
+      if (variant === 'manual') {
+        lastWatched.next(null);
+      }
+
       dismiss(id, type, variant);
     },
   };
