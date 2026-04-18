@@ -287,5 +287,3 @@ describe('generateFromMeta', () => {
     });
   });
 });
-
-

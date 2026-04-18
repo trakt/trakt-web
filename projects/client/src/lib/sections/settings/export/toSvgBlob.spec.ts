@@ -27,7 +27,9 @@ describe('toSvgBlob', () => {
   });
 
   it('returns a Blob of type image/svg+xml when svg is present', () => {
-    const container = makeContainer('<svg xmlns="http://www.w3.org/2000/svg"><rect /></svg>');
+    const container = makeContainer(
+      '<svg xmlns="http://www.w3.org/2000/svg"><rect /></svg>',
+    );
     const blob = toSvgBlob(container);
     expect(blob).toBeInstanceOf(Blob);
     expect(blob?.type).toBe('image/svg+xml');
@@ -48,7 +50,9 @@ describe('toSvgBlob', () => {
       '<svg xmlns="http://www.w3.org/2000/svg"><rect fill="var(--my-color)" /></svg>',
     );
     vi.spyOn(window, 'getComputedStyle').mockReturnValue({
-      getPropertyValue: (prop: string) => (prop === '--my-color' ? '#ff0000' : ''),
+      getPropertyValue: (
+        prop: string,
+      ) => (prop === '--my-color' ? '#ff0000' : ''),
       color: 'rgb(0,0,0)',
     } as unknown as CSSStyleDeclaration);
 

@@ -76,7 +76,6 @@ export function useVip() {
     subscription: subscription.pipe(map(($details) => $details.data)),
     isLoading: subscription.pipe(map(toLoadingState)),
     elevatedPlanType: elevatedPlanType.asObservable(),
-    setElevatedPlanType: (type: VipPlanDuration) =>
-      elevatedPlanType.next(type),
+    setElevatedPlanType: (type: VipPlanDuration) => elevatedPlanType.next(type),
   };
 }

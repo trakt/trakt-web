@@ -4,7 +4,9 @@
   /**
    * Dynamic card size config
    */
-  --list-inner-width: calc(100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance));
+  --list-inner-width: calc(
+    100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance)
+  );
   --max-list-item-count: 10;
   --max-list-landscape-item-count: 7;
 
@@ -14,11 +16,13 @@
   --min-portrait-card-width: var(--ni-132);
   --min-landscape-card-width: var(--ni-200);
 
-  @include dynamic-item-count(--list-item-count,
+  @include dynamic-item-count(
+    --list-item-count,
     var(--min-portrait-card-width),
     var(--max-list-item-count),
   );
-  @include dynamic-item-count(--list-landscape-item-count,
+  @include dynamic-item-count(
+    --list-landscape-item-count,
     var(--min-landscape-card-width),
     var(--max-list-landscape-item-count),
   );
@@ -30,36 +34,50 @@
   --height-card-footer-sm: var(--ni-28);
 
   --width-portrait-card: var(--min-portrait-card-width);
-  @include dynamic-card-width(--width-portrait-card,
+  @include dynamic-card-width(
+    --width-portrait-card,
     var(--min-portrait-card-width),
     var(--list-item-count),
   );
   --height-portrait-card-cover: calc(var(--width-portrait-card) * 1.5);
-  --height-portrait-card: calc(var(--height-portrait-card-cover) + var(--height-card-footer));
-  --height-portrait-card-sm: calc(var(--height-portrait-card-cover) + var(--height-card-footer-sm));
+  --height-portrait-card: calc(
+    var(--height-portrait-card-cover) + var(--height-card-footer)
+  );
+  --height-portrait-card-sm: calc(
+    var(--height-portrait-card-cover) + var(--height-card-footer-sm)
+  );
 
   --width-landscape-card: var(--min-landscape-card-width);
-  @include dynamic-card-width(--width-landscape-card,
+  @include dynamic-card-width(
+    --width-landscape-card,
     var(--min-landscape-card-width),
     var(--list-landscape-item-count),
   );
   --height-landscape-card-cover: calc(var(--width-landscape-card) / 1.786);
-  --height-landscape-card: calc(var(--height-landscape-card-cover) + var(--height-card-footer));
+  --height-landscape-card: calc(
+    var(--height-landscape-card-cover) + var(--height-card-footer)
+  );
 
   --min-person-card-width: var(--ni-120);
   --max-list-person-item-count: 15;
 
   --list-person-item-count: var(--max-list-person-item-count);
-  @include dynamic-item-count(--list-person-item-count,
+  @include dynamic-item-count(
+    --list-person-item-count,
     var(--min-person-card-width),
-    var(--max-list-person-item-count));
+    var(--max-list-person-item-count),
+  );
 
   --width-person-card: var(--min-person-card-width);
-  @include dynamic-card-width(--width-person-card,
+  @include dynamic-card-width(
+    --width-person-card,
     var(--min-person-card-width),
-    var(--list-person-item-count));
+    var(--list-person-item-count),
+  );
   --height-person-card-cover: calc(var(--width-person-card) * 176 / 120);
-  --height-person-card: calc(var(--height-person-card-cover) + var(--height-card-footer));
+  --height-person-card: calc(
+    var(--height-person-card-cover) + var(--height-card-footer)
+  );
 
   --width-summary-card: var(--ni-276);
   --height-summary-card-cover: var(--ni-208);
@@ -69,14 +87,18 @@
   --max-list-summary-item-count: 5;
 
   --list-summary-item-count: var(--max-list-summary-item-count);
-  @include dynamic-item-count(--list-summary-item-count,
+  @include dynamic-item-count(
+    --list-summary-item-count,
     var(--min-list-card-width),
-    var(--max-list-summary-item-count));
+    var(--max-list-summary-item-count),
+  );
 
   --width-list-card: var(--min-list-card-width);
-  @include dynamic-card-width(--width-list-card,
+  @include dynamic-card-width(
+    --width-list-card,
     var(--min-list-card-width),
-    var(--list-summary-item-count));
+    var(--list-summary-item-count),
+  );
 
   --height-list-card: var(--ni-256);
 
@@ -84,14 +106,18 @@
   --max-list-comment-item-count: 5;
 
   --list-comment-item-count: var(--max-list-comment-item-count);
-  @include dynamic-item-count(--list-comment-item-count,
+  @include dynamic-item-count(
+    --list-comment-item-count,
     var(--min-comment-card-width),
-    var(--max-list-comment-item-count));
+    var(--max-list-comment-item-count),
+  );
 
   --width-comment-card: var(--min-comment-card-width);
-  @include dynamic-card-width(--width-comment-card,
+  @include dynamic-card-width(
+    --width-comment-card,
     var(--min-comment-card-width),
-    var(--list-comment-item-count));
+    var(--list-comment-item-count),
+  );
   --height-comment-card: var(--ni-172);
 
   --width-trivia-card: min(var(--ni-480), 85vw);
@@ -114,7 +140,9 @@
   --width-cta-activity-card: var(--ni-340);
   --height-cta-activity-card: var(--height-landscape-card-cover);
 
-  --width-cta-list-placeholder-card: calc(100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance));
+  --width-cta-list-placeholder-card: calc(
+    100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance)
+  );
 
   --min-profile-item-width: var(--ni-80);
   --max-list-profile-item-count: 20;
@@ -123,16 +151,20 @@
     Profile items use gap: 0, so item count and width are calculated
     without subtracting list-gap (unlike media card lists).
   */
-  --list-profile-item-count: clamp(1,
-      round(down, var(--list-inner-width) / var(--min-profile-item-width), 1),
-      var(--max-list-profile-item-count));
+  --list-profile-item-count: clamp(
+    1,
+    round(down, var(--list-inner-width) / var(--min-profile-item-width), 1),
+    var(--max-list-profile-item-count)
+  );
 
   @supports (-moz-appearance: none) {
     --list-profile-item-count: var(--max-list-profile-item-count);
   }
 
-  --width-profile-item: max(calc(var(--list-inner-width) / var(--list-profile-item-count)),
-    var(--min-profile-item-width));
+  --width-profile-item: max(
+    calc(var(--list-inner-width) / var(--list-profile-item-count)),
+    var(--min-profile-item-width)
+  );
   --height-profile-item: calc(var(--width-profile-item) * 1.2);
 
   @include for-tablet-sm-and-below {
@@ -143,7 +175,9 @@
   --width-where-to-watch-item: var(--ni-96);
   --height-where-to-watch-item: var(--ni-96);
 
-  --preferred-sentiment-card-width: calc(3 * var(--width-where-to-watch-item) + 2 * var(--list-gap));
+  --preferred-sentiment-card-width: calc(
+    3 * var(--width-where-to-watch-item) + 2 * var(--list-gap)
+  );
   --width-sentiment-card: min(var(--preferred-sentiment-card-width), 85vw);
   --height-sentiment-card: var(--ni-188);
 
@@ -161,36 +195,78 @@
     Pulse graphs occupy 2 slots, so we round down to the nearest
     even number to prevent a graph from half-overflowing at the edge.
   */
-  --pulse-item-count: clamp(2,
-    calc(2 * round(down, var(--list-inner-width) / (2 * (var(--min-pulse-card-width) + var(--list-gap))), 1)),
-    var(--max-pulse-item-count));
+  --pulse-item-count: clamp(
+    2,
+    calc(
+      2
+        * round(
+        down,
+        var(--list-inner-width)
+          / (
+          2 * (var(--min-pulse-card-width) + var(--list-gap))
+        ),
+        1
+      )
+    ),
+    var(--max-pulse-item-count)
+  );
 
   @supports (-moz-appearance: none) {
     --pulse-item-count: var(--max-pulse-item-count);
   }
 
-  @include dynamic-card-width(--width-pulse-card,
+  @include dynamic-card-width(
+    --width-pulse-card,
     var(--min-pulse-card-width),
     var(--pulse-item-count),
   );
 
   --height-pulse-card: var(--ni-156);
-  --height-pulse-list: calc(var(--height-pulse-card) + var(--layout-scrollbar-width));
+  --height-pulse-list: calc(
+    var(--height-pulse-card) + var(--layout-scrollbar-width)
+  );
 
   /**
    * List dimensions
    */
-  --height-landscape-list: calc(var(--height-landscape-card) + var(--layout-scrollbar-width));
-  --height-person-list: calc(var(--height-person-card) + var(--layout-scrollbar-width));
-  --height-poster-list: calc(var(--height-portrait-card) + var(--layout-scrollbar-width));
-  --height-poster-list-sm: calc(var(--height-portrait-card-sm) + var(--layout-scrollbar-width));
-  --height-lists-list: calc(var(--height-list-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
-  --height-comments-list: calc(var(--height-comment-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
-  --height-trivia-list: calc(var(--height-trivia-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
-  --height-sentiment-list: calc(var(--height-sentiment-card) + var(--layout-footer-less-padding));
-  --height-comment-thread-list: calc(var(--height-comment-thread-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
-  --height-profile-list: calc(var(--height-profile-item) + var(--layout-scrollbar-width));
-  --height-where-to-watch-list: calc(var(--height-where-to-watch-item) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
+  --height-landscape-list: calc(
+    var(--height-landscape-card) + var(--layout-scrollbar-width)
+  );
+  --height-person-list: calc(
+    var(--height-person-card) + var(--layout-scrollbar-width)
+  );
+  --height-poster-list: calc(
+    var(--height-portrait-card) + var(--layout-scrollbar-width)
+  );
+  --height-poster-list-sm: calc(
+    var(--height-portrait-card-sm) + var(--layout-scrollbar-width)
+  );
+  --height-lists-list: calc(
+    var(--height-list-card) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
+  );
+  --height-comments-list: calc(
+    var(--height-comment-card) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
+  );
+  --height-trivia-list: calc(
+    var(--height-trivia-card) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
+  );
+  --height-sentiment-list: calc(
+    var(--height-sentiment-card) + var(--layout-footer-less-padding)
+  );
+  --height-comment-thread-list: calc(
+    var(--height-comment-thread-card) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
+  );
+  --height-profile-list: calc(
+    var(--height-profile-item) + var(--layout-scrollbar-width)
+  );
+  --height-where-to-watch-list: calc(
+    var(--height-where-to-watch-item) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
+  );
 
   /**
    * Structural variables
@@ -213,8 +289,17 @@
 
   --summary-side-action-bar-width: var(--ni-40);
   --summary-poster-gap: var(--gap-s);
-  --summary-poster-width: min(calc(100dvw - 2 * (var(--layout-distance-side) + var(--summary-side-action-bar-width) + var(--summary-poster-gap))),
-    var(--ni-320));
+  --summary-poster-width: min(
+    calc(
+      100dvw
+        - 2
+        * (
+        var(--layout-distance-side) + var(--summary-side-action-bar-width)
+          + var(--summary-poster-gap)
+      )
+    ),
+    var(--ni-320)
+  );
 
   --toggle-large-width: var(--ni-88);
 

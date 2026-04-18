@@ -46,6 +46,7 @@ export function toTranslatedGenre(
   genre: string | (keyof typeof GENRE_MAP),
   data?: Record<string, unknown>,
 ): string {
-  const translationFn = GENRE_MAP[normalizeTranslationKey(genre) as keyof typeof GENRE_MAP];
+  const translationFn =
+    GENRE_MAP[normalizeTranslationKey(genre) as keyof typeof GENRE_MAP];
   return translationFn?.(data) ?? genre;
 }

@@ -17,4 +17,3 @@ const PARSER_MAP: Record<ImportSource, FileParser> = {
 export function getParser(source: ImportSource): FileParser {
   return PARSER_MAP[source];
 }
-

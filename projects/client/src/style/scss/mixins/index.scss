@@ -19,7 +19,8 @@
 }
 
 @mixin for-tablet-sm {
-  @media (min-width: $breakpoint-tablet-sm-min) and (max-width: $breakpoint-tablet-sm-max) {
+  @media (min-width: $breakpoint-tablet-sm-min)
+      and (max-width: $breakpoint-tablet-sm-max) {
     @content;
   }
 }
@@ -31,7 +32,8 @@
 }
 
 @mixin for-tablet-lg {
-  @media (min-width: $breakpoint-tablet-lg-min) and (max-width: $breakpoint-tablet-lg-max) {
+  @media (min-width: $breakpoint-tablet-lg-min)
+      and (max-width: $breakpoint-tablet-lg-max) {
     @content;
   }
 }
@@ -57,7 +59,6 @@
   }
 
   @include for-mouse {
-
     &:hover,
     &:focus-visible {
       color: var(--color-link-active);
@@ -100,7 +101,11 @@
 }
 
 @mixin dynamic-item-count($itemCountVariable, $minCardWidth, $maxItemCount) {
-  $calculatedItemCount: round(down, var(--list-inner-width) / ($minCardWidth + var(--list-gap)), 1);
+  $calculatedItemCount: round(
+    down,
+    var(--list-inner-width) / ($minCardWidth + var(--list-gap)),
+    1
+  );
 
   #{$itemCountVariable}: clamp(1, $calculatedItemCount, $maxItemCount);
 

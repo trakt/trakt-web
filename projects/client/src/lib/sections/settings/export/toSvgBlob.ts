@@ -10,7 +10,9 @@ function resolveAllVars(svgString: string, context: Element): string {
         const varName = commaIdx >= 0
           ? varExpr.slice(0, commaIdx).trim()
           : varExpr.trim();
-        const fallback = commaIdx >= 0 ? varExpr.slice(commaIdx + 1).trim() : '';
+        const fallback = commaIdx >= 0
+          ? varExpr.slice(commaIdx + 1).trim()
+          : '';
         return style.getPropertyValue(varName).trim() || fallback;
       },
     );

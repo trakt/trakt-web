@@ -1,4 +1,4 @@
-@use "$style/scss/mixins/index" as *;
+@use '$style/scss/mixins/index' as *;
 
 // Define theme variables for light mode
 @mixin light-theme {
@@ -18,17 +18,21 @@
   --color-input-background: var(--shade-10);
 
   --color-drawer-border: var(--shade-400);
-  --background-vip-drawer: radial-gradient(ellipse 80% 86% at 7.82% 100%,
-      var(--red-50) 0%,
-      var(--color-card-background) 100%);
+  --background-vip-drawer: radial-gradient(
+    ellipse 80% 86% at 7.82% 100%,
+    var(--red-50) 0%,
+    var(--color-card-background) 100%
+  );
 
   /**
    * Navbar
    */
   --color-background-navbar-base: var(--color-floating-background);
-  --color-background-navbar: color-mix(in srgb,
-      var(--color-background-navbar-base) 90%,
-      transparent);
+  --color-background-navbar: color-mix(
+    in srgb,
+    var(--color-background-navbar-base) 90%,
+    transparent
+  );
   --color-foreground-navbar: var(--color-foreground);
   --color-border: var(--shade-200);
   --color-background-side-navbar: var(--color-background-navbar-base);
@@ -40,28 +44,32 @@
   --color-official-list-background: var(--purple-200);
 
   /*
-    * Actions bar
-    */
+   * Actions bar
+   */
   --color-actions-bar-background: var(--color-floating-background);
 
   /*
    * Cta
    */
-  --color-cta-background-gradient: linear-gradient(260deg,
-      color-mix(in srgb, var(--shade-10) 60%, transparent) 0%,
-      var(--shade-10) 65%);
+  --color-cta-background-gradient: linear-gradient(
+    260deg,
+    color-mix(in srgb, var(--shade-10) 60%, transparent) 0%,
+    var(--shade-10) 65%
+  );
 
   /*
    * List
    */
-  --list-shadow: radial-gradient(50% 50% at 50% 50%,
-      color-mix(in srgb, var(--color-shadow) 86%, transparent) 0%,
-      color-mix(in srgb, var(--color-shadow) 62%, transparent) 24%,
-      color-mix(in srgb, var(--color-shadow) 43%, transparent) 34%,
-      color-mix(in srgb, var(--color-shadow) 29%, transparent) 46%,
-      color-mix(in srgb, var(--color-shadow) 18%, transparent) 63%,
-      color-mix(in srgb, var(--color-shadow) 7%, transparent) 86%,
-      transparent 100%);
+  --list-shadow: radial-gradient(
+    50% 50% at 50% 50%,
+    color-mix(in srgb, var(--color-shadow) 86%, transparent) 0%,
+    color-mix(in srgb, var(--color-shadow) 62%, transparent) 24%,
+    color-mix(in srgb, var(--color-shadow) 43%, transparent) 34%,
+    color-mix(in srgb, var(--color-shadow) 29%, transparent) 46%,
+    color-mix(in srgb, var(--color-shadow) 18%, transparent) 63%,
+    color-mix(in srgb, var(--color-shadow) 7%, transparent) 86%,
+    transparent 100%
+  );
   --list-meta-info-color: var(--purple-700);
 
   /*
@@ -78,7 +86,11 @@
   /*
    * Navbar
    */
-  --color-background-mobile-navbar: color-mix(in srgb, var(--color-background-navbar-base) 90%, transparent);
+  --color-background-mobile-navbar: color-mix(
+    in srgb,
+    var(--color-background-navbar-base) 90%,
+    transparent
+  );
 
   /*
    * Tooltip
@@ -87,8 +99,8 @@
   --color-tooltip-text: var(--shade-800);
 
   /*
-  * Overrides
-  */
+   * Overrides
+   */
   .trakt-background-cover-image,
   .trakt-cover-image {
     opacity: 0.75;
@@ -97,7 +109,11 @@
   /**
    * Toasts
    */
-  --color-toast-background: color-mix(in srgb, var(--shade-100) 70%, transparent 30%);
+  --color-toast-background: color-mix(
+    in srgb,
+    var(--shade-100) 70%,
+    transparent 30%
+  );
   --color-toast-border: var(--shade-200);
   --color-toast-progress-bar-background: var(--shade-300);
   --color-toast-progress-bar-progress: var(--shade-500);
@@ -118,11 +134,14 @@
   --color-current-reaction-background: var(--shade-100);
   --color-reaction-distribution-background: var(--shade-60);
 
-
   /**
-    * Calendar
-    */
-  --color-calendar-background: color-mix(in srgb, var(--color-background-navbar-base) 90%, transparent);
+   * Calendar
+   */
+  --color-calendar-background: color-mix(
+    in srgb,
+    var(--color-background-navbar-base) 90%,
+    transparent
+  );
   --color-calendar-inactive-background: var(--color-background-navbar-base);
   --color-calendar-active-background: var(--shade-200);
   --color-calendar-background-hover: var(--shade-100);
@@ -151,7 +170,11 @@
   /*
    * Dialogs & drawers
    */
-  --color-drawer-background: color-mix(in srgb, var(--shade-70) 94%, transparent);
+  --color-drawer-background: color-mix(
+    in srgb,
+    var(--shade-70) 94%,
+    transparent
+  );
   --color-dialog-background: var(--color-drawer-background);
   --color-modal-background: var(--color-card-background);
 
@@ -160,54 +183,84 @@
    */
   --color-sentiment-good: var(--purple-700);
   --color-sentiment-bad: var(--red-800);
-  --color-sentiment-highlight-border: color-mix(in srgb, var(--shade-800) 10%, transparent);
-  --background-sentiment-highlight: linear-gradient(135deg,
+  --color-sentiment-highlight-border: color-mix(
+    in srgb,
+    var(--shade-800) 10%,
+    transparent
+  );
+  --background-sentiment-highlight: linear-gradient(
+    135deg,
     color-mix(in srgb, var(--shade-800) 5%, transparent) 0%,
-    color-mix(in srgb, var(--shade-800) 2.5%, transparent) 100%);
+    color-mix(in srgb, var(--shade-800) 2.5%, transparent) 100%
+  );
 
   /*
    * VIP page
    */
-  --background-vip-content: linear-gradient(180deg,
+  --background-vip-content: linear-gradient(
+    180deg,
     var(--red-50) 0%,
-    var(--shade-50) 100%);
-  --background-usage-limits-card: linear-gradient(180deg,
+    var(--shade-50) 100%
+  );
+  --background-usage-limits-card: linear-gradient(
+    180deg,
     color-mix(in srgb, var(--shade-50) 80%, transparent) 0%,
-    color-mix(in srgb, var(--shade-100) 80%, transparent) 100%);
+    color-mix(in srgb, var(--shade-100) 80%, transparent) 100%
+  );
   --color-usage-bar-background: var(--shade-300);
   --color-usage-bar: var(--color-text-primary);
-  --background-vip-glass-card: radial-gradient(circle at top left,
+  --background-vip-glass-card: radial-gradient(
+    circle at top left,
     color-mix(in srgb, var(--shade-10) 30%, transparent) 0%,
-    color-mix(in srgb, var(--shade-10) 60%, transparent) 60%);
-  --background-vip-plain-glass-card: color-mix(in srgb, var(--shade-10) 60%, transparent);
-  --color-vip-upgrade-button: color-mix(in srgb,
+    color-mix(in srgb, var(--shade-10) 60%, transparent) 60%
+  );
+  --background-vip-plain-glass-card: color-mix(
+    in srgb,
+    var(--shade-10) 60%,
+    transparent
+  );
+  --color-vip-upgrade-button: color-mix(
+    in srgb,
     var(--red-50) 25%,
-    transparent);
-  --background-subscription-card: radial-gradient(ellipse 110% 125% at 8% 100%,
+    transparent
+  );
+  --background-subscription-card: radial-gradient(
+    ellipse 110% 125% at 8% 100%,
     var(--shade-20) 0%,
-    var(--shade-100) 100%);
-  --background-popular-subscription-card: radial-gradient(ellipse 110% 125% at 8% 100%,
+    var(--shade-100) 100%
+  );
+  --background-popular-subscription-card: radial-gradient(
+    ellipse 110% 125% at 8% 100%,
     var(--shade-20) 0%,
-    color-mix(in srgb,
-      var(--red-950) 10%,
-      var(--shade-10)) 100%);
+    color-mix(in srgb, var(--red-950) 10%, var(--shade-10)) 100%
+  );
   --color-vip-popular-tag: #fdc700;
   --color-vip-border-accent: var(--red-600);
   --color-vip-surface-muted: var(--red-50);
-  --background-vip-elevated-card: radial-gradient(167.08% 143.09% at 7.82% 100%,
+  --background-vip-elevated-card: radial-gradient(
+    167.08% 143.09% at 7.82% 100%,
     var(--color-vip-surface-muted) 0%,
-    var(--shade-100) 100%);
+    var(--shade-100) 100%
+  );
   --color-vip-discount-pill: var(--red-700);
-  --color-vip-discount-pill-background: color-mix(in srgb, var(--red-700) 10%, transparent);
+  --color-vip-discount-pill-background: color-mix(
+    in srgb,
+    var(--red-700) 10%,
+    transparent
+  );
   /*
    * Profile page
    */
-  --background-profile-details: radial-gradient(50% 40% at 50% 0%,
+  --background-profile-details: radial-gradient(
+    50% 40% at 50% 0%,
     var(--purple-50) 0%,
-    var(--shade-50) 100%);
-  --background-vip-profile-details: radial-gradient(50% 40% at 50% 0%,
+    var(--shade-50) 100%
+  );
+  --background-vip-profile-details: radial-gradient(
+    50% 40% at 50% 0%,
     var(--red-20) 0%,
-    var(--shade-50) 100%);
+    var(--shade-50) 100%
+  );
 
   /*
    * Tab view
@@ -220,7 +273,11 @@
    * Streak
    */
   --color-streak-border: var(--shade-70);
-  --color-streak-surface: linear-gradient(90deg, var(--shade-20) 0%, var(--shade-40) 100%);
+  --color-streak-surface: linear-gradient(
+    90deg,
+    var(--shade-20) 0%,
+    var(--shade-40) 100%
+  );
   --color-streak-day: var(--purple-600);
 
   /*
@@ -239,26 +296,38 @@
   --color-shadow: var(--shade-940);
 
   --color-foreground: var(--shade-10);
-  --color-background: color-mix(in srgb, var(--shade-920) 97%, var(--purple-900));
+  --color-background: color-mix(
+    in srgb,
+    var(--shade-920) 97%,
+    var(--purple-900)
+  );
 
   --color-text-primary: var(--shade-10);
   --color-text-secondary: var(--shade-300);
   --color-text-emphasis: var(--purple-300);
 
-  --color-input-background: color-mix(in srgb, var(--shade-800) 25%, transparent);
+  --color-input-background: color-mix(
+    in srgb,
+    var(--shade-800) 25%,
+    transparent
+  );
 
   --color-drawer-border: var(--shade-700);
-  --background-vip-drawer: radial-gradient(ellipse 80% 86% at 7.82% 100%,
-      var(--red-950) 0%,
-      var(--color-card-background) 100%);
+  --background-vip-drawer: radial-gradient(
+    ellipse 80% 86% at 7.82% 100%,
+    var(--red-950) 0%,
+    var(--color-card-background) 100%
+  );
 
   /**
    * Navbar
    */
   --color-background-navbar-base: var(--color-floating-background);
-  --color-background-navbar: color-mix(in srgb,
-      var(--color-background-navbar-base) 90%,
-      transparent);
+  --color-background-navbar: color-mix(
+    in srgb,
+    var(--color-background-navbar-base) 90%,
+    transparent
+  );
   --color-foreground-navbar: var(--shade-10);
   --color-border: var(--shade-700);
   --color-background-side-navbar: var(--color-background-navbar-base);
@@ -270,26 +339,30 @@
   --color-official-list-background: var(--purple-800);
 
   /*
-    * Actions bar
-    */
+   * Actions bar
+   */
   --color-actions-bar-background: var(--color-floating-background);
 
   /*
    * Cta
    */
-  --color-cta-background-gradient: linear-gradient(260deg,
-      color-mix(in srgb, var(--shade-900) 60%, transparent) 0%,
-      var(--shade-900) 65%);
+  --color-cta-background-gradient: linear-gradient(
+    260deg,
+    color-mix(in srgb, var(--shade-900) 60%, transparent) 0%,
+    var(--shade-900) 65%
+  );
 
   /*
    * List
    */
-  --list-shadow: radial-gradient(50% 50% at 50% 50%,
-      color-mix(in srgb, var(--color-shadow) 90%, transparent) 0%,
-      color-mix(in srgb, var(--color-shadow) 45%, transparent) 32%,
-      color-mix(in srgb, var(--color-shadow) 30%, transparent) 61%,
-      color-mix(in srgb, var(--color-shadow) 25%, transparent) 80%,
-      transparent 100%);
+  --list-shadow: radial-gradient(
+    50% 50% at 50% 50%,
+    color-mix(in srgb, var(--color-shadow) 90%, transparent) 0%,
+    color-mix(in srgb, var(--color-shadow) 45%, transparent) 32%,
+    color-mix(in srgb, var(--color-shadow) 30%, transparent) 61%,
+    color-mix(in srgb, var(--color-shadow) 25%, transparent) 80%,
+    transparent 100%
+  );
   --list-meta-info-color: var(--purple-400);
 
   /*
@@ -306,9 +379,11 @@
   /*
    * Navbar
    */
-  --color-background-mobile-navbar: color-mix(in srgb,
-      var(--color-background-navbar-base) 80%,
-      transparent);
+  --color-background-mobile-navbar: color-mix(
+    in srgb,
+    var(--color-background-navbar-base) 80%,
+    transparent
+  );
 
   /*
    * Tooltip
@@ -328,7 +403,11 @@
   /**
    * Toasts
    */
-  --color-toast-background: color-mix(in srgb, var(--shade-900) 70%, transparent 30%);
+  --color-toast-background: color-mix(
+    in srgb,
+    var(--shade-900) 70%,
+    transparent 30%
+  );
   --color-toast-border: var(--shade-700);
   --color-toast-progress-bar-background: var(--shade-500);
   --color-toast-progress-bar-progress: var(--shade-200);
@@ -350,11 +429,13 @@
   --color-reaction-distribution-background: var(--shade-700);
 
   /**
-    * Calendar
-    */
-  --color-calendar-background: color-mix(in srgb,
-      var(--color-background-navbar-base) 90%,
-      transparent);
+   * Calendar
+   */
+  --color-calendar-background: color-mix(
+    in srgb,
+    var(--color-background-navbar-base) 90%,
+    transparent
+  );
   --color-calendar-inactive-background: var(--color-background-navbar-base);
   --color-calendar-active-background: var(--shade-800);
   --color-calendar-background-hover: var(--shade-700);
@@ -383,7 +464,11 @@
   /*
    * Dialogs & drawers
    */
-  --color-drawer-background: color-mix(in srgb, var(--shade-920) 94%, transparent);
+  --color-drawer-background: color-mix(
+    in srgb,
+    var(--shade-920) 94%,
+    transparent
+  );
   --color-dialog-background: var(--color-drawer-background);
   --color-modal-background: var(--color-card-background);
 
@@ -392,52 +477,84 @@
    */
   --color-sentiment-good: var(--purple-200);
   --color-sentiment-bad: var(--red-100);
-  --color-sentiment-highlight-border: color-mix(in srgb, var(--shade-10) 10%, transparent);
-  --background-sentiment-highlight: linear-gradient(135deg,
-      color-mix(in srgb, var(--shade-10) 5%, transparent) 0%,
-      color-mix(in srgb, var(--shade-10) 2.5%, transparent) 100%);
+  --color-sentiment-highlight-border: color-mix(
+    in srgb,
+    var(--shade-10) 10%,
+    transparent
+  );
+  --background-sentiment-highlight: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--shade-10) 5%, transparent) 0%,
+    color-mix(in srgb, var(--shade-10) 2.5%, transparent) 100%
+  );
 
   /*
    * VIP page
    */
-  --background-vip-content: linear-gradient(180deg,
-      var(--red-975) 0%,
-      var(--shade-1000) 100%);
-  --background-usage-limits-card: linear-gradient(180deg,
-      color-mix(in srgb, var(--shade-930) 80%, transparent) 0%,
-      color-mix(in srgb, var(--shade-1000) 80%, transparent) 100%);
+  --background-vip-content: linear-gradient(
+    180deg,
+    var(--red-975) 0%,
+    var(--shade-1000) 100%
+  );
+  --background-usage-limits-card: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--shade-930) 80%, transparent) 0%,
+    color-mix(in srgb, var(--shade-1000) 80%, transparent) 100%
+  );
   --color-usage-bar-background: var(--shade-800);
   --color-usage-bar: var(--shade-100);
-  --background-vip-glass-card: radial-gradient(circle at top left,
-      color-mix(in srgb, var(--red-900) 20%, transparent) 0%,
-      transparent 60%);
-  --background-vip-plain-glass-card: color-mix(in srgb, var(--shade-10) 10%, transparent);
-  --color-vip-upgrade-button: color-mix(in srgb,
-      var(--red-950) 25%,
-      transparent);
-  --background-subscription-card: radial-gradient(ellipse 110% 125% at 8% 100%,
-      var(--shade-920) 0%,
-      var(--shade-1000) 100%);
-  --background-popular-subscription-card: radial-gradient(ellipse 110% 125% at 8% 100%,
-      var(--red-950) 0%,
-      var(--shade-1000) 100%);
+  --background-vip-glass-card: radial-gradient(
+    circle at top left,
+    color-mix(in srgb, var(--red-900) 20%, transparent) 0%,
+    transparent 60%
+  );
+  --background-vip-plain-glass-card: color-mix(
+    in srgb,
+    var(--shade-10) 10%,
+    transparent
+  );
+  --color-vip-upgrade-button: color-mix(
+    in srgb,
+    var(--red-950) 25%,
+    transparent
+  );
+  --background-subscription-card: radial-gradient(
+    ellipse 110% 125% at 8% 100%,
+    var(--shade-920) 0%,
+    var(--shade-1000) 100%
+  );
+  --background-popular-subscription-card: radial-gradient(
+    ellipse 110% 125% at 8% 100%,
+    var(--red-950) 0%,
+    var(--shade-1000) 100%
+  );
   --color-vip-popular-tag: #fdc700;
   --color-vip-border-accent: #b31818;
   --color-vip-surface-muted: #490105;
-  --background-vip-elevated-card: radial-gradient(167.08% 143.09% at 7.82% 100%,
-      var(--color-vip-surface-muted) 0%,
-      var(--shade-1000) 100%);
+  --background-vip-elevated-card: radial-gradient(
+    167.08% 143.09% at 7.82% 100%,
+    var(--color-vip-surface-muted) 0%,
+    var(--shade-1000) 100%
+  );
   --color-vip-discount-pill: var(--red-100);
-  --color-vip-discount-pill-background: color-mix(in srgb, var(--red-100) 10%, transparent);
+  --color-vip-discount-pill-background: color-mix(
+    in srgb,
+    var(--red-100) 10%,
+    transparent
+  );
   /*
    * Profile page
    */
-  --background-profile-details: radial-gradient(50% 40% at 50% 0%,
-      var(--purple-950) 0%,
-      var(--purple-1000) 100%);
-  --background-vip-profile-details: radial-gradient(50% 40% at 50% 0%,
-      var(--red-950) 0%,
-      var(--red-1000) 100%);
+  --background-profile-details: radial-gradient(
+    50% 40% at 50% 0%,
+    var(--purple-950) 0%,
+    var(--purple-1000) 100%
+  );
+  --background-vip-profile-details: radial-gradient(
+    50% 40% at 50% 0%,
+    var(--red-950) 0%,
+    var(--red-1000) 100%
+  );
 
   /*
    * Tab view
@@ -450,7 +567,11 @@
    * Streak
    */
   --color-streak-border: var(--shade-900);
-  --color-streak-surface: linear-gradient(90deg, var(--shade-940) 0%, var(--shade-920) 100%);
+  --color-streak-surface: linear-gradient(
+    90deg,
+    var(--shade-940) 0%,
+    var(--shade-920) 100%
+  );
   --color-streak-day: var(--purple-400);
 
   /*

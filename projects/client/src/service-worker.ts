@@ -6,7 +6,7 @@ import { precacheAndRoute } from 'workbox-precaching';
 import {
   NavigationRoute,
   registerRoute,
-  setCatchHandler
+  setCatchHandler,
 } from 'workbox-routing';
 import {
   CacheFirst,

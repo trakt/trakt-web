@@ -14,7 +14,10 @@ describe('buildRatingsPayload', () => {
 
       const result = buildRatingsPayload([item]);
 
-      expect(result.movies).toEqual([{ rating: 8, ids: { imdb: 'tt1234567' } }]);
+      expect(result.movies).toEqual([{
+        rating: 8,
+        ids: { imdb: 'tt1234567' },
+      }]);
       expect(result.shows).toHaveLength(0);
     });
 

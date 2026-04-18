@@ -7,8 +7,9 @@ import type { Handle } from '@sveltejs/kit';
  * @see https://developers.cloudflare.com/bots/concepts/bot/verified-bots/
  */
 function isLegitimateBot(request: Request): boolean {
-  const verifiedBotCategory = (request as { cf?: { verifiedBotCategory?: string } })
-    .cf?.verifiedBotCategory;
+  const verifiedBotCategory =
+    (request as { cf?: { verifiedBotCategory?: string } })
+      .cf?.verifiedBotCategory;
   return verifiedBotCategory === 'Search Engine Crawler';
 }
 

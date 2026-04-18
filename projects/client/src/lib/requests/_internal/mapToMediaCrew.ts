@@ -17,7 +17,9 @@ function toMember(response: CrewResponse | CastResponse) {
   return ({
     name: response.person.name,
     key: response.person.ids.slug,
-    ...(response.episode_count != null ? { episodeCount: response.episode_count } : {}),
+    ...(response.episode_count != null
+      ? { episodeCount: response.episode_count }
+      : {}),
   });
 }
 
