@@ -757,7 +757,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "同じ",
   "text_stats_delta_up": "+{count}",
-  "text_stats_episodes_count": "{count}エピソード",
+  "text_stats_episodes_count": "{count}話",
   "text_stats_keep_it_going": "続けていこう!",
   "text_stats_keep_streak_alive": "で連続記録を維持しましょう！",
   "text_stats_movies_count": "{count}本",

@@ -757,7 +757,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "gleich",
   "text_stats_delta_up": "+{count}",
-  "text_stats_episodes_count": "{count} Episoden",
+  "text_stats_episodes_count": "{count} Folgen",
   "text_stats_keep_it_going": "Machen Sie weiter!",
   "text_stats_keep_streak_alive": "um Ihren Streak am Leben zu erhalten!",
   "text_stats_movies_count": "{count} Filme",
