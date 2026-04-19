@@ -14,7 +14,7 @@ import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts'
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { combineLatest, of } from 'rxjs';
-import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 export function useShow(slug: string | undefined) {
   if (!slug) {
@@ -45,11 +45,15 @@ export function useShow(slug: string | undefined) {
     ),
   );
 
-  const sentiment = isAuthorized.pipe(
-    switchMap((authorized) => {
-      if (!authorized) return of(undefined);
-      return useQuery(showSentimentQuery({ slug }));
-    }),
+  const sentiment = combineLatest([
+    isAuthorized,
+    useQuery(
+      isAuthorized.pipe(
+        map((authorized) => showSentimentQuery({ slug, enabled: authorized })),
+      ),
+    ),
+  ]).pipe(
+    map(([authorized, query]) => (authorized ? query : undefined)),
     shareReplay(1),
   );
 

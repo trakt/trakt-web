@@ -5,7 +5,7 @@ import { mapToSentimentAnalysis } from '../../_internal/mapToSentimentAnalyis.ts
 import { SentimentAnalysisSchema } from '../../models/SentimentAnalysis.ts';
 import type { SentimentResponse } from '../../models/SentimentResponse.ts';
 
-type ShowSentimentParams = { slug: string } & ApiParams;
+type ShowSentimentParams = { slug: string; enabled: boolean } & ApiParams;
 
 const showSentimentRequest = async (
   { fetch, slug }: ShowSentimentParams,
@@ -30,4 +30,5 @@ export const showSentimentQuery = defineQuery({
   mapper: (response) => mapToSentimentAnalysis(response.body),
   schema: SentimentAnalysisSchema.nullish(),
   ttl: time.hours(3),
+  enabled: (params) => params.enabled,
 });
