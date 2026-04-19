@@ -10,7 +10,10 @@ describe('movieSentimentQuery', () => {
     const result = await runQuery({
       factory: () =>
         createTestBedQuery(
-          movieSentimentQuery({ slug: MovieHereticMappedMock.slug }),
+          movieSentimentQuery({
+            slug: MovieHereticMappedMock.slug,
+            enabled: true,
+          }),
         ),
       mapper: (response) => response?.data,
     });

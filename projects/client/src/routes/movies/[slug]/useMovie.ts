@@ -14,7 +14,7 @@ import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts'
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { combineLatest, of } from 'rxjs';
-import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 /*
   FIXME: Fix the root cause.
@@ -47,11 +47,15 @@ export function useMovie(slug: string | undefined) {
   const studios = useQuery(movieStudiosQuery({ slug }));
   const crew = useQuery(moviePeopleQuery({ slug }));
 
-  const sentiment = isAuthorized.pipe(
-    switchMap((authorized) => {
-      if (!authorized) return of(undefined);
-      return useQuery(movieSentimentQuery({ slug }));
-    }),
+  const sentiment = combineLatest([
+    isAuthorized,
+    useQuery(
+      isAuthorized.pipe(
+        map((authorized) => movieSentimentQuery({ slug, enabled: authorized })),
+      ),
+    ),
+  ]).pipe(
+    map(([authorized, query]) => (authorized ? query : undefined)),
     shareReplay(1),
   );
 
