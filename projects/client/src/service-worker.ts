@@ -30,6 +30,15 @@ declare let self: ServiceWorkerGlobalScope;
  */
 self.__WB_DISABLE_DEV_LOGS = true;
 
+// Global error and unhandledrejection event listeners for debugging
+self.addEventListener('error', (event) => {
+  console.error('Service Worker error event:', event.message, event.filename, event.lineno, event.colno, event.error);
+});
+
+self.addEventListener('unhandledrejection', (event) => {
+  console.error('Service Worker unhandledrejection:', event.reason);
+});
+
 // Global Workbox catch handler: log the failure and fall back to network
 setCatchHandler(async ({ event, request, url }) => {
   console.error('Workbox route handler failed for:', {
@@ -55,6 +64,25 @@ setCatchHandler(async ({ event, request, url }) => {
 function removeNavigationCache() {
   return caches.delete(CacheKey.navigation);
 }
+
+// Force immediate activation for new service worker
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
+});
+
+// Bust all caches on new service worker activation
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+      const cacheNames = await caches.keys();
+      await Promise.all(cacheNames.map((name) => caches.delete(name)));
+      // Optionally, claim clients immediately
+      if (self.clients && self.clients.claim) {
+        await self.clients.claim();
+      }
+    })()
+  );
+});
 
 addEventListener('message', (event) => {
   if (event.data?.type === WorkerMessage.CacheBust) {
@@ -86,6 +114,23 @@ registerRoute(
 
     return await navigationHandler.handle(context);
   }),
+);
+
+// Immutable assets 404 handling
+registerRoute(
+  ({ url }) => url.pathname.includes('/_app/immutable/'),
+  async ({ event, request, url }) => {
+    const is404Redirect = url.searchParams.has('_sw404');
+    const response = await fetch(request);
+    if (response && response.status === 404) {
+      await removeNavigationCache();
+      if (!is404Redirect) {
+        url.searchParams.set('_sw404', '1');
+        return Response.redirect(url.toString(), 302);
+      }
+    }
+    return response;
+  },
 );
 
 // Manifest route - always try network first
