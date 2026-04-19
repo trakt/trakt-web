@@ -4,7 +4,7 @@ import type { Token } from '../token/index.ts';
 
 export const AUTH_CONTEXT_KEY = Symbol('auth-is-authorized');
 
-type AuthContextType = {
+export type AuthContextType = {
   isAuthorized: BehaviorSubject<boolean>;
   token: BehaviorSubject<Token | null>;
 };

@@ -15,14 +15,16 @@
     accessToken,
   }: AuthProviderProps = $props();
 
-  const { isAuthorized } = iffy(() =>
+  const ctx = iffy(() =>
     createAuthContext({
       isAuthorized: isAuthorizedOidc,
       token: null,
     }),
   );
 
-  const { isInitializing } = iffy(() => initializeUserManager(accessToken));
+  const { isInitializing } = iffy(() =>
+    initializeUserManager({ ctx, tokenFromServer: accessToken }),
+  );
   const { user } = useUser();
 </script>
 
