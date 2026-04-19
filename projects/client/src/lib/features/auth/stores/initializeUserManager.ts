@@ -6,7 +6,7 @@ import { onMount } from 'svelte';
 import { getOidcConfig } from '../getOidcConfig.ts';
 import { setToken, type Token } from '../token/index.ts';
 import { postToken } from './_internal/postToken.ts';
-import { getAuthContext } from './getAuthContext.ts';
+import type { AuthContextType } from './createAuthContext.ts';
 import { setUserManager } from './userManager.ts';
 
 function mapToToken(user: User | null): Token {
@@ -18,7 +18,12 @@ function mapToToken(user: User | null): Token {
   };
 }
 
-export function initializeUserManager(tokenFromServer?: string | null) {
+type InitializeUserManagerParams = {
+  ctx: AuthContextType;
+  tokenFromServer?: string | null;
+};
+
+export function initializeUserManager({ ctx, tokenFromServer }: InitializeUserManagerParams) {
   if (!browser) {
     return {
       isInitializing: of(false),
@@ -26,7 +31,6 @@ export function initializeUserManager(tokenFromServer?: string | null) {
   }
 
   const isInitializing = new BehaviorSubject(true);
-  const ctx = getAuthContext();
 
   onMount(() => {
     const manager = new UserManager(

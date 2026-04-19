@@ -3,12 +3,16 @@ import { OidcUserMock } from '$mocks/data/auth/OidcUserMock.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { describe, expect, it } from 'vitest';
 import { getToken } from '../token/index.ts';
+import { getAuthContext } from './getAuthContext.ts';
 import { initializeUserManager } from './initializeUserManager.ts';
 import { useAuth } from './useAuth.ts';
 
 describe('initializeUserManager', () => {
   it('should initialize unauthorized users', async () => {
-    await renderStore(() => initializeUserManager());
+    await renderStore(() => {
+      const ctx = getAuthContext();
+      return initializeUserManager({ ctx });
+    });
     const { isAuthorized } = await renderStore(() => useAuth());
 
     const token = getToken();
@@ -19,7 +23,10 @@ describe('initializeUserManager', () => {
 
   it('should initialize authorized users', async () => {
     setAuthorization(true);
-    await renderStore(() => initializeUserManager(OidcUserMock.access_token));
+    await renderStore(() => {
+      const ctx = getAuthContext();
+      return initializeUserManager({ ctx, tokenFromServer: OidcUserMock.access_token });
+    });
     const { isAuthorized } = await renderStore(() => useAuth());
 
     const token = getToken();
