@@ -7,6 +7,7 @@
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import type { BaseItemProps } from "$lib/sections/lists/components/models/BaseItemProps";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { getEpisodesUntil } from "./getEpisodesUntil";
   import { WatchedUntilHereIntlProvider } from "./WatchedUntilHereIntlProvider";
 
@@ -36,26 +37,42 @@
   const hasBulkMarkAsWatched = $derived(
     hasUnseenEpisodes && episode.effectiveReleaseDate && !isFuture,
   );
+
+  const { isWatchable } = $derived(
+    useMarkAsWatched({ type: "episode", media: episode, show }),
+  );
+
+  const isActionable = $derived(isWatchable || hasBulkMarkAsWatched);
 </script>
 
 {#snippet popupActions()}
   <RenderFor audience="authenticated">
     <MarkAsWatchedAction
       style="dropdown-item"
-      type="show"
-      size="small"
-      i18n={WatchedUntilHereIntlProvider}
-      title={show.title}
-      media={{
-        id: show.id,
-        effectiveReleaseDate: show.effectiveReleaseDate,
-        seasons: getEpisodesUntil({
-          previousSeasons,
-          episode,
-          watchedEpisodes,
-        }),
-      }}
+      type="episode"
+      title={episode.title}
+      {show}
+      media={episode}
+      mode="hybrid"
     />
+    {#if hasBulkMarkAsWatched}
+      <MarkAsWatchedAction
+        style="dropdown-item"
+        type="show"
+        size="small"
+        i18n={WatchedUntilHereIntlProvider}
+        title={show.title}
+        media={{
+          id: show.id,
+          effectiveReleaseDate: show.effectiveReleaseDate,
+          seasons: getEpisodesUntil({
+            previousSeasons,
+            episode,
+            watchedEpisodes,
+          }),
+        }}
+      />
+    {/if}
   </RenderFor>
 {/snippet}
 
@@ -64,7 +81,7 @@
   media={show}
   {style}
   {coverUrl}
-  popupActions={hasBulkMarkAsWatched ? popupActions : undefined}
+  popupActions={isActionable ? popupActions : undefined}
   variant={isFuture ? "upcoming" : "default"}
   context="show"
   {source}

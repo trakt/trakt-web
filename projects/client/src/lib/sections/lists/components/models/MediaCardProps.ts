@@ -15,7 +15,6 @@ export type MediaItemVariant<T> =
 
 type BaseMediaProps<T> = BaseItemProps & MediaItemVariant<T> & {
   coverTag?: Snippet;
-  indicators?: Snippet;
   mode?: 'standalone' | 'mixed';
   onclick?: (item: T) => void;
 };
