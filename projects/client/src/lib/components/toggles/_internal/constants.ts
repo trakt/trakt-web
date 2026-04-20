@@ -107,17 +107,17 @@ const trivia: ToggleDefinition<'trivia'> = {
 
 const progress: ToggleDefinition<'progress'> = {
   id: 'progress',
-  default: 'in-progress',
+  default: 'completed',
   options: [
-    {
-      value: 'in-progress',
-      text: m.button_text_progress_in_progress,
-      label: m.button_label_progress_in_progress,
-    },
     {
       value: 'completed',
       text: m.button_text_progress_completed,
       label: m.button_label_progress_completed,
+    },
+    {
+      value: 'in-progress',
+      text: m.button_text_progress_in_progress,
+      label: m.button_label_progress_in_progress,
     },
     {
       value: 'dropped',
