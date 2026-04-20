@@ -3,6 +3,7 @@
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useStoredFilters } from "$lib/features/filters/useStoredFilters.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import FiltersPopupMenu from "./filters/FiltersPopupMenu.svelte";
   import FilterTabs from "./FilterTabs.svelte";
@@ -18,6 +19,10 @@
 </script>
 
 {#snippet badge()}
+  <div class="trakt-filter-toggles">
+    <DiscoverToggles />
+  </div>
+
   {#if $activeMode === FilterMode.Simple}
     <FiltersPopupMenu {onClose} />
   {/if}
@@ -32,3 +37,9 @@
 >
   <FilterTabs activeMode={$activeMode} {setActiveMode} {tabPosition} />
 </Drawer>
+
+<style>
+  .trakt-filter-toggles {
+    display: flex;
+  }
+</style>
