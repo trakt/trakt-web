@@ -1,6 +1,7 @@
 <script lang="ts">
   import YirDefault from "./default/YirDefault.svelte";
   import YirTitleSection from "./default/_internal/YirTitleSection.svelte";
+  import YirHeader from "./_internal/YirHeader.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useYirDetail } from "./_internal/useYirDetail";
 
@@ -12,6 +13,8 @@
 </script>
 
 <div class="yir-page" id="year-in-review">
+  <YirHeader {slug} {year} />
+
   <YirTitleSection {slug} {year} coverImage={$detail?.images.cover} />
 
   {#if $isLoading}

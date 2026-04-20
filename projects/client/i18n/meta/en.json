@@ -7484,6 +7484,27 @@
         "ios"
       ]
     },
+    "yir_button_next": {
+      "default": "Next",
+      "description": "Button text for next page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_share_text": {
+      "default": "Check out my {year} Year in Review on Trakt",
+      "description": "Share text used when sharing a Year in Review page.",
+      "variables": {
+        "year": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "yir_button_see_more": {
       "default": "See More",
       "description": "Button text for see more.",
