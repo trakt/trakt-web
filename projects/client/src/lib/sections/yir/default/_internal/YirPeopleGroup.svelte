@@ -56,9 +56,20 @@
   }
 
   $effect(() => {
-    if (viewportEl) {
+    if (!viewportEl) return;
+
+    measureRowHeight();
+
+    // Row height depends on the width of each `.yir-person-link` (the
+    // circular headshot scales with its container), so re-measure whenever
+    // the viewport resizes and keep the scroll aligned with the current page.
+    const resizeObserver = new ResizeObserver(() => {
       measureRowHeight();
-    }
+      viewportEl?.scrollTo({ top: currentPage * rowHeight, behavior: "instant" });
+    });
+    resizeObserver.observe(viewportEl);
+
+    return () => resizeObserver.disconnect();
   });
 
   function personUrl(person: YirPerson): string {

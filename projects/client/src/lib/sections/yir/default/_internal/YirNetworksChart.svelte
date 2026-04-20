@@ -228,6 +228,14 @@
       return true;
     };
 
+    const rebuildLogos = () => {
+      // Remove old logo groups so they get re-created at the new circle positions
+      chartContainer
+        ?.querySelectorAll("[data-company-id]")
+        .forEach((el) => el.remove());
+      addLogosAndText();
+    };
+
     // Initial render with retry logic
     let retryCount = 0;
     const maxRetries = 10;
@@ -241,11 +249,28 @@
 
     setTimeout(tryAddLogos, 100);
 
-    // Watch for chart updates
+    // Watch for chart updates (Carbon rebuilds the SVG on data / theme changes)
     const observer = new MutationObserver(addLogosAndText);
     observer.observe(chartContainer, { childList: true, subtree: true });
 
-    return () => observer.disconnect();
+    // Watch for container size changes — Carbon re-lays out circles, so
+    // we need to re-position the overlaid logos to match.
+    let resizeFrame: number | null = null;
+    const resizeObserver = new ResizeObserver(() => {
+      if (resizeFrame !== null) cancelAnimationFrame(resizeFrame);
+      // Defer so Carbon can finish its own layout pass first.
+      resizeFrame = requestAnimationFrame(() => {
+        resizeFrame = null;
+        rebuildLogos();
+      });
+    });
+    resizeObserver.observe(chartContainer);
+
+    return () => {
+      observer.disconnect();
+      resizeObserver.disconnect();
+      if (resizeFrame !== null) cancelAnimationFrame(resizeFrame);
+    };
   });
 </script>
 
