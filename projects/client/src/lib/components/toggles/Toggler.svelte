@@ -1,4 +1,5 @@
 <script lang="ts" generics="T">
+  import { goto } from "$app/navigation";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType.ts";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import Toggle from "./_internal/Toggle.svelte";
@@ -24,9 +25,42 @@
     custom animation functions for use with svelte:animate
   */
   let trackerElement: HTMLDivElement;
-  const handleChange = (index: number) => {
+  let pending = $state<{ index: number; href?: string } | null>(null);
+
+  const handleChange = (index: number, href?: string) => {
+    pending = { index, href };
     trackerIndex.set(index);
     trackerElement?.classList.add("moving");
+  };
+
+  const handleTransitionEnd = (event: TransitionEvent) => {
+    if (event.propertyName !== "left" || !pending) return;
+
+    (event.currentTarget as HTMLDivElement).classList.remove("moving");
+
+    const { index, href } = pending;
+    pending = null;
+
+    onChange(options.at(index)?.value ?? value);
+
+    if (href) {
+      // eslint-disable-next-line svelte/no-navigation-without-resolve
+      goto(href, { replaceState: true, keepFocus: true, noScroll: true });
+    }
+  };
+
+  const getTriggerProps = (option: ToggleOption<T>, index: number) => {
+    if (option.href) {
+      return {
+        href: option.href,
+        mode: "prevent" as const,
+        onclick: (resolvedHref: string) => handleChange(index, resolvedHref),
+      };
+    }
+
+    return {
+      onclick: () => handleChange(index),
+    };
   };
 </script>
 
@@ -41,19 +75,14 @@
     class="tracker"
     style:--tracker-index={$trackerIndex}
     class:text-variant={variant === "text"}
-    ontransitionend={(event) => {
-      event.currentTarget.classList.remove("moving");
-      const newValue = options.at($trackerIndex)?.value ?? value;
-      onChange(newValue);
-    }}
+    ontransitionend={handleTransitionEnd}
   ></div>
   {#each options as option, index (option.value)}
     <Toggle
-      onclick={() => handleChange(index)}
       isPressed={$trackerIndex === index}
       label={option.label()}
-      href={option.href}
       {variant}
+      {...getTriggerProps(option, index)}
     >
       {#snippet icon()}
         <ToggleIcon {option} />

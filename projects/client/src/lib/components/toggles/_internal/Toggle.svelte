@@ -3,22 +3,33 @@
   import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import type { Snippet } from "svelte";
 
+  type ToggleBaseProps = {
+    icon: Snippet;
+    isPressed: boolean;
+    variant?: "icon" | "text";
+    label: string;
+  };
+
+  type ToggleHrefProps = {
+    href: string;
+    onclick: (resolvedHref: string) => void;
+    mode: "direct" | "prevent";
+  } & ToggleBaseProps;
+
+  type ToggleButtonProps = {
+    onclick: () => void;
+  } & ToggleBaseProps;
+
+  type ToggleProps = (ToggleHrefProps | ToggleButtonProps) & ChildrenProps;
+
   const {
     children,
     icon,
     isPressed,
-    onclick,
-    href,
     variant = "icon",
     label,
-  }: {
-    icon: Snippet;
-    isPressed: boolean;
-    onclick: () => void;
-    href?: string;
-    variant?: "icon" | "text";
-    label: string;
-  } & ChildrenProps = $props();
+    ...rest
+  }: ToggleProps = $props();
 </script>
 
 {#snippet content()}
@@ -28,20 +39,20 @@
   {/if}
 {/snippet}
 
-{#if href}
+{#if "href" in rest}
   <a
-    use:appendGlobalParameters={href}
+    use:appendGlobalParameters={rest.href}
     class="trakt-toggler-toggle"
     class:is-pressed={isPressed}
     class:text-variant={variant === "text"}
     data-dpad-navigation={DpadNavigationType.Item}
     aria-label={label}
     aria-current={isPressed ? "page" : undefined}
-    data-sveltekit-replacestate
-    data-sveltekit-keepfocus
-    data-sveltekit-noscroll
-    {href}
-    {onclick}
+    href={rest.href}
+    onclick={(event) => {
+      if (rest.mode === "prevent") event.preventDefault();
+      rest.onclick(event.currentTarget.href);
+    }}
   >
     {@render content()}
   </a>
@@ -53,7 +64,7 @@
     data-dpad-navigation={DpadNavigationType.Item}
     aria-label={label}
     type="button"
-    {onclick}
+    onclick={rest.onclick}
   >
     {@render content()}
   </button>
