@@ -5,6 +5,7 @@
   import "@carbon/charts-svelte/styles.css";
   import { languageTag } from "$lib/features/i18n";
   import { findMaxIndex } from "$lib/utils/array/findMaxIndex";
+  import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
 
   const {
     data,
@@ -26,15 +27,11 @@
     return () => resizeObserver.disconnect();
   });
 
-  // Generate localized month names using Intl API
   const monthNames = $derived.by(() => {
     const locale = languageTag();
-    const formatter = new Intl.DateTimeFormat(locale, { month: "short" });
-    // Create dates for each month
-    return Array.from({ length: 12 }, (_, i) => {
-      const date = new Date(2021, i, 1);
-      return formatter.format(date);
-    });
+    return Array.from({ length: 12 }, (_, i) =>
+      toHumanMonth(new Date(2021, i, 1), locale, "short"),
+    );
   });
 
   // Calculate max value index for coloring

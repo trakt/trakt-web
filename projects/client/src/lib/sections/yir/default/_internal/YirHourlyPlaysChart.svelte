@@ -5,6 +5,8 @@
   import "@carbon/charts-svelte/styles.css";
   import { languageTag } from "$lib/features/i18n";
   import { findMaxIndex } from "$lib/utils/array/findMaxIndex";
+  import { toHumanHour } from "$lib/utils/formatting/date/toHumanHour";
+  import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime";
 
   const {
     data,
@@ -26,18 +28,11 @@
     return () => resizeObserver.disconnect();
   });
 
-  // Generate localized hour labels using Intl API
   const hourLabels = $derived.by(() => {
     const locale = languageTag();
-    const formatter = new Intl.DateTimeFormat(locale, {
-      hour: "numeric",
-      hour12: undefined, // Let locale decide 12h vs 24h
-    });
-
-    return Array.from({ length: 24 }, (_, hour) => {
-      const date = new Date(2021, 0, 1, hour, 0);
-      return formatter.format(date);
-    });
+    return Array.from({ length: 24 }, (_, hour) =>
+      toHumanHour(new Date(2021, 0, 1, hour, 0), locale),
+    );
   });
 
   // Calculate max value index for coloring
@@ -52,19 +47,11 @@
     })),
   );
 
-  // Format time range for tooltip using Intl API
   function getTimeRange(hour: number): string {
     const locale = languageTag();
-    const formatter = new Intl.DateTimeFormat(locale, {
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: undefined, // Let locale decide 12h vs 24h
-    });
-
-    const startDate = new Date(2021, 0, 1, hour, 0);
-    const endDate = new Date(2021, 0, 1, hour, 59);
-
-    return `${formatter.format(startDate)} - ${formatter.format(endDate)}`;
+    const start = toHumanClockTime(new Date(2021, 0, 1, hour, 0), locale);
+    const end = toHumanClockTime(new Date(2021, 0, 1, hour, 59), locale);
+    return `${start} - ${end}`;
   }
 
   const options = $derived<BarChartOptions>({

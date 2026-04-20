@@ -3,8 +3,9 @@
   import { ScaleTypes } from "@carbon/charts";
   import { BarChartSimple } from "@carbon/charts-svelte";
   import "@carbon/charts-svelte/styles.css";
-  import { languageTag } from "$lib/features/i18n";
+  import { getLocale } from "$lib/features/i18n";
   import { findMaxIndex } from "$lib/utils/array/findMaxIndex";
+  import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek";
 
   const {
     data,
@@ -26,16 +27,12 @@
     return () => resizeObserver.disconnect();
   });
 
-  // Generate localized day names using Intl API
   const dayNames = $derived.by(() => {
-    const locale = languageTag();
-    const formatter = new Intl.DateTimeFormat(locale, { weekday: "short" });
-    // Create dates for each day of the week (starting with Sunday)
-    return Array.from({ length: 7 }, (_, i) => {
-      // January 3, 2021 was a Sunday, so we can use it as a base
-      const date = new Date(2021, 0, 3 + i);
-      return formatter.format(date);
-    });
+    const locale = getLocale();
+    // January 3, 2021 was a Sunday, so we use it as a base.
+    return Array.from({ length: 7 }, (_, i) =>
+      toHumanDayOfWeek(new Date(2021, 0, 3 + i), locale),
+    );
   });
 
   // Calculate max value index for coloring

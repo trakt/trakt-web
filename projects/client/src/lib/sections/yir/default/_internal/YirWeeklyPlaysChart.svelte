@@ -5,6 +5,7 @@
   import "@carbon/charts-svelte/styles.css";
   import { languageTag } from "$lib/features/i18n";
   import { findMaxIndex } from "$lib/utils/array/findMaxIndex";
+  import { toHumanShortDate } from "$lib/utils/formatting/date/toHumanShortDate";
 
   const {
     data,
@@ -40,23 +41,18 @@
     })),
   );
 
-  // Get week date range for tooltip
   function getWeekDateRange(weekNumber: number): string {
+    const locale = languageTag();
     const firstDay = new Date(year, 0, 1);
     const daysOffset = (weekNumber - 1) * 7;
+
     const weekStart = new Date(firstDay);
     weekStart.setDate(firstDay.getDate() + daysOffset);
 
     const weekEnd = new Date(weekStart);
     weekEnd.setDate(weekStart.getDate() + 6);
 
-    const formatDate = (date: Date) => {
-      const month = date.toLocaleString(languageTag(), { month: "short" });
-      const day = date.getDate();
-      return `${month} ${day}`;
-    };
-
-    return `${formatDate(weekStart)} - ${formatDate(weekEnd)}`;
+    return `${toHumanShortDate(weekStart, locale)} - ${toHumanShortDate(weekEnd, locale)}`;
   }
 
   const options = $derived<BarChartOptions>({

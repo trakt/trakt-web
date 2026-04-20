@@ -256,28 +256,19 @@
     width: 100%;
     height: var(--ni-640);
 
-    :global(.cds--cc--chart-wrapper) {
-      background: transparent !important;
-    }
-
-    :global(.cds--cc--chart-svg) {
-      background: transparent !important;
-    }
-
-    :global(.cds--cc--chart-holder) {
-      background: transparent !important;
-    }
-
+    :global(.cds--cc--chart-wrapper),
+    :global(.cds--cc--chart-svg),
+    :global(.cds--cc--chart-holder),
     :global(svg) {
-      background: transparent !important;
+      background: transparent;
     }
 
     // Style the circle pack nodes
     :global(circle) {
       stroke: none;
       cursor: pointer;
-      opacity: 1 !important;
-      fill-opacity: 1 !important;
+      opacity: 1;
+      fill-opacity: 1;
       transition: transform 0.2s ease;
       transform-box: fill-box;
       transform-origin: center;
@@ -303,21 +294,21 @@
   :global(.cds--tooltip),
   :global(.cds--cc--tooltip),
   :global(.cds--cc--tooltip-container) {
-    background: transparent !important;
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+    background: transparent;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
   }
 
   :global(.cds--cc--tooltip .content-box .title-tooltip) {
-    max-width: none !important;
+    max-width: none;
   }
 
   :global(.cds--cc--tooltip),
   :global(.cds--cc--tooltip *) {
-    max-width: none !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
+    max-width: none;
+    overflow: visible;
+    text-overflow: clip;
   }
 
   :global(.yir-chart-tooltip) {

@@ -132,24 +132,12 @@
     }
 
     // Shared chart styles
-    :global(.cds--cc--chart-wrapper) {
-      background: transparent !important;
-    }
-
-    :global(.cds--cc--chart-svg) {
-      background: transparent !important;
-    }
-
-    :global(.cds--cc--chart-holder) {
-      background: transparent !important;
-    }
-
-    :global(svg) {
-      background: transparent !important;
-    }
-
+    :global(.cds--cc--chart-wrapper),
+    :global(.cds--cc--chart-svg),
+    :global(.cds--cc--chart-holder),
+    :global(svg),
     :global(g) {
-      background: transparent !important;
+      background: transparent;
     }
 
     :global(path[class*="bar fill"]) {
@@ -157,7 +145,7 @@
       cursor: pointer;
 
       &:hover {
-        fill: var(--yir-chart-bar-hover) !important;
+        fill: var(--yir-chart-bar-hover);
       }
     }
 
@@ -166,52 +154,50 @@
     }
 
     :global(.cds--cc--axes g.axis g.tick text) {
-      fill: var(--yir-chart-axis) !important;
-      font-size: 11px !important;
-      font-family: inherit !important;
+      fill: var(--yir-chart-axis);
+      font-size: 11px;
+      font-family: inherit;
     }
 
     :global(.cds--cc--grid line) {
-      stroke: transparent !important;
+      stroke: transparent;
     }
 
     :global(.cds--cc--grid rect.chart-grid-backdrop) {
-      fill: none !important;
+      fill: none;
     }
 
-    :global(.cds--cc--axis path) {
-      stroke: var(--yir-chart-axis) !important;
-    }
-
+    :global(.cds--cc--axis path),
     :global(.cds--cc--axis line) {
-      stroke: var(--yir-chart-axis) !important;
+      stroke: var(--yir-chart-axis);
     }
 
     :global(.cds--tooltip),
     :global(.cds--cc--tooltip),
     :global(.cds--cc--tooltip-container) {
-      background: transparent !important;
-      background-color: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
+      background: transparent;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     :global(.yir-chart-tooltip) {
-      background: rgba(0, 0, 0, 0.92);
-      border: 1px solid #3a3a3a;
-      border-radius: 6px;
-      padding: 8px 12px;
-      color: #fff;
+      background: color-mix(in srgb, var(--shade-1000) 92%, transparent);
+      border: var(--border-thickness-xxs) solid var(--shade-800);
+      border-radius: var(--border-radius-xs);
+      padding: var(--ni-8) var(--ni-12);
+      color: var(--shade-10);
       font-family: inherit;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 var(--ni-2) var(--ni-8)
+        color-mix(in srgb, var(--shade-1000) 60%, transparent);
       text-align: center;
     }
 
     :global(.yir-chart-tooltip-plays) {
       font-size: 14px;
       font-weight: 600;
-      margin-bottom: 4px;
-      color: #fff;
+      margin-bottom: var(--ni-4);
+      color: var(--shade-10);
     }
 
     :global(.yir-chart-tooltip-week),

@@ -100,12 +100,12 @@
       display: none;
     }
 
-    &:hover .yir-genre-bar {
+    &:hover .yir-genre-bar:not(:hover) {
       opacity: 0.5;
+    }
 
-      .yir-genre-percentage {
-        opacity: 1;
-      }
+    &:hover .yir-genre-bar .yir-genre-percentage {
+      opacity: 1;
     }
 
     @include for-mobile {
@@ -154,14 +154,10 @@
     transition: all 0.5s;
     cursor: pointer;
 
-    &:hover {
-      opacity: 1 !important;
-    }
-
     @include for-mobile {
       height: var(--ni-30);
       min-height: var(--ni-30);
-      width: var(--mobile-bar-width) !important;
+      width: var(--mobile-bar-width);
       margin-left: 0;
       margin-bottom: 0;
       display: block;

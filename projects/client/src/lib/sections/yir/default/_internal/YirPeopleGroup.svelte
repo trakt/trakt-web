@@ -236,10 +236,8 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    &:hover {
-      .yir-person {
-        opacity: 0.5;
-      }
+    &:hover .yir-person-link:not(:hover) .yir-person {
+      opacity: 0.5;
     }
   }
 
@@ -249,10 +247,6 @@
     width: 20%;
 
     &:hover {
-      .yir-person {
-        opacity: 1 !important;
-      }
-
       .yir-headshot {
         box-shadow: 0 0 var(--ni-20) var(--purple-500);
 

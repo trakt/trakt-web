@@ -17,7 +17,7 @@
     type === "shows" ? m.yir_section_title_highest_rated_shows() : m.yir_section_title_highest_rated_movies(),
   );
 
-  let activeIndex = $state(-1);
+  let activeIndex = $state(0);
 
   function itemUrl(item: YirTopRatedItem): string {
     return UrlBuilder.media(type === "shows" ? "show" : "movie", item.entry.slug);
@@ -46,7 +46,6 @@
             class="yir-grid-item"
             title={item.entry.title}
             onmouseenter={() => { activeIndex = index; }}
-            onmouseleave={() => { activeIndex = -1; }}
           >
             <div class="yir-poster">
               <div class="yir-corner-rating">
@@ -101,12 +100,10 @@
   .yir-posters {
     text-align: center;
 
-    &:hover {
-      .yir-poster {
-        .yir-poster-img,
-        .yir-corner-rating {
-          opacity: 0.3;
-        }
+    &:hover .yir-grid-item:not(:hover) {
+      .yir-poster-img,
+      .yir-corner-rating {
+        opacity: 0.3;
       }
     }
   }
@@ -117,13 +114,6 @@
     padding: 0;
     margin: 0;
     text-decoration: none;
-
-    &:hover {
-      .yir-poster-img,
-      .yir-corner-rating {
-        opacity: 1 !important;
-      }
-    }
 
     @include for-mobile {
       width: 20%;
