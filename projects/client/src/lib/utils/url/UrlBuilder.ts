@@ -2,6 +2,7 @@ import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.t
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import type { PersonalListType } from '$lib/sections/lists/user/models/PersonalListType.ts';
+import type { DiscoverMode } from '../../features/discover/models/DiscoverMode.ts';
 import type { CrewPositions } from '../../requests/models/CrewPosition.ts';
 import { SUPPORT_EMAIL } from '../constants.ts';
 import { buildParamString } from './buildParamString.ts';
@@ -19,6 +20,11 @@ type WellKnownQueryParams = {
   library?: string;
   sort_by?: string;
   sort_how?: string;
+  mode?: DiscoverMode;
+};
+
+type DiscoverUrlParams = SearchParams & {
+  mode?: DiscoverMode;
 };
 
 type UrlBuilderParams =
@@ -57,17 +63,18 @@ function sanitizeParams(
     display: params.display,
     sort_by: params.sort_by,
     sort_how: params.sort_how,
+    mode: params.mode,
   };
 }
 
-const mediaDrilldownFactory =
-  (category: string) => ({ type, ...params }: UrlBuilderParams) => {
-    const typePath = type === 'media' ? type : `${type}s`;
+const discoverDrilldownFactory =
+  (category: string) => (params?: DiscoverUrlParams) => {
+    const baseUrl = `/discover/${category}`;
+    if (!params) {
+      return baseUrl;
+    }
 
-    const baseUrl = `/${typePath}/${category}`;
-    return baseUrl + buildParamString({
-      ...sanitizeParams(params),
-    });
+    return baseUrl + buildParamString(sanitizeParams(params));
   };
 
 const categoryDrilldownFactory =
@@ -136,17 +143,17 @@ export const UrlBuilder = {
   watched: (params: UrlBuilderParams) => {
     return categoryDrilldownFactory('watched')(params);
   },
-  trending(params: UrlBuilderParams) {
-    return mediaDrilldownFactory('trending')(params);
+  trending(params?: DiscoverUrlParams) {
+    return discoverDrilldownFactory('trending')(params);
   },
-  recommended(params: UrlBuilderParams) {
-    return mediaDrilldownFactory('recommended')(params);
+  recommended(params?: DiscoverUrlParams) {
+    return discoverDrilldownFactory('recommended')(params);
   },
-  anticipated(params: UrlBuilderParams) {
-    return mediaDrilldownFactory('anticipated')(params);
+  anticipated(params?: DiscoverUrlParams) {
+    return discoverDrilldownFactory('anticipated')(params);
   },
-  popular(params: UrlBuilderParams) {
-    return mediaDrilldownFactory('popular')(params);
+  popular(params?: DiscoverUrlParams) {
+    return discoverDrilldownFactory('popular')(params);
   },
   social: {
     activity: () => {
