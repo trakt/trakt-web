@@ -25,10 +25,22 @@
     },
   ]);
 
+  const colorByName = $derived(
+    Object.fromEntries(
+      companies.map((c) => {
+        const raw = (c.color ?? "").toLowerCase();
+        const isBlackish = raw === "#000" || raw === "#000000";
+        const color = !raw || isBlackish ? "#333" : c.color;
+        return [c.name, color];
+      }),
+    ),
+  );
+
   const options = $derived<CirclePackChartOptions>({
     title: "",
     theme: "g100",
     height: "600px",
+    animations: false,
     legend: {
       enabled: false,
     },
@@ -37,6 +49,10 @@
     },
     canvasZoom: {
       enabled: false,
+    },
+    getFillColor: (_group, label, data, defaultFillColor) => {
+      const name: string = label ?? data?.name ?? data?.key ?? "";
+      return colorByName[name] ?? defaultFillColor ?? "#333";
     },
     circlePack: {
       depth: 1, // Only show children, not root
@@ -122,20 +138,6 @@
 
         // Skip very small circles
         if (r < 20) return;
-
-        // Apply company color if available, otherwise use default
-        let fillColor = company.color || "#222";
-        // If color is black, use #333 for better contrast
-        if (
-          fillColor.toLowerCase() === "#000" ||
-          fillColor.toLowerCase() === "#000000"
-        ) {
-          fillColor = "#333";
-        }
-        circle.style.fill = fillColor;
-        // Force full opacity (Carbon Charts sets fill-opacity)
-        circle.setAttribute("fill-opacity", "1");
-        circle.setAttribute("opacity", "1");
 
         // Check if we already added content
         const existingGroup = circle.parentElement?.querySelector(
