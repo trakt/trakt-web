@@ -6,15 +6,18 @@
   import Link from "$lib/components/link/Link.svelte";
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
   import SeasonLabelTag from "$lib/components/media/tags/SeasonLabelTag.svelte";
+  import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import type { Snippet } from "svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { SeasonCardProps } from "./models/SeasonCardProps";
+  import StatusIndicators from "./StatusIndicators.svelte";
 
   const scrollOffset = 8;
 
@@ -35,6 +38,10 @@
   } & SeasonCardProps = $props();
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
+
+  const { isWatched } = $derived(
+    useIsWatched({ type: "season", media: season, show: media }),
+  );
 
   const scrollToItem = (element: HTMLElement) => {
     if (!isCurrentSeason || variant === "list-item") return;
@@ -61,6 +68,10 @@
     });
   };
 </script>
+
+{#snippet indicatorTags()}
+  <StatusIndicators isWatched={$isWatched} isWatchlisted={false} />
+{/snippet}
 
 <div
   class="trakt-season-item"
@@ -103,6 +114,10 @@
           src={season.poster?.url.medium ?? media.poster.url.medium}
           alt={seasonLabel(season.number)}
         />
+
+        <IndicatorTags>
+          {@render indicatorTags()}
+        </IndicatorTags>
       </Link>
       <CardFooter tag={variant === "list-item" ? tag : undefined}>
         {#if variant === "default"}
@@ -128,6 +143,7 @@
       {style}
       {popupActions}
       {sortTag}
+      indicators={indicatorTags}
     />
   {/if}
 </div>

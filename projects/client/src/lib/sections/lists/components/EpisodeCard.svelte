@@ -6,6 +6,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
+  import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -28,6 +29,7 @@
     episode,
     media: show,
     source,
+    indicators,
     ...rest
   }: EpisodeCardProps = $props();
 
@@ -69,6 +71,12 @@
         alt={`${show.title} - ${episode.title}`}
         {badge}
       />
+
+      {#if indicators}
+        <IndicatorTags>
+          {@render indicators()}
+        </IndicatorTags>
+      {/if}
     </Link>
 
     <CardFooter {tag} />
@@ -89,6 +97,12 @@
         {badge}
         {tag}
       />
+
+      {#if indicators}
+        <IndicatorTags>
+          {@render indicators()}
+        </IndicatorTags>
+      {/if}
     </Link>
 
     <CardFooter {action}>

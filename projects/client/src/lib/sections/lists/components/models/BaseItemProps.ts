@@ -7,4 +7,5 @@ export type BaseItemProps = {
   style?: 'cover' | 'summary' | 'compact';
   source?: string;
   popupActions?: Snippet;
+  indicators?: Snippet;
 };

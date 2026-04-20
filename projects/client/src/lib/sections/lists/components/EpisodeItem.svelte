@@ -13,12 +13,14 @@
   import TextTag from "$lib/components/tags/TextTag.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import type { Snippet } from "svelte";
   import SummaryCardRating from "./_internal/SummaryCardRating.svelte";
   import EpisodeCard from "./EpisodeCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
+  import StatusIndicators from "./StatusIndicators.svelte";
 
   const { sortTag, ...props }: EpisodeCardProps & { sortTag?: Snippet } =
     $props();
@@ -38,13 +40,39 @@
   );
 
   const status = $derived(getEpisodeStatus(props.episode.type));
+
+  const { isWatched } = $derived(
+    useIsWatched({ type: "episode", media: props.episode, show: props.media }),
+  );
+
+  const hasMarkAsWatched = $derived.by(() => {
+    if (isListItem || isFuture || isHidden || isActivity) {
+      return false;
+    }
+
+    return !$isWatched;
+  });
+
+  const hasIndicators = $derived.by(() => {
+    const standAloneVariants: ReadonlyArray<string> = [
+      "list-item",
+      "default",
+      "calendar",
+    ];
+
+    return standAloneVariants.includes(props.variant) ? $isWatched : false;
+  });
 </script>
+
+{#snippet indicatorTags()}
+  <StatusIndicators isWatched={$isWatched} isWatchlisted={false} />
+{/snippet}
 
 {#snippet action()}
   {#if props.action}
     {@render props.action()}
   {:else}
-    {#if !isFuture && !isActivity && !isHidden && !isListItem}
+    {#if hasMarkAsWatched}
       <RenderFor audience="authenticated">
         <MarkAsWatchedAction
           mode={props.variant === "next" && props.context !== "show"
@@ -174,11 +202,17 @@
       badge={action}
       {sortTag}
       type="episode"
+      indicators={hasIndicators ? indicatorTags : undefined}
     />
   {/if}
 
   {#if style === "cover"}
-    <EpisodeCard {...props} {tag} {action} />
+    <EpisodeCard
+      {...props}
+      {tag}
+      {action}
+      indicators={hasIndicators ? indicatorTags : undefined}
+    />
   {/if}
 {/snippet}
 

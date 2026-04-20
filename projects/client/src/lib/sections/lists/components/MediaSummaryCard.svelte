@@ -57,6 +57,7 @@
     contextualTag,
     sortTag,
     layout = "default",
+    indicators,
     ...rest
   }: SummaryCardProps = $props();
 
@@ -94,13 +95,6 @@
     };
   });
 
-  const indicators = $derived.by(() => {
-    if (rest.type !== "movie" && rest.type !== "show") {
-      return;
-    }
-
-    return rest.indicators;
-  });
   const ratedItem = $derived.by(() => {
     switch (rest.type) {
       case "movie":
