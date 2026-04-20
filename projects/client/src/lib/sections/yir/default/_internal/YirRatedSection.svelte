@@ -3,6 +3,7 @@
   import { m } from "$lib/paraglide/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import YirSectionHeader from "./YirSectionHeader.svelte";
+  import YirPageInner from "./YirPageInner.svelte";
 
   const {
     type,
@@ -37,28 +38,30 @@
       {sectionTitle}
     </YirSectionHeader>
 
-    <div class="yir-posters">
-      {#each items as item, index}
-        <a
-          href={itemUrl(item)}
-          class="yir-grid-item"
-          title={item.entry.title}
-          onmouseenter={() => { activeIndex = index; }}
-          onmouseleave={() => { activeIndex = -1; }}
-        >
-          <div class="yir-poster">
-            <div class="yir-corner-rating">
-              <span>{item.rating}</span>
+    <YirPageInner>
+      <div class="yir-posters">
+        {#each items as item, index}
+          <a
+            href={itemUrl(item)}
+            class="yir-grid-item"
+            title={item.entry.title}
+            onmouseenter={() => { activeIndex = index; }}
+            onmouseleave={() => { activeIndex = -1; }}
+          >
+            <div class="yir-poster">
+              <div class="yir-corner-rating">
+                <span>{item.rating}</span>
+              </div>
+              <img
+                class="yir-poster-img"
+                src={item.entry.poster.url.thumb}
+                alt={item.entry.title}
+              />
             </div>
-            <img
-              class="yir-poster-img"
-              src={item.entry.poster.url.thumb}
-              alt={item.entry.title}
-            />
-          </div>
-        </a>
-      {/each}
-    </div>
+          </a>
+        {/each}
+      </div>
+    </YirPageInner>
   </div>
 </section>
 
@@ -96,17 +99,7 @@
   }
 
   .yir-posters {
-    margin: 0 auto;
-    max-width: var(--ni-1280);
     text-align: center;
-
-    @include for-tablet-sm-and-below {
-      max-width: var(--ni-920);
-    }
-
-    @include for-mobile {
-      max-width: 100%;
-    }
 
     &:hover {
       .yir-poster {

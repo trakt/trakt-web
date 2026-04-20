@@ -19,6 +19,11 @@
     position: relative;
     max-width: var(--ni-1280);
     margin: 0 auto;
+    padding-left: calc(
+      var(--layout-sidebar-distance) + var(--layout-distance-side)
+    );
+    padding-right: var(--layout-distance-side);
+    box-sizing: border-box;
 
     @include for-tablet-sm-and-below {
       max-width: var(--ni-920);

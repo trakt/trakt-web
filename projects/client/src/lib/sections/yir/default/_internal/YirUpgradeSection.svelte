@@ -2,18 +2,21 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import GetVIPLink from "$lib/sections/navbar/components/GetVIPLink.svelte";
   import { m } from "$lib/paraglide/messages";
+  import YirPageInner from "./YirPageInner.svelte";
 </script>
 
 <RenderFor audience="free">
   <section class="yir-vip-page">
-    <div class="yir-page-inner">
-      <div class="yir-go-vip">
-        <p class="yir-upgrade-text">
-          {m.yir_upgrade_message()}
-        </p>
-        <GetVIPLink source="yir" />
+    <YirPageInner>
+      <div class="yir-upgrade-content">
+        <div class="yir-go-vip">
+          <p class="yir-upgrade-text">
+            {m.yir_upgrade_message()}
+          </p>
+          <GetVIPLink source="yir" />
+        </div>
       </div>
-    </div>
+    </YirPageInner>
   </section>
 </RenderFor>
 
@@ -25,19 +28,9 @@
     background-color: var(--shade-950);
   }
 
-  .yir-page-inner {
+  .yir-upgrade-content {
     text-align: center;
     padding: var(--ni-72) 0;
-    max-width: var(--ni-1280);
-    margin: 0 auto;
-
-    @include for-tablet-sm-and-below {
-      max-width: var(--ni-920);
-    }
-
-    @include for-mobile {
-      max-width: 100%;
-    }
   }
 
   .yir-go-vip {
