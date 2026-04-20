@@ -3,6 +3,8 @@
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
   import { map } from "rxjs";
   import { m } from "$lib/paraglide/messages";
+  import { DEFAULT_COVER } from "$lib/utils/constants";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
 
   const {
     slug,
@@ -24,32 +26,27 @@
   const now = new Date();
   const isCurrentYear = $derived(year === now.getFullYear());
   const subtitle = $derived(isCurrentYear ? m.yir_title_year_to_date() : m.yir_title_year_in_review());
+
+  const coverSrc = $derived(
+    $profile?.cover?.url || coverImage || DEFAULT_COVER,
+  );
 </script>
 
 <section class="yir-title-page">
-  {#if $profile?.cover?.url}
-    <img
-      class="yir-cover-bg"
-      src={$profile.cover.url}
-      alt=""
-    />
-  {:else if coverImage}
-    <img
-      class="yir-cover-bg"
-      src={coverImage}
-      alt=""
-    />
-  {/if}
+  <div class="yir-cover-bg">
+    <CrossOriginImage src={coverSrc} alt="" />
+  </div>
   <div class="yir-titles-wrapper">
     <div class="yir-titles">
       {#if $profile}
         <div class="yir-user">
           <a href="/users/{slug}" class="yir-avatar-link">
-            <img
-              class="yir-avatar"
-              src={$profile.avatar.url}
-              alt={$profile.name.full ?? slug}
-            />
+            <div class="yir-avatar">
+              <CrossOriginImage
+                src={$profile.avatar.url}
+                alt={$profile.name.full ?? slug}
+              />
+            </div>
           </a>
           <span class="yir-display-name">
             <a href="/users/{slug}">{$profile.name.full || $profile.username}</a>
@@ -81,10 +78,13 @@
   .yir-cover-bg {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+
+    :global(img) {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
   }
 
   .yir-titles-wrapper {
@@ -122,8 +122,14 @@
     border-radius: 50%;
     border: var(--border-thickness-xs) solid var(--shade-10);
     background-color: var(--shade-10);
-    object-fit: cover;
-    display: block;
+    overflow: hidden;
+
+    :global(img) {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     @include for-mobile {
       width: var(--ni-30);
