@@ -4,6 +4,7 @@
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { languageTag } from "$lib/features/i18n";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import YirSectionHeader from "./YirSectionHeader.svelte";
 
   const {
     type,
@@ -36,15 +37,10 @@
         style:background-image="url({item.entry.cover.url.medium})"
       >
         <div class="yir-shade"></div>
-        <div class="yir-page-inner">
-          <div class="yir-section-header">
-            <h2>
-              <span class="yir-header-number">
-                <span class="yir-hash">#</span>{index + 1}
-              </span>
-              <span class="yir-header-text">{m.yir_label_most_watched({ type: typeLabel })}</span>
-            </h2>
-          </div>
+        <div class="yir-featured-card">
+          <YirSectionHeader flat rank={index + 1}>
+            {m.yir_label_most_watched({ type: typeLabel })}
+          </YirSectionHeader>
 
           <a href={itemUrl(item)} class="yir-card-media">
             <div class="yir-logo-wrapper">
@@ -99,7 +95,6 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-  @use "./shared" as *;
 
   .yir-most-watched-section {
     background-color: var(--shade-950);
@@ -140,7 +135,7 @@
     );
   }
 
-  .yir-page-inner {
+  .yir-featured-card {
     position: relative;
     z-index: 1;
     height: 100%;
@@ -148,24 +143,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: none;
-    padding: 0;
-  }
-
-  .yir-section-header {
-    padding: 0;
-  }
-
-  .yir-header-number {
-    display: inline-block;
-    background-color: var(--shade-10);
-    color: var(--shade-1000);
-    padding: var(--ni-6) var(--ni-8);
-    margin-right: var(--ni-neg-4);
-  }
-
-  .yir-hash {
-    font-size: 14px;
   }
 
   .yir-card-media {

@@ -2,6 +2,8 @@
   import type { YirCompany } from "$lib/requests/models/YirDetail";
   import { m } from "$lib/paraglide/messages";
   import YirNetworksChart from "./YirNetworksChart.svelte";
+  import YirSectionHeader from "./YirSectionHeader.svelte";
+  import YirPageInner from "./YirPageInner.svelte";
 
   const {
     studios,
@@ -11,22 +13,19 @@
 </script>
 
 <section class="yir-studios-section" id="section-movies-networks">
-  <div class="yir-page-inner">
-    <div class="yir-section-header">
-      <h2>
-        <span class="yir-header-text">{m.yir_section_title_studios()}</span>
-      </h2>
-    </div>
+  <YirPageInner>
+    <YirSectionHeader>
+      {m.yir_section_title_studios()}
+    </YirSectionHeader>
 
     <div class="yir-studio-bubbles">
       <YirNetworksChart companies={studios} type="movies" />
     </div>
-  </div>
+  </YirPageInner>
 </section>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-  @use "./shared" as *;
 
   .yir-studios-section {
     background-color: var(--shade-950);

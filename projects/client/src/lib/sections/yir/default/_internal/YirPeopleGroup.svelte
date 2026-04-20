@@ -2,6 +2,7 @@
   import type { YirPeopleType, YirPerson } from "$lib/requests/models/YirPerson";
   import { useYirPeople } from "../../_internal/useYirPeople";
   import { m } from "$lib/paraglide/messages";
+  import YirSectionHeader from "./YirSectionHeader.svelte";
 
   const {
     slug,
@@ -82,20 +83,16 @@
 
 {#if $isLoading}
   <div class="yir-people-group">
-    <div class="yir-section-header">
-      <h2>
-        <span class="yir-header-text">{label}</span>
-      </h2>
-    </div>
+    <YirSectionHeader compact>
+      {label}
+    </YirSectionHeader>
     <p class="yir-people-loading">{m.yir_state_loading()}</p>
   </div>
 {:else if $people && $people.length > 0}
   <div class="yir-people-group">
-    <div class="yir-section-header" class:no-top-padding={type === "actresses"}>
-      <h2>
-        <span class="yir-header-text">{label}</span>
-      </h2>
-    </div>
+    <YirSectionHeader compact noTopPadding={type === "actresses"}>
+      {label}
+    </YirSectionHeader>
 
     {#if multiPage}
       <button
@@ -185,25 +182,10 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-  @use "./shared" as *;
 
   .yir-people-group {
     overflow: hidden;
     padding-bottom: var(--ni-30);
-  }
-
-  .yir-section-header {
-    &.no-top-padding {
-      padding-top: 0;
-    }
-
-    @include for-mobile {
-      padding: var(--ni-40) 0 var(--ni-16) 0;
-
-      &.no-top-padding {
-        padding-top: 0;
-      }
-    }
   }
 
   .yir-people-loading {

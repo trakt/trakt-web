@@ -7,6 +7,8 @@
   import YirHourlyPlaysChart from "./YirHourlyPlaysChart.svelte";
   import { m } from "$lib/paraglide/messages";
   import { formatNumber } from "$lib/utils/format/formatNumber";
+  import YirSectionHeader from "./YirSectionHeader.svelte";
+  import YirPageInner from "./YirPageInner.svelte";
 
   const {
     type,
@@ -32,14 +34,10 @@
 </script>
 
 <section class="yir-stats-section" id="section-{type}-stats">
-  <div class="yir-page-inner">
-    <div class="yir-section-header">
-      <h2>
-        <span class="yir-header-text">
-          <strong>{formatNumber(stats.itemsCount ?? 0)}</strong> {sectionTitle}
-        </span>
-      </h2>
-    </div>
+  <YirPageInner>
+    <YirSectionHeader>
+      <strong>{formatNumber(stats.itemsCount ?? 0)}</strong> {sectionTitle}
+    </YirSectionHeader>
 
     <div class="yir-watched-stats">
       <div class="yir-stat">
@@ -113,21 +111,25 @@
         <h2 class="yir-under-chart">{m.yir_label_plays_by_hour({ type: specificType })}</h2>
       {/if}
     {/if}
-  </div>
+  </YirPageInner>
 </section>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-  @use "./shared" as *;
 
   .yir-stats-section {
-    background-color: var(--shade-950);
-
     // Shared chart CSS variables
     --yir-chart-bar: #999;
     --yir-chart-bar-max: #fff;
     --yir-chart-bar-hover: #ab2425;
     --yir-chart-axis: #555;
+
+    background-color: var(--shade-950);
+    padding-bottom: var(--ni-72);
+
+    @include for-mobile {
+      padding-bottom: var(--ni-40);
+    }
 
     // Shared chart styles
     :global(.cds--cc--chart-wrapper) {
@@ -227,22 +229,6 @@
     :global(.yir-chart-tooltip-dates) {
       font-size: 10px;
       opacity: 0.65;
-    }
-  }
-
-  .yir-page-inner {
-    padding-bottom: 70px;
-
-    @include for-mobile {
-      padding-bottom: 40px;
-    }
-  }
-
-  .yir-section-header {
-    padding: var(--ni-72) 0;
-
-    @include for-mobile {
-      padding: var(--ni-40) 0;
     }
   }
 

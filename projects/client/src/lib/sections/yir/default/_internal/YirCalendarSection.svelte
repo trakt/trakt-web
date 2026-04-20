@@ -5,6 +5,7 @@
   import { m } from "$lib/paraglide/messages";
   import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate";
   import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime";
+  import YirSectionHeader from "./YirSectionHeader.svelte";
 
   const {
     how,
@@ -41,11 +42,9 @@
   <div class="yir-calendar-shade"></div>
 
   <div class="yir-calendar-inner">
-    <div class="yir-section-header">
-      <h2>
-        <span class="yir-header-text">{headerText}</span>
-      </h2>
-    </div>
+    <YirSectionHeader>
+      {headerText}
+    </YirSectionHeader>
 
     <a href={itemUrl} class="yir-calendar-media">
       {#if item.entry.logo.url.medium}
@@ -104,32 +103,6 @@
     position: relative;
     z-index: 1;
     padding: var(--ni-20) 0 var(--ni-88) 0;
-  }
-
-  .yir-section-header {
-    text-align: center;
-    padding: var(--ni-72) 0;
-
-    h2 {
-      text-transform: uppercase;
-      display: inline-block;
-      letter-spacing: 1px;
-      border: var(--border-thickness-xxs) solid var(--shade-10);
-      background-color: color-mix(in srgb, var(--shade-1000) 50%, transparent);
-      font-size: 16px;
-      line-height: 1;
-      text-align: center;
-      margin: 0;
-    }
-
-    @include for-mobile {
-      padding: var(--ni-40) 0;
-    }
-  }
-
-  .yir-header-text {
-    display: inline-block;
-    padding: var(--ni-6) var(--ni-8);
   }
 
   .yir-calendar-media {

@@ -297,4 +297,51 @@
       display: block;
     }
   }
+
+  // Carbon Charts tooltip overrides
+  // These are global because Carbon Charts portals the tooltip out of the component's DOM tree.
+  :global(.cds--tooltip),
+  :global(.cds--cc--tooltip),
+  :global(.cds--cc--tooltip-container) {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  :global(.cds--cc--tooltip .content-box .title-tooltip) {
+    max-width: none !important;
+  }
+
+  :global(.cds--cc--tooltip),
+  :global(.cds--cc--tooltip *) {
+    max-width: none !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  :global(.yir-chart-tooltip) {
+    background: color-mix(in srgb, var(--shade-1000) 92%, transparent);
+    border: var(--border-thickness-xxs) solid var(--shade-800);
+    border-radius: var(--border-radius-xs);
+    padding: var(--ni-8) var(--ni-12);
+    color: var(--shade-10);
+    font-family: inherit;
+    box-shadow: 0 var(--ni-2) var(--ni-8)
+      color-mix(in srgb, var(--shade-1000) 60%, transparent);
+    text-align: center;
+  }
+
+  :global(.yir-chart-tooltip-name) {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: var(--ni-4);
+    color: var(--shade-10);
+    white-space: nowrap;
+  }
+
+  :global(.yir-chart-tooltip-plays) {
+    font-size: 11px;
+    opacity: 0.85;
+  }
 </style>

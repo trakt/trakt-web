@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { YirGenresGroup } from "$lib/requests/models/YirDetail";
   import { m } from "$lib/paraglide/messages";
+  import YirSectionHeader from "./YirSectionHeader.svelte";
+  import YirPageInner from "./YirPageInner.svelte";
 
   const {
     type,
@@ -38,12 +40,10 @@
 </script>
 
 <section class="yir-genres-section" id="section-{type}-genres">
-  <div class="yir-page-inner">
-    <div class="yir-section-header">
-      <h2>
-        <span class="yir-header-text">{sectionTitle}</span>
-      </h2>
-    </div>
+  <YirPageInner>
+    <YirSectionHeader>
+      {sectionTitle}
+    </YirSectionHeader>
 
     <div class="yir-genre-bars">
       {#each genres.genres as genre, index}
@@ -74,30 +74,18 @@
         </div>
       {/each}
     </div>
-  </div>
+  </YirPageInner>
 </section>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-  @use "./shared" as *;
 
   .yir-genres-section {
     background-color: var(--shade-1000);
-  }
-
-  .yir-page-inner {
     padding-bottom: var(--ni-72);
 
     @include for-mobile {
       padding-bottom: var(--ni-40);
-    }
-  }
-
-  .yir-section-header {
-    padding: var(--ni-72) 0;
-
-    @include for-mobile {
-      padding: var(--ni-40) 0;
     }
   }
 

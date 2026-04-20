@@ -8,6 +8,8 @@
   import MarkAsWatchedIcon from "$lib/components/icons/MarkAsWatchedIcon.svelte";
   import { m } from "$lib/paraglide/messages";
   import { formatNumber } from "$lib/utils/format/formatNumber";
+  import YirSectionHeader from "./YirSectionHeader.svelte";
+  import YirPageInner from "./YirPageInner.svelte";
 
   type AllStats = YirStatsCategory & {
     listsCounts: { total: number };
@@ -27,12 +29,10 @@
 </script>
 
 <section class="yir-totals-section" id="section-totals">
-  <div class="yir-page-inner">
-    <div class="yir-section-header">
-      <h2>
-        <span class="yir-header-text">{m.yir_section_title_totals({ year })}</span>
-      </h2>
-    </div>
+  <YirPageInner>
+    <YirSectionHeader>
+      {m.yir_section_title_totals({ year })}
+    </YirSectionHeader>
 
     <div class="yir-stats-row">
       <div class="yir-stat">
@@ -85,27 +85,15 @@
         </span>
       </div>
     </div>
-  </div>
+  </YirPageInner>
 </section>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-  @use "./shared" as *;
 
   .yir-totals-section {
     background-color: var(--shade-1000);
-  }
-
-  .yir-page-inner {
     padding-bottom: var(--ni-72);
-  }
-
-  .yir-section-header {
-    padding: var(--ni-72) 0;
-
-    @include for-mobile {
-      padding: var(--ni-40) 0;
-    }
   }
 
   .yir-stats-row {

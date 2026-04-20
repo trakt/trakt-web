@@ -2,6 +2,7 @@
   import type { YirTopRatedItem } from "$lib/requests/models/YirDetail";
   import { m } from "$lib/paraglide/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import YirSectionHeader from "./YirSectionHeader.svelte";
 
   const {
     type,
@@ -31,12 +32,10 @@
     ></div>
   {/each}
 
-  <div class="yir-page-inner">
-    <div class="yir-section-header">
-      <h2>
-        <span class="yir-header-text">{sectionTitle}</span>
-      </h2>
-    </div>
+  <div class="yir-rated-inner">
+    <YirSectionHeader>
+      {sectionTitle}
+    </YirSectionHeader>
 
     <div class="yir-posters">
       {#each items as item, index}
@@ -65,7 +64,6 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-  @use "./shared" as *;
 
   .yir-rated-section {
     text-align: center;
@@ -86,23 +84,14 @@
     }
   }
 
-  .yir-page-inner {
+  .yir-rated-inner {
     position: relative;
     z-index: 1;
     background-color: color-mix(in srgb, var(--shade-1000) 30%, transparent);
     padding-bottom: var(--ni-72);
-    max-width: none;
 
     @include for-mobile {
       padding-bottom: var(--ni-40);
-    }
-  }
-
-  .yir-section-header {
-    padding: var(--ni-72) 0;
-
-    @include for-mobile {
-      padding: var(--ni-40) 0;
     }
   }
 
