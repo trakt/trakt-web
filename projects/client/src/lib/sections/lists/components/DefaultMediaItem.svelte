@@ -1,14 +1,11 @@
 <script lang="ts">
-  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import CertificationTag from "$lib/components/media/tags/CertificationTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
-  import IndicatorTag from "$lib/components/media/tags/IndicatorTag.svelte";
   import MediaIconTag from "$lib/components/media/tags/MediaIconTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
-  import TrackIcon from "$lib/components/TrackIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
@@ -21,6 +18,7 @@
   import type { MediaCardProps } from "../components/models/MediaCardProps";
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
+  import StatusIndicators from "./StatusIndicators.svelte";
 
   const {
     type,
@@ -68,15 +66,7 @@
 {/snippet}
 
 {#snippet indicatorTags()}
-  {#if $isWatched}
-    <IndicatorTag>
-      <TrackIcon />
-    </IndicatorTag>
-  {:else if $isWatchlisted}
-    <IndicatorTag>
-      <BookmarkIcon state="added" />
-    </IndicatorTag>
-  {/if}
+  <StatusIndicators isWatched={$isWatched} isWatchlisted={$isWatchlisted} />
 {/snippet}
 
 {#snippet tag()}
