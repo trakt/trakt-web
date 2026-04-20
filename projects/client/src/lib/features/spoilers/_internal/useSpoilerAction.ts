@@ -1,8 +1,8 @@
 import { SPOILER_CLASS_NAME } from '$lib/features/spoilers/constants.ts';
-import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
+import type { ExtendedMediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { useMediaSpoiler } from '../useMediaSpoiler.ts';
 
-type SpoilerActionProps = MediaStoreProps;
+type SpoilerActionProps = ExtendedMediaStoreProps;
 
 export function useSpoilerAction(rest: SpoilerActionProps) {
   const { isSpoilerHidden } = useMediaSpoiler(rest);

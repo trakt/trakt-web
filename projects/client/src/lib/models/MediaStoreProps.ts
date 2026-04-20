@@ -16,7 +16,8 @@ type EpisodeCount = {
 
 type SeasonProps<T> = {
   type: 'season';
-  media: ArrayOrSingle<T & { number: number }>;
+  media: ArrayOrSingle<T & { number: number; episodes: { count: number } }>;
+  show: { id: number };
 };
 
 type EpisodeProps<T> = {

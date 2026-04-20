@@ -58,6 +58,7 @@ export const WatchedShowSchema = WatchedMediaSchema.extend({
   isWatched: z.boolean(),
   isPartiallyWatched: z.boolean(),
   watchedDates: z.array(z.date()),
+  playsPerSeason: z.map(z.number(), z.number()),
 });
 export type WatchedShow = z.infer<typeof WatchedShowSchema>;
 
@@ -87,6 +88,11 @@ function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
     ? Math.min(...regularEpisodes.map((episode) => episode.plays))
     : 0;
 
+  const playsPerSeason = episodes.reduce(
+    (acc, { season }) => acc.set(season, (acc.get(season) ?? 0) + 1),
+    new Map<number, number>(),
+  );
+
   return {
     id: show.ids.trakt,
     watchedAt: new Date(last_watched_at),
@@ -95,6 +101,7 @@ function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
     plays,
     episodes,
     watchedDates: episodes.map((e) => e.watchedAt),
+    playsPerSeason,
   };
 }
 

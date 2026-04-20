@@ -74,6 +74,7 @@ export const UserHistoryMappedMock: UserHistory = {
       'isWatched': true,
       'isPartiallyWatched': false,
       'plays': 1,
+      'playsPerSeason': new Map([[0, 1], [1, 8]]),
       'watchedAt': new Date('2024-12-27T16:28:32.000Z'),
       'watchedDates': [
         new Date('2024-12-27T16:28:32.000Z'),
@@ -100,6 +101,7 @@ export const UserHistoryMappedMock: UserHistory = {
       'isWatched': false,
       'isPartiallyWatched': true,
       'plays': 0,
+      'playsPerSeason': new Map([[1, 1]]),
       'watchedAt': new Date('2024-12-27T16:13:42.000Z'),
       'watchedDates': [new Date('2024-12-27T16:13:42.000Z')],
     }],
