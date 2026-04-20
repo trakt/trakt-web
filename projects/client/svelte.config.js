@@ -35,6 +35,9 @@ const config = {
         persist: false,
       },
     }),
+    serviceWorker: {
+      register: false,
+    },
     alias: {
       '$mocks': './src/mocks',
       '$worker': './src/worker',

@@ -16,6 +16,8 @@ if ('serviceWorker' in navigator && isSafari()) {
 
 if ('serviceWorker' in navigator && !isSafari()) {
   globalThis.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js', { type: 'module' });
+
     globalThis.addEventListener('beforeinstallprompt', (event) => {
       globalThis.install = event;
     });
