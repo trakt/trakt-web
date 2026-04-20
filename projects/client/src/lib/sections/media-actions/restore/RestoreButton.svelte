@@ -48,7 +48,7 @@
 {/if}
 
 {#if style === "action"}
-  <ActionButton {...commonProps} {...props}>
+  <ActionButton {...commonProps} {...props} style="ghost">
     <RestoreIcon />
   </ActionButton>
 {/if}

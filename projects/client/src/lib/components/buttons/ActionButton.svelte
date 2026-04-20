@@ -187,6 +187,28 @@
       margin: var(--ni-4);
     }
 
+    &[data-variant="secondary"]:not([data-style="ghost"]):not([disabled]) {
+      background-color: color-mix(
+        in srgb,
+        var(--color-foreground-action-button) 5%,
+        transparent
+      );
+      border: var(--border-thickness-xxs) solid
+        color-mix(
+          in srgb,
+          var(--color-foreground-action-button) 50%,
+          transparent
+        );
+      color: var(--color-text-primary);
+
+      @include for-mouse {
+        &:hover {
+          background-color: var(--color-background-action-button);
+          color: var(--color-foreground-action-button);
+        }
+      }
+    }
+
     &[data-style="ghost"] {
       background-color: transparent;
 
