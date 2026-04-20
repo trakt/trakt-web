@@ -189,7 +189,7 @@
 
   .yir-people-group {
     overflow: hidden;
-    padding-bottom: 30px;
+    padding-bottom: var(--ni-30);
   }
 
   .yir-section-header {
@@ -198,7 +198,7 @@
     }
 
     @include for-mobile {
-      padding: 40px 0 15px 0;
+      padding: var(--ni-40) 0 var(--ni-16) 0;
 
       &.no-top-padding {
         padding-top: 0;
@@ -209,7 +209,7 @@
   .yir-people-loading {
     text-align: center;
     opacity: 0.5;
-    color: #fff;
+    color: var(--shade-10);
   }
 
   .yir-pager {
@@ -217,16 +217,16 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap: 8px;
-    padding: 10px 0;
+    gap: var(--gap-xs);
+    padding: var(--ni-10) 0;
     background: none;
     border: none;
     cursor: pointer;
-    color: #666;
+    color: var(--shade-500);
     transition: color 0.3s;
 
     &:hover {
-      color: #aaa;
+      color: var(--shade-300);
     }
 
     &.invisible {
@@ -263,7 +263,7 @@
 
   .yir-person-link {
     text-decoration: none;
-    color: #fff;
+    color: var(--shade-10);
     width: 20%;
 
     &:hover {
@@ -272,7 +272,7 @@
       }
 
       .yir-headshot {
-        box-shadow: 0 0 20px var(--purple-500);
+        box-shadow: 0 0 var(--ni-20) var(--purple-500);
 
         &::after {
           border-color: var(--purple-500);
@@ -284,7 +284,7 @@
       }
 
       .yir-person-count {
-        color: #ccc;
+        color: var(--shade-100);
       }
     }
 
@@ -294,8 +294,8 @@
   }
 
   .yir-person {
-    margin: 20px 0 10px 0;
-    padding: 0 13px;
+    margin: var(--ni-20) 0 var(--ni-10) 0;
+    padding: 0 var(--ni-14);
     transition: all 0.5s;
     text-align: center;
     position: relative;
@@ -304,16 +304,17 @@
   .yir-rank {
     position: absolute;
     top: 0;
-    left: 13px;
-    color: #fff;
+    left: var(--ni-14);
+    color: var(--shade-10);
     font-weight: bold;
     font-size: 13px;
     z-index: 2;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 var(--ni-1) var(--ni-2)
+      color-mix(in srgb, var(--shade-1000) 80%, transparent);
   }
 
   .yir-headshot {
-    background-color: #000;
+    background-color: var(--shade-1000);
     position: relative;
     overflow: hidden;
     border-radius: 50%;
@@ -331,10 +332,10 @@
       border-radius: 100%;
       width: 100%;
       height: 100%;
-      box-shadow: 0 0 0 100px #000;
+      box-shadow: 0 0 0 var(--ni-104) var(--shade-1000);
       left: 0;
       top: 0;
-      border: solid 1px #555;
+      border: var(--border-thickness-xxs) solid var(--shade-600);
       transition: border-color 0.5s;
     }
   }
@@ -348,9 +349,9 @@
 
   .yir-person-name {
     font-size: 15px;
-    margin-top: 12px;
-    margin-bottom: 7px;
-    color: #fff;
+    margin-top: var(--ni-12);
+    margin-bottom: var(--ni-8);
+    color: var(--shade-10);
     transition: all 0.5s;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -364,8 +365,8 @@
   .yir-person-count {
     font-size: 11px;
     text-transform: uppercase;
-    color: #aaa;
-    margin: 2px 0 0 0;
+    color: var(--shade-300);
+    margin: var(--ni-2) 0 0 0;
     transition: all 0.5s;
 
     @include for-mobile {
@@ -376,16 +377,17 @@
   .yir-person-tooltip {
     position: fixed;
     transform: translate(-50%, -100%);
-    background: rgba(0, 0, 0, 0.92);
-    border: 1px solid #3a3a3a;
-    border-radius: 6px;
-    padding: 8px 12px;
+    background: color-mix(in srgb, var(--shade-1000) 92%, transparent);
+    border: var(--border-thickness-xxs) solid var(--shade-800);
+    border-radius: var(--border-radius-xs);
+    padding: var(--ni-8) var(--ni-12);
     white-space: nowrap;
     z-index: 10;
     font-size: 12px;
     line-height: 1.6;
     pointer-events: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 var(--ni-2) var(--ni-8)
+      color-mix(in srgb, var(--shade-1000) 60%, transparent);
     font-family: inherit;
 
     @include for-mobile {
@@ -394,7 +396,7 @@
   }
 
   .yir-tooltip-title {
-    color: #fff;
+    color: var(--shade-10);
     text-align: center;
   }
 

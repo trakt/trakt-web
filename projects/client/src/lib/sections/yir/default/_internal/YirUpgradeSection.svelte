@@ -27,12 +27,12 @@
 
   .yir-page-inner {
     text-align: center;
-    padding: 70px 0;
-    max-width: 1170px;
+    padding: var(--ni-72) 0;
+    max-width: var(--ni-1280);
     margin: 0 auto;
 
     @include for-tablet-sm-and-below {
-      max-width: 750px;
+      max-width: var(--ni-920);
     }
 
     @include for-mobile {
@@ -43,10 +43,10 @@
   .yir-go-vip {
     margin: 0 auto;
     background: var(--shade-950);
-    width: 424px;
+    width: var(--ni-380);
     max-width: 75%;
     font-size: 16px;
-    box-shadow: 0 0 50px #af0000;
+    box-shadow: 0 0 var(--ni-52) var(--red-800);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,7 +55,7 @@
     gap: var(--gap-m);
 
     &:hover {
-      background: #161616;
+      background: var(--shade-930);
     }
 
     @include for-mobile {
@@ -65,6 +65,6 @@
   }
 
   .yir-upgrade-text {
-    color: #fff;
+    color: var(--shade-10);
   }
 </style>

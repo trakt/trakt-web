@@ -254,7 +254,7 @@
 <style lang="scss">
   .yir-networks-chart {
     width: 100%;
-    height: 600px;
+    height: var(--ni-640);
 
     :global(.cds--cc--chart-wrapper) {
       background: transparent !important;

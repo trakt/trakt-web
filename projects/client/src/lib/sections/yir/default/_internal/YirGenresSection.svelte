@@ -82,28 +82,28 @@
   @use "./shared" as *;
 
   .yir-genres-section {
-    background-color: #090909;
+    background-color: var(--shade-1000);
   }
 
   .yir-page-inner {
-    padding-bottom: 70px;
+    padding-bottom: var(--ni-72);
 
     @include for-mobile {
-      padding-bottom: 40px;
+      padding-bottom: var(--ni-40);
     }
   }
 
   .yir-section-header {
-    padding: 70px 0;
+    padding: var(--ni-72) 0;
 
     @include for-mobile {
-      padding: 40px 0;
+      padding: var(--ni-40) 0;
     }
   }
 
   .yir-genre-bars {
     display: flex;
-    padding: 40px var(--ni-16) 60px var(--ni-16);
+    padding: var(--ni-40) var(--ni-16) var(--ni-60) var(--ni-16);
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
@@ -133,7 +133,7 @@
     @include for-mobile {
       display: flex;
       flex-direction: column;
-      margin-bottom: 16px;
+      margin-bottom: var(--ni-16);
     }
   }
 
@@ -143,25 +143,25 @@
     @include for-mobile {
       display: flex;
       flex-direction: column;
-      margin-bottom: 2px;
-      padding-left: 6px;
-      border-left: 1px solid;
+      margin-bottom: var(--ni-2);
+      padding-left: var(--ni-6);
+      border-left: var(--border-thickness-xxs) solid;
     }
   }
 
   .yir-genre-name {
     font-size: 14px;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--shade-10);
     font-weight: 500;
     line-height: 1.2;
   }
 
   .yir-genre-bar {
-    height: 30px;
-    margin-left: 2px;
+    height: var(--ni-30);
+    margin-left: var(--ni-2);
     position: relative;
-    min-width: 45px;
+    min-width: var(--ni-44);
     width: var(--bar-width);
     transition: all 0.5s;
     cursor: pointer;
@@ -171,8 +171,8 @@
     }
 
     @include for-mobile {
-      height: 30px;
-      min-height: 30px;
+      height: var(--ni-30);
+      min-height: var(--ni-30);
       width: var(--mobile-bar-width) !important;
       margin-left: 0;
       margin-bottom: 0;
@@ -185,12 +185,12 @@
   }
 
   .yir-genre-percentage {
-    color: #000;
+    color: var(--shade-1000);
     position: absolute;
     width: 100%;
     text-align: center;
     left: 0;
-    top: 7px;
+    top: var(--ni-8);
     font-size: 12px;
     opacity: 0;
     transition: opacity 0.5s;
@@ -203,13 +203,13 @@
   .yir-genre-label {
     position: absolute;
     left: 0;
-    bottom: 30px;
+    bottom: var(--ni-30);
     font-size: 12px;
     text-transform: uppercase;
     white-space: nowrap;
-    padding: 4px 6px;
-    color: #fff;
-    border-left: 2px solid;
+    padding: var(--ni-4) var(--ni-6);
+    color: var(--shade-10);
+    border-left: var(--border-thickness-xs) solid;
     pointer-events: none;
 
     @include for-mobile {
@@ -218,20 +218,20 @@
   }
 
   .yir-genre-row[data-index]:nth-child(even) .yir-genre-label {
-    top: 30px;
+    top: var(--ni-30);
     bottom: auto;
   }
 
   .yir-genre-count {
     font-size: 12px;
-    color: #999;
+    color: var(--shade-400);
     text-transform: uppercase;
   }
 
   .yir-genre-count-desktop {
     display: block;
     font-size: 10px;
-    color: #999;
+    color: var(--shade-400);
     text-transform: uppercase;
   }
 </style>

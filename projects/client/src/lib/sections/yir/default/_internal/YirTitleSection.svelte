@@ -73,7 +73,7 @@
     justify-content: center;
     min-height: 100vh;
     min-height: 100dvh;
-    background-color: #0c0c0c;
+    background-color: var(--shade-950);
     position: relative;
     overflow: hidden;
   }
@@ -96,9 +96,9 @@
 
   .yir-titles {
     display: inline-block;
-    background: radial-gradient(circle, #222 20%, var(--shade-950) 80%);
+    background: radial-gradient(circle, var(--shade-900) 20%, var(--shade-950) 80%);
     padding: var(--ni-20);
-    box-shadow: 0 0 50px #000;
+    box-shadow: 0 0 var(--ni-52) var(--shade-1000);
 
     @include for-mobile {
       max-width: 80%;
@@ -117,17 +117,17 @@
   }
 
   .yir-avatar {
-    width: 40px;
-    height: 40px;
+    width: var(--ni-40);
+    height: var(--ni-40);
     border-radius: 50%;
-    border: 2px solid #fff;
-    background-color: #fff;
+    border: var(--border-thickness-xs) solid var(--shade-10);
+    background-color: var(--shade-10);
     object-fit: cover;
     display: block;
 
     @include for-mobile {
-      width: 30px;
-      height: 30px;
+      width: var(--ni-30);
+      height: var(--ni-30);
     }
   }
 
@@ -136,7 +136,7 @@
     font-size: 26px;
 
     a {
-      color: #fff;
+      color: var(--shade-10);
       text-decoration: none;
     }
 
@@ -146,13 +146,13 @@
   }
 
   .yir-under-user {
-    width: 370px;
+    width: var(--ni-380);
     max-width: 100%;
-    border-bottom: 1px dashed #666;
-    margin: 25px auto 5px auto;
+    border-bottom: var(--border-thickness-xxs) dashed var(--shade-500);
+    margin: var(--ni-24) auto var(--ni-6) auto;
 
     @include for-mobile {
-      width: 250px;
+      width: var(--ni-256);
     }
   }
 
@@ -161,7 +161,7 @@
     font-weight: normal;
     margin: 0;
     line-height: 1;
-    color: #fff;
+    color: var(--shade-10);
 
     @include for-mobile {
       font-size: 100px;
@@ -169,11 +169,11 @@
   }
 
   .yir-subtitle {
-    background-color: #fff;
+    background-color: var(--shade-10);
     color: var(--shade-950);
     display: block;
     text-transform: uppercase;
-    padding: 8px var(--ni-16);
+    padding: var(--ni-8) var(--ni-16);
     letter-spacing: 3px;
     word-spacing: 5px;
     margin: 0;

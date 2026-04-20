@@ -58,7 +58,7 @@ const YirTopRatedItemSchema = z.object({
 
 const YirWatchedItemSchema = z.object({
   type: z.enum(['episode', 'movie']),
-  watchedAt: z.string(),
+  watchedAt: z.date(),
   entry: MediaEntrySchema,
   episodeTitle: z.string().nullish(),
 });

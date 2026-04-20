@@ -24,15 +24,15 @@
   @use "$style/scss/mixins/index" as *;
 
   .yir-people-section {
-    background-color: #000;
+    background-color: var(--shade-1000);
   }
 
   .yir-people-container {
-    max-width: 1170px;
+    max-width: var(--ni-1280);
     margin: 0 auto;
 
     @include for-tablet-sm-and-below {
-      max-width: 750px;
+      max-width: var(--ni-920);
     }
 
     @include for-mobile {

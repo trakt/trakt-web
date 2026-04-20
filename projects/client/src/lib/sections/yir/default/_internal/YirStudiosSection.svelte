@@ -34,14 +34,14 @@
 
   .yir-studio-bubbles {
     width: 100%;
-    height: 600px;
-    margin-top: -40px;
+    height: var(--ni-640);
+    margin-top: var(--ni-neg-40);
     display: flex;
     align-items: center;
     justify-content: center;
 
     @include for-mobile {
-      height: 400px;
+      height: var(--ni-480);
     }
   }
 </style>

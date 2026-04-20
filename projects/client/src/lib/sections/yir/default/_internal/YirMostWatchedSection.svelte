@@ -134,7 +134,10 @@
   .yir-shade {
     position: absolute;
     inset: 0;
-    background: radial-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    background: radial-gradient(
+      color-mix(in srgb, var(--shade-1000) 80%, transparent),
+      transparent
+    );
   }
 
   .yir-page-inner {
@@ -155,10 +158,10 @@
 
   .yir-header-number {
     display: inline-block;
-    background-color: #fff;
-    color: #000;
-    padding: 6px 8px;
-    margin-right: -3px;
+    background-color: var(--shade-10);
+    color: var(--shade-1000);
+    padding: var(--ni-6) var(--ni-8);
+    margin-right: var(--ni-neg-4);
   }
 
   .yir-hash {
@@ -167,20 +170,21 @@
 
   .yir-card-media {
     text-decoration: none;
-    color: #fff;
+    color: var(--shade-10);
     margin-top: var(--ni-20);
   }
 
   .yir-logo-wrapper {
     .yir-card-logo {
       max-width: 70%;
-      width: 300px;
+      width: var(--ni-300);
     }
   }
 
   .yir-card-title {
     font-size: 40px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2)
+      color-mix(in srgb, var(--shade-1000) 80%, transparent);
     margin: 0;
 
     @include for-mobile {
@@ -189,15 +193,15 @@
   }
 
   .yir-card-stats {
-    margin-top: 70px;
+    margin-top: var(--ni-72);
   }
 
   .yir-stat-line {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    margin-top: 5px;
+    gap: var(--gap-xxs);
+    margin-top: var(--ni-6);
     font-size: 18px;
   }
 
@@ -236,21 +240,21 @@
     position: absolute;
     z-index: 1;
     left: 0;
-    top: -11px;
+    top: var(--ni-neg-12);
     text-align: center;
     width: 100%;
   }
 
   .yir-rank {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--shade-800);
+    color: var(--shade-10);
     display: inline-block;
     font-size: 11px;
     font-weight: bold;
-    border: solid 2px #fff;
+    border: var(--border-thickness-xs) solid var(--shade-10);
     border-radius: 50%;
-    height: 22px;
-    width: 22px;
+    height: var(--ni-22);
+    width: var(--ni-22);
     line-height: 2.2;
   }
 

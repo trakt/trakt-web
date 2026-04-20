@@ -7106,12 +7106,18 @@
     "yir_title_year_to_date": {
       "default": "Year to date",
       "description": "Title shown for the current year's Year in Review.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_title_year_in_review": {
       "default": "Year in Review",
       "description": "Main title for the Year in Review page.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_totals": {
       "default": "{year} Totals",
@@ -7121,67 +7127,106 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_tv_shows": {
       "default": "TV Shows",
       "description": "Section title for TV shows statistics.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_movies": {
       "default": "Movies",
       "description": "Section title for movies statistics.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_highest_rated_shows": {
       "default": "Highest Rated TV Shows",
       "description": "Section title for highest rated TV shows.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_highest_rated_movies": {
       "default": "Highest Rated Movies",
       "description": "Section title for highest rated movies.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_show_genres": {
       "default": "TV Show Genres",
       "description": "Section title for TV show genres.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_movie_genres": {
       "default": "Movie Genres",
       "description": "Section title for movie genres.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_networks": {
       "default": "TV Show Networks",
       "description": "Section title for TV show networks.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_studios": {
       "default": "Movie Studios",
       "description": "Section title for movie studios.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_top_actors": {
       "default": "Top Actors",
       "description": "Section title for top actors.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_top_actresses": {
       "default": "Top Actresses",
       "description": "Section title for top actresses.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_top_directors": {
       "default": "Top Directors",
       "description": "Section title for top directors.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_section_title_top_writers": {
       "default": "Top Writers",
       "description": "Section title for top writers.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_calendar_first_play": {
       "default": "first play of {year}",
@@ -7191,7 +7236,10 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_calendar_last_play": {
       "default": "last play of {year}",
@@ -7201,7 +7249,10 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_most_watched": {
       "default": "most watched {type}",
@@ -7211,32 +7262,50 @@
           "type": "string"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_hours_watched": {
       "default": "hours watched",
       "description": "Label for hours watched statistic.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_per_month": {
       "default": "per month",
       "description": "Label for per month statistics.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_per_week": {
       "default": "per week",
       "description": "Label for per week statistics.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_per_day": {
       "default": "per day",
       "description": "Label for per day statistics.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_collected": {
       "default": "collected",
       "description": "Label for collected items statistic.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_plays_by_week": {
       "default": "{type} plays by week",
@@ -7246,7 +7315,10 @@
           "type": "string"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_plays_by_month": {
       "default": "{type} plays by month",
@@ -7256,7 +7328,10 @@
           "type": "string"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_plays_by_day": {
       "default": "{type} plays by day of the week",
@@ -7266,7 +7341,10 @@
           "type": "string"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_plays_by_hour": {
       "default": "{type} plays by time of day",
@@ -7276,7 +7354,10 @@
           "type": "string"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_label_week_number": {
       "default": "Week {weekNumber}",
@@ -7286,7 +7367,10 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_unit_play": {
       "default": "{count, plural, one {play} other {plays}}",
@@ -7296,7 +7380,10 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_unit_hour": {
       "default": "{count, plural, one {hour} other {hours}}",
@@ -7306,7 +7393,10 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_unit_rating": {
       "default": "{count, plural, one {rating} other {ratings}}",
@@ -7316,7 +7406,10 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_unit_comment": {
       "default": "{count, plural, one {comment} other {comments}}",
@@ -7326,7 +7419,10 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_unit_list": {
       "default": "{count, plural, one {list} other {lists}}",
@@ -7336,7 +7432,10 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_unit_movie": {
       "default": "{count, plural, one {movie} other {movies}}",
@@ -7346,7 +7445,10 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_unit_show": {
       "default": "{count, plural, one {show} other {shows}}",
@@ -7356,7 +7458,10 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_unit_episode": {
       "default": "{count, plural, one {episode} other {episodes}}",
@@ -7366,27 +7471,42 @@
           "type": "number"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_button_previous": {
       "default": "Previous",
       "description": "Button text for previous page.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_button_see_more": {
       "default": "See More",
       "description": "Button text for see more.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_state_loading": {
       "default": "Loading...",
       "description": "Loading state text.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "yir_upgrade_message": {
       "default": "Upgrade to VIP and get your own all time and yearly Year in Review pages, plus a lot more great features!",
       "description": "Message encouraging users to upgrade to VIP for Year in Review.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "vip_feature_title_mir": {
       "default": "Month in Review",

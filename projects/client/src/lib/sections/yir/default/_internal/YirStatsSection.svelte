@@ -239,20 +239,20 @@
   }
 
   .yir-section-header {
-    padding: 70px 0;
+    padding: var(--ni-72) 0;
 
     @include for-mobile {
-      padding: 40px 0;
+      padding: var(--ni-40) 0;
     }
   }
 
   .yir-watched-stats {
     display: flex;
     align-items: center;
-    padding: 0 10% 40px 10%;
+    padding: 0 10% var(--ni-40) 10%;
 
     &:last-of-type {
-      padding-bottom: 20px;
+      padding-bottom: var(--ni-20);
     }
 
     @include for-tablet-sm-and-below {
@@ -268,7 +268,7 @@
       .yir-stat {
         width: 50%;
         flex: none;
-        margin-bottom: 15px;
+        margin-bottom: var(--ni-16);
       }
     }
   }
@@ -281,13 +281,13 @@
   .yir-stat-arrow {
     display: flex;
     align-items: center;
-    color: #444;
+    color: var(--shade-700);
     flex-shrink: 0;
-    padding: 0 8px;
+    padding: 0 var(--ni-8);
 
     :global(svg) {
-      width: 32px;
-      height: 32px;
+      width: var(--ni-32);
+      height: var(--ni-32);
     }
 
     @include for-mobile {
@@ -300,7 +300,7 @@
     font-size: 60px;
     font-weight: bold;
     line-height: 1;
-    color: #fff;
+    color: var(--shade-10);
 
     @include for-tablet-sm-and-below {
       font-size: 45px;
@@ -315,10 +315,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: var(--gap-xxs);
     font-size: 14px;
     text-transform: uppercase;
-    color: #aaa;
+    color: var(--shade-300);
     margin-top: 0;
 
     @include for-mobile {
@@ -327,15 +327,15 @@
   }
 
   .yir-separator {
-    border-bottom: 1px dashed #333;
-    margin: 40px 0;
+    border-bottom: var(--border-thickness-xxs) dashed var(--shade-800);
+    margin: var(--ni-40) 0;
   }
 
   .yir-under-chart {
     font-size: 14px;
     text-transform: uppercase;
-    color: #aaa;
-    margin: 15px 0 0 0;
+    color: var(--shade-300);
+    margin: var(--ni-16) 0 0 0;
     text-align: center;
   }
 
@@ -343,33 +343,32 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--gap-xl);
-    margin-top: 70px;
+    margin-top: var(--ni-72);
 
     @include for-mobile {
       grid-template-columns: 1fr;
-      margin-top: 50px;
+      margin-top: var(--ni-52);
     }
   }
 
   .yir-chart-container {
-    margin-top: 70px;
+    margin-top: var(--ni-72);
     overflow-x: auto;
     overflow-y: hidden;
-
-    @include for-mobile {
-      margin-left: -20px;
-      margin-right: -20px;
-      padding-left: 20px;
-      padding-right: 20px;
-      margin-top: 50px;
-    }
-
     /* Hide scrollbar but keep functionality */
     scrollbar-width: thin;
-    scrollbar-color: #333 transparent;
+    scrollbar-color: var(--shade-800) transparent;
+
+    @include for-mobile {
+      margin-left: var(--ni-neg-20);
+      margin-right: var(--ni-neg-20);
+      padding-left: var(--ni-20);
+      padding-right: var(--ni-20);
+      margin-top: var(--ni-52);
+    }
 
     &::-webkit-scrollbar {
-      height: 6px;
+      height: var(--ni-6);
     }
 
     &::-webkit-scrollbar-track {
@@ -377,8 +376,8 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #333;
-      border-radius: 3px;
+      background: var(--shade-800);
+      border-radius: var(--border-radius-xs);
     }
   }
 </style>

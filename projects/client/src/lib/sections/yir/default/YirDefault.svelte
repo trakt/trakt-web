@@ -124,7 +124,7 @@
     flex-direction: column;
     width: 100%;
     background-color: var(--shade-950);
-    color: #fff;
+    color: var(--shade-10);
     overflow-x: hidden;
   }
 </style>

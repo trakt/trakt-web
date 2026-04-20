@@ -135,7 +135,7 @@ function mapWatchedItem(raw: RawWatchedItem | null): YirWatchedItem | null {
 
   return {
     type: raw.type,
-    watchedAt: raw.watched_at,
+    watchedAt: new Date(raw.watched_at),
     entry,
     episodeTitle: raw.episode?.title,
   };

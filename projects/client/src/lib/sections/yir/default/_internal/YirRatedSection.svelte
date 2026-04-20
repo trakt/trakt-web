@@ -89,30 +89,30 @@
   .yir-page-inner {
     position: relative;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding-bottom: 70px;
+    background-color: color-mix(in srgb, var(--shade-1000) 30%, transparent);
+    padding-bottom: var(--ni-72);
     max-width: none;
 
     @include for-mobile {
-      padding-bottom: 40px;
+      padding-bottom: var(--ni-40);
     }
   }
 
   .yir-section-header {
-    padding: 70px 0;
+    padding: var(--ni-72) 0;
 
     @include for-mobile {
-      padding: 40px 0;
+      padding: var(--ni-40) 0;
     }
   }
 
   .yir-posters {
     margin: 0 auto;
-    max-width: 1170px;
+    max-width: var(--ni-1280);
     text-align: center;
 
     @include for-tablet-sm-and-below {
-      max-width: 750px;
+      max-width: var(--ni-920);
     }
 
     @include for-mobile {
@@ -150,8 +150,8 @@
 
   .yir-poster {
     border: none;
-    background-color: #000;
-    box-shadow: 0 0 20px #000;
+    background-color: var(--shade-1000);
+    box-shadow: 0 0 var(--ni-20) var(--shade-1000);
     position: relative;
 
     .yir-poster-img,
@@ -168,17 +168,17 @@
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 40px 40px 0;
+    border-width: 0 var(--ni-40) var(--ni-40) 0;
     border-color: transparent var(--red-500) transparent transparent;
     font-size: 10px;
     font-weight: bold;
-    color: #fff;
+    color: var(--shade-10);
 
     span {
       position: absolute;
-      top: 4px;
-      right: -37px;
-      width: 30px;
+      top: var(--ni-4);
+      right: var(--ni-neg-36);
+      width: var(--ni-30);
       text-align: center;
     }
   }

@@ -93,28 +93,28 @@
   @use "./shared" as *;
 
   .yir-totals-section {
-    background-color: #090909;
+    background-color: var(--shade-1000);
   }
 
   .yir-page-inner {
-    padding-bottom: 70px;
+    padding-bottom: var(--ni-72);
   }
 
   .yir-section-header {
-    padding: 70px 0;
+    padding: var(--ni-72) 0;
 
     @include for-mobile {
-      padding: 40px 0;
+      padding: var(--ni-40) 0;
     }
   }
 
   .yir-stats-row {
     display: flex;
     justify-content: center;
-    padding: 0 20% 40px 20%;
+    padding: 0 20% var(--ni-40) 20%;
 
     &:last-child {
-      padding-bottom: 20px;
+      padding-bottom: var(--ni-20);
     }
 
     @include for-tablet-sm-and-below {
@@ -138,7 +138,7 @@
     font-size: 60px;
     font-weight: bold;
     line-height: 1;
-    color: #fff;
+    color: var(--shade-10);
 
     @include for-tablet-sm-and-below {
       font-size: 45px;
@@ -153,10 +153,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: var(--gap-xxs);
     font-size: 14px;
     text-transform: uppercase;
-    color: #aaa;
+    color: var(--shade-300);
     margin-top: 0;
   }
 
@@ -165,8 +165,8 @@
     align-items: center;
 
     :global(svg) {
-      width: 14px;
-      height: 14px;
+      width: var(--ni-14);
+      height: var(--ni-14);
     }
   }
 </style>

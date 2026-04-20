@@ -3,6 +3,8 @@
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/paraglide/messages";
+  import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate";
+  import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime";
 
   const {
     how,
@@ -14,22 +16,8 @@
     year: number;
   } = $props();
 
-  const watchedDate = $derived(new Date(item.watchedAt));
-
-  const formattedDate = $derived(
-    watchedDate.toLocaleDateString(languageTag(), {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }),
-  );
-
-  const formattedTime = $derived(
-    watchedDate.toLocaleTimeString(languageTag(), {
-      hour: "numeric",
-      minute: "2-digit",
-    }),
-  );
+  const formattedDate = $derived(toHumanLongDate(item.watchedAt, languageTag()));
+  const formattedTime = $derived(toHumanClockTime(item.watchedAt, languageTag()));
 
   const slug = $derived(item.entry.slug);
   const mediaType = $derived(item.entry.type === "show" ? "shows" : "movies");
@@ -106,25 +94,28 @@
   .yir-calendar-shade {
     position: absolute;
     inset: 0;
-    background: radial-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    background: radial-gradient(
+      color-mix(in srgb, var(--shade-1000) 80%, transparent),
+      transparent
+    );
   }
 
   .yir-calendar-inner {
     position: relative;
     z-index: 1;
-    padding: 20px 0 90px 0;
+    padding: var(--ni-20) 0 var(--ni-88) 0;
   }
 
   .yir-section-header {
     text-align: center;
-    padding: 70px 0;
+    padding: var(--ni-72) 0;
 
     h2 {
       text-transform: uppercase;
       display: inline-block;
       letter-spacing: 1px;
-      border: solid 1px #fff;
-      background-color: rgba(0, 0, 0, 0.5);
+      border: var(--border-thickness-xxs) solid var(--shade-10);
+      background-color: color-mix(in srgb, var(--shade-1000) 50%, transparent);
       font-size: 16px;
       line-height: 1;
       text-align: center;
@@ -132,47 +123,49 @@
     }
 
     @include for-mobile {
-      padding: 40px 0;
+      padding: var(--ni-40) 0;
     }
   }
 
   .yir-header-text {
     display: inline-block;
-    padding: 6px 8px;
+    padding: var(--ni-6) var(--ni-8);
   }
 
   .yir-calendar-media {
     display: block;
     text-decoration: none;
-    color: #fff;
+    color: var(--shade-10);
   }
 
   .yir-logo-wrapper {
     .yir-calendar-logo {
       max-width: 70%;
-      width: 300px;
+      width: var(--ni-300);
     }
   }
 
   .yir-calendar-title {
     font-size: 40px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2)
+      color-mix(in srgb, var(--shade-1000) 80%, transparent);
     margin: 0;
 
     @include for-mobile {
       font-size: 32px;
-      padding: 0 15px;
+      padding: 0 var(--ni-16);
     }
   }
 
   .yir-calendar-episode {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-    margin: 10px 0 0 0;
+    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2)
+      color-mix(in srgb, var(--shade-1000) 80%, transparent);
+    margin: var(--ni-10) 0 0 0;
     font-size: 22px;
 
     @include for-mobile {
       font-size: 16px;
-      padding: 0 15px;
+      padding: 0 var(--ni-16);
     }
   }
 
@@ -181,8 +174,8 @@
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
     align-items: center;
-    gap: 0 10px;
-    margin-top: 60px;
+    gap: 0 var(--gap-xs);
+    margin-top: var(--ni-60);
     line-height: 1.2;
   }
 
@@ -190,12 +183,12 @@
     grid-row: 1 / 3;
     display: flex;
     align-items: center;
-    color: #fff;
+    color: var(--shade-10);
     opacity: 0.7;
 
     :global(svg) {
-      width: 36px;
-      height: 36px;
+      width: var(--ni-36);
+      height: var(--ni-36);
     }
   }
 

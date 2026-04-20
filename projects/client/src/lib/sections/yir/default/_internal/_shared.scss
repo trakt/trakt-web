@@ -3,14 +3,14 @@
 // Common section header styles
 .yir-section-header {
   text-align: center;
-  padding: 70px 0 20px 0;
+  padding: var(--ni-72) 0 var(--ni-20) 0;
 
   h2 {
     text-transform: uppercase;
     display: inline-block;
     letter-spacing: 1px;
-    border: solid 1px #fff;
-    background-color: rgba(0, 0, 0, 0.5);
+    border: var(--border-thickness-xxs) solid var(--shade-10);
+    background-color: color-mix(in srgb, var(--shade-1000) 50%, transparent);
     font-size: 16px;
     line-height: 1;
     text-align: center;
@@ -18,24 +18,24 @@
   }
 
   @include for-mobile {
-    padding: 40px 0 20px 0;
+    padding: var(--ni-40) 0 var(--ni-20) 0;
   }
 }
 
 .yir-header-text {
   display: inline-block;
-  padding: 6px 8px;
+  padding: var(--ni-6) var(--ni-8);
 }
 
 // Common page inner container
 .yir-page-inner {
-  padding: 0 0 20px 0;
+  padding: 0 0 var(--ni-20) 0;
   position: relative;
-  max-width: 1170px;
+  max-width: var(--ni-1280);
   margin: 0 auto;
 
   @include for-tablet-sm-and-below {
-    max-width: 750px;
+    max-width: var(--ni-920);
   }
 
   @include for-mobile {
@@ -44,6 +44,8 @@
 }
 
 // Bubble chart tooltip styles (shared between networks and studios)
+// Carbon Charts injects its own styles with high specificity, so
+// some overrides cannot be avoided here.
 :global(.cds--tooltip),
 :global(.cds--cc--tooltip),
 :global(.cds--cc--tooltip-container) {
@@ -65,21 +67,21 @@
 }
 
 :global(.yir-chart-tooltip) {
-  background: rgba(0, 0, 0, 0.92);
-  border: 1px solid #3a3a3a;
-  border-radius: 6px;
-  padding: 8px 12px;
-  color: #fff;
+  background: color-mix(in srgb, var(--shade-1000) 92%, transparent);
+  border: var(--border-thickness-xxs) solid var(--shade-800);
+  border-radius: var(--border-radius-xs);
+  padding: var(--ni-8) var(--ni-12);
+  color: var(--shade-10);
   font-family: inherit;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 var(--ni-2) var(--ni-8) color-mix(in srgb, var(--shade-1000) 60%, transparent);
   text-align: center;
 }
 
 :global(.yir-chart-tooltip-name) {
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 4px;
-  color: #fff;
+  margin-bottom: var(--ni-4);
+  color: var(--shade-10);
   white-space: nowrap;
 }
 
