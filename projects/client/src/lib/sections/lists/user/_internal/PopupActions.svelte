@@ -30,6 +30,7 @@
       return {
         type: listedItem.type,
         media: season,
+        show: listedItem.entry.show,
         title: `${listedItem.entry.show.title} ${seasonLabel(season.number)}`,
       };
     }

@@ -1,8 +1,8 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { map } from 'rxjs';
-import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
+import type { ExtendedMediaStoreProps } from '../../../models/MediaStoreProps.ts';
 
-export type IsWatchedProps = MediaStoreProps;
+export type IsWatchedProps = ExtendedMediaStoreProps;
 
 export function useIsWatched(props: IsWatchedProps) {
   const { type } = props;
@@ -12,7 +12,10 @@ export function useIsWatched(props: IsWatchedProps) {
   const episodes = props.type === 'episode'
     ? Array.isArray(props.media) ? props.media : [props.media]
     : [];
-  const showId = props.type === 'episode' ? props.show.id : -1;
+  const showId = 'show' in props ? props.show.id : -1;
+  const seasons = props.type === 'season'
+    ? Array.isArray(props.media) ? props.media : [props.media]
+    : [];
 
   const isWatched = history.pipe(
     map(($history) => {
@@ -31,6 +34,14 @@ export function useIsWatched(props: IsWatchedProps) {
             watchedEpisodes.some((e) =>
               e.season === episode.season && e.episode === episode.number
             )
+          );
+        }
+        case 'season': {
+          const countBySeason = $history.shows.get(showId)?.playsPerSeason ??
+            new Map<number, number>();
+
+          return seasons.every((season) =>
+            (countBySeason.get(season.number) ?? 0) >= season.episodes.count
           );
         }
         case 'show': {
