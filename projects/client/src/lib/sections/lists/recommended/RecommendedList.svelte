@@ -39,7 +39,7 @@
   }}
   {filterOverride}
   useList={useRecommendedList}
-  urlBuilder={UrlBuilder.recommended}
+  urlBuilder={() => UrlBuilder.recommended()}
 >
   {#snippet item(media)}
     <RecommendedListItem

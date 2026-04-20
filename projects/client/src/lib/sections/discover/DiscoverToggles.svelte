@@ -5,7 +5,7 @@
   import GlobalParameterSetter from "$lib/features/parameters/GlobalParameterSetter.svelte";
   import { buildParamString } from "$lib/utils/url/buildParamString";
 
-  const { mode: selectedType, setMode, options } = useDiscover();
+  const { mode: selectedType, onModeChange, options } = useDiscover();
 
   const optionsWithHref = options.map((option) => ({
     ...option,
@@ -17,7 +17,7 @@
   <Toggler
     value={$selectedType}
     variant="text"
-    onChange={setMode}
+    onChange={onModeChange}
     options={optionsWithHref}
   />
 </GlobalParameterSetter>

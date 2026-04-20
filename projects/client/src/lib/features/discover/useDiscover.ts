@@ -1,7 +1,8 @@
 import { page } from '$app/state';
 import { useToggler } from '$lib/components/toggles/useToggler.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { combineLatest, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, map } from 'rxjs';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
 import { useParameters } from '../parameters/useParameters.ts';
@@ -29,17 +30,27 @@ export function useDiscover() {
 
       return raw as DiscoverMode;
     }),
+    distinctUntilChanged(),
   );
 
-  const setMode = (value: DiscoverMode) => {
+  const currentOption = mode.pipe(
+    map((value) =>
+      assertDefined(
+        options.find((o) => o.value === value),
+        `Invalid discover mode: ${value}`,
+      )
+    ),
+  );
+
+  const onModeChange = (value: DiscoverMode) => {
     track({ mode: value, source: page.route.id ?? 'unknown' });
     set(value);
   };
 
   return {
     options,
-    current,
-    setMode,
+    current: currentOption,
+    onModeChange,
     mode,
     useSeasonalFilters: combineLatest(
       [useSeasonalFilters, activeTheme],

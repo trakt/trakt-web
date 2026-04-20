@@ -47,9 +47,8 @@
       search,
     })}
   urlBuilder={urlBuilder ??
-    ((params) =>
+    (() =>
       UrlBuilder.trending({
-        ...params,
         search,
       }))}
 >
