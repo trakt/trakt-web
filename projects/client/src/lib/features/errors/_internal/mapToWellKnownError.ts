@@ -10,6 +10,8 @@ function mapToWellKnownErrorType(statusCode: number) {
     case 502:
     case 503:
       return WellKnownErrorType.ServerError;
+    case 429:
+      return WellKnownErrorType.RateLimitError;
     case 423:
       return WellKnownErrorType.LockedAccountError;
     case 404:

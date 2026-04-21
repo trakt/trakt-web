@@ -69,6 +69,10 @@
   <ErrorLockedAccountPage />
 {/if}
 
+{#if $fetchError?.type === WellKnownErrorType.RateLimitError}
+  <ErrorServicePage message={$fetchError.message} />
+{/if}
+
 {#if $fetchError?.type === WellKnownErrorType.ServerError}
   <ErrorServicePage message={$fetchError.message} />
 {/if}

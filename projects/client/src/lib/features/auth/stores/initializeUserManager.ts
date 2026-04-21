@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { FETCH_ERROR_EVENT } from '$lib/features/errors/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { type User, UserManager } from 'oidc-client-ts';
 import { BehaviorSubject, of } from 'rxjs';
@@ -23,7 +24,9 @@ type InitializeUserManagerParams = {
   tokenFromServer?: string | null;
 };
 
-export function initializeUserManager({ ctx, tokenFromServer }: InitializeUserManagerParams) {
+export function initializeUserManager(
+  { ctx, tokenFromServer }: InitializeUserManagerParams,
+) {
   if (!browser) {
     return {
       isInitializing: of(false),
@@ -62,9 +65,27 @@ export function initializeUserManager({ ctx, tokenFromServer }: InitializeUserMa
       setAuthState({ token, isExpired });
     };
 
+    const dispatchRateLimitError = () => {
+      globalThis.window.dispatchEvent(
+        new CustomEvent(FETCH_ERROR_EVENT, {
+          detail: {
+            status: 429,
+            message: 'Rate limited during token renewal',
+          },
+        }),
+      );
+    };
+
+    const handleSilentRenewFailure = (error: unknown) => {
+      if (error instanceof Error && error.message.includes('429')) {
+        dispatchRateLimitError();
+      }
+      handleUserEvent(null);
+    };
+
     const initializeUser = (user: User | null) => {
       if (user?.expired) {
-        manager.signinSilent().catch(() => handleUserEvent(null));
+        manager.signinSilent().catch(handleSilentRenewFailure);
         return;
       }
 
@@ -79,7 +100,7 @@ export function initializeUserManager({ ctx, tokenFromServer }: InitializeUserMa
         return;
       }
 
-      manager.signinSilent().catch(() => handleUserEvent(null));
+      manager.signinSilent().catch(handleSilentRenewFailure);
     };
 
     manager.getUser().then(initializeUser);
