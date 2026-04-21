@@ -1,5 +1,6 @@
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { WatchListIntent } from '$lib/requests/models/WatchListIntent.ts';
 import { BehaviorSubject, map, type Observable } from 'rxjs';
 import { assertDefined } from '../../../../utils/assert/assertDefined.ts';
 import {
@@ -38,6 +39,7 @@ type UseListSortingProps = {
   type?: MediaType;
 } | {
   type: 'watchlist';
+  intent: WatchListIntent;
 } | {
   type: 'favorites';
   slug: string;
@@ -84,7 +86,12 @@ export function useListSorting(
     ),
     urlBuilder: ({ sortBy, sortHow }: ListUrlBuilderParams) => {
       if (props.type === 'watchlist') {
-        return getListUrl({ type: 'watchlist', sortBy, sortHow });
+        return getListUrl({
+          type: 'watchlist',
+          intent: props.intent,
+          sortBy,
+          sortHow,
+        });
       }
 
       if (props.type === 'favorites') {
