@@ -36,17 +36,18 @@
     {/snippet}
 
     {#snippet actions()}
-      <CommenterRating {comment} />
+      <div class="trakt-comment-header-actions">
+        <CommenterRating {comment} />
 
-      <RenderFor audience="authenticated">
-        {#if isOwnComment}
+        <RenderFor audience="authenticated">
           <CommentActions
             {comment}
             type={typeProps.type}
+            {isOwnComment}
             onEdit={() => (isEditOpen = true)}
           />
-        {/if}
-      </RenderFor>
+        </RenderFor>
+      </div>
     {/snippet}
 
     <UserProfileLink user={comment.user} />
@@ -79,5 +80,11 @@
       top: var(--ni-neg-4);
       right: var(--ni-neg-10);
     }
+  }
+
+  .trakt-comment-header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
   }
 </style>

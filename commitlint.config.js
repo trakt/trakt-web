@@ -77,6 +77,7 @@ module.exports = {
         'link',
         'list',
         'mir',
+        'moderation',
         'movie',
         'msw',
         'navbar',
