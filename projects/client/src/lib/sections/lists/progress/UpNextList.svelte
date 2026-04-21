@@ -3,24 +3,19 @@
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { MediaProgressIntent } from "$lib/requests/queries/sync/mediaProgressQuery";
   import DropNotePromptProvider from "$lib/sections/media-actions/drop/DropNotePromptProvider.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useStablePaginated } from "../stores/useStablePaginated";
   import ContinueWatchingItem from "./_internal/ContinueWatchingItem.svelte";
-  import StartWatchingItem from "./_internal/StartWatchingItem.svelte";
   import { useUpNextList } from "./useUpNextList";
-
-  const { intent }: { intent: MediaProgressIntent } = $props();
 
   const { user } = useUser();
   const { mode } = useDiscover();
 
   const cta = $derived({
-    type:
-      intent === "start" ? ("start-watching" as const) : ("up-next" as const),
+    type: "up-next" as const,
     mediaType: $mode === "media" ? undefined : $mode,
   });
 
@@ -30,40 +25,27 @@
 <DropNotePromptProvider>
   <DrillableMediaList
     type={$mode}
-    id={`up-next-list-${$mode}-${intent}`}
+    id={`up-next-list-${$mode}`}
     source={{
-      id: intent === "start" ? "start-watching" : "continue-watching",
+      id: "up-next",
     }}
     drilldownLabel="drill label"
     filter={$filterMap}
     useList={(listParams) =>
       useStablePaginated({
         ...listParams,
-        useList: (params) =>
-          useUpNextList({
-            ...params,
-            intent,
-          }),
+        useList: useUpNextList,
         compareFn: (l, r) => {
           const isComparingEpisodes = "show" in l && "show" in r;
           return isComparingEpisodes ? l.show.id === r.show.id : l.id === r.id;
         },
       })}
-    urlBuilder={() =>
-      intent === "start"
-        ? UrlBuilder.startWatching($user?.slug ?? "")
-        : UrlBuilder.progress($user?.slug ?? "")}
-    title={intent === "start"
-      ? m.list_title_start_watching()
-      : m.list_title_up_next()}
-    variant={intent === "start" ? "portrait" : "landscape"}
+    urlBuilder={() => UrlBuilder.progress($user?.slug ?? "")}
+    title={m.list_title_up_next()}
+    variant="landscape"
   >
     {#snippet item(progressEntry)}
-      {#if progressEntry.intent === "start"}
-        <StartWatchingItem entry={progressEntry} style="cover" />
-      {:else}
-        <ContinueWatchingItem entry={progressEntry} style="cover" />
-      {/if}
+      <ContinueWatchingItem entry={progressEntry} style="cover" />
     {/snippet}
 
     {#snippet ctaItem()}

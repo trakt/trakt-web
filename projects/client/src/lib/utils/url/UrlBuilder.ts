@@ -161,7 +161,9 @@ export const UrlBuilder = {
     },
   },
   progress: (user: string) => `/users/${user}/progress`,
-  startWatching: (user: string) => `/users/${user}/start-watching`,
+  startWatching: (user: string, params: Record<string, string | number> = {}) =>
+    `/users/${user}/start-watching${buildParamString(sanitizeParams(params))}`,
+
   home: () => '/',
   shows: () => '/shows',
   discover: () => '/discover',

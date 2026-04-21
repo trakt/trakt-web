@@ -5,21 +5,24 @@
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
-  import type { MovieStartEntry } from "$lib/requests/models/MovieProgressEntry";
-  import type { UpNextStartEntry } from "$lib/requests/models/UpNextEntry";
+  import type { MovieEntry } from "$lib/requests/models/MovieEntry";
+  import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
+  import type { Snippet } from "svelte";
   import MediaItem from "../../components/MediaItem.svelte";
+  import UpNextSwipe from "../../progress/_internal/UpNextSwipe.svelte";
   import { mapToMarkAsWatchedTarget } from "./mapToMarkAsWatchedTarget";
   import MovieStartWatchingSwipe from "./MovieStartWatchingSwipe.svelte";
-  import UpNextSwipe from "./UpNextSwipe.svelte";
 
   const {
     entry,
     style,
+    sortTag,
   }: {
-    entry: MovieStartEntry | UpNextStartEntry;
+    entry: MovieEntry | ShowEntry;
     style: "summary" | "cover";
+    sortTag?: Snippet;
   } = $props();
 
   const markAsWatchedTarget = $derived(mapToMarkAsWatchedTarget(entry));
@@ -27,7 +30,11 @@
     if ("episode" in entry) {
       return {
         type: "show" as const,
-        episode: entry.episode,
+        episode: {
+          ...entry.episode,
+          season: 1,
+          number: 1,
+        },
         media: entry,
       };
     }
@@ -86,6 +93,7 @@
     {style}
     {popupActions}
     {action}
+    {sortTag}
     tag={style === "summary" ? summaryTag : undefined}
     variant="start"
     source="start-watching"

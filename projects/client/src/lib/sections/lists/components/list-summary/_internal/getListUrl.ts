@@ -1,11 +1,13 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
+import type { WatchListIntent } from '$lib/requests/models/WatchListIntent.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { SortBy } from '../../../user/models/SortBy.ts';
 import type { SortDirection } from '../../../user/models/SortDirection.ts';
 
 type ListProps = {
   type: 'watchlist';
+  intent: WatchListIntent;
 } | {
   type: 'user-list';
   list: MediaListSummary;
@@ -28,7 +30,9 @@ export function getListUrl(props: ListUrlProps) {
 
   switch (props.type) {
     case 'watchlist':
-      return UrlBuilder.lists.watchlist('me', params);
+      return props.intent === 'default'
+        ? UrlBuilder.lists.watchlist('me', params)
+        : UrlBuilder.startWatching('me', params);
     case 'favorites':
       return UrlBuilder.profile.favorites(props.slug, params);
     case 'user-list': {

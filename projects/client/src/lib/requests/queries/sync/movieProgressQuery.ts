@@ -5,11 +5,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type {
-  ListedMovieResponse,
-  MovieProgressResponse,
-  UpNextIntentRequest,
-} from '@trakt/api';
+import type { MovieProgressResponse } from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
@@ -22,17 +18,15 @@ import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
 type MovieProgressParams =
   & PaginationParams
   & ApiParams
-  & UpNextIntentRequest
   & FilterParams;
 
-const mapToInProgressMovie = (
+export const mapToMovieProgressEntry = (
   response: MovieProgressResponse,
 ): MovieProgressEntry => {
   const runtime = response.movie.runtime ?? 0;
   const minutesElapsed = Math.floor((response.progress / 100) * runtime);
 
   return {
-    intent: 'continue',
     ...mapToMovieEntry(response.movie),
     playbackId: response.id,
     progress: response.progress,
@@ -43,58 +37,9 @@ const mapToInProgressMovie = (
   };
 };
 
-const mapToStartWatchingMovie = (
-  response: ListedMovieResponse,
-): MovieProgressEntry => {
-  return {
-    intent: 'start',
-    ...mapToMovieEntry(response.movie),
-  };
-};
-
-export const mapToMovieProgressEntry = (
-  item: MovieProgressResponse | ListedMovieResponse,
-): MovieProgressEntry => {
-  return 'listed_at' in item
-    ? mapToStartWatchingMovie(item)
-    : mapToInProgressMovie(item);
-};
-
-export type MovieProgressSuccessResponse = {
-  status: 200;
-  body: MovieProgressResponse[] | ListedMovieResponse[];
-  headers: Headers;
-};
-
-export type MovieProgressResponseType = MovieProgressSuccessResponse | {
-  status: number;
-  body: unknown;
-  headers: Headers;
-};
-
 export const movieProgressRequest = (
-  { fetch, limit, page, intent, filter }: MovieProgressParams,
-): Promise<MovieProgressResponseType> => {
-  if (intent === 'start') {
-    return api({ fetch })
-      .users
-      .watchlist
-      .movies({
-        params: {
-          id: 'me',
-          sort: 'released',
-        },
-        query: {
-          extended: 'full,images,colors',
-          hide: 'unreleased',
-          sort_how: 'desc',
-          page,
-          limit,
-          ...filter,
-        },
-      });
-  }
-
+  { fetch, limit, page, filter }: MovieProgressParams,
+) => {
   return api({ fetch })
     .sync
     .progress
@@ -120,13 +65,10 @@ export const movieProgressQuery = defineInfiniteQuery({
   ) => [
     params.page,
     params.limit,
-    params.intent,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: movieProgressRequest,
-  mapper: (queryResponse) => {
-    const response = queryResponse as MovieProgressSuccessResponse;
-
+  mapper: (response) => {
     return {
       entries: response.body
         .map(mapToMovieProgressEntry)

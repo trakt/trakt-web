@@ -9,28 +9,19 @@ import z from 'zod';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
 import { MovieProgressSchema } from '../../models/MovieProgressEntry.ts';
-import { UpNextEntryNitroSchema } from '../../models/UpNextEntry.ts';
+import { UpNextEntrySchema } from '../../models/UpNextEntry.ts';
 import { interleaveMediaProgress } from './_internal/interleaveMediaProgress.ts';
 import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
 import {
   mapToMovieProgressEntry,
   movieProgressRequest,
-  type MovieProgressSuccessResponse,
 } from './movieProgressQuery.ts';
-import {
-  mapUpNextResponse,
-  upNextNitroRequest,
-  type UpNextSuccessResponse,
-} from './upNextNitroQuery.ts';
+import { mapUpNextResponse, upNextNitroRequest } from './upNextNitroQuery.ts';
 
-export type MediaProgressIntent = 'continue' | 'start';
-
-type MediaProgressParams = PaginationParams & ApiParams & FilterParams & {
-  intent: MediaProgressIntent;
-};
+type MediaProgressParams = PaginationParams & ApiParams & FilterParams;
 
 const MediaProgressSchema = z.union([
-  UpNextEntryNitroSchema,
+  UpNextEntrySchema,
   MovieProgressSchema,
 ]);
 
@@ -51,7 +42,6 @@ export const mediaProgressQuery = defineInfiniteQuery({
   ) => [
     params.page,
     params.limit,
-    params.intent,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: (params) =>
@@ -60,11 +50,9 @@ export const mediaProgressQuery = defineInfiniteQuery({
       movieProgressRequest(params),
     ]),
   mapper: ([upNextResponse, movieProgressResponse]) => {
-    const upNextSuccessResponse = upNextResponse as UpNextSuccessResponse;
-    const episodes = upNextSuccessResponse.body.map(mapUpNextResponse);
+    const episodes = upNextResponse.body.map(mapUpNextResponse);
 
-    const movieResponse = movieProgressResponse as MovieProgressSuccessResponse;
-    const movies = movieResponse.body
+    const movies = movieProgressResponse.body
       .map(mapToMovieProgressEntry)
       .filter(isValidProgressMovie);
 

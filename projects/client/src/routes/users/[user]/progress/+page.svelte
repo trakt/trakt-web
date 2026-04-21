@@ -23,5 +23,5 @@
     header={{ title: m.list_title_up_next(), metaInfo: $current.text() }}
   />
 
-  <UpNextPaginatedList intent="continue" />
+  <UpNextPaginatedList />
 </TraktPage>

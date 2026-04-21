@@ -6,26 +6,16 @@ type SortMediaProgressProps = {
   movies: MovieProgressEntry[];
 };
 
-function getEpisodeDate(episode: UpNextEntry) {
-  return episode.intent === 'start'
-    ? episode.effectiveReleaseDate
-    : episode.lastWatchedAt;
-}
-
-function getMovieDate(movie: MovieProgressEntry) {
-  return movie.intent === 'start' ? movie.airDate : movie.lastWatchedAt;
-}
-
 export function interleaveMediaProgress(props: SortMediaProgressProps) {
   const { episodes, movies } = props;
 
   const { result, insertedKeys } = episodes.reduce(
     (acc, episode) => {
-      const episodeDate = getEpisodeDate(episode);
+      const episodeDate = episode.lastWatchedAt;
 
       const moviesToInsert = movies
         .filter((movie) => {
-          const date = getMovieDate(movie);
+          const date = movie.lastWatchedAt;
           if (acc.insertedKeys.has(movie.key) || !date) {
             return false;
           }

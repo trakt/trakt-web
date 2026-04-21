@@ -1,9 +1,9 @@
-import type { MovieStartEntry } from '$lib/requests/models/MovieProgressEntry.ts';
-import type { UpNextStartEntry } from '$lib/requests/models/UpNextEntry.ts';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import type { MarkAsWatchedStoreProps } from '../../../media-actions/mark-as-watched/useMarkAsWatched.ts';
 
 export function mapToMarkAsWatchedTarget(
-  entry: MovieStartEntry | UpNextStartEntry,
+  entry: MovieEntry | ShowEntry,
 ): MarkAsWatchedStoreProps {
   if ('episode' in entry) {
     return {
@@ -13,8 +13,8 @@ export function mapToMarkAsWatchedTarget(
         effectiveReleaseDate: entry.effectiveReleaseDate,
         seasons: [
           {
-            number: entry.episode.season,
-            episodes: [{ number: entry.episode.number }],
+            number: 1,
+            episodes: [{ number: 1 }],
           },
         ],
       },

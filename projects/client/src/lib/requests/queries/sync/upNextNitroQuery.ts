@@ -5,11 +5,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import {
-  type ListedShowResponse,
-  type UpNextIntentRequest,
-  type UpNextResponse,
-} from '@trakt/api';
+import { type UpNextResponse } from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { mapToEpisodeEntry } from '../../_internal/mapToEpisodeEntry.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
@@ -17,16 +13,15 @@ import { mapToShowProgress } from '../../_internal/mapToShowProgress.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
 import {
   type UpNextEntry,
-  UpNextEntryNitroSchema,
+  UpNextEntrySchema,
 } from '../../models/UpNextEntry.ts';
 
 type UpNextParams =
   & PaginationParams
   & ApiParams
-  & UpNextIntentRequest
   & FilterParams;
 
-function mapUpNextContinueWatching(item: UpNextResponse): UpNextEntry {
+export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   const show = mapToShowEntry(item.show);
   const episode = mapToEpisodeEntry(item.progress.next_episode);
   episode.runtime = isNaN(episode.runtime) ? show.runtime : episode.runtime;
@@ -34,72 +29,16 @@ function mapUpNextContinueWatching(item: UpNextResponse): UpNextEntry {
   const progress = mapToShowProgress(item.progress);
 
   return {
-    intent: 'continue',
     show,
     ...episode,
     ...progress,
   };
 }
 
-function mapUpNextStartWatching(response: ListedShowResponse): UpNextEntry {
-  const show = mapToShowEntry(response.show);
-
-  return {
-    intent: 'start',
-    ...show,
-    episode: {
-      ...show.episode,
-      season: 1,
-      number: 1,
-    },
-  };
-}
-
-export function mapUpNextResponse(
-  response: UpNextResponse | ListedShowResponse,
-) {
-  return 'listed_at' in response
-    ? mapUpNextStartWatching(response)
-    : mapUpNextContinueWatching(response);
-}
-
-export type UpNextSuccessResponse = {
-  status: 200;
-  body: UpNextResponse[] | ListedShowResponse[];
-  headers: Headers;
-};
-
-export type UpNextResponseType = UpNextSuccessResponse | {
-  status: number;
-  body: unknown;
-  headers: Headers;
-};
-
 export const upNextNitroRequest = (
   params: UpNextParams,
-): Promise<UpNextResponseType> => {
-  const { fetch, limit, page, intent, filter } = params;
-
-  if (intent === 'start') {
-    return api({ fetch })
-      .users
-      .watchlist
-      .shows({
-        params: {
-          id: 'me',
-          sort: 'released',
-        },
-        query: {
-          extended: 'full,images,colors',
-          // FIXME: update @trakt/api to allow comma separated values
-          hide: 'unreleased,watched,watching' as 'unreleased',
-          sort_how: 'desc',
-          page,
-          limit,
-          ...filter,
-        },
-      });
-  }
+) => {
+  const { fetch, limit, page, filter } = params;
 
   return api({ fetch })
     .sync
@@ -109,7 +48,7 @@ export const upNextNitroRequest = (
       query: {
         page,
         limit,
-        intent,
+        intent: 'continue',
         ...filter,
       },
     });
@@ -129,19 +68,16 @@ export const upNextNitroQuery = defineInfiniteQuery({
   ) => [
     params.page,
     params.limit,
-    params.intent,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: upNextNitroRequest,
-  mapper: (queryResponse) => {
-    const response = queryResponse as UpNextSuccessResponse;
-
+  mapper: (response) => {
     return {
       entries: response.body.map(mapUpNextResponse),
       page: extractPageMeta(response.headers),
     };
   },
-  schema: PaginatableSchemaFactory(UpNextEntryNitroSchema),
+  schema: PaginatableSchemaFactory(UpNextEntrySchema),
   ttl: time.minutes(30),
   refetchOnWindowFocus: true,
 });
