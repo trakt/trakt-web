@@ -21,6 +21,7 @@
   import NavigationHistoryProvider from "$lib/features/navigation-history/NavigationHistoryProvider.svelte";
   import AddNoteDrawerProvider from "$lib/features/notes/AddNoteDrawerProvider.svelte";
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
+  import ReportDialogProvider from "$lib/features/report/ReportDialogProvider.svelte";
   import PlayerProvider from "$lib/features/player/YoutubePlayerProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
@@ -162,6 +163,7 @@
                                   <ConfirmationProvider>
                                     <MarkAsWatchedDrawerProvider />
                                     <AddNoteDrawerProvider />
+                                    <ReportDialogProvider />
                                     <CoverImage />
                                     <SeasonalFlair />
 

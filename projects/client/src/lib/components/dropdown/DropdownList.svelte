@@ -250,7 +250,7 @@
     padding: var(--list-padding);
 
     border-radius: var(--border-radius-m);
-    background-color: var(--shade-10);
+    background-color: var(--color-floating-background);
     box-shadow: var(--shadow-menu);
 
     div.spacer {

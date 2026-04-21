@@ -9960,6 +9960,144 @@
         "android",
         "ios"
       ]
+    },
+    "dialog_title_report": {
+      "default": "Report",
+      "description": "Title for the report dialog, shown when a user reports a comment, movie, show, season, episode, list, or user.",
+      "exclude": []
+    },
+    "input_placeholder_report_reason": {
+      "default": "Select a reason",
+      "description": "Placeholder shown when no report reason is selected yet.",
+      "exclude": []
+    },
+    "input_placeholder_report_message": {
+      "default": "Provide details about this report",
+      "description": "Placeholder for the message textarea inside the report dialog.",
+      "exclude": []
+    },
+    "button_text_submit_report": {
+      "default": "Send",
+      "description": "Text for the submit button in the report dialog.",
+      "exclude": []
+    },
+    "button_label_submit_report": {
+      "default": "Submit report",
+      "description": "Aria-label for the submit button in the report dialog.",
+      "exclude": []
+    },
+    "button_text_report_comment": {
+      "default": "Report",
+      "description": "Text for the button in the review action menu that opens the report dialog.",
+      "exclude": []
+    },
+    "button_label_report_comment": {
+      "default": "Report review",
+      "description": "Aria-label for the button in the review action menu that opens the report dialog.",
+      "exclude": []
+    },
+    "label_report_reason_spoilers": {
+      "default": "Spoilers",
+      "description": "Report reason: the content contains undisclosed spoilers.",
+      "exclude": []
+    },
+    "label_report_reason_language": {
+      "default": "Wrong language",
+      "description": "Report reason: the content is in the wrong language, or \u2014 for reviews \u2014 not in English.",
+      "exclude": []
+    },
+    "label_report_reason_abusive": {
+      "default": "Abusive",
+      "description": "Report reason: the content is abusive.",
+      "exclude": []
+    },
+    "label_report_reason_spam": {
+      "default": "Spam",
+      "description": "Report reason: the content is spam.",
+      "exclude": []
+    },
+    "label_report_reason_bigotry": {
+      "default": "Bigotry",
+      "description": "Report reason: the content contains bigotry.",
+      "exclude": []
+    },
+    "label_report_reason_political": {
+      "default": "Political attack",
+      "description": "Report reason: the content is a political attack.",
+      "exclude": []
+    },
+    "label_report_reason_offtopic": {
+      "default": "Off-topic",
+      "description": "Report reason: the content is off-topic.",
+      "exclude": []
+    },
+    "label_report_reason_support": {
+      "default": "Support question",
+      "description": "Report reason: the content is a support question that belongs elsewhere.",
+      "exclude": []
+    },
+    "label_report_reason_duplicate": {
+      "default": "Duplicate",
+      "description": "Report reason: the content is a duplicate of something that already exists.",
+      "exclude": []
+    },
+    "label_report_reason_too_short": {
+      "default": "Too short",
+      "description": "Report reason: the review is too short to be useful.",
+      "exclude": []
+    },
+    "label_report_reason_remove": {
+      "default": "Remove",
+      "description": "Report reason: the item should be removed from Trakt.",
+      "exclude": []
+    },
+    "label_report_reason_data_refresh": {
+      "default": "Data refresh",
+      "description": "Report reason: the item's data needs to be refreshed from its source.",
+      "exclude": []
+    },
+    "label_report_reason_metadata": {
+      "default": "Metadata",
+      "description": "Report reason: the item has incorrect metadata.",
+      "exclude": []
+    },
+    "label_report_reason_adult": {
+      "default": "Adult content",
+      "description": "Report reason: the item contains adult content that isn't flagged.",
+      "exclude": []
+    },
+    "label_report_reason_runtime": {
+      "default": "Runtime",
+      "description": "Report reason: the item's runtime is incorrect.",
+      "exclude": []
+    },
+    "label_report_reason_tmdb": {
+      "default": "TMDB",
+      "description": "Report reason: the item has an issue with its TMDB source.",
+      "exclude": []
+    },
+    "label_report_reason_other": {
+      "default": "Other",
+      "description": "Report reason: something not covered by the other options.",
+      "exclude": []
+    },
+    "error_text_report_already_reported": {
+      "default": "You've already reported this.",
+      "description": "Error shown in the report dialog when the server indicates the user has already reported this item.",
+      "exclude": []
+    },
+    "error_text_report_rate_limited": {
+      "default": "Too many reports in a short period. Please try again later.",
+      "description": "Error shown in the report dialog when the user has exceeded the report rate limit.",
+      "exclude": []
+    },
+    "error_text_report_unknown": {
+      "default": "Something went wrong while submitting this report. If this keeps happening, please <a>submit a new issue</a>.",
+      "description": "Error shown in the report dialog when the report fails for an unexpected reason.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
