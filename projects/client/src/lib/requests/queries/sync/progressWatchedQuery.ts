@@ -45,6 +45,14 @@ const progressWatchedRequest = (
         page,
         limit,
         intent,
+        ...(
+          intent === 'continue'
+            ? {
+              sort_by: 'remaining',
+              sort_how: 'asc',
+            }
+            : {}
+        ),
       },
     });
 
