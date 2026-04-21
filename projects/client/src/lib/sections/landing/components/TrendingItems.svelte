@@ -71,6 +71,14 @@
   }
 
   .trakt-landing-trending-items {
+    --width-card: var(--min-portrait-card-width);
+    --height-card-cover: calc(var(--width-card) * 1.5);
+    --width-portrait-card: var(--width-card);
+    --height-portrait-card-cover: var(--height-card-cover);
+    --height-portrait-card: calc(
+      var(--height-card-cover) + var(--height-card-footer-sm)
+    );
+
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     grid-auto-flow: column;
