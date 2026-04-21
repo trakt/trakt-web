@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MovieContinueEntry } from "$lib/requests/models/MovieProgressEntry";
+  import type { MovieProgressEntry } from "$lib/requests/models/MovieProgressEntry";
   import DropAction from "$lib/sections/media-actions/drop/DropAction.svelte";
   import MediaItem from "../../components/MediaItem.svelte";
   import MarkAsCompletedAction from "./MarkAsCompletedAction.svelte";
@@ -10,7 +10,7 @@
     playbackId,
     style,
   }: {
-    movie: MovieContinueEntry;
+    movie: MovieProgressEntry;
     playbackId: number;
     style: "cover" | "summary";
   } = $props();

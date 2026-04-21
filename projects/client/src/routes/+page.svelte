@@ -16,6 +16,7 @@
   import PersonalHistoryList from "$lib/sections/lists/history/PersonalHistoryList.svelte";
   import UpNextList from "$lib/sections/lists/progress/UpNextList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
+  import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
   import WeeklyPulse from "$lib/sections/stats/WeeklyPulse.svelte";
@@ -45,7 +46,7 @@
     </NavbarStateSetter>
 
     <Banner />
-    <UpNextList intent="continue" />
+    <UpNextList />
 
     <RenderForFeature flag={FeatureFlag.ThisWeek}>
       {#snippet enabled()}
@@ -53,7 +54,12 @@
       {/snippet}
     </RenderForFeature>
 
-    <UpNextList intent="start" />
+    <WatchList
+      drilldownLabel={m.button_label_view_all_start_watching_items()}
+      type={$mode}
+      intent="start"
+    />
+
     <StreakCallout />
     <UpcomingList />
     <PersonalHistoryList mode={$mode} />

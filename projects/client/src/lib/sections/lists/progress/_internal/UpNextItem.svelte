@@ -1,7 +1,7 @@
 <script lang="ts">
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
-  import type { MovieContinueEntry } from "$lib/requests/models/MovieProgressEntry";
+  import type { MovieProgressEntry } from "$lib/requests/models/MovieProgressEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import RestoreAction from "$lib/sections/media-actions/restore/RestoreAction.svelte";
   import DropAction from "../../../media-actions/drop/DropAction.svelte";
@@ -17,7 +17,7 @@
   };
 
   type UpNextMovieProps = {
-    movie: MovieContinueEntry;
+    movie: MovieProgressEntry;
     playbackId: number;
   };
 

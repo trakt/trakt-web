@@ -11,16 +11,6 @@ const createContinueMovie = (
   key,
   airDate,
   lastWatchedAt,
-  intent: 'continue',
-} as MovieProgressEntry);
-
-const createStartMovie = (
-  key: string,
-  airDate: Date,
-): MovieProgressEntry => ({
-  key,
-  airDate,
-  intent: 'start',
 } as MovieProgressEntry);
 
 const createContinueEpisode = (
@@ -29,20 +19,10 @@ const createContinueEpisode = (
   lastWatchedAt: Date | null = null,
 ): UpNextEntry => ({
   key,
-  intent: 'continue',
   show: {
     airDate: showAirDate,
   },
   lastWatchedAt,
-} as UpNextEntry);
-
-const createStartEpisode = (
-  key: string,
-  effectiveReleaseDate: Date,
-): UpNextEntry => ({
-  key,
-  intent: 'start',
-  effectiveReleaseDate,
 } as UpNextEntry);
 
 describe('interleaveMediaProgress', () => {
@@ -85,35 +65,7 @@ describe('interleaveMediaProgress', () => {
     });
   });
 
-  describe('with "start" intent', () => {
-    it('should interleave based on airDate', () => {
-      const episodes = [
-        createStartEpisode('episode-2', new Date('2024-01-10')),
-        createStartEpisode('episode-1', new Date('2024-01-01')),
-      ];
-      const movies = [
-        createStartMovie('movie-4', new Date('2024-01-12')),
-        createStartMovie('movie-3', new Date('2024-01-11')),
-        createStartMovie('movie-2', new Date('2024-01-03')),
-        createStartMovie('movie-1', new Date('2024-01-02')),
-      ];
-
-      const result = interleaveMediaProgress({
-        episodes,
-        movies,
-      });
-
-      expect(result).toHaveLength(6);
-      expect(result[0]!.key).toBe('movie-4');
-      expect(result[1]!.key).toBe('movie-3');
-      expect(result[2]!.key).toBe('episode-2');
-      expect(result[3]!.key).toBe('movie-2');
-      expect(result[4]!.key).toBe('movie-1');
-      expect(result[5]!.key).toBe('episode-1');
-    });
-  });
-
-  describe('with "continue" intent', () => {
+  describe('with progress data', () => {
     it('should interleave movies based on lastWatchedAt', () => {
       const episodes = [
         createContinueEpisode(

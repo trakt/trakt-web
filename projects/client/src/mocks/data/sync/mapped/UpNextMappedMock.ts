@@ -4,7 +4,6 @@ import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSi
 
 export const UpNextMappedMock: UpNextEntry[] = [
   {
-    'intent': 'continue',
     'completed': 0,
     'remaining': 20,
     'show': ShowSiloMappedMock,

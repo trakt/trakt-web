@@ -4133,6 +4133,14 @@
         "ios"
       ]
     },
+    "button_label_view_all_start_watching_items": {
+      "default": "View all start watching items",
+      "description": "Aria-label for the button that allows users to view all start watching items.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "button_text_shows": {
       "default": "Shows",
       "description": "Text for the button that allows users to toggle shows in the watchlist.",

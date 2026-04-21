@@ -19,6 +19,7 @@ type WatchlistParams =
     sortBy: SortBy;
     sortHow?: SortDirection | Nil;
     type?: MediaType;
+    hide?: 'unreleased';
   }
   & PaginationParams
   & ApiParams
@@ -40,7 +41,7 @@ function typeToWatchlistMethod(type?: MediaType) {
 }
 
 const watchlistRequest = (
-  { fetch, sortBy, sortHow, type, limit, page, filter }: WatchlistParams,
+  { fetch, sortBy, sortHow, type, limit, page, filter, hide }: WatchlistParams,
 ) => {
   const method = typeToWatchlistMethod(type);
 
@@ -56,6 +57,7 @@ const watchlistRequest = (
         limit,
         sort_by: sortBy,
         sort_how: sortHow,
+        hide,
         ...filter,
       },
     });
@@ -68,6 +70,7 @@ export const watchlistQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('movie'),
     InvalidateAction.MarkAsWatched('show'),
+    InvalidateAction.MarkAsWatched('episode'),
   ],
   dependencies: (
     params: WatchlistParams,
@@ -77,6 +80,7 @@ export const watchlistQuery = defineInfiniteQuery({
     params.sortHow,
     params.limit,
     params.page,
+    params.hide,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: watchlistRequest,
