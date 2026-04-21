@@ -11,9 +11,10 @@
 
   const { mode, current: currentDiscoverMode } = useDiscover();
 
-  const { current, update, options, urlBuilder } = $derived(
-    useListSorting({ type: "watchlist" }),
-  );
+  const { current, update, options, urlBuilder } = useListSorting({
+    type: "watchlist",
+    intent: "default",
+  });
 </script>
 
 <TraktPage
