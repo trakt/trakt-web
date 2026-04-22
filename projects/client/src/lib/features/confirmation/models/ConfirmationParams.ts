@@ -70,6 +70,12 @@ interface ConfirmationParamsMap {
   [ConfirmationType.CancelImport]: {
     type: ConfirmationType.CancelImport;
   };
+  [ConfirmationType.CancelReset]: {
+    type: ConfirmationType.CancelReset;
+  };
+  [ConfirmationType.ClearWatchlist]: {
+    type: ConfirmationType.ClearWatchlist;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

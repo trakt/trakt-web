@@ -6625,7 +6625,7 @@
       ]
     },
     "import_status_parsing": {
-      "default": "Parsing your data\u2026",
+      "default": "Parsing your data…",
       "description": "Status text shown while the import file is being parsed.",
       "exclude": [
         "android",
@@ -6633,7 +6633,7 @@
       ]
     },
     "import_status_syncing": {
-      "default": "Syncing {processed} / {total} items\u2026",
+      "default": "Syncing {processed} / {total} items…",
       "description": "Status text shown while items are being synced to Trakt.",
       "variables": {
         "processed": {
@@ -6753,6 +6753,94 @@
     "button_label_import_more": {
       "default": "Reset and start a new import.",
       "description": "Aria-label for the import more button.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_clear_data": {
+      "default": "Clear Data",
+      "description": "Header for the settings section that allows users to clear their Trakt data.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_clear_data": {
+      "default": "Permanently delete data from your Trakt account.",
+      "description": "Description for the clear data settings section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_clear_watchlist": {
+      "default": "Clear watchlist",
+      "description": "Label for the row in clear data settings that allows users to clear their entire watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_clear_watchlist": {
+      "default": "Clear now",
+      "description": "Text for the button that clears the user's entire watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_clear_watchlist": {
+      "default": "Clear all items from your watchlist",
+      "description": "Aria-label for the button that clears the user's entire watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "warning_prompt_clear_watchlist": {
+      "default": "Are you sure you want to clear your entire watchlist? This cannot be undone.",
+      "description": "Warning prompt shown when a user tries to clear their entire watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "reset_status_cleared": {
+      "default": "Watchlist cleared.",
+      "description": "Status text shown when a watchlist clear has completed successfully.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "reset_status_clearing": {
+      "default": "Clearing {processed} / {total} items…",
+      "description": "Status text shown while watchlist items are being deleted.",
+      "variables": {
+        "processed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_stop_reset": {
+      "default": "Stop Clearing",
+      "description": "Text for the button that stops an in-progress watchlist clear when navigating away.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "warning_prompt_cancel_reset": {
+      "default": "Your watchlist is being cleared. Navigating away will stop it. Are you sure?",
+      "description": "Warning message shown when a user tries to navigate away while a watchlist clear is in progress.",
       "exclude": [
         "android",
         "ios"

@@ -125,5 +125,17 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_cancel_import(),
         operation: 'destructive',
       };
+    case ConfirmationType.CancelReset:
+      return {
+        buttonText: m.button_text_stop_reset(),
+        message: m.warning_prompt_cancel_reset(),
+        operation: 'destructive',
+      };
+    case ConfirmationType.ClearWatchlist:
+      return {
+        buttonText: m.button_text_clear_watchlist(),
+        message: m.warning_prompt_clear_watchlist(),
+        operation: 'destructive',
+      };
   }
 }
