@@ -6,7 +6,7 @@
   import { linear } from "svelte/easing";
   import { slide } from "svelte/transition";
   import {
-    Drawers,
+    SummaryDrawers,
     summaryDrawerNavigation,
   } from "../../_internal/summaryDrawerNavigation.ts";
 
@@ -19,7 +19,7 @@
 </script>
 
 <watch-count-tag>
-  <Link href={buildDrawerLink(Drawers.History)} noscroll>
+  <Link {...buildDrawerLink(SummaryDrawers.History)}>
     <StemTag
       --color-background-stem-tag="var(--shade-10)"
       --color-foreground-stem-tag="var(--shade-920)"

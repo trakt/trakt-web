@@ -5,8 +5,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import BannerContainer from "$lib/sections/banner/_internal/BannerContainer.svelte";
   import {
-      dashboardDrawerNavigation,
-      DashboardDrawers,
+    dashboardDrawerNavigation,
+    DashboardDrawers,
   } from "../dashboard/_internal/dashboardDrawerNavigation";
   import StreakIcon from "./_internal/icons/StreakIcon.svelte";
   import StreakAccumulator from "./_internal/StreakAccumulator.svelte";
@@ -101,7 +101,7 @@
 {:else}
   <BannerContainer variant="fluid">
     <trakt-streak-callout>
-      <Link href={drilldownLink} noscroll>
+      <Link {...drilldownLink}>
         <div class="trakt-streak-callout">
           <div class="trakt-streak-left">
             <div class="trakt-streak-flame">

@@ -6,7 +6,7 @@
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
   import {
-    Drawers,
+    SummaryDrawers,
     summaryDrawerNavigation,
   } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -54,7 +54,7 @@
     <SeasonPopupMenu title={subtitle} {episodes} {show} />
 
     <ViewAllButton
-      href={buildDrawerLink(Drawers.Seasons)}
+      {...buildDrawerLink(SummaryDrawers.Seasons)}
       label={m.button_text_view_all()}
       noscroll
       source={{ id: "seasons" }}

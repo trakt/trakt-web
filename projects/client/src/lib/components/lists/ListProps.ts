@@ -9,4 +9,5 @@ export type ListProps<T> = {
   actions?: Snippet;
   drilldownLink?: string;
   noscroll?: boolean;
+  replacestate?: boolean;
 };

@@ -6,13 +6,17 @@ export function drawerNavigation<T extends string>() {
   const buildDrawerLink = (drawer: T) => {
     const url = new URL(page.url);
     url.searchParams.set(DRAWER_VIEW_PARAM, drawer);
-    return url.toString();
+    return {
+      href: url.toString(),
+      noscroll: true,
+      replacestate: true,
+    };
   };
 
   const close = () => {
     const url = new URL(page.url);
     url.searchParams.delete(DRAWER_VIEW_PARAM);
-    goto(url, { noScroll: true });
+    goto(url, { noScroll: true, replaceState: true });
   };
 
   return {

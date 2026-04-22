@@ -4,7 +4,7 @@
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
   import {
-    Drawers,
+    SummaryDrawers,
     summaryDrawerNavigation,
   } from "../summary/_internal/summaryDrawerNavigation";
   import CastMemberItem from "./components/CastMemberItem.svelte";
@@ -15,19 +15,21 @@
     cast: CastMember[];
     slug: string;
     type: ExtendedMediaType;
-    drilldownLink?: string;
   };
 
-  const { title, cast, slug, type, drilldownLink }: CastListProps = $props();
+  const { title, cast, slug, type }: CastListProps = $props();
+
   const { buildDrawerLink } = summaryDrawerNavigation();
+  const castDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Cast));
 </script>
 
 <SectionList
   id={`cast-list-${slug}`}
   items={cast}
   {title}
-  {drilldownLink}
-  noscroll={drilldownLink != null}
+  drilldownLink={castDrawerLink.href}
+  noscroll={castDrawerLink.noscroll}
+  replacestate={castDrawerLink.replacestate}
   --height-list="var(--height-person-list)"
 >
   {#snippet item(castMember)}
@@ -36,7 +38,7 @@
 
   {#snippet actions()}
     <ViewAllButton
-      href={buildDrawerLink(Drawers.Cast)}
+      {...castDrawerLink}
       label={m.button_text_view_all()}
       noscroll
       disabled={cast.length === 0}

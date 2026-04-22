@@ -4,7 +4,7 @@
   import { m } from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import {
-    Drawers,
+    SummaryDrawers,
     summaryDrawerNavigation,
   } from "$lib/sections/summary/_internal/summaryDrawerNavigation.ts";
 
@@ -19,8 +19,7 @@
     style="flat"
     color="default"
     {variant}
-    href={buildDrawerLink(Drawers.History)}
-    noscroll
+    {...buildDrawerLink(SummaryDrawers.History)}
     label={m.button_label_view_all_history()}
   >
     {m.list_title_history()}

@@ -6,7 +6,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import {
-    Drawers,
+    SummaryDrawers,
     summaryDrawerNavigation,
   } from "../../../_internal/summaryDrawerNavigation.ts";
   import SentimentSummary from "./SentimentSummary.svelte";
@@ -23,9 +23,8 @@
 
 <div class="trakt-sentiment-card">
   <Link
-    href={buildDrawerLink(Drawers.Sentiment)}
+    {...buildDrawerLink(SummaryDrawers.Sentiment)}
     label={m.button_label_view_sentiment_analysis()}
-    noscroll
     color="inherit"
     onclick={() => track({ source: "sentiment" })}
   >

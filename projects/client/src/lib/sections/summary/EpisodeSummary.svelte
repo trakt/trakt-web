@@ -8,10 +8,6 @@
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
-  import {
-    Drawers,
-    summaryDrawerNavigation,
-  } from "./_internal/summaryDrawerNavigation";
   import SummaryCover from "./components/_internal/SummaryCover.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import EpisodeSummary from "./components/episode/EpisodeSummary.svelte";
@@ -29,8 +25,6 @@
     crew,
   }: EpisodeSummaryProps = $props();
 
-  const { buildDrawerLink } = summaryDrawerNavigation();
-  const castDrawerLink = $derived(buildDrawerLink(Drawers.Cast));
   const relatedLink = $derived(
     UrlBuilder.related.episode(show.slug, episode.season, episode.number),
   );
@@ -101,7 +95,6 @@
   cast={crew.cast}
   slug={show.slug}
   type="episode"
-  drilldownLink={castDrawerLink}
 />
 
 <Comments
