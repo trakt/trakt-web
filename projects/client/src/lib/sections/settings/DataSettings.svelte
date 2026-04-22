@@ -1,6 +1,7 @@
 <script lang="ts">
   import RawExport from "./_internal/RawExport.svelte";
   import RawImport from "./_internal/RawImport.svelte";
+  import ResetData from "./_internal/ResetData.svelte";
   import SettingsDrawer from "./SettingsDrawer.svelte";
 </script>
 
@@ -8,6 +9,7 @@
   <SettingsDrawer />
   <RawImport />
   <RawExport />
+  <ResetData />
 </div>
 
 <style>
