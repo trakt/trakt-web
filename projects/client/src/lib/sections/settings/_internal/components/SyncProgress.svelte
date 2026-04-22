@@ -1,26 +1,26 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages.ts";
   import { slide } from "svelte/transition";
 
-  type ImportProgressProps = {
+  type SyncProgressProps = {
     processedCount: number;
     totalCount: number;
+    label: string;
   };
 
-  const { processedCount, totalCount }: ImportProgressProps = $props();
+  const { processedCount, totalCount, label }: SyncProgressProps = $props();
 
   const percentage = $derived(
     totalCount > 0 ? Math.round((processedCount / totalCount) * 100) : 0,
   );
 </script>
 
-<div class="import-progress" transition:slide={{ duration: 150, axis: "y" }}>
+<div class="sync-progress" transition:slide={{ duration: 150, axis: "y" }}>
   <p class="secondary">
-    {m.import_status_syncing({ processed: processedCount, total: totalCount })}
+    {label}
   </p>
-  <div class="import-progress-bar-track">
+  <div class="sync-progress-bar-track">
     <div
-      class="import-progress-bar-fill"
+      class="sync-progress-bar-fill"
       style="width: {percentage}%"
       role="progressbar"
       aria-valuenow={processedCount}
@@ -31,20 +31,20 @@
 </div>
 
 <style>
-  .import-progress {
+  .sync-progress {
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
   }
 
-  .import-progress-bar-track {
+  .sync-progress-bar-track {
     height: var(--ni-6);
     border-radius: var(--border-radius-xs);
     background-color: color-mix(in srgb, var(--color-border) 50%, transparent);
     overflow: hidden;
   }
 
-  .import-progress-bar-fill {
+  .sync-progress-bar-fill {
     height: 100%;
     border-radius: var(--border-radius-xs);
     background-color: var(--color-background-purple);
