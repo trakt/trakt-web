@@ -1,7 +1,5 @@
-import { goto } from '$app/navigation';
-import { page } from '$app/state';
-
-const VIEW_PARAM = 'view';
+import { DRAWER_VIEW_PARAM } from '$lib/components/drawer/constants/index.ts';
+import { drawerNavigation } from '$lib/components/drawer/drawerNavigation.ts';
 
 export enum ImportDrawers {
   JsonGuidelines = 'json-guidelines',
@@ -20,19 +18,7 @@ function mapToDrawer(value: string | Nil): ImportDrawers | null {
 }
 
 export function importDrawerNavigation(searchParams?: URLSearchParams) {
-  const drawer = mapToDrawer(searchParams?.get(VIEW_PARAM));
+  const drawer = mapToDrawer(searchParams?.get(DRAWER_VIEW_PARAM));
 
-  const buildDrawerLink = (drawer: ImportDrawers) => {
-    const url = new URL(page.url);
-    url.searchParams.set(VIEW_PARAM, drawer);
-    return url.toString();
-  };
-
-  const close = () => {
-    const url = new URL(page.url);
-    url.searchParams.delete(VIEW_PARAM);
-    goto(url, { noScroll: true });
-  };
-
-  return { drawer, buildDrawerLink, close };
+  return { drawer, ...drawerNavigation<ImportDrawers>() };
 }
