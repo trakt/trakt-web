@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { beforeNavigate, goto } from "$app/navigation";
+  import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
+  import NavigationGuard from "$lib/components/NavigationGuard.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useAnalytics } from "$lib/features/analytics/useAnalytics";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
@@ -24,11 +24,12 @@
   } from "../import/ImportTypes.ts";
   import { getParser } from "../import/parsers/getParser.ts";
   import { syncToTrakt } from "../import/syncToTrakt.ts";
+  import type { SyncState } from "../sync/models/SyncState.ts";
+  import SyncProgress from "./components/SyncProgress.svelte";
   import ImportComplete from "./import/ImportComplete.svelte";
   import ImportDropzone from "./import/ImportDropzone.svelte";
   import ImportError from "./import/ImportError.svelte";
   import ImportGuide from "./import/ImportGuide.svelte";
-  import ImportProgress from "./import/ImportProgress.svelte";
   import ImportSummary from "./import/ImportSummary.svelte";
   import SettingsBlock from "./SettingsBlock.svelte";
 
@@ -41,11 +42,9 @@
   const { invalidate } = useInvalidator();
   const { record } = useAnalytics();
 
-  type ImportUIState = {
+  type ImportUIState = SyncState<ImportStatus> & {
     selectedSource: ImportSource;
-    status: ImportStatus;
     parsedItems: ReadonlyArray<UniversalImportItem>;
-    processedCount: number;
     errorCount: number;
     parseError: string | null;
   };
@@ -57,6 +56,7 @@
     processedCount: 0,
     errorCount: 0,
     parseError: null,
+    totalCount: 0,
   });
 
   const counts = $derived<ImportCounts>({
@@ -82,6 +82,7 @@
 
     try {
       state.parsedItems = await parser.parse(fileArray);
+      state.totalCount = state.parsedItems.length;
       state.status = "review";
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : String(err);
@@ -128,13 +129,13 @@
       });
 
       const duration = Date.now() - startTime;
-      const successCount = state.parsedItems.length - failed;
+      const successCount = state.totalCount - failed;
 
       state.errorCount = failed;
 
       record(AnalyticsEvent.ImportCompleted, {
         source: state.selectedSource,
-        totalItems: state.parsedItems.length,
+        totalItems: state.totalCount,
         historyCount: counts.history,
         watchlistCount: counts.watchlist,
         ratingsCount: counts.ratings,
@@ -180,45 +181,6 @@
     goto(url, { replaceState: true, noScroll: true, keepFocus: true });
   }
 
-  const { confirm } = useConfirm();
-
-  beforeNavigate((nav) => {
-    if (state.status !== "syncing") return;
-    if (nav.willUnload) return;
-
-    nav.cancel();
-
-    confirm({
-      type: ConfirmationType.CancelImport,
-      onConfirm: () => {
-        reset();
-
-        if (nav.to) {
-          // eslint-disable-next-line svelte/no-navigation-without-resolve
-          goto(nav.to.url);
-        }
-      },
-    })();
-  });
-
-  $effect(() => {
-    if (state.status !== "syncing") return;
-
-    const onBeforeUnload = (event: BeforeUnloadEvent) => {
-      event.preventDefault();
-      /*
-        Many browsers ignore event.preventDefault() for the
-        beforeunload event unless returnValue is also set
-      */
-      event.returnValue = "";
-    };
-
-    globalThis.window.addEventListener("beforeunload", onBeforeUnload);
-    return () => {
-      globalThis.window.removeEventListener("beforeunload", onBeforeUnload);
-    };
-  });
-
   const getTabLabel = (config: ImportSourceConfig) => {
     switch (config.id) {
       case "trakt-json":
@@ -232,36 +194,53 @@
 </script>
 
 {#snippet importRow()}
-  <div class="trakt-import-row">
-    <ImportGuide config={sourceConfig} />
-    <div class="import-body">
-      {#if state.status === "parsing"}
-        <p class="secondary" transition:slide={{ duration: 150, axis: "y" }}>
-          {m.import_status_parsing()}
-        </p>
-      {:else if state.status === "idle" || state.status === "reading"}
-        <ImportDropzone
-          accept={sourceConfig.accept}
-          maxFiles={sourceConfig.maxFiles}
-          prompt={getDropPrompt()}
-          onfiles={handleFiles}
-        />
-      {:else if state.status === "review"}
-        <ImportSummary
-          {counts}
-          totalItems={state.parsedItems.length}
-          onstart={startImport}
-          onreset={reset}
-        />
-      {:else if state.status === "syncing"}
-        <ImportProgress processedCount={state.processedCount} totalCount={state.parsedItems.length} />
-      {:else if state.status === "complete"}
-        <ImportComplete processedCount={state.processedCount} errorCount={state.errorCount} onreset={reset} />
-      {:else if state.status === "error"}
-        <ImportError error={state.parseError ?? ""} onreset={reset} />
-      {/if}
+  <NavigationGuard
+    isActive={state.status === "syncing"}
+    confirmationParams={{ type: ConfirmationType.CancelImport }}
+    onreset={reset}
+  >
+    <div class="trakt-import-row">
+      <ImportGuide config={sourceConfig} />
+      <div class="import-body">
+        {#if state.status === "parsing"}
+          <p class="secondary" transition:slide={{ duration: 150, axis: "y" }}>
+            {m.import_status_parsing()}
+          </p>
+        {:else if state.status === "idle" || state.status === "reading"}
+          <ImportDropzone
+            accept={sourceConfig.accept}
+            maxFiles={sourceConfig.maxFiles}
+            prompt={getDropPrompt()}
+            onfiles={handleFiles}
+          />
+        {:else if state.status === "review"}
+          <ImportSummary
+            {counts}
+            totalItems={state.totalCount}
+            onstart={startImport}
+            onreset={reset}
+          />
+        {:else if state.status === "syncing"}
+          <SyncProgress
+            processedCount={state.processedCount}
+            totalCount={state.totalCount}
+            label={m.import_status_syncing({
+              processed: state.processedCount,
+              total: state.totalCount,
+            })}
+          />
+        {:else if state.status === "complete"}
+          <ImportComplete
+            processedCount={state.processedCount}
+            errorCount={state.errorCount}
+            onreset={reset}
+          />
+        {:else if state.status === "error"}
+          <ImportError error={state.parseError ?? ""} onreset={reset} />
+        {/if}
+      </div>
     </div>
-  </div>
+  </NavigationGuard>
 {/snippet}
 
 <SettingsBlock title={m.header_import()} description={m.description_import()}>
