@@ -8,11 +8,13 @@
     style,
     href,
     noscroll,
+    replacestate,
   }: {
     title: string;
     metaInfo?: Snippet;
     href?: string;
     noscroll?: boolean;
+    replacestate?: boolean;
     style: "primary" | "secondary";
   } = $props();
 </script>
@@ -25,7 +27,7 @@
 
 <div class="trakt-list-title">
   {#if href}
-    <Link {href} {noscroll}>{@render content()}</Link>
+    <Link {href} {noscroll} {replacestate}>{@render content()}</Link>
   {:else}
     {@render content()}
   {/if}

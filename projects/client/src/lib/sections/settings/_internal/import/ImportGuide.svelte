@@ -15,7 +15,7 @@
 
   const { buildDrawerLink } = importDrawerNavigation();
 
-  const guidelinesHref = $derived.by(() => {
+  const guidelinesLink = $derived.by(() => {
     switch (config.id) {
       case "trakt-json":
         return buildDrawerLink(ImportDrawers.JsonGuidelines);
@@ -57,11 +57,10 @@
     </ol>
   {/if}
 
-  {#if guidelinesHref}
+  {#if guidelinesLink}
     <div class="import-guide-action">
       <Button
-        href={guidelinesHref}
-        noscroll
+        {...guidelinesLink}
         variant="primary"
         color="default"
         size="small"

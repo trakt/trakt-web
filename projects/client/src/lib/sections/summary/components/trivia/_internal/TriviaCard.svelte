@@ -10,7 +10,7 @@
   import type { MediaTrivia } from "$lib/requests/models/MediaTrivia";
   import ShadowScroller from "$lib/sections/components/ShadowScroller.svelte";
   import {
-    Drawers,
+    SummaryDrawers,
     summaryDrawerNavigation,
   } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import { Marked } from "marked";
@@ -56,9 +56,8 @@
 {#snippet triviaSummaryCard()}
   <div class="trakt-trivia-summary-card">
     <Link
-      href={buildDrawerLink(Drawers.Trivia)}
+      {...buildDrawerLink(SummaryDrawers.Trivia)}
       label={m.button_label_view_trivia()}
-      noscroll
       color="inherit"
       onclick={() => track({ source: "trivia" })}
     >

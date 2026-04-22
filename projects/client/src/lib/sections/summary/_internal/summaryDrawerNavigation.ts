@@ -1,7 +1,7 @@
 import { DRAWER_VIEW_PARAM } from '$lib/components/drawer/constants/index.ts';
 import { drawerNavigation } from '$lib/components/drawer/drawerNavigation.ts';
 
-export enum Drawers {
+export enum SummaryDrawers {
   Sentiment = 'sentiment',
   Details = 'details',
   Cast = 'cast',
@@ -14,22 +14,22 @@ export enum Drawers {
 
 function mapToDrawer(value: string | Nil) {
   switch (value) {
-    case Drawers.Sentiment:
-      return Drawers.Sentiment;
-    case Drawers.Details:
-      return Drawers.Details;
-    case Drawers.Cast:
-      return Drawers.Cast;
-    case Drawers.Videos:
-      return Drawers.Videos;
-    case Drawers.Trivia:
-      return Drawers.Trivia;
-    case Drawers.History:
-      return Drawers.History;
-    case Drawers.WhereToWatch:
-      return Drawers.WhereToWatch;
-    case Drawers.Seasons:
-      return Drawers.Seasons;
+    case SummaryDrawers.Sentiment:
+      return SummaryDrawers.Sentiment;
+    case SummaryDrawers.Details:
+      return SummaryDrawers.Details;
+    case SummaryDrawers.Cast:
+      return SummaryDrawers.Cast;
+    case SummaryDrawers.Videos:
+      return SummaryDrawers.Videos;
+    case SummaryDrawers.Trivia:
+      return SummaryDrawers.Trivia;
+    case SummaryDrawers.History:
+      return SummaryDrawers.History;
+    case SummaryDrawers.WhereToWatch:
+      return SummaryDrawers.WhereToWatch;
+    case SummaryDrawers.Seasons:
+      return SummaryDrawers.Seasons;
     default:
       return null;
   }
@@ -40,6 +40,6 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
 
   return {
     drawer,
-    ...drawerNavigation<Drawers>(),
+    ...drawerNavigation<SummaryDrawers>(),
   };
 }

@@ -6,7 +6,7 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { m } from "$lib/features/i18n/messages";
   import {
-    Drawers,
+    SummaryDrawers,
     summaryDrawerNavigation,
   } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
 
@@ -28,8 +28,7 @@
   const onclick = () => track({ source: "details" });
 
   const commonProps = $derived({
-    href: buildDrawerLink(Drawers.Details),
-    noscroll: true,
+    ...buildDrawerLink(SummaryDrawers.Details),
     label: m.button_label_details({ title }),
     onclick,
   });

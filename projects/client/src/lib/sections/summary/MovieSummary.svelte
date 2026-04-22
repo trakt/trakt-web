@@ -11,10 +11,6 @@
   import RelatedList from "../lists/RelatedList.svelte";
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
-  import {
-    Drawers,
-    summaryDrawerNavigation,
-  } from "./_internal/summaryDrawerNavigation";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
@@ -23,10 +19,6 @@
   import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
   import SummaryDrawer from "./SummaryDrawer.svelte";
-
-  const { buildDrawerLink } = summaryDrawerNavigation();
-  const castDrawerLink = $derived(buildDrawerLink(Drawers.Cast));
-  const videosDrawerLink = $derived(buildDrawerLink(Drawers.Videos));
 
   const {
     media,
@@ -74,12 +66,11 @@
   cast={crew.cast}
   slug={media.slug}
   type={media.type}
-  drilldownLink={castDrawerLink}
 />
 
 <Comments {media} type="movie" />
 
-<VideoList slug={media.slug} {videos} drilldownLink={videosDrawerLink} />
+<VideoList slug={media.slug} {videos} />
 
 <RelatedList
   title={m.list_title_related_movies()}

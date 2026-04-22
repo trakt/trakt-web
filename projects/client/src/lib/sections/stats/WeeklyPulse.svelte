@@ -14,7 +14,9 @@
   import { pairStatRuns } from "./_internal/utils/pairStatRuns.ts";
 
   const { buildDrawerLink } = dashboardDrawerNavigation();
-  const drilldownLink = $derived(buildDrawerLink(DashboardDrawers.WeeklyPulse));
+  const weeklyPulseDrawerLink = $derived(
+    buildDrawerLink(DashboardDrawers.WeeklyPulse),
+  );
 
   const { items, isLoading, dateRange } = useWeeklyPulse();
 
@@ -28,7 +30,9 @@
     id="weekly-pulse"
     items={orderedItems}
     title={m.header_stats_this_week()}
-    {drilldownLink}
+    drilldownLink={weeklyPulseDrawerLink.href}
+    noscroll={weeklyPulseDrawerLink.noscroll}
+    replacestate={weeklyPulseDrawerLink.replacestate}
     --height-list="var(--height-pulse-list)"
   >
     {#snippet metaInfo()}
@@ -62,7 +66,7 @@
 
     {#snippet actions()}
       <ViewAllButton
-        href={drilldownLink}
+        {...weeklyPulseDrawerLink}
         label={m.button_text_view_all()}
         disabled={$items.length === 0}
         source={{ id: "weekly-pulse" }}

@@ -7,7 +7,7 @@
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import {
-    Drawers,
+    SummaryDrawers,
     summaryDrawerNavigation,
   } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import type { Snippet } from "svelte";
@@ -41,6 +41,7 @@
   const hasUnseenEpisodes = $derived(!showProgress?.isWatched);
 
   const { buildDrawerLink } = summaryDrawerNavigation();
+  const seasonDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Seasons));
 </script>
 
 <SectionList
@@ -49,8 +50,9 @@
   {title}
   {subtitle}
   --height-list={mediaListHeightResolver("landscape")}
-  drilldownLink={buildDrawerLink(Drawers.Seasons)}
-  noscroll
+  drilldownLink={seasonDrawerLink.href}
+  noscroll={seasonDrawerLink.noscroll}
+  replacestate={seasonDrawerLink.replacestate}
 >
   {#snippet item(episode)}
     <SeasonEpisodeItem
@@ -70,7 +72,7 @@
     {/if}
 
     <ViewAllButton
-      href={buildDrawerLink(Drawers.Seasons)}
+      {...seasonDrawerLink}
       label={m.button_text_view_all()}
       noscroll
       source={{ id: "seasons" }}

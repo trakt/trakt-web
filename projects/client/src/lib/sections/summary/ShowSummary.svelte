@@ -13,10 +13,6 @@
   import SeasonList from "../lists/season/SeasonList.svelte";
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
-  import {
-    Drawers,
-    summaryDrawerNavigation,
-  } from "./_internal/summaryDrawerNavigation";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
@@ -47,9 +43,6 @@
     sentiment,
   }: ShowSummaryProps = $props();
 
-  const { buildDrawerLink } = summaryDrawerNavigation();
-  const castDrawerLink = $derived(buildDrawerLink(Drawers.Cast));
-  const videosDrawerLink = $derived(buildDrawerLink(Drawers.Videos));
   const relatedLink = $derived(UrlBuilder.related.show(media.slug));
   const listsLink = $derived(UrlBuilder.popularLists.show(media.slug));
 
@@ -101,12 +94,11 @@
   cast={crew.cast}
   slug={media.slug}
   type={media.type}
-  drilldownLink={castDrawerLink}
 />
 
 <Comments {media} type="show" />
 
-<VideoList slug={media.slug} {videos} drilldownLink={videosDrawerLink} />
+<VideoList slug={media.slug} {videos} />
 
 <SeasonList show={media} {seasons} {currentSeason} />
 

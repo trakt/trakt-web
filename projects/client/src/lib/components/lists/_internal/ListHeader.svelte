@@ -14,6 +14,7 @@
     navigationType,
     href,
     noscroll,
+    replacestate,
     listActions,
     ...props
   }: {
@@ -26,6 +27,7 @@
     navigationType?: DpadNavigationType;
     href?: string;
     noscroll?: boolean;
+    replacestate?: boolean;
   } & HTMLElementProps = $props();
 </script>
 
@@ -44,9 +46,23 @@
         {@render titleAction({ device: ["desktop", "tablet-lg"] })}
 
         {#if subtitle == null}
-          <ListTitle {title} {href} {noscroll} {metaInfo} style="primary" />
+          <ListTitle
+            {title}
+            {href}
+            {noscroll}
+            {replacestate}
+            {metaInfo}
+            style="primary"
+          />
         {:else}
-          <ListTitle {title} {href} {noscroll} {metaInfo} style="secondary" />
+          <ListTitle
+            {title}
+            {href}
+            {noscroll}
+            {replacestate}
+            {metaInfo}
+            style="secondary"
+          />
           <ListTitle title={`/ ${subtitle}`} style="primary" />
         {/if}
 
