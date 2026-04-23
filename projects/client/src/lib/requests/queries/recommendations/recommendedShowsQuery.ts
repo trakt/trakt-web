@@ -47,6 +47,7 @@ export const recommendedShowsQuery = defineQuery({
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
+    InvalidateAction.HideRecommended('show'),
   ],
   dependencies: (
     params,

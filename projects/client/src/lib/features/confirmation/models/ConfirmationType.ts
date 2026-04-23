@@ -19,4 +19,5 @@ export enum ConfirmationType {
   CancelImport = 'cancel-import',
   CancelReset = 'cancel-reset',
   ClearWatchlist = 'clear-watchlist',
+  HideRecommendation = 'hide-recommendation',
 }

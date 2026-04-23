@@ -58,6 +58,8 @@ export const recommendedMediaQuery = defineQuery({
     InvalidateAction.MarkAsWatched('episode'),
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
+    InvalidateAction.HideRecommended('show'),
+    InvalidateAction.HideRecommended('movie'),
   ],
   dependencies: (
     params: RecommendedMediaParams,

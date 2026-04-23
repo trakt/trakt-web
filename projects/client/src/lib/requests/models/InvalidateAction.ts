@@ -22,7 +22,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:smart_list:${ListType}`
   | `${typeof INVALIDATION_ID}:commented:${ExtendedMediaType}`
   | `${typeof INVALIDATION_ID}:notes:${MediaType}`
-  | `${typeof INVALIDATION_ID}:vip:${VipType}`;
+  | `${typeof INVALIDATION_ID}:vip:${VipType}`
+  | `${typeof INVALIDATION_ID}:hide_recommended:${MediaType}`;
 
 type TypeDataMap = {
   'auth': null;
@@ -42,6 +43,7 @@ type TypeDataMap = {
   'smart_list': ListType;
   'notes': MediaType;
   'vip': VipType;
+  'hide_recommended': MediaType;
 };
 
 export function invalidationId(key?: string) {
@@ -113,4 +115,7 @@ export const InvalidateAction = {
   Vip: {
     Canceled: buildInvalidationKey('vip', 'canceled'),
   },
+
+  HideRecommended: (type: MediaType) =>
+    buildInvalidationKey('hide_recommended', type),
 };

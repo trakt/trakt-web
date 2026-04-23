@@ -49,6 +49,7 @@ export const AnalyticsEvent = {
   Extras: buildEventKey(MEDIA_ACTION_PREFIX, 'extras'),
   Trailer: buildEventKey(MEDIA_ACTION_PREFIX, 'trailer'),
   StreamOn: buildEventKey(MEDIA_ACTION_PREFIX, 'stream-on'),
+  HideRecommendation: buildEventKey(MEDIA_ACTION_PREFIX, 'hide-recommendation'),
 
   Settings: buildEventKey(USER_ACTION_PREFIX, 'settings'),
   CoverImage: buildEventKey(USER_ACTION_PREFIX, 'cover-image'),

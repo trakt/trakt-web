@@ -84,6 +84,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Extras]: ExtrasType;
   [AnalyticsEvent.Trailer]: { slug: string };
   [AnalyticsEvent.StreamOn]: StreamOnType;
+  [AnalyticsEvent.HideRecommendation]: { type: MediaType };
 
   [AnalyticsEvent.Settings]: { settings: string };
   [AnalyticsEvent.CoverImage]: CoverImageType;
