@@ -46,6 +46,7 @@ export const recommendedMoviesQuery = defineQuery({
   invalidations: [
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
+    InvalidateAction.HideRecommended('movie'),
   ],
   dependencies: (
     params,

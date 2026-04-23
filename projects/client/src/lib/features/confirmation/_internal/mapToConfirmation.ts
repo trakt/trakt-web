@@ -137,5 +137,11 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_clear_watchlist(),
         operation: 'destructive',
       };
+    case ConfirmationType.HideRecommendation:
+      return {
+        buttonText: m.button_text_hide_recommendation(),
+        message: m.warning_prompt_hide_recommendation({ title: props.title }),
+        operation: 'destructive',
+      };
   }
 }

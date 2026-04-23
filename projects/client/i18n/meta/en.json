@@ -2559,6 +2559,37 @@
         "ios"
       ]
     },
+    "button_text_hide_recommendation": {
+      "default": "Hide recommendation",
+      "description": "Text for the button that hides a recommended movie or show from the user's recommendations list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_hide_recommendation": {
+      "default": "Hide \"{title}\" from recommendations",
+      "description": "Aria-label for the button that hides a recommended movie or show from the user's recommendations list.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "warning_prompt_hide_recommendation": {
+      "default": "Are you sure you want to hide \"{title}\" from your recommendations?",
+      "description": "Warning prompt shown when a user tries to hide a recommended movie or show.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": []
+    },
     "warning_prompt_mark_as_watched_show": {
       "default": "Are you sure you want to mark \"{title}\" as watched? This will mark all episodes as watched.",
       "description": "Warning prompt shown when a user tries to mark a show as watched.",

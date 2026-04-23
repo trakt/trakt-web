@@ -8,14 +8,12 @@
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
-  import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
   import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
-  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
-  import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { useIsWatchlisted } from "$lib/stores/useIsWatchlisted";
   import type { Snippet } from "svelte";
   import type { MediaCardProps } from "../components/models/MediaCardProps";
+  import DefaultMediaPopupActions from "./DefaultMediaPopupActions.svelte";
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
   import StatusIndicators from "./StatusIndicators.svelte";
@@ -95,26 +93,10 @@
   {#if rest.popupActions}
     {@render rest.popupActions()}
   {:else}
-    <RenderFor audience="authenticated">
-      <WatchlistAction
-        style="dropdown-item"
-        title={media.title}
-        type={media.type}
-        {media}
-      />
-      <MarkAsWatchedAction
-        style="dropdown-item"
-        title={media.title}
-        type={media.type}
-        {media}
-      />
-      <ListAction
-        style="dropdown-item"
-        {media}
-        title={media.title}
-        onClick={() => (isListsDrawerOpen = true)}
-      />
-    </RenderFor>
+    <DefaultMediaPopupActions
+      {media}
+      onListAction={() => (isListsDrawerOpen = true)}
+    />
   {/if}
 {/snippet}
 

@@ -76,6 +76,10 @@ interface ConfirmationParamsMap {
   [ConfirmationType.ClearWatchlist]: {
     type: ConfirmationType.ClearWatchlist;
   };
+  [ConfirmationType.HideRecommendation]: {
+    type: ConfirmationType.HideRecommendation;
+    title: string;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =
