@@ -21,6 +21,7 @@ type WellKnownQueryParams = {
   sort_by?: string;
   sort_how?: string;
   mode?: DiscoverMode;
+  section?: string;
 };
 
 type DiscoverUrlParams = SearchParams & {
@@ -52,6 +53,10 @@ export function decodeRecord(
   }
 }
 
+function sanitizeOgSettingsSection(section?: string) {
+  return section === 'advanced' ? '/advanced' : '';
+}
+
 function sanitizeParams(
   params: Omit<WellKnownQueryParams, 'search'> & SearchParams,
 ): WellKnownQueryParams {
@@ -64,6 +69,7 @@ function sanitizeParams(
     sort_by: params.sort_by,
     sort_how: params.sort_how,
     mode: params.mode,
+    section: params.section,
   };
 }
 
@@ -274,9 +280,9 @@ export const UrlBuilder = {
         `https://widgets.trakt.tv/users/${slug}/yir.jpg?year=${year}`,
     },
     frame: {
-      settings: (token: string) =>
+      settings: (token: string, section?: string) =>
         ogIframeAccessTokenFactory(
-          'https://trakt.tv/settings',
+          `https://trakt.tv/settings${sanitizeOgSettingsSection(section)}`,
           token,
         ),
       yearToDate: (slug: string, year: string, token: string | Nil) =>
@@ -299,7 +305,8 @@ export const UrlBuilder = {
   settings: {
     general: () => '/settings',
     data: () => '/settings/data',
-    advanced: () => '/settings/advanced',
+    advanced: (params: Pick<WellKnownQueryParams, 'section'> = {}) =>
+      `/settings/advanced${buildParamString(sanitizeParams(params))}`,
     preview: () => '/settings/preview',
   },
   external: {

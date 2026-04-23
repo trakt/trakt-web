@@ -293,7 +293,6 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • A{startEpisode}-{endEpisode}",
   "error_text_404": "(Oroa dig inte, det händer! Till och med Kraften är ibland ur balans.)",
   "error_text_email": "E-postuppdateringen misslyckades. Se till att det är en giltig adress.",
-  "error_text_locked_account": "Ditt konto är låst, <a>kontakta support</a> för att lösa detta problem.",
   "error_text_service_unavailable": "Anslutningen är... frånvarande. Som ett bortglömt minne.",
   "error_text_unexpected_error": "Oj då... detta var inte planerat. Om detta fortsätter att hända, vänligen <a>skicka in ett nytt ärende</a>.",
   "error_text_unexpected_notes_error": "Något gick fel när din anteckning postades. Om detta fortsätter att hända, vänligen <a>skicka in ett nytt ärende</a>.",

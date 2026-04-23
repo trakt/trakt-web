@@ -293,7 +293,6 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • F{startEpisode}-{endEpisode}",
   "error_text_404": "(Keine Sorge, das passiert! Sogar die Macht ist manchmal nicht im Gleichgewicht.)",
   "error_text_email": "E-Mail-Update fehlgeschlagen. Stellen Sie sicher, dass es sich um eine gültige Adresse handelt.",
-  "error_text_locked_account": "Ihr Konto ist gesperrt. Bitte <a>kontaktieren Sie den Support</a>, um dieses Problem zu lösen.",
   "error_text_service_unavailable": "Die Verbindung ist... abwesend. Wie eine vergessene Erinnerung.",
   "error_text_unexpected_error": "Uhm... das war nicht geplant. Wenn das weiterhin passiert, reichen Sie bitte <a>ein neues Problem</a> ein.",
   "error_text_unexpected_notes_error": "Beim Posten Ihrer Notiz ist etwas schiefgelaufen. Sollte dies weiterhin passieren, reichen Sie bitte <a>ein neues Problem ein</a>.",

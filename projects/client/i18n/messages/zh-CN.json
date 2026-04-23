@@ -269,7 +269,6 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • E{startEpisode}-{endEpisode}",
   "error_text_404": "（别担心，这很正常！就连原力有时也会失去平衡。）",
   "error_text_email": "更新失败。请确保地址有效，就像确保电影首映礼的门票没有过期一样。",
-  "error_text_locked_account": "您的账户已被锁定，请<a>联系客服</a>解决此问题。",
   "error_text_service_unavailable": "连接...消失了。就像被遗忘的记忆。",
   "error_text_unexpected_error": "噢噢……这不在计划之内。如果问题持续存在，请<a>提交新问题</a>。",
   "error_text_unexpected_notes_error": "发布备注时出了点问题。如果错误持续出现，请<a>提交新问题</a>。",

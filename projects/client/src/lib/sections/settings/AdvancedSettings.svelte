@@ -1,9 +1,12 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import SettingsFrame from "$lib/components/frame/SettingsFrame.svelte";
+
+  const section = $derived(page.url.searchParams.get("section") ?? "");
 </script>
 
 <div class="trakt-advanced-settings">
-  <SettingsFrame />
+  <SettingsFrame {section} />
 </div>
 
 <style>

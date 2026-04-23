@@ -293,7 +293,6 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • E{startEpisode}-{endEpisode}",
   "error_text_404": "(Nu-ți face griji, se întâmplă! Chiar și Forța este uneori dezaliniată.)",
   "error_text_email": "Actualizarea emailului a eșuat. Asigură-te că este o adresă validă.",
-  "error_text_locked_account": "Contul tău este blocat, <a>contactează asistența</a> pentru a rezolva această problemă.",
   "error_text_service_unavailable": "Conexiunea este... absentă. Ca o amintire uitată.",
   "error_text_unexpected_error": "Ops... asta nu era planificat. Dacă se întâmplă în continuare, te rugăm să <a>raportezi o problemă</a>.",
   "error_text_unexpected_notes_error": "Ceva nu a mers bine la postarea notei tale. Dacă acest lucru se tot întâmplă, te rugăm să <a>trimiți o nouă problemă</a>.",

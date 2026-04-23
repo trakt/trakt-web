@@ -293,7 +293,6 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • A{startEpisode}-{endEpisode}",
   "error_text_404": "(Bare rolig, det sker! Selv Kraften kan nogle gange være ude af balance.)",
   "error_text_email": "E-mailopdatering mislykkedes. Sørg for, at det er en gyldig adresse.",
-  "error_text_locked_account": "Din konto er låst. <a>Kontakt support</a> for at løse dette problem.",
   "error_text_service_unavailable": "Forbindelsen er... fraværende. Som et glemt minde.",
   "error_text_unexpected_error": "Åh nej... dette var ikke planlagt. Hvis dette fortsætter, bedes du <a>indsende et nyt problem</a>.",
   "error_text_unexpected_notes_error": "Der opstod en fejl under posting af din note. Hvis dette fortsætter, bedes du <a>indgive en ny fejlrapport</a>.",
