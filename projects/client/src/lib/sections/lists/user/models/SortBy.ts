@@ -3,4 +3,5 @@ export type SortBy =
   | 'runtime'
   | 'percentage'
   | 'released'
+  | 'remaining'
   | 'title';

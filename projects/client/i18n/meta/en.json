@@ -6176,6 +6176,19 @@
         "ios"
       ]
     },
+    "button_text_sort_remaining": {
+      "default": "Remaining",
+      "description": "Text for the button that allows users to sort shows by the number of remaining episodes to watch.",
+      "exclude": []
+    },
+    "button_label_sort_remaining": {
+      "default": "Sort by remaining episodes",
+      "description": "Aria-label for the button that allows users to sort shows by the number of remaining episodes to watch.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "text_about_user": {
       "default": "About {username}",
       "description": "Text for the section that shows a specific users 'about me' description.",

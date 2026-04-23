@@ -4,6 +4,8 @@ import { type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
+import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
+import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import z from 'zod';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
@@ -18,7 +20,14 @@ import {
 } from './movieProgressQuery.ts';
 import { mapUpNextResponse, upNextNitroRequest } from './upNextNitroQuery.ts';
 
-type MediaProgressParams = PaginationParams & ApiParams & FilterParams;
+type MediaProgressParams =
+  & PaginationParams
+  & ApiParams
+  & FilterParams
+  & {
+    sortBy?: SortBy;
+    sortHow?: SortDirection;
+  };
 
 const MediaProgressSchema = z.union([
   UpNextEntrySchema,
@@ -42,6 +51,8 @@ export const mediaProgressQuery = defineInfiniteQuery({
   ) => [
     params.page,
     params.limit,
+    params.sortBy,
+    params.sortHow,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: (params) =>
@@ -49,7 +60,7 @@ export const mediaProgressQuery = defineInfiniteQuery({
       upNextNitroRequest(params),
       movieProgressRequest(params),
     ]),
-  mapper: ([upNextResponse, movieProgressResponse]) => {
+  mapper: ([upNextResponse, movieProgressResponse], { sortBy, sortHow }) => {
     const episodes = upNextResponse.body.map(mapUpNextResponse);
 
     const movies = movieProgressResponse.body
@@ -57,10 +68,8 @@ export const mediaProgressQuery = defineInfiniteQuery({
       .filter(isValidProgressMovie);
 
     return {
-      entries: interleaveMediaProgress({
-        episodes,
-        movies,
-      }),
+      // TODO: hmm, dealing with the sorting in interleave is weird :/
+      entries: interleaveMediaProgress({ episodes, movies, sortBy, sortHow }),
       page: extractPageMeta(upNextResponse.headers),
     };
   },

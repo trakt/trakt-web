@@ -4,6 +4,8 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
+import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
+import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { MovieProgressResponse } from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
@@ -14,11 +16,16 @@ import {
   MovieProgressSchema,
 } from '../../models/MovieProgressEntry.ts';
 import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
+import { sortProgressEntries } from './_internal/sortProgressEntries.ts';
 
 type MovieProgressParams =
   & PaginationParams
   & ApiParams
-  & FilterParams;
+  & FilterParams
+  & {
+    sortBy?: SortBy;
+    sortHow?: SortDirection;
+  };
 
 export const mapToMovieProgressEntry = (
   response: MovieProgressResponse,
@@ -65,14 +72,18 @@ export const movieProgressQuery = defineInfiniteQuery({
   ) => [
     params.page,
     params.limit,
+    params.sortBy,
+    params.sortHow,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: movieProgressRequest,
-  mapper: (response) => {
+  mapper: (response, { sortBy, sortHow }) => {
+    const entries = response.body
+      .map(mapToMovieProgressEntry)
+      .filter(isValidProgressMovie);
+
     return {
-      entries: response.body
-        .map(mapToMovieProgressEntry)
-        .filter(isValidProgressMovie),
+      entries: sortProgressEntries(entries, sortBy, sortHow),
       page: extractPageMeta(response.headers),
     };
   },

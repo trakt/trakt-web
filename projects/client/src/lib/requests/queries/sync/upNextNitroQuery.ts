@@ -4,6 +4,8 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
+import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
+import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { type UpNextResponse } from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
@@ -19,7 +21,11 @@ import {
 type UpNextParams =
   & PaginationParams
   & ApiParams
-  & FilterParams;
+  & FilterParams
+  & {
+    sortBy?: SortBy;
+    sortHow?: SortDirection;
+  };
 
 export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   const show = mapToShowEntry(item.show);
@@ -38,7 +44,7 @@ export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
 export const upNextNitroRequest = (
   params: UpNextParams,
 ) => {
-  const { fetch, limit, page, filter } = params;
+  const { fetch, limit, page, filter, sortBy, sortHow } = params;
 
   return api({ fetch })
     .sync
@@ -50,6 +56,7 @@ export const upNextNitroRequest = (
         limit,
         intent: 'continue',
         ...filter,
+        ...(sortBy ? { sort_by: sortBy, sort_how: sortHow ?? 'asc' } : {}),
       },
     });
 };
@@ -68,6 +75,8 @@ export const upNextNitroQuery = defineInfiniteQuery({
   ) => [
     params.page,
     params.limit,
+    params.sortBy,
+    params.sortHow,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: upNextNitroRequest,

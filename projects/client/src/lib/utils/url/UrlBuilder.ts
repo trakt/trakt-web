@@ -160,7 +160,8 @@ export const UrlBuilder = {
       return '/social/activity';
     },
   },
-  progress: (user: string) => `/users/${user}/progress`,
+  progress: (user: string, params: Record<string, string | number> = {}) =>
+    `/users/${user}/progress${buildParamString(sanitizeParams(params))}`,
   startWatching: (user: string, params: Record<string, string | number> = {}) =>
     `/users/${user}/start-watching${buildParamString(sanitizeParams(params))}`,
 
