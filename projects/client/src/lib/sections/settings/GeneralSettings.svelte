@@ -3,6 +3,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Appearance from "./_internal/Appearance.svelte";
   import Behavior from "./_internal/Behavior.svelte";
+  import BlockedUsers from "./_internal/BlockedUsers.svelte";
   import Genres from "./_internal/Genres.svelte";
   import Profile from "./_internal/Profile.svelte";
 </script>
@@ -11,6 +12,7 @@
   <Profile />
   <Behavior />
   <Genres />
+  <BlockedUsers />
   <Appearance />
 
   <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>

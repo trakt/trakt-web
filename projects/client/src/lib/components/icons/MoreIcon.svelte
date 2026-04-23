@@ -14,7 +14,7 @@
 
   const baseSize = $derived(size === "small" ? 16 : 24);
   const halfBaseSize = $derived(baseSize / 2);
-  const radius = $derived(size === "small" ? 2 : 2.5);
+  const radius = 2;
 </script>
 
 {#snippet circles(filterUrl: string = "")}
