@@ -293,6 +293,8 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • E{startEpisode}-{endEpisode}",
   "error_text_404": "(Ikke bekymre deg, det skjer! Selv Kraften er noen ganger i ubalanse.)",
   "error_text_email": "E-postoppdatering mislyktes. Sørg for at det er en gyldig adresse.",
+  "error_text_locked_account_guide": "Vennligst besøk <a>avanserte innstillinger</a> for å kjøre en historikkanalyse og låse opp kontoen din.",
+  "error_text_locked_account_persists": "Hvis problemet vedvarer, vennligst <a>kontakt kundestøtte</a> for å løse dette problemet.",
   "error_text_service_unavailable": "Tilkoblingen er... fraværende. Som et glemt minne.",
   "error_text_unexpected_error": "Å nei... dette var ikke planlagt. Hvis dette fortsetter, vennligst <a>rapporter et nytt problem</a>.",
   "error_text_unexpected_notes_error": "Noe gikk galt under publiseringen av notatet ditt. Hvis dette fortsetter å skje, vennligst <a>rapporter et nytt problem</a>.",

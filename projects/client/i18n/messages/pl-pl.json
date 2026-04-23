@@ -293,6 +293,8 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • O{startEpisode}-{endEpisode}",
   "error_text_404": "(Nie martw się, to się zdarza! Nawet Moc bywa czasem w rozsypce.)",
   "error_text_email": "Aktualizacja e-maila nie powiodła się. Upewnij się, że adres jest prawidłowy.",
+  "error_text_locked_account_guide": "Odwiedź <a>ustawienia zaawansowane</a>, aby przeprowadzić analizę historii i odblokować swoje konto.",
+  "error_text_locked_account_persists": "Jeśli problem będzie się powtarzał, proszę <a>skontaktować się z pomocą techniczną</a>, aby rozwiązać ten problem.",
   "error_text_service_unavailable": "Połączenie jest... nieobecne. Jak zapomniane wspomnienie.",
   "error_text_unexpected_error": "Ojoj... to nie było planowane. Jeśli problem będzie się powtarzał, prosimy o <a>zgłoszenie nowego problemu</a>.",
   "error_text_unexpected_notes_error": "Coś poszło nie tak podczas publikowania Twojej notatki. Jeśli problem będzie się powtarzał, prosimy o <a>zgłoszenie nowego problemu</a>.",

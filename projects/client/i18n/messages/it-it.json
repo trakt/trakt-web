@@ -293,6 +293,8 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • E{startEpisode}-{endEpisode}",
   "error_text_404": "(Non preoccuparti, succede! Anche la Forza a volte è fuori allineamento.)",
   "error_text_email": "Aggiornamento email fallito. Assicurati che sia un indirizzo valido.",
+  "error_text_locked_account_guide": "Visita le <a>impostazioni avanzate</a> per eseguire un'analisi della cronologia e sbloccare il tuo account.",
+  "error_text_locked_account_persists": "Se il problema persiste, <a>contatta il supporto</a> per risolvere il problema.",
   "error_text_service_unavailable": "La connessione è... assente. Come un ricordo dimenticato.",
   "error_text_unexpected_error": "Uh oh... questo non era previsto. Se il problema persiste, per favore <a>segnala un nuovo problema</a>.",
   "error_text_unexpected_notes_error": "Qualcosa è andato storto durante la pubblicazione della tua nota. Se il problema persiste, per favore <a>segnala un nuovo problema</a>.",
