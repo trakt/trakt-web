@@ -293,7 +293,6 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • É{startEpisode}-{endEpisode}",
   "error_text_404": "Pas d'inquiétude, ça arrive! Même la Force est parfois déséquilibrée.",
   "error_text_email": "Échec de la mise à jour de l'e-mail. Assurez-vous que l'adresse est valide.",
-  "error_text_locked_account": "Votre compte est bloqué, <a>contactez le support</a> pour résoudre ce problème.",
   "error_text_service_unavailable": "La connexion est... absente. Comme un souvenir oublié.",
   "error_text_unexpected_error": "Oh oh... ce n'était pas prévu. Si cela continue, veuillez <a>signaler un nouveau problème</a>.",
   "error_text_unexpected_notes_error": "Un problème est survenu lors de la publication de votre note. Si cela persiste, veuillez <a>soumettre un nouveau problème</a>.",

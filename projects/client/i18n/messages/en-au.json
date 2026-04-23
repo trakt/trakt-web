@@ -293,7 +293,6 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • E{startEpisode}-{endEpisode}",
   "error_text_404": "(Don't worry, it happens! Even the Force is sometimes out of alignment.)",
   "error_text_email": "Email update failed. Make sure it's a valid address.",
-  "error_text_locked_account": "Your account is locked, <a>contact support</a> to resolve this issue.",
   "error_text_service_unavailable": "The connection is... absent. Like a forgotten memory.",
   "error_text_unexpected_error": "Uh oh... this wasn't planned. If this keeps happening, please <a>submit a new issue</a>.",
   "error_text_unexpected_notes_error": "Something went wrong while posting your note. If this keeps happening, please <a>submit a new issue</a>.",

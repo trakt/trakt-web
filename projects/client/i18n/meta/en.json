@@ -3420,9 +3420,17 @@
         "ios"
       ]
     },
-    "error_text_locked_account": {
-      "default": "Your account is locked, <a>contact support</a> to resolve this issue.",
-      "description": "Text shown on the account locked page, informing the user that their account is locked and providing a link to contact support.",
+    "error_text_locked_account_guide": {
+      "default": "Please visit the <a>advanced settings</a> to run a history analysis and unlock your account.",
+      "description": "Text shown on the account locked page, informing the user that their account has been locked and how to unlock it.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "error_text_locked_account_persists": {
+      "default": "If the issue persists, please <a>contact support</a> to resolve this issue.",
+      "description": "Text shown on the account locked page, informing the user that if they can't unlock their account, they should contact support for assistance.",
       "exclude": [
         "android",
         "ios"

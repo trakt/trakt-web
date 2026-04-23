@@ -293,7 +293,6 @@
   "episode_footer_season_episode_range": "S{seasonNumber} • E{startEpisode}-{endEpisode}",
   "error_text_404": "ご心配なく、よくあることです！フォースですら、時に乱れることがあります。",
   "error_text_email": "メールアドレスの更新に失敗しました。有効なアドレスであることを確認してください。",
-  "error_text_locked_account": "アカウントがロックされています。この問題を解決するには<a>サポートにお問い合わせください</a>。",
   "error_text_service_unavailable": "接続は… 不在です。忘れ去られた記憶のように。",
   "error_text_unexpected_error": "あらら...これは予期せぬエラーです。問題が解決しない場合は、<a>新しい課題を報告してください</a>。",
   "error_text_unexpected_notes_error": "ノートの投稿中に問題が発生しました。この問題が引き続き発生する場合は、<a>新しい問題を提出</a>してください。",

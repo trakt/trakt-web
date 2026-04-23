@@ -293,7 +293,6 @@
   "episode_footer_season_episode_range": "T{seasonNumber} • E{startEpisode}-{endEpisode}",
   "error_text_404": "(Não se preocupe, acontece! Até a Força às vezes está desalinhada.)",
   "error_text_email": "Falha na atualização do e-mail. Certifique-se de que é um endereço válido.",
-  "error_text_locked_account": "Sua conta está bloqueada, <a>contate o suporte</a> para resolver este problema.",
   "error_text_service_unavailable": "A conexão está... ausente. Como uma memória esquecida.",
   "error_text_unexpected_error": "Oh não... isso não foi planejado. Se isso continuar acontecendo, por favor, <a>envie um novo problema</a>.",
   "error_text_unexpected_notes_error": "Algo deu errado ao postar sua nota. Se isso continuar acontecendo, por favor, <a>envie um novo problema</a>.",

@@ -7,6 +7,8 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { frameListener } from "./_internal/frameListener";
 
+  const { section }: { section?: string } = $props();
+
   const { user } = useUser();
   const { value: token } = getToken();
 
@@ -23,7 +25,7 @@
   <iframe
     class="trakt-settings-frame"
     title={m.page_title_settings()}
-    src={UrlBuilder.og.frame.settings(token ?? "")}
+    src={UrlBuilder.og.frame.settings(token ?? "", section)}
     use:frameListener={{ slug: $user.slug, source: "settings" }}
     onload={handleLoad}
   ></iframe>

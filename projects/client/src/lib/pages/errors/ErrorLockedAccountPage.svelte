@@ -9,7 +9,14 @@
 <ErrorPage title={m.page_title_account_locked()}>
   <p>
     <MessageWithLink
-      message={m.error_text_locked_account()}
+      message={m.error_text_locked_account_guide()}
+      href={UrlBuilder.settings.advanced({ section: "advanced" })}
+      target="_self"
+    />
+  </p>
+  <p>
+    <MessageWithLink
+      message={m.error_text_locked_account_persists()}
       href={UrlBuilder.og.support()}
       target="_blank"
     />

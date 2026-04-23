@@ -1,5 +1,6 @@
 <script lang="ts">
   import { afterNavigate } from "$app/navigation";
+  import { page } from "$app/state";
   import Error404Page from "$lib/pages/errors/Error404Page.svelte";
   import ErrorLockedAccountPage from "$lib/pages/errors/ErrorLockedAccountPage.svelte";
   import ErrorServicePage from "$lib/pages/errors/ErrorServicePage.svelte";
@@ -7,6 +8,7 @@
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import * as Sentry from "@sentry/sveltekit";
   import { onMount } from "svelte";
+  import { isErrorExempt } from "./_internal/errorExemptions.ts";
   import { mapToWellKnownError } from "./_internal/mapToWellKnownError";
   import { FETCH_ERROR_EVENT } from "./constants";
   import type { CustomFetchError } from "./models/CustomFetchError";
@@ -37,6 +39,7 @@
     unexpectedError.set(undefined);
   });
 
+  const hasExemption = $derived(isErrorExempt($fetchError, page.route.id));
   const hasError = $derived($fetchError || $unexpectedError);
 </script>
 
@@ -61,26 +64,28 @@
   }}
 />
 
-{#if $unexpectedError}
-  <UnexpectedErrorPage />
+{#if !hasExemption}
+  {#if $unexpectedError}
+    <UnexpectedErrorPage />
+  {/if}
+
+  {#if $fetchError?.type === WellKnownErrorType.LockedAccountError}
+    <ErrorLockedAccountPage />
+  {/if}
+
+  {#if $fetchError?.type === WellKnownErrorType.RateLimitError}
+    <ErrorServicePage message={$fetchError.message} />
+  {/if}
+
+  {#if $fetchError?.type === WellKnownErrorType.ServerError}
+    <ErrorServicePage message={$fetchError.message} />
+  {/if}
+
+  {#if $fetchError?.type === WellKnownErrorType.NotFoundError}
+    <Error404Page />
+  {/if}
 {/if}
 
-{#if $fetchError?.type === WellKnownErrorType.LockedAccountError}
-  <ErrorLockedAccountPage />
-{/if}
-
-{#if $fetchError?.type === WellKnownErrorType.RateLimitError}
-  <ErrorServicePage message={$fetchError.message} />
-{/if}
-
-{#if $fetchError?.type === WellKnownErrorType.ServerError}
-  <ErrorServicePage message={$fetchError.message} />
-{/if}
-
-{#if $fetchError?.type === WellKnownErrorType.NotFoundError}
-  <Error404Page />
-{/if}
-
-{#if !hasError}
+{#if !hasError || hasExemption}
   {@render children()}
 {/if}
