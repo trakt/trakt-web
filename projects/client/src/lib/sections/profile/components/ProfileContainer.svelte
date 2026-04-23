@@ -38,7 +38,7 @@
     gap: var(--gap-m);
 
     margin: 0 var(--layout-distance-side);
-    padding: var(--ni-24);
+    padding: var(--ni-16);
     box-sizing: border-box;
 
     transition: padding var(--transition-increment) ease-in-out;

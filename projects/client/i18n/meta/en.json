@@ -3517,6 +3517,114 @@
         "ios"
       ]
     },
+    "button_text_block": {
+      "default": "Block",
+      "description": "Text for the button that blocks another user.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_unblock": {
+      "default": "Unblock",
+      "description": "Text for the button that unblocks another user.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_block": {
+      "default": "Block {username}",
+      "description": "Aria-label for the button that blocks another user.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_unblock": {
+      "default": "Unblock {username}",
+      "description": "Aria-label for the button that unblocks another user.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_profile_actions": {
+      "default": "More actions for {username}",
+      "description": "Aria-label for the overflow menu button on another user's profile that exposes actions such as blocking.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "warning_prompt_block_user": {
+      "default": "Block {username}?",
+      "description": "Warning prompt shown when a user tries to block another user. The username will be rendered in bold.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "warning_prompt_block_user_detail": {
+      "default": "They will no longer be able to follow you or see your activity.",
+      "description": "Secondary detail line shown below the block user confirmation prompt, explaining the consequences of blocking.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "heading_blocked_users": {
+      "default": "Blocked Users",
+      "description": "Page heading for the blocked users settings page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_blocked_users": {
+      "default": "People you've blocked can't follow you or see your activity.",
+      "exclude": [
+        "android",
+        "ios"
+      ],
+      "description": "Description shown under the Blocked Users settings heading explaining what blocking does."
+    },
+    "text_no_blocked_users": {
+      "default": "You haven't blocked anyone.",
+      "description": "Empty-state text shown on the blocked users settings page when the user has not blocked anyone.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_blocked_user": {
+      "default": "Blocked",
+      "description": "Tag shown on another user's profile when the current user has blocked them.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "list_title_social": {
       "default": "Social",
       "description": "Title for lists containing the profiles the user follows or profiles that follow the user. This title should be as short and concise as possible.",

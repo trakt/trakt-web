@@ -1,6 +1,7 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { type UserLimits } from '$lib/requests/models/UserLimits.ts';
+import { blockedUsersQuery } from '$lib/requests/queries/users/blockedUsersQuery.ts';
 import { userLimitsQuery } from '$lib/requests/queries/vip/userLimitsQuery.ts';
 import { map, of, shareReplay, switchMap } from 'rxjs';
 import {
@@ -121,6 +122,7 @@ export function useUser() {
   const limitsQuerySignal = useQuery(userLimitsQuery());
   const notesQuerySignal = useQuery(currentUserNotesQuery());
   const droppedQuerySignal = useQuery(currentUserDroppedQuery());
+  const blockedQuerySignal = useQuery(blockedUsersQuery());
 
   // Create a stream that switches between authorized and anonymous state
   const userContext$ = isAuthorized.pipe(
@@ -166,6 +168,7 @@ export function useUser() {
           dropped: of<UserDroppedHistory>({
             shows: new Set(),
           }),
+          blocked: of<Set<string>>(new Set()),
         });
       }
 
@@ -206,6 +209,15 @@ export function useUser() {
         dropped: droppedQuerySignal.pipe(
           map((dropped) => dropped.data),
         ),
+        blocked: blockedQuerySignal.pipe(
+          map((blocked) =>
+            new Set(
+              (blocked.data ?? [])
+                .map((profile) => profile.slug)
+                .filter((slug): slug is string => Boolean(slug)),
+            )
+          ),
+        ),
       });
     }),
     shareReplay(1),
@@ -224,5 +236,6 @@ export function useUser() {
     limits: userContext$.pipe(switchMap((ctx) => ctx.limits)),
     notes: userContext$.pipe(switchMap((ctx) => ctx.notes)),
     dropped: userContext$.pipe(switchMap((ctx) => ctx.dropped)),
+    blocked: userContext$.pipe(switchMap((ctx) => ctx.blocked)),
   };
 }

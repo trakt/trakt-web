@@ -6,61 +6,72 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import ProfileAbout from "$lib/sections/profile/components/ProfileAbout.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { DisplayableProfileProps } from "../profile/DisplayableProfileProps";
-  import FollowUserButton from "./_internal/FollowUserButton.svelte";
+  import BlockedUserTag from "./_internal/BlockedUserTag.svelte";
+  import ProfileOverflowMenu from "./_internal/ProfileOverflowMenu.svelte";
   import ProfileImage from "./ProfileImage.svelte";
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
-  const { user } = useUser();
+  const { user, blocked } = useUser();
   const { isMe } = $derived(useIsMe(slug));
 
   const shareableSlug = $derived($isMe ? $user.slug : slug);
+  const isBlocked = $derived($blocked.has(slug));
 </script>
 
 <div class="profile-page-banner-container">
-  <ProfileImage
-    isEditable={$isMe}
-    --image-size="var(--ni-64)"
-    --border-width="var(--border-thickness-s)"
-    name={profile.name.first}
-    src={profile.avatar.url}
-    isVip={profile.isVip}
-  >
-    {#snippet badge()}
-      <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-        {#if profile.isVip}
-          <VipBadge isDirector={profile.isDirector} />
+  <div class="profile-identity">
+    <ProfileImage
+      isEditable={$isMe}
+      --image-size="var(--ni-64)"
+      --border-width="var(--border-thickness-s)"
+      name={profile.name.first}
+      src={profile.avatar.url}
+      isVip={profile.isVip}
+    >
+      {#snippet badge()}
+        <RenderFor audience="authenticated">
+          {#if !$isMe && isBlocked}
+            <BlockedUserTag />
+          {/if}
+        </RenderFor>
+        {#if !isBlocked}
+          <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
+            {#if profile.isVip}
+              <VipBadge isDirector={profile.isDirector} />
+            {/if}
+          </RenderFor>
         {/if}
-      </RenderFor>
-    {/snippet}
-  </ProfileImage>
-  <div class="profile-info" data-hj-suppress data-sentry-mask>
-    <div class="profile-user-details">
-      <span class="title ellipsis">
-        {toDisplayableName(profile)}
-      </span>
+      {/snippet}
+    </ProfileImage>
+    <div class="profile-user-details" data-hj-suppress data-sentry-mask>
+      <span class="title ellipsis">{toDisplayableName(profile)}</span>
       <span class="user-location ellipsis">{profile.location}</span>
     </div>
     <div class="profile-actions">
-      <ShareButton
-        title={profile.name.first}
-        urlOverride={UrlBuilder.profile.user(shareableSlug)}
-        textFactory={({ title: name }) => m.text_share_profile({ name })}
-        source={{ id: "profile", type: $isMe ? "own" : "other" }}
-      />
-      <RenderFor audience="authenticated">
-        {#if !$isMe}
-          <FollowUserButton {profile} {slug} />
-        {/if}
-        {#if $isMe}
-          <SettingsButton style="action" />
-        {/if}
-      </RenderFor>
+      <div class="profile-icon-actions">
+        <ShareButton
+          title={profile.name.first}
+          urlOverride={UrlBuilder.profile.user(shareableSlug)}
+          textFactory={({ title: name }) => m.text_share_profile({ name })}
+          source={{ id: "profile", type: $isMe ? "own" : "other" }}
+        />
+        <RenderFor audience="authenticated">
+          {#if !$isMe}
+            <ProfileOverflowMenu {profile} {slug} />
+          {:else}
+            <SettingsButton style="action" />
+          {/if}
+        </RenderFor>
+      </div>
     </div>
   </div>
+
+  <ProfileAbout {profile} {slug} />
 </div>
 
 <style lang="scss">
@@ -69,32 +80,50 @@
   .profile-page-banner-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    gap: var(--gap-m);
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+
+    :global(.trakt-profile-about) {
+      flex: 1;
+      min-height: 0;
+    }
+
+    @include for-tablet-sm-and-below {
+      height: auto;
+
+      :global(.trakt-profile-about) {
+        flex: initial;
+      }
+
+      :global(.trakt-profile-about .line-clamp-container) {
+        align-items: flex-start;
+      }
+    }
+  }
+
+  .profile-identity {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     gap: var(--gap-s);
-
-    transition: gap var(--transition-increment) ease-in-out;
-
-    max-width: var(--ni-148);
-    overflow: hidden;
 
     :global(.profile-image-container) {
       display: flex;
       flex-direction: column;
       align-items: center;
 
-      :global(.trakt-vip-badge) {
+      :global(.trakt-vip-badge),
+      :global(.trakt-blocked-user-tag) {
         z-index: var(--layer-base);
         margin-top: var(--ni-neg-16);
       }
     }
 
     @include for-tablet-sm-and-below {
-      max-width: none;
-
-      align-items: center;
-      flex-direction: row;
       gap: var(--gap-xs);
-      flex-grow: 1;
+      flex-wrap: wrap;
 
       span.ellipsis {
         white-space: normal;
@@ -112,30 +141,22 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-micro);
-  }
-
-  .profile-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-m);
-    width: 100%;
+    min-width: 0;
+    flex: 1;
 
     .user-location {
       color: var(--color-text-secondary);
-    }
-
-    @include for-tablet-sm-and-below {
-      flex-direction: row;
-      gap: var(--gap-xs);
-      justify-content: space-between;
     }
   }
 
   .profile-actions {
     display: flex;
     align-items: center;
-
     gap: var(--gap-s);
+    flex-shrink: 0;
+
+    position: relative;
+    z-index: var(--layer-raised);
 
     :global(svg) {
       width: var(--ni-24);
@@ -143,9 +164,26 @@
     }
 
     @include for-tablet-sm-and-below {
-      align-self: flex-end;
-
       gap: var(--gap-xs);
+    }
+  }
+
+  .profile-icon-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xxs);
+
+    :global(.trakt-popup-menu-button) {
+      @include for-mouse() {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--color-foreground) 10%,
+            transparent
+          );
+          color: inherit;
+        }
+      }
     }
   }
 </style>

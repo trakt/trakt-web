@@ -7,11 +7,13 @@
 
   const {
     message,
+    detail,
     buttonText,
     onAction,
     operation,
   }: {
     message: string;
+    detail?: string;
     buttonText: string;
     operation: ConfirmationOperation;
     onAction: (action: ConfirmationAction) => void;
@@ -19,7 +21,12 @@
 </script>
 
 <Modal onClose={() => onAction("cancel")}>
-  <p>{message}</p>
+  <div class="trakt-confirmation-content">
+    <p>{message}</p>
+    {#if detail}
+      <p>{detail}</p>
+    {/if}
+  </div>
 
   {#snippet footer()}
     <Button
@@ -41,3 +48,11 @@
     </Button>
   {/snippet}
 </Modal>
+
+<style>
+  .trakt-confirmation-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+  }
+</style>

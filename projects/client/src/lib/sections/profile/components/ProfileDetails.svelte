@@ -5,7 +5,6 @@
   import ProfilePageBanner from "$lib/sections/profile-banner/ProfilePageBanner.svelte";
   import type { DisplayableProfileProps } from "../DisplayableProfileProps";
   import MonthToDate from "./MonthToDate.svelte";
-  import ProfileAbout from "./ProfileAbout.svelte";
   import ThisMonth from "./ThisMonth.svelte";
   import ThisYear from "./ThisYear.svelte";
   import VipUpsell from "./VipUpsell.svelte";
@@ -31,13 +30,7 @@
   class:is-vip={profile.isVip}
   class:is-narrow={isFreeOtherProfile}
 >
-  <div class="trakt-profile-banner">
-    <ProfilePageBanner {profile} {slug} />
-
-    <RenderFor audience="all" device={["desktop", "tablet-lg"]}>
-      <ProfileAbout {profile} {slug} />
-    </RenderFor>
-  </div>
+  <ProfilePageBanner {profile} {slug} />
 
   {#if profile.isVip}
     <RenderFor audience="all" device={["desktop"]}>
@@ -72,8 +65,6 @@
         <VipUpsell />
       {/if}
     </RenderFor>
-
-    <ProfileAbout {profile} {slug} />
   </RenderFor>
 </div>
 
@@ -118,16 +109,6 @@
       & {
         --details-column-count: 1;
       }
-    }
-  }
-
-  .trakt-profile-banner {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: var(--gap-m);
-
-    @include for-tablet-sm-and-below {
-      grid-template-columns: 1fr;
     }
   }
 
