@@ -12,6 +12,7 @@
 {#if $activeConfirmation?.message}
   <ConfirmationDialog
     message={$activeConfirmation.message}
+    detail={$activeConfirmation.detail}
     buttonText={$activeConfirmation.buttonText}
     operation={$activeConfirmation.operation}
     onAction={(action) => {

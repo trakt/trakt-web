@@ -19,6 +19,7 @@ type FilterType = { id: string; action: 'set' | 'reset'; mode: FilterMode };
 type FiltersType = { action: 'save' | 'reset' };
 type CheckInType = { type: 'episode' | 'movie'; action: 'start' | 'stop' };
 type FollowType = { action: 'follow' | 'unfollow' };
+type BlockType = { action: 'block' | 'unblock' };
 type ExtrasType = { slug: string; type: MediaVideoType };
 type CommentType = { action: 'post' | 'reply' | 'edit' };
 type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
@@ -90,6 +91,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.CoverImage]: CoverImageType;
 
   [AnalyticsEvent.Follow]: FollowType;
+  [AnalyticsEvent.Block]: BlockType;
 
   [AnalyticsEvent.ListEdit]: never;
   [AnalyticsEvent.ListDelete]: never;

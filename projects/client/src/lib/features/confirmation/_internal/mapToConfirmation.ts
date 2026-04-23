@@ -6,6 +6,7 @@ import { getWarningMessage } from './getWarningMessage.ts';
 
 type Confirmation = {
   message: string | Nil;
+  detail?: string;
   buttonText: string;
   operation: ConfirmationOperation;
 };
@@ -81,6 +82,13 @@ export function mapToConfirmation<T extends ConfirmationType>(
       return {
         buttonText: m.button_text_unfollow(),
         message: m.warning_prompt_unfollow_user({ username: props.username }),
+        operation: 'destructive',
+      };
+    case ConfirmationType.BlockUser:
+      return {
+        buttonText: m.button_text_block(),
+        message: m.warning_prompt_block_user({ username: props.username }),
+        detail: m.warning_prompt_block_user_detail(),
         operation: 'destructive',
       };
     case ConfirmationType.StopCheckin:

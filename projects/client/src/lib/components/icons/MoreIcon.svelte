@@ -20,7 +20,7 @@
 {#snippet circles(filterUrl: string = "")}
   <circle
     cx={halfBaseSize}
-    cy={size === "small" ? 2 : 4}
+    cy={size === "small" ? 3 : 4}
     r={radius}
     fill="currentColor"
     filter={filterUrl}
@@ -34,7 +34,7 @@
   />
   <circle
     cx={halfBaseSize}
-    cy={size === "small" ? 14 : 20}
+    cy={size === "small" ? 13 : 20}
     r={radius}
     fill="currentColor"
     filter={filterUrl}
