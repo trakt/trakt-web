@@ -14,4 +14,6 @@ type RateableMedia = {
   media: MediaEntry;
 };
 
-export type RateNowProps = RateableEpisode | RateableMedia;
+export type RateNowProps = (RateableEpisode | RateableMedia) & {
+  onclick?: () => void;
+};

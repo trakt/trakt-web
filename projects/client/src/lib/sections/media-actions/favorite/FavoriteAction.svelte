@@ -16,6 +16,7 @@
     id: number;
     onAction?: (state: boolean) => void;
     navigationType?: DpadNavigationType;
+    onclick?: () => void;
   };
 
   const {
@@ -26,6 +27,7 @@
     id,
     onAction,
     navigationType,
+    onclick,
   }: FavoriteActionProps = $props();
 
   let showNotePrompt = $state(false);
@@ -55,6 +57,17 @@
     }),
   );
 
+  const handler = (action: "add" | "remove") => {
+    onclick?.();
+
+    if (action === "add") {
+      addToFavorites();
+      return;
+    }
+
+    confirmRemove();
+  };
+
   onMount(() => {
     return isUpdatingFavorite.subscribe((value) => onAction?.(value));
   });
@@ -78,7 +91,7 @@
     {size}
     isFavorited={$isFavorited}
     isFavoriteUpdating={$isUpdatingFavorite}
-    onAdd={addToFavorites}
-    onRemove={confirmRemove}
+    onAdd={() => handler("add")}
+    onRemove={() => handler("remove")}
   />
 </NotePrompt>
