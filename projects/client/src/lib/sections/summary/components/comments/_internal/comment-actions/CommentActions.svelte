@@ -5,14 +5,16 @@
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import DeleteCommentButton from "./DeleteCommentButton.svelte";
   import EditCommentButton from "./EditCommentButton.svelte";
+  import ReportCommentButton from "./ReportCommentButton.svelte";
 
   type CommentActionsProps = {
     comment: MediaComment;
     type: ExtendedMediaType;
+    isOwnComment: boolean;
     onEdit: () => void;
   };
 
-  const { comment, type, onEdit }: CommentActionsProps = $props();
+  const { comment, type, isOwnComment, onEdit }: CommentActionsProps = $props();
 </script>
 
 <PopupMenu
@@ -20,7 +22,11 @@
   mode="standalone"
 >
   {#snippet items()}
-    <EditCommentButton onclick={onEdit} />
-    <DeleteCommentButton {comment} {type} />
+    {#if isOwnComment}
+      <EditCommentButton onclick={onEdit} />
+      <DeleteCommentButton {comment} {type} />
+    {:else}
+      <ReportCommentButton {comment} />
+    {/if}
   {/snippet}
 </PopupMenu>
