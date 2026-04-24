@@ -113,7 +113,7 @@
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    z-index: var(--layer-overlay);
+    z-index: var(--layer-top);
 
     width: min(var(--ni-480), calc(100dvw - var(--ni-32)));
     padding: var(--ni-12) var(--ni-16);
