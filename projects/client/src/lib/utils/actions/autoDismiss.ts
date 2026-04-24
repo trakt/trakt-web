@@ -1,34 +1,42 @@
 import { time } from '$lib/utils/timing/time.ts';
 import { interval } from 'rxjs';
 
-const FPS = 30;
+const defaultDuration = time.seconds(10);
+const fps = 30;
 
 export type AutoDismissProps = {
   onDismiss: () => void;
-  durationSeconds?: number;
+  durationMs?: number;
   now?: () => number;
 };
 
 export function autoDismiss(
   node: HTMLElement,
-  { onDismiss, durationSeconds = 10, now = Date.now }: AutoDismissProps,
+  { onDismiss, durationMs = defaultDuration, now = Date.now }: AutoDismissProps,
 ) {
+  let params = { onDismiss, durationMs, now };
   const startTime = now();
-  const durationMs = durationSeconds * 1000;
 
-  const subscription = interval(time.fps(FPS)).subscribe(() => {
-    const elapsedMs = now() - startTime;
-    const progress = Math.min(elapsedMs / durationMs, 1);
+  const subscription = interval(time.fps(fps)).subscribe(() => {
+    const elapsedMs = params.now() - startTime;
+    const progress = Math.min(elapsedMs / params.durationMs, 1);
 
     node.style.setProperty('--progress', String(progress));
 
     if (progress >= 1) {
       subscription.unsubscribe();
-      onDismiss();
+      params.onDismiss();
     }
   });
 
   return {
+    update(newParams: AutoDismissProps) {
+      params = {
+        onDismiss: newParams.onDismiss,
+        durationMs: newParams.durationMs ?? params.durationMs,
+        now: newParams.now ?? params.now,
+      };
+    },
     destroy() {
       subscription.unsubscribe();
     },

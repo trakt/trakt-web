@@ -1,7 +1,6 @@
 <script lang="ts">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
-  import { autoDismiss } from "$lib/utils/actions/autoDismiss.ts";
+  import AutoCloseButton from "$lib/components/buttons/AutoCloseButton.svelte";
+  import { m } from "$lib/features/i18n/messages";
   import { fade } from "svelte/transition";
 
   const {
@@ -13,22 +12,15 @@
 </script>
 
 {#if hasSplashScreen}
-  <div
-    class="trakt-seasonal-splash-screen"
-    transition:fade={{ duration: 150 }}
-    use:autoDismiss={{ onDismiss }}
-  >
+  <div class="trakt-seasonal-splash-screen" transition:fade={{ duration: 150 }}>
     {@render children()}
-    <div class="trakt-splash-close-button">
-      <ActionButton
-        color="purple"
-        onclick={onDismiss}
-        label="close"
-        size="small"
-      >
-        <CloseIcon />
-      </ActionButton>
-    </div>
+    <AutoCloseButton
+      onclick={onDismiss}
+      label={m.button_label_close()}
+      style="flat"
+      color="purple"
+      --color-progress-ring="var(--shade-10)"
+    />
   </div>
 {/if}
 
@@ -61,33 +53,11 @@
       object-fit: contain;
     }
 
-    .trakt-splash-close-button {
+    :global(.trakt-auto-close-button) {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
       bottom: calc(env(safe-area-inset-bottom, 0) + var(--ni-48));
-
-      &::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: var(--ni-36);
-        height: var(--ni-36);
-        border-radius: 50%;
-        background: conic-gradient(
-          var(--shade-10) calc(var(--progress, 0) * 360deg),
-          transparent 0deg 360deg
-        );
-
-        pointer-events: none;
-        z-index: -1;
-      }
-
-      :global(.trakt-action-button) {
-        border-radius: 50%;
-      }
     }
   }
 </style>

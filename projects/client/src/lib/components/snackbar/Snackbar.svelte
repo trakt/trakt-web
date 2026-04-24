@@ -1,11 +1,9 @@
 <script lang="ts">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import AutoCloseButton from "$lib/components/buttons/AutoCloseButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
-  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import Popover from "$lib/components/popover/Popover.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { autoDismiss } from "$lib/utils/actions/autoDismiss.ts";
   import type { Snippet } from "svelte";
   import { onMount } from "svelte";
   import { fly } from "svelte/transition";
@@ -65,14 +63,6 @@
   </Button>
 {/snippet}
 
-{#snippet closeButton(dismissAction: typeof autoDismiss)}
-  <div class="snackbar-close" use:dismissAction={{ onDismiss }}>
-    <ActionButton onclick={onDismiss} label="close" size="small" style="ghost">
-      <CloseIcon />
-    </ActionButton>
-  </div>
-{/snippet}
-
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   {@render children?.()}
 
@@ -87,7 +77,7 @@
     >
       <p class="snackbar-message">{message}</p>
       {@render actionButton()}
-      {@render closeButton(autoDismiss)}
+      <AutoCloseButton onclick={onDismiss} label={m.button_label_close()} />
     </div>
   {/if}
 </RenderFor>
@@ -99,14 +89,14 @@
       <div class="snackbar-popover" role="status" aria-live="polite">
         <div class="snackbar-popover-header">
           <span class="bold title">{title}</span>
-          {@render closeButton(autoDismiss)}
+          <AutoCloseButton onclick={onDismiss} label={m.button_label_close()} />
         </div>
         <p>{message}</p>
         <div class="snackbar-popover-actions">
           <Button
             size="small"
             color="default"
-            label="cancel"
+            label={m.button_label_cancel()}
             onclick={onDismiss}
           >
             {m.button_text_cancel()}
@@ -169,36 +159,5 @@
     display: flex;
     justify-content: flex-end;
     gap: var(--ni-8);
-  }
-
-  .snackbar-close {
-    position: relative;
-    flex-shrink: 0;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: var(--ni-36);
-      height: var(--ni-36);
-      border-radius: 50%;
-      background: conic-gradient(
-        var(--purple-500) calc(var(--progress, 0) * 360deg),
-        transparent 0deg 360deg
-      );
-      mask: radial-gradient(
-        circle closest-side,
-        transparent calc(100% - 2px),
-        black calc(100% - 2px)
-      );
-      pointer-events: none;
-      z-index: var(--layer-background);
-    }
-
-    :global(.trakt-action-button) {
-      border-radius: 50%;
-    }
   }
 </style>
