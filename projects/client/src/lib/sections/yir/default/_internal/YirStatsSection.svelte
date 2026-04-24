@@ -118,103 +118,11 @@
   @use "$style/scss/mixins/index" as *;
 
   .yir-stats-section {
-    // Shared chart CSS variables
-    --yir-chart-bar: #999;
-    --yir-chart-bar-max: #fff;
-    --yir-chart-bar-hover: #ab2425;
-    --yir-chart-axis: #555;
-
     background-color: var(--shade-950);
     padding-bottom: var(--ni-72);
 
     @include for-mobile {
       padding-bottom: var(--ni-40);
-    }
-
-    // Shared chart styles
-    :global(.cds--cc--chart-wrapper),
-    :global(.cds--cc--chart-svg),
-    :global(.cds--cc--chart-holder),
-    :global(svg),
-    :global(g) {
-      background: transparent;
-    }
-
-    :global(path[class*="bar fill"]) {
-      transition: fill 0.15s ease;
-      cursor: pointer;
-
-      &:hover {
-        fill: var(--yir-chart-bar-hover);
-      }
-    }
-
-    :global(.cds--cc--axis-title) {
-      display: none;
-    }
-
-    :global(.cds--cc--axes g.axis g.tick text) {
-      fill: var(--yir-chart-axis);
-      font-size: 11px;
-      font-family: inherit;
-    }
-
-    :global(.cds--cc--grid line) {
-      stroke: transparent;
-    }
-
-    :global(.cds--cc--grid rect.chart-grid-backdrop) {
-      fill: none;
-    }
-
-    :global(.cds--cc--axis path),
-    :global(.cds--cc--axis line) {
-      stroke: var(--yir-chart-axis);
-    }
-
-    :global(.cds--tooltip),
-    :global(.cds--cc--tooltip),
-    :global(.cds--cc--tooltip-container) {
-      background: transparent;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
-    }
-
-    :global(.yir-chart-tooltip) {
-      background: color-mix(in srgb, var(--shade-1000) 92%, transparent);
-      border: var(--border-thickness-xxs) solid var(--shade-800);
-      border-radius: var(--border-radius-xs);
-      padding: var(--ni-8) var(--ni-12);
-      color: var(--shade-10);
-      font-family: inherit;
-      box-shadow: 0 var(--ni-2) var(--ni-8)
-        color-mix(in srgb, var(--shade-1000) 60%, transparent);
-      text-align: center;
-    }
-
-    :global(.yir-chart-tooltip-plays) {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: var(--ni-4);
-      color: var(--shade-10);
-    }
-
-    :global(.yir-chart-tooltip-week),
-    :global(.yir-chart-tooltip-month),
-    :global(.yir-chart-tooltip-day),
-    :global(.yir-chart-tooltip-time) {
-      font-size: 11px;
-      opacity: 0.85;
-    }
-
-    :global(.yir-chart-tooltip-week) {
-      margin-bottom: 2px;
-    }
-
-    :global(.yir-chart-tooltip-dates) {
-      font-size: 10px;
-      opacity: 0.65;
     }
   }
 
