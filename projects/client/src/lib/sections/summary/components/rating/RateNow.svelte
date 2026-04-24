@@ -13,6 +13,7 @@
 
   const {
     variant = "guard",
+    onclick,
     ...props
   }: RateNowProps & { variant?: "allow" | "guard" } = $props();
 
@@ -63,12 +64,16 @@
       <RatingStars
         rating={$pendingRating ?? $current?.rating}
         isRating={$pendingRating !== null}
-        onRemoveRating={removeRating}
+        onRemoveRating={() => {
+          onclick?.();
+          removeRating();
+        }}
         onAddRating={(rating: number, ev: MouseEvent) => {
           if (rating === $current?.rating) {
             return;
           }
 
+          onclick?.();
           setConfettiPosition(rating, ev);
           addRating(rating);
         }}
@@ -86,6 +91,7 @@
             type={props.type}
             id={props.media.id}
             navigationType={DpadNavigationType.Item}
+            {onclick}
           />
         </div>
       {/if}
