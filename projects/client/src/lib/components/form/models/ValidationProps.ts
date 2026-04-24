@@ -1,4 +1,4 @@
-export type ValidationProps = {
+export type ValidationProps<T = string> = {
   errorText: string;
-  isValid: (value: string) => boolean;
+  isValid: (value: T) => boolean;
 };

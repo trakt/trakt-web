@@ -1,5 +1,6 @@
 <script lang="ts">
   import { getLanguageAndRegion } from "$lib/features/i18n";
+  import { parseLocalDate } from "$lib/utils/date/parseLocalDate.ts";
   import CalendarIcon from "../../icons/CalendarIcon.svelte";
   import type { DateInputProps } from "./DateInputProps.ts";
   import { formatDateInputValue } from "./formatDateInputValue.ts";
@@ -10,6 +11,7 @@
     maxDate,
     label,
     disabled = false,
+    required = false,
     onChange,
   }: DateInputProps = $props();
 
@@ -40,6 +42,7 @@
     class="trakt-date-time-input"
     {type}
     {disabled}
+    {required}
     aria-label={label}
     value={formatDateInputValue(value, type)}
     max={formatDateInputValue(maxDate, type)}
@@ -51,7 +54,9 @@
         return;
       }
 
-      onChange(new Date(target.value));
+      onChange(
+        type === "date" ? parseLocalDate(target.value) : new Date(target.value),
+      );
     }}
   />
 </div>
