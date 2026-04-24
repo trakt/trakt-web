@@ -8,6 +8,7 @@ import {
 import { UserNameSchema } from '$lib/requests/models/UserName.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { DEFAULT_AVATAR } from '$lib/utils/constants.ts';
+import { parseLocalDate } from '$lib/utils/date/parseLocalDate.ts';
 import { toUserName } from '$lib/utils/formatting/string/toUserName.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -67,6 +68,7 @@ export const UserSettingsSchema = z.object({
     }),
   }),
   preferredTheme: z.nativeEnum(Theme),
+  birthday: z.date().nullish(),
 });
 
 export type UserSettings = z.infer<typeof UserSettingsSchema>;
@@ -168,6 +170,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       },
     },
     preferredTheme: mapToPreferredTheme(browsing?.dark_knight),
+    birthday: user.dob ? parseLocalDate(user.dob) : null,
   };
 }
 
