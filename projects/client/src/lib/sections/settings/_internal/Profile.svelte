@@ -4,8 +4,11 @@
   import { lineClamp } from "$lib/components/text/lineClamp";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
+  import { formatLocalDate } from "$lib/utils/date/formatLocalDate";
+  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import ManageSubscriptionButton from "./components/ManageSubscriptionButton.svelte";
   import { getSwitchInnerText } from "./getSwitchInnerText";
   import LargeSettingsRow from "./LargeSettingsRow.svelte";
@@ -23,45 +26,69 @@
 
   const promptMap = $derived({
     name: {
-      prompt: m.input_prompt_display_name(),
       label: m.button_label_change_display_name(),
-      currentValue: $profile.displayName,
-      name: m.text_display_name(),
+      drawer: {
+        type: "input" as const,
+        title: m.input_prompt_display_name(),
+        currentValue: $profile.displayName,
+        name: m.text_display_name(),
+        isRequired: true,
+        onSave: async (value: string) => $profile.set({ name: value }),
+      },
     },
     email: {
-      prompt: m.input_prompt_email(),
       label: m.button_label_change_email(),
-      currentValue: $email.value ?? "",
-      name: m.text_display_email(),
+      drawer: {
+        type: "input" as const,
+        title: m.input_prompt_email(),
+        currentValue: $email.value ?? "",
+        name: m.text_display_email(),
+        isRequired: true,
+        onSave: async (value: string) =>
+          (await $email.set(value))
+            ? undefined
+            : { error: m.error_text_email() },
+      },
     },
     location: {
-      prompt: m.input_prompt_location(),
       label: m.button_label_change_location(),
-      currentValue: $profile.location,
-      name: m.text_location(),
+      drawer: {
+        type: "input" as const,
+        title: m.input_prompt_location(),
+        currentValue: $profile.location,
+        name: m.text_location(),
+        isRequired: true,
+        onSave: async (value: string) => $profile.set({ location: value }),
+      },
     },
     about: {
-      prompt: m.input_prompt_about(),
       label: m.button_label_change_about(),
-      currentValue: $profile.about,
-      name: m.text_about(),
+      drawer: {
+        type: "textarea" as const,
+        title: m.input_prompt_about(),
+        currentValue: $profile.about,
+        name: m.text_about(),
+        isRequired: false,
+        onSave: async (value: string) => $profile.set({ about: value }),
+      },
+    },
+    birthday: {
+      label: m.button_label_change_birthday(),
+      drawer: {
+        type: "datepicker" as const,
+        title: m.input_prompt_birthday(),
+        label: m.button_label_change_birthday(),
+        currentValue: $profile.birthday ?? undefined,
+        name: m.text_birthday(),
+        isRequired: true,
+        onSave: async (date: Date) =>
+          $profile.set({ dob: date ? formatLocalDate(date) : null }),
+      },
     },
   });
 
   type ProfileField = keyof typeof promptMap;
   let activeField = $state<ProfileField>();
-
-  const handleSaveField = async (value: string) => {
-    if (!activeField) return;
-
-    if (activeField === "email") {
-      return (await $email.set(value))
-        ? undefined
-        : { error: m.error_text_email() };
-    }
-
-    return $profile.set({ [activeField]: value });
-  };
 </script>
 
 {#snippet renameField(field: ProfileField)}
@@ -107,6 +134,17 @@
     </SettingsRow>
   {/if}
 
+  <SettingsRow title={m.text_birthday()}>
+    <p class="ellipsis">
+      {$profile.birthday
+        ? toHumanDay({ date: $profile.birthday, locale: getLocale() })
+        : ""}
+    </p>
+    {#snippet action()}
+      {@render renameField("birthday")}
+    {/snippet}
+  </SettingsRow>
+
   <SettingsRow title={m.text_location()}>
     <p class="ellipsis">{$profile.location}</p>
     {#snippet action()}
@@ -145,13 +183,8 @@
 
 {#if activeField}
   <SettingInputDrawer
-    isRequired={activeField !== "about"}
-    type={activeField === "about" ? "textarea" : "input"}
-    title={promptMap[activeField].prompt}
-    name={promptMap[activeField].name}
-    currentValue={promptMap[activeField].currentValue}
+    {...promptMap[activeField].drawer}
     onClose={() => (activeField = undefined)}
-    onSave={handleSaveField}
     isSaving={$isSavingSettings}
   />
 {/if}

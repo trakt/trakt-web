@@ -4,4 +4,5 @@ export type DatePickerProps = {
   label: string;
   onChange: (date?: Date) => void;
   disabled?: boolean;
+  required?: boolean;
 };

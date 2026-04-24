@@ -1,4 +1,4 @@
-import type { DatePickerProps } from './DatePickerProps.ts';
+import type { DatePickerProps } from '../models/DatePickerProps.ts';
 
 export type DateInputType = 'date' | 'datetime-local';
 

@@ -102,6 +102,7 @@ export function useSettings() {
       displayName: $user.name.full,
       location: $user.location ?? '',
       about: $user.about ?? '',
+      birthday: $user.birthday,
       set: async (settings: UserSettingsRequest) => {
         const payload: SettingsRequest = {
           user: { ...settings },

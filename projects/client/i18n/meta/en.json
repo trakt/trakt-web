@@ -4052,6 +4052,14 @@
       "description": "Text for the section that allows users to change their 'about me' description.",
       "exclude": []
     },
+    "text_birthday": {
+      "default": "Birthday",
+      "description": "Text for the section that allows users to change their birthday.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "page_title_automatic_tracking": {
       "default": "Automatic Tracking",
       "description": "Title for the automatic tracking page.",
@@ -4083,6 +4091,14 @@
         "ios"
       ]
     },
+    "button_label_change_birthday": {
+      "default": "Change birthday",
+      "description": "Aria-label for the button that allows users to change their birthday.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "input_prompt_display_name": {
       "default": "What should your display name be?",
       "description": "Message for the prompt that allows users to specify their display name.",
@@ -4109,6 +4125,14 @@
       "default": "Tell us a bit about yourself.",
       "description": "Message for the prompt that allows users to specify their 'about me' description.",
       "exclude": [
+        "ios"
+      ]
+    },
+    "input_prompt_birthday": {
+      "default": "When is your birthday?",
+      "description": "Message for the prompt that allows users to specify their birthday.",
+      "exclude": [
+        "android",
         "ios"
       ]
     },
