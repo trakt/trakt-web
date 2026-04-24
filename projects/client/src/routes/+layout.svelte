@@ -93,6 +93,7 @@
   <link rel="stylesheet" href="https://cdn.plyr.io/3.8.3/plyr.css" />
   <!-- Plyr JS -->
   <script src="https://cdn.plyr.io/3.8.3/plyr.js"></script>
+  <!-- Carbon Charts CSS (note: loaded in script for proper module resolution) -->
   <style>
     html,
     body {
