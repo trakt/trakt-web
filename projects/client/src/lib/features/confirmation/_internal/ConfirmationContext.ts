@@ -5,6 +5,7 @@ export type ConfirmationRequest = {
   onConfirm: () => void;
   onCancel?: () => void;
   message: string | Nil;
+  detail?: string;
   buttonText: string;
   operation: ConfirmationOperation;
 };

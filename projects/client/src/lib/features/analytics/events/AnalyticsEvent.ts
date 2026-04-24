@@ -55,6 +55,7 @@ export const AnalyticsEvent = {
   CoverImage: buildEventKey(USER_ACTION_PREFIX, 'cover-image'),
 
   Follow: buildEventKey(FOLLOW_ACTION_PREFIX, 'follow'),
+  Block: buildEventKey(USER_ACTION_PREFIX, 'block'),
 
   ListEdit: buildEventKey(LIST_ACTION_PREFIX, 'edit'),
   ListDelete: buildEventKey(LIST_ACTION_PREFIX, 'delete'),

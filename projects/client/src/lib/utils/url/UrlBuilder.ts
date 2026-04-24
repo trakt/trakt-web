@@ -308,6 +308,7 @@ export const UrlBuilder = {
     advanced: (params: Pick<WellKnownQueryParams, 'section'> = {}) =>
       `/settings/advanced${buildParamString(sanitizeParams(params))}`,
     preview: () => '/settings/preview',
+    blocked: () => '/settings/blocked',
   },
   external: {
     imdb: {

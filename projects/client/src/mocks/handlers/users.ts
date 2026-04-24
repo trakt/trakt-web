@@ -24,6 +24,7 @@ import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesR
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
 import { ShowActivityHistoryResponseMock } from '../data/users/response/ShowActivityHistoryResponseMock.ts';
 import { SocialActivityResponseMock } from '../data/users/response/SocialActivityResponseMock.ts';
+import { UserBlockedResponseMock } from '../data/users/response/UserBlockedResponseMock.ts';
 import { UserFollowersResponseMock } from '../data/users/response/UserFollowersResponseMock.ts';
 import { UserFollowingResponseMock } from '../data/users/response/UserFollowingResponseMock.ts';
 import { UserMonthInReviewResponseMock } from '../data/users/response/UserMonthInReviewResponseMock.ts';
@@ -170,5 +171,14 @@ export const users = [
   ),
   http.get('http://localhost/users/likes/lists', () => {
     return HttpResponse.json(MinimalLikedListsResponseMock);
+  }),
+  http.get('http://localhost/users/blocked', () => {
+    return HttpResponse.json(UserBlockedResponseMock);
+  }),
+  http.post('http://localhost/users/:id/block', () => {
+    return new HttpResponse(null, { status: 201 });
+  }),
+  http.delete('http://localhost/users/:id/block', () => {
+    return new HttpResponse(null, { status: 204 });
   }),
 ];

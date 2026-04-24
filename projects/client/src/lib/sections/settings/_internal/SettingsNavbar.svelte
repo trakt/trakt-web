@@ -20,6 +20,9 @@
     <Link href={UrlBuilder.settings.preview()}>
       <span class="title">{m.link_text_preview_settings()}</span>
     </Link>
+    <Link href={UrlBuilder.settings.blocked()}>
+      <span class="title">{m.link_text_blocked_users()}</span>
+    </Link>
   </div>
 {/snippet}
 

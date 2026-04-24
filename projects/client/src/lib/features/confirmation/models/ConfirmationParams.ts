@@ -20,6 +20,10 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.UnfollowUser;
     username: string;
   };
+  [ConfirmationType.BlockUser]: {
+    type: ConfirmationType.BlockUser;
+    username: string;
+  };
   [ConfirmationType.RemoveFromWatched]: {
     type: ConfirmationType.RemoveFromWatched;
     title: string;

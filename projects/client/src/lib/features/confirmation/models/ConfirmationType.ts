@@ -10,6 +10,7 @@ export enum ConfirmationType {
   RemoveFromWatchList = 'remove-from-watchlist',
   RemoveFromList = 'remove-from-list',
   UnfollowUser = 'unfollow-user',
+  BlockUser = 'block-user',
   StopCheckin = 'stop-checkin',
   DeleteComment = 'delete-comment',
   SuppressRatingsToast = 'suppress-ratings-toast',
