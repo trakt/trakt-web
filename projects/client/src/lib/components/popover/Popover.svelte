@@ -29,7 +29,11 @@
     {@render children()}
   </Popover.Trigger>
   <Popover.Portal>
-    <Popover.Content sideOffset={8} side="top">
+    <Popover.Content
+      sideOffset={8}
+      side="top"
+      style="z-index: var(--layer-top)"
+    >
       {@render content()}
     </Popover.Content>
   </Popover.Portal>
