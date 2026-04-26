@@ -46,6 +46,7 @@
     gap: var(--gap-xs);
     justify-content: space-between;
     align-items: center;
+    flex-direction: column;
 
     :global(.trakt-link) {
       text-decoration: none;

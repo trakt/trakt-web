@@ -80,14 +80,26 @@
 {#if variant === "portrait"}
   <PortraitCard>
     {@render content(media.poster.url.thumb)}
-    <CardFooter {action} {tag} />
+    <CardFooter {action} {tag}>
+      <Link href={UrlBuilder.media(type, media.slug)}>
+        <p class="trakt-card-title ellipsis">
+          {media.title}
+        </p>
+      </Link>
+    </CardFooter>
   </PortraitCard>
 {/if}
 
 {#if variant === "landscape"}
   <LandscapeCard>
     {@render content(media.cover.url.thumb, media.logo.url.medium)}
-    <CardFooter {action} {tag} />
+    <CardFooter {action} {tag}>
+      <Link href={UrlBuilder.media(type, media.slug)}>
+        <p class="trakt-card-title ellipsis">
+          {media.title}
+        </p>
+      </Link>
+    </CardFooter>
   </LandscapeCard>
 {/if}
 
