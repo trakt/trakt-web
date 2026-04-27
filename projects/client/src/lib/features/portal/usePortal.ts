@@ -58,9 +58,10 @@ export function usePortal(props?: PortalProps) {
   const toggleHandler = (target: HTMLElement) => {
     if (isPopupOpen.value) {
       closeHandler();
-    } else {
-      openHandler(target);
+      return;
     }
+
+    openHandler(target);
   };
 
   const portalTrigger = (targetNode: HTMLElement) => {
