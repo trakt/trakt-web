@@ -150,7 +150,9 @@
   }
 
   .calendar-navigation {
-    --sticky-top: calc(env(safe-area-inset-top, 0) + var(--gap-m));
+    --sticky-top: calc(
+      var(--navbar-actions-bottom, env(safe-area-inset-top, 0))
+    );
 
     box-shadow: var(--shadow-raised);
 
