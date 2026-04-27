@@ -15,10 +15,13 @@ export function trackElementBottom(
     'scroll',
     update,
   );
+  const resizeObserver = new ResizeObserver(update);
+  resizeObserver.observe(node);
 
   return {
     destroy() {
       unregisterScroll();
+      resizeObserver.disconnect();
       document.documentElement.style.removeProperty(cssVarName);
     },
   };
