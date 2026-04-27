@@ -113,6 +113,8 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.SmartListCreate]: never;
 
   [AnalyticsEvent.AddNote]: { type: NoteType };
+  [AnalyticsEvent.DeleteNote]: { type: NoteType };
+  [AnalyticsEvent.EditNote]: { type: NoteType };
 
   // Data Import
   [AnalyticsEvent.ImportInitiated]: ImportInitiatedType;

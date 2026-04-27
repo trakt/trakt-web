@@ -3,7 +3,6 @@
   import * as m from "$lib/features/i18n/messages";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import NotesDrawer from "../../../notes/NotesDrawer.svelte";
   import NotesButton from "./NotesButton.svelte";
 
   const {
@@ -19,8 +18,6 @@
     style?: "action" | "dropdown-item";
     media: MediaEntry;
   } = $props();
-
-  let showNotesDrawer = $state(false);
 </script>
 
 <ShareButton
@@ -38,13 +35,4 @@
   source={{ id: "media", type }}
 />
 
-<NotesButton
-  {style}
-  {variant}
-  onClick={() => (showNotesDrawer = true)}
-  {media}
-/>
-
-{#if showNotesDrawer}
-  <NotesDrawer onClose={() => (showNotesDrawer = false)} {media} />
-{/if}
+<NotesButton {style} {variant} {media} />

@@ -95,6 +95,12 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_delete_comment(),
         operation: 'destructive',
       };
+    case ConfirmationType.DeleteNote:
+      return {
+        buttonText: m.button_text_delete_note(),
+        message: m.warning_prompt_delete_note(),
+        operation: 'destructive',
+      };
     case ConfirmationType.SuppressRatingsToast:
       return {
         buttonText: m.button_text_stop_asking(),

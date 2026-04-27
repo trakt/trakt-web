@@ -47,6 +47,10 @@ export const userNotesNotesQuery = defineQuery({
   invalidations: [
     InvalidateAction.Note.Add('movie'),
     InvalidateAction.Note.Add('show'),
+    InvalidateAction.Note.Edit('movie'),
+    InvalidateAction.Note.Edit('show'),
+    InvalidateAction.Note.Delete('movie'),
+    InvalidateAction.Note.Delete('show'),
     InvalidateAction.Favorited('movie'),
     InvalidateAction.Favorited('show'),
   ],

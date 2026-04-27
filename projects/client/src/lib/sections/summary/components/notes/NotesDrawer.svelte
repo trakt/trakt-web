@@ -21,6 +21,6 @@
   {#if $isLoading}
     <LoadingIndicator />
   {:else}
-    <Notes notes={$notes} />
+    <Notes notes={$notes} {media} />
   {/if}
 </Drawer>

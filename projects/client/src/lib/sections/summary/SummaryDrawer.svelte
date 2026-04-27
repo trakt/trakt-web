@@ -13,6 +13,7 @@
   import DetailsDrawer from "./components/details/DetailsDrawer.svelte";
   import type { MediaDetailsProps } from "./components/details/MediaDetailsProps";
   import HistoryDrawer from "./components/history/HistoryDrawer.svelte";
+  import NotesDrawer from "./components/notes/NotesDrawer.svelte";
   import SeasonsDrawer from "./components/seasons/SeasonsDrawer.svelte";
   import SentimentDrawer from "./components/sentiment/SentimentDrawer.svelte";
   import TriviaDrawer from "./components/trivia/TriviaDrawer.svelte";
@@ -79,6 +80,10 @@
 
 {#if drawer === SummaryDrawers.History}
   <HistoryDrawer {...details} onClose={close} />
+{/if}
+
+{#if drawer === SummaryDrawers.Notes && media}
+  <NotesDrawer {media} onClose={close} />
 {/if}
 
 {#if drawer === SummaryDrawers.WhereToWatch}

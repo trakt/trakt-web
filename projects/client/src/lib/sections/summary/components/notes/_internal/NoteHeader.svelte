@@ -3,13 +3,17 @@
   import { m } from "$lib/features/i18n/messages";
   import type { UserNote } from "$lib/requests/models/UserNote";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
+  import type { Snippet } from "svelte";
   import TextCardHeader from "../../_internal/TextCardHeader.svelte";
   import NoteIcon from "./NoteIcon.svelte";
 
-  const { note }: { note: UserNote } = $props();
+  const { note, actions }: { note: UserNote; actions?: Snippet } = $props();
 </script>
 
-<TextCardHeader subTitle={toHumanDay({ date: note.updatedAt, locale: getLocale() })}>
+<TextCardHeader
+  subTitle={toHumanDay({ date: note.updatedAt, locale: getLocale() })}
+  {actions}
+>
   {#snippet icon()}
     <NoteIcon {note} />
   {/snippet}
