@@ -8396,6 +8396,54 @@
         "ios"
       ]
     },
+    "button_text_edit_note": {
+      "default": "Edit",
+      "description": "Button text for editing a note on a show or movie.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_edit_note": {
+      "default": "Edit note",
+      "description": "Aria-label for the button that allows users to edit a note on a show or movie.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_delete_note": {
+      "default": "Delete",
+      "description": "Button text for deleting a note on a show or movie.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_delete_note": {
+      "default": "Delete note",
+      "description": "Aria-label for the button that allows users to delete a note on a show or movie.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "warning_prompt_delete_note": {
+      "default": "Are you sure you want to delete this note?",
+      "description": "Confirmation prompt shown when a user attempts to delete a note.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_popup_menu_notes": {
+      "default": "Note actions",
+      "description": "Aria-label for the popup menu that shows note actions (edit, delete).",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "error_text_email": {
       "default": "Email update failed. Make sure it's a valid address.",
       "description": "Error text shown when a user attempts to update their email with an invalid email address.",

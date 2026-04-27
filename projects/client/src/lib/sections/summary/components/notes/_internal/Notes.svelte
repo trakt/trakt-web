@@ -1,9 +1,10 @@
 <script lang="ts">
+  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { UserNote } from "$lib/requests/models/UserNote";
   import NoteCard from "./NoteCard.svelte";
   import NotePlaceholder from "./NotePlaceholder.svelte";
 
-  const { notes }: { notes: UserNote[] } = $props();
+  const { notes, media }: { notes: UserNote[]; media: MediaEntry } = $props();
 </script>
 
 <div class="trakt-notes">
@@ -12,7 +13,7 @@
   {/if}
 
   {#each notes as note (note.id)}
-    <NoteCard {note} />
+    <NoteCard {note} {media} />
   {/each}
 </div>
 
