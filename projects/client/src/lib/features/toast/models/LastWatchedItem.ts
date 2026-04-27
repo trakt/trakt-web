@@ -1,8 +1,14 @@
 import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 
 type Movie = {
   type: 'movie';
   media: MovieEntry;
 };
 
-export type LastWatchedItem = Movie;
+type Show = {
+  type: 'show';
+  media: ShowEntry;
+};
+
+export type LastWatchedItem = Movie | Show;

@@ -28,6 +28,11 @@ export function useDismissals() {
               dismissed.type === 'movie' &&
               dismissed.id === activity.movie.id.toString()
             );
+          case 'episode':
+            return (
+              dismissed.type === 'show' &&
+              dismissed.id === activity.show.id.toString()
+            );
           default:
             return false;
         }

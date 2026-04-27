@@ -7,7 +7,7 @@ export function getToastTitle(item: NowPlayingItem | LastWatchedItem | Nil) {
     return '';
   }
 
-  return item.type === 'movie'
+  return item.type === 'movie' || item.type === 'show'
     ? item.media.title
     : episodeActivityTitle(item.media, item.show);
 }
