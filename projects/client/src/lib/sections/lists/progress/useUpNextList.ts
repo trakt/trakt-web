@@ -13,13 +13,17 @@ import {
 import {
   upNextNitroQuery,
 } from '$lib/requests/queries/sync/upNextNitroQuery.ts';
+import type { UpNextSortBy } from '$lib/sections/lists/progress/UpNextSortBy.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
+import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 
 export type UpNextStoreProps =
   & PaginationParams
   & FilterParams
   & {
     type: DiscoverMode;
+    sortBy?: UpNextSortBy;
+    sortHow?: SortDirection;
   };
 
 type ProgressEntry = UpNextEntry | MovieProgressEntry;
