@@ -7,6 +7,7 @@
   type AutoCloseButtonProps = {
     onclick: () => void;
     label: string;
+    durationMs?: number;
   } & Pick<TraktActionButtonProps, "style" | "color">;
 
   const {
@@ -14,6 +15,7 @@
     label,
     style = "ghost",
     color,
+    durationMs,
   }: AutoCloseButtonProps = $props();
 </script>
 
@@ -21,6 +23,7 @@
   class="trakt-auto-close-button"
   use:autoDismiss={{
     onDismiss: onclick,
+    durationMs,
   }}
 >
   <ActionButton {onclick} {label} {style} {color} size="small">

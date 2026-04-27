@@ -8,8 +8,11 @@
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import { useLastWatched } from "$lib/features/toast/useLastWatched";
   import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
+  import { time } from "$lib/utils/timing/time.ts";
   import { getToastTitle } from "./getToastTitle";
   import ToastItemCard from "./ToastItemCard.svelte";
+
+  const lingerDuration = time.seconds(5);
 
   const { lastWatched }: { lastWatched: LastWatchedItem } = $props();
 
@@ -41,6 +44,7 @@
           <AutoCloseButton
             onclick={handleDismiss}
             label={m.button_label_dismiss()}
+            durationMs={lingerDuration}
           />
         {/key}
       {:else}
