@@ -30,7 +30,9 @@
 </script>
 
 {#snippet tag()}
-  <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} type="tag" />
+  <div class="trakt-media-tag">
+    <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} type="tag" />
+  </div>
 {/snippet}
 
 <LandscapeCard>
@@ -82,3 +84,18 @@
     </p>
   </CardFooter>
 </LandscapeCard>
+
+<style>
+  .trakt-media-tag {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: var(--gap-micro);
+
+    :global(.trakt-tag) {
+      background: var(--color-background-cover-tag);
+    }
+  }
+</style>

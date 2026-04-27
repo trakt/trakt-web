@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
+  import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
+  import AirTimeTag from "$lib/components/media/tags/AirTimeTag.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
@@ -33,7 +36,16 @@
       variant={variant === "default" ? "upcoming" : "calendar"}
       source="calendar"
       popupActions={hasAired(item) ? popupActions : undefined}
-    />
+    >
+      {#snippet tag()}
+        <AirTimeTag airDate={item.airDate} />
+        <EpisodeStatusTag
+          i18n={EpisodeIntlProvider}
+          episodeType={item.type}
+          type="tag"
+        />
+      {/snippet}
+    </EpisodeItem>
   {/if}
 
   {#if item.type === "movie"}
