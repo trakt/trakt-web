@@ -55,6 +55,14 @@ export function usePortal(props?: PortalProps) {
     isPopupOpen.next(true);
   };
 
+  const toggleHandler = (target: HTMLElement) => {
+    if (isPopupOpen.value) {
+      closeHandler();
+    } else {
+      openHandler(target);
+    }
+  };
+
   const portalTrigger = (targetNode: HTMLElement) => {
     const closeAroundTarget = (event: Event) => {
       const isPersistent = props?.type === 'persistent';
@@ -64,7 +72,7 @@ export function usePortal(props?: PortalProps) {
 
       closeHandler();
     };
-    const openAroundTarget = () => openHandler(targetNode);
+    const openAroundTarget = () => toggleHandler(targetNode);
 
     onMount(() => {
       clickOutside(targetNode);
