@@ -95,10 +95,10 @@
 {/snippet}
 
 {#snippet tag()}
-  {#if props.tag}
-    {@render props.tag()}
-  {:else}
-    <div class="trakt-episode-tag">
+  <div class="trakt-episode-tag">
+    {#if props.tag}
+      {@render props.tag()}
+    {:else}
       {#if ["default"].includes(props.variant)}
         <DurationTag i18n={TagIntlProvider} {runtime} type="tag" />
       {/if}
@@ -178,8 +178,8 @@
           </TextTag>
         </TagBar>
       {/if}
-    </div>
-  {/if}
+    {/if}
+  </div>
 {/snippet}
 
 {#snippet card()}
