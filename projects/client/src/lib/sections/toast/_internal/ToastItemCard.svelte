@@ -4,6 +4,7 @@
   import type { NowPlayingItem } from "$lib/requests/models/NowPlayingItem";
   import ToastEpisodeCover from "./ToastEpisodeCover.svelte";
   import ToastMovieCover from "./ToastMovieCover.svelte";
+  import ToastShowCover from "./ToastShowCover.svelte";
 
   const { item }: { item: NowPlayingItem | LastWatchedItem } = $props();
 </script>
@@ -20,5 +21,9 @@
 
   {#if item.type === "episode"}
     <ToastEpisodeCover episode={item.media} show={item.show} />
+  {/if}
+
+  {#if item.type === "show"}
+    <ToastShowCover show={item.media} />
   {/if}
 </Card>
