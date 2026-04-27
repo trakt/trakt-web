@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="T extends SortBy | UpNextSortBy">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
@@ -7,7 +7,9 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { m } from "$lib/features/i18n/messages";
+  import type { UpNextSortBy } from "$lib/sections/lists/progress/UpNextSortBy";
   import type { ListUrlBuilder } from "../models/ListUrlBuilder";
+  import type { SortBy } from "../models/SortBy";
   import type { SortDirection } from "../models/SortDirection";
   import type { Sorting } from "../models/Sorting";
   import SortIcon from "./SortIcon.svelte";
@@ -18,10 +20,10 @@
     current,
     urlBuilder,
   }: {
-    options: Sorting[];
+    options: Sorting<T>[];
     onClose: () => void;
-    current: { sortHow: SortDirection; sorting: Sorting };
-    urlBuilder: ListUrlBuilder;
+    current: { sortHow: SortDirection; sorting: Sorting<T> };
+    urlBuilder: ListUrlBuilder<T>;
   } = $props();
 
   const { track } = useTrack(AnalyticsEvent.ListSort);

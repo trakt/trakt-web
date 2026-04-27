@@ -1,11 +1,13 @@
-<script lang="ts">
+<script lang="ts" generics="T extends SortBy | UpNextSortBy">
   import { page } from "$app/state";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import SortIcon from "$lib/components/icons/SortIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { UpNextSortBy } from "$lib/sections/lists/progress/UpNextSortBy";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import SortOptionsDrawer from "./_internal/SortOptionsDrawer.svelte";
   import type { ListUrlBuilder } from "./models/ListUrlBuilder";
+  import type { SortBy } from "./models/SortBy";
   import type { SortDirection } from "./models/SortDirection";
   import type { Sorting } from "./models/Sorting";
 
@@ -16,9 +18,9 @@
     onUpdate,
     disabled,
   }: {
-    options: Sorting[];
-    current: { sortHow: SortDirection; sorting: Sorting };
-    urlBuilder: ListUrlBuilder;
+    options: Sorting<T>[];
+    current: { sortHow: SortDirection; sorting: Sorting<T> };
+    urlBuilder: ListUrlBuilder<T>;
     onUpdate: (params: Record<string, string>) => void;
     disabled?: boolean;
   } = $props();
