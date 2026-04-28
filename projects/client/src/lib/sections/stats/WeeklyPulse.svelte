@@ -9,10 +9,10 @@
   } from "../dashboard/_internal/dashboardDrawerNavigation";
   import ViewAllButton from "../lists/components/ViewAllButton.svelte";
   import PulseCell from "./_internal/PulseCell.svelte";
+  import type { PulseItem } from "./_internal/models/PulseItem.ts";
   import PulseGraph from "./_internal/PulseGraph.svelte";
   import { useWeeklyPulse } from "./_internal/useWeeklyPulse";
   import { getDateRangeLabel } from "./_internal/utils/getDateRangeLabel";
-  import { pairStatRuns } from "./_internal/utils/pairStatRuns.ts";
 
   const { buildDrawerLink } = dashboardDrawerNavigation();
   const weeklyPulseDrawerLink = $derived(
@@ -25,7 +25,28 @@
 
   const hasItems = $derived($items.length > 0);
 
-  const orderedItems = $derived(pairStatRuns($items));
+  function getSectionPriority(entry: PulseItem): number {
+    if (entry.type === "graph" && entry.kind === "screenTimeDaily") return 0;
+    if (entry.type === "stat" && entry.key === "screenTimeTotal") return 1;
+    if (entry.type === "graph" && entry.kind === "watchClock") return 2;
+    if (entry.type === "stat" && entry.key === "avgPerDay") return 3;
+    if (entry.type === "stat" && entry.key === "longestBinge") return 4;
+    if (entry.type === "stat" && entry.key === "screenTimeShare") return 5;
+    if (entry.type === "stat" && entry.key === "activeDays") return 6;
+
+    return 100;
+  }
+
+  const orderedItems = $derived.by(() =>
+    $items
+      .map((entry, index) => ({
+        entry,
+        index,
+        priority: getSectionPriority(entry),
+      }))
+      .sort((a, b) => a.priority - b.priority || a.index - b.index)
+      .map((x) => x.entry),
+  );
 </script>
 
 {#if hasItems || $isLoading}
