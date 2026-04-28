@@ -1,5 +1,6 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import MarkAsWatchedIcon from "../../icons/MarkAsWatchedIcon.svelte";
@@ -17,6 +18,7 @@
     onAsk,
     isMarkingAsWatched,
     isWatched,
+    isLoading = false,
     style,
     mode = "hybrid",
     ...props
@@ -55,7 +57,7 @@
     color: $color,
     variant: mode === "ask" ? "primary" : variant,
     onclick: handler,
-    disabled: isMarkingAsWatched,
+    disabled: isMarkingAsWatched || isLoading,
     ...events,
   });
 
@@ -70,6 +72,14 @@
   );
 </script>
 
+{#snippet watchIcon(size?: "small")}
+  {#if isLoading}
+    <LoadingIndicator />
+  {:else}
+    <MarkAsWatchedIcon {state} {size} />
+  {/if}
+{/snippet}
+
 {#if allowMarkAsWatched}
   {#if style === "normal"}
     <div
@@ -83,7 +93,7 @@
       >
         {buttonText}
         {#snippet icon()}
-          <MarkAsWatchedIcon {state} size="small" />
+          {@render watchIcon("small")}
         {/snippet}
       </Button>
     </div>
@@ -91,7 +101,7 @@
 
   {#if style === "action"}
     <ActionButton style="ghost" {...commonProps} {...props}>
-      <MarkAsWatchedIcon {state} />
+      {@render watchIcon()}
     </ActionButton>
   {/if}
 
@@ -99,7 +109,7 @@
     <DropdownItem {...commonProps} style="flat">
       {buttonText}
       {#snippet icon()}
-        <MarkAsWatchedIcon {state} />
+        {@render watchIcon()}
       {/snippet}
     </DropdownItem>
   {/if}

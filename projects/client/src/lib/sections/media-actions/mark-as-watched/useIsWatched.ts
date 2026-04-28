@@ -16,6 +16,9 @@ export function useIsWatched(props: IsWatchedProps) {
   const seasons = props.type === 'season'
     ? Array.isArray(props.media) ? props.media : [props.media]
     : [];
+  const shows = props.type === 'show'
+    ? Array.isArray(props.media) ? props.media : [props.media]
+    : [];
 
   const isWatched = history.pipe(
     map(($history) => {
@@ -27,13 +30,10 @@ export function useIsWatched(props: IsWatchedProps) {
         case 'movie':
           return media.every((m) => $history.movies.has(m.id));
         case 'episode': {
-          const watchedEpisodes = $history.shows.get(showId)?.episodes ??
-            [];
+          const watchedEpisodes = $history.shows.get(showId)?.episodes ?? [];
 
           return episodes.every((episode) =>
-            watchedEpisodes.some((e) =>
-              e.season === episode.season && e.episode === episode.number
-            )
+            watchedEpisodes.some((e) => e.episodeId === episode.id)
           );
         }
         case 'season': {
@@ -45,9 +45,22 @@ export function useIsWatched(props: IsWatchedProps) {
           );
         }
         case 'show': {
-          return media.every((m) =>
-            Boolean($history.shows.get(m.id)?.isWatched)
-          );
+          return shows.every((show) => {
+            const watchedShow = $history.shows.get(show.id);
+            const episodeCount = show.episode?.count;
+
+            if (!watchedShow || !episodeCount) {
+              return false;
+            }
+
+            const watchedEpisodeCount = [
+              ...watchedShow.playsPerSeason.entries(),
+            ]
+              .filter(([season]) => season !== 0)
+              .reduce((sum, [, count]) => sum + count, 0);
+
+            return watchedEpisodeCount >= episodeCount;
+          });
         }
       }
     }),

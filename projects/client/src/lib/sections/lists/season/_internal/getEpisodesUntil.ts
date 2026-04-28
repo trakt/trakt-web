@@ -1,5 +1,3 @@
-import type { WatchedEpisode } from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
-
 type Episode = { season: number; number: number };
 type Season = {
   number: number;
@@ -9,40 +7,40 @@ type Season = {
 type GetEpisodesUntilProps = {
   previousSeasons: Season[];
   episode: Episode;
-  watchedEpisodes?: WatchedEpisode[];
+  watchedBySeason: ReadonlyMap<number, ReadonlySet<number>>;
 };
 
-function getSeasonUntil(seasonNumber: number, episodeCount: number) {
-  return {
-    number: seasonNumber,
-    episodes: Array.from({ length: episodeCount }, (_, i) => ({
-      number: i + 1,
-    })),
-  };
+function getUnwatchedEpisodesForSeason(
+  seasonNumber: number,
+  episodeCount: number,
+  watchedEpisodes: ReadonlySet<number>,
+) {
+  const episodes = Array.from({ length: episodeCount }, (_, i) => i + 1)
+    .filter((n) => !watchedEpisodes.has(n))
+    .map((n) => ({ number: n }));
+
+  return { number: seasonNumber, episodes };
 }
 
 export function getEpisodesUntil(
-  { previousSeasons, episode, watchedEpisodes }: GetEpisodesUntilProps,
+  { previousSeasons, episode, watchedBySeason }: GetEpisodesUntilProps,
 ) {
   const previousSeasonEpisodes = previousSeasons
-    .flatMap((season) => getSeasonUntil(season.number, season.episodes.count));
+    .map((season) =>
+      getUnwatchedEpisodesForSeason(
+        season.number,
+        season.episodes.count,
+        watchedBySeason.get(season.number) ?? new Set(),
+      )
+    )
+    .filter((season) => season.episodes.length > 0);
 
-  const currentSeasonEpisodes = getSeasonUntil(episode.season, episode.number);
+  const currentSeasonWatched = watchedBySeason.get(episode.season) ?? new Set();
+  const currentSeasonEpisodes = getUnwatchedEpisodesForSeason(
+    episode.season,
+    episode.number,
+    currentSeasonWatched,
+  );
 
-  const seasons = [
-    ...previousSeasonEpisodes,
-    currentSeasonEpisodes,
-  ];
-
-  return seasons
-    .map((season) => ({
-      number: season.number,
-      episodes: season.episodes.filter((e) => {
-        const isWatched = watchedEpisodes?.some(
-          (we) => we.season === season.number && we.episode === e.number,
-        );
-        return !isWatched;
-      }),
-    }))
-    .filter((s) => s.episodes.length > 0);
+  return [...previousSeasonEpisodes, currentSeasonEpisodes];
 }
