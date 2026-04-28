@@ -1,5 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import { useDiscover } from "$lib/features/discover/useDiscover.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import PulseCell from "$lib/sections/stats/_internal/PulseCell.svelte";
   import PulseGraph from "$lib/sections/stats/_internal/PulseGraph.svelte";
@@ -9,7 +10,8 @@
 
   const { onClose }: { onClose: () => void } = $props();
 
-  const { items, dateRange } = useWeeklyPulse();
+  const { mode } = useDiscover();
+  const { items, dateRange } = useWeeklyPulse({ mode });
 
   let isOpen = $state(false);
 </script>

@@ -32,6 +32,11 @@ const emptyGraphData: PulseGraphData = {
     buckets: Array.from({ length: 10 }, () => 0),
     average: 0,
   },
+  screenTimeDaily: {
+    percentages: [0, 0, 0, 0, 0, 0, 0],
+    minutesPerDay: [0, 0, 0, 0, 0, 0, 0],
+    labels: [],
+  },
 };
 
 describe('pickGraphs selection', () => {
@@ -43,6 +48,11 @@ describe('pickGraphs selection', () => {
     const data: PulseGraphData = {
       ...emptyGraphData,
       dailyBars: { days: [1, 2, 0, 3, 1, 0, 2], labels: [] },
+      screenTimeDaily: {
+        percentages: [0, 0, 0, 0, 0, 0, 0],
+        minutesPerDay: [0, 0, 0, 0, 0, 0, 0],
+        labels: [],
+      },
     };
     expect(pickGraphs(data).map((g) => g.type)).toContain('dailyBars');
   });
@@ -116,6 +126,11 @@ describe('pickGraphs', () => {
         buckets: Array.from({ length: 10 }, () => 0),
         average: 0,
       },
+      screenTimeDaily: {
+        percentages: [0, 0, 0, 0, 0, 0, 0],
+        minutesPerDay: [0, 0, 0, 0, 0, 0, 0],
+        labels: [],
+      },
     };
     const result = pickGraphs(data);
     expect(result.length).toBeGreaterThan(1);
@@ -137,6 +152,11 @@ describe('pickGraphs', () => {
       ratingsDistribution: {
         buckets: Array.from({ length: 10 }, () => 0),
         average: 0,
+      },
+      screenTimeDaily: {
+        percentages: [0, 0, 0, 0, 0, 0, 0],
+        minutesPerDay: [0, 0, 0, 0, 0, 0, 0],
+        labels: [],
       },
     };
     expect(pickGraphs(data)).toEqual([]);

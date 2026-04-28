@@ -25,9 +25,11 @@
 {:else if key === "busiestDay"}
   <TrendIcon direction="up" />
 {:else if key === "longestBinge"}
-  <PlayIcon />
-{:else if key === "hours"}
   <ClockIcon />
+{:else if key === "hours" || key === "screenTimeTotal" || key === "avgPerDay"}
+  <ClockIcon />
+{:else if key === "screenTimeShare"}
+  <TrendIcon direction="up" />
 {:else if key === "ratings"}
   <StarIcon fill="full" />
 {:else if key === "comments"}

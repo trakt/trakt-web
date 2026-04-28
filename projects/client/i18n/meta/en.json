@@ -9614,6 +9614,62 @@
         "ios"
       ]
     },
+    "header_stats_graph_screen_time_daily": {
+      "default": "Daily Screen Time",
+      "description": "Title for the daily screen time bar chart in weekly pulse, showing % of waking hours spent watching per day.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_screen_time_total": {
+      "default": "Screen Time",
+      "description": "Label for total screen time stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_screen_time_total": {
+      "default": "Total watch time this week",
+      "description": "Tooltip for total screen time stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_screen_time_share": {
+      "default": "Waking Hours",
+      "description": "Label for screen time as percentage of waking hours stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_screen_time_share": {
+      "default": "% of waking hours spent watching (based on 16h day)",
+      "description": "Tooltip for screen time share stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_avg_per_day": {
+      "default": "Avg / Day",
+      "description": "Label for average watch time per active day stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_avg_per_day": {
+      "default": "Average watch time on active days",
+      "description": "Tooltip for average per active day stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "header_stats_graph_shows_movies": {
       "default": "Shows vs Movies",
       "description": "Title for the shows/movies breakdown graph in weekly pulse.",

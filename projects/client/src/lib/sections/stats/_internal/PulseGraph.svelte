@@ -5,6 +5,7 @@
   import type { PulseGraphType } from "./models/PulseGraphType";
   import PulseGraphDailyBars from "./PulseGraphDailyBars.svelte";
   import PulseGraphRatings from "./PulseGraphRatings.svelte";
+  import PulseGraphScreenTimeDaily from "./PulseGraphScreenTimeDaily.svelte";
   import PulseGraphShowsMovies from "./PulseGraphShowsMovies.svelte";
   import PulseGraphWatchClock from "./PulseGraphWatchClock.svelte";
   import PulseGraphWeekTrend from "./PulseGraphWeekTrend.svelte";
@@ -18,6 +19,7 @@
     watchClock: m.header_stats_graph_peak(),
     showsMovies: m.header_stats_graph_shows_movies(),
     ratingsDistribution: m.header_stats_graph_ratings(),
+    screenTimeDaily: m.header_stats_graph_screen_time_daily(),
   };
 
   const title = $derived(titles[kind]);
@@ -40,6 +42,8 @@
       <PulseGraphShowsMovies data={data.showsMovies} />
     {:else if kind === "ratingsDistribution"}
       <PulseGraphRatings data={data.ratingsDistribution} />
+    {:else if kind === "screenTimeDaily"}
+      <PulseGraphScreenTimeDaily data={data.screenTimeDaily} />
     {/if}
   </div>
 </Card>

@@ -21,4 +21,9 @@ export type PulseGraphData = {
     readonly buckets: readonly number[];
     readonly average: number;
   };
+  readonly screenTimeDaily: {
+    readonly percentages: readonly number[];
+    readonly minutesPerDay: readonly number[];
+    readonly labels: readonly string[];
+  };
 };

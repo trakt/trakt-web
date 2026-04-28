@@ -1,6 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
+  import { useDiscover } from "$lib/features/discover/useDiscover.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import {
     dashboardDrawerNavigation,
@@ -18,7 +19,9 @@
     buildDrawerLink(DashboardDrawers.WeeklyPulse),
   );
 
-  const { items, isLoading, dateRange } = useWeeklyPulse();
+  const { mode } = useDiscover();
+
+  const { items, isLoading, dateRange } = useWeeklyPulse({ mode });
 
   const hasItems = $derived($items.length > 0);
 

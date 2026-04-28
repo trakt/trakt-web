@@ -3,4 +3,5 @@ export type PulseGraphType =
   | 'weekTrend'
   | 'watchClock'
   | 'showsMovies'
-  | 'ratingsDistribution';
+  | 'ratingsDistribution'
+  | 'screenTimeDaily';
