@@ -164,13 +164,14 @@
   --max-pulse-item-count: 12;
 
   /*
-    Pulse graphs occupy 2 slots, so we round down to the nearest
-    even number to prevent a graph from half-overflowing at the edge.
+    The item sequence is: graph (2 slots), cell (1 slot), graph (2 slots), cells.
+    We can't round to the nearest even count, since a count of 4 would show 
+    the second graph half-cut, so we skip 4.
   */
+  --pulse-item-max-count: round(down, var(--list-inner-width) / (var(--min-pulse-card-width) + var(--list-gap)), 1);
+  --pulse-item-count-corrected: calc(var(--pulse-item-max-count) - clamp(0, var(--pulse-item-max-count) - 3, 1) + clamp(0, var(--pulse-item-max-count) - 4, 1));
   --pulse-item-count: clamp(2,
-    calc(2 * round(down,
-        var(--list-inner-width) / (2 * (var(--min-pulse-card-width) + var(--list-gap))),
-        1)),
+    var(--pulse-item-count-corrected),
     var(--max-pulse-item-count));
 
   @supports (-moz-appearance: none) {

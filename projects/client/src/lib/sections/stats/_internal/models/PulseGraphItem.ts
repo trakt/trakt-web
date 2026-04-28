@@ -1,10 +1,16 @@
-import type { PulseGraphData } from './PulseGraphData.ts';
-import type { PulseGraphType } from './PulseGraphType.ts';
+import type { PeakHoursData } from './PeakHoursData.ts';
+import type { ScreenTimeDailyData } from './ScreenTimeDailyData.ts';
 
-export type PulseGraphItem = {
-  readonly type: 'graph';
-  readonly key: string;
-  readonly kind: PulseGraphType;
-  readonly data: PulseGraphData;
-  readonly score: number;
-};
+export type PulseGraphItem =
+  | {
+    readonly type: 'graph';
+    readonly key: string;
+    readonly kind: 'peakHours';
+    readonly data: PeakHoursData;
+  }
+  | {
+    readonly type: 'graph';
+    readonly key: string;
+    readonly kind: 'screenTimeDaily';
+    readonly data: ScreenTimeDailyData;
+  };

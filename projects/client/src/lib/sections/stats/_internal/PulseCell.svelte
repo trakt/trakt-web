@@ -1,30 +1,22 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import type { PulseDeltaKind } from "./models/PulseDeltaKind";
   import PulseDeltaTag from "./PulseDeltaTag.svelte";
-  import PulseIcon from "./PulseIcon.svelte";
 
-  const {
-    key,
-    value,
-    label,
-    tooltip,
-    delta = null,
-    note,
-  }: {
-    key: string;
+  type PulseCellProps = {
     value: string;
     label: string;
-    tooltip?: string;
-    delta?: number | null;
-    note?: string;
-  } = $props();
+    tooltip: string;
+    delta: number;
+    deltaKind: PulseDeltaKind;
+  };
+
+  const { value, label, tooltip, delta, deltaKind }: PulseCellProps = $props();
 </script>
 
-{#snippet iconEl()}
-  <div class="trakt-pulse-cell-icon">
-    <PulseIcon {key} />
-  </div>
+{#snippet valueText()}
+  <p class="trakt-pulse-cell-value bold ellipsis">{value}</p>
 {/snippet}
 
 <Card
@@ -32,20 +24,19 @@
   --height-card="var(--height-pulse-card)"
 >
   <div class="trakt-pulse-cell">
-    {#if tooltip}
-      <Tooltip content={tooltip} side="right">
-        {@render iconEl()}
-      </Tooltip>
-    {:else}
-      {@render iconEl()}
-    {/if}
+    <p>{label}</p>
 
     <div class="trakt-pulse-cell-body">
-      <p class="trakt-pulse-cell-value">{value}</p>
-      <p class="trakt-pulse-cell-label">{label}</p>
+      {#if tooltip}
+        <Tooltip content={tooltip} side="right">
+          {@render valueText()}
+        </Tooltip>
+      {:else}
+        {@render valueText()}
+      {/if}
     </div>
 
-    <PulseDeltaTag {delta} {note} />
+    <PulseDeltaTag {delta} {deltaKind} />
   </div>
 </Card>
 
@@ -54,46 +45,25 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--ni-10);
+    gap: var(--gap-xs);
+    justify-content: space-between;
+
     padding: var(--ni-16);
+    box-sizing: border-box;
+
     overflow: hidden;
-  }
-
-  .trakt-pulse-cell-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: var(--ni-28);
-    height: var(--ni-28);
-    border-radius: var(--border-radius-s);
-    background: var(--color-official-list-background);
-
-    :global(svg) {
-      width: var(--ni-16);
-      height: var(--ni-16);
-      color: var(--color-text-emphasis);
-    }
+    height: 100%;
   }
 
   .trakt-pulse-cell-body {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-4);
+    gap: var(--gap-xxs);
     flex: 1;
+    justify-content: center;
   }
 
   .trakt-pulse-cell-value {
-    font-size: var(--ni-32);
-    font-weight: 700;
-    line-height: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .trakt-pulse-cell-label {
-    font-size: var(--ni-13);
-    color: var(--shade-400);
+    font-size: var(--ni-28);
   }
 </style>

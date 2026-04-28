@@ -1,10 +1,8 @@
 <script lang="ts">
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useDiscover } from "$lib/features/discover/useDiscover";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import Banner from "$lib/sections/banner/Banner.svelte";
   import DashboardDrawer from "$lib/sections/dashboard/DashboardDrawer.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
@@ -19,7 +17,6 @@
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
-  import WeeklyPulse from "$lib/sections/stats/WeeklyPulse.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   // FIXME: move to PersonalHistoryList when Profile also supports discover mode
@@ -48,12 +45,6 @@
 
     <Banner />
     <UpNextList />
-
-    <RenderForFeature flag={FeatureFlag.ThisWeek}>
-      {#snippet enabled()}
-        <WeeklyPulse />
-      {/snippet}
-    </RenderForFeature>
 
     <WatchList
       drilldownLabel={m.button_label_view_all_start_watching_items()}

@@ -5,6 +5,7 @@ const commentIdParam = 'comment_id';
 
 export enum ProfileDrawers {
   Activity = 'activity',
+  MyStats = 'my-stats',
 }
 
 const profileDrawerParams = {
@@ -15,6 +16,8 @@ function mapToDrawer(value: string | Nil) {
   switch (value) {
     case ProfileDrawers.Activity:
       return ProfileDrawers.Activity;
+    case ProfileDrawers.MyStats:
+      return ProfileDrawers.MyStats;
     default:
       return null;
   }
@@ -35,5 +38,6 @@ export function profileDrawerNavigation(searchParams?: URLSearchParams) {
         ProfileDrawers.Activity,
         id != null ? { [commentIdParam]: String(id) } : undefined,
       ),
+    buildMyStatsDrawerLink: () => buildDrawerLink(ProfileDrawers.MyStats),
   };
 }
