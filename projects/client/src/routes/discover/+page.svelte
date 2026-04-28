@@ -38,7 +38,7 @@
       <DiscoverToggles />
     {/snippet}
 
-    {#snippet seasonalActions()}
+    {#snippet headerActions()}
       <SeasonalToggle />
     {/snippet}
   </NavbarStateSetter>

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -25,10 +24,7 @@
 
 <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
   <div class="trakt-settings-navbar">
-    <div class="trakt-settings-sidebar-content">
-      {@render settingsLinks()}
-    </div>
-    <LogoutButton />
+    {@render settingsLinks()}
   </div>
 </RenderFor>
 
@@ -42,29 +38,21 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-settings-navbar {
+    position: sticky;
+    top: calc(env(safe-area-inset-top, 0) + var(--content-gap));
+    align-self: start;
+
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     gap: var(--gap-s);
 
-    min-height: var(--ni-480);
-    max-height: calc(100dvh - var(--content-gap));
-
-    :global(.trakt-button) {
-      width: fit-content;
-    }
-
     @include for-tablet-sm-and-below {
+      position: static;
+
       min-height: 0;
       height: fit-content;
     }
-  }
-
-  .trakt-settings-sidebar-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-l);
   }
 
   .trakt-settings-links {
@@ -79,18 +67,38 @@
     }
 
     :global(.trakt-link) {
+      display: block;
+      padding: var(--ni-10) var(--ni-12);
+
+      border-radius: var(--border-radius-m);
+
       text-decoration: none;
+
+      transition: background-color var(--transition-increment) ease-in-out;
     }
 
     :global(.trakt-link.trakt-link-active) {
+      background-color: color-mix(
+        in srgb,
+        var(--color-link-active) 14%,
+        transparent
+      );
+
       :global(span.title) {
-        color: var(--color-text-primary);
+        color: var(--color-link-active);
       }
     }
 
     @include for-tablet-sm-and-below {
       flex-direction: row;
+      flex-wrap: wrap;
       align-items: center;
+
+      gap: var(--gap-xs);
+
+      :global(.trakt-link) {
+        padding: var(--ni-8) var(--ni-10);
+      }
     }
   }
 </style>

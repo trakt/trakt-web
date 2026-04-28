@@ -43,9 +43,11 @@
 {/if}
 
 {#if style === "action"}
-  <ActionButton {...commonProps} style="ghost">
-    <LogoutIcon />
-  </ActionButton>
+  <div class="trakt-logout-action-button">
+    <ActionButton {...commonProps} style="ghost" color="red">
+      <LogoutIcon />
+    </ActionButton>
+  </div>
 {/if}
 
 {#if style === "dropdown-item"}
@@ -56,3 +58,27 @@
     {/snippet}
   </DropdownItem>
 {/if}
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-logout-action-button {
+    --color-logout-button: var(--color-background-red);
+
+    :global(
+      .trakt-action-button[data-style="ghost"][data-variant="primary"][data-color="red"]
+    ) {
+      --color-foreground-action-button: var(--color-logout-button);
+
+      @include for-mouse {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--color-logout-button) 10%,
+            transparent
+          );
+        }
+      }
+    }
+  }
+</style>
