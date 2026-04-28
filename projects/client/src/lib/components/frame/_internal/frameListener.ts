@@ -4,11 +4,6 @@ import { onMount } from 'svelte';
 import { UrlBuilder } from '../../../utils/url/UrlBuilder.ts';
 import { useShare } from '../../buttons/share/useShare.ts';
 
-const VALID_ORIGINS: string[] = [
-  'https://trakt.tv',
-  'http://localhost:3000',
-] as const;
-
 type FrameMessage = {
   type: 'embeddedHeight';
   height: number;
@@ -38,8 +33,15 @@ export function frameListener(
 ) {
   const { share } = useShare({ id: source });
 
+  let iframeOrigin: string;
+  try {
+    iframeOrigin = new URL(element.src).origin;
+  } catch {
+    return;
+  }
+
   const handleMessage = (event: MessageEvent<FrameMessage>) => {
-    if (!VALID_ORIGINS.includes(event.origin)) {
+    if (event.origin !== iframeOrigin) {
       return;
     }
 
@@ -81,9 +83,7 @@ export function frameListener(
   globalThis.window.addEventListener('message', handleMessage);
 
   const postMessageToChild = <T>(message: T) => {
-    VALID_ORIGINS.forEach((origin) => {
-      element.contentWindow?.postMessage(message, origin);
-    });
+    element.contentWindow?.postMessage(message, iframeOrigin);
   };
 
   onMount(() => {
