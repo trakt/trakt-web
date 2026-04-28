@@ -20,7 +20,7 @@ export function useIsRateable(props: IsRateableProps) {
 
           return media.every((m) => {
             const show = $history.shows.get(m.id);
-            return Boolean(show?.isPartiallyWatched || show?.isWatched);
+            return show?.episodes.some((e) => e.season !== 0) ?? false;
           });
         }),
       ),

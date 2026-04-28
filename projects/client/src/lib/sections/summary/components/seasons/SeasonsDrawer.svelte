@@ -10,8 +10,10 @@
   import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
   import SeasonEpisodeItem from "$lib/sections/lists/season/_internal/SeasonEpisodeItem.svelte";
   import SeasonPopupMenu from "$lib/sections/lists/season/_internal/SeasonPopupMenu.svelte";
+  import { useShowWatchedEpisodes } from "$lib/sections/lists/season/_internal/useShowWatchedEpisodes";
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
+  import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import { fade } from "svelte/transition";
 
   const {
@@ -35,8 +37,14 @@
   const { history } = useUser();
 
   const showProgress = $derived($history?.shows.get(show.id));
-  const watchedEpisodes = $derived(showProgress?.episodes);
-  const hasUnseenEpisodes = $derived(!showProgress?.isWatched);
+  const watchedEpisodeCount = $derived(
+    countWatchedEpisodes(showProgress?.playsPerSeason ?? new Map()),
+  );
+  const hasUnseenEpisodes = $derived(watchedEpisodeCount < show.episode.count);
+
+  const { watchedBySeason, isLoading: isWatchedLoading } = $derived(
+    useShowWatchedEpisodes({ showId: show.id }),
+  );
 
   const previousSeasons = $derived(
     seasons.filter((s) => s.number > 0 && s.number < currentSeason),
@@ -113,8 +121,9 @@
                 {show}
                 {episode}
                 {previousSeasons}
-                {watchedEpisodes}
                 {hasUnseenEpisodes}
+                watchedBySeason={$watchedBySeason}
+                isWatchedLoading={$isWatchedLoading}
                 coverUrl={seasonPosterUrl}
                 style="compact"
                 source="seasons-drawer"
