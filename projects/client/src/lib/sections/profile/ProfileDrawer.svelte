@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import MyStatsDrawer from "../stats/MyStatsDrawer.svelte";
   import {
     ProfileDrawers,
     profileDrawerNavigation,
@@ -11,6 +12,8 @@
   );
 </script>
 
-{#if drawer === ProfileDrawers.Activity}
+{#if drawer === ProfileDrawers.MyStats}
+  <MyStatsDrawer onClose={close} />
+{:else if drawer === ProfileDrawers.Activity}
   <ActivityDrawer {sourceCommentId} onClose={close} />
 {/if}

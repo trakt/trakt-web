@@ -1,36 +1,30 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
+  import { useDiscover } from "$lib/features/discover/useDiscover.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import {
-    dashboardDrawerNavigation,
-    DashboardDrawers,
-  } from "../dashboard/_internal/dashboardDrawerNavigation";
+  import { profileDrawerNavigation } from "../profile/_internal/profileDrawerNavigation.ts";
   import PulseCell from "./_internal/PulseCell.svelte";
   import PulseGraph from "./_internal/PulseGraph.svelte";
-  import { useWeeklyPulse } from "./_internal/useWeeklyPulse";
-  import { getDateRangeLabel } from "./_internal/utils/getDateRangeLabel";
-  import { pairStatRuns } from "./_internal/utils/pairStatRuns.ts";
+  import { useWeeklyPulse } from "./_internal/useWeeklyPulse.ts";
+  import { getDateRangeLabel } from "./_internal/utils/getDateRangeLabel.ts";
 
-  const { buildDrawerLink } = dashboardDrawerNavigation();
-  const weeklyPulseDrawerLink = $derived(
-    buildDrawerLink(DashboardDrawers.WeeklyPulse),
-  );
+  const { buildMyStatsDrawerLink } = profileDrawerNavigation();
 
-  const { items, isLoading, dateRange } = useWeeklyPulse();
+  const { mode } = useDiscover();
+
+  const { items, isLoading, dateRange } = useWeeklyPulse({ mode });
 
   const hasItems = $derived($items.length > 0);
-
-  const orderedItems = $derived(pairStatRuns($items));
 </script>
 
 {#if hasItems || $isLoading}
   <SectionList
     id="weekly-pulse"
-    items={orderedItems}
-    title={m.header_stats_this_week()}
+    items={$items}
+    title={m.header_stats_my_stats()}
     drilldown={{
-      ...weeklyPulseDrawerLink,
+      ...buildMyStatsDrawerLink(),
       source: { id: "weekly-pulse" },
       label: m.button_text_view_all(),
     }}
@@ -45,15 +39,14 @@
     {#snippet item(entry)}
       {#if entry.type === "stat"}
         <PulseCell
-          key={entry.key}
           value={entry.value}
           label={entry.label}
           tooltip={entry.tooltip}
           delta={entry.delta}
-          note={entry.note}
+          deltaKind={entry.deltaKind}
         />
       {:else if entry.type === "graph"}
-        <PulseGraph kind={entry.kind} data={entry.data} />
+        <PulseGraph item={entry} />
       {/if}
     {/snippet}
 

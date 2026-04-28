@@ -1,4 +1,4 @@
 export enum FeatureFlag {
-  ThisWeek = 'this-week',
+  MyStats = 'my-stats',
   YearInReview = 'year-in-review',
 }

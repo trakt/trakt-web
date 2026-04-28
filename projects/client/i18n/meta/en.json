@@ -9822,7 +9822,7 @@
       ]
     },
     "text_stats_time_late_night": {
-      "default": "Late Night",
+      "default": "Night",
       "description": "Label for late night time bucket (10pm-5am) in watch clock chart.",
       "exclude": [
         "android",
@@ -9959,7 +9959,7 @@
       ]
     },
     "text_stats_delta_same": {
-      "default": "same",
+      "default": "No change",
       "description": "Label shown when week-over-week change is zero.",
       "exclude": [
         "android",
@@ -10016,25 +10016,9 @@
         "ios"
       ]
     },
-    "header_stats_this_week": {
-      "default": "Your Week",
-      "description": "Section header for the weekly pulse stats block.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "header_stats_graph_daily": {
-      "default": "Daily Activity",
-      "description": "Title for the daily bars graph in weekly pulse.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "header_stats_graph_trend": {
-      "default": "Week Trend",
-      "description": "Title for the week-over-week trend graph in weekly pulse.",
+    "header_stats_my_stats": {
+      "default": "My Stats",
+      "description": "Title for the weekly pulse stats section and drawer.",
       "exclude": [
         "android",
         "ios"
@@ -10043,6 +10027,62 @@
     "header_stats_graph_peak": {
       "default": "Peak Hours",
       "description": "Title for the watch clock graph in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_stats_graph_screen_time_daily": {
+      "default": "Daily Screen Time",
+      "description": "Title for the daily screen time bar chart in weekly pulse, showing % of waking hours spent watching per day.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_screen_time_total": {
+      "default": "Screen Time",
+      "description": "Label for total screen time stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_screen_time_total": {
+      "default": "Total watch time this week",
+      "description": "Tooltip for total screen time stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_screen_time_share": {
+      "default": "Waking Hours",
+      "description": "Label for screen time as percentage of waking hours stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_screen_time_share": {
+      "default": "% of waking hours spent watching (based on 16h day)",
+      "description": "Tooltip for screen time share stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "label_stats_avg_per_day": {
+      "default": "Avg / Day",
+      "description": "Label for average watch time per active day stat in weekly pulse.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tooltip_stats_avg_per_day": {
+      "default": "Average watch time on active days",
+      "description": "Tooltip for average per active day stat in weekly pulse.",
       "exclude": [
         "android",
         "ios"
@@ -10242,14 +10282,6 @@
     "list_title_smart_lists": {
       "default": "Smart Lists",
       "description": "Title for smart lists. This should be as short and concise as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "header_stats_graph_ratings": {
-      "default": "Ratings",
-      "description": "Title for the ratings distribution graph in weekly pulse.",
       "exclude": [
         "android",
         "ios"

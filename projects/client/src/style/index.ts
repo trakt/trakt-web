@@ -4,6 +4,7 @@ import './palette/orange.css';
 import './palette/purple.css';
 import './palette/red.css';
 import './palette/shade.css';
+import './palette/yellow.css';
 
 import './numeric-increments/index.css';
 import './sizing/index.css';
