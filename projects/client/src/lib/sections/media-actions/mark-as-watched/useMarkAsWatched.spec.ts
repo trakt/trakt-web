@@ -222,7 +222,7 @@ describe('useMarkAsWatched', () => {
         useMarkAsWatched({
           ...props,
           media: {
-            id: 1,
+            id: 2,
             season: 1,
             number: 2,
             effectiveReleaseDate: new Date(),

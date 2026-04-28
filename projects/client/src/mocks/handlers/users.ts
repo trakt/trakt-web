@@ -30,6 +30,7 @@ import { UserFollowingResponseMock } from '../data/users/response/UserFollowingR
 import { UserMonthInReviewResponseMock } from '../data/users/response/UserMonthInReviewResponseMock.ts';
 import { UserWatchingResponseMock } from '../data/users/response/UserWatchingResponseMock.ts';
 import { WatchedMoviesResponseMock } from '../data/users/response/WatchedMoviesResponseMock.ts';
+import { WatchedShowsMinimalResponseMock } from '../data/users/response/WatchedShowsMinimalResponseMock.ts';
 import { WatchedShowsResponseMock } from '../data/users/response/WatchedShowsResponseMock.ts';
 import { WatchlistMinimalResponseMock } from '../data/users/response/WatchlistMinimalResponseMock.ts';
 import { WatchlistMoviesResponseMock } from '../data/users/response/WatchlistMoviesResponseMock.ts';
@@ -50,8 +51,13 @@ export const users = [
   http.get('http://localhost/users/hidden/progress_watched*', () => {
     return HttpResponse.json(HiddenShowProgressResponseMock);
   }),
-  http.get('http://localhost/users/me/watched/shows', () => {
-    return HttpResponse.json(WatchedShowsResponseMock);
+  http.get('http://localhost/users/me/watched/shows*', (response) => {
+    const { searchParams } = new URL(response.request.url);
+    const extended = searchParams.get('extended');
+
+    return HttpResponse.json(
+      extended === 'min' ? WatchedShowsMinimalResponseMock : WatchedShowsResponseMock,
+    );
   }),
   http.get('http://localhost/users/me/watched/movies', () => {
     return HttpResponse.json(WatchedMoviesResponseMock);

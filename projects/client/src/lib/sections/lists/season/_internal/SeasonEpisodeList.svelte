@@ -10,9 +10,11 @@
     SummaryDrawers,
     summaryDrawerNavigation,
   } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
+  import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import type { Snippet } from "svelte";
   import ViewAllButton from "../../components/ViewAllButton.svelte";
   import SeasonEpisodeItem from "./SeasonEpisodeItem.svelte";
+  import { useShowWatchedEpisodes } from "./useShowWatchedEpisodes";
 
   type SeasonEpisodeListProps = {
     show: ShowEntry;
@@ -37,8 +39,14 @@
   const { history } = useUser();
 
   const showProgress = $derived($history?.shows.get(show.id));
-  const watchedEpisodes = $derived(showProgress?.episodes);
-  const hasUnseenEpisodes = $derived(!showProgress?.isWatched);
+  const watchedEpisodeCount = $derived(
+    countWatchedEpisodes(showProgress?.playsPerSeason ?? new Map()),
+  );
+  const hasUnseenEpisodes = $derived(watchedEpisodeCount < show.episode.count);
+
+  const { watchedBySeason, isLoading: isWatchedLoading } = $derived(
+    useShowWatchedEpisodes({ showId: show.id }),
+  );
 
   const { buildDrawerLink } = summaryDrawerNavigation();
   const seasonDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Seasons));
@@ -59,8 +67,9 @@
       {show}
       {episode}
       {previousSeasons}
-      {watchedEpisodes}
       {hasUnseenEpisodes}
+      watchedBySeason={$watchedBySeason}
+      isWatchedLoading={$isWatchedLoading}
       {coverUrl}
       source="season-episode-list"
     />

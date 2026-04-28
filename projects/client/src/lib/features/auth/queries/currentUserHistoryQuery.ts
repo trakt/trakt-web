@@ -1,10 +1,9 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
-import type { WatchedShowsResponse } from '@trakt/api';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
-import { MAX_DATE } from '../../../utils/constants.ts';
 import { time } from '../../../utils/timing/time.ts';
 
 export const MediaPlayHistorySchema = z.object({
@@ -22,14 +21,21 @@ const WatchMovieSchema = WatchedMediaSchema.extend({
 });
 export type WatchedMovie = z.infer<typeof WatchMovieSchema>;
 
+function getLastWatchedAt(timestamps: string[]): Date {
+  const lastWatchedAt = assertDefined(
+    timestamps.toSorted().at(-1),
+    'Expected at least one timestamp',
+  );
+
+  return new Date(lastWatchedAt);
+}
+
 function mapWatchedMovieResponse(
   [id, timestamps]: [string, string[]],
 ): WatchedMovie {
-  const lastWatchedAt = timestamps.toSorted().at(-1);
-
   return {
     id: Number(id),
-    watchedAt: new Date(lastWatchedAt ?? MAX_DATE),
+    watchedAt: getLastWatchedAt(timestamps),
     plays: timestamps.length,
     watchedDates: timestamps.map((t) => new Date(t)),
   };
@@ -49,58 +55,58 @@ const currentUserWatchedMoviesRequest = ({ fetch }: ApiParams) =>
 
 export const WatchedEpisodeSchema = MediaPlayHistorySchema.extend({
   season: z.number(),
-  episode: z.number(),
+  episodeId: z.number(),
 });
 export type WatchedEpisode = z.infer<typeof WatchedEpisodeSchema>;
 
-export const WatchedShowSchema = WatchedMediaSchema.extend({
-  episodes: z.array(WatchedEpisodeSchema),
-  isWatched: z.boolean(),
-  isPartiallyWatched: z.boolean(),
-  watchedDates: z.array(z.date()),
-  playsPerSeason: z.map(z.number(), z.number()),
-});
+export const WatchedShowSchema = WatchedMediaSchema.omit({ plays: true })
+  .extend({
+    episodes: z.array(WatchedEpisodeSchema),
+    watchedDates: z.array(z.date()),
+    playsPerSeason: z.map(z.number(), z.number()),
+  });
 export type WatchedShow = z.infer<typeof WatchedShowSchema>;
 
-function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
-  const { show, last_watched_at, seasons = [] } = entry;
-  const aired = entry.show.aired_episodes;
+function mapWatchedShowResponse(
+  [showId, seasons]: [string, Record<string, Record<string, string[]>>],
+): WatchedShow {
+  const id = Number(showId);
 
-  const episodes = (seasons ?? [])
-    .flatMap((season) =>
-      season.episodes.map((episode) => ({
-        season: season.number,
-        episode: episode.number,
-        watchedAt: new Date(episode.last_watched_at),
-        plays: episode.plays,
-      }))
+  const episodes = Object.entries(seasons)
+    .flatMap(([seasonId, episodeMap]) =>
+      Object.entries(episodeMap).map(([episodeId, timestamps]) => {
+        const seasonNumber = Number(
+          assertDefined(
+            seasonId.split('|').at(1),
+            'Expected season key to contain season number',
+          ),
+        );
+
+        return {
+          season: seasonNumber,
+          episodeId: Number(episodeId),
+          watchedAt: getLastWatchedAt(timestamps),
+          plays: timestamps.length,
+        };
+      })
     );
-
-  const regularEpisodes = episodes.filter(
-    ({ season }) => season !== 0,
-  );
-
-  const watchedEpisodeCount = regularEpisodes.length;
-  const isWatched = watchedEpisodeCount >= aired;
-
-  // FIXME: move this logic to the backend
-  const plays = isWatched
-    ? Math.min(...regularEpisodes.map((episode) => episode.plays))
-    : 0;
 
   const playsPerSeason = episodes.reduce(
     (acc, { season }) => acc.set(season, (acc.get(season) ?? 0) + 1),
     new Map<number, number>(),
   );
 
+  const watchedDates = episodes.map((episode) => episode.watchedAt);
+  const watchedAt = watchedDates.reduce(
+    (max, date) => date > max ? date : max,
+    new Date(0),
+  );
+
   return {
-    id: show.ids.trakt,
-    watchedAt: new Date(last_watched_at),
-    isPartiallyWatched: watchedEpisodeCount > 0 && watchedEpisodeCount < aired,
-    isWatched,
-    plays,
+    id,
+    watchedAt,
     episodes,
-    watchedDates: episodes.map((e) => e.watchedAt),
+    watchedDates,
     playsPerSeason,
   };
 }
@@ -109,9 +115,14 @@ const currentUserWatchedShowsRequest = ({ fetch }: ApiParams) =>
   api({ fetch })
     .users
     .watched
+    .minimal
     .shows({
       params: { id: 'me' },
-      query: { specials: true },
+      query: {
+        specials: true,
+        extended: 'min',
+        season_numbers: true,
+      },
     });
 
 const UserHistorySchema = z.object({
@@ -141,7 +152,7 @@ export const currentUserHistoryQuery = defineQuery({
       (entry) => entry.id,
     );
     const shows = toMap(
-      showsResponse.body,
+      Object.entries(showsResponse.body),
       mapWatchedShowResponse,
       (entry) => entry.id,
     );

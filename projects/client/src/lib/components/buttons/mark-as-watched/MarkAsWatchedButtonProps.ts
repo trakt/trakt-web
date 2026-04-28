@@ -5,6 +5,7 @@ export type MarkAsWatchedButtonProps = {
   title: string;
   isMarkingAsWatched: boolean;
   isWatched: boolean;
+  isLoading?: boolean;
   style: 'action' | 'normal' | 'dropdown-item';
   size: 'normal' | 'small';
   onWatch: (event: MouseEvent) => void;

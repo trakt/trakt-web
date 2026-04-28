@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { WatchedEpisode } from "$lib/features/auth/queries/currentUserHistoryQuery.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { Season } from "$lib/requests/models/Season";
@@ -15,8 +14,9 @@
     show: ShowEntry;
     episode: EpisodeEntry;
     previousSeasons: Season[];
-    watchedEpisodes?: WatchedEpisode[];
     hasUnseenEpisodes: boolean;
+    watchedBySeason: ReadonlyMap<number, ReadonlySet<number>>;
+    isWatchedLoading: boolean;
     style?: BaseItemProps["style"];
     source: string;
     coverUrl?: string;
@@ -26,8 +26,9 @@
     show,
     episode,
     previousSeasons,
-    watchedEpisodes,
     hasUnseenEpisodes,
+    watchedBySeason,
+    isWatchedLoading,
     style,
     source,
     coverUrl,
@@ -62,13 +63,14 @@
         size="small"
         i18n={WatchedUntilHereIntlProvider}
         title={show.title}
+        isLoading={isWatchedLoading}
         media={{
           id: show.id,
           effectiveReleaseDate: show.effectiveReleaseDate,
           seasons: getEpisodesUntil({
             previousSeasons,
             episode,
-            watchedEpisodes,
+            watchedBySeason,
           }),
         }}
       />

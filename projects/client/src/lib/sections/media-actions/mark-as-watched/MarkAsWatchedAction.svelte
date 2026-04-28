@@ -12,6 +12,7 @@
     title,
     i18n,
     mode,
+    isLoading,
     ...target
   }: MarkAsWatchedActionProps = $props();
 
@@ -55,6 +56,7 @@
     {size}
     {i18n}
     {mode}
+    {isLoading}
     isWatched={$isWatched}
     isMarkingAsWatched={$isMarkingAsWatched}
     onWatch={confirmMarkAsWatched}
