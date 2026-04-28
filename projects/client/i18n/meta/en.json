@@ -2445,7 +2445,8 @@
       "default": "{day}s at {time}",
       "description": "Formatted text showing the recurring day and time a show airs.",
       "exclude": [
-        "android"
+        "android",
+        "ios"
       ],
       "variables": {
         "day": {
@@ -2563,8 +2564,7 @@
       "default": "Hide recommendation",
       "description": "Text for the button that hides a recommended movie or show from the user's recommendations list.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_hide_recommendation": {
@@ -5436,8 +5436,7 @@
       "default": "Data",
       "description": "Text for the link to the data settings page.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "link_text_advanced_settings": {
@@ -6978,8 +6977,7 @@
       "default": "Clear watchlist",
       "description": "Label for the row in clear data settings that allows users to clear their entire watchlist.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_clear_watchlist": {
@@ -7002,16 +7000,14 @@
       "default": "Are you sure you want to clear your entire watchlist? This cannot be undone.",
       "description": "Warning prompt shown when a user tries to clear their entire watchlist.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "reset_status_cleared": {
       "default": "Watchlist cleared.",
       "description": "Status text shown when a watchlist clear has completed successfully.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "reset_status_clearing": {
@@ -10041,8 +10037,7 @@
       "default": "Progress",
       "description": "Title for lists containing progress information for shows, e.g. in progress, completed, or dropped shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_view_all_progress": {
@@ -10073,24 +10068,21 @@
       "default": "In Progress",
       "description": "Text for the button that allows users to filter the list to only display shows that are in progress. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_progress_completed": {
       "default": "Completed",
       "description": "Text for the button that allows users to filter the list to only display shows that are completed. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_progress_dropped": {
       "default": "Dropped",
       "description": "Text for the button that allows users to filter the list to only display shows that are dropped. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_progress_in_progress": {
