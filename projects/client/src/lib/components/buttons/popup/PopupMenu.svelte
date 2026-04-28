@@ -20,6 +20,7 @@
   use:disableTransitionOn={"touch"}
   use:portalTrigger
   aria-haspopup="true"
+  aria-expanded={$isOpened}
   class="trakt-popup-menu-button"
   data-mode={mode}
   data-size={size}

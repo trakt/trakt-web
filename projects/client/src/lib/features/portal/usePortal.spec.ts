@@ -29,7 +29,7 @@ describe('action: usePortal', () => {
     component.destroy();
   });
 
-  it('should add a single underlay', async () => {
+  it('should add a single underlay, even after multiple clicks', async () => {
     const targetNode = document.createElement('div');
     const popupNode = document.createElement('div');
 
@@ -38,6 +38,9 @@ describe('action: usePortal', () => {
     const { portalTrigger } = usePortal();
 
     const component = await renderStore(() => portalTrigger(targetNode));
+    // Click three times to open/close/open
+    targetNode.dispatchEvent(new Event('click'));
+    targetNode.dispatchEvent(new Event('click'));
     targetNode.dispatchEvent(new Event('click'));
 
     const underlays = document.querySelectorAll(`#${PORTAL_UNDERLAY_ID}`);
@@ -45,6 +48,10 @@ describe('action: usePortal', () => {
     const underlay = assertDefined(underlays[0]);
     expect(document.body.contains(underlay)).toBe(true);
 
+    // Clicking again destroys the underlay
+    targetNode.dispatchEvent(new Event('click'));
+    const underlays2 = document.querySelectorAll(`#${PORTAL_UNDERLAY_ID}`);
+    expect(underlays2).toHaveLength(0);
     component.destroy();
   });
 
