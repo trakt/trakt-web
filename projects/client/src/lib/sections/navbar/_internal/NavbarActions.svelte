@@ -24,11 +24,10 @@
 
   <div class="trakt-navbar-actions-right">
     <RenderFor audience="authenticated">
-      {@render $state.sortActions?.()}
-      {#if $state.seasonalActions}
-        {@render $state.seasonalActions?.()}
+      {@render $state.headerActions?.()}
+      {#if $state.showFilters}
+        <FilterButton isDisabled={!$state.hasFilters} />
       {/if}
-      <FilterButton isDisabled={!$state.hasFilters} />
     </RenderFor>
     <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>
     <RenderFor audience="public">

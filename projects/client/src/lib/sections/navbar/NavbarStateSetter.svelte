@@ -4,21 +4,21 @@
 
   const {
     actions,
-    seasonalActions,
     contextualActions,
     toastActions,
     mode,
     hasFilters,
-    sortActions,
+    showFilters,
+    headerActions,
     header,
   }: {
     actions?: Snippet;
-    seasonalActions?: Snippet;
     contextualActions?: Snippet;
     toastActions?: Snippet | Nil;
     mode?: NavbarMode;
     hasFilters?: boolean;
-    sortActions?: Snippet;
+    showFilters?: boolean;
+    headerActions?: Snippet;
     header?: {
       title: string;
       metaInfo?: string | Snippet;
@@ -31,10 +31,10 @@
   $effect(() => {
     set({
       actions,
-      seasonalActions,
       contextualActions,
       hasFilters,
-      sortActions,
+      showFilters,
+      headerActions,
       header,
     });
   });

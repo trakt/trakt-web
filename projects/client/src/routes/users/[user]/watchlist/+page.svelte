@@ -31,7 +31,7 @@
       metaInfo: $currentDiscoverMode.text(),
     }}
   >
-    {#snippet sortActions()}
+    {#snippet headerActions()}
       <ListSortActions
         {options}
         {urlBuilder}

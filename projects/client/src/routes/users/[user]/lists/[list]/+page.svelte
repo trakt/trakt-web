@@ -49,7 +49,7 @@
       actions,
     }}
   >
-    {#snippet sortActions()}
+    {#snippet headerActions()}
       <ListSortActions
         {options}
         {urlBuilder}

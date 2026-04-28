@@ -32,9 +32,10 @@
           </JoinTraktButton>
         </RenderFor>
         <RenderFor audience="authenticated">
-          {@render $state.sortActions?.()}
-          {@render $state.seasonalActions?.()}
-          <FilterButton isDisabled={!$state.hasFilters} />
+          {@render $state.headerActions?.()}
+          {#if $state.showFilters}
+            <FilterButton isDisabled={!$state.hasFilters} />
+          {/if}
         </RenderFor>
         <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>
       </div>

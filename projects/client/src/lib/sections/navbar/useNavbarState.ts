@@ -6,10 +6,10 @@ export type NavbarMode = 'full' | 'minimal' | 'hidden';
 
 type NavbarState = {
   actions: Snippet | undefined;
-  seasonalActions: Snippet | undefined;
   contextualActions: Snippet | undefined;
   hasFilters: boolean;
-  sortActions?: Snippet;
+  showFilters: boolean;
+  headerActions?: Snippet;
   header?: {
     title: string;
     metaInfo?: string | Snippet;
@@ -29,10 +29,10 @@ const globalNavbarStateStore = new BehaviorSubject<GlobalNavbarState>({
 
 const initialNavbarState: NavbarState = {
   actions: undefined,
-  seasonalActions: undefined,
   contextualActions: undefined,
   hasFilters: false,
-  sortActions: undefined,
+  showFilters: true,
+  headerActions: undefined,
   header: undefined,
 };
 
