@@ -19,6 +19,8 @@
   const dismiss = () => {
     open = false;
   };
+
+  let promptAnchor = $state<HTMLElement | Nil>(null);
 </script>
 
 <NotePrompt
@@ -34,5 +36,9 @@
   type={target?.type ?? "movie"}
   id={target?.id ?? 0}
   noteType="drop"
+  customAnchor={promptAnchor}
 />
-{@render children()}
+
+<div bind:this={promptAnchor}>
+  {@render children()}
+</div>

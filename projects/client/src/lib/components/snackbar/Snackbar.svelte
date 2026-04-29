@@ -18,6 +18,7 @@
     actionLabel: string;
     actionText: string;
     children?: Snippet;
+    anchor?: HTMLElement | Nil;
   };
 
   const {
@@ -30,6 +31,7 @@
     actionLabel,
     actionText,
     children,
+    anchor,
   }: SnackbarProps = $props();
 
   let navbarHeight = $state(0);
@@ -82,30 +84,40 @@
   {/if}
 </RenderFor>
 
+{#snippet popoverContent()}
+  <div class="snackbar-popover" role="status" aria-live="polite">
+    <div class="snackbar-popover-header">
+      <span class="bold title">{title}</span>
+      <AutoCloseButton onclick={onDismiss} label={m.button_label_close()} />
+    </div>
+    <p>{message}</p>
+    <div class="snackbar-popover-actions">
+      <Button
+        size="small"
+        color="default"
+        label={m.button_label_cancel()}
+        onclick={onDismiss}
+      >
+        {m.button_text_cancel()}
+      </Button>
+      {@render actionButton()}
+    </div>
+  </div>
+{/snippet}
+
 <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-  <Popover {open} {onOpenChange}>
-    {@render children?.()}
-    {#snippet content()}
-      <div class="snackbar-popover" role="status" aria-live="polite">
-        <div class="snackbar-popover-header">
-          <span class="bold title">{title}</span>
-          <AutoCloseButton onclick={onDismiss} label={m.button_label_close()} />
-        </div>
-        <p>{message}</p>
-        <div class="snackbar-popover-actions">
-          <Button
-            size="small"
-            color="default"
-            label={m.button_label_cancel()}
-            onclick={onDismiss}
-          >
-            {m.button_text_cancel()}
-          </Button>
-          {@render actionButton()}
-        </div>
-      </div>
-    {/snippet}
-  </Popover>
+  {#if anchor}
+    <Popover
+      {open}
+      {onOpenChange}
+      customAnchor={anchor}
+      content={popoverContent}
+    />
+  {:else}
+    <Popover {open} {onOpenChange} content={popoverContent}>
+      {@render children?.()}
+    </Popover>
+  {/if}
 </RenderFor>
 
 <style lang="scss">

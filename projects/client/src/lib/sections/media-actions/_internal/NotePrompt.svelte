@@ -15,6 +15,7 @@
     id: number;
     noteType: NoteDrawerType;
     children?: Snippet;
+    customAnchor?: HTMLElement | Nil;
   };
 
   const {
@@ -26,6 +27,7 @@
     id,
     noteType,
     children,
+    customAnchor,
   }: NotePromptProps = $props();
 
   const { open: openNoteDrawer } = useAddNoteDrawer();
@@ -54,4 +56,5 @@
   actionLabel={m.button_label_add_note({ title })}
   actionText={m.button_text_add_note()}
   {children}
+  anchor={customAnchor}
 />
