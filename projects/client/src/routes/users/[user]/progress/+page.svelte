@@ -32,7 +32,7 @@
     hasFilters
     header={{ title: m.list_title_up_next(), metaInfo: $current.text() }}
   >
-    {#snippet sortActions()}
+    {#snippet headerActions()}
       <ListSortActions
         {options}
         {urlBuilder}
