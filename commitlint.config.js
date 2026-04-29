@@ -86,6 +86,7 @@ module.exports = {
         'out-now',
         'parameter',
         'player',
+        'popover',
         'popular',
         'popup',
         'portal',
