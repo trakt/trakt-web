@@ -4,8 +4,12 @@
   import type { CookieConsent } from "./models/CookieConsent";
   import { useCookieConsent } from "./useCookieConsent";
 
-  const { consent, children }: { consent: CookieConsent } & ChildrenProps =
-    $props();
+  type CookieConsentProviderProps = {
+    consent: CookieConsent;
+    isBot: boolean;
+  } & ChildrenProps;
+
+  const { consent, isBot, children }: CookieConsentProviderProps = $props();
 
   const { setConsent } = useCookieConsent();
 
@@ -14,4 +18,6 @@
 
 {@render children()}
 
-<CookieNotice />
+{#if !isBot}
+  <CookieNotice />
+{/if}
