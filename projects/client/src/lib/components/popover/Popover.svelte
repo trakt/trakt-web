@@ -6,9 +6,12 @@
     content: Snippet;
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
-  } & ChildrenProps;
+  } & (
+    | { customAnchor: HTMLElement; children?: never }
+    | { children: Snippet; customAnchor?: never }
+  );
 
-  const { children, content, open, onOpenChange }: PopoverProps = $props();
+  const { content, open, onOpenChange, ...rest }: PopoverProps = $props();
 
   const isControlled = $derived(open !== undefined);
 
@@ -25,14 +28,17 @@
 </script>
 
 <Popover.Root bind:open={getOpen, setOpen}>
-  <Popover.Trigger class="trakt-popover-trigger">
-    {@render children()}
-  </Popover.Trigger>
+  {#if rest.children}
+    <Popover.Trigger class="trakt-popover-trigger">
+      {@render rest.children()}
+    </Popover.Trigger>
+  {/if}
   <Popover.Portal>
     <Popover.Content
       sideOffset={8}
       side="top"
       style="z-index: var(--layer-top)"
+      customAnchor={rest.customAnchor}
     >
       {@render content()}
     </Popover.Content>
