@@ -50,7 +50,7 @@
       return false;
     }
 
-    return !$isWatched;
+    return props.variant === "next" || !$isWatched;
   });
 
   const hasIndicators = $derived.by(() => {
