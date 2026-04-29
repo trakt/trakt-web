@@ -116,23 +116,6 @@ registerRoute(
   }),
 );
 
-// Immutable assets 404 handling
-registerRoute(
-  ({ url }) => url.pathname.includes('/_app/immutable/'),
-  async ({ event, request, url }) => {
-    const is404Redirect = url.searchParams.has('_sw404');
-    const response = await fetch(request);
-    if (response && response.status === 404) {
-      await removeNavigationCache();
-      if (!is404Redirect) {
-        url.searchParams.set('_sw404', '1');
-        return Response.redirect(url.toString(), 302);
-      }
-    }
-    return response;
-  },
-);
-
 // Manifest route - always try network first
 registerRoute(
   ({ url }) => url.pathname.endsWith('manifest.webmanifest'),
