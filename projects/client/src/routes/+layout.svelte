@@ -17,14 +17,14 @@
   import FeatureFlagProvider from "$lib/features/feature-flag/FeatureFlagProvider.svelte";
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
-  import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import NavigationHistoryProvider from "$lib/features/navigation-history/NavigationHistoryProvider.svelte";
+  import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import AddNoteDrawerProvider from "$lib/features/notes/AddNoteDrawerProvider.svelte";
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
-  import ReportDialogProvider from "$lib/features/report/ReportDialogProvider.svelte";
   import PlayerProvider from "$lib/features/player/YoutubePlayerProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
+  import ReportDialogProvider from "$lib/features/report/ReportDialogProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import SeasonalFlair from "$lib/features/theme/components/SeasonalFlair.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
@@ -148,68 +148,71 @@
         >
           <WSInvalidator />
           <FeatureFlagProvider>
-            <CookieConsentProvider consent={data.cookieConsent}>
+            <CookieConsentProvider
+              consent={data.cookieConsent}
+              isBot={data.isBot}
+            >
               <PlayerProvider>
                 <AnalyticsProvider>
                   <RedirectProvider>
                     <NavigationProvider>
                       <NavigationHistoryProvider>
                         <LocaleProvider>
-                        <SearchProvider config={data.typesense}>
-                          <FilterProvider>
-                            <CoverProvider>
-                              <ToastProvider>
-                                <DiscoverProvider>
-                                  <ConfirmationProvider>
-                                    <MarkAsWatchedDrawerProvider />
-                                    <AddNoteDrawerProvider />
-                                    <ReportDialogProvider />
-                                    <CoverImage />
-                                    <SeasonalFlair />
+                          <SearchProvider config={data.typesense}>
+                            <FilterProvider>
+                              <CoverProvider>
+                                <ToastProvider>
+                                  <DiscoverProvider>
+                                    <ConfirmationProvider>
+                                      <MarkAsWatchedDrawerProvider />
+                                      <AddNoteDrawerProvider />
+                                      <ReportDialogProvider />
+                                      <CoverImage />
+                                      <SeasonalFlair />
 
-                                    <ThemeProvider theme={data.theme}>
-                                      <ListScrollHistoryProvider>
-                                        <!--
+                                      <ThemeProvider theme={data.theme}>
+                                        <ListScrollHistoryProvider>
+                                          <!--
                                         All navbars are added in the layout to make sure they can
                                         persist during navigation. The state is set on a page level.
                                       -->
-                                        <RenderFor
-                                          audience="all"
-                                          device={["mobile", "tablet-sm"]}
-                                        >
-                                          <TopNavbar />
-                                        </RenderFor>
+                                          <RenderFor
+                                            audience="all"
+                                            device={["mobile", "tablet-sm"]}
+                                          >
+                                            <TopNavbar />
+                                          </RenderFor>
 
-                                        <RenderFor
-                                          audience="all"
-                                          device={["desktop", "tablet-lg"]}
-                                        >
-                                          <SideNavbar />
-                                        </RenderFor>
+                                          <RenderFor
+                                            audience="all"
+                                            device={["desktop", "tablet-lg"]}
+                                          >
+                                            <SideNavbar />
+                                          </RenderFor>
 
-                                        {@render children()}
+                                          {@render children()}
 
-                                        <RenderFor
-                                          audience="all"
-                                          device={["mobile", "tablet-sm"]}
-                                        >
-                                          <MobileNavbar />
-                                        </RenderFor>
+                                          <RenderFor
+                                            audience="all"
+                                            device={["mobile", "tablet-sm"]}
+                                          >
+                                            <MobileNavbar />
+                                          </RenderFor>
 
-                                        <RenderFor audience="authenticated">
-                                          <NavbarToastContent />
-                                        </RenderFor>
-                                        <SvelteQueryDevtools
-                                          buttonPosition="bottom-right"
-                                          styleNonce="opacity: 0.5"
-                                        />
-                                      </ListScrollHistoryProvider>
-                                    </ThemeProvider>
-                                  </ConfirmationProvider>
-                                </DiscoverProvider>
-                              </ToastProvider>
-                            </CoverProvider>
-                          </FilterProvider>
+                                          <RenderFor audience="authenticated">
+                                            <NavbarToastContent />
+                                          </RenderFor>
+                                          <SvelteQueryDevtools
+                                            buttonPosition="bottom-right"
+                                            styleNonce="opacity: 0.5"
+                                          />
+                                        </ListScrollHistoryProvider>
+                                      </ThemeProvider>
+                                    </ConfirmationProvider>
+                                  </DiscoverProvider>
+                                </ToastProvider>
+                              </CoverProvider>
+                            </FilterProvider>
                           </SearchProvider>
                         </LocaleProvider>
                       </NavigationHistoryProvider>
