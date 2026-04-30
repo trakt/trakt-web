@@ -3,9 +3,9 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
-  import DeleteCommentButton from "./DeleteCommentButton.svelte";
-  import EditCommentButton from "./EditCommentButton.svelte";
-  import ReportCommentButton from "./ReportCommentButton.svelte";
+  import DeleteCommentButton from "./_internal/comment-actions/DeleteCommentButton.svelte";
+  import EditCommentButton from "./_internal/comment-actions/EditCommentButton.svelte";
+  import ReportCommentButton from "./_internal/comment-actions/ReportCommentButton.svelte";
 
   type CommentActionsProps = {
     comment: MediaComment;

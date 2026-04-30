@@ -3,16 +3,17 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type { Snippet } from "svelte";
+  import ReactAction from "../_internal/comment-actions/ReactAction.svelte";
+  import ReplyButton from "../_internal/comment-actions/ReplyButton.svelte";
+  import CommentInput from "../_internal/comment-input/CommentInput.svelte";
+  import CommentBody from "../_internal/CommentBody.svelte";
+  import CommentFooter from "../_internal/CommentFooter.svelte";
+  import CommentHeader from "../_internal/CommentHeader.svelte";
   import type {
     EpisodeCommentProps,
     MediaCommentProps,
-  } from "../../CommentsProps";
-  import ReactAction from "../comment-actions/ReactAction.svelte";
-  import ReplyButton from "../comment-actions/ReplyButton.svelte";
-  import CommentInput from "../comment-input/CommentInput.svelte";
-  import CommentBody from "../CommentBody.svelte";
-  import CommentFooter from "../CommentFooter.svelte";
-  import CommentHeader from "../CommentHeader.svelte";
+  } from "../CommentsProps";
   import CommentReplies from "./CommentReplies.svelte";
   import { THREAD_LIST_CLASS } from "./constants";
   import { scrollActiveCommentIntoView } from "./scrollActiveCommentIntoView";
@@ -24,6 +25,8 @@
     isReplying: boolean;
     setReplying: (comment: MediaComment, isReplying: boolean) => void;
     shouldScrollIntoView: boolean;
+    header?: Snippet;
+    scrollContainerClass?: string;
   } & (MediaCommentProps | EpisodeCommentProps);
 
   const {
@@ -33,6 +36,8 @@
     setReplying,
     reset,
     shouldScrollIntoView,
+    header,
+    scrollContainerClass = THREAD_LIST_CLASS,
     ...typeProps
   }: CommentThreadCardProps = $props();
 
@@ -41,7 +46,7 @@
       return;
     }
 
-    return scrollActiveCommentIntoView(node, THREAD_LIST_CLASS);
+    return scrollActiveCommentIntoView(node, scrollContainerClass);
   };
 </script>
 
@@ -52,7 +57,11 @@
   action={scrollIntoView}
 >
   <div class="trakt-comment-thread-container">
-    <CommentHeader {comment} {media} {...typeProps} />
+    {#if header}
+      {@render header()}
+    {:else}
+      <CommentHeader {comment} {media} {...typeProps} />
+    {/if}
 
     <div class="trakt-comment-thread">
       <CommentBody {comment} {media} type="full" />

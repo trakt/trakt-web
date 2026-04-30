@@ -4,17 +4,17 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaComment } from "$lib/requests/models/MediaComment.ts";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry.ts";
+  import TextCardHeader from "$lib/sections/components/text-card/TextCardHeader.svelte";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay.ts";
-  import TextCardHeader from "../../_internal/TextCardHeader.svelte";
+  import CommentActions from "../CommentActions.svelte";
   import type {
     EpisodeCommentProps,
     MediaCommentProps,
   } from "../CommentsProps.ts";
-  import CommentActions from "./comment-actions/CommentActions.svelte";
+  import AddReviewDrawer from "../drawers/AddReviewDrawer.svelte";
   import CommenterRating from "./CommenterRating.svelte";
-  import AddReviewDrawer from "./drawers/AddReviewDrawer.svelte";
 
   type CommentHeaderProps = {
     comment: MediaComment;
@@ -30,7 +30,9 @@
 </script>
 
 <div class="trakt-comment-header">
-  <TextCardHeader subTitle={toHumanDay({ date: comment.createdAt, locale: getLocale() })}>
+  <TextCardHeader
+    subTitle={toHumanDay({ date: comment.createdAt, locale: getLocale() })}
+  >
     {#snippet icon()}
       <UserAvatar user={comment.user} size="small" />
     {/snippet}

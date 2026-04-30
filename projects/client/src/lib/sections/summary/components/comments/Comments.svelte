@@ -6,14 +6,14 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
-  import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
+  import CommentCard from "$lib/sections/summary/components/comments/CommentCard.svelte";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import AddCommentAction from "./_internal/comment-actions/AddCommentAction.svelte";
-  import AddReviewDrawer from "./_internal/drawers/AddReviewDrawer.svelte";
-  import CommentsDrawer from "./_internal/drawers/CommentsDrawer.svelte";
   import type { ActiveComment } from "./_internal/models/ActiveComment";
   import { useComments } from "./_internal/useComments";
   import type { CommentsProps } from "./CommentsProps";
+  import AddReviewDrawer from "./drawers/AddReviewDrawer.svelte";
+  import CommentsDrawer from "./drawers/CommentsDrawer.svelte";
 
   const { media, ...props }: CommentsProps = $props();
 

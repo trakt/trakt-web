@@ -7,11 +7,14 @@
   import type { MediaComment } from "$lib/requests/models/MediaComment.ts";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment.ts";
   import { iffy } from "$lib/utils/function/iffy.ts";
-  import type { CommentsProps } from "../../CommentsProps.ts";
-  import SpoilerSwitch from "../comment-input/SpoilerSwitch.svelte";
-  import type { ActiveComment } from "../models/ActiveComment.ts";
-  import type { UseAddCommentProps } from "../usePostComment.ts";
-  import { usePostComment } from "../usePostComment.ts";
+  import SpoilerSwitch from "../_internal/comment-input/SpoilerSwitch.svelte";
+  import type { ActiveComment } from "../_internal/models/ActiveComment.ts";
+  import {
+    type UseAddCommentProps,
+    usePostComment,
+  } from "../_internal/usePostComment.ts";
+  import type { CommentsProps } from "../CommentsProps.ts";
+
   import { isReviewValid } from "./isReviewValid.ts";
 
   type PostMode = {

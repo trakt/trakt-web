@@ -1,6 +1,6 @@
 <script lang="ts">
   import { m } from "$lib/features/i18n/messages";
-  import TextCard from "../../_internal/TextCard.svelte";
+  import TextCard from "../../../../components/text-card/TextCard.svelte";
 </script>
 
 <TextCard --width-card="100%" --height-card="fit-content">

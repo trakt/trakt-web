@@ -2,9 +2,9 @@
   import { getLocale } from "$lib/features/i18n";
   import { m } from "$lib/features/i18n/messages";
   import type { UserNote } from "$lib/requests/models/UserNote";
+  import TextCardHeader from "$lib/sections/components/text-card/TextCardHeader.svelte";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import type { Snippet } from "svelte";
-  import TextCardHeader from "../../_internal/TextCardHeader.svelte";
   import NoteIcon from "./NoteIcon.svelte";
 
   const { note, actions }: { note: UserNote; actions?: Snippet } = $props();
