@@ -3,7 +3,7 @@
   import AddNoteDrawer from "$lib/features/notes/AddNoteDrawer.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { UserNote } from "$lib/requests/models/UserNote";
-  import TextCard from "../../_internal/TextCard.svelte";
+  import TextCard from "../../../../components/text-card/TextCard.svelte";
   import NoteActions from "./note-actions/NoteActions.svelte";
   import NoteHeader from "./NoteHeader.svelte";
 

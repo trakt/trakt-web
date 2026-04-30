@@ -6,11 +6,11 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { BehaviorSubject } from "rxjs";
   import { slide } from "svelte/transition";
+  import CommentReply from "../_internal/CommentReply.svelte";
   import type {
     EpisodeCommentProps,
     MediaCommentProps,
-  } from "../../CommentsProps";
-  import CommentReply from "../CommentReply.svelte";
+  } from "../CommentsProps";
   import { useCommentReplies } from "./useCommentReplies";
 
   type CommentRepliesProps = {
