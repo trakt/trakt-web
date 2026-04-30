@@ -7,11 +7,13 @@
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import LibraryList from "../lists/library/LibraryList.svelte";
   import PersonalLists from "../lists/user/PersonalLists.svelte";
+  import MyActivityList from "./components/MyActivityList.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
   import ProfileDetails from "./components/ProfileDetails.svelte";
   import ProfilesList from "./components/ProfilesList.svelte";
   import ProgressList from "./components/ProgressList.svelte";
   import type { DisplayableProfileProps } from "./DisplayableProfileProps.ts";
+  import ProfileDrawer from "./ProfileDrawer.svelte";
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
@@ -26,6 +28,7 @@
 
 {#if $isMe}
   <PersonalHistoryList mode={$mode} />
+  <MyActivityList mode={$mode} />
   <ProgressList mode={$mode} />
 {:else}
   <RecentlyWatchedList title={m.list_title_history()} {slug} mode={$mode} />
@@ -44,3 +47,5 @@
 {/if}
 
 <ProfilesList {slug} />
+
+<ProfileDrawer />
