@@ -2465,7 +2465,7 @@
       ]
     },
     "warning_prompt_drop_show": {
-      "default": "Are you sure you want to drop \"{title}\" show? This will remove it from your Continue Watching list.",
+      "default": "Are you sure you want to drop \"{title}\"? This will remove it from your Continue Watching list.",
       "description": "Warning prompt shown when a user tries to drop a show.",
       "variables": {
         "title": {
