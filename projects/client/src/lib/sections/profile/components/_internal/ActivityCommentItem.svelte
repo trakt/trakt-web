@@ -100,7 +100,7 @@
     {/snippet}
 
     <Link href={mediaLink}>
-      {mediaTitle}
+      <p class="ellipsis">{mediaTitle}</p>
     </Link>
 
     {#snippet actions()}
