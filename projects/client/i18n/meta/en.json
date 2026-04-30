@@ -10056,6 +10056,22 @@
         "ios"
       ]
     },
+    "button_label_view_all_activity": {
+      "default": "View all activity",
+      "description": "Aria-label for the button that allows users to view all activity items.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_placeholder_reviews": {
+      "default": "You haven't written any reviews yet.",
+      "description": "Placeholder text shown when there are no reviews in the user's activity list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "page_title_progress": {
       "default": "Progress",
       "description": "Title for the progress page.",

@@ -41,7 +41,7 @@
     {comment}
     {media}
     type="preview"
-    onClick={() => onDrilldown?.({ id: comment.id, isReplying: false })}
+    onClick={() => onDrilldown({ id: comment.id, isReplying: false })}
   />
 
   {#snippet footer()}
