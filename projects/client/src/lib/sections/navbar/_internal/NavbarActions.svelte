@@ -1,5 +1,7 @@
 <script lang="ts">
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
+  import EditModeBar from "$lib/features/edit-mode/EditModeBar.svelte";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
@@ -11,11 +13,13 @@
   import NavbarHeader from "./NavbarHeader.svelte";
 
   const { state } = useNavbarState();
+
+  const { isEditMode } = useEditMode();
 </script>
 
 <div
   class="trakt-navbar-actions"
-  class:is-hidden={$state.mode === "minimal"}
+  class:is-hidden={$state.mode === "minimal" && !$isEditMode}
   use:trackElementBottom={"--navbar-actions-bottom"}
   use:trackWindowScroll={"trakt-navbar-actions-scroll"}
 >
@@ -24,16 +28,20 @@
   </div>
 
   <div class="trakt-navbar-actions-center">
-    {#if $state.actions}
+    {#if $isEditMode}
+      <EditModeBar />
+    {:else}
       {@render $state.actions?.()}
     {/if}
   </div>
 
   <div class="trakt-navbar-actions-right">
     <RenderFor audience="authenticated">
-      {@render $state.headerActions?.()}
-      {#if $state.showFilters}
-        <FilterButton isDisabled={!$state.hasFilters} />
+      {#if !$isEditMode}
+        {@render $state.headerActions?.()}
+        {#if $state.showFilters}
+          <FilterButton isDisabled={!$state.hasFilters} />
+        {/if}
       {/if}
     </RenderFor>
     <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>

@@ -1,5 +1,7 @@
 <script lang="ts">
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
+  import EditModeBar from "$lib/features/edit-mode/EditModeBar.svelte";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import NavbarHeader from "./_internal/NavbarHeader.svelte";
@@ -9,18 +11,25 @@
   import { useNavbarState } from "./useNavbarState";
 
   const { state } = useNavbarState();
+
+  const { isEditMode } = useEditMode();
 </script>
 
-{#if $state.mode !== "hidden"}
+{#if $state.mode !== "hidden" || $isEditMode}
   <header>
     <nav
       class="trakt-navbar"
-      class:is-hidden={$state.mode === "minimal"}
+      class:is-hidden={$state.mode === "minimal" && !$isEditMode}
+      class:is-edit-mode={$isEditMode}
       use:trackWindowScroll={"trakt-navbar-scroll"}
     >
       <div class="trakt-navbar-left">
         <NavbarHeader />
-        {@render $state.actions?.()}
+        {#if $isEditMode}
+          <EditModeBar />
+        {:else}
+          {@render $state.actions?.()}
+        {/if}
       </div>
 
       <div class="trakt-navbar-links">
@@ -32,9 +41,11 @@
           </JoinTraktButton>
         </RenderFor>
         <RenderFor audience="authenticated">
-          {@render $state.headerActions?.()}
-          {#if $state.showFilters}
-            <FilterButton isDisabled={!$state.hasFilters} />
+          {#if !$isEditMode}
+            {@render $state.headerActions?.()}
+            {#if $state.showFilters}
+              <FilterButton isDisabled={!$state.hasFilters} />
+            {/if}
           {/if}
         </RenderFor>
         <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>
@@ -43,7 +54,7 @@
 
     <div
       class="trakt-navbar-spacer"
-      class:is-hidden={$state.mode === "minimal"}
+      class:is-hidden={$state.mode === "minimal" && !$isEditMode}
     ></div>
   </header>
 {/if}
@@ -116,6 +127,10 @@
       height: 0;
       opacity: 0;
       pointer-events: none;
+    }
+
+    &.is-edit-mode {
+      justify-content: center;
     }
 
     @include for-mobile {

@@ -1,0 +1,18 @@
+.trakt-edit-mode {
+  transition:
+    opacity var(--transition-increment) cubic-bezier(0.35, 1.55, 0.65, 1),
+    transform var(--transition-increment) cubic-bezier(0.35, 1.55, 0.65, 1),
+    filter var(--transition-increment) ease-out,
+    min-height var(--transition-increment) ease-in-out,
+    height var(--transition-increment) ease-in-out;
+
+  pointer-events: none;
+
+  opacity: 0.7;
+
+  &.is-hidden {
+    opacity: 0.3;
+    filter: blur(var(--ni-2));
+    transform: scale(0.97);
+  }
+}

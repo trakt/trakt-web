@@ -14,6 +14,7 @@
     replacestate,
     label,
     navigationType,
+    disabled,
     ...props
   }: ChildrenProps &
     HTMLAnchorProps &
@@ -42,7 +43,7 @@
   class:trakt-link={!!href}
   class:trakt-link-active={$isActive}
   data-dpad-navigation={navigationType}
-  class:trakt-no-link={!href}
+  class:trakt-no-link={!href || disabled}
   {...props}
   {href}
 >
@@ -105,5 +106,6 @@
 
   .trakt-no-link {
     all: unset;
+    pointer-events: none;
   }
 </style>
