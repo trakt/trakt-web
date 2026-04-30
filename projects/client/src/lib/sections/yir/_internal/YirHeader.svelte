@@ -14,6 +14,7 @@
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
+  import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
 
   const {
     slug,
@@ -48,21 +49,9 @@
   const canShare = $derived(
     browser && !!navigator.canShare && navigator.canShare(shareData),
   );
-
-  let isScrolled = $state(false);
-
-  $effect(() => {
-    if (!browser) return;
-    const onScroll = () => {
-      isScrolled = window.scrollY > 0;
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  });
 </script>
 
-<header class="yir-header" class:scrolled={isScrolled}>
+<header class="yir-header" use:trackWindowScroll={"scrolled"}>
   <nav class="yir-header-section yir-header-center">
     <a
       href={prevYearUrl}
@@ -138,10 +127,18 @@
       background-color 0.2s,
       backdrop-filter 0.2s;
 
-    &.scrolled {
+    &:global(.scrolled) {
       background: var(--color-background-mobile-navbar);
       box-shadow: var(--shadow-navbar);
       backdrop-filter: blur(var(--ni-8));
+
+      color: var(--color-text-primary);
+
+      :global(.yir-header-nav-btn),
+      :global(.yir-header-user),
+      :global(.yir-header-share) {
+        color: var(--color-text-primary);
+      }
     }
   }
 

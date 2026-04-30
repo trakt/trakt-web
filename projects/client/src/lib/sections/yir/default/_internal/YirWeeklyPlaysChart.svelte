@@ -2,6 +2,8 @@
   import BarChart from "$lib/components/charts/BarChart.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { toHumanShortDate } from "$lib/utils/formatting/date/toHumanShortDate";
+  import { addDays } from "date-fns/addDays";
+  import { startOfYear } from "date-fns/startOfYear";
   import { yirTooltipHTML } from "../../_internal/yirTooltipHTML.ts";
 
   const {
@@ -12,18 +14,13 @@
     year: number;
   } = $props();
 
-  const labels = $derived(Array.from({ length: 52 }, (_, i) => `${i + 1}`));
-
   function getWeekDateRange(weekNumber: number): string {
     const locale = languageTag();
-    const firstDay = new Date(year, 0, 1);
-    const daysOffset = (weekNumber - 1) * 7;
-
-    const weekStart = new Date(firstDay);
-    weekStart.setDate(firstDay.getDate() + daysOffset);
-
-    const weekEnd = new Date(weekStart);
-    weekEnd.setDate(weekStart.getDate() + 6);
+    const weekStart = addDays(
+      startOfYear(new Date(year, 0, 1)),
+      (weekNumber - 1) * 7,
+    );
+    const weekEnd = addDays(weekStart, 6);
 
     return `${toHumanShortDate(weekStart, locale)} - ${toHumanShortDate(weekEnd, locale)}`;
   }
@@ -36,6 +33,13 @@
       extra: getWeekDateRange(weekNumber),
     });
   }
+
+  const chartData = $derived(
+    data.map((value, index) => ({
+      value,
+      label: `${index + 1}`,
+    })),
+  );
 </script>
 
-<BarChart {data} {labels} {tooltipHTML} />
+<BarChart data={chartData} {tooltipHTML} />

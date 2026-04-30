@@ -1,7 +1,10 @@
 <script lang="ts">
-  import type { YirPeopleType, YirPerson } from "$lib/requests/models/YirPerson";
-  import { useYirPeople } from "../../_internal/useYirPeople";
   import { m } from "$lib/paraglide/messages";
+  import type {
+    YirPeopleType,
+    YirPerson,
+  } from "$lib/requests/models/YirPerson";
+  import { useYirPeople } from "../../_internal/useYirPeople";
   import YirSectionHeader from "./YirSectionHeader.svelte";
 
   const {
@@ -16,14 +19,12 @@
     label: string;
   } = $props();
 
-  const { people, isLoading } = $derived(
-    useYirPeople({ slug, year, type }),
-  );
+  const { people, isLoading } = $derived(useYirPeople({ slug, year, type }));
 
   const ITEMS_PER_ROW = 5;
 
   let currentPage = $state(0);
-  let viewportEl = $state<HTMLDivElement | undefined>(undefined);
+  let viewportEl: HTMLDivElement | undefined;
   let rowHeight = $state(0);
   let hoveredPerson = $state<number | null>(null);
   let tooltipPosition = $state<{ x: number; y: number } | null>(null);
@@ -55,9 +56,8 @@
     });
   }
 
-  $effect(() => {
-    if (!viewportEl) return;
-
+  function observeResize(node: HTMLDivElement) {
+    viewportEl = node;
     measureRowHeight();
 
     // Row height depends on the width of each `.yir-person-link` (the
@@ -65,12 +65,12 @@
     // the viewport resizes and keep the scroll aligned with the current page.
     const resizeObserver = new ResizeObserver(() => {
       measureRowHeight();
-      viewportEl?.scrollTo({ top: currentPage * rowHeight, behavior: "instant" });
+      node.scrollTo({ top: currentPage * rowHeight, behavior: "instant" });
     });
-    resizeObserver.observe(viewportEl);
+    resizeObserver.observe(node);
 
-    return () => resizeObserver.disconnect();
-  });
+    return { destroy: () => resizeObserver.disconnect() };
+  }
 
   function personUrl(person: YirPerson): string {
     return `/people/${person.slug}`;
@@ -119,7 +119,7 @@
 
     <div
       class="yir-people-viewport"
-      bind:this={viewportEl}
+      use:observeResize
       style:height={rowHeight > 0 ? `${rowHeight}px` : "auto"}
     >
       <div class="yir-people-wrapper">
@@ -142,12 +142,14 @@
               <h2 class="yir-person-name">{person.name}</h2>
               {#if person.count.movies > 0}
                 <h3 class="yir-person-count">
-                  {person.count.movies} {person.count.movies === 1 ? "movie" : "movies"}
+                  {person.count.movies}
+                  {person.count.movies === 1 ? "movie" : "movies"}
                 </h3>
               {/if}
               {#if person.count.shows > 0}
                 <h3 class="yir-person-count">
-                  {person.count.shows} {person.count.shows === 1 ? "show" : "shows"}
+                  {person.count.shows}
+                  {person.count.shows === 1 ? "show" : "shows"}
                 </h3>
               {/if}
             </div>
@@ -167,7 +169,11 @@
           {#each person.titles as title}
             <div class="yir-tooltip-title">
               {#if title.type === "show" && title.episodeCount}
-                {title.title} — <span class="yir-episode-count">{title.episodeCount} {title.episodeCount === 1 ? "episode" : "episodes"}</span>
+                {title.title} —
+                <span class="yir-episode-count">
+                  {title.episodeCount}
+                  {title.episodeCount === 1 ? "episode" : "episodes"}
+                </span>
               {:else}
                 {title.title}
               {/if}

@@ -1,16 +1,14 @@
 <script lang="ts">
-  import YirDefault from "./default/YirDefault.svelte";
-  import YirTitleSection from "./default/_internal/YirTitleSection.svelte";
-  import YirHeader from "./_internal/YirHeader.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useNavbarState } from "$lib/sections/navbar/useNavbarState";
+  import YirHeader from "./_internal/YirHeader.svelte";
   import { useYirDetail } from "./_internal/useYirDetail";
+  import YirDefault from "./default/YirDefault.svelte";
+  import YirTitleSection from "./default/_internal/YirTitleSection.svelte";
 
   const { slug, year }: { slug: string; year: number } = $props();
 
-  const { detail, isLoading } = $derived(
-    useYirDetail({ slug, year }),
-  );
+  const { detail, isLoading } = $derived(useYirDetail({ slug, year }));
 
   // The expanded sidebar overlaps and crowds the YIR layout — force the
   // collapsed/default-width sidebar for the duration of this page.
@@ -19,6 +17,21 @@
     globalSet({ forceCollapsed: true });
     return () => globalSet({ forceCollapsed: false });
   });
+
+  /*
+    TODO:
+    - 'deno task check' issues
+    - css var for bar chart height
+    - bar chart flickering on resize
+    - use UrlBuilder where applicable, e.g. people section
+    - sidebar collapse state via NavbarStateSetter in +page.svelte, instead of effect here
+      -- collapse also can keep profile section open
+    - placeholders need to be different; e.g. first play placeholder is purple
+    - bar chart readability on mobile size (especially the weekly ones)
+    - people section -> as you go down, it starts showing bits of the next row
+    - extract bubble chart
+    - extract genres chart
+  */
 </script>
 
 <div class="yir-page" id="year-in-review">

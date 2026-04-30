@@ -4,30 +4,17 @@
   import { ScaleTypes } from "@carbon/charts";
   import { BarChartSimple, type BarChartOptions } from "@carbon/charts-svelte";
   import "@carbon/charts-svelte/styles.css";
-  import { onMount } from "svelte";
+  import type { BarChartProps } from "./models/BarChartProps";
 
   const barSpacing = 2;
 
-  type TooltipArgs = { value: number; label: string; index: number };
+  const { data, tooltipHTML }: BarChartProps = $props();
 
-  const {
-    data,
-    labels,
-    tooltipHTML,
-  }: {
-    data: number[];
-    labels: string[];
-    tooltipHTML?: (args: TooltipArgs) => string;
-  } = $props();
+  const values = $derived(data.map((d) => d.value));
+  const labels = $derived(data.map((d) => d.label));
 
-  const chartData = $derived(
-    data
-      .map((value, i) => ({ label: labels[i], value }))
-      .filter((entry) => entry.label !== undefined),
-  );
+  const maxValue = $derived(Math.max(...values, 0));
 
-  const maxValue = $derived(Math.max(...data, 0));
-  // TODO: resizing seems to blink some of the bars
   const { observedDimension, observeDimension } = useDimensionObserver(
     "width",
     time.fps(30),
@@ -77,18 +64,10 @@
       return `var(--color-bar-hover, ${barColor})`;
     },
   });
-
-  let isMounted = $state(false);
-
-  onMount(() => {
-    isMounted = true;
-  });
 </script>
 
 <div class="trakt-bar-chart" use:observeDimension>
-  {#if isMounted && $observedDimension > 0 && chartData.length > 0}
-    <BarChartSimple data={chartData} {options} />
-  {/if}
+  <BarChartSimple {data} {options} />
 </div>
 
 <style lang="scss">
