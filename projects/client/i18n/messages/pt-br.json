@@ -1123,7 +1123,7 @@
   "warning_prompt_delete_list": "Tem certeza que deseja excluir a lista {name}?",
   "warning_prompt_delete_note": "Tem certeza que deseja excluir esta nota?",
   "warning_prompt_drop_movie": "Tem certeza que deseja abandonar \"{title}\"? Isso o removerá da sua lista Continuar Assistindo.",
-  "warning_prompt_drop_show": "Tem certeza que deseja abandonar a série \"{title}\"? Isso a removerá da sua lista Continuar Assistindo.",
+  "warning_prompt_drop_show": "Tem certeza que deseja abandonar \"{title}\"? Isso o removerá da sua lista Continuar Assistindo.",
   "warning_prompt_hide_recommendation": "Tem certeza de que deseja ocultar \"{title}\" das suas recomendações?",
   "warning_prompt_log_out": "Tem certeza que deseja sair?",
   "warning_prompt_mark_as_watched_multiple_episodes": "Tem certeza que deseja marcar {count} episódios como assistidos?",

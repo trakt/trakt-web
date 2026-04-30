@@ -1123,7 +1123,7 @@
   "warning_prompt_delete_list": "Weet je zeker dat je de lijst {name} wilt verwijderen?",
   "warning_prompt_delete_note": "Weet je zeker dat je deze notitie wilt verwijderen?",
   "warning_prompt_drop_movie": "Weet je zeker dat je \"{title}\" wilt laten vallen? Hiermee wordt deze verwijderd uit je 'Verder kijken'-lijst.",
-  "warning_prompt_drop_show": "Weet je zeker dat je de serie \"{title}\" wilt laten vallen? Hiermee wordt deze verwijderd uit je 'Verder kijken'-lijst.",
+  "warning_prompt_drop_show": "Weet je zeker dat je \"{title}\" wilt laten vallen? Hiermee wordt deze verwijderd uit je 'Verder kijken'-lijst.",
   "warning_prompt_hide_recommendation": "Weet u zeker dat u \"{title}\" wilt verbergen uit uw aanbevelingen?",
   "warning_prompt_log_out": "Weet je zeker dat je wilt uitloggen?",
   "warning_prompt_mark_as_watched_multiple_episodes": "Weet je zeker dat je {count} afleveringen als bekeken wilt markeren?",

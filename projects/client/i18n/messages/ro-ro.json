@@ -1123,7 +1123,7 @@
   "warning_prompt_delete_list": "Ești sigur că vrei să ștergi lista {name}?",
   "warning_prompt_delete_note": "Ești sigur că vrei să ștergi această notă?",
   "warning_prompt_drop_movie": "Ești sigur că vrei să renunți la \"{title}\"? Acesta va fi eliminat din lista ta Continuă vizionarea.",
-  "warning_prompt_drop_show": "Ești sigur că vrei să renunți la serialul \"{title}\"? Acesta va fi eliminat din lista ta Continuă vizionarea.",
+  "warning_prompt_drop_show": "Ești sigur că vrei să renunți la \"{title}\"? Acesta va fi eliminat din lista ta Continuă vizionarea.",
   "warning_prompt_hide_recommendation": "Ești sigur că vrei să ascunzi „{title}” din recomandările tale?",
   "warning_prompt_log_out": "Ești sigur că vrei să te deconectezi?",
   "warning_prompt_mark_as_watched_multiple_episodes": "Ești sigur că vrei să marchezi {count} episoade ca vizionate?",

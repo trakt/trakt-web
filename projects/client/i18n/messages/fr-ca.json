@@ -1123,7 +1123,7 @@
   "warning_prompt_delete_list": "Voulez-vous vraiment supprimer la liste {name}?",
   "warning_prompt_delete_note": "Voulez-vous vraiment supprimer cette note \n?",
   "warning_prompt_drop_movie": "Voulez-vous vraiment abandonner « {title} »? Cela le retirera de votre liste « En cours ».",
-  "warning_prompt_drop_show": "Voulez-vous vraiment abandonner la série « {title} »? Cela la retirera de votre liste « En cours ».",
+  "warning_prompt_drop_show": "Voulez-vous vraiment abandonner « {title} »? Cela le retirera de votre liste « En cours ».",
   "warning_prompt_hide_recommendation": "Êtes-vous sûr de vouloir masquer « {title} » de vos recommandations?",
   "warning_prompt_log_out": "Voulez-vous vraiment vous déconnecter?",
   "warning_prompt_mark_as_watched_multiple_episodes": "Voulez-vous vraiment marquer {count} épisodes comme vus?",

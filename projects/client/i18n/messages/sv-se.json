@@ -1123,7 +1123,7 @@
   "warning_prompt_delete_list": "Är du säker på att du vill ta bort listan {name}?",
   "warning_prompt_delete_note": "Är du säker på att du vill ta bort den här anteckningen?",
   "warning_prompt_drop_movie": "Är du säker på att du vill sluta följa \"{title}\"? Den kommer att tas bort från din lista över Pågående tittande.",
-  "warning_prompt_drop_show": "Är du säker på att du vill sluta följa serien \"{title}\"? Den kommer att tas bort från din lista över Pågående tittande.",
+  "warning_prompt_drop_show": "Är du säker på att du vill sluta följa \"{title}\"? Den kommer att tas bort från din lista över Pågående tittande.",
   "warning_prompt_hide_recommendation": "Är du säker på att du vill dölja \"{title}\" från dina rekommendationer?",
   "warning_prompt_log_out": "Är du säker på att du vill logga ut?",
   "warning_prompt_mark_as_watched_multiple_episodes": "Är du säker på att du vill markera {count} avsnitt som sedda?",

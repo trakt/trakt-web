@@ -1123,7 +1123,7 @@
   "warning_prompt_delete_list": "Möchten Sie die Liste {name} wirklich löschen?",
   "warning_prompt_delete_note": "Möchten Sie diese Notiz wirklich löschen?",
   "warning_prompt_drop_movie": "Möchten Sie \"{title}\" wirklich abbrechen? Dies entfernt ihn/sie aus Ihrer Weitersehen-Liste.",
-  "warning_prompt_drop_show": "Möchten Sie die Serie \"{title}\" wirklich abbrechen? Dies entfernt sie aus Ihrer Weitersehen-Liste.",
+  "warning_prompt_drop_show": "Möchten Sie \"{title}\" wirklich abbrechen? Dies entfernt ihn/sie aus Ihrer Weitersehen-Liste.",
   "warning_prompt_hide_recommendation": "Möchten Sie „{title}“ wirklich aus Ihren Empfehlungen ausblenden?",
   "warning_prompt_log_out": "Möchten Sie sich wirklich abmelden?",
   "warning_prompt_mark_as_watched_multiple_episodes": "Möchten Sie wirklich {count} Episoden als gesehen markieren?",
