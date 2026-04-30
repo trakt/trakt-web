@@ -1,10 +1,16 @@
 <script lang="ts">
+  import { appendClassList } from "$lib/utils/actions/appendClassList";
   import type { Snippet } from "svelte";
 
-  const { children, icon }: ChildrenProps & { icon?: Snippet } = $props();
+  type TextTagProps = ChildrenProps & {
+    icon?: Snippet;
+    classList?: string;
+  };
+
+  const { children, icon, classList = "" }: TextTagProps = $props();
 </script>
 
-<div class="trakt-text-tag">
+<div class="trakt-text-tag" use:appendClassList={classList}>
   {@render icon?.()}
   {@render children()}
 </div>

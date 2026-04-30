@@ -28,6 +28,7 @@ import { UserBlockedResponseMock } from '../data/users/response/UserBlockedRespo
 import { UserFollowersResponseMock } from '../data/users/response/UserFollowersResponseMock.ts';
 import { UserFollowingResponseMock } from '../data/users/response/UserFollowingResponseMock.ts';
 import { UserMonthInReviewResponseMock } from '../data/users/response/UserMonthInReviewResponseMock.ts';
+import { UserPendingFollowsResponseMock } from '../data/users/response/UserPendingFollowsResponseMock.ts';
 import { UserWatchingResponseMock } from '../data/users/response/UserWatchingResponseMock.ts';
 import { WatchedMoviesResponseMock } from '../data/users/response/WatchedMoviesResponseMock.ts';
 import { WatchedShowsMinimalResponseMock } from '../data/users/response/WatchedShowsMinimalResponseMock.ts';
@@ -56,7 +57,9 @@ export const users = [
     const extended = searchParams.get('extended');
 
     return HttpResponse.json(
-      extended === 'min' ? WatchedShowsMinimalResponseMock : WatchedShowsResponseMock,
+      extended === 'min'
+        ? WatchedShowsMinimalResponseMock
+        : WatchedShowsResponseMock,
     );
   }),
   http.get('http://localhost/users/me/watched/movies', () => {
@@ -112,6 +115,9 @@ export const users = [
   }),
   http.get('http://localhost/users/me/following', () => {
     return HttpResponse.json(UserFollowingResponseMock);
+  }),
+  http.get('http://localhost/users/requests/following', () => {
+    return HttpResponse.json(UserPendingFollowsResponseMock);
   }),
   http.get(
     `http://localhost/users/${UserProfileHarryMappedMock.slug}/lists/${

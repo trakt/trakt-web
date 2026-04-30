@@ -11,16 +11,24 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { DisplayableProfileProps } from "../profile/DisplayableProfileProps";
   import BlockedUserTag from "./_internal/BlockedUserTag.svelte";
+  import PendingFollowTag from "./_internal/PendingFollowTag.svelte";
   import ProfileOverflowMenu from "./_internal/ProfileOverflowMenu.svelte";
+  import { useFollowUserRequest } from "./_internal/useFollowUser";
   import ProfileImage from "./ProfileImage.svelte";
 
-  const { profile, slug }: DisplayableProfileProps = $props();
+  type Props = DisplayableProfileProps & {
+    compact?: boolean;
+  };
+
+  const { profile, slug, compact = false }: Props = $props();
 
   const { user, blocked } = useUser();
   const { isMe } = $derived(useIsMe(slug));
+  const { followStatus } = $derived(useFollowUserRequest(slug));
 
   const shareableSlug = $derived($isMe ? $user.slug : slug);
   const isBlocked = $derived($blocked.has(slug));
+  const isPending = $derived($followStatus === "pending");
 </script>
 
 <div class="profile-page-banner-container">
@@ -37,9 +45,11 @@
         <RenderFor audience="authenticated">
           {#if !$isMe && isBlocked}
             <BlockedUserTag />
+          {:else if !$isMe && isPending}
+            <PendingFollowTag />
           {/if}
         </RenderFor>
-        {#if !isBlocked}
+        {#if !isBlocked && !isPending}
           <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
             {#if profile.isVip}
               <VipBadge isDirector={profile.isDirector} />
@@ -50,16 +60,20 @@
     </ProfileImage>
     <div class="profile-user-details" data-hj-suppress data-sentry-mask>
       <span class="title ellipsis">{toDisplayableName(profile)}</span>
-      <span class="user-location ellipsis">{profile.location}</span>
+      {#if !compact}
+        <span class="user-location ellipsis">{profile.location}</span>
+      {/if}
     </div>
     <div class="profile-actions">
       <div class="profile-icon-actions">
-        <ShareButton
-          title={profile.name.first}
-          urlOverride={UrlBuilder.profile.user(shareableSlug)}
-          textFactory={({ title: name }) => m.text_share_profile({ name })}
-          source={{ id: "profile", type: $isMe ? "own" : "other" }}
-        />
+        {#if !compact}
+          <ShareButton
+            title={profile.name.first}
+            urlOverride={UrlBuilder.profile.user(shareableSlug)}
+            textFactory={({ title: name }) => m.text_share_profile({ name })}
+            source={{ id: "profile", type: $isMe ? "own" : "other" }}
+          />
+        {/if}
         <RenderFor audience="authenticated">
           {#if !$isMe}
             <ProfileOverflowMenu {profile} {slug} />
@@ -71,7 +85,9 @@
     </div>
   </div>
 
-  <ProfileAbout {profile} {slug} />
+  {#if !compact}
+    <ProfileAbout {profile} {slug} />
+  {/if}
 </div>
 
 <style lang="scss">
@@ -115,7 +131,8 @@
       align-items: center;
 
       :global(.trakt-vip-badge),
-      :global(.trakt-blocked-user-tag) {
+      :global(.trakt-blocked-user-tag),
+      :global(.trakt-pending-follow-tag) {
         z-index: var(--layer-base);
         margin-top: var(--ni-neg-16);
       }
