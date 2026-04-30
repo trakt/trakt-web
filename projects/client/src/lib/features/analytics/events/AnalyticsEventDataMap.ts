@@ -18,7 +18,9 @@ type RatingType = { action: 'added' | 'changed'; rating: number } | {
 type FilterType = { id: string; action: 'set' | 'reset'; mode: FilterMode };
 type FiltersType = { action: 'save' | 'reset' };
 type CheckInType = { type: 'episode' | 'movie'; action: 'start' | 'stop' };
-type FollowType = { action: 'follow' | 'unfollow' };
+type FollowType = {
+  action: 'follow' | 'unfollow' | 'cancel-follow-request';
+};
 type BlockType = { action: 'block' | 'unblock' };
 type ExtrasType = { slug: string; type: MediaVideoType };
 type CommentType = { action: 'post' | 'reply' | 'edit' };
