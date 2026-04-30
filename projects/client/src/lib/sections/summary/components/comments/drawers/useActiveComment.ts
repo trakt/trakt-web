@@ -1,6 +1,6 @@
 import type { MediaComment } from '$lib/requests/models/MediaComment.ts';
 import { BehaviorSubject } from 'rxjs';
-import type { ActiveComment } from '../models/ActiveComment.ts';
+import type { ActiveComment } from '../_internal/models/ActiveComment.ts';
 
 export function useActiveComment(source?: ActiveComment) {
   const activeComment = new BehaviorSubject<ActiveComment | undefined>(source);
