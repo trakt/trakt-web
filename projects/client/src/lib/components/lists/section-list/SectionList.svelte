@@ -1,8 +1,15 @@
 <script lang="ts" generics="T extends { key: string }">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Crossfade from "$lib/components/Crossfade.svelte";
+  import "$lib/features/edit-mode/edit-mode.css";
+  import EditModeVisibilityButton from "$lib/features/edit-mode/EditModeVisibilityButton.svelte";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { writable } from "$lib/utils/store/WritableSubject";
@@ -47,6 +54,16 @@
     titleAction: externalTitleAction,
   }: SectionListProps<T> = $props();
 
+  const { isEditMode, section } = useEditMode();
+  const {
+    isHidden,
+    toggle: toggleHidden,
+    action: editModeAction,
+  } = $derived(section(id));
+
+  const { isEnabled } = useFeatureFlag();
+  const isEditModeEnabled = $derived(isEnabled(FeatureFlag.EditMode));
+
   const isHeaderVisible = $derived(Boolean(title));
 
   const { navigation } = useNavigation();
@@ -63,7 +80,7 @@
   });
 
   const isCollapsed = $derived.by(() => {
-    if (variant !== "default") {
+    if (variant !== "default" || $isEditMode) {
       return false;
     }
 
@@ -75,18 +92,20 @@
   {#if externalTitleAction}
     {@render externalTitleAction()}
   {:else if variant === "default"}
-    <ActionButton
-      onclick={toggle}
-      label={isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
-      style="ghost"
-      color="default"
-    >
-      <CollapseIcon state={isCollapsed ? "collapsed" : "expanded"} />
-    </ActionButton>
+    {#if !$isEditModeEnabled}
+      <ActionButton
+        onclick={toggle}
+        label={isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
+        style="ghost"
+        color="default"
+      >
+        <CollapseIcon state={isCollapsed ? "collapsed" : "expanded"} />
+      </ActionButton>
+    {/if}
   {/if}
 {/snippet}
 
-{#snippet actions()}
+{#snippet defaultActions()}
   {@render _externalActions?.()}
 
   {#if drilldown}
@@ -101,64 +120,86 @@
   {/if}
 {/snippet}
 
-<section
-  use:whenInViewport={() => isVisible.set(true)}
-  class="section-list-container"
-  class:section-list-container-collapsed={isCollapsed}
-  class:section-list-container-mounted={$isMounted}
-  class:section-list-container-no-header={!isHeaderVisible}
-  class:section-list-has-drilldown={Boolean(drilldown)}
-  class:section-list-has-multiple-items={items.length > 1}
-  data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
-  data-variant={variant}
->
-  {#if $isVisible}
-    {#if isHeaderVisible && title}
-      <ListHeader
-        {title}
-        {subtitle}
-        {titleAction}
-        {metaInfo}
-        actions={isCollapsed ? undefined : actions}
-        navigationType={headerNavigationType}
-        href={drilldown?.href}
-        replacestate={drilldown?.replacestate}
-        noscroll={drilldown?.noscroll}
-      />
-    {/if}
-    <div class="section-list">
-      <Crossfade showA={items.length > 0}>
-        {#snippet childrenA()}
-          <div
-            use:scrollHistory={id}
-            use:resetScroll
-            class="trakt-list-item-container section-list-horizontal-scroll"
-            data-dpad-navigation={DpadNavigationType.List}
-            data-navigation-type={$navigation}
-          >
-            {#each items as i (i.key)}
-              {@render item(i)}
-            {/each}
+{#snippet actions()}
+  <RenderForFeature flag={FeatureFlag.EditMode}>
+    {#snippet enabled()}
+      {#if !$isEditMode}
+        {@render defaultActions()}
+      {:else}
+        <EditModeVisibilityButton
+          isHidden={$isHidden}
+          label={$isHidden
+            ? m.button_label_show_section({ section: title ?? "" })
+            : m.button_label_hide_section({ section: title ?? "" })}
+          onclick={toggleHidden}
+        />
+      {/if}
+    {/snippet}
 
-            {#if ctaItem && items.length <= ctaCutOff}
-              {#key `section-list-${id}_cta`}
-                {@render ctaItem()}
-              {/key}
-            {/if}
-          </div>
-        {/snippet}
+    {@render defaultActions()}
+  </RenderForFeature>
+{/snippet}
 
-        {#snippet childrenB()}
-          {#if empty != null && $isMounted}
-            <div class={emptyStateClass}>
-              {@render empty()}
+{#if !$isEditModeEnabled || $isEditMode || !$isHidden}
+  <section
+    use:whenInViewport={() => isVisible.set(true)}
+    class="section-list-container"
+    class:section-list-container-collapsed={isCollapsed}
+    class:section-list-container-mounted={$isMounted}
+    class:section-list-container-no-header={!isHeaderVisible}
+    class:section-list-has-drilldown={Boolean(drilldown)}
+    class:section-list-has-multiple-items={items.length > 1}
+    data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
+    data-variant={variant}
+  >
+    {#if $isVisible}
+      {#if isHeaderVisible && title}
+        <ListHeader
+          {title}
+          {subtitle}
+          {titleAction}
+          {metaInfo}
+          actions={isCollapsed ? undefined : actions}
+          navigationType={headerNavigationType}
+          href={drilldown?.href}
+          replacestate={drilldown?.replacestate}
+          noscroll={drilldown?.noscroll}
+        />
+      {/if}
+      <div class="section-list" use:editModeAction>
+        <Crossfade showA={items.length > 0}>
+          {#snippet childrenA()}
+            <div
+              use:scrollHistory={id}
+              use:resetScroll
+              class="trakt-list-item-container section-list-horizontal-scroll"
+              data-dpad-navigation={DpadNavigationType.List}
+              data-navigation-type={$navigation}
+            >
+              {#each items as i (i.key)}
+                {@render item(i)}
+              {/each}
+
+              {#if ctaItem && items.length <= ctaCutOff}
+                {#key `section-list-${id}_cta`}
+                  {@render ctaItem()}
+                {/key}
+              {/if}
             </div>
-          {/if}
-        {/snippet}
-      </Crossfade>
-    </div>
-  {/if}
-</section>
+          {/snippet}
+
+          {#snippet childrenB()}
+            {#if empty != null && $isMounted}
+              <div class={emptyStateClass}>
+                {@render empty()}
+              </div>
+            {/if}
+          {/snippet}
+        </Crossfade>
+      </div>
+    {/if}
+  </section>
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -195,7 +236,7 @@
         height var(--transition-increment) ease-in-out,
         min-height var(--transition-increment) ease-in-out;
 
-      .section-list {
+      .section-list:not(.trakt-edit-mode) {
         transition:
           height var(--transition-increment) ease-in-out,
           min-height var(--transition-increment) ease-in-out;
@@ -229,6 +270,13 @@
   .section-list-empty-state {
     min-height: var(--section-list-height);
     height: var(--section-list-height);
+
+    &:not(.trakt-edit-mode) {
+      transition:
+        opacity var(--transition-increment) ease-in-out,
+        filter var(--transition-increment) ease-in-out,
+        transform var(--transition-increment) ease-in-out;
+    }
   }
 
   .section-list-empty-state:not(:has(:global(.trakt-skeleton-list))) {

@@ -2,6 +2,11 @@
   import ArrowRightIcon from "$lib/components/icons/ArrowRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { useDiscover } from "$lib/features/discover/useDiscover";
+  import "$lib/features/edit-mode/edit-mode.css";
+  import EditModeVisibilityButton from "$lib/features/edit-mode/EditModeVisibilityButton.svelte";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import BannerContainer from "$lib/sections/banner/_internal/BannerContainer.svelte";
   import {
@@ -14,6 +19,15 @@
   import { useStreak } from "./_internal/useStreak";
 
   const { mode } = useDiscover();
+
+  const id = "daily-streak";
+  const { isEditMode, section } = useEditMode();
+  const {
+    isHidden,
+    toggle: toggleHidden,
+    action: editModeAction,
+  } = $derived(section(id));
+
   const { streakCount, streakState, isLoading } = $derived(
     useStreak({ mode: $mode }),
   );
@@ -94,56 +108,78 @@
   );
 
   const isAtRisk = $derived($streakState === "at_risk");
+
+  const { isEnabled } = useFeatureFlag();
+  const isEditModeEnabled = $derived(isEnabled(FeatureFlag.EditMode));
 </script>
 
-{#if $isLoading}
-  <BannerContainer variant="fluid">
-    <div class="trakt-streak-skeleton"></div>
-  </BannerContainer>
-{:else}
-  <BannerContainer variant="fluid">
-    <trakt-streak-callout>
-      <Link {...drilldownLink}>
-        <div class="trakt-streak-callout">
-          <div class="trakt-streak-left">
-            <div class="trakt-streak-flame">
-              <StreakIcon count={$streakCount} />
-            </div>
+{#snippet editAction()}
+  <EditModeVisibilityButton
+    isHidden={$isHidden}
+    label={$isHidden
+      ? m.button_label_show_section({
+          section: m.drawer_title_streak_activity(),
+        })
+      : m.button_label_hide_section({
+          section: m.drawer_title_streak_activity(),
+        })}
+    onclick={toggleHidden}
+  />
+{/snippet}
 
-            <div class="trakt-streak-info">
-              <p class="trakt-streak-title bold">
-                <span class="trakt-streak-count bold">{streakLabel}</span>
-                {m.text_stats_watching_streak()}
-              </p>
-              <p class="secondary">
-                {#if isAtRisk || $streakCount === 0}
-                  <span class="secondary bold">
-                    {m.text_stats_watch_today()}
-                  </span>
-                  {#if $streakCount > 0}
-                    {m.text_stats_keep_streak_alive()}
+{#if !$isEditModeEnabled || $isEditMode || !$isHidden}
+  {#if $isLoading}
+    <BannerContainer variant="fluid">
+      <div class="trakt-streak-skeleton"></div>
+    </BannerContainer>
+  {:else}
+    <BannerContainer
+      variant="fluid"
+      action={$isEditMode ? editAction : undefined}
+    >
+      <trakt-streak-callout>
+        <Link {...drilldownLink} disabled={$isEditMode}>
+          <div class="trakt-streak-callout" use:editModeAction>
+            <div class="trakt-streak-left">
+              <div class="trakt-streak-flame">
+                <StreakIcon count={$streakCount} />
+              </div>
+
+              <div class="trakt-streak-info">
+                <p class="trakt-streak-title bold">
+                  <span class="trakt-streak-count bold">{streakLabel}</span>
+                  {m.text_stats_watching_streak()}
+                </p>
+                <p class="secondary">
+                  {#if isAtRisk || $streakCount === 0}
+                    <span class="secondary bold">
+                      {m.text_stats_watch_today()}
+                    </span>
+                    {#if $streakCount > 0}
+                      {m.text_stats_keep_streak_alive()}
+                    {:else}
+                      {m.text_stats_start_streak()}
+                    {/if}
                   {:else}
-                    {m.text_stats_start_streak()}
+                    {tierMessage}
                   {/if}
-                {:else}
-                  {tierMessage}
-                {/if}
-              </p>
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div class="trakt-streak-right">
-            <div class="trakt-streak-accumulator">
-              <StreakAccumulator cells={$heatmap?.cells ?? []} />
-            </div>
-            <div class="trakt-streak-footer">
-              <ArrowRightIcon />
+            <div class="trakt-streak-right">
+              <div class="trakt-streak-accumulator">
+                <StreakAccumulator cells={$heatmap?.cells ?? []} />
+              </div>
+              <div class="trakt-streak-footer">
+                <ArrowRightIcon />
+              </div>
             </div>
           </div>
-        </div>
-      </Link>
-    </trakt-streak-callout>
-  </BannerContainer>
+        </Link>
+      </trakt-streak-callout>
+    </BannerContainer>
+  {/if}
 {/if}
 
 <style lang="scss">

@@ -6836,6 +6836,40 @@
     "button_label_activity_ratings": {
       "default": "View ratings",
       "description": "Aria-label for the activity toggle button to show ratings."
+    },
+    "text_edit_mode_toggle_sections": {
+      "default": "Hide/show sections",
+      "description": "Text to indicate what users can do in the edit mode."
+    },
+    "button_text_exit_edit_mode": {
+      "default": "Exit edit mode",
+      "description": "Text for the button that allows users to exit edit mode after customizing their dashboard."
+    },
+    "button_label_exit_edit_mode": {
+      "default": "Exit edit mode",
+      "description": "Aria-label for the button that allows users to exit edit mode after customizing their dashboard."
+    },
+    "button_label_show_section": {
+      "default": "Show {section}",
+      "description": "Aria-label for the button that allows users to show a hidden section in edit mode.",
+      "variables": {
+        "section": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_hide_section": {
+      "default": "Hide {section}",
+      "description": "Aria-label for the button that allows users to hide a visible section in edit mode.",
+      "variables": {
+        "section": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_edit_mode": {
+      "default": "Edit mode",
+      "description": "Aria-label for the button that allows users to enter edit mode to customize their dashboard."
     }
   }
 }
