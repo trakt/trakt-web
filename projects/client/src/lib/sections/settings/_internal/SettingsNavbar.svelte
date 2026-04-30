@@ -39,7 +39,10 @@
 
   .trakt-settings-navbar {
     position: sticky;
-    top: calc(env(safe-area-inset-top, 0) + var(--content-gap));
+    top: calc(
+      var(--navbar-actions-bottom, env(safe-area-inset-top, 0)) +
+        var(--content-gap)
+    );
     align-self: start;
 
     display: flex;
@@ -48,6 +51,8 @@
     gap: var(--gap-s);
 
     @include for-tablet-sm-and-below {
+      top: calc(env(safe-area-inset-top, 0) + var(--content-gap));
+
       position: static;
 
       min-height: 0;
