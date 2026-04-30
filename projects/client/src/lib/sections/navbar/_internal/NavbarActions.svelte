@@ -1,5 +1,7 @@
 <script lang="ts">
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
+  import ExitEditModeButton from "$lib/features/edit-mode/ExitEditModeButton.svelte";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
@@ -11,6 +13,8 @@
   import NavbarHeader from "./NavbarHeader.svelte";
 
   const { state } = useNavbarState();
+
+  const { isEditMode } = useEditMode();
 </script>
 
 <div
@@ -24,7 +28,9 @@
   </div>
 
   <div class="trakt-navbar-actions-center">
-    {#if $state.actions}
+    {#if $isEditMode}
+      <ExitEditModeButton />
+    {:else}
       {@render $state.actions?.()}
     {/if}
   </div>

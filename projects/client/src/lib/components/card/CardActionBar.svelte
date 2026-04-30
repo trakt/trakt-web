@@ -1,15 +1,20 @@
 <script lang="ts">
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
 
   const { actions }: { actions: Snippet } = $props();
+
+  const { isEditMode } = useEditMode();
 </script>
 
-<RenderFor audience="authenticated">
-  <div class="trakt-card-action-bar">
-    {@render actions()}
-  </div>
-</RenderFor>
+{#if !$isEditMode}
+  <RenderFor audience="authenticated">
+    <div class="trakt-card-action-bar">
+      {@render actions()}
+    </div>
+  </RenderFor>
+{/if}
 
 <style>
   .trakt-card-action-bar {

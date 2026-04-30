@@ -1,5 +1,7 @@
 <script lang="ts">
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
+  import ExitEditModeButton from "$lib/features/edit-mode/ExitEditModeButton.svelte";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import NavbarHeader from "./_internal/NavbarHeader.svelte";
@@ -9,6 +11,8 @@
   import { useNavbarState } from "./useNavbarState";
 
   const { state } = useNavbarState();
+
+  const { isEditMode } = useEditMode();
 </script>
 
 {#if $state.mode !== "hidden"}
@@ -20,7 +24,11 @@
     >
       <div class="trakt-navbar-left">
         <NavbarHeader />
-        {@render $state.actions?.()}
+        {#if $isEditMode}
+          <ExitEditModeButton />
+        {:else}
+          {@render $state.actions?.()}
+        {/if}
       </div>
 
       <div class="trakt-navbar-links">

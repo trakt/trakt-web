@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -27,6 +28,8 @@
   const { isAuthorized } = useAuth();
   const audience = $derived($isAuthorized ? "authenticated" : "public");
   const pageMode = $derived($isAuthorized ? "default" : "content-only");
+
+  const { toggle, isEditMode } = useEditMode();
 </script>
 
 <TraktPage
@@ -46,6 +49,7 @@
     </NavbarStateSetter>
 
     <Banner />
+
     <UpNextList />
 
     <RenderForFeature flag={FeatureFlag.ThisWeek}>
@@ -64,7 +68,6 @@
     <UpcomingList />
     <PersonalHistoryList mode={$mode} />
     <ActivityList />
-
     <DashboardDrawer />
   </RenderFor>
 

@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { CardFooterProps } from "./CardFooterProps";
 
   const { children, action, tag }: CardFooterProps = $props();
+
+  const { isEditMode } = useEditMode();
 </script>
 
 <div class="trakt-card-footer">
@@ -16,7 +19,7 @@
     </div>
   {/if}
 
-  {#if action}
+  {#if action && !$isEditMode}
     <RenderFor audience="all">
       <div class="trakt-card-footer-action">
         {@render action()}

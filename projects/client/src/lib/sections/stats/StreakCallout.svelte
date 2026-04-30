@@ -2,6 +2,8 @@
   import ArrowRightIcon from "$lib/components/icons/ArrowRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
+  import VisibilityToggle from "$lib/features/edit-mode/VisibilityToggle.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import BannerContainer from "$lib/sections/banner/_internal/BannerContainer.svelte";
   import {
@@ -14,6 +16,9 @@
   import { useStreak } from "./_internal/useStreak";
 
   const { mode } = useDiscover();
+  const { isEditMode, isHidden, toggleHidden } = useEditMode({
+    sectionId: "streak-callout",
+  });
   const { streakCount, streakState, isLoading } = $derived(
     useStreak({ mode: $mode }),
   );
@@ -94,54 +99,71 @@
   const isAtRisk = $derived($streakState === "at_risk");
 </script>
 
-{#if $isLoading}
-  <BannerContainer variant="fluid">
-    <div class="trakt-streak-skeleton"></div>
-  </BannerContainer>
-{:else}
-  <BannerContainer variant="fluid">
-    <trakt-streak-callout>
-      <Link {...drilldownLink}>
-        <div class="trakt-streak-callout">
-          <div class="trakt-streak-left">
-            <div class="trakt-streak-flame">
-              <StreakIcon count={$streakCount} />
-            </div>
+{#snippet editAction()}
+  <VisibilityToggle
+    isHidden={$isHidden}
+    label={$isHidden ? "Show streak" : "Hide streak"}
+    onclick={toggleHidden}
+  />
+{/snippet}
 
-            <div class="trakt-streak-info">
-              <p class="trakt-streak-title bold">
-                <span class="trakt-streak-count bold">{streakLabel}</span>
-                {m.text_stats_watching_streak()}
-              </p>
-              <p class="secondary">
-                {#if isAtRisk || $streakCount === 0}
-                  <span class="secondary bold">
-                    {m.text_stats_watch_today()}
-                  </span>
-                  {#if $streakCount > 0}
-                    {m.text_stats_keep_streak_alive()}
+{#if $isEditMode || !$isHidden}
+  {#if $isLoading}
+    <BannerContainer variant="fluid">
+      <div class="trakt-streak-skeleton"></div>
+    </BannerContainer>
+  {:else}
+    <BannerContainer
+      variant="fluid"
+      action={$isEditMode ? editAction : undefined}
+    >
+      <trakt-streak-callout>
+        <Link {...drilldownLink}>
+          <div
+            class="trakt-streak-callout"
+            class:is-edit-mode={$isEditMode}
+            class:is-hidden={$isHidden}
+          >
+            <div class="trakt-streak-left">
+              <div class="trakt-streak-flame">
+                <StreakIcon count={$streakCount} />
+              </div>
+
+              <div class="trakt-streak-info">
+                <p class="trakt-streak-title bold">
+                  <span class="trakt-streak-count bold">{streakLabel}</span>
+                  {m.text_stats_watching_streak()}
+                </p>
+                <p class="secondary">
+                  {#if isAtRisk || $streakCount === 0}
+                    <span class="secondary bold">
+                      {m.text_stats_watch_today()}
+                    </span>
+                    {#if $streakCount > 0}
+                      {m.text_stats_keep_streak_alive()}
+                    {:else}
+                      {m.text_stats_start_streak()}
+                    {/if}
                   {:else}
-                    {m.text_stats_start_streak()}
+                    {tierMessage}
                   {/if}
-                {:else}
-                  {tierMessage}
-                {/if}
-              </p>
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div class="trakt-streak-right">
-            <div class="trakt-streak-accumulator">
-              <StreakAccumulator cells={$heatmap?.cells ?? []} />
-            </div>
-            <div class="trakt-streak-footer">
-              <ArrowRightIcon />
+            <div class="trakt-streak-right">
+              <div class="trakt-streak-accumulator">
+                <StreakAccumulator cells={$heatmap?.cells ?? []} />
+              </div>
+              <div class="trakt-streak-footer">
+                <ArrowRightIcon />
+              </div>
             </div>
           </div>
-        </div>
-      </Link>
-    </trakt-streak-callout>
-  </BannerContainer>
+        </Link>
+      </trakt-streak-callout>
+    </BannerContainer>
+  {/if}
 {/if}
 
 <style lang="scss">
@@ -231,6 +253,24 @@
       align-items: flex-end;
       align-self: stretch;
       gap: 0;
+    }
+  }
+
+  .trakt-streak-callout {
+    transition:
+      opacity var(--transition-increment) cubic-bezier(0.34, 1.56, 0.64, 1),
+      filter var(--transition-increment) ease-out,
+      transform var(--transition-increment) cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    &.is-edit-mode {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    &.is-edit-mode.is-hidden {
+      opacity: 0.3;
+      filter: blur(3px);
+      transform: scale(0.97);
     }
   }
 

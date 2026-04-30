@@ -13,6 +13,7 @@
   import CookieConsentProvider from "$lib/features/cookie-consent/CookieConsentProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
   import DiscoverProvider from "$lib/features/discover/DiscoverProvider.svelte";
+  import EditModeProvider from "$lib/features/edit-mode/EditModeProvider.svelte";
   import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
   import FeatureFlagProvider from "$lib/features/feature-flag/FeatureFlagProvider.svelte";
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
@@ -169,45 +170,46 @@
                                       <ReportDialogProvider />
                                       <CoverImage />
                                       <SeasonalFlair />
-
-                                      <ThemeProvider theme={data.theme}>
-                                        <ListScrollHistoryProvider>
-                                          <!--
+                                      <EditModeProvider>
+                                        <ThemeProvider theme={data.theme}>
+                                          <ListScrollHistoryProvider>
+                                            <!--
                                         All navbars are added in the layout to make sure they can
                                         persist during navigation. The state is set on a page level.
                                       -->
-                                          <RenderFor
-                                            audience="all"
-                                            device={["mobile", "tablet-sm"]}
-                                          >
-                                            <TopNavbar />
-                                          </RenderFor>
+                                            <RenderFor
+                                              audience="all"
+                                              device={["mobile", "tablet-sm"]}
+                                            >
+                                              <TopNavbar />
+                                            </RenderFor>
 
-                                          <RenderFor
-                                            audience="all"
-                                            device={["desktop", "tablet-lg"]}
-                                          >
-                                            <SideNavbar />
-                                          </RenderFor>
+                                            <RenderFor
+                                              audience="all"
+                                              device={["desktop", "tablet-lg"]}
+                                            >
+                                              <SideNavbar />
+                                            </RenderFor>
 
-                                          {@render children()}
+                                            {@render children()}
 
-                                          <RenderFor
-                                            audience="all"
-                                            device={["mobile", "tablet-sm"]}
-                                          >
-                                            <MobileNavbar />
-                                          </RenderFor>
+                                            <RenderFor
+                                              audience="all"
+                                              device={["mobile", "tablet-sm"]}
+                                            >
+                                              <MobileNavbar />
+                                            </RenderFor>
 
-                                          <RenderFor audience="authenticated">
-                                            <NavbarToastContent />
-                                          </RenderFor>
-                                          <SvelteQueryDevtools
-                                            buttonPosition="bottom-right"
-                                            styleNonce="opacity: 0.5"
-                                          />
-                                        </ListScrollHistoryProvider>
-                                      </ThemeProvider>
+                                            <RenderFor audience="authenticated">
+                                              <NavbarToastContent />
+                                            </RenderFor>
+                                            <SvelteQueryDevtools
+                                              buttonPosition="bottom-right"
+                                              styleNonce="opacity: 0.5"
+                                            />
+                                          </ListScrollHistoryProvider>
+                                        </ThemeProvider>
+                                      </EditModeProvider>
                                     </ConfirmationProvider>
                                   </DiscoverProvider>
                                 </ToastProvider>

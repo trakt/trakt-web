@@ -1,9 +1,12 @@
 <script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
+  import EditModeIcon from "$lib/components/icons/EditModeIcon.svelte";
   import GearIcon from "$lib/components/icons/GearIcon.svelte";
   import LibraryIcon from "$lib/components/icons/LibraryIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
@@ -31,6 +34,8 @@
     if (isExpanded) return;
     hideTimeout = setTimeout(() => (hoverVisible = false), 150);
   }
+
+  const { toggle } = useEditMode();
 </script>
 
 {#snippet navItem(href: string, label: string, title: string, icon: Snippet)}
@@ -85,6 +90,18 @@
           m.button_label_settings(),
           iconSettings,
         )}
+
+        <!-- TODO this location is not good enough for this -->
+        <ActionButton
+          style="ghost"
+          label="EDIT"
+          size="small"
+          onclick={() => {
+            toggle();
+          }}
+        >
+          <EditModeIcon />
+        </ActionButton>
       </nav>
     </div>
 

@@ -1,6 +1,7 @@
 <script lang="ts" generics="T extends { key: string }">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Crossfade from "$lib/components/Crossfade.svelte";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
+  import VisibilityToggle from "$lib/features/edit-mode/VisibilityToggle.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
@@ -11,8 +12,6 @@
   import { useScrollHistoryAction } from "../_internal/useScrollHistoryAction";
   import type { ListProps } from "../ListProps";
   import { resetScroll } from "./_internal/resetScroll";
-  import { useCollapsedList } from "./_internal/useCollapsedList";
-  import CollapseIcon from "./CollapseIcon.svelte";
   import type { ListVariant } from "./ListVariant";
 
   const emptyStateClass = "section-list-empty-state";
@@ -36,7 +35,7 @@
     ctaItem,
     empty,
     metaInfo,
-    actions,
+    actions: _externalActions,
     drilldownLink,
     noscroll,
     replacestate,
@@ -48,12 +47,16 @@
 
   const isHeaderVisible = $derived(Boolean(title));
 
+  const { isEditMode, isHidden, toggleHidden } = $derived(
+    useEditMode({ sectionId: id }),
+  );
+
   const { navigation } = useNavigation();
   const isVisible = writable($navigation === "dpad");
   const isMounted = writable(false);
-  const { isCollapsed: isListCollapsed, toggle } = $derived(
-    useCollapsedList(id),
-  );
+  // const { isCollapsed: isListCollapsed, toggle } = $derived(
+  //   useCollapsedList(id),
+  // );
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
 
@@ -61,19 +64,22 @@
     isMounted.set(true);
   });
 
-  const isCollapsed = $derived.by(() => {
-    if (variant !== "default") {
-      return false;
-    }
+  const isCollapsed = false;
+  // const isCollapsed = $derived.by(() => {
+  //   if (variant !== "default") {
+  //     return false;
+  //   }
 
-    return $isListCollapsed;
-  });
+  //   return $isListCollapsed;
+  // });
 </script>
 
 {#snippet titleAction()}
   {#if externalTitleAction}
     {@render externalTitleAction()}
-  {:else if variant === "default"}
+  {/if}
+  <!-- TODO only hide if on non editable page -->
+  <!-- {:else if variant === "default"}
     <ActionButton
       onclick={toggle}
       label={isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
@@ -82,67 +88,82 @@
     >
       <CollapseIcon state={isCollapsed ? "collapsed" : "expanded"} />
     </ActionButton>
-  {/if}
+  {/if} -->
 {/snippet}
 
-<section
-  use:whenInViewport={() => isVisible.set(true)}
-  class="section-list-container"
-  class:section-list-container-collapsed={isCollapsed}
-  class:section-list-container-mounted={$isMounted}
-  class:section-list-container-no-header={!isHeaderVisible}
-  class:section-list-has-drilldown={Boolean(drilldownLink)}
-  class:section-list-has-multiple-items={items.length > 1}
-  data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
-  data-variant={variant}
->
-  {#if $isVisible}
-    {#if isHeaderVisible && title}
-      <ListHeader
-        {title}
-        {subtitle}
-        {titleAction}
-        {metaInfo}
-        {noscroll}
-        {replacestate}
-        actions={isCollapsed ? undefined : actions}
-        navigationType={headerNavigationType}
-        href={drilldownLink}
-      />
-    {/if}
-    <div class="section-list">
-      <Crossfade showA={items.length > 0}>
-        {#snippet childrenA()}
-          <div
-            use:scrollHistory={id}
-            use:resetScroll
-            class="trakt-list-item-container section-list-horizontal-scroll"
-            data-dpad-navigation={DpadNavigationType.List}
-            data-navigation-type={$navigation}
-          >
-            {#each items as i (i.key)}
-              {@render item(i)}
-            {/each}
-
-            {#if ctaItem && items.length <= ctaCutOff}
-              {#key `section-list-${id}_cta`}
-                {@render ctaItem()}
-              {/key}
-            {/if}
-          </div>
-        {/snippet}
-
-        {#snippet childrenB()}
-          {#if empty != null && $isMounted}
-            <div class={emptyStateClass}>
-              {@render empty()}
-            </div>
-          {/if}
-        {/snippet}
-      </Crossfade>
-    </div>
+{#snippet actions()}
+  {#if !$isEditMode}
+    {@render _externalActions?.()}
+  {:else}
+    <VisibilityToggle
+      isHidden={$isHidden}
+      label={$isHidden ? `Show ${title} section` : `Hide ${title} section`}
+      onclick={toggleHidden}
+    />
   {/if}
-</section>
+{/snippet}
+{#if $isEditMode || !$isHidden}
+  <section
+    use:whenInViewport={() => isVisible.set(true)}
+    class="section-list-container"
+    class:section-list-container-collapsed={isCollapsed}
+    class:section-list-container-mounted={$isMounted}
+    class:section-list-container-no-header={!isHeaderVisible}
+    class:section-list-has-drilldown={Boolean(drilldownLink)}
+    class:section-list-has-multiple-items={items.length > 1}
+    data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
+    data-variant={variant}
+    class:is-edit-mode={$isEditMode}
+    class:is-hidden={$isHidden}
+  >
+    {#if $isVisible}
+      {#if isHeaderVisible && title}
+        <ListHeader
+          {title}
+          {subtitle}
+          {titleAction}
+          {metaInfo}
+          {noscroll}
+          {replacestate}
+          actions={isCollapsed ? undefined : actions}
+          navigationType={headerNavigationType}
+          href={$isEditMode ? undefined : drilldownLink}
+        />
+      {/if}
+      <div class="section-list">
+        <Crossfade showA={items.length > 0}>
+          {#snippet childrenA()}
+            <div
+              use:scrollHistory={id}
+              use:resetScroll
+              class="trakt-list-item-container section-list-horizontal-scroll"
+              data-dpad-navigation={DpadNavigationType.List}
+              data-navigation-type={$navigation}
+            >
+              {#each items as i (i.key)}
+                {@render item(i)}
+              {/each}
+
+              {#if ctaItem && items.length <= ctaCutOff}
+                {#key `section-list-${id}_cta`}
+                  {@render ctaItem()}
+                {/key}
+              {/if}
+            </div>
+          {/snippet}
+
+          {#snippet childrenB()}
+            {#if empty != null && $isMounted}
+              <div class={emptyStateClass}>
+                {@render empty()}
+              </div>
+            {/if}
+          {/snippet}
+        </Crossfade>
+      </div>
+    {/if}
+  </section>
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -184,6 +205,18 @@
       }
     }
 
+    &.section-list-container-mounted.is-edit-mode {
+      .section-list {
+        transition:
+          height var(--transition-increment) ease-in-out,
+          min-height var(--transition-increment) ease-in-out,
+          opacity var(--transition-increment) cubic-bezier(0.34, 1.56, 0.64, 1),
+          filter var(--transition-increment) ease-out,
+          transform var(--transition-increment)
+            cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+    }
+
     &[data-variant="inline"] {
       :global(.trakt-list-inset-title) {
         margin: 0;
@@ -198,6 +231,26 @@
         width: 100%;
       }
     }
+
+    &.is-edit-mode {
+      .section-list {
+        opacity: 0.7;
+        pointer-events: none;
+        transition:
+          opacity var(--transition-increment) cubic-bezier(0.34, 1.56, 0.64, 1),
+          filter var(--transition-increment) ease-out,
+          transform var(--transition-increment)
+            cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+    }
+
+    &.is-edit-mode.is-hidden {
+      .section-list {
+        opacity: 0.3;
+        filter: blur(3px);
+        transform: scale(0.97);
+      }
+    }
   }
 
   .section-list-container {
@@ -209,6 +262,11 @@
   .section-list-empty-state {
     min-height: var(--section-list-height);
     height: var(--section-list-height);
+
+    transition:
+      opacity var(--transition-increment) ease-in-out,
+      filter var(--transition-increment) ease-in-out,
+      transform var(--transition-increment) ease-in-out;
   }
 
   .section-list-empty-state:not(:has(:global(.trakt-skeleton-list))) {
