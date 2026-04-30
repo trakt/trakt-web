@@ -1123,7 +1123,7 @@
   "warning_prompt_delete_list": "Er du sikker på at du vil slette listen {name}?",
   "warning_prompt_delete_note": "Er du sikker på at du vil slette dette notatet?",
   "warning_prompt_drop_movie": "Er du sikker på at du vil droppe \"{title}\"? Dette vil fjerne den fra Fortsett å se-listen din.",
-  "warning_prompt_drop_show": "Er du sikker på at du vil droppe serien \"{title}\"? Dette vil fjerne den fra Fortsett å se-listen din.",
+  "warning_prompt_drop_show": "Er du sikker på at du vil droppe \"{title}\"? Dette vil fjerne den fra Fortsett å se-listen din.",
   "warning_prompt_hide_recommendation": "Er du sikker på at du vil skjule \"{title}\" fra dine anbefalinger?",
   "warning_prompt_log_out": "Er du sikker på at du vil logge ut?",
   "warning_prompt_mark_as_watched_multiple_episodes": "Er du sikker på at du vil merke {count} episoder som sett?",

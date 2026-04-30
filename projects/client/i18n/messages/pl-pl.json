@@ -1123,7 +1123,7 @@
   "warning_prompt_delete_list": "Czy na pewno chcesz usunąć listę {name}?",
   "warning_prompt_delete_note": "Czy na pewno chcesz usunąć tę notatkę?",
   "warning_prompt_drop_movie": "Czy na pewno chcesz porzucić \"{title}\"? Spowoduje to usunięcie go z listy Kontynuuj oglądanie.",
-  "warning_prompt_drop_show": "Czy na pewno chcesz porzucić serial \"{title}\"? Spowoduje to usunięcie go z listy Kontynuuj oglądanie.",
+  "warning_prompt_drop_show": "Czy na pewno chcesz porzucić \"{title}\"? Spowoduje to usunięcie go z listy Kontynuuj oglądanie.",
   "warning_prompt_hide_recommendation": "Czy na pewno chcesz ukryć \"{title}\" z rekomendacji?",
   "warning_prompt_log_out": "Czy na pewno chcesz się wylogować?",
   "warning_prompt_mark_as_watched_multiple_episodes": "Czy na pewno chcesz oznaczyć {count} odcinków jako obejrzanych?",

@@ -1123,7 +1123,7 @@
   "warning_prompt_delete_list": "Are you sure you want to delete the list {name}?",
   "warning_prompt_delete_note": "Are you sure you want to delete this note?",
   "warning_prompt_drop_movie": "Are you sure you want to drop \"{title}\"? This will remove it from your Continue Watching list.",
-  "warning_prompt_drop_show": "Are you sure you want to drop \"{title}\" show? This will remove it from your Continue Watching list.",
+  "warning_prompt_drop_show": "Are you sure you want to drop \"{title}\"? This will remove it from your Continue Watching list.",
   "warning_prompt_hide_recommendation": "Are you sure you want to hide \"{title}\" from your recommendations?",
   "warning_prompt_log_out": "Are you sure you want to log out?",
   "warning_prompt_mark_as_watched_multiple_episodes": "Are you sure you want to mark {count} episodes as watched?",
