@@ -5,7 +5,6 @@
   import ErrorLockedAccountPage from "$lib/pages/errors/ErrorLockedAccountPage.svelte";
   import ErrorServicePage from "$lib/pages/errors/ErrorServicePage.svelte";
   import UnexpectedErrorPage from "$lib/pages/errors/UnexpectedErrorPage.svelte";
-  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import * as Sentry from "@sentry/sveltekit";
   import { onMount } from "svelte";
   import { isErrorExempt } from "./_internal/errorExemptions.ts";
@@ -18,14 +17,15 @@
   } from "./models/WellKnownErrors";
 
   const { children }: ChildrenProps = $props();
-  const fetchError = writable<WellKnownError | undefined>(undefined);
-  const unexpectedError = writable<Error | undefined>(undefined);
-  const sessionId = writable<string | undefined>(undefined);
+
+  let fetchError = $state<WellKnownError | undefined>(undefined);
+  let unexpectedError = $state<Error | undefined>(undefined);
+  let sessionId = $state<string | undefined>(undefined);
 
   onMount(() => {
     const handler = (event: Event) => {
       const errorEvent = event as CustomEvent<CustomFetchError>;
-      fetchError.set(mapToWellKnownError(errorEvent.detail));
+      fetchError = mapToWellKnownError(errorEvent.detail);
     };
 
     globalThis.window.addEventListener(FETCH_ERROR_EVENT, handler);
@@ -36,13 +36,13 @@
   });
 
   afterNavigate((_) => {
-    fetchError.set(undefined);
-    unexpectedError.set(undefined);
-    sessionId.set(undefined);
+    fetchError = undefined;
+    unexpectedError = undefined;
+    sessionId = undefined;
   });
 
-  const hasExemption = $derived(isErrorExempt($fetchError, page.route.id));
-  const hasError = $derived($fetchError || $unexpectedError);
+  const hasExemption = $derived(isErrorExempt(fetchError, page.route.id));
+  const hasError = $derived(fetchError || unexpectedError);
 </script>
 
 <svelte:window
@@ -69,7 +69,7 @@
     }
 
     const id = crypto.randomUUID();
-    sessionId.set(id);
+    sessionId = id;
 
     Sentry.captureException(error, {
       tags: {
@@ -77,28 +77,28 @@
         sessionId: id,
       },
     });
-    unexpectedError.set(error);
+    unexpectedError = error;
   }}
 />
 
 {#if !hasExemption}
-  {#if $unexpectedError}
-    <UnexpectedErrorPage error={$unexpectedError} sessionId={$sessionId} />
+  {#if unexpectedError}
+    <UnexpectedErrorPage error={unexpectedError} {sessionId} />
   {/if}
 
-  {#if $fetchError?.type === WellKnownErrorType.LockedAccountError}
+  {#if fetchError?.type === WellKnownErrorType.LockedAccountError}
     <ErrorLockedAccountPage />
   {/if}
 
-  {#if $fetchError?.type === WellKnownErrorType.RateLimitError}
-    <ErrorServicePage message={$fetchError.message} />
+  {#if fetchError?.type === WellKnownErrorType.RateLimitError}
+    <ErrorServicePage message={fetchError.message} />
   {/if}
 
-  {#if $fetchError?.type === WellKnownErrorType.ServerError}
-    <ErrorServicePage message={$fetchError.message} />
+  {#if fetchError?.type === WellKnownErrorType.ServerError}
+    <ErrorServicePage message={fetchError.message} />
   {/if}
 
-  {#if $fetchError?.type === WellKnownErrorType.NotFoundError}
+  {#if fetchError?.type === WellKnownErrorType.NotFoundError}
     <Error404Page />
   {/if}
 {/if}
