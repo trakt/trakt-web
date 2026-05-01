@@ -55,6 +55,17 @@
       return;
     }
 
+    /*
+      Filter out errors caused by blocked frames e.g.,
+      due to popup blockers or browser privacy settings)
+    */
+    if (
+      error.name === "SecurityError" &&
+      error.message.toLowerCase().includes("blocked a frame")
+    ) {
+      return;
+    }
+
     Sentry.captureException(error, {
       tags: {
         type: "ErrorProvider",
