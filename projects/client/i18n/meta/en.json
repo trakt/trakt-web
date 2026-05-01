@@ -1562,7 +1562,7 @@
       "exclude": []
     },
     "button_label_remove_from_watched": {
-      "default": "Remove \"{title}\" from your Watched list",
+      "default": "Remove \"{title}\" from your Watched history",
       "description": "Aria-label for the button that allows users to remove a movie, show, or episode from their watch history.",
       "variables": {
         "title": {
@@ -1575,7 +1575,7 @@
       ]
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Are you sure you want to remove \"{title}\" from your Watched list? All plays will be removed.",
+      "default": "Are you sure you want to remove \"{title}\" from your Watched history? All plays will be removed.",
       "description": "Warning prompt shown when a user tries to remove a movie, show, or episode from their watch history.",
       "variables": {
         "title": {
@@ -1585,7 +1585,7 @@
       "exclude": []
     },
     "button_label_remove_from_history": {
-      "default": "Remove this play of \"{title}\" from your Watched list",
+      "default": "Remove this play of \"{title}\" from your Watched history",
       "description": "Aria-label for the button that allows users to remove a movie or episode from their watch history.",
       "variables": {
         "title": {
@@ -1598,7 +1598,7 @@
       ]
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Are you sure you want to remove this play of \"{title}\" from your Watched list?",
+      "default": "Are you sure you want to remove this play of \"{title}\" from your Watched history?",
       "description": "Warning prompt shown when a user tries to remove a single play of a movie or episode from their watch history.",
       "variables": {
         "title": {
