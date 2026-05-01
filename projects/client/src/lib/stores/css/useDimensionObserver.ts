@@ -1,4 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 export type Dimension = 'width' | 'height' | 'bottom';
 
 // Extract dimension getter function
@@ -19,7 +20,10 @@ const setObservedDimension = (
   }
 };
 
-export const useDimensionObserver = (dimension: Dimension) => {
+export const useDimensionObserver = (
+  dimension: Dimension,
+  debounce?: number,
+) => {
   const observedDimension = new BehaviorSubject(0);
 
   const observeDimension = (node: HTMLElement) => {
@@ -57,7 +61,9 @@ export const useDimensionObserver = (dimension: Dimension) => {
   };
 
   return {
-    observedDimension,
+    observedDimension: debounce != null
+      ? observedDimension.pipe(debounceTime(debounce))
+      : observedDimension,
     observeDimension,
   };
 };

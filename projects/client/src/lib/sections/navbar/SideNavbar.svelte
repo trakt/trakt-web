@@ -6,6 +6,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useCollapsedSection } from "$lib/stores/useCollapsedSection";
+  import { combineLatest, map } from "rxjs";
   import { slide } from "svelte/transition";
   import NavbarActions from "./_internal/NavbarActions.svelte";
   import SideNavbarContent from "./_internal/SideNavbarContent.svelte";
@@ -14,7 +15,16 @@
   import { useNavbarState } from "./useNavbarState";
 
   const { state } = useNavbarState();
-  const { isCollapsed, toggle } = useCollapsedSection("side-navbar", true);
+  const { isCollapsed: storedCollapsed, toggle } = useCollapsedSection(
+    "side-navbar",
+    true,
+  );
+
+  // Pages can opt into a forced-collapsed sidebar (e.g. YIR), which always
+  // wins over the user's stored preference for the duration of that page.
+  const isCollapsed = combineLatest([storedCollapsed, state]).pipe(
+    map(([stored, $state]) => $state.forceCollapsed || stored),
+  );
 
   $effect(() => {
     const width = $isCollapsed

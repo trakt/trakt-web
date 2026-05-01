@@ -1,4 +1,5 @@
 import { MAX_DATE } from '$lib/utils/constants.ts';
+import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { MovieCertificationResponse, MovieResponse } from '@trakt/api';
 import type { MovieEntry } from '../models/MovieEntry.ts';
@@ -27,6 +28,11 @@ export function mapToMovieEntry(
   const poster = mapToPoster(movie.images);
   const cover = mapToCover(movie.images);
   const logo = mapToLogo(movie.images);
+
+  const thumbCandidate = findDefined(
+    ...(movie.images?.thumb ?? []),
+  );
+
   const effectiveReleaseDate = new Date(movie.released ?? MAX_DATE);
 
   return {
@@ -48,7 +54,12 @@ export function mapToMovieEntry(
     cover,
     logo,
     thumb: {
-      url: cover.url.thumb,
+      url: prependHttps(
+        findDefined(
+          thumbCandidate,
+        ),
+        cover.url.thumb,
+      ),
     },
     genres: movie.genres ?? [],
     status: movie.status ?? 'unknown',
