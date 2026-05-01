@@ -144,6 +144,8 @@
     flex-direction: column;
     gap: var(--gap-xl);
 
+    padding-bottom: var(--ni-8);
+
     :global(.trakt-list-item-container) {
       padding: 0;
     }
