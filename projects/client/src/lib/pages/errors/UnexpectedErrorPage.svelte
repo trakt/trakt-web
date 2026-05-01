@@ -97,7 +97,8 @@
     }
 
     pre {
-      overflow-x: auto;
+      max-height: var(--ni-280);
+      overflow: auto;
       white-space: pre-wrap;
       word-break: break-all;
     }
