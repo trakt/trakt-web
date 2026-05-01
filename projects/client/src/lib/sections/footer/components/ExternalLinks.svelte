@@ -46,6 +46,7 @@
     <Link
       href={UrlBuilder.app.ios()}
       target="_blank"
+      aria-label="iOS App" // TODO: add translation
       onclick={() => trackLink("ios-app")}
     >
       <AppleIcon />
@@ -53,6 +54,7 @@
     <Link
       href={UrlBuilder.app.android()}
       target="_blank"
+      aria-label="Android App" // TODO: add translation
       onclick={() => trackLink("android-app")}
     >
       <AndroidIcon />
@@ -63,6 +65,7 @@
     <Link
       href={UrlBuilder.github.web()}
       target="_blank"
+      aria-label="GitHub" // TODO: add translation
       onclick={() => trackLink("github-web")}
     >
       <GithubIcon />
@@ -70,6 +73,7 @@
     <Link
       href={UrlBuilder.socialMedia.reddit()}
       target="_blank"
+      aria-label="Reddit" // TODO: add translation
       onclick={() => trackLink("reddit")}
     >
       <RedditIcon />
