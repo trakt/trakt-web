@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { page } from "$app/state";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting";
@@ -8,13 +8,12 @@
   import UserListPaginatedList from "$lib/sections/lists/user/UserListPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
-  import { mapToMediaType } from "../../../users/[user]/lists/[list]/_internal/mapToMediaType";
   import type { PageProps } from "../[list]/$types";
   import { useListSummary } from "./useListSummary";
 
   const { params }: PageProps = $props();
 
-  const { type, text } = $derived(mapToMediaType(page.url.searchParams));
+  const { mode, current: currentDiscoverMode } = useDiscover();
 
   const { list, isLoading } = $derived(
     useListSummary({
@@ -25,7 +24,7 @@
   const listName = $derived($list?.name ?? "");
 
   const { current, update, options, urlBuilder } = $derived(
-    useListSorting({ list: $list, type }),
+    useListSorting({ list: $list, type: "user-list" }),
   );
 </script>
 
@@ -47,7 +46,7 @@
     hasFilters
     header={{
       title: listName,
-      metaInfo: text,
+      metaInfo: $currentDiscoverMode.text(),
       actions,
     }}
   >
@@ -65,7 +64,7 @@
   {#if !$isLoading}
     <UserListPaginatedList
       list={$list!}
-      {type}
+      type={$mode}
       sortBy={$current.sorting.value}
       sortHow={$current.sortHow}
     />

@@ -4,11 +4,11 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import { useListItems } from "$lib/sections/lists/user/useListItems";
+  import type { Snippet } from "svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import UserListItem from "./_internal/UserListItem.svelte";
   import ListActions from "./ListActions.svelte";
-  import type { Snippet } from "svelte";
 
   const {
     list,
@@ -39,7 +39,7 @@
   drilldownLabel={m.button_text_view_all()}
   filter={$filterMap}
   useList={(params) => useListItems({ list, ...params })}
-  urlBuilder={() => getListUrl({ type: "user-list", list, mode: type })}
+  urlBuilder={() => getListUrl({ type: "user-list", list })}
   title={list.name}
   {titleAction}
 >

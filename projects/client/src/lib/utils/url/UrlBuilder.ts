@@ -217,7 +217,7 @@ export const UrlBuilder = {
   users: (id: string) => ({
     lists: (slug: string, params: Record<string, string> = {}) =>
       `/users/${id}/lists/${slug}${
-        buildParamString({ ...sanitizeParams(params), type: params.type })
+        buildParamString({ ...sanitizeParams(params) })
       }`,
     yearToDate: (year: number) => `/users/${id}/year/${year}`,
     monthInReview: (year: number, month: number) =>

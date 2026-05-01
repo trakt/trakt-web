@@ -1,5 +1,4 @@
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { WatchListIntent } from '$lib/requests/models/WatchListIntent.ts';
 import { BehaviorSubject, map, type Observable } from 'rxjs';
 import { assertDefined } from '../../../../utils/assert/assertDefined.ts';
@@ -35,8 +34,8 @@ type ListSorting = {
 };
 
 type UseListSortingProps = {
+  type: 'user-list';
   list: MediaListSummary | undefined;
-  type?: MediaType;
 } | {
   type: 'watchlist';
   intent: WatchListIntent;
@@ -107,11 +106,10 @@ export function useListSorting(
         return '#';
       }
 
-      const { list, type } = props;
+      const { list } = props;
       return getListUrl({
         type: 'user-list',
         list,
-        mode: type,
         sortBy,
         sortHow,
       });

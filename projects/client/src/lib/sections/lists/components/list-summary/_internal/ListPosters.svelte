@@ -27,7 +27,7 @@
 
 {#if posters}
   <Link
-    href={getListUrl({ type: "user-list", list, mode: type })}
+    href={getListUrl({ type: "user-list", list })}
     onclick={() => {
       onclick?.();
       source && track({ source, type: "list" });
