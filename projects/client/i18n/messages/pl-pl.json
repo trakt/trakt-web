@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Coś poszło nie tak podczas wysyłania tego zgłoszenia. Jeśli problem będzie się powtarzał, prosimy o <a>zgłoszenie nowego problemu</a>.",
   "error_text_service_unavailable": "Połączenie jest... nieobecne. Jak zapomniane wspomnienie.",
   "error_text_unexpected_error": "Ojoj... to nie było planowane. Jeśli problem będzie się powtarzał, prosimy o <a>zgłoszenie nowego problemu</a>.",
+  "error_text_unexpected_error_include_details": "Proszę uwzględnić te szczegóły podczas zgłaszania problemu:",
   "error_text_unexpected_notes_error": "Coś poszło nie tak podczas publikowania Twojej notatki. Jeśli problem będzie się powtarzał, prosimy o <a>zgłoszenie nowego problemu</a>.",
   "filter_label_ratings": "Ocena Trakt od {min} do {max}",
   "filter_label_runtime": "{range} minut",

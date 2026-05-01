@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Ceva nu a mers bine la trimiterea acestui raport. Dacă acest lucru se tot întâmplă, vă rugăm să <a>trimiteți o nouă problemă</a>.",
   "error_text_service_unavailable": "Conexiunea este... absentă. Ca o amintire uitată.",
   "error_text_unexpected_error": "Ops... asta nu era planificat. Dacă se întâmplă în continuare, te rugăm să <a>raportezi o problemă</a>.",
+  "error_text_unexpected_error_include_details": "Vă rugăm să includeți aceste detalii când raportați problema:",
   "error_text_unexpected_notes_error": "Ceva nu a mers bine la postarea notei tale. Dacă acest lucru se tot întâmplă, te rugăm să <a>trimiți o nouă problemă</a>.",
   "filter_label_ratings": "Evaluare Trakt de la {min} la {max}",
   "filter_label_runtime": "{range} minute",

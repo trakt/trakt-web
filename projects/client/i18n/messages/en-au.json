@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Something went wrong while submitting this report. If this keeps happening, please <a>submit a new issue</a>.",
   "error_text_service_unavailable": "The connection is... absent. Like a forgotten memory.",
   "error_text_unexpected_error": "Uh oh... this wasn't planned. If this keeps happening, please <a>submit a new issue</a>.",
+  "error_text_unexpected_error_include_details": "Please include these details when reporting the issue:",
   "error_text_unexpected_notes_error": "Something went wrong while posting your note. If this keeps happening, please <a>submit a new issue</a>.",
   "filter_label_ratings": "Trakt Rating of {min} to {max}",
   "filter_label_runtime": "{range} minutes",

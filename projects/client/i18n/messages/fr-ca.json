@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Un problème est survenu lors de l'envoi de ce signalement. Si cela persiste, veuillez <a>soumettre un nouveau problème</a>.",
   "error_text_service_unavailable": "La connexion est... absente. Comme un souvenir oublié.",
   "error_text_unexpected_error": "Oh oh... ce n'était pas prévu. Si cela continue, veuillez <a>signaler un nouveau problème</a>.",
+  "error_text_unexpected_error_include_details": "Veuillez inclure ces détails lors du signalement du problème:",
   "error_text_unexpected_notes_error": "Un problème est survenu lors de la publication de votre note. Si cela persiste, veuillez <a>soumettre un nouveau problème</a>.",
   "filter_label_ratings": "Évaluation Trakt de {min} à {max}",
   "filter_label_runtime": "{range} minutes",

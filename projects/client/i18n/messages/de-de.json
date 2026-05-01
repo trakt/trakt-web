@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Beim Senden dieses Berichts ist etwas schiefgelaufen. Sollte dies weiterhin passieren, reichen Sie bitte <a>ein neues Problem ein</a>.",
   "error_text_service_unavailable": "Die Verbindung ist... abwesend. Wie eine vergessene Erinnerung.",
   "error_text_unexpected_error": "Uhm... das war nicht geplant. Wenn das weiterhin passiert, reichen Sie bitte <a>ein neues Problem</a> ein.",
+  "error_text_unexpected_error_include_details": "Bitte fügen Sie diese Details bei der Meldung des Problems hinzu:",
   "error_text_unexpected_notes_error": "Beim Posten Ihrer Notiz ist etwas schiefgelaufen. Sollte dies weiterhin passieren, reichen Sie bitte <a>ein neues Problem ein</a>.",
   "filter_label_ratings": "Trakt-Bewertung von {min} bis {max}",
   "filter_label_runtime": "{range} Minuten",

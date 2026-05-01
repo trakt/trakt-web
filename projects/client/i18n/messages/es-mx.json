@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Algo salió mal al enviar este reporte. Si esto sigue ocurriendo, por favor <a>envía un nuevo problema</a>.",
   "error_text_service_unavailable": "La conexión está... ausente. Como un recuerdo olvidado.",
   "error_text_unexpected_error": "Uy... esto no estaba planeado. Si esto sigue ocurriendo, por favor <a>envía un nuevo problema</a>.",
+  "error_text_unexpected_error_include_details": "Por favor, incluye estos detalles al reportar el problema:",
   "error_text_unexpected_notes_error": "Algo salió mal al publicar tu nota. Si esto sigue ocurriendo, por favor <a>envía un nuevo problema</a>.",
   "filter_label_ratings": "Calificación de Trakt de {min} a {max}",
   "filter_label_runtime": "{range} minutos",

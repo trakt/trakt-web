@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Er ging iets mis tijdens het indienen van dit rapport. Als dit blijft gebeuren, kunt u alstublieft <a>een nieuw probleem indienen</a>.",
   "error_text_service_unavailable": "De verbinding is... afwezig. Als een vergeten herinnering.",
   "error_text_unexpected_error": "Oeps... dit was niet de bedoeling. Als dit blijft gebeuren, <a>dien dan een nieuw probleem in</a>.",
+  "error_text_unexpected_error_include_details": "Vermeld alstublieft deze details bij het melden van het probleem:",
   "error_text_unexpected_notes_error": "Er ging iets mis tijdens het plaatsen van uw notitie. Als dit blijft gebeuren, kunt u alstublieft <a>een nieuw probleem indienen</a>.",
   "filter_label_ratings": "Trakt beoordeling van {min} tot {max}",
   "filter_label_runtime": "{range} minuten",
