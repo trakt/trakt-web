@@ -8,11 +8,21 @@ function parseValue(headerValue: string | null): number {
   return Math.max(1, value);
 }
 
-export function extractPageMeta(headers: Headers): PageMeta {
+export function extractPageMeta(headers: Headers, fallbackPage = 1): PageMeta {
+  const pageCountHeader = headers.get('x-pagination-page-count');
+
+  if (pageCountHeader === null) {
+    return {
+      type: 'infinite',
+      current: fallbackPage,
+    };
+  }
+
   const current = parseValue(headers.get('x-pagination-page'));
-  const total = parseValue(headers.get('x-pagination-page-count'));
+  const total = parseValue(pageCountHeader);
 
   return {
+    type: 'paginated',
     current: Math.min(current, total),
     total,
   };

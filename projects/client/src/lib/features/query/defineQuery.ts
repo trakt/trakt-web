@@ -127,18 +127,23 @@ export function defineInfiniteQuery<
             const isValid = isValidResponse(response, queryKey.at(0));
 
             if (!isValid) {
-              return { entries: [], page: { current: 1, total: 1 } } as z.infer<
+              return {
+                entries: [],
+                page: { type: 'paginated', current: 1, total: 1 },
+              } as z.infer<
                 TOutput
               >;
             }
 
-            return mapper(response, requestParams);
+            return mapper(response, { ...requestParams, page: pageParam });
           });
       },
       initialPageParam: requestParams.page ?? 1,
       getNextPageParam: (lastPage) => {
-        const { page } = lastPage as Paginatable<TEntry>;
-        const hasMore = page.current < page.total;
+        const { page, entries } = lastPage as Paginatable<TEntry>;
+        const hasMore = page.type === 'infinite'
+          ? entries.length > 0
+          : page.current < page.total;
         return hasMore ? page.current + 1 : undefined;
       },
       ...buildCommonOptions(params, requestParams),

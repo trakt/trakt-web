@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { extractPageMeta } from './extractPageMeta.ts';
 
 describe('extractPageMeta', () => {
-  it('should extract page meta from headers with valid values', () => {
+  it('should extract paginated page meta from headers with valid values', () => {
     const headers = new Headers({
       'x-pagination-page': '5',
       'x-pagination-page-count': '10',
@@ -11,36 +11,35 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 5,
       total: 10,
     });
   });
 
-  it('should default to page 1 when headers are missing', () => {
+  it('should return infinite type when page count header is missing', () => {
     const headers = new Headers();
 
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'infinite',
       current: 1,
-      total: 1,
     });
   });
 
-  it('should default to 1 when current page header is missing', () => {
-    const headers = new Headers({
-      'x-pagination-page-count': '20',
-    });
+  it('should use fallbackPage when page count header is missing', () => {
+    const headers = new Headers();
 
-    const result = extractPageMeta(headers);
+    const result = extractPageMeta(headers, 3);
 
     expect(result).toEqual({
-      current: 1,
-      total: 20,
+      type: 'infinite',
+      current: 3,
     });
   });
 
-  it('should default to 1 when total page count header is missing', () => {
+  it('should return infinite type when only page count header is absent', () => {
     const headers = new Headers({
       'x-pagination-page': '3',
     });
@@ -48,8 +47,22 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'infinite',
       current: 1,
-      total: 1,
+    });
+  });
+
+  it('should default current to 1 when current page header is missing', () => {
+    const headers = new Headers({
+      'x-pagination-page-count': '20',
+    });
+
+    const result = extractPageMeta(headers);
+
+    expect(result).toEqual({
+      type: 'paginated',
+      current: 1,
+      total: 20,
     });
   });
 
@@ -62,6 +75,7 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 1,
       total: 10,
     });
@@ -76,6 +90,7 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 1,
       total: 1,
     });
@@ -90,6 +105,7 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 1,
       total: 10,
     });
@@ -104,6 +120,7 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 1,
       total: 10,
     });
@@ -118,6 +135,7 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 1,
       total: 1,
     });
@@ -132,6 +150,7 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 1,
       total: 1,
     });
@@ -146,6 +165,7 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 5,
       total: 10,
     });
@@ -160,6 +180,7 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 1,
       total: 1,
     });
@@ -174,6 +195,7 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 999,
       total: 1000,
     });
@@ -188,6 +210,7 @@ describe('extractPageMeta', () => {
     const result = extractPageMeta(headers);
 
     expect(result).toEqual({
+      type: 'paginated',
       current: 10,
       total: 10,
     });
