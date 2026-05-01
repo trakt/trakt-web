@@ -54,12 +54,26 @@ export const users = [
   http.get('http://localhost/users/me/watched/shows*', (response) => {
     const { searchParams } = new URL(response.request.url);
     const extended = searchParams.get('extended');
+    const page = Number(searchParams.get('page') ?? 1);
+
+    if (page > 1) {
+      return HttpResponse.json({});
+    }
 
     return HttpResponse.json(
-      extended === 'min' ? WatchedShowsMinimalResponseMock : WatchedShowsResponseMock,
+      extended === 'min'
+        ? WatchedShowsMinimalResponseMock
+        : WatchedShowsResponseMock,
     );
   }),
-  http.get('http://localhost/users/me/watched/movies', () => {
+  http.get('http://localhost/users/me/watched/movies*', (response) => {
+    const { searchParams } = new URL(response.request.url);
+    const page = Number(searchParams.get('page') ?? 1);
+
+    if (page > 1) {
+      return HttpResponse.json({});
+    }
+
     return HttpResponse.json(WatchedMoviesResponseMock);
   }),
   http.get('http://localhost/users/me/watchlist/movies*', () => {
