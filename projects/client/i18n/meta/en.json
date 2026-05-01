@@ -5111,6 +5111,14 @@
         "ios"
       ]
     },
+    "error_text_unexpected_error_include_details": {
+      "default": "Please include these details when reporting the issue:",
+      "description": "Text shown on the unexpected error page, asking the user to include error details when reporting the issue.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "list_placeholder_no_filter_results": {
       "default": "Bummer, no hits. Your filter may have been a little too selective.",
       "description": "Placeholder text shown when there are no results for a filter.",

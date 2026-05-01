@@ -20,6 +20,7 @@
   const { children }: ChildrenProps = $props();
   const fetchError = writable<WellKnownError | undefined>(undefined);
   const unexpectedError = writable<Error | undefined>(undefined);
+  const sessionId = writable<string | undefined>(undefined);
 
   onMount(() => {
     const handler = (event: Event) => {
@@ -37,6 +38,7 @@
   afterNavigate((_) => {
     fetchError.set(undefined);
     unexpectedError.set(undefined);
+    sessionId.set(undefined);
   });
 
   const hasExemption = $derived(isErrorExempt($fetchError, page.route.id));
@@ -66,9 +68,13 @@
       return;
     }
 
+    const id = crypto.randomUUID();
+    sessionId.set(id);
+
     Sentry.captureException(error, {
       tags: {
         type: "ErrorProvider",
+        sessionId: id,
       },
     });
     unexpectedError.set(error);
@@ -77,7 +83,7 @@
 
 {#if !hasExemption}
   {#if $unexpectedError}
-    <UnexpectedErrorPage />
+    <UnexpectedErrorPage error={$unexpectedError} sessionId={$sessionId} />
   {/if}
 
   {#if $fetchError?.type === WellKnownErrorType.LockedAccountError}
