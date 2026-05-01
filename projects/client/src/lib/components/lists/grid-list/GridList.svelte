@@ -62,7 +62,7 @@
   });
 </script>
 
-<section class="trakt-grid-list-container" data-sizing={sizing}>
+<section class="trakt-grid-list-container" role="list" data-sizing={sizing}>
   {#if title}
     <ListHeader {title} {metaInfo} {actions} {listActions} />
   {/if}

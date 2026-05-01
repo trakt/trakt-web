@@ -42,6 +42,7 @@
   <header>
     <nav
       class="trakt-side-navbar"
+      role="navigation"
       data-dpad-navigation={DpadNavigationType.Navbar}
     >
       <div class="trakt-side-navbar-top" class:is-expanded={!isCollapsed}>

@@ -57,14 +57,14 @@
       {/snippet}
     </NavbarStateSetter>
 
-    <div class="trakt-search-container">
+    <div role="search" class="trakt-search-container">
       <SearchInput />
     </div>
   </RenderFor>
 
   <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
     {#if isMobileApple}
-      <div class="trakt-search-container">
+      <div role="search" class="trakt-search-container">
         <SearchInput />
       </div>
 

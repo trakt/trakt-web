@@ -101,7 +101,7 @@
 {/snippet}
 
 <MediaSwipe {type} {media} {style}>
-  <trakt-default-media-item class:is-deemphasized={isDeemphasized}>
+  <trakt-default-media-item role="listitem" class:is-deemphasized={isDeemphasized}>
     <MediaItem
       {type}
       {media}
