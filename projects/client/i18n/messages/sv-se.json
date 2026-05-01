@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Något gick fel när denna rapport skickades. Om detta fortsätter att hända, vänligen <a>skicka in ett nytt ärende</a>.",
   "error_text_service_unavailable": "Anslutningen är... frånvarande. Som ett bortglömt minne.",
   "error_text_unexpected_error": "Oj då... detta var inte planerat. Om detta fortsätter att hända, vänligen <a>skicka in ett nytt ärende</a>.",
+  "error_text_unexpected_error_include_details": "Vänligen inkludera dessa detaljer när du rapporterar problemet:",
   "error_text_unexpected_notes_error": "Något gick fel när din anteckning postades. Om detta fortsätter att hända, vänligen <a>skicka in ett nytt ärende</a>.",
   "filter_label_ratings": "Trakt-betyg från {min} till {max}",
   "filter_label_runtime": "{range} minuter",

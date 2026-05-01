@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Qualcosa è andato storto durante l'invio di questa segnalazione. Se il problema persiste, per favore <a>segnala un nuovo problema</a>.",
   "error_text_service_unavailable": "La connessione è... assente. Come un ricordo dimenticato.",
   "error_text_unexpected_error": "Uh oh... questo non era previsto. Se il problema persiste, per favore <a>segnala un nuovo problema</a>.",
+  "error_text_unexpected_error_include_details": "Includi questi dettagli quando segnali il problema:",
   "error_text_unexpected_notes_error": "Qualcosa è andato storto durante la pubblicazione della tua nota. Se il problema persiste, per favore <a>segnala un nuovo problema</a>.",
   "filter_label_ratings": "Valutazione Trakt da {min} a {max}",
   "filter_label_runtime": "{range} minuti",

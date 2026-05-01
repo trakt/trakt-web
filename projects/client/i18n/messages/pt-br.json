@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Algo deu errado ao enviar esta denúncia. Se isso continuar acontecendo, por favor, <a>envie um novo problema</a>.",
   "error_text_service_unavailable": "A conexão está... ausente. Como uma memória esquecida.",
   "error_text_unexpected_error": "Oh não... isso não foi planejado. Se isso continuar acontecendo, por favor, <a>envie um novo problema</a>.",
+  "error_text_unexpected_error_include_details": "Por favor, inclua estes detalhes ao relatar o problema:",
   "error_text_unexpected_notes_error": "Algo deu errado ao postar sua nota. Se isso continuar acontecendo, por favor, <a>envie um novo problema</a>.",
   "filter_label_ratings": "Avaliação Trakt de {min} a {max}",
   "filter_label_runtime": "{range} minutos",

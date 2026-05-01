@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Noe gikk galt under innsending av denne rapporten. Hvis dette fortsetter å skje, vennligst <a>rapporter et nytt problem</a>.",
   "error_text_service_unavailable": "Tilkoblingen er... fraværende. Som et glemt minne.",
   "error_text_unexpected_error": "Å nei... dette var ikke planlagt. Hvis dette fortsetter, vennligst <a>rapporter et nytt problem</a>.",
+  "error_text_unexpected_error_include_details": "Vennligst inkluder disse detaljene når du rapporterer problemet:",
   "error_text_unexpected_notes_error": "Noe gikk galt under publiseringen av notatet ditt. Hvis dette fortsetter å skje, vennligst <a>rapporter et nytt problem</a>.",
   "filter_label_ratings": "Trakt-vurdering fra {min} til {max}",
   "filter_label_runtime": "{range} minutter",

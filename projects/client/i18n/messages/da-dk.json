@@ -320,6 +320,7 @@
   "error_text_report_unknown": "Der opstod en fejl under indsendelsen af denne rapport. Hvis dette fortsætter, bedes du <a>indgive en ny fejlrapport</a>.",
   "error_text_service_unavailable": "Forbindelsen er... fraværende. Som et glemt minde.",
   "error_text_unexpected_error": "Åh nej... dette var ikke planlagt. Hvis dette fortsætter, bedes du <a>indsende et nyt problem</a>.",
+  "error_text_unexpected_error_include_details": "Medtag venligst disse detaljer, når du rapporterer problemet:",
   "error_text_unexpected_notes_error": "Der opstod en fejl under posting af din note. Hvis dette fortsætter, bedes du <a>indgive en ny fejlrapport</a>.",
   "filter_label_ratings": "Trakt-bedømmelse fra {min} til {max}",
   "filter_label_runtime": "{range} minutter",
