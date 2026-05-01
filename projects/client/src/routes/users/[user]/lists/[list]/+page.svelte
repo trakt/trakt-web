@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { page } from "$app/state";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting";
@@ -10,7 +10,6 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import type { PageProps } from "./$types";
-  import { mapToMediaType } from "./_internal/mapToMediaType";
 
   const { params }: PageProps = $props();
 
@@ -21,11 +20,12 @@
     }),
   );
 
-  const { type, text } = $derived(mapToMediaType(page.url.searchParams));
+  const { mode, current: currentDiscoverMode } = useDiscover();
+
   const listName = $derived($list?.name ?? "");
 
   const { current, update, options, urlBuilder } = $derived(
-    useListSorting({ list: $list, type }),
+    useListSorting({ list: $list, type: "user-list" }),
   );
 </script>
 
@@ -45,7 +45,7 @@
     hasFilters
     header={{
       title: listName,
-      metaInfo: text,
+      metaInfo: $currentDiscoverMode.text(),
       actions,
     }}
   >
@@ -65,7 +65,7 @@
   {#if $list}
     <UserListPaginatedList
       list={$list}
-      {type}
+      type={$mode}
       sortBy={$current.sorting.value}
       sortHow={$current.sortHow}
     />

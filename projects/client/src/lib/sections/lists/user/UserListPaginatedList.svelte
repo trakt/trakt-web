@@ -1,8 +1,8 @@
 <script lang="ts">
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import SortValue from "./_internal/SortValue.svelte";
   import UserListItem from "./_internal/UserListItem.svelte";
@@ -11,7 +11,7 @@
   import { useSort } from "./useSort";
 
   type UserListProps = {
-    type?: MediaType;
+    type?: DiscoverMode;
     list: MediaListSummary;
   } & ListSortProps;
 
