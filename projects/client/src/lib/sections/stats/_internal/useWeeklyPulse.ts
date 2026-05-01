@@ -1,5 +1,5 @@
-import type { UserHistory } from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
 import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
+import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 
 import { addDays } from '$lib/utils/date/addDays.ts';

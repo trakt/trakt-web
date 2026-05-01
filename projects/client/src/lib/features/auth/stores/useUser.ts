@@ -14,10 +14,6 @@ import {
 } from '../queries/currentUserDroppedQuery.ts';
 import { currentUserFavoritesQuery } from '../queries/currentUserFavoritesQuery.ts';
 import {
-  currentUserHistoryQuery,
-  type UserHistory,
-} from '../queries/currentUserHistoryQuery.ts';
-import {
   currentUserLikesQuery,
   type UserLikes,
 } from '../queries/currentUserLikesQuery.ts';
@@ -46,6 +42,10 @@ import {
   type UserWatchlist,
 } from '../queries/currentUserWatchlistQuery.ts';
 import { useAuth } from './useAuth.ts';
+import {
+  useCurrentUserHistory,
+  type UserHistory,
+} from './useCurrentUserHistory.ts';
 
 const ANONYMOUS_USER: UserSettings = {
   id: 0,
@@ -107,7 +107,7 @@ export function useUser() {
   const { isAuthorized } = useAuth();
 
   const userQuerySignal = useQuery(currentUserSettingsQuery());
-  const historyQuerySignal = useQuery(currentUserHistoryQuery());
+  const { history: historySignal } = useCurrentUserHistory();
   const watchlistQuerySignal = useQuery(currentUserWatchlistQuery());
   const ratingsQuerySignal = useQuery(currentUserRatingsQuery());
   const commentReactionsQuerySignal = useQuery(
@@ -176,9 +176,7 @@ export function useUser() {
         user: userQuerySignal.pipe(
           map((query) => definedData(query.data)),
         ),
-        history: historyQuerySignal.pipe(
-          map((query) => query.data),
-        ),
+        history: historySignal,
         watchlist: watchlistQuerySignal.pipe(
           map((watchlist) => watchlist.data),
         ),
