@@ -1,4 +1,4 @@
-import type { UserHistory } from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
+import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 
 export function filterWatchedDates(

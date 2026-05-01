@@ -1,6 +1,6 @@
 import type {
   UserHistory,
-} from '$lib/features/auth/queries/currentUserHistoryQuery.ts';
+} from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 
 export const UserHistoryMappedMock: UserHistory = {
   'lastWatchedAt': new Date('2024-12-27T16:28:32.000Z'),
