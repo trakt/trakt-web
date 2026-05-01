@@ -17,7 +17,7 @@ type GetGroupedServicesProps = {
 
 function toServiceInCountry(country: string, countryName: string) {
   return (service: StreamingServiceOption): ServiceInCountry => ({
-    key: `${service.source}-${country}`,
+    key: `${service.key}-${country}`,
     country,
     countryName,
     service,

@@ -175,4 +175,33 @@ describe('getGroupedServices', () => {
     const countries = result[StreamingGroup.Subscription][0]?.countries ?? [];
     expect(countries[0]?.country).toBe('us');
   });
+
+  it('should generate unique keys when the same source appears multiple times in the same country', () => {
+    const amazon1: StreamingServiceOption = {
+      ...streaming('amazon_prime_video'),
+      key: 'amazon_prime_video-de-standard',
+    };
+    const amazon2: StreamingServiceOption = {
+      ...streaming('amazon_prime_video'),
+      key: 'amazon_prime_video-de-4k',
+      is4k: true,
+    };
+
+    const result = getGroupedServices({
+      services: [
+        namedServices('de', 'Germany', [amazon1, amazon2]),
+      ],
+      userCountry: 'de',
+      favoriteSources: noFavorites,
+    });
+
+    const subscription = result[StreamingGroup.Subscription];
+    expect(subscription).toHaveLength(1);
+
+    const countries = subscription[0]?.countries ?? [];
+    expect(countries).toHaveLength(2);
+
+    const keys = countries.map((c) => c.key);
+    expect(new Set(keys).size).toBe(keys.length);
+  });
 });
