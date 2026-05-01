@@ -1,59 +1,17 @@
 <script lang="ts">
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
-  import { getLocale, languageTag } from "$lib/features/i18n";
-  import { getStartOfWeek } from "$lib/utils/date/getStartOfWeek.ts";
-  import { isSameDayOfYear } from "$lib/utils/date/isSameDayOfYear.ts";
-  import { addDays } from "date-fns/addDays";
-  import type { HeatmapCell } from "./useActivityHeatmap.ts";
+  import { languageTag } from "$lib/features/i18n";
+  import type { HeatmapCell } from "./models/HeatmapCell.ts";
   import { formatActivityTooltip } from "./utils/formatActivityTooltip.ts";
 
   const { cells }: { cells: ReadonlyArray<HeatmapCell> } = $props();
 
   const now = new Date();
   const locale = $derived(languageTag());
-
-  const daysInWeek = 7;
-
-  const filteredCells = $derived.by(() => {
-    const now = new Date();
-    const weekStart = getStartOfWeek(now, getLocale());
-
-    return Array.from({ length: daysInWeek }).map((_, i) => {
-      const currentDate = addDays(weekStart, i);
-
-      const existingCell = cells.find(
-        (c) =>
-          c.date.getFullYear() === currentDate.getFullYear() &&
-          c.date.getMonth() === currentDate.getMonth() &&
-          c.date.getDate() === currentDate.getDate(),
-      );
-
-      if (existingCell) {
-        return existingCell;
-      }
-
-      const isToday =
-        currentDate.getFullYear() === now.getFullYear() &&
-        isSameDayOfYear(currentDate, now);
-
-      const todayMidnight = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
-      );
-
-      return {
-        date: currentDate,
-        count: 0,
-        isFuture: currentDate.getTime() > todayMidnight.getTime(),
-        isToday,
-      };
-    });
-  });
 </script>
 
 <div class="trakt-streak-accumulator">
-  {#each filteredCells as cell (cell.date.getTime())}
+  {#each cells as cell (cell.date.getTime())}
     <Tooltip
       content={formatActivityTooltip({
         date: cell.date,

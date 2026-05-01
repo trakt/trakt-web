@@ -17,7 +17,9 @@
   const { streakCount, streakState, isLoading } = $derived(
     useStreak({ mode: $mode }),
   );
-  const { heatmap } = $derived(useActivityHeatmap({ mode: $mode }));
+  const { heatmap } = $derived(
+    useActivityHeatmap({ mode: $mode, period: "week" }),
+  );
   const { buildDrawerLink } = dashboardDrawerNavigation();
   const drilldownLink = $derived(buildDrawerLink(DashboardDrawers.Streak));
 
