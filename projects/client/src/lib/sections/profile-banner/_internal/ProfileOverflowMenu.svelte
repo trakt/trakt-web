@@ -22,9 +22,13 @@
   const blockActions = useBlockUser();
   const { isRequestingBlock } = blockActions;
 
-  const { isRequestingFollow, isFollowed, followUser, unfollowUser } = $derived(
-    useFollowUserRequest(slug),
-  );
+  const {
+    isRequestingFollow,
+    followStatus,
+    followUser,
+    unfollowUser,
+    cancelFollowRequest,
+  } = $derived(useFollowUserRequest(slug));
 
   const userDisplayName = $derived(toDisplayableName(profile));
 
@@ -44,6 +48,34 @@
       onConfirm: unfollowUser,
     }),
   );
+
+  const followItem = $derived.by(() => {
+    switch ($followStatus) {
+      case "following":
+        return {
+          label: m.button_label_unfollow({ username: userDisplayName }),
+          text: m.button_text_unfollow(),
+          onClick: confirmUnfollow,
+          iconState: "followed" as const,
+        };
+      case "pending":
+        return {
+          label: m.button_label_cancel_follow_request({
+            username: userDisplayName,
+          }),
+          text: m.button_text_cancel_follow_request(),
+          onClick: cancelFollowRequest,
+          iconState: "unfollowed" as const,
+        };
+      default:
+        return {
+          label: m.button_label_follow({ username: userDisplayName }),
+          text: m.button_text_follow(),
+          onClick: followUser,
+          iconState: "unfollowed" as const,
+        };
+    }
+  });
 
   const {
     color,
@@ -75,15 +107,13 @@
         style="flat"
         color="default"
         variant="secondary"
-        label={$isFollowed
-          ? m.button_label_unfollow({ username: userDisplayName })
-          : m.button_label_follow({ username: userDisplayName })}
-        onclick={$isFollowed ? confirmUnfollow : followUser}
+        label={followItem.label}
+        onclick={followItem.onClick}
         disabled={$isRequestingFollow}
       >
-        {$isFollowed ? m.button_text_unfollow() : m.button_text_follow()}
+        {followItem.text}
         {#snippet icon()}
-          <FollowIcon state={$isFollowed ? "followed" : "unfollowed"} />
+          <FollowIcon state={followItem.iconState} />
         {/snippet}
       </DropdownItem>
     {/if}

@@ -2841,7 +2841,7 @@
       ]
     },
     "header_private_profile": {
-      "default": "This profile is private",
+      "default": "This profile is private.",
       "description": "Header for the section that indicates a user's profile is private.",
       "exclude": [
         "android",
@@ -2849,7 +2849,7 @@
       ]
     },
     "text_private_profile_description": {
-      "default": "As if there wasn't enough hidden already. {username}'s secrets remain their own.",
+      "default": "As if there wasn't enough hidden already, {username}'s secrets remain their own.",
       "description": "Description text for a private profile, a lighthearted fun message to indicate that it is a private profile.",
       "variables": {
         "username": {
@@ -3504,6 +3504,27 @@
         "ios"
       ]
     },
+    "button_text_cancel_follow_request": {
+      "default": "Cancel Request",
+      "description": "Text for the button that cancels a pending follow request sent to a private profile.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_cancel_follow_request": {
+      "default": "Cancel follow request to {username}",
+      "description": "Aria-label for the button that cancels a pending follow request sent to a private profile.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "warning_prompt_unfollow_user": {
       "default": "Are you sure you want to unfollow {username}?",
       "description": "Warning prompt shown when a user tries to unfollow a profile.",
@@ -3620,6 +3641,14 @@
     "tag_text_blocked_user": {
       "default": "Blocked",
       "description": "Tag shown on another user's profile when the current user has blocked them.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_follow_request_pending": {
+      "default": "Pending",
+      "description": "Tag shown on another user's avatar when the current user's follow request is awaiting their approval.",
       "exclude": [
         "android",
         "ios"

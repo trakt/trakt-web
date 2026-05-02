@@ -1,23 +1,23 @@
 <script lang="ts">
-  import BlockIcon from "$lib/components/icons/BlockIcon.svelte";
+  import HourglassIcon from "$lib/components/icons/HourglassIcon.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
 </script>
 
-<div class="trakt-blocked-user-tag">
-  <TextTag classList="blocked-user-tag">
+<div class="trakt-pending-follow-tag">
+  <TextTag classList="pending-follow-tag">
     {#snippet icon()}
-      <BlockIcon />
+      <HourglassIcon />
     {/snippet}
-    <span class="tag bold uppercase">{m.tag_text_blocked_user()}</span>
+    <span class="tag bold uppercase">{m.tag_text_follow_request_pending()}</span>
   </TextTag>
 </div>
 
 <style lang="scss">
-  .trakt-blocked-user-tag {
-    :global(.blocked-user-tag) {
-      background-color: var(--color-foreground-red);
-      color: var(--color-background-red);
+  .trakt-pending-follow-tag {
+    :global(.pending-follow-tag) {
+      background-color: var(--color-foreground-orange);
+      color: var(--color-background-orange);
 
       border-radius: var(--border-radius-xxl);
       padding: var(--ni-8) var(--ni-10);
