@@ -776,7 +776,7 @@
   "text_landing_share": "别人会喜欢关注的观点、评分和列表。",
   "text_landing_track": "你看过的每一部电影、每一集和每一季，尽在一个地方。",
   "text_language": "语言",
-  "text_last_day": "上个 {day}",
+  "text_last_day": "上 {day}",
   "text_library": "媒体库",
   "text_location": "位置",
   "text_member_since": "自 {date} 起",
