@@ -1,3 +1,4 @@
+import type { UserLimits } from '$lib/requests/models/UserLimits.ts';
 import type { VipPlan } from '../models/VipPlan.ts';
 
 export const VIP_PLANS: VipPlan[] = [
@@ -26,3 +27,20 @@ export const VIP_PLANS: VipPlan[] = [
     discount: null,
   },
 ];
+
+const emptyLimit = {
+  current: 0,
+  free: 0,
+  vip: 0,
+};
+
+export const USER_LIMITS_PLACEHOLDER: UserLimits = {
+  history: emptyLimit,
+  ratings: emptyLimit,
+  watchlistItems: emptyLimit,
+  totalListItems: emptyLimit,
+  staticLists: emptyLimit,
+  dynamicLists: emptyLimit,
+  digitalLibrary: emptyLimit,
+  totalNotes: emptyLimit,
+};

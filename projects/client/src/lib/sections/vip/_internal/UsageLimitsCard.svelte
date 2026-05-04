@@ -23,7 +23,7 @@
   );
 </script>
 
-<div class="trakt-usage-limits-card">
+<div class="trakt-usage-limits-card" data-variant={variant}>
   {#if title}
     <span class="secondary bold">{title}</span>
   {/if}
@@ -70,6 +70,14 @@
       color-mix(in srgb, var(--color-border) 50%, transparent);
 
     transition: padding var(--transition-increment) ease-in-out;
+
+    &[data-variant="free"] {
+      border: none;
+      box-shadow: none;
+      background: none;
+      padding: 0;
+    }
+
     @include for-mobile {
       padding: var(--ni-18);
     }
