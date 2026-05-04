@@ -9,6 +9,7 @@
   import Redirect from "../../components/router/Redirect.svelte";
   import Footer from "../footer/Footer.svelte";
   import NavbarStateSetter from "../navbar/NavbarStateSetter.svelte";
+  import { openGraphUrlBuilder } from "./_internal/openGraphUrlBuilder";
 
   type TraktPageProps = {
     title: string | undefined;
@@ -36,8 +37,22 @@
   const websiteName = "Trakt Web";
   const websiteTitle = "Track Your Shows & Movies";
   const twitterHandle = "@trakt";
+  const slug = $derived(page.params.slug);
 
-  const image = $derived(_image ?? DEFAULT_SHARE_COVER);
+  const image = $derived.by(() => {
+    const isMediaPage = type === "movie" || type === "show";
+    if (isMediaPage && slug) {
+      return openGraphUrlBuilder({
+        url: page.url,
+        type,
+        slug,
+        shareType: "open-graph",
+      });
+    }
+
+    return _image ?? DEFAULT_SHARE_COVER;
+  });
+
   const displayTitle = $derived(`${websiteName}: ${_title || websiteTitle}`);
   const defaultOgTitle = `${websiteName}: ${websiteTitle}`;
 

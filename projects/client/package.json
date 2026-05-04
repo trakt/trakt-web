@@ -29,6 +29,7 @@
     "i18n:generate:watch": "deno run --allow-read --allow-write i18n/generator/cli.ts -i i18n/meta/ -o i18n/ --watch"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "4.20260504.1",
     "@cucumber/cucumber": "12.6.0",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "1.58.2",
