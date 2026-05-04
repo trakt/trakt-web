@@ -679,7 +679,7 @@
   "tag_text_preview": "Попередній перегляд",
   "tag_text_released": "Випущено",
   "tag_text_remaining_duration": "{duration} залишилось",
-  "tag_text_remaining_episodes": "Залишилось: {count}",
+  "tag_text_remaining_episodes": "{count} еп. залишилось",
   "tag_text_shows": "Серіали",
   "tag_text_smart_list_preview": "Попередній перегляд списку",
   "tag_text_tba": "Буде оголошено",
