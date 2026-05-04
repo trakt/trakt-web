@@ -20,7 +20,7 @@
   );
 </script>
 
-<div class="trakt-limit-item">
+<div class="trakt-limit-item" data-variant={variant}>
   <div class="trakt-limit-header">
     <span>{item.title()}</span>
     <div class="trakt-limit-values">
@@ -63,6 +63,16 @@
       height: auto;
       grid-template-columns: 1fr;
       row-gap: var(--gap-xxs);
+    }
+
+    &[data-variant="free"] {
+      height: auto;
+      grid-template-columns: 1fr;
+      row-gap: var(--gap-xxs);
+
+      .trakt-limit-header {
+        grid-template-columns: 1fr auto;
+      }
     }
   }
 
