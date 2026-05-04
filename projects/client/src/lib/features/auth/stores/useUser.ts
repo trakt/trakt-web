@@ -133,7 +133,6 @@ export function useUser() {
           history: of<UserHistory>({
             movies: new Map(),
             shows: new Map(),
-            lastWatchedAt: null,
           }),
           watchlist: of<UserWatchlist>({
             movies: new Set(),

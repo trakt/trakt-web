@@ -2,7 +2,8 @@
   import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
   import CalendarControls from "./CalendarControls.svelte";
 
-  const navigationProps: CalendarNavigationProps = $props();
+  const navigationProps: WithRequired<CalendarNavigationProps, "navigation"> =
+    $props();
 </script>
 
 <div class="calendar-header">

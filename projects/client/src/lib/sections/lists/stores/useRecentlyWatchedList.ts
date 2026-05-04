@@ -13,33 +13,27 @@ import {
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { map } from 'rxjs';
-import { mapToActivityCalendar } from './_internal/mapToActivityCalendar.ts';
+import { mapToCalendarPeriods } from './_internal/mapToCalendarPeriods.ts';
 import type { HistoryEntry } from './models/HistoryEntry.ts';
 
 export type RecentlyWatchedType = 'movie' | 'show' | 'episode' | 'media';
-
-type DateRange = {
-  startDate: Date;
-  endDate: Date;
-};
 
 type RecentlyWatchedListStoreProps = {
   type: RecentlyWatchedType;
   limit?: number;
   slug?: string;
   id?: number;
-  range?: DateRange;
+  page?: number;
 } & FilterParams;
 
 function typeToQuery(
-  { type, id, slug, range, limit, filter }: RecentlyWatchedListStoreProps,
+  { type, id, slug, page, limit, filter }: RecentlyWatchedListStoreProps,
 ) {
   const params = {
     limit: limit ?? DEFAULT_PAGE_SIZE,
     slug: slug ?? 'me',
     id,
-    startDate: range?.startDate,
-    endDate: range?.endDate,
+    page: page ?? 1,
     filter,
   };
 
@@ -57,6 +51,7 @@ function typeToQuery(
         HistoryEntry
       >;
     default:
+      // FIXME: switch to all endpoint
       return activityHistoryQuery(params) as InfiniteQuery<
         HistoryEntry
       >;
@@ -68,9 +63,9 @@ export function useRecentlyWatchedList(
 ) {
   const { list, ...rest } = usePaginatedListQuery(typeToQuery(params));
 
-  const historyCalendar = list.pipe(
-    map((items) => mapToActivityCalendar(items, params.range?.startDate)),
+  const periods = list.pipe(
+    map((items) => mapToCalendarPeriods(items)),
   );
 
-  return { list, historyCalendar, ...rest };
+  return { list, periods, ...rest };
 }
