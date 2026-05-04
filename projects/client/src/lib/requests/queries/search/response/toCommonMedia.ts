@@ -1,5 +1,6 @@
 import { unixToDateTime } from '../../../../utils/date/unixToDateTime.ts';
 import { prependHttps } from '../../../../utils/url/prependHttps.ts';
+import { mapToTrailerUrl } from '../../../_internal/mapToTrailerUrl.ts';
 import type { MovieSchema } from '../../../search/schema/MovieSchema.ts';
 import type { ShowSchema } from '../../../search/schema/ShowSchema.ts';
 import { toIds } from './toIds.ts';
@@ -14,7 +15,7 @@ export function toCommonMedia(input: ShowSchema | MovieSchema) {
     overview: input.overview,
     runtime: input.runtime,
     country: input.country,
-    trailer: prependHttps(input.trailer),
+    trailer: mapToTrailerUrl(input.trailer),
     homepage: prependHttps(input.homepage),
     status: input.status,
     rating: input.rating,

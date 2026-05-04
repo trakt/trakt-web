@@ -8,6 +8,7 @@ import { mapToLogo } from './mapToLogo.ts';
 import { mapToPostCredits } from './mapToPostCredits.ts';
 import { mapToPoster } from './mapToPoster.ts';
 import { mapToSocialMedia } from './mapToSocialMedia.ts';
+import { mapToTrailerUrl } from './mapToTrailerUrl.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
 
 function mapMovieCertificationResponse(
@@ -53,9 +54,7 @@ export function mapToMovieEntry(
     genres: movie.genres ?? [],
     status: movie.status ?? 'unknown',
     overview: movie.overview ?? 'TBD',
-    trailer: prependHttps(
-      movie.trailer,
-    ),
+    trailer: mapToTrailerUrl(movie.trailer),
     /**
      * Duplicate for compat with other entities.
      */
