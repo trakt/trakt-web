@@ -43,6 +43,8 @@ declare global {
   type DistributiveOmit<T, K extends keyof T> = T extends unknown ? Omit<T, K>
     : never;
 
+  type WithRequired<T, K extends keyof T> = T & Required<Pick<T, K>>;
+
   type ChildrenProps = {
     children: import('svelte').Snippet;
   };
