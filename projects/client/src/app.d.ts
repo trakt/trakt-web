@@ -203,6 +203,11 @@ declare global {
       preservedFilters?: Record<string, string>;
     }
     // interface Platform {}
+    interface Platform {
+      env: {
+        R2_WALTER: import('@cloudflare/workers-types').R2Bucket;
+      };
+    }
   }
 
   namespace svelteHTML {
