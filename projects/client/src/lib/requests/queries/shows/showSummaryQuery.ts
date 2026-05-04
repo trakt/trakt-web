@@ -21,7 +21,7 @@ const showSummaryRequest = (
     });
 
 export const showSummaryQuery = defineQuery({
-  key: 'showSummary',
+  key: 'showSummary:v2',
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: showSummaryRequest,
