@@ -8,6 +8,7 @@ import { mapToCover } from './mapToCover.ts';
 import { mapToLogo } from './mapToLogo.ts';
 import { mapToPoster } from './mapToPoster.ts';
 import { mapToSocialMedia } from './mapToSocialMedia.ts';
+import { mapToTrailerUrl } from './mapToTrailerUrl.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
 
 export function mapToShowEntry(
@@ -55,9 +56,7 @@ export function mapToShowEntry(
     genres: show.genres ?? [],
     status: show.status ?? 'unknown',
     overview: show.overview ?? 'TBD',
-    trailer: prependHttps(
-      show.trailer,
-    ),
+    trailer: mapToTrailerUrl(show.trailer),
     /**
      * Duplicate for compat with other entities.
      */

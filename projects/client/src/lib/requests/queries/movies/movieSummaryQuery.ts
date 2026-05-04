@@ -21,7 +21,7 @@ const movieSummaryRequest = (
     });
 
 export const movieSummaryQuery = defineQuery({
-  key: 'movieSummary',
+  key: 'movieSummary:v2',
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: movieSummaryRequest,
