@@ -1,5 +1,11 @@
 import { useInfiniteQuery } from '$lib/features/query/useQuery.ts';
-import { combineLatest, distinctUntilChanged, map, Observable, tap } from 'rxjs';
+import {
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  Observable,
+  tap,
+} from 'rxjs';
 import {
   currentUserWatchedMoviesQuery,
   type WatchedMovie,
@@ -9,7 +15,8 @@ import {
   type WatchedShow,
 } from '../queries/currentUserWatchedShowsQuery.ts';
 
-const historyLimit = 1000;
+const showsHistoryLimit = 1000;
+const moviesHistoryLimit = 10000;
 
 export type UserHistory = {
   movies: Map<number, WatchedMovie>;
@@ -58,10 +65,10 @@ type UseCurrentUserHistoryResult = {
 
 export function useCurrentUserHistory(): UseCurrentUserHistoryResult {
   const moviesQuery = useInfiniteQuery(
-    currentUserWatchedMoviesQuery({ limit: historyLimit }),
+    currentUserWatchedMoviesQuery({ limit: moviesHistoryLimit }),
   );
   const showsQuery = useInfiniteQuery(
-    currentUserWatchedShowsQuery({ limit: historyLimit }),
+    currentUserWatchedShowsQuery({ limit: showsHistoryLimit }),
   );
 
   const history = combineLatest([moviesQuery, showsQuery]).pipe(
