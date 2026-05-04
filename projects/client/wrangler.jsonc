@@ -20,5 +20,11 @@
   "vars": {
     "TYPESENSE_SERVER": "search.trakt.tv"
   },
-  "upload_source_maps": true
+  "upload_source_maps": true,
+  "r2_buckets": [
+    {
+      "binding": "R2_WALTER",
+      "bucket_name": "walter"
+    }
+  ]
 }

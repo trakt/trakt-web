@@ -326,4 +326,10 @@ export const UrlBuilder = {
     wikipedia: (id: string) => `https://en.wikipedia.org/wiki/${id}`,
   },
   feedback: () => 'https://roadmap.trakt.tv',
+  api: {
+    shareableImage: {
+      openGraph: (type: 'movie' | 'show', slug: string) =>
+        `/api/shareable-image?type=${type}&slug=${slug}&variant=open-graph`,
+    },
+  },
 };
