@@ -50,6 +50,7 @@
     "nb-no": "🇳🇴",
     "da-dk": "🇩🇰",
     "zh-cn": "🇨🇳",
+    "tr-tr": "🇹🇷",
   };
 
   const localeToTitle: Record<AvailableLocale, string> = {
@@ -73,6 +74,7 @@
     "nb-no": "Norsk (Bokmål)",
     "da-dk": "Dansk",
     "zh-cn": "中文 (简体)",
+    "tr-tr": "Türkçe",
   };
 
   const options = $derived(
