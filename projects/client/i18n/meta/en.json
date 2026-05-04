@@ -7299,9 +7299,9 @@
         "ios"
       ]
     },
-    "vip_feature_title_increased_limits": {
-      "default": "Increased Limits",
-      "description": "Title for the Increased Limits VIP feature.",
+    "vip_text_vip_go_beyond_limits": {
+      "default": "Go beyond your limits",
+      "description": "Heading for the VIP section explaining what increased limits are offered.",
       "exclude": [
         "ios"
       ]
