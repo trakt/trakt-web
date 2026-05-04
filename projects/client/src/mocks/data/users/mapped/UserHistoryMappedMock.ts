@@ -3,7 +3,6 @@ import type {
 } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 
 export const UserHistoryMappedMock: UserHistory = {
-  'lastWatchedAt': new Date('2024-12-27T16:28:32.000Z'),
   'movies': new Map([
     [916302, {
       'id': 916302,

@@ -23,6 +23,5 @@ export function createHistoryCalendar<T>(
           getActivityTime(b).getTime() - getActivityTime(a).getTime()
         ),
       };
-    })
-    .sort((a, b) => a.date.getTime() - b.date.getTime());
+    });
 }

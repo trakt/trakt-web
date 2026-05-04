@@ -7,18 +7,10 @@
   import { dateKey } from "./dateKey";
   import Day from "./Day.svelte";
 
-  type CalendarDaysProps = { calendar: Calendar<T> } & Omit<
-    CalendarNavigationProps,
-    "onReset"
-  >;
+  type CalendarDaysProps = { calendar: Calendar<T> } & CalendarNavigationProps;
 
-  const {
-    calendar,
-    activeDate,
-    onNext,
-    onPrevious,
-    maxDate,
-  }: CalendarDaysProps = $props();
+  const { calendar, activeDate, navigation, maxDate }: CalendarDaysProps =
+    $props();
 
   const isNextDisabled = $derived(
     maxDate ? isSameWeek(activeDate, maxDate) : false,
@@ -28,7 +20,7 @@
   );
 </script>
 
-<CalendarSwipe onNextPeriod={onNext} onPreviousPeriod={onPrevious} {directions}>
+{#snippet calendarDays()}
   <div class="trakt-calendar-days">
     {#each calendar as day (dateKey(day.date))}
       <Day
@@ -37,7 +29,19 @@
       />
     {/each}
   </div>
-</CalendarSwipe>
+{/snippet}
+
+{#if navigation}
+  <CalendarSwipe
+    onNextPeriod={navigation.onNext}
+    onPreviousPeriod={navigation.onPrevious}
+    {directions}
+  >
+    {@render calendarDays()}
+  </CalendarSwipe>
+{:else}
+  {@render calendarDays()}
+{/if}
 
 <style>
   .trakt-calendar-days {

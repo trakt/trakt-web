@@ -8,13 +8,12 @@
   import { isToday } from "date-fns/isToday";
   import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
 
-  const {
-    onNext,
-    onPrevious,
-    onReset,
-    activeDate,
-    maxDate,
-  }: CalendarNavigationProps = $props();
+  type CalendarControlsProps = WithRequired<
+    CalendarNavigationProps,
+    "navigation"
+  >;
+
+  const { navigation, activeDate, maxDate }: CalendarControlsProps = $props();
 
   const isNextDisabled = $derived(
     maxDate ? isSameWeek(activeDate, maxDate) : false,
@@ -24,7 +23,7 @@
 <div class="calendar-controls">
   <ActionButton
     label={m.button_label_previous_calendar_period()}
-    onclick={onPrevious}
+    onclick={navigation.onPrevious}
     style="ghost"
   >
     <CaretLeftIcon />
@@ -34,7 +33,7 @@
     color="default"
     label={m.button_label_reset_calendar_period()}
     disabled={isToday(activeDate)}
-    onclick={onReset}
+    onclick={navigation.onReset}
     style="ghost"
   >
     {m.button_text_reset_calendar_period()}
@@ -42,7 +41,7 @@
 
   <ActionButton
     label={m.button_label_next_calendar_period()}
-    onclick={onNext}
+    onclick={navigation.onNext}
     style="ghost"
     disabled={isNextDisabled}
   >

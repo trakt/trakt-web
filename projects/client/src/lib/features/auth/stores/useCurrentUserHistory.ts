@@ -21,7 +21,6 @@ const moviesHistoryLimit = 10000;
 export type UserHistory = {
   movies: Map<number, WatchedMovie>;
   shows: Map<number, WatchedShow>;
-  lastWatchedAt: Date | null;
 };
 
 function toWatchedMap<T extends { id: number }>(
@@ -34,22 +33,6 @@ function toQueryMap<T extends { id: number }>(
   query: { data?: { pages: Array<{ entries: T[] }> } },
 ): Map<number, T> {
   return toWatchedMap(query.data?.pages.flatMap((p) => p.entries) ?? []);
-}
-
-// FIXME: this can go when history is paginated properly
-function getLastWatchedAt(
-  movies: Map<number, WatchedMovie>,
-  shows: Map<number, WatchedShow>,
-): Date | null {
-  if (movies.size === 0 && shows.size === 0) return null;
-
-  const toMax = (max: Date, { watchedAt }: WatchedMovie | WatchedShow) =>
-    watchedAt > max ? watchedAt : max;
-
-  return [...shows.values()].reduce(
-    toMax,
-    [...movies.values()].reduce(toMax, new Date(0)),
-  );
 }
 
 function isSettled(
@@ -88,7 +71,6 @@ export function useCurrentUserHistory(): UseCurrentUserHistoryResult {
       return {
         movies: moviesMap,
         shows: showsMap,
-        lastWatchedAt: getLastWatchedAt(moviesMap, showsMap),
       };
     }),
     distinctUntilChanged((prev, curr) => prev === null && curr === null),

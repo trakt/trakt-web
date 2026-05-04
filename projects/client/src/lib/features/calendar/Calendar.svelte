@@ -44,14 +44,18 @@
       fingerprint: `${$mode}:${JSON.stringify($filterMap)}`,
     }),
   );
+
+  const navigation = $derived({
+    onNext: next,
+    onPrevious: previous,
+    onReset: reset,
+  });
 </script>
 
 <CalendarLayout
   activeDate={$activeDate}
   isLoading={$isLoading}
-  onNext={next}
-  onPrevious={previous}
-  onReset={reset}
+  {navigation}
   onLoadMore={loadMore}
   {periods}
   {order}

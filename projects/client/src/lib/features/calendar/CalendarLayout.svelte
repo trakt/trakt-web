@@ -15,9 +15,7 @@
   const {
     activeDate,
     isLoading,
-    onNext,
-    onPrevious,
-    onReset,
+    navigation: externalNavigation,
     item,
     layout = "grid",
     maxDate,
@@ -47,17 +45,15 @@
       ?.scrollIntoView({ block: "start" });
   }
 
-  function handleNext() {
-    handleNavigation(onNext);
-  }
+  const navigation = $derived.by(() => {
+    if (!externalNavigation) return;
 
-  function handlePrevious() {
-    handleNavigation(onPrevious);
-  }
-
-  function handleReset() {
-    handleNavigation(onReset);
-  }
+    return {
+      onNext: () => handleNavigation(externalNavigation.onNext),
+      onPrevious: () => handleNavigation(externalNavigation.onPrevious),
+      onReset: () => handleNavigation(externalNavigation.onReset),
+    };
+  });
 
   const visiblePeriodCalendar = $derived.by(() => {
     const firstPeriod = periods.at(0)?.calendar ?? [];
@@ -81,31 +77,29 @@
   const { observeDimension } = useLazyLoader({ loadMore, parent: null });
 
   const isInitialPeriod = $derived(periods.length <= 1);
+  const isInitialLoad = $derived(isInitialPeriod && isLoading);
 </script>
 
 <div class="calendar-layout-container" use:observeDimension>
-  <div
-    class="calendar-navigation"
-    use:trackWindowScroll={"is-scrolled"}
-    use:trackElementBottom={"--calendar-nav-bottom"}
-  >
-    <CalendarHeader
-      onNext={handleNext}
-      onPrevious={handlePrevious}
-      onReset={handleReset}
-      {maxDate}
-      activeDate={selectedDate}
-    />
-    <CalendarDays
-      calendar={visiblePeriodCalendar}
-      onNext={handleNext}
-      onPrevious={handlePrevious}
-      {maxDate}
-      activeDate={selectedDate}
-    />
-  </div>
+  {#if navigation || !isInitialLoad}
+    <div
+      class="calendar-navigation"
+      use:trackWindowScroll={"is-scrolled"}
+      use:trackElementBottom={"--calendar-nav-bottom"}
+    >
+      {#if navigation}
+        <CalendarHeader {navigation} {maxDate} activeDate={selectedDate} />
+      {/if}
+      <CalendarDays
+        calendar={visiblePeriodCalendar}
+        {navigation}
+        {maxDate}
+        activeDate={selectedDate}
+      />
+    </div>
+  {/if}
 
-  {#if isLoading && isInitialPeriod}
+  {#if isInitialLoad}
     <div class="loading-wrapper">
       <LoadingIndicator />
     </div>

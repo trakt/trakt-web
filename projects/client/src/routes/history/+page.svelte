@@ -1,5 +1,4 @@
 <script>
-  import { useUser } from "$lib/features/auth/stores/useUser";
   import CalendarProvider from "$lib/features/calendar/CalendarProvider.svelte";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages";
@@ -10,7 +9,6 @@
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   const { mode, current } = useDiscover();
-  const { history } = useUser();
 </script>
 
 <TraktPage
@@ -25,9 +23,7 @@
     header={{ title: m.list_title_history(), metaInfo: $current.text() }}
   />
 
-  {#if $history}
-    <CalendarProvider initialDate={$history.lastWatchedAt}>
-      <PersonalHistoryPaginatedList mode={$mode} />
-    </CalendarProvider>
-  {/if}
+  <CalendarProvider>
+    <PersonalHistoryPaginatedList mode={$mode} />
+  </CalendarProvider>
 </TraktPage>
