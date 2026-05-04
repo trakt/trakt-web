@@ -17,6 +17,7 @@ import {
   ro,
   ru,
   sv,
+  tr,
   uk,
   zhCN,
 } from 'date-fns/locale';
@@ -44,4 +45,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'nb-no': nb,
   'da-dk': da,
   'zh-cn': zhCN,
+  'tr-tr': tr,
 };
