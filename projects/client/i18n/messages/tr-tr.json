@@ -1128,7 +1128,7 @@
   "warning_prompt_delete_comment": "Yorumunuzu silmek istediğinizden emin misiniz?",
   "warning_prompt_delete_list": "{name} listesini silmek istediğinizden emin misiniz?",
   "warning_prompt_delete_note": "Bu notu silmek istediğinizden emin misiniz?",
-  "warning_prompt_drop_movie": "\"{title}\" öğesini bırakmak istediğinizden emin misiniz? Bu, onu İzlemeye Devam listenizden kaldıracaktır.",
+  "warning_prompt_drop_movie": "\"{title}\" öğesini bırakmak istediğinizden emin misiniz? Bu, onu \"İzlemeye Devam\" listenizden kaldıracaktır.",
   "warning_prompt_drop_show": "\"{title}\" öğesini bırakmak istediğinizden emin misiniz? Bu, onu İzlemeye Devam listenizden kaldıracaktır.",
   "warning_prompt_hide_recommendation": "\"{title}\" öğesini önerilerinizden gizlemek istediğinizden emin misiniz?",
   "warning_prompt_log_out": "Çıkış yapmak istediğinizden emin misiniz?",
