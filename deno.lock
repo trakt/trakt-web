@@ -46,7 +46,7 @@
     "npm:globals@17.6.0": "17.6.0",
     "npm:idb-keyval@6.2.2": "6.2.2",
     "npm:jsdom@26.1.0": "26.1.0",
-    "npm:marked@^17.0.6": "17.0.6",
+    "npm:marked@^18.0.3": "18.0.3",
     "npm:msw@2.14.3": "2.14.3_typescript@5.8.3",
     "npm:oidc-client-ts@3.5.0": "3.5.0",
     "npm:papaparse@^5.5.3": "5.5.3",
@@ -6032,8 +6032,8 @@
         "semver@7.7.4"
       ]
     },
-    "marked@17.0.6": {
-      "integrity": "sha512-gB0gkNafnonOw0obSTEGZTT86IuhILt2Wfx0mWH/1Au83kybTayroZ/V6nS25mN7u8ASy+5fMhgB3XPNrOZdmA==",
+    "marked@18.0.3": {
+      "integrity": "sha512-7VT90JOkDeaRWpfjOReRGPEKn0ecdARBkDGL+tT1wZY0efPPqkUxLUSmzy/C7TIylQYJC9STISEsCHrqb/7VIA==",
       "bin": true
     },
     "math-intrinsics@1.1.0": {
@@ -8265,7 +8265,7 @@
             "npm:globals@17.6.0",
             "npm:idb-keyval@6.2.2",
             "npm:jsdom@26.1.0",
-            "npm:marked@^17.0.6",
+            "npm:marked@^18.0.3",
             "npm:msw@2.14.3",
             "npm:oidc-client-ts@3.5.0",
             "npm:papaparse@^5.5.3",
