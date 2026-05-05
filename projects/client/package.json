@@ -81,7 +81,7 @@
     "fflate": "^0.8.2",
     "firebase": "12.12.1",
     "idb-keyval": "6.2.2",
-    "marked": "^17.0.6",
+    "marked": "^18.0.3",
     "oidc-client-ts": "3.5.0",
     "plyr": "^3.8.4",
     "resolve-accept-language": "3.2.1",
