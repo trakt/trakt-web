@@ -20,7 +20,6 @@
       "default": "Premiere",
       "description": "Text for the tag that indicates the premiere of a season or a show. This should be as short as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -28,7 +27,6 @@
       "default": "Finale",
       "description": "Text for the tag that indicates the finale of a season or a show. This should be as short as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -967,9 +965,7 @@
     "header_total_runtime": {
       "default": "Total Runtime",
       "description": "Header for the total runtime section. Shows the total time to watch all aired episodes of a show.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "header_country": {
       "default": "Country",
@@ -1036,16 +1032,12 @@
     "header_director": {
       "default": "Director",
       "description": "Header for the director section.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "header_writer": {
       "default": "Writer",
       "description": "Header for the writer section.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "header_creator": {
       "default": "Creator",
@@ -2050,8 +2042,8 @@
         "android"
       ]
     },
-    "button_text_stream_on": {
-      "default": "Stream on",
+    "button_text_stream": {
+      "default": "Stream",
       "description": "Text for the button that allows users to stream a movie or show on an external service.",
       "exclude": [
         "ios",
@@ -2322,9 +2314,7 @@
     "list_title_collaborative_lists": {
       "default": "Collaborations",
       "description": "Title for lists containing collaborative lists the user is part of. This title should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "list_title_liked_lists": {
       "default": "Liked",
@@ -2493,7 +2483,7 @@
       "exclude": []
     },
     "warning_prompt_drop_movie": {
-      "default": "Are you sure you want to drop \"{title}\"? This will remove it from your Continue Watching list.",
+      "default": "Are you sure you want to drop \"{title}\"? This will remove it from your \"Continue Watching\" list.",
       "description": "Warning prompt shown when a user tries to drop a movie.",
       "variables": {
         "title": {
@@ -2501,7 +2491,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2522,7 +2511,14 @@
       "default": "Drop movie",
       "description": "Text for the button that allows a user to drop a movie. Indicating that a user is no longer actively tracking this movie.",
       "exclude": [
-        "android",
+        "ios"
+      ]
+    },
+    "button_text_drop_episode": {
+      "default": "Drop episode",
+      "description": "Text for the button that allows a user to drop an episode watching. Indicating that a user is no longer actively watching this episode.",
+      "exclude": [
+        "web",
         "ios"
       ]
     },
@@ -2662,7 +2658,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2730,6 +2725,14 @@
       "default": "Review",
       "description": "Title for the review dialog, which is used when a user is adding a new review.",
       "exclude": []
+    },
+    "list_title_replies": {
+      "default": "Replies",
+      "description": "Title for lists containing replies to a review. This title should be as short and concise as possible.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
     },
     "button_text_add_review": {
       "default": "Add Review",
@@ -2937,9 +2940,7 @@
     "button_text_manage_lists": {
       "default": "Manage lists",
       "description": "Text for the button that opens the lists drawer. This allows users to add or remove a movie or show from their lists.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "button_text_view_history": {
       "default": "View History",
@@ -4609,9 +4610,7 @@
     "link_text_feedback": {
       "default": "Feedback",
       "description": "Text for the link that takes users to the feedback page where they can make and vote on feature requests.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "link_text_terms_of_use": {
       "default": "Terms of Use",
@@ -4822,9 +4821,7 @@
     "text_cta_up_next_movies": {
       "default": "Your movies. Your pace. Jump back in exactly where you left off. What are you currently watching?",
       "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite movies.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "text_cta_start_watching_media": {
       "default": "Your queue awaits. Add the shows and movies you're excited to start watching. What's next?",
@@ -5308,7 +5305,6 @@
       "default": "Movie has been dropped.",
       "description": "Text shown when a user has dropped a movie (meaning he abandons watching it after few minutes).",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5770,7 +5766,6 @@
       "default": "Set as cover image",
       "description": "Text for the button that sets the background image of a movie, show, or episode as the users cover image. This must be as short as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6533,9 +6528,7 @@
     "list_title_trivia": {
       "default": "Trivia",
       "description": "Title for lists containing trivia about a movie or show. This title should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "button_label_trivia_no_spoilers": {
       "default": "No spoilers",
@@ -6548,9 +6541,7 @@
     "button_text_trivia_no_spoilers": {
       "default": "No spoilers",
       "description": "Text for the button that allows users to only view spoiler free trivia. This title should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "button_label_trivia_spoilers": {
       "default": "Spoilers",
@@ -6563,16 +6554,13 @@
     "button_text_trivia_spoilers": {
       "default": "Spoilers",
       "description": "Text for the button that allows users to view trivia with spoilers. This title should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "button_text_stop_asking": {
       "default": "Stop asking",
       "description": "Text for the button that allows a user to stop prompted, for example being asked to rate what they recently saw.",
       "exclude": [
-        "ios",
-        "android"
+        "ios"
       ]
     },
     "warning_prompt_suppress_ratings_toast": {
@@ -7163,9 +7151,7 @@
     "text_vip_upsell_dive_deeper": {
       "default": "Dive deeper.",
       "description": "Text shown to encourage non-VIP users to subscribe to explore more detailed features and results.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "text_vip_upsell_sentiment": {
       "default": "Upgrade to VIP to unlock more insights.",
@@ -7341,7 +7327,6 @@
       "default": "Get more trivia and insights about the movies and shows you watch.",
       "description": "Description for the Trivia VIP feature.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -7420,16 +7405,12 @@
     "vip_feature_title_profile_customisation": {
       "default": "More Customisation: Profile Header",
       "description": "Title for the VIP feature that allows profile header customisation.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "vip_feature_description_profile_customisation": {
       "default": "Personalize your profile with custom headers and make your Trakt presence uniquely yours.",
       "description": "Description for the VIP feature that allows profile header customisation.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "vip_feature_title_plex_sync": {
       "default": "Sync Plex more frequently",
@@ -7978,6 +7959,22 @@
     "text_info_liked_removed": {
       "default": "Removed from liked lists.",
       "description": "Text shown when a user has removed a list from their liked lists.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_cover_set": {
+      "default": "Cover image has been set.",
+      "description": "Text shown when a user has set a profile cover image.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_cover_removed": {
+      "default": "Cover image has been cleared.",
+      "description": "Text shown when a user has removed a profile cover image.",
       "exclude": [
         "ios",
         "web"
@@ -9050,9 +9047,7 @@
     "stat_text_plays": {
       "default": "Plays",
       "description": "Text for the plays stat, indicating the number of times a movie, show, or episode was watched. This should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "limit_title_watch_history": {
       "default": "Watch History",
@@ -9161,9 +9156,7 @@
     "stat_text_watchers": {
       "default": "Watchers",
       "description": "Text for the watchers stat, indicating the number of users who are watching a movie, show, or episode. This should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "limit_title_ratings": {
       "default": "Ratings",
@@ -9184,9 +9177,7 @@
     "stat_text_lists": {
       "default": "Lists",
       "description": "Text for the lists stat, indicating the number of lists that contain a movie, show, or episode. This should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "limit_title_offline_library": {
       "default": "Offline Library",
@@ -9207,9 +9198,7 @@
     "stat_text_favorited": {
       "default": "Favorites",
       "description": "Text for the favorites stat, indicating the number of times a movie, or show has been favorited. This should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "text_stats_day_count": {
       "default": "{count}-day",
@@ -10073,9 +10062,7 @@
     "list_title_progress": {
       "default": "Progress",
       "description": "Title for lists containing progress information for shows, e.g. in progress, completed, or dropped shows. This title should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "button_label_view_all_progress": {
       "default": "View all progress",
@@ -10120,23 +10107,17 @@
     "button_text_progress_in_progress": {
       "default": "In Progress",
       "description": "Text for the button that allows users to filter the list to only display shows that are in progress. This title should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "button_text_progress_completed": {
       "default": "Completed",
       "description": "Text for the button that allows users to filter the list to only display shows that are completed. This title should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "button_text_progress_dropped": {
       "default": "Dropped",
       "description": "Text for the button that allows users to filter the list to only display shows that are dropped. This title should be as short and concise as possible.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "button_label_progress_in_progress": {
       "default": "View in progress shows",
@@ -10388,6 +10369,219 @@
       "description": "Error shown in the report dialog when the report fails for an unexpected reason.",
       "exclude": [
         "android",
+        "ios"
+      ]
+    },
+    "text_rate_prompt_1": {
+      "default": "How did you like it?",
+      "description": "Prompt text shown when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rate_prompt_2": {
+      "default": "Your verdict?",
+      "description": "Prompt text shown when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rate_prompt_3": {
+      "default": "Worth the watch?",
+      "description": "Prompt text shown when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_cta_collab_lists": {
+      "default": "Lists you help curate. Work with others and track movies and shows together.",
+      "description": "Text for the call-to-action encouraging users to check out their collab lists. This should be a short sentence.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "warning_prompt_set_cover_image": {
+      "default": "Use \"{title}\" as your profile background image?",
+      "description": "Message shown to the user to confirm if they want to set a particular media image as their profile background image.",
+      "exclude": [
+        "web",
+        "ios"
+      ],
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_no_rating": {
+      "default": "No rating",
+      "description": "Label for no/clear rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rating_1": {
+      "default": "Weak",
+      "description": "Label for 1 star rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rating_2": {
+      "default": "Terrible",
+      "description": "Label for 2 star rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rating_3": {
+      "default": "Bad",
+      "description": "Label for 3 star rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rating_4": {
+      "default": "Poor",
+      "description": "Label for 4 star rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rating_5": {
+      "default": "Meh",
+      "description": "Label for 5 star rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rating_6": {
+      "default": "Fair",
+      "description": "Label for 6 star rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rating_7": {
+      "default": "Good",
+      "description": "Label for 7 star rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rating_8": {
+      "default": "Great",
+      "description": "Label for 8 star rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rating_9": {
+      "default": "Superb",
+      "description": "Label for 9 star rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_rating_10": {
+      "default": "Absolute Cinema!",
+      "description": "Label for 10 star rating when asking users to rate a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_player_play_now": {
+      "default": "Play Now",
+      "description": "Text for the button that allows users to play a movie or show immediately.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_player_resume": {
+      "default": "Play Now",
+      "description": "Text for the button that allows users to resume watching a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_player_subtitles_off": {
+      "default": "Off",
+      "description": "Text for the button that allows users to turn subtitles off when watching a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "button_text_player_audio_default": {
+      "default": "Default",
+      "description": "Text for the button that allows users to select the default audio language when watching a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "header_player_subtitle": {
+      "default": "Subtitles",
+      "description": "Header for the section that allows users to select subtitle options for a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "header_player_subtitle_size": {
+      "default": "Size",
+      "description": "Header for the section that allows users to select subtitle options for a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "header_player_subtitle_language": {
+      "default": "Language",
+      "description": "Header for the section that allows users to select subtitle language for a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "header_player_audio": {
+      "default": "Audio",
+      "description": "Header for the section that allows users to select subtitle language for a movie or show.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_unavailable": {
+      "default": "Unavailable",
+      "description": "Label shown when an option or content is unavailable to display.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_plex_tv_library_description": {
+      "default": "Enable Trakt Plex Sync to access your Plex server media library.",
+      "description": "Description shown when a user has no Plex libraries connected. This should be a short sentence.",
+      "exclude": [
+        "web",
         "ios"
       ]
     }
