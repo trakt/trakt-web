@@ -60,8 +60,8 @@
         <h3 class="yir-calendar-title">{item.entry.title}</h3>
       {/if}
 
-      {#if item.episodeTitle}
-        <h4 class="yir-calendar-episode">{item.episodeTitle}</h4>
+      {#if item.type === "episode"}
+        <h4 class="yir-calendar-episode">{item.episode.title}</h4>
       {/if}
     </a>
 

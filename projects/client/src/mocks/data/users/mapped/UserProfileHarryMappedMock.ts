@@ -21,4 +21,5 @@ export const UserProfileHarryMappedMock: UserProfile = {
   'about': undefined,
   'location': undefined,
   'cover': undefined,
+  'joinedAt': null,
 };
