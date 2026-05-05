@@ -2579,7 +2579,9 @@
           "type": "string"
         }
       },
-      "exclude": []
+      "exclude": [
+        "android"
+      ]
     },
     "warning_prompt_mark_as_watched_show_until": {
       "default": "Are you sure you want to mark all unseen episodes of \"{title}\" as watched until episode {episode}? This will mark {count} episodes as watched.",
@@ -5327,14 +5329,6 @@
         "web"
       ]
     },
-    "button_text_long_press_for_more": {
-      "default": "Long press for more",
-      "description": "Text shown when a user can long press on a button to see more options.",
-      "exclude": [
-        "ios",
-        "web"
-      ]
-    },
     "list_placeholder_empty": {
       "default": "There is nothing in this list.",
       "description": "Placeholder text shown when there are no movies or shows in the user's watchlist.",
@@ -5869,9 +5863,7 @@
     "header_appearance": {
       "default": "Appearance",
       "description": "Header for the section that allows users to change the appearance, i.e. color theme and language.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "description_appearance": {
       "default": "Change your theme and language settings.",
@@ -5891,9 +5883,7 @@
     "text_language": {
       "default": "Language",
       "description": "Text for the section that allows users to change the language.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "switch_label_toggle_halloween_filters": {
       "default": "Toggle halloween filters",
@@ -6650,7 +6640,8 @@
       "default": "Year in Review & more.",
       "description": "Description used to promote a VIP package for the user.",
       "exclude": [
-        "web"
+        "web",
+        "android"
       ]
     },
     "button_label_like_list": {
@@ -7930,7 +7921,8 @@
       "default": "Built to last",
       "description": "Heading for the VIP costs section explaining what VIP supports.",
       "exclude": [
-        "ios"
+        "ios",
+        "android"
       ]
     },
     "text_vip_costs": {
@@ -10929,11 +10921,10 @@
       ]
     },
     "button_text_player_resume": {
-      "default": "Play Now",
+      "default": "Resume",
       "description": "Text for the button that allows users to resume watching a movie or show.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "button_text_player_subtitles_off": {
@@ -10995,6 +10986,22 @@
     "text_plex_tv_library_description": {
       "default": "Enable Trakt Plex Sync to access your Plex server media library.",
       "description": "Description shown when a user has no Plex libraries connected. This should be a short sentence.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "header_settings_clear_cover": {
+      "default": "Clear Cover Image",
+      "description": "Header for the setting that allows users to clear their profile cover image.",
+      "exclude": [
+        "web",
+        "ios"
+      ]
+    },
+    "text_settings_clear_cover": {
+      "default": "Clear current cover image and return to the default.",
+      "description": "Description for the setting that allows users to clear their profile cover image.",
       "exclude": [
         "web",
         "ios"
