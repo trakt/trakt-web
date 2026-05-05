@@ -285,6 +285,11 @@ jobs:
           echo "THE SCROLL OF KNOWLEDGE HAS BEEN TRANSCRIBED:"
           cat projects/client/.npmrc
 
+      - name: Awaken the Node Ancient (Setup Node 22 for Wrangler)
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
       - name: Divining the Commit Runes aka Extract Short SHA
         id: vars
         run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
