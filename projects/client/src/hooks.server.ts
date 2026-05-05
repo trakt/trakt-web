@@ -9,6 +9,7 @@ import { handle as handleImage } from '$lib/features/image/handle.ts';
 import { handle as handleMobileOperatingSystem } from '$lib/features/mobile-os/handle.ts';
 import { handle as handleSearchConfig } from '$lib/features/search/handle.ts';
 import { handle as handleTheme } from '$lib/features/theme/handle.ts';
+import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
 
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
 import {
@@ -32,11 +33,22 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
     return response;
   }
 
-  const clonedHeaders = new Headers(response.headers);
-  const cacheControl = event.locals.isLegitimateBot
-    ? 'public, max-age=3600, s-maxage=3600'
-    : 'private, no-store, no-cache, must-revalidate';
+  function toCacheControl() {
+    // Verified search engine crawlers (via Cloudflare), full CDN caching for SEO
+    if (event.locals.isLegitimateBot) {
+      return 'public, max-age=3600, s-maxage=3600';
+    }
 
+    // Social bots (Discord, Slack, etc.), "public" so embeds work, but no CDN caching
+    if (isBotAgent(event.request.headers.get('user-agent'))) {
+      return 'public, max-age=0, must-revalidate';
+    }
+
+    return 'private, no-store, no-cache, must-revalidate';
+  }
+
+  const clonedHeaders = new Headers(response.headers);
+  const cacheControl = toCacheControl();
   clonedHeaders.set('Cache-Control', cacheControl);
 
   return new Response(response.body, {
