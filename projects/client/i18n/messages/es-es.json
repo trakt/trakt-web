@@ -1128,7 +1128,7 @@
   "warning_prompt_delete_comment": "¿Estás seguro de que quieres eliminar tu reseña?",
   "warning_prompt_delete_list": "¿Estás seguro de que quieres eliminar la lista {name}?",
   "warning_prompt_delete_note": "¿Estás seguro de que quieres eliminar esta nota?",
-  "warning_prompt_drop_movie": "¿Estás seguro de que quieres abandonar \"{title}\"? Esto la eliminará de tu lista de Continuar viendo.",
+  "warning_prompt_drop_movie": "¿Estás seguro de que quieres abandonar \"{title}\"? Esto la eliminará de tu lista de \"Continuar viendo\".",
   "warning_prompt_drop_show": "¿Estás seguro de que quieres abandonar \"{title}\"? Esto la eliminará de tu lista de Continuar viendo.",
   "warning_prompt_hide_recommendation": "¿Estás seguro de que quieres ocultar \"{title}\" de tus recomendaciones?",
   "warning_prompt_log_out": "¿Estás seguro de que quieres cerrar sesión?",
