@@ -25,5 +25,6 @@ export function mapToUserProfile(user: ProfileResponse): UserProfile {
     location: user.location,
     about: user.about,
     cover,
+    joinedAt: user.joined_at ? new Date(user.joined_at) : null,
   };
 }

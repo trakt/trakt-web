@@ -2,25 +2,23 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import YirHeader from "./_internal/YirHeader.svelte";
   import { useYirDetail } from "./_internal/useYirDetail";
-  import YirDefault from "./default/YirDefault.svelte";
-  import YirTitleSection from "./default/_internal/YirTitleSection.svelte";
+  import { getYirTemplate } from "./getYirTemplate";
 
   const { slug, year }: { slug: string; year: number } = $props();
 
   const { detail, isLoading } = $derived(useYirDetail({ slug, year }));
+  const Template = $derived(getYirTemplate(year));
 </script>
 
 <div class="yir-page" id="year-in-review">
   <YirHeader {slug} {year} />
-
-  <YirTitleSection {slug} {year} coverImage={$detail?.images.cover} />
 
   {#if $isLoading}
     <div class="yir-loading">
       <LoadingIndicator />
     </div>
   {:else if $detail}
-    <YirDefault detail={$detail} {slug} {year} />
+    <Template detail={$detail} {slug} {year} />
   {/if}
 </div>
 

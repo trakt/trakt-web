@@ -133,12 +133,18 @@ function mapWatchedItem(raw: RawWatchedItem | null): YirWatchedItem | null {
   const entry = mapWatchedItemEntry(raw);
   if (!entry) return null;
 
-  return {
+  const item = {
     type: raw.type,
     watchedAt: new Date(raw.watched_at),
     entry,
-    episodeTitle: raw.episode?.title,
-  };
+  } as YirWatchedItem;
+
+  if (item.type === 'episode') {
+    if (!raw.episode) return null;
+    item.episode = raw.episode;
+  }
+
+  return item;
 }
 
 function mapMostWatchedShows(

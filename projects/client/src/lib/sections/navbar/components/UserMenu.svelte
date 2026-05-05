@@ -1,10 +1,13 @@
 <script lang="ts">
+  import CelebrationIcon from "$lib/components/icons/CelebrationIcon.svelte";
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import GearIcon from "$lib/components/icons/GearIcon.svelte";
   import LibraryIcon from "$lib/components/icons/LibraryIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
 
@@ -55,6 +58,7 @@
 
 {#snippet iconHistory()}<ClockIcon />{/snippet}
 {#snippet iconLibrary()}<LibraryIcon />{/snippet}
+{#snippet iconYearInReview()}<CelebrationIcon />{/snippet}
 {#snippet iconSettings()}<GearIcon />{/snippet}
 
 <div
@@ -79,6 +83,16 @@
           m.page_title_library(),
           iconLibrary,
         )}
+        <RenderForFeature flag={FeatureFlag.YearInReview}>
+          {#snippet enabled()}
+            {@render navItem(
+              UrlBuilder.users("me").yearToDate(new Date().getFullYear()),
+              m.yir_title_year_in_review(),
+              m.yir_title_year_in_review(),
+              iconYearInReview,
+            )}
+          {/snippet}
+        </RenderForFeature>
         {@render navItem(
           UrlBuilder.settings.general(),
           m.button_label_settings(),

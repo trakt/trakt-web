@@ -22,6 +22,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'justin',
     'username': 'justin',
+    'joinedAt': new Date('2010-09-25T17:49:25.000Z'),
   },
   {
     'about': 'Huge tv nerd',
@@ -44,6 +45,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'sean',
     'username': 'sean',
+    'joinedAt': new Date('2010-09-25T17:49:25.000Z'),
   },
   {
     'about': '',
@@ -66,6 +68,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'ohifriend',
     'username': 'Ohifriend',
+    'joinedAt': new Date('2015-11-06T23:52:00.000Z'),
   },
   {
     'about': '',
@@ -88,6 +91,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'kristin',
     'username': 'Kristin',
+    'joinedAt': new Date('2021-12-15T19:36:29.000Z'),
   },
   {
     'about':
@@ -111,6 +115,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'sonply',
     'username': 'Sonply',
+    'joinedAt': new Date('2019-11-02T13:53:28.000Z'),
   },
   {
     'about': '',
@@ -133,6 +138,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'kcador',
     'username': 'kcador',
+    'joinedAt': new Date('2014-01-18T22:26:01.000Z'),
   },
   {
     'about': 'Pricinple Product Designer at Trakt.tv',
@@ -155,6 +161,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'zandertrakt',
     'username': 'zandertrakt',
+    'joinedAt': new Date('2024-06-12T14:22:53.000Z'),
   },
   {
     'about': '',
@@ -177,6 +184,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'andrei-l-magnea',
     'username': 'Andrei L. Magnea',
+    'joinedAt': new Date('2025-01-15T10:27:13.000Z'),
   },
   {
     'about': '',
@@ -199,6 +207,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'marius',
     'username': 'marius',
+    'joinedAt': new Date('2014-03-28T15:49:44.000Z'),
   },
   {
     'about': '',
@@ -221,6 +230,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'visualcortex',
     'username': 'visualcortex',
+    'joinedAt': new Date('2024-09-03T16:56:42.000Z'),
   },
   {
     'about':
@@ -244,6 +254,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'seftur',
     'username': 'seftur',
+    'joinedAt': new Date('2015-07-24T13:15:42.000Z'),
   },
   {
     'about': '',
@@ -266,5 +277,6 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'private': false,
     'slug': 'mike-d-47b75e85-263f-4f74-bda4-d6347793fbba',
     'username': 'mike.d',
+    'joinedAt': new Date('2025-05-06T08:17:49.000Z'),
   },
 ];

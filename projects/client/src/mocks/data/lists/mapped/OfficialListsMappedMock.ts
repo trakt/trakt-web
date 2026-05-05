@@ -33,6 +33,7 @@ export const OfficialListsMappedMock: MediaListSummary[] = [
       'about': undefined,
       'location': undefined,
       'cover': undefined,
+      'joinedAt': null,
     },
     'posters': [],
     'updatedAt': new Date('2025-02-09T21:39:59.000Z'),
