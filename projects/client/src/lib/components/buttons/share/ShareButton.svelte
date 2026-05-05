@@ -28,9 +28,17 @@
   }: ShareButtonProps = $props();
 
   const shareUrl = $derived.by(() => {
-    const url = new URL(urlOverride ?? page.url.toString());
-    url.searchParams.set(PREFETCH_SHARE_PARAM, "true");
-    return url.toString();
+    const baseUrl = urlOverride ?? (browser ? page.url.toString() : null);
+    if (!baseUrl) return "";
+
+    if (baseUrl.startsWith("https://")) {
+      const url = new URL(baseUrl);
+      url.searchParams.set(PREFETCH_SHARE_PARAM, "true");
+      return url.toString();
+    }
+
+    const separator = baseUrl.includes("?") ? "&" : "?";
+    return `${baseUrl}${separator}${PREFETCH_SHARE_PARAM}=true`;
   });
 
   const data = $derived({
