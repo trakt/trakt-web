@@ -56,12 +56,27 @@ const YirTopRatedItemSchema = z.object({
   entry: MediaEntrySchema,
 });
 
-const YirWatchedItemSchema = z.object({
-  type: z.enum(['episode', 'movie']),
+const YirWatchedMovieSchema = z.object({
+  type: z.literal('movie'),
   watchedAt: z.date(),
   entry: MediaEntrySchema,
-  episodeTitle: z.string().nullish(),
 });
+
+const YirWatchedEpisodeSchema = z.object({
+  type: z.literal('episode'),
+  watchedAt: z.date(),
+  entry: MediaEntrySchema,
+  episode: z.object({
+    title: z.string(),
+    season: z.number(),
+    number: z.number(),
+  }),
+});
+
+const YirWatchedItemSchema = z.discriminatedUnion('type', [
+  YirWatchedMovieSchema,
+  YirWatchedEpisodeSchema,
+]);
 
 export const YirDetailSchema = z.object({
   stats: z.object({
@@ -103,3 +118,5 @@ export type YirCompany = z.infer<typeof YirCompanySchema>;
 export type YirMostWatchedItem = z.infer<typeof YirMostWatchedItemSchema>;
 export type YirTopRatedItem = z.infer<typeof YirTopRatedItemSchema>;
 export type YirWatchedItem = z.infer<typeof YirWatchedItemSchema>;
+export type YirWatchedMovie = z.infer<typeof YirWatchedMovieSchema>;
+export type YirWatchedEpisode = z.infer<typeof YirWatchedEpisodeSchema>;

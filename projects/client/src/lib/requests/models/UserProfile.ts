@@ -19,6 +19,7 @@ export const UserProfileSchema = z.object({
   cover: z.object({
     url: z.string().nullish(),
   }).optional(),
+  joinedAt: z.date().nullish(),
 });
 
 export type UserProfile = z.infer<typeof UserProfileSchema>;

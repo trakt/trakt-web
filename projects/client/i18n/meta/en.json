@@ -7545,6 +7545,93 @@
         "ios"
       ]
     },
+    "yir_2024_huge_label_year_in_review": {
+      "default": "year in review",
+      "description": "Hero label rendered in huge gradient text on the 2024 Year in Review template (intentionally lowercase).",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_huge_label_year_to_date": {
+      "default": "year to date",
+      "description": "Hero label rendered in huge gradient text on the 2024 Year in Review template when viewing the current year (intentionally lowercase).",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_directed_by": {
+      "default": "Directed By",
+      "description": "Label above the user avatar in the 2024 Year in Review hero.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_trakt_worldwide": {
+      "default": "Trakt Worldwide",
+      "description": "Label next to the globe icon in the 2024 Year in Review hero membership block.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_member_since": {
+      "default": "Member Since",
+      "description": "Label next to the join year in the 2024 Year in Review hero membership block.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_first_play_of": {
+      "default": "First play of {year}",
+      "description": "Label for the first-play card on the 2024 Year in Review template.",
+      "variables": {
+        "year": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_last_play_of": {
+      "default": "Last play of {year}",
+      "description": "Label for the last-play card on the 2024 Year in Review template.",
+      "variables": {
+        "year": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_play_count_in": {
+      "default": "Play Count in {year}",
+      "description": "Label above the play count on the first/last-play cards on the 2024 Year in Review template.",
+      "variables": {
+        "year": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_watched_at": {
+      "default": "Watched At",
+      "description": "Label above the watched-at timestamp on the first/last-play cards on the 2024 Year in Review template.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "vip_feature_title_mir": {
       "default": "Month in Review",
       "description": "Title for the Month in Review VIP feature.",

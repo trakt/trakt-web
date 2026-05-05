@@ -9,6 +9,7 @@
   import YirStudiosSection from "./_internal/YirStudiosSection.svelte";
   import YirRatedSection from "./_internal/YirRatedSection.svelte";
   import YirPeopleSection from "./_internal/YirPeopleSection.svelte";
+  import YirTitleSection from "./_internal/YirTitleSection.svelte";
   import YirUpgradeSection from "./_internal/YirUpgradeSection.svelte";
 
   const {
@@ -21,6 +22,8 @@
     year: number;
   } = $props();
 </script>
+
+<YirTitleSection {slug} {year} coverImage={detail.images.cover} />
 
 <YirTotalsSection stats={detail.stats.all} {year} />
 
