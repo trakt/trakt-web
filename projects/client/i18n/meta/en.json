@@ -715,14 +715,6 @@
         "ios"
       ]
     },
-    "list_title_coming_soon": {
-      "default": "Coming Soon",
-      "description": "Title for lists containing watchlisted movies that are coming soon. This title should be as short and concise as possible.",
-      "exclude": [
-        "web",
-        "ios"
-      ]
-    },
     "tag_text_tba": {
       "default": "TBA",
       "description": "Text for the tag that indicates that something has no release date yet. This should be as short as possible.",
@@ -2403,13 +2395,6 @@
         "ios"
       ]
     },
-    "list_title_available_now": {
-      "default": "Available Now",
-      "description": "Title for lists containing watchlisted movies that are currently available to watch. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
-    },
     "tag_text_preview": {
       "default": "Preview",
       "description": "Text for the tag that indicates a preview feature. This should be as short as possible.",
@@ -2638,7 +2623,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4616,7 +4600,8 @@
       "default": "Terms of Use",
       "description": "Text for the link that takes users to the terms of use page.",
       "exclude": [
-        "web"
+        "web",
+        "android"
       ]
     },
     "link_text_policy": {
@@ -4929,7 +4914,9 @@
     "text_cta_smart_lists": {
       "default": "Set the filters. Skip the curation. Your list builds and updates itself automatically.",
       "description": "Call to action text shown in the empty smart lists screen, encouraging users to create a smart list.",
-      "exclude": []
+      "exclude": [
+        "android"
+      ]
     },
     "text_cta_favorites": {
       "default": "Your faves. Your story. Spotlight the movies and shows that left a mark.",
@@ -6313,7 +6300,9 @@
     "button_text_sort_title": {
       "default": "Title",
       "description": "Text for the button that allows users to sort items alphabetically by title.",
-      "exclude": []
+      "exclude": [
+        "android"
+      ]
     },
     "button_label_sort_title": {
       "default": "Sort alphabetically",
@@ -6350,7 +6339,9 @@
     "button_text_sort_remaining": {
       "default": "Remaining",
       "description": "Text for the button that allows users to sort shows by the number of remaining episodes or movies to watch.",
-      "exclude": []
+      "exclude": [
+        "android"
+      ]
     },
     "button_label_sort_remaining": {
       "default": "Sort by remaining episodes or movies",
@@ -6567,8 +6558,7 @@
       "default": "Do you want to stop being asked to rate what you recently watched?",
       "description": "Text for the warning prompt that appears to ask a user to stop being asked to rate what they recently watched.",
       "exclude": [
-        "ios",
-        "android"
+        "ios"
       ]
     },
     "button_text_restore_rating_prompts": {
@@ -7225,7 +7215,6 @@
       "default": "No hype, just features.",
       "description": "Text used to promote the features of a VIP package for the user.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
