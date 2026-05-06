@@ -872,8 +872,7 @@
       "default": "Shows",
       "description": "Title for lists containing shows related to a person's credits. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_episodes_watched": {
@@ -892,8 +891,7 @@
       "default": "Movies",
       "description": "Title for lists containing movies related to a person's credits. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "text_movies_watched": {
@@ -2048,6 +2046,14 @@
       "exclude": [
         "android",
         "ios"
+      ]
+    },
+    "button_text_stream_on": {
+      "default": "Stream On",
+      "description": "Text for the button that allows users to stream a movie or show on an external service.",
+      "exclude": [
+        "android",
+        "web"
       ]
     },
     "header_streaming": {
@@ -3629,8 +3635,7 @@
       "default": "Blocked",
       "description": "Tag shown on another user's profile when the current user has blocked them.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "tag_text_follow_request_pending": {
@@ -6064,30 +6069,24 @@
       "default": "Height",
       "description": "Header for the section that displays the person's height.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "header_birthday": {
       "default": "Birthday",
       "description": "Header for the section that displays the person's birthday.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "header_age": {
       "default": "Age",
       "description": "Header for the section that displays the person's age.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "header_date_of_death": {
       "default": "Date of death",
       "description": "Header for the section that displays the person's date of death.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_view_all_where_to_watch": {
@@ -6386,9 +6385,7 @@
     "list_title_from_my_history": {
       "default": "From My History",
       "description": "Title for lists containing movies or shows a user has seen a person in. This title should be as short and concise as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_placeholder_from_my_history": {
       "default": "You haven't seen {name} in anything yet.",
@@ -10916,8 +10913,7 @@
       "default": "Play Now",
       "description": "Text for the button that allows users to play a movie or show immediately.",
       "exclude": [
-        "web",
-        "ios"
+        "web"
       ]
     },
     "button_text_player_resume": {
@@ -11005,6 +11001,35 @@
       "exclude": [
         "web",
         "ios"
+      ]
+    },
+    "tab_text_more": {
+      "default": "More",
+      "description": "Text for the tab in the iPadOS and tvOS side bar that acts as a container for extra sections like Library and Watchlist. This should be kept as short as possible.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
+    "list_placeholder_library_plex_empty": {
+      "default": "You have no synced library items from Plex.",
+      "description": "Placeholder text shown in the library section on tvOS when there are no synced items from Plex. This should be a short and concise message.",
+      "exclude": [
+        "android",
+        "web"
+      ]
+    },
+    "button_text_open_in_service": {
+      "default": "Open in {service}",
+      "description": "Text for the button that allows users to open the current media in an external app. The variable {service} represents the name of the app (e.g., Infuse, Plex) where brand names may generally not translated.",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "web"
       ]
     }
   }
