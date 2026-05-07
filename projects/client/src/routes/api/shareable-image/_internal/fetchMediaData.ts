@@ -12,7 +12,7 @@ type FetchMediaDataParams = {
   slug: string;
 } & ApiParams;
 
-export function fetchMediaData({ type, slug, fetch }: FetchMediaDataParams) {
+function resolveMediaData({ type, slug, fetch }: FetchMediaDataParams) {
   if (type === 'movie') {
     return Promise.all(
       [
@@ -30,4 +30,14 @@ export function fetchMediaData({ type, slug, fetch }: FetchMediaDataParams) {
       showPeopleQuery({ slug, fetch }).execute(),
     ] as const,
   );
+}
+
+export async function fetchMediaData(params: FetchMediaDataParams) {
+  const [media, ratings, crew] = await resolveMediaData(params);
+
+  if (!media || !ratings || !crew) {
+    throw new Error('Incomplete media data');
+  }
+
+  return { media, ratings, crew };
 }

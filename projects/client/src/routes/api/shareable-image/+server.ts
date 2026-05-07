@@ -66,15 +66,17 @@ export const GET: RequestHandler = async (
     fetch,
   });
 
-  const [media, ratings, crew] = await fetchMediaData({
+  const mediaData = await fetchMediaData({
     type,
     slug,
     fetch: fetchFn,
-  });
+  }).catch(() => null);
 
-  if (!media || !ratings || !crew) {
+  if (!mediaData) {
     return new Response('Data not found', { status: 404 });
   }
+
+  const { media, ratings, crew } = mediaData;
 
   const posterUrl = media.poster.url.medium.replace(/\.webp$/i, '');
 
