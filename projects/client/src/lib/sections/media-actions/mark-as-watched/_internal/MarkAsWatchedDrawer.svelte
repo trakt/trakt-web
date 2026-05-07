@@ -17,7 +17,7 @@
     useMarkAsWatched,
     type MarkAsWatchedStoreProps,
   } from "../useMarkAsWatched";
-  import DateTimePickerDialog from "./DateTimePickerDialog.svelte";
+  import HistorySlotDrawer from "./HistorySlotDrawer.svelte";
   import { toMarkAsWatchedMetaInfo } from "./toMarkAsWatchedMetaInfo";
 
   const {
@@ -70,7 +70,7 @@
 
   const metaInfo = $derived(toMarkAsWatchedMetaInfo(target));
 
-  const showDateTimePicker = writable(false);
+  let showHistoryPicker = $state(false);
 
   const isSingleMedia = $derived.by(() => {
     if (Array.isArray(target.media)) {
@@ -120,7 +120,7 @@
     </DropdownItem>
 
     <DropdownItem
-      onclick={() => showDateTimePicker.set(true)}
+      onclick={() => (showHistoryPicker = true)}
       label={m.button_label_mark_as_watched_other_date()}
       {...commonProps}
     >
@@ -147,14 +147,14 @@
   </div>
 </Drawer>
 
-{#if $showDateTimePicker}
-  <DateTimePickerDialog
+{#if showHistoryPicker}
+  <HistorySlotDrawer
+    onClose={() => (showHistoryPicker = false)}
     {title}
-    buttonText={m.button_text_mark_as_watched()}
-    onCancel={() => showDateTimePicker.set(false)}
+    {metaInfo}
     onConfirm={(date) => {
       handler(date);
-      showDateTimePicker.set(false);
+      showHistoryPicker = false;
     }}
   />
 {/if}
