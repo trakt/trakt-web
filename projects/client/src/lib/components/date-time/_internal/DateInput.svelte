@@ -8,6 +8,7 @@
   const {
     type,
     value,
+    minDate,
     maxDate,
     label,
     disabled = false,
@@ -20,6 +21,7 @@
   let inputElement: HTMLInputElement;
   function pickerOnClick(node: HTMLElement) {
     const handler = () => {
+      if (disabled) return;
       inputElement.showPicker();
     };
 
@@ -34,7 +36,11 @@
 </script>
 
 <div class="trakt-date-time-picker">
-  <div use:pickerOnClick class="trakt-date-time-icon">
+  <div
+    use:pickerOnClick
+    class="trakt-date-time-icon"
+    class:is-disabled={disabled}
+  >
     <CalendarIcon />
   </div>
   <input
@@ -45,6 +51,7 @@
     {required}
     aria-label={label}
     value={formatDateInputValue(value, type)}
+    min={formatDateInputValue(minDate, type)}
     max={formatDateInputValue(maxDate, type)}
     lang={language}
     onchange={(ev) => {
@@ -127,5 +134,10 @@
     z-index: calc(var(--layer-top) + var(--layer-overlay));
     top: var(--date-time-icon-offset);
     left: var(--date-time-icon-offset);
+
+    &.is-disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
   }
 </style>
