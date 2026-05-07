@@ -7,8 +7,8 @@
 </script>
 
 <StemTag
-  --color-background-stem-tag="var(--shade-10)"
-  --color-foreground-stem-tag="var(--shade-920)"
+  --color-background-stem-tag="var(--color-background-indicator-tag)"
+  --color-foreground-stem-tag="var(--color-text-indicator-tag)"
 >
   {#snippet icon()}
     <DropIcon />
