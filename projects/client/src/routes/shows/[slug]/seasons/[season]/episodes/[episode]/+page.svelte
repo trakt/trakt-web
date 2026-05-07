@@ -23,7 +23,7 @@
   title={$intl?.title ?? $episode?.title}
   info={$episode}
   image={$episode?.cover.url}
-  type="movie"
+  type="episode"
   hasDynamicContent={true}
 >
   <RenderFor audience="authenticated">

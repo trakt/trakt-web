@@ -3,7 +3,7 @@
   import { getLanguageAndRegion } from "$lib/features/i18n";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaType } from "$lib/requests/models/MediaType";
+  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Redirect from "../../components/router/Redirect.svelte";
@@ -13,7 +13,7 @@
 
   type TraktPageProps = {
     title: string | undefined;
-    type?: MediaType | "webpage" | "home";
+    type?: ExtendedMediaType | "webpage" | "home";
     image: string | Nil;
     info?: {
       overview: string;
@@ -72,6 +72,7 @@
       case "movie":
         return "video.movie";
       case "show":
+      case "episode":
         return "video.tv_show";
       case "webpage":
       default:
@@ -139,10 +140,23 @@
       url,
     });
 
+  // FIXME: extend with season and episode information
+  const createEpisodeLd = (title: string, url: string) =>
+    JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TVEpisode",
+      name: title,
+      description: _info?.overview,
+      image: _image,
+      url,
+    });
+
   const jsonLd = $derived.by(() => {
     if (type === "home") return createWebsiteLd(canonicalUrl);
     if (type === "movie" && _title) return createMovieLd(_title, canonicalUrl);
     if (type === "show" && _title) return createShowLd(_title, canonicalUrl);
+    if (type === "episode" && _title)
+      return createEpisodeLd(_title, canonicalUrl);
     return null;
   });
 
