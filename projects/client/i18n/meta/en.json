@@ -1618,64 +1618,47 @@
     "translated_value_status_released": {
       "default": "Released",
       "description": "Status value for released media items. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_status_planned": {
       "default": "Planned",
       "description": "Status value for planned media items. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_status_post_production": {
       "default": "Post-Production",
       "description": "Status value for media items that are in post-production. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_status_canceled": {
       "default": "Canceled",
       "description": "Status value for canceled media items. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_status_in_production": {
       "default": "In Production",
       "description": "Status value for media items that are currently in production. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_status_rumored": {
       "default": "Rumored",
       "description": "Status value for rumored media items. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_status_ended": {
       "default": "Ended",
       "description": "Status value for ended shows. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_status_returning_series": {
       "default": "Returning Series",
       "description": "Status value for returning shows. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_status_pilot": {
       "default": "Pilot",
       "description": "Status value for shows that are in the pilot stage. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1683,24 +1666,18 @@
       "default": "Continuing",
       "description": "Status value shows that are continuing. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
     "translated_value_status_upcoming": {
       "default": "Upcoming",
       "description": "Status value for upcoming media items. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_status_unknown": {
       "default": "Unknown",
       "description": "Status value for media items with an unknown status. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": []
     },
     "header_expected_premiere": {
       "default": "Expected Premiere",
