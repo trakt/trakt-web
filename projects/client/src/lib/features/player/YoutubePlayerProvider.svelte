@@ -72,8 +72,8 @@
       destroy() {
         instance.off("exitfullscreen", handleExitVideo);
 
-        instance.on("pause", handlePauseVideo);
-        instance.on("ended", handleExitVideo);
+        instance.off("pause", handlePauseVideo);
+        instance.off("ended", handleExitVideo);
         instance.off("ready", handleReady);
         teardownPreloadPlay.unsubscribe();
 
