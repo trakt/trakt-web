@@ -86,10 +86,8 @@ export default defineConfig(({ mode }) => ({
 
   plugins: [
     sentrySvelteKit({
-      sourceMapsUploadOptions: {
-        org: 'trakt-tv',
-        project: 'trakt-web',
-      },
+      org: 'trakt-tv',
+      project: 'trakt-web',
     }),
     sveltekit(),
     sveltekitOG(),
