@@ -10947,7 +10947,7 @@
         "web"
       ]
     },
-    "text_play_subscriptions": {
+    "text_settings_play_subscriptions": {
       "default": "Google Play Subscriptions",
       "description": "Text for the section in settings that allows users to manage their Google Play subscription. This should be a short and concise message.",
       "exclude": [
