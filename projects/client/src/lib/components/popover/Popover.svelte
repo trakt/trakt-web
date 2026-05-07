@@ -25,7 +25,7 @@
 </script>
 
 <Popover.Root bind:open={getOpen, setOpen}>
-  <Popover.Trigger class="trakt-popover-trigger">
+  <Popover.Trigger class="trakt-popover-trigger" aria-hidden="true">
     {@render children()}
   </Popover.Trigger>
   <Popover.Portal>

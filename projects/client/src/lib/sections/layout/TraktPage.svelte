@@ -178,7 +178,7 @@
     <NavbarStateSetter mode="full" />
   {/if}
 
-  <div class="trakt-content" {...dynamicContentProps}>
+  <div class="trakt-content" role="main" {...dynamicContentProps}>
     {@render children()}
   </div>
 
