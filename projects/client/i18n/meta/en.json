@@ -10954,6 +10954,35 @@
         "ios",
         "web"
       ]
+    },
+    "button_label_history_slot": {
+      "default": "Watched between {startDate} and {endDate}",
+      "description": "Aria-label for the button that allows users to pick a date time range for when they watched a movie or episode.",
+      "variables": {
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_pick_history_slot": {
+      "default": "Pick where \"{title}\" fits into your watch history.",
+      "description": "Text shown when asking users to pick a date time range for when they watched a movie or episode. This should be a short and concise message.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
