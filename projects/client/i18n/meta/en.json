@@ -1658,16 +1658,12 @@
     "translated_value_status_pilot": {
       "default": "Pilot",
       "description": "Status value for shows that are in the pilot stage. The value is sent back from the Trakt API.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "translated_value_status_continuing": {
       "default": "Continuing",
       "description": "Status value shows that are continuing. The value is sent back from the Trakt API.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "translated_value_status_upcoming": {
       "default": "Upcoming",
