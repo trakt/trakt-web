@@ -180,261 +180,187 @@
     "translated_value_genre_horror": {
       "default": "Horror",
       "description": "Text for the horror genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_comedy": {
       "default": "Comedy",
       "description": "Text for the comedy genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_action": {
       "default": "Action",
       "description": "Text for the action genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_adventure": {
       "default": "Adventure",
       "description": "Text for the adventure genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_animation": {
       "default": "Animation",
       "description": "Text for the animation genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_biography": {
       "default": "Biography",
       "description": "Text for the biography genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_children": {
       "default": "Children",
       "description": "Text for the children genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_crime": {
       "default": "Crime",
       "description": "Text for the crime genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_documentary": {
       "default": "Documentary",
       "description": "Text for the documentary genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_drama": {
       "default": "Drama",
       "description": "Text for the drama genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_family": {
       "default": "Family",
       "description": "Text for the family genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_fantasy": {
       "default": "Fantasy",
       "description": "Text for the fantasy genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_game_show": {
       "default": "Game Show",
       "description": "Text for the game show genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_history": {
       "default": "History",
       "description": "Text for the history genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_home_and_garden": {
       "default": "Home and Garden",
       "description": "Text for the home and garden genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_holiday": {
       "default": "Holiday",
       "description": "Text for the holiday genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_music": {
       "default": "Music",
       "description": "Text for the music genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_musical": {
       "default": "Musical",
       "description": "Text for the musical genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_mystery": {
       "default": "Mystery",
       "description": "Text for the mystery genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_news": {
       "default": "News",
       "description": "Text for the news genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_none": {
       "default": "None",
       "description": "Text for the none genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_reality": {
       "default": "Reality",
       "description": "Text for the reality genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_romance": {
       "default": "Romance",
       "description": "Text for the romance genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_short": {
       "default": "Short",
       "description": "Text for the short genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_soap": {
       "default": "Soap",
       "description": "Text for the soap genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_special_interest": {
       "default": "Special Interest",
       "description": "Text for the special interest genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_sporting_event": {
       "default": "Sporting Event",
       "description": "Text for the sporting event genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_suspense": {
       "default": "Suspense",
       "description": "Text for the suspense genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_talk_show": {
       "default": "Talk Show",
       "description": "Text for the talk show genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_thriller": {
       "default": "Thriller",
       "description": "Text for the thriller genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_war": {
       "default": "War",
       "description": "Text for the war genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_western": {
       "default": "Western",
       "description": "Text for the western genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_anime": {
       "default": "Anime",
       "description": "Text for the anime genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_superhero": {
       "default": "Superhero",
       "description": "Text for the superhero genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_donghua": {
       "default": "Donghua",
       "description": "Text for the donghua genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_mini_series": {
       "default": "Mini-Series",
       "description": "Text for the mini-series genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "translated_value_genre_science_fiction": {
       "default": "Science Fiction",
       "description": "Text for the science fiction genre. The value is sent back from the Trakt API.",
-      "exclude": [
-        "android"
-      ]
+      "exclude": []
     },
     "button_label_remove_from_watchlist": {
       "default": "Remove \"{title}\" from your Watchlist",
@@ -10626,7 +10552,7 @@
     },
     "label_report_reason_language": {
       "default": "Wrong language",
-      "description": "Report reason: the content is in the wrong language, or \u2014 for reviews \u2014 not in English.",
+      "description": "Report reason: the content is in the wrong language, or — for reviews — not in English.",
       "exclude": [
         "android",
         "ios"
