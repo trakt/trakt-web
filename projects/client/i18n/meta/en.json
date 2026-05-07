@@ -10930,6 +10930,30 @@
         "android",
         "web"
       ]
+    },
+    "header_settings_translations": {
+      "default": "Translations",
+      "description": "Header for the section in settings that allows users to open CrowdIn translations project.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_settings_translations": {
+      "default": "Help translate the app and fix mistakes for your language.",
+      "description": "Description for the section in settings that allows users to open and join CrowdIn translations project. This should be a short and concise message.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_play_subscriptions": {
+      "default": "Google Play Subscriptions",
+      "description": "Text for the section in settings that allows users to manage their Google Play subscription. This should be a short and concise message.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
     }
   }
 }
