@@ -7,7 +7,7 @@
   import PageLinks from "./PageLinks.svelte";
 </script>
 
-<div class="trakt-footer-content" role="contentinfo">
+<div class="trakt-footer-content">
   <RenderFor device={["tablet-lg", "desktop"]} audience="all">
     <FooterBar>
       <FooterLogo />
