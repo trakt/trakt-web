@@ -62,13 +62,17 @@
   });
 </script>
 
-<section class="trakt-grid-list-container" role="list" data-sizing={sizing}>
+<section class="trakt-grid-list-container" data-sizing={sizing}>
   {#if title}
     <ListHeader {title} {metaInfo} {actions} {listActions} />
   {/if}
 
   {#if uniqueItems.length > 0 || promotedItems.length > 0}
-    <div class="trakt-list-item-container trakt-list-items" use:customAction>
+    <div
+      class="trakt-list-item-container trakt-list-items"
+      role="list"
+      use:customAction
+    >
       {#each promotedItems as i (i.key)}
         {@render item(i)}
       {/each}
