@@ -1,3 +1,4 @@
+import type { ListDrilldownLinkProps } from '$lib/components/lists/section-list/models/ListDrilldownLinkProps.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { Snippet } from 'svelte';
 import type { LimitStore } from './LimitStore.ts';
@@ -13,8 +14,7 @@ export type MediaListProps<T, M> = {
   actions?: Snippet<[T[], M]>;
   empty?: Snippet;
   metaInfo?: Snippet;
-  drilldownLink?: string;
-  noscroll?: boolean;
+  drilldown?: ListDrilldownLinkProps;
   variant?: 'portrait' | 'landscape';
   titleAction?: Snippet;
 } & FilterParams;

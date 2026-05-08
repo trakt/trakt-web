@@ -4,7 +4,6 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import CalendarButton from "./components/CalendarButton.svelte";
   import CtaItem from "./components/cta/CtaItem.svelte";
   import DrillableMediaList from "./drilldown/DrillableMediaList.svelte";
   import { useUpcomingItems } from "./stores/useUpcomingItems";
@@ -40,9 +39,5 @@
 
   {#snippet empty()}
     <CtaItem {cta} variant="placeholder" />
-  {/snippet}
-
-  {#snippet actions()}
-    <CalendarButton />
   {/snippet}
 </DrillableMediaList>

@@ -7,7 +7,4 @@ export type ListProps<T> = {
   item: Snippet<[T]>;
   ctaItem?: Snippet;
   actions?: Snippet;
-  drilldownLink?: string;
-  noscroll?: boolean;
-  replacestate?: boolean;
 };

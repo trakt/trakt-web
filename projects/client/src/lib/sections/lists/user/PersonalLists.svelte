@@ -11,7 +11,6 @@
   import CtaItem from "../components/cta/CtaItem.svelte";
   import type { Cta } from "../components/cta/models/Cta.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
-  import ViewAllButton from "../components/ViewAllButton.svelte";
   import CreateListAction from "./_internal/CreateListAction.svelte";
   import ListsHeader from "./_internal/ListsHeader.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
@@ -105,7 +104,11 @@
       id={`personal-lists-${type}-list`}
       items={$lists}
       {title}
-      drilldownLink={UrlBuilder.lists.all(slug, type)}
+      drilldown={{
+        href: UrlBuilder.lists.all(slug, type),
+        label: m.button_label_view_all_lists(),
+        source: { id: "personal-lists", type },
+      }}
       --height-list="var(--height-lists-list)"
       --height-override-list={$lists.length === 0
         ? "var(--height-poster-list-sm)"
@@ -129,13 +132,6 @@
         {#if isMine}
           <CreateListAction />
         {/if}
-
-        <ViewAllButton
-          href={UrlBuilder.lists.all(slug, type)}
-          label={m.button_label_view_all_lists()}
-          disabled={$lists.length === 0}
-          source={{ id: "personal-lists", type }}
-        />
       {/snippet}
     </SectionList>
   {/if}

@@ -4,7 +4,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import ListSummaryItem from "$lib/sections/lists/components/list-summary/ListSummaryItem.svelte";
-  import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import UserList from "$lib/sections/lists/user/UserList.svelte";
   import { MAX_LISTS } from "./_internal/constants.ts";
   import { useListSummary } from "./useListSummary.ts";
@@ -14,7 +13,7 @@
     type,
     title,
     drilldownLink,
-  }: { slug: string; type: MediaType; title: string; drilldownLink?: string } =
+  }: { slug: string; type: MediaType; title: string; drilldownLink: string } =
     $props();
 
   // Due to slow performance, we fetch the lists here instead of useMovie/useShow
@@ -35,7 +34,11 @@
     id={`popular-lists-list-${slug}`}
     items={lists}
     title={m.list_title_popular_lists()}
-    {drilldownLink}
+    drilldown={{
+      href: drilldownLink,
+      label: m.button_text_view_all(),
+      source: { id: "popular-lists" },
+    }}
     --height-list="var(--height-lists-list)"
   >
     {#snippet item(list)}
@@ -46,15 +49,6 @@
       {#if !$isLoading}
         <p>{m.list_placeholder_popular_lists({ title })}</p>
       {/if}
-    {/snippet}
-
-    {#snippet actions()}
-      <ViewAllButton
-        href={drilldownLink}
-        label={m.button_text_view_all()}
-        source={{ id: "popular-lists" }}
-        disabled={lists.length === 0}
-      />
     {/snippet}
   </SectionList>
 </RenderFor>

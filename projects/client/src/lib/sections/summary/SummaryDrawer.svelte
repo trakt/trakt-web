@@ -10,6 +10,8 @@
     summaryDrawerNavigation,
   } from "./_internal/summaryDrawerNavigation";
   import CastDrawer from "./components/cast/CastDrawer.svelte";
+  import type { CommentsProps } from "./components/comments/CommentsProps";
+  import CommentsDrawer from "./components/comments/drawers/CommentsDrawer.svelte";
   import DetailsDrawer from "./components/details/DetailsDrawer.svelte";
   import type { MediaDetailsProps } from "./components/details/MediaDetailsProps";
   import HistoryDrawer from "./components/history/HistoryDrawer.svelte";
@@ -32,9 +34,22 @@
     currentSeason?: number;
   } & MediaDetailsProps = $props();
 
-  const { drawer, close } = $derived(
+  const { drawer, close, sourceCommentId } = $derived(
     summaryDrawerNavigation(page.url.searchParams),
   );
+
+  const commentsProps = $derived.by((): CommentsProps => {
+    if (details.type === "episode") {
+      return {
+        media: details.show,
+        type: "episode",
+        season: details.episode.season,
+        episode: details.episode.number,
+        id: details.episode.id,
+      };
+    }
+    return { media: details.media, type: details.type };
+  });
 
   const mediaSlug = $derived(
     details.type === "episode" ? details.show.slug : details.media.slug,
@@ -92,4 +107,14 @@
 
 {#if drawer === SummaryDrawers.Seasons && seasons && currentSeason != null && showEntry}
   <SeasonsDrawer show={showEntry} {seasons} {currentSeason} onClose={close} />
+{/if}
+
+{#if drawer === SummaryDrawers.Comments}
+  <CommentsDrawer
+    {...commentsProps}
+    source={sourceCommentId != null
+      ? { id: sourceCommentId, isReplying: false }
+      : undefined}
+    onClose={close}
+  />
 {/if}
