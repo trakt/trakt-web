@@ -1,6 +1,7 @@
 <script lang="ts">
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import TagContent from "$lib/components/tags/TagContent.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
 
   type ProgressTagProps = {
@@ -19,7 +20,7 @@
   aria-valuenow={progress}
   aria-valuemin={0}
   aria-valuemax={total}
-  aria-label="Progress"
+  aria-label={m.tag_progress()}
 >
   <TagContent>
     <div class="tag-content">

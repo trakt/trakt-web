@@ -9,6 +9,7 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import FeatureFlagTool from "$lib/features/feature-flag/FeatureFlagTool.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { print, PrintTarget } from "$lib/utils/console/print";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useInstallPrompt } from "../stores/useInstallPrompt";
@@ -38,7 +39,7 @@
     <FeatureFlagTool />
 
     {#if $install}
-      <Link href="#" label="Install PWA" onclick={handleInstall}>
+      <Link href="#" label={m.link_text_install_pwa()} onclick={handleInstall}>
         <InstallIcon />
       </Link>
     {/if}
@@ -46,7 +47,7 @@
     <Link
       href={UrlBuilder.app.ios()}
       target="_blank"
-      label="iOS App"
+      label={m.link_text_ios_app()}
       onclick={() => trackLink("ios-app")}
     >
       <AppleIcon />
@@ -54,7 +55,7 @@
     <Link
       href={UrlBuilder.app.android()}
       target="_blank"
-      label="Android App"
+      label={m.link_text_android_app()}
       onclick={() => trackLink("android-app")}
     >
       <AndroidIcon />
@@ -65,7 +66,7 @@
     <Link
       href={UrlBuilder.github.web()}
       target="_blank"
-      label="GitHub"
+      label={m.link_text_github()}
       onclick={() => trackLink("github-web")}
     >
       <GithubIcon />
@@ -73,7 +74,7 @@
     <Link
       href={UrlBuilder.socialMedia.reddit()}
       target="_blank"
-      label="Reddit"
+      label={m.link_text_reddit()}
       onclick={() => trackLink("reddit")}
     >
       <RedditIcon />
