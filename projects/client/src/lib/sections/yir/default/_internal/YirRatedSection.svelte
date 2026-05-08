@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Link from "$lib/components/link/Link.svelte";
   import { m } from "$lib/paraglide/messages";
   import type { YirTopRatedItem } from "$lib/requests/models/YirDetail";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -46,25 +47,26 @@
     <YirPageInner>
       <div class="yir-posters">
         {#each items as item, index (item.entry.id)}
-          <a
-            href={itemUrl(item)}
-            class="yir-grid-item"
-            title={item.entry.title}
-            onmouseenter={() => {
-              activeIndex = index;
-            }}
-          >
-            <div class="yir-poster">
-              <div class="yir-corner-rating">
-                <span>{item.rating}</span>
+          <div class="yir-grid-item" title={item.entry.title}>
+            <Link
+              href={itemUrl(item)}
+              label={item.entry.title}
+              onmouseenter={() => {
+                activeIndex = index;
+              }}
+            >
+              <div class="yir-poster">
+                <div class="yir-corner-rating">
+                  <span>{item.rating}</span>
+                </div>
+                <img
+                  class="yir-poster-img"
+                  src={item.entry.poster.url.thumb}
+                  alt={item.entry.title}
+                />
               </div>
-              <img
-                class="yir-poster-img"
-                src={item.entry.poster.url.thumb}
-                alt={item.entry.title}
-              />
-            </div>
-          </a>
+            </Link>
+          </div>
         {/each}
       </div>
     </YirPageInner>
@@ -120,7 +122,11 @@
     display: inline-block;
     padding: 0;
     margin: 0;
-    text-decoration: none;
+
+    :global(.trakt-link) {
+      display: block;
+      text-decoration: none;
+    }
 
     @include for-mobile {
       width: 20%;

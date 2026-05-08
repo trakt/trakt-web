@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Link from "$lib/components/link/Link.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/paraglide/messages";
   import type { YirMostWatchedItem } from "$lib/requests/models/YirDetail";
@@ -46,19 +47,21 @@
             {m.yir_label_most_watched({ type: typeLabel })}
           </YirSectionHeader>
 
-          <a href={itemUrl(item)} class="yir-card-media">
-            <div class="yir-logo-wrapper">
-              {#if !PLACEHOLDERS.includes(item.entry.logo.url.medium)}
-                <img
-                  class="yir-card-logo"
-                  src={item.entry.logo.url.medium}
-                  alt={item.entry.title}
-                />
-              {:else}
-                <h3 class="yir-card-title">{item.entry.title}</h3>
-              {/if}
-            </div>
-          </a>
+          <div class="yir-card-media">
+            <Link href={itemUrl(item)} color="inherit">
+              <div class="yir-logo-wrapper">
+                {#if !PLACEHOLDERS.includes(item.entry.logo.url.medium)}
+                  <img
+                    class="yir-card-logo"
+                    src={item.entry.logo.url.medium}
+                    alt={item.entry.title}
+                  />
+                {:else}
+                  <h3 class="yir-card-title">{item.entry.title}</h3>
+                {/if}
+              </div>
+            </Link>
+          </div>
 
           <div class="yir-card-stats">
             <div class="yir-stat-line">
@@ -77,22 +80,24 @@
   <!-- Thumbnail grid -->
   <div class="yir-most-watched-grid">
     {#each items as item, index (item.entry.id)}
-      <a
-        href={itemUrl(item)}
-        class="yir-grid-item"
-        onmouseenter={() => {
-          activeIndex = index;
-        }}
-      >
-        <div class="yir-rank-wrapper">
-          <span class="yir-rank">{index + 1}</span>
-        </div>
-        <img
-          class="yir-grid-thumb"
-          src={item.entry.thumb.url}
-          alt={item.entry.title}
-        />
-      </a>
+      <div class="yir-grid-item">
+        <Link
+          href={itemUrl(item)}
+          onmouseenter={() => {
+            activeIndex = index;
+          }}
+          color="inherit"
+        >
+          <div class="yir-rank-wrapper">
+            <span class="yir-rank">{index + 1}</span>
+          </div>
+          <img
+            class="yir-grid-thumb"
+            src={item.entry.thumb.url}
+            alt={item.entry.title}
+          />
+        </Link>
+      </div>
     {/each}
   </div>
 </section>
@@ -150,9 +155,13 @@
   }
 
   .yir-card-media {
-    text-decoration: none;
-    color: var(--shade-10);
     margin-top: var(--ni-20);
+    color: var(--shade-10);
+
+    :global(.trakt-link) {
+      display: block;
+      text-decoration: none;
+    }
   }
 
   .yir-logo-wrapper {
@@ -215,6 +224,11 @@
           opacity: 1;
         }
       }
+    }
+
+    :global(.trakt-link) {
+      display: block;
+      text-decoration: none;
     }
 
     @include for-tablet-sm-and-below {
@@ -283,6 +297,8 @@
   }
 
   .yir-rank {
+    --rank-size: var(--ni-22);
+
     background-color: var(--shade-800);
     color: var(--shade-10);
     display: inline-block;
@@ -290,9 +306,9 @@
     font-weight: bold;
     border: var(--border-thickness-xs) solid var(--shade-10);
     border-radius: 50%;
-    height: var(--ni-22);
-    width: var(--ni-22);
-    line-height: 2.2;
+    height: var(--rank-size);
+    width: var(--rank-size);
+    line-height: var(--rank-size);
   }
 
   .yir-grid-thumb {

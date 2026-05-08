@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Link from "$lib/components/link/Link.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { useQuery } from "$lib/features/query/useQuery";
   import { m } from "$lib/paraglide/messages";
@@ -39,18 +40,20 @@
     <div class="yir-titles">
       {#if $profile}
         <div class="yir-user">
-          <a href={UrlBuilder.profile.user(slug)} class="yir-avatar-link">
-            <div class="yir-avatar">
-              <CrossOriginImage
-                src={$profile.avatar.url}
-                alt={$profile.name.full ?? slug}
-              />
-            </div>
-          </a>
+          <span class="yir-avatar-link">
+            <Link href={UrlBuilder.profile.user(slug)} color="inherit">
+              <div class="yir-avatar">
+                <CrossOriginImage
+                  src={$profile.avatar.url}
+                  alt={$profile.name.full ?? slug}
+                />
+              </div>
+            </Link>
+          </span>
           <span class="yir-display-name">
-            <a href={UrlBuilder.profile.user(slug)}>
+            <Link href={UrlBuilder.profile.user(slug)} color="inherit">
               {$profile.name.full || $profile.username}
-            </a>
+            </Link>
           </span>
         </div>
         <div class="yir-under-user"></div>
@@ -119,6 +122,11 @@
   .yir-avatar-link {
     display: flex;
     flex-shrink: 0;
+
+    :global(.trakt-link) {
+      display: flex;
+      text-decoration: none;
+    }
   }
 
   .yir-avatar {
@@ -146,7 +154,7 @@
     display: inline-block;
     font-size: var(--ni-24);
 
-    a {
+    :global(.trakt-link) {
       color: var(--shade-10);
       text-decoration: none;
     }
