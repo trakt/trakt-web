@@ -13,6 +13,10 @@ const exemptions: Exemption[] = [
     errorType: WellKnownErrorType.LockedAccountError,
     routes: new Set([UrlBuilder.settings.advanced()]),
   },
+  {
+    errorType: WellKnownErrorType.ServerError,
+    routes: new Set([UrlBuilder.settings.advanced()]),
+  },
 ];
 
 export function isErrorExempt(
