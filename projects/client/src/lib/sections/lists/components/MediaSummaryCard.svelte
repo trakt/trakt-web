@@ -82,7 +82,7 @@
       const posterOverride = "coverUrl" in rest ? rest.coverUrl : undefined;
 
       return {
-        background: episodeCover,
+        background: !isCompact ? episodeCover : undefined,
         poster: posterOverride ?? media.poster.url.thumb,
         title: rest.episode.title,
       };
@@ -152,7 +152,7 @@
   --poster-aspect-ratio="0.6667"
 >
   {#if popupActions}
-    <CardActionBar>
+    <CardActionBar variant={isCompact ? "standalone" : "default"}>
       {#snippet actions()}
         <PopupMenu
           label={m.button_label_popup_menu({ title: media.title })}
@@ -166,10 +166,12 @@
     </CardActionBar>
   {/if}
 
-  <SummaryCardBackgroundImage
-    src={coverData.background}
-    alt={`Background for ${coverData.title}`}
-  />
+  {#if coverData.background}
+    <SummaryCardBackgroundImage
+      src={coverData.background}
+      alt={`Background for ${coverData.title}`}
+    />
+  {/if}
 
   <Link
     {href}
@@ -365,15 +367,26 @@
 
   :global(.trakt-summary-card-compact) {
     .trakt-card-title {
-      font-size: var(--font-size-title);
+      font-size: var(--font-size-text);
     }
 
     .trakt-summary-poster {
+      --padding-compact-poster: calc(
+        (
+            var(--height-summary-card-compact) - var(
+                --height-summary-card-cover-compact
+              )
+          ) *
+          0.5
+      );
       --poster-width: calc(
         var(--height-summary-card-cover-compact) * var(--poster-aspect-ratio)
       );
 
-      height: var(--height-summary-card-cover-compact);
+      padding: var(--padding-compact-poster);
+      box-sizing: border-box;
+
+      height: var(--height-summary-card-compact);
     }
   }
 </style>

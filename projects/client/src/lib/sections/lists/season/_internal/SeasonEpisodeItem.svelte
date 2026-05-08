@@ -19,7 +19,6 @@
     isWatchedLoading: boolean;
     style?: BaseItemProps["style"];
     source: string;
-    coverUrl?: string;
   };
 
   const {
@@ -31,7 +30,6 @@
     isWatchedLoading,
     style,
     source,
-    coverUrl,
   }: SeasonEpisodeItemProps = $props();
 
   const isFuture = $derived(episode.effectiveReleaseDate > new Date());
@@ -82,7 +80,6 @@
   {episode}
   media={show}
   {style}
-  {coverUrl}
   popupActions={isActionable ? popupActions : undefined}
   variant={isFuture ? "upcoming" : "default"}
   context="show"

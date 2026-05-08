@@ -2,11 +2,16 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
 
-  const { actions }: { actions: Snippet } = $props();
+  type CardActionBarProps = {
+    actions: Snippet;
+    variant?: "default" | "standalone";
+  };
+
+  const { actions, variant = "default" }: CardActionBarProps = $props();
 </script>
 
 <RenderFor audience="authenticated">
-  <div class="trakt-card-action-bar">
+  <div class="trakt-card-action-bar" data-variant={variant}>
     {@render actions()}
   </div>
 </RenderFor>
@@ -25,23 +30,25 @@
 
     pointer-events: none;
 
-    &::before {
-      content: "";
+    &[data-variant="default"] {
+      &::before {
+        content: "";
 
-      width: var(--height-action-bar);
-      height: var(--height-action-bar);
+        width: var(--height-action-bar);
+        height: var(--height-action-bar);
 
-      position: absolute;
-      top: 0;
-      right: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
 
-      border-top-right-radius: var(--border-radius-m);
+        border-top-right-radius: var(--border-radius-m);
 
-      background-image: radial-gradient(
-        circle at top right,
-        color-mix(in srgb, var(--color-shadow) 30%, transparent) 15%,
-        transparent 65%
-      );
+        background-image: radial-gradient(
+          circle at top right,
+          color-mix(in srgb, var(--color-shadow) 30%, transparent) 15%,
+          transparent 65%
+        );
+      }
     }
 
     :global(.trakt-popup-menu-button) {
