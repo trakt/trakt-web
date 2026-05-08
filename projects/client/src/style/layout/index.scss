@@ -244,8 +244,8 @@
   --font-size-text: var(--ni-14);
 
   --width-summary-card-compact: 100%;
-  --height-summary-card-cover-compact: var(--ni-112);
-  --height-summary-card-compact: var(--height-summary-card-cover-compact);
+  --height-summary-card-cover-compact: var(--ni-88);
+  --height-summary-card-compact: var(--ni-96);
 
   @include for-tablet-sm-and-below {
     --width-summary-card: var(--width-summary-card-compact);

@@ -50,10 +50,6 @@
     seasons.filter((s) => s.number > 0 && s.number < currentSeason),
   );
 
-  const seasonPosterUrl = $derived(
-    seasons.find((s) => s.number === currentSeason)?.poster?.url.thumb,
-  );
-
   const buildSeasonLink = (seasonNumber: number) => {
     const url = new URL(page.url);
     url.searchParams.set("season", String(seasonNumber));
@@ -124,7 +120,6 @@
                 {hasUnseenEpisodes}
                 watchedBySeason={$watchedBySeason}
                 isWatchedLoading={$isWatchedLoading}
-                coverUrl={seasonPosterUrl}
                 style="compact"
                 source="seasons-drawer"
               />
@@ -180,6 +175,10 @@
     :global(.trakt-list-items) {
       grid-template-columns: 1fr;
       grid-row-gap: var(--gap-s);
+    }
+
+    :global(.trakt-summary-card-compact) {
+      --poster-aspect-ratio: 1.778;
     }
 
     :global(.trakt-list-inset-title) {

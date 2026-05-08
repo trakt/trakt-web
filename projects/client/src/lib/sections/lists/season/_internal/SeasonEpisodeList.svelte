@@ -22,7 +22,6 @@
     title?: string;
     headerActions?: Snippet;
     subtitle?: string;
-    coverUrl?: string;
   };
 
   const {
@@ -32,7 +31,6 @@
     title,
     subtitle,
     headerActions,
-    coverUrl,
   }: SeasonEpisodeListProps = $props();
 
   const { history } = useUser();
@@ -71,7 +69,6 @@
       {hasUnseenEpisodes}
       watchedBySeason={$watchedBySeason}
       isWatchedLoading={$isWatchedLoading}
-      {coverUrl}
       source="season-episode-list"
     />
   {/snippet}
