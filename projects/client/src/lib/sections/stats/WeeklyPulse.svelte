@@ -6,7 +6,6 @@
     dashboardDrawerNavigation,
     DashboardDrawers,
   } from "../dashboard/_internal/dashboardDrawerNavigation";
-  import ViewAllButton from "../lists/components/ViewAllButton.svelte";
   import PulseCell from "./_internal/PulseCell.svelte";
   import PulseGraph from "./_internal/PulseGraph.svelte";
   import { useWeeklyPulse } from "./_internal/useWeeklyPulse";
@@ -30,9 +29,11 @@
     id="weekly-pulse"
     items={orderedItems}
     title={m.header_stats_this_week()}
-    drilldownLink={weeklyPulseDrawerLink.href}
-    noscroll={weeklyPulseDrawerLink.noscroll}
-    replacestate={weeklyPulseDrawerLink.replacestate}
+    drilldown={{
+      ...weeklyPulseDrawerLink,
+      source: { id: "weekly-pulse" },
+      label: m.button_text_view_all(),
+    }}
     --height-list="var(--height-pulse-list)"
   >
     {#snippet metaInfo()}
@@ -62,15 +63,6 @@
           <SkeletonList id="weekly-pulse" variant="portrait" />
         </div>
       {/if}
-    {/snippet}
-
-    {#snippet actions()}
-      <ViewAllButton
-        {...weeklyPulseDrawerLink}
-        label={m.button_text_view_all()}
-        disabled={$items.length === 0}
-        source={{ id: "weekly-pulse" }}
-      />
     {/snippet}
   </SectionList>
 {/if}

@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
-  import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import CommentCard from "$lib/sections/summary/components/comments/CommentCard.svelte";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import AddCommentAction from "./_internal/comment-actions/AddCommentAction.svelte";
@@ -13,7 +14,6 @@
   import { useComments } from "./_internal/useComments";
   import type { CommentsProps } from "./CommentsProps";
   import AddReviewDrawer from "./drawers/AddReviewDrawer.svelte";
-  import CommentsDrawer from "./drawers/CommentsDrawer.svelte";
 
   const { media, ...props }: CommentsProps = $props();
 
@@ -27,17 +27,17 @@
     }),
   );
 
-  const drilldownSource = writable<ActiveComment | undefined>(undefined);
-
-  const isOpen = writable(false);
-  const onClose = () => isOpen.set(false);
+  const { buildCommentsDrawerLink } = summaryDrawerNavigation();
 
   const isPostReviewOpen = writable(false);
   const onClosePostReview = () => isPostReviewOpen.set(false);
 
   const onDrilldown = (comment?: ActiveComment) => {
-    isOpen.set(true);
-    drilldownSource.set(comment);
+    const link = buildCommentsDrawerLink(comment?.id);
+    goto(link.href, {
+      noScroll: link.noscroll,
+      replaceState: link.replacestate,
+    });
   };
 </script>
 
@@ -52,6 +52,11 @@
     title={m.list_title_comments()}
     --height-list="var(--height-comments-list)"
     {metaInfo}
+    drilldown={{
+      ...buildCommentsDrawerLink(),
+      label: m.button_label_view_all_comments(),
+      source: { id: "comments" },
+    }}
   >
     {#snippet item(comment)}
       <CommentCard {comment} {media} {onDrilldown} {...props} />
@@ -67,7 +72,6 @@
       <Toggler
         value={$sortType.value}
         onChange={(value) => {
-          drilldownSource.set(undefined);
           set(value);
         }}
         {options}
@@ -77,12 +81,6 @@
         onclick={() => {
           isPostReviewOpen.set(true);
         }}
-      />
-
-      <ViewAllButton
-        label={m.button_label_view_all_comments()}
-        onclick={() => onDrilldown()}
-        source={{ id: "comments" }}
       />
     {/snippet}
   </SectionList>
@@ -95,9 +93,5 @@
       {media}
       {...props}
     />
-  {/if}
-
-  {#if $isOpen}
-    <CommentsDrawer {onClose} source={$drilldownSource} {media} {...props} />
   {/if}
 </RenderFor>

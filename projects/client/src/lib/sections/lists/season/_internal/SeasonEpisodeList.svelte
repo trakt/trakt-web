@@ -12,7 +12,6 @@
   } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import type { Snippet } from "svelte";
-  import ViewAllButton from "../../components/ViewAllButton.svelte";
   import SeasonEpisodeItem from "./SeasonEpisodeItem.svelte";
   import { useShowWatchedEpisodes } from "./useShowWatchedEpisodes";
 
@@ -58,9 +57,11 @@
   {title}
   {subtitle}
   --height-list={mediaListHeightResolver("landscape")}
-  drilldownLink={seasonDrawerLink.href}
-  noscroll={seasonDrawerLink.noscroll}
-  replacestate={seasonDrawerLink.replacestate}
+  drilldown={{
+    ...seasonDrawerLink,
+    source: { id: "seasons" },
+    label: m.button_text_view_all(),
+  }}
 >
   {#snippet item(episode)}
     <SeasonEpisodeItem
@@ -79,12 +80,5 @@
     {#if headerActions}
       {@render headerActions()}
     {/if}
-
-    <ViewAllButton
-      {...seasonDrawerLink}
-      label={m.button_text_view_all()}
-      noscroll
-      source={{ id: "seasons" }}
-    />
   {/snippet}
 </SectionList>

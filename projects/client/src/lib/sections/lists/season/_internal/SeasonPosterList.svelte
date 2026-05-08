@@ -10,7 +10,6 @@
     summaryDrawerNavigation,
   } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import ViewAllButton from "../../components/ViewAllButton.svelte";
   import SeasonPopupMenu from "./SeasonPopupMenu.svelte";
 
   type SeasonListProps = {
@@ -39,6 +38,11 @@
   {subtitle}
   id={`season-poster-list-${show.slug}`}
   items={seasons}
+  drilldown={{
+    ...buildDrawerLink(SummaryDrawers.Seasons),
+    source: { id: "seasons" },
+    label: m.button_text_view_all(),
+  }}
   --height-list="var(--height-poster-list-sm)"
   --height-override-card="var(--height-portrait-card-sm)"
 >
@@ -52,12 +56,5 @@
   {/snippet}
   {#snippet actions()}
     <SeasonPopupMenu title={subtitle} {episodes} {show} />
-
-    <ViewAllButton
-      {...buildDrawerLink(SummaryDrawers.Seasons)}
-      label={m.button_text_view_all()}
-      noscroll
-      source={{ id: "seasons" }}
-    />
   {/snippet}
 </SectionList>
