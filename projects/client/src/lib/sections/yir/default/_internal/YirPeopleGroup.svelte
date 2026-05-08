@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Link from "$lib/components/link/Link.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import { m } from "$lib/paraglide/messages";
   import type {
@@ -132,36 +133,40 @@
                 </div>
               {/each}
             {/snippet}
-            <a href={personUrl(person)} class="yir-person-link">
-              <div class="yir-person">
-                <span class="yir-rank">{index + 1}</span>
-                <div class="yir-headshot">
-                  <img
-                    src={isDefault ? DEFAULT_AVATAR : person.headshot.url.thumb}
-                    alt={person.name}
-                    class="yir-headshot-img"
-                    class:is-default={isDefault}
-                  />
+            <div class="yir-person-link">
+              <Link href={personUrl(person)}>
+                <div class="yir-person">
+                  <span class="yir-rank">{index + 1}</span>
+                  <div class="yir-headshot">
+                    <img
+                      src={isDefault
+                        ? DEFAULT_AVATAR
+                        : person.headshot.url.thumb}
+                      alt={person.name}
+                      class="yir-headshot-img"
+                      class:is-default={isDefault}
+                    />
+                  </div>
+                  <h2 class="yir-person-name">{person.name}</h2>
+                  <h3 class="yir-person-count">
+                    {#if person.count.movies > 0}
+                      {person.count.movies}
+                      {person.count.movies === 1 ? "movie" : "movies"}
+                    {:else}
+                      &nbsp;
+                    {/if}
+                  </h3>
+                  <h3 class="yir-person-count">
+                    {#if person.count.shows > 0}
+                      {person.count.shows}
+                      {person.count.shows === 1 ? "show" : "shows"}
+                    {:else}
+                      &nbsp;
+                    {/if}
+                  </h3>
                 </div>
-                <h2 class="yir-person-name">{person.name}</h2>
-                <h3 class="yir-person-count">
-                  {#if person.count.movies > 0}
-                    {person.count.movies}
-                    {person.count.movies === 1 ? "movie" : "movies"}
-                  {:else}
-                    &nbsp;
-                  {/if}
-                </h3>
-                <h3 class="yir-person-count">
-                  {#if person.count.shows > 0}
-                    {person.count.shows}
-                    {person.count.shows === 1 ? "show" : "shows"}
-                  {:else}
-                    &nbsp;
-                  {/if}
-                </h3>
-              </div>
-            </a>
+              </Link>
+            </div>
           </Tooltip>
         {/each}
       </div>
@@ -253,9 +258,13 @@
   }
 
   .yir-person-link {
-    text-decoration: none;
-    color: var(--shade-10);
     width: 100%;
+
+    :global(.trakt-link) {
+      display: block;
+      text-decoration: none;
+      color: var(--shade-10);
+    }
 
     @include for-mouse {
       &:hover {
