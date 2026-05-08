@@ -20,8 +20,7 @@
     filter,
     filterOverride,
     metaInfo,
-    drilldownLink,
-    noscroll,
+    drilldown,
     variant: externalVariant,
     titleAction,
   }: MediaListProps<T, M> = $props();
@@ -54,8 +53,7 @@
   {item}
   {title}
   {metaInfo}
-  {drilldownLink}
-  {noscroll}
+  {drilldown}
   {titleAction}
   actions={externalActions ? actions : undefined}
   --height-list={height}

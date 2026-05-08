@@ -3,6 +3,7 @@
   import Crossfade from "$lib/components/Crossfade.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
+  import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
@@ -14,6 +15,7 @@
   import { useCollapsedList } from "./_internal/useCollapsedList";
   import CollapseIcon from "./CollapseIcon.svelte";
   import type { ListVariant } from "./ListVariant";
+  import type { ListDrilldownLinkProps } from "./models/ListDrilldownLinkProps";
 
   const emptyStateClass = "section-list-empty-state";
   const ctaCutOff = 4;
@@ -26,6 +28,7 @@
     subtitle?: string;
     variant?: ListVariant;
     titleAction?: Snippet;
+    drilldown?: ListDrilldownLinkProps;
   };
 
   const {
@@ -36,10 +39,8 @@
     ctaItem,
     empty,
     metaInfo,
-    actions,
-    drilldownLink,
-    noscroll,
-    replacestate,
+    actions: _externalActions,
+    drilldown,
     headerNavigationType,
     subtitle,
     variant = "default",
@@ -85,13 +86,28 @@
   {/if}
 {/snippet}
 
+{#snippet actions()}
+  {@render _externalActions?.()}
+
+  {#if drilldown}
+    <ViewAllButton
+      href={drilldown.href}
+      label={drilldown.label}
+      disabled={items.length === 0}
+      source={drilldown.source}
+      noscroll={drilldown.noscroll}
+      replacestate={drilldown.replacestate}
+    />
+  {/if}
+{/snippet}
+
 <section
   use:whenInViewport={() => isVisible.set(true)}
   class="section-list-container"
   class:section-list-container-collapsed={isCollapsed}
   class:section-list-container-mounted={$isMounted}
   class:section-list-container-no-header={!isHeaderVisible}
-  class:section-list-has-drilldown={Boolean(drilldownLink)}
+  class:section-list-has-drilldown={Boolean(drilldown)}
   class:section-list-has-multiple-items={items.length > 1}
   data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
   data-variant={variant}
@@ -103,11 +119,11 @@
         {subtitle}
         {titleAction}
         {metaInfo}
-        {noscroll}
-        {replacestate}
         actions={isCollapsed ? undefined : actions}
         navigationType={headerNavigationType}
-        href={drilldownLink}
+        href={drilldown?.href}
+        replacestate={drilldown?.replacestate}
+        noscroll={drilldown?.noscroll}
       />
     {/if}
     <div class="section-list">

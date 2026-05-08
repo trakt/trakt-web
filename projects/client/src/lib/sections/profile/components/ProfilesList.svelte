@@ -6,7 +6,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
-  import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useFollowing } from "../stores/useFollowing";
   import ProfileItem from "./ProfileItem.svelte";
@@ -39,7 +38,11 @@
     items={$profiles}
     title={m.list_title_social()}
     --height-list="var(--height-profile-list)"
-    drilldownLink={UrlBuilder.profile.social(slug)}
+    drilldown={{
+      href: UrlBuilder.profile.social(slug),
+      label: m.button_label_view_all_social(),
+      source: { id: "social" },
+    }}
     {metaInfo}
   >
     {#snippet empty()}
@@ -58,13 +61,6 @@
 
     {#snippet actions()}
       <Toggler value={$current.value} onChange={set} {options} />
-
-      <ViewAllButton
-        href={UrlBuilder.profile.social(slug)}
-        label={m.button_label_view_all_social()}
-        disabled={$profiles.length === 0}
-        source={{ id: "social" }}
-      />
     {/snippet}
   </SectionList>
 </div>

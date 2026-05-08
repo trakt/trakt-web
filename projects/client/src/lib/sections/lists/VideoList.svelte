@@ -9,7 +9,6 @@
   } from "../summary/_internal/summaryDrawerNavigation";
   import VideoItem from "./components/VideoItem.svelte";
   import VideoTypeDropdown from "./components/VideoTypeDropdown.svelte";
-  import ViewAllButton from "./components/ViewAllButton.svelte";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
   import { useVideoTypes } from "./utils/useVideoTypes";
 
@@ -32,9 +31,11 @@
     id={`video-list-${slug}`}
     {items}
     title={m.list_title_extras()}
-    drilldownLink={videosDrawerLink.href}
-    noscroll={videosDrawerLink.noscroll}
-    replacestate={videosDrawerLink.replacestate}
+    drilldown={{
+      ...videosDrawerLink,
+      source: { id: "videos" },
+      label: m.button_text_view_all(),
+    }}
     --height-list={mediaListHeightResolver("landscape")}
     headerNavigationType={DpadNavigationType.List}
   >
@@ -47,13 +48,6 @@
         {types}
         active={$active}
         onchange={(type) => active.set(type)}
-      />
-
-      <ViewAllButton
-        {...videosDrawerLink}
-        label={m.button_text_view_all()}
-        source={{ id: "videos" }}
-        disabled={videos.length === 0}
       />
     {/snippet}
   </SectionList>

@@ -1,7 +1,6 @@
 <script lang="ts" generics="T extends { key: string }, M">
   import type { Snippet } from "svelte";
   import type { DrilldownSource } from "../components/models/DrilldownSource";
-  import ViewAllButton from "../components/ViewAllButton.svelte";
   import type { DrillListProps } from "./DrillListProps";
   import MediaList from "./MediaList.svelte";
   import type { MediaListProps } from "./MediaListProps";
@@ -24,19 +23,21 @@
     ...props
   }: DrillableList<T, M> = $props();
 
-  const href = $derived(urlBuilder({ type: props.type, ...props.filter }));
+  const drilldown = $derived.by(() => {
+    if (props.filterOverride) {
+      return undefined;
+    }
+
+    return {
+      href: urlBuilder({ type: props.type, ...props.filter }),
+      label: drilldownLabel,
+      source,
+    };
+  });
 </script>
 
-<MediaList {...props} drilldownLink={href} {titleAction}>
+<MediaList {...props} {drilldown} {titleAction}>
   {#snippet actions(items)}
     {@render externalActions?.(items, props.type)}
-    {#if !props.filterOverride}
-      <ViewAllButton
-        {href}
-        label={drilldownLabel}
-        disabled={items.length === 0}
-        {source}
-      />
-    {/if}
   {/snippet}
 </MediaList>

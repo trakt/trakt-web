@@ -8,7 +8,6 @@
     summaryDrawerNavigation,
   } from "../summary/_internal/summaryDrawerNavigation";
   import CastMemberItem from "./components/CastMemberItem.svelte";
-  import ViewAllButton from "./components/ViewAllButton.svelte";
 
   type CastListProps = {
     title: string;
@@ -27,22 +26,14 @@
   id={`cast-list-${slug}`}
   items={cast}
   {title}
-  drilldownLink={castDrawerLink.href}
-  noscroll={castDrawerLink.noscroll}
-  replacestate={castDrawerLink.replacestate}
+  drilldown={{
+    ...castDrawerLink,
+    source: { id: "social" },
+    label: m.button_text_view_all(),
+  }}
   --height-list="var(--height-person-list)"
 >
   {#snippet item(castMember)}
     <CastMemberItem {castMember} {type} />
-  {/snippet}
-
-  {#snippet actions()}
-    <ViewAllButton
-      {...castDrawerLink}
-      label={m.button_text_view_all()}
-      noscroll
-      disabled={cast.length === 0}
-      source={{ id: "social" }}
-    />
   {/snippet}
 </SectionList>

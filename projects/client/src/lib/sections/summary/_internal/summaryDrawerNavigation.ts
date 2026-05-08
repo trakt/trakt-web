@@ -11,7 +11,14 @@ export enum SummaryDrawers {
   WhereToWatch = 'where-to-watch',
   Seasons = 'seasons',
   Notes = 'notes',
+  Comments = 'comments',
 }
+
+const commentIdParam = 'comment_id';
+
+const summaryDrawerParams = {
+  [SummaryDrawers.Comments]: { [commentIdParam]: '' },
+} satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
 
 function mapToDrawer(value: string | Nil) {
   switch (value) {
@@ -33,16 +40,28 @@ function mapToDrawer(value: string | Nil) {
       return SummaryDrawers.Seasons;
     case SummaryDrawers.Notes:
       return SummaryDrawers.Notes;
+    case SummaryDrawers.Comments:
+      return SummaryDrawers.Comments;
     default:
       return null;
   }
 }
 
 export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
+  const { buildDrawerLink, close } = drawerNavigation(summaryDrawerParams);
   const drawer = mapToDrawer(searchParams?.get(DRAWER_VIEW_PARAM));
+  const commentId = searchParams?.get(commentIdParam);
+  const sourceCommentId = commentId != null ? Number(commentId) : undefined;
 
   return {
     drawer,
-    ...drawerNavigation<SummaryDrawers>(),
+    sourceCommentId,
+    close,
+    buildDrawerLink,
+    buildCommentsDrawerLink: (id?: number) =>
+      buildDrawerLink(
+        SummaryDrawers.Comments,
+        id != null ? { [commentIdParam]: String(id) } : undefined,
+      ),
   };
 }

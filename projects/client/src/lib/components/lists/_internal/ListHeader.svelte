@@ -63,7 +63,13 @@
             {metaInfo}
             style="secondary"
           />
-          <ListTitle title={`/ ${subtitle}`} style="primary" />
+          <ListTitle
+            title={`/ ${subtitle}`}
+            style="primary"
+            {href}
+            {noscroll}
+            {replacestate}
+          />
         {/if}
 
         {#if actions}

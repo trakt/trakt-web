@@ -4,7 +4,6 @@
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
   import { m } from "$lib/features/i18n/messages.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
-  import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import { profileDrawerNavigation } from "../_internal/profileDrawerNavigation.ts";
   import ActivityCommentItem from "./_internal/ActivityCommentItem.svelte";
   import {
@@ -36,6 +35,11 @@
   title={m.list_title_activity()}
   {metaInfo}
   --height-list="var(--height-comments-list)"
+  drilldown={{
+    ...buildDrawerLink(),
+    label: m.button_label_view_all_activity(),
+    source: { id: "activity" },
+  }}
 >
   {#snippet item(entry: ActivityEntry)}
     {#if entry.activityType === "reviews"}
@@ -52,13 +56,5 @@
         {m.list_placeholder_reviews()}
       </p>
     {/if}
-  {/snippet}
-
-  {#snippet actions()}
-    <ViewAllButton
-      label={m.button_label_view_all_activity()}
-      onclick={() => navigateToActivityDrawer()}
-      source={{ id: "activity" }}
-    />
   {/snippet}
 </SectionList>
