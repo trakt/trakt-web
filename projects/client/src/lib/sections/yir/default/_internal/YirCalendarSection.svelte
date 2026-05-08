@@ -1,5 +1,6 @@
 <script lang="ts">
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/paraglide/messages";
   import type { YirWatchedItem } from "$lib/requests/models/YirDetail";
@@ -27,6 +28,8 @@
   );
 
   const itemUrl = $derived(UrlBuilder.media(item.entry.type, item.entry.slug));
+  const logoUrl = $derived(item.entry.logo.url.medium);
+  const hasLogo = $derived(!PLACEHOLDERS.includes(logoUrl));
 
   const headerText = $derived(
     how === "first"
@@ -47,23 +50,25 @@
       {headerText}
     </YirSectionHeader>
 
-    <a href={itemUrl} class="yir-calendar-media">
-      {#if !PLACEHOLDERS.includes(item.entry.logo.url.medium)}
-        <div class="yir-logo-wrapper">
-          <img
-            class="yir-calendar-logo"
-            src={item.entry.logo.url.medium}
-            alt={item.entry.title}
-          />
-        </div>
-      {:else}
-        <h3 class="yir-calendar-title">{item.entry.title}</h3>
-      {/if}
+    <div class="yir-calendar-media">
+      <Link href={itemUrl}>
+        {#if hasLogo}
+          <div class="yir-logo-wrapper">
+            <img
+              class="yir-calendar-logo"
+              src={logoUrl}
+              alt={item.entry.title}
+            />
+          </div>
+        {:else}
+          <h3 class="yir-calendar-title">{item.entry.title}</h3>
+        {/if}
 
-      {#if item.type === "episode"}
-        <h4 class="yir-calendar-episode">{item.episode.title}</h4>
-      {/if}
-    </a>
+        {#if item.type === "episode"}
+          <h4 class="yir-calendar-episode">{item.episode.title}</h4>
+        {/if}
+      </Link>
+    </div>
 
     <div class="yir-calendar-date">
       <span class="yir-calendar-icon"><CalendarIcon /></span>
@@ -107,9 +112,11 @@
   }
 
   .yir-calendar-media {
-    display: block;
-    text-decoration: none;
-    color: var(--shade-10);
+    :global(.trakt-link) {
+      display: block;
+      text-decoration: none;
+      color: var(--shade-10);
+    }
   }
 
   .yir-logo-wrapper {
