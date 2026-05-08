@@ -12,13 +12,21 @@ type MapHistoryToSlotsParams = {
 export function buildHistorySlots(
   { now, list }: MapHistoryToSlotsParams,
 ): SlottedEntry[] {
-  if (list.length === 0) return [];
+  // FIXME: find the root cause of duplicates
+  const seen = new Set<string>();
+  const uniqueList = list.filter((entry) => {
+    if (seen.has(entry.key)) return false;
+    seen.add(entry.key);
+    return true;
+  });
 
-  const first = assertDefined(list.at(0));
-  const last = assertDefined(list.at(-1));
+  if (uniqueList.length === 0) return [];
 
-  const entrySlots = list.slice(0, -1).map((entry, i): SlottedEntry => {
-    const nextEntry = assertDefined(list.at(i + 1));
+  const first = assertDefined(uniqueList.at(0));
+  const last = assertDefined(uniqueList.at(-1));
+
+  const entrySlots = uniqueList.slice(0, -1).map((entry, i): SlottedEntry => {
+    const nextEntry = assertDefined(uniqueList.at(i + 1));
     return {
       key: getSlotKey(entry, nextEntry),
       startDate: entry.watchedAt,
