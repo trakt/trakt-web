@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { Season } from "$lib/requests/models/Season";
@@ -42,6 +43,15 @@
   );
 
   const isActionable = $derived(isWatchable || hasBulkMarkAsWatched);
+  const variant = $derived(isFuture ? "upcoming" : "default");
+
+  const src = $derived(
+    useEpisodeSpoilerImage({
+      episode,
+      show,
+      variant,
+    }),
+  );
 </script>
 
 {#snippet popupActions()}
@@ -84,4 +94,5 @@
   variant={isFuture ? "upcoming" : "default"}
   context="show"
   {source}
+  coverUrl={$src}
 />
