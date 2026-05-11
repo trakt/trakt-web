@@ -29,26 +29,26 @@
   </div>
 
   {#snippet footer()}
+    <Button
+      size="small"
+      style="ghost"
+      color="default"
+      label={m.button_text_cancel()}
+      onclick={() => onAction("cancel")}
+    >
+      {m.button_text_cancel()}
+    </Button>
     <div class={operation === "destructive" ? "destructive-action" : "affirmative-action"} style="display: contents;">
       <Button
         size="small"
         variant="primary"
         color="custom"
-        label={m.button_text_cancel()}
-        onclick={() => onAction("cancel")}
+        label={buttonText}
+        onclick={() => onAction("confirm")}
       >
-        {m.button_text_cancel()}
+        {buttonText}
       </Button>
     </div>
-    <Button
-      size="small"
-      style="ghost"
-      color="default"
-      label={buttonText}
-      onclick={() => onAction("confirm")}
-    >
-      {buttonText}
-    </Button>
   {/snippet}
 </Modal>
 
