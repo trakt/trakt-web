@@ -20,7 +20,7 @@
   aria-valuenow={progress}
   aria-valuemin={0}
   aria-valuemax={total}
-  aria-label={m.tag_progress()}
+  aria-label={m.tag_label_progress()}
 >
   <TagContent>
     <div class="tag-content">

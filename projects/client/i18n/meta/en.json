@@ -10984,35 +10984,53 @@
         "ios"
       ]
     },
-    "tag_progress": {
+    "tag_label_progress": {
       "default": "Progress",
       "description": "Label for the progress bar.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
-    "link_text_install_pwa": {
+    "link_label_install_pwa": {
       "default": "Install PWA",
       "description": "Text for the link to the install PWA page.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
-    "link_text_reddit": {
+    "link_label_reddit": {
       "default": "Reddit",
       "description": "Text for the link to the Trakt Reddit page.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
-    "link_text_github": {
+    "link_label_github": {
       "default": "GitHub",
       "description": "Text for the link to the Trakt GitHub page.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
-    "link_text_ios_app": {
+    "link_label_ios_app": {
       "default": "iOS App",
       "description": "Text for the link to the Trakt iOS app page.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
-    "link_text_android_app": {
+    "link_label_android_app": {
       "default": "Android App",
       "description": "Text for the link to the Trakt Android app page.",
-      "exclude": []
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

@@ -39,7 +39,7 @@
     <FeatureFlagTool />
 
     {#if $install}
-      <Link href="#" label={m.link_text_install_pwa()} onclick={handleInstall}>
+      <Link href="#" label={m.link_label_install_pwa()} onclick={handleInstall}>
         <InstallIcon />
       </Link>
     {/if}
@@ -47,7 +47,7 @@
     <Link
       href={UrlBuilder.app.ios()}
       target="_blank"
-      label={m.link_text_ios_app()}
+      label={m.link_label_ios_app()}
       onclick={() => trackLink("ios-app")}
     >
       <AppleIcon />
@@ -55,7 +55,7 @@
     <Link
       href={UrlBuilder.app.android()}
       target="_blank"
-      label={m.link_text_android_app()}
+      label={m.link_label_android_app()}
       onclick={() => trackLink("android-app")}
     >
       <AndroidIcon />
@@ -66,7 +66,7 @@
     <Link
       href={UrlBuilder.github.web()}
       target="_blank"
-      label={m.link_text_github()}
+      label={m.link_label_github()}
       onclick={() => trackLink("github-web")}
     >
       <GithubIcon />
@@ -74,7 +74,7 @@
     <Link
       href={UrlBuilder.socialMedia.reddit()}
       target="_blank"
-      label={m.link_text_reddit()}
+      label={m.link_label_reddit()}
       onclick={() => trackLink("reddit")}
     >
       <RedditIcon />
