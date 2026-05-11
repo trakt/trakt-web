@@ -244,6 +244,9 @@ export const UrlBuilder = {
   },
   socialMedia: {
     reddit: () => 'https://www.reddit.com/r/trakt',
+    instagram: () => 'https://www.instagram.com/trakt.tv',
+    x: () => 'https://x.com/trakt',
+    tiktok: () => 'https://www.tiktok.com/@trakt.tv',
   },
   vip: () => '/vip',
   terms: () => '/terms',

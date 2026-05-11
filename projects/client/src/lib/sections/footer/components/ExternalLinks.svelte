@@ -34,47 +34,45 @@
 </script>
 
 <div class="trakt-external-links">
-  <div class="trakt-app-links">
-    <FeatureFlagTool />
+  <FeatureFlagTool />
 
-    {#if $install}
-      <Link href="#" onclick={handleInstall}>
-        <InstallIcon />
-      </Link>
-    {/if}
+  {#if $install}
+    <Link href="#" onclick={handleInstall}>
+      <InstallIcon />
+    </Link>
+  {/if}
 
-    <Link
-      href={UrlBuilder.app.ios()}
-      target="_blank"
-      onclick={() => trackLink("ios-app")}
-    >
-      <AppleIcon />
-    </Link>
-    <Link
-      href={UrlBuilder.app.android()}
-      target="_blank"
-      onclick={() => trackLink("android-app")}
-    >
-      <AndroidIcon />
-    </Link>
-  </div>
+  <Link
+    href={UrlBuilder.app.ios()}
+    target="_blank"
+    onclick={() => trackLink("ios-app")}
+  >
+    <AppleIcon />
+  </Link>
 
-  <div class="trakt-footer-links">
-    <Link
-      href={UrlBuilder.github.web()}
-      target="_blank"
-      onclick={() => trackLink("github-web")}
-    >
-      <GithubIcon />
-    </Link>
-    <Link
-      href={UrlBuilder.socialMedia.reddit()}
-      target="_blank"
-      onclick={() => trackLink("reddit")}
-    >
-      <RedditIcon />
-    </Link>
-  </div>
+  <Link
+    href={UrlBuilder.app.android()}
+    target="_blank"
+    onclick={() => trackLink("android-app")}
+  >
+    <AndroidIcon />
+  </Link>
+
+  <Link
+    href={UrlBuilder.socialMedia.reddit()}
+    target="_blank"
+    onclick={() => trackLink("reddit")}
+  >
+    <RedditIcon />
+  </Link>
+
+  <Link
+    href={UrlBuilder.github.web()}
+    target="_blank"
+    onclick={() => trackLink("github-web")}
+  >
+    <GithubIcon />
+  </Link>
 </div>
 
 <style lang="scss">
@@ -83,24 +81,21 @@
   .trakt-external-links {
     display: flex;
     align-items: center;
-    gap: var(--gap-xl);
+    gap: var(--gap-l);
 
     :global(.trakt-link svg) {
-      height: var(--ni-32);
+      height: var(--ni-24);
       width: auto;
+      color: var(--color-text-secondary);
+      transition: color 0.15s ease;
+    }
+
+    :global(.trakt-link:hover svg) {
+      color: var(--color-text-primary);
     }
 
     @include for-tablet-sm-and-below {
-      gap: 0;
-      justify-content: space-between;
-      flex-grow: 1;
+      gap: var(--gap-m);
     }
-  }
-
-  .trakt-app-links,
-  .trakt-footer-links {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-s);
   }
 </style>
