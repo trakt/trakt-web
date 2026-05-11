@@ -112,7 +112,7 @@
     :global(.trakt-button[data-style="ghost"]) {
       margin: 0;
       transform: none;
-      border: var(--border-thickness-xs) solid var(--color-foreground);
+      border: none;
       height: var(--ni-40);
       box-sizing: border-box;
       border-radius: var(--border-radius-m);

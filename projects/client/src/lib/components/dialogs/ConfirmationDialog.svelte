@@ -29,15 +29,6 @@
   </div>
 
   {#snippet footer()}
-    <Button
-      size="small"
-      style="ghost"
-      color="default"
-      label={m.button_text_cancel()}
-      onclick={() => onAction("cancel")}
-    >
-      {m.button_text_cancel()}
-    </Button>
     <div class={operation === "destructive" ? "destructive-action" : "affirmative-action"} style="display: contents;">
       <Button
         size="small"
@@ -49,6 +40,15 @@
         {buttonText}
       </Button>
     </div>
+    <Button
+      size="small"
+      style="ghost"
+      color="default"
+      label={m.button_text_cancel()}
+      onclick={() => onAction("cancel")}
+    >
+      {m.button_text_cancel()}
+    </Button>
   {/snippet}
 </Modal>
 
