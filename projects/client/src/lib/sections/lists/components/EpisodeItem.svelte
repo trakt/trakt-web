@@ -206,7 +206,7 @@
       popupActions={props.popupActions}
       layout={isCompact ? "compact" : "default"}
       context={"context" in props ? props.context : undefined}
-      coverUrl={"coverUrl" in props ? props.coverUrl : $src}
+      coverUrl={"coverUrl" in props ? props.coverUrl : undefined}
       {tag}
       badge={action}
       {sortTag}
