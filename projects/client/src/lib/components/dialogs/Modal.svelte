@@ -57,15 +57,15 @@
   }
 
   :global(.trakt-modal) {
-    padding: var(--ni-24);
-    border-radius: var(--border-radius-l);
+    padding: var(--ni-32);
+    border-radius: var(--ni-24);
     border: none;
     outline: none;
     background-color: var(--color-modal-background);
     color: var(--color-text-primary);
     box-shadow: var(--shadow-dialog);
 
-    max-width: var(--ni-480);
+    max-width: var(--ni-520);
     min-width: var(--ni-320);
 
     display: flex;
@@ -93,10 +93,29 @@
     }
   }
 
+  :global(.trakt-modal-body) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-12);
+  }
+
   :global(.trakt-modal-footer) {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: var(--ni-16);
+
+    :global(.trakt-button) {
+      min-width: var(--ni-160);
+    }
+
+    :global(.trakt-button[data-style="ghost"]) {
+      margin: 0;
+      transform: none;
+      outline: var(--border-thickness-xs) solid var(--color-foreground);
+      border-radius: var(--border-radius-m);
+      padding-inline: var(--ni-32);
+    }
 
     @include for-mobile {
       flex-direction: column-reverse;

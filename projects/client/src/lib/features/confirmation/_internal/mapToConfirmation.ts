@@ -18,7 +18,7 @@ export function mapToConfirmation<T extends ConfirmationType>(
       return {
         buttonText: m.button_text_mark_as_watched(),
         message: getWarningMessage(props.title, props.target),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.RemoveFromWatched:
       return {
@@ -36,13 +36,13 @@ export function mapToConfirmation<T extends ConfirmationType>(
       return {
         buttonText: m.button_text_drop_show(),
         message: m.warning_prompt_drop_show({ title: props.title }),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.DropMovie:
       return {
         buttonText: m.button_text_drop_movie(),
         message: m.warning_prompt_drop_movie({ title: props.title }),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.RestoreShow:
       return {
@@ -54,7 +54,7 @@ export function mapToConfirmation<T extends ConfirmationType>(
       return {
         buttonText: m.button_text_delete_list(),
         message: m.warning_prompt_delete_list({ name: props.name }),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.RemoveFavorite:
       return {
@@ -66,7 +66,7 @@ export function mapToConfirmation<T extends ConfirmationType>(
       return {
         buttonText: m.button_text_remove_from_watchlist(),
         message: m.warning_prompt_remove_from_watchlist({ title: props.title }),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.RemoveFromList:
       return {
@@ -75,49 +75,49 @@ export function mapToConfirmation<T extends ConfirmationType>(
           list: props.name,
           title: props.title,
         }),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.UnfollowUser:
       return {
         buttonText: m.button_text_unfollow(),
         message: m.warning_prompt_unfollow_user({ username: props.username }),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.StopCheckin:
       return {
         buttonText: m.button_text_stop_check_in(),
         message: m.warning_prompt_stop_checkin({ title: props.title }),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.DeleteComment:
       return {
         buttonText: m.button_text_delete_comment(),
         message: m.warning_prompt_delete_comment(),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.SuppressRatingsToast:
       return {
         buttonText: m.button_text_stop_asking(),
         message: m.warning_prompt_suppress_ratings_toast(),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.Logout:
       return {
         buttonText: m.button_text_logout(),
         message: m.warning_prompt_log_out(),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.SimpleFilters:
       return {
         buttonText: m.button_text_reset_all_filters(),
         message: m.warning_prompt_simple_filters(),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
     case ConfirmationType.CancelVip:
       return {
         buttonText: m.button_text_cancel_vip(),
         message: m.warning_prompt_cancel_vip(),
-        operation: 'destructive',
+        operation: 'affirmative',
       };
   }
 }
