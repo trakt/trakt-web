@@ -1,6 +1,5 @@
-export const EXTENSION_PROTOCOLS = [
-  'chrome-extension://',
-  'moz-extension://',
-  'safari-extension://',
-  'resource://',
-];
+export const BUNDLE_PATHS = [
+  '/_app/',
+  '/src/',
+  '/node_modules/',
+] as const;

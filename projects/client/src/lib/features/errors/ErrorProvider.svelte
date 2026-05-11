@@ -10,7 +10,7 @@
   import { isErrorExempt } from "./_internal/errorExemptions.ts";
   import { mapToWellKnownError } from "./_internal/mapToWellKnownError";
   import { FETCH_ERROR_EVENT } from "./constants";
-  import { EXTENSION_PROTOCOLS } from "./constants/index.ts";
+  import { BUNDLE_PATHS } from "./constants/index.ts";
   import type { CustomFetchError } from "./models/CustomFetchError";
   import {
     WellKnownErrorType,
@@ -53,12 +53,15 @@
       return;
     }
 
-    // Filter out extension noise and third-party scripts
-    const isExternalNoise =
-      !error.stack?.includes(window.location.hostname) ||
-      EXTENSION_PROTOCOLS.some((protocol) => error.stack?.includes(protocol));
+    const stack = error.stack;
+    if (!stack) return;
 
-    if (isExternalNoise) return;
+    // Filter out extension noise and third-party scripts
+    const isFromSvelteKitBundle = BUNDLE_PATHS.some((path) =>
+      stack.includes(path),
+    );
+
+    if (!isFromSvelteKitBundle) return;
 
     /*
       Filter out errors caused by blocked frames e.g.,
