@@ -10,7 +10,7 @@
     mode = "overlay",
     size = "small",
     icon,
-    label = "More options",
+    label,
     ...props
   }: PopupMenuProps = $props();
 
