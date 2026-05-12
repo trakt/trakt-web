@@ -77,11 +77,12 @@ interface ConfirmationParamsMap {
   [ConfirmationType.CancelImport]: {
     type: ConfirmationType.CancelImport;
   };
-  [ConfirmationType.CancelReset]: {
-    type: ConfirmationType.CancelReset;
+  [ConfirmationType.CancelClear]: {
+    type: ConfirmationType.CancelClear;
   };
-  [ConfirmationType.ClearWatchlist]: {
-    type: ConfirmationType.ClearWatchlist;
+  [ConfirmationType.ClearData]: {
+    type: ConfirmationType.ClearData;
+    sourceText: string;
   };
   [ConfirmationType.HideRecommendation]: {
     type: ConfirmationType.HideRecommendation;

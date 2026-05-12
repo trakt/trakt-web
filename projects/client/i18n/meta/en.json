@@ -6879,42 +6879,29 @@
       "default": "Clear watchlist",
       "description": "Label for the row in clear data settings that allows users to clear their entire watchlist.",
       "exclude": [
-        "android"
-      ]
-    },
-    "button_text_clear_watchlist": {
-      "default": "Clear now",
-      "description": "Text for the button that clears the user's entire watchlist.",
-      "exclude": [
         "android",
-        "ios"
-      ]
-    },
-    "button_label_clear_watchlist": {
-      "default": "Clear all items from your watchlist",
-      "description": "Aria-label for the button that clears the user's entire watchlist.",
-      "exclude": [
-        "android",
-        "ios"
+        "web"
       ]
     },
     "warning_prompt_clear_watchlist": {
       "default": "Are you sure you want to clear your entire watchlist? This cannot be undone.",
       "description": "Warning prompt shown when a user tries to clear their entire watchlist.",
       "exclude": [
-        "android"
+        "android",
+        "web"
       ]
     },
     "reset_status_cleared": {
       "default": "Watchlist cleared.",
       "description": "Status text shown when a watchlist clear has completed successfully.",
       "exclude": [
-        "android"
+        "android",
+        "web"
       ]
     },
-    "reset_status_clearing": {
+    "clear_status_clearing": {
       "default": "Clearing {processed} / {total} items…",
-      "description": "Status text shown while watchlist items are being deleted.",
+      "description": "Status text shown while items are being deleted, such as watchlist, ratings etc.",
       "variables": {
         "processed": {
           "type": "number"
@@ -6928,16 +6915,16 @@
         "ios"
       ]
     },
-    "button_text_stop_reset": {
+    "button_text_stop_clear": {
       "default": "Stop Clearing",
-      "description": "Text for the button that stops an in-progress watchlist clear when navigating away.",
+      "description": "Text for the button that stops an in-progress data clear when navigating away, e.g. when clearing watchlist, ratings, etc.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "warning_prompt_cancel_reset": {
-      "default": "Your watchlist is being cleared. Navigating away will stop it. Are you sure?",
+    "warning_prompt_cancel_clear": {
+      "default": "Navigating away will stop stop clearing your data. Are you sure?",
       "description": "Warning message shown when a user tries to navigate away while a watchlist clear is in progress.",
       "exclude": [
         "android",
@@ -11063,6 +11050,77 @@
       "description": "Text shown when asking users to pick a date time range for when they watched a movie or episode. This should be a short and concise message.",
       "variables": {
         "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "dropdown_label_clear_source": {
+      "default": "Source",
+      "description": "Aria-label for the dropdown that allows users to select a source when clearing data.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_clear_source_watchlist": {
+      "default": "Watchlist",
+      "description": "Text for the source option that allows users to clear their watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_clear_source_ratings": {
+      "default": "Ratings",
+      "description": "Text for the source option that allows users to clear their ratings.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_clear_now": {
+      "default": "Clear now",
+      "description": "Text for the button that clears the user's chosen source, e.g. watchlist, ratings, etc..",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_clear_now": {
+      "default": "Clear all items from your {source}",
+      "description": "Aria-label for the button that clears the user's entire watchlist.",
+      "variables": {
+        "source": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "clear_status_source_cleared": {
+      "default": "{source} cleared.",
+      "description": "Status text shown when a clear has completed successfully for a source, e.g. watchlist, ratings, etc.",
+      "variables": {
+        "source": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "warning_prompt_clear_data": {
+      "default": "Are you sure you want to clear your {source}? This cannot be undone.",
+      "description": "Warning prompt shown when a user tries to clear their data, such as watchlist, ratings, etc.",
+      "variables": {
+        "source": {
           "type": "string"
         }
       },

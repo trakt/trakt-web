@@ -56,6 +56,16 @@ type ExportInitiatedType = { isVip: string };
 type ExportCompletedType = { duration: number; endpointCount: number };
 type ExportFailedType = { error: string };
 
+type ClearInitiatedType = { source: string };
+type ClearCompletedType = {
+  source: string;
+  totalItems: number;
+  successCount: number;
+  failedCount: number;
+  duration: number;
+};
+type ClearFailedType = { source: string; error: string };
+
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
   [AnalyticsEvent.PublicRedirect]: never;
@@ -129,4 +139,9 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.ExportInitiated]: ExportInitiatedType;
   [AnalyticsEvent.ExportCompleted]: ExportCompletedType;
   [AnalyticsEvent.ExportFailed]: ExportFailedType;
+
+  // Data Clear
+  [AnalyticsEvent.ClearInitiated]: ClearInitiatedType;
+  [AnalyticsEvent.ClearCompleted]: ClearCompletedType;
+  [AnalyticsEvent.ClearFailed]: ClearFailedType;
 };
