@@ -10,7 +10,7 @@ import type { UniversalImportItem } from './ImportTypes.ts';
 
 export async function syncToTrakt(
   items: ReadonlyArray<UniversalImportItem>,
-  { onProgress, onError, onStart, onComplete }: SyncEngineCallbacks,
+  { onProgress, onError, onStart, onComplete, signal }: SyncEngineCallbacks,
 ): Promise<number> {
   onStart?.();
 
@@ -20,7 +20,11 @@ export async function syncToTrakt(
     const ratingItems = items.filter((i) => i.action === 'ratings');
 
     const client = api();
-    const { run, getErrorCount } = createSyncRunner({ onProgress, onError });
+    const { run, getErrorCount } = createSyncRunner({
+      onProgress,
+      onError,
+      signal,
+    });
 
     if (historyItems.length > 0) {
       await run(
@@ -46,7 +50,7 @@ export async function syncToTrakt(
       );
     }
 
-    onComplete?.(true);
+    onComplete?.(!signal?.aborted);
     return getErrorCount();
   } catch (err) {
     onComplete?.(false);

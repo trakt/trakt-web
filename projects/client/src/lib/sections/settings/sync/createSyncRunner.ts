@@ -3,9 +3,12 @@ import { processChunks } from './processChunks.ts';
 type SyncRunnerCallbacks = {
   onProgress: (processed: number) => void;
   onError: (message: string) => void;
+  signal?: AbortSignal;
 };
 
-export function createSyncRunner({ onProgress, onError }: SyncRunnerCallbacks) {
+export function createSyncRunner(
+  { onProgress, onError, signal }: SyncRunnerCallbacks,
+) {
   let processedCount = 0;
   let errorCount = 0;
 
@@ -24,6 +27,7 @@ export function createSyncRunner({ onProgress, onError }: SyncRunnerCallbacks) {
           onProgress(n);
         },
         onError,
+        signal,
       },
       processedCount,
     );

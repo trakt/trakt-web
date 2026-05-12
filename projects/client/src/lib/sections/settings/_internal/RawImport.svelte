@@ -42,6 +42,8 @@
   const { invalidate } = useInvalidator();
   const { record } = useAnalytics();
 
+  let abortController: AbortController | null = null;
+
   type ImportUIState = SyncState<ImportStatus> & {
     selectedSource: ImportSource;
     parsedItems: ReadonlyArray<UniversalImportItem>;
@@ -97,6 +99,7 @@
   }
 
   async function startImport() {
+    abortController = new AbortController();
     const startTime = Date.now();
     state.processedCount = 0;
     state.errorCount = 0;
@@ -104,6 +107,7 @@
 
     try {
       const failed = await syncToTrakt(state.parsedItems, {
+        signal: abortController.signal,
         onProgress: (count) => {
           state.processedCount = count;
         },
@@ -158,6 +162,7 @@
   }
 
   function reset() {
+    abortController?.abort();
     state.status = "idle";
     state.parsedItems = [];
     state.processedCount = 0;
