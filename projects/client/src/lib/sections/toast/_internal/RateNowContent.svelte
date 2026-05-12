@@ -8,6 +8,7 @@
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import { useLastWatched } from "$lib/features/toast/useLastWatched";
   import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
+  import { shuffle } from "$lib/utils/array/shuffle";
   import { time } from "$lib/utils/timing/time.ts";
   import { getToastTitle } from "./getToastTitle";
   import ToastItemCard from "./ToastItemCard.svelte";
@@ -26,7 +27,19 @@
     onConfirm: suppress,
   });
 
+  const ratingPrompts = [
+    m.text_rating_prompt_1(),
+    m.text_rating_prompt_2(),
+    m.text_rating_prompt_3(),
+    m.text_rating_prompt_4(),
+    m.text_rating_prompt_5(),
+    m.text_rating_prompt_6(),
+    m.text_rating_prompt_7(),
+    m.text_rating_prompt_8(),
+  ] as const;
+
   const title = $derived(getToastTitle(lastWatched));
+  const ratingPrompt = $derived(shuffle(ratingPrompts).at(0));
 
   const handleDismiss = () => {
     dismiss(lastWatched.media.id, lastWatched.type, "manual");
@@ -38,37 +51,43 @@
 
   <div class="trakt-now-playing-content">
     <div class="trakt-rate-now-header">
-      <p class="ellipsis">{title}</p>
-      {#if interactionCounter > 0}
-        {#key interactionCounter}
-          <AutoCloseButton
-            onclick={handleDismiss}
-            label={m.button_label_dismiss()}
-            durationMs={lingerDuration}
-          />
-        {/key}
-      {:else}
-        <ActionButton
-          onclick={() => {
-            handleDismiss();
-            if (!$isAtLimit) {
-              return;
-            }
+      <div class="trakt-rate-now-titles">
+        <span class="trakt-verdict secondary">{ratingPrompt}</span>
+        <p class="trakt-title ellipsis bold">{title}</p>
+      </div>
+      <div class="trakt-rate-now-actions">
+        {#if interactionCounter > 0}
+          {#key interactionCounter}
+            <AutoCloseButton
+              onclick={handleDismiss}
+              label={m.button_label_dismiss()}
+              durationMs={lingerDuration}
+            />
+          {/key}
+        {:else}
+          <ActionButton
+            onclick={() => {
+              handleDismiss();
+              if (!$isAtLimit) {
+                return;
+              }
 
-            confirmSuppression();
-          }}
-          label={m.button_label_dismiss()}
-          style="ghost"
-          size="small"
-        >
-          <CloseIcon />
-        </ActionButton>
-      {/if}
+              confirmSuppression();
+            }}
+            label={m.button_label_dismiss()}
+            style="ghost"
+            size="small"
+          >
+            <CloseIcon />
+          </ActionButton>
+        {/if}
+      </div>
     </div>
     <div class="trakt-rate-now-container">
       <RateNow
         {...lastWatched}
         variant="allow"
+        style="minimal"
         onclick={() => (interactionCounter += 1)}
       />
     </div>
@@ -98,12 +117,21 @@
   .trakt-rate-now-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: var(--gap-m);
+  }
+
+  .trakt-rate-now-titles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+    flex: 1;
+    min-width: 0;
   }
 
   .trakt-rate-now-container {
     :global(.trakt-rate-now) {
-      justify-content: space-between;
+      justify-content: flex-start;
     }
 
     :global(svg) {
