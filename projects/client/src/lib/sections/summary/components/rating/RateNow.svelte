@@ -14,6 +14,7 @@
   const {
     variant = "guard",
     onclick,
+    style = "default",
     ...props
   }: RateNowProps & { variant?: "allow" | "guard" } = $props();
 
@@ -56,7 +57,9 @@
     data-dpad-navigation={DpadNavigationType.List}
     transition:slide={{ duration: 150 }}
   >
-    <span class="bold">{m.header_rate_now()}</span>
+    {#if style !== "minimal"}
+      <span class="bold">{m.header_rate_now()}</span>
+    {/if}
     <div
       class="trakt-rate-actions"
       transition:fade={{ duration: 150, delay: 150 }}

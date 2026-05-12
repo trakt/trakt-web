@@ -16,4 +16,5 @@ type RateableMedia = {
 
 export type RateNowProps = (RateableEpisode | RateableMedia) & {
   onclick?: () => void;
+  style?: 'default' | 'minimal';
 };

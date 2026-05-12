@@ -6676,6 +6676,38 @@
       "default": "Unavailable",
       "description": "Label shown when an option or content is unavailable to display."
     },
+    "text_rating_prompt_1": {
+      "default": "What's the verdict?",
+      "description": "Verdict-style rating prompt rotated in the Rate Now toast."
+    },
+    "text_rating_prompt_2": {
+      "default": "What did you think?",
+      "description": "Thoughts-style rating prompt rotated in the Rate Now toast."
+    },
+    "text_rating_prompt_3": {
+      "default": "Well, how was it?",
+      "description": "Conversational rating prompt rotated in the Rate Now toast."
+    },
+    "text_rating_prompt_4": {
+      "default": "Thoughts?",
+      "description": "Short rating prompt rotated in the Rate Now toast."
+    },
+    "text_rating_prompt_5": {
+      "default": "Out of five stars?",
+      "description": "Stars-out-of-five rating prompt rotated in the Rate Now toast."
+    },
+    "text_rating_prompt_6": {
+      "default": "How many stars does it earn?",
+      "description": "How-many-stars rating prompt rotated in the Rate Now toast."
+    },
+    "text_rating_prompt_7": {
+      "default": "Rate your experience.",
+      "description": "Rate-your-experience prompt rotated in the Rate Now toast."
+    },
+    "text_rating_prompt_8": {
+      "default": "Give it a grade.",
+      "description": "Grade-style rating prompt rotated in the Rate Now toast."
+    },
     "text_plex_tv_library_description": {
       "default": "Enable Trakt Plex Sync to access your Plex server media library.",
       "description": "Description shown when a user has no Plex libraries connected. This should be a short sentence."
