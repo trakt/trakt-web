@@ -19,7 +19,7 @@ export enum ConfirmationType {
   SimpleFilters = 'simple-filters',
   CancelVip = 'cancel-vip',
   CancelImport = 'cancel-import',
-  CancelReset = 'cancel-reset',
-  ClearWatchlist = 'clear-watchlist',
+  CancelClear = 'cancel-clear',
+  ClearData = 'clear-data',
   HideRecommendation = 'hide-recommendation',
 }

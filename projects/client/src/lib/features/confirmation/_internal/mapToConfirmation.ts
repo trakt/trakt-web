@@ -139,16 +139,16 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_cancel_import(),
         operation: 'destructive',
       };
-    case ConfirmationType.CancelReset:
+    case ConfirmationType.CancelClear:
       return {
-        buttonText: m.button_text_stop_reset(),
-        message: m.warning_prompt_cancel_reset(),
+        buttonText: m.button_text_stop_clear(),
+        message: m.warning_prompt_cancel_clear(),
         operation: 'destructive',
       };
-    case ConfirmationType.ClearWatchlist:
+    case ConfirmationType.ClearData:
       return {
-        buttonText: m.button_text_clear_watchlist(),
-        message: m.warning_prompt_clear_watchlist(),
+        buttonText: m.button_text_clear_now(),
+        message: m.warning_prompt_clear_data({ source: props.sourceText }),
         operation: 'destructive',
       };
     case ConfirmationType.HideRecommendation:

@@ -10,6 +10,7 @@ const VIP_ACTION_PREFIX = 'vip-action';
 const SMART_LIST_ACTION_PREFIX = 'smart-list-action';
 const DATA_IMPORT_ACTION_PREFIX = 'data-import';
 const DATA_EXPORT_ACTION_PREFIX = 'data-export';
+const DATA_CLEAR_ACTION_PREFIX = 'data-clear';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -90,4 +91,9 @@ export const AnalyticsEvent = {
   ExportInitiated: buildEventKey(DATA_EXPORT_ACTION_PREFIX, 'initiated'),
   ExportCompleted: buildEventKey(DATA_EXPORT_ACTION_PREFIX, 'completed'),
   ExportFailed: buildEventKey(DATA_EXPORT_ACTION_PREFIX, 'failed'),
+
+  // Data Clear
+  ClearInitiated: buildEventKey(DATA_CLEAR_ACTION_PREFIX, 'initiated'),
+  ClearCompleted: buildEventKey(DATA_CLEAR_ACTION_PREFIX, 'completed'),
+  ClearFailed: buildEventKey(DATA_CLEAR_ACTION_PREFIX, 'failed'),
 } as const;
