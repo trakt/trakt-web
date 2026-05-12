@@ -3,4 +3,5 @@ export type SyncEngineCallbacks = {
   onError: (message: string) => void;
   onStart?: () => void;
   onComplete?: (success: boolean) => void;
+  signal?: AbortSignal;
 };

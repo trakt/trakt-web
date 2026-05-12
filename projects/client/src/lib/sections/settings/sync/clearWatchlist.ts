@@ -7,7 +7,7 @@ import type { SyncEngineCallbacks } from './models/SyncEngineCallbacks.ts';
 
 export async function clearWatchlist(
   watchlist: UserWatchlist,
-  { onProgress, onError, onStart, onComplete }: SyncEngineCallbacks,
+  { onProgress, onError, onStart, onComplete, signal }: SyncEngineCallbacks,
 ): Promise<void> {
   onStart?.();
 
@@ -20,7 +20,7 @@ export async function clearWatchlist(
     }));
 
     const client = api();
-    const { run } = createSyncRunner({ onProgress, onError });
+    const { run } = createSyncRunner({ onProgress, onError, signal });
 
     if (movies.length > 0) {
       await run(
@@ -40,7 +40,7 @@ export async function clearWatchlist(
       );
     }
 
-    onComplete?.(true);
+    onComplete?.(!signal?.aborted);
   } catch (err) {
     onComplete?.(false);
     throw err;
