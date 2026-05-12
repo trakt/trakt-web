@@ -12,7 +12,7 @@
   },
   "messages": {
     "list_title_upcoming_schedule": {
-      "default": "Upcoming Schedule",
+      "default": "Calendar",
       "description": "Title for lists containing upcoming episodes. This title should be as short and concise as possible.",
       "exclude": []
     },
