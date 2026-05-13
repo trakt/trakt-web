@@ -5,6 +5,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import WhereToWatchEmptyItem from "$lib/sections/lists/where-to-watch/_internal/WhereToWatchEmptyItem.svelte";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import { getGroupedServices } from "./getGroupedServices";
@@ -120,7 +121,9 @@
   {/if}
 
   {#if !$isLoading && !hasAnyResults}
-    <p class="secondary">{m.button_text_no_services()}</p>
+    <div class="where-to-watch-empty">
+      <WhereToWatchEmptyItem />
+    </div>
   {/if}
 </Drawer>
 
@@ -150,5 +153,29 @@
     min-width: 0;
     align-self: center;
     height: var(--height-where-to-watch-list);
+  }
+
+  .where-to-watch-empty {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-self: flex-start;
+    width: fit-content;
+    margin-inline: 0;
+    padding-inline: 0;
+    padding-block: var(--ni-12);
+    min-height: var(--height-where-to-watch-list);
+  }
+
+  :global(.section-list-empty-state) {
+    width: auto;
+    margin: 0;
+    padding-inline: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  :global(.section-list-empty-state:not(:has(:global(.trakt-skeleton-list)))) {
+    width: auto;
   }
 </style>

@@ -4,6 +4,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
+  import WhereToWatchEmptyItem from "$lib/sections/lists/where-to-watch/_internal/WhereToWatchEmptyItem.svelte";
   import {
     summaryDrawerNavigation,
     SummaryDrawers,
@@ -40,6 +41,16 @@
     return [...$plexServices, ...justWatchServices];
   });
 
+  const drilldown = $derived.by(() =>
+    services.length > 0
+      ? {
+          ...buildDrawerLink(SummaryDrawers.WhereToWatch),
+          source: { id: "where-to-watch" },
+          label: m.button_label_view_all_where_to_watch(),
+        }
+      : undefined,
+  );
+
   const { country } = useStreamingPreferences();
 
   const isAired = $derived.by(() => {
@@ -63,11 +74,7 @@
       id={`where-to-watch-${target.media.slug}`}
       items={services}
       title={m.list_title_where_to_watch()}
-      drilldown={{
-        ...buildDrawerLink(SummaryDrawers.WhereToWatch),
-        source: { id: "where-to-watch" },
-        label: m.button_label_view_all_where_to_watch(),
-      }}
+      {drilldown}
       {metaInfo}
       {variant}
       --height-list="var(--height-where-to-watch-list)"
@@ -77,8 +84,36 @@
       {/snippet}
 
       {#snippet empty()}
-        <p class="secondary">{m.button_text_no_services()}</p>
+        <div class="where-to-watch-empty">
+          <WhereToWatchEmptyItem />
+        </div>
       {/snippet}
     </SectionList>
   </div>
 {/if}
+
+<style lang="scss">
+  .where-to-watch-empty {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-self: flex-start;
+    width: fit-content;
+    margin-inline: 0;
+    padding-inline: 0;
+    padding-block: var(--ni-12);
+    min-height: var(--height-where-to-watch-list);
+  }
+
+  :global(.section-list-empty-state) {
+    width: auto;
+    margin: 0;
+    padding-inline: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  :global(.section-list-empty-state:not(:has(:global(.trakt-skeleton-list)))) {
+    width: auto;
+  }
+</style>
