@@ -24,6 +24,7 @@ type ToMediaOrEpisodeIntlProps = ToMediaIntlProps | ToEpisodeIntlProps;
 
 export function findRegionalIntl(props: ToMediaOrEpisodeIntlProps) {
   const { region } = getLanguageAndRegion();
+  const regionCode = region.toLowerCase();
 
   const commonIntl = (intl?: MediaIntl | EpisodeIntl) => ({
     title: intl?.title ?? props.fallback?.title ?? '',
@@ -32,11 +33,11 @@ export function findRegionalIntl(props: ToMediaOrEpisodeIntlProps) {
   });
 
   if (props.type === 'episode') {
-    const intl = props.translations?.find((intl) => intl.country === region);
+    const intl = props.translations?.find((intl) => intl.country === regionCode);
     return commonIntl(intl);
   }
 
-  const intl = props.translations?.find((intl) => intl.country === region);
+  const intl = props.translations?.find((intl) => intl.country === regionCode);
   return {
     ...commonIntl(intl),
     tagline: intl?.tagline ?? props.fallback?.tagline ?? '',

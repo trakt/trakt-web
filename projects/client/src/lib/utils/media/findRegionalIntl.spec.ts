@@ -32,7 +32,7 @@ describe('util: findRegionalIntl', () => {
     });
 
     it('should return portuguese translation for pt-br locale', () => {
-      setLocale('pt-br');
+      setLocale('pt-BR');
 
       const result = findRegionalIntl({
         type: 'movie',
@@ -46,7 +46,7 @@ describe('util: findRegionalIntl', () => {
     });
 
     it('should return dutch translation for nl locale', () => {
-      setLocale('nl-nl');
+      setLocale('nl-NL');
 
       const result = findRegionalIntl({
         type: 'movie',
@@ -62,7 +62,7 @@ describe('util: findRegionalIntl', () => {
     });
 
     it('should return fallback data for unsupported locale', () => {
-      setLocale('fr-fr');
+      setLocale('fr-FR');
 
       const result = findRegionalIntl({
         type: 'movie',
@@ -102,7 +102,7 @@ describe('util: findRegionalIntl', () => {
     });
 
     it('should return dutch translation for nl locale', () => {
-      setLocale('nl-nl');
+      setLocale('nl-NL');
 
       const result = findRegionalIntl({
         type: 'show',
@@ -117,7 +117,7 @@ describe('util: findRegionalIntl', () => {
     });
 
     it('should return japanese translation for ja locale', () => {
-      setLocale('ja-jp');
+      setLocale('ja-JP');
 
       const result = findRegionalIntl({
         type: 'show',
@@ -151,7 +151,7 @@ describe('util: findRegionalIntl', () => {
     });
 
     it('should return dutch translation for nl locale', () => {
-      setLocale('nl-nl');
+      setLocale('nl-NL');
 
       const result = findRegionalIntl({
         type: 'episode',

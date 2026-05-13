@@ -60,7 +60,7 @@ describe('handle: i18n', () => {
 
     const transformed = transformPageChunk?.({ html, done: true });
 
-    expect(transformed).toContain('lang="nl-nl"');
+    expect(transformed).toContain('lang="nl-NL"');
   });
 
   it('should prefer the cookie over the accept-language header', async () => {

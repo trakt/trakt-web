@@ -13,7 +13,7 @@ describe('toHumanDay', () => {
   it('will display 19 september 2023', () => {
     const day = new Date('2023-09-19');
 
-    expect(toHumanDay({ date: day, locale: 'nl-nl' })).toBe(
+    expect(toHumanDay({ date: day, locale: 'nl-NL' })).toBe(
       '19 september 2023',
     );
   });

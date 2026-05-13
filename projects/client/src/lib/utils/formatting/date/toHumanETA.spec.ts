@@ -41,12 +41,12 @@ describe('toHumanETA', () => {
 
   it('should return "après-demain" for 2 days difference in French', () => {
     const targetDate = new Date('2023-01-03');
-    expect(toHumanETA(today, targetDate, 'fr-fr')).toBe('après-demain');
+    expect(toHumanETA(today, targetDate, 'fr-FR')).toBe('après-demain');
   });
 
   it('should return "poimâine" for 2 days difference in Romanian', () => {
     const targetDate = new Date('2023-01-03');
-    expect(toHumanETA(today, targetDate, 'ro-ro')).toBe('poimâine');
+    expect(toHumanETA(today, targetDate, 'ro-RO')).toBe('poimâine');
   });
 
   it('should return the year for past dates', () => {

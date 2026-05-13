@@ -63,7 +63,7 @@ describe('isCurrentWeek', () => {
   it('works with different locales', () => {
     const today = new Date();
 
-    expect(isCurrentWeek(today, 'de-de')).toBe(true);
-    expect(isCurrentWeek(today, 'fr-fr')).toBe(true);
+    expect(isCurrentWeek(today, 'de-DE')).toBe(true);
+    expect(isCurrentWeek(today, 'fr-FR')).toBe(true);
   });
 });

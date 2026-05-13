@@ -83,5 +83,5 @@ export const getPreferredLocale = (headers: Headers): AvailableLocale => {
     FALLBACK_LOCALE,
   );
 
-  return sanitizeLocale(resolvedLocale.toLocaleLowerCase());
+  return sanitizeLocale(resolvedLocale);
 };
