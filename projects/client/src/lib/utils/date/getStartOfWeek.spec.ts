@@ -25,7 +25,7 @@ describe('getStartOfWeek', () => {
 
   it('handles date at the beginning of the week for a different locale', () => {
     const sunday = new Date('2023-12-17');
-    const result = getStartOfWeek(sunday, 'nl-nl');
+    const result = getStartOfWeek(sunday, 'nl-NL');
 
     expect(result.toDateString()).toBe('Mon Dec 11 2023');
   });

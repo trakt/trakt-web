@@ -32,7 +32,7 @@ describe('store: useShow', () => {
     });
 
     it('should contain japanese information', async () => {
-      setLocale('ja-jp');
+      setLocale('ja-JP');
 
       const result = await runQuery({
         factory: () => useShow(ShowSiloMappedMock.slug).intl,

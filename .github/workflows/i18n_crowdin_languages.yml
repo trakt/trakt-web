@@ -49,27 +49,18 @@ jobs:
 
           NEW_IDS=()
 
-          # Read every locale except the base (source) locale
+          # Read every locale except the base (source) locale.
+          # settings.json already uses standard BCP 47 casing (e.g. fr-FR, pt-BR),
+          # which matches CrowdIn's locale field directly — no normalization needed.
           while IFS= read -r LOCALE; do
-            # Normalize: fr-fr -> fr-FR, pt-br -> pt-BR, ja-jp -> ja-JP
-            LANG="${LOCALE%%-*}"
-            RAW_REGION="${LOCALE##*-}"
-            REGION="${RAW_REGION^^}"
-
-            if [ "$LANG" = "$REGION" ]; then
-              CROWDIN_LOCALE="$LANG"
-            else
-              CROWDIN_LOCALE="${LANG}-${REGION}"
-            fi
-
-            # Look up CrowdIn language ID by its locale field (exact match first)
             CROWDIN_ID=$(echo "$ALL_LANGUAGES" \
-              | jq -r --arg loc "$CROWDIN_LOCALE" \
+              | jq -r --arg loc "$LOCALE" \
                 '.[] | select(.locale == $loc) | .id' \
               | head -1)
 
             # Fallback: match on the language subtag alone (e.g. ja for ja-JP)
             if [ -z "$CROWDIN_ID" ]; then
+              LANG="${LOCALE%%-*}"
               CROWDIN_ID=$(echo "$ALL_LANGUAGES" \
                 | jq -r --arg lang "$LANG" \
                   '.[] | select(.id == $lang) | .id' \
@@ -77,7 +68,7 @@ jobs:
             fi
 
             if [ -z "$CROWDIN_ID" ]; then
-              echo "::warning::No CrowdIn language found for '$LOCALE' (tried locale '$CROWDIN_LOCALE' and id '$LANG')"
+              echo "::warning::No CrowdIn language found for '$LOCALE'"
               continue
             fi
 

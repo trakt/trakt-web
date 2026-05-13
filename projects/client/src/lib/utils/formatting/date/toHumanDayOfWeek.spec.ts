@@ -60,7 +60,7 @@ describe('toHumanDayOfWeek', () => {
   it('will handle other locales', () => {
     const tuesday = new Date('2023-12-19');
 
-    expect(toHumanDayOfWeek(tuesday, 'nl-nl')).toBe('din');
-    expect(toHumanDayOfWeek(tuesday, 'de-de')).toBe('Di.');
+    expect(toHumanDayOfWeek(tuesday, 'nl-NL')).toBe('din');
+    expect(toHumanDayOfWeek(tuesday, 'de-DE')).toBe('Di.');
   });
 });

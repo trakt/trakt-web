@@ -31,7 +31,7 @@ describe('store: useMovie', () => {
     });
 
     it('should contain portuguese information', async () => {
-      setLocale('pt-br');
+      setLocale('pt-BR');
 
       const result = await runQuery({
         factory: () => useMovie(MovieHereticMappedMock.slug).intl,
