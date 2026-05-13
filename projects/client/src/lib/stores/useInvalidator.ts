@@ -9,22 +9,28 @@ import { setMarker } from '../utils/date/Marker.ts';
 export function useInvalidator() {
   const client = browser ? useQueryClient() : undefined;
 
-  const invalidate = async (action: InvalidateActionOptions) => {
-    setMarker(action);
+  const invalidateAll = async (actions: InvalidateActionOptions[]) => {
+    actions.forEach(setMarker);
 
-    if (action === InvalidateAction.Auth) {
+    const hasAuth = actions.includes(InvalidateAction.Auth);
+
+    if (hasAuth) {
       await client?.removeQueries();
     }
 
     await client?.invalidateQueries({
       predicate: (query) => {
-        return action === InvalidateAction.Auth ||
-          query.queryKey.includes(action);
+        return hasAuth ||
+          actions.some((action) => query.queryKey.includes(action));
       },
     });
   };
 
+  const invalidate = (action: InvalidateActionOptions) =>
+    invalidateAll([action]);
+
   return {
     invalidate,
+    invalidateAll,
   };
 }
