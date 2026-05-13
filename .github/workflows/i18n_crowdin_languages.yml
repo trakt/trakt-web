@@ -1,0 +1,114 @@
+name: Sync Locales to CrowdIn
+
+# Runs whenever the Inlang settings file changes on main, making it the
+# source of truth for which languages CrowdIn should have as targets.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'projects/client/i18n/project.inlang/settings.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync-languages:
+    name: Sync Locales to CrowdIn
+    runs-on: ubuntu-latest
+    concurrency:
+      group: sync-crowdin-languages
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync locales to CrowdIn target languages
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_TOKEN: ${{ secrets.CROWDIN_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          BASE="https://api.crowdin.com/api/v2"
+          SETTINGS="projects/client/i18n/project.inlang/settings.json"
+
+          BASE_LOCALE=$(jq -r '.baseLocale' "$SETTINGS")
+
+          # Fetch all CrowdIn supported languages in one page (currently ~300)
+          # In the API, 500 is the upper limit.
+          ALL_LANGUAGES=$(curl -sf \
+            -H "Authorization: Bearer $CROWDIN_TOKEN" \
+            "$BASE/languages?limit=500" | jq '[.data[].data]')
+
+          # Get current project target language IDs
+          CURRENT_IDS=$(curl -sf \
+            -H "Authorization: Bearer $CROWDIN_TOKEN" \
+            "$BASE/projects/$CROWDIN_PROJECT_ID" \
+            | jq '[.data.targetLanguageIds[]]')
+
+          NEW_IDS=()
+
+          # Read every locale except the base (source) locale
+          while IFS= read -r LOCALE; do
+            # Normalize: fr-fr -> fr-FR, pt-br -> pt-BR, ja-jp -> ja-JP
+            LANG="${LOCALE%%-*}"
+            RAW_REGION="${LOCALE##*-}"
+            REGION="${RAW_REGION^^}"
+
+            if [ "$LANG" = "$REGION" ]; then
+              CROWDIN_LOCALE="$LANG"
+            else
+              CROWDIN_LOCALE="${LANG}-${REGION}"
+            fi
+
+            # Look up CrowdIn language ID by its locale field (exact match first)
+            CROWDIN_ID=$(echo "$ALL_LANGUAGES" \
+              | jq -r --arg loc "$CROWDIN_LOCALE" \
+                '.[] | select(.locale == $loc) | .id' \
+              | head -1)
+
+            # Fallback: match on the language subtag alone (e.g. ja for ja-JP)
+            if [ -z "$CROWDIN_ID" ]; then
+              CROWDIN_ID=$(echo "$ALL_LANGUAGES" \
+                | jq -r --arg lang "$LANG" \
+                  '.[] | select(.id == $lang) | .id' \
+                | head -1)
+            fi
+
+            if [ -z "$CROWDIN_ID" ]; then
+              echo "::warning::No CrowdIn language found for '$LOCALE' (tried locale '$CROWDIN_LOCALE' and id '$LANG')"
+              continue
+            fi
+
+            # Skip if already a target language
+            if echo "$CURRENT_IDS" | jq -e --arg id "$CROWDIN_ID" 'contains([$id])' > /dev/null; then
+              echo "✓ $LOCALE → $CROWDIN_ID (already configured)"
+              continue
+            fi
+
+            echo "+ $LOCALE → $CROWDIN_ID (will be added)"
+            NEW_IDS+=("$CROWDIN_ID")
+          done < <(jq -r --arg base "$BASE_LOCALE" '.locales[] | select(. != $base)' "$SETTINGS")
+
+          if [ "${#NEW_IDS[@]}" -eq 0 ]; then
+            echo "No new languages to add — CrowdIn is already in sync."
+            exit 0
+          fi
+
+          # Build a JSON Patch payload — one op per new language
+          PATCH='[]'
+          for ID in "${NEW_IDS[@]}"; do
+            PATCH=$(echo "$PATCH" | jq --arg id "$ID" \
+              '. + [{"op":"add","path":"/targetLanguageIds/-","value":$id}]')
+          done
+
+          echo "Patching CrowdIn project..."
+          curl -sf -X PATCH \
+            -H "Authorization: Bearer $CROWDIN_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$PATCH" \
+            "$BASE/projects/$CROWDIN_PROJECT_ID" \
+            | jq '.data.targetLanguageIds'
+
+          echo "Done!"
