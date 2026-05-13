@@ -14,7 +14,9 @@ type HandleSettingsProps = {
   action: string;
 };
 
-type UserSettingsRequest = SettingsRequest['user'];
+type UserSettingsRequest = SettingsRequest['user'] & {
+  username?: string;
+};
 
 function mapToDarkKnight(theme: Theme) {
   switch (theme) {
@@ -103,12 +105,13 @@ export function useSettings() {
       location: $user.location ?? '',
       about: $user.about ?? '',
       birthday: $user.birthday,
-      set: async (settings: UserSettingsRequest) => {
+      username: $user.username,
+      set: (settings: UserSettingsRequest) => {
         const payload: SettingsRequest = {
           user: { ...settings },
         };
 
-        await handleSettingsChange({
+        return handleSettingsChange({
           request: () => saveSettingsRequest({ body: payload }),
           action: 'profile',
         });

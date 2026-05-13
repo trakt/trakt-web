@@ -33,7 +33,24 @@
         currentValue: $profile.displayName,
         name: m.text_display_name(),
         isRequired: true,
-        onSave: async (value: string) => $profile.set({ name: value }),
+        onSave: async (value: string) =>
+          (await $profile.set({ name: value }))
+            ? undefined
+            : { error: m.error_text_failed_update() },
+      },
+    },
+    username: {
+      label: m.button_label_change_username(),
+      drawer: {
+        type: "input" as const,
+        title: m.input_prompt_username(),
+        currentValue: $profile.username,
+        name: m.text_username(),
+        isRequired: true,
+        onSave: async (value: string) =>
+          (await $profile.set({ username: value }))
+            ? undefined
+            : { error: m.error_text_username() },
       },
     },
     email: {
@@ -58,7 +75,10 @@
         currentValue: $profile.location,
         name: m.text_location(),
         isRequired: true,
-        onSave: async (value: string) => $profile.set({ location: value }),
+        onSave: async (value: string) =>
+          (await $profile.set({ location: value }))
+            ? undefined
+            : { error: m.error_text_failed_update() },
       },
     },
     about: {
@@ -69,7 +89,10 @@
         currentValue: $profile.about,
         name: m.text_about(),
         isRequired: false,
-        onSave: async (value: string) => $profile.set({ about: value }),
+        onSave: async (value: string) =>
+          (await $profile.set({ about: value }))
+            ? undefined
+            : { error: m.error_text_failed_update() },
       },
     },
     birthday: {
@@ -82,7 +105,9 @@
         name: m.text_birthday(),
         isRequired: true,
         onSave: async (date: Date) =>
-          $profile.set({ dob: date ? formatLocalDate(date) : null }),
+          (await $profile.set({ dob: date ? formatLocalDate(date) : null }))
+            ? undefined
+            : { error: m.error_text_failed_update() },
       },
     },
   });
@@ -122,6 +147,13 @@
     <p class="ellipsis">{$profile.displayName}</p>
     {#snippet action()}
       {@render renameField("name")}
+    {/snippet}
+  </SettingsRow>
+
+  <SettingsRow title={m.text_username()}>
+    <p class="ellipsis">{$profile.username}</p>
+    {#snippet action()}
+      {@render renameField("username")}
     {/snippet}
   </SettingsRow>
 
