@@ -2,6 +2,7 @@
   import { getAuthContext } from "$lib/features/auth/stores/getAuthContext.ts";
   import type { InvalidateActionOptions } from "$lib/requests/models/InvalidateAction.ts";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
+  import { useClearInProgress } from "$lib/stores/useClearInProgress.ts";
   import { useImportInProgress } from "$lib/stores/useImportInProgress.ts";
   import { useInvalidator } from "$lib/stores/useInvalidator";
   import { LogLevel, print } from "$lib/utils/console/print";
@@ -15,6 +16,7 @@
   const { token } = getAuthContext();
   const { invalidateAll } = useInvalidator();
   const { importInProgress } = useImportInProgress();
+  const { clearInProgress } = useClearInProgress();
 
   let socket = $state<WebSocket | Nil>(null);
 
@@ -32,6 +34,7 @@
 
   function wsInvalidate(event: MessageEvent) {
     if (importInProgress.getValue()) return;
+    if (clearInProgress.getValue()) return;
 
     try {
       const data: WebSocketData = JSON.parse(event.data);
