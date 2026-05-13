@@ -1,5 +1,8 @@
 <script lang="ts">
+  import Carousel from "$lib/components/carousel/Carousel.svelte";
+  import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
 
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
@@ -7,16 +10,23 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
+  import { useShowProgress } from "$lib/stores/useShowProgress";
+  import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
+  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
+  import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import SeasonList from "../lists/season/SeasonList.svelte";
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
+  import NavbarStateSetter from "../navbar/NavbarStateSetter.svelte";
+  import SummaryRateNow from "./components/_internal/SummaryRateNow.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
+  import { useIsRateable } from "./components/rating/_internal/useIsRateable";
   import Sentiment from "./components/sentiment/Sentiment.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
@@ -55,7 +65,66 @@
       ),
     ].map((name) => ({ name })),
   );
+
+  const { isRateable } = $derived(useIsRateable({ type: "show", media }));
+
+  const { progress } = $derived(useShowProgress(media.slug));
+
+  const episode = $derived($progress);
+  const episodeRuntime = $derived(episode?.runtime ?? 0);
+  const episodeRemaining = $derived(episode?.remaining ?? 0);
+  const episodeTitle = $derived.by(() => {
+    if (!episode) return "";
+    return episodeActivityTitle(episode);
+  });
+
+  const hasProgress = $derived(episode && episode.id !== -1);
 </script>
+
+{#snippet rateContent()}
+  <SummaryRateNow type="show" {media} />
+{/snippet}
+
+{#snippet progressContent()}
+  <div class="up-next">
+    <div class="poster">
+      <CrossOriginImage
+        classList="trakt-card-cover-image"
+        src={episode?.cover.url ?? EPISODE_COVER_PLACEHOLDER}
+        alt="whatever"
+      />
+    </div>
+    <div class="info">
+      <span class="secondary">
+        {#if episode?.season === 1 && episode?.number === 1}
+          Start watching
+        {:else}
+          Continue watching
+        {/if}
+      </span>
+      <span class="ellipsis">
+        {`${episodeTitle} (${toHumanDuration({ minutes: episodeRuntime }, languageTag())})`}
+      </span>
+      <span class="tag ellipsis">
+        {`${episodeRemaining} left (${toHumanDuration({ minutes: episodeRemaining * episodeRuntime }, languageTag())})`}
+      </span>
+    </div>
+  </div>
+{/snippet}
+
+{#if hasProgress || $isRateable}
+  <NavbarStateSetter>
+    {#snippet contextualActions()}
+      {#if $isRateable && hasProgress}
+        <Carousel items={[progressContent, rateContent]} />
+      {:else if hasProgress}
+        {@render progressContent()}
+      {:else}
+        {@render rateContent()}
+      {/if}
+    {/snippet}
+  </NavbarStateSetter>
+{/if}
 
 <SummaryDrawer
   {sentiment}
@@ -118,3 +187,31 @@
 />
 
 <TriviaList {media} />
+
+<style>
+  .up-next {
+    --up-next-height: var(--ni-48);
+    height: var(--up-next-height);
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap-s);
+
+    .poster {
+      display: contents;
+
+      :global(img) {
+        padding-top: var(--ni-2);
+        height: var(--up-next-height);
+        width: calc(var(--up-next-height) * (16 / 9));
+        border-radius: var(--border-radius-s);
+      }
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+</style>
