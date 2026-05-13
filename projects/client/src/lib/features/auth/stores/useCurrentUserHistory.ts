@@ -15,7 +15,7 @@ import {
   type WatchedShow,
 } from '../queries/currentUserWatchedShowsQuery.ts';
 
-const showsHistoryLimit = 250;
+const showsHistoryLimit = 1000;
 const moviesHistoryLimit = 10000;
 
 export type UserHistory = {
