@@ -15,4 +15,8 @@ export const CLEAR_DATA_SOURCES: readonly ClearSource[] = [
     type: 'ratings',
     label: m.text_clear_source_ratings,
   },
+  {
+    type: 'history',
+    label: m.text_clear_source_history,
+  },
 ];

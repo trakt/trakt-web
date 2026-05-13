@@ -10,6 +10,7 @@
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useClearInProgress } from "$lib/stores/useClearInProgress.ts";
   import { useInvalidator } from "$lib/stores/useInvalidator";
   import { slide } from "svelte/transition";
   import type { SyncState } from "../sync/models/SyncState";
@@ -23,8 +24,9 @@
   import SettingsBlock from "./SettingsBlock.svelte";
   import SettingsRow from "./SettingsRow.svelte";
 
-  const { watchlist, ratings } = useUser();
-  const { invalidate } = useInvalidator();
+  const { watchlist, ratings, history } = useUser();
+  const { invalidateAll } = useInvalidator();
+  const { clearInProgress } = useClearInProgress();
   const { confirm } = useConfirm();
   const { record } = useAnalytics();
 
@@ -38,6 +40,8 @@
         return { type: activeSourceType, input: $watchlist };
       case "ratings":
         return { type: activeSourceType, input: $ratings };
+      case "history":
+        return { type: activeSourceType, input: $history ?? undefined };
     }
   });
 
@@ -65,6 +69,7 @@
     record(AnalyticsEvent.ClearInitiated, { source: source.type });
 
     abortController = new AbortController();
+    clearInProgress.next(true);
     syncState.status = "clearing";
     syncState.processedCount = 0;
     syncState.totalCount = totalCount;
@@ -82,6 +87,7 @@
       },
       onComplete: async (success) => {
         if (!success) {
+          clearInProgress.next(false);
           record(AnalyticsEvent.ClearFailed, {
             source: source.type,
             error: "aborted or fully failed",
@@ -100,7 +106,8 @@
           duration,
         });
 
-        await Promise.all(invalidations.map((action) => invalidate(action)));
+        await invalidateAll(invalidations);
+        clearInProgress.next(false);
         syncState.status = "done";
       },
     });
@@ -108,6 +115,7 @@
 
   function stopClear() {
     abortController?.abort();
+    clearInProgress.next(false);
     syncState.status = "idle";
     syncState.processedCount = 0;
     syncState.totalCount = 0;

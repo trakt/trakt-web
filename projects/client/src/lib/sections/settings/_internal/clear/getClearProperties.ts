@@ -15,6 +15,8 @@ function getTotalCount(source: ClearSource) {
         source.input.shows.size +
         source.input.episodes.size
       );
+    case 'history':
+      return source.input.movies.size + source.input.shows.size;
   }
 }
 
@@ -30,6 +32,12 @@ function getInvalidations(source: ClearSource) {
         InvalidateAction.Rated('movie'),
         InvalidateAction.Rated('show'),
         InvalidateAction.Rated('episode'),
+      ];
+    case 'history':
+      return [
+        InvalidateAction.MarkAsWatched('movie'),
+        InvalidateAction.MarkAsWatched('show'),
+        InvalidateAction.MarkAsWatched('episode'),
       ];
   }
 }
