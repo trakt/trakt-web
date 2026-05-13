@@ -2383,8 +2383,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_drop_show": {
@@ -2605,8 +2604,7 @@
       "default": "Review Replies",
       "description": "Aria-label for the button that opens the review replies dialog.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_comment_replies": {
@@ -2666,24 +2664,21 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "textarea_placeholder_reply": {
       "default": "Reply...",
       "description": "Placeholder text for the reply textarea in the review dialog.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_add_new_comment": {
       "default": "Add a new review",
       "description": "Aria-label for the button that opens the review dialog to add a new review.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "textarea_placeholder_comment": {
@@ -3596,8 +3591,7 @@
       "default": "Add review",
       "description": "Aria-label for the button that allows users to add a new review.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "input_prompt_rename_list": {
@@ -3809,9 +3803,7 @@
     "link_text_view_profile": {
       "default": "View profile",
       "description": "Text for the link that allows users to view their profile.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_search": {
       "default": "Search",
@@ -3891,8 +3883,7 @@
       "default": "Apply changes",
       "description": "Aria-label for the button that allows users to apply changes that are currently being edited.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_continue": {
@@ -3907,8 +3898,7 @@
       "default": "Create list",
       "description": "Aria-label for the button that allows users to create a new list.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_cta_create_list": {
@@ -5016,8 +5006,7 @@
       "default": "Activity",
       "description": "Title for lists containing recently watched items of the profiles the user follows or their own recently watched items. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_social": {
@@ -5558,8 +5547,7 @@
       "default": "Edit Review",
       "description": "Aria-label for the button that allows a user to edit a review.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_delete_comment": {
@@ -5579,7 +5567,6 @@
       "default": "Delete Review",
       "description": "Aria-label for the button that allows a user to delete a review.",
       "exclude": [
-        "ios",
         "android"
       ]
     },
@@ -5670,9 +5657,7 @@
     "button_text_set_cover_image": {
       "default": "Set as cover image",
       "description": "Text for the button that sets the background image of a movie, show, or episode as the users cover image. This must be as short as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "button_label_set_cover_image": {
       "default": "Set the image of \"{title}\" as your cover image.",
@@ -5683,8 +5668,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "page_title_start_watching": {
@@ -8365,7 +8349,6 @@
       "default": "Cover image has been set.",
       "description": "Text shown when a user has set a profile cover image.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -8373,7 +8356,6 @@
       "default": "Cover image has been cleared.",
       "description": "Text shown when a user has removed a profile cover image.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
@@ -8847,8 +8829,7 @@
       "default": "Personal Note",
       "description": "Text to denote that a note is a users personal note.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "drawer_title_notes": {
@@ -8896,8 +8877,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "input_placeholder_note_favorite": {
@@ -8911,16 +8891,14 @@
       "default": "Why did you drop this title?",
       "description": "Placeholder text for the input field when adding a note about why a user dropped a title.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "validation_text_note": {
       "default": "Note is required",
       "description": "Validation text shown when the user inputs an empty note.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "validation_text_note_character_limit": {
@@ -8932,8 +8910,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "error_text_unexpected_notes_error": {
@@ -8948,48 +8925,42 @@
       "default": "Edit",
       "description": "Button text for editing a note on a show or movie.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_edit_note": {
       "default": "Edit note",
       "description": "Aria-label for the button that allows users to edit a note on a show or movie.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_delete_note": {
       "default": "Delete",
       "description": "Button text for deleting a note on a show or movie.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_delete_note": {
       "default": "Delete note",
       "description": "Aria-label for the button that allows users to delete a note on a show or movie.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "warning_prompt_delete_note": {
       "default": "Are you sure you want to delete this note?",
       "description": "Confirmation prompt shown when a user attempts to delete a note.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_label_popup_menu_notes": {
       "default": "Note actions",
       "description": "Aria-label for the popup menu that shows note actions (edit, delete).",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "error_text_email": {
@@ -11029,7 +11000,6 @@
       "default": "Translations",
       "description": "Header for the section in settings that allows users to open CrowdIn translations project.",
       "exclude": [
-        "ios",
         "web"
       ]
     },
