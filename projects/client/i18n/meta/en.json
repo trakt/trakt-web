@@ -586,6 +586,11 @@
       "description": "Meta description for the movies section page.",
       "exclude": ["android", "ios"]
     },
+    "page_description_media": {
+      "default": "Browse trending, popular, and highly anticipated movies and TV shows on Trakt Web. Find your next watch and keep track of everything you've seen.",
+      "description": "Meta description for the movies section page.",
+      "exclude": ["android", "ios"]
+    },
     "button_text_browse_shows": {
       "default": "Shows",
       "description": "Text for the button that allows users to browse shows.",

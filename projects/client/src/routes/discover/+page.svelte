@@ -24,12 +24,35 @@
 
     return $themeFilters?.find((filter) => filter.id === id);
   };
+
+  const overview = $derived.by(() => {
+    switch ($type) {
+      case "show":
+        return m.page_description_shows();
+      case "movie":
+        return m.page_description_movies();
+      default:
+        return m.page_description_media();
+    }
+  });
+
+  const title = $derived.by(() => {
+    switch ($type) {
+      case "show":
+        return m.page_title_shows();
+      case "movie":
+        return m.page_title_movies();
+      default:
+        return m.page_title_discover();
+    }
+  });
 </script>
 
 <TraktPage
   audience="all"
   image={DEFAULT_SHARE_SHOW_COVER}
-  title={m.page_title_discover()}
+  {title}
+  info={{ overview }}
 >
   <TraktPageCoverSetter />
 
