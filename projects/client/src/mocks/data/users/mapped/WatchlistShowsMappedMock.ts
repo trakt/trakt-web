@@ -13,6 +13,7 @@ export const WatchlistShowsMappedMock: WatchlistedItem[] = [
     'entry': {
       ...ShowSiloMinimalMappedMock,
       'colors': undefined,
+      'updatedAt': undefined,
     },
   },
 ];

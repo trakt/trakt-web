@@ -20,6 +20,7 @@
     rating?: number | Nil;
     votes?: number;
     certification?: string | Nil;
+    updatedAt?: Date | Nil;
   };
 
   type TraktPageProps = {
@@ -253,7 +254,10 @@
   {/if}
   <meta property="og:title" content={ogTitle} />
   <meta property="og:locale" content={ogLocale} />
-  <meta property="og:updated_time" content={new Date().toISOString()} />
+
+  {#if _info?.updatedAt}
+    <meta property="og:updated_time" content={_info.updatedAt.toISOString()} />
+  {/if}
 
   <meta name="description" content={description} />
   <meta property="og:description" content={description} />

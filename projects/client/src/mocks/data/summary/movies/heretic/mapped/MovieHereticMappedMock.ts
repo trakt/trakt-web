@@ -40,6 +40,7 @@ export const MovieHereticMappedMock: MovieEntry = {
     },
   },
   'year': 2024,
+  'updatedAt': new Date('2024-12-15T08:05:20.000Z'),
   'type': 'movie',
   'runtime': 111,
   'slug': 'heretic-2024',
