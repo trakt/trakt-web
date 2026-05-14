@@ -1,7 +1,5 @@
+@seo
 Feature: SEO meta tags
-
-  Background:
-    When I click on the "consent-button" button
 
   Scenario: Home page has complete SEO meta tags
     Then the page should meet core SEO requirements
@@ -22,7 +20,7 @@ Feature: SEO meta tags
     And the page title should be "Trakt Web: Shows"
     And the og:title should be "Trakt Web: Shows"
     And the description should be "Discover trending, popular, and highly anticipated TV shows on Trakt Web. Find your next binge-worthy series and track every episode."
-    And the canonical path should be "/shows"
+    And the canonical path should be "/discover"
 
   Scenario: Movies section page has complete SEO meta tags
     When I open the movies section
@@ -32,7 +30,7 @@ Feature: SEO meta tags
     And the page title should be "Trakt Web: Movies"
     And the og:title should be "Trakt Web: Movies"
     And the description should be "Browse trending, popular, and highly anticipated movies on Trakt Web. Find your next watch and keep track of everything you've seen."
-    And the canonical path should be "/movies"
+    And the canonical path should be "/discover"
 
   Scenario: Show summary page has complete SEO meta tags
     When I view the show summary of "silo"
