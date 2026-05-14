@@ -165,6 +165,53 @@ Then(
 );
 
 Then(
+  'the og:image dimensions should be 1200 by 630',
+  async function (this: TraktWorld) {
+    const [width, height] = await Promise.all([
+      this.page.$eval('meta[property="og:image:width"]', (el) => el.getAttribute('content') ?? ''),
+      this.page.$eval('meta[property="og:image:height"]', (el) => el.getAttribute('content') ?? ''),
+    ]);
+    expect(width, 'og:image:width').toBe('1200');
+    expect(height, 'og:image:height').toBe('630');
+  },
+);
+
+Then(
+  'the JSON-LD should include a search action',
+  async function (this: TraktWorld) {
+    const jsonLdText = await this.page.$eval(
+      'script[type="application/ld+json"]',
+      (el) => el.textContent ?? '',
+    );
+    const jsonLd = JSON.parse(jsonLdText) as Record<string, unknown>;
+    const action = jsonLd['potentialAction'] as Record<string, unknown> | undefined;
+    expect(action, 'JSON-LD potentialAction should be present').toBeDefined();
+    expect(action?.['@type'], 'potentialAction @type').toBe('SearchAction');
+    const target = action?.['target'] as Record<string, unknown> | undefined;
+    expect(String(target?.['urlTemplate'] ?? ''), 'SearchAction urlTemplate').toMatch(
+      /search.*search_term_string/,
+    );
+  },
+);
+
+Then(
+  'the JSON-LD should include genre and year',
+  async function (this: TraktWorld) {
+    const jsonLdText = await this.page.$eval(
+      'script[type="application/ld+json"]',
+      (el) => el.textContent ?? '',
+    );
+    const jsonLd = JSON.parse(jsonLdText) as Record<string, unknown>;
+    const genres = jsonLd['genre'];
+    expect(genres, 'JSON-LD genre should be present').toBeDefined();
+    expect(Array.isArray(genres) ? genres.length : 0, 'JSON-LD genre should be non-empty').toBeGreaterThan(0);
+    const datePublished = jsonLd['datePublished'];
+    expect(datePublished, 'JSON-LD datePublished should be present').toBeDefined();
+    expect(String(datePublished ?? ''), 'JSON-LD datePublished should be a year').toMatch(/^\d{4}$/);
+  },
+);
+
+Then(
   'the JSON-LD should be of type {string}',
   async function (this: TraktWorld, schemaType: string) {
     const jsonLdText = await this.page.$eval(

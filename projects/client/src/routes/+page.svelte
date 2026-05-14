@@ -33,6 +33,7 @@
   {audience}
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_home()}
+  info={{ overview: m.page_description_home() }}
   type="home"
   mode={pageMode}
 >
