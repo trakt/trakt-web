@@ -52,6 +52,7 @@
     "zh-CN": "🇨🇳",
     "tr-TR": "🇹🇷",
     "hu-HU": "🇭🇺",
+    "el-GR": "🇬🇷",
   };
 
   const localeToTitle: Record<AvailableLocale, string> = {
@@ -77,6 +78,7 @@
     "zh-CN": "中文 (简体)",
     "tr-TR": "Türkçe",
     "hu-HU": "Magyar",
+    "el-GR": "Ελληνικά",
   };
 
   const options = $derived(

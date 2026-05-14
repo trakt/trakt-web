@@ -3,6 +3,7 @@ import {
   bg,
   da,
   de,
+  el,
   enAU,
   enUS,
   es,
@@ -48,4 +49,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'zh-CN': zhCN,
   'tr-TR': tr,
   'hu-HU': hu,
+  'el-GR': el,
 };
