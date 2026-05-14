@@ -11221,6 +11221,30 @@
         "android",
         "ios"
       ]
+    },
+    "text_footer_category_platform": {
+      "default": "Platform",
+      "description": "Footer category for platform links in the app footer. This should be a short and concise title.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_footer_category_community": {
+      "default": "Community",
+      "description": "Footer category for community links in the app footer. This should be a short and concise title.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_footer_category_legal": {
+      "default": "Legal",
+      "description": "Footer category for legal links in the app footer. This should be a short and concise title.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

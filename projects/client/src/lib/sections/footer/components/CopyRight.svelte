@@ -1,45 +1,50 @@
 <script lang="ts">
+  import FeatureFlagTool from "$lib/features/feature-flag/FeatureFlagTool.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
 
   const currentYear = new Date().getFullYear();
-  const copyright = $derived(`© 2010-${currentYear} trakt, inc.`);
+  const copyright = `© 2010-${currentYear} trakt, inc.`;
 </script>
 
-{#snippet content(copyrightText: string, subtitleText: string)}
-  <p class="secondary bold">
-    {copyrightText}
-  </p>
-  <p class="secondary bold">
-    {subtitleText}
-  </p>
-{/snippet}
+<div class="trakt-footer-copyright">
+  <div class="trakt-copyright">
+    <p class="secondary tag">
+      {copyright}
+      {m.text_copyright_notice()}
+    </p>
+    <p class="secondary tag">
+      {m.text_copyright_crafted_by()}
+    </p>
+  </div>
 
-<div class="trakt-copyright">
-  <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-    {@render content(
-      `${copyright} ${m.text_copyright_notice()}`,
-      m.text_copyright_crafted_by(),
-    )}
-  </RenderFor>
-
-  <RenderFor audience="all" device={["tablet-sm", "mobile"]}>
-    {@render content(copyright, m.text_copyright_notice())}
-  </RenderFor>
+  <FeatureFlagTool />
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  .trakt-footer-copyright,
   .trakt-copyright {
     display: flex;
-    flex-direction: column;
-    gap: var(--ni-8);
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
 
-    width: fit-content;
+  .trakt-footer-copyright {
+    :global(.trakt-action-button) {
+      --button-size: var(--ni-32);
+    }
+  }
 
-    @include for-mobile() {
-      align-items: center;
+  .trakt-copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-xs);
+
+    @include for-mobile {
+      flex-direction: column;
     }
   }
 </style>
