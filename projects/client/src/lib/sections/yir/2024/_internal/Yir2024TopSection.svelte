@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { m } from "$lib/paraglide/messages";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
 
   import Yir2024Hero from "./Yir2024Hero.svelte";
   import Yir2024PageInner from "./Yir2024PageInner.svelte";
-  import Yir2024PlayCard from "./Yir2024PlayCard.svelte";
   import Yir2024WatchedStats from "./Yir2024WatchedStats.svelte";
 
   const {
@@ -12,12 +10,10 @@
     slug,
     year,
   }: {
-    detail: YirDetail;
+    detail: YirDetail | null;
     slug: string;
     year: number;
   } = $props();
-
-  const hasWatched = $derived(detail.stats.all.playCounts.total > 0);
 </script>
 
 <section class="yir-2024-top" id="section-totals">
@@ -27,13 +23,8 @@
     <div class="yir-2024-top-stack">
       <Yir2024Hero {slug} {year} {detail} />
 
-      <Yir2024WatchedStats stats={detail.stats.all} {slug} />
-
-      {#if hasWatched && detail.firstWatched}
-        <Yir2024PlayCard
-          item={detail.firstWatched}
-          headerLabel={m.yir_2024_first_play_of({ year })}
-        />
+      {#if detail}
+        <Yir2024WatchedStats stats={detail.stats.all} {slug} />
       {/if}
     </div>
   </Yir2024PageInner>
@@ -42,7 +33,7 @@
 <style lang="scss">
   .yir-2024-top {
     position: relative;
-    padding: var(--ni-104) 0;
+    padding: var(--ni-104) 0 0 0;
     overflow: hidden;
   }
 

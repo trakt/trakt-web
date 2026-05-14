@@ -7677,6 +7677,155 @@
         "ios"
       ]
     },
+    "yir_2024_stats_intro_shows": {
+      "default": "In {year}, you watched",
+      "description": "Lead-in line above the big '{hours} hours of {count} Shows' headline on the 2024 Year in Review TV stats section.",
+      "variables": {
+        "year": { "type": "number" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_intro_movies": {
+      "default": "In {year}, you watched",
+      "description": "Lead-in line above the big '{hours} hours of {count} Movies' headline on the 2024 Year in Review movie stats section.",
+      "variables": {
+        "year": { "type": "number" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_summary_shows": {
+      "default": "{hours} hours of {count} Shows",
+      "description": "Big headline summarising hours watched and number of distinct shows on the 2024 Year in Review TV stats section.",
+      "variables": {
+        "hours": { "type": "string" },
+        "count": { "type": "string" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_summary_movies": {
+      "default": "{hours} hours of {count} Movies",
+      "description": "Big headline summarising hours watched and number of distinct movies on the 2024 Year in Review movie stats section.",
+      "variables": {
+        "hours": { "type": "string" },
+        "count": { "type": "string" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_most_active_week": {
+      "default": "Your most active week was <b>{start} - {end}</b> with <b>{count} plays</b>.",
+      "description": "Info line on the 2024 Year in Review stats section reporting the user's busiest watching week. The <b> tags wrap dynamic values that render as bold purple highlights — keep them around the same content when translating.",
+      "variables": {
+        "start": { "type": "string" },
+        "end": { "type": "string" },
+        "count": { "type": "string" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_most_popular_time": {
+      "default": "The most popular time you watched was <b>{time}</b>.",
+      "description": "Info line on the 2024 Year in Review stats section reporting the user's busiest hour of day. The <b> tags wrap the time value as a bold purple highlight — keep them around the time when translating.",
+      "variables": {
+        "time": { "type": "string" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_card_hours": {
+      "default": "{count} Hours",
+      "description": "Title on the hours-watched chart card on the 2024 Year in Review stats section.",
+      "variables": {
+        "count": { "type": "string" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_card_plays": {
+      "default": "{count} Plays",
+      "description": "Title on the plays chart card on the 2024 Year in Review stats section.",
+      "variables": {
+        "count": { "type": "string" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_per_month": {
+      "default": "Per Month",
+      "description": "Stat-line label for the monthly average row on the 2024 Year in Review stats card.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_per_week": {
+      "default": "Per Week",
+      "description": "Stat-line label for the weekly average row on the 2024 Year in Review stats card.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_per_day": {
+      "default": "Per Day",
+      "description": "Stat-line label for the daily average row on the 2024 Year in Review stats card.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_tooltip_plays": {
+      "default": "{count} Plays",
+      "description": "Tooltip headline for play-count points on the 2024 Year in Review stats charts.",
+      "variables": {
+        "count": { "type": "string" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_tooltip_hours": {
+      "default": "{count} Hours",
+      "description": "Tooltip headline for hours-watched points on the 2024 Year in Review stats charts.",
+      "variables": {
+        "count": { "type": "string" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "yir_2024_stats_tooltip_week_label": {
+      "default": "Week {week}",
+      "description": "Tooltip secondary label naming the week number on the 2024 Year in Review weekly chart.",
+      "variables": {
+        "week": { "type": "string" }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "vip_feature_title_mir": {
       "default": "Month in Review",
       "description": "Title for the Month in Review VIP feature.",

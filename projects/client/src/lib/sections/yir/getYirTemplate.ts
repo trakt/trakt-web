@@ -4,7 +4,12 @@ import Yir2024 from './2024/Yir2024.svelte';
 import YirDefault from './default/YirDefault.svelte';
 
 type YirTemplateProps = {
-  detail: YirDetail;
+  /**
+   * Null while the YIR detail query is in flight. Templates render their
+   * scaffold (header / hero / etc) immediately and gate detail-dependent
+   * sections so the page progressively fills in as data lands.
+   */
+  detail: YirDetail | null;
   slug: string;
   year: number;
 };

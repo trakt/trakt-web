@@ -11,4 +11,6 @@ export type BarChartProps = {
   data: BarChartData[];
   tickLabels?: string[];
   tooltip?: Snippet<[TooltipArgs]>;
+  /** Pixel gap between bars. Defaults to 2px. */
+  barSpacing?: number;
 };
