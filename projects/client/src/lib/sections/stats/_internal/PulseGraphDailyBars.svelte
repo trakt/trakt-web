@@ -9,17 +9,23 @@
 
 <div class="graph-daily-bars">
   {#each data.labels as label, i (i)}
-    {@const barPct = max > 0 ? ((data.days[i] ?? 0) / max) * 100 : 0}
-    {@const isToday = label === m.text_stats_today()}
+    {@const value = data.days[i] ?? 0}
+    {@const barPct = max > 0 ? (value / max) * 100 : 0}
+    {@const isMax = value === max && value > 0}
+    {@const displayLabel = label.charAt(0).toUpperCase()}
+
     <div class="daily-bar-col">
+      <span class="daily-bar-value" class:is-highlight={isMax}>
+        {value > 0 ? value : ""}
+      </span>
       <div class="daily-bar-track">
         <div
           class="daily-bar-fill"
-          class:is-today={isToday}
+          class:is-highlight={isMax}
           style:height="{barPct}%"
         ></div>
       </div>
-      <span class="daily-bar-label">{label}</span>
+      <span class="daily-bar-label">{displayLabel}</span>
     </div>
   {/each}
 </div>
@@ -29,6 +35,8 @@
     display: flex;
     gap: var(--ni-8);
     flex: 1;
+    align-items: flex-end;
+    padding-bottom: var(--ni-4);
   }
 
   .daily-bar-col {
@@ -38,40 +46,52 @@
     gap: var(--ni-4);
     flex: 1;
     min-width: 0;
-    justify-content: flex-end;
+    height: 100%;
+  }
+
+  .daily-bar-value {
+    font-size: var(--ni-10);
+    font-weight: 600;
+    color: var(--shade-600);
+    height: var(--ni-12);
+    line-height: 1.2;
+
+    &.is-highlight {
+      color: var(--color-white);
+    }
   }
 
   .daily-bar-track {
     position: relative;
-    width: 100%;
+    width: var(--ni-24);
     flex: 1;
     display: flex;
     justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--ni-4) var(--ni-4) 0 0;
   }
 
   .daily-bar-fill {
     position: absolute;
     bottom: 0;
-    left: 15%;
-    right: 15%;
-    background: var(--purple-500);
-    border-radius: var(--ni-2);
+    left: 0;
+    right: 0;
+    background: #333; // Default grey for bars
+    border-radius: var(--ni-4) var(--ni-4) 0 0;
     min-height: 1px;
+    transition: height 0.3s ease-out;
 
-    &.is-today {
-      background: var(--purple-400);
-      box-shadow: 0 0 var(--ni-6)
-        color-mix(in srgb, var(--purple-400) 40%, transparent);
+    &.is-highlight {
+      background: var(--purple-500);
     }
   }
 
   .daily-bar-label {
-    font-size: var(--ni-10);
+    font-size: var(--ni-11);
+    font-weight: 500;
     color: var(--shade-600);
     line-height: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 100%;
+    margin-top: var(--ni-4);
   }
 </style>
+

@@ -37,9 +37,9 @@
     --height-list="var(--height-pulse-list)"
   >
     {#snippet metaInfo()}
-      <p class="trakt-weekly-pulse-range tag secondary">
+      <span class="trakt-weekly-pulse-range">
         {getDateRangeLabel(dateRange)}
-      </p>
+      </span>
     {/snippet}
 
     {#snippet item(entry)}
@@ -77,5 +77,17 @@
     :global(.trakt-skeleton-card-footer) {
       display: none;
     }
+  }
+
+  :global(#weekly-pulse .trakt-list-title) {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--ni-12);
+  }
+
+  .trakt-weekly-pulse-range {
+    font-size: var(--ni-13);
+    color: var(--shade-400);
+    font-weight: 500;
   }
 </style>

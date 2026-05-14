@@ -53,11 +53,14 @@
     overflow: hidden;
     height: 100%;
     box-sizing: border-box;
+    background: #1d1f21;
   }
 
   .trakt-pulse-graph-title {
     font-size: var(--ni-11);
     font-weight: 600;
     color: var(--shade-400);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 </style>

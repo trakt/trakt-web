@@ -32,17 +32,10 @@
   --height-card="var(--height-pulse-card)"
 >
   <div class="trakt-pulse-cell">
-    {#if tooltip}
-      <Tooltip content={tooltip} side="right">
-        {@render iconEl()}
-      </Tooltip>
-    {:else}
-      {@render iconEl()}
-    {/if}
+    <p class="trakt-pulse-cell-label">{label}</p>
 
     <div class="trakt-pulse-cell-body">
       <p class="trakt-pulse-cell-value">{value}</p>
-      <p class="trakt-pulse-cell-label">{label}</p>
     </div>
 
     <PulseDeltaTag {delta} {note} />
@@ -57,23 +50,10 @@
     gap: var(--ni-10);
     padding: var(--ni-16);
     overflow: hidden;
-  }
+    height: 100%;
+    box-sizing: border-box;
 
-  .trakt-pulse-cell-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: var(--ni-28);
-    height: var(--ni-28);
-    border-radius: var(--border-radius-s);
-    background: var(--color-official-list-background);
-
-    :global(svg) {
-      width: var(--ni-16);
-      height: var(--ni-16);
-      color: var(--color-text-emphasis);
-    }
+    background: #1d1f21; // Dark background matching the photo
   }
 
   .trakt-pulse-cell-body {
@@ -81,19 +61,25 @@
     flex-direction: column;
     gap: var(--ni-4);
     flex: 1;
+    justify-content: center;
   }
 
   .trakt-pulse-cell-value {
-    font-size: var(--ni-32);
+    font-size: var(--ni-48);
     font-weight: 700;
     line-height: 1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--color-white);
   }
 
   .trakt-pulse-cell-label {
-    font-size: var(--ni-13);
+    font-size: var(--ni-11);
+    font-weight: 600;
     color: var(--shade-400);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 </style>
+
