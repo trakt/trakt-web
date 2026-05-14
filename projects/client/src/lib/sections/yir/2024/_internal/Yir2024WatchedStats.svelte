@@ -192,7 +192,7 @@
   }
 
   .yir-2024-stat-label {
-    font-size: var(--ni-14);
+    font-size: var(--font-size-text);
     color: var(--shade-300);
     text-transform: uppercase;
 

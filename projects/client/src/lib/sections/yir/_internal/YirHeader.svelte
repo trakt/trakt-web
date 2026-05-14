@@ -1,5 +1,6 @@
 <script lang="ts">
   import { browser } from "$app/environment";
+  import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import { map } from "rxjs";
 
@@ -8,6 +9,7 @@
   import { useQuery } from "$lib/features/query/useQuery";
   import { m } from "$lib/paraglide/messages";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
+  import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
@@ -37,6 +39,37 @@
 
   const prevYearUrl = $derived(UrlBuilder.users(slug).yearToDate(year - 1));
   const nextYearUrl = $derived(UrlBuilder.users(slug).yearToDate(year + 1));
+
+  // Arrow-key navigation between years. Skip when the user is typing in an
+  // input/textarea/contenteditable so we don't hijack form-field navigation.
+  function isTextInputTarget(target: EventTarget | null): boolean {
+    if (!(target instanceof HTMLElement)) return false;
+    const tag = target.tagName;
+    return (
+      tag === "INPUT" ||
+      tag === "TEXTAREA" ||
+      tag === "SELECT" ||
+      target.isContentEditable
+    );
+  }
+
+  $effect(() => {
+    return GlobalEventBus.getInstance().register("keydown", (event) => {
+      if (event.metaKey || event.ctrlKey || event.altKey) return;
+      if (isTextInputTarget(event.target)) return;
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goto(prevYearUrl);
+        return;
+      }
+
+      if (event.key === "ArrowRight" && canGoNext) {
+        event.preventDefault();
+        goto(nextYearUrl);
+      }
+    });
+  });
 
   const { share } = $derived(useShare({ id: "yir" }));
 
@@ -127,6 +160,9 @@
       background-color 0.2s,
       backdrop-filter 0.2s;
 
+    // The "scrolled" treatment also applies on hover so the bar lights up
+    // when the user is interacting with it, even before they scroll.
+    &:hover,
     &:global(.scrolled) {
       background: var(--color-background-mobile-navbar);
       box-shadow: var(--shadow-navbar);

@@ -17,67 +17,71 @@
     slug,
     year,
   }: {
-    detail: YirDetail;
+    detail: YirDetail | null;
     slug: string;
     year: number;
   } = $props();
 </script>
 
-<YirTitleSection {slug} {year} coverImage={detail.images.cover} />
+<!-- Title section paints immediately (cover image falls back to the
+     DEFAULT_COVER constant inside the component when unavailable). -->
+<YirTitleSection {slug} {year} coverImage={detail?.images.cover} />
 
-<YirTotalsSection stats={detail.stats.all} {year} />
+{#if detail}
+  <YirTotalsSection stats={detail.stats.all} {year} />
 
-{#if detail.firstWatched}
-  <YirCalendarSection how="first" item={detail.firstWatched} {year} />
+  {#if detail.firstWatched}
+    <YirCalendarSection how="first" item={detail.firstWatched} {year} />
+  {/if}
+
+  <!-- TV Shows -->
+  {#if detail.stats.shows.playCounts.total > 0}
+    <YirStatsSection type="shows" stats={detail.stats.shows} {year} />
+  {/if}
+
+  {#if detail.mostWatched.shows.length > 0}
+    <YirMostWatchedSection type="shows" items={detail.mostWatched.shows} />
+  {/if}
+
+  {#if detail.genres.shows.itemCount > 0}
+    <YirGenresSection type="shows" genres={detail.genres.shows} />
+  {/if}
+
+  {#if detail.networks.length > 0}
+    <YirNetworksSection networks={detail.networks} />
+  {/if}
+
+  {#if detail.topRated.shows.length > 0}
+    <YirRatedSection type="shows" items={detail.topRated.shows} />
+  {/if}
+
+  <!-- Movies -->
+  {#if detail.stats.movies.playCounts.total > 0}
+    <YirStatsSection type="movies" stats={detail.stats.movies} {year} />
+  {/if}
+
+  {#if detail.mostWatched.movies.length > 0}
+    <YirMostWatchedSection type="movies" items={detail.mostWatched.movies} />
+  {/if}
+
+  {#if detail.genres.movies.itemCount > 0}
+    <YirGenresSection type="movies" genres={detail.genres.movies} />
+  {/if}
+
+  {#if detail.productionCompanies.length > 0}
+    <YirStudiosSection studios={detail.productionCompanies} />
+  {/if}
+
+  {#if detail.topRated.movies.length > 0}
+    <YirRatedSection type="movies" items={detail.topRated.movies} />
+  {/if}
+
+  <!-- People -->
+  <YirPeopleSection {slug} {year} />
+
+  {#if detail.lastWatched}
+    <YirCalendarSection how="last" item={detail.lastWatched} {year} />
+  {/if}
+
+  <YirUpgradeSection />
 {/if}
-
-<!-- TV Shows -->
-{#if detail.stats.shows.playCounts.total > 0}
-  <YirStatsSection type="shows" stats={detail.stats.shows} {year} />
-{/if}
-
-{#if detail.mostWatched.shows.length > 0}
-  <YirMostWatchedSection type="shows" items={detail.mostWatched.shows} />
-{/if}
-
-{#if detail.genres.shows.itemCount > 0}
-  <YirGenresSection type="shows" genres={detail.genres.shows} />
-{/if}
-
-{#if detail.networks.length > 0}
-  <YirNetworksSection networks={detail.networks} />
-{/if}
-
-{#if detail.topRated.shows.length > 0}
-  <YirRatedSection type="shows" items={detail.topRated.shows} />
-{/if}
-
-<!-- Movies -->
-{#if detail.stats.movies.playCounts.total > 0}
-  <YirStatsSection type="movies" stats={detail.stats.movies} {year} />
-{/if}
-
-{#if detail.mostWatched.movies.length > 0}
-  <YirMostWatchedSection type="movies" items={detail.mostWatched.movies} />
-{/if}
-
-{#if detail.genres.movies.itemCount > 0}
-  <YirGenresSection type="movies" genres={detail.genres.movies} />
-{/if}
-
-{#if detail.productionCompanies.length > 0}
-  <YirStudiosSection studios={detail.productionCompanies} />
-{/if}
-
-{#if detail.topRated.movies.length > 0}
-  <YirRatedSection type="movies" items={detail.topRated.movies} />
-{/if}
-
-<!-- People -->
-<YirPeopleSection {slug} {year} />
-
-{#if detail.lastWatched}
-  <YirCalendarSection how="last" item={detail.lastWatched} {year} />
-{/if}
-
-<YirUpgradeSection />

@@ -8,10 +8,14 @@
   import { flushSync } from "svelte";
   import type { BarChartProps, TooltipArgs } from "./models/BarChartProps";
 
-  const barSpacing = 2;
   const chartPaddingVar = "var(--ni-12)";
 
-  const { data, tooltip, tickLabels }: BarChartProps = $props();
+  const {
+    data,
+    tooltip,
+    tickLabels,
+    barSpacing = 2,
+  }: BarChartProps = $props();
 
   // Carbon Charts keys bars by `group`; remap label → group so D3 join is stable on resize.
   const carbonData = $derived(

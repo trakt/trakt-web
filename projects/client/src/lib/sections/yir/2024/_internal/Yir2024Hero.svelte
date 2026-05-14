@@ -21,7 +21,7 @@
   }: {
     slug: string;
     year: number;
-    detail: YirDetail;
+    detail: YirDetail | null;
   } = $props();
 
   const profileQuery = $derived(useQuery(userProfileQuery({ slug })));
@@ -35,11 +35,16 @@
       : m.yir_2024_huge_label_year_in_review(),
   );
 
+  // Posters need the YIR detail; render an empty list while it loads so the
+  // rest of the hero (year row, label, directed-by, membership) paints
+  // immediately and the posters fade in once the query lands.
   const heroPosters = $derived(
-    [
-      ...detail.mostWatched.shows.slice(0, 3),
-      ...detail.mostWatched.movies.slice(0, 3),
-    ].map((item) => item.entry),
+    detail
+      ? [
+        ...detail.mostWatched.shows.slice(0, 3),
+        ...detail.mostWatched.movies.slice(0, 3),
+      ].map((item) => item.entry)
+      : [],
   );
 
   const displayName = $derived(
@@ -191,11 +196,11 @@
 
   .yir-2024-by-label,
   .yir-2024-name-label {
-    font-size: var(--ni-18);
+    font-size: var(--font-size-title);
     text-align: start;
 
     @include for-mobile {
-      font-size: var(--ni-14);
+      font-size: var(--font-size-text);
     }
   }
 
