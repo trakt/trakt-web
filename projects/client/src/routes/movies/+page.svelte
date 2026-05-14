@@ -16,6 +16,7 @@
   audience="all"
   image={DEFAULT_SHARE_MOVIE_COVER}
   title={m.page_title_movies()}
+  info={{ overview: m.page_description_movies() }}
 >
   <TraktPageCoverSetter />
 

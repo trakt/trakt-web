@@ -6,19 +6,27 @@
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre";
   import Redirect from "../../components/router/Redirect.svelte";
   import Footer from "../footer/Footer.svelte";
   import NavbarStateSetter from "../navbar/NavbarStateSetter.svelte";
   import { openGraphUrlBuilder } from "./_internal/openGraphUrlBuilder";
 
+  type MediaInfo = {
+    overview: string;
+    runtime?: number;
+    year?: number | Nil;
+    genres?: ReadonlyArray<string>;
+    rating?: number | Nil;
+    votes?: number;
+    certification?: string | Nil;
+  };
+
   type TraktPageProps = {
     title: string | undefined;
     type?: ExtendedMediaType | "webpage" | "home";
     image: string | Nil;
-    info?: {
-      overview: string;
-      runtime?: number;
-    };
+    info?: MediaInfo;
     hasDynamicContent?: boolean;
     mode?: "default" | "content-only";
   };
@@ -38,6 +46,17 @@
   const websiteTitle = "Track Your Shows & Movies";
   const twitterHandle = "@trakt";
   const slug = $derived(page.params.slug);
+
+  const DEFAULT_OVERVIEW =
+    "Trakt Web: A new, lightweight way to track your favorite movies and TV shows.";
+  const MAX_DESCRIPTION_LENGTH = 155;
+
+  function truncateDescription(text: string): string {
+    if (text.length <= MAX_DESCRIPTION_LENGTH) return text;
+    const truncated = text.slice(0, MAX_DESCRIPTION_LENGTH);
+    const lastSpace = truncated.lastIndexOf(" ");
+    return `${truncated.slice(0, lastSpace > 0 ? lastSpace : MAX_DESCRIPTION_LENGTH)}…`;
+  }
 
   const image = $derived.by(() => {
     const isMediaPage = type === "movie" || type === "show";
@@ -80,14 +99,21 @@
     }
   });
 
-  const info = $derived(
-    type === "webpage" || type === "home"
-      ? {
-          overview:
-            "Trakt Web: A new, lightweight way to track your favorite movies and TV shows.",
-          runtime: 0,
-        }
-      : _info,
+  const DEFAULT_PAGE_INFO: MediaInfo = {
+    overview: DEFAULT_OVERVIEW,
+    runtime: 0,
+  };
+
+  const info = $derived.by<MediaInfo | undefined>(() => {
+    if (type !== "webpage" && type !== "home") return _info;
+    return {
+      ...DEFAULT_PAGE_INFO,
+      overview: _info?.overview ?? DEFAULT_OVERVIEW,
+    };
+  });
+
+  const description = $derived(
+    info != null ? truncateDescription(info.overview) : undefined,
   );
 
   const canonicalUrl = $derived(`${page.url.origin}${page.url.pathname}`);
@@ -108,37 +134,75 @@
 
   const robots = $derived(AUDIENCE_ROBOTS[audience]);
 
-  const createWebsiteLd = (url: string) =>
-    JSON.stringify({
+  const isMediaPage = $derived(type === "movie" || type === "show");
+
+  const createWebsiteLd = (url: string) => {
+    const origin = new URL(url).origin;
+    return JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: websiteName,
       url,
       description: websiteTitle,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${origin}${UrlBuilder.search()}?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
     });
+  };
+
+  const buildAggregateRating = (rating: number | Nil, votes: number | undefined) => {
+    if (!rating || !votes) return undefined;
+    return {
+      "@type": "AggregateRating",
+      ratingValue: rating.toFixed(1),
+      ratingCount: votes,
+      bestRating: "10",
+      worstRating: "0",
+    };
+  };
 
   const createMovieLd = (title: string, url: string) => {
-    const duration = _info?.runtime;
+    const { runtime, year, genres, rating, votes, certification } = _info ?? {};
+    const genreLabels = genres?.map((g) => toTranslatedGenre(g)) ?? [];
+    const aggregateRating = buildAggregateRating(rating, votes);
+
     return JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Movie",
       name: title,
-      description: _info?.overview,
+      description: description,
       image: _image,
       url,
-      ...(duration && duration > 0 ? { duration: `PT${duration}M` } : {}),
+      ...(year ? { datePublished: String(year) } : {}),
+      ...(genreLabels.length > 0 ? { genre: genreLabels } : {}),
+      ...(runtime && runtime > 0 ? { duration: `PT${runtime}M` } : {}),
+      ...(certification ? { contentRating: certification } : {}),
+      ...(aggregateRating ? { aggregateRating } : {}),
     });
   };
 
-  const createShowLd = (title: string, url: string) =>
-    JSON.stringify({
+  const createShowLd = (title: string, url: string) => {
+    const { year, genres, rating, votes } = _info ?? {};
+    const genreLabels = genres?.map((g) => toTranslatedGenre(g)) ?? [];
+    const aggregateRating = buildAggregateRating(rating, votes);
+
+    return JSON.stringify({
       "@context": "https://schema.org",
       "@type": "TVSeries",
       name: title,
-      description: _info?.overview,
+      description: description,
       image: _image,
       url,
+      ...(year ? { datePublished: String(year) } : {}),
+      ...(genreLabels.length > 0 ? { genre: genreLabels } : {}),
+      ...(aggregateRating ? { aggregateRating } : {}),
     });
+  };
 
   // FIXME: extend with season and episode information
   const createEpisodeLd = (title: string, url: string) =>
@@ -146,7 +210,7 @@
       "@context": "https://schema.org",
       "@type": "TVEpisode",
       name: title,
-      description: _info?.overview,
+      description: description,
       image: _image,
       url,
     });
@@ -178,17 +242,21 @@
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:image" content={image} />
   <meta property="og:image:alt" content={ogTitle} />
+  {#if isMediaPage}
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+  {/if}
   <meta property="og:title" content={ogTitle} />
   <meta property="og:locale" content={ogLocale} />
   <meta property="og:updated_time" content={new Date().toISOString()} />
 
-  {#if info != null}
-    <meta name="description" content={info.overview} />
-    <meta property="og:description" content={info.overview} />
-    {#if info.runtime && info.runtime > 0}
-      <meta property="video:duration" content={`${info.runtime * 60}`} />
+  {#if description != null}
+    <meta name="description" content={description} />
+    <meta property="og:description" content={description} />
+    {#if _info?.runtime && _info.runtime > 0}
+      <meta property="video:duration" content={`${_info.runtime * 60}`} />
     {/if}
-    <meta name="twitter:description" content={info.overview} />
+    <meta name="twitter:description" content={description} />
   {/if}
 
   <meta name="twitter:card" content="summary_large_image" />

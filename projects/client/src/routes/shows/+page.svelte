@@ -18,6 +18,7 @@
   audience="all"
   image={DEFAULT_SHARE_SHOW_COVER}
   title={m.page_title_shows()}
+  info={{ overview: m.page_description_shows() }}
 >
   <NavbarStateSetter hasFilters />
   <TraktPageCoverSetter />
