@@ -5,8 +5,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Redirect from "../../components/router/Redirect.svelte";
   import Footer from "../footer/Footer.svelte";
   import NavbarStateSetter from "../navbar/NavbarStateSetter.svelte";
@@ -112,8 +112,10 @@
     };
   });
 
+  const fallbackDescription = "Trakt Web: Track Your Shows & Movies";
+
   const description = $derived(
-    info != null ? truncateDescription(info.overview) : undefined,
+    info?.overview ? truncateDescription(info.overview) : fallbackDescription,
   );
 
   const canonicalUrl = $derived(`${page.url.origin}${page.url.pathname}`);
@@ -155,7 +157,10 @@
     });
   };
 
-  const buildAggregateRating = (rating: number | Nil, votes: number | undefined) => {
+  const buildAggregateRating = (
+    rating: number | Nil,
+    votes: number | undefined,
+  ) => {
     if (!rating || !votes) return undefined;
     return {
       "@type": "AggregateRating",
@@ -175,7 +180,7 @@
       "@context": "https://schema.org",
       "@type": "Movie",
       name: title,
-      description: description,
+      description,
       image: _image,
       url,
       ...(year ? { datePublished: String(year) } : {}),
@@ -195,7 +200,7 @@
       "@context": "https://schema.org",
       "@type": "TVSeries",
       name: title,
-      description: description,
+      description,
       image: _image,
       url,
       ...(year ? { datePublished: String(year) } : {}),
@@ -250,14 +255,12 @@
   <meta property="og:locale" content={ogLocale} />
   <meta property="og:updated_time" content={new Date().toISOString()} />
 
-  {#if description != null}
-    <meta name="description" content={description} />
-    <meta property="og:description" content={description} />
-    {#if _info?.runtime && _info.runtime > 0}
-      <meta property="video:duration" content={`${_info.runtime * 60}`} />
-    {/if}
-    <meta name="twitter:description" content={description} />
+  <meta name="description" content={description} />
+  <meta property="og:description" content={description} />
+  {#if _info?.runtime && _info.runtime > 0}
+    <meta property="video:duration" content={`${_info.runtime * 60}`} />
   {/if}
+  <meta name="twitter:description" content={description} />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content={twitterHandle} />

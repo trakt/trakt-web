@@ -7,6 +7,8 @@
 
   const { children }: ChildrenProps = $props();
 
+  update(sanitizeGlobalParameters(page.url.searchParams));
+
   $effect(() => {
     const sanitizedParams = sanitizeGlobalParameters(page.url.searchParams);
     update(sanitizedParams);
