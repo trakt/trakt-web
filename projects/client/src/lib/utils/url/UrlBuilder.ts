@@ -173,7 +173,14 @@ export const UrlBuilder = {
 
   home: () => '/',
   shows: () => '/shows',
-  discover: () => '/discover',
+  discover: (params?: DiscoverUrlParams) => {
+    const baseUrl = '/discover';
+    if (!params) {
+      return baseUrl;
+    }
+
+    return baseUrl + buildParamString(sanitizeParams(params));
+  },
   media: (type: MediaType, id: string) => {
     switch (type) {
       case 'show':
