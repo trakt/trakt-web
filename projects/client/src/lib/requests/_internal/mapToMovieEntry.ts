@@ -68,5 +68,6 @@ export function mapToMovieEntry(
     rating: mapToTraktRating(movie.rating),
     homepage: prependHttps(movie.homepage),
     socialMedia: mapToSocialMedia(movie),
+    updatedAt: movie.updated_at ? new Date(movie.updated_at) : undefined,
   };
 }

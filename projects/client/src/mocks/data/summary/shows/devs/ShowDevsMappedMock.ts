@@ -9,6 +9,7 @@ export const ShowDevsMappedMock: ShowEntry = {
   'originalTitle': 'Devs',
   'runtime': 52,
   'year': 2020,
+  'updatedAt': new Date('2024-12-13T08:02:52.000Z'),
   'tagline': 'Reality is stranger than dreams.',
   'network': 'Hulu',
   'country': 'us',

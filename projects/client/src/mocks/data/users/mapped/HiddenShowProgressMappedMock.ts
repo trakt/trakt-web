@@ -7,6 +7,7 @@ export const HiddenShowProgressMappedMock: HiddenShow[] = [
     'show': {
       ...ShowSiloMinimalMappedMock,
       'colors': undefined,
+      'updatedAt': undefined,
     },
   },
 ];

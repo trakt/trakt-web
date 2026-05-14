@@ -9,6 +9,7 @@ export const MovieMatrixMappedMock: MovieEntry = {
   'originalTitle': 'The Matrix',
   'runtime': 136,
   'year': 1999,
+  'updatedAt': new Date('2024-12-27T15:30:51.000Z'),
   'tagline': 'The fight for the future begins.',
   'country': 'us',
   'status': 'released',

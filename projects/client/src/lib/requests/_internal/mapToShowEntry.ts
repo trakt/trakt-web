@@ -82,5 +82,6 @@ export function mapToShowEntry(
       : undefined,
     homepage: prependHttps(show.homepage),
     socialMedia: mapToSocialMedia(show),
+    updatedAt: show.updated_at ? new Date(show.updated_at) : undefined,
   };
 }

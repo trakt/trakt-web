@@ -52,6 +52,7 @@ export const MediaEntrySchema = z.object({
   rating: z.number().nullish(),
   homepage: HttpsUrlSchema.nullish(),
   socialMedia: socialMediaSchema.optional(),
+  updatedAt: z.date().nullish(),
 });
 
 export type MediaEntry = z.infer<typeof MediaEntrySchema>;

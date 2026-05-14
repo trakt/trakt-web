@@ -36,6 +36,7 @@ export const ShowSiloMappedMock: ShowEntry = {
   },
   'type': 'show',
   'year': 2023,
+  'updatedAt': new Date('2024-12-15T15:36:02.000Z'),
   'runtime': 60,
   'slug': 'silo',
   'status': 'returning series',
