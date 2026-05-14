@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
@@ -8,6 +9,7 @@
   import type { UserRatingEntry } from "$lib/requests/queries/users/userRatingsQuery.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { profileDrawerNavigation } from "../_internal/profileDrawerNavigation.ts";
   import ActivityCommentItem from "./_internal/ActivityCommentItem.svelte";
   import ActivityRatingItem from "./_internal/ActivityRatingItem.svelte";
@@ -52,6 +54,12 @@
   const heightList = $derived(
     isRatings ? "var(--height-landscape-list)" : "var(--height-comments-list)",
   );
+
+  const placeholderText = $derived(
+    isRatings
+      ? m.list_placeholder_no_ratings_activity()
+      : m.list_placeholder_no_review_activity(),
+  );
 </script>
 
 {#snippet metaInfo()}
@@ -80,9 +88,11 @@
   {#snippet empty()}
     {#if !$isLoading}
       <p class="secondary">
-        {isRatings
-          ? m.list_placeholder_ratings()
-          : m.list_placeholder_reviews()}
+        <MessageWithLink
+          message={placeholderText}
+          href={UrlBuilder.history.home()}
+          target="_self"
+        />
       </p>
     {/if}
   {/snippet}
