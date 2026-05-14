@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { TestId } from "$e2e/models/TestId";
+
   const { title }: { title: string } = $props();
 </script>
 
@@ -6,6 +8,7 @@
   class="trakt-responsive-title"
   class:short-title={title.length < 15}
   class:long-title={title.length > 25}
+  data-testid={TestId.SummaryMediaTitle}
 >
   {title}
 </h1>

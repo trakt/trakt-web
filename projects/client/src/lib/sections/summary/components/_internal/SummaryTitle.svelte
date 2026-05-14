@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { TestId } from "$e2e/models/TestId";
   import Link from "$lib/components/link/Link.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
@@ -26,7 +25,7 @@
   });
 </script>
 
-<div class="trakt-summary-title" data-testid={TestId.SummaryMediaTitle}>
+<div class="trakt-summary-title">
   <ResponsiveTitle {title} />
 
   {#if mainCredit}
