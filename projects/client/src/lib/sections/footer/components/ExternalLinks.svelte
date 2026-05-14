@@ -8,7 +8,6 @@
   import Link from "$lib/components/link/Link.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
-  import FeatureFlagTool from "$lib/features/feature-flag/FeatureFlagTool.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { print, PrintTarget } from "$lib/utils/console/print";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -35,77 +34,78 @@
 </script>
 
 <div class="trakt-external-links">
-  <div class="trakt-app-links">
-    <FeatureFlagTool />
+  {#if $install}
+    <Link href="#" label={m.link_label_install_pwa()} onclick={handleInstall}>
+      <InstallIcon />
+    </Link>
+  {/if}
 
-    {#if $install}
-      <Link href="#" label={m.link_label_install_pwa()} onclick={handleInstall}>
-        <InstallIcon />
-      </Link>
-    {/if}
+  <Link
+    href={UrlBuilder.app.ios()}
+    target="_blank"
+    label={m.link_label_ios_app()}
+    onclick={() => trackLink("ios-app")}
+  >
+    <AppleIcon />
+  </Link>
 
-    <Link
-      href={UrlBuilder.app.ios()}
-      target="_blank"
-      label={m.link_label_ios_app()}
-      onclick={() => trackLink("ios-app")}
-    >
-      <AppleIcon />
-    </Link>
-    <Link
-      href={UrlBuilder.app.android()}
-      target="_blank"
-      label={m.link_label_android_app()}
-      onclick={() => trackLink("android-app")}
-    >
-      <AndroidIcon />
-    </Link>
-  </div>
+  <Link
+    href={UrlBuilder.app.android()}
+    target="_blank"
+    label={m.link_label_android_app()}
+    onclick={() => trackLink("android-app")}
+  >
+    <AndroidIcon />
+  </Link>
 
-  <div class="trakt-footer-links">
-    <Link
-      href={UrlBuilder.github.web()}
-      target="_blank"
-      label={m.link_label_github()}
-      onclick={() => trackLink("github-web")}
-    >
-      <GithubIcon />
-    </Link>
-    <Link
-      href={UrlBuilder.socialMedia.reddit()}
-      target="_blank"
-      label={m.link_label_reddit()}
-      onclick={() => trackLink("reddit")}
-    >
-      <RedditIcon />
-    </Link>
-  </div>
+  <Link
+    href={UrlBuilder.socialMedia.reddit()}
+    target="_blank"
+    label={m.link_label_reddit()}
+    onclick={() => trackLink("reddit")}
+  >
+    <RedditIcon />
+  </Link>
+
+  <Link
+    href={UrlBuilder.github.web()}
+    target="_blank"
+    label={m.link_label_github()}
+    onclick={() => trackLink("github-web")}
+  >
+    <GithubIcon />
+  </Link>
 </div>
 
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
+<style>
   .trakt-external-links {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xl);
+    --external-link-size: var(--ni-30);
 
-    :global(.trakt-link svg) {
-      height: var(--ni-32);
-      width: auto;
-    }
-
-    @include for-tablet-sm-and-below {
-      gap: 0;
-      justify-content: space-between;
-      flex-grow: 1;
-    }
-  }
-
-  .trakt-app-links,
-  .trakt-footer-links {
     display: flex;
     align-items: center;
     gap: var(--gap-s);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    :global(.trakt-link) {
+      height: var(--external-link-size);
+      width: var(--external-link-size);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    :global(.trakt-link svg) {
+      height: var(--ni-24);
+      width: auto;
+
+      color: var(--color-text-secondary);
+      transition: color var(--transition-increment) ease;
+    }
+
+    :global(.trakt-link:hover svg) {
+      color: var(--color-text-primary);
+    }
   }
 </style>

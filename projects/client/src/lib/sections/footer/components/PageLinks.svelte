@@ -8,48 +8,56 @@
   const { user } = useUser();
 </script>
 
-<div class="trakt-page-links" class:is-vip={$user.isVip}>
-  <RenderFor audience="vip">
+<div class="trakt-page-links">
+  <div class="trakt-link-group">
+    <span class="secondary">{m.text_footer_category_platform()}</span>
     <Link href={UrlBuilder.vip()}>
       <span class="bold">VIP</span>
     </Link>
+    <RenderFor audience="vip">
+      <Link
+        href={UrlBuilder.feedback()}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="bold">{m.link_text_feedback()}</span>
+      </Link>
+      <Link
+        href={UrlBuilder.og.support($user?.slug)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="bold">{m.link_text_support()}</span>
+      </Link>
+    </RenderFor>
+  </div>
 
+  <div class="trakt-link-group">
+    <span class="secondary">{m.text_footer_category_community()}</span>
     <Link
-      href={UrlBuilder.feedback()}
+      href={UrlBuilder.og.forums()}
       target="_blank"
       rel="noopener noreferrer"
     >
-      <span class="bold">{m.link_text_feedback()}</span>
+      <span class="bold">{m.link_text_forums()}</span>
     </Link>
-
-    <Link
-      href={UrlBuilder.og.support($user?.slug)}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <span class="bold">{m.link_text_support()}</span>
+    <Link href={UrlBuilder.about()}>
+      <span class="bold">{m.link_text_about()}</span>
     </Link>
-  </RenderFor>
+    <Link href={UrlBuilder.branding()}>
+      <span class="bold">{m.link_text_branding()}</span>
+    </Link>
+  </div>
 
-  <Link href={UrlBuilder.og.forums()} target="_blank" rel="noopener noreferrer">
-    <span class="bold">{m.link_text_forums()}</span>
-  </Link>
-
-  <Link href={UrlBuilder.about()}>
-    <span class="bold">{m.link_text_about()}</span>
-  </Link>
-
-  <Link href={UrlBuilder.branding()}>
-    <span class="bold">{m.link_text_branding()}</span>
-  </Link>
-
-  <Link href={UrlBuilder.terms()}>
-    <span class="bold">{m.link_text_terms()}</span>
-  </Link>
-
-  <Link href={UrlBuilder.privacy()}>
-    <span class="bold">{m.link_text_privacy()}</span>
-  </Link>
+  <div class="trakt-link-group">
+    <span class="secondary">{m.text_footer_category_legal()}</span>
+    <Link href={UrlBuilder.terms()}>
+      <span class="bold">{m.link_text_terms()}</span>
+    </Link>
+    <Link href={UrlBuilder.privacy()}>
+      <span class="bold">{m.link_text_privacy()}</span>
+    </Link>
+  </div>
 </div>
 
 <style lang="scss">
@@ -57,16 +65,20 @@
 
   .trakt-page-links {
     display: flex;
-    gap: var(--gap-l);
+    gap: var(--gap-xxl);
 
     @include for-mobile() {
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: var(--gap-s);
+      gap: var(--gap-l);
     }
+  }
 
-    :global(.trakt-link) {
-      text-decoration: none;
-    }
+  .trakt-link-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+  }
+
+  .trakt-link-group :global(.trakt-link) {
+    text-decoration: none;
   }
 </style>

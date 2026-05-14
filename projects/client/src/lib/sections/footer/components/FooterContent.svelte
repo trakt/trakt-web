@@ -1,44 +1,26 @@
 <script lang="ts">
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import CopyRight from "./CopyRight.svelte";
   import ExternalLinks from "./ExternalLinks.svelte";
-  import FooterBar from "./FooterBar.svelte";
   import FooterLogo from "./FooterLogo.svelte";
   import PageLinks from "./PageLinks.svelte";
 </script>
 
 <div class="trakt-footer-content">
-  <RenderFor device={["tablet-lg", "desktop"]} audience="all">
-    <FooterBar>
+  <div class="trakt-footer-grid">
+    <div class="trakt-footer-left-col">
       <FooterLogo />
+    </div>
+
+    <div class="trakt-footer-center-col">
       <PageLinks />
-    </FooterBar>
+    </div>
 
-    <FooterBar>
-      <div class="trakt-footer-left">
-        <CopyRight />
-      </div>
-      <div class="trakt-footer-right">
-        <RenderFor audience="all">
-          <ExternalLinks />
-        </RenderFor>
-      </div>
-    </FooterBar>
-  </RenderFor>
-
-  <RenderFor device={["tablet-sm", "mobile"]} audience="all">
-    <FooterBar>
-      <div class="trakt-footer-left">
-        <CopyRight />
-      </div>
-      <div class="trakt-footer-right">
-        <PageLinks />
-      </div>
-    </FooterBar>
-    <FooterBar>
+    <div class="trakt-footer-right-col">
       <ExternalLinks />
-    </FooterBar>
-  </RenderFor>
+    </div>
+  </div>
+
+  <CopyRight />
 </div>
 
 <style lang="scss">
@@ -47,18 +29,46 @@
   .trakt-footer-content {
     height: 100%;
     position: relative;
-    display: grid;
-    align-content: space-between;
 
-    @include for-mobile {
-      padding-bottom: var(--ni-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxl);
+
+    box-sizing: border-box;
+    padding: var(--footer-bar-padding) 0;
+
+    transition: gap var(--transition-increment) ease-in-out;
+
+    @include for-tablet-sm-and-below {
+      gap: var(--gap-l);
     }
   }
 
-  .trakt-footer-left,
-  .trakt-footer-right {
+  .trakt-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    gap: var(--gap-l);
+
+    @include for-tablet-sm-and-below {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .trakt-footer-left-col {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .trakt-footer-center-col {
     display: flex;
     justify-content: center;
-    align-items: center;
+  }
+
+  .trakt-footer-right-col {
+    display: flex;
+    justify-content: flex-end;
   }
 </style>
