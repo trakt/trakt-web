@@ -29,11 +29,12 @@
     variant?: ListVariant;
     titleAction?: Snippet;
     drilldown?: ListDrilldownLinkProps;
+    collapsed?: boolean;
   };
 
   const {
     id,
-    items,
+    items = [],
     title,
     item,
     ctaItem,
@@ -45,6 +46,7 @@
     subtitle,
     variant = "default",
     titleAction: externalTitleAction,
+    collapsed: externalCollapsed,
   }: SectionListProps<T> = $props();
 
   const isHeaderVisible = $derived(Boolean(title));
@@ -63,6 +65,10 @@
   });
 
   const isCollapsed = $derived.by(() => {
+    if (externalCollapsed !== undefined) {
+      return externalCollapsed;
+    }
+
     if (variant !== "default") {
       return false;
     }
@@ -74,7 +80,7 @@
 {#snippet titleAction()}
   {#if externalTitleAction}
     {@render externalTitleAction()}
-  {:else if variant === "default"}
+  {:else if variant === "default" && externalCollapsed === undefined}
     <ActionButton
       onclick={toggle}
       label={isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}

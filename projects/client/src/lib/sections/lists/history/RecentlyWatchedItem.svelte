@@ -4,6 +4,7 @@
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import RemoveFromHistoryAction from "$lib/sections/media-actions/remove-from-history/RemoveFromHistoryAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
+  import AddReviewAction from "$lib/sections/media-actions/add-review/AddReviewAction.svelte";
   import ActivityItem from "../components/ActivityItem.svelte";
   import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
   import type { HistoryEntry } from "../stores/models/HistoryEntry";
@@ -37,6 +38,7 @@
 {#snippet popupActions()}
   <RenderFor audience="authenticated">
     {#if activity.type === "episode"}
+      <AddReviewAction entry={activity} />
       <RemoveFromHistoryAction
         style="dropdown-item"
         title={activity.episode.title}
@@ -49,6 +51,7 @@
         type={activity.movie.type}
         media={activity.movie}
       />
+      <AddReviewAction entry={activity} />
       <RemoveFromHistoryAction
         style="dropdown-item"
         title={activity.movie.title}
