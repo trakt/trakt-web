@@ -57,6 +57,13 @@
 
       display: flex;
       gap: var(--gap-micro);
+      padding-top: var(--ni-8);
+
+      :global(.trakt-text-tag) :global(p),
+      :global(.trakt-stem-tag) :global(p),
+      :global(.trakt-tag) :global(p) {
+        font-size: var(--ni-12);
+      }
     }
 
     .trakt-card-footer-information {
@@ -84,6 +91,7 @@
         color: var(--color-text-secondary);
         margin: 0;
         font-weight: 500;
+        font-size: var(--ni-12);
       }
     }
   }
