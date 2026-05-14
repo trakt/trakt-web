@@ -19,7 +19,6 @@
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
-  import WeeklyPulse from "$lib/sections/stats/WeeklyPulse.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   // FIXME: move to PersonalHistoryList when Profile also supports discover mode
@@ -48,11 +47,6 @@
     <Banner />
     <UpNextList />
 
-    <RenderForFeature flag={FeatureFlag.ThisWeek}>
-      {#snippet enabled()}
-        <WeeklyPulse />
-      {/snippet}
-    </RenderForFeature>
 
     <WatchList
       drilldownLabel={m.button_label_view_all_start_watching_items()}
