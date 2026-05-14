@@ -51,6 +51,7 @@
     "da-DK": "🇩🇰",
     "zh-CN": "🇨🇳",
     "tr-TR": "🇹🇷",
+    "hu-HU": "🇭🇺",
   };
 
   const localeToTitle: Record<AvailableLocale, string> = {
@@ -75,6 +76,7 @@
     "da-DK": "Dansk",
     "zh-CN": "中文 (简体)",
     "tr-TR": "Türkçe",
+    "hu-HU": "Magyar",
   };
 
   const options = $derived(
