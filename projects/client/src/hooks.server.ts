@@ -39,9 +39,14 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
       return 'public, max-age=3600, s-maxage=3600';
     }
 
-    // Social bots (Discord, Slack, etc.), "public" so embeds work, but no CDN caching
-    if (isBotAgent(event.request.headers.get('user-agent'))) {
-      return 'public, max-age=0, must-revalidate';
+    // Social bots (Discord, Slack, etc.), allow a short cache so strict crawlers (Discord) will render embeds
+    // Only cache publicly for unauthenticated requests to prevent cache poisoning via spoofed User-Agent
+    if (
+      isBotAgent(event.request.headers.get('user-agent')) &&
+      !event.locals.oidcAuth
+    ) {
+      // 120 seconds is enough to satisfy Discord without heavily caching stale content
+      return 'public, max-age=120, s-maxage=120';
     }
 
     return 'private, no-store, no-cache, must-revalidate';
