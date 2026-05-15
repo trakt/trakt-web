@@ -1,3 +1,4 @@
+import '$lib/polyfills/mapGroupBy.ts';
 import { handle as handleAuth } from '$lib/features/auth/handle.ts';
 import { handle as handleBotVerification } from '$lib/features/bot-verification/handle.ts';
 import { handle as handleCacheBust } from '$lib/features/cache-bust/handle.ts';
