@@ -30,15 +30,15 @@
     <NavbarStateSetter mode="minimal" />
   </RenderFor>
 
-  {#if !$isLoading}
+  {#if !$isLoading && $show && $showIntl && $episode && $intl && $seasons && $crew}
     <EpisodeSummary
-      show={$show!}
-      showIntl={$showIntl!}
-      episode={$episode!}
-      episodeIntl={$intl!}
-      seasons={$seasons!}
+      show={$show}
+      showIntl={$showIntl}
+      episode={$episode}
+      episodeIntl={$intl}
+      seasons={$seasons}
       streamOn={$streamOn}
-      crew={$crew!}
+      crew={$crew}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->
