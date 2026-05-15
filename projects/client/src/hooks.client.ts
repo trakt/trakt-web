@@ -42,6 +42,9 @@ Sentry.init({
     // injected by ad-blockers / privacy extensions.
     'Blocked a frame with origin',
     "Failed to read a named property 'Element' from 'Window'",
+    // Third-party tracker / referrer-attribution script we don't own —
+    // outages there leak through as unhandled rejections.
+    'singleview.site',
   ],
   beforeSend(event) {
     const isWellKnownRejection = event.exception?.values?.some(
