@@ -9,6 +9,13 @@ type ShareData = {
   text: string;
 };
 
+const IgnoredShareErrors: ReadonlySet<string> = new Set([
+  // User dismissed the share sheet.
+  'AbortError',
+  // The browser already serializes shares, a previous share is still active.
+  'InvalidStateError',
+]);
+
 export function useShare(source: DrilldownSource) {
   const { track } = useTrack(AnalyticsEvent.Share);
 
@@ -20,10 +27,10 @@ export function useShare(source: DrilldownSource) {
     }
 
     try {
-      track({ source: source.id, type: source.type });
       await navigator.share(data);
+      track({ source: source.id, type: source.type });
     } catch (error) {
-      if (error instanceof Error && error.name === 'AbortError') {
+      if (error instanceof Error && IgnoredShareErrors.has(error.name)) {
         return;
       }
 
