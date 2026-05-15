@@ -56,7 +56,11 @@
     goToSeason($show.slug, activeSeason);
   });
 
-  const isReady = $derived(!$isLoading && !isNaN(currentSeason));
+  const hasCoreData = $derived(
+    $show != null && $intl != null && $studios != null && $crew != null &&
+      $seasons != null,
+  );
+  const isReady = $derived(!$isLoading && !isNaN(currentSeason) && hasCoreData);
 </script>
 
 <TraktPage
