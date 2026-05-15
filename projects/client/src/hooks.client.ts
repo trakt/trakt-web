@@ -90,15 +90,73 @@ function isDynamicImportError(error: unknown): boolean {
   );
 }
 
-function reloadOnceForStaleDeploy(error: unknown): void {
-  if (!isDynamicImportError(error)) return;
+function hasChunkPath(path?: string): boolean {
+  if (!path) {
+    return false;
+  }
+
+  return path.includes('/app/immutable/chunks/');
+}
+
+function getRejectionUrl(reason: unknown): string | undefined {
+  if (typeof reason !== 'object' || reason === null) return undefined;
+  if (!('url' in reason)) return undefined;
+  return String((reason as { url?: unknown }).url ?? '');
+}
+
+function shouldReloadForRejection(event: PromiseRejectionEvent): boolean {
+  if (isDynamicImportError(event.reason)) return true;
+  return hasChunkPath(getRejectionUrl(event.reason));
+}
+
+function shouldReloadForError(event: ErrorEvent): boolean {
+  if (isDynamicImportError(event.error ?? event.message)) return true;
+  if (event.target instanceof HTMLScriptElement) {
+    return hasChunkPath(event.target.src);
+  }
+  return hasChunkPath(event.filename);
+}
+
+function shouldReloadForClientEvent(
+  event: ErrorEvent | PromiseRejectionEvent,
+): boolean {
+  if ('reason' in event) return shouldReloadForRejection(event);
+  return shouldReloadForError(event);
+}
+
+function buildReloadUrl() {
+  const url = new URL(window.location.href);
+  url.searchParams.set('_cb', Date.now().toString());
+  return url.toString();
+}
+
+function triggerReloadOnce(): void {
   if (sessionStorage.getItem(DYNAMIC_IMPORT_RELOAD_KEY)) return;
 
   sessionStorage.setItem(DYNAMIC_IMPORT_RELOAD_KEY, '1');
-  window.location.reload();
+  window.location.replace(buildReloadUrl());
+}
+
+function reloadOnceForStaleDeploy(error: unknown): void {
+  if (!isDynamicImportError(error)) return;
+  triggerReloadOnce();
+}
+
+function reloadOnceFromClientEvent(
+  event: ErrorEvent | PromiseRejectionEvent,
+): void {
+  if (!shouldReloadForClientEvent(event)) return;
+  triggerReloadOnce();
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('error', reloadOnceFromClientEvent);
+  window.addEventListener('unhandledrejection', reloadOnceFromClientEvent);
 }
 
 // If you have a custom error handler, pass it to `handleErrorWithSentry`
-export const handleError = handleErrorWithSentry(({ error }: { error: unknown }) => {
-  reloadOnceForStaleDeploy(error);
-});
+export const handleError = handleErrorWithSentry(
+  ({ error }: { error: unknown }) => {
+    reloadOnceForStaleDeploy(error);
+  },
+);
