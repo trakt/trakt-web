@@ -47,6 +47,7 @@
   $effect.pre(() => {
     if (!isNaN(currentSeason)) return;
     if ($seasons == null || $show == null) return;
+    if ($seasons.length === 0) return;
 
     const activeSeason = findActiveSeason({
       seasons: $seasons,
