@@ -66,22 +66,13 @@ function removeNavigationCache() {
 }
 
 // Force immediate activation for new service worker
-self.addEventListener('install', (event) => {
+self.addEventListener('install', () => {
   self.skipWaiting();
 });
 
-// Bust all caches on new service worker activation
+// Claim clients without deleting all caches to avoid churn and race conditions.
 self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    (async () => {
-      const cacheNames = await caches.keys();
-      await Promise.all(cacheNames.map((name) => caches.delete(name)));
-      // Optionally, claim clients immediately
-      if (self.clients && self.clients.claim) {
-        await self.clients.claim();
-      }
-    })()
-  );
+  event.waitUntil(self.clients.claim());
 });
 
 addEventListener('message', (event) => {
@@ -96,6 +87,11 @@ precacheAndRoute(self.__WB_MANIFEST);
 // Navigation routes
 const navigationHandler = new StaleWhileRevalidate({
   cacheName: CacheKey.navigation,
+  plugins: [
+    new ExpirationPlugin({
+      maxAgeSeconds: time.hours(12) / time.seconds(1),
+    }),
+  ],
 });
 
 registerRoute(
