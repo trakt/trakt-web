@@ -34,6 +34,9 @@ Sentry.init({
     'error loading dynamically imported module',
     'Importing a module script failed',
     'Unable to preload CSS for',
+    // Firebase Installations rejects when the device loses connectivity
+    // — we use it solely for analytics, so the outage isn't actionable.
+    'installations/app-offline',
   ],
   beforeSend(event) {
     const isWellKnownRejection = event.exception?.values?.some(
