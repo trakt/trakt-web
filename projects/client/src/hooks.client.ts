@@ -30,6 +30,7 @@ Sentry.init({
     'AbortError',
     'Failed to register a ServiceWorker',
     'service-worker.js load failed',
+    "type 'module' in RegistrationOptions is not implemented yet",
     'Failed to fetch dynamically imported module',
     'error loading dynamically imported module',
     'Importing a module script failed',
