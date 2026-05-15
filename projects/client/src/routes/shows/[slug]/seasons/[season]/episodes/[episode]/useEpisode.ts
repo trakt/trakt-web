@@ -57,8 +57,20 @@ export function useEpisode(
     crew,
   ];
 
-  const isLoading = combineLatest(queries).pipe(
-    map(($queries) => $queries.some(toLoadingState)),
+  const coreQueries = [episode, show];
+
+  // Keep isLoading true until episode + show payloads are present —
+  // queries can flip to !fetching while `data` is still undefined
+  // (errored or empty), which would otherwise let the page render
+  // a half-populated summary.
+  const isLoading = combineLatest([
+    combineLatest(queries),
+    combineLatest(coreQueries),
+  ]).pipe(
+    map(([$queries, $coreQueries]) =>
+      $queries.some(toLoadingState) ||
+      $coreQueries.some(($query) => $query.data == null)
+    ),
   );
 
   return {

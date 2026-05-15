@@ -24,12 +24,12 @@
     <NavbarStateSetter mode="minimal" />
   </RenderFor>
 
-  {#if !$isLoading}
+  {#if !$isLoading && $movie && $studios && $crew && $intl}
     <MovieSummary
-      media={$movie!}
-      studios={$studios!}
-      crew={$crew!}
-      intl={$intl!}
+      media={$movie}
+      studios={$studios}
+      crew={$crew}
+      intl={$intl}
       streamOn={$streamOn}
       videos={$videos}
       sentiment={$sentiment}
