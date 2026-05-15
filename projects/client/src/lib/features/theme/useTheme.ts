@@ -6,7 +6,6 @@ import { retry } from '$lib/utils/retry/retry.ts';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { getContext } from 'svelte';
 import { THEME_COOKIE_NAME } from './constants.ts';
-import type { ThemeResponse } from './handle.ts';
 import { Theme } from './models/Theme.ts';
 import { ThemeEndpoint } from './ThemeEndpoint.ts';
 
@@ -20,7 +19,8 @@ export function useTheme() {
 
     track({ theme: value });
     theme.next(value);
-    await retry(() =>
+
+    const response = await retry(() =>
       fetch(ThemeEndpoint.Set, {
         method: 'POST',
         headers: {
@@ -28,7 +28,19 @@ export function useTheme() {
         },
         body: JSON.stringify({ theme: value }),
       })
-    ).then((res) => res.json() as Promise<ThemeResponse>);
+    );
+
+    if (!response.ok) {
+      return;
+    }
+
+    try {
+      await response.json();
+    } catch {
+      // The theme is already applied optimistically client-side, so an
+      // empty or non-JSON body (e.g., an HTML error page from an
+      // intermediary CDN) is safe to swallow.
+    }
   }
 
   if (browser) {
