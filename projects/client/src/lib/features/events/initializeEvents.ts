@@ -5,11 +5,12 @@ import type { Events } from './models/Events.ts';
 
 type InitializeEventsProps = {
   setEvent: (id: string | null) => void;
-  events: Events;
+  events: Events | undefined;
   dateFn: EventDateFn;
 };
 
 function checkAndSchedule({ events, dateFn, setEvent }: InitializeEventsProps) {
+  if (!events) return;
   const now = new Date();
   const eventProps = { events, now, dateFn };
   const active = activeEvent(eventProps);
