@@ -38,6 +38,9 @@ const config = {
     serviceWorker: {
       register: false,
     },
+    paths: {
+      relative: false,
+    },
     alias: {
       '$mocks': './src/mocks',
       '$worker': './src/worker',
