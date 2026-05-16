@@ -37,11 +37,30 @@
       embedId.next(null);
       handlePauseVideo();
     };
+    /**
+     * `instance.fullscreen.enter()` calls `Element.requestFullscreen` under
+     * the hood. Safari rejects that promise with `TypeError: Cannot request
+     * fullscreen without transient activation` once the originating user
+     * gesture has expired (any awaited microtask is enough). Plyr does not
+     * surface the promise, so we both gate on `navigator.userActivation`
+     * before calling and `await` to absorb a rejection if a future Plyr
+     * version starts returning it.
+     */
+    const enterFullscreenSafely = async () => {
+      if (navigator.userActivation?.isActive === false) return;
+
+      try {
+        await instance.fullscreen.enter();
+      } catch {
+        // user activation expired - render inline instead
+      }
+    };
+
     const handleReady = () => {
       isLoading.next(false);
 
       if (autoplay) {
-        instance.fullscreen.enter();
+        void enterFullscreenSafely();
         instance.play();
       }
     };
@@ -55,7 +74,7 @@
         await new Promise((resolve) => setTimeout(resolve, time.fps(24)));
       }
 
-      instance.fullscreen.enter();
+      await enterFullscreenSafely();
       await instance.play();
     };
 
