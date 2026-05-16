@@ -68,6 +68,12 @@ export const handle: Handle = sequence(
     dsn: SENTRY_DSN,
     tracesSampleRate: 0.1,
     enableLogs: true,
+    ignoreErrors: [
+      // Client disconnected mid-request; the worker has nothing to do.
+      // Cloudflare surfaces this as "Network connection lost." against
+      // whichever subrequest or body-read was in flight.
+      'Network connection lost.',
+    ],
   }),
   sentryHandle(),
   handleBotVerification,
