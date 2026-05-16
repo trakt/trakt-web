@@ -5,8 +5,14 @@ import { time } from '$lib/utils/timing/time.ts';
 import { json, type RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request, cookies }) => {
-  const { token, expiresAt }: OidcAuthToken = await request.json();
+  // Client disconnected before the body finished streaming
+  // ("Network connection lost." in CF Workers). Nothing to persist.
+  const body: OidcAuthToken | null = await request.json().catch(() => null);
+  if (!body) {
+    return new Response(null, { status: 499 });
+  }
 
+  const { token, expiresAt } = body;
   const maxAge = expiresAt ? time.years(1) / time.seconds(1) : 0;
   const cookieContent = JSON.stringify({ token, expiresAt });
 
