@@ -1,3 +1,4 @@
+import { EpisodeIntlProvider } from '$lib/components/episode/EpisodeIntlProvider.ts';
 import { GenreIntlProvider } from '$lib/components/summary/GenreIntlProvider.ts';
 import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
@@ -59,6 +60,15 @@ function mediaStatus(media: MediaEntry) {
     values: media.year && media.type === 'movie'
       ? undefined
       : [toTranslatedStatus(media.status)],
+  };
+}
+
+function episodeType(episode: EpisodeEntry): MediaDetail {
+  const label = EpisodeIntlProvider.episodeTypeText(episode.type);
+
+  return {
+    title: m.header_episode_type(),
+    values: label ? [label] : undefined,
   };
 }
 
@@ -231,6 +241,7 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
       episodeAirDate(props.episode),
       networks(props.networks),
       runtime(props.episode),
+      episodeType(props.episode),
       ...mainCredits(props.type, props.crew),
       postCredits(props.episode),
     ];
