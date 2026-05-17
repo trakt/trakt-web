@@ -16,13 +16,16 @@ type MainCredit = {
 };
 
 function mapToCreator(crew: MediaCrew): MainCredit | null {
-  const creator = crew.creators?.at(0);
-  if (!creator) return null;
+  const [first, ...rest] = crew.creators ?? [];
+  if (!first) return null;
 
   return {
-    text: m.text_created_by({ name: creator.name }),
-    key: creator.key,
+    text: m.text_created_by({ name: first.name }),
+    key: first.key,
     positions: { shows: 'created by' },
+    others: rest.length > 0
+      ? rest.map(({ name, key }) => ({ name, key }))
+      : undefined,
   };
 }
 
