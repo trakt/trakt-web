@@ -117,7 +117,11 @@ function hasChunkPath(path?: string): boolean {
     return false;
   }
 
-  return path.includes('/app/immutable/chunks/');
+  // SvelteKit emits immutable chunk URLs under `/_app/immutable/`.
+  // Match both the absolute prefix and the relative form so the recovery
+  // also catches errors triggered from cross-origin or relative resolutions.
+  return path.includes('/_app/immutable/') ||
+    path.includes('_app/immutable/');
 }
 
 function getRejectionUrl(reason: unknown): string | undefined {
