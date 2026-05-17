@@ -60,10 +60,7 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
   const list = query.pipe(
     map(($query) =>
       ($query.data ?? [])
-        .filter((d) => {
-          const distanceFromNow = d.airDate.getTime() - Date.now();
-          return distanceFromNow > 0;
-        })
+        .filter((d) => d.effectiveReleaseDate.getTime() > Date.now())
         .slice(0, props.limit)
     ),
   );
