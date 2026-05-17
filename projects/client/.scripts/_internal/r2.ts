@@ -2,9 +2,10 @@
  * Minimal R2 client over the S3-compatible API. Used by the immutable-asset
  * sync and prune scripts.
  *
- * Caller supplies credentials + bucket. We sign requests with sigv4 and
- * issue raw fetch() calls — no aws-sdk dependency, runs in plain Deno on
- * GitHub Actions runners.
+ * Caller supplies credentials + bucket. We sign requests with AWS SigV4
+ * (the auth scheme R2 inherits from its S3 compatibility) and issue raw
+ * fetch() calls — no aws-sdk dependency, runs in plain Deno on GitHub
+ * Actions runners.
  */
 
 export type R2ClientConfig = {
@@ -21,7 +22,7 @@ const EMPTY_BODY_SHA256 =
 
 function hex(buf: ArrayBuffer | Uint8Array): string {
   const view = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
-  return [...view].map((b) => b.toString(16).padStart(2, '0')).join('');
+  return [...view].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
 async function sha256Hex(data: Uint8Array | string): Promise<string> {
@@ -46,6 +47,24 @@ async function hmac(
 
 function encodeKey(key: string): string {
   return key.split('/').map(encodeURIComponent).join('/');
+}
+
+function xmlEscape(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;');
+}
+
+function xmlUnescape(value: string): string {
+  return value
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&apos;', "'")
+    .replaceAll('&amp;', '&');
 }
 
 export class R2Client {
@@ -85,12 +104,16 @@ export class R2Client {
       ...extraHeaders,
     };
 
-    const lowerKeys = Object.keys(headers).map((k) => k.toLowerCase()).sort();
-    const lookup = (lc: string) =>
-      headers[Object.keys(headers).find((k) => k.toLowerCase() === lc)!].trim();
-    const canonicalHeaders =
-      lowerKeys.map((h) => `${h}:${lookup(h)}`).join('\n') + '\n';
-    const signedHeaders = lowerKeys.join(';');
+    const normalizedHeaders = Object.fromEntries(
+      Object.entries(headers).map(([k, v]) => [k.toLowerCase(), v.trim()]),
+    );
+    const sortedHeaderNames = Object.keys(normalizedHeaders).sort();
+    const canonicalHeaders = `${
+      sortedHeaderNames
+        .map((h) => `${h}:${normalizedHeaders[h]}`)
+        .join('\n')
+    }\n`;
+    const signedHeaders = sortedHeaderNames.join(';');
 
     const canonicalRequest = [
       method,
@@ -122,13 +145,16 @@ export class R2Client {
     return headers;
   }
 
+  private keyPath(key: string): string {
+    return `/${this.config.bucket}/${encodeKey(key)}`;
+  }
+
   private url(key: string, query = ''): string {
-    const path = `/${this.config.bucket}/${encodeKey(key)}`;
-    return `${this.endpoint}${path}${query ? `?${query}` : ''}`;
+    return `${this.endpoint}${this.keyPath(key)}${query ? `?${query}` : ''}`;
   }
 
   async head(key: string): Promise<boolean> {
-    const pathSuffix = `/${this.config.bucket}/${encodeKey(key)}`;
+    const pathSuffix = this.keyPath(key);
     const headers = await this.sign('HEAD', pathSuffix, '', null);
     const res = await fetch(this.url(key), { method: 'HEAD', headers });
     if (res.status === 200) return true;
@@ -141,7 +167,7 @@ export class R2Client {
     body: Uint8Array,
     extra: Record<string, string> = {},
   ): Promise<void> {
-    const pathSuffix = `/${this.config.bucket}/${encodeKey(key)}`;
+    const pathSuffix = this.keyPath(key);
     const headers = await this.sign('PUT', pathSuffix, '', body, extra);
     const res = await fetch(this.url(key), { method: 'PUT', headers, body });
     if (!res.ok) {
@@ -150,7 +176,7 @@ export class R2Client {
   }
 
   async getText(key: string): Promise<string> {
-    const pathSuffix = `/${this.config.bucket}/${encodeKey(key)}`;
+    const pathSuffix = this.keyPath(key);
     const headers = await this.sign('GET', pathSuffix, '', null);
     const res = await fetch(this.url(key), { method: 'GET', headers });
     if (!res.ok) {
@@ -185,14 +211,18 @@ export class R2Client {
         );
       }
       const xml = await res.text();
-      const keys = [...xml.matchAll(/<Key>([^<]+)<\/Key>/g)].map((m) => m[1]);
+      const keys = [...xml.matchAll(/<Key>([^<]+)<\/Key>/g)].map((m) =>
+        xmlUnescape(m[1])
+      );
       for (const k of keys) yield k;
 
       const isTruncated = /<IsTruncated>true<\/IsTruncated>/.test(xml);
       const tokenMatch = xml.match(
         /<NextContinuationToken>([^<]+)<\/NextContinuationToken>/,
       );
-      continuationToken = isTruncated && tokenMatch ? tokenMatch[1] : undefined;
+      continuationToken = isTruncated && tokenMatch
+        ? xmlUnescape(tokenMatch[1])
+        : undefined;
     } while (continuationToken);
   }
 
@@ -206,11 +236,9 @@ export class R2Client {
       const xmlBody = `<?xml version="1.0" encoding="UTF-8"?>
 <Delete>
 ${
-        batch.map((k) =>
-          `  <Object><Key>${
-            k.replace(/&/g, '&amp;').replace(/</g, '&lt;')
-          }</Key></Object>`
-        ).join('\n')
+        batch.map((k) => `  <Object><Key>${xmlEscape(k)}</Key></Object>`).join(
+          '\n',
+        )
       }
 </Delete>`;
       const body = new TextEncoder().encode(xmlBody);

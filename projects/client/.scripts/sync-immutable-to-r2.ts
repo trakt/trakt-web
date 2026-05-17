@@ -32,17 +32,10 @@ import {
 
 const SOURCE_DIR = Deno.env.get('IMMUTABLE_SOURCE_DIR') ??
   '.svelte-kit/cloudflare';
-const RELEASE_SHA = Deno.env.get('RELEASE_SHA');
 const CONCURRENCY = 16;
 
-if (!RELEASE_SHA) {
-  console.error('Missing RELEASE_SHA');
-  Deno.exit(1);
-}
-
-const r2 = r2FromEnv();
-
 async function uploadOne(
+  r2: ReturnType<typeof r2FromEnv>,
   fullPath: string,
   rootDir: string,
 ): Promise<{ key: string; status: 'uploaded' | 'skipped' }> {
@@ -59,6 +52,13 @@ async function uploadOne(
 }
 
 async function main(): Promise<void> {
+  const releaseSha = Deno.env.get('RELEASE_SHA');
+  if (!releaseSha) {
+    console.error('Missing RELEASE_SHA');
+    Deno.exit(1);
+  }
+
+  const r2 = r2FromEnv();
   const immutableDir = `${SOURCE_DIR}/${IMMUTABLE_PREFIX}`;
   try {
     await Deno.stat(immutableDir);
@@ -87,7 +87,7 @@ async function main(): Promise<void> {
       const path = queue.pop();
       if (!path) return;
       try {
-        const { key, status } = await uploadOne(path, SOURCE_DIR);
+        const { key, status } = await uploadOne(r2, path, SOURCE_DIR);
         manifestKeys.push(key);
         if (status === 'uploaded') uploaded++;
         else skipped++;
@@ -110,11 +110,11 @@ async function main(): Promise<void> {
   }
 
   const manifest: ReleaseManifest = {
-    sha: RELEASE_SHA!,
+    sha: releaseSha,
     uploadedAt: new Date().toISOString(),
     keys: manifestKeys.sort(),
   };
-  const manifestKey = manifestKeyFor(RELEASE_SHA!);
+  const manifestKey = manifestKeyFor(releaseSha);
   await r2.put(
     manifestKey,
     new TextEncoder().encode(JSON.stringify(manifest, null, 2)),
