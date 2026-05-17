@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { manifestKeyFor } from './_internal/r2.ts';
+import { manifestKeyFor } from './_internal/manifest.ts';
 import { selectKeepManifests } from './prune-immutable-r2.ts';
 
 function manifestAt(sha: string, when: Date): string {
@@ -11,9 +11,9 @@ describe('selectKeepManifests', () => {
     const now = new Date('2026-05-17T12:00:00Z');
     const manifests = Array.from({ length: 15 }, (_, i) => {
       // One deploy per day, 14d ago → today.
-      const t = new Date(now);
-      t.setUTCDate(now.getUTCDate() - (14 - i));
-      return manifestAt(`sha${i.toString().padStart(2, '0')}`, t);
+      const when = new Date(now);
+      when.setUTCDate(now.getUTCDate() - (14 - i));
+      return manifestAt(`sha${i.toString().padStart(2, '0')}`, when);
     });
 
     const { keep, prune } = selectKeepManifests(manifests, now, 10, 24);
@@ -28,8 +28,8 @@ describe('selectKeepManifests', () => {
     const now = new Date('2026-05-17T12:00:00Z');
     const manifests = Array.from({ length: 15 }, (_, i) => {
       // 15 deploys in the past hour.
-      const t = new Date(now.getTime() - (15 - i) * 60_000);
-      return manifestAt(`sha${i.toString().padStart(2, '0')}`, t);
+      const when = new Date(now.getTime() - (15 - i) * 60_000);
+      return manifestAt(`sha${i.toString().padStart(2, '0')}`, when);
     });
 
     const { keep, prune } = selectKeepManifests(manifests, now, 10, 24);
@@ -40,14 +40,14 @@ describe('selectKeepManifests', () => {
   it('takes the union of count and age windows', () => {
     const now = new Date('2026-05-17T12:00:00Z');
     const old = Array.from({ length: 8 }, (_, i) => {
-      const t = new Date(now);
-      t.setUTCDate(now.getUTCDate() - (15 + i)); // 15-22 days old
-      return manifestAt(`old${i}`, t);
+      const when = new Date(now);
+      when.setUTCDate(now.getUTCDate() - (15 + i)); // 15-22 days old
+      return manifestAt(`old${i}`, when);
     });
     const recent = Array.from({ length: 12 }, (_, i) => {
       // 12 deploys in the past 3 hours
-      const t = new Date(now.getTime() - (12 - i) * 15 * 60_000);
-      return manifestAt(`new${i.toString().padStart(2, '0')}`, t);
+      const when = new Date(now.getTime() - (12 - i) * 15 * 60_000);
+      return manifestAt(`new${i.toString().padStart(2, '0')}`, when);
     });
 
     const { keep, prune } = selectKeepManifests(

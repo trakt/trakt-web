@@ -22,13 +22,13 @@
 
 import { walk } from '@std/fs/walk';
 import { relative } from '@std/path';
+import { contentTypeFor } from './_internal/content-type.ts';
 import {
-  contentTypeFor,
   IMMUTABLE_PREFIX,
   manifestKeyFor,
-  r2FromEnv,
   type ReleaseManifest,
-} from './_internal/r2.ts';
+} from './_internal/manifest.ts';
+import { r2FromEnv } from './_internal/r2.ts';
 
 const SOURCE_DIR = Deno.env.get('IMMUTABLE_SOURCE_DIR') ??
   '.svelte-kit/cloudflare';

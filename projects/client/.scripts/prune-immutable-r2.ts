@@ -33,10 +33,10 @@
 import {
   IMMUTABLE_PREFIX,
   manifestKeyToDate,
-  r2FromEnv,
   RELEASE_MANIFEST_PREFIX,
   type ReleaseManifest,
-} from './_internal/r2.ts';
+} from './_internal/manifest.ts';
+import { r2FromEnv } from './_internal/r2.ts';
 
 export function selectKeepManifests(
   manifests: string[],

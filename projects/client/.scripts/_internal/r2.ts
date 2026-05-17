@@ -8,6 +8,8 @@
  * Actions runners.
  */
 
+import { xmlEscape, xmlUnescape } from './xml.ts';
+
 export type R2ClientConfig = {
   accountId: string;
   accessKey: string;
@@ -25,14 +27,16 @@ function hex(buf: ArrayBuffer | Uint8Array): string {
   return [...view].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
-async function sha256Hex(data: Uint8Array | string): Promise<string> {
+async function sha256Hex(
+  data: Uint8Array<ArrayBuffer> | string,
+): Promise<string> {
   const buf = typeof data === 'string' ? new TextEncoder().encode(data) : data;
   const hash = await crypto.subtle.digest('SHA-256', buf);
   return hex(hash);
 }
 
 async function hmac(
-  key: ArrayBuffer | Uint8Array,
+  key: ArrayBuffer | Uint8Array<ArrayBuffer>,
   data: string,
 ): Promise<ArrayBuffer> {
   const cryptoKey = await crypto.subtle.importKey(
@@ -47,24 +51,6 @@ async function hmac(
 
 function encodeKey(key: string): string {
   return key.split('/').map(encodeURIComponent).join('/');
-}
-
-function xmlEscape(value: string): string {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&apos;');
-}
-
-function xmlUnescape(value: string): string {
-  return value
-    .replaceAll('&lt;', '<')
-    .replaceAll('&gt;', '>')
-    .replaceAll('&quot;', '"')
-    .replaceAll('&apos;', "'")
-    .replaceAll('&amp;', '&');
 }
 
 export class R2Client {
@@ -88,7 +74,7 @@ export class R2Client {
     method: string,
     pathSuffix: string,
     query: string,
-    body: Uint8Array | null,
+    body: Uint8Array<ArrayBuffer> | null,
     extraHeaders: Record<string, string> = {},
   ): Promise<Record<string, string>> {
     const now = new Date();
@@ -164,7 +150,7 @@ export class R2Client {
 
   async put(
     key: string,
-    body: Uint8Array,
+    body: Uint8Array<ArrayBuffer>,
     extra: Record<string, string> = {},
   ): Promise<void> {
     const pathSuffix = this.keyPath(key);
@@ -212,17 +198,15 @@ export class R2Client {
       }
       const xml = await res.text();
       const keys = [...xml.matchAll(/<Key>([^<]+)<\/Key>/g)].map((m) =>
-        xmlUnescape(m[1])
+        xmlUnescape(m[1] ?? '')
       );
       for (const k of keys) yield k;
 
       const isTruncated = /<IsTruncated>true<\/IsTruncated>/.test(xml);
-      const tokenMatch = xml.match(
+      const token = xml.match(
         /<NextContinuationToken>([^<]+)<\/NextContinuationToken>/,
-      );
-      continuationToken = isTruncated && tokenMatch
-        ? xmlUnescape(tokenMatch[1])
-        : undefined;
+      )?.[1];
+      continuationToken = isTruncated && token ? xmlUnescape(token) : undefined;
     } while (continuationToken);
   }
 
@@ -288,65 +272,4 @@ export function r2FromEnv(): R2Client {
   }
 
   return new R2Client({ accountId, accessKey, secretKey, bucket });
-}
-
-export const RELEASE_MANIFEST_PREFIX = 'releases/';
-export const IMMUTABLE_PREFIX = '_app/immutable/';
-
-export type ReleaseManifest = {
-  sha: string;
-  uploadedAt: string;
-  keys: string[];
-};
-
-export function manifestKeyFor(sha: string, now: Date = new Date()): string {
-  const iso = now.toISOString().replace(/[:.]/g, '-');
-  return `${RELEASE_MANIFEST_PREFIX}${iso}_${sha}.json`;
-}
-
-/**
- * Reverse of {@link manifestKeyFor}. Returns `null` if the key does not
- * match the expected `releases/<ISO-flattened>_<sha>.json` shape, which
- * keeps stray objects (manual uploads, partial writes) from being treated
- * as deploys when computing retention.
- */
-export function manifestKeyToDate(key: string): Date | null {
-  const stem = key
-    .replace(new RegExp(`^${RELEASE_MANIFEST_PREFIX}`), '')
-    .replace(/\.json$/, '');
-  const [encodedIso] = stem.split('_');
-  if (!encodedIso) return null;
-
-  // encodedIso shape: YYYY-MM-DDTHH-MM-SS-mmmZ
-  const match = encodedIso.match(
-    /^(\d{4}-\d{2}-\d{2})T(\d{2})-(\d{2})-(\d{2})-(\d{3})Z$/,
-  );
-  if (!match) return null;
-  const [, datePart, hh, mm, ss, ms] = match;
-  const iso = `${datePart}T${hh}:${mm}:${ss}.${ms}Z`;
-  const d = new Date(iso);
-  return Number.isNaN(d.getTime()) ? null : d;
-}
-
-const CONTENT_TYPE_BY_EXT: Record<string, string> = {
-  js: 'text/javascript; charset=utf-8',
-  mjs: 'text/javascript; charset=utf-8',
-  css: 'text/css; charset=utf-8',
-  map: 'application/json; charset=utf-8',
-  json: 'application/json; charset=utf-8',
-  svg: 'image/svg+xml',
-  woff: 'font/woff',
-  woff2: 'font/woff2',
-  ttf: 'font/ttf',
-  png: 'image/png',
-  jpg: 'image/jpeg',
-  jpeg: 'image/jpeg',
-  webp: 'image/webp',
-  gif: 'image/gif',
-  ico: 'image/x-icon',
-};
-
-export function contentTypeFor(key: string): string {
-  const ext = key.split('.').pop()?.toLowerCase() ?? '';
-  return CONTENT_TYPE_BY_EXT[ext] ?? 'application/octet-stream';
 }
