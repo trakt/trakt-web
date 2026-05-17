@@ -63,9 +63,9 @@ export const upcomingMediaQuery = defineQuery({
     );
 
     return [...episodes, ...movies]
-      .toSorted((a, b) => {
-        return new Date(a.airDate).getTime() - new Date(b.airDate).getTime();
-      });
+      .toSorted((a, b) =>
+        a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime()
+      );
   },
   schema: UpcomingMediaSchema.array(),
   ttl: time.minutes(30),
