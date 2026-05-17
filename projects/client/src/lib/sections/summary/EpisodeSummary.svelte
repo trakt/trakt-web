@@ -49,7 +49,7 @@
   if available. This approach ensures visual consistency between a show and its
   episodes.
 -->
-<SummaryCover src={episode.cover.url ?? ""} colors={show.colors} type="show" />
+<SummaryCover src={$posterSrc} colors={show.colors} type="show" />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <EpisodeSummaryV2
