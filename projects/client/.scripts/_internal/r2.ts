@@ -276,6 +276,30 @@ export function manifestKeyFor(sha: string, now: Date = new Date()): string {
   return `${RELEASE_MANIFEST_PREFIX}${iso}_${sha}.json`;
 }
 
+/**
+ * Reverse of {@link manifestKeyFor}. Returns `null` if the key does not
+ * match the expected `releases/<ISO-flattened>_<sha>.json` shape, which
+ * keeps stray objects (manual uploads, partial writes) from being treated
+ * as deploys when computing retention.
+ */
+export function manifestKeyToDate(key: string): Date | null {
+  const stem = key
+    .replace(new RegExp(`^${RELEASE_MANIFEST_PREFIX}`), '')
+    .replace(/\.json$/, '');
+  const [encodedIso] = stem.split('_');
+  if (!encodedIso) return null;
+
+  // encodedIso shape: YYYY-MM-DDTHH-MM-SS-mmmZ
+  const match = encodedIso.match(
+    /^(\d{4}-\d{2}-\d{2})T(\d{2})-(\d{2})-(\d{2})-(\d{3})Z$/,
+  );
+  if (!match) return null;
+  const [, datePart, hh, mm, ss, ms] = match;
+  const iso = `${datePart}T${hh}:${mm}:${ss}.${ms}Z`;
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
 const CONTENT_TYPE_BY_EXT: Record<string, string> = {
   js: 'text/javascript; charset=utf-8',
   mjs: 'text/javascript; charset=utf-8',
