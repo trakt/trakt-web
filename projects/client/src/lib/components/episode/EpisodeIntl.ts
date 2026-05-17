@@ -8,6 +8,7 @@ type TimestampMetaData = {
 export type EpisodeIntl = {
   premiereText: () => string;
   finaleText: () => string;
+  episodeTypeText: (type: EpisodeType) => string | Nil;
   timestampText: (metadata: TimestampMetaData) => string;
   durationText: (duration: number) => string;
   remainingText: (remaining: number) => string;
