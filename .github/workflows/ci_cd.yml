@@ -306,7 +306,7 @@ jobs:
           RELEASE_SHA: ${{ steps.vars.outputs.short_sha }}
         continue-on-error: true
 
-      - name: Prune Old Releases from R2 (keep last 10)
+      - name: Prune Old Releases from R2 (last 10 or last 24h, whichever is larger)
         working-directory: projects/client
         run: 'deno task prune:immutable'
         env:
@@ -314,6 +314,7 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           KEEP_RELEASES: '10'
+          MIN_AGE_HOURS: '24'
         continue-on-error: true
 
       - name: Invoking the Cloudflare Spirits
