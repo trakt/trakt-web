@@ -13,9 +13,14 @@
   type CastMemberCardProps = {
     castMember: CastMember;
     type: ExtendedMediaType;
+    variant?: "default" | "multi-line";
   };
 
-  const { castMember, type }: CastMemberCardProps = $props();
+  const {
+    castMember,
+    type,
+    variant = "default",
+  }: CastMemberCardProps = $props();
 
   const params = $derived({
     [`${type}s`]: "acting" as const,
@@ -32,21 +37,58 @@
   {/if}
 {/snippet}
 
-<PersonCard>
-  <Link focusable={false} href={UrlBuilder.people(castMember.key, params)}>
-    <CardCover
-      title={castMember.name}
-      src={castMember.headshot.url.thumb}
-      alt={`${m.image_alt_person_headshot({ person: castMember.name })}`}
-      {tag}
-    />
-  </Link>
-  <CardFooter>
-    <p class="trakt-card-title ellipsis">
-      {castMember.name}
-    </p>
-    <p class="trakt-card-subtitle ellipsis">
-      {castMember.characterName}
-    </p>
-  </CardFooter>
-</PersonCard>
+<div class="cast-member-item" data-variant={variant}>
+  <PersonCard>
+    <Link focusable={false} href={UrlBuilder.people(castMember.key, params)}>
+      <CardCover
+        title={castMember.name}
+        src={castMember.headshot.url.thumb}
+        alt={`${m.image_alt_person_headshot({ person: castMember.name })}`}
+        {tag}
+      />
+    </Link>
+    <CardFooter>
+      <p class="trakt-card-title trakt-cast-name" title={castMember.name}>
+        {castMember.name}
+      </p>
+      <p
+        class="trakt-card-subtitle trakt-cast-name"
+        title={castMember.characterName}
+      >
+        {castMember.characterName}
+      </p>
+    </CardFooter>
+  </PersonCard>
+</div>
+
+<style lang="scss">
+  .cast-member-item {
+    display: contents;
+  }
+
+  .trakt-cast-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cast-member-item[data-variant="multi-line"] {
+    .trakt-cast-name {
+      display: -webkit-box;
+
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+
+      overflow: hidden;
+      overflow-wrap: anywhere;
+      text-overflow: unset;
+      white-space: unset;
+      word-break: break-word;
+    }
+
+    :global(.trakt-card-footer) {
+      align-items: flex-start;
+    }
+  }
+</style>

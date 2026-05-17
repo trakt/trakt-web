@@ -34,7 +34,7 @@
         --width-item="var(--width-person-card)"
       >
         {#snippet item(item)}
-          <CastMemberItem castMember={item} {type} />
+          <CastMemberItem castMember={item} {type} variant="multi-line" />
         {/snippet}
       </GridList>
     </div>
@@ -47,6 +47,8 @@
   .cast-drawer-content {
     display: contents;
 
+    --height-cast-footer: var(--ni-56);
+
     --container-width: calc(var(--drawer-size) - 2 * var(--drawer-padding));
     --width-override-card: calc(
       (var(--container-width) - 3 * var(--list-gap)) / 3
@@ -58,7 +60,7 @@
       var(--width-override-card) * var(--card-aspect-ratio)
     );
     --height-override-card: calc(
-      var(--height-override-card-cover) + var(--height-card-footer)
+      var(--height-override-card-cover) + var(--height-cast-footer)
     );
 
     @include for-mobile {
@@ -71,6 +73,7 @@
 
     :global(.trakt-list-items) {
       grid-template-columns: repeat(3, 1fr);
+      justify-items: center;
     }
   }
 </style>
