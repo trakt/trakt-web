@@ -14,6 +14,7 @@ import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { ShowProgressResponse } from '@trakt/api';
+import { isLatestAiredEpisode } from '../../_internal/isLatestAiredEpisode.ts';
 import { mapToPostCredits } from '../../_internal/mapToPostCredits.ts';
 
 const showProgressRequest = (
@@ -66,6 +67,7 @@ function mapShowProgressResponse(
     completed: item.completed,
     remaining: item.aired - item.completed,
     minutesLeft: item.stats?.minutes_left ?? 0,
+    isLatestAired: isLatestAiredEpisode(episode, item.last_episode),
     type: episode?.episode_type as EpisodeType ?? EpisodeUnknownType.unknown,
     genres: [],
     overview: episode?.overview ?? '',

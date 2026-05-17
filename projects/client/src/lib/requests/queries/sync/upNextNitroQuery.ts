@@ -9,6 +9,7 @@ import type { SortDirection } from '$lib/sections/lists/user/models/SortDirectio
 import { time } from '$lib/utils/timing/time.ts';
 import { type UpNextResponse } from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
+import { isLatestAiredEpisode } from '../../_internal/isLatestAiredEpisode.ts';
 import { mapToEpisodeEntry } from '../../_internal/mapToEpisodeEntry.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import { mapToShowProgress } from '../../_internal/mapToShowProgress.ts';
@@ -33,11 +34,16 @@ export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   episode.runtime = isNaN(episode.runtime) ? show.runtime : episode.runtime;
 
   const progress = mapToShowProgress(item.progress);
+  const isLatestAired = isLatestAiredEpisode(
+    item.progress.next_episode,
+    item.progress.last_episode,
+  );
 
   return {
     show,
     ...episode,
     ...progress,
+    isLatestAired,
   };
 }
 

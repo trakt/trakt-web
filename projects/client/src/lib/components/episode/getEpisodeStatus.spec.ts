@@ -33,4 +33,37 @@ describe('getEpisodeStatus', () => {
       expect(getEpisodeStatus(type)).toBeUndefined();
     });
   });
+
+  describe('mid-season staleness gate', () => {
+    it.each([
+      EpisodeFinaleType.mid_season_finale,
+      EpisodePremiereType.mid_season_premiere,
+    ])('returns undefined for %s when not the latest aired', (type) => {
+      expect(
+        getEpisodeStatus(type, { isLatestAired: false }),
+      ).toBeUndefined();
+    });
+
+    it.each([
+      [EpisodeFinaleType.mid_season_finale, 'finale'],
+      [EpisodePremiereType.mid_season_premiere, 'premiere'],
+    ] as const)(
+      'returns %s status for %s when it is the latest aired',
+      (type, expected) => {
+        expect(
+          getEpisodeStatus(type, { isLatestAired: true }),
+        ).toBe(expected);
+      },
+    );
+
+    it.each([
+      EpisodeFinaleType.series_finale,
+      EpisodeFinaleType.season_finale,
+      EpisodePremiereType.series_premiere,
+      EpisodePremiereType.season_premiere,
+    ])('does not gate non-mid-season %s', (type) => {
+      expect(getEpisodeStatus(type, { isLatestAired: false }))
+        .toBe(type.endsWith('finale') ? 'finale' : 'premiere');
+    });
+  });
 });

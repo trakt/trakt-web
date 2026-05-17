@@ -62,6 +62,38 @@ describe('EpisodeStatusTag', () => {
     expect(tagLabel).toBeInTheDocument();
   });
 
+  test('it hides the mid season finale tag when not the latest aired', () => {
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: EpisodeFinaleType.mid_season_finale,
+          isLatestAired: false,
+        },
+      },
+    );
+
+    expect(screen.queryByText(EpisodeIntlProvider.finaleText()))
+      .not.toBeInTheDocument();
+  });
+
+  test('it hides the mid season premiere tag when not the latest aired', () => {
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: EpisodePremiereType.mid_season_premiere,
+          isLatestAired: false,
+        },
+      },
+    );
+
+    expect(screen.queryByText(EpisodeIntlProvider.premiereText()))
+      .not.toBeInTheDocument();
+  });
+
   test('it renders the season premiere tag', () => {
     render(
       EpisodeStatusTag,
