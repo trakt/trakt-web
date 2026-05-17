@@ -210,6 +210,7 @@ declare global {
     interface Platform {
       env: {
         R2_WALTER: import('@cloudflare/workers-types').R2Bucket;
+        R2_IMMUTABLE: import('@cloudflare/workers-types').R2Bucket;
       };
     }
   }

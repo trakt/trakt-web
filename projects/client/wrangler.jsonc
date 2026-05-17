@@ -25,6 +25,13 @@
     {
       "binding": "R2_WALTER",
       "bucket_name": "walter"
+    },
+    {
+      // Retains every deploy's SvelteKit immutable chunks/assets so clients
+      // with cached HTML referencing previous-deploy hashes can still
+      // resolve their assets. Synced additively from CI on every deploy.
+      "binding": "R2_IMMUTABLE",
+      "bucket_name": "trakt-web-immutable"
     }
   ]
 }

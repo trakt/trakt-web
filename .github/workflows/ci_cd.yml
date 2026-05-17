@@ -292,6 +292,15 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Sync Immutable Chunks to R2 (deploy-retention pool)
+        working-directory: projects/client
+        run: 'deno task sync:immutable'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        continue-on-error: true
+
       - name: Divining the Commit Runes aka Extract Short SHA
         id: vars
         run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
