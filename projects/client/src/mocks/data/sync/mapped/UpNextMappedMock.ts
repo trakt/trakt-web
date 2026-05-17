@@ -10,6 +10,7 @@ export const UpNextMappedMock: UpNextEntry[] = [
     'total': 20,
     'minutesLeft': 471,
     'lastWatchedAt': new Date('2025-01-28T12:53:21.000Z'),
+    'isLatestAired': false,
     ...EpisodeSiloMappedMock,
   },
 ];

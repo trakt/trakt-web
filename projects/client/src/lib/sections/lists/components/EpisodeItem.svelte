@@ -40,7 +40,13 @@
     isNaN(props.episode.runtime) ? props.media.runtime : props.episode.runtime,
   );
 
-  const status = $derived(getEpisodeStatus(props.episode.type));
+  const status = $derived(
+    getEpisodeStatus(props.episode.type, {
+      isLatestAired: props.variant === "next"
+        ? props.episode.isLatestAired
+        : undefined,
+    }),
+  );
 
   const { isWatched } = $derived(
     useIsWatched({ type: "episode", media: props.episode, show: props.media }),
@@ -117,6 +123,7 @@
           <EpisodeStatusTag
             i18n={EpisodeIntlProvider}
             episodeType={props.episode.type}
+            isLatestAired={props.episode.isLatestAired}
           />
         {/snippet}
 

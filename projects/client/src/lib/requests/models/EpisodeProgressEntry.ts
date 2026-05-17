@@ -6,5 +6,6 @@ export const EpisodeProgressEntrySchema = EpisodeEntrySchema.merge(z.object({
   completed: z.number(),
   remaining: z.number(),
   minutesLeft: z.number(),
+  isLatestAired: z.boolean(),
 }));
 export type EpisodeProgressEntry = z.infer<typeof EpisodeProgressEntrySchema>;

@@ -10,11 +10,17 @@
     i18n: EpisodeIntl;
     episodeType: EpisodeType;
     type?: TagType;
+    isLatestAired?: boolean;
   };
 
-  const { i18n, episodeType, type = "text" }: EpisodeStatusProps = $props();
+  const {
+    i18n,
+    episodeType,
+    type = "text",
+    isLatestAired,
+  }: EpisodeStatusProps = $props();
 
-  const status = $derived(getEpisodeStatus(episodeType));
+  const status = $derived(getEpisodeStatus(episodeType, { isLatestAired }));
 </script>
 
 {#snippet tagContent(text: string)}
