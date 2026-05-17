@@ -1,4 +1,5 @@
 import '$lib/polyfills/mapGroupBy.ts';
+import { handle as handleAssetFallback } from '$lib/features/asset-fallback/handle.ts';
 import { handle as handleAuth } from '$lib/features/auth/handle.ts';
 import { handle as handleBotVerification } from '$lib/features/bot-verification/handle.ts';
 import { handle as handleCacheBust } from '$lib/features/cache-bust/handle.ts';
@@ -77,6 +78,10 @@ export const handle: Handle = sequence(
     ],
   }),
   sentryHandle(),
+  // Must run before any feature that touches `event.locals` or session
+  // state so missing-asset requests (which carry no user context) skip the
+  // rest of the pipeline entirely.
+  handleAssetFallback,
   handleBotVerification,
   handleDevice,
   handleLocale,
