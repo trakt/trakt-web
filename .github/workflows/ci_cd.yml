@@ -292,6 +292,10 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Divining the Commit Runes aka Extract Short SHA
+        id: vars
+        run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - name: Sync Immutable Chunks to R2 (deploy-retention pool)
         working-directory: projects/client
         run: 'deno task sync:immutable'
@@ -299,11 +303,18 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          RELEASE_SHA: ${{ steps.vars.outputs.short_sha }}
         continue-on-error: true
 
-      - name: Divining the Commit Runes aka Extract Short SHA
-        id: vars
-        run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Prune Old Releases from R2 (keep last 10)
+        working-directory: projects/client
+        run: 'deno task prune:immutable'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          KEEP_RELEASES: '10'
+        continue-on-error: true
 
       - name: Invoking the Cloudflare Spirits
         if: github.ref == 'refs/heads/main'
