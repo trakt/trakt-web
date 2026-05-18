@@ -1,7 +1,7 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DeleteIcon from "$lib/components/icons/DeleteIcon.svelte";
-  import MarkAsWatchedIcon from "../../icons/MarkAsWatchedIcon.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
   import Button from "../Button.svelte";
   import { useDangerButton } from "../_internal/useDangerButton";
@@ -39,7 +39,7 @@
   <Button {...commonProps} {...props}>
     {i18n.text()}
     {#snippet icon()}
-      <MarkAsWatchedIcon state="watched" size="small" />
+      <TrackIcon state="watched" />
     {/snippet}
   </Button>
 {/if}
@@ -54,7 +54,7 @@
   <DropdownItem {...commonProps} style="flat">
     {i18n.text()}
     {#snippet icon()}
-      <MarkAsWatchedIcon state="watched" />
+      <TrackIcon state="watched" />
     {/snippet}
   </DropdownItem>
 {/if}

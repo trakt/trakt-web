@@ -2,7 +2,7 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import type { MarkAsWatchedButtonIntl } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonIntl";
   import { MarkAsWatchedButtonIntlProvider } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonIntlProvider";
-  import TrackIcon from "$lib/components/TrackIcon.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import {

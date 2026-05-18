@@ -1,7 +1,7 @@
 <script lang="ts">
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import IndicatorTag from "$lib/components/media/tags/IndicatorTag.svelte";
-  import TrackIcon from "$lib/components/TrackIcon.svelte";
 
   type StatusIndicatorsProps = {
     isWatched: boolean;

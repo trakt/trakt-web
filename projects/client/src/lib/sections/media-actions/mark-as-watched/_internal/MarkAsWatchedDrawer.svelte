@@ -5,7 +5,7 @@
   import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
   import QuestionIcon from "$lib/components/icons/QuestionIcon.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
-  import TrackIcon from "$lib/components/TrackIcon.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
