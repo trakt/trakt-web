@@ -67,6 +67,7 @@
         ...buildDrawerLink(SummaryDrawers.WhereToWatch),
         source: { id: "where-to-watch" },
         label: m.button_label_view_all_where_to_watch(),
+        mode: "always",
       }}
       {metaInfo}
       {variant}

@@ -93,7 +93,7 @@
     <ViewAllButton
       href={drilldown.href}
       label={drilldown.label}
-      disabled={items.length === 0}
+      disabled={items.length === 0 && drilldown.mode !== "always"}
       source={drilldown.source}
       noscroll={drilldown.noscroll}
       replacestate={drilldown.replacestate}
