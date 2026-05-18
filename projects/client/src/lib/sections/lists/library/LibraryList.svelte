@@ -1,20 +1,22 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
+  import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages.ts";
+  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
-  import LibraryDropdown from "./_internal/LibraryDropdown.svelte";
   import LibraryMediaItem from "./_internal/LibraryMediaItem.svelte";
-  import { LIBRARIES } from "./constants";
+  import LibraryToggler from "./_internal/LibraryToggler.svelte";
   import type { Library } from "./models/Library";
   import { useLibraryList } from "./useLibraryList";
 
   const { mode }: { mode: DiscoverMode } = $props();
 
-  let activeLibrary: Library = $state("plex");
+  const { current } = useToggler("library");
+  const activeLibrary: Library = $derived($current.value);
 
   const { list, isLoading } = $derived(
     useLibraryList({
@@ -28,6 +30,10 @@
   // FIXME: when we have native plex sync, always show skeleton + cta/upsell to sync plex
 </script>
 
+{#snippet metaInfo()}
+  <ListMetaInfo text={$current.text()} />
+{/snippet}
+
 <div class="trakt-library-list">
   <SectionList
     id={{
@@ -36,6 +42,7 @@
     }}
     items={$list}
     title={m.list_title_library()}
+    {metaInfo}
     --height-list={mediaListHeightResolver("portrait")}
     drilldown={{
       href: UrlBuilder.library.me(activeLibrary),
@@ -48,11 +55,7 @@
     {/snippet}
 
     {#snippet actions()}
-      <LibraryDropdown
-        libraries={LIBRARIES}
-        selectedLibrary={activeLibrary}
-        onChange={(type) => (activeLibrary = type)}
-      />
+      <LibraryToggler />
     {/snippet}
 
     {#snippet empty()}
