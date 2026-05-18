@@ -199,6 +199,11 @@ export const UrlBuilder = {
     `/people/${id}${buildParamString(positions ?? {})}`,
   episode: (id: string, season: number, episode: number) =>
     `/shows/${id}/seasons/${season}/episodes/${episode}`,
+  credits: {
+    movies: (slug: string) => `/people/${slug}/movies`,
+    shows: (slug: string) => `/people/${slug}/shows`,
+    history: (slug: string) => `/people/${slug}/history`,
+  },
   related: {
     movie: (slug: string) => `/movies/${slug}/related`,
     show: (slug: string) => `/shows/${slug}/related`,

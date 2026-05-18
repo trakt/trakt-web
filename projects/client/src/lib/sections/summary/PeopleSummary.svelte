@@ -3,6 +3,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { CrewPositions } from "$lib/requests/models/CrewPosition";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CreditsList from "../lists/CreditsList.svelte";
   import CreditsHistoryList from "../lists/history/CreditsHistoryList.svelte";
   import PeopleSummary from "./components/people/PeopleSummary.svelte";
@@ -30,11 +31,16 @@
   type="movie"
   {person}
   {positions}
+  drilldownLink={UrlBuilder.credits.movies(person.slug)}
 />
 <CreditsList
   title={m.list_title_show_credits()}
   type="show"
   {person}
   {positions}
+  drilldownLink={UrlBuilder.credits.shows(person.slug)}
 />
-<CreditsHistoryList {person} />
+<CreditsHistoryList
+  {person}
+  drilldownLink={UrlBuilder.credits.history(person.slug)}
+/>
