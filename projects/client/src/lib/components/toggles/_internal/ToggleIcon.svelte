@@ -1,5 +1,6 @@
 <script lang="ts" generics="T">
   import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
+  import CustomLibraryIcon from "$lib/components/icons/CustomLibraryIcon.svelte";
   import DropIcon from "$lib/components/icons/DropIcon.svelte";
   import FollowersIcon from "$lib/components/icons/FollowersIcon.svelte";
   import FollowingIcon from "$lib/components/icons/FollowingIcon.svelte";
@@ -9,6 +10,7 @@
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import NoSpoilerIcon from "$lib/components/icons/NoSpoilerIcon.svelte";
   import PeopleIcon from "$lib/components/icons/PeopleIcon.svelte";
+  import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import PopularIcon from "$lib/components/icons/PopularIcon.svelte";
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
@@ -87,4 +89,12 @@
 
 {#if option.value === "ratings"}
   <RatingIcon variant="user" style="unrated" />
+{/if}
+
+{#if option.value === "plex"}
+  <PlexLibraryIcon />
+{/if}
+
+{#if option.value === "other"}
+  <CustomLibraryIcon />
 {/if}

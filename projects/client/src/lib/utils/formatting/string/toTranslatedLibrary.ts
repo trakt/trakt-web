@@ -1,6 +1,7 @@
 import * as m from '$lib/features/i18n/messages.ts';
 
 const LIBRARY_MAP = {
+  plex: () => 'Plex',
   other: m.translated_value_library_custom,
 } as const;
 

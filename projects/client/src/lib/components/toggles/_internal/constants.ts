@@ -9,7 +9,8 @@ export type TogglerId =
   | 'comment'
   | 'trivia'
   | 'progress'
-  | 'activity';
+  | 'activity'
+  | 'library';
 
 type DiscoverToggleType = DiscoverMode;
 type SocialToggleType = 'following' | 'followers';
@@ -17,6 +18,7 @@ type CommentToggleType = CommentSortType;
 type TriviaToggleType = 'spoilers' | 'no-spoilers';
 type ProgressToggleType = 'in-progress' | 'dropped' | 'completed';
 type ActivityToggleType = 'reviews' | 'ratings';
+type LibraryToggleType = 'plex' | 'other';
 
 type Toggler<T, K> = {
   id: T;
@@ -31,6 +33,7 @@ export type TogglerValueMap = {
   trivia: TriviaToggleType;
   progress: ProgressToggleType;
   activity: ActivityToggleType;
+  library: LibraryToggleType;
 };
 
 type ToggleDefinition<K extends TogglerId> = Toggler<K, TogglerValueMap[K]>;
@@ -147,6 +150,23 @@ const activity: ToggleDefinition<'activity'> = {
   ],
 };
 
+const library: ToggleDefinition<'library'> = {
+  id: 'library',
+  default: 'plex',
+  options: [
+    {
+      value: 'plex',
+      text: () => 'Plex',
+      label: () => 'Plex',
+    },
+    {
+      value: 'other',
+      text: m.translated_value_library_custom,
+      label: m.translated_value_library_custom,
+    },
+  ],
+};
+
 export const TOGGLERS: {
   [K in TogglerId]: Toggler<K, TogglerValueMap[K]>;
 } = {
@@ -156,4 +176,5 @@ export const TOGGLERS: {
   trivia,
   progress,
   activity,
+  library,
 } as const;
