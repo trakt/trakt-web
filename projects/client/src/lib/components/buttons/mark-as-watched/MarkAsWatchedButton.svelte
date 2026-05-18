@@ -1,9 +1,9 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import MarkAsWatchedIcon from "../../icons/MarkAsWatchedIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
   import Button from "../Button.svelte";
   import { useDangerButton } from "../_internal/useDangerButton";
@@ -76,7 +76,7 @@
   {#if isLoading}
     <LoadingIndicator />
   {:else}
-    <MarkAsWatchedIcon {state} {size} />
+    <TrackIcon {state} {size} />
   {/if}
 {/snippet}
 
@@ -93,7 +93,7 @@
       >
         {buttonText}
         {#snippet icon()}
-          {@render watchIcon("small")}
+          {@render watchIcon()}
         {/snippet}
       </Button>
     </div>
@@ -101,7 +101,7 @@
 
   {#if style === "action"}
     <ActionButton style="ghost" {...commonProps} {...props}>
-      {@render watchIcon()}
+      {@render watchIcon("small")}
     </ActionButton>
   {/if}
 

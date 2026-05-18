@@ -12,8 +12,8 @@
   import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import SpoilerIcon from "$lib/components/icons/SpoilerIcon.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
-  import TrackIcon from "$lib/components/TrackIcon.svelte";
 
   interface ToggleIconProps {
     option: ToggleOption<T>;

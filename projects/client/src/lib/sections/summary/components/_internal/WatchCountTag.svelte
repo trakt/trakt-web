@@ -1,8 +1,8 @@
 <script lang="ts">
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import type { TagIntl } from "$lib/components/media/tags/TagIntl";
   import StemTag from "$lib/components/tags/StemTag.svelte";
-  import TrackIcon from "$lib/components/TrackIcon.svelte";
   import { linear } from "svelte/easing";
   import { slide } from "svelte/transition";
   import {

@@ -1,7 +1,7 @@
 <script lang="ts">
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
-  import TrackIcon from "$lib/components/TrackIcon.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import { LandingStepType } from "../StepsIntl";
   import Step from "./Step.svelte";
 </script>

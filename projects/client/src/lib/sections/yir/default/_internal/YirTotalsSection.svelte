@@ -3,8 +3,8 @@
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
   import FavoriteIcon from "$lib/components/icons/FavoriteIcon.svelte";
-  import MarkAsWatchedIcon from "$lib/components/icons/MarkAsWatchedIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
   import { formatNumber } from "$lib/utils/format/formatNumber";
@@ -39,7 +39,7 @@
         </span>
         <span class="yir-stat-unit">
           <span class="yir-stat-icon">
-            <MarkAsWatchedIcon state="unwatched" />
+            <TrackIcon state="unwatched" />
           </span>
           {stats.playCounts.total === 1 ? "play" : "plays"}
         </span>

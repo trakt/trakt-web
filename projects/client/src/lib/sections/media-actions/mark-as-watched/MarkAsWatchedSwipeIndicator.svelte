@@ -1,5 +1,5 @@
 <script lang="ts">
-  import MarkAsWatchedIcon from "$lib/components/icons/MarkAsWatchedIcon.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import StemSwipeIndicator from "../_internal/StemSwipeIndicator.svelte";
 
   const { isActive }: { isActive: boolean } = $props();
@@ -9,5 +9,5 @@
   {isActive}
   --color-gesture-active="var(--color-background-purple)"
 >
-  <MarkAsWatchedIcon size="normal" state="unwatched" />
+  <TrackIcon state="unwatched" />
 </StemSwipeIndicator>

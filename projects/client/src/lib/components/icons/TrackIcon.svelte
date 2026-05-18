@@ -1,5 +1,12 @@
 <script lang="ts">
-  const { state = "watched" }: { state?: "watched" | "unwatched" } = $props();
+  const {
+    size = "normal",
+    state = "watched",
+  }: IconProps & {
+    state?: "watched" | "unwatched";
+  } = $props();
+
+  const strokeWidth = $derived(size === "small" ? 1 : 1.5);
 </script>
 
 <svg
@@ -17,9 +24,9 @@
 
   <path
     class="icon-path {state === 'watched' ? 'hidden' : ''}"
-    d="M22.6661 3.2466L9.16758 19.3335L1.37548 12.7952"
+    d="M10.5 20.4499L1 12.15L4 8.15002L10.2887 13.65L18.5 3.65002L22 6.65002L10.5 20.4499Z"
     stroke="currentColor"
-    stroke-width="2"
+    stroke-width={strokeWidth}
   />
 </svg>
 
