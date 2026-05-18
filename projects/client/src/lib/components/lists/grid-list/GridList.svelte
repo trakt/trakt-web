@@ -68,7 +68,12 @@
   {/if}
 
   {#if uniqueItems.length > 0 || promotedItems.length > 0}
-    <div class="trakt-list-item-container trakt-list-items" use:customAction>
+    <div
+      class="trakt-list-item-container trakt-list-items"
+      role={groupBy ? "none" : "list"}
+ 
+      use:customAction
+    >
       {#each promotedItems as i (i.key)}
         {@render item(i)}
       {/each}

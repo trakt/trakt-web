@@ -282,9 +282,9 @@
     <NavbarStateSetter mode="full" />
   {/if}
 
-  <div class="trakt-content" data-mode={mode} {...dynamicContentProps}>
+  <main class="trakt-content" data-mode={mode} {...dynamicContentProps}>
     {@render children()}
-  </div>
+  </main>
 
   {#if mode === "default"}
     <Footer />

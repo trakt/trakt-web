@@ -10,6 +10,7 @@
     mode = "overlay",
     size = "small",
     icon,
+    label,
     ...props
   }: PopupMenuProps = $props();
 
@@ -20,6 +21,7 @@
   use:disableTransitionOn={"touch"}
   use:portalTrigger
   aria-haspopup="true"
+  aria-label={label}
   aria-expanded={$isOpened}
   class="trakt-popup-menu-button"
   data-mode={mode}
