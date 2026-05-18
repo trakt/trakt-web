@@ -18,6 +18,11 @@
     year,
   }: {
     detail: YirDetail | null;
+    /**
+     * Accepted for prop-type compatibility with the template registry; the
+     * default template doesn't render an inline loading indicator.
+     */
+    isLoading: boolean;
     slug: string;
     year: number;
   } = $props();

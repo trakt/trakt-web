@@ -5,7 +5,7 @@
 
   const { slug, year }: { slug: string; year: number } = $props();
 
-  const { detail } = $derived(useYirDetail({ slug, year }));
+  const { detail, isLoading } = $derived(useYirDetail({ slug, year }));
   const Template = $derived(getYirTemplate(year));
 </script>
 
@@ -14,7 +14,12 @@
   <!-- Always mount the template so its scaffold (header text, hero shell)
        paints immediately; detail-dependent sections inside the template
        gate on `detail` and fill in once the query lands. -->
-  <Template detail={$detail ?? null} {slug} {year} />
+  <Template
+    detail={$detail ?? null}
+    isLoading={$isLoading}
+    {slug}
+    {year}
+  />
 </div>
 
 <style lang="scss">

@@ -9,10 +9,12 @@
 
   const {
     detail,
+    isLoading,
     slug,
     year,
   }: {
     detail: YirDetail | null;
+    isLoading: boolean;
     slug: string;
     year: number;
   } = $props();
@@ -63,7 +65,7 @@
         />
       </Yir2024PageInner>
     {/if}
-  {:else}
+  {:else if isLoading}
     <!-- Detail query in flight: hero has already painted above; show a
          small inline indicator where the rest of the sections will mount. -->
     <div class="yir-2024-loading">
