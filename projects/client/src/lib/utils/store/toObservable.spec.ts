@@ -18,11 +18,8 @@ function mockWritable<T>(initial: T) {
   };
 }
 
-const flushMicrotasks = () =>
-  new Promise<void>((resolve) => queueMicrotask(resolve));
-
 describe('toObservable', () => {
-  it('should emit initial value synchronously from readable store', () => {
+  it('should emit initial value from readable store', () => {
     const store = mockWritable('initial');
     const observable = toObservable(store);
     let emittedValue: string | undefined;
@@ -35,7 +32,7 @@ describe('toObservable', () => {
     subscription.unsubscribe();
   });
 
-  it('should emit updated values from writable store (deferred)', async () => {
+  it('should emit updated values from writable store', () => {
     const store = mockWritable('initial');
     const observable = toObservable(store);
     const emittedValues: string[] = [];
@@ -46,13 +43,12 @@ describe('toObservable', () => {
 
     store.set('updated');
     store.set('final');
-    await flushMicrotasks();
 
     expect(emittedValues).toEqual(['initial', 'updated', 'final']);
     subscription.unsubscribe();
   });
 
-  it('should handle multiple subscribers independently', async () => {
+  it('should handle multiple subscribers independently', () => {
     const store = mockWritable(1);
     const observable = toObservable(store);
     const values1: number[] = [];
@@ -63,7 +59,6 @@ describe('toObservable', () => {
 
     store.set(2);
     store.set(3);
-    await flushMicrotasks();
 
     expect(values1).toEqual([1, 2, 3]);
     expect(values2).toEqual([1, 2, 3]);
@@ -72,7 +67,7 @@ describe('toObservable', () => {
     sub2.unsubscribe();
   });
 
-  it('should stop emitting after unsubscription', async () => {
+  it('should stop emitting after unsubscription', () => {
     const store = mockWritable('start');
     const observable = toObservable(store);
     const emittedValues: string[] = [];
@@ -82,12 +77,8 @@ describe('toObservable', () => {
     });
 
     store.set('middle');
-    // Flush so the deferred 'middle' lands before we unsubscribe;
-    // anything emitted after unsubscribe must not be delivered.
-    await flushMicrotasks();
     subscription.unsubscribe();
     store.set('end');
-    await flushMicrotasks();
 
     expect(emittedValues).toEqual(['start', 'middle']);
   });
