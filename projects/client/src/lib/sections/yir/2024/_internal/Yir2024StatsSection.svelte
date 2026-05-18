@@ -390,7 +390,7 @@
   // bottom padding to a tighter value so the watermark sits closer to the
   // averages list above it (no big empty gap between the two).
   .yir-2024-stats-card {
-    --height-yir-2024-line-chart: var(--ni-104);
+    --height-area-chart: var(--ni-104);
     --panel-padding-bottom: var(--ni-64);
 
     display: flex;
@@ -398,7 +398,7 @@
     min-width: 0;
 
     @include for-mobile {
-      --height-yir-2024-line-chart: var(--ni-72);
+      --height-area-chart: var(--ni-72);
       --panel-padding-bottom: var(--ni-40);
     }
   }
