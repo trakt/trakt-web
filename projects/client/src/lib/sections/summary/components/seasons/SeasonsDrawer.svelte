@@ -3,11 +3,13 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
+  import SeasonDropdown from "$lib/sections/lists/season/_internal/SeasonDropdown.svelte";
   import SeasonEpisodeItem from "$lib/sections/lists/season/_internal/SeasonEpisodeItem.svelte";
   import SeasonPopupMenu from "$lib/sections/lists/season/_internal/SeasonPopupMenu.svelte";
   import { useShowWatchedEpisodes } from "$lib/sections/lists/season/_internal/useShowWatchedEpisodes";
@@ -58,6 +60,13 @@
 </script>
 
 {#snippet badge()}
+  <SeasonDropdown
+    showSlug={show.slug}
+    {seasons}
+    {currentSeason}
+    urlBuilder={buildSeasonLink}
+  />
+
   <SeasonPopupMenu
     title={seasonLabel(currentSeason)}
     episodes={$episodes}
@@ -72,16 +81,16 @@
   onOpened={() => (isOpen = true)}
   title={m.list_title_seasons()}
   size="large"
-  metaInfo={seasonLabel(currentSeason)}
 >
   {#if isOpen}
     <div class="seasons-drawer-content" transition:fade={{ duration: 150 }}>
       {#if seasons.length > 1}
         <div class="seasons-section">
-          <GridList
-            id={`seasons-list-${show.slug}`}
+          <SectionList
+            id={`season-poster-list-${show.slug}`}
             items={seasons}
-            --width-item="var(--width-portrait-card)"
+            title={null}
+            variant="inline"
           >
             {#snippet item(season)}
               <SeasonItem
@@ -91,7 +100,7 @@
                 urlBuilder={() => buildSeasonLink(season.number)}
               />
             {/snippet}
-          </GridList>
+          </SectionList>
         </div>
       {/if}
 
@@ -137,7 +146,7 @@
   .seasons-drawer-content {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xl);
+    gap: var(--gap-m);
 
     padding-bottom: var(--ni-8);
 
@@ -150,7 +159,7 @@
     --column-count: 4;
 
     --container-width: calc(
-      var(--drawer-size) - 2 * var(--drawer-padding) - var(--list-gap) * 2
+      var(--drawer-size) - 2 * var(--drawer-padding) - var(--list-gap)
     );
     --width-override-card: calc(
       (var(--container-width) - (var(--column-count) - 1) * var(--list-gap)) /
@@ -161,13 +170,15 @@
       var(--height-override-card-cover) + var(--height-card-footer-sm)
     );
 
-    @include for-mobile {
-      --container-width: calc(100dvw - 2 * var(--drawer-padding));
-    }
+    --height-list: calc(
+      var(--height-override-card) + var(--layout-scrollbar-width)
+    );
 
-    :global(.trakt-list-items) {
-      grid-row-gap: var(--gap-s);
-      grid-template-columns: repeat(var(--column-count), 1fr);
+    @include for-mobile {
+      --column-count: 3;
+      --container-width: calc(
+        100dvw - 2 * var(--drawer-padding) - var(--list-gap)
+      );
     }
   }
 

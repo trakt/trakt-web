@@ -43,29 +43,36 @@
     useIsWatched({ type: "season", media: season, show: media }),
   );
 
-  const scrollToItem = (element: HTMLElement) => {
-    if (!isCurrentSeason || variant === "list-item") return;
+  const scrollToItem = (element: HTMLElement, active: boolean) => {
+    const doScroll = (active: boolean, behavior: "smooth" | "instant") => {
+      if (!active || variant === "list-item") return;
 
-    const parent = element.parentElement;
-    if (!parent) {
-      return;
-    }
+      const parent = element.parentElement;
+      if (!parent) return;
 
-    const parentRight = parent.scrollLeft + parent.clientWidth;
-    const elementLeft = element.offsetLeft;
-    const elementRight = elementLeft + element.offsetWidth;
-    const isOutOfView = elementRight > parentRight;
+      const parentRight = parent.scrollLeft + parent.clientWidth;
+      const elementLeft = element.offsetLeft;
+      const elementRight = elementLeft + element.offsetWidth;
+      const isOutOfView =
+        elementRight > parentRight || elementLeft < parent.scrollLeft;
 
-    if (!isOutOfView) {
-      return;
-    }
+      if (!isOutOfView) return;
 
-    requestAnimationFrame(() => {
-      parent.scrollTo({
-        left: elementLeft - scrollOffset,
-        behavior: "instant",
+      requestAnimationFrame(() => {
+        parent.scrollTo({
+          left: elementLeft - scrollOffset,
+          behavior,
+        });
       });
-    });
+    };
+
+    doScroll(active, "instant");
+
+    return {
+      update: (active: boolean) => {
+        doScroll(active, "smooth");
+      },
+    };
   };
 </script>
 
@@ -77,7 +84,7 @@
   class="trakt-season-item"
   class:is-current-season={isCurrentSeason}
   data-variant={variant}
-  use:scrollToItem
+  use:scrollToItem={isCurrentSeason}
 >
   {#if style === "cover"}
     {#snippet tag()}
