@@ -10,6 +10,11 @@ type YirTemplateProps = {
    * sections so the page progressively fills in as data lands.
    */
   detail: YirDetail | null;
+  /**
+   * True while the underlying query is loading. Lets templates distinguish
+   * "still fetching" from "loaded but empty" (e.g. a user with no plays).
+   */
+  isLoading: boolean;
   slug: string;
   year: number;
 };
