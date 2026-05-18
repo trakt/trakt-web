@@ -9,9 +9,19 @@
     showSlug: string;
     seasons: Season[];
     currentSeason: number;
+    urlBuilder?: (seasonNumber: number) => string;
   };
 
-  const { showSlug, seasons, currentSeason }: SeasonDropdownProps = $props();
+  const { showSlug, seasons, currentSeason, urlBuilder }: SeasonDropdownProps =
+    $props();
+
+  const buildUrl = $derived(
+    urlBuilder ?? ((n: number) => UrlBuilder.show(showSlug, { season: n })),
+  );
+
+  const seasonText = (seasonNumber: number) => {
+    return seasonNumber === 0 ? m.text_season_specials() : `${seasonNumber}`;
+  };
 </script>
 
 <DropdownList
@@ -23,15 +33,11 @@
   size="small"
   disabled={seasons.length < 2}
 >
-  {currentSeason}
+  {seasonText(currentSeason)}
   {#snippet items()}
     {#each seasons as season (season.id)}
-      <DropdownItem
-        color="blue"
-        href={UrlBuilder.show(showSlug, { season: season.number })}
-        noscroll
-      >
-        {season.number}
+      <DropdownItem color="blue" href={buildUrl(season.number)} noscroll>
+        {seasonText(season.number)}
       </DropdownItem>
     {/each}
   {/snippet}
