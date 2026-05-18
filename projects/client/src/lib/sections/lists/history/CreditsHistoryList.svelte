@@ -6,7 +6,10 @@
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import { useHistoryCreditsList } from "./_internal/useHistoryCreditsList";
 
-  const { person }: { person: PersonSummary } = $props();
+  const {
+    person,
+    drilldownLink,
+  }: { person: PersonSummary; drilldownLink?: string } = $props();
 
   const { list, isLoading } = $derived(
     useHistoryCreditsList({ slug: person.slug }),
@@ -17,6 +20,13 @@
   id={`credits-history-list-${person.slug}`}
   items={$list}
   title={m.list_title_from_my_history()}
+  drilldown={drilldownLink
+    ? {
+        href: drilldownLink,
+        label: m.button_text_view_all(),
+        source: { id: "credits-history" },
+      }
+    : undefined}
   --height-list={mediaListHeightResolver("portrait")}
 >
   {#snippet item(entry)}

@@ -12,10 +12,12 @@
     mediaCredit,
     source,
     mode,
+    style = "cover",
   }: {
     mediaCredit: MediaCredit;
     source: string;
     mode?: "standalone" | "mixed";
+    style?: "summary" | "cover";
   } = $props();
 
   const toCharacter = (character?: string) => {
@@ -51,7 +53,8 @@
   {source}
   variant="credit"
   {mode}
-  {tag}
+  {style}
+  tag={style === "cover" ? tag : undefined}
   role={mediaCredit.type === "cast"
     ? toCharacter(mediaCredit.character)
     : toJob(mediaCredit.job)}

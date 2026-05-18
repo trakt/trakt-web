@@ -78,9 +78,10 @@ export function useHistoryCreditsList(
 
   return {
     list: list$,
-    isLoading: combineLatest([movies$, shows$]).pipe(
+    isLoading: combineLatest([movies$, shows$, history$]).pipe(
       map(
-        ([movies, shows]) => toLoadingState(movies) || toLoadingState(shows),
+        ([movies, shows, history]) =>
+          toLoadingState(movies) || toLoadingState(shows) || !history,
       ),
     ),
   };
