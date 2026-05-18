@@ -34,5 +34,5 @@
     "strict": true,
     "verbatimModuleSyntax": true
   },
-  "allowScripts": ["npm:@firebase/util@1.13.0", "npm:@sentry/cli@2.58.2", "npm:core-js@3.46.0", "npm:esbuild@0.25.12", "npm:esbuild@0.27.0", "npm:fsevents@2.3.2", "npm:fsevents@2.3.3", "npm:msw@2.7.3", "npm:protobufjs@7.5.4", "npm:sharp@0.33.5", "npm:workerd@1.20251202.0"]
+  "allowScripts": ["npm:@carbon/charts-svelte@1.27.10", "npm:@carbon/charts@1.27.10", "npm:@carbon/colors@11.51.0", "npm:@carbon/utils-position@1.3.0", "npm:@firebase/util@1.13.0", "npm:@firebase/util@1.15.0", "npm:@sentry/cli@2.58.2", "npm:@sentry/cli@2.58.5", "npm:core-js@3.46.0", "npm:core-js@3.47.0", "npm:esbuild@0.25.12", "npm:esbuild@0.27.0", "npm:esbuild@0.27.3", "npm:esbuild@0.27.4", "npm:esbuild@0.28.0", "npm:fsevents@2.3.2", "npm:fsevents@2.3.3", "npm:msw@2.14.3", "npm:msw@2.7.3", "npm:protobufjs@7.5.4", "npm:protobufjs@7.5.6", "npm:sharp@0.33.5", "npm:sharp@0.34.5", "npm:workerd@1.20251202.0", "npm:workerd@1.20260430.1"]
 }

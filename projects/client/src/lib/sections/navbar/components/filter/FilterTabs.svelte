@@ -19,11 +19,13 @@
     setActiveMode,
     actions,
     tabPosition,
+    useAdvancedSimpleFilters = false,
   }: {
     activeMode: FilterMode;
     setActiveMode: (to: string) => void;
     actions?: Snippet;
     tabPosition?: "top" | "bottom";
+    useAdvancedSimpleFilters?: boolean;
   } = $props();
 
   const { filters, hasAnyAdvancedFilter, filterMap } = useFilter();
@@ -90,7 +92,7 @@
     {
       value: FilterMode.Simple,
       label: m.tab_text_simple_filters(),
-      content: simpleFilters,
+      content: useAdvancedSimpleFilters ? advancedFilters : simpleFilters,
     },
     {
       value: FilterMode.Advanced,

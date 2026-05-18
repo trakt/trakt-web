@@ -15,4 +15,5 @@ export type CalendarLayoutProps<T> = {
   order?: CalendarOrder;
   periods: ReadonlyArray<CalendarPeriod<T>>;
   onLoadMore: () => void;
+  showNavigation?: boolean;
 } & CalendarNavigationProps;

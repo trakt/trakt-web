@@ -1,7 +1,10 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import { useDiscover } from "$lib/features/discover/useDiscover.ts";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { m } from "$lib/features/i18n/messages.ts";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import WeeklyPulse from "$lib/sections/stats/WeeklyPulse.svelte";
   import FavoritesList from "../lists/favorites/FavoritesList.svelte";
   import PersonalHistoryList from "../lists/history/PersonalHistoryList.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
@@ -28,6 +31,11 @@
 
 {#if $isMe}
   <PersonalHistoryList mode={$mode} />
+  <RenderForFeature flag={FeatureFlag.ThisWeek}>
+    {#snippet enabled()}
+      <WeeklyPulse />
+    {/snippet}
+  </RenderForFeature>
   <MyActivityList mode={$mode} />
   <ProgressList mode={$mode} />
 {:else}

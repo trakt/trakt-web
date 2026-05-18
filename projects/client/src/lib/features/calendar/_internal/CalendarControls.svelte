@@ -53,7 +53,13 @@
   .calendar-controls {
     display: flex;
     align-items: center;
+    justify-content: center;
 
     gap: var(--gap-xs);
+  }
+
+  .calendar-controls :global(.trakt-button),
+  .calendar-controls :global(.trakt-action-button) {
+    color: white;
   }
 </style>
