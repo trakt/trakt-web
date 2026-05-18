@@ -61,7 +61,9 @@ export const mediaProgressQuery = defineInfiniteQuery({
       movieProgressRequest(params),
     ]),
   mapper: ([upNextResponse, movieProgressResponse], { sortBy, sortHow }) => {
-    const episodes = upNextResponse.body.map(mapUpNextResponse);
+    const episodes = upNextResponse.body
+      .filter((item) => item.progress.next_episode != null)
+      .map(mapUpNextResponse);
 
     const movies = movieProgressResponse.body
       .map(mapToMovieProgressEntry)

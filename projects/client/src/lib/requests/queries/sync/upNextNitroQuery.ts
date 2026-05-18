@@ -83,7 +83,9 @@ export const upNextNitroQuery = defineInfiniteQuery({
   request: upNextNitroRequest,
   mapper: (response) => {
     return {
-      entries: response.body.map(mapUpNextResponse),
+      entries: response.body
+        .filter((item) => item.progress.next_episode != null)
+        .map(mapUpNextResponse),
       page: extractPageMeta(response.headers),
     };
   },
