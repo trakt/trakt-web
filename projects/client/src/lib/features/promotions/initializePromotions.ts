@@ -16,12 +16,18 @@ export function initializePromotions() {
       }
 
       const config = PROMOTIONS[id];
-      set({
+      const base = {
         id: config.id,
         end: utcToLocalDate(config.end),
         start: utcToLocalDate(config.start),
         audience: config.audience,
-      });
+      };
+
+      set(
+        config.type === 'message'
+          ? { ...base, type: 'message', message: config.message }
+          : { ...base, type: 'promotion' },
+      );
     },
   });
 }
