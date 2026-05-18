@@ -70,6 +70,7 @@
     "@libn/fuzzy": "npm:@jsr/libn__fuzzy@^0.4.0",
     "@sentry/sveltekit": "10.51.0",
     "@sveltejs/kit": "^2.59.1",
+    "@svelte-put/shortcut": "^4.1.0",
     "@tanstack/svelte-query": "5.90.2",
     "@tanstack/svelte-query-devtools": "5.90.2",
     "@tanstack/svelte-query-persist-client": "5.90.2",

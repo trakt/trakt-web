@@ -2,6 +2,7 @@
   import { browser } from "$app/environment";
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
+  import { shortcut } from "@svelte-put/shortcut";
   import { map } from "rxjs";
 
   import { useShare } from "$lib/components/buttons/share/useShare";
@@ -9,7 +10,6 @@
   import { useQuery } from "$lib/features/query/useQuery";
   import { m } from "$lib/paraglide/messages";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
-  import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
@@ -53,24 +53,6 @@
     );
   }
 
-  $effect(() => {
-    return GlobalEventBus.getInstance().register("keydown", (event) => {
-      if (event.metaKey || event.ctrlKey || event.altKey) return;
-      if (isTextInputTarget(event.target)) return;
-
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        goto(prevYearUrl);
-        return;
-      }
-
-      if (event.key === "ArrowRight" && canGoNext) {
-        event.preventDefault();
-        goto(nextYearUrl);
-      }
-    });
-  });
-
   const { share } = $derived(useShare({ id: "yir" }));
 
   const shareData = $derived({
@@ -83,6 +65,32 @@
     browser && !!navigator.canShare && navigator.canShare(shareData),
   );
 </script>
+
+<svelte:window
+  use:shortcut={{
+    trigger: [
+      {
+        key: "ArrowLeft",
+        modifier: false,
+        preventDefault: true,
+        callback: ({ originalEvent }) => {
+          if (isTextInputTarget(originalEvent.target)) return;
+          goto(prevYearUrl);
+        },
+      },
+      {
+        key: "ArrowRight",
+        modifier: false,
+        enabled: canGoNext,
+        preventDefault: true,
+        callback: ({ originalEvent }) => {
+          if (isTextInputTarget(originalEvent.target)) return;
+          goto(nextYearUrl);
+        },
+      },
+    ],
+  }}
+/>
 
 <header class="yir-header" use:trackWindowScroll={"scrolled"}>
   <nav class="yir-header-section yir-header-center">

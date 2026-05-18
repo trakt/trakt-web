@@ -15,6 +15,7 @@
     "npm:@jsr/trakt__api@0.4.11": "0.4.11_openapi3-ts@4.5.0",
     "npm:@playwright/test@1.59.1": "1.59.1",
     "npm:@sentry/sveltekit@10.51.0": "10.51.0_@sveltejs+kit@2.59.1__@sveltejs+vite-plugin-svelte@7.0.0___svelte@5.55.5___vite@8.0.10____esbuild@0.28.0____sass-embedded@1.99.0__svelte@5.55.5__typescript@5.8.3__vite@8.0.10___esbuild@0.28.0___sass-embedded@1.99.0_vite@8.0.10__esbuild@0.28.0__sass-embedded@1.99.0_@sveltejs+vite-plugin-svelte@7.0.0__svelte@5.55.5__vite@8.0.10___esbuild@0.28.0___sass-embedded@1.99.0",
+    "npm:@svelte-put/shortcut@^4.1.0": "4.1.0_svelte@5.55.5",
     "npm:@sveltejs/adapter-auto@7.0.1": "7.0.1_@sveltejs+kit@2.59.1__@sveltejs+vite-plugin-svelte@7.0.0___svelte@5.55.5___vite@8.0.10____esbuild@0.28.0____sass-embedded@1.99.0__svelte@5.55.5__typescript@5.8.3__vite@8.0.10___esbuild@0.28.0___sass-embedded@1.99.0_@sveltejs+vite-plugin-svelte@7.0.0__svelte@5.55.5__vite@8.0.10___esbuild@0.28.0___sass-embedded@1.99.0",
     "npm:@sveltejs/adapter-cloudflare@7.2.8": "7.2.8_@sveltejs+kit@2.59.1__@sveltejs+vite-plugin-svelte@7.0.0___svelte@5.55.5___vite@8.0.10____esbuild@0.28.0____sass-embedded@1.99.0__svelte@5.55.5__typescript@5.8.3__vite@8.0.10___esbuild@0.28.0___sass-embedded@1.99.0_@sveltejs+vite-plugin-svelte@7.0.0__svelte@5.55.5__vite@8.0.10___esbuild@0.28.0___sass-embedded@1.99.0",
     "npm:@sveltejs/kit@^2.59.1": "2.59.1_@sveltejs+vite-plugin-svelte@7.0.0__svelte@5.55.5__vite@8.0.10___esbuild@0.28.0___sass-embedded@1.99.0_svelte@5.55.5_typescript@5.8.3_vite@8.0.10__esbuild@0.28.0__sass-embedded@1.99.0",
@@ -3196,6 +3197,12 @@
         "json5",
         "magic-string@0.25.9",
         "string.prototype.matchall"
+      ]
+    },
+    "@svelte-put/shortcut@4.1.0_svelte@5.55.5": {
+      "integrity": "sha512-wImNEIkbxAIWFqlfuhcbC+jRPDeRa/uJGIXHMEVVD+jqL9xCwWNnkGQJ6Qb2XVszuRLHlb8SGZDL3Io/h3vs8w==",
+      "dependencies": [
+        "svelte"
       ]
     },
     "@sveltejs/acorn-typescript@1.0.9_acorn@8.16.0": {
@@ -8234,6 +8241,7 @@
             "npm:@jsr/trakt__api@0.4.11",
             "npm:@playwright/test@1.59.1",
             "npm:@sentry/sveltekit@10.51.0",
+            "npm:@svelte-put/shortcut@^4.1.0",
             "npm:@sveltejs/adapter-auto@7.0.1",
             "npm:@sveltejs/adapter-cloudflare@7.2.8",
             "npm:@sveltejs/kit@^2.59.1",
