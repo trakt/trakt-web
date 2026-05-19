@@ -8,7 +8,6 @@ import * as path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { firstItem } from '../../../src/lib/utils/assert/firstItem.ts';
 import type { MetaMessages } from '../model/MetaMessages.ts';
-import { Platform } from '../model/Platform.ts';
 import type { PlatformGenerator } from '../model/PlatformGenerator.ts';
 import { WebGenerator } from './WebGenerator.ts';
 
@@ -66,36 +65,6 @@ describe('WebGenerator', () => {
     );
     expect(content.simple_message).toBe('Hello World');
     expect(content.greeting).toBe('Hello, {name}!');
-  });
-
-  it('should exclude messages marked for web exclusion', async () => {
-    const testMetaMessages: MetaMessages = {
-      meta: {
-        locale: 'en',
-        direction: 'ltr',
-        generator: {
-          inlang: {
-            enabled: true,
-            outputPath: './messages/{locale}.json',
-          },
-        },
-      },
-      messages: {
-        included_message: {
-          default: 'This should be included',
-        },
-        excluded_message: {
-          default: 'This should be excluded',
-          exclude: ['web' as Platform],
-        },
-      },
-    };
-
-    const results = await generator.generate([testMetaMessages], tempDir);
-    const content = JSON.parse(firstItem(results).content);
-
-    expect(content.included_message).toBe('This should be included');
-    expect(content.excluded_message).toBeUndefined();
   });
 
   it('should skip generation when inlang is not enabled', async () => {

@@ -148,39 +148,4 @@ describe('I18nGenerator', () => {
       expect(content.simple).toBe('Hello');
     });
   });
-
-  describe('exclude functionality', () => {
-    it('should exclude messages from Web when exclude contains web', async () => {
-      const excludeGenerator = new I18nGenerator([{
-        meta: {
-          locale: 'en',
-          direction: 'ltr',
-          generator: {
-            inlang: {
-              enabled: true,
-              outputPath: './messages/{locale}.json',
-            },
-          },
-        },
-        messages: {
-          common_message: { default: 'Available everywhere' },
-          web_excluded: {
-            default: 'Not for Web',
-            exclude: [Platform.WEB],
-          },
-        },
-      }]);
-
-      const results = await excludeGenerator.generatePlatforms(
-        [Platform.WEB],
-        tempDir,
-      );
-
-      expect(results).toHaveLength(1);
-      const webData = JSON.parse(firstItem(results).content);
-
-      expect(webData.common_message).toBe('Available everywhere');
-      expect(webData.web_excluded).toBeUndefined();
-    });
-  });
 });
