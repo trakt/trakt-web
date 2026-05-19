@@ -1,4 +1,5 @@
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { activityHistoryQuery } from '$lib/requests/queries/users/activityHistoryQuery.ts';
 import {
@@ -16,42 +17,59 @@ import { map } from 'rxjs';
 import { mapToCalendarPeriods } from './_internal/mapToCalendarPeriods.ts';
 import type { HistoryEntry } from './models/HistoryEntry.ts';
 
-export type RecentlyWatchedType = 'movie' | 'show' | 'episode' | 'media';
+export type RecentlyWatchedType = ExtendedMediaType | 'media';
 
-type RecentlyWatchedListStoreProps = {
-  type: RecentlyWatchedType;
-  limit?: number;
-  slug?: string;
+type SpecificHistory = {
+  type: ExtendedMediaType;
   id?: number;
-  page?: number;
-} & FilterParams;
+};
+
+type MediaHistory = {
+  type: 'media';
+};
+
+type RecentlyWatchedListStoreProps =
+  & {
+    limit?: number;
+    slug?: string;
+    page?: number;
+  }
+  & FilterParams
+  & (SpecificHistory | MediaHistory);
 
 function typeToQuery(
-  { type, id, slug, page, limit, filter }: RecentlyWatchedListStoreProps,
+  props: RecentlyWatchedListStoreProps,
 ) {
   const params = {
-    limit: limit ?? DEFAULT_PAGE_SIZE,
-    slug: slug ?? 'me',
-    id,
-    page: page ?? 1,
-    filter,
+    limit: props.limit ?? DEFAULT_PAGE_SIZE,
+    slug: props.slug ?? 'me',
+    page: props.page ?? 1,
+    filter: props.filter,
   };
 
-  switch (type) {
+  switch (props.type) {
     case 'movie':
-      return movieActivityHistoryQuery(params) as InfiniteQuery<
+      return movieActivityHistoryQuery({
+        ...params,
+        id: props.id,
+      }) as InfiniteQuery<
         HistoryEntry
       >;
     case 'episode':
-      return episodeActivityHistoryQuery(params) as InfiniteQuery<
+      return episodeActivityHistoryQuery({
+        ...params,
+        id: props.id,
+      }) as InfiniteQuery<
         HistoryEntry
       >;
     case 'show':
-      return showActivityHistoryQuery(params) as InfiniteQuery<
+      return showActivityHistoryQuery({
+        ...params,
+        id: props.id,
+      }) as InfiniteQuery<
         HistoryEntry
       >;
     default:
-      // FIXME: switch to all endpoint
       return activityHistoryQuery(params) as InfiniteQuery<
         HistoryEntry
       >;

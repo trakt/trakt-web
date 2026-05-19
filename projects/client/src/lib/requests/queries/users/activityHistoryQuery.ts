@@ -1,6 +1,6 @@
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { type ApiParams } from '$lib/requests/api.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -9,13 +9,11 @@ import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDepe
 import type { FilterParams } from '../../models/FilterParams.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 import {
-  episodeActivityHistoryRequest,
   EpisodeActivityHistorySchema,
   mapToEpisodeActivityHistory,
 } from './episodeActivityHistoryQuery.ts';
 import {
   mapToMovieActivityHistory,
-  movieActivityHistoryRequest,
   MovieActivityHistorySchema,
 } from './movieActivityHistoryQuery.ts';
 
@@ -35,8 +33,27 @@ const HistorySchema = z.discriminatedUnion('type', [
 ]);
 export type ActivityHistory = z.infer<typeof HistorySchema>;
 
+export function activityHistoryRequest(
+  { fetch, slug, startDate, endDate, limit, page, filter }:
+    ActivityHistoryParams,
+) {
+  const queryParams = {
+    extended: 'full,images' as const,
+    start_at: startDate?.toISOString(),
+    end_at: endDate?.toISOString(),
+    limit,
+    page,
+    ...filter,
+  };
+
+  return api({ fetch }).users.history.all({
+    params: { id: slug },
+    query: queryParams,
+  });
+}
+
 export const activityHistoryQuery = defineInfiniteQuery({
-  key: 'activityHistory',
+  key: 'activityHistory:v2',
   invalidations: [
     InvalidateAction.MarkAsWatched('episode'),
     InvalidateAction.MarkAsWatched('movie'),
@@ -50,24 +67,15 @@ export const activityHistoryQuery = defineInfiniteQuery({
     params.slug,
     ...getGlobalFilterDependencies(params.filter),
   ],
-  request: (params) =>
-    Promise.all([
-      movieActivityHistoryRequest(params),
-      episodeActivityHistoryRequest(params),
-    ]),
-  mapper: ([movieResponse, episodeResponse]) => {
-    const movies = movieResponse.body.map(mapToMovieActivityHistory);
-    const episodes = episodeResponse.body.map(mapToEpisodeActivityHistory);
-
-    const watched = [...movies, ...episodes].toSorted((a, b) =>
-      b.watchedAt.getTime() - a.watchedAt.getTime()
-    );
-
-    return {
-      entries: watched,
-      page: extractPageMeta(episodeResponse.headers),
-    };
-  },
+  request: activityHistoryRequest,
+  mapper: (response) => ({
+    entries: response.body.map((item) =>
+      item.type === 'movie'
+        ? mapToMovieActivityHistory(item)
+        : mapToEpisodeActivityHistory(item)
+    ),
+    page: extractPageMeta(response.headers),
+  }),
   schema: PaginatableSchemaFactory(HistorySchema),
   ttl: time.hours(1),
 });
