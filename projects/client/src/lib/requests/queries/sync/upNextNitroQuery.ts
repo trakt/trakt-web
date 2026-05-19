@@ -9,7 +9,6 @@ import type { SortDirection } from '$lib/sections/lists/user/models/SortDirectio
 import { time } from '$lib/utils/timing/time.ts';
 import { type UpNextResponse } from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
-import { isLatestAiredEpisode } from '../../_internal/isLatestAiredEpisode.ts';
 import { mapToEpisodeEntry } from '../../_internal/mapToEpisodeEntry.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import { mapToShowProgress } from '../../_internal/mapToShowProgress.ts';
@@ -34,10 +33,15 @@ export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   episode.runtime = isNaN(episode.runtime) ? show.runtime : episode.runtime;
 
   const progress = mapToShowProgress(item.progress);
-  const isLatestAired = isLatestAiredEpisode(
-    item.progress.next_episode,
-    item.progress.last_episode,
-  );
+  /*
+   * FIXME: `progress.last_episode` is the user's furthest watched episode, not the show's
+   *  latest aired episode, so comparing next_episode against it via isLatestAiredEpisode
+   *  was effectively always true. As a proxy, treat the next episode as the latest aired
+   *  when remaining (aired - completed) is 1 or less - i.e. no further aired episode
+   *  exists beyond the displayed one. Replace once the API surfaces an absolute
+   *  "latest aired episode" reference.
+   */
+  const isLatestAired = (item.progress.aired - item.progress.completed) <= 1;
 
   return {
     show,
