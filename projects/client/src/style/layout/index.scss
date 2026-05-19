@@ -106,8 +106,14 @@
   --width-comment-thread-card: var(--width-comment-card);
   --height-comment-thread-card: var(--ni-480);
 
-  --width-toast-card: var(--ni-104);
-  --height-toast-card: var(--ni-80);
+  --width-toast-card: var(--ni-124);
+  --height-toast-card: var(--ni-96);
+
+
+  @include for-tablet-sm-and-below {
+    --width-toast-card: var(--ni-104);
+    --height-toast-card: var(--ni-80);
+  }
 
   --width-cta-landscape-card: var(--width-landscape-card);
   --height-cta-landscape-card: var(--height-landscape-card);
@@ -130,8 +136,8 @@
     without subtracting list-gap (unlike media card lists).
   */
   --list-profile-item-count: clamp(1,
-      round(down, var(--list-inner-width) / var(--min-profile-item-width), 1),
-      var(--max-list-profile-item-count));
+    round(down, var(--list-inner-width) / var(--min-profile-item-width), 1),
+    var(--max-list-profile-item-count));
 
   @supports (-moz-appearance: none) {
     --list-profile-item-count: var(--max-list-profile-item-count);
@@ -243,6 +249,7 @@
    */
   --font-size-tag: var(--ni-10);
   --font-size-text: var(--ni-14);
+  --font-size-text-small: var(--ni-12);
 
   --width-summary-card-compact: 100%;
   --height-summary-card-cover-compact: var(--ni-88);

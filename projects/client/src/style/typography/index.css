@@ -76,6 +76,10 @@ code {
     font-size: var(--font-size-tag);
   }
 
+  &.small {
+    font-size: var(--font-size-text-small);
+  }
+
   &.no-wrap {
     white-space: nowrap;
   }

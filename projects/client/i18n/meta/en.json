@@ -2037,6 +2037,15 @@
       "default": "remaining",
       "description": "Text used to indicate the remaining time of a movie or episode."
     },
+    "text_ends_at": {
+      "default": "Ends at {time}",
+      "description": "Text in the 'now playing' check-in toast indicating the clock time when the currently watched movie or episode will finish.",
+      "variables": {
+        "time": {
+          "type": "string"
+        }
+      }
+    },
     "button_text_checkin": {
       "default": "Now watching",
       "description": "Text for the button that allows users to indicate that they are starting to watch a movie or episode."
