@@ -67,15 +67,6 @@
                   "type": "string",
                   "description": "Description of the message purpose and context"
                 },
-                "exclude": {
-                  "type": "array",
-                  "description": "Platforms to exclude this message from",
-                  "items": {
-                    "type": "string",
-                    "enum": ["android", "ios", "web"]
-                  },
-                  "uniqueItems": true
-                },
                 "variables": {
                   "type": "object",
                   "description": "Variable definitions used in the message",

@@ -185,10 +185,6 @@ describe('generateFromMeta', () => {
             count: { type: 'number', description: 'Item count' },
           },
         },
-        excluded: {
-          default: 'Should not appear in web',
-          exclude: [Platform.WEB],
-        },
       });
 
       const results = await generateFromMeta(metaDir, tempDir);
@@ -198,7 +194,6 @@ describe('generateFromMeta', () => {
       expect(webResult).toBeDefined();
       const webContent = JSON.parse(assertDefined(webResult).content);
       expect(webContent.complex).toBe('Complex {type} with {count} items');
-      expect(webContent.excluded).toBeUndefined();
     });
   });
 
@@ -252,38 +247,6 @@ describe('generateFromMeta', () => {
       await expect(
         generateFromMeta(metaDir, outputDir),
       ).resolves.not.toThrow();
-    });
-
-    it('should prune web-excluded keys from locale message files', async () => {
-      await createMetaFile('en', {
-        hello: { default: 'Hello World' },
-        android_only: {
-          default: 'Android only',
-          exclude: [Platform.WEB],
-        },
-      });
-
-      const messagesDir = path.join(tempDir, 'messages');
-      await fs.promises.mkdir(messagesDir, { recursive: true });
-      await fs.promises.writeFile(
-        path.join(messagesDir, 'fr-fr.json'),
-        JSON.stringify({
-          '$schema': 'https://inlang.com/schema/inlang-message-format',
-          'hello': 'Bonjour',
-          'android_only': 'Android uniquement',
-        }),
-      );
-
-      await generateFromMeta(metaDir, tempDir);
-
-      const content = JSON.parse(
-        await fs.promises.readFile(
-          path.join(messagesDir, 'fr-fr.json'),
-          'utf-8',
-        ),
-      );
-      expect(content.hello).toBe('Bonjour');
-      expect(content.android_only).toBeUndefined();
     });
   });
 });

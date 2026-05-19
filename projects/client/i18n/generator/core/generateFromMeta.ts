@@ -93,12 +93,8 @@ export async function generateFromMeta(
 
   const results = await generator.generatePlatforms(targetPlatforms, outputDir);
 
-  const validKeys = new Set(
-    Object.entries(englishMeta.messages)
-      .filter(([_, def]) => !def.exclude?.includes(Platform.WEB))
-      .map(([key]) => key),
-  );
-  await pruneStaleLocaleMessages(outputDir, validKeys);
+  const keys = new Set(Object.keys(englishMeta.messages));
+  await pruneStaleLocaleMessages(outputDir, keys);
 
   return results;
 }
