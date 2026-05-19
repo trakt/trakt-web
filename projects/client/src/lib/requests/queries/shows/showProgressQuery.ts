@@ -14,7 +14,6 @@ import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { ShowProgressResponse } from '@trakt/api';
-import { isLatestAiredEpisode } from '../../_internal/isLatestAiredEpisode.ts';
 import { mapToPostCredits } from '../../_internal/mapToPostCredits.ts';
 
 const showProgressRequest = (
@@ -67,7 +66,12 @@ function mapShowProgressResponse(
     completed: item.completed,
     remaining: item.aired - item.completed,
     minutesLeft: item.stats?.minutes_left ?? 0,
-    isLatestAired: isLatestAiredEpisode(episode, item.last_episode),
+    // FIXME: `item.last_episode` is the user's furthest watched episode, not the show's
+    //  latest aired episode, so comparing next vs last directly was effectively always true.
+    //  As a proxy, treat the next episode as the latest aired when remaining (aired -
+    //  completed) is 1 or less. Replace once the API surfaces an absolute "latest aired
+    //  episode" reference.
+    isLatestAired: (item.aired - item.completed) <= 1,
     type: episode?.episode_type as EpisodeType ?? EpisodeUnknownType.unknown,
     genres: [],
     overview: episode?.overview ?? '',

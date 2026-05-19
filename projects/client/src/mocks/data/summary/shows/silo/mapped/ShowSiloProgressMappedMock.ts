@@ -22,7 +22,7 @@ export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
   'completed': 11,
   'remaining': 6,
   'minutesLeft': 301,
-  'isLatestAired': true,
+  'isLatestAired': false,
   'type': EpisodeStandardType.standard,
   'year': 2024,
   'postCredits': [],
