@@ -98,7 +98,7 @@
 
       <ShadowScroller>
         <PaginatedList
-          type="media"
+          type={"media" as const}
           target="parent"
           useList={useRecentlyWatchedList}
         >
