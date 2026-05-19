@@ -19,58 +19,42 @@
     "tag_text_premiere": {
       "default": "Premiere",
       "description": "Text for the tag that indicates the premiere of a season or a show. This should be as short as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_finale": {
       "default": "Finale",
       "description": "Text for the tag that indicates the finale of a season or a show. This should be as short as possible.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_series_premiere": {
       "default": "Series Premiere",
       "description": "Text for the tag that indicates the first ever episode of a show. Shown on episode detail surfaces.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_series_finale": {
       "default": "Series Finale",
       "description": "Text for the tag that indicates the last ever episode of a show. Shown on episode detail surfaces.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_season_premiere": {
       "default": "Season Premiere",
       "description": "Text for the tag that indicates the first episode of a season. Shown on episode detail surfaces.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_season_finale": {
       "default": "Season Finale",
       "description": "Text for the tag that indicates the last episode of a season. Shown on episode detail surfaces.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_mid_season_premiere": {
       "default": "Mid-Season Premiere",
       "description": "Text for the tag that indicates the first episode after a mid-season break. Shown on episode detail surfaces.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "tag_text_mid_season_finale": {
       "default": "Mid-Season Finale",
       "description": "Text for the tag that indicates the last episode before a mid-season break. Shown on episode detail surfaces.",
-      "exclude": [
-        "ios"
-      ]
+      "exclude": []
     },
     "list_title_up_next": {
       "default": "Continue Watching",
