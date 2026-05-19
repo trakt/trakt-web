@@ -13,6 +13,10 @@ function toShareTypePath(shareType: ShareType): string {
   switch (shareType) {
     case 'open-graph':
       return 'og';
+    case 'feed':
+      return 'feed';
+    case 'story':
+      return 'story';
   }
 }
 

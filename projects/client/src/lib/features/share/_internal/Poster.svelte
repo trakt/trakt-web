@@ -13,7 +13,17 @@
 
   const posterAspectRatio = 350 / 232;
 
-  const posterHeight = $derived(height - padding * 2);
+  const posterHeight = $derived.by(() => {
+    switch (variant) {
+      case "feed":
+        return height / 1.5;
+      case "story":
+        return height / 1.75;
+      case "open-graph":
+        return height - padding * 2;
+    }
+  });
+
   const posterWidth = $derived(posterHeight / posterAspectRatio);
 </script>
 
@@ -29,11 +39,10 @@
 
 <style>
   .trakt-poster-container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    height: 100%;
   }
 
   .trakt-share-poster {

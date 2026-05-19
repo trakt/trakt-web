@@ -77,6 +77,11 @@
     font-size: 26px;
     font-weight: bold;
 
+    span {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
     :global(svg) {
       width: 26px;
       height: 26px;
