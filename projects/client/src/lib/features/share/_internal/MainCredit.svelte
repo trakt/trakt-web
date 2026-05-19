@@ -47,5 +47,9 @@
     gap: 8px;
 
     font-size: 26px;
+
+    span {
+      font-size: 26px;
+    }
   }
 </style>

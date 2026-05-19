@@ -66,7 +66,6 @@
         url: page.url,
         type,
         slug,
-        shareType: "open-graph",
       });
     }
 
