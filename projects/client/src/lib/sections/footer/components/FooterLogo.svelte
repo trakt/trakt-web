@@ -20,6 +20,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--ni-8);
+    align-items: center;
   }
 
   .trakt-logo {

@@ -448,7 +448,7 @@
       ]
     },
     "text_copyright_crafted_by": {
-      "default": "Hand crafted around the world",
+      "default": "Hand crafted around the world.",
       "description": "Additional detail for the copyright notice indicating that the project is developed by a global team.",
       "exclude": [
         "android",
