@@ -15,6 +15,12 @@ type MainCredit = {
   others?: ReadonlyArray<AdditionalPerson>;
 };
 
+function mapToOthers(
+  others: Array<{ name: string; key: string }>,
+): ReadonlyArray<AdditionalPerson> {
+  return others.slice(0, 1).map(({ name, key }) => ({ name, key }));
+}
+
 function mapToCreator(crew: MediaCrew): MainCredit | null {
   const [first, ...rest] = crew.creators ?? [];
   if (!first) return null;
@@ -23,9 +29,7 @@ function mapToCreator(crew: MediaCrew): MainCredit | null {
     text: m.text_created_by({ name: first.name }),
     key: first.key,
     positions: { shows: 'created by' },
-    others: rest.length > 0
-      ? rest.map(({ name, key }) => ({ name, key }))
-      : undefined,
+    others: rest.length > 0 ? mapToOthers(rest) : undefined,
   };
 }
 
@@ -48,9 +52,7 @@ function mapToDirector(
     text: m.text_directed_by({ name: first.name }),
     key: first.key,
     positions,
-    others: rest.length > 0
-      ? rest.map(({ name, key }) => ({ name, key }))
-      : undefined,
+    others: rest.length > 0 ? mapToOthers(rest) : undefined,
   };
 }
 

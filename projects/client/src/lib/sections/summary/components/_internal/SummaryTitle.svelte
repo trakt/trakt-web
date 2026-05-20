@@ -34,14 +34,13 @@
         message={mainCredit.text}
         href={UrlBuilder.people(mainCredit.key, mainCredit.positions)}
         target="_self"
-      />
-      {#each mainCredit.others ?? [] as person (person.key)}
-        {", "}
-        <Link
-          href={UrlBuilder.people(person.key, mainCredit.positions)}
-          target="_self">{person.name}</Link
-        >
-      {/each}
+      />{#if mainCredit.others?.[0]}{", "}<Link
+          href={UrlBuilder.people(
+            mainCredit.others[0].key,
+            mainCredit.positions,
+          )}
+          target="_self">{mainCredit.others[0].name}</Link
+        >{/if}
     </p>
   {/if}
 
