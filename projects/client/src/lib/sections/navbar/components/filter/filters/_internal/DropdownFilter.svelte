@@ -9,19 +9,13 @@
   import { buildParamString } from "$lib/utils/url/buildParamString";
   import type { ListFilterProps } from "../ListFilterProps";
 
-  const { color, value, display, filter }: ListFilterProps = $props();
+  const { value, display, filter }: ListFilterProps = $props();
 
   const { track } = useTrack(AnalyticsEvent.Filter);
 </script>
 
 <GlobalParameterSetter parameter={filter.key}>
-  <DropdownList
-    label={filter.label()}
-    variant="secondary"
-    size="small"
-    style="flat"
-    {color}
-  >
+  <DropdownList label={filter.label()}>
     {display}
     {#snippet items()}
       <DropdownItem

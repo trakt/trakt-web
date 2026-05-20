@@ -160,14 +160,7 @@
     <div class="trakt-clear-data">
       <SettingsRow title={m.text_source()}>
         <div class="trakt-clear-source">
-          <DropdownList
-            label={m.dropdown_label_clear_source()}
-            style="flat"
-            size="small"
-            variant="secondary"
-            color="default"
-            preferNative
-          >
+          <DropdownList label={m.dropdown_label_clear_source()}>
             {currentSourceText}
             {#snippet items()}
               {#each CLEAR_DATA_SOURCES as source (source.type)}

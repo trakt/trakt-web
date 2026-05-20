@@ -13,16 +13,12 @@
   const { getFilterValue } = useFilter();
   const currentValue = $derived(getFilterValue(filter.key));
 
-  const isFiltering = $derived(Boolean($currentValue));
-
-  const color = $derived(isFiltering ? "blue" : "default");
   const currentLabel = $derived(
     filter.options.find((option) => option.value === $currentValue)?.label() ??
       m.option_text_all(),
   );
 
   const commonProps: ListFilterProps = $derived({
-    color,
     value: $currentValue,
     display: currentLabel,
     filter: filter,

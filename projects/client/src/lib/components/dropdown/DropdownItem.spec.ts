@@ -1,43 +1,23 @@
 import DropdownItem from './DropdownItem.svelte';
 
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
-import { setAuthorization } from '$test/beds/store/renderStore.ts';
-import { screen, waitFor } from '@testing-library/svelte';
+import { fireEvent, screen, waitFor } from '@testing-library/svelte';
 import { createRawSnippet } from 'svelte';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 describe('DropdownItem', () => {
-  it('should render as a link', async () => {
-    setAuthorization(true);
-
+  it('should render as an option', async () => {
     renderComponent(DropdownItem, {
       props: {
-        href: '/test-link',
         children: createRawSnippet(() => ({
-          render: () => '<span>Test Link</span>',
+          render: () => '<span>Test Item</span>',
         })),
       },
     });
 
     await waitFor(() => {
-      const linkElement = screen.getByRole('link', { name: /test link/i });
-      expect(linkElement).toBeInTheDocument();
-      expect(linkElement).toHaveAttribute('href', '/test-link');
-    });
-  });
-
-  it('should render normally', async () => {
-    renderComponent(DropdownItem, {
-      props: {
-        children: createRawSnippet(() => ({
-          render: () => '<span>Normal Item</span>',
-        })),
-      },
-    });
-
-    await waitFor(() => {
-      const listItemElement = screen.getByRole('listitem');
-      expect(listItemElement).toBeInTheDocument();
+      const optionElement = screen.getByRole('option', { name: /test item/i });
+      expect(optionElement).toBeInTheDocument();
     });
   });
 
@@ -51,8 +31,8 @@ describe('DropdownItem', () => {
     });
 
     await waitFor(() => {
-      const listItemElement = screen.getByRole('listitem');
-      expect(listItemElement).toHaveAttribute('data-color', 'purple');
+      const optionElement = screen.getByRole('option');
+      expect(optionElement).toHaveAttribute('data-color', 'purple');
     });
   });
 
@@ -67,39 +47,27 @@ describe('DropdownItem', () => {
     });
 
     await waitFor(() => {
-      const listItemElement = screen.getByRole('listitem');
-      expect(listItemElement).toHaveAttribute('data-color', 'red');
+      const optionElement = screen.getByRole('option');
+      expect(optionElement).toHaveAttribute('data-color', 'red');
     });
   });
 
-  it('should handle tabindex correctly', async () => {
+  it('should call onclick when clicked', async () => {
+    const handleClick = vi.fn();
+
     renderComponent(DropdownItem, {
       props: {
+        onclick: handleClick,
         children: createRawSnippet(() => ({
           render: () => '<span>Item</span>',
         })),
       },
     });
 
-    await waitFor(() => {
-      const listItemElement = screen.getByRole('listitem');
-      expect(listItemElement).toHaveAttribute('tabindex', '-1');
-    });
-  });
-
-  it('should have tabindex 0 when interactive', async () => {
-    renderComponent(DropdownItem, {
-      props: {
-        onclick: () => {},
-        children: createRawSnippet(() => ({
-          render: () => '<span>Item</span>',
-        })),
-      },
-    });
-
-    await waitFor(() => {
-      const listItemElement = screen.getByRole('button');
-      expect(listItemElement).toHaveAttribute('tabindex', '0');
+    await waitFor(async () => {
+      const optionElement = screen.getByRole('option');
+      await fireEvent.click(optionElement);
+      expect(handleClick).toHaveBeenCalled();
     });
   });
 
@@ -134,8 +102,8 @@ describe('DropdownItem', () => {
     });
 
     await waitFor(() => {
-      const listItemElement = screen.getByRole('listitem');
-      expect(listItemElement).toHaveAttribute('data-style', 'flat');
+      const optionElement = screen.getByRole('option');
+      expect(optionElement).toHaveAttribute('data-style', 'flat');
     });
   });
 });

@@ -1,8 +1,8 @@
-import type { TraktButtonProps } from '$lib/components/buttons/TraktButtonProps.ts';
 import type { Snippet } from 'svelte';
 
 export type TraktDropdownListProps = {
+  label: string;
+  disabled?: boolean;
+  icon?: Snippet;
   items: Snippet;
-  preferNative?: boolean;
-  style?: Exclude<TraktButtonProps['style'], 'ghost' | 'underlined'>;
-} & Omit<TraktButtonProps, 'style'>;
+} & ChildrenProps;

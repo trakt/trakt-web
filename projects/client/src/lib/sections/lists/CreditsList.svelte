@@ -67,11 +67,6 @@
   {#snippet actions()}
     <DropdownList
       label={m.dropdown_label_person_position()}
-      preferNative
-      style="flat"
-      variant="primary"
-      color="blue"
-      size="small"
       disabled={$allPositions.length <= 1}
     >
       {toTranslatedPosition(selectedPosition)}

@@ -26,14 +26,7 @@
   };
 </script>
 
-<DropdownList
-  label={m.header_target()}
-  variant="secondary"
-  size="small"
-  style="flat"
-  color="default"
-  {disabled}
->
+<DropdownList label={m.header_target()} {disabled}>
   {targetText(value)}
   {#snippet items()}
     {#each Object.values(ListTarget) as target (target)}

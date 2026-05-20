@@ -2,7 +2,6 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import { toTranslatedVideoType } from "$lib/utils/formatting/string/toTranslatedVideoType";
 
@@ -16,15 +15,7 @@
 </script>
 
 {#if types.length > 1}
-  <DropdownList
-    preferNative
-    label={m.dropdown_label_extras()}
-    style="flat"
-    variant="primary"
-    color="blue"
-    size="small"
-    navigationType={DpadNavigationType.Item}
-  >
+  <DropdownList label={m.dropdown_label_extras()}>
     {toTranslatedVideoType(active)}
     {#snippet items()}
       {#each types as type}

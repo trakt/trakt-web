@@ -24,15 +24,7 @@
   };
 </script>
 
-<DropdownList
-  preferNative
-  label={m.list_title_seasons()}
-  style="flat"
-  variant="primary"
-  color="blue"
-  size="small"
-  disabled={seasons.length < 2}
->
+<DropdownList label={m.list_title_seasons()} disabled={seasons.length < 2}>
   {seasonText(currentSeason)}
   {#snippet items()}
     {#each seasons as season (season.id)}

@@ -263,14 +263,7 @@
   <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
     <div class="trakt-import-source">
       <span>{m.text_source()}</span>
-      <DropdownList
-        label={m.dropdown_label_import_source()}
-        style="flat"
-        size="small"
-        variant="secondary"
-        color="default"
-        preferNative
-      >
+      <DropdownList label={m.dropdown_label_import_source()}>
         {getTabLabel(sourceConfig)}
         {#snippet items()}
           {#each Object.values(IMPORT_SOURCE_CONFIGS) as config (config.id)}

@@ -69,15 +69,7 @@
 >
   <div class="trakt-report-properties" bind:this={fieldsContainer}>
     <div class="trakt-report-reason" class:is-placeholder={reason == null}>
-      <DropdownList
-        label={reasonButtonLabel}
-        variant="primary"
-        size="small"
-        style="flat"
-        color="custom"
-        preferNative
-        disabled={$isSubmitting}
-      >
+      <DropdownList label={reasonButtonLabel} disabled={$isSubmitting}>
         {reasonButtonLabel}
         {#snippet items()}
           {#each reasons as value (value)}

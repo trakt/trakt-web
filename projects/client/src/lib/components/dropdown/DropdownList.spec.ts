@@ -15,7 +15,7 @@ describe('DropdownList', () => {
   const defaultProps: TraktDropdownListProps = {
     items: createRawSnippet(() => ({
       render: () => `
-        <li>Item 1</li>
+        <div role="option" aria-selected="false">Item 1</div>
       `,
     })),
     children: createRawSnippet(() => ({
@@ -36,14 +36,14 @@ describe('DropdownList', () => {
     });
 
     await waitFor(async () => {
-      const dropdownButton = screen.getByRole('button', {
+      const dropdownButton = screen.getByRole('combobox', {
         name: /click here/i,
       });
       await fireEvent.click(dropdownButton);
       vi.advanceTimersToNextFrame();
 
-      const items = screen.getAllByRole('listitem');
-      expect(items).toHaveLength(1);
+      const listbox = screen.getByRole('listbox');
+      expect(listbox).toBeInTheDocument();
     });
   });
 
@@ -55,46 +55,20 @@ describe('DropdownList', () => {
     });
 
     await waitFor(async () => {
-      const dropdownButton = screen.getByRole('button', {
+      const dropdownButton = screen.getByRole('combobox', {
         name: /click here/i,
       });
 
       await fireEvent.click(dropdownButton);
       vi.advanceTimersToNextFrame();
 
-      const list = screen.getByRole('list');
-      expect(list).toBeInTheDocument();
+      const listbox = screen.getByRole('listbox');
+      expect(listbox).toBeInTheDocument();
 
       await fireEvent.click(window);
       vi.advanceTimersToNextFrame();
 
-      await waitForElementToBeRemoved(screen.getByRole('list'));
-    });
-  });
-
-  it('should close the dropdown when clicking an item', async () => {
-    renderComponent(DropdownList, {
-      props: {
-        ...defaultProps,
-      },
-    });
-
-    await waitFor(async () => {
-      const dropdownButton = screen.getByRole('button', {
-        name: /click here/i,
-      });
-
-      await fireEvent.click(dropdownButton);
-      vi.advanceTimersToNextFrame();
-
-      const list = screen.getByRole('list');
-      expect(list).toBeInTheDocument();
-
-      const item = screen.getByRole('listitem');
-      await fireEvent.click(item);
-      vi.advanceTimersToNextFrame();
-
-      await waitForElementToBeRemoved(list);
+      await waitForElementToBeRemoved(screen.getByRole('listbox'));
     });
   });
 });

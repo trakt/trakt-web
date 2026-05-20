@@ -6,7 +6,7 @@
   import type { ListFilterProps } from "../ListFilterProps";
   import { useFilterSetter } from "./useFilterSetter";
 
-  const { color, value, display, filter }: ListFilterProps = $props();
+  const { value, display, filter }: ListFilterProps = $props();
 
   const { gotoFilteredState } = useFilterSetter();
 
@@ -26,7 +26,6 @@
     label={filter.label()}
     variant="secondary"
     text="capitalize"
-    {color}
   >
     {display}
   </Button>
