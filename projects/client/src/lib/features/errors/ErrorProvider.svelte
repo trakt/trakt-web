@@ -56,7 +56,12 @@
     // Filter out extension noise and third-party scripts
     const isExternalNoise =
       !error.stack?.includes(window.location.hostname) ||
-      EXTENSION_PROTOCOLS.some((protocol) => error.stack?.includes(protocol));
+      EXTENSION_PROTOCOLS.some((protocol) => error.stack?.includes(protocol)) ||
+      // YouTube IFrame API (www-widgetapi.js) can be injected by
+      // browser extensions as a second copy alongside Plyr's own instance.
+      // When the iframe is torn down during SPA navigation the orphaned
+      // API copy accesses stale registry entries; not actionable for us.
+      error.stack?.includes("www-widgetapi.js");
 
     if (isExternalNoise) return;
 
