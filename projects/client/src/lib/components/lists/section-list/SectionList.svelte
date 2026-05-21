@@ -174,6 +174,8 @@
       var(--section-list-height) + var(--ni-40) + var(--list-header-gap)
     );
 
+    --list-mask-offset: var(--layout-distance-side);
+
     contain: layout;
 
     display: flex;
@@ -201,6 +203,8 @@
     }
 
     &[data-variant="inline"] {
+      --list-mask-offset: 0;
+
       :global(.trakt-list-inset-title) {
         margin: 0;
       }
@@ -280,13 +284,19 @@
       overflow-x: hidden;
       mask-image: linear-gradient(
         to right,
-        black calc(100% - var(--layout-distance-side)),
-        transparent calc(100% - var(--layout-distance-side))
+        black calc(100% - var(--list-mask-offset)),
+        transparent calc(100% - var(--list-mask-offset))
       );
 
       @supports (-moz-appearance: none) {
         overflow-x: auto;
         mask-image: none;
+      }
+
+      @include for-tablet-lg {
+        --list-mask-offset: calc(
+          var(--layout-distance-side) - var(--list-gap) * 0.5
+        );
       }
 
       @include for-tablet-sm-and-below {
