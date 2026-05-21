@@ -876,6 +876,7 @@
   "text_display_email": "Електронна пошта",
   "text_display_name": "Ім'я для відображення",
   "text_during_credits": "Під час титрів",
+  "text_ends_at": "Закінчується о {time}",
   "text_episodes_watched": "{count} епізодів",
   "text_export_status_complete": "Експорт завершено.",
   "text_export_status_fail": "Експорт не вдався. Перевірте консоль браузера для отримання додаткової інформації.",

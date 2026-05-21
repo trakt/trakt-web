@@ -876,6 +876,7 @@
   "text_display_email": "Correo electrónico",
   "text_display_name": "Nombre de usuario",
   "text_during_credits": "Durante los créditos",
+  "text_ends_at": "Termina a las {time}",
   "text_episodes_watched": "{count} episodios",
   "text_export_status_complete": "Exportación completa.",
   "text_export_status_fail": "La exportación falló. Revisa la consola de tu navegador para más detalles.",

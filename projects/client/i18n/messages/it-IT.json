@@ -876,6 +876,7 @@
   "text_display_email": "Email",
   "text_display_name": "Nome visualizzato",
   "text_during_credits": "Durante i titoli di coda",
+  "text_ends_at": "Termina alle {time}",
   "text_episodes_watched": "{count} episodi",
   "text_export_status_complete": "Esportazione completata.",
   "text_export_status_fail": "Esportazione fallita. Controlla la console del tuo browser per maggiori dettagli.",

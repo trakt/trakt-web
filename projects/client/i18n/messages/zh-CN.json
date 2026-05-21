@@ -876,6 +876,7 @@
   "text_display_email": "电子邮件",
   "text_display_name": "显示名称",
   "text_during_credits": "片尾字幕期间",
+  "text_ends_at": "结束于 {time}",
   "text_episodes_watched": "{count} 集",
   "text_export_status_complete": "导出完成。",
   "text_export_status_fail": "导出失败。请检查您的浏览器控制台以获取更多详细信息。",

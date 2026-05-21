@@ -876,6 +876,7 @@
   "text_display_email": "Email",
   "text_display_name": "Όνομα εμφάνισης",
   "text_during_credits": "Κατά τη διάρκεια των τίτλων",
+  "text_ends_at": "Τελειώνει στις {time}",
   "text_episodes_watched": "{count} επεισόδια",
   "text_export_status_complete": "Η εξαγωγή ολοκληρώθηκε.",
   "text_export_status_fail": "Η εξαγωγή απέτυχε. Ελέγξτε την κονσόλα του προγράμματος περιήγησης για περισσότερες λεπτομέρειες.",

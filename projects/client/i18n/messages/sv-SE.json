@@ -876,6 +876,7 @@
   "text_display_email": "E-post",
   "text_display_name": "Visningsnamn",
   "text_during_credits": "Under eftertexterna",
+  "text_ends_at": "Slutar klockan {time}",
   "text_episodes_watched": "{count} avsnitt",
   "text_export_status_complete": "Exporten slutförd.",
   "text_export_status_fail": "Exporten misslyckades. Kontrollera din webbläsarkonsol för mer information.",

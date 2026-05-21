@@ -876,6 +876,7 @@
   "text_display_email": "E-posta",
   "text_display_name": "Görünen ad",
   "text_during_credits": "Jenerik sırasında",
+  "text_ends_at": "{time}da biter",
   "text_episodes_watched": "{count} bölüm",
   "text_export_status_complete": "Dışa aktarma tamamlandı.",
   "text_export_status_fail": "Dışa aktarma başarısız oldu. Daha fazla ayrıntı için tarayıcı konsolunuzu kontrol edin.",

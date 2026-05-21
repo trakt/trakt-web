@@ -876,6 +876,7 @@
   "text_display_email": "メールアドレス",
   "text_display_name": "表示名",
   "text_during_credits": "クレジット中",
+  "text_ends_at": "{time}に終了",
   "text_episodes_watched": "{count}話",
   "text_export_status_complete": "エクスポートが完了しました。",
   "text_export_status_fail": "エクスポートに失敗しました。詳細はブラウザのコンソールをご確認ください。",

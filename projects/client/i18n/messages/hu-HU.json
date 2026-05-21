@@ -876,6 +876,7 @@
   "text_display_email": "E-mail",
   "text_display_name": "Megjelenített név",
   "text_during_credits": "Stáblista közbeni jelenetek",
+  "text_ends_at": "Vége {time} órakor",
   "text_episodes_watched": "{count} epizód",
   "text_export_status_complete": "Exportálás befejeződött.",
   "text_export_status_fail": "Az exportálás sikertelen. További részletekért ellenőrizd a böngésződ konzolját.",

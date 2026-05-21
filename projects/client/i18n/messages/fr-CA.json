@@ -876,6 +876,7 @@
   "text_display_email": "Courriel",
   "text_display_name": "Nom d'affichage",
   "text_during_credits": "Pendant le générique",
+  "text_ends_at": "Se termine à {time}",
   "text_episodes_watched": "{count} épisodes",
   "text_export_status_complete": "Exportation terminée.",
   "text_export_status_fail": "Échec de l'exportation. Vérifiez la console de votre navigateur pour plus de détails.",

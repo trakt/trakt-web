@@ -876,6 +876,7 @@
   "text_display_email": "Имейл",
   "text_display_name": "Показвано име",
   "text_during_credits": "По време на надписите",
+  "text_ends_at": "Приключва в {time}",
   "text_episodes_watched": "{count} епизода",
   "text_export_status_complete": "Експортирането е завършено.",
   "text_export_status_fail": "Експортирането не успя. Проверете конзолата на браузъра си за повече подробности.",

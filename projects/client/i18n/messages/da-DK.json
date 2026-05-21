@@ -876,6 +876,7 @@
   "text_display_email": "E-mail",
   "text_display_name": "Visningsnavn",
   "text_during_credits": "Under rulleteksterne",
+  "text_ends_at": "Slutter kl. {time}",
   "text_episodes_watched": "{count} afsnit",
   "text_export_status_complete": "Eksport fuldført.",
   "text_export_status_fail": "Eksport mislykkedes. Se din browserkonsol for flere detaljer.",
