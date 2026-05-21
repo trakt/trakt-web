@@ -1,3 +1,4 @@
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { WAKING_HOURS_PER_DAY } from '$lib/sections/stats/_internal/constants/index.ts';
@@ -17,11 +18,11 @@ function allDates(week: WeekData): readonly Date[] {
 interface GetStatItemsParams {
   readonly thisWeek: WeekData;
   readonly lastWeek: WeekData;
-  readonly now: Date;
+  readonly mode: DiscoverMode;
 }
 
 export function getStatItems(
-  { thisWeek, lastWeek }: GetStatItemsParams,
+  { thisWeek, lastWeek, mode }: GetStatItemsParams,
 ): PulseStatItem[] {
   const locale = getLocale();
   const twAll = allDates(thisWeek);
@@ -45,7 +46,7 @@ export function getStatItems(
     ? lastWeek.totalMinutes / wakingMinutesPerWeek
     : 0;
 
-  const stats: PulseStat[] = [
+  const commonStats: PulseStat[] = [
     {
       key: 'screenTimeTotal',
       rawValue: thisWeek.totalMinutes,
@@ -76,15 +77,9 @@ export function getStatItems(
       delta: computeDelta(avgMinutesPerDay, lastWeekAvgMinutes),
       deltaKind: 'time',
     },
-    {
-      key: 'episodes',
-      rawValue: thisWeek.showDates.length,
-      value: toHumanNumber(thisWeek.showDates.length, languageTag()),
-      label: m.label_stats_episodes(),
-      tooltip: m.tooltip_stats_episodes(),
-      delta: computeDelta(thisWeek.showDates.length, lastWeek.showDates.length),
-      deltaKind: 'count',
-    },
+  ];
+
+  const movieStats: PulseStat[] = [
     {
       key: 'movies',
       rawValue: thisWeek.movieDates.length,
@@ -97,6 +92,18 @@ export function getStatItems(
       ),
       deltaKind: 'count',
     },
+  ];
+
+  const showStats: PulseStat[] = [
+    {
+      key: 'episodes',
+      rawValue: thisWeek.showDates.length,
+      value: toHumanNumber(thisWeek.showDates.length, languageTag()),
+      label: m.label_stats_episodes(),
+      tooltip: m.tooltip_stats_episodes(),
+      delta: computeDelta(thisWeek.showDates.length, lastWeek.showDates.length),
+      deltaKind: 'count',
+    },
     {
       key: 'shows',
       rawValue: thisWeek.uniqueShows,
@@ -107,6 +114,14 @@ export function getStatItems(
       deltaKind: 'count',
     },
   ];
+
+  const stats = [...commonStats];
+  if (mode === 'media' || mode === 'movie') {
+    stats.push(...movieStats);
+  }
+  if (mode === 'media' || mode === 'show') {
+    stats.push(...showStats);
+  }
 
   return stats.map((stat) => ({
     type: 'stat',

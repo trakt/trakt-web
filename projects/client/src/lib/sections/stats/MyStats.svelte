@@ -13,7 +13,9 @@
 
   const { mode } = useDiscover();
 
-  const { items, isLoading, dateRange } = useWeeklyPulse({ mode });
+  const { items, isLoading, dateRange } = $derived(
+    useWeeklyPulse({ mode: $mode }),
+  );
 
   const hasItems = $derived($items.length > 0);
 </script>
