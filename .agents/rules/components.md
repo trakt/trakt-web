@@ -247,6 +247,34 @@ Use guards instead of inline `{#if auth.isLoggedIn}` or `{#if isDesktop}`:
 
 ---
 
+## Font Styling
+
+Use the global typography utility classes from `style/typography/index.css` for
+font styling. Do **not** write custom font-size or font-weight declarations when
+a utility class already covers the need.
+
+```svelte
+<!-- Good -->
+<span class="bold ellipsis">Movie title</span>
+<span class="tag secondary">2024</span>
+
+<!-- Bad — manual override when a class exists -->
+<span style="font-weight: 600">Movie title</span>
+```
+
+When a manual `font-size` override is unavoidable (e.g. responsive tweaks),
+prefer semantic font-size variables over raw sizing tokens:
+
+```scss
+// Good
+font-size: var(--font-size-tag); // semantic intent is clear
+
+// Bad
+font-size: var(--ni-10); // raw value, no semantic meaning
+```
+
+---
+
 ## `data-*` Attributes for Variants
 
 Components use `data-*` attributes for styling variants instead of class
@@ -320,3 +348,7 @@ Cards that render below the fold should defer rendering until visible:
 - [ ] Variants expressed via `data-*` attributes, not dynamic class strings
 - [ ] SCSS uses CSS custom properties (`--ni-*`, `--color-*`) — no raw hex
       values
+- [ ] Font styling uses typography utility classes (`.bold`, `.ellipsis`,
+      `.tag`, etc.) — no manual `font-weight`/`font-size` when a class covers it
+- [ ] When `font-size` overrides are needed, uses semantic variables
+      (`--font-size-tag`, `--font-size-text`) not raw tokens (`--ni-10`)
