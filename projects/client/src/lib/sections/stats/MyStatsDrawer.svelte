@@ -11,7 +11,7 @@
   const { onClose }: { onClose: () => void } = $props();
 
   const { mode } = useDiscover();
-  const { items, dateRange } = useWeeklyPulse({ mode });
+  const { items, dateRange } = $derived(useWeeklyPulse({ mode: $mode }));
 
   const graphs = $derived($items.filter((e) => e.type === "graph"));
   const stats = $derived($items.filter((e) => e.type === "stat"));

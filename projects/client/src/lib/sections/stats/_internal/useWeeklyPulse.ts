@@ -67,7 +67,7 @@ function buildWeekData(
   };
 }
 
-export function useWeeklyPulse({ mode }: { mode: Observable<DiscoverMode> }): {
+export function useWeeklyPulse({ mode }: { mode: DiscoverMode }): {
   items: Observable<PulseItem[]>;
   isLoading: Observable<boolean>;
   dateRange: DateRange;
@@ -110,10 +110,10 @@ export function useWeeklyPulse({ mode }: { mode: Observable<DiscoverMode> }): {
     showActivityHistoryQuery(queryParams),
   );
 
-  const items = combineLatest([movieList, showList, ratings, mode]).pipe(
-    map(([$movies, $shows, $ratings, $mode]) => {
-      const movies = $mode !== 'show' ? $movies : [];
-      const shows = $mode !== 'movie' ? $shows : [];
+  const items = combineLatest([movieList, showList, ratings]).pipe(
+    map(([$movies, $shows, $ratings]) => {
+      const movies = mode !== 'show' ? $movies : [];
+      const shows = mode !== 'movie' ? $shows : [];
 
       const twMovies = filterByRange(
         movies,
@@ -147,7 +147,7 @@ export function useWeeklyPulse({ mode }: { mode: Observable<DiscoverMode> }): {
         subtractDays(now, 7),
       );
 
-      const statItems = getStatItems({ thisWeek, lastWeek, now });
+      const statItems = getStatItems({ thisWeek, lastWeek, mode });
 
       const graphItems = getGraphItems({
         thisWeek,
