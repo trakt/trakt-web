@@ -9,7 +9,10 @@ export type ActivityEntry = MovieActivityHistory | EpisodeActivityHistory;
 const daysInWeek = 7;
 
 function getRuntimeMinutes(entry: ActivityEntry): number {
-  return entry.type === 'movie' ? entry.movie.runtime : entry.episode.runtime;
+  const runtime = entry.type === 'movie'
+    ? entry.movie.runtime
+    : entry.episode.runtime;
+  return Number.isNaN(runtime) ? 0 : runtime;
 }
 
 export function computeTotalMinutes(

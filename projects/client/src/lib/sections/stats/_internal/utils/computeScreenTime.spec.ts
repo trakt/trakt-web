@@ -60,6 +60,30 @@ describe('computeTotalMinutes', () => {
     expect(computeTotalMinutes([])).toBe(0);
   });
 
+  it('treats NaN movie runtime as 0', () => {
+    const entries = [
+      makeMovieEntry(new Date('2024-01-15T10:00:00Z'), NaN),
+      makeMovieEntry(new Date('2024-01-16T10:00:00Z'), 90),
+    ];
+    expect(computeTotalMinutes(entries)).toBe(90);
+  });
+
+  it('treats NaN episode runtime as 0', () => {
+    const entries = [
+      makeShowEntry(new Date('2024-01-15T10:00:00Z'), NaN),
+      makeShowEntry(new Date('2024-01-16T10:00:00Z'), 30),
+    ];
+    expect(computeTotalMinutes(entries)).toBe(30);
+  });
+
+  it('returns 0 when all runtimes are NaN', () => {
+    const entries = [
+      makeMovieEntry(new Date('2024-01-15T10:00:00Z'), NaN),
+      makeShowEntry(new Date('2024-01-16T10:00:00Z'), NaN),
+    ];
+    expect(computeTotalMinutes(entries)).toBe(0);
+  });
+
   it('sums movie runtimes', () => {
     const entries = [
       makeMovieEntry(new Date('2024-01-15T10:00:00Z'), 120),
@@ -119,5 +143,15 @@ describe('computeDailyMinutes', () => {
     ];
     const result = computeDailyMinutes(entries, now);
     expect(result.every((v) => v === 0)).toBe(true);
+  });
+
+  it('treats NaN runtime as 0 in daily buckets', () => {
+    const now = new Date('2024-01-21T12:00:00Z');
+    const entries = [
+      makeMovieEntry(new Date('2024-01-21T10:00:00Z'), NaN),
+      makeShowEntry(new Date('2024-01-21T11:00:00Z'), 45),
+    ];
+    const result = computeDailyMinutes(entries, now);
+    expect(result[6]).toBe(45);
   });
 });
