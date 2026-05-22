@@ -28,4 +28,5 @@ export type DrilledMediaListProps<T, M> =
     listActions?: Snippet;
     groupBy?: (item: T) => string;
     groupHeader?: Snippet<[string]>;
+    beforeItems?: Snippet<[T[]]>;
   };

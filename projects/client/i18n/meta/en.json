@@ -6830,6 +6830,69 @@
     "text_footer_category_legal": {
       "default": "Legal",
       "description": "Footer category for legal links in the app footer. This should be a short and concise title."
+    },
+    "tag_text_in_progress": {
+      "default": "In Progress",
+      "description": "Status label shown on the list progress card when the user has marked some, but not all, items in a list as watched.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_completed": {
+      "default": "Completed",
+      "description": "Status label shown on the list progress card when the user has marked every item in a list as watched.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_not_started": {
+      "default": "Not Started",
+      "description": "Status label shown on the list progress card when none of the items in a list have been marked as watched.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_number_of_items": {
+      "default": "{count} items",
+      "description": "Text describing the total number of items in a list. Used on the list progress card. Should be as short as possible.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_items_watched": {
+      "default": "{count} watched",
+      "description": "Text on the list progress card indicating how many items the user has watched. Should be as short as possible.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_count_left": {
+      "default": "{count} left",
+      "description": "Text on the list progress card indicating how many items are still unwatched. Should be as short as possible.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

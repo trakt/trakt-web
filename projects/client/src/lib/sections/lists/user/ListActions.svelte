@@ -15,8 +15,12 @@
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import { useDeleteList } from "./_internal/useDeleteList";
   import { useLikeList } from "./_internal/useLikeList";
+  import type { Snippet } from "svelte";
 
-  const { list }: { list: MediaListSummary } = $props();
+  const {
+    list,
+    between,
+  }: { list: MediaListSummary; between?: Snippet } = $props();
 
   const { deleteList, isDeleting, isDeleted } = $derived(useDeleteList(list));
 
@@ -50,6 +54,10 @@
     state={$isLiked ? "liked" : "unliked"}
     {list}
   />
+
+  {#if between}
+    {@render between()}
+  {/if}
 
   {#if isListOwner}
     <PopupMenu

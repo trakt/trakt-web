@@ -16,6 +16,7 @@
     sizing?: "default" | "auto";
     groupBy?: (item: T) => string;
     groupHeader?: Snippet<[string]>;
+    beforeItems?: Snippet<[T[]]>;
   };
 
   const {
@@ -31,6 +32,7 @@
     sizing = "default",
     groupBy,
     groupHeader,
+    beforeItems,
   }: PageListProps<T> = $props();
 
   const customAction = (node: HTMLElement) => dimensionObserver?.(node);
@@ -71,9 +73,12 @@
     <div
       class="trakt-list-item-container trakt-list-items"
       role={groupBy ? "none" : "list"}
- 
+
       use:customAction
     >
+      {#if beforeItems}
+        {@render beforeItems(uniqueItems)}
+      {/if}
       {#each promotedItems as i (i.key)}
         {@render item(i)}
       {/each}

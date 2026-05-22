@@ -1,7 +1,10 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
+  import type { ListProgress } from "$lib/sections/lists/_internal/getListProgress.ts";
+  import ListProgressCardMinimal from "$lib/sections/lists/components/ListProgressCardMinimal.svelte";
   import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting";
   import ListActions from "$lib/sections/lists/user/ListActions.svelte";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
@@ -26,11 +29,23 @@
   const { current, update, options, urlBuilder } = $derived(
     useListSorting({ list: $list, type: "user-list" }),
   );
+
+  let progress = $state<ListProgress | null>(null);
 </script>
+
+{#snippet navbarProgress()}
+  <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
+    {#if progress}
+      <div class="trakt-list-navbar-progress">
+        <ListProgressCardMinimal {progress} />
+      </div>
+    {/if}
+  </RenderFor>
+{/snippet}
 
 {#snippet actions()}
   {#if $list}
-    <ListActions list={$list} />
+    <ListActions list={$list} between={navbarProgress} />
   {/if}
 {/snippet}
 
@@ -67,6 +82,18 @@
       type={$mode}
       sortBy={$current.sorting.value}
       sortHow={$current.sortHow}
+      onProgressChange={(next) => (progress = next)}
     />
   {/if}
 </TraktPage>
+
+<style lang="scss">
+  .trakt-list-navbar-progress {
+    display: flex;
+    align-items: center;
+    width: var(--ni-480);
+    max-width: 50vw;
+    min-width: var(--ni-280);
+    margin: 0 var(--gap-s);
+  }
+</style>

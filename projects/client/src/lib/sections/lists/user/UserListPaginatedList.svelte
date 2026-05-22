@@ -1,9 +1,17 @@
 <script lang="ts">
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
+  import {
+    getListProgress,
+    type ListProgress,
+  } from "../_internal/getListProgress.ts";
+  import ListProgressCardMinimal from "../components/ListProgressCardMinimal.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import ListProgressBridge from "./_internal/ListProgressBridge.svelte";
   import SortValue from "./_internal/SortValue.svelte";
   import UserListItem from "./_internal/UserListItem.svelte";
   import type { ListSortProps } from "./models/ListSortProps";
@@ -13,11 +21,19 @@
   type UserListProps = {
     type?: DiscoverMode;
     list: MediaListSummary;
+    onProgressChange?: (progress: ListProgress) => void;
   } & ListSortProps;
 
-  const { type, list, sortBy, sortHow }: UserListProps = $props();
+  const {
+    type,
+    list,
+    sortBy,
+    sortHow,
+    onProgressChange,
+  }: UserListProps = $props();
 
   const { filterMap } = useFilter();
+  const { history } = useUser();
   const sort = $derived(useSort(sortBy));
 
   const listCacheId = $derived.by(() => {
@@ -52,6 +68,16 @@
         </Tooltip>
       {/if}
     </div>
+  {/snippet}
+
+  {#snippet beforeItems(items)}
+    {@const progress = getListProgress(items, $history)}
+    <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+      <ListProgressCardMinimal {progress} />
+    </RenderFor>
+    {#if onProgressChange}
+      <ListProgressBridge {progress} {onProgressChange} />
+    {/if}
   {/snippet}
 
   {#snippet item(media)}
