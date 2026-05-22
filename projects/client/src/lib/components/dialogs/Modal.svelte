@@ -59,7 +59,8 @@
   :global(.trakt-modal) {
     padding: var(--ni-24);
     border-radius: var(--border-radius-l);
-    border: none;
+    border: var(--border-thickness-xxs) solid
+      color-mix(in srgb, var(--color-text-primary) 8%, transparent);
     outline: none;
     background-color: var(--color-modal-background);
     color: var(--color-text-primary);
@@ -96,12 +97,12 @@
   :global(.trakt-modal-footer) {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: var(--ni-8);
 
     @include for-mobile {
       flex-direction: column-reverse;
       align-items: stretch;
-      gap: var(--ni-8);
     }
   }
 </style>

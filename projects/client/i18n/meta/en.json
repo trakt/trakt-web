@@ -6981,6 +6981,98 @@
     "match_label_different_universe": {
       "default": "Different universe",
       "description": "Tonal label for the lowest match band (<25%). Anchor of the six-tier ladder. Reads as 'no shared world' without being harsh."
+    },
+    "confirmation_title_mark_as_watched": {
+      "default": "Mark as watched?",
+      "description": "Title of the confirmation dialog shown before marking a movie, show, or episode as watched."
+    },
+    "confirmation_title_remove_from_watched": {
+      "default": "Remove from history?",
+      "description": "Title of the confirmation dialog shown before removing a movie, show, or episode from the user's watched history."
+    },
+    "confirmation_title_remove_play": {
+      "default": "Remove play?",
+      "description": "Title of the confirmation dialog shown before removing a single play from the user's watched history."
+    },
+    "confirmation_title_drop_show": {
+      "default": "Drop show?",
+      "description": "Title of the confirmation dialog shown before dropping a show from the user's tracked shows."
+    },
+    "confirmation_title_drop_movie": {
+      "default": "Drop movie?",
+      "description": "Title of the confirmation dialog shown before dropping a movie from the user's tracked movies."
+    },
+    "confirmation_title_restore_show": {
+      "default": "Restore show?",
+      "description": "Title of the confirmation dialog shown before restoring a previously dropped show back to tracked."
+    },
+    "confirmation_title_delete_list": {
+      "default": "Delete list?",
+      "description": "Title of the confirmation dialog shown before permanently deleting a user's custom list."
+    },
+    "confirmation_title_remove_favorite": {
+      "default": "Remove favorite?",
+      "description": "Title of the confirmation dialog shown before removing a movie or show from the user's favorites."
+    },
+    "confirmation_title_remove_from_watchlist": {
+      "default": "Remove from watchlist?",
+      "description": "Title of the confirmation dialog shown before removing a movie, show, or episode from the user's watchlist."
+    },
+    "confirmation_title_remove_from_list": {
+      "default": "Remove from list?",
+      "description": "Title of the confirmation dialog shown before removing an item from a user's custom list."
+    },
+    "confirmation_title_unfollow_user": {
+      "default": "Unfollow user?",
+      "description": "Title of the confirmation dialog shown before unfollowing another user."
+    },
+    "confirmation_title_block_user": {
+      "default": "Block user?",
+      "description": "Title of the confirmation dialog shown before blocking another user."
+    },
+    "confirmation_title_stop_checkin": {
+      "default": "Stop check-in?",
+      "description": "Title of the confirmation dialog shown before stopping an active check-in."
+    },
+    "confirmation_title_delete_comment": {
+      "default": "Delete review?",
+      "description": "Title of the confirmation dialog shown before permanently deleting the user's review or comment."
+    },
+    "confirmation_title_delete_note": {
+      "default": "Delete note?",
+      "description": "Title of the confirmation dialog shown before permanently deleting one of the user's notes."
+    },
+    "confirmation_title_suppress_ratings_toast": {
+      "default": "Stop asking?",
+      "description": "Title of the confirmation dialog shown before suppressing future ratings prompts."
+    },
+    "confirmation_title_log_out": {
+      "default": "Log out?",
+      "description": "Title of the confirmation dialog shown before logging the user out of their account."
+    },
+    "confirmation_title_reset_filters": {
+      "default": "Reset filters?",
+      "description": "Title of the confirmation dialog shown before resetting all active list filters."
+    },
+    "confirmation_title_cancel_vip": {
+      "default": "Cancel VIP?",
+      "description": "Title of the confirmation dialog shown before cancelling the user's VIP subscription."
+    },
+    "confirmation_title_cancel_import": {
+      "default": "Cancel import?",
+      "description": "Title of the confirmation dialog shown before cancelling an in-progress import."
+    },
+    "confirmation_title_stop_clear": {
+      "default": "Stop clearing?",
+      "description": "Title of the confirmation dialog shown before stopping an in-progress clear-data operation."
+    },
+    "confirmation_title_clear_data": {
+      "default": "Clear data?",
+      "description": "Title of the confirmation dialog shown before clearing the user's data for a specific source (watchlist, ratings, etc.)."
+    },
+    "confirmation_title_hide_recommendation": {
+      "default": "Hide recommendation?",
+      "description": "Title of the confirmation dialog shown before hiding a recommendation."
     }
   }
 }
