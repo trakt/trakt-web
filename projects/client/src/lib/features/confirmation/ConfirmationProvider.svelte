@@ -11,6 +11,7 @@
 
 {#if $activeConfirmation?.message}
   <ConfirmationDialog
+    title={$activeConfirmation.title}
     message={$activeConfirmation.message}
     detail={$activeConfirmation.detail}
     buttonText={$activeConfirmation.buttonText}
