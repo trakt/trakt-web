@@ -1,5 +1,6 @@
 import { collaborationListsQuery } from '$lib/requests/queries/users/collaborationListsQuery.ts';
 import { personalListsQuery } from '$lib/requests/queries/users/personalListsQuery.ts';
+import { dedupe } from '$lib/utils/array/dedupe.ts';
 import { map } from 'rxjs';
 import type { PaginationParams } from '../../../requests/models/PaginationParams.ts';
 import { likedListsQuery } from '../../../requests/queries/users/likedListsQuery.ts';
@@ -40,11 +41,14 @@ export function usePersonalListsSummary(
     list: list.pipe(
       map(
         ($list) => {
+          // FIXME: figure out the root cause of duplicates
+          const deduped = dedupe((item) => item.id, $list);
+
           if (sortBy === 'none') {
-            return $list;
+            return deduped;
           }
 
-          return $list.toSorted((a, b) =>
+          return deduped.toSorted((a, b) =>
             // FIXME: update when we add sorting options
             b.updatedAt.getTime() - a.updatedAt.getTime()
           );
