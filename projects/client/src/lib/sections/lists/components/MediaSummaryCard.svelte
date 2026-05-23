@@ -200,7 +200,7 @@
         <p class="trakt-card-title ellipsis">
           {media.title}
         </p>
-        <p class="trakt-card-subtitle secondary ellipsis">
+        <p class="trakt-card-subtitle small secondary ellipsis">
           {seasonLabel(rest.season.number)}
         </p>
       {:else if rest.variant === "activity"}
@@ -218,7 +218,7 @@
             {media.title}
           </p>
         {/if}
-        <p class="trakt-card-subtitle secondary ellipsis capitalize">
+        <p class="trakt-card-subtitle small secondary ellipsis capitalize">
           {#if rest.activityType === "social"}
             {toRelativeHumanDay(new Date(), rest.date, getLocale())}
           {:else}
@@ -231,14 +231,14 @@
             {rest.episode.title}
           </Spoiler>
         </p>
-        <p class="trakt-card-subtitle secondary ellipsis">
+        <p class="trakt-card-subtitle small secondary ellipsis">
           {episodeSubtitle(rest.episode)}
         </p>
       {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
         <p class="trakt-card-title ellipsis">
           {media.title}
         </p>
-        <p class="trakt-card-subtitle secondary ellipsis">
+        <p class="trakt-card-subtitle small secondary ellipsis">
           {episodeNumberLabel({
             seasonNumber: rest.episode.season,
             episodeNumber: rest.episode.number,
@@ -253,7 +253,7 @@
         <p class="trakt-card-title ellipsis">
           {media.title}
         </p>
-        <p class="trakt-card-subtitle secondary ellipsis">
+        <p class="trakt-card-subtitle small secondary ellipsis">
           {rest.role}
         </p>
       {:else}
@@ -266,7 +266,7 @@
           </p>
         {/if}
         <GenreList
-          classList="trakt-card-subtitle smaller ellipsis secondary"
+          classList="trakt-card-subtitle small ellipsis secondary"
           separator=", "
           genres={media.genres}
         />

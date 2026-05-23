@@ -55,11 +55,18 @@
     }
 
     .trakt-card-footer-tag {
+      font-size: var(--font-size-text-small);
+
       width: 100%;
       overflow: hidden;
 
       display: flex;
       gap: var(--gap-micro);
+
+      :global(span),
+      :global(p) {
+        font-size: var(--font-size-text-small);
+      }
     }
 
     .trakt-card-footer-information {
@@ -87,6 +94,7 @@
         color: var(--color-text-secondary);
         margin: 0;
         font-weight: 500;
+        font-size: var(--font-size-text-small);
       }
     }
   }
