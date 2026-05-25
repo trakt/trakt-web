@@ -1,0 +1,112 @@
+name: The Sanctum Wards aka Supply Chain
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  hardened-audit:
+    if: github.event.pull_request.draft != true
+    name: Warding the Inner Sanctum
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+
+    steps:
+      - name: Sealing the Outbound Gates aka Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
+
+      - name: Enforce Exact Version Pins aka Forbid Semver Ranges
+        run: |
+          set -euo pipefail
+          OFFENDERS=$(
+            jq -r '
+              (.dependencies // {}) + (.devDependencies // {})
+              | to_entries[]
+              | select(.value | test("^[\\^~]"))
+              | "\(.key)@\(.value)"
+            ' projects/client/package.json
+          )
+          if [ -n "$OFFENDERS" ]; then
+            echo "::error::Non-exact version ranges detected. Pin exact versions."
+            echo "$OFFENDERS"
+            exit 1
+          fi
+
+      - name: Ward Against Allowlist Drift aka Block Silent Postinstall Grants
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          git fetch origin "${{ github.event.pull_request.base.ref }}" --depth=1
+          BEFORE=$(git show "origin/${{ github.event.pull_request.base.ref }}":deno.json | jq '.allowScripts | length')
+          AFTER=$(jq '.allowScripts | length' deno.json)
+          if [ "$AFTER" -gt "$BEFORE" ]; then
+            if gh pr view "$PR_NUMBER" --json labels -q '.labels[].name' | grep -qx 'allowlist-change'; then
+              echo "allowScripts grew from $BEFORE to $AFTER — label present, allowed."
+            else
+              echo "::error::allowScripts grew from $BEFORE to $AFTER without 'allowlist-change' label."
+              echo "Add the 'allowlist-change' label after manual review of every new entry."
+              exit 1
+            fi
+          fi
+
+      - name: Frozen Install aka Verify Lockfile Integrity
+        run: deno task install
+
+      - name: Verify NPM Provenance aka Audit Signatures
+        working-directory: projects/client
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          if [ -d node_modules ]; then
+            npm audit signatures || {
+              echo "::warning::npm audit signatures reported issues. Review before merging."
+              exit 0
+            }
+          else
+            echo "::warning::node_modules not present after deno install — skipping signature audit."
+          fi
+
+  dependency-review:
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft != true
+    name: The Lockfile Inquisition aka Dependency Review
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Sealing the Outbound Gates aka Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Scrutinizing the Lockfile Delta aka Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: on-failure
