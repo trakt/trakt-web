@@ -1,4 +1,5 @@
 <script lang="ts" generics="T">
+  import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
   import DropIcon from "$lib/components/icons/DropIcon.svelte";
   import FollowersIcon from "$lib/components/icons/FollowersIcon.svelte";
   import FollowingIcon from "$lib/components/icons/FollowingIcon.svelte";
@@ -9,6 +10,7 @@
   import NoSpoilerIcon from "$lib/components/icons/NoSpoilerIcon.svelte";
   import PeopleIcon from "$lib/components/icons/PeopleIcon.svelte";
   import PopularIcon from "$lib/components/icons/PopularIcon.svelte";
+  import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import SpoilerIcon from "$lib/components/icons/SpoilerIcon.svelte";
@@ -77,4 +79,12 @@
 
 {#if option.value === "dropped"}
   <DropIcon />
+{/if}
+
+{#if option.value === "reviews"}
+  <CommentIcon />
+{/if}
+
+{#if option.value === "ratings"}
+  <RatingIcon variant="user" style="unrated" />
 {/if}

@@ -13,8 +13,12 @@
     ...props
   }: MediaCardProps & { contextualTag?: Snippet; sortTag?: Snippet } = $props();
   const style = $derived(props.style ?? "cover");
+  const resolvedStyle = $derived<"cover" | "summary">(
+    style === "compact" ? "summary" : style,
+  );
+  const isCompact = $derived(style === "compact");
 
-  const isCover = $derived(style === "cover");
+  const isCover = $derived(resolvedStyle === "cover");
 </script>
 
 {#snippet coverTag()}
@@ -37,20 +41,21 @@
   </div>
 {/snippet}
 
-{#if style === "cover"}
+{#if resolvedStyle === "cover"}
   <MediaCard
     {...props}
     {coverTag}
-    {style}
+    style={resolvedStyle}
     action={props.action}
     popupActions={props.badge ? undefined : props.popupActions}
   />
 {/if}
 
-{#if style === "summary"}
+{#if resolvedStyle === "summary"}
   <MediaSummaryCard
     {...props}
-    {style}
+    style={resolvedStyle}
+    layout={isCompact ? "compact" : "default"}
     {contextualTag}
     {sortTag}
     badge={props.action}

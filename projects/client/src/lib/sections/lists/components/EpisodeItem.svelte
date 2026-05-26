@@ -11,7 +11,6 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
-  import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
@@ -42,9 +41,8 @@
 
   const status = $derived(
     getEpisodeStatus(props.episode.type, {
-      isLatestAired: props.variant === "next"
-        ? props.episode.isLatestAired
-        : undefined,
+      isLatestAired:
+        props.variant === "next" ? props.episode.isLatestAired : undefined,
     }),
   );
 
@@ -69,14 +67,6 @@
 
     return standAloneVariants.includes(props.variant) ? $isWatched : false;
   });
-
-  const src = $derived(
-    useEpisodeSpoilerImage({
-      episode: props.episode,
-      show: props.media,
-      variant: props.variant,
-    }),
-  );
 </script>
 
 {#snippet indicatorTags()}
@@ -201,7 +191,18 @@
 {#snippet card()}
   {#if style === "summary" || style === "compact"}
     <MediaSummaryCard
-      variant="default"
+      {...props.variant === "activity"
+        ? {
+            variant: "activity" as const,
+            activityType: props.activityType,
+            date: props.date,
+          }
+        : {
+            variant: "default" as const,
+            tag,
+            context: "context" in props ? props.context : undefined,
+            coverUrl: "coverUrl" in props ? props.coverUrl : undefined,
+          }}
       episode={props.episode}
       source={props.source}
       media={{
@@ -212,9 +213,6 @@
       }}
       popupActions={props.popupActions}
       layout={isCompact ? "compact" : "default"}
-      context={"context" in props ? props.context : undefined}
-      coverUrl={"coverUrl" in props ? props.coverUrl : undefined}
-      {tag}
       badge={action}
       {sortTag}
       type="episode"

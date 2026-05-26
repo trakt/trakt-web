@@ -4693,7 +4693,9 @@
       "default": "In {year}, you watched",
       "description": "Lead-in line above the big '{hours} hours of {count} Shows' headline on the 2024 Year in Review TV stats section.",
       "variables": {
-        "year": { "type": "number" }
+        "year": {
+          "type": "number"
+        }
       },
       "exclude": [
         "android",
@@ -4704,7 +4706,9 @@
       "default": "In {year}, you watched",
       "description": "Lead-in line above the big '{hours} hours of {count} Movies' headline on the 2024 Year in Review movie stats section.",
       "variables": {
-        "year": { "type": "number" }
+        "year": {
+          "type": "number"
+        }
       },
       "exclude": [
         "android",
@@ -4715,8 +4719,12 @@
       "default": "{hours} hours of {count} Shows",
       "description": "Big headline summarising hours watched and number of distinct shows on the 2024 Year in Review TV stats section.",
       "variables": {
-        "hours": { "type": "string" },
-        "count": { "type": "string" }
+        "hours": {
+          "type": "string"
+        },
+        "count": {
+          "type": "string"
+        }
       },
       "exclude": [
         "android",
@@ -4727,8 +4735,12 @@
       "default": "{hours} hours of {count} Movies",
       "description": "Big headline summarising hours watched and number of distinct movies on the 2024 Year in Review movie stats section.",
       "variables": {
-        "hours": { "type": "string" },
-        "count": { "type": "string" }
+        "hours": {
+          "type": "string"
+        },
+        "count": {
+          "type": "string"
+        }
       },
       "exclude": [
         "android",
@@ -4739,9 +4751,15 @@
       "default": "Your most active week was <b>{start} - {end}</b> with <b>{count} plays</b>.",
       "description": "Info line on the 2024 Year in Review stats section reporting the user's busiest watching week. The <b> tags wrap dynamic values that render as bold purple highlights — keep them around the same content when translating.",
       "variables": {
-        "start": { "type": "string" },
-        "end": { "type": "string" },
-        "count": { "type": "string" }
+        "start": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        },
+        "count": {
+          "type": "string"
+        }
       },
       "exclude": [
         "android",
@@ -4752,7 +4770,9 @@
       "default": "The most popular time you watched was <b>{time}</b>.",
       "description": "Info line on the 2024 Year in Review stats section reporting the user's busiest hour of day. The <b> tags wrap the time value as a bold purple highlight — keep them around the time when translating.",
       "variables": {
-        "time": { "type": "string" }
+        "time": {
+          "type": "string"
+        }
       },
       "exclude": [
         "android",
@@ -4763,7 +4783,9 @@
       "default": "{count} Hours",
       "description": "Title on the hours-watched chart card on the 2024 Year in Review stats section.",
       "variables": {
-        "count": { "type": "string" }
+        "count": {
+          "type": "string"
+        }
       },
       "exclude": [
         "android",
@@ -4774,7 +4796,9 @@
       "default": "{count} Plays",
       "description": "Title on the plays chart card on the 2024 Year in Review stats section.",
       "variables": {
-        "count": { "type": "string" }
+        "count": {
+          "type": "string"
+        }
       },
       "exclude": [
         "android",
@@ -4809,7 +4833,9 @@
       "default": "{count} Plays",
       "description": "Tooltip headline for play-count points on the 2024 Year in Review stats charts.",
       "variables": {
-        "count": { "type": "string" }
+        "count": {
+          "type": "string"
+        }
       },
       "exclude": [
         "android",
@@ -4820,7 +4846,9 @@
       "default": "{count} Hours",
       "description": "Tooltip headline for hours-watched points on the 2024 Year in Review stats charts.",
       "variables": {
-        "count": { "type": "string" }
+        "count": {
+          "type": "string"
+        }
       },
       "exclude": [
         "android",
@@ -4831,7 +4859,9 @@
       "default": "Week {week}",
       "description": "Tooltip secondary label naming the week number on the 2024 Year in Review weekly chart.",
       "variables": {
-        "week": { "type": "string" }
+        "week": {
+          "type": "string"
+        }
       },
       "exclude": [
         "android",
@@ -6830,6 +6860,38 @@
     "text_footer_category_legal": {
       "default": "Legal",
       "description": "Footer category for legal links in the app footer. This should be a short and concise title."
+    },
+    "list_title_ratings": {
+      "default": "Ratings",
+      "description": "Title for the user ratings list."
+    },
+    "page_title_ratings": {
+      "default": "Ratings",
+      "description": "Title for the ratings page."
+    },
+    "list_placeholder_ratings": {
+      "default": "You haven't rated anything yet.",
+      "description": "Placeholder text shown when there are no ratings in the user's ratings list."
+    },
+    "button_label_view_all_ratings": {
+      "default": "View all ratings",
+      "description": "Aria-label for the button that allows users to view all their ratings."
+    },
+    "button_text_activity_reviews": {
+      "default": "Reviews",
+      "description": "Text for the activity toggle button to show reviews. This should be as short and concise as possible."
+    },
+    "button_label_activity_reviews": {
+      "default": "View reviews",
+      "description": "Aria-label for the activity toggle button to show reviews."
+    },
+    "button_text_activity_ratings": {
+      "default": "Ratings",
+      "description": "Text for the activity toggle button to show ratings. This should be as short and concise as possible."
+    },
+    "button_label_activity_ratings": {
+      "default": "View ratings",
+      "description": "Aria-label for the activity toggle button to show ratings."
     }
   }
 }
