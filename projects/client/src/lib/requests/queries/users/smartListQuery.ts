@@ -25,6 +25,7 @@ const SmartListTargetSchema = z.enum([
 export type SmartListTarget = z.infer<typeof SmartListTargetSchema>;
 
 const SmartListSchema = z.object({
+  key: z.string(),
   title: z.string(),
   target: SmartListTargetSchema,
   type: MediaTypeSchema,
@@ -66,6 +67,7 @@ function mapToSmartList(
   entry: FilterResponse,
 ): SmartList {
   return {
+    key: `smart-list-${entry.id}`,
     title: entry.name,
     type: mapToType(entry.section),
     target: mapToTarget(entry.path),
