@@ -1,4 +1,5 @@
 import * as m from '$lib/features/i18n/messages.ts';
+import type { PeakHoursBucket } from '$lib/sections/stats/_internal/models/PeakHoursBucket.ts';
 
 const morningStartHour = 5;
 const afternoonStartHour = 12;
@@ -14,16 +15,32 @@ function timeBucketIndex(hour: number): number {
 
 export function bucketByTimeOfDay(
   dates: ReadonlyArray<Date>,
-): ReadonlyArray<{ readonly label: string; readonly count: number }> {
+): ReadonlyArray<PeakHoursBucket> {
   const counts = Array.from(
     { length: 4 },
     (_, i) => dates.filter((d) => timeBucketIndex(d.getHours()) === i).length,
   );
 
   return [
-    { label: m.text_stats_time_morning(), count: counts[0] ?? 0 },
-    { label: m.text_stats_time_afternoon(), count: counts[1] ?? 0 },
-    { label: m.text_stats_time_evening(), count: counts[2] ?? 0 },
-    { label: m.text_stats_time_late_night(), count: counts[3] ?? 0 },
+    {
+      label: m.text_stats_time_morning(),
+      count: counts[0] ?? 0,
+      key: 'morning',
+    },
+    {
+      label: m.text_stats_time_afternoon(),
+      count: counts[1] ?? 0,
+      key: 'afternoon',
+    },
+    {
+      label: m.text_stats_time_evening(),
+      count: counts[2] ?? 0,
+      key: 'evening',
+    },
+    {
+      label: m.text_stats_time_late_night(),
+      count: counts[3] ?? 0,
+      key: 'night',
+    },
   ];
 }

@@ -7,7 +7,7 @@
 </script>
 
 <div class="graph-peak-hours">
-  {#each data.buckets as bucket (bucket.label)}
+  {#each data.buckets as bucket (bucket.key)}
     <div class="peak-row">
       <span class="peak-label tag">{bucket.label}</span>
       <div class="peak-bar-track">
