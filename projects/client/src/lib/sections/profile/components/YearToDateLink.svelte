@@ -24,7 +24,7 @@
 </script>
 
 <trakt-year-to-date-link>
-  <Link {href} onclick={() => track({ source, target: href })}>
+  <Link {href} onclick={() => track({ source, target: href })} color="inherit">
     <div class="ytd-link-content">
       <span class="bold ytd-year">{currentYear}</span>
       <ExternalLinkIcon />
@@ -32,12 +32,9 @@
   </Link>
 </trakt-year-to-date-link>
 
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
+<style>
   trakt-year-to-date-link {
-    :global(.trakt-link[data-color="default"]) {
-      color: inherit;
+    :global(.trakt-link) {
       text-decoration: none;
 
       display: flex;

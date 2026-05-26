@@ -71,6 +71,8 @@
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: background, height, padding, gap;
+
+    z-index: var(--layer-base);
   }
 
   .trakt-review-content[data-variant="gradient"] {
