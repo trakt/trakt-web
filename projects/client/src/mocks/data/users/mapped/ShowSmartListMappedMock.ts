@@ -11,6 +11,7 @@ export const ShowSmartListMappedMock = [
     target: 'trending',
     type: 'show',
     id: 21230,
+    key: 'smart-list-21230',
     updatedAt: new Date('2025-04-30T12:42:42.000Z'),
   },
 ];

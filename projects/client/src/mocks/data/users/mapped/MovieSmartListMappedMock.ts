@@ -12,6 +12,7 @@ export const MovieSmartListMappedMock = [
     target: 'trending',
     type: 'movie',
     id: 21229,
+    key: 'smart-list-21229',
     updatedAt: new Date('2025-04-30T12:39:22.000Z'),
   },
 ];

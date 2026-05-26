@@ -9,7 +9,7 @@ import {
 import { firstValueFrom, map } from 'rxjs';
 
 export function usePaginatedListQuery<
-  TOutput,
+  TOutput extends { key: string },
   TError extends Error,
 >(
   props: CreateInfiniteQueryOptions<
@@ -32,7 +32,16 @@ export function usePaginatedListQuery<
         return [];
       }
 
-      return $query.data.pages.flatMap((page) => page.entries);
+      // Dedupe across pages to counter offset pagination drift
+      return $query.data.pages
+        .flatMap((page) => page.entries)
+        .filter(
+          ((seen) => (entry) => {
+            if (seen.has(entry.key)) return false;
+            seen.add(entry.key);
+            return true;
+          })(new Set<string>()),
+        );
     }),
   );
 
