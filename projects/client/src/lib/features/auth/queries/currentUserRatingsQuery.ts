@@ -42,6 +42,8 @@ function mapRatedItemResponse(response: RatedItemResponse): RatedEntry {
           'Expected episode in RatedItemResponse',
         ).ids.trakt,
       };
+    case 'season':
+      throw new Error('Season ratings are not supported');
   }
 }
 

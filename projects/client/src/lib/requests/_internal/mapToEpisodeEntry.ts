@@ -1,4 +1,5 @@
 import { thumbUrl } from '$lib/requests/_internal/thumbUrl.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { MAX_DATE } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -13,8 +14,12 @@ type EpisodeResponse =
   | CalendarShowResponse['episode'];
 
 export function mapToEpisodeEntry(
-  episode: EpisodeResponse,
+  episodeResponse: EpisodeResponse,
 ): EpisodeEntry {
+  const episode = assertDefined(
+    episodeResponse,
+    'Episode response is undefined',
+  );
   const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));
 
   const airDate = new Date(episode.first_aired ?? MAX_DATE);
