@@ -4,6 +4,11 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type {
+  ActivityHistoryResponse,
+  EpisodeActivityHistoryResponse,
+  MovieActivityHistoryResponse,
+} from '@trakt/api';
 import { z } from 'zod';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
@@ -52,6 +57,17 @@ export function activityHistoryRequest(
   });
 }
 
+type ValidHistoryItemResponse =
+  | MovieActivityHistoryResponse
+  | EpisodeActivityHistoryResponse;
+
+function isValidHistoryItemResponse(
+  response: ActivityHistoryResponse,
+): response is ValidHistoryItemResponse {
+  return (response.type === 'movie' && Boolean(response.movie)) ||
+    (response.type === 'episode' && Boolean(response.episode));
+}
+
 export const activityHistoryQuery = defineInfiniteQuery({
   key: 'activityHistory:v2',
   invalidations: [
@@ -69,11 +85,13 @@ export const activityHistoryQuery = defineInfiniteQuery({
   ],
   request: activityHistoryRequest,
   mapper: (response) => ({
-    entries: response.body.map((item) =>
-      item.type === 'movie'
-        ? mapToMovieActivityHistory(item)
-        : mapToEpisodeActivityHistory(item)
-    ),
+    entries: response.body
+      .filter(isValidHistoryItemResponse)
+      .map((item) =>
+        item.type === 'movie'
+          ? mapToMovieActivityHistory(item)
+          : mapToEpisodeActivityHistory(item)
+      ),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(HistorySchema),

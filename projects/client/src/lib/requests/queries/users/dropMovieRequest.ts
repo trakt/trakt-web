@@ -13,7 +13,7 @@ export function dropMovieRequest(
     .drop
     .movie({
       params: {
-        id: `${id}`,
+        id,
       },
     })
     .then(({ status }) => {
