@@ -36,7 +36,7 @@
 
 <div class="trakt-month-in-review-link">
   {#if variant === "link"}
-    <Link {href} {onclick}>
+    <Link {href} {onclick} color="inherit">
       <ExternalLinkIcon />
       <p class="uppercase bold">{previousMonth}</p>
     </Link>
