@@ -2,6 +2,7 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { m } from "$lib/paraglide/messages";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
+  import Yir2024MostPlayedSection from "./_internal/Yir2024MostPlayedSection.svelte";
   import Yir2024PageInner from "./_internal/Yir2024PageInner.svelte";
   import Yir2024PlayCard from "./_internal/Yir2024PlayCard.svelte";
   import Yir2024StatsSection from "./_internal/Yir2024StatsSection.svelte";
@@ -49,9 +50,27 @@
       </Yir2024PageInner>
     {/if}
 
+    {#if detail.mostWatched.shows.length > 0}
+      <Yir2024PageInner>
+        <Yir2024MostPlayedSection
+          type="shows"
+          items={detail.mostWatched.shows}
+        />
+      </Yir2024PageInner>
+    {/if}
+
     {#if detail.stats.movies.playCounts.total > 0}
       <Yir2024PageInner>
         <Yir2024StatsSection type="movies" stats={detail.stats.movies} {year} />
+      </Yir2024PageInner>
+    {/if}
+
+    {#if detail.mostWatched.movies.length > 0}
+      <Yir2024PageInner>
+        <Yir2024MostPlayedSection
+          type="movies"
+          items={detail.mostWatched.movies}
+        />
       </Yir2024PageInner>
     {/if}
 
