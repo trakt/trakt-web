@@ -11,20 +11,28 @@
   import CreateSmartListAction from "$lib/sections/smart-lists/CreateSmartListAction.svelte";
   import type { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { useNavbarState } from "$lib/sections/navbar/useNavbarState";
   import FilterTabs from "./FilterTabs.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
 
   const {
     onClose,
     smartListTarget,
+    hasAutoClose = true,
+    onSaveFilter = onClose,
   }: {
     onClose: () => void;
     smartListTarget?: ListTarget | Nil;
+    hasAutoClose?: boolean;
+    onSaveFilter?: () => void;
   } = $props();
 
   const { activeMode, setActiveMode, saveFilters, resetFilters } =
     useStoredFilters();
   const { hasActiveFilter } = useFilter();
+
+  const { state } = useNavbarState();
+  const filterPanelHeader = $derived($state.filterPanelHeader);
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const isSmallTablet = useMedia(WellKnownMediaQuery.tabletSmall);
@@ -62,7 +70,7 @@
           tooltip={false}
           onclick={() => {
             saveFilters();
-            onClose();
+            onSaveFilter();
           }}
         >
           <SaveFiltersIcon />
@@ -76,10 +84,17 @@
 <Drawer
   {onClose}
   {badge}
+  {hasAutoClose}
   title={m.header_filters()}
   trapSelector=".trakt-filter"
   size="auto"
 >
+  {#if filterPanelHeader}
+    <div class="trakt-filter-panel-header">
+      {@render filterPanelHeader()}
+    </div>
+  {/if}
+
   <FilterTabs activeMode={$activeMode} {setActiveMode} {tabPosition} />
 
   {#if smartListTarget}
@@ -102,5 +117,12 @@
     display: flex;
     align-items: center;
     gap: var(--gap-micro);
+  }
+
+  .trakt-filter-panel-header {
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: var(--gap-m);
   }
 </style>

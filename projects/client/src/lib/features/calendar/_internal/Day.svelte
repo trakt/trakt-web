@@ -2,8 +2,9 @@
   import { getLocale, languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
-  import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
+  import { isBefore } from "date-fns/isBefore";
+  import { startOfDay } from "date-fns/startOfDay";
   import ContentIndicator from "./ContentIndicator.svelte";
   import { dateKey } from "./dateKey";
 
@@ -16,6 +17,7 @@
   } = $props();
 
   const itemCount = $derived(day.items.length);
+  const isPast = $derived(isBefore(day.date, startOfDay(new Date())));
 
   const scrollToDay = () => {
     const key = dateKey(day.date);
@@ -33,13 +35,13 @@
   })}
   class:has-items={itemCount > 0}
   class:is-active={isActiveDate}
+  class:is-past={isPast}
   onclick={scrollToDay}
 >
-  <span>
-    {toHumanMonth(day.date, languageTag(), "short")}
+  <span class="day-cell">
+    <span class="day-of-month">{day.date.getDate()}</span>
+    <span class="month">{toHumanMonth(day.date, languageTag(), "short")}</span>
   </span>
-  <span class="bold">{day.date.getDate()}</span>
-  <span>{toHumanDayOfWeek(day.date, getLocale())}</span>
 
   <ContentIndicator {itemCount} />
 </button>
@@ -54,34 +56,70 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: var(--gap-xs);
 
     min-width: var(--ni-44);
     box-sizing: border-box;
+  }
 
-    border-radius: var(--border-radius-s);
+  .day-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    transition: background-color var(--transition-increment) ease-in-out;
-    background-color: var(--color-calendar-inactive-background);
+    width: 100%;
+    padding: var(--ni-4) var(--ni-2);
+    box-sizing: border-box;
 
-    padding: var(--ni-8);
-    gap: var(--gap-xs);
+    border: var(--border-thickness-xxs) solid transparent;
+    border-radius: var(--ni-10);
 
-    &:not(.has-items) {
-      pointer-events: none;
+    color: var(--color-text-secondary);
 
-      span {
-        opacity: 0.5;
-      }
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: background-color, border-color, color;
+
+    .day-of-month,
+    .month {
+      font-size: var(--font-size-text);
+      line-height: var(--ni-24);
+      letter-spacing: 0.025em;
     }
 
-    &.is-active {
-      background-color: var(--color-calendar-active-background);
+    .day-of-month {
+      font-weight: 600;
     }
+  }
 
-    @include for-mouse() {
-      &.has-items:not(.is-active):hover {
-        cursor: pointer;
-        background-color: var(--color-calendar-background-hover);
+  .trakt-calendar-day-button:not(.has-items) {
+    pointer-events: none;
+
+    .day-cell {
+      opacity: 0.6;
+    }
+  }
+
+  .trakt-calendar-day-button.is-active .day-cell {
+    background-color: var(--purple-900);
+    border-color: var(--purple-700);
+    color: var(--shade-10);
+  }
+
+  .trakt-calendar-day-button.is-past {
+    opacity: 0.3;
+  }
+
+  @include for-mouse {
+    .trakt-calendar-day-button.has-items:not(.is-active):hover {
+      cursor: pointer;
+
+      .day-cell {
+        background-color: color-mix(
+          in srgb,
+          var(--purple-900) 35%,
+          transparent
+        );
+        color: var(--shade-10);
       }
     }
   }

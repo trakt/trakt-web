@@ -1,8 +1,7 @@
 <script lang="ts" generics="T extends { key: string }">
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
-  import { getLocale } from "$lib/features/i18n";
-  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import type { Snippet } from "svelte";
+  import CalendarDayHeader from "./CalendarDayHeader.svelte";
   import { dateKey } from "./dateKey";
 
   const {
@@ -32,12 +31,8 @@
     {#each orderedCalendar as day (dateKey(day.date))}
       {#if day.items.length > 0}
         <div id={dateKey(day.date)} class="calendar-day-anchor">
-          <GridList
-            title={toHumanDay({ date: day.date, locale: getLocale() })}
-            items={day.items}
-            id={dateKey(day.date)}
-            {item}
-          />
+          <CalendarDayHeader date={day.date} count={day.items.length} />
+          <GridList items={day.items} id={dateKey(day.date)} {item} />
         </div>
       {/if}
     {/each}
@@ -49,6 +44,10 @@
 
   .calendar-day-anchor {
     scroll-margin-top: var(--calendar-nav-bottom, 0px);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
   }
 
   .trakt-calendar-items {

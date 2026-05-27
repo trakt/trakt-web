@@ -69,6 +69,7 @@ export function useCalendarPeriod(
     const referenceDate = visibleDate.value ?? startDate.value;
 
     if (isCurrentWeek(referenceDate, getLocale())) {
+      visibleDate.next(null);
       activeDate.next(new Date());
       return;
     }

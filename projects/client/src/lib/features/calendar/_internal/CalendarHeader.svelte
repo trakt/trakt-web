@@ -1,14 +1,20 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
+  import type { CalendarView } from "../models/CalendarView.ts";
   import CalendarControls from "./CalendarControls.svelte";
 
   type CalendarHeaderProps = WithRequired<
     CalendarNavigationProps,
     "navigation"
-  > & { actions?: Snippet };
+  > & {
+    actions?: Snippet;
+    view?: CalendarView;
+    onToggleView?: () => void;
+  };
 
-  const { actions, ...navigationProps }: CalendarHeaderProps = $props();
+  const { actions, view, onToggleView, ...navigationProps }: CalendarHeaderProps =
+    $props();
 </script>
 
 <div class="trakt-calendar-header">
@@ -17,7 +23,7 @@
       {@render actions()}
     </div>
   {/if}
-  <CalendarControls {...navigationProps} />
+  <CalendarControls {...navigationProps} {view} {onToggleView} />
 </div>
 
 <style>
