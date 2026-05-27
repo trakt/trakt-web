@@ -54,8 +54,13 @@
   @use "$style/scss/mixins/index.scss" as *;
 
   :global(.trakt-select-trigger) {
-    --color-background-select: var(--shade-50);
-    --color-foreground-select: var(--shade-700);
+    --color-background-select: var(--color-background);
+    --color-foreground-select: var(--color-foreground);
+    --color-border-select: color-mix(
+      in srgb,
+      var(--purple-400) 20%,
+      transparent
+    );
     --button-height: var(--ni-40);
 
     all: unset;
@@ -69,30 +74,39 @@
     height: var(--button-height);
     min-width: 0;
 
-    padding: var(--ni-12);
+    padding: 0 var(--ni-12);
     box-sizing: border-box;
 
-    border-radius: var(--border-radius-m);
+    border: var(--border-thickness-xxs) solid var(--color-border-select);
+    border-radius: var(--ni-10);
 
     background-color: var(--color-background-select);
     color: var(--color-foreground-select);
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: background-color, color;
+    transition-property: background-color, border-color;
 
     -webkit-tap-highlight-color: transparent;
   }
 
+  :global(.trakt-select-trigger) span {
+    font-size: var(--ni-12);
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+  }
+
   :global(.trakt-select-trigger:not([data-disabled])) {
     @include for-mouse {
-      &:hover,
-      &:focus-visible {
-        background-color: var(--color-foreground-select);
-        color: var(--color-background-select);
+      &:hover {
+        --color-border-select: color-mix(
+          in srgb,
+          var(--purple-400) 45%,
+          transparent
+        );
       }
 
       &:focus-visible {
-        outline: var(--border-thickness-xs) solid var(--color-foreground-select);
+        outline: var(--border-thickness-xxs) solid var(--purple-400);
       }
     }
   }

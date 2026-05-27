@@ -79,8 +79,8 @@
   }
 
   :global(.trakt-slider) {
-    --slider-thumb-size: var(--ni-20);
-    --slider-track-height: var(--ni-10);
+    --slider-thumb-size: var(--ni-32);
+    --slider-track-height: var(--ni-20);
 
     position: relative;
 
@@ -115,13 +115,13 @@
     cursor: pointer;
     overflow: hidden;
 
-    border-radius: var(--border-radius-xl);
-    background-color: var(--shade-100);
+    border-radius: var(--border-radius-xxl);
+    background-color: var(--shade-900);
 
     :global(.trakt-slider-range) {
       position: absolute;
       height: 100%;
-      background-color: var(--blue-500);
+      background-color: var(--purple-600);
     }
   }
 
@@ -139,7 +139,7 @@
     cursor: pointer;
     border-radius: 50%;
 
-    background-color: var(--blue-500);
+    background-color: var(--purple-600);
     box-shadow: var(--shadow-raised);
 
     transition: var(--transition-increment) ease-in-out;
@@ -154,7 +154,7 @@
     }
 
     &:hover {
-      background-color: var(--blue-600);
+      background-color: var(--purple-500);
     }
 
     &:focus-visible {

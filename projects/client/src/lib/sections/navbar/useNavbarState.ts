@@ -9,6 +9,7 @@ type NavbarState = {
   contextualActions: Snippet | undefined;
   hasFilters: boolean;
   showFilters: boolean;
+  filterPanelHeader?: Snippet | null;
   headerActions?: Snippet;
   header?: {
     title: string;
@@ -35,6 +36,7 @@ const initialNavbarState: NavbarState = {
   contextualActions: undefined,
   hasFilters: false,
   showFilters: true,
+  filterPanelHeader: undefined,
   headerActions: undefined,
   header: undefined,
   sidebar: {

@@ -83,28 +83,75 @@
   </div>
 {/snippet}
 
-<TabView
-  {tabPosition}
-  value={activeMode}
-  tabs={[
-    {
-      value: FilterMode.Simple,
-      label: m.tab_text_simple_filters(),
-      content: simpleFilters,
-    },
-    {
-      value: FilterMode.Advanced,
-      label: m.tab_text_advanced_filters(),
-      content: advancedFilters,
-    },
-  ]}
-  {onChange}
-/>
+<div class="trakt-filter-tabs">
+  <TabView
+    {tabPosition}
+    value={activeMode}
+    tabs={[
+      {
+        value: FilterMode.Simple,
+        label: m.tab_text_simple_filters(),
+        content: simpleFilters,
+      },
+      {
+        value: FilterMode.Advanced,
+        label: m.tab_text_advanced_filters(),
+        content: advancedFilters,
+      },
+    ]}
+    {onChange}
+  />
+</div>
 
-<style>
+<style lang="scss">
   .trakt-filters-content {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xl);
+  }
+
+  /* Filters selector pill — restyles the shared TabView for the filter panel only. */
+  .trakt-filter-tabs :global(.trakt-tab-view) {
+    --tab-border-radius: var(--border-radius-m);
+  }
+
+  .trakt-filter-tabs :global(.trakt-tabs-list) {
+    background-color: var(--shade-900);
+    padding: var(--ni-4);
+  }
+
+  .trakt-filter-tabs :global(.trakt-tab-indicator) {
+    background-color: var(--purple-700);
+  }
+
+  .trakt-filter-tabs :global(.trakt-tab-trigger) {
+    height: var(--ni-32);
+    color: var(--shade-10);
+  }
+
+  .trakt-filter-tabs :global(.trakt-tab-trigger[data-state="inactive"]) {
+    opacity: 0.45;
+  }
+
+  .trakt-filter-tabs
+    :global(.trakt-tab-trigger:hover:not([data-state="active"])) {
+    background-color: color-mix(in srgb, var(--purple-700) 35%, transparent);
+    opacity: 1;
+  }
+
+  .trakt-filter-tabs :global(.trakt-tab-trigger:focus-visible) {
+    outline: var(--border-thickness-xxs) solid var(--purple-400);
+    background-color: transparent;
+    color: var(--shade-10);
+  }
+
+  .trakt-filter-tabs :global(.trakt-tab-trigger span) {
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  .trakt-filter-tabs
+    :global(.trakt-tab-trigger[data-state="active"] span) {
+    font-weight: 600;
   }
 </style>

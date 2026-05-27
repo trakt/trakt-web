@@ -19,7 +19,7 @@
   <TraktPageCoverSetter />
 
   <NavbarStateSetter
-    hasFilters
+    showFilters={false}
     header={{ title: m.header_calendar(), metaInfo: $current.text() }}
   />
 
