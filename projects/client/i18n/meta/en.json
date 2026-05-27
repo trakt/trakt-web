@@ -4689,6 +4689,22 @@
       "default": "Watched At",
       "description": "Label above the watched-at timestamp on the first/last-play cards on the 2024 Year in Review template."
     },
+    "yir_2024_most_watched_shows": {
+      "default": "Most Watched Shows",
+      "description": "Section header above the top-10 most-watched shows list on the 2024 Year in Review template."
+    },
+    "yir_2024_most_watched_movies": {
+      "default": "Most Watched Movies",
+      "description": "Section header above the top-10 most-watched movies list on the 2024 Year in Review template."
+    },
+    "yir_2024_plays_label": {
+      "default": "Plays",
+      "description": "Stat label under the play count on the 2024 Year in Review most-watched cards."
+    },
+    "yir_2024_time_watched_label": {
+      "default": "Time Watched",
+      "description": "Stat label under the time-watched duration on the 2024 Year in Review most-watched cards."
+    },
     "yir_2024_stats_intro_shows": {
       "default": "In {year}, you watched",
       "description": "Lead-in line above the big '{hours} hours of {count} Shows' headline on the 2024 Year in Review TV stats section.",
