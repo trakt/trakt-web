@@ -1,9 +1,17 @@
 <script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import StarIcon from "$lib/components/icons/StarIcon.svelte";
+  import Popover from "$lib/components/popover/Popover.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import RemoveFromHistoryAction from "$lib/sections/media-actions/remove-from-history/RemoveFromHistoryAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
+  import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
+  import type { RateNowProps } from "$lib/sections/summary/components/rating/models/RateNowProps";
+  import { NOOP_FN } from "$lib/utils/constants";
+  import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import ActivityItem from "../components/ActivityItem.svelte";
   import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
   import type { HistoryEntry } from "../stores/models/HistoryEntry";
@@ -31,7 +39,28 @@
     return data?.rating;
   });
 
+  const rateTarget = $derived<RateNowProps>(
+    activity.type === "episode"
+      ? {
+          type: "episode",
+          media: activity.episode,
+          show: activity.show,
+        }
+      : {
+          type: "movie",
+          media: activity.movie,
+        },
+  );
+
   const activityType = $derived(isActionable ? "personal" : "social");
+
+  const targetTitle = $derived.by(() => {
+    if (activity.type === "episode") {
+      return episodeActivityTitle(activity.episode);
+    }
+
+    return activity.movie.title;
+  });
 </script>
 
 {#snippet popupActions()}
@@ -58,9 +87,28 @@
   </RenderFor>
 {/snippet}
 
+{#snippet rateContent()}
+  <div class="trakt-history-rate-popover">
+    <RateNow {...rateTarget} variant="allow" />
+  </div>
+{/snippet}
+
 {#snippet action()}
   {#if userRating}
     <UserRating rating={userRating} />
+  {:else}
+    <RenderFor audience="authenticated">
+      <Popover content={rateContent}>
+        <ActionButton
+          style="ghost"
+          size="small"
+          onclick={NOOP_FN}
+          label={m.button_label_rate({ title: targetTitle })}
+        >
+          <StarIcon fill="none" />
+        </ActionButton>
+      </Popover>
+    </RenderFor>
   {/if}
 {/snippet}
 
@@ -85,3 +133,20 @@
     {activityType}
   />
 {/if}
+
+<style>
+  .trakt-history-rate-popover {
+    padding: var(--ni-12) var(--ni-16);
+    border-radius: var(--border-radius-l);
+    background-color: var(--color-modal-background);
+    box-shadow: var(--shadow-menu);
+
+    :global(svg) {
+      --icon-color: var(--color-text-primary);
+    }
+
+    :global(.is-current-rating svg) {
+      --icon-fill-color: var(--color-text-primary);
+    }
+  }
+</style>

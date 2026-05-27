@@ -7097,6 +7097,15 @@
     "confirmation_title_hide_recommendation": {
       "default": "Hide recommendation?",
       "description": "Title of the confirmation dialog shown before hiding a recommendation."
+    },
+    "button_label_rate": {
+      "default": "Rate \"{title}\"",
+      "description": "Aria label for the button that allows users to rate a movie, show, or episode.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
