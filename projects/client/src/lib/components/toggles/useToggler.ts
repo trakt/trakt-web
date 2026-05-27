@@ -12,6 +12,10 @@ const TOGGLER_PREFIX = 'trakt_toggler';
 
 const globalStores = new Map<string, BehaviorSubject<unknown>>();
 
+export function resetGlobalStore() {
+  globalStores.clear();
+}
+
 export function useToggler<T extends TogglerId, K = TogglerValueMap[T]>(id: T) {
   const toggler = TOGGLERS[id];
   const storageKey = `${TOGGLER_PREFIX}_${toggler.id}`;
