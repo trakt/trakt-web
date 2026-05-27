@@ -4696,11 +4696,7 @@
         "year": {
           "type": "number"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "yir_2024_stats_intro_movies": {
       "default": "In {year}, you watched",
@@ -4709,11 +4705,7 @@
         "year": {
           "type": "number"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "yir_2024_stats_summary_shows": {
       "default": "{hours} hours of {count} Shows",
@@ -4725,11 +4717,7 @@
         "count": {
           "type": "string"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "yir_2024_stats_summary_movies": {
       "default": "{hours} hours of {count} Movies",
@@ -4741,11 +4729,7 @@
         "count": {
           "type": "string"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "yir_2024_stats_most_active_week": {
       "default": "Your most active week was <b>{start} - {end}</b> with <b>{count} plays</b>.",
@@ -4760,11 +4744,7 @@
         "count": {
           "type": "string"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "yir_2024_stats_most_popular_time": {
       "default": "The most popular time you watched was <b>{time}</b>.",
@@ -4773,11 +4753,7 @@
         "time": {
           "type": "string"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "yir_2024_stats_card_hours": {
       "default": "{count} Hours",
@@ -4786,11 +4762,7 @@
         "count": {
           "type": "string"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "yir_2024_stats_card_plays": {
       "default": "{count} Plays",
@@ -4799,35 +4771,19 @@
         "count": {
           "type": "string"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "yir_2024_stats_per_month": {
       "default": "Per Month",
-      "description": "Stat-line label for the monthly average row on the 2024 Year in Review stats card.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "description": "Stat-line label for the monthly average row on the 2024 Year in Review stats card."
     },
     "yir_2024_stats_per_week": {
       "default": "Per Week",
-      "description": "Stat-line label for the weekly average row on the 2024 Year in Review stats card.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "description": "Stat-line label for the weekly average row on the 2024 Year in Review stats card."
     },
     "yir_2024_stats_per_day": {
       "default": "Per Day",
-      "description": "Stat-line label for the daily average row on the 2024 Year in Review stats card.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "description": "Stat-line label for the daily average row on the 2024 Year in Review stats card."
     },
     "yir_2024_stats_tooltip_plays": {
       "default": "{count} Plays",
@@ -4836,11 +4792,7 @@
         "count": {
           "type": "string"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "yir_2024_stats_tooltip_hours": {
       "default": "{count} Hours",
@@ -4849,11 +4801,7 @@
         "count": {
           "type": "string"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "yir_2024_stats_tooltip_week_label": {
       "default": "Week {week}",
@@ -4862,11 +4810,7 @@
         "week": {
           "type": "string"
         }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      }
     },
     "vip_feature_title_mir": {
       "default": "Month in Review",
