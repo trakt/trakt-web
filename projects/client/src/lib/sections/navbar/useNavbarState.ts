@@ -21,6 +21,7 @@ type NavbarState = {
   hasFilters: boolean;
   showFilters: boolean;
   smartListTarget: ListTarget | Nil;
+  filterPanelHeader?: Snippet | null;
   headerActions?: Snippet;
   header?: NavbarHeaderState;
   sidebar: {
@@ -45,6 +46,7 @@ const initialNavbarState: NavbarState = {
   hasFilters: false,
   showFilters: true,
   smartListTarget: undefined,
+  filterPanelHeader: undefined,
   headerActions: undefined,
   header: undefined,
   sidebar: {
