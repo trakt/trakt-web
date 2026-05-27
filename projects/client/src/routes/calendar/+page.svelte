@@ -27,7 +27,7 @@
 
   <ResponsiveNavbarStateSetter
     contentToggle="discover"
-    hasFilters
+    showFilters={false}
     header={{
       title: m.header_calendar(),
       metaInfo: $isApplicable ? $episodeType.text() : $current.text(),
