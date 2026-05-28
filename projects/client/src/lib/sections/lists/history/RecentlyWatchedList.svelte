@@ -17,7 +17,7 @@
 
 <DrillableMediaList
   {title}
-  id={`recently-watched-list-${slug}-${mode}`}
+  id={`recently-watched-list-${mode}`}
   type={mode}
   useList={({ limit }: { limit: number }) =>
     useRecentlyWatchedList({

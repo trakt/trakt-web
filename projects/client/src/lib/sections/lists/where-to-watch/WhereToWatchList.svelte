@@ -60,7 +60,7 @@
 {#if isAired}
   <div transition:slide={{ duration: 150 }}>
     <SectionList
-      id={`where-to-watch-${target.media.slug}`}
+      id={`where-to-watch-${target.type}`}
       items={services}
       title={m.list_title_where_to_watch()}
       drilldown={{

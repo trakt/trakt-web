@@ -36,7 +36,7 @@
 <SectionList
   {title}
   {subtitle}
-  id={`season-poster-list-${show.slug}`}
+  id="season-poster-list"
   items={seasons}
   drilldown={{
     ...buildDrawerLink(SummaryDrawers.Seasons),
