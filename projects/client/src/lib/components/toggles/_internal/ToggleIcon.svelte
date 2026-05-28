@@ -1,5 +1,7 @@
 <script lang="ts" generics="T">
+  import CastIcon from "$lib/components/icons/CastIcon.svelte";
   import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
+  import CrewIcon from "$lib/components/icons/CrewIcon.svelte";
   import CustomLibraryIcon from "$lib/components/icons/CustomLibraryIcon.svelte";
   import DropIcon from "$lib/components/icons/DropIcon.svelte";
   import FollowersIcon from "$lib/components/icons/FollowersIcon.svelte";
@@ -97,4 +99,12 @@
 
 {#if option.value === "other"}
   <CustomLibraryIcon />
+{/if}
+
+{#if option.value === "cast"}
+  <CastIcon />
+{/if}
+
+{#if option.value === "crew"}
+  <CrewIcon />
 {/if}

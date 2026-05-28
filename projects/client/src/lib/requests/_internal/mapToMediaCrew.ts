@@ -35,9 +35,12 @@ function toCrewMember(
 function toCastMember(
   castResponse: CastResponse,
 ): CastMember {
+  const characters = castResponse.characters ?? [];
+
   return ({
     ...toMember(castResponse),
-    characterName: castResponse.characters.at(0) ?? '',
+    characterName: castResponse.character ?? characters.at(0) ?? '',
+    ...(characters.length > 1 ? { characters } : {}),
     headshot: mapToHeadshot(castResponse.person.images),
   });
 }

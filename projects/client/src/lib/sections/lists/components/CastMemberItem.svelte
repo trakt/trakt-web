@@ -13,13 +13,11 @@
   type CastMemberCardProps = {
     castMember: CastMember;
     type: ExtendedMediaType;
-    variant?: "default" | "multi-line";
   };
 
   const {
     castMember,
     type,
-    variant = "default",
   }: CastMemberCardProps = $props();
 
   const params = $derived({
@@ -37,7 +35,7 @@
   {/if}
 {/snippet}
 
-<div class="cast-member-item" data-variant={variant}>
+<div class="cast-member-item">
   <PersonCard>
     <Link focusable={false} href={UrlBuilder.people(castMember.key, params)}>
       <CardCover
@@ -70,25 +68,5 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  .cast-member-item[data-variant="multi-line"] {
-    .trakt-cast-name {
-      display: -webkit-box;
-
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-
-      overflow: hidden;
-      overflow-wrap: anywhere;
-      text-overflow: unset;
-      white-space: unset;
-      word-break: break-word;
-    }
-
-    :global(.trakt-card-footer) {
-      align-items: flex-start;
-    }
   }
 </style>
