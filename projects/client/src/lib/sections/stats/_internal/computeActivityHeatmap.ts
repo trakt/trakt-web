@@ -1,4 +1,5 @@
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';
+import { HEATMAP_MAX_INTENSITY_COUNT } from '$lib/sections/stats/_internal/constants/index.ts';
 import { addDays } from '$lib/utils/date/addDays.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { getStartOfWeek } from '$lib/utils/date/getStartOfWeek.ts';
@@ -16,7 +17,7 @@ function toIntensity(count: number): HeatmapIntensity {
   if (count === 0) return 0;
   if (count === 1) return 1;
   if (count <= 3) return 2;
-  if (count <= 6) return 3;
+  if (count < HEATMAP_MAX_INTENSITY_COUNT) return 3;
   return 4;
 }
 

@@ -2,6 +2,8 @@
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { languageTag } from "$lib/features/i18n";
+  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
+  import { HEATMAP_MAX_INTENSITY_COUNT } from "./_internal/constants/index.ts";
   import { useActivityHeatmap } from "./_internal/useActivityHeatmap.ts";
   import { formatActivityTooltip } from "./_internal/utils/formatActivityTooltip.ts";
 
@@ -11,6 +13,13 @@
 
   const locale = $derived(languageTag());
   const now = new Date();
+
+  const maxIntensityValue = $derived.by(() => {
+    if (!$heatmap) return HEATMAP_MAX_INTENSITY_COUNT;
+
+    const maxCount = Math.max(...$heatmap.cells.map((cell) => cell.count));
+    return Math.max(maxCount, HEATMAP_MAX_INTENSITY_COUNT);
+  });
 </script>
 
 {#if $isLoading}
@@ -75,11 +84,15 @@
       </div>
 
       <div class="trakt-heatmap-legend">
-        <span class="trakt-heatmap-legend-label">Less</span>
+        <span class="trakt-heatmap-legend-label">
+          {toHumanNumber(0, locale)}
+        </span>
         {#each [0, 1, 2, 3, 4] as level (level)}
           <div class="trakt-heatmap-cell" data-intensity={level}></div>
         {/each}
-        <span class="trakt-heatmap-legend-label">More</span>
+        <span class="trakt-heatmap-legend-label">
+          {toHumanNumber(maxIntensityValue, locale)}
+        </span>
       </div>
     </div>
   </div>
