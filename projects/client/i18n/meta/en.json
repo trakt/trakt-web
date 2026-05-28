@@ -2913,7 +2913,7 @@
       "description": "Label for the button that navigates to the selected calendar day.",
       "variables": {
         "day": {
-          "type": "number"
+          "type": "string"
         }
       }
     },

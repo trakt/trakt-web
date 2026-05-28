@@ -15,7 +15,7 @@ export function toCalendarDayParts(
   const locale = LOCALE_MAP[localeKey] ?? LOCALE_MAP['en'];
 
   return {
-    dayOfMonth: format(date, 'dd', { locale }),
+    dayOfMonth: format(date, 'd', { locale }),
     month: format(date, 'MMM', { locale }),
     weekday: format(date, 'EEE', { locale }),
   };

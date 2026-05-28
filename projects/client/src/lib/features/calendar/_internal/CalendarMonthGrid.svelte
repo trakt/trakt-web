@@ -74,7 +74,7 @@
             <span class="month-day-number">{cell.date.getDate()}</span>
             {#if cell.items.length > 0}
               <span class="month-day-indicator" aria-hidden="true">
-                {#each Array(Math.min(cell.items.length, MAX_INDICATOR_DOTS)) as _, i (i)}
+                {#each Array.from({ length: Math.min(cell.items.length, MAX_INDICATOR_DOTS) }) as _, i (i)}
                   <span class="dot"></span>
                 {/each}
               </span>

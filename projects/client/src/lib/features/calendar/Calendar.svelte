@@ -14,7 +14,7 @@
   import { endOfWeek } from "date-fns/endOfWeek";
   import { startOfMonth } from "date-fns/startOfMonth";
   import { startOfWeek as dfStartOfWeek } from "date-fns/startOfWeek";
-  import { onMount } from "svelte";
+  import { tick } from "svelte";
   import { useFilter } from "../filters/useFilter";
   import CalendarDays from "./_internal/CalendarDays.svelte";
   import CalendarHeader from "./_internal/CalendarHeader.svelte";
@@ -82,8 +82,9 @@
     return match?.calendar ?? firstPeriod;
   });
 
-  function handleNavigation(action: () => void) {
+  async function handleNavigation(action: () => void) {
     action();
+    await tick();
     document
       .getElementById(dateKey(activeDate.value))
       ?.scrollIntoView({ block: "start" });
@@ -147,9 +148,6 @@
 
   $effect(() => {
     set({ filterPanelHeader: calendarNavigation });
-  });
-
-  onMount(() => {
     return () => set({ filterPanelHeader: null });
   });
 
