@@ -7,6 +7,27 @@ function metaContent(page: Page, selector: string): Promise<string> {
   return page.$eval(selector, (el) => el.getAttribute('content') ?? '');
 }
 
+// During SvelteKit client-side navigation, the outgoing page's <svelte:head>
+// briefly coexists with the incoming one, producing two matching meta elements.
+// .last() always selects the incoming (correct) element.
+function metaLocator(page: Page, selector: string) {
+  return page.locator(selector).last();
+}
+
+// The JSON-LD script tag may be temporarily absent during client-side navigation.
+// The try/catch allows expect.poll to retry gracefully instead of throwing immediately.
+async function getJsonLd(page: Page): Promise<Record<string, unknown>> {
+  try {
+    const text = await page.$eval(
+      'script[type="application/ld+json"]',
+      (el) => el.textContent ?? '',
+    );
+    return JSON.parse(text) as Record<string, unknown>;
+  } catch {
+    return {};
+  }
+}
+
 Then(
   'the page should meet core SEO requirements',
   async function (this: TraktWorld) {
@@ -78,16 +99,19 @@ Then(
 Then(
   'the page should not be blocked from indexing',
   async function (this: TraktWorld) {
-    const robots = await metaContent(this.page, 'meta[name="robots"]');
-    expect(robots, 'robots directive').toBe('index, follow');
+    await expect(metaLocator(this.page, 'meta[name="robots"]')).toHaveAttribute(
+      'content',
+      'index, follow',
+    );
   },
 );
 
 Then(
   'the og:type should be {string}',
   async function (this: TraktWorld, expectedType: string) {
-    const ogType = await metaContent(this.page, 'meta[property="og:type"]');
-    expect(ogType, 'og:type').toBe(expectedType);
+    await expect(
+      metaLocator(this.page, 'meta[property="og:type"]'),
+    ).toHaveAttribute('content', expectedType);
   },
 );
 
@@ -101,28 +125,27 @@ Then(
 Then(
   'the og:title should be {string}',
   async function (this: TraktWorld, expectedTitle: string) {
-    const [ogTitle, twitterTitle] = await Promise.all([
-      metaContent(this.page, 'meta[property="og:title"]'),
-      metaContent(this.page, 'meta[name="twitter:title"]'),
-    ]);
-    expect(ogTitle, 'og:title').toBe(expectedTitle);
-    expect(twitterTitle, 'twitter:title should match og:title').toBe(
-      expectedTitle,
-    );
+    await expect(
+      metaLocator(this.page, 'meta[property="og:title"]'),
+    ).toHaveAttribute('content', expectedTitle);
+    await expect(
+      metaLocator(this.page, 'meta[name="twitter:title"]'),
+    ).toHaveAttribute('content', expectedTitle);
   },
 );
 
 Then(
   'the description should be {string}',
   async function (this: TraktWorld, expectedDescription: string) {
-    const [description, ogDescription, twitterDescription] = await Promise.all([
-      metaContent(this.page, 'meta[name="description"]'),
-      metaContent(this.page, 'meta[property="og:description"]'),
-      metaContent(this.page, 'meta[name="twitter:description"]'),
-    ]);
-    expect(description, 'description').toBe(expectedDescription);
-    expect(ogDescription, 'og:description').toBe(expectedDescription);
-    expect(twitterDescription, 'twitter:description').toBe(expectedDescription);
+    await expect(
+      metaLocator(this.page, 'meta[name="description"]'),
+    ).toHaveAttribute('content', expectedDescription);
+    await expect(
+      metaLocator(this.page, 'meta[property="og:description"]'),
+    ).toHaveAttribute('content', expectedDescription);
+    await expect(
+      metaLocator(this.page, 'meta[name="twitter:description"]'),
+    ).toHaveAttribute('content', expectedDescription);
   },
 );
 
@@ -145,26 +168,22 @@ Then(
     await expect(titleEl).toBeVisible();
     const visibleTitle = (await titleEl.textContent() ?? '').trim();
 
-    const [ogTitle, twitterTitle] = await Promise.all([
-      metaContent(this.page, 'meta[property="og:title"]'),
-      metaContent(this.page, 'meta[name="twitter:title"]'),
-    ]);
-    expect(ogTitle.trim(), 'og:title should match visible media title').toBe(
-      visibleTitle,
-    );
-    expect(
-      twitterTitle.trim(),
-      'twitter:title should match visible media title',
-    ).toBe(
-      visibleTitle,
-    );
+    await expect(
+      metaLocator(this.page, 'meta[property="og:title"]'),
+    ).toHaveAttribute('content', visibleTitle);
+    await expect(
+      metaLocator(this.page, 'meta[name="twitter:title"]'),
+    ).toHaveAttribute('content', visibleTitle);
   },
 );
 
 Then(
   'the page title should contain the og:title',
   async function (this: TraktWorld) {
-    const ogTitle = await metaContent(this.page, 'meta[property="og:title"]');
+    const ogTitle =
+      (await metaLocator(this.page, 'meta[property="og:title"]').getAttribute(
+        'content',
+      )) ?? '';
     const escapedTitle = ogTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     await expect(this.page).toHaveTitle(new RegExp(escapedTitle));
   },
@@ -173,106 +192,85 @@ Then(
 Then(
   'the og:image should be an absolute URL',
   async function (this: TraktWorld) {
-    const [ogImage, twitterImage] = await Promise.all([
-      metaContent(this.page, 'meta[property="og:image"]'),
-      metaContent(this.page, 'meta[name="twitter:image"]'),
-    ]);
-    expect(ogImage, 'og:image should be an absolute URL').toMatch(
-      /^https?:\/\/.+/,
-    );
-    expect(twitterImage, 'twitter:image should be an absolute URL').toMatch(
-      /^https?:\/\/.+/,
-    );
+    await expect(
+      metaLocator(this.page, 'meta[property="og:image"]'),
+    ).toHaveAttribute('content', /^https?:\/\/.+/);
+    await expect(
+      metaLocator(this.page, 'meta[name="twitter:image"]'),
+    ).toHaveAttribute('content', /^https?:\/\/.+/);
   },
 );
 
 Then(
   'the og:image dimensions should be 1200 by 630',
   async function (this: TraktWorld) {
-    const [width, height] = await Promise.all([
-      this.page.$eval(
-        'meta[property="og:image:width"]',
-        (el) => el.getAttribute('content') ?? '',
-      ),
-      this.page.$eval(
-        'meta[property="og:image:height"]',
-        (el) => el.getAttribute('content') ?? '',
-      ),
-    ]);
-    expect(width, 'og:image:width').toBe('1200');
-    expect(height, 'og:image:height').toBe('630');
+    await expect(
+      metaLocator(this.page, 'meta[property="og:image:width"]'),
+    ).toHaveAttribute('content', '1200');
+    await expect(
+      metaLocator(this.page, 'meta[property="og:image:height"]'),
+    ).toHaveAttribute('content', '630');
   },
 );
 
 Then(
   'the JSON-LD should include a search action',
   async function (this: TraktWorld) {
-    const jsonLdText = await this.page.$eval(
-      'script[type="application/ld+json"]',
-      (el) => el.textContent ?? '',
-    );
-    const jsonLd = JSON.parse(jsonLdText) as Record<string, unknown>;
+    await expect.poll(async () => {
+      const jsonLd = await getJsonLd(this.page);
+      const action = jsonLd['potentialAction'] as
+        | Record<string, unknown>
+        | undefined;
+      const target = action?.['target'] as Record<string, unknown> | undefined;
+      return String(target?.['urlTemplate'] ?? '');
+    }).toMatch(/search.*search_term_string/);
+
+    const jsonLd = await getJsonLd(this.page);
     const action = jsonLd['potentialAction'] as
       | Record<string, unknown>
       | undefined;
-    expect(action, 'JSON-LD potentialAction should be present').toBeDefined();
     expect(action?.['@type'], 'potentialAction @type').toBe('SearchAction');
-    const target = action?.['target'] as Record<string, unknown> | undefined;
-    expect(String(target?.['urlTemplate'] ?? ''), 'SearchAction urlTemplate')
-      .toMatch(
-        /search.*search_term_string/,
-      );
   },
 );
 
 Then(
   'the JSON-LD should include genre and year',
   async function (this: TraktWorld) {
-    const jsonLdText = await this.page.$eval(
-      'script[type="application/ld+json"]',
-      (el) => el.textContent ?? '',
-    );
-    const jsonLd = JSON.parse(jsonLdText) as Record<string, unknown>;
-    const genres = jsonLd['genre'];
-    expect(genres, 'JSON-LD genre should be present').toBeDefined();
-    expect(
-      Array.isArray(genres) ? genres.length : 0,
-      'JSON-LD genre should be non-empty',
-    ).toBeGreaterThan(0);
-    const datePublished = jsonLd['datePublished'];
-    expect(datePublished, 'JSON-LD datePublished should be present')
-      .toBeDefined();
-    expect(
-      String(datePublished ?? ''),
-      'JSON-LD datePublished should be a year',
-    ).toMatch(/^\d{4}$/);
+    await expect.poll(async () => {
+      const jsonLd = await getJsonLd(this.page);
+      const genres = jsonLd['genre'];
+      return Array.isArray(genres) ? genres.length : 0;
+    }).toBeGreaterThan(0);
+
+    await expect.poll(async () => {
+      const jsonLd = await getJsonLd(this.page);
+      return String(jsonLd['datePublished'] ?? '');
+    }).toMatch(/^\d{4}$/);
   },
 );
 
 Then(
   'the JSON-LD should be of type {string}',
   async function (this: TraktWorld, schemaType: string) {
-    const jsonLdText = await this.page.$eval(
-      'script[type="application/ld+json"]',
-      (el) => el.textContent ?? '',
-    );
-    const jsonLd = JSON.parse(jsonLdText) as Record<string, unknown>;
+    await expect.poll(() =>
+      getJsonLd(this.page).then((jsonLd) => jsonLd['@type'])
+    ).toBe(schemaType);
+
+    const jsonLd = await getJsonLd(this.page);
     expect(jsonLd['@context'], 'JSON-LD @context').toBe('https://schema.org');
-    expect(jsonLd['@type'], 'JSON-LD @type').toBe(schemaType);
   },
 );
 
 Then(
   'the JSON-LD name should match the og:title',
   async function (this: TraktWorld) {
-    const ogTitle = await metaContent(this.page, 'meta[property="og:title"]');
-    const jsonLdText = await this.page.$eval(
-      'script[type="application/ld+json"]',
-      (el) => el.textContent ?? '',
-    );
-    const jsonLd = JSON.parse(jsonLdText) as Record<string, unknown>;
-    expect(String(jsonLd['name']), 'JSON-LD name should match og:title').toBe(
-      ogTitle,
-    );
+    const ogTitle =
+      (await metaLocator(this.page, 'meta[property="og:title"]').getAttribute(
+        'content',
+      )) ?? '';
+
+    await expect.poll(() =>
+      getJsonLd(this.page).then((jsonLd) => String(jsonLd['name'] ?? ''))
+    ).toBe(ogTitle);
   },
 );
