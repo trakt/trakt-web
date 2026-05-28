@@ -18,12 +18,20 @@
 
   const { filterMap } = useFilter();
 
+  const now = new Date();
+
+  // We go for a somewhat stable end date to not invalidate the query on every page visit
+  const endDate = new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1),
+  );
+
   const { periods, isLoading, hasNextPage, fetchNextPage } = $derived(
     useRecentlyWatchedList({
       type: historyType,
       slug: "me",
       limit: HISTORY_UPPER_LIMIT,
       filter: $filterMap,
+      endDate,
     }),
   );
 
@@ -31,8 +39,6 @@
     if (!$hasNextPage) return;
     fetchNextPage();
   });
-
-  const now = new Date();
 
   // FIXME: add support for prev/next/reset to this paginated variant
 </script>

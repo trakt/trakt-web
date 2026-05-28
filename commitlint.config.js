@@ -69,6 +69,7 @@ module.exports = {
         'frame',
         'gestures',
         'guards',
+        'history',
         'i18n',
         'landing',
         'layout',
