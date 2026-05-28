@@ -85,7 +85,6 @@
     }
 
     &[data-today] {
-      background: var(--color-streak-day);
       border-color: var(--color-streak-day);
       outline: var(--ni-1) solid var(--color-streak-day);
       outline-offset: var(--ni-1);
