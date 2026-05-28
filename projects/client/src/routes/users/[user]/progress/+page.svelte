@@ -8,7 +8,7 @@
   import UpNextPaginatedList from "$lib/sections/lists/progress/UpNextPaginatedList.svelte";
   import { useUpNextSorting } from "$lib/sections/lists/progress/useUpNextSorting";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   const { current } = useDiscover();
@@ -28,7 +28,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter
+  <ResponsiveNavbarStateSetter
     hasFilters
     header={{ title: m.list_title_up_next(), metaInfo: $current.text() }}
   >
@@ -40,7 +40,7 @@
         onUpdate={update}
       />
     {/snippet}
-  </NavbarStateSetter>
+  </ResponsiveNavbarStateSetter>
 
   <UpNextPaginatedList
     sortBy={$currentSort.sorting?.value}

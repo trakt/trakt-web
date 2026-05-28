@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { onMount, type Snippet } from "svelte";
-  import { useNavbarState, type NavbarMode } from "./useNavbarState";
+  import { onMount } from "svelte";
+  import type { NavbarStateSetterProps } from "./models/NavbarStateSetterProps";
+  import { useNavbarState } from "./useNavbarState";
 
   const {
     actions,
@@ -12,23 +13,7 @@
     headerActions,
     header,
     sidebar,
-  }: {
-    actions?: Snippet;
-    contextualActions?: Snippet;
-    toastActions?: Snippet | Nil;
-    mode?: NavbarMode;
-    hasFilters?: boolean;
-    showFilters?: boolean;
-    headerActions?: Snippet;
-    header?: {
-      title: string;
-      metaInfo?: string | Snippet;
-      actions?: Snippet;
-    };
-    sidebar?: {
-      mode: "default" | "fixed";
-    };
-  } = $props();
+  }: NavbarStateSetterProps = $props();
 
   const { set, globalSet, reset } = useNavbarState();
 

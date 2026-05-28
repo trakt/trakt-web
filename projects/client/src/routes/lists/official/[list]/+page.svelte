@@ -6,7 +6,7 @@
   import ListActions from "$lib/sections/lists/user/ListActions.svelte";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
   import UserListPaginatedList from "$lib/sections/lists/user/UserListPaginatedList.svelte";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import type { PageProps } from "../[list]/$types";
   import { useListSummary } from "./useListSummary";
@@ -42,7 +42,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter
+  <ResponsiveNavbarStateSetter
     hasFilters
     header={{
       title: listName,
@@ -59,7 +59,7 @@
         disabled={$isLoading}
       />
     {/snippet}
-  </NavbarStateSetter>
+  </ResponsiveNavbarStateSetter>
 
   {#if !$isLoading}
     <UserListPaginatedList

@@ -6,7 +6,7 @@
   import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
   import WatchlistPaginatedList from "$lib/sections/lists/watchlist/WatchlistPaginatedList.svelte";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
 
   const { mode, current: currentDiscoverMode } = useDiscover();
@@ -24,7 +24,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter
+  <ResponsiveNavbarStateSetter
     hasFilters
     header={{
       title: m.list_title_watchlist(),
@@ -39,7 +39,7 @@
         onUpdate={update}
       />
     {/snippet}
-  </NavbarStateSetter>
+  </ResponsiveNavbarStateSetter>
 
   <WatchlistPaginatedList
     type={$mode}
