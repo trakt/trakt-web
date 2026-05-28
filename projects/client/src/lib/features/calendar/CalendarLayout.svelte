@@ -1,11 +1,8 @@
 <script lang="ts" generics="T extends { key: string }">
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useLazyLoader } from "$lib/sections/lists/drilldown/_internal/useLazyLoader";
-  import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
-  import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
-  import CalendarDays from "./_internal/CalendarDays.svelte";
-  import CalendarHeader from "./_internal/CalendarHeader.svelte";
   import CalendarItems from "./_internal/CalendarItems.svelte";
+  import CalendarWeekItems from "./_internal/CalendarWeekItems.svelte";
   import { dateKey } from "./_internal/dateKey";
   import EmptyPeriod from "./_internal/EmptyPeriod.svelte";
   import ScrollSpy from "./_internal/ScrollSpy.svelte";
@@ -15,59 +12,23 @@
   const {
     activeDate,
     isLoading,
-    navigation: externalNavigation,
     item,
     layout = "grid",
-    maxDate,
     order = "chronological",
+    view = "day",
     periods,
     onLoadMore,
   }: CalendarLayoutProps<T> = $props();
 
   const { visibleDate } = getCalendarContext();
 
-  let activeScrollDate = $state<Date | null>(null);
-
   const allDays = $derived(periods.flatMap((p) => p.calendar));
 
   function handleScrollSpyUpdate(id: string) {
     const entry = allDays.find((d) => dateKey(d.date) === id);
     if (!entry) return;
-    activeScrollDate = entry.date;
     visibleDate.next(entry.date);
   }
-
-  function handleNavigation(action: () => void) {
-    activeScrollDate = null;
-    action();
-    document
-      .getElementById(dateKey(activeDate))
-      ?.scrollIntoView({ block: "start" });
-  }
-
-  const navigation = $derived.by(() => {
-    if (!externalNavigation) return;
-
-    return {
-      onNext: () => handleNavigation(externalNavigation.onNext),
-      onPrevious: () => handleNavigation(externalNavigation.onPrevious),
-      onReset: () => handleNavigation(externalNavigation.onReset),
-    };
-  });
-
-  const visiblePeriodCalendar = $derived.by(() => {
-    const firstPeriod = periods.at(0)?.calendar ?? [];
-    if (!activeScrollDate) return firstPeriod;
-
-    const scrollKey = dateKey(activeScrollDate);
-    const match = periods.find((p) =>
-      p.calendar.some((d) => dateKey(d.date) === scrollKey),
-    );
-
-    return match?.calendar ?? firstPeriod;
-  });
-
-  const selectedDate = $derived(activeScrollDate ?? activeDate);
 
   const loadMore = () => {
     if (isLoading) return;
@@ -81,24 +42,6 @@
 </script>
 
 <div class="calendar-layout-container" use:observeDimension>
-  {#if navigation || !isInitialLoad}
-    <div
-      class="calendar-navigation"
-      use:trackWindowScroll={"is-scrolled"}
-      use:trackElementBottom={"--calendar-nav-bottom"}
-    >
-      {#if navigation}
-        <CalendarHeader {navigation} {maxDate} activeDate={selectedDate} />
-      {/if}
-      <CalendarDays
-        calendar={visiblePeriodCalendar}
-        {navigation}
-        {maxDate}
-        activeDate={selectedDate}
-      />
-    </div>
-  {/if}
-
   {#if isInitialLoad}
     <div class="loading-wrapper">
       <LoadingIndicator />
@@ -110,13 +53,17 @@
       onUpdate={handleScrollSpyUpdate}
     >
       {#each periods as period (period.key)}
-        <CalendarItems calendar={period.calendar} {order} {item} {layout}>
-          {#snippet empty()}
-            {#if !isLoading}
-              <EmptyPeriod />
-            {/if}
-          {/snippet}
-        </CalendarItems>
+        {#if view === "week"}
+          <CalendarWeekItems calendar={period.calendar} {item} />
+        {:else}
+          <CalendarItems calendar={period.calendar} {order} {item} {layout}>
+            {#snippet empty()}
+              {#if !isLoading}
+                <EmptyPeriod />
+              {/if}
+            {/snippet}
+          </CalendarItems>
+        {/if}
       {/each}
     </ScrollSpy>
 
@@ -141,56 +88,6 @@
     margin-right: var(--layout-distance-side);
 
     flex-grow: 1;
-  }
-
-  .calendar-navigation {
-    --sticky-top: calc(
-      var(--navbar-actions-bottom, env(safe-area-inset-top, 0))
-    );
-
-    box-shadow: var(--shadow-raised);
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-s);
-
-    overflow: hidden;
-
-    max-width: var(--ni-480);
-
-    padding: var(--ni-10);
-    border-radius: var(--border-radius-m);
-
-    position: sticky;
-    top: var(--sticky-top);
-    z-index: var(--layer-overlay);
-
-    background-color: var(--color-calendar-background);
-
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: gap, top;
-
-    backdrop-filter: blur(var(--ni-8));
-
-    @include for-mobile {
-      --sticky-top: calc(env(safe-area-inset-top, 0) + var(--ni-4));
-
-      :global(.calendar-header) {
-        transition: height var(--transition-increment) ease-in-out;
-      }
-
-      &:global(.is-scrolled) {
-        gap: var(--ni-0);
-
-        :global(.calendar-header) {
-          height: var(--ni-0);
-        }
-      }
-    }
-
-    @include for-tablet-sm-and-below {
-      top: calc(var(--navbar-height) + var(--sticky-top));
-    }
   }
 
   .loading-wrapper {

@@ -2913,7 +2913,7 @@
       "description": "Label for the button that navigates to the selected calendar day.",
       "variables": {
         "day": {
-          "type": "number"
+          "type": "string"
         }
       }
     },
@@ -5409,6 +5409,72 @@
     "text_calendar_placeholder_empty_period": {
       "default": "The screen is dark. No movies. No episodes. Just you and the silence.",
       "description": "Text for the placeholder when there are no entries in a calendar period."
+    },
+    "calendar_view_day": {
+      "default": "Day",
+      "description": "Label for the Day option in the calendar view selector dropdown.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "calendar_view_week": {
+      "default": "Week",
+      "description": "Label for the Week option in the calendar view selector dropdown (month grid view).",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_calendar_view": {
+      "default": "Calendar view",
+      "description": "Accessibility label for the calendar view selector dropdown (Day / Week).",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_expand_calendar_month": {
+      "default": "Expand to month view",
+      "description": "Accessibility label for the chevron button at the bottom of the calendar navigation that expands the day strip into a month grid.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_collapse_calendar_month": {
+      "default": "Collapse to day view",
+      "description": "Accessibility label for the chevron button at the bottom of the calendar navigation when in month view; clicking collapses back to the day strip.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "calendar_day_item_count_one": {
+      "default": "{count} Item",
+      "description": "Count of media items scheduled on a given calendar day (singular), shown in the day row header.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "calendar_day_item_count_other": {
+      "default": "{count} Items",
+      "description": "Count of media items scheduled on a given calendar day (plural), shown in the day row header.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_simple_filters": {
       "default": "Switching to simple filters will reset all your current filters. Are you sure you want to proceed?",

@@ -1,13 +1,20 @@
 <script lang="ts">
   import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
+  import type { CalendarView } from "../models/CalendarView.ts";
   import CalendarControls from "./CalendarControls.svelte";
 
-  const navigationProps: WithRequired<CalendarNavigationProps, "navigation"> =
-    $props();
+  const {
+    view,
+    onToggleView,
+    ...navigationProps
+  }: WithRequired<CalendarNavigationProps, "navigation"> & {
+    view: CalendarView;
+    onToggleView: () => void;
+  } = $props();
 </script>
 
 <div class="calendar-header">
-  <CalendarControls {...navigationProps} />
+  <CalendarControls {...navigationProps} {view} {onToggleView} />
 </div>
 
 <style>
