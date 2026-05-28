@@ -302,7 +302,8 @@ Common attributes:
 
 ## Lazy Rendering on Cards
 
-Cards that render below the fold should defer rendering until visible:
+Cards that render below the fold should defer rendering until visible. The
+`whenInViewport` action takes a plain callback (no object param):
 
 ```svelte
 <script lang="ts">
@@ -310,11 +311,28 @@ Cards that render below the fold should defer rendering until visible:
   let isVisible = $state(false);
 </script>
 
-<div use:whenInViewport={{ onVisible: () => (isVisible = true) }}>
+<div use:whenInViewport={() => (isVisible = true)}>
   {#if isVisible}
     <CardContent />
   {/if}
 </div>
+```
+
+---
+
+## i18n in Components
+
+Always import the Paraglide messages namespace as `m` and call messages as
+functions. Never inline literal user-facing strings.
+
+```svelte
+<script lang="ts">
+  import * as m from '$lib/features/i18n/messages.ts';
+</script>
+
+<button aria-label={m.button_label_retry()}>
+  {m.button_text_retry()}
+</button>
 ```
 
 ---

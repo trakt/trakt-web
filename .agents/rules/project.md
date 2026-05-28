@@ -1,15 +1,16 @@
 ---
 trigger: glob
-globs: "**"
-description: "Core project overview, structure, architecture patterns, styling conventions, and tooling. Apply to all files."
-applyTo: "**"
+globs: '**'
+description: 'Core project overview, structure, architecture patterns, styling conventions, and tooling. Apply to all files.'
+applyTo: '**'
 ---
 
 # Project Guidelines
 
 ## Tech Stack
 
-SvelteKit + TypeScript app (Svelte 5, runes mode) deployed to Cloudflare Pages. Monorepo using Deno workspaces with the app at `projects/client/`.
+SvelteKit + TypeScript app (Svelte 5, runes mode) deployed to Cloudflare Pages.
+Monorepo using Deno workspaces with the app at `projects/client/`.
 
 ## Project Structure
 
@@ -34,50 +35,91 @@ projects/client/src/
 
 ## Commit Standards
 
-- **Follow Conventional Commits**: All commits must adhere to the [Conventional Commits](https://www.conventionalcommits.org/) specification.
-  - Use types: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, `perf:`, etc.
+- **Follow Conventional Commits**: All commits must adhere to the
+  [Conventional Commits](https://www.conventionalcommits.org/) specification.
+  - Use types: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`,
+    `perf:`, etc.
   - Example: `feat: add user profile component`
   - Example: `fix: correct date formatting in calendar view`
 
 ## Architecture Patterns
 
 ### Pages are thin shells
-Route pages compose features and sections. Business logic lives in `lib/features/`, not in route files. Layouts wrap children with providers (e.g., `CalendarProvider`).
+
+Route pages compose features and sections. Business logic lives in
+`lib/features/`, not in route files. Layouts wrap children with providers (e.g.,
+`CalendarProvider`).
 
 ### Features are self-contained
-Each feature directory in `lib/features/` owns its state, components, and queries. Features expose a public API and keep internals in `_internal/` subdirectories.
+
+Each feature directory in `lib/features/` owns its state, components, and
+queries. Features expose a public API and keep internals in `_internal/`
+subdirectories.
 
 ### Components use data attributes for variants
-Components use `data-variant`, `data-style`, `data-color` attributes for styling variants rather than prop-driven class concatenation.
+
+Components use `data-variant`, `data-style`, `data-color` attributes for styling
+variants rather than prop-driven class concatenation.
 
 ### Snippets for flexible content
-Use Svelte 5 `{#snippet}` for reusable template fragments and component slot alternatives.
+
+Use Svelte 5 `{#snippet}` for reusable template fragments and component slot
+alternatives.
 
 ### Guards for conditional rendering
-Use `RenderFor`, `RenderForFeature`, `RenderForAudience` components instead of inline `{#if}` blocks for auth/feature/audience gating.
+
+Use `RenderFor`, `RenderForFeature`, `RenderForAudience` components instead of
+inline `{#if}` blocks for auth/feature/audience gating.
 
 ### Stores use RxJS + localStorage
-State management uses `BehaviorSubject` from RxJS, often backed by `localStorage` for persistence. Prefer `$derived()` for computed values over additional stores.
+
+State management uses `BehaviorSubject` from RxJS, often backed by
+`localStorage` for persistence. Prefer `$derived()` for computed values over
+additional stores.
 
 ### API requests use mappers
-`lib/requests/` contains query definitions via `defineQuery()` and pure mapper functions that transform API responses to domain models. Zod validates at the boundary.
+
+`lib/requests/` contains query definitions via `defineQuery()` and pure mapper
+functions that transform API responses to domain models. Zod validates at the
+boundary.
 
 ### i18n via Paraglide
-Internationalization uses Paraglide JS (Inlang). Messages are type-safe functions: `m.page_title_home()`. Source definitions live in `i18n/meta/`, generated output in `lib/paraglide/`. Never edit generated files.
+
+Internationalization uses Paraglide JS (Inlang). Messages are type-safe
+functions: `m.page_title_home()`. Source definitions live in `i18n/meta/`,
+generated output in `lib/paraglide/`. Never edit generated files.
 
 ## Styling
 
 - SCSS with scoped Svelte `<style lang="scss">` blocks.
-- All values via CSS custom properties (`--ni-*`, `--color-*`, `--gap-*`, `--border-radius-*`).
-- Responsive mixins: `for-mobile`, `for-tablet-sm`, `for-desktop`, `for-mouse`, `for-touch`.
+- All values via CSS custom properties (`--ni-*`, `--color-*`, `--gap-*`,
+  `--border-radius-*`).
+- Responsive mixins: `for-mobile`, `for-tablet-sm`, `for-desktop`, `for-mouse`,
+  `for-touch`.
 - Import mixins as: `@use "$style/scss/mixins/index" as *;`
-- Full light/dark theme support. Never use raw hex values — use semantic CSS variables.
+- Full light/dark theme support. Never use raw hex values — use semantic CSS
+  variables.
 - Use kebab-case for CSS class names.
 - Component-scoped styles preferred.
+
+## Path Aliases
+
+| Alias     | Resolves to  | Use for                                 |
+| --------- | ------------ | --------------------------------------- |
+| `$lib`    | `src/lib`    | All app source imports                  |
+| `$style`  | `src/style`  | Global SCSS mixins, tokens              |
+| `$mocks`  | `src/mocks`  | MSW handlers + mock response/data files |
+| `$test`   | `test`       | Test beds, test utilities               |
+| `$worker` | `src/worker` | Cloudflare worker code                  |
+| `$e2e`    | `e2e`        | Playwright/Cucumber e2e helpers         |
+
+Always use aliases over deep relative paths (`../../../`).
 
 ## Tooling
 
 - **Formatter**: Use `deno fmt`, not prettier.
-- **Linter**: ESLint with TypeScript + Svelte plugins. Config at `eslint.config.js`.
-- **Build**: Vite + SvelteKit adapter-cloudflare. Paraglide generates i18n before build.
+- **Linter**: ESLint with TypeScript + Svelte plugins. Config at
+  `eslint.config.js`.
+- **Build**: Vite + SvelteKit adapter-cloudflare. Paraglide generates i18n
+  before build.
 - **Dev**: `deno task client:dev` starts the dev server.
