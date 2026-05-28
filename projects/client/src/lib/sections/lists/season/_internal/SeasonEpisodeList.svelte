@@ -50,7 +50,7 @@
 </script>
 
 <SectionList
-  id={`season-episode-list-${show.slug}`}
+  id="season-episode-list"
   items={episodes}
   {title}
   {subtitle}

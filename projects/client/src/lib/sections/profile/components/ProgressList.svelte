@@ -34,7 +34,7 @@
     <DrillableMediaList
       --height-override-card="var(--height-portrait-card-sm)"
       --height-override-list="var(--height-poster-list-sm)"
-      id="progress-list-{$current.value}"
+      id="progress-list"
       source={{ id: "progress", type: $current.value }}
       title={m.list_title_progress()}
       drilldownLabel={m.button_label_view_all_progress()}

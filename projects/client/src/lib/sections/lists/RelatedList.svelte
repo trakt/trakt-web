@@ -16,7 +16,7 @@
 </script>
 
 <MediaList
-  id={`related-list-${type}-${slug}`}
+  id={`related-list-${type}`}
   useList={(params) => useRelatedList({ ...params, slug })}
   {type}
   {title}

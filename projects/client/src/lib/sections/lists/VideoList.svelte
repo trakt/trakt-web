@@ -2,6 +2,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import {
     summaryDrawerNavigation,
@@ -15,9 +16,10 @@
   type VideoListProps = {
     slug: string;
     videos: MediaVideo[];
+    type: MediaType;
   };
 
-  const { slug, videos }: VideoListProps = $props();
+  const { slug, videos, type }: VideoListProps = $props();
 
   const { record, types, active } = $derived(useVideoTypes(videos));
   const items = $derived(record[$active] ?? []);
@@ -28,7 +30,7 @@
 
 {#if videos.length > 0}
   <SectionList
-    id={`video-list-${slug}`}
+    id={`video-list-${type}`}
     {items}
     title={m.list_title_extras()}
     drilldown={{

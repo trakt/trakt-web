@@ -78,7 +78,7 @@
     {#snippet contextualContent()}
       <RenderFor audience="all" device={["desktop"]}>
         <WhereToWatchList type="show" {media} {streamOn} variant="inline" />
-        <Sentiment {sentiment} slug={media.slug} variant="inline" />
+        <Sentiment {sentiment} type={media.type} variant="inline" />
       </RenderFor>
     {/snippet}
   </MediaSummary>
@@ -86,19 +86,14 @@
 
 <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="show" {media} {streamOn} />
-  <Sentiment {sentiment} slug={media.slug} />
+  <Sentiment {sentiment} type={media.type} />
 </RenderFor>
 
-<CastList
-  title={m.list_title_actors()}
-  cast={crew.cast}
-  slug={media.slug}
-  type={media.type}
-/>
+<CastList title={m.list_title_actors()} cast={crew.cast} type={media.type} />
 
 <Comments {media} type="show" />
 
-<VideoList slug={media.slug} {videos} />
+<VideoList slug={media.slug} {videos} type="show" />
 
 <SeasonList show={media} {seasons} {currentSeason} />
 
