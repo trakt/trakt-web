@@ -16,6 +16,7 @@
   import { verticalDrag } from "./_internal/verticalDrag";
 
   const drawerClass = "trakt-drawer";
+  const HEADER_OVERLAY_FADE_DISTANCE = 16;
 
   type DrawerProps = {
     onClose: () => void;
@@ -29,6 +30,7 @@
     classList?: string;
     variant?: "default" | "vip";
     drilldown?: ListDrilldownLinkProps;
+    headerVariant?: "default" | "overlay";
   } & ChildrenProps;
 
   const {
@@ -44,6 +46,7 @@
     classList = "",
     variant = "default",
     drilldown,
+    headerVariant = "default",
   }: DrawerProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -58,6 +61,24 @@
   });
 
   const isOpening = writable(false);
+  let headerOverlayOpacity = $state(0);
+
+  const updateHeaderOverlay = (event: Event) => {
+    if (headerVariant !== "overlay") {
+      return;
+    }
+
+    const target = event.currentTarget;
+    if (!(target instanceof HTMLElement)) {
+      return;
+    }
+
+    headerOverlayOpacity = Math.min(
+      target.scrollTop / HEADER_OVERLAY_FADE_DISTANCE,
+      1,
+    );
+  };
+
   onMount(() => {
     if ($isOpening) {
       return;
@@ -70,6 +91,8 @@
 <div
   class={drawerClass}
   data-size={size}
+  data-header-variant={headerVariant}
+  style:--drawer-header-overlay-opacity={headerOverlayOpacity}
   transition:slide={{ duration: 150, axis: slideAxis }}
   use:portal
   use:trap
@@ -131,14 +154,16 @@
         label={m.button_label_close()}
         style="ghost"
         navigationType={DpadNavigationType.Item}
-        --color-foreground-default="var(--color-text-secondary)"
+        --color-foreground-default={headerVariant === "overlay"
+          ? "var(--color-text-primary)"
+          : "var(--color-text-secondary)"}
       >
         <CloseIcon />
       </ActionButton>
     </RenderFor>
   </div>
 
-  <div class="trakt-drawer-content">
+  <div class="trakt-drawer-content" onscroll={updateHeaderOverlay}>
     {@render children()}
   </div>
 </div>
@@ -151,6 +176,10 @@
     --drawer-padding: var(--ni-16);
     --drawer-gap: var(--gap-m);
     --drawer-border-radius: var(--border-radius-xxl);
+    --drawer-header-overlay-height: calc(
+      var(--drawer-padding) * 2 + var(--ni-48)
+    );
+    --drawer-header-overlay-opacity: 0;
 
     touch-action: none;
 
@@ -183,12 +212,105 @@
 
     backdrop-filter: blur(var(--ni-12));
 
+    &[data-header-variant="overlay"] {
+      z-index: calc(var(--layer-menu) + 1);
+      gap: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+
+      .trakt-drawer-header {
+        position: absolute;
+        z-index: var(--layer-top);
+        top: 0;
+        left: 0;
+        right: 0;
+        align-items: flex-start;
+
+        box-sizing: border-box;
+        min-height: var(--drawer-header-overlay-height);
+        padding-top: var(--drawer-padding);
+        padding-bottom: var(--drawer-padding);
+        pointer-events: none;
+
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+          opacity: var(--drawer-header-overlay-opacity);
+
+          background: color-mix(
+            in srgb,
+            var(--color-drawer-background) 75%,
+            transparent
+          );
+          backdrop-filter: blur(var(--ni-10));
+          mask-image: linear-gradient(
+            to bottom,
+            black 0%,
+            color-mix(in srgb, black 99%, transparent) 10%,
+            color-mix(in srgb, black 95%, transparent) 20%,
+            color-mix(in srgb, black 89%, transparent) 30%,
+            color-mix(in srgb, black 81%, transparent) 40%,
+            color-mix(in srgb, black 71%, transparent) 50%,
+            color-mix(in srgb, black 59%, transparent) 60%,
+            color-mix(in srgb, black 45%, transparent) 70%,
+            color-mix(in srgb, black 31%, transparent) 80%,
+            color-mix(in srgb, black 16%, transparent) 90%,
+            transparent 100%
+          );
+        }
+
+        > * {
+          position: relative;
+          z-index: 1;
+          pointer-events: auto;
+        }
+
+        .trakt-drawer-title-container {
+          align-items: flex-start;
+        }
+
+        :global(.trakt-action-button) {
+          position: relative;
+          z-index: 1;
+          pointer-events: auto;
+        }
+      }
+
+      .trakt-drawer-content {
+        padding-top: calc(var(--drawer-header-overlay-height) + var(--gap-xs));
+        padding-bottom: 0;
+
+        &::after {
+          content: "";
+          flex: 0 0 calc(
+            var(--drawer-padding) + var(--gap-m) +
+              env(safe-area-inset-bottom, 0)
+          );
+        }
+      }
+    }
+
     &[data-size="large"] {
       --drawer-size: var(--ni-480);
     }
 
     &:has(.trakt-drawer-drag-handle) {
       padding-top: 0;
+
+      &[data-header-variant="overlay"] {
+        --drawer-drag-handle-height: calc(var(--ni-18) * 2 + var(--ni-4));
+
+        .trakt-drawer-drag-handle {
+          margin-bottom: 0;
+        }
+
+        .trakt-drawer-header {
+          top: var(--drawer-drag-handle-height);
+        }
+      }
     }
 
     @include for-mobile {
@@ -275,8 +397,11 @@
   .trakt-drawer-content {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: var(--gap-m);
 
+    box-sizing: border-box;
+    min-height: 0;
     overflow-y: auto;
     scrollbar-gutter: stable;
     padding-bottom: var(--ni-8);

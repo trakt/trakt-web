@@ -314,6 +314,14 @@
       "default": "Search shows...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for."
     },
+    "input_placeholder_search_credit_members": {
+      "default": "Search name, character, or job...",
+      "description": "Placeholder text for the people drawer search input. This should be short and indicate users can search locally by person name, character, or job."
+    },
+    "input_label_search_credit_members": {
+      "default": "Search people",
+      "description": "Aria-label for the people drawer search input."
+    },
     "button_text_join_trakt": {
       "default": "Join Trakt",
       "description": "Text for the Trakt login button. This should be a short and concise message that indicates what users can do."
@@ -1139,6 +1147,22 @@
     "list_title_actors": {
       "default": "Actors",
       "description": "Title for lists containing actors of a movie, show, or episode. This title should be as short and concise as possible."
+    },
+    "drawer_title_people": {
+      "default": "People",
+      "description": "Title for the drawer containing people related to a movie, show, or episode. This title should be as short and concise as possible."
+    },
+    "drawer_meta_info_cast": {
+      "default": "Cast",
+      "description": "Subtitle for the people drawer when cast members are selected. This should be as short and concise as possible."
+    },
+    "drawer_meta_info_crew": {
+      "default": "Crew",
+      "description": "Subtitle for the people drawer when crew members are selected. This should be as short and concise as possible."
+    },
+    "drawer_meta_info_cast_and_crew": {
+      "default": "Cast & Crew",
+      "description": "Subtitle for the people drawer when searching across cast and crew. This should be as short and concise as possible."
     },
     "button_label_view_all_trending_movies": {
       "default": "View all trending movies",

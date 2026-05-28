@@ -82,7 +82,7 @@
 {/if}
 
 {#if drawer === SummaryDrawers.Cast}
-  <CastDrawer cast={details.crew.cast} type={details.type} onClose={close} />
+  <CastDrawer crew={details.crew} type={details.type} onClose={close} />
 {/if}
 
 {#if drawer === SummaryDrawers.Videos && videos}

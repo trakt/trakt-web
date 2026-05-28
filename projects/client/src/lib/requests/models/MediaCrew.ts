@@ -16,6 +16,7 @@ export type CrewMember = z.infer<typeof CrewMemberSchema>;
 
 export const CastMemberSchema = baseSchema.extend({
   characterName: z.string(),
+  characters: z.array(z.string()).optional(),
   headshot: z.object({
     url: ImageUrlsSchema,
   }),
