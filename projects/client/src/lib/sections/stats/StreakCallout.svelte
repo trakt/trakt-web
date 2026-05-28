@@ -28,86 +28,18 @@
     action: editModeAction,
   } = $derived(section(id));
 
-  const { streakCount, streakState, isLoading } = $derived(
-    useStreak({ mode: $mode }),
-  );
+  const { streakCount, isLoading } = $derived(useStreak({ mode: $mode }));
   const { heatmap } = $derived(
     useActivityHeatmap({ mode: $mode, period: "week" }),
   );
   const { buildDrawerLink } = dashboardDrawerNavigation();
   const drilldownLink = $derived(buildDrawerLink(DashboardDrawers.Streak));
 
-  type Tier = {
-    threshold: number;
-    message: string;
-    exactMessage: string;
-  };
-
-  const tiers: ReadonlyArray<Tier> = [
-    {
-      threshold: 365,
-      message: m.text_stats_streak_every_single_day(),
-      exactMessage: m.text_stats_streak_exact_year(),
-    },
-    {
-      threshold: 180,
-      message: m.text_stats_streak_every_single_day(),
-      exactMessage: m.text_stats_streak_exact_half_year(),
-    },
-    {
-      threshold: 90,
-      message: m.text_stats_streak_others_dream(),
-      exactMessage: m.text_stats_streak_exact_90(),
-    },
-    {
-      threshold: 60,
-      message: m.text_stats_streak_lifestyle(),
-      exactMessage: m.text_stats_streak_exact_60(),
-    },
-    {
-      threshold: 30,
-      message: m.text_stats_streak_no_days_off(),
-      exactMessage: m.text_stats_streak_exact_month(),
-    },
-    {
-      threshold: 14,
-      message: m.text_stats_streak_locked_in(),
-      exactMessage: m.text_stats_streak_exact_two_weeks(),
-    },
-    {
-      threshold: 7,
-      message: m.text_stats_streak_keep_fire(),
-      exactMessage: m.text_stats_streak_exact_week(),
-    },
-    {
-      threshold: 3,
-      message: m.text_stats_streak_habit_forming(),
-      exactMessage: m.text_stats_streak_exact_three_days(),
-    },
-    {
-      threshold: 1,
-      message: m.text_stats_streak_keep_going(),
-      exactMessage: m.text_stats_streak_exact_it_begins(),
-    },
-  ];
-
-  const tierMessage = $derived.by(() => {
-    const count = $streakCount;
-    const tier = tiers.find(({ threshold }) => count >= threshold);
-
-    if (!tier) return m.text_stats_streak_keep_going();
-
-    const { threshold, message, exactMessage } = tier;
-    return count === threshold && exactMessage ? exactMessage : message;
-  });
-
   const streakLabel = $derived(
     $streakCount === 1
       ? m.text_stats_day_count({ count: String($streakCount) })
       : m.text_stats_days_count({ count: String($streakCount) }),
   );
-
-  const isAtRisk = $derived($streakState === "at_risk");
 
   const { isEnabled } = useFeatureFlag();
   const isEditModeEnabled = $derived(isEnabled(FeatureFlag.EditMode));
@@ -150,20 +82,6 @@
                   <span class="trakt-streak-count bold">{streakLabel}</span>
                   {m.text_stats_watching_streak()}
                 </p>
-                <p class="secondary">
-                  {#if isAtRisk || $streakCount === 0}
-                    <span class="secondary bold">
-                      {m.text_stats_watch_today()}
-                    </span>
-                    {#if $streakCount > 0}
-                      {m.text_stats_keep_streak_alive()}
-                    {:else}
-                      {m.text_stats_start_streak()}
-                    {/if}
-                  {:else}
-                    {tierMessage}
-                  {/if}
-                </p>
               </div>
             </div>
 
@@ -187,7 +105,7 @@
 
   trakt-streak-callout,
   .trakt-streak-skeleton {
-    height: var(--ni-80);
+    height: var(--ni-74);
   }
 
   trakt-streak-callout {
@@ -232,7 +150,8 @@
   .trakt-streak-callout {
     background: var(--color-streak-surface);
 
-    padding: var(--ni-18);
+    padding: var(--ni-12);
+    padding-right: var(--ni-18);
 
     display: flex;
     align-items: center;
@@ -240,12 +159,6 @@
 
     border: var(--ni-1) solid var(--color-streak-border);
     border-radius: var(--border-radius-l);
-
-    @include for-tablet-sm-and-below {
-      gap: var(--gap-m);
-      padding: var(--ni-12);
-      padding-right: var(--ni-18);
-    }
   }
 
   .trakt-streak-left {
@@ -264,11 +177,7 @@
     flex: 1;
 
     @include for-tablet-sm-and-below {
-      flex-direction: column;
-      flex: none;
-      align-items: flex-end;
-      align-self: stretch;
-      gap: 0;
+      gap: var(--gap-s);
     }
   }
 
