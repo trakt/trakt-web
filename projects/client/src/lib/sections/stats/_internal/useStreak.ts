@@ -4,16 +4,12 @@ import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { map, shareReplay } from 'rxjs';
 import { filterWatchedDates } from './filterWatchedDates.ts';
 
-export type StreakState = 'active' | 'at_risk' | 'none';
-
 type StreakResult = {
   readonly count: number;
-  readonly state: StreakState;
 };
 
 const emptyStreak: StreakResult = {
   count: 0,
-  state: 'none',
 };
 
 export function computeStreak(
@@ -69,7 +65,6 @@ export function computeStreak(
 
   return {
     count: streakCount,
-    state: hasActivityToday ? 'active' : 'at_risk',
   };
 }
 
@@ -91,7 +86,6 @@ export function useStreak({ mode }: { mode: DiscoverMode }) {
 
   return {
     streakCount: streak.pipe(map(($s) => $s?.count ?? 0)),
-    streakState: streak.pipe(map(($s) => $s?.state ?? 'none' as StreakState)),
     isLoading: streak.pipe(map(($s) => $s === null)),
   };
 }
