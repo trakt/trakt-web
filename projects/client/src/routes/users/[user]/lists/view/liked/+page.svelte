@@ -7,7 +7,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import PersonalListsPaginated from "$lib/sections/lists/user/PersonalListsPaginated.svelte";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
@@ -30,7 +30,7 @@
 
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter
+  <ResponsiveNavbarStateSetter
     hasFilters
     header={{ title: m.list_title_liked_lists(), metaInfo: $current.text() }}
   />

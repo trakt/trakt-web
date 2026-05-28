@@ -7,7 +7,7 @@
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
   import UserListPaginatedList from "$lib/sections/lists/user/UserListPaginatedList.svelte";
   import { useUserListSummary } from "$lib/sections/lists/user/useUserListSummary.ts";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import type { PageProps } from "./$types";
 
@@ -29,7 +29,7 @@
   );
 </script>
 
-{#snippet actions()}
+{#snippet listActions()}
   {#if $list}
     <ListActions list={$list} />
   {/if}
@@ -41,12 +41,12 @@
   title={listName}
   hasDynamicContent={true}
 >
-  <NavbarStateSetter
+  <ResponsiveNavbarStateSetter
     hasFilters
     header={{
       title: listName,
       metaInfo: $currentDiscoverMode.text(),
-      actions,
+      actions: listActions,
     }}
   >
     {#snippet headerActions()}
@@ -58,7 +58,7 @@
         disabled={$isLoading}
       />
     {/snippet}
-  </NavbarStateSetter>
+  </ResponsiveNavbarStateSetter>
 
   <TraktPageCoverSetter />
 

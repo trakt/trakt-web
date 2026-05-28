@@ -7,7 +7,7 @@
   import { useActivityList } from "$lib/sections/lists/activity/_internal/useActivityList";
 
   import ActivityPaginatedList from "$lib/sections/lists/activity/ActivityPaginatedList.svelte";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   const { mode, current } = useDiscover();
@@ -27,7 +27,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter
+  <ResponsiveNavbarStateSetter
     hasFilters
     header={{
       title: m.list_title_social_activity(),

@@ -6,7 +6,7 @@
   import FavoritesListPaginated from "$lib/sections/lists/favorites/FavoritesListPaginated.svelte";
   import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import type { PageProps } from "./$types";
 
@@ -26,7 +26,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter
+  <ResponsiveNavbarStateSetter
     header={{
       title: m.list_title_favorites(),
       metaInfo: $currentDiscoverMode.text(),
@@ -40,7 +40,7 @@
         onUpdate={update}
       />
     {/snippet}
-  </NavbarStateSetter>
+  </ResponsiveNavbarStateSetter>
 
   <FavoritesListPaginated
     slug={params.slug}

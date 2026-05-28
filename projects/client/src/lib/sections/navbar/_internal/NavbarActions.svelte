@@ -20,6 +20,7 @@
 <div
   class="trakt-navbar-actions"
   class:is-hidden={$state.mode === "minimal" && !$isEditMode}
+  class:has-actions={Boolean($state.actions)}
   use:trackElementBottom={"--navbar-actions-bottom"}
   use:trackWindowScroll={"trakt-navbar-actions-scroll"}
 >
@@ -27,13 +28,15 @@
     <NavbarHeader />
   </div>
 
-  <div class="trakt-navbar-actions-center">
-    {#if $isEditMode}
-      <EditModeBar />
-    {:else}
-      {@render $state.actions?.()}
-    {/if}
-  </div>
+  {#if $state.actions || $isEditMode}
+    <div class="trakt-navbar-actions-center">
+      {#if $isEditMode}
+        <EditModeBar />
+      {:else}
+        {@render $state.actions?.()}
+      {/if}
+    </div>
+  {/if}
 
   <div class="trakt-navbar-actions-right">
     <RenderFor audience="authenticated">
@@ -164,5 +167,16 @@
     display: flex;
     align-items: center;
     gap: var(--gap-s);
+  }
+
+  .trakt-navbar-actions.has-actions {
+    .trakt-navbar-actions-left {
+      flex: 1;
+    }
+
+    .trakt-navbar-actions-right {
+      flex: 1;
+      justify-content: flex-end;
+    }
   }
 </style>

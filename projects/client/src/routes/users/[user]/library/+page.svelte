@@ -7,7 +7,7 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import LibraryListPaginated from "$lib/sections/lists/library/LibraryListPaginated.svelte";
   import type { Library } from "$lib/sections/lists/library/models/Library";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
@@ -31,7 +31,7 @@
     image={DEFAULT_SHARE_MOVIE_COVER}
     title={m.page_title_library()}
   >
-    <NavbarStateSetter
+    <ResponsiveNavbarStateSetter
       header={{ title: m.list_title_library(), metaInfo: $current.text() }}
     />
 

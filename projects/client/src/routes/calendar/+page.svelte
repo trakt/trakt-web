@@ -4,7 +4,7 @@
   import * as m from "$lib/features/i18n/messages";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
 
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
@@ -18,7 +18,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter
+  <ResponsiveNavbarStateSetter
     hasFilters
     header={{ title: m.header_calendar(), metaInfo: $current.text() }}
   />
