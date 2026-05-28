@@ -274,3 +274,31 @@ Then(
     ).toBe(ogTitle);
   },
 );
+
+const metaSelectors = [
+  'meta[property="og:title"]',
+  'meta[property="og:description"]',
+  'meta[property="og:type"]',
+  'meta[property="og:image"]',
+  'meta[property="og:url"]',
+  'meta[name="description"]',
+  'meta[name="robots"]',
+  'meta[name="twitter:title"]',
+  'meta[name="twitter:description"]',
+  'meta[name="twitter:image"]',
+  'meta[name="twitter:card"]',
+  'link[rel="canonical"]',
+];
+
+Then(
+  'each meta tag should have exactly one instance',
+  async function (this: TraktWorld) {
+    for (const selector of metaSelectors) {
+      await expect
+        .poll(() => this.page.locator(selector).count(), {
+          message: `${selector} should have exactly one instance`,
+        })
+        .toBe(1);
+    }
+  },
+);
