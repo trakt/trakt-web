@@ -1036,7 +1036,7 @@
   "text_stats_time_morning": "Rano",
   "text_stats_today": "Dzisiaj",
   "text_stats_was_last_week": "w ubiegłym tygodniu był {day}",
-  "text_stats_watching_streak": "seria oglądania",
+  "text_stats_watching_streak": "seria",
   "text_stats_weeks_ago": "{count} tyg. temu",
   "text_stats_weeks_short": "{count} tyg",
   "text_stream": "Stream",

@@ -1036,7 +1036,7 @@
   "text_stats_time_morning": "Mañana",
   "text_stats_today": "Hoy",
   "text_stats_was_last_week": "fue {day} la semana pasada",
-  "text_stats_watching_streak": "racha de visualización",
+  "text_stats_watching_streak": "racha",
   "text_stats_weeks_ago": "Hace {count} sem.",
   "text_stats_weeks_short": "{count}s",
   "text_stream": "Streaming",

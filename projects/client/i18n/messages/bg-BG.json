@@ -1036,7 +1036,7 @@
   "text_stats_time_morning": "Сутрин",
   "text_stats_today": "Днес",
   "text_stats_was_last_week": "беше {day} миналата седмица",
-  "text_stats_watching_streak": "поредица от гледания",
+  "text_stats_watching_streak": "поредица",
   "text_stats_weeks_ago": "Преди {count} седмици",
   "text_stats_weeks_short": "{count}с",
   "text_stream": "Стрийм",

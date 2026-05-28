@@ -1036,7 +1036,7 @@
   "text_stats_time_morning": "Matin",
   "text_stats_today": "Aujourd'hui",
   "text_stats_was_last_week": "était {day} la semaine dernière",
-  "text_stats_watching_streak": "série de visionnage",
+  "text_stats_watching_streak": "série",
   "text_stats_weeks_ago": "Il y a {count} sem.",
   "text_stats_weeks_short": "{count} sem.",
   "text_stream": "Diffuser",

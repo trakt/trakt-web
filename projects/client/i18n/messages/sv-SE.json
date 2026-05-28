@@ -1036,7 +1036,7 @@
   "text_stats_time_morning": "Morgon",
   "text_stats_today": "Idag",
   "text_stats_was_last_week": "var {day} förra veckan",
-  "text_stats_watching_streak": "tittarstreak",
+  "text_stats_watching_streak": "svit",
   "text_stats_weeks_ago": "{count}v sedan",
   "text_stats_weeks_short": "{count}v",
   "text_stream": "Streama",

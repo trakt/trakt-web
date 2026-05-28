@@ -1036,7 +1036,7 @@
   "text_stats_time_morning": "Πρωί",
   "text_stats_today": "Σήμερα",
   "text_stats_was_last_week": "ήταν {day} την περασμένη εβδομάδα",
-  "text_stats_watching_streak": "σερί παρακολούθησης",
+  "text_stats_watching_streak": "σερί",
   "text_stats_weeks_ago": "πριν από {count} εβδ.",
   "text_stats_weeks_short": "{count}εβδ.",
   "text_stream": "Ροή",
