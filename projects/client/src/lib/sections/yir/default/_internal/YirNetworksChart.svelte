@@ -1,34 +1,14 @@
 <script lang="ts">
-  import BubbleChart from "$lib/components/charts/BubbleChart.svelte";
-  import type { YirCompany } from "$lib/requests/models/YirDetail";
   import YirTooltip from "../../_internal/YirTooltip.svelte";
+  import YirCompaniesBubbleChart from "../../_internal/YirCompaniesBubbleChart.svelte";
+  import type { YirCompany } from "$lib/requests/models/YirDetail.ts";
 
-  const {
-    companies,
-    type = "shows",
-  }: {
+  type YirNetworksChartProps = {
     companies: YirCompany[];
     type?: "shows" | "movies";
-  } = $props();
+  };
 
-  const fallbackColor = "#333";
-  const blackPattern = /^#0{3}(?:0{3})?$/i;
-
-  function colorFor(company: YirCompany): string {
-    const raw = (company.color ?? "").toLowerCase();
-    if (!raw || blackPattern.test(raw)) return fallbackColor;
-    return company.color ?? fallbackColor;
-  }
-
-  const items = $derived(
-    companies.map((c) => ({
-      id: c.id,
-      label: c.name,
-      value: c.count,
-      imageUrl: c.imageUrl,
-      color: colorFor(c),
-    })),
-  );
+  const { companies, type = "shows" }: YirNetworksChartProps = $props();
 
   function itemLabelFor(count: number): string {
     if (type === "movies") return count === 1 ? "movie" : "movies";
@@ -37,14 +17,14 @@
 </script>
 
 <div class="yir-networks-chart">
-  <BubbleChart {items}>
-    {#snippet tooltip({ item })}
+  <YirCompaniesBubbleChart {companies}>
+    {#snippet tooltip({ company })}
       <YirTooltip
-        main={item.label}
-        sub="{item.value} {itemLabelFor(item.value)}"
+        main={company.name}
+        sub="{company.count} {itemLabelFor(company.count)}"
       />
     {/snippet}
-  </BubbleChart>
+  </YirCompaniesBubbleChart>
 </div>
 
 <style lang="scss">

@@ -231,7 +231,7 @@ export function mapToYirDetail(response: RawYirResponse): YirDetail {
       ),
     },
     networks: mapCompanies(response.networks ?? []),
-    productionCompanies: mapCompanies(response.production_companies ?? []),
+    studios: mapCompanies(response.production_companies ?? []),
     topRated: {
       shows: mapTopRatedShows(response.top_rated?.shows ?? []),
       movies: mapTopRatedMovies(response.top_rated?.movies ?? []),

@@ -4705,6 +4705,30 @@
       "default": "Time Watched",
       "description": "Stat label under the time-watched duration on the 2024 Year in Review most-watched cards."
     },
+    "yir_2024_most_watched_networks": {
+      "default": "Most watched networks",
+      "description": "Section heading above the networks bubble chart on the 2024 Year in Review template."
+    },
+    "yir_2024_most_watched_studios": {
+      "default": "Most watched studios",
+      "description": "Section heading above the studios bubble chart on the 2024 Year in Review template."
+    },
+    "yir_2024_companies_most_watched": {
+      "default": "Most Watched",
+      "description": "Row label above the user's top-watched network/studio name on the 2024 Year in Review companies section."
+    },
+    "yir_2024_companies_least_watched": {
+      "default": "Least Watched",
+      "description": "Row label above the user's least-watched network/studio name on the 2024 Year in Review companies section."
+    },
+    "yir_2024_network_count": {
+      "default": "Network Count",
+      "description": "Row label for the total number of distinct networks watched on the 2024 Year in Review networks section."
+    },
+    "yir_2024_studio_count": {
+      "default": "Studio Count",
+      "description": "Row label for the total number of distinct studios watched on the 2024 Year in Review studios section."
+    },
     "yir_2024_stats_intro_shows": {
       "default": "In {year}, you watched",
       "description": "Lead-in line above the big '{hours} hours of {count} Shows' headline on the 2024 Year in Review TV stats section.",

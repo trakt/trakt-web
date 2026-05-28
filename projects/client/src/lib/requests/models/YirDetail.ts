@@ -101,7 +101,7 @@ export const YirDetailSchema = z.object({
     movies: YirGenresGroupSchema,
   }),
   networks: YirCompanySchema.array(),
-  productionCompanies: YirCompanySchema.array(),
+  studios: YirCompanySchema.array(),
   topRated: z.object({
     shows: YirTopRatedItemSchema.array(),
     movies: YirTopRatedItemSchema.array(),
