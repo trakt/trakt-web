@@ -5239,6 +5239,46 @@
       "default": "Cover image has been cleared.",
       "description": "Text shown when a user has removed a profile cover image."
     },
+    "text_info_follow_request": {
+      "default": "Follow request has been sent.",
+      "description": "Text shown when a follow request has been sent to another user."
+    },
+    "text_info_following": {
+      "default": "You are now following {username}.",
+      "description": "Text shown when the user starts following another user.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "text_info_not_following": {
+      "default": "You are no longer following {username}.",
+      "description": "Text shown when the user stops following another user.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "text_info_blocked": {
+      "default": "{username} has been blocked.",
+      "description": "Text shown when the user blocks another user.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "text_info_unblocked": {
+      "default": "{username} has been unblocked.",
+      "description": "Text shown when the user unblocks another user.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
     "text_cta_liked_lists": {
       "default": "Discover what others love. Explore and save lists from the community.",
       "description": "Call to action text shown to encourage users to explore and save lists from the community."
