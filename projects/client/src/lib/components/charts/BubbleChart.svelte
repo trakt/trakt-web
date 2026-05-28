@@ -28,10 +28,17 @@
   const filterId = `bubble-chart-whiteimage-${crypto.randomUUID()}`;
 
   const minContentRadius = useVarToPixels("var(--min-radius-bubble-chart)");
-  const observedHeight = useVarToPixels("var(--height-bubble-chart)");
 
-  const { observedDimension: observedWidth, observeDimension } =
+  // Width and height are both read from the container element so consumers
+  // can size the chart however they like (CSS var token, fixed px, percent
+  // of parent, etc.) without needing a global CSS variable lookup. Using
+  // `useVarToPixels` for height previously meant any local override of
+  // `--height-bubble-chart` was ignored, since that helper resolves vars
+  // against `document.body`, not the chart container.
+  const { observedDimension: observedWidth, observeDimension: observeWidth } =
     useDimensionObserver("width");
+  const { observedDimension: observedHeight, observeDimension: observeHeight } =
+    useDimensionObserver("height");
 
   let hovered = $state<PackedNode | null>(null);
   let pointer = $state({ x: 0, y: 0 });
@@ -101,7 +108,8 @@
 
 <div
   class="bubble-chart"
-  use:observeDimension
+  use:observeWidth
+  use:observeHeight
   onpointermove={handlePointerMove}
   onpointerleave={handlePointerLeave}
   role="presentation"

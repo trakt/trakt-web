@@ -73,8 +73,8 @@
     <YirGenresSection type="movies" genres={detail.genres.movies} />
   {/if}
 
-  {#if detail.productionCompanies.length > 0}
-    <YirStudiosSection studios={detail.productionCompanies} />
+  {#if detail.studios.length > 0}
+    <YirStudiosSection studios={detail.studios} />
   {/if}
 
   {#if detail.topRated.movies.length > 0}
