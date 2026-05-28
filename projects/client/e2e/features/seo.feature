@@ -59,3 +59,10 @@ Feature: SEO meta tags
     And the JSON-LD should be of type "Movie"
     And the JSON-LD name should match the og:title
     And the JSON-LD should include genre and year
+
+  # FIXME: Investigate why build + googlebot agent string detects duplicate tags 
+  # Scenario: Meta tags settle to a single instance after navigation
+  #   When I view the show summary of "silo"
+  #   Then each meta tag should have exactly one instance
+  #   When I view the movie summary of "heretic-2024"
+  #   Then each meta tag should have exactly one instance
