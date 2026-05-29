@@ -16,6 +16,7 @@ import {
   nb,
   nl,
   pl,
+  pt,
   ptBR,
   ro,
   ru,
@@ -52,4 +53,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'hu-HU': hu,
   'el-GR': el,
   'fa-IR': faIR,
+  'pt-PT': pt,
 };
