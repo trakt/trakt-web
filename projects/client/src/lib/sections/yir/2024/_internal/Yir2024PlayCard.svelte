@@ -1,18 +1,18 @@
 <script lang="ts">
-  import type { YirWatchedItem } from "$lib/requests/models/YirDetail";
+  import type { YirWatchedItem } from "$lib/requests/models/YirDetail.ts";
   import Yir2024MediaCard from "./Yir2024MediaCard.svelte";
 
-  const {
-    item,
-    headerLabel,
-  }: {
+  type Yir2024PlayCardProps = {
     item: YirWatchedItem;
-    headerLabel: string;
-  } = $props();
+    playLabel: string;
+    year: number;
+  };
+
+  const { item, playLabel, year }: Yir2024PlayCardProps = $props();
 </script>
 
 <section class="yir-2024-play-card">
-  <Yir2024MediaCard {item} {headerLabel} />
+  <Yir2024MediaCard {item} {playLabel} {year} />
 </section>
 
 <style lang="scss">

@@ -4666,18 +4666,17 @@
       "default": "Member Since",
       "description": "Label next to the join year in the 2024 Year in Review hero membership block."
     },
-    "yir_2024_first_play_of": {
-      "default": "First play of {year}",
-      "description": "Label for the first-play card on the 2024 Year in Review template.",
-      "variables": {
-        "year": {
-          "type": "number"
-        }
-      }
+    "yir_2024_first_play": {
+      "default": "First Play",
+      "description": "First-play stat value on the 2024 Year in Review first/last-play cards. Shown above the '{year}' qualifier line."
     },
-    "yir_2024_last_play_of": {
-      "default": "Last play of {year}",
-      "description": "Label for the last-play card on the 2024 Year in Review template.",
+    "yir_2024_last_play": {
+      "default": "Last Play",
+      "description": "Last-play stat value on the 2024 Year in Review first/last-play cards. Shown above the '{year}' qualifier line."
+    },
+    "yir_2024_play_of_year": {
+      "default": "of {year}",
+      "description": "Year qualifier shown as the small label beneath 'First Play' / 'Last Play' on the 2024 Year in Review first/last-play cards.",
       "variables": {
         "year": {
           "type": "number"

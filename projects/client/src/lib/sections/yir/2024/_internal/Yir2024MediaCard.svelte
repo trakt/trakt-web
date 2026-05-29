@@ -1,30 +1,26 @@
 <script lang="ts">
-  import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
-  import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { languageTag } from "$lib/features/i18n";
-  import type { YirWatchedItem } from "$lib/requests/models/YirDetail";
-  import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate";
-  import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime";
-  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { m } from "$lib/paraglide/messages";
+  import type { YirWatchedItem } from "$lib/requests/models/YirDetail.ts";
+  import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate.ts";
+  import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime.ts";
+  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
 
-  const {
-    item,
-    headerLabel,
-  }: {
+  type Yir2024MediaCardProps = {
     item: YirWatchedItem;
-    headerLabel: string;
-  } = $props();
+    playLabel: string;
+    year: number;
+  };
+
+  const { item, playLabel, year }: Yir2024MediaCardProps = $props();
 
   const itemUrl = $derived(UrlBuilder.media(item.entry.type, item.entry.slug));
 
-  const formattedDate = $derived(
-    `${toHumanLongDate(item.watchedAt, languageTag())} ${
-      toHumanClockTime(item.watchedAt, languageTag())
-    }`,
-  );
+  const watchedDate = $derived(toHumanLongDate(item.watchedAt, languageTag()));
+  const watchedTime = $derived(toHumanClockTime(item.watchedAt, languageTag()));
 
   const episodeCode = $derived(
     item.type === "episode"
@@ -44,23 +40,31 @@
   <div class="yir-2024-media-shade"></div>
 
   <div class="yir-2024-content">
-    <div class="yir-2024-play-callout">
-      <span class="yir-2024-play-icon"><PlayIcon /></span>
-      <span class="bold yir-2024-play-label">{headerLabel}</span>
+    <!-- Two stat pairs mirroring the most-watched cards: "First/Last Play"
+         over its "of {year}" label, and the watched date over its time. -->
+    <div class="yir-2024-media-stats">
+      <div class="yir-2024-media-stat">
+        <span class="bold yir-2024-media-stat-value">{playLabel}</span>
+        <span class="bold uppercase yir-2024-media-stat-label">
+          {m.yir_2024_play_of_year({ year })}
+        </span>
+      </div>
+      <div class="yir-2024-media-stat">
+        <span class="bold yir-2024-media-stat-value">{watchedDate}</span>
+        <span class="bold uppercase yir-2024-media-stat-label">
+          {watchedTime}
+        </span>
+      </div>
     </div>
-
-    <p class="yir-2024-watched-at">
-      <span class="yir-2024-watched-at-icon"><ClockIcon /></span>
-      <span>{formattedDate}</span>
-    </p>
 
     <Link href={itemUrl} color="inherit">
       <span class="yir-2024-titles">
         <h2 class="bold yir-2024-media-title">{item.entry.title}</h2>
         {#if item.type === "episode"}
           <p class="yir-2024-media-episode">
-            <span class="bold">{episodeCode}</span>
-            <span>&ldquo;{item.episode.title}&rdquo;</span>
+            <span class="bold yir-2024-media-episode-code">{episodeCode}</span>
+            <span class="yir-2024-media-episode-title"
+            >{item.episode.title}</span>
           </p>
         {/if}
       </span>
@@ -116,10 +120,10 @@
   }
 
   // Rows top → bottom:
-  //   1. ▷ + "First/Last play of {year}" callout
-  //   2. Watched-at date with clock icon
-  //   3. Title (huge)
-  //   4. Episode "S1 • E2" + quoted title (only when episode)
+  //   1. Two stat pairs ("First/Last Play" + "of {year}", date + time),
+  //      styled like the most-watched cards.
+  //   2. Title (huge)
+  //   3. Episode "S1 • E2" + title (only when episode)
   .yir-2024-content {
     position: relative;
     z-index: 2;
@@ -139,36 +143,40 @@
     }
   }
 
-  // Both rows share icon size + gap + font-size so the icons line up
-  // vertically and the text after each icon starts at the same x.
-  .yir-2024-play-callout,
-  .yir-2024-watched-at {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--gap-xs);
-    font-size: var(--ni-16);
-    color: var(--shade-10);
-  }
+  // Stat pairs laid out in a row — same visual language as
+  // Yir2024MostPlayedCard's stats: bold value over a small uppercase muted
+  // label.
+  .yir-2024-media-stats {
+    display: flex;
+    gap: var(--ni-32);
 
-  .yir-2024-play-icon,
-  .yir-2024-watched-at-icon {
-    display: inline-flex;
-    align-items: center;
-    color: var(--shade-10);
-
-    :global(svg) {
-      width: var(--ni-20);
-      height: var(--ni-20);
+    @include for-mobile {
+      gap: var(--ni-16);
     }
   }
 
-  .yir-2024-play-label {
-    text-transform: uppercase;
+  .yir-2024-media-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-2);
   }
 
-  .yir-2024-watched-at {
-    margin-top: var(--ni-6);
+  .yir-2024-media-stat-value {
+    font-size: var(--ni-22);
+    color: var(--shade-10);
+
+    @include for-mobile {
+      font-size: var(--font-size-title);
+    }
+  }
+
+  .yir-2024-media-stat-label {
+    font-size: var(--font-size-text);
+    color: var(--shade-300);
+
+    @include for-mobile {
+      font-size: var(--font-size-tag);
+    }
   }
 
   // Strip the inherited Link decoration and color so the title block
@@ -192,17 +200,26 @@
     font-size: clamp(var(--ni-28), 4vw, var(--ni-52));
   }
 
+  // Episode sub-line: code reads as the emphasis, the title sits back in a
+  // muted gray — smaller and calmer than the headline title above it.
   .yir-2024-media-episode {
-    margin-top: var(--ni-2);
-    font-size: var(--ni-28);
-    color: var(--shade-10);
+    margin-top: var(--ni-8);
+    font-size: var(--ni-20);
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: var(--gap-xs);
 
     @include for-mobile {
-      font-size: var(--ni-22);
+      font-size: var(--font-size-title);
     }
+  }
+
+  .yir-2024-media-episode-code {
+    color: var(--shade-10);
+  }
+
+  .yir-2024-media-episode-title {
+    color: var(--shade-300);
   }
 </style>

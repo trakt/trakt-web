@@ -40,7 +40,8 @@
       <Yir2024PageInner>
         <Yir2024PlayCard
           item={detail.firstWatched}
-          headerLabel={m.yir_2024_first_play_of({ year })}
+          playLabel={m.yir_2024_first_play()}
+          {year}
         />
       </Yir2024PageInner>
     {/if}
@@ -96,7 +97,8 @@
       <Yir2024PageInner>
         <Yir2024PlayCard
           item={detail.lastWatched}
-          headerLabel={m.yir_2024_last_play_of({ year })}
+          playLabel={m.yir_2024_last_play()}
+          {year}
         />
       </Yir2024PageInner>
     {/if}
