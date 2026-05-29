@@ -113,17 +113,6 @@
       :global(.trakt-action-button) {
         --button-size: var(--ni-32);
       }
-
-      @include for-mobile {
-        :global(.trakt-action-button) {
-          --button-size: var(--ni-24);
-
-          :global(svg) {
-            width: var(--ni-16);
-            height: var(--ni-16);
-          }
-        }
-      }
     }
   }
 </style>
