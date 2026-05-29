@@ -1,33 +1,68 @@
 <script lang="ts">
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
+  import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import type { Snippet } from "svelte";
+  import type { ListDrilldownLinkProps } from "../section-list/models/ListDrilldownLinkProps";
+
+  type ListTitleProps = {
+    title: string;
+    metaInfo?: Snippet;
+    drilldown?: ListDrilldownLinkProps;
+    subtitle?: string;
+    disabled?: boolean;
+  } & HTMLElementProps;
 
   const {
     title,
     metaInfo,
-    style,
-    href,
-    noscroll,
-    replacestate,
-  }: {
-    title: string;
-    metaInfo?: Snippet;
-    href?: string;
-    noscroll?: boolean;
-    replacestate?: boolean;
-    style: "primary" | "secondary";
-  } = $props();
+    subtitle,
+    drilldown,
+    disabled,
+    ...props
+  }: ListTitleProps = $props();
+
+  const { isEditMode } = useEditMode();
+  const { track } = useTrack(AnalyticsEvent.Drilldown);
 </script>
 
 {#snippet content()}
-  <span class="title shadow-list-title ellipsis" data-style={style}>
-    {title}
-  </span>
+  <div class="trakt-list-title-wrapper">
+    <span
+      class="title shadow-list-title ellipsis"
+      data-style={subtitle ? "secondary" : "primary"}
+    >
+      {title}
+    </span>
+    {#if subtitle}
+      <span class="title shadow-list-title ellipsis" data-style="primary">
+        {`/ ${subtitle}`}
+      </span>
+    {/if}
+  </div>
 {/snippet}
 
-<div class="trakt-list-title">
-  {#if href}
-    <Link {href} {noscroll} {replacestate}>{@render content()}</Link>
+<div
+  class="trakt-list-title"
+  data-drilldown={drilldown && !$isEditMode ? "" : undefined}
+  {...props}
+>
+  {#if drilldown && !$isEditMode}
+    <Link
+      href={drilldown.href}
+      label={drilldown.label}
+      noscroll={drilldown.noscroll}
+      replacestate={drilldown.replacestate}
+      {disabled}
+      color="inherit"
+      onclick={() =>
+        track({ source: drilldown.source.id, type: drilldown.source.type })}
+    >
+      {@render content()}
+      <CaretRightIcon />
+    </Link>
   {:else}
     {@render content()}
   {/if}
@@ -45,8 +80,49 @@
     flex-direction: column;
     min-width: 0;
 
+    .trakt-list-title-wrapper,
+    :global(.trakt-link) {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xs);
+      min-width: 0;
+    }
+
     :global(.trakt-link) {
       text-decoration: none;
+    }
+
+    &[data-drilldown] {
+      :global(.trakt-link) {
+        :global(svg) {
+          flex-shrink: 0;
+          width: calc(var(--font-size-title) * 0.9);
+          height: calc(var(--font-size-title) * 0.9);
+        }
+
+        @include for-mouse {
+          &:hover {
+            color: var(--color-link-active);
+
+            :global(.shadow-list-title) {
+              color: var(--color-link-active);
+            }
+          }
+        }
+      }
+
+      :global(.trakt-no-link) {
+        :global(svg) {
+          color: var(--color-foreground-button-disabled);
+        }
+      }
+
+      .shadow-list-title {
+        width: auto;
+        max-width: none;
+
+        transition: color var(--transition-increment) ease-in-out;
+      }
     }
   }
 

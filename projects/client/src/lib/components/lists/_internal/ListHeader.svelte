@@ -3,7 +3,19 @@
   import type { DeviceProps } from "$lib/guards/_internal/DeviceProps";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
+  import type { ListDrilldownLinkProps } from "../section-list/models/ListDrilldownLinkProps";
   import ListTitle from "./ListTitle.svelte";
+
+  type ListHeaderProps = {
+    title: string;
+    subtitle?: string;
+    metaInfo?: Snippet;
+    titleAction?: Snippet;
+    actions?: Snippet;
+    listActions?: Snippet;
+    navigationType?: DpadNavigationType;
+    drilldown?: ListDrilldownLinkProps;
+  } & HTMLElementProps;
 
   const {
     title,
@@ -12,23 +24,11 @@
     titleAction: externalTitleAction,
     actions,
     navigationType,
-    href,
-    noscroll,
-    replacestate,
+    drilldown,
     listActions,
+    disabled,
     ...props
-  }: {
-    title: string;
-    subtitle?: string;
-    metaInfo?: Snippet;
-    titleAction?: Snippet;
-    actions?: Snippet;
-    listActions?: Snippet;
-    navigationType?: DpadNavigationType;
-    href?: string;
-    noscroll?: boolean;
-    replacestate?: boolean;
-  } & HTMLElementProps = $props();
+  }: ListHeaderProps = $props();
 </script>
 
 {#snippet titleAction({ device }: DeviceProps)}
@@ -45,32 +45,7 @@
       <div class="trakt-list-title">
         {@render titleAction({ device: ["desktop", "tablet-lg"] })}
 
-        {#if subtitle == null}
-          <ListTitle
-            {title}
-            {href}
-            {noscroll}
-            {replacestate}
-            {metaInfo}
-            style="primary"
-          />
-        {:else}
-          <ListTitle
-            {title}
-            {href}
-            {noscroll}
-            {replacestate}
-            {metaInfo}
-            style="secondary"
-          />
-          <ListTitle
-            title={`/ ${subtitle}`}
-            style="primary"
-            {href}
-            {noscroll}
-            {replacestate}
-          />
-        {/if}
+        <ListTitle {title} {drilldown} {metaInfo} {disabled} {subtitle} />
 
         {#if actions}
           <div class="trakt-list-actions" data-dpad-navigation={navigationType}>
@@ -120,7 +95,7 @@
     .trakt-list-header-content {
       display: flex;
       align-items: center;
-      gap: var(--gap-xs);
+      gap: var(--gap-s);
       min-width: 0;
 
       :global(.trakt-preview-badge) {
