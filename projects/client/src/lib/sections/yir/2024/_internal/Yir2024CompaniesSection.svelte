@@ -4,6 +4,7 @@
   import { formatNumber } from "$lib/utils/format/formatNumber.ts";
   import YirCompaniesBubbleChart from "../../_internal/YirCompaniesBubbleChart.svelte";
   import YirTooltip from "../../_internal/YirTooltip.svelte";
+  import Yir2024StatSummary from "./Yir2024StatSummary.svelte";
 
   type Yir2024CompaniesSectionProps = {
     type: "shows" | "movies";
@@ -23,8 +24,9 @@
   );
 
   const mostWatched = $derived(companies[0]);
-  const leastWatched = $derived(companies[companies.length - 1]);
-  const companyCount = $derived(companies.length);
+  const leastWatched = $derived(
+    companies.length > 1 ? companies[companies.length - 1] : undefined,
+  );
 
   // FIXME(i18n): hardcoded English plurals match the existing convention
   // across the YIR module (default template uses the same pattern in
@@ -41,42 +43,13 @@
     <div class="yir-2024-companies-text">
       <h2 class="bold yir-2024-companies-heading">{heading}</h2>
 
-      <dl class="yir-2024-companies-stats">
-        {#if mostWatched}
-          <div class="yir-2024-companies-row">
-            <dt>{m.yir_2024_companies_most_watched()}</dt>
-            <dd>
-              <span class="ellipsis yir-2024-companies-name">
-                {mostWatched.name}
-              </span>
-              <span class="bold uppercase tag yir-2024-companies-count">
-                {formatNumber(mostWatched.count)}
-                {itemUnit(mostWatched.count)}
-              </span>
-            </dd>
-          </div>
-        {/if}
-
-        {#if leastWatched && leastWatched.id !== mostWatched?.id}
-          <div class="yir-2024-companies-row">
-            <dt>{m.yir_2024_companies_least_watched()}</dt>
-            <dd>
-              <span class="ellipsis yir-2024-companies-name">
-                {leastWatched.name}
-              </span>
-              <span class="bold uppercase tag yir-2024-companies-count">
-                {formatNumber(leastWatched.count)}
-                {itemUnit(leastWatched.count)}
-              </span>
-            </dd>
-          </div>
-        {/if}
-
-        <div class="yir-2024-companies-row">
-          <dt>{countLabel}</dt>
-          <dd class="yir-2024-companies-total">{formatNumber(companyCount)}</dd>
-        </div>
-      </dl>
+      <Yir2024StatSummary
+        {mostWatched}
+        {leastWatched}
+        {countLabel}
+        total={companies.length}
+        unit={itemUnit}
+      />
     </div>
 
     <div class="yir-2024-companies-chart">
@@ -136,7 +109,9 @@
         width: min-content;
       }
 
-      .yir-2024-companies-stats {
+      // Stat list is rendered by Yir2024StatSummary (its own scope), so it
+      // has to be reached with :global to take the remaining row width.
+      :global(.yir-2024-stat-summary) {
         flex: 1;
         min-width: 0;
       }
@@ -150,67 +125,6 @@
     @include for-mobile {
       font-size: var(--ni-28);
     }
-  }
-
-  .yir-2024-companies-stats {
-    display: flex;
-    flex-direction: column;
-  }
-
-  // Each row has a light divider under it (matching v2's stat-line) so the
-  // three rows read as a list. Last row drops the divider.
-  .yir-2024-companies-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--ni-32);
-    padding: var(--ni-16) 0;
-    border-bottom: var(--border-thickness-xxs) solid var(--shade-800);
-
-    &:last-child {
-      border-bottom: none;
-    }
-
-    @include for-tablet-sm-and-below {
-      gap: var(--ni-16);
-    }
-
-    dt {
-      font-size: var(--font-size-title);
-      color: var(--shade-10);
-    }
-
-    dd {
-      display: flex;
-      align-items: center;
-      gap: var(--gap-xs);
-      font-size: var(--font-size-title);
-      color: var(--shade-10);
-      min-width: 0;
-    }
-  }
-
-  // Network/studio name pops in the YIR purple so it visually links back to
-  // the bubble chart's highlight color (also matches v2's link styling).
-  // Truncation handled by the `.ellipsis` utility class on the markup.
-  .yir-2024-companies-name {
-    color: var(--purple-300);
-  }
-
-  // Pill-shaped count badge with white background + dark text — matches
-  // the v2 design exactly. `--border-radius-xxl` is the established YIR /
-  // v3 token for pill-shaped tags (used by VIP badges, MostPopularTag, etc).
-  // Font sizing is handled by the `.tag` utility class on the markup.
-  .yir-2024-companies-count {
-    background: var(--shade-10);
-    color: var(--shade-900);
-    border-radius: var(--border-radius-xxl);
-    padding: var(--ni-4) var(--ni-10);
-    white-space: nowrap;
-  }
-
-  .yir-2024-companies-total {
-    color: var(--shade-10);
   }
 
   .yir-2024-companies-chart {
