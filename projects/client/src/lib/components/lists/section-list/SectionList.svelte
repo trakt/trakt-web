@@ -10,7 +10,6 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
-  import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
@@ -110,17 +109,6 @@
 
 {#snippet defaultActions()}
   {@render _externalActions?.()}
-
-  {#if drilldown}
-    <ViewAllButton
-      href={drilldown.href}
-      label={drilldown.label}
-      disabled={items.length === 0 && drilldown.mode !== "always"}
-      source={drilldown.source}
-      noscroll={drilldown.noscroll}
-      replacestate={drilldown.replacestate}
-    />
-  {/if}
 {/snippet}
 
 {#snippet actions()}
@@ -164,9 +152,8 @@
           {metaInfo}
           actions={isCollapsed ? undefined : actions}
           navigationType={headerNavigationType}
-          href={drilldown?.href}
-          replacestate={drilldown?.replacestate}
-          noscroll={drilldown?.noscroll}
+          {drilldown}
+          disabled={items.length === 0 && drilldown?.mode !== "always"}
         />
       {/if}
       <div class="section-list" use:editModeAction>
