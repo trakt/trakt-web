@@ -4,6 +4,7 @@ import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { map } from 'rxjs';
 import { filterWatchedDates } from './filterWatchedDates.ts';
+import { getAttributedStreakDay } from './utils/getAttributedStreakDay.ts';
 
 type StreakResult = {
   readonly count: number;
@@ -24,7 +25,7 @@ export function computeStreak(
   const daysWithActivity = new Set(
     watchedDates
       .toSorted((a, b) => b.getTime() - a.getTime())
-      .map(getDayKey),
+      .map((date) => getDayKey(getAttributedStreakDay(date))),
   );
 
   const today = new Date(
