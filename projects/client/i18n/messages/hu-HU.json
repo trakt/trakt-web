@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Nincsenek szinkronizált könyvtárelemeid a Plexből.",
   "list_placeholder_media_history": "Még nem nézted meg a(z) \"{title}\" címet",
   "list_placeholder_no_filter_results": "Sajnos nincs találat. Lehet, hogy túl szigorúan állítottad be a szűrőket.",
+  "list_placeholder_no_ratings_activity": "Nincs jelenthető tevékenység. <a>Szeretnél értékelést adni?</a>",
+  "list_placeholder_no_review_activity": "Nincs jelenthető tevékenység. <a>Szeretnél értékelést írni?</a>",
   "list_placeholder_personal_list_empty": "Még semmi sincs ezen a listán.",
   "list_placeholder_personal_list_empty_movies": "Még nincsenek filmek ezen a listán.",
   "list_placeholder_personal_list_empty_shows": "Még nincsenek sorozatok ezen a listán.",

@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Du har inga synkroniserade biblioteksobjekt från Plex.",
   "list_placeholder_media_history": "Du har inte sett \"{title}\" än",
   "list_placeholder_no_filter_results": "Tråkigt, inga träffar. Ditt filter kan ha varit lite för selektivt.",
+  "list_placeholder_no_ratings_activity": "Ingen aktivitet att rapportera. <a>Vill du lämna ett betyg?</a>",
+  "list_placeholder_no_review_activity": "Ingen aktivitet att rapportera. <a>Vill du lämna en recension?</a>",
   "list_placeholder_personal_list_empty": "Det finns inget i den här listan ännu.",
   "list_placeholder_personal_list_empty_movies": "Det finns inga filmer i den här listan ännu.",
   "list_placeholder_personal_list_empty_shows": "Det finns inga serier i den här listan ännu.",

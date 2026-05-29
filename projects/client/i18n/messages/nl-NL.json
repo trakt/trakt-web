@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Je hebt geen gesynchroniseerde bibliotheekitems van Plex.",
   "list_placeholder_media_history": "Je hebt \"{title}\" nog niet bekeken",
   "list_placeholder_no_filter_results": "Jammer, geen resultaten. Je filter was misschien iets te selectief.",
+  "list_placeholder_no_ratings_activity": "Geen activiteit om te melden. <a>Wil je een beoordeling achterlaten?</a>",
+  "list_placeholder_no_review_activity": "Geen activiteit om te melden. <a>Wil je een recensie achterlaten?</a>",
   "list_placeholder_personal_list_empty": "Er staat nog niets in deze lijst.",
   "list_placeholder_personal_list_empty_movies": "Er staan nog geen films in deze lijst.",
   "list_placeholder_personal_list_empty_shows": "Er staan nog geen series in deze lijst.",

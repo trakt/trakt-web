@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "У вас нет синхронизированных элементов библиотеки из Plex.",
   "list_placeholder_media_history": "Вы еще не смотрели \"{title}\"",
   "list_placeholder_no_filter_results": "Жаль, ничего не найдено. Ваш фильтр, возможно, был слишком избирательным.",
+  "list_placeholder_no_ratings_activity": "Нет активности для отчета. <a>Хотите оставить оценку?</a>",
+  "list_placeholder_no_review_activity": "Нет активности для отчета. <a>Хотите оставить отзыв?</a>",
   "list_placeholder_personal_list_empty": "В этом списке пока ничего нет.",
   "list_placeholder_personal_list_empty_movies": "В этом списке пока нет фильмов.",
   "list_placeholder_personal_list_empty_shows": "В этом списке пока нет сериалов.",

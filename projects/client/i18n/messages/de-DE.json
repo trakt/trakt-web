@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Du hast keine synchronisierten Mediathek-Elemente von Plex.",
   "list_placeholder_media_history": "Sie haben \"{title}\" noch nicht gesehen",
   "list_placeholder_no_filter_results": "Schade, keine Treffer. Ihr Filter war vielleicht etwas zu selektiv.",
+  "list_placeholder_no_ratings_activity": "Keine Aktivität zu melden. <a>Möchtest du eine Bewertung abgeben?</a>",
+  "list_placeholder_no_review_activity": "Keine Aktivität zu melden. <a>Möchtest du eine Bewertung hinterlassen?</a>",
   "list_placeholder_personal_list_empty": "Diese Liste ist noch leer.",
   "list_placeholder_personal_list_empty_movies": "Diese Liste enthält noch keine Filme.",
   "list_placeholder_personal_list_empty_shows": "Diese Liste enthält noch keine Serien.",

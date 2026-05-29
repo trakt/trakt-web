@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Нямате синхронизирани елементи от библиотеката от Plex.",
   "list_placeholder_media_history": "Все още не сте гледали \"{title}\"",
   "list_placeholder_no_filter_results": "Разочароващо, няма резултати. Филтърът ти може би е бил твърде избирателен.",
+  "list_placeholder_no_ratings_activity": "Няма дейност за отчитане. <a>Искате ли да оставите оценка?</a>",
+  "list_placeholder_no_review_activity": "Няма дейност за отчитане. <a>Искате ли да оставите отзив?</a>",
   "list_placeholder_personal_list_empty": "Все още няма нищо в този списък.",
   "list_placeholder_personal_list_empty_movies": "Все още няма филми в този списък.",
   "list_placeholder_personal_list_empty_shows": "Все още няма сериали в този списък.",

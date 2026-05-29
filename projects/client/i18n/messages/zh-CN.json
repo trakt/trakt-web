@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "您尚未从 Plex 同步任何媒体库项目。",
   "list_placeholder_media_history": "你尚未观看“{title}”",
   "list_placeholder_no_filter_results": "真遗憾，没有匹配项。你的筛选条件可能过于严格。",
+  "list_placeholder_no_ratings_activity": "没有可报告的活动。<a>想留下评分吗？</a>",
+  "list_placeholder_no_review_activity": "没有可报告的活动。<a>想留下评论吗？</a>",
   "list_placeholder_personal_list_empty": "此列表尚无内容。",
   "list_placeholder_personal_list_empty_movies": "此列表尚无电影。",
   "list_placeholder_personal_list_empty_shows": "此列表尚无剧集。",

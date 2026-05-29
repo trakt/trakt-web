@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Du har ingen synkroniserede biblioteks-elementer fra Plex.",
   "list_placeholder_media_history": "Du har ikke set \"{title}\" endnu",
   "list_placeholder_no_filter_results": "Ærgerligt, ingen resultater. Dit filter har måske været lidt for selektivt.",
+  "list_placeholder_no_ratings_activity": "Ingen aktivitet at rapportere. <a>Vil du give en bedømmelse?</a>",
+  "list_placeholder_no_review_activity": "Ingen aktivitet at rapportere. <a>Vil du give en anmeldelse?</a>",
   "list_placeholder_personal_list_empty": "Der er intet på denne liste endnu.",
   "list_placeholder_personal_list_empty_movies": "Der er ingen film på denne liste endnu.",
   "list_placeholder_personal_list_empty_shows": "Der er ingen serier på denne liste endnu.",

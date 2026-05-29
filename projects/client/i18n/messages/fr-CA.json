@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Vous n'avez aucun élément de bibliothèque synchronisé depuis Plex.",
   "list_placeholder_media_history": "Vous n'avez pas encore regardé « {title} »",
   "list_placeholder_no_filter_results": "Dommage, aucun résultat. Votre filtre est peut-être un peu trop sélectif.",
+  "list_placeholder_no_ratings_activity": "Aucune activité à signaler. <a>Voulez-vous laisser une note?</a>",
+  "list_placeholder_no_review_activity": "Aucune activité à signaler. <a>Voulez-vous laisser une critique?</a>",
   "list_placeholder_personal_list_empty": "Il n'y a rien dans cette liste pour le moment.",
   "list_placeholder_personal_list_empty_movies": "Il n'y a aucun film dans cette liste pour le moment.",
   "list_placeholder_personal_list_empty_shows": "Il n'y a aucune série dans cette liste pour le moment.",

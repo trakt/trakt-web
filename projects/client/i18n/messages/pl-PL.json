@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Nie masz zsynchronizowanych elementów biblioteki z Plex.",
   "list_placeholder_media_history": "Nie oglądałeś jeszcze \"{title}\"",
   "list_placeholder_no_filter_results": "Brak wyników. Twój filtr mógł być zbyt selektywny.",
+  "list_placeholder_no_ratings_activity": "Brak aktywności do zgłoszenia. <a>Chcesz zostawić ocenę?</a>",
+  "list_placeholder_no_review_activity": "Brak aktywności do zgłoszenia. <a>Chcesz zostawić recenzję?</a>",
   "list_placeholder_personal_list_empty": "Lista jest pusta.",
   "list_placeholder_personal_list_empty_movies": "Lista nie zawiera żadnych filmów.",
   "list_placeholder_personal_list_empty_shows": "Lista nie zawiera żadnych seriali.",

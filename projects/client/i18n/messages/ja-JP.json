@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Plexから同期されたライブラリ項目はありません。",
   "list_placeholder_media_history": "「{title}」はまだ視聴していません",
   "list_placeholder_no_filter_results": "残念、ヒットなし。フィルターが少し厳しすぎたかもしれません。",
+  "list_placeholder_no_ratings_activity": "報告するアクティビティはありません。<a>評価を残しますか？</a>",
+  "list_placeholder_no_review_activity": "報告するアクティビティはありません。<a>レビューを残しますか？</a>",
   "list_placeholder_personal_list_empty": "このリストにはまだ何もありません。",
   "list_placeholder_personal_list_empty_movies": "このリストにはまだ映画がありません。",
   "list_placeholder_personal_list_empty_shows": "このリストにはまだ番組がありません。",

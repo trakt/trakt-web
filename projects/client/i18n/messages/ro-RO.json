@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Nu ai niciun element de bibliotecă sincronizat din Plex.",
   "list_placeholder_media_history": "Nu ai vizionat \"{title}\" încă",
   "list_placeholder_no_filter_results": "Ghinion, niciun rezultat. Filtrul tău ar fi putut fi prea selectiv.",
+  "list_placeholder_no_ratings_activity": "Nicio activitate de raportat. <a>Doriți să lăsați o evaluare?</a>",
+  "list_placeholder_no_review_activity": "Nicio activitate de raportat. <a>Doriți să lăsați o recenzie?</a>",
   "list_placeholder_personal_list_empty": "Nu este nimic în această listă încă.",
   "list_placeholder_personal_list_empty_movies": "Nu sunt filme în această listă încă.",
   "list_placeholder_personal_list_empty_shows": "Nu sunt seriale în această listă încă.",

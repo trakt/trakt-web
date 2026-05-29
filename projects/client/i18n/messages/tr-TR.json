@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Plex'ten senkronize edilmiş kütüphane öğeniz yok.",
   "list_placeholder_media_history": "Henüz \"{title}\" izlemediniz",
   "list_placeholder_no_filter_results": "Maalesef, sonuç yok. Filtreniz biraz fazla seçici olmuş olabilir.",
+  "list_placeholder_no_ratings_activity": "Bildirilecek etkinlik yok. <a>Puan bırakmak ister misiniz?</a>",
+  "list_placeholder_no_review_activity": "Bildirilecek etkinlik yok. <a>Yorum bırakmak ister misiniz?</a>",
   "list_placeholder_personal_list_empty": "Bu listede henüz hiçbir şey yok.",
   "list_placeholder_personal_list_empty_movies": "Bu listede henüz film yok.",
   "list_placeholder_personal_list_empty_shows": "Bu listede henüz dizi yok.",

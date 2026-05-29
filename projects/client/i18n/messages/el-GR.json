@@ -605,6 +605,8 @@
   "list_placeholder_library_plex_empty": "Δεν έχετε συγχρονισμένα στοιχεία βιβλιοθήκης από το Plex.",
   "list_placeholder_media_history": "Δεν έχετε παρακολουθήσει ακόμα το \"{title}\"",
   "list_placeholder_no_filter_results": "Αποτυχία, κανένα αποτέλεσμα. Το φίλτρο σας ίσως ήταν λίγο υπερβολικά επιλεκτικό.",
+  "list_placeholder_no_ratings_activity": "Καμία δραστηριότητα για αναφορά. <a>Θέλετε να αφήσετε μια βαθμολογία;</a>",
+  "list_placeholder_no_review_activity": "Καμία δραστηριότητα για αναφορά. <a>Θέλετε να αφήσετε μια κριτική;</a>",
   "list_placeholder_personal_list_empty": "Δεν υπάρχει τίποτα σε αυτή τη λίστα ακόμα.",
   "list_placeholder_personal_list_empty_movies": "Δεν υπάρχουν ταινίες σε αυτή τη λίστα ακόμα.",
   "list_placeholder_personal_list_empty_shows": "Δεν υπάρχουν σειρές σε αυτή τη λίστα ακόμα.",
