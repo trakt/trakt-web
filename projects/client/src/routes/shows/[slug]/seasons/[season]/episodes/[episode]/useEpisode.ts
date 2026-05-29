@@ -77,13 +77,7 @@ export function useEpisode(
     isLoading,
     episode: episode.pipe(map(($episode) => $episode.data)),
     show: show.pipe(map(($show) => $show.data)),
-    seasons: combineLatest([seasons, episode]).pipe(
-      map(([$seasons, $episode]) =>
-        $seasons.data?.filter((season) =>
-          season.number === $episode.data?.season
-        )
-      ),
-    ),
+    seasons: seasons.pipe(map(($seasons) => $seasons.data)),
     crew: crew.pipe(map(($crew) => $crew.data ?? EMPTY_CREW)),
     intl: combineLatest([intl, episode]).pipe(
       map(([$intl, $episode]) =>
