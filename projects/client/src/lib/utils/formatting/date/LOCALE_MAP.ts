@@ -1,6 +1,7 @@
 import type { Locale } from 'date-fns/locale';
 import {
   bg,
+  ca,
   da,
   de,
   el,
@@ -54,4 +55,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'el-GR': el,
   'fa-IR': faIR,
   'pt-PT': pt,
+  'ca-ES': ca,
 };
