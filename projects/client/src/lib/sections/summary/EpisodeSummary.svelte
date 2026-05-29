@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import * as m from "$lib/features/i18n/messages";
 
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
@@ -32,6 +33,19 @@
   const posterSrc = $derived(
     useEpisodeSpoilerImage({ episode, show, variant: "default" }),
   );
+
+  const currentSeasonOnly = $derived(
+    seasons.filter((s) => s.number === episode.season),
+  );
+
+  // The seasons drawer can switch seasons via the `season` search param
+  // (set by the dropdown / poster links), independent of the episode's own
+  // season shown in the page body.
+  const drawerSeason = $derived.by(() => {
+    const param = page.url.searchParams.get("season");
+    const seasonNumber = param ? parseInt(param, 10) : NaN;
+    return isNaN(seasonNumber) ? episode.season : seasonNumber;
+  });
 
   const networks = $derived(
     (() => {
@@ -105,7 +119,7 @@
   id={episode.id}
 />
 
-<SeasonList {show} {seasons} currentSeason={episode.season} />
+<SeasonList {show} seasons={currentSeasonOnly} currentSeason={episode.season} />
 
 <RelatedList
   title={m.list_title_related_shows()}
@@ -118,7 +132,7 @@
   {crew}
   {episode}
   {seasons}
-  currentSeason={episode.season}
+  currentSeason={drawerSeason}
   {show}
   {networks}
   type="episode"
