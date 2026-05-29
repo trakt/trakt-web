@@ -12,6 +12,7 @@ import {
   fr,
   frCA,
   hu,
+  id,
   it,
   ja,
   nb,
@@ -56,4 +57,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'fa-IR': faIR,
   'pt-PT': pt,
   'ca-ES': ca,
+  'id-ID': id,
 };

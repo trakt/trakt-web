@@ -56,6 +56,7 @@
     "fa-IR": "🇮🇷",
     "pt-PT": "🇵🇹",
     "ca-ES": "🇪🇸",
+    "id-ID": "🇮🇩",
   };
 
   const localeToTitle: Record<AvailableLocale, string> = {
@@ -85,6 +86,7 @@
     "fa-IR": "فارسی",
     "pt-PT": "Português (Portugal)",
     "ca-ES": "Català",
+    "id-ID": "Bahasa Indonesia",
   };
 
   const options = $derived(
