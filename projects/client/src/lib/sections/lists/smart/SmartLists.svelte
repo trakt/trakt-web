@@ -5,7 +5,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
-  import ViewAllButton from "../components/ViewAllButton.svelte";
   import ListsHeader from "../user/_internal/ListsHeader.svelte";
   import CreateSmartListButton from "./_internal/CreateSmartListButton.svelte";
   import SmartListRenderer from "./SmartListRenderer.svelte";
@@ -14,17 +13,17 @@
   const { mode }: { mode: DiscoverMode } = $props();
 
   const { list } = $derived(useSmartLists({ mode }));
+
+  const drilldown = $derived({
+    href: UrlBuilder.lists.smart.all(),
+    label: m.button_label_view_all_lists(),
+    source: { id: "smart-lists" },
+    mode: $list.length === 0 ? ("disabled" as const) : ("default" as const),
+  });
 </script>
 
 {#snippet actions()}
   <CreateSmartListButton />
-
-  <ViewAllButton
-    href={UrlBuilder.lists.smart.all()}
-    label={m.button_label_view_all_lists()}
-    source={{ id: "smart-lists" }}
-    disabled={$list.length === 0}
-  />
 {/snippet}
 
 {#if $list.length === 0}
@@ -35,6 +34,7 @@
     items={[]}
     title="Smart Lists"
     --height-list="var(--height-poster-list-sm)"
+    {drilldown}
     {actions}
   >
     {#snippet item(_)}{/snippet}
@@ -44,7 +44,7 @@
   </SectionList>
 {:else}
   <div class="trakt-smart-lists">
-    <ListsHeader title="Smart Lists" {actions}>
+    <ListsHeader title="Smart Lists" {actions} {drilldown}>
       {#snippet icon()}
         <SmartListIcon />
       {/snippet}

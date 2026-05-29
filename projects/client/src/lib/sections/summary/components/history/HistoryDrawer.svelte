@@ -3,7 +3,6 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import { useRecentlyWatchedList } from "$lib/sections/lists/stores/useRecentlyWatchedList.ts";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
@@ -49,24 +48,21 @@
   const hasHistory = $derived($list.length > 0);
 
   let isOpen = $state(false);
-</script>
 
-{#snippet badge()}
-  <ViewAllButton
-    {href}
-    label={m.button_label_view_all_history()}
-    disabled={!$hasNextPage}
-    source={{ id: "media_watch_history", type: props.type }}
-    size="small"
-  />
-{/snippet}
+  const drilldown = $derived({
+    href,
+    label: m.button_label_view_all_history(),
+    source: { id: "media_watch_history", type: props.type },
+    mode: $hasNextPage ? ("default" as const) : ("disabled" as const),
+  });
+</script>
 
 <Drawer
   {onClose}
   onOpened={() => (isOpen = true)}
   title={m.list_title_history()}
   size="auto"
-  {badge}
+  {drilldown}
 >
   {#if isOpen}
     <div transition:fade={{ duration: 150 }}>

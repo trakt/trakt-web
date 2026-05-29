@@ -55,7 +55,7 @@
       label={drilldown.label}
       noscroll={drilldown.noscroll}
       replacestate={drilldown.replacestate}
-      {disabled}
+      disabled={disabled || drilldown.mode === "disabled"}
       color="inherit"
       onclick={() =>
         track({ source: drilldown.source.id, type: drilldown.source.type })}
@@ -98,13 +98,18 @@
           flex-shrink: 0;
           width: calc(var(--font-size-title) * 0.9);
           height: calc(var(--font-size-title) * 0.9);
+
+          color: var(--color-text-primary);
+
+          transition: color var(--transition-increment) ease-in-out;
         }
 
         @include for-mouse {
           &:hover {
             color: var(--color-link-active);
 
-            :global(.shadow-list-title) {
+            :global(.shadow-list-title),
+            :global(svg) {
               color: var(--color-link-active);
             }
           }
