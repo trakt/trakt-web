@@ -7,6 +7,7 @@ import {
   enAU,
   enUS,
   es,
+  faIR,
   fr,
   frCA,
   hu,
@@ -50,4 +51,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'tr-TR': tr,
   'hu-HU': hu,
   'el-GR': el,
+  'fa-IR': faIR,
 };

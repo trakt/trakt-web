@@ -69,7 +69,10 @@ export const setLocale = (locale: string): AvailableLocale => {
   return sanitizedLocale;
 };
 
-export const getTextDirection = (_locale: AvailableLocale) => 'ltr';
+const RTL_LOCALES = new Set<AvailableLocale>(['fa-IR']);
+
+export const getTextDirection = (locale: AvailableLocale) =>
+  RTL_LOCALES.has(locale) ? 'rtl' : 'ltr';
 
 export const getPreferredLocale = (headers: Headers): AvailableLocale => {
   const localeIdentifiers = availableLocales.map((locale) => {
