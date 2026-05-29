@@ -5,6 +5,7 @@
   import {
     type AvailableLocale,
     availableLocales,
+    getLocale,
   } from "$lib/features/i18n/index.ts";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
@@ -89,13 +90,22 @@
     "id-ID": "Bahasa Indonesia",
   };
 
-  const options = $derived(
-    availableLocales.map((option) => ({
-      value: option,
-      text: `${localeToFlag[option]} ${localeToTitle[option]}`,
-      label: localeToTitle[option],
-    })),
-  );
+  const options = $derived.by(() => {
+    const currentLocale = getLocale();
+    const displayNames = new Intl.DisplayNames([currentLocale], {
+      type: "language",
+    });
+    const collator = new Intl.Collator(currentLocale, { sensitivity: "base" });
+
+    return availableLocales
+      .map((option) => ({
+        value: option,
+        text: `${localeToFlag[option]} ${localeToTitle[option]}`,
+        label: localeToTitle[option],
+        sortKey: displayNames.of(option) ?? option,
+      }))
+      .sort((a, b) => collator.compare(a.sortKey, b.sortKey));
+  });
 
   const displayText = (value: AvailableLocale) => localeToTitle[value];
 </script>
