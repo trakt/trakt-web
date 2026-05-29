@@ -1,4 +1,5 @@
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
+import { getAttributedStreakDay } from './getAttributedStreakDay.ts';
 
 export type MonthlyStats = {
   readonly currentStreak: number;
@@ -30,10 +31,10 @@ function areConsecutiveDays(dateA: Date, dateB: Date): boolean {
 function deduplicateAndSort(
   dates: ReadonlyArray<Date>,
 ): ReadonlyArray<Date> {
-  const uniqueByDay = new Map(
+  const uniqueByDay = new Map<string, Date>(
     dates.map((date) => {
-      const normalized = toMidnight(date);
-      return [getDayKey(normalized), normalized];
+      const day = getAttributedStreakDay(date);
+      return [getDayKey(day), day];
     }),
   );
   return [...uniqueByDay.values()].sort(

@@ -162,6 +162,29 @@ describe('computeMonthlyStats', () => {
     });
   });
 
+  describe('streak buffer (30-minute window after midnight)', () => {
+    it('attributes a watch within the buffer window only to the previous day', () => {
+      // Apr 16 at 00:25 → attributed to Apr 15 only (not Apr 16)
+      // Apr 14 (normal) + Apr 15 (buffered) = streak of 2, ending yesterday
+      const dates = [
+        getDate(2026, 4, 14),
+        new Date(2026, 3, 16, 0, 25),
+      ];
+      const { currentStreak } = computeMonthlyStats(dates, NOW);
+      expect(currentStreak).toBe(2);
+    });
+
+    it('does not apply buffer at exactly 30 minutes past midnight', () => {
+      // Apr 16 at 00:30 → 00:30 − 30 min = 00:00 same day → no credit for Apr 15
+      const dates = [
+        getDate(2026, 4, 14),
+        new Date(2026, 3, 16, 0, 30),
+      ];
+      const { currentStreak } = computeMonthlyStats(dates, NOW);
+      expect(currentStreak).toBe(1);
+    });
+  });
+
   describe('activeDaysThisYear', () => {
     it('counts only days in the current year', () => {
       const dates = [
