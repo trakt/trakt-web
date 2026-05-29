@@ -4765,13 +4765,13 @@
       "default": "Most watched studios",
       "description": "Section heading above the studios bubble chart on the 2024 Year in Review template."
     },
-    "yir_2024_companies_most_watched": {
+    "yir_2024_stat_most_watched": {
       "default": "Most Watched",
-      "description": "Row label above the user's top-watched network/studio name on the 2024 Year in Review companies section."
+      "description": "Row label above the user's top-watched entry (network / studio / genre) in the 2024 Year in Review stat summary lists."
     },
-    "yir_2024_companies_least_watched": {
+    "yir_2024_stat_least_watched": {
       "default": "Least Watched",
-      "description": "Row label above the user's least-watched network/studio name on the 2024 Year in Review companies section."
+      "description": "Row label above the user's least-watched entry (network / studio / genre) in the 2024 Year in Review stat summary lists."
     },
     "yir_2024_network_count": {
       "default": "Network Count",
@@ -4780,6 +4780,26 @@
     "yir_2024_studio_count": {
       "default": "Studio Count",
       "description": "Row label for the total number of distinct studios watched on the 2024 Year in Review studios section."
+    },
+    "yir_2024_genre_count": {
+      "default": "Genre Count",
+      "description": "Row label for the total number of distinct genres watched on the 2024 Year in Review genres section."
+    },
+    "yir_2024_most_watched_show_genres": {
+      "default": "Most Watched Show Genres",
+      "description": "Section heading above the show-genres bar chart on the 2024 Year in Review template."
+    },
+    "yir_2024_most_watched_movie_genres": {
+      "default": "Most Watched Movie Genres",
+      "description": "Section heading above the movie-genres bar chart on the 2024 Year in Review template."
+    },
+    "yir_2024_genres_watermark_show": {
+      "default": "show genres",
+      "description": "Faint background watermark text behind the show-genres section heading on the 2024 Year in Review template."
+    },
+    "yir_2024_genres_watermark_movie": {
+      "default": "movie genres",
+      "description": "Faint background watermark text behind the movie-genres section heading on the 2024 Year in Review template."
     },
     "yir_2024_stats_intro_shows": {
       "default": "In {year}, you watched",
