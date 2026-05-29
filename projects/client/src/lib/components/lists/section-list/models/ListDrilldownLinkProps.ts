@@ -6,5 +6,5 @@ export type ListDrilldownLinkProps = {
   noscroll?: boolean;
   replacestate?: boolean;
   source: DrilldownSource;
-  mode?: 'default' | 'always';
+  mode?: 'default' | 'always' | 'disabled';
 };

@@ -10,6 +10,8 @@
   import { slide } from "svelte/transition";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CloseIcon from "../icons/CloseIcon.svelte";
+  import ListTitle from "../lists/_internal/ListTitle.svelte";
+  import type { ListDrilldownLinkProps } from "../lists/section-list/models/ListDrilldownLinkProps";
   import { useDrawerPortal } from "./_internal/useDrawerPortal";
   import { verticalDrag } from "./_internal/verticalDrag";
 
@@ -26,6 +28,7 @@
     onOpened?: () => void;
     classList?: string;
     variant?: "default" | "vip";
+    drilldown?: ListDrilldownLinkProps;
   } & ChildrenProps;
 
   const {
@@ -40,6 +43,7 @@
     onOpened,
     classList = "",
     variant = "default",
+    drilldown,
   }: DrawerProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -103,7 +107,12 @@
     {#if title}
       <div class="trakt-drawer-title-container">
         <div class="trakt-drawer-title">
-          <h1 class="ellipsis">{title}</h1>
+          {#if drilldown}
+            <ListTitle {title} {drilldown} />
+          {:else}
+            <h1 class="ellipsis">{title}</h1>
+          {/if}
+
           {#if metaInfo}
             {#if typeof metaInfo === "string"}
               <p class="title-meta-info bold ellipsis">{metaInfo}</p>

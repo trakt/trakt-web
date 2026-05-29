@@ -1,11 +1,16 @@
 <script lang="ts">
+  import ListTitle from "$lib/components/lists/_internal/ListTitle.svelte";
+  import type { ListDrilldownLinkProps } from "$lib/components/lists/section-list/models/ListDrilldownLinkProps";
   import type { Snippet } from "svelte";
 
-  const {
-    title,
-    icon,
-    actions,
-  }: { title: string; icon?: Snippet; actions?: Snippet } = $props();
+  type ListsHeaderProps = {
+    title: string;
+    icon?: Snippet;
+    actions?: Snippet;
+    drilldown?: ListDrilldownLinkProps;
+  };
+
+  const { title, icon, actions, drilldown }: ListsHeaderProps = $props();
 </script>
 
 <div class="trakt-lists-header">
@@ -16,7 +21,11 @@
       </div>
     {/if}
 
-    <span class="title secondary">{title}</span>
+    {#if drilldown}
+      <ListTitle {title} {drilldown} />
+    {:else}
+      <span class="title secondary">{title}</span>
+    {/if}
   </div>
 
   {#if actions}
