@@ -21,6 +21,10 @@
   <RatingIcon />
 {/if}
 
+{#if sortBy === "my_rating"}
+  <StarIcon fill="full" />
+{/if}
+
 {#if sortBy === "runtime"}
   <ClockIcon />
 {/if}

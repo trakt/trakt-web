@@ -23,6 +23,11 @@ export const LIST_SORT_OPTIONS: Sorting[] = [
     label: m.button_label_sort_rating,
   },
   {
+    value: 'my_rating',
+    text: m.button_text_sort_my_rating,
+    label: m.button_label_sort_my_rating,
+  },
+  {
     value: 'released',
     text: m.button_text_sort_release_date,
     label: m.button_label_sort_release_date,

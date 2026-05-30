@@ -6,6 +6,7 @@ import { isMaxDate } from '../../../../utils/date/isMaxDate.ts';
 import { toHumanDay } from '../../../../utils/formatting/date/toHumanDay.ts';
 import { toHumanDuration } from '../../../../utils/formatting/date/toHumanDuration.ts';
 import { toTraktRating } from '../../../../utils/formatting/number/toTraktRating.ts';
+import { toUserRating } from '../../../../utils/formatting/number/toUserRating.ts';
 import type { SortBy } from '../models/SortBy.ts';
 
 export type SortInput = ListItem | FavoritedEntry;
@@ -74,7 +75,11 @@ function getRating(item: SortInput): number | null | undefined {
   return getListItemEntry(item).rating;
 }
 
-export function formatSortValue(item: SortInput, sortBy?: SortBy) {
+export function formatSortValue(
+  item: SortInput,
+  sortBy?: SortBy,
+  userRating?: number,
+) {
   if (!sortBy) {
     return;
   }
@@ -100,6 +105,10 @@ export function formatSortValue(item: SortInput, sortBy?: SortBy) {
       const rating = getRating(item);
       return rating ? `${toTraktRating(rating, getLocale())}` : undefined;
     }
+    case 'my_rating':
+      return userRating != null
+        ? toUserRating(userRating, getLocale())
+        : undefined;
     case 'title':
       return getTitle(item)[0]?.toUpperCase();
   }

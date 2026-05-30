@@ -83,6 +83,21 @@ describe('formatSortValue', () => {
     });
   });
 
+  describe('sortBy: my_rating', () => {
+    const item = {
+      type: 'movie',
+      entry: { id: 1 },
+    } as unknown as ListItem;
+
+    it('should return formatted user rating when provided', () => {
+      expect(formatSortValue(item, 'my_rating', 8)).toBe('4');
+    });
+
+    it('should return undefined when user rating is missing', () => {
+      expect(formatSortValue(item, 'my_rating')).toBeUndefined();
+    });
+  });
+
   describe('sortBy: title', () => {
     it('should return first letter of movie title', () => {
       const movieItem = {
