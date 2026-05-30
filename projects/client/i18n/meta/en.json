@@ -3834,6 +3834,14 @@
       "default": "Sort by rating",
       "description": "Aria-label for the button that allows users to sort items by their rating."
     },
+    "button_text_sort_my_rating": {
+      "default": "My Rating",
+      "description": "Text for the button that allows users to sort items by their own rating."
+    },
+    "button_label_sort_my_rating": {
+      "default": "Sort by my rating",
+      "description": "Aria-label for the button that allows users to sort items by their own rating."
+    },
     "button_text_sort_release_date": {
       "default": "Release Date",
       "description": "Text for the button that allows users to sort items by their release date."
