@@ -17,7 +17,7 @@
 </script>
 
 <SectionList
-  id="credits-history-list"
+  id={`credits-history-list-${person.slug}`}
   items={$list}
   title={m.list_title_from_my_history()}
   drilldown={drilldownLink

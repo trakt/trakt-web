@@ -4,25 +4,26 @@
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
   import {
-      SummaryDrawers,
-      summaryDrawerNavigation,
+    SummaryDrawers,
+    summaryDrawerNavigation,
   } from "../summary/_internal/summaryDrawerNavigation";
   import CastMemberItem from "./components/CastMemberItem.svelte";
 
   type CastListProps = {
     title: string;
     cast: CastMember[];
+    slug: string;
     type: ExtendedMediaType;
   };
 
-  const { title, cast, type }: CastListProps = $props();
+  const { title, cast, slug, type }: CastListProps = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
   const castDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Cast));
 </script>
 
 <SectionList
-  id={`cast-list-${type}`}
+  id={`cast-list-${slug}`}
   items={cast}
   {title}
   drilldown={{

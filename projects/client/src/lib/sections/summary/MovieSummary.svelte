@@ -15,7 +15,7 @@
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
-  import Sentiment from "./components/sentiment/Sentiment.svelte";
+  import CommunitySentiment from "./components/sentiment/Sentiment.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
   import SummaryDrawer from "./SummaryDrawer.svelte";
@@ -50,7 +50,7 @@
     {#snippet contextualContent()}
       <RenderFor audience="all" device={["desktop"]}>
         <WhereToWatchList type="movie" {media} {streamOn} variant="inline" />
-        <Sentiment {sentiment} type={media.type} variant="inline" />
+        <CommunitySentiment {sentiment} slug={media.slug} variant="inline" />
       </RenderFor>
     {/snippet}
   </MediaSummary>
@@ -58,14 +58,19 @@
 
 <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="movie" {media} {streamOn} />
-  <Sentiment {sentiment} type={media.type} />
+  <CommunitySentiment {sentiment} slug={media.slug} />
 </RenderFor>
 
-<CastList title={m.list_title_actors()} cast={crew.cast} type={media.type} />
+<CastList
+  title={m.list_title_actors()}
+  cast={crew.cast}
+  slug={media.slug}
+  type={media.type}
+/>
 
 <Comments {media} type="movie" />
 
-<VideoList slug={media.slug} {videos} type="movie" />
+<VideoList slug={media.slug} {videos} />
 
 <RelatedList
   title={m.list_title_related_movies()}
