@@ -6886,6 +6886,66 @@
     "button_label_edit_mode": {
       "default": "Edit mode",
       "description": "Aria-label for the button that allows users to enter edit mode to customize their dashboard."
+    },
+    "match_pill_aria_label": {
+      "default": "{score}% match, {label}. Open match details.",
+      "description": "Aria-label for the compatibility pill in the profile banner. Announces the match score, the tonal label (e.g. 'Soul twin'), and that the pill opens a drawer with more detail.",
+      "variables": {
+        "score": {
+          "type": "number"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "match_drawer_title": {
+      "default": "Match details",
+      "description": "Header of the drawer that opens when the compatibility pill is tapped."
+    },
+    "match_drawer_breakdown_header": {
+      "default": "How this adds up",
+      "description": "Section header inside the match drawer, above the per-signal bars that explain how the overall score is composed."
+    },
+    "match_drawer_breakdown_topics": {
+      "default": "Topics",
+      "description": "Label for the per-signal bar that shows what fraction of media topics (subgenres) the two users share."
+    },
+    "match_drawer_breakdown_favorites": {
+      "default": "Favorites",
+      "description": "Label for the per-signal bar that shows what fraction of favorited movies and shows the two users share."
+    },
+    "match_drawer_breakdown_caption": {
+      "default": "Score blends topic taste (70%) and shared favorites (30%).",
+      "description": "Small caption under the breakdown bars, explaining the weighting used to compute the overall match score."
+    },
+    "match_drawer_shared_topics_header": {
+      "default": "Shared topics",
+      "description": "Section header above the list of subgenre chips that both users have watched a lot of. 'Topics' is the user-facing label for the technical concept of subgenres."
+    },
+    "match_label_soul_twin": {
+      "default": "Soul twin",
+      "description": "Tonal label for the highest match band (75%+). Reads as 'we like the exact same stuff'."
+    },
+    "match_label_strong_match": {
+      "default": "Strong match",
+      "description": "Tonal label for a high match band (55-74%). Reads as 'lots in common'."
+    },
+    "match_label_aligned_tastes": {
+      "default": "Aligned tastes",
+      "description": "Tonal label for a solid-mid match band (35-54%). Reads as 'meaningful overlap'."
+    },
+    "match_label_common_ground": {
+      "default": "Common ground",
+      "description": "Tonal label for a mid match band (20-34%). Reads as 'some overlap worth exploring'."
+    },
+    "match_label_light_overlap": {
+      "default": "Light overlap",
+      "description": "Tonal label for a low match band (8-19%). Reads as 'a little in common'."
+    },
+    "match_label_different_scenes": {
+      "default": "Different scenes",
+      "description": "Tonal label for the lowest match band (<8%). Reads as 'we watch very different things' without being harsh."
     }
   }
 }
