@@ -1,9 +1,7 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import { useDiscover } from "$lib/features/discover/useDiscover.ts";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import { m } from "$lib/features/i18n/messages.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import FavoritesList from "../lists/favorites/FavoritesList.svelte";
   import PersonalHistoryList from "../lists/history/PersonalHistoryList.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
@@ -30,11 +28,7 @@
 </ProfileContainer>
 
 {#if $isMe}
-  <RenderForFeature flag={FeatureFlag.MyStats}>
-    {#snippet enabled()}
-      <MyStats />
-    {/snippet}
-  </RenderForFeature>
+  <MyStats />
   <PersonalHistoryList mode={$mode} />
   <MyActivityList mode={$mode} />
   <ProgressList mode={$mode} />
