@@ -6899,6 +6899,10 @@
         }
       }
     },
+    "match_pill_loading_aria_label": {
+      "default": "Computing match score",
+      "description": "Aria-label for the compatibility pill placeholder shown while the match score is loading."
+    },
     "match_drawer_title": {
       "default": "Match details",
       "description": "Header of the drawer that opens when the compatibility pill is tapped."
