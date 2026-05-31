@@ -16,7 +16,21 @@
   let isOpen = $state(false);
 </script>
 
-{#if !$isLoading && $match}
+{#if $isLoading}
+  <!-- Placeholder mirrors the loaded pill's outer dimensions (padding,
+       border, radius) so the surrounding profile-user-details column does
+       not jump when the real score lands. -->
+  <div
+    class="trakt-match-pill"
+    role="status"
+    data-loading="true"
+    aria-busy="true"
+    aria-label={m.match_pill_loading_aria_label()}
+  >
+    <span class="placeholder placeholder-score"></span>
+    <span class="placeholder placeholder-label"></span>
+  </div>
+{:else if $match}
   <!-- FIXME: use Link component for this + build drawer link -->
   <button
     class="trakt-match-pill"
@@ -38,6 +52,7 @@
 <style lang="scss">
   .trakt-match-pill {
     --pill-accent: var(--color-foreground);
+    --height-match-label: calc(var(--font-size-text) + var(--ni-2));
     --fill: 0%;
 
     align-self: flex-start;
@@ -84,11 +99,21 @@
     &:active {
       transform: scale(0.97);
     }
+
+    &[data-loading="true"] {
+      cursor: default;
+      background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+
+      &:active {
+        transform: none;
+      }
+    }
   }
 
   .score {
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
+    height: var(--height-match-label);
   }
 
   .suffix {
@@ -98,5 +123,50 @@
 
   .label {
     white-space: nowrap;
+    height: var(--height-match-label);
+  }
+
+  // Skeleton inner blocks sized to typical pill content so the outer
+  // dimensions match: ~3.5ch score area, ~12ch label area. Shimmer sweep
+  // mirrors the SkeletonCard treatment for visual continuity.
+  .placeholder {
+    display: inline-block;
+    height: var(--height-match-label);
+    border-radius: var(--border-radius-xs, var(--ni-4));
+    background: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+
+      position: absolute;
+      top: 0;
+
+      width: 300%;
+      height: 100%;
+
+      transform: translateX(100%);
+
+      animation: slide calc(8 * var(--transition-increment)) infinite;
+
+      background: linear-gradient(
+        110deg,
+        transparent 0%,
+        transparent 30%,
+        color-mix(in srgb, var(--color-foreground) 25%, transparent) 50%,
+        transparent 70%,
+        transparent 100%
+      );
+    }
+  }
+
+  .placeholder-score {
+    width: 3.5ch;
+  }
+
+  .placeholder-label {
+    width: 12ch;
   }
 </style>
