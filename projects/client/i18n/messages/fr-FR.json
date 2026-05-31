@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Âme sœur",
   "match_label_strong_match": "Forte correspondance",
   "match_pill_aria_label": "{score}% de correspondance, {label}. Ouvrir les détails de la correspondance.",
+  "match_pill_loading_aria_label": "Calcul du score de compatibilité",
   "notes_placeholder_text": "Laissez une note la prochaine fois que vous ajoutez ou supprimez un titre.",
   "option_text_africa": "Afrique",
   "option_text_all": "Tous",

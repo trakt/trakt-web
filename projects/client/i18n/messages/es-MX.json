@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Alma gemela",
   "match_label_strong_match": "Coincidencia fuerte",
   "match_pill_aria_label": "{score}% de coincidencia, {label}. Abrir detalles de la coincidencia.",
+  "match_pill_loading_aria_label": "Calculando puntuación de coincidencia",
   "notes_placeholder_text": "Deja una nota la próxima vez que marques como favorito o abandones un título.",
   "option_text_africa": "África",
   "option_text_all": "Todos",

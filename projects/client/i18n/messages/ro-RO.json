@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Suflet pereche",
   "match_label_strong_match": "Potrivire puternică",
   "match_pill_aria_label": "{score}% potrivire, {label}. Deschide detaliile potrivirii.",
+  "match_pill_loading_aria_label": "Se calculează scorul de potrivire",
   "notes_placeholder_text": "Lasă o notă data viitoare când adaugi la favorite sau renunți la un titlu.",
   "option_text_africa": "Africa",
   "option_text_all": "Toate",

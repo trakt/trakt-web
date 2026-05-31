@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Själsfrände",
   "match_label_strong_match": "Stark matchning",
   "match_pill_aria_label": "{score}% match, {label}. Öppna matchningsdetaljer.",
+  "match_pill_loading_aria_label": "Beräknar kompatibilitetspoäng",
   "notes_placeholder_text": "Lämna en anteckning nästa gång du markerar en titel som favorit eller släpper den.",
   "option_text_africa": "Afrika",
   "option_text_all": "Alla",

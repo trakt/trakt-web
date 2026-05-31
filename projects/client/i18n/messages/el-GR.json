@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Αδελφή ψυχή",
   "match_label_strong_match": "Ισχυρή αντιστοιχία",
   "match_pill_aria_label": "{score}% αντιστοιχία, {label}. Άνοιγμα λεπτομερειών αντιστοιχίας.",
+  "match_pill_loading_aria_label": "Υπολογίζεται η βαθμολογία αντιστοίχισης",
   "notes_placeholder_text": "Αφήστε μια σημείωση την επόμενη φορά που θα βάλετε στα αγαπημένα ή θα απορρίψετε έναν τίτλο.",
   "option_text_africa": "Αφρική",
   "option_text_all": "Όλα",

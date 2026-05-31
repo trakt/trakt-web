@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Alma Gêmea",
   "match_label_strong_match": "Alta compatibilidade",
   "match_pill_aria_label": "{score}% de compatibilidade, {label}. Abrir detalhes da compatibilidade.",
+  "match_pill_loading_aria_label": "Calculando pontuação de compatibilidade",
   "notes_placeholder_text": "Deixe uma nota na próxima vez que você favoritar ou abandonar um título.",
   "option_text_africa": "África",
   "option_text_all": "Todos",

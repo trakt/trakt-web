@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Sjelevenn",
   "match_label_strong_match": "Sterk match",
   "match_pill_aria_label": "{score}% match, {label}. Åpne matchdetaljer.",
+  "match_pill_loading_aria_label": "Beregner treffscore",
   "notes_placeholder_text": "Legg igjen et notat neste gang du favoritter eller dropper en tittel.",
   "option_text_africa": "Afrika",
   "option_text_all": "Alle",

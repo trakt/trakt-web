@@ -686,6 +686,7 @@
   "match_label_soul_twin": "ソウルメイト",
   "match_label_strong_match": "高一致",
   "match_pill_aria_label": "{score}%一致、{label}。一致の詳細を開く。",
+  "match_pill_loading_aria_label": "マッチスコアを計算中",
   "notes_placeholder_text": "次回タイトルをお気に入りに追加したり、ドロップしたりする際にメモを残しましょう。",
   "option_text_africa": "アフリカ",
   "option_text_all": "全て",

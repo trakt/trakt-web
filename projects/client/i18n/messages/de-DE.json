@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Seelenverwandte(r)",
   "match_label_strong_match": "Starke Übereinstimmung",
   "match_pill_aria_label": "{score}% Übereinstimmung, {label}. Übereinstimmungsdetails öffnen.",
+  "match_pill_loading_aria_label": "Übereinstimmungswert wird berechnet",
   "notes_placeholder_text": "Hinterlassen Sie eine Notiz, wenn Sie das nächste Mal einen Titel favorisieren oder abbrechen.",
   "option_text_africa": "Afrika",
   "option_text_all": "Alle",

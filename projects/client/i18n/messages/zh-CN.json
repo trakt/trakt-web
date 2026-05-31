@@ -686,6 +686,7 @@
   "match_label_soul_twin": "灵魂伴侣",
   "match_label_strong_match": "高度匹配",
   "match_pill_aria_label": "{score}% 匹配，{label}。打开匹配详情。",
+  "match_pill_loading_aria_label": "正在计算匹配度",
   "notes_placeholder_text": "下次您收藏或放弃某部影片时留下笔记。",
   "option_text_africa": "非洲",
   "option_text_all": "全部",

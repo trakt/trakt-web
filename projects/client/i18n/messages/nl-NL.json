@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Zielsverwant",
   "match_label_strong_match": "Sterke match",
   "match_pill_aria_label": "{score}% match, {label}. Open matchdetails.",
+  "match_pill_loading_aria_label": "Matchscore berekenen",
   "notes_placeholder_text": "Laat een notitie achter de volgende keer dat u een titel favoriet of laat vallen.",
   "option_text_africa": "Afrika",
   "option_text_all": "Alles",

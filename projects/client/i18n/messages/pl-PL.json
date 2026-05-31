@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Bliźniak duszy",
   "match_label_strong_match": "Silne dopasowanie",
   "match_pill_aria_label": "{score}% dopasowania, {label}. Otwórz szczegóły dopasowania.",
+  "match_pill_loading_aria_label": "Obliczanie wyniku dopasowania",
   "notes_placeholder_text": "Zostaw notatkę następnym razem, gdy dodasz do ulubionych lub porzucisz tytuł.",
   "option_text_africa": "Afryka",
   "option_text_all": "Wszystkie",

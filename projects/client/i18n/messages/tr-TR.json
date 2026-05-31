@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Ruh ikizi",
   "match_label_strong_match": "Güçlü eşleşme",
   "match_pill_aria_label": "{score}% eşleşme, {label}. Eşleşme detaylarını aç.",
+  "match_pill_loading_aria_label": "Eşleşme puanı hesaplanıyor",
   "notes_placeholder_text": "Bir dahaki sefere bir başlığı favorilediğinizde veya bıraktığınızda bir not bırakın.",
   "option_text_africa": "Afrika",
   "option_text_all": "Tümü",

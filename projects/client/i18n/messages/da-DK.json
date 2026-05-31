@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Sjæleven",
   "match_label_strong_match": "Stærkt match",
   "match_pill_aria_label": "{score}% match, {label}. Åbn matchdetaljer.",
+  "match_pill_loading_aria_label": "Beregner matchscore",
   "notes_placeholder_text": "Efterlad en note næste gang du favoritter eller dropper en titel.",
   "option_text_africa": "Afrika",
   "option_text_all": "Alle",

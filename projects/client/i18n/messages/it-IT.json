@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Anima gemella",
   "match_label_strong_match": "Forte corrispondenza",
   "match_pill_aria_label": "{score}% di corrispondenza, {label}. Apri dettagli corrispondenza.",
+  "match_pill_loading_aria_label": "Calcolo del punteggio di corrispondenza",
   "notes_placeholder_text": "Lascia una nota la prossima volta che aggiungi un titolo ai preferiti o lo scarti.",
   "option_text_africa": "Africa",
   "option_text_all": "Tutti",

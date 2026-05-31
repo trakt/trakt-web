@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Сродна душа",
   "match_label_strong_match": "Силно съвпадение",
   "match_pill_aria_label": "{score}% съвпадение, {label}. Отворете подробности за съвпадението.",
+  "match_pill_loading_aria_label": "Изчисляване на резултат за съвпадение",
   "notes_placeholder_text": "Оставете бележка следващия път, когато харесате или премахнете заглавие.",
   "option_text_africa": "Африка",
   "option_text_all": "Всички",

@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Lélektárs",
   "match_label_strong_match": "Erős egyezés",
   "match_pill_aria_label": "{score}% egyezés, {label}. Egyezési részletek megnyitása.",
+  "match_pill_loading_aria_label": "Egyezési pontszám számítása",
   "notes_placeholder_text": "Hagyj egy jegyzetet, amikor legközelebb kedvencnek jelölsz vagy eldobsz egy címet.",
   "option_text_africa": "Afrika",
   "option_text_all": "Összes",

@@ -686,6 +686,7 @@
   "match_label_soul_twin": "Споріднена душа",
   "match_label_strong_match": "Висока відповідність",
   "match_pill_aria_label": "{score}% відповідності, {label}. Відкрити деталі відповідності.",
+  "match_pill_loading_aria_label": "Обчислення оцінки сумісності",
   "notes_placeholder_text": "Залиште нотатку наступного разу, коли ви додаєте в улюблені або відмовляєтеся від назви.",
   "option_text_africa": "Африка",
   "option_text_all": "Всі",
