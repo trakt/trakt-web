@@ -34,7 +34,10 @@
 
 <div class="trakt-profiles-list">
   <SectionList
-    id={`profiles-list-${slug}-${$current.value}`}
+    id={{
+      scope: "profiles-list",
+      key: `${slug}-${$current.value}`,
+    }}
     items={$profiles}
     title={m.list_title_social()}
     --height-list="var(--height-profile-list)"

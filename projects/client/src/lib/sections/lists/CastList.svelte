@@ -23,7 +23,10 @@
 </script>
 
 <SectionList
-  id={`cast-list-${slug}`}
+  id={{
+    scope: `cast-list-${type}`,
+    key: slug,
+  }}
   items={cast}
   {title}
   drilldown={{

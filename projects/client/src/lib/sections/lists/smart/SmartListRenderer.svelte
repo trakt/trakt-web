@@ -32,20 +32,22 @@
 
 <GlobalParameterEscaper enabled>
   {#each $lists as list (list.id)}
+    {@const scope = `smart-list-${list.target}-${list.key}`}
+
     {#snippet actions()}
       <SmartListActions {list} />
     {/snippet}
 
     {#if list.target === "trending"}
-      <TrendingList {...getListProps(list)} {actions} />
+      <TrendingList {...getListProps(list)} {actions} {scope} />
     {/if}
 
     {#if list.target === "anticipated"}
-      <AnticipatedList {...getListProps(list)} {actions} />
+      <AnticipatedList {...getListProps(list)} {actions} {scope} />
     {/if}
 
     {#if list.target === "popular"}
-      <PopularList {...getListProps(list)} {actions} />
+      <PopularList {...getListProps(list)} {actions} {scope} />
     {/if}
   {/each}
 </GlobalParameterEscaper>

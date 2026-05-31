@@ -87,7 +87,10 @@
       {#if seasons.length > 1}
         <div class="seasons-section">
           <SectionList
-            id={`season-poster-list-${show.slug}`}
+            id={{
+              scope: "season-poster-list",
+              key: show.slug,
+            }}
             items={seasons}
             title={null}
             variant="inline"

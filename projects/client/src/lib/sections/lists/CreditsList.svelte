@@ -59,7 +59,10 @@
 </script>
 
 <SectionList
-  id={`credits-list-${person.slug}-${type}-${selectedPosition}`}
+  id={{
+    scope: `credits-list-${type}`,
+    key: `${person.slug}-${selectedPosition}`,
+  }}
   items={list}
   {title}
   drilldown={drilldownHref

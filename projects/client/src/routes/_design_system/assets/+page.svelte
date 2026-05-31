@@ -96,7 +96,9 @@
   </div>
 
   <SectionList
-    id="assets-covers"
+    id={{
+      scope: "assets-covers",
+    }}
     title={`Covers (${media.length})`}
     items={media}
     --height-list="var(--ni-128)"
@@ -120,7 +122,9 @@
   </SectionList>
 
   <SectionList
-    id="assets-posters"
+    id={{
+      scope: "assets-posters",
+    }}
     title={`Posters (${media.length})`}
     items={media}
     --height-list="var(--ni-180)"
@@ -144,7 +148,9 @@
   </SectionList>
 
   <SectionList
-    id="assets-logos"
+    id={{
+      scope: "assets-logos",
+    }}
     title={`Logos (${media.length})`}
     items={media}
     --height-list="var(--ni-180)"

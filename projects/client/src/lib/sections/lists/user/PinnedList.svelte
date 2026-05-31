@@ -39,5 +39,10 @@
     </ActionButton>
   {/snippet}
 
-  <UserList list={$list} type={mode} titleAction={dismissAction} />
+  <UserList
+    list={$list}
+    type={mode}
+    titleAction={dismissAction}
+    scope="pinned-list"
+  />
 {/if}

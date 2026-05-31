@@ -30,13 +30,14 @@
     type: "favorites" as const,
     mediaType: mode === "media" ? undefined : mode,
   });
-
-  const listId = $derived(`favorites-list-${mode}-${slug}`);
 </script>
 
 <DrillableMediaList
   {title}
-  id={listId}
+  id={{
+    scope: "favorites-list",
+    key: `${mode}-${slug}`,
+  }}
   type={mode}
   useList={(params) => useFavoritesList({ ...params, slug })}
   drilldownLabel={m.button_label_view_all_favorites()}

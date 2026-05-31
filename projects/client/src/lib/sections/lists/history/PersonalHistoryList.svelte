@@ -23,7 +23,10 @@
 
 <DrillableMediaList
   title={m.list_title_history()}
-  id="personal-history-list"
+  id={{
+    scope: "personal-history-list",
+    key: historyType,
+  }}
   type="episode"
   filter={$filterMap}
   useList={(params) =>

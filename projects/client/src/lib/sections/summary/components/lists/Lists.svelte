@@ -21,17 +21,22 @@
 
   const lists = $derived($list.slice(0, MAX_LISTS));
   const topList = $derived(lists.at(0));
+
+  const scope = $derived(`popular-lists-${type}`);
 </script>
 
 {#snippet topUserList()}
   {#if topList}
-    <UserList list={topList} {type} />
+    <UserList list={topList} {type} {scope} />
   {/if}
 {/snippet}
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
   <SectionList
-    id={`popular-lists-list-${slug}`}
+    id={{
+      scope,
+      key: slug,
+    }}
     items={lists}
     title={m.list_title_popular_lists()}
     drilldown={{

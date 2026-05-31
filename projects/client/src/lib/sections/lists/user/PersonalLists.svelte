@@ -101,7 +101,10 @@
 
   {#if variant === "summary"}
     <SectionList
-      id={`personal-lists-${type}-list`}
+      id={{
+        scope: "personal-lists-list",
+        key: type,
+      }}
       items={$lists}
       {title}
       drilldown={{

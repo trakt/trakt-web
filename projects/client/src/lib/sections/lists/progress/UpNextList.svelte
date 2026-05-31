@@ -25,7 +25,10 @@
 <DropNotePromptProvider>
   <DrillableMediaList
     type={$mode}
-    id={`up-next-list-${$mode}`}
+    id={{
+      scope: "up-next-list",
+      key: $mode,
+    }}
     source={{
       id: "up-next",
     }}

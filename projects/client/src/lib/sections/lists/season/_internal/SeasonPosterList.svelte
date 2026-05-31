@@ -36,7 +36,10 @@
 <SectionList
   {title}
   {subtitle}
-  id={`season-poster-list-${show.slug}`}
+  id={{
+    scope: "season-poster-list",
+    key: show.slug,
+  }}
   items={seasons}
   drilldown={{
     ...buildDrawerLink(SummaryDrawers.Seasons),

@@ -29,7 +29,9 @@
 
 {#if $list.length === 0}
   <SectionList
-    id="smart-lists"
+    id={{
+      scope: "smart-lists",
+    }}
     items={[]}
     title="Smart Lists"
     --height-list="var(--height-poster-list-sm)"

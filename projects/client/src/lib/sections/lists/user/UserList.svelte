@@ -10,12 +10,15 @@
   import UserListItem from "./_internal/UserListItem.svelte";
   import ListActions from "./ListActions.svelte";
 
-  const {
-    list,
-    type,
-    titleAction,
-  }: { list: MediaListSummary; type?: DiscoverMode; titleAction?: Snippet } =
-    $props();
+  type UserListProps = {
+    list: MediaListSummary;
+    type?: DiscoverMode;
+    titleAction?: Snippet;
+    scope?: string;
+  };
+
+  const { list, type, titleAction, scope }: UserListProps = $props();
+
   const { filterMap } = useFilter();
 
   const placeholderText = $derived.by(() => {
@@ -35,7 +38,10 @@
   --height-override-list="var(--height-poster-list-sm)"
   {type}
   source={{ id: "user-list", type }}
-  id={`user-list-${type}-${list.id}`}
+  id={{
+    scope: scope ?? "user-list",
+    key: `${type}-${list.id}`,
+  }}
   drilldownLabel={m.button_text_view_all()}
   filter={$filterMap}
   useList={(params) => useListItems({ list, ...params })}

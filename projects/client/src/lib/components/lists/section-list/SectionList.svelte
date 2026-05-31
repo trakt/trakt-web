@@ -23,12 +23,13 @@
   import CollapseIcon from "./CollapseIcon.svelte";
   import type { ListVariant } from "./ListVariant";
   import type { ListDrilldownLinkProps } from "./models/ListDrilldownLinkProps";
+  import type { SectionListId } from "./models/SectionListId";
 
   const emptyStateClass = "section-list-empty-state";
   const ctaCutOff = 4;
 
-  type SectionListProps<T> = ListProps<T> & {
-    id: string;
+  type SectionListProps<T> = Omit<ListProps<T>, "id"> & {
+    id: SectionListId;
     empty?: Snippet;
     metaInfo?: Snippet;
     headerNavigationType?: DpadNavigationType;
@@ -59,7 +60,9 @@
     isHidden,
     toggle: toggleHidden,
     action: editModeAction,
-  } = $derived(section(id));
+  } = $derived(section(id.scope));
+
+  const listId = $derived(id.key ? `${id.scope}-${id.key}` : id.scope);
 
   const { isEnabled } = useFeatureFlag();
   const isEditModeEnabled = $derived(isEnabled(FeatureFlag.EditMode));
@@ -70,7 +73,7 @@
   const isVisible = writable($navigation === "dpad");
   const isMounted = writable(false);
   const { isCollapsed: isListCollapsed, toggle } = $derived(
-    useCollapsedList(id),
+    useCollapsedList(listId),
   );
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
@@ -170,7 +173,7 @@
         <Crossfade showA={items.length > 0}>
           {#snippet childrenA()}
             <div
-              use:scrollHistory={id}
+              use:scrollHistory={listId}
               use:resetScroll
               class="trakt-list-item-container section-list-horizontal-scroll"
               data-dpad-navigation={DpadNavigationType.List}
@@ -181,7 +184,7 @@
               {/each}
 
               {#if ctaItem && items.length <= ctaCutOff}
-                {#key `section-list-${id}_cta`}
+                {#key `section-list-${listId}_cta`}
                   {@render ctaItem()}
                 {/key}
               {/if}
