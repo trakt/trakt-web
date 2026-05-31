@@ -60,7 +60,7 @@
 >
   {#snippet empty()}
     {#if $isLoading}
-      <SkeletonList {id} {variant} />
+      <SkeletonList id={id.scope} {variant} />
     {:else if $hasActiveFilter}
       <NoFilterResultsPlaceholder />
     {:else}

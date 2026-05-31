@@ -50,7 +50,10 @@
 </script>
 
 <SectionList
-  id={`season-episode-list-${show.slug}`}
+  id={{
+    scope: "season-episode-list",
+    key: show.slug,
+  }}
   items={episodes}
   {title}
   {subtitle}

@@ -41,7 +41,10 @@
 {#if summaryItem.text.length > 0}
   <div class="trivia-list-container" transition:slide={{ duration: 150 }}>
     <SectionList
-      id={`trivia-list-${media.slug}-${media.type}`}
+      id={{
+        scope: `trivia-list-${media.type}`,
+        key: media.slug,
+      }}
       items={[summaryItem]}
       title={m.list_title_trivia()}
       --height-list="var(--height-trivia-list)"

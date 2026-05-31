@@ -22,7 +22,9 @@
 
 {#if hasItems || $isLoading}
   <SectionList
-    id="weekly-pulse"
+    id={{
+      scope: "weekly-pulse",
+    }}
     items={$items}
     title={m.header_stats_my_stats()}
     drilldown={{

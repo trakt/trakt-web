@@ -16,6 +16,7 @@
     search?: Record<string, string>;
     filterOverride?: FilterOverrideParams;
     actions?: Snippet;
+    scope?: string;
   } & Partial<DrillListProps<DiscoverMode>>;
 
   const {
@@ -26,6 +27,7 @@
     filterOverride,
     actions,
     urlBuilder,
+    scope,
   }: TrendingListProps = $props();
   const { filterMap } = useFilter();
 </script>
@@ -33,7 +35,10 @@
 <DrillableMediaList
   --height-override-card="var(--height-portrait-card-sm)"
   --height-override-list="var(--height-poster-list-sm)"
-  id="trending-list-{type}"
+  id={{
+    scope: scope ?? "trending-list",
+    key: type,
+  }}
   source={{ id: "trending", type }}
   {title}
   {drilldownLabel}

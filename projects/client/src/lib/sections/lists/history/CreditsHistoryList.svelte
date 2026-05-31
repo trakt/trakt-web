@@ -17,7 +17,10 @@
 </script>
 
 <SectionList
-  id={`credits-history-list-${person.slug}`}
+  id={{
+    scope: "credits-history-list",
+    key: person.slug,
+  }}
   items={$list}
   title={m.list_title_from_my_history()}
   drilldown={drilldownLink

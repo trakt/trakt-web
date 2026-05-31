@@ -46,7 +46,10 @@
 <DrillableMediaList
   --height-override-card={cardHeight}
   --height-override-list={listHeight}
-  id={`watch-list-${type ?? "media"}-${intent}`}
+  id={{
+    scope: `watch-list-${intent}`,
+    key: `${type ?? "media"}`,
+  }}
   source={{ id: source, type }}
   title={intent === "default"
     ? m.list_title_watchlist()

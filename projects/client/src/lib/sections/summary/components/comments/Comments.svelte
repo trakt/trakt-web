@@ -47,7 +47,10 @@
 
 <RenderFor audience="all">
   <SectionList
-    id={`comments-list-${media.slug}-${$sortType.value}`}
+    id={{
+      scope: `comments-list-${props.type}`,
+      key: `${media.slug}-${$sortType.value}`,
+    }}
     items={$comments}
     title={m.list_title_comments()}
     --height-list="var(--height-comments-list)"

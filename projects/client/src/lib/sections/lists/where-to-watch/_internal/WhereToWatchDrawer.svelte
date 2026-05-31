@@ -65,7 +65,10 @@
     {#if $plexServices.length > 0}
       <WhereToWatchCategory>
         <SectionList
-          id={`where-to-watch-${target.media.slug}-library`}
+          id={{
+            scope: `where-to-watch-drawer-list-library`,
+            key: target.media.slug,
+          }}
           items={$plexServices}
           title={null}
           variant="inline"
@@ -92,7 +95,10 @@
 
             <div class="trakt-service-countries">
               <SectionList
-                id={`where-to-watch-${target.media.slug}-${streamingGroup}-${row.source}`}
+                id={{
+                  scope: `where-to-watch-drawer-list-${streamingGroup}-${row.source}`,
+                  key: target.media.slug,
+                }}
                 items={row.countries}
                 title={null}
                 variant="inline"

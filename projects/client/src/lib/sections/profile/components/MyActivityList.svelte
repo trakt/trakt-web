@@ -67,7 +67,10 @@
 {/snippet}
 
 <SectionList
-  id="activity-list"
+  id={{
+    scope: "activity-list",
+    key: $activityType.value,
+  }}
   items={$list}
   title={m.list_title_activity()}
   {metaInfo}

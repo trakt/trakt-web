@@ -19,7 +19,9 @@
 </script>
 
 <DrillableMediaList
-  id="upcoming-list"
+  id={{
+    scope: "upcoming-list",
+  }}
   source={{ id: "calendar" }}
   type={$mode}
   variant="landscape"

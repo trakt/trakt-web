@@ -16,7 +16,10 @@
 </script>
 
 <MediaList
-  id={`related-list-${type}-${slug}`}
+  id={{
+    scope: `related-list-${type}`,
+    key: slug,
+  }}
   useList={(params) => useRelatedList({ ...params, slug })}
   {type}
   {title}

@@ -30,7 +30,10 @@
 
 <div class="trakt-library-list">
   <SectionList
-    id="library-list"
+    id={{
+      scope: "library-list",
+      key: `${mode}-${activeLibrary}`,
+    }}
     items={$list}
     title={m.list_title_library()}
     --height-list={mediaListHeightResolver("portrait")}
