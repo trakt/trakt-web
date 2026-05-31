@@ -68,7 +68,7 @@
     align-items: center;
 
     height: calc(var(--height-card) - var(--height-card-cover));
-    padding: var(--ni-8);
+    padding-top: var(--ni-8);
     box-sizing: border-box;
 
     :global(.trakt-button) {
