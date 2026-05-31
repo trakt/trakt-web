@@ -59,7 +59,7 @@
 </script>
 
 <SectionList
-  id={`credits-list-${type}`}
+  id={`credits-list-${person.slug}-${type}-${selectedPosition}`}
   items={list}
   {title}
   drilldown={drilldownHref
