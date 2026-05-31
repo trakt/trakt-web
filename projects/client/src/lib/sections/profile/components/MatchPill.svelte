@@ -169,4 +169,48 @@
   .placeholder-label {
     width: 12ch;
   }
+
+  // Skeleton inner blocks sized to typical pill content so the outer
+  // dimensions match: ~3.5ch score area, ~12ch label area. Shimmer sweep
+  // mirrors the SkeletonCard treatment for visual continuity.
+  .placeholder {
+    display: inline-block;
+    height: var(--font-size-text);
+    border-radius: var(--border-radius-xs, var(--ni-4));
+    background: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+
+      position: absolute;
+      top: 0;
+
+      width: 300%;
+      height: 100%;
+
+      transform: translateX(100%);
+
+      animation: slide calc(8 * var(--transition-increment)) infinite;
+
+      background: linear-gradient(
+        110deg,
+        transparent 0%,
+        transparent 30%,
+        color-mix(in srgb, var(--color-foreground) 25%, transparent) 50%,
+        transparent 70%,
+        transparent 100%
+      );
+    }
+  }
+
+  .placeholder-score {
+    width: 3.5ch;
+  }
+
+  .placeholder-label {
+    width: 12ch;
+  }
 </style>
