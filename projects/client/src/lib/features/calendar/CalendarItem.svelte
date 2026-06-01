@@ -6,6 +6,8 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
+  import DropAction from "$lib/sections/media-actions/drop/DropAction.svelte";
+  import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { hasAired } from "$lib/utils/media/hasAired";
   import type { CalendarItem } from "./_internal/useCalendar";
@@ -15,20 +17,37 @@
     item,
     variant = "default",
   }: { item: CalendarItem; variant?: "default" | "summary" } = $props();
+
+  const isDropped = $derived(
+    "show" in item ? useIsDropped(item.show).isDropped : undefined,
+  );
+
+  const hasActions = $derived(hasAired(item) || !$isDropped);
 </script>
 
 <trakt-calendar-item data-variant={variant}>
   {#if "show" in item}
     {#snippet popupActions()}
       <RenderFor audience="authenticated">
-        <MarkAsWatchedAction
-          style="dropdown-item"
-          type="episode"
-          title={item.title}
-          show={item.show}
-          media={item}
-          mode="hybrid"
-        />
+        {#if hasAired(item)}
+          <MarkAsWatchedAction
+            style="dropdown-item"
+            type="episode"
+            title={item.title}
+            show={item.show}
+            media={item}
+            mode="hybrid"
+          />
+        {/if}
+
+        {#if !$isDropped}
+          <DropAction
+            style="dropdown-item"
+            type="show"
+            id={item.show.id}
+            title={item.show.title}
+          />
+        {/if}
       </RenderFor>
     {/snippet}
 
@@ -37,7 +56,7 @@
       media={item.show}
       variant={variant === "default" ? "upcoming" : "calendar"}
       source="calendar"
-      popupActions={hasAired(item) ? popupActions : undefined}
+      popupActions={hasActions ? popupActions : undefined}
     >
       {#snippet tag()}
         {#if variant === "summary"}

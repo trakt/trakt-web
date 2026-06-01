@@ -5,6 +5,7 @@ export type DropButtonProps = {
   isDropping: boolean;
   style: 'action' | 'normal' | 'dropdown-item';
   size: 'normal' | 'small';
+  variant?: 'primary' | 'secondary';
   onDrop: () => void;
   type: MediaType;
 } & Omit<ButtonProps, 'children' | 'onclick' | 'label' | 'type'>;

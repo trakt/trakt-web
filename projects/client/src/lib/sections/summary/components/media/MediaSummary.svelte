@@ -14,7 +14,7 @@
   import SummaryContainer from "../summary/SummaryContainer.svelte";
   import SummaryHeader from "../summary/SummaryHeader.svelte";
   import SummaryOverview from "../summary/SummaryOverview.svelte";
-  import { useIsDropped } from "./_internal/useIsDropped";
+  import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
   import { useMediaMetaInfo } from "./useMediaMetaInfo";
   import MediaActions from "./v2/_internal/MediaActions.svelte";

@@ -14,7 +14,7 @@
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import SummaryTitle from "../../_internal/SummaryTitle.svelte";
   import { useIsRateable } from "../../rating/_internal/useIsRateable";
-  import { useIsDropped } from "../_internal/useIsDropped";
+  import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import type { MediaSummaryEntry } from "../models/MediaSummaryEntry";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
