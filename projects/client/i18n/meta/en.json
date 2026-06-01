@@ -4022,6 +4022,18 @@
       "default": "Trivia",
       "description": "Title for lists containing trivia about a movie or show. This title should be as short and concise as possible."
     },
+    "trivia_label_did_you_know": {
+      "default": "Did you know?",
+      "description": "Short, playful label that introduces a trivia fact about a movie or show — used as a header above the fact text."
+    },
+    "trivia_label_guess_what": {
+      "default": "Guess what?",
+      "description": "Short, playful label that introduces a trivia fact about a movie or show — used as a header above the fact text."
+    },
+    "trivia_label_fun_fact": {
+      "default": "Fun fact!",
+      "description": "Short, playful label that introduces a trivia fact about a movie or show — used as a header above the fact text."
+    },
     "button_label_trivia_no_spoilers": {
       "default": "No spoilers",
       "description": "Aria-label for the button that allows users to only view spoiler free trivia."

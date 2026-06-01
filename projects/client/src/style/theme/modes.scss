@@ -18,9 +18,9 @@
   --color-input-background: var(--shade-10);
 
   --color-drawer-border: var(--shade-400);
-  --background-vip-drawer: radial-gradient(ellipse 80% 86% at 7.82% 100%,
+  --background-vip-drawer: radial-gradient(ellipse 110% 50% at 50% 100%,
       var(--red-50) 0%,
-      var(--color-card-background) 100%);
+      var(--color-card-background) 75%);
 
   /**
    * Navbar
@@ -280,9 +280,9 @@
       transparent);
 
   --color-drawer-border: var(--shade-700);
-  --background-vip-drawer: radial-gradient(ellipse 80% 86% at 7.82% 100%,
+  --background-vip-drawer: radial-gradient(ellipse 110% 50% at 50% 100%,
       var(--red-950) 0%,
-      var(--color-card-background) 100%);
+      var(--color-card-background) 75%);
 
   /**
    * Navbar
