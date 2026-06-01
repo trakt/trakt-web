@@ -2,13 +2,10 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type {
-    UserMatch,
-    UserMatchSharedSubgenre,
-  } from "$lib/requests/models/UserMatch";
+  import type { UserMatch } from "$lib/requests/models/UserMatch";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
   import { matchLabel } from "./matchLabel";
-  import { rarityTier, type RarityTier } from "./rarityTier";
+  import { chipTier } from "./chipTier.ts";
   import SharedMediaPoster from "./SharedMediaPoster.svelte";
 
   const {
@@ -34,20 +31,17 @@
     match.shared.favorites.shows.slice(0, maxSharedPerType),
   );
 
-  // Rare > notable > common > unknown. Server already sorts by
-  // watchCount; the secondary sort here floats niche taste agreement
-  // to the top of the chip row, where it's the strongest scan signal.
-  const tierOrder: Record<RarityTier, number> = {
-    rare: 0,
-    notable: 1,
-    common: 2,
-    unknown: 3,
-  };
-  type DecoratedSubgenre = UserMatchSharedSubgenre & { tier: RarityTier };
-  const sharedSubgenres: DecoratedSubgenre[] = $derived(
-    [...match.shared.subgenres]
-      .map((item) => ({ ...item, tier: rarityTier(item.rarity) }))
-      .sort((a, b) => tierOrder[a.tier] - tierOrder[b.tier]),
+  // Tier is purely positional now: the server already orders chips
+  // by `watchCount × rarity` so index 0 is the user's most
+  // distinctive shared topic with this person. The sparkle reads as
+  // "your hero chip for this pairing" rather than a global rarity
+  // claim - always produces visual hierarchy, even for users whose
+  // top topics are all globally common slugs.
+  const sharedSubgenres = $derived(
+    match.shared.subgenres.map((item, index) => ({
+      ...item,
+      tier: chipTier(index, item.rarity),
+    })),
   );
 
   const dasharray = $derived(`${score}, 100`);
@@ -120,7 +114,7 @@
         <ul class="chips">
           {#each sharedSubgenres as item (item.id)}
             <li class="chip small" data-tier={item.tier}>
-              {#if item.tier === "rare"}
+              {#if item.tier === "rare" || item.tier === "unicorn"}
                 <span class="sparkle" aria-hidden="true">✦</span>
               {/if}
               <span>{item.name}</span>
@@ -340,6 +334,27 @@
       0 var(--ni-2) var(--ni-12)
         color-mix(in srgb, var(--color-foreground) 18%, transparent);
     font-weight: 600;
+  }
+
+  .chip[data-tier="unicorn"] {
+    --chip-unicorn: #a78bfa;
+
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--chip-unicorn) 32%, transparent),
+      color-mix(in srgb, var(--chip-unicorn) 14%, transparent)
+    );
+    border-color: color-mix(in srgb, var(--chip-unicorn) 60%, transparent);
+    box-shadow: 0 0 0 1px
+        color-mix(in srgb, var(--chip-unicorn) 28%, transparent),
+      0 var(--ni-2) var(--ni-14)
+        color-mix(in srgb, var(--chip-unicorn) 40%, transparent);
+    font-weight: 600;
+
+    .sparkle {
+      color: var(--chip-unicorn);
+      opacity: 1;
+    }
   }
 
   .sparkle {

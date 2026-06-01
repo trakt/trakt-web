@@ -4,7 +4,7 @@ export const UserMatchSharedSubgenreSchema = z.object({
   id: z.number(),
   name: z.string(),
   slug: z.string(),
-  watchCount: z.number().optional(),
+  watchCount: z.number(),
   /**
    * Globally-normalized rarity in [0, 1] from the TF-IDF corpus.
    * Higher = niche taste agreement. Omitted when the slug is absent
