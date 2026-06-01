@@ -8,9 +8,14 @@ import { combineLatest } from 'rxjs';
 
 export function appendGlobalParameters(
   anchor: HTMLAnchorElement,
-  _href?: string | Nil,
+  href?: string | Nil,
 ) {
   const { search, override, isEscaped } = useParameters();
+
+  // Track the original href separately — anchor.href gets mutated by applyParams,
+  // so we can't re-read it on subsequent calls. The update() callback keeps this
+  // in sync when the action parameter changes reactively.
+  let originalHref = href ?? anchor.getAttribute('href') ?? '';
 
   let latestValues: [URLSearchParams, string, boolean] | null = null;
 
@@ -21,10 +26,11 @@ export function appendGlobalParameters(
 
     if ($isEscaped) return;
 
-    const isExternal = globalThis.window.location.origin !== anchor.origin;
+    const url = new URL(originalHref, globalThis.window.location.href);
+
+    const isExternal = globalThis.window.location.origin !== url.origin;
     if (isExternal) return;
 
-    const url = new URL(anchor.href);
     const currentUrl = new URL(globalThis.window.location.href);
     const isSamePath = url.pathname === currentUrl.pathname;
 
@@ -56,7 +62,10 @@ export function appendGlobalParameters(
   });
 
   return {
-    update: () => applyParams(),
+    update: (newHref?: string | Nil) => {
+      originalHref = newHref ?? originalHref;
+      applyParams();
+    },
     destroy: () => subscription.unsubscribe(),
   };
 }
