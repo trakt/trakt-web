@@ -2,9 +2,13 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { UserMatch } from "$lib/requests/models/UserMatch";
+  import type {
+    UserMatch,
+    UserMatchSharedSubgenre,
+  } from "$lib/requests/models/UserMatch";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
   import { matchLabel } from "./matchLabel";
+  import { rarityTier, type RarityTier } from "./rarityTier";
   import SharedMediaPoster from "./SharedMediaPoster.svelte";
 
   const {
@@ -28,6 +32,22 @@
   );
   const sharedShows = $derived(
     match.shared.favorites.shows.slice(0, maxSharedPerType),
+  );
+
+  // Rare > notable > common > unknown. Server already sorts by
+  // watchCount; the secondary sort here floats niche taste agreement
+  // to the top of the chip row, where it's the strongest scan signal.
+  const tierOrder: Record<RarityTier, number> = {
+    rare: 0,
+    notable: 1,
+    common: 2,
+    unknown: 3,
+  };
+  type DecoratedSubgenre = UserMatchSharedSubgenre & { tier: RarityTier };
+  const sharedSubgenres: DecoratedSubgenre[] = $derived(
+    [...match.shared.subgenres]
+      .map((item) => ({ ...item, tier: rarityTier(item.rarity) }))
+      .sort((a, b) => tierOrder[a.tier] - tierOrder[b.tier]),
   );
 
   const dasharray = $derived(`${score}, 100`);
@@ -89,17 +109,22 @@
       <p class="caption secondary">{m.match_drawer_breakdown_caption()}</p>
     </section>
 
-    {#if match.shared.subgenres.length > 0}
+    {#if sharedSubgenres.length > 0}
       <section class="block">
         <header>
           <h3 class="section-title secondary">
             {m.match_drawer_shared_topics_header()}
           </h3>
-          <span class="count secondary">{match.shared.subgenres.length}</span>
+          <span class="count secondary">{sharedSubgenres.length}</span>
         </header>
         <ul class="chips">
-          {#each match.shared.subgenres as item (item.id)}
-            <li class="chip small"><span>{item.name}</span></li>
+          {#each sharedSubgenres as item (item.id)}
+            <li class="chip small" data-tier={item.tier}>
+              {#if item.tier === "rare"}
+                <span class="sparkle" aria-hidden="true">✦</span>
+              {/if}
+              <span>{item.name}</span>
+            </li>
           {/each}
         </ul>
       </section>
@@ -280,9 +305,47 @@
   }
 
   .chip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ni-4);
     padding: var(--ni-4) var(--ni-10);
     border-radius: var(--ni-12);
     background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
+    border: 1px solid transparent;
+    transition: background calc(var(--transition-increment) * 1) ease-out,
+      border-color calc(var(--transition-increment) * 1) ease-out,
+      box-shadow calc(var(--transition-increment) * 1) ease-out,
+      color calc(var(--transition-increment) * 1) ease-out;
+  }
+
+  .chip[data-tier="common"] {
+    opacity: 0.75;
+  }
+
+  .chip[data-tier="notable"] {
+    background: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+    border-color: color-mix(in srgb, var(--color-foreground) 18%, transparent);
+  }
+
+  .chip[data-tier="rare"] {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-foreground) 22%, transparent),
+      color-mix(in srgb, var(--color-foreground) 10%, transparent)
+    );
+    border-color: color-mix(in srgb, var(--color-foreground) 40%, transparent);
+    box-shadow: 0 0 0 1px
+        color-mix(in srgb, var(--color-foreground) 14%, transparent),
+      0 var(--ni-2) var(--ni-12)
+        color-mix(in srgb, var(--color-foreground) 18%, transparent);
+    font-weight: 600;
+  }
+
+  .sparkle {
+    font-size: 0.85em;
+    line-height: 1;
+    opacity: 0.85;
   }
 
   .caption {
