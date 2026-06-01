@@ -6,6 +6,7 @@ import {
   HiddenShowSchema,
 } from '$lib/requests/models/HiddenShow.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { MAX_DATE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { HiddenShowItemResponse } from '@trakt/api';
 import type { LimitParams } from '../../models/LimitParams.ts';
@@ -14,7 +15,7 @@ type HiddenShowsParams = LimitParams & ApiParams;
 
 function mapToHiddenShowItem(item: HiddenShowItemResponse): HiddenShow {
   return {
-    hiddenAt: new Date(item.hidden_at),
+    hiddenAt: new Date(item.hidden_at ?? MAX_DATE),
     show: mapToShowEntry(item.show),
   };
 }

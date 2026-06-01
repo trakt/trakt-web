@@ -132,7 +132,7 @@
                 {hasUnseenEpisodes}
                 watchedBySeason={$watchedBySeason}
                 isWatchedLoading={$isWatchedLoading}
-                style="compact"
+                style="minimal"
                 source="seasons-drawer"
               />
             {/snippet}
@@ -191,7 +191,7 @@
       grid-row-gap: var(--gap-s);
     }
 
-    :global(.trakt-summary-card-compact) {
+    :global(.trakt-summary-card-minimal) {
       --poster-aspect-ratio: 1.778;
     }
 

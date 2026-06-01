@@ -27,6 +27,7 @@
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
   import type { MediaCardProps } from "./models/MediaCardProps";
   import type { SeasonCardProps } from "./models/SeasonCardProps";
+  import type { SummaryCardLayout } from "./models/SummaryCardLayout";
 
   type EpisodeSummaryProps = {
     type: "episode";
@@ -45,7 +46,7 @@
     contextualTag?: Snippet;
     badge?: Snippet;
     sortTag?: Snippet;
-    layout?: "default" | "compact";
+    layout?: SummaryCardLayout;
   } & DistributiveOmit<ItemCardProps, "badge" | "action">;
 
   const {
@@ -67,9 +68,10 @@
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
   const isCompact = $derived(layout === "compact");
+  const isMinimal = $derived(layout === "minimal");
 
   const hasMultiLineTitles = $derived(
-    !isCompact && ($isTabletLarge || $isDesktop),
+    !isCompact && !isMinimal && ($isTabletLarge || $isDesktop),
   );
 
   const isShowContext = $derived(
@@ -82,7 +84,7 @@
       const posterOverride = "coverUrl" in rest ? rest.coverUrl : undefined;
 
       return {
-        background: !isCompact ? episodeCover : undefined,
+        background: !isMinimal ? episodeCover : undefined,
         poster: posterOverride ?? media.poster.url.thumb,
         title: rest.episode.title,
       };
@@ -152,7 +154,7 @@
   --poster-aspect-ratio="0.6667"
 >
   {#if popupActions}
-    <CardActionBar variant={isCompact ? "standalone" : "default"}>
+    <CardActionBar variant={isCompact || isMinimal ? "standalone" : "default"}>
       {#snippet actions()}
         <PopupMenu
           label={m.button_label_popup_menu({ title: media.title })}
@@ -365,6 +367,7 @@
     }
   }
 
+  :global(.trakt-summary-card-minimal),
   :global(.trakt-summary-card-compact) {
     .trakt-card-title {
       font-size: var(--font-size-text);

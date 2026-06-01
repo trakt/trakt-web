@@ -29,10 +29,13 @@
   const isActivity = $derived(props.variant === "activity");
   const isHidden = $derived(props.status === "hidden");
   const isListItem = $derived(props.variant === "list-item");
+
   const style = $derived(props.style ?? "cover");
-  const isCompact = $derived(style === "compact");
   const resolvedStyle: "cover" | "summary" = $derived(
-    style === "compact" ? "summary" : style,
+    style === "compact" || style === "minimal" ? "summary" : style,
+  );
+  const summaryCardLayout = $derived(
+    style === "compact" || style === "minimal" ? style : "default",
   );
 
   const runtime = $derived(
@@ -189,7 +192,7 @@
 {/snippet}
 
 {#snippet card()}
-  {#if style === "summary" || style === "compact"}
+  {#if resolvedStyle === "summary"}
     <MediaSummaryCard
       {...props.variant === "activity"
         ? {
@@ -212,7 +215,7 @@
         },
       }}
       popupActions={props.popupActions}
-      layout={isCompact ? "compact" : "default"}
+      layout={summaryCardLayout}
       badge={action}
       {sortTag}
       type="episode"

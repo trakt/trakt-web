@@ -3,6 +3,7 @@
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import type { Snippet } from "svelte";
   import { fade } from "svelte/transition";
+  import type { SummaryCardLayout } from "../models/SummaryCardLayout";
 
   const {
     children,
@@ -12,10 +13,10 @@
   }: {
     tag?: Snippet;
     classList?: string;
-    layout?: "default" | "compact";
+    layout?: SummaryCardLayout;
   } & ChildrenProps = $props();
 
-  const isCompact = $derived(layout === "compact");
+  const isSmall = $derived(layout === "compact" || layout === "minimal");
 </script>
 
 <div class="trakt-summary-card-details" use:appendClassList={classList}>
@@ -23,7 +24,7 @@
     {@render children()}
   </div>
 
-  {#if tag && !isCompact}
+  {#if tag && !isSmall}
     <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
       <div class="trakt-summary-card-tags" in:fade={{ duration: 150 }}>
         {@render tag()}

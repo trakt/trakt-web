@@ -9,6 +9,7 @@ import {
   type DroppedProgressEntry,
   DroppedProgressEntrySchema,
 } from '$lib/requests/models/ProgressEntry.ts';
+import { MAX_DATE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { HiddenShowItemResponse } from '@trakt/api';
 
@@ -23,7 +24,7 @@ function mapToDroppedProgressEntry(
     key: show.key,
     type: 'dropped',
     show,
-    hiddenAt: new Date(item.hidden_at),
+    hiddenAt: new Date(item.hidden_at ?? MAX_DATE),
   };
 }
 
