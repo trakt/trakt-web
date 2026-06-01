@@ -10,8 +10,15 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { DropButtonProps } from "./DropButtonProps";
 
-  const { type, title, onDrop, isDropping, style, ...props }: DropButtonProps =
-    $props();
+  const {
+    type,
+    title,
+    onDrop,
+    isDropping,
+    style,
+    variant: variantOverride,
+    ...props
+  }: DropButtonProps = $props();
 
   const { confirm } = useConfirm();
 
@@ -36,7 +43,7 @@
         ? m.button_label_drop_movie({ title })
         : m.button_label_drop_show({ title }),
     color: $color,
-    variant,
+    variant: variantOverride ?? variant,
     onclick: confirmDrop,
     disabled: isDropping,
     ...events,

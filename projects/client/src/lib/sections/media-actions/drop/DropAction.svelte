@@ -5,11 +5,13 @@
   type DropActionProps = {
     style: "normal" | "action" | "dropdown-item";
     size?: "normal" | "small";
+    variant?: "primary" | "secondary";
   } & DropStoreProps;
 
   const {
     style = "action",
     size = "normal",
+    variant,
     title,
     ...target
   }: DropActionProps = $props();
@@ -26,6 +28,7 @@
   {style}
   {title}
   {size}
+  {variant}
   type={target.type}
   isDropping={$isDropping}
   onDrop={drop}
