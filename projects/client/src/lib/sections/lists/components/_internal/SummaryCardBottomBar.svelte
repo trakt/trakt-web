@@ -2,6 +2,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
   import { fade } from "svelte/transition";
+  import type { SummaryCardLayout } from "../models/SummaryCardLayout";
 
   const {
     children,
@@ -11,10 +12,10 @@
   }: ChildrenProps & {
     tag?: Snippet;
     contextualTag?: Snippet;
-    layout?: "default" | "compact";
+    layout?: SummaryCardLayout;
   } = $props();
 
-  const isCompact = $derived(layout === "compact");
+  const isSmall = $derived(layout === "compact" || layout === "minimal");
 </script>
 
 <div
@@ -22,14 +23,14 @@
   class:has-contextualTag={Boolean(contextualTag)}
   data-layout={layout}
 >
-  {#if contextualTag && !isCompact}
+  {#if contextualTag && !isSmall}
     <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
       {@render contextualTag()}
     </RenderFor>
   {/if}
 
   {#if tag}
-    {#if isCompact}
+    {#if isSmall}
       <div class="trakt-summary-bottom-bar-tags" in:fade={{ duration: 150 }}>
         {@render tag()}
       </div>
@@ -70,6 +71,7 @@
       justify-content: space-between;
     }
 
+    &[data-layout="minimal"],
     &[data-layout="compact"] {
       --poster-width: calc(
         var(--height-summary-card-cover-compact) * var(--poster-aspect-ratio, 0)

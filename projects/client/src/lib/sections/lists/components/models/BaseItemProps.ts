@@ -4,7 +4,7 @@ export type BaseItemProps = {
   badge?: Snippet;
   action?: Snippet;
   tag?: Snippet;
-  style?: 'cover' | 'summary' | 'compact';
+  style?: 'cover' | 'summary' | 'compact' | 'minimal';
   source?: string;
   popupActions?: Snippet;
   indicators?: Snippet;
