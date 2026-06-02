@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Befejezett sorozatok megtekintése",
   "button_label_progress_dropped": "Eldobott sorozatok megtekintése",
   "button_label_progress_in_progress": "Folyamatban lévő sorozatok megtekintése",
+  "button_label_rate": "„{title}” értékelése",
   "button_label_raw_export": "Exportáld a nyers adataidat ZIP-fájlként.",
   "button_label_react": "Reagálás ezzel: {reaction}",
   "button_label_read_more": "Bővebben",

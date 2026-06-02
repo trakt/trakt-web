@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Vezi serialele finalizate",
   "button_label_progress_dropped": "Vezi serialele abandonate",
   "button_label_progress_in_progress": "Vezi serialele în desfășurare",
+  "button_label_rate": "Notează \"{title}\"",
   "button_label_raw_export": "Exportă un fișier ZIP care conține datele tale brute.",
   "button_label_react": "Reacționează cu {reaction}",
   "button_label_read_more": "Citește mai mult",

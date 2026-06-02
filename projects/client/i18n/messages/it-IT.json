@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Visualizza serie TV completate",
   "button_label_progress_dropped": "Visualizza serie TV abbandonate",
   "button_label_progress_in_progress": "Visualizza serie TV in corso",
+  "button_label_rate": "Valuta \"{title}\"",
   "button_label_raw_export": "Esporta un file ZIP contenente i tuoi dati grezzi.",
   "button_label_react": "Reagisci con {reaction}",
   "button_label_read_more": "Leggi di più",

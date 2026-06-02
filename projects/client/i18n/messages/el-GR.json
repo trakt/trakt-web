@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Προβολή ολοκληρωμένων σειρών",
   "button_label_progress_dropped": "Προβολή σειρών που διακόπηκαν",
   "button_label_progress_in_progress": "Προβολή σειρών σε εξέλιξη",
+  "button_label_rate": "Βαθμολογήστε \"{title}\"",
   "button_label_raw_export": "Εξαγωγή αρχείου ZIP που περιέχει τα ακατέργαστα δεδομένα σας.",
   "button_label_react": "Αντιδράστε με {reaction}",
   "button_label_read_more": "Διαβάστε περισσότερα",

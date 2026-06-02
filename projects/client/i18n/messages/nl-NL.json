@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Bekijk voltooide series",
   "button_label_progress_dropped": "Bekijk laten vallen series",
   "button_label_progress_in_progress": "Bekijk series die bezig zijn",
+  "button_label_rate": "Beoordeel \"{title}\"",
   "button_label_raw_export": "Exporteer een ZIP-bestand met uw ruwe gegevens.",
   "button_label_react": "Reageer met {reaction}",
   "button_label_read_more": "Lees meer",

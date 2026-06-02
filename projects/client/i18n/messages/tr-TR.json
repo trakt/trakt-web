@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Tamamlanan dizileri görüntüle",
   "button_label_progress_dropped": "Bırakılan dizileri görüntüle",
   "button_label_progress_in_progress": "Devam eden dizileri görüntüle",
+  "button_label_rate": "\"{title}\" Oyla",
   "button_label_raw_export": "Ham verilerinizi içeren bir ZIP dosyasını dışa aktar.",
   "button_label_react": "{reaction} ile tepki ver",
   "button_label_read_more": "Daha fazla oku",

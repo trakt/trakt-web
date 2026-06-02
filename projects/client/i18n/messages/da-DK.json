@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Se afsluttede serier",
   "button_label_progress_dropped": "Se opgivne serier",
   "button_label_progress_in_progress": "Se serier i gang",
+  "button_label_rate": "Bedøm \"{title}\"",
   "button_label_raw_export": "Eksporter en ZIP-fil indeholdende dine rå data.",
   "button_label_react": "Reager med {reaction}",
   "button_label_read_more": "Læs mere",

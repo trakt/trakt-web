@@ -107,6 +107,7 @@
   "button_label_progress_completed": "View completed shows",
   "button_label_progress_dropped": "View dropped shows",
   "button_label_progress_in_progress": "View in progress shows",
+  "button_label_rate": "Rate \"{title}\"",
   "button_label_raw_export": "Export a ZIP file containing your raw data.",
   "button_label_react": "React with {reaction}",
   "button_label_read_more": "Read more",

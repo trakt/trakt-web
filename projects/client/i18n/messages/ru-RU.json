@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Просмотреть завершенные шоу",
   "button_label_progress_dropped": "Просмотреть отмененные шоу",
   "button_label_progress_in_progress": "Просмотреть шоу в процессе",
+  "button_label_rate": "Оценить \"{title}\"",
   "button_label_raw_export": "Экспортировать ZIP-файл, содержащий ваши необработанные данные.",
   "button_label_react": "Отреагировать как {reaction}",
   "button_label_read_more": "Читать далее",

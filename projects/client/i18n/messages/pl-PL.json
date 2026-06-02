@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Zobacz ukończone seriale",
   "button_label_progress_dropped": "Zobacz porzucone seriale",
   "button_label_progress_in_progress": "Zobacz seriale w trakcie",
+  "button_label_rate": "Oceń \"{title}\"",
   "button_label_raw_export": "Eksportuj plik ZIP zawierający twoje dane.",
   "button_label_react": "Zareaguj: {reaction}",
   "button_label_read_more": "Czytaj dalej",

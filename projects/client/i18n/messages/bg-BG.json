@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Виж завършените сериали",
   "button_label_progress_dropped": "Виж изоставените сериали",
   "button_label_progress_in_progress": "Виж продължаващите сериали",
+  "button_label_rate": "Оцени \"{title}\"",
   "button_label_raw_export": "Експортиране на ZIP файл, съдържащ необработените ви данни.",
   "button_label_react": "Реагирай с {reaction}",
   "button_label_read_more": "Прочети повече",

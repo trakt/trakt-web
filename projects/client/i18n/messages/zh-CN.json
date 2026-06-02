@@ -107,6 +107,7 @@
   "button_label_progress_completed": "查看已完成的节目",
   "button_label_progress_dropped": "查看已放弃的节目",
   "button_label_progress_in_progress": "查看进行中的节目",
+  "button_label_rate": "评分“{title}”",
   "button_label_raw_export": "导出包含您的原始数据的 ZIP 文件。",
   "button_label_react": "使用 {reaction} 反应",
   "button_label_read_more": "阅读更多",

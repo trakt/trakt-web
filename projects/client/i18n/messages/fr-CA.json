@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Voir les séries terminées",
   "button_label_progress_dropped": "Voir les séries abandonnées",
   "button_label_progress_in_progress": "Voir les séries en cours",
+  "button_label_rate": "Évaluer « {title} »",
   "button_label_raw_export": "Exporter un fichier ZIP contenant vos données brutes.",
   "button_label_react": "Réagir avec {reaction}",
   "button_label_read_more": "Lire la suite",

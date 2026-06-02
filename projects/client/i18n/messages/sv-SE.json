@@ -107,6 +107,7 @@
   "button_label_progress_completed": "Visa slutförda serier",
   "button_label_progress_dropped": "Visa avbrutna serier",
   "button_label_progress_in_progress": "Visa pågående serier",
+  "button_label_rate": "Betygsätt \"{title}\"",
   "button_label_raw_export": "Exportera en ZIP-fil som innehåller din råa data.",
   "button_label_react": "Reagera med {reaction}",
   "button_label_read_more": "Läs mer",
