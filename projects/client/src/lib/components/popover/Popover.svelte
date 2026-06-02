@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Popover } from "bits-ui";
   import type { Snippet } from "svelte";
+  import { scale } from "svelte/transition";
 
   type PopoverProps = {
     content: Snippet;
@@ -35,12 +36,24 @@
   {/if}
   <Popover.Portal>
     <Popover.Content
+      forceMount
       sideOffset={8}
       side="top"
-      style="z-index: var(--layer-top)"
       customAnchor={rest.customAnchor}
     >
-      {@render content()}
+      {#snippet child({ wrapperProps, props, open })}
+        {#if open}
+          <div {...wrapperProps}>
+            <div
+              {...props}
+              style="z-index: var(--layer-top)"
+              transition:scale={{ duration: 250 }}
+            >
+              {@render content()}
+            </div>
+          </div>
+        {/if}
+      {/snippet}
     </Popover.Content>
   </Popover.Portal>
 </Popover.Root>
