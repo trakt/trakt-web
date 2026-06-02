@@ -4,32 +4,32 @@ applyTo: "**"
 # Project Coding Standards
 
 ## Tech Stack
-- This is a SvelteKit + TypeScript project, using Svelte 5 in runes mode.
+- SvelteKit + TypeScript project, using Svelte 5 in runes mode.
 
 ## Naming Conventions
-- Use PascalCase for component names, interfaces, and type aliases.
-- Use camelCase for variables, functions, and methods.
-- Use ALL_CAPS for global constants only (not local constants).
+- PascalCase for component names, interfaces, type aliases.
+- camelCase for variables, functions, methods.
+- ALL_CAPS for global constants only (not local constants).
 
 ## Commit Standards
-- **Follow Conventional Commits**: All commits must adhere to the [Conventional Commits](https://www.conventionalcommits.org/) specification.
-  - Use types: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, `perf:`, etc.
+- **Follow Conventional Commits**: All commits must adhere to [Conventional Commits](https://www.conventionalcommits.org/).
+  - Types: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, `perf:`, etc.
   - Example: `feat: add user profile component`
   - Example: `fix: correct date formatting in calendar view`
 
 ## Code Principles
 
 ### Functional Programming
-- **Write functional code**: Prefer pure functions that avoid side effects when possible.
-- Functions should return consistent output for the same input.
-- Minimize state mutation and favor immutable data structures.
+- **Write functional code**: Prefer pure functions; avoid side effects when possible.
+- Functions return consistent output for same input.
+- Minimize state mutation; favor immutable data structures.
 - Keep Svelte stores minimal; use `$derived()` for computed values.
 
 ### Immutability
 - **Prefer `const` over `let`**: Use `const` whenever possible.
 - Avoid reassigning variables.
-- Use array methods like `map`, `filter`, and `reduce` instead of mutating loops.
-- Use TypeScript's `readonly` types: `Readonly<T>`, `ReadonlyArray<T>`, `ReadonlyMap`, `ReadonlySet`.
+- Use `map`, `filter`, `reduce` over mutating loops.
+- Use TypeScript `readonly` types: `Readonly<T>`, `ReadonlyArray<T>`, `ReadonlyMap`, `ReadonlySet`.
 
 **Bad:**
 ```typescript
@@ -45,8 +45,8 @@ const result = items.map(transform);
 ```
 
 ### Early Exits
-- **Use guard clauses and early returns**: Check error conditions first and return early.
-- Avoid deep nesting by handling edge cases at the start of functions.
+- **Use guard clauses and early returns**: Check error conditions first, return early.
+- Avoid deep nesting by handling edge cases at function start.
 
 **Bad:**
 ```typescript
@@ -74,16 +74,16 @@ function processData(data: Data | null) {
 ```
 
 ### Code Smells to Avoid
-- **No nested if statements**: Nested conditionals indicate poor architecture.
+- **No nested if statements**: Nested conditionals signal poor architecture.
   - Refactor into separate functions with clear responsibilities.
-  - Use guard clauses and early returns instead.
-- **No abstraction leaks**: Ensure abstractions hide implementation details completely.
-- **No "god functions"**: Each function should have a single, clear responsibility.
+  - Use guard clauses and early returns.
+- **No abstraction leaks**: Abstractions must hide implementation details fully.
+- **No "god functions"**: Each function has a single, clear responsibility.
 
 ### Function Design
-- **Single Responsibility Principle**: Each function should do one thing well.
-- Function names should clearly describe what they do.
-- When a function takes 3+ parameters, use a single object parameter.
+- **Single Responsibility Principle**: Each function does one thing well.
+- Function names clearly describe what they do.
+- 3+ parameters -> use single object parameter.
 - Pass dependencies as parameters (dependency injection).
 
 **Bad:**
@@ -99,7 +99,7 @@ fetchData({ url, token, retry, timeout });
 ### Dependency Injection
 - **Pass dependencies as parameters**: Don't instantiate external services inside functions.
 - Makes functions testable without mocking.
-- Use interface types to define the shape of dependencies.
+- Use interface types to define dependency shape.
 
 **Bad:**
 ```typescript
@@ -122,19 +122,19 @@ export function fetchUser({ api, id }: FetchUserParams) {
 ```
 
 ### Separation of Concerns
-- **Push side effects to the edges**: Keep core logic pure and deterministic.
-- API calls, local storage, and DOM manipulation are side effects.
-- Pure functions should handle data transformation only.
-- Side effects should live in the outer layers (components, hooks, server functions).
+- **Push side effects to edges**: Keep core logic pure and deterministic.
+- API calls, local storage, DOM manipulation are side effects.
+- Pure functions handle data transformation only.
+- Side effects live in outer layers (components, hooks, server functions).
 
 ### Simplicity
 - **Keep it simple**: Simple code is maintainable code.
 - Suggestions should be simple and functional.
-- Suggestions should have a low visual complexity.
-- Split up suggestions in smaller functions if need be.
-- Suggestions should not be over-engineered.
+- Suggestions should have low visual complexity.
+- Split suggestions into smaller functions when needed.
+- Don't over-engineer.
 - Favor readability over cleverness.
-- If a solution feels complex, step back and reconsider the approach.
+- If a solution feels complex, step back and reconsider.
 
 ### Iteration Patterns
 - **Prefer functional methods over imperative loops**: Use `map`, `filter`, `reduce`.
@@ -148,15 +148,15 @@ export function fetchUser({ api, id }: FetchUserParams) {
 ## Svelte 5 Specific Guidelines
 
 ### Reactive State
-- Use `$derived()` for computed values (they're cached).
-- Minimize use of stores; prefer local reactive state with runes.
+- Use `$derived()` for computed values (cached).
+- Minimize stores; prefer local reactive state with runes.
 - Use early returns in `$derived()` expressions when appropriate.
 
 ### Component Structure
 - Keep components focused and single-purpose.
 - Extract complex logic into separate utility functions.
 - Use snippets for reusable template fragments.
-- Actions should handle DOM manipulation, not reactive statements.
+- Actions handle DOM manipulation, not reactive statements.
 
 ## Summary
 

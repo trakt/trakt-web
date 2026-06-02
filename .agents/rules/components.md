@@ -9,13 +9,13 @@ applyTo: 'projects/client/src/lib/{components,features,sections,guards}/**'
 
 ## Overview
 
-UI code is split across four directories, each with a distinct role:
+UI code split across four directories, each with distinct role:
 
 | Directory        | Role                                                          |
 | ---------------- | ------------------------------------------------------------- |
-| `lib/components` | Generic, reusable UI primitives — zero domain knowledge       |
+| `lib/components` | Generic, reusable UI primitives - zero domain knowledge       |
 | `lib/features`   | Stateful feature modules: providers, contexts, store hooks    |
-| `lib/sections`   | Page-level composition — orchestrates features + components   |
+| `lib/sections`   | Page-level composition - orchestrates features + components   |
 | `lib/guards`     | Conditional rendering gates (`RenderFor`, `RenderForFeature`) |
 
 ---
@@ -24,36 +24,30 @@ UI code is split across four directories, each with a distinct role:
 
 ### `lib/components/`
 
-Purely presentational, reusable across the entire app. No awareness of API
-shapes or app state.
+Purely presentational, reusable across app. No awareness of API shapes or app state.
 
 ### `lib/features/`
 
-Each subdirectory is a self-contained feature. Features own their state,
-providers, contexts, and domain-specific sub-components.
+Each subdirectory is self-contained feature. Features own their state, providers, contexts, and domain-specific sub-components.
 
 ### `lib/sections/`
 
-Page-level composition components. Sections know about domain data shapes and
-compose features and `lib/components` together to form page regions.
+Page-level composition components. Sections know domain data shapes and compose features + `lib/components` into page regions.
 
 ### `lib/guards/`
 
-Thin conditional-rendering wrappers — use these instead of inline `{#if}` for
-auth / feature / audience / device gating.
+Thin conditional-rendering wrappers - use instead of inline `{#if}` for auth / feature / audience / device gating.
 
 ---
 
 ## The `_internal/` Rule
 
-`_internal/` folders enforce file-private visibility. The rule is strict:
+`_internal/` folders enforce file-private visibility. Strict rule:
 
-> **A file inside `folderA/_internal/` may only be imported by files inside
+> **File inside `folderA/_internal/` may only be imported by files inside
 > `folderA/` or `folderA/_internal/` itself.**
 
-If a helper, sub-component, or context factory is needed outside its parent
-folder, it must be **uplifted** — moved to `folderA/` (and exported) or to a
-higher-level shared location.
+If a helper, sub-component, or context factory is needed outside its parent folder, it must be **uplifted** - moved to `folderA/` (and exported) or to a higher-level shared location.
 
 **Never import from another folder's `_internal/`.**
 
@@ -72,7 +66,7 @@ sections/
         SummaryTitleMapper.ts ← only used inside summary/components/
       SummaryTitle.svelte     ← imports _internal/SummaryTitleMapper ✔
 
-# WRONG — do not do this:
+# WRONG - do not do this:
 features/upsell/UpsellCta.svelte  ← importing search/_internal/createSearchContext ✗
 ```
 
@@ -80,8 +74,7 @@ features/upsell/UpsellCta.svelte  ← importing search/_internal/createSearchCon
 
 ## Svelte 5 Runes
 
-All components use Svelte 5 runes mode. Never use `export let`, `$:`, or
-`createEventDispatcher`.
+All components use Svelte 5 runes mode. Never use `export let`, `$:`, or `createEventDispatcher`.
 
 ```svelte
 <script lang="ts">
@@ -107,9 +100,7 @@ Key runes:
 
 ## Props Type Files
 
-For components with more than 2-3 props, define a separate
-`ComponentNameProps.ts` file (usually inside the component folder or
-`_internal/`).
+For components with 3+ props, define separate `ComponentNameProps.ts` file (usually inside component folder or `_internal/`).
 
 ```typescript
 // buttons/_internal/TraktButtonProps.ts
@@ -123,14 +114,13 @@ export type TraktButtonProps = {
 };
 ```
 
-Use `Snippet` (from `svelte`) for slot-like composition — never use the legacy
-slot API.
+Use `Snippet` (from `svelte`) for slot-like composition - never the legacy slot API.
 
 ---
 
 ## Snippets for Composition
 
-Use `{#snippet}` and the `Snippet` type for flexible content injection.
+Use `{#snippet}` and `Snippet` type for flexible content injection.
 
 ```svelte
 <!-- In the component -->
@@ -159,7 +149,7 @@ Use `{#snippet}` and the `Snippet` type for flexible content injection.
 
 ## Provider Pattern
 
-Feature providers are thin shells that call a context factory from `_internal/`.
+Feature providers are thin shells calling a context factory from `_internal/`.
 
 ```svelte
 <!-- features/search/SearchProvider.svelte -->
@@ -176,8 +166,7 @@ Feature providers are thin shells that call a context factory from `_internal/`.
 {@render children()}
 ```
 
-The matching `getXxxContext()` function is called by child components to access
-the shared state:
+Matching `getXxxContext()` function called by child components to access shared state:
 
 ```typescript
 // features/search/_internal/getSearchContext.ts
@@ -196,14 +185,13 @@ Naming conventions:
 | `XxxProvider.svelte`            | Provider shell component                   |
 | `_internal/createXxxContext.ts` | Calls `setContext`, returns context object |
 | `_internal/getXxxContext.ts`    | Wraps `getContext` with proper typing      |
-| `_internal/XxxContext.ts`       | TypeScript type for the context object     |
+| `_internal/XxxContext.ts`       | TypeScript type for context object         |
 
 ---
 
 ## `use*` Hooks (Feature Stores)
 
-Feature state is often exposed via `use*` composable functions that return
-reactive RxJS-based state.
+Feature state often exposed via `use*` composable functions returning reactive RxJS-based state.
 
 ```typescript
 // features/auth/stores/useUser.ts
@@ -220,8 +208,7 @@ export function useUser() {
 - Live in `features/{domain}/stores/` (or `features/{domain}/stores/_internal/`)
 - Name always starts with `use` (e.g., `useUser`, `useTheme`, `useFilters`)
 - Return `$derived` values, not raw observables
-- Do **not** import across feature boundaries — if sharing is needed, expose via
-  context or a shared section
+- Do **not** import across feature boundaries - if sharing needed, expose via context or shared section
 
 ---
 
@@ -243,27 +230,24 @@ Use guards instead of inline `{#if auth.isLoggedIn}` or `{#if isDesktop}`:
 </RenderForFeature>
 ```
 
-`RenderFor` props: `audience`, `device`, `input` (can be combined).
+`RenderFor` props: `audience`, `device`, `input` (combinable).
 
 ---
 
 ## Font Styling
 
-Use the global typography utility classes from `style/typography/index.css` for
-font styling. Do **not** write custom font-size or font-weight declarations when
-a utility class already covers the need.
+Use global typography utility classes from `style/typography/index.css` for font styling. Do **not** write custom font-size or font-weight declarations when a utility class covers it.
 
 ```svelte
 <!-- Good -->
 <span class="bold ellipsis">Movie title</span>
 <span class="tag secondary">2024</span>
 
-<!-- Bad — manual override when a class exists -->
+<!-- Bad - manual override when a class exists -->
 <span style="font-weight: 600">Movie title</span>
 ```
 
-When a manual `font-size` override is unavoidable (e.g. responsive tweaks),
-prefer semantic font-size variables over raw sizing tokens:
+When manual `font-size` override is unavoidable (e.g. responsive tweaks), prefer semantic font-size variables over raw sizing tokens:
 
 ```scss
 // Good
@@ -277,8 +261,7 @@ font-size: var(--ni-10); // raw value, no semantic meaning
 
 ## `data-*` Attributes for Variants
 
-Components use `data-*` attributes for styling variants instead of class
-concatenation.
+Components use `data-*` attributes for styling variants instead of class concatenation.
 
 ```svelte
 <button data-variant="primary" data-style="filled">
@@ -302,8 +285,7 @@ Common attributes:
 
 ## Lazy Rendering on Cards
 
-Cards that render below the fold should defer rendering until visible. The
-`whenInViewport` action takes a plain callback (no object param):
+Cards rendering below the fold should defer rendering until visible. `whenInViewport` action takes a plain callback (no object param):
 
 ```svelte
 <script lang="ts">
@@ -322,8 +304,7 @@ Cards that render below the fold should defer rendering until visible. The
 
 ## i18n in Components
 
-Always import the Paraglide messages namespace as `m` and call messages as
-functions. Never inline literal user-facing strings.
+Always import Paraglide messages namespace as `m` and call messages as functions. Never inline literal user-facing strings.
 
 ```svelte
 <script lang="ts">
@@ -353,8 +334,8 @@ functions. Never inline literal user-facing strings.
 
 - [ ] Correct layer: primitive → `components`, stateful/context → `features`,
       composition → `sections`
-- [ ] Never import from another folder's `_internal/` — uplift if needed
-- [ ] Using Svelte 5 runes (`$props`, `$derived`, `$effect`) — no `export let`
+- [ ] Never import from another folder's `_internal/` - uplift if needed
+- [ ] Using Svelte 5 runes (`$props`, `$derived`, `$effect`) - no `export let`
       or `$:`
 - [ ] Snippets used for slot-like composition, not legacy `<slot>`
 - [ ] Props type file created for components with 3+ props
@@ -364,9 +345,9 @@ functions. Never inline literal user-facing strings.
 - [ ] Guards (`RenderFor`, `RenderForFeature`) used instead of raw `{#if}` for
       auth/feature/device gating
 - [ ] Variants expressed via `data-*` attributes, not dynamic class strings
-- [ ] SCSS uses CSS custom properties (`--ni-*`, `--color-*`) — no raw hex
+- [ ] SCSS uses CSS custom properties (`--ni-*`, `--color-*`) - no raw hex
       values
 - [ ] Font styling uses typography utility classes (`.bold`, `.ellipsis`,
-      `.tag`, etc.) — no manual `font-weight`/`font-size` when a class covers it
+      `.tag`, etc.) - no manual `font-weight`/`font-size` when a class covers it
 - [ ] When `font-size` overrides are needed, uses semantic variables
       (`--font-size-tag`, `--font-size-text`) not raw tokens (`--ni-10`)

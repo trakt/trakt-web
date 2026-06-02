@@ -11,10 +11,8 @@ applyTo: 'projects/client/src/lib/requests/**'
 
 `lib/requests/` integrates with two sources:
 
-- **`@trakt/api`** — Typed SDK for the Trakt v2 REST API. Use `api({ fetch })`
-  to call it.
-- **`v3/` endpoints** — Untyped internal endpoints accessed via `rawApiFetch`.
-  Always define a local Zod schema for their response.
+- **`@trakt/api`** - Typed SDK for Trakt v2 REST API. Use `api({ fetch })` to call it.
+- **`v3/` endpoints** - Untyped internal endpoints accessed via `rawApiFetch`. Always define a local Zod schema for their response.
 
 ---
 
@@ -30,9 +28,9 @@ applyTo: 'projects/client/src/lib/requests/**'
 
 ---
 
-## Pattern 1 — `@trakt/api` Query (`defineQuery`)
+## Pattern 1 - `@trakt/api` Query (`defineQuery`)
 
-Use this for standard single-fetch queries backed by the typed SDK.
+Use for standard single-fetch queries backed by the typed SDK.
 
 ```ts
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
@@ -68,21 +66,17 @@ export const someQuery = defineQuery({
 
 ### Key rules
 
-- The `request` function receives the full `params` object — destructure only
-  what you need.
-- `mapper` transforms `response.body` (typed by the SDK) into the domain model.
-- `schema` is the Zod schema for the **output** — it validates what `mapper`
-  returns.
-- `dependencies` must list every param that, when changed, should refetch. Use
-  spread helpers for filters/search (see below).
-- `invalidations` lists `InvalidateAction.*` tokens that bust this cache when
-  mutations fire.
+- `request` receives full `params` object - destructure only what you need.
+- `mapper` transforms `response.body` (typed by SDK) into domain model.
+- `schema` is Zod schema for **output** - validates what `mapper` returns.
+- `dependencies` must list every param that, when changed, should refetch. Use spread helpers for filters/search (see below).
+- `invalidations` lists `InvalidateAction.*` tokens that bust this cache when mutations fire.
 
 ---
 
-## Pattern 2 — `@trakt/api` Paginated Query (`defineInfiniteQuery`)
+## Pattern 2 - `@trakt/api` Paginated Query (`defineInfiniteQuery`)
 
-Use this for list endpoints that support pagination.
+Use for list endpoints supporting pagination.
 
 ```ts
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
@@ -121,17 +115,15 @@ export const someListQuery = defineInfiniteQuery({
 
 ### Key rules
 
-- Always use `PaginatableSchemaFactory(EntrySchema)` for the schema.
-- Always call `extractPageMeta(response.headers)` to populate the `page` field.
+- Always use `PaginatableSchemaFactory(EntrySchema)` for schema.
+- Always call `extractPageMeta(response.headers)` to populate `page` field.
 - Include `params.page` and `params.limit` in `dependencies`.
 
 ---
 
-## Pattern 3 — `v3/` Endpoint Query
+## Pattern 3 - `v3/` Endpoint Query
 
-`v3/` endpoints are not covered by `@trakt/api`'s type system. **Always** define
-a Zod schema locally for their response, and parse with it before returning from
-the request function.
+`v3/` endpoints not covered by `@trakt/api`'s type system. **Always** define a Zod schema locally for their response, parse with it before returning from request function.
 
 ```ts
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
@@ -181,20 +173,16 @@ export const someV3Query = defineQuery({
 
 ### Key rules
 
-- **Always** `.parse()` the raw JSON — never trust unvalidated `v3/` responses.
-- If the endpoint can return an empty/error body, guard with `response.ok` and
-  return `{ body: undefined, status: 200 }` as the fallback so `mapper` receives
-  `undefined` and can handle it gracefully.
-- Export the `ResponseSchema` when other files need to reference it.
-- Keep the raw response schema (`...ResponseSchema`) and domain schema
-  (`...Schema`) separate.
+- **Always** `.parse()` raw JSON - never trust unvalidated `v3/` responses.
+- If endpoint can return empty/error body, guard with `response.ok` and return `{ body: undefined, status: 200 }` as fallback so `mapper` receives `undefined` and handles it gracefully.
+- Export `ResponseSchema` when other files need to reference it.
+- Keep raw response schema (`...ResponseSchema`) and domain schema (`...Schema`) separate.
 
 ---
 
-## Pattern 4 — Mutation Request
+## Pattern 4 - Mutation Request
 
-Use for write operations (add, remove, update). These are plain async functions
-— not queries.
+Use for write operations (add, remove, update). Plain async functions - not queries.
 
 ```ts
 import { api, type ApiParams } from '$lib/requests/api.ts';
@@ -214,19 +202,16 @@ export function someActionRequest(
 }
 ```
 
-For `v3/` mutations use `rawApiFetch` with `method: 'POST'` / `'DELETE'` and
-validate with Zod if the response body matters.
+For `v3/` mutations use `rawApiFetch` with `method: 'POST'` / `'DELETE'` and validate with Zod if response body matters.
 
 ---
 
 ## Mapper Functions
 
-- Pure functions — no side effects, no API calls.
+- Pure functions - no side effects, no API calls.
 - Named `mapTo{DomainType}(apiResponse): DomainType`.
-- Live in `_internal/` if reused across queries; inline or exported from the
-  query file if used only once or twice.
-- When extending an existing mapper (e.g., adding a field), prefer `.extend()`
-  on the schema rather than duplicating.
+- Live in `_internal/` if reused across queries; inline or exported from query file if used only once or twice.
+- When extending existing mapper (e.g., adding a field), prefer `.extend()` on schema rather than duplicating.
 
 ```ts
 // _internal/mapToEntry.ts
@@ -243,11 +228,9 @@ export function mapToEntry(response: EntryResponse): Entry {
 
 ## Models
 
-- Define Zod schema first; derive the TypeScript type with `z.infer`.
-- Use `.nullish()` for optional nullable fields, `.optional()` for fields that
-  may be absent.
-- Export both the schema (`EntitySchema`) and the type (`Entity`) from the same
-  file.
+- Define Zod schema first; derive TypeScript type with `z.infer`.
+- Use `.nullish()` for optional nullable fields, `.optional()` for fields that may be absent.
+- Export both schema (`EntitySchema`) and type (`Entity`) from same file.
 
 ```ts
 // models/Entry.ts
@@ -267,7 +250,7 @@ export type Entry = z.infer<typeof EntrySchema>;
 
 ## Invalidations
 
-Use `InvalidateAction.*` to declare which mutations should bust a query's cache.
+Use `InvalidateAction.*` to declare which mutations bust a query's cache.
 
 ```ts
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -285,7 +268,7 @@ Leave `invalidations: []` for queries that never need external cache busting.
 
 ## TTL Reference
 
-`Infinity` should never be used used for TTL.
+`Infinity` should never be used for TTL.
 
 | Data freshness                    | Value                                    |
 | --------------------------------- | ---------------------------------------- |
@@ -298,8 +281,7 @@ Leave `invalidations: []` for queries that never need external cache busting.
 
 ## Filter & Search Dependencies
 
-When a query accepts `FilterParams` or `SearchParams`, spread the helper
-functions in `dependencies`:
+When a query accepts `FilterParams` or `SearchParams`, spread the helper functions in `dependencies`:
 
 ```ts
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
@@ -317,7 +299,7 @@ dependencies: (params) => [
 
 ## Conditional Queries
 
-Use `enabled` to skip fetching when required params are absent:
+Use `enabled` to skip fetching when required params absent:
 
 ```ts
 export const someQuery = defineQuery({
@@ -332,9 +314,9 @@ export const someQuery = defineQuery({
 
 | Client                         | When to use                                          |
 | ------------------------------ | ---------------------------------------------------- |
-| `api({ fetch })`               | Default — attaches Bearer token if user is signed in |
+| `api({ fetch })`               | Default - attaches Bearer token if user is signed in |
 | `unauthorizedApi({ fetch })`   | Public endpoints that must not send auth headers     |
-| `rawApiFetch({ fetch, path })` | `v3/` and other non-SDK endpoints — authenticated    |
+| `rawApiFetch({ fetch, path })` | `v3/` and other non-SDK endpoints - authenticated    |
 
 ---
 
@@ -342,14 +324,14 @@ export const someQuery = defineQuery({
 
 Before submitting a new query or request, verify:
 
-- [ ] File is in the correct subfolder (`queries/{domain}/`, `sync/`, `vip/`)
-- [ ] File name matches the exported symbol (`movieSummaryQuery.ts` →
+- [ ] File is in correct subfolder (`queries/{domain}/`, `sync/`, `vip/`)
+- [ ] File name matches exported symbol (`movieSummaryQuery.ts` →
       `movieSummaryQuery`)
 - [ ] Params type intersects `ApiParams`
 - [ ] `@trakt/api` endpoint: SDK chain via `api({ fetch })`
 - [ ] `v3/` endpoint: `rawApiFetch` + local `ResponseSchema.parse()`
-- [ ] `schema` matches the **output** of `mapper`, not the raw API response
+- [ ] `schema` matches **output** of `mapper`, not raw API response
 - [ ] `dependencies` lists every param that should trigger a refetch
 - [ ] `invalidations` lists relevant `InvalidateAction.*` tokens
-- [ ] Mapper is a pure function — no side effects
-- [ ] `ttl` is appropriate for the data's freshness requirements
+- [ ] Mapper is pure function - no side effects
+- [ ] `ttl` is appropriate for data's freshness requirements
