@@ -67,7 +67,8 @@ export function useCalendar(
   const allItems = combineLatest(queries).pipe(
     map(($queries) => {
       return $queries.flatMap((query) => query.data ?? []).toSorted((a, b) => {
-        return new Date(a.airDate).getTime() - new Date(b.airDate).getTime();
+        return a.effectiveReleaseDate.getTime() -
+          b.effectiveReleaseDate.getTime();
       });
     }),
   );
@@ -81,7 +82,7 @@ export function useCalendar(
           date.setDate(props.start.getDate() + i);
 
           const items = $allItems.filter(
-            (item) => isSameDay(item.airDate, date),
+            (item) => isSameDay(item.effectiveReleaseDate, date),
           );
 
           return { date, items };
