@@ -51,6 +51,7 @@ module.exports = {
         'cover',
         'credits',
         'cta',
+        'deploy',
         'deps',
         'dialog',
         'discover',
