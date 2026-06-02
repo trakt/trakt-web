@@ -96,12 +96,42 @@ describe('useStableArray', () => {
     expect(await firstValueFrom(store.list)).toEqual([item1]);
   });
 
-  it('should add new items at the end of the list', async () => {
+  it('should insert new item at its server-sorted position when it leads the update', async () => {
     const source = new BehaviorSubject<MockItem[]>([]);
     const store = useStableArray(compareFn, source);
 
     source.next([item1, item2]);
     source.next([item3, item1, item2]);
+
+    queueMicrotask(() => source.complete());
+    expect(await lastValueFrom(store.list, { defaultValue: [] })).toEqual([
+      item3,
+      item1,
+      item2,
+    ]);
+  });
+
+  it('should insert new item at its server-sorted position when it is in the middle', async () => {
+    const source = new BehaviorSubject<MockItem[]>([]);
+    const store = useStableArray(compareFn, source);
+
+    source.next([item1, item3]);
+    source.next([item1, item2, item3]);
+
+    queueMicrotask(() => source.complete());
+    expect(await lastValueFrom(store.list, { defaultValue: [] })).toEqual([
+      item1,
+      item2,
+      item3,
+    ]);
+  });
+
+  it('should append new item at the end when server places it last', async () => {
+    const source = new BehaviorSubject<MockItem[]>([]);
+    const store = useStableArray(compareFn, source);
+
+    source.next([item1, item2]);
+    source.next([item1, item2, item3]);
 
     queueMicrotask(() => source.complete());
     expect(await lastValueFrom(store.list, { defaultValue: [] })).toEqual([

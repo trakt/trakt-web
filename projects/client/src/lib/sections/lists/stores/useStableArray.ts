@@ -9,13 +9,24 @@ export function useStableArray<T>(
       (prevItem) => update.some((newItem) => compareFn(prevItem, newItem)),
     );
 
-    update.forEach((newItem) => {
+    update.forEach((newItem, updateIndex) => {
       const index = updatedList.findIndex((item) => compareFn(item, newItem));
       if (index !== -1) {
         updatedList[index] = newItem;
-      } else {
-        updatedList.push(newItem);
+        return;
       }
+
+      const successor = update
+        .slice(updateIndex + 1)
+        .find((nextItem) =>
+          updatedList.some((item) => compareFn(item, nextItem))
+        );
+
+      const insertAt = successor
+        ? updatedList.findIndex((item) => compareFn(item, successor))
+        : updatedList.length;
+
+      updatedList.splice(insertAt, 0, newItem);
     });
 
     return updatedList;
