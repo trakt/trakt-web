@@ -82,7 +82,11 @@ describe('useRatings', () => {
       })
     );
 
-    await addRating(2);
+    vi.useFakeTimers();
+    addRating(2);
+    await vi.advanceTimersByTimeAsync(500);
+    vi.useRealTimers();
+
     expect(invalidate)
       .toHaveBeenCalledWith(InvalidateAction.Rated('movie'));
     expect(invalidate)

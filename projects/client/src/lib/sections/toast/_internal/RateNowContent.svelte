@@ -13,7 +13,7 @@
   import { getToastTitle } from "./getToastTitle";
   import ToastItemCard from "./ToastItemCard.svelte";
 
-  const lingerDuration = time.seconds(5);
+  const lingerDuration = time.seconds(3);
 
   const { lastWatched }: { lastWatched: LastWatchedItem } = $props();
 

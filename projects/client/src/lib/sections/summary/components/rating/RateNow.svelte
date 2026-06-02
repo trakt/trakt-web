@@ -23,12 +23,13 @@
   const type = $derived(props.type);
   const id = $derived(props.media.id);
 
-  const { pendingRating, current, addRating, removeRating } = $derived(
-    useRatings({
-      type,
-      id,
-    }),
-  );
+  const { pendingRating, isSubmitting, current, addRating, removeRating } =
+    $derived(
+      useRatings({
+        type,
+        id,
+      }),
+    );
 
   const confettiPosition = writable<{ x: number; y: number } | null>(null);
   const setConfettiPosition = (rating: number, ev: MouseEvent) => {
@@ -66,7 +67,7 @@
     >
       <RatingStars
         rating={$pendingRating ?? $current?.rating}
-        isRating={$pendingRating !== null}
+        isRating={$isSubmitting}
         onRemoveRating={() => {
           onclick?.();
           removeRating();
