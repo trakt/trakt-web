@@ -5,10 +5,21 @@ import { useLastWatched } from '$lib/features/toast/useLastWatched.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject, combineLatest, firstValueFrom, map } from 'rxjs';
 import { removeRatingRequest } from '$lib/requests/sync/removeRatingRequest.ts';
+import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import type { RatingsSyncRequest, RemoveRatingsParams } from '@trakt/api';
+import {
+  BehaviorSubject,
+  combineLatest,
+  debounceTime,
+  filter,
+  firstValueFrom,
+  map,
+  Subject,
+} from 'rxjs';
+
+const postDelay = time.seconds(0.5);
 
 type RateableType = ExtendedMediaType;
 
@@ -92,10 +103,15 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     }),
   );
 
-  const addRating = async (newRating: number) => {
-    pendingRating.next(newRating);
+  const isSubmitting = new BehaviorSubject<boolean>(false);
+  const ratingSubject = new Subject<number | null>();
 
-    // Derive current rating presence
+  ratingSubject.pipe(
+    debounceTime(postDelay),
+    filter((v): v is number => v !== null),
+  ).subscribe(async (newRating) => {
+    isSubmitting.next(true);
+
     let hasRating = false;
     const currentRatings = await firstValueFrom(ratings);
     if (currentRatings) {
@@ -112,21 +128,23 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
       }
     }
 
-    track({
-      action: hasRating ? 'changed' : 'added',
-      rating: newRating,
-    });
+    track({ action: hasRating ? 'changed' : 'added', rating: newRating });
 
-    await addRatingRequest({
-      body: toAddPayload(type, id, newRating),
-    });
+    await addRatingRequest({ body: toAddPayload(type, id, newRating) });
     await invalidate(InvalidateAction.Rated(type));
 
     pendingRating.next(null);
+    isSubmitting.next(false);
     dismiss(id, type, 'rating');
+  });
+
+  const addRating = (newRating: number) => {
+    pendingRating.next(newRating);
+    ratingSubject.next(newRating);
   };
 
   const removeRating = async () => {
+    ratingSubject.next(null);
     pendingRating.next(0);
 
     track({ action: 'removed' });
@@ -139,6 +157,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
 
   return {
     pendingRating,
+    isSubmitting,
     current,
     addRating,
     removeRating,
