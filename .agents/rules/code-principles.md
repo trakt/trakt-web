@@ -9,21 +9,21 @@ applyTo: "**"
 
 ## Functional Programming
 
-- **Write functional code**: Prefer pure functions that avoid side effects when possible.
-  - Functions should return consistent output for the same input.
-  - Minimize state mutation and favor immutable data structures.
+- **Write functional code**: prefer pure functions, avoid side effects when possible.
+  - Same input -> same output.
+  - Minimize mutation; favor immutable data.
   - Keep Svelte stores minimal; use `$derived()` for computed values.
-- **Separation of Concerns**: Keep core logic pure and deterministic.
-  - API calls, local storage, and DOM manipulation are side effects.
-  - Pure functions should handle data transformation only.
-  - Side effects should live in the outer layers (components, hooks, server functions).
+- **Separation of Concerns**: keep core logic pure and deterministic.
+  - API calls, local storage, DOM manipulation = side effects.
+  - Pure functions handle data transformation only.
+  - Side effects live in outer layers (components, hooks, server functions).
 
 ## Immutability
 
-- **Prefer `const` over `let`**: Use `const` whenever possible.
+- **Prefer `const` over `let`** whenever possible.
 - Avoid reassigning variables.
-- Use array methods like `map`, `filter`, and `reduce` instead of mutating loops.
-- Use TypeScript's `readonly` types: `Readonly<T>`, `ReadonlyArray<T>`, `ReadonlyMap`, `ReadonlySet`.
+- Use `map`, `filter`, `reduce` instead of mutating loops.
+- Use TypeScript `readonly` types: `Readonly<T>`, `ReadonlyArray<T>`, `ReadonlyMap`, `ReadonlySet`.
 
 **Bad:**
 ```typescript
@@ -40,8 +40,8 @@ const result = items.map(transform);
 
 ## Early Exits
 
-- **Use guard clauses and early returns**: Check error conditions first and return early.
-- Avoid deep nesting by handling edge cases at the start of functions.
+- **Use guard clauses and early returns**: check error conditions first, return early.
+- Avoid deep nesting; handle edge cases at function start.
 
 **Bad:**
 ```typescript
@@ -70,17 +70,17 @@ function processData(data: Data | null) {
 
 ## Code Smells to Avoid
 
-- **No nested if statements**: Nested conditionals indicate poor architecture.
+- **No nested if statements**: nested conditionals signal poor architecture.
   - Refactor into separate functions with clear responsibilities.
   - Use guard clauses and early returns instead.
-- **No abstraction leaks**: Ensure abstractions hide implementation details completely.
-- **No "god functions"**: Each function should have a single, clear responsibility.
+- **No abstraction leaks**: abstractions must hide implementation details fully.
+- **No "god functions"**: each function has a single, clear responsibility.
 
 ## Function Design
 
-- **Single Responsibility Principle**: Each function should do one thing well.
-- Function names should clearly describe what they do.
-- When a function takes 3+ parameters, use a single object parameter.
+- **Single Responsibility**: each function does one thing well.
+- Function names describe what they do.
+- 3+ parameters -> use a single object parameter.
 
 **Bad:**
 ```typescript
@@ -94,9 +94,9 @@ fetchData({ url, token, retry, timeout });
 
 ## Dependency Injection
 
-- **Pass dependencies as parameters**: Don't instantiate external services inside functions.
+- **Pass dependencies as parameters**: don't instantiate external services inside functions.
 - Makes functions testable without mocking.
-- Use interface types to define the shape of dependencies.
+- Use interface types for dependency shape.
 
 **Bad:**
 ```typescript
@@ -120,13 +120,13 @@ export function fetchUser({ api, id }: FetchUserParams) {
 
 ## Simplicity
 
-- **Keep it simple**: Simple code is maintainable code.
-- Suggestions should be simple and functional with low visual complexity.
-- Split up into smaller functions when needed.
+- **Keep it simple**: simple code is maintainable code.
+- Suggestions should be simple, functional, low visual complexity.
+- Split into smaller functions when needed.
 - Favor readability over cleverness.
-- If a solution feels complex, step back and reconsider the approach.
+- If a solution feels complex, step back and reconsider.
 
 ## Iteration Patterns
 
-- **Prefer functional methods over imperative loops**: Use `map`, `filter`, `reduce`.
+- **Prefer functional methods over imperative loops**: `map`, `filter`, `reduce`.
 - Avoid mutable loop counters when possible.

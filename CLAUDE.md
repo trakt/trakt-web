@@ -1,14 +1,14 @@
 Before implementing anything, identify which domain you are working in and
-actively apply the corresponding rule file for that domain:
+read the corresponding rule file from `.agents/rules/` (only the core rules
+auto-load via AGENTS.md; domain rules load on demand):
 
-- UI surface (lib/components, lib/features, lib/sections, lib/guards): apply
+- UI surface (lib/components, lib/features, lib/sections, lib/guards): read
   components.md
-- API requests, queries, mutations, mappers (lib/requests): apply requests.md
-- Shared utilities (lib/utils): apply utils.md
-- Tests (`*.test.ts`, `*.spec.ts`, files under `test/`): apply testing.md
-- All other source code: apply project.md, code-principles.md, and
-  implementation.md (always-on baseline).
-
-All rule files are referenced below via AGENTS.md.
+- API requests, queries, mutations, mappers (lib/requests): read requests.md
+- Shared utilities (lib/utils): read utils.md
+- Tests (`*.test.ts`, `*.spec.ts`, files under `test/`): testing.md (already
+  loaded as core)
+- All other source code: project.md, code-principles.md, implementation.md
+  (always-on baseline, already loaded as core).
 
 @AGENTS.md
