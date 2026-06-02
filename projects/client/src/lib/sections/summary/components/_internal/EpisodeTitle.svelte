@@ -24,7 +24,7 @@
   <Link href={UrlBuilder.show(show.slug)}>
     <span class="bold">{showTitle}</span>
   </Link>
-  <p class="bold">{m.text_season_episode_number(episode)}</p>
+  <span>{m.text_season_episode_number(episode)}</span>
 </div>
 
 <style>
@@ -32,5 +32,9 @@
     display: flex;
     align-items: center;
     gap: var(--gap-s);
+
+    :global(.trakt-link) {
+      display: inline-flex;
+    }
   }
 </style>
