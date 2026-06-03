@@ -1,11 +1,13 @@
 <script lang="ts">
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import { useDiscover } from "$lib/features/discover/useDiscover.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { DisplayableProfileProps } from "../DisplayableProfileProps.ts";
   import MatchDrawer from "./_internal/MatchDrawer.svelte";
   import { matchLabel } from "./_internal/matchLabel";
   import { useMatch } from "./_internal/useMatch.ts";
 
-  const { slug }: { slug: string } = $props();
+  const { profile, slug }: DisplayableProfileProps = $props();
 
   const { mode } = useDiscover();
   const { match, isLoading, band } = $derived(useMatch({ slug, mode: $mode }));
@@ -41,12 +43,17 @@
     style:--fill={`${score}%`}
   >
     <span class="score bold">{score}<span class="suffix small">%</span></span>
+    <span class="anchor">{m.match_pill_anchor()}</span>
+    <span class="separator" aria-hidden="true">·</span>
     <span class="label bold">{label}</span>
+    <span class="caret" aria-hidden="true">
+      <CaretRightIcon />
+    </span>
   </button>
 {/if}
 
 {#if isOpen && $match}
-  <MatchDrawer match={$match} onClose={() => (isOpen = false)} />
+  <MatchDrawer match={$match} onClose={() => (isOpen = false)} {profile} />
 {/if}
 
 <style lang="scss">
@@ -61,7 +68,9 @@
     display: inline-flex;
     align-items: center;
     gap: var(--gap-xxs);
-    padding: var(--ni-4) var(--ni-12);
+    height: var(--ni-28);
+    padding: 0 var(--ni-12);
+    box-sizing: border-box;
     border-radius: var(--border-radius-xxl);
 
     // Background is the progress encoding: the score percent of the pill
@@ -121,9 +130,37 @@
     margin-left: 1px;
   }
 
+  .anchor {
+    white-space: nowrap;
+    opacity: 0.85;
+    height: var(--height-match-label);
+  }
+
+  .separator {
+    opacity: 0.5;
+    height: var(--height-match-label);
+  }
+
   .label {
     white-space: nowrap;
     height: var(--height-match-label);
+  }
+
+  .caret {
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.55;
+    margin-left: var(--ni-6);
+    font-size: var(--font-size-tag);
+    transition:
+      transform var(--transition-increment) ease-out,
+      opacity var(--transition-increment) ease-out;
+  }
+
+  .trakt-match-pill:hover .caret,
+  .trakt-match-pill:focus-visible .caret {
+    opacity: 0.9;
+    transform: translateX(var(--ni-2));
   }
 
   // Skeleton inner blocks sized to typical pill content so the outer

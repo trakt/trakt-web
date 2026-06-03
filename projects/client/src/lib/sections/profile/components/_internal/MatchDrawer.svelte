@@ -4,17 +4,18 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { UserMatch } from "$lib/requests/models/UserMatch";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
-  import { matchLabel } from "./matchLabel";
+  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
+  import type { DisplayableProfileProps } from "../../DisplayableProfileProps.ts";
   import { chipTier } from "./chipTier.ts";
+  import { matchLabel } from "./matchLabel";
   import SharedMediaPoster from "./SharedMediaPoster.svelte";
 
-  const {
-    onClose,
-    match,
-  }: {
+  type MatchDrawerProps = {
     onClose: () => void;
     match: UserMatch;
-  } = $props();
+  } & Pick<DisplayableProfileProps, "profile">;
+
+  const { onClose, match, profile }: MatchDrawerProps = $props();
 
   const score = $derived(match.score);
   const label = $derived(matchLabel(score));
@@ -50,6 +51,9 @@
 <Drawer {onClose} title={m.match_drawer_title()} size="auto">
   <div class="trakt-match-drawer">
     <div class="hero">
+      <p class="hero-subject bold">
+        {m.match_drawer_subject({ username: toDisplayableName(profile) })}
+      </p>
       <div class="gauge">
         <svg viewBox="0 0 36 36" aria-hidden="true">
           <path
@@ -68,6 +72,9 @@
         </div>
       </div>
       <p class="hero-label bold">{label}</p>
+      <p class="hero-caption secondary">
+        {m.match_drawer_overlap_caption()}
+      </p>
     </div>
 
     <section class="block">
@@ -226,10 +233,22 @@
     margin-left: 2px;
   }
 
+  .hero-subject {
+    margin: 0;
+    text-align: center;
+    font-size: var(--font-size-text);
+  }
+
   .hero-label {
     margin: 0;
     text-align: center;
     font-size: var(--font-size-separator);
+  }
+
+  .hero-caption {
+    margin: 0;
+    text-align: center;
+    font-size: var(--font-size-text-small);
   }
 
   .block {
@@ -307,7 +326,8 @@
     border-radius: var(--ni-12);
     background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
     border: 1px solid transparent;
-    transition: background calc(var(--transition-increment) * 1) ease-out,
+    transition:
+      background calc(var(--transition-increment) * 1) ease-out,
       border-color calc(var(--transition-increment) * 1) ease-out,
       box-shadow calc(var(--transition-increment) * 1) ease-out,
       color calc(var(--transition-increment) * 1) ease-out;
@@ -329,8 +349,8 @@
       color-mix(in srgb, var(--color-foreground) 10%, transparent)
     );
     border-color: color-mix(in srgb, var(--color-foreground) 40%, transparent);
-    box-shadow: 0 0 0 1px
-        color-mix(in srgb, var(--color-foreground) 14%, transparent),
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-foreground) 14%, transparent),
       0 var(--ni-2) var(--ni-12)
         color-mix(in srgb, var(--color-foreground) 18%, transparent);
     font-weight: 600;
@@ -345,8 +365,8 @@
       color-mix(in srgb, var(--chip-unicorn) 14%, transparent)
     );
     border-color: color-mix(in srgb, var(--chip-unicorn) 60%, transparent);
-    box-shadow: 0 0 0 1px
-        color-mix(in srgb, var(--chip-unicorn) 28%, transparent),
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--chip-unicorn) 28%, transparent),
       0 var(--ni-2) var(--ni-14)
         color-mix(in srgb, var(--chip-unicorn) 40%, transparent);
     font-weight: 600;

@@ -6979,9 +6979,26 @@
       "default": "Computing match score",
       "description": "Aria-label for the compatibility pill placeholder shown while the match score is loading."
     },
+    "match_pill_anchor": {
+      "default": "match",
+      "description": "Anchor word rendered between the score and the tonal label on the compatibility pill (e.g. '74% match · Crossover'). Frames the percentage in plain language so first-time visitors can parse the pill at a glance without opening the drawer."
+    },
     "match_drawer_title": {
       "default": "Match details",
       "description": "Header of the drawer that opens when the compatibility pill is tapped."
+    },
+    "match_drawer_subject": {
+      "default": "You & {username}",
+      "description": "Subject line shown above the score gauge in the match drawer. Frames the metric as a comparison between the viewer and the profile owner so first-time visitors immediately understand who is being matched. Renders the profile owner's @-handle verbatim.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "match_drawer_overlap_caption": {
+      "default": "How your taste overlaps",
+      "description": "One-line subtitle shown under the tonal match label (e.g. 'Co-stars'). Explains in plain language what the score and label actually measure, so the cinematic vocabulary doesn't leave first-time visitors guessing."
     },
     "match_drawer_breakdown_header": {
       "default": "How this adds up",
