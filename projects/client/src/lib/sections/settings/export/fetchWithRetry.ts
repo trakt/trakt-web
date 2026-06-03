@@ -12,8 +12,8 @@ export function fetchWithRetry(
   return retryAsync(
     async () => {
       const pageUrl = url.includes('?')
-        ? `${url}&page=${page}&limit=1000`
-        : `${url}?page=${page}&limit=1000`;
+        ? `${url}&page=${page}&limit=250`
+        : `${url}?page=${page}&limit=250`;
 
       const response = await rawApiFetch({ path: `/${pageUrl}` });
 
