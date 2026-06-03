@@ -3,10 +3,12 @@
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import SummaryCover from "../_internal/SummaryCover.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
+  import { useIsStarted } from "../_internal/useIsStarted";
   import StreamOnOverlay from "../overlay/StreamOnOverlay.svelte";
   import TrailerOverlay from "../overlay/TrailerOverlay.svelte";
   import RateNow from "../rating/RateNow.svelte";
@@ -14,7 +16,6 @@
   import SummaryContainer from "../summary/SummaryContainer.svelte";
   import SummaryHeader from "../summary/SummaryHeader.svelte";
   import SummaryOverview from "../summary/SummaryOverview.svelte";
-  import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
   import { useMediaMetaInfo } from "./useMediaMetaInfo";
   import MediaActions from "./v2/_internal/MediaActions.svelte";
@@ -36,6 +37,7 @@
 
   const { ratings } = $derived(useMediaMetaInfo(target));
   const { isDropped } = $derived(useIsDropped(media));
+  const { isStarted } = $derived(useIsStarted(target));
 
   const posterUrl = $derived(streamOn?.preferred?.link ?? media.trailer);
 </script>
@@ -45,6 +47,7 @@
     {postCreditsCount}
     watchCount={$watchCount}
     isDropped={$isDropped}
+    isStarted={$isStarted}
   />
 {/snippet}
 
