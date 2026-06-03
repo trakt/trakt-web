@@ -88,6 +88,13 @@
       :global(.trakt-action-button) {
         width: var(--ni-32);
         height: var(--ni-32);
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          inset: calc(var(--ni-neg-8) * 1.5);
+        }
       }
     }
   }
