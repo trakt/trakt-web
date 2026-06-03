@@ -107,7 +107,7 @@
   "button_label_progress_completed": "Abgeschlossene Serien anzeigen",
   "button_label_progress_dropped": "Abgebrochene Serien anzeigen",
   "button_label_progress_in_progress": "Laufende Serien anzeigen",
-  "button_label_rate": "\"{title}\" bewerten",
+  "button_label_rate": "\"{\\s_title}\" bewerten",
   "button_label_raw_export": "ZIP-Datei mit Ihren Rohdaten exportieren.",
   "button_label_react": "Mit {reaction} reagieren",
   "button_label_read_more": "Mehr lesen",
