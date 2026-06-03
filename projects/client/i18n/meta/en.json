@@ -1028,6 +1028,27 @@
       "default": "Seasons",
       "description": "Title for lists containing seasons of a show. This title should be as short and concise as possible."
     },
+    "section_title_season_progress": {
+      "default": "Season {number} progress",
+      "description": "Title for the season progress card shown in the seasons drawer. Shows the season number.",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "section_title_specials_progress": {
+      "default": "Specials progress",
+      "description": "Title for the season progress card when the selected season is the specials season (season 0)."
+    },
+    "text_season_complete": {
+      "default": "All caught up",
+      "description": "Text shown when a user has watched all episodes in a season."
+    },
+    "text_season_not_started": {
+      "default": "Not started",
+      "description": "Text shown when a user has not watched any episodes in a season."
+    },
     "text_season_number": {
       "default": "Season {number}",
       "description": "Text for the season number of a show. This should be as short and concise as possible.",

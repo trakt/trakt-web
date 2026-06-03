@@ -73,6 +73,7 @@
         border-radius: inherit;
 
         width: calc(var(--progress-width) - var(--progress-bar-offset));
+        max-width: calc(100% - var(--progress-bar-spacing));
         background-color: var(--color-background-progress-tag);
 
         transition: width var(--transition-increment) ease-in;

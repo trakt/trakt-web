@@ -6,6 +6,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
@@ -14,6 +15,7 @@
   import SeasonPopupMenu from "$lib/sections/lists/season/_internal/SeasonPopupMenu.svelte";
   import { useShowWatchedEpisodes } from "$lib/sections/lists/season/_internal/useShowWatchedEpisodes";
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
+  import SeasonProgressCard from "$lib/sections/summary/components/seasons/SeasonProgressCard.svelte";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import { fade } from "svelte/transition";
@@ -50,6 +52,13 @@
 
   const previousSeasons = $derived(
     seasons.filter((s) => s.number > 0 && s.number < currentSeason),
+  );
+
+  const currentSeasonData = $derived(
+    seasons.find((s) => s.number === currentSeason),
+  );
+  const currentSeasonWatched = $derived(
+    $watchedBySeason?.get(currentSeason)?.size ?? 0,
   );
 
   const buildSeasonLink = (seasonNumber: number) => {
@@ -106,6 +115,18 @@
           </SectionList>
         </div>
       {/if}
+
+      <RenderFor audience="authenticated">
+        {#if currentSeasonData && currentSeasonData.episodes.count > 0}
+          <SeasonProgressCard
+            seasonNumber={currentSeason}
+            watched={currentSeasonWatched}
+            total={currentSeasonData.episodes.count}
+            totalRuntime={currentSeasonData.totalRuntime}
+            loading={$isWatchedLoading}
+          />
+        {/if}
+      </RenderFor>
 
       <div class="episodes-section">
         {#snippet metaInfo()}
