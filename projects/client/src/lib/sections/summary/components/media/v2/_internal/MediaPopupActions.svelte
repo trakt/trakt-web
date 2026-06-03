@@ -1,4 +1,9 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
+  import ReportButton from "$lib/features/report/ReportButton.svelte";
+  import type { ReportParams } from "$lib/features/report/models/ReportParams.ts";
+  import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
   import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
@@ -15,6 +20,12 @@
   const { isWatched } = $derived(useIsWatched({ media, type: media.type }));
   const { isDropped } = $derived(useIsDropped(media));
   let isListsDrawerOpen = $state(false);
+
+  const reportParams = $derived<ReportParams>(
+    media.type === "show"
+      ? { type: ReportableType.Show, id: media.id, title }
+      : { type: ReportableType.Movie, id: media.id, title },
+  );
 </script>
 
 {#if $isWatched}
@@ -62,6 +73,14 @@
     {title}
   />
 {/if}
+
+<RenderFor audience="authenticated">
+  <ReportButton
+    params={reportParams}
+    label={m.button_label_report_media({ title })}
+    variant="primary"
+  />
+</RenderFor>
 
 {#if isListsDrawerOpen}
   <ListsDrawer

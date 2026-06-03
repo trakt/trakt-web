@@ -1,7 +1,12 @@
 <script lang="ts">
+  import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
+  import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import ReportButton from "$lib/features/report/ReportButton.svelte";
+  import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import PersonTitle from "../../_internal/PersonTitle.svelte";
   import Summary from "./../../_internal/Summary.svelte";
@@ -31,6 +36,26 @@
       source={{ id: "person" }}
     />
     <SocialMediaLinks {person} />
+    <RenderFor audience="authenticated">
+      <PopupMenu
+        label={m.button_label_popup_menu({ title: person.name })}
+        mode="standalone"
+      >
+        {#snippet icon()}
+          <MoreIcon />
+        {/snippet}
+        {#snippet items()}
+          <ReportButton
+            params={{
+              type: ReportableType.Person,
+              id: person.id,
+              title: person.name,
+            }}
+            label={m.button_label_report_person({ name: person.name })}
+          />
+        {/snippet}
+      </PopupMenu>
+    </RenderFor>
   {/snippet}
 
   {#snippet meta()}

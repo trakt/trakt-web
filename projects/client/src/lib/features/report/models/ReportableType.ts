@@ -4,6 +4,7 @@ export enum ReportableType {
   Show = 'show',
   Season = 'season',
   Episode = 'episode',
+  Person = 'person',
   List = 'list',
   User = 'user',
 }

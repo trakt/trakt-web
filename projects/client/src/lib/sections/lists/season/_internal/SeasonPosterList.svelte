@@ -31,6 +31,10 @@
   }: SeasonListProps = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
+
+  const currentSeasonId = $derived(
+    seasons.find((s) => s.number === currentSeason)?.id,
+  );
 </script>
 
 <SectionList
@@ -58,6 +62,11 @@
     />
   {/snippet}
   {#snippet actions()}
-    <SeasonPopupMenu title={subtitle} {episodes} {show} />
+    <SeasonPopupMenu
+      title={subtitle}
+      {episodes}
+      {show}
+      seasonId={currentSeasonId}
+    />
   {/snippet}
 </SectionList>

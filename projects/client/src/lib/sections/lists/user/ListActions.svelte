@@ -5,6 +5,8 @@
   import Redirect from "$lib/components/router/Redirect.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
+  import ReportButton from "$lib/features/report/ReportButton.svelte";
+  import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -51,12 +53,12 @@
     {list}
   />
 
-  {#if isListOwner}
-    <PopupMenu
-      label={m.button_label_popup_menu({ title: list.name })}
-      mode="standalone"
-    >
-      {#snippet items()}
+  <PopupMenu
+    label={m.button_label_popup_menu({ title: list.name })}
+    mode="standalone"
+  >
+    {#snippet items()}
+      {#if isListOwner}
         <ShareButton
           title={list.name}
           style="dropdown-item"
@@ -73,9 +75,14 @@
           isDeleting={$isDeleting}
           onDelete={deleteList}
         />
-      {/snippet}
-    </PopupMenu>
-  {/if}
+      {:else}
+        <ReportButton
+          params={{ type: ReportableType.List, id: list.id, title: list.name }}
+          label={m.button_label_report_list({ name: list.name })}
+        />
+      {/if}
+    {/snippet}
+  </PopupMenu>
 </RenderFor>
 
 {#if showEditList}

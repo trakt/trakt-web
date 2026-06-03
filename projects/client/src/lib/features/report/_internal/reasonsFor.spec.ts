@@ -58,6 +58,23 @@ describe('reasonsFor', () => {
     expect(result).not.toContain(ReportReason.DataRefresh);
   });
 
+  it('returns the person reason set for Person (media set without runtime)', () => {
+    const result = reasonsFor(ReportableType.Person);
+
+    expect(result).toEqual([
+      ReportReason.Duplicate,
+      ReportReason.Remove,
+      ReportReason.DataRefresh,
+      ReportReason.Metadata,
+      ReportReason.Adult,
+      ReportReason.Language,
+      ReportReason.Spam,
+      ReportReason.Tmdb,
+      ReportReason.Other,
+    ]);
+    expect(result).not.toContain(ReportReason.Runtime);
+  });
+
   it('returns the user reason set for User', () => {
     const result = reasonsFor(ReportableType.User);
 
