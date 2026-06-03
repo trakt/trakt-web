@@ -338,9 +338,13 @@ export const UrlBuilder = {
   },
   feedback: () => 'https://roadmap.trakt.tv',
   api: {
-    shareableImage: {
-      openGraph: (type: 'movie' | 'show', slug: string) =>
-        `/api/shareable-image?type=${type}&slug=${slug}&variant=open-graph`,
+    shareableImage: (type: 'movie' | 'show', slug: string) => {
+      const basePath = `/api/shareable-image?type=${type}&slug=${slug}`;
+      return {
+        openGraph: () => `${basePath}&variant=open-graph`,
+        feed: () => `${basePath}&variant=feed`,
+        story: () => `${basePath}&variant=story`,
+      };
     },
   },
 };
