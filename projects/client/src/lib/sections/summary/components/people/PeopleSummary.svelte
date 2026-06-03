@@ -2,6 +2,8 @@
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import ReportButton from "$lib/features/report/ReportButton.svelte";
+  import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import PersonTitle from "../_internal/PersonTitle.svelte";
   import SummaryContainer from "./../summary/SummaryContainer.svelte";
@@ -32,6 +34,17 @@
           title={person.name}
           textFactory={({ title: name }) => m.text_share_person({ name })}
           source={{ id: "person" }}
+        />
+      {/snippet}
+
+      {#snippet popupActions()}
+        <ReportButton
+          params={{
+            type: ReportableType.Person,
+            id: person.id,
+            title: person.name,
+          }}
+          label={m.button_label_report_person({ name: person.name })}
         />
       {/snippet}
 

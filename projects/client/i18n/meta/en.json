@@ -6535,6 +6535,26 @@
       "default": "Report review",
       "description": "Aria-label for the button in the review action menu that opens the report dialog."
     },
+    "button_text_report": {
+      "default": "Report",
+      "description": "Text for the button in an action menu that opens the report dialog for a movie, show, person, list, or user."
+    },
+    "button_label_report_media": {
+      "default": "Report {title}",
+      "description": "Aria-label for the action-menu button that opens the report dialog for a movie, show, season, or episode. {title} is the media title."
+    },
+    "button_label_report_person": {
+      "default": "Report {name}",
+      "description": "Aria-label for the action-menu button that opens the report dialog for a person. {name} is the person's name."
+    },
+    "button_label_report_list": {
+      "default": "Report {name}",
+      "description": "Aria-label for the action-menu button that opens the report dialog for a list. {name} is the list name."
+    },
+    "button_label_report_user": {
+      "default": "Report {username}",
+      "description": "Aria-label for the action-menu button that opens the report dialog for a user. {username} is the user's display name."
+    },
     "label_report_reason_spoilers": {
       "default": "Spoilers",
       "description": "Report reason: the content contains undisclosed spoilers."

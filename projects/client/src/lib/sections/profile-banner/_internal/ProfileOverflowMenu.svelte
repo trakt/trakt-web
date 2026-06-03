@@ -9,6 +9,9 @@
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
+  import ReportButton from "$lib/features/report/ReportButton.svelte";
+  import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { DisplayableProfileProps } from "$lib/sections/profile/DisplayableProfileProps";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { useBlockUser } from "./useBlockUser";
@@ -139,5 +142,12 @@
         {/snippet}
       </DropdownItem>
     {/if}
+
+    <RenderFor audience="authenticated">
+      <ReportButton
+        params={{ type: ReportableType.User, id: slug }}
+        label={m.button_label_report_user({ username: userDisplayName })}
+      />
+    </RenderFor>
   {/snippet}
 </PopupMenu>

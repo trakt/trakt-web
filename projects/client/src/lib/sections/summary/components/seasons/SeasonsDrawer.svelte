@@ -54,6 +54,10 @@
     seasons.filter((s) => s.number > 0 && s.number < currentSeason),
   );
 
+  const currentSeasonId = $derived(
+    seasons.find((s) => s.number === currentSeason)?.id,
+  );
+
   const currentSeasonData = $derived(
     seasons.find((s) => s.number === currentSeason),
   );
@@ -80,6 +84,7 @@
     title={seasonLabel(currentSeason)}
     episodes={$episodes}
     {show}
+    seasonId={currentSeasonId}
     disabled={$isLoading}
   />
 {/snippet}

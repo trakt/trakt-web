@@ -21,24 +21,28 @@
     {@render children()}
   </div>
 
-  {#if headerActions}
-    <RenderFor audience="all">
-      <div class="trakt-summary-action-header">
-        {@render headerActions()}
-      </div>
-    </RenderFor>
-  {/if}
+  {#if headerActions || popupActions}
+    <div class="trakt-summary-action-header">
+      {#if headerActions}
+        <RenderFor audience="all">
+          {@render headerActions()}
+        </RenderFor>
+      {/if}
 
-  {#if popupActions}
-    <RenderFor audience="all">
-      <div class="trakt-summary-action-header">
-        <PopupMenu label={m.button_label_popup_menu({ title })} size="normal">
-          {#snippet items()}
-            {@render popupActions()}
-          {/snippet}
-        </PopupMenu>
-      </div>
-    </RenderFor>
+      {#if popupActions}
+        <RenderFor audience="all">
+          <PopupMenu
+            label={m.button_label_popup_menu({ title })}
+            size="normal"
+            mode="standalone"
+          >
+            {#snippet items()}
+              {@render popupActions()}
+            {/snippet}
+          </PopupMenu>
+        </RenderFor>
+      {/if}
+    </div>
   {/if}
 </div>
 
@@ -50,6 +54,7 @@
 
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: var(--gap-xs);
 
     flex: 1;

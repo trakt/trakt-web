@@ -25,6 +25,11 @@ type ReportParamsMap = {
     id: number;
     title: string;
   };
+  [ReportableType.Person]: {
+    type: ReportableType.Person;
+    id: number;
+    title: string;
+  };
   [ReportableType.List]: {
     type: ReportableType.List;
     id: number;
