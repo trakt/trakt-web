@@ -11,7 +11,7 @@ export function openGraphUrlBuilder(
   { url, type, slug }: OpenGraphUrlBuilderProps,
 ): HttpsUrl {
   const root = url.origin;
-  const urlBuilder = UrlBuilder.api.shareableImage.openGraph;
+  const urlBuilder = UrlBuilder.api.shareableImage;
 
-  return `${root}${urlBuilder(type, slug)}` as HttpsUrl;
+  return `${root}${urlBuilder(type, slug).openGraph()}` as HttpsUrl;
 }
