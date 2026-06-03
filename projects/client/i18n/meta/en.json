@@ -6479,7 +6479,7 @@
       "description": "Text for the button that allows users to filter the list to only display shows that are in progress. This title should be as short and concise as possible."
     },
     "button_text_progress_completed": {
-      "default": "Completed",
+      "default": "Up to date",
       "description": "Text for the button that allows users to filter the list to only display shows that are completed. This title should be as short and concise as possible."
     },
     "button_text_progress_dropped": {
