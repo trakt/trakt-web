@@ -6,6 +6,7 @@
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaIntl } from "$lib/requests/models/MediaIntl";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
+  import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
@@ -13,8 +14,8 @@
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import SummaryTitle from "../../_internal/SummaryTitle.svelte";
+  import { useIsStarted } from "../../_internal/useIsStarted";
   import { useIsRateable } from "../../rating/_internal/useIsRateable";
-  import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import type { MediaSummaryEntry } from "../models/MediaSummaryEntry";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
@@ -40,6 +41,7 @@
 
   const { isRateable } = $derived(useIsRateable(target));
   const { isDropped } = $derived(useIsDropped(media));
+  const { isStarted } = $derived(useIsStarted(target));
 </script>
 
 {#snippet tags()}
@@ -47,6 +49,7 @@
     {postCreditsCount}
     watchCount={$watchCount}
     isDropped={$isDropped}
+    isStarted={$isStarted}
   />
 {/snippet}
 
