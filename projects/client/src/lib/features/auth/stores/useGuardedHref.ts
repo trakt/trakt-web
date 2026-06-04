@@ -1,8 +1,18 @@
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { useBotContext } from '../../bot-verification/stores/useBotContext.ts';
 import { UrlBuilder } from '../../../utils/url/UrlBuilder.ts';
+import { useBotContext } from '../../bot-verification/stores/useBotContext.ts';
 import { useAuth } from './useAuth.ts';
+
+const whitelistedUrls = [
+  UrlBuilder.app.ios(),
+  UrlBuilder.app.android(),
+  UrlBuilder.github.web(),
+  UrlBuilder.socialMedia.reddit(),
+] as const;
+
+const isWhitelistedUrl = (url: string) =>
+  whitelistedUrls.some((whitelistedUrl) => url.startsWith(whitelistedUrl));
 
 export function useGuardedHref(href: string | Nil) {
   const originalHref = of(href);
@@ -19,6 +29,10 @@ export function useGuardedHref(href: string | Nil) {
 
         // Legitimate bots always see original href for SEO
         if (isLegitimateBot) {
+          return href;
+        }
+
+        if (isWhitelistedUrl(href)) {
           return href;
         }
 
