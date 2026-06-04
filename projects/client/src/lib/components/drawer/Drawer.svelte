@@ -19,19 +19,21 @@
   const HEADER_OVERLAY_FADE_DISTANCE = 16;
 
   type DrawerProps = {
+    children: Snippet;
     onClose: () => void;
     title?: string;
     hasAutoClose?: boolean;
     trapSelector?: string;
     size?: "normal" | "large" | "auto";
     badge?: Snippet;
+    actions?: Snippet;
     metaInfo?: string | Snippet;
     onOpened?: () => void;
     classList?: string;
     variant?: "default" | "vip";
     drilldown?: ListDrilldownLinkProps;
     headerVariant?: "default" | "overlay";
-  } & ChildrenProps;
+  };
 
   const {
     children,
@@ -41,6 +43,7 @@
     trapSelector,
     size = "normal",
     badge,
+    actions,
     metaInfo,
     onOpened,
     classList = "",
@@ -148,19 +151,23 @@
       </div>
     {/if}
 
-    <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-      <ActionButton
-        onclick={onClose}
-        label={m.button_label_close()}
-        style="ghost"
-        navigationType={DpadNavigationType.Item}
-        --color-foreground-default={headerVariant === "overlay"
-          ? "var(--color-text-primary)"
-          : "var(--color-text-secondary)"}
-      >
-        <CloseIcon />
-      </ActionButton>
-    </RenderFor>
+    <div class="trakt-drawer-actions">
+      {@render actions?.()}
+
+      <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+        <ActionButton
+          onclick={onClose}
+          label={m.button_label_close()}
+          style="ghost"
+          navigationType={DpadNavigationType.Item}
+          --color-foreground-default={headerVariant === "overlay"
+            ? "var(--color-text-primary)"
+            : "var(--color-text-secondary)"}
+        >
+          <CloseIcon />
+        </ActionButton>
+      </RenderFor>
+    </div>
   </div>
 
   <div class="trakt-drawer-content" onscroll={updateHeaderOverlay}>
@@ -392,6 +399,13 @@
     &.has-title {
       justify-content: space-between;
     }
+  }
+
+  .trakt-drawer-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    flex-shrink: 0;
   }
 
   .trakt-drawer-content {
