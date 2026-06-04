@@ -13,7 +13,7 @@
   import type { ActiveComment } from "./_internal/models/ActiveComment";
   import { useComments } from "./_internal/useComments";
   import type { CommentsProps } from "./CommentsProps";
-  import AddReviewDrawer from "./drawers/AddReviewDrawer.svelte";
+  import AddReviewDrawerHost from "./drawers/AddReviewDrawerHost.svelte";
 
   const { media, ...props }: CommentsProps = $props();
 
@@ -89,7 +89,7 @@
   </SectionList>
 
   {#if $isPostReviewOpen}
-    <AddReviewDrawer
+    <AddReviewDrawerHost
       onClose={onClosePostReview}
       onCommentPost={onDrilldown}
       mode="post"

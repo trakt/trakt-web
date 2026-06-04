@@ -9,17 +9,17 @@
     SummaryDrawers,
     summaryDrawerNavigation,
   } from "./_internal/summaryDrawerNavigation";
-  import CastDrawer from "./components/cast/CastDrawer.svelte";
+  import CastDrawerHost from "./components/cast/CastDrawerHost.svelte";
   import type { CommentsProps } from "./components/comments/CommentsProps";
-  import CommentsDrawer from "./components/comments/drawers/CommentsDrawer.svelte";
+  import CommentsDrawerHost from "./components/comments/drawers/CommentsDrawerHost.svelte";
   import DetailsDrawer from "./components/details/DetailsDrawer.svelte";
   import type { MediaDetailsProps } from "./components/details/MediaDetailsProps";
-  import HistoryDrawer from "./components/history/HistoryDrawer.svelte";
-  import NotesDrawer from "./components/notes/NotesDrawer.svelte";
-  import SeasonsDrawer from "./components/seasons/SeasonsDrawer.svelte";
+  import HistoryDrawerHost from "./components/history/HistoryDrawerHost.svelte";
+  import NotesDrawerHost from "./components/notes/NotesDrawerHost.svelte";
+  import SeasonsDrawerHost from "./components/seasons/SeasonsDrawerHost.svelte";
   import SentimentDrawer from "./components/sentiment/SentimentDrawer.svelte";
-  import TriviaDrawer from "./components/trivia/TriviaDrawer.svelte";
-  import VideoDrawer from "./components/videos/VideoDrawer.svelte";
+  import TriviaDrawerHost from "./components/trivia/TriviaDrawerHost.svelte";
+  import VideoDrawerHost from "./components/videos/VideoDrawerHost.svelte";
 
   const {
     sentiment,
@@ -82,23 +82,23 @@
 {/if}
 
 {#if drawer === SummaryDrawers.Cast}
-  <CastDrawer crew={details.crew} type={details.type} onClose={close} />
+  <CastDrawerHost crew={details.crew} type={details.type} onClose={close} />
 {/if}
 
 {#if drawer === SummaryDrawers.Videos && videos}
-  <VideoDrawer {videos} slug={mediaSlug} onClose={close} />
+  <VideoDrawerHost {videos} slug={mediaSlug} onClose={close} />
 {/if}
 
 {#if drawer === SummaryDrawers.Trivia && media}
-  <TriviaDrawer {media} onClose={close} />
+  <TriviaDrawerHost {media} onClose={close} />
 {/if}
 
 {#if drawer === SummaryDrawers.History}
-  <HistoryDrawer {...details} onClose={close} />
+  <HistoryDrawerHost {...details} onClose={close} />
 {/if}
 
 {#if drawer === SummaryDrawers.Notes && media}
-  <NotesDrawer {media} onClose={close} />
+  <NotesDrawerHost {media} onClose={close} />
 {/if}
 
 {#if drawer === SummaryDrawers.WhereToWatch}
@@ -106,11 +106,16 @@
 {/if}
 
 {#if drawer === SummaryDrawers.Seasons && seasons && currentSeason != null && showEntry}
-  <SeasonsDrawer show={showEntry} {seasons} {currentSeason} onClose={close} />
+  <SeasonsDrawerHost
+    show={showEntry}
+    {seasons}
+    {currentSeason}
+    onClose={close}
+  />
 {/if}
 
 {#if drawer === SummaryDrawers.Comments}
-  <CommentsDrawer
+  <CommentsDrawerHost
     {...commentsProps}
     source={sourceCommentId != null
       ? { id: sourceCommentId, isReplying: false }

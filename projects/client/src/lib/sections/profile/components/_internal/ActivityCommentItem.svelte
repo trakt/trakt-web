@@ -9,7 +9,7 @@
   import TextCardHeader from "$lib/sections/components/text-card/TextCardHeader.svelte";
   import CommentActions from "$lib/sections/summary/components/comments/CommentActions.svelte";
   import CommentCard from "$lib/sections/summary/components/comments/CommentCard.svelte";
-  import AddReviewDrawer from "$lib/sections/summary/components/comments/drawers/AddReviewDrawer.svelte";
+  import AddReviewDrawerHost from "$lib/sections/summary/components/comments/drawers/AddReviewDrawerHost.svelte";
   import CommentThreadCard from "$lib/sections/summary/components/comments/drawers/CommentThreadCard.svelte";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay.ts";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
@@ -143,7 +143,7 @@
 {/if}
 
 {#if isEditOpen}
-  <AddReviewDrawer
+  <AddReviewDrawerHost
     onClose={() => (isEditOpen = false)}
     onCommentPost={() => (isEditOpen = false)}
     mode="edit"
