@@ -1,13 +1,13 @@
 <script lang="ts">
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import { useDiscover } from "$lib/features/discover/useDiscover.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { DisplayableProfileProps } from "../DisplayableProfileProps.ts";
-  import MatchDrawer from "./_internal/MatchDrawer.svelte";
-  import { matchLabel } from "./_internal/matchLabel";
-  import { useMatch } from "./_internal/useMatch.ts";
+  import { profileDrawerNavigation } from "../_internal/profileDrawerNavigation.ts";
+  import { useMatch } from "../_internal/useMatch.ts";
+  import { matchLabel } from "./_internal/matchLabel.ts";
 
-  const { profile, slug }: DisplayableProfileProps = $props();
+  const { slug }: { slug: string } = $props();
 
   const { mode } = useDiscover();
   const { match, isLoading, band } = $derived(useMatch({ slug, mode: $mode }));
@@ -15,55 +15,70 @@
   const score = $derived($match?.score ?? 0);
   const label = $derived(matchLabel(score));
 
-  let isOpen = $state(false);
+  const { buildMatchDrawerLink } = profileDrawerNavigation();
+  const drawerLink = $derived(buildMatchDrawerLink());
 </script>
 
 {#if $isLoading}
   <!-- Placeholder mirrors the loaded pill's outer dimensions (padding,
        border, radius) so the surrounding profile-user-details column does
        not jump when the real score lands. -->
-  <div
-    class="trakt-match-pill"
-    role="status"
-    data-loading="true"
-    aria-busy="true"
-    aria-label={m.match_pill_loading_aria_label()}
-  >
-    <span class="placeholder placeholder-score"></span>
-    <span class="placeholder placeholder-label"></span>
+  <div class="trakt-match-pill-link-wrapper">
+    <div
+      class="trakt-match-pill"
+      role="status"
+      data-loading="true"
+      aria-busy="true"
+      aria-label={m.match_pill_loading_aria_label()}
+    >
+      <span
+        class="trakt-match-pill-placeholder trakt-match-pill-placeholder-score"
+      ></span>
+      <span
+        class="trakt-match-pill-placeholder trakt-match-pill-placeholder-label"
+      ></span>
+    </div>
   </div>
 {:else if $match}
-  <!-- FIXME: use Link component for this + build drawer link -->
-  <button
-    class="trakt-match-pill"
-    type="button"
-    onclick={() => (isOpen = true)}
-    aria-label={m.match_pill_aria_label({ score, label })}
-    data-band={band}
-    style:--fill={`${score}%`}
-  >
-    <span class="score bold">{score}<span class="suffix small">%</span></span>
-    <span class="anchor">{m.match_pill_anchor()}</span>
-    <span class="separator" aria-hidden="true">·</span>
-    <span class="label bold">{label}</span>
-    <span class="caret" aria-hidden="true">
-      <CaretRightIcon />
-    </span>
-  </button>
+  <div class="trakt-match-pill-link-wrapper">
+    <Link
+      {...drawerLink}
+      color="inherit"
+      label={m.match_pill_aria_label({ score, label })}
+    >
+      <span
+        class="trakt-match-pill"
+        data-band={band}
+        style:--fill={`${score}%`}
+      >
+        <span class="trakt-match-pill-score bold">
+          {score}<span class="trakt-match-pill-suffix small">%</span>
+        </span>
+        <span class="trakt-match-pill-anchor">{m.match_pill_anchor()}</span>
+        <span class="trakt-match-pill-separator" aria-hidden="true">·</span>
+        <span class="trakt-match-pill-label bold">{label}</span>
+        <span class="trakt-match-pill-caret" aria-hidden="true">
+          <CaretRightIcon />
+        </span>
+      </span>
+    </Link>
+  </div>
 {/if}
 
-{#if isOpen && $match}
-  <MatchDrawer match={$match} onClose={() => (isOpen = false)} {profile} />
-{/if}
+<style>
+  .trakt-match-pill-link-wrapper {
+    align-self: flex-start;
+    margin-top: var(--gap-xxs);
 
-<style lang="scss">
+    :global(.trakt-link) {
+      text-decoration: none;
+    }
+  }
+
   .trakt-match-pill {
     --pill-accent: var(--color-foreground);
     --height-match-label: calc(var(--font-size-text) + var(--ni-2));
     --fill: 0%;
-
-    align-self: flex-start;
-    margin-top: var(--gap-xxs);
 
     display: inline-flex;
     align-items: center;
@@ -73,9 +88,9 @@
     box-sizing: border-box;
     border-radius: var(--border-radius-xxl);
 
-    // Background is the progress encoding: the score percent of the pill
-    // width is filled with a soft accent tint, the rest is neutral. Reads
-    // like a score bar without needing a separate UI element.
+    /* Background is the progress encoding: the score percent of the pill
+       width is filled with a soft accent tint, the rest is neutral. Reads
+       like a score bar without needing a separate UI element. */
     background: linear-gradient(
       to right,
       color-mix(in srgb, var(--pill-accent) 22%, transparent) 0%,
@@ -119,34 +134,34 @@
     }
   }
 
-  .score {
+  .trakt-match-pill-score {
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
     height: var(--height-match-label);
   }
 
-  .suffix {
+  .trakt-match-pill-suffix {
     opacity: 0.7;
-    margin-left: 1px;
+    margin-left: var(--ni-1);
   }
 
-  .anchor {
+  .trakt-match-pill-anchor {
     white-space: nowrap;
     opacity: 0.85;
     height: var(--height-match-label);
   }
 
-  .separator {
+  .trakt-match-pill-separator {
     opacity: 0.5;
     height: var(--height-match-label);
   }
 
-  .label {
+  .trakt-match-pill-label {
     white-space: nowrap;
     height: var(--height-match-label);
   }
 
-  .caret {
+  .trakt-match-pill-caret {
     display: inline-flex;
     align-items: center;
     opacity: 0.55;
@@ -157,16 +172,16 @@
       opacity var(--transition-increment) ease-out;
   }
 
-  .trakt-match-pill:hover .caret,
-  .trakt-match-pill:focus-visible .caret {
+  .trakt-match-pill:hover .trakt-match-pill-caret,
+  .trakt-match-pill:focus-visible .trakt-match-pill-caret {
     opacity: 0.9;
     transform: translateX(var(--ni-2));
   }
 
-  // Skeleton inner blocks sized to typical pill content so the outer
-  // dimensions match: ~3.5ch score area, ~12ch label area. Shimmer sweep
-  // mirrors the SkeletonCard treatment for visual continuity.
-  .placeholder {
+  /* Skeleton inner blocks sized to typical pill content so the outer
+     dimensions match: ~3.5ch score area, ~12ch label area. Shimmer sweep
+     mirrors the SkeletonCard treatment for visual continuity. */
+  .trakt-match-pill-placeholder {
     display: inline-block;
     height: var(--height-match-label);
     border-radius: var(--border-radius-xs, var(--ni-4));
@@ -199,11 +214,11 @@
     }
   }
 
-  .placeholder-score {
+  .trakt-match-pill-placeholder-score {
     width: 3.5ch;
   }
 
-  .placeholder-label {
+  .trakt-match-pill-placeholder-label {
     width: 12ch;
   }
 </style>
