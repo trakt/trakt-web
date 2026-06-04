@@ -76,7 +76,7 @@
         <RenderFor audience="authenticated">
           <RenderForFeature flag={FeatureFlag.UserMatch}>
             {#snippet enabled()}
-              <MatchPill {slug} {profile} />
+              <MatchPill {slug} />
             {/snippet}
           </RenderForFeature>
         </RenderFor>

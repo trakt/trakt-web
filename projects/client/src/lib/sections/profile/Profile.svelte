@@ -50,4 +50,4 @@
 
 <ProfilesList {slug} />
 
-<ProfileDrawer />
+<ProfileDrawer {slug} {profile} />
