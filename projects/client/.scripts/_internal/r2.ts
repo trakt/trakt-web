@@ -21,6 +21,7 @@ const REGION = 'auto';
 const SERVICE = 's3';
 const EMPTY_BODY_SHA256 =
   'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+const META_HEADER_PREFIX = 'x-amz-meta-';
 
 function hex(buf: ArrayBuffer | Uint8Array): string {
   const view = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
@@ -148,6 +149,30 @@ export class R2Client {
     throw new Error(`HEAD ${key} → ${res.status} ${await res.text()}`);
   }
 
+  /** R2 lowercases the metadata names it stores. */
+  async headMetadata(key: string): Promise<Record<string, string> | undefined> {
+    const headers = await this.sign('HEAD', this.keyPath(key), '', null);
+    const res = await fetch(this.url(key), { method: 'HEAD', headers });
+    if (!res.ok) return undefined;
+
+    return Object.fromEntries(
+      [...res.headers.entries()]
+        .filter(([name]) => name.startsWith(META_HEADER_PREFIX))
+        .map(([name, value]) => [
+          name.slice(META_HEADER_PREFIX.length),
+          value,
+        ]),
+    );
+  }
+
+  async delete(key: string): Promise<void> {
+    const headers = await this.sign('DELETE', this.keyPath(key), '', null);
+    const res = await fetch(this.url(key), { method: 'DELETE', headers });
+    if (!res.ok && res.status !== 204) {
+      throw new Error(`DELETE ${key} → ${res.status} ${await res.text()}`);
+    }
+  }
+
   async put(
     key: string,
     body: Uint8Array<ArrayBuffer>,
@@ -171,43 +196,56 @@ export class R2Client {
     return res.text();
   }
 
+  async listPage(
+    { prefix, cursor }: { prefix?: string; cursor?: string },
+  ): Promise<{ keys: string[]; cursor?: string }> {
+    const params = new URLSearchParams({ 'list-type': '2' });
+    if (prefix) params.set('prefix', prefix);
+    if (cursor) params.set('continuation-token', cursor);
+
+    // SigV4 canonicalises the query sorted by name and %-encoded.
+    const query = [...params.entries()]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+      .join('&');
+
+    const pathSuffix = `/${this.config.bucket}`;
+    const headers = await this.sign('GET', pathSuffix, query, null);
+    const res = await fetch(
+      `${this.endpoint}${pathSuffix}?${query}`,
+      { method: 'GET', headers },
+    );
+    if (!res.ok) {
+      throw new Error(
+        `LIST ${prefix ?? 'root'} → ${res.status} ${await res.text()}`,
+      );
+    }
+
+    const xml = await res.text();
+    const keys = [...xml.matchAll(/<Key>([^<]+)<\/Key>/g)].map((m) =>
+      xmlUnescape(m[1] ?? '')
+    );
+    const isTruncated = /<IsTruncated>true<\/IsTruncated>/.test(xml);
+    const token = xml.match(
+      /<NextContinuationToken>([^<]+)<\/NextContinuationToken>/,
+    )?.[1];
+
+    return {
+      keys,
+      cursor: isTruncated && token ? xmlUnescape(token) : undefined,
+    };
+  }
+
   /**
    * Iterates every key under a prefix (paginated by the S3 list API).
    */
   async *list(prefix: string): AsyncGenerator<string, void, unknown> {
-    let continuationToken: string | undefined;
+    let cursor: string | undefined;
     do {
-      const params = new URLSearchParams({
-        'list-type': '2',
-        prefix,
-      });
-      if (continuationToken) {
-        params.set('continuation-token', continuationToken);
-      }
-      const query = params.toString();
-      const pathSuffix = `/${this.config.bucket}`;
-      const headers = await this.sign('GET', pathSuffix, query, null);
-      const res = await fetch(
-        `${this.endpoint}${pathSuffix}?${query}`,
-        { method: 'GET', headers },
-      );
-      if (!res.ok) {
-        throw new Error(
-          `LIST ${prefix} → ${res.status} ${await res.text()}`,
-        );
-      }
-      const xml = await res.text();
-      const keys = [...xml.matchAll(/<Key>([^<]+)<\/Key>/g)].map((m) =>
-        xmlUnescape(m[1] ?? '')
-      );
-      for (const k of keys) yield k;
-
-      const isTruncated = /<IsTruncated>true<\/IsTruncated>/.test(xml);
-      const token = xml.match(
-        /<NextContinuationToken>([^<]+)<\/NextContinuationToken>/,
-      )?.[1];
-      continuationToken = isTruncated && token ? xmlUnescape(token) : undefined;
-    } while (continuationToken);
+      const page = await this.listPage({ prefix, cursor });
+      for (const key of page.keys) yield key;
+      cursor = page.cursor;
+    } while (cursor);
   }
 
   /**
