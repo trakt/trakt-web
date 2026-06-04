@@ -98,9 +98,9 @@
 
 <Comments {media} type="show" />
 
-<VideoList slug={media.slug} {videos} type="show" />
-
 <SeasonList show={media} {seasons} {currentSeason} />
+
+<VideoList slug={media.slug} {videos} type="show" />
 
 <RelatedList
   title={m.list_title_related_shows()}
