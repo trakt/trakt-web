@@ -107,7 +107,10 @@ export const GET: RequestHandler = async (
       try {
         await platform.env.R2_WALTER.put(imagePath, buffer, {
           httpMetadata: { contentType: 'image/png' },
-          customMetadata: { cachedAt: String(Date.now()) },
+          customMetadata: {
+            cachedAt: String(Date.now()),
+            releaseDate: String(media.effectiveReleaseDate.getTime()),
+          },
         });
       } catch (e) {
         error('Failed to cache image in R2:', e);
