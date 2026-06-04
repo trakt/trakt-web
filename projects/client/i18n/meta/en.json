@@ -2763,6 +2763,19 @@
       "default": "Apply changes",
       "description": "Aria-label for the button that allows users to apply changes that are currently being edited."
     },
+    "button_text_reorder": {
+      "default": "Reorder",
+      "description": "Text for the button that opens a list reordering drawer."
+    },
+    "button_label_reorder_list": {
+      "default": "Reorder {name}",
+      "description": "Aria-label for the button that opens a list reordering drawer.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "button_text_continue": {
       "default": "Continue",
       "description": "Text for the button that allows users to continue to next screen etc."
@@ -6655,6 +6668,10 @@
     "drawer_title_sort": {
       "default": "Sort By",
       "description": "Title for the drawer containing sorting options for a user's list items. This should be as short and concise as possible."
+    },
+    "drawer_title_reorder_list": {
+      "default": "Drag to reorder",
+      "description": "Title for the drawer containing controls to reorder list items by dragging."
     },
     "header_sentiment_positive": {
       "default": "Positive",

@@ -14,15 +14,18 @@
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";
+  import ListReorderDrawer from "./_internal/ListReorderDrawer.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import { useDeleteList } from "./_internal/useDeleteList";
   import { useLikeList } from "./_internal/useLikeList";
+  import ListReorderButton from "./ListReorderButton.svelte";
 
   const { list }: { list: MediaListSummary } = $props();
 
   const { deleteList, isDeleting, isDeleted } = $derived(useDeleteList(list));
 
   let showEditList = $state(false);
+  let showReorderList = $state(false);
 
   const { user } = useUser();
   const { likeList, unlikeList, isUpdating, isLiked } = $derived(
@@ -35,7 +38,12 @@
   );
 
   const handleLike = $derived(() => {
-    $isLiked ? unlikeList() : likeList();
+    if ($isLiked) {
+      unlikeList();
+      return;
+    }
+
+    likeList();
   });
 
   const isDisabled = $derived($isUpdating || isListOwner);
@@ -65,6 +73,11 @@
           textFactory={({ title: name }) => m.text_share_list({ name })}
           source={{ id: "user-list" }}
         />
+        <ListReorderButton
+          title={list.name}
+          disabled={$isDeleting}
+          onclick={() => (showReorderList = true)}
+        />
         <EditListButton
           {list}
           isDeleting={$isDeleting}
@@ -87,4 +100,12 @@
 
 {#if showEditList}
   <SaveListDrawer type="update" onClose={() => (showEditList = false)} {list} />
+{/if}
+
+{#if showReorderList}
+  <ListReorderDrawer
+    title={list.name}
+    source={{ type: "user-list", list }}
+    onClose={() => (showReorderList = false)}
+  />
 {/if}
