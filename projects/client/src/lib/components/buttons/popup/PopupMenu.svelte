@@ -32,7 +32,7 @@
   {#if icon}
     {@render icon()}
   {:else}
-    <MoreIcon />
+    <MoreIcon {size} />
   {/if}
 </button>
 
@@ -109,6 +109,15 @@
         &:hover {
           background-color: var(--active-background-color);
           color: var(--active-color);
+        }
+
+        &[data-mode="standalone"]:not([data-popup-state="opened"]):hover {
+          color: var(--color-text-primary);
+          background-color: color-mix(
+            in srgb,
+            var(--color-foreground) 10%,
+            transparent
+          );
         }
       }
     }

@@ -4,7 +4,6 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import BlockIcon from "$lib/components/icons/BlockIcon.svelte";
   import FollowIcon from "$lib/components/icons/FollowIcon.svelte";
-  import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -101,9 +100,6 @@
   mode="standalone"
   size="normal"
 >
-  {#snippet icon()}
-    <MoreIcon size="normal" />
-  {/snippet}
   {#snippet items()}
     {#if !isBlocked}
       <DropdownItem
