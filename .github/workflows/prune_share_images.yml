@@ -1,0 +1,39 @@
+name: The Purge of Stale Visions aka Prune Share Images
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prune:
+    name: Expunging the Stale Relics
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Sealing the Outbound Gates aka Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            api.cloudflare.com:443
+            github.com:443
+
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
+
+      - name: Purge the Stale Visions aka Prune Share Images
+        run: deno run --allow-env --allow-net projects/client/.scripts/pruneShareImages.run.ts
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET_NAME: walter

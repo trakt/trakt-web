@@ -1,5 +1,11 @@
-import type { ShareType } from '$lib/features/share/models/ShareType.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import {
+  SHARE_TYPE_DIMENSIONS,
+  type ShareType,
+} from '$lib/features/share/models/ShareType.ts';
+import {
+  type MediaType,
+  MediaTypeSchema,
+} from '$lib/requests/models/MediaType.ts';
 
 const rootPath = 'images';
 
@@ -34,4 +40,15 @@ export function buildImagePath({ shareType, slug, type }: BuildImagePathProps) {
   const mediaPath = toMediaPath(type, slug);
 
   return `${rootPath}/${shareTypePath}/${mediaPath}/image.png`;
+}
+
+export function buildTargetPrefixes(): ReadonlyArray<string> {
+  const shareTypes = Object.keys(SHARE_TYPE_DIMENSIONS) as ShareType[];
+  const mediaTypes = MediaTypeSchema.options;
+
+  return shareTypes.flatMap((shareType) =>
+    mediaTypes.map((type) =>
+      `${rootPath}/${toShareTypePath(shareType)}/${type}/`
+    )
+  );
 }
