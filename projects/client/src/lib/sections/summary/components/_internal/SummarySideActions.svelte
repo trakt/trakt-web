@@ -21,6 +21,8 @@
     :global(.trakt-action-button) {
       :global(svg) {
         color: var(--color-foreground);
+        width: var(--ni-24);
+        height: var(--ni-24);
       }
     }
   }

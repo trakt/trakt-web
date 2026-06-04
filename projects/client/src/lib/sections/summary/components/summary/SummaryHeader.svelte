@@ -58,6 +58,11 @@
     gap: var(--gap-xs);
 
     flex: 1;
+
+    :global(svg) {
+      width: var(--ni-24);
+      height: var(--ni-24);
+    }
   }
 
   .trakt-summary-header-children {

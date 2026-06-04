@@ -1,7 +1,6 @@
 <script lang="ts">
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
-  import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import ReportButton from "$lib/features/report/ReportButton.svelte";
@@ -40,10 +39,8 @@
       <PopupMenu
         label={m.button_label_popup_menu({ title: person.name })}
         mode="standalone"
+        size="normal"
       >
-        {#snippet icon()}
-          <MoreIcon />
-        {/snippet}
         {#snippet items()}
           <ReportButton
             params={{
