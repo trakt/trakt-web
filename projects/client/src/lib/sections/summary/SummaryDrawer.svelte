@@ -4,7 +4,7 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
-  import WhereToWatchDrawer from "$lib/sections/lists/where-to-watch/_internal/WhereToWatchDrawer.svelte";
+  import WhereToWatchDrawerHost from "$lib/sections/lists/where-to-watch/_internal/WhereToWatchDrawerHost.svelte";
   import {
     SummaryDrawers,
     summaryDrawerNavigation,
@@ -102,7 +102,7 @@
 {/if}
 
 {#if drawer === SummaryDrawers.WhereToWatch}
-  <WhereToWatchDrawer {...whereToWatchTarget} onClose={close} />
+  <WhereToWatchDrawerHost {...whereToWatchTarget} onClose={close} />
 {/if}
 
 {#if drawer === SummaryDrawers.Seasons && seasons && currentSeason != null && showEntry}
