@@ -1,5 +1,6 @@
 <script lang="ts">
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
+  import { useIsFollowing } from "$lib/features/auth/stores/useIsFollowing.ts";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -16,6 +17,15 @@
 
   const { user, isLoading } = $derived(useProfile(params.slug));
   const { isMe } = $derived(useIsMe(params.slug));
+  const { isFollowing } = $derived(useIsFollowing(params.slug));
+
+  const isPrivateProfile = $derived(
+    $user?.private === true && !$isMe && $isFollowing === false,
+  );
+  const isProfileVisible = $derived(
+    $user != null &&
+      ($isMe === true || $isFollowing === true || !$user.private),
+  );
 
   const title = $derived(
     $user?.username
@@ -40,9 +50,9 @@
 
   {#if !$isLoading && $user}
     <CoverImageSetter src={$user.cover?.url} type="main" />
-    {#if $user.private && !$isMe}
+    {#if isPrivateProfile}
       <PrivateProfile profile={$user} slug={$user.slug ?? ""} />
-    {:else}
+    {:else if isProfileVisible}
       <Profile profile={$user} slug={$user.slug ?? ""} />
     {/if}
   {/if}
