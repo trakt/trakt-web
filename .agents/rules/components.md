@@ -318,6 +318,19 @@ Always import Paraglide messages namespace as `m` and call messages as functions
 
 ---
 
+## Drawer Naming Convention
+
+Drawers follow a split naming pattern:
+
+| Suffix        | Role                                                                 |
+| ------------- | -------------------------------------------------------------------- |
+| `*Drawer`     | Pure-content drawer (props in → `<Drawer>` out), router, or provider |
+| `*DrawerHost` | Fetches its own data via `use*` hooks, then renders `<Drawer>`       |
+
+If a drawer component calls `use*` hooks to load data itself, name it `*DrawerHost`. If it receives all data via props, name it `*Drawer`.
+
+---
+
 ## Displaying User Names
 
 Always use `toDisplayableName` from `$lib/utils/profile/toDisplayableName.ts` when rendering a user's name. It returns the full name when available, or falls back to `@username`.
