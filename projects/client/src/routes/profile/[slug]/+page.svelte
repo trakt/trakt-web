@@ -1,5 +1,6 @@
 <script lang="ts">
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
@@ -14,6 +15,7 @@
   const { params }: PageProps = $props();
 
   const { user, isLoading } = $derived(useProfile(params.slug));
+  const { isMe } = $derived(useIsMe(params.slug));
 
   const title = $derived(
     $user?.username
@@ -38,7 +40,7 @@
 
   {#if !$isLoading && $user}
     <CoverImageSetter src={$user.cover?.url} type="main" />
-    {#if $user.private}
+    {#if $user.private && !$isMe}
       <PrivateProfile profile={$user} slug={$user.slug ?? ""} />
     {:else}
       <Profile profile={$user} slug={$user.slug ?? ""} />
