@@ -13,7 +13,7 @@
     EpisodeCommentProps,
     MediaCommentProps,
   } from "../CommentsProps.ts";
-  import AddReviewDrawer from "../drawers/AddReviewDrawer.svelte";
+  import AddReviewDrawerHost from "../drawers/AddReviewDrawerHost.svelte";
   import CommenterRating from "./CommenterRating.svelte";
 
   type CommentHeaderProps = {
@@ -57,7 +57,7 @@
 </div>
 
 {#if isEditOpen}
-  <AddReviewDrawer
+  <AddReviewDrawerHost
     onClose={() => {
       isEditOpen = false;
     }}

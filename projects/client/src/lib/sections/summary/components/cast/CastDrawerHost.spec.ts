@@ -3,7 +3,7 @@ import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/
 import { fireEvent, screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
-import CastDrawer from './CastDrawer.svelte';
+import CastDrawerHost from './CastDrawerHost.svelte';
 
 beforeAll(() => {
   Element.prototype.scrollTo = vi.fn();
@@ -21,7 +21,7 @@ async function finishToggleTransition() {
   await fireEvent(tracker as Element, transitionEnd);
 }
 
-describe('CastDrawer', () => {
+describe('CastDrawerHost', () => {
   it('filters credits and searches locally', async () => {
     const user = userEvent.setup();
     const crew = {
@@ -39,7 +39,7 @@ describe('CastDrawer', () => {
       ],
     };
 
-    renderComponent(CastDrawer, {
+    renderComponent(CastDrawerHost, {
       props: {
         crew,
         type: 'show',
