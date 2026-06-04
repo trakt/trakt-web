@@ -69,9 +69,11 @@
       Filter out errors caused by blocked frames e.g.,
       due to popup blockers or browser privacy settings)
     */
+    const message = error.message.toLowerCase();
     if (
       error.name === "SecurityError" &&
-      error.message.toLowerCase().includes("blocked a frame")
+      (message.includes("blocked a frame") ||
+        message.includes("cross-origin object"))
     ) {
       return;
     }
