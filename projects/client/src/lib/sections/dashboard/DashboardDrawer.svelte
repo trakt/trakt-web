@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import StreakDrawer from "../stats/StreakDrawer.svelte";
+  import StreakDrawerHost from "../stats/StreakDrawerHost.svelte";
   import {
     DashboardDrawers,
     dashboardDrawerNavigation,
@@ -12,5 +12,5 @@
 </script>
 
 {#if drawer === DashboardDrawers.Streak}
-  <StreakDrawer onClose={close} />
+  <StreakDrawerHost onClose={close} />
 {/if}
