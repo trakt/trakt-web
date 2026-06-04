@@ -5,7 +5,7 @@
     ProfileDrawers,
     profileDrawerNavigation,
   } from "./_internal/profileDrawerNavigation.ts";
-  import ActivityDrawer from "./components/_internal/drawers/ActivityDrawer.svelte";
+  import ActivityDrawerHost from "./components/_internal/drawers/ActivityDrawerHost.svelte";
   import type { DisplayableProfileProps } from "./DisplayableProfileProps.ts";
   import MatchDrawerHost from "./_internal/MatchDrawerHost.svelte";
 
@@ -19,7 +19,7 @@
 {#if drawer === ProfileDrawers.MyStats}
   <MyStatsDrawer onClose={close} />
 {:else if drawer === ProfileDrawers.Activity}
-  <ActivityDrawer {sourceCommentId} onClose={close} />
+  <ActivityDrawerHost {sourceCommentId} onClose={close} />
 {:else if drawer === ProfileDrawers.Match}
   <MatchDrawerHost {slug} {profile} onClose={close} />
 {/if}
