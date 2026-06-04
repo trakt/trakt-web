@@ -318,6 +318,34 @@ Always import Paraglide messages namespace as `m` and call messages as functions
 
 ---
 
+## Displaying User Names
+
+Always use `toDisplayableName` from `$lib/utils/profile/toDisplayableName.ts` when rendering a user's name. It returns the full name when available, or falls back to `@username`.
+
+```svelte
+<script lang="ts">
+  import { toDisplayableName } from '$lib/utils/profile/toDisplayableName.ts';
+</script>
+
+<!-- Good -->
+<span>{toDisplayableName(profile)}</span>
+
+<!-- Bad - bypass the utility and re-implement the fallback logic inline -->
+<span>{profile.name.full || `@${profile.username}`}</span>
+```
+
+When passing a name into an i18n message, pass the result of `toDisplayableName` as the variable, never construct the `@`-prefixed string inside the message key itself, as `@` in message strings breaks the generated JSDoc output.
+
+```svelte
+<!-- Good -->
+{m.some_message({ username: toDisplayableName(profile) })}
+
+<!-- Bad - @ inside the message default value causes a JSDoc parse error -->
+{m.some_message({ username: profile.username })}
+```
+
+---
+
 ## Where to Place a New Component
 
 | Question                                              | Place in                                     |
