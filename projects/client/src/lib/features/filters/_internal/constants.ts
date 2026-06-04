@@ -176,7 +176,39 @@ const COUNTRY_FILTER: Filter = {
   },
 };
 
+const STATUS_FILTER: Filter = {
+  label: m.header_status,
+  key: FilterKey.Status,
+  type: 'list',
+  options: [
+    { label: m.translated_value_status_released, value: 'returning series,continuing,released' },
+    { label: m.translated_value_status_upcoming, value: 'upcoming,in production,planned,post production' },
+    { label: m.translated_value_status_ended, value: 'ended' },
+    { label: m.translated_value_status_canceled, value: 'canceled' },
+    { label: m.translated_value_status_rumored, value: 'rumored' },
+  ],
+  advanced: {
+    type: 'multi-select',
+    options: [
+      {
+        label: m.translated_value_status_returning_series,
+        value: 'returning series',
+      },
+      { label: m.translated_value_status_released, value: 'released' },
+      { label: m.translated_value_status_continuing, value: 'continuing' },
+      { label: m.translated_value_status_upcoming, value: 'upcoming' },
+      { label: m.translated_value_status_in_production, value: 'in production' },
+      { label: m.translated_value_status_post_production, value: 'post production' },
+      { label: m.translated_value_status_planned, value: 'planned' },
+      { label: m.translated_value_status_ended, value: 'ended' },
+      { label: m.translated_value_status_canceled, value: 'canceled' },
+      { label: m.translated_value_status_rumored, value: 'rumored' },
+    ],
+  },
+};
+
 export const FILTERS = [
+  STATUS_FILTER,
   GENRE_FILTER,
   STREAMING_FILTER,
   DECADE_FILTER,

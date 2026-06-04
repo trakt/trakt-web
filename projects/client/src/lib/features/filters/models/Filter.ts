@@ -19,6 +19,7 @@ export enum FilterKey {
   ImdbRatings = 'imdb_ratings',
   RtMeter = 'rt_meters',
   RtUserMeter = 'rt_user_meters',
+  Status = 'statuses',
 }
 
 type BaseFilter = {
