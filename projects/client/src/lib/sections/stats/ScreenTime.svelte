@@ -9,7 +9,7 @@
   import { useWeeklyPulse } from "./_internal/useWeeklyPulse.ts";
   import { getDateRangeLabel } from "./_internal/utils/getDateRangeLabel.ts";
 
-  const { buildMyStatsDrawerLink } = profileDrawerNavigation();
+  const { buildScreenTimeDrawerLink } = profileDrawerNavigation();
 
   const { mode } = useDiscover();
 
@@ -23,19 +23,19 @@
 {#if hasItems || $isLoading}
   <SectionList
     id={{
-      scope: "weekly-pulse",
+      scope: "screen-time",
     }}
     items={$items}
-    title={m.header_stats_my_stats()}
+    title={m.header_screen_time()}
     drilldown={{
-      ...buildMyStatsDrawerLink(),
-      source: { id: "weekly-pulse" },
+      ...buildScreenTimeDrawerLink(),
+      source: { id: "screen-time" },
       label: m.button_text_view_all(),
     }}
     --height-list="var(--height-pulse-list)"
   >
     {#snippet metaInfo()}
-      <p class="trakt-weekly-pulse-range tag secondary">
+      <p class="tag secondary">
         {getDateRangeLabel(dateRange)}
       </p>
     {/snippet}
@@ -57,7 +57,7 @@
     {#snippet empty()}
       {#if $isLoading}
         <div class="trakt-pulse-skeleton-wrapper">
-          <SkeletonList id="weekly-pulse" variant="portrait" />
+          <SkeletonList id="screen-time" variant="portrait" />
         </div>
       {/if}
     {/snippet}

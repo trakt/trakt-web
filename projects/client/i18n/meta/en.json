@@ -6000,12 +6000,12 @@
       "description": "Tooltip for episodes stat icon in weekly pulse."
     },
     "tooltip_stats_movies": {
-      "default": "Movies watched this week",
-      "description": "Tooltip for movies stat icon in weekly pulse."
+      "default": "Time spent watching movies this week",
+      "description": "Tooltip for movies screen time stat icon in weekly pulse."
     },
     "tooltip_stats_shows": {
-      "default": "Unique shows watched",
-      "description": "Tooltip for unique shows stat icon in weekly pulse."
+      "default": "Time spent watching shows this week",
+      "description": "Tooltip for shows screen time stat icon in weekly pulse."
     },
     "tooltip_stats_active_days": {
       "default": "Days with at least one watch",
@@ -6221,20 +6221,20 @@
         }
       }
     },
-    "header_stats_my_stats": {
-      "default": "My Stats",
-      "description": "Title for the weekly pulse stats section and drawer."
+    "header_screen_time": {
+      "default": "Screen Time",
+      "description": "Title for the screen time stats section and drawer."
     },
     "header_stats_graph_peak": {
       "default": "Peak Hours",
       "description": "Title for the watch clock graph in weekly pulse."
     },
     "header_stats_graph_screen_time_daily": {
-      "default": "Daily Screen Time",
+      "default": "Daily Breakdown",
       "description": "Title for the daily screen time bar chart in weekly pulse, showing % of waking hours spent watching per day."
     },
     "label_stats_screen_time_total": {
-      "default": "Screen Time",
+      "default": "Total",
       "description": "Label for total screen time stat in weekly pulse."
     },
     "tooltip_stats_screen_time_total": {
