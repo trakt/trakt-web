@@ -51,12 +51,10 @@
         data-band={band}
         style:--fill={`${score}%`}
       >
+        <span class="trakt-match-pill-anchor">{m.match_pill_anchor()}</span>
         <span class="trakt-match-pill-score bold">
           {score}<span class="trakt-match-pill-suffix small">%</span>
         </span>
-        <span class="trakt-match-pill-anchor">{m.match_pill_anchor()}</span>
-        <span class="trakt-match-pill-separator" aria-hidden="true">·</span>
-        <span class="trakt-match-pill-label bold">{label}</span>
         <span class="trakt-match-pill-caret" aria-hidden="true">
           <CaretRightIcon />
         </span>
@@ -148,16 +146,6 @@
   .trakt-match-pill-anchor {
     white-space: nowrap;
     opacity: 0.85;
-    height: var(--height-match-label);
-  }
-
-  .trakt-match-pill-separator {
-    opacity: 0.5;
-    height: var(--height-match-label);
-  }
-
-  .trakt-match-pill-label {
-    white-space: nowrap;
     height: var(--height-match-label);
   }
 

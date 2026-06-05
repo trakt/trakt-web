@@ -7020,11 +7020,11 @@
       "description": "Aria-label for the compatibility pill placeholder shown while the match score is loading."
     },
     "match_pill_anchor": {
-      "default": "match",
-      "description": "Anchor word rendered between the score and the tonal label on the compatibility pill (e.g. '74% match · Crossover'). Frames the percentage in plain language so first-time visitors can parse the pill at a glance without opening the drawer."
+      "default": "Match:",
+      "description": "Anchor word rendered before the score on the compatibility pill (e.g. 'Match: 74%'). Frames the percentage in plain language so first-time visitors can parse the pill at a glance without opening the drawer."
     },
     "match_drawer_title": {
-      "default": "Match details",
+      "default": "Match breakdown",
       "description": "Header of the drawer that opens when the compatibility pill is tapped."
     },
     "match_drawer_subject": {
@@ -7041,7 +7041,7 @@
       "description": "One-line subtitle shown under the tonal match label (e.g. 'Co-stars'). Explains in plain language what the score and label actually measure, so the cinematic vocabulary doesn't leave first-time visitors guessing."
     },
     "match_drawer_breakdown_header": {
-      "default": "How this adds up",
+      "default": "Details",
       "description": "Section header inside the match drawer, above the per-signal bars that explain how the overall score is composed."
     },
     "match_drawer_breakdown_topics": {

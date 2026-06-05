@@ -1,10 +1,11 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { UserMatch } from "$lib/requests/models/UserMatch";
+  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
-  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import type { DisplayableProfileProps } from "../DisplayableProfileProps.ts";
   import { chipTier } from "./_internal/chipTier.ts";
   import { matchLabel } from "./_internal/matchLabel.ts";
@@ -16,6 +17,8 @@
   } & Pick<DisplayableProfileProps, "profile">;
 
   const { onClose, match, profile }: MatchDrawerProps = $props();
+
+  const { user } = useUser();
 
   const score = $derived(match.score);
   const label = $derived(matchLabel(score));
@@ -51,8 +54,13 @@
 <Drawer {onClose} title={m.match_drawer_title()} size="auto">
   <div class="trakt-match-drawer">
     <div class="trakt-match-drawer-hero">
-      <p class="trakt-match-drawer-hero-subject bold">
-        {m.match_drawer_subject({ username: toDisplayableName(profile) })}
+      <div class="trakt-match-drawer-hero-avatars">
+        <UserAvatar user={$user} size="large" />
+        <span class="trakt-match-drawer-hero-vs small bold">VS</span>
+        <UserAvatar user={profile} size="large" />
+      </div>
+      <p class="trakt-match-drawer-hero-caption small">
+        {m.match_drawer_overlap_caption()}
       </p>
       <div class="trakt-match-drawer-gauge">
         <svg viewBox="0 0 36 36" aria-hidden="true">
@@ -73,14 +81,11 @@
         </div>
       </div>
       <p class="trakt-match-drawer-hero-label bold">{label}</p>
-      <p class="trakt-match-drawer-hero-caption small secondary">
-        {m.match_drawer_overlap_caption()}
-      </p>
     </div>
 
     <section class="trakt-match-drawer-block">
       <header class="trakt-match-drawer-section-header">
-        <h3 class="trakt-match-drawer-section-title tag secondary bold">
+        <h3 class="trakt-match-drawer-section-title tag secondary">
           {m.match_drawer_breakdown_header()}
         </h3>
       </header>
@@ -205,7 +210,6 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      transform: rotate(-90deg);
     }
   }
 
@@ -217,7 +221,7 @@
 
   .trakt-match-drawer-gauge-fill {
     fill: none;
-    stroke: var(--color-foreground);
+    stroke: var(--purple-500);
     stroke-width: var(--stroke-width-match-gauge);
     stroke-linecap: round;
     transition: stroke-dasharray calc(var(--transition-increment) * 2) ease-out;
@@ -241,8 +245,20 @@
     margin-left: var(--ni-2);
   }
 
-  .trakt-match-drawer-hero-subject {
-    text-align: center;
+  .trakt-match-drawer-hero-avatars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-s);
+
+    :global(.trakt-user-avatar) {
+      width: var(--ni-66);
+      height: var(--ni-66);
+    }
+  }
+
+  .trakt-match-drawer-hero-vs {
+    color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
   }
 
   .trakt-match-drawer-hero-label {
@@ -252,6 +268,7 @@
 
   .trakt-match-drawer-hero-caption {
     text-align: center;
+    color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
   }
 
   .trakt-match-drawer-block {
@@ -263,8 +280,14 @@
   .trakt-match-drawer-section-header {
     display: flex;
     align-items: baseline;
-    justify-content: space-between;
-    gap: var(--gap-xs);
+    justify-content: flex-start;
+    gap: var(--gap-s);
+  }
+
+  .trakt-match-drawer-section-title {
+    font-size: var(--font-size-text);
+    color: var(--color-foreground);
+    padding-bottom: var(--ni-6);
   }
 
   .trakt-match-drawer-count {
@@ -293,13 +316,13 @@
     position: relative;
     height: var(--ni-6);
     border-radius: var(--ni-6);
-    background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+    background: color-mix(in srgb, var(--color-foreground) 15%, transparent);
     overflow: hidden;
 
     span {
       position: absolute;
       inset: 0 auto 0 0;
-      background: var(--color-foreground);
+      background: var(--purple-500);
       transition: width calc(var(--transition-increment) * 2) ease-out;
     }
   }

@@ -7,7 +7,7 @@
   import type { Snippet } from "svelte";
 
   type UserAvatarProps = {
-    user: UserProfile;
+    user: Pick<UserProfile, "avatar" | "slug" | "username" | "isVip">;
     size?: "small" | "large";
     icon?: Snippet;
     onClick?: () => void;
