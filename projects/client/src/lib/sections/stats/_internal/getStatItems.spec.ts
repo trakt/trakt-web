@@ -11,6 +11,8 @@ const emptyWeek: WeekData = {
   uniqueShows: 0,
   ratings: [],
   totalMinutes: 0,
+  movieMinutes: 0,
+  showMinutes: 0,
   dailyMinutes: [],
 };
 
@@ -37,9 +39,8 @@ describe('getStatItems', () => {
       expect(keys).toContain('screenTimeTotal');
       expect(keys).toContain('screenTimeShare');
       expect(keys).toContain('avgPerDay');
-      expect(keys).toContain('movies');
-      expect(keys).toContain('episodes');
-      expect(keys).toContain('shows');
+      expect(keys).toContain('movieTime');
+      expect(keys).toContain('showTime');
     });
 
     it('returns common + movie stats only for movie mode', () => {
@@ -52,9 +53,8 @@ describe('getStatItems', () => {
       expect(keys).toContain('screenTimeTotal');
       expect(keys).toContain('screenTimeShare');
       expect(keys).toContain('avgPerDay');
-      expect(keys).toContain('movies');
-      expect(keys).not.toContain('episodes');
-      expect(keys).not.toContain('shows');
+      expect(keys).toContain('movieTime');
+      expect(keys).not.toContain('showTime');
     });
 
     it('returns common + show stats only for show mode', () => {
@@ -67,9 +67,8 @@ describe('getStatItems', () => {
       expect(keys).toContain('screenTimeTotal');
       expect(keys).toContain('screenTimeShare');
       expect(keys).toContain('avgPerDay');
-      expect(keys).not.toContain('movies');
-      expect(keys).toContain('episodes');
-      expect(keys).toContain('shows');
+      expect(keys).not.toContain('movieTime');
+      expect(keys).toContain('showTime');
     });
   });
 
@@ -94,9 +93,8 @@ describe('getStatItems', () => {
       expect(getKey(items, 'screenTimeTotal')?.deltaKind).toBe('time');
       expect(getKey(items, 'screenTimeShare')?.deltaKind).toBe('percentage');
       expect(getKey(items, 'avgPerDay')?.deltaKind).toBe('time');
-      expect(getKey(items, 'movies')?.deltaKind).toBe('count');
-      expect(getKey(items, 'episodes')?.deltaKind).toBe('count');
-      expect(getKey(items, 'shows')?.deltaKind).toBe('count');
+      expect(getKey(items, 'movieTime')?.deltaKind).toBe('time');
+      expect(getKey(items, 'showTime')?.deltaKind).toBe('time');
     });
   });
 
@@ -151,35 +149,22 @@ describe('getStatItems', () => {
       expect(getKey(items, 'avgPerDay')?.rawValue).toBe(0);
     });
 
-    it('movies rawValue equals movieDates length', () => {
+    it('movieTime rawValue equals movieMinutes', () => {
       const items = getStatItems({
-        thisWeek: makeWeek({
-          movieDates: [new Date(), new Date(), new Date()],
-        }),
+        thisWeek: makeWeek({ movieMinutes: 120 }),
         lastWeek: emptyWeek,
         mode: 'movie',
       });
-      expect(getKey(items, 'movies')?.rawValue).toBe(3);
+      expect(getKey(items, 'movieTime')?.rawValue).toBe(120);
     });
 
-    it('episodes rawValue equals showDates length', () => {
+    it('showTime rawValue equals showMinutes', () => {
       const items = getStatItems({
-        thisWeek: makeWeek({
-          showDates: [new Date(), new Date()],
-        }),
+        thisWeek: makeWeek({ showMinutes: 90 }),
         lastWeek: emptyWeek,
         mode: 'show',
       });
-      expect(getKey(items, 'episodes')?.rawValue).toBe(2);
-    });
-
-    it('shows rawValue equals uniqueShows', () => {
-      const items = getStatItems({
-        thisWeek: makeWeek({ uniqueShows: 5 }),
-        lastWeek: emptyWeek,
-        mode: 'show',
-      });
-      expect(getKey(items, 'shows')?.rawValue).toBe(5);
+      expect(getKey(items, 'showTime')?.rawValue).toBe(90);
     });
   });
 
@@ -204,31 +189,22 @@ describe('getStatItems', () => {
       expect(getKey(items, 'screenTimeShare')?.delta).toBe(25);
     });
 
-    it('movies delta is difference in movie count', () => {
+    it('movieTime delta is difference in movie minutes', () => {
       const items = getStatItems({
-        thisWeek: makeWeek({ movieDates: [new Date(), new Date()] }),
-        lastWeek: makeWeek({ movieDates: [new Date()] }),
+        thisWeek: makeWeek({ movieMinutes: 120 }),
+        lastWeek: makeWeek({ movieMinutes: 60 }),
         mode: 'movie',
       });
-      expect(getKey(items, 'movies')?.delta).toBe(1);
+      expect(getKey(items, 'movieTime')?.delta).toBe(60);
     });
 
-    it('episodes delta is difference in episode count', () => {
+    it('showTime delta is difference in show minutes', () => {
       const items = getStatItems({
-        thisWeek: makeWeek({ showDates: [new Date()] }),
-        lastWeek: makeWeek({ showDates: [new Date(), new Date(), new Date()] }),
+        thisWeek: makeWeek({ showMinutes: 30 }),
+        lastWeek: makeWeek({ showMinutes: 90 }),
         mode: 'show',
       });
-      expect(getKey(items, 'episodes')?.delta).toBe(-2);
-    });
-
-    it('shows delta is difference in unique show count', () => {
-      const items = getStatItems({
-        thisWeek: makeWeek({ uniqueShows: 4 }),
-        lastWeek: makeWeek({ uniqueShows: 4 }),
-        mode: 'show',
-      });
-      expect(getKey(items, 'shows')?.delta).toBe(0);
+      expect(getKey(items, 'showTime')?.delta).toBe(-60);
     });
   });
 });

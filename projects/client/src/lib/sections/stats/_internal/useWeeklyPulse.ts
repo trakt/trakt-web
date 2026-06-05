@@ -63,6 +63,8 @@ function buildWeekData(
     uniqueShows: countUniqueShows(shows),
     ratings,
     totalMinutes: computeTotalMinutes(all),
+    movieMinutes: computeTotalMinutes(movies),
+    showMinutes: computeTotalMinutes(shows),
     dailyMinutes: computeDailyMinutes(all, now),
   };
 }

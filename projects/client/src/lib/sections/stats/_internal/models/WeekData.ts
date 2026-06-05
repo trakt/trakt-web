@@ -4,5 +4,7 @@ export type WeekData = {
   readonly uniqueShows: number;
   readonly ratings: ReadonlyArray<{ readonly rating: number }>;
   readonly totalMinutes: number;
+  readonly movieMinutes: number;
+  readonly showMinutes: number;
   readonly dailyMinutes: ReadonlyArray<number>;
 };

@@ -3,7 +3,6 @@ import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { WAKING_HOURS_PER_DAY } from '$lib/sections/stats/_internal/constants/index.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
-import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber.ts';
 import { toPercentage } from '$lib/utils/formatting/number/toPercentage.ts';
 import type { PulseStat } from './models/PulseStat.ts';
 import type { PulseStatItem } from './models/PulseStatItem.ts';
@@ -81,37 +80,25 @@ export function getStatItems(
 
   const movieStats: PulseStat[] = [
     {
-      key: 'movies',
-      rawValue: thisWeek.movieDates.length,
-      value: toHumanNumber(thisWeek.movieDates.length, languageTag()),
+      key: 'movieTime',
+      rawValue: thisWeek.movieMinutes,
+      value: toHumanDuration({ minutes: thisWeek.movieMinutes }, languageTag()),
       label: m.label_stats_movies(),
       tooltip: m.tooltip_stats_movies(),
-      delta: computeDelta(
-        thisWeek.movieDates.length,
-        lastWeek.movieDates.length,
-      ),
-      deltaKind: 'count',
+      delta: computeDelta(thisWeek.movieMinutes, lastWeek.movieMinutes),
+      deltaKind: 'time',
     },
   ];
 
   const showStats: PulseStat[] = [
     {
-      key: 'episodes',
-      rawValue: thisWeek.showDates.length,
-      value: toHumanNumber(thisWeek.showDates.length, languageTag()),
-      label: m.label_stats_episodes(),
-      tooltip: m.tooltip_stats_episodes(),
-      delta: computeDelta(thisWeek.showDates.length, lastWeek.showDates.length),
-      deltaKind: 'count',
-    },
-    {
-      key: 'shows',
-      rawValue: thisWeek.uniqueShows,
-      value: toHumanNumber(thisWeek.uniqueShows, languageTag()),
+      key: 'showTime',
+      rawValue: thisWeek.showMinutes,
+      value: toHumanDuration({ minutes: thisWeek.showMinutes }, languageTag()),
       label: m.label_stats_shows(),
       tooltip: m.tooltip_stats_shows(),
-      delta: computeDelta(thisWeek.uniqueShows, lastWeek.uniqueShows),
-      deltaKind: 'count',
+      delta: computeDelta(thisWeek.showMinutes, lastWeek.showMinutes),
+      deltaKind: 'time',
     },
   ];
 

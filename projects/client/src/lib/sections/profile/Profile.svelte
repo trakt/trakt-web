@@ -7,7 +7,7 @@
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import LibraryList from "../lists/library/LibraryList.svelte";
   import PersonalLists from "../lists/user/PersonalLists.svelte";
-  import MyStats from "../stats/MyStats.svelte";
+  import ScreenTime from "../stats/ScreenTime.svelte";
   import MyActivityList from "./components/MyActivityList.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
   import ProfileDetails from "./components/ProfileDetails.svelte";
@@ -28,7 +28,7 @@
 </ProfileContainer>
 
 {#if $isMe}
-  <MyStats />
+  <ScreenTime />
   <PersonalHistoryList mode={$mode} />
   <MyActivityList mode={$mode} />
   <ProgressList mode={$mode} />

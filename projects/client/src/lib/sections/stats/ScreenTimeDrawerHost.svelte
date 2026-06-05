@@ -26,15 +26,12 @@
 <Drawer
   {onClose}
   onOpened={() => (isOpen = true)}
-  title={m.header_stats_my_stats()}
+  title={m.header_screen_time()}
   size="large"
   {metaInfo}
 >
   {#if isOpen}
-    <div
-      class="weekly-pulse-drawer-content"
-      transition:fade={{ duration: 150 }}
-    >
+    <div class="screen-time-drawer-content" transition:fade={{ duration: 150 }}>
       <div class="pulse-graphs">
         {#each graphs as entry (entry.key)}
           <PulseGraph item={entry} />
@@ -56,8 +53,8 @@
   {/if}
 </Drawer>
 
-<style lang="scss">
-  .weekly-pulse-drawer-content {
+<style>
+  .screen-time-drawer-content {
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
