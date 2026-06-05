@@ -15,10 +15,21 @@
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { toTranslatedType } from "$lib/utils/formatting/string/toTranslatedType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import { AnalyticsEvent } from "../analytics/events/AnalyticsEvent";
   import { useTrack } from "../analytics/useTrack";
 
-  const { type, media }: Pick<MediaCardProps, "type" | "media"> = $props();
+  type CalendarMediaCardProps = Pick<MediaCardProps, "type" | "media"> & {
+    popupActions?: Snippet;
+    source?: string;
+  };
+
+  const {
+    type,
+    media,
+    popupActions: externalPopupActions,
+    source = "calendar",
+  }: CalendarMediaCardProps = $props();
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 
@@ -35,24 +46,32 @@
   </div>
 {/snippet}
 
+{#snippet popupActions()}
+  {#if externalPopupActions}
+    {@render externalPopupActions()}
+  {:else}
+    <WatchlistAction
+      style="dropdown-item"
+      title={media.title}
+      type={media.type}
+      {media}
+    />
+    <MarkAsWatchedAction
+      style="dropdown-item"
+      title={media.title}
+      type={media.type}
+      {media}
+    />
+  {/if}
+{/snippet}
+
 <LandscapeCard>
   <RenderFor audience="authenticated">
     <CardActionBar>
       {#snippet actions()}
         <PopupMenu label={m.button_label_popup_menu({ title: media.title })}>
           {#snippet items()}
-            <WatchlistAction
-              style="dropdown-item"
-              title={media.title}
-              type={media.type}
-              {media}
-            />
-            <MarkAsWatchedAction
-              style="dropdown-item"
-              title={media.title}
-              type={media.type}
-              {media}
-            />
+            {@render popupActions()}
           {/snippet}
         </PopupMenu>
       {/snippet}
@@ -62,7 +81,7 @@
   <Link
     focusable={false}
     href={UrlBuilder.media(type, media.slug)}
-    onclick={() => track({ source: "calendar", type })}
+    onclick={() => track({ source, type })}
   >
     <CardCover
       title={media.title}

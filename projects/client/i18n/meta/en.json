@@ -394,6 +394,10 @@
       "default": "Anticipated",
       "description": "Title for lists containing anticipated movies or shows. This title should be as short and concise as possible."
     },
+    "list_title_releases": {
+      "default": "Releases",
+      "description": "Title for a curated calendar list of upcoming movies and episodes from trending, recommended, or anticipated titles. This title should be short."
+    },
     "button_text_get_vip": {
       "default": "Get",
       "description": "Text for the button that takes users to the VIP subscription page."
@@ -1229,6 +1233,10 @@
     "button_label_view_all_anticipated_shows": {
       "default": "View all anticipated shows",
       "description": "Aria-label for the button that allows users to view all anticipated shows."
+    },
+    "button_label_view_releases": {
+      "default": "View releases",
+      "description": "Aria-label for the button that opens the Releases page."
     },
     "list_title_anticipated_movies": {
       "default": "Anticipated Movies",
@@ -3531,6 +3539,10 @@
       "default": "Discover",
       "description": "Title for the discover page."
     },
+    "page_description_releases": {
+      "default": "Upcoming movies and episodes from trending, recommended, or anticipated titles.",
+      "description": "Short description for the Releases page."
+    },
     "list_title_start_watching": {
       "default": "Start Watching",
       "description": "Title for lists containing shows or movies a user should start watching. This title should be as short and concise as possible."
@@ -3619,6 +3631,10 @@
     "page_title_trending_media": {
       "default": "Trending media",
       "description": "Title for the trending media page."
+    },
+    "page_title_releases": {
+      "default": "Releases",
+      "description": "Title for the Releases page."
     },
     "button_text_media": {
       "default": "Media",

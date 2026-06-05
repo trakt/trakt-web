@@ -35,7 +35,7 @@ export function mapToAnticipatedMovie({
   };
 }
 
-const movieAnticipatedRequest = (
+export const movieAnticipatedRequest = (
   { fetch, limit, page, filter, filterOverride, search }:
     MovieAnticipatedParams,
 ) => {

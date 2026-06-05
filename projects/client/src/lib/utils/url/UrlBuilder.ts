@@ -161,6 +161,9 @@ export const UrlBuilder = {
   popular(params?: DiscoverUrlParams) {
     return discoverDrilldownFactory('popular')(params);
   },
+  releases(params?: DiscoverUrlParams) {
+    return discoverDrilldownFactory('releases')(params);
+  },
   social: {
     activity: () => {
       return '/social/activity';

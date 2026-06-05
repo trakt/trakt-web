@@ -42,7 +42,7 @@ export function mapToAnticipatedShow({
   };
 }
 
-const showAnticipatedRequest = (
+export const showAnticipatedRequest = (
   { fetch, limit, page, filter, filterOverride, search }: ShowAnticipatedParams,
 ) => {
   const filterParams = filterOverride?.show ?? filter;

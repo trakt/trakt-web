@@ -36,7 +36,7 @@ export function mapToTrendingShow({
   };
 }
 
-const showTrendingRequest = (
+export const showTrendingRequest = (
   { fetch, limit, page, filter, filterOverride, search }: ShowTrendingParams,
 ) => {
   const filterParams = filterOverride?.show ?? filter;
