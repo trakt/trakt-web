@@ -1,14 +1,11 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import type { FavoritedEntry } from "$lib/requests/models/FavoritedEntry";
-  import type { ListItem } from "$lib/requests/models/ListItem";
   import type { SortBy } from "../models/SortBy";
-  import { formatSortValue } from "./formatSortValue";
-  import { getUserRatingForItem } from "./getUserRatingForItem";
   import SortIcon from "../SortIcon.svelte";
+  import { formatSortValue, type SortInput } from "./formatSortValue";
+  import { getUserRatingForItem } from "./getUserRatingForItem";
 
-  const { item, sortBy }: { item: ListItem | FavoritedEntry; sortBy?: SortBy } =
-    $props();
+  const { item, sortBy }: { item: SortInput; sortBy?: SortBy } = $props();
 
   const { ratings } = useUser();
   const userRating = $derived(
