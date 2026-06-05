@@ -57,7 +57,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: var(--gap-m);
+    gap: var(--gap-s);
 
     height: var(--review-content-height);
 

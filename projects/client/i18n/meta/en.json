@@ -784,7 +784,7 @@
       "description": "Text for the number of episodes watched by a user. This should be as short and concise as possible.",
       "variables": {
         "count": {
-          "type": "number"
+          "type": "string"
         }
       }
     },
@@ -797,7 +797,7 @@
       "description": "Text for the number of movies watched by a user. This should be as short and concise as possible.",
       "variables": {
         "count": {
-          "type": "number"
+          "type": "string"
         }
       }
     },
@@ -2443,7 +2443,7 @@
       "description": "Text shown to indicate the number of shows a user has watched.",
       "variables": {
         "count": {
-          "type": "number"
+          "type": "string"
         }
       }
     },
@@ -4056,6 +4056,10 @@
     "text_this_year": {
       "default": "This year",
       "description": "Text shown to indicate the users stats of the current year."
+    },
+    "text_all_time": {
+      "default": "All time",
+      "description": "Text shown to indicate the users all-time stats."
     },
     "text_view_all": {
       "default": "View all",

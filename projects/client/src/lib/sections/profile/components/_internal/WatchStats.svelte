@@ -5,50 +5,55 @@
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-  import type { MonthToDateDetails } from "../../models/MonthToDateDetails";
 
-  const {
-    monthToDate,
-    isLoading,
-    size = "normal",
-  }: {
-    monthToDate: MonthToDateDetails;
+  type WatchStats = {
+    movieCount: number;
+    showCount: number;
+    episodeCount: number;
+  };
+
+  type WatchStatsProps = {
+    stats: WatchStats;
     isLoading: boolean;
     size?: "normal" | "large";
-  } = $props();
+  };
+
+  const { stats, isLoading, size = "normal" }: WatchStatsProps = $props();
 
   const statVariant = $derived(size === "large" ? "plain" : "default");
 
   const getMainLabel = (
     value: number,
-    labelFn: ({ count }: { count: number }) => string,
+    labelFn: ({ count }: { count: string }) => string,
   ) => {
-    return size === "large"
-      ? toHumanNumber(value, languageTag())
-      : labelFn({ count: value });
+    const valueLabel = toHumanNumber(value, languageTag());
+    return size === "large" ? valueLabel : labelFn({ count: valueLabel });
   };
 
   const watchStats = $derived([
     {
-      label: getMainLabel(monthToDate.episodeCount, m.text_episodes_watched),
+      label: getMainLabel(stats.episodeCount, m.text_episodes_watched),
       tagLabel: m.tag_text_episodes(),
       icon: ShowIcon,
+      key: "episodes",
     },
     {
-      label: getMainLabel(monthToDate.showCount, m.text_shows_watched),
+      label: getMainLabel(stats.showCount, m.text_shows_watched),
       tagLabel: m.tag_text_shows(),
       icon: ShowIcon,
+      key: "shows",
     },
     {
-      label: getMainLabel(monthToDate.movieCount, m.text_movies_watched),
+      label: getMainLabel(stats.movieCount, m.text_movies_watched),
       tagLabel: m.tag_text_movies(),
       icon: MovieIcon,
+      key: "movies",
     },
   ] as const);
 </script>
 
 <div class="trakt-watch-stats" data-size={size}>
-  {#each watchStats as stat}
+  {#each watchStats as stat (stat.key)}
     <Stat {isLoading} variant={statVariant}>
       {#snippet icon()}
         {@const Icon = stat.icon}
@@ -66,7 +71,9 @@
   {/each}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-watch-stats {
     display: flex;
     flex-wrap: wrap;
@@ -83,6 +90,15 @@
       :global(svg) {
         width: var(--ni-32);
         height: var(--ni-32);
+      }
+
+      @include for-mobile {
+        gap: var(--gap-s);
+
+        :global(svg) {
+          width: var(--ni-24);
+          height: var(--ni-24);
+        }
       }
     }
   }
