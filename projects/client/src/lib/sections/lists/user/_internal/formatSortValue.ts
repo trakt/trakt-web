@@ -1,6 +1,7 @@
 import * as m from '$lib/features/i18n/messages.ts';
 import type { FavoritedEntry } from '$lib/requests/models/FavoritedEntry.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
+import type { ProgressEntry } from '$lib/requests/models/ProgressEntry.ts';
 import { getLocale, languageTag } from '../../../../features/i18n/index.ts';
 import { isMaxDate } from '../../../../utils/date/isMaxDate.ts';
 import { toHumanDay } from '../../../../utils/formatting/date/toHumanDay.ts';
@@ -9,14 +10,24 @@ import { toTraktRating } from '../../../../utils/formatting/number/toTraktRating
 import { toUserRating } from '../../../../utils/formatting/number/toUserRating.ts';
 import type { SortBy } from '../models/SortBy.ts';
 
-export type SortInput = ListItem | FavoritedEntry;
+export type SortInput = ListItem | FavoritedEntry | ProgressEntry;
 
 function isFavorited(item: SortInput): item is FavoritedEntry {
   return 'favoritedAt' in item;
 }
 
-function getAddedAt(item: SortInput): Date {
-  return isFavorited(item) ? item.favoritedAt : item.listedAt;
+function isProgress(item: SortInput): item is ProgressEntry {
+  return 'type' in item && (item.type === 'watched' || item.type === 'dropped');
+}
+
+function getAddedAt(item: SortInput): Date | undefined {
+  if (isFavorited(item)) return item.favoritedAt;
+  if (isProgress(item)) {
+    return item.type === 'watched'
+      ? (item.lastWatchedAt ?? undefined)
+      : item.hiddenAt;
+  }
+  return item.listedAt;
 }
 
 function getListItemEntry(item: ListItem) {
@@ -32,6 +43,10 @@ function getListItemEntry(item: ListItem) {
 }
 
 function getRuntimeMinutes(item: SortInput): number {
+  if (isProgress(item)) {
+    return item.show.totalRuntime;
+  }
+
   if (isFavorited(item)) {
     const { item: media } = item;
     return 'totalRuntime' in media ? media.totalRuntime : media.runtime;
@@ -52,11 +67,13 @@ function getRuntimeMinutes(item: SortInput): number {
 }
 
 function getAirDate(item: SortInput): Date {
+  if (isProgress(item)) return item.show.effectiveReleaseDate;
   if (isFavorited(item)) return item.item.airDate;
   return getListItemEntry(item).airDate;
 }
 
 function getTitle(item: SortInput): string {
+  if (isProgress(item)) return item.show.title;
   if (isFavorited(item)) return item.item.title;
 
   switch (item.type) {
@@ -71,6 +88,7 @@ function getTitle(item: SortInput): string {
 }
 
 function getRating(item: SortInput): number | null | undefined {
+  if (isProgress(item)) return item.show.rating;
   if (isFavorited(item)) return item.item.rating;
   return getListItemEntry(item).rating;
 }
@@ -85,12 +103,16 @@ export function formatSortValue(
   }
 
   switch (sortBy) {
-    case 'added':
-      return toHumanDay({
-        date: getAddedAt(item),
-        locale: getLocale(),
-        format: 'short',
-      });
+    case 'added': {
+      const addedAt = getAddedAt(item);
+      return addedAt
+        ? toHumanDay({
+          date: addedAt,
+          locale: getLocale(),
+          format: 'short',
+        })
+        : undefined;
+    }
     case 'runtime': {
       const runtime = getRuntimeMinutes(item);
       return toHumanDuration({ minutes: runtime }, languageTag());
@@ -119,7 +141,8 @@ export function groupByFirstLetter(item: SortInput): string {
 }
 
 export function groupByAdded(item: SortInput): string {
-  return String(getAddedAt(item).getFullYear());
+  const addedAt = getAddedAt(item);
+  return addedAt ? String(addedAt.getFullYear()) : '#';
 }
 
 export function groupByReleased(item: SortInput): string {

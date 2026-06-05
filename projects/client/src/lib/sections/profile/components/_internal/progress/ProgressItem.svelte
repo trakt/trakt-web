@@ -3,27 +3,19 @@
   import EpisodeRemainingTag from "$lib/components/episode/tags/EpisodeRemainingTag.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { ProgressEntry } from "$lib/requests/models/ProgressEntry.ts";
-  import type { SortBy } from "$lib/sections/lists/user/models/SortBy.ts";
   import MediaItem from "$lib/sections/lists/components/MediaItem.svelte";
-  import ProgressSortValue from "./ProgressSortValue.svelte";
   import DropAction from "$lib/sections/media-actions/drop/DropAction.svelte";
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
+  import type { Snippet } from "svelte";
 
   type ProgressItemProps = {
     entry: ProgressEntry;
     style?: "cover" | "summary";
     type: "in-progress" | "completed" | "dropped";
-    sortBy?: SortBy;
-    showSortTag?: boolean;
+    sortTag?: Snippet;
   };
 
-  const {
-    entry,
-    style = "cover",
-    type,
-    sortBy,
-    showSortTag = false,
-  }: ProgressItemProps = $props();
+  const { entry, style = "cover", type, sortTag }: ProgressItemProps = $props();
 
   const { isDropped } = $derived(useIsDropped(entry.show));
   const hasActions = $derived(!$isDropped);
@@ -37,10 +29,6 @@
       type="tag"
     />
   {/if}
-{/snippet}
-
-{#snippet sortTag()}
-  <ProgressSortValue {entry} {sortBy} />
 {/snippet}
 
 {#snippet popupActions()}
@@ -62,7 +50,7 @@
   source="progress"
   variant="progress"
   {style}
-  sortTag={showSortTag ? sortTag : undefined}
+  {sortTag}
   coverTag={type === "in-progress" ? coverTag : undefined}
   popupActions={hasActions ? popupActions : undefined}
 />
