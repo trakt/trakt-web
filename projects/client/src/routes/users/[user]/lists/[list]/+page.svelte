@@ -2,7 +2,7 @@
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting";
+  import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting.ts";
   import ListActions from "$lib/sections/lists/user/ListActions.svelte";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
   import UserListPaginatedList from "$lib/sections/lists/user/UserListPaginatedList.svelte";

@@ -2,12 +2,18 @@ import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts'
 import type { ProgressEntry } from '$lib/requests/models/ProgressEntry.ts';
 import { progressWatchedQuery } from '$lib/requests/queries/sync/progressWatchedQuery.ts';
 import { droppedShowsQuery } from '$lib/requests/queries/users/droppedShowsQuery.ts';
+import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
+import type {
+  SortDirection,
+} from '$lib/sections/lists/user/models/SortDirection.ts';
 import { DEFAULT_PAGE_SIZE } from '../../../../utils/constants.ts';
 import { usePaginatedListQuery } from '../../../lists/stores/usePaginatedListQuery.ts';
 
 type UseProgressListProps = {
   type: 'in-progress' | 'completed' | 'dropped';
   limit?: number;
+  sortBy?: SortBy;
+  sortHow?: SortDirection;
 };
 
 function typeToQuery(
@@ -20,11 +26,15 @@ function typeToQuery(
       return progressWatchedQuery({
         limit,
         intent: 'continue',
+        sortBy: props.sortBy,
+        sortHow: props.sortHow,
       }) as InfiniteQuery<ProgressEntry>;
     case 'completed':
       return progressWatchedQuery({
         limit,
         intent: 'completed',
+        sortBy: props.sortBy,
+        sortHow: props.sortHow,
       }) as InfiniteQuery<ProgressEntry>;
     case 'dropped':
       return droppedShowsQuery({

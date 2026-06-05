@@ -4,7 +4,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import FavoritesListPaginated from "$lib/sections/lists/favorites/FavoritesListPaginated.svelte";
-  import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting";
+  import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting.ts";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
   import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";

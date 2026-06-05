@@ -12,7 +12,7 @@
   import type { SortBy } from "../models/SortBy";
   import type { SortDirection } from "../models/SortDirection";
   import type { Sorting } from "../models/Sorting";
-  import SortIcon from "./SortIcon.svelte";
+  import SortIcon from "../SortIcon.svelte";
 
   const {
     options,
