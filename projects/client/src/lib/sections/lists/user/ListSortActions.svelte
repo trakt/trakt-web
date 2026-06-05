@@ -3,13 +3,13 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import SortIcon from "$lib/components/icons/SortIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { UpNextSortBy } from "$lib/sections/lists/progress/UpNextSortBy";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import SortOptionsDrawer from "./_internal/SortOptionsDrawer.svelte";
   import type { ListUrlBuilder } from "./models/ListUrlBuilder";
-  import type { SortBy } from "./models/SortBy";
   import type { SortDirection } from "./models/SortDirection";
   import type { Sorting } from "./models/Sorting";
+  import type { SortBy } from "./models/SortBy";
+  import type { UpNextSortBy } from "$lib/sections/lists/progress/UpNextSortBy";
 
   const {
     options,

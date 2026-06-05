@@ -66,7 +66,7 @@ export const upNextNitroRequest = (
         limit,
         intent: 'continue',
         ...filter,
-        ...(sortBy ? { sort_by: sortBy } : {}),
+        ...(sortBy ? { sort_by: sortBy === 'released' ? 'aired' : sortBy  } : {}),
         ...(sortHow ? { sort_how: sortHow } : {}),
       },
     });

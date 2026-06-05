@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting";
+  import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting.ts";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
   import WatchlistPaginatedList from "$lib/sections/lists/watchlist/WatchlistPaginatedList.svelte";
   import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";

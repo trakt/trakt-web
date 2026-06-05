@@ -42,10 +42,18 @@ type UseListSortingProps = {
 } | {
   type: 'favorites';
   slug: string;
+} | {
+  type: 'progress';
+  slug: string;
 };
 
 function getDefaultDirection(props: UseListSortingProps): SortDirection {
-  if (props.type === 'watchlist' || props.type === 'favorites' || !props.list) {
+  if (
+    props.type === 'watchlist' ||
+    props.type === 'favorites' ||
+    props.type === 'progress' ||
+    !props.list
+  ) {
     return 'desc';
   }
 
@@ -96,6 +104,15 @@ export function useListSorting(
       if (props.type === 'favorites') {
         return getListUrl({
           type: 'favorites',
+          slug: props.slug,
+          sortBy,
+          sortHow,
+        });
+      }
+
+      if (props.type === 'progress') {
+        return getListUrl({
+          type: 'progress',
           slug: props.slug,
           sortBy,
           sortHow,

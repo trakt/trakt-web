@@ -5,7 +5,7 @@
   import type { SortBy } from "../models/SortBy";
   import { formatSortValue } from "./formatSortValue";
   import { getUserRatingForItem } from "./getUserRatingForItem";
-  import SortIcon from "./SortIcon.svelte";
+  import SortIcon from "../SortIcon.svelte";
 
   const { item, sortBy }: { item: ListItem | FavoritedEntry; sortBy?: SortBy } =
     $props();

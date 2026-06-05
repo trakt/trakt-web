@@ -13,6 +13,9 @@ type ListProps = {
 } | {
   type: 'favorites';
   slug: string;
+} | {
+  type: 'progress';
+  slug: string;
 };
 
 type ListUrlProps = {
@@ -32,6 +35,8 @@ export function getListUrl(props: ListUrlProps) {
         : UrlBuilder.startWatching('me', params);
     case 'favorites':
       return UrlBuilder.profile.favorites(props.slug, params);
+    case 'progress':
+      return UrlBuilder.profile.progress(props.slug, params);
     case 'user-list': {
       if (props.list.user.slug) {
         return UrlBuilder.users(props.list.user.slug).lists(

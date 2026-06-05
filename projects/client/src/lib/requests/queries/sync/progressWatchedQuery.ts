@@ -10,12 +10,18 @@ import {
   type WatchedProgressEntry,
   WatchedProgressEntrySchema,
 } from '$lib/requests/models/ProgressEntry.ts';
+import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
+import type {
+  SortDirection,
+} from '$lib/sections/lists/user/models/SortDirection.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { UpNextResponse } from '@trakt/api';
 
 type ProgressWatchedParams =
   & {
     intent: 'continue' | 'completed';
+    sortBy?: SortBy;
+    sortHow?: SortDirection;
   }
   & PaginationParams
   & ApiParams;
@@ -33,10 +39,19 @@ function mapToWatchedProgressEntry(
   };
 }
 
+function mapToNitroSortBy(sortBy: SortBy | undefined): string | undefined {
+  if (sortBy === 'percentage') return 'rating';
+  return sortBy;
+}
+
 const progressWatchedRequest = (
-  { fetch, page, limit, intent }: ProgressWatchedParams,
-) =>
-  api({ fetch })
+  { fetch, page, limit, intent, sortBy, sortHow }: ProgressWatchedParams,
+) => {
+  const defaultSort = intent === 'continue'
+    ? { sort_by: 'remaining', sort_how: 'asc' as const }
+    : {};
+
+  return api({ fetch })
     .sync
     .progress
     .upNext
@@ -45,16 +60,12 @@ const progressWatchedRequest = (
         page,
         limit,
         intent,
-        ...(
-          intent === 'continue'
-            ? {
-              sort_by: 'remaining',
-              sort_how: 'asc',
-            }
-            : {}
-        ),
+        ...defaultSort,
+        ...(sortBy ? { sort_by: mapToNitroSortBy(sortBy) } : {}),
+        ...(sortHow ? { sort_how: sortHow } : {}),
       },
     });
+};
 
 export const progressWatchedQuery = defineInfiniteQuery({
   key: 'progressWatched',
@@ -68,6 +79,8 @@ export const progressWatchedQuery = defineInfiniteQuery({
     params.page,
     params.limit,
     params.intent,
+    params.sortBy,
+    params.sortHow,
   ],
   request: progressWatchedRequest,
   mapper: (response) => ({

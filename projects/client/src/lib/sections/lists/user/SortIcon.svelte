@@ -5,8 +5,8 @@
   import RemainingIcon from "$lib/components/icons/RemainingIcon.svelte";
   import SortAlphaIcon from "$lib/components/icons/SortAlphaIcon.svelte";
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
-  import type { UpNextSortBy } from "$lib/sections/lists/progress/UpNextSortBy";
-  import type { SortBy } from "../models/SortBy";
+  import type { UpNextSortBy } from "$lib/sections/lists/progress/UpNextSortBy.ts";
+  import type { SortBy } from "./models/SortBy.ts";
 
   const {
     sortBy,

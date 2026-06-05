@@ -8,7 +8,7 @@
   import DrillableMediaList from "$lib/sections/lists/drilldown/DrillableMediaList.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { slide } from "svelte/transition";
-  import ProgressItem from "./_internal/ProgressItem.svelte";
+  import ProgressItem from "./_internal/progress/ProgressItem.svelte";
   import { useProgressList } from "./_internal/useProgressList.ts";
 
   const { mode }: { mode: DiscoverMode } = $props();
