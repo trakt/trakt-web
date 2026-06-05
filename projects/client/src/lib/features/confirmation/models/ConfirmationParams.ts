@@ -88,6 +88,13 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.HideRecommendation;
     title: string;
   };
+  [ConfirmationType.UnlinkStreaming]: {
+    type: ConfirmationType.UnlinkStreaming;
+    service: string;
+  };
+  [ConfirmationType.UndoSync]: {
+    type: ConfirmationType.UndoSync;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

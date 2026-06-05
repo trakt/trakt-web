@@ -7,6 +7,7 @@ import { people } from './handlers/people.ts';
 import { recommendations } from './handlers/recommendations.ts';
 import { search } from './handlers/search.ts';
 import { shows } from './handlers/shows.ts';
+import { streamingSync } from './handlers/streamingSync.ts';
 import { sync } from './handlers/sync.ts';
 import { team } from './handlers/team.ts';
 import { users } from './handlers/users.ts';
@@ -16,6 +17,7 @@ const handlers = [
   ...users,
   ...movies,
   ...shows,
+  ...streamingSync,
   ...sync,
   ...people,
   ...watchNow,

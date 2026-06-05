@@ -327,6 +327,12 @@ export const UrlBuilder = {
     advanced: (params: Pick<WellKnownQueryParams, 'section'> = {}) =>
       `/settings/advanced${buildParamString(sanitizeParams(params))}`,
     preview: () => '/settings/preview',
+    streamingSync: (
+      params: { connection?: string; service?: string | null } = {},
+    ) => `/settings/streaming-sync${buildParamString(params)}`,
+    streamingSyncDetail: (id: number | string) =>
+      `/settings/streaming-sync/${id}`,
+    streamingSyncCallback: () => '/callback/streaming',
   },
   external: {
     imdb: {

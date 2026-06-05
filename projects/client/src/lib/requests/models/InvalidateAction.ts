@@ -25,7 +25,9 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:notes_edit:${MediaType}`
   | `${typeof INVALIDATION_ID}:notes_delete:${MediaType}`
   | `${typeof INVALIDATION_ID}:vip:${VipType}`
-  | `${typeof INVALIDATION_ID}:hide_recommended:${MediaType}`;
+  | `${typeof INVALIDATION_ID}:hide_recommended:${MediaType}`
+  | `${typeof INVALIDATION_ID}:streaming_connection`
+  | `${typeof INVALIDATION_ID}:data_sync`;
 
 type TypeDataMap = {
   'auth': null;
@@ -48,6 +50,8 @@ type TypeDataMap = {
   'notes_delete': MediaType;
   'vip': VipType;
   'hide_recommended': MediaType;
+  'streaming_connection': null;
+  'data_sync': null;
 };
 
 export function invalidationId(key?: string) {
@@ -125,4 +129,9 @@ export const InvalidateAction = {
 
   HideRecommended: (type: MediaType) =>
     buildInvalidationKey('hide_recommended', type),
+
+  StreamingSync: {
+    Connection: buildInvalidationKey('streaming_connection'),
+    Sync: buildInvalidationKey('data_sync'),
+  },
 };
