@@ -22,6 +22,7 @@
     title?: string;
     headerActions?: Snippet;
     subtitle?: string;
+    currentEpisode?: number;
   };
 
   const {
@@ -31,6 +32,7 @@
     title,
     subtitle,
     headerActions,
+    currentEpisode,
   }: SeasonEpisodeListProps = $props();
 
   const { history } = useUser();
@@ -72,6 +74,7 @@
       {hasUnseenEpisodes}
       watchedBySeason={$watchedBySeason}
       isWatchedLoading={$isWatchedLoading}
+      isCurrentEpisode={episode.number === currentEpisode}
       source="season-episode-list"
     />
   {/snippet}

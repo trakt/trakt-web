@@ -119,7 +119,12 @@
   id={episode.id}
 />
 
-<SeasonList {show} seasons={currentSeasonOnly} currentSeason={episode.season} />
+<SeasonList
+  {show}
+  seasons={currentSeasonOnly}
+  currentSeason={episode.season}
+  currentEpisode={episode.number}
+/>
 
 <RelatedList
   title={m.list_title_related_shows()}
