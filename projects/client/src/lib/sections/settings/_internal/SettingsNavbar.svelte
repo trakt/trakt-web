@@ -1,7 +1,9 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
@@ -13,6 +15,13 @@
     <Link href={UrlBuilder.settings.data()}>
       <span class="title">{m.link_text_data_settings()}</span>
     </Link>
+    <RenderForFeature flag={FeatureFlag.StreamingSync}>
+      {#snippet enabled()}
+        <Link href={UrlBuilder.settings.streamingSync()}>
+          <span class="title">{m.link_text_streaming_sync_settings()}</span>
+        </Link>
+      {/snippet}
+    </RenderForFeature>
     <Link href={UrlBuilder.settings.advanced()}>
       <span class="title">{m.link_text_advanced_settings()}</span>
     </Link>

@@ -7,6 +7,13 @@ type Exemption = {
   routes: Set<string>;
 };
 
+// Route ids (with dynamic segments) that handle service errors inline rather
+// than replacing the page with the global "service unreachable" page.
+const streamingSyncRoute = UrlBuilder.settings.streamingSync();
+const streamingSyncDetailRoute = UrlBuilder.settings.streamingSyncDetail(
+  '[id]',
+);
+
 // FIXME: remove this exemption when we can do clean up natively
 const exemptions: Exemption[] = [
   {
@@ -15,7 +22,11 @@ const exemptions: Exemption[] = [
   },
   {
     errorType: WellKnownErrorType.ServerError,
-    routes: new Set([UrlBuilder.settings.advanced()]),
+    routes: new Set([
+      UrlBuilder.settings.advanced(),
+      streamingSyncRoute,
+      streamingSyncDetailRoute,
+    ]),
   },
 ];
 

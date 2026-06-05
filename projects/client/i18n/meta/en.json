@@ -11,6 +11,214 @@
     }
   },
   "messages": {
+    "link_text_streaming_sync_settings": {
+      "default": "Streaming Sync",
+      "description": "Text for the link to the streaming sync settings page."
+    },
+    "header_streaming_sync": {
+      "default": "Streaming Sync",
+      "description": "Header for the streaming sync settings section."
+    },
+    "description_streaming_sync": {
+      "default": "Automatically sync your watched history and ratings. Connect a service below, or in the official Trakt mobile apps.",
+      "description": "Description for the streaming sync settings section."
+    },
+    "badge_text_beta": {
+      "default": "Beta",
+      "description": "Badge text indicating a feature is in beta. Keep short."
+    },
+    "button_text_connect": {
+      "default": "Connect",
+      "description": "Text for the button that connects a streaming service."
+    },
+    "button_text_reconnect": {
+      "default": "Reconnect",
+      "description": "Text for the button that reconnects a broken streaming service."
+    },
+    "button_text_upgrade": {
+      "default": "Upgrade",
+      "description": "Text for the button that upgrades to VIP to unlock a streaming service."
+    },
+    "button_label_connect_streaming_service": {
+      "default": "Connect {service}",
+      "description": "Aria-label for the button that connects a specific streaming service."
+    },
+    "button_label_sync_streaming_service": {
+      "default": "Sync {service}",
+      "description": "Aria-label for the button that syncs a specific streaming service."
+    },
+    "button_label_unlink_streaming_service": {
+      "default": "Unlink {service}",
+      "description": "Aria-label for the button that unlinks a specific streaming service."
+    },
+    "tag_text_inactive": {
+      "default": "Inactive",
+      "description": "Tag indicating a connected streaming service is inactive and needs reconnecting. Keep short."
+    },
+    "tag_text_vip": {
+      "default": "VIP",
+      "description": "Tag indicating a streaming service requires Trakt VIP. Keep short."
+    },
+    "text_streaming_profile": {
+      "default": "Profile",
+      "description": "Label for the streaming service profile name."
+    },
+    "text_streaming_last_synced": {
+      "default": "Last Synced",
+      "description": "Label for when a streaming service was last synced."
+    },
+    "text_streaming_never_synced": {
+      "default": "Never",
+      "description": "Shown when a streaming service has never been synced."
+    },
+    "text_streaming_queued": {
+      "default": "Queued",
+      "description": "Shown when a streaming service sync is queued."
+    },
+    "text_reconnect_streaming_warning": {
+      "default": "Please reconnect {services} below.",
+      "description": "Warning shown when one or more streaming services are inactive and need reconnecting."
+    },
+    "button_text_sync_new_data": {
+      "default": "Sync New Data",
+      "description": "Text for the option to sync only new data from a streaming service."
+    },
+    "button_text_sync_all_data": {
+      "default": "Sync All Data",
+      "description": "Text for the option to sync all data from a streaming service."
+    },
+    "button_label_sync_options": {
+      "default": "Choose sync option",
+      "description": "Aria-label for the button that opens the sync options menu."
+    },
+    "confirmation_title_unlink_streaming": {
+      "default": "Unlink {service}?",
+      "description": "Title for the dialog confirming unlinking a streaming service."
+    },
+    "confirmation_message_unlink_streaming": {
+      "default": "This will stop syncing your watched history and ratings from {service}. You can reconnect at any time.",
+      "description": "Message for the dialog confirming unlinking a streaming service."
+    },
+    "button_text_unlink": {
+      "default": "Unlink",
+      "description": "Text for the button that confirms unlinking a streaming service."
+    },
+    "confirmation_title_undo_sync": {
+      "default": "Undo this sync?",
+      "description": "Title for the dialog confirming undoing a data sync."
+    },
+    "confirmation_message_undo_sync": {
+      "default": "This will reverse every item this sync imported into your history, ratings, watchlist, and library.",
+      "description": "Message for the dialog confirming undoing a data sync."
+    },
+    "button_text_undo": {
+      "default": "Undo",
+      "description": "Text for the button that undoes a data sync."
+    },
+    "text_undone": {
+      "default": "Undone",
+      "description": "Shown when a data sync has been undone."
+    },
+    "header_data_syncs": {
+      "default": "Data Syncs",
+      "description": "Header for the list of recent data syncs."
+    },
+    "description_data_syncs": {
+      "default": "Recent data syncs from your connected streaming services.",
+      "description": "Description for the list of recent data syncs."
+    },
+    "text_no_data_synced": {
+      "default": "No data has been synced yet.",
+      "description": "Shown when no data syncs exist."
+    },
+    "text_table_history": {
+      "default": "History",
+      "description": "Table column header for history counts."
+    },
+    "text_table_library": {
+      "default": "Library",
+      "description": "Table column header for library counts."
+    },
+    "text_table_ratings": {
+      "default": "Ratings",
+      "description": "Table column header for ratings counts."
+    },
+    "text_table_watchlist": {
+      "default": "Watchlist",
+      "description": "Table column header for watchlist counts."
+    },
+    "text_streaming_count_movies": {
+      "default": "{count} movies",
+      "description": "Count of movies synced."
+    },
+    "text_streaming_count_episodes": {
+      "default": "{count} episodes",
+      "description": "Count of episodes synced."
+    },
+    "text_streaming_count_shows": {
+      "default": "{count} shows",
+      "description": "Count of shows synced."
+    },
+    "text_streaming_count_seasons": {
+      "default": "{count} seasons",
+      "description": "Count of seasons synced."
+    },
+    "text_streaming_count_paused": {
+      "default": "{count} paused",
+      "description": "Count of paused items in a sync."
+    },
+    "text_streaming_count_skipped": {
+      "default": "{count} skipped",
+      "description": "Count of skipped items in a sync."
+    },
+    "header_sync_detail": {
+      "default": "Sync ID {id}",
+      "description": "Header for a single data sync detail page, showing its id."
+    },
+    "description_sync_detail": {
+      "default": "Some details about this sync.",
+      "description": "Description for the data sync detail page."
+    },
+    "header_paused_items": {
+      "default": "{count} Paused Items",
+      "description": "Header for the paused items list on a sync detail page, showing the count."
+    },
+    "description_paused_items": {
+      "default": "These items were added as paused, since they were not at least 80% watched.",
+      "description": "Description for the paused items list."
+    },
+    "header_skipped_items": {
+      "default": "{count} Skipped Items",
+      "description": "Header for the skipped items list on a sync detail page, showing the count."
+    },
+    "description_skipped_items": {
+      "default": "Some useful info to help identify what was skipped and why. Anything in red caused the item to be skipped.",
+      "description": "Description for the skipped items list."
+    },
+    "text_unknown": {
+      "default": "Unknown",
+      "description": "Shown when a value could not be resolved."
+    },
+    "text_no_paused_items": {
+      "default": "No paused items.",
+      "description": "Shown when a sync has no paused items."
+    },
+    "text_no_skipped_items": {
+      "default": "No skipped items.",
+      "description": "Shown when a sync has no skipped items."
+    },
+    "button_text_load_more": {
+      "default": "Load More",
+      "description": "Text for the button that loads more items in a list."
+    },
+    "text_streaming_service_logo_alt": {
+      "default": "{service} logo",
+      "description": "Alt text for a streaming service logo image."
+    },
+    "button_label_watch_on_service": {
+      "default": "Watch on {service}",
+      "description": "Aria-label for the link to watch an item on a streaming service."
+    },
     "list_title_upcoming_schedule": {
       "default": "Calendar",
       "description": "Title for lists containing upcoming episodes. This title should be as short and concise as possible."
@@ -7335,6 +7543,54 @@
     "error_text_image_preview_failed": {
       "default": "Preview failed to load",
       "description": "Error text shown when the generated image preview cannot be loaded."
+    },
+    "text_data_syncs_count_before": {
+      "default": "Data has synced",
+      "description": "Text before the bold sync count in the data syncs banner. Followed by the count and the word for 'times'."
+    },
+    "text_data_syncs_count_after": {
+      "default": "times",
+      "description": "Text after the bold sync count in the data syncs banner (e.g. 'Data has synced 37 times')."
+    },
+    "text_data_syncs_recent_before": {
+      "default": "Most recent sync was",
+      "description": "Text before the bold most-recent-sync date in the data syncs banner."
+    },
+    "text_connection_status_connected_title": {
+      "default": "Connected to {service}",
+      "description": "Title shown in the banner after a streaming service is successfully connected."
+    },
+    "text_connection_status_connected_message": {
+      "default": "We're syncing your watched history and ratings now.",
+      "description": "Message shown after a streaming service is successfully connected."
+    },
+    "text_connection_status_error_title": {
+      "default": "Couldn't connect {service}",
+      "description": "Title shown in the banner when connecting a streaming service failed."
+    },
+    "text_connection_status_error_message": {
+      "default": "Something went wrong. Please try again.",
+      "description": "Message shown when connecting a streaming service failed."
+    },
+    "text_connection_status_cancelled_title": {
+      "default": "Connection cancelled",
+      "description": "Title shown in the banner when the user cancelled connecting a streaming service."
+    },
+    "text_connection_status_cancelled_message": {
+      "default": "You can connect {service} whenever you're ready.",
+      "description": "Message shown when the user cancelled connecting a streaming service."
+    },
+    "text_streaming_service_fallback": {
+      "default": "your streaming service",
+      "description": "Generic fallback name used when a streaming service name can't be resolved."
+    },
+    "error_text_sync_load_failed": {
+      "default": "We couldn't load this right now. Please try again.",
+      "description": "Inline error message shown when a streaming sync detail or its items fail to load."
+    },
+    "text_streaming_tmdb_pill": {
+      "default": "TMDB {id}",
+      "description": "Pill label showing the TMDB id of a synced item."
     }
   }
 }
