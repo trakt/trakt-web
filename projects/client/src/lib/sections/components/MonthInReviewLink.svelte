@@ -38,7 +38,7 @@
   {#if variant === "link"}
     <Link {href} {onclick} color="inherit">
       <ExternalLinkIcon />
-      <p class="uppercase bold">{previousMonth}</p>
+      <p class="bold">{previousMonth}</p>
     </Link>
   {:else}
     <Button

@@ -4,6 +4,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ProfilePageBanner from "$lib/sections/profile-banner/ProfilePageBanner.svelte";
   import type { DisplayableProfileProps } from "../DisplayableProfileProps";
+  import AllTimeStats from "./AllTimeStats.svelte";
   import MonthToDate from "./MonthToDate.svelte";
   import ThisMonth from "./ThisMonth.svelte";
   import ThisYear from "./ThisYear.svelte";
@@ -21,8 +22,12 @@
   <ThisMonth {slug} />
 {/snippet}
 
-{#snippet thisYear()}
-  <ThisYear {slug} source="profile" />
+{#snippet allTimeStats()}
+  {#if $isMe}
+    <AllTimeStats />
+  {:else}
+    <ThisYear {slug} source="profile" />
+  {/if}
 {/snippet}
 
 <div
@@ -38,12 +43,12 @@
         {@render thisMonth()}
       </div>
       <div class="trakt-profile-details-item">
-        {@render thisYear()}
+        {@render allTimeStats()}
       </div>
     </RenderFor>
 
     <RenderFor audience="all" device={["tablet-lg"]}>
-      <Carousel items={[thisMonth, thisYear]} />
+      <Carousel items={[thisMonth, allTimeStats]} />
     </RenderFor>
   {/if}
 
