@@ -61,6 +61,7 @@
         UrlBuilder.anticipated(),
         m.list_title_most_anticipated(),
       )}
+      {@render navSubLink(UrlBuilder.releases(), m.list_title_releases())}
       {@render navSubLink(UrlBuilder.popular(), m.list_title_most_popular())}
     </NavGroup>
 

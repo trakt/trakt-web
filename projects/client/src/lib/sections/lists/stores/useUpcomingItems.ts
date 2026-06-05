@@ -9,6 +9,7 @@ import {
 import { upcomingMediaQuery } from '$lib/requests/queries/calendars/upcomingMediaQuery.ts';
 import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMoviesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { map } from 'rxjs';
 
@@ -19,11 +20,10 @@ type UseUpcomingItemsProps = {
 
 type UpcomingList = Array<MediaEntry | UpcomingEpisodeEntry>;
 
-const ONE_DAY = 1000 * 60 * 60 * 24;
-const DAYS_TO_FETCH = 14;
+const daysToFetch = 14;
 
 function daysAgo(days: number) {
-  return new Date(Date.now() - ONE_DAY * days);
+  return new Date(Date.now() - time.days(days));
 }
 
 function getUpcomingCalendarQuery(
@@ -32,7 +32,7 @@ function getUpcomingCalendarQuery(
 ) {
   const params = {
     startDate,
-    days: DAYS_TO_FETCH,
+    days: daysToFetch,
     filter: props.filter,
   };
 

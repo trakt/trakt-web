@@ -1,7 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
-import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
-import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
+import { mapToUpcomingEpisodeEntry } from '$lib/requests/_internal/mapToUpcomingEpisodeEntry.ts';
 import { type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -20,6 +19,7 @@ export type CalendarMediaParams =
   & {
     startDate: string;
     days: number;
+    target?: 'my' | 'all';
   }
   & ApiParams
   & FilterParams;
@@ -42,9 +42,15 @@ export const upcomingMediaQuery = defineQuery({
   dependencies: (
     params: CalendarMediaParams,
   ) => [
+    params.target,
     params.startDate,
     params.days,
-    ...getGlobalFilterDependencies(params.filter),
+    ...getGlobalFilterDependencies(
+      params.filterOverride?.movie ?? params.filter,
+    ),
+    ...getGlobalFilterDependencies(
+      params.filterOverride?.show ?? params.filter,
+    ),
   ],
   request: (params) =>
     Promise.all([
@@ -52,11 +58,9 @@ export const upcomingMediaQuery = defineQuery({
       upcomingMoviesRequest(params),
     ]),
   mapper: ([episodesResponse, moviesResponse]) => {
-    const allEpisodes = episodesResponse.body.map((item) => ({
-      show: mapToShowEntry(item.show),
-      ...mapToEpisodeEntry(item.episode),
-    }));
-    const episodes = coalesceEpisodes(allEpisodes);
+    const episodes = coalesceEpisodes(
+      episodesResponse.body.map(mapToUpcomingEpisodeEntry),
+    );
 
     const movies = moviesResponse.body.map((entry) =>
       mapToMovieEntry(entry.movie)

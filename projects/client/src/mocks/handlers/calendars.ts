@@ -11,7 +11,19 @@ export const calendars = [
     },
   ),
   http.get(
+    'http://localhost/calendars/all/shows/*',
+    () => {
+      return HttpResponse.json(UpcomingEpisodesResponseMock);
+    },
+  ),
+  http.get(
     'http://localhost/calendars/my/movies/*',
+    () => {
+      return HttpResponse.json(UpcomingMoviesResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/calendars/all/movies/*',
     () => {
       return HttpResponse.json(UpcomingMoviesResponseMock);
     },

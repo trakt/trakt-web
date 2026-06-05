@@ -11,26 +11,31 @@ export type CalendarMoviesParams =
   & {
     startDate: string;
     days: number;
+    target?: 'my' | 'all';
   }
   & ApiParams
   & FilterParams;
 
 export const upcomingMoviesRequest = (
-  { fetch, startDate, days, filter }: CalendarMoviesParams,
-) =>
-  api({ fetch })
+  { fetch, startDate, days, filter, filterOverride, target = 'my' }:
+    CalendarMoviesParams,
+) => {
+  const filterParams = filterOverride?.movie ?? filter;
+
+  return api({ fetch })
     .calendars
     .movies({
       query: {
         extended: 'full,images',
-        ...filter,
+        ...filterParams,
       },
       params: {
-        target: 'my',
+        target,
         start_date: startDate,
         days,
       },
     });
+};
 
 export const upcomingMoviesQuery = defineQuery({
   key: 'upcomingMovies',
@@ -41,9 +46,12 @@ export const upcomingMoviesQuery = defineQuery({
   dependencies: (
     params,
   ) => [
+    params.target,
     params.startDate,
     params.days,
-    ...getGlobalFilterDependencies(params.filter),
+    ...getGlobalFilterDependencies(
+      params.filterOverride?.movie ?? params.filter,
+    ),
   ],
   request: upcomingMoviesRequest,
   mapper: (response) =>

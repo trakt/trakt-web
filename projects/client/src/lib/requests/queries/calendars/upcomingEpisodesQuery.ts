@@ -1,7 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
-import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
-import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
+import { mapToUpcomingEpisodeEntry } from '$lib/requests/_internal/mapToUpcomingEpisodeEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
@@ -15,6 +14,7 @@ export type CalendarShowsParams =
   & {
     startDate: string;
     days: number;
+    target?: 'my' | 'all';
   }
   & ApiParams
   & FilterParams;
@@ -25,21 +25,25 @@ export const UpcomingEpisodeEntrySchema = EpisodeEntrySchema.merge(z.object({
 export type UpcomingEpisodeEntry = z.infer<typeof UpcomingEpisodeEntrySchema>;
 
 export const upcomingEpisodesRequest = (
-  { fetch, startDate, days, filter }: CalendarShowsParams,
-) =>
-  api({ fetch })
+  { fetch, startDate, days, filter, filterOverride, target = 'my' }:
+    CalendarShowsParams,
+) => {
+  const filterParams = filterOverride?.show ?? filter;
+
+  return api({ fetch })
     .calendars
     .shows({
       query: {
         extended: 'full,images',
-        ...filter,
+        ...filterParams,
       },
       params: {
-        target: 'my',
+        target,
         start_date: startDate,
         days,
       },
     });
+};
 
 export const upcomingEpisodesQuery = defineQuery({
   key: 'upcomingEpisodes',
@@ -52,19 +56,16 @@ export const upcomingEpisodesQuery = defineQuery({
   dependencies: (
     params,
   ) => [
+    params.target,
     params.startDate,
     params.days,
-    ...getGlobalFilterDependencies(params.filter),
+    ...getGlobalFilterDependencies(
+      params.filterOverride?.show ?? params.filter,
+    ),
   ],
   request: upcomingEpisodesRequest,
-  mapper: (response) => {
-    const episodes = response.body.map((item) => ({
-      show: mapToShowEntry(item.show),
-      ...mapToEpisodeEntry(item.episode),
-    }));
-
-    return coalesceEpisodes(episodes);
-  },
+  mapper: (response) =>
+    coalesceEpisodes(response.body.map(mapToUpcomingEpisodeEntry)),
   schema: UpcomingEpisodeEntrySchema.array(),
   ttl: time.minutes(30),
   refetchOnWindowFocus: true,
