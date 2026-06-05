@@ -45,7 +45,9 @@
     useMarkAsWatched({ type: "episode", media: episode, show }),
   );
 
-  const isActionable = $derived(isWatchable || hasBulkMarkAsWatched);
+  const isActionable = $derived(
+    !isFuture && (isWatchable || hasBulkMarkAsWatched),
+  );
   const variant = $derived(isFuture ? "upcoming" : "default");
 
   const src = $derived(
