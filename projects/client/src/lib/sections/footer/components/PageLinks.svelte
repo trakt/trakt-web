@@ -11,25 +11,15 @@
 <div class="trakt-page-links">
   <div class="trakt-link-group">
     <span class="secondary">{m.text_footer_category_platform()}</span>
+    <Link href={UrlBuilder.about()}>
+      <span class="bold">{m.link_text_about()}</span>
+    </Link>
     <Link href={UrlBuilder.vip()}>
       <span class="bold">VIP</span>
     </Link>
-    <RenderFor audience="vip">
-      <Link
-        href={UrlBuilder.feedback()}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span class="bold">{m.link_text_feedback()}</span>
-      </Link>
-      <Link
-        href={UrlBuilder.og.support($user?.slug)}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span class="bold">{m.link_text_support()}</span>
-      </Link>
-    </RenderFor>
+    <Link href={UrlBuilder.branding()}>
+      <span class="bold">{m.link_text_branding()}</span>
+    </Link>
   </div>
 
   <div class="trakt-link-group">
@@ -41,12 +31,22 @@
     >
       <span class="bold">{m.link_text_forums()}</span>
     </Link>
-    <Link href={UrlBuilder.about()}>
-      <span class="bold">{m.link_text_about()}</span>
-    </Link>
-    <Link href={UrlBuilder.branding()}>
-      <span class="bold">{m.link_text_branding()}</span>
-    </Link>
+    <RenderFor audience="vip">
+      <Link
+        href={UrlBuilder.og.support($user?.slug)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="bold">{m.link_text_support()}</span>
+      </Link>
+      <Link
+        href={UrlBuilder.feedback()}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="bold">{m.link_text_feedback()}</span>
+      </Link>
+    </RenderFor>
   </div>
 
   <div class="trakt-link-group">
