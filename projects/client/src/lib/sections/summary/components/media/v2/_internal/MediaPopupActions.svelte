@@ -6,20 +6,24 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
-  import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
   import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import DropAction from "$lib/sections/media-actions/drop/DropAction.svelte";
+  import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
-  import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import HistoryButton from "$lib/sections/summary/components/history/HistoryButton.svelte";
   import SideActions from "./SideActions.svelte";
 
-  const { media, title }: { media: MediaEntry; title: string } = $props();
+  type MediaPopupActionsProps = {
+    media: MediaEntry;
+    title: string;
+    onListAction: () => void;
+  };
+
+  const { media, title, onListAction }: MediaPopupActionsProps = $props();
 
   const { isWatched } = $derived(useIsWatched({ media, type: media.type }));
   const { isDropped } = $derived(useIsDropped(media));
-  let isListsDrawerOpen = $state(false);
 
   const reportParams = $derived<ReportParams>(
     media.type === "show"
@@ -42,7 +46,7 @@
   style="dropdown-item"
   {media}
   {title}
-  onClick={() => (isListsDrawerOpen = true)}
+  onClick={onListAction}
   variant="primary"
 />
 
@@ -81,11 +85,3 @@
     variant="primary"
   />
 </RenderFor>
-
-{#if isListsDrawerOpen}
-  <ListsDrawer
-    onClose={() => (isListsDrawerOpen = false)}
-    {media}
-    title={media.title}
-  />
-{/if}
