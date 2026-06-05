@@ -13,13 +13,12 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
+  import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import type { Snippet } from "svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { SeasonCardProps } from "./models/SeasonCardProps";
   import StatusIndicators from "./StatusIndicators.svelte";
-
-  const scrollOffset = 8;
 
   const {
     season,
@@ -44,35 +43,8 @@
   );
 
   const scrollToItem = (element: HTMLElement, active: boolean) => {
-    const doScroll = (active: boolean, behavior: "smooth" | "instant") => {
-      if (!active || variant === "list-item") return;
-
-      const parent = element.parentElement;
-      if (!parent) return;
-
-      const parentRight = parent.scrollLeft + parent.clientWidth;
-      const elementLeft = element.offsetLeft;
-      const elementRight = elementLeft + element.offsetWidth;
-      const isOutOfView =
-        elementRight > parentRight || elementLeft < parent.scrollLeft;
-
-      if (!isOutOfView) return;
-
-      requestAnimationFrame(() => {
-        parent.scrollTo({
-          left: elementLeft - scrollOffset,
-          behavior,
-        });
-      });
-    };
-
-    doScroll(active, "instant");
-
-    return {
-      update: (active: boolean) => {
-        doScroll(active, "smooth");
-      },
-    };
+    if (variant === "list-item") return;
+    return scrollActiveItemIntoView(element, active);
   };
 </script>
 
