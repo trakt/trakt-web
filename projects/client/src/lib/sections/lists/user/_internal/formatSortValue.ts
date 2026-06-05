@@ -117,3 +117,11 @@ export function formatSortValue(
 export function groupByFirstLetter(item: SortInput): string {
   return formatSortValue(item, 'title') ?? '#';
 }
+
+export function groupByAdded(item: SortInput): string {
+  return String(getAddedAt(item).getFullYear());
+}
+
+export function groupByReleased(item: SortInput): string {
+  return String(getAirDate(item).getFullYear());
+}

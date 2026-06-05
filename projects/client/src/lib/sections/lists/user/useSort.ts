@@ -1,13 +1,30 @@
 import type { Snippet } from 'svelte';
-import { groupByFirstLetter } from './_internal/formatSortValue.ts';
+import {
+  groupByAdded,
+  groupByFirstLetter,
+  groupByReleased,
+} from './_internal/formatSortValue.ts';
 import type { SortBy } from './models/SortBy.ts';
 
+function getGroupBy(sortBy?: SortBy) {
+  switch (sortBy) {
+    case 'title':
+      return groupByFirstLetter;
+    case 'added':
+      return groupByAdded;
+    case 'released':
+      return groupByReleased;
+    default:
+      return undefined;
+  }
+}
+
 export function useSort(sortBy?: SortBy) {
-  const isGrouped = sortBy === 'title';
-  const hasSortTag = !isGrouped && sortBy != null;
+  const groupBy = getGroupBy(sortBy);
+  const hasSortTag = !groupBy && sortBy != null;
 
   return {
-    groupBy: isGrouped ? groupByFirstLetter : undefined,
+    groupBy,
     toTag: (snippet: Snippet | undefined) => hasSortTag ? snippet : undefined,
   };
 }
