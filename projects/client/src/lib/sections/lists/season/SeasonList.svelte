@@ -15,9 +15,11 @@
     show: ShowEntry;
     seasons: Season[];
     currentSeason: number;
+    currentEpisode?: number;
   };
 
-  const { show, seasons, currentSeason }: SeasonListProps = $props();
+  const { show, seasons, currentSeason, currentEpisode }: SeasonListProps =
+    $props();
 
   const { list: episodes } = $derived(
     useSeasonEpisodes(show.slug, currentSeason),
@@ -62,6 +64,7 @@
   {show}
   {previousSeasons}
   episodes={$episodes}
+  {currentEpisode}
   headerActions={isLargeScreen && !hasSingleSeason ? headerActions : undefined}
   {...episodeProps}
 />

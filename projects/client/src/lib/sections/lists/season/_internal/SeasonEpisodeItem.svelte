@@ -8,6 +8,7 @@
   import type { BaseItemProps } from "$lib/sections/lists/components/models/BaseItemProps";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
+  import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
   import { getEpisodesUntil } from "./getEpisodesUntil";
   import { WatchedUntilHereIntlProvider } from "./WatchedUntilHereIntlProvider";
 
@@ -18,6 +19,7 @@
     hasUnseenEpisodes: boolean;
     watchedBySeason: ReadonlyMap<number, ReadonlySet<number>>;
     isWatchedLoading: boolean;
+    isCurrentEpisode?: boolean;
     style?: BaseItemProps["style"];
     source: string;
   };
@@ -29,6 +31,7 @@
     hasUnseenEpisodes,
     watchedBySeason,
     isWatchedLoading,
+    isCurrentEpisode = false,
     style,
     source,
   }: SeasonEpisodeItemProps = $props();
@@ -86,13 +89,15 @@
   </RenderFor>
 {/snippet}
 
-<EpisodeItem
-  {episode}
-  media={show}
-  {style}
-  popupActions={isActionable ? popupActions : undefined}
-  variant={isFuture ? "upcoming" : "default"}
-  context="show"
-  {source}
-  coverUrl={$src}
-/>
+<div use:scrollActiveItemIntoView={isCurrentEpisode}>
+  <EpisodeItem
+    {episode}
+    media={show}
+    {style}
+    popupActions={isActionable ? popupActions : undefined}
+    variant={isFuture ? "upcoming" : "default"}
+    context="show"
+    {source}
+    coverUrl={$src}
+  />
+</div>
