@@ -981,11 +981,11 @@
       "description": "Job title for the creator. The value is sent back from the Trakt API."
     },
     "button_text_remove_from_history": {
-      "default": "Remove from Watched",
+      "default": "Remove from History",
       "description": "Text for the button that allows users to remove a movie or episode from their watch history."
     },
     "button_label_remove_from_watched": {
-      "default": "Remove \"{title}\" from your Watched history",
+      "default": "Remove \"{title}\" from your History",
       "description": "Aria-label for the button that allows users to remove a movie, show, or episode from their watch history.",
       "variables": {
         "title": {
@@ -994,7 +994,7 @@
       }
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Are you sure you want to remove \"{title}\" from your Watched history? All plays will be removed.",
+      "default": "Are you sure you want to remove \"{title}\" from your History? All plays will be removed.",
       "description": "Warning prompt shown when a user tries to remove a movie, show, or episode from their watch history.",
       "variables": {
         "title": {
@@ -1003,7 +1003,7 @@
       }
     },
     "button_label_remove_from_history": {
-      "default": "Remove this play of \"{title}\" from your Watched history",
+      "default": "Remove this play of \"{title}\" from your History",
       "description": "Aria-label for the button that allows users to remove a movie or episode from their watch history.",
       "variables": {
         "title": {
@@ -1012,7 +1012,7 @@
       }
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Are you sure you want to remove this play of \"{title}\" from your Watched history?",
+      "default": "Are you sure you want to remove this play of \"{title}\" from your History?",
       "description": "Warning prompt shown when a user tries to remove a single play of a movie or episode from their watch history.",
       "variables": {
         "title": {
@@ -5843,7 +5843,7 @@
       "description": "Section heading for the 'Meet the Team' section on the About page."
     },
     "text_about_tagline": {
-      "default": "Trakt is a platform that does many complex things. We try to make it simple. Trakt automatically tracks what you're watching across all your devices and apps — giving you a single place to see your entire watch history, discover what's next, and connect with a community of millions of movie and TV lovers around the world.",
+      "default": "Trakt automatically tracks what you're watching across all your devices and apps — giving you a single place to see your entire watch history, discover what's next, and connect with a community of millions of movie and TV lovers around the world.",
       "description": "Tagline paragraph on the About page describing what Trakt is."
     },
     "about_feature_title_scrobble": {
@@ -5851,7 +5851,7 @@
       "description": "Title for the scrobbling/tracking feature card on the About page."
     },
     "about_feature_description_scrobble": {
-      "default": "Automatically scrobble what you watch across hundreds of apps — Plex, Kodi, Emby, Infuse, and more. Never lose track of your progress.",
+      "default": "Automatically scrobble what you watch across hundreds of apps and media servers. Never lose track of your progress.",
       "description": "Description for the scrobbling/tracking feature card on the About page."
     },
     "about_feature_title_any_device": {
@@ -5859,7 +5859,7 @@
       "description": "Title for the multi-device/platform feature card on the About page."
     },
     "about_feature_description_any_device": {
-      "default": "Works with streaming services, Blu-ray, digital purchases, and physical media. iOS, Android, Apple TV, Fire TV, Roku, and more.",
+      "default": "Works with streaming services, and digital purchases. iOS, Android, Apple TV, Android TV, and more.",
       "description": "Description for the multi-device/platform feature card on the About page."
     },
     "about_feature_title_discover": {
