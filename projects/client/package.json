@@ -31,6 +31,7 @@
     "sync:immutable": "deno run --allow-net --allow-read --allow-env .scripts/sync-immutable-to-r2.ts",
     "prune:immutable": "deno run --allow-net --allow-env .scripts/prune-immutable-r2.ts",
     "i18n:resolve": "deno run --allow-read --allow-write .scripts/resolve-i18n.ts",
+    "i18n:check": "deno run --allow-read .scripts/check-i18n-placeholders.ts",
     "i18n:generate": "deno run --allow-read --allow-write i18n/generator/cli.ts -i i18n/meta/ -o i18n/",
     "i18n:generate:watch": "deno run --allow-read --allow-write i18n/generator/cli.ts -i i18n/meta/ -o i18n/ --watch"
   },

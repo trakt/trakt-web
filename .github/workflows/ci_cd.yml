@@ -68,6 +68,25 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  i18n-check:
+    needs: files-changed
+    if: ${{
+      needs.files-changed.outputs.client_source == 'true' ||
+      needs.files-changed.outputs.i18n_source == 'true'
+      }}
+    name: The Babelfish Audit (i18n Placeholders)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
+
+      - name: Audit Translation Placeholders
+        working-directory: projects/client
+        run: 'deno task i18n:check'
+
   test:
     needs: files-changed
     if: ${{
