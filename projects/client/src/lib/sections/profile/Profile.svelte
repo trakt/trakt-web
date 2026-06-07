@@ -27,6 +27,8 @@
   <ProfileDetails {slug} {profile} />
 </ProfileContainer>
 
+<FavoritesList {slug} title={m.list_title_favorites()} mode={$mode} />
+
 {#if $isMe}
   <ScreenTime />
   <PersonalHistoryList mode={$mode} />
@@ -35,8 +37,6 @@
 {:else}
   <RecentlyWatchedList title={m.list_title_history()} {slug} mode={$mode} />
 {/if}
-
-<FavoritesList {slug} title={m.list_title_favorites()} mode={$mode} />
 
 {#if !$isMe}
   <PersonalLists {slug} type="personal" mode={$mode} />
