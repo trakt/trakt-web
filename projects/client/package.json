@@ -89,7 +89,7 @@
     "plyr": "3.8.4",
     "resolve-accept-language": "3.2.1",
     "rxjs": "7.8.2",
-    "svelte": "5.55.5",
+    "svelte": "5.55.7",
     "svelte-confetti": "2.3.2",
     "ts-retry": "6.0.0",
     "typesense": "3.0.6",
