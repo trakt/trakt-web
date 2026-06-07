@@ -67,11 +67,7 @@ jobs:
 
       - name: Forge i18n Artifacts Once
         working-directory: projects/client
-        run: deno task i18n:web
-
-      - name: Forge the Paraglide Runes aka Compile Paraglide
-        working-directory: projects/client
-        run: deno run -A npm:@inlang/paraglide-js compile --project ./i18n/project.inlang --outdir ./src/lib/paraglide
+        run: deno task i18n:prepare
 
       - name: Enumerate Major-Only Candidates
         id: enumerate
