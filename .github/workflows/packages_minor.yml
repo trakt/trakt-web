@@ -1,0 +1,131 @@
+name: The Minor Rejuvenation aka Bump Minor Versions
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every Sunday at 18:00 UTC (Sunday evening, before the work week).
+    - cron: '0 18 * * 0'
+
+permissions:
+  contents: read
+
+jobs:
+  bump-minor:
+    name: Refresh Minor & Patch Pins
+    runs-on: ubuntu-latest
+    concurrency:
+      group: packages-minor
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      pull-requests: write
+    timeout-minutes: 90
+
+    steps:
+      - name: Summoning the GitHub App Token
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ secrets.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
+
+      - name: Forge i18n Artifacts Once
+        working-directory: projects/client
+        run: deno task i18n:web
+
+      - name: Enumerate Minor Candidates
+        id: enumerate
+        working-directory: projects/client
+        run: |
+          set -euo pipefail
+          deno run -A npm:npm-check-updates@latest \
+            -p npm \
+            --target minor \
+            --jsonUpgraded > /tmp/minors.json
+          echo "::group::minor candidates"
+          cat /tmp/minors.json
+          echo "::endgroup::"
+          COUNT=$(jq 'length' /tmp/minors.json)
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
+      - name: Short-Circuit When Nothing To Do
+        if: steps.enumerate.outputs.count == '0'
+        run: echo "No minor upgrades available. Done."
+
+      - name: Bisect Candidate Set
+        if: steps.enumerate.outputs.count != '0'
+        env:
+          TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
+        run: ./.github/scripts/ncu-bisect.sh /tmp/minors.json
+
+      - name: Detect Adopted vs Reverted
+        if: steps.enumerate.outputs.count != '0'
+        id: detect
+        run: |
+          set -euo pipefail
+          if [ -s /tmp/passing.txt ]; then
+            echo "has_passing=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_passing=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build PR Body
+        if: steps.detect.outputs.has_passing == 'true'
+        id: pr_body
+        run: |
+          {
+            echo "Automated minor + patch bump. Each candidate was tried independently with reinstall + typecheck + tests + minimal build (\`build:doctor\`). Failures were reverted automatically; only green bumps reach this PR."
+            echo ""
+            echo "## Adopted"
+            echo ""
+            while IFS='=' read -r NAME VERSION; do
+              [ -z "$NAME" ] && continue
+              echo "- \`$NAME\` → \`$VERSION\`"
+            done < /tmp/passing.txt
+            if [ -s /tmp/failing.txt ]; then
+              echo ""
+              echo "## Reverted"
+              echo ""
+              while IFS='=' read -r NAME VERSION; do
+                [ -z "$NAME" ] && continue
+                echo "- \`$NAME\` → \`$VERSION\`"
+              done < /tmp/failing.txt
+              echo ""
+              echo "_Reverted candidates stay on their current pin; investigate or pin them out before the next run._"
+            fi
+          } > /tmp/pr-body.md
+          {
+            echo 'body<<PRBODY_EOF'
+            cat /tmp/pr-body.md
+            echo 'PRBODY_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Forge the Pull Request
+        if: steps.detect.outputs.has_passing == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          branch: chore/deps-minor
+          delete-branch: true
+          base: main
+          commit-message: 'chore(deps): bump minor & patch versions'
+          title: 'chore(deps): bump minor & patch versions'
+          body: ${{ steps.pr_body.outputs.body }}
+          labels: |
+            dependencies
+            automated
+          reviewers: |
+            seferturan
+            vladjerca
+          assignees: |
+            seferturan
