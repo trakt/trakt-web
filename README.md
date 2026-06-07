@@ -128,42 +128,91 @@ Run the following command:
 [deno|npm|bun] run build:preview && [deno|npm|bun] run preview
 ```
 
-## Update Minor Dependencies
+## Dependency Updates
 
-### Install `npm-check-updates`
+We use [`npm-check-updates`](https://github.com/raineorshine/npm-check-updates)
+(`ncu`) to drive package bumps. Two GitHub workflows automate the recurring
+work; the manual recipes below stay around for ad-hoc runs.
+
+### Automated Flows
+
+Both workflows live under `.github/workflows/` and can be triggered from the
+Actions tab via `workflow_dispatch`.
+
+Both flows enumerate candidates with `ncu --jsonUpgraded`, then run
+`.github/scripts/ncu-bisect.sh` to find the largest green subset.
+
+**Bisection strategy (full set first, halve on failure):**
+
+1. **Phase 1 (fast, typecheck-only):** apply the whole candidate set, run
+   `deno install --allow-scripts` + `deno task check`. If green, adopt all. If
+   red, split the set in half and recurse on each half. Singletons that fail are
+   recorded as rejected; everything green stacks on a rolling baseline. Worst
+   case for K candidates with F failures is roughly `F + log2(K)` probes (a
+   clean batch of 30 = 1 probe; F=1 = ~6-9 probes).
+2. **Phase 2 (final tests):** run `deno task test:doctor` (vitest, no coverage,
+   parallel) on the adopted set. If it fails, re-bisect the adopted set with
+   full verify (check + tests) to identify which adopted bump regressed at
+   runtime.
+3. **Phase 3 (build):** run `deno task build:doctor` (vite build with Sentry
+   plugin off, no minify, no sourcemap; validates the module graph compiles
+   end-to-end without network/auth side effects).
+
+Local dry-run on a 30-candidate minor set with 2 failures: 15 probes, ~7.5 min
+wall time (vs. ~60 min for sequential per-package).
+
+`ncu --doctor` is not used: it spawns `npm install --no-save <pkg>@<ver>` per
+candidate, which conflicts with this project's peer-dep state and would not
+actually exercise the deno-managed test runtime even if it succeeded.
+
+i18n is generated once at the start of the workflow (the per-task `pretest` /
+`prebuild` hooks are skipped by the doctor variants).
+
+#### `packages_minor.yml` - Minor & Patch Bumps
+
+- **Cadence:** every Sunday at 18:00 UTC.
+- **Scope:** minor + patch versions (`ncu --target minor`).
+- **On any green:** opens `chore(deps): bump minor & patch versions` PR with
+  reviewers `seferturan` and `vladjerca`. PR body lists adopted + reverted.
+- **On nothing green:** no PR; reverted set surfaces in the workflow log.
+
+#### `packages_major.yml` - Major Bumps
+
+- **Cadence:** first Sunday of each month at 19:00 UTC (cron gates by
+  day-of-month).
+- **Scope:** major-version diffs only (`ncu --target latest` minus the
+  `--target minor` set).
+- **On any green:** opens `chore(deps): bump major versions` PR, listing
+  adopted + skipped.
+- **On any red:** opens a companion issue assigned to `seferturan` with the
+  reverted packages and the last 80 log lines per package.
+
+### Manual Recipes
+
+If you need to run `ncu` locally, install it once:
 
 ```bash
 deno install -g --allow-all -n ncu npm:npm-check-updates
 ```
 
-NOTE: For the client project add the `-p npm` since we're using a `package.json`
-definition for the svelte project.
+NOTE: For the client project pass `-p npm` on every invocation since the svelte
+project is defined via `package.json` (the workspace itself uses deno). Run the
+commands below from `projects/client/`.
 
-### Production
+#### Minor
 
-- **Check:** `ncu --dep prod -t minor`
-- **Update:** `ncu --dep prod -t minor -u`
+- **Check:** `ncu -p npm --dep prod -t minor` / `ncu -p npm --dep dev -t minor`
+- **Update:** add `-u` to write changes.
 
-### Development
+#### Major
 
-- **Check:** `ncu --dep dev -t minor`
-- **Update:** `ncu --dep dev -t minor -u`
+- **Check:** `ncu -p npm --dep prod -t latest` /
+  `ncu -p npm --dep dev -t latest`
+- For each entry: `ncu -p npm <ENTRY> -u -t latest`, then build, fix breaks,
+  test, commit.
 
-Verify that the above steps run smoothly and revert any changes that break the
-build (this should generally not be the case).
-
-## Update Major Dependencies
-
-- **Production:** `ncu --dep prod -t latest`
-- **Development:** `ncu --dep dev -t latest`
-
-For each entry listed as a result:
-
-1. `ncu <ENTRY> -u -t latest`
-1. Build
-1. Update any breaks
-1. Test
-1. Commit
+After any local bump, refresh the lockfile with `deno install --allow-scripts`
+before committing.
 
 ## Resolving i18n Conflicts
 
