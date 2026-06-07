@@ -119,6 +119,7 @@ verify() {
   if [ "$VERIFY_MODE" = "fast" ]; then
     if ! (cd "$CLIENT" && deno task check) >> "$log_file" 2>&1; then
       log "  ✗ check failed"
+      dump_probe_log "$log_file"
       return 1
     fi
     log "  ✓ verify passed (check)"
@@ -141,10 +142,26 @@ verify() {
 
   if [ "$check_ok" -ne 0 ] || [ "$test_ok" -ne 0 ]; then
     log "  ✗ verify failed (check_exit=$check_ok test_exit=$test_ok)"
+    dump_probe_log "$log_file"
     return 1
   fi
   log "  ✓ verify passed (check + tests)"
   return 0
+}
+
+# Dump last 40 lines of a probe log to stderr so the failure reason is
+# visible in the workflow log without artifact uploads. Capped to keep
+# the workflow log readable when many probes fail in a row.
+DUMPED_PROBES=0
+dump_probe_log() {
+  local log_file="$1"
+  if [ "$DUMPED_PROBES" -ge 5 ]; then return; fi
+  DUMPED_PROBES=$((DUMPED_PROBES + 1))
+  log "  ── tail of $log_file ──"
+  tail -n 40 "$log_file" 2>/dev/null | while IFS= read -r line; do
+    printf '       %s\n' "$line" >&2
+  done
+  log "  ── end of $log_file ──"
 }
 
 # Recursive bisection driven by side effects (no stdout capture).
