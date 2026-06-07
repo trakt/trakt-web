@@ -7180,6 +7180,39 @@
           "type": "string"
         }
       }
+    },
+    "button_text_watch_until_here_anchor_start": {
+      "default": "Start time",
+      "description": "Toggle label that treats the picked date and time as when the user started binge-watching the selected episodes."
+    },
+    "button_text_watch_until_here_anchor_end": {
+      "default": "End time",
+      "description": "Toggle label that treats the picked date and time as when the user finished binge-watching the selected episodes."
+    },
+    "button_label_watch_until_here_anchor_start": {
+      "default": "Treat the picked date as the start of the binge",
+      "description": "Aria label for the toggle that treats the picked date and time as when the user started binge-watching the selected episodes."
+    },
+    "button_label_watch_until_here_anchor_end": {
+      "default": "Treat the picked date as the end of the binge",
+      "description": "Aria label for the toggle that treats the picked date and time as when the user finished binge-watching the selected episodes."
+    },
+    "text_watch_until_here_preview_title": {
+      "default": "Watched timestamps",
+      "description": "Header above the list of episodes and their computed watched_at timestamps in the watch-until-here drawer."
+    },
+    "text_watch_until_here_episode_count": {
+      "default": "{count} episodes",
+      "description": "Subtitle in the watch-until-here drawer showing how many episodes will be marked.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "date_time_label_watch_until_here": {
+      "default": "Pick the date and time used to anchor the binge",
+      "description": "Aria label for the date-time picker shown in the watch-until-here drawer."
     }
   }
 }

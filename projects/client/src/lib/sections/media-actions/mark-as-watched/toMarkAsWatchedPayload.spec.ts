@@ -65,6 +65,50 @@ describe('toMarkAsWatchedPayload', () => {
     });
   });
 
+  it('should prefer per-episode watched_at when provided', () => {
+    const customA = new Date('2024-02-01T12:00:00.000Z');
+    const customB = new Date('2024-02-02T12:00:00.000Z');
+
+    const result = toMarkAsWatchedPayload(
+      {
+        type: 'show' as const,
+        media: [
+          {
+            id: 42,
+            seasons: [
+              {
+                number: 2,
+                episodes: [
+                  { number: 1, watched_at: customA.toISOString() },
+                  { number: 2, watched_at: customB.toISOString() },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      testDate,
+    );
+
+    expect(result).toEqual({
+      shows: [
+        {
+          ids: { trakt: 42 },
+          watched_at: undefined,
+          seasons: [
+            {
+              number: 2,
+              episodes: [
+                { number: 1, watched_at: customA.toISOString() },
+                { number: 2, watched_at: customB.toISOString() },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+  });
+
   it('should transform partial shows payload correctly', () => {
     const partialShows = testMedia.map((media, index) => ({
       id: media.id,

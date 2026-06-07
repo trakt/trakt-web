@@ -156,6 +156,7 @@
                 {episode}
                 {previousSeasons}
                 {hasUnseenEpisodes}
+                currentSeasonEpisodes={$episodes}
                 watchedBySeason={$watchedBySeason}
                 isWatchedLoading={$isWatchedLoading}
                 style="minimal"

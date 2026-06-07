@@ -43,7 +43,7 @@ export function toMarkAsWatchedPayload(
           number: season.number,
           episodes: season.episodes.map((episode) => ({
             number: episode.number,
-            watched_at: watchedAtDate,
+            watched_at: episode.watched_at ?? watchedAtDate,
           })),
         })),
       })),
