@@ -69,6 +69,10 @@ jobs:
         working-directory: projects/client
         run: deno task i18n:web
 
+      - name: Forge the Paraglide Runes aka Compile Paraglide
+        working-directory: projects/client
+        run: deno run -A npm:@inlang/paraglide-js compile --project ./i18n/project.inlang --outdir ./src/lib/paraglide
+
       - name: Enumerate Major-Only Candidates
         id: enumerate
         working-directory: projects/client
