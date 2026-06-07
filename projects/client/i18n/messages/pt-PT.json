@@ -48,7 +48,7 @@
   "button_label_close_reaction": "Fechar",
   "button_label_collapse_navbar": "Recolher",
   "button_label_comment_replies": "Respostas à Avaliação",
-  "button_label_comment_reply": "Responder...",
+  "button_label_comment_reply": "Responder a {user}",
   "button_label_cookie_accept": "Aceitar todos os cookies",
   "button_label_cookie_accept_functional_only": "Aceitar apenas cookies funcionais",
   "button_label_create_list": "Criar lista",
