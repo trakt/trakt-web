@@ -4,6 +4,7 @@ type SeasonInfo = {
     number: number;
     episodes: Array<{
       number: number;
+      watched_at?: string;
     }>;
   }>;
 };

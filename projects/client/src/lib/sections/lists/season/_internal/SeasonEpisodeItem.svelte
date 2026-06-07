@@ -1,4 +1,8 @@
 <script lang="ts">
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
@@ -7,16 +11,17 @@
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import type { BaseItemProps } from "$lib/sections/lists/components/models/BaseItemProps";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import WatchedUntilHereDrawer from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/WatchedUntilHereDrawer.svelte";
+  import { useWatchUntilHereEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/useWatchUntilHereEpisodes.ts";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
-  import { getEpisodesUntil } from "./getEpisodesUntil";
-  import { WatchedUntilHereIntlProvider } from "./WatchedUntilHereIntlProvider";
 
   type SeasonEpisodeItemProps = {
     show: ShowEntry;
     episode: EpisodeEntry;
     previousSeasons: Season[];
     hasUnseenEpisodes: boolean;
+    currentSeasonEpisodes: EpisodeEntry[];
     watchedBySeason: ReadonlyMap<number, ReadonlySet<number>>;
     isWatchedLoading: boolean;
     isCurrentEpisode?: boolean;
@@ -29,6 +34,7 @@
     episode,
     previousSeasons,
     hasUnseenEpisodes,
+    currentSeasonEpisodes,
     watchedBySeason,
     isWatchedLoading,
     isCurrentEpisode = false,
@@ -57,6 +63,21 @@
       variant,
     }),
   );
+
+  let isWatchUntilDrawerOpen = $state(false);
+
+  const watchUntilResolver = $derived.by(() => {
+    if (!isWatchUntilDrawerOpen) return null;
+    return useWatchUntilHereEpisodes({
+      showSlug: show.slug,
+      targetEpisode: { season: episode.season, number: episode.number },
+      previousSeasons,
+      currentSeasonEpisodes,
+      watchedBySeason,
+    });
+  });
+  const resolvedEpisodes = $derived(watchUntilResolver?.episodes);
+  const isResolvingEpisodes = $derived(watchUntilResolver?.isLoading);
 </script>
 
 {#snippet popupActions()}
@@ -70,23 +91,21 @@
       mode="hybrid"
     />
     {#if hasBulkMarkAsWatched}
-      <MarkAsWatchedAction
-        style="dropdown-item"
-        type="show"
-        size="small"
-        i18n={WatchedUntilHereIntlProvider}
-        title={show.title}
-        isLoading={isWatchedLoading}
-        media={{
-          id: show.id,
-          effectiveReleaseDate: show.effectiveReleaseDate,
-          seasons: getEpisodesUntil({
-            previousSeasons,
-            episode,
-            watchedBySeason,
-          }),
-        }}
-      />
+      <DropdownItem
+        onclick={() => (isWatchUntilDrawerOpen = true)}
+        label={m.button_label_watched_until_here({ title: show.title })}
+        style="flat"
+        color="default"
+        disabled={isWatchedLoading}
+        variant="secondary"
+      >
+        {m.button_text_watched_until_here()}
+        {#snippet icon()}
+          <IconWrapper isLoading={isWatchedLoading}>
+            <TrackIcon state="unwatched" />
+          </IconWrapper>
+        {/snippet}
+      </DropdownItem>
     {/if}
   </RenderFor>
 {/snippet}
@@ -113,4 +132,14 @@
   </div>
 {:else}
   {@render episodeItem()}
+{/if}
+
+{#if isWatchUntilDrawerOpen && resolvedEpisodes}
+  <WatchedUntilHereDrawer
+    {show}
+    title={show.title}
+    episodes={$resolvedEpisodes ?? []}
+    isResolvingEpisodes={$isResolvingEpisodes ?? false}
+    onClose={() => (isWatchUntilDrawerOpen = false)}
+  />
 {/if}

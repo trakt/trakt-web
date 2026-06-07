@@ -72,6 +72,7 @@
       {episode}
       {previousSeasons}
       {hasUnseenEpisodes}
+      currentSeasonEpisodes={episodes}
       watchedBySeason={$watchedBySeason}
       isWatchedLoading={$isWatchedLoading}
       isCurrentEpisode={episode.number === currentEpisode}
