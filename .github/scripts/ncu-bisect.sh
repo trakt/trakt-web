@@ -158,9 +158,7 @@ dump_probe_log() {
   if [ "$DUMPED_PROBES" -ge 5 ]; then return; fi
   DUMPED_PROBES=$((DUMPED_PROBES + 1))
   log "  ── tail of $log_file ──"
-  tail -n 40 "$log_file" 2>/dev/null | while IFS= read -r line; do
-    printf '       %s\n' "$line" >&2
-  done
+  tail -n 40 "$log_file" 2>/dev/null | sed 's/^/       /' >&2
   log "  ── end of $log_file ──"
 }
 
