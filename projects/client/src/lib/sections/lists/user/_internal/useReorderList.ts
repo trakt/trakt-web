@@ -1,20 +1,48 @@
-import type { ReorderListSource } from '../models/ReorderListSource.ts';
-import { useListItems } from '../useListItems.ts';
-import { mapListItemToReorderableItem } from './reorderListItems.ts';
+import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
+import type { ListItem } from '$lib/requests/models/ListItem.ts';
+import { userListItemsQuery } from '$lib/requests/queries/users/userListItemsQuery.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { map } from 'rxjs';
+import type { ReorderListSource } from '../models/ReorderListSource.ts';
+import { mapListItemToReorderableItem } from './reorderListItems.ts';
 
-const REORDER_PAGE_SIZE = 100;
+const reorderPageSize = 100;
+
+function uniqueByKey(entries: ListItem[]): ListItem[] {
+  const seen = new Set<string>();
+  return entries.filter((item) => {
+    if (seen.has(item.key)) return false;
+    seen.add(item.key);
+    return true;
+  });
+}
 
 export function useReorderList(source: ReorderListSource) {
-  const { list, ...rest } = useListItems({
-    list: source.list,
-    limit: REORDER_PAGE_SIZE,
-  });
-
-  return {
-    list: list.pipe(
-      map((items) => items.map(mapListItemToReorderableItem)),
+  const query = useAllPagesInfiniteQuery(userListItemsQuery({
+    userId: assertDefined(
+      source.list.user.slug,
+      'Expected user list to have a user slug',
     ),
-    ...rest,
-  };
+    listId: source.list.slug,
+    limit: reorderPageSize,
+  }));
+
+  const isLoading = query.pipe(
+    map(($query) =>
+      $query.isPending || $query.isFetchingNextPage || $query.hasNextPage
+    ),
+  );
+
+  const list = query.pipe(
+    map(($query) => {
+      if ($query.isPending || $query.isFetchingNextPage || $query.hasNextPage) {
+        return [];
+      }
+
+      const entries = $query.data?.pages.flatMap((page) => page.entries) ?? [];
+      return uniqueByKey(entries).map(mapListItemToReorderableItem);
+    }),
+  );
+
+  return { isLoading, list };
 }
