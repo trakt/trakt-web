@@ -21,17 +21,6 @@
   const marked = new Marked();
   const { buildDrawerLink } = summaryDrawerNavigation();
   const { track } = useTrack(AnalyticsEvent.Drilldown);
-
-  const labelMessages = [
-    m.trivia_label_did_you_know,
-    m.trivia_label_guess_what,
-    m.trivia_label_fun_fact,
-  ] as const;
-
-  function labelFor(index: number): string {
-    const message = labelMessages[index % labelMessages.length];
-    return message ? message() : "";
-  }
 </script>
 
 <div class="trakt-trivia-summary-card">
@@ -49,12 +38,9 @@
         <ul class="trakt-trivia-summary-list">
           {#each summary as fact, index (index)}
             <li class="trakt-trivia-summary-fact">
-              <header class="trakt-trivia-summary-fact-header">
-                <span class="trakt-trivia-summary-fact-icon">
-                  <SparkleIcon />
-                </span>
-                <span class="tag secondary">{labelFor(index)}</span>
-              </header>
+              <span class="trakt-trivia-summary-fact-icon">
+                <SparkleIcon />
+              </span>
               <div class="trakt-trivia-summary-fact-body">
                 {@html marked.parse(fact)}
               </div>
@@ -110,7 +96,7 @@
   .trakt-trivia-summary-list {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-20);
+    gap: var(--ni-16);
 
     margin: 0;
     padding: 0;
@@ -119,18 +105,13 @@
 
   .trakt-trivia-summary-fact {
     display: flex;
-    flex-direction: column;
-    gap: var(--ni-6);
-  }
-
-  .trakt-trivia-summary-fact-header {
-    display: flex;
-    align-items: center;
-    gap: var(--ni-8);
+    align-items: flex-start;
+    gap: var(--ni-12);
   }
 
   .trakt-trivia-summary-fact-icon {
     display: inline-flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
 
