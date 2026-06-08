@@ -26,10 +26,17 @@
     padding-left: var(--layout-distance-side);
     padding-right: var(--layout-distance-side);
 
+    &.has-toast {
+      margin-top: calc(var(--height-toast-card) + var(--gap-xxl));
+    }
+
     @include for-tablet-sm-and-below {
       &.has-toast {
-        margin-top: calc(var(--height-toast-card) + var(--gap-xxl));
+        margin-top: 0;
       }
+
+      margin-top: 0;
+      margin-bottom: var(--gap-l);
 
       height: fit-content;
       position: relative;

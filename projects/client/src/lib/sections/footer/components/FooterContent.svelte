@@ -35,7 +35,7 @@
     gap: var(--gap-xxl);
 
     box-sizing: border-box;
-    padding: var(--footer-bar-padding) 0;
+    padding-top: var(--footer-bar-padding);
 
     transition: gap var(--transition-increment) ease-in-out;
 
