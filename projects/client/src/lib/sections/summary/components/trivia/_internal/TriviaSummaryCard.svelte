@@ -67,6 +67,7 @@
     }
 
     :global(.trakt-card-content) {
+      height: auto;
       border-radius: var(--border-radius-xl);
     }
 
@@ -80,12 +81,10 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: var(--gap-m);
+    gap: var(--ni-16);
 
     box-sizing: border-box;
-    min-height: var(--height-trivia-card);
-    padding: var(--ni-28);
+    padding: var(--ni-20);
 
     background: var(--background-vip-drawer);
     border: var(--border-thickness-xxs) solid
@@ -96,7 +95,7 @@
   .trakt-trivia-summary-list {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-16);
+    gap: var(--ni-12);
 
     margin: 0;
     padding: 0;
