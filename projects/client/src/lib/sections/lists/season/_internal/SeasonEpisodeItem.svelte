@@ -91,7 +91,7 @@
   </RenderFor>
 {/snippet}
 
-<div use:scrollActiveItemIntoView={isCurrentEpisode}>
+{#snippet episodeItem()}
   <EpisodeItem
     {episode}
     media={show}
@@ -102,4 +102,15 @@
     {source}
     coverUrl={$src}
   />
-</div>
+{/snippet}
+
+{#if isCurrentEpisode}
+  <div
+    use:scrollActiveItemIntoView={isCurrentEpisode}
+    class="trakt-season-episode-item"
+  >
+    {@render episodeItem()}
+  </div>
+{:else}
+  {@render episodeItem()}
+{/if}

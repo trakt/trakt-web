@@ -182,6 +182,10 @@
     :global(.trakt-list-item-container) {
       padding: 0;
     }
+
+    :global(.trakt-grid-list-container) {
+      overflow-x: visible;
+    }
   }
 
   .seasons-section {
@@ -212,6 +216,10 @@
   }
 
   .episodes-section {
+    :global(.trakt-season-episode-item) {
+      min-width: 0;
+    }
+
     :global(.trakt-list-items) {
       grid-template-columns: 1fr;
       grid-row-gap: var(--gap-s);
