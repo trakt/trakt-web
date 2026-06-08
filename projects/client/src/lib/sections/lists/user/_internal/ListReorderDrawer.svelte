@@ -3,6 +3,8 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
@@ -37,6 +39,7 @@
 
   const { list, isLoading } = $derived(useReorderList(source));
   const { invalidateAll } = useInvalidator();
+  const { confirm } = useConfirm();
 
   let orderedItems = $state<ReorderableListItem[]>([]);
   let loadedSignature = $state("");
@@ -424,6 +427,18 @@
     }
   }
 
+  function handleClose() {
+    if (!hasChanges) {
+      onClose();
+      return;
+    }
+
+    confirm({
+      type: ConfirmationType.DiscardChanges,
+      onConfirm: onClose,
+    })();
+  }
+
   function dragGhostPortal(node: HTMLElement) {
     document.body.appendChild(node);
 
@@ -469,7 +484,7 @@
 {/snippet}
 
 <Drawer
-  {onClose}
+  onClose={handleClose}
   title={m.drawer_title_reorder_list()}
   metaInfo={title}
   size="large"

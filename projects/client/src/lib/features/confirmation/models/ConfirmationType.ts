@@ -24,4 +24,5 @@ export enum ConfirmationType {
   HideRecommendation = 'hide-recommendation',
   UnlinkStreaming = 'unlink-streaming',
   UndoSync = 'undo-sync',
+  DiscardChanges = 'discard-changes',
 }

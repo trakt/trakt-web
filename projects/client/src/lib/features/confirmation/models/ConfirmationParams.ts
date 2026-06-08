@@ -95,6 +95,9 @@ interface ConfirmationParamsMap {
   [ConfirmationType.UndoSync]: {
     type: ConfirmationType.UndoSync;
   };
+  [ConfirmationType.DiscardChanges]: {
+    type: ConfirmationType.DiscardChanges;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =
