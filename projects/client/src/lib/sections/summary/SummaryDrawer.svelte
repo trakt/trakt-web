@@ -110,6 +110,7 @@
     show={showEntry}
     {seasons}
     {currentSeason}
+    crew={details.crew}
     onClose={close}
   />
 {/if}
