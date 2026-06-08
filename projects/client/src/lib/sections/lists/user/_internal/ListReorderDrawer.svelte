@@ -35,14 +35,11 @@
     onClose: () => void;
   } = $props();
 
-  const { list, isLoading, hasNextPage, fetchNextPage } = $derived(
-    useReorderList(source),
-  );
+  const { list, isLoading } = $derived(useReorderList(source));
   const { invalidateAll } = useInvalidator();
 
   let orderedItems = $state<ReorderableListItem[]>([]);
   let loadedSignature = $state("");
-  let isFetchingNextPage = $state(false);
   let isApplying = $state(false);
   let draggedKey = $state<string | null>(null);
   let instantPosterKeys = $state<readonly string[]>([]);
@@ -65,7 +62,7 @@
   const rankOrderedItems = $derived(sortReorderableItems($list));
   const rankSignature = $derived(itemOrderSignature(rankOrderedItems));
   const orderedSignature = $derived(itemOrderSignature(orderedItems));
-  const isLoaded = $derived(!$isLoading && !$hasNextPage);
+  const isLoaded = $derived(!$isLoading);
   const hasChanges = $derived(isLoaded && orderedSignature !== rankSignature);
   const canApply = $derived(hasChanges && !isApplying);
   const draggedItem = $derived(
@@ -112,17 +109,6 @@
     }
 
     return rows;
-  });
-
-  $effect(() => {
-    if ($isLoading || !$hasNextPage || isFetchingNextPage) {
-      return;
-    }
-
-    isFetchingNextPage = true;
-    void fetchNextPage().finally(() => {
-      isFetchingNextPage = false;
-    });
   });
 
   $effect(() => {
