@@ -340,6 +340,7 @@ export const UrlBuilder = {
     wikipedia: (id: string) => `https://en.wikipedia.org/wiki/${id}`,
   },
   feedback: () => 'https://roadmap.trakt.tv',
+  admin: () => 'https://admin.trakt.tv',
   api: {
     shareableImage: (type: 'movie' | 'show', slug: string) => {
       const basePath = `/api/shareable-image?type=${type}&slug=${slug}`;

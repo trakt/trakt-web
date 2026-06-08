@@ -11,6 +11,7 @@
   import ReportButton from "$lib/features/report/ReportButton.svelte";
   import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import ModerateAction from "$lib/sections/components/admin/ModerateAction.svelte";
   import type { DisplayableProfileProps } from "$lib/sections/profile/DisplayableProfileProps";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { useBlockUser } from "./useBlockUser";
@@ -145,5 +146,7 @@
         label={m.button_label_report_user({ username: userDisplayName })}
       />
     </RenderFor>
+
+    <ModerateAction variant="secondary" />
   {/snippet}
 </PopupMenu>
