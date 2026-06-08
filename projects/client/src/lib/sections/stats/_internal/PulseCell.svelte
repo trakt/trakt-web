@@ -3,6 +3,7 @@
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import type { PulseDeltaKind } from "./models/PulseDeltaKind";
   import PulseDeltaTag from "./PulseDeltaTag.svelte";
+  import { splitDuration } from "./utils/splitDuration.ts";
 
   type PulseCellProps = {
     value: string;
@@ -12,11 +13,23 @@
     deltaKind: PulseDeltaKind;
   };
 
-  const { value, label, tooltip, delta, deltaKind }: PulseCellProps = $props();
+  const {
+    value: originalValue,
+    label,
+    tooltip,
+    delta,
+    deltaKind,
+  }: PulseCellProps = $props();
+
+  const value = $derived(
+    deltaKind === "time" ? splitDuration(originalValue) : [originalValue],
+  );
 </script>
 
 {#snippet valueText()}
-  <p class="trakt-pulse-cell-value bold ellipsis">{value}</p>
+  {#each value as part, index (index)}
+    <span class="trakt-pulse-cell-value bold ellipsis">{part}</span>
+  {/each}
 {/snippet}
 
 <Card
@@ -53,17 +66,19 @@
 
     overflow: hidden;
     height: 100%;
-  }
 
-  .trakt-pulse-cell-body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xxs);
-    flex: 1;
-    justify-content: center;
+    :global(.trakt-tooltip-trigger),
+    .trakt-pulse-cell-body {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--gap-xxs);
+      flex: 1;
+      justify-content: flex-start;
+      align-items: center;
+    }
   }
 
   .trakt-pulse-cell-value {
-    font-size: var(--ni-28);
+    font-size: var(--ni-24);
   }
 </style>
