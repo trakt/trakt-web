@@ -2,6 +2,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import { m } from "$lib/paraglide/messages";
   import type { YirTopRatedItem } from "$lib/requests/models/YirDetail";
+  import UserRating from "$lib/sections/components/UserRating.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import YirPageInner from "./YirPageInner.svelte";
   import YirSectionHeader from "./YirSectionHeader.svelte";
@@ -56,14 +57,14 @@
               }}
             >
               <div class="yir-poster">
-                <div class="yir-corner-rating">
-                  <span>{item.rating}</span>
-                </div>
                 <img
                   class="yir-poster-img"
-                  src={item.entry.poster.url.thumb}
+                  src={item.entry.poster?.url?.thumb}
                   alt={item.entry.title}
                 />
+              </div>
+              <div class="yir-rating">
+                <UserRating rating={item.rating} />
               </div>
             </Link>
           </div>
@@ -111,7 +112,7 @@
 
     &:hover .yir-grid-item:not(:hover) {
       .yir-poster-img,
-      .yir-corner-rating {
+      .yir-rating {
         opacity: 0.3;
       }
     }
@@ -139,32 +140,8 @@
     box-shadow: 0 0 var(--ni-20) var(--shade-1000);
     position: relative;
 
-    .yir-poster-img,
-    .yir-corner-rating {
+    .yir-poster-img {
       transition: all 0.5s;
-    }
-  }
-
-  .yir-corner-rating {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 var(--ni-32) var(--ni-32) 0;
-    border-color: transparent var(--red-500) transparent transparent;
-    font-weight: bold;
-    color: var(--shade-10);
-
-    span {
-      position: absolute;
-      top: var(--ni-4);
-      right: var(--ni-neg-32);
-      width: var(--ni-18);
-      text-align: center;
-      font-size: var(--ni-11);
     }
   }
 
@@ -173,5 +150,15 @@
     display: block;
     aspect-ratio: 2 / 3;
     object-fit: cover;
+  }
+
+  // 5-point star rating (shared v3 UserRating), centered beneath the poster.
+  .yir-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--ni-8);
+    color: var(--shade-10);
+    transition: all 0.5s;
   }
 </style>

@@ -270,7 +270,9 @@
     width: var(--ni-300);
     aspect-ratio: 2 / 3;
     overflow: hidden;
-    border-radius: var(--border-radius-s);
+    // Matches the summary-page poster corner (SummaryPoster.svelte), shared
+    // with the highest-rated section poster.
+    border-radius: var(--border-radius-xxl);
     box-shadow: 0 var(--ni-16) var(--ni-48)
       color-mix(in srgb, var(--shade-1000) 50%, transparent);
     transition: transform 0.25s var(--transition-increment) ease-out;
