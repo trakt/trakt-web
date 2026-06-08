@@ -21,14 +21,14 @@
 </script>
 
 {#if visibleFacts.length > 0}
-  <section class="trivia-section" transition:slide={{ duration: 150 }}>
-    <h2 class="trivia-section-title">{m.list_title_trivia()}</h2>
+  <section class="trakt-trivia-section" transition:slide={{ duration: 150 }}>
+    <h2 class="trakt-trivia-section-title">{m.list_title_trivia()}</h2>
     <TriviaSummaryCard summary={visibleFacts} />
   </section>
 {/if}
 
 <style lang="scss">
-  .trivia-section {
+  .trakt-trivia-section {
     display: flex;
     flex-direction: column;
     gap: var(--list-header-gap);
@@ -36,7 +36,7 @@
     padding-inline: var(--layout-distance-side);
   }
 
-  .trivia-section-title {
+  .trakt-trivia-section-title {
     margin: 0;
   }
 </style>
