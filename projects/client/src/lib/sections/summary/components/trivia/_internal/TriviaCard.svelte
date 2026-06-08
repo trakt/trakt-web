@@ -32,7 +32,7 @@
   </div>
 </Card>
 
-<style lang="scss">
+<style>
   .trakt-trivia-container {
     position: relative;
 

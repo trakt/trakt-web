@@ -27,7 +27,7 @@
   </section>
 {/if}
 
-<style lang="scss">
+<style>
   .trakt-trivia-section {
     display: flex;
     flex-direction: column;
