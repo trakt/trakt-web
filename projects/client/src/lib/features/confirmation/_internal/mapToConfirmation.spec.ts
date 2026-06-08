@@ -23,4 +23,14 @@ describe('mapToConfirmation', () => {
     expect(result.operation).toBe('destructive');
     expect(result.message).toContain('harry');
   });
+
+  it('should build a destructive confirmation for DiscardChanges', () => {
+    const result = mapToConfirmation({
+      type: ConfirmationType.DiscardChanges,
+    });
+
+    expect(result.operation).toBe('destructive');
+    expect(result.buttonText).toBeTruthy();
+    expect(result.message).toBeTruthy();
+  });
 });

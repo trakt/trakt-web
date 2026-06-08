@@ -177,6 +177,12 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.confirmation_message_undo_sync(),
     operation: 'destructive',
   }),
+  [ConfirmationType.DiscardChanges]: () => ({
+    title: m.dialog_title_discard_changes(),
+    buttonText: m.button_text_discard(),
+    message: m.warning_prompt_discard_changes(),
+    operation: 'destructive',
+  }),
 };
 
 export function mapToConfirmation<T extends ConfirmationType>(
