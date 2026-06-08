@@ -19,6 +19,9 @@
     <Link href={UrlBuilder.settings.preview()}>
       <span class="title">{m.link_text_preview_settings()}</span>
     </Link>
+    <Link href={UrlBuilder.settings.plex()}>
+      <span class="title">{m.link_text_plex_settings()}</span>
+    </Link>
   </div>
 {/snippet}
 
