@@ -4757,6 +4757,14 @@
       "default": "Time Watched",
       "description": "Stat label under the time-watched duration on the 2024 Year in Review most-watched cards."
     },
+    "yir_2024_highest_rated_shows": {
+      "default": "Highest Rated TV Shows",
+      "description": "Section heading above the highest-rated shows list on the 2024 Year in Review template."
+    },
+    "yir_2024_highest_rated_movies": {
+      "default": "Highest Rated Movies",
+      "description": "Section heading above the highest-rated movies list on the 2024 Year in Review template."
+    },
     "yir_2024_most_watched_networks": {
       "default": "Most watched networks",
       "description": "Section heading above the networks bubble chart on the 2024 Year in Review template."

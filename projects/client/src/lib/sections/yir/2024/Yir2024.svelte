@@ -7,6 +7,7 @@
   import Yir2024MostPlayedSection from "./_internal/Yir2024MostPlayedSection.svelte";
   import Yir2024PageInner from "./_internal/Yir2024PageInner.svelte";
   import Yir2024PlayCard from "./_internal/Yir2024PlayCard.svelte";
+  import Yir2024RatedSection from "./_internal/Yir2024RatedSection.svelte";
   import Yir2024StatsSection from "./_internal/Yir2024StatsSection.svelte";
   import Yir2024TopSection from "./_internal/Yir2024TopSection.svelte";
 
@@ -74,6 +75,12 @@
       </Yir2024PageInner>
     {/if}
 
+    {#if detail.topRated.shows.length > 0}
+      <Yir2024PageInner>
+        <Yir2024RatedSection type="shows" items={detail.topRated.shows} />
+      </Yir2024PageInner>
+    {/if}
+
     {#if detail.stats.movies.playCounts.total > 0}
       <Yir2024PageInner>
         <Yir2024StatsSection type="movies" stats={detail.stats.movies} {year} />
@@ -101,6 +108,12 @@
     {#if detail.genres.movies.itemCount > 0}
       <Yir2024PageInner>
         <Yir2024GenresSection type="movies" genres={detail.genres.movies} />
+      </Yir2024PageInner>
+    {/if}
+
+    {#if detail.topRated.movies.length > 0}
+      <Yir2024PageInner>
+        <Yir2024RatedSection type="movies" items={detail.topRated.movies} />
       </Yir2024PageInner>
     {/if}
 

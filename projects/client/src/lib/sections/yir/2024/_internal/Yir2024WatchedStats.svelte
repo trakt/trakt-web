@@ -1,8 +1,8 @@
 <script lang="ts">
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
-  import FavoriteIcon from "$lib/components/icons/FavoriteIcon.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
+  import StarIcon from "$lib/components/icons/StarIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
@@ -55,7 +55,7 @@
   </span>
 
   <span class="yir-2024-stat">
-    <span class="yir-2024-stat-icon"><FavoriteIcon state="filled" /></span>
+    <span class="yir-2024-stat-icon"><StarIcon fill="full" /></span>
     <span class="yir-2024-stat-display">
       <span class="bold yir-2024-stat-value">
         {formatNumber(stats.ratingsCounts.total)}

@@ -37,6 +37,10 @@
     overflow: hidden;
   }
 
+  // Centered soft glow. The vertical radius is sized so the gradient reaches
+  // full transparency right at the top and bottom edges — otherwise `overflow:
+  // hidden` clips it mid-fade and leaves a hard purple seam where the section
+  // meets the first-play card below.
   .yir-2024-top-gradient {
     position: absolute;
     inset: 0;
@@ -44,7 +48,7 @@
     pointer-events: none;
     opacity: 0.35;
     background: radial-gradient(
-      55% 55% at 50% 60%,
+      55% 50% at 50% 50%,
       var(--purple-700) 0%,
       color-mix(in srgb, var(--purple-700) 0%, transparent) 100%
     );
