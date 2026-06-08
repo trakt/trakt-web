@@ -152,7 +152,7 @@
           {metaInfo}
           actions={isCollapsed ? undefined : actions}
           navigationType={headerNavigationType}
-          {drilldown}
+          drilldown={isCollapsed ? undefined : drilldown}
           disabled={items.length === 0 && drilldown?.mode !== "always"}
         />
       {/if}
