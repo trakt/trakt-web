@@ -5,6 +5,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
+  import ModerateAction from "$lib/sections/components/admin/ModerateAction.svelte";
   import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
@@ -64,3 +65,5 @@
     variant="primary"
   />
 </RenderFor>
+
+<ModerateAction />

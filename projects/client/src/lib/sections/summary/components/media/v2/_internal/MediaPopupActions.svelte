@@ -5,6 +5,7 @@
   import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import ModerateAction from "$lib/sections/components/admin/ModerateAction.svelte";
   import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
   import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import DropAction from "$lib/sections/media-actions/drop/DropAction.svelte";
@@ -85,3 +86,5 @@
     variant="primary"
   />
 </RenderFor>
+
+<ModerateAction />
