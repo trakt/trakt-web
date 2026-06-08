@@ -27,8 +27,6 @@
     --toast-gap: var(--gap-m);
     --toast-bottom-distance: var(--ni-24);
     --toast-height: calc(var(--height-toast-card) + 2 * var(--toast-padding));
-    --toast-footer-top: var(--footer-height) - var(--footer-bar-padding);
-    --toast-footer-offset: var(--toast-footer-top) - var(--toast-height);
 
     position: fixed;
     z-index: var(--layer-overlay);
@@ -43,7 +41,7 @@
 
     bottom: max(
       var(--toast-bottom-distance),
-      var(--toast-footer-offset) - var(--distance-from-bottom)
+      var(--footer-height) - var(--distance-from-bottom)
     );
     left: 50%;
     transform: translateX(-50%);
