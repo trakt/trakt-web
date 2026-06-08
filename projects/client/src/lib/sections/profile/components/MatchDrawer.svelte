@@ -108,9 +108,6 @@
           </span>
         </div>
       </div>
-      <p class="trakt-match-drawer-caption small secondary">
-        {m.match_drawer_breakdown_caption()}
-      </p>
     </section>
 
     {#if sharedSubgenres.length > 0}
@@ -366,8 +363,7 @@
     );
     border-color: color-mix(in srgb, var(--chip-unicorn) 60%, transparent);
     box-shadow:
-      0 0 0 var(--ni-1)
-        color-mix(in srgb, var(--chip-unicorn) 28%, transparent),
+      0 0 0 var(--ni-1) color-mix(in srgb, var(--chip-unicorn) 28%, transparent),
       0 var(--ni-2) var(--ni-14)
         color-mix(in srgb, var(--chip-unicorn) 40%, transparent);
     font-weight: 600;

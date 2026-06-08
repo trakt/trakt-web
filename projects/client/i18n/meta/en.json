@@ -7052,10 +7052,6 @@
       "default": "Favorites",
       "description": "Label for the per-signal bar that shows what fraction of favorited movies and shows the two users share."
     },
-    "match_drawer_breakdown_caption": {
-      "default": "Score blends topic taste (70%) and shared favorites (30%).",
-      "description": "Small caption under the breakdown bars, explaining the weighting used to compute the overall match score."
-    },
     "match_drawer_shared_topics_header": {
       "default": "Shared topics",
       "description": "Section header above the list of subgenre chips that both users have watched a lot of. 'Topics' is the user-facing label for the technical concept of subgenres."
