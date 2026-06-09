@@ -33,7 +33,9 @@ export function findRegionalIntl(props: ToMediaOrEpisodeIntlProps) {
   });
 
   if (props.type === 'episode') {
-    const intl = props.translations?.find((intl) => intl.country === regionCode);
+    const intl = props.translations?.find((intl) =>
+      intl.country === regionCode
+    );
     return commonIntl(intl);
   }
 

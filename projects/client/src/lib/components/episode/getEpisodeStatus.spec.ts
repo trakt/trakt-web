@@ -44,10 +44,12 @@ describe('getEpisodeStatus', () => {
       ).toBeUndefined();
     });
 
-    it.each([
-      [EpisodeFinaleType.mid_season_finale, 'finale'],
-      [EpisodePremiereType.mid_season_premiere, 'premiere'],
-    ] as const)(
+    it.each(
+      [
+        [EpisodeFinaleType.mid_season_finale, 'finale'],
+        [EpisodePremiereType.mid_season_premiere, 'premiere'],
+      ] as const,
+    )(
       'returns %s status for %s when it is the latest aired',
       (type, expected) => {
         expect(
