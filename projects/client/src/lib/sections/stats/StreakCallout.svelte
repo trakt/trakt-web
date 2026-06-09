@@ -155,7 +155,7 @@
 
     display: flex;
     align-items: center;
-    gap: var(--gap-l);
+    gap: var(--gap-s);
 
     border: var(--ni-1) solid var(--color-streak-border);
     border-radius: var(--border-radius-l);
@@ -164,9 +164,13 @@
   .trakt-streak-left {
     display: flex;
     align-items: center;
-    gap: var(--gap-m);
+    gap: var(--gap-l);
     min-width: 0;
     flex: 1;
+
+    @include for-tablet-sm-and-below {
+      gap: var(--gap-s);
+    }
   }
 
   .trakt-streak-right {
@@ -174,10 +178,13 @@
     flex-direction: row;
     align-items: center;
     gap: var(--gap-l);
+
+    max-width: var(--ni-160);
     flex: 1;
 
     @include for-tablet-sm-and-below {
       gap: var(--gap-s);
+      flex: none;
     }
   }
 
