@@ -1,6 +1,7 @@
 import type { MovieResponse, ShowResponse } from '@trakt/api';
 import type {
   YirCompany,
+  YirCountriesGroup,
   YirDetail,
   YirGenresGroup,
   YirMostWatchedItem,
@@ -73,6 +74,11 @@ type RawCompany = {
   color?: string | null;
 };
 
+type RawCountriesGroup = {
+  country_count: number;
+  countries: Array<{ country: string; count: number }>;
+};
+
 type RawTopRatedShow = {
   rating: number;
   show: ShowResponse;
@@ -127,6 +133,10 @@ type RawYirResponse = {
   top_rated: {
     shows: RawTopRatedShow[];
     movies: RawTopRatedMovie[];
+  };
+  countries?: {
+    shows: RawCountriesGroup;
+    movies: RawCountriesGroup;
   };
   trends?: {
     shows: RawTrendShow[];
@@ -210,6 +220,16 @@ function mapCompanies(raw: RawCompany[]): YirCompany[] {
   }));
 }
 
+function mapCountriesGroup(raw: RawCountriesGroup): YirCountriesGroup {
+  return {
+    countryCount: raw.country_count,
+    countries: (raw.countries ?? []).map((item) => ({
+      code: item.country,
+      count: item.count,
+    })),
+  };
+}
+
 function mapTopRatedShows(raw: RawTopRatedShow[]): YirTopRatedItem[] {
   return raw.map((item) => ({
     rating: item.rating,
@@ -286,6 +306,14 @@ export function mapToYirDetail(response: RawYirResponse): YirDetail {
     topRated: {
       shows: mapTopRatedShows(response.top_rated?.shows ?? []),
       movies: mapTopRatedMovies(response.top_rated?.movies ?? []),
+    },
+    countries: {
+      shows: mapCountriesGroup(
+        response.countries?.shows ?? { country_count: 0, countries: [] },
+      ),
+      movies: mapCountriesGroup(
+        response.countries?.movies ?? { country_count: 0, countries: [] },
+      ),
     },
     trends: {
       shows: mapTrendShows(response.trends?.shows ?? []),

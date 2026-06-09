@@ -5137,6 +5137,18 @@
       "default": "Studio Count",
       "description": "Row label for the total number of distinct studios watched on the 2024 Year in Review studios section."
     },
+    "yir_2024_most_watched_show_countries": {
+      "default": "Most Watched\nShow Countries",
+      "description": "Heading above the world map of countries whose shows were watched on the 2024 Year in Review template. The newline breaks it after 'Most Watched' on wider viewports (collapsed to a space when stacked)."
+    },
+    "yir_2024_most_watched_movie_countries": {
+      "default": "Most Watched\nMovie Countries",
+      "description": "Heading above the world map of countries whose movies were watched on the 2024 Year in Review template. The newline breaks it after 'Most Watched' on wider viewports (collapsed to a space when stacked)."
+    },
+    "yir_2024_country_count": {
+      "default": "Country Count",
+      "description": "Row label for the total number of distinct countries watched on the 2024 Year in Review countries section."
+    },
     "yir_2024_genre_count": {
       "default": "Genre Count",
       "description": "Row label for the total number of distinct genres watched on the 2024 Year in Review genres section."

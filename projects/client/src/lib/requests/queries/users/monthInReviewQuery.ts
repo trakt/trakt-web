@@ -25,8 +25,13 @@ export const UserReviewSchema = z.object({
 
 export type UserReview = z.infer<typeof UserReviewSchema>;
 
+// Only the fields shared by both the month- and year-in-review responses are
+// read here; typing to this subset lets the year response (which omits
+// `streaming_services`) reuse the same mapper.
+type ReviewStats = Pick<MonthInReviewResponse, 'stats' | 'first_watched'>;
+
 export function mapToFirstPlay(
-  response: MonthInReviewResponse,
+  response: ReviewStats,
 ): MediaEntry | null {
   if (!response.first_watched) {
     return null;
@@ -38,7 +43,7 @@ export function mapToFirstPlay(
 }
 
 export function mapToUserReview(
-  response: MonthInReviewResponse,
+  response: ReviewStats,
 ): UserReview {
   return {
     playCount: response.stats.all.play_counts.total,

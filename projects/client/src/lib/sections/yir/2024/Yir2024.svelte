@@ -3,6 +3,7 @@
   import { m } from "$lib/paraglide/messages";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
   import Yir2024CompaniesSection from "./_internal/Yir2024CompaniesSection.svelte";
+  import Yir2024CountriesSection from "./_internal/Yir2024CountriesSection.svelte";
   import Yir2024GenresSection from "./_internal/Yir2024GenresSection.svelte";
   import Yir2024MostPlayedSection from "./_internal/Yir2024MostPlayedSection.svelte";
   import Yir2024PageInner from "./_internal/Yir2024PageInner.svelte";
@@ -83,6 +84,12 @@
       </Yir2024PageInner>
     {/if}
 
+    {#if detail.countries.shows.countryCount > 0}
+      <Yir2024PageInner>
+        <Yir2024CountriesSection type="shows" group={detail.countries.shows} />
+      </Yir2024PageInner>
+    {/if}
+
     {#if (detail.trends?.shows.length ?? 0) > 0}
       <Yir2024PageInner>
         <Yir2024TrendsSection
@@ -123,6 +130,12 @@
     {#if detail.topRated.movies.length > 0}
       <Yir2024PageInner>
         <Yir2024RatedSection type="movies" items={detail.topRated.movies} />
+      </Yir2024PageInner>
+    {/if}
+
+    {#if detail.countries.movies.countryCount > 0}
+      <Yir2024PageInner>
+        <Yir2024CountriesSection type="movies" group={detail.countries.movies} />
       </Yir2024PageInner>
     {/if}
 
