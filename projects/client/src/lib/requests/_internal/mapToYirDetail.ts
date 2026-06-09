@@ -179,9 +179,7 @@ function mapCompanies(raw: RawCompany[]): YirCompany[] {
     id: item.id,
     name: item.name,
     count: item.count,
-    imageUrl: item.image_url
-      ? appendWebp(prependHttps(item.image_url))
-      : null,
+    imageUrl: item.image_url ? appendWebp(prependHttps(item.image_url)) : null,
     color: item.color,
   }));
 }
