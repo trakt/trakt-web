@@ -23,9 +23,9 @@
     "npm:@sveltejs/adapter-cloudflare@7.2.8": "7.2.8_@sveltejs+kit@2.63.0__@sveltejs+vite-plugin-svelte@7.1.2___svelte@5.56.3___vite@8.0.16____esbuild@0.28.0____sass-embedded@1.100.0__svelte@5.56.3__typescript@5.8.3__vite@8.0.16___esbuild@0.28.0___sass-embedded@1.100.0_typescript@5.8.3",
     "npm:@sveltejs/kit@2.63.0": "2.63.0_@sveltejs+vite-plugin-svelte@7.1.2__svelte@5.56.3__vite@8.0.16___esbuild@0.28.0___sass-embedded@1.100.0_svelte@5.56.3_typescript@5.8.3_vite@8.0.16__esbuild@0.28.0__sass-embedded@1.100.0",
     "npm:@sveltejs/vite-plugin-svelte@7.1.2": "7.1.2_svelte@5.56.3_vite@8.0.16__esbuild@0.28.0__sass-embedded@1.100.0",
-    "npm:@tanstack/svelte-query-devtools@5.90.2": "5.90.2_@tanstack+svelte-query@5.90.2__svelte@5.56.3_svelte@5.56.3",
-    "npm:@tanstack/svelte-query-persist-client@5.90.2": "5.90.2_@tanstack+svelte-query@5.90.2__svelte@5.56.3_svelte@5.56.3",
-    "npm:@tanstack/svelte-query@5.90.2": "5.90.2_svelte@5.56.3",
+    "npm:@tanstack/svelte-query-devtools@6.1.34": "6.1.34_@tanstack+svelte-query@6.1.34__svelte@5.56.3_svelte@5.56.3",
+    "npm:@tanstack/svelte-query-persist-client@6.1.34": "6.1.34_@tanstack+svelte-query@6.1.34__svelte@5.56.3_svelte@5.56.3",
+    "npm:@tanstack/svelte-query@6.1.34": "6.1.34_svelte@5.56.3",
     "npm:@testing-library/jest-dom@6.9.1": "6.9.1",
     "npm:@testing-library/svelte@5.3.1": "5.3.1_svelte@5.56.3_vite@8.0.16__esbuild@0.28.0__sass-embedded@1.100.0_vitest@4.1.8__@opentelemetry+api@1.9.1__@vitest+coverage-istanbul@4.1.8__jsdom@29.1.1__vite@8.0.16___esbuild@0.28.0___sass-embedded@1.100.0__typescript@5.8.3_jsdom@29.1.1_typescript@5.8.3",
     "npm:@testing-library/user-event@14.6.1": "14.6.1_@testing-library+dom@10.4.1",
@@ -3151,20 +3151,20 @@
     "@takumi-rs/wasm@0.55.4": {
       "integrity": "sha512-/iOhQW+nJW0hhv2viu6806JehiAKWFvJ4LXux6CW4XBpP1xWdr4H+VBS7OYMbQu/7XaPITyL7B10lSTtRUAHoA=="
     },
-    "@tanstack/query-core@5.90.2": {
-      "integrity": "sha512-k/TcR3YalnzibscALLwxeiLUub6jN5EDLwKDiO7q5f4ICEoptJ+n9+7vcEFy5/x/i6Q+Lb/tXrsKCggf5uQJXQ=="
+    "@tanstack/query-core@5.101.0": {
+      "integrity": "sha512-cQetA74EB+seWySv1TTKr828TnP0u39m6LykwDXIo84SNortpDkp30TMEjkqtYCNP9c40uT/iwl6MLiufEt0Ow=="
     },
-    "@tanstack/query-devtools@5.90.1": {
-      "integrity": "sha512-GtINOPjPUH0OegJExZ70UahT9ykmAhmtNVcmtdnOZbxLwT7R5OmRztR5Ahe3/Cu7LArEmR6/588tAycuaWb1xQ=="
+    "@tanstack/query-devtools@5.101.0": {
+      "integrity": "sha512-MVqw17k08RQtGGLEL654+dX/btbX9p/8WjkznO//zusLTMaObxi3Q+MoFwGVkC9K3tqjn8qrrNhJevXx4fJTeQ=="
     },
-    "@tanstack/query-persist-client-core@5.90.2": {
-      "integrity": "sha512-rgJRgqqziPc3KgK2mav2HNR4PoI5e7fkiIrkg85xZ5j29mHPzTp3A0QcceQXVaV9qcPp/SMDJA48A6BpGJGHZg==",
+    "@tanstack/query-persist-client-core@5.101.0": {
+      "integrity": "sha512-LH99WepGVLwlLfuOcQcPK7f3Xg/Gf+xlMMIj9xWu/8oQ3egnDzjr+a4HvEmi6PGob5SmGXvmDKZaH5+In9dzjw==",
       "dependencies": [
         "@tanstack/query-core"
       ]
     },
-    "@tanstack/svelte-query-devtools@5.90.2_@tanstack+svelte-query@5.90.2__svelte@5.56.3_svelte@5.56.3": {
-      "integrity": "sha512-Mk6FWRz7rBr1zFlX2aBmRM8RIehCwE3VBE5/SX3L/pG5mFIBOCQqIUeyw+eNIW8RBbPvWDv9MrLohi/8cj9J4A==",
+    "@tanstack/svelte-query-devtools@6.1.34_@tanstack+svelte-query@6.1.34__svelte@5.56.3_svelte@5.56.3": {
+      "integrity": "sha512-zVXoXqzE/n+j+Zq/47EqJf+DfmJt2+Hoz58ec8+JGa5t4k+b23Ix6Ea1W4IgHKKVVhaWhva4d6RauE4tPyW3Gw==",
       "dependencies": [
         "@tanstack/query-devtools",
         "@tanstack/svelte-query",
@@ -3172,16 +3172,16 @@
         "svelte"
       ]
     },
-    "@tanstack/svelte-query-persist-client@5.90.2_@tanstack+svelte-query@5.90.2__svelte@5.56.3_svelte@5.56.3": {
-      "integrity": "sha512-Q5FrwAR1KPh+yWL+hlldqakjR76vz4exRumhldaroowUKp8suV2mPbo4uYJz1CskRECzn5fKrRYOMEQsHxDRtg==",
+    "@tanstack/svelte-query-persist-client@6.1.34_@tanstack+svelte-query@6.1.34__svelte@5.56.3_svelte@5.56.3": {
+      "integrity": "sha512-Xt2lLa9KJfsIl+oEWgFiXGLaX8uvbS2rnUfQxgxDSjQSbAf6ZlVePHXBjqvwvSP1zSQ9xNlFjtMu/f4Low59rg==",
       "dependencies": [
         "@tanstack/query-persist-client-core",
         "@tanstack/svelte-query",
         "svelte"
       ]
     },
-    "@tanstack/svelte-query@5.90.2_svelte@5.56.3": {
-      "integrity": "sha512-owjnp0w8sOXlMhLZhucHrsYvCjgjHrVyII/wlqMGefxKFyroZS3xCwTee+IUx7UHbL+QmKr/HQTeTqhgxmxPQw==",
+    "@tanstack/svelte-query@6.1.34_svelte@5.56.3": {
+      "integrity": "sha512-b/j6OXHd285NLPTH31SqJ8+XfHKoDPV8+ZGxXjg4pSAWW2aVo/f5gbu5m32QjfdTSumib3+d1dJBv5Yupv7HKw==",
       "dependencies": [
         "@tanstack/query-core",
         "svelte"
@@ -7893,9 +7893,9 @@
             "npm:@sveltejs/adapter-cloudflare@7.2.8",
             "npm:@sveltejs/kit@2.63.0",
             "npm:@sveltejs/vite-plugin-svelte@7.1.2",
-            "npm:@tanstack/svelte-query-devtools@5.90.2",
-            "npm:@tanstack/svelte-query-persist-client@5.90.2",
-            "npm:@tanstack/svelte-query@5.90.2",
+            "npm:@tanstack/svelte-query-devtools@6.1.34",
+            "npm:@tanstack/svelte-query-persist-client@6.1.34",
+            "npm:@tanstack/svelte-query@6.1.34",
             "npm:@testing-library/jest-dom@6.9.1",
             "npm:@testing-library/svelte@5.3.1",
             "npm:@testing-library/user-event@14.6.1",

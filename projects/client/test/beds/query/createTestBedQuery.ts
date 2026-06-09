@@ -1,17 +1,20 @@
-import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { queryBridge } from '$lib/features/query/_internal/queryBridge.svelte.ts';
 import {
-  createQuery,
   type CreateQueryOptions,
-  type QueryObserverResult,
+  useQueryClient,
 } from '@tanstack/svelte-query';
 
 export function createTestBedQuery<
   TQueryFnData = unknown,
-  TError = unknown,
+  TError extends Error = Error,
   TData = TQueryFnData,
   TQueryKey extends readonly unknown[] = [],
 >(
   options: CreateQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
 ) {
-  return toObservable<QueryObserverResult<TData, TError>>(createQuery(options));
+  const client = useQueryClient();
+  return queryBridge<TData, TError>(
+    () => options as unknown as CreateQueryOptions<TData, TError>,
+    client,
+  );
 }
