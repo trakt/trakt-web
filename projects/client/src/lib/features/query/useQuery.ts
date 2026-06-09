@@ -1,10 +1,7 @@
 import { browser } from '$app/environment';
-import { toObservable } from '$lib/utils/store/toObservable.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import {
-  createInfiniteQuery,
   type CreateInfiniteQueryOptions,
-  createQuery,
   type CreateQueryOptions,
   type InfiniteData,
   type InfiniteQueryObserverResult,
@@ -18,11 +15,19 @@ import {
   Observable,
   type OperatorFunction,
   pipe,
+  shareReplay,
+  tap,
 } from 'rxjs';
 import type { Paginatable } from '../../requests/models/Paginatable.ts';
 import { findInvalidationId } from './_internal/findInvalidationId.ts';
 import { findQueryId } from './_internal/findQueryId.ts';
 import { invalidationPredicate } from './_internal/invalidationPredicate.ts';
+import {
+  infiniteQueryBridge,
+  queryBridge,
+  type QueryOptionsRef,
+  reactiveQueryBridge,
+} from './_internal/queryBridge.svelte.ts';
 
 /**
  * Tracks query invalidation requests.
@@ -115,37 +120,17 @@ export function useQuery<
     | CreateQueryOptions<TOutput, TError>
     | Observable<CreateQueryOptions<TOutput, TError>>,
 ): Observable<QueryObserverResult<TOutput, TError>> {
-  let optionsStore:
-    | CreateQueryOptions<TOutput, TError>
-    | {
-      subscribe: (
-        run: (val: CreateQueryOptions<TOutput, TError>) => void,
-      ) => () => void;
-    };
-  let getQueryKey: () =>
-    | CreateQueryOptions<TOutput, TError>['queryKey']
-    | undefined;
+  const client = useQueryClient();
 
   if (isObservable(props)) {
-    let currentOptions: CreateQueryOptions<TOutput, TError> | undefined;
-
-    optionsStore = {
-      subscribe: (run) => {
-        const sub = props.subscribe((val) => {
-          currentOptions = val;
-          run(val);
-        });
-        return () => sub.unsubscribe();
-      },
-    };
-    getQueryKey = () => currentOptions?.queryKey;
-  } else {
-    optionsStore = props;
-    getQueryKey = () => props.queryKey;
+    const ref: QueryOptionsRef<TOutput, TError> = {};
+    return reactiveQueryBridge(props, client, ref).pipe(
+      invalidationHook(() => ref.current?.queryKey),
+    );
   }
 
-  return toObservable(createQuery(optionsStore)).pipe(
-    invalidationHook(getQueryKey),
+  return queryBridge(() => props, client).pipe(
+    invalidationHook(() => props.queryKey),
   );
 }
 
@@ -164,7 +149,53 @@ export function useInfiniteQuery<
     TPageParam
   >,
 ): Observable<InfiniteQueryObserverResult<TData, TError>> {
-  return toObservable(createInfiniteQuery(props)).pipe(
+  const client = useQueryClient();
+
+  return infiniteQueryBridge<
+    Paginatable<TOutput>,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  >(() => props, client).pipe(
     invalidationHook(props.queryKey),
+  );
+}
+
+/**
+ * Like `useInfiniteQuery`, but automatically fetches subsequent pages until
+ * all data is loaded. Uses live QueryClient state to guard `fetchNextPage()`
+ * so that concurrent observers (e.g. multiple `useUser()` call sites) don't
+ * duplicate in-flight fetches.
+ */
+export function useAllPagesInfiniteQuery<
+  TOutput,
+  TError extends Error,
+  TData = InfiniteData<Paginatable<TOutput>>,
+  TQueryKey extends QueryKey = QueryKey,
+  TPageParam = number,
+>(
+  props: CreateInfiniteQueryOptions<
+    Paginatable<TOutput>,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  >,
+): Observable<InfiniteQueryObserverResult<TData, TError>> {
+  const client = useQueryClient();
+
+  return useInfiniteQuery<TOutput, TError, TData, TQueryKey, TPageParam>(
+    props,
+  ).pipe(
+    tap((query) => {
+      if (
+        query.hasNextPage &&
+        client.getQueryState(props.queryKey)?.fetchStatus === 'idle'
+      ) {
+        query.fetchNextPage();
+      }
+    }),
+    shareReplay({ bufferSize: 1, refCount: true }),
   );
 }

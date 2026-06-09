@@ -1,10 +1,10 @@
-import { useInfiniteQuery } from '$lib/features/query/useQuery.ts';
+import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
 import {
   combineLatest,
   distinctUntilChanged,
   map,
   Observable,
-  tap,
+  shareReplay,
 } from 'rxjs';
 import {
   currentUserWatchedMoviesQuery,
@@ -47,19 +47,14 @@ type UseCurrentUserHistoryResult = {
 };
 
 export function useCurrentUserHistory(): UseCurrentUserHistoryResult {
-  const moviesQuery = useInfiniteQuery(
+  const moviesQuery = useAllPagesInfiniteQuery(
     currentUserWatchedMoviesQuery({ limit: moviesHistoryLimit }),
   );
-  const showsQuery = useInfiniteQuery(
+  const showsQuery = useAllPagesInfiniteQuery(
     currentUserWatchedShowsQuery({ limit: showsHistoryLimit }),
   );
 
   const history = combineLatest([moviesQuery, showsQuery]).pipe(
-    tap(([movies, shows]) => {
-      [movies, shows]
-        .filter((q) => q.hasNextPage && !q.isFetchingNextPage)
-        .forEach((q) => q.fetchNextPage());
-    }),
     map(([movies, shows]) => {
       if (!isSettled(movies) || !isSettled(shows)) {
         return null;
@@ -74,6 +69,7 @@ export function useCurrentUserHistory(): UseCurrentUserHistoryResult {
       };
     }),
     distinctUntilChanged((prev, curr) => prev === null && curr === null),
+    shareReplay({ bufferSize: 1, refCount: true }),
   );
 
   const isLoading = combineLatest([moviesQuery, showsQuery]).pipe(

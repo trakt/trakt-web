@@ -1,8 +1,8 @@
-import { useInfiniteQuery } from '$lib/features/query/useQuery.ts';
+import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
 import {
   showActivityHistoryQuery,
 } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
-import { map, tap } from 'rxjs';
+import { map } from 'rxjs';
 
 type UseShowWatchedEpisodesProps = {
   showId: number;
@@ -11,16 +11,11 @@ type UseShowWatchedEpisodesProps = {
 export function useShowWatchedEpisodes(
   { showId }: UseShowWatchedEpisodesProps,
 ) {
-  const query = useInfiniteQuery(
+  const query = useAllPagesInfiniteQuery(
     showActivityHistoryQuery({ slug: 'me', id: showId, limit: 100 }),
   );
 
   const watchedBySeason = query.pipe(
-    tap(($query) => {
-      if ($query.hasNextPage && !$query.isFetchingNextPage) {
-        $query.fetchNextPage();
-      }
-    }),
     map(($query) => {
       const entries = $query.data?.pages.flatMap((page) => page.entries) ?? [];
 

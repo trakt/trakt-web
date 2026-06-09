@@ -1,15 +1,16 @@
-import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { infiniteQueryBridge } from '$lib/features/query/_internal/queryBridge.svelte.ts';
 import {
-  createInfiniteQuery,
   type CreateInfiniteQueryOptions,
-  type InfiniteQueryObserverResult,
+  type InfiniteData,
+  type QueryKey,
+  useQueryClient,
 } from '@tanstack/svelte-query';
 
 export function createTestBedInfiniteQuery<
   TQueryFnData = unknown,
-  TError = unknown,
-  TData = TQueryFnData,
-  TQueryKey extends readonly unknown[] = [],
+  TError extends Error = Error,
+  TData = InfiniteData<TQueryFnData>,
+  TQueryKey extends QueryKey = QueryKey,
   TPageParam = unknown,
 >(
   options: CreateInfiniteQueryOptions<
@@ -20,7 +21,15 @@ export function createTestBedInfiniteQuery<
     TPageParam
   >,
 ) {
-  return toObservable<InfiniteQueryObserverResult<TData, TError>>(
-    createInfiniteQuery(options),
+  const client = useQueryClient();
+  return infiniteQueryBridge<
+    TQueryFnData,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  >(
+    () => options,
+    client,
   );
 }
