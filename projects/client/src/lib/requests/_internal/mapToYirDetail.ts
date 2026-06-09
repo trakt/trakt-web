@@ -6,6 +6,7 @@ import type {
   YirMostWatchedItem,
   YirStatsCategory,
   YirTopRatedItem,
+  YirTrendItem,
   YirWatchedItem,
 } from '../models/YirDetail.ts';
 import { mapToMovieEntry } from './mapToMovieEntry.ts';
@@ -81,6 +82,20 @@ type RawTopRatedMovie = {
   movie: MovieResponse;
 };
 
+type RawTrendShow = {
+  month: number;
+  watchers: number;
+  watched: boolean;
+  show: ShowResponse;
+};
+
+type RawTrendMovie = {
+  month: number;
+  watchers: number;
+  watched: boolean;
+  movie: MovieResponse;
+};
+
 type RawYirResponse = {
   stats: {
     all: RawStatsCategory & { lists_counts: RawStats };
@@ -106,6 +121,10 @@ type RawYirResponse = {
   top_rated: {
     shows: RawTopRatedShow[];
     movies: RawTopRatedMovie[];
+  };
+  trends?: {
+    shows: RawTrendShow[];
+    movies: RawTrendMovie[];
   };
 };
 
@@ -198,6 +217,24 @@ function mapTopRatedMovies(raw: RawTopRatedMovie[]): YirTopRatedItem[] {
   }));
 }
 
+function mapTrendShows(raw: RawTrendShow[]): YirTrendItem[] {
+  return raw.map((item) => ({
+    month: item.month,
+    watchers: item.watchers,
+    watched: item.watched,
+    entry: mapToShowEntry(item.show),
+  }));
+}
+
+function mapTrendMovies(raw: RawTrendMovie[]): YirTrendItem[] {
+  return raw.map((item) => ({
+    month: item.month,
+    watchers: item.watchers,
+    watched: item.watched,
+    entry: mapToMovieEntry(item.movie),
+  }));
+}
+
 export function mapToYirDetail(response: RawYirResponse): YirDetail {
   const { stats, images } = response;
 
@@ -233,6 +270,10 @@ export function mapToYirDetail(response: RawYirResponse): YirDetail {
     topRated: {
       shows: mapTopRatedShows(response.top_rated?.shows ?? []),
       movies: mapTopRatedMovies(response.top_rated?.movies ?? []),
+    },
+    trends: {
+      shows: mapTrendShows(response.trends?.shows ?? []),
+      movies: mapTrendMovies(response.trends?.movies ?? []),
     },
   };
 }

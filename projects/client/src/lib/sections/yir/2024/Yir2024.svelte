@@ -10,6 +10,7 @@
   import Yir2024RatedSection from "./_internal/Yir2024RatedSection.svelte";
   import Yir2024StatsSection from "./_internal/Yir2024StatsSection.svelte";
   import Yir2024TopSection from "./_internal/Yir2024TopSection.svelte";
+  import Yir2024TrendsSection from "./_internal/Yir2024TrendsSection.svelte";
 
   const {
     detail,
@@ -81,6 +82,16 @@
       </Yir2024PageInner>
     {/if}
 
+    {#if (detail.trends?.shows.length ?? 0) > 0}
+      <Yir2024PageInner>
+        <Yir2024TrendsSection
+          type="shows"
+          items={detail.trends?.shows ?? []}
+          {year}
+        />
+      </Yir2024PageInner>
+    {/if}
+
     {#if detail.stats.movies.playCounts.total > 0}
       <Yir2024PageInner>
         <Yir2024StatsSection type="movies" stats={detail.stats.movies} {year} />
@@ -98,10 +109,7 @@
 
     {#if detail.studios.length > 0}
       <Yir2024PageInner>
-        <Yir2024CompaniesSection
-          type="movies"
-          companies={detail.studios}
-        />
+        <Yir2024CompaniesSection type="movies" companies={detail.studios} />
       </Yir2024PageInner>
     {/if}
 
@@ -114,6 +122,16 @@
     {#if detail.topRated.movies.length > 0}
       <Yir2024PageInner>
         <Yir2024RatedSection type="movies" items={detail.topRated.movies} />
+      </Yir2024PageInner>
+    {/if}
+
+    {#if (detail.trends?.movies.length ?? 0) > 0}
+      <Yir2024PageInner>
+        <Yir2024TrendsSection
+          type="movies"
+          items={detail.trends?.movies ?? []}
+          {year}
+        />
       </Yir2024PageInner>
     {/if}
 
