@@ -3,6 +3,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
+  import { checksum } from "$lib/utils/string/checksum";
   import SkeletonList from "../../../components/lists/SkeletonList.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import NoFilterResultsPlaceholder from "./_internal/NoFilterResultsPlaceholder.svelte";
@@ -34,6 +35,20 @@
     }),
   );
 
+  /*
+    The filter values are used as the content hash to ensure list
+    scroll position is reset when applying/changing filters.
+  */
+  const contentHash = $derived(
+    checksum(
+      JSON.stringify({
+        type,
+        filter: filter ?? {},
+        filterOverride: filterOverride ?? {},
+      }),
+    ),
+  );
+
   const defaultVariant = $derived(useDefaultCardVariant(type));
   const variant = $derived(externalVariant ?? $defaultVariant);
   const height = $derived(mediaListHeightResolver(variant));
@@ -56,6 +71,7 @@
   {drilldown}
   {titleAction}
   actions={externalActions ? actions : undefined}
+  {contentHash}
   --height-list={height}
 >
   {#snippet empty()}
