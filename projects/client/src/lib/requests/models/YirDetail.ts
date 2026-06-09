@@ -56,6 +56,14 @@ const YirTopRatedItemSchema = z.object({
   entry: MediaEntrySchema,
 });
 
+const YirTrendItemSchema = z.object({
+  /** Calendar month (1-12) the title premiered in. */
+  month: z.number(),
+  watchers: z.number(),
+  watched: z.boolean(),
+  entry: MediaEntrySchema,
+});
+
 const YirWatchedMovieSchema = z.object({
   type: z.literal('movie'),
   watchedAt: z.date(),
@@ -106,6 +114,10 @@ export const YirDetailSchema = z.object({
     shows: YirTopRatedItemSchema.array(),
     movies: YirTopRatedItemSchema.array(),
   }),
+  trends: z.object({
+    shows: YirTrendItemSchema.array(),
+    movies: YirTrendItemSchema.array(),
+  }).nullish(),
 });
 
 export type YirDetail = z.infer<typeof YirDetailSchema>;
@@ -117,6 +129,7 @@ export type YirGenresGroup = z.infer<typeof YirGenresGroupSchema>;
 export type YirCompany = z.infer<typeof YirCompanySchema>;
 export type YirMostWatchedItem = z.infer<typeof YirMostWatchedItemSchema>;
 export type YirTopRatedItem = z.infer<typeof YirTopRatedItemSchema>;
+export type YirTrendItem = z.infer<typeof YirTrendItemSchema>;
 export type YirWatchedItem = z.infer<typeof YirWatchedItemSchema>;
 export type YirWatchedMovie = z.infer<typeof YirWatchedMovieSchema>;
 export type YirWatchedEpisode = z.infer<typeof YirWatchedEpisodeSchema>;

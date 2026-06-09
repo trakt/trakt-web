@@ -4781,6 +4781,64 @@
       "default": "Highest Rated Movies",
       "description": "Section heading above the highest-rated movies list on the 2024 Year in Review template."
     },
+    "yir_2024_show_trends": {
+      "default": "Show Trends",
+      "description": "Heading for the section showing the most-watched shows that premiered each month, on the 2024 Year in Review template."
+    },
+    "yir_2024_movie_trends": {
+      "default": "Movie Trends",
+      "description": "Heading for the section showing the most-watched movies that premiered each month, on the 2024 Year in Review template."
+    },
+    "yir_2024_trends_subtitle_shows": {
+      "default": "The most watched shows that premiered in {year}.",
+      "description": "Subtitle under the Show Trends heading on the 2024 Year in Review template.",
+      "variables": {
+        "year": {
+          "type": "number"
+        }
+      }
+    },
+    "yir_2024_trends_subtitle_movies": {
+      "default": "The most watched movies that premiered in {year}.",
+      "description": "Subtitle under the Movie Trends heading on the 2024 Year in Review template.",
+      "variables": {
+        "year": {
+          "type": "number"
+        }
+      }
+    },
+    "yir_2024_trends_watched_shows": {
+      "default": "You watched {watched} of {total} shows.",
+      "description": "Summary of how many of the trending shows the user watched, on the 2024 Year in Review template.",
+      "variables": {
+        "watched": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "yir_2024_trends_watched_movies": {
+      "default": "You watched {watched} of {total} movies.",
+      "description": "Summary of how many of the trending movies the user watched, on the 2024 Year in Review template.",
+      "variables": {
+        "watched": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "yir_2024_trend_watchers": {
+      "default": "{count} watchers",
+      "description": "Watcher count shown beneath each trending title on the 2024 Year in Review template. `count` is a pre-formatted number string."
+    },
+    "yir_2024_trend_watched": {
+      "default": "Watched",
+      "description": "Label on the chip marking a trending title the user has watched, on the 2024 Year in Review template."
+    },
     "yir_2024_most_watched_networks": {
       "default": "Most watched networks",
       "description": "Section heading above the networks bubble chart on the 2024 Year in Review template."
