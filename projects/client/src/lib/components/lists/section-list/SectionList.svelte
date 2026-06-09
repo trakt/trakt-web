@@ -36,6 +36,7 @@
     variant?: ListVariant;
     titleAction?: Snippet;
     drilldown?: ListDrilldownLinkProps;
+    contentHash?: string;
   };
 
   const {
@@ -52,6 +53,7 @@
     subtitle,
     variant = "default",
     titleAction: externalTitleAction,
+    contentHash,
   }: SectionListProps<T> = $props();
 
   const { isEditMode, section } = useEditMode();
@@ -161,7 +163,7 @@
           {#snippet childrenA()}
             <div
               use:scrollHistory={listId}
-              use:resetScroll
+              use:resetScroll={contentHash}
               class="trakt-list-item-container section-list-horizontal-scroll"
               data-dpad-navigation={DpadNavigationType.List}
               data-navigation-type={$navigation}
