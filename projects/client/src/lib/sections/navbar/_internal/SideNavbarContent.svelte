@@ -76,6 +76,19 @@
         UrlBuilder.lists.watchlist("me"),
         m.page_title_watchlist(),
       )}
+      {@render navSubLink(UrlBuilder.lists.smart.all(), m.list_title_smart_lists())}
+      {@render navSubLink(
+        UrlBuilder.lists.all("me", "personal"),
+        m.list_title_personal_lists(),
+      )}
+      {@render navSubLink(
+        UrlBuilder.lists.all("me", "liked"),
+        m.list_title_liked_lists(),
+      )}
+      {@render navSubLink(
+        UrlBuilder.lists.all("me", "collaboration"),
+        m.list_title_collaborative_lists(),
+      )}
     </NavGroup>
   </RenderFor>
 </div>

@@ -10,14 +10,17 @@
   import SmartListActions from "./_internal/SmartListActions.svelte";
   import { useSmartLists } from "./useSmartLists";
 
+  import type { Snippet } from "svelte";
+
   type SmartListRendererProps = {
     mode: DiscoverMode;
     limit?: number;
+    empty?: Snippet;
   };
 
-  const { mode, limit }: SmartListRendererProps = $props();
+  const { mode, limit, empty }: SmartListRendererProps = $props();
 
-  const { list: lists } = $derived(useSmartLists({ mode, limit }));
+  const { list: lists, isLoading } = $derived(useSmartLists({ mode, limit }));
 
   const getListProps = (list: SmartList) => ({
     title: list.title,
@@ -30,24 +33,28 @@
   });
 </script>
 
-<GlobalParameterEscaper enabled>
-  {#each $lists as list (list.id)}
-    {@const scope = `smart-list-${list.target}-${list.key}`}
+{#if !$isLoading && $lists.length === 0}
+  {@render empty?.()}
+{:else}
+  <GlobalParameterEscaper enabled>
+    {#each $lists as list (list.id)}
+      {@const scope = `smart-list-${list.target}-${list.key}`}
 
-    {#snippet actions()}
-      <SmartListActions {list} />
-    {/snippet}
+      {#snippet actions()}
+        <SmartListActions {list} />
+      {/snippet}
 
-    {#if list.target === "trending"}
-      <TrendingList {...getListProps(list)} {actions} {scope} />
-    {/if}
+      {#if list.target === "trending"}
+        <TrendingList {...getListProps(list)} {actions} {scope} />
+      {/if}
 
-    {#if list.target === "anticipated"}
-      <AnticipatedList {...getListProps(list)} {actions} {scope} />
-    {/if}
+      {#if list.target === "anticipated"}
+        <AnticipatedList {...getListProps(list)} {actions} {scope} />
+      {/if}
 
-    {#if list.target === "popular"}
-      <PopularList {...getListProps(list)} {actions} {scope} />
-    {/if}
-  {/each}
-</GlobalParameterEscaper>
+      {#if list.target === "popular"}
+        <PopularList {...getListProps(list)} {actions} {scope} />
+      {/if}
+    {/each}
+  </GlobalParameterEscaper>
+{/if}
