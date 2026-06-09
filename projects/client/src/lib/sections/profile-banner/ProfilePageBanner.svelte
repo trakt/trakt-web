@@ -4,10 +4,8 @@
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import MatchPill from "$lib/sections/profile/components/MatchPill.svelte";
   import ProfileAbout from "$lib/sections/profile/components/ProfileAbout.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
@@ -74,11 +72,7 @@
       {/if}
       {#if !$isMe && !isBlocked}
         <RenderFor audience="authenticated">
-          <RenderForFeature flag={FeatureFlag.UserMatch}>
-            {#snippet enabled()}
-              <MatchPill {slug} />
-            {/snippet}
-          </RenderForFeature>
+          <MatchPill {slug} />
         </RenderFor>
       {/if}
     </div>
