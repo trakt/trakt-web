@@ -1,6 +1,6 @@
 import type { FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
-import { combineLatest, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, map } from 'rxjs';
 import { getAdditionalKeys } from '../../sections/navbar/components/filter/filters/_internal/getAdditionalKeys.ts';
 import { useNavbarState } from '../../sections/navbar/useNavbarState.ts';
 import { useUser } from '../auth/stores/useUser.ts';
@@ -74,6 +74,18 @@ export function useFilter() {
 
             return filterMap;
           }, {} as Record<string, string>);
+      }),
+      /*
+        combineLatest includes `user`, which can refresh after any action
+        that can update history/ratings/etc. Without distinctUntilChanged,
+        a new object reference would propagate to consumers and cause
+        list stores to recreate with empty previous state.
+       */
+      distinctUntilChanged((a, b) => {
+        const aKeys = Object.keys(a);
+        const bKeys = Object.keys(b);
+        return aKeys.length === bKeys.length &&
+          aKeys.every((k) => a[k] === b[k]);
       }),
     ),
   };
