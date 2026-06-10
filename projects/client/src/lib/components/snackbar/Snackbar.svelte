@@ -1,126 +1,111 @@
 <script lang="ts">
   import AutoCloseButton from "$lib/components/buttons/AutoCloseButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
-  import Popover from "$lib/components/popover/Popover.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { Snippet } from "svelte";
   import { onMount } from "svelte";
   import { fly } from "svelte/transition";
 
+  type SnackbarAction = {
+    text: string;
+    label: string;
+    onAction: () => void;
+  };
+
   type SnackbarProps = {
     open: boolean;
-    onOpenChange: (open: boolean) => void;
     onDismiss: () => void;
-    onAction: () => void;
-    title: string;
+    title?: string;
     message: string;
-    actionLabel: string;
-    actionText: string;
-    children?: Snippet;
-    anchor?: HTMLElement | Nil;
+    action?: SnackbarAction;
+    variant?: "default" | "error";
   };
 
   const {
     open,
-    onOpenChange,
     onDismiss,
-    onAction,
     title,
     message,
-    actionLabel,
-    actionText,
-    children,
-    anchor,
+    action,
+    variant = "default",
   }: SnackbarProps = $props();
 
   let navbarHeight = $state(0);
 
   onMount(() => {
-    const navbar = document.querySelector(".trakt-mobile-navbar");
-    if (!navbar) return;
+    let currentNavbar: Element | null = null;
+    let resizeObserver: ResizeObserver | undefined;
 
-    const update = () => {
-      navbarHeight = navbar.getBoundingClientRect().height;
+    const updateHeight = () => {
+      navbarHeight = currentNavbar
+        ? currentNavbar.getBoundingClientRect().height
+        : 0;
     };
 
-    update();
+    const checkNavbar = () => {
+      const navbar = document.querySelector(".trakt-mobile-navbar");
+      if (navbar !== currentNavbar) {
+        resizeObserver?.disconnect();
+        currentNavbar = navbar;
 
-    const observer = new ResizeObserver(update);
-    observer.observe(navbar);
+        if (navbar) {
+          resizeObserver = new ResizeObserver(updateHeight);
+          resizeObserver.observe(navbar);
+        }
+        updateHeight();
+      }
+    };
 
-    return () => observer.disconnect();
+    checkNavbar();
+
+    const mutationObserver = new MutationObserver(checkNavbar);
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      mutationObserver.disconnect();
+      resizeObserver?.disconnect();
+    };
   });
 </script>
 
 {#snippet actionButton()}
-  <Button
-    size="small"
-    variant="primary"
-    color="purple"
-    label={actionLabel}
-    onclick={onAction}
-  >
-    {actionText}
-  </Button>
+  {#if action}
+    <Button
+      size="small"
+      variant="primary"
+      color="purple"
+      label={action.label}
+      onclick={action.onAction}
+    >
+      {action.text}
+    </Button>
+  {/if}
 {/snippet}
 
-<RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-  {@render children?.()}
+{#if open}
+  <div
+    class="trakt-snackbar"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+    style="bottom: {navbarHeight}px;"
+    data-variant={variant}
+    transition:fly={{ y: 20, duration: 200 }}
+  >
+    {#if title}
+      <span class="bold">{title}</span>
+    {/if}
 
-  {#if open}
-    <div
-      class="trakt-snackbar"
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-      style="bottom: {navbarHeight + 8}px;"
-      transition:fly={{ y: 20, duration: 200 }}
-    >
+    <div class="snackbar-content">
       <p class="snackbar-message">{message}</p>
       {@render actionButton()}
       <AutoCloseButton onclick={onDismiss} label={m.button_label_close()} />
     </div>
-  {/if}
-</RenderFor>
-
-{#snippet popoverContent()}
-  <div class="snackbar-popover" role="status" aria-live="polite">
-    <div class="snackbar-popover-header">
-      <span class="bold title">{title}</span>
-      <AutoCloseButton onclick={onDismiss} label={m.button_label_close()} />
-    </div>
-    <p>{message}</p>
-    <div class="snackbar-popover-actions">
-      <Button
-        size="small"
-        color="default"
-        label={m.button_label_cancel()}
-        onclick={onDismiss}
-      >
-        {m.button_text_cancel()}
-      </Button>
-      {@render actionButton()}
-    </div>
   </div>
-{/snippet}
-
-<RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-  {#if anchor}
-    <Popover
-      {open}
-      {onOpenChange}
-      customAnchor={anchor}
-      content={popoverContent}
-    />
-  {:else}
-    <Popover {open} {onOpenChange} content={popoverContent}>
-      {@render children?.()}
-    </Popover>
-  {/if}
-</RenderFor>
+{/if}
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-snackbar {
     position: fixed;
     left: 50%;
@@ -132,44 +117,32 @@
     box-sizing: border-box;
 
     display: flex;
-    align-items: center;
-    gap: var(--ni-12);
+    flex-direction: column;
+    gap: var(--gap-micro);
 
     background-color: var(--color-modal-background);
     border-radius: var(--border-radius-l);
     box-shadow: var(--shadow-raised);
     backdrop-filter: blur(var(--ni-16));
+
+    margin-bottom: var(--ni-24);
+
+    .snackbar-content {
+      display: flex;
+      align-items: center;
+      gap: var(--ni-12);
+    }
+
+    &[data-variant="error"] {
+      border: var(--ni-1) solid var(--red-500);
+    }
+
+    @include for-tablet-sm-and-below {
+      margin-bottom: var(--ni-8);
+    }
   }
 
   .snackbar-message {
     flex: 1;
-  }
-
-  .snackbar-popover {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-12);
-
-    min-width: var(--ni-240);
-    padding: var(--ni-16);
-
-    background-color: var(--color-modal-background);
-    border-radius: var(--border-radius-l);
-    box-shadow: var(--shadow-menu);
-
-    animation: fade-in var(--transition-increment) ease-out forwards;
-  }
-
-  .snackbar-popover-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--ni-8);
-  }
-
-  .snackbar-popover-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--ni-8);
   }
 </style>
