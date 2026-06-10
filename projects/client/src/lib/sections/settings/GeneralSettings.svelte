@@ -26,14 +26,11 @@
   .trakt-general-settings {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xxl);
-
+    gap: var(--gap-s);
     min-width: 0;
-    max-width: var(--ni-480);
 
     @include for-tablet-sm-and-below {
       padding: 0;
-      max-width: 100%;
     }
   }
 </style>
