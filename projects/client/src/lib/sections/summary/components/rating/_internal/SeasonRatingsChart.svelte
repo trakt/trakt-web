@@ -90,8 +90,8 @@
   >
     <defs>
       <linearGradient id="seasonRatingsArea" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="0%" stop-color="var(--color-accent)" stop-opacity="0.35" />
-        <stop offset="100%" stop-color="var(--color-accent)" stop-opacity="0" />
+        <stop offset="0%" stop-color="var(--color-accent)" stop-opacity="0.55" />
+        <stop offset="100%" stop-color="var(--color-accent)" stop-opacity="0.05" />
       </linearGradient>
     </defs>
 
@@ -110,7 +110,7 @@
 
     {#each points as p (p.season)}
       <g class="point" transform={`translate(${toX(p.season)}, ${toY(p.rating)})`}>
-        <circle r="4" />
+        <circle r="5" />
         <text class="point-label tag" y="-8" text-anchor="middle">
           {p.rating}%
         </text>
@@ -166,10 +166,10 @@
   }
 
   .grid-line {
-    stroke: var(--color-border);
+    stroke: var(--color-text-secondary);
     stroke-width: 1;
-    stroke-dasharray: 2 4;
-    opacity: 0.5;
+    stroke-dasharray: 2 3;
+    opacity: 0.35;
   }
 
   .area {
@@ -179,13 +179,13 @@
   .line {
     fill: none;
     stroke: var(--color-accent);
-    stroke-width: 2;
+    stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
 
   .point circle {
-    fill: var(--color-card-background);
+    fill: var(--color-text-primary);
     stroke: var(--color-accent);
     stroke-width: 2;
   }
@@ -193,10 +193,12 @@
   .point-label {
     fill: var(--color-text-primary);
     font-size: var(--font-size-text-small);
+    font-weight: 700;
   }
 
   .axis-label {
-    fill: var(--color-text-secondary);
+    fill: var(--color-text-primary);
     font-size: var(--font-size-text-small);
+    font-weight: 600;
   }
 </style>
