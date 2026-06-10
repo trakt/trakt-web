@@ -90,8 +90,8 @@
   >
     <defs>
       <linearGradient id="seasonRatingsArea" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="0%" stop-color="var(--color-accent)" stop-opacity="0.55" />
-        <stop offset="100%" stop-color="var(--color-accent)" stop-opacity="0.05" />
+        <stop offset="0%" stop-color="var(--color-text-emphasis)" stop-opacity="0.55" />
+        <stop offset="100%" stop-color="var(--color-text-emphasis)" stop-opacity="0.05" />
       </linearGradient>
     </defs>
 
@@ -178,7 +178,7 @@
 
   .line {
     fill: none;
-    stroke: var(--color-accent);
+    stroke: var(--color-text-emphasis);
     stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -186,7 +186,7 @@
 
   .point circle {
     fill: var(--color-text-primary);
-    stroke: var(--color-accent);
+    stroke: var(--color-text-emphasis);
     stroke-width: 2;
   }
 
