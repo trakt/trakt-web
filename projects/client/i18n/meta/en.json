@@ -2486,6 +2486,32 @@
         }
       }
     },
+    "button_text_approve_follow_request": {
+      "default": "Approve Request",
+      "description": "Text for the button that approves an incoming follow request."
+    },
+    "button_label_approve_follow_request": {
+      "default": "Approve follow request from {username}",
+      "description": "Aria-label for the button that approves an incoming follow request.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_reject_follow_request": {
+      "default": "Reject Request",
+      "description": "Text for the button that rejects an incoming follow request."
+    },
+    "button_label_reject_follow_request": {
+      "default": "Reject follow request from {username}",
+      "description": "Aria-label for the button that rejects an incoming follow request.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
     "warning_prompt_unfollow_user": {
       "default": "Are you sure you want to unfollow {username}?",
       "description": "Warning prompt shown when a user tries to unfollow a profile.",
@@ -2574,6 +2600,10 @@
     "list_placeholder_following": {
       "default": "There is no one here (yet).",
       "description": "Placeholder text shown when there are no profiles followed by the user."
+    },
+    "list_placeholder_follow_requests": {
+      "default": "There are no follow requests.",
+      "description": "Placeholder text shown when there are no incoming follow requests."
     },
     "button_label_read_more": {
       "default": "Read more",
@@ -3625,6 +3655,14 @@
     "button_text_followers": {
       "default": "Followers",
       "description": "Aria-label for the button that allows users to toggle the social list to view who their followers are."
+    },
+    "button_label_follow_requests": {
+      "default": "Follow requests",
+      "description": "Aria-label for the button that allows users to toggle the social list to view incoming follow requests."
+    },
+    "button_text_follow_requests": {
+      "default": "Requests",
+      "description": "Text for the button that allows users to toggle the social list to view incoming follow requests."
     },
     "button_label_dismiss": {
       "default": "Dismiss",
@@ -5710,6 +5748,24 @@
     "text_info_follow_request": {
       "default": "Follow request has been sent.",
       "description": "Text shown when a follow request has been sent to another user."
+    },
+    "text_info_follow_request_approved": {
+      "default": "Approved follow request from {username}.",
+      "description": "Text shown when a user approves an incoming follow request.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "text_info_follow_request_rejected": {
+      "default": "Rejected follow request from {username}.",
+      "description": "Text shown when a user rejects an incoming follow request.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
     },
     "text_info_following": {
       "default": "You are now following {username}.",

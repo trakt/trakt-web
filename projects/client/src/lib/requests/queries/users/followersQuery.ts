@@ -3,6 +3,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { mapToUserProfile } from '../../_internal/mapToUserProfile.ts';
+import { InvalidateAction } from '../../models/InvalidateAction.ts';
 import { UserProfileSchema } from '../../models/UserProfile.ts';
 
 type FollowersParams = { slug: string } & ApiParams;
@@ -23,7 +24,7 @@ const followersRequest = (
 
 export const followersQuery = defineQuery({
   key: 'followers',
-  invalidations: [],
+  invalidations: [InvalidateAction.User.Follow],
   dependencies: (
     params: FollowersParams,
   ) => [params.slug],

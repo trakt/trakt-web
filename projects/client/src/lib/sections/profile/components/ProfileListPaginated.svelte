@@ -1,7 +1,8 @@
 <script lang="ts">
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
+  import { getProfileSocialPlaceholder } from "../_internal/getProfileSocialPlaceholder";
+  import type { ProfileSocialListType } from "../models/ProfileSocialListType";
   import { useFollowing } from "../stores/useFollowing";
   import ProfileCard from "./ProfileCard.svelte";
 
@@ -10,16 +11,12 @@
     type,
   }: {
     slug: string;
-    type: "following" | "followers";
+    type: ProfileSocialListType;
   } = $props();
 
   const { profiles, isLoading } = $derived(useFollowing(slug, type));
 
-  const placeholder = $derived(
-    type === "following"
-      ? m.list_placeholder_following()
-      : m.list_placeholder_followers(),
-  );
+  const placeholder = $derived(getProfileSocialPlaceholder(type));
 </script>
 
 <GridList

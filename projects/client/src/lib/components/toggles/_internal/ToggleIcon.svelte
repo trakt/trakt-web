@@ -53,6 +53,10 @@
   <FollowersIcon />
 {/if}
 
+{#if option.value === "requests"}
+  <HourglassIcon />
+{/if}
+
 {#if option.value === "newest"}
   <RecentIcon />
 {/if}
