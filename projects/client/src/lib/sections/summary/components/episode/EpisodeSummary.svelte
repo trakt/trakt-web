@@ -5,6 +5,10 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import type { Snippet } from "svelte";
+  import {
+    SummaryDrawers,
+    summaryDrawerNavigation,
+  } from "../../_internal/summaryDrawerNavigation";
   import EpisodeTitle from "../_internal/EpisodeTitle.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
@@ -42,6 +46,9 @@
   const { ratings } = $derived(
     useMediaMetaInfo({ type, episode, media: show }),
   );
+
+  const { buildDrawerLink } = summaryDrawerNavigation();
+  const ratingsDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Ratings));
 </script>
 
 {#snippet tags()}
@@ -66,7 +73,11 @@
   <SummaryHeader {title}>
     <EpisodeTitle {episode} {show} {showIntl} />
     <SummaryTitle {title} {crew} {type} {episode} media={show} />
-    <RatingList ratings={$ratings} entry={episode} />
+    <RatingList
+      ratings={$ratings}
+      entry={episode}
+      drilldown={ratingsDrawerLink}
+    />
   </SummaryHeader>
 
   <Spoiler media={episode} {show} {type}>

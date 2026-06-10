@@ -5,6 +5,10 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import { useWatchCount } from "$lib/stores/useWatchCount";
+  import {
+    SummaryDrawers,
+    summaryDrawerNavigation,
+  } from "../../_internal/summaryDrawerNavigation";
   import SummaryCover from "../_internal/SummaryCover.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
@@ -38,6 +42,9 @@
   const { ratings } = $derived(useMediaMetaInfo(target));
   const { isDropped } = $derived(useIsDropped(media));
   const { isStarted } = $derived(useIsStarted(target));
+
+  const { buildDrawerLink } = summaryDrawerNavigation();
+  const ratingsDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Ratings));
 
   const posterUrl = $derived(streamOn?.preferred?.link ?? media.trailer);
 </script>
@@ -74,7 +81,11 @@
   <div class="trakt-summary-main-content">
     <SummaryHeader {title}>
       <SummaryTitle {title} {crew} {...target} />
-      <RatingList ratings={$ratings} entry={media} />
+      <RatingList
+        ratings={$ratings}
+        entry={media}
+        drilldown={ratingsDrawerLink}
+      />
     </SummaryHeader>
 
     <Spoiler {media} {type}>

@@ -4,6 +4,10 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
+  import {
+    SummaryDrawers,
+    summaryDrawerNavigation,
+  } from "../../../_internal/summaryDrawerNavigation";
   import EpisodeTitle from "../../_internal/EpisodeTitle.svelte";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
@@ -37,6 +41,9 @@
     useMediaMetaInfo({ type, episode, media: show }),
   );
 
+  const { buildDrawerLink } = summaryDrawerNavigation();
+  const ratingsDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Ratings));
+
   const { isRateable } = $derived(
     useIsRateable({ type, media: episode, show }),
   );
@@ -64,7 +71,11 @@
   {/snippet}
 
   {#snippet meta()}
-    <RatingList ratings={$ratings} entry={episode} />
+    <RatingList
+      ratings={$ratings}
+      entry={episode}
+      drilldown={ratingsDrawerLink}
+    />
     <EpisodeTitle {episode} {show} {showIntl} />
     <SummaryTitle {title} {type} {crew} media={show} {episode} />
 

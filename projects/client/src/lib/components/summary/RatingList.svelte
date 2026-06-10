@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import { getLocale } from "$lib/features/i18n";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
@@ -11,6 +12,7 @@
   } from "$lib/utils/formatting/number/toRottenTomatoRating";
   import { toTraktRating } from "$lib/utils/formatting/number/toTraktRating";
   import { toVotesBasedRating } from "$lib/utils/formatting/number/toVotesBasedRating";
+  import ActionButton from "../buttons/ActionButton.svelte";
   import PopcornIcon from "../icons/PopcornIcon.svelte";
   import RatingIcon from "../icons/RatingIcon.svelte";
   import RottenIcon from "../icons/RottenIcon.svelte";
@@ -19,16 +21,26 @@
   import RatingItem from "./RatingItem.svelte";
   import { getDisplayableRatings } from "./_internal/getDisplayableRatings";
 
+  type TraktRatingDrilldown = {
+    href: string;
+    noscroll: boolean;
+    replacestate: boolean;
+  };
+
   type RatingListProps = {
     i18n?: RatingIntl;
     ratings: MediaRating;
     entry: MediaEntry | EpisodeEntry;
+    drilldown?: TraktRatingDrilldown;
+    variant?: "all" | "external";
   };
 
   const {
     i18n = RatingIntlProvider,
     ratings,
     entry,
+    drilldown,
+    variant = "all",
   }: RatingListProps = $props();
 
   const { trakt, imdb, rotten } = $derived(
@@ -40,7 +52,7 @@
   );
 </script>
 
-<div class="trakt-summary-ratings">
+{#snippet traktItem()}
   <RatingItem
     rating={trakt?.rating && toTraktRating(trakt.rating, getLocale())}
   >
@@ -49,6 +61,12 @@
       {i18n.voteText(trakt?.votes ?? 0)}
     {/snippet}
   </RatingItem>
+{/snippet}
+
+<div class="trakt-summary-ratings">
+  {#if variant === "all"}
+    {@render traktItem()}
+  {/if}
 
   <RatingItem rating={imdb?.rating} url={imdb?.url}>
     <IMDBIcon style={toVotesBasedRating(imdb?.votes)} />
@@ -72,6 +90,20 @@
       {/snippet}
     </RatingItem>
   {/if}
+
+  {#if drilldown}
+    <ActionButton
+      classList="trakt-ratings-drilldown-button"
+      href={drilldown.href}
+      noscroll={drilldown.noscroll}
+      replacestate={drilldown.replacestate}
+      label={i18n.viewBreakdownLabel()}
+      style="ghost"
+      size="small"
+    >
+      <CaretRightIcon />
+    </ActionButton>
+  {/if}
 </div>
 
 <style lang="scss">
@@ -81,6 +113,13 @@
     display: flex;
     align-items: center;
     gap: var(--gap-m);
+
+    :global(.trakt-ratings-drilldown-button) {
+      :global(svg) {
+        width: var(--ni-20);
+        height: var(--ni-20);
+      }
+    }
 
     @include for-mobile() {
       gap: var(--gap-s);

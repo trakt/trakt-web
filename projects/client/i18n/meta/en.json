@@ -2241,6 +2241,31 @@
       "default": "Ratings",
       "description": "Header for the filter that allows users to select a rating."
     },
+    "header_ratings_trakt": {
+      "default": "Trakt Rating",
+      "description": "Section header in the ratings breakdown drawer above the Trakt rating distribution card."
+    },
+    "header_ratings_official": {
+      "default": "Official Ratings",
+      "description": "Section header in the ratings breakdown drawer for the row of official rating sources (IMDb, Rotten Tomatoes critics and audience)."
+    },
+    "text_ratings_votes": {
+      "default": "{count} votes",
+      "description": "Vote count text shown under the Trakt rating in the ratings breakdown drawer.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "text_ratings_no_data": {
+      "default": "No ratings yet.",
+      "description": "Empty-state text shown in the ratings breakdown drawer when no rating data is available for the title."
+    },
+    "button_label_view_ratings_breakdown": {
+      "default": "View ratings breakdown",
+      "description": "Aria-label for the Trakt rating in the summary header that opens the ratings breakdown drawer."
+    },
     "button_label_view_all_items_in": {
       "default": "View all items in \"{title}\"",
       "description": "Aria-label for the button that allows users to view all items in a specific category or list.",
