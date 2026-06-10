@@ -19,6 +19,8 @@
   // Flip the tooltip below the point when it's near the plot top, so it isn't
   // clipped by the chart's container.
   const TOOLTIP_FLIP_THRESHOLD = 52;
+  // Vertical space reserved under the plot for x-axis tick labels.
+  const LABEL_BAND = 18;
 
   const {
     data,
@@ -26,6 +28,9 @@
     seriesIndex = 0,
     color,
     showArea = false,
+    baseline,
+    showDots = false,
+    tickLabels,
     fillColor,
     dotColor,
     dotHaloColor,
@@ -48,9 +53,12 @@
   const resolvedHalo = $derived(dotHaloColor ?? "var(--color-card-background)");
 
   const margin = $derived(Math.max($dotRadius + 3, 5));
+  const labelBand = $derived(tickLabels ? LABEL_BAND : 0);
   const width = $derived($observedWidth);
   const height$ = $derived($observedHeight);
   const innerWidth = $derived(Math.max(width - margin * 2, 0));
+  // Bottom of the plotting area, lifted above the tick-label band.
+  const plotBottom = $derived(height$ - margin - labelBand);
 
   const values = $derived(data.map((d) => d.value));
   const hasPlot = $derived(width > 0 && height$ > 0 && data.length > 0);
@@ -58,12 +66,20 @@
   const yScale = $derived.by(() => {
     const dataMin = Math.min(...values);
     const dataMax = Math.max(...values);
-    const min = Math.min(dataMin, 0);
+    const floor = baseline ?? Math.min(dataMin, 0);
+    const top = Math.max(dataMax, floor);
     // Flat-span guard: a zero-height domain divides by zero and amplifies
     // float jitter into a jumping baseline; pad it to a unit span.
-    const max = min === Math.max(dataMax, 0) ? min + 1 : Math.max(dataMax, 0);
-    return scaleLinear().domain([min, max]).range([height$ - margin, margin]);
+    const ceil = floor === top ? floor + 1 : top;
+    return scaleLinear().domain([floor, ceil]).range([plotBottom, margin]);
   });
+
+  const ticks = $derived(
+    (tickLabels ?? []).map((text, index) => ({
+      text,
+      x: points[index]?.x ?? margin,
+    })).filter((tick) => tick.text !== ""),
+  );
 
   const xScale = $derived(
     scalePoint<number>()
@@ -88,12 +104,14 @@
     }));
   });
 
-  const baseline = $derived(
-    Math.min(Math.max(yScale(0), margin), height$ - margin),
+  const areaBaseY = $derived(
+    Math.min(Math.max(yScale(baseline ?? 0), margin), plotBottom),
   );
   const linePath = $derived(hasPlot ? buildLinePath(smoothPoints) : "");
   const areaPath = $derived(
-    hasPlot ? buildAreaPath({ points: smoothPoints, baseline }) : "",
+    hasPlot
+      ? buildAreaPath({ points: smoothPoints, baseline: areaBaseY })
+      : "",
   );
 
   const interaction = createPlotInteraction({
@@ -176,13 +194,36 @@
         style="d: path('{linePath}');"
       />
 
+      {#if showDots}
+        {#each points as point, index (data[index].label)}
+          <circle
+            class="data-dot"
+            cx={point.x}
+            cy={point.y}
+            r={$dotRadius * 0.8}
+            style="fill: {resolvedDot}; stroke: {resolvedHalo};"
+          />
+        {/each}
+      {/if}
+
+      {#each ticks as tick (tick.text)}
+        <text
+          class="line-tick"
+          x={tick.x}
+          y={height$ - margin}
+          text-anchor="middle"
+        >
+          {tick.text}
+        </text>
+      {/each}
+
       {#if activePoint}
         <line
           class="active-guide"
           x1={activePoint.x}
           y1={margin}
           x2={activePoint.x}
-          y2={height$ - margin}
+          y2={plotBottom}
         />
         <circle
           class="active-dot"
@@ -286,6 +327,17 @@
       both;
   }
 
+  .data-dot {
+    stroke-width: var(--viz-line-width);
+    animation: viz-fade-in var(--viz-enter-duration) var(--viz-enter-ease) both;
+  }
+
+  .line-tick {
+    fill: var(--viz-label);
+    font-size: var(--font-size-tag);
+    text-anchor: middle;
+  }
+
   .line-chart-tooltip {
     position: absolute;
     pointer-events: none;
@@ -333,7 +385,8 @@
   @media (prefers-reduced-motion: reduce) {
     .line-path,
     .area-path,
-    .active-dot {
+    .active-dot,
+    .data-dot {
       animation: none;
     }
   }

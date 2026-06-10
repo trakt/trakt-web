@@ -18,6 +18,16 @@ export type LineChartProps = {
   color?: string;
   /** Fill the area beneath the line (turns the primitive into an area chart). */
   showArea?: boolean;
+  /**
+   * Y-value the domain floors at and the area fills down to. Defaults to
+   * `min(0, dataMin)`. Set a non-zero floor (e.g. 60 for a 60-100 ratings
+   * range) to zoom the line into its meaningful band.
+   */
+  baseline?: number;
+  /** Render a static marker at every data point, not just the active one. */
+  showDots?: boolean;
+  /** Sparse labels rendered under the axis; index-aligned, empty strings skipped. */
+  tickLabels?: string[];
   /** CSS color for the area fill; defaults to a `color` vertical fade gradient. */
   fillColor?: string;
   /** CSS color for the hover/pin marker dot. Defaults to `color`. */
