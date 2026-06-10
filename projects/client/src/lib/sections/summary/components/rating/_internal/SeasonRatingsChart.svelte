@@ -9,15 +9,18 @@
 
   const { seasons }: Props = $props();
 
-  const points: SeasonPoint[] = $derived(
-    seasons
-      .filter((s) => s.number > 0 && s.rating != null)
+  const points: SeasonPoint[] = $derived((() => {
+    const now = new Date();
+    return seasons
+      .filter((s) =>
+        s.number > 0 && s.rating != null && s.airDate <= now
+      )
       .map((s) => ({
         season: s.number,
         rating: Math.round((s.rating ?? 0) * 100),
       }))
-      .sort((a, b) => a.season - b.season),
-  );
+      .sort((a, b) => a.season - b.season);
+  })());
 
   const width = 480;
   const height = 140;
