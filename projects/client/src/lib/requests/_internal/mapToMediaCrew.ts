@@ -6,11 +6,16 @@ import type {
 import type { CastResponse, CrewResponse, PeopleResponse } from '@trakt/api';
 import { mapToHeadshot } from './mapToHeadshot.ts';
 
+type PeopleResponseWithGuestStars = PeopleResponse & {
+  guest_stars?: CastResponse[] | null;
+};
+
 export const EMPTY_CREW: Readonly<MediaCrew> = {
   directors: [],
   writers: [],
   creators: [],
   cast: [],
+  guestStars: [],
 };
 
 function toMember(response: CrewResponse | CastResponse) {
@@ -46,7 +51,7 @@ function toCastMember(
 }
 
 export function mapToMediaCrew(
-  response: PeopleResponse,
+  response: PeopleResponseWithGuestStars,
 ): MediaCrew {
   return {
     directors: (response.crew?.directing ?? [])
@@ -56,6 +61,8 @@ export function mapToMediaCrew(
     creators: (response.crew?.['created by'] ?? [])
       .map(toCrewMember),
     cast: (response.cast ?? [])
+      .map(toCastMember),
+    guestStars: (response.guest_stars ?? [])
       .map(toCastMember),
   };
 }

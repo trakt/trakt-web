@@ -25,15 +25,34 @@ describe('mapToMediaCrew', () => {
           },
         },
       ],
+      guest_stars: [
+        {
+          character: 'Guest Role',
+          characters: ['Guest Role'],
+          person: {
+            name: 'Guest Actor',
+            ids: { slug: 'guest-actor' },
+            images: {},
+          },
+        },
+      ],
     } as unknown as PeopleResponse;
+    const crew = mapToMediaCrew(response);
 
-    expect(mapToMediaCrew(response).cast).toMatchObject([
+    expect(crew.cast).toMatchObject([
       {
         characterName: 'Primary Role',
         characters: ['Primary Role', 'Secondary Role'],
       },
       {
         characterName: '',
+      },
+    ]);
+    expect(crew.guestStars).toMatchObject([
+      {
+        characterName: 'Guest Role',
+        key: 'guest-actor',
+        name: 'Guest Actor',
       },
     ]);
   });
