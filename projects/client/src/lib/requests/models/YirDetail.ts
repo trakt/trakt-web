@@ -118,6 +118,12 @@ export const YirDetailSchema = z.object({
     shows: YirTrendItemSchema.array(),
     movies: YirTrendItemSchema.array(),
   }).nullish(),
+  // Popular titles the user hasn't watched yet, recommended in the closing
+  // "thanks" section.
+  thanks: z.object({
+    shows: MediaEntrySchema.array(),
+    movies: MediaEntrySchema.array(),
+  }).nullish(),
 });
 
 export type YirDetail = z.infer<typeof YirDetailSchema>;
