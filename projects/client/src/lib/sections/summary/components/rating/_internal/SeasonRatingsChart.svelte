@@ -125,9 +125,13 @@
     <path class="line" d={linePath} />
 
     {#each points as p (p.season)}
+      {@const isPeak = p.season === peak?.season}
+      {@const isTrough = p.season === trough?.season}
       <g
         class="point"
         class:permanent={permanentSeasons.has(p.season)}
+        class:peak={isPeak}
+        class:trough={isTrough}
         transform={`translate(${toX(p.season)}, ${toY(p.rating)})`}
       >
         <!-- Transparent hit target gives the tiny visible dot a wider
@@ -137,6 +141,17 @@
         <text class="point-label tag" y="-8" text-anchor="middle">
           {p.rating}%
         </text>
+        {#if isPeak || isTrough}
+          <text
+            class="point-tag tag"
+            class:peak-tag={isPeak}
+            class:trough-tag={isTrough}
+            y="-22"
+            text-anchor="middle"
+          >
+            {isPeak ? "▲ PEAK" : "▼ LOW"}
+          </text>
+        {/if}
       </g>
     {/each}
 
@@ -230,6 +245,31 @@
   .point:hover .point-label,
   .point:focus-within .point-label {
     opacity: 1;
+  }
+
+  // Peak / low dots get a colored ring so they're identifiable on long
+  // shows where many points cluster together.
+  .point.peak .dot {
+    stroke: var(--color-background-trend-up-background-tag);
+  }
+
+  .point.trough .dot {
+    stroke: var(--color-background-trend-down-background-tag);
+  }
+
+  .point-tag {
+    font-size: calc(var(--font-size-text-small) * 0.85);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+  }
+
+  .peak-tag {
+    fill: var(--color-background-trend-up-background-tag);
+  }
+
+  .trough-tag {
+    fill: var(--color-background-trend-down-background-tag);
   }
 
   .axis-label {
