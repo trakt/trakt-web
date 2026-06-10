@@ -1,28 +1,26 @@
 <script lang="ts">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
-  import { lineClamp } from "$lib/components/text/lineClamp";
-  import Switch from "$lib/components/toggles/Switch.svelte";
+  import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
+  import GlobeIcon from "$lib/components/icons/GlobeIcon.svelte";
+  import LockIcon from "$lib/components/icons/LockIcon.svelte";
+  import NotesIcon from "$lib/components/icons/NotesIcon.svelte";
+  import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
+  import StarIcon from "$lib/components/icons/StarIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
   import { formatLocalDate } from "$lib/utils/date/formatLocalDate";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
-  import ManageSubscriptionButton from "./components/ManageSubscriptionButton.svelte";
-  import { getSwitchInnerText } from "./getSwitchInnerText";
-  import LargeSettingsRow from "./LargeSettingsRow.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import SettingInputDrawer from "./SettingInputDrawer.svelte";
-  import SettingsBlock from "./SettingsBlock.svelte";
-  import SettingsRow from "./SettingsRow.svelte";
+  import SettingsGroupCard from "./SettingsGroupCard.svelte";
+  import SettingsNavRow from "./SettingsNavRow.svelte";
+  import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
+  import SettingsToggleRow from "./SettingsToggleRow.svelte";
   import { useSettings } from "./useSettings";
-
-  const aboutLineClamp = 3;
 
   const { user } = useUser();
   const { profile, email, isSavingSettings } = useSettings();
-
-  const innerText = $derived(getSwitchInnerText($profile.isPrivate, "yes-no"));
 
   const promptMap = $derived({
     name: {
@@ -114,104 +112,118 @@
 
   type ProfileField = keyof typeof promptMap;
   let activeField = $state<ProfileField>();
+
+  const birthdayLabel = $derived(
+    $profile.birthday
+      ? toHumanDay({ date: $profile.birthday, locale: getLocale() })
+      : "",
+  );
 </script>
 
-{#snippet renameField(field: ProfileField)}
-  <ActionButton
-    style="ghost"
-    label={promptMap[field].label}
-    onclick={() => (activeField = field)}
-    disabled={$isSavingSettings}
-    size="small"
-  >
-    <RenameIcon />
-  </ActionButton>
-{/snippet}
-
-<SettingsBlock
-  title={m.header_account_details()}
-  description={m.description_account_details()}
->
-  <SettingsRow title={m.text_avatar()}>
+<div class="profile-hero-card">
+  <div class="hero-avatar">
     <ProfileImage
       isEditable
-      --image-size="var(--ni-52)"
+      --image-size="var(--ni-56)"
       --border-width="var(--border-thickness-xs)"
       name={$user.name.first}
       src={$user.avatar.url}
       isVip={$user.isVip}
     />
-  </SettingsRow>
+  </div>
 
-  <SettingsRow title={m.text_display_name()}>
-    <p class="ellipsis">{$profile.displayName}</p>
-    {#snippet action()}
-      {@render renameField("name")}
-    {/snippet}
-  </SettingsRow>
+  <div class="hero-info">
+    <p class="hero-name bold ellipsis">{$profile.displayName || $profile.username}</p>
+    {#if $profile.location}
+      <p class="hero-location">{$profile.location}</p>
+    {/if}
+  </div>
 
-  <SettingsRow title={m.text_username()}>
-    <p class="ellipsis">{$profile.username}</p>
-    {#snippet action()}
-      {@render renameField("username")}
-    {/snippet}
-  </SettingsRow>
+  {#if $user.isVip}
+    <span class="vip-badge">VIP</span>
+  {/if}
+</div>
+
+<SettingsSectionLabel title={m.header_account_details()} />
+
+<SettingsGroupCard>
+  <SettingsNavRow
+    title={m.text_display_name()}
+    value={$profile.displayName}
+    onclick={() => (activeField = "name")}
+    disabled={$isSavingSettings}
+  >
+    {#snippet icon()}<ProfileIcon />{/snippet}
+  </SettingsNavRow>
+
+  <SettingsNavRow
+    title={m.text_username()}
+    value={$profile.username ? `@${$profile.username}` : ""}
+    onclick={() => (activeField = "username")}
+    disabled={$isSavingSettings}
+  >
+    {#snippet icon()}<ProfileIcon />{/snippet}
+  </SettingsNavRow>
 
   {#if Boolean($email.value)}
-    <SettingsRow title={m.text_display_email()}>
-      <p class="ellipsis">{$email.value}</p>
-      {#snippet action()}
-        {@render renameField("email")}
-      {/snippet}
-    </SettingsRow>
+    <SettingsNavRow
+      title={m.text_display_email()}
+      value={$email.value ?? ""}
+      onclick={() => (activeField = "email")}
+      disabled={$isSavingSettings}
+    >
+      {#snippet icon()}<ProfileIcon />{/snippet}
+    </SettingsNavRow>
   {/if}
 
-  <SettingsRow title={m.text_birthday()}>
-    <p class="ellipsis">
-      {$profile.birthday
-        ? toHumanDay({ date: $profile.birthday, locale: getLocale() })
-        : ""}
-    </p>
-    {#snippet action()}
-      {@render renameField("birthday")}
-    {/snippet}
-  </SettingsRow>
+  <SettingsNavRow
+    title={m.text_birthday()}
+    value={birthdayLabel}
+    onclick={() => (activeField = "birthday")}
+    disabled={$isSavingSettings}
+  >
+    {#snippet icon()}<CalendarIcon />{/snippet}
+  </SettingsNavRow>
 
-  <SettingsRow title={m.text_location()}>
-    <p class="ellipsis">{$profile.location}</p>
-    {#snippet action()}
-      {@render renameField("location")}
-    {/snippet}
-  </SettingsRow>
+  <SettingsNavRow
+    title={m.text_location()}
+    value={$profile.location}
+    onclick={() => (activeField = "location")}
+    disabled={$isSavingSettings}
+  >
+    {#snippet icon()}<GlobeIcon />{/snippet}
+  </SettingsNavRow>
 
-  <LargeSettingsRow title={m.text_about()}>
-    {#snippet action()}
-      {@render renameField("about")}
-    {/snippet}
-    <p
-      class="trakt-about-text"
-      style="--line-clamp-lines: {aboutLineClamp}"
-      use:lineClamp={{ lines: aboutLineClamp }}
-    >
-      {$profile.about}
-    </p>
-  </LargeSettingsRow>
+  <SettingsNavRow
+    title={m.text_about()}
+    description={$profile.about}
+    onclick={() => (activeField = "about")}
+    disabled={$isSavingSettings}
+  >
+    {#snippet icon()}<NotesIcon />{/snippet}
+  </SettingsNavRow>
+</SettingsGroupCard>
 
-  <ManageSubscriptionButton />
+<SettingsSectionLabel title={m.header_settings_privacy()} />
 
-  <SettingsRow title={m.text_private_account()}>
-    {#snippet action()}
-      <Switch
-        {innerText}
-        color="purple"
-        label={m.switch_label_private()}
-        checked={$profile.isPrivate}
-        onclick={() => $profile.set({ private: !$profile.isPrivate })}
-        disabled={$isSavingSettings}
-      />
-    {/snippet}
-  </SettingsRow>
-</SettingsBlock>
+<SettingsGroupCard>
+  <SettingsToggleRow
+    title={m.text_private_account()}
+    label={m.switch_label_private()}
+    checked={$profile.isPrivate}
+    onclick={() => $profile.set({ private: !$profile.isPrivate })}
+    disabled={$isSavingSettings}
+  >
+    {#snippet icon()}<LockIcon />{/snippet}
+  </SettingsToggleRow>
+
+  <SettingsNavRow
+    title={m.button_text_manage_subscription()}
+    href={UrlBuilder.vip()}
+  >
+    {#snippet icon()}<StarIcon fill="none" />{/snippet}
+  </SettingsNavRow>
+</SettingsGroupCard>
 
 {#if activeField}
   <SettingInputDrawer
@@ -221,14 +233,44 @@
   />
 {/if}
 
-<style>
-  /* FIXME: find out why the initial values set in lineClamp are not applied */
-  .trakt-about-text {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: var(--line-clamp-lines);
+<style lang="scss">
+  .profile-hero-card {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-m);
+    padding: var(--gap-m);
+    border-radius: var(--border-radius-l);
+    background: var(--color-card-background);
+    max-width: 600px;
+    box-sizing: border-box;
+  }
 
-    display: -webkit-box;
-    overflow: hidden;
-    line-clamp: var(--line-clamp-lines);
+  .hero-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+  }
+
+  .hero-name {
+    font-size: var(--font-size-separator);
+    color: var(--color-text-primary);
+  }
+
+  .hero-location {
+    font-size: var(--font-size-text-small);
+    color: var(--color-text-secondary);
+  }
+
+  .vip-badge {
+    flex-shrink: 0;
+    font-size: var(--ni-18);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--color-foreground-vip-badge);
+    background: var(--color-background-vip-badge);
+    padding: var(--gap-xs) var(--gap-s);
+    border-radius: 9999px;
   }
 </style>

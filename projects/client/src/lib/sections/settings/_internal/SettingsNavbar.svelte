@@ -92,14 +92,10 @@
     }
 
     :global(.trakt-link.trakt-link-active) {
-      background-color: color-mix(
-        in srgb,
-        var(--color-link-active) 14%,
-        transparent
-      );
+      background-color: var(--purple-500);
 
       :global(span.title) {
-        color: var(--color-link-active);
+        color: var(--color-foreground);
       }
     }
 
