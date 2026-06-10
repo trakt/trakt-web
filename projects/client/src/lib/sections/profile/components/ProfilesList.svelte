@@ -1,13 +1,14 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { useToggler } from "$lib/components/toggles/useToggler";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import * as m from "$lib/features/i18n/messages.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { getProfileSocialPlaceholder } from "../_internal/getProfileSocialPlaceholder";
   import { useFollowing } from "../stores/useFollowing";
+  import { useProfileSocialToggler } from "../stores/useProfileSocialToggler";
   import ProfileItem from "./ProfileItem.svelte";
 
   const {
@@ -16,14 +17,10 @@
     slug: string;
   } = $props();
 
-  const { current, set, options } = useToggler("social");
+  const { current, set, options } = $derived(useProfileSocialToggler(slug));
   const { profiles, isLoading } = $derived(useFollowing(slug, $current.value));
 
-  const placeholder = $derived(
-    $current.value === "following"
-      ? m.list_placeholder_following()
-      : m.list_placeholder_followers(),
-  );
+  const placeholder = $derived(getProfileSocialPlaceholder($current.value));
 
   const { isMe } = $derived(useIsMe(slug));
 </script>
@@ -63,7 +60,7 @@
     {/snippet}
 
     {#snippet actions()}
-      <Toggler value={$current.value} onChange={set} {options} />
+      <Toggler value={$current.value} onChange={set} options={$options} />
     {/snippet}
   </SectionList>
 </div>

@@ -13,7 +13,7 @@ export type TogglerId =
   | 'library';
 
 type DiscoverToggleType = DiscoverMode;
-type SocialToggleType = 'following' | 'followers';
+type SocialToggleType = 'following' | 'followers' | 'requests';
 type CommentToggleType = CommentSortType;
 type TriviaToggleType = 'spoilers' | 'no-spoilers';
 type ProgressToggleType = 'in-progress' | 'dropped' | 'completed';
@@ -51,6 +51,11 @@ const social: ToggleDefinition<'social'> = {
       value: 'followers',
       text: m.button_text_followers,
       label: m.button_label_followers,
+    },
+    {
+      value: 'requests',
+      text: m.button_text_follow_requests,
+      label: m.button_label_follow_requests,
     },
   ],
 };

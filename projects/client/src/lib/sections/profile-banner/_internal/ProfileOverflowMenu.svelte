@@ -3,7 +3,10 @@
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import BlockIcon from "$lib/components/icons/BlockIcon.svelte";
+  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
+  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import FollowIcon from "$lib/components/icons/FollowIcon.svelte";
+  import Snackbar from "$lib/components/snackbar/Snackbar.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -19,6 +22,9 @@
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
+  let snackbarOpen = $state(false);
+  let snackbarMessage = $state("");
+
   const { blocked } = useUser();
   const isBlocked = $derived($blocked.has(slug));
 
@@ -27,10 +33,13 @@
 
   const {
     isRequestingFollow,
+    incomingFollowRequest,
     followStatus,
     followUser,
     unfollowUser,
     cancelFollowRequest,
+    approveIncomingFollowRequest,
+    denyIncomingFollowRequest,
   } = $derived(useFollowUserRequest(slug));
 
   const userDisplayName = $derived(toDisplayableName(profile));
@@ -94,6 +103,40 @@
     disabled: $isRequestingBlock,
     ...events,
   });
+
+  const openSnackbar = (message: string) => {
+    snackbarMessage = message;
+    snackbarOpen = true;
+  };
+
+  const closeSnackbar = () => {
+    snackbarOpen = false;
+  };
+
+  const handleFollowRequest = async (
+    action: (requestId: number) => Promise<boolean>,
+    successMessage: (params: { username: string }) => string,
+  ) => {
+    const requestId = $incomingFollowRequest?.id;
+    if (requestId == null) return;
+
+    const succeeded = await action(requestId);
+    if (!succeeded) return;
+
+    openSnackbar(successMessage({ username: userDisplayName }));
+  };
+
+  const approveRequest = () =>
+    handleFollowRequest(
+      approveIncomingFollowRequest,
+      m.text_info_follow_request_approved,
+    );
+
+  const denyRequest = () =>
+    handleFollowRequest(
+      denyIncomingFollowRequest,
+      m.text_info_follow_request_rejected,
+    );
 </script>
 
 <PopupMenu
@@ -102,6 +145,39 @@
   size="normal"
 >
   {#snippet items()}
+    {#if $incomingFollowRequest}
+      <DropdownItem
+        style="flat"
+        color="default"
+        variant="secondary"
+        label={m.button_label_approve_follow_request({
+          username: userDisplayName,
+        })}
+        onclick={approveRequest}
+        disabled={$isRequestingFollow}
+      >
+        {m.button_text_approve_follow_request()}
+        {#snippet icon()}
+          <CheckIcon />
+        {/snippet}
+      </DropdownItem>
+      <DropdownItem
+        style="flat"
+        color="red"
+        variant="secondary"
+        label={m.button_label_reject_follow_request({
+          username: userDisplayName,
+        })}
+        onclick={denyRequest}
+        disabled={$isRequestingFollow}
+      >
+        {m.button_text_reject_follow_request()}
+        {#snippet icon()}
+          <CloseIcon />
+        {/snippet}
+      </DropdownItem>
+    {/if}
+
     {#if !isBlocked}
       <DropdownItem
         style="flat"
@@ -150,3 +226,10 @@
     <ModerateAction variant="secondary" />
   {/snippet}
 </PopupMenu>
+
+<Snackbar
+  open={snackbarOpen}
+  onDismiss={closeSnackbar}
+  title={m.button_label_follow_requests()}
+  message={snackbarMessage}
+/>
