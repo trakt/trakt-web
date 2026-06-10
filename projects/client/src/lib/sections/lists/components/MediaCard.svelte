@@ -155,10 +155,14 @@
     {@render content(media.poster.url.thumb)}
     <CardFooter {action}>
       <div class="trakt-card-credit-footer">
-        {@render tag?.()}
-        <p class="trakt-card-subtitle ellipsis">
+        <p class="trakt-card-title ellipsis">
           {rest.role}
         </p>
+        {#if tag}
+          <div class="trakt-card-subtitle">
+            {@render tag()}
+          </div>
+        {/if}
       </div>
     </CardFooter>
   </PortraitCard>
@@ -174,14 +178,12 @@
     }
   }
 
-  .trakt-card-credit-footer {
-    transform: scale(0.85);
-    transform-origin: bottom left;
-
-    transition: transform var(--transition-increment) ease-in-out;
-
-    @include for-mobile {
-      transform: scale(0.9);
+  .trakt-card-credit-footer .trakt-card-subtitle {
+    :global(p),
+    :global(.trakt-text-tag),
+    :global(.trakt-media-icon-tag) {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-text-small);
     }
   }
 </style>
