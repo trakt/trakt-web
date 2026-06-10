@@ -7,6 +7,7 @@
   import Yir2024GenresSection from "./_internal/Yir2024GenresSection.svelte";
   import Yir2024MostPlayedSection from "./_internal/Yir2024MostPlayedSection.svelte";
   import Yir2024PageInner from "./_internal/Yir2024PageInner.svelte";
+  import Yir2024PeopleSection from "./_internal/Yir2024PeopleSection.svelte";
   import Yir2024PlayCard from "./_internal/Yir2024PlayCard.svelte";
   import Yir2024RatedSection from "./_internal/Yir2024RatedSection.svelte";
   import Yir2024StatsSection from "./_internal/Yir2024StatsSection.svelte";
@@ -148,6 +149,10 @@
         />
       </Yir2024PageInner>
     {/if}
+
+    <Yir2024PageInner>
+      <Yir2024PeopleSection {slug} {year} />
+    </Yir2024PageInner>
 
     {#if detail.lastWatched}
       <Yir2024PageInner>

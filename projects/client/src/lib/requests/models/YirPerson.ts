@@ -6,6 +6,7 @@ const YirPersonTitleSchema = z.object({
   type: z.enum(['show', 'movie']),
   traktId: z.number(),
   episodeCount: z.number().optional(),
+  year: z.number().nullish(),
 });
 
 export const YirPersonSchema = z.object({
