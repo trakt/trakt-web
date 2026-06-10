@@ -185,6 +185,7 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'name': 'Steve Zahn',
     },
   ],
+  'guestStars': [],
   'directors': [
     {
       'key': 'rhiannon-preece-towey',
