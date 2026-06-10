@@ -70,6 +70,19 @@
       ? points.reduce((acc, p) => (p.rating < acc.rating ? p : acc))
       : null,
   );
+
+  // First, last, peak, and trough get permanent labels; the rest fade in on
+  // hover to avoid clutter on long-running shows.
+  const permanentSeasons = $derived(
+    new Set(
+      [
+        points.at(0)?.season,
+        points.at(-1)?.season,
+        peak?.season,
+        trough?.season,
+      ].filter((s): s is number => s != null),
+    ),
+  );
 </script>
 
 {#if points.length >= 2}
@@ -112,8 +125,15 @@
     <path class="line" d={linePath} />
 
     {#each points as p (p.season)}
-      <g class="point" transform={`translate(${toX(p.season)}, ${toY(p.rating)})`}>
-        <circle r="5" />
+      <g
+        class="point"
+        class:permanent={permanentSeasons.has(p.season)}
+        transform={`translate(${toX(p.season)}, ${toY(p.rating)})`}
+      >
+        <!-- Transparent hit target gives the tiny visible dot a wider
+             hover/tap area without affecting layout. -->
+        <circle class="hit" r="14" />
+        <circle class="dot" r="5" />
         <text class="point-label tag" y="-8" text-anchor="middle">
           {p.rating}%
         </text>
@@ -187,16 +207,29 @@
     stroke-linejoin: round;
   }
 
-  .point circle {
+  .point .dot {
     fill: var(--color-text-primary);
     stroke: var(--color-text-emphasis);
     stroke-width: 2;
+  }
+
+  .point .hit {
+    fill: transparent;
   }
 
   .point-label {
     fill: var(--color-text-primary);
     font-size: var(--font-size-text-small);
     font-weight: 700;
+    opacity: 0;
+    transition: opacity var(--transition-increment) ease-out;
+    pointer-events: none;
+  }
+
+  .point.permanent .point-label,
+  .point:hover .point-label,
+  .point:focus-within .point-label {
+    opacity: 1;
   }
 
   .axis-label {
