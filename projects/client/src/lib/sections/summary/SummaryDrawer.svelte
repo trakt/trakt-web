@@ -126,5 +126,5 @@
 {/if}
 
 {#if drawer === SummaryDrawers.Ratings}
-  <RatingsDrawer {...details} onClose={close} />
+  <RatingsDrawer {...details} {seasons} onClose={close} />
 {/if}
