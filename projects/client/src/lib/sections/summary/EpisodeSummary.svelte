@@ -37,6 +37,7 @@
   const currentSeasonOnly = $derived(
     seasons.filter((s) => s.number === episode.season),
   );
+  const actors = $derived([...crew.cast, ...crew.guestStars]);
 
   // The seasons drawer can switch seasons via the `season` search param
   // (set by the dropdown / poster links), independent of the episode's own
@@ -106,7 +107,7 @@
 
 <CastList
   title={m.list_title_actors()}
-  cast={crew.cast}
+  cast={actors}
   slug={show.slug}
   type="episode"
 />
