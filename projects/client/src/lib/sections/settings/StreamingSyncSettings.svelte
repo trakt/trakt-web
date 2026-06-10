@@ -3,7 +3,7 @@
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import ConnectionResultHandler from "./_internal/streaming-sync/ConnectionResultHandler.svelte";
   import DataSyncs from "./_internal/streaming-sync/DataSyncs.svelte";
-  import StreamingConnectionStatusBanner from "./_internal/streaming-sync/StreamingConnectionStatusBanner.svelte";
+  import StreamingConnectionStatusSnackbar from "./_internal/streaming-sync/StreamingConnectionStatusSnackbar.svelte";
   import StreamingServices from "./_internal/streaming-sync/StreamingServices.svelte";
   import StreamingSyncIntro from "./_internal/streaming-sync/StreamingSyncIntro.svelte";
 </script>
@@ -13,7 +13,7 @@
     <div class="trakt-streaming-sync-settings">
       <ConnectionResultHandler />
       <StreamingSyncIntro />
-      <StreamingConnectionStatusBanner />
+      <StreamingConnectionStatusSnackbar />
       <StreamingServices />
       <DataSyncs />
     </div>
