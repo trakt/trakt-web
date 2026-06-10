@@ -3,7 +3,7 @@ import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { MonthInReviewResponse } from '@trakt/api';
+import type { YearInReviewResponse } from '@trakt/api';
 import { z } from 'zod';
 import { type MediaEntry, MediaEntrySchema } from '../../models/MediaEntry.ts';
 
@@ -26,7 +26,7 @@ export const UserReviewSchema = z.object({
 export type UserReview = z.infer<typeof UserReviewSchema>;
 
 export function mapToFirstPlay(
-  response: MonthInReviewResponse,
+  response: YearInReviewResponse,
 ): MediaEntry | null {
   if (!response.first_watched) {
     return null;
@@ -38,7 +38,7 @@ export function mapToFirstPlay(
 }
 
 export function mapToUserReview(
-  response: MonthInReviewResponse,
+  response: YearInReviewResponse,
 ): UserReview {
   return {
     playCount: response.stats.all.play_counts.total,
