@@ -52,6 +52,30 @@ applyTo: '**'
   (e.g., use `replaceState: true` in SvelteKit's `goto` or the `replacestate`
   property).
 
+## Fetching all pages automatically
+
+When a caller needs ALL pages (not user-triggered pagination), use
+`useAllPagesInfiniteQuery` instead of `useInfiniteQuery`. It automatically calls
+`fetchNextPage()` after each page lands until `hasNextPage` is false, with a
+live QueryClient guard to prevent duplicate fetches across multiple observers.
+
+```ts
+import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
+
+const query = useAllPagesInfiniteQuery(
+  someListQuery({ slug, limit: 1000 }),
+);
+
+// query emits InfiniteQueryObserverResult — access all entries via:
+const entries = query.pipe(
+  map((q) => q.data?.pages.flatMap((p) => p.entries) ?? []),
+);
+```
+
+Use `useInfiniteQuery` only when pages are loaded on demand (e.g. "load more"
+button or scroll-based pagination). Never put manual `tap + fetchNextPage` logic
+on a query — use `useAllPagesInfiniteQuery` instead.
+
 ## Tooling (CRITICAL)
 
 - **Formatting**: NEVER run `prettier`. ALWAYS run `deno fmt`.
