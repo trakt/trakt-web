@@ -9,6 +9,7 @@
   import Yir2024PlayCard from "./_internal/Yir2024PlayCard.svelte";
   import Yir2024RatedSection from "./_internal/Yir2024RatedSection.svelte";
   import Yir2024StatsSection from "./_internal/Yir2024StatsSection.svelte";
+  import Yir2024ThanksSection from "./_internal/Yir2024ThanksSection.svelte";
   import Yir2024TopSection from "./_internal/Yir2024TopSection.svelte";
   import Yir2024TrendsSection from "./_internal/Yir2024TrendsSection.svelte";
 
@@ -135,13 +136,22 @@
       </Yir2024PageInner>
     {/if}
 
-    <p class="yir-2024-pending">More sections coming soon&hellip;</p>
-
     {#if detail.lastWatched}
       <Yir2024PageInner>
         <Yir2024PlayCard
           item={detail.lastWatched}
           playLabel={m.yir_2024_last_play()}
+          {year}
+        />
+      </Yir2024PageInner>
+    {/if}
+
+    {#if (detail.thanks?.shows.length ?? 0) > 0 || (detail.thanks?.movies
+      .length ?? 0) > 0}
+      <Yir2024PageInner>
+        <Yir2024ThanksSection
+          shows={detail.thanks?.shows ?? []}
+          movies={detail.thanks?.movies ?? []}
           {year}
         />
       </Yir2024PageInner>
@@ -156,6 +166,8 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   // Parent-driven vertical rhythm via --content-gap so children don't carry
   // margins for inter-section spacing.
   .yir-2024 {
@@ -169,13 +181,11 @@
     // Scoped to the 2024 template so the Spline Sans face only swaps in
     // here and the rest of the app keeps the global Roboto stack.
     font-family: "Spline Sans", Helvetica, Arial, sans-serif;
-  }
 
-  .yir-2024-pending {
-    margin: 0;
-    padding: var(--ni-20);
-    text-align: center;
-    color: var(--shade-500);
+    // Tighter section rhythm on phones.
+    @include for-mobile {
+      --content-gap: var(--ni-40);
+    }
   }
 
   .yir-2024-loading {

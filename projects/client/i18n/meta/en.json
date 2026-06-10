@@ -5089,6 +5089,30 @@
       "default": "Watched",
       "description": "Label on the chip marking a trending title the user has watched, on the 2024 Year in Review template."
     },
+    "yir_2024_thanks_intro": {
+      "default": "But most importantly…",
+      "description": "Lead-in above the large \"thanks!\" wordmark in the closing section of the 2024 Year in Review template."
+    },
+    "yir_2024_thanks_title": {
+      "default": "thanks!",
+      "description": "Large purple wordmark in the closing section of the 2024 Year in Review template."
+    },
+    "yir_2024_thanks_copy_directed": {
+      "default": "You did an epic job directing <b>{year}</b>. Here's to an even better sequel in <b>{nextYear}</b>.",
+      "description": "First paragraph of closing copy in the 2024 Year in Review template, thanking the user for their year. The <b> tags wrap the years as bold highlights — keep them around the years when translating.",
+      "variables": {
+        "year": {
+          "type": "number"
+        },
+        "nextYear": {
+          "type": "number"
+        }
+      }
+    },
+    "yir_2024_thanks_copy_recommend": {
+      "default": "Keep your journey going. Try watching one of these popular shows or movies.",
+      "description": "Second paragraph of closing copy in the 2024 Year in Review template, introducing the recommended titles below."
+    },
     "yir_2024_most_watched_networks": {
       "default": "Most watched networks",
       "description": "Section heading above the networks bubble chart on the 2024 Year in Review template."

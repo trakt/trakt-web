@@ -9,6 +9,7 @@ import type {
   YirTrendItem,
   YirWatchedItem,
 } from '../models/YirDetail.ts';
+import type { MediaEntry } from '../models/MediaEntry.ts';
 import { mapToMovieEntry } from './mapToMovieEntry.ts';
 import { mapToShowEntry } from './mapToShowEntry.ts';
 import { appendWebp } from '$lib/utils/url/appendWebp.ts';
@@ -96,6 +97,11 @@ type RawTrendMovie = {
   movie: MovieResponse;
 };
 
+type RawThanks = {
+  shows?: Array<{ show: ShowResponse }>;
+  movies?: Array<{ movie: MovieResponse }>;
+};
+
 type RawYirResponse = {
   stats: {
     all: RawStatsCategory & { lists_counts: RawStats };
@@ -126,6 +132,7 @@ type RawYirResponse = {
     shows: RawTrendShow[];
     movies: RawTrendMovie[];
   };
+  thanks?: RawThanks;
 };
 
 function mapStatsCategory(raw: RawStatsCategory): YirStatsCategory {
@@ -235,6 +242,15 @@ function mapTrendMovies(raw: RawTrendMovie[]): YirTrendItem[] {
   }));
 }
 
+function mapThanks(
+  raw: RawThanks,
+): { shows: MediaEntry[]; movies: MediaEntry[] } {
+  return {
+    shows: raw.shows?.map((item) => mapToShowEntry(item.show)) ?? [],
+    movies: raw.movies?.map((item) => mapToMovieEntry(item.movie)) ?? [],
+  };
+}
+
 export function mapToYirDetail(response: RawYirResponse): YirDetail {
   const { stats, images } = response;
 
@@ -275,5 +291,6 @@ export function mapToYirDetail(response: RawYirResponse): YirDetail {
       shows: mapTrendShows(response.trends?.shows ?? []),
       movies: mapTrendMovies(response.trends?.movies ?? []),
     },
+    thanks: mapThanks(response.thanks ?? {}),
   };
 }
