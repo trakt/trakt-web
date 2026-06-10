@@ -14,8 +14,16 @@
   import { fade } from "svelte/transition";
   import CreditMemberItem from "../../../lists/components/CreditMemberItem.svelte";
   import type { CreditMember } from "../../../lists/models/CreditMember";
+  import CreditGroupHeader from "./_internal/CreditGroupHeader.svelte";
 
   type CreditsType = "cast" | "crew";
+  type CreditGroupId = "main-cast" | "supporting-cast" | "crew";
+  type CreditGroup = {
+    id: CreditGroupId;
+    label: string;
+    members: CreditMember[];
+    showHeader: boolean;
+  };
 
   const creditOptions: ToggleOption<CreditsType>[] = [
     {
@@ -122,9 +130,32 @@
   };
   const toCreditMemberKey = (member: CreditMember) =>
     `${member.key}-${member.positions ? "cast" : "crew"}`;
+  const toCreditGroupHeaderId = (group: CreditGroup) =>
+    `cast-list-${type}-${isSearching ? "search" : creditsType}-${group.id}-header`;
 
-  const castMembers = $derived(
+  const filterCreditMembers = (members: CreditMember[]) => {
+    if (!isSearching) return members;
+
+    return members.filter(({ description, name }) =>
+      `${name} ${description}`.toLocaleLowerCase().includes(
+        normalizedSearchTerm,
+      )
+    );
+  };
+
+  const mainCastMembers = $derived(
     crew.cast.map(toCastCreditMember),
+  );
+  const supportingCastMembers = $derived(
+    type === "episode" ? crew.guestStars.map(toCastCreditMember) : [],
+  );
+  const castGroupLabel = $derived(
+    type === "episode" ? m.header_main_cast() : m.drawer_meta_info_cast(),
+  );
+  const supportingCastGroupLabel = $derived(
+    type === "episode" && mainCastMembers.length > 0
+      ? m.header_supporting_cast()
+      : m.drawer_meta_info_cast(),
   );
   const crewMembers = $derived(
     uniqueCrewMembers([
@@ -133,24 +164,44 @@
       ...crew.writers,
     ]).map(toCrewCreditMember),
   );
-  const allCredits = $derived([...castMembers, ...crewMembers]);
-  const selectedCredits = $derived.by(() => {
-    if (isSearching) return allCredits;
-    if (creditsType === "crew") return crewMembers;
-
-    return castMembers;
-  });
-  const visibleCredits = $derived.by(() => {
-    if (!isSearching) {
-      return selectedCredits;
+  const allCreditGroups = $derived<CreditGroup[]>([
+    {
+      id: "main-cast",
+      label: castGroupLabel,
+      members: mainCastMembers,
+      showHeader: true,
+    },
+    {
+      id: "supporting-cast",
+      label: supportingCastGroupLabel,
+      members: supportingCastMembers,
+      showHeader: true,
+    },
+    {
+      id: "crew",
+      label: m.drawer_meta_info_crew(),
+      members: crewMembers,
+      showHeader: isSearching,
+    },
+  ]);
+  const selectedCreditGroups = $derived.by(() => {
+    if (isSearching) return allCreditGroups;
+    if (creditsType === "crew") {
+      return allCreditGroups
+        .filter((group) => group.id === "crew")
+        .map((group) => ({ ...group, showHeader: false }));
     }
 
-    return selectedCredits.filter(({ description, name }) =>
-      `${name} ${description}`.toLocaleLowerCase().includes(
-        normalizedSearchTerm,
-      )
-    );
+    return allCreditGroups.filter((group) => group.id !== "crew");
   });
+  const visibleCreditGroups = $derived(
+    selectedCreditGroups
+      .map((group) => ({
+        ...group,
+        members: filterCreditMembers(group.members),
+      }))
+      .filter((group) => group.members.length > 0),
+  );
 </script>
 
 <Drawer
@@ -173,14 +224,33 @@
         />
       </label>
 
-      {#if visibleCredits.length > 0}
+      {#if visibleCreditGroups.length > 0}
         <div
           id={`cast-list-${type}-${isSearching ? "search" : creditsType}`}
           class="credit-list"
-          role="list"
         >
-          {#each visibleCredits as item (toCreditMemberKey(item))}
-            <CreditMemberItem member={item} {type} />
+          {#each visibleCreditGroups as group (group.id)}
+            <section class="credit-list-group">
+              {#if group.showHeader}
+                <CreditGroupHeader
+                  id={toCreditGroupHeaderId(group)}
+                  label={group.label}
+                  count={group.members.length}
+                />
+              {/if}
+
+              <div
+                class="credit-list-group-items"
+                role="list"
+                aria-labelledby={group.showHeader
+                  ? toCreditGroupHeaderId(group)
+                  : undefined}
+              >
+                {#each group.members as item (toCreditMemberKey(item))}
+                  <CreditMemberItem member={item} {type} />
+                {/each}
+              </div>
+            </section>
           {/each}
         </div>
       {:else}
@@ -240,9 +310,22 @@
       }
     }
 
-    .credit-list {
+    .credit-list,
+    .credit-list-group,
+    .credit-list-group-items {
       display: flex;
       flex-direction: column;
+    }
+
+    .credit-list {
+      gap: var(--gap-m);
+    }
+
+    .credit-list-group {
+      gap: var(--gap-xs);
+    }
+
+    .credit-list-group-items {
       gap: var(--gap-s);
     }
 

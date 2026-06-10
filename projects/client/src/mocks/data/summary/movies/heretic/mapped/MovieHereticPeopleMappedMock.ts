@@ -196,6 +196,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
       'name': 'Carolyn Adair',
     },
   ],
+  'guestStars': [],
   'directors': [
     {
       'key': 'scott-beck',

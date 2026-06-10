@@ -88,7 +88,13 @@ export const shows = [
   ),
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/people`,
-    () => {
+    ({ request }) => {
+      if (
+        new URL(request.url).searchParams.get('extended') !== 'images'
+      ) {
+        return new HttpResponse(null, { status: 400 });
+      }
+
       return HttpResponse.json(ShowSiloPeopleResponseMock);
     },
   ),
@@ -148,7 +154,14 @@ export const shows = [
   ),
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/people`,
-    () => {
+    ({ request }) => {
+      if (
+        new URL(request.url).searchParams.get('extended') !==
+          'images,guest_stars'
+      ) {
+        return new HttpResponse(null, { status: 400 });
+      }
+
       return HttpResponse.json(EpisodeSiloPeopleResponseMock);
     },
   ),
