@@ -7237,6 +7237,46 @@
     "date_time_label_watch_until_here": {
       "default": "Pick the date and time used to anchor the binge",
       "description": "Aria label for the date-time picker shown in the watch-until-here drawer."
+    },
+    "dialog_prompt_media_share_image_format": {
+      "default": "Choose an image format to share.",
+      "description": "Message for the prompt that asks the user to select the layout of the image they want to share."
+    },
+    "button_text_media_share_format_open_graph": {
+      "default": "Default",
+      "description": "Text for the button that selects the default image format for sharing."
+    },
+    "button_text_media_share_format_feed": {
+      "default": "Feed",
+      "description": "Text for the button that selects the social feed image format for sharing."
+    },
+    "button_text_media_share_format_story": {
+      "default": "Story",
+      "description": "Text for the button that selects the story image format for sharing."
+    },
+    "button_text_media_share_instagram_stories": {
+      "default": "Instagram Stories",
+      "description": "Text for the button that allows users to share the generated image directly to Instagram Stories."
+    },
+    "button_label_media_share_image": {
+      "default": "Share image",
+      "description": "Aria-label for the button that confirms and opens the external sharing dialog to share the generated image."
+    },
+    "button_label_media_share_instagram_stories": {
+      "default": "Share to Instagram Stories",
+      "description": "Aria-label for the button that shares the generated image directly to Instagram Stories."
+    },
+    "button_text_media_share_type_link": {
+      "default": "Link",
+      "description": "Text for the button that allows users to select sharing a direct link."
+    },
+    "button_text_media_share_type_image": {
+      "default": "Image",
+      "description": "Text for the button that allows users to select sharing a generated image."
+    },
+    "error_text_image_preview_failed": {
+      "default": "Preview failed to load",
+      "description": "Error text shown when the generated image preview cannot be loaded."
     }
   }
 }
