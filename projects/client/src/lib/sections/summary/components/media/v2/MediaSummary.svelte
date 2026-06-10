@@ -9,6 +9,10 @@
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
+  import {
+    SummaryDrawers,
+    summaryDrawerNavigation,
+  } from "../../../_internal/summaryDrawerNavigation";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
@@ -42,6 +46,9 @@
   const { isRateable } = $derived(useIsRateable(target));
   const { isDropped } = $derived(useIsDropped(media));
   const { isStarted } = $derived(useIsStarted(target));
+
+  const { buildDrawerLink } = summaryDrawerNavigation();
+  const ratingsDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Ratings));
 </script>
 
 {#snippet tags()}
@@ -77,7 +84,11 @@
   {/snippet}
 
   {#snippet meta()}
-    <RatingList ratings={$ratings} entry={media} />
+    <RatingList
+      ratings={$ratings}
+      entry={media}
+      drilldown={ratingsDrawerLink}
+    />
     <SummaryTitle {title} {crew} {...target} />
 
     <RenderFor audience="authenticated">

@@ -16,6 +16,7 @@
   import type { MediaDetailsProps } from "./components/details/MediaDetailsProps";
   import HistoryDrawerHost from "./components/history/HistoryDrawerHost.svelte";
   import NotesDrawerHost from "./components/notes/NotesDrawerHost.svelte";
+  import RatingsDrawer from "./components/rating/RatingsDrawer.svelte";
   import SeasonsDrawerHost from "./components/seasons/SeasonsDrawerHost.svelte";
   import SentimentDrawer from "./components/sentiment/SentimentDrawer.svelte";
   import TriviaDrawerHost from "./components/trivia/TriviaDrawerHost.svelte";
@@ -122,4 +123,8 @@
       : undefined}
     onClose={close}
   />
+{/if}
+
+{#if drawer === SummaryDrawers.Ratings}
+  <RatingsDrawer {...details} onClose={close} />
 {/if}

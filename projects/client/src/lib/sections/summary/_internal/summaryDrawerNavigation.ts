@@ -12,6 +12,7 @@ export enum SummaryDrawers {
   Seasons = 'seasons',
   Notes = 'notes',
   Comments = 'comments',
+  Ratings = 'ratings',
 }
 
 const commentIdParam = 'comment_id';
@@ -42,6 +43,8 @@ function mapToDrawer(value: string | Nil) {
       return SummaryDrawers.Notes;
     case SummaryDrawers.Comments:
       return SummaryDrawers.Comments;
+    case SummaryDrawers.Ratings:
+      return SummaryDrawers.Ratings;
     default:
       return null;
   }
