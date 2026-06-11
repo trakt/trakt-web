@@ -3,7 +3,7 @@
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile.ts";
-  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
+  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import UserAvatar from "./components/UserAvatar.svelte";
 
   type PeopleWatchedListProps = {
