@@ -1,4 +1,5 @@
 <script lang="ts">
+  import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import GlobeIcon from "$lib/components/icons/GlobeIcon.svelte";
   import LockIcon from "$lib/components/icons/LockIcon.svelte";
@@ -140,7 +141,7 @@
   </div>
 
   {#if $user.isVip}
-    <span class="vip-badge">VIP</span>
+    <VipBadge isDirector={$user.isDirector} />
   {/if}
 </div>
 
@@ -263,14 +264,4 @@
     color: var(--color-text-secondary);
   }
 
-  .vip-badge {
-    flex-shrink: 0;
-    font-size: var(--ni-18);
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--color-foreground-vip-badge);
-    background: var(--color-background-vip-badge);
-    padding: var(--gap-xs) var(--gap-s);
-    border-radius: 9999px;
-  }
 </style>
