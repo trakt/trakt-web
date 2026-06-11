@@ -24,14 +24,17 @@ const request = async ({ fetch, id }: MovieNetworkWatchersParams) => {
     query: { extended: "full,images" },
   });
 
-  const following = followingResponse.body as FollowerResponse[];
+  const following = (followingResponse.body as FollowerResponse[]) ?? [];
 
   const results = await Promise.all(
     following
       .slice(0, MAX_FOLLOWING_TO_CHECK)
       .map(async (follower: FollowerResponse) => {
-        const user = follower.user;
-        const userSlug = user.ids.slug ?? user.username;
+        const user = follower?.user;
+        if (!user) return { user: undefined, hasWatched: false };
+
+        const userSlug = user.ids?.slug ?? user.username;
+        if (!userSlug) return { user, hasWatched: false };
 
         try {
           const historyResponse = await api({ fetch }).users.history.movie({
@@ -42,7 +45,7 @@ const request = async ({ fetch, id }: MovieNetworkWatchersParams) => {
             query: { extended: "full" },
           });
 
-          const body = historyResponse.body as MovieActivityHistoryResponse[];
+          const body = (historyResponse.body as MovieActivityHistoryResponse[]) ?? [];
 
           return {
             user,
@@ -56,7 +59,7 @@ const request = async ({ fetch, id }: MovieNetworkWatchersParams) => {
 
   const watchers = results
     .filter(
-      (r): r is { hasWatched: boolean; user: ProfileResponse } => r.hasWatched,
+      (r): r is { hasWatched: boolean; user: ProfileResponse } => Boolean(r.hasWatched && r.user),
     )
     .map((r) => mapToUserProfile(r.user));
 
