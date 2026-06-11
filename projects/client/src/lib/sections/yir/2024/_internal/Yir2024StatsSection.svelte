@@ -12,6 +12,7 @@
   import { setMonth } from "date-fns/setMonth";
   import { startOfYear } from "date-fns/startOfYear";
 
+  import MessageWithBold from "$lib/components/text/MessageWithBold.svelte";
   import YirTooltip from "../../_internal/YirTooltip.svelte";
   import Yir2024LineChart from "./Yir2024LineChart.svelte";
   import Yir2024SectionHeader from "./Yir2024SectionHeader.svelte";
@@ -104,9 +105,8 @@
     const formatter = new Intl.DateTimeFormat(languageTag(), {
       weekday: "short",
     });
-    return Array.from(
-      { length: 7 },
-      (_, i) => formatter.format(new Date(2026, 0, 4 + i)),
+    return Array.from({ length: 7 }, (_, i) =>
+      formatter.format(new Date(2026, 0, 4 + i)),
     );
   });
   const dailyPlaysData = $derived.by(() => {
@@ -127,18 +127,20 @@
         <div class="yir-2024-stats-info">
           {#if peakWeek}
             <p>
-              <!-- The i18n message embeds <b> wrappers around dynamic
-                values; render as HTML so the bold purple highlight applies. -->
-              {@html m.yir_2024_stats_most_active_week({
-                start: peakWeek.start,
-                end: peakWeek.end,
-                count: formatNumber(peakWeek.count),
-              })}
+              <MessageWithBold
+                message={m.yir_2024_stats_most_active_week({
+                  start: peakWeek.start,
+                  end: peakWeek.end,
+                  count: formatNumber(peakWeek.count),
+                })}
+              />
             </p>
           {/if}
           {#if peakHour}
             <p>
-              {@html m.yir_2024_stats_most_popular_time({ time: peakHour })}
+              <MessageWithBold
+                message={m.yir_2024_stats_most_popular_time({ time: peakHour })}
+              />
             </p>
           {/if}
         </div>
