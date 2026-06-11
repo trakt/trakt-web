@@ -13,6 +13,7 @@
   import ImdbLink from "./_internal/ImdbLink.svelte";
   import PersonDetails from "./_internal/PersonDetails.svelte";
   import SocialMediaLinks from "./_internal/SocialMediaLinks.svelte";
+  import { hasSocialMediaLinks } from "./_internal/hasSocialMediaLinks";
 
   const { person }: { person: PersonSummary } = $props();
 </script>
@@ -34,7 +35,9 @@
       textFactory={({ title: name }) => m.text_share_person({ name })}
       source={{ id: "person" }}
     />
-    <SocialMediaLinks {person} />
+    {#if hasSocialMediaLinks(person)}
+      <SocialMediaLinks {person} />
+    {/if}
     <RenderFor audience="authenticated">
       <PopupMenu
         label={m.button_label_popup_menu({ title: person.name })}

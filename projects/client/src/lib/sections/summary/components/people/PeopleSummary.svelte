@@ -9,6 +9,8 @@
   import SummaryContainer from "./../summary/SummaryContainer.svelte";
   import SummaryHeader from "./../summary/SummaryHeader.svelte";
   import SummaryOverview from "./../summary/SummaryOverview.svelte";
+  import DetailSeparator from "./v2/_internal/DetailSeparator.svelte";
+  import { hasSocialMediaLinks } from "./v2/_internal/hasSocialMediaLinks";
   import ImdbLink from "./v2/_internal/ImdbLink.svelte";
   import PersonDetails from "./v2/_internal/PersonDetails.svelte";
   import SocialMediaLinks from "./v2/_internal/SocialMediaLinks.svelte";
@@ -55,16 +57,19 @@
   </div>
 
   <div class="person-meta-info">
-    <div class="person-social-media-links">
-      <SocialMediaLinks {person} />
-    </div>
-
     <PersonDetails
       height={person.height}
       birthday={person.birthday}
       deathDate={person.deathDate}
       variant="compact"
     />
+
+    {#if hasSocialMediaLinks(person)}
+      <DetailSeparator />
+      <div class="person-social-media-links">
+        <SocialMediaLinks {person} />
+      </div>
+    {/if}
   </div>
 </SummaryContainer>
 
@@ -72,8 +77,8 @@
   .person-meta-info {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--gap-l);
+    justify-content: flex-start;
+    gap: var(--gap-m);
   }
 
   .trakt-summary-main-content {
