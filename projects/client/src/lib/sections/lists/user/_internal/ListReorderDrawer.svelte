@@ -5,27 +5,24 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
   import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
   import { reorderListRequest } from "$lib/requests/queries/users/reorderListRequest.ts";
   import { useInvalidator } from "$lib/stores/useInvalidator.ts";
   import { assertDefined } from "$lib/utils/assert/assertDefined.ts";
   import { MEDIA_POSTER_PLACEHOLDER } from "$lib/utils/assets.ts";
-  import { onDestroy } from "svelte";
   import { flip } from "svelte/animate";
   import { cubicOut } from "svelte/easing";
   import type { ReorderListSource } from "../models/ReorderListSource.ts";
   import type { ReorderableListItem } from "./models/ReorderableListItem.ts";
+  import { type DragGhost, reorderDrag } from "./reorderDrag.ts";
   import {
     itemOrderSignature,
     listItemRankIds,
     sortReorderableItems,
   } from "./reorderListItems.ts";
   import { useReorderList } from "./useReorderList.ts";
-
-  const autoScrollEdgeSize = 88;
-  const autoScrollMaxFrameDistance = 14;
 
   const {
     source,
@@ -41,29 +38,23 @@
   const { invalidateAll } = useInvalidator();
   const { confirm } = useConfirm();
 
-  let orderedItems = $state<ReorderableListItem[]>([]);
-  let loadedSignature = $state("");
+  let localOrder = $state<{
+    signature: string;
+    items: ReorderableListItem[];
+  } | null>(null);
   let isApplying = $state(false);
   let draggedKey = $state<string | null>(null);
   let instantPosterKeys = $state<readonly string[]>([]);
   let placeholderIndex = $state<number | null>(null);
-  let dragPointerId = $state<number | null>(null);
-  let dragCaptureElement: HTMLElement | null = null;
-  let dragClientY = 0;
-  let autoScrollFrame: number | null = null;
-  let scrollContainer: HTMLElement | null = null;
-  let dragGhost = $state<{
-    top: number;
-    left: number;
-    width: number;
-    height: number;
-    offsetX: number;
-    offsetY: number;
-  } | null>(null);
-  let tableBody = $state<HTMLTableSectionElement | null>(null);
+  let dragGhost = $state<DragGhost | null>(null);
 
-  const rankOrderedItems = $derived(sortReorderableItems($list));
+  const rankOrderedItems = $derived(sortReorderableItems($list ?? []));
   const rankSignature = $derived(itemOrderSignature(rankOrderedItems));
+  const orderedItems = $derived(
+    localOrder?.signature === rankSignature
+      ? localOrder.items
+      : rankOrderedItems,
+  );
   const orderedSignature = $derived(itemOrderSignature(orderedItems));
   const isLoaded = $derived(!$isLoading);
   const hasChanges = $derived(isLoaded && orderedSignature !== rankSignature);
@@ -79,9 +70,8 @@
   const draggedItemRank = $derived(
     draggedKey == null
       ? null
-      : (placeholderIndex ?? orderedItems.findIndex((item) =>
-        item.key === draggedKey
-      )) + 1,
+      : (placeholderIndex ??
+          orderedItems.findIndex((item) => item.key === draggedKey)) + 1,
   );
   const dragGhostStyle = $derived(
     dragGhost == null
@@ -114,46 +104,6 @@
     return rows;
   });
 
-  $effect(() => {
-    if (!isLoaded || loadedSignature === rankSignature) {
-      return;
-    }
-
-    orderedItems = rankOrderedItems;
-    instantPosterKeys = [];
-    loadedSignature = rankSignature;
-  });
-
-  function draggedItemIndex() {
-    if (!draggedKey) {
-      return -1;
-    }
-
-    return orderedItems.findIndex((item) => item.key === draggedKey);
-  }
-
-  function getPointerDropIndex(clientY: number) {
-    if (draggedItemIndex() < 0) {
-      return null;
-    }
-
-    const rows = Array.from(
-      tableBody?.querySelectorAll<HTMLTableRowElement>("[data-reorder-key]") ??
-        [],
-    );
-
-    if (rows.length === 0) {
-      return 0;
-    }
-
-    const targetIndex = rows.findIndex((row) => {
-      const rect = row.getBoundingClientRect();
-      return clientY < rect.top + rect.height / 2;
-    });
-
-    return targetIndex < 0 ? rows.length : targetIndex;
-  }
-
   function itemRank(index: number) {
     if (placeholderIndex == null || index < placeholderIndex) {
       return index + 1;
@@ -162,230 +112,53 @@
     return index + 2;
   }
 
-  function commitDrag() {
-    if (!draggedItem || placeholderIndex == null) {
-      return;
-    }
-
-    orderedItems = [
-      ...visibleItems.slice(0, placeholderIndex),
-      draggedItem,
-      ...visibleItems.slice(placeholderIndex),
-    ];
-  }
-
-  function disablePosterAnimation(itemKey: string | null) {
-    if (itemKey == null || instantPosterKeys.includes(itemKey)) {
-      return;
-    }
-
-    instantPosterKeys = [...instantPosterKeys, itemKey];
-  }
-
   function shouldAnimatePoster(item: ReorderableListItem) {
     return !instantPosterKeys.includes(item.key);
   }
 
-  function endDrag() {
-    stopAutoScroll();
+  function onDragStart(key: string, ghost: DragGhost, fromIndex: number) {
+    draggedKey = key;
+    dragGhost = ghost;
+    placeholderIndex = fromIndex;
+  }
 
-    if (dragPointerId != null && dragCaptureElement != null) {
-      try {
-        if (dragCaptureElement.hasPointerCapture(dragPointerId)) {
-          dragCaptureElement.releasePointerCapture(dragPointerId);
-        }
-      } catch {
-        // The browser may already have released capture during pointercancel.
+  function onGhostMove(ghost: DragGhost) {
+    dragGhost = ghost;
+  }
+
+  function onPlaceholderMove(index: number) {
+    placeholderIndex = index;
+  }
+
+  function onDragEnd(
+    key: string | null,
+    finalIndex: number | null,
+    cancelled: boolean,
+  ) {
+    if (!cancelled && key != null && finalIndex != null) {
+      const item = orderedItems.find((i) => i.key === key);
+
+      if (item) {
+        const visible = orderedItems.filter((i) => i.key !== key);
+
+        localOrder = {
+          signature: rankSignature,
+          items: [
+            ...visible.slice(0, finalIndex),
+            item,
+            ...visible.slice(finalIndex),
+          ],
+        };
+      }
+
+      if (!instantPosterKeys.includes(key)) {
+        instantPosterKeys = [...instantPosterKeys, key];
       }
     }
 
     draggedKey = null;
     placeholderIndex = null;
-    dragPointerId = null;
-    dragCaptureElement = null;
-    scrollContainer = null;
     dragGhost = null;
-    window.removeEventListener("pointermove", handlePointerMove);
-    window.removeEventListener("pointerup", handlePointerEnd);
-    window.removeEventListener("pointercancel", handlePointerCancel);
-  }
-
-  function updateGhostPosition(clientX: number, clientY: number) {
-    if (!dragGhost) {
-      return;
-    }
-
-    dragGhost = {
-      ...dragGhost,
-      left: clientX - dragGhost.offsetX,
-      top: clientY - dragGhost.offsetY,
-    };
-  }
-
-  function updatePlaceholderIndex(clientY: number) {
-    const toIndex = getPointerDropIndex(clientY);
-
-    if (toIndex == null || toIndex === placeholderIndex) {
-      return;
-    }
-
-    placeholderIndex = toIndex;
-  }
-
-  function updateDragPointer(clientX: number, clientY: number) {
-    dragClientY = clientY;
-    updateGhostPosition(clientX, clientY);
-    updatePlaceholderIndex(clientY);
-  }
-
-  function getScrollContainer() {
-    const element = tableBody?.closest(".trakt-drawer-content");
-
-    return element instanceof HTMLElement ? element : null;
-  }
-
-  function getAutoScrollStep(distanceFromEdge: number) {
-    const distance = Math.max(distanceFromEdge, 0);
-    const intensity = Math.min(
-      (autoScrollEdgeSize - distance) / autoScrollEdgeSize,
-      1,
-    );
-
-    return Math.ceil(autoScrollMaxFrameDistance * intensity);
-  }
-
-  function getAutoScrollDistance() {
-    if (scrollContainer == null) {
-      return 0;
-    }
-
-    const containerRect = scrollContainer.getBoundingClientRect();
-    const distanceFromTop = dragClientY - containerRect.top;
-    const distanceFromBottom = containerRect.bottom - dragClientY;
-    const maxScrollTop = scrollContainer.scrollHeight -
-      scrollContainer.clientHeight;
-
-    if (distanceFromTop < autoScrollEdgeSize && scrollContainer.scrollTop > 0) {
-      return -getAutoScrollStep(distanceFromTop);
-    }
-
-    if (
-      distanceFromBottom < autoScrollEdgeSize &&
-      scrollContainer.scrollTop < maxScrollTop
-    ) {
-      return getAutoScrollStep(distanceFromBottom);
-    }
-
-    return 0;
-  }
-
-  function handleAutoScroll() {
-    autoScrollFrame = null;
-
-    if (dragPointerId == null || scrollContainer == null) {
-      return;
-    }
-
-    const scrollDistance = getAutoScrollDistance();
-    const previousScrollTop = scrollContainer.scrollTop;
-
-    scrollContainer.scrollTop += scrollDistance;
-
-    if (scrollContainer.scrollTop !== previousScrollTop) {
-      updatePlaceholderIndex(dragClientY);
-    }
-
-    startAutoScroll();
-  }
-
-  function startAutoScroll() {
-    if (autoScrollFrame != null) {
-      return;
-    }
-
-    autoScrollFrame = requestAnimationFrame(handleAutoScroll);
-  }
-
-  function stopAutoScroll() {
-    if (autoScrollFrame == null) {
-      return;
-    }
-
-    cancelAnimationFrame(autoScrollFrame);
-    autoScrollFrame = null;
-  }
-
-  function handlePointerMove(event: PointerEvent) {
-    if (dragPointerId !== event.pointerId) {
-      return;
-    }
-
-    event.preventDefault();
-    updateDragPointer(event.clientX, event.clientY);
-  }
-
-  function handlePointerEnd(event: PointerEvent) {
-    if (dragPointerId !== event.pointerId) {
-      return;
-    }
-
-    disablePosterAnimation(draggedKey);
-    commitDrag();
-    endDrag();
-  }
-
-  function handlePointerCancel(event: PointerEvent) {
-    if (dragPointerId !== event.pointerId) {
-      return;
-    }
-
-    disablePosterAnimation(draggedKey);
-    endDrag();
-  }
-
-  function handleDragStart(event: PointerEvent, item: ReorderableListItem) {
-    if (event.button !== 0) {
-      return;
-    }
-
-    event.preventDefault();
-    endDrag();
-
-    const row = event.currentTarget as HTMLTableRowElement;
-    const rowRect = row.getBoundingClientRect();
-    const fromIndex = orderedItems.findIndex((orderedItem) =>
-      orderedItem.key === item.key
-    );
-    if (fromIndex < 0) {
-      return;
-    }
-
-    dragCaptureElement = tableBody ?? row;
-    try {
-      dragCaptureElement.setPointerCapture(event.pointerId);
-    } catch {
-      dragCaptureElement = null;
-    }
-
-    draggedKey = item.key;
-    placeholderIndex = fromIndex;
-    dragPointerId = event.pointerId;
-    scrollContainer = getScrollContainer();
-    dragClientY = event.clientY;
-    dragGhost = {
-      top: rowRect.top,
-      left: rowRect.left,
-      width: rowRect.width,
-      height: rowRect.height,
-      offsetX: event.clientX - rowRect.left,
-      offsetY: event.clientY - rowRect.top,
-    };
-    window.addEventListener("pointermove", handlePointerMove, {
-      passive: false,
-    });
-    window.addEventListener("pointerup", handlePointerEnd);
-    window.addEventListener("pointercancel", handlePointerCancel);
-    startAutoScroll();
   }
 
   async function requestReorder() {
@@ -448,8 +221,6 @@
       },
     };
   }
-
-  onDestroy(endDrag);
 </script>
 
 {#snippet itemSummary(item: ReorderableListItem, animatePoster = true)}
@@ -512,7 +283,13 @@
     {:else}
       <table class="reorder-table">
         <tbody
-          bind:this={tableBody}
+          use:reorderDrag={{
+            getItems: () => orderedItems,
+            onDragStart,
+            onGhostMove,
+            onPlaceholderMove,
+            onDragEnd,
+          }}
           class:has-active-drag={draggedKey != null}
         >
           {#each renderRows as row (row.key)}
@@ -520,11 +297,6 @@
               data-reorder-key={row.type === "item" ? row.item.key : undefined}
               class:drag-placeholder={row.type === "placeholder"}
               animate:flip={{ duration: 220, easing: cubicOut }}
-              onpointerdown={(event) => {
-                if (row.type === "item") {
-                  handleDragStart(event, row.item);
-                }
-              }}
             >
               <td class="rank-cell">
                 {#if row.type === "item"}
@@ -611,7 +383,6 @@
   tbody {
     tr {
       cursor: grab;
-      touch-action: none;
       filter: drop-shadow(
         var(--ni-1) var(--ni-1) var(--ni-4)
           color-mix(in srgb, var(--color-shadow) 10%, transparent)
@@ -626,6 +397,9 @@
     }
 
     td {
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
       background: var(--reorder-row-background);
 
       &:first-child {
@@ -708,6 +482,8 @@
     flex-shrink: 0;
     border-radius: var(--border-radius-s);
     background-color: var(--color-surface-button-disabled);
+    pointer-events: none;
+    -webkit-user-drag: none;
   }
 
   .item-title {
