@@ -44,12 +44,14 @@
   .trakt-main-credit {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 8px;
 
-    font-size: 26px;
+    font-size: 36px;
 
     span {
       font-size: 26px;
+      flex-shrink: 0;
     }
   }
 </style>
