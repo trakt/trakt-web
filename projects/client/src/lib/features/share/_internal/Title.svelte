@@ -10,7 +10,7 @@
   .trakt-share-title {
     margin: 0;
 
-    font-size: 48px;
-    line-height: 52px;
+    font-size: 56px;
+    line-height: 60px;
   }
 </style>

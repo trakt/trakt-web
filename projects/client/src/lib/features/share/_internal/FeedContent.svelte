@@ -36,6 +36,7 @@
 
     flex: 1;
     height: 100%;
+    margin-top: 16px;
 
     color: #efefef;
   }

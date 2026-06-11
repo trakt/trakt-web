@@ -74,17 +74,17 @@
     gap: 6px;
 
     color: #efefef;
-    font-size: 26px;
+    font-size: 32px;
     font-weight: bold;
 
     span {
-      font-size: 26px;
+      font-size: 32px;
       font-weight: bold;
     }
 
     :global(svg) {
-      width: 26px;
-      height: 26px;
+      width: 32px;
+      height: 32px;
     }
   }
 
@@ -96,7 +96,7 @@
 
   .imdb-rating {
     :global(svg) {
-      width: 52px;
+      width: 64px;
     }
   }
 </style>

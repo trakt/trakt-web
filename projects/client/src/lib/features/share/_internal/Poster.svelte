@@ -16,7 +16,7 @@
   const posterHeight = $derived.by(() => {
     switch (variant) {
       case "feed":
-        return height / 1.5;
+        return height / 1.25;
       case "story":
         return height / 1.75;
       case "open-graph":
