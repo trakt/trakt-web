@@ -1,14 +1,14 @@
-import { defineQuery } from "$lib/features/query/defineQuery.ts";
-import { mapToUserProfile } from "$lib/requests/_internal/mapToUserProfile.ts";
-import { api, type ApiParams } from "$lib/requests/api.ts";
-import { UserProfileSchema } from "$lib/requests/models/UserProfile.ts";
-import { time } from "$lib/utils/timing/time.ts";
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { mapToUserProfile } from '$lib/requests/_internal/mapToUserProfile.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
+import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import type {
   FollowerResponse,
   MovieActivityHistoryResponse,
   ProfileResponse,
-} from "@trakt/api";
-import { z } from "zod";
+} from '@trakt/api';
+import { z } from 'zod';
 
 type MovieNetworkWatchersParams = {
   slug: string;
@@ -20,8 +20,8 @@ const MAX_FOLLOWING_TO_CHECK = 10;
 
 const request = async ({ fetch, id }: MovieNetworkWatchersParams) => {
   const followingResponse = await api({ fetch }).users.following({
-    params: { id: "me" },
-    query: { extended: "full,images" },
+    params: { id: 'me' },
+    query: { extended: 'full,images' },
   });
 
   const following = (followingResponse.body as FollowerResponse[]) ?? [];
@@ -42,10 +42,11 @@ const request = async ({ fetch, id }: MovieNetworkWatchersParams) => {
               id: userSlug,
               item_id: `${id}`,
             },
-            query: { extended: "full" },
+            query: { extended: 'full' },
           });
 
-          const body = (historyResponse.body as MovieActivityHistoryResponse[]) ?? [];
+          const body =
+            (historyResponse.body as MovieActivityHistoryResponse[]) ?? [];
 
           return {
             user,
@@ -59,7 +60,8 @@ const request = async ({ fetch, id }: MovieNetworkWatchersParams) => {
 
   const watchers = results
     .filter(
-      (r): r is { hasWatched: boolean; user: ProfileResponse } => Boolean(r.hasWatched && r.user),
+      (r): r is { hasWatched: boolean; user: ProfileResponse } =>
+        Boolean(r.hasWatched && r.user),
     )
     .map((r) => mapToUserProfile(r.user));
 
@@ -67,7 +69,7 @@ const request = async ({ fetch, id }: MovieNetworkWatchersParams) => {
 };
 
 export const movieNetworkWatchersQuery = defineQuery({
-  key: "movieNetworkWatchers",
+  key: 'movieNetworkWatchers',
   request,
   dependencies: (params) => [params.slug, params.id],
   invalidations: [],

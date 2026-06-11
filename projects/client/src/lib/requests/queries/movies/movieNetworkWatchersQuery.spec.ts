@@ -1,12 +1,12 @@
-import { UserFollowingMappedMock } from "$mocks/data/users/mapped/UserFollowingMappedMock.ts";
-import { MovieHereticResponseMock } from "$mocks/data/summary/movies/heretic/response/MovieHereticResponseMock.ts";
-import { createTestBedQuery } from "$test/beds/query/createTestBedQuery.ts";
-import { runQuery } from "$test/beds/query/runQuery.ts";
-import { describe, expect, it } from "vitest";
-import { movieNetworkWatchersQuery } from "./movieNetworkWatchersQuery.ts";
+import { UserFollowingMappedMock } from '$mocks/data/users/mapped/UserFollowingMappedMock.ts';
+import { MovieHereticResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
+import { createTestBedQuery } from '$test/beds/query/createTestBedQuery.ts';
+import { runQuery } from '$test/beds/query/runQuery.ts';
+import { describe, expect, it } from 'vitest';
+import { movieNetworkWatchersQuery } from './movieNetworkWatchersQuery.ts';
 
-describe("movieNetworkWatchersQuery", () => {
-  it("should query network watchers for Heretic (2024)", async () => {
+describe('movieNetworkWatchersQuery', () => {
+  it('should query network watchers for Heretic (2024)', async () => {
     const result = await runQuery({
       factory: () =>
         createTestBedQuery(
