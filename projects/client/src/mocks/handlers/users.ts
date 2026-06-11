@@ -107,6 +107,9 @@ export const users = [
   http.get('http://localhost/users/me/history/movies*', () => {
     return HttpResponse.json(MovieActivityHistoryResponseMock);
   }),
+  http.get('http://localhost/users/:userId/history/movies/:itemId*', () => {
+    return HttpResponse.json(MovieActivityHistoryResponseMock);
+  }),
   http.get('http://localhost/users/me/history/episodes*', () => {
     return HttpResponse.json(EpisodeActivityHistoryResponseMock);
   }),
