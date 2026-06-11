@@ -15,7 +15,6 @@ import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts'
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { combineLatest, map, of, shareReplay } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 /*
   FIXME: Fix the root cause.
@@ -79,19 +78,18 @@ export function useMovie(slug: string | undefined) {
     ),
   );
 
-  const networkWatchers = combineLatest([isAuthorized, movie]).pipe(
-    switchMap(([authorized, $movie]) => {
-      const movieId = $movie.data?.id;
-      if (!authorized || !movieId) return of(undefined);
-
-      return useQuery(
-        movieNetworkWatchersQuery({
+  const networkWatchers = useQuery(
+    combineLatest([isAuthorized, movie]).pipe(
+      map(([authorized, $movie]) => {
+        const movieId = $movie.data?.id;
+        return movieNetworkWatchersQuery({
           slug,
-          id: movieId,
-          enabled: true,
-        }),
-      );
-    }),
+          id: movieId ?? 0,
+          enabled: Boolean(authorized && movieId),
+        });
+      }),
+    ),
+  ).pipe(
     map(($result) => $result?.data ?? []),
     shareReplay(1),
   );
