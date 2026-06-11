@@ -24,19 +24,23 @@ UI code split across four directories, each with distinct role:
 
 ### `lib/components/`
 
-Purely presentational, reusable across app. No awareness of API shapes or app state.
+Purely presentational, reusable across app. No awareness of API shapes or app
+state.
 
 ### `lib/features/`
 
-Each subdirectory is self-contained feature. Features own their state, providers, contexts, and domain-specific sub-components.
+Each subdirectory is self-contained feature. Features own their state,
+providers, contexts, and domain-specific sub-components.
 
 ### `lib/sections/`
 
-Page-level composition components. Sections know domain data shapes and compose features + `lib/components` into page regions.
+Page-level composition components. Sections know domain data shapes and compose
+features + `lib/components` into page regions.
 
 ### `lib/guards/`
 
-Thin conditional-rendering wrappers - use instead of inline `{#if}` for auth / feature / audience / device gating.
+Thin conditional-rendering wrappers - use instead of inline `{#if}` for auth /
+feature / audience / device gating.
 
 ---
 
@@ -47,7 +51,9 @@ Thin conditional-rendering wrappers - use instead of inline `{#if}` for auth / f
 > **File inside `folderA/_internal/` may only be imported by files inside
 > `folderA/` or `folderA/_internal/` itself.**
 
-If a helper, sub-component, or context factory is needed outside its parent folder, it must be **uplifted** - moved to `folderA/` (and exported) or to a higher-level shared location.
+If a helper, sub-component, or context factory is needed outside its parent
+folder, it must be **uplifted** - moved to `folderA/` (and exported) or to a
+higher-level shared location.
 
 **Never import from another folder's `_internal/`.**
 
@@ -74,7 +80,8 @@ features/upsell/UpsellCta.svelte  ← importing search/_internal/createSearchCon
 
 ## Svelte 5 Runes
 
-All components use Svelte 5 runes mode. Never use `export let`, `$:`, or `createEventDispatcher`.
+All components use Svelte 5 runes mode. Never use `export let`, `$:`, or
+`createEventDispatcher`.
 
 ```svelte
 <script lang="ts">
@@ -100,7 +107,8 @@ Key runes:
 
 ## Props Type Files
 
-For components with 3+ props, define separate `ComponentNameProps.ts` file (usually inside component folder or `_internal/`).
+For components with 3+ props, define separate `ComponentNameProps.ts` file
+(usually inside component folder or `_internal/`).
 
 ```typescript
 // buttons/_internal/TraktButtonProps.ts
@@ -114,7 +122,8 @@ export type TraktButtonProps = {
 };
 ```
 
-Use `Snippet` (from `svelte`) for slot-like composition - never the legacy slot API.
+Use `Snippet` (from `svelte`) for slot-like composition - never the legacy slot
+API.
 
 ---
 
@@ -166,7 +175,8 @@ Feature providers are thin shells calling a context factory from `_internal/`.
 {@render children()}
 ```
 
-Matching `getXxxContext()` function called by child components to access shared state:
+Matching `getXxxContext()` function called by child components to access shared
+state:
 
 ```typescript
 // features/search/_internal/getSearchContext.ts
@@ -191,7 +201,8 @@ Naming conventions:
 
 ## `use*` Hooks (Feature Stores)
 
-Feature state often exposed via `use*` composable functions returning reactive RxJS-based state.
+Feature state often exposed via `use*` composable functions returning reactive
+RxJS-based state.
 
 ```typescript
 // features/auth/stores/useUser.ts
@@ -208,7 +219,8 @@ export function useUser() {
 - Live in `features/{domain}/stores/` (or `features/{domain}/stores/_internal/`)
 - Name always starts with `use` (e.g., `useUser`, `useTheme`, `useFilters`)
 - Return `$derived` values, not raw observables
-- Do **not** import across feature boundaries - if sharing needed, expose via context or shared section
+- Do **not** import across feature boundaries - if sharing needed, expose via
+  context or shared section
 
 ---
 
@@ -236,7 +248,9 @@ Use guards instead of inline `{#if auth.isLoggedIn}` or `{#if isDesktop}`:
 
 ## Font Styling
 
-Use global typography utility classes from `style/typography/index.css` for font styling. Do **not** write custom font-size or font-weight declarations when a utility class covers it.
+Use global typography utility classes from `style/typography/index.css` for font
+styling. Do **not** write custom font-size or font-weight declarations when a
+utility class covers it.
 
 ```svelte
 <!-- Good -->
@@ -247,7 +261,8 @@ Use global typography utility classes from `style/typography/index.css` for font
 <span style="font-weight: 600">Movie title</span>
 ```
 
-When manual `font-size` override is unavoidable (e.g. responsive tweaks), prefer semantic font-size variables over raw sizing tokens:
+When manual `font-size` override is unavoidable (e.g. responsive tweaks), prefer
+semantic font-size variables over raw sizing tokens:
 
 ```scss
 // Good
@@ -261,7 +276,8 @@ font-size: var(--ni-10); // raw value, no semantic meaning
 
 ## `data-*` Attributes for Variants
 
-Components use `data-*` attributes for styling variants instead of class concatenation.
+Components use `data-*` attributes for styling variants instead of class
+concatenation.
 
 ```svelte
 <button data-variant="primary" data-style="filled">
@@ -285,7 +301,8 @@ Common attributes:
 
 ## Lazy Rendering on Cards
 
-Cards rendering below the fold should defer rendering until visible. `whenInViewport` action takes a plain callback (no object param):
+Cards rendering below the fold should defer rendering until visible.
+`whenInViewport` action takes a plain callback (no object param):
 
 ```svelte
 <script lang="ts">
@@ -304,7 +321,8 @@ Cards rendering below the fold should defer rendering until visible. `whenInView
 
 ## i18n in Components
 
-Always import Paraglide messages namespace as `m` and call messages as functions. Never inline literal user-facing strings.
+Always import Paraglide messages namespace as `m` and call messages as
+functions. Never inline literal user-facing strings.
 
 ```svelte
 <script lang="ts">
@@ -327,13 +345,16 @@ Drawers follow a split naming pattern:
 | `*Drawer`     | Pure-content drawer (props in → `<Drawer>` out), router, or provider |
 | `*DrawerHost` | Fetches its own data via `use*` hooks, then renders `<Drawer>`       |
 
-If a drawer component calls `use*` hooks to load data itself, name it `*DrawerHost`. If it receives all data via props, name it `*Drawer`.
+If a drawer component calls `use*` hooks to load data itself, name it
+`*DrawerHost`. If it receives all data via props, name it `*Drawer`.
 
 ---
 
 ## Displaying User Names
 
-Always use `toDisplayableName` from `$lib/utils/profile/toDisplayableName.ts` when rendering a user's name. It returns the full name when available, or falls back to `@username`.
+Always use `toDisplayableName` from `$lib/utils/profile/toDisplayableName.ts`
+when rendering a user's name. It returns the full name when available, or falls
+back to `@username`.
 
 ```svelte
 <script lang="ts">
@@ -347,7 +368,9 @@ Always use `toDisplayableName` from `$lib/utils/profile/toDisplayableName.ts` wh
 <span>{profile.name.full || `@${profile.username}`}</span>
 ```
 
-When passing a name into an i18n message, pass the result of `toDisplayableName` as the variable, never construct the `@`-prefixed string inside the message key itself, as `@` in message strings breaks the generated JSDoc output.
+When passing a name into an i18n message, pass the result of `toDisplayableName`
+as the variable, never construct the `@`-prefixed string inside the message key
+itself, as `@` in message strings breaks the generated JSDoc output.
 
 ```svelte
 <!-- Good -->
@@ -355,6 +378,26 @@ When passing a name into an i18n message, pass the result of `toDisplayableName`
 
 <!-- Bad - @ inside the message default value causes a JSDoc parse error -->
 {m.some_message({ username: profile.username })}
+```
+
+---
+
+## i18n and HTML in Translations
+
+Never render translation messages via `{@html}`. If a message embeds markup, use
+the appropriate helper component instead:
+
+- **`MessageWithBold`** (`$lib/components/text/MessageWithBold.svelte`) —
+  renders `<b>…</b>` segments in a message as real `<b>` elements.
+- **`MessageWithLink`** (`$lib/components/link/MessageWithLink.svelte`) —
+  renders an `<a>…</a>` segment as a real link.
+
+```svelte
+<!-- Bad -->
+<p>{@html m.some_message({ value })}</p>
+
+<!-- Good -->
+<p><MessageWithBold message={m.some_message({ value })} /></p>
 ```
 
 ---
