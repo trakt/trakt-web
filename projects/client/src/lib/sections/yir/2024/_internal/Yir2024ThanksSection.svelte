@@ -1,4 +1,5 @@
 <script lang="ts">
+  import MessageWithBold from "$lib/components/text/MessageWithBold.svelte";
   import { m } from "$lib/paraglide/messages";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry.ts";
   import Yir2024PostersRow from "./Yir2024PostersRow.svelte";
@@ -22,8 +23,11 @@
     <p class="bold yir-2024-thanks-title">{m.yir_2024_thanks_title()}</p>
 
     <div class="yir-2024-thanks-copy">
-      <!-- Message wraps the years in <b>; render as HTML so they bold. -->
-      <p>{@html m.yir_2024_thanks_copy_directed({ year, nextYear })}</p>
+      <p>
+        <MessageWithBold
+          message={m.yir_2024_thanks_copy_directed({ year, nextYear })}
+        />
+      </p>
       <p>{m.yir_2024_thanks_copy_recommend()}</p>
     </div>
   </div>
