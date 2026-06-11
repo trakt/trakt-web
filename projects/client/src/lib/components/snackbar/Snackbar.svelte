@@ -18,6 +18,7 @@
     message: string;
     action?: SnackbarAction;
     variant?: "default" | "error";
+    dismissDurationMs?: number;
   };
 
   const {
@@ -27,6 +28,7 @@
     message,
     action,
     variant = "default",
+    dismissDurationMs,
   }: SnackbarProps = $props();
 
   let navbarHeight = $state(0);
@@ -98,7 +100,11 @@
     <div class="snackbar-content">
       <p class="snackbar-message">{message}</p>
       {@render actionButton()}
-      <AutoCloseButton onclick={onDismiss} label={m.button_label_close()} />
+      <AutoCloseButton
+        onclick={onDismiss}
+        label={m.button_label_close()}
+        durationMs={dismissDurationMs}
+      />
     </div>
   </div>
 {/if}

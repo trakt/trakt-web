@@ -31,8 +31,6 @@
 </script>
 
 <main>
-  <h1>Buttons</h1>
-
   <div class="button-display">
     {#each styles as style}
       <section>
