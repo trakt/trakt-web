@@ -1,9 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
-  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
-  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
 
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
@@ -12,6 +9,7 @@
   import type { UserProfile } from "$lib/requests/models/UserProfile.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CastList from "../lists/CastList.svelte";
+  import PeopleWatchedList from "../lists/PeopleWatchedList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
@@ -73,21 +71,7 @@
 </RenderFor>
 
 <RenderFor audience="authenticated">
-  {#if watchers.length > 0}
-    <SectionList
-      id={{ scope: "people-watched", key: media.slug }}
-      items={watchers}
-      title={m.list_title_people_watched()}
-      --height-list="var(--ni-64)"
-    >
-      {#snippet item(user)}
-        <div class="people-watched-item">
-          <UserAvatar {user} size="small" />
-          <p class="bold ellipsis">{toDisplayableName(user)}</p>
-        </div>
-      {/snippet}
-    </SectionList>
-  {/if}
+  <PeopleWatchedList slug={media.slug} {watchers} />
 </RenderFor>
 
 <CastList
@@ -117,13 +101,3 @@
 />
 
 <TriviaList {media} />
-
-<style lang="scss">
-  .people-watched-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--gap-xs);
-    width: var(--ni-56);
-  }
-</style>
