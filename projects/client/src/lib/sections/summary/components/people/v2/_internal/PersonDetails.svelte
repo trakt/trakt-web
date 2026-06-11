@@ -7,6 +7,7 @@
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toMeasurement } from "$lib/utils/formatting/number/toMeasurement";
   import Celebration from "./Celebration.svelte";
+  import DetailSeparator from "./DetailSeparator.svelte";
 
   const {
     birthday,
@@ -35,7 +36,7 @@
       <p>{toMeasurement(height / 100, getLocale())}</p>
     </div>
     {#if birthday}
-      <div class="trakt-detail-separator"></div>
+      <DetailSeparator />
     {/if}
   {/if}
   {#if birthday}
@@ -44,9 +45,11 @@
         <Celebration />
       {/if}
       <span class="bold secondary">{m.header_birthday()}</span>
-      <p>{toHumanDay({ date: birthday, locale: getLocale(), format: "short" })}</p>
+      <p>
+        {toHumanDay({ date: birthday, locale: getLocale(), format: "short" })}
+      </p>
     </div>
-    <div class="trakt-detail-separator"></div>
+    <DetailSeparator />
     <div class="trakt-person-detail">
       <span class="bold secondary">{detailHeader}</span>
       {#if deathDate}
@@ -59,7 +62,9 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-person-details {
     --details-width: var(--ni-320);
     --details-gap: var(--gap-m);
@@ -75,15 +80,21 @@
 
       .trakt-person-detail {
         width: fit-content;
-        align-items: flex-end;
+        align-items: flex-start;
       }
     }
   }
 
-  .trakt-detail-separator {
-    width: var(--ni-1);
-    background-color: var(--color-text-secondary);
-    opacity: 0.25;
+  @include for-tablet-lg {
+    .trakt-person-detail span.bold {
+      font-weight: normal;
+    }
+  }
+
+  @include for-desktop {
+    .trakt-person-detail span.bold {
+      font-weight: normal;
+    }
   }
 
   .trakt-person-detail {
