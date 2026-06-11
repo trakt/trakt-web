@@ -8,7 +8,7 @@ import type { SortDirection } from '$lib/sections/lists/user/models/SortDirectio
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { usePaginatedListQuery } from './usePaginatedListQuery.ts';
 
-type UseFavoritesProps = {
+export type UseFavoritesProps = {
   type?: DiscoverMode;
   slug: string;
   limit?: number;
