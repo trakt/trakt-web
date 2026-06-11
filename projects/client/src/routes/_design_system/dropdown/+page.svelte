@@ -32,8 +32,6 @@
 {/snippet}
 
 <main>
-  <h1>Dropdowns</h1>
-
   <div class="button-display">
     {#each styles as style}
       <section>

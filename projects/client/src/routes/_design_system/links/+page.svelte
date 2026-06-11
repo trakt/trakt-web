@@ -9,8 +9,6 @@
 </script>
 
 <main>
-  <h1>Links</h1>
-
   <div class="link-display">
     <section>
       <h2>External</h2>
