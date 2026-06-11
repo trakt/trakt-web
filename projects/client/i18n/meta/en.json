@@ -6758,6 +6758,10 @@
     },
     "label_stats_current_streak": {
       "default": "Current Streak",
+      "description": "Label for the current streak stat in the total stats block."
+    },
+    "label_stats_current_monthly_streak": {
+      "default": "Monthly Streak",
       "description": "Label for the current streak stat in the monthly stats block."
     },
     "label_stats_dropped_streaks": {
