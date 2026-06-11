@@ -47,6 +47,13 @@ type UseListSortingProps = {
   slug: string;
 };
 
+function getDefaultSortBy(props: UseListSortingProps): SortBy | undefined {
+  if (props.type === 'favorites') {
+    return 'added';
+  }
+  return undefined;
+}
+
 function getDefaultDirection(props: UseListSortingProps): SortDirection {
   if (
     props.type === 'watchlist' ||
@@ -74,11 +81,13 @@ export function useListSorting(
 
   return {
     update,
-    options: LIST_SORT_OPTIONS,
+    options: props.type === 'favorites'
+      ? LIST_SORT_OPTIONS.filter((option) => option.value !== undefined)
+      : LIST_SORT_OPTIONS,
     current: params.pipe(
       map(($params) => {
         const defaultDirection = getDefaultDirection(props);
-        const sortBy = mapToSortBy($params.sort_by);
+        const sortBy = mapToSortBy($params.sort_by) ?? getDefaultSortBy(props);
         const sortHow = mapToDirection($params.sort_how) ?? defaultDirection;
 
         const sorting = LIST_SORT_OPTIONS.find(
