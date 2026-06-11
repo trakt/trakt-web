@@ -1,11 +1,15 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
+  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
 
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
+  import type { UserProfile } from "$lib/requests/models/UserProfile.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
@@ -28,11 +32,13 @@
     streamOn,
     videos,
     sentiment,
+    watchers,
   }: {
     media: MovieEntry;
     studios: MediaStudio[];
     videos: MediaVideo[];
     sentiment: SentimentAnalysis | Nil;
+    watchers: UserProfile[];
   } & CommonMediaSummaryProps = $props();
 
   const relatedLink = $derived(UrlBuilder.related.movie(media.slug));
@@ -66,6 +72,24 @@
   <Sentiment {sentiment} slug={media.slug} type="movie" />
 </RenderFor>
 
+<RenderFor audience="authenticated">
+  {#if watchers.length > 0}
+    <SectionList
+      id={{ scope: "people-watched", key: media.slug }}
+      items={watchers}
+      title={m.list_title_people_watched()}
+      --height-list="var(--ni-64)"
+    >
+      {#snippet item(user)}
+        <div class="people-watched-item">
+          <UserAvatar {user} size="small" />
+          <p class="bold ellipsis">{toDisplayableName(user)}</p>
+        </div>
+      {/snippet}
+    </SectionList>
+  {/if}
+</RenderFor>
+
 <CastList
   title={m.list_title_actors()}
   cast={crew.cast}
@@ -93,3 +117,13 @@
 />
 
 <TriviaList {media} />
+
+<style lang="scss">
+  .people-watched-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-xs);
+    width: var(--ni-56);
+  }
+</style>
