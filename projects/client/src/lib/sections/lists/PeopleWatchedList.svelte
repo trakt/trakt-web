@@ -22,11 +22,7 @@
     --height-list="var(--ni-48)"
   >
     {#snippet item(user)}
-      <Tooltip
-        content={toDisplayableName(user)}
-        variant="compact"
-        side="bottom"
-      >
+      <Tooltip content={toDisplayableName(user)}>
         <UserAvatar {user} size="large" />
       </Tooltip>
     {/snippet}
