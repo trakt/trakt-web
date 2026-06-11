@@ -16,7 +16,8 @@ export const load: LayoutLoad = ({ data }) => {
     },
   });
 
-  setToken({ value: data.oidcAuth.token, expiresAt: data.oidcAuth.expiresAt });
+  const activeAuth = data.legacyAuth.isAuthorized ? data.legacyAuth : data.oidcAuth;
+  setToken({ value: activeAuth.token, expiresAt: activeAuth.expiresAt });
 
   return { queryClient, ...data };
 };

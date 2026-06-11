@@ -18,6 +18,7 @@
   <AuthProvider
     isAuthorized={$isAuthorized}
     accessToken={OidcUserMock.access_token}
+    isAuthorizedLegacy={false}
   >
     <FeatureFlagProvider>
       <ToastProvider>

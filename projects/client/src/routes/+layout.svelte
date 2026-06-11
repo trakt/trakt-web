@@ -146,6 +146,7 @@
         <AuthProvider
           isAuthorized={data.oidcAuth.isAuthorized}
           accessToken={data.oidcAuth.token}
+          isAuthorizedLegacy={data.legacyAuth.isAuthorized}
         >
           <WSInvalidator />
           <FeatureFlagProvider>

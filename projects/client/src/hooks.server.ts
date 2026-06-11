@@ -45,7 +45,8 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
     // Only cache publicly for unauthenticated requests to prevent cache poisoning via spoofed User-Agent
     if (
       isBotAgent(event.request.headers.get('user-agent')) &&
-      !event.locals.oidcAuth
+      !event.locals.oidcAuth &&
+      !event.locals.legacyAuth
     ) {
       // 120 seconds is enough to satisfy Discord without heavily caching stale content
       return 'public, max-age=120, s-maxage=120';

@@ -199,6 +199,9 @@ declare global {
       oidcAuth:
         | import('$lib/features/auth/models/OidcAuthToken.ts').OidcAuthToken
         | Nil;
+      legacyAuth:
+        | import('$lib/features/auth/models/OidcAuthToken.ts').OidcAuthToken
+        | Nil;
       typesense: TypesenseConfig;
       isLegitimateBot: boolean;
     }
