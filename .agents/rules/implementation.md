@@ -33,6 +33,33 @@ applyTo: '**'
 - Type definitions: PascalCase files (e.g., `MediaStoreProps.ts`,
   `FilterParams.ts`)
 
+## Module Imports
+
+- **No barrel files.** Do not create `index.ts` files whose only job is to
+  re-export from siblings. Import directly from the file that owns the symbol
+  (e.g. `$lib/features/intl-overlay/withBulkIntlOverlay.ts`, not
+  `$lib/features/intl-overlay/index.ts`). Reasons:
+  - Tree-shaking and IDE jump-to-definition both work better against the real
+    file.
+  - Barrels create circular-import risk when sibling modules import each other
+    through the barrel.
+  - Renames and deletions are easier to grep when every importer references the
+    concrete path.
+- If an existing barrel is the only public surface of a feature, prefer removing
+  it and updating callers over extending it. Do not add new re-exports to
+  surviving barrels.
+- **One export per file, named like the file.** Each module should expose a
+  single primary symbol whose name matches the file name (minus the extension).
+  Examples: `withBulkIntlOverlay.ts` exports `withBulkIntlOverlay`;
+  `BulkIntlTarget.ts` exports the `BulkIntlTarget` type;
+  `scheduleEntryTargets.ts` exports `scheduleEntryTargets`.
+- **Unexported helpers inside the same file are fine.** The rule above is about
+  the public surface, not the file body. A module can declare any number of
+  local types, constants, or helper functions as long as they stay
+  module-private (no `export` keyword). Promote them to their own file only once
+  a second module needs to import them. Co-located `*.spec.ts` files do not
+  count as separate exports.
+
 ## TypeScript Standards
 
 - Always use TypeScript with strict mode.
