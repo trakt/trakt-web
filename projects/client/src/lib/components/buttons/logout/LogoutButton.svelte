@@ -64,8 +64,6 @@
   @use "$style/scss/mixins/index" as *;
 
   .logout-label {
-    font-size: var(--font-size-title);
-    color: var(--color-foreground);
     user-select: none;
     pointer-events: none;
   }

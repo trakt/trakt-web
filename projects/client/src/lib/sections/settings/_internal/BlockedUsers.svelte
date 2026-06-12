@@ -16,7 +16,7 @@
 
 <SettingsGroupCard>
   {#if $blockedUsers.length === 0}
-    <p class="empty-state secondary">{m.text_no_blocked_users()}</p>
+    <p class="empty-state small secondary">{m.text_no_blocked_users()}</p>
   {:else}
     {#each $blockedUsers as profile (profile.key)}
       <BlockedUserRow {profile} />
@@ -24,9 +24,8 @@
   {/if}
 </SettingsGroupCard>
 
-<style lang="scss">
+<style>
   .empty-state {
     padding: var(--gap-m);
-    font-size: var(--font-size-text-small);
   }
 </style>

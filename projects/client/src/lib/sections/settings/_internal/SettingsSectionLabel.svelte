@@ -2,15 +2,18 @@
   const { title }: { title: string } = $props();
 </script>
 
-<p class="settings-section-label">{title}</p>
+<p class="settings-section-label bold">{title}</p>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .settings-section-label {
-    max-width: 600px;
+    max-width: var(--ni-640);
     padding: var(--gap-m) var(--gap-m) var(--gap-xs);
     font-size: var(--font-size-title);
-    font-weight: 600;
-    color: var(--color-foreground);
-    user-select: none;
+
+    @include for-tablet-sm-and-below() {
+      max-width: 100%;
+    }
   }
 </style>

@@ -1,11 +1,14 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
+  import AboutIcon from "$lib/components/icons/AboutIcon.svelte";
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
+  import EmailIcon from "$lib/components/icons/EmailIcon.svelte";
   import GlobeIcon from "$lib/components/icons/GlobeIcon.svelte";
+  import IdIcon from "$lib/components/icons/IdIcon.svelte";
   import LockIcon from "$lib/components/icons/LockIcon.svelte";
-  import NotesIcon from "$lib/components/icons/NotesIcon.svelte";
   import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
+  import Switch from "$lib/components/toggles/Switch.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -15,9 +18,8 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import SettingInputDrawer from "./SettingInputDrawer.svelte";
   import SettingsGroupCard from "./SettingsGroupCard.svelte";
-  import SettingsNavRow from "./SettingsNavRow.svelte";
+  import SettingsGroupRow from "./SettingsGroupRow.svelte";
   import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
-  import SettingsToggleRow from "./SettingsToggleRow.svelte";
   import { useSettings } from "./useSettings";
 
   const { user } = useUser();
@@ -121,22 +123,22 @@
   );
 </script>
 
-<div class="profile-hero-card">
-  <div class="hero-avatar">
-    <ProfileImage
-      isEditable
-      --image-size="var(--ni-56)"
-      --border-width="var(--border-thickness-xs)"
-      name={$user.name.first}
-      src={$user.avatar.url}
-      isVip={$user.isVip}
-    />
-  </div>
+<div class="trakt-settings-profile-card">
+  <ProfileImage
+    isEditable
+    --image-size="var(--ni-56)"
+    --border-width="var(--border-thickness-xs)"
+    name={$user.name.first}
+    src={$user.avatar.url}
+    isVip={$user.isVip}
+  />
 
-  <div class="hero-info">
-    <p class="hero-name bold ellipsis">{$profile.displayName || $profile.username}</p>
+  <div class="trakt-settings-profile-info">
+    <span class="bold ellipsis title">
+      {$profile.displayName || $profile.username}
+    </span>
     {#if $profile.location}
-      <p class="hero-location">{$profile.location}</p>
+      <p class="secondary small">{$profile.location}</p>
     {/if}
   </div>
 
@@ -148,82 +150,96 @@
 <SettingsSectionLabel title={m.header_account_details()} />
 
 <SettingsGroupCard>
-  <SettingsNavRow
+  <SettingsGroupRow
     title={m.text_display_name()}
+    label={m.button_label_change_display_name()}
     value={$profile.displayName}
     onclick={() => (activeField = "name")}
     disabled={$isSavingSettings}
+    variant="button"
   >
-    {#snippet icon()}<ProfileIcon />{/snippet}
-  </SettingsNavRow>
+    {#snippet icon()}<IdIcon />{/snippet}
+  </SettingsGroupRow>
 
-  <SettingsNavRow
+  <SettingsGroupRow
     title={m.text_username()}
+    label={m.button_label_change_username()}
     value={$profile.username ? `@${$profile.username}` : ""}
     onclick={() => (activeField = "username")}
     disabled={$isSavingSettings}
+    variant="button"
   >
     {#snippet icon()}<ProfileIcon />{/snippet}
-  </SettingsNavRow>
+  </SettingsGroupRow>
 
   {#if Boolean($email.value)}
-    <SettingsNavRow
+    <SettingsGroupRow
       title={m.text_display_email()}
+      label={m.button_label_change_email()}
       value={$email.value ?? ""}
       onclick={() => (activeField = "email")}
       disabled={$isSavingSettings}
+      variant="button"
     >
-      {#snippet icon()}<ProfileIcon />{/snippet}
-    </SettingsNavRow>
+      {#snippet icon()}<EmailIcon />{/snippet}
+    </SettingsGroupRow>
   {/if}
 
-  <SettingsNavRow
+  <SettingsGroupRow
     title={m.text_birthday()}
+    label={m.button_label_change_birthday()}
     value={birthdayLabel}
     onclick={() => (activeField = "birthday")}
     disabled={$isSavingSettings}
+    variant="button"
   >
     {#snippet icon()}<CalendarIcon />{/snippet}
-  </SettingsNavRow>
+  </SettingsGroupRow>
 
-  <SettingsNavRow
+  <SettingsGroupRow
     title={m.text_location()}
+    label={m.button_label_change_location()}
     value={$profile.location}
     onclick={() => (activeField = "location")}
     disabled={$isSavingSettings}
+    variant="button"
   >
     {#snippet icon()}<GlobeIcon />{/snippet}
-  </SettingsNavRow>
+  </SettingsGroupRow>
 
-  <SettingsNavRow
+  <SettingsGroupRow
     title={m.text_about()}
+    label={m.button_label_change_about()}
     description={$profile.about}
     onclick={() => (activeField = "about")}
     disabled={$isSavingSettings}
+    variant="button"
   >
-    {#snippet icon()}<NotesIcon />{/snippet}
-  </SettingsNavRow>
+    {#snippet icon()}<AboutIcon />{/snippet}
+  </SettingsGroupRow>
 </SettingsGroupCard>
 
 <SettingsSectionLabel title={m.header_settings_privacy()} />
 
 <SettingsGroupCard>
-  <SettingsToggleRow
-    title={m.text_private_account()}
-    label={m.switch_label_private()}
-    checked={$profile.isPrivate}
-    onclick={() => $profile.set({ private: !$profile.isPrivate })}
-    disabled={$isSavingSettings}
-  >
+  <SettingsGroupRow title={m.text_private_account()} variant="custom">
     {#snippet icon()}<LockIcon />{/snippet}
-  </SettingsToggleRow>
+    <Switch
+      label={m.switch_label_private()}
+      checked={$profile.isPrivate}
+      onclick={() => $profile.set({ private: !$profile.isPrivate })}
+      disabled={$isSavingSettings}
+      color="purple"
+    />
+  </SettingsGroupRow>
 
-  <SettingsNavRow
+  <SettingsGroupRow
     title={m.button_text_manage_subscription()}
     href={UrlBuilder.vip()}
+    variant="link"
   >
     {#snippet icon()}<StarIcon fill="none" />{/snippet}
-  </SettingsNavRow>
+  </SettingsGroupRow>
 </SettingsGroupCard>
 
 {#if activeField}
@@ -235,33 +251,30 @@
 {/if}
 
 <style lang="scss">
-  .profile-hero-card {
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-settings-profile-card {
     display: flex;
     align-items: center;
     gap: var(--gap-m);
     padding: var(--gap-m);
     border-radius: var(--border-radius-l);
     background: var(--color-card-background);
-    max-width: 600px;
+    max-width: var(--ni-640);
     box-sizing: border-box;
+
+    box-shadow: var(--shadow-base);
+
+    @include for-tablet-sm-and-below() {
+      max-width: 100%;
+    }
   }
 
-  .hero-info {
+  .trakt-settings-profile-info {
     flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;
     gap: var(--gap-xxs);
   }
-
-  .hero-name {
-    font-size: var(--font-size-separator);
-    color: var(--color-text-primary);
-  }
-
-  .hero-location {
-    font-size: var(--font-size-text-small);
-    color: var(--color-text-secondary);
-  }
-
 </style>

@@ -95,7 +95,7 @@
       background-color: var(--purple-500);
 
       :global(span.title) {
-        color: var(--color-foreground);
+        color: var(--shade-10);
       }
     }
 

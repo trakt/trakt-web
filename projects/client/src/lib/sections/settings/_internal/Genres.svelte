@@ -38,30 +38,31 @@
 
 <SettingsGroupCard>
   <div class="genre-picker-row">
-    <p class="genre-description secondary">{m.description_genres({ limit: genreLimit })}</p>
+    <p class="small secondary">
+      {m.description_genres({ limit: genreLimit })}
+    </p>
     <div class="trakt-genres">
       {#each GENRES as genre (genre)}
         <ToggleTag
-          label={toTranslatedGenre(genre)}
+          label={m.button_label_toggle_genre({
+            genre: toTranslatedGenre(genre),
+          })}
           isPressed={favorites.includes(genre)}
           disabled={!isGenreSelectable(genre)}
           onclick={() => toggleFavoriteGenre(genre)}
-        >{toTranslatedGenre(genre)}</ToggleTag>
+          >{toTranslatedGenre(genre)}</ToggleTag
+        >
       {/each}
     </div>
   </div>
 </SettingsGroupCard>
 
-<style lang="scss">
+<style>
   .genre-picker-row {
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
     padding: var(--gap-m);
-  }
-
-  .genre-description {
-    font-size: var(--font-size-text-small);
   }
 
   .trakt-genres {
