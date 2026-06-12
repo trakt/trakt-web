@@ -1,6 +1,7 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { makeTargets } from '$lib/features/intl-overlay/makeTargets.ts';
-import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { LibraryItem } from '$lib/requests/models/LibraryItem.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { libraryQuery } from '$lib/requests/queries/sync/libraryQuery.ts';
@@ -41,17 +42,21 @@ const libraryItemTargets = makeTargets<LibraryItem>(
 );
 
 export function useLibraryList(props: UseLibraryListProps) {
-  const { list, ...rest } = usePaginatedListQuery(libraryQuery({
-    page: props.page ?? 1,
-    limit: props.limit ?? DEFAULT_PAGE_SIZE,
-    availableOn: props.library,
-    type: props.type,
-  }));
+  const { list: baseList, isLoading: baseLoading, ...rest } =
+    usePaginatedListQuery(libraryQuery({
+      page: props.page ?? 1,
+      limit: props.limit ?? DEFAULT_PAGE_SIZE,
+      availableOn: props.library,
+      type: props.type,
+    }));
+
+  const overlay = createBulkIntlOverlay<LibraryItem>({
+    getTargets: libraryItemTargets,
+  });
 
   return {
-    list: list.pipe(
-      withBulkIntlOverlay({ getTargets: libraryItemTargets }),
-    ),
+    list: baseList.pipe(overlay.operator),
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
     ...rest,
   };
 }

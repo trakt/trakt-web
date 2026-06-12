@@ -1,4 +1,6 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
@@ -10,7 +12,6 @@ import {
   showTrendingQuery,
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
-import { withBulkMediaIntl } from '$lib/features/intl-overlay/withBulkMediaIntl.ts';
 import { map } from 'rxjs';
 import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 import { mediaTrendingQuery } from '../../../requests/queries/media/mediaTrendingQuery.ts';
@@ -44,18 +45,20 @@ function typeToQuery(
 export function useTrendingList(
   props: TrendingListStoreProps,
 ) {
-  const { list, ...rest } = usePaginatedListQuery(
-    typeToQuery(props),
-  );
+  const { list: baseList, isLoading: baseLoading, ...rest } =
+    usePaginatedListQuery(typeToQuery(props));
+
+  const overlay = createBulkMediaIntl<TrendingEntry>();
 
   return {
-    list: list.pipe(
+    list: baseList.pipe(
       map(($list) => {
         // TODO: remove this filter when the server is fixed
         return $list.filter((entry) => entry.id !== 0 && entry.slug !== null);
       }),
-      withBulkMediaIntl(),
+      overlay.operator,
     ),
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
     ...rest,
   };
 }

@@ -4,7 +4,7 @@ import { useQueryClient } from '$lib/features/query/_internal/queryClientContext
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { debounceTime, map, shareReplay, switchMap, tap } from 'rxjs/operators';
-import { withBulkMediaIntl } from '../intl-overlay/withBulkMediaIntl.ts';
+import { createBulkMediaIntl } from '../intl-overlay/createBulkMediaIntl.ts';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
 import {
   searchListsQuery,
@@ -130,15 +130,18 @@ export function useSearch() {
     multicast(),
   );
 
-  const mediaItems$ = results.pipe(
-    map((response) => response?.type === 'media' ? response.items : []),
-    withBulkMediaIntl(),
-  );
+  const overlay = createBulkMediaIntl<MediaSearchResult['items'][number]>();
 
-  const localizedResults = combineLatest([results, mediaItems$]).pipe(
-    map(([response, items]) =>
-      response?.type === 'media' ? { ...response, items } : response
-    ),
+  const localizedResults = results.pipe(
+    switchMap((response) => {
+      if (response?.type !== 'media') {
+        return of(response);
+      }
+      return of(response.items).pipe(
+        overlay.operator,
+        map((items) => ({ ...response, items })),
+      );
+    }),
     shareReplay(1),
   );
 

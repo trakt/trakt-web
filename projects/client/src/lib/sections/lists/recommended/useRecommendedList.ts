@@ -1,4 +1,6 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -10,7 +12,6 @@ import {
   type RecommendedShow,
   recommendedShowsQuery,
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
-import { withBulkMediaIntl } from '$lib/features/intl-overlay/withBulkMediaIntl.ts';
 import { dailyOrderArray } from '$lib/sections/lists/stores/dailyOrderArray.ts';
 import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
@@ -77,6 +78,7 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
   const queryObservable = useQuery(query);
 
   const listKey = getListKey(props);
+  const overlay = createBulkMediaIntl<RecommendedEntry>();
 
   const allItems = queryObservable.pipe(
     map((q) => q.data ?? []),
@@ -84,7 +86,7 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
       `recommended-${listKey}-order`,
       (item) => item.id,
     ),
-    withBulkMediaIntl<RecommendedEntry>(),
+    overlay.operator,
   );
 
   const { list, hasNextPage, fetchNextPage } = useInMemoryPagination(allItems, {
@@ -92,13 +94,11 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
     limit: props.limit,
   });
 
-  const isLoading = queryObservable.pipe(
-    map(toLoadingState),
-  );
+  const baseLoading = queryObservable.pipe(map(toLoadingState));
 
   return {
     list,
-    isLoading,
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
     hasNextPage,
     fetchNextPage,
   };
