@@ -1,6 +1,9 @@
 import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { makeTargets } from '$lib/features/intl-overlay/makeTargets.ts';
+import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { MediaCredit } from '$lib/requests/models/MediaCredits.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { personMovieCreditsQuery } from '$lib/requests/queries/people/personMovieCreditsQuery.ts';
@@ -12,6 +15,12 @@ import { toLoadingState } from '../../../../utils/requests/toLoadingState.ts';
 type UseHistoryCreditsListProps = {
   slug: string;
 };
+
+const mediaCreditTargets = makeTargets<MediaCredit>({
+  get: (entry) => ({ id: entry.media.id, type: entry.media.type }),
+  patch: (entry, title) =>
+    ({ ...entry, media: { ...entry.media, title } }) as typeof entry,
+});
 
 const getHistoryMap = (history: UserHistory, type: MediaType) => {
   return type === 'movie' ? history.movies : history.shows;
@@ -77,7 +86,9 @@ export function useHistoryCreditsList(
   );
 
   return {
-    list: list$,
+    list: list$.pipe(
+      withBulkIntlOverlay<MediaCredit>({ getTargets: mediaCreditTargets }),
+    ),
     isLoading: combineLatest([movies$, shows$, history$]).pipe(
       map(
         ([movies, shows, history]) =>

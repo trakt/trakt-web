@@ -3,7 +3,8 @@ import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
-import { debounceTime, map, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { withBulkMediaIntl } from '../intl-overlay/withBulkMediaIntl.ts';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
 import {
   searchListsQuery,
@@ -129,7 +130,19 @@ export function useSearch() {
     multicast(),
   );
 
-  const coverSrc = results.pipe(
+  const mediaItems$ = results.pipe(
+    map((response) => response?.type === 'media' ? response.items : []),
+    withBulkMediaIntl(),
+  );
+
+  const localizedResults = combineLatest([results, mediaItems$]).pipe(
+    map(([response, items]) =>
+      response?.type === 'media' ? { ...response, items } : response
+    ),
+    shareReplay(1),
+  );
+
+  const coverSrc = localizedResults.pipe(
     map(mapToSearchCover),
   );
 
@@ -146,7 +159,7 @@ export function useSearch() {
   return {
     postRecentSearch,
     search,
-    results,
+    results: localizedResults,
     coverSrc,
     clear,
     mode,
