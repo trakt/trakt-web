@@ -1,29 +1,25 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
-  import AboutIcon from "$lib/components/icons/AboutIcon.svelte";
-  import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
-  import EmailIcon from "$lib/components/icons/EmailIcon.svelte";
-  import GlobeIcon from "$lib/components/icons/GlobeIcon.svelte";
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import IdIcon from "$lib/components/icons/IdIcon.svelte";
-  import LockIcon from "$lib/components/icons/LockIcon.svelte";
-  import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
-  import StarIcon from "$lib/components/icons/StarIcon.svelte";
+  import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
-  import { formatLocalDate } from "$lib/utils/date/formatLocalDate";
-  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { getSwitchInnerText } from "./getSwitchInnerText";
   import SettingInputDrawer from "./SettingInputDrawer.svelte";
+  import SettingsBlock from "./SettingsBlock.svelte";
   import SettingsGroupCard from "./SettingsGroupCard.svelte";
   import SettingsGroupRow from "./SettingsGroupRow.svelte";
+  import SettingsRow from "./SettingsRow.svelte";
   import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
   import { useSettings } from "./useSettings";
 
   const { user } = useUser();
-  const { profile, email, isSavingSettings } = useSettings();
+  const { profile, isSavingSettings } = useSettings();
+
+  const innerText = $derived(getSwitchInnerText($profile.isPrivate, "yes-no"));
 
   const promptMap = $derived({
     name: {
@@ -40,88 +36,23 @@
             : { error: m.error_text_failed_update() },
       },
     },
-    username: {
-      label: m.button_label_change_username(),
-      drawer: {
-        type: "input" as const,
-        title: m.input_prompt_username(),
-        currentValue: $profile.username,
-        name: m.text_username(),
-        isRequired: true,
-        onSave: async (value: string) =>
-          (await $profile.set({ username: value }))
-            ? undefined
-            : { error: m.error_text_username() },
-      },
-    },
-    email: {
-      label: m.button_label_change_email(),
-      drawer: {
-        type: "input" as const,
-        title: m.input_prompt_email(),
-        currentValue: $email.value ?? "",
-        name: m.text_display_email(),
-        isRequired: true,
-        onSave: async (value: string) =>
-          (await $email.set(value))
-            ? undefined
-            : { error: m.error_text_email() },
-      },
-    },
-    location: {
-      label: m.button_label_change_location(),
-      drawer: {
-        type: "input" as const,
-        title: m.input_prompt_location(),
-        currentValue: $profile.location,
-        name: m.text_location(),
-        isRequired: true,
-        onSave: async (value: string) =>
-          (await $profile.set({ location: value }))
-            ? undefined
-            : { error: m.error_text_failed_update() },
-      },
-    },
-    about: {
-      label: m.button_label_change_about(),
-      drawer: {
-        type: "textarea" as const,
-        title: m.input_prompt_about(),
-        currentValue: $profile.about,
-        name: m.text_about(),
-        isRequired: false,
-        onSave: async (value: string) =>
-          (await $profile.set({ about: value }))
-            ? undefined
-            : { error: m.error_text_failed_update() },
-      },
-    },
-    birthday: {
-      label: m.button_label_change_birthday(),
-      drawer: {
-        type: "datepicker" as const,
-        title: m.input_prompt_birthday(),
-        label: m.button_label_change_birthday(),
-        currentValue: $profile.birthday ?? undefined,
-        name: m.text_birthday(),
-        isRequired: true,
-        onSave: async (date: Date) =>
-          (await $profile.set({ dob: date ? formatLocalDate(date) : null }))
-            ? undefined
-            : { error: m.error_text_failed_update() },
-      },
-    },
   });
 
   type ProfileField = keyof typeof promptMap;
   let activeField = $state<ProfileField>();
-
-  const birthdayLabel = $derived(
-    $profile.birthday
-      ? toHumanDay({ date: $profile.birthday, locale: getLocale() })
-      : "",
-  );
 </script>
+
+{#snippet renameField(field: ProfileField)}
+  <ActionButton
+    style="ghost"
+    label={promptMap[field].label}
+    onclick={() => (activeField = field)}
+    disabled={$isSavingSettings}
+    size="small"
+  >
+    <RenameIcon />
+  </ActionButton>
+{/snippet}
 
 <div class="trakt-settings-profile-card">
   <ProfileImage
@@ -149,6 +80,11 @@
 
 <SettingsSectionLabel title={m.header_account_details()} />
 
+<p>{$profile.displayName}</p>
+<SettingsRow title={m.text_display_name()}>
+  <p class="ellipsis">{$profile.displayName}</p>
+</SettingsRow>
+
 <SettingsGroupCard>
   <SettingsGroupRow
     title={m.text_display_name()}
@@ -160,87 +96,32 @@
   >
     {#snippet icon()}<IdIcon />{/snippet}
   </SettingsGroupRow>
-
-  <SettingsGroupRow
-    title={m.text_username()}
-    label={m.button_label_change_username()}
-    value={$profile.username ? `@${$profile.username}` : ""}
-    onclick={() => (activeField = "username")}
-    disabled={$isSavingSettings}
-    variant="button"
-  >
-    {#snippet icon()}<ProfileIcon />{/snippet}
-  </SettingsGroupRow>
-
-  {#if Boolean($email.value)}
-    <SettingsGroupRow
-      title={m.text_display_email()}
-      label={m.button_label_change_email()}
-      value={$email.value ?? ""}
-      onclick={() => (activeField = "email")}
-      disabled={$isSavingSettings}
-      variant="button"
-    >
-      {#snippet icon()}<EmailIcon />{/snippet}
-    </SettingsGroupRow>
-  {/if}
-
-  <SettingsGroupRow
-    title={m.text_birthday()}
-    label={m.button_label_change_birthday()}
-    value={birthdayLabel}
-    onclick={() => (activeField = "birthday")}
-    disabled={$isSavingSettings}
-    variant="button"
-  >
-    {#snippet icon()}<CalendarIcon />{/snippet}
-  </SettingsGroupRow>
-
-  <SettingsGroupRow
-    title={m.text_location()}
-    label={m.button_label_change_location()}
-    value={$profile.location}
-    onclick={() => (activeField = "location")}
-    disabled={$isSavingSettings}
-    variant="button"
-  >
-    {#snippet icon()}<GlobeIcon />{/snippet}
-  </SettingsGroupRow>
-
-  <SettingsGroupRow
-    title={m.text_about()}
-    label={m.button_label_change_about()}
-    description={$profile.about}
-    onclick={() => (activeField = "about")}
-    disabled={$isSavingSettings}
-    variant="button"
-  >
-    {#snippet icon()}<AboutIcon />{/snippet}
-  </SettingsGroupRow>
 </SettingsGroupCard>
 
-<SettingsSectionLabel title={m.header_settings_privacy()} />
+<SettingsBlock
+  title={m.header_account_details()}
+  description={m.description_account_details()}
+>
+  <SettingsRow title={m.text_display_name()}>
+    <p class="ellipsis">{$profile.displayName}</p>
+    {#snippet action()}
+      {@render renameField("name")}
+    {/snippet}
+  </SettingsRow>
 
-<SettingsGroupCard>
-  <SettingsGroupRow title={m.text_private_account()} variant="custom">
-    {#snippet icon()}<LockIcon />{/snippet}
-    <Switch
-      label={m.switch_label_private()}
-      checked={$profile.isPrivate}
-      onclick={() => $profile.set({ private: !$profile.isPrivate })}
-      disabled={$isSavingSettings}
-      color="purple"
-    />
-  </SettingsGroupRow>
-
-  <SettingsGroupRow
-    title={m.button_text_manage_subscription()}
-    href={UrlBuilder.vip()}
-    variant="link"
-  >
-    {#snippet icon()}<StarIcon fill="none" />{/snippet}
-  </SettingsGroupRow>
-</SettingsGroupCard>
+  <SettingsRow title={m.text_private_account()}>
+    {#snippet action()}
+      <Switch
+        {innerText}
+        color="purple"
+        label={m.switch_label_private()}
+        checked={$profile.isPrivate}
+        onclick={() => $profile.set({ private: !$profile.isPrivate })}
+        disabled={$isSavingSettings}
+      />
+    {/snippet}
+  </SettingsRow>
+</SettingsBlock>
 
 {#if activeField}
   <SettingInputDrawer
