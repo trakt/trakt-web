@@ -1,5 +1,6 @@
 import { activityEntryTargets } from '$lib/features/intl-overlay/activityEntryTargets.ts';
-import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
@@ -81,17 +82,24 @@ function typeToQuery(
 export function useRecentlyWatchedList(
   params: RecentlyWatchedListStoreProps,
 ) {
-  const { list, ...rest } = usePaginatedListQuery(typeToQuery(params));
-
-  const localized = list.pipe(
-    withBulkIntlOverlay<HistoryEntry>({
-      getTargets: activityEntryTargets,
-    }),
+  const { list, isLoading: baseLoading, ...rest } = usePaginatedListQuery(
+    typeToQuery(params),
   );
+
+  const overlay = createBulkIntlOverlay<HistoryEntry>({
+    getTargets: activityEntryTargets,
+  });
+
+  const localized = list.pipe(overlay.operator);
 
   const periods = localized.pipe(
     map((items) => mapToCalendarPeriods(items)),
   );
 
-  return { list: localized, periods, ...rest };
+  return {
+    list: localized,
+    periods,
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
+    ...rest,
+  };
 }

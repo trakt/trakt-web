@@ -1,6 +1,7 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
-import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import {
@@ -37,7 +38,11 @@ export function useReleasesItems(props: UseReleasesItemsProps) {
     }),
   );
 
-  const isLoading = query.pipe(map(($query) => $query.isLoading));
+  const overlay = createBulkIntlOverlay<ReleasesCalendarEntry>({
+    getTargets: episodeWithShowOrMovieTargets,
+  });
+
+  const baseLoading = query.pipe(map(($query) => $query.isLoading));
 
   const list = query.pipe(
     map(($query) =>
@@ -47,10 +52,11 @@ export function useReleasesItems(props: UseReleasesItemsProps) {
         now: new Date(),
       })
     ),
-    withBulkIntlOverlay<ReleasesCalendarEntry>({
-      getTargets: episodeWithShowOrMovieTargets,
-    }),
+    overlay.operator,
   );
 
-  return { list, isLoading };
+  return {
+    list,
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
+  };
 }

@@ -1,6 +1,9 @@
 import { makeTargets } from './makeTargets.ts';
 
-type Titled = { id: number; title: string };
+type Titled = {
+  id: number;
+  title: string;
+};
 
 type EpisodeWithShow = Titled & {
   show: { id: number; title: string };
@@ -9,9 +12,11 @@ type EpisodeWithShow = Titled & {
 /**
  * Targets for entries that are either an episode carrying its
  * embedded `.show` (the episode title sits at the entry root) or a
- * standalone movie entry. Covers calendar/upcoming/releases rows
- * and up-next progress rows where the API mixes both shapes in a
- * single list.
+ * standalone media entry (movie or show). Covers calendar / upcoming
+ * / releases rows and up-next progress rows where the API mixes both
+ * shapes in a single list. Standalone rows expose their kind via
+ * `entry.type` (MediaEntry / MovieEntry / ShowEntry) so the helper
+ * falls back to that rather than assuming "movie".
  */
 export const episodeWithShowOrMovieTargets = <
   T extends Titled | EpisodeWithShow,
@@ -29,7 +34,14 @@ export const episodeWithShowOrMovieTargets = <
       patch: (e, title) => 'show' in e ? ({ ...e, title } as T) : e,
     },
     {
-      get: (e) => 'show' in e ? null : { id: e.id, type: 'movie' },
+      get: (e) => {
+        if ('show' in e) return null;
+        const standaloneType =
+          'type' in e && (e as { type?: unknown }).type === 'show'
+            ? 'show'
+            : 'movie';
+        return { id: e.id, type: standaloneType };
+      },
       patch: (e, title) => ({ ...e, title } as T),
     },
   )(entry);

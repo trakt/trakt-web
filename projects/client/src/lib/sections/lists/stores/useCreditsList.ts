@@ -1,5 +1,5 @@
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { makeTargets } from '$lib/features/intl-overlay/makeTargets.ts';
-import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { CrewPosition } from '$lib/requests/models/CrewPosition.ts';
 import type {
@@ -9,7 +9,7 @@ import type {
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { personMovieCreditsQuery } from '$lib/requests/queries/people/personMovieCreditsQuery.ts';
 import { personShowCreditsQuery } from '$lib/requests/queries/people/personShowCreditsQuery.ts';
-import { combineLatest, map } from 'rxjs';
+import { map, of, switchMap } from 'rxjs';
 
 type UseCreditsListProps = {
   type: MediaType;
@@ -79,13 +79,20 @@ export function useCreditsList(
 ) {
   const query = useQuery(typeToQuery({ type, slug }));
 
-  const flatCredits = query.pipe(
-    map(($query) => flattenCredits($query.data)),
-    withBulkIntlOverlay({ getTargets: flatCreditTargets }),
-  );
+  const overlay = createBulkIntlOverlay<FlatCredit>({
+    getTargets: flatCreditTargets,
+  });
 
-  const credits = combineLatest([query, flatCredits]).pipe(
-    map(([$query, $flat]) => rebuildCredits($query.data, $flat)),
+  // switchMap keeps the flatten -> overlay -> rebuild chain bound to the
+  // same `query` emission so navigating between credits pages can never
+  // pair fresh credits with stale localized titles.
+  const credits = query.pipe(
+    switchMap(($query) =>
+      of(flattenCredits($query.data)).pipe(
+        overlay.operator,
+        map(($flat) => rebuildCredits($query.data, $flat)),
+      )
+    ),
   );
 
   return {

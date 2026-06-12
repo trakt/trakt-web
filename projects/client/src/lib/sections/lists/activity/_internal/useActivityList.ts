@@ -1,6 +1,7 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { activityEntryTargets } from '$lib/features/intl-overlay/activityEntryTargets.ts';
-import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SocialActivity } from '$lib/requests/models/SocialActivity.ts';
@@ -23,7 +24,7 @@ type ActivityListProps =
   & FilterParams;
 
 export function useActivityList(props: ActivityListProps) {
-  const { list, ...rest } = usePaginatedListQuery(
+  const { list, isLoading: baseLoading, ...rest } = usePaginatedListQuery(
     socialActivityQuery({
       ...props,
       startDate: props.range?.startDate,
@@ -31,10 +32,12 @@ export function useActivityList(props: ActivityListProps) {
     }),
   );
 
+  const overlay = createBulkIntlOverlay<SocialActivity>({
+    getTargets: activityEntryTargets,
+  });
+
   const filteredList = list.pipe(
-    withBulkIntlOverlay<SocialActivity>({
-      getTargets: activityEntryTargets,
-    }),
+    overlay.operator,
     map(($list) => {
       if (!props.type || props.type === 'media') {
         return $list;
@@ -54,6 +57,7 @@ export function useActivityList(props: ActivityListProps) {
   return {
     list: filteredList,
     activityCalendar,
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
     ...rest,
   };
 }

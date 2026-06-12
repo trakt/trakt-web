@@ -1,3 +1,4 @@
+import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import {
   movieTrendingQuery,
@@ -5,7 +6,6 @@ import {
 import {
   showTrendingQuery,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
-import { withBulkMediaIntl } from '$lib/features/intl-overlay/withBulkMediaIntl.ts';
 import { map } from 'rxjs';
 import type { InfiniteQuery } from '../../features/query/models/InfiniteQuery.ts';
 import { dailyShuffle } from '../../utils/array/dailyShuffle.ts';
@@ -33,11 +33,12 @@ function typeToQuery(type: MediaType) {
 
 export function useTrendingItems(type: MediaType) {
   const { list } = usePaginatedListQuery(typeToQuery(type));
+  const overlay = createBulkMediaIntl<TrendingEntry>();
 
   return {
     list: list.pipe(
       map(($list) => dailyShuffle($list).slice(0, RANDOM_ITEM_COUNT)),
-      withBulkMediaIntl(),
+      overlay.operator,
     ),
   };
 }

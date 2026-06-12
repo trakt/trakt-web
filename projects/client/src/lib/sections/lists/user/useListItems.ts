@@ -1,6 +1,7 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { listItemTargets } from '$lib/features/intl-overlay/listItemTargets.ts';
-import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -69,13 +70,14 @@ function listToQuery(
 }
 
 export function useListItems(props: UseListItemsProps) {
-  const { list, ...rest } = usePaginatedListQuery(listToQuery(props));
+  const { list: baseList, isLoading: baseLoading, ...rest } =
+    usePaginatedListQuery(listToQuery(props));
+  const overlay = createBulkIntlOverlay<ListItem>({
+    getTargets: listItemTargets,
+  });
   return {
-    list: list.pipe(
-      withBulkIntlOverlay<ListItem>({
-        getTargets: listItemTargets,
-      }),
-    ),
+    list: baseList.pipe(overlay.operator),
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
     ...rest,
   };
 }
