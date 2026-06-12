@@ -31,7 +31,11 @@
   );
 </script>
 
-<CountryMap {data}>
+<CountryMap
+  {data}
+  --color-map-chart-background="var(--shade-900)"
+  --color-map-chart-highlight="var(--red-500)"
+>
   {#snippet tooltip({ code })}
     {@const country = countryByCode.get(code)}
     {#if country}
