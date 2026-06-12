@@ -25,6 +25,7 @@ function mapEpisodeIntlResponse(
     title: translation.title,
     overview: translation.overview,
     country: translation.country,
+    language: translation.language,
   };
 }
 

@@ -9,6 +9,7 @@ export const EpisodeSiloTranslationsMappedMock: Map<string, EpisodeIntl> =
           "Sheriff Becker's plans for the future are thrown off course after his wife meets a hacker with information about the silo.",
         'title': 'Freedom Day',
         'country': 'us',
+        'language': 'en',
       },
     ],
     [
@@ -18,6 +19,7 @@ export const EpisodeSiloTranslationsMappedMock: Map<string, EpisodeIntl> =
           'Sheriff Beckers toekomstplannen worden verstoord als zijn vrouw een hacker ontmoet met informatie over de Silo.',
         'title': 'Vrijheidsdag',
         'country': 'nl',
+        'language': 'nl',
       },
     ],
   ]);

@@ -1,9 +1,17 @@
 import { setLocale } from '$lib/features/i18n/index.ts';
+import type { EpisodeIntl } from '$lib/requests/models/EpisodeIntl.ts';
+import type { MediaIntl } from '$lib/requests/models/MediaIntl.ts';
 import { EpisodeSiloTranslationsMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloTranslationsMappedMock.ts';
 import { MovieHereticTranslationsMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticTranslationsMappedMock.ts';
 import { ShowSiloTranslationsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloTranslationsMappedMock.ts';
 import { describe, expect, it } from 'vitest';
 import { findRegionalIntl } from './findRegionalIntl.ts';
+
+function omitLanguage<T extends MediaIntl | EpisodeIntl>(intl: T | undefined) {
+  if (!intl) return intl;
+  const { language: _language, ...rest } = intl;
+  return rest;
+}
 
 describe('util: findRegionalIntl', () => {
   describe('movie media type', () => {
@@ -26,7 +34,7 @@ describe('util: findRegionalIntl', () => {
       });
 
       expect(result).to.deep.equal({
-        ...MovieHereticTranslationsMappedMock.get('en'),
+        ...omitLanguage(MovieHereticTranslationsMappedMock.get('en')),
         title: fallbackData.title,
       });
     });
@@ -41,7 +49,7 @@ describe('util: findRegionalIntl', () => {
       });
 
       expect(result).to.deep.equal(
-        MovieHereticTranslationsMappedMock.get('pt'),
+        omitLanguage(MovieHereticTranslationsMappedMock.get('pt')),
       );
     });
 
@@ -55,7 +63,7 @@ describe('util: findRegionalIntl', () => {
       });
 
       expect(result).to.deep.equal({
-        ...MovieHereticTranslationsMappedMock.get('nl'),
+        ...omitLanguage(MovieHereticTranslationsMappedMock.get('nl')),
         title: fallbackData.title,
         tagline: fallbackData.tagline,
       });
@@ -75,6 +83,40 @@ describe('util: findRegionalIntl', () => {
         overview: fallbackData.overview,
         tagline: fallbackData.tagline,
         country: '',
+      });
+    });
+
+    it('should borrow title from a same-language sibling when the regional translation has it null', () => {
+      setLocale('es-ES');
+
+      const translations: MediaIntl[] = [
+        {
+          country: 'mx',
+          language: 'es',
+          title: 'Sunshine: Alerta solar',
+          overview: 'Spanish (MX) overview.',
+          tagline: 'Si el sol muere, nosotros también.',
+        },
+        {
+          country: 'es',
+          language: 'es',
+          title: null,
+          overview: 'Spanish (ES) overview.',
+          tagline: null,
+        },
+      ];
+
+      const result = findRegionalIntl({
+        type: 'movie',
+        translations,
+        fallback: fallbackData,
+      });
+
+      expect(result).to.deep.equal({
+        title: 'Sunshine: Alerta solar',
+        overview: 'Spanish (ES) overview.',
+        tagline: 'Si el sol muere, nosotros también.',
+        country: 'es',
       });
     });
   });
@@ -98,7 +140,9 @@ describe('util: findRegionalIntl', () => {
         fallback: fallbackData,
       });
 
-      expect(result).to.deep.equal(ShowSiloTranslationsMappedMock.get('en'));
+      expect(result).to.deep.equal(
+        omitLanguage(ShowSiloTranslationsMappedMock.get('en')),
+      );
     });
 
     it('should return dutch translation for nl locale', () => {
@@ -111,7 +155,7 @@ describe('util: findRegionalIntl', () => {
       });
 
       expect(result).to.deep.equal({
-        ...ShowSiloTranslationsMappedMock.get('nl'),
+        ...omitLanguage(ShowSiloTranslationsMappedMock.get('nl')),
         title: fallbackData.title,
       });
     });
@@ -125,7 +169,9 @@ describe('util: findRegionalIntl', () => {
         fallback: fallbackData,
       });
 
-      expect(result).to.deep.equal(ShowSiloTranslationsMappedMock.get('ja'));
+      expect(result).to.deep.equal(
+        omitLanguage(ShowSiloTranslationsMappedMock.get('ja')),
+      );
     });
   });
 
@@ -147,7 +193,9 @@ describe('util: findRegionalIntl', () => {
         fallback: fallbackData,
       });
 
-      expect(result).to.deep.equal(EpisodeSiloTranslationsMappedMock.get('en'));
+      expect(result).to.deep.equal(
+        omitLanguage(EpisodeSiloTranslationsMappedMock.get('en')),
+      );
     });
 
     it('should return dutch translation for nl locale', () => {
@@ -159,7 +207,9 @@ describe('util: findRegionalIntl', () => {
         fallback: fallbackData,
       });
 
-      expect(result).to.deep.equal(EpisodeSiloTranslationsMappedMock.get('nl'));
+      expect(result).to.deep.equal(
+        omitLanguage(EpisodeSiloTranslationsMappedMock.get('nl')),
+      );
     });
   });
 });
