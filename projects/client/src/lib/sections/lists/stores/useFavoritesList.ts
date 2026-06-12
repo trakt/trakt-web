@@ -1,4 +1,7 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { makeTargets } from '$lib/features/intl-overlay/makeTargets.ts';
+import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
+import type { FavoritedEntry } from '$lib/requests/models/FavoritedEntry.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { mediaFavoritesQuery } from '$lib/requests/queries/media/mediaFavoritesQuery.ts';
 import { movieFavoritesQuery } from '$lib/requests/queries/movies/movieFavoritesQuery.ts';
@@ -33,11 +36,25 @@ function typeToQuery(
   }
 }
 
+const favoritedEntryTargets = makeTargets<FavoritedEntry>({
+  get: (entry) => ({ id: entry.item.id, type: entry.item.type }),
+  patch: (entry, title) => ({
+    ...entry,
+    item: { ...entry.item, title } as typeof entry.item,
+  }),
+});
+
 export function useFavoritesList(
   { type, slug, filter, limit = DEFAULT_PAGE_SIZE, sortBy, sortHow }:
     UseFavoritesProps,
 ) {
-  return usePaginatedListQuery(
+  const { list, ...rest } = usePaginatedListQuery(
     typeToQuery({ type, slug, filter, limit, sortBy, sortHow }),
   );
+  return {
+    list: list.pipe(
+      withBulkIntlOverlay({ getTargets: favoritedEntryTargets }),
+    ),
+    ...rest,
+  };
 }

@@ -1,4 +1,6 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { listItemTargets } from '$lib/features/intl-overlay/listItemTargets.ts';
+import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { WatchListIntent } from '$lib/requests/models/WatchListIntent.ts';
@@ -34,9 +36,9 @@ export function useWatchList(params: WatchListStoreProps) {
 
   const result = {
     list: items.pipe(
+      withBulkIntlOverlay({ getTargets: listItemTargets }),
       map(($items) =>
-        $items
-          .filter((item) => item.type === 'movie' || item.type === 'show')
+        $items.filter((item) => item.type === 'movie' || item.type === 'show')
       ),
     ),
     ...rest,

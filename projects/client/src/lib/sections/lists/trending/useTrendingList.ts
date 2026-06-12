@@ -10,6 +10,7 @@ import {
   showTrendingQuery,
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
+import { withBulkMediaIntl } from '$lib/features/intl-overlay/withBulkMediaIntl.ts';
 import { map } from 'rxjs';
 import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 import { mediaTrendingQuery } from '../../../requests/queries/media/mediaTrendingQuery.ts';
@@ -53,6 +54,7 @@ export function useTrendingList(
         // TODO: remove this filter when the server is fixed
         return $list.filter((entry) => entry.id !== 0 && entry.slug !== null);
       }),
+      withBulkMediaIntl(),
     ),
     ...rest,
   };
