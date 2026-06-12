@@ -9,5 +9,6 @@ export function mapToMediaIntl(
     overview: translation.overview,
     tagline: translation.tagline,
     country: translation.country,
+    language: translation.language,
   };
 }
