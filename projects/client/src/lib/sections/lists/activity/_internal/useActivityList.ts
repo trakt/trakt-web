@@ -1,6 +1,9 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { activityEntryTargets } from '$lib/features/intl-overlay/activityEntryTargets.ts';
+import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
+import type { SocialActivity } from '$lib/requests/models/SocialActivity.ts';
 import { socialActivityQuery } from '$lib/requests/queries/users/socialActivityQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { map } from 'rxjs';
@@ -28,16 +31,21 @@ export function useActivityList(props: ActivityListProps) {
     }),
   );
 
-  const filteredList = list.pipe(map(($list) => {
-    if (!props.type || props.type === 'media') {
-      return $list;
-    }
+  const filteredList = list.pipe(
+    withBulkIntlOverlay<SocialActivity>({
+      getTargets: activityEntryTargets,
+    }),
+    map(($list) => {
+      if (!props.type || props.type === 'media') {
+        return $list;
+      }
 
-    return $list.filter((entry) =>
-      entry.type === props.type ||
-      props.type === 'show' && entry.type === 'episode'
-    );
-  }));
+      return $list.filter((entry) =>
+        entry.type === props.type ||
+        props.type === 'show' && entry.type === 'episode'
+      );
+    }),
+  );
 
   const activityCalendar = filteredList.pipe(
     map((items) => mapToActivityCalendar(items, props.range?.startDate)),
