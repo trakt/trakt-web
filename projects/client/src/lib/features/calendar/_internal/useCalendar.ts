@@ -1,3 +1,5 @@
+import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
+import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import {
@@ -70,6 +72,9 @@ export function useCalendar(
         return a.effectiveReleaseDate.getTime() -
           b.effectiveReleaseDate.getTime();
       });
+    }),
+    withBulkIntlOverlay<CalendarItem>({
+      getTargets: episodeWithShowOrMovieTargets,
     }),
   );
 
