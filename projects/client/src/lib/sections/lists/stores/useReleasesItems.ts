@@ -1,7 +1,10 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
+import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import {
+  type ReleasesCalendarEntry,
   releasesCalendarQuery,
 } from '$lib/requests/queries/calendars/releasesCalendarQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
@@ -44,6 +47,9 @@ export function useReleasesItems(props: UseReleasesItemsProps) {
         now: new Date(),
       })
     ),
+    withBulkIntlOverlay<ReleasesCalendarEntry>({
+      getTargets: episodeWithShowOrMovieTargets,
+    }),
   );
 
   return { list, isLoading };
