@@ -1,3 +1,5 @@
+import { activityEntryTargets } from '$lib/features/intl-overlay/activityEntryTargets.ts';
+import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
@@ -81,9 +83,15 @@ export function useRecentlyWatchedList(
 ) {
   const { list, ...rest } = usePaginatedListQuery(typeToQuery(params));
 
-  const periods = list.pipe(
+  const localized = list.pipe(
+    withBulkIntlOverlay<HistoryEntry>({
+      getTargets: activityEntryTargets,
+    }),
+  );
+
+  const periods = localized.pipe(
     map((items) => mapToCalendarPeriods(items)),
   );
 
-  return { list, periods, ...rest };
+  return { list: localized, periods, ...rest };
 }
