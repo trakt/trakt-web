@@ -9,6 +9,7 @@ import {
   showPopularQuery,
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
 import { addYear } from '$lib/utils/date/addYear.ts';
+import { withBulkMediaIntl } from '$lib/features/intl-overlay/withBulkMediaIntl.ts';
 import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 import { mediaPopularQuery } from '../../../requests/queries/media/mediaPopularQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
@@ -55,5 +56,9 @@ function typeToQuery(
 export function usePopularList(
   props: PopularListStoreProps,
 ) {
-  return usePaginatedListQuery(typeToQuery(props));
+  const { list, ...rest } = usePaginatedListQuery(typeToQuery(props));
+  return {
+    list: list.pipe(withBulkMediaIntl<PopularEntry>()),
+    ...rest,
+  };
 }

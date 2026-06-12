@@ -10,6 +10,7 @@ import {
   type RecommendedShow,
   recommendedShowsQuery,
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
+import { withBulkMediaIntl } from '$lib/features/intl-overlay/withBulkMediaIntl.ts';
 import { dailyOrderArray } from '$lib/sections/lists/stores/dailyOrderArray.ts';
 import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
@@ -83,6 +84,7 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
       `recommended-${listKey}-order`,
       (item) => item.id,
     ),
+    withBulkMediaIntl<RecommendedEntry>(),
   );
 
   const { list, hasNextPage, fetchNextPage } = useInMemoryPagination(allItems, {

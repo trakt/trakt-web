@@ -11,6 +11,7 @@ import {
   showAnticipatedQuery,
 } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
 import { addYear } from '$lib/utils/date/addYear.ts';
+import { withBulkMediaIntl } from '$lib/features/intl-overlay/withBulkMediaIntl.ts';
 import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 import { mediaAnticipatedQuery } from '../../../requests/queries/media/mediaAnticipatedQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
@@ -56,5 +57,9 @@ function typeToQuery(
 export function useAnticipatedList(
   props: AnticipatedListStoreProps,
 ) {
-  return usePaginatedListQuery(typeToQuery(props));
+  const { list, ...rest } = usePaginatedListQuery(typeToQuery(props));
+  return {
+    list: list.pipe(withBulkMediaIntl<AnticipatedEntry>()),
+    ...rest,
+  };
 }
