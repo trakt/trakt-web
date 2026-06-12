@@ -40,7 +40,10 @@ describe('store: useShow', () => {
         waitFor: (result) => result?.overview !== '' && result?.country !== '',
       });
 
-      expect(result).to.deep.equal(ShowSiloTranslationsMappedMock.get('ja'));
+      const { language: _language, ...expected } =
+        ShowSiloTranslationsMappedMock
+          .get('ja')!;
+      expect(result).to.deep.equal(expected);
     });
 
     it('should return crew', async () => {

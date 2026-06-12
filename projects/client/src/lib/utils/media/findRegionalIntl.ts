@@ -22,26 +22,72 @@ type ToEpisodeIntlProps = {
 
 type ToMediaOrEpisodeIntlProps = ToMediaIntlProps | ToEpisodeIntlProps;
 
-export function findRegionalIntl(props: ToMediaOrEpisodeIntlProps) {
-  const { region } = getLanguageAndRegion();
-  const regionCode = region.toLowerCase();
+function pickField<T extends MediaIntl | EpisodeIntl>(
+  translations: ReadonlyArray<T> | undefined,
+  language: string,
+  regionCode: string,
+  getter: (intl: T) => string | Nil,
+): string | undefined {
+  if (!translations?.length) return undefined;
 
-  const commonIntl = (intl?: MediaIntl | EpisodeIntl) => ({
-    title: intl?.title ?? props.fallback?.title ?? '',
-    overview: intl?.overview ?? props.fallback?.overview ?? '',
-    country: intl?.country ?? '',
-  });
+  // 1. Region match wins when it carries a non-empty value.
+  const regional = translations.find((intl) => intl.country === regionCode);
+  const regionalValue = regional ? getter(regional) : null;
+  if (regionalValue) return regionalValue;
 
-  if (props.type === 'episode') {
-    const intl = props.translations?.find((intl) =>
-      intl.country === regionCode
-    );
-    return commonIntl(intl);
+  // 2. Fall back to a sibling translation in the same language that
+  //    does carry the field. Trakt sometimes returns the regional
+  //    variant with title null while another country in the same
+  //    language has it filled (e.g. es-ES null but es-MX present).
+  for (const intl of translations) {
+    if (intl.language !== language) continue;
+    const value = getter(intl);
+    if (value) return value;
   }
 
-  const intl = props.translations?.find((intl) => intl.country === regionCode);
+  return undefined;
+}
+
+export function findRegionalIntl(props: ToMediaOrEpisodeIntlProps) {
+  const { language, region } = getLanguageAndRegion();
+  const regionCode = region.toLowerCase();
+  const languageCode = language.toLowerCase();
+
+  const title = pickField(
+    props.translations,
+    languageCode,
+    regionCode,
+    (intl) => intl.title,
+  );
+  const overview = pickField(
+    props.translations,
+    languageCode,
+    regionCode,
+    (intl) => intl.overview,
+  );
+  const matchedCountry =
+    props.translations?.find((intl) => intl.country === regionCode)?.country ??
+      '';
+
+  const common = {
+    title: title ?? props.fallback?.title ?? '',
+    overview: overview ?? props.fallback?.overview ?? '',
+    country: matchedCountry,
+  };
+
+  if (props.type === 'episode') {
+    return common;
+  }
+
+  const tagline = pickField(
+    props.translations,
+    languageCode,
+    regionCode,
+    (intl) => intl.tagline,
+  );
+
   return {
-    ...commonIntl(intl),
-    tagline: intl?.tagline ?? props.fallback?.tagline ?? '',
+    ...common,
+    tagline: tagline ?? props.fallback?.tagline ?? '',
   };
 }
