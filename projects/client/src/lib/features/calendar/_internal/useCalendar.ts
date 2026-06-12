@@ -1,5 +1,6 @@
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
-import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import {
@@ -62,9 +63,13 @@ export function useCalendar(
   const queries = typeToQueries(props)
     .map((query) => useQuery(query));
 
-  const isLoading = combineLatest(queries).pipe(
+  const baseLoading = combineLatest(queries).pipe(
     map(($queries) => $queries.some(toLoadingState)),
   );
+
+  const overlay = createBulkIntlOverlay<CalendarItem>({
+    getTargets: episodeWithShowOrMovieTargets,
+  });
 
   const allItems = combineLatest(queries).pipe(
     map(($queries) => {
@@ -73,13 +78,11 @@ export function useCalendar(
           b.effectiveReleaseDate.getTime();
       });
     }),
-    withBulkIntlOverlay<CalendarItem>({
-      getTargets: episodeWithShowOrMovieTargets,
-    }),
+    overlay.operator,
   );
 
   return {
-    isLoading,
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
     calendar: allItems.pipe(
       map(($allItems) => {
         return Array.from({ length: props.days }, (_, i) => {

@@ -40,15 +40,16 @@ const bulkIntlRequest = async (
     path: `/v3/intl/bulk?${params.toString()}`,
   });
 
-  return response.ok
-    ? {
-      body: BulkIntlResponseSchema.parse(await response.json()),
-      status: 200,
-    }
-    : {
-      body: BulkIntlResponseSchema.parse({}),
-      status: 200,
-    };
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch bulk intl: ${response.status} ${response.statusText}`,
+    );
+  }
+
+  return {
+    body: BulkIntlResponseSchema.parse(await response.json()),
+    status: 200,
+  };
 };
 
 export const bulkIntlQuery = defineQuery({

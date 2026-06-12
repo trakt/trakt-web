@@ -1,11 +1,13 @@
-import type { OperatorFunction } from 'rxjs';
 import type { BulkIntlOverlayType } from './BulkIntlOverlayType.ts';
-import { withBulkIntlOverlay } from './withBulkIntlOverlay.ts';
+import {
+  type BulkIntlOverlay,
+  createBulkIntlOverlay,
+} from './createBulkIntlOverlay.ts';
 
-export function withBulkMediaIntl<
+export function createBulkMediaIntl<
   T extends { id: number; type: BulkIntlOverlayType; title: string },
->(): OperatorFunction<T[], T[]> {
-  return withBulkIntlOverlay<T>({
+>(): BulkIntlOverlay<T> {
+  return createBulkIntlOverlay<T>({
     getTargets: (entry) => [{
       id: entry.id,
       type: entry.type,
