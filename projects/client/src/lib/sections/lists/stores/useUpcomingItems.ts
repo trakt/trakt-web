@@ -1,4 +1,6 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
+import { withBulkIntlOverlay } from '$lib/features/intl-overlay/withBulkIntlOverlay.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
@@ -63,6 +65,9 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
         .filter((d) => d.effectiveReleaseDate.getTime() > Date.now())
         .slice(0, props.limit)
     ),
+    withBulkIntlOverlay<MediaEntry | UpcomingEpisodeEntry>({
+      getTargets: episodeWithShowOrMovieTargets,
+    }),
   );
 
   return { list, isLoading };
