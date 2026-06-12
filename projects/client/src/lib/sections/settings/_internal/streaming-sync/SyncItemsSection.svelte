@@ -76,7 +76,7 @@
   );
 </script>
 
-<SettingsBlock {title} {description} boldTitle>
+<SettingsBlock {title} {description}>
   {#if $isError}
     <SyncLoadError onRetry={retry} />
   {:else if !$isLoading && $items.length === 0}

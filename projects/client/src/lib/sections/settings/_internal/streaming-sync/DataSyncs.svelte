@@ -47,7 +47,6 @@
 <SettingsBlock
   title={m.header_data_syncs()}
   description={m.description_data_syncs()}
-  boldTitle
 >
   {#if $summary && $summary.count > 0 && $summary.latest}
     <div class="trakt-data-syncs-banner">
