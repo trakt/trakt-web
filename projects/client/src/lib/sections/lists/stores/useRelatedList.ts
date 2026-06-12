@@ -1,3 +1,4 @@
+import { withBulkMediaIntl } from '$lib/features/intl-overlay/withBulkMediaIntl.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
@@ -38,5 +39,9 @@ function typeToQuery(
 export function useRelatedList(
   props: RelatedListStoreProps,
 ) {
-  return usePaginatedListQuery(typeToQuery(props));
+  const { list, ...rest } = usePaginatedListQuery(typeToQuery(props));
+  return {
+    list: list.pipe(withBulkMediaIntl<RelatedEntry>()),
+    ...rest,
+  };
 }
