@@ -1,3 +1,4 @@
+import { withBulkEpisodeIntl } from '$lib/features/intl-overlay/withBulkEpisodeIntl.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { showSeasonEpisodesQuery } from '$lib/requests/queries/shows/showSeasonEpisodesQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
@@ -10,7 +11,10 @@ export const useSeasonEpisodes = (slug: string, season: number) => {
   }));
 
   return {
-    list: query.pipe(map(($query) => $query.data ?? [])),
+    list: query.pipe(
+      map(($query) => $query.data ?? []),
+      withBulkEpisodeIntl(),
+    ),
     isLoading: query.pipe(map(toLoadingState)),
   };
 };

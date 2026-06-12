@@ -5,6 +5,7 @@ import {
 } from '@tanstack/svelte-query';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { debounceTime, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { withBulkMediaIntl } from '../intl-overlay/withBulkMediaIntl.ts';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
 import {
   searchListsQuery,
@@ -130,7 +131,19 @@ export function useSearch() {
     shareReplay(1),
   );
 
-  const coverSrc = results.pipe(
+  const mediaItems$ = results.pipe(
+    map((response) => response?.type === 'media' ? response.items : []),
+    withBulkMediaIntl(),
+  );
+
+  const localizedResults = combineLatest([results, mediaItems$]).pipe(
+    map(([response, items]) =>
+      response?.type === 'media' ? { ...response, items } : response
+    ),
+    shareReplay(1),
+  );
+
+  const coverSrc = localizedResults.pipe(
     map(mapToSearchCover),
   );
 
@@ -147,7 +160,7 @@ export function useSearch() {
   return {
     postRecentSearch,
     search,
-    results,
+    results: localizedResults,
     coverSrc,
     clear,
     mode,
