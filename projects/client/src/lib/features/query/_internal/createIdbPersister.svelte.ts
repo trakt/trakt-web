@@ -20,7 +20,11 @@ export function createIdbPersister(): Persister {
 
   return {
     persistClient: monitor(async (client: PersistedClient) => {
-      await set(IDB_VALID_KEY, client)
+      // TanStack Query v6 wraps cache data in Svelte 5 $state proxies, which
+      // IDB's structured clone algorithm cannot serialize. $state.snapshot
+      // strips the proxies while preserving all structured-cloneable types
+      // (Date, Map, Set, etc.) that JSON round-tripping would destroy.
+      await set(IDB_VALID_KEY, $state.snapshot(client))
         .catch(handleError);
     }, 'IDB Persister'),
     restoreClient: monitor(async () => {
