@@ -87,8 +87,6 @@
     padding: var(--ni-20);
 
     background: var(--background-vip-drawer);
-    border: var(--border-thickness-xxs) solid
-      color-mix(in srgb, var(--color-text-primary) 17%, transparent);
     border-radius: var(--border-radius-xl);
   }
 
