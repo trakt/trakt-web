@@ -21,6 +21,7 @@ type ReorderDragParams = {
   ) => void;
   rowDataAttribute?: string;
   scrollContainerClassName?: string;
+  dragHandleSelector?: string;
 };
 
 const autoScrollEdgeSize = 88;
@@ -37,6 +38,7 @@ export function reorderDrag(
     .replace(/^data-/, '')
     .replace(/-([a-z])/g, (_, c) => c.toUpperCase());
   const scrollClass = params.scrollContainerClassName ?? 'trakt-drawer-content';
+  const handleSelector = params.dragHandleSelector ?? '.drag-handle';
 
   let draggedKey: string | null = null;
   let dragGhost: DragGhost | null = null;
@@ -190,7 +192,10 @@ export function reorderDrag(
   function handlePointerDown(event: PointerEvent) {
     if (event.button !== 0) return;
 
-    const row = (event.target as HTMLElement).closest<HTMLTableRowElement>(
+    const target = event.target as HTMLElement;
+    if (!target.closest(handleSelector)) return;
+
+    const row = target.closest<HTMLTableRowElement>(
       `[${rowAttr}]`,
     );
     const key = row?.dataset[rowDatasetKey];
