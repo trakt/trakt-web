@@ -382,7 +382,7 @@
 
   tbody {
     tr {
-      cursor: grab;
+      cursor: default;
       filter: drop-shadow(
         var(--ni-1) var(--ni-1) var(--ni-4)
           color-mix(in srgb, var(--color-shadow) 10%, transparent)
@@ -397,7 +397,6 @@
     }
 
     td {
-      touch-action: none;
       user-select: none;
       -webkit-user-select: none;
       background: var(--reorder-row-background);
@@ -511,7 +510,7 @@
     gap: var(--ni-3);
     border-radius: var(--border-radius-m);
     color: var(--color-text-secondary);
-    pointer-events: none;
+    cursor: grab;
     touch-action: none;
 
     span {

@@ -23,6 +23,9 @@ function makeRow(
 ): HTMLTableRowElement {
   const row = document.createElement('tr');
   row.setAttribute('data-reorder-key', key);
+  const handle = document.createElement('div');
+  handle.className = 'drag-handle';
+  row.appendChild(handle);
   vi.spyOn(row, 'getBoundingClientRect').mockReturnValue({
     top,
     bottom: top + height,
@@ -104,7 +107,8 @@ describe('action: reorderDrag', () => {
     target: HTMLElement,
     { button = 0, pointerId = 1, clientX = 50, clientY = 25 } = {},
   ) {
-    target.dispatchEvent(
+    const dispatchTarget = target.querySelector('.drag-handle') ?? target;
+    dispatchTarget.dispatchEvent(
       new PointerEvent('pointerdown', {
         bubbles: true,
         button,
@@ -309,6 +313,9 @@ describe('action: reorderDrag', () => {
     it('should use the provided attribute name to identify draggable rows', () => {
       const customRow = document.createElement('tr');
       customRow.setAttribute('data-list-row', 'a');
+      const customHandle = document.createElement('div');
+      customHandle.className = 'drag-handle';
+      customRow.appendChild(customHandle);
       vi.spyOn(customRow, 'getBoundingClientRect').mockReturnValue(
         rowA.getBoundingClientRect(),
       );
