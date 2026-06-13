@@ -1,26 +1,23 @@
 <script lang="ts">
+  import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import IdIcon from "$lib/components/icons/IdIcon.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
-  import { lineClamp } from "$lib/components/text/lineClamp";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
-  import { formatLocalDate } from "$lib/utils/date/formatLocalDate";
-  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
-  import ManageSubscriptionButton from "./components/ManageSubscriptionButton.svelte";
   import { getSwitchInnerText } from "./getSwitchInnerText";
-  import LargeSettingsRow from "./LargeSettingsRow.svelte";
   import SettingInputDrawer from "./SettingInputDrawer.svelte";
   import SettingsBlock from "./SettingsBlock.svelte";
+  import SettingsGroupCard from "./SettingsGroupCard.svelte";
+  import SettingsGroupRow from "./SettingsGroupRow.svelte";
   import SettingsRow from "./SettingsRow.svelte";
+  import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
   import { useSettings } from "./useSettings";
 
-  const aboutLineClamp = 3;
-
   const { user } = useUser();
-  const { profile, email, isSavingSettings } = useSettings();
+  const { profile, isSavingSettings } = useSettings();
 
   const innerText = $derived(getSwitchInnerText($profile.isPrivate, "yes-no"));
 
@@ -35,77 +32,6 @@
         isRequired: true,
         onSave: async (value: string) =>
           (await $profile.set({ name: value }))
-            ? undefined
-            : { error: m.error_text_failed_update() },
-      },
-    },
-    username: {
-      label: m.button_label_change_username(),
-      drawer: {
-        type: "input" as const,
-        title: m.input_prompt_username(),
-        currentValue: $profile.username,
-        name: m.text_username(),
-        isRequired: true,
-        onSave: async (value: string) =>
-          (await $profile.set({ username: value }))
-            ? undefined
-            : { error: m.error_text_username() },
-      },
-    },
-    email: {
-      label: m.button_label_change_email(),
-      drawer: {
-        type: "input" as const,
-        title: m.input_prompt_email(),
-        currentValue: $email.value ?? "",
-        name: m.text_display_email(),
-        isRequired: true,
-        onSave: async (value: string) =>
-          (await $email.set(value))
-            ? undefined
-            : { error: m.error_text_email() },
-      },
-    },
-    location: {
-      label: m.button_label_change_location(),
-      drawer: {
-        type: "input" as const,
-        title: m.input_prompt_location(),
-        currentValue: $profile.location,
-        name: m.text_location(),
-        isRequired: true,
-        onSave: async (value: string) =>
-          (await $profile.set({ location: value }))
-            ? undefined
-            : { error: m.error_text_failed_update() },
-      },
-    },
-    about: {
-      label: m.button_label_change_about(),
-      drawer: {
-        type: "textarea" as const,
-        title: m.input_prompt_about(),
-        currentValue: $profile.about,
-        name: m.text_about(),
-        isRequired: false,
-        onSave: async (value: string) =>
-          (await $profile.set({ about: value }))
-            ? undefined
-            : { error: m.error_text_failed_update() },
-      },
-    },
-    birthday: {
-      label: m.button_label_change_birthday(),
-      drawer: {
-        type: "datepicker" as const,
-        title: m.input_prompt_birthday(),
-        label: m.button_label_change_birthday(),
-        currentValue: $profile.birthday ?? undefined,
-        name: m.text_birthday(),
-        isRequired: true,
-        onSave: async (date: Date) =>
-          (await $profile.set({ dob: date ? formatLocalDate(date) : null }))
             ? undefined
             : { error: m.error_text_failed_update() },
       },
@@ -128,76 +54,60 @@
   </ActionButton>
 {/snippet}
 
+<div class="trakt-settings-profile-card">
+  <ProfileImage
+    isEditable
+    --image-size="var(--ni-56)"
+    --border-width="var(--border-thickness-xs)"
+    name={$user.name.first}
+    src={$user.avatar.url}
+    isVip={$user.isVip}
+  />
+
+  <div class="trakt-settings-profile-info">
+    <span class="bold ellipsis title">
+      {$profile.displayName || $profile.username}
+    </span>
+    {#if $profile.location}
+      <p class="secondary small">{$profile.location}</p>
+    {/if}
+  </div>
+
+  {#if $user.isVip}
+    <VipBadge isDirector={$user.isDirector} />
+  {/if}
+</div>
+
+<SettingsSectionLabel title={m.header_account_details()} />
+
+<p>{$profile.displayName}</p>
+<SettingsRow title={m.text_display_name()}>
+  <p class="ellipsis">{$profile.displayName}</p>
+</SettingsRow>
+
+<SettingsGroupCard>
+  <SettingsGroupRow
+    title={m.text_display_name()}
+    label={m.button_label_change_display_name()}
+    value={$profile.displayName}
+    onclick={() => (activeField = "name")}
+    disabled={$isSavingSettings}
+    variant="button"
+  >
+    {#snippet icon()}<IdIcon />{/snippet}
+  </SettingsGroupRow>
+</SettingsGroupCard>
+
 <SettingsBlock
   title={m.header_account_details()}
   description={m.description_account_details()}
 >
-  <SettingsRow title={m.text_avatar()}>
-    <ProfileImage
-      isEditable
-      --image-size="var(--ni-52)"
-      --border-width="var(--border-thickness-xs)"
-      name={$user.name.first}
-      src={$user.avatar.url}
-      isVip={$user.isVip}
-    />
-  </SettingsRow>
-
   <SettingsRow title={m.text_display_name()}>
     <p class="ellipsis">{$profile.displayName}</p>
     {#snippet action()}
       {@render renameField("name")}
     {/snippet}
   </SettingsRow>
-
-  <SettingsRow title={m.text_username()}>
-    <p class="ellipsis">{$profile.username}</p>
-    {#snippet action()}
-      {@render renameField("username")}
-    {/snippet}
-  </SettingsRow>
-
-  {#if Boolean($email.value)}
-    <SettingsRow title={m.text_display_email()}>
-      <p class="ellipsis">{$email.value}</p>
-      {#snippet action()}
-        {@render renameField("email")}
-      {/snippet}
-    </SettingsRow>
-  {/if}
-
-  <SettingsRow title={m.text_birthday()}>
-    <p class="ellipsis">
-      {$profile.birthday
-        ? toHumanDay({ date: $profile.birthday, locale: getLocale() })
-        : ""}
-    </p>
-    {#snippet action()}
-      {@render renameField("birthday")}
-    {/snippet}
-  </SettingsRow>
-
-  <SettingsRow title={m.text_location()}>
-    <p class="ellipsis">{$profile.location}</p>
-    {#snippet action()}
-      {@render renameField("location")}
-    {/snippet}
-  </SettingsRow>
-
-  <LargeSettingsRow title={m.text_about()}>
-    {#snippet action()}
-      {@render renameField("about")}
-    {/snippet}
-    <p
-      class="trakt-about-text"
-      style="--line-clamp-lines: {aboutLineClamp}"
-      use:lineClamp={{ lines: aboutLineClamp }}
-    >
-      {$profile.about}
-    </p>
-  </LargeSettingsRow>
-
-  <ManageSubscriptionButton />
 
   <SettingsRow title={m.text_private_account()}>
     {#snippet action()}
@@ -221,14 +131,31 @@
   />
 {/if}
 
-<style>
-  /* FIXME: find out why the initial values set in lineClamp are not applied */
-  .trakt-about-text {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: var(--line-clamp-lines);
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
 
-    display: -webkit-box;
-    overflow: hidden;
-    line-clamp: var(--line-clamp-lines);
+  .trakt-settings-profile-card {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-m);
+    padding: var(--gap-m);
+    border-radius: var(--border-radius-l);
+    background: var(--color-card-background);
+    max-width: var(--ni-640);
+    box-sizing: border-box;
+
+    box-shadow: var(--shadow-base);
+
+    @include for-tablet-sm-and-below() {
+      max-width: 100%;
+    }
+  }
+
+  .trakt-settings-profile-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
   }
 </style>

@@ -47,6 +47,7 @@
     <ActionButton {...commonProps} style="ghost" color="red">
       <LogoutIcon />
     </ActionButton>
+    <span class="logout-label">{m.button_text_logout()}</span>
   </div>
 {/if}
 
@@ -62,7 +63,18 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  .logout-label {
+    user-select: none;
+    pointer-events: none;
+  }
+
   .trakt-logout-action-button {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    padding: 0 var(--gap-s);
+    border-radius: var(--border-radius-m);
+    cursor: pointer;
     --color-logout-button: var(--color-background-red);
 
     :global(
@@ -72,12 +84,18 @@
 
       @include for-mouse {
         &:hover {
-          background-color: color-mix(
-            in srgb,
-            var(--color-logout-button) 10%,
-            transparent
-          );
+          background-color: transparent;
         }
+      }
+    }
+
+    @include for-mouse {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--color-logout-button) 10%,
+          transparent
+        );
       }
     }
   }

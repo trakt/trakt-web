@@ -4,7 +4,8 @@
   import ToggleTag from "$lib/sections/components/ToggleTag.svelte";
   import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre";
   import type { Genre } from "@trakt/api";
-  import SettingsBlock from "./SettingsBlock.svelte";
+  import SettingsGroupCard from "./SettingsGroupCard.svelte";
+  import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
   import { useSettings } from "./useSettings";
 
   const genreLimit = 5;
@@ -33,31 +34,40 @@
   };
 </script>
 
-<SettingsBlock
-  title={m.header_favorite_genres()}
-  description={m.description_genres({ limit: genreLimit })}
->
-  <div class="trakt-genres" role="group">
-    {#each GENRES as genre}
-      <ToggleTag
-        disabled={!isGenreSelectable(genre)}
-        label={m.button_label_toggle_genre({
-          genre: toTranslatedGenre(genre),
-        })}
-        onclick={() => toggleFavoriteGenre(genre)}
-        isPressed={favorites.includes(genre)}
-      >
-        {genre}
-      </ToggleTag>
-    {/each}
+<SettingsSectionLabel title={m.header_favorite_genres()} />
+
+<SettingsGroupCard>
+  <div class="genre-picker-row">
+    <p class="small secondary">
+      {m.description_genres({ limit: genreLimit })}
+    </p>
+    <div class="trakt-genres">
+      {#each GENRES as genre (genre)}
+        <ToggleTag
+          label={m.button_label_toggle_genre({
+            genre: toTranslatedGenre(genre),
+          })}
+          isPressed={favorites.includes(genre)}
+          disabled={!isGenreSelectable(genre)}
+          onclick={() => toggleFavoriteGenre(genre)}
+          >{toTranslatedGenre(genre)}</ToggleTag
+        >
+      {/each}
+    </div>
   </div>
-</SettingsBlock>
+</SettingsGroupCard>
 
 <style>
+  .genre-picker-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
+    padding: var(--gap-m);
+  }
+
   .trakt-genres {
     display: flex;
     flex-wrap: wrap;
-
     gap: var(--gap-xs);
   }
 </style>

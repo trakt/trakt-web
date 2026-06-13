@@ -18,10 +18,7 @@
 </script>
 
 <div class="trakt-blocked-user-row">
-  <Link
-    href={UrlBuilder.profile.user(slug)}
-    color="inherit"
-  >
+  <Link href={UrlBuilder.profile.user(slug)} color="inherit">
     <div class="blocked-user-identity">
       <ProfileImage
         --image-size="var(--ni-40)"
@@ -54,7 +51,7 @@
     justify-content: space-between;
     gap: var(--gap-m);
 
-    padding: var(--ni-12) 0;
+    padding: var(--gap-m);
 
     :global(.trakt-link) {
       text-decoration: none;
