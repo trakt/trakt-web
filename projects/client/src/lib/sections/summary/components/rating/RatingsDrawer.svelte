@@ -7,8 +7,9 @@
   import { useMediaMetaInfo } from "../media/useMediaMetaInfo.ts";
   import RatingsDistribution from "./_internal/RatingsDistribution.svelte";
   import type { RatingsDrawerProps } from "./_internal/RatingsDrawerProps.ts";
+  import SeasonRatingsChart from "./_internal/SeasonRatingsChart.svelte";
 
-  const { onClose, ...props }: RatingsDrawerProps = $props();
+  const { onClose, seasons, ...props }: RatingsDrawerProps = $props();
 
   const metaInfoTarget = $derived(
     props.type === "episode"
@@ -53,6 +54,10 @@
       {:else}
         {#if ratings.trakt}
           <RatingsDistribution trakt={ratings.trakt} />
+        {/if}
+
+        {#if props.type === "show" && seasons}
+          <SeasonRatingsChart {seasons} />
         {/if}
 
         <section class="ratings-card official-card">
