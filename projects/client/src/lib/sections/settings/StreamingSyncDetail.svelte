@@ -35,7 +35,6 @@
   <SettingsBlock
     title={m.header_sync_detail({ id: syncId })}
     description={m.description_sync_detail()}
-    boldTitle
   >
     {#snippet titlePrefix()}
       <span class="title-prefix">

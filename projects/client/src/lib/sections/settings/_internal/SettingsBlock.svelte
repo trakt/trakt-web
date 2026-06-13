@@ -5,12 +5,10 @@
     title,
     description,
     children,
-    boldTitle = false,
     titlePrefix,
   }: ChildrenProps & {
     title: string;
     description: string;
-    boldTitle?: boolean;
     titlePrefix?: Snippet;
   } = $props();
 </script>
@@ -18,8 +16,7 @@
 <div class="trakt-settings-block">
   <div class="trakt-settings-block-header">
     <p
-      class="settings-title"
-      class:bold={boldTitle}
+      class="settings-title bold"
       class:has-prefix={Boolean(titlePrefix)}
     >
       {#if titlePrefix}{@render titlePrefix()}{/if}{title}
