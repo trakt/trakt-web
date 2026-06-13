@@ -1,4 +1,7 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
+import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MovieProgressEntry } from '$lib/requests/models/MovieProgressEntry.ts';
@@ -46,5 +49,14 @@ function typeToQuery(props: UpNextStoreProps) {
 export function useUpNextList(
   props: UpNextStoreProps,
 ) {
-  return usePaginatedListQuery(typeToQuery(props));
+  const { list: baseList, isLoading: baseLoading, ...rest } =
+    usePaginatedListQuery(typeToQuery(props));
+  const overlay = createBulkIntlOverlay<ProgressEntry>({
+    getTargets: episodeWithShowOrMovieTargets,
+  });
+  return {
+    list: baseList.pipe(overlay.operator),
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
+    ...rest,
+  };
 }

@@ -1,8 +1,14 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
+import { listItemTargets } from '$lib/features/intl-overlay/listItemTargets.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { WatchListIntent } from '$lib/requests/models/WatchListIntent.ts';
-import { watchlistQuery } from '$lib/requests/queries/users/watchlistQuery.ts';
+import {
+  type WatchlistedItem,
+  watchlistQuery,
+} from '$lib/requests/queries/users/watchlistQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { combineLatest, map } from 'rxjs';
@@ -21,24 +27,32 @@ export type WatchListStoreProps = PaginationParams & FilterParams & {
 export function useWatchList(params: WatchListStoreProps) {
   const defaultSort = params.intent === 'default' ? 'added' : 'released';
 
-  const { list: items, ...rest } = usePaginatedListQuery(
-    watchlistQuery({
-      limit: params.limit ?? DEFAULT_PAGE_SIZE,
-      type: params.type === 'media' ? undefined : params.type,
-      sortBy: params.sortBy ?? defaultSort,
-      sortHow: params.sortHow ?? 'desc',
-      filter: params.filter,
-      hide: params.intent === 'start' ? 'unreleased' : undefined,
-    }),
+  const { list: items, isLoading: baseLoading, ...rest } =
+    usePaginatedListQuery(
+      watchlistQuery({
+        limit: params.limit ?? DEFAULT_PAGE_SIZE,
+        type: params.type === 'media' ? undefined : params.type,
+        sortBy: params.sortBy ?? defaultSort,
+        sortHow: params.sortHow ?? 'desc',
+        filter: params.filter,
+        hide: params.intent === 'start' ? 'unreleased' : undefined,
+      }),
+    );
+
+  const overlay = createBulkIntlOverlay<WatchlistedItem>({
+    getTargets: listItemTargets,
+  });
+
+  const localizedList = items.pipe(
+    overlay.operator,
+    map(($items) =>
+      $items.filter((item) => item.type === 'movie' || item.type === 'show')
+    ),
   );
 
   const result = {
-    list: items.pipe(
-      map(($items) =>
-        $items
-          .filter((item) => item.type === 'movie' || item.type === 'show')
-      ),
-    ),
+    list: localizedList,
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
     ...rest,
   };
 

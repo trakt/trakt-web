@@ -38,9 +38,10 @@ describe('store: useMovie', () => {
         waitFor: (result) => result?.overview !== '' && result?.country !== '',
       });
 
-      expect(result).to.deep.equal(
-        MovieHereticTranslationsMappedMock.get('pt'),
-      );
+      const { language: _language, ...expected } =
+        MovieHereticTranslationsMappedMock
+          .get('pt')!;
+      expect(result).to.deep.equal(expected);
     });
 
     it('should return studios', async () => {

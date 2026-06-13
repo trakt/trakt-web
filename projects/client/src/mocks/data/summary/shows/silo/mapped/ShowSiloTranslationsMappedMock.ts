@@ -9,6 +9,7 @@ export const ShowSiloTranslationsMappedMock: Map<string, MediaIntl> = new Map([
       'tagline': 'The truth will surface.',
       'title': 'Silo',
       'country': 'us',
+      'language': 'en',
     },
   ],
   [
@@ -19,6 +20,7 @@ export const ShowSiloTranslationsMappedMock: Map<string, MediaIntl> = new Map([
       'tagline': 'Om te leven heb je iets nodig om voor te sterven.',
       'title': null,
       'country': 'nl',
+      'language': 'nl',
     },
   ],
   [
@@ -29,6 +31,7 @@ export const ShowSiloTranslationsMappedMock: Map<string, MediaIntl> = new Map([
       'tagline': '生きるために、命をかけて追い求める。',
       'title': 'サイロ',
       'country': 'jp',
+      'language': 'ja',
     },
   ],
 ]);

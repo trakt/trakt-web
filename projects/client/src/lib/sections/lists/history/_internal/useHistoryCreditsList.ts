@@ -1,6 +1,10 @@
 import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
+import { makeTargets } from '$lib/features/intl-overlay/makeTargets.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { MediaCredit } from '$lib/requests/models/MediaCredits.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { personMovieCreditsQuery } from '$lib/requests/queries/people/personMovieCreditsQuery.ts';
@@ -12,6 +16,12 @@ import { toLoadingState } from '../../../../utils/requests/toLoadingState.ts';
 type UseHistoryCreditsListProps = {
   slug: string;
 };
+
+const mediaCreditTargets = makeTargets<MediaCredit>({
+  get: (entry) => ({ id: entry.media.id, type: entry.media.type }),
+  patch: (entry, title) =>
+    ({ ...entry, media: { ...entry.media, title } }) as typeof entry,
+});
 
 const getHistoryMap = (history: UserHistory, type: MediaType) => {
   return type === 'movie' ? history.movies : history.shows;
@@ -76,13 +86,19 @@ export function useHistoryCreditsList(
     }),
   );
 
-  return {
-    list: list$,
-    isLoading: combineLatest([movies$, shows$, history$]).pipe(
-      map(
-        ([movies, shows, history]) =>
-          toLoadingState(movies) || toLoadingState(shows) || !history,
-      ),
+  const overlay = createBulkIntlOverlay<MediaCredit>({
+    getTargets: mediaCreditTargets,
+  });
+
+  const baseLoading = combineLatest([movies$, shows$, history$]).pipe(
+    map(
+      ([movies, shows, history]) =>
+        toLoadingState(movies) || toLoadingState(shows) || !history,
     ),
+  );
+
+  return {
+    list: list$.pipe(overlay.operator),
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
   };
 }

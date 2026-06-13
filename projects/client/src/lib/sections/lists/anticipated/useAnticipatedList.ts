@@ -1,4 +1,6 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
@@ -56,5 +58,12 @@ function typeToQuery(
 export function useAnticipatedList(
   props: AnticipatedListStoreProps,
 ) {
-  return usePaginatedListQuery(typeToQuery(props));
+  const { list: baseList, isLoading: baseLoading, ...rest } =
+    usePaginatedListQuery(typeToQuery(props));
+  const overlay = createBulkMediaIntl<AnticipatedEntry>();
+  return {
+    list: baseList.pipe(overlay.operator),
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
+    ...rest,
+  };
 }

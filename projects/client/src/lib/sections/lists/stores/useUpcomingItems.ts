@@ -1,4 +1,7 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
+import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
@@ -54,8 +57,11 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
   );
 
   const query = useQuery(getUpcomingCalendarQuery(startDate, props));
+  const overlay = createBulkIntlOverlay<MediaEntry | UpcomingEpisodeEntry>({
+    getTargets: episodeWithShowOrMovieTargets,
+  });
 
-  const isLoading = query.pipe(map(($query) => $query.isLoading));
+  const baseLoading = query.pipe(map(($query) => $query.isLoading));
 
   const list = query.pipe(
     map(($query) =>
@@ -63,7 +69,11 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
         .filter((d) => d.effectiveReleaseDate.getTime() > Date.now())
         .slice(0, props.limit)
     ),
+    overlay.operator,
   );
 
-  return { list, isLoading };
+  return {
+    list,
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
+  };
 }
