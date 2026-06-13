@@ -7,6 +7,7 @@ type RawYirPersonTitle = {
   type: 'show' | 'movie';
   trakt_id: number;
   episode_count?: number;
+  year?: number | null;
 };
 
 type RawYirPerson = {
@@ -30,6 +31,7 @@ function mapPerson(raw: RawYirPerson): YirPerson {
       type: t.type,
       traktId: t.trakt_id,
       episodeCount: t.episode_count,
+      year: t.year,
     })),
   };
 }

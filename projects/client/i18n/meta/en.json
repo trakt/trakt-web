@@ -5053,6 +5053,42 @@
       "default": "Most Watched Movies",
       "description": "Section header above the top-10 most-watched movies list on the 2024 Year in Review template."
     },
+    "yir_2024_people_label": {
+      "default": "Most watched",
+      "description": "Small uppercase label above each people column (Actors/Actresses/Directors/Writers) in the 2024 Year in Review people section."
+    },
+    "yir_2024_people_actors": {
+      "default": "Actors",
+      "description": "Title of the most-watched actors column on the 2024 Year in Review people section."
+    },
+    "yir_2024_people_actresses": {
+      "default": "Actresses",
+      "description": "Title of the most-watched actresses column on the 2024 Year in Review people section."
+    },
+    "yir_2024_people_directors": {
+      "default": "Directors",
+      "description": "Title of the most-watched directors column on the 2024 Year in Review people section."
+    },
+    "yir_2024_people_writers": {
+      "default": "Writers",
+      "description": "Title of the most-watched writers column on the 2024 Year in Review people section."
+    },
+    "yir_2024_people_seen_in": {
+      "default": "Seen in",
+      "description": "Label on the expandable button that reveals the shows/movies a person appeared in, on the 2024 Year in Review people section."
+    },
+    "yir_2024_people_show_count": {
+      "default": "{count} shows",
+      "description": "Show count shown beside a person's name on the 2024 Year in Review people section. Plural form is used for all counts for now."
+    },
+    "yir_2024_people_movie_count": {
+      "default": "{count} movies",
+      "description": "Movie count shown beside a person's name on the 2024 Year in Review people section. Plural form is used for all counts for now."
+    },
+    "yir_2024_people_episode_count": {
+      "default": "{count} episodes",
+      "description": "Episode count shown after a show in the expanded 'seen in' list on the 2024 Year in Review people section. Plural form is used for all counts for now."
+    },
     "yir_2024_plays_label": {
       "default": "Plays",
       "description": "Stat label under the play count on the 2024 Year in Review most-watched cards."
