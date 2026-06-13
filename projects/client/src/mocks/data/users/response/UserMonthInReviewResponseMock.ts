@@ -159,4 +159,11 @@ export const UserMonthInReviewResponseMock: MonthInReviewResponse = {
       },
     },
   },
+  'countries': {
+    'shows': { 'country_count': 0, 'countries': [] },
+    'movies': { 'country_count': 0, 'countries': [] },
+  },
+  'trends': { 'shows': [], 'movies': [] },
+  'thanks': { 'shows': [], 'movies': [] },
+  'streaming_services': { 'country': 'us', 'services': [] },
 };

@@ -37,6 +37,17 @@ const YirGenresGroupSchema = z.object({
   genres: YirGenreSchema.array(),
 });
 
+const YirCountrySchema = z.object({
+  /** ISO 3166-1 alpha-2 code (e.g. "us"); the display name is derived in the UI. */
+  code: z.string(),
+  count: z.number(),
+});
+
+const YirCountriesGroupSchema = z.object({
+  countryCount: z.number(),
+  countries: YirCountrySchema.array(),
+});
+
 const YirCompanySchema = z.object({
   id: z.number(),
   name: z.string(),
@@ -114,6 +125,10 @@ export const YirDetailSchema = z.object({
     shows: YirTopRatedItemSchema.array(),
     movies: YirTopRatedItemSchema.array(),
   }),
+  countries: z.object({
+    shows: YirCountriesGroupSchema,
+    movies: YirCountriesGroupSchema,
+  }),
   trends: z.object({
     shows: YirTrendItemSchema.array(),
     movies: YirTrendItemSchema.array(),
@@ -132,6 +147,8 @@ export type YirStatsCategory = z.infer<typeof YirStatsCategorySchema>;
 export type YirDistributions = z.infer<typeof YirDistributionsSchema>;
 export type YirGenre = z.infer<typeof YirGenreSchema>;
 export type YirGenresGroup = z.infer<typeof YirGenresGroupSchema>;
+export type YirCountry = z.infer<typeof YirCountrySchema>;
+export type YirCountriesGroup = z.infer<typeof YirCountriesGroupSchema>;
 export type YirCompany = z.infer<typeof YirCompanySchema>;
 export type YirMostWatchedItem = z.infer<typeof YirMostWatchedItemSchema>;
 export type YirTopRatedItem = z.infer<typeof YirTopRatedItemSchema>;
