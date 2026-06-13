@@ -1,6 +1,10 @@
-import type { PeopleResponse } from '@trakt/api';
+import type { CastResponse, PeopleResponse } from '@trakt/api';
 
-export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
+type PeopleResponseWithGuestStars = PeopleResponse & {
+  guest_stars: CastResponse[];
+};
+
+export const EpisodeSiloPeopleResponseMock: PeopleResponseWithGuestStars = {
   'cast': [
     {
       'character': 'Juliette Nichols',
@@ -187,6 +191,34 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
       'images': {
         'headshot': [
           'walter-r2.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
+        ],
+      },
+    },
+  ],
+  'guest_stars': [
+    {
+      'character': 'Gloria Hildebrandt',
+      'characters': [
+        'Gloria Hildebrandt',
+      ],
+      'person': {
+        'name': 'Sophie Thompson',
+        'ids': {
+          'trakt': 14103,
+          'slug': 'sophie-thompson',
+          'imdb': 'nm0860749',
+          'tmdb': 10207,
+        },
+        'images': {
+          'headshot': [
+            'walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
+          ],
+          'fanart': [],
+        },
+      },
+      'images': {
+        'headshot': [
+          'walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
         ],
       },
     },

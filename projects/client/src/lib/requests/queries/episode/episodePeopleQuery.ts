@@ -22,7 +22,7 @@ const episodePeopleRequest = (
         episode,
       },
       query: {
-        extended: 'images',
+        extended: 'images,guest_stars' as 'images',
       },
     });
 
