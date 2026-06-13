@@ -8,7 +8,7 @@
 
   const { params }: PageProps = $props();
 
-  const { movie, intl, studios, crew, streamOn, isLoading, videos, sentiment } =
+  const { movie, intl, studios, crew, streamOn, isLoading, videos, sentiment, watchers } =
     $derived(useMovie(params.slug));
 </script>
 
@@ -33,6 +33,7 @@
       streamOn={$streamOn}
       videos={$videos}
       sentiment={$sentiment}
+      watchers={$watchers}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->

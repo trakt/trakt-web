@@ -1685,6 +1685,10 @@
       "default": "Created By",
       "description": "Value for the person who created a show, keep language specifics in mind."
     },
+    "list_title_people_watched": {
+      "default": "People Watched",
+      "description": "Title for a section showing which of the user's followed people have watched a specific movie."
+    },
     "list_title_personal_lists": {
       "default": "My Lists",
       "description": "Title for lists containing the user's personal lists. This title should be as short and concise as possible."

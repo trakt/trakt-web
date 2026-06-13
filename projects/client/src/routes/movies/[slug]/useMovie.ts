@@ -3,6 +3,7 @@ import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
+import { movieNetworkWatchersQuery } from '$lib/requests/queries/movies/movieNetworkWatchersQuery.ts';
 import { moviePeopleQuery } from '$lib/requests/queries/movies/moviePeopleQuery.ts';
 import { movieSentimentQuery } from '$lib/requests/queries/movies/movieSentimentQuery.ts';
 import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuery.ts';
@@ -13,8 +14,7 @@ import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferr
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { combineLatest, of } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { combineLatest, map, of, shareReplay } from 'rxjs';
 
 /*
   FIXME: Fix the root cause.
@@ -34,6 +34,7 @@ export function useMovie(slug: string | undefined) {
       intl: of(undefined),
       streamOn: of(undefined),
       sentiment: of(undefined),
+      watchers: of([]),
     };
   }
 
@@ -75,6 +76,22 @@ export function useMovie(slug: string | undefined) {
     country.pipe(
       map((country) => streamMovieQuery({ slug, country })),
     ),
+  );
+
+  const networkWatchers = useQuery(
+    combineLatest([isAuthorized, movie]).pipe(
+      map(([authorized, $movie]) => {
+        const movieId = $movie.data?.id;
+        return movieNetworkWatchersQuery({
+          slug,
+          id: movieId ?? 0,
+          enabled: Boolean(authorized && movieId),
+        });
+      }),
+    ),
+  ).pipe(
+    map(($result) => $result?.data ?? []),
+    shareReplay(1),
   );
 
   const queries = [
@@ -137,5 +154,6 @@ export function useMovie(slug: string | undefined) {
         };
       }),
     ),
+    watchers: networkWatchers,
   };
 }

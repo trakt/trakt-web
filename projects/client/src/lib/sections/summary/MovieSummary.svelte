@@ -6,8 +6,10 @@
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
+  import type { UserProfile } from "$lib/requests/models/UserProfile.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CastList from "../lists/CastList.svelte";
+  import PeopleWatchedList from "../lists/PeopleWatchedList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
@@ -28,11 +30,13 @@
     streamOn,
     videos,
     sentiment,
+    watchers,
   }: {
     media: MovieEntry;
     studios: MediaStudio[];
     videos: MediaVideo[];
     sentiment: SentimentAnalysis | Nil;
+    watchers: UserProfile[];
   } & CommonMediaSummaryProps = $props();
 
   const relatedLink = $derived(UrlBuilder.related.movie(media.slug));
@@ -64,6 +68,10 @@
 <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="movie" {media} {streamOn} />
   <Sentiment {sentiment} slug={media.slug} type="movie" />
+</RenderFor>
+
+<RenderFor audience="authenticated">
+  <PeopleWatchedList slug={media.slug} {watchers} />
 </RenderFor>
 
 <CastList
