@@ -26,11 +26,11 @@ describe('transition: slideFade', () => {
 
     const transition = slideFade(node, { axis: 'x' });
 
-    expect(transition.css(0)).toContain('width: 0px;');
+    expect(transition.css(0)).toContain('transform: translate(100px, 0);');
     expect(transition.css(0)).toContain('opacity: 0;');
-    expect(transition.css(0.5)).toContain('width: 100px;');
+    expect(transition.css(0.5)).toContain('transform: translate(0px, 0);');
     expect(transition.css(0.5)).toContain('opacity: 0;');
-    expect(transition.css(1)).toContain('width: 100px;');
+    expect(transition.css(1)).toContain('transform: translate(0px, 0);');
     expect(transition.css(1)).toContain('opacity: 1;');
   });
 
@@ -45,11 +45,11 @@ describe('transition: slideFade', () => {
 
     const transition = slideFade(node, { axis: 'y' });
 
-    expect(transition.css(0)).toContain('height: 0px;');
+    expect(transition.css(0)).toContain('transform: translate(0, 50px);');
     expect(transition.css(0)).toContain('opacity: 0;');
-    expect(transition.css(0.5)).toContain('height: 50px;');
+    expect(transition.css(0.5)).toContain('transform: translate(0, 0px);');
     expect(transition.css(0.5)).toContain('opacity: 0;');
-    expect(transition.css(1)).toContain('height: 50px;');
+    expect(transition.css(1)).toContain('transform: translate(0, 0px);');
     expect(transition.css(1)).toContain('opacity: 1;');
   });
 });
