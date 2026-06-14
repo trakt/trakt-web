@@ -1,4 +1,9 @@
-import { BehaviorSubject, combineLatest, map } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  distinctUntilChanged,
+  map,
+} from 'rxjs';
 import {
   createParameterContext,
   type ParameterType,
@@ -43,6 +48,7 @@ export function useParameters() {
 
       return searchParams;
     }),
+    distinctUntilChanged((a, b) => a.toString() === b.toString()),
   );
 
   return {
