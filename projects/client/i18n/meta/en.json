@@ -7294,6 +7294,10 @@
       "default": "History",
       "description": "Text for the source option that allows users to clear their watch history."
     },
+    "text_clear_source_library": {
+      "default": "Library",
+      "description": "Text for the source option that allows users to clear their library (collection)."
+    },
     "button_text_clear_now": {
       "default": "Clear now",
       "description": "Text for the button that clears the user's chosen source, e.g. watchlist, ratings, etc.."

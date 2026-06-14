@@ -1,11 +1,9 @@
-import {
-  type CollectionMinimalResponse,
-  type CollectionMinimalShowResponse,
-} from '@trakt/api';
 import z from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
+import { InvalidateAction } from '../../../requests/models/InvalidateAction.ts';
 import { time } from '../../../utils/timing/time.ts';
 import { defineQuery } from '../../query/defineQuery.ts';
+import { toCollectionTraktIds } from './_internal/toCollectionTraktIds.ts';
 
 const UserPlexLibrarySchema = z.object({
   movieIds: z.array(z.number()),
@@ -28,12 +26,6 @@ const currentUserPlexLibraryRequest = (
       },
     });
 
-function toTraktIds(
-  libraryResponse: CollectionMinimalResponse | CollectionMinimalShowResponse,
-): number[] {
-  return Object.keys(libraryResponse).map((key) => parseInt(key, 10));
-}
-
 export const currentUserPlexLibraryQuery = defineQuery({
   key: 'currentUserPlexLibrary',
   request: (params) =>
@@ -42,12 +34,15 @@ export const currentUserPlexLibraryQuery = defineQuery({
       currentUserPlexLibraryRequest(params, 'shows'),
       currentUserPlexLibraryRequest(params, 'episodes'),
     ]),
-  invalidations: [],
+  invalidations: [
+    InvalidateAction.Collected('movie'),
+    InvalidateAction.Collected('episode'),
+  ],
   dependencies: [],
   mapper: ([moviesResponse, showsResponse, episodesResponse]) => ({
-    movieIds: toTraktIds(moviesResponse.body),
-    showIds: toTraktIds(showsResponse.body),
-    episodeIds: toTraktIds(episodesResponse.body),
+    movieIds: toCollectionTraktIds(moviesResponse.body),
+    showIds: toCollectionTraktIds(showsResponse.body),
+    episodeIds: toCollectionTraktIds(episodesResponse.body),
   }),
   schema: UserPlexLibrarySchema,
   ttl: time.hours(3),

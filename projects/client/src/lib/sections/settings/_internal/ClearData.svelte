@@ -24,7 +24,7 @@
   import SettingsBlock from "./SettingsBlock.svelte";
   import SettingsRow from "./SettingsRow.svelte";
 
-  const { watchlist, ratings, history } = useUser();
+  const { watchlist, ratings, history, collection } = useUser();
   const { invalidateAll } = useInvalidator();
   const { clearInProgress } = useClearInProgress();
   const { confirm } = useConfirm();
@@ -42,6 +42,8 @@
         return { type: activeSourceType, input: $ratings };
       case "history":
         return { type: activeSourceType, input: $history ?? undefined };
+      case "library":
+        return { type: activeSourceType, input: $collection };
     }
   });
 

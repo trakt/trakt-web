@@ -21,7 +21,7 @@ export async function processChunks<TItem, TPayload, TResponse>(
 
     try {
       const payload = buildPayload(batch);
-      await retryWithRateLimit(() => sendRequest(payload));
+      await retryWithRateLimit(() => sendRequest(payload), signal);
     } catch (err) {
       errors += batch.length;
       onError(err instanceof Error ? err.message : String(err));
