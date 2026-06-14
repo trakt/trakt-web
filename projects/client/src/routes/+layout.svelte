@@ -91,10 +91,15 @@
     href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&family=Roboto+Mono:wght@400;600&display=swap"
     rel="stylesheet"
   />
-  <!-- Plyr CSS -->
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.8.3/plyr.css" />
-  <!-- Plyr JS -->
-  <script src="https://cdn.plyr.io/3.8.3/plyr.js"></script>
+  <!-- Plyr CSS - loaded async so it does not block first paint -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.plyr.io/3.8.3/plyr.css"
+    media="print"
+    onload={(e) => ((e.currentTarget as HTMLLinkElement).media = "all")}
+  />
+  <!-- Plyr JS - deferred so it does not block first paint -->
+  <script src="https://cdn.plyr.io/3.8.3/plyr.js" defer></script>
   <style>
     html,
     body {
