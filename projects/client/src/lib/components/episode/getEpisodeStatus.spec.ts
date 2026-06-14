@@ -2,6 +2,7 @@ import {
   EpisodeFinaleType,
   EpisodePremiereType,
 } from '$lib/requests/models/EpisodeType.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { describe, expect, it } from 'vitest';
 import { getEpisodeStatus } from './getEpisodeStatus.ts';
 
@@ -66,6 +67,50 @@ describe('getEpisodeStatus', () => {
     ])('does not gate non-mid-season %s', (type) => {
       expect(getEpisodeStatus(type, { isLatestAired: false }))
         .toBe(type.endsWith('finale') ? 'finale' : 'premiere');
+    });
+  });
+
+  describe('new status', () => {
+    it('returns "new" for standard episodes released within 7 days', () => {
+      const threeDaysAgo = new Date(Date.now() - time.days(3));
+
+      expect(
+        getEpisodeStatus('standard', { releaseDate: threeDaysAgo }),
+      ).toBe('new');
+    });
+
+    it('returns "new" for episodes released exactly 7 days ago', () => {
+      const sevenDaysAgo = new Date(Date.now() - time.days(7));
+
+      expect(
+        getEpisodeStatus('standard', { releaseDate: sevenDaysAgo }),
+      ).toBe('new');
+    });
+
+    it('returns undefined for episodes released more than 7 days ago', () => {
+      const tenDaysAgo = new Date(Date.now() - time.days(10));
+
+      expect(
+        getEpisodeStatus('standard', { releaseDate: tenDaysAgo }),
+      ).toBeUndefined();
+    });
+
+    it('returns undefined for episodes released in the future', () => {
+      const tomorrow = new Date(Date.now() + time.days(1));
+
+      expect(
+        getEpisodeStatus('standard', { releaseDate: tomorrow }),
+      ).toBeUndefined();
+    });
+
+    it('does not return "new" when episode is a premiere', () => {
+      const threeDaysAgo = new Date(Date.now() - time.days(3));
+
+      expect(
+        getEpisodeStatus(EpisodePremiereType.season_premiere, {
+          releaseDate: threeDaysAgo,
+        }),
+      ).toBe('premiere');
     });
   });
 });

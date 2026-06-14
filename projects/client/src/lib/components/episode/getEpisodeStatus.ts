@@ -3,17 +3,26 @@ import {
   EpisodePremiereType,
   type EpisodeType,
 } from '$lib/requests/models/EpisodeType.ts';
+import { time } from '$lib/utils/timing/time.ts';
 
-type EpisodeStatus = 'premiere' | 'finale';
+type EpisodeStatus = 'premiere' | 'finale' | 'new';
 
 type GetEpisodeStatusOptions = {
   isLatestAired?: boolean;
+  releaseDate?: Date;
 };
 
 const MID_SEASON_TYPES: ReadonlySet<EpisodeType> = new Set([
   EpisodeFinaleType.mid_season_finale,
   EpisodePremiereType.mid_season_premiere,
 ]);
+
+const NEW_EPISODE_WINDOW_MS = time.days(7);
+
+function isEpisodeNew(releaseDate: Date): boolean {
+  const elapsed = Date.now() - releaseDate.getTime();
+  return elapsed >= 0 && elapsed <= NEW_EPISODE_WINDOW_MS;
+}
 
 export function getEpisodeStatus(
   type: EpisodeType,
@@ -28,6 +37,9 @@ export function getEpisodeStatus(
     .includes(type);
 
   if (!isPremiere && !isFinale) {
+    if (options.releaseDate && isEpisodeNew(options.releaseDate)) {
+      return 'new';
+    }
     return;
   }
 

@@ -4,6 +4,7 @@ import {
   EpisodeFinaleType,
   EpisodePremiereType,
 } from '$lib/requests/models/EpisodeType.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { render, screen } from '@testing-library/svelte';
 import { describe, expect, test, vi } from 'vitest';
 import { EpisodeIntlProvider } from '../EpisodeIntlProvider.ts';
@@ -143,5 +144,43 @@ describe('EpisodeStatusTag', () => {
       EpisodeIntlProvider.premiereText(),
     );
     expect(tagLabel).toBeInTheDocument();
+  });
+
+  test('it renders the new tag when release date is within 7 days', () => {
+    const threeDaysAgo = new Date(Date.now() - time.days(3));
+
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: 'standard',
+          releaseDate: threeDaysAgo,
+        },
+      },
+    );
+
+    const tagLabel = screen.getByText(
+      EpisodeIntlProvider.newText(),
+    );
+    expect(tagLabel).toBeInTheDocument();
+  });
+
+  test('it does not render the new tag when release date is older than 7 days', () => {
+    const tenDaysAgo = new Date(Date.now() - time.days(10));
+
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: 'standard',
+          releaseDate: tenDaysAgo,
+        },
+      },
+    );
+
+    expect(screen.queryByText(EpisodeIntlProvider.newText()))
+      .not.toBeInTheDocument();
   });
 });
