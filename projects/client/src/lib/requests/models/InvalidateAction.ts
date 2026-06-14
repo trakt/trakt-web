@@ -11,6 +11,7 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:auth`
   | `${typeof INVALIDATION_ID}:rated:${ExtendedMediaType}`
   | `${typeof INVALIDATION_ID}:mark_as_watched:${ExtendedMediaType}`
+  | `${typeof INVALIDATION_ID}:collected:${ExtendedMediaType}`
   | `${typeof INVALIDATION_ID}:watchlisted:${MediaType}`
   | `${typeof INVALIDATION_ID}:dropped::${MediaType}`
   | `${typeof INVALIDATION_ID}:restored:show`
@@ -33,6 +34,7 @@ type TypeDataMap = {
   'auth': null;
   'rated': ExtendedMediaType;
   'mark_as_watched': ExtendedMediaType;
+  'collected': ExtendedMediaType;
   'watchlisted': MediaType;
   'dropped': MediaType;
   'restored': 'show';
@@ -77,6 +79,9 @@ export const InvalidateAction = {
 
   MarkAsWatched: (type: ExtendedMediaType) =>
     buildInvalidationKey('mark_as_watched', type),
+
+  Collected: (type: ExtendedMediaType) =>
+    buildInvalidationKey('collected', type),
 
   Watchlisted: (type: MediaType) => buildInvalidationKey('watchlisted', type),
   Listed: (type: MediaType) => buildInvalidationKey('listed', type),

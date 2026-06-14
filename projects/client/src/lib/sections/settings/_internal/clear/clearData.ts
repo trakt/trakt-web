@@ -1,4 +1,5 @@
 import { clearHistory } from '$lib/sections/settings/sync/clearHistory.ts';
+import { clearLibrary } from '$lib/sections/settings/sync/clearLibrary.ts';
 import { clearRatings } from '$lib/sections/settings/sync/clearRatings.ts';
 import { clearWatchlist } from '$lib/sections/settings/sync/clearWatchlist.ts';
 import type { SyncEngineCallbacks } from '../../sync/models/SyncEngineCallbacks.ts';
@@ -18,5 +19,9 @@ export async function clearData(
 
   if (data.type === 'history') {
     await clearHistory(data.input, callbacks);
+  }
+
+  if (data.type === 'library') {
+    await clearLibrary(data.input, callbacks);
   }
 }

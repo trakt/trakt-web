@@ -71,6 +71,14 @@ export const sync = [
       });
     },
   ),
+  http.post(
+    'http://localhost/sync/collection/remove',
+    () => {
+      return new HttpResponse(null, {
+        status: 200,
+      });
+    },
+  ),
   http.get(
     'http://localhost/sync/progress/up_next*',
     () => {

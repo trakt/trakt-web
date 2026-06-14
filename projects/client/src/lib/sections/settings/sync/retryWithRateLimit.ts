@@ -1,6 +1,9 @@
 import { retry } from '$lib/utils/retry/retry.ts';
 
-export function retryWithRateLimit<T>(fn: () => Promise<T>): Promise<T> {
+export function retryWithRateLimit<T>(
+  fn: () => Promise<T>,
+  signal?: AbortSignal,
+): Promise<T> {
   return retry(async () => {
     try {
       return await fn();
@@ -13,5 +16,5 @@ export function retryWithRateLimit<T>(fn: () => Promise<T>): Promise<T> {
       }
       throw err;
     }
-  });
+  }, signal);
 }

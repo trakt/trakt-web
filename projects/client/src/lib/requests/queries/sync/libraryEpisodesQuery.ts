@@ -1,4 +1,5 @@
 import { api } from '$lib/requests/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { defineInfiniteQuery } from '../../../features/query/defineQuery.ts';
 import { time } from '../../../utils/timing/time.ts';
 import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
@@ -24,7 +25,7 @@ export const episodeLibraryRequest = (
 
 export const libraryEpisodesQuery = defineInfiniteQuery({
   key: 'libraryEpisodesQuery',
-  invalidations: [],
+  invalidations: [InvalidateAction.Collected('episode')],
   dependencies: (params) => [params.page, params.limit, params.availableOn],
   request: episodeLibraryRequest,
   mapper: (response) => ({

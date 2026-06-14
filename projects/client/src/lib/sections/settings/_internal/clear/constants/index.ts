@@ -19,4 +19,8 @@ export const CLEAR_DATA_SOURCES: readonly ClearSource[] = [
     type: 'history',
     label: m.text_clear_source_history,
   },
+  {
+    type: 'library',
+    label: m.text_clear_source_library,
+  },
 ];

@@ -14,6 +14,10 @@ import {
 } from 'rxjs';
 import { getContext, setContext } from 'svelte';
 import {
+  currentUserCollectionQuery,
+  type UserCollection,
+} from '../queries/currentUserCollectionQuery.ts';
+import {
   currentUserCommentReactionsQuery,
   type UserReactions,
 } from '../queries/currentUserCommentReactionsQuery.ts';
@@ -142,6 +146,7 @@ function createUseUserInstance() {
   const userQuerySignal = useQuery(currentUserSettingsQuery());
   const { history: historySignal } = useCurrentUserHistory();
   const watchlistQuerySignal = useQuery(currentUserWatchlistQuery());
+  const collectionQuerySignal = useQuery(currentUserCollectionQuery());
   const ratingsQuerySignal = useQuery(currentUserRatingsQuery());
   const commentReactionsQuerySignal = useQuery(
     currentUserCommentReactionsQuery(),
@@ -170,6 +175,10 @@ function createUseUserInstance() {
           watchlist: of<UserWatchlist>({
             movies: new Set(),
             shows: new Set(),
+          }),
+          collection: of<UserCollection>({
+            movies: new Set(),
+            episodes: new Set(),
           }),
           ratings: of<UserRatings>({
             episodes: new Map(),
@@ -211,6 +220,9 @@ function createUseUserInstance() {
         history: historySignal,
         watchlist: watchlistQuerySignal.pipe(
           map((watchlist) => watchlist.data),
+        ),
+        collection: collectionQuerySignal.pipe(
+          map((collection) => collection.data),
         ),
         ratings: ratingsQuerySignal.pipe(
           map((ratings) => ratings.data),
@@ -258,6 +270,9 @@ function createUseUserInstance() {
     history: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.history))),
     watchlist: share(
       sharedUserContext$.pipe(switchMap((ctx) => ctx.watchlist)),
+    ),
+    collection: share(
+      sharedUserContext$.pipe(switchMap((ctx) => ctx.collection)),
     ),
     ratings: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.ratings))),
     reactions: share(
