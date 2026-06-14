@@ -202,6 +202,6 @@ export function useAllPagesInfiniteQuery<
         query.fetchNextPage();
       }
     }),
-    shareReplay({ bufferSize: 1, refCount: true }),
+    shareReplay({ bufferSize: 1, refCount: false }),
   );
 }
