@@ -14,4 +14,5 @@ export type TagIntl = {
   watchedLabel: () => string;
   toRemainingDuration: (duration: number) => string;
   droppedLabel: () => string;
+  newLabel: () => string;
 };

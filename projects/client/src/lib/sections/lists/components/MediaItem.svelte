@@ -1,5 +1,6 @@
 <script lang="ts">
   import ActivityTag from "$lib/components/media/tags/ActivityTag.svelte";
+  import MediaStatusTag from "$lib/components/media/tags/MediaStatusTag.svelte";
   import ProgressTag from "$lib/components/media/tags/ProgressTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import type { Snippet } from "svelte";
@@ -37,6 +38,14 @@
       <ProgressTag progress={props.progress ?? 0}>
         {TagIntlProvider.toRemainingDuration(props.minutesLeft)}
       </ProgressTag>
+    {/if}
+    {#if props.type === "movie"}
+      <MediaStatusTag
+        i18n={TagIntlProvider}
+        status={props.media.status}
+        effectiveReleaseDate={props.media.effectiveReleaseDate}
+        type={isCover ? "tag" : "text"}
+      />
     {/if}
     {#if props.coverTag}
       {@render props.coverTag()}
