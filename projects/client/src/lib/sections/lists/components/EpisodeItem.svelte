@@ -46,6 +46,7 @@
     getEpisodeStatus(props.episode.type, {
       isLatestAired:
         props.variant === "next" ? props.episode.isLatestAired : undefined,
+      releaseDate: props.episode.effectiveReleaseDate,
     }),
   );
 
@@ -117,6 +118,7 @@
             i18n={EpisodeIntlProvider}
             episodeType={props.episode.type}
             isLatestAired={props.episode.isLatestAired}
+            releaseDate={props.episode.effectiveReleaseDate}
           />
         {/snippet}
 
@@ -150,6 +152,7 @@
         <EpisodeStatusTag
           i18n={EpisodeIntlProvider}
           episodeType={props.episode.type}
+          releaseDate={props.episode.effectiveReleaseDate}
           type="tag"
         />
       {/if}
@@ -158,6 +161,7 @@
         <EpisodeStatusTag
           i18n={EpisodeIntlProvider}
           episodeType={props.episode.type}
+          releaseDate={props.episode.effectiveReleaseDate}
           type="tag"
         />
       {/if}
