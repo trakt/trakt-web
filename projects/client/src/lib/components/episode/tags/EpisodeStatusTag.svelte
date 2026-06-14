@@ -11,6 +11,7 @@
     episodeType: EpisodeType;
     type?: TagType;
     isLatestAired?: boolean;
+    releaseDate?: Date;
   };
 
   const {
@@ -18,9 +19,10 @@
     episodeType,
     type = "text",
     isLatestAired,
+    releaseDate,
   }: EpisodeStatusProps = $props();
 
-  const status = $derived(getEpisodeStatus(episodeType, { isLatestAired }));
+  const status = $derived(getEpisodeStatus(episodeType, { isLatestAired, releaseDate }));
 </script>
 
 {#snippet tagContent(text: string)}
@@ -48,6 +50,10 @@
   {@render tag(i18n.premiereText())}
 {/if}
 
+{#if status === "new"}
+  {@render tag(i18n.newText())}
+{/if}
+
 <style>
   .trakt-episode-status {
     display: flex;
@@ -68,6 +74,10 @@
 
     &[data-status="premiere"] {
       background-color: var(--green-500);
+    }
+
+    &[data-status="new"] {
+      background-color: var(--blue-500);
     }
   }
 </style>

@@ -144,4 +144,44 @@ describe('EpisodeStatusTag', () => {
     );
     expect(tagLabel).toBeInTheDocument();
   });
+
+  test('it renders the new tag when release date is within 7 days', () => {
+    const now = new Date();
+    const threeDaysAgo = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000);
+
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: 'standard',
+          releaseDate: threeDaysAgo,
+        },
+      },
+    );
+
+    const tagLabel = screen.getByText(
+      EpisodeIntlProvider.newText(),
+    );
+    expect(tagLabel).toBeInTheDocument();
+  });
+
+  test('it does not render the new tag when release date is older than 7 days', () => {
+    const now = new Date();
+    const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
+
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: 'standard',
+          releaseDate: tenDaysAgo,
+        },
+      },
+    );
+
+    expect(screen.queryByText(EpisodeIntlProvider.newText()))
+      .not.toBeInTheDocument();
+  });
 });

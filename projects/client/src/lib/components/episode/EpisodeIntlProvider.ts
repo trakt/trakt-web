@@ -33,6 +33,7 @@ function episodeTypeText(type: EpisodeType): string | Nil {
 export const EpisodeIntlProvider: EpisodeIntl = {
   premiereText: () => m.tag_text_premiere(),
   finaleText: () => m.tag_text_finale(),
+  newText: () => m.tag_text_new(),
   episodeTypeText,
   timestampText: ({ date, type }) => {
     const now = new Date();

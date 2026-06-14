@@ -117,6 +117,7 @@
             i18n={EpisodeIntlProvider}
             episodeType={props.episode.type}
             isLatestAired={props.episode.isLatestAired}
+            releaseDate={props.episode.releaseDate}
           />
         {/snippet}
 
@@ -150,6 +151,7 @@
         <EpisodeStatusTag
           i18n={EpisodeIntlProvider}
           episodeType={props.episode.type}
+          releaseDate={props.episode.releaseDate}
           type="tag"
         />
       {/if}
@@ -158,6 +160,7 @@
         <EpisodeStatusTag
           i18n={EpisodeIntlProvider}
           episodeType={props.episode.type}
+          releaseDate={props.episode.releaseDate}
           type="tag"
         />
       {/if}

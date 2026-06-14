@@ -68,4 +68,53 @@ describe('getEpisodeStatus', () => {
         .toBe(type.endsWith('finale') ? 'finale' : 'premiere');
     });
   });
+
+  describe('new status', () => {
+    it('returns "new" for standard episodes released within 7 days', () => {
+      const now = new Date();
+      const threeDaysAgo = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000);
+
+      expect(
+        getEpisodeStatus('standard', { releaseDate: threeDaysAgo }),
+      ).toBe('new');
+    });
+
+    it('returns "new" for episodes released exactly 7 days ago', () => {
+      const now = new Date();
+      const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+      expect(
+        getEpisodeStatus('standard', { releaseDate: sevenDaysAgo }),
+      ).toBe('new');
+    });
+
+    it('returns undefined for episodes released more than 7 days ago', () => {
+      const now = new Date();
+      const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
+
+      expect(
+        getEpisodeStatus('standard', { releaseDate: tenDaysAgo }),
+      ).toBeUndefined();
+    });
+
+    it('returns undefined for episodes released in the future', () => {
+      const now = new Date();
+      const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+
+      expect(
+        getEpisodeStatus('standard', { releaseDate: tomorrow }),
+      ).toBeUndefined();
+    });
+
+    it('does not return "new" when episode is a premiere', () => {
+      const now = new Date();
+      const threeDaysAgo = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000);
+
+      expect(
+        getEpisodeStatus(EpisodePremiereType.season_premiere, {
+          releaseDate: threeDaysAgo,
+        }),
+      ).toBe('premiere');
+    });
+  });
 });
