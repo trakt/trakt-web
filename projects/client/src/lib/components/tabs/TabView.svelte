@@ -77,15 +77,17 @@
 
       top: var(--tab-list-padding);
       bottom: var(--tab-list-padding);
-      left: calc(
-        var(--active-index) * (var(--tab-width) + var(--tab-list-gap))
-      );
+      left: 0;
       width: var(--tab-width);
+      transform: translateX(
+        calc(var(--active-index) * (var(--tab-width) + var(--tab-list-gap)))
+      );
 
       background-color: var(--color-tab-background);
       border-radius: var(--tab-border-radius);
 
-      transition: left var(--transition-increment) ease-in-out;
+      transition: transform var(--transition-increment) ease-in-out;
+      will-change: transform;
       pointer-events: none;
     }
 
