@@ -39,6 +39,8 @@ const INVALIDATION_MAP = new Map<string, number>();
 
 const MIN_INVALIDATION_AGE = time.seconds(30);
 
+const MAX_INVALIDATION_POLLS = 50;
+
 function invalidationHook<T>(
   queryKeyOrFn:
     | CreateQueryOptions['queryKey']
@@ -84,11 +86,12 @@ function invalidationHook<T>(
       }
 
       const queryAge = Date.now() - currentState.dataUpdatedAt;
-      INVALIDATION_MAP.set(id, Date.now());
 
       if (queryAge < MIN_INVALIDATION_AGE) {
         return value;
       }
+
+      INVALIDATION_MAP.set(id, Date.now());
 
       (async () => {
         const isNotReady = () => {
@@ -98,7 +101,8 @@ function invalidationHook<T>(
             state?.fetchStatus !== 'idle';
         };
 
-        while (isNotReady()) {
+        let attempts = 0;
+        while (isNotReady() && attempts++ < MAX_INVALIDATION_POLLS) {
           await new Promise((resolve) => {
             setTimeout(resolve, time.seconds(0.1));
           });
