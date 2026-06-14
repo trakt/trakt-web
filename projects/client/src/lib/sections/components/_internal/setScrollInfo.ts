@@ -19,18 +19,28 @@ export function setScrollInfo(node: HTMLElement) {
     node.classList.toggle('scrolled-up', !isAtBottom);
   };
 
-  node.addEventListener('scroll', scrollHandler);
+  let frame = 0;
+  const scheduleScroll = () => {
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      scrollHandler();
+    });
+  };
+
+  node.addEventListener('scroll', scheduleScroll, { passive: true });
   const unregisterResize = GlobalEventBus.getInstance().register(
     'resize',
-    () => requestAnimationFrame(scrollHandler),
+    scheduleScroll,
   );
 
   onMount(scrollHandler);
 
   return {
     destroy() {
+      if (frame) cancelAnimationFrame(frame);
       unregisterResize();
-      node.removeEventListener('scroll', scrollHandler);
+      node.removeEventListener('scroll', scheduleScroll);
     },
   };
 }

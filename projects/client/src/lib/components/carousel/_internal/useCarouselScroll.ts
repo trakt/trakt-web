@@ -44,7 +44,7 @@ export function useCarouselScroll() {
   const scrollObserver = (node: HTMLUListElement) => {
     listElement = node;
 
-    const updateScrollState = () => {
+    const emitState = () => {
       scrollState$.next({
         scrollLeft: node.scrollLeft,
         scrollWidth: node.scrollWidth,
@@ -52,15 +52,25 @@ export function useCarouselScroll() {
       });
     };
 
-    updateScrollState();
-    node.addEventListener('scroll', updateScrollState);
+    let frame = 0;
+    const scheduleEmit = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        emitState();
+      });
+    };
 
-    const resizeObserver = new ResizeObserver(updateScrollState);
+    emitState();
+    node.addEventListener('scroll', scheduleEmit, { passive: true });
+
+    const resizeObserver = new ResizeObserver(scheduleEmit);
     resizeObserver.observe(node);
 
     return {
       destroy() {
-        node.removeEventListener('scroll', updateScrollState);
+        if (frame) cancelAnimationFrame(frame);
+        node.removeEventListener('scroll', scheduleEmit);
         resizeObserver.disconnect();
         scrollState$.complete();
         listElement = null;
