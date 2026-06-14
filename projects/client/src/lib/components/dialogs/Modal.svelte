@@ -41,18 +41,26 @@
     position: fixed;
     inset: 0;
     z-index: calc(var(--layer-top) - 1);
+
+    backdrop-filter: blur(var(--ni-8));
+    opacity: 0;
+    will-change: opacity;
   }
 
   :global(.trakt-modal-overlay[data-state="open"]) {
-    animation: blurIn var(--transition-increment) ease-in-out forwards;
+    animation: overlayFadeIn var(--transition-increment) ease-in-out forwards;
   }
 
-  @keyframes blurIn {
-    from {
-      backdrop-filter: blur(0);
-    }
+  @keyframes overlayFadeIn {
     to {
-      backdrop-filter: blur(var(--ni-8));
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.trakt-modal-overlay) {
+      backdrop-filter: none;
+      background: color-mix(in srgb, var(--color-background) 60%, transparent);
     }
   }
 
