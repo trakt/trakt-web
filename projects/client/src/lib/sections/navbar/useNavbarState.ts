@@ -1,6 +1,13 @@
 type Nil = null | undefined;
-import { BehaviorSubject, combineLatest, map } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  shareReplay,
+} from 'rxjs';
 import type { Snippet } from 'svelte';
+import { isShallowEqual } from '$lib/utils/object/isShallowEqual.ts';
 
 export type NavbarMode = 'full' | 'minimal' | 'hidden';
 
@@ -55,6 +62,8 @@ export function useNavbarState() {
         ...$navbarStateStore,
         ...$globalNavbarStateStore,
       })),
+      distinctUntilChanged(isShallowEqual),
+      shareReplay({ bufferSize: 1, refCount: true }),
     ),
     set: (props: Partial<NavbarState>) => {
       const current = navbarStateStore.value;
