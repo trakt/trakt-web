@@ -23,7 +23,7 @@ export function slideFade(
   const opacity = +style.opacity;
 
   const primary_property = axis === 'y' ? 'height' : 'width';
-  const primary_property_value = parseFloat(style[primary_property]);
+  const distance = parseFloat(style[primary_property]);
 
   return {
     delay,
@@ -31,9 +31,11 @@ export function slideFade(
     easing: cubicInOut,
     css: (t: number) => {
       const [slideT, opacityT] = splitTransition(t);
+      const offset = (1 - slideT) * distance;
+      const translate = axis === 'y' ? `0, ${offset}px` : `${offset}px, 0`;
 
       return (
-        `${primary_property}: ${slideT * primary_property_value}px;` +
+        `transform: translate(${translate});` +
         `opacity: ${opacityT * opacity};`
       );
     },
