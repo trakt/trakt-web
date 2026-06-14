@@ -39,7 +39,7 @@
         {TagIntlProvider.toRemainingDuration(props.minutesLeft)}
       </ProgressTag>
     {/if}
-    {#if props.type === "movie"}
+    {#if props.type === "movie" || props.type === "show"}
       <MediaStatusTag
         i18n={TagIntlProvider}
         status={props.media.status}
