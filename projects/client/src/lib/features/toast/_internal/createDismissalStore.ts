@@ -1,5 +1,5 @@
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
-import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
+import { persistDebounced } from '$lib/utils/storage/persistDebounced.ts';
 import { BehaviorSubject } from 'rxjs';
 import { DISMISSAL_STORAGE_KEY } from '../constants/index.ts';
 import type { DismissalVariant } from '../models/DismissalVariant.ts';
@@ -9,7 +9,7 @@ import { getStoredDismissals } from './getStoredDismissals.ts';
 import { normalizeDismissalItems } from './normalizeDismissalItems.ts';
 
 function writeStoredDismissals(dismissals: StoredDismissalsV2) {
-  safeLocalStorage.setItem(DISMISSAL_STORAGE_KEY, JSON.stringify(dismissals));
+  persistDebounced(DISMISSAL_STORAGE_KEY, dismissals);
 }
 
 export function createDismissalStore() {

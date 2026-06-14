@@ -1,7 +1,7 @@
 import { page } from '$app/state';
 import { useToggler } from '$lib/components/toggles/useToggler.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
+import { persistDebounced } from '$lib/utils/storage/persistDebounced.ts';
 import { combineLatest, distinctUntilChanged, map } from 'rxjs';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
@@ -65,7 +65,7 @@ export function useDiscover() {
     ),
     setSeasonalFilters: (value: boolean) => {
       useSeasonalFilters.next(value);
-      safeLocalStorage.setItem(SEASONAL_STORAGE_KEY, JSON.stringify(value));
+      persistDebounced(SEASONAL_STORAGE_KEY, value);
     },
   };
 }

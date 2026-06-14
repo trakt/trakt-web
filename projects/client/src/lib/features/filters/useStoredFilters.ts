@@ -1,5 +1,6 @@
 import { goto } from '$app/navigation';
 import { page } from '$app/state';
+import { persistDebounced } from '$lib/utils/storage/persistDebounced.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { BehaviorSubject } from 'rxjs';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
@@ -34,7 +35,7 @@ export function createStoredFiltersStore(
   return {
     filters: filters.asObservable(),
     update: (newFilters: StoredFilter) => {
-      safeLocalStorage.setItem(key, JSON.stringify(newFilters));
+      persistDebounced(key, newFilters);
       filters.next(newFilters);
     },
     reset: () => {
