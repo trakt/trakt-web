@@ -1,6 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { BehaviorSubject, map, switchMap } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, map } from 'rxjs';
 
 export function useStreamingPreferences() {
   const { user } = useUser();
@@ -16,9 +16,10 @@ export function useStreamingPreferences() {
     favorites: user.pipe(
       map((u) => u?.services.favorites ?? []),
     ),
-    country: user.pipe(switchMap((u) => {
-      return new BehaviorSubject(u?.services.country || 'us').asObservable();
-    })),
+    country: user.pipe(
+      map((u) => u?.services.country || 'us'),
+      distinctUntilChanged(),
+    ),
     toggleShowOnlyFavorites: () => {
       const newValue = !showOnlyFavorites.value;
       safeLocalStorage.setItem(
