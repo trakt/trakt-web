@@ -66,7 +66,7 @@
       filter: grayscale(0.5);
 
       transition: var(--transition-increment) ease-in-out;
-      transition-property: filter, opacity, width, left;
+      transition-property: filter, opacity;
 
       @include for-tablet-sm-and-below {
         width: 150%;
