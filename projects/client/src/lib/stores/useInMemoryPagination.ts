@@ -1,4 +1,11 @@
-import { BehaviorSubject, combineLatest, map, type Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  type Observable,
+  shareReplay,
+} from 'rxjs';
 
 /**
  * Creates in-memory infinite scroll pagination for an Observable array.
@@ -21,16 +28,22 @@ export function useInMemoryPagination<T>(
 ) {
   const page$ = new BehaviorSubject<number>(page);
 
-  const list = combineLatest([source$, page$]).pipe(
-    map(([items, currentPage]) => items.slice(0, currentPage * limit)),
+  const paged = combineLatest([source$, page$]).pipe(
+    map(([items, currentPage]) => {
+      const pageEnd = currentPage * limit;
+      return {
+        list: items.slice(0, pageEnd),
+        hasNextPage: items.length > pageEnd,
+      };
+    }),
+    shareReplay({ bufferSize: 1, refCount: true }),
   );
 
-  const hasNextPage = combineLatest([source$, page$]).pipe(
-    map(([items, currentPage]) => {
-      const totalItems = items.length;
-      const nextPageEnd = currentPage * limit;
-      return totalItems > nextPageEnd;
-    }),
+  const list = paged.pipe(map((paged) => paged.list));
+
+  const hasNextPage = paged.pipe(
+    map((paged) => paged.hasNextPage),
+    distinctUntilChanged(),
   );
 
   const fetchNextPage = () => {
