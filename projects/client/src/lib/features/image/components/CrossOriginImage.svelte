@@ -1,7 +1,6 @@
 <script lang="ts">
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { PLACEHOLDERS } from "$lib/utils/assets";
-  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import type { ImageProps } from "./ImageProps";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
 
@@ -16,28 +15,32 @@
     ...rest
   }: ImageProps = $props();
 
-  const response = $derived(writable({ uri: src }));
-  const isImageLoaded = $derived(writable(false));
+  let uri = $state(src);
+  let isImageLoaded = $state(false);
+
+  $effect(() => {
+    uri = src;
+    isImageLoaded = false;
+  });
 
   const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
 </script>
 
 <img
   {loading}
-  class:image-loaded={$isImageLoaded}
+  decoding="async"
+  class:image-loaded={isImageLoaded}
   class:image-animation-enabled={animate}
   class:image-placeholder={isPlaceholder}
   use:appendClassList={classList}
-  src={$response.uri}
+  src={uri}
   {alt}
   onerror={(ev) => {
-    resolveEnvironmentUri(src).then(response.set);
+    resolveEnvironmentUri(src).then((next) => (uri = next));
     _onerror?.(ev);
   }}
-  onload={function (ev) {
-    setTimeout(() => {
-      isImageLoaded.set(true);
-    }, 100);
+  onload={(ev) => {
+    isImageLoaded = true;
     _onload?.(ev);
   }}
   {...rest}
