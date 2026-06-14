@@ -50,7 +50,7 @@ export function useLazyLoader({ loadMore, parent }: UseLazyLoaderProps) {
       const resizeHandler = () => debouncedLoadOnResize();
 
       if (parent) {
-        parent.addEventListener('scroll', scrollHandler);
+        parent.addEventListener('scroll', scrollHandler, { passive: true });
 
         return () => {
           parent.removeEventListener('scroll', scrollHandler);
