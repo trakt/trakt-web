@@ -2,7 +2,7 @@ import '$lib/polyfills/mapGroupBy.ts';
 import '$lib/polyfills/toSorted.ts';
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
 import * as Sentry from '@sentry/sveltekit';
-import { handleErrorWithSentry, replayIntegration } from '@sentry/sveltekit';
+import { handleErrorWithSentry } from '@sentry/sveltekit';
 
 Sentry.init({
   dsn: SENTRY_DSN,
@@ -12,20 +12,13 @@ Sentry.init({
   // Enable logs to be sent to Sentry
   enableLogs: true,
 
-  // This sets the sample rate to be 10%. You may want this to be 100% while
-  // in development and sample at a lower rate in production
-  replaysSessionSampleRate: 0.1,
-
-  // If the entire session is not sampled, use the below sample rate to sample
-  // sessions when an error occurs.
+  // Replay is only loaded for REPLAY_LOAD_SAMPLE of users (see below). For
+  // the sampled cohort, capture both session and on-error replays fully.
+  replaysSessionSampleRate: 1.0,
   replaysOnErrorSampleRate: 1.0,
 
-  // If you don't want to use Session Replay, just remove the line below:
-  integrations: [replayIntegration({
-    maskAllInputs: false,
-    maskAllText: false,
-    blockAllMedia: false,
-  })],
+  // Replay integration is added post-load to keep hydration light. See below.
+  integrations: [],
   // Strings for partial matches. Regex patterns for exact matches.
   ignoreErrors: [
     'CancelledError',
@@ -175,9 +168,39 @@ function reloadOnceFromClientEvent(
   triggerReloadOnce();
 }
 
+// Fraction of users that download and initialize Sentry's replay integration.
+// Sampling at the loader keeps the chunk + init cost off the other (1 - x) of
+// users entirely, while the sampled cohort still gets full session + on-error
+// replay coverage.
+const REPLAY_LOAD_SAMPLE = 0.1;
+
 if (typeof window !== 'undefined') {
   window.addEventListener('error', reloadOnceFromClientEvent);
   window.addEventListener('unhandledrejection', reloadOnceFromClientEvent);
+
+  const shouldLoadReplay = Math.random() < REPLAY_LOAD_SAMPLE;
+
+  const loadReplay = () => {
+    const schedule = window.requestIdleCallback?.bind(window) ??
+      ((cb: IdleRequestCallback) => window.setTimeout(() => cb({} as IdleDeadline), 0));
+    schedule(() => {
+      import('@sentry/sveltekit').then(({ replayIntegration }) => {
+        Sentry.addIntegration(replayIntegration({
+          maskAllInputs: false,
+          maskAllText: false,
+          blockAllMedia: false,
+        }));
+      });
+    }, { timeout: 5000 });
+  };
+
+  if (shouldLoadReplay) {
+    if (document.readyState === 'complete') {
+      loadReplay();
+    } else {
+      window.addEventListener('load', loadReplay, { once: true });
+    }
+  }
 }
 
 // If you have a custom error handler, pass it to `handleErrorWithSentry`
