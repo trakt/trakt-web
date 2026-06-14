@@ -3,19 +3,20 @@ export function debounce<TArgs, TReturn>(
   wait: number,
 ) {
   let timeout: NodeJS.Timeout;
-  let currentPromise: Promise<TReturn> | null = null;
+  let resolvers: Array<(value: TReturn) => void> = [];
 
   return function executedFunction(...args: TArgs[]): Promise<TReturn> {
-    if (currentPromise) {
-      clearTimeout(timeout);
-    }
+    clearTimeout(timeout);
 
-    return (currentPromise = new Promise<TReturn>((resolve) => {
+    return new Promise<TReturn>((resolve) => {
+      resolvers.push(resolve);
+
       timeout = setTimeout(async () => {
         const result = await func(...args);
-        resolve(result);
-        currentPromise = null;
+        const pending = resolvers;
+        resolvers = [];
+        pending.forEach((settle) => settle(result));
       }, wait);
-    }));
+    });
   };
 }
