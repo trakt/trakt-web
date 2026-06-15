@@ -5,12 +5,13 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PeopleSummary from "$lib/sections/summary/PeopleSummary.svelte";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { PageProps } from "./$types";
   import { usePerson } from "./usePerson";
 
   const { params }: PageProps = $props();
 
-  const { person, isLoading } = $derived(usePerson(params.slug));
+  const { person, isLoading } = usePerson(fromRune(() => params.slug));
 
   const mapToCrewPosition = (value: string | Nil) => {
     return crewPositionSchema.safeParse(value?.toLowerCase()).data;
