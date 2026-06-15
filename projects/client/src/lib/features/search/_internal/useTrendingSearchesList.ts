@@ -16,7 +16,7 @@ import {
 } from '$lib/requests/queries/search/searchTrendingQuery.ts';
 import { isSameDayOfYear } from '$lib/utils/date/isSameDayOfYear.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { type CreateQueryOptions } from '@tanstack/svelte-query';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { map } from 'rxjs/operators';
 
 const LIST_LIMIT = 50;

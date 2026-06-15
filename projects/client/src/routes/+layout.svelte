@@ -42,7 +42,7 @@
   import { retry } from "$lib/utils/retry/retry.js";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
-  import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
+  import QueryDevtools from "$lib/features/query/QueryDevtools.svelte";
   import { onMount } from "svelte";
 
   const { data, children } = $props();
@@ -203,9 +203,9 @@
                                             <RenderFor audience="authenticated">
                                               <NavbarToastContent />
                                             </RenderFor>
-                                            <SvelteQueryDevtools
+                                            <QueryDevtools
+                                              client={data.queryClient}
                                               buttonPosition="bottom-right"
-                                              styleNonce="opacity: 0.5"
                                             />
                                           </ListScrollHistoryProvider>
                                         </ThemeProvider>

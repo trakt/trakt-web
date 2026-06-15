@@ -13,7 +13,7 @@ import {
 import { dailyOrderArray } from '$lib/sections/lists/stores/dailyOrderArray.ts';
 import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { type CreateQueryOptions } from '@tanstack/svelte-query';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { map, shareReplay } from 'rxjs';
 import { recommendedMediaQuery } from '../../../requests/queries/media/mediaRecommendedQuery.ts';
 import { useInMemoryPagination } from '../../../stores/useInMemoryPagination.ts';

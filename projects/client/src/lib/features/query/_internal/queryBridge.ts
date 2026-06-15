@@ -1,8 +1,10 @@
 import { browser } from '$app/environment';
 import { NOOP_FN } from '$lib/utils/constants.ts';
+import type {
+  CreateInfiniteQueryOptions,
+  CreateQueryOptions,
+} from '$lib/features/query/types.ts';
 import {
-  type CreateInfiniteQueryOptions,
-  type CreateQueryOptions,
   type InfiniteData,
   InfiniteQueryObserver,
   type InfiniteQueryObserverResult,
@@ -10,19 +12,16 @@ import {
   type QueryKey,
   QueryObserver,
   type QueryObserverResult,
-} from '@tanstack/svelte-query';
+} from '@tanstack/query-core';
 import { Observable } from 'rxjs';
 
 /**
- * @tanstack/svelte-query v6 ships a runes-based wrapper (`createQuery`) that
- * subscribes its underlying QueryObserver via an `$effect`. That effect's
- * cleanup tears the observer down whenever its tracked dependencies blink
- * (notably the persist client's `isRestoring` box), which left our single
- * shared subscription path racing with invalidations and dropping refetches.
- *
- * To dodge that we skip the runes layer and drive query-core's `QueryObserver`
- * directly. The RxJS subscription owns the lifecycle: the observer is created
- * on first subscribe and destroyed when the last subscriber leaves.
+ * Drive query-core's `QueryObserver` / `InfiniteQueryObserver` directly from
+ * an RxJS Observable. The Observable subscription owns the observer's
+ * lifecycle: created on first subscribe, destroyed when the last subscriber
+ * leaves. We do not lean on Svelte runes here - runes-based wrappers tear
+ * the observer down during reactive flushes, racing with invalidations and
+ * dropping refetches.
  */
 
 // `any` to avoid TanStack's narrow generic variance fighting our wider

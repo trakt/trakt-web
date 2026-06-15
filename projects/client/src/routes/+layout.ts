@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import { setToken } from '$lib/features/auth/token/index.ts';
 import { retryDelay } from '$lib/utils/retry/retryDelay.ts';
 import type { LayoutLoad } from '$types/$types.d.ts';
-import { QueryClient } from '@tanstack/svelte-query';
+import { QueryClient } from '@tanstack/query-core';
 
 export const load: LayoutLoad = ({ data }) => {
   const queryClient = new QueryClient({

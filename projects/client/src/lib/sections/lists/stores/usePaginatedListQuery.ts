@@ -1,11 +1,8 @@
 import { useInfiniteQuery } from '$lib/features/query/useQuery.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import {
-  type CreateInfiniteQueryOptions,
-  type InfiniteData,
-  type QueryKey,
-} from '@tanstack/svelte-query';
+import type { CreateInfiniteQueryOptions } from '$lib/features/query/types.ts';
+import type { InfiniteData, QueryKey } from '@tanstack/query-core';
 import { firstValueFrom, map } from 'rxjs';
 
 export function usePaginatedListQuery<

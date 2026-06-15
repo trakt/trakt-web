@@ -1,14 +1,16 @@
 import { browser } from '$app/environment';
 import { time } from '$lib/utils/timing/time.ts';
-import {
-  type CreateInfiniteQueryOptions,
-  type CreateQueryOptions,
-  type InfiniteData,
-  type InfiniteQueryObserverResult,
-  type QueryKey,
-  type QueryObserverResult,
-  useQueryClient,
-} from '@tanstack/svelte-query';
+import type {
+  CreateInfiniteQueryOptions,
+  CreateQueryOptions,
+} from '$lib/features/query/types.ts';
+import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
+import type {
+  InfiniteData,
+  InfiniteQueryObserverResult,
+  QueryKey,
+  QueryObserverResult,
+} from '@tanstack/query-core';
 import {
   isObservable,
   map,
@@ -27,7 +29,7 @@ import {
   queryBridge,
   type QueryOptionsRef,
   reactiveQueryBridge,
-} from './_internal/queryBridge.svelte.ts';
+} from './_internal/queryBridge.ts';
 
 /**
  * Tracks query invalidation requests.

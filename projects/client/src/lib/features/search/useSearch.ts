@@ -1,8 +1,6 @@
 import { browser } from '$app/environment';
-import {
-  type CreateQueryOptions,
-  useQueryClient,
-} from '@tanstack/svelte-query';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
+import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { debounceTime, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';

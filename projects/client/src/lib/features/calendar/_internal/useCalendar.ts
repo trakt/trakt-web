@@ -7,7 +7,7 @@ import {
 import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMoviesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { type CreateQueryOptions } from '@tanstack/svelte-query';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { isSameDay } from 'date-fns/isSameDay';
 import { combineLatest, map, type Observable } from 'rxjs';
 import type { FilterParams } from '../../../requests/models/FilterParams.ts';
