@@ -1,11 +1,11 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { peopleSummaryQuery } from '$lib/requests/queries/people/peopleSummaryQuery.ts';
-import { map } from 'rxjs';
+import { map, type Observable } from 'rxjs';
 
-export function usePerson(slug: string) {
-  const person = useQuery(peopleSummaryQuery({
-    slug,
-  }));
+export function usePerson(slug$: Observable<string>) {
+  const person = useQuery(
+    slug$.pipe(map((slug) => peopleSummaryQuery({ slug }))),
+  );
 
   return {
     isLoading: person.pipe(map(($person) => $person.isPending)),

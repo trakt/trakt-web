@@ -5,12 +5,13 @@
   import CreditsPositionSelector from "$lib/sections/lists/components/CreditsPositionSelector.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { usePerson } from "../usePerson";
   import type { PageProps } from "./$types";
 
   const { params }: PageProps = $props();
 
-  const { person, isLoading } = $derived(usePerson(params.slug));
+  const { person, isLoading } = usePerson(fromRune(() => params.slug));
 
   const title = $derived.by(() => {
     if ($isLoading || !$person) return m.list_title_movie_credits();
