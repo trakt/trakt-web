@@ -1,33 +1,58 @@
 import { error } from '$lib/utils/console/print.ts';
 import { monitor } from '$lib/utils/perf/monitor.ts';
-import type {
-  PersistedClient,
-  Persister,
+import {
+  type AsyncStorage,
+  experimental_createQueryPersister,
 } from '@tanstack/query-persist-client-core';
-import { del, get, set } from 'idb-keyval';
+import { createStore, del, entries, get, set } from 'idb-keyval';
 
-const IDB_VALID_KEY = 'trakt-query-client';
+const DB_NAME = 'trakt-query';
+const STORE_NAME = 'query-cache';
+const MAX_AGE_MS = 24 * 60 * 60 * 1000;
 
-/**
- * Creates an Indexed DB persister or a no-op persister based on environment
- * @see https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
- */
-export function createIdbPersister(): Persister {
-  const handleError = (e: unknown) => {
-    error('IDB Persister Error:', e);
-    return undefined;
-  };
+const handleError = (e: unknown) => {
+  error('IDB Persister Error:', e);
+};
+
+function createIdbStorage(): AsyncStorage<string> {
+  const store = createStore(DB_NAME, STORE_NAME);
 
   return {
-    persistClient: monitor(async (client: PersistedClient) => {
-      await set(IDB_VALID_KEY, client).catch(handleError);
-    }, 'IDB Persister'),
-    restoreClient: monitor(async () => {
-      return await get<PersistedClient>(IDB_VALID_KEY)
-        .catch(handleError);
-    }, 'IDB Restorer'),
-    removeClient: async () => {
-      await del(IDB_VALID_KEY);
-    },
+    getItem: monitor(
+      (key: string) =>
+        get<string>(key, store).catch((e) => {
+          handleError(e);
+          return undefined;
+        }),
+      'IDB Restorer',
+    ),
+    setItem: monitor(
+      (key: string, value: string) => set(key, value, store).catch(handleError),
+      'IDB Persister',
+    ),
+    removeItem: (key: string) => del(key, store).catch(handleError),
+    entries: () =>
+      entries<string, string>(store)
+        .then((rows) =>
+          rows.map(([k, v]) => [String(k), v] as [string, string])
+        )
+        .catch((e) => {
+          handleError(e);
+          return [];
+        }),
   };
+}
+
+/**
+ * Per-query IDB persister via TanStack's experimental_createQueryPersister.
+ * Each query writes to its own IDB key, so writes never serialize the whole
+ * cache. Restore is lazy: a query is rehydrated only when its observer
+ * subscribes.
+ */
+export function createIdbPersister(buster: string) {
+  return experimental_createQueryPersister<string>({
+    storage: createIdbStorage(),
+    buster,
+    maxAge: MAX_AGE_MS,
+  });
 }
