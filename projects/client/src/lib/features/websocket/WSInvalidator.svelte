@@ -58,6 +58,8 @@
           scheduleInvalidation(InvalidateAction.CheckIn);
           scheduleInvalidation(InvalidateAction.MarkAsWatched("movie"));
           break;
+        case "account:settings":
+          return scheduleInvalidation(InvalidateAction.User.Settings);
         default:
           print(LogLevel.Log, "warn", "WS Warning: Unknown key", data.key);
       }
