@@ -112,9 +112,9 @@ the rule against current authoritative docs rather than trust folklore.
 - **Pick the multicast variant that matches your replay needs.** Use
   `shareReplay({ bufferSize: 1, refCount: true })` for "BehaviorSubject
   semantics with auto-teardown when nothing is listening." Use
-  `share({ connector: () => new ReplaySubject(1), resetOnRefCountZero:
-  () => timer(N) })` when the source must survive a brief unsubscribe
-  (a navigation round-trip, say) but still tear down when truly idle.
+  `share({ connector: () => new ReplaySubject(1), resetOnRefCountZero: () => timer(N) })`
+  when the source must survive a brief unsubscribe (a navigation
+  round-trip, say) but still tear down when truly idle.
   [rxjs.dev: `shareReplay`](https://rxjs.dev/api/operators/shareReplay),
   [rxjs.dev: `share`](https://rxjs.dev/api/operators/share).
 - **Avoid `shareReplay({ refCount: false })` (and the equivalent
@@ -124,10 +124,11 @@ the rule against current authoritative docs rather than trust folklore.
   listeners.
   [RxJS issue 5034 / discussion 6731](https://github.com/ReactiveX/rxjs/issues/5034).
 - **Use `distinctUntilChanged` whenever the upstream may emit new
-  *identities* with identical *values*.** A `combineLatest(...).pipe(
-  map(spread))` builds a fresh object each tick; provide a key/equality
-  function (value-based for primitives, structural for objects) so
-  downstream consumers do not re-render on no-op upstream churn.
+  *identities* with identical *values*.** A
+  `combineLatest(...).pipe(map(spread))` builds a fresh object each
+  tick; provide a key/equality function (value-based for primitives,
+  structural for objects) so downstream consumers do not re-render on
+  no-op upstream churn.
   [rxjs.dev: `distinctUntilChanged`](https://rxjs.dev/api/operators/distinctUntilChanged).
 - **Map, don't reconstruct.** If a derived stream is a pure function of
   an upstream, use `map` or `combineLatest` + `map`; don't tear down and
@@ -164,7 +165,7 @@ the rule against current authoritative docs rather than trust folklore.
   are usually ready before the user scrolls, avoiding a spinner.
   Reserve viewport-gating for data the user is *unlikely* to reach, or
   for fetches expensive enough to demonstrably hurt initial paint.
-  [TanStack: prefetching](https://tanstack.com/query/v4/docs/framework/react/guides/prefetching).
+  [TanStack: prefetching](https://tanstack.com/query/v5/docs/framework/react/guides/prefetching).
 - **Invalidate from the mutation, not on a poll.** Use
   `queryClient.invalidateQueries({ predicate })` from the write site
   rather than polling timers on the read site. Polling is a last
@@ -175,11 +176,11 @@ the rule against current authoritative docs rather than trust folklore.
   a ceiling becomes a runaway tab when the source fails for a
   structural reason. Cap retries and back off; cap polls at a
   session-scoped count.
-  [TanStack: window-focus refetching](https://tanstack.com/query/v4/docs/framework/react/guides/window-focus-refetching).
+  [TanStack: window-focus refetching](https://tanstack.com/query/v5/docs/framework/react/guides/window-focus-refetching).
 - **Seed lists from a parent query's data with `initialData` when the
   shape allows it.** Avoids a second network round-trip for a detail
   view that the list already rendered.
-  [TanStack: initial query data](https://tanstack.com/query/v4/docs/react/guides/initial-query-data).
+  [TanStack: initial query data](https://tanstack.com/query/v5/docs/framework/react/guides/initial-query-data).
 
 ---
 
