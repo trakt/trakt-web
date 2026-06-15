@@ -6,6 +6,8 @@ auto-load via AGENTS.md; domain rules load on demand):
   components.md
 - API requests, queries, mutations, mappers (lib/requests): read requests.md
 - Shared utilities (lib/utils): read utils.md
+- Perf work (animations, scroll handlers, IntersectionObservers, rxjs
+  plumbing, bundle/boot, viewport gating): read performance.md
 - Tests (`*.test.ts`, `*.spec.ts`, files under `test/`): testing.md (already
   loaded as core)
 - All other source code: project.md, code-principles.md, implementation.md
