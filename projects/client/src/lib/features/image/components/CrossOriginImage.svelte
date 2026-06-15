@@ -36,7 +36,7 @@
   src={uri}
   {alt}
   onerror={(ev) => {
-    resolveEnvironmentUri(src).then((next) => (uri = next));
+    resolveEnvironmentUri(src).then((next) => (uri = next.uri));
     _onerror?.(ev);
   }}
   onload={(ev) => {

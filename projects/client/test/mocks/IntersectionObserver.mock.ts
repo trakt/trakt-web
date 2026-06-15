@@ -1,23 +1,29 @@
+type Callback = (
+  entries: IntersectionObserverEntry[],
+  observer: IntersectionObserver,
+) => void;
+
 (globalThis as Record<string, unknown>).IntersectionObserver =
-  class IntersectionObserver {
+  class MockIntersectionObserver {
+    #callback: Callback;
     constructor(
-      callback: (
-        entries: IntersectionObserverEntry[],
-        observer: IntersectionObserver,
-      ) => void,
-      _options: IntersectionObserver,
+      callback: Callback,
+      _options?: IntersectionObserverInit,
     ) {
-      callback([{
+      this.#callback = callback;
+    }
+    observe(target: Element) {
+      const entry = {
         isIntersecting: true,
-        intersectionRatio: 0,
+        intersectionRatio: 1,
         time: performance.now(),
         boundingClientRect: new DOMRectReadOnly(),
         intersectionRect: new DOMRectReadOnly(),
         rootBounds: null,
-        target: document.createElement('div'),
-      }], this);
+        target,
+      } as IntersectionObserverEntry;
+      this.#callback([entry], this as unknown as IntersectionObserver);
     }
-    observe() {}
     disconnect() {}
     unobserve() {}
   };
