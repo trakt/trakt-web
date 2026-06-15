@@ -1,4 +1,5 @@
 import { setLocale } from '$lib/features/i18n/index.ts';
+import { valueObservable } from '$lib/utils/store/valueObservable.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPeopleMappedMock.ts';
 import { MovieHereticStudiosMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticStudiosMappedMock.ts';
@@ -11,7 +12,8 @@ describe('store: useMovie', () => {
   describe('movie: Heretic (2024)', () => {
     it('should contain summary', async () => {
       const result = await runQuery({
-        factory: () => useMovie(MovieHereticMappedMock.slug).movie,
+        factory: () =>
+          useMovie(valueObservable(MovieHereticMappedMock.slug)).movie,
       });
 
       expect(result).to.deep.equal(MovieHereticMappedMock);
@@ -19,7 +21,8 @@ describe('store: useMovie', () => {
 
     it('should contain english information', async () => {
       const result = await runQuery({
-        factory: () => useMovie(MovieHereticMappedMock.slug).intl,
+        factory: () =>
+          useMovie(valueObservable(MovieHereticMappedMock.slug)).intl,
         waitFor: (result) => result?.overview !== '',
       });
 
@@ -34,7 +37,8 @@ describe('store: useMovie', () => {
       setLocale('pt-BR');
 
       const result = await runQuery({
-        factory: () => useMovie(MovieHereticMappedMock.slug).intl,
+        factory: () =>
+          useMovie(valueObservable(MovieHereticMappedMock.slug)).intl,
         waitFor: (result) => result?.overview !== '' && result?.country !== '',
       });
 
@@ -45,7 +49,8 @@ describe('store: useMovie', () => {
 
     it('should return studios', async () => {
       const result = await runQuery({
-        factory: () => useMovie(MovieHereticMappedMock.slug).studios,
+        factory: () =>
+          useMovie(valueObservable(MovieHereticMappedMock.slug)).studios,
         waitFor: (result) => result.length !== 0,
       });
 
@@ -54,7 +59,8 @@ describe('store: useMovie', () => {
 
     it('should return crew', async () => {
       const result = await runQuery({
-        factory: () => useMovie(MovieHereticMappedMock.slug).crew,
+        factory: () =>
+          useMovie(valueObservable(MovieHereticMappedMock.slug)).crew,
         waitFor: (result) => result.cast.length !== 0,
       });
 

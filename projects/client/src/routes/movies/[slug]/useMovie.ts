@@ -13,45 +13,29 @@ import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferr
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { combineLatest, of } from 'rxjs';
+import { combineLatest, type Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
-/*
-  FIXME: Fix the root cause.
-  Dealing with undefined slug is a temporary solution.
-  The root cause is that one of the components can still handle
-  a subscription/query which makes the page still reactive
-  even when navigating away. Same for useShow.ts & MediaSummary.svelte
-*/
-export function useMovie(slug: string | undefined) {
-  if (!slug) {
-    return {
-      isLoading: of(true),
-      movie: of(undefined),
-      studios: of([]),
-      crew: of(EMPTY_CREW),
-      videos: of([]),
-      intl: of(undefined),
-      streamOn: of(undefined),
-      sentiment: of(undefined),
-    };
-  }
-
+export function useMovie(slug$: Observable<string>) {
   const { isAuthorized } = useAuth();
   const { country, favorites } = useStreamingPreferences();
 
-  const movie = useQuery(movieSummaryQuery({
-    slug,
-  }));
+  const movie = useQuery(
+    slug$.pipe(map((slug) => movieSummaryQuery({ slug }))),
+  );
 
-  const studios = useQuery(movieStudiosQuery({ slug }));
-  const crew = useQuery(moviePeopleQuery({ slug }));
+  const studios = useQuery(
+    slug$.pipe(map((slug) => movieStudiosQuery({ slug }))),
+  );
+  const crew = useQuery(slug$.pipe(map((slug) => moviePeopleQuery({ slug }))));
 
   const sentiment = combineLatest([
     isAuthorized,
     useQuery(
-      isAuthorized.pipe(
-        map((authorized) => movieSentimentQuery({ slug, enabled: authorized })),
+      combineLatest([slug$, isAuthorized]).pipe(
+        map(([slug, authorized]) =>
+          movieSentimentQuery({ slug, enabled: authorized })
+        ),
       ),
     ),
   ]).pipe(
@@ -59,21 +43,25 @@ export function useMovie(slug: string | undefined) {
     shareReplay(1),
   );
 
-  const videos = useQuery(movieVideosQuery({
-    slug,
-  }));
+  const videos = useQuery(
+    slug$.pipe(map((slug) => movieVideosQuery({ slug }))),
+  );
 
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
   const { language } = getLanguageAndRegion();
 
   const intl = useQuery(
-    movieIntlQuery({ slug, language, enabled: !isLocaleSkipped }),
+    slug$.pipe(
+      map((slug) =>
+        movieIntlQuery({ slug, language, enabled: !isLocaleSkipped })
+      ),
+    ),
   );
 
   const streamOnQuery = useQuery(
-    country.pipe(
-      map((country) => streamMovieQuery({ slug, country })),
+    combineLatest([slug$, country]).pipe(
+      map(([slug, country]) => streamMovieQuery({ slug, country })),
     ),
   );
 
@@ -91,7 +79,7 @@ export function useMovie(slug: string | undefined) {
   const isSentimentLoading = sentiment.pipe(
     map((query) => query ? toLoadingState(query) : false),
   );
-  // Keep isLoading true until the core movie payload is present —
+  // Keep isLoading true until the core movie payload is present -
   // queries can flip to !fetching while `data` is still undefined
   // (errored or empty), which would otherwise let the page render
   // a half-populated summary.
