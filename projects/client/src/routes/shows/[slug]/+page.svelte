@@ -8,6 +8,7 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
   import { findActiveSeason } from "$lib/utils/media/findActiveSeason";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
   import { useShow } from "./useShow";
@@ -15,16 +16,19 @@
 
   const { params }: PageProps = $props();
 
-  const { show, intl, studios, crew, seasons, streamOn, isLoading, sentiment } =
-    $derived(useShow(params.slug));
+  const slug$ = fromRune(() => params.slug);
 
-  const videos = $derived(useShowVideos({ slug: params.slug }));
+  const { show, intl, studios, crew, seasons, streamOn, isLoading, sentiment } =
+    useShow(slug$);
+
+  const videos = useShowVideos({ slug: slug$ });
 
   const currentSeason = $derived(
     parseInt(page.url.searchParams.get("season") ?? ""),
   );
 
-  const lastWatchedSeason = $derived(useUserSeason($show?.id));
+  const showId$ = fromRune(() => $show?.id);
+  const lastWatchedSeason = useUserSeason(showId$);
 
   const { search } = useParameters();
   const goToSeason = (slug: string, season: number) => {

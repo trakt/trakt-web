@@ -1,4 +1,5 @@
 import { setLocale } from '$lib/features/i18n/index.ts';
+import { valueObservable } from '$lib/utils/store/valueObservable.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
 import { ShowSiloSeasonsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSeasonsMappedMock.ts';
@@ -12,7 +13,7 @@ describe('store: useShow', () => {
   describe('show: Silo (2023)', () => {
     it('should contain summary', async () => {
       const result = await runQuery({
-        factory: () => useShow(ShowSiloMappedMock.slug).show,
+        factory: () => useShow(valueObservable(ShowSiloMappedMock.slug)).show,
       });
 
       expect(result).to.deep.equal(ShowSiloMappedMock);
@@ -20,7 +21,7 @@ describe('store: useShow', () => {
 
     it('should contain english information', async () => {
       const result = await runQuery({
-        factory: () => useShow(ShowSiloMappedMock.slug).intl,
+        factory: () => useShow(valueObservable(ShowSiloMappedMock.slug)).intl,
         waitFor: (result) => result?.overview !== '',
       });
 
@@ -35,7 +36,7 @@ describe('store: useShow', () => {
       setLocale('ja-JP');
 
       const result = await runQuery({
-        factory: () => useShow(ShowSiloMappedMock.slug).intl,
+        factory: () => useShow(valueObservable(ShowSiloMappedMock.slug)).intl,
         waitFor: (result) => result?.overview !== '' && result?.country !== '',
       });
 
@@ -44,7 +45,7 @@ describe('store: useShow', () => {
 
     it('should return crew', async () => {
       const result = await runQuery({
-        factory: () => useShow(ShowSiloMappedMock.slug).crew,
+        factory: () => useShow(valueObservable(ShowSiloMappedMock.slug)).crew,
         waitFor: (result) => result.cast.length !== 0,
       });
 
@@ -53,7 +54,8 @@ describe('store: useShow', () => {
 
     it('should return seasons', async () => {
       const result = await runQuery({
-        factory: () => useShow(ShowSiloMappedMock.slug).seasons,
+        factory: () =>
+          useShow(valueObservable(ShowSiloMappedMock.slug)).seasons,
       });
 
       expect(result).to.deep.equal(ShowSiloSeasonsMappedMock);
@@ -61,7 +63,8 @@ describe('store: useShow', () => {
 
     it('should return studios', async () => {
       const result = await runQuery({
-        factory: () => useShow(ShowSiloMappedMock.slug).studios,
+        factory: () =>
+          useShow(valueObservable(ShowSiloMappedMock.slug)).studios,
         waitFor: (result) => result.length !== 0,
       });
 

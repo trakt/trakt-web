@@ -1,22 +1,18 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { map, of } from 'rxjs';
+import { combineLatest, map, type Observable } from 'rxjs';
 
 export const EMPTY_SEASON_INFO = { number: -1, episodes: { count: -1 } };
 
-export function useUserSeason(showId: number | Nil) {
-  if (!showId) return of(EMPTY_SEASON_INFO);
-
+export function useUserSeason(showId$: Observable<number | Nil>) {
   const { isAuthorized } = useAuth();
-  if (!isAuthorized.value) return of(EMPTY_SEASON_INFO);
-
   const { history } = useUser();
 
-  return history.pipe(
-    map(($history) => {
-      if (!$history) return EMPTY_SEASON_INFO;
+  return combineLatest([showId$, isAuthorized, history]).pipe(
+    map(([showId, authorized, $history]) => {
+      if (!showId || !authorized || !$history) return EMPTY_SEASON_INFO;
 
-      const episodes = $history?.shows.get(showId)?.episodes ??
+      const episodes = $history.shows.get(showId)?.episodes ??
         [{ season: -1 }];
       const season = Math.max(...episodes.map((episode) => episode.season));
 

@@ -13,43 +13,35 @@ import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferr
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { combineLatest, of } from 'rxjs';
+import { combineLatest, type Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
-export function useShow(slug: string | undefined) {
-  if (!slug) {
-    return {
-      isLoading: of(true),
-      show: of(undefined),
-      studios: of([]),
-      crew: of(EMPTY_CREW),
-      seasons: of(undefined),
-      videos: of([]),
-      intl: of(undefined),
-      streamOn: of(undefined),
-      sentiment: of(undefined),
-    };
-  }
-
+export function useShow(slug$: Observable<string>) {
   const { isAuthorized } = useAuth();
   const { country, favorites } = useStreamingPreferences();
 
-  const show = useQuery(showSummaryQuery({ slug }));
-  const seasons = useQuery(showSeasonsQuery({ slug }));
-  const studios = useQuery(showStudiosQuery({ slug }));
-  const crew = useQuery(showPeopleQuery({ slug }));
+  const show = useQuery(slug$.pipe(map((slug) => showSummaryQuery({ slug }))));
+  const seasons = useQuery(
+    slug$.pipe(map((slug) => showSeasonsQuery({ slug }))),
+  );
+  const studios = useQuery(
+    slug$.pipe(map((slug) => showStudiosQuery({ slug }))),
+  );
+  const crew = useQuery(slug$.pipe(map((slug) => showPeopleQuery({ slug }))));
 
   const streamOnQuery = useQuery(
-    country.pipe(
-      map((country) => streamShowQuery({ slug, country })),
+    combineLatest([slug$, country]).pipe(
+      map(([slug, country]) => streamShowQuery({ slug, country })),
     ),
   );
 
   const sentiment = combineLatest([
     isAuthorized,
     useQuery(
-      isAuthorized.pipe(
-        map((authorized) => showSentimentQuery({ slug, enabled: authorized })),
+      combineLatest([slug$, isAuthorized]).pipe(
+        map(([slug, authorized]) =>
+          showSentimentQuery({ slug, enabled: authorized })
+        ),
       ),
     ),
   ]).pipe(
@@ -62,7 +54,11 @@ export function useShow(slug: string | undefined) {
   const { language } = getLanguageAndRegion();
 
   const intl = useQuery(
-    showIntlQuery({ slug, language, enabled: !isLocaleSkipped }),
+    slug$.pipe(
+      map((slug) =>
+        showIntlQuery({ slug, language, enabled: !isLocaleSkipped })
+      ),
+    ),
   );
 
   const queries = [
