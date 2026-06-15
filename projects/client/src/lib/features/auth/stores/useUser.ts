@@ -3,7 +3,15 @@ import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { type UserLimits } from '$lib/requests/models/UserLimits.ts';
 import { blockedUsersQuery } from '$lib/requests/queries/users/blockedUsersQuery.ts';
 import { userLimitsQuery } from '$lib/requests/queries/vip/userLimitsQuery.ts';
-import { map, of, shareReplay, switchMap } from 'rxjs';
+import type { Observable } from 'rxjs';
+import {
+  map,
+  of,
+  ReplaySubject,
+  share as rxShare,
+  switchMap,
+  timer,
+} from 'rxjs';
 import { getContext, setContext } from 'svelte';
 import {
   currentUserCommentReactionsQuery,
@@ -107,6 +115,26 @@ function definedData<T>(data: T | undefined): T {
 const USE_USER_CONTEXT_KEY = Symbol('use-user');
 
 type UseUserInstance = ReturnType<typeof createUseUserInstance>;
+
+// Multicast each public slice so multiple template `$store` bindings (and
+// downstream `.pipe(...)` consumers) share one upstream observer chain
+// instead of each spawning its own QueryObserver. We use rxjs `share` with a
+// fresh `ReplaySubject(1)` and a small `resetOnRefCountZero` window: the
+// upstream stays alive while subscribers exist, brief 0-subscriber gaps
+// during page navigation / restore cycles don't race invalidations, and
+// genuine teardown (AuthProvider unmount, logout) eventually releases the
+// QueryObservers so the QueryClient can collect them.
+const TEARDOWN_GRACE_MS = 100;
+function share<T>(source: Observable<T>): Observable<T> {
+  return source.pipe(
+    rxShare({
+      connector: () => new ReplaySubject<T>(1),
+      resetOnRefCountZero: () => timer(TEARDOWN_GRACE_MS),
+      resetOnComplete: false,
+      resetOnError: false,
+    }),
+  );
+}
 
 function createUseUserInstance() {
   const { isAuthorized } = useAuth();
@@ -222,23 +250,31 @@ function createUseUserInstance() {
         ),
       });
     }),
-    shareReplay(1),
   );
+  const sharedUserContext$ = share(userContext$);
 
   return {
-    user: userContext$.pipe(switchMap((ctx) => ctx.user)),
-    history: userContext$.pipe(switchMap((ctx) => ctx.history)),
-    watchlist: userContext$.pipe(switchMap((ctx) => ctx.watchlist)),
-    ratings: userContext$.pipe(switchMap((ctx) => ctx.ratings)),
-    reactions: userContext$.pipe(switchMap((ctx) => ctx.reactions)),
-    favorites: userContext$.pipe(switchMap((ctx) => ctx.favorites)),
-    network: userContext$.pipe(switchMap((ctx) => ctx.network)),
-    plexLibrary: userContext$.pipe(switchMap((ctx) => ctx.plexLibrary)),
-    likes: userContext$.pipe(switchMap((ctx) => ctx.likes)),
-    limits: userContext$.pipe(switchMap((ctx) => ctx.limits)),
-    notes: userContext$.pipe(switchMap((ctx) => ctx.notes)),
-    dropped: userContext$.pipe(switchMap((ctx) => ctx.dropped)),
-    blocked: userContext$.pipe(switchMap((ctx) => ctx.blocked)),
+    user: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.user))),
+    history: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.history))),
+    watchlist: share(
+      sharedUserContext$.pipe(switchMap((ctx) => ctx.watchlist)),
+    ),
+    ratings: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.ratings))),
+    reactions: share(
+      sharedUserContext$.pipe(switchMap((ctx) => ctx.reactions)),
+    ),
+    favorites: share(
+      sharedUserContext$.pipe(switchMap((ctx) => ctx.favorites)),
+    ),
+    network: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.network))),
+    plexLibrary: share(
+      sharedUserContext$.pipe(switchMap((ctx) => ctx.plexLibrary)),
+    ),
+    likes: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.likes))),
+    limits: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.limits))),
+    notes: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.notes))),
+    dropped: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.dropped))),
+    blocked: share(sharedUserContext$.pipe(switchMap((ctx) => ctx.blocked))),
   };
 }
 
