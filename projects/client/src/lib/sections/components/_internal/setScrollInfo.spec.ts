@@ -3,7 +3,10 @@ import { describe, expect, it, vi } from 'vitest';
 import { setScrollInfo } from './setScrollInfo.ts';
 
 describe('action: setScrollInfo', () => {
-  function scrollTo(
+  const nextFrame = () =>
+    new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+
+  async function scrollTo(
     node: HTMLDivElement,
     location: 'top' | 'middle' | 'bottom',
   ) {
@@ -26,6 +29,7 @@ describe('action: setScrollInfo', () => {
     }
 
     node.dispatchEvent(new Event('scroll'));
+    await nextFrame();
   }
 
   it('should not add scroll info if the node has no overflow', async () => {
@@ -42,7 +46,7 @@ describe('action: setScrollInfo', () => {
     const node = document.createElement('div');
     const component = await renderStore(() => setScrollInfo(node));
 
-    scrollTo(node, 'bottom');
+    await scrollTo(node, 'bottom');
 
     expect(node.classList).toContain('scrolled-down');
     expect(node.classList).not.toContain('scrolled-up');
@@ -54,7 +58,7 @@ describe('action: setScrollInfo', () => {
     const node = document.createElement('div');
     const component = await renderStore(() => setScrollInfo(node));
 
-    scrollTo(node, 'top');
+    await scrollTo(node, 'top');
 
     expect(node.classList).not.toContain('scrolled-down');
     expect(node.classList).toContain('scrolled-up');
@@ -66,7 +70,7 @@ describe('action: setScrollInfo', () => {
     const node = document.createElement('div');
     const component = await renderStore(() => setScrollInfo(node));
 
-    scrollTo(node, 'middle');
+    await scrollTo(node, 'middle');
 
     expect(node.classList).toContain('scrolled-down');
     expect(node.classList).toContain('scrolled-up');
