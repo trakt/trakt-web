@@ -17,8 +17,10 @@ import {
   Observable,
   type OperatorFunction,
   pipe,
-  shareReplay,
+  ReplaySubject,
+  share,
   tap,
+  timer,
 } from 'rxjs';
 import type { Paginatable } from '../../requests/models/Paginatable.ts';
 import { findInvalidationId } from './_internal/findInvalidationId.ts';
@@ -202,6 +204,9 @@ export function useAllPagesInfiniteQuery<
         query.fetchNextPage();
       }
     }),
-    shareReplay({ bufferSize: 1, refCount: false }),
+    share({
+      connector: () => new ReplaySubject(1),
+      resetOnRefCountZero: () => timer(time.seconds(1)),
+    }),
   );
 }

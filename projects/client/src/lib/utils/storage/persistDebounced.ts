@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
-import { debounceTime, groupBy, map, mergeMap } from 'rxjs/operators';
+import { debounceTime, groupBy, mergeMap } from 'rxjs/operators';
 import { safeLocalStorage } from './safeStorage.ts';
 
 type Write = { readonly key: string; readonly value: string };
@@ -9,12 +9,7 @@ const writes$ = new Subject<Write>();
 writes$
   .pipe(
     groupBy((w) => w.key),
-    mergeMap((group) =>
-      group.pipe(
-        debounceTime(200),
-        map((latest) => latest),
-      )
-    ),
+    mergeMap((group) => group.pipe(debounceTime(200))),
   )
   .subscribe(({ key, value }) => safeLocalStorage.setItem(key, value));
 
