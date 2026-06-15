@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { multicast } from '$lib/utils/store/multicast.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type {
   CreateInfiniteQueryOptions,
@@ -17,10 +18,7 @@ import {
   Observable,
   type OperatorFunction,
   pipe,
-  ReplaySubject,
-  share,
   tap,
-  timer,
 } from 'rxjs';
 import type { Paginatable } from '../../requests/models/Paginatable.ts';
 import { findInvalidationId } from './_internal/findInvalidationId.ts';
@@ -134,11 +132,13 @@ export function useQuery<
     const ref: QueryOptionsRef<TOutput, TError> = {};
     return reactiveQueryBridge(props, client, ref).pipe(
       invalidationHook(() => ref.current?.queryKey),
+      multicast(),
     );
   }
 
   return queryBridge(() => props, client).pipe(
     invalidationHook(() => props.queryKey),
+    multicast(),
   );
 }
 
@@ -167,6 +167,7 @@ export function useInfiniteQuery<
     TPageParam
   >(() => props, client).pipe(
     invalidationHook(props.queryKey),
+    multicast(),
   );
 }
 
@@ -204,9 +205,6 @@ export function useAllPagesInfiniteQuery<
         query.fetchNextPage();
       }
     }),
-    share({
-      connector: () => new ReplaySubject(1),
-      resetOnRefCountZero: () => timer(time.seconds(1)),
-    }),
+    multicast(),
   );
 }
