@@ -1,19 +1,22 @@
 import { browser } from '$app/environment';
-import { NOOP_FN } from '$lib/utils/constants.ts';
 import type {
   CreateInfiniteQueryOptions,
   CreateQueryOptions,
 } from '$lib/features/query/types.ts';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import {
+  type DefaultedQueryObserverOptions,
   type InfiniteData,
   InfiniteQueryObserver,
+  type InfiniteQueryObserverOptions,
   type InfiniteQueryObserverResult,
   type QueryClient,
   type QueryKey,
   QueryObserver,
+  type QueryObserverOptions,
   type QueryObserverResult,
 } from '@tanstack/query-core';
-import { Observable } from 'rxjs';
+import { Observable, type Subscriber } from 'rxjs';
 
 /**
  * Drive query-core's `QueryObserver` / `InfiniteQueryObserver` directly from
@@ -24,34 +27,122 @@ import { Observable } from 'rxjs';
  * dropping refetches.
  */
 
-// `any` to avoid TanStack's narrow generic variance fighting our wider
-// queryBridge signatures; the runtime contract is identical.
-// deno-lint-ignore no-explicit-any
-type AnyObserver = QueryObserver<any, any, any, any, any>;
-// deno-lint-ignore no-explicit-any
-type AnyInfiniteObserver = InfiniteQueryObserver<any, any, any, any, any>;
+// The structural surface `bridge` needs. setOptions is not in here because
+// the bridge only owns the observer's read/lifecycle calls; setOptions stays
+// on the concrete observer at the call site where the option type is known.
+type ReadableObserver<TResult> = {
+  getCurrentResult(): TResult;
+  subscribe(listener: (result: TResult) => void): () => void;
+  updateResult(): void;
+  destroy(): void;
+};
 
-function driveObserver<TResult>(
-  observer: AnyObserver | AnyInfiniteObserver,
-  emit: (result: TResult) => void,
+function resolveQueryOptions<
+  TQueryFnData,
+  TError,
+  TData,
+  TQueryKey extends QueryKey,
+>(
+  client: QueryClient,
+  options: QueryObserverOptions<
+    TQueryFnData,
+    TError,
+    TData,
+    TQueryFnData,
+    TQueryKey
+  >,
+): DefaultedQueryObserverOptions<
+  TQueryFnData,
+  TError,
+  TData,
+  TQueryFnData,
+  TQueryKey
+> {
+  // Match createBaseQuery's resolved-options shape so the observer hands out
+  // optimistic results while a fetch is in-flight, matching what consumers
+  // (and our tests) expect.
+  const resolved = client.defaultQueryOptions(options);
+  resolved._optimisticResults = 'optimistic';
+  return resolved;
+}
+
+function resolveInfiniteQueryOptions<
+  TQueryFnData,
+  TError,
+  TData,
+  TQueryKey extends QueryKey,
+  TPageParam,
+>(
+  client: QueryClient,
+  options: InfiniteQueryObserverOptions<
+    TQueryFnData,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  >,
+): InfiniteQueryObserverOptions<
+  TQueryFnData,
+  TError,
+  TData,
+  TQueryKey,
+  TPageParam
+> {
+  // The runtime payload still has the infinite-specific keys
+  // (`getNextPageParam`, `initialPageParam`); `defaultQueryOptions` just
+  // narrows the static type. Cast back to the infinite shape so the
+  // InfiniteQueryObserver constructor accepts the result.
+  const resolved = client.defaultQueryOptions(
+    options as unknown as QueryObserverOptions<
+      TQueryFnData,
+      TError,
+      TData,
+      TQueryFnData,
+      TQueryKey
+    >,
+  ) as unknown as
+    & InfiniteQueryObserverOptions<
+      TQueryFnData,
+      TError,
+      TData,
+      TQueryKey,
+      TPageParam
+    >
+    & { _optimisticResults?: 'optimistic' | 'isRestoring' };
+  resolved._optimisticResults = 'optimistic';
+  return resolved;
+}
+
+function bridge<TResult>(
+  subscriber: Subscriber<TResult>,
+  createObserver: () => ReadableObserver<TResult>,
 ): () => void {
+  const observer = createObserver();
+
+  if (!browser) {
+    // SSR: emit the current optimistic result once so consumers can render
+    // off the dehydrated cache without crashing on `undefined`. No listener
+    // attached - effects / timers cannot run on the server anyway.
+    subscriber.next(observer.getCurrentResult());
+    observer.destroy();
+    return NOOP_FN;
+  }
+
   // Emit current state synchronously so consumers reading immediately after
   // subscribing get a value, matching prior Svelte-store behaviour.
-  emit(observer.getCurrentResult() as TResult);
-  const unsubscribe = observer.subscribe(
-    (result: unknown) => emit(result as TResult),
-  );
-  // Force the observer to recompute its result now that a listener is
-  // attached. Matches createBaseQuery's post-subscribe `updateResult` call;
-  // without it, optimistic→hydrated transitions (e.g. an MSW handler resolving
-  // synchronously in a unit test) can land before any listener is registered
-  // and the consumer only sees the initial snapshot.
+  subscriber.next(observer.getCurrentResult());
+  const unsubscribe = observer.subscribe((result) => subscriber.next(result));
+  // Force a recompute now that a listener is attached. Matches
+  // createBaseQuery's post-subscribe `updateResult` - without it, optimistic
+  // -> hydrated transitions that resolve synchronously can land before any
+  // listener is registered and the consumer only sees the initial snapshot.
   observer.updateResult();
+
   return () => {
     unsubscribe();
     // `destroy` removes the observer from its Query and clears refetch
-    // timers. The listener Set is the source of truth for whether a Query is
-    // considered active, so cleanup keeps cache hygiene honest.
+    // timers. The Query's listener Set is the source of truth for whether
+    // it counts as active, so cleanup keeps cache hygiene honest.
     observer.destroy();
   };
 }
@@ -64,31 +155,16 @@ export function queryBridge<TOutput, TError extends Error>(
   optionsAccessor: () => CreateQueryOptions<TOutput, TError>,
   client: QueryClient,
 ): Observable<QueryObserverResult<TOutput, TError>> {
-  return new Observable<QueryObserverResult<TOutput, TError>>((subscriber) => {
-    // deno-lint-ignore no-explicit-any
-    const resolved = client.defaultQueryOptions(optionsAccessor()) as any;
-    // Match createBaseQuery's resolved-options shape so the observer hands
-    // out optimistic results while a fetch is in-flight, matching what
-    // svelte-query consumers (and our tests) expect.
-    resolved._optimisticResults = 'optimistic';
-
-    if (!browser) {
-      // SSR: emit the current optimistic result once so consumers can render
-      // off the dehydrated cache without crashing on `undefined`.
-      const observer = new QueryObserver(client, resolved);
-      subscriber.next(
-        observer.getCurrentResult() as QueryObserverResult<TOutput, TError>,
-      );
-      observer.destroy();
-      return NOOP_FN;
-    }
-
-    const observer = new QueryObserver(client, resolved);
-    return driveObserver<QueryObserverResult<TOutput, TError>>(
-      observer,
-      (result) => subscriber.next(result),
-    );
-  });
+  return new Observable<QueryObserverResult<TOutput, TError>>((subscriber) =>
+    bridge(
+      subscriber,
+      () =>
+        new QueryObserver(
+          client,
+          resolveQueryOptions(client, optionsAccessor()),
+        ),
+    )
+  );
 }
 
 export function reactiveQueryBridge<TOutput, TError extends Error>(
@@ -97,23 +173,21 @@ export function reactiveQueryBridge<TOutput, TError extends Error>(
   optionsRef: QueryOptionsRef<TOutput, TError>,
 ): Observable<QueryObserverResult<TOutput, TError>> {
   return new Observable<QueryObserverResult<TOutput, TError>>((subscriber) => {
-    let observer: AnyObserver | undefined;
+    let observer: QueryObserver<TOutput, TError> | undefined;
     let cleanup: (() => void) | undefined;
 
     const sub = options$.subscribe({
       next: (value) => {
         optionsRef.current = value;
-        // deno-lint-ignore no-explicit-any
-        const resolved = client.defaultQueryOptions(value) as any;
-        if (!observer) {
-          observer = new QueryObserver(client, resolved);
-          cleanup = driveObserver<QueryObserverResult<TOutput, TError>>(
-            observer,
-            (result) => subscriber.next(result),
-          );
+        const resolved = resolveQueryOptions(client, value);
+        if (observer) {
+          observer.setOptions(resolved);
           return;
         }
-        observer.setOptions(resolved);
+        cleanup = bridge(
+          subscriber,
+          () => (observer = new QueryObserver(client, resolved)),
+        );
       },
       error: (err) => subscriber.error(err),
       complete: () => subscriber.complete(),
@@ -143,27 +217,14 @@ export function infiniteQueryBridge<
   client: QueryClient,
 ): Observable<InfiniteQueryObserverResult<TData, TError>> {
   return new Observable<InfiniteQueryObserverResult<TData, TError>>(
-    (subscriber) => {
-      // deno-lint-ignore no-explicit-any
-      const resolved = client.defaultQueryOptions(optionsAccessor()) as any;
-
-      if (!browser) {
-        const observer = new InfiniteQueryObserver(client, resolved);
-        subscriber.next(
-          observer.getCurrentResult() as InfiniteQueryObserverResult<
-            TData,
-            TError
-          >,
-        );
-        observer.destroy();
-        return NOOP_FN;
-      }
-
-      const observer = new InfiniteQueryObserver(client, resolved);
-      return driveObserver<InfiniteQueryObserverResult<TData, TError>>(
-        observer,
-        (result) => subscriber.next(result),
-      );
-    },
+    (subscriber) =>
+      bridge(
+        subscriber,
+        () =>
+          new InfiniteQueryObserver(
+            client,
+            resolveInfiniteQueryOptions(client, optionsAccessor()),
+          ),
+      ),
   );
 }
