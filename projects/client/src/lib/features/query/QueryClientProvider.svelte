@@ -9,15 +9,16 @@
   const { children, client }: ChildrenProps & { client: QueryClient } =
     $props();
 
-  const persisterType = isPWA() ? "memory" : "idb";
+  // Stable reference - re-creating the literal inline retriggers
+  // PersistQueryClientProvider's restore effect, which thrashes `isRestoring`
+  // and tears down every active QueryObserver via createBaseQuery's
+  // subscribe-effect cleanup.
+  const persistOptions = iffy(() => ({
+    persister: createPersister(isPWA() ? "memory" : "idb"),
+    buster: busterVersion,
+  }));
 </script>
 
-<PersistQueryClientProvider
-  {client}
-  persistOptions={{
-    persister: createPersister(persisterType),
-    buster: busterVersion,
-  }}
->
+<PersistQueryClientProvider {client} {persistOptions}>
   {@render children()}
 </PersistQueryClientProvider>
