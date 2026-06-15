@@ -10,12 +10,15 @@
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
   import Profile from "$lib/sections/profile/Profile.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { PageProps } from "./$types";
   import { useProfile } from "./useProfile";
 
   const { params }: PageProps = $props();
 
-  const { user, isLoading } = $derived(useProfile(params.slug));
+  const slug$ = fromRune(() => params.slug);
+
+  const { user, isLoading } = useProfile(slug$);
   const { isMe } = $derived(useIsMe(params.slug));
   const { isFollowing } = $derived(useIsFollowing(params.slug));
 
