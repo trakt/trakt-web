@@ -4,6 +4,7 @@ import { type UserLimits } from '$lib/requests/models/UserLimits.ts';
 import { blockedUsersQuery } from '$lib/requests/queries/users/blockedUsersQuery.ts';
 import { userLimitsQuery } from '$lib/requests/queries/vip/userLimitsQuery.ts';
 import { map, of, shareReplay, switchMap } from 'rxjs';
+import { getContext, setContext } from 'svelte';
 import {
   currentUserCommentReactionsQuery,
   type UserReactions,
@@ -103,7 +104,11 @@ function definedData<T>(data: T | undefined): T {
   return data as T;
 }
 
-export function useUser() {
+const USE_USER_CONTEXT_KEY = Symbol('use-user');
+
+type UseUserInstance = ReturnType<typeof createUseUserInstance>;
+
+function createUseUserInstance() {
   const { isAuthorized } = useAuth();
 
   const userQuerySignal = useQuery(currentUserSettingsQuery());
@@ -235,4 +240,19 @@ export function useUser() {
     dropped: userContext$.pipe(switchMap((ctx) => ctx.dropped)),
     blocked: userContext$.pipe(switchMap((ctx) => ctx.blocked)),
   };
+}
+
+// Memoize per AuthProvider scope so descendants share one instance of the
+// user query chain. `AuthProvider` seeds the context; any call below it
+// returns the same set of observables instead of spawning fresh
+// `useQuery(...)` setups.
+export function useUser(): UseUserInstance {
+  const existing = getContext<UseUserInstance | undefined>(
+    USE_USER_CONTEXT_KEY,
+  );
+  if (existing) return existing;
+
+  const instance = createUseUserInstance();
+  setContext(USE_USER_CONTEXT_KEY, instance);
+  return instance;
 }
