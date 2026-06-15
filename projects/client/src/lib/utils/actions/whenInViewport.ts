@@ -1,3 +1,4 @@
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import type { ActionReturn } from 'svelte/action';
 
 type Callback = () => void;
@@ -36,7 +37,7 @@ export function whenInViewport(
   callback: Callback,
 ): ActionReturn<undefined> {
   if (!element) {
-    return { destroy: () => {} };
+    return { destroy: NOOP_FN };
   }
 
   const pool = getPool({ threshold: 0.1 });
