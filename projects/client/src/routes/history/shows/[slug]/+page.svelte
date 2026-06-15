@@ -5,12 +5,13 @@
   import MediaWatchHistoryPaginatedList from "$lib/sections/lists/history/MediaWatchHistoryPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { useShow } from "../../../shows/[slug]/useShow";
   import type { PageProps } from "./$types";
 
   const { params }: PageProps = $props();
 
-  const { show } = $derived(useShow(params.slug));
+  const { show } = useShow(fromRune(() => params.slug));
 </script>
 
 <TraktPage
