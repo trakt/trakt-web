@@ -1,10 +1,12 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { userProfileQuery } from '$lib/requests/queries/users/userProfileQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { map } from 'rxjs';
+import { map, type Observable } from 'rxjs';
 
-export function useProfile(slug: string) {
-  const response = useQuery(userProfileQuery({ slug }));
+export function useProfile(slug$: Observable<string>) {
+  const response = useQuery(
+    slug$.pipe(map((slug) => userProfileQuery({ slug }))),
+  );
 
   return {
     user: response.pipe(map(($response) => $response.data)),
