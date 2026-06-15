@@ -1,5 +1,6 @@
 import { error } from '$lib/utils/console/print.ts';
 import { monitor } from '$lib/utils/perf/monitor.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import {
   type AsyncStorage,
   experimental_createQueryPersister,
@@ -8,7 +9,7 @@ import { createStore, del, entries, get, set } from 'idb-keyval';
 
 const DB_NAME = 'trakt-query';
 const STORE_NAME = 'query-cache';
-const MAX_AGE_MS = 24 * 60 * 60 * 1000;
+const MAX_AGE_MS = time.days(1);
 
 const handleError = (e: unknown) => {
   error('IDB Persister Error:', e);
