@@ -6,7 +6,8 @@
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
   import { OidcUserMock } from "$mocks/data/auth/OidcUserMock.ts";
-  import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
+  import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
+  import { QueryClient } from "@tanstack/query-core";
   import type { Snippet } from "svelte";
   import { isAuthorized } from "./isAuthorized.ts";
 

@@ -1,8 +1,6 @@
-import { queryBridge } from '$lib/features/query/_internal/queryBridge.svelte.ts';
-import {
-  type CreateQueryOptions,
-  useQueryClient,
-} from '@tanstack/svelte-query';
+import { queryBridge } from '$lib/features/query/_internal/queryBridge.ts';
+import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 
 export function createTestBedQuery<
   TQueryFnData = unknown,

@@ -1,5 +1,5 @@
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
-import type { InfiniteData } from '@tanstack/svelte-query';
+import type { InfiniteData } from '@tanstack/query-core';
 
 type PaginatedResponse<T> = {
   data?: InfiniteData<Paginatable<T>>;

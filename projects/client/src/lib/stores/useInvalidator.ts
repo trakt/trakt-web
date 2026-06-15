@@ -3,7 +3,7 @@ import {
   InvalidateAction,
   type InvalidateActionOptions,
 } from '$lib/requests/models/InvalidateAction.ts';
-import { useQueryClient } from '@tanstack/svelte-query';
+import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
 import { setMarker } from '../utils/date/Marker.ts';
 
 export function useInvalidator() {

@@ -4,9 +4,8 @@ import { monitor } from '$lib/utils/perf/monitor.ts';
 import type {
   CreateInfiniteQueryOptions,
   CreateQueryOptions,
-  InfiniteData,
-  QueryKey,
-} from '@tanstack/svelte-query';
+} from '$lib/features/query/types.ts';
+import type { InfiniteData, QueryKey } from '@tanstack/query-core';
 import { type z, type ZodType } from 'zod';
 import type { InvalidateActionOptions } from '../../requests/models/InvalidateAction.ts';
 import type { Paginatable } from '../../requests/models/Paginatable.ts';

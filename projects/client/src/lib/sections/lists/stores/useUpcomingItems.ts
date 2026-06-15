@@ -10,7 +10,7 @@ import { upcomingMediaQuery } from '$lib/requests/queries/calendars/upcomingMedi
 import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMoviesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { type CreateQueryOptions } from '@tanstack/svelte-query';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { map } from 'rxjs';
 
 type UseUpcomingItemsProps = {

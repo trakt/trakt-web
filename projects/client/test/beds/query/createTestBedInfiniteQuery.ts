@@ -1,10 +1,7 @@
-import { infiniteQueryBridge } from '$lib/features/query/_internal/queryBridge.svelte.ts';
-import {
-  type CreateInfiniteQueryOptions,
-  type InfiniteData,
-  type QueryKey,
-  useQueryClient,
-} from '@tanstack/svelte-query';
+import { infiniteQueryBridge } from '$lib/features/query/_internal/queryBridge.ts';
+import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
+import type { CreateInfiniteQueryOptions } from '$lib/features/query/types.ts';
+import type { InfiniteData, QueryKey } from '@tanstack/query-core';
 
 export function createTestBedInfiniteQuery<
   TQueryFnData = unknown,

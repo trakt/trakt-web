@@ -1,7 +1,7 @@
 import type {
   PersistedClient,
   Persister,
-} from '@tanstack/svelte-query-persist-client';
+} from '@tanstack/query-persist-client-core';
 import { monitor } from '../../../utils/perf/monitor.ts';
 
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;

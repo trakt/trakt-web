@@ -7,7 +7,7 @@ import { episodeStatsQuery } from '$lib/requests/queries/episode/episodeStatsQue
 import { movieStatsQuery } from '$lib/requests/queries/movies/movieStatsQuery.ts';
 import { showStatsQuery } from '$lib/requests/queries/shows/showStatsQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import type { CreateQueryOptions } from '@tanstack/svelte-query';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { map } from 'rxjs';
 import type { MediaDetailsProps } from '../MediaDetailsProps.ts';
 import {
