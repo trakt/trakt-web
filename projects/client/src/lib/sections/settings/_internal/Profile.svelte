@@ -9,6 +9,7 @@
   import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
@@ -21,7 +22,8 @@
   import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
   import { useSettings } from "./useSettings";
 
-  const { user, profile, email, isSavingSettings } = useSettings();
+  const { user } = useUser();
+  const { profile, email, isSavingSettings } = useSettings();
 
   const promptMap = $derived({
     name: {

@@ -7,7 +7,7 @@ import { changeEmailRequest } from '$lib/requests/queries/users/changeEmailReque
 import { saveSettingsRequest } from '$lib/requests/queries/users/saveSettingsRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { SettingsRequest } from '@trakt/api';
-import { BehaviorSubject, map, shareReplay } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 type HandleSettingsProps = {
   request: () => Promise<boolean>;
@@ -30,20 +30,13 @@ function mapToDarkKnight(theme: Theme) {
 }
 
 export function useSettings() {
-  const { user: userSource } = useUser();
+  // useUser is now memoized + multicasted; the same instance backs Profile's
+  // direct `$user` bindings and these slices, so no local shareReplay wrapper
+  // is needed anymore.
+  const { user } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Settings);
   const isSavingSettings = new BehaviorSubject(false);
-
-  // The `user` stream from `useUser` is cold: every `$store` auto-subscription
-  // in the settings UI (and there are many - profile, email, spoilers,
-  // watch-again, the raw user, ...) would otherwise spin up its own query
-  // observer. Sharing a single replayed subscription keeps every settings view
-  // reading from one consistent source, so a change emits once and updates the
-  // whole page instead of leaving stale views behind.
-  const user = userSource.pipe(
-    shareReplay({ bufferSize: 1, refCount: true }),
-  );
 
   const handleSettingsChange = async (
     { request, action }: HandleSettingsProps,
@@ -76,7 +69,6 @@ export function useSettings() {
   };
 
   return {
-    user,
     isSavingSettings: isSavingSettings.asObservable(),
     spoilers: user.pipe(map(($user) => ({
       isHidden: Boolean($user.preferences.isSpoilerHidden),
