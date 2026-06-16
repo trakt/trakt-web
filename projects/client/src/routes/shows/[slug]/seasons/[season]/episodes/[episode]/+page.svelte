@@ -3,19 +3,20 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import EpisodeSummary from "$lib/sections/summary/EpisodeSummary.svelte";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { PageProps } from "./$types";
   import { useEpisode } from "./useEpisode";
 
   const { params }: PageProps = $props();
 
+  const params$ = fromRune(() => ({
+    slug: params.slug,
+    season: parseInt(params.season),
+    episode: parseInt(params.episode),
+  }));
+
   const { episode, seasons, crew, streamOn, intl, show, showIntl, isLoading } =
-    $derived(
-      useEpisode({
-        slug: params.slug,
-        season: parseInt(params.season),
-        episode: parseInt(params.episode),
-      }),
-    );
+    useEpisode(params$);
 </script>
 
 <TraktPage
