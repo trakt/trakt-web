@@ -54,22 +54,38 @@ function createIdbStorage(): AsyncStorage<PersistedQuery> {
   };
 }
 
-const identity = <T>(value: T): T => value;
+function isPersistedQuery(value: unknown): value is PersistedQuery {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    typeof (value as PersistedQuery).state === 'object' &&
+    (value as PersistedQuery).state !== null
+  );
+}
+
+// Default serializer is JSON. We pass identity because idb-keyval already
+// round-trips through IDB structured clone, preserving Date/Map/Set prototypes.
+// Validate shape on read so stale JSON-string entries from prior deploys throw
+// inside the persister's deserialize-try block, which removes and skips them.
+const serialize = (value: PersistedQuery): PersistedQuery => value;
+const deserialize = (value: PersistedQuery): PersistedQuery => {
+  if (!isPersistedQuery(value)) {
+    throw new TypeError('Invalid persisted query shape');
+  }
+  return value;
+};
 
 /**
  * Per-query IDB persister via TanStack's experimental_createQueryPersister.
  * Each query writes to its own IDB key, so writes never serialize the whole
  * cache. Restore is lazy: a query is rehydrated only when its observer
  * subscribes.
- *
- * Identity serialize/deserialize bypass the default JSON pipeline. idb-keyval
- * stores values via structured clone, preserving Date/Map/Set prototypes.
  */
 export function createIdbPersister() {
   return experimental_createQueryPersister<PersistedQuery>({
     storage: createIdbStorage(),
-    serialize: identity,
-    deserialize: identity,
+    serialize,
+    deserialize,
     buster: BUSTER,
     maxAge: MAX_AGE_MS,
   });
