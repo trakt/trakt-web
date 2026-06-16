@@ -1,7 +1,8 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { getLocale } from '$lib/features/i18n/index.ts';
-import { map, shareReplay } from 'rxjs';
+import { multicast } from '$lib/utils/store/multicast.ts';
+import { map } from 'rxjs';
 import { computeActivityHeatmap } from './computeActivityHeatmap.ts';
 import { filterWatchedDates } from './filterWatchedDates.ts';
 
@@ -27,7 +28,7 @@ export function useActivityHeatmap({
 
       return computeActivityHeatmap(watchedDates, now, locale, period);
     }),
-    shareReplay(1),
+    multicast(),
   );
 
   return {

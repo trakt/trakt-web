@@ -1,7 +1,8 @@
 import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { chunkedReduce } from '$lib/utils/timing/chunkedReduce.ts';
-import { from, map, Observable, of, shareReplay, startWith, switchMap } from 'rxjs';
+import { multicast } from '$lib/utils/store/multicast.ts';
+import { from, map, Observable, of, startWith, switchMap } from 'rxjs';
 
 export type AllTimeStats = {
   movieCount: number;
@@ -52,7 +53,7 @@ export function useAllTimeStats() {
       if (!h) return of(loadingState);
       return computeStats(h);
     }),
-    shareReplay({ bufferSize: 1, refCount: true }),
+    multicast(),
   );
 
   return {

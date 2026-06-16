@@ -1,10 +1,10 @@
+import { multicast } from '$lib/utils/store/multicast.ts';
 import {
   BehaviorSubject,
   combineLatest,
   distinctUntilChanged,
   map,
   type Observable,
-  shareReplay,
 } from 'rxjs';
 
 /**
@@ -36,7 +36,7 @@ export function useInMemoryPagination<T>(
         hasNextPage: items.length > pageEnd,
       };
     }),
-    shareReplay({ bufferSize: 1, refCount: true }),
+    multicast(),
   );
 
   const list = paged.pipe(map((paged) => paged.list));

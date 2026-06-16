@@ -1,11 +1,6 @@
 import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
-import {
-  combineLatest,
-  distinctUntilChanged,
-  map,
-  Observable,
-  shareReplay,
-} from 'rxjs';
+import { multicast } from '$lib/utils/store/multicast.ts';
+import { combineLatest, distinctUntilChanged, map, Observable } from 'rxjs';
 import {
   currentUserWatchedMoviesQuery,
   type WatchedMovie,
@@ -69,7 +64,7 @@ export function useCurrentUserHistory(): UseCurrentUserHistoryResult {
       };
     }),
     distinctUntilChanged((prev, curr) => prev === null && curr === null),
-    shareReplay({ bufferSize: 1, refCount: true }),
+    multicast(),
   );
 
   const isLoading = combineLatest([moviesQuery, showsQuery]).pipe(

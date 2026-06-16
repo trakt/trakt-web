@@ -1,8 +1,9 @@
 import { browser } from '$app/environment';
 import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
+import { multicast } from '$lib/utils/store/multicast.ts';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
-import { debounceTime, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, map, switchMap, tap } from 'rxjs/operators';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
 import {
   searchListsQuery,
@@ -125,7 +126,7 @@ export function useSearch() {
       );
     }),
     tap(() => isSearching.next(false)),
-    shareReplay(1),
+    multicast(),
   );
 
   const coverSrc = results.pipe(

@@ -10,7 +10,8 @@ import { WAKING_HOURS_PER_DAY } from '$lib/sections/stats/_internal/constants/in
 import { addDays } from '$lib/utils/date/addDays.ts';
 import { getStartOfDay } from '$lib/utils/date/getStartOfDay.ts';
 import { subtractDays } from '$lib/utils/date/subtractDays.ts';
-import { combineLatest, map, type Observable, shareReplay } from 'rxjs';
+import { multicast } from '$lib/utils/store/multicast.ts';
+import { combineLatest, map, type Observable } from 'rxjs';
 import { getGraphItems } from './getGraphItems.ts';
 import { getSectionPriority } from './getSectionPriority.ts';
 import { getStatItems } from './getStatItems.ts';
@@ -167,7 +168,7 @@ export function useWeeklyPulse({ mode }: { mode: DiscoverMode }): {
         .sort((a, b) => a.priority - b.priority || a.index - b.index)
         .map((x) => x.entry);
     }),
-    shareReplay(1),
+    multicast(),
   );
 
   const isLoading = combineLatest([isLoadingMovies, isLoadingShows]).pipe(
