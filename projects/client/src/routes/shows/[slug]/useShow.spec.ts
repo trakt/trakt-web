@@ -1,5 +1,5 @@
 import { setLocale } from '$lib/features/i18n/index.ts';
-import { valueObservable } from '$lib/utils/store/valueObservable.ts';
+import { valueObservable } from '$test/beds/store/valueObservable.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
 import { ShowSiloSeasonsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSeasonsMappedMock.ts';

@@ -1,5 +1,5 @@
 import { setLocale } from '$lib/features/i18n/index.ts';
-import { valueObservable } from '$lib/utils/store/valueObservable.ts';
+import { valueObservable } from '$test/beds/store/valueObservable.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPeopleMappedMock.ts';
 import { MovieHereticStudiosMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticStudiosMappedMock.ts';

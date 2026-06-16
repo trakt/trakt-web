@@ -171,8 +171,8 @@ re-creates the entire observer chain on every reactive flush.
   the component's own `$effect.pre` callbacks run. Otherwise a consumer reading
   downstream observable values in `$effect.pre` (e.g. a route's redirect logic)
   sees the previous accessor value until the next flush.
-- **For static input (specs, one-shot fetches), use `valueObservable`.**
-  `valueObservable(value)` at `$lib/utils/store/valueObservable` lifts a static
+- **For specs and other test-only static input, use `valueObservable`.**
+  `valueObservable(value)` at `$test/beds/store/valueObservable` lifts a static
   value into an Observable that never completes. Prefer this over `of()`, which
   completes synchronously - completion propagates through `reactiveQueryBridge`
   and closes the outer subscriber before the QueryObserver's async fetch can
