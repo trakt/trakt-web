@@ -1,6 +1,7 @@
 <script lang="ts">
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { PLACEHOLDERS } from "$lib/utils/assets";
+  import { iffy } from "$lib/utils/function/iffy";
   import type { ImageProps } from "./ImageProps";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
 
@@ -15,7 +16,7 @@
     ...rest
   }: ImageProps = $props();
 
-  let uri = $state(src);
+  let uri = $state(iffy(() => src));
   let isImageLoaded = $state(false);
 
   $effect(() => {
