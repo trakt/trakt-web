@@ -340,6 +340,150 @@ Common attributes:
 | -------------- | -------------------------------------- |
 | `data-variant` | Visual variant (primary, secondary, …) |
 | `data-style`   | Style modifier (filled, outlined, …)   |
+| `data-color`   | Color token (purple, red, neutral, …)  |
+| `data-size`    | Size token (small, normal, large, …)   |
+| `data-state`   | Discrete state (open, closed, loading) |
+
+---
+
+## CSS Class Naming Convention
+
+The codebase follows a strict, **non-BEM, namespaced kebab-case** convention.
+Stick to it. New components that diverge create reviewer noise and visual
+regressions when global selectors collide. Class names must be semantic and
+role-based: describe purpose/content, not position, raw styling, or DOM shape.
+
+### 1. Root class: `trakt-{component-name-kebab}`
+
+Every component's outermost element carries a single namespaced root class
+derived from the file name. The prefix `trakt-` scopes the component within the
+global CSS surface and prevents collisions with utility classes.
+
+```svelte
+<!-- AutoCloseButton.svelte -->
+<button class="trakt-auto-close-button"> … </button>
+
+<!-- TopNavbar.svelte -->
+<nav class="trakt-navbar"> … </nav>
+
+<!-- SummaryHeader.svelte -->
+<header class="trakt-summary-header"> … </header>
+```
+
+- One root class per component. Do not stack `class="trakt-x trakt-y"` at the
+  root; if two namespaces apply, the component is doing two jobs.
+- Match the component file name in kebab-case. Short semantic aliases are
+  acceptable when the file name is long and the alias is unambiguous
+  (`TopNavbar` → `.trakt-navbar`, `Card` → `.trakt-card`), but **never drop the
+  `trakt-` prefix**.
+- Icon components and pure utility wrappers without their own styles are exempt
+  — they do not need a root class at all.
+
+### 2. Nested element classes: scoped kebab-case, no prefix
+
+Child elements inside a `trakt-*` root use plain kebab-case names. The SCSS
+nests them under the root selector so the global namespace stays clean.
+
+```svelte
+<div class="trakt-card">
+  <div class="card-cover"> … </div>
+  <span class="card-title"> … </span>
+</div>
+```
+
+```scss
+.trakt-card {
+  .card-cover { … }
+  .card-title { … }
+}
+```
+
+- Child class names are kebab-case.
+- Do **not** use BEM `__` or `--` separators (`card__cover`, `card--large`). The
+  codebase does not use BEM.
+- Do **not** prefix children with `trakt-` again. The root scope is enough.
+
+### 3. State modifiers: `is-*` / `has-*`, toggled via `class:`
+
+Binary states (active, disabled, loading, expanded, dragging, error) are
+expressed as state classes prefixed `is-` or `has-`, toggled with Svelte's
+`class:` binding.
+
+```svelte
+<div
+  class="trakt-drawer"
+  class:is-open={open}
+  class:is-loading={loading}
+  class:has-error={error}
+> … </div>
+```
+
+```scss
+.trakt-drawer {
+  &.is-open { … }
+  &.is-loading { … }
+  &.has-error { … }
+}
+```
+
+- `is-*` for the element's own state.
+- `has-*` when state describes the presence of a child or property.
+- Reserve `class:` for these state toggles and for typography utility opt-ins
+  (`class:bold`, `class:ellipsis`). Never use it to switch between visual
+  variants — those are `data-variant` attributes.
+
+### 4. Variants: `data-*` attributes, not class concatenation
+
+See the `data-*` section above. Variants, sizes, colors, layouts, and tiers are
+driven by `data-*` attributes bound directly from props. Never build a class
+string like `class="btn btn-{variant} btn-{size}"`.
+
+### 5. Style selectors: chained, not generic
+
+SCSS selectors always anchor to the component's `trakt-*` root or a child class.
+Element-only selectors (`button { … }`, `div > span { … }`) leak across
+components and are forbidden.
+
+```scss
+// Good
+.trakt-button { … }
+.trakt-button[data-variant='primary'] { … }
+.trakt-button .button-label { … }
+
+// Bad
+button { … }                    // leaks globally
+.primary { … }                  // collides with utility
+.button[data-variant='primary'] // unprefixed, fragile
+```
+
+### 6. Inline `style` only for CSS variables and layout tricks
+
+Inline `style=` is restricted to:
+
+- CSS custom property injection: `style="--tab-count: {n}"`
+- Layout primitives that have no class equivalent: `style="display: contents"`
+- Stacking context references: `style="z-index: var(--layer-top)"`
+
+Never inline raw property values (`style="color: #fff"`,
+`style="margin-top: 12px"`) — define a class or use a token.
+
+### 7. Forbidden patterns
+
+| Pattern                              | Use instead                              |
+| ------------------------------------ | ---------------------------------------- |
+| `class="movieCard"` (camelCase)      | `class="trakt-movie-card"`               |
+| `class="MovieCard"` (PascalCase)     | `class="trakt-movie-card"`               |
+| `class="card card--large card__cta"` | root + child kebab + `data-size="large"` |
+| `class="flex items-center mt-4"`     | scoped SCSS rules; no utility chains     |
+| `class:variantPrimary={…}`           | `data-variant="primary"`                 |
+| Root class without `trakt-` prefix   | Add the prefix                           |
+| Generic element selectors in SCSS    | Anchor to `.trakt-*` root                |
+
+### 8. When the root class deviates
+
+If a new component cannot follow rule 1 (e.g. it wraps a third-party widget that
+already namespaces itself, like `tsqd-parent-container` for React Query
+Devtools), call it out in the PR description. Default is the prefix.
 
 ---
 
@@ -473,6 +617,15 @@ the appropriate helper component instead:
 - [ ] Guards (`RenderFor`, `RenderForFeature`) used instead of raw `{#if}` for
       auth/feature/device gating
 - [ ] Variants expressed via `data-*` attributes, not dynamic class strings
+- [ ] Root class is `trakt-{component-name-kebab}` (single class, namespaced)
+- [ ] Child element classes are scoped kebab-case under the root - no `trakt-`
+      prefix on children, no BEM `__`/`--` separators
+- [ ] State toggles use `class:is-*` / `class:has-*` - never camelCase or
+      variant-style class toggles
+- [ ] No element-only or generic CSS selectors (`button { … }`,
+      `.primary { … }`) - always anchored to the `trakt-*` root
+- [ ] No inline `style=` for raw property values - only CSS variables, layout
+      tricks (`display: contents`), or `z-index` token refs
 - [ ] SCSS uses CSS custom properties (`--ni-*`, `--color-*`) - no raw hex
       values
 - [ ] Font styling uses typography utility classes (`.bold`, `.ellipsis`,
