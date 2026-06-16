@@ -7,6 +7,7 @@ import { MoviesAnticipatedResponseMock } from '../data/movies/response/MoviesAnt
 import { MoviesPopularResponseMock } from '../data/movies/response/MoviesPopularResponseMock.ts';
 import { MoviesTrendingResponseMock } from '../data/movies/response/MoviesTrendingResponseMock.ts';
 import { MediaWatchingResponseMock } from '../data/summary/common/response/MediaWatchingResponseMock.ts';
+import { MediaSocialResponseMock } from '../data/summary/common/response/MediaSocialResponseMock.ts';
 import { HereticListsResponseMock } from '../data/summary/movies/heretic/response/HereticListsResponseMock.ts';
 import { MovieHereticPeopleResponseMock } from '../data/summary/movies/heretic/response/MovieHereticPeopleResponseMock.ts';
 import { MovieHereticRatingsResponseMock } from '../data/summary/movies/heretic/response/MovieHereticRatingsResponseMock.ts';
@@ -17,6 +18,20 @@ import { MovieHereticTranslationsResponseMock } from '../data/summary/movies/her
 import { MovieHereticVideoResponseMock } from '../data/summary/movies/heretic/response/MovieHereticVideoResponseMock.ts';
 import { MovieHereticWatchNowResponseMock } from '../data/summary/movies/heretic/response/MovieHereticWatchNowResponseMock.ts';
 import { MovieStudiosResponseMock } from '../data/summary/movies/heretic/response/MovieStudiosResponseMock.ts';
+
+function paginatedSocial(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const page = Number(searchParams.get('page') ?? 1);
+  const items = page > 1 ? [] : MediaSocialResponseMock;
+
+  return HttpResponse.json(items, {
+    headers: {
+      'x-pagination-page': `${page}`,
+      'x-pagination-page-count': '1',
+      'x-pagination-item-count': `${MediaSocialResponseMock.length}`,
+    },
+  });
+}
 
 export const movies = [
   http.get(
@@ -59,6 +74,12 @@ export const movies = [
     `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/watching`,
     () => {
       return HttpResponse.json(MediaWatchingResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/social*`,
+    ({ request }) => {
+      return paginatedSocial(request);
     },
   ),
   http.get(

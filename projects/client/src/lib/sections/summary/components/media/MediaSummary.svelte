@@ -9,6 +9,7 @@
     SummaryDrawers,
     summaryDrawerNavigation,
   } from "../../_internal/summaryDrawerNavigation";
+  import SocialActivitiesButton from "../_internal/SocialActivitiesButton.svelte";
   import SummaryCover from "../_internal/SummaryCover.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
@@ -38,6 +39,10 @@
   const title = $derived(intl?.title ?? media?.title ?? "");
   const { watchCount } = $derived(useWatchCount(target));
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
+  const socialTarget = $derived({
+    type: target.type,
+    slug: media.slug,
+  });
 
   const { ratings } = $derived(useMediaMetaInfo(target));
   const { isDropped } = $derived(useIsDropped(media));
@@ -86,6 +91,10 @@
         entry={media}
         drilldown={ratingsDrawerLink}
       />
+
+      <RenderFor audience="authenticated">
+        <SocialActivitiesButton target={socialTarget} {title} />
+      </RenderFor>
     </SummaryHeader>
 
     <Spoiler {media} {type}>

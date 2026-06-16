@@ -11,6 +11,7 @@ import { ShowsAnticipatedResponseMock } from '../data/shows/response/ShowsAntici
 import { ShowsPopularResponseMock } from '../data/shows/response/ShowsPopularResponseMock.ts';
 import { ShowsTrendingResponseMock } from '../data/shows/response/ShowsTrendingResponseMock.ts';
 import { MediaWatchingResponseMock } from '../data/summary/common/response/MediaWatchingResponseMock.ts';
+import { MediaSocialResponseMock } from '../data/summary/common/response/MediaSocialResponseMock.ts';
 import { EpisodeSiloRatingsResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloRatingsResponseMock.ts';
 import { EpisodeSiloResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloResponseMock.ts';
 import { EpisodeSiloStatsResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloStatsResponseMock.ts';
@@ -30,6 +31,20 @@ import { ShowSiloVideoSeason1ResponseMock } from '../data/summary/shows/silo/res
 import { ShowSiloVideoSeason2ResponseMock } from '../data/summary/shows/silo/response/ShowSiloVideoSeason2ResponseMock.ts';
 import { ShowSiloWatchNowResponseMock } from '../data/summary/shows/silo/response/ShowSiloWatchNowResponseMock.ts';
 import { SiloListsResponseMock } from '../data/summary/shows/silo/response/SiloListsResponseMock.ts';
+
+function paginatedSocial(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const page = Number(searchParams.get('page') ?? 1);
+  const items = page > 1 ? [] : MediaSocialResponseMock;
+
+  return HttpResponse.json(items, {
+    headers: {
+      'x-pagination-page': `${page}`,
+      'x-pagination-page-count': '1',
+      'x-pagination-item-count': `${MediaSocialResponseMock.length}`,
+    },
+  });
+}
 
 export const shows = [
   http.get(
@@ -81,6 +96,12 @@ export const shows = [
     },
   ),
   http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/social*`,
+    ({ request }) => {
+      return paginatedSocial(request);
+    },
+  ),
+  http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/studios`,
     () => {
       return HttpResponse.json(ShowSiloStudiosResponseMock);
@@ -114,6 +135,12 @@ export const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/watching`,
     () => {
       return HttpResponse.json(MediaWatchingResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/social*`,
+    ({ request }) => {
+      return paginatedSocial(request);
     },
   ),
   http.get(
