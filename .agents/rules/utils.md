@@ -10,8 +10,8 @@ applyTo: 'projects/client/src/lib/utils/**'
 ## Overview
 
 `lib/utils/` holds pure helpers, browser utilities, Svelte actions, shared
-constants. Organized by domain. Before adding a helper, check if domain
-folder has an equivalent.
+constants. Organized by domain. Before adding a helper, check if domain folder
+has an equivalent.
 
 ---
 
@@ -60,8 +60,8 @@ export function myAction(node: HTMLElement, param?: SomeType) {
 **Rules:**
 
 - Actions needing global window events must register via
-  `GlobalEventBus.getInstance().register()` - never attach listeners to
-  `window` directly.
+  `GlobalEventBus.getInstance().register()` - never attach listeners to `window`
+  directly.
 - Dispatch semantic `CustomEvent`s over imperatively mutating state.
 - Clean up all listeners in `destroy()`.
 
@@ -106,8 +106,8 @@ toCountryName(code, languageTag);
 
 **Rules:**
 
-- Import `LOCALE_MAP` and resolve `date-fns` locale object when using
-  `date-fns` functions.
+- Import `LOCALE_MAP` and resolve `date-fns` locale object when using `date-fns`
+  functions.
 - Use `Intl.*` APIs for runtime locale resolution - never hard-code locale
   strings inside functions.
 
@@ -171,12 +171,14 @@ invariants only.
 
 ## Store Utilities (`store/`)
 
-| Export                     | Purpose                                                                   |
-| -------------------------- | ------------------------------------------------------------------------- |
-| `WritableSubject<T>`       | `BehaviorSubject` with `.set()` / `.update()` like Svelte writable stores |
-| `writable<T>(initial)`     | Factory shorthand for `new WritableSubject(initial)`                      |
-| `resolve(stream, timeout)` | Await first defined value from RxJS `Observable`                          |
-| `toObservable(store)`      | Bridge Svelte-compatible readable store into RxJS `Observable`            |
+| Export                     | Purpose                                                                          |
+| -------------------------- | -------------------------------------------------------------------------------- |
+| `WritableSubject<T>`       | `BehaviorSubject` with `.set()` / `.update()` like Svelte writable stores        |
+| `writable<T>(initial)`     | Factory shorthand for `new WritableSubject(initial)`                             |
+| `resolve(stream, timeout)` | Await first defined value from RxJS `Observable`                                 |
+| `valueObservable(value)`   | Lift a static value into a never-completing `Observable<T>` (prefer over `of()`) |
+| `fromRune(accessor)`       | Bridge a Svelte 5 rune-driven accessor into an `Observable<T>` via `$effect.pre` |
+| `multicast(graceMs?)`      | `share + ReplaySubject(1) + timer` operator for multi-subscriber Observables     |
 
 ---
 
@@ -231,8 +233,8 @@ Before adding a utility:
 - [ ] File name and exported function name are camelCase and match
 - [ ] Function is pure (unless action or intentional side-effect helper)
 - [ ] Internal helpers not needing public exposure live in `_internal/`
-- [ ] Locale-aware formatters accept `locale` as optional last param,
-      defaulting to `'en'`
+- [ ] Locale-aware formatters accept `locale` as optional last param, defaulting
+      to `'en'`
 - [ ] No direct `window.addEventListener` - use `GlobalEventBus`
 - [ ] No direct `localStorage` / `sessionStorage` - use `safeLocalStorage` /
       `safeSessionStorage`
