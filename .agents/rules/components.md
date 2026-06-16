@@ -222,6 +222,50 @@ export function useUser() {
 - Do **not** import across feature boundaries - if sharing needed, expose via
   context or shared section
 
+### Hooks that drive `useQuery` take `Observable<T>`, never a bare value
+
+When the hook internally calls `useQuery`, accept the reactive input as
+`Observable<T>` and pipe it into the query options:
+
+```typescript
+// routes/shows/[slug]/useShow.ts
+export function useShow(slug$: Observable<string>) {
+  const show = useQuery(slug$.pipe(map((slug) => showSummaryQuery({ slug }))));
+  // ...
+}
+```
+
+Consumers lift the rune into an Observable with `fromRune`:
+
+```svelte
+<!-- routes/shows/[slug]/+page.svelte -->
+<script lang="ts">
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import { useShow } from "./useShow";
+
+  const { params }: PageProps = $props();
+  const slug$ = fromRune(() => params.slug);
+  const { show, intl } = useShow(slug$);
+</script>
+```
+
+**Never** wrap a query-driving hook in `$derived`:
+
+```svelte
+<!-- WRONG - re-instantiates the entire QueryObserver chain on every
+     reactive tick, spawning N observers per page visit -->
+const { show } = $derived(useShow(params.slug));
+```
+
+Specs and one-shot static input lift the value with `valueObservable(value)`
+from `$lib/utils/store/valueObservable.ts` (NOT `of(value)`, which completes
+synchronously and closes the outer subscriber before fetch emits).
+
+Hooks that do NOT call `useQuery` (e.g. `useIsMe`, `useDangerButton`,
+`useToggler`) can keep bare-value signatures; their `$derived` re-runs are cheap
+glue, not QueryObserver churn. See `performance.md` "Driving hooks from Svelte
+runes" for the full perf rationale.
+
 ---
 
 ## Guard Components
