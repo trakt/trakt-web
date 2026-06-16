@@ -40,7 +40,7 @@
   </button>
 {/snippet}
 
-<div class="branding-logo-sections">
+<div class="trakt-branding-logos">
   <section class="branding-logo-section">
     <div class="branding-section-header">
       <h2 class="branding-section-heading">
@@ -192,7 +192,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .branding-logo-sections {
+  .trakt-branding-logos {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xxl);

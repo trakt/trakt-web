@@ -3,7 +3,7 @@
   import { Confetti } from "svelte-confetti";
 </script>
 
-<div class="confetti-container">
+<div class="trakt-celebration">
   <Confetti
     y={[0, 0.5]}
     x={[-1, 2]}
@@ -15,7 +15,7 @@
 </div>
 
 <style>
-  .confetti-container {
+  .trakt-celebration {
     position: absolute;
     left: 50%;
     top: 50%;

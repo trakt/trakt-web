@@ -27,7 +27,7 @@
   });
 </script>
 
-<div class="search-results-grid" data-variant={type}>
+<div class="trakt-search-results-grid" data-variant={type}>
   <GridList
     id={`search-grid-list-${type}`}
     {items}
@@ -63,7 +63,7 @@
     }
   }
 
-  .search-results-grid:not([data-variant="lists"]) {
+  .trakt-search-results-grid:not([data-variant="lists"]) {
     @include for-mobile {
       @include responsive-layout(3, var(--gap-xxs));
       --footer-height: var(--height-card-footer-sm);
@@ -84,7 +84,7 @@
     }
   }
 
-  .search-results-grid[data-variant="lists"] {
+  .trakt-search-results-grid[data-variant="lists"] {
     @include responsive-layout(3, var(--list-gap));
 
     @include for-tablet-lg {

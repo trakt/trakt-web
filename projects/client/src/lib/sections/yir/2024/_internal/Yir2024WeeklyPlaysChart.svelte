@@ -13,7 +13,7 @@
   } = $props();
 </script>
 
-<div class="yir-2024-weekly-chart">
+<div class="trakt-yir-2024-weekly-plays-chart">
   <YirWeeklyPlaysChart {data} {year} barSpacing={1}>
     {#snippet tooltip({ value, week, dateRange })}
       <YirTooltip
@@ -29,7 +29,7 @@
   // 2024 palette: bars use the lightest cool gray (shade-100, exactly
   // matches v2's #d2d6d9); peak week pops in the lighter purple-300, and
   // hover lands on purple-500 (#9f42c6, exactly matches v2's hover).
-  .yir-2024-weekly-chart {
+  .trakt-yir-2024-weekly-plays-chart {
     --color-bar-custom-default: var(--shade-100);
     --color-bar-custom-highlight: var(--purple-300);
     --color-bar-custom-hover: var(--purple-500);

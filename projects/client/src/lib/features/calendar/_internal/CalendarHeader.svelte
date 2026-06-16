@@ -6,12 +6,12 @@
     $props();
 </script>
 
-<div class="calendar-header">
+<div class="trakt-calendar-header">
   <CalendarControls {...navigationProps} />
 </div>
 
 <style>
-  .calendar-header {
+  .trakt-calendar-header {
     height: var(--ni-40);
     overflow: hidden;
 

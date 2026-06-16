@@ -11,12 +11,12 @@
   const { item, playLabel, year }: Yir2024PlayCardProps = $props();
 </script>
 
-<section class="yir-2024-play-card">
+<section class="trakt-yir-2024-play-card">
   <Yir2024MediaCard {item} {playLabel} {year} />
 </section>
 
 <style lang="scss">
-  .yir-2024-play-card {
+  .trakt-yir-2024-play-card {
     width: 100%;
   }
 </style>

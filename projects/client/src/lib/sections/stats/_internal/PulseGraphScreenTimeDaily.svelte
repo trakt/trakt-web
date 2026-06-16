@@ -26,7 +26,7 @@
   }
 </script>
 
-<div class="graph-screen-time-daily">
+<div class="trakt-pulse-graph-screen-time-daily">
   {#each data.labels as label, i (i)}
     {@const pct = data.percentages[i] ?? 0}
     {@const minutes = data.minutesPerDay[i] ?? 0}
@@ -56,7 +56,7 @@
 </div>
 
 <style lang="scss">
-  .graph-screen-time-daily {
+  .trakt-pulse-graph-screen-time-daily {
     display: flex;
     gap: var(--ni-8);
 

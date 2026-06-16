@@ -35,7 +35,7 @@
   {/if}
 {/snippet}
 
-<div class="import-guide">
+<div class="trakt-import-guide">
   <p class="import-guide-title bold">{config.guide.title}</p>
 
   {#if config.guide.description != null}
@@ -73,7 +73,7 @@
 </div>
 
 <style lang="scss">
-  .import-guide {
+  .trakt-import-guide {
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);

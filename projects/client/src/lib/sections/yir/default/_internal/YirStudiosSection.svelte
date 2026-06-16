@@ -12,7 +12,7 @@
   } = $props();
 </script>
 
-<section class="yir-studios-section" id="section-movies-networks">
+<section class="trakt-yir-studios-section" id="section-movies-networks">
   <YirPageInner>
     <YirSectionHeader>
       {m.yir_section_title_studios()}
@@ -27,7 +27,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-studios-section {
+  .trakt-yir-studios-section {
     background-color: var(--shade-950);
   }
 

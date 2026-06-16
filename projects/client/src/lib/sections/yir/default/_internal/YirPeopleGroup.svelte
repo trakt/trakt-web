@@ -81,14 +81,14 @@
 </script>
 
 {#if $isLoading}
-  <div class="yir-people-group">
+  <div class="trakt-yir-people-group">
     <YirSectionHeader compact>
       {label}
     </YirSectionHeader>
     <p class="yir-people-loading">{m.yir_state_loading()}</p>
   </div>
 {:else if $people && $people.length > 0}
-  <div class="yir-people-group">
+  <div class="trakt-yir-people-group">
     <YirSectionHeader compact noTopPadding={type === "actresses"}>
       {label}
     </YirSectionHeader>
@@ -189,7 +189,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-people-group {
+  .trakt-yir-people-group {
     overflow: hidden;
     padding-bottom: var(--ni-30);
   }

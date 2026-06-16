@@ -16,7 +16,7 @@
   } = $props();
 </script>
 
-<section class="yir-2024-top" id="section-totals">
+<section class="trakt-yir-2024-top-section" id="section-totals">
   <div class="yir-2024-top-gradient" aria-hidden="true"></div>
 
   <Yir2024PageInner>
@@ -31,7 +31,7 @@
 </section>
 
 <style lang="scss">
-  .yir-2024-top {
+  .trakt-yir-2024-top-section {
     position: relative;
     padding: var(--ni-104) 0 0 0;
     overflow: hidden;

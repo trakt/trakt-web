@@ -63,7 +63,7 @@
   };
 </script>
 
-<div class="slider-container">
+<div class="trakt-slider-filter">
   <p>{sliderOptions.formatLabel(labelValue)}</p>
   <Slider
     range={sliderOptions.range}
@@ -76,7 +76,7 @@
 </div>
 
 <style>
-  .slider-container {
+  .trakt-slider-filter {
     width: 100%;
     height: var(--ni-64);
 

@@ -8,7 +8,7 @@
   } = $props();
 </script>
 
-<div class="yir-2024-page-inner">
+<div class="trakt-yir-2024-page-inner">
   {@render children()}
 </div>
 
@@ -21,7 +21,7 @@
   // set on .yir-page) and mirrors it on the right so the content sits
   // centered between the two safe-areas. Tablet-sm-and-below loses the side
   // navbar so the YIR-specific minimum bumps to var(--ni-40).
-  .yir-2024-page-inner {
+  .trakt-yir-2024-page-inner {
     width: 100%;
     max-width: var(--ni-1280);
     margin: 0 auto;

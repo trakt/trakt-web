@@ -16,7 +16,7 @@
   } = $props();
 </script>
 
-<div class="crossfade-container">
+<div class="trakt-crossfade">
   {#if showA}
     <div
       class="crossfade-content"
@@ -39,7 +39,7 @@
   we need to ensure they are still rendered on top of each other.
 -->
 <style>
-  .crossfade-container {
+  .trakt-crossfade {
     position: relative;
     width: 100%;
     height: 100%;

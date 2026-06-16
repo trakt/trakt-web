@@ -5,7 +5,7 @@
   const { data, tooltip }: AreaChartProps = $props();
 </script>
 
-<div class="yir-2024-line-chart">
+<div class="trakt-yir-2024-line-chart">
   <!--
     2024 palette: white line, dark fill (~v2's #222 → shade-920), and a
     purple-500 hover pin with a faint white halo. Colors are passed as props
@@ -24,7 +24,7 @@
 </div>
 
 <style lang="scss">
-  .yir-2024-line-chart {
+  .trakt-yir-2024-line-chart {
     width: 100%;
     height: 100%;
 

@@ -12,7 +12,7 @@
   }: Yir2024StatSummaryProps = $props();
 </script>
 
-<dl class="yir-2024-stat-summary">
+<dl class="trakt-yir-2024-stat-summary">
   {#if mostWatched}
     <div class="yir-2024-stat-row">
       <dt>{m.yir_2024_stat_most_watched()}</dt>
@@ -48,7 +48,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-stat-summary {
+  .trakt-yir-2024-stat-summary {
     display: flex;
     flex-direction: column;
   }

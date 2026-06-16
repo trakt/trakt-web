@@ -11,7 +11,7 @@
   ] as const;
 </script>
 
-<section class="branding-requirements">
+<section class="trakt-branding-requirements">
   <h2 class="branding-section-heading">{m.heading_branding_requirements()}</h2>
   <ul class="branding-requirements-list">
     {#each requirements as req, i (i)}
@@ -23,7 +23,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .branding-requirements {
+  .trakt-branding-requirements {
     display: flex;
     flex-direction: column;
     width: 100%;

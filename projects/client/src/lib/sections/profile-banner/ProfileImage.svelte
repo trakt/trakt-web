@@ -93,7 +93,7 @@
   }
 </script>
 
-<div class="profile-image-container" class:is-vip={isVip}>
+<div class="trakt-profile-image" class:is-vip={isVip}>
   <figure class="profile-image" data-sentry-block>
     <!-- This should be the first element, else: HierarchyRequestError -->
     <figcaption class="visually-hidden">
@@ -185,7 +185,7 @@
     border: 0;
   }
 
-  .profile-image-container {
+  .trakt-profile-image {
     position: relative;
 
     &.is-vip {
@@ -268,8 +268,8 @@
     }
   }
 
-  .profile-image-container:has(.editable-image-wrapper:hover) .edit-badge,
-  .profile-image-container:has(.editable-image-wrapper:focus-visible)
+  .trakt-profile-image:has(.editable-image-wrapper:hover) .edit-badge,
+  .trakt-profile-image:has(.editable-image-wrapper:focus-visible)
     .edit-badge {
     opacity: 1;
     transform: translate(15%, 15%) scale(1.1);

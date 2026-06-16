@@ -6,7 +6,7 @@
   const max = $derived(Math.max(...data.buckets.map((b) => b.count), 1));
 </script>
 
-<div class="graph-peak-hours">
+<div class="trakt-pulse-graph-peak-hours">
   {#each data.buckets as bucket (bucket.key)}
     <div class="peak-row">
       <span class="peak-label tag">{bucket.label}</span>
@@ -22,7 +22,7 @@
 </div>
 
 <style lang="scss">
-  .graph-peak-hours {
+  .trakt-pulse-graph-peak-hours {
     display: flex;
     flex-direction: column;
     gap: var(--ni-8);

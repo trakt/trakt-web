@@ -11,7 +11,7 @@
 </script>
 
 {#if entries.length > 0}
-  <div class="yir-2024-posters-row">
+  <div class="trakt-yir-2024-posters-row">
     {#each entries as entry (entry.key)}
       <a
         href={UrlBuilder.media(entry.type, entry.slug)}
@@ -27,7 +27,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-posters-row {
+  .trakt-yir-2024-posters-row {
     display: flex;
     align-items: flex-end;
     justify-content: center;

@@ -53,7 +53,7 @@
   {/if}
 {/snippet}
 
-<div class="season-progress-card" class:is-complete={isComplete}>
+<div class="trakt-season-progress-card" class:is-complete={isComplete}>
   <div class="progress-header">
     <p class="bold capitalize">
       {seasonNumber === 0
@@ -91,7 +91,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .season-progress-card {
+  .trakt-season-progress-card {
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);

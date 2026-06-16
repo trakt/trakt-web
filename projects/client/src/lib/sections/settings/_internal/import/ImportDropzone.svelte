@@ -19,7 +19,7 @@
 </script>
 
 <div
-  class="import-dropzone"
+  class="trakt-import-dropzone"
   transition:slide={{ duration: 150, axis: "y" }}
   use:dropzone={{ accept, multiple: maxFiles > 1 }}
   onfiles={handleFiles}
@@ -31,7 +31,7 @@
 </div>
 
 <style>
-  .import-dropzone {
+  .trakt-import-dropzone {
     display: flex;
     flex-direction: column;
     align-items: center;

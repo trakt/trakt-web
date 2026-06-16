@@ -41,12 +41,12 @@
   });
 </script>
 
-<div class="navigation-guard" use:preventUnload={isActive}>
+<div class="trakt-navigation-guard" use:preventUnload={isActive}>
   {@render children()}
 </div>
 
 <style>
-  .navigation-guard {
+  .trakt-navigation-guard {
     display: contents;
   }
 </style>

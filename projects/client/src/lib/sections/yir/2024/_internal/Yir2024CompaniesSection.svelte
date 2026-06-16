@@ -38,7 +38,7 @@
   }
 </script>
 
-<section class="yir-2024-companies" id="section-{type}-companies">
+<section class="trakt-yir-2024-companies-section" id="section-{type}-companies">
   <div class="yir-2024-companies-panel">
     <div class="yir-2024-companies-text">
       <h2 class="bold yir-2024-companies-heading">{heading}</h2>
@@ -68,7 +68,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-companies {
+  .trakt-yir-2024-companies-section {
     width: 100%;
   }
 
@@ -111,7 +111,7 @@
 
       // Stat list is rendered by Yir2024StatSummary (its own scope), so it
       // has to be reached with :global to take the remaining row width.
-      :global(.yir-2024-stat-summary) {
+      :global(.trakt-yir-2024-stat-summary) {
         flex: 1;
         min-width: 0;
       }

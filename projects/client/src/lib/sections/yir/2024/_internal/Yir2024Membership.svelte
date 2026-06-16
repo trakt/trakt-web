@@ -9,7 +9,7 @@
   } = $props();
 </script>
 
-<div class="yir-2024-membership">
+<div class="trakt-yir-2024-membership">
   <div class="yir-2024-trakt-worldwide">
     <span class="bold yir-2024-membership-label">
       {m.yir_2024_trakt_worldwide()}
@@ -32,7 +32,7 @@
   // 6-column grid that mirrors the 6-poster wave above. Placing the label
   // blocks in columns 2 and 5 (centered within them) lines them up exactly
   // under poster 2 and poster 5.
-  .yir-2024-membership {
+  .trakt-yir-2024-membership {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     align-items: center;

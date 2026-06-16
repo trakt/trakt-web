@@ -38,7 +38,7 @@
   );
 </script>
 
-<section class="yir-calendar-section" id="section-{how}-play">
+<section class="trakt-yir-calendar-section" id="section-{how}-play">
   <div
     class="yir-calendar-bg"
     style:background-image="url({item.entry.cover.url.medium})"
@@ -81,7 +81,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-calendar-section {
+  .trakt-yir-calendar-section {
     position: relative;
     text-align: center;
     background-color: var(--shade-950);

@@ -2,10 +2,10 @@
   const { letter }: { letter: string } = $props();
 </script>
 
-<span class="letter-header">{letter}</span>
+<span class="trakt-letter-group-header">{letter}</span>
 
 <style lang="scss">
-  .letter-header {
+  .trakt-letter-group-header {
     font-size: var(--ni-20);
     font-weight: bold;
     color: var(--color-text-primary);

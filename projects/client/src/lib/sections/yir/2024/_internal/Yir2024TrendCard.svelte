@@ -28,7 +28,7 @@
   );
 </script>
 
-<div class="yir-2024-trend-card">
+<div class="trakt-yir-2024-trend-card">
   <Link href={itemUrl} color="inherit">
     <span class="uppercase yir-2024-trend-month">{monthLabel}</span>
 
@@ -54,7 +54,7 @@
 <style>
   /* The whole card is one Link laid out as a column; strip the link's
      underline and inherit the card's white text. */
-  .yir-2024-trend-card :global(.trakt-link) {
+  .trakt-yir-2024-trend-card :global(.trakt-link) {
     display: flex;
     flex-direction: column;
     gap: var(--ni-4);

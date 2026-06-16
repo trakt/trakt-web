@@ -22,7 +22,7 @@ const line = (className: string, text: string | undefined): string =>
 export const yirTooltipHTML = (
   { main, sub, extra }: YirTooltipContent,
 ): string => `
-  <div class="yir-tooltip">
+  <div class="trakt-yir-tooltip">
     ${line('yir-tooltip-main', main)}
     ${line('yir-tooltip-sub', sub)}
     ${line('yir-tooltip-extra', extra)}

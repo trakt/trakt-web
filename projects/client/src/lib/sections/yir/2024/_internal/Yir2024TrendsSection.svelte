@@ -36,7 +36,7 @@
   );
 </script>
 
-<section class="yir-2024-trends" id="section-{type}-trends">
+<section class="trakt-yir-2024-trends-section" id="section-{type}-trends">
   <header class="yir-2024-trends-header">
     <h2 class="bold yir-2024-trends-title">{heading}</h2>
     <p class="yir-2024-trends-subtitle">{subtitle}</p>
@@ -56,7 +56,7 @@
   @use "$style/scss/mixins/index" as *;
 
   // Purple gradient panel (matches v2's trends sections).
-  .yir-2024-trends {
+  .trakt-yir-2024-trends-section {
     // border-box so the panel's padding stays inside its 100% width (there's
     // no global box-sizing reset) — otherwise it overflows the page wrapper.
     box-sizing: border-box;

@@ -107,7 +107,7 @@
 </script>
 
 <div
-  class="bubble-chart"
+  class="trakt-bubble-chart"
   use:observeWidth
   use:observeHeight
   onpointermove={handlePointerMove}
@@ -188,7 +188,7 @@
 </div>
 
 <style lang="scss">
-  .bubble-chart {
+  .trakt-bubble-chart {
     position: relative;
     width: 100%;
     height: 100%;

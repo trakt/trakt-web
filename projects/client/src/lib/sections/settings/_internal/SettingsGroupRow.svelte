@@ -57,12 +57,12 @@
 {/snippet}
 
 {#if rest.variant === "link"}
-  <a class="settings-group-row" href={rest.href}>
+  <a class="trakt-settings-group-row" href={rest.href}>
     {@render rowContent()}
   </a>
 {:else if rest.variant === "button"}
   <button
-    class="settings-group-row"
+    class="trakt-settings-group-row"
     onclick={rest.onclick}
     disabled={rest.disabled}
     aria-label={rest.label}
@@ -71,7 +71,7 @@
     {@render rowContent()}
   </button>
 {:else}
-  <div class="settings-group-row">
+  <div class="trakt-settings-group-row">
     {@render rowContent()}
   </div>
 {/if}
@@ -79,7 +79,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .settings-group-row {
+  .trakt-settings-group-row {
     display: flex;
     align-items: center;
     gap: var(--gap-m);

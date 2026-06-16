@@ -32,7 +32,7 @@
   );
 </script>
 
-<article class="yir-2024-media-card">
+<article class="trakt-yir-2024-media-card">
   <div class="yir-2024-media-cover">
     <CrossOriginImage src={item.entry.cover.url.medium} alt="" />
   </div>
@@ -75,7 +75,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-media-card {
+  .trakt-yir-2024-media-card {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;

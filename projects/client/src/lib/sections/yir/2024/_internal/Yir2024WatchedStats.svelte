@@ -25,7 +25,7 @@
   const historyUrl = $derived(UrlBuilder.profile.history(slug));
 </script>
 
-<div class="yir-2024-watched-stats">
+<div class="trakt-yir-2024-watched-stats">
   <span class="yir-2024-stat yir-2024-stat-link">
     <Link href={historyUrl} color="inherit">
       <span class="yir-2024-stat-row">
@@ -94,7 +94,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-watched-stats {
+  .trakt-yir-2024-watched-stats {
     display: flex;
     justify-content: space-between;
     align-items: center;

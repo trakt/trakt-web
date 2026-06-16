@@ -4,7 +4,7 @@
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
 </script>
 
-<div class="watchlist-tag">
+<div class="trakt-released-tag">
   <InfoTag>
     {m.tag_text_movies()}
   </InfoTag>
@@ -14,7 +14,7 @@
 </div>
 
 <style>
-  .watchlist-tag {
+  .trakt-released-tag {
     display: flex;
     align-items: center;
     gap: var(--ni-4);

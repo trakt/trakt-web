@@ -26,7 +26,7 @@
   const hoursWatched = $derived(Math.round(stats.minutes.total / 60));
 </script>
 
-<section class="yir-totals-section" id="section-totals">
+<section class="trakt-yir-totals-section" id="section-totals">
   <YirPageInner>
     <YirSectionHeader>
       {m.yir_section_title_totals({ year })}
@@ -101,7 +101,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-totals-section {
+  .trakt-yir-totals-section {
     background-color: var(--shade-1000);
     padding-bottom: var(--ni-72);
   }

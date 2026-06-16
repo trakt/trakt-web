@@ -23,12 +23,12 @@
   ];
 </script>
 
-<div class="media-type-toggler">
+<div class="trakt-media-type-toggler">
   <Toggler value={type} variant="text" {onChange} {options} />
 </div>
 
 <style>
-  .media-type-toggler {
+  .trakt-media-type-toggler {
     display: flex;
   }
 </style>

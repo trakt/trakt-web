@@ -18,7 +18,7 @@
   );
 </script>
 
-<section class="yir-2024-most-played" id="section-{type}-most-watched">
+<section class="trakt-yir-2024-most-played-section" id="section-{type}-most-watched">
   <header class="yir-2024-most-played-header">
     <h2 class="bold yir-2024-most-played-heading">{heading}</h2>
   </header>
@@ -33,7 +33,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-most-played {
+  .trakt-yir-2024-most-played-section {
     position: relative;
     width: 100%;
     display: flex;

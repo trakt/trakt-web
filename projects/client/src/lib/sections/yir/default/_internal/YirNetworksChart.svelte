@@ -16,7 +16,7 @@
   }
 </script>
 
-<div class="yir-networks-chart">
+<div class="trakt-yir-networks-chart">
   <YirCompaniesBubbleChart {companies}>
     {#snippet tooltip({ company })}
       <YirTooltip
@@ -28,7 +28,7 @@
 </div>
 
 <style lang="scss">
-  .yir-networks-chart {
+  .trakt-yir-networks-chart {
     width: 100%;
     height: var(--height-bubble-chart);
   }

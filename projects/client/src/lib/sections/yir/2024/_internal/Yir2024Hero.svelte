@@ -53,7 +53,7 @@
   const joinYear = $derived($profile?.joinedAt?.getFullYear() ?? null);
 </script>
 
-<header class="yir-2024-hero">
+<header class="trakt-yir-2024-hero">
   <div class="yir-2024-year-row">
     <Yir2024Stars />
     <span class="bold yir-2024-current-year">{year}</span>
@@ -104,7 +104,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-hero {
+  .trakt-yir-2024-hero {
     display: flex;
     flex-direction: column;
     align-items: center;

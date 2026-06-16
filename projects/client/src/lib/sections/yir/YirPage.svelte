@@ -9,7 +9,7 @@
   const Template = $derived(getYirTemplate(year));
 </script>
 
-<div class="yir-page" id="year-in-review">
+<div class="trakt-yir-page" id="year-in-review">
   <YirHeader {slug} {year} />
   <!-- Always mount the template so its scaffold (header text, hero shell)
        paints immediately; detail-dependent sections inside the template
@@ -25,7 +25,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-page {
+  .trakt-yir-page {
     display: flex;
     flex-direction: column;
     background-color: var(--shade-950);

@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
 </script>
 
-<section class="branding-questions">
+<section class="trakt-branding-questions">
   <div class="branding-questions-inner">
     <div class="branding-questions-content">
       <h2 class="branding-section-heading">
@@ -29,7 +29,7 @@
 </section>
 
 <style lang="scss">
-  .branding-questions {
+  .trakt-branding-questions {
     width: 100%;
   }
 

@@ -19,7 +19,7 @@
   );
 </script>
 
-<section class="yir-genres-section" id="section-{type}-genres">
+<section class="trakt-yir-genres-section" id="section-{type}-genres">
   <YirPageInner>
     <YirSectionHeader>
       {sectionTitle}
@@ -32,7 +32,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-genres-section {
+  .trakt-yir-genres-section {
     background-color: var(--shade-1000);
     padding-bottom: var(--ni-72);
 

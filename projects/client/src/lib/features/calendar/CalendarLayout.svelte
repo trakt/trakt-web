@@ -80,7 +80,7 @@
   const isInitialLoad = $derived(isInitialPeriod && isLoading);
 </script>
 
-<div class="calendar-layout-container" use:observeDimension>
+<div class="trakt-calendar-layout" use:observeDimension>
   {#if navigation || !isInitialLoad}
     <div
       class="calendar-navigation"
@@ -131,7 +131,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .calendar-layout-container {
+  .trakt-calendar-layout {
     display: flex;
     flex-direction: column;
 
@@ -175,14 +175,14 @@
     @include for-mobile {
       --sticky-top: calc(env(safe-area-inset-top, 0) + var(--ni-4));
 
-      :global(.calendar-header) {
+      :global(.trakt-calendar-header) {
         transition: height var(--transition-increment) ease-in-out;
       }
 
       &:global(.is-scrolled) {
         gap: var(--ni-0);
 
-        :global(.calendar-header) {
+        :global(.trakt-calendar-header) {
           height: var(--ni-0);
         }
       }
