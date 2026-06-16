@@ -1,4 +1,5 @@
 import { BehaviorSubject, type Observable } from 'rxjs';
+import { onDestroy } from 'svelte';
 
 /**
  * Bridge a Svelte 5 rune-driven accessor into an RxJS Observable.
@@ -21,6 +22,12 @@ export function fromRune<T>(accessor: () => T): Observable<T> {
   const subject = new BehaviorSubject<T>(accessor());
   $effect.pre(() => {
     subject.next(accessor());
+  });
+  // Complete the subject on component teardown so downstream subscribers
+  // (and the bridge's `complete: () => subscriber.complete()` handler)
+  // tear down cleanly instead of relying on GC of the orphaned subject.
+  onDestroy(() => {
+    subject.complete();
   });
   return subject.asObservable();
 }
