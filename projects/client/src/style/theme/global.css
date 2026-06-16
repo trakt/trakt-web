@@ -105,4 +105,9 @@
    */
   --color-input-focus: var(--purple-500);
   --color-input-error: var(--red-600);
+
+  /**
+   * Card
+   */
+  --color-card-border-hover: var(--purple-500);
 }

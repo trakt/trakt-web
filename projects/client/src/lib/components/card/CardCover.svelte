@@ -69,7 +69,9 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-card-cover {
     --padding-card-tag: var(--ni-8);
 
@@ -130,6 +132,17 @@
       :global(img.trakt-card-cover-image) {
         object-position: top;
       }
+    }
+  }
+
+  .trakt-card-cover {
+    outline: var(--border-thickness-xs) solid transparent;
+    transition: outline-color var(--transition-increment) ease-in-out;
+  }
+
+  @include for-mouse() {
+    :global(.trakt-card-content:hover) .trakt-card-cover {
+      outline-color: var(--color-card-border-hover);
     }
   }
 
