@@ -4442,6 +4442,34 @@
       "default": "Spoilers",
       "description": "Text for the button that allows users to view trivia with spoilers. This title should be as short and concise as possible."
     },
+    "button_label_trivia_category_filter": {
+      "default": "Filter trivia by category",
+      "description": "Aria-label for the trivia category filter dropdown button."
+    },
+    "option_text_trivia_category_all": {
+      "default": "All",
+      "description": "Text for the 'All categories' option in the trivia category filter dropdown. Should be as short and concise as possible."
+    },
+    "option_text_trivia_category_bts": {
+      "default": "Behind the scenes",
+      "description": "Text for the 'Behind the scenes' trivia category option. Should be as short and concise as possible."
+    },
+    "option_text_trivia_category_cast_n_crew": {
+      "default": "Cast & crew",
+      "description": "Text for the 'Cast & crew' trivia category option. Should be as short and concise as possible."
+    },
+    "option_text_trivia_category_story_n_themes": {
+      "default": "Story & themes",
+      "description": "Text for the 'Story & themes' trivia category option. Should be as short and concise as possible."
+    },
+    "option_text_trivia_category_impact_n_legacy": {
+      "default": "Impact & legacy",
+      "description": "Text for the 'Impact & legacy' trivia category option. Should be as short and concise as possible."
+    },
+    "option_text_trivia_category_real_world_connections": {
+      "default": "Real-world connections",
+      "description": "Text for the 'Real-world connections' trivia category option. Should be as short and concise as possible."
+    },
     "button_text_stop_asking": {
       "default": "Stop asking",
       "description": "Text for the button that allows a user to stop prompted, for example being asked to rate what they recently saw."
