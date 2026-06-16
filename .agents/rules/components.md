@@ -376,8 +376,8 @@ global CSS surface and prevents collisions with utility classes.
   acceptable when the file name is long and the alias is unambiguous
   (`TopNavbar` → `.trakt-navbar`, `Card` → `.trakt-card`), but **never drop the
   `trakt-` prefix**.
-- Icon components and pure utility wrappers without their own styles are exempt
-  — they do not need a root class at all.
+- Icon components and pure utility wrappers without their own styles are
+  exempt - they do not need a root class at all.
 
 ### 2. Nested element classes: scoped kebab-case, no prefix
 
@@ -430,7 +430,7 @@ expressed as state classes prefixed `is-` or `has-`, toggled with Svelte's
 - `has-*` when state describes the presence of a child or property.
 - Reserve `class:` for these state toggles and for typography utility opt-ins
   (`class:bold`, `class:ellipsis`). Never use it to switch between visual
-  variants — those are `data-variant` attributes.
+  variants - those are `data-variant` attributes.
 
 ### 4. Variants: `data-*` attributes, not class concatenation
 
@@ -465,7 +465,7 @@ Inline `style=` is restricted to:
 - Stacking context references: `style="z-index: var(--layer-top)"`
 
 Never inline raw property values (`style="color: #fff"`,
-`style="margin-top: 12px"`) — define a class or use a token.
+`style="margin-top: 12px"`) - define a class or use a token.
 
 ### 7. Forbidden patterns
 
