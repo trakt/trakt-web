@@ -14,7 +14,7 @@ import { dailyOrderArray } from '$lib/sections/lists/stores/dailyOrderArray.ts';
 import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import type { CreateQueryOptions } from '$lib/features/query/types.ts';
-import { map, shareReplay } from 'rxjs';
+import { map } from 'rxjs';
 import { recommendedMediaQuery } from '../../../requests/queries/media/mediaRecommendedQuery.ts';
 import { useInMemoryPagination } from '../../../stores/useInMemoryPagination.ts';
 
@@ -73,7 +73,7 @@ function getListKey(props: RecommendationListStoreProps) {
 
 export const useRecommendedList = (props: RecommendationListStoreProps) => {
   const query = typeToQuery(props);
-  const queryObservable = useQuery(query).pipe(shareReplay(1));
+  const queryObservable = useQuery(query);
 
   const listKey = getListKey(props);
 

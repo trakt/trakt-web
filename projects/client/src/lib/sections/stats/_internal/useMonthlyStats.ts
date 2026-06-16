@@ -1,6 +1,7 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
-import { map, shareReplay } from 'rxjs';
+import { multicast } from '$lib/utils/store/multicast.ts';
+import { map } from 'rxjs';
 import { computeMonthlyStats } from './utils/computeMonthlyStats.ts';
 
 type UseMonthlyStatsParams = {
@@ -25,7 +26,7 @@ export function useMonthlyStats({ mode }: UseMonthlyStatsParams) {
 
       return computeMonthlyStats([...movieDates, ...showDates], now);
     }),
-    shareReplay(1),
+    multicast(),
   );
 
   return {

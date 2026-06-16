@@ -1,10 +1,10 @@
 type Nil = null | undefined;
+import { multicast } from '$lib/utils/store/multicast.ts';
 import {
   BehaviorSubject,
   combineLatest,
   distinctUntilChanged,
   map,
-  shareReplay,
 } from 'rxjs';
 import type { Snippet } from 'svelte';
 import { isShallowEqual } from '$lib/utils/object/isShallowEqual.ts';
@@ -63,7 +63,7 @@ export function useNavbarState() {
         ...$globalNavbarStateStore,
       })),
       distinctUntilChanged(isShallowEqual),
-      shareReplay({ bufferSize: 1, refCount: true }),
+      multicast(),
     ),
     set: (props: Partial<NavbarState>) => {
       const current = navbarStateStore.value;

@@ -13,8 +13,9 @@ import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferr
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { multicast } from '$lib/utils/store/multicast.ts';
 import { combineLatest, type Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export function useMovie(slug$: Observable<string>) {
   const { isAuthorized } = useAuth();
@@ -40,7 +41,7 @@ export function useMovie(slug$: Observable<string>) {
     ),
   ]).pipe(
     map(([authorized, query]) => (authorized ? query : undefined)),
-    shareReplay(1),
+    multicast(),
   );
 
   const videos = useQuery(

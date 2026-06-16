@@ -1,7 +1,8 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
-import { map, shareReplay } from 'rxjs';
+import { multicast } from '$lib/utils/store/multicast.ts';
+import { map } from 'rxjs';
 import { filterWatchedDates } from './filterWatchedDates.ts';
 
 type StreakResult = {
@@ -81,7 +82,7 @@ export function useStreak({ mode }: { mode: DiscoverMode }) {
 
       return computeStreak(watchedDates, now);
     }),
-    shareReplay(1),
+    multicast(),
   );
 
   return {
