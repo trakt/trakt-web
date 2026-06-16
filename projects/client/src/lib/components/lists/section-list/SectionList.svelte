@@ -84,7 +84,7 @@
   });
 
   const isCollapsed = $derived.by(() => {
-    if (variant !== "default" || $isEditMode) {
+    if (variant !== "default") {
       return false;
     }
 
@@ -96,7 +96,7 @@
   {#if externalTitleAction}
     {@render externalTitleAction()}
   {:else if variant === "default"}
-    {#if !$isEditModeEnabled}
+    {#if $isEditMode}
       <ActionButton
         onclick={toggle}
         label={isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
@@ -154,7 +154,7 @@
           {metaInfo}
           actions={isCollapsed ? undefined : actions}
           navigationType={headerNavigationType}
-          drilldown={isCollapsed ? undefined : drilldown}
+          {drilldown}
           disabled={items.length === 0 && drilldown?.mode !== "always"}
         />
       {/if}
