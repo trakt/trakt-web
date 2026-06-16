@@ -30,7 +30,7 @@
   const isExpanded = $derived($lines === 1337);
 </script>
 
-<div class="line-clamp-container">
+<div class="trakt-clamped-text">
   <p
     use:lineClamp={{ lines: $lines, isClamped }}
     use:appendClassList={classList}
@@ -53,7 +53,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .line-clamp-container {
+  .trakt-clamped-text {
     display: flex;
     align-items: flex-end;
 

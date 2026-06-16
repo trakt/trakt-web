@@ -118,7 +118,7 @@
   </div>
 {/snippet}
 
-<div class="credit-member-item" role="listitem">
+<div class="trakt-credit-member-item" role="listitem">
   <Card
     classList="trakt-credit-member-card"
     --height-card={cardHeight}
@@ -159,7 +159,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .credit-member-item {
+  .trakt-credit-member-item {
     width: 100%;
   }
 

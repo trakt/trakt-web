@@ -14,7 +14,7 @@
 </script>
 
 <div
-  class="progress-tag"
+  class="trakt-progress-tag"
   style:--progress-width={`${progress}%`}
   role="progressbar"
   aria-valuenow={progress}
@@ -51,7 +51,7 @@
     gap: var(--gap-xs);
   }
 
-  .progress-tag {
+  .trakt-progress-tag {
     width: 100%;
     min-width: 0;
 

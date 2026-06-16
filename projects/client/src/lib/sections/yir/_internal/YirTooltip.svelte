@@ -10,7 +10,7 @@
   } = $props();
 </script>
 
-<div class="yir-tooltip">
+<div class="trakt-yir-tooltip">
   <div class="yir-tooltip-main">{main}</div>
   {#if sub}
     <div class="yir-tooltip-sub">{sub}</div>
@@ -24,7 +24,7 @@
   // Styles are :global so the same classes can be reused by Carbon's
   // tooltip customHTML callback (see yirTooltipHTML.ts), which renders
   // outside this component's DOM.
-  :global(.yir-tooltip) {
+  :global(.trakt-yir-tooltip) {
     background: color-mix(in srgb, var(--shade-1000) 92%, transparent);
     border: var(--border-thickness-xxs) solid var(--shade-800);
     border-radius: var(--border-radius-xs);

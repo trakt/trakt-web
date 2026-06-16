@@ -50,7 +50,7 @@
     */
 </script>
 
-<div class="yir-genre-bars" data-variant={variant}>
+<div class="trakt-yir-genre-bars" data-variant={variant}>
   {#each genres.genres as genre, index (genre.name)}
     {@const percentage = (genre.count / genres.itemCount) * 100}
     {@const relativePercentage = (genre.count / maxCount) * 100}
@@ -87,7 +87,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-genre-bars {
+  .trakt-yir-genre-bars {
     display: flex;
     padding: var(--ni-40) var(--ni-16) var(--ni-60) var(--ni-16);
     overflow-x: auto;
@@ -233,7 +233,7 @@
   // the bar's color and uppercase text, instead of the transparent
   // left-border style. ~31% matches v2's `#RRGGBB50` (0x50 alpha) tint so
   // the panel reads through the label.
-  .yir-genre-bars[data-variant="filled"] {
+  .trakt-yir-genre-bars[data-variant="filled"] {
     .yir-genre-label {
       width: max-content;
       max-width: 200%;

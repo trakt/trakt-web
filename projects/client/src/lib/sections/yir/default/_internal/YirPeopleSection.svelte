@@ -12,7 +12,7 @@
   } = $props();
 </script>
 
-<section class="yir-people-section" id="section-people">
+<section class="trakt-yir-people-section" id="section-people">
   <YirPageInner>
     <YirPeopleGroup {slug} {year} type="actors" label={m.yir_section_title_top_actors()} />
     <YirPeopleGroup {slug} {year} type="actresses" label={m.yir_section_title_top_actresses()} />
@@ -22,7 +22,7 @@
 </section>
 
 <style lang="scss">
-  .yir-people-section {
+  .trakt-yir-people-section {
     background-color: var(--shade-1000);
   }
 </style>

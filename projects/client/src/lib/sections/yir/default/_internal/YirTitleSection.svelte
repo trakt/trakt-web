@@ -32,7 +32,7 @@
   );
 </script>
 
-<section class="yir-title-page">
+<section class="trakt-yir-title-section">
   <div class="yir-cover-bg">
     <CrossOriginImage src={coverSrc} alt="" />
   </div>
@@ -68,7 +68,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-title-page {
+  .trakt-yir-title-section {
     display: flex;
     align-items: center;
     justify-content: center;

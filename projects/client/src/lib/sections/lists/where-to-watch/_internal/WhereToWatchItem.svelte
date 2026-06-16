@@ -65,7 +65,7 @@
   const nameLines = $derived(text ? 1 : 2);
 </script>
 
-<div class="where-to-watch-item">
+<div class="trakt-where-to-watch-item">
   <Link
     href={service.link}
     target="_blank"
@@ -94,7 +94,7 @@
 </div>
 
 <style>
-  .where-to-watch-item {
+  .trakt-where-to-watch-item {
     :global(.trakt-link) {
       text-decoration: none;
       color: var(--color-text-secondary);

@@ -26,7 +26,7 @@
   }
 </script>
 
-<div class="swipe-carousel-root" use:carousel.setupSwipe={enabled}>
+<div class="trakt-swipe-carousel" use:carousel.setupSwipe={enabled}>
   <button
     class="swipe-carousel-nav"
     onclick={carousel.goToPrev}
@@ -65,7 +65,7 @@
 </div>
 
 <style lang="scss">
-  .swipe-carousel-root {
+  .trakt-swipe-carousel {
     touch-action: pan-y;
     display: flex;
     align-items: center;

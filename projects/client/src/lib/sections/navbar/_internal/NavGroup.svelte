@@ -23,7 +23,7 @@
   } = $props();
 </script>
 
-<div class="nav-group">
+<div class="trakt-nav-group">
   <div class="nav-main-link" class:is-expanded={!isCollapsed}>
     <Tooltip
       content={title}
@@ -52,7 +52,7 @@
 </div>
 
 <style>
-  .nav-group {
+  .trakt-nav-group {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xxs);

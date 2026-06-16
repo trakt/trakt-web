@@ -14,7 +14,7 @@
   const successCount = $derived(processedCount - errorCount);
 </script>
 
-<div class="import-complete" transition:slide={{ duration: 150, axis: "y" }}>
+<div class="trakt-import-complete" transition:slide={{ duration: 150, axis: "y" }}>
   <div class="import-complete-summary">
     <p class="secondary">
       {m.import_complete_synced({ count: successCount })}
@@ -38,7 +38,7 @@
 </div>
 
 <style>
-  .import-complete {
+  .trakt-import-complete {
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);

@@ -118,7 +118,7 @@
   });
 </script>
 
-<section class="yir-2024-stats" id="section-{type}-stats">
+<section class="trakt-yir-2024-stats-section" id="section-{type}-stats">
   <div class="yir-2024-stats-stack">
     <article class="yir-2024-stats-panel yir-2024-stats-summary">
       <div class="yir-2024-stats-summary-text">
@@ -244,7 +244,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-stats {
+  .trakt-yir-2024-stats-section {
     width: 100%;
   }
 

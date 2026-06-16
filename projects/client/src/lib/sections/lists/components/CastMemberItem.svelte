@@ -35,7 +35,7 @@
   {/if}
 {/snippet}
 
-<div class="cast-member-item">
+<div class="trakt-cast-member-item">
   <PersonCard>
     <Link focusable={false} href={UrlBuilder.people(castMember.key, params)}>
       <CardCover
@@ -60,7 +60,7 @@
 </div>
 
 <style lang="scss">
-  .cast-member-item {
+  .trakt-cast-member-item {
     display: contents;
   }
 

@@ -11,7 +11,7 @@
   const { error, onreset }: ImportErrorProps = $props();
 </script>
 
-<div class="import-error" transition:slide={{ duration: 150, axis: "y" }}>
+<div class="trakt-import-error" transition:slide={{ duration: 150, axis: "y" }}>
   <p class="secondary">
     {m.import_status_error({ message: error })}
   </p>
@@ -28,7 +28,7 @@
 </div>
 
 <style>
-  .import-error {
+  .trakt-import-error {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);

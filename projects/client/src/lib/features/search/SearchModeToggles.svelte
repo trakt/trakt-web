@@ -55,14 +55,14 @@
   ];
 </script>
 
-<div class="search-mode-toggles" role="group">
+<div class="trakt-search-mode-toggles" role="group">
   <Toggler value={$selectedType} variant="text" {onChange} {options} />
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .search-mode-toggles {
+  .trakt-search-mode-toggles {
     display: flex;
     align-items: center;
     justify-content: center;

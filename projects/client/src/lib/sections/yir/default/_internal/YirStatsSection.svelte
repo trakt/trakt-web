@@ -37,7 +37,7 @@
   const hoursDaily = $derived(stats.minutes.daily / 60);
 </script>
 
-<section class="yir-stats-section" id="section-{type}-stats">
+<section class="trakt-yir-stats-section" id="section-{type}-stats">
   <YirPageInner>
     <YirSectionHeader>
       <strong>{formatNumber(stats.itemsCount ?? 0)}</strong>
@@ -141,7 +141,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-stats-section {
+  .trakt-yir-stats-section {
     background-color: var(--shade-950);
     padding-bottom: var(--ni-72);
 

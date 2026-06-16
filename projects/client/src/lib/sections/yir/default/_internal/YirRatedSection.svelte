@@ -31,7 +31,7 @@
   }
 </script>
 
-<section class="yir-rated-section" id="section-{type}-ratings">
+<section class="trakt-yir-rated-section" id="section-{type}-ratings">
   {#each items as item, index (item.entry.id)}
     <div
       class="yir-fanart-bg"
@@ -77,7 +77,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-rated-section {
+  .trakt-yir-rated-section {
     text-align: center;
     position: relative;
     background-color: var(--shade-950);

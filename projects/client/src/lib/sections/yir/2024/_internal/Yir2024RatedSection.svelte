@@ -32,7 +32,7 @@
   }
 </script>
 
-<section class="yir-2024-rated" id="section-{type}-highest-rated">
+<section class="trakt-yir-2024-rated-section" id="section-{type}-highest-rated">
   <article class="yir-2024-rated-panel">
     <div class="yir-2024-rated-covers" aria-hidden="true">
       {#each items as item, index (item.entry.id)}
@@ -89,7 +89,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-rated {
+  .trakt-yir-2024-rated-section {
     width: 100%;
   }
 

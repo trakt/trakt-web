@@ -20,7 +20,7 @@
   );
 </script>
 
-<div class="calendar-controls">
+<div class="trakt-calendar-controls">
   <ActionButton
     label={m.button_label_previous_calendar_period()}
     onclick={navigation.onPrevious}
@@ -50,7 +50,7 @@
 </div>
 
 <style>
-  .calendar-controls {
+  .trakt-calendar-controls {
     display: flex;
     align-items: center;
 

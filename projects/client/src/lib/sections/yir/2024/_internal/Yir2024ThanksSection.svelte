@@ -17,7 +17,7 @@
   const nextYear = $derived(year + 1);
 </script>
 
-<section class="yir-2024-thanks" id="section-thanks">
+<section class="trakt-yir-2024-thanks-section" id="section-thanks">
   <div class="yir-2024-thanks-grid">
     <h2 class="bold yir-2024-thanks-intro">{m.yir_2024_thanks_intro()}</h2>
     <p class="bold yir-2024-thanks-title">{m.yir_2024_thanks_title()}</p>
@@ -38,7 +38,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-thanks {
+  .trakt-yir-2024-thanks-section {
     width: 100%;
     color: var(--shade-10);
     // Last section on the page — keep a gap below the posters so they don't

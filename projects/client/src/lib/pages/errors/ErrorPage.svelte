@@ -19,7 +19,7 @@
   <title>{title}</title>
 </svelte:head>
 
-<main class="error-page">
+<main class="trakt-error-page">
   <h1>{title}</h1>
   {#if rest.children}
     {@render rest.children()}
@@ -31,7 +31,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .error-page {
+  .trakt-error-page {
     height: 100%;
 
     display: flex;

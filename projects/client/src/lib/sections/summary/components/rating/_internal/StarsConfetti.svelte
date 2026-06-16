@@ -6,7 +6,7 @@
 </script>
 
 <div
-  class="confetti-container"
+  class="trakt-stars-confetti"
   style="left: {position.x}px; top: {position.y}px;"
 >
   <Confetti
@@ -21,7 +21,7 @@
 </div>
 
 <style>
-  .confetti-container {
+  .trakt-stars-confetti {
     position: absolute;
   }
 </style>

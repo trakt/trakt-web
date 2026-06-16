@@ -8,14 +8,14 @@
   } = $props();
 </script>
 
-<div class="yir-page-inner">
+<div class="trakt-yir-page-inner">
   {@render children()}
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-page-inner {
+  .trakt-yir-page-inner {
     position: relative;
     width: 100%;
     max-width: var(--ni-1280);

@@ -22,7 +22,7 @@
   const pressedState = $derived(isPressed ? "true" : "false");
 </script>
 
-<div class="toggle-tag" class:is-checked={isPressed}>
+<div class="trakt-toggle-tag" class:is-checked={isPressed}>
   <Button
     {disabled}
     {label}
@@ -47,7 +47,7 @@
 </div>
 
 <style>
-  .toggle-tag {
+  .trakt-toggle-tag {
     :global(.trakt-button) {
       flex-direction: row-reverse;
 

@@ -68,7 +68,7 @@
   }
 
   .trakt-profile-item {
-    :global(.profile-image-container.is-vip)::before {
+    :global(.trakt-profile-image.is-vip)::before {
       --offset: calc(-1 * var(--border-thickness-s));
 
       content: "";
@@ -91,7 +91,7 @@
       z-index: var(--layer-background);
     }
 
-    :global(.profile-image-container) {
+    :global(.trakt-profile-image) {
       background-color: var(--color-card-background);
       border-radius: 50%;
 

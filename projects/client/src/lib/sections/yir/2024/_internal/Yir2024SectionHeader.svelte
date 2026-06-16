@@ -11,7 +11,7 @@
   } = $props();
 </script>
 
-<header class="yir-2024-section-header">
+<header class="trakt-yir-2024-section-header">
   <p class="bold yir-2024-section-header-intro">{intro}</p>
   <h2 class="bold yir-2024-section-header-title">{title}</h2>
 </header>
@@ -19,7 +19,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-section-header {
+  .trakt-yir-2024-section-header {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);

@@ -39,7 +39,7 @@
   }
 </script>
 
-<section class="yir-2024-genres" id="section-{type}-genres">
+<section class="trakt-yir-2024-genres-section" id="section-{type}-genres">
   <div class="yir-2024-genres-panel">
     <span class="bold yir-2024-genres-watermark" aria-hidden="true">
       {watermark}
@@ -66,7 +66,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-genres {
+  .trakt-yir-2024-genres-section {
     width: 100%;
   }
 
@@ -147,7 +147,7 @@
 
   // Stat list rendered by Yir2024StatSummary (its own scope), reached with
   // :global to constrain its column width on desktop.
-  .yir-2024-genres-top :global(.yir-2024-stat-summary) {
+  .yir-2024-genres-top :global(.trakt-yir-2024-stat-summary) {
     flex: 0 1 var(--ni-360);
     min-width: 0;
 

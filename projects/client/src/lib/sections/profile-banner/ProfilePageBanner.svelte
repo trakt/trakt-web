@@ -38,7 +38,7 @@
   const isPublic = $derived(variant === "public");
 </script>
 
-<div class="profile-page-banner-container">
+<div class="trakt-profile-page-banner">
   <div class="profile-identity">
     <ProfileImage
       isEditable={$isMe}
@@ -105,7 +105,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .profile-page-banner-container {
+  .trakt-profile-page-banner {
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
@@ -125,7 +125,7 @@
         flex: initial;
       }
 
-      :global(.trakt-profile-about .line-clamp-container) {
+      :global(.trakt-profile-about .trakt-clamped-text) {
         align-items: flex-start;
       }
     }
@@ -137,7 +137,7 @@
     align-items: center;
     gap: var(--gap-s);
 
-    :global(.profile-image-container) {
+    :global(.trakt-profile-image) {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -158,7 +158,7 @@
         white-space: normal;
       }
 
-      :global(.profile-image-container) {
+      :global(.trakt-profile-image) {
         --width: var(--ni-40);
         --height: var(--ni-40);
         --border-width: var(--border-thickness-xs);

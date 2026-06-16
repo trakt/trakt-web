@@ -29,7 +29,7 @@
   );
 </script>
 
-<div class="native-select-container">
+<div class="trakt-native-select">
   {#if icon}
     <div class="native-select-icon">
       {@render icon()}
@@ -57,7 +57,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .native-select-container {
+  .trakt-native-select {
     --icon-size: var(--ni-16);
 
     position: relative;

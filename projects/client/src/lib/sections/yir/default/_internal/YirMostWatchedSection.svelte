@@ -32,7 +32,7 @@
   }
 </script>
 
-<section class="yir-most-watched-section" id="section-{type}-most-watched">
+<section class="trakt-yir-most-watched-section" id="section-{type}-most-watched">
   <!-- Featured card area with fanart backgrounds -->
   <div class="yir-most-watched-page">
     {#each items as item, index (item.entry.id)}
@@ -105,7 +105,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-most-watched-section {
+  .trakt-yir-most-watched-section {
     background-color: var(--shade-950);
     text-align: center;
     position: relative;

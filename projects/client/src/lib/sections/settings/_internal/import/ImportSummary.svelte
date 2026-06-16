@@ -30,7 +30,7 @@
   });
 </script>
 
-<div class="import-summary" transition:slide={{ duration: 150, axis: "y" }}>
+<div class="trakt-import-summary" transition:slide={{ duration: 150, axis: "y" }}>
   <div class="import-summary-counts">
     {#if counts.history > 0}
       <p class="secondary">
@@ -77,7 +77,7 @@
 </div>
 
 <style>
-  .import-summary {
+  .trakt-import-summary {
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);

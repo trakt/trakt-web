@@ -3,7 +3,7 @@
   export let lastUpdated: string;
 </script>
 
-<div class="legal-page">
+<div class="trakt-legal-page">
   <header class="legal-header">
     <h1>{title}</h1>
     <p class="last-updated">
@@ -27,7 +27,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .legal-page {
+  .trakt-legal-page {
     --width-max-page: var(--ni-920);
     --number-width: var(--ni-32);
 

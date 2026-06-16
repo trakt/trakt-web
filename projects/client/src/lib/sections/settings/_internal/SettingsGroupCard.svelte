@@ -2,14 +2,14 @@
   const { children }: ChildrenProps = $props();
 </script>
 
-<div class="settings-group-card">
+<div class="trakt-settings-group-card">
   {@render children()}
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .settings-group-card {
+  .trakt-settings-group-card {
     border-radius: var(--border-radius-l);
     background: var(--color-card-background);
     overflow: hidden;

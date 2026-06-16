@@ -14,7 +14,7 @@
   );
 </script>
 
-<div class="sync-progress" transition:slide={{ duration: 150, axis: "y" }}>
+<div class="trakt-sync-progress" transition:slide={{ duration: 150, axis: "y" }}>
   <p class="secondary">
     {label}
   </p>
@@ -31,7 +31,7 @@
 </div>
 
 <style>
-  .sync-progress {
+  .trakt-sync-progress {
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);

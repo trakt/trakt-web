@@ -2,7 +2,7 @@
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
 </script>
 
-<span class="yir-2024-stars" aria-hidden="true">
+<span class="trakt-yir-2024-stars" aria-hidden="true">
   <StarIcon fill="none" />
   <StarIcon fill="none" />
   <StarIcon fill="none" />
@@ -11,7 +11,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-2024-stars {
+  .trakt-yir-2024-stars {
     display: inline-flex;
     align-items: center;
     gap: var(--gap-xs);

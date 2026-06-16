@@ -25,7 +25,7 @@
 </script>
 
 <li
-  class="yir-2024-most-played-card"
+  class="trakt-yir-2024-most-played-card"
   role="article"
   data-rank-position={(rank - 1) % 4}
 >
@@ -83,7 +83,7 @@
   // rotation: center / end / center / start). Alignment is driven by
   // `align-self` on the flex-column parent so spacing between cards still
   // comes from the parent's `gap` — no per-card margin.
-  .yir-2024-most-played-card {
+  .trakt-yir-2024-most-played-card {
     position: relative;
     width: 90%;
     height: var(--ni-640);

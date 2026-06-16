@@ -8,7 +8,7 @@
   const hasMoreThanMax = $derived(itemCount > maxPreviewItems);
 </script>
 
-<div class="content-indicator">
+<div class="trakt-content-indicator">
   {#each indicators as _, i (i)}
     <span class="circle"></span>
   {/each}
@@ -19,7 +19,7 @@
 </div>
 
 <style>
-  .content-indicator {
+  .trakt-content-indicator {
     display: flex;
     align-items: center;
     justify-content: center;

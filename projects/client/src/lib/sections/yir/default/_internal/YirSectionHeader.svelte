@@ -17,7 +17,7 @@
 </script>
 
 <div
-  class="yir-section-header"
+  class="trakt-yir-section-header"
   class:compact
   class:no-top-padding={noTopPadding}
   class:flat
@@ -37,7 +37,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .yir-section-header {
+  .trakt-yir-section-header {
     text-align: center;
     padding: var(--ni-72) 0;
 
