@@ -1,18 +1,21 @@
-export function preventUnload(_node: HTMLElement, isActive: boolean) {
-  function handler(e: BeforeUnloadEvent) {
-    if (!isActive) return;
-    e.preventDefault();
-    e.returnValue = '';
-  }
+import { GlobalEventBus } from '../events/GlobalEventBus.ts';
 
-  globalThis.window.addEventListener('beforeunload', handler);
+export function preventUnload(_node: HTMLElement, isActive: boolean) {
+  const unregister = GlobalEventBus.getInstance().register(
+    'beforeunload',
+    (event) => {
+      if (!isActive) return;
+      event.preventDefault();
+      event.returnValue = '';
+    },
+  );
 
   return {
     update(next: boolean) {
       isActive = next;
     },
     destroy() {
-      globalThis.window.removeEventListener('beforeunload', handler);
+      unregister();
     },
   };
 }

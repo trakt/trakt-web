@@ -205,7 +205,6 @@ safeLocalStorage.setItem('key', value);
 | `prependHttps(url, placeholder?)` | Ensure URL starts with `https://`                                     |
 | `prependHttpOrHttps(url)`         | Same, but allows `http://` for localhost                              |
 | `setCacheBuster(url)`             | Append `_cb` timestamp to bust CDN caches                             |
-| `buildOAuthUrl(clientId, origin)` | Construct OAuth redirect URL                                          |
 
 **Rules:**
 
