@@ -65,6 +65,7 @@ type ClearCompletedType = {
   duration: number;
 };
 type ClearFailedType = { source: string; error: string };
+type CollapseType = { action: 'collapse' | 'expand'; source: string };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -82,6 +83,8 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.SummaryDrilldown]: DrilldownType;
   [AnalyticsEvent.Search]: SearchType;
   [AnalyticsEvent.Share]: ShareType;
+  [AnalyticsEvent.Collapse]: CollapseType;
+  [AnalyticsEvent.EditMode]: { enabled: boolean };
 
   [AnalyticsEvent.Drop]: { type: MediaType };
   [AnalyticsEvent.Restore]: never;

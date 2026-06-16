@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { getContext } from 'svelte';
 import { useCollapsedSection } from '../../stores/useCollapsedSection.ts';
@@ -28,6 +30,7 @@ type UseEditModeReturn = {
 
 export function useEditMode(): UseEditModeReturn {
   const context = getContext<EditModeContext>(EDIT_MODE_CONTEXT_KEY);
+  const { track } = useTrack(AnalyticsEvent.EditMode);
 
   if (!context) {
     const falseSubject = new BehaviorSubject<boolean>(false);
@@ -46,10 +49,12 @@ export function useEditMode(): UseEditModeReturn {
   const { isEditMode } = context;
 
   function toggle() {
+    track({ enabled: !isEditMode.value });
     isEditMode.next(!isEditMode.value);
   }
 
   function exit() {
+    track({ enabled: false });
     isEditMode.next(false);
   }
 

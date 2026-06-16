@@ -1,6 +1,5 @@
 <script lang="ts">
   import { afterNavigate } from "$app/navigation";
-  import { useFeatureFlag } from "../feature-flag/useFeatureFlag";
   import { createEditModeContext } from "./_internal/createEditModeContext";
   import { useEditMode } from "./useEditMode";
 
@@ -9,7 +8,7 @@
   createEditModeContext();
 
   const { exit } = useEditMode();
-  const { isEnabled } = useFeatureFlag();
+  // const { isEnabled } = useFeatureFlag();
 
   // FIXME: when removing the feature flag, add tracking
   // const isEditModeEnabled = $derived(isEnabled(FeatureFlag.EditMode));
