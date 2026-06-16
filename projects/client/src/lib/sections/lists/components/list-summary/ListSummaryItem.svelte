@@ -35,7 +35,9 @@
   </div>
 </Card>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-list-summary {
     height: var(--height-list-card);
     box-sizing: border-box;
@@ -45,6 +47,9 @@
     gap: var(--gap-xs);
 
     padding: var(--ni-12);
+
+    outline: var(--border-thickness-xs) solid transparent;
+    transition: outline-color var(--transition-increment) ease-in-out;
 
     background-color: color-mix(
       in srgb,
@@ -59,6 +64,12 @@
         var(--color-official-list-background) 40%,
         var(--color-background)
       );
+    }
+  }
+
+  @include for-mouse() {
+    :global(.trakt-card-content:hover) .trakt-list-summary {
+      outline-color: var(--color-card-border-hover);
     }
   }
 </style>
