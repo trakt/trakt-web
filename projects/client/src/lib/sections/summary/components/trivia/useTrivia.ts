@@ -33,23 +33,30 @@ export function useTrivia(props: UseTriviaProps) {
     }),
   );
 
-  return {
-    list: combineLatest([query, hasSpoilers]).pipe(
-      map(([$query, $hasSpoilers]) => {
-        if (!$query.data) {
-          return [];
+  const list = combineLatest([query, hasSpoilers]).pipe(
+    map(([$query, $hasSpoilers]) => {
+      if (!$query.data) {
+        return [];
+      }
+
+      return $query.data.items.filter((trivia) => {
+        if (!$hasSpoilers) {
+          return true;
         }
 
-        return $query.data.items.filter((trivia) => {
-          if (!$hasSpoilers) {
-            return true;
-          }
+        return props.variant === 'spoilers'
+          ? trivia.isSpoiler
+          : !trivia.isSpoiler;
+      });
+    }),
+  );
 
-          return props.variant === 'spoilers'
-            ? trivia.isSpoiler
-            : !trivia.isSpoiler;
-        });
-      }),
+  return {
+    list,
+    categories: list.pipe(
+      map(($list) =>
+        Array.from(new Set($list.map((trivia) => trivia.category)))
+      ),
     ),
     summary: query.pipe(
       map(($query) => $query.data ? $query.data.summary : []),

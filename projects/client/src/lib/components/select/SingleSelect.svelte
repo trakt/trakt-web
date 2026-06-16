@@ -8,6 +8,7 @@
     value = null,
     placeholder,
     disabled = false,
+    autoWidth = false,
     onChange,
   }: SingleSelectProps = $props();
 
@@ -16,6 +17,7 @@
       ? (options.find((o) => o.value === value)?.label ?? placeholder)
       : placeholder,
   );
+
 </script>
 
 <SelectBase
@@ -23,6 +25,7 @@
   value={value ?? undefined}
   {placeholder}
   {disabled}
+  {autoWidth}
   triggerLabel={selectedLabel}
   hasValue={Boolean(value)}
   onValueChange={onChange}

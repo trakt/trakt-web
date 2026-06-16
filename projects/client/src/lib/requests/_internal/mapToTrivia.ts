@@ -13,5 +13,6 @@ export function mapToTrivia(
     key,
     text: response.text,
     isSpoiler: response.spoiler,
+    category: response.category,
   };
 }

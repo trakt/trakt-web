@@ -23,6 +23,7 @@
     triggerLabel: string;
     hasValue: boolean;
     children: Snippet;
+    autoWidth?: boolean;
   } & (SelectSingleProps | SelectMultipleProps);
 
   const {
@@ -31,6 +32,7 @@
     triggerLabel,
     hasValue,
     children,
+    autoWidth = false,
     ...rest
   }: SelectBaseProps = $props();
 
@@ -56,7 +58,7 @@
       {#snippet child({ props, wrapperProps, open: contentOpen })}
         {#if contentOpen}
           <div {...wrapperProps}>
-            <div {...props} class="trakt-select-content">
+            <div {...props} class="trakt-select-content" data-auto-width={autoWidth}>
               <Select.ScrollUpButton>
                 {#snippet child({ props: scrollProps })}
                   <div {...scrollProps} class="trakt-select-scroll-button">
@@ -123,7 +125,13 @@
     gap: var(--gap-s);
 
     height: var(--button-height);
+    overflow: hidden;
     min-width: 0;
+
+    span {
+      flex: 1;
+      min-width: 0;
+    }
 
     padding: var(--ni-12);
     box-sizing: border-box;
@@ -170,6 +178,11 @@
       height: var(--ni-12);
       flex-shrink: 0;
     }
+  }
+
+  .trakt-select-content[data-auto-width="true"] {
+    width: max-content;
+    min-width: var(--bits-select-anchor-width);
   }
 
   .trakt-select-content {

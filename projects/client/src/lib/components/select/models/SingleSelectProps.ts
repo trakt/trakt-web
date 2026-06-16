@@ -5,5 +5,6 @@ export type SingleSelectProps = {
   value?: string | null;
   placeholder: string;
   disabled?: boolean;
+  autoWidth?: boolean;
   onChange: (value: string) => void;
 };
