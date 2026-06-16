@@ -258,7 +258,7 @@ const { show } = $derived(useShow(params.slug));
 ```
 
 Specs and one-shot static input lift the value with `valueObservable(value)`
-from `$lib/utils/store/valueObservable.ts` (NOT `of(value)`, which completes
+from `$test/beds/store/valueObservable.ts` (NOT `of(value)`, which completes
 synchronously and closes the outer subscriber before fetch emits).
 
 Hooks that do NOT call `useQuery` (e.g. `useIsMe`, `useDangerButton`,

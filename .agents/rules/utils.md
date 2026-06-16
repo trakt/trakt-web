@@ -176,7 +176,6 @@ invariants only.
 | `WritableSubject<T>`       | `BehaviorSubject` with `.set()` / `.update()` like Svelte writable stores        |
 | `writable<T>(initial)`     | Factory shorthand for `new WritableSubject(initial)`                             |
 | `resolve(stream, timeout)` | Await first defined value from RxJS `Observable`                                 |
-| `valueObservable(value)`   | Lift a static value into a never-completing `Observable<T>` (prefer over `of()`) |
 | `fromRune(accessor)`       | Bridge a Svelte 5 rune-driven accessor into an `Observable<T>` via `$effect.pre` |
 | `multicast(graceMs?)`      | `share + ReplaySubject(1) + timer` operator for multi-subscriber Observables     |
 
