@@ -5,9 +5,7 @@ import { retryDelay } from '$lib/utils/retry/retryDelay.ts';
 import type { LayoutLoad } from '$types/$types.d.ts';
 import { QueryClient } from '@tanstack/query-core';
 
-const QUERY_CACHE_BUSTER = 'v2';
-
-const persister = browser ? createIdbPersister(QUERY_CACHE_BUSTER) : undefined;
+const persister = browser ? createIdbPersister() : undefined;
 
 export const load: LayoutLoad = ({ data }) => {
   const queryClient = new QueryClient({
