@@ -9,6 +9,7 @@
     summaryDrawerNavigation,
   } from "../../../_internal/summaryDrawerNavigation";
   import EpisodeTitle from "../../_internal/EpisodeTitle.svelte";
+  import SocialActivitiesButton from "../../_internal/SocialActivitiesButton.svelte";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
@@ -29,13 +30,19 @@
     posterSrc,
   }: Omit<EpisodeSummaryProps, "seasons" | "streamon"> & { posterSrc: string } =
     $props();
-  const type = "episode";
+  const type = "episode" as const;
 
   const title = $derived(episodeIntl.title ?? episode.title);
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
   const { watchCount } = $derived(useWatchCount({ show, episode, type }));
   const postCreditsCount = $derived(episode.postCredits?.length ?? 0);
+  const socialTarget = $derived({
+    type,
+    slug: show.slug,
+    season: episode.season,
+    episode: episode.number,
+  });
 
   const { ratings } = $derived(
     useMediaMetaInfo({ type, episode, media: show }),
@@ -71,15 +78,16 @@
   {/snippet}
 
   {#snippet meta()}
+    <EpisodeTitle {episode} {show} {showIntl} />
+    <SummaryTitle {title} {type} {crew} media={show} {episode} />
     <RatingList
       ratings={$ratings}
       entry={episode}
       drilldown={ratingsDrawerLink}
     />
-    <EpisodeTitle {episode} {show} {showIntl} />
-    <SummaryTitle {title} {type} {crew} media={show} {episode} />
 
     <RenderFor audience="authenticated">
+      <SocialActivitiesButton target={socialTarget} {title} />
       <EpisodeActions {episode} {show} {title} {showTitle} />
     </RenderFor>
   {/snippet}

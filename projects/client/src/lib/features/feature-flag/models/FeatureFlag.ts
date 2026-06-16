@@ -3,4 +3,5 @@ export enum FeatureFlag {
   EditMode = 'edit-mode',
   StreamingSync = 'streaming-sync',
   ScopedFavorites = 'scoped-favorites',
+  SocialActivities = 'social-activities',
 }

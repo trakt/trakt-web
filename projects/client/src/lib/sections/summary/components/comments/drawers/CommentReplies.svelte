@@ -50,7 +50,7 @@
     class="trakt-comment-replies"
     transition:slide={{ duration: 150, axis: "y" }}
   >
-    {#each $list as reply}
+    {#each $list as reply (reply.id)}
       <div class="trakt-comment-container">
         <CommentReply comment={reply} {media} {...typeProps} />
       </div>

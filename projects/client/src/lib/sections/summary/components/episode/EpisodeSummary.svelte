@@ -10,6 +10,7 @@
     summaryDrawerNavigation,
   } from "../../_internal/summaryDrawerNavigation";
   import EpisodeTitle from "../_internal/EpisodeTitle.svelte";
+  import SocialActivitiesButton from "../_internal/SocialActivitiesButton.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
   import { useMediaMetaInfo } from "../media/useMediaMetaInfo";
@@ -35,13 +36,19 @@
     posterSrc: string;
     contextualContent?: Snippet;
   } = $props();
-  const type = "episode";
+  const type = "episode" as const;
 
   const title = $derived(episodeIntl.title ?? episode.title);
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
   const { watchCount } = $derived(useWatchCount({ show, episode, type }));
   const postCreditsCount = $derived(episode.postCredits?.length ?? 0);
+  const socialTarget = $derived({
+    type,
+    slug: show.slug,
+    season: episode.season,
+    episode: episode.number,
+  });
 
   const { ratings } = $derived(
     useMediaMetaInfo({ type, episode, media: show }),
@@ -78,6 +85,10 @@
       entry={episode}
       drilldown={ratingsDrawerLink}
     />
+
+    <RenderFor audience="authenticated">
+      <SocialActivitiesButton target={socialTarget} {title} />
+    </RenderFor>
   </SummaryHeader>
 
   <Spoiler media={episode} {show} {type}>

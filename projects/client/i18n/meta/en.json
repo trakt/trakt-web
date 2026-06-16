@@ -7733,6 +7733,48 @@
     "text_streaming_tmdb_pill": {
       "default": "TMDB {id}",
       "description": "Pill label showing the TMDB id of a synced item."
+    },
+    "text_social_activities_placeholder": {
+      "default": "No one you follow has watched, rated, reviewed, or watchlisted this yet.",
+      "description": "Placeholder text shown when there are no social activities to show for a movie, show, or episode."
+    },
+    "link_label_open_review": {
+      "default": "Open review by {user}",
+      "description": "Text for the link that opens a review of a specific user.",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
+    },
+    "tag_text_watchlisted": {
+      "default": "Watchlisted",
+      "description": "Text for the tag that indicates if a movie or show is watchlisted. This should be as short and concise as possible."
+    },
+    "tag_text_reviewed": {
+      "default": "Reviewed",
+      "description": "Text for the tag that indicates if a movie, show, or episode is reviewed. This should be as short and concise as possible."
+    },
+    "link_label_view_social_activities": {
+      "default": "View social activities for {title}",
+      "description": "Text for the link that opens social activities for a specific movie, show, or episode.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_no_activity": {
+      "default": "No activity",
+      "description": "Placeholder text shown when there are no social activities for a movie, show, or episode. This should be as short and concise as possible."
+    },
+    "text_social_activity": {
+      "default": "Activity",
+      "description": "Text for singular social activity label."
+    },
+    "text_social_activities": {
+      "default": "Activities",
+      "description": "Text for plural social activities label."
     }
   }
 }

@@ -8,10 +8,12 @@ export enum SummaryDrawers {
   Videos = 'videos',
   Trivia = 'trivia',
   History = 'history',
+  Social = 'social',
   WhereToWatch = 'where-to-watch',
   Seasons = 'seasons',
   Notes = 'notes',
   Comments = 'comments',
+  Review = 'review',
   Ratings = 'ratings',
 }
 
@@ -19,6 +21,7 @@ const commentIdParam = 'comment_id';
 
 const summaryDrawerParams = {
   [SummaryDrawers.Comments]: { [commentIdParam]: '' },
+  [SummaryDrawers.Review]: { [commentIdParam]: '' },
 } satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
 
 function mapToDrawer(value: string | Nil) {
@@ -35,6 +38,8 @@ function mapToDrawer(value: string | Nil) {
       return SummaryDrawers.Trivia;
     case SummaryDrawers.History:
       return SummaryDrawers.History;
+    case SummaryDrawers.Social:
+      return SummaryDrawers.Social;
     case SummaryDrawers.WhereToWatch:
       return SummaryDrawers.WhereToWatch;
     case SummaryDrawers.Seasons:
@@ -43,6 +48,8 @@ function mapToDrawer(value: string | Nil) {
       return SummaryDrawers.Notes;
     case SummaryDrawers.Comments:
       return SummaryDrawers.Comments;
+    case SummaryDrawers.Review:
+      return SummaryDrawers.Review;
     case SummaryDrawers.Ratings:
       return SummaryDrawers.Ratings;
     default:
@@ -65,6 +72,11 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
       buildDrawerLink(
         SummaryDrawers.Comments,
         id != null ? { [commentIdParam]: String(id) } : undefined,
+      ),
+    buildReviewDrawerLink: (id: number) =>
+      buildDrawerLink(
+        SummaryDrawers.Review,
+        { [commentIdParam]: String(id) },
       ),
   };
 }
