@@ -12,39 +12,53 @@ import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferr
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { combineLatest } from 'rxjs';
+import { combineLatest, type Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-type UseEpisodeParams = {
+export type UseEpisodeParams = {
   slug: string;
   season: number;
   episode: number;
 };
 
-export function useEpisode(
-  params: UseEpisodeParams,
-) {
+export function useEpisode(params$: Observable<UseEpisodeParams>) {
   const { country, favorites } = useStreamingPreferences();
 
-  const episode = useQuery(episodeSummaryQuery(params));
-  const show = useQuery(showSummaryQuery({ slug: params.slug }));
-  const seasons = useQuery(showSeasonsQuery(params));
-  const crew = useQuery(episodePeopleQuery(params));
+  const episode = useQuery(
+    params$.pipe(map((p) => episodeSummaryQuery(p))),
+  );
+  const show = useQuery(
+    params$.pipe(map((p) => showSummaryQuery({ slug: p.slug }))),
+  );
+  const seasons = useQuery(
+    params$.pipe(map((p) => showSeasonsQuery(p))),
+  );
+  const crew = useQuery(
+    params$.pipe(map((p) => episodePeopleQuery(p))),
+  );
 
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
   const { language } = getLanguageAndRegion();
 
   const intl = useQuery(
-    episodeIntlQuery({ ...params, language, enabled: !isLocaleSkipped }),
+    params$.pipe(
+      map((p) =>
+        episodeIntlQuery({ ...p, language, enabled: !isLocaleSkipped })
+      ),
+    ),
   );
   const showIntl = useQuery(
-    showIntlQuery({ slug: params.slug, language, enabled: !isLocaleSkipped }),
+    params$.pipe(
+      map((p) =>
+        showIntlQuery({ slug: p.slug, language, enabled: !isLocaleSkipped })
+      ),
+    ),
   );
 
   const streamOnQuery = useQuery(
-    country.pipe(
-      map((country) => streamEpisodeQuery({ ...params, country })),
+    combineLatest([params$, country]).pipe(
+      map(([p, country]) => streamEpisodeQuery({ ...p, country })),
     ),
   );
 
@@ -59,7 +73,7 @@ export function useEpisode(
 
   const coreQueries = [episode, show];
 
-  // Keep isLoading true until episode + show payloads are present —
+  // Keep isLoading true until episode + show payloads are present -
   // queries can flip to !fetching while `data` is still undefined
   // (errored or empty), which would otherwise let the page render
   // a half-populated summary.

@@ -5,18 +5,19 @@
   import MediaWatchHistoryPaginatedList from "$lib/sections/lists/history/MediaWatchHistoryPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { useEpisode } from "../../../../../../../shows/[slug]/seasons/[season]/episodes/[episode]/useEpisode";
   import type { PageProps } from "./$types";
 
   const { params }: PageProps = $props();
 
-  const { episode } = $derived(
-    useEpisode({
-      slug: params.slug,
-      season: parseInt(params.season),
-      episode: parseInt(params.episode),
-    }),
-  );
+  const params$ = fromRune(() => ({
+    slug: params.slug,
+    season: parseInt(params.season),
+    episode: parseInt(params.episode),
+  }));
+
+  const { episode } = useEpisode(params$);
 </script>
 
 <TraktPage
