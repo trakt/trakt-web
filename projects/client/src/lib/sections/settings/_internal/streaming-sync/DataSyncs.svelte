@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useInfiniteQuery, useQuery } from "$lib/features/query/useQuery.ts";
   import { dataSyncsQuery } from "$lib/requests/queries/streaming-sync/dataSyncsQuery.ts";
   import { dataSyncsSummaryQuery } from "$lib/requests/queries/streaming-sync/dataSyncsSummaryQuery.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { firstValueFrom, map } from "rxjs";
+  import DataSyncList from "../DataSyncList.svelte";
   import SettingsBlock from "../SettingsBlock.svelte";
-  import DataSyncRow from "./DataSyncRow.svelte";
   import { toServiceInfo } from "./toServiceInfo.ts";
   import { useStreamingServiceLookup } from "./useStreamingServiceLookup.ts";
   import { useStreamingSyncActions } from "./useStreamingSyncActions.ts";
@@ -70,32 +70,20 @@
   {#if !$isLoading && ($syncs ?? []).length === 0}
     <p class="secondary italic">{m.text_no_data_synced()}</p>
   {:else}
-    <div class="trakt-data-syncs-list">
-      {#each $syncs ?? [] as sync (sync.key)}
-        <DataSyncRow
-          {sync}
-          service={toServiceInfo({
-            serviceId: sync.source,
-            application: sync.application,
-            connections: $lookup,
-          })}
-          onUndo={actions.undo(sync.id)}
-        />
-      {/each}
-    </div>
-
-    {#if $hasNextPage}
-      <Button
-        size="small"
-        variant="secondary"
-        color="default"
-        disabled={$isFetchingNextPage}
-        label={m.button_text_load_more()}
-        onclick={fetchNextPage}
-      >
-        {m.button_text_load_more()}
-      </Button>
-    {/if}
+    <DataSyncList
+      syncs={$syncs ?? []}
+      hasNextPage={$hasNextPage}
+      isFetchingNextPage={$isFetchingNextPage}
+      onLoadMore={fetchNextPage}
+      getOnUndo={actions.undo}
+      getService={(sync) =>
+        toServiceInfo({
+          serviceId: sync.source,
+          application: sync.application,
+          connections: $lookup,
+        })}
+      getHref={(sync) => UrlBuilder.settings.streamingSyncDetail(sync.id)}
+    />
   {/if}
 </SettingsBlock>
 
@@ -142,9 +130,4 @@
     font-size: var(--font-size-tag);
   }
 
-  .trakt-data-syncs-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-s);
-  }
 </style>

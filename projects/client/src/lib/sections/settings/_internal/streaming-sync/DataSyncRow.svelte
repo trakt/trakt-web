@@ -5,29 +5,46 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { DataSync } from "$lib/requests/models/DataSync.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import StreamingServiceBadge from "./StreamingServiceBadge.svelte";
   import type { ServiceInfo } from "./toServiceInfo.ts";
-  import { type SyncCountLabel, toSyncCountLabels } from "./toSyncCountLabels.ts";
+  import {
+    type SyncCountLabel,
+    toSyncCountLabels,
+  } from "./toSyncCountLabels.ts";
 
   type DataSyncRowProps = {
     sync: DataSync;
     service?: ServiceInfo;
     onUndo: () => void;
+    href?: string;
   };
 
-  const { sync, service, onUndo }: DataSyncRowProps = $props();
-
-  const detailUrl = $derived(UrlBuilder.settings.streamingSyncDetail(sync.id));
+  const { sync, service, onUndo, href }: DataSyncRowProps = $props();
 
   type Group = { key: string; label: string; pills: SyncCountLabel[] };
 
   const groups = $derived.by<Group[]>(() => {
     const sections: Group[] = [
-      { key: "history", label: m.text_table_history(), pills: toSyncCountLabels(sync.items.history) },
-      { key: "library", label: m.text_table_library(), pills: toSyncCountLabels(sync.items.library) },
-      { key: "ratings", label: m.text_table_ratings(), pills: toSyncCountLabels(sync.items.ratings) },
-      { key: "watchlist", label: m.text_table_watchlist(), pills: toSyncCountLabels(sync.items.watchlist) },
+      {
+        key: "history",
+        label: m.text_table_history(),
+        pills: toSyncCountLabels(sync.items.history),
+      },
+      {
+        key: "library",
+        label: m.text_table_library(),
+        pills: toSyncCountLabels(sync.items.library),
+      },
+      {
+        key: "ratings",
+        label: m.text_table_ratings(),
+        pills: toSyncCountLabels(sync.items.ratings),
+      },
+      {
+        key: "watchlist",
+        label: m.text_table_watchlist(),
+        pills: toSyncCountLabels(sync.items.watchlist),
+      },
     ].filter((group) => group.pills.length > 0);
 
     return sections;
@@ -54,9 +71,13 @@
 </script>
 
 {#snippet pill(label: string, kind: "added" | "flag")}
-  <Link href={detailUrl} color="inherit">
+  {#if href}
+    <Link {href} color="inherit">
+      <span class="pill" data-kind={kind}>{label}</span>
+    </Link>
+  {:else}
     <span class="pill" data-kind={kind}>{label}</span>
-  </Link>
+  {/if}
 {/snippet}
 
 <div class="trakt-data-sync-row" class:is-undone={sync.isUndone}>
@@ -72,11 +93,17 @@
   </div>
 
   <div class="details">
-    <Link href={detailUrl} color="inherit">
-      <span class="date bold">
+    {#if href}
+      <Link {href} color="inherit">
+        <span class="date bold capitalize">
+          {toHumanDate(new Date(), sync.createdAt, getLocale())}
+        </span>
+      </Link>
+    {:else}
+      <span class="date bold capitalize">
         {toHumanDate(new Date(), sync.createdAt, getLocale())}
       </span>
-    </Link>
+    {/if}
 
     {#if !sync.isUndone && hasBreakdown}
       <div class="groups">
@@ -187,7 +214,6 @@
 
     color: var(--color-text-secondary);
     font-size: var(--font-size-tag);
-    text-transform: uppercase;
   }
 
   .group-pills {
@@ -256,6 +282,5 @@
     color: var(--color-text-secondary);
 
     font-size: var(--font-size-tag);
-    text-transform: uppercase;
   }
 </style>
