@@ -20,10 +20,6 @@
   const tooltipClass = $derived(
     variant === "compact" ? "trakt-tooltip-compact" : "trakt-tooltip",
   );
-
-  const arrowClass = $derived(
-    variant === "compact" ? "trakt-tooltip-compact-arrow" : undefined,
-  );
 </script>
 
 <Tooltip.Provider>
@@ -41,9 +37,6 @@
     </Tooltip.Trigger>
     <Tooltip.Portal>
       <Tooltip.Content class={tooltipClass} {side} {sideOffset}>
-        {#if arrowClass}
-          <Tooltip.Arrow class={arrowClass} />
-        {/if}
         {#if typeof content === "function"}
           {@render content()}
         {:else if variant === "default"}
@@ -88,12 +81,7 @@
 
     border-radius: var(--border-radius-xs);
     padding: var(--ni-6) var(--ni-8);
-    margin-left: var(--ni-neg-7);
 
     box-shadow: var(--shadow-menu);
-  }
-
-  :global(.trakt-tooltip-compact-arrow) {
-    color: var(--color-tooltip-background);
   }
 </style>

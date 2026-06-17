@@ -4,6 +4,7 @@
   import { getLocale } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import { toTraktRating } from "$lib/utils/formatting/number/toTraktRating";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import { STAR_RATINGS } from "../constants/index.ts";
 
   type RatingsDistributionProps = {
@@ -54,26 +55,23 @@
       </p>
     </div>
 
-    <div class="trakt-histogram" aria-hidden="true">
-      <div class="histogram-bars">
-        {#each starBuckets as bucket (bucket.star)}
-          <div class="histogram-bar-slot">
+    <div class="trakt-histogram">
+      {#each starBuckets as bucket (bucket.star)}
+        <Tooltip
+          content={toHumanNumber(bucket.value, getLocale())}
+          variant="compact"
+          sideOffset={4}
+        >
+          <div class="histogram-column">
             <div
               class="histogram-bar"
               data-intensity={toIntensity(bucket.value, maxValue)}
-              style="--bar-height: {(bucket.value / maxValue) * 100}%"
+              style="--bar-fraction: {bucket.value / maxValue}"
             ></div>
-            <span class="bar-tooltip tag bold">
-              {toHumanNumber(bucket.value, getLocale())}
-            </span>
+            <span class="histogram-label tag secondary">{bucket.star}</span>
           </div>
-        {/each}
-      </div>
-      <div class="histogram-scale tag secondary">
-        {#each starBuckets as bucket (bucket.star)}
-          <span>{bucket.star}</span>
-        {/each}
-      </div>
+        </Tooltip>
+      {/each}
     </div>
   </div>
 </section>
@@ -123,46 +121,40 @@
   .trakt-histogram {
     flex: 1;
     min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-2);
-  }
-
-  .histogram-bars {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    align-items: end;
     gap: var(--ni-4);
-    height: var(--ni-48);
-  }
 
-  .histogram-bar-slot {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 100%;
-    transform-origin: bottom;
-    transition: transform calc(0.5 * var(--transition-increment)) ease-in-out;
+    :global(.trakt-tooltip-trigger) {
+      transform-origin: bottom;
+      transition: transform calc(0.5 * var(--transition-increment)) ease-in-out;
 
-    @include for-mouse {
-      &:hover {
-        transform: scale(1.1);
-
-        .histogram-bar {
-          background: var(--color-text-primary);
-        }
-
-        .bar-tooltip {
-          opacity: 1;
-          transform: translate(-50%, calc(-1 * var(--ni-6)));
+      @include for-mouse {
+        &:hover {
+          transform: scale(1.1);
         }
       }
     }
   }
 
+  .histogram-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--ni-2);
+    width: 100%;
+  }
+
+  @include for-mouse {
+    :global(.trakt-tooltip-trigger:hover) .histogram-bar {
+      background: var(--color-text-primary);
+    }
+  }
+
   .histogram-bar {
     width: 70%;
-    height: var(--bar-height);
+    height: calc(var(--bar-fraction, 0) * var(--ni-48));
     min-height: var(--ni-2);
     border-radius: var(--border-radius-xs);
     transform-origin: bottom;
@@ -186,30 +178,8 @@
     }
   }
 
-  .bar-tooltip {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    padding: var(--ni-2) var(--ni-6);
-    border-radius: var(--border-radius-xs);
-    background: var(--color-tooltip-background);
-    color: var(--color-tooltip-text);
-    opacity: 0;
-    pointer-events: none;
-    white-space: nowrap;
-    transition: opacity var(--transition-increment) ease-in-out,
-      transform var(--transition-increment) ease-in-out;
-  }
-
-  .histogram-scale {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+  .histogram-label {
     color: var(--color-text-secondary);
-
-    span {
-      text-align: center;
-    }
   }
 
   @keyframes rating-bar-rise {
