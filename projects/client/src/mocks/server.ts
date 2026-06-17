@@ -4,6 +4,7 @@ import { comments } from './handlers/comments.ts';
 import { lists } from './handlers/lists.ts';
 import { movies } from './handlers/movies.ts';
 import { people } from './handlers/people.ts';
+import { plex } from './handlers/plex.ts';
 import { recommendations } from './handlers/recommendations.ts';
 import { search } from './handlers/search.ts';
 import { shows } from './handlers/shows.ts';
@@ -20,6 +21,7 @@ const handlers = [
   ...streamingSync,
   ...sync,
   ...people,
+  ...plex,
   ...watchNow,
   ...recommendations,
   ...calendars,
