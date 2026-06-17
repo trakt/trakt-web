@@ -5,6 +5,7 @@
   import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
+  import GenreCarousel from "$lib/sections/discover/GenreCarousel.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
@@ -93,6 +94,8 @@
     type={$type}
     filterOverride={getThemeFilters("anticipated")}
   />
+  <GenreCarousel />
+
   <RenderFor audience="authenticated">
     <ReleasesList />
   </RenderFor>

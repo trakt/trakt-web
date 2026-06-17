@@ -1240,6 +1240,10 @@
       "default": "Seasons",
       "description": "Title for lists containing seasons of a show. This title should be as short and concise as possible."
     },
+    "section_title_browse_by_genre": {
+      "default": "Genres",
+      "description": "Title for the genres carousel section on the Discover page."
+    },
     "section_title_season_progress": {
       "default": "Season {number} progress",
       "description": "Title for the season progress card shown in the seasons drawer. Shows the season number.",
