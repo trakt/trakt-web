@@ -76,6 +76,7 @@
 
   .trakt-summary-children {
     flex-grow: 1;
+    align-self: stretch;
 
     display: flex;
     flex-direction: column;
