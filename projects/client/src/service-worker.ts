@@ -73,6 +73,14 @@ setCatchHandler(async ({ event, request, url }) => {
   }
 });
 
+const toSeconds = (milliseconds: number) => milliseconds / time.seconds(1);
+
+const expiration = (maxAgeMs: number, maxEntries?: number) =>
+  new ExpirationPlugin({
+    maxAgeSeconds: toSeconds(maxAgeMs),
+    ...(maxEntries === undefined ? {} : { maxEntries }),
+  });
+
 function removeNavigationCache() {
   return caches.delete(CacheKey.navigation);
 }
@@ -91,7 +99,7 @@ self.addEventListener('activate', (event) => {
   ]));
 });
 
-addEventListener('message', (event) => {
+self.addEventListener('message', (event) => {
   if (event.data?.type === WorkerMessage.CacheBust) {
     event.waitUntil(removeNavigationCache());
   }
@@ -127,9 +135,7 @@ const navigationHandler = new StaleWhileRevalidate({
   cacheName: CacheKey.navigation,
   plugins: [
     localeAwareCacheKey,
-    new ExpirationPlugin({
-      maxAgeSeconds: time.hours(12) / time.seconds(1),
-    }),
+    expiration(time.hours(12)),
   ],
 });
 
@@ -156,15 +162,11 @@ registerRoute(
   ({ url }) => url.pathname.endsWith('manifest.webmanifest'),
   new NetworkFirst({
     cacheName: CacheKey.manifest,
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: time.hours(1) / time.seconds(1),
-      }),
-    ],
+    plugins: [expiration(time.hours(1))],
   }),
 );
 
-// Static assets with auth-aware cache
+// Same-origin static assets, media and documents (CacheFirst)
 registerRoute(
   ({ url }) => {
     // Skip caching for localhost
@@ -182,23 +184,14 @@ registerRoute(
   },
   new CacheFirst({
     cacheName: CacheKey.static,
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: time.days(30) / time.seconds(1),
-      }),
-    ],
+    plugins: [expiration(time.days(30))],
   }),
 );
 
 // External resources
 const externalRouteHandler = new StaleWhileRevalidate({
   cacheName: CacheKey.external,
-  plugins: [
-    new ExpirationPlugin({
-      maxEntries: 50,
-      maxAgeSeconds: time.days(7) / time.seconds(1),
-    }),
-  ],
+  plugins: [expiration(time.days(7), 50)],
 });
 
 // Fonts
@@ -218,12 +211,7 @@ registerRoute(
   ({ url }) => Domain.images.includes(url.hostname),
   new CacheFirst({
     cacheName: CacheKey.images,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 666,
-        maxAgeSeconds: time.days(30) / time.seconds(1),
-      }),
-    ],
+    plugins: [expiration(time.days(30), 666)],
     fetchOptions: {
       mode: 'no-cors',
     },
