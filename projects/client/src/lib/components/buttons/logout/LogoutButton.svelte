@@ -7,7 +7,6 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import ActionButton from "../ActionButton.svelte";
 
   const {
     style = "normal",
@@ -43,12 +42,18 @@
 {/if}
 
 {#if style === "action"}
-  <div class="trakt-logout-action-button">
-    <ActionButton {...commonProps} style="ghost" color="red">
+  <Button
+    style="ghost"
+    variant="secondary"
+    color="red"
+    navigationType={DpadNavigationType.Item}
+    {...commonProps}
+  >
+    {m.button_text_logout()}
+    {#snippet icon()}
       <LogoutIcon />
-    </ActionButton>
-    <span class="logout-label">{m.button_text_logout()}</span>
-  </div>
+    {/snippet}
+  </Button>
 {/if}
 
 {#if style === "dropdown-item"}
@@ -59,44 +64,3 @@
     {/snippet}
   </DropdownItem>
 {/if}
-
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  .logout-label {
-    user-select: none;
-    pointer-events: none;
-  }
-
-  .trakt-logout-action-button {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xs);
-    padding: 0 var(--gap-s);
-    border-radius: var(--border-radius-m);
-    cursor: pointer;
-    --color-logout-button: var(--color-background-red);
-
-    :global(
-      .trakt-action-button[data-style="ghost"][data-variant="primary"][data-color="red"]
-    ) {
-      --color-foreground-action-button: var(--color-logout-button);
-
-      @include for-mouse {
-        &:hover {
-          background-color: transparent;
-        }
-      }
-    }
-
-    @include for-mouse {
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          var(--color-logout-button) 10%,
-          transparent
-        );
-      }
-    }
-  }
-</style>
