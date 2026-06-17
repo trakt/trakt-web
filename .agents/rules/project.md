@@ -9,7 +9,7 @@ applyTo: '**'
 
 ## Tech Stack
 
-SvelteKit + TypeScript app (Svelte 5, runes mode) deployed to Cloudflare Pages. Monorepo using Deno workspaces with app at `projects/client/`.
+SvelteKit + TypeScript app (Svelte 5, runes mode) deployed to Cloudflare Workers. Monorepo using Deno workspaces with app at `projects/client/`.
 
 ## Project Structure
 
@@ -20,7 +20,7 @@ projects/client/src/
     components/    # Reusable UI components (buttons, forms, dialogs, media, etc.)
     features/      # Feature modules - self-contained domains (auth, calendar, theme, i18n, etc.)
     sections/      # Page composition - navbar, lists, profile, layout shells
-    guards/        # Conditional rendering (RenderFor, RenderForFeature, RenderForAudience)
+    guards/        # Conditional rendering (RenderFor, RenderForFeature)
     requests/      # API request mappers and query definitions
     stores/        # Reactive state (RxJS BehaviorSubject + localStorage)
     models/        # TypeScript type definitions
@@ -61,7 +61,7 @@ Use Svelte 5 `{#snippet}` for reusable template fragments and component slot alt
 
 ### Guards for conditional rendering
 
-Use `RenderFor`, `RenderForFeature`, `RenderForAudience` components instead of inline `{#if}` blocks for auth/feature/audience gating.
+Use `RenderFor`, `RenderForFeature` components instead of inline `{#if}` blocks for auth/feature/audience gating.
 
 ### Stores use RxJS + localStorage
 

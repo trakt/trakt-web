@@ -1,3 +1,10 @@
+---
+trigger: glob
+globs: 'projects/client/src/**'
+description: 'Performance principles for animations, scroll/resize handlers, IntersectionObservers, rxjs plumbing, bundle/boot, and viewport gating.'
+applyTo: 'projects/client/src/**'
+---
+
 # Performance Guidelines
 
 Framework-agnostic perf principles for client-side work. Read when the work

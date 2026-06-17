@@ -21,8 +21,8 @@ Vitest + `@testing-library/svelte` in jsdom environment.
 ## Running Tests
 
 ```bash
-deno task client:test    # from project root
-vitest                   # from projects/client/
+deno task test:unit    # from projects/client/
+vitest                 # from projects/client/
 ```
 
 ## Testing Philosophy
@@ -82,6 +82,7 @@ src/mocks/
       mapped/{Entity}MappedMock.ts       # post-mapper domain model shape
 ```
 
+- `{domain}` may be a multi-segment path (e.g. `summary/episodes/silo`), not just a single folder; resulting in paths like `data/summary/episodes/silo/response/...`.
 - **`response/`** mocks mirror raw API payload - used by MSW handlers.
 - **`mapped/`** mocks mirror output of the corresponding `mapTo*` function - used as expected value in assertions.
 - Handler URLs use `http://localhost/...` origin and match the SDK path.
