@@ -1,12 +1,14 @@
 import { LOCALE_COOKIE_NAME } from '$lib/features/i18n/constants.ts';
 import {
   type AvailableLocale,
+  defaultLocale,
   getPreferredLocale,
   getTextDirection,
   setLocale,
 } from '$lib/features/i18n/index.ts';
 import { LocaleEndpoint } from '$lib/features/i18n/LocaleEndpoint.ts';
 import { overwriteServerAsyncLocalStorage } from '$lib/paraglide/runtime.js';
+import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import type { Handle } from '@sveltejs/kit';
@@ -49,10 +51,16 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
   }
 
-  const preferredLocale = getPreferredLocale(event.request.headers);
-  const locale = setLocale(
-    event.cookies.get(LOCALE_COOKIE_NAME) ?? preferredLocale,
-  );
+  // Bot responses are publicly cached (see handleCacheControl) under a
+  // locale-blind cache key, so a localized render would be served to every
+  // subsequent visitor on that URL. Pin bots to the default locale to keep
+  // cached HTML neutral.
+  const isCacheableBot = event.locals.isLegitimateBot ||
+    isBotAgent(event.request.headers.get('user-agent'));
+
+  const requestedLocale = event.cookies.get(LOCALE_COOKIE_NAME) ??
+    getPreferredLocale(event.request.headers);
+  const locale = setLocale(isCacheableBot ? defaultLocale : requestedLocale);
   const direction = getTextDirection(locale);
 
   return localeStorage.run({ locale }, () =>
