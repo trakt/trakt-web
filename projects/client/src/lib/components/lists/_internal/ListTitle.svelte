@@ -78,6 +78,7 @@
   .trakt-list-title {
     display: flex;
     flex-direction: column;
+    gap: var(--gap-xs);
     min-width: 0;
 
     .trakt-list-title-wrapper,
