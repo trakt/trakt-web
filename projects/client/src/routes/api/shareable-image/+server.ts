@@ -18,6 +18,7 @@ const cacheControl = 'public, max-age=604800';
 export const GET: RequestHandler = async (
   { request, url, fetch, platform },
 ) => {
+  const requestStartedAt = Date.now();
   const type = url.searchParams.get('type');
   const slug = url.searchParams.get('slug');
   const variant = url.searchParams.get('variant');
@@ -66,6 +67,7 @@ export const GET: RequestHandler = async (
     fetch,
   });
 
+  const dataFetchStartedAt = Date.now();
   const mediaData = await fetchMediaData({
     type,
     slug,
@@ -87,10 +89,14 @@ export const GET: RequestHandler = async (
     error('Failed to fetch poster:', e);
     return new Response('Failed to fetch poster', { status: 500 });
   }
+  console.log(
+    `[shareable-image] data fetched in ${Date.now() - dataFetchStartedAt}ms`,
+  );
 
   const { width, height } = SHARE_TYPE_DIMENSIONS[shareType];
 
   try {
+    const imageGenerationStartedAt = Date.now();
     const imageResponse = new ImageResponse(
       ShareCard,
       {
@@ -102,6 +108,11 @@ export const GET: RequestHandler = async (
     );
 
     const buffer = await imageResponse.arrayBuffer();
+    console.log(
+      `[shareable-image] image generated in ${
+        Date.now() - imageGenerationStartedAt
+      }ms`,
+    );
 
     if (!IS_DEV && platform) {
       try {
@@ -116,6 +127,9 @@ export const GET: RequestHandler = async (
 
     const responseHeaders = new Headers(imageResponse.headers);
     responseHeaders.set('Cache-Control', cacheControl);
+    console.log(
+      `[shareable-image] total request ${Date.now() - requestStartedAt}ms`,
+    );
 
     return new Response(buffer, { headers: responseHeaders });
   } catch (e) {
