@@ -98,6 +98,9 @@ interface ConfirmationParamsMap {
   [ConfirmationType.DiscardChanges]: {
     type: ConfirmationType.DiscardChanges;
   };
+  [ConfirmationType.DisconnectPlex]: {
+    type: ConfirmationType.DisconnectPlex;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

@@ -108,6 +108,15 @@
   }
 }
 
+@keyframes pulse {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
 @keyframes slide {
   0% {
     transform: translateX(-100%);

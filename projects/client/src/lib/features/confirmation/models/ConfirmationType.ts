@@ -25,4 +25,5 @@ export enum ConfirmationType {
   UnlinkStreaming = 'unlink-streaming',
   UndoSync = 'undo-sync',
   DiscardChanges = 'discard-changes',
+  DisconnectPlex = 'disconnect-plex',
 }

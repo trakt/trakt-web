@@ -4,4 +4,5 @@ export enum FeatureFlag {
   StreamingSync = 'streaming-sync',
   ScopedFavorites = 'scoped-favorites',
   SocialActivities = 'social-activities',
+  PlexSync = 'plex-sync',
 }

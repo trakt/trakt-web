@@ -8,7 +8,7 @@
     titlePrefix,
   }: ChildrenProps & {
     title: string;
-    description: string;
+    description?: string;
     titlePrefix?: Snippet;
   } = $props();
 </script>
@@ -21,7 +21,7 @@
     >
       {#if titlePrefix}{@render titlePrefix()}{/if}{title}
     </p>
-    <p class="secondary">{description}</p>
+    {#if description}<p class="secondary">{description}</p>{/if}
   </div>
   <div class="trakt-settings-block-content">
     {@render children()}

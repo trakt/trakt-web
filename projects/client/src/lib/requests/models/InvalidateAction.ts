@@ -4,6 +4,7 @@ import type { MediaType } from './MediaType.ts';
 type UserType = 'avatar' | 'settings' | 'follow' | 'cover' | 'block';
 type ListType = 'edited' | 'deleted' | 'created' | 'like';
 type VipType = 'canceled';
+type PlexType = 'settings' | 'syncs';
 
 const INVALIDATION_ID = 'invalidate' as const;
 
@@ -28,7 +29,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:vip:${VipType}`
   | `${typeof INVALIDATION_ID}:hide_recommended:${MediaType}`
   | `${typeof INVALIDATION_ID}:streaming_connection`
-  | `${typeof INVALIDATION_ID}:data_sync`;
+  | `${typeof INVALIDATION_ID}:data_sync`
+  | `${typeof INVALIDATION_ID}:plex:${PlexType}`;
 
 type TypeDataMap = {
   'auth': null;
@@ -54,6 +56,7 @@ type TypeDataMap = {
   'hide_recommended': MediaType;
   'streaming_connection': null;
   'data_sync': null;
+  'plex': PlexType;
 };
 
 export function invalidationId(key?: string) {
@@ -138,5 +141,10 @@ export const InvalidateAction = {
   StreamingSync: {
     Connection: buildInvalidationKey('streaming_connection'),
     Sync: buildInvalidationKey('data_sync'),
+  },
+
+  Plex: {
+    Settings: buildInvalidationKey('plex', 'settings'),
+    Syncs: buildInvalidationKey('plex', 'syncs'),
   },
 };

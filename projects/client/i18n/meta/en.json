@@ -51,6 +51,58 @@
       "default": "Unlink {service}",
       "description": "Aria-label for the button that unlinks a specific streaming service."
     },
+    "button_label_plex_connect": {
+      "default": "Connect your Plex account",
+      "description": "Aria-label for the button that starts the Plex connection flow."
+    },
+    "button_label_plex_disconnect": {
+      "default": "Disconnect your Plex account",
+      "description": "Aria-label for the button that disconnects the linked Plex account."
+    },
+    "button_label_plex_sync_now": {
+      "default": "Sync Plex now",
+      "description": "Aria-label for the button that triggers an immediate Plex sync."
+    },
+    "button_label_plex_toggle_movie_watched": {
+      "default": "Toggle watched sync for movies",
+      "description": "Aria-label for the button that toggles watched history sync for movies."
+    },
+    "button_label_plex_toggle_movie_rated": {
+      "default": "Toggle ratings sync for movies",
+      "description": "Aria-label for the button that toggles ratings sync for movies."
+    },
+    "button_label_plex_toggle_movie_watchlist": {
+      "default": "Toggle watchlist sync for movies",
+      "description": "Aria-label for the button that toggles watchlist sync for movies."
+    },
+    "button_label_plex_toggle_movie_library": {
+      "default": "Toggle library sync for movies",
+      "description": "Aria-label for the button that toggles library sync for movies."
+    },
+    "button_label_plex_toggle_show_rated": {
+      "default": "Toggle ratings sync for shows",
+      "description": "Aria-label for the button that toggles ratings sync for shows."
+    },
+    "button_label_plex_toggle_show_watchlist": {
+      "default": "Toggle watchlist sync for shows",
+      "description": "Aria-label for the button that toggles watchlist sync for shows."
+    },
+    "button_label_plex_toggle_season_rated": {
+      "default": "Toggle ratings sync for seasons",
+      "description": "Aria-label for the button that toggles ratings sync for seasons."
+    },
+    "button_label_plex_toggle_episode_watched": {
+      "default": "Toggle watched sync for episodes",
+      "description": "Aria-label for the button that toggles watched history sync for episodes."
+    },
+    "button_label_plex_toggle_episode_rated": {
+      "default": "Toggle ratings sync for episodes",
+      "description": "Aria-label for the button that toggles ratings sync for episodes."
+    },
+    "button_label_plex_toggle_episode_library": {
+      "default": "Toggle library sync for episodes",
+      "description": "Aria-label for the button that toggles library sync for episodes."
+    },
     "tag_text_inactive": {
       "default": "Inactive",
       "description": "Tag indicating a connected streaming service is inactive and needs reconnecting. Keep short."
@@ -7775,6 +7827,126 @@
     "text_social_activities": {
       "default": "Activities",
       "description": "Text for plural social activities label."
+    },
+    "link_text_plex_settings": {
+      "default": "Plex",
+      "description": "Text for the link to the Plex sync settings page."
+    },
+    "header_plex_sync": {
+      "default": "Plex Sync",
+      "description": "Header for the Plex sync settings section."
+    },
+    "description_plex_sync": {
+      "default": "Connect your Plex account to sync watch history, ratings, and collections with Trakt.",
+      "description": "Description for the Plex sync settings section."
+    },
+    "label_plex_connection": {
+      "default": "Connection",
+      "description": "Label for the Plex connection row in settings."
+    },
+    "label_plex_connected": {
+      "default": "Connected to Plex",
+      "description": "Status label shown when the user has a connected Plex account."
+    },
+    "label_plex_not_connected": {
+      "default": "Not connected",
+      "description": "Status label shown when the user has no Plex account connected."
+    },
+    "button_connect_plex": {
+      "default": "Connect Plex",
+      "description": "Button to start the Plex account connection flow."
+    },
+    "button_disconnect_plex": {
+      "default": "Disconnect",
+      "description": "Button to disconnect the connected Plex account."
+    },
+    "confirmation_title_disconnect_plex": {
+      "default": "Disconnect Plex?",
+      "description": "Title of the confirmation dialog shown before disconnecting Plex."
+    },
+    "confirmation_message_disconnect_plex": {
+      "default": "This will stop syncing your Plex library. You can reconnect at any time.",
+      "description": "Body of the confirmation dialog shown before disconnecting Plex."
+    },
+    "button_plex_authorized": {
+      "default": "I've connected Plex",
+      "description": "Button shown while waiting for the user to complete Plex authorization in a new tab."
+    },
+    "text_plex_auth_waiting": {
+      "default": "A Plex authorization page has been opened. Complete the sign-in there, then click the button below.",
+      "description": "Instructional text shown while waiting for the user to authorize on plex.tv."
+    },
+    "header_plex_servers": {
+      "default": "Select Server",
+      "description": "Header for the Plex server selection block in settings."
+    },
+    "description_plex_servers": {
+      "default": "Choose the Plex server to sync with Trakt.",
+      "description": "Description for the Plex server selection block."
+    },
+    "label_plex_no_servers": {
+      "default": "No servers found. Make sure your Plex server is online and accessible.",
+      "description": "Message shown when no Plex servers are available after connecting."
+    },
+    "header_plex_manual_sync": {
+      "default": "Manual Sync",
+      "description": "Header for the manual sync section in Plex settings."
+    },
+    "description_plex_manual_sync": {
+      "default": "Trigger an immediate sync of your Plex watch history to Trakt.",
+      "description": "Description for the manual sync section in Plex settings."
+    },
+    "button_plex_sync_now": {
+      "default": "Sync Now",
+      "description": "Button to trigger a manual Plex sync."
+    },
+    "label_plex_server": {
+      "default": "Server",
+      "description": "Label for the Plex server row in settings."
+    },
+    "header_plex_sync_settings": {
+      "default": "Plex Sync Settings",
+      "description": "Header for the section that shows sync toggle settings for Plex."
+    },
+    "description_plex_sync_settings": {
+      "default": "These settings control which data types sync to Trakt.",
+      "description": "Description under the Plex sync settings section header."
+    },
+    "label_plex_sync_as": {
+      "default": "Sync as",
+      "description": "Label for the dropdown to select which Plex home account to sync as."
+    },
+    "label_plex_library_table_type": {
+      "default": "Type",
+      "description": "Column header for the library type in the Plex library table."
+    },
+    "label_plex_library_table_sync": {
+      "default": "Sync?",
+      "description": "Column header for the sync checkbox in the Plex library table."
+    },
+    "button_plex_toggle_watched": {
+      "default": "Watched",
+      "description": "Pill toggle button label for the watched sync option in Plex sync settings."
+    },
+    "text_plex_synced_summary": {
+      "default": "Data has synced {count} times. Your most recent sync was {date}.",
+      "description": "Summary text showing total sync count and last sync date in Plex sync history."
+    },
+    "header_plex_sync_history": {
+      "default": "Sync History",
+      "description": "Header for the Plex sync history section."
+    },
+    "label_plex_history_date": {
+      "default": "Date",
+      "description": "Column header for the date in the Plex sync history table."
+    },
+    "label_plex_history_service": {
+      "default": "Service",
+      "description": "Column header for the service in the Plex sync history table."
+    },
+    "button_plex_undo_sync": {
+      "default": "Undo",
+      "description": "Button to undo a Plex sync in the sync history table."
     }
   }
 }
