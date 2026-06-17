@@ -6,11 +6,20 @@ import {
   setLocale,
 } from '$lib/features/i18n/index.ts';
 import { LocaleEndpoint } from '$lib/features/i18n/LocaleEndpoint.ts';
+import { overwriteServerAsyncLocalStorage } from '$lib/paraglide/runtime.js';
 import { time } from '$lib/utils/timing/time.ts';
+import { AsyncLocalStorage } from 'node:async_hooks';
 import type { Handle } from '@sveltejs/kit';
 
 export const LANG_PLACEHOLDER = '"%paraglide.lang%"';
 export const DIR_PLACEHOLDER = '"%paraglide.textDirection%"';
+
+// Cloudflare reuses one isolate across concurrent requests, so paraglide's
+// `globalVariable` strategy leaks one request's locale into another's SSR
+// render. Per-request AsyncLocalStorage isolates the locale; `getLocale()`
+// reads the store before falling back to the shared global.
+const localeStorage = new AsyncLocalStorage<{ locale: AvailableLocale }>();
+overwriteServerAsyncLocalStorage(localeStorage);
 
 export const handle: Handle = async ({ event, resolve }) => {
   if (event.url.pathname.startsWith(LocaleEndpoint.Set)) {
@@ -42,12 +51,13 @@ export const handle: Handle = async ({ event, resolve }) => {
   );
   const direction = getTextDirection(locale);
 
-  return resolve(event, {
-    transformPageChunk({ html, done }) {
-      if (!done) return html;
-      return html
-        .replace(LANG_PLACEHOLDER, locale)
-        .replace(DIR_PLACEHOLDER, direction);
-    },
-  });
+  return localeStorage.run({ locale }, () =>
+    resolve(event, {
+      transformPageChunk({ html, done }) {
+        if (!done) return html;
+        return html
+          .replace(LANG_PLACEHOLDER, locale)
+          .replace(DIR_PLACEHOLDER, direction);
+      },
+    }));
 };
