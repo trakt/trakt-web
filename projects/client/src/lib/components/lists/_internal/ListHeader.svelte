@@ -82,7 +82,6 @@
     align-items: center;
     gap: var(--gap-xs);
     min-height: var(--ni-40);
-    height: var(--ni-40);
     user-select: none;
 
     .trakt-list-actions {
