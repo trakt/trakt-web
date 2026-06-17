@@ -18,7 +18,11 @@ export const DIR_PLACEHOLDER = '"%paraglide.textDirection%"';
 // `globalVariable` strategy leaks one request's locale into another's SSR
 // render. Per-request AsyncLocalStorage isolates the locale; `getLocale()`
 // reads the store before falling back to the shared global.
-const localeStorage = new AsyncLocalStorage<{ locale: AvailableLocale }>();
+const localeStorage = new AsyncLocalStorage<{
+  locale?: AvailableLocale;
+  origin?: string;
+  messageCalls?: Set<string>;
+}>();
 overwriteServerAsyncLocalStorage(localeStorage);
 
 export const handle: Handle = async ({ event, resolve }) => {
