@@ -1,8 +1,18 @@
 <script lang="ts">
-  const { title }: { title: string } = $props();
+  type SettingSectionLabelProps = {
+    title: string;
+    description?: string;
+  };
+
+  const { title, description }: SettingSectionLabelProps = $props();
 </script>
 
-<p class="trakt-settings-section-label bold">{title}</p>
+<div class="trakt-settings-section-label">
+  <span class="title bold">{title}</span>
+  {#if description}
+    <p class="secondary small">{description}</p>
+  {/if}
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -10,7 +20,10 @@
   .trakt-settings-section-label {
     max-width: var(--ni-640);
     padding: var(--gap-m) var(--gap-m) var(--gap-xs);
-    font-size: var(--font-size-title);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
 
     @include for-tablet-sm-and-below() {
       max-width: 100%;

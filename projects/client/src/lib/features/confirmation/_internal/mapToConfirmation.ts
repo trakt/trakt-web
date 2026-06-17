@@ -183,6 +183,12 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.warning_prompt_discard_changes(),
     operation: 'destructive',
   }),
+  [ConfirmationType.DisconnectPlex]: () => ({
+    title: m.confirmation_title_disconnect_plex(),
+    buttonText: m.button_disconnect_plex(),
+    message: m.confirmation_message_disconnect_plex(),
+    operation: 'destructive',
+  }),
 };
 
 export function mapToConfirmation<T extends ConfirmationType>(

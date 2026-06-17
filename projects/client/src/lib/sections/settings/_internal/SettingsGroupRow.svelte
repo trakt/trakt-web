@@ -6,6 +6,7 @@
     title: string;
     description?: string;
     icon: Snippet;
+    tag?: Snippet;
   };
 
   type ButtonRowProps = {
@@ -28,7 +29,8 @@
   type SettingsGroupRowProps = CommonRowProps &
     (ButtonRowProps | LinkRowProps | CustomRowProps);
 
-  const { title, description, icon, ...rest }: SettingsGroupRowProps = $props();
+  const { title, description, icon, tag, ...rest }: SettingsGroupRowProps =
+    $props();
 </script>
 
 {#snippet rowContent()}
@@ -37,7 +39,12 @@
   </div>
 
   <div class="row-body">
-    <span class="row-title">{title}</span>
+    <div class="row-title-line">
+      <span class="row-title">{title}</span>
+      {#if tag}
+        {@render tag()}
+      {/if}
+    </div>
     {#if description}
       <span class="row-description secondary small">{description}</span>
     {/if}
@@ -139,10 +146,15 @@
 
   .row-body {
     flex: 1;
-    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: var(--gap-xxs);
+  }
+
+  .row-title-line {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-s);
   }
 
   .row-title {

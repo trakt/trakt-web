@@ -28,6 +28,13 @@
     <Link href={UrlBuilder.settings.preview()}>
       <span class="title">{m.link_text_preview_settings()}</span>
     </Link>
+    <RenderForFeature flag={FeatureFlag.PlexSync}>
+      {#snippet enabled()}
+        <Link href={UrlBuilder.settings.plex()}>
+          <span class="title">{m.link_text_plex_settings()}</span>
+        </Link>
+      {/snippet}
+    </RenderForFeature>
   </div>
 {/snippet}
 
