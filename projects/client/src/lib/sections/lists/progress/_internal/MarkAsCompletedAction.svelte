@@ -30,6 +30,7 @@
       id: media.id,
       type: "movie",
       title: media.title,
+      context: "complete",
     }),
   );
 
