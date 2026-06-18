@@ -182,7 +182,8 @@ if (typeof window !== 'undefined') {
 
   const loadReplay = () => {
     const schedule = window.requestIdleCallback?.bind(window) ??
-      ((cb: IdleRequestCallback) => window.setTimeout(() => cb({} as IdleDeadline), 0));
+      ((cb: IdleRequestCallback) =>
+        window.setTimeout(() => cb({} as IdleDeadline), 0));
     schedule(() => {
       import('@sentry/sveltekit').then(({ replayIntegration }) => {
         Sentry.addIntegration(replayIntegration({

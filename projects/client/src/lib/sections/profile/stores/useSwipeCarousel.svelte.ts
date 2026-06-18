@@ -14,12 +14,22 @@ interface SwipeCarouselCallbacks {
   onDraggingChange?: (isDragging: boolean) => void;
 }
 
-function resolveSlideOnRelease(dx: number, activeSlide: number, lastSlide: number): number {
+function resolveSlideOnRelease(
+  dx: number,
+  activeSlide: number,
+  lastSlide: number,
+): number {
   if (Math.abs(dx) < SWIPE_THRESHOLD) return activeSlide;
-  return dx < 0 ? Math.min(activeSlide + 1, lastSlide) : Math.max(activeSlide - 1, FIRST_SLIDE);
+  return dx < 0
+    ? Math.min(activeSlide + 1, lastSlide)
+    : Math.max(activeSlide - 1, FIRST_SLIDE);
 }
 
-function clampDragX(activeSlide: number, lastSlide: number, dx: number): number {
+function clampDragX(
+  activeSlide: number,
+  lastSlide: number,
+  dx: number,
+): number {
   if (activeSlide === FIRST_SLIDE) return Math.min(0, dx);
   if (activeSlide === lastSlide) return Math.max(0, dx);
   return dx;
@@ -34,7 +44,10 @@ function computeSlideProgress(
   return Math.min(lastSlide, Math.max(FIRST_SLIDE, activeSlide - dx / width));
 }
 
-export function useSwipeCarousel(slideCount: number, callbacks: SwipeCarouselCallbacks = {}) {
+export function useSwipeCarousel(
+  slideCount: number,
+  callbacks: SwipeCarouselCallbacks = {},
+) {
   const lastSlide = slideCount - 1;
   const slideOffsetPercent = 100 / slideCount;
 
@@ -84,7 +97,9 @@ export function useSwipeCarousel(slideCount: number, callbacks: SwipeCarouselCal
         }
 
         setIsDragging(true);
-        setSlideProgress(computeSlideProgress(activeSlide, lastSlide, dx, node.clientWidth));
+        setSlideProgress(
+          computeSlideProgress(activeSlide, lastSlide, dx, node.clientWidth),
+        );
         dragX = clampDragX(activeSlide, lastSlide, dx);
       },
       GESTURE_OPTIONS,
@@ -112,10 +127,18 @@ export function useSwipeCarousel(slideCount: number, callbacks: SwipeCarouselCal
   }
 
   return {
-    get activeSlide() { return activeSlide; },
-    get isDragging() { return isDragging; },
-    get slideProgress() { return slideProgress; },
-    get trackTransform() { return trackTransform; },
+    get activeSlide() {
+      return activeSlide;
+    },
+    get isDragging() {
+      return isDragging;
+    },
+    get slideProgress() {
+      return slideProgress;
+    },
+    get trackTransform() {
+      return trackTransform;
+    },
     goToNext,
     goToPrev,
     setupSwipe,
