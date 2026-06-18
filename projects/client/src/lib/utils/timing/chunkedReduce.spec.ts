@@ -8,12 +8,20 @@ describe('util: chunkedReduce', () => {
   });
 
   it('should return the initial value for an empty iterable', async () => {
-    const result = await chunkedReduce([], (_acc: number, _n: number) => _acc + _n, 42);
+    const result = await chunkedReduce(
+      [],
+      (_acc: number, _n: number) => _acc + _n,
+      42,
+    );
     expect(result).toBe(42);
   });
 
   it('should work with any iterable', async () => {
-    const result = await chunkedReduce(new Set([1, 2, 3]), (acc, n) => acc + n, 0);
+    const result = await chunkedReduce(
+      new Set([1, 2, 3]),
+      (acc, n) => acc + n,
+      0,
+    );
     expect(result).toBe(6);
   });
 

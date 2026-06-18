@@ -5,7 +5,8 @@
 // scheduler.yield() (Chrome 129+) is the standard primitive; setTimeout(0) is
 // the pre-standard fallback — both suspend the current task and reschedule it.
 function yieldToMain(): Promise<void> {
-  const scheduler = (globalThis as { scheduler?: { yield?: () => Promise<void> } }).scheduler;
+  const scheduler =
+    (globalThis as { scheduler?: { yield?: () => Promise<void> } }).scheduler;
   if (typeof scheduler?.yield === 'function') {
     return scheduler.yield();
   }
