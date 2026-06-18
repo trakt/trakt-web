@@ -19,6 +19,7 @@ type DropProps = {
 
 export type DropStoreProps = DropProps & {
   title: string;
+  context?: 'drop' | 'complete';
 };
 
 function requestDrop(props: DropProps) {
@@ -41,7 +42,7 @@ function requestDrop(props: DropProps) {
 export function useDrop(
   props: DropStoreProps,
 ) {
-  const { title, ...target } = props;
+  const { title, context = 'drop', ...target } = props;
   const isDropping = new BehaviorSubject(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
@@ -61,7 +62,9 @@ export function useDrop(
 
     await requestDrop(target);
 
-    dropNote?.show({ title, type: target.type, id: target.id });
+    if (context === 'drop') {
+      dropNote?.show({ title, type: target.type, id: target.id });
+    }
 
     await invalidate(InvalidateAction.Drop(target.type));
 
