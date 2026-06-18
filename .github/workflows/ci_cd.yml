@@ -53,6 +53,22 @@ jobs:
               - '.github/workflows/**'
               - '.github/actions/**'
 
+  format-check:
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+    name: The Scribe's Precision (Format Check)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
+
+      - name: Verifying the Scribe's Precision aka Format Check
+        working-directory: projects/client
+        run: deno fmt --check src i18n/meta i18n/messages/en.json
+
   localize:
     needs: files-changed
     if: ${{
