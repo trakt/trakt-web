@@ -1,6 +1,8 @@
 import { browser } from '$app/environment';
 import { FETCH_ERROR_EVENT } from '$lib/features/errors/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { WorkerMessage } from '$worker/WorkerMessage.ts';
+import { workerRequest } from '$worker/workerRequest.ts';
 import { type User, UserManager } from 'oidc-client-ts';
 import { BehaviorSubject, of } from 'rxjs';
 import { onMount } from 'svelte';
@@ -53,8 +55,22 @@ export function initializeUserManager(
       setToken(token);
       ctx.token.next(token);
 
-      ctx.isAuthorized.next(!isExpired);
+      const nextIsAuthorized = !isExpired;
+      // Client auth resolved differently than the SSR-seeded value the cached
+      // navigation document was rendered with. Evict it so the next load isn't
+      // served a stale unauthorized shell that flickers into the dashboard.
+      // Mirrors the logout-time bust in useAuth.
+      const didAuthorizationChange =
+        ctx.isAuthorized.value !== nextIsAuthorized;
+
+      ctx.isAuthorized.next(nextIsAuthorized);
       isInitializing.next(false);
+
+      if (didAuthorizationChange) {
+        // Best-effort: the SW may be unavailable (private mode, blocked).
+        // Swallow so a failed bust never surfaces as an unhandled rejection.
+        void workerRequest(WorkerMessage.CacheBust).catch(() => {});
+      }
     };
 
     const handleUserEvent = (user: User | null) => {
