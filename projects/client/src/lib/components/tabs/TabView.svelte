@@ -80,7 +80,7 @@
       left: 0;
       width: var(--tab-width);
       transform: translateX(
-        calc(var(--active-index) * (var(--tab-width) + var(--tab-list-gap)))
+        calc(var(--active-index) * (100% + var(--tab-list-gap)))
       );
 
       background-color: var(--color-tab-background);
