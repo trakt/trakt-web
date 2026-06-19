@@ -40,6 +40,10 @@ import {
   type UserRatings,
 } from '../queries/currentUserRatingsQuery.ts';
 import {
+  currentUserRewatchingQuery,
+  type UserRewatching,
+} from '../queries/currentUserRewatchingQuery.ts';
+import {
   currentUserSettingsQuery,
   type UserSettings,
 } from '../queries/currentUserSettingsQuery.ts';
@@ -134,6 +138,7 @@ function createUseUserInstance() {
   const limitsQuerySignal = useQuery(userLimitsQuery());
   const notesQuerySignal = useQuery(currentUserNotesQuery());
   const droppedQuerySignal = useQuery(currentUserDroppedQuery());
+  const rewatchingQuerySignal = useQuery(currentUserRewatchingQuery());
   const blockedQuerySignal = useQuery(blockedUsersQuery());
 
   // Create a stream that switches between authorized and anonymous state
@@ -183,6 +188,9 @@ function createUseUserInstance() {
           dropped: of<UserDroppedHistory>({
             shows: new Set(),
           }),
+          rewatching: of<UserRewatching>({
+            shows: new Set(),
+          }),
           blocked: of<Set<string>>(new Set()),
         });
       }
@@ -225,6 +233,9 @@ function createUseUserInstance() {
         dropped: droppedQuerySignal.pipe(
           map((dropped) => dropped.data),
         ),
+        rewatching: rewatchingQuerySignal.pipe(
+          map((rewatching) => rewatching.data),
+        ),
         blocked: blockedQuerySignal.pipe(
           map((blocked) =>
             new Set(
@@ -256,6 +267,7 @@ function createUseUserInstance() {
     limits: sharedUserContext$.pipe(switchMap((ctx) => ctx.limits)),
     notes: sharedUserContext$.pipe(switchMap((ctx) => ctx.notes)),
     dropped: sharedUserContext$.pipe(switchMap((ctx) => ctx.dropped)),
+    rewatching: sharedUserContext$.pipe(switchMap((ctx) => ctx.rewatching)),
     blocked: sharedUserContext$.pipe(switchMap((ctx) => ctx.blocked)),
   };
 }

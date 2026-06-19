@@ -58,6 +58,12 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.warning_prompt_restore_show({ title: props.title }),
     operation: 'affirmative',
   }),
+  [ConfirmationType.StartRewatching]: (props) => ({
+    title: m.confirmation_title_rewatching_prompt({ title: props.title }),
+    buttonText: m.button_text_start_rewatching(),
+    message: m.confirmation_message_rewatching_prompt(),
+    operation: 'affirmative',
+  }),
   [ConfirmationType.DeleteList]: (props) => ({
     title: m.confirmation_title_delete_list(),
     buttonText: m.button_text_delete_list(),

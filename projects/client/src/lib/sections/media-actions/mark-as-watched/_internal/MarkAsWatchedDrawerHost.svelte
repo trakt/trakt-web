@@ -8,11 +8,15 @@
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MarkAsWatchedAt } from "$lib/models/MarkAsWatchedAt";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
+  import { combineLatest, firstValueFrom, map } from "rxjs";
   import { onDestroy } from "svelte";
   import CheckInAction from "../../check-in/CheckInAction.svelte";
+  import { useRewatching } from "../../rewatching/useRewatching.ts";
   import {
     useMarkAsWatched,
     type MarkAsWatchedStoreProps,
@@ -30,8 +34,19 @@
   } & MarkAsWatchedStoreProps = $props();
 
   const { confirm } = useConfirm();
+  const { isEnabled } = useFeatureFlag();
   const { isMarkingAsWatched, markAsWatched, isWatched } = $derived(
     useMarkAsWatched(target),
+  );
+
+  // The rewatching session only applies to a single show episode.
+  const rewatchingShow = $derived(
+    target.type === "episode" && !Array.isArray(target.media)
+      ? target.show
+      : null,
+  );
+  const rewatching = $derived(
+    rewatchingShow ? useRewatching({ show: rewatchingShow }) : null,
   );
 
   const confirmedAction = writable<MarkAsWatchedAt | null>(null);
@@ -47,7 +62,44 @@
     }
   };
 
+  const isRewatchingPromptCandidate = () => Boolean(rewatching) && $isWatched;
+
+  const promptForRewatching = async (
+    session: NonNullable<typeof rewatching>,
+    show: NonNullable<typeof rewatchingShow>,
+  ) => {
+    const canPrompt = await firstValueFrom(
+      combineLatest([
+        isEnabled(FeatureFlag.Rewatching),
+        session.isRewatching,
+      ]).pipe(map(([isFeatureEnabled, isAlreadyRewatching]) =>
+        isFeatureEnabled && !isAlreadyRewatching
+      )),
+    );
+
+    if (!canPrompt) {
+      return;
+    }
+
+    confirm({
+      type: ConfirmationType.StartRewatching,
+      title: show.title,
+      onConfirm: () => session.startRewatching(),
+    })();
+  };
+
+  const promptRewatchingAfterClose = (shouldPrompt: boolean) => {
+    autoClose();
+
+    if (shouldPrompt && rewatching && rewatchingShow) {
+      promptForRewatching(rewatching, rewatchingShow);
+    }
+  };
+
   const handler = async (watchedAt: MarkAsWatchedAt) => {
+    const shouldPromptRewatching =
+      watchedAt === "now" && isRewatchingPromptCandidate();
+
     const confirmMarkAsWatched = confirm({
       type: ConfirmationType.MarkAsWatched,
       title,
@@ -55,7 +107,7 @@
       onConfirm: async () => {
         confirmedAction.set(watchedAt);
         await markAsWatched(watchedAt);
-        autoClose();
+        promptRewatchingAfterClose(shouldPromptRewatching);
       },
     });
 
@@ -90,7 +142,8 @@
         style="dropdown-item"
         variant="primary"
         disabled={commonProps.disabled}
-        onCheckIn={autoClose}
+        onCheckIn={() =>
+          promptRewatchingAfterClose(isRewatchingPromptCandidate())}
       />
     {/if}
 

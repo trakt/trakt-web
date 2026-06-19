@@ -5,6 +5,7 @@ type UserType = 'avatar' | 'settings' | 'follow' | 'cover' | 'block';
 type ListType = 'edited' | 'deleted' | 'created' | 'like';
 type VipType = 'canceled' | 'updated';
 type PlexType = 'settings' | 'syncs';
+type RewatchingType = 'show';
 
 const INVALIDATION_ID = 'invalidate' as const;
 
@@ -27,6 +28,7 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:notes_edit:${MediaType}`
   | `${typeof INVALIDATION_ID}:notes_delete:${MediaType}`
   | `${typeof INVALIDATION_ID}:vip:${VipType}`
+  | `${typeof INVALIDATION_ID}:rewatching:${RewatchingType}`
   | `${typeof INVALIDATION_ID}:hide_recommended:${MediaType}`
   | `${typeof INVALIDATION_ID}:streaming_connection`
   | `${typeof INVALIDATION_ID}:data_sync`
@@ -53,6 +55,7 @@ type TypeDataMap = {
   'notes_edit': MediaType;
   'notes_delete': MediaType;
   'vip': VipType;
+  'rewatching': RewatchingType;
   'hide_recommended': MediaType;
   'streaming_connection': null;
   'data_sync': null;
@@ -135,6 +138,9 @@ export const InvalidateAction = {
     Canceled: buildInvalidationKey('vip', 'canceled'),
     Updated: buildInvalidationKey('vip', 'updated'),
   },
+
+  Rewatching: (type: RewatchingType) =>
+    buildInvalidationKey('rewatching', type),
 
   HideRecommended: (type: MediaType) =>
     buildInvalidationKey('hide_recommended', type),

@@ -10,6 +10,7 @@
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
+  import { useIsRewatching } from "$lib/sections/media-actions/rewatching/useIsRewatching";
   import { useIsWatchlisted } from "$lib/stores/useIsWatchlisted";
   import type { Snippet } from "svelte";
   import type { MediaCardProps } from "../components/models/MediaCardProps";
@@ -24,6 +25,7 @@
     style,
     mode,
     tag: externalTag,
+    coverTag: externalCoverTag,
     canDeemphasize,
     ...rest
   }: MediaCardProps<MediaInputDefault> & {
@@ -34,6 +36,7 @@
   const { isWatched, isPartiallyWatched } = $derived(
     useIsWatched({ type, media }),
   );
+  const { isRewatching } = $derived(useIsRewatching({ type, media }));
   const { isWatchlisted } = $derived(useIsWatchlisted({ type, media }));
 
   const isDeemphasized = $derived(canDeemphasize && $isWatched);
@@ -67,6 +70,7 @@
 
 {#snippet indicatorTags()}
   <StatusIndicators
+    isRewatching={$isRewatching}
     isWatched={$isWatched}
     isPartiallyWatched={$isPartiallyWatched}
     isWatchlisted={$isWatchlisted}
@@ -116,6 +120,7 @@
       {media}
       {style}
       tag={rest.variant !== "next" ? tag : undefined}
+      coverTag={externalCoverTag}
       contextualTag={mode === "mixed" ? contextualTag : undefined}
       indicators={indicatorTags}
       {...rest}

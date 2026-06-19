@@ -3,7 +3,11 @@ import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { MAX_DATE } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import type { CalendarShowResponse, UpNextResponse } from '@trakt/api';
+import type {
+  CalendarShowResponse,
+  EpisodeResponse as TraktEpisodeResponse,
+  UpNextResponse,
+} from '@trakt/api';
 import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
 import { type EpisodeType, EpisodeUnknownType } from '../models/EpisodeType.ts';
 import { mapToPostCredits } from './mapToPostCredits.ts';
@@ -11,7 +15,8 @@ import { mapToTraktRating } from './mapToTraktRating.ts';
 
 type EpisodeResponse =
   | UpNextResponse['progress']['next_episode']
-  | CalendarShowResponse['episode'];
+  | CalendarShowResponse['episode']
+  | TraktEpisodeResponse;
 
 export function mapToEpisodeEntry(
   episodeResponse: EpisodeResponse,

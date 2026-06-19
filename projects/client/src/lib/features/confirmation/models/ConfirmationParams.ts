@@ -44,6 +44,10 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.RestoreShow;
     title: string;
   };
+  [ConfirmationType.StartRewatching]: {
+    type: ConfirmationType.StartRewatching;
+    title: string;
+  };
   [ConfirmationType.RemoveFavorite]: {
     type: ConfirmationType.RemoveFavorite;
     title: string;

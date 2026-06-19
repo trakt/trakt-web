@@ -7,6 +7,7 @@
   import type { MediaIntl } from "$lib/requests/models/MediaIntl";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
+  import { useIsRewatching } from "$lib/sections/media-actions/rewatching/useIsRewatching";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import {
@@ -51,6 +52,7 @@
   const { isRateable } = $derived(useIsRateable(target));
   const { isDropped } = $derived(useIsDropped(media));
   const { isStarted } = $derived(useIsStarted(target));
+  const { isRewatching } = $derived(useIsRewatching(target));
 
   const { buildDrawerLink } = summaryDrawerNavigation();
   const ratingsDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Ratings));
@@ -62,6 +64,7 @@
     watchCount={$watchCount}
     isDropped={$isDropped}
     isStarted={$isStarted}
+    isRewatching={$isRewatching}
   />
 {/snippet}
 

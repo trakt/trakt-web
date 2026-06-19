@@ -142,7 +142,108 @@
       ? UrlBuilder.episode(media.slug, rest.episode.season, rest.episode.number)
       : UrlBuilder.media(media.type, media.slug),
   );
+
+  const popupMenuTitle = $derived(
+    rest.type === "episode" ? rest.episode.title : media.title,
+  );
 </script>
+
+{#snippet cardContent()}
+  <div class="trakt-summary-poster">
+    <CardCover
+      title={coverData.title}
+      alt={`Poster for ${coverData.title}`}
+      src={coverData.poster}
+    />
+    {#if indicators}
+      <IndicatorTags>
+        {@render indicators()}
+      </IndicatorTags>
+    {/if}
+  </div>
+
+  <SummaryCardDetails
+    classList={hasMultiLineTitles ? "multi-line-titles" : ""}
+    {tag}
+    {layout}
+  >
+    {#if rest.type === "season"}
+      <p class="trakt-card-title ellipsis">
+        {media.title}
+      </p>
+      <p class="trakt-card-subtitle small secondary ellipsis">
+        {seasonLabel(rest.season.number)}
+      </p>
+    {:else if rest.variant === "activity"}
+      {#if rest.type === "episode"}
+        <p class="trakt-card-title ellipsis">
+          {episodeSubtitle(rest.episode)}
+          {#if !["multiple_episodes", "full_season"].includes(rest.episode.type)}
+            <Spoiler media={rest.episode} show={media} type="episode">
+              - {rest.episode.title}
+            </Spoiler>
+          {/if}
+        </p>
+      {:else}
+        <p class="trakt-card-title ellipsis">
+          {media.title}
+        </p>
+      {/if}
+      <p class="trakt-card-subtitle small secondary ellipsis capitalize">
+        {#if rest.activityType === "social"}
+          {toRelativeHumanDay(new Date(), rest.date, getLocale())}
+        {:else}
+          {toHumanDate(new Date(), rest.date, getLocale())}
+        {/if}
+      </p>
+    {:else if isShowContext && rest.type === "episode"}
+      <p class="trakt-card-title ellipsis">
+        <Spoiler media={rest.episode} show={media} type="episode">
+          {rest.episode.title}
+        </Spoiler>
+      </p>
+      <p class="trakt-card-subtitle small secondary ellipsis">
+        {episodeSubtitle(rest.episode)}
+      </p>
+    {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
+      <p class="trakt-card-title ellipsis">
+        {media.title}
+      </p>
+      <p class="trakt-card-subtitle small secondary ellipsis">
+        {episodeNumberLabel({
+          seasonNumber: rest.episode.season,
+          episodeNumber: rest.episode.number,
+        })}
+        {#if rest.variant !== "start"}
+          <Spoiler media={rest.episode} show={media} type="episode">
+            - {rest.episode.title}
+          </Spoiler>
+        {/if}
+      </p>
+    {:else if rest.variant === "credit"}
+      <p class="trakt-card-title ellipsis">
+        {media.title}
+      </p>
+      <p class="trakt-card-subtitle small secondary ellipsis">
+        {rest.role}
+      </p>
+    {:else}
+      <p class="trakt-card-title ellipsis">
+        {media.title}
+      </p>
+      {#if hasDistinctOriginalTitle}
+        <p class="secondary ellipsis">
+          ({media.originalTitle})
+        </p>
+      {/if}
+      <GenreList
+        classList="trakt-card-subtitle small ellipsis secondary"
+        separator=", "
+        genres={media.genres}
+      />
+    {/if}
+  </SummaryCardDetails>
+{/snippet}
 
 <Card
   classList="trakt-summary-card trakt-summary-card-{layout}"
@@ -155,7 +256,7 @@
     <CardActionBar variant={isCompact || isMinimal ? "standalone" : "default"}>
       {#snippet actions()}
         <PopupMenu
-          label={m.button_label_popup_menu({ title: media.title })}
+          label={m.button_label_popup_menu({ title: popupMenuTitle })}
           mode="standalone"
           title={media.title}
         >
@@ -179,100 +280,7 @@
     onclick={() => source && track({ source, type: rest.type })}
     color="inherit"
   >
-    <div class="trakt-summary-poster">
-      <CardCover
-        title={coverData.title}
-        alt={`Poster for ${coverData.title}`}
-        src={coverData.poster}
-      />
-      {#if indicators}
-        <IndicatorTags>
-          {@render indicators()}
-        </IndicatorTags>
-      {/if}
-    </div>
-
-    <SummaryCardDetails
-      classList={hasMultiLineTitles ? "multi-line-titles" : ""}
-      {tag}
-      {layout}
-    >
-      {#if rest.type === "season"}
-        <p class="trakt-card-title ellipsis">
-          {media.title}
-        </p>
-        <p class="trakt-card-subtitle small secondary ellipsis">
-          {seasonLabel(rest.season.number)}
-        </p>
-      {:else if rest.variant === "activity"}
-        {#if rest.type === "episode"}
-          <p class="trakt-card-title ellipsis">
-            {episodeSubtitle(rest.episode)}
-            {#if !["multiple_episodes", "full_season"].includes(rest.episode.type)}
-              <Spoiler media={rest.episode} show={media} type="episode">
-                - {rest.episode.title}
-              </Spoiler>
-            {/if}
-          </p>
-        {:else}
-          <p class="trakt-card-title ellipsis">
-            {media.title}
-          </p>
-        {/if}
-        <p class="trakt-card-subtitle small secondary ellipsis capitalize">
-          {#if rest.activityType === "social"}
-            {toRelativeHumanDay(new Date(), rest.date, getLocale())}
-          {:else}
-            {toHumanDate(new Date(), rest.date, getLocale())}
-          {/if}
-        </p>
-      {:else if isShowContext && rest.type === "episode"}
-        <p class="trakt-card-title ellipsis">
-          <Spoiler media={rest.episode} show={media} type="episode">
-            {rest.episode.title}
-          </Spoiler>
-        </p>
-        <p class="trakt-card-subtitle small secondary ellipsis">
-          {episodeSubtitle(rest.episode)}
-        </p>
-      {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
-        <p class="trakt-card-title ellipsis">
-          {media.title}
-        </p>
-        <p class="trakt-card-subtitle small secondary ellipsis">
-          {episodeNumberLabel({
-            seasonNumber: rest.episode.season,
-            episodeNumber: rest.episode.number,
-          })}
-          {#if rest.variant !== "start"}
-            <Spoiler media={rest.episode} show={media} type="episode">
-              - {rest.episode.title}
-            </Spoiler>
-          {/if}
-        </p>
-      {:else if rest.variant === "credit"}
-        <p class="trakt-card-title ellipsis">
-          {media.title}
-        </p>
-        <p class="trakt-card-subtitle small secondary ellipsis">
-          {rest.role}
-        </p>
-      {:else}
-        <p class="trakt-card-title ellipsis">
-          {media.title}
-        </p>
-        {#if hasDistinctOriginalTitle}
-          <p class="secondary ellipsis">
-            ({media.originalTitle})
-          </p>
-        {/if}
-        <GenreList
-          classList="trakt-card-subtitle small ellipsis secondary"
-          separator=", "
-          genres={media.genres}
-        />
-      {/if}
-    </SummaryCardDetails>
+    {@render cardContent()}
   </Link>
 
   <SummaryCardBottomBar {contextualTag} {tag} {layout}>

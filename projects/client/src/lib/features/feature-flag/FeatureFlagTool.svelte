@@ -29,7 +29,15 @@
       hasAutoClose={false}
       size="auto"
     >
-      <FeatureFlagItems />
+      <div class="trakt-feature-flag-items">
+        <FeatureFlagItems />
+      </div>
     </Drawer>
   {/if}
 </RenderFor>
+
+<style>
+  .trakt-feature-flag-items {
+    overflow-y: auto;
+  }
+</style>

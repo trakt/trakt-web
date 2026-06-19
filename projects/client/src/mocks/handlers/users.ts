@@ -22,6 +22,7 @@ import { MinimalLikedListsResponseMock } from '../data/users/response/MinimalLik
 import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
 import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesResponseMock.ts';
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
+import { RewatchingShowsResponseMock } from '../data/users/response/RewatchingShowsResponseMock.ts';
 import { ShowActivityHistoryResponseMock } from '../data/users/response/ShowActivityHistoryResponseMock.ts';
 import { SocialActivityResponseMock } from '../data/users/response/SocialActivityResponseMock.ts';
 import { UserBlockedResponseMock } from '../data/users/response/UserBlockedResponseMock.ts';
@@ -50,6 +51,9 @@ export const users = [
       return HttpResponse.json(ExtendedUserProfileHarryResponseMock);
     },
   ),
+  http.get('http://localhost/users/hidden/progress_watched_reset*', () => {
+    return HttpResponse.json(RewatchingShowsResponseMock);
+  }),
   http.get('http://localhost/users/hidden/progress_watched*', () => {
     return HttpResponse.json(HiddenShowProgressResponseMock);
   }),

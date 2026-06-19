@@ -4,6 +4,7 @@
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
+  import { useIsRewatching } from "$lib/sections/media-actions/rewatching/useIsRewatching";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import {
     SummaryDrawers,
@@ -47,6 +48,7 @@
   const { ratings, isLoading } = $derived(useMediaMetaInfo(target));
   const { isDropped } = $derived(useIsDropped(media));
   const { isStarted } = $derived(useIsStarted(target));
+  const { isRewatching } = $derived(useIsRewatching(target));
 
   const { buildDrawerLink } = summaryDrawerNavigation();
   const ratingsDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Ratings));
@@ -60,6 +62,7 @@
     watchCount={$watchCount}
     isDropped={$isDropped}
     isStarted={$isStarted}
+    isRewatching={$isRewatching}
   />
 {/snippet}
 
