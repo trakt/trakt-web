@@ -1,10 +1,13 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import type { MediaSocialQueryTarget } from "$lib/requests/queries/media/mediaSocialQuery.ts";
+  import RewatchingDrawerHost from "$lib/sections/media-actions/rewatching/RewatchingDrawerHost.svelte";
   import WhereToWatchDrawerHost from "$lib/sections/lists/where-to-watch/_internal/WhereToWatchDrawerHost.svelte";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle.ts";
   import {
@@ -162,4 +165,12 @@
 
 {#if drawer === SummaryDrawers.Ratings}
   <RatingsDrawer {...details} {seasons} onClose={close} />
+{/if}
+
+{#if drawer === SummaryDrawers.Rewatching && showEntry}
+  <RenderForFeature flag={FeatureFlag.Rewatching}>
+    {#snippet enabled()}
+      <RewatchingDrawerHost show={showEntry} onClose={close} />
+    {/snippet}
+  </RenderForFeature>
 {/if}

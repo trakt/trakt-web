@@ -1,6 +1,7 @@
 import BrainIcon from '$lib/components/icons/BrainIcon.svelte';
 import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
+import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
 import PlexLibraryIcon from '$lib/components/icons/PlexLibraryIcon.svelte';
 import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
@@ -104,5 +105,10 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_smart_related(),
     description: () => m.preview_feature_description_smart_related(),
     audience: 'director',
+  },
+  [FeatureFlag.Rewatching]: {
+    icon: FastRewindIcon,
+    title: () => m.preview_feature_title_rewatch(),
+    description: () => m.preview_feature_description_rewatch(),
   },
 };

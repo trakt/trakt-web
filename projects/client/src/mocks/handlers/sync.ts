@@ -8,6 +8,14 @@ import { UserPlexShowLibraryResponseMock } from '../data/users/response/UserPlex
 
 export const sync = [
   http.post(
+    'http://localhost/checkin',
+    () => {
+      return HttpResponse.json({}, {
+        status: 201,
+      });
+    },
+  ),
+  http.post(
     'http://localhost/sync/history',
     () => {
       return new HttpResponse(null, {

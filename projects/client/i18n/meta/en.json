@@ -421,6 +421,45 @@
       "default": "Watch again",
       "description": "Text for the button that allows users to mark a movie, episode, or show as re-watched."
     },
+    "button_text_start_rewatching": {
+      "default": "Start rewatching",
+      "description": "Text for the button that opens the rewatching drawer for a show."
+    },
+    "button_label_start_rewatching": {
+      "default": "Start rewatching \"{title}\"",
+      "description": "Aria-label for the button that opens the rewatching drawer for a show.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_stop_rewatching": {
+      "default": "Stop rewatching",
+      "description": "Text for the button that stops an active rewatching session for a show."
+    },
+    "button_label_stop_rewatching": {
+      "default": "Stop rewatching \"{title}\"",
+      "description": "Aria-label for the button that stops an active rewatching session for a show.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "confirmation_title_rewatching_prompt": {
+      "default": "Are you rewatching \"{title}\"?",
+      "description": "Title for a confirmation dialog that asks whether the user is currently rewatching the show after rewatching an episode.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "confirmation_message_rewatching_prompt": {
+      "default": "Starting a rewatching session will update your Continue Watching.",
+      "description": "Message for a confirmation dialog explaining that starting a rewatching session will update the user's Up Next."
+    },
     "button_label_add_to_watchlist": {
       "default": "Add \"{title}\" to your Watchlist",
       "description": "Aria-label for the button that adds a movie or show to the user's watchlist.",
@@ -1352,6 +1391,18 @@
     "list_title_episodes": {
       "default": "Episodes",
       "description": "Title for lists containing episodes of a season. This title should be as short and concise as possible."
+    },
+    "drawer_title_rewatching": {
+      "default": "Rewatching",
+      "description": "Title for the drawer that lets users pick the next episode for a show rewatching session. This should be short and concise."
+    },
+    "text_rewatching_next_episode_prompt": {
+      "default": "What's the next episode you want to rewatch?",
+      "description": "Prompt shown above the episode list in the rewatching drawer."
+    },
+    "text_rewatching_no_episodes": {
+      "default": "There are no aired episodes to rewatch yet.",
+      "description": "Empty-state text shown in the rewatching drawer when no aired episodes are available."
     },
     "list_title_seasons": {
       "default": "Seasons",
@@ -4263,6 +4314,10 @@
     "tag_text_started": {
       "default": "Started",
       "description": "Text for the tag that is shown to indicate a show is started but not completed. This should be as short as possible."
+    },
+    "tag_text_rewatching": {
+      "default": "Rewatching",
+      "description": "Text for the tag that is shown to indicate a show has an active rewatching session. This should be as short as possible."
     },
     "header_height": {
       "default": "Height",
@@ -7370,6 +7425,14 @@
     "preview_feature_description_smart_related": {
       "default": "Use our next-gen engine to surface related movies and shows beyond the obvious.",
       "description": "Description for the Smart Related preview feature."
+    },
+    "preview_feature_title_rewatch": {
+      "default": "Rewatch",
+      "description": "Title for the Rewatch preview feature."
+    },
+    "preview_feature_description_rewatch": {
+      "default": "Start rewatching sessions for shows you've already seen, check in or mark watched episodes directly from the session drawer.",
+      "description": "Description for the Rewatch preview feature."
     },
     "header_official_links": {
       "default": "Official Links",

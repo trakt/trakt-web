@@ -74,6 +74,7 @@ export const progressWatchedQuery = defineInfiniteQuery({
     InvalidateAction.MarkAsWatched('episode'),
     InvalidateAction.Drop('show'),
     InvalidateAction.Restore,
+    InvalidateAction.Rewatching('show'),
   ],
   dependencies: (params: ProgressWatchedParams) => [
     params.page,

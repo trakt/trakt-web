@@ -119,6 +119,22 @@ export const shows = [
       return HttpResponse.json(ShowSiloProgressResponseMock);
     },
   ),
+  http.post(
+    'http://localhost/shows/:id/progress/watched/reset',
+    () => {
+      return new HttpResponse(null, {
+        status: 204,
+      });
+    },
+  ),
+  http.delete(
+    'http://localhost/shows/:id/progress/watched/reset',
+    () => {
+      return new HttpResponse(null, {
+        status: 204,
+      });
+    },
+  ),
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons`,
     () => {

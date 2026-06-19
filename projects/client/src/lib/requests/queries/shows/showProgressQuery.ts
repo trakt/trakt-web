@@ -85,6 +85,7 @@ export const showProgressQuery = defineQuery({
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.MarkAsWatched('episode'),
+    InvalidateAction.Rewatching('show'),
   ],
   dependencies: (params) => [params.slug],
   request: showProgressRequest,
