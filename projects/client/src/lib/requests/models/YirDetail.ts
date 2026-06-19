@@ -14,6 +14,27 @@ const YirDistributionsSchema = z.object({
   monthly: z.number().array(),
   days: z.number().array(),
   hourly: z.number().array().optional(),
+  // Per-day-of-month buckets (index 0 = 1st). Month in Review only; the
+  // monthly stats variant charts plays across the days of the chosen month.
+  // Nullish because the API emits it via `&.values` (can be null) and omits it
+  // entirely for Year in Review.
+  daily: z.number().array().nullish(),
+});
+
+// Subscription streaming services the user watched on during the period, with
+// per-type play counts. Month in Review only.
+const YirStreamingServiceSchema = z.object({
+  source: z.string(),
+  name: z.string(),
+  shows: z.number(),
+  movies: z.number(),
+  all: z.number(),
+});
+
+const YirStreamingServicesSchema = z.object({
+  /** ISO 3166-1 alpha-2 code resolved from the user's watchnow country. */
+  country: z.string(),
+  services: YirStreamingServiceSchema.array(),
 });
 
 const YirStatsCategorySchema = z.object({
@@ -139,6 +160,9 @@ export const YirDetailSchema = z.object({
     shows: MediaEntrySchema.array(),
     movies: MediaEntrySchema.array(),
   }).nullish(),
+  // Month in Review only: subscription services the period's plays were
+  // available on.
+  streamingServices: YirStreamingServicesSchema.nullish(),
 });
 
 export type YirDetail = z.infer<typeof YirDetailSchema>;
@@ -156,3 +180,5 @@ export type YirTrendItem = z.infer<typeof YirTrendItemSchema>;
 export type YirWatchedItem = z.infer<typeof YirWatchedItemSchema>;
 export type YirWatchedMovie = z.infer<typeof YirWatchedMovieSchema>;
 export type YirWatchedEpisode = z.infer<typeof YirWatchedEpisodeSchema>;
+export type YirStreamingService = z.infer<typeof YirStreamingServiceSchema>;
+export type YirStreamingServices = z.infer<typeof YirStreamingServicesSchema>;

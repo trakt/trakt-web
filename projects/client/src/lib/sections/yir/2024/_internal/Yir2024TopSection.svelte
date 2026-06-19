@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { YirDetail } from "$lib/requests/models/YirDetail";
+  import type { ReviewMode } from "../../ReviewMode";
 
   import Yir2024Hero from "./Yir2024Hero.svelte";
   import Yir2024PageInner from "./Yir2024PageInner.svelte";
@@ -9,10 +10,15 @@
     detail,
     slug,
     year,
+    month = 1,
+    mode = "yir",
   }: {
     detail: YirDetail | null;
     slug: string;
     year: number;
+    /** 1-12. Only meaningful in MIR mode. */
+    month?: number;
+    mode?: ReviewMode;
   } = $props();
 </script>
 
@@ -21,7 +27,7 @@
 
   <Yir2024PageInner>
     <div class="yir-2024-top-stack">
-      <Yir2024Hero {slug} {year} {detail} />
+      <Yir2024Hero {slug} {year} {detail} {month} {mode} />
 
       {#if detail}
         <Yir2024WatchedStats stats={detail.stats.all} {slug} />

@@ -179,6 +179,15 @@ export const UserMonthInReviewResponseMock: MonthInReviewResponse = {
   },
   'streaming_services': {
     'country': 'us',
-    'services': [],
+    'services': [
+      {
+        'source': 'netflix',
+        'name': 'Netflix',
+        'shows': 1,
+        'movies': 2,
+        'all': 3,
+      },
+      { 'source': 'hulu', 'name': 'Hulu', 'shows': 0, 'movies': 1, 'all': 1 },
+    ],
   },
 };
