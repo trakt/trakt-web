@@ -13,6 +13,10 @@
   const { getFilterValue } = useFilter();
   const currentValue = $derived(getFilterValue(filter.key));
 
+  const isChecked = $derived(
+    filter.isInverted ? $currentValue !== "true" : $currentValue === "true",
+  );
+
   const handler = () => {
     gotoFilteredState({
       key: filter.key,
@@ -20,14 +24,12 @@
       mode: FilterMode.Simple,
     });
   };
-
-  // FIXME: either add explicit clear, or make indeterminate state selectable
 </script>
 
-<Filter title={filter.label()}>
+<Filter title={filter.label()} variant="inline">
   <Switch
     label={filter.label()}
-    checked={$currentValue === "true"}
+    checked={isChecked}
     indeterminate={$currentValue == null}
     color="blue"
     onclick={handler}

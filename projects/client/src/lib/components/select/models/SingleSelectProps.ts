@@ -1,9 +1,9 @@
 import type { SelectOption } from './SelectOption.ts';
 
-export type MultiSelectProps = {
+export type SingleSelectProps = {
   options: ReadonlyArray<SelectOption>;
-  value?: string[];
+  value?: string | null;
   placeholder: string;
   disabled?: boolean;
-  onChange: (values: string[]) => void;
+  onChange: (value: string) => void;
 };

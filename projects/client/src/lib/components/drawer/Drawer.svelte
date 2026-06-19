@@ -292,10 +292,11 @@
 
         &::after {
           content: "";
-          flex: 0 0 calc(
-            var(--drawer-padding) + var(--gap-m) +
-              env(safe-area-inset-bottom, 0)
-          );
+          flex: 0 0
+            calc(
+              var(--drawer-padding) + var(--gap-m) +
+                env(safe-area-inset-bottom, 0)
+            );
         }
       }
     }
@@ -376,6 +377,7 @@
     align-items: center;
     gap: var(--gap-xs);
 
+    flex: 1;
     min-width: 0;
   }
 

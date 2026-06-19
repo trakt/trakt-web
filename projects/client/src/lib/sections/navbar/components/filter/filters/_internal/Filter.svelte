@@ -16,7 +16,7 @@
   data-dpad-navigation={DpadNavigationType.List}
   data-variant={variant}
 >
-  <span>{title}</span>
+  <span class:secondary={variant === "inline"}>{title}</span>
   {@render children()}
 </div>
 
@@ -31,7 +31,9 @@
     &[data-variant="inline"] {
       flex-direction: row;
       align-items: center;
+      justify-content: space-between;
       gap: var(--gap-m);
+      width: 100%;
     }
   }
 </style>

@@ -5,19 +5,21 @@
   const { value, label }: { value: string; label: string } = $props();
 </script>
 
-<Select.Item {value} {label} class="trakt-select-item">
-  {#snippet children({ selected })}
-    <span class="ellipsis capitalize">{label}</span>
-    {#if selected}
-      <CheckIcon />
-    {/if}
+<Select.Item {value} {label}>
+  {#snippet child({ props, selected })}
+    <div {...props} class="trakt-select-item">
+      <span class="ellipsis capitalize">{label}</span>
+      {#if selected}
+        <CheckIcon />
+      {/if}
+    </div>
   {/snippet}
 </Select.Item>
 
 <style lang="scss">
   @use "$style/scss/mixins/index.scss" as *;
 
-  :global(.trakt-select-item) {
+  .trakt-select-item {
     --color-background-item-hover: var(--shade-60);
     --color-foreground-item: var(--shade-700);
     --select-item-height: var(--ni-40);
@@ -49,27 +51,9 @@
         background-color: var(--color-background-item-hover);
       }
     }
-  }
 
-  :global(.trakt-select-item[data-highlighted]) {
-    background-color: var(--color-background-item-hover);
-  }
-
-  @keyframes select-vertical-grow-down {
-    from {
-      clip-path: inset(0 0 100% 0 round var(--border-radius-m));
-    }
-    to {
-      clip-path: inset(0 0 0% 0 round var(--border-radius-m));
-    }
-  }
-
-  @keyframes select-vertical-grow-up {
-    from {
-      clip-path: inset(100% 0 0 0 round var(--border-radius-m));
-    }
-    to {
-      clip-path: inset(0% 0 0 0 round var(--border-radius-m));
+    &[data-highlighted] {
+      background-color: var(--color-background-item-hover);
     }
   }
 </style>

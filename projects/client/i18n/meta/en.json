@@ -2265,6 +2265,10 @@
       "default": "All",
       "description": "Text for the 'All' option in dropdowns or filters."
     },
+    "header_display": {
+      "default": "Display",
+      "description": "Section header for the display toggles in the filters panel."
+    },
     "header_filters": {
       "default": "Filters",
       "description": "Header for the filters panel."
@@ -2338,6 +2342,14 @@
     "button_label_reset_all_filters": {
       "default": "Reset all filters",
       "description": "Aria-label for the button that resets all filters to their initial values."
+    },
+    "tooltip_reset_filters": {
+      "default": "Reset Filters",
+      "description": "Tooltip text for the reset filters button in the filter sidebar."
+    },
+    "tooltip_save_as_default": {
+      "default": "Save as Default",
+      "description": "Tooltip text for the save filters as default button in the filter sidebar."
     },
     "translated_value_video_type_trailer": {
       "default": "Trailer",

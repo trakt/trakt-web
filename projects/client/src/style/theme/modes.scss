@@ -79,6 +79,11 @@
   --color-foreground-button-disabled: var(--shade-400);
 
   /*
+   * Select
+   */
+  --color-background-select: var(--shade-50);
+
+  /*
    * Link
    */
   --color-link-active: var(--purple-700);
@@ -263,6 +268,7 @@
   --color-tablist-background: var(--shade-100);
   --color-tab-background: var(--shade-10);
   --color-tab-hover-background: var(--shade-70);
+  --color-tab-active-text: var(--color-text-primary);
 
   /*
    * Streak
@@ -303,6 +309,13 @@
   --color-confirmation-cancel-background-hover: var(--shade-80);
   --color-confirmation-destructive-background: var(--red-300);
   --color-confirmation-destructive-foreground: var(--red-1000);
+
+  /*
+   * Filters
+   */
+  --color-filter-tablist-background: var(--shade-100);
+  --color-filter-tab-background: var(--purple-700);
+  --color-filter-tab-active-text: var(--shade-10);
 }
 
 // Define theme variables for dark mode
@@ -385,6 +398,11 @@
    */
   --color-surface-button-disabled: var(--shade-800);
   --color-foreground-button-disabled: var(--shade-400);
+
+  /*
+   * Select
+   */
+  --color-background-select: var(--color-background);
 
   /**
    * Link
@@ -572,6 +590,7 @@
   --color-tablist-background: var(--shade-800);
   --color-tab-background: var(--shade-500);
   --color-tab-hover-background: var(--shade-700);
+  --color-tab-active-text: var(--color-text-primary);
 
   /*
    * Streak
@@ -612,6 +631,13 @@
   --color-confirmation-cancel-background-hover: var(--shade-1000);
   --color-confirmation-destructive-background: var(--red-200);
   --color-confirmation-destructive-foreground: var(--red-1000);
+
+  /*
+   * Filters
+   */
+  --color-filter-tablist-background: var(--shade-910);
+  --color-filter-tab-background: var(--purple-700);
+  --color-filter-tab-active-text: var(--shade-10);
 }
 
 // Apply themes to selectors

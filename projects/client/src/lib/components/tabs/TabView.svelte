@@ -109,6 +109,10 @@
         cursor: pointer;
       }
 
+      &[data-state="active"] {
+        color: var(--color-tab-active-text);
+      }
+
       &:hover:not([data-state="active"]) {
         background-color: var(--color-tab-hover-background);
       }
