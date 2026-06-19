@@ -2890,6 +2890,10 @@
       "default": "Edit List",
       "description": "Title for a screen that allows users to edit an existing list."
     },
+    "text_placeholder_generic": {
+      "default": "Nothing to see here.",
+      "description": "Generic placeholder text shown when a section or list has no content to display."
+    },
     "list_placeholder_personal_list_empty": {
       "default": "There is nothing in this list yet.",
       "description": "Placeholder text shown when there are no shows or movies in a user's personal list."
