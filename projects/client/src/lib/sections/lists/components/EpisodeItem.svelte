@@ -16,6 +16,8 @@
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import type { Snippet } from "svelte";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import HoverSummaryWrapper from "./_internal/HoverSummaryWrapper.svelte";
   import SummaryCardRating from "./_internal/SummaryCardRating.svelte";
   import EpisodeCard from "./EpisodeCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
@@ -30,12 +32,23 @@
   const isHidden = $derived(props.status === "hidden");
   const isListItem = $derived(props.variant === "list-item");
 
+  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
+
   const style = $derived(props.style ?? "cover");
   const resolvedStyle: "cover" | "summary" = $derived(
     style === "compact" || style === "minimal" ? "summary" : style,
   );
   const summaryCardLayout = $derived(
     style === "compact" || style === "minimal" ? style : "default",
+  );
+
+  const isHoverMode = $derived(
+    resolvedStyle === "summary" &&
+      summaryCardLayout === "default" &&
+      ($isTabletLarge || $isDesktop) &&
+      $isMouse,
   );
 
   const runtime = $derived(
@@ -195,36 +208,56 @@
   </div>
 {/snippet}
 
+{#snippet episodeSummaryCard()}
+  <MediaSummaryCard
+    {...props.variant === "activity"
+      ? {
+          variant: "activity" as const,
+          activityType: props.activityType,
+          date: props.date,
+        }
+      : {
+          variant: "default" as const,
+          tag,
+          context: "context" in props ? props.context : undefined,
+          coverUrl: "coverUrl" in props ? props.coverUrl : undefined,
+        }}
+    episode={props.episode}
+    source={props.source}
+    media={{
+      ...props.media,
+      episode: {
+        count: 0,
+      },
+    }}
+    popupActions={props.popupActions}
+    layout={summaryCardLayout}
+    badge={action}
+    {sortTag}
+    type="episode"
+    indicators={hasIndicators ? indicatorTags : undefined}
+  />
+{/snippet}
+
 {#snippet card()}
   {#if resolvedStyle === "summary"}
-    <MediaSummaryCard
-      {...props.variant === "activity"
-        ? {
-            variant: "activity" as const,
-            activityType: props.activityType,
-            date: props.date,
-          }
-        : {
-            variant: "default" as const,
-            tag,
-            context: "context" in props ? props.context : undefined,
-            coverUrl: "coverUrl" in props ? props.coverUrl : undefined,
-          }}
-      episode={props.episode}
-      source={props.source}
-      media={{
-        ...props.media,
-        episode: {
-          count: 0,
-        },
-      }}
-      popupActions={props.popupActions}
-      layout={summaryCardLayout}
-      badge={action}
-      {sortTag}
-      type="episode"
-      indicators={hasIndicators ? indicatorTags : undefined}
-    />
+    {#if isHoverMode}
+      <HoverSummaryWrapper orientation="landscape">
+        {#snippet coverCard()}
+          <EpisodeCard
+            {...props}
+            {tag}
+            {action}
+            indicators={hasIndicators ? indicatorTags : undefined}
+          />
+        {/snippet}
+        {#snippet summaryOverlay()}
+          {@render episodeSummaryCard()}
+        {/snippet}
+      </HoverSummaryWrapper>
+    {:else}
+      {@render episodeSummaryCard()}
+    {/if}
   {/if}
 
   {#if style === "cover"}

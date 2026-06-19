@@ -3,7 +3,9 @@
   import MediaStatusTag from "$lib/components/media/tags/MediaStatusTag.svelte";
   import ProgressTag from "$lib/components/media/tags/ProgressTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import type { Snippet } from "svelte";
+  import HoverSummaryWrapper from "./_internal/HoverSummaryWrapper.svelte";
   import MediaCard from "./MediaCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { MediaCardProps } from "./models/MediaCardProps";
@@ -14,6 +16,10 @@
     ...props
   }: MediaCardProps & { contextualTag?: Snippet; sortTag?: Snippet } = $props();
 
+  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
+
   const style = $derived(props.style ?? "cover");
   const resolvedStyle = $derived<"cover" | "summary">(
     style === "compact" || style === "minimal" ? "summary" : style,
@@ -23,6 +29,12 @@
   );
 
   const isCover = $derived(resolvedStyle === "cover");
+  const isHoverMode = $derived(
+    resolvedStyle === "summary" &&
+      summaryCardLayout === "default" &&
+      ($isTabletLarge || $isDesktop) &&
+      $isMouse,
+  );
 </script>
 
 {#snippet coverTag()}
@@ -64,18 +76,46 @@
 {/if}
 
 {#if resolvedStyle === "summary"}
-  <MediaSummaryCard
-    {...props}
-    style={resolvedStyle}
-    layout={summaryCardLayout}
-    {contextualTag}
-    {sortTag}
-    badge={props.action}
-    popupActions={props.badge ? undefined : props.popupActions}
-    tag={props.variant === "next" || props.variant === "progress"
-      ? coverTag
-      : props.tag}
-  />
+  {#if isHoverMode}
+    <HoverSummaryWrapper>
+      {#snippet coverCard()}
+        <MediaCard
+          {...props}
+          {coverTag}
+          style="cover"
+          action={props.action}
+          popupActions={props.badge ? undefined : props.popupActions}
+        />
+      {/snippet}
+      {#snippet summaryOverlay()}
+        <MediaSummaryCard
+          {...props}
+          style={resolvedStyle}
+          layout={summaryCardLayout}
+          {contextualTag}
+          {sortTag}
+          badge={props.action}
+          popupActions={props.badge ? undefined : props.popupActions}
+          tag={props.variant === "next" || props.variant === "progress"
+            ? coverTag
+            : props.tag}
+        />
+      {/snippet}
+    </HoverSummaryWrapper>
+  {:else}
+    <MediaSummaryCard
+      {...props}
+      style={resolvedStyle}
+      layout={summaryCardLayout}
+      {contextualTag}
+      {sortTag}
+      badge={props.action}
+      popupActions={props.badge ? undefined : props.popupActions}
+      tag={props.variant === "next" || props.variant === "progress"
+        ? coverTag
+        : props.tag}
+    />
+  {/if}
 {/if}
 
 <style>

@@ -18,20 +18,42 @@
 
 <PaginatedList {type} {filter} {useList}>
   {#snippet items(items, isLoading)}
-    <GridList
-      {...props}
-      {id}
-      {actions}
-      {items}
-      {listActions}
-      sizing="auto"
-      --width-item="var(--width-summary-card)"
-    >
-      {#snippet empty()}
-        {#if !isLoading}
-          {@render externalEmpty?.()}
-        {/if}
-      {/snippet}
-    </GridList>
+    <div class="drilled-list" data-orientation={cardOrientation}>
+      <GridList
+        {...props}
+        {id}
+        {actions}
+        {items}
+        {listActions}
+        sizing="auto"
+      >
+        {#snippet empty()}
+          {#if !isLoading}
+            {@render externalEmpty?.()}
+          {/if}
+        {/snippet}
+      </GridList>
+    </div>
   {/snippet}
 </PaginatedList>
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .drilled-list {
+    --width-item: var(--width-summary-card);
+
+    &[data-orientation="portrait"] {
+      @include for-mouse {
+        --width-item: var(--width-portrait-card);
+      }
+    }
+
+    &[data-orientation="landscape"] {
+      @include for-mouse {
+        --width-item: var(--width-landscape-card);
+      }
+    }
+
+  }
+</style>
