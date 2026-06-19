@@ -1,42 +1,40 @@
 <script lang="ts">
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import type { ListFilter } from "$lib/features/filters/models/Filter";
+  import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import DropdownFilter from "./_internal/DropdownFilter.svelte";
   import Filter from "./_internal/Filter.svelte";
-  import SelectFilter from "./_internal/SelectFilter.svelte";
-  import type { ListFilterProps } from "./ListFilterProps";
+  import { useFilterSetter } from "./_internal/useFilterSetter";
+
+  const resetValue = "__reset_filter__";
 
   const { filter }: { filter: ListFilter } = $props();
 
   const { getFilterValue } = useFilter();
+  const { gotoFilteredState } = useFilterSetter();
+
   const currentValue = $derived(getFilterValue(filter.key));
 
-  const isFiltering = $derived(Boolean($currentValue));
+  const options = $derived([
+    { label: m.button_label_reset_filter(), value: resetValue },
+    ...filter.options.map((o) => ({ label: o.label(), value: o.value })),
+  ]);
 
-  const color = $derived(isFiltering ? "blue" : "default");
-  const currentLabel = $derived(
-    filter.options.find((option) => option.value === $currentValue)?.label() ??
-      m.option_text_all(),
-  );
-
-  const commonProps: ListFilterProps = $derived({
-    color,
-    value: $currentValue,
-    display: currentLabel,
-    filter: filter,
-  });
+  const onChange = (value: string) => {
+    gotoFilteredState({
+      key: filter.key,
+      value: value === resetValue ? null : value,
+      mode: FilterMode.Simple,
+    });
+  };
 </script>
 
 <Filter title={filter.label()}>
-  <RenderFor
-    audience="authenticated"
-    device={["tablet-sm", "tablet-lg", "desktop"]}
-  >
-    <DropdownFilter {...commonProps} />
-  </RenderFor>
-  <RenderFor audience="authenticated" device={["mobile"]}>
-    <SelectFilter {...commonProps} />
-  </RenderFor>
+  <SingleSelect
+    {options}
+    value={$currentValue ?? null}
+    placeholder={m.option_text_all()}
+    {onChange}
+  />
 </Filter>

@@ -117,15 +117,17 @@ const RATINGS_FILTER: Filter = {
 };
 
 const IGNORE_WATCHED_FILTER: Filter = {
-  label: m.header_hide_watched,
+  label: m.tag_text_watched,
   key: FilterKey.IgnoreWatched,
   type: 'toggle',
+  isInverted: true,
 };
 
 const IGNORE_WATCHLISTED_FILTER: Filter = {
-  label: m.header_hide_watchlisted,
+  label: m.tag_text_watchlisted,
   key: FilterKey.IgnoreWatchlisted,
   type: 'toggle',
+  isInverted: true,
 };
 
 const CERTIFICATION_FILTER: Filter = {
@@ -220,7 +222,6 @@ const STATUS_FILTER: Filter = {
 };
 
 export const FILTERS = [
-  STATUS_FILTER,
   GENRE_FILTER,
   STREAMING_FILTER,
   DECADE_FILTER,
@@ -228,6 +229,7 @@ export const FILTERS = [
   RATINGS_FILTER,
   CERTIFICATION_FILTER,
   COUNTRY_FILTER,
+  STATUS_FILTER,
   IGNORE_WATCHED_FILTER,
   IGNORE_WATCHLISTED_FILTER,
 ] as const;

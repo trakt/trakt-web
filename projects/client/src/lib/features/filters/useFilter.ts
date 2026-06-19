@@ -24,6 +24,20 @@ export function useFilter() {
         }),
       );
     },
+    activeFilterCount: combineLatest(
+      [search, storedFilters, state],
+    ).pipe(
+      map(([$search, $storedFilters, $state]) => {
+        if (!$state.hasFilters) return 0;
+
+        const defaults = $storedFilters ?? {};
+        return FILTERS.filter((filter) => {
+          const current = $search.get(filter.key) ?? null;
+          const stored = (defaults[filter.key] as string | undefined) ?? null;
+          return current !== stored;
+        }).length;
+      }),
+    ),
     hasActiveFilter: combineLatest(
       [search, storedFilters, state],
     ).pipe(

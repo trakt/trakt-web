@@ -6,10 +6,16 @@
   {@render children()}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-filter-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--gap-s);
+    gap: var(--gap-l);
+
+    @include for-tablet-sm-and-below {
+      gap: var(--gap-s);
+    }
   }
 </style>

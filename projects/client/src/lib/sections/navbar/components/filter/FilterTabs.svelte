@@ -8,7 +8,6 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
-  import FilterGroup from "./filters/_internal/FilterGroup.svelte";
   import { useFilterSetter } from "./filters/_internal/useFilterSetter";
   import AdvancedFilters from "./filters/AdvancedFilters.svelte";
   import SimpleFilters from "./filters/SimpleFilters.svelte";
@@ -60,11 +59,14 @@
 </script>
 
 {#snippet commonFilters()}
-  <FilterGroup>
-    {#each toggleTypeFilters as filter (filter.key)}
-      <ToggleFilter {filter} />
-    {/each}
-  </FilterGroup>
+  <div class="trakt-display-section">
+    <span class="display-title">{m.header_display()}</span>
+    <div class="display-toggles">
+      {#each toggleTypeFilters as filter (filter.key)}
+        <ToggleFilter {filter} />
+      {/each}
+    </div>
+  </div>
 {/snippet}
 
 {#snippet simpleFilters()}
@@ -83,28 +85,54 @@
   </div>
 {/snippet}
 
-<TabView
-  {tabPosition}
-  value={activeMode}
-  tabs={[
-    {
-      value: FilterMode.Simple,
-      label: m.tab_text_simple_filters(),
-      content: simpleFilters,
-    },
-    {
-      value: FilterMode.Advanced,
-      label: m.tab_text_advanced_filters(),
-      content: advancedFilters,
-    },
-  ]}
-  {onChange}
-/>
+<div class="trakt-filter-tabs">
+  <TabView
+    {tabPosition}
+    value={activeMode}
+    tabs={[
+      {
+        value: FilterMode.Simple,
+        label: m.tab_text_simple_filters(),
+        content: simpleFilters,
+      },
+      {
+        value: FilterMode.Advanced,
+        label: m.tab_text_advanced_filters(),
+        content: advancedFilters,
+      },
+    ]}
+    {onChange}
+  />
+</div>
 
 <style>
+  .trakt-filter-tabs {
+    --color-tablist-background: var(--color-filter-tablist-background);
+    --color-tab-background: var(--color-filter-tab-background);
+    --color-tab-active-text: var(--color-filter-tab-active-text);
+    --tab-list-padding: 0;
+
+    :global(.trakt-tabs-list) {
+      width: 100%;
+      height: var(--ni-40);
+    }
+  }
+
   .trakt-filters-content {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xl);
+  }
+
+  .trakt-display-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+
+    .display-toggles {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-s);
+    }
   }
 </style>

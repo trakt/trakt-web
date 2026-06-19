@@ -36,6 +36,7 @@ export type ListFilter = BaseFilter & {
 
 export type ToggleFilter = BaseFilter & {
   type: 'toggle';
+  isInverted?: boolean;
 };
 
 export type RatingsFilter =

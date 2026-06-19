@@ -1,33 +1,30 @@
 <script lang="ts">
   import SelectBase from "./_internal/SelectBase.svelte";
   import SelectItem from "./_internal/SelectItem.svelte";
-  import type { MultiSelectProps } from "./models/MultiSelectProps";
+  import type { SingleSelectProps } from "./models/SingleSelectProps";
 
   const {
     options,
-    value = [],
+    value = null,
     placeholder,
     disabled = false,
     onChange,
-  }: MultiSelectProps = $props();
+  }: SingleSelectProps = $props();
 
   const selectedLabel = $derived(
-    value.length
-      ? options
-        .filter((option) => value.includes(option.value))
-        .map((option) => option.label)
-        .join(", ")
+    value
+      ? (options.find((o) => o.value === value)?.label ?? placeholder)
       : placeholder,
   );
 </script>
 
 <SelectBase
-  type="multiple"
-  {value}
+  type="single"
+  value={value ?? undefined}
   {placeholder}
   {disabled}
   triggerLabel={selectedLabel}
-  hasValue={value.length > 0}
+  hasValue={Boolean(value)}
   onValueChange={onChange}
 >
   {#each options as option (option.value)}
