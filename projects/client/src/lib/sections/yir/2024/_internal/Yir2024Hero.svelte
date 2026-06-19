@@ -4,10 +4,13 @@
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { languageTag } from "$lib/features/i18n";
   import { useQuery } from "$lib/features/query/useQuery";
   import { m } from "$lib/paraglide/messages";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
+  import type { ReviewMode } from "../../ReviewMode";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
+  import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   import Yir2024Membership from "./Yir2024Membership.svelte";
@@ -18,10 +21,15 @@
     slug,
     year,
     detail,
+    month = 1,
+    mode = "yir",
   }: {
     slug: string;
     year: number;
     detail: YirDetail | null;
+    /** 1-12. Only meaningful in MIR mode. */
+    month?: number;
+    mode?: ReviewMode;
   } = $props();
 
   const profileQuery = $derived(useQuery(userProfileQuery({ slug })));
@@ -29,8 +37,12 @@
 
   const now = new Date();
   const isCurrentYear = $derived(year === now.getFullYear());
+  // MIR shows the month name as the huge label (lowercased by CSS); YIR keeps
+  // the "year in review" / "year to date" wording.
   const hugeLabel = $derived(
-    isCurrentYear
+    mode === "mir"
+      ? toHumanMonth(new Date(year, month - 1, 1), languageTag())
+      : isCurrentYear
       ? m.yir_2024_huge_label_year_to_date()
       : m.yir_2024_huge_label_year_in_review(),
   );

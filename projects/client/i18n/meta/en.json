@@ -5083,6 +5083,19 @@
         }
       }
     },
+    "mir_title_month_in_review": {
+      "default": "Month in Review",
+      "description": "Period label in the Month in Review header, shown beneath the month and year (the MIR equivalent of 'Year in Review')."
+    },
+    "mir_share_text": {
+      "default": "Check out my {month} Month in Review on Trakt",
+      "description": "Share text used when sharing a Month in Review page. {month} is the formatted month and year, e.g. 'May 2025'.",
+      "variables": {
+        "month": {
+          "type": "string"
+        }
+      }
+    },
     "yir_button_see_more": {
       "default": "See More",
       "description": "Button text for see more."
@@ -5343,6 +5356,18 @@
       "default": "movie genres",
       "description": "Faint background watermark text behind the movie-genres section heading on the 2024 Year in Review template."
     },
+    "yir_2024_streaming_intro": {
+      "default": "Availability on",
+      "description": "Lead-in line above the 'Streaming Services' heading on the Month in Review streaming section."
+    },
+    "yir_2024_streaming_title": {
+      "default": "Streaming Services",
+      "description": "Heading for the Month in Review streaming-services section, listing the subscription services the month's plays were available on."
+    },
+    "yir_2024_streaming_service_count": {
+      "default": "Service Count",
+      "description": "Label for the total number of distinct streaming services row in the Month in Review streaming section."
+    },
     "yir_2024_stats_intro_shows": {
       "default": "In {year}, you watched",
       "description": "Lead-in line above the big '{hours} hours of {count} Shows' headline on the 2024 Year in Review TV stats section.",
@@ -5358,6 +5383,24 @@
       "variables": {
         "year": {
           "type": "number"
+        }
+      }
+    },
+    "yir_2024_stats_intro_shows_monthly": {
+      "default": "In {month}, you watched",
+      "description": "Lead-in line above the big '{hours} hours of {count} Shows' headline on the Month in Review TV stats section. {month} is the month name, e.g. 'May'.",
+      "variables": {
+        "month": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2024_stats_intro_movies_monthly": {
+      "default": "In {month}, you watched",
+      "description": "Lead-in line above the big '{hours} hours of {count} Movies' headline on the Month in Review movie stats section. {month} is the month name, e.g. 'May'.",
+      "variables": {
+        "month": {
+          "type": "string"
         }
       }
     },
@@ -5393,6 +5436,18 @@
           "type": "string"
         },
         "end": {
+          "type": "string"
+        },
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2024_stats_most_active_day": {
+      "default": "Your most active day was <b>{date}</b> with <b>{count} plays</b>.",
+      "description": "Info line on the Month in Review stats section reporting the user's busiest watching day within the month. The <b> tags wrap dynamic values that render as bold purple highlights — keep them around the same content when translating.",
+      "variables": {
+        "date": {
           "type": "string"
         },
         "count": {

@@ -1,30 +1,31 @@
 <script lang="ts">
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
+  import MessageWithBold from "$lib/components/text/MessageWithBold.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
   import { formatNumber } from "$lib/utils/format/formatNumber";
+  import { toHumanClockHour } from "$lib/utils/formatting/date/toHumanClockHour";
   import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
   import { toHumanShortDate } from "$lib/utils/formatting/date/toHumanShortDate";
-  import { addDays } from "date-fns/addDays";
-  import { setMonth } from "date-fns/setMonth";
-  import { startOfYear } from "date-fns/startOfYear";
 
-  import MessageWithBold from "$lib/components/text/MessageWithBold.svelte";
   import YirTooltip from "../../_internal/YirTooltip.svelte";
+  import Yir2024DailyPlaysChart from "./Yir2024DailyPlaysChart.svelte";
   import Yir2024LineChart from "./Yir2024LineChart.svelte";
   import Yir2024SectionHeader from "./Yir2024SectionHeader.svelte";
-  import Yir2024WeeklyPlaysChart from "./Yir2024WeeklyPlaysChart.svelte";
 
   const {
     type,
     stats,
+    month,
     year,
   }: {
     type: "shows" | "movies";
     stats: YirStatsCategory;
+    /** 1-12. */
+    month: number;
     year: number;
   } = $props();
 
@@ -34,22 +35,27 @@
   const hoursTotal = $derived(Math.round(stats.minutes.total / 60));
   const playsTotal = $derived(stats.playCounts.total);
 
-  const hoursMonthly = $derived(stats.minutes.monthly / 60);
+  // Month in Review surfaces per-week / per-day averages (no per-month row, as
+  // the whole period is a single month).
   const hoursWeekly = $derived(stats.minutes.weekly / 60);
   const hoursDaily = $derived(stats.minutes.daily / 60);
 
-  const peakWeek = $derived.by(() => {
-    const weekly = stats.distributions?.weekly ?? [];
-    if (weekly.length === 0) return null;
-    const maxValue = Math.max(...weekly);
-    const maxIndex = weekly.indexOf(maxValue);
-    const start = addDays(startOfYear(new Date(year, 0, 1)), maxIndex * 7);
-    const end = addDays(start, 6);
-    const locale = languageTag();
+  const monthName = $derived(
+    toHumanMonth(new Date(year, month - 1, 1), languageTag()),
+  );
+
+  // Most active day within the month, from the per-day-of-month distribution.
+  const peakDay = $derived.by(() => {
+    const daily = stats.distributions?.daily ?? [];
+    if (daily.length === 0) return null;
+    const maxValue = Math.max(...daily);
+    const maxIndex = daily.indexOf(maxValue);
     return {
       count: maxValue,
-      start: toHumanShortDate(start, locale),
-      end: toHumanShortDate(end, locale),
+      date: toHumanShortDate(
+        new Date(year, month - 1, maxIndex + 1),
+        languageTag(),
+      ),
     };
   });
 
@@ -63,8 +69,8 @@
 
   const introMessage = $derived(
     type === "shows"
-      ? m.yir_2024_stats_intro_shows({ year })
-      : m.yir_2024_stats_intro_movies({ year }),
+      ? m.yir_2024_stats_intro_shows_monthly({ month: monthName })
+      : m.yir_2024_stats_intro_movies_monthly({ month: monthName }),
   );
   const summaryMessage = $derived(
     type === "shows"
@@ -85,22 +91,22 @@
     m.yir_2024_stats_card_plays({ count: formatNumber(playsTotal) }),
   );
 
-  // Hours chart data — 12 monthly buckets in user's locale.
-  const monthlyHoursData = $derived.by(() => {
+  // Daily-within-month plays power the summary's tall bar chart.
+  const dailyPlaysData = $derived(stats.distributions?.daily ?? []);
+
+  // Hours card line chart — plays distributed across the 24 hours of the day,
+  // in the user's locale clock format.
+  const hourlyHoursData = $derived.by(() => {
     const locale = languageTag();
-    const monthly = stats.distributions?.monthly ?? [];
-    return monthly.map((value, index) => ({
-      // The distribution stores minutes per bucket; the card frames hours so
-      // we convert before rendering.
-      value: Math.round(value / 60),
-      label: toHumanMonth(setMonth(new Date(0), index), locale, "short"),
+    const hourly = stats.distributions?.hourly ?? [];
+    return hourly.map((value, index) => ({
+      value: Math.round(value),
+      label: toHumanClockHour(new Date(2000, 0, 1, index), locale),
     }));
   });
 
-  // Plays chart data — 7 day-of-week buckets, with day names rendered in
-  // the user's locale via Intl. Reference dates pinned to a known week
-  // starting on Sunday (Jan 4, 2026 was a Sunday) so index 0 = Sun, …,
-  // 6 = Sat regardless of the current date.
+  // Plays card line chart — 7 day-of-week buckets. Reference dates pinned to a
+  // known week starting on Sunday (Jan 4, 2026) so index 0 = Sun … 6 = Sat.
   const weekdayLabels = $derived.by(() => {
     const formatter = new Intl.DateTimeFormat(languageTag(), {
       weekday: "short",
@@ -109,7 +115,7 @@
       formatter.format(new Date(2026, 0, 4 + i)),
     );
   });
-  const dailyPlaysData = $derived.by(() => {
+  const dayOfWeekData = $derived.by(() => {
     const days = stats.distributions?.days ?? [];
     return days.map((value, index) => ({
       value: Math.round(value),
@@ -118,20 +124,19 @@
   });
 </script>
 
-<section class="trakt-yir-2024-stats-section" id="section-{type}-stats">
+<section class="trakt-yir-2024-stats-monthly-section" id="section-{type}-stats">
   <div class="yir-2024-stats-stack">
     <article class="yir-2024-stats-panel yir-2024-stats-summary">
       <div class="yir-2024-stats-summary-text">
         <Yir2024SectionHeader intro={introMessage} title={summaryMessage} />
 
         <div class="yir-2024-stats-info">
-          {#if peakWeek}
+          {#if peakDay}
             <p>
               <MessageWithBold
-                message={m.yir_2024_stats_most_active_week({
-                  start: peakWeek.start,
-                  end: peakWeek.end,
-                  count: formatNumber(peakWeek.count),
+                message={m.yir_2024_stats_most_active_day({
+                  date: peakDay.date,
+                  count: formatNumber(peakDay.count),
                 })}
               />
             </p>
@@ -146,9 +151,9 @@
         </div>
       </div>
 
-      {#if stats.distributions?.weekly}
+      {#if dailyPlaysData.length > 0}
         <div class="yir-2024-stats-summary-chart">
-          <Yir2024WeeklyPlaysChart data={stats.distributions.weekly} {year} />
+          <Yir2024DailyPlaysChart data={dailyPlaysData} {month} {year} />
         </div>
       {/if}
 
@@ -168,10 +173,10 @@
       </header>
 
       <div class="yir-2024-stats-card-chart">
-        <Yir2024LineChart data={monthlyHoursData}>
+        <Yir2024LineChart data={hourlyHoursData}>
           {#snippet tooltip({ value, label })}
             <YirTooltip
-              main={m.yir_2024_stats_tooltip_hours({
+              main={m.yir_2024_stats_tooltip_plays({
                 count: formatNumber(value),
               })}
               sub={label}
@@ -181,10 +186,6 @@
       </div>
 
       <dl class="yir-2024-stats-averages">
-        <div class="yir-2024-stats-average-row">
-          <dt>{m.yir_2024_stats_per_month()}</dt>
-          <dd class="bold">{formatDecimal(hoursMonthly)}</dd>
-        </div>
         <div class="yir-2024-stats-average-row">
           <dt>{m.yir_2024_stats_per_week()}</dt>
           <dd class="bold">{formatDecimal(hoursWeekly)}</dd>
@@ -211,7 +212,7 @@
       </header>
 
       <div class="yir-2024-stats-card-chart">
-        <Yir2024LineChart data={dailyPlaysData}>
+        <Yir2024LineChart data={dayOfWeekData}>
           {#snippet tooltip({ value, label })}
             <YirTooltip
               main={m.yir_2024_stats_tooltip_plays({
@@ -224,10 +225,6 @@
       </div>
 
       <dl class="yir-2024-stats-averages">
-        <div class="yir-2024-stats-average-row">
-          <dt>{m.yir_2024_stats_per_month()}</dt>
-          <dd class="bold">{formatDecimal(stats.playCounts.monthly)}</dd>
-        </div>
         <div class="yir-2024-stats-average-row">
           <dt>{m.yir_2024_stats_per_week()}</dt>
           <dd class="bold">{formatDecimal(stats.playCounts.weekly)}</dd>
@@ -250,7 +247,9 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-yir-2024-stats-section {
+  // Layout mirrors Yir2024StatsSection exactly (full-width summary on top, two
+  // chart cards beneath) so the monthly and yearly stats read identically.
+  .trakt-yir-2024-stats-monthly-section {
     width: 100%;
   }
 
@@ -258,15 +257,11 @@
   // its own overflow:hidden — on the short line cards the tooltip gets cut
   // off. Let tooltips overflow the chart wrapper into the (taller) panel so
   // the full box shows.
-  .trakt-yir-2024-stats-section :global(.trakt-area-chart),
-  .trakt-yir-2024-stats-section :global(.trakt-bar-chart) {
+  .trakt-yir-2024-stats-monthly-section :global(.trakt-area-chart),
+  .trakt-yir-2024-stats-monthly-section :global(.trakt-bar-chart) {
     overflow: visible;
   }
 
-  // Summary panel sits at full width on its own row; the two chart cards
-  // share the row beneath in a 2-column grid that collapses to a single
-  // column at tablet-sm-and-below. Tight 10px gap so the three panels
-  // read as one continuous unit.
   .yir-2024-stats-stack {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -283,12 +278,6 @@
     }
   }
 
-  // Shared panel chrome: rounded card. --panel-padding-x exposes the
-  // horizontal padding so children can bleed (negative margin) to the
-  // panel edges and the watermark can match the inset.
-  // The three panels (summary on top, hours + plays beneath) only round
-  // their outer corners so they read as one continuous unit. Each panel
-  // exposes --panel-radius so the size can step down on smaller screens.
   .yir-2024-stats-panel {
     --panel-padding-x: var(--ni-44);
     --panel-padding-top: var(--ni-44);
@@ -301,8 +290,6 @@
     overflow: visible;
     padding: var(--panel-padding-top) var(--panel-padding-x)
       var(--panel-padding-bottom);
-    // Approximates v2's #112836 → #191C1E radial: a faint blue-tinged
-    // center at the top fading out to a darker charcoal everywhere else.
     background: radial-gradient(
       50% 39.27% at 50% 0%,
       color-mix(in srgb, var(--shade-950) 90%, var(--blue-500) 10%) 0%,
@@ -317,26 +304,19 @@
     }
   }
 
-  // Summary panel sits on top of the row pair: pill-rounded only on top.
   .yir-2024-stats-summary {
     border-top-left-radius: var(--panel-radius);
     border-top-right-radius: var(--panel-radius);
   }
 
-  // Hours card is the bottom-left of the desktop row.
   .yir-2024-stats-card-hours {
     border-bottom-left-radius: var(--panel-radius);
   }
 
-  // Plays card is the bottom-right of the desktop row.
   .yir-2024-stats-card-plays {
     border-bottom-right-radius: var(--panel-radius);
   }
 
-  // Once the cards stack vertically (tablet-sm-and-below), the hours card
-  // becomes the *middle* panel of the stack — drop its bottom corners — and
-  // the plays card becomes the bottom of the stack, so both its bottom
-  // corners pick up --panel-radius.
   @include for-tablet-sm-and-below {
     .yir-2024-stats-card-hours {
       border-bottom-left-radius: 0;
@@ -349,8 +329,6 @@
     }
   }
 
-  // Summary panel: heading + info on the left, weekly bar chart on the right.
-  // Stacks to a single column at tablet-sm-and-below.
   .yir-2024-stats-summary {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
@@ -381,17 +359,12 @@
       line-height: 1.3;
     }
 
-    // The i18n strings embed <b> around dynamic values; render those as
-    // bold purple inline highlights.
     :global(b) {
       color: var(--purple-300);
       font-weight: 700;
     }
   }
 
-  // The chart bleeds to the panel edges (negative horizontal margin) so the
-  // bar grid spans the full width of its column rather than sitting inside
-  // the panel's content padding.
   .yir-2024-stats-summary-chart {
     min-width: 0;
     width: auto;
@@ -403,10 +376,6 @@
     }
   }
 
-  // Each chart card stretches to the full inner width — line chart inside
-  // gets the entire row to render across. The card overrides the panel's
-  // bottom padding to a tighter value so the watermark sits closer to the
-  // averages list above it (no big empty gap between the two).
   .yir-2024-stats-card {
     --height-area-chart: var(--ni-104);
     --panel-padding-bottom: var(--ni-64);
@@ -447,17 +416,11 @@
     }
   }
 
-  // Same bleed treatment as the summary chart — let the line fill the
-  // entire card width.
   .yir-2024-stats-card-chart {
     margin: var(--ni-16) calc(-1 * var(--panel-padding-x)) 0;
     min-width: 0;
   }
 
-  // Averages list: each row's separator stretches edge-to-edge of the
-  // panel. The list itself bleeds outward; rows pull the inset back in
-  // via their own horizontal padding so the labels and values line up
-  // with the rest of the panel content.
   .yir-2024-stats-averages {
     margin: var(--ni-16) calc(-1 * var(--panel-padding-x)) 0;
     padding: 0;
@@ -495,9 +458,6 @@
     }
   }
 
-  // Faint repeated title at the bottom of each panel, partially clipped by
-  // overflow:hidden. Plain font-size that steps down at smaller viewports
-  // — no clamp / cqw cleverness so the size is predictable at every break.
   // Clips the watermark to the panel box (and its rounded corners) so the
   // panel itself can stay overflow:visible for chart tooltips.
   .yir-2024-stats-watermark-clip {

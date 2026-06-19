@@ -6,6 +6,7 @@ import type {
   YirGenresGroup,
   YirMostWatchedItem,
   YirStatsCategory,
+  YirStreamingServices,
   YirTopRatedItem,
   YirTrendItem,
   YirWatchedItem,
@@ -29,6 +30,7 @@ type RawDistributions = {
   monthly: number[];
   days: number[];
   hourly?: number[];
+  daily?: number[] | null;
 };
 
 type RawStatsCategory = {
@@ -108,7 +110,18 @@ type RawThanks = {
   movies?: Array<{ movie: MovieResponse }>;
 };
 
-type RawYirResponse = {
+type RawStreamingServices = {
+  country: string;
+  services: Array<{
+    source: string;
+    name: string;
+    shows: number;
+    movies: number;
+    all: number;
+  }>;
+};
+
+export type RawYirResponse = {
   stats: {
     all: RawStatsCategory & { lists_counts: RawStats };
     shows: RawStatsCategory;
@@ -143,6 +156,7 @@ type RawYirResponse = {
     movies: RawTrendMovie[];
   };
   thanks?: RawThanks;
+  streaming_services?: RawStreamingServices | null;
 };
 
 function mapStatsCategory(raw: RawStatsCategory): YirStatsCategory {
@@ -271,6 +285,23 @@ function mapThanks(
   };
 }
 
+function mapStreamingServices(
+  raw: RawStreamingServices | null | undefined,
+): YirStreamingServices | undefined {
+  if (!raw) return undefined;
+
+  return {
+    country: raw.country,
+    services: raw.services.map((service) => ({
+      source: service.source,
+      name: service.name,
+      shows: service.shows,
+      movies: service.movies,
+      all: service.all,
+    })),
+  };
+}
+
 export function mapToYirDetail(response: RawYirResponse): YirDetail {
   const { stats, images } = response;
 
@@ -320,5 +351,6 @@ export function mapToYirDetail(response: RawYirResponse): YirDetail {
       movies: mapTrendMovies(response.trends?.movies ?? []),
     },
     thanks: mapThanks(response.thanks ?? {}),
+    streamingServices: mapStreamingServices(response.streaming_services),
   };
 }
