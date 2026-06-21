@@ -13,6 +13,7 @@
   import ActivityList from "$lib/sections/lists/activity/ActivityList.svelte";
   import PersonalHistoryList from "$lib/sections/lists/history/PersonalHistoryList.svelte";
   import UpNextList from "$lib/sections/lists/progress/UpNextList.svelte";
+  import RecommendedList from "$lib/sections/lists/recommended/RecommendedList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
@@ -54,6 +55,13 @@
 
     <StreakCallout />
     <UpcomingList />
+    <RecommendedList
+      title={m.list_title_recommended()}
+      drilldownLabel={$mode === "show"
+        ? m.button_label_view_all_recommended_shows()
+        : m.button_label_view_all_recommended_movies()}
+      type={$mode}
+    />
     <PersonalHistoryList mode={$mode} />
     <ActivityList />
 
