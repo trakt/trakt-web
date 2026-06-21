@@ -133,6 +133,53 @@ describe('mapToSearchParamValue', () => {
     });
   });
 
+  describe('list filters with options appended outside the static filter', () => {
+    const streamingFilter: ListFilter = {
+      key: FilterKey.Streaming,
+      label: () => 'Streaming',
+      type: 'list',
+      options: [
+        { label: () => 'My Favorites', value: 'favorites' },
+        { label: () => 'Streaming Now', value: 'subscriptions' },
+        { label: () => 'Free', value: 'free' },
+        { label: () => 'All Digital Releases', value: 'any' },
+      ],
+      advanced: {
+        type: 'multi-select',
+      },
+    };
+
+    it('should pass a brand value of joined slugs through untouched', () => {
+      const result = mapToSearchParamValue({
+        filter: streamingFilter,
+        value: 'netflix,netflix_standard_with_ads',
+        user: mockUser,
+      });
+
+      expect(result).toBe('netflix,netflix_standard_with_ads');
+    });
+
+    it('should keep the exclusion prefix on each excluded slug', () => {
+      const result = mapToSearchParamValue({
+        filter: streamingFilter,
+        value: '-netflix,-hulu',
+        user: mockUser,
+      });
+
+      expect(result).toBe('-netflix,-hulu');
+    });
+
+    it('should combine a static option with appended slugs', () => {
+      const result = mapToSearchParamValue({
+        filter: streamingFilter,
+        value: 'subscriptions,netflix',
+        user: mockUser,
+      });
+
+      expect(result).toBe('subscriptions,netflix');
+    });
+  });
+
   describe('ratings filters', () => {
     const ratingsFilter: RatingsFilter = {
       key: FilterKey.Ratings,
