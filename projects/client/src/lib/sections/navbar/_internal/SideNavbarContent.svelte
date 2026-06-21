@@ -44,6 +44,7 @@
     <RenderFor audience="authenticated">
       {@render navSubLink(UrlBuilder.progress("me"), m.list_title_up_next())}
       {@render navSubLink(UrlBuilder.calendar(), m.page_title_calendar())}
+      {@render navSubLink(UrlBuilder.recommended(), m.list_title_recommended())}
     </RenderFor>
   </NavGroup>
 
@@ -56,12 +57,11 @@
       {isCollapsed}
     >
       {@render navSubLink(UrlBuilder.trending(), m.list_title_trending())}
-      {@render navSubLink(UrlBuilder.recommended(), m.list_title_recommended())}
+      {@render navSubLink(UrlBuilder.releases(), m.list_title_releases())}
       {@render navSubLink(
         UrlBuilder.anticipated(),
         m.list_title_most_anticipated(),
       )}
-      {@render navSubLink(UrlBuilder.releases(), m.list_title_releases())}
       {@render navSubLink(UrlBuilder.popular(), m.list_title_most_popular())}
     </NavGroup>
 

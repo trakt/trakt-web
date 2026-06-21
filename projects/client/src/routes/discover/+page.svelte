@@ -10,7 +10,6 @@
   import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
   import PopularList from "$lib/sections/lists/popular/PopularList.svelte";
   import ReleasesList from "$lib/sections/lists/ReleasesList.svelte";
-  import RecommendedList from "$lib/sections/lists/recommended/RecommendedList.svelte";
   import TrendingList from "$lib/sections/lists/trending/TrendingList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
@@ -75,16 +74,9 @@
     type={$type}
     filterOverride={getThemeFilters("trending")}
   />
-  <RenderFor audience="authenticated">
-    <RecommendedList
-      title={m.list_title_recommended()}
-      drilldownLabel={$type === "show"
-        ? m.button_label_view_all_recommended_shows()
-        : m.button_label_view_all_recommended_movies()}
-      type={$type}
-      filterOverride={getThemeFilters("recommended")}
-    />
-  </RenderFor>
+  
+  <ReleasesList />
+
   <AnticipatedList
     drilldownLabel={$type === "show"
       ? m.button_label_view_all_anticipated_shows()
@@ -93,9 +85,6 @@
     type={$type}
     filterOverride={getThemeFilters("anticipated")}
   />
-  <RenderFor audience="authenticated">
-    <ReleasesList />
-  </RenderFor>
   <PopularList
     drilldownLabel={$type === "show"
       ? m.button_label_view_all_popular_shows()
