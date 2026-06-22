@@ -9,7 +9,7 @@ type StartShowRewatchingParams = {
 export async function startShowRewatchingRequest(
   { fetch, id }: StartShowRewatchingParams,
 ): Promise<boolean> {
-  const resetAt = new Date(Date.now() - time.minutes(1)).toISOString();
+  const resetAt = new Date(Date.now() - time.minutes(3)).toISOString();
 
   const response = await rawApiFetch({
     fetch,
