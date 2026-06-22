@@ -2,12 +2,10 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import CoverImageIcon from "$lib/components/icons/CoverImageIcon.svelte";
-  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
-  import CoverImageUpsellLink from "./_internal/CoverImageUpsellLink.svelte";
   import { useCoverImage } from "./useCoverImage";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
 
   type SetCoverImageActionProps = {
     style: "action" | "dropdown-item";
@@ -32,38 +30,26 @@
   const commonProps = $derived({
     onclick: setCoverImage,
     label: m.button_label_set_cover_image({ title }),
+    disabled: $isSettingCoverImage,
   });
 </script>
 
-{#snippet actionButton(isDisabled: boolean)}
-  <ActionButton style="ghost" disabled={isDisabled} {...commonProps}>
+{#snippet icon()}
+  {#if $isSettingCoverImage}
+    <LoadingIndicator />
+  {:else}
     <CoverImageIcon />
-  </ActionButton>
+  {/if}
 {/snippet}
 
-<RenderFor audience="free">
-  {#if style === "action"}
-    <Tooltip content="Only available for VIP members">
-      {@render actionButton(true)}
-    </Tooltip>
-  {/if}
+{#if style === "action"}
+  <ActionButton style="ghost" {...commonProps}>
+    {@render icon()}
+  </ActionButton>
+{/if}
 
-  {#if style === "dropdown-item"}
-    <CoverImageUpsellLink />
-  {/if}
-</RenderFor>
-
-<RenderFor audience="vip">
-  {#if style === "action"}
-    {@render actionButton($isSettingCoverImage)}
-  {/if}
-
-  {#if style === "dropdown-item"}
-    <DropdownItem color="default" style="flat" {variant} {...commonProps}>
-      {m.button_text_set_cover_image()}
-      {#snippet icon()}
-        <CoverImageIcon />
-      {/snippet}
-    </DropdownItem>
-  {/if}
-</RenderFor>
+{#if style === "dropdown-item"}
+  <DropdownItem color="default" style="flat" {variant} {...commonProps} {icon}>
+    {m.button_text_set_cover_image()}
+  </DropdownItem>
+{/if}
