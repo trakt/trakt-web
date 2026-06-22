@@ -7,7 +7,7 @@ describe('show rewatching requests', () => {
     vi.useRealTimers();
   });
 
-  it('should start a rewatch session one minute before now', async () => {
+  it('should start a rewatch session three minutes before now', async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2026-06-18T12:00:00.000Z'));
 
@@ -25,7 +25,7 @@ describe('show rewatching requests', () => {
       'http://localhost/shows/123/progress/watched/reset',
       expect.objectContaining({
         method: 'POST',
-        body: JSON.stringify({ reset_at: '2026-06-18T11:59:00.000Z' }),
+        body: JSON.stringify({ reset_at: '2026-06-18T11:57:00.000Z' }),
       }),
     );
   });
