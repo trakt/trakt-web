@@ -26,6 +26,7 @@
 
 <TraktPage audience="all" {title} image={DEFAULT_SHARE_COVER}>
   <NavbarStateSetter
+    hasFilters
     header={{
       title,
       actions: headerActions,

@@ -1,6 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import { useFilter } from "$lib/features/filters/useFilter";
   import type {
     CrewPosition,
     CrewPositions,
@@ -9,9 +10,12 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CreditMediaItem from "./components/CreditMediaItem.svelte";
   import CreditsPositionDropdown from "./components/CreditsPositionDropdown.svelte";
+  import NoFilterResultsPlaceholder from "./drilldown/_internal/NoFilterResultsPlaceholder.svelte";
+  import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
@@ -26,6 +30,8 @@
   const { title, type, person, positions, drilldownLink }: CreditsListProps =
     $props();
 
+  const { filterMap, hasActiveFilter } = useFilter();
+
   const selectedPosition = $derived.by(() => {
     const defaultPosition = person.knownFor ?? "acting";
     const position = positions?.[`${type}s`];
@@ -33,9 +39,15 @@
     return position ?? defaultPosition;
   });
 
-  const { credits, positions: allPositions } = $derived(
-    useCreditsList({ type, slug: person.slug }),
-  );
+  const {
+    credits,
+    isLoading,
+    positions: allPositions,
+  } = useCreditsList({
+    type$: fromRune(() => type),
+    slug$: fromRune(() => person.slug),
+    filter$: filterMap,
+  });
 
   const getPositionList = (mediaCredits?: MediaCredits) => {
     if (!mediaCredits) return [];
@@ -76,6 +88,14 @@
 >
   {#snippet item(entry)}
     <CreditMediaItem mediaCredit={entry} source="credits" mode="standalone" />
+  {/snippet}
+
+  {#snippet empty()}
+    {#if $isLoading}
+      <SkeletonList id={`credits-list-${type}`} variant={$defaultVariant} />
+    {:else if $hasActiveFilter}
+      <NoFilterResultsPlaceholder />
+    {/if}
   {/snippet}
 
   {#snippet actions()}

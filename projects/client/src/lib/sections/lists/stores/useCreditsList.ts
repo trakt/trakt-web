@@ -9,17 +9,22 @@ import type {
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { personMovieCreditsQuery } from '$lib/requests/queries/people/personMovieCreditsQuery.ts';
 import { personShowCreditsQuery } from '$lib/requests/queries/people/personShowCreditsQuery.ts';
-import { map, of, switchMap } from 'rxjs';
+import { combineLatest, map, type Observable, of, switchMap } from 'rxjs';
 
 type UseCreditsListProps = {
-  type: MediaType;
-  slug: string;
+  type$: Observable<MediaType>;
+  slug$: Observable<string>;
+  filter$: Observable<Record<string, string>>;
 };
 
 function typeToQuery(
-  { type, slug }: UseCreditsListProps,
+  { type, slug, filter }: {
+    type: MediaType;
+    slug: string;
+    filter: Record<string, string>;
+  },
 ) {
-  const params = { slug };
+  const params = { slug, filter };
 
   switch (type) {
     case 'movie':
@@ -75,9 +80,13 @@ function rebuildCredits(
 }
 
 export function useCreditsList(
-  { type, slug }: UseCreditsListProps,
+  { type$, slug$, filter$ }: UseCreditsListProps,
 ) {
-  const query = useQuery(typeToQuery({ type, slug }));
+  const query = useQuery(
+    combineLatest([type$, slug$, filter$]).pipe(
+      map(([type, slug, filter]) => typeToQuery({ type, slug, filter })),
+    ),
+  );
 
   const overlay = createBulkIntlOverlay<FlatCredit>({
     getTargets: flatCreditTargets,
@@ -97,6 +106,7 @@ export function useCreditsList(
 
   return {
     credits,
+    isLoading: query.pipe(map(($query) => $query.isLoading)),
     positions: query.pipe(
       map(($query) => {
         if (!$query.data) return [];

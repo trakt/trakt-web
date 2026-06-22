@@ -10,11 +10,12 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { personMovieCreditsQuery } from '$lib/requests/queries/people/personMovieCreditsQuery.ts';
 import { personShowCreditsQuery } from '$lib/requests/queries/people/personShowCreditsQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { combineLatest, map } from 'rxjs';
+import { combineLatest, map, type Observable } from 'rxjs';
 import { toLoadingState } from '../../../../utils/requests/toLoadingState.ts';
 
 type UseHistoryCreditsListProps = {
-  slug: string;
+  slug$: Observable<string>;
+  filter$: Observable<Record<string, string>>;
 };
 
 const mediaCreditTargets = makeTargets<MediaCredit>({
@@ -41,12 +42,20 @@ const getWatchedAt = (media: MediaEntry, history: UserHistory) => {
 };
 
 export function useHistoryCreditsList(
-  { slug }: UseHistoryCreditsListProps,
+  { slug$, filter$ }: UseHistoryCreditsListProps,
 ) {
   const { history } = useUser();
 
-  const movieQuery = useQuery(personMovieCreditsQuery({ slug }));
-  const showQuery = useQuery(personShowCreditsQuery({ slug }));
+  const movieQuery = useQuery(
+    combineLatest([slug$, filter$]).pipe(
+      map(([slug, filter]) => personMovieCreditsQuery({ slug, filter })),
+    ),
+  );
+  const showQuery = useQuery(
+    combineLatest([slug$, filter$]).pipe(
+      map(([slug, filter]) => personShowCreditsQuery({ slug, filter })),
+    ),
+  );
 
   const history$ = history;
   const movies$ = movieQuery;

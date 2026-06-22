@@ -14,6 +14,7 @@
   import PersonDetails from "./_internal/PersonDetails.svelte";
   import SocialMediaLinks from "./_internal/SocialMediaLinks.svelte";
   import { hasSocialMediaLinks } from "./_internal/hasSocialMediaLinks";
+  import FilterButton from "$lib/sections/navbar/components/filter/FilterButton.svelte";
 
   const { person }: { person: PersonSummary } = $props();
 </script>
@@ -30,6 +31,8 @@
   {/snippet}
 
   {#snippet sideActions()}
+    <FilterButton isDisabled={false} />
+
     <ShareButton
       title={person.name}
       textFactory={({ title: name }) => m.text_share_person({ name })}
