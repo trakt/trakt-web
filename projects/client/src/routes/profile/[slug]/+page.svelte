@@ -42,6 +42,7 @@
   image={DEFAULT_SHARE_COVER}
   {title}
   hasDynamicContent={true}
+  filterScope="global"
 >
   <RenderFor audience="authenticated">
     <NavbarStateSetter>

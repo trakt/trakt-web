@@ -3,7 +3,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import SeasonalToggle from "$lib/features/theme/components/SeasonalToggle.svelte";
   import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
@@ -53,6 +52,7 @@
   image={DEFAULT_SHARE_SHOW_COVER}
   {title}
   info={{ overview }}
+  filterScope="global"
 >
   <TraktPageCoverSetter />
 
@@ -74,7 +74,7 @@
     type={$type}
     filterOverride={getThemeFilters("trending")}
   />
-  
+
   <ReleasesList />
 
   <AnticipatedList

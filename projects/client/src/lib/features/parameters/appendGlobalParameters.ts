@@ -1,10 +1,38 @@
 import {
+  filterScopeStore,
+  type FilterScopeValue,
+} from '$lib/features/filters/filterScopeStore.ts';
+import {
   LOCAL_PARAMS,
   WHITE_LISTED_PARAMS,
 } from '$lib/features/parameters/_internal/constants.ts';
+import { FILTER_KEYS } from '$lib/features/filters/filterKeys.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
 import { buildParamString } from '$lib/utils/url/buildParamString.ts';
 import { combineLatest } from 'rxjs';
+
+function buildEffectiveSearch({
+  search,
+  filterScope,
+  overrideKey,
+}: {
+  search: URLSearchParams;
+  filterScope: FilterScopeValue;
+  overrideKey: string;
+}): URLSearchParams {
+  if (!filterScope) return search;
+
+  const result = new URLSearchParams(search);
+  for (const key of FILTER_KEYS) {
+    result.delete(key);
+  }
+  for (const [key, value] of Object.entries(filterScope)) {
+    if (key !== overrideKey) {
+      result.set(key, value);
+    }
+  }
+  return result;
+}
 
 export function appendGlobalParameters(
   anchor: HTMLAnchorElement,
@@ -17,12 +45,14 @@ export function appendGlobalParameters(
   // in sync when the action parameter changes reactively.
   let originalHref = href ?? anchor.getAttribute('href') ?? '';
 
-  let latestValues: [URLSearchParams, string, boolean] | null = null;
+  let latestValues:
+    | [URLSearchParams, string, boolean, FilterScopeValue]
+    | null = null;
 
   const applyParams = () => {
     if (!latestValues) return;
 
-    const [$search, $override, $isEscaped] = latestValues;
+    const [$search, $override, $isEscaped, $filterScope] = latestValues;
 
     if ($isEscaped) return;
 
@@ -39,22 +69,31 @@ export function appendGlobalParameters(
         .filter(([key]) => LOCAL_PARAMS.includes(key))
       : [];
 
+    // Same-path navigation (type/sort toggles, etc.) must reflect the user's
+    // live filter edits. Only outbound (different-path) links fall back to the
+    // frozen local snapshot, so navigating away restores the global filters.
+    const effectiveSearch = isSamePath ? $search : buildEffectiveSearch({
+      search: $search,
+      filterScope: $filterScope,
+      overrideKey: $override,
+    });
+
     const params = Object.fromEntries([
       ...localParams,
       ...Array.from(url.searchParams.entries())
         .filter(([key]) =>
           key === $override || !WHITE_LISTED_PARAMS.includes(key)
         ),
-      ...$search.entries(),
+      ...effectiveSearch.entries(),
     ]);
 
     anchor.href = `${url.pathname}${buildParamString(params)}`;
   };
 
   const subscription = combineLatest(
-    [search, override, isEscaped],
+    [search, override, isEscaped, filterScopeStore],
   ).subscribe({
-    next: (values: [URLSearchParams, string, boolean]) => {
+    next: (values: [URLSearchParams, string, boolean, FilterScopeValue]) => {
       latestValues = values;
       applyParams();
     },

@@ -27,6 +27,7 @@
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_lists()}
+  filterScope="global"
 >
   {#if !$isMe}
     <Redirect to={UrlBuilder.profile.user(params.user)} />

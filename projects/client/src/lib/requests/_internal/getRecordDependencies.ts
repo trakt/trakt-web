@@ -1,6 +1,6 @@
 export function getRecordDependencies(
   params: Record<string, string | number | boolean> | Nil,
-  whitelist?: string[],
+  whitelist?: readonly string[],
 ): string[] {
   if (!params) {
     return [];
