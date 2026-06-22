@@ -48,7 +48,12 @@
 
   <SmartLists mode={$mode} />
 
-  <PersonalLists slug={$user.slug} type="personal" mode={$mode} />
-  <PersonalLists slug={$user.slug} type="liked" mode={$mode} />
-  <PersonalLists slug={$user.slug} type="collaboration" mode={$mode} />
+  <PersonalLists slug={$user.slug} type="personal" mode={$mode} display="compact" />
+  <PersonalLists slug={$user.slug} type="liked" mode={$mode} display="compact" />
+  <PersonalLists
+    slug={$user.slug}
+    type="collaboration"
+    mode={$mode}
+    display="compact"
+  />
 </TraktPage>
