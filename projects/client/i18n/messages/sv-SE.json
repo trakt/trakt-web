@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Översikt är inte tillgänglig.",
   "text_personal_note": "Personlig anteckning",
   "text_pick_history_slot": "Välj var \"{title}\" passar in i din tittarhistorik.",
+  "text_placeholder_generic": "Inget att se här.",
   "text_placeholder_preview_features": "För närvarande finns inga förhandsfunktioner. Kom tillbaka senare.",
   "text_play_count": "{count} visningar",
   "text_plex_auth_waiting": "En Plex-auktoriseringssida har öppnats. Slutför inloggningen där och klicka sedan på knappen nedan.",

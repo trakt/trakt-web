@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Прегледът не е наличен.",
   "text_personal_note": "Лична бележка",
   "text_pick_history_slot": "Изберете къде „{title}“ се вписва в историята ви на гледане.",
+  "text_placeholder_generic": "Няма нищо за разглеждане.",
   "text_placeholder_preview_features": "В момента няма налични функции за предварителен преглед. Проверете по-късно.",
   "text_play_count": "{count} гледания",
   "text_plex_auth_waiting": "Отвори се страница за оторизация на Plex. Завършете влизането там, след което кликнете върху бутона по-долу.",

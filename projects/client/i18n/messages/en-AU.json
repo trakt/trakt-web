@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Overview is not available.",
   "text_personal_note": "Personal Note",
   "text_pick_history_slot": "Pick where \"{title}\" fits into your watch history.",
+  "text_placeholder_generic": "Nothing to see here.",
   "text_placeholder_preview_features": "Currently there aren't any preview features. Check back later.",
   "text_play_count": "{count} plays",
   "text_plex_auth_waiting": "A Plex authorisation page has been opened. Complete the sign-in there, then click the button below.",

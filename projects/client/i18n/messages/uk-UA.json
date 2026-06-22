@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Опис недоступний.",
   "text_personal_note": "Особиста нотатка",
   "text_pick_history_slot": "Оберіть, куди \"{title}\" вписується в історію ваших переглядів.",
+  "text_placeholder_generic": "Тут нічого немає.",
   "text_placeholder_preview_features": "Наразі немає функцій попереднього перегляду. Перевірте пізніше.",
   "text_play_count": "{count} переглядів",
   "text_plex_auth_waiting": "Сторінку авторизації Plex відкрито. Завершіть вхід там, а потім натисніть кнопку нижче.",

@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Prezentarea generală nu este disponibilă.",
   "text_personal_note": "Notă personală",
   "text_pick_history_slot": "Alege unde se încadrează „{title}” în istoricul tău de vizionare",
+  "text_placeholder_generic": "Nimic de văzut aici.",
   "text_placeholder_preview_features": "În prezent nu există funcții de previzualizare. Revino mai târziu.",
   "text_play_count": "{count} vizionări",
   "text_plex_auth_waiting": "O pagină de autorizare Plex a fost deschisă. Finalizează autentificarea acolo, apoi apasă pe butonul de mai jos.",

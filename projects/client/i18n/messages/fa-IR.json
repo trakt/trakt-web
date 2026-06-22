@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "نمای کلی در دسترس نیست.",
   "text_personal_note": "یادداشت شخصی",
   "text_pick_history_slot": "انتخاب کنید \"{title}\" در کدام بخش تاریخچه تماشای شما قرار می‌گیرد.",
+  "text_placeholder_generic": "اینجا چیزی برای نمایش نیست.",
   "text_placeholder_preview_features": "در حال حاضر هیچ ویژگی پیش‌نمایشی وجود ندارد. بعداً دوباره بررسی کنید.",
   "text_play_count": "{count} پخش",
   "text_plex_auth_waiting": "صفحه مجوزدهی Plex باز شده است. ورود به سیستم را در آنجا تکمیل کنید، سپس روی دکمه زیر کلیک کنید.",

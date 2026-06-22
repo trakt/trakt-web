@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Ikhtisar tidak tersedia.",
   "text_personal_note": "Catatan Pribadi",
   "text_pick_history_slot": "Pilih di mana \"{title}\" masuk dalam riwayat tontonan Anda.",
+  "text_placeholder_generic": "Tidak ada apa-apa di sini.",
   "text_placeholder_preview_features": "Saat ini tidak ada fitur pratinjau. Coba periksa lagi nanti.",
   "text_play_count": "{count} putaran",
   "text_plex_auth_waiting": "Halaman otorisasi Plex telah dibuka. Selesaikan proses masuk di sana, lalu klik tombol di bawah.",

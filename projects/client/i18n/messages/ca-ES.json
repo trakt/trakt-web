@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "La sinopsi no està disponible.",
   "text_personal_note": "Nota personal",
   "text_pick_history_slot": "Tria on s'ajusta \"{title}\" al teu historial de visualitzacions.",
+  "text_placeholder_generic": "Res a veure aquí.",
   "text_placeholder_preview_features": "Actualment no hi ha funcions de previsualització. Torna-hi més tard.",
   "text_play_count": "{count} reproduccions",
   "text_plex_auth_waiting": "S'ha obert una pàgina d'autorització de Plex. Completa l'inici de sessió allà i, a continuació, fes clic al botó de sota.",

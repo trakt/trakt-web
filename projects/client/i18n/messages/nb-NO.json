@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Oversikt er ikke tilgjengelig.",
   "text_personal_note": "Personlig notat",
   "text_pick_history_slot": "Velg hvor \"{title}\" passer inn i din seerhistorikk.",
+  "text_placeholder_generic": "Ingenting å se her.",
   "text_placeholder_preview_features": "Det er for øyeblikket ingen forhåndsvisningsfunksjoner. Kom tilbake senere.",
   "text_play_count": "{count} avspillinger",
   "text_plex_auth_waiting": "En Plex-autoriseringsside har blitt åpnet. Fullfør innloggingen der, og klikk deretter på knappen nedenfor.",

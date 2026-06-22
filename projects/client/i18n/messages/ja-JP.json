@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "概要は利用できません。",
   "text_personal_note": "個人ノート",
   "text_pick_history_slot": "「{title}」を視聴履歴のどこに記録するか選択してください。",
+  "text_placeholder_generic": "表示するものがありません。",
   "text_placeholder_preview_features": "現在、プレビュー機能はありません。後でご確認ください。",
   "text_play_count": "{count}回再生",
   "text_plex_auth_waiting": "Plexの認証ページが開かれました。そちらでサインインを完了し、以下のボタンをクリックしてください。",

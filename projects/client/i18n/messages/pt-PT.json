@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Visão geral não disponível.",
   "text_personal_note": "Nota Pessoal",
   "text_pick_history_slot": "Escolha onde \"{title}\" se encaixa no seu histórico de visualização.",
+  "text_placeholder_generic": "Nada para ver aqui.",
   "text_placeholder_preview_features": "Atualmente não há recursos de pré-visualização. Volte mais tarde.",
   "text_play_count": "{count} reproduções",
   "text_plex_auth_waiting": "Uma página de autorização do Plex foi aberta. Conclua o login lá e, em seguida, clique no botão abaixo.",

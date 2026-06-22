@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Oversigt er ikke tilgængelig.",
   "text_personal_note": "Personlig note",
   "text_pick_history_slot": "Vælg hvor \"{title}\" passer ind i din set-historik.",
+  "text_placeholder_generic": "Intet at se her.",
   "text_placeholder_preview_features": "Der er i øjeblikket ingen forhåndsvisningsfunktioner. Tjek tilbage senere.",
   "text_play_count": "{count} visninger",
   "text_plex_auth_waiting": "En Plex-godkendelsesside er blevet åbnet. Fuldfør login der, og klik derefter på knappen nedenfor.",

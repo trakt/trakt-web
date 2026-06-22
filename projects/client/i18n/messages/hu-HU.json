@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Az áttekintés nem elérhető.",
   "text_personal_note": "Személyes jegyzet",
   "text_pick_history_slot": "Válaszd ki, hová illik a(z) „{title}” a nézési előzményeidbe.",
+  "text_placeholder_generic": "Nincs itt semmi.",
   "text_placeholder_preview_features": "Jelenleg nincsenek előnézeti funkciók. Nézz vissza később.",
   "text_play_count": "{count} lejátszás",
   "text_plex_auth_waiting": "Megnyílt egy Plex engedélyezési oldal. Fejezd be a bejelentkezést ott, majd kattints az alábbi gombra.",

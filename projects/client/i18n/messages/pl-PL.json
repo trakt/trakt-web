@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Opis jest niedostępny.",
   "text_personal_note": "Notatka osobista",
   "text_pick_history_slot": "Wybierz, gdzie „{title}” pasuje do Twojej historii oglądania.",
+  "text_placeholder_generic": "Nic tu nie ma.",
   "text_placeholder_preview_features": "Brak nowych funkcjonalności. Sprawdź później.",
   "text_play_count": "{count} odtworzeń",
   "text_plex_auth_waiting": "Strona autoryzacji Plex została otwarta. Zaloguj się tam, a następnie kliknij przycisk poniżej.",

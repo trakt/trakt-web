@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "L'aperçu n'est pas disponible.",
   "text_personal_note": "Note personnelle",
   "text_pick_history_slot": "Choisissez où \"{title}\" s'insère dans votre historique de visionnement.",
+  "text_placeholder_generic": "Rien à afficher ici.",
   "text_placeholder_preview_features": "Il n'y a actuellement aucune fonctionnalité en avant-première. Revenez plus tard.",
   "text_play_count": "{count} lectures",
   "text_plex_auth_waiting": "Une page d'autorisation Plex a été ouverte. Terminez la connexion là-bas, puis cliquez sur le bouton ci-dessous.",

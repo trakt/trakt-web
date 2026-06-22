@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Übersicht nicht verfügbar.",
   "text_personal_note": "Persönliche Notiz",
   "text_pick_history_slot": "Wählen Sie, wo \"{title}\" in Ihre Historie passt.",
+  "text_placeholder_generic": "Nichts zu sehen hier.",
   "text_placeholder_preview_features": "Derzeit sind keine Vorschau-Funktionen verfügbar. Schauen Sie später noch einmal vorbei.",
   "text_play_count": "{count} Wiedergaben",
   "text_plex_auth_waiting": "Eine Plex-Autorisierungsseite wurde geöffnet. Schließen Sie dort die Anmeldung ab und klicken Sie dann auf die Schaltfläche unten.",

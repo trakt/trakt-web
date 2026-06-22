@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Descripción no disponible.",
   "text_personal_note": "Nota personal",
   "text_pick_history_slot": "Elige dónde \"{title}\" encaja en tu historial de reproducciones.",
+  "text_placeholder_generic": "Nada que mostrar aquí.",
   "text_placeholder_preview_features": "Actualmente no hay funciones de vista previa. Vuelve a consultar más tarde.",
   "text_play_count": "{count} reproducciones",
   "text_plex_auth_waiting": "Se ha abierto una página de autorización de Plex. Completa el inicio de sesión allí, luego haz clic en el botón de abajo.",

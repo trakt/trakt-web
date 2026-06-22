@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "Genel bakış mevcut değil.",
   "text_personal_note": "Kişisel Not",
   "text_pick_history_slot": "“{title}”ın izleme geçmişinizdeki yerini belirleyin.",
+  "text_placeholder_generic": "Gösterilecek hiçbir şey yok.",
   "text_placeholder_preview_features": "Şu anda herhangi bir önizleme özelliği bulunmamaktadır. Daha sonra tekrar kontrol edin.",
   "text_play_count": "{count} oynatma",
   "text_plex_auth_waiting": "Bir Plex yetkilendirme sayfası açıldı. Oturum açma işlemini orada tamamlayın, ardından aşağıdaki düğmeye tıklayın.",

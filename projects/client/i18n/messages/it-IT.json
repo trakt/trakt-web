@@ -1153,6 +1153,7 @@
   "text_overview_placeholder": "La panoramica non è disponibile.",
   "text_personal_note": "Nota personale",
   "text_pick_history_slot": "Scegli dove collocare \"{title}\" nella tua cronologia.",
+  "text_placeholder_generic": "Niente da vedere qui.",
   "text_placeholder_preview_features": "Al momento non ci sono funzionalità in anteprima. Riprova più tardi.",
   "text_play_count": "{count} riproduzioni",
   "text_plex_auth_waiting": "È stata aperta una pagina di autorizzazione Plex. Completa l'accesso lì, quindi clicca sul pulsante qui sotto.",
