@@ -22,6 +22,7 @@
 
 <TraktPage audience="authenticated" {title} image={DEFAULT_SHARE_COVER}>
   <NavbarStateSetter
+    hasFilters
     header={{
       title,
     }}

@@ -5,6 +5,8 @@
     type CrewPosition,
   } from "$lib/requests/models/CrewPosition";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import { useFilter } from "$lib/features/filters/useFilter";
   import { useCreditsList } from "../stores/useCreditsList";
   import CreditsPositionDropdown from "./CreditsPositionDropdown.svelte";
 
@@ -21,7 +23,13 @@
     ).data ?? "acting",
   );
 
-  const { positions: allPositions } = $derived(useCreditsList({ type, slug }));
+  const { filterMap } = useFilter();
+
+  const { positions: allPositions } = useCreditsList({
+    type$: fromRune(() => type),
+    slug$: fromRune(() => slug),
+    filter$: filterMap,
+  });
 
   const buildPositionHref = (position: CrewPosition) => {
     const url = new URL(page.url.toString());

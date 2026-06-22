@@ -14,6 +14,7 @@
   import ImdbLink from "./v2/_internal/ImdbLink.svelte";
   import PersonDetails from "./v2/_internal/PersonDetails.svelte";
   import SocialMediaLinks from "./v2/_internal/SocialMediaLinks.svelte";
+  import FilterButton from "$lib/sections/navbar/components/filter/FilterButton.svelte";
 
   const { person }: { person: PersonSummary } = $props();
 </script>
@@ -32,6 +33,7 @@
   <div class="trakt-summary-main-content">
     <SummaryHeader title={person.name}>
       {#snippet headerActions()}
+        <FilterButton isDisabled={false} />
         <ShareButton
           title={person.name}
           textFactory={({ title: name }) => m.text_share_person({ name })}

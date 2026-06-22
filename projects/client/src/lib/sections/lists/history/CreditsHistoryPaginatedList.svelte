@@ -2,7 +2,10 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import { useFilter } from "$lib/features/filters/useFilter";
   import CreditMediaItem from "../components/CreditMediaItem.svelte";
+  import NoFilterResultsPlaceholder from "../drilldown/_internal/NoFilterResultsPlaceholder.svelte";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { useHistoryCreditsList } from "./_internal/useHistoryCreditsList";
 
   type CreditsHistoryPaginatedListProps = {
@@ -12,7 +15,12 @@
 
   const { slug, name }: CreditsHistoryPaginatedListProps = $props();
 
-  const { list, isLoading } = $derived(useHistoryCreditsList({ slug }));
+  const { filterMap, hasActiveFilter } = useFilter();
+
+  const { list, isLoading } = useHistoryCreditsList({
+    slug$: fromRune(() => slug),
+    filter$: filterMap,
+  });
 </script>
 
 <GridList
@@ -31,7 +39,9 @@
   {/snippet}
 
   {#snippet empty()}
-    {#if $isLoading}
+    {#if $hasActiveFilter && !$isLoading}
+      <NoFilterResultsPlaceholder />
+    {:else if $isLoading}
       <LoadingIndicator />
     {:else}
       <p class="secondary">

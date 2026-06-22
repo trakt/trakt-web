@@ -31,7 +31,7 @@
   image={$person?.headshot?.url.medium}
 >
   <RenderFor audience="authenticated">
-    <NavbarStateSetter mode="minimal" />
+    <NavbarStateSetter mode="minimal" hasFilters />
   </RenderFor>
 
   {#if !$isLoading}
