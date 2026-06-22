@@ -9,6 +9,7 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import SmartLists from "$lib/sections/lists/smart/SmartLists.svelte";
   import PersonalLists from "$lib/sections/lists/user/PersonalLists.svelte";
+  import type { PersonalListType } from "$lib/sections/lists/user/models/PersonalListType.ts";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
@@ -21,6 +22,12 @@
   const { user } = useUser();
 
   const { isMe } = $derived(useIsMe(params.user));
+
+  const personalListTypes: PersonalListType[] = [
+    "personal",
+    "liked",
+    "collaboration",
+  ];
 </script>
 
 <TraktPage
@@ -48,7 +55,7 @@
 
   <SmartLists mode={$mode} />
 
-  <PersonalLists slug={$user.slug} type="personal" mode={$mode} />
-  <PersonalLists slug={$user.slug} type="liked" mode={$mode} />
-  <PersonalLists slug={$user.slug} type="collaboration" mode={$mode} />
+  {#each personalListTypes as type (type)}
+    <PersonalLists slug={$user.slug} {type} mode={$mode} display="compact" />
+  {/each}
 </TraktPage>
