@@ -1,13 +1,15 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
-import { bulkIntlQuery } from '$lib/requests/queries/intl/bulkIntlQuery.ts';
 import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
+import { bulkIntlQuery } from '$lib/requests/queries/intl/bulkIntlQuery.ts';
 import {
+  asapScheduler,
   BehaviorSubject,
   catchError,
   from,
   map,
   type Observable,
+  observeOn,
   of,
   type OperatorFunction,
   startWith,
@@ -92,5 +94,12 @@ export function createBulkIntlOverlay<T>(
       startWith([] as T[]),
     );
 
-  return { operator, intlLoading$ };
+  // Defer loading-state emissions to the microtask queue so subscribers
+  // reading `intlLoading$` inside a Svelte `$derived` don't observe a write
+  // mid-evaluation (state_unsafe_mutation). The `entries$` data stream stays
+  // synchronous.
+  return {
+    operator,
+    intlLoading$: intlLoading$.pipe(observeOn(asapScheduler)),
+  };
 }
