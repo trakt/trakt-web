@@ -15,7 +15,6 @@ import {
   type MovieProgressEntry,
   MovieProgressSchema,
 } from '../../models/MovieProgressEntry.ts';
-import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
 import { sortMovieProgress } from './_internal/sortMovieProgress.ts';
 
 type MovieProgressParams =
@@ -79,8 +78,7 @@ export const movieProgressQuery = defineInfiniteQuery({
   request: movieProgressRequest,
   mapper: (response, { sortBy, sortHow }) => {
     const entries = response.body
-      .map(mapToMovieProgressEntry)
-      .filter(isValidProgressMovie);
+      .map(mapToMovieProgressEntry);
 
     return {
       entries: sortMovieProgress({ entries, sortBy, sortHow }),

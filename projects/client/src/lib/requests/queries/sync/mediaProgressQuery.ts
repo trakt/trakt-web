@@ -13,7 +13,6 @@ import type { FilterParams } from '../../models/FilterParams.ts';
 import { MovieProgressSchema } from '../../models/MovieProgressEntry.ts';
 import { UpNextEntrySchema } from '../../models/UpNextEntry.ts';
 import { interleaveMediaProgress } from './_internal/interleaveMediaProgress.ts';
-import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
 import {
   mapToMovieProgressEntry,
   movieProgressRequest,
@@ -66,8 +65,7 @@ export const mediaProgressQuery = defineInfiniteQuery({
       .map(mapUpNextResponse);
 
     const movies = movieProgressResponse.body
-      .map(mapToMovieProgressEntry)
-      .filter(isValidProgressMovie);
+      .map(mapToMovieProgressEntry);
 
     return {
       entries: interleaveMediaProgress({
