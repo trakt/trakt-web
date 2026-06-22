@@ -31,6 +31,7 @@
       width: 75%;
 
       object-fit: cover;
+      content-visibility: visible;
     }
   }
 </style>

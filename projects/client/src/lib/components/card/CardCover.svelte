@@ -139,12 +139,12 @@
     outline: var(--border-thickness-xs) solid transparent;
     transition: outline-color var(--transition-increment) ease-in-out;
   }
-
+  /* 
   @include for-mouse() {
     :global(.trakt-card-content:hover) .trakt-card-cover {
       outline-color: var(--color-card-border-hover);
     }
-  }
+  } */
 
   .trakt-card-cover-image {
     position: relative;

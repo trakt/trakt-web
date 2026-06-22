@@ -4,26 +4,18 @@
   import CardActionBar from "$lib/components/card/CardActionBar.svelte";
   import CardCover from "$lib/components/card/CardCover.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import GenreList from "$lib/components/summary/GenreList.svelte";
   import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
-  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
-  import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
-  import { toRelativeHumanDay } from "$lib/utils/formatting/date/toRelativeHumanDay";
-  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
-  import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
-  import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import SummaryCardBackgroundImage from "./_internal/SummaryCardBackgroundImage.svelte";
   import SummaryCardBottomBar from "./_internal/SummaryCardBottomBar.svelte";
   import SummaryCardDetails from "./_internal/SummaryCardDetails.svelte";
   import SummaryCardRating from "./_internal/SummaryCardRating.svelte";
+  import SummaryCardTitles from "./_internal/SummaryCardTitles.svelte";
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
   import type { MediaCardProps } from "./models/MediaCardProps";
   import type { SeasonCardProps } from "./models/SeasonCardProps";
@@ -64,15 +56,15 @@
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 
-  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  // const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
+  // const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
   const isCompact = $derived(layout === "compact");
   const isMinimal = $derived(layout === "minimal");
 
-  const hasMultiLineTitles = $derived(
-    !isCompact && !isMinimal && ($isTabletLarge || $isDesktop),
-  );
+  // const hasMultiLineTitles = $derived(
+  //   !isCompact && !isMinimal && ($isTabletLarge || $isDesktop),
+  // );
 
   const isShowContext = $derived(
     rest.type === "episode" && "context" in rest && rest.context === "show",
@@ -116,12 +108,6 @@
 
     return externalTag;
   });
-
-  const hasDistinctOriginalTitle = $derived(
-    media.originalTitle
-      ? media.title.toLowerCase() !== media.originalTitle.toLowerCase()
-      : false,
-  );
 
   const dimensions = $derived.by(() => {
     if (layout === "default") {
@@ -193,90 +179,13 @@
       {/if}
     </div>
 
-    <SummaryCardDetails
-      classList={hasMultiLineTitles ? "multi-line-titles" : ""}
-      {tag}
-      {layout}
-    >
-      {#if rest.type === "season"}
-        <p class="trakt-card-title ellipsis">
-          {media.title}
-        </p>
-        <p class="trakt-card-subtitle small secondary ellipsis">
-          {seasonLabel(rest.season.number)}
-        </p>
-      {:else if rest.variant === "activity"}
-        {#if rest.type === "episode"}
-          <p class="trakt-card-title ellipsis">
-            {episodeSubtitle(rest.episode)}
-            {#if !["multiple_episodes", "full_season"].includes(rest.episode.type)}
-              <Spoiler media={rest.episode} show={media} type="episode">
-                - {rest.episode.title}
-              </Spoiler>
-            {/if}
-          </p>
-        {:else}
-          <p class="trakt-card-title ellipsis">
-            {media.title}
-          </p>
-        {/if}
-        <p class="trakt-card-subtitle small secondary ellipsis capitalize">
-          {#if rest.activityType === "social"}
-            {toRelativeHumanDay(new Date(), rest.date, getLocale())}
-          {:else}
-            {toHumanDate(new Date(), rest.date, getLocale())}
-          {/if}
-        </p>
-      {:else if isShowContext && rest.type === "episode"}
-        <p class="trakt-card-title ellipsis">
-          <Spoiler media={rest.episode} show={media} type="episode">
-            {rest.episode.title}
-          </Spoiler>
-        </p>
-        <p class="trakt-card-subtitle small secondary ellipsis">
-          {episodeSubtitle(rest.episode)}
-        </p>
-      {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
-        <p class="trakt-card-title ellipsis">
-          {media.title}
-        </p>
-        <p class="trakt-card-subtitle small secondary ellipsis">
-          {episodeNumberLabel({
-            seasonNumber: rest.episode.season,
-            episodeNumber: rest.episode.number,
-          })}
-          {#if rest.variant !== "start"}
-            <Spoiler media={rest.episode} show={media} type="episode">
-              - {rest.episode.title}
-            </Spoiler>
-          {/if}
-        </p>
-      {:else if rest.variant === "credit"}
-        <p class="trakt-card-title ellipsis">
-          {media.title}
-        </p>
-        <p class="trakt-card-subtitle small secondary ellipsis">
-          {rest.role}
-        </p>
-      {:else}
-        <p class="trakt-card-title ellipsis">
-          {media.title}
-        </p>
-        {#if hasDistinctOriginalTitle}
-          <p class="secondary ellipsis">
-            ({media.originalTitle})
-          </p>
-        {/if}
-        <GenreList
-          classList="trakt-card-subtitle small ellipsis secondary"
-          separator=", "
-          genres={media.genres}
-        />
-      {/if}
+    <!-- classList={hasMultiLineTitles ? "multi-line-titles" : ""} -->
+    <SummaryCardDetails>
+      <SummaryCardTitles {...rest} {media} />
     </SummaryCardDetails>
   </Link>
 
-  <SummaryCardBottomBar {contextualTag} {tag} {layout}>
+  <SummaryCardBottomBar {tag} {layout}>
     {#if sortTag}
       {@render sortTag()}
     {:else if badge}
@@ -334,45 +243,8 @@
     }
   }
 
-  :global(.trakt-summary-card-titles) {
-    min-height: var(--ni-66);
-  }
-
-  .trakt-card-title,
-  .trakt-card-subtitle,
-  :global(.trakt-card-subtitle) {
-    padding-right: var(--ni-18);
-  }
-
-  :global(.multi-line-titles) {
-    .trakt-card-title,
-    .trakt-card-subtitle,
-    :global(.trakt-card-subtitle) {
-      display: -webkit-box;
-
-      line-clamp: 2;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-
-      white-space: initial;
-      overflow: hidden;
-    }
-  }
-
-  .trakt-card-title {
-    font-size: var(--font-size-text);
-
-    @include for-tablet-sm-and-below {
-      font-size: var(--font-size-title);
-    }
-  }
-
   :global(.trakt-summary-card-minimal),
   :global(.trakt-summary-card-compact) {
-    .trakt-card-title {
-      font-size: var(--font-size-text);
-    }
-
     .trakt-summary-poster {
       --padding-compact-poster: calc(
         (
