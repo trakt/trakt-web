@@ -387,7 +387,6 @@
       );
 
       padding: var(--padding-compact-poster);
-      box-sizing: border-box;
 
       height: var(--height-summary-card-compact);
     }

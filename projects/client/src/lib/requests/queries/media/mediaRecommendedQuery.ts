@@ -8,20 +8,15 @@ import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { getRecommendedSearchParams } from '../../_internal/getRecommendedSearchParams.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
+import { mapToRecommendationSource } from '../../_internal/mapToRecommendationSource.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
-import {
-  type RecommendationsResponse,
-  RecommendationsResponseSchema,
-} from '../../models/RecommendationsResponse.ts';
+import { RecommendationsResponseSchema } from '../../models/RecommendationsResponse.ts';
 import {
   RecommendedMovieSchema,
 } from '../recommendations/recommendedMoviesQuery.ts';
 import {
   RecommendedShowSchema,
 } from '../recommendations/recommendedShowsQuery.ts';
-
-export { RecommendationsResponseSchema };
-export type { RecommendationsResponse };
 
 type RecommendedMediaParams = LimitParams & ApiParams & FilterParams;
 
@@ -72,9 +67,12 @@ export const recommendedMediaQuery = defineQuery({
   ],
   request: recommendedMediaRequest,
   mapper: (response) =>
-    response.body?.map((item) =>
-      'movie' in item ? mapToMovieEntry(item.movie) : mapToShowEntry(item.show)
-    ) ?? [],
+    response.body?.map((item) => ({
+      ...('movie' in item
+        ? mapToMovieEntry(item.movie)
+        : mapToShowEntry(item.show)),
+      sources: item.sources.map(mapToRecommendationSource),
+    })) ?? [],
   schema: RecommendedMediaSchema.array(),
   ttl: time.hours(24),
 });

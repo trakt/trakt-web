@@ -8,16 +8,14 @@ import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { getRecommendedSearchParams } from '../../_internal/getRecommendedSearchParams.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
+import { mapToRecommendationSource } from '../../_internal/mapToRecommendationSource.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
-import {
-  type RecommendationsMovieResponse,
-  RecommendationsMovieResponseSchema,
-} from '../../models/RecommendationsResponse.ts';
+import { RecommendationSourceSchema } from '../../models/RecommendationSource.ts';
+import { RecommendationsMovieResponseSchema } from '../../models/RecommendationsResponse.ts';
 
-export { RecommendationsMovieResponseSchema };
-export type { RecommendationsMovieResponse };
-
-export const RecommendedMovieSchema = MovieEntrySchema;
+export const RecommendedMovieSchema = MovieEntrySchema.extend({
+  sources: z.array(RecommendationSourceSchema),
+});
 export type RecommendedMovie = z.infer<typeof RecommendedMovieSchema>;
 
 type RecommendedMoviesParams = LimitParams & ApiParams & FilterParams;
@@ -59,7 +57,10 @@ export const recommendedMoviesQuery = defineQuery({
   ],
   request: recommendedMoviesRequest,
   mapper: (response) =>
-    response.body?.map((item) => mapToMovieEntry(item.movie)) ?? [],
+    response.body?.map((item) => ({
+      ...mapToMovieEntry(item.movie),
+      sources: item.sources.map(mapToRecommendationSource),
+    })) ?? [],
   schema: RecommendedMovieSchema.array(),
   ttl: time.hours(24),
 });
