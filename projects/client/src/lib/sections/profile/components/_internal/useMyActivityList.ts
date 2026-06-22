@@ -1,4 +1,7 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
+import { profileActivityTargets } from '$lib/features/intl-overlay/profileActivityTargets.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { UserCommentEntry } from '$lib/requests/queries/users/userCommentsQuery.ts';
@@ -39,24 +42,34 @@ function typeToQuery(props: UseMyActivityListProps) {
 }
 
 export function useMyActivityList(props: UseMyActivityListProps) {
-  const { list, ...rest } = usePaginatedListQuery(typeToQuery(props));
+  const { list, isLoading: baseLoading, ...rest } = usePaginatedListQuery(
+    typeToQuery(props),
+  );
 
-  const filteredList = list.pipe(map(($list) => {
-    if (props.mode === 'media') {
-      return $list;
-    }
+  const overlay = createBulkIntlOverlay<ActivityEntry>({
+    getTargets: profileActivityTargets,
+  });
 
-    return $list.filter((entry) => {
-      if (props.mode === 'show') {
-        return entry.type === 'show' || entry.type === 'episode';
+  const filteredList = list.pipe(
+    overlay.operator,
+    map(($list) => {
+      if (props.mode === 'media') {
+        return $list;
       }
 
-      return entry.type === 'movie';
-    });
-  }));
+      return $list.filter((entry) => {
+        if (props.mode === 'show') {
+          return entry.type === 'show' || entry.type === 'episode';
+        }
+
+        return entry.type === 'movie';
+      });
+    }),
+  );
 
   return {
     list: filteredList,
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
     ...rest,
   };
 }
