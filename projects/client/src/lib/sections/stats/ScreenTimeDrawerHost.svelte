@@ -53,7 +53,9 @@
   {/if}
 </Drawer>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .screen-time-drawer-content {
     display: flex;
     flex-direction: column;
@@ -76,5 +78,9 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--gap-s);
+
+    @include for-mobile {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>
