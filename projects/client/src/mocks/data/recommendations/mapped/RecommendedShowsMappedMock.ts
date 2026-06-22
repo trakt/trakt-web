@@ -7,5 +7,6 @@ export const RecommendedShowsMappedMock: RecommendedShow[] = [
     'episode': {
       'count': 15,
     },
+    sources: [],
   },
 ];

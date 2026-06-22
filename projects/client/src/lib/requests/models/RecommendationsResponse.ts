@@ -1,13 +1,13 @@
 import { movieResponseSchema, showResponseSchema } from '@trakt/api';
 import { z } from 'zod';
 
-const SubgenreSchema = z.object({
+export const SubgenreSchema = z.object({
   id: z.number(),
   name: z.string(),
   slug: z.string(),
 });
 
-const SourceSchema = z.union([
+export const SourceSchema = z.union([
   z.object({
     id: z.number(),
     type: z.enum(['activity', 'favorite']),
@@ -68,3 +68,6 @@ export const RecommendationsResponseSchema = z.array(
 export type RecommendationsResponse = z.infer<
   typeof RecommendationsResponseSchema
 >;
+
+export type Subgenre = z.infer<typeof SubgenreSchema>;
+export type Source = z.infer<typeof SourceSchema>;

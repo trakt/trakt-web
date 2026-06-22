@@ -1909,6 +1909,26 @@
       "default": "Restore show",
       "description": "Text for the button that restores a hidden show."
     },
+    "button_text_view_recommendation_sources": {
+      "default": "Why this?",
+      "description": "Text for the button that opens the recommendation sources drawer."
+    },
+    "drawer_title_recommendation_sources": {
+      "default": "Why was this recommended?",
+      "description": "Title for the drawer that shows why a movie or show was recommended."
+    },
+    "list_title_recommendation_sources_activity": {
+      "default": "You watched",
+      "description": "Section title for recommendation sources based on viewing activity."
+    },
+    "list_title_recommendation_sources_favorite": {
+      "default": "You loved",
+      "description": "Section title for recommendation sources based on favorited shows and movies."
+    },
+    "list_title_recommendation_sources_subgenre": {
+      "default": "You like",
+      "description": "Section title for recommendation sources based on liked subgenres."
+    },
     "button_text_hide_recommendation": {
       "default": "Hide recommendation",
       "description": "Text for the button that hides a recommended movie or show from the user's recommendations list."
