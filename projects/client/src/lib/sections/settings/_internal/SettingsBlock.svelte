@@ -6,15 +6,17 @@
     description,
     children,
     titlePrefix,
+    indented = false,
   }: ChildrenProps & {
     title: string;
     description?: string;
     titlePrefix?: Snippet;
+    indented?: boolean;
   } = $props();
 </script>
 
 <div class="trakt-settings-block">
-  <div class="trakt-settings-block-header">
+  <div class="trakt-settings-block-header" class:is-indented={indented}>
     <p
       class="settings-title bold"
       class:has-prefix={Boolean(titlePrefix)}
@@ -36,6 +38,10 @@
     flex-direction: column;
 
     gap: var(--gap-xs);
+
+    &.is-indented {
+      padding-inline: var(--gap-m);
+    }
 
     p.settings-title {
       transition: font-size var(--transition-increment) ease-in-out;

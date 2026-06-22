@@ -3,6 +3,7 @@
   import { useQuery } from "$lib/features/query/useQuery.ts";
   import { streamingConnectionsQuery } from "$lib/requests/queries/streaming-sync/streamingConnectionsQuery.ts";
   import { map } from "rxjs";
+  import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import StreamingServiceTile from "./StreamingServiceTile.svelte";
 
   const connections = useQuery(streamingConnectionsQuery()).pipe(
@@ -25,11 +26,11 @@
     </div>
   {/if}
 
-  <div class="trakt-streaming-services-grid">
+  <SettingsGroupCard>
     {#each $connections ?? [] as connection (connection.key)}
       <StreamingServiceTile {connection} />
     {/each}
-  </div>
+  </SettingsGroupCard>
 </div>
 
 <style lang="scss">
@@ -47,12 +48,11 @@
     color: var(--color-foreground-red);
   }
 
-  .trakt-streaming-services-grid {
-    display: grid;
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(min(var(--ni-320), 100%), 1fr)
-    );
-    gap: var(--gap-l);
+  // Service rows reset their own border (button-based rows), so re-assert the
+  // 1px divider here — scoped to this section so other group cards are untouched.
+  .trakt-streaming-services
+    :global(.trakt-streaming-service-tile + .trakt-streaming-service-tile) {
+    border-top: var(--border-thickness-xxs) solid
+      color-mix(in srgb, var(--color-foreground) 8%, transparent);
   }
 </style>

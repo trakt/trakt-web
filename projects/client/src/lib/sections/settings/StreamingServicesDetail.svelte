@@ -6,16 +6,17 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { firstValueFrom, map } from "rxjs";
   import SettingsBlock from "./_internal/SettingsBlock.svelte";
-  import DataSyncRow from "./_internal/streaming-sync/DataSyncRow.svelte";
-  import SyncItemsSection from "./_internal/streaming-sync/SyncItemsSection.svelte";
-  import SyncLoadError from "./_internal/streaming-sync/SyncLoadError.svelte";
-  import { toServiceInfo } from "./_internal/streaming-sync/toServiceInfo.ts";
-  import { useStreamingServiceLookup } from "./_internal/streaming-sync/useStreamingServiceLookup.ts";
-  import { useStreamingSyncActions } from "./_internal/streaming-sync/useStreamingSyncActions.ts";
+  import SettingsGroupCard from "./_internal/SettingsGroupCard.svelte";
+  import DataSyncRow from "./_internal/streaming-services/DataSyncRow.svelte";
+  import SyncItemsSection from "./_internal/streaming-services/SyncItemsSection.svelte";
+  import SyncLoadError from "./_internal/streaming-services/SyncLoadError.svelte";
+  import { toServiceInfo } from "./_internal/streaming-services/toServiceInfo.ts";
+  import { useStreamingServiceLookup } from "./_internal/streaming-services/useStreamingServiceLookup.ts";
+  import { useStreamingServicesActions } from "./_internal/streaming-services/useStreamingServicesActions.ts";
 
   const { syncId }: { syncId: number } = $props();
 
-  const actions = useStreamingSyncActions();
+  const actions = useStreamingServicesActions();
   const { lookup } = useStreamingServiceLookup();
 
   const syncQuery = $derived(useQuery(dataSyncQuery({ id: syncId })));
@@ -31,14 +32,15 @@
   };
 </script>
 
-<div class="trakt-streaming-sync-detail">
+<div class="trakt-streaming-services-detail">
   <SettingsBlock
     title={m.header_sync_detail({ id: syncId })}
     description={m.description_sync_detail()}
+    indented
   >
     {#snippet titlePrefix()}
       <span class="title-prefix">
-        <Link href={UrlBuilder.settings.streamingSync()} color="inherit">
+        <Link href={UrlBuilder.settings.streamingServices()} color="inherit">
           {m.link_text_streaming_sync_settings()}
         </Link>
         <span class="title-sep">/</span>
@@ -48,15 +50,17 @@
     {#if $isError}
       <SyncLoadError onRetry={retry} />
     {:else if $sync}
-      <DataSyncRow
-        sync={$sync}
-        service={toServiceInfo({
-          serviceId: $sync.source,
-          application: $sync.application,
-          connections: $lookup,
-        })}
-        onUndo={actions.undo($sync.id)}
-      />
+      <SettingsGroupCard>
+        <DataSyncRow
+          sync={$sync}
+          service={toServiceInfo({
+            serviceId: $sync.source,
+            application: $sync.application,
+            connections: $lookup,
+          })}
+          onUndo={actions.undo($sync.id)}
+        />
+      </SettingsGroupCard>
     {/if}
   </SettingsBlock>
 
@@ -70,10 +74,18 @@
 </div>
 
 <style lang="scss">
-  .trakt-streaming-sync-detail {
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-streaming-services-detail {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xl);
+
+    max-width: var(--ni-640);
+
+    @include for-tablet-sm-and-below() {
+      max-width: 100%;
+    }
   }
 
   .title-prefix {

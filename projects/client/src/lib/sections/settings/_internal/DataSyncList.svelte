@@ -2,8 +2,9 @@
   import Button from '$lib/components/buttons/Button.svelte';
   import * as m from '$lib/features/i18n/messages.ts';
   import type { DataSync } from '$lib/requests/models/DataSync.ts';
-  import DataSyncRow from './streaming-sync/DataSyncRow.svelte';
-  import type { ServiceInfo } from './streaming-sync/toServiceInfo.ts';
+  import SettingsGroupCard from './SettingsGroupCard.svelte';
+  import DataSyncRow from './streaming-services/DataSyncRow.svelte';
+  import type { ServiceInfo } from './streaming-services/toServiceInfo.ts';
 
   type DataSyncListProps = {
     syncs: DataSync[];
@@ -26,7 +27,7 @@
   }: DataSyncListProps = $props();
 </script>
 
-<div class="trakt-data-sync-list">
+<SettingsGroupCard>
   {#each syncs as sync (sync.key)}
     <DataSyncRow
       {sync}
@@ -35,7 +36,7 @@
       onUndo={getOnUndo(sync.id)}
     />
   {/each}
-</div>
+</SettingsGroupCard>
 
 {#if hasNextPage}
   <Button
@@ -49,11 +50,3 @@
     {m.button_text_load_more()}
   </Button>
 {/if}
-
-<style lang="scss">
-  .trakt-data-sync-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-s);
-  }
-</style>

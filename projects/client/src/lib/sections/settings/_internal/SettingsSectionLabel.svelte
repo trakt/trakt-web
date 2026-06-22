@@ -10,7 +10,7 @@
 <div class="trakt-settings-section-label">
   <span class="title bold">{title}</span>
   {#if description}
-    <p class="secondary small">{description}</p>
+    <p class="secondary">{description}</p>
   {/if}
 </div>
 

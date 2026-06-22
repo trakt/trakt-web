@@ -9,13 +9,17 @@
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import StreamingServiceBadge from "./StreamingServiceBadge.svelte";
-  import { useStreamingSyncActions } from "./useStreamingSyncActions.ts";
+  import { useStreamingServicesActions } from "./useStreamingServicesActions.ts";
 
   const { connection }: { connection: StreamingConnection } = $props();
 
-  const actions = useStreamingSyncActions();
+  const actions = useStreamingServicesActions();
 
   let isBusy = $state(false);
+
+  const isConnectAction = $derived(
+    !connection.isConnected && connection.isConnectable,
+  );
 
   const QUEUED_YEAR = 2000;
 
@@ -46,14 +50,11 @@
   }
 </script>
 
-<div
-  class="trakt-streaming-service-tile"
-  class:is-inactive={connection.isConnected && !connection.isActive}
->
+{#snippet tileContent()}
   <StreamingServiceBadge
     name={connection.name}
+    source={connection.id}
     logoUrl={connection.logoUrl}
-    color={connection.color}
     size="small"
   />
 
@@ -77,7 +78,7 @@
         {/if}
         <span class="detail">
           <em>{m.text_streaming_last_synced()}:</em>
-          {lastSyncedLabel}
+          <span class="last-synced capitalize">{lastSyncedLabel}</span>
         </span>
       </div>
     {/if}
@@ -132,19 +133,10 @@
           </DropdownItem>
         {/snippet}
       </PopupMenu>
-    {:else if connection.isConnectable}
-      <Button
-        size="small"
-        variant="primary"
-        color="purple"
-        disabled={isBusy}
-        label={m.button_label_connect_streaming_service({
-          service: connection.name,
-        })}
-        onclick={() => run(() => actions.connect(connection.id))}
-      >
+    {:else if isConnectAction}
+      <span class="connect-cue bold">
         {m.button_text_connect()}
-      </Button>
+      </span>
     {:else}
       <Button
         size="small"
@@ -157,25 +149,66 @@
       </Button>
     {/if}
   </div>
-</div>
+{/snippet}
+
+{#if isConnectAction}
+  <button
+    class="trakt-streaming-service-tile"
+    type="button"
+    disabled={isBusy}
+    aria-label={m.button_label_connect_streaming_service({
+      service: connection.name,
+    })}
+    onclick={() => run(() => actions.connect(connection.id))}
+  >
+    {@render tileContent()}
+  </button>
+{:else}
+  <div
+    class="trakt-streaming-service-tile"
+    class:is-inactive={connection.isConnected && !connection.isActive}
+  >
+    {@render tileContent()}
+  </div>
+{/if}
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-streaming-service-tile {
     display: flex;
     align-items: center;
     gap: var(--gap-m);
 
-    padding: var(--ni-12) var(--ni-16);
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--ni-14) var(--ni-16);
 
-    border: var(--border-thickness-xs) solid transparent;
-    border-radius: var(--border-radius-l);
-    background-color: var(--color-card-background);
-    box-shadow: var(--shadow-base);
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
 
-    transition: border-color var(--transition-increment) ease-in-out;
+    transition: background var(--transition-increment) ease-in-out;
 
-    &:hover {
-      border-color: var(--color-link-active);
+    &:is(button) {
+      cursor: pointer;
+
+      &:disabled {
+        cursor: default;
+        opacity: var(--de-emphasized-opacity);
+      }
+    }
+
+    @include for-mouse {
+      &:hover {
+        background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+
+        .connect-cue {
+          background: var(--color-background-purple-hover);
+        }
+      }
     }
   }
 
@@ -210,12 +243,37 @@
     }
   }
 
+  .last-synced {
+    display: inline-block;
+  }
+
   .action {
     flex-shrink: 0;
 
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
+  }
+
+  .connect-cue {
+    flex-shrink: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: var(--ni-40);
+    padding: 0 var(--ni-12);
+    box-sizing: border-box;
+    border-radius: calc(var(--border-radius-m) * 0.8);
+
+    background: var(--color-background-purple);
+    color: var(--color-foreground-purple);
+
+    font-size: var(--font-size-text-small);
+    white-space: nowrap;
+
+    transition: background var(--transition-increment) ease-in-out;
   }
 
   span.tag {

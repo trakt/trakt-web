@@ -20,7 +20,7 @@
 </script>
 
 {#if isWellKnown}
-  <WellKnownLogo {source} {displayName} {i18n} />
+  <WellKnownLogo {source} {displayName} />
 {:else}
   <CrossOriginImage
     src={logoSrc}

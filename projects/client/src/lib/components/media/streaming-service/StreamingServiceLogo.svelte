@@ -27,16 +27,16 @@
 >
   {#if $logo?.url}
     <ServiceLogo {source} logoSrc={$logo?.url} {displayName} {i18n} />
-    {#if $logo?.channelUrl}
-      <div class="trakt-channel-separator"></div>
-      <CrossOriginImage
-        src={$logo?.channelUrl}
-        alt={i18n.alt(displayName)}
-        classList="trakt-channel-logo"
-      />
-    {/if}
   {:else}
     <span class="bold uppercase">{displayName}</span>
+  {/if}
+  {#if $logo?.channelUrl}
+    <div class="trakt-channel-separator"></div>
+    <CrossOriginImage
+      src={$logo?.channelUrl}
+      alt={i18n.alt(displayName)}
+      classList="trakt-channel-logo"
+    />
   {/if}
 </div>
 

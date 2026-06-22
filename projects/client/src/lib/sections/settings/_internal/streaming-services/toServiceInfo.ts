@@ -1,6 +1,7 @@
 import type { StreamingConnection } from '$lib/requests/models/StreamingConnection.ts';
 
 export type ServiceInfo = {
+  source: string;
   name: string;
   logoUrl?: string | null;
   color?: string | null;
@@ -26,6 +27,7 @@ export function toServiceInfo(
 
   const connection = connections?.get(serviceId);
   return {
+    source: serviceId,
     name: connection?.name ?? application ?? serviceId,
     logoUrl: connection?.logoUrl,
     color: connection?.color,

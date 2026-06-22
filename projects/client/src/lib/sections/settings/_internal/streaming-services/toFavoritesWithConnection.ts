@@ -1,3 +1,4 @@
+import { toFavoriteId } from './toFavoriteId.ts';
 import { toWatchNowSource } from './toWatchNowSource.ts';
 
 type ToFavoritesWithConnectionParams = {
@@ -11,17 +12,25 @@ type ToFavoritesWithConnectionParams = {
  *
  * The younify connection id is mapped onto its watch-now source slug (reusing
  * `toWatchNowSource`) and stored as a country-prefixed favorite, e.g.
- * `us-disney_plus`. Returns `null` when the service is already a favorite so
- * the caller can skip a redundant save.
+ * `us-disney_plus`. Only favorites for the current country are kept - the
+ * result fully replaces the stored list, so other countries are not sent.
+ * Returns `null` when the service is already a favorite so the caller can skip
+ * a redundant save.
  */
 export function toFavoritesWithConnection(
   { serviceId, country, favorites }: ToFavoritesWithConnectionParams,
 ): string[] | null {
-  const favoriteId = `${country}-${toWatchNowSource(serviceId)}`;
+  if (!country || !favorites) {
+    return null;
+  }
+
+  const favoriteId = toFavoriteId(country, toWatchNowSource(serviceId));
 
   if (favorites.includes(favoriteId)) {
     return null;
   }
 
-  return [...favorites, favoriteId];
+  const currentCountry = favorites.filter((id) => id.startsWith(`${country}-`));
+
+  return [...currentCountry, favoriteId];
 }

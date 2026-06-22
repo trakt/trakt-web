@@ -50,16 +50,16 @@
         >
           <StreamingServiceBadge
             name={service.name}
+            source={service.source}
             logoUrl={service.logoUrl}
-            color={service.color}
             size="small"
           />
         </Link>
       {:else}
         <StreamingServiceBadge
           name={service.name}
+          source={service.source}
           logoUrl={service.logoUrl}
-          color={service.color}
           size="small"
         />
       {/if}
@@ -79,7 +79,7 @@
 
     <div class="meta">
       {#if watchedDate}
-        <span class="meta-date">
+        <span class="meta-date capitalize">
           {toHumanDate(new Date(), watchedDate, getLocale())}
         </span>
       {/if}
@@ -107,6 +107,8 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-sync-item-row {
     display: flex;
     align-items: center;
@@ -114,15 +116,12 @@
 
     padding: var(--ni-12) var(--ni-16);
 
-    border: var(--border-thickness-xs) solid transparent;
-    border-radius: var(--border-radius-l);
-    background-color: var(--color-card-background);
-    box-shadow: var(--shadow-base);
+    transition: background var(--transition-increment) ease-in-out;
 
-    transition: border-color var(--transition-increment) ease-in-out;
-
-    &:hover {
-      border-color: var(--color-link-active);
+    @include for-mouse {
+      &:hover {
+        background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+      }
     }
   }
 
@@ -140,6 +139,8 @@
   }
 
   .title {
+    font-size: var(--font-size-text);
+
     color: var(--color-text-primary);
 
     &.is-bad {
@@ -177,12 +178,8 @@
     color: var(--color-text-secondary);
 
     &.is-bad {
-      background-color: color-mix(
-        in srgb,
-        var(--color-foreground-red) 16%,
-        transparent
-      );
-      color: var(--color-foreground-red);
+      background-color: var(--color-foreground-red);
+      color: var(--color-background-red);
     }
   }
 

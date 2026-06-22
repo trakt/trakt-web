@@ -15,9 +15,9 @@
     <Link href={UrlBuilder.settings.data()}>
       <span class="title">{m.link_text_data_settings()}</span>
     </Link>
-    <RenderForFeature flag={FeatureFlag.StreamingSync}>
+    <RenderForFeature flag={FeatureFlag.StreamingServices}>
       {#snippet enabled()}
-        <Link href={UrlBuilder.settings.streamingSync()}>
+        <Link href={UrlBuilder.settings.streamingServices()}>
           <span class="title">{m.link_text_streaming_sync_settings()}</span>
         </Link>
       {/snippet}

@@ -31,5 +31,5 @@ export const load: PageLoad = ({ url }) => {
     ? url.searchParams.get(YC_SERVICE_PARAM)
     : undefined;
 
-  redirect(303, UrlBuilder.settings.streamingSync({ connection, service }));
+  redirect(303, UrlBuilder.settings.streamingServices({ connection, service }));
 };
