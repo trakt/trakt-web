@@ -30,6 +30,7 @@
         onclick={() =>
           track({ id: filter.key, action: "reset", mode: FilterMode.Simple })}
         replacestate
+        noscroll
       >
         {m.button_label_reset_filter()}
       </DropdownItem>
@@ -41,6 +42,7 @@
           onclick={() =>
             track({ id: filter.key, action: "set", mode: FilterMode.Simple })}
           replacestate
+          noscroll
         >
           {option.label()}
         </DropdownItem>
