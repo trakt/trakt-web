@@ -1,3 +1,6 @@
+import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
+import { progressEntryTargets } from '$lib/features/intl-overlay/progressEntryTargets.ts';
+import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import type { ProgressEntry } from '$lib/requests/models/ProgressEntry.ts';
 import { progressWatchedQuery } from '$lib/requests/queries/sync/progressWatchedQuery.ts';
@@ -44,5 +47,17 @@ function typeToQuery(
 }
 
 export function useProgressList(props: UseProgressListProps) {
-  return usePaginatedListQuery(typeToQuery(props));
+  const { list, isLoading: baseLoading, ...rest } = usePaginatedListQuery(
+    typeToQuery(props),
+  );
+
+  const overlay = createBulkIntlOverlay<ProgressEntry>({
+    getTargets: progressEntryTargets,
+  });
+
+  return {
+    list: list.pipe(overlay.operator),
+    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
+    ...rest,
+  };
 }
