@@ -1,5 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import FilterScopeSetter from "$lib/features/filters/FilterScopeSetter.svelte";
+  import type { FilterScope } from "$lib/features/filters/models/FilterScope.ts";
   import { getLanguageAndRegion } from "$lib/features/i18n";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -30,6 +32,7 @@
     info?: MediaInfo;
     hasDynamicContent?: boolean;
     mode?: "default" | "content-only";
+    filterScope?: FilterScope;
   };
 
   const {
@@ -41,6 +44,7 @@
     info: _info,
     hasDynamicContent = false,
     mode = "default",
+    filterScope = "local",
   }: ChildrenProps & TraktPageProps & AudienceProps = $props();
 
   const websiteName = "Trakt Web";
@@ -276,25 +280,27 @@
   {/if}
 </svelte:head>
 
-<RenderFor {audience}>
-  {#if mode === "default"}
-    <NavbarStateSetter mode="full" />
-  {/if}
+<FilterScopeSetter {filterScope}>
+  <RenderFor {audience}>
+    {#if mode === "default"}
+      <NavbarStateSetter mode="full" />
+    {/if}
 
-  <main class="trakt-content" data-mode={mode} {...dynamicContentProps}>
-    {@render children()}
-  </main>
+    <main class="trakt-content" data-mode={mode} {...dynamicContentProps}>
+      {@render children()}
+    </main>
 
-  {#if mode === "default"}
-    <Footer />
-  {/if}
-</RenderFor>
-
-{#if audience === "authenticated"}
-  <RenderFor audience="public">
-    <Redirect to={UrlBuilder.home()} />
+    {#if mode === "default"}
+      <Footer />
+    {/if}
   </RenderFor>
-{/if}
+
+  {#if audience === "authenticated"}
+    <RenderFor audience="public">
+      <Redirect to={UrlBuilder.home()} />
+    </RenderFor>
+  {/if}
+</FilterScopeSetter>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

@@ -34,6 +34,7 @@
   info={{ overview: m.page_description_home() }}
   type="home"
   mode={pageMode}
+  filterScope="global"
 >
   <RenderFor audience="authenticated">
     <TraktPageCoverSetter />

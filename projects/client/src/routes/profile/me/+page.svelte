@@ -17,6 +17,7 @@
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_profile()}
   hasDynamicContent={true}
+  filterScope="global"
 >
   <RenderFor audience="authenticated">
     <NavbarStateSetter>
