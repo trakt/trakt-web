@@ -2,7 +2,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
 </script>
 
-<div class="trakt-streaming-sync-intro">
+<div class="trakt-streaming-services-intro">
   <div class="intro-title">
     <p class="settings-title bold">{m.header_streaming_sync()}</p>
     <span class="tag beta">{m.badge_text_beta()}</span>
@@ -11,10 +11,12 @@
 </div>
 
 <style lang="scss">
-  .trakt-streaming-sync-intro {
+  .trakt-streaming-services-intro {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
+
+    padding-inline: var(--gap-m);
   }
 
   .intro-title {

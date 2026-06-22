@@ -12,15 +12,63 @@
   },
   "messages": {
     "link_text_streaming_sync_settings": {
-      "default": "Streaming Sync",
-      "description": "Text for the link to the streaming sync settings page."
+      "default": "Streaming Services",
+      "description": "Text for the link to the streaming services settings page."
+    },
+    "header_streaming_services": {
+      "default": "Streaming Services",
+      "description": "Header for the streaming services favorites section and drawer."
+    },
+    "description_streaming_services": {
+      "default": "Your favorites make it easier to find content on the services you watch most.",
+      "description": "Subtitle for the streaming services favorites section."
+    },
+    "label_favorites": {
+      "default": "Favorites",
+      "description": "Label for the favorite streaming services row."
+    },
+    "label_streaming_country": {
+      "default": "Country",
+      "description": "Label for the dropdown that selects the default streaming country."
+    },
+    "button_text_manage": {
+      "default": "Manage",
+      "description": "Text for the button that opens the favorite streaming services picker."
+    },
+    "button_text_add_streaming_service": {
+      "default": "Add streaming service",
+      "description": "Text for the button that opens the streaming services picker drawer."
+    },
+    "button_label_toggle_favorite_service": {
+      "default": "Toggle {service} as a favorite",
+      "description": "Aria-label for toggling a streaming service as a favorite."
+    },
+    "input_placeholder_filter_services": {
+      "default": "Filter streaming services",
+      "description": "Placeholder for the streaming services filter input."
+    },
+    "text_services_selected": {
+      "default": "{count} / {total} selected · {country}",
+      "description": "Shows how many streaming services are selected out of the total available, and the detected country."
+    },
+    "text_favorites_limit_reached": {
+      "default": "You can select up to {limit} services",
+      "description": "Label shown under the filter input when the user has reached the maximum number of favorite streaming services."
+    },
+    "text_no_services_match_filter": {
+      "default": "No services match your filter.",
+      "description": "Empty state shown in the favorites picker when the filter text matches no streaming services."
+    },
+    "button_text_save": {
+      "default": "Save",
+      "description": "Text for a generic save button."
     },
     "header_streaming_sync": {
       "default": "Streaming Sync",
       "description": "Header for the streaming sync settings section."
     },
     "description_streaming_sync": {
-      "default": "Automatically sync your watched history and ratings. Connect a service below, or in the official Trakt mobile apps.",
+      "default": "Automatically sync your watched history and ratings.",
       "description": "Description for the streaming sync settings section."
     },
     "badge_text_beta": {
@@ -236,7 +284,7 @@
       "description": "Header for the paused items list on a sync detail page, showing the count."
     },
     "description_paused_items": {
-      "default": "These items were added as paused, since they were not at least 80% watched.",
+      "default": "These items were not watched at least 80%.",
       "description": "Description for the paused items list."
     },
     "header_skipped_items": {
@@ -244,7 +292,7 @@
       "description": "Header for the skipped items list on a sync detail page, showing the count."
     },
     "description_skipped_items": {
-      "default": "Some useful info to help identify what was skipped and why. Anything in red caused the item to be skipped.",
+      "default": "Anything in red caused the item to be skipped.",
       "description": "Description for the skipped items list."
     },
     "text_unknown": {

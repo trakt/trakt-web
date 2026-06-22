@@ -17,11 +17,11 @@ const StreamingSourceListSchema = z.map(
   StreamingSourceSchema.array(),
 );
 
-// FIXME: remove when API is fixed
 function mapToColor(color: string) {
   const hexColorRegex = /^#[0-9A-Fa-f]{6}$/;
 
-  if (!hexColorRegex.test(color) || color === '#000000') {
+  // Allow black (#000000) - some services are legitimately black-branded.
+  if (!hexColorRegex.test(color)) {
     return;
   }
 

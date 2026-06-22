@@ -11,6 +11,7 @@ export const WELL_KNOWN_SERVICES: WellKnownServices = {
   ],
   crunchyroll: ['crunchyroll'],
   disneyPlus: ['disney_plus'],
+  fandango: ['fandango'],
   googlePlayMovies: ['google_play_movies'],
   hulu: ['hulu'],
   netflix: ['netflix'],

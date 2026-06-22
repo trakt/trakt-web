@@ -10,7 +10,7 @@ import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { streamingConnectionStatus } from './streamingConnectionStatus.ts';
 
-export function useStreamingSyncActions() {
+export function useStreamingServicesActions() {
   const { invalidate } = useInvalidator();
   const { confirm } = useConfirm();
 
@@ -18,7 +18,7 @@ export function useStreamingSyncActions() {
   // `yc_serviceId` appended; that route applies the result, then redirects
   // back to the settings page.
   const buildReturnUrl = () =>
-    new URL(UrlBuilder.settings.streamingSyncCallback(), page.url.origin)
+    new URL(UrlBuilder.settings.streamingServicesCallback(), page.url.origin)
       .toString();
 
   const connect = async (serviceId: string) => {

@@ -68,7 +68,7 @@
 
     // Strip the result params so a refresh doesn't re-trigger the banner.
     // eslint-disable-next-line svelte/no-navigation-without-resolve
-    await goto(UrlBuilder.settings.streamingSync(), {
+    await goto(UrlBuilder.settings.streamingServices(), {
       replaceState: true,
       noScroll: true,
       keepFocus: true,

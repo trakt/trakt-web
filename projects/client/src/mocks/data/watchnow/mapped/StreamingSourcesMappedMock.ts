@@ -26,7 +26,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/apple-tv-666c72c3b0e37f8ad861fb8d317e2160f46711ad8a4dd62ccf4d8afbe4c53c5a.png.webp',
@@ -35,7 +35,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/apple-tv-plus-aeddf2e981277fca1567cc814d8f2d34d2ae00ff3913408d18a258a6190bedc3.png.webp',
@@ -53,7 +53,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/canal-plus-bd23a920201a8c557333c9bd226e230c8c1d094fc4de582d79338b9cb4dbf8b0.png.webp',
@@ -62,7 +62,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/cinemember-b840d17961e9659b51efb65a4fdbb898757e391e2fa220cdefca3c0904de702b.png.webp',
@@ -155,7 +155,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/docalliance-films-da53173ec0ec7c026099ef5a2241af1c2eeae7f61ee6d72a11407b485401680d.png.webp',
@@ -257,7 +257,7 @@ export const StreamingSourcesMappedMock: Map<
       {
         'channelLogoUrl':
           'https://trakt.tv/assets/channels/free-07d99d3ee44e8f3ba937f71599f40306da3077110d5b51e08fc9d47cc6d72bc0.png.webp',
-        'color': undefined,
+        'color': '#000000',
         'isFree': true,
         'logoUrl': undefined,
         'name': 'JustWatchTV (free)',
@@ -265,7 +265,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/kpn-41b115254d4c01056b1a14cdd9d105045ec2c1b2f228e31f9d8888da3237a28e.png.webp',
@@ -302,7 +302,7 @@ export const StreamingSourcesMappedMock: Map<
       {
         'channelLogoUrl':
           'https://trakt.tv/assets/channels/amazon-channel-b5739028533271a9dde61e2a943ec4337a8952e13cdb32bf59947b0ced040f77.png.webp',
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/mgm-65f164f1135161a80c9f4ea8ebafab1bfc736dfe217c714b55a1c86f4a1c2712.png.webp',
@@ -393,7 +393,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/plex-5e7292839da5cdbdedb0f2806ec3fc8a6c5b436dd81ed7aeff825e68407c4ba2.png.webp',
@@ -421,7 +421,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/skyshowtime-fe6d70edf1637c3f62a7e8bf5deb323cd462d1a3a02f3a818e11e99c0f9f3498.png.webp',
@@ -440,7 +440,7 @@ export const StreamingSourcesMappedMock: Map<
       {
         'channelLogoUrl':
           'https://trakt.tv/assets/channels/free-07d99d3ee44e8f3ba937f71599f40306da3077110d5b51e08fc9d47cc6d72bc0.png.webp',
-        'color': undefined,
+        'color': '#000000',
         'isFree': true,
         'logoUrl':
           'https://trakt.tv/assets/channels/south-park-8439f017dfe552deaae611cd8af6c66bdb60df794c287a41981da7c9839f8274.png.webp',
@@ -476,7 +476,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/true-story-cbd06a0c03d7ba8e2fd43756a4280ae578e4d2c94977452b6fcf66cbe31e7d47.png.webp',
@@ -586,7 +586,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/docalliance-films-da53173ec0ec7c026099ef5a2241af1c2eeae7f61ee6d72a11407b485401680d.png.webp',
@@ -652,7 +652,7 @@ export const StreamingSourcesMappedMock: Map<
       {
         'channelLogoUrl':
           'https://trakt.tv/assets/channels/free-07d99d3ee44e8f3ba937f71599f40306da3077110d5b51e08fc9d47cc6d72bc0.png.webp',
-        'color': undefined,
+        'color': '#000000',
         'isFree': true,
         'logoUrl': undefined,
         'name': 'JustWatchTV (free)',
@@ -696,7 +696,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/plex-5e7292839da5cdbdedb0f2806ec3fc8a6c5b436dd81ed7aeff825e68407c4ba2.png.webp',
@@ -714,7 +714,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/skyshowtime-fe6d70edf1637c3f62a7e8bf5deb323cd462d1a3a02f3a818e11e99c0f9f3498.png.webp',
@@ -750,7 +750,7 @@ export const StreamingSourcesMappedMock: Map<
       },
       {
         'channelLogoUrl': undefined,
-        'color': undefined,
+        'color': '#000000',
         'isFree': false,
         'logoUrl':
           'https://trakt.tv/assets/channels/true-story-cbd06a0c03d7ba8e2fd43756a4280ae578e4d2c94977452b6fcf66cbe31e7d47.png.webp',

@@ -22,6 +22,16 @@ describe('util: toFavoritesWithConnection', () => {
     expect(result).to.deep.equal(['us-fandango']);
   });
 
+  it('should drop favorites from other countries', () => {
+    const result = toFavoritesWithConnection({
+      serviceId: 'disneyplus',
+      country: 'us',
+      favorites: ['nl-max', 'us-netflix'],
+    });
+
+    expect(result).to.deep.equal(['us-netflix', 'us-disney_plus']);
+  });
+
   it('should return null when the service is already a favorite', () => {
     const result = toFavoritesWithConnection({
       serviceId: 'paramountplus',

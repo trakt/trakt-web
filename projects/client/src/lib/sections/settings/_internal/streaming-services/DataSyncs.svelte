@@ -11,11 +11,11 @@
   import SettingsBlock from "../SettingsBlock.svelte";
   import { toServiceInfo } from "./toServiceInfo.ts";
   import { useStreamingServiceLookup } from "./useStreamingServiceLookup.ts";
-  import { useStreamingSyncActions } from "./useStreamingSyncActions.ts";
+  import { useStreamingServicesActions } from "./useStreamingServicesActions.ts";
 
   const SYNCS_PAGE_SIZE = 10;
 
-  const actions = useStreamingSyncActions();
+  const actions = useStreamingServicesActions();
   const { lookup } = useStreamingServiceLookup();
 
   const query = useInfiniteQuery(dataSyncsQuery({ limit: SYNCS_PAGE_SIZE }));
@@ -47,6 +47,7 @@
 <SettingsBlock
   title={m.header_data_syncs()}
   description={m.description_data_syncs()}
+  indented
 >
   {#if $summary && $summary.count > 0 && $summary.latest}
     <div class="trakt-data-syncs-banner">
@@ -82,7 +83,7 @@
           application: sync.application,
           connections: $lookup,
         })}
-      getHref={(sync) => UrlBuilder.settings.streamingSyncDetail(sync.id)}
+      getHref={(sync) => UrlBuilder.settings.streamingServicesDetail(sync.id)}
     />
   {/if}
 </SettingsBlock>

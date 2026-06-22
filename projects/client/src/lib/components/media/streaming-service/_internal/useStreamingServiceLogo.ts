@@ -3,6 +3,7 @@ import type { StreamingSource } from '$lib/requests/models/StreamingSource.ts';
 import { streamingSourcesQuery } from '$lib/requests/queries/services/streamingSourcesQuery.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { combineLatest, map, Observable, of } from 'rxjs';
+import { cleanStreamingServiceName } from './cleanStreamingServiceName.ts';
 
 type UseStreamingServicesProps = {
   source: string;
@@ -17,7 +18,7 @@ type ServiceLogo = {
 
 function mapToLogo(source: StreamingSource): ServiceLogo {
   return {
-    name: source.name,
+    name: cleanStreamingServiceName(source.name),
     url: source.logoUrl,
     channelUrl: source.channelLogoUrl,
   };

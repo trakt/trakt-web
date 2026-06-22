@@ -6,6 +6,7 @@
   import { syncSkippedItemsQuery } from "$lib/requests/queries/streaming-sync/syncSkippedItemsQuery.ts";
   import { firstValueFrom, map } from "rxjs";
   import SettingsBlock from "../SettingsBlock.svelte";
+  import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SyncItemRow from "./SyncItemRow.svelte";
   import SyncLoadError from "./SyncLoadError.svelte";
   import { toServiceInfo } from "./toServiceInfo.ts";
@@ -76,13 +77,13 @@
   );
 </script>
 
-<SettingsBlock {title} {description}>
+<SettingsBlock {title} {description} indented>
   {#if $isError}
     <SyncLoadError onRetry={retry} />
   {:else if !$isLoading && $items.length === 0}
     <p class="secondary">{emptyText}</p>
   {:else}
-    <div class="trakt-sync-items-list">
+    <SettingsGroupCard>
       {#each $items as item (item.key)}
         <SyncItemRow
           {item}
@@ -92,7 +93,7 @@
           })}
         />
       {/each}
-    </div>
+    </SettingsGroupCard>
 
     {#if $hasNextPage}
       <Button
@@ -108,11 +109,3 @@
     {/if}
   {/if}
 </SettingsBlock>
-
-<style lang="scss">
-  .trakt-sync-items-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-s);
-  }
-</style>

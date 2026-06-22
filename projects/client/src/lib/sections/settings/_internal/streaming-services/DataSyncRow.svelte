@@ -71,39 +71,25 @@
 </script>
 
 {#snippet pill(label: string, kind: "added" | "flag")}
-  {#if href}
-    <Link {href} color="inherit">
-      <span class="pill" data-kind={kind}>{label}</span>
-    </Link>
-  {:else}
-    <span class="pill" data-kind={kind}>{label}</span>
-  {/if}
+  <span class="pill" data-kind={kind}>{label}</span>
 {/snippet}
 
-<div class="trakt-data-sync-row" class:is-undone={sync.isUndone}>
+{#snippet rowContent()}
   <div class="service">
     {#if service}
       <StreamingServiceBadge
         name={service.name}
+        source={service.source}
         logoUrl={service.logoUrl}
-        color={service.color}
         size="small"
       />
     {/if}
   </div>
 
   <div class="details">
-    {#if href}
-      <Link {href} color="inherit">
-        <span class="date bold capitalize">
-          {toHumanDate(new Date(), sync.createdAt, getLocale())}
-        </span>
-      </Link>
-    {:else}
-      <span class="date bold capitalize">
-        {toHumanDate(new Date(), sync.createdAt, getLocale())}
-      </span>
-    {/if}
+    <span class="date bold capitalize">
+      {toHumanDate(new Date(), sync.createdAt, getLocale())}
+    </span>
 
     {#if !sync.isUndone && hasBreakdown}
       <div class="groups">
@@ -130,6 +116,16 @@
       </div>
     {/if}
   </div>
+{/snippet}
+
+<div class="trakt-data-sync-row" class:is-undone={sync.isUndone}>
+  {#if href}
+    <Link {href} color="inherit">
+      {@render rowContent()}
+    </Link>
+  {:else}
+    {@render rowContent()}
+  {/if}
 
   <div class="action">
     {#if sync.isUndone}
@@ -156,22 +152,21 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-data-sync-row {
     display: flex;
     align-items: center;
     gap: var(--gap-m);
 
-    padding: var(--ni-12) var(--ni-16);
+    padding: var(--ni-14) var(--ni-16);
 
-    border: var(--border-thickness-xs) solid transparent;
-    border-radius: var(--border-radius-l);
-    background-color: var(--color-card-background);
-    box-shadow: var(--shadow-base);
+    transition: background var(--transition-increment) ease-in-out;
 
-    transition: border-color var(--transition-increment) ease-in-out;
-
-    &:hover {
-      border-color: var(--color-link-active);
+    @include for-mouse {
+      &:hover {
+        background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+      }
     }
 
     &.is-undone {
@@ -266,6 +261,13 @@
   }
 
   .trakt-data-sync-row :global(.trakt-link) {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap-m);
+
     text-decoration: none;
   }
 
