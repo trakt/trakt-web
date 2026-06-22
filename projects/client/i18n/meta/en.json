@@ -4695,7 +4695,7 @@
       "description": "Text for the button that stops an in-progress data clear when navigating away, e.g. when clearing watchlist, ratings, etc."
     },
     "warning_prompt_cancel_clear": {
-      "default": "Navigating away will stop stop clearing your data. Are you sure?",
+      "default": "Navigating away will stop clearing your data. Are you sure?",
       "description": "Warning message shown when a user tries to navigate away while a watchlist clear is in progress."
     },
     "import_vip_limit_exceeded": {
@@ -7999,6 +7999,14 @@
     "button_plex_undo_sync": {
       "default": "Undo",
       "description": "Button to undo a Plex sync in the sync history table."
+    },
+    "button_text_install": {
+      "default": "Install",
+      "description": "Text for the button that allows users to install the new version of the app."
+    },
+    "text_info_update_downloaded": {
+      "default": "Update is ready to install.",
+      "description": "Text shown when a new version of the app has been downloaded and is ready to be installed."
     }
   }
 }
