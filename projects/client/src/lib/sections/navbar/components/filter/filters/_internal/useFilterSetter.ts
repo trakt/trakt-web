@@ -47,7 +47,7 @@ export function useFilterSetter() {
         new URL(globalThis.window.location.href),
         props,
       );
-      goto(url, { keepFocus: true, replaceState: true });
+      goto(url, { keepFocus: true, replaceState: true, noScroll: true });
     },
     syncAdditionalKeys: (filterMap: Record<string, string>) => {
       const filtersToApply: ApplyFilterToUrlProps[] = [];
@@ -82,7 +82,7 @@ export function useFilterSetter() {
         new URL(globalThis.window.location.href),
         filtersToApply,
       );
-      goto(url, { keepFocus: true, replaceState: true });
+      goto(url, { keepFocus: true, replaceState: true, noScroll: true });
     },
   };
 }
