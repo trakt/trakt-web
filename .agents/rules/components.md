@@ -268,6 +268,29 @@ runes" for the full perf rationale.
 
 ---
 
+## URL Navigation in Feature Hooks
+
+Never mutate `page.url.searchParams` (or any other property of `page` from
+`$app/state`) directly. `page` is Svelte reactive state: in-place mutations
+trigger a reactive flush, and if a query observer fires during that flush it
+will attempt to set `$state` inside a `$derived` context →
+`state_unsafe_mutation`.
+
+Always build a URL copy and pass it to `goto`:
+
+```typescript
+// Good
+const url = new URL(page.url);
+url.searchParams.set('key', 'value');
+goto(url, { replaceState: true });
+
+// Bad — mutates reactive state, may cause state_unsafe_mutation
+page.url.searchParams.set('key', 'value');
+goto(page.url, { replaceState: true });
+```
+
+---
+
 ## Guard Components
 
 Use guards instead of inline `{#if auth.isLoggedIn}` or `{#if isDesktop}`:
