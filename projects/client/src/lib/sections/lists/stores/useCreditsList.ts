@@ -1,3 +1,4 @@
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { makeTargets } from '$lib/features/intl-overlay/makeTargets.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
@@ -15,6 +16,7 @@ type UseCreditsListProps = {
   type$: Observable<MediaType>;
   slug$: Observable<string>;
   filter$: Observable<Record<string, string>>;
+  mode$: Observable<DiscoverMode>;
 };
 
 function typeToQuery(
@@ -80,7 +82,7 @@ function rebuildCredits(
 }
 
 export function useCreditsList(
-  { type$, slug$, filter$ }: UseCreditsListProps,
+  { type$, slug$, filter$, mode$ }: UseCreditsListProps,
 ) {
   const query = useQuery(
     combineLatest([type$, slug$, filter$]).pipe(
@@ -95,9 +97,13 @@ export function useCreditsList(
   // switchMap keeps the flatten -> overlay -> rebuild chain bound to the
   // same `query` emission so navigating between credits pages can never
   // pair fresh credits with stale localized titles.
-  const credits = query.pipe(
-    switchMap(($query) =>
-      of(flattenCredits($query.data)).pipe(
+  const credits = combineLatest([query, mode$]).pipe(
+    switchMap(([$query, mode]) =>
+      of(
+        flattenCredits($query.data).filter(
+          ({ credit }) => mode === 'media' || credit.media.type === mode,
+        ),
+      ).pipe(
         overlay.operator,
         map(($flat) => rebuildCredits($query.data, $flat)),
       )

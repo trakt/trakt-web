@@ -1,7 +1,9 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import * as m from "$lib/features/i18n/messages";
+  import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import * as m from "$lib/features/i18n/messages";
   import type {
     CrewPosition,
     CrewPositions,
@@ -15,7 +17,6 @@
   import CreditMediaItem from "./components/CreditMediaItem.svelte";
   import CreditsPositionDropdown from "./components/CreditsPositionDropdown.svelte";
   import NoFilterResultsPlaceholder from "./drilldown/_internal/NoFilterResultsPlaceholder.svelte";
-  import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
@@ -31,6 +32,7 @@
     $props();
 
   const { filterMap, hasActiveFilter } = useFilter();
+  const { mode } = useDiscover();
 
   const selectedPosition = $derived.by(() => {
     const defaultPosition = person.knownFor ?? "acting";
@@ -47,6 +49,7 @@
     type$: fromRune(() => type),
     slug$: fromRune(() => person.slug),
     filter$: filterMap,
+    mode$: mode,
   });
 
   const getPositionList = (mediaCredits?: MediaCredits) => {

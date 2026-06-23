@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { CrewPositions } from "$lib/requests/models/CrewPosition";
@@ -16,6 +17,8 @@
     person: PersonSummary;
     positions?: CrewPositions;
   } = $props();
+
+  const { mode } = useDiscover();
 </script>
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
@@ -26,20 +29,26 @@
   <PeopleSummary {person} />
 </RenderFor>
 
-<CreditsList
-  title={m.list_title_movie_credits()}
-  type="movie"
-  {person}
-  {positions}
-  drilldownLink={UrlBuilder.credits.movies(person.slug)}
-/>
-<CreditsList
-  title={m.list_title_show_credits()}
-  type="show"
-  {person}
-  {positions}
-  drilldownLink={UrlBuilder.credits.shows(person.slug)}
-/>
+{#if $mode === "media" || $mode === "movie"}
+  <CreditsList
+    title={m.list_title_movie_credits()}
+    type="movie"
+    {person}
+    {positions}
+    drilldownLink={UrlBuilder.credits.movies(person.slug)}
+  />
+{/if}
+
+{#if $mode === "media" || $mode === "show"}
+  <CreditsList
+    title={m.list_title_show_credits()}
+    type="show"
+    {person}
+    {positions}
+    drilldownLink={UrlBuilder.credits.shows(person.slug)}
+  />
+{/if}
+
 <CreditsHistoryList
   {person}
   drilldownLink={UrlBuilder.credits.history(person.slug)}

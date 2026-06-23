@@ -1,6 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import CreditMediaItem from "../components/CreditMediaItem.svelte";
@@ -16,10 +17,12 @@
   }: { person: PersonSummary; drilldownLink?: string } = $props();
 
   const { filterMap, hasActiveFilter } = useFilter();
+  const { mode } = useDiscover();
 
   const { list, isLoading } = useHistoryCreditsList({
     slug$: fromRune(() => person.slug),
     filter$: filterMap,
+    mode$: mode,
   });
 </script>
 

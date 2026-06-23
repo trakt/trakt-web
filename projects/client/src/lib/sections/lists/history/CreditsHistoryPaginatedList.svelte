@@ -2,6 +2,7 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
   import CreditMediaItem from "../components/CreditMediaItem.svelte";
   import NoFilterResultsPlaceholder from "../drilldown/_internal/NoFilterResultsPlaceholder.svelte";
@@ -16,10 +17,12 @@
   const { slug, name }: CreditsHistoryPaginatedListProps = $props();
 
   const { filterMap, hasActiveFilter } = useFilter();
+  const { mode } = useDiscover();
 
   const { list, isLoading } = useHistoryCreditsList({
     slug$: fromRune(() => slug),
     filter$: filterMap,
+    mode$: mode,
   });
 </script>
 

@@ -7,6 +7,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useCreditsList } from "../stores/useCreditsList";
   import CreditsPositionDropdown from "./CreditsPositionDropdown.svelte";
 
@@ -24,11 +25,13 @@
   );
 
   const { filterMap } = useFilter();
+  const { mode } = useDiscover();
 
   const { positions: allPositions } = useCreditsList({
     type$: fromRune(() => type),
     slug$: fromRune(() => slug),
     filter$: filterMap,
+    mode$: mode,
   });
 
   const buildPositionHref = (position: CrewPosition) => {
