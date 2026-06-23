@@ -1,5 +1,6 @@
 import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { makeTargets } from '$lib/features/intl-overlay/makeTargets.ts';
 import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
@@ -16,6 +17,7 @@ import { toLoadingState } from '../../../../utils/requests/toLoadingState.ts';
 type UseHistoryCreditsListProps = {
   slug$: Observable<string>;
   filter$: Observable<Record<string, string>>;
+  mode$: Observable<DiscoverMode>;
 };
 
 const mediaCreditTargets = makeTargets<MediaCredit>({
@@ -42,7 +44,7 @@ const getWatchedAt = (media: MediaEntry, history: UserHistory) => {
 };
 
 export function useHistoryCreditsList(
-  { slug$, filter$ }: UseHistoryCreditsListProps,
+  { slug$, filter$, mode$ }: UseHistoryCreditsListProps,
 ) {
   const { history } = useUser();
 
@@ -61,8 +63,8 @@ export function useHistoryCreditsList(
   const movies$ = movieQuery;
   const shows$ = showQuery;
 
-  const list$ = combineLatest([movies$, shows$, history$]).pipe(
-    map(([movies, shows, historyResult]) => {
+  const list$ = combineLatest([movies$, shows$, history$, mode$]).pipe(
+    map(([movies, shows, historyResult, mode]) => {
       if (!historyResult) {
         return [];
       }
@@ -73,7 +75,10 @@ export function useHistoryCreditsList(
 
       const credits = Array.from(mediaCredits.values())
         .flatMap((entries) => entries)
-        .filter((credit) => isInHistory(credit.media, historyResult));
+        .filter((credit) =>
+          isInHistory(credit.media, historyResult) &&
+          (mode === 'media' || credit.media.type === mode)
+        );
 
       const castCredits = credits.filter((credit) => credit.type === 'cast');
       const crewCredits = credits.filter((credit) => credit.type === 'crew');

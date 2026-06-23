@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
   import {
     crewPositionSchema,
@@ -21,6 +22,7 @@
   const { slug, type }: CreditsPaginatedListProps = $props();
 
   const { filterMap, hasActiveFilter } = useFilter();
+  const { mode } = useDiscover();
 
   const selectedPosition = $derived<CrewPosition>(
     crewPositionSchema.safeParse(
@@ -32,6 +34,7 @@
     type$: fromRune(() => type),
     slug$: fromRune(() => slug),
     filter$: filterMap,
+    mode$: mode,
   });
 
   const getPositionList = (mediaCredits?: MediaCredits) => {
@@ -40,6 +43,7 @@
   };
 
   const list = $derived(getPositionList($credits));
+  const hasMatchingType = $derived($mode === "media" || $mode === type);
 </script>
 
 <GridList
@@ -58,7 +62,7 @@
   {/snippet}
 
   {#snippet empty()}
-    {#if $hasActiveFilter && !$isLoading}
+    {#if ($hasActiveFilter || !hasMatchingType) && !$isLoading}
       <NoFilterResultsPlaceholder />
     {/if}
   {/snippet}
