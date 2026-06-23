@@ -2,8 +2,8 @@
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import ReportButton from "$lib/features/report/ReportButton.svelte";
   import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
+  import ReportButton from "$lib/features/report/ReportButton.svelte";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import PersonTitle from "../_internal/PersonTitle.svelte";
   import SummaryContainer from "./../summary/SummaryContainer.svelte";
@@ -14,7 +14,6 @@
   import ImdbLink from "./v2/_internal/ImdbLink.svelte";
   import PersonDetails from "./v2/_internal/PersonDetails.svelte";
   import SocialMediaLinks from "./v2/_internal/SocialMediaLinks.svelte";
-  import FilterButton from "$lib/sections/navbar/components/filter/FilterButton.svelte";
 
   const { person }: { person: PersonSummary } = $props();
 </script>
@@ -25,23 +24,20 @@
   {/if}
 {/snippet}
 
-<SummaryContainer>
+<SummaryContainer variant="compact">
   {#snippet poster()}
     <SummaryPoster src={person.headshot.url.medium} alt={person.name} {tags} />
   {/snippet}
 
   <div class="trakt-summary-main-content">
     <SummaryHeader title={person.name}>
-      {#snippet headerActions()}
-        <FilterButton isDisabled={false} />
+      {#snippet popupActions()}
         <ShareButton
           title={person.name}
           textFactory={({ title: name }) => m.text_share_person({ name })}
           source={{ id: "person" }}
+          style="dropdown-item"
         />
-      {/snippet}
-
-      {#snippet popupActions()}
         <ReportButton
           params={{
             type: ReportableType.Person,
