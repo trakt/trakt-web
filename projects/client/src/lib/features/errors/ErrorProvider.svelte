@@ -97,7 +97,7 @@
   {/if}
 
   {#if fetchError?.type === WellKnownErrorType.LockedAccountError}
-    <ErrorLockedAccountPage />
+    <ErrorLockedAccountPage message={fetchError.message} />
   {/if}
 
   {#if fetchError?.type === WellKnownErrorType.RateLimitError}

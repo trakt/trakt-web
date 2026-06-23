@@ -2494,6 +2494,10 @@
       "default": "Please visit the <a>advanced settings</a> to run a history analysis and unlock your account.",
       "description": "Text shown on the account locked page, informing the user that their account has been locked and how to unlock it."
     },
+    "error_text_locked_account_collection_limit": {
+      "default": "This user account has been locked because the collection has exceeded the limit. Please <a>contact support</a> to resolve this issue.",
+      "description": "Text shown on the account locked page when the account is locked because the collection limit is exceeded."
+    },
     "error_text_locked_account_persists": {
       "default": "If the issue persists, please <a>contact support</a> to resolve this issue.",
       "description": "Text shown on the account locked page, informing the user that if they can't unlock their account, they should contact support for assistance."
