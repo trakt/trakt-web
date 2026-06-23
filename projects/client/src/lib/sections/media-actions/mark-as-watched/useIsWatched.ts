@@ -1,5 +1,5 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { map } from 'rxjs';
+import { map, shareReplay } from 'rxjs';
 import type { ExtendedMediaStoreProps } from '../../../models/MediaStoreProps.ts';
 
 export type IsWatchedProps = ExtendedMediaStoreProps;
@@ -20,32 +20,50 @@ export function useIsWatched(props: IsWatchedProps) {
     ? Array.isArray(props.media) ? props.media : [props.media]
     : [];
 
-  const isWatched = history.pipe(
+  const watchState = history.pipe(
     map(($history) => {
       if (!$history) {
-        return false;
+        return { isWatched: false, isPartiallyWatched: false };
       }
 
       switch (type) {
         case 'movie':
-          return media.every((m) => $history.movies.has(m.id));
+          return {
+            isWatched: media.every((m) => $history.movies.has(m.id)),
+            isPartiallyWatched: false,
+          };
         case 'episode': {
           const watchedEpisodes = $history.shows.get(showId)?.episodes ?? [];
 
-          return episodes.every((episode) =>
-            watchedEpisodes.some((e) => e.episodeId === episode.id)
-          );
+          return {
+            isWatched: episodes.every((episode) =>
+              watchedEpisodes.some((e) => e.episodeId === episode.id)
+            ),
+            isPartiallyWatched: false,
+          };
         }
         case 'season': {
           const countBySeason = $history.shows.get(showId)?.playsPerSeason ??
             new Map<number, number>();
 
-          return seasons.every((season) =>
+          const watchedCount = seasons.filter((season) =>
             (countBySeason.get(season.number) ?? 0) >= season.episodes.count
-          );
+          ).length;
+
+          const hasSomeCompleteSeasons = watchedCount > 0 &&
+            watchedCount < seasons.length;
+          const hasSomePartialSeasons = seasons.some((season) => {
+            const count = countBySeason.get(season.number) ?? 0;
+            return count > 0 && count < season.episodes.count;
+          });
+
+          return {
+            isWatched: watchedCount === seasons.length,
+            isPartiallyWatched: hasSomeCompleteSeasons || hasSomePartialSeasons,
+          };
         }
         case 'show': {
-          return shows.every((show) => {
+          const isWatched = shows.every((show) => {
             const watchedShow = $history.shows.get(show.id);
             const episodeCount = show.episode?.count;
 
@@ -56,15 +74,34 @@ export function useIsWatched(props: IsWatchedProps) {
             const watchedEpisodeCount = [
               ...watchedShow.playsPerSeason.entries(),
             ]
-              .filter(([season]) => season !== 0)
+              .filter(([season]) =>
+                season !== 0
+              )
               .reduce((sum, [, count]) => sum + count, 0);
 
             return watchedEpisodeCount >= episodeCount;
           });
+
+          const isPartiallyWatched = !isWatched && shows.some((show) => {
+            const watchedShow = $history.shows.get(show.id);
+
+            if (!watchedShow) {
+              return false;
+            }
+
+            return [...watchedShow.playsPerSeason.entries()]
+              .some(([season, count]) => season !== 0 && count > 0);
+          });
+
+          return { isWatched, isPartiallyWatched };
         }
       }
     }),
+    shareReplay({ bufferSize: 1, refCount: true }),
   );
 
-  return { isWatched };
+  const isWatched = watchState.pipe(map((s) => s.isWatched));
+  const isPartiallyWatched = watchState.pipe(map((s) => s.isPartiallyWatched));
+
+  return { isWatched, isPartiallyWatched };
 }

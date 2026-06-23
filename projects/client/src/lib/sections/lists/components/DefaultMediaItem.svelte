@@ -31,7 +31,9 @@
     sortTag?: Snippet;
   } = $props();
 
-  const { isWatched } = $derived(useIsWatched({ type, media }));
+  const { isWatched, isPartiallyWatched } = $derived(
+    useIsWatched({ type, media }),
+  );
   const { isWatchlisted } = $derived(useIsWatchlisted({ type, media }));
 
   const isDeemphasized = $derived(canDeemphasize && $isWatched);
@@ -64,7 +66,11 @@
 {/snippet}
 
 {#snippet indicatorTags()}
-  <StatusIndicators isWatched={$isWatched} isWatchlisted={$isWatchlisted} />
+  <StatusIndicators
+    isWatched={$isWatched}
+    isPartiallyWatched={$isPartiallyWatched}
+    isWatchlisted={$isWatchlisted}
+  />
 {/snippet}
 
 {#snippet tag()}
@@ -101,7 +107,10 @@
 {/snippet}
 
 <MediaSwipe {type} {media} {style}>
-  <trakt-default-media-item role="listitem" class:is-deemphasized={isDeemphasized}>
+  <trakt-default-media-item
+    role="listitem"
+    class:is-deemphasized={isDeemphasized}
+  >
     <MediaItem
       {type}
       {media}

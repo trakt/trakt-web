@@ -1,4 +1,4 @@
-import { time } from "$lib/utils/timing/time";
+import { time } from '$lib/utils/timing/time';
 
 function waitForGlobalPlyr(): Promise<new (...args: unknown[]) => Plyr> {
   return new Promise((resolve, reject) => {
@@ -6,7 +6,7 @@ function waitForGlobalPlyr(): Promise<new (...args: unknown[]) => Plyr> {
 
     const timeout = setTimeout(() => {
       cancelAnimationFrame(rafId);
-      reject(new Error("Plyr failed to load"));
+      reject(new Error('Plyr failed to load'));
     }, time.seconds(10));
 
     function check() {
