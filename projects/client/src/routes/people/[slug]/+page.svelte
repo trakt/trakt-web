@@ -5,6 +5,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PeopleSummary from "$lib/sections/summary/PeopleSummary.svelte";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { PageProps } from "./$types";
   import { usePerson } from "./usePerson";
@@ -23,6 +24,13 @@
 
     return { movies, shows };
   });
+
+  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+
+  const navbarMode = $derived(
+    $isTabletLarge || $isDesktop ? "full" : "minimal",
+  );
 </script>
 
 <TraktPage
@@ -31,7 +39,7 @@
   image={$person?.headshot?.url.medium}
 >
   <RenderFor audience="authenticated">
-    <NavbarStateSetter mode="minimal" hasFilters />
+    <NavbarStateSetter mode={navbarMode} hasFilters />
   </RenderFor>
 
   {#if !$isLoading}

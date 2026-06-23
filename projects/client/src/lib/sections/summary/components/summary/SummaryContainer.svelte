@@ -5,6 +5,7 @@
     poster?: Snippet;
     contextualContent?: Snippet;
     topActions?: Snippet;
+    variant?: "compact" | "default";
   } & ChildrenProps;
 
   const {
@@ -12,10 +13,15 @@
     contextualContent: content,
     children,
     topActions: actions,
+    variant = "default",
   }: SummaryContainerProps = $props();
 </script>
 
-<div class="trakt-summary-container" class:has-contextual-content={content}>
+<div
+  class="trakt-summary-container"
+  class:has-contextual-content={content}
+  data-variant={variant}
+>
   {#if poster}
     <div class="trakt-summary-poster-container">
       {@render poster()}
@@ -51,6 +57,11 @@
 
     margin: 0 var(--layout-distance-side);
     padding-top: var(--ni-38);
+
+    &[data-variant="compact"] {
+      padding-top: 0;
+      margin-top: calc(-1 * var(--gap-m));
+    }
 
     @include for-desktop {
       &.has-contextual-content {
