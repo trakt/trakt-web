@@ -1,10 +1,13 @@
 <script lang="ts">
   import StemTag from "$lib/components/tags/StemTag.svelte";
 
-  const { children }: ChildrenProps = $props();
+  const {
+    children,
+    variant = "full",
+  }: { variant?: "partial" | "full" } & ChildrenProps = $props();
 </script>
 
-<trakt-indicator-tag>
+<trakt-indicator-tag data-variant={variant}>
   <StemTag
     --color-background-stem-tag="var(--color-background-indicator-tag)"
     --color-foreground-stem-tag="var(--color-text-indicator-tag)"
@@ -22,6 +25,16 @@
       :global(trakt-tag-icon svg) {
         width: var(--ni-10);
         height: var(--ni-10);
+      }
+    }
+
+    &[data-variant="partial"] {
+      :global(.trakt-tag) {
+        background: linear-gradient(
+          to right,
+          var(--color-background-stem-tag) 50%,
+          var(--shade-500) 50%
+        );
       }
     }
   }

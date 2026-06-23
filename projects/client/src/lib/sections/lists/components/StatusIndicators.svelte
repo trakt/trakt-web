@@ -5,14 +5,19 @@
 
   type StatusIndicatorsProps = {
     isWatched: boolean;
+    isPartiallyWatched?: boolean;
     isWatchlisted: boolean;
   };
 
-  const { isWatched, isWatchlisted }: StatusIndicatorsProps = $props();
+  const {
+    isWatched,
+    isPartiallyWatched,
+    isWatchlisted,
+  }: StatusIndicatorsProps = $props();
 </script>
 
-{#if isWatched}
-  <IndicatorTag>
+{#if isWatched || isPartiallyWatched}
+  <IndicatorTag variant={isPartiallyWatched ? "partial" : "full"}>
     <TrackIcon />
   </IndicatorTag>
 {:else if isWatchlisted}

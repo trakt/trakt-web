@@ -38,7 +38,7 @@
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 
-  const { isWatched } = $derived(
+  const { isWatched, isPartiallyWatched } = $derived(
     useIsWatched({ type: "season", media: season, show: media }),
   );
 
@@ -49,7 +49,11 @@
 </script>
 
 {#snippet indicatorTags()}
-  <StatusIndicators isWatched={$isWatched} isWatchlisted={false} />
+  <StatusIndicators
+    isWatched={$isWatched}
+    isPartiallyWatched={$isPartiallyWatched}
+    isWatchlisted={false}
+  />
 {/snippet}
 
 <div
