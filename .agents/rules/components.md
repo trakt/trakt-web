@@ -313,6 +313,41 @@ Use guards instead of inline `{#if auth.isLoggedIn}` or `{#if isDesktop}`:
 
 ---
 
+## Theme-Aware Styling
+
+Components must never apply styles conditionally based on the active theme. No
+`[data-theme='dark']` or `[data-theme='light']` selectors inside component SCSS
+blocks, and no `prefers-color-scheme` media queries inside a component.
+
+Instead, every theme-variant value belongs as a CSS custom property in
+`src/style/theme/modes.scss` under both `@mixin light-theme` and
+`@mixin dark-theme`. Components then consume that variable unconditionally.
+
+```scss
+// Bad - component leaks theme awareness
+.trakt-my-card {
+  background: var(--shade-10);
+
+  [data-theme='dark'] & {
+    background: var(--shade-930);
+  }
+}
+
+// Good - define the variable in modes.scss …
+// light-theme mixin:  --color-my-card-background: var(--shade-10);
+// dark-theme mixin:   --color-my-card-background: var(--shade-930);
+
+// … then use it unconditionally in the component
+.trakt-my-card {
+  background: var(--color-my-card-background);
+}
+```
+
+If no suitable semantic variable exists yet, add one to **both** mixins in
+`modes.scss` before wiring it up in the component.
+
+---
+
 ## Font Styling
 
 Use global typography utility classes from `style/typography/index.css` for font
@@ -649,6 +684,9 @@ the appropriate helper component instead:
       `.primary { … }`) - always anchored to the `trakt-*` root
 - [ ] No inline `style=` for raw property values - only CSS variables, layout
       tricks (`display: contents`), or `z-index` token refs
+- [ ] No theme-conditional selectors (`[data-theme='dark']`,
+      `prefers-color-scheme`) inside component SCSS - theme values belong in
+      `modes.scss` as CSS variables consumed unconditionally by the component
 - [ ] SCSS uses CSS custom properties (`--ni-*`, `--color-*`) - no raw hex
       values
 - [ ] Font styling uses typography utility classes (`.bold`, `.ellipsis`,
