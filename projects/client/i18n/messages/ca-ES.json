@@ -478,6 +478,7 @@
   "error_text_failed_update": "L'actualització ha fallat. Torna-ho a provar.",
   "error_text_image_preview_failed": "No s'ha pogut carregar la previsualització",
   "error_text_lists_limit": "Has arribat al límit de les teves llistes personals. Actualitza a VIP per obtenir una quantitat il·limitada de llistes!",
+  "error_text_locked_account_collection_limit": "Aquest compte d'usuari s'ha bloquejat perquè la col·lecció ha superat el límit. Si us plau, <a>contacta amb el suport</a> per resoldre aquest problema.",
   "error_text_locked_account_guide": "Si us plau, visita la secció de <a>configuració avançada</a> per executar una anàlisi de l'historial i desbloquejar el teu compte.",
   "error_text_locked_account_persists": "Si el problema persisteix, si us plau, <a>contacta amb el suport</a> per resoldre'l.",
   "error_text_report_already_reported": "Ja has informat d'això.",

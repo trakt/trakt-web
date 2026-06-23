@@ -478,6 +478,7 @@
   "error_text_failed_update": "Aktualizacja nie powiodła się. Spróbuj ponownie.",
   "error_text_image_preview_failed": "Nie udało się wczytać podglądu",
   "error_text_lists_limit": "Osiągnąłeś limit swoich list osobistych. Zostań VIP, aby odblokować większą liczbę list!",
+  "error_text_locked_account_collection_limit": "Konto użytkownika zostało zablokowane, ponieważ kolekcja przekroczyła limit. Skontaktuj się z <a>pomocą techniczną</a>, aby rozwiązać ten problem.",
   "error_text_locked_account_guide": "Zobacz <a>ustawienia zaawansowane</a>, aby przeanalizować historię i odblokować swoje konto.",
   "error_text_locked_account_persists": "Jeśli problem będzie się powtarzał, proszę <a>skontaktować się z pomocą techniczną</a>.",
   "error_text_report_already_reported": "Już to zgłosiłeś.",

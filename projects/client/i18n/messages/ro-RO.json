@@ -478,6 +478,7 @@
   "error_text_failed_update": "Actualizarea a eșuat. Te rog să încerci din nou.",
   "error_text_image_preview_failed": "Previzualizarea nu a putut fi încărcată",
   "error_text_lists_limit": "Ai atins limita listelor personale. Fă upgrade la VIP pentru liste nelimitate!",
+  "error_text_locked_account_collection_limit": "Acest cont de utilizator a fost blocat deoarece colecția a depășit limita. Vă rugăm să <a>contactați asistența</a> pentru a rezolva această problemă.",
   "error_text_locked_account_guide": "Te rugăm să vizitezi <a>setările avansate</a> pentru a rula o analiză a istoricului și a debloca contul.",
   "error_text_locked_account_persists": "Dacă problema persistă, te rugăm să <a>contactezi asistența</a> pentru a rezolva această problemă.",
   "error_text_report_already_reported": "Ați raportat deja acest lucru.",

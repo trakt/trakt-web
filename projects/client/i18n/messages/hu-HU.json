@@ -478,6 +478,7 @@
   "error_text_failed_update": "A frissítés sikertelen. Kérjük, próbálja újra.",
   "error_text_image_preview_failed": "Az előnézet betöltése sikertelen",
   "error_text_lists_limit": "Elérted a személyes listáid számának a limitjét. Válts VIP tagságra korlátlan számú listákért!",
+  "error_text_locked_account_collection_limit": "Ez a felhasználói fiók zárolásra került, mert a gyűjtemény túllépte a limitet. Kérjük, <a>keresse fel az ügyfélszolgálatot</a> a probléma megoldásához.",
   "error_text_locked_account_guide": "Kérjük, keresd fel a <a>haladó beállítások</a> oldalt, az előzmények elemzéséhez és a fiók feloldásához.",
   "error_text_locked_account_persists": "Ha a probléma továbbra is fennáll, kérjük, <a>vedd fel a kapcsolatot az ügyfélszolgálattal</a> a probléma megoldásához.",
   "error_text_report_already_reported": "Ezt már jelentetted.",

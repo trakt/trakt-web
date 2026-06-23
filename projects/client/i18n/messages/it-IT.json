@@ -478,6 +478,7 @@
   "error_text_failed_update": "Aggiornamento fallito. Riprova.",
   "error_text_image_preview_failed": "Impossibile caricare l'anteprima",
   "error_text_lists_limit": "Hai raggiunto il limite delle tue liste personali. Passa a VIP per un numero illimitato di liste!",
+  "error_text_locked_account_collection_limit": "Questo account utente è stato bloccato perché la collezione ha superato il limite. Si prega di <a>contattare il supporto</a> per risolvere questo problema.",
   "error_text_locked_account_guide": "Visita le <a>impostazioni avanzate</a> per eseguire un'analisi della cronologia e sbloccare il tuo account.",
   "error_text_locked_account_persists": "Se il problema persiste, <a>contatta il supporto</a> per risolvere il problema.",
   "error_text_report_already_reported": "Hai già segnalato questo elemento.",

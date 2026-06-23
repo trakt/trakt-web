@@ -478,6 +478,7 @@
   "error_text_failed_update": "更新失败。请再试一次。",
   "error_text_image_preview_failed": "预览加载失败",
   "error_text_lists_limit": "你已达到个人列表数量上限。升级至VIP可获得无限量列表！",
+  "error_text_locked_account_collection_limit": "此用户帐户已被锁定，因为收藏已超出限制。请<a>联系支持</a>以解决此问题。",
   "error_text_locked_account_guide": "请访问<a>高级设置</a>以运行历史分析并解锁您的账户。",
   "error_text_locked_account_persists": "如果问题仍然存在，请<a>联系支持</a>以解决此问题。",
   "error_text_report_already_reported": "您已举报过此内容。",

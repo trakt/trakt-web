@@ -478,6 +478,7 @@
   "error_text_failed_update": "Güncelleme başarısız oldu. Lütfen tekrar deneyin.",
   "error_text_image_preview_failed": "Önizleme yüklenemedi",
   "error_text_lists_limit": "Kişisel listelerinizin sınırına ulaştınız. Sınırsız liste için VIP'ye yükseltin!",
+  "error_text_locked_account_collection_limit": "Bu kullanıcı hesabı, koleksiyon limiti aşıldığı için kilitlenmiştir. Lütfen bu sorunu çözmek için <a>destek ile iletişime geçin</a>.",
   "error_text_locked_account_guide": "Bir geçmiş analizi yapmak ve hesabınızın kilidini açmak için lütfen <a>gelişmiş ayarlara</a> gidin.",
   "error_text_locked_account_persists": "Sorun devam ederse, lütfen bu sorunu çözmek için <a>destek ile iletişime geçin</a>.",
   "error_text_report_already_reported": "Bunu zaten bildirdiniz.",

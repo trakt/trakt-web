@@ -478,6 +478,7 @@
   "error_text_failed_update": "Bijwerken mislukt. Probeer het opnieuw.",
   "error_text_image_preview_failed": "Voorbeeld kon niet worden geladen",
   "error_text_lists_limit": "Je hebt de limiet voor persoonlijke lijsten bereikt. Upgrade naar VIP voor een onbeperkt aantal lijsten!",
+  "error_text_locked_account_collection_limit": "Dit gebruikersaccount is vergrendeld omdat de collectie de limiet heeft overschreden. Neem alstublieft <a>contact op met de ondersteuning</a> om dit probleem op te lossen.",
   "error_text_locked_account_guide": "Bezoek de <a>geavanceerde instellingen</a> om een geschiedenisanalyse uit te voeren en je account te ontgrendelen.",
   "error_text_locked_account_persists": "Als het probleem aanhoudt, neem dan <a>contact op met de ondersteuning</a> om dit probleem op te lossen.",
   "error_text_report_already_reported": "Dit is al door u gemeld.",

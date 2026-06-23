@@ -478,6 +478,7 @@
   "error_text_failed_update": "Opdatering mislykkedes. Prøv venligst igen.",
   "error_text_image_preview_failed": "Forhåndsvisning kunne ikke indlæses",
   "error_text_lists_limit": "Du har nået grænsen for dine personlige lister. Opgrader til VIP for ubegrænsede lister!",
+  "error_text_locked_account_collection_limit": "Denne brugerkonto er blevet låst, fordi samlingen har overskredet grænsen. Venligst <a>kontakt support</a> for at løse dette problem.",
   "error_text_locked_account_guide": "Besøg venligst de <a>avancerede indstillinger</a> for at køre en historikanalyse og låse din konto op.",
   "error_text_locked_account_persists": "Hvis problemet fortsætter, venligst <a>kontakt support</a> for at løse dette problem.",
   "error_text_report_already_reported": "Du har allerede rapporteret dette.",

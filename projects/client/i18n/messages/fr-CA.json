@@ -478,6 +478,7 @@
   "error_text_failed_update": "La mise à jour a échoué. Veuillez réessayer.",
   "error_text_image_preview_failed": "Échec du chargement de l'aperçu",
   "error_text_lists_limit": "Vous avez atteint la limite de vos listes personnelles. Passez au VIP pour un nombre illimité de listes!",
+  "error_text_locked_account_collection_limit": "Ce compte d'utilisateur a été verrouillé car la collection a dépassé la limite. Veuillez <a>contacter le support</a> pour résoudre ce problème.",
   "error_text_locked_account_guide": "Veuillez consulter les <a>paramètres avancés</a> pour effectuer une analyse de l'historique et déverrouiller votre compte.",
   "error_text_locked_account_persists": "Si le problème persiste, veuillez <a>contacter le support</a> pour le résoudre.",
   "error_text_report_already_reported": "Vous avez déjà signalé cet élément.",

@@ -478,6 +478,7 @@
   "error_text_failed_update": "Update failed. Please try again.",
   "error_text_image_preview_failed": "Preview failed to load",
   "error_text_lists_limit": "You've reached your limit for personal lists. Upgrade to VIP for unlimited lists!",
+  "error_text_locked_account_collection_limit": "This user account has been locked because the collection has exceeded the limit. Please <a>contact support</a> to resolve this issue.",
   "error_text_locked_account_guide": "Please visit the <a>advanced settings</a> to run a history analysis and unlock your account.",
   "error_text_locked_account_persists": "If the issue persists, please <a>contact support</a> to resolve this issue.",
   "error_text_report_already_reported": "You've already reported this.",

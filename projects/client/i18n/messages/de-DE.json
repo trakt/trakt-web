@@ -478,6 +478,7 @@
   "error_text_failed_update": "Aktualisierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
   "error_text_image_preview_failed": "Vorschau konnte nicht geladen werden",
   "error_text_lists_limit": "Sie haben das Limit Ihrer persönlichen Listen erreicht. Werden Sie VIP für unbegrenzt viele Listen!",
+  "error_text_locked_account_collection_limit": "Dieses Benutzerkonto wurde gesperrt, da die Sammlung das Limit überschritten hat. Bitte <a>kontaktieren Sie den Support</a>, um dieses Problem zu lösen.",
   "error_text_locked_account_guide": "Bitte besuchen Sie die <a>erweiterten Einstellungen</a>, um eine Historienanalyse durchzuführen und Ihr Konto zu entsperren.",
   "error_text_locked_account_persists": "Sollte das Problem weiterhin bestehen, bitte <a>kontaktieren Sie den Support</a>, um dieses Problem zu lösen.",
   "error_text_report_already_reported": "Sie haben dies bereits gemeldet.",

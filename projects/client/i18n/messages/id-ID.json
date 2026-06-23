@@ -478,6 +478,7 @@
   "error_text_failed_update": "Pembaruan gagal. Silakan coba lagi.",
   "error_text_image_preview_failed": "Pratinjau gagal dimuat",
   "error_text_lists_limit": "Anda telah mencapai batas daftar pribadi Anda. Tingkatkan ke VIP untuk daftar tanpa batas!",
+  "error_text_locked_account_collection_limit": "Akun pengguna ini telah dikunci karena koleksi telah melampaui batas. Harap <a>hubungi dukungan</a> untuk menyelesaikan masalah ini.",
   "error_text_locked_account_guide": "Silakan kunjungi <a>pengaturan lanjutan</a> untuk menjalankan analisis riwayat dan membuka kunci akun Anda.",
   "error_text_locked_account_persists": "Jika masalah berlanjut, silakan <a>hubungi dukungan</a> untuk menyelesaikan masalah ini.",
   "error_text_report_already_reported": "Anda sudah melaporkan ini.",

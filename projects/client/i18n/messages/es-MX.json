@@ -478,6 +478,7 @@
   "error_text_failed_update": "Error al actualizar. Inténtalo de nuevo.",
   "error_text_image_preview_failed": "No se pudo cargar la vista previa",
   "error_text_lists_limit": "Has alcanzado el límite de tus listas personales. ¡Actualiza a VIP para tener listas ilimitadas!",
+  "error_text_locked_account_collection_limit": "Esta cuenta de usuario ha sido bloqueada porque la colección ha excedido el límite. Por favor, <a>contacta a soporte</a> para resolver este problema.",
   "error_text_locked_account_guide": "Visita los <a>ajustes avanzados</a> para ejecutar un análisis del historial y desbloquear tu cuenta.",
   "error_text_locked_account_persists": "Si el problema persiste, <a>contacta a soporte</a> para resolver este problema.",
   "error_text_report_already_reported": "Ya has reportado esto.",
