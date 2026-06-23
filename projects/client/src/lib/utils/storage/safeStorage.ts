@@ -10,13 +10,33 @@ const Noop_storage: Storage = {
   clear: NOOP_FN,
 };
 
+function wrapStorage(storage: Storage): Storage {
+  return {
+    get length() {
+      return storage.length;
+    },
+    key: (index) => storage.key(index),
+    getItem: (key) => storage.getItem(key),
+    setItem: (key, value) => {
+      try {
+        storage.setItem(key, value);
+      } catch {
+        // QuotaExceededError: storage full or disabled
+      }
+    },
+    removeItem: (key) => storage.removeItem(key),
+    clear: () => storage.clear(),
+  };
+}
+
 function resolveStorage(getStorage: () => Storage | null): Storage {
   if (!browser) {
     return Noop_storage;
   }
 
   try {
-    return getStorage() ?? Noop_storage;
+    const storage = getStorage();
+    return storage ? wrapStorage(storage) : Noop_storage;
   } catch {
     return Noop_storage;
   }
