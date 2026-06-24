@@ -274,7 +274,7 @@
   .poster-wrapper {
     --poster-index: 0;
 
-    --poster-overlap: var(--poster-width) / 5;
+    --poster-overlap: calc(var(--poster-width) / 5);
     --total-poster-width: calc(
       (var(--poster-width) - var(--poster-overlap)) * var(--poster-count)
     );
