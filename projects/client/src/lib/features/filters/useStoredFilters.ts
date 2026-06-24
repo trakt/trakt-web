@@ -71,6 +71,12 @@ export function useStoredFilters() {
       },
     );
 
+    // No-op navigations (e.g. empty stored filters) would otherwise loop
+    // forever under afterNavigate, since the URL never changes.
+    if (url.href === page.url.href) {
+      return;
+    }
+
     goto(url, { replaceState: true });
   };
 
