@@ -1,3 +1,4 @@
+import { isWorkerAuthHost } from '../url/isWorkerAuthHost.ts';
 import { IS_DEV, IS_PREVIEW } from '../env/index.ts';
 
 export function getReferrer() {
@@ -11,8 +12,7 @@ export function getReferrer() {
 
   // workers.dev hosts (worker-auth beta) serve from their own origin; return it
   // so OAuth redirects come back to the same host, not the prod app origin.
-  const host = globalThis.window?.location.hostname;
-  if (host?.endsWith('.workers.dev')) {
+  if (isWorkerAuthHost(globalThis.window?.location.hostname)) {
     return globalThis.window.location.origin;
   }
 
