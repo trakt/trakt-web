@@ -1,8 +1,14 @@
 import { getReferrer } from '$lib/utils/requests/getReferrer.ts';
+import { isWorkerAuthHost } from '$lib/utils/url/isWorkerAuthHost.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { type UserManagerSettings, WebStorageStateStore } from 'oidc-client-ts';
 
 function getAuthority() {
+  // Worker-auth beta: on the workers.dev host, run OAuth through the worker.
+  if (isWorkerAuthHost(globalThis.window?.location.hostname)) {
+    return prependHttps('auth.trakt.tv');
+  }
+
   return prependHttps(
     TRAKT_TARGET_ENVIRONMENT
       .replace('api.', '')
