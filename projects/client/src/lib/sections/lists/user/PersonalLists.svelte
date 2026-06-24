@@ -53,9 +53,8 @@
 
   const isMine = $derived(type === "personal" && $isMe);
   const isPresentable = $derived(
-    display === "compact"
-      ? $isMe || (!$isLoading && $lists.length > 0)
-      : isMine || (!$isLoading && $lists.length > 0),
+    (display === "compact" ? $isMe : isMine) ||
+      (!$isLoading && $lists.length > 0),
   );
 
   const title = $derived.by(() => {
