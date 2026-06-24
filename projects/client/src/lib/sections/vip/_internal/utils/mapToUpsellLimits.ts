@@ -18,10 +18,6 @@ export function mapToUpsellLimits(
       limits: limits.watchlistItems,
     },
     {
-      title: m.limit_title_notes,
-      limits: limits.totalNotes,
-    },
-    {
       title: m.limit_title_smart_lists,
       limits: limits.dynamicLists,
     },

@@ -7,8 +7,6 @@
   import GlobeIcon from "./icons/GlobeIcon.svelte";
   import LibraryIcon from "./icons/LibraryIcon.svelte";
   import ListIcon from "./icons/ListIcon.svelte";
-  import NotesIcon from "./icons/NotesIcon.svelte";
-  import ProfileIcon from "./icons/ProfileIcon.svelte";
   import RecapsIcon from "./icons/RecapsIcon.svelte";
   import SentimentIcon from "./icons/SentimentIcon.svelte";
   import StreamingIcon from "./icons/StreamingIcon.svelte";
@@ -39,11 +37,6 @@
       icon: LibraryIcon,
     },
     {
-      title: m.vip_feature_title_profile_customisation,
-      description: m.vip_feature_description_profile_customisation,
-      icon: ProfileIcon,
-    },
-    {
       title: m.vip_feature_title_plex_sync,
       description: m.vip_feature_description_plex_sync,
       icon: SyncIcon,
@@ -67,11 +60,6 @@
       title: m.vip_feature_title_api_apps,
       description: m.vip_feature_description_api_apps,
       icon: ApiIcon,
-    },
-    {
-      title: m.vip_feature_title_private_notes,
-      description: m.vip_feature_description_private_notes,
-      icon: NotesIcon,
     },
     {
       title: m.vip_feature_title_support,
