@@ -18,7 +18,7 @@
 </script>
 
 {#if isOpen}
-  <Drawer {onClose} {title} {metaInfo}>
+  <Drawer {onClose} {title} {metaInfo} size="auto">
     <div class="trakt-media-actions">
       {@render children()}
     </div>
