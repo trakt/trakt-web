@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { afterNavigate } from "$app/navigation";
   import { useStoredFilters } from "./useStoredFilters";
 
   const { children }: ChildrenProps = $props();
 
   const { restoreFilters } = useStoredFilters();
 
-  onMount(() => {
+  afterNavigate(() => {
     restoreFilters();
   });
 </script>
