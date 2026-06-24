@@ -94,6 +94,8 @@
       color: var(--shade-10);
 
       line-height: 1;
+
+      pointer-events: none;
     }
   }
 </style>
