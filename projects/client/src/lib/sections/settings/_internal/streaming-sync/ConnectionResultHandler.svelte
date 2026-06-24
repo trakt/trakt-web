@@ -2,10 +2,14 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
+  import { saveStreamingPreferencesRequest } from "$lib/requests/queries/services/saveStreamingPreferencesRequest.ts";
   import { refreshStreamingRequest } from "$lib/requests/queries/streaming-sync/refreshStreamingRequest.ts";
   import { useInvalidator } from "$lib/stores/useInvalidator.ts";
+  import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
+  import { firstValueFrom } from "rxjs";
   import { onMount } from "svelte";
+  import { toFavoritesWithConnection } from "./toFavoritesWithConnection.ts";
   import {
     type StreamingConnectionStatusKind,
     streamingConnectionStatus,
@@ -22,12 +26,35 @@
   ]);
 
   const { invalidate } = useInvalidator();
+  const { favorites, country } = useStreamingPreferences();
 
   function toKind(value: string | null): StreamingConnectionStatusKind | null {
     if (value && RESULT_KINDS.has(value as StreamingConnectionStatusKind)) {
       return value as StreamingConnectionStatusKind;
     }
     return null;
+  }
+
+  // Mark the connected service as a watch-now favorite, mapping the younify id
+  // onto its source slug. Best-effort: a failure must not block the re-sync.
+  async function addConnectedFavorite(serviceId: string) {
+    const [currentFavorites, countryCode] = await Promise.all([
+      firstValueFrom(favorites),
+      firstValueFrom(country),
+    ]);
+
+    const nextFavorites = toFavoritesWithConnection({
+      serviceId,
+      country: countryCode,
+      favorites: currentFavorites,
+    });
+
+    if (!nextFavorites) {
+      return;
+    }
+
+    await saveStreamingPreferencesRequest({ favorites: nextFavorites });
+    await invalidate(InvalidateAction.User.Settings);
   }
 
   onMount(async () => {
@@ -49,8 +76,10 @@
 
     streamingConnectionStatus.set({ kind, serviceId });
 
-    // Mirror v2: a fresh connection kicks off a full re-sync of all data.
     if (kind === "connected" && serviceId) {
+      await addConnectedFavorite(serviceId).catch(() => {});
+
+      // Mirror v2: a fresh connection kicks off a full re-sync of all data.
       await refreshStreamingRequest({ serviceId, allData: true }).catch(() =>
         false
       );
