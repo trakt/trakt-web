@@ -48,6 +48,10 @@ export const handle: Handle = async ({ event, resolve }) => {
     };
     setCookieConsent(consent);
 
+    const host = event.url.hostname;
+    const onRootDomain = host === ROOT_DOMAIN ||
+      host.endsWith(`.${ROOT_DOMAIN}`);
+
     return new Response(
       null,
       {
@@ -61,7 +65,7 @@ export const handle: Handle = async ({ event, resolve }) => {
               secure: IS_PROD,
               maxAge: time.months(6) / time.seconds(1),
               path: '/',
-              domain: IS_PROD ? `.${ROOT_DOMAIN}` : undefined,
+              domain: IS_PROD && onRootDomain ? `.${ROOT_DOMAIN}` : undefined,
             },
           ),
         },
