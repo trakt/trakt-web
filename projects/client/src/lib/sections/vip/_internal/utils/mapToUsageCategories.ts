@@ -23,15 +23,6 @@ export function mapToUsageCategories(
 
   return [
     {
-      title: m.usage_title_personal_activity,
-      items: [
-        {
-          title: m.limit_title_notes,
-          limits: limits.totalNotes,
-        },
-      ],
-    },
-    {
       title: m.usage_title_lists,
       items: [
         {

@@ -5578,7 +5578,7 @@
       "description": "Description for the More to Come VIP feature section."
     },
     "vip_feature_title_recaps": {
-      "default": "More Recaps: Monthly & Yearly",
+      "default": "More Stats: Monthly & Yearly Recap",
       "description": "Title for the VIP feature that provides monthly and yearly recap reports."
     },
     "vip_feature_description_recaps": {
@@ -5609,14 +5609,6 @@
       "default": "Store more of your viewing history with expanded library limits designed to last a lifetime.",
       "description": "Description for the VIP feature that expands library limits."
     },
-    "vip_feature_title_profile_customisation": {
-      "default": "More Customisation: Profile Header",
-      "description": "Title for the VIP feature that allows profile header customisation."
-    },
-    "vip_feature_description_profile_customisation": {
-      "default": "Personalize your profile with custom headers and make your Trakt presence uniquely yours.",
-      "description": "Description for the VIP feature that allows profile header customisation."
-    },
     "vip_feature_title_plex_sync": {
       "default": "Sync Plex more frequently",
       "description": "Title for the VIP feature that increases Plex sync frequency."
@@ -5642,7 +5634,7 @@
       "description": "Description for the VIP feature that allows creating more custom lists."
     },
     "vip_feature_title_sentiment_trivia": {
-      "default": "More info: Sentiment + Trivia",
+      "default": "More Info: Sentiment & Trivia",
       "description": "Title for the VIP feature that provides sentiment analysis and trivia."
     },
     "vip_feature_description_sentiment_trivia": {
@@ -5650,20 +5642,12 @@
       "description": "Description for the VIP feature that provides sentiment analysis and trivia."
     },
     "vip_feature_title_api_apps": {
-      "default": "More API APPs Connected",
+      "default": "More API Apps Connected",
       "description": "Title for the VIP feature that allows connecting more API apps."
     },
     "vip_feature_description_api_apps": {
       "default": "Connect more third-party apps and services through the Trakt API to enhance your experience.",
       "description": "Description for the VIP feature that allows connecting more API apps."
-    },
-    "vip_feature_title_private_notes": {
-      "default": "More Private Notes",
-      "description": "Title for the VIP feature that allows more private notes."
-    },
-    "vip_feature_description_private_notes": {
-      "default": "Add tons more personal notes to your shows and movies to remember your thoughts and recommendations.",
-      "description": "Description for the VIP feature that allows more private notes."
     },
     "vip_feature_title_support": {
       "default": "Better Support: Forum & Feedback",
@@ -5861,10 +5845,6 @@
         }
       }
     },
-    "usage_title_personal_activity": {
-      "default": "Personal Activity",
-      "description": "Title for the section that shows a user's personal activity usage, such as their watch history and ratings counts and limits."
-    },
     "usage_title_lists": {
       "default": "Lists",
       "description": "Title for the section that shows a user's lists usage, such as their list item counts and limits."
@@ -5876,10 +5856,6 @@
     "limit_title_smart_lists": {
       "default": "Smart Lists",
       "description": "Title for the progress bar that shows a user's smart lists usage. This should be as short as possible."
-    },
-    "limit_title_notes": {
-      "default": "Notes",
-      "description": "Title for the progress bar that shows a user's notes usage. This should be as short as possible."
     },
     "limit_title_personal_lists": {
       "default": "Personal Lists",
