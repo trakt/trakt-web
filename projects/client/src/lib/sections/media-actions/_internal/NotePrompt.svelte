@@ -90,6 +90,7 @@
       onAction: handleAddNote,
     }}
   />
+  {@render children?.()}
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
