@@ -105,7 +105,7 @@
     switch (key) {
       case "genres":
       case "subgenres":
-        return splitValues(value).map(toTranslatedGenre);
+        return splitValues(value).map((genre) => toTranslatedGenre(genre));
       case "years":
         return [formatRange(value, m.advanced_filter_label_release_year)];
       case "runtimes":
