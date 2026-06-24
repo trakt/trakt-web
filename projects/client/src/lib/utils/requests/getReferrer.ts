@@ -10,8 +10,8 @@ export function getReferrer() {
     return 'http://localhost:4173';
   }
 
-  // workers.dev hosts (worker-auth beta) serve from their own origin; return it
-  // so OAuth redirects come back to the same host, not the prod app origin.
+  // On workers.dev hosts, return the serving origin so OAuth redirects come
+  // back to the same host.
   if (isWorkerAuthHost(globalThis.window?.location.hostname)) {
     return globalThis.window.location.origin;
   }

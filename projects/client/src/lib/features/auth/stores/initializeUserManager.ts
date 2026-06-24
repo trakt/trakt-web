@@ -6,7 +6,11 @@ import { workerRequest } from '$worker/workerRequest.ts';
 import { type User, UserManager } from 'oidc-client-ts';
 import { BehaviorSubject, of } from 'rxjs';
 import { onMount } from 'svelte';
+import { deriveStandardAuthority } from '../deriveStandardAuthority.ts';
 import { getOidcConfig } from '../getOidcConfig.ts';
+import { portWorkerAuthSession } from '../portWorkerAuthSession.ts';
+import { resolveOidcAuthority } from '../resolveOidcAuthority.ts';
+import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { setToken, type Token } from '../token/index.ts';
 import { postToken } from './_internal/postToken.ts';
 import type { AuthContextType } from './createAuthContext.ts';
@@ -38,6 +42,15 @@ export function initializeUserManager(
   const isInitializing = new BehaviorSubject(true);
 
   onMount(() => {
+    // Carry an existing session across an authority change so it is kept
+    // instead of orphaned under the old key (which logs the user out).
+    portWorkerAuthSession({
+      store: safeLocalStorage,
+      clientId: TRAKT_CLIENT_ID,
+      fromAuthority: deriveStandardAuthority(),
+      toAuthority: resolveOidcAuthority(),
+    });
+
     const manager = new UserManager(
       getOidcConfig(),
     );
