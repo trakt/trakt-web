@@ -1,5 +1,12 @@
+import { BehaviorSubject } from 'rxjs';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { FilterKey } from '$lib/features/filters/models/Filter.ts';
+import { filterScopeStore } from '$lib/features/filters/filterScopeStore.ts';
 import { appendGlobalParameters } from './appendGlobalParameters.ts';
+import {
+  PARAMETER_CONTEXT_KEY,
+  type ParameterType,
+} from './_internal/createParameterContext.ts';
 
 let pageUrl = new URL('https://app.trakt.tv/profile/userA');
 let afterNavigateCallback: (() => void) | undefined;
@@ -52,12 +59,24 @@ function makeAnchor(href: string): HTMLAnchorElement {
   return anchor;
 }
 
+/**
+ * Seeds the live parameter context so useParameters().search emits the given
+ * filters, mimicking filters currently applied to the page.
+ */
+function seedLiveParams(params: Record<string, ParameterType>) {
+  mockSvelteContextStore.set(PARAMETER_CONTEXT_KEY, {
+    parameters: new BehaviorSubject(new Map(Object.entries(params))),
+  });
+}
+
 describe('appendGlobalParameters', () => {
   beforeEach(() => {
     mockSvelteContextStore.clear();
     globalThis.window.history.pushState({}, '', '/profile/userA');
     pageUrl = new URL('/profile/userA', globalThis.window.location.href);
     afterNavigateCallback = undefined;
+    // Default to global scope; local-scope tests opt in explicitly.
+    filterScopeStore.next(null);
   });
 
   afterEach(() => {
@@ -115,6 +134,55 @@ describe('appendGlobalParameters', () => {
 
     expect(new URL(anchor.href).origin).toBe('https://example.com');
     expect(new URL(anchor.href).pathname).toBe('/page');
+  });
+
+  describe('local filter scope', () => {
+    it('applies the frozen snapshot to outbound (different-path) links', () => {
+      filterScopeStore.next({ [FilterKey.Genres]: 'action' });
+
+      const anchor = makeAnchor('/movies/heretic');
+      appendGlobalParameters(anchor, '/movies/heretic');
+
+      expect(new URL(anchor.href).searchParams.get(FilterKey.Genres)).toBe(
+        'action',
+      );
+    });
+
+    it('drops live filter edits from outbound links in favour of the snapshot', () => {
+      seedLiveParams({ [FilterKey.Genres]: 'comedy' });
+      filterScopeStore.next({ [FilterKey.Genres]: 'action' });
+
+      const anchor = makeAnchor('/movies/heretic');
+      appendGlobalParameters(anchor, '/movies/heretic');
+
+      expect(new URL(anchor.href).searchParams.get(FilterKey.Genres)).toBe(
+        'action',
+      );
+    });
+
+    it('preserves live filter edits on same-path links (toggles/sort)', () => {
+      seedLiveParams({ [FilterKey.Genres]: 'comedy' });
+      filterScopeStore.next({ [FilterKey.Genres]: 'action' });
+
+      const anchor = makeAnchor('/profile/userA');
+      appendGlobalParameters(anchor, '/profile/userA');
+
+      // Same path => the snapshot must NOT override the user's live edit.
+      expect(new URL(anchor.href).searchParams.get(FilterKey.Genres)).toBe(
+        'comedy',
+      );
+    });
+  });
+
+  it('passes live filters through unchanged under global scope', () => {
+    seedLiveParams({ [FilterKey.Genres]: 'comedy' });
+
+    const anchor = makeAnchor('/movies/heretic');
+    appendGlobalParameters(anchor, '/movies/heretic');
+
+    expect(new URL(anchor.href).searchParams.get(FilterKey.Genres)).toBe(
+      'comedy',
+    );
   });
 
   it('unsubscribes from the RxJS stream on destroy', () => {
