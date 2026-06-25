@@ -25,10 +25,6 @@
 
 <style>
   .trakt-preview-features {
-    max-width: var(--ni-480);
-
-    :global(.trakt-settings-feature-preview) {
-      justify-content: space-between;
-    }
+    max-width: var(--ni-640);
   }
 </style>

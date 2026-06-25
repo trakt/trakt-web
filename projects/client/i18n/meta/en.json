@@ -7053,12 +7053,77 @@
       "description": "Header for the section that allows users to enable or disable preview features."
     },
     "description_preview_features": {
-      "default": "Enable or disable preview features that are in development. These features may be unstable and can be changed at any time.",
+      "default": "Try upcoming features before they’re broadly available. Preview Features may change as we refine them.",
       "description": "Description for the preview features section."
     },
     "text_placeholder_preview_features": {
       "default": "Currently there aren't any preview features. Check back later.",
       "description": "Placeholder text for when there are no preview features available."
+    },
+    "link_label_open_preview_feature": {
+      "default": "Open {title}",
+      "description": "Aria-label for the link that opens an enabled preview feature.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "preview_feature_title_year_in_review": {
+      "default": "Year In Review",
+      "description": "Title for the Year In Review preview feature."
+    },
+    "preview_feature_description_year_in_review": {
+      "default": "Preview Year in Review, now running directly in V3.",
+      "description": "Description for the Year In Review preview feature."
+    },
+    "preview_feature_title_month_in_review": {
+      "default": "Month In Review",
+      "description": "Title for the Month In Review preview feature."
+    },
+    "preview_feature_description_month_in_review": {
+      "default": "Preview Month in Review, now running directly in V3.",
+      "description": "Description for the Month In Review preview feature."
+    },
+    "preview_feature_title_edit_mode": {
+      "default": "Edit Mode",
+      "description": "Title for the Edit Mode preview feature."
+    },
+    "preview_feature_description_edit_mode": {
+      "default": "Enable controls for hiding or showing configurable sections across the app.",
+      "description": "Description for the Edit Mode preview feature."
+    },
+    "preview_feature_title_streaming_sync": {
+      "default": "Streaming Sync",
+      "description": "Title for the Streaming Sync preview feature."
+    },
+    "preview_feature_description_streaming_sync": {
+      "default": "Connect supported streaming services so watch history and ratings can sync back to Trakt automatically. The connection flow from web is still in beta.",
+      "description": "Description for the Streaming Sync preview feature."
+    },
+    "preview_feature_title_scoped_favorites": {
+      "default": "Scoped Favorites",
+      "description": "Title for the Scoped Favorites preview feature."
+    },
+    "preview_feature_description_scoped_favorites": {
+      "default": "Time-box favorite lists by showing current-year favorites on profiles and grouping the full favorites list by year.",
+      "description": "Description for the Scoped Favorites preview feature."
+    },
+    "preview_feature_title_social_activities": {
+      "default": "Social Activities",
+      "description": "Title for the Social Activities preview feature."
+    },
+    "preview_feature_description_social_activities": {
+      "default": "Show who you follow has watched, watchlisted, commented on, or rated a movie, show, or episode directly on media pages.",
+      "description": "Description for the Social Activities preview feature."
+    },
+    "preview_feature_title_plex_sync": {
+      "default": "Plex Sync",
+      "description": "Title for the Plex Sync preview feature."
+    },
+    "preview_feature_description_plex_sync": {
+      "default": "Connect Plex to sync your watch history, ratings, and library to Trakt. Includes connection, server selection, and sync tools.",
+      "description": "Description for the Plex Sync preview feature."
     },
     "header_official_links": {
       "default": "Official Links",

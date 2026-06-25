@@ -9,12 +9,14 @@ export const FEATURE_FLAG_LOCAL_STORAGE_KEY = 'trakt-feature-flags';
 
 function initializeFlags() {
   const storedFlags = safeLocalStorage.getItem(FEATURE_FLAG_LOCAL_STORAGE_KEY);
-  const parsedFlags = storedFlags ? JSON.parse(storedFlags) : {};
+  const parsedFlags = storedFlags
+    ? JSON.parse(storedFlags) as Partial<Record<FeatureFlag, boolean>>
+    : {};
+  const featureFlags = Object.values(FeatureFlag);
 
-  return Object.values(FeatureFlag).reduce((acc, flag) => {
-    acc[flag] = parsedFlags[flag] ?? false;
-    return acc;
-  }, {} as Record<string, boolean>);
+  return Object.fromEntries(
+    featureFlags.map((flag) => [flag, parsedFlags[flag] ?? false]),
+  ) as Record<FeatureFlag, boolean>;
 }
 
 export function createFeatureFlagContext() {

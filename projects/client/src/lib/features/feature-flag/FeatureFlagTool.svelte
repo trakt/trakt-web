@@ -23,7 +23,12 @@
   </ActionButton>
 
   {#if $isOpen}
-    <Drawer {onClose} title={m.header_preview_features()} hasAutoClose={false}>
+    <Drawer
+      {onClose}
+      title={m.header_preview_features()}
+      hasAutoClose={false}
+      size="auto"
+    >
       <FeatureFlagItems />
     </Drawer>
   {/if}
