@@ -1,10 +1,14 @@
-<script lang="ts" generics="T extends SortBy | UpNextSortBy">
+<script
+  lang="ts"
+  generics="T extends SortBy | UpNextSortBy | UserListsSortBy"
+>
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import SortDirectionIcon from "$lib/components/icons/SortDirectionIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { m } from "$lib/features/i18n/messages";
+  import type { UserListsSortBy } from "$lib/requests/models/UserListsSortBy.ts";
   import type { UpNextSortBy } from "$lib/sections/lists/progress/UpNextSortBy";
   import type { ListUrlBuilder } from "../models/ListUrlBuilder";
   import type { SortBy } from "../models/SortBy";
