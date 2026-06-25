@@ -6869,7 +6869,7 @@
       "description": "Tooltip for screen time share stat in weekly pulse."
     },
     "label_stats_avg_per_day": {
-      "default": "Avg / Day",
+      "default": "Daily Average",
       "description": "Label for average watch time per active day stat in weekly pulse."
     },
     "tooltip_stats_avg_per_day": {
