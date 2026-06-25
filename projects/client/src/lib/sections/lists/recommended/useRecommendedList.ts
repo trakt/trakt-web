@@ -1,6 +1,7 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
 import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -15,7 +16,6 @@ import {
 import { dailyOrderArray } from '$lib/sections/lists/stores/dailyOrderArray.ts';
 import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { map } from 'rxjs';
 import { recommendedMediaQuery } from '../../../requests/queries/media/mediaRecommendedQuery.ts';
 import { useInMemoryPagination } from '../../../stores/useInMemoryPagination.ts';
@@ -84,7 +84,7 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
     map((q) => q.data ?? []),
     dailyOrderArray<RecommendedEntry>(
       `recommended-${listKey}-order`,
-      (item) => item.id,
+      (item) => item.key,
     ),
     overlay.operator,
   );
