@@ -2945,6 +2945,10 @@
       "default": "Reorder",
       "description": "Text for the button that opens a list reordering drawer."
     },
+    "button_text_reorder_lists": {
+      "default": "Reorder lists",
+      "description": "Text for the button that opens a drawer for reordering a user's lists."
+    },
     "button_label_reorder_list": {
       "default": "Reorder {name}",
       "description": "Aria-label for the button that opens a list reordering drawer.",
@@ -4315,6 +4319,22 @@
       "default": "Sort by default order",
       "description": "Aria-label for the button that allows users to sort items by the default sorting method."
     },
+    "button_text_sort_rank": {
+      "default": "Rank",
+      "description": "Text for the button that allows users to sort lists by their custom rank order."
+    },
+    "button_label_sort_rank": {
+      "default": "Sort by rank",
+      "description": "Aria-label for the button that allows users to sort lists by their custom rank order."
+    },
+    "button_text_sort_name": {
+      "default": "Name",
+      "description": "Text for the button that allows users to sort lists alphabetically by name."
+    },
+    "button_label_sort_name": {
+      "default": "Sort by name",
+      "description": "Aria-label for the button that allows users to sort lists alphabetically by name."
+    },
     "button_text_sort_added_date": {
       "default": "Date Added",
       "description": "Text for the button that allows users to sort items by the date they were added."
@@ -4354,6 +4374,22 @@
     "button_label_sort_release_date": {
       "default": "Sort by release date",
       "description": "Aria-label for the button that allows users to sort items by their release date."
+    },
+    "button_text_sort_updated_date": {
+      "default": "Updated Date",
+      "description": "Text for the button that allows users to sort lists by the date they were last updated."
+    },
+    "button_label_sort_updated_date": {
+      "default": "Sort by updated date",
+      "description": "Aria-label for the button that allows users to sort lists by the date they were last updated."
+    },
+    "button_text_sort_created_date": {
+      "default": "Created Date",
+      "description": "Text for the button that allows users to sort lists by the date they were created."
+    },
+    "button_label_sort_created_date": {
+      "default": "Sort by created date",
+      "description": "Aria-label for the button that allows users to sort lists by the date they were created."
     },
     "button_text_sort_title": {
       "default": "Title",
