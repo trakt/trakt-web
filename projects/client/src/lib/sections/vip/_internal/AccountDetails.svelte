@@ -8,6 +8,7 @@
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import LifetimeBadge from "./LifetimeBadge.svelte";
+  import SubscriptionActions from "./SubscriptionActions.svelte";
   import SubscriptionDetails from "./SubscriptionDetails.svelte";
   import VipContentContainer from "./VipContentContainer.svelte";
 
@@ -37,7 +38,10 @@
           {#if subscription?.memberSince}
             <p>
               {m.text_member_since({
-                date: toHumanDay({ date: subscription.memberSince, locale: getLocale() }),
+                date: toHumanDay({
+                  date: subscription.memberSince,
+                  locale: getLocale(),
+                }),
               })}
             </p>
           {/if}
@@ -47,6 +51,9 @@
           {/if}
         </div>
       </div>
+      {#if !isLifeTime && !$user.isDirector}
+        <SubscriptionActions {subscription} />
+      {/if}
     </div>
 
     {#if !isLifeTime && !$user.isDirector}
@@ -66,7 +73,7 @@
     gap: var(--gap-l);
 
     width: 100%;
-    max-width: var(--ni-640);
+    max-width: var(--ni-768);
 
     background-color: var(--color-card-background);
 
@@ -114,6 +121,8 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xxs);
+
+    flex: 1;
   }
 
   .vip-profile-header-membership {

@@ -6,6 +6,7 @@ const FORMAT_STRINGS = {
   short: 'PP',
   long: 'PPP',
   'long-with-time': 'PPP p',
+  'short-with-time': 'PP p',
 } as const;
 
 type ToHumanDayProps = {

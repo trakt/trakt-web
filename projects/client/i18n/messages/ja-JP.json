@@ -1612,7 +1612,6 @@
   "warning_prompt_block_user_detail": "そのユーザーはあなたをフォローしたり、あなたのアクティビティを閲覧したりできなくなります。",
   "warning_prompt_cancel_clear": "別の画面に移動すると、データのクリアが停止されます。よろしいですか？",
   "warning_prompt_cancel_import": "インポートが進行中です。移動すると停止します。よろしいですか？",
-  "warning_prompt_cancel_vip": "VIPサブスクリプションをキャンセルしてもよろしいですか？現在の請求期間の終了時にVIP機能へのアクセスを失います。",
   "warning_prompt_clear_data": "{source}をクリアしてもよろしいですか？この操作は元に戻せません。",
   "warning_prompt_clear_watchlist": "ウォッチリストの全項目をクリアしてもよろしいですか？この操作は元に戻せません。",
   "warning_prompt_delete_comment": "レビューを削除してもよろしいですか？",

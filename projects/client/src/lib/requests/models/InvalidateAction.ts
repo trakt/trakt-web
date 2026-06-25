@@ -3,7 +3,7 @@ import type { MediaType } from './MediaType.ts';
 
 type UserType = 'avatar' | 'settings' | 'follow' | 'cover' | 'block';
 type ListType = 'edited' | 'deleted' | 'created' | 'like';
-type VipType = 'canceled';
+type VipType = 'canceled' | 'updated';
 type PlexType = 'settings' | 'syncs';
 
 const INVALIDATION_ID = 'invalidate' as const;
@@ -133,6 +133,7 @@ export const InvalidateAction = {
 
   Vip: {
     Canceled: buildInvalidationKey('vip', 'canceled'),
+    Updated: buildInvalidationKey('vip', 'updated'),
   },
 
   HideRecommended: (type: MediaType) =>

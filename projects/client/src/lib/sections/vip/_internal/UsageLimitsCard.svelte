@@ -10,11 +10,13 @@
     items,
     variant = "vip",
     isLoading = false,
+    style = "default",
   }: {
     title?: string;
     items: UsageCategoryItem[];
     variant?: "free" | "vip";
     isLoading?: boolean;
+    style?: "default" | "compact";
   } = $props();
 
   let isExpanded = $state(false);
@@ -23,7 +25,7 @@
   );
 </script>
 
-<div class="trakt-usage-limits-card" data-variant={variant}>
+<div class="trakt-usage-limits-card" data-variant={variant} data-style={style}>
   {#if title}
     <span class="secondary bold">{title}</span>
   {/if}
@@ -58,18 +60,20 @@
     flex-direction: column;
     gap: var(--gap-m);
 
-    background: var(--background-usage-limits-card);
-
-    box-shadow: var(--shadow-base);
-
-    padding: var(--ni-32);
-    box-sizing: border-box;
-
-    border-radius: var(--border-radius-xxl);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--color-border) 50%, transparent);
-
     transition: padding var(--transition-increment) ease-in-out;
+
+    &[data-style="default"] {
+      background: var(--background-usage-limits-card);
+
+      box-shadow: var(--shadow-base);
+
+      padding: var(--ni-32);
+      box-sizing: border-box;
+
+      border-radius: var(--border-radius-xxl);
+      border: var(--ni-1) solid
+        color-mix(in srgb, var(--color-border) 50%, transparent);
+    }
 
     &[data-variant="free"] {
       border: none;
@@ -79,7 +83,9 @@
     }
 
     @include for-mobile {
-      padding: var(--ni-18);
+      &[data-style="default"] {
+        padding: var(--ni-18);
+      }
     }
   }
 

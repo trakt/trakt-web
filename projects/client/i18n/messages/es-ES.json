@@ -1612,7 +1612,6 @@
   "warning_prompt_block_user_detail": "Ya no podrán seguirte ni ver tu actividad.",
   "warning_prompt_cancel_clear": "Si te vas, se detendrá el borrado de tus datos. ¿Estás seguro?",
   "warning_prompt_cancel_import": "Su importación está en progreso. Si sale, se detendrá. ¿Está seguro?",
-  "warning_prompt_cancel_vip": "¿Estás seguro de que quieres cancelar tu suscripción VIP? Perderás el acceso a las funciones VIP al final de tu ciclo de facturación actual.",
   "warning_prompt_clear_data": "¿Estás seguro de que quieres borrar tu {source}? Esto no se puede deshacer.",
   "warning_prompt_clear_watchlist": "¿Estás seguro de que quieres borrar toda tu lista de seguimiento? Esto no se puede deshacer.",
   "warning_prompt_delete_comment": "¿Estás seguro de que quieres eliminar tu reseña?",

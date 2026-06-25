@@ -14,7 +14,7 @@
   </div>
 
   <div class="subscription-detail-header">
-    <span class="secondary">{title}</span>
+    <span class="secondary small">{title}</span>
     <span class="bold">{@render children()}</span>
   </div>
 </div>
@@ -53,6 +53,8 @@
   .subscription-detail-header {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-micro);
+    gap: var(--ni-2);
+
+    min-width: 0;
   }
 </style>

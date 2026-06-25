@@ -1,1 +1,4 @@
-export type ConfirmationOperation = 'affirmative' | 'destructive';
+export type ConfirmationOperation =
+  | 'affirmative'
+  | 'destructive'
+  | 'preventative';

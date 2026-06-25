@@ -2,24 +2,22 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import UsageLimitsCard from "./UsageLimitsCard.svelte";
   import { mapToUsageCategories } from "./utils/mapToUsageCategories";
-  import VipContentContainer from "./VipContentContainer.svelte";
 
   const { limits } = useUser();
 
   const categories = $derived(mapToUsageCategories($limits));
 </script>
 
-<VipContentContainer>
-  <div class="trakt-vip-usage-limits">
-    {#each categories as category, index (index)}
-      <UsageLimitsCard
-        items={category.items}
-        title={category.title()}
-        isLoading={!$limits}
-      />
-    {/each}
-  </div>
-</VipContentContainer>
+<div class="trakt-vip-usage-limits">
+  {#each categories as category, index (index)}
+    <UsageLimitsCard
+      items={category.items}
+      title={category.title()}
+      isLoading={!$limits}
+      style="compact"
+    />
+  {/each}
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

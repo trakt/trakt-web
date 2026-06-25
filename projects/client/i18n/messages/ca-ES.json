@@ -1612,7 +1612,6 @@
   "warning_prompt_block_user_detail": "Ja no et podran seguir ni veure la teva activitat.",
   "warning_prompt_cancel_clear": "Si te'n vas, s'aturarà l'eliminació de les teves dades. Estàs segur?",
   "warning_prompt_cancel_import": "La teva importació està en curs. Si te'n vas, s'aturarà. Estàs segur?",
-  "warning_prompt_cancel_vip": "Estàs segur que vols cancel·lar la teva subscripció VIP? Perdràs l'accés a les funcions VIP al final del teu cicle de facturació actual.",
   "warning_prompt_clear_data": "Estàs segur que vols esborrar el teu {source}? Aquesta acció no es pot desfer.",
   "warning_prompt_clear_watchlist": "Estàs segur que vols esborrar tota la teva llista de seguiment? Aquesta acció no es pot desfer.",
   "warning_prompt_delete_comment": "Estàs segur que vols suprimir la teva ressenya?",
