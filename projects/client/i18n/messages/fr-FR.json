@@ -1612,7 +1612,6 @@
   "warning_prompt_block_user_detail": "Ils ne pourront plus vous suivre ni voir votre activité.",
   "warning_prompt_cancel_clear": "Quitter cette page interrompra le vidage de vos données. Êtes-vous sûr ?",
   "warning_prompt_cancel_import": "Votre importation est en cours. Si vous quittez cette page, elle sera arrêtée. Êtes-vous sûr ?",
-  "warning_prompt_cancel_vip": "Êtes-vous sûr de vouloir annuler votre abonnement VIP ? Vous perdrez l'accès aux fonctionnalités VIP à la fin de votre cycle de facturation actuel.",
   "warning_prompt_clear_data": "Êtes-vous sûr de vouloir vider votre {source} ? Cette action est irréversible.",
   "warning_prompt_clear_watchlist": "Êtes-vous sûr de vouloir vider l'intégralité de votre liste de suivi ? Cette action est irréversible.",
   "warning_prompt_delete_comment": "Êtes-vous sûr de vouloir supprimer votre avis ?",

@@ -3,6 +3,7 @@ import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { cancelSubscriptionQuery } from '$lib/requests/vip/cancelSubscriptionQuery.ts';
+import { confirmCheckoutQuery } from '$lib/requests/vip/confirmCheckoutQuery.ts';
 import { manageSubscriptionQuery } from '$lib/requests/vip/manageSubscriptionQuery.ts';
 import { startCheckoutQuery } from '$lib/requests/vip/startCheckoutQuery.ts';
 import { vipPlansQuery } from '$lib/requests/vip/vipPlansQuery.ts';
@@ -27,7 +28,7 @@ export function useVip() {
   const { track: trackManage } = useTrack(AnalyticsEvent.VipManage);
   const { track: trackCancel } = useTrack(AnalyticsEvent.VipCancel);
 
-  const { invalidate } = useInvalidator();
+  const { invalidate, invalidateAll } = useInvalidator();
 
   const isFetching = new BehaviorSubject(false);
 
@@ -71,6 +72,14 @@ export function useVip() {
       } finally {
         isFetching.next(false);
       }
+    },
+    confirmCheckout: async (sessionId: string) => {
+      const success = await confirmCheckoutQuery({ sessionId });
+      await invalidateAll([
+        InvalidateAction.Vip.Updated,
+        InvalidateAction.User.Settings,
+      ]);
+      return success;
     },
     isFetching: isFetching.asObservable(),
     subscription: subscription.pipe(map(($details) => $details.data)),

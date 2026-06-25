@@ -1612,7 +1612,6 @@
   "warning_prompt_block_user_detail": "Mereka tidak lagi dapat mengikuti Anda atau melihat aktivitas Anda.",
   "warning_prompt_cancel_clear": "Meninggalkan halaman akan menghentikan penghapusan data Anda. Apakah Anda yakin?",
   "warning_prompt_cancel_import": "Impor Anda sedang berlangsung. Meninggalkan halaman akan menghentikannya. Apakah Anda yakin?",
-  "warning_prompt_cancel_vip": "Apakah Anda yakin ingin membatalkan langganan VIP Anda? Anda akan kehilangan akses ke fitur VIP pada akhir siklus penagihan Anda saat ini.",
   "warning_prompt_clear_data": "Apakah Anda yakin ingin menghapus {source} Anda? Ini tidak dapat diurungkan.",
   "warning_prompt_clear_watchlist": "Apakah Anda yakin ingin menghapus seluruh daftar tontonan Anda? Ini tidak dapat diurungkan.",
   "warning_prompt_delete_comment": "Anda yakin ingin menghapus ulasan Anda?",

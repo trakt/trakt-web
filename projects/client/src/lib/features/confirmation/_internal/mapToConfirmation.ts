@@ -9,6 +9,7 @@ type Confirmation = {
   message: string | Nil;
   detail?: string;
   buttonText: string;
+  cancelText?: string;
   operation: ConfirmationOperation;
 };
 
@@ -133,11 +134,12 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.warning_prompt_simple_filters(),
     operation: 'destructive',
   }),
-  [ConfirmationType.CancelVip]: () => ({
+  [ConfirmationType.CancelVip]: (props) => ({
     title: m.confirmation_title_cancel_vip(),
-    buttonText: m.button_text_cancel_vip(),
-    message: m.warning_prompt_cancel_vip(),
-    operation: 'destructive',
+    buttonText: m.button_text_cancel_vip_prompt(),
+    cancelText: m.button_text_keep_vip_prompt(),
+    message: m.warning_prompt_cancel_vip({ date: props.renewsOn }),
+    operation: 'preventative',
   }),
   [ConfirmationType.CancelImport]: () => ({
     title: m.confirmation_title_cancel_import(),

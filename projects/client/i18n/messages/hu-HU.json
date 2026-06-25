@@ -1612,7 +1612,6 @@
   "warning_prompt_block_user_detail": "Nem tudnak többé követni, és nem láthatják a tevékenységedet.",
   "warning_prompt_cancel_clear": "Ha elnavigálsz az oldalról, az adatok törlése megszakad. Biztosan kilépsz?",
   "warning_prompt_cancel_import": "Az importálás folyamatban van. Elnavigálás leállítja. Biztos vagy benne?",
-  "warning_prompt_cancel_vip": "Biztosan le szeretnéd mondani VIP előfizetésedet? Az aktuális számlázási ciklus végén elveszíted a VIP funkciókhoz való hozzáférést.",
   "warning_prompt_clear_data": "Biztosan törölni szeretnéd a(z) {source} elemeit? Ez nem vonható vissza.",
   "warning_prompt_clear_watchlist": "Biztosan kiüríted a teljes lejátszási listádat? Ez a művelet nem vonható vissza.",
   "warning_prompt_delete_comment": "Biztosan törlöd az értékelését?",

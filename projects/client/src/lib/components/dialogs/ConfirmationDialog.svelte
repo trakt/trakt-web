@@ -10,6 +10,7 @@
     message,
     detail,
     buttonText,
+    cancelText: externalCancelText,
     onAction,
     operation,
   }: {
@@ -17,12 +18,14 @@
     message: string;
     detail?: string;
     buttonText: string;
+    cancelText?: string;
     operation: ConfirmationOperation;
     onAction: (action: ConfirmationAction) => void;
   } = $props();
 
   const isDestructive = $derived(operation === "destructive");
-  const cancelText = $derived(m.button_text_cancel());
+  const isPreventative = $derived(operation === "preventative");
+  const cancelText = $derived(externalCancelText ?? m.button_text_cancel());
 </script>
 
 <Modal onClose={() => onAction("cancel")}>
@@ -38,8 +41,8 @@
     <div class="trakt-confirmation-actions" data-operation={operation}>
       <Button
         size="small"
-        style="ghost"
-        color="custom"
+        style={isPreventative ? "flat" : "ghost"}
+        color={isPreventative ? "blue" : "custom"}
         label={cancelText}
         onclick={() => onAction("cancel")}
       >

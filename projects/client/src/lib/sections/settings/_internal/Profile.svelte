@@ -5,6 +5,7 @@
   import EmailIcon from "$lib/components/icons/EmailIcon.svelte";
   import GlobeIcon from "$lib/components/icons/GlobeIcon.svelte";
   import IdIcon from "$lib/components/icons/IdIcon.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import LockIcon from "$lib/components/icons/LockIcon.svelte";
   import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
@@ -143,7 +144,13 @@
   </div>
 
   {#if $user.isVip}
-    <VipBadge isDirector={$user.isDirector} />
+    <Link
+      href={UrlBuilder.vip()}
+      color="inherit"
+      label={m.button_label_manage_subscription()}
+    >
+      <VipBadge isDirector={$user.isDirector} />
+    </Link>
   {/if}
 </div>
 
@@ -267,6 +274,11 @@
 
     @include for-tablet-sm-and-below() {
       max-width: 100%;
+    }
+
+    :global(.trakt-link) {
+      display: inline-flex;
+      text-decoration: none;
     }
   }
 

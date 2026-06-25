@@ -3596,12 +3596,12 @@
       }
     },
     "button_text_manage_subscription": {
-      "default": "Manage subscription",
-      "description": "Text for the manage subscription button."
+      "default": "Manage VIP Subscription",
+      "description": "Text for the manage VIP subscription button."
     },
     "button_label_manage_subscription": {
-      "default": "Manage subscription",
-      "description": "Aria-label for the manage subscription button."
+      "default": "Manage VIP Subscription",
+      "description": "Aria-label for the manage VIP subscription button."
     },
     "header_account_details": {
       "default": "Account details",
@@ -6445,28 +6445,73 @@
       "description": "Generic error text shown when a user attempts to update their settings and the update fails."
     },
     "button_text_cancel_vip": {
-      "default": "Cancel Subscription",
+      "default": "Cancel VIP",
       "description": "Text for the button that allows users to cancel their VIP subscription. This should be as short as possible."
     },
-    "button_label_cancel_vip": {
-      "default": "Cancel Subscription",
-      "description": "Aria-label for the button that allows users to cancel their VIP subscription."
+    "button_text_cancel_vip_prompt": {
+      "default": "Cancel anyway",
+      "description": "Text for the button that allows users to confirm the cancellation of their VIP subscription. This should be as short as possible."
     },
-    "button_text_renew_vip": {
-      "default": "Renew Subscription",
-      "description": "Text for the button that allows users to renew their VIP subscription. This should be as short as possible."
+    "button_text_keep_vip_prompt": {
+      "default": "Keep my premium perks",
+      "description": "Text for the button that allows users to dismiss the cancel VIP prompt. This should be as short as possible."
     },
-    "button_label_renew_vip": {
-      "default": "Renew Subscription",
-      "description": "Aria-label for the button that allows users to renew their VIP subscription."
+    "text_vip_transaction_charged": {
+      "default": "Charged <b>{amount}</b> via <b>{method}</b> for <b>{term}</b>",
+      "description": "Payment-history sentence for a charge. The <b> tags wrap the amount, payment method, and term as bold highlights - keep them when translating. amount is a formatted price (e.g. $30), method is the payment provider, term is the plan length (e.g. 1 Year).",
+      "variables": {
+        "amount": { "type": "string" },
+        "method": { "type": "string" },
+        "term": { "type": "string" }
+      }
     },
-    "button_text_manage_vip": {
-      "default": "Manage Subscription",
-      "description": "Text for the button that allows users to manage their VIP subscription. This should be as short as possible."
+    "text_vip_transaction_charged_short": {
+      "default": "Charged <b>{amount}</b> via <b>{method}</b>",
+      "description": "Payment-history sentence for a charge with no known term. The <b> tags wrap the amount and payment method as bold highlights - keep them when translating.",
+      "variables": {
+        "amount": { "type": "string" },
+        "method": { "type": "string" }
+      }
     },
-    "button_label_manage_vip": {
-      "default": "Manage Subscription",
-      "description": "Aria-label for the button that allows users to manage their VIP subscription."
+    "text_vip_transaction_created": {
+      "default": "Created a new <b>{method}</b> subscription",
+      "description": "Payment-history sentence for a new subscription. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
+      "variables": {
+        "method": { "type": "string" }
+      }
+    },
+    "text_vip_transaction_cancelled": {
+      "default": "Cancelled a <b>{method}</b> subscription",
+      "description": "Payment-history sentence for a cancellation. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
+      "variables": {
+        "method": { "type": "string" }
+      }
+    },
+    "text_vip_transaction_refunded": {
+      "default": "Refunded <b>{amount}</b> via <b>{method}</b>",
+      "description": "Payment-history sentence for a refund. The <b> tags wrap the amount and payment method as bold highlights - keep them when translating.",
+      "variables": {
+        "amount": { "type": "string" },
+        "method": { "type": "string" }
+      }
+    },
+    "text_vip_transaction_disputed": {
+      "default": "Disputed a <b>{method}</b> charge",
+      "description": "Payment-history sentence for a disputed charge. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
+      "variables": {
+        "method": { "type": "string" }
+      }
+    },
+    "text_vip_transaction_plan_changed": {
+      "default": "Changed your <b>{method}</b> plan",
+      "description": "Payment-history sentence for a plan change. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
+      "variables": {
+        "method": { "type": "string" }
+      }
+    },
+    "text_vip_transaction_complimentary": {
+      "default": "Complimentary <b>VIP</b> membership",
+      "description": "Payment-history sentence for a complimentary or manually granted membership. The <b> tags wrap VIP as a bold highlight - keep them when translating."
     },
     "text_member_since": {
       "default": "Since {date}",
@@ -6489,9 +6534,66 @@
       "default": "Current Plan",
       "description": "Header for the current plan section, which indicates the user's current VIP subscription plan."
     },
+    "header_payment_method": {
+      "default": "Payment",
+      "description": "Header for the payment method section, which indicates how the user pays for their VIP subscription."
+    },
+    "text_vip_payment_method_card": {
+      "default": "Credit Card",
+      "description": "Label for a VIP subscription paid by credit card (via Stripe)."
+    },
+    "text_vip_payment_method_paypal": {
+      "default": "PayPal",
+      "description": "Label for a VIP subscription paid through PayPal."
+    },
+    "text_vip_payment_method_apple": {
+      "default": "App Store",
+      "description": "Label for a VIP subscription paid through the Apple App Store."
+    },
+    "text_vip_payment_method_google": {
+      "default": "Google Play",
+      "description": "Label for a VIP subscription paid through Google Play."
+    },
+    "text_vip_payment_method_other": {
+      "default": "Other",
+      "description": "Label for a VIP subscription with no recognised payment method."
+    },
+    "button_label_cancel_vip": {
+      "default": "Cancel Subscription",
+      "description": "Aria-label for the button that allows users to cancel their VIP subscription."
+    },
+    "button_text_renew_vip": {
+      "default": "Renew",
+      "description": "Text for the button that allows users to renew their VIP subscription. This should be as short as possible."
+    },
+    "button_label_renew_vip": {
+      "default": "Renew Subscription",
+      "description": "Aria-label for the button that allows users to renew their VIP subscription."
+    },
+    "button_text_manage_vip": {
+      "default": "Manage",
+      "description": "Text for the button that allows users to manage their VIP subscription. This should be as short as possible."
+    },
+    "button_label_manage_vip": {
+      "default": "Manage Subscription",
+      "description": "Aria-label for the button that allows users to manage their VIP subscription."
+    },
+    "button_text_history": {
+      "default": "History",
+      "description": "Short text for a button that reveals the VIP payment history. This should be as short as possible."
+    },
+    "button_text_usage": {
+      "default": "Usage",
+      "description": "Short text for a button that reveals the VIP usage limits. This should be as short as possible."
+    },
     "warning_prompt_cancel_vip": {
-      "default": "Are you sure you want to cancel your VIP subscription? You will lose access to VIP features at the end of your current billing cycle.",
-      "description": "Text for the warning prompt that appears when a user attempts to cancel their VIP subscription."
+      "default": "Are you sure you want to cancel your VIP subscription? You'll keep your VIP benefits until {date}, after which you'll lose access to VIP features. Trakt does not offer refunds for cancelled subscriptions.",
+      "description": "Text for the warning prompt that appears when a user attempts to cancel their VIP subscription. The date is when their current paid period ends and access is lost.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      }
     },
     "page_title_terms": {
       "default": "Terms of Use",

@@ -2,6 +2,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import StripeReturnHandler from "$lib/sections/vip/StripeReturnHandler.svelte";
   import VipManage from "$lib/sections/vip/VipManage.svelte";
   import VipSubscribe from "$lib/sections/vip/VipSubscribe.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
@@ -9,6 +10,8 @@
 
 <TraktPage audience="authenticated" image={DEFAULT_SHARE_COVER} title="VIP">
   <NavbarStateSetter mode="minimal" />
+
+  <StripeReturnHandler />
 
   <RenderFor audience="free">
     <VipSubscribe />
