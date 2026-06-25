@@ -7,13 +7,17 @@
   import SmartListIcon from "$lib/components/icons/SmartListIcon.svelte";
   import SortAlphaIcon from "$lib/components/icons/SortAlphaIcon.svelte";
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
+  import type { UserListsSortBy } from "$lib/requests/models/UserListsSortBy.ts";
   import type { UpNextSortBy } from "$lib/sections/lists/progress/UpNextSortBy.ts";
   import type { SortBy } from "./models/SortBy.ts";
 
   const {
     sortBy,
     variant = "default",
-  }: { sortBy: SortBy | UpNextSortBy; variant?: "default" | "value" } =
+  }: {
+    sortBy: SortBy | UpNextSortBy | UserListsSortBy;
+    variant?: "default" | "value";
+  } =
     $props();
 </script>
 
@@ -35,7 +39,11 @@
   <CalendarIcon />
 {/if}
 
-{#if sortBy === "title"}
+{#if sortBy === "updated_at" || sortBy === "created_at"}
+  <CalendarIcon />
+{/if}
+
+{#if sortBy === "title" || sortBy === "name"}
   <SortAlphaIcon />
 {/if}
 
