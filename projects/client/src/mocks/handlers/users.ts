@@ -203,7 +203,7 @@ export const users = [
       );
     },
   ),
-  http.get('http://localhost/users/likes/lists', () => {
+  http.get('http://localhost/users/me/likes/lists', () => {
     return HttpResponse.json(MinimalLikedListsResponseMock);
   }),
   http.get('http://localhost/users/blocked', () => {

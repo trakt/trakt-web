@@ -3,6 +3,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import type { LikedListItemResponse } from '@trakt/api';
 import { z } from 'zod';
 import { time } from '../../../utils/timing/time.ts';
 
@@ -20,8 +21,8 @@ export type UserLikes = z.infer<typeof UserLikesSchema>;
 const currentUserListLikesRequest = ({ fetch }: ApiParams) =>
   api({ fetch })
     .users
-    .likes
-    .lists({
+    .likes({
+      params: { id: 'me', type: 'lists' },
       query: {
         limit: 'all',
         extended: 'min',
@@ -35,7 +36,9 @@ export const currentUserLikesQuery = defineQuery({
   dependencies: [],
   mapper: (response) => ({
     lists: toMap(
-      response.body,
+      response.body.filter(
+        (entry): entry is LikedListItemResponse => entry.type === 'list',
+      ),
       (entry) => ({
         id: assertDefined(
           'id' in entry.list ? entry.list.id : undefined,
