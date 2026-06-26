@@ -1,17 +1,32 @@
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
+import { saveSettingsRequest } from '$lib/requests/queries/users/saveSettingsRequest.ts';
+import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { getToastContext } from './_internal/getToastContext.ts';
 import type { DismissalVariant } from './models/DismissalVariant.ts';
 import { useDismissals } from './useDismissals.ts';
 
 export function useLastWatched() {
   const { lastWatched } = getToastContext();
-  const { dismiss, isSuppressed, suppress, isAtLimit } = useDismissals();
+  const { dismiss, isAtLimit, resetCount } = useDismissals();
+  const { invalidate } = useInvalidator();
 
   return {
     lastWatched,
-    isSuppressed,
-    suppress,
     isAtLimit,
+    suppress: async () => {
+      const success = await saveSettingsRequest({
+        body: { browsing: { show_rating_prompt: false } },
+      });
+
+      if (!success) {
+        return;
+      }
+
+      resetCount();
+      lastWatched.next(null);
+      await invalidate(InvalidateAction.User.Settings);
+    },
     dismiss: (
       id: number,
       type: ExtendedMediaType,

@@ -155,7 +155,7 @@ export function useSettings() {
       },
     }))),
     ratingPrompt: user.pipe(map(($user) => ({
-      showRatingPrompt: Boolean($user.preferences.showRatingPrompt),
+      showRatingPrompt: $user.preferences.showRatingPrompt,
 
       set: async (showRatingPrompt: boolean) => {
         const payload = {

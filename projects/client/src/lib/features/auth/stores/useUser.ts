@@ -88,6 +88,7 @@ const ANONYMOUS_USER: UserSettings = {
     },
     isSpoilerHidden: false,
     hasWatchAgain: false,
+    showRatingPrompt: true,
   },
   genres: [],
   services: {

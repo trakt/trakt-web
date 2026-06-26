@@ -6102,7 +6102,7 @@
       "description": "Text for the settings that controls whether users are prompted to rate movies and episodes after watching."
     },
     "text_settings_show_rating_prompt_description": {
-      "default": "Ask you to rate movies and episodes after watching.",
+      "default": "Get asked to rate movies and episodes after watching.",
       "description": "Text for the description of the settings that controls whether users are prompted to rate movies and episodes after watching."
     },
     "switch_label_rating_prompt": {
