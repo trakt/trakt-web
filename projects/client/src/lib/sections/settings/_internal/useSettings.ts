@@ -154,5 +154,21 @@ export function useSettings() {
         });
       },
     }))),
+    ratingPrompt: user.pipe(map(($user) => ({
+      showRatingPrompt: Boolean($user.preferences.showRatingPrompt),
+
+      set: async (showRatingPrompt: boolean) => {
+        const payload = {
+          browsing: {
+            show_rating_prompt: showRatingPrompt,
+          },
+        };
+
+        await handleSettingsChange({
+          request: () => saveSettingsRequest({ body: payload }),
+          action: 'show_rating_prompt',
+        });
+      },
+    }))),
   };
 }

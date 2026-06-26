@@ -6097,6 +6097,18 @@
       "default": "Allow more than 1 play for movies and episodes.",
       "description": "Text for the description of the settings that allows users to mark movies and episodes as played more than once."
     },
+    "text_settings_show_rating_prompt": {
+      "default": "Rating Prompts",
+      "description": "Text for the settings that controls whether users are prompted to rate movies and episodes after watching."
+    },
+    "text_settings_show_rating_prompt_description": {
+      "default": "Ask you to rate movies and episodes after watching.",
+      "description": "Text for the description of the settings that controls whether users are prompted to rate movies and episodes after watching."
+    },
+    "switch_label_rating_prompt": {
+      "default": "Enable or disable rating prompts",
+      "description": "Accessible label for the toggle switch that enables or disables rating prompts."
+    },
     "text_onboarding_1_title_1": {
       "default": "Everything you watch.",
       "description": "Text for the title of the first onboarding screen that introduces users to the main value proposition of Trakt."

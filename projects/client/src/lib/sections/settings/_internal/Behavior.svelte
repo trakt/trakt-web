@@ -1,5 +1,6 @@
 <script lang="ts">
   import HideIcon from "$lib/components/icons/HideIcon.svelte";
+  import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
@@ -9,7 +10,8 @@
   import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
   import { useSettings } from "./useSettings.ts";
 
-  const { watchAgain, spoilers, isSavingSettings } = useSettings();
+  const { watchAgain, spoilers, ratingPrompt, isSavingSettings } =
+    useSettings();
 </script>
 
 <SettingsSectionLabel title={m.header_behavior()} />
@@ -46,6 +48,21 @@
       label={m.switch_label_multiple_watches()}
       checked={$watchAgain.hasWatchAgain}
       onclick={() => $watchAgain.set(!$watchAgain.hasWatchAgain)}
+      disabled={$isSavingSettings}
+      color="purple"
+    />
+  </SettingsGroupRow>
+
+  <SettingsGroupRow
+    title={m.text_settings_show_rating_prompt()}
+    description={m.text_settings_show_rating_prompt_description()}
+    variant="custom"
+  >
+    {#snippet icon()}<RatingIcon />{/snippet}
+    <Switch
+      label={m.switch_label_rating_prompt()}
+      checked={$ratingPrompt.showRatingPrompt}
+      onclick={() => $ratingPrompt.set(!$ratingPrompt.showRatingPrompt)}
       disabled={$isSavingSettings}
       color="purple"
     />
