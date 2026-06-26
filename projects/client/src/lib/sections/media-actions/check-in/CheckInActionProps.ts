@@ -5,5 +5,6 @@ export type CheckInActionProps = {
   title: string;
   size?: 'normal' | 'small';
   variant?: 'primary' | 'secondary';
+  disabled?: boolean;
   onCheckIn?: () => void;
 } & UseCheckInProps;

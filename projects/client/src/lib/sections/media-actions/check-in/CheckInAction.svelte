@@ -8,6 +8,7 @@
     size = "normal",
     title,
     variant,
+    disabled = false,
     onCheckIn,
     ...target
   }: CheckInActionProps = $props();
@@ -28,6 +29,7 @@
     {title}
     {size}
     {variant}
+    {disabled}
     isCheckedIn={$isCheckedIn}
     isCheckingIn={$isCheckingIn}
     checkin={checkinHandler}

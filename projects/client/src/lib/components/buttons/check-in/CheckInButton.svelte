@@ -16,6 +16,7 @@
     isCheckedIn,
     checkin,
     variant = "secondary",
+    disabled = false,
     ...props
   }: CheckInButtonProps = $props();
 
@@ -24,7 +25,7 @@
     color: "default",
     variant,
     onclick: checkin,
-    disabled: isCheckingIn || isCheckedIn,
+    disabled: disabled || isCheckingIn || isCheckedIn,
   });
 </script>
 
