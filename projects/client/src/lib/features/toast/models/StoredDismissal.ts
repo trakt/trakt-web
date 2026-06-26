@@ -11,5 +11,4 @@ export type StoredDismissalsV2 = {
   version: 2;
   items: DismissedItem[];
   dismissalCount: number;
-  isSuppressed: boolean;
 };

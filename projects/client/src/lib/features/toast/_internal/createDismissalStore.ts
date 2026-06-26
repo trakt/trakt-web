@@ -25,10 +25,10 @@ export function createDismissalStore() {
 
   return {
     dismissals,
-    suppress: () => {
+    resetCount: () => {
       update({
         ...dismissals.value,
-        isSuppressed: true,
+        dismissalCount: 0,
       });
     },
     dismiss: (

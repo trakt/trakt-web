@@ -31,8 +31,8 @@ function toLastWatchedMedia(
 }
 
 export function useCurrentUserLastWatched() {
-  const { ratings, history } = useUser();
-  const { isSuppressed, wasDismissed } = useDismissals();
+  const { ratings, history, user } = useUser();
+  const { wasDismissed } = useDismissals();
 
   const params = {
     slug: 'me',
@@ -58,11 +58,11 @@ export function useCurrentUserLastWatched() {
 
   return {
     lastWatchedItem: combineLatest(
-      [list$, ratings, isSuppressed, history],
+      [list$, ratings, history, user],
     ).pipe(
       map(
-        ([$list, $ratings, $isSuppressed, $history]) => {
-          if (!$ratings || $isSuppressed) {
+        ([$list, $ratings, $history, $user]) => {
+          if (!$ratings || !$user.preferences.showRatingPrompt) {
             return null;
           }
 

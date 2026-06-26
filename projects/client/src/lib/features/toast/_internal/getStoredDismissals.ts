@@ -10,7 +10,6 @@ const EMPTY_DATA: StoredDismissalsV2 = {
   version: 2,
   items: [],
   dismissalCount: 0,
-  isSuppressed: false,
 };
 
 // FIXME: remove backwards compatibility end of jan 2026

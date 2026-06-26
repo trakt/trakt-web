@@ -11,10 +11,7 @@ export function useDismissals() {
       map((store) => store.items),
     ),
     dismiss: dismissalStore.dismiss,
-    suppress: dismissalStore.suppress,
-    isSuppressed: dismissalStore.dismissals.pipe(
-      map((store) => store.isSuppressed),
-    ),
+    resetCount: dismissalStore.resetCount,
     isAtLimit: dismissalStore.dismissals.pipe(
       map((store) => store.dismissalCount >= DISMISSAL_LIMIT),
     ),
