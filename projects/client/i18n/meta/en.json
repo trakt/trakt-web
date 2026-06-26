@@ -8102,6 +8102,36 @@
     "text_info_update_downloaded": {
       "default": "Update is ready to install.",
       "description": "Text shown when a new version of the app has been downloaded and is ready to be installed."
+    },
+    "button_text_move_to_bottom": {
+      "default": "Move to Bottom",
+      "description": "Context menu action to move a list item to the bottom of the list."
+    },
+    "button_text_move_to_position": {
+      "default": "Move to...",
+      "description": "Context menu action to move a list item to a specific position."
+    },
+    "button_text_move_to_top": {
+      "default": "Move to Top",
+      "description": "Context menu action to move a list item to the top of the list."
+    },
+    "input_placeholder_reorder_position": {
+      "default": "Position (1–{count})",
+      "description": "Placeholder for the position text field in the move-to-position alert. {count} is replaced with the total item count.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "dialog_prompt_move_to_position": {
+      "default": "Enter a new position for \"{title}\".",
+      "description": "Body of the move-to-position alert. {title} is replaced with the item title.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
