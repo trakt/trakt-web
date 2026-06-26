@@ -7125,6 +7125,14 @@
       "default": "Connect Plex to sync your watch history, ratings, and library to Trakt. Includes connection, server selection, and sync tools.",
       "description": "Description for the Plex Sync preview feature."
     },
+    "preview_feature_title_smart_related": {
+      "default": "Smart Related",
+      "description": "Title for the Smart Related preview feature."
+    },
+    "preview_feature_description_smart_related": {
+      "default": "Use our next-gen engine to surface related movies and shows beyond the obvious.",
+      "description": "Description for the Smart Related preview feature."
+    },
     "header_official_links": {
       "default": "Official Links",
       "description": "Header for the official links section, with official links for a show or movie, like the official site, instagram, etc.."
@@ -8257,6 +8265,22 @@
           "type": "string"
         }
       }
+    },
+    "button_text_related_standard": {
+      "default": "Standard",
+      "description": "Text for the related media toggle button to show standard related movies or shows. This should be as short and concise as possible."
+    },
+    "button_label_related_standard": {
+      "default": "Standard related",
+      "description": "Aria-label for the related media toggle button to show standard related movies or shows. This should be as short and concise as possible."
+    },
+    "button_text_related_smart": {
+      "default": "Smart",
+      "description": "Text for the related media toggle button to show smart related movies or shows. This should be as short and concise as possible."
+    },
+    "button_label_related_smart": {
+      "default": "Smart related",
+      "description": "Aria-label for the related media toggle button to show smart related movies or shows. This should be as short and concise as possible."
     }
   }
 }

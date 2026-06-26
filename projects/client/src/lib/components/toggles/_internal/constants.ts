@@ -10,7 +10,8 @@ export type TogglerId =
   | 'trivia'
   | 'progress'
   | 'activity'
-  | 'library';
+  | 'library'
+  | 'related';
 
 type DiscoverToggleType = DiscoverMode;
 type SocialToggleType = 'following' | 'followers' | 'requests';
@@ -19,6 +20,7 @@ type TriviaToggleType = 'spoilers' | 'no-spoilers';
 type ProgressToggleType = 'in-progress' | 'dropped' | 'completed';
 type ActivityToggleType = 'reviews' | 'ratings';
 type LibraryToggleType = 'plex' | 'other';
+type RelatedToggleType = 'standard' | 'smart';
 
 type Toggler<T, K> = {
   id: T;
@@ -34,6 +36,7 @@ export type TogglerValueMap = {
   progress: ProgressToggleType;
   activity: ActivityToggleType;
   library: LibraryToggleType;
+  related: RelatedToggleType;
 };
 
 type ToggleDefinition<K extends TogglerId> = Toggler<K, TogglerValueMap[K]>;
@@ -172,6 +175,23 @@ const library: ToggleDefinition<'library'> = {
   ],
 };
 
+const related: ToggleDefinition<'related'> = {
+  id: 'related',
+  default: 'standard',
+  options: [
+    {
+      value: 'standard',
+      text: m.button_text_related_standard,
+      label: m.button_label_related_standard,
+    },
+    {
+      value: 'smart',
+      text: m.button_text_related_smart,
+      label: m.button_label_related_smart,
+    },
+  ],
+};
+
 export const TOGGLERS: {
   [K in TogglerId]: Toggler<K, TogglerValueMap[K]>;
 } = {
@@ -182,4 +202,5 @@ export const TOGGLERS: {
   progress,
   activity,
   library,
+  related,
 } as const;

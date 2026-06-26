@@ -1,5 +1,7 @@
 <script lang="ts" generics="T">
+  import BrainIcon from "$lib/components/icons/BrainIcon.svelte";
   import CastIcon from "$lib/components/icons/CastIcon.svelte";
+  import ShuffleIcon from "$lib/components/icons/ShuffleIcon.svelte";
   import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
   import CrewIcon from "$lib/components/icons/CrewIcon.svelte";
   import CustomLibraryIcon from "$lib/components/icons/CustomLibraryIcon.svelte";
@@ -111,4 +113,12 @@
 
 {#if option.value === "crew"}
   <CrewIcon />
+{/if}
+
+{#if option.value === "standard"}
+  <ShuffleIcon />
+{/if}
+
+{#if option.value === "smart"}
+  <BrainIcon />
 {/if}
