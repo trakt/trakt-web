@@ -1,7 +1,7 @@
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { ListResponse } from '@trakt/api';
+import type { LikedListItemResponse, ListResponse } from '@trakt/api';
 import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
 import { mapToMediaListSummary } from '../../_internal/mapToMediaListSummary.ts';
 import { InvalidateAction } from '../../models/InvalidateAction.ts';
@@ -17,8 +17,8 @@ const likedListsRequest = (
 ) =>
   api({ fetch })
     .users
-    .likes
-    .lists({
+    .likes({
+      params: { id: 'me', type: 'lists' },
       query: {
         extended: 'full,images',
         page,
@@ -32,9 +32,9 @@ export const likedListsQuery = defineInfiniteQuery({
   dependencies: (params) => [params.page, params.limit],
   request: likedListsRequest,
   mapper: (response) => ({
-    entries: response.body.map((i) =>
-      mapToMediaListSummary(i.list as ListResponse)
-    ),
+    entries: response.body
+      .filter((entry): entry is LikedListItemResponse => entry.type === 'list')
+      .map((entry) => mapToMediaListSummary(entry.list as ListResponse)),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(MediaListSummarySchema),
