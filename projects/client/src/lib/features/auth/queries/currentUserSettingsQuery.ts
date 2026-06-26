@@ -53,6 +53,7 @@ export const UserSettingsSchema = z.object({
     }),
     isSpoilerHidden: z.boolean().optional(),
     hasWatchAgain: z.boolean(),
+    showRatingPrompt: z.boolean().nullish(),
   }),
   genres: genreOptionSchema.array(),
   services: z.object({
@@ -141,6 +142,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
           : browsing?.watch_popup_action ?? 'now',
       },
       hasWatchAgain: !(browsing?.watch_only_once ?? true),
+      showRatingPrompt: browsing?.show_rating_prompt,
       progress: {
         sort: {
           by: 'added',

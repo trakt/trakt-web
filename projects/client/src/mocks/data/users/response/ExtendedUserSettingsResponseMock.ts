@@ -52,6 +52,7 @@ export const ExtendedUsersResponseMock: SettingsResponse & {
     'week_start_day': '0',
     'watch_after_rating': '',
     'watch_only_once': false,
+    'show_rating_prompt': true,
     'other_site_ratings': true,
     'release_date_ignore_runtime': false,
     'display_early_ratings': false,
