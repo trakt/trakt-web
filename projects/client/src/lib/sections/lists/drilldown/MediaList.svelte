@@ -24,6 +24,7 @@
     drilldown,
     variant: externalVariant,
     titleAction,
+    contentKey,
   }: MediaListProps<T, M> = $props();
 
   const { list, isLoading } = $derived(
@@ -45,6 +46,7 @@
         type,
         filter: filter ?? {},
         filterOverride: filterOverride ?? {},
+        contentKey: contentKey ?? {},
       }),
     ),
   );

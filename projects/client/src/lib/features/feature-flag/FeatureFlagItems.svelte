@@ -3,6 +3,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { m } from "$lib/features/i18n/messages";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { FeatureFlag } from "./models/FeatureFlag";
   import { featureFlagDefinitions } from "./models/featureFlagDefinitions";
@@ -24,42 +25,47 @@
       {@const title = definition.title()}
       {@const description = definition.description?.() ?? ""}
       {@const featureLink = definition.featureLink?.()}
-      <div class="feature-flag-item">
-        <div class="feature-flag-icon">
-          <Icon />
-        </div>
+      <RenderFor audience={definition.audience ?? "vip"}>
+        <div class="feature-flag-item">
+          <div class="feature-flag-icon">
+            <Icon />
+          </div>
 
-        <div class="feature-flag-copy">
-          <span class="feature-flag-title bold">{title}</span>
-          {#if description}
-            <p class="feature-flag-description secondary small">
-              {description}
-            </p>
-          {/if}
-        </div>
-
-        <div class="feature-flag-actions">
-          <Switch
-            color="purple"
-            label={title}
-            checked={value}
-            innerText={value ? "On" : "Off"}
-            onclick={() => setFlag(key, !value)}
-          />
-
-          <span class="feature-flag-link" aria-hidden={!value || !featureLink}>
-            {#if value && featureLink}
-              <Link
-                href={featureLink.href}
-                label={featureLink.label()}
-                color="inherit"
-              >
-                <CaretRightIcon />
-              </Link>
+          <div class="feature-flag-copy">
+            <span class="feature-flag-title bold">{title}</span>
+            {#if description}
+              <p class="feature-flag-description secondary small">
+                {description}
+              </p>
             {/if}
-          </span>
+          </div>
+
+          <div class="feature-flag-actions">
+            <Switch
+              color="purple"
+              label={title}
+              checked={value}
+              innerText={value ? "On" : "Off"}
+              onclick={() => setFlag(key, !value)}
+            />
+
+            <span
+              class="feature-flag-link"
+              aria-hidden={!value || !featureLink}
+            >
+              {#if value && featureLink}
+                <Link
+                  href={featureLink.href}
+                  label={featureLink.label()}
+                  color="inherit"
+                >
+                  <CaretRightIcon />
+                </Link>
+              {/if}
+            </span>
+          </div>
         </div>
-      </div>
+      </RenderFor>
     {/each}
   </div>
 {:else}

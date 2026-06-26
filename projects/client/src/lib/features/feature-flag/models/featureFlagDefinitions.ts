@@ -1,3 +1,4 @@
+import BrainIcon from '$lib/components/icons/BrainIcon.svelte';
 import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
@@ -19,6 +20,7 @@ type FeatureFlagDefinition = {
   title: () => string;
   description?: (() => string | null) | null;
   featureLink?: (() => FeatureFlagLink | null) | null;
+  audience?: 'director' | 'vip';
 };
 
 type FeatureFlagDefinitions = Readonly<
@@ -96,5 +98,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
         UrlBuilder.settings.plex(),
         m.preview_feature_title_plex_sync(),
       ),
+  },
+  [FeatureFlag.SmartRelated]: {
+    icon: BrainIcon,
+    title: () => m.preview_feature_title_smart_related(),
+    description: () => m.preview_feature_description_smart_related(),
+    audience: 'director',
   },
 };

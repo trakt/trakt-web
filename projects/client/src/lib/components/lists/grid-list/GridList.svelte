@@ -71,7 +71,6 @@
     <div
       class="trakt-list-item-container trakt-list-items"
       role={groupBy ? "none" : "list"}
- 
       use:customAction
     >
       {#each promotedItems as i (i.key)}

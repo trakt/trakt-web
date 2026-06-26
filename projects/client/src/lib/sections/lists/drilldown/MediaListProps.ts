@@ -18,10 +18,11 @@ export type MediaListProps<T, M> = {
   drilldown?: ListDrilldownLinkProps;
   variant?: 'portrait' | 'landscape';
   titleAction?: Snippet;
+  contentKey?: string;
 } & FilterParams;
 
 export type DrilledMediaListProps<T, M> =
-  & Omit<MediaListProps<T, M>, 'useList' | 'actions' | 'id'>
+  & Omit<MediaListProps<T, M>, 'useList' | 'actions' | 'id' | 'contentKey'>
   & {
     id: string;
     useList: PaginatableStore<T, M>;
