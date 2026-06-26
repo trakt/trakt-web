@@ -89,6 +89,7 @@
         {title}
         style="dropdown-item"
         variant="primary"
+        disabled={commonProps.disabled}
         onCheckIn={autoClose}
       />
     {/if}
