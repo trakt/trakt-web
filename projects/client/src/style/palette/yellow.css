@@ -1,16 +1,16 @@
 :root {
-  --yellow-50: #fffbe6;
-  --yellow-60: #fff8d9;
-  --yellow-70: #fff5cc;
-  --yellow-80: #fff1bf;
-  --yellow-90: #ffeeb2;
-  --yellow-100: #ffeba5;
-  --yellow-200: #ffd966;
-  --yellow-300: #ffc41a;
-  --yellow-400: #f5b300;
-  --yellow-500: #e6a800;
-  --yellow-600: #cc9400;
-  --yellow-700: #a07300;
-  --yellow-800: #7a5800;
-  --yellow-900: #5c4200;
+  --yellow-50: oklch(96.5% 0.035 85.0);
+  --yellow-60: oklch(95.0% 0.045 85.0);
+  --yellow-70: oklch(93.5% 0.055 85.0);
+  --yellow-80: oklch(92.0% 0.065 85.0);
+  --yellow-90: oklch(90.5% 0.075 85.0);
+  --yellow-100: oklch(89.0% 0.09 85.0);
+  --yellow-200: oklch(84.0% 0.0908 85.0);
+  --yellow-300: oklch(80.0% 0.1287 85.0);
+  --yellow-400: oklch(78.0% 0.1535 85.0);
+  --yellow-500: oklch(76.0% 0.1496 85.0);
+  --yellow-600: oklch(70.0% 0.1378 85.0);
+  --yellow-700: oklch(58.0% 0.1142 85.0);
+  --yellow-800: oklch(47.0% 0.0926 85.0);
+  --yellow-900: oklch(38.0% 0.075 85.0);
 }
