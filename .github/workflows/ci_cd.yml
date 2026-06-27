@@ -314,13 +314,6 @@ jobs:
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      
-      # Add this new step to copy the .npmrc file
-      - name: The Ancient Scroll of JSR aka Copy .npmrc
-        run: |
-          cp .npmrc projects/client/
-          echo "THE SCROLL OF KNOWLEDGE HAS BEEN TRANSCRIBED:"
-          cat projects/client/.npmrc
 
       - name: Awaken the Node Ancient (Setup Node 22 for Wrangler)
         uses: actions/setup-node@v6
