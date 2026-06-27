@@ -13,21 +13,25 @@
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
-  function navigateToSearch(rawValue: string) {
-    // An empty q is kept in the URL on purpose: it resets the persisted
-    // query in SearchProvider (which only reacts when the q param exists).
+  function onSearch(ev: Event) {
+    const inputElement = ev.target as HTMLInputElement;
+    const value = inputElement.value.trim();
+
+    if (value.length === 0) {
+      goto(pathName, {
+        replaceState: page.url.pathname === pathName,
+        keepFocus: true,
+      });
+    }
+
     const params = buildParamString({
       m: $mode,
-      q: rawValue.trim(),
+      q: inputElement.value.trim(),
     });
     goto(`${pathName}${params}`, {
       replaceState: page.url.pathname === pathName,
       keepFocus: true,
     });
-  }
-
-  function onSearch(ev: Event) {
-    navigateToSearch((ev.target as HTMLInputElement).value);
   }
 
   let inputElement: HTMLInputElement;
@@ -62,20 +66,16 @@
   });
 
   onMount(() => {
-    const length = inputElement.value.length;
-
-    // Autofocus only with a mouse; on touch it would pop the keyboard on
-    // every navigation to the search page.
-    if ($isMouse) {
-      inputElement.setSelectionRange(length, length);
-      inputElement.focus();
+    if (!$isMouse) {
+      return;
     }
 
-    // Apply a persisted query (e.g. arriving from the sidebar link, which
-    // points at /search with no params) on every platform. Skip when the URL
-    // already carries it, as the page already searches from the q param.
-    if (length > 0 && page.url.searchParams.get("q") !== inputElement.value.trim()) {
-      navigateToSearch(inputElement.value);
+    const length = inputElement.value.length;
+    inputElement.setSelectionRange(length, length);
+    inputElement.focus();
+
+    if (length > 0) {
+      inputElement.click();
     }
   });
 </script>
@@ -92,6 +92,7 @@
   <input
     use:clickOutside
     bind:this={inputElement}
+    onclick={onSearch}
     onclickoutside={clear}
     class="trakt-search-input"
     type="search"
