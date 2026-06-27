@@ -648,6 +648,77 @@ the appropriate helper component instead:
 
 ---
 
+## Direction & Logical Properties (RTL)
+
+The app renders in RTL locales (e.g. `fa-IR`); `<html dir>` is set per request
+(SSR) and synced on client locale switch. Components must mirror automatically.
+
+**Always use logical properties, never physical sides, for layout:**
+
+| Physical (forbidden for layout)  | Logical (use this)                            |
+| -------------------------------- | --------------------------------------------- |
+| `left` / `right`                 | `inset-inline-start` / `inset-inline-end`     |
+| `padding-left` / `padding-right` | `padding-inline-start` / `padding-inline-end` |
+| `margin-left` / `margin-right`   | `margin-inline-start` / `margin-inline-end`   |
+| `border-left` / `border-right`   | `border-inline-start` / `border-inline-end`   |
+| `border-top-left-radius` (etc.)  | `border-start-start-radius` (etc.)            |
+| `text-align: left / right`       | `text-align: start / end`                     |
+| `float: left / right`            | `float: inline-start / inline-end`            |
+
+Flex/grid already follow `dir`, so `justify-content`, `gap`, and source order
+flip for free - prefer them over absolute positioning.
+
+**Transforms are NOT direction-aware.** A `translateX(+n)` points the same way
+in RTL. For translate-driven motion (sliding indicators, offset badges),
+multiply the inline offset by the global `--rtl-sign` custom property (`1` in
+LTR, `-1` in RTL, defined in `style/direction/index.css`):
+
+```scss
+transform: translateX(calc(var(--rtl-sign) * var(--offset)));
+```
+
+**Directional icons** (chevrons, arrows, carets pointing along the reading axis)
+must flip. Add the `trakt-icon-directional` class to the icon's `<svg>`; a
+global rule mirrors it under `:dir(rtl)`. Icons with no directional meaning must
+NOT carry the class.
+
+**Keep physical `left`/`right` ONLY when the value is not a layout side:**
+
+- JS-measured viewport coordinates (`getBoundingClientRect`, drag ghosts,
+  pointer positions) - these are absolute screen coords, never flip them.
+- Horizontal centering tricks: `left: 50%` + `transform: translate(-50%, …)` is
+  direction-symmetric; leave it physical (a logical inset mis-centers).
+- Off-screen hiding (`left: -100dvw`).
+- Inside `@keyframes` or purely decorative shimmer/sweep animations.
+- Third-party JS config keys that happen to be named `left`/`right` (e.g.
+  carbon-charts axis keys) - these are not CSS.
+
+When you add or move a `transition`/`will-change` list, name the LOGICAL
+property (`inset-inline-start`, not `left`), or the animation silently dies.
+
+## Accessibility
+
+- **Every interactive control needs an accessible name.** Icon-only buttons (no
+  visible text) MUST have an `aria-label` sourced from a Paraglide message
+  - never ship a `<button>` whose only child is an `<svg>`.
+
+  ```svelte
+  <button aria-label={m.button_label_next()} onclick={next}>
+    <CaretRightIcon />
+  </button>
+  ```
+
+- Use native semantic elements (`<button>`, `<a>`, `<nav>`, `<dialog>`) over
+  `<div>` with click handlers. A clickable `<div>` needs `role` + `tabindex` +
+  keyboard handlers and is almost always the wrong choice.
+- Preserve focus styling - rely on `:focus-visible`; never blanket
+  `outline: none` without a replacement focus indicator.
+- Pair every icon/color-only signal with text or an `aria-*` attribute; do not
+  encode meaning in color alone.
+- Decorative imagery uses empty `alt=""`; meaningful imagery has descriptive
+  `alt`. Decorative SVGs that are not directional need no label.
+- Respect `prefers-reduced-motion` for non-essential animation.
+
 ## Where to Place a New Component
 
 | Question                                              | Place in                                     |
@@ -693,3 +764,14 @@ the appropriate helper component instead:
       `.tag`, etc.) - no manual `font-weight`/`font-size` when a class covers it
 - [ ] When `font-size` overrides are needed, uses semantic variables
       (`--font-size-tag`, `--font-size-text`) not raw tokens (`--ni-10`)
+- [ ] RTL-safe: logical properties only (`inset-inline-*`,
+      `padding/margin-inline-*`, `text-align: start/end`, logical radii) - no
+      physical `left`/`right` for layout; `translateX` offsets multiplied by
+      `--rtl-sign`
+- [ ] Directional icons carry `trakt-icon-directional`; non-directional ones do
+      not
+- [ ] Physical `left`/`right` only for JS-measured coords, `left:50%` centering,
+      off-screen hide, keyframes, or third-party JS keys
+- [ ] Icon-only buttons have an `aria-label` from a Paraglide message; native
+      semantic elements used over click-handler `<div>`s; `:focus-visible`
+      preserved
