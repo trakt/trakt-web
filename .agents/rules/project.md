@@ -9,7 +9,8 @@ applyTo: '**'
 
 ## Tech Stack
 
-SvelteKit + TypeScript app (Svelte 5, runes mode) deployed to Cloudflare Workers. Monorepo using Deno workspaces with app at `projects/client/`.
+SvelteKit + TypeScript app (Svelte 5, runes mode) deployed to Cloudflare
+Workers. Monorepo using Deno workspaces with app at `projects/client/`.
 
 ## Project Structure
 
@@ -45,45 +46,66 @@ projects/client/src/
 
 ### Pages are thin shells
 
-Route pages compose features and sections. Business logic lives in `lib/features/`, not in route files. Layouts wrap children with providers (e.g., `CalendarProvider`).
+Route pages compose features and sections. Business logic lives in
+`lib/features/`, not in route files. Layouts wrap children with providers (e.g.,
+`CalendarProvider`).
 
 ### Features are self-contained
 
-Each feature directory in `lib/features/` owns its state, components, queries. Features expose a public API; keep internals in `_internal/` subdirectories.
+Each feature directory in `lib/features/` owns its state, components, queries.
+Features expose a public API; keep internals in `_internal/` subdirectories.
 
 ### Components use data attributes for variants
 
-Components use `data-variant`, `data-style`, `data-color` attributes for styling variants rather than prop-driven class concatenation.
+Components use `data-variant`, `data-style`, `data-color` attributes for styling
+variants rather than prop-driven class concatenation.
 
 ### Snippets for flexible content
 
-Use Svelte 5 `{#snippet}` for reusable template fragments and component slot alternatives.
+Use Svelte 5 `{#snippet}` for reusable template fragments and component slot
+alternatives.
 
 ### Guards for conditional rendering
 
-Use `RenderFor`, `RenderForFeature` components instead of inline `{#if}` blocks for auth/feature/audience gating.
+Use `RenderFor`, `RenderForFeature` components instead of inline `{#if}` blocks
+for auth/feature/audience gating.
 
 ### Stores use RxJS + localStorage
 
-State management uses `BehaviorSubject` from RxJS, often backed by `localStorage` for persistence. Prefer `$derived()` for computed values over additional stores.
+State management uses `BehaviorSubject` from RxJS, often backed by
+`localStorage` for persistence. Prefer `$derived()` for computed values over
+additional stores.
 
 ### API requests use mappers
 
-`lib/requests/` contains query definitions via `defineQuery()` and pure mapper functions that transform API responses to domain models. Zod validates at the boundary.
+`lib/requests/` contains query definitions via `defineQuery()` and pure mapper
+functions that transform API responses to domain models. Zod validates at the
+boundary.
 
 ### i18n via Paraglide
 
-Internationalization uses Paraglide JS (Inlang). Messages are type-safe functions: `m.page_title_home()`. Source definitions live in `i18n/meta/`, generated output in `lib/paraglide/`. Never edit generated files.
+Internationalization uses Paraglide JS (Inlang). Messages are type-safe
+functions: `m.page_title_home()`. Source definitions live in `i18n/meta/`,
+generated output in `lib/paraglide/`. Never edit generated files.
 
 ## Styling
 
 - SCSS with scoped Svelte `<style lang="scss">` blocks.
-- All values via CSS custom properties (`--ni-*`, `--color-*`, `--gap-*`, `--border-radius-*`).
-- Responsive mixins: `for-mobile`, `for-tablet-sm`, `for-desktop`, `for-mouse`, `for-touch`.
+- All values via CSS custom properties (`--ni-*`, `--color-*`, `--gap-*`,
+  `--border-radius-*`).
+- Responsive mixins: `for-mobile`, `for-tablet-sm`, `for-desktop`, `for-mouse`,
+  `for-touch`.
 - Import mixins as: `@use "$style/scss/mixins/index" as *;`
-- Full light/dark theme support. Never use raw hex values - use semantic CSS variables.
+- Full light/dark theme support. Never use raw hex values - use semantic CSS
+  variables.
 - Use kebab-case for CSS class names.
 - Component-scoped styles preferred.
+- **RTL-safe by default.** The app ships in RTL locales (e.g. `fa-IR`), so never
+  hardcode a physical side for layout. Use logical properties:
+  `padding-inline-*`/`margin-inline-*`, `inset-inline-start`/`inset-inline-end`
+  (not `left`/`right`), `text-align: start/end`, `border-inline-*`, and logical
+  corner radii (`border-start-start-radius`, etc.). See `components.md` for the
+  full direction + accessibility rules.
 
 ## Path Aliases
 
@@ -101,6 +123,8 @@ Always use aliases over deep relative paths (`../../../`).
 ## Tooling
 
 - **Formatter**: Use `deno fmt`, not prettier.
-- **Linter**: ESLint with TypeScript + Svelte plugins. Config at `eslint.config.js`.
-- **Build**: Vite + SvelteKit adapter-cloudflare. Paraglide generates i18n before build.
+- **Linter**: ESLint with TypeScript + Svelte plugins. Config at
+  `eslint.config.js`.
+- **Build**: Vite + SvelteKit adapter-cloudflare. Paraglide generates i18n
+  before build.
 - **Dev**: `deno task client:dev` starts the dev server.
