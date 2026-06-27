@@ -126,7 +126,7 @@
       --color-background-button: #{$background-color};
       --color-foreground-button: #{$foreground-color};
 
-      &:not([data-style="textured"]):not([data-style="ghost"]) {
+      &:not([data-style="ghost"]) {
         @include for-mouse {
           &:hover,
           &:focus-visible {
@@ -168,15 +168,6 @@
 
     --scale-factor-button: 1;
     --button-height: var(--ni-52);
-
-    --color-background-button-light: color-mix(
-      in srgb,
-      var(--color-background-button) 35%,
-      white 65%
-    );
-
-    --color-highlight: rgba(255, 255, 255, 0.52);
-    --color-shadow: rgba(0, 0, 0, 0.32);
 
     all: unset;
     display: flex;
@@ -380,37 +371,6 @@
 
       &[data-size="tag"] {
         outline: var(--border-thickness-xxs) solid var(--color-foreground);
-      }
-    }
-
-    &[data-style="textured"] {
-      &:not([data-size="tag"]) {
-        padding-top: var(--ni-12);
-      }
-
-      &,
-      &::before {
-        box-shadow:
-          0px 1px 2px 0px var(--color-highlight) inset,
-          2px -4px 2px 0px var(--color-shadow) inset,
-          0px 2px 8px 0px var(--color-shadow);
-      }
-
-      &::before {
-        background: radial-gradient(
-          59.13% 72.55% at 50.22% 118.63%,
-          var(--color-background-button-light) 0%,
-          var(--color-background-button) 100%
-        );
-      }
-
-      &:not([disabled]):active {
-        padding-top: var(--ni-16);
-
-        box-shadow:
-          0px -1px 2px 0px var(--color-highlight) inset,
-          2px 4px 2px 0px var(--color-shadow) inset,
-          0px 2px 8px 0px var(--color-shadow);
       }
     }
 

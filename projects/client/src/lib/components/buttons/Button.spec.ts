@@ -106,7 +106,7 @@ describe('Button', () => {
           ...defaultProps,
           variant: 'secondary',
           size: 'small',
-          style: 'textured',
+          style: 'flat',
           color: 'red',
         },
       });
@@ -114,7 +114,7 @@ describe('Button', () => {
       await waitFor(() => {
         const button = screen.getByRole('button');
         expect(button).toHaveAttribute('data-variant', 'secondary');
-        expect(button).toHaveAttribute('data-style', 'textured');
+        expect(button).toHaveAttribute('data-style', 'flat');
         expect(button).toHaveAttribute('data-size', 'small');
         expect(button).toHaveAttribute('data-alignment', 'centered');
         expect(button).toHaveAttribute('data-color', 'red');

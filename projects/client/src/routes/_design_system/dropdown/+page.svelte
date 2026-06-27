@@ -9,7 +9,7 @@
     "primary",
     "secondary",
   ];
-  const styles: TraktDropdownListProps["style"][] = ["textured", "flat"];
+  const styles: TraktDropdownListProps["style"][] = ["flat"];
 </script>
 
 {#snippet items()}

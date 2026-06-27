@@ -17,20 +17,7 @@
       <Button
         href={externalLink}
         target="_blank"
-        label="This is the primary textured link"
-        style="textured"
-        color="purple"
-      >
-        Textured Icon
-        {#snippet icon()}
-          <WatchNowIcon />
-        {/snippet}
-      </Button>
-
-      <Button
-        href={externalLink}
-        target="_blank"
-        label="This is the primary textured link"
+        label="This is the primary flat link"
         style="flat"
         color="purple"
       >
@@ -40,7 +27,7 @@
       <Button
         href={externalLink}
         target="_blank"
-        label="This is the primary textured link in a disabled"
+        label="This is the primary link in a disabled"
         style="ghost"
         color="purple"
       >
@@ -51,7 +38,7 @@
         <ActionButton
           href={page.url.pathname}
           target="_blank"
-          label="This is the primary textured link"
+          label="This is the primary link"
           color="purple"
         >
           <WatchNowIcon />
@@ -60,7 +47,7 @@
         <ActionButton
           href={page.url.pathname}
           target="_blank"
-          label="This is the primary textured link"
+          label="This is the primary link"
           color="blue"
         >
           <WatchNowIcon />
@@ -69,7 +56,7 @@
         <ActionButton
           href={page.url.pathname}
           target="_blank"
-          label="This is the primary textured link in a disabled"
+          label="This is the primary link in a disabled"
           color="red"
         >
           <WatchNowIcon />
@@ -84,20 +71,7 @@
       <Button
         href={page.url.pathname}
         target="_blank"
-        label="This is the primary textured link"
-        style="textured"
-        color="purple"
-      >
-        Textured Icon
-        {#snippet icon()}
-          <WatchNowIcon />
-        {/snippet}
-      </Button>
-
-      <Button
-        href={page.url.pathname}
-        target="_blank"
-        label="This is the primary textured link"
+        label="This is the primary flat link"
         style="flat"
         color="purple"
       >
@@ -107,7 +81,7 @@
       <Button
         href={page.url.pathname}
         target="_blank"
-        label="This is the primary textured link in a disabled"
+        label="This is the primary link in a disabled"
         style="ghost"
         color="purple"
       >
@@ -118,7 +92,7 @@
         <ActionButton
           href={page.url.pathname}
           target="_blank"
-          label="This is the primary textured link"
+          label="This is the primary link"
           color="purple"
         >
           <WatchNowIcon />
@@ -127,7 +101,7 @@
         <ActionButton
           href={page.url.pathname}
           target="_blank"
-          label="This is the primary textured link"
+          label="This is the primary link"
           color="blue"
         >
           <WatchNowIcon />
@@ -136,7 +110,7 @@
         <ActionButton
           href={page.url.pathname}
           target="_blank"
-          label="This is the primary textured link in a disabled"
+          label="This is the primary link in a disabled"
           color="red"
         >
           <WatchNowIcon />
@@ -152,20 +126,7 @@
         href="/"
         color="purple"
         target="_blank"
-        label="This is the primary textured link"
-        style="textured"
-      >
-        Textured Icon
-        {#snippet icon()}
-          <WatchNowIcon />
-        {/snippet}
-      </Button>
-
-      <Button
-        href="/"
-        color="purple"
-        target="_blank"
-        label="This is the primary textured link"
+        label="This is the primary flat link"
         style="flat"
       >
         Flat primary
@@ -175,7 +136,7 @@
         href="/"
         color="purple"
         target="_blank"
-        label="This is the primary textured link in a disabled"
+        label="This is the primary link in a disabled"
         style="ghost"
       >
         Ghost primary
@@ -185,7 +146,7 @@
         <ActionButton
           href="/"
           target="_blank"
-          label="This is the primary textured link"
+          label="This is the primary link"
           color="purple"
         >
           <WatchNowIcon />
@@ -194,7 +155,7 @@
         <ActionButton
           href="/"
           target="_blank"
-          label="This is the primary textured link"
+          label="This is the primary link"
           color="blue"
         >
           <WatchNowIcon />
@@ -203,7 +164,7 @@
         <ActionButton
           href="/"
           target="_blank"
-          label="This is the primary textured link in a disabled"
+          label="This is the primary link in a disabled"
           color="red"
         >
           <WatchNowIcon />
