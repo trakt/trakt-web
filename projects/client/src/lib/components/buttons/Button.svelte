@@ -1,12 +1,10 @@
 <script lang="ts">
-  import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
-  import { disableNavigation } from "$lib/utils/actions/disableNavigation";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
-  import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
-  import { onMount } from "svelte";
+  import { Button } from "bits-ui";
   import { useGuardedHref } from "../../features/auth/stores/useGuardedHref";
+  import { createButtonHost } from "./_internal/createButtonHost.svelte";
   import type { TraktButtonProps } from "./TraktButtonProps";
 
   type TraktButtonAnchorProps = HTMLAnchorProps &
@@ -28,28 +26,49 @@
     ...props
   }: TraktButtonProps | TraktButtonAnchorProps = $props();
 
-  const rest = $derived({
-    ...props,
-    disabled: disabled || undefined,
-  });
-
-  const hasIcon = $derived(icon != null);
-  const isDefaultAlignment = $derived(hasIcon);
-  const alignment = $derived(isDefaultAlignment ? "default" : "centered");
   const { guardedHref, originalHref } = $derived(
-    useGuardedHref((rest as TraktButtonAnchorProps).href),
+    useGuardedHref((props as TraktButtonAnchorProps).href),
   );
-  const noscroll = $derived((rest as TraktButtonAnchorProps).noscroll);
-  const replacestate = $derived((rest as TraktButtonAnchorProps).replacestate);
+  const noscroll = $derived((props as TraktButtonAnchorProps).noscroll);
+  const replacestate = $derived((props as TraktButtonAnchorProps).replacestate);
 
   const href = $derived($guardedHref);
   const { isActive } = $derived(useActiveLink($originalHref));
 
-  const appendTestId = $derived((element: HTMLElement) => {
-    onMount(() => {
-      if (!dataTestId) return;
-      element.setAttribute("data-testid", dataTestId);
-    });
+  const hasIcon = $derived(icon != null);
+  const alignment = $derived(hasIcon ? "default" : "centered");
+
+  const classList = $derived(
+    [
+      "trakt-button",
+      href != null && "trakt-button-link",
+      $isActive && "trakt-link-active",
+    ]
+      .filter(Boolean)
+      .join(" "),
+  );
+
+  const host = createButtonHost({
+    getProps: () => props,
+    getHref: () => href,
+    getDisabled: () => disabled,
+    getClassName: () => classList,
+    getNoscroll: () => noscroll,
+    getReplacestate: () => replacestate,
+    getAttrs: () => ({
+      "aria-label": label,
+      "data-variant": variant,
+      "data-alignment": alignment,
+      "data-style": style,
+      "data-color": color,
+      "data-size": size,
+      "data-dpad-navigation": navigationType,
+      "data-testid": dataTestId,
+    }),
+    commonActions: [
+      (node) => disableTransitionOn(node, "touch"),
+      (node) => clickOutside(node),
+    ],
   });
 </script>
 
@@ -74,92 +93,54 @@
   {/if}
 {/snippet}
 
-{#if href != null}
-  <a
-    use:disableTransitionOn={"touch"}
-    use:clickOutside
-    use:triggerWithKeyboard
-    use:appendGlobalParameters={href}
-    use:disableNavigation={rest.disabled}
-    use:appendTestId
-    data-sveltekit-keepfocus
-    data-sveltekit-noscroll={noscroll}
-    data-sveltekit-replacestate={replacestate}
-    class="trakt-button trakt-button-link"
-    class:trakt-link-active={$isActive}
-    aria-label={label}
-    data-variant={variant}
-    data-alignment={alignment}
-    data-style={style}
-    data-color={color}
-    data-size={size}
-    data-dpad-navigation={navigationType}
-    {...rest}
-    {href}
-  >
-    {@render contents()}
-  </a>
-{:else}
-  <button
-    use:disableTransitionOn={"touch"}
-    use:clickOutside
-    use:appendTestId
-    class="trakt-button"
-    aria-label={label}
-    data-variant={variant}
-    data-alignment={alignment}
-    data-style={style}
-    data-color={color}
-    data-size={size}
-    data-dpad-navigation={navigationType}
-    {...rest}
-  >
-    {@render contents()}
-  </button>
-{/if}
+<Button.Root {...host.rootProps}>
+  {@render contents()}
+</Button.Root>
 
 <style lang="scss">
   @use "$style/scss/mixins/index.scss" as *;
 
-  @mixin variant-styles($variant, $background-color, $foreground-color) {
-    &[data-variant="#{$variant}"] {
-      --color-background-button: #{$background-color};
-      --color-foreground-button: #{$foreground-color};
+  // bits-ui renders the underlying element, so it never receives this
+  // component's scope hash. Every selector is therefore wrapped in :global(),
+  // anchored to the namespaced root, to survive Svelte's scoped-CSS pruning.
+  $b: ".trakt-button";
+  $on: ":not([disabled]):not([aria-disabled=true])";
 
-      &:not([data-style="ghost"]) {
-        @include for-mouse {
-          &:hover,
-          &:focus-visible {
-            --color-foreground-button: #{$background-color};
-            --color-background-button: #{$foreground-color};
-          }
-        }
+  @mixin variant-styles($base, $color, $variant, $bg, $fg) {
+    :global(#{$base}[data-color=#{$color}][data-variant=#{$variant}]) {
+      --color-background-button: #{$bg};
+      --color-foreground-button: #{$fg};
+    }
+
+    @include for-mouse {
+      :global(
+          #{$base}[data-color=#{$color}][data-variant=#{$variant}]:not([data-style=ghost]):hover
+        ),
+      :global(
+          #{$base}[data-color=#{$color}][data-variant=#{$variant}]:not([data-style=ghost]):focus-visible
+        ) {
+        --color-foreground-button: #{$bg};
+        --color-background-button: #{$fg};
       }
     }
   }
 
-  @mixin color-styles($color) {
-    &[data-color="#{$color}"] {
-      $background-color: var(--color-background-#{$color});
-      $foreground-color: var(--color-foreground-#{$color});
+  @mixin color-styles($base, $color) {
+    $bg: var(--color-background-#{$color});
+    $fg: var(--color-foreground-#{$color});
 
-      @include variant-styles("primary", $background-color, $foreground-color);
-      @include variant-styles(
-        "secondary",
-        $foreground-color,
-        $background-color
-      );
+    @include variant-styles($base, $color, primary, $bg, $fg);
+    @include variant-styles($base, $color, secondary, $fg, $bg);
 
-      @include for-mouse {
-        &:focus-visible {
-          outline: var(--border-thickness-xs) solid
-            var(--color-foreground-button);
-        }
+    @include for-mouse {
+      :global(#{$base}[data-color=#{$color}]:focus-visible) {
+        outline: var(--border-thickness-xs) solid
+          var(--color-foreground-button);
       }
     }
   }
 
-  .trakt-button {
+  :global(#{$b}) {
     --color-background-button-outline: color-mix(
       in srgb,
       var(--color-background-button) 10%,
@@ -186,230 +167,226 @@
     position: relative;
     overflow: hidden;
 
-    transition: var(--transition-increment) ease-in-out;
+    transition: var(--transition-increment) cubic-bezier(0.22, 1, 0.36, 1);
     transition-property:
-      box-shadow, outline, padding, transform, color, background,
-      text-decoration;
+      box-shadow, outline, outline-offset, padding, transform, color,
+      background, text-decoration;
+  }
 
-    &.trakt-button-link {
-      &[data-style="ghost"] {
-        &.trakt-link-active {
-          color: var(--color-background-button);
-        }
-      }
+  :global(#{$b} .button-icon) {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
 
-      &[data-style="underlined"] {
-        &.trakt-link-active {
-          text-decoration-color: color-mix(
-            in srgb,
-            var(--color-background-button) 80%,
-            white 20%
-          );
-          text-decoration-line: underline;
-        }
-      }
+  // Needed to make ellipses work with flex
+  // https://css-tricks.com/flexbox-truncated-text/
+  :global(#{$b} .button-label) {
+    min-width: 0;
+  }
+
+  :global(#{$b} p),
+  :global(#{$b} .button-label),
+  :global(#{$b} .button-icon) {
+    z-index: var(--layer-base);
+  }
+
+  :global(#{$b}.trakt-button-link[data-style=ghost].trakt-link-active) {
+    color: var(--color-background-button);
+  }
+
+  :global(#{$b}.trakt-button-link[data-style=underlined].trakt-link-active) {
+    text-decoration-color: color-mix(
+      in srgb,
+      var(--color-background-button) 80%,
+      white 20%
+    );
+    text-decoration-line: underline;
+  }
+
+  @each $color in "purple", "red", "blue", "orange", "default", "custom" {
+    @include color-styles($b, $color);
+  }
+
+  :global(#{$b}[data-alignment=default]) {
+    justify-content: space-between;
+  }
+
+  :global(#{$b}[data-alignment=centered]) {
+    justify-content: center;
+  }
+
+  // TODO: revert this once the dynamic scaling is figured out
+  :global(#{$b}[data-size=small] .button-label p),
+  :global(#{$b}[data-size=tag] .button-label p) {
+    font-size: 0.75rem;
+  }
+
+  :global(#{$b}[data-size=small] .button-icon svg),
+  :global(#{$b}[data-size=tag] .button-icon svg) {
+    width: auto;
+    height: var(--ni-18);
+  }
+
+  :global(#{$b}[data-size=small]) {
+    --button-height: var(--ni-40);
+    border-radius: calc(var(--border-radius-m) * 0.8);
+    padding: var(--ni-12);
+    gap: var(--ni-12);
+  }
+
+  :global(#{$b}[data-size=tag]) {
+    --button-height: var(--ni-18);
+    padding: var(--ni-2) var(--ni-10);
+    min-width: var(--ni-48);
+    box-sizing: border-box;
+  }
+
+  :global(#{$b}[data-size=tag][data-style=ghost]) {
+    margin: 0;
+  }
+
+  :global(#{$b}),
+  :global(#{$b}::before),
+  :global(#{$b}:active[disabled]) {
+    height: var(--button-height);
+    box-sizing: border-box;
+    border-radius: var(--border-radius-m);
+  }
+
+  :global(#{$b}::before) {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+    width: 100%;
+
+    opacity: 0;
+    transition: opacity var(--transition-increment) ease-in-out;
+  }
+
+  @include for-mouse {
+    :global(#{$b}:hover::before),
+    :global(#{$b}:focus-visible::before) {
+      opacity: 1;
+    }
+  }
+
+  :global(#{$b}:active::before) {
+    opacity: 0;
+  }
+
+  :global(#{$b}:active[disabled]) {
+    animation: jiggle-wiggle var(--animation-duration-jiggle-wiggle) infinite;
+  }
+
+  :global(#{$b}:focus-visible) {
+    outline: var(--border-thickness-xs) solid
+      var(--color-background-button-outline);
+    outline-offset: var(--ni-2);
+  }
+
+  :global(#{$b}[disabled]),
+  :global(#{$b}[aria-disabled=true]) {
+    cursor: not-allowed;
+    color: var(--color-foreground-button-disabled);
+    background: var(--color-surface-button-disabled);
+  }
+
+  :global(#{$b}[disabled]::before),
+  :global(#{$b}[aria-disabled=true]::before) {
+    display: none;
+  }
+
+  :global(#{$b}[data-style=ghost]) {
+    margin: var(--ni-neg-4) var(--ni-neg-10);
+    transform: scale(calc(var(--scale-factor-button) * 0.76925));
+    background: transparent;
+  }
+
+  :global(#{$b}[data-style=ghost]:not([data-variant=secondary])) {
+    color: var(--color-foreground);
+  }
+
+  :global(#{$b}[data-style=ghost][disabled]),
+  :global(#{$b}[data-style=ghost][aria-disabled=true]) {
+    color: var(--color-foreground-button-disabled);
+  }
+
+  @include for-mouse {
+    :global(#{$b}[data-style=ghost]:hover#{$on}) {
+      color: var(--color-foreground-button);
     }
 
-    @each $color in "purple", "red", "blue", "orange", "default", "custom" {
-      @include color-styles($color);
+    :global(#{$b}[data-style=ghost]:hover#{$on}[data-size=tag]) {
+      outline: var(--border-thickness-xs) solid var(--color-background-button);
     }
 
-    &[data-alignment="default"] {
-      justify-content: space-between;
+    :global(#{$b}[data-style=ghost]:hover#{$on}[data-variant=primary]) {
+      background: var(--color-background-button);
     }
 
-    &[data-alignment="centered"] {
-      justify-content: center;
+    :global(#{$b}[data-style=ghost]:hover#{$on}[data-variant=secondary]) {
+      background: color-mix(
+        in srgb,
+        var(--color-foreground-button) 10%,
+        transparent 90%
+      );
+    }
+  }
+
+  :global(#{$b}[data-style=ghost]:active#{$on}) {
+    transform: scale(calc(var(--scale-factor-button) * 0.7));
+  }
+
+  :global(#{$b}[data-style=ghost][data-size=tag]) {
+    outline: var(--border-thickness-xxs) solid var(--color-foreground);
+  }
+
+  @include for-mouse {
+    :global(#{$b}[data-style=flat]:hover#{$on}) {
+      box-shadow: 0 var(--ni-4) var(--ni-12) var(--ni-neg-2)
+        color-mix(in srgb, var(--color-background-button) 45%, transparent);
+      transform: translateY(calc(var(--ni-1) * -1));
+    }
+  }
+
+  :global(#{$b}[data-style=flat]:active#{$on}) {
+    transform: scale(calc(var(--scale-factor-button) * 0.97));
+    box-shadow: none;
+  }
+
+  :global(#{$b}[data-style=underlined]) {
+    --underline-offset: var(--ni-4);
+    --line-thickness: var(--ni-2);
+
+    background: transparent;
+    text-decoration-color: transparent;
+    color: var(--color-foreground);
+
+    text-underline-offset: var(--underline-offset);
+    text-decoration-thickness: var(--line-thickness);
+    line-height: calc(100% + var(--underline-offset) + var(--line-thickness));
+  }
+
+  :global(#{$b}[data-style=underlined][disabled]),
+  :global(#{$b}[data-style=underlined][aria-disabled=true]) {
+    color: var(--color-foreground-button-disabled);
+  }
+
+  @include for-mouse {
+    :global(#{$b}[data-style=underlined]:hover#{$on}) {
+      text-decoration-line: underline;
+      text-decoration-color: var(--color-foreground);
     }
 
-    &[data-size="small"],
-    &[data-size="tag"] {
-      // TODO: revert this once the dynamic scaling is figured out
-
-      .button-label {
-        p {
-          font-size: 0.75rem;
-        }
-      }
-
-      .button-icon {
-        :global(svg) {
-          width: auto;
-          height: var(--ni-18);
-        }
-      }
-    }
-
-    &[data-size="small"] {
-      --button-height: var(--ni-40);
-      border-radius: calc(var(--border-radius-m) * 0.8);
-      padding: var(--ni-12);
-      gap: var(--ni-12);
-    }
-
-    &[data-size="tag"] {
-      --button-height: var(--ni-18);
-      padding: var(--ni-2) var(--ni-10);
-      min-width: var(--ni-48);
-      box-sizing: border-box;
-
-      &[data-style="ghost"] {
-        margin: 0;
-      }
-    }
-
-    &,
-    &::before,
-    &:active[disabled] {
-      height: var(--button-height);
-      box-sizing: border-box;
-      border-radius: var(--border-radius-m);
-    }
-
-    &::before {
-      width: 100%;
-    }
-
-    .button-icon {
-      display: flex;
-      align-items: center;
-      gap: var(--gap-xs);
-    }
-
-    .button-label {
-      // Needed to make ellipses work with flex
-      // https://css-tricks.com/flexbox-truncated-text/
-      min-width: 0;
-    }
-
-    p,
-    .button-label,
-    .button-icon {
-      z-index: var(--layer-base);
-    }
-
-    &::before {
-      content: "";
-
-      position: absolute;
-      top: 0;
-      inset-inline-start: 0;
-
-      opacity: 0;
-      transition: opacity var(--transition-increment) ease-in-out;
-    }
-
-    @include for-mouse {
-      &:hover::before,
-      &:focus-visible::before {
-        opacity: 1;
-      }
-    }
-
-    &:active::before {
-      opacity: 0;
-    }
-
-    &:active[disabled] {
-      animation: jiggle-wiggle var(--animation-duration-jiggle-wiggle) infinite;
-    }
-
-    &:focus-visible {
-      outline: var(--border-thickness-xs) solid
-        var(--color-background-button-outline);
-    }
-
-    &[disabled] {
-      cursor: not-allowed;
-      color: var(--color-foreground-button-disabled);
-      background: var(--color-surface-button-disabled);
-
-      &::before {
-        display: none;
-      }
-    }
-
-    &[data-style="ghost"] {
-      margin: var(--ni-neg-4) var(--ni-neg-10);
-      transform: scale(calc(var(--scale-factor-button) * 0.76925));
-      background: transparent;
-
-      &:not([data-variant="secondary"]) {
-        color: var(--color-foreground);
-      }
-
-      &[disabled] {
-        color: var(--color-foreground-button-disabled);
-      }
-
-      @include for-mouse {
-        &:hover:not([disabled]) {
-          color: var(--color-foreground-button);
-
-          &[data-size="tag"] {
-            outline: var(--border-thickness-xs) solid
-              var(--color-background-button);
-          }
-
-          &[data-variant="primary"] {
-            background: var(--color-background-button);
-          }
-
-          &[data-variant="secondary"] {
-            background: color-mix(
-              in srgb,
-              var(--color-foreground-button) 10%,
-              transparent 90%
-            );
-          }
-        }
-      }
-
-      &:active:not([disabled]) {
-        transform: scale(calc(var(--scale-factor-button) * 0.7));
-      }
-
-      &[data-size="tag"] {
-        outline: var(--border-thickness-xxs) solid var(--color-foreground);
-      }
-    }
-
-    &[data-style="flat"] {
-      &:active:not([disabled]) {
-        transform: scale(calc(var(--scale-factor-button) * 0.97));
-      }
-    }
-
-    &[data-style="underlined"] {
-      --underline-offset: var(--ni-4);
-      --line-thickness: var(--ni-2);
-
-      background: transparent;
-      text-decoration-color: transparent;
-      color: var(--color-foreground);
-
-      text-underline-offset: var(--underline-offset);
-      text-decoration-thickness: var(--line-thickness);
-      line-height: calc(100% + var(--underline-offset) + var(--line-thickness));
-
-      &[disabled] {
-        color: var(--color-foreground-button-disabled);
-      }
-
-      @include for-mouse {
-        &:hover:not([disabled]) {
-          text-decoration-line: underline;
-          text-decoration-color: var(--color-foreground);
-
-          &:not(.trakt-link-active) {
-            color: color-mix(
-              in srgb,
-              var(--color-foreground-button) 80%,
-              white 20%
-            );
-          }
-        }
-      }
+    :global(#{$b}[data-style=underlined]:hover#{$on}:not(.trakt-link-active)) {
+      color: color-mix(
+        in srgb,
+        var(--color-foreground-button) 80%,
+        white 20%
+      );
     }
   }
 </style>
