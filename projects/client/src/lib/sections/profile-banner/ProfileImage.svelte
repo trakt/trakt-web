@@ -199,7 +199,7 @@
       height: var(--ni-24);
 
       top: var(--ni-neg-8);
-      right: var(--ni-neg-8);
+      inset-inline-end: var(--ni-neg-8);
 
       z-index: var(--layer-raised);
     }
@@ -242,8 +242,8 @@
   .edit-badge {
     position: absolute;
     bottom: 0;
-    right: 0;
-    transform: translate(15%, 15%);
+    inset-inline-end: 0;
+    transform: translate(calc(var(--rtl-sign) * 15%), 15%);
 
     width: var(--ni-24);
     height: var(--ni-24);
@@ -272,13 +272,13 @@
   .trakt-profile-image:has(.editable-image-wrapper:focus-visible)
     .edit-badge {
     opacity: 1;
-    transform: translate(15%, 15%) scale(1.1);
+    transform: translate(calc(var(--rtl-sign) * 15%), 15%) scale(1.1);
   }
 
   .upload-overlay {
     position: absolute;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: var(--image-size);
     height: var(--image-size);
     border-radius: 50%;

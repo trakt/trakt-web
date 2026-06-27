@@ -130,8 +130,8 @@
       display: flex;
       flex-direction: column;
       margin-bottom: var(--ni-2);
-      padding-left: var(--ni-6);
-      border-left: var(--border-thickness-xxs) solid var(--genre-color);
+      padding-inline-start: var(--ni-6);
+      border-inline-start: var(--border-thickness-xxs) solid var(--genre-color);
     }
   }
 
@@ -153,7 +153,7 @@
 
   .yir-genre-bar {
     height: var(--ni-30);
-    margin-left: var(--ni-2);
+    margin-inline-start: var(--ni-2);
     position: relative;
     min-width: var(--ni-44);
     width: var(--bar-width);
@@ -169,14 +169,14 @@
       height: var(--ni-30);
       min-height: var(--ni-30);
       width: var(--mobile-bar-width);
-      margin-left: 0;
+      margin-inline-start: 0;
       margin-bottom: 0;
       display: block;
     }
   }
 
   .yir-genre-row:first-child .yir-genre-bar {
-    margin-left: 0;
+    margin-inline-start: 0;
   }
 
   .yir-genre-percentage {
@@ -184,7 +184,7 @@
     position: absolute;
     width: 100%;
     text-align: center;
-    left: 0;
+    inset-inline-start: 0;
     top: var(--ni-8);
     font-size: var(--font-size-text-small);
     opacity: 0;
@@ -197,7 +197,7 @@
 
   .yir-genre-label {
     position: absolute;
-    left: 0;
+    inset-inline-start: 0;
     bottom: var(--ni-30);
     width: 200%;
     box-sizing: border-box;
@@ -205,7 +205,7 @@
     white-space: nowrap;
     padding: var(--ni-4) var(--ni-6);
     color: var(--shade-10);
-    border-left: var(--border-thickness-xs) solid var(--genre-color);
+    border-inline-start: var(--border-thickness-xs) solid var(--genre-color);
     pointer-events: none;
 
     @include for-tablet-sm-and-below {
@@ -240,7 +240,7 @@
       background-color: color-mix(in srgb, var(--genre-color) 31%, transparent);
       // Full-color 1px left border on top of the translucent fill (matches
       // v2: solid border-color + `#RRGGBB50` background tint).
-      border-left: var(--border-thickness-xxs) solid var(--genre-color);
+      border-inline-start: var(--border-thickness-xxs) solid var(--genre-color);
       text-transform: uppercase;
     }
 

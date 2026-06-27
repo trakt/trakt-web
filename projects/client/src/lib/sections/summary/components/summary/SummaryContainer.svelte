@@ -102,7 +102,7 @@
   }
 
   .trakt-summary-actions {
-    margin-left: var(--ni-neg-16);
+    margin-inline-start: var(--ni-neg-16);
   }
 
   .trakt-summary-poster-container {

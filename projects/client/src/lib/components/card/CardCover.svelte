@@ -112,12 +112,12 @@
 
     .trakt-card-cover-badge {
       top: 0;
-      left: 0;
+      inset-inline-start: 0;
     }
 
     .trakt-card-cover-tag {
       bottom: 0;
-      left: 0;
+      inset-inline-start: 0;
 
       justify-content: flex-start;
       gap: var(--gap-xxs);
@@ -182,7 +182,7 @@
 
       position: absolute;
       bottom: 0;
-      left: calc((100% - var(--logo-width)) / 2);
+      inset-inline-start: calc((100% - var(--logo-width)) / 2);
 
       object-fit: contain;
       object-position: bottom;
@@ -194,7 +194,7 @@
 
       position: absolute;
       bottom: 0;
-      left: 0;
+      inset-inline-start: 0;
 
       color: var(--color-overlay-foreground);
       text-align: center;
@@ -217,7 +217,7 @@
 
       position: absolute;
       bottom: 0;
-      left: 0;
+      inset-inline-start: 0;
 
       width: 100%;
       height: 75%;

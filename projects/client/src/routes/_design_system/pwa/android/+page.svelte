@@ -164,8 +164,7 @@
     .trakt-android-phone-top-bar {
       position: absolute;
       top: 0;
-      left: 0;
-      right: 0;
+      inset-inline: 0;
       height: calc(
         var(--height-android) - var(--height-pwa) -
           var(--height-android-gesture)
@@ -183,7 +182,7 @@
       .trakt-android-phone-top-bar-left {
         font-size: var(--font-size-m);
         font-weight: var(--font-weight-bold);
-        text-align: left;
+        text-align: start;
         flex-grow: 1;
         color: var(--background-android-theme-color);
         filter: invert(1);
@@ -212,8 +211,7 @@
     .trakt-android-gesture-navbar {
       position: absolute;
       bottom: 0;
-      left: 0;
-      right: 0;
+      inset-inline: 0;
       height: var(--height-android-gesture);
       background-color: black;
       display: flex;

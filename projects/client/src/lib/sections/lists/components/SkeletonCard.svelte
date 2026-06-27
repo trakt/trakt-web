@@ -74,6 +74,13 @@
       var(--index);
   }
 
+  .trakt-skeleton-card-cover,
+  .trakt-skeleton-card-footer {
+    &:dir(rtl)::after {
+      animation-direction: reverse;
+    }
+  }
+
   .trakt-skeleton-card-cover::after,
   .trakt-skeleton-card-footer::after {
     content: "";

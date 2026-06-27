@@ -26,7 +26,7 @@
 
     &:global(.theme-halloween) {
       top: calc(-0.5 * var(--image-size));
-      right: calc(0.5 * var(--image-size));
+      inset-inline-end: calc(0.5 * var(--image-size));
       animation: lift-and-swing 5s infinite;
     }
 
@@ -34,7 +34,7 @@
       z-index: 1;
 
       top: calc(-0.5 * var(--image-size));
-      right: calc(-0.35 * var(--image-size));
+      inset-inline-end: calc(-0.35 * var(--image-size));
 
       transform: rotate(15deg);
     }

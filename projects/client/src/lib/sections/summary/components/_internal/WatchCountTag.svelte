@@ -61,7 +61,7 @@
 
     :global(.counter[inert]) {
       position: absolute;
-      left: var(--ni-20);
+      inset-inline-start: var(--ni-20);
     }
 
     :global(.trakt-link) {

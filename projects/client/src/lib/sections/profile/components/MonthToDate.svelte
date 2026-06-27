@@ -120,7 +120,7 @@
   .trakt-mtd-title-overlay {
     position: absolute;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
   }
 
   .trakt-mtd-footer {

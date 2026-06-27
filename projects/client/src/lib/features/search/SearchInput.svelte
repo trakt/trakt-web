@@ -146,7 +146,7 @@
       position: absolute;
       z-index: calc(var(--layer-top) + var(--layer-overlay));
       top: var(--search-icon-offset);
-      left: var(--search-icon-offset);
+      inset-inline-start: var(--search-icon-offset);
     }
 
     .trakt-search-input {
@@ -154,7 +154,7 @@
       height: 100%;
       width: 100%;
       padding: var(--ni-8) var(--ni-16);
-      padding-left: calc(
+      padding-inline-start: calc(
         var(--search-icon-size) + var(--search-icon-offset) + var(--ni-16)
       );
       box-sizing: border-box;
@@ -164,7 +164,8 @@
 
       transition: var(--transition-increment) ease-in-out;
       transition-property:
-        border-color, background-color, padding, width, top, left, opacity;
+        border-color, background-color, padding, width, top, inset-inline-start,
+        opacity;
 
       backdrop-filter: blur(var(--ni-8));
 
@@ -219,8 +220,8 @@
 
         position: absolute;
         bottom: var(--ni-neg-2);
-        left: calc(var(--search-side-distance) / 2);
-        right: 0;
+        inset-inline-start: calc(var(--search-side-distance) / 2);
+        inset-inline-end: 0;
 
         border-radius: 50%;
         background: linear-gradient(

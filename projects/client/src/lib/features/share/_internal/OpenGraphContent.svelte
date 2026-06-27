@@ -25,7 +25,7 @@
 
 <style>
   .trakt-open-graph-content {
-    padding-left: 48px;
+    padding: 48px;
 
     box-sizing: border-box;
 

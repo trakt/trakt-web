@@ -60,7 +60,7 @@
 
       position: absolute;
       top: 0;
-      left: 0;
+      inset-inline-start: 0;
       width: var(--content-width);
       height: var(--content-height);
 
@@ -92,24 +92,30 @@
   .trakt-cta-cover {
     position: absolute;
     top: 0;
-    right: 0;
+    inset-inline-end: 0;
     width: var(--content-width);
     height: var(--content-height);
 
     overflow: hidden;
     border-radius: var(--border-radius-m);
 
+    --cta-mask-dir: to right;
+
+    &:dir(rtl) {
+      --cta-mask-dir: to left;
+    }
+
     :global(img) {
       position: absolute;
       top: 0;
-      right: 0;
+      inset-inline-end: 0;
 
       width: min(100%, var(--ni-640));
       height: var(--content-height);
 
       object-fit: cover;
 
-      mask: linear-gradient(to right, transparent 0%, black 30%);
+      mask: linear-gradient(var(--cta-mask-dir), transparent 0%, black 30%);
     }
   }
 </style>

@@ -64,7 +64,7 @@
     justify-content: center;
 
     padding: var(--ni-8);
-    padding-left: var(--ni-12);
+    padding-inline-start: var(--ni-12);
 
     background-color: transparent;
 

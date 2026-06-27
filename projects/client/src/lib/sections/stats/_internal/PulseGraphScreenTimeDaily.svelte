@@ -107,8 +107,7 @@
     position: absolute;
 
     bottom: calc(100% + var(--ni-4));
-    left: 0;
-    right: 0;
+    inset-inline: 0;
 
     text-align: center;
   }

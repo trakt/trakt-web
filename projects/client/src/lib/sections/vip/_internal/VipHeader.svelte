@@ -46,7 +46,7 @@
     :global(.trakt-vip-badge) {
       display: inline-flex;
       vertical-align: middle;
-      margin-left: var(--gap-xxs);
+      margin-inline-start: var(--gap-xxs);
     }
 
     font-size: var(--ni-40);

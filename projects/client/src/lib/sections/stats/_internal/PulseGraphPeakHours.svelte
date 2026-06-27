@@ -39,7 +39,7 @@
   .peak-label {
     width: var(--ni-64);
     flex-shrink: 0;
-    text-align: left;
+    text-align: start;
   }
 
   .peak-bar-track {
@@ -60,7 +60,7 @@
 
   .peak-count {
     width: var(--ni-28);
-    text-align: right;
+    text-align: end;
     flex-shrink: 0;
   }
 </style>

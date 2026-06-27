@@ -243,8 +243,8 @@
       }
 
       .trakt-list-item-container {
-        padding-left: var(--ni-2);
-        padding-right: var(--ni-2);
+        padding-inline-start: var(--ni-2);
+        padding-inline-end: var(--ni-2);
       }
 
       .section-list-empty-state {
@@ -322,11 +322,7 @@
   .section-list-has-multiple-items:has(:global(.trakt-view-all-button)) {
     .section-list-horizontal-scroll {
       overflow-x: hidden;
-      mask-image: linear-gradient(
-        to right,
-        black calc(100% - var(--list-mask-offset)),
-        transparent calc(100% - var(--list-mask-offset))
-      );
+      @include list-mask(var(--list-mask-offset));
 
       @supports (-moz-appearance: none) {
         overflow-x: auto;

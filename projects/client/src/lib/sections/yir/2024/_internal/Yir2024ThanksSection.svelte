@@ -109,7 +109,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--ni-20);
-    text-align: left;
+    text-align: start;
     color: var(--shade-10);
 
     // Set on the <p> directly — a global `p { font-size }` rule beats the

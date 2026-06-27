@@ -174,7 +174,10 @@
 
       .trakt-switch-tick {
         transform: translateX(
-          calc(var(--button-width) - var(--tick-size) - 2 * var(--tick-offset))
+          calc(
+            var(--rtl-sign) *
+              (var(--button-width) - var(--tick-size) - 2 * var(--tick-offset))
+          )
         );
 
         :global(svg) {
@@ -187,7 +190,8 @@
       .trakt-switch-tick {
         transform: translateX(
           calc(
-            (var(--button-width) - var(--tick-size) - 2 * var(--tick-offset)) /
+            var(--rtl-sign) *
+              (var(--button-width) - var(--tick-size) - 2 * var(--tick-offset)) /
               2
           )
         );
@@ -210,11 +214,14 @@
       transition-property: color, transform;
 
       position: absolute;
-      left: var(--text-offset);
+      inset-inline-start: var(--text-offset);
       width: var(--text-width);
 
       transform: translateX(
-        calc(var(--button-width) - var(--text-width) - 2 * var(--text-offset))
+        calc(
+          var(--rtl-sign) *
+            (var(--button-width) - var(--text-width) - 2 * var(--text-offset))
+        )
       );
     }
 
@@ -225,7 +232,7 @@
 
       position: absolute;
       top: var(--tick-offset);
-      left: var(--tick-offset);
+      inset-inline-start: var(--tick-offset);
 
       width: var(--tick-size);
       height: var(--tick-size);
@@ -246,7 +253,7 @@
 
         position: absolute;
         top: 0;
-        left: 0;
+        inset-inline-start: 0;
 
         width: 100%;
         height: 100%;

@@ -22,13 +22,9 @@
   .trakt-skeleton-list {
     overflow: hidden;
 
-    padding-left: var(--layout-distance-side);
+    padding-inline-start: var(--layout-distance-side);
 
-    mask-image: linear-gradient(
-      to right,
-      black calc(100% - var(--layout-distance-side)),
-      transparent calc(100% - var(--layout-distance-side))
-    );
+    @include list-mask(var(--layout-distance-side));
 
     @supports (-moz-appearance: none) {
       mask-image: none;

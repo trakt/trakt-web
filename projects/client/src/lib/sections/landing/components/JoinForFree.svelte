@@ -107,7 +107,7 @@
 
     .trakt-team-member {
       position: absolute;
-      left: calc(var(--user-index) * var(--avatar-offset));
+      inset-inline-start: calc(var(--user-index) * var(--avatar-offset));
     }
 
     :global(.trakt-user-avatar) {

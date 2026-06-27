@@ -40,7 +40,7 @@
   .trakt-summary-actions-underlay {
     position: fixed;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 100vw;
     height: 100vh;
 
@@ -53,14 +53,14 @@
     position: absolute;
     top: 100%;
     width: 100%;
-    left: 0;
+    inset-inline-start: 0;
 
     box-shadow: var(--shadow-raised);
     clip-path: inset(0 -100vmax -100vmax -100vmax);
 
     background: var(--color-actions-bar-background);
-    border-bottom-left-radius: var(--border-radius-l);
-    border-bottom-right-radius: var(--border-radius-l);
+    border-end-start-radius: var(--border-radius-l);
+    border-end-end-radius: var(--border-radius-l);
 
     padding: var(--ni-12);
     box-sizing: border-box;

@@ -256,13 +256,13 @@
   }
 
   .yir-grid-item:first-child .yir-grid-thumb {
-    border-top-left-radius: var(--border-radius-s);
-    border-bottom-left-radius: var(--border-radius-s);
+    border-start-start-radius: var(--border-radius-s);
+    border-end-start-radius: var(--border-radius-s);
   }
 
   .yir-grid-item:last-child .yir-grid-thumb {
-    border-top-right-radius: var(--border-radius-s);
-    border-bottom-right-radius: var(--border-radius-s);
+    border-start-end-radius: var(--border-radius-s);
+    border-end-end-radius: var(--border-radius-s);
   }
 
   @include for-tablet-sm-and-below {
@@ -290,7 +290,7 @@
   .yir-rank-wrapper {
     position: absolute;
     z-index: 1;
-    left: 0;
+    inset-inline-start: 0;
     top: var(--ni-neg-12);
     text-align: center;
     width: 100%;

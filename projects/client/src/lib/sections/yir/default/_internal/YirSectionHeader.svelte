@@ -70,7 +70,7 @@
       background-color: var(--shade-10);
       color: var(--shade-1000);
       padding: var(--ni-6) var(--ni-8);
-      margin-right: var(--ni-neg-4);
+      margin-inline-end: var(--ni-neg-4);
     }
 
     .yir-hash {

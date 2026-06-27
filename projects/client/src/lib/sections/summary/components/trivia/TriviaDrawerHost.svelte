@@ -141,7 +141,7 @@
 
   .category-filter {
     display: flex;
-    margin-left: auto;
+    margin-inline-start: auto;
     min-width: 0;
   }
 

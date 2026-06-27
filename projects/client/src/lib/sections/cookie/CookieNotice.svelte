@@ -79,8 +79,8 @@
     z-index: var(--layer-top);
 
     margin: auto;
-    right: 0;
-    left: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     bottom: calc(
       var(--cookie-notice-distance-size) + env(safe-area-inset-bottom, 0)
     );
@@ -92,14 +92,14 @@
 
     box-sizing: border-box;
     padding: var(--ni-24);
-    padding-left: var(--ni-40);
+    padding-inline-start: var(--ni-40);
 
     width: min(var(--ni-480), 85%);
     background-color: var(--color-cookie-background);
     box-shadow: var(--shadow-dialog);
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: bottom, right, width;
+    transition-property: bottom, inset-inline-end, width;
 
     .trakt-cookie {
       --cookie-size: var(--ni-60);
@@ -107,7 +107,7 @@
       --cookie-quarter-size: calc(var(--cookie-size) / 4);
 
       position: absolute;
-      left: calc(-1 * var(--cookie-half-size));
+      inset-inline-start: calc(-1 * var(--cookie-half-size));
       top: var(--cookie-quarter-size);
 
       font-size: var(--cookie-size);
@@ -117,13 +117,13 @@
     backdrop-filter: blur(var(--ni-16));
 
     @include for-mobile {
-      padding-left: var(--ni-24);
+      padding-inline-start: var(--ni-24);
       padding-top: var(--ni-40);
       flex-direction: column;
 
       .trakt-cookie {
         position: absolute;
-        left: calc(50% - var(--cookie-half-size));
+        inset-inline-start: calc(50% - var(--cookie-half-size));
         top: calc(-1 * var(--cookie-half-size));
       }
     }
@@ -145,8 +145,7 @@
 
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
+    inset-inline: 0;
     bottom: 0;
 
     background-color: color-mix(

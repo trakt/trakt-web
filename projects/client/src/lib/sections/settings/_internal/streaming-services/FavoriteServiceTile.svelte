@@ -63,7 +63,7 @@
   .tile-check {
     position: absolute;
     top: var(--ni-neg-6);
-    right: var(--ni-neg-4);
+    inset-inline-end: var(--ni-neg-4);
 
     display: flex;
     align-items: center;

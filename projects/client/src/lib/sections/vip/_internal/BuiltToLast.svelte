@@ -50,7 +50,7 @@
 
     ul {
       padding: 0;
-      padding-left: var(--ni-18);
+      padding-inline-start: var(--ni-18);
       margin: var(--ni-20) 0 0 0;
 
       li {

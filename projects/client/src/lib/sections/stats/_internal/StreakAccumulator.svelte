@@ -42,7 +42,7 @@
     flex: 1;
     min-width: 0;
     max-width: var(--ni-160);
-    margin-left: auto;
+    margin-inline-start: auto;
     padding-block: var(--ni-2);
 
     @include for-tablet-sm-and-below {

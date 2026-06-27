@@ -137,8 +137,7 @@
     z-index: var(--layer-raised);
 
     bottom: 0;
-    left: 0;
-    right: 0;
+    inset-inline: 0;
 
     transform: translateY(50%);
   }

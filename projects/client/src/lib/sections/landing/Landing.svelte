@@ -78,7 +78,7 @@
     --popcorn-safe-area: var(--popcorn-height);
 
     position: absolute;
-    left: 0;
+    inset-inline-start: 0;
     top: 0;
     width: calc(
       100dvw - 2 * var(--landing-padding) - var(--layout-scrollbar-width)

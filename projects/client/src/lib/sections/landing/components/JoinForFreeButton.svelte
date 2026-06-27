@@ -33,7 +33,7 @@
 
         position: absolute;
         top: calc(-1 * var(--glow-size));
-        left: calc(-1 * var(--glow-size));
+        inset-inline-start: calc(-1 * var(--glow-size));
 
         width: calc(100% + 2 * var(--glow-size));
         height: calc(100% + 2 * var(--glow-size));

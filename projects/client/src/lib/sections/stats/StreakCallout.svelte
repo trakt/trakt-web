@@ -151,7 +151,7 @@
     background: var(--color-streak-surface);
 
     padding: var(--ni-12);
-    padding-right: var(--ni-18);
+    padding-inline-end: var(--ni-18);
 
     display: flex;
     align-items: center;

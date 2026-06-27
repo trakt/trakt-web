@@ -182,8 +182,8 @@
   .limit-label {
     margin: 0;
     padding-top: var(--gap-xs);
-    padding-right: var(--gap-xs);
-    text-align: right;
+    padding-inline-end: var(--gap-xs);
+    text-align: end;
 
     &.invisible {
       visibility: hidden;

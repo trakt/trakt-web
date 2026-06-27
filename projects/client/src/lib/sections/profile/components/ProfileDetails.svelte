@@ -128,7 +128,7 @@
     &::before {
       content: "";
       position: absolute;
-      left: calc(-0.5 * var(--profile-details-gap));
+      inset-inline-start: calc(-0.5 * var(--profile-details-gap));
       top: 0;
       bottom: 0;
       width: var(--ni-1);

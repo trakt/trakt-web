@@ -78,7 +78,7 @@
     .filter-count-badge {
       position: absolute;
       top: 0;
-      right: 0;
+      inset-inline-end: 0;
 
       min-width: var(--ni-16);
       height: var(--ni-16);

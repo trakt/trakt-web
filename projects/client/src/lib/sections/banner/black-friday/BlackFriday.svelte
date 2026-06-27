@@ -96,20 +96,20 @@
     height: auto;
 
     top: 0;
-    left: 50%;
+    inset-inline-start: 50%;
 
     filter: grayscale(100%);
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: left, right;
+    transition-property: inset-inline-start, inset-inline-end;
 
     @include for-tablet-lg {
-      left: 60%;
+      inset-inline-start: 60%;
     }
 
     @include for-tablet-sm-and-below {
-      left: auto;
-      right: var(--ni-neg-32);
+      inset-inline-start: auto;
+      inset-inline-end: var(--ni-neg-32);
       top: var(--ni-32);
     }
   }

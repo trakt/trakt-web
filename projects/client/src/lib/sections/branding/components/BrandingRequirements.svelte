@@ -33,7 +33,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
-    padding-left: var(--gap-l);
+    padding-inline-start: var(--gap-l);
 
     li {
       font-size: var(--font-size-text);

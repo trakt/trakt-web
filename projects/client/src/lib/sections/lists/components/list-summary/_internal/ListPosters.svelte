@@ -79,7 +79,7 @@
     );
 
     position: absolute;
-    left: calc(var(--poster-offset) * var(--poster-index));
+    inset-inline-start: calc(var(--poster-offset) * var(--poster-index));
 
     height: var(--poster-height);
     width: var(--poster-width);

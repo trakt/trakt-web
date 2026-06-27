@@ -137,8 +137,8 @@
 
     gap: var(--gap-s);
 
-    margin-left: var(--layout-distance-side);
-    margin-right: var(--layout-distance-side);
+    margin-inline-start: var(--layout-distance-side);
+    margin-inline-end: var(--layout-distance-side);
 
     flex-grow: 1;
   }

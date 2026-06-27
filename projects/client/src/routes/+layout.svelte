@@ -243,6 +243,15 @@
     opacity: 0.25;
   }
 
+  // Dev-only TanStack toggle defaults to the physical bottom-right. Under RTL
+  // the side navbar (and its avatar) dock to the right, so relocate the toggle
+  // to the opposite bottom corner to avoid overlapping them. !important beats
+  // the library's inline positioning.
+  :global(.tsqd-open-btn-container:dir(rtl)) {
+    inset-inline-end: auto !important;
+    inset-inline-start: var(--ni-16) !important;
+  }
+
   @include for-mouse {
     :global(::-webkit-scrollbar) {
       width: var(--ni-8);

@@ -100,7 +100,7 @@
       gap: var(--gap-xs);
       align-items: center;
 
-      padding-left: var(--ni-12);
+      padding-inline-start: var(--ni-12);
       background: color-mix(
         in srgb,
         var(--color-card-background) 50%,

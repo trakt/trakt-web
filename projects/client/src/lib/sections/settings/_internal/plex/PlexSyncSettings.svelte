@@ -189,7 +189,7 @@
   .skeleton-tags {
     display: flex;
     gap: var(--gap-xs);
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 
   .skeleton {

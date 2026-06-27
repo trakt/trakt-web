@@ -76,14 +76,14 @@
   .trakt-design-system-route {
     box-sizing: border-box;
     min-height: 100vh;
-    padding-left: var(--layout-sidebar-distance);
+    padding-inline-start: var(--layout-sidebar-distance);
     margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: margin, padding;
 
     @include for-tablet-sm-and-below {
-      padding-left: 0;
+      padding-inline-start: 0;
       margin-top: var(--gap-m);
     }
 
