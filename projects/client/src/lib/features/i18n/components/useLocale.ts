@@ -3,6 +3,7 @@ import {
   type AvailableLocale,
   defaultLocale,
   getLocale,
+  getTextDirection,
   setLocale,
 } from '$lib/features/i18n/index.ts';
 import { BehaviorSubject, type PartialObserver, type Subscription } from 'rxjs';
@@ -42,10 +43,13 @@ export function useLocale(): LocaleStore {
   return {
     subscribe: locale.subscribe.bind(locale),
     set: (value: string) => {
-      locale.next(setLocale(value));
+      const sanitized = setLocale(value);
+      locale.next(sanitized);
 
       if (browser) {
-        globalThis.document.documentElement.lang = value;
+        const root = globalThis.document.documentElement;
+        root.lang = sanitized;
+        root.dir = getTextDirection(sanitized);
       }
     },
   };
