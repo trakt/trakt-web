@@ -1,16 +1,16 @@
 :root {
-  --orange-50: #ffefe6;
-  --orange-60: #ffe8dc;
-  --orange-70: #ffe1d1;
-  --orange-80: #ffdbc7;
-  --orange-90: #ffd4bc;
-  --orange-100: #ffcdb2;
-  --orange-200: #ffb58c;
-  --orange-300: #ff9458;
-  --orange-400: #ff7138;
-  --orange-500: #ff5f0a;
-  --orange-600: #e85605;
-  --orange-700: #b54304;
-  --orange-800: #8c3403;
-  --orange-900: #6b2803;
+  --orange-50: oklch(96.5% 0.0181 47.0);
+  --orange-60: oklch(95.0% 0.0262 47.0);
+  --orange-70: oklch(93.5% 0.0344 47.0);
+  --orange-80: oklch(92.0% 0.0429 47.0);
+  --orange-90: oklch(90.5% 0.0516 47.0);
+  --orange-100: oklch(88.5% 0.0635 47.0);
+  --orange-200: oklch(81.0% 0.11 47.0);
+  --orange-300: oklch(72.0% 0.156 47.0);
+  --orange-400: oklch(68.0% 0.186 47.0);
+  --orange-500: oklch(64.0% 0.1701 47.0);
+  --orange-600: oklch(58.0% 0.1541 47.0);
+  --orange-700: oklch(48.0% 0.1276 47.0);
+  --orange-800: oklch(39.0% 0.1038 47.0);
+  --orange-900: oklch(31.0% 0.0827 47.0);
 }
