@@ -113,7 +113,6 @@
   data-size={size}
 >
   <Button
-    style="textured"
     navigationType={buttonNavigationType}
     type="button"
     {size}
