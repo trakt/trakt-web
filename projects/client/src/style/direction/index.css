@@ -1,0 +1,21 @@
+/*
+  Directional glyphs (chevrons, carets, arrows) point along the reading axis,
+  so they must mirror under RTL. Opt a glyph in with `trakt-icon-directional`;
+  icons that read the same in both directions stay untouched.
+*/
+.trakt-icon-directional:dir(rtl) {
+  transform: scaleX(-1);
+}
+
+/*
+  Transforms are never direction-aware, so a physical translateX(+n) keeps
+  pointing the same way under RTL. Multiply the inline offset by --rtl-sign
+  (1 in LTR, -1 in RTL) to mirror translate-driven motion.
+*/
+:root {
+  --rtl-sign: 1;
+}
+
+:root:dir(rtl) {
+  --rtl-sign: -1;
+}

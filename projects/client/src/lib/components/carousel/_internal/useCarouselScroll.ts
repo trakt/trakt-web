@@ -1,7 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-
-type Direction = 'left' | 'right';
+import { scrollSign } from './scrollSign.ts';
 
 type ScrollState = {
   readonly scrollLeft: number;
@@ -15,28 +14,37 @@ const INITIAL_SCROLL_STATE: ScrollState = {
   clientWidth: 0,
 };
 
+// RTL browsers report scrollLeft as <= 0 (0 at the inline start, growing
+// negative toward the end). Normalizing on the absolute value keeps the
+// scroll-affordance math direction-agnostic.
+const distanceFromStart = ({ scrollLeft }: ScrollState) => Math.abs(scrollLeft);
+const distanceFromEnd = (
+  { scrollLeft, scrollWidth, clientWidth }: ScrollState,
+) => scrollWidth - clientWidth - Math.abs(scrollLeft);
+
 export function useCarouselScroll() {
   const scrollState$ = new BehaviorSubject<ScrollState>(INITIAL_SCROLL_STATE);
 
-  const canScrollLeft = scrollState$.pipe(
-    map(({ scrollLeft }) => scrollLeft > 0),
+  const canScrollToStart = scrollState$.pipe(
+    map((state) => distanceFromStart(state) > 0),
     distinctUntilChanged(),
   );
 
-  const canScrollRight = scrollState$.pipe(
-    map(({ scrollLeft, scrollWidth, clientWidth }) =>
-      scrollLeft < scrollWidth - clientWidth - 1
-    ),
+  const canScrollToEnd = scrollState$.pipe(
+    map((state) => distanceFromEnd(state) > 1),
     distinctUntilChanged(),
   );
 
   let listElement: HTMLUListElement | null = null;
 
-  const scroll = (direction: Direction) => {
+  const scroll = (target: 'start' | 'end') => {
     if (!listElement) return;
-    const amount = listElement.clientWidth;
+    const sign = scrollSign({
+      target,
+      isRtl: getComputedStyle(listElement).direction === 'rtl',
+    });
     listElement.scrollBy({
-      left: direction === 'left' ? -amount : amount,
+      left: sign * listElement.clientWidth,
       behavior: 'smooth',
     });
   };
@@ -79,8 +87,8 @@ export function useCarouselScroll() {
   };
 
   return {
-    canScrollLeft,
-    canScrollRight,
+    canScrollToStart,
+    canScrollToEnd,
     scrollObserver,
     scroll,
   };

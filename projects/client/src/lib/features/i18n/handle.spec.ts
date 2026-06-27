@@ -28,6 +28,50 @@ describe('handle: i18n', () => {
     expect(transformed).toContain('dir="ltr"');
   });
 
+  it('should render dir="rtl" for an RTL locale', async () => {
+    const html = `<html
+                  lang="${LANG_PLACEHOLDER}"
+                  dir="${DIR_PLACEHOLDER}">
+                ></html>`;
+
+    const { transformPageChunk } = await interceptHandleResolveOptions(
+      handle,
+      new Request('http://localhost', {
+        headers: new Headers({
+          'Accept-Language': 'fa-IR',
+        }),
+      }),
+    );
+
+    const transformed = transformPageChunk?.({ html, done: true });
+
+    expect(transformed).toContain('lang="fa-IR"');
+    expect(transformed).toContain('dir="rtl"');
+  });
+
+  it('should render dir="rtl" when the locale cookie is RTL', async () => {
+    const html = `<html
+                  lang="${LANG_PLACEHOLDER}"
+                  dir="${DIR_PLACEHOLDER}">
+                ></html>`;
+
+    // LTR Accept-Language, but an RTL cookie must still flip the direction.
+    const { transformPageChunk } = await interceptHandleResolveOptions(
+      handle,
+      new Request('http://localhost', {
+        headers: new Headers({
+          'Accept-Language': 'en-us',
+        }),
+      }),
+      (key) => (key === LOCALE_COOKIE_NAME ? 'fa-IR' : null),
+    );
+
+    const transformed = transformPageChunk?.({ html, done: true });
+
+    expect(transformed).toContain('lang="fa-IR"');
+    expect(transformed).toContain('dir="rtl"');
+  });
+
   it('should set locale cookie', async () => {
     const event = mockRequestEvent({
       url: 'http://localhost/_features/locale/set',

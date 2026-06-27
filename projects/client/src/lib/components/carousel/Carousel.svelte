@@ -1,12 +1,13 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
+  import * as m from "$lib/features/i18n/messages";
   import ScrollLeftIcon from "../icons/ScrollLeftIcon.svelte";
   import ScrollRightIcon from "../icons/ScrollRightIcon.svelte";
   import { useCarouselScroll } from "./_internal/useCarouselScroll";
 
   const { items }: { items: Snippet[] } = $props();
 
-  const { canScrollLeft, canScrollRight, scrollObserver, scroll } =
+  const { canScrollToStart, canScrollToEnd, scrollObserver, scroll } =
     useCarouselScroll();
 
   // FIXME: find existing component to replace this with
@@ -14,9 +15,10 @@
 
 <div class="trakt-carousel">
   <button
-    class="scroll-button left"
-    onclick={() => scroll("left")}
-    disabled={!$canScrollLeft}
+    class="scroll-button start"
+    onclick={() => scroll("start")}
+    disabled={!$canScrollToStart}
+    aria-label={m.button_label_carousel_scroll_start()}
   >
     <ScrollLeftIcon />
   </button>
@@ -30,9 +32,10 @@
   </ul>
 
   <button
-    class="scroll-button right"
-    onclick={() => scroll("right")}
-    disabled={!$canScrollRight}
+    class="scroll-button end"
+    onclick={() => scroll("end")}
+    disabled={!$canScrollToEnd}
+    aria-label={m.button_label_carousel_scroll_end()}
   >
     <ScrollRightIcon />
   </button>
@@ -88,12 +91,12 @@
 
     transition: opacity var(--transition-increment) ease-in-out;
 
-    &.left {
-      left: 0;
+    &.start {
+      inset-inline-start: 0;
     }
 
-    &.right {
-      right: 0;
+    &.end {
+      inset-inline-end: 0;
     }
 
     :global(svg) {

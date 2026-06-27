@@ -1,4 +1,5 @@
 <svg
+  class="trakt-icon-directional"
   width="16"
   height="16"
   viewBox="0 0 16 16"
