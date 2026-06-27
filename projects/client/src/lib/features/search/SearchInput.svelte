@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
+  import { replaceState } from "$app/navigation";
   import { page } from "$app/state";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
@@ -18,20 +18,15 @@
     const value = inputElement.value.trim();
 
     if (value.length === 0) {
-      goto(pathName, {
-        replaceState: page.url.pathname === pathName,
-        keepFocus: true,
-      });
+      replaceState(pathName, page.state);
+      return;
     }
 
     const params = buildParamString({
       m: $mode,
       q: inputElement.value.trim(),
     });
-    goto(`${pathName}${params}`, {
-      replaceState: page.url.pathname === pathName,
-      keepFocus: true,
-    });
+    replaceState(`${pathName}${params}`, page.state);
   }
 
   let inputElement: HTMLInputElement;
@@ -75,7 +70,8 @@
     inputElement.focus();
 
     if (length > 0) {
-      inputElement.click();
+      const params = buildParamString({ m: $mode, q: inputElement.value });
+      replaceState(`${pathName}${params}`, page.state);
     }
   });
 </script>
@@ -92,7 +88,6 @@
   <input
     use:clickOutside
     bind:this={inputElement}
-    onclick={onSearch}
     onclickoutside={clear}
     class="trakt-search-input"
     type="search"
