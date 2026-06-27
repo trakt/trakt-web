@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { replaceState } from "$app/navigation";
+  import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
@@ -18,7 +18,10 @@
     const value = inputElement.value.trim();
 
     if (value.length === 0) {
-      replaceState(pathName, page.state);
+      goto(pathName, {
+        replaceState: page.url.pathname === pathName,
+        keepFocus: true,
+      });
       return;
     }
 
@@ -26,7 +29,10 @@
       m: $mode,
       q: inputElement.value.trim(),
     });
-    replaceState(`${pathName}${params}`, page.state);
+    goto(`${pathName}${params}`, {
+      replaceState: page.url.pathname === pathName,
+      keepFocus: true,
+    });
   }
 
   let inputElement: HTMLInputElement;
@@ -68,11 +74,6 @@
     const length = inputElement.value.length;
     inputElement.setSelectionRange(length, length);
     inputElement.focus();
-
-    if (length > 0) {
-      const params = buildParamString({ m: $mode, q: inputElement.value });
-      replaceState(`${pathName}${params}`, page.state);
-    }
   });
 </script>
 
