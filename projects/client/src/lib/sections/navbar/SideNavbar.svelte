@@ -95,7 +95,7 @@
 
     position: fixed;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: var(--side-navbar-width);
     height: calc(
       100dvh - var(--navbar-margin-top) - var(--navbar-margin-bottom)

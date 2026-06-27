@@ -97,7 +97,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
-    padding-left: calc(var(--nav-icon-size) + var(--gap-s));
+    padding-inline-start: calc(var(--nav-icon-size) + var(--gap-s));
 
     :global(.trakt-link) {
       text-decoration: none;

@@ -21,10 +21,10 @@
     height: var(--ni-256);
 
     margin-top: var(--gap-xxl);
-    margin-left: var(--layout-sidebar-distance);
+    margin-inline-start: var(--layout-sidebar-distance);
 
-    padding-left: var(--layout-distance-side);
-    padding-right: var(--layout-distance-side);
+    padding-inline-start: var(--layout-distance-side);
+    padding-inline-end: var(--layout-distance-side);
 
     &.has-toast {
       margin-top: calc(var(--height-toast-card) + var(--gap-xxl));

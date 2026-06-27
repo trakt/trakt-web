@@ -196,7 +196,7 @@
 
     top: 0;
     bottom: 0;
-    right: 0;
+    inset-inline-end: 0;
 
     width: var(--drawer-size);
     padding-top: var(--drawer-padding);
@@ -213,9 +213,9 @@
     gap: var(--drawer-gap);
 
     overflow: hidden;
-    border-top-left-radius: var(--drawer-border-radius);
-    border-bottom-left-radius: var(--drawer-border-radius);
-    border-left: var(--ni-1) solid var(--color-drawer-border);
+    border-start-start-radius: var(--drawer-border-radius);
+    border-end-start-radius: var(--drawer-border-radius);
+    border-inline-start: var(--ni-1) solid var(--color-drawer-border);
 
     backdrop-filter: blur(var(--ni-12));
 
@@ -229,8 +229,7 @@
         position: absolute;
         z-index: var(--layer-top);
         top: 0;
-        left: 0;
-        right: 0;
+        inset-inline: 0;
         align-items: flex-start;
 
         box-sizing: border-box;
@@ -325,14 +324,14 @@
       --mobile-drawer-height: var(--drawer-size);
 
       top: initial;
-      left: 0;
+      inset-inline-start: 0;
 
       width: initial;
       height: calc(var(--mobile-drawer-height) - var(--drag-offset, 0px));
 
-      border-bottom-left-radius: initial;
-      border-top-right-radius: var(--drawer-border-radius);
-      border-left: none;
+      border-end-start-radius: initial;
+      border-start-end-radius: var(--drawer-border-radius);
+      border-inline-start: none;
       border-top: var(--ni-1) solid var(--color-drawer-border);
 
       &:global(:not(.is-dragging)) {
@@ -426,14 +425,14 @@
 
   .trakt-drawer-header,
   .trakt-drawer-content {
-    padding-left: var(--drawer-padding);
-    padding-right: var(--drawer-padding);
+    padding-inline-start: var(--drawer-padding);
+    padding-inline-end: var(--drawer-padding);
   }
 
   .trakt-drawer-vip-background {
     position: absolute;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 100%;
     height: 100%;
 

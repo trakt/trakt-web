@@ -25,7 +25,7 @@
     z-index: var(--layer-background);
 
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 100%;
     height: 100%;
 

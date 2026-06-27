@@ -49,7 +49,7 @@
     :global(ul),
     :global(ol) {
       margin: 0 0 var(--gap-m);
-      padding-left: var(--gap-l);
+      padding-inline-start: var(--gap-l);
 
       :global(li) {
         margin-bottom: var(--gap-xs);
@@ -96,13 +96,13 @@
         align-items: center;
         gap: var(--gap-s);
         margin: 0 0 var(--gap-m);
-        padding-left: calc(var(--number-width) + var(--gap-s));
+        padding-inline-start: calc(var(--number-width) + var(--gap-s));
         position: relative;
       }
 
       :global(.number) {
         position: absolute;
-        left: 0;
+        inset-inline-start: 0;
         display: flex;
         align-items: center;
         justify-content: center;

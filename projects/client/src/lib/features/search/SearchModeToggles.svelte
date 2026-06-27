@@ -67,8 +67,8 @@
     align-items: center;
     justify-content: center;
 
-    margin-left: var(--layout-distance-side);
-    margin-right: var(--layout-distance-side);
+    margin-inline-start: var(--layout-distance-side);
+    margin-inline-end: var(--layout-distance-side);
 
     gap: var(--gap-m);
     transition: gap var(--transition-increment) ease-in-out;

@@ -104,7 +104,7 @@
       --stop-button-offset: var(--ni-neg-6);
       position: absolute;
       top: calc(var(--stop-button-offset) - var(--content-vertical-padding));
-      right: var(--stop-button-offset);
+      inset-inline-end: var(--stop-button-offset);
     }
   }
 

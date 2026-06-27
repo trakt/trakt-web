@@ -80,7 +80,7 @@
     :global(.trakt-user-rating-icon) {
       position: absolute;
       top: var(--ni-neg-4);
-      right: var(--ni-neg-10);
+      inset-inline-end: var(--ni-neg-10);
     }
   }
 

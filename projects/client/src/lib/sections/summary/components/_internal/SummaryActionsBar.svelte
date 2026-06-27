@@ -74,8 +74,8 @@
     }
 
     &:global(:has(.trakt-media-actions-popup-button.is-opened)) {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
       transition-delay: 0s;
     }
 

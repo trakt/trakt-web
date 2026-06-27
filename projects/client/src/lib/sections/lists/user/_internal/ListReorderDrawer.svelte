@@ -376,7 +376,7 @@
     box-sizing: border-box;
     position: relative;
     padding: var(--ni-8);
-    text-align: left;
+    text-align: start;
     vertical-align: middle;
   }
 
@@ -402,13 +402,13 @@
       background: var(--reorder-row-background);
 
       &:first-child {
-        border-top-left-radius: var(--border-radius-m);
-        border-bottom-left-radius: var(--border-radius-m);
+        border-start-start-radius: var(--border-radius-m);
+        border-end-start-radius: var(--border-radius-m);
       }
 
       &:last-child {
-        border-top-right-radius: var(--border-radius-m);
-        border-bottom-right-radius: var(--border-radius-m);
+        border-start-end-radius: var(--border-radius-m);
+        border-end-end-radius: var(--border-radius-m);
       }
     }
   }
@@ -435,19 +435,19 @@
 
       &:first-child {
         &::after {
-          border-left: var(--border-thickness-xxs) dashed
+          border-inline-start: var(--border-thickness-xxs) dashed
             color-mix(in srgb, var(--color-background-purple) 48%, transparent);
-          border-top-left-radius: var(--border-radius-m);
-          border-bottom-left-radius: var(--border-radius-m);
+          border-start-start-radius: var(--border-radius-m);
+          border-end-start-radius: var(--border-radius-m);
         }
       }
 
       &:last-child {
         &::after {
-          border-right: var(--border-thickness-xxs) dashed
+          border-inline-end: var(--border-thickness-xxs) dashed
             color-mix(in srgb, var(--color-background-purple) 48%, transparent);
-          border-top-right-radius: var(--border-radius-m);
-          border-bottom-right-radius: var(--border-radius-m);
+          border-start-end-radius: var(--border-radius-m);
+          border-end-end-radius: var(--border-radius-m);
         }
       }
     }

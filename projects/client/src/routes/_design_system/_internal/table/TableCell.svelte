@@ -16,7 +16,7 @@
   th,
   td {
     padding: 0.75rem;
-    text-align: left;
+    text-align: start;
     border: 1px solid var(--color-border);
   }
 

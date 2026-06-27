@@ -62,7 +62,7 @@
 
     margin: 0;
     padding: 0;
-    padding-left: var(--ni-12);
+    padding-inline-start: var(--ni-12);
 
     font-size: var(--font-size-text);
 

@@ -30,15 +30,21 @@
     position: absolute;
     overflow: hidden;
 
-    left: 0;
+    inset-inline-start: 0;
     top: 0;
     width: var(--ni-920);
     height: var(--ni-920);
 
     opacity: 0.35;
 
+    --spotlight-origin: top left;
+
+    &:dir(rtl) {
+      --spotlight-origin: top right;
+    }
+
     background: radial-gradient(
-      circle at top left,
+      circle at var(--spotlight-origin),
       var(--trakt-cover-primary-color) 0%,
       color-mix(in srgb, var(--trakt-cover-primary-color) 80%, transparent) 20%,
       transparent 70%

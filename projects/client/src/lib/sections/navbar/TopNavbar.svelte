@@ -83,7 +83,7 @@
     z-index: var(--layer-overlay);
     position: fixed;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
 
     box-sizing: border-box;
     display: flex;
@@ -99,8 +99,8 @@
     gap: var(--gap-l);
 
     border-radius: 0%;
-    border-bottom-left-radius: var(--border-radius-xxl);
-    border-bottom-right-radius: var(--border-radius-xxl);
+    border-end-start-radius: var(--border-radius-xxl);
+    border-end-end-radius: var(--border-radius-xxl);
 
     transition: calc(2 * var(--transition-increment)) ease-in-out;
     transition-property: width, background-color, box-shadow, top, opacity;

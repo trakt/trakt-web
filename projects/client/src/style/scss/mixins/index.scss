@@ -118,6 +118,20 @@
   }
 }
 
+@mixin list-mask($offset) {
+  --list-mask-dir: to right;
+
+  &:dir(rtl) {
+    --list-mask-dir: to left;
+  }
+
+  mask-image: linear-gradient(
+    var(--list-mask-dir),
+    black calc(100% - $offset),
+    transparent calc(100% - $offset)
+  );
+}
+
 @mixin dynamic-card-width($widthVariable, $minCardWidth, $itemCount) {
   $listGaps: calc($itemCount * var(--list-gap));
   $listUsableWidth: calc(var(--list-inner-width) - $listGaps);

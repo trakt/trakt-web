@@ -117,7 +117,7 @@
     gap: var(--gap-s);
 
     padding: var(--ni-8);
-    padding-left: var(--ni-16);
+    padding-inline-start: var(--ni-16);
     box-sizing: border-box;
 
     border-radius: var(--border-radius-s);

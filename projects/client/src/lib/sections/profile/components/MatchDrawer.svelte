@@ -242,7 +242,7 @@
   .trakt-match-drawer-suffix {
     font-size: var(--font-size-separator);
     opacity: 0.6;
-    margin-left: var(--ni-2);
+    margin-inline-start: var(--ni-2);
   }
 
   .trakt-match-drawer-hero-avatars {
@@ -308,7 +308,7 @@
   }
 
   .trakt-match-drawer-breakdown-value {
-    text-align: right;
+    text-align: end;
     font-variant-numeric: tabular-nums;
   }
 

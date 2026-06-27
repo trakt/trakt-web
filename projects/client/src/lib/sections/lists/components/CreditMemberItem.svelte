@@ -274,7 +274,7 @@
   .trakt-credit-member-description {
     color: var(--color-text-secondary);
     overflow-wrap: anywhere;
-    padding-right: 0;
+    padding-inline-end: 0;
     white-space: normal;
     word-break: break-word;
   }

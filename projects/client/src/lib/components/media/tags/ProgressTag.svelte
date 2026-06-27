@@ -65,7 +65,7 @@
         content: "";
         display: block;
         position: absolute;
-        left: var(--progress-bar-offset);
+        inset-inline-start: var(--progress-bar-offset);
         top: var(--progress-bar-offset);
         width: calc(100% - var(--progress-bar-spacing));
         height: calc(100% - var(--progress-bar-spacing));

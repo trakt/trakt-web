@@ -116,13 +116,13 @@
     }
 
     @include for-tablet-sm-and-below {
-      padding-left: 10%;
-      padding-right: 10%;
+      padding-inline-start: 10%;
+      padding-inline-end: 10%;
     }
 
     @include for-mobile {
-      padding-left: 3%;
-      padding-right: 3%;
+      padding-inline-start: 3%;
+      padding-inline-end: 3%;
     }
   }
 

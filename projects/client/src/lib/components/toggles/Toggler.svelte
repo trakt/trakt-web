@@ -34,7 +34,7 @@
   };
 
   const handleTransitionEnd = (event: TransitionEvent) => {
-    if (event.propertyName !== "left" || !pending) return;
+    if (event.propertyName === "opacity" || !pending) return;
 
     (event.currentTarget as HTMLDivElement).classList.remove("moving");
 
@@ -124,13 +124,15 @@
     --scale-transform: scaleX(1.1) scaleY(0.75);
 
     --tracker-offset: calc(var(--tracker-index) * var(--gap-xxs));
-    --tracker-left: calc(var(--tracker-index) * var(--toggle-small-width));
+    --tracker-inline-start: calc(
+      var(--tracker-index) * var(--toggle-small-width)
+    );
     --tracker-animation-duration: calc(
       var(--toggler-animation-duration) + var(--toggle-animation-delay)
     );
 
-    left: calc(var(--tracker-left) + var(--tracker-offset));
-    margin-left: var(--ni-4);
+    inset-inline-start: calc(var(--tracker-inline-start) + var(--tracker-offset));
+    margin-inline-start: var(--ni-4);
 
     position: absolute;
 
@@ -141,7 +143,7 @@
     background-color: var(--toggler-tracker-color);
 
     transition: var(--tracker-animation-duration) ease-in-out;
-    transition-property: left, opacity;
+    transition-property: inset-inline-start, opacity;
     transform-origin: center;
 
     &:global(.moving) {

@@ -160,13 +160,13 @@
     }
 
     @include for-tablet-sm-and-below {
-      padding-left: 5%;
-      padding-right: 5%;
+      padding-inline-start: 5%;
+      padding-inline-end: 5%;
     }
 
     @include for-mobile {
-      padding-left: 3%;
-      padding-right: 3%;
+      padding-inline-start: 3%;
+      padding-inline-end: 3%;
       flex-wrap: wrap;
 
       .yir-stat {
@@ -294,8 +294,8 @@
     // Extra horizontal breathing room around the charts on smaller
     // screens so the bars don't hug the viewport edges.
     @include for-tablet-sm-and-below {
-      padding-left: var(--ni-20);
-      padding-right: var(--ni-20);
+      padding-inline-start: var(--ni-20);
+      padding-inline-end: var(--ni-20);
     }
 
     @include for-mobile {

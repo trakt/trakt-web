@@ -26,7 +26,7 @@
       content: "";
       position: absolute;
       top: 0;
-      left: 0;
+      inset-inline-start: 0;
       height: 100%;
       width: var(--play-progress);
       background-color: var(--color-toast-progress-bar-progress);

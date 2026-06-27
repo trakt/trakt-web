@@ -21,7 +21,7 @@
 
       border-radius: var(--border-radius-xxl);
       padding: var(--ni-8) var(--ni-10);
-      padding-left: var(--ni-8);
+      padding-inline-start: var(--ni-8);
 
       :global(svg) {
         width: var(--ni-14);

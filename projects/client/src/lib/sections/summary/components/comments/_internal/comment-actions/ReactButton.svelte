@@ -134,7 +134,7 @@
     transition-property: background-color, filter, opacity;
 
     &.has-summary {
-      padding-right: var(--ni-10);
+      padding-inline-end: var(--ni-10);
     }
 
     &[disabled]:not([data-popup-state="opened"]) {

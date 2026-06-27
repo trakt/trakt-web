@@ -56,7 +56,7 @@
           position: absolute;
 
           bottom: var(--ni-neg-4);
-          left: 0;
+          inset-inline-start: 0;
 
           width: 100%;
 

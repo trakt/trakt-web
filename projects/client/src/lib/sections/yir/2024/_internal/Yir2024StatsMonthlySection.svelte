@@ -305,27 +305,27 @@
   }
 
   .yir-2024-stats-summary {
-    border-top-left-radius: var(--panel-radius);
-    border-top-right-radius: var(--panel-radius);
+    border-start-start-radius: var(--panel-radius);
+    border-start-end-radius: var(--panel-radius);
   }
 
   .yir-2024-stats-card-hours {
-    border-bottom-left-radius: var(--panel-radius);
+    border-end-start-radius: var(--panel-radius);
   }
 
   .yir-2024-stats-card-plays {
-    border-bottom-right-radius: var(--panel-radius);
+    border-end-end-radius: var(--panel-radius);
   }
 
   @include for-tablet-sm-and-below {
     .yir-2024-stats-card-hours {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
     }
 
     .yir-2024-stats-card-plays {
-      border-bottom-left-radius: var(--panel-radius);
-      border-bottom-right-radius: var(--panel-radius);
+      border-end-start-radius: var(--panel-radius);
+      border-end-end-radius: var(--panel-radius);
     }
   }
 
@@ -371,8 +371,8 @@
     margin: 0 calc(-1 * var(--panel-padding-x));
 
     @include for-tablet-sm-and-below {
-      margin-left: 0;
-      margin-right: 0;
+      margin-inline-start: 0;
+      margin-inline-end: 0;
     }
   }
 
@@ -474,8 +474,8 @@
 
     position: absolute;
     bottom: 0;
-    left: var(--watermark-inset);
-    right: var(--watermark-inset);
+    inset-inline-start: var(--watermark-inset);
+    inset-inline-end: var(--watermark-inset);
     transform: translateY(35%);
     text-align: center;
     font-family: inherit;

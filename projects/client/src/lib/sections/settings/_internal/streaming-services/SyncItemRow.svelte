@@ -217,7 +217,7 @@
 
     font-size: var(--font-size-tag);
     color: var(--color-text-primary);
-    text-align: right;
+    text-align: end;
   }
 
   .trakt-sync-item-row :global(.trakt-link) {

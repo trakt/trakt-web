@@ -105,7 +105,7 @@
     box-sizing: border-box;
 
     padding: var(--ni-8) var(--ni-16);
-    padding-left: calc(
+    padding-inline-start: calc(
       var(--date-time-icon-size) + var(--date-time-icon-offset) + var(--ni-16)
     );
 
@@ -133,7 +133,7 @@
     position: absolute;
     z-index: calc(var(--layer-top) + var(--layer-overlay));
     top: var(--date-time-icon-offset);
-    left: var(--date-time-icon-offset);
+    inset-inline-start: var(--date-time-icon-offset);
 
     &.is-disabled {
       cursor: default;

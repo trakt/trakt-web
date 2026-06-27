@@ -94,7 +94,7 @@
     min-height: var(--ni-64);
     width: 100%;
     box-sizing: border-box;
-    text-align: left;
+    text-align: start;
     background: transparent;
     border: none;
     text-decoration: none;
@@ -176,7 +176,7 @@
   .row-value {
     flex-shrink: 0;
     white-space: nowrap;
-    margin-right: var(--gap-xxs);
+    margin-inline-end: var(--gap-xxs);
   }
 
   .row-caret {

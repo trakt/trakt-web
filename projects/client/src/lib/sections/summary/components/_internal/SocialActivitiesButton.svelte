@@ -170,14 +170,14 @@
     height: var(--watched-by-avatar-size);
     flex: 0 0 var(--watched-by-avatar-size);
 
-    margin-left: calc(var(--watched-by-avatar-size) * -0.5);
+    margin-inline-start: calc(var(--watched-by-avatar-size) * -0.5);
 
     border-radius: 50%;
     overflow: hidden;
     box-sizing: border-box;
 
     &:first-child {
-      margin-left: 0;
+      margin-inline-start: 0;
     }
 
     :global(.trakt-user-avatar) {
@@ -195,7 +195,7 @@
     align-items: center;
     gap: var(--ni-4);
     height: var(--height-watched-by-label);
-    padding-right: var(--ni-4);
+    padding-inline-end: var(--ni-4);
 
     &.is-text-only {
       padding-inline: var(--ni-8);

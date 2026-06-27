@@ -101,8 +101,8 @@
   .yir-2024-genres-watermark {
     position: absolute;
     top: var(--ni-72);
-    left: var(--panel-padding-x);
-    right: 0;
+    inset-inline-start: var(--panel-padding-x);
+    inset-inline-end: 0;
     font-size: clamp(var(--ni-72), 12vw, var(--ni-160));
     line-height: 1;
     white-space: nowrap;

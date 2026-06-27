@@ -37,7 +37,10 @@
       class="trakt-limit-zone free-limit"
       style:width="{limitedPercentage}%"
     ></div>
-    <div class="trakt-limit-zone vip-limit" style:left="{limitedPercentage}%">
+    <div
+      class="trakt-limit-zone vip-limit"
+      style:inset-inline-start="{limitedPercentage}%"
+    >
       <span class="vip-limit-label tag secondary">
         {toHumanNumber(vipLimit, languageTag())}
       </span>
@@ -86,10 +89,10 @@
       }
 
       .vip-limit {
-        right: 0;
-        margin-left: var(--ni-neg-24);
+        inset-inline-end: 0;
+        margin-inline-start: var(--ni-neg-24);
 
-        border-left: none;
+        border-inline-start: none;
         border-style: dashed;
 
         background-color: transparent;
@@ -106,7 +109,7 @@
 
   .vip-limit-label {
     position: absolute;
-    right: var(--ni-8);
+    inset-inline-end: var(--ni-8);
     top: 50%;
     transform: translateY(-50%);
   }
@@ -115,7 +118,7 @@
     z-index: var(--layer-raised);
     position: absolute;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     bottom: 0;
 
     width: var(--progress);

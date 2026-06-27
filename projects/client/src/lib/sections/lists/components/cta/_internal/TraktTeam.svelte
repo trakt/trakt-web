@@ -65,7 +65,7 @@
 
       position: absolute;
       top: var(--ni-neg-8);
-      right: var(--ni-neg-4);
+      inset-inline-end: var(--ni-neg-4);
     }
   }
 </style>

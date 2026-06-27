@@ -54,7 +54,7 @@
 
     position: absolute;
     bottom: 0;
-    right: 0;
+    inset-inline-end: 0;
     width: calc(100% - var(--poster-width));
 
     display: flex;

@@ -298,7 +298,7 @@
   .yir-rank {
     position: absolute;
     top: 0;
-    left: var(--ni-14);
+    inset-inline-start: var(--ni-14);
     color: var(--shade-10);
     font-weight: bold;
     font-size: var(--ni-12);
@@ -317,7 +317,7 @@
     &::before {
       content: "";
       padding-top: 100%;
-      float: left;
+      float: inline-start;
     }
 
     &::after {
@@ -327,7 +327,7 @@
       width: 100%;
       height: 100%;
       box-shadow: 0 0 0 var(--ni-104) var(--shade-1000);
-      left: 0;
+      inset-inline-start: 0;
       top: 0;
       border: var(--border-thickness-xxs) solid var(--shade-600);
       transition: border-color 0.5s;
@@ -338,7 +338,7 @@
     width: 100%;
     position: absolute;
     top: -10%;
-    left: 0;
+    inset-inline-start: 0;
 
     &.is-default {
       top: 0;

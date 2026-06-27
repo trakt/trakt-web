@@ -60,7 +60,7 @@
     :global(img) {
       width: 100%;
       height: 100%;
-      left: 0;
+      inset-inline-start: 0;
       position: relative;
 
       filter: grayscale(0.5);
@@ -70,20 +70,20 @@
 
       @include for-tablet-sm-and-below {
         width: 150%;
-        left: -25%;
+        inset-inline-start: -25%;
         object-fit: cover;
       }
 
       @include for-mobile {
         width: 220%;
-        left: -60%;
+        inset-inline-start: -60%;
       }
     }
   }
 
   .trakt-background-cover-image {
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
 
     &::after,
     &::before {
@@ -92,7 +92,7 @@
       height: 100%;
       position: absolute;
       bottom: 0;
-      left: 0;
+      inset-inline-start: 0;
       pointer-events: none;
       z-index: var(--layer-floating);
     }

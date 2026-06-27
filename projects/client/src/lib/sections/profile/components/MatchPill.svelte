@@ -140,7 +140,7 @@
 
   .trakt-match-pill-suffix {
     opacity: 0.7;
-    margin-left: var(--ni-1);
+    margin-inline-start: var(--ni-1);
   }
 
   .trakt-match-pill-anchor {
@@ -153,7 +153,7 @@
     display: inline-flex;
     align-items: center;
     opacity: 0.55;
-    margin-left: var(--ni-6);
+    margin-inline-start: var(--ni-6);
     font-size: var(--font-size-tag);
     transition:
       transform var(--transition-increment) ease-out,

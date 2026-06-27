@@ -76,8 +76,8 @@
       opacity: 0;
 
       top: var(--offset);
-      left: var(--offset);
-      right: var(--offset);
+      inset-inline-start: var(--offset);
+      inset-inline-end: var(--offset);
       bottom: var(--offset);
 
       background: conic-gradient(

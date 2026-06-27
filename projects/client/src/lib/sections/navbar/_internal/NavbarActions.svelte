@@ -90,8 +90,7 @@
     transition-property: opacity;
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
+    inset-inline: 0;
     z-index: var(--layer-overlay);
     display: flex;
     justify-content: space-between;
@@ -99,7 +98,7 @@
     gap: var(--gap-m);
     padding: var(--gap-m);
     margin-top: env(safe-area-inset-top);
-    padding-left: calc(
+    padding-inline-start: calc(
       var(--layout-distance-side) + var(--layout-sidebar-distance)
     );
 

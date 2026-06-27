@@ -67,7 +67,7 @@
     }
 
     :global(.trakt-review-content-footer) {
-      margin-left: auto;
+      margin-inline-start: auto;
     }
 
     @include for-tablet-sm-and-below {
@@ -77,7 +77,7 @@
       }
 
       :global(.trakt-review-content-footer) {
-        margin-left: 0;
+        margin-inline-start: 0;
       }
 
       :global(.trakt-review-content) {

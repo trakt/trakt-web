@@ -150,8 +150,7 @@
   .yir-header {
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
+    inset-inline: 0;
     z-index: 10;
 
     display: flex;
@@ -313,7 +312,7 @@
     }
 
     .yir-header-user {
-      margin-right: auto;
+      margin-inline-end: auto;
     }
   }
 </style>

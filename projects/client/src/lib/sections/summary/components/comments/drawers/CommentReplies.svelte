@@ -70,7 +70,7 @@
     flex-direction: column;
     gap: var(--gap-xl);
 
-    padding-left: var(--ni-32);
+    padding-inline-start: var(--ni-32);
   }
 
   .toggle-replies-button {

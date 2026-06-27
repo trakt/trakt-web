@@ -90,7 +90,7 @@
     gap: var(--gap-xs);
 
     margin: 0;
-    padding-left: var(--ni-20);
+    padding-inline-start: var(--ni-20);
   }
 
   .import-guide-action {

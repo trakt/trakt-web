@@ -328,7 +328,7 @@
     flex-shrink: 0;
 
     :global(.trakt-indicator-tags) {
-      left: 0;
+      inset-inline-start: 0;
       width: var(--poster-width);
     }
   }
@@ -340,7 +340,7 @@
   .trakt-card-title,
   .trakt-card-subtitle,
   :global(.trakt-card-subtitle) {
-    padding-right: var(--ni-18);
+    padding-inline-end: var(--ni-18);
   }
 
   :global(.multi-line-titles) {

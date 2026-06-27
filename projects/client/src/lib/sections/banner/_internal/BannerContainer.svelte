@@ -24,8 +24,8 @@
 
 <style>
   .trakt-banner-container {
-    margin-left: var(--layout-distance-side);
-    margin-right: var(--layout-distance-side);
+    margin-inline-start: var(--layout-distance-side);
+    margin-inline-end: var(--layout-distance-side);
 
     gap: var(--gap-xs);
     display: flex;

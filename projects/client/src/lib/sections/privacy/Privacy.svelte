@@ -837,7 +837,7 @@
     td {
       border: 1px solid var(--color-border);
       padding: var(--gap-xs) var(--gap-s);
-      text-align: left;
+      text-align: start;
       vertical-align: top;
     }
 

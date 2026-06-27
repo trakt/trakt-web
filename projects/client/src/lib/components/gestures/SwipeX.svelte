@@ -150,8 +150,8 @@
 
     height: var(--indicator-height, 100%);
 
-    left: var(--indicator-left);
-    right: var(--indicator-right);
+    inset-inline-start: var(--indicator-left);
+    inset-inline-end: var(--indicator-right);
     width: var(--indicator-width, 0);
 
     background-color: var(--indicator-color, transparent);
@@ -165,8 +165,8 @@
       opacity var(--transition-increment) ease-out,
       width var(--transition-increment) ease-out,
       background-color var(--transition-increment) ease-out,
-      left var(--transition-increment) ease-out,
-      right var(--transition-increment) ease-out,
+      inset-inline-start var(--transition-increment) ease-out,
+      inset-inline-end var(--transition-increment) ease-out,
       color var(--transition-increment) ease-out,
       outline-color var(--transition-increment) ease-out;
   }

@@ -54,7 +54,7 @@
     &[data-mode="cover"] {
       position: absolute;
       top: 0;
-      left: 0;
+      inset-inline-start: 0;
 
       @include for-tablet-sm-and-below {
         .trakt-frame-spacer {

@@ -87,12 +87,12 @@
 
   // Vertical divider between the two columns (pad each side toward the line).
   .yir-2024-people-cell:nth-child(odd) {
-    padding-right: var(--ni-48);
-    border-right: var(--border-thickness-xs) solid var(--people-divider);
+    padding-inline-end: var(--ni-48);
+    border-inline-end: var(--border-thickness-xs) solid var(--people-divider);
   }
 
   .yir-2024-people-cell:nth-child(even) {
-    padding-left: var(--ni-48);
+    padding-inline-start: var(--ni-48);
   }
 
   // Horizontal divider between the two rows.
@@ -110,12 +110,12 @@
   // Stacked: drop the vertical divider, keep horizontal dividers between all.
   @include for-tablet-sm-and-below {
     .yir-2024-people-cell:nth-child(odd) {
-      padding-right: 0;
-      border-right: none;
+      padding-inline-end: 0;
+      border-inline-end: none;
     }
 
     .yir-2024-people-cell:nth-child(even) {
-      padding-left: 0;
+      padding-inline-start: 0;
     }
 
     .yir-2024-people-cell:nth-child(1) {

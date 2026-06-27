@@ -74,7 +74,7 @@
 
           position: absolute;
           top: 0;
-          left: 0;
+          inset-inline-start: 0;
 
           width: var(--width-override-card, var(--width-card));
           height: var(--height-override-card, var(--height-card));

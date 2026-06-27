@@ -177,12 +177,12 @@
     text-transform: uppercase;
     font-size: var(--ni-18);
     font-weight: bold;
-    text-align: left;
+    text-align: start;
   }
 
   .yir-calendar-time {
     font-size: var(--ni-18);
-    text-align: left;
+    text-align: start;
     padding-top: 2px;
   }
 </style>

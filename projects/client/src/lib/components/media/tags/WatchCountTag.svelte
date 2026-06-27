@@ -48,13 +48,13 @@
     gap: var(--ni-1);
 
     :global(.trakt-tag-label .trakt-tag) {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
     }
 
     :global(.trakt-tag-count .trakt-tag) {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
 
       min-width: var(--ni-12);
 

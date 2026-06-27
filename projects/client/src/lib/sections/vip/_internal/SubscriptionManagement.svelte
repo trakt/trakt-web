@@ -81,8 +81,8 @@
 
     /* To compensate for the buttons' padding */
     margin-bottom: var(--ni-neg-12);
-    margin-left: var(--ni-neg-12);
-    margin-right: var(--ni-neg-12);
+    margin-inline-start: var(--ni-neg-12);
+    margin-inline-end: var(--ni-neg-12);
 
     :global(.trakt-button) {
       flex-direction: row-reverse;

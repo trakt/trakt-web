@@ -28,13 +28,19 @@
     height: var(--height-action-bar);
 
     top: 0;
-    right: 0;
-    left: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     z-index: var(--layer-floating);
 
     pointer-events: none;
 
     &[data-variant="default"] {
+      --action-bar-shadow-origin: top right;
+
+      &:dir(rtl) {
+        --action-bar-shadow-origin: top left;
+      }
+
       &::before {
         content: "";
 
@@ -43,12 +49,12 @@
 
         position: absolute;
         top: 0;
-        right: 0;
+        inset-inline-end: 0;
 
-        border-top-right-radius: var(--border-radius-m);
+        border-start-end-radius: var(--border-radius-m);
 
         background-image: radial-gradient(
-          circle at top right,
+          circle at var(--action-bar-shadow-origin),
           color-mix(in srgb, var(--color-shadow) 30%, transparent) 15%,
           transparent 65%
         );
@@ -57,7 +63,7 @@
 
     :global(.trakt-popup-menu-button) {
       position: absolute;
-      right: 0;
+      inset-inline-end: 0;
     }
 
     :global(> *) {

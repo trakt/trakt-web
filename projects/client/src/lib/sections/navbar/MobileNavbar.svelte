@@ -101,15 +101,14 @@
 
     position: fixed;
     bottom: 0;
-    left: 0;
-    right: 0;
+    inset-inline: 0;
     z-index: var(--layer-overlay);
 
     background-color: var(--color-background-mobile-navbar);
     box-shadow: var(--shadow-navbar);
 
-    border-top-left-radius: var(--border-radius-xxl);
-    border-top-right-radius: var(--border-radius-xxl);
+    border-start-start-radius: var(--border-radius-xxl);
+    border-start-end-radius: var(--border-radius-xxl);
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: height, gap;

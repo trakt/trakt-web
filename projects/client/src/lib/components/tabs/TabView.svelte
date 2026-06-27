@@ -73,14 +73,16 @@
       --tab-width: calc(var(--available-width) / var(--tab-count));
 
       position: absolute;
-      margin-left: var(--tab-list-padding);
+      margin-inline-start: var(--tab-list-padding);
 
       top: var(--tab-list-padding);
       bottom: var(--tab-list-padding);
-      left: 0;
+      inset-inline-start: 0;
       width: var(--tab-width);
       transform: translateX(
-        calc(var(--active-index) * (100% + var(--tab-list-gap)))
+        calc(
+          var(--rtl-sign) * var(--active-index) * (100% + var(--tab-list-gap))
+        )
       );
 
       background-color: var(--color-tab-background);

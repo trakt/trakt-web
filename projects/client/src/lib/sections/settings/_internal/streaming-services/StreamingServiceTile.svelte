@@ -193,7 +193,7 @@
     box-sizing: border-box;
     padding: var(--ni-14) var(--ni-16);
 
-    text-align: left;
+    text-align: start;
     background: transparent;
     border: none;
     color: inherit;

@@ -84,7 +84,7 @@
     border-radius: var(--border-radius-m);
     border: var(--ni-1) solid var(--color-border);
 
-    text-align: left;
+    text-align: start;
 
     .trakt-error-details-header {
       grid-column: 1 / -1;

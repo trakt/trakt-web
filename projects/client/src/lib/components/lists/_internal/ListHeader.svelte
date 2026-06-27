@@ -68,12 +68,12 @@
 
   .trakt-list-inset-title {
     margin: 0;
-    margin-left: var(--layout-distance-side);
-    margin-right: var(--layout-distance-side);
-    transition: margin-left calc(var(--transition-increment) * 2) ease-in-out;
+    margin-inline-start: var(--layout-distance-side);
+    margin-inline-end: var(--layout-distance-side);
+    transition: margin-inline-start calc(var(--transition-increment) * 2) ease-in-out;
 
     @include for-tablet-sm-and-below {
-      margin-left: calc(var(--layout-distance-side));
+      margin-inline-start: calc(var(--layout-distance-side));
     }
   }
 

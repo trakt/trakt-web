@@ -33,7 +33,7 @@
     background-color: var(--color-floating-background);
     border-radius: var(--ni-60);
     padding: var(--ni-8);
-    padding-left: var(--ni-16);
+    padding-inline-start: var(--ni-16);
 
     box-shadow: var(--shadow-floating);
 

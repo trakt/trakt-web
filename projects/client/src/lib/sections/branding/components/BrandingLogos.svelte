@@ -313,7 +313,7 @@
   .logo-download {
     position: absolute;
     top: var(--gap-s);
-    right: var(--gap-s);
+    inset-inline-end: var(--gap-s);
 
     display: flex;
     align-items: center;
