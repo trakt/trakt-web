@@ -1,30 +1,32 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import CopyIcon from "$lib/components/icons/CopyIcon.svelte";
+  import EditModeIcon from "$lib/components/icons/EditModeIcon.svelte";
   import VisibilityIcon from "$lib/components/icons/VisibilityIcon.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { useQuery } from "$lib/features/query/useQuery.ts";
-  import type { ApiApplication } from "$lib/requests/models/ApiApplication.ts";
-  import { apiApplicationsQuery } from "$lib/requests/queries/apps/apiApplicationsQuery.ts";
   import { copyToClipboard } from "$lib/utils/clipboard/copyToClipboard.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { map } from "rxjs";
   import { onDestroy } from "svelte";
+  import DeleteApiApplicationButton from "./_internal/apps/DeleteApiApplicationButton.svelte";
+  import { useApiApplication } from "./_internal/apps/useApiApplication.ts";
   import SettingsBlock from "./_internal/SettingsBlock.svelte";
   import SettingsCrumb from "./_internal/SettingsCrumb.svelte";
 
   const { appId }: { appId: number } = $props();
 
-  const apiApplications = useQuery(apiApplicationsQuery()).pipe(
-    map((query) => query.data ?? []),
-  );
+  function handleDeleted() {
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
+    goto(UrlBuilder.settings.appsApi());
+  }
 
-  const app = $derived(
-    $apiApplications.find((entry: ApiApplication) => entry.id === appId),
-  );
+  const appId$ = fromRune(() => appId);
+  const { app: app$ } = useApiApplication(appId$);
+  const app = $derived($app$);
 
   const COPIED_RESET_MS = 1500;
   const SECRET_MASK = "•".repeat(24);
@@ -115,7 +117,13 @@
     <span class="meta-label">{field.label}</span>
     <div class="value-row">
       <code class="value" class:masked={isHidden}>
-        {isHidden ? SECRET_MASK : field.value}
+        {#if isHidden}
+          {SECRET_MASK}
+        {:else}
+          {#each field.value.split("\n") as line, index (index)}
+            <span class="value-line">{line}</span>
+          {/each}
+        {/if}
       </code>
       <div class="actions">
         {#if field.isSecret}
@@ -151,6 +159,20 @@
 
 <div class="trakt-api-application-detail">
   {#if app}
+    <div class="card-actions">
+      <ActionButton
+        href={UrlBuilder.settings.appsApiEdit(app.id)}
+        style="ghost"
+        color="default"
+        size="small"
+        label={m.button_label_edit_app({ name: app.name })}
+      >
+        <EditModeIcon />
+      </ActionButton>
+
+      <DeleteApiApplicationButton {app} onDeleted={handleDeleted} />
+    </div>
+
     <SettingsBlock title={app.name} description={app.description ?? ""}>
       {#snippet titlePrefix()}
         <SettingsCrumb
@@ -185,8 +207,24 @@
 
 <style lang="scss">
   .trakt-api-application-detail {
+    position: relative;
+
     width: 100%;
-    max-width: var(--ni-480);
+    max-width: var(--ni-640);
+  }
+
+  .card-actions {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap-m);
+  }
+
+  .trakt-api-application-detail :global(.trakt-settings-block-header) {
+    padding-inline-end: var(--ni-72);
   }
 
   .credentials {
@@ -204,7 +242,7 @@
 
   .meta-label {
     color: var(--color-text-secondary);
-    font-size: var(--font-size-tag);
+    font-size: var(--font-size-text-small);
     text-transform: uppercase;
   }
 
@@ -219,18 +257,31 @@
     flex: 1;
     min-width: 0;
 
-    font-size: var(--font-size-tag);
-    overflow-wrap: anywhere;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-2);
+
+    font-size: var(--font-size-text-small);
 
     &.masked {
       letter-spacing: var(--ni-2);
     }
   }
 
+  .value-line {
+    min-width: 0;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .actions {
     display: flex;
     align-items: center;
     flex-shrink: 0;
+
+    gap: var(--gap-m);
   }
 
   .copied-icon {
@@ -264,11 +315,11 @@
     );
     color: var(--color-link-active);
 
-    font-size: var(--font-size-tag);
+    font-size: var(--font-size-text-small);
     white-space: nowrap;
   }
 
   .created {
-    font-size: var(--font-size-tag);
+    font-size: var(--font-size-text-small);
   }
 </style>

@@ -9082,6 +9082,121 @@
           "type": "string"
         }
       }
+    },
+    "heading_create_api_application": {
+      "default": "Create application",
+      "description": "Heading for the form used to register a new OAuth API application."
+    },
+    "description_create_api_application": {
+      "default": "Register a new OAuth application to access the Trakt API.",
+      "description": "Description shown under the Create application heading."
+    },
+    "link_text_create_api_application": {
+      "default": "Create application",
+      "description": "Link/button text that opens the form to create a new API application."
+    },
+    "label_app_name": {
+      "default": "Name",
+      "description": "Field label for an API application's name."
+    },
+    "input_placeholder_app_name": {
+      "default": "My application",
+      "description": "Placeholder for the API application name input."
+    },
+    "label_app_description": {
+      "default": "Description",
+      "description": "Field label for an API application's description."
+    },
+    "hint_app_description": {
+      "default": "This shows up in the Connected Apps section when a user grants access to your app.",
+      "description": "Helper text explaining where an API application's description is shown."
+    },
+    "label_app_redirect_uris": {
+      "default": "Redirect URIs",
+      "description": "Field label for the list of OAuth redirect URIs of an API application."
+    },
+    "input_placeholder_app_redirect_uris": {
+      "default": "https://example.com/callback",
+      "description": "Placeholder for the redirect URIs input."
+    },
+    "hint_app_redirect_uris": {
+      "default": "One URI per line. No query strings, just the full URI path. Use urn:ietf:wg:oauth:2.0:oob for device authentication.",
+      "description": "Helper text describing the format rules for redirect URIs."
+    },
+    "label_app_origins": {
+      "default": "JavaScript (CORS) origins",
+      "description": "Field label for the list of JavaScript (CORS) origins of an API application."
+    },
+    "input_placeholder_app_origins": {
+      "default": "https://example.com",
+      "description": "Placeholder for the JavaScript (CORS) origins input."
+    },
+    "hint_app_origins": {
+      "default": "One origin per line. No wildcards or paths.",
+      "description": "Helper text describing the format rules for JavaScript (CORS) origins."
+    },
+    "button_label_create_app": {
+      "default": "Create application",
+      "description": "Accessible label for the button that submits the create API application form."
+    },
+    "validation_text_app_name": {
+      "default": "Please enter an application name.",
+      "description": "Validation message shown when the API application name is empty."
+    },
+    "validation_text_app_redirect_uris": {
+      "default": "Add at least one redirect URI.",
+      "description": "Validation message shown when no redirect URI has been provided."
+    },
+    "heading_edit_api_application": {
+      "default": "Edit application",
+      "description": "Heading for the form used to edit an existing OAuth API application."
+    },
+    "description_edit_api_application": {
+      "default": "Update your OAuth application's details, redirect URIs and permissions.",
+      "description": "Supporting text under the edit API application form heading."
+    },
+    "button_label_save_app": {
+      "default": "Save application",
+      "description": "Accessible label for the button that submits the edit API application form."
+    },
+    "button_text_edit_app": {
+      "default": "Edit",
+      "description": "Text for the button that opens the edit form for an API application."
+    },
+    "button_label_edit_app": {
+      "default": "Edit {name}",
+      "description": "Accessible label for the button that opens the edit form for an API application. {name} is the app name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_delete_api_app": {
+      "default": "Delete",
+      "description": "Text for the button that deletes an API application."
+    },
+    "button_label_delete_api_app": {
+      "default": "Delete {name}",
+      "description": "Accessible label for the button that deletes an API application. {name} is the app name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "confirmation_title_delete_api_app": {
+      "default": "Delete application?",
+      "description": "Title of the confirmation dialog shown before deleting an API application."
+    },
+    "confirmation_message_delete_api_app": {
+      "default": "This permanently deletes {name} and revokes every token issued for it. This cannot be undone.",
+      "description": "Body of the confirmation dialog shown before deleting an API application. {name} is the app name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }
