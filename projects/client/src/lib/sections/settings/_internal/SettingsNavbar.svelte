@@ -15,7 +15,7 @@
     <Link href={UrlBuilder.settings.data()}>
       <span class="title">{m.link_text_data_settings()}</span>
     </Link>
-    <Link href={UrlBuilder.settings.apps()}>
+    <Link href={UrlBuilder.settings.apps()} activeMatch="nested">
       <span class="title">{m.link_text_apps_settings()}</span>
     </Link>
     <RenderForFeature flag={FeatureFlag.StreamingServices}>

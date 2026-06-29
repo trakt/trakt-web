@@ -13,6 +13,7 @@
     isCancelDisabled = false,
     confirmButtonText,
     confirmButtonLabel,
+    inlineActions = false,
   }: FormProps = $props();
 
   let formElement: HTMLFormElement;
@@ -42,7 +43,7 @@
     {@render children()}
   </div>
 
-  <div class="trakt-form-actions">
+  <div class="trakt-form-actions" class:is-inline={inlineActions}>
     <Button
       size="small"
       variant="secondary"
@@ -81,6 +82,10 @@
 
     :global(.trakt-button) {
       flex: 1;
+    }
+
+    &.is-inline {
+      flex-direction: row;
     }
   }
 </style>
