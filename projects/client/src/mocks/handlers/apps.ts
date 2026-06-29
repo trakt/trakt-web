@@ -11,4 +11,8 @@ export const apps = [
     'http://localhost/v3/users/me/applications',
     () => HttpResponse.json(ApiApplicationsResponseMock),
   ),
+  http.delete(
+    'http://localhost/v3/users/me/connected-apps/:id',
+    () => new HttpResponse(null, { status: 204 }),
+  ),
 ];

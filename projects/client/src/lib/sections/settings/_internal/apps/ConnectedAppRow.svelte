@@ -4,23 +4,27 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ConnectedApp } from "$lib/requests/models/ConnectedApp.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
-  import AppRow from "./AppRow.svelte";
+  import SettingsGroupRow from "../SettingsGroupRow.svelte";
+  import RevokeConnectedAppButton from "./RevokeConnectedAppButton.svelte";
 
   const { app }: { app: ConnectedApp } = $props();
 
-  const connectedOn = $derived(
-    toHumanDate(new Date(), app.connectedAt, getLocale()),
-  );
-  const lastUsedOn = $derived(
-    toHumanDate(new Date(), app.lastUsedAt, getLocale()),
+  const description = $derived(
+    [
+      m.text_app_connected_on({
+        date: toHumanDate(new Date(), app.connectedAt, getLocale()),
+      }),
+      m.text_app_last_used({
+        date: toHumanDate(new Date(), app.lastUsedAt, getLocale()),
+      }),
+    ].join(" · "),
   );
 </script>
 
-<AppRow title={app.name}>
+<SettingsGroupRow title={app.name} {description} variant="custom">
   {#snippet icon()}
     <PlugIcon />
   {/snippet}
 
-  <span>{m.text_app_connected_on({ date: connectedOn })}</span>
-  <span>{m.text_app_last_used({ date: lastUsedOn })}</span>
-</AppRow>
+  <RevokeConnectedAppButton {app} />
+</SettingsGroupRow>

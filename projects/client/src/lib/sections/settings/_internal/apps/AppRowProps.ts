@@ -5,4 +5,5 @@ export type AppRowProps = {
   title: string;
   href?: string;
   children?: Snippet;
+  action?: Snippet;
 };
