@@ -5,7 +5,6 @@ import { usePopupHelpers } from '$lib/features/portal/_internal/usePopupHelpers.
 import { clickOutside } from '$lib/utils/actions/clickOutside.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
 import { BehaviorSubject } from 'rxjs';
-import { onMount } from 'svelte';
 import { isTargetContained } from './_internal/isTargetContained.ts';
 import type { PopupPlacement } from './_internal/models/PopupPlacement.ts';
 
@@ -74,15 +73,14 @@ export function usePortal(props?: PortalProps) {
       closeHandler();
     };
     const toggleAroundTarget = () => toggleHandler(targetNode);
+    const { destroy: destroyClickOutside } = clickOutside(targetNode);
 
-    onMount(() => {
-      clickOutside(targetNode);
-      targetNode.addEventListener('clickoutside', closeAroundTarget);
-      targetNode.addEventListener('click', toggleAroundTarget);
-    });
+    targetNode.addEventListener('clickoutside', closeAroundTarget);
+    targetNode.addEventListener('click', toggleAroundTarget);
 
     return {
       destroy() {
+        destroyClickOutside();
         targetNode.removeEventListener('clickoutside', closeAroundTarget);
         targetNode.removeEventListener('click', toggleAroundTarget);
         removeHelpers(null);

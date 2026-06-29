@@ -38,9 +38,7 @@
   } & SeasonCardProps;
 
   type ItemCardProps =
-    | MediaCardProps
-    | EpisodeSummaryProps
-    | SeasonSummaryProps;
+    MediaCardProps | EpisodeSummaryProps | SeasonSummaryProps;
 
   type SummaryCardProps = {
     contextualTag?: Snippet;
@@ -159,6 +157,7 @@
         <PopupMenu
           label={m.button_label_popup_menu({ title: media.title })}
           mode="standalone"
+          title={media.title}
         >
           {#snippet items()}
             {@render popupActions()}

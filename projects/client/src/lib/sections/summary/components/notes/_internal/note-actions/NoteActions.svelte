@@ -15,7 +15,11 @@
   const { note, media, onEdit }: NoteActionsProps = $props();
 </script>
 
-<PopupMenu label={m.button_label_popup_menu_notes()} mode="standalone">
+<PopupMenu
+  label={m.button_label_popup_menu_notes()}
+  mode="standalone"
+  title={m.button_label_popup_menu_notes()}
+>
   {#snippet items()}
     <EditNoteButton onclick={onEdit} />
     <DeleteNoteButton {note} {media} />

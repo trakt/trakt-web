@@ -86,7 +86,11 @@
 
   <div class="action">
     {#if connection.isConnected && connection.isActive}
-      <PopupMenu size="small" label={m.button_label_sync_options()}>
+      <PopupMenu
+        size="small"
+        label={m.button_label_sync_options()}
+        title={m.button_label_sync_options()}
+      >
         {#snippet items()}
           <DropdownItem onclick={() => run(() => actions.sync(connection.id))}>
             {m.button_text_sync_new_data()}
@@ -120,7 +124,11 @@
       >
         {m.button_text_reconnect()}
       </Button>
-      <PopupMenu size="small" label={m.button_label_sync_options()}>
+      <PopupMenu
+        size="small"
+        label={m.button_label_sync_options()}
+        title={m.button_label_sync_options()}
+      >
         {#snippet items()}
           <DropdownItem
             color="red"

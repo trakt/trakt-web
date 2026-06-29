@@ -35,6 +35,7 @@
             label={m.button_label_popup_menu({ title })}
             size="normal"
             mode="standalone"
+            {title}
           >
             {#snippet items()}
               {@render popupActions()}

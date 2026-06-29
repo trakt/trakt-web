@@ -20,6 +20,7 @@
 <PopupMenu
   label={m.button_label_popup_menu({ title: m.list_title_comments() })}
   mode="standalone"
+  title={m.list_title_comments()}
 >
   {#snippet items()}
     {#if isOwnComment}

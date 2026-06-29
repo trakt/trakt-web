@@ -7,6 +7,7 @@
   import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
+  import FilterButton from "$lib/sections/navbar/components/filter/FilterButton.svelte";
   import PersonTitle from "../../_internal/PersonTitle.svelte";
   import Summary from "./../../_internal/Summary.svelte";
   import SummaryOverview from "./../../summary/SummaryOverview.svelte";
@@ -14,7 +15,6 @@
   import PersonDetails from "./_internal/PersonDetails.svelte";
   import SocialMediaLinks from "./_internal/SocialMediaLinks.svelte";
   import { hasSocialMediaLinks } from "./_internal/hasSocialMediaLinks";
-  import FilterButton from "$lib/sections/navbar/components/filter/FilterButton.svelte";
 
   const { person }: { person: PersonSummary } = $props();
 </script>
@@ -46,6 +46,7 @@
         label={m.button_label_popup_menu({ title: person.name })}
         mode="standalone"
         size="normal"
+        title={person.name}
       >
         {#snippet items()}
           <ReportButton

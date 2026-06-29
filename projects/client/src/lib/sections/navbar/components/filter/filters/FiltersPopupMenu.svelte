@@ -10,6 +10,7 @@
 <PopupMenu
   label={m.button_label_popup_menu({ title: m.header_filters() })}
   mode="standalone"
+  title={m.header_filters()}
 >
   {#snippet items()}
     <ResetAllButton />
