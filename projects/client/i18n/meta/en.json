@@ -9056,6 +9056,32 @@
     "text_app_created_on": {
       "default": "Created {date}",
       "description": "Shows the date an API application was created."
+    },
+    "button_text_revoke_access": {
+      "default": "Revoke access",
+      "description": "Button label for revoking a connected app's access to the user's account."
+    },
+    "button_label_revoke_app": {
+      "default": "Revoke access for {name}",
+      "description": "Accessible label for the button that revokes a specific connected app's access. {name} is the app's name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "confirmation_title_revoke_app": {
+      "default": "Revoke access?",
+      "description": "Title of the confirmation dialog shown before revoking a connected app's access."
+    },
+    "confirmation_message_revoke_app": {
+      "default": "This will revoke {name}'s access to your Trakt account. You can reconnect it at any time.",
+      "description": "Body of the confirmation dialog shown before revoking a connected app. {name} is the app's name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }
