@@ -1,7 +1,7 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import DismissIcon from "$lib/components/icons/DismissIcon.svelte";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import UserList from "./UserList.svelte";
   import { usePinnedListDismissal } from "./_internal/usePinnedListDismissal.ts";

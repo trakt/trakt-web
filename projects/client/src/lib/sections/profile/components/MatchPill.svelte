@@ -1,7 +1,7 @@
 <script lang="ts">
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import { useDiscover } from "$lib/features/discover/useDiscover.ts";
+  import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { profileDrawerNavigation } from "../_internal/profileDrawerNavigation.ts";
   import { useMatch } from "../_internal/useMatch.ts";

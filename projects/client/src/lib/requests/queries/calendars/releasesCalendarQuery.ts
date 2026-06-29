@@ -1,5 +1,5 @@
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';

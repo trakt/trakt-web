@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useDiscover } from "$lib/features/discover/useDiscover.ts";
+  import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import MatchDrawer from "../components/MatchDrawer.svelte";
   import type { DisplayableProfileProps } from "../DisplayableProfileProps.ts";
   import { useMatch } from "./useMatch.ts";

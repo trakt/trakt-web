@@ -1,4 +1,4 @@
-import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { smartListQuery } from '$lib/requests/queries/users/smartListQuery.ts';
 import { DEFAULT_SMART_LIST_LIMIT } from '$lib/utils/constants.ts';
 import { combineLatest, map } from 'rxjs';

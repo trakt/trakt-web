@@ -4,7 +4,7 @@
   import Form from "$lib/components/form/Form.svelte";
   import FormInput from "$lib/components/form/FormInput.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import { useSeasonalTheme } from "../useSeasonalTheme";
   import ChristmasToggle from "./_internal/christmas/ChristmasToggle.svelte";
   import HalloweenToggle from "./_internal/halloween/HalloweenToggle.svelte";

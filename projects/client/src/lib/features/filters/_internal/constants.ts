@@ -13,6 +13,9 @@ import { generateRegionOptions } from './generateRegionOptions.ts';
 import { generateRuntimeOptions } from './generateRuntimeOptions.ts';
 import { GENRES } from './genres.ts';
 
+export const SEASONAL_STORAGE_KEY = 'trakt_seasonal_filter';
+export const DISCOVER_MODE_PARAM = 'mode';
+
 const GENRE_FILTER: Filter = {
   label: m.header_genre,
   key: FilterKey.Genres,

@@ -2,7 +2,7 @@
   import CalendarLayout from "$lib/features/calendar/CalendarLayout.svelte";
   import { useCalendarPeriod } from "$lib/features/calendar/context/useCalendarPeriod";
   import type { CalendarPeriod } from "$lib/features/calendar/models/CalendarLayoutProps";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { SocialActivity } from "$lib/requests/models/SocialActivity";
   import { HISTORY_UPPER_LIMIT } from "$lib/utils/constants";

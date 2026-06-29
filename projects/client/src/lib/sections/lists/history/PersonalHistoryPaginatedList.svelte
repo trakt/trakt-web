@@ -1,7 +1,7 @@
 <script lang="ts">
   import CalendarLayout from "$lib/features/calendar/CalendarLayout.svelte";
   import { useCalendarPeriod } from "$lib/features/calendar/context/useCalendarPeriod";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import { HISTORY_UPPER_LIMIT } from "$lib/utils/constants";
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";

@@ -1,12 +1,12 @@
 <script lang="ts">
   import ArrowRightIcon from "$lib/components/icons/ArrowRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
   import "$lib/features/edit-mode/edit-mode.css";
   import EditModeVisibilityButton from "$lib/features/edit-mode/EditModeVisibilityButton.svelte";
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import BannerContainer from "$lib/sections/banner/_internal/BannerContainer.svelte";
   import {

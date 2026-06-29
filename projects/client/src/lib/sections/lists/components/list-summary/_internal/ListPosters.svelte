@@ -2,7 +2,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";

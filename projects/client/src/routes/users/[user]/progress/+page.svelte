@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
 
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";

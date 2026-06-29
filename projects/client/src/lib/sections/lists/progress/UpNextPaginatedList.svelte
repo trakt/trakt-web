@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
   import DrilledMediaList from "$lib/sections/lists/drilldown/DrilledMediaList.svelte";
   import type { UpNextSortProps } from "$lib/sections/lists/progress/UpNextSortProps";

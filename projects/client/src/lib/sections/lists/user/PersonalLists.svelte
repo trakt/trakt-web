@@ -4,7 +4,7 @@
   import ThumbsUpIcon from "$lib/components/icons/ThumbsUpIcon.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";

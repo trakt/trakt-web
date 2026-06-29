@@ -1,4 +1,4 @@
-import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
 import type { ToggleOption } from '../ToggleOption.ts';

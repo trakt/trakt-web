@@ -1,6 +1,6 @@
 <script lang="ts">
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";

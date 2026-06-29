@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useDiscover } from "$lib/features/discover/useDiscover.ts";
+  import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import * as m from "$lib/features/i18n/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";

@@ -1,7 +1,7 @@
 <script lang="ts">
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { m } from "$lib/features/i18n/messages.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";

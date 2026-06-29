@@ -12,7 +12,6 @@
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
   import CookieConsentProvider from "$lib/features/cookie-consent/CookieConsentProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
-  import DiscoverProvider from "$lib/features/discover/DiscoverProvider.svelte";
   import EditModeProvider from "$lib/features/edit-mode/EditModeProvider.svelte";
   import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
   import FeatureFlagProvider from "$lib/features/feature-flag/FeatureFlagProvider.svelte";
@@ -24,6 +23,7 @@
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
   import PlayerProvider from "$lib/features/player/YoutubePlayerProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
+  import QueryDevtools from "$lib/features/query/QueryDevtools.svelte";
   import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
   import ReportDialogProvider from "$lib/features/report/ReportDialogProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
@@ -42,7 +42,6 @@
   import { retry } from "$lib/utils/retry/retry.js";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
-  import QueryDevtools from "$lib/features/query/QueryDevtools.svelte";
   import { onMount } from "svelte";
 
   const { data, children } = $props();
@@ -168,55 +167,53 @@
                             <FilterProvider>
                               <CoverProvider>
                                 <ToastProvider>
-                                  <DiscoverProvider>
-                                    <ConfirmationProvider>
-                                      <MarkAsWatchedDrawerProvider />
-                                      <AddNoteDrawerProvider />
-                                      <ReportDialogProvider />
-                                      <CoverImage />
-                                      <SeasonalFlair />
-                                      <EditModeProvider>
-                                        <ThemeProvider theme={data.theme}>
-                                          <ListScrollHistoryProvider>
-                                            <!--
+                                  <ConfirmationProvider>
+                                    <MarkAsWatchedDrawerProvider />
+                                    <AddNoteDrawerProvider />
+                                    <ReportDialogProvider />
+                                    <CoverImage />
+                                    <SeasonalFlair />
+                                    <EditModeProvider>
+                                      <ThemeProvider theme={data.theme}>
+                                        <ListScrollHistoryProvider>
+                                          <!--
                                         All navbars are added in the layout to make sure they can
                                         persist during navigation. The state is set on a page level.
                                       -->
-                                            <RenderFor
-                                              audience="all"
-                                              device={["mobile", "tablet-sm"]}
-                                            >
-                                              <TopNavbar />
-                                            </RenderFor>
+                                          <RenderFor
+                                            audience="all"
+                                            device={["mobile", "tablet-sm"]}
+                                          >
+                                            <TopNavbar />
+                                          </RenderFor>
 
-                                            <RenderFor
-                                              audience="all"
-                                              device={["desktop", "tablet-lg"]}
-                                            >
-                                              <SideNavbar />
-                                            </RenderFor>
+                                          <RenderFor
+                                            audience="all"
+                                            device={["desktop", "tablet-lg"]}
+                                          >
+                                            <SideNavbar />
+                                          </RenderFor>
 
-                                            {@render children()}
+                                          {@render children()}
 
-                                            <RenderFor
-                                              audience="all"
-                                              device={["mobile", "tablet-sm"]}
-                                            >
-                                              <MobileNavbar />
-                                            </RenderFor>
+                                          <RenderFor
+                                            audience="all"
+                                            device={["mobile", "tablet-sm"]}
+                                          >
+                                            <MobileNavbar />
+                                          </RenderFor>
 
-                                            <RenderFor audience="authenticated">
-                                              <NavbarToastContent />
-                                            </RenderFor>
-                                            <QueryDevtools
-                                              client={data.queryClient}
-                                              buttonPosition="bottom-right"
-                                            />
-                                          </ListScrollHistoryProvider>
-                                        </ThemeProvider>
-                                      </EditModeProvider>
-                                    </ConfirmationProvider>
-                                  </DiscoverProvider>
+                                          <RenderFor audience="authenticated">
+                                            <NavbarToastContent />
+                                          </RenderFor>
+                                          <QueryDevtools
+                                            client={data.queryClient}
+                                            buttonPosition="bottom-right"
+                                          />
+                                        </ListScrollHistoryProvider>
+                                      </ThemeProvider>
+                                    </EditModeProvider>
+                                  </ConfirmationProvider>
                                 </ToastProvider>
                               </CoverProvider>
                             </FilterProvider>

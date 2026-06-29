@@ -1,5 +1,5 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { getLocale } from '$lib/features/i18n/index.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { map } from 'rxjs';

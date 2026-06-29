@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import type { Snippet } from "svelte";

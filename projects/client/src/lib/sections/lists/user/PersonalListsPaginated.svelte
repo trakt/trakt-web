@@ -1,6 +1,6 @@
 <script lang="ts">
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import { DEFAULT_LISTS_DRILL_SIZE } from "$lib/utils/constants";
   import type { PersonalListType } from "./models/PersonalListType";
   import { usePersonalListsSummary } from "./usePersonalListsSummary";

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages";
   import GlobalParameterEscaper from "$lib/features/parameters/GlobalParameterEscaper.svelte";
   import type { SmartList } from "$lib/requests/queries/users/smartListQuery";
