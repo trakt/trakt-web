@@ -330,7 +330,9 @@ export const UrlBuilder = {
     apps: () => '/settings/apps',
     appsConnected: () => '/settings/apps/connected',
     appsApi: () => '/settings/apps/api',
+    appsApiNew: () => '/settings/apps/api/new',
     appsApiDetail: (id: number | string) => `/settings/apps/api/${id}`,
+    appsApiEdit: (id: number | string) => `/settings/apps/api/${id}/edit`,
     advanced: (params: Pick<WellKnownQueryParams, 'section'> = {}) =>
       `/settings/advanced${buildParamString(sanitizeParams(params))}`,
     preview: () => '/settings/preview',

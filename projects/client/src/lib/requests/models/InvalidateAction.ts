@@ -31,7 +31,10 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:streaming_connection`
   | `${typeof INVALIDATION_ID}:data_sync`
   | `${typeof INVALIDATION_ID}:plex:${PlexType}`
-  | `${typeof INVALIDATION_ID}:app_revoke`;
+  | `${typeof INVALIDATION_ID}:app_revoke`
+  | `${typeof INVALIDATION_ID}:app_create`
+  | `${typeof INVALIDATION_ID}:app_update`
+  | `${typeof INVALIDATION_ID}:app_delete`;
 
 type TypeDataMap = {
   'auth': null;
@@ -59,6 +62,9 @@ type TypeDataMap = {
   'data_sync': null;
   'plex': PlexType;
   'app_revoke': null;
+  'app_create': null;
+  'app_update': null;
+  'app_delete': null;
 };
 
 export function invalidationId(key?: string) {
@@ -153,5 +159,8 @@ export const InvalidateAction = {
 
   App: {
     Revoke: buildInvalidationKey('app_revoke'),
+    Create: buildInvalidationKey('app_create'),
+    Update: buildInvalidationKey('app_update'),
+    Delete: buildInvalidationKey('app_delete'),
   },
 };

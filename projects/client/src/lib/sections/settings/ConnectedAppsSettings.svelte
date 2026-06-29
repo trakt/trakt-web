@@ -4,10 +4,10 @@
   import { connectedAppsQuery } from "$lib/requests/queries/apps/connectedAppsQuery.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { map } from "rxjs";
-  import AppCard from "./_internal/apps/AppCard.svelte";
   import ConnectedAppRow from "./_internal/apps/ConnectedAppRow.svelte";
   import SettingsBlock from "./_internal/SettingsBlock.svelte";
   import SettingsCrumb from "./_internal/SettingsCrumb.svelte";
+  import SettingsGroupCard from "./_internal/SettingsGroupCard.svelte";
 
   const connectedApps = useQuery(connectedAppsQuery()).pipe(
     map((query) => query.data ?? []),
@@ -29,11 +29,11 @@
     {#if $connectedApps.length === 0}
       <p class="secondary">{m.text_no_connected_apps()}</p>
     {:else}
-      <AppCard>
+      <SettingsGroupCard>
         {#each $connectedApps as app (app.key)}
           <ConnectedAppRow {app} />
         {/each}
-      </AppCard>
+      </SettingsGroupCard>
     {/if}
   </SettingsBlock>
 </div>
@@ -43,7 +43,7 @@
 
   .trakt-connected-apps-settings {
     width: 100%;
-    max-width: var(--ni-480);
+    max-width: var(--ni-640);
 
     @include for-tablet-sm-and-below {
       max-width: 100%;

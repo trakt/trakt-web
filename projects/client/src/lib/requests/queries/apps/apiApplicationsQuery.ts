@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import { ApiApplicationSchema } from '$lib/requests/models/ApiApplication.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import {
   type ApiApplicationResponse,
@@ -29,7 +30,11 @@ const apiApplicationsRequest = async (
 
 export const apiApplicationsQuery = defineQuery({
   key: 'apiApplications',
-  invalidations: [],
+  invalidations: [
+    InvalidateAction.App.Create,
+    InvalidateAction.App.Update,
+    InvalidateAction.App.Delete,
+  ],
   dependencies: () => [],
   request: apiApplicationsRequest,
   mapper: (response) => response.body.map(mapToApiApplication),

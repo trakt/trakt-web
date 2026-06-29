@@ -106,6 +106,10 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.RevokeApp;
     name: string;
   };
+  [ConfirmationType.DeleteApiApp]: {
+    type: ConfirmationType.DeleteApiApp;
+    name: string;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

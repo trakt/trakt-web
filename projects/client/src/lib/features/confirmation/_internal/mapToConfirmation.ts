@@ -197,6 +197,12 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.confirmation_message_revoke_app({ name: props.name }),
     operation: 'destructive',
   }),
+  [ConfirmationType.DeleteApiApp]: (props) => ({
+    title: m.confirmation_title_delete_api_app(),
+    buttonText: m.button_text_delete_api_app(),
+    message: m.confirmation_message_delete_api_app({ name: props.name }),
+    operation: 'destructive',
+  }),
 };
 
 export function mapToConfirmation<T extends ConfirmationType>(
