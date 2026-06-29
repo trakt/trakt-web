@@ -327,6 +327,10 @@ export const UrlBuilder = {
   settings: {
     general: () => '/settings',
     data: () => '/settings/data',
+    apps: () => '/settings/apps',
+    appsConnected: () => '/settings/apps/connected',
+    appsApi: () => '/settings/apps/api',
+    appsApiDetail: (id: number | string) => `/settings/apps/api/${id}`,
     advanced: (params: Pick<WellKnownQueryParams, 'section'> = {}) =>
       `/settings/advanced${buildParamString(sanitizeParams(params))}`,
     preview: () => '/settings/preview',
