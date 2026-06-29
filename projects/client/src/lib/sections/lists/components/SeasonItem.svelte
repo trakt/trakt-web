@@ -77,6 +77,7 @@
               label={m.button_label_popup_menu({
                 title: seasonLabel(season.number),
               })}
+              title={seasonLabel(season.number)}
             >
               {#snippet items()}
                 {@render popupActions()}

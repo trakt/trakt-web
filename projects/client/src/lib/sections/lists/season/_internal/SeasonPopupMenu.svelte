@@ -23,6 +23,7 @@
 <PopupMenu
   label={m.button_label_popup_menu({ title })}
   mode="standalone"
+  {title}
   {disabled}
 >
   {#snippet items()}

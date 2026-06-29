@@ -1,9 +1,11 @@
 <script lang="ts">
+  import Drawer from "$lib/components/drawer/Drawer.svelte";
   import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
-  import { usePortal } from "$lib/features/portal/usePortal";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { slide } from "svelte/transition";
   import type { PopupMenuProps } from "./PopupMenuProps";
+  import { usePopupMenu } from "./_internal/usePopupMenu";
 
   const {
     items,
@@ -11,42 +13,62 @@
     size = "small",
     icon,
     label,
+    title,
     ...props
   }: PopupMenuProps = $props();
 
-  const { portalTrigger, portal, isOpened } = usePortal();
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const variant = $derived($isMobile ? "drawer" : "portal");
+
+  const { menuTrigger, portal, isOpened, close } = $derived(
+    usePopupMenu({ variant }),
+  );
 </script>
 
-<button
-  use:disableTransitionOn={"touch"}
-  use:portalTrigger
-  aria-haspopup="true"
-  aria-label={label}
-  aria-expanded={$isOpened}
-  class="trakt-popup-menu-button"
-  data-mode={mode}
-  data-size={size}
-  class:has-custom-icon={!!icon}
-  {...props}
->
-  {#if icon}
-    {@render icon()}
-  {:else}
-    <MoreIcon {size} />
-  {/if}
-</button>
-
-{#if $isOpened}
-  <div
-    use:portal
-    class="trakt-popup-menu-container"
-    transition:slide={{ duration: 150 }}
+{#key variant}
+  <button
+    use:disableTransitionOn={"touch"}
+    use:menuTrigger
+    aria-haspopup="true"
+    aria-label={label}
+    aria-expanded={$isOpened}
+    class="trakt-popup-menu-button"
+    data-mode={mode}
+    data-size={size}
+    data-variant={variant}
+    class:has-custom-icon={!!icon}
+    class:has-drawer-open={$isOpened && variant === "drawer"}
+    {...props}
   >
-    <div class="spacer"></div>
-    <ul>
-      {@render items()}
-    </ul>
-  </div>
+    {#if icon}
+      {@render icon()}
+    {:else}
+      <MoreIcon {size} />
+    {/if}
+  </button>
+{/key}
+
+{#if variant === "drawer"}
+  {#if $isOpened}
+    <Drawer onClose={close} {title} size="auto">
+      <ul class="popup-menu-drawer-item">
+        {@render items()}
+      </ul>
+    </Drawer>
+  {/if}
+{:else}
+  {#if $isOpened}
+    <div
+      use:portal
+      class="trakt-popup-menu-container"
+      transition:slide={{ duration: 150 }}
+    >
+      <div class="spacer"></div>
+      <ul>
+        {@render items()}
+      </ul>
+    </div>
+  {/if}
 {/if}
 
 <style lang="scss">
@@ -143,6 +165,7 @@
       }
     }
 
+    &.has-drawer-open,
     &[data-popup-state="opened"] {
       :global(svg) {
         transform: rotate(90deg);
@@ -185,6 +208,19 @@
 
     div.spacer {
       height: calc($button-size + $button-padding * 2 + var(--list-padding));
+    }
+  }
+
+  .popup-menu-drawer-item {
+    all: unset;
+
+    display: grid;
+    grid-template-columns: 100%;
+    gap: var(--gap-xxs);
+
+    :global(li) {
+      width: 100%;
+      box-sizing: border-box;
     }
   }
 </style>

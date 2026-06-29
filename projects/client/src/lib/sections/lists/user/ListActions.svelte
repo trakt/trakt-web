@@ -5,8 +5,8 @@
   import Redirect from "$lib/components/router/Redirect.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
-  import ReportButton from "$lib/features/report/ReportButton.svelte";
   import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
+  import ReportButton from "$lib/features/report/ReportButton.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -64,6 +64,7 @@
   <PopupMenu
     label={m.button_label_popup_menu({ title: list.name })}
     mode="standalone"
+    title={list.name}
   >
     {#snippet items()}
       {#if isListOwner}

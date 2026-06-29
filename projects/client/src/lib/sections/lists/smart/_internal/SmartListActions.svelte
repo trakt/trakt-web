@@ -13,6 +13,7 @@
 <PopupMenu
   label={m.button_label_popup_menu({ title: list.title })}
   mode="standalone"
+  title={list.title}
 >
   {#snippet items()}
     <DeleteSmartListButton

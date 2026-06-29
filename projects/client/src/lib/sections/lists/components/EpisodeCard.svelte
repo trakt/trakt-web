@@ -46,7 +46,10 @@
   {#if externalPopupActions}
     <CardActionBar>
       {#snippet actions()}
-        <PopupMenu label={m.button_label_popup_menu({ title: episode.title })}>
+        <PopupMenu
+          label={m.button_label_popup_menu({ title: episode.title })}
+          title={episode.title}
+        >
           {#snippet items()}
             {@render externalPopupActions()}
           {/snippet}

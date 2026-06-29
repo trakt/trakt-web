@@ -143,6 +143,7 @@
   label={m.button_label_profile_actions({ username: userDisplayName })}
   mode="standalone"
   size="normal"
+  title={userDisplayName}
 >
   {#snippet items()}
     {#if $incomingFollowRequest}
