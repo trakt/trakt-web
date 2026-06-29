@@ -1,6 +1,6 @@
 import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { makeTargets } from '$lib/features/intl-overlay/makeTargets.ts';
 import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';

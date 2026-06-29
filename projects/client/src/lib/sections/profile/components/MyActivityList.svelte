@@ -4,7 +4,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { m } from "$lib/features/i18n/messages.ts";
   import type { UserRatingEntry } from "$lib/requests/queries/users/userRatingsQuery.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";

@@ -5,7 +5,7 @@ import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
 import type { NoteType } from '$lib/requests/models/NoteType.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
-import type { DiscoverMode } from '../../discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
 import type { FilterMode } from '../../filters/models/FilterMode.ts';
 import { AnalyticsEvent } from './AnalyticsEvent.ts';
 

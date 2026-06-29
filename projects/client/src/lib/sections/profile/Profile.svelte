@@ -1,6 +1,6 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
-  import { useDiscover } from "$lib/features/discover/useDiscover.ts";
+  import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import { m } from "$lib/features/i18n/messages.ts";
   import FavoritesList from "../lists/favorites/FavoritesList.svelte";
   import PersonalHistoryList from "../lists/history/PersonalHistoryList.svelte";

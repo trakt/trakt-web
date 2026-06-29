@@ -3,7 +3,7 @@
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
-  import { useDiscover } from "$lib/features/discover/useDiscover.ts";
+  import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import { m } from "$lib/features/i18n/messages.ts";
   import { useActiveComment } from "$lib/sections/summary/components/comments/drawers/useActiveComment.ts";
   import {

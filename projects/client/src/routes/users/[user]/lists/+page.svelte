@@ -2,7 +2,7 @@
   import Redirect from "$lib/components/router/Redirect.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";

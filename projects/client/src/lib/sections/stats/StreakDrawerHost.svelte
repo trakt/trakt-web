@@ -1,7 +1,7 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import { languageTag } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";

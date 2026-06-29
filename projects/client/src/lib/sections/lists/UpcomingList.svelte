@@ -1,6 +1,6 @@
 <script lang="ts">
   import CalendarItem from "$lib/features/calendar/CalendarItem.svelte";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";

@@ -1,6 +1,7 @@
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
 import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import {
@@ -10,11 +11,10 @@ import {
 import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMoviesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { isSameDay } from 'date-fns/isSameDay';
 import { combineLatest, map, type Observable } from 'rxjs';
 import type { FilterParams } from '../../../requests/models/FilterParams.ts';
-import type { DiscoverMode } from '../../discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
 import type { Calendar } from '../models/Calendar.ts';
 
 export type CalendarItem = UpcomingEpisodeEntry | MediaEntry;

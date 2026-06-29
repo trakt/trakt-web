@@ -1,4 +1,4 @@
-import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
 import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';

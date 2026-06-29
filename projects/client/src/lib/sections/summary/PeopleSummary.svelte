@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { CrewPositions } from "$lib/requests/models/CrewPosition";

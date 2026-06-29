@@ -7,10 +7,11 @@ import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
 import type { ParameterType } from '../parameters/_internal/createParameterContext.ts';
 import { useParameters } from '../parameters/useParameters.ts';
-import { FILTERS } from './_internal/constants.ts';
+import { DISCOVER_MODE_PARAM, FILTERS } from './_internal/constants.ts';
 import { getDefaultFilters } from './_internal/getDefaultFilters.ts';
 import { hasFilter } from './_internal/hasFilter.ts';
 import { processFilterParams } from './_internal/processFilterParams.ts';
+import type { DiscoverMode } from './models/DiscoverMode.ts';
 import { FilterMode } from './models/FilterMode.ts';
 
 export const STORED_FILTERS_KEY = 'trakt-global-filters' as const;
@@ -60,7 +61,7 @@ export function useStoredFilters() {
 
   const goToStoredFilters = (
     filters: StoredFilter,
-    baseUrl: URL = page.url,
+    baseUrl: URL,
   ) => {
     const url = new URL(baseUrl);
 
@@ -77,7 +78,7 @@ export function useStoredFilters() {
       return;
     }
 
-    goto(url, { replaceState: true });
+    goto(url, { replaceState: true, keepFocus: true, noScroll: true });
   };
 
   const saveFilters = () => {
@@ -103,15 +104,27 @@ export function useStoredFilters() {
     storedFiltersStore.update(filtersObject);
   };
 
-  const restoreFilters = () => {
+  const restoreFilters = (mode?: DiscoverMode) => {
+    const url = new URL(page.url);
+
+    if (mode) {
+      url.searchParams.set(DISCOVER_MODE_PARAM, mode);
+    }
+
     const hasParams = hasFilter(page.url.searchParams);
     const defaultFilters = getDefaultFilters();
+    const shouldRestoreFilters = !hasParams && defaultFilters;
 
-    if (hasParams || !defaultFilters) {
+    if (mode && !shouldRestoreFilters) {
+      if (url.href !== page.url.href) {
+        goto(url, { replaceState: true, keepFocus: true, noScroll: true });
+      }
       return;
     }
 
-    goToStoredFilters(defaultFilters);
+    if (shouldRestoreFilters) {
+      goToStoredFilters(defaultFilters, url);
+    }
   };
 
   const resetFilters = () => {

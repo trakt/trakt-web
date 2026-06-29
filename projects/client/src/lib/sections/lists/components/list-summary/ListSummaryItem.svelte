@@ -1,6 +1,6 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import ListHeader from "./_internal/ListHeader.svelte";
   import ListPosters from "./_internal/ListPosters.svelte";

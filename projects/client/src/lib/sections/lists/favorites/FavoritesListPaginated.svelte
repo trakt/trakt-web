@@ -1,6 +1,6 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { useFavoritesList } from "../stores/useFavoritesList";
   import SortValue from "../user/_internal/SortValue.svelte";

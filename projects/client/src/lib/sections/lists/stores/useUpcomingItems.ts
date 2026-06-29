@@ -1,7 +1,8 @@
-import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
 import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
@@ -13,7 +14,6 @@ import { upcomingMediaQuery } from '$lib/requests/queries/calendars/upcomingMedi
 import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMoviesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { map } from 'rxjs';
 
 type UseUpcomingItemsProps = {

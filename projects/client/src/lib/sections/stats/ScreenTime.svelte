@@ -1,7 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
-  import { useDiscover } from "$lib/features/discover/useDiscover.ts";
+  import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { profileDrawerNavigation } from "../profile/_internal/profileDrawerNavigation.ts";
   import PulseCell from "./_internal/PulseCell.svelte";

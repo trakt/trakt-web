@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
   import {
     crewPositionSchema,
@@ -9,9 +9,9 @@
   } from "$lib/requests/models/CrewPosition";
   import type { MediaCredits } from "$lib/requests/models/MediaCredits";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import CreditMediaItem from "./components/CreditMediaItem.svelte";
   import NoFilterResultsPlaceholder from "./drilldown/_internal/NoFilterResultsPlaceholder.svelte";
-  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
 
   type CreditsPaginatedListProps = {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { m } from "$lib/features/i18n/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";

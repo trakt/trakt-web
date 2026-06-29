@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import SnowBackground from "./christmas/SnowBackground.svelte";
 
   const { themeId }: { themeId: string } = $props();

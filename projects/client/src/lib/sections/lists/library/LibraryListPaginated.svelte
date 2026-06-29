@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import LibraryMediaItem from "./_internal/LibraryMediaItem.svelte";

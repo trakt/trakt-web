@@ -11,7 +11,7 @@ import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { isSameDay } from 'date-fns/isSameDay';
 import { map, type Observable } from 'rxjs';
 import type { FilterParams } from '../../../requests/models/FilterParams.ts';
-import type { DiscoverMode } from '../../discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
 import type { Calendar } from '../models/Calendar.ts';
 
 const releasesCalendarSourceLimit = 50;

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { languageTag } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
   import { HEATMAP_MAX_INTENSITY_COUNT } from "./_internal/constants/index.ts";

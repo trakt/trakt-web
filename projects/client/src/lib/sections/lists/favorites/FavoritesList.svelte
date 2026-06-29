@@ -1,8 +1,8 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";

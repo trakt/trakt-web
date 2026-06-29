@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
   import RecentlyWatchedItem from "./RecentlyWatchedItem.svelte";

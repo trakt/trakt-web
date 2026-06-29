@@ -1,6 +1,6 @@
 import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import type { EpisodeActivityHistory } from '$lib/requests/queries/users/episodeActivityHistoryQuery.ts';
 import type { MovieActivityHistory } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import { movieActivityHistoryQuery } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';

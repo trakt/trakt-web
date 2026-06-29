@@ -1,4 +1,4 @@
-import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { WAKING_HOURS_PER_DAY } from '$lib/sections/stats/_internal/constants/index.ts';

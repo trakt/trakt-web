@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";

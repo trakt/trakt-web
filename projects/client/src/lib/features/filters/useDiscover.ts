@@ -10,7 +10,7 @@ import { useSeasonalTheme } from '../theme/useSeasonalTheme.ts';
 import {
   DISCOVER_MODE_PARAM,
   SEASONAL_STORAGE_KEY,
-} from './_internal/constants/index.ts';
+} from './_internal/constants.ts';
 import { getDiscoverContext } from './_internal/getDiscoverContext.ts';
 import type { DiscoverMode } from './models/DiscoverMode.ts';
 

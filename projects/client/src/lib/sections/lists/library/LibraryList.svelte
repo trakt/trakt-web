@@ -2,7 +2,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";

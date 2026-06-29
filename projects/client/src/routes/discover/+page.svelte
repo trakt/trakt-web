@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import SeasonalToggle from "$lib/features/theme/components/SeasonalToggle.svelte";
   import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";

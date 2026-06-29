@@ -1,4 +1,4 @@
-import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import type { RecentlyWatchedType } from '../../stores/useRecentlyWatchedList.ts';
 
 export function toRecentlyWatchedType(

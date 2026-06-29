@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import type { ReleasesCalendarEntry } from "$lib/requests/queries/calendars/releasesCalendarQuery";
   import { getDaysDifference } from "$lib/utils/date/getDaysDifference";
   import { useFilter } from "../filters/useFilter";

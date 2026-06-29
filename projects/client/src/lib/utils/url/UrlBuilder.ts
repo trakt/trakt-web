@@ -2,7 +2,7 @@ import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.t
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import type { PersonalListType } from '$lib/sections/lists/user/models/PersonalListType.ts';
-import type { DiscoverMode } from '../../features/discover/models/DiscoverMode.ts';
+import type { DiscoverMode } from '../../features/filters/models/DiscoverMode.ts';
 import type { CrewPositions } from '../../requests/models/CrewPosition.ts';
 import { SUPPORT_EMAIL } from '../constants.ts';
 import { buildParamString } from './buildParamString.ts';

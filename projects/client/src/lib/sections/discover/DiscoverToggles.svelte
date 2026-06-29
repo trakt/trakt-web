@@ -1,7 +1,7 @@
 <script lang="ts">
   import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { DISCOVER_MODE_PARAM } from "$lib/features/discover/_internal/constants";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { DISCOVER_MODE_PARAM } from "$lib/features/filters/_internal/constants";
+  import { useDiscover } from "$lib/features/filters/useDiscover";
   import GlobalParameterSetter from "$lib/features/parameters/GlobalParameterSetter.svelte";
   import { buildParamString } from "$lib/utils/url/buildParamString";
 

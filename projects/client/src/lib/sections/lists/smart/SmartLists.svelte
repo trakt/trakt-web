@@ -1,7 +1,7 @@
 <script lang="ts">
   import SmartListIcon from "$lib/components/icons/SmartListIcon.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
