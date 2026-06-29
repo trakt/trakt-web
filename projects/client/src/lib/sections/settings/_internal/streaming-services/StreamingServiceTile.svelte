@@ -90,6 +90,7 @@
         size="small"
         label={m.button_label_sync_options()}
         title={m.button_label_sync_options()}
+        mode="standalone"
       >
         {#snippet items()}
           <DropdownItem onclick={() => run(() => actions.sync(connection.id))}>
