@@ -37,14 +37,17 @@
           : m.yir_title_year_in_review()),
   );
 
+  const hasCover = $derived(!!$profile?.cover?.url || !!coverImage);
   const coverSrc = $derived(
     $profile?.cover?.url || coverImage || DEFAULT_COVER,
   );
 </script>
 
 <section class="trakt-yir-title-section" class:is-all-time={isAllTime}>
-  <div class="yir-cover-bg">
-    <CrossOriginImage src={coverSrc} alt="" />
+  <div class="yir-cover-bg" class:has-cover={hasCover}>
+    {#if hasCover}
+      <CrossOriginImage src={coverSrc} alt="" />
+    {/if}
   </div>
   <div class="yir-titles-wrapper">
     <div class="yir-titles">
@@ -103,34 +106,52 @@
   .yir-cover-bg {
     position: absolute;
     inset: 0;
-    // Own stacking context so the top scrim below can layer above the image
-    // (the image is a stacking context via `contain`, so a plain positioned
-    // ::before would otherwise paint under it). Stays below the titles.
-    isolation: isolate;
+    // Default (no cover image): gradient background.
+    background:
+      radial-gradient(
+        ellipse 70% 65% at 25% 52%,
+        var(--purple-700) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        ellipse 50% 45% at 72% 50%,
+        var(--blue-800) 0%,
+        transparent 65%
+      ),
+      var(--color-yir-poster-background);
 
-    :global(img) {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
+    // When a cover image is present, render it and add the top scrim.
+    &.has-cover {
+      background: none;
+      // Own stacking context so the top scrim below can layer above the image
+      // (the image is a stacking context via `contain`, so a plain positioned
+      // ::before would otherwise paint under it). Stays below the titles.
+      isolation: isolate;
 
-    // The fixed header's text is always light on this template, so darken the
-    // top of the cover behind it (fading to transparent) to keep it readable
-    // over bright posters.
-    &::before {
-      content: "";
-      position: absolute;
-      inset-block-start: 0;
-      inset-inline: 0;
-      z-index: var(--layer-base);
-      height: var(--ni-160);
-      background: linear-gradient(
-        to bottom,
-        color-mix(in srgb, var(--shade-1000) 60%, transparent),
-        transparent
-      );
-      pointer-events: none;
+      :global(img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      // The fixed header's text is always light on this template, so darken
+      // the top of the cover behind it (fading to transparent) to keep it
+      // readable over bright posters.
+      &::before {
+        content: "";
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline: 0;
+        z-index: var(--layer-base);
+        height: var(--ni-160);
+        background: linear-gradient(
+          to bottom,
+          color-mix(in srgb, var(--shade-1000) 60%, transparent),
+          transparent
+        );
+        pointer-events: none;
+      }
     }
   }
 
@@ -142,13 +163,17 @@
   }
 
   .yir-titles {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
     background: radial-gradient(
       circle,
       var(--color-yir-poster-surface-raised) 20%,
       var(--color-yir-poster-background) 80%
     );
-    padding: var(--ni-20);
+    padding-inline: var(--ni-20);
+    padding-block: calc(var(--ni-20) * 1.3);
+    border-radius: var(--border-radius-l);
     box-shadow: 0 0 var(--ni-52) var(--color-yir-poster-surface);
 
     @include for-mobile {
@@ -210,7 +235,8 @@
   .yir-under-user {
     width: var(--ni-380);
     max-width: 100%;
-    border-bottom: var(--border-thickness-xxs) dashed var(--color-yir-text-muted);
+    border-bottom: var(--border-thickness-xxs) dashed
+      var(--color-yir-text-muted);
     margin: var(--ni-24) auto var(--ni-6) auto;
 
     @include for-mobile {
@@ -219,14 +245,14 @@
   }
 
   .yir-year {
-    font-size: var(--ni-180);
-    font-weight: normal;
+    font-size: calc(var(--ni-180) * 0.7);
+    font-weight: bold;
     margin: 0;
     line-height: 1;
     color: var(--color-yir-poster-foreground);
 
     @include for-mobile {
-      font-size: var(--ni-104);
+      font-size: calc(var(--ni-104) * 0.7);
     }
 
     // The all-time view shows a word ("All Time") instead of a 4-digit year,
@@ -241,9 +267,12 @@
   }
 
   .yir-subtitle {
-    background-color: var(--color-yir-poster-foreground);
-    color: var(--color-yir-poster-background);
+    background-color: transparent;
+    color: var(--color-yir-poster-foreground);
+    border: var(--border-thickness-xs) solid var(--color-yir-border);
+    border-radius: var(--border-radius-l);
     display: block;
+    width: 70%;
     text-transform: uppercase;
     padding: var(--ni-8) var(--ni-16);
     letter-spacing: 3px;
@@ -310,8 +339,10 @@
 
     .yir-subtitle {
       background: none;
+      border: none;
       color: var(--shade-10);
       padding: 0;
+      width: auto;
       margin-top: var(--ni-12);
       font-size: var(--ni-28);
       letter-spacing: 2px;
