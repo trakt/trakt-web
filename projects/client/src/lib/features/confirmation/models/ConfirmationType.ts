@@ -28,4 +28,5 @@ export enum ConfirmationType {
   UndoSync = 'undo-sync',
   DiscardChanges = 'discard-changes',
   DisconnectPlex = 'disconnect-plex',
+  RevokeApp = 'revoke-app',
 }

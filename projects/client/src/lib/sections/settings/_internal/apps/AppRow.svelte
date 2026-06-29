@@ -3,7 +3,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import type { AppRowProps } from "./AppRowProps.ts";
 
-  const { icon, title, href, children }: AppRowProps = $props();
+  const { icon, title, href, children, action }: AppRowProps = $props();
 </script>
 
 {#snippet body()}
@@ -32,6 +32,9 @@
   {:else}
     <div class="row-surface">
       {@render body()}
+      {#if action}
+        <span class="row-action">{@render action()}</span>
+      {/if}
     </div>
   {/if}
 </div>
@@ -134,5 +137,12 @@
       width: var(--ni-20);
       height: var(--ni-20);
     }
+  }
+
+  .row-action {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
   }
 </style>

@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import { ConnectedAppSchema } from '$lib/requests/models/ConnectedApp.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import {
   type ConnectedAppResponse,
@@ -29,7 +30,7 @@ const connectedAppsRequest = async (
 
 export const connectedAppsQuery = defineQuery({
   key: 'connectedApps',
-  invalidations: [],
+  invalidations: [InvalidateAction.App.Revoke],
   dependencies: () => [],
   request: connectedAppsRequest,
   mapper: (response) => response.body.map(mapToConnectedApp),

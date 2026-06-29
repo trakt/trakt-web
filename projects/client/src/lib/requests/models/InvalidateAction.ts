@@ -33,7 +33,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:hide_recommended:${MediaType}`
   | `${typeof INVALIDATION_ID}:streaming_connection`
   | `${typeof INVALIDATION_ID}:data_sync`
-  | `${typeof INVALIDATION_ID}:plex:${PlexType}`;
+  | `${typeof INVALIDATION_ID}:plex:${PlexType}`
+  | `${typeof INVALIDATION_ID}:app_revoke`;
 
 type TypeDataMap = {
   'auth': null;
@@ -61,6 +62,7 @@ type TypeDataMap = {
   'streaming_connection': null;
   'data_sync': null;
   'plex': PlexType;
+  'app_revoke': null;
 };
 
 export function invalidationId(key?: string) {
@@ -155,5 +157,9 @@ export const InvalidateAction = {
   Plex: {
     Settings: buildInvalidationKey('plex', 'settings'),
     Syncs: buildInvalidationKey('plex', 'syncs'),
+  },
+
+  App: {
+    Revoke: buildInvalidationKey('app_revoke'),
   },
 };
