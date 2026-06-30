@@ -6,7 +6,7 @@
   import { PLACEHOLDERS } from "$lib/utils/assets";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { yirUnit } from "../../_internal/yirUnit.ts";
+  import { yirUnit } from "./yirUnit.ts";
   import YirSectionHeader from "./YirSectionHeader.svelte";
 
   const {

@@ -14,9 +14,17 @@
      * name + plural unit) without re-deriving it from the map's code/value.
      */
     tooltip: Snippet<[CountryTooltipArgs]>;
+    /** CSS color token tinting watched countries; overridable per template. */
+    highlight?: string;
   };
 
-  const { countries, tooltip: tooltipSnippet }: YirCountriesMapProps = $props();
+  const {
+    countries,
+    tooltip: tooltipSnippet,
+    // Default to the primary viz purple so every YIR map matches the charts
+    // (e.g. the release-years bars); a template can still override it.
+    highlight = "var(--viz-1)",
+  }: YirCountriesMapProps = $props();
 
   const data = $derived(
     countries.map((country) => ({ code: country.code, value: country.count })),
@@ -34,7 +42,7 @@
 <CountryMap
   {data}
   --color-map-chart-background="var(--color-yir-surface-raised)"
-  --color-map-chart-highlight="var(--red-500)"
+  --color-map-chart-highlight={highlight}
 >
   {#snippet tooltip({ code })}
     {@const country = countryByCode.get(code)}

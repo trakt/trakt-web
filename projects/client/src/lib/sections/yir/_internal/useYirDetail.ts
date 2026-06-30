@@ -1,12 +1,13 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { yirDetailQuery } from '$lib/requests/queries/users/yirDetailQuery.ts';
+import type { YirYear } from '$lib/requests/models/YirYear.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map } from 'rxjs';
 import { withYirIntlOverlay } from './withYirIntlOverlay.ts';
 
 type UseYirDetailProps = {
   slug: string;
-  year: number;
+  year: YirYear;
 };
 
 export function useYirDetail(props: UseYirDetailProps) {

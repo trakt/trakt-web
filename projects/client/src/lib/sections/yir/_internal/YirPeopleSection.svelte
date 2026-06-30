@@ -2,13 +2,14 @@
   import YirPeopleGroup from "./YirPeopleGroup.svelte";
   import YirPageInner from "./YirPageInner.svelte";
   import { m } from "$lib/paraglide/messages";
+  import type { YirYear } from "$lib/requests/models/YirYear";
 
   const {
     slug,
     year,
   }: {
     slug: string;
-    year: number;
+    year: YirYear;
   } = $props();
 </script>
 
@@ -22,7 +23,16 @@
 </section>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-yir-people-section {
     background-color: var(--color-yir-surface);
+
+    @include for-mobile {
+      // Match the charts' generous mobile side inset.
+      :global(.trakt-yir-people-group) {
+        padding-inline: 5%;
+      }
+    }
   }
 </style>

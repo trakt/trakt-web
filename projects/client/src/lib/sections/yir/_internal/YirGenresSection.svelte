@@ -1,7 +1,7 @@
 <script lang="ts">
   import { m } from "$lib/paraglide/messages";
   import type { YirGenresGroup } from "$lib/requests/models/YirDetail.ts";
-  import YirGenreBars from "../../_internal/YirGenreBars.svelte";
+  import YirGenreBars from "./YirGenreBars.svelte";
   import YirPageInner from "./YirPageInner.svelte";
   import YirSectionHeader from "./YirSectionHeader.svelte";
 
@@ -38,6 +38,11 @@
 
     @include for-mobile {
       padding-bottom: var(--ni-40);
+
+      // Match the charts' generous mobile side inset.
+      :global(.trakt-segmented-bar) {
+        padding-inline: 5%;
+      }
     }
   }
 </style>

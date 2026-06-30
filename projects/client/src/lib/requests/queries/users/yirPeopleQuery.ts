@@ -3,10 +3,11 @@ import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { mapToYirPeople } from '../../_internal/mapToYirPerson.ts';
 import { type YirPeopleType, YirPersonSchema } from '../../models/YirPerson.ts';
+import type { YirYear } from '../../models/YirYear.ts';
 
 export type YirPeopleParams = {
   slug: string;
-  year: number;
+  year: YirYear;
   type: YirPeopleType;
 } & ApiParams;
 
