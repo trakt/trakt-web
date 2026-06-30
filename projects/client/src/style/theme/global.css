@@ -110,4 +110,25 @@
    * Card
    */
   --color-card-border-hover: var(--purple-500);
+
+  /**
+   * Data visualization (theme-independent geometry + timing)
+   *
+   * Colors live in modes.scss (--viz-1..8 etc); these are the shape/size/motion
+   * knobs shared across every chart primitive so a tuning change lands in one
+   * place. `--viz-morph-duration` drives the CSS `transition: d` morph on
+   * lines/areas; `--viz-enter-duration`/`--viz-enter-ease` drive the juicy
+   * spring-style entrance.
+   */
+  --viz-line-width: var(--ni-2);
+  --viz-axis-width: 1px;
+  --viz-dot-radius: var(--ni-4);
+  --viz-bar-radius: var(--border-radius-s);
+  --viz-bar-gap: var(--ni-2);
+  --viz-pattern-stroke-width: 1.5;
+  --viz-pattern-size: var(--ni-6);
+  --viz-morph-duration: var(--transition-increment);
+  --viz-enter-duration: 720ms;
+  --viz-enter-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --viz-glow-blur: var(--ni-12);
 }
