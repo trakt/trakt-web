@@ -3,27 +3,7 @@ import { streamingSourcesQuery } from '$lib/requests/queries/services/streamingS
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { combineLatest, map, type Observable, startWith } from 'rxjs';
 import { buildStreamingServiceOptions } from './buildStreamingServiceOptions.ts';
-
-type StreamingServiceOption = {
-  source: string;
-  name: string;
-  hasLogo: boolean;
-};
-
-type StreamingBrandOption = {
-  key: string;
-  name: string;
-  source: string;
-  color: string | undefined;
-  slugs: string[];
-  hasLogo: boolean;
-};
-
-type StreamingServiceOptions = {
-  all: StreamingServiceOption[];
-  top: StreamingBrandOption[];
-  hasFavorites: boolean;
-};
+import type { StreamingServiceOptions } from './StreamingServiceOptions.ts';
 
 const emptyStreamingServiceOptions: StreamingServiceOptions = {
   all: [],

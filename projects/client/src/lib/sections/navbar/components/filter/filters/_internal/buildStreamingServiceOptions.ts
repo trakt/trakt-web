@@ -1,34 +1,18 @@
 import { getWellKnownSourceGroup } from '$lib/components/media/streaming-service/getWellKnownSourceGroup.ts';
 import { sortStreamingServices } from '$lib/requests/_internal/sortStreamingServices.ts';
 import type { StreamingSource } from '$lib/requests/models/StreamingSource.ts';
+import type {
+  StreamingBrandOption,
+  StreamingServiceOption,
+  StreamingServiceOptions,
+} from './StreamingServiceOptions.ts';
 
 const simpleServiceLimit = 5;
-
-type StreamingServiceOption = {
-  source: string;
-  name: string;
-  hasLogo: boolean;
-};
-
-type StreamingBrandOption = {
-  key: string;
-  name: string;
-  source: string;
-  color: string | undefined;
-  slugs: string[];
-  hasLogo: boolean;
-};
 
 type BuildStreamingServiceOptionsParams = {
   countryCode: string;
   favorites: ReadonlyArray<string>;
   sourceMap: ReadonlyMap<string, ReadonlyArray<StreamingSource>>;
-};
-
-type StreamingServiceOptions = {
-  all: StreamingServiceOption[];
-  top: StreamingBrandOption[];
-  hasFavorites: boolean;
 };
 
 function toServiceOption(source: StreamingSource): StreamingServiceOption {
