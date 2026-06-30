@@ -48,10 +48,12 @@
     const base = displayItems.map((item, index) => {
       const share = ratio({ value: item.value, total });
       const slot = vizSeriesSlot(item.seriesIndex ?? index);
+      const color = item.color ??
+        (item.isOther ? "var(--viz-neutral)" : `var(--viz-${slot})`);
       return {
         ...item,
         index,
-        colorVar: item.isOther ? "--viz-neutral" : `--viz-${slot}`,
+        color,
         percent: Math.round(share * 100),
         grow: item.value > 0 ? Math.max(share, minSegment) : minSegment,
       };
@@ -79,7 +81,7 @@
       <div
         class="segment"
         class:is-below={segment.index % 2 === 1}
-        style="--seg-grow: {segment.grow}; --seg-label-max: {segment.labelMax}; --seg-color: var({segment.colorVar}); --viz-series: var({segment.colorVar}); --i: {segment.index};"
+        style="--seg-grow: {segment.grow}; --seg-label-max: {segment.labelMax}; --seg-color: {segment.color}; --viz-series: {segment.color}; --i: {segment.index};"
       >
         <span class="segment-label">
           <span class="segment-name bold ellipsis">{segment.label}</span>
@@ -99,7 +101,7 @@
   <!-- Mobile fallback: beside-the-bar labels can't fit, so list shares here. -->
   <ul class="segment-legend">
     {#each segments as segment (segment.index)}
-      <li class="legend-row" style="--seg-color: var({segment.colorVar});">
+      <li class="legend-row" style="--seg-color: {segment.color};">
         <span class="legend-swatch"></span>
         <span class="legend-name bold ellipsis">{segment.label}</span>
         {#if segment.sublabel}
@@ -118,8 +120,14 @@
     position: relative;
     width: 100%;
     margin: 0;
+    // Keep horizontal padding (added by consumers on mobile) inside the 100%
+    // width so the full-width bar never overflows the container.
+    box-sizing: border-box;
     // Room above + below the bar for the alternating labels.
     padding-block: var(--ni-44);
+    // Anchor labels/legend to the start so a centered consumer (e.g. the
+    // ratings hero) can't inherit-center them.
+    text-align: start;
   }
 
   .segmented-track {

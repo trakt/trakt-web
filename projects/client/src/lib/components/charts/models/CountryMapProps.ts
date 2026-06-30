@@ -13,4 +13,6 @@ export type CountryMapProps = {
   data: CountryMapDatum[];
   /** Rendered in the hovered country's tooltip. */
   tooltip?: Snippet<[CountryMapTooltipArgs]>;
+  /** Accessible name for the map (screen readers + caption). */
+  label?: string;
 };

@@ -1,16 +1,16 @@
 <script lang="ts">
   import type { YirDetail } from "$lib/requests/models/YirDetail";
-  import YirTotalsSection from "./_internal/YirTotalsSection.svelte";
-  import YirCalendarSection from "./_internal/YirCalendarSection.svelte";
-  import YirStatsSection from "./_internal/YirStatsSection.svelte";
-  import YirMostWatchedSection from "./_internal/YirMostWatchedSection.svelte";
-  import YirGenresSection from "./_internal/YirGenresSection.svelte";
-  import YirNetworksSection from "./_internal/YirNetworksSection.svelte";
-  import YirStudiosSection from "./_internal/YirStudiosSection.svelte";
-  import YirRatedSection from "./_internal/YirRatedSection.svelte";
-  import YirPeopleSection from "./_internal/YirPeopleSection.svelte";
-  import YirTitleSection from "./_internal/YirTitleSection.svelte";
-  import YirUpgradeSection from "./_internal/YirUpgradeSection.svelte";
+  import YirTotalsSection from "../_internal/YirTotalsSection.svelte";
+  import YirCalendarSection from "../_internal/YirCalendarSection.svelte";
+  import YirStatsSection from "../_internal/YirStatsSection.svelte";
+  import YirMostWatchedSection from "../_internal/YirMostWatchedSection.svelte";
+  import YirGenresSection from "../_internal/YirGenresSection.svelte";
+  import YirNetworksSection from "../_internal/YirNetworksSection.svelte";
+  import YirStudiosSection from "../_internal/YirStudiosSection.svelte";
+  import YirRatedSection from "../_internal/YirRatedSection.svelte";
+  import YirPeopleSection from "../_internal/YirPeopleSection.svelte";
+  import YirTitleSection from "../_internal/YirTitleSection.svelte";
+  import YirUpgradeSection from "../_internal/YirUpgradeSection.svelte";
 
   const {
     detail,

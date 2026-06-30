@@ -1,19 +1,30 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
   import { m } from "$lib/paraglide/messages";
-  import type { YirTopRatedItem } from "$lib/requests/models/YirDetail";
+  import type {
+    YirRatingCount,
+    YirTopRatedItem,
+  } from "$lib/requests/models/YirDetail";
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import YirPageInner from "./YirPageInner.svelte";
+  import YirRatingsBar from "./YirRatingsBar.svelte";
   import YirSectionHeader from "./YirSectionHeader.svelte";
 
   const {
     type,
     items,
+    ratingsDistribution,
   }: {
     type: "shows" | "movies";
     items: YirTopRatedItem[];
+    /** All-time only: full 1-10 ratings breakdown shown below the posters. */
+    ratingsDistribution?: YirRatingCount[];
   } = $props();
+
+  const ratingSegments = $derived(
+    (ratingsDistribution ?? []).filter((datum) => datum.count > 0),
+  );
 
   const sectionTitle = $derived(
     type === "shows"
@@ -40,7 +51,7 @@
     ></div>
   {/each}
 
-  <div class="yir-rated-inner">
+  <div class="yir-rated-inner" class:has-ratings={ratingSegments.length > 0}>
     <YirSectionHeader>
       {sectionTitle}
     </YirSectionHeader>
@@ -71,6 +82,16 @@
         {/each}
       </div>
     </YirPageInner>
+
+    {#if ratingSegments.length > 0}
+      <YirSectionHeader>
+        {m.yir_section_title_all_ratings()}
+      </YirSectionHeader>
+
+      <YirPageInner>
+        <YirRatingsBar distribution={ratingSegments} {type} />
+      </YirPageInner>
+    {/if}
   </div>
 </section>
 
@@ -109,13 +130,38 @@
     background-color: var(--color-yir-scrim-soft);
     padding-bottom: var(--ni-72);
 
+    // All-time only: bottom-to-top fade from 70% black to transparent so the
+    // ratings bar sitting there reads clearly against the fanart.
+    &.has-ratings {
+      background-image: linear-gradient(
+        to top,
+        color-mix(in srgb, var(--color-yir-poster-surface) 70%, transparent) 0%,
+        transparent 100%
+      );
+    }
+
     @include for-mobile {
       padding-bottom: var(--ni-40);
+
+      // Match the charts' generous mobile side inset for the ratings bar.
+      :global(.trakt-segmented-bar) {
+        padding-inline: 5%;
+      }
     }
   }
 
   .yir-posters {
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    // Center each row so a partial row (fewer items than a full row, or a
+    // wrapped last row) sits centered instead of hugging the start edge.
+    justify-content: center;
+    gap: var(--ni-16) var(--ni-12);
+
+    // Larger resolutions: up to 10 rated titles per row.
+    > .yir-grid-item {
+      flex: 0 0 calc((100% - 9 * var(--ni-12)) / 10);
+    }
 
     &:hover .yir-grid-item:not(:hover) {
       .yir-poster-img,
@@ -123,26 +169,34 @@
         opacity: 0.3;
       }
     }
-  }
 
-  .yir-grid-item {
-    width: 10%;
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-
-    :global(.trakt-link) {
-      display: block;
-      text-decoration: none;
+    @include for-tablet-sm {
+      > .yir-grid-item {
+        flex: 0 0 calc((100% - 4 * var(--ni-12)) / 5);
+      }
     }
 
     @include for-mobile {
-      width: 20%;
+      // Match the charts' generous mobile side inset.
+      padding-inline: 5%;
+
+      > .yir-grid-item {
+        flex: 0 0 calc((100% - 2 * var(--ni-12)) / 3);
+      }
+    }
+  }
+
+  .yir-grid-item {
+    :global(.trakt-link) {
+      display: block;
+      text-decoration: none;
     }
   }
 
   .yir-poster {
     border: none;
+    border-radius: var(--border-radius-m);
+    overflow: hidden;
     background-color: var(--color-yir-poster-surface);
     box-shadow: 0 0 var(--ni-20) var(--color-yir-poster-surface);
     position: relative;

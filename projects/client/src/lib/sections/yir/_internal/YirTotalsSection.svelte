@@ -7,10 +7,11 @@
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
+  import type { YirYear } from "$lib/requests/models/YirYear";
   import { formatNumber } from "$lib/utils/format/formatNumber";
-  import { yirUnit } from "../../_internal/yirUnit.ts";
   import YirPageInner from "./YirPageInner.svelte";
   import YirSectionHeader from "./YirSectionHeader.svelte";
+  import { yirUnit } from "./yirUnit.ts";
 
   type AllStats = YirStatsCategory & {
     listsCounts: { total: number };
@@ -21,19 +22,25 @@
     year,
   }: {
     stats: AllStats;
-    year: number;
+    year: YirYear;
   } = $props();
 
   const hoursWatched = $derived(Math.round(stats.minutes.total / 60));
+
+  const heading = $derived(
+    year === "all"
+      ? m.yir_section_title_all_time_totals()
+      : m.yir_section_title_totals({ year }),
+  );
 </script>
 
 <section class="trakt-yir-totals-section" id="section-totals">
   <YirPageInner>
     <YirSectionHeader>
-      {m.yir_section_title_totals({ year })}
+      {heading}
     </YirSectionHeader>
 
-    <div class="yir-stats-row">
+    <div class="yir-stats-grid">
       <div class="yir-stat">
         <span class="yir-stat-number">
           {formatNumber(stats.playCounts.total)}
@@ -63,16 +70,18 @@
           {m.yir_label_collected()}
         </span>
       </div>
-    </div>
 
-    <div class="yir-stats-row">
       <div class="yir-stat">
         <span class="yir-stat-number">
           {formatNumber(stats.ratingsCounts.total)}
         </span>
         <span class="yir-stat-unit">
           <span class="yir-stat-icon"><FavoriteIcon state="filled" /></span>
-          {yirUnit(stats.ratingsCounts.total, m.yir_unit_rating, m.yir_unit_ratings)}
+          {yirUnit(
+            stats.ratingsCounts.total,
+            m.yir_unit_rating,
+            m.yir_unit_ratings,
+          )}
         </span>
       </div>
 
@@ -82,7 +91,11 @@
         </span>
         <span class="yir-stat-unit">
           <span class="yir-stat-icon"><CommentIcon style="filled" /></span>
-          {yirUnit(stats.commentsCounts.total, m.yir_unit_comment, m.yir_unit_comments)}
+          {yirUnit(
+            stats.commentsCounts.total,
+            m.yir_unit_comment,
+            m.yir_unit_comments,
+          )}
         </span>
       </div>
 
@@ -107,14 +120,12 @@
     padding-bottom: var(--ni-72);
   }
 
-  .yir-stats-row {
-    display: flex;
-    justify-content: center;
-    padding: 0 20% var(--ni-40) 20%;
-
-    &:last-child {
-      padding-bottom: var(--ni-20);
-    }
+  .yir-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--gap-l);
+    row-gap: var(--ni-40);
+    padding: 0 20% var(--ni-20) 20%;
 
     @include for-tablet-sm-and-below {
       padding-inline-start: 10%;
@@ -128,7 +139,6 @@
   }
 
   .yir-stat {
-    flex: 1;
     text-align: center;
   }
 

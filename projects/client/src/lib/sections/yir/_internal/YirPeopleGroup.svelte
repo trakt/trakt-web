@@ -6,11 +6,12 @@
     YirPeopleType,
     YirPerson,
   } from "$lib/requests/models/YirPerson";
+  import type { YirYear } from "$lib/requests/models/YirYear";
   import { PLACEHOLDERS } from "$lib/utils/assets";
   import { DEFAULT_AVATAR } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { useYirPeople } from "../../_internal/useYirPeople";
-  import { yirUnit } from "../../_internal/yirUnit.ts";
+  import { useYirPeople } from "./useYirPeople.ts";
+  import { yirUnit } from "./yirUnit.ts";
   import YirSectionHeader from "./YirSectionHeader.svelte";
 
   const {
@@ -20,7 +21,7 @@
     label,
   }: {
     slug: string;
-    year: number;
+    year: YirYear;
     type: YirPeopleType;
     label: string;
   } = $props();

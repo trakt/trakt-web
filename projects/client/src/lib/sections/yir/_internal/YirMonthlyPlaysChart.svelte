@@ -3,9 +3,9 @@
   import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/paraglide/messages";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
-  import { yirUnit } from "../../_internal/yirUnit.ts";
+  import { yirUnit } from "./yirUnit.ts";
   import { setMonth } from "date-fns/setMonth";
-  import YirTooltip from "../../_internal/YirTooltip.svelte";
+  import YirTooltip from "./YirTooltip.svelte";
 
   const { data }: { data: number[] } = $props();
 
