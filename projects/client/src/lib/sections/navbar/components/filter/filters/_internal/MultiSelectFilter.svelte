@@ -15,7 +15,14 @@
   const {
     filter,
     disabled = false,
-  }: { filter: AdvancedMultiSelectFilter; disabled?: boolean } = $props();
+    searchPlaceholder,
+    emptyLabel,
+  }: {
+    filter: AdvancedMultiSelectFilter;
+    disabled?: boolean;
+    searchPlaceholder?: string;
+    emptyLabel?: string;
+    } = $props();
 
   const { getFilterValue } = useFilter();
   const currentValueRaw = $derived(getFilterValue(filter.key));
@@ -41,6 +48,7 @@
     (filter.advanced.options ?? filter.options).map((option) => ({
       label: option.label(),
       value: option.value,
+      icon: option.icon,
       // "My Favorites" expands to a saved set; excluding it is not meaningful.
       excludable: option.value !== "favorites",
     })),
@@ -61,6 +69,8 @@
     excluded={selection.excluded}
     placeholder={m.option_text_all()}
     {disabled}
+    {searchPlaceholder}
+    {emptyLabel}
     {onChange}
   />
 </Filter>

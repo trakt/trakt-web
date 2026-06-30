@@ -7,5 +7,7 @@ export type MultiSelectProps = {
   excluded?: string[];
   placeholder: string;
   disabled?: boolean;
+  searchPlaceholder?: string;
+  emptyLabel?: string;
   onChange: (selection: MultiSelectSelection) => void;
 };

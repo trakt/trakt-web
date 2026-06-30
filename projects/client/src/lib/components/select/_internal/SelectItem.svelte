@@ -7,15 +7,9 @@
   import type { MultiSelectState } from "../models/MultiSelectState.ts";
   import type { SelectItemProps } from "./SelectItemProps.ts";
 
-  const {
-    value,
-    label,
-    state,
-    excludable = true,
-    onCommit,
-  }: SelectItemProps = $props();
+  const { option, state, onCommit }: SelectItemProps = $props();
 
-  const hasToggle = $derived(onCommit != null && excludable);
+  const hasToggle = $derived(onCommit != null && (option.excludable ?? true));
 
   // Keep the pointer sequence from reaching the row so bits-ui does not also
   // toggle selection - the buttons are the single source of truth.
@@ -35,8 +29,8 @@
     class:is-include={target === "included"}
     class:is-exclude={target === "excluded"}
     aria-label={target === "included"
-      ? m.button_label_include_option({ label })
-      : m.button_label_exclude_option({ label })}
+      ? m.button_label_include_option({ label: option.label })
+      : m.button_label_exclude_option({ label: option.label })}
     aria-pressed={state === target}
     onpointerdown={block}
     onpointerup={block}
@@ -50,23 +44,26 @@
   </button>
 {/snippet}
 
-<Select.Item {value} {label}>
+<Select.Item value={option.value} label={option.label}>
   {#snippet child({ props, selected })}
     <div
       {...props}
       class="trakt-select-item"
-      class:has-toggle={hasToggle}
       class:is-excluded={state === "excluded"}
       data-state={state ?? "none"}
       aria-label={state === "excluded"
-        ? m.option_label_excluded({ label })
+        ? m.option_label_excluded({ label: option.label })
         : undefined}
     >
       {#if hasToggle}
         {@render sideToggle("included")}
       {/if}
 
-      <span class="ellipsis capitalize">{label}</span>
+      {@render option.icon?.(option)}
+
+      <span class="trakt-select-item-label ellipsis capitalize">
+        {option.label}
+      </span>
 
       {#if hasToggle}
         {@render sideToggle("excluded")}
@@ -84,6 +81,7 @@
     --color-background-item-hover: var(--shade-60);
     --color-foreground-item: var(--shade-700);
     --select-item-height: var(--ni-40);
+    --select-item-toggle-size: var(--ni-24);
 
     display: flex;
     align-items: center;
@@ -117,22 +115,12 @@
       background-color: var(--color-background-item-hover);
     }
 
-    /* label sits between two fixed side slots so it never shifts */
-    &.has-toggle {
-      display: grid;
-      grid-template-columns: var(--ni-24) 1fr var(--ni-24);
-      gap: var(--gap-s);
-    }
-
-    &.is-excluded .ellipsis {
+    &.is-excluded .trakt-select-item-label {
       color: var(--red-500);
       text-decoration: line-through;
     }
 
-    .ellipsis {
-      text-align: start;
-    }
-
+    /* label sits between two fixed side slots so it never shifts */
     .toggle-side {
       all: unset;
 
@@ -140,9 +128,10 @@
       align-items: center;
       justify-content: center;
 
-      width: var(--ni-24);
-      height: var(--ni-24);
+      width: var(--select-item-toggle-size);
+      height: var(--select-item-toggle-size);
       box-sizing: border-box;
+      flex-shrink: 0;
 
       border-radius: var(--border-radius-xs);
       cursor: pointer;
@@ -184,4 +173,11 @@
       flex-shrink: 0;
     }
   }
+
+  .trakt-select-item-label {
+    flex: 1;
+    min-width: 0;
+    text-align: start;
+  }
+
 </style>

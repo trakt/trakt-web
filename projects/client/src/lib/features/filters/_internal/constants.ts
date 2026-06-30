@@ -74,6 +74,7 @@ const STREAMING_FILTER: Filter = {
       label: m.option_text_streaming_now,
       value: 'subscriptions',
     },
+    { label: m.list_title_streaming_free, value: 'free' },
     { label: m.option_text_all_digital_releases, value: 'any' },
   ],
   advanced: {

@@ -1,4 +1,6 @@
+import type { SelectOption } from '$lib/components/select/models/SelectOption.ts';
 import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
+import type { Snippet } from 'svelte';
 import type { FilterKey } from './Filter.ts';
 
 type FilterValueMapper = {
@@ -17,6 +19,7 @@ type MultiKeyFilter = {
 export type FilterOption = {
   label: () => string;
   value: string;
+  icon?: Snippet<[SelectOption]>;
 } & FilterValueMapper;
 
 export type SliderOption = {

@@ -1,38 +1,45 @@
 <script lang="ts">
-  import {
-    type Filter,
-    FilterKey,
-    type ListFilter as ListFilterModel,
-  } from "$lib/features/filters/models/Filter";
-  import { useFilter } from "$lib/features/filters/useFilter";
+  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
+  import type { ListFilter as ListFilterModel } from "$lib/features/filters/models/Filter.ts";
   import ListFilter from "../ListFilter.svelte";
-  import { useStreamingServiceOptions } from "./useStreamingServiceOptions";
+  import { omitEmptyFavoritesOption } from "./omitEmptyFavoritesOption.ts";
+  import StreamingServiceSelectLogo from "./StreamingServiceSelectLogo.svelte";
+  import { useStreamingServiceOptions } from "./useStreamingServiceOptions.ts";
 
-  const { filters } = useFilter();
+  const { filter }: { filter: ListFilterModel } = $props();
 
-  const isStreamingFilter = (filter: Filter): filter is ListFilterModel =>
-    filter.key === FilterKey.Streaming && filter.type === "list";
-
-  const baseFilter = $derived(filters.find(isStreamingFilter));
+  const toBrandValue = (slugs: ReadonlyArray<string>) => slugs.join(",");
 
   const options = useStreamingServiceOptions();
-
-  const augmentedFilter = $derived(
-    baseFilter
-      ? {
-        ...baseFilter,
-        options: [
-          ...baseFilter.options,
-          ...$options.top.map((brand) => ({
-            label: () => brand.name,
-            value: brand.slugs.join(","),
-          })),
-        ],
-      }
-      : undefined,
+  const baseOptions = $derived(
+    omitEmptyFavoritesOption(filter.options, $options.hasFavorites),
   );
+  const logoSources = $derived(
+    new Map(
+      $options.top
+        .filter((brand) => brand.hasLogo)
+        .map((brand) => [toBrandValue(brand.slugs), brand.source]),
+    ),
+  );
+
+  const augmentedFilter = $derived.by((): ListFilterModel => ({
+    ...filter,
+    options: [
+      ...baseOptions,
+      ...$options.top.map((brand) => ({
+        label: () => brand.name,
+        value: toBrandValue(brand.slugs),
+        icon: brand.hasLogo ? serviceLogo : undefined,
+      })),
+    ],
+  }));
 </script>
 
-{#if augmentedFilter}
-  <ListFilter filter={augmentedFilter} />
-{/if}
+{#snippet serviceLogo(option: SelectOption)}
+  {@const source = logoSources.get(option.value)}
+  {#if source}
+    <StreamingServiceSelectLogo {source} />
+  {/if}
+{/snippet}
+
+<ListFilter filter={augmentedFilter} />
