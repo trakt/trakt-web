@@ -60,6 +60,13 @@ export const DESIGN_SYSTEM_GROUPS: DesignSystemGroup[] = [
         kind: 'Component',
       },
       {
+        title: 'Charts',
+        href: '/_design_system/charts',
+        description:
+          'Data-viz primitives, distribution-bar + KPI-tile bases, and the shared VizPoint contract.',
+        kind: 'Component',
+      },
+      {
         title: 'Drawers',
         href: '/_design_system/drawers',
         description: 'Drawer sizes, overlay headers, and VIP variants.',
