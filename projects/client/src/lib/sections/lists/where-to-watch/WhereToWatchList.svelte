@@ -58,7 +58,7 @@
 {/snippet}
 
 {#if isAired}
-  <div transition:slide={{ duration: 150 }}>
+  <div transition:slide={{ duration: 150 }} class="trakt-where-to-watch-list">
     <SectionList
       id={{
         scope: `where-to-watch-list-${target.type}`,
@@ -86,3 +86,12 @@
     </SectionList>
   </div>
 {/if}
+
+<style>
+  .trakt-where-to-watch-list {
+    /* The default is overridden because the meta info has an icon and needs a bigger gap */
+    :global(.trakt-list-title) {
+      gap: var(--gap-xs);
+    }
+  }
+</style>
