@@ -417,6 +417,8 @@
   "button_text_younify_fix": "رفع",
   "button_text_younify_send_logs": "ارسال گزارش‌ها",
   "button_text_younify_unlink": "قطع پیوند",
+  "chart_label_grouped_categories": "{count} دسته‌بندی",
+  "chart_label_other": "دیگر",
   "clear_status_clearing": "در حال پاک کردن {processed} / {total} آیتم…",
   "clear_status_source_cleared": "{source} پاک شد.",
   "confirmation_message_disconnect_plex": "این کار همگام‌سازی کتابخانه Plex شما را متوقف می‌کند. هر زمان که خواستید می‌توانید دوباره متصل شوید.",

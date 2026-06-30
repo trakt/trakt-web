@@ -417,6 +417,8 @@
   "button_text_younify_fix": "修复",
   "button_text_younify_send_logs": "发送日志",
   "button_text_younify_unlink": "取消关联",
+  "chart_label_grouped_categories": "{count} 条类别",
+  "chart_label_other": "其他",
   "clear_status_clearing": "正在清除 {processed} / {total} 个项目…",
   "clear_status_source_cleared": "{source} 已清除。",
   "confirmation_message_disconnect_plex": "这将停止同步您的Plex媒体库。您可以随时重新连接。",

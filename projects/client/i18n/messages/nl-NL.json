@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Repareer",
   "button_text_younify_send_logs": "Logs verzenden",
   "button_text_younify_unlink": "Ontkoppelen",
+  "chart_label_grouped_categories": "{count} categorieën",
+  "chart_label_other": "Overig",
   "clear_status_clearing": "{processed} / {total} items worden gewist…",
   "clear_status_source_cleared": "{source} gewist.",
   "confirmation_message_disconnect_plex": "Dit stopt het synchroniseren van je Plex-bibliotheek. Je kunt op elk moment opnieuw verbinding maken.",

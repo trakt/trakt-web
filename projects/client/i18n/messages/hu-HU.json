@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Javítás",
   "button_text_younify_send_logs": "Naplók küldése",
   "button_text_younify_unlink": "Leválasztás",
+  "chart_label_grouped_categories": "{count} kategóriák",
+  "chart_label_other": "Egyéb",
   "clear_status_clearing": "{processed} / {total} elem törlése...",
   "clear_status_source_cleared": "{source} törölve.",
   "confirmation_message_disconnect_plex": "Ez leállítja a Plex könyvtár szinkronizálását. Bármikor újra csatlakoztathatja.",

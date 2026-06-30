@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Επιδιόρθωση",
   "button_text_younify_send_logs": "Αποστολή Καταγραφών",
   "button_text_younify_unlink": "Αποσύνδεση",
+  "chart_label_grouped_categories": "{count} κατηγορίες",
+  "chart_label_other": "Άλλο",
   "clear_status_clearing": "Εκκαθάριση {processed} / {total} στοιχείων…",
   "clear_status_source_cleared": "Το {source} εκκαθαρίστηκε.",
   "confirmation_message_disconnect_plex": "Αυτό θα σταματήσει τον συγχρονισμό της βιβλιοθήκης σας Plex. Μπορείτε να επανασυνδεθείτε ανά πάσα στιγμή.",

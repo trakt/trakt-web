@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Åtgärda",
   "button_text_younify_send_logs": "Skicka loggar",
   "button_text_younify_unlink": "Avlänka",
+  "chart_label_grouped_categories": "{count} kategorier",
+  "chart_label_other": "Övrigt",
   "clear_status_clearing": "Rensar {processed} / {total} objekt…",
   "clear_status_source_cleared": "{source} har rensats.",
   "confirmation_message_disconnect_plex": "Detta kommer att stoppa synkroniseringen av ditt Plex-bibliotek. Du kan återansluta när som helst.",

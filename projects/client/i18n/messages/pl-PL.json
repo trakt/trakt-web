@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Napraw",
   "button_text_younify_send_logs": "Wyślij logi",
   "button_text_younify_unlink": "Rozłącz",
+  "chart_label_grouped_categories": "{count} kategorie",
+  "chart_label_other": "Inne",
   "clear_status_clearing": "Usuwanie... {processed} / {total}",
   "clear_status_source_cleared": "Wyczyszczono: {source}.",
   "confirmation_message_disconnect_plex": "Spowoduje to zatrzymanie synchronizacji Twojej biblioteki Plex. Możesz ponownie połączyć w dowolnym momencie.",

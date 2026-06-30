@@ -417,6 +417,8 @@
   "button_text_younify_fix": "修正",
   "button_text_younify_send_logs": "ログを送信",
   "button_text_younify_unlink": "リンク解除",
+  "chart_label_grouped_categories": "{count}件のカテゴリ",
+  "chart_label_other": "その他",
   "clear_status_clearing": "{processed} / {total}項目をクリア中…",
   "clear_status_source_cleared": "{source}をクリアしました。",
   "confirmation_message_disconnect_plex": "これにより、Plexライブラリの同期が停止されます。いつでも再接続できます。",

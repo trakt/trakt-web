@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Perbaiki",
   "button_text_younify_send_logs": "Kirim Log",
   "button_text_younify_unlink": "Lepas Tautan",
+  "chart_label_grouped_categories": "{count} kategori",
+  "chart_label_other": "Lain-lain",
   "clear_status_clearing": "Menghapus {processed} / {total} item…",
   "clear_status_source_cleared": "{source} telah dihapus.",
   "confirmation_message_disconnect_plex": "Ini akan menghentikan sinkronisasi perpustakaan Plex Anda. Anda dapat terhubung kembali kapan saja.",

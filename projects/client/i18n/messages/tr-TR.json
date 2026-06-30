@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Düzelt",
   "button_text_younify_send_logs": "Günlükleri Gönder",
   "button_text_younify_unlink": "Bağlantıyı Kes",
+  "chart_label_grouped_categories": "{count} kategori",
+  "chart_label_other": "Diğer",
   "clear_status_clearing": "{processed} / {total} öğe temizleniyor…",
   "clear_status_source_cleared": "{source} temizlendi.",
   "confirmation_message_disconnect_plex": "Bu işlem, Plex kütüphanenizin senkronizasyonunu durduracaktır. İstediğiniz zaman yeniden bağlanabilirsiniz.",

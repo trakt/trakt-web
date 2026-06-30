@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Réparer",
   "button_text_younify_send_logs": "Envoyer les journaux",
   "button_text_younify_unlink": "Dissocier",
+  "chart_label_grouped_categories": "{count} catégories",
+  "chart_label_other": "Autre",
   "clear_status_clearing": "Vidage de {processed} / {total} éléments…",
   "clear_status_source_cleared": "{source} vidé.",
   "confirmation_message_disconnect_plex": "Ceci arrêtera la synchronisation de votre bibliothèque Plex. Vous pourrez vous reconnecter à tout moment.",

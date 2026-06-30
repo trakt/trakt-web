@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Виправити",
   "button_text_younify_send_logs": "Надіслати журнали",
   "button_text_younify_unlink": "Відв'язати",
+  "chart_label_grouped_categories": "{count} категорій",
+  "chart_label_other": "Інше",
   "clear_status_clearing": "Очищення {processed} / {total} елементів…",
   "clear_status_source_cleared": "{source} очищено.",
   "confirmation_message_disconnect_plex": "Це припинить синхронізацію вашої бібліотеки Plex. Ви можете підключитися знову в будь-який час.",

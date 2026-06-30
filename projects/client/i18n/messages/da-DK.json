@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Ret",
   "button_text_younify_send_logs": "Send logfiler",
   "button_text_younify_unlink": "Frakobl",
+  "chart_label_grouped_categories": "{count} kategorier",
+  "chart_label_other": "Andet",
   "clear_status_clearing": "Rydder {processed} / {total} elementer…",
   "clear_status_source_cleared": "{source} ryddet.",
   "confirmation_message_disconnect_plex": "Dette vil stoppe synkroniseringen af dit Plex-bibliotek. Du kan genoprette forbindelse når som helst.",

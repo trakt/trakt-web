@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Reparieren",
   "button_text_younify_send_logs": "Logs senden",
   "button_text_younify_unlink": "Entknüpfen",
+  "chart_label_grouped_categories": "{count} Kategorien",
+  "chart_label_other": "Andere",
   "clear_status_clearing": "Es werden {processed} / {total} Elemente geleert…",
   "clear_status_source_cleared": "{source} geleert.",
   "confirmation_message_disconnect_plex": "Dadurch wird die Synchronisierung Ihrer Plex-Bibliothek beendet. Sie können die Verbindung jederzeit wiederherstellen.",

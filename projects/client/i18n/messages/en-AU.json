@@ -417,6 +417,8 @@
   "button_text_younify_fix": "Fix",
   "button_text_younify_send_logs": "Send Logs",
   "button_text_younify_unlink": "Unlink",
+  "chart_label_grouped_categories": "{count} categories",
+  "chart_label_other": "Other",
   "clear_status_clearing": "Clearing {processed} / {total} items…",
   "clear_status_source_cleared": "{source} cleared.",
   "confirmation_message_disconnect_plex": "This will stop syncing your Plex library. You can reconnect at any time.",
