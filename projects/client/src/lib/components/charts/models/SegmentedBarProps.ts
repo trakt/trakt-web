@@ -18,4 +18,11 @@ export type SegmentedBarProps = {
    * visible + labelable. Defaults to 0.04.
    */
   minSegment?: number;
+  /**
+   * Cap on rendered segments (including the rolled-up "Other" bucket). When
+   * `items` exceeds this, the smallest-by-value categories collapse into a
+   * single trailing "Other" segment so the bar never degrades into unreadable
+   * slivers. Defaults to 8.
+   */
+  maxSegments?: number;
 };
