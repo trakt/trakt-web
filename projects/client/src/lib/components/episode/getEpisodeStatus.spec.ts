@@ -3,7 +3,7 @@ import {
   EpisodePremiereType,
 } from '$lib/requests/models/EpisodeType.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { getEpisodeStatus } from './getEpisodeStatus.ts';
 
 describe('getEpisodeStatus', () => {
@@ -80,11 +80,11 @@ describe('getEpisodeStatus', () => {
     });
 
     it('returns "new" for episodes released exactly 7 days ago', () => {
+      vi.useFakeTimers();
       const sevenDaysAgo = new Date(Date.now() - time.days(7));
-
-      expect(
-        getEpisodeStatus('standard', { releaseDate: sevenDaysAgo }),
-      ).toBe('new');
+      const result = getEpisodeStatus('standard', { releaseDate: sevenDaysAgo });
+      vi.useRealTimers();
+      expect(result).toBe('new');
     });
 
     it('returns undefined for episodes released more than 7 days ago', () => {

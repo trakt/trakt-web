@@ -4,14 +4,13 @@
   import { useQuery } from "$lib/features/query/useQuery";
   import { m } from "$lib/paraglide/messages";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
-  import { DEFAULT_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { map } from "rxjs";
 
   const {
     slug,
     year,
-    coverImage,
+    coverImage: _,
   }: {
     slug: string;
     year: number;
@@ -26,16 +25,10 @@
   const subtitle = $derived(
     isCurrentYear ? m.yir_title_year_to_date() : m.yir_title_year_in_review(),
   );
-
-  const coverSrc = $derived(
-    $profile?.cover?.url || coverImage || DEFAULT_COVER,
-  );
 </script>
 
 <section class="trakt-yir-title-section">
-  <div class="yir-cover-bg">
-    <CrossOriginImage src={coverSrc} alt="" />
-  </div>
+  <div class="yir-cover-bg"></div>
   <div class="yir-titles-wrapper">
     <div class="yir-titles">
       {#if $profile}
@@ -82,13 +75,18 @@
   .yir-cover-bg {
     position: absolute;
     inset: 0;
-
-    :global(img) {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
+    background:
+      radial-gradient(
+        ellipse 70% 65% at 25% 52%,
+        var(--purple-700) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        ellipse 50% 45% at 72% 50%,
+        var(--blue-800) 0%,
+        transparent 65%
+      ),
+      var(--shade-950);
   }
 
   .yir-titles-wrapper {
@@ -99,13 +97,17 @@
   }
 
   .yir-titles {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
     background: radial-gradient(
       circle,
       var(--shade-900) 20%,
       var(--shade-950) 80%
     );
-    padding: var(--ni-20);
+    padding-inline: var(--ni-20);
+    padding-block: calc(var(--ni-20) * 1.3);
+    border-radius: var(--border-radius-l);
     box-shadow: 0 0 var(--ni-52) var(--shade-1000);
 
     @include for-mobile {
@@ -176,21 +178,24 @@
   }
 
   .yir-year {
-    font-size: var(--ni-180);
-    font-weight: normal;
+    font-size: calc(var(--ni-180) * 0.7);
+    font-weight: bold;
     margin: 0;
     line-height: 1;
     color: var(--shade-10);
 
     @include for-mobile {
-      font-size: var(--ni-104);
+      font-size: calc(var(--ni-104) * 0.7);
     }
   }
 
   .yir-subtitle {
-    background-color: var(--shade-10);
-    color: var(--shade-950);
+    background-color: transparent;
+    color: var(--shade-10);
+    border: var(--border-thickness-xs) solid var(--shade-10);
+    border-radius: var(--border-radius-l);
     display: block;
+    width: 70%;
     text-transform: uppercase;
     padding: var(--ni-8) var(--ni-16);
     letter-spacing: 3px;
