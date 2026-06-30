@@ -6,6 +6,7 @@ import { PostCreditsSchema } from './PostCreditsSchema.ts';
 
 const BaseEpisodeEntrySchema = z.object({
   id: z.number(),
+  imdbId: z.string().nullish(),
   key: z.string(),
   season: z.number(),
   number: z.number(),

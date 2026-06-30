@@ -7,4 +7,5 @@ export enum FeatureFlag {
   SocialActivities = 'social-activities',
   PlexSync = 'plex-sync',
   SmartRelated = 'smart-related',
+  ParentalGuide = 'parental-guide',
 }

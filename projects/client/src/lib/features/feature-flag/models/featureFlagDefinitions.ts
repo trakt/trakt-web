@@ -2,6 +2,7 @@ import BrainIcon from '$lib/components/icons/BrainIcon.svelte';
 import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
+import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PlexLibraryIcon from '$lib/components/icons/PlexLibraryIcon.svelte';
 import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
 import TrackIcon from '$lib/components/icons/TrackIcon.svelte';
@@ -103,6 +104,12 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     icon: BrainIcon,
     title: () => m.preview_feature_title_smart_related(),
     description: () => m.preview_feature_description_smart_related(),
+    audience: 'director',
+  },
+  [FeatureFlag.ParentalGuide]: {
+    icon: NoSpoilerIcon,
+    title: () => m.option_text_certification_parental_guidance(),
+    description: () => m.preview_feature_description_parental_guide(),
     audience: 'director',
   },
 };
