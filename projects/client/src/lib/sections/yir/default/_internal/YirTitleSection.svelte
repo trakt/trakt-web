@@ -69,12 +69,21 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-yir-title-section {
+    // Poster hero: cover image + dark panel + white text in both themes.
+    // Pin the shared chrome tokens (consumed by YirSectionHeader and the
+    // text below) to their always-dark poster values so the overlay stays
+    // legible regardless of the active theme.
+    --color-yir-text-primary: var(--color-yir-poster-foreground);
+    --color-yir-border: var(--color-yir-poster-foreground);
+    --color-yir-title-chip-background: var(--color-yir-scrim);
+
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     min-height: 100dvh;
-    background-color: var(--shade-950);
+    background-color: var(--color-yir-poster-background);
+    color: var(--color-yir-poster-foreground);
     position: relative;
     overflow: hidden;
   }
@@ -102,11 +111,11 @@
     display: inline-block;
     background: radial-gradient(
       circle,
-      var(--shade-900) 20%,
-      var(--shade-950) 80%
+      var(--color-yir-poster-surface-raised) 20%,
+      var(--color-yir-poster-background) 80%
     );
     padding: var(--ni-20);
-    box-shadow: 0 0 var(--ni-52) var(--shade-1000);
+    box-shadow: 0 0 var(--ni-52) var(--color-yir-poster-surface);
 
     @include for-mobile {
       max-width: 80%;
@@ -133,8 +142,8 @@
     width: var(--ni-40);
     height: var(--ni-40);
     border-radius: 50%;
-    border: var(--border-thickness-xs) solid var(--shade-10);
-    background-color: var(--shade-10);
+    border: var(--border-thickness-xs) solid var(--color-yir-poster-foreground);
+    background-color: var(--color-yir-poster-foreground);
     overflow: hidden;
 
     :global(img) {
@@ -155,7 +164,7 @@
     font-size: var(--ni-24);
 
     :global(.trakt-link) {
-      color: var(--shade-10);
+      color: var(--color-yir-poster-foreground);
       text-decoration: none;
     }
 
@@ -167,7 +176,7 @@
   .yir-under-user {
     width: var(--ni-380);
     max-width: 100%;
-    border-bottom: var(--border-thickness-xxs) dashed var(--shade-500);
+    border-bottom: var(--border-thickness-xxs) dashed var(--color-yir-text-muted);
     margin: var(--ni-24) auto var(--ni-6) auto;
 
     @include for-mobile {
@@ -180,7 +189,7 @@
     font-weight: normal;
     margin: 0;
     line-height: 1;
-    color: var(--shade-10);
+    color: var(--color-yir-poster-foreground);
 
     @include for-mobile {
       font-size: var(--ni-104);
@@ -188,8 +197,8 @@
   }
 
   .yir-subtitle {
-    background-color: var(--shade-10);
-    color: var(--shade-950);
+    background-color: var(--color-yir-poster-foreground);
+    color: var(--color-yir-poster-background);
     display: block;
     text-transform: uppercase;
     padding: var(--ni-8) var(--ni-16);

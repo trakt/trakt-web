@@ -161,7 +161,7 @@
     padding: var(--ni-20) var(--ni-10);
 
     background: transparent;
-    color: var(--shade-10);
+    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
 
     transition:
       background-color 0.2s,
@@ -206,13 +206,13 @@
     padding: var(--ni-8);
     background: none;
     border: none;
-    color: var(--shade-10);
+    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
     cursor: pointer;
     text-decoration: none;
     transition: color 0.2s;
 
     &:hover:not(.disabled) {
-      color: var(--purple-300);
+      color: var(--color-yir-text-accent);
     }
 
     &.disabled {
@@ -241,7 +241,7 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
-    color: var(--shade-10);
+    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
     text-decoration: none;
     min-width: 0;
   }
@@ -251,7 +251,7 @@
     height: var(--ni-28);
     border-radius: 50%;
     overflow: hidden;
-    background: var(--shade-800);
+    background: var(--color-yir-surface-chip);
     flex-shrink: 0;
 
     :global(img) {
@@ -277,12 +277,12 @@
     padding: var(--ni-8);
     background: none;
     border: none;
-    color: var(--shade-10);
+    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
     cursor: pointer;
     transition: color 0.2s;
 
     &:hover {
-      color: var(--purple-300);
+      color: var(--color-yir-text-accent);
     }
 
     :global(svg) {

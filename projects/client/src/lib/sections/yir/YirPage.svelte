@@ -9,7 +9,11 @@
   const Template = $derived(getYirTemplate(year));
 </script>
 
-<div class="trakt-yir-page" id="year-in-review">
+<div
+  class="trakt-yir-page"
+  class:is-2024-template={year === 2024}
+  id="year-in-review"
+>
   <YirHeader {slug} {year} />
   <!-- Always mount the template so its scaffold (header text, hero shell)
        paints immediately; detail-dependent sections inside the template
@@ -28,17 +32,13 @@
   .trakt-yir-page {
     display: flex;
     flex-direction: column;
-    background-color: var(--shade-950);
-    color: var(--shade-10);
+    background-color: var(--color-yir-background);
+    color: var(--color-yir-text-primary);
     overflow-x: hidden;
 
-    // YIR is rendered with a dark backdrop regardless of user theme.
-    // These overrides force chart colors to stay legible.
-    --color-bar-custom-default: var(--shade-300);
-    --color-bar-custom-highlight: var(--shade-10);
-    --color-bar-custom-hover: var(--red-700);
-    --color-bar-chart-text-primary: var(--shade-10);
-    --color-bar-chart-text-secondary: var(--shade-500);
+    // The fixed header floats over the hero. The default template's hero is a
+    // dark poster in both themes, so the header text stays white there.
+    --color-yir-header-foreground: var(--color-yir-poster-foreground);
 
     // YIR-only: account for the side navbar's outer margin (gap-s on each
     // side, see SideNavbar.svelte) so the visible gap on the right of the
@@ -50,5 +50,11 @@
     @include for-tablet-sm-and-below {
       --layout-sidebar-distance: 0;
     }
+  }
+
+  // The 2024 template's hero is theme-aware (not a dark poster), so the
+  // header text must track the theme to stay legible over the light hero.
+  .trakt-yir-page.is-2024-template {
+    --color-yir-header-foreground: var(--color-yir-text-primary);
   }
 </style>

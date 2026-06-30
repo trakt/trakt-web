@@ -39,7 +39,7 @@
     justify-content: space-between;
     gap: var(--gap-m);
 
-    color: var(--shade-10);
+    color: var(--color-review-foreground);
 
     height: var(--ni-56);
 
@@ -48,8 +48,8 @@
 
     background: linear-gradient(
       178deg,
-      var(--shade-920) 43.39%,
-      color-mix(in srgb, var(--purple-500) 75%, transparent) 145.02%
+      var(--color-review-base-deep) 43.39%,
+      color-mix(in srgb, var(--color-review-accent) 75%, transparent) 145.02%
     );
 
     border-radius: var(--border-radius-l);
@@ -72,8 +72,8 @@
 
       background: linear-gradient(
         135.65deg,
-        var(--shade-920) 43.39%,
-        color-mix(in srgb, var(--purple-500) 75%, transparent) 145.02%
+        var(--color-review-base-deep) 43.39%,
+        color-mix(in srgb, var(--color-review-accent) 75%, transparent) 145.02%
       );
     }
   }

@@ -78,9 +78,16 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-yir-rated-section {
+    // Poster hero: fanart + posters + white text in both themes (see
+    // YirTitleSection for the token-pinning rationale).
+    --color-yir-text-primary: var(--color-yir-poster-foreground);
+    --color-yir-border: var(--color-yir-poster-foreground);
+    --color-yir-title-chip-background: var(--color-yir-scrim);
+
     text-align: center;
     position: relative;
-    background-color: var(--shade-950);
+    background-color: var(--color-yir-poster-background);
+    color: var(--color-yir-poster-foreground);
   }
 
   .yir-fanart-bg {
@@ -99,7 +106,7 @@
   .yir-rated-inner {
     position: relative;
     z-index: 1;
-    background-color: color-mix(in srgb, var(--shade-1000) 30%, transparent);
+    background-color: var(--color-yir-scrim-soft);
     padding-bottom: var(--ni-72);
 
     @include for-mobile {
@@ -136,8 +143,8 @@
 
   .yir-poster {
     border: none;
-    background-color: var(--shade-1000);
-    box-shadow: 0 0 var(--ni-20) var(--shade-1000);
+    background-color: var(--color-yir-poster-surface);
+    box-shadow: 0 0 var(--ni-20) var(--color-yir-poster-surface);
     position: relative;
 
     .yir-poster-img {
@@ -158,7 +165,7 @@
     justify-content: center;
     align-items: center;
     margin-top: var(--ni-8);
-    color: var(--shade-10);
+    color: var(--color-yir-poster-foreground);
     transition: all 0.5s;
   }
 </style>

@@ -353,6 +353,73 @@
   // Non-color (hatched <pattern>) encoding is off until a high-contrast mode
   // turns it on. Kept here so components can reference it unconditionally.
   --viz-pattern-opacity: 0;
+
+  /*
+   * Year / Month in Review
+   *
+   * Two layers. "Chrome" (flat stat/data surfaces) flips with the theme.
+   * "Poster" heroes (cover-image sections with white text over a dark scrim)
+   * stay dark in BOTH themes by design - the scrim keeps overlaid text
+   * legible regardless of the active theme, mirroring the cover-image
+   * treatment above. The review banner is an adaptive purple accent card.
+   */
+  // Chrome
+  --color-yir-background: var(--shade-50);
+  --color-yir-surface: var(--shade-10);
+  --color-yir-surface-raised: var(--shade-100);
+  --color-yir-surface-chip: var(--shade-200);
+  --color-yir-text-primary: var(--shade-920);
+  --color-yir-text-secondary: var(--shade-600);
+  --color-yir-text-muted: var(--shade-500);
+  --color-yir-text-accent: var(--purple-700);
+  --color-yir-accent: var(--purple-500);
+  --color-yir-border: var(--shade-900);
+  --color-yir-border-subtle: var(--shade-300);
+  --color-yir-separator: var(--shade-300);
+  --color-yir-arrow: var(--shade-400);
+  --color-yir-badge-background: var(--shade-900);
+  --color-yir-badge-foreground: var(--shade-10);
+  --color-yir-title-chip-background: color-mix(
+    in srgb,
+    var(--shade-10) 60%,
+    transparent
+  );
+  --color-yir-tooltip-background: color-mix(
+    in srgb,
+    var(--shade-10) 95%,
+    transparent
+  );
+  --color-yir-upgrade-glow: var(--red-300);
+  // Poster heroes (constant across themes)
+  --color-yir-poster-foreground: var(--shade-10);
+  --color-yir-poster-background: var(--shade-950);
+  --color-yir-poster-surface: var(--shade-1000);
+  --color-yir-poster-surface-raised: var(--shade-900);
+  --color-yir-poster-chip: var(--shade-800);
+  --color-yir-scrim: color-mix(in srgb, var(--shade-1000) 80%, transparent);
+  --color-yir-scrim-soft: color-mix(
+    in srgb,
+    var(--shade-1000) 30%,
+    transparent
+  );
+  // Review banner (adaptive accent card)
+  --color-review-foreground: var(--shade-10);
+  --color-review-accent: var(--purple-500);
+  --color-review-base: var(--purple-700);
+  --color-review-base-deep: var(--purple-800);
+  // 2024 template: branded purple hero wordmark and blue-tinged stat panels
+  // (charts themselves render through the shared --viz-* tokens).
+  --color-yir-hero-gradient-start: var(--purple-400);
+  --color-yir-hero-gradient-end: var(--purple-800);
+  --color-yir-panel-background: radial-gradient(
+    50% 39.27% at 50% 0%,
+    color-mix(in srgb, var(--shade-10) 92%, var(--blue-500) 8%) 0%,
+    color-mix(in srgb, var(--shade-50) 70%, var(--shade-100) 30%) 100%
+  );
+  // Opacity of the dark "trakt" fanart wordmark behind the hero. Full in dark
+  // (the SVG reads as designed); knocked back to a faint watermark in light so
+  // the heavy dark wordmark doesn't dominate the light background.
+  --yir-hero-watermark-opacity: 0.12;
 }
 
 // Define theme variables for dark mode
@@ -705,6 +772,67 @@
   --viz-fade-floor: 0.14;
   --viz-glow-percent: 60%;
   --viz-pattern-opacity: 0;
+
+  /*
+   * Year / Month in Review (see light-theme for the layer rationale)
+   */
+  // Chrome
+  --color-yir-background: var(--shade-950);
+  --color-yir-surface: var(--shade-1000);
+  --color-yir-surface-raised: var(--shade-930);
+  --color-yir-surface-chip: var(--shade-800);
+  --color-yir-text-primary: var(--shade-10);
+  --color-yir-text-secondary: var(--shade-300);
+  --color-yir-text-muted: var(--shade-500);
+  --color-yir-text-accent: var(--purple-300);
+  --color-yir-accent: var(--purple-500);
+  --color-yir-border: var(--shade-10);
+  --color-yir-border-subtle: var(--shade-600);
+  --color-yir-separator: var(--shade-800);
+  --color-yir-arrow: var(--shade-700);
+  --color-yir-badge-background: var(--shade-10);
+  --color-yir-badge-foreground: var(--shade-1000);
+  --color-yir-title-chip-background: color-mix(
+    in srgb,
+    var(--shade-1000) 50%,
+    transparent
+  );
+  --color-yir-tooltip-background: color-mix(
+    in srgb,
+    var(--shade-1000) 92%,
+    transparent
+  );
+  --color-yir-upgrade-glow: var(--red-800);
+  // Poster heroes (constant across themes)
+  --color-yir-poster-foreground: var(--shade-10);
+  --color-yir-poster-background: var(--shade-950);
+  --color-yir-poster-surface: var(--shade-1000);
+  --color-yir-poster-surface-raised: var(--shade-900);
+  --color-yir-poster-chip: var(--shade-800);
+  --color-yir-scrim: color-mix(in srgb, var(--shade-1000) 80%, transparent);
+  --color-yir-scrim-soft: color-mix(
+    in srgb,
+    var(--shade-1000) 30%,
+    transparent
+  );
+  // Review banner (adaptive accent card)
+  --color-review-foreground: var(--shade-10);
+  --color-review-accent: var(--purple-500);
+  --color-review-base: var(--shade-900);
+  --color-review-base-deep: var(--shade-920);
+  // 2024 template (see light-theme for the rationale)
+  --color-yir-hero-gradient-start: color-mix(
+    in srgb,
+    var(--purple-300) 80%,
+    white
+  );
+  --color-yir-hero-gradient-end: var(--purple-700);
+  --color-yir-panel-background: radial-gradient(
+    50% 39.27% at 50% 0%,
+    color-mix(in srgb, var(--shade-950) 90%, var(--blue-500) 10%) 0%,
+    color-mix(in srgb, var(--shade-950) 70%, var(--shade-900) 30%) 100%
+  );
+  --yir-hero-watermark-opacity: 1;
 }
 
 // Apply themes to selectors

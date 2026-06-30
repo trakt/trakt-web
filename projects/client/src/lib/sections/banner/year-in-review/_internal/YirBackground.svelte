@@ -40,9 +40,9 @@
     opacity: 0.3;
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--purple-500) 64%, transparent) -2.25%,
-      color-mix(in srgb, var(--purple-500) 32%, transparent) 73.62%,
-      color-mix(in srgb, var(--shade-920) 0%, transparent) 105.05%
+      color-mix(in srgb, var(--color-review-accent) 64%, transparent) -2.25%,
+      color-mix(in srgb, var(--color-review-accent) 32%, transparent) 73.62%,
+      color-mix(in srgb, var(--color-review-base-deep) 0%, transparent) 105.05%
     );
     background-clip: text;
 

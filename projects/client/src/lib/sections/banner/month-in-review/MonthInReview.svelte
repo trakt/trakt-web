@@ -86,8 +86,8 @@
 
         background: radial-gradient(
           78.23% 78.23% at 0% 100%,
-          var(--purple-500) 0%,
-          var(--shade-900) 100%
+          var(--color-review-accent) 0%,
+          var(--color-review-base) 100%
         );
       }
     }

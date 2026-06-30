@@ -142,7 +142,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-yir-stats-section {
-    background-color: var(--shade-950);
+    background-color: var(--color-yir-background);
     padding-bottom: var(--ni-72);
 
     @include for-mobile {
@@ -185,7 +185,7 @@
   .yir-stat-arrow {
     display: flex;
     align-items: center;
-    color: var(--shade-700);
+    color: var(--color-yir-arrow);
     flex-shrink: 0;
     // Vertical offset = (number font-size − svg size) / 2, so the arrow
     // centers on the big number rather than on the row's flex-start baseline.
@@ -216,7 +216,7 @@
     font-size: var(--ni-48);
     font-weight: bold;
     line-height: 1;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     @include for-tablet-sm-and-below {
       font-size: var(--ni-40);
@@ -234,7 +234,7 @@
     gap: var(--gap-xxs);
     font-size: var(--font-size-text);
     text-transform: uppercase;
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
     margin-top: 0;
 
     @include for-mobile {
@@ -243,14 +243,14 @@
   }
 
   .yir-separator {
-    border-bottom: var(--border-thickness-xxs) dashed var(--shade-800);
+    border-bottom: var(--border-thickness-xxs) dashed var(--color-yir-separator);
     margin: var(--ni-40) 0;
   }
 
   .yir-under-chart {
     font-size: var(--font-size-text);
     text-transform: uppercase;
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
     margin: var(--ni-16) 0 0 0;
     text-align: center;
   }
@@ -289,7 +289,7 @@
     overflow-y: hidden;
     /* Hide scrollbar but keep functionality */
     scrollbar-width: thin;
-    scrollbar-color: var(--shade-800) transparent;
+    scrollbar-color: var(--color-yir-separator) transparent;
 
     // Extra horizontal breathing room around the charts on smaller
     // screens so the bars don't hug the viewport edges.
@@ -311,7 +311,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: var(--shade-800);
+      background: var(--color-yir-separator);
       border-radius: var(--border-radius-xs);
     }
   }

@@ -25,14 +25,13 @@
   // tooltip customHTML callback (see yirTooltipHTML.ts), which renders
   // outside this component's DOM.
   :global(.trakt-yir-tooltip) {
-    background: color-mix(in srgb, var(--shade-1000) 92%, transparent);
-    border: var(--border-thickness-xxs) solid var(--shade-800);
+    background: var(--color-yir-tooltip-background);
+    border: var(--border-thickness-xxs) solid var(--color-yir-separator);
     border-radius: var(--border-radius-xs);
     padding: var(--ni-8) var(--ni-12);
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
     font-family: inherit;
-    box-shadow: 0 var(--ni-2) var(--ni-8)
-      color-mix(in srgb, var(--shade-1000) 60%, transparent);
+    box-shadow: 0 var(--ni-2) var(--ni-8) var(--color-yir-scrim);
     text-align: center;
     white-space: nowrap;
   }
@@ -40,7 +39,7 @@
   :global(.yir-tooltip-main) {
     font-size: var(--font-size-text);
     font-weight: 600;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     &:not(:last-child) {
       margin-bottom: var(--ni-4);
@@ -50,6 +49,6 @@
   :global(.yir-tooltip-sub),
   :global(.yir-tooltip-extra) {
     font-size: var(--ni-12);
-    color: var(--shade-500);
+    color: var(--color-yir-text-muted);
   }
 </style>

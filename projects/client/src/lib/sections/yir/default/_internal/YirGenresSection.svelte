@@ -33,7 +33,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-yir-genres-section {
-    background-color: var(--shade-1000);
+    background-color: var(--color-yir-surface);
     padding-bottom: var(--ni-72);
 
     @include for-mobile {
