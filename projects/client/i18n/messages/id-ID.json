@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Memuat...",
   "yir_title_year_in_review": "Kilas Balik Tahunan",
   "yir_title_year_to_date": "Tahun Berjalan",
-  "yir_unit_comment": "{count, plural, one {komentar} other {komentar}}",
-  "yir_unit_episode": "{count, plural, one {episode} other {episode}}",
-  "yir_unit_hour": "{count, plural, one {jam} other {jam}}",
-  "yir_unit_list": "{count, plural, one {daftar} other {daftar}}",
-  "yir_unit_movie": "{count, plural, one {film} other {film}}",
-  "yir_unit_play": "{count, plural, one {tontonan} other {tontonan}}",
-  "yir_unit_rating": "{count, plural, one {penilaian} other {penilaian}}",
-  "yir_unit_show": "{count, plural, one {acara} other {acara}}",
   "yir_upgrade_message": "Tingkatkan ke VIP dan dapatkan halaman Kilas Balik Sepanjang Masa dan Tahunan Anda sendiri, ditambah banyak fitur hebat lainnya!"
 }

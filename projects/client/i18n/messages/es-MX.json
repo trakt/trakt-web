@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Cargando...",
   "yir_title_year_in_review": "Resumen Anual",
   "yir_title_year_to_date": "Año hasta la fecha",
-  "yir_unit_comment": "{count, plural, one {comentario} other {comentarios}}",
-  "yir_unit_episode": "{count, plural, one {episodio} other {episodios}}",
-  "yir_unit_hour": "{count, plural, one {hora} other {horas}}",
-  "yir_unit_list": "{count, plural, one {lista} other {listas}}",
-  "yir_unit_movie": "{count, plural, one {película} other {películas}}",
-  "yir_unit_play": "{count, plural, one {reproducción} other {reproducciones}}",
-  "yir_unit_rating": "{count, plural, one {calificación} other {calificaciones}}",
-  "yir_unit_show": "{count, plural, one {serie} other {series}}",
   "yir_upgrade_message": "¡Actualízate a VIP y obtén tus propias páginas de Resumen Anual de todos los tiempos y anuales, además de muchas más funciones geniales!"
 }

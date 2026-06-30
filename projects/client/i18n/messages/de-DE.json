@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Wird geladen...",
   "yir_title_year_in_review": "Jahresrückblick",
   "yir_title_year_to_date": "Jahresstatistik",
-  "yir_unit_comment": "{count, plural, one {Kommentar} other {Kommentare}}",
-  "yir_unit_episode": "{count, plural, one {Episode} other {Episoden}}",
-  "yir_unit_hour": "{count, plural, one {Stunde} other {Stunden}}",
-  "yir_unit_list": "{count, plural, one {Liste} other {Listen}}",
-  "yir_unit_movie": "{count, plural, one {Film} other {Filme}}",
-  "yir_unit_play": "{count, plural, one {Wiedergabe} other {Wiedergaben}}",
-  "yir_unit_rating": "{count, plural, one {Bewertung} other {Bewertungen}}",
-  "yir_unit_show": "{count, plural, one {Serie} other {Serien}}",
   "yir_upgrade_message": "Upgrade auf VIP und erhalte deine eigenen Jahresrückblicke für alle Zeiten und Jahre, plus viele weitere tolle Funktionen!"
 }

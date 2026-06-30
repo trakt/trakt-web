@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Завантаження...",
   "yir_title_year_in_review": "Рік у Підсумках",
   "yir_title_year_to_date": "Рік до сьогодні",
-  "yir_unit_comment": "{count, plural, one {коментар} few {коментарі} other {коментарів}}",
-  "yir_unit_episode": "{count, plural, one {епізод} few {епізоди} other {епізодів}}",
-  "yir_unit_hour": "{count, plural, one {година} few {години} other {годин}}",
-  "yir_unit_list": "{count, plural, one {список} few {списки} other {списків}}",
-  "yir_unit_movie": "{count, plural, one {фільм} few {фільми} other {фільмів}}",
-  "yir_unit_play": "{count, plural, one {перегляд} few {перегляди} other {переглядів}}",
-  "yir_unit_rating": "{count, plural, one {оцінка} few {оцінки} other {оцінок}}",
-  "yir_unit_show": "{count, plural, one {серіал} few {серіали} other {серіалів}}",
   "yir_upgrade_message": "Оновіться до VIP і отримайте власні сторінки підсумків року за весь час та за рік, а також багато інших чудових функцій!"
 }

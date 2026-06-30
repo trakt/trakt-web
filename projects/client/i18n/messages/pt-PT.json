@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Carregando...",
   "yir_title_year_in_review": "Retrospectiva do Ano",
   "yir_title_year_to_date": "Acumulado do ano",
-  "yir_unit_comment": "{count, plural, one {comentário} other {comentários}}",
-  "yir_unit_episode": "{count, plural, one {episódio} other {episódios}}",
-  "yir_unit_hour": "{count, plural, one {hora} other {horas}}",
-  "yir_unit_list": "{count, plural, one {lista} other {listas}}",
-  "yir_unit_movie": "{count, plural, one {filme} other {filmes}}",
-  "yir_unit_play": "{count, plural, one {reprodução} other {reproduções}}",
-  "yir_unit_rating": "{count, plural, one {avaliação} other {avaliações}}",
-  "yir_unit_show": "{count, plural, one {série} other {séries}}",
   "yir_upgrade_message": "Atualize para VIP e tenha suas próprias páginas de Retrospectiva do Ano e de todos os tempos, além de muitos outros recursos excelentes!"
 }

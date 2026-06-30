@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Laddar...",
   "yir_title_year_in_review": "Årsöversikt",
   "yir_title_year_to_date": "År hittills",
-  "yir_unit_comment": "{count, plural, one {kommentar} other {kommentarer}}",
-  "yir_unit_episode": "{count, plural, one {avsnitt} other {avsnitt}}",
-  "yir_unit_hour": "{count, plural, one {timme} other {timmar}}",
-  "yir_unit_list": "{count, plural, one {lista} other {listor}}",
-  "yir_unit_movie": "{count, plural, one {film} other {filmer}}",
-  "yir_unit_play": "{count, plural, one {uppspelning} other {uppspelningar}}",
-  "yir_unit_rating": "{count, plural, one {betyg} other {betyg}}",
-  "yir_unit_show": "{count, plural, one {serie} other {serier}}",
   "yir_upgrade_message": "Uppgradera till VIP och få dina egna årsöversikter för alla tider och år, plus många fler fantastiska funktioner!"
 }

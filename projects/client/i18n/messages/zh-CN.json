@@ -1772,13 +1772,5 @@
   "yir_state_loading": "正在加载...",
   "yir_title_year_in_review": "年度回顾",
   "yir_title_year_to_date": "年至今",
-  "yir_unit_comment": "{count, plural, one {评论} other {评论}}",
-  "yir_unit_episode": "{count, plural, one {集} other {集}}",
-  "yir_unit_hour": "{count, plural, one {小时} other {小时}}",
-  "yir_unit_list": "{count, plural, one {列表} other {列表}}",
-  "yir_unit_movie": "{count, plural, one {电影} other {电影}}",
-  "yir_unit_play": "{count, plural, one {播放} other {播放}}",
-  "yir_unit_rating": "{count, plural, one {评分} other {评分}}",
-  "yir_unit_show": "{count, plural, one {剧集} other {剧集}}",
   "yir_upgrade_message": "升级到 VIP，即可获得您专属的全部时间及年度回顾页面，以及更多精彩功能！"
 }

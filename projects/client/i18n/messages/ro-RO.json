@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Se încarcă...",
   "yir_title_year_in_review": "Retrospectiva Anului",
   "yir_title_year_to_date": "Anul curent",
-  "yir_unit_comment": "{count, plural, one {comentariu} other {comentarii}}",
-  "yir_unit_episode": "{count, plural, one {episod} other {episoade}}",
-  "yir_unit_hour": "{count, plural, one {oră} other {ore}}",
-  "yir_unit_list": "{count, plural, one {listă} other {liste}}",
-  "yir_unit_movie": "{count, plural, one {film} other {filme}}",
-  "yir_unit_play": "{count, plural, one {vizionare} other {vizionări}}",
-  "yir_unit_rating": "{count, plural, one {evaluare} other {evaluări}}",
-  "yir_unit_show": "{count, plural, one {serial} other {seriale}}",
   "yir_upgrade_message": "Fă upgrade la VIP și obține propriile pagini Anul în Revistă pentru toate timpurile și anual, plus multe alte funcții grozave!"
 }

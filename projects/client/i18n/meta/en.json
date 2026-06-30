@@ -5138,77 +5138,73 @@
         }
       }
     },
+    "yir_label_top_genres": {
+      "default": "Top genres",
+      "description": "Label for the top-genres segmented bar chart in the Year in Review genres section."
+    },
     "yir_unit_play": {
-      "default": "{count, plural, one {play} other {plays}}",
-      "description": "Unit for plays (singular/plural).",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "play",
+      "description": "Singular unit noun for a play, shown next to a count in Year/Month in Review."
+    },
+    "yir_unit_plays": {
+      "default": "plays",
+      "description": "Plural unit noun for plays, shown next to a count in Year/Month in Review."
     },
     "yir_unit_hour": {
-      "default": "{count, plural, one {hour} other {hours}}",
-      "description": "Unit for hours (singular/plural).",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "hour",
+      "description": "Singular unit noun for an hour, shown next to a count in Year/Month in Review."
+    },
+    "yir_unit_hours": {
+      "default": "hours",
+      "description": "Plural unit noun for hours, shown next to a count in Year/Month in Review."
     },
     "yir_unit_rating": {
-      "default": "{count, plural, one {rating} other {ratings}}",
-      "description": "Unit for ratings (singular/plural).",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "rating",
+      "description": "Singular unit noun for a rating, shown next to a count in Year/Month in Review."
+    },
+    "yir_unit_ratings": {
+      "default": "ratings",
+      "description": "Plural unit noun for ratings, shown next to a count in Year/Month in Review."
     },
     "yir_unit_comment": {
-      "default": "{count, plural, one {comment} other {comments}}",
-      "description": "Unit for comments (singular/plural).",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "comment",
+      "description": "Singular unit noun for a comment, shown next to a count in Year/Month in Review."
+    },
+    "yir_unit_comments": {
+      "default": "comments",
+      "description": "Plural unit noun for comments, shown next to a count in Year/Month in Review."
     },
     "yir_unit_list": {
-      "default": "{count, plural, one {list} other {lists}}",
-      "description": "Unit for lists (singular/plural).",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "list",
+      "description": "Singular unit noun for a list, shown next to a count in Year/Month in Review."
+    },
+    "yir_unit_lists": {
+      "default": "lists",
+      "description": "Plural unit noun for lists, shown next to a count in Year/Month in Review."
     },
     "yir_unit_movie": {
-      "default": "{count, plural, one {movie} other {movies}}",
-      "description": "Unit for movies (singular/plural).",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "movie",
+      "description": "Singular unit noun for a movie, shown next to a count in Year/Month in Review."
+    },
+    "yir_unit_movies": {
+      "default": "movies",
+      "description": "Plural unit noun for movies, shown next to a count in Year/Month in Review."
     },
     "yir_unit_show": {
-      "default": "{count, plural, one {show} other {shows}}",
-      "description": "Unit for shows (singular/plural).",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "show",
+      "description": "Singular unit noun for a show, shown next to a count in Year/Month in Review."
+    },
+    "yir_unit_shows": {
+      "default": "shows",
+      "description": "Plural unit noun for shows, shown next to a count in Year/Month in Review."
     },
     "yir_unit_episode": {
-      "default": "{count, plural, one {episode} other {episodes}}",
-      "description": "Unit for episodes (singular/plural).",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "episode",
+      "description": "Singular unit noun for an episode, shown next to a count in Year/Month in Review."
+    },
+    "yir_unit_episodes": {
+      "default": "episodes",
+      "description": "Plural unit noun for episodes, shown next to a count in Year/Month in Review."
     },
     "yir_button_previous": {
       "default": "Previous",

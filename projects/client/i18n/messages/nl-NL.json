@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Laden...",
   "yir_title_year_in_review": "Jaaroverzicht",
   "yir_title_year_to_date": "Jaar tot nu toe",
-  "yir_unit_comment": "{count, plural, one {opmerking} other {opmerkingen}}",
-  "yir_unit_episode": "{count, plural, one {aflevering} other {afleveringen}}",
-  "yir_unit_hour": "{count, plural, one {uur} other {uren}}",
-  "yir_unit_list": "{count, plural, one {lijst} other {lijsten}}",
-  "yir_unit_movie": "{count, plural, one {film} other {films}}",
-  "yir_unit_play": "{count, plural, one {weergave} other {weergaven}}",
-  "yir_unit_rating": "{count, plural, one {beoordeling} other {beoordelingen}}",
-  "yir_unit_show": "{count, plural, one {serie} other {series}}",
   "yir_upgrade_message": "Upgrade naar VIP en krijg je eigen all-time en jaarlijkse Jaaroverzicht pagina's, plus nog veel meer geweldige functies!"
 }
