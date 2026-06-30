@@ -1,5 +1,6 @@
 <script lang="ts">
   import LineChart from "$lib/components/charts/LineChart.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { Season } from "$lib/requests/models/Season.ts";
 
   type SeasonPoint = { season: number; rating: number };
@@ -9,6 +10,9 @@
   };
 
   const { seasons }: Props = $props();
+
+  const seasonLabel = (season: number) =>
+    m.label_season_short({ number: String(season) });
 
   const points: SeasonPoint[] = $derived.by(() => {
     const now = new Date();
@@ -22,9 +26,9 @@
   });
 
   const data = $derived(
-    points.map((p) => ({ value: p.rating, label: `S${p.season}` })),
+    points.map((p) => ({ value: p.rating, label: seasonLabel(p.season) })),
   );
-  const tickLabels = $derived(points.map((p) => `S${p.season}`));
+  const tickLabels = $derived(points.map((p) => seasonLabel(p.season)));
 
   // Zoom the line into its meaningful band rather than anchoring at 0.
   const baseline = $derived(Math.min(...points.map((p) => p.rating), 60));
@@ -44,11 +48,17 @@
 {#if points.length >= 2}
   <section class="trakt-season-ratings-chart">
     <div class="header">
-      <h3 class="card-title bold secondary">Quality Over Time</h3>
+      <h3 class="card-title bold secondary">
+        {m.header_ratings_quality_over_time()}
+      </h3>
       {#if peak && trough}
         <span class="meta tag secondary">
-          Peak S{peak.season} · {peak.rating}% &nbsp;·&nbsp; Low S{trough
-            .season} · {trough.rating}%
+          {m.text_ratings_season_extremes({
+            peak: seasonLabel(peak.season),
+            peakRating: String(peak.rating),
+            low: seasonLabel(trough.season),
+            lowRating: String(trough.rating),
+          })}
         </span>
       {/if}
     </div>
@@ -60,11 +70,16 @@
         {baseline}
         showArea
         showDots
-        label="Season ratings over time"
+        label={m.label_ratings_season_chart()}
         height="var(--ni-160)"
       >
         {#snippet tooltip({ label, value })}
-          <span class="season-tooltip">{label} · {value}%</span>
+          <span class="season-tooltip">
+            {m.text_ratings_season_point({
+              season: label,
+              rating: String(value),
+            })}
+          </span>
         {/snippet}
       </LineChart>
     </div>
