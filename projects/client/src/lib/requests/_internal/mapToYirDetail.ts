@@ -4,6 +4,8 @@ import type {
   YirCountriesGroup,
   YirDetail,
   YirGenresGroup,
+  YirGlobalTopItem,
+  YirListProgress,
   YirMostWatchedItem,
   YirStatsCategory,
   YirStreamingServices,
@@ -25,12 +27,32 @@ type RawStats = {
   daily: number;
 };
 
+type RawYearCount = { year: number; count: number };
+type RawDecadeCount = { decade: number; count: number };
+type RawRatingCount = { rating: number; count: number };
+
 type RawDistributions = {
   weekly: number[];
   monthly: number[];
   days: number[];
   hourly?: number[];
   daily?: number[] | null;
+  yearly?: RawYearCount[] | null;
+};
+
+type RawReleaseYearsGroup = {
+  years: RawYearCount[];
+  decades: RawDecadeCount[];
+};
+
+type RawListProgress = {
+  id: number;
+  site: string;
+  title: string;
+  logo?: string | null;
+  total: number;
+  watched: number;
+  percentage: number;
 };
 
 type RawStatsCategory = {
@@ -41,6 +63,7 @@ type RawStatsCategory = {
   comments_counts: RawStats;
   distributions?: RawDistributions;
   items_count?: number;
+  ratings_distribution?: RawRatingCount[] | null;
 };
 
 type RawWatchedItem = {
@@ -105,6 +128,18 @@ type RawTrendMovie = {
   movie: MovieResponse;
 };
 
+type RawGlobalTopShow = {
+  watchers: number;
+  watched: boolean;
+  show: ShowResponse;
+};
+
+type RawGlobalTopMovie = {
+  watchers: number;
+  watched: boolean;
+  movie: MovieResponse;
+};
+
 type RawThanks = {
   shows?: Array<{ show: ShowResponse }>;
   movies?: Array<{ movie: MovieResponse }>;
@@ -151,10 +186,22 @@ export type RawYirResponse = {
     shows: RawCountriesGroup;
     movies: RawCountriesGroup;
   };
+  release_years?: {
+    shows: RawReleaseYearsGroup;
+    movies: RawReleaseYearsGroup;
+  } | null;
+  list_progress?: {
+    shows: RawListProgress[];
+    movies: RawListProgress[];
+  } | null;
   trends?: {
     shows: RawTrendShow[];
     movies: RawTrendMovie[];
   };
+  global_top?: {
+    shows: RawGlobalTopShow[];
+    movies: RawGlobalTopMovie[];
+  } | null;
   thanks?: RawThanks;
   streaming_services?: RawStreamingServices | null;
 };
@@ -168,6 +215,7 @@ function mapStatsCategory(raw: RawStatsCategory): YirStatsCategory {
     commentsCounts: raw.comments_counts,
     distributions: raw.distributions,
     itemsCount: raw.items_count,
+    ratingsDistribution: raw.ratings_distribution ?? undefined,
   };
 }
 
@@ -276,6 +324,22 @@ function mapTrendMovies(raw: RawTrendMovie[]): YirTrendItem[] {
   }));
 }
 
+function mapGlobalTopShows(raw: RawGlobalTopShow[]): YirGlobalTopItem[] {
+  return raw.map((item) => ({
+    watchers: item.watchers,
+    watched: item.watched,
+    entry: mapToShowEntry(item.show),
+  }));
+}
+
+function mapGlobalTopMovies(raw: RawGlobalTopMovie[]): YirGlobalTopItem[] {
+  return raw.map((item) => ({
+    watchers: item.watchers,
+    watched: item.watched,
+    entry: mapToMovieEntry(item.movie),
+  }));
+}
+
 function mapThanks(
   raw: RawThanks,
 ): { shows: MediaEntry[]; movies: MediaEntry[] } {
@@ -300,6 +364,14 @@ function mapStreamingServices(
       all: service.all,
     })),
   };
+}
+
+function mapListProgress(raw: RawListProgress[]): YirListProgress[] {
+  return raw.map((item) => ({
+    ...item,
+    // The API returns a protocol-less asset URL; ensure it's absolute.
+    logo: item.logo ? prependHttps(item.logo) : null,
+  }));
 }
 
 export function mapToYirDetail(response: RawYirResponse): YirDetail {
@@ -346,10 +418,28 @@ export function mapToYirDetail(response: RawYirResponse): YirDetail {
         response.countries?.movies ?? { country_count: 0, countries: [] },
       ),
     },
+    releaseYears: response.release_years
+      ? {
+        shows: response.release_years.shows ?? { years: [], decades: [] },
+        movies: response.release_years.movies ?? { years: [], decades: [] },
+      }
+      : undefined,
+    listProgress: response.list_progress
+      ? {
+        shows: mapListProgress(response.list_progress.shows ?? []),
+        movies: mapListProgress(response.list_progress.movies ?? []),
+      }
+      : undefined,
     trends: {
       shows: mapTrendShows(response.trends?.shows ?? []),
       movies: mapTrendMovies(response.trends?.movies ?? []),
     },
+    globalTop: response.global_top
+      ? {
+        shows: mapGlobalTopShows(response.global_top.shows ?? []),
+        movies: mapGlobalTopMovies(response.global_top.movies ?? []),
+      }
+      : undefined,
     thanks: mapThanks(response.thanks ?? {}),
     streamingServices: mapStreamingServices(response.streaming_services),
   };

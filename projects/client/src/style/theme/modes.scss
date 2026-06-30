@@ -390,6 +390,15 @@
     transparent
   );
   --color-yir-upgrade-glow: var(--red-300);
+  // List-progress logo plate: brand wordmarks bake in white text designed for
+  // dark UIs, so on the light chrome surface they wash out. A soft dark radial
+  // behind each logo restores contrast (the dark theme needs none - see below).
+  --color-yir-list-logo-backdrop: radial-gradient(
+    ellipse closest-side at center,
+    color-mix(in srgb, var(--shade-500) 40%, transparent) 0%,
+    color-mix(in srgb, var(--shade-500) 18%, transparent) 50%,
+    transparent 100%
+  );
   // Poster heroes (constant across themes)
   --color-yir-poster-foreground: var(--shade-10);
   --color-yir-poster-background: var(--shade-950);
@@ -803,6 +812,9 @@
     transparent
   );
   --color-yir-upgrade-glow: var(--red-800);
+  // List-progress logo plate: the dark chrome surface already gives white brand
+  // wordmarks enough contrast, so no plate is needed here (see light-theme).
+  --color-yir-list-logo-backdrop: none;
   // Poster heroes (constant across themes)
   --color-yir-poster-foreground: var(--shade-10);
   --color-yir-poster-background: var(--shade-950);

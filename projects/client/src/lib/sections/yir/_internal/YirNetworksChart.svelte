@@ -1,7 +1,7 @@
 <script lang="ts">
-  import YirTooltip from "../../_internal/YirTooltip.svelte";
-  import YirCompaniesBubbleChart from "../../_internal/YirCompaniesBubbleChart.svelte";
-  import { yirMediaUnit } from "../../_internal/yirMediaUnit.ts";
+  import YirTooltip from "./YirTooltip.svelte";
+  import YirCompaniesBubbleChart from "./YirCompaniesBubbleChart.svelte";
+  import { yirMediaUnit } from "./yirMediaUnit.ts";
   import type { YirCompany } from "$lib/requests/models/YirDetail.ts";
 
   type YirNetworksChartProps = {

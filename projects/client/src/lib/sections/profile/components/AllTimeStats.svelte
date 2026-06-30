@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from '$lib/features/i18n/messages.ts';
   import { useAllTimeStats } from '../stores/useAllTimeStats.ts';
+  import AllTimeLink from './AllTimeLink.svelte';
   import StatsCard from './_internal/StatsCard.svelte';
   import YearToDateLink from './YearToDateLink.svelte';
 
@@ -11,6 +12,7 @@
   {#snippet footer()}
     <div class="year-link">
       <YearToDateLink slug="me" source="profile" />
+      <AllTimeLink slug="me" source="profile" />
     </div>
   {/snippet}
 </StatsCard>
@@ -21,5 +23,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: var(--gap-m);
   }
 </style>

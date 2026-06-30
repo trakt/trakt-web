@@ -1,87 +1,169 @@
 <script lang="ts">
-  import "@carbon/charts-svelte/styles.css";
-  import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver.ts";
-  import { ChoroplethChart } from "@carbon/charts-svelte";
-  import { flushSync } from "svelte";
-  import { loadGeo } from "./_internal/loadGeo.ts";
+  import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
+  import { geoNaturalEarth1, geoPath } from "d3";
+  import {
+    type CountryFeature,
+    loadCountryFeatures,
+  } from "./_internal/loadCountryFeatures.ts";
   import type {
     CountryMapProps,
     CountryMapTooltipArgs,
   } from "./models/CountryMapProps.ts";
 
-  const { data, tooltip }: CountryMapProps = $props();
+  const { data, tooltip, label = "Country map" }: CountryMapProps = $props();
 
-  function buildGradientStops(from: string, to: string): string[] {
-    return [30, 40, 50, 60, 70, 80, 90].map(
-      (p) => `color-mix(in srgb, ${from} ${p}%, ${to})`,
-    );
-  }
-
-  const colorStops = $derived(
-    buildGradientStops(
-      "var(--color-map-chart-highlight)",
-      "var(--color-map-chart-background)",
-    ),
+  const valueByCode = $derived(
+    new Map(data.map((datum) => [datum.code.toLowerCase(), datum.value])),
   );
-
-  const carbonData = $derived(
-    data.map((datum) => ({
-      name: datum.code.toLowerCase(),
-      value: datum.value,
-    })),
-  );
+  const values = $derived(data.map((datum) => datum.value));
+  const maxValue = $derived(values.length > 0 ? Math.max(...values) : 0);
+  const minValue = $derived(values.length > 0 ? Math.min(...values) : 0);
 
   const { observedDimension: observedWidth, observeDimension: observeWidth } =
     useDimensionObserver("width");
   const { observedDimension: observedHeight, observeDimension: observeHeight } =
     useDimensionObserver("height");
 
-  // Carbon tooltips are HTML strings, so render the consumer snippet to a
-  // hidden container and hand Carbon its markup.
-  let tooltipContainer: HTMLDivElement | undefined = $state();
-  let tooltipArgs: CountryMapTooltipArgs | null = $state(null);
+  let features = $state<CountryFeature[]>([]);
+  $effect(() => {
+    let active = true;
+    loadCountryFeatures()
+      .then((collection) => {
+        if (active) features = collection.features;
+      })
+      .catch(() => {/* loadCountryFeatures already logs the failure */});
+    return () => {
+      active = false;
+    };
+  });
 
-  const customHTML = $derived(
-    (items: Array<{ label: string; value: number }>) => {
-      if (!tooltip || !tooltipContainer || !items?.length) return "";
-      const item = items[0];
-      tooltipArgs = { code: String(item.label), value: item.value };
-      flushSync();
-      return tooltipContainer.innerHTML;
-    },
+  type RenderedCountry = {
+    code: string;
+    path: string;
+    fill: string;
+    value: number | undefined;
+    interactive: boolean;
+  };
+
+  // Tint a watched country across the same 30%→90% highlight band the Carbon
+  // scale used, so a single play stays visible and the most-watched country
+  // reads as the strongest.
+  function fillFor(value: number): string {
+    const range = maxValue - minValue;
+    const ratio = range > 0 ? (value - minValue) / range : 1;
+    const percentage = 30 + ratio * 60;
+    return `color-mix(in srgb, var(--color-map-chart-highlight) ${percentage}%, var(--color-map-chart-background))`;
+  }
+
+  // Fit the projection to the WHOLE world, not just the watched countries, so
+  // the map is always centred regardless of where the user's countries cluster
+  // (a northern-only set would otherwise push the globe off-centre and clip).
+  const rendered = $derived.by<RenderedCountry[]>(() => {
+    const width = $observedWidth;
+    const height = $observedHeight;
+    if (width === 0 || height === 0 || features.length === 0) return [];
+
+    const projection = geoNaturalEarth1().fitSize([width, height], {
+      type: "FeatureCollection",
+      features,
+    });
+    const toPath = geoPath(projection);
+
+    return features.map((feature) => {
+      const code = feature.properties.code;
+      const value = valueByCode.get(code);
+      const interactive = value != null;
+      return {
+        code,
+        value,
+        interactive,
+        path: toPath(feature) ?? "",
+        fill: interactive ? fillFor(value) : "var(--color-map-chart-missing)",
+      };
+    });
+  });
+
+  let hovered = $state<RenderedCountry | null>(null);
+  let pointer = $state({ x: 0, y: 0 });
+
+  // Delegated from the figure so individual countries stay plain (non-focusable,
+  // non-interactive) SVG paths; only watched countries surface a tooltip.
+  function resolveCountry(event: PointerEvent): RenderedCountry | null {
+    const target = event.target;
+    if (!(target instanceof SVGPathElement)) return null;
+    const index = Number(target.dataset.index);
+    const country = rendered[index];
+    return country?.interactive ? country : null;
+  }
+
+  function trackPointer(event: PointerEvent) {
+    const country = resolveCountry(event);
+    if (!country) {
+      // Over a gap, the map background, or an unwatched country — drop the
+      // tooltip. Safe to always clear since the tooltip is pointer-events: none.
+      hovered = null;
+      return;
+    }
+    hovered = country;
+    pointer = { x: event.clientX, y: event.clientY };
+  }
+
+  function movePointer(event: PointerEvent) {
+    if (hovered) pointer = { x: event.clientX, y: event.clientY };
+  }
+
+  function clearPointer(event: PointerEvent) {
+    // Touch fires a synthetic leave right after a tap; keep the tooltip pinned
+    // there (mirrors the other charts' interaction).
+    if (event.pointerType !== "mouse") return;
+    hovered = null;
+  }
+
+  const tooltipArgs = $derived<CountryMapTooltipArgs | null>(
+    hovered ? { code: hovered.code, value: hovered.value ?? 0 } : null,
   );
 </script>
 
-<div class="trakt-country-map" use:observeWidth use:observeHeight>
-  {#await loadGeo() then geoData}
-    {#if $observedWidth > 0 && $observedHeight > 0}
-      <ChoroplethChart
-        data={carbonData}
-        options={{
-          geoData,
-          thematic: { projection: "geoNaturalEarth1" },
-          color: { gradient: { colors: colorStops } },
-          legend: { enabled: false },
-          toolbar: { enabled: false },
-          tooltip: { enabled: tooltip != null, customHTML },
-          resizable: false,
-          width: `${$observedWidth}px`,
-          height: `${$observedHeight}px`,
-        }}
-      />
-    {/if}
-  {/await}
+<figure
+  class="trakt-country-map"
+  use:observeWidth
+  use:observeHeight
+  onpointerover={trackPointer}
+  onpointerdown={trackPointer}
+  onpointermove={movePointer}
+  onpointerleave={clearPointer}
+  role="presentation"
+>
+  <figcaption class="viz-caption">{label}</figcaption>
 
-  <!--
-    Carbon has no snippet-tooltip API, so render the snippet to a hidden
-    container and pull its HTML into Carbon's customHTML renderer.
-  -->
-  <div bind:this={tooltipContainer} style="display:none" aria-hidden="true">
-    {#if tooltip && tooltipArgs}
+  <svg
+    width={$observedWidth}
+    height={$observedHeight}
+    viewBox={`0 0 ${$observedWidth} ${$observedHeight}`}
+    role="img"
+    aria-label={label}
+  >
+    {#each rendered as country, index (index)}
+      <path
+        class="country"
+        class:is-interactive={country.interactive}
+        data-index={index}
+        d={country.path}
+        style:fill={country.fill}
+      />
+    {/each}
+  </svg>
+
+  {#if tooltip && tooltipArgs && hovered}
+    <div
+      class="country-map-tooltip"
+      style:left="{pointer.x}px"
+      style:top="{pointer.y}px"
+    >
       {@render tooltip(tooltipArgs)}
-    {/if}
-  </div>
-</div>
+    </div>
+  {/if}
+</figure>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -90,45 +172,38 @@
     position: relative;
     width: 100%;
     height: 100%;
+    margin: 0;
 
-    :global(.cds--chart-holder) {
-      width: 100%;
-      height: 100%;
-      background: transparent;
+    svg {
+      display: block;
     }
 
-    // Watched countries — hairline dark borders, brighten on hover. Fill comes
-    // from Carbon's quantized color scale (inline style), so it's left alone.
-    :global(g.geo path) {
+    .country {
       stroke: var(--color-map-chart-border);
       stroke-width: 0.5;
       vector-effect: non-scaling-stroke;
-      cursor: pointer;
       transition: filter var(--transition-increment) ease;
     }
 
-    // Unwatched countries are merged into one shape, carbon inlines the fill color,
-    // and the only way to change it is via an !important rule.
-    :global(g.missing-data path) {
-      fill: var(--color-map-chart-missing) !important;
-      stroke: var(--color-map-chart-border);
-      stroke-width: 0.5;
-      vector-effect: non-scaling-stroke;
+    .country.is-interactive {
+      cursor: pointer;
     }
 
     @include for-mouse {
-      :global(g.geo path:hover) {
+      .country.is-interactive:hover {
         filter: brightness(1.4);
       }
     }
+
+    .viz-caption {
+      @include visually-hidden;
+    }
   }
 
-  // Carbon mounts the tooltip outside the chart holder; flatten its wrapper so
-  // the consumer snippet's styling shows through cleanly.
-  :global(.cds--cc--tooltip) {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    padding: 0;
+  .country-map-tooltip {
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, calc(-100% - var(--ni-12)));
+    z-index: var(--layer-top);
   }
 </style>

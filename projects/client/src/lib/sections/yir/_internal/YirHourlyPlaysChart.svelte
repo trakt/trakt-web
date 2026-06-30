@@ -3,12 +3,13 @@
   import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/paraglide/messages";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { formatNumber } from "$lib/utils/format/formatNumber";
   import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime";
   import { toHumanHour } from "$lib/utils/formatting/date/toHumanHour";
-  import { yirUnit } from "../../_internal/yirUnit.ts";
+  import { yirUnit } from "./yirUnit.ts";
   import { setHours } from "date-fns/setHours";
   import { setMinutes } from "date-fns/setMinutes";
-  import YirTooltip from "../../_internal/YirTooltip.svelte";
+  import YirTooltip from "./YirTooltip.svelte";
 
   const { data }: { data: number[] } = $props();
 

@@ -4,6 +4,7 @@
   import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/paraglide/messages";
   import type { YirWatchedItem } from "$lib/requests/models/YirDetail";
+  import type { YirYear } from "$lib/requests/models/YirYear";
   import { PLACEHOLDERS } from "$lib/utils/assets";
   import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime";
   import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate";
@@ -17,7 +18,7 @@
   }: {
     how: "first" | "last";
     item: YirWatchedItem;
-    year: number;
+    year: YirYear;
   } = $props();
 
   const formattedDate = $derived(
@@ -31,11 +32,16 @@
   const logoUrl = $derived(item.entry.logo.url.medium);
   const hasLogo = $derived(!PLACEHOLDERS.includes(logoUrl));
 
-  const headerText = $derived(
-    how === "first"
+  const headerText = $derived.by(() => {
+    if (year === "all") {
+      return how === "first"
+        ? m.yir_calendar_first_play_all_time()
+        : m.yir_calendar_last_play_all_time();
+    }
+    return how === "first"
       ? m.yir_calendar_first_play({ year })
-      : m.yir_calendar_last_play({ year }),
-  );
+      : m.yir_calendar_last_play({ year });
+  });
 </script>
 
 <section class="trakt-yir-calendar-section" id="section-{how}-play">

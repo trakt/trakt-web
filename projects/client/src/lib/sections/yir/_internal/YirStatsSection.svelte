@@ -1,25 +1,40 @@
 <script lang="ts">
   import ArrowRightIcon from "$lib/components/icons/ArrowRightIcon.svelte";
   import { m } from "$lib/paraglide/messages";
-  import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
+  import type {
+    YirStatsCategory,
+    YirYearCount,
+  } from "$lib/requests/models/YirDetail";
   import { formatNumber } from "$lib/utils/format/formatNumber";
-  import { yirUnit } from "../../_internal/yirUnit.ts";
+  import { yirUnit } from "./yirUnit.ts";
   import YirDailyPlaysChart from "./YirDailyPlaysChart.svelte";
   import YirHourlyPlaysChart from "./YirHourlyPlaysChart.svelte";
   import YirMonthlyPlaysChart from "./YirMonthlyPlaysChart.svelte";
   import YirPageInner from "./YirPageInner.svelte";
   import YirSectionHeader from "./YirSectionHeader.svelte";
+  import YirTooltip from "./YirTooltip.svelte";
   import YirWeeklyPlaysChart from "./YirWeeklyPlaysChart.svelte";
+  import YirYearBarChart from "./YirYearBarChart.svelte";
 
   const {
     type,
     stats,
     year,
+    yearlyPlays,
   }: {
     type: "shows" | "movies";
     stats: YirStatsCategory;
     year: number;
+    /**
+     * Plays per calendar year. All-time view only; when provided, an extra
+     * "plays by year" chart is rendered above the weekly distribution.
+     */
+    yearlyPlays?: YirYearCount[];
   } = $props();
+
+  const yearlyChartData = $derived(
+    (yearlyPlays ?? []).map((d) => ({ label: String(d.year), value: d.count })),
+  );
 
   const sectionTitle = $derived(
     type === "shows"
@@ -108,13 +123,40 @@
 
     <div class="yir-separator"></div>
 
-    {#if stats.distributions}
+    {#if yearlyChartData.length > 0}
       <div class="yir-chart-container">
-        <YirWeeklyPlaysChart data={stats.distributions.weekly} {year} />
+        <YirYearBarChart data={yearlyChartData}>
+          {#snippet tooltip({ value, label })}
+            <YirTooltip
+              main="{formatNumber(value)} {value === 1 ? 'play' : 'plays'}"
+              sub={label}
+            />
+          {/snippet}
+        </YirYearBarChart>
       </div>
       <h2 class="yir-under-chart">
-        {m.yir_label_plays_by_week({ type: specificType })}
+        {m.yir_label_plays_by_year({ type: specificType })}
       </h2>
+    {/if}
+
+    {#if stats.distributions}
+      <!-- The all-time view shows plays-by-year (above) instead of by-week. -->
+      {#if yearlyChartData.length === 0}
+        <div class="yir-chart-container">
+          <YirWeeklyPlaysChart data={stats.distributions.weekly} {year}>
+            {#snippet tooltip({ value, week, dateRange })}
+              <YirTooltip
+                main="{formatNumber(value)} {value === 1 ? 'play' : 'plays'}"
+                sub="Week {week}"
+                extra={dateRange}
+              />
+            {/snippet}
+          </YirWeeklyPlaysChart>
+        </div>
+        <h2 class="yir-under-chart">
+          {m.yir_label_plays_by_week({ type: specificType })}
+        </h2>
+      {/if}
 
       <div class="yir-charts-row">
         <div>

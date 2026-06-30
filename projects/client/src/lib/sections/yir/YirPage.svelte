@@ -1,12 +1,13 @@
 <script lang="ts">
+  import type { YirYear } from "$lib/requests/models/YirYear";
+  import YirAllTime from "./all-time/YirAllTime.svelte";
   import YirHeader from "./_internal/YirHeader.svelte";
   import { useYirDetail } from "./_internal/useYirDetail";
   import { getYirTemplate } from "./getYirTemplate";
 
-  const { slug, year }: { slug: string; year: number } = $props();
+  const { slug, year }: { slug: string; year: YirYear } = $props();
 
   const { detail, isLoading } = $derived(useYirDetail({ slug, year }));
-  const Template = $derived(getYirTemplate(year));
 </script>
 
 <div
@@ -18,12 +19,17 @@
   <!-- Always mount the template so its scaffold (header text, hero shell)
        paints immediately; detail-dependent sections inside the template
        gate on `detail` and fill in once the query lands. -->
-  <Template
-    detail={$detail ?? null}
-    isLoading={$isLoading}
-    {slug}
-    {year}
-  />
+  {#if year === "all"}
+    <YirAllTime detail={$detail ?? null} isLoading={$isLoading} {slug} />
+  {:else}
+    {@const Template = getYirTemplate(year)}
+    <Template
+      detail={$detail ?? null}
+      isLoading={$isLoading}
+      {slug}
+      {year}
+    />
+  {/if}
 </div>
 
 <style lang="scss">

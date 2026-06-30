@@ -9,6 +9,7 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { useQuery } from "$lib/features/query/useQuery";
   import { m } from "$lib/paraglide/messages";
+  import type { YirYear } from "$lib/requests/models/YirYear";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
@@ -23,22 +24,42 @@
     year,
   }: {
     slug: string;
-    year: number;
+    year: YirYear;
   } = $props();
 
   const profileQuery = $derived(useQuery(userProfileQuery({ slug })));
   const profile = $derived(profileQuery.pipe(map(($q) => $q.data)));
 
   const currentYear = new Date().getFullYear();
+  const isAllTime = $derived(year === "all");
+  const numericYear = $derived(year === "all" ? currentYear : year);
   const isCurrentYear = $derived(year === currentYear);
-  const canGoNext = $derived(year < currentYear);
+
+  // Period nav loops: …2023 → 2024 → current year → all-time → (current year).
+  // All-time is the terminal step, so it has no "next".
+  const hasNext = $derived(!isAllTime);
 
   const periodLabel = $derived(
     isCurrentYear ? m.yir_title_year_to_date() : m.yir_title_year_in_review(),
   );
+  const yearLabel = $derived(isAllTime ? m.yir_label_all_time() : String(year));
 
-  const prevYearUrl = $derived(UrlBuilder.users(slug).yearToDate(year - 1));
-  const nextYearUrl = $derived(UrlBuilder.users(slug).yearToDate(year + 1));
+  const prevYearUrl = $derived(
+    isAllTime
+      ? UrlBuilder.users(slug).yearToDate(currentYear)
+      : UrlBuilder.users(slug).yearToDate(numericYear - 1),
+  );
+  const nextYearUrl = $derived(
+    numericYear < currentYear
+      ? UrlBuilder.users(slug).yearToDate(numericYear + 1)
+      : UrlBuilder.users(slug).allTime(),
+  );
+
+  const shareText = $derived(
+    isAllTime
+      ? m.yir_share_text_all_time()
+      : m.yir_share_text({ year: numericYear }),
+  );
 
   // Arrow-key navigation between years. Skip when the user is typing in an
   // input/textarea/contenteditable so we don't hijack form-field navigation.
@@ -56,8 +77,8 @@
   const { share } = $derived(useShare({ id: "yir" }));
 
   const shareData = $derived({
-    title: m.yir_share_text({ year }),
-    text: m.yir_share_text({ year }),
+    title: shareText,
+    text: shareText,
     url: browser ? page.url.toString() : "",
   });
 
@@ -81,7 +102,7 @@
       {
         key: "ArrowRight",
         modifier: false,
-        enabled: canGoNext,
+        enabled: hasNext,
         preventDefault: true,
         callback: ({ originalEvent }) => {
           if (isTextInputTarget(originalEvent.target)) return;
@@ -102,10 +123,12 @@
       <CaretLeftIcon />
     </a>
     <span class="yir-header-year-label">
-      <strong>{year}</strong>
-      <span class="yir-header-period">{periodLabel}</span>
+      <strong>{yearLabel}</strong>
+      {#if !isAllTime}
+        <span class="yir-header-period">{periodLabel}</span>
+      {/if}
     </span>
-    {#if canGoNext}
+    {#if hasNext}
       <a
         href={nextYearUrl}
         class="yir-header-nav-btn"
@@ -137,7 +160,7 @@
     <button
       class="yir-header-share"
       onclick={() => share(shareData)}
-      aria-label={m.button_label_share({ title: m.yir_share_text({ year }) })}
+      aria-label={m.button_label_share({ title: shareText })}
     >
       <ShareIcon />
     </button>
