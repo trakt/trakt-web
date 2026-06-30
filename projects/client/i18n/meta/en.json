@@ -7263,7 +7263,7 @@
       "description": "Title for the progress page."
     },
     "button_text_progress_in_progress": {
-      "default": "In Progress",
+      "default": "In progress",
       "description": "Text for the button that allows users to filter the list to only display shows that are in progress. This title should be as short and concise as possible."
     },
     "button_text_progress_completed": {
@@ -8289,6 +8289,39 @@
     "button_label_related_smart": {
       "default": "Smart related",
       "description": "Aria-label for the related media toggle button to show smart related movies or shows. This should be as short and concise as possible."
+    },
+    "text_list_private": {
+      "default": "Private",
+      "description": "Text used to indicate that a list is private."
+    },
+    "text_list_public": {
+      "default": "Public",
+      "description": "Text used to indicate that a list is public."
+    },
+    "text_list_public_info": {
+      "default": "List will be visible to all the users.",
+      "description": "Informational text explaining that a public list is visible to everyone."
+    },
+    "text_list_private_info": {
+      "default": "List will be visible only to you.",
+      "description": "Informational text explaining that a private list is visible only to its owner."
+    },
+    "button_text_sort_asc": {
+      "default": "Asc",
+      "description": "Text for the button that sorts items in ascending order. This should be as short and concise as possible."
+    },
+    "button_text_sort_desc": {
+      "default": "Desc",
+      "description": "Text for the button that sorts items in descending order. This should be as short and concise as possible."
+    },
+    "text_info_follow_requested": {
+      "default": "{username} requested to follow you.",
+      "description": "Text shown when another user has requested to follow you.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
     }
   }
 }
