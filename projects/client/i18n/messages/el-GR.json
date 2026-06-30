@@ -39,6 +39,8 @@
   "button_label_cancel": "Ακύρωση",
   "button_label_cancel_follow_request": "Ακύρωση αίτησης παρακολούθησης προς {username}",
   "button_label_cancel_vip": "Ακύρωση Συνδρομής",
+  "button_label_carousel_scroll_end": "Μετακινηθείτε στο τέλος",
+  "button_label_carousel_scroll_start": "Μετακινηθείτε στην αρχή",
   "button_label_change_about": "Αλλαγή σχετικών πληροφοριών",
   "button_label_change_birthday": "Αλλαγή γενεθλίων",
   "button_label_change_display_name": "Αλλαγή ονόματος εμφάνισης",

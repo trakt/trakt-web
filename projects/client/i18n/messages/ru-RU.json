@@ -39,6 +39,8 @@
   "button_label_cancel": "Отмена",
   "button_label_cancel_follow_request": "Отменить запрос на подписку для {username}",
   "button_label_cancel_vip": "Отменить подписку",
+  "button_label_carousel_scroll_end": "Прокрутить в конец",
+  "button_label_carousel_scroll_start": "Прокрутить в начало",
   "button_label_change_about": "Изменить информацию о себе",
   "button_label_change_birthday": "Изменить день рождения",
   "button_label_change_display_name": "Изменить отображаемое имя",

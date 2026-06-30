@@ -39,6 +39,8 @@
   "button_label_cancel": "Abbrechen",
   "button_label_cancel_follow_request": "Folgeanfrage an {username} abbrechen",
   "button_label_cancel_vip": "Abonnement kündigen",
+  "button_label_carousel_scroll_end": "Zum Ende scrollen",
+  "button_label_carousel_scroll_start": "Zum Anfang scrollen",
   "button_label_change_about": "Über ändern",
   "button_label_change_birthday": "Geburtstag ändern",
   "button_label_change_display_name": "Anzeigename ändern",

@@ -39,6 +39,8 @@
   "button_label_cancel": "Anulează",
   "button_label_cancel_follow_request": "Anulează cererea de urmărire către {username}",
   "button_label_cancel_vip": "Anulează abonamentul",
+  "button_label_carousel_scroll_end": "Derulează la sfârșit",
+  "button_label_carousel_scroll_start": "Derulează la început",
   "button_label_change_about": "Schimbă descrierea",
   "button_label_change_birthday": "Schimbă data nașterii",
   "button_label_change_display_name": "Schimbă numele afișat",

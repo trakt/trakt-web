@@ -39,6 +39,8 @@
   "button_label_cancel": "Mégse",
   "button_label_cancel_follow_request": "Követési kérelem visszavonása {username} felhasználótól",
   "button_label_cancel_vip": "Előfizetés lemondása",
+  "button_label_carousel_scroll_end": "Görgessen a végére",
+  "button_label_carousel_scroll_start": "Görgessen az elejére",
   "button_label_change_about": "Rólam módosítása",
   "button_label_change_birthday": "Születésnap módosítása",
   "button_label_change_display_name": "Megjelenített név módosítása",

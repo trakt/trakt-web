@@ -39,6 +39,8 @@
   "button_label_cancel": "Скасувати",
   "button_label_cancel_follow_request": "Скасувати запит на підписку до {username}",
   "button_label_cancel_vip": "Скасувати підписку",
+  "button_label_carousel_scroll_end": "Прокрутити до кінця",
+  "button_label_carousel_scroll_start": "Прокрутити до початку",
   "button_label_change_about": "Змінити про себе",
   "button_label_change_birthday": "Змінити день народження",
   "button_label_change_display_name": "Змінити ім'я для відображення",

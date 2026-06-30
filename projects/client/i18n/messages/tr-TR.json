@@ -39,6 +39,8 @@
   "button_label_cancel": "İptal",
   "button_label_cancel_follow_request": "{username} kullanıcısına gönderilen takip isteğini iptal et",
   "button_label_cancel_vip": "Aboneliği İptal Et",
+  "button_label_carousel_scroll_end": "Sona kaydır",
+  "button_label_carousel_scroll_start": "Başa kaydır",
   "button_label_change_about": "Hakkında değiştir",
   "button_label_change_birthday": "Doğum gününü değiştir",
   "button_label_change_display_name": "Görünen adı değiştir",

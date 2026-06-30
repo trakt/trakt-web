@@ -39,6 +39,8 @@
   "button_label_cancel": "Annuler",
   "button_label_cancel_follow_request": "Annuler la demande d'abonnement à {username}",
   "button_label_cancel_vip": "Annuler l'abonnement",
+  "button_label_carousel_scroll_end": "Faire défiler à la fin",
+  "button_label_carousel_scroll_start": "Faire défiler au début",
   "button_label_change_about": "Modifier la description",
   "button_label_change_birthday": "Modifier la date de naissance",
   "button_label_change_display_name": "Modifier le nom d'affichage",

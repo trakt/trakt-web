@@ -39,6 +39,8 @@
   "button_label_cancel": "Annuleren",
   "button_label_cancel_follow_request": "Volgverzoek aan {username} annuleren",
   "button_label_cancel_vip": "Abonnement opzeggen",
+  "button_label_carousel_scroll_end": "Scroll naar het einde",
+  "button_label_carousel_scroll_start": "Scroll naar het begin",
   "button_label_change_about": "Wijzig 'over mij'",
   "button_label_change_birthday": "Verjaardag wijzigen",
   "button_label_change_display_name": "Wijzig weergavenaam",

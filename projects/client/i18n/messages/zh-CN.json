@@ -39,6 +39,8 @@
   "button_label_cancel": "取消",
   "button_label_cancel_follow_request": "取消对 {username} 的关注请求",
   "button_label_cancel_vip": "取消订阅",
+  "button_label_carousel_scroll_end": "滚动到末尾",
+  "button_label_carousel_scroll_start": "滚动到开始",
   "button_label_change_about": "更改关于我",
   "button_label_change_birthday": "更改生日",
   "button_label_change_display_name": "更改显示名称",

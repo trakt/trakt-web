@@ -39,6 +39,8 @@
   "button_label_cancel": "Cancelar",
   "button_label_cancel_follow_request": "Cancelar pedido para seguir {username}",
   "button_label_cancel_vip": "Cancelar Assinatura",
+  "button_label_carousel_scroll_end": "Rolar para o fim",
+  "button_label_carousel_scroll_start": "Rolar para o início",
   "button_label_change_about": "Alterar sobre mim",
   "button_label_change_birthday": "Alterar data de nascimento",
   "button_label_change_display_name": "Alterar nome de exibição",

@@ -39,6 +39,8 @@
   "button_label_cancel": "Cancel",
   "button_label_cancel_follow_request": "Cancel follow request to {username}",
   "button_label_cancel_vip": "Cancel Subscription",
+  "button_label_carousel_scroll_end": "Scroll to end",
+  "button_label_carousel_scroll_start": "Scroll to start",
   "button_label_change_about": "Change about",
   "button_label_change_birthday": "Change birthday",
   "button_label_change_display_name": "Change display name",

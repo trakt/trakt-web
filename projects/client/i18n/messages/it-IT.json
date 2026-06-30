@@ -39,6 +39,8 @@
   "button_label_cancel": "Annulla",
   "button_label_cancel_follow_request": "Annulla richiesta di follow a {username}",
   "button_label_cancel_vip": "Annulla abbonamento",
+  "button_label_carousel_scroll_end": "Scorri alla fine",
+  "button_label_carousel_scroll_start": "Scorri all'inizio",
   "button_label_change_about": "Modifica descrizione",
   "button_label_change_birthday": "Cambia data di nascita",
   "button_label_change_display_name": "Cambia nome visualizzato",

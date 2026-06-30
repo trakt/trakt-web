@@ -39,6 +39,8 @@
   "button_label_cancel": "Anuluj",
   "button_label_cancel_follow_request": "Anuluj prośbę o obserwowanie dla {username}",
   "button_label_cancel_vip": "Anuluj subskrypcję",
+  "button_label_carousel_scroll_end": "Przewiń do końca",
+  "button_label_carousel_scroll_start": "Przewiń do początku",
   "button_label_change_about": "Zmień opis",
   "button_label_change_birthday": "Zmień datę urodzenia",
   "button_label_change_display_name": "Zmień wyświetlaną nazwę",

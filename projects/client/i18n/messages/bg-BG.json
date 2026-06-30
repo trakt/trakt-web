@@ -39,6 +39,8 @@
   "button_label_cancel": "Отказ",
   "button_label_cancel_follow_request": "Отмяна на заявка за следване до {username}",
   "button_label_cancel_vip": "Анулиране на абонамент",
+  "button_label_carousel_scroll_end": "Превъртете до края",
+  "button_label_carousel_scroll_start": "Превъртете до началото",
   "button_label_change_about": "Промени описанието",
   "button_label_change_birthday": "Промени рожден ден",
   "button_label_change_display_name": "Промени показвано име",

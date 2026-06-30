@@ -39,6 +39,8 @@
   "button_label_cancel": "لغو",
   "button_label_cancel_follow_request": "لغو درخواست دنبال کردن برای {username}",
   "button_label_cancel_vip": "لغو اشتراک",
+  "button_label_carousel_scroll_end": "پیمایش به انتها",
+  "button_label_carousel_scroll_start": "پیمایش به ابتدا",
   "button_label_change_about": "تغییر درباره",
   "button_label_change_birthday": "تغییر تاریخ تولد",
   "button_label_change_display_name": "تغییر نام نمایشی",

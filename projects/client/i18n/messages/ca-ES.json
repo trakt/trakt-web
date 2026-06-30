@@ -39,6 +39,8 @@
   "button_label_cancel": "Cancel·la",
   "button_label_cancel_follow_request": "Cancel·la la sol·licitud de seguiment a {username}",
   "button_label_cancel_vip": "Cancel·la la subscripció",
+  "button_label_carousel_scroll_end": "Desplaça't al final",
+  "button_label_carousel_scroll_start": "Desplaça't a l'inici",
   "button_label_change_about": "Canvia informació",
   "button_label_change_birthday": "Canvia la data de naixement",
   "button_label_change_display_name": "Canvia el nom de visualització",

@@ -39,6 +39,8 @@
   "button_label_cancel": "Batal",
   "button_label_cancel_follow_request": "Batalkan permintaan ikuti ke {username}",
   "button_label_cancel_vip": "Batalkan Langganan",
+  "button_label_carousel_scroll_end": "Gulir ke akhir",
+  "button_label_carousel_scroll_start": "Gulir ke awal",
   "button_label_change_about": "Ubah tentang",
   "button_label_change_birthday": "Ubah tanggal lahir",
   "button_label_change_display_name": "Ubah nama tampilan",

@@ -39,6 +39,8 @@
   "button_label_cancel": "キャンセル",
   "button_label_cancel_follow_request": "{username}へのフォローリクエストをキャンセル",
   "button_label_cancel_vip": "サブスクリプションをキャンセル",
+  "button_label_carousel_scroll_end": "末尾へスクロール",
+  "button_label_carousel_scroll_start": "先頭へスクロール",
   "button_label_change_about": "自己紹介を変更",
   "button_label_change_birthday": "誕生日を変更",
   "button_label_change_display_name": "表示名を変更",

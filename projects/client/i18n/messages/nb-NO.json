@@ -39,6 +39,8 @@
   "button_label_cancel": "Avbryt",
   "button_label_cancel_follow_request": "Avbryt følgeforspørsel til {username}",
   "button_label_cancel_vip": "Avbryt abonnement",
+  "button_label_carousel_scroll_end": "Rull til slutt",
+  "button_label_carousel_scroll_start": "Rull til start",
   "button_label_change_about": "Endre om meg",
   "button_label_change_birthday": "Endre fødselsdato",
   "button_label_change_display_name": "Endre visningsnavn",
