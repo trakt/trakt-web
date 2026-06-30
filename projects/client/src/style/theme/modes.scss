@@ -23,6 +23,12 @@
   --color-medal-bronze: var(--orange-400);
   --color-text-emphasis: var(--purple-700);
 
+  --color-accent-purple: var(--purple-700);
+  --color-accent-red: var(--red-700);
+  --color-accent-blue: var(--blue-700);
+  --color-accent-orange: var(--orange-700);
+  --color-accent-default: var(--color-foreground);
+
   --color-input-background: var(--shade-10);
 
   --color-drawer-border: var(--shade-400);
@@ -514,6 +520,12 @@
   --color-medal-silver: var(--shade-400);
   --color-medal-bronze: var(--orange-400);
   --color-text-emphasis: var(--purple-300);
+
+  --color-accent-purple: var(--purple-300);
+  --color-accent-red: var(--red-300);
+  --color-accent-blue: var(--blue-300);
+  --color-accent-orange: var(--orange-300);
+  --color-accent-default: var(--color-foreground);
 
   --color-input-background: color-mix(
     in srgb,
