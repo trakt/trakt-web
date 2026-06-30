@@ -2411,6 +2411,53 @@
       "default": "No ratings yet.",
       "description": "Empty-state text shown in the ratings breakdown drawer when no rating data is available for the title."
     },
+    "header_ratings_quality_over_time": {
+      "default": "Quality Over Time",
+      "description": "Section header above the season-ratings line chart in the ratings breakdown drawer, which plots each season's rating over time."
+    },
+    "label_season_short": {
+      "default": "S{number}",
+      "description": "Compact season label (e.g. S1) used for the season-ratings chart axis, tooltips and peak/low summary.",
+      "variables": {
+        "number": {
+          "type": "string"
+        }
+      }
+    },
+    "label_ratings_season_chart": {
+      "default": "Season ratings over time",
+      "description": "Accessible label for the season-ratings line chart in the ratings breakdown drawer."
+    },
+    "text_ratings_season_extremes": {
+      "default": "Peak {peak} · {peakRating}% · Low {low} · {lowRating}%",
+      "description": "Summary line above the season-ratings chart calling out the highest- and lowest-rated seasons. {peak}/{low} are compact season labels (e.g. S4); {peakRating}/{lowRating} are whole-number percentages.",
+      "variables": {
+        "peak": {
+          "type": "string"
+        },
+        "peakRating": {
+          "type": "string"
+        },
+        "low": {
+          "type": "string"
+        },
+        "lowRating": {
+          "type": "string"
+        }
+      }
+    },
+    "text_ratings_season_point": {
+      "default": "{season} · {rating}%",
+      "description": "Tooltip for a point on the season-ratings chart. {season} is a compact season label (e.g. S3); {rating} is a whole-number percentage.",
+      "variables": {
+        "season": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "string"
+        }
+      }
+    },
     "button_label_view_ratings_breakdown": {
       "default": "View ratings breakdown",
       "description": "Aria-label for the Trakt rating in the summary header that opens the ratings breakdown drawer."
