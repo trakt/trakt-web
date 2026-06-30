@@ -6,6 +6,7 @@
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName.ts";
   import YirCountriesMap from "../../_internal/YirCountriesMap.svelte";
   import YirTooltip from "../../_internal/YirTooltip.svelte";
+  import { yirMediaUnit } from "../../_internal/yirMediaUnit.ts";
   import Yir2024StatSummary from "./Yir2024StatSummary.svelte";
 
   type Yir2024CountriesSectionProps = {
@@ -25,12 +26,8 @@
     return toCountryName(code, languageTag());
   }
 
-  // FIXME(i18n): hardcoded English plurals match the existing convention
-  // across the YIR module (see Yir2024CompaniesSection and the default
-  // template). Migrate holistically when YIR i18n unit keys are added.
   function itemUnit(count: number): string {
-    if (type === "movies") return count === 1 ? "movie" : "movies";
-    return count === 1 ? "show" : "shows";
+    return yirMediaUnit(type, count);
   }
 
   // API returns the list sorted by count desc, so first = most, last = least.

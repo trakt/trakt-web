@@ -4,6 +4,7 @@
   import { formatNumber } from "$lib/utils/format/formatNumber.ts";
   import YirCompaniesBubbleChart from "../../_internal/YirCompaniesBubbleChart.svelte";
   import YirTooltip from "../../_internal/YirTooltip.svelte";
+  import { yirMediaUnit } from "../../_internal/yirMediaUnit.ts";
   import Yir2024StatSummary from "./Yir2024StatSummary.svelte";
 
   type Yir2024CompaniesSectionProps = {
@@ -28,13 +29,8 @@
     companies.length > 1 ? companies[companies.length - 1] : undefined,
   );
 
-  // FIXME(i18n): hardcoded English plurals match the existing convention
-  // across the YIR module (default template uses the same pattern in
-  // YirStatsSection, YirTotalsSection, YirMostWatchedSection, etc.).
-  // Migrate holistically when i18n keys are added across all YIR sections.
   function itemUnit(count: number): string {
-    if (type === "movies") return count === 1 ? "movie" : "movies";
-    return count === 1 ? "show" : "shows";
+    return yirMediaUnit(type, count);
   }
 </script>
 

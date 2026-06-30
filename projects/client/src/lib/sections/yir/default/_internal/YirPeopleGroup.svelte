@@ -10,6 +10,7 @@
   import { DEFAULT_AVATAR } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useYirPeople } from "../../_internal/useYirPeople";
+  import { yirUnit } from "../../_internal/yirUnit.ts";
   import YirSectionHeader from "./YirSectionHeader.svelte";
 
   const {
@@ -125,7 +126,11 @@
                     <span>{title.title} —</span>
                     <span class="yir-episode-count">
                       {title.episodeCount}
-                      {title.episodeCount === 1 ? "episode" : "episodes"}
+                      {yirUnit(
+                        title.episodeCount,
+                        m.yir_unit_episode,
+                        m.yir_unit_episodes,
+                      )}
                     </span>
                   {:else}
                     <span>{title.title}</span>
@@ -151,7 +156,11 @@
                   <h3 class="yir-person-count">
                     {#if person.count.movies > 0}
                       {person.count.movies}
-                      {person.count.movies === 1 ? "movie" : "movies"}
+                      {yirUnit(
+                        person.count.movies,
+                        m.yir_unit_movie,
+                        m.yir_unit_movies,
+                      )}
                     {:else}
                       &nbsp;
                     {/if}
@@ -159,7 +168,11 @@
                   <h3 class="yir-person-count">
                     {#if person.count.shows > 0}
                       {person.count.shows}
-                      {person.count.shows === 1 ? "show" : "shows"}
+                      {yirUnit(
+                        person.count.shows,
+                        m.yir_unit_show,
+                        m.yir_unit_shows,
+                      )}
                     {:else}
                       &nbsp;
                     {/if}

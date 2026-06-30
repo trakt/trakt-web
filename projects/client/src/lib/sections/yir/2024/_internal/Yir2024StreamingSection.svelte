@@ -4,6 +4,7 @@
   import { formatNumber } from "$lib/utils/format/formatNumber.ts";
   import YirStreamingBubbleChart from "../../_internal/YirStreamingBubbleChart.svelte";
   import YirTooltip from "../../_internal/YirTooltip.svelte";
+  import { yirMediaUnit } from "../../_internal/yirMediaUnit.ts";
 
   type Yir2024StreamingSectionProps = {
     services: YirStreamingService[];
@@ -18,14 +19,11 @@
     [...services].sort((a, b) => b.all - a.all).slice(0, 3),
   );
 
-  // FIXME(i18n): hardcoded English plurals match the existing convention
-  // across the YIR module (see Yir2024CompaniesSection). Migrate holistically
-  // when i18n keys are added across all YIR sections.
   function showsUnit(count: number): string {
-    return count === 1 ? "show" : "shows";
+    return yirMediaUnit("shows", count);
   }
   function moviesUnit(count: number): string {
-    return count === 1 ? "movie" : "movies";
+    return yirMediaUnit("movies", count);
   }
 
   // Per-service count lines, each on its own row in the tooltip. Zero counts
