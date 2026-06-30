@@ -14,6 +14,7 @@ export const LibraryMappedMock: LibraryItem[] = [
       },
       'genres': [],
       'id': 13352063,
+      'imdbId': 'tt37976114',
       'key': 'episode-13352063',
       'number': 4,
       'overview':
@@ -264,6 +265,7 @@ export const LibraryMappedMock: LibraryItem[] = [
       },
       'genres': [],
       'id': 298461,
+      'imdbId': 'tt0642348',
       'key': 'episode-298461',
       'number': 1,
       'overview':

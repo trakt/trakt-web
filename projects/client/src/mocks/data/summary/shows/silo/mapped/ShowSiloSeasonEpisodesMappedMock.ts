@@ -11,6 +11,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 5165667,
+    'imdbId': 'tt14693272',
     'key': 'episode-5165667',
     'number': 1,
     'overview':
@@ -33,6 +34,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374195,
+    'imdbId': 'tt17057038',
     'key': 'episode-7374195',
     'number': 2,
     'overview':
@@ -55,6 +57,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374298,
+    'imdbId': 'tt17057042',
     'key': 'episode-7374298',
     'number': 3,
     'overview':
@@ -77,6 +80,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374307,
+    'imdbId': 'tt16091606',
     'key': 'episode-7374307',
     'number': 4,
     'overview':
@@ -99,6 +103,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374308,
+    'imdbId': 'tt17073696',
     'key': 'episode-7374308',
     'number': 5,
     'overview':
@@ -121,6 +126,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374309,
+    'imdbId': 'tt18078232',
     'key': 'episode-7374309',
     'number': 6,
     'overview':
@@ -143,6 +149,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374310,
+    'imdbId': 'tt19782800',
     'key': 'episode-7374310',
     'number': 7,
     'overview':
@@ -165,6 +172,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374312,
+    'imdbId': 'tt19782808',
     'key': 'episode-7374312',
     'number': 8,
     'overview':
@@ -187,6 +195,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374313,
+    'imdbId': 'tt19782850',
     'key': 'episode-7374313',
     'number': 9,
     'overview':
@@ -209,6 +218,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374314,
+    'imdbId': 'tt19782854',
     'key': 'episode-7374314',
     'number': 10,
     'overview':

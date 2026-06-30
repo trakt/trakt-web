@@ -6,4 +6,5 @@ export enum FeatureFlag {
   UpNextSmartSort = 'up-next-smart-sort',
   Rewatching = 'rewatching',
   Leaderboard = 'leaderboard',
+  ParentalGuide = 'parental-guide',
 }
