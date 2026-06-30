@@ -66,8 +66,8 @@
 
     border-radius: var(--border-radius-l);
 
-    color: var(--shade-10);
-    background: var(--shade-900);
+    color: var(--color-review-foreground);
+    background: var(--color-review-base);
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: background, height, padding, gap;
@@ -78,8 +78,8 @@
   .trakt-review-content[data-variant="gradient"] {
     background: radial-gradient(
       60.59% 305.37% at 100% 100%,
-      var(--purple-500) 0%,
-      var(--shade-900) 100%
+      var(--color-review-accent) 0%,
+      var(--color-review-base) 100%
     );
   }
 

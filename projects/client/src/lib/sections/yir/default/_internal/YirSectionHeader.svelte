@@ -57,8 +57,8 @@
       text-transform: uppercase;
       display: inline-block;
       letter-spacing: 1px;
-      border: var(--border-thickness-xxs) solid var(--shade-10);
-      background-color: color-mix(in srgb, var(--shade-1000) 50%, transparent);
+      border: var(--border-thickness-xxs) solid var(--color-yir-border);
+      background-color: var(--color-yir-title-chip-background);
       font-size: var(--ni-16);
       line-height: 1;
       text-align: center;
@@ -67,8 +67,8 @@
 
     .yir-header-number {
       display: inline-block;
-      background-color: var(--shade-10);
-      color: var(--shade-1000);
+      background-color: var(--color-yir-badge-background);
+      color: var(--color-yir-badge-foreground);
       padding: var(--ni-6) var(--ni-8);
       margin-inline-end: var(--ni-neg-4);
     }

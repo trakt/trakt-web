@@ -23,6 +23,6 @@
 
 <style lang="scss">
   .trakt-yir-people-section {
-    background-color: var(--shade-1000);
+    background-color: var(--color-yir-surface);
   }
 </style>

@@ -24,9 +24,10 @@
 
   // Companies with no brand color or with a pure-black brand color would
   // collapse onto the panel background; fall back to a neutral semantic
-  // gray so the bubble still reads. Carbon writes the value as an inline
-  // SVG fill, so `var(...)` strings resolve at render time at the SVG node.
-  const fallbackColor = "var(--shade-800)";
+  // gray that reads on both the light and dark YIR surface. Carbon writes
+  // the value as an inline SVG fill, so `var(...)` strings resolve at
+  // render time at the SVG node.
+  const fallbackColor = "var(--color-yir-text-muted)";
   const blackPattern = /^#0{3}(?:0{3})?$/i;
 
   function colorFor(company: YirCompany): string {

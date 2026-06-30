@@ -25,7 +25,7 @@
 
   .yir-vip-page {
     position: relative;
-    background-color: var(--shade-950);
+    background-color: var(--color-yir-background);
   }
 
   .yir-upgrade-content {
@@ -35,11 +35,11 @@
 
   .yir-go-vip {
     margin: 0 auto;
-    background: var(--shade-950);
+    background: var(--color-yir-background);
     width: var(--ni-380);
     max-width: 75%;
     font-size: var(--ni-16);
-    box-shadow: 0 0 var(--ni-52) var(--red-800);
+    box-shadow: 0 0 var(--ni-52) var(--color-yir-upgrade-glow);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,7 +48,7 @@
     gap: var(--gap-m);
 
     &:hover {
-      background: var(--shade-930);
+      background: var(--color-yir-surface-raised);
     }
 
     @include for-mobile {
@@ -58,6 +58,6 @@
   }
 
   .yir-upgrade-text {
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
   }
 </style>

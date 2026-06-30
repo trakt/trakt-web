@@ -102,7 +102,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-yir-totals-section {
-    background-color: var(--shade-1000);
+    background-color: var(--color-yir-surface);
     padding-bottom: var(--ni-72);
   }
 
@@ -136,7 +136,7 @@
     font-size: var(--ni-60);
     font-weight: bold;
     line-height: 1;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     @include for-tablet-sm-and-below {
       font-size: var(--ni-44);
@@ -154,7 +154,7 @@
     gap: var(--gap-xxs);
     font-size: var(--font-size-text);
     text-transform: uppercase;
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
     margin-top: 0;
   }
 

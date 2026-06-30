@@ -197,7 +197,7 @@
   .yir-people-loading {
     text-align: center;
     opacity: 0.5;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
   }
 
   .yir-pager {
@@ -212,11 +212,11 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--shade-500);
+    color: var(--color-yir-text-muted);
     transition: color 0.3s;
 
     &:hover {
-      color: var(--shade-300);
+      color: var(--color-yir-text-secondary);
     }
 
     &.invisible {
@@ -263,25 +263,25 @@
     :global(.trakt-link) {
       display: block;
       text-decoration: none;
-      color: var(--shade-10);
+      color: var(--color-yir-text-primary);
     }
 
     @include for-mouse {
       &:hover {
         .yir-headshot {
-          box-shadow: 0 0 var(--ni-20) var(--purple-500);
+          box-shadow: 0 0 var(--ni-20) var(--color-yir-accent);
 
           &::after {
-            border-color: var(--purple-500);
+            border-color: var(--color-yir-accent);
           }
         }
 
         .yir-person-name {
-          color: var(--purple-500);
+          color: var(--color-yir-accent);
         }
 
         .yir-person-count {
-          color: var(--shade-100);
+          color: var(--color-yir-text-primary);
         }
       }
     }
@@ -299,16 +299,15 @@
     position: absolute;
     top: 0;
     inset-inline-start: var(--ni-14);
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
     font-weight: bold;
     font-size: var(--ni-12);
     z-index: 2;
-    text-shadow: 0 var(--ni-1) var(--ni-2)
-      color-mix(in srgb, var(--shade-1000) 80%, transparent);
+    text-shadow: 0 var(--ni-1) var(--ni-2) var(--color-yir-scrim);
   }
 
   .yir-headshot {
-    background-color: var(--shade-1000);
+    background-color: var(--color-yir-surface);
     position: relative;
     overflow: hidden;
     border-radius: 50%;
@@ -326,10 +325,12 @@
       border-radius: 100%;
       width: 100%;
       height: 100%;
-      box-shadow: 0 0 0 var(--ni-104) var(--shade-1000);
+      // Flood ring that crops the square headshot into a circle - must match
+      // the section surface so the masked corners blend in both themes.
+      box-shadow: 0 0 0 var(--ni-104) var(--color-yir-surface);
       inset-inline-start: 0;
       top: 0;
-      border: var(--border-thickness-xxs) solid var(--shade-600);
+      border: var(--border-thickness-xxs) solid var(--color-yir-border-subtle);
       transition: border-color 0.5s;
     }
   }
@@ -349,7 +350,7 @@
     font-size: var(--ni-16);
     margin-top: var(--ni-12);
     margin-bottom: var(--ni-8);
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
     transition: all 0.5s;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -363,7 +364,7 @@
   .yir-person-count {
     font-size: var(--ni-12);
     text-transform: uppercase;
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
     margin: var(--ni-2) 0 0 0;
     transition: all 0.5s;
 

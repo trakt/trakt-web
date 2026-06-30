@@ -28,7 +28,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-yir-networks-section {
-    background-color: var(--shade-950);
+    background-color: var(--color-yir-background);
   }
 
   .yir-network-bubbles {

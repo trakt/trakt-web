@@ -106,7 +106,17 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-yir-most-watched-section {
-    background-color: var(--shade-950);
+    // Poster hero: fanart + dark strip + white text in both themes. Pin the
+    // shared chrome tokens (incl. the ranked section-header pill) to their
+    // always-dark poster values (see YirTitleSection for the rationale).
+    --color-yir-text-primary: var(--color-yir-poster-foreground);
+    --color-yir-border: var(--color-yir-poster-foreground);
+    --color-yir-title-chip-background: var(--color-yir-scrim);
+    --color-yir-badge-background: var(--color-yir-poster-foreground);
+    --color-yir-badge-foreground: var(--color-yir-poster-surface);
+
+    background-color: var(--color-yir-poster-background);
+    color: var(--color-yir-poster-foreground);
     text-align: center;
     position: relative;
   }
@@ -138,10 +148,7 @@
   .yir-shade {
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-      color-mix(in srgb, var(--shade-1000) 80%, transparent),
-      transparent
-    );
+    background: radial-gradient(var(--color-yir-scrim), transparent);
   }
 
   .yir-featured-card {
@@ -156,7 +163,7 @@
 
   .yir-card-media {
     margin-top: var(--ni-20);
-    color: var(--shade-10);
+    color: var(--color-yir-poster-foreground);
 
     :global(.trakt-link) {
       display: block;
@@ -173,8 +180,7 @@
 
   .yir-card-title {
     font-size: var(--ni-32);
-    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2)
-      color-mix(in srgb, var(--shade-1000) 80%, transparent);
+    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2) var(--color-yir-scrim);
     margin: 0;
 
     @include for-mobile {
@@ -207,14 +213,11 @@
     margin: -2.5% var(--layout-sidebar-distance) 0;
     // Solid backdrop so hover-faded thumbs reveal this dark color instead
     // of bleeding the fanart through.
-    background-color: var(--shade-1000);
+    background-color: var(--color-yir-poster-surface);
     border-radius: var(--border-radius-s);
     // Drop-shadow follows the alpha outline (incl. the first/last thumbs'
     // rounded corners), so the strip reads as floating above the fanart.
-    filter: drop-shadow(
-      0 var(--ni-4) var(--ni-12)
-        color-mix(in srgb, var(--shade-1000) 70%, transparent)
-    );
+    filter: drop-shadow(0 var(--ni-4) var(--ni-12) var(--color-yir-scrim));
 
     &:hover {
       .yir-grid-item {
@@ -299,12 +302,12 @@
   .yir-rank {
     --rank-size: var(--ni-22);
 
-    background-color: var(--shade-800);
-    color: var(--shade-10);
+    background-color: var(--color-yir-poster-chip);
+    color: var(--color-yir-poster-foreground);
     display: inline-block;
     font-size: var(--ni-12);
     font-weight: bold;
-    border: var(--border-thickness-xs) solid var(--shade-10);
+    border: var(--border-thickness-xs) solid var(--color-yir-poster-foreground);
     border-radius: 50%;
     height: var(--rank-size);
     width: var(--rank-size);

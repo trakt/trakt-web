@@ -82,9 +82,16 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-yir-calendar-section {
+    // Poster hero: keep the overlay dark/white in both themes (see
+    // YirTitleSection for the token-pinning rationale).
+    --color-yir-text-primary: var(--color-yir-poster-foreground);
+    --color-yir-border: var(--color-yir-poster-foreground);
+    --color-yir-title-chip-background: var(--color-yir-scrim);
+
     position: relative;
     text-align: center;
-    background-color: var(--shade-950);
+    background-color: var(--color-yir-poster-background);
+    color: var(--color-yir-poster-foreground);
   }
 
   .yir-calendar-bg {
@@ -99,10 +106,7 @@
   .yir-calendar-shade {
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-      color-mix(in srgb, var(--shade-1000) 80%, transparent),
-      transparent
-    );
+    background: radial-gradient(var(--color-yir-scrim), transparent);
   }
 
   .yir-calendar-inner {
@@ -115,7 +119,7 @@
     :global(.trakt-link) {
       display: block;
       text-decoration: none;
-      color: var(--shade-10);
+      color: var(--color-yir-poster-foreground);
     }
   }
 
@@ -128,8 +132,7 @@
 
   .yir-calendar-title {
     font-size: var(--ni-40);
-    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2)
-      color-mix(in srgb, var(--shade-1000) 80%, transparent);
+    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2) var(--color-yir-scrim);
     margin: 0;
 
     @include for-mobile {
@@ -139,8 +142,7 @@
   }
 
   .yir-calendar-episode {
-    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2)
-      color-mix(in srgb, var(--shade-1000) 80%, transparent);
+    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2) var(--color-yir-scrim);
     margin: var(--ni-10) 0 0 0;
     font-size: var(--ni-22);
 
@@ -164,7 +166,7 @@
     grid-row: 1 / 3;
     display: flex;
     align-items: center;
-    color: var(--shade-10);
+    color: var(--color-yir-poster-foreground);
     opacity: 0.7;
 
     :global(svg) {

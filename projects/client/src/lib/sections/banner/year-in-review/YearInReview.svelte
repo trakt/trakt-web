@@ -75,8 +75,8 @@
 
       background: linear-gradient(
         178deg,
-        var(--shade-920) 43.39%,
-        color-mix(in srgb, var(--purple-500) 75%, transparent) 145.02%
+        var(--color-review-base-deep) 43.39%,
+        color-mix(in srgb, var(--color-review-accent) 75%, transparent) 145.02%
       );
     }
 
@@ -95,8 +95,8 @@
 
         background: linear-gradient(
           171deg,
-          var(--shade-920) 63.39%,
-          color-mix(in srgb, var(--purple-500) 75%, transparent) 145.02%
+          var(--color-review-base-deep) 63.39%,
+          color-mix(in srgb, var(--color-review-accent) 75%, transparent) 145.02%
         );
       }
     }
