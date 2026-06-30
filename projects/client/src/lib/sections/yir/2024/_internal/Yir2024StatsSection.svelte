@@ -303,11 +303,7 @@
       var(--panel-padding-bottom);
     // Approximates v2's #112836 → #191C1E radial: a faint blue-tinged
     // center at the top fading out to a darker charcoal everywhere else.
-    background: radial-gradient(
-      50% 39.27% at 50% 0%,
-      color-mix(in srgb, var(--shade-950) 90%, var(--blue-500) 10%) 0%,
-      color-mix(in srgb, var(--shade-950) 70%, var(--shade-900) 30%) 100%
-    );
+    background: var(--color-yir-panel-background);
 
     @include for-mobile {
       --panel-padding-x: var(--ni-20);
@@ -373,7 +369,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xxs);
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
 
     p {
       margin: 0;
@@ -384,7 +380,7 @@
     // The i18n strings embed <b> around dynamic values; render those as
     // bold purple inline highlights.
     :global(b) {
-      color: var(--purple-300);
+      color: var(--color-yir-text-accent);
       font-weight: 700;
     }
   }
@@ -438,7 +434,7 @@
 
   .yir-2024-stats-card-icon {
     display: inline-flex;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     :global(svg) {
       width: var(--ni-28);
@@ -467,7 +463,7 @@
     justify-content: space-between;
     align-items: baseline;
     padding: var(--ni-10) var(--panel-padding-x);
-    border-bottom: var(--border-thickness-xxs) solid var(--shade-800);
+    border-bottom: var(--border-thickness-xxs) solid var(--color-yir-separator);
 
     &:last-child {
       border-bottom: none;
@@ -476,7 +472,7 @@
     dt {
       margin: 0;
       font-size: var(--font-size-title);
-      color: var(--shade-300);
+      color: var(--color-yir-text-secondary);
 
       @include for-mobile {
         font-size: var(--font-size-text);
@@ -486,7 +482,7 @@
     dd {
       margin: 0;
       font-size: var(--font-size-title);
-      color: var(--shade-10);
+      color: var(--color-yir-text-primary);
 
       @include for-mobile {
         font-size: var(--font-size-text);
@@ -522,7 +518,7 @@
     font-size: var(--watermark-font-size);
     line-height: 1;
     letter-spacing: -0.02em;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
     opacity: 0.05;
     pointer-events: none;
     user-select: none;

@@ -26,13 +26,9 @@
 </div>
 
 <style lang="scss">
-  // 2024 palette: bars use the lightest cool gray (shade-100, exactly
-  // matches v2's #d2d6d9); peak week pops in the lighter purple-300, and
-  // hover lands on purple-500 (#9f42c6, exactly matches v2's hover).
+  // Bars render through the shared --viz-* palette (theme-aware, peak-weighted
+  // by the BarChart primitive); only the chart height is template-specific.
   .trakt-yir-2024-weekly-plays-chart {
-    --color-bar-custom-default: var(--shade-100);
-    --color-bar-custom-highlight: var(--purple-300);
-    --color-bar-custom-hover: var(--purple-500);
     --height-bar-chart: var(--ni-300);
     width: 100%;
 

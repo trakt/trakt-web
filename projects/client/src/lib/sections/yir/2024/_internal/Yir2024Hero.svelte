@@ -117,23 +117,42 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-yir-2024-hero {
+    position: relative;
+    // Own stacking context so the z-index:-1 watermark below is scoped to this
+    // element and can't slip behind the page background.
+    isolation: isolate;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: var(--gap-xl);
-    // Stylized "trakt" wordmark + fanart cutout sits behind the hero text.
-    // Pushed down a bit so the "2024" stars row sits above it cleanly.
-    background-image: url("/yir/2024/trakt-fanart-logo.svg");
-    background-position: center top var(--ni-72);
-    background-repeat: no-repeat;
-    background-size: contain;
+
+    // Stylized "trakt" wordmark + fanart cutout sits behind the hero text as a
+    // watermark. Rendered on a ::before so its opacity is theme-driven (full
+    // in dark, faint in light) without fading the hero's text, and so the page
+    // background shows through instead of a flat veil rectangle.
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image: url("/yir/2024/trakt-fanart-logo.svg");
+      // Pushed down a bit so the "2024" stars row sits above it cleanly.
+      background-position: center top var(--ni-72);
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: var(--yir-hero-watermark-opacity);
+      pointer-events: none;
+    }
 
     @include for-mobile {
-      // Less vertical breathing between rows on small screens, and pull the
-      // backdrop SVG up so it isn't hovering near the middle of the hero.
+      // Less vertical breathing between rows on small screens.
       gap: var(--gap-xs);
-      background-position: center top;
+
+      // Pull the backdrop SVG up so it isn't hovering near the middle.
+      &::before {
+        background-position: center top;
+      }
     }
   }
 
@@ -141,13 +160,13 @@
     display: flex;
     align-items: center;
     gap: var(--gap-m);
-    color: var(--purple-300);
+    color: var(--color-yir-text-accent);
     text-transform: uppercase;
   }
 
   .yir-2024-current-year {
     font-size: var(--ni-52);
-    color: var(--purple-300);
+    color: var(--color-yir-text-accent);
 
     @include for-mobile {
       font-size: var(--ni-24);
@@ -168,12 +187,12 @@
     letter-spacing: -0.04em;
     font-weight: 700;
     padding: 0 var(--ni-12);
-    color: var(--purple-700);
+    color: var(--color-yir-hero-gradient-end);
     white-space: nowrap;
     background: radial-gradient(
       59% 73% at 50% 119%,
-      color-mix(in srgb, var(--purple-300) 80%, white),
-      var(--purple-700)
+      var(--color-yir-hero-gradient-start),
+      var(--color-yir-hero-gradient-end)
     );
     background-clip: text;
     -webkit-background-clip: text;
@@ -219,11 +238,11 @@
   // "Directed By" matches the muted gray of the Trakt Worldwide / Member
   // Since labels; the username pops in the brighter shade-10.
   .yir-2024-by-label {
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
   }
 
   .yir-2024-name-label {
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     :global(.trakt-link) {
       text-decoration: none;
@@ -242,8 +261,8 @@
     width: var(--ni-64);
     height: var(--ni-64);
     border-radius: 50%;
-    border: var(--border-thickness-s) solid var(--shade-10);
-    background: var(--shade-800);
+    border: var(--border-thickness-s) solid var(--color-yir-border);
+    background: var(--color-yir-surface-chip);
     overflow: hidden;
     box-sizing: content-box;
 

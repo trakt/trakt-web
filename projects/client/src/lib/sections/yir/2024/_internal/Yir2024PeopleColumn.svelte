@@ -52,14 +52,14 @@
     display: block;
     font-size: var(--font-size-text);
     letter-spacing: 2px;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
   }
 
   .yir-2024-people-column-title {
     margin: var(--ni-2) 0 0;
     font-size: var(--ni-32);
     line-height: 1.1;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
   }
 
   /* Capped height with its own scroll, so each of the four columns scrolls
@@ -77,6 +77,6 @@
   .yir-2024-people-column-loading {
     margin: 0;
     padding: var(--ni-20) 0;
-    color: var(--shade-500);
+    color: var(--color-yir-text-muted);
   }
 </style>

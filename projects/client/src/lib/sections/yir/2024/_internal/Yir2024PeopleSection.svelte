@@ -52,18 +52,14 @@
 
   // Same radial-gradient wrapper as the stats graph panels.
   .trakt-yir-2024-people {
-    --people-divider: var(--shade-1000);
+    --people-divider: var(--color-yir-separator);
 
     box-sizing: border-box;
     width: 100%;
     overflow: hidden;
     border-radius: var(--ni-64);
     padding: var(--ni-44);
-    background: radial-gradient(
-      50% 39.27% at 50% 0%,
-      color-mix(in srgb, var(--shade-950) 90%, var(--blue-500) 10%) 0%,
-      color-mix(in srgb, var(--shade-950) 70%, var(--shade-900) 30%) 100%
-    );
+    background: var(--color-yir-panel-background);
 
     @include for-mobile {
       border-radius: var(--ni-32);

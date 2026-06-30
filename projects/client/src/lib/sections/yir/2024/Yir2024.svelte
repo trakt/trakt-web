@@ -243,8 +243,8 @@
     display: flex;
     flex-direction: column;
     gap: var(--content-gap);
-    background-color: var(--shade-950);
-    color: var(--shade-10);
+    background-color: var(--color-yir-background);
+    color: var(--color-yir-text-primary);
     // Scoped to the 2024 template so the Spline Sans face only swaps in
     // here and the rest of the app keeps the global Roboto stack.
     font-family: "Spline Sans", Helvetica, Arial, sans-serif;
@@ -259,6 +259,6 @@
     display: flex;
     justify-content: center;
     padding: var(--ni-72) 0;
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
   }
 </style>

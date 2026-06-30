@@ -40,7 +40,7 @@
 
   .trakt-yir-2024-thanks-section {
     width: 100%;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
     // Last section on the page — keep a gap below the posters so they don't
     // butt up against the page edge.
     padding-bottom: var(--ni-72);
@@ -91,8 +91,8 @@
     letter-spacing: -0.04em;
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--purple-300) 85%, white) 0%,
-      var(--purple-500) 100%
+      var(--color-yir-hero-gradient-start) 0%,
+      var(--color-yir-hero-gradient-end) 100%
     );
     background-clip: text;
     -webkit-background-clip: text;
@@ -110,7 +110,7 @@
     flex-direction: column;
     gap: var(--ni-20);
     text-align: start;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     // Set on the <p> directly — a global `p { font-size }` rule beats the
     // value the paragraph would otherwise inherit from this container.

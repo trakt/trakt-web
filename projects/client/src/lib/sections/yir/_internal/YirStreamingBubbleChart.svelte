@@ -23,9 +23,9 @@
     tooltip: tooltipSnippet,
   }: YirStreamingBubbleChartProps = $props();
 
-  // Services without a brand color fall back to a neutral semantic gray so the
-  // bubble still reads against the dark panel.
-  const fallbackColor = "var(--shade-800)";
+  // Services without a brand color fall back to a neutral semantic gray that
+  // reads on both the light and dark YIR surface.
+  const fallbackColor = "var(--color-yir-text-muted)";
 
   const sourcesQuery = useQuery(streamingSourcesQuery({}));
   const sources = sourcesQuery.pipe(map(($query) => $query.data));
