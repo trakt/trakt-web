@@ -8,6 +8,7 @@
   import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
   import { formatNumber } from "$lib/utils/format/formatNumber";
+  import { yirUnit } from "../../_internal/yirUnit.ts";
   import YirPageInner from "./YirPageInner.svelte";
   import YirSectionHeader from "./YirSectionHeader.svelte";
 
@@ -41,7 +42,7 @@
           <span class="yir-stat-icon">
             <TrackIcon state="unwatched" />
           </span>
-          {stats.playCounts.total === 1 ? "play" : "plays"}
+          {yirUnit(stats.playCounts.total, m.yir_unit_play, m.yir_unit_plays)}
         </span>
       </div>
 
@@ -49,7 +50,7 @@
         <span class="yir-stat-number">{formatNumber(hoursWatched)}</span>
         <span class="yir-stat-unit">
           <span class="yir-stat-icon"><ClockIcon /></span>
-          {hoursWatched === 1 ? "hour" : "hours"}
+          {yirUnit(hoursWatched, m.yir_unit_hour, m.yir_unit_hours)}
         </span>
       </div>
 
@@ -59,7 +60,7 @@
         </span>
         <span class="yir-stat-unit">
           <span class="yir-stat-icon"><BookmarkIcon state="added" /></span>
-          collected
+          {m.yir_label_collected()}
         </span>
       </div>
     </div>
@@ -71,7 +72,7 @@
         </span>
         <span class="yir-stat-unit">
           <span class="yir-stat-icon"><FavoriteIcon state="filled" /></span>
-          {stats.ratingsCounts.total === 1 ? "rating" : "ratings"}
+          {yirUnit(stats.ratingsCounts.total, m.yir_unit_rating, m.yir_unit_ratings)}
         </span>
       </div>
 
@@ -81,7 +82,7 @@
         </span>
         <span class="yir-stat-unit">
           <span class="yir-stat-icon"><CommentIcon style="filled" /></span>
-          {stats.commentsCounts.total === 1 ? "comment" : "comments"}
+          {yirUnit(stats.commentsCounts.total, m.yir_unit_comment, m.yir_unit_comments)}
         </span>
       </div>
 
@@ -91,7 +92,7 @@
         </span>
         <span class="yir-stat-unit">
           <span class="yir-stat-icon"><ListIcon /></span>
-          {stats.listsCounts.total === 1 ? "list" : "lists"}
+          {yirUnit(stats.listsCounts.total, m.yir_unit_list, m.yir_unit_lists)}
         </span>
       </div>
     </div>

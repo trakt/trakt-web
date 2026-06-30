@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider.ts";
   import { m } from "$lib/paraglide/messages";
-  import type { YirGenresGroup } from "$lib/requests/models/YirDetail.ts";
+  import type { YirGenre, YirGenresGroup } from "$lib/requests/models/YirDetail.ts";
   import YirGenreBars from "../../_internal/YirGenreBars.svelte";
+  import { yirMediaUnit } from "../../_internal/yirMediaUnit.ts";
   import Yir2024StatSummary from "./Yir2024StatSummary.svelte";
 
   type Yir2024GenresSectionProps = {
@@ -23,19 +25,23 @@
       : m.yir_2024_genres_watermark_movie(),
   );
 
-  const mostWatched = $derived(genres.genres[0]);
+  // Localize the genre name for the stat rows (the bars localize their own
+  // labels). Falls back to the raw API name for genres without a translation.
+  function toStatEntry(genre: YirGenre) {
+    return { name: GenreIntlProvider.genre(genre.name), count: genre.count };
+  }
+
+  const mostWatched = $derived(
+    genres.genres[0] ? toStatEntry(genres.genres[0]) : undefined,
+  );
   const leastWatched = $derived(
     genres.genres.length > 1
-      ? genres.genres[genres.genres.length - 1]
+      ? toStatEntry(genres.genres[genres.genres.length - 1])
       : undefined,
   );
 
-  // FIXME(i18n): hardcoded English plurals match the existing convention
-  // across the YIR module. Migrate holistically when i18n keys are added
-  // across all YIR sections.
   function itemUnit(count: number): string {
-    if (type === "movies") return count === 1 ? "movie" : "movies";
-    return count === 1 ? "show" : "shows";
+    return yirMediaUnit(type, count);
   }
 </script>
 

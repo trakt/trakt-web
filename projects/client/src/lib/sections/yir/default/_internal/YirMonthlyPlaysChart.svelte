@@ -1,7 +1,9 @@
 <script lang="ts">
   import BarChart from "$lib/components/charts/BarChart.svelte";
   import { languageTag } from "$lib/features/i18n";
+  import { m } from "$lib/paraglide/messages";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
+  import { yirUnit } from "../../_internal/yirUnit.ts";
   import { setMonth } from "date-fns/setMonth";
   import YirTooltip from "../../_internal/YirTooltip.svelte";
 
@@ -18,6 +20,9 @@
 
 <BarChart data={chartData}>
   {#snippet tooltip({ value, label })}
-    <YirTooltip main="{value} {value === 1 ? 'play' : 'plays'}" sub={label} />
+    <YirTooltip
+      main="{value} {yirUnit(value, m.yir_unit_play, m.yir_unit_plays)}"
+      sub={label}
+    />
   {/snippet}
 </BarChart>

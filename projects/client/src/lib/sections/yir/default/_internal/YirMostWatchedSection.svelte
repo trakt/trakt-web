@@ -6,6 +6,7 @@
   import { PLACEHOLDERS } from "$lib/utils/assets";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { yirUnit } from "../../_internal/yirUnit.ts";
   import YirSectionHeader from "./YirSectionHeader.svelte";
 
   const {
@@ -16,7 +17,10 @@
     items: YirMostWatchedItem[];
   } = $props();
 
-  const typeLabel = $derived(type === "shows" ? "show" : "movie");
+  // Localized singular noun fed into the "most watched {type}" label.
+  const typeLabel = $derived(
+    type === "shows" ? m.yir_unit_show() : m.yir_unit_movie(),
+  );
 
   let activeIndex = $state(0);
 
@@ -69,7 +73,7 @@
             </div>
             <div class="yir-stat-line">
               {item.plays.toLocaleString()}
-              {item.plays === 1 ? "play" : "plays"}
+              {yirUnit(item.plays, m.yir_unit_play, m.yir_unit_plays)}
             </div>
           </div>
         </div>

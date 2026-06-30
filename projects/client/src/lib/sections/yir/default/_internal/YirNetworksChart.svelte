@@ -1,6 +1,7 @@
 <script lang="ts">
   import YirTooltip from "../../_internal/YirTooltip.svelte";
   import YirCompaniesBubbleChart from "../../_internal/YirCompaniesBubbleChart.svelte";
+  import { yirMediaUnit } from "../../_internal/yirMediaUnit.ts";
   import type { YirCompany } from "$lib/requests/models/YirDetail.ts";
 
   type YirNetworksChartProps = {
@@ -11,8 +12,7 @@
   const { companies, type = "shows" }: YirNetworksChartProps = $props();
 
   function itemLabelFor(count: number): string {
-    if (type === "movies") return count === 1 ? "movie" : "movies";
-    return count === 1 ? "show" : "shows";
+    return yirMediaUnit(type, count);
   }
 </script>
 

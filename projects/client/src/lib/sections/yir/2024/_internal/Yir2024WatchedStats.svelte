@@ -5,9 +5,11 @@
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
   import { formatNumber } from "$lib/utils/format/formatNumber";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { yirUnit } from "../../_internal/yirUnit.ts";
 
   type AllStats = YirStatsCategory & {
     listsCounts: { total: number };
@@ -37,7 +39,7 @@
             {formatNumber(stats.playCounts.total)}
           </span>
           <span class="bold yir-2024-stat-label">
-            {stats.playCounts.total === 1 ? "play" : "plays"}
+            {yirUnit(stats.playCounts.total, m.yir_unit_play, m.yir_unit_plays)}
           </span>
         </span>
       </span>
@@ -49,7 +51,7 @@
     <span class="yir-2024-stat-display">
       <span class="bold yir-2024-stat-value">{formatNumber(hours)}</span>
       <span class="bold yir-2024-stat-label">
-        {hours === 1 ? "hour" : "hours"}
+        {yirUnit(hours, m.yir_unit_hour, m.yir_unit_hours)}
       </span>
     </span>
   </span>
@@ -61,7 +63,7 @@
         {formatNumber(stats.ratingsCounts.total)}
       </span>
       <span class="bold yir-2024-stat-label">
-        {stats.ratingsCounts.total === 1 ? "rating" : "ratings"}
+        {yirUnit(stats.ratingsCounts.total, m.yir_unit_rating, m.yir_unit_ratings)}
       </span>
     </span>
   </span>
@@ -73,7 +75,7 @@
         {formatNumber(stats.commentsCounts.total)}
       </span>
       <span class="bold yir-2024-stat-label">
-        {stats.commentsCounts.total === 1 ? "comment" : "comments"}
+        {yirUnit(stats.commentsCounts.total, m.yir_unit_comment, m.yir_unit_comments)}
       </span>
     </span>
   </span>
@@ -85,7 +87,7 @@
         {formatNumber(stats.listsCounts.total)}
       </span>
       <span class="bold yir-2024-stat-label">
-        {stats.listsCounts.total === 1 ? "list" : "lists"}
+        {yirUnit(stats.listsCounts.total, m.yir_unit_list, m.yir_unit_lists)}
       </span>
     </span>
   </span>

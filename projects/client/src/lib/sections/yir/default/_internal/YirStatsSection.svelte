@@ -3,6 +3,7 @@
   import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
   import { formatNumber } from "$lib/utils/format/formatNumber";
+  import { yirUnit } from "../../_internal/yirUnit.ts";
   import YirDailyPlaysChart from "./YirDailyPlaysChart.svelte";
   import YirHourlyPlaysChart from "./YirHourlyPlaysChart.svelte";
   import YirMonthlyPlaysChart from "./YirMonthlyPlaysChart.svelte";
@@ -25,7 +26,11 @@
       ? m.yir_section_title_tv_shows()
       : m.yir_section_title_movies(),
   );
-  const specificType = $derived(type === "shows" ? "episode" : "movie");
+  // Localized singular noun ("episode"/"movie") used both as standalone text
+  // and injected into the chart labels via the message {type} variable.
+  const specificType = $derived(
+    type === "shows" ? m.yir_unit_episode() : m.yir_unit_movie(),
+  );
 
   function formatDecimal(value: number): string {
     return value.toFixed(1);
@@ -75,7 +80,7 @@
         </span>
         <span class="yir-stat-unit">
           {specificType}
-          {stats.playCounts.total === 1 ? "play" : "plays"}
+          {yirUnit(stats.playCounts.total, m.yir_unit_play, m.yir_unit_plays)}
         </span>
       </div>
       <span class="yir-stat-arrow"><ArrowRightIcon /></span>

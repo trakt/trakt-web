@@ -1,6 +1,9 @@
 <script lang="ts">
   import SegmentedBar from "$lib/components/charts/SegmentedBar.svelte";
+  import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider.ts";
+  import { m } from "$lib/paraglide/messages";
   import type { YirGenresGroup } from "$lib/requests/models/YirDetail.ts";
+  import { yirMediaUnit } from "./yirMediaUnit.ts";
 
   type YirGenreBarsProps = {
     type: "shows" | "movies";
@@ -11,19 +14,17 @@
 
   const { type, genres }: YirGenreBarsProps = $props();
 
-  const unit = $derived(type === "shows" ? "show" : "movie");
-
   // Compose the shared SegmentedBar SOT so YIR genres render identically to the
   // design-system primitive (categorical viz palette, gloss, alternating labels).
   const items = $derived(
     genres.genres.map((genre) => ({
-      label: genre.name,
+      label: GenreIntlProvider.genre(genre.name),
       value: genre.count,
       sublabel: `${genre.count.toLocaleString()} ${
-        genre.count === 1 ? unit : `${unit}s`
+        yirMediaUnit(type, genre.count)
       }`,
     })),
   );
 </script>
 
-<SegmentedBar {items} label="Top genres" />
+<SegmentedBar {items} label={m.yir_label_top_genres()} />

@@ -1,9 +1,11 @@
 <script lang="ts">
   import BarChart from "$lib/components/charts/BarChart.svelte";
   import { languageTag } from "$lib/features/i18n";
+  import { m } from "$lib/paraglide/messages";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime";
   import { toHumanHour } from "$lib/utils/formatting/date/toHumanHour";
+  import { yirUnit } from "../../_internal/yirUnit.ts";
   import { setHours } from "date-fns/setHours";
   import { setMinutes } from "date-fns/setMinutes";
   import YirTooltip from "../../_internal/YirTooltip.svelte";
@@ -35,7 +37,7 @@
       locale,
     )}
     <YirTooltip
-      main="{value} {value === 1 ? 'play' : 'plays'}"
+      main="{value} {yirUnit(value, m.yir_unit_play, m.yir_unit_plays)}"
       sub="{start} - {end}"
     />
   {/snippet}
