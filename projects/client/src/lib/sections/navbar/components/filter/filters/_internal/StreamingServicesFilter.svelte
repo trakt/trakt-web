@@ -1,64 +1,55 @@
 <script lang="ts">
-  import MultiSelect from "$lib/components/select/MultiSelect.svelte";
-  import { FilterKey } from "$lib/features/filters/models/Filter";
-  import { FilterMode } from "$lib/features/filters/models/FilterMode";
-  import { useFilter } from "$lib/features/filters/useFilter";
+  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
+  import type { AdvancedMultiSelectFilter } from "$lib/features/filters/models/Filter";
   import * as m from "$lib/features/i18n/messages.ts";
-  import Filter from "./Filter.svelte";
-  import { useFilterSetter } from "./useFilterSetter";
+  import MultiSelectFilter from "./MultiSelectFilter.svelte";
+  import StreamingServiceSelectLogo from "./StreamingServiceSelectLogo.svelte";
   import { useStreamingServiceOptions } from "./useStreamingServiceOptions";
 
-  const resetValue = "__reset_filter__";
-
-  const { getFilterValue, filters } = useFilter();
-  const { gotoFilteredState } = useFilterSetter();
+  const { filter }: { filter: AdvancedMultiSelectFilter } = $props();
 
   const options = useStreamingServiceOptions();
-  const currentValueRaw = $derived(getFilterValue(FilterKey.Streaming));
-
-  const selectedValues = $derived(
-    $currentValueRaw ? $currentValueRaw.split(",") : [],
+  const servicesWithLogo = $derived(
+    new Set(
+      $options.all
+        .filter((option) => option.hasLogo)
+        .map((option) => option.source),
+    ),
+  );
+  const baseOptions = $derived(
+    $options.hasFavorites
+      ? filter.options
+      : filter.options.filter((option) => option.value !== "favorites"),
   );
 
-  const keywordOptions = $derived(
-    filters
-      .filter((filter) => filter.key === FilterKey.Streaming)
-      .flatMap((filter) => ("options" in filter ? filter.options : []))
-      .map((option) => ({ label: option.label(), value: option.value })),
-  );
+  const augmentedFilter = $derived.by((): AdvancedMultiSelectFilter => ({
+    ...filter,
+    advanced: {
+      ...filter.advanced,
+      label: filter.advanced.label ?? filter.label,
+      options: [
+        ...baseOptions,
+        ...$options.all.map((option) => ({
+          label: () => option.name,
+          value: option.source,
+        })),
+      ],
+    },
+  }));
 
-  const serviceOptions = $derived(
-    $options.all.map((option) => ({
-      label: option.name,
-      value: option.source,
-    })),
-  );
-
-  const optionsWithReset = $derived([
-    { label: m.button_label_reset_filter(), value: resetValue },
-    ...keywordOptions,
-    ...serviceOptions,
-  ]);
-
-  const onChange = (values: string[]) => {
-    const hasReset = values.includes(resetValue);
-    const hasValues = values.length > 0;
-
-    const value = !hasReset && hasValues ? values.join(",") : null;
-
-    gotoFilteredState({
-      value,
-      key: FilterKey.Streaming,
-      mode: FilterMode.Advanced,
-    });
-  };
+  function hasServiceLogo(option: SelectOption): boolean {
+    return servicesWithLogo.has(option.value);
+  }
 </script>
 
-<Filter title={m.header_streaming()}>
-  <MultiSelect
-    options={optionsWithReset}
-    value={selectedValues}
-    placeholder={m.option_text_all()}
-    {onChange}
-  />
-</Filter>
+{#snippet serviceLogo(option: SelectOption)}
+  <StreamingServiceSelectLogo source={option.value} />
+{/snippet}
+
+<MultiSelectFilter
+  filter={augmentedFilter}
+  searchPlaceholder={m.input_placeholder_filter()}
+  emptyLabel={m.text_no_services_match_filter()}
+  optionLeading={serviceLogo}
+  hasOptionLeading={hasServiceLogo}
+/>

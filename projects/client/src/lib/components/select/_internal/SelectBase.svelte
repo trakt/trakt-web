@@ -23,6 +23,7 @@
     triggerLabel: string;
     hasValue: boolean;
     children: Snippet;
+    header?: Snippet;
     autoWidth?: boolean;
   } & (SelectSingleProps | SelectMultipleProps);
 
@@ -32,6 +33,7 @@
     triggerLabel,
     hasValue,
     children,
+    header,
     autoWidth = false,
     ...rest
   }: SelectBaseProps = $props();
@@ -59,6 +61,10 @@
         {#if contentOpen}
           <div {...wrapperProps}>
             <div {...props} class="trakt-select-content" data-auto-width={autoWidth}>
+              {#if header}
+                {@render header()}
+              {/if}
+
               <Select.ScrollUpButton>
                 {#snippet child({ props: scrollProps })}
                   <div {...scrollProps} class="trakt-select-scroll-button">

@@ -1,6 +1,8 @@
 <script lang="ts">
   import { FilterKey } from "$lib/features/filters/models/Filter";
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import { useFilter } from "$lib/features/filters/useFilter";
   import FilterGroup from "./_internal/FilterGroup.svelte";
   import StreamingAvailabilityFilter from "./_internal/StreamingAvailabilityFilter.svelte";
@@ -8,12 +10,13 @@
   import SliderFilter from "./SliderFilter.svelte";
 
   const { filters } = useFilter();
+  const { isEnabled } = useFeatureFlag();
+  const isStreamingServicesEnabled = $derived(
+    isEnabled(FeatureFlag.StreamingServices),
+  );
 
   const listTypeFilters = $derived(
-    filters.filter(
-      (filter) =>
-        filter.type === "list" && filter.key !== FilterKey.Streaming,
-    ),
+    filters.filter((filter) => filter.type === "list"),
   );
   const ratingTypeFilters = $derived(
     filters.filter((filter) => filter.type === "slider"),
@@ -22,9 +25,12 @@
 
 <FilterGroup>
   {#each listTypeFilters as filter (filter.key)}
-    <ListFilter {filter} />
+    {#if filter.key === FilterKey.Streaming && $isStreamingServicesEnabled}
+      <StreamingAvailabilityFilter {filter} />
+    {:else}
+      <ListFilter {filter} />
+    {/if}
   {/each}
-  <StreamingAvailabilityFilter />
 </FilterGroup>
 
 {#each ratingTypeFilters as filter (filter.key)}

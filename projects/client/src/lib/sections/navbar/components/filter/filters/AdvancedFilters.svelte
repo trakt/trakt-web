@@ -1,6 +1,8 @@
 <script lang="ts">
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { FilterKey } from "$lib/features/filters/models/Filter";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import { useFilter } from "$lib/features/filters/useFilter";
   import FilterGroup from "./_internal/FilterGroup.svelte";
   import { isMultiSelectFilter } from "./_internal/isMultiSelectFilter";
@@ -10,20 +12,23 @@
   import SliderFilter from "./SliderFilter.svelte";
 
   const { filters } = useFilter();
+  const { isEnabled } = useFeatureFlag();
+  const isStreamingServicesEnabled = $derived(
+    isEnabled(FeatureFlag.StreamingServices),
+  );
 
   const sliderFilters = $derived(filters.filter(isSliderFilter));
-  const multiSelectFilters = $derived(
-    filters
-      .filter(isMultiSelectFilter)
-      .filter((filter) => filter.key !== FilterKey.Streaming),
-  );
+  const multiSelectFilters = $derived(filters.filter(isMultiSelectFilter));
 </script>
 
 <FilterGroup>
   {#each multiSelectFilters as filter (filter.key)}
-    <MultiSelectFilter {filter} />
+    {#if filter.key === FilterKey.Streaming && $isStreamingServicesEnabled}
+      <StreamingServicesFilter {filter} />
+    {:else}
+      <MultiSelectFilter {filter} />
+    {/if}
   {/each}
-  <StreamingServicesFilter />
 </FilterGroup>
 
 {#each sliderFilters as filter (filter.key)}

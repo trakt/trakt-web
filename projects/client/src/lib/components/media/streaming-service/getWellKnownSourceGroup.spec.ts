@@ -12,6 +12,16 @@ describe('util: getWellKnownSourceGroup', () => {
     expect(getWellKnownSourceGroup('netflix')).toBe('netflix');
   });
 
+  it('should resolve segment-aware variants to their brand key', () => {
+    expect(getWellKnownSourceGroup('netflix_standard_with_ads')).toBe(
+      'netflix',
+    );
+  });
+
+  it('should not resolve partial segment matches', () => {
+    expect(getWellKnownSourceGroup('complex')).toBeUndefined();
+  });
+
   it('should return undefined for an unknown source', () => {
     expect(getWellKnownSourceGroup('curiosity_stream')).toBeUndefined();
   });
