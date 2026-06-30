@@ -35,6 +35,6 @@
   onValueChange={onChange}
 >
   {#each options as option (option.value)}
-    <SelectItem value={option.value} label={option.label} />
+    <SelectItem {option} />
   {/each}
 </SelectBase>

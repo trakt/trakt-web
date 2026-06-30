@@ -1,9 +1,8 @@
 import type { MultiSelectState } from '../models/MultiSelectState.ts';
+import type { SelectOption } from '../models/SelectOption.ts';
 
 export type SelectItemProps = {
-  value: string;
-  label: string;
+  option: SelectOption;
   state?: MultiSelectState;
-  excludable?: boolean;
   onCommit?: (next: MultiSelectState | undefined) => void;
 };

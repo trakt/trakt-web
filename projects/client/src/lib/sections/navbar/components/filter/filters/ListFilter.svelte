@@ -9,7 +9,11 @@
 
   const resetValue = "__reset_filter__";
 
-  const { filter }: { filter: ListFilter } = $props();
+  const {
+    filter,
+  }: {
+    filter: ListFilter;
+    } = $props();
 
   const { getFilterValue } = useFilter();
   const { gotoFilteredState } = useFilterSetter();
@@ -18,7 +22,11 @@
 
   const options = $derived([
     { label: m.button_label_reset_filter(), value: resetValue },
-    ...filter.options.map((o) => ({ label: o.label(), value: o.value })),
+    ...filter.options.map((o) => ({
+      label: o.label(),
+      value: o.value,
+      icon: o.icon,
+    })),
   ]);
 
   const onChange = (value: string) => {

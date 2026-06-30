@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { FilterKey } from "$lib/features/filters/models/Filter";
+  import { FilterKey } from "$lib/features/filters/models/Filter.ts";
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import FilterGroup from "./_internal/FilterGroup.svelte";
@@ -10,10 +10,7 @@
   const { filters } = useFilter();
 
   const listTypeFilters = $derived(
-    filters.filter(
-      (filter) =>
-        filter.type === "list" && filter.key !== FilterKey.Streaming,
-    ),
+    filters.filter((filter) => filter.type === "list"),
   );
   const ratingTypeFilters = $derived(
     filters.filter((filter) => filter.type === "slider"),
@@ -22,9 +19,12 @@
 
 <FilterGroup>
   {#each listTypeFilters as filter (filter.key)}
-    <ListFilter {filter} />
+    {#if filter.key === FilterKey.Streaming}
+      <StreamingAvailabilityFilter {filter} />
+    {:else}
+      <ListFilter {filter} />
+    {/if}
   {/each}
-  <StreamingAvailabilityFilter />
 </FilterGroup>
 
 {#each ratingTypeFilters as filter (filter.key)}

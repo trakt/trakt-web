@@ -11,6 +11,8 @@
     excluded = [],
     placeholder,
     disabled = false,
+    searchPlaceholder,
+    emptyLabel,
     onChange,
   }: MultiSelectProps = $props();
 
@@ -28,6 +30,17 @@
     if (excludedSet.has(optionValue)) return "excluded";
     return undefined;
   };
+
+  let search = $state("");
+
+  const normalizedSearch = $derived(search.trim().toLowerCase());
+  const visibleOptions = $derived(
+    normalizedSearch
+      ? options.filter((option) =>
+        option.label.toLowerCase().includes(normalizedSearch)
+      )
+      : options,
+  );
 
   const selectedLabel = $derived(
     value.length
@@ -76,7 +89,36 @@
 
     setState(toggled, stateOf(toggled) === undefined ? "included" : undefined);
   };
+
+  const listNavigationKeys = new Set([
+    "Escape",
+    "Tab",
+    "ArrowDown",
+    "ArrowUp",
+    "Enter",
+  ]);
+
+  function stopSelectKeyboardHandling(event: KeyboardEvent) {
+    if (listNavigationKeys.has(event.key)) {
+      return;
+    }
+
+    event.stopPropagation();
+  }
 </script>
+
+{#snippet searchField()}
+  <div class="trakt-select-search">
+    <input
+      bind:value={search}
+      type="search"
+      placeholder={searchPlaceholder}
+      aria-label={searchPlaceholder}
+      onkeydown={stopSelectKeyboardHandling}
+      onclick={(event) => event.stopPropagation()}
+    />
+  </div>
+{/snippet}
 
 <SelectBase
   type="multiple"
@@ -86,14 +128,66 @@
   triggerLabel={selectedLabel}
   hasValue={value.length > 0}
   onValueChange={onRowToggle}
+  header={searchPlaceholder ? searchField : undefined}
+  autoWidth
 >
-  {#each options as option (option.value)}
+  {#each visibleOptions as option (option.value)}
     <SelectItem
-      value={option.value}
-      label={option.label}
+      {option}
       state={stateOf(option.value)}
-      excludable={option.excludable ?? true}
       onCommit={(next) => setState(option.value, next)}
     />
   {/each}
+  {#if visibleOptions.length === 0 && emptyLabel}
+    <div class="trakt-select-empty">
+      {emptyLabel}
+    </div>
+  {/if}
 </SelectBase>
+
+<style lang="scss">
+  .trakt-select-search {
+    --color-select-search-background: var(--shade-50);
+    --color-select-search-border: var(--shade-200);
+    --color-select-search-foreground: var(--shade-920);
+    --color-select-search-placeholder: var(--shade-700);
+
+    padding: var(--ni-4) var(--ni-4) var(--ni-8);
+
+    input {
+      width: 100%;
+      min-width: 0;
+      height: var(--ni-36);
+      padding-inline: var(--ni-10);
+      box-sizing: border-box;
+      font-size: var(--font-size-text);
+
+      border: var(--border-thickness-xxs) solid
+        var(--color-select-search-border);
+      border-radius: var(--border-radius-s);
+
+      background: var(--color-select-search-background);
+      color: var(--color-select-search-foreground);
+      color-scheme: light;
+      outline: none;
+
+      transition: border-color var(--transition-increment) ease-in-out;
+
+      &::placeholder {
+        color: var(--color-select-search-placeholder);
+      }
+
+      &:focus-within {
+        border-color: var(--color-input-focus);
+      }
+    }
+  }
+
+  .trakt-select-empty {
+    margin: 0;
+    padding: var(--ni-12) var(--ni-8);
+    font-size: var(--font-size-tag);
+    color: var(--shade-700);
+    text-align: center;
+  }
+</style>
