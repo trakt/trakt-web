@@ -1,4 +1,6 @@
 <script lang="ts">
+  import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
+  import { ratio } from "$lib/utils/number/ratio.ts";
   import { slide } from "svelte/transition";
 
   type SyncProgressProps = {
@@ -9,8 +11,8 @@
 
   const { processedCount, totalCount, label }: SyncProgressProps = $props();
 
-  const percentage = $derived(
-    totalCount > 0 ? Math.round((processedCount / totalCount) * 100) : 0,
+  const fraction = $derived(
+    ratio({ value: processedCount, total: totalCount }),
   );
 </script>
 
@@ -18,16 +20,12 @@
   <p class="secondary">
     {label}
   </p>
-  <div class="sync-progress-bar-track">
-    <div
-      class="sync-progress-bar-fill"
-      style="width: {percentage}%"
-      role="progressbar"
-      aria-valuenow={processedCount}
-      aria-valuemin={0}
-      aria-valuemax={totalCount}
-    ></div>
-  </div>
+  <DistributionBar
+    {fraction}
+    color="var(--color-background-purple)"
+    label={label}
+    --distribution-bar-track="color-mix(in srgb, var(--color-border) 50%, transparent)"
+  />
 </div>
 
 <style>
@@ -35,19 +33,5 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
-  }
-
-  .sync-progress-bar-track {
-    height: var(--ni-6);
-    border-radius: var(--border-radius-xs);
-    background-color: color-mix(in srgb, var(--color-border) 50%, transparent);
-    overflow: hidden;
-  }
-
-  .sync-progress-bar-fill {
-    height: 100%;
-    border-radius: var(--border-radius-xs);
-    background-color: var(--color-background-purple);
-    transition: width var(--transition-increment) ease-in-out;
   }
 </style>

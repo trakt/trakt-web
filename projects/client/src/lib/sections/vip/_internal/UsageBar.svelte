@@ -1,4 +1,5 @@
 <script lang="ts">
+  import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import { calculateLimitProgress } from "./utils/calculateLimitProgress";
@@ -47,12 +48,15 @@
     </div>
   {/if}
 
-  <div
-    class="trakt-progress-bar"
-    class:is-over-limit={isOverLimit}
-    class:is-low-percentage={isLowPercentage}
-    style:--progress="{isLoading ? 0 : progress}%"
-  ></div>
+  <div class="trakt-usage-fill">
+    <DistributionBar
+      track={false}
+      fraction={(isLoading ? 0 : progress) / 100}
+      minVisible={isLowPercentage ? 0.06 : 0}
+      color={isOverLimit ? "var(--viz-negative)" : "var(--color-usage-bar)"}
+      --distribution-bar-thickness="100%"
+    />
+  </div>
 </div>
 
 <style>
@@ -114,27 +118,9 @@
     transform: translateY(-50%);
   }
 
-  .trakt-progress-bar {
+  .trakt-usage-fill {
     z-index: var(--layer-raised);
     position: absolute;
-    top: 0;
-    inset-inline-start: 0;
-    bottom: 0;
-
-    width: var(--progress);
-
-    background-color: var(--color-usage-bar);
-
-    border-radius: var(--border-radius-xxl);
-
-    transition: width var(--transition-increment) ease-in-out;
-
-    &.is-low-percentage {
-      width: var(--ni-14);
-    }
-
-    &.is-over-limit {
-      background-color: var(--red-700);
-    }
+    inset: 0;
   }
 </style>

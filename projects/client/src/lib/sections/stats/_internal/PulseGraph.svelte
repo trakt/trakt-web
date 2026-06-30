@@ -21,7 +21,7 @@
   --height-card="var(--height-pulse-card)"
 >
   <div class="trakt-pulse-graph">
-    <p>{title}</p>
+    <p class="small secondary">{title}</p>
 
     {#if item.kind === "peakHours"}
       <PulseGraphPeakHours data={item.data} />
