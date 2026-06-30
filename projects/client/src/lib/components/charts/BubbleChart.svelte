@@ -9,6 +9,7 @@
     BubbleChartTooltipArgs,
   } from "./models/BubbleChartProps";
 
+  const chartPadding = 12;
   const { items, tooltip, label = "Bubble chart" }: BubbleChartProps = $props();
 
   type HierarchyDatum = {
@@ -160,6 +161,7 @@
     height={$observedHeight}
     role="img"
     aria-label={label}
+    viewBox={`-${chartPadding} -${chartPadding} ${$observedWidth + chartPadding * 2} ${$observedHeight + chartPadding * 2}`}
   >
     <defs>
       <filter id={filterId}>

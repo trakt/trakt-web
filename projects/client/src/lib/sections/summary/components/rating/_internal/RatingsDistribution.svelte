@@ -1,10 +1,12 @@
 <script lang="ts">
+  import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaRating } from "$lib/requests/models/MediaRating.ts";
-  import { getLocale } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import { toTraktRating } from "$lib/utils/formatting/number/toTraktRating";
-  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import { ratio } from "$lib/utils/number/ratio.ts";
   import { STAR_RATINGS } from "../constants/index.ts";
 
   type RatingsDistributionProps = {
@@ -17,28 +19,17 @@
     & keyof NonNullable<typeof trakt.distribution>
     & string;
 
-  const starBuckets = $derived(
+  const buckets = $derived(
     STAR_RATINGS.map((star) => {
       const low = String(star.range.min + 1) as DistributionKey;
       const high = String(star.range.max) as DistributionKey;
       const value = (trakt.distribution?.[low] ?? 0) +
         (trakt.distribution?.[high] ?? 0);
-      return { star: star.index, value };
+      return { value, star: star.index };
     }),
   );
 
-  const maxValue = $derived(
-    Math.max(...starBuckets.map((b) => b.value), 1),
-  );
-
-  function toIntensity(value: number, max: number): 0 | 1 | 2 | 3 | 4 {
-    if (value <= 0) return 0;
-    const ratio = value / max;
-    if (ratio <= 0.25) return 1;
-    if (ratio <= 0.5) return 2;
-    if (ratio <= 0.75) return 3;
-    return 4;
-  }
+  const maxValue = $derived(Math.max(...buckets.map((b) => b.value), 1));
 
   const traktPercent = $derived(toTraktRating(trakt.rating, getLocale()));
   const voteCountText = $derived(toHumanNumber(trakt.votes, getLocale()));
@@ -56,18 +47,24 @@
     </div>
 
     <div class="trakt-histogram">
-      {#each starBuckets as bucket (bucket.star)}
+      {#each buckets as bucket, i (bucket.star)}
         <Tooltip
           content={toHumanNumber(bucket.value, getLocale())}
           variant="compact"
           sideOffset={4}
         >
           <div class="histogram-column">
-            <div
-              class="histogram-bar"
-              data-intensity={toIntensity(bucket.value, maxValue)}
-              style="--bar-fraction: {bucket.value / maxValue}"
-            ></div>
+            <div class="histogram-bar">
+              <DistributionBar
+                orientation="vertical"
+                fraction={ratio({ value: bucket.value, total: maxValue })}
+                active={bucket.value === maxValue && maxValue > 0}
+                minVisible={0.04}
+                index={i}
+                label="{bucket.star}: {toHumanNumber(bucket.value, getLocale())}"
+                --distribution-bar-thickness="100%"
+              />
+            </div>
             <span class="histogram-label tag secondary">{bucket.star}</span>
           </div>
         </Tooltip>
@@ -132,7 +129,7 @@
 
       @include for-mouse {
         &:hover {
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
       }
     }
@@ -142,52 +139,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--ni-2);
+    gap: var(--ni-4);
     width: 100%;
-  }
-
-  @include for-mouse {
-    :global(.trakt-tooltip-trigger:hover) .histogram-bar {
-      background: var(--color-text-primary);
-    }
   }
 
   .histogram-bar {
     width: 70%;
-    height: calc(var(--bar-fraction, 0) * var(--ni-48));
-    min-height: var(--ni-2);
-    border-radius: var(--border-radius-xs);
-    transform-origin: bottom;
-    animation: rating-bar-rise 650ms cubic-bezier(0.16, 1, 0.3, 1) 250ms both;
-    transition: background var(--transition-increment) ease-in-out;
-
-    &[data-intensity="0"] {
-      background: var(--color-heatmap-empty);
-    }
-    &[data-intensity="1"] {
-      background: var(--color-heatmap-l1);
-    }
-    &[data-intensity="2"] {
-      background: var(--color-heatmap-l2);
-    }
-    &[data-intensity="3"] {
-      background: var(--color-heatmap-l3);
-    }
-    &[data-intensity="4"] {
-      background: var(--color-heatmap-l4);
-    }
+    height: var(--ni-48);
+    display: flex;
+    justify-content: center;
   }
 
   .histogram-label {
     color: var(--color-text-secondary);
-  }
-
-  @keyframes rating-bar-rise {
-    from {
-      transform: scaleY(0);
-    }
-    to {
-      transform: scaleY(1);
-    }
   }
 </style>

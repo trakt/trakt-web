@@ -1,7 +1,9 @@
 <script lang="ts">
+  import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
   import { getLocale, languageTag } from "$lib/features/i18n/index.ts";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration.ts";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage.ts";
+  import { ratio } from "$lib/utils/number/ratio.ts";
   import type { ScreenTimeDailyData } from "./models/ScreenTimeDailyData";
 
   const { data }: { data: ScreenTimeDailyData } = $props();
@@ -19,10 +21,12 @@
     }).format(0),
   );
 
+  // Sequential brand-purple intensity ramp (light -> deep = more screen time),
+  // premium and on-brand rather than a traffic-light rainbow.
   function barColor(pct: number): string {
-    if (pct >= 30) return "var(--orange-500)";
-    if (pct >= 15) return "var(--yellow-500)";
-    return "var(--green-500)";
+    if (pct >= 30) return "var(--viz-5)";
+    if (pct >= 15) return "var(--viz-1)";
+    return "var(--viz-3)";
   }
 </script>
 
@@ -30,25 +34,27 @@
   {#each data.labels as label, i (i)}
     {@const pct = data.percentages[i] ?? 0}
     {@const minutes = data.minutesPerDay[i] ?? 0}
-    {@const normalizedPct = (pct / maxPct) * 100}
+    {@const fraction = ratio({ value: pct, total: maxPct })}
     <div class="screen-time-column">
-      <div class="screen-time-bar-container">
-        <div
-          class="screen-time-fill"
-          style:height="{normalizedPct}%"
-          style:background={barColor(pct)}
-          title="{toHumanDuration({ minutes }, lang)} · {toPercentage(
-            pct / 100,
-            locale,
-          )}"
-        >
-          <span
-            class="screen-time-value tag secondary no-wrap"
-            title={toHumanDuration({ minutes }, lang)}
-          >
-            {toHumanDuration({ minutes, separator: "" }, lang) || zeroMinutes}
-          </span>
-        </div>
+      <span class="screen-time-value tag secondary no-wrap">
+        {toHumanDuration({ minutes, separator: "" }, lang) || zeroMinutes}
+      </span>
+      <div
+        class="screen-time-bar-container"
+        title="{toHumanDuration({ minutes }, lang)} · {toPercentage(
+          pct / 100,
+          locale,
+        )}"
+      >
+        <DistributionBar
+          orientation="vertical"
+          {fraction}
+          color={barColor(pct)}
+          index={i}
+          minVisible={0.03}
+          label="{label}: {toHumanDuration({ minutes }, lang)}"
+          --distribution-bar-thickness="64%"
+        />
       </div>
       <span class="screen-time-label tag ellipsis no-wrap">{label}</span>
     </div>
@@ -77,25 +83,11 @@
   .screen-time-bar-container {
     width: 100%;
     height: var(--ni-80);
-
-    padding-top: var(--ni-16);
     box-sizing: border-box;
 
+    // Center the single vertical bar within the column slot.
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .screen-time-fill {
-    position: relative;
-
-    width: 100%;
-    min-height: 2px;
-
-    border-radius: var(--ni-4) var(--ni-4) 0 0;
-
-    transition: var(--transition-increment) ease;
-    transition-property: height, background;
+    justify-content: center;
   }
 
   .screen-time-label {
@@ -103,12 +95,9 @@
     text-align: center;
   }
 
+  // Aligned across all columns at the top of the chart, above every bar.
   .screen-time-value {
-    position: absolute;
-
-    bottom: calc(100% + var(--ni-4));
-    inset-inline: 0;
-
+    width: 100%;
     text-align: center;
   }
 </style>

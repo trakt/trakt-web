@@ -22,7 +22,7 @@
     <div class="kpi-icon">{@render icon()}</div>
   {/if}
 
-  <p class="kpi-label tag secondary uppercase ellipsis">{label}</p>
+  <p class="kpi-label small secondary ellipsis">{label}</p>
 
   <div class="kpi-value">
     {#if tooltip}
@@ -80,10 +80,15 @@
     flex-wrap: wrap;
     align-items: center;
     gap: var(--gap-xxs);
-    font-size: var(--kpi-value-size);
-    line-height: 1.05;
-    font-weight: 700;
     min-width: 0;
+
+    &,
+    :global(span),
+    :global(p) {
+      font-size: var(--kpi-value-size);
+      line-height: 1.05;
+      font-weight: 700;
+    }
 
     // Split value parts (e.g. "2h" "11m") inherit the headline size.
     :global(.trakt-tooltip-trigger) {

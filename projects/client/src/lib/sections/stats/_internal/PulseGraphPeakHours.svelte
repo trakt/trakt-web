@@ -1,4 +1,6 @@
 <script lang="ts">
+  import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
+  import { ratio } from "$lib/utils/number/ratio.ts";
   import type { PeakHoursData } from "./models/PeakHoursData";
 
   const { data }: { data: PeakHoursData } = $props();
@@ -7,14 +9,16 @@
 </script>
 
 <div class="trakt-pulse-graph-peak-hours">
-  {#each data.buckets as bucket (bucket.key)}
+  {#each data.buckets as bucket, i (bucket.key)}
     <div class="peak-row">
       <span class="peak-label tag">{bucket.label}</span>
-      <div class="peak-bar-track">
-        <div
-          class="peak-bar-fill"
-          style:width="{(bucket.count / max) * 100}%"
-        ></div>
+      <div class="peak-bar">
+        <DistributionBar
+          fraction={ratio({ value: bucket.count, total: max })}
+          index={i}
+          active={bucket.count === max && bucket.count > 0}
+          label="{bucket.label}: {bucket.count}"
+        />
       </div>
       <span class="peak-count secondary tag">{bucket.count}</span>
     </div>
@@ -42,20 +46,8 @@
     text-align: start;
   }
 
-  .peak-bar-track {
+  .peak-bar {
     flex: 1;
-    height: var(--ni-8);
-    background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
-    border-radius: var(--ni-4);
-    overflow: hidden;
-  }
-
-  .peak-bar-fill {
-    height: 100%;
-    background: var(--purple-500);
-    border-radius: var(--ni-4);
-    min-width: 2px;
-    transition: width var(--transition-increment) ease;
   }
 
   .peak-count {

@@ -395,7 +395,6 @@
   .yir-2024-stats-summary-chart {
     min-width: 0;
     width: auto;
-    margin: 0 calc(-1 * var(--panel-padding-x));
 
     @include for-tablet-sm-and-below {
       margin-inline-start: 0;
