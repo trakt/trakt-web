@@ -32,16 +32,17 @@
     );
 
   const confettiPosition = writable<{ x: number; y: number } | null>(null);
-  const setConfettiPosition = (rating: number, ev: MouseEvent) => {
+  const setConfettiPosition = (rating: number, ev?: MouseEvent) => {
     const isMaxRating = rating === 10;
-    const hasValidTarget = ev.currentTarget instanceof HTMLElement;
+    const target = ev?.currentTarget;
+    const hasValidTarget = target instanceof HTMLElement;
 
     if (!isMaxRating || !rootElement || !hasValidTarget) {
       confettiPosition.set(null);
       return;
     }
 
-    const targetRect = ev.currentTarget.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
     const parentRect = rootElement.getBoundingClientRect();
 
     const x = targetRect.left + targetRect.width / 2 - parentRect.left;
@@ -72,7 +73,7 @@
           onclick?.();
           removeRating();
         }}
-        onAddRating={(rating: number, ev: MouseEvent) => {
+        onAddRating={(rating: number, ev?: MouseEvent) => {
           if (rating === $current?.rating) {
             return;
           }
