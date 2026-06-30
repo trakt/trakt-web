@@ -316,6 +316,43 @@
   --color-filter-tablist-background: var(--shade-100);
   --color-filter-tab-background: var(--purple-700);
   --color-filter-tab-active-text: var(--shade-10);
+
+  /*
+   * Data visualization
+   *
+   * Categorical series palette (--viz-1..8) plus structural roles. A restrained
+   * purple<->blue cool duotone (brand-anchored, NOT a rainbow): odd slots ride
+   * the purple ramp, even slots the blue ramp, interleaving hue + lightness so
+   * adjacent series stay distinguishable while the whole set reads premium and
+   * cohesive. The dark mixin lifts every step for dark surfaces. Components
+   * consume only these tokens - never a raw palette step - so a single edit here
+   * re-skins every chart.
+   */
+  --viz-1: var(--purple-500);
+  --viz-2: var(--blue-600);
+  --viz-3: var(--purple-300);
+  --viz-4: var(--blue-400);
+  --viz-5: var(--purple-700);
+  --viz-6: var(--blue-800);
+  --viz-7: var(--purple-200);
+  --viz-8: var(--blue-300);
+
+  --viz-axis: var(--shade-400);
+  --viz-grid: var(--shade-200);
+  --viz-neutral: var(--shade-300);
+  --viz-track: var(--shade-100);
+  --viz-label: var(--color-text-secondary);
+  --viz-positive: var(--green-600);
+  --viz-negative: var(--red-600);
+
+  // Bottom stop opacity for the vertical fade gradients (the "fade to nothing"
+  // floor). Lighter surfaces want a softer floor so fills don't muddy.
+  --viz-fade-floor: 0.08;
+  // Hover/active bloom strength on the glow drop-shadow.
+  --viz-glow-percent: 45%;
+  // Non-color (hatched <pattern>) encoding is off until a high-contrast mode
+  // turns it on. Kept here so components can reference it unconditionally.
+  --viz-pattern-opacity: 0;
 }
 
 // Define theme variables for dark mode
@@ -638,6 +675,36 @@
   --color-filter-tablist-background: var(--shade-910);
   --color-filter-tab-background: var(--purple-700);
   --color-filter-tab-active-text: var(--shade-10);
+
+  /*
+   * Data visualization (dark surfaces)
+   *
+   * Lifted to the 300/400 steps so saturated hues stay vivid against a dark
+   * panel; --viz-8 stays a touch deeper to round out the spread. Fades + glow
+   * read stronger on dark, hence the higher floor + bloom.
+   */
+  --viz-1: var(--purple-300);
+  --viz-2: var(--blue-400);
+  --viz-3: var(--purple-200);
+  --viz-4: var(--blue-300);
+  --viz-5: var(--purple-500);
+  --viz-6: var(--blue-600);
+  --viz-7: var(--purple-100);
+  --viz-8: var(--blue-200);
+
+  --viz-axis: var(--shade-700);
+  --viz-grid: var(--shade-800);
+  --viz-neutral: var(--shade-600);
+  --viz-track: var(--shade-900);
+  // Lighter than text-secondary so axis labels stay legible on very dark viz
+  // backgrounds (e.g. the near-black YIR template).
+  --viz-label: var(--shade-300);
+  --viz-positive: var(--green-400);
+  --viz-negative: var(--red-400);
+
+  --viz-fade-floor: 0.14;
+  --viz-glow-percent: 60%;
+  --viz-pattern-opacity: 0;
 }
 
 // Apply themes to selectors
@@ -647,6 +714,71 @@
 
 [data-theme='dark'] {
   @include dark-theme();
+}
+
+// High-contrast viz variants (the HC light + HC dark "modes" the charts target).
+// Keyed off the OS `prefers-contrast` signal rather than a 4th/5th theme enum,
+// so they layer on top of the existing light/dark surfaces without forking the
+// Theme model. Series snap to pure-saturated extremes, structural lines go to
+// the foreground, fades flatten toward solid, and the hatched <pattern> overlay
+// is switched on (--viz-pattern-opacity: 1) so series stay distinguishable by
+// shape, not hue alone.
+@mixin viz-high-contrast-light {
+  --viz-1: var(--purple-700);
+  --viz-2: var(--blue-800);
+  --viz-3: var(--purple-500);
+  --viz-4: var(--blue-600);
+  --viz-5: var(--purple-900);
+  --viz-6: var(--blue-900);
+  --viz-7: var(--purple-600);
+  --viz-8: var(--blue-700);
+
+  --viz-axis: var(--shade-900);
+  --viz-grid: var(--shade-400);
+  --viz-neutral: var(--shade-500);
+  --viz-label: var(--color-foreground);
+  --viz-fade-floor: 0.35;
+  --viz-glow-percent: 0%;
+  --viz-pattern-opacity: 1;
+}
+
+@mixin viz-high-contrast-dark {
+  --viz-1: var(--purple-100);
+  --viz-2: var(--blue-100);
+  --viz-3: var(--purple-300);
+  --viz-4: var(--blue-300);
+  --viz-5: var(--purple-50);
+  --viz-6: var(--blue-50);
+  --viz-7: var(--purple-200);
+  --viz-8: var(--blue-200);
+
+  --viz-axis: var(--shade-50);
+  --viz-grid: var(--shade-600);
+  --viz-neutral: var(--shade-500);
+  --viz-label: var(--color-foreground);
+  --viz-fade-floor: 0.45;
+  --viz-glow-percent: 0%;
+  --viz-pattern-opacity: 1;
+}
+
+@media (prefers-contrast: more) {
+  [data-theme='light'] {
+    @include viz-high-contrast-light();
+  }
+
+  [data-theme='dark'] {
+    @include viz-high-contrast-dark();
+  }
+
+  [data-theme='system'] {
+    @media (prefers-color-scheme: light) {
+      @include viz-high-contrast-light();
+    }
+
+    @media (prefers-color-scheme: dark) {
+      @include viz-high-contrast-dark();
+    }
+  }
 }
 
 [data-theme='system'] {

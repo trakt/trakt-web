@@ -6,6 +6,35 @@
   }
 }
 
+// Visually hide an element while keeping it available to screen readers
+// (e.g. a chart's <figcaption> summary).
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Keyboard focus ring for the chart plots; tints to the series colour, falling
+// back to the hero viz slot when no series is set on the element.
+@mixin viz-focus-ring {
+  outline: var(--ni-2) solid var(--viz-series, var(--viz-1));
+  outline-offset: var(--ni-2);
+  border-radius: var(--viz-bar-radius);
+}
+
+// Active/hover treatment for chart marks: a brightness + saturation pop. No
+// shadow (kept per-segment shadows from stacking) and no transform (never fights
+// the bars' entrance animations). Add `transition: filter` for a smooth in/out.
+@mixin viz-hover-active {
+  filter: brightness(1.16) saturate(1.22);
+}
+
 @mixin for-touch {
   @media (hover: none) and (pointer: coarse) {
     @content;
