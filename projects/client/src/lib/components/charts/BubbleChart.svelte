@@ -2,13 +2,14 @@
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import { hierarchy, pack } from "d3";
+  import { nextVizId } from "./_internal/nextVizId.ts";
   import type {
     BubbleChartItem,
     BubbleChartProps,
     BubbleChartTooltipArgs,
   } from "./models/BubbleChartProps";
 
-  const { items, tooltip }: BubbleChartProps = $props();
+  const { items, tooltip, label = "Bubble chart" }: BubbleChartProps = $props();
 
   type HierarchyDatum = {
     item?: BubbleChartItem;
@@ -25,7 +26,7 @@
   };
 
   const padding = 3;
-  const filterId = `bubble-chart-whiteimage-${crypto.randomUUID()}`;
+  const filterId = nextVizId("bubble-chart-whiteimage");
 
   const minContentRadius = useVarToPixels("var(--min-radius-bubble-chart)");
 
@@ -70,6 +71,20 @@
       });
   });
 
+  // SVG paints in document order with no z-index, so a hovered (scaled) bubble
+  // gets clipped by later siblings. Render the hovered node last so it paints on
+  // top; keyed `each` just moves the existing element, preserving its transition.
+  const orderedNodes = $derived.by(() => {
+    const active = hovered;
+    if (!active) {
+      return nodes;
+    }
+    return [
+      ...nodes.filter((node) => node.item.id !== active.item.id),
+      ...nodes.filter((node) => node.item.id === active.item.id),
+    ];
+  });
+
   function imageSizeFor(r: number): number {
     return Math.min(r * 1.2, 80);
   }
@@ -93,8 +108,32 @@
     pointer = { x: event.clientX, y: event.clientY };
   }
 
-  function handlePointerLeave() {
+  function handlePointerLeave(event: PointerEvent) {
+    // Touch fires a synthetic leave right after the tap - ignore it so the
+    // tapped bubble's tooltip stays pinned (mirrors the chart interaction hook).
+    if (event.pointerType !== "mouse") {
+      return;
+    }
     hovered = null;
+  }
+
+  // Keyboard: each bubble is focusable (Tab between them); focus shows its
+  // tooltip anchored at the bubble centre, Escape clears + blurs.
+  function handleFocus(node: PackedNode, event: FocusEvent) {
+    hovered = node;
+    const rect = (event.currentTarget as Element).getBoundingClientRect();
+    pointer = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+  }
+
+  function handleBlur() {
+    hovered = null;
+  }
+
+  function handleKeydown(event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      hovered = null;
+      (event.currentTarget as SVGElement).blur();
+    }
   }
 
   function handleImageError(id: number) {
@@ -106,7 +145,7 @@
   );
 </script>
 
-<div
+<figure
   class="trakt-bubble-chart"
   use:observeWidth
   use:observeHeight
@@ -114,11 +153,13 @@
   onpointerleave={handlePointerLeave}
   role="presentation"
 >
+  <figcaption class="viz-caption">{label}</figcaption>
+
   <svg
     width={$observedWidth}
     height={$observedHeight}
     role="img"
-    aria-label="Bubble chart"
+    aria-label={label}
   >
     <defs>
       <filter id={filterId}>
@@ -130,16 +171,29 @@
       </filter>
     </defs>
 
-    {#each nodes as node (node.item.id)}
+    {#each orderedNodes as node (node.item.id)}
       {@const showImage = node.item.imageUrl && !failedImages.has(node.item.id)}
       {@const hasRoomForContent = node.r >= $minContentRadius}
       {@const imageSize = imageSizeFor(node.r)}
 
+      <!--
+        role="img" labels each bubble for screen readers; bubbles are also
+        keyboard-focusable (Tab between them, Escape clears), so the tabindex +
+        listeners are intentional.
+      -->
+      <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+      <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
       <g
         class="node"
         onpointerenter={(event) => handlePointerEnter(node, event)}
+        onpointerdown={(event) => handlePointerEnter(node, event)}
+        onfocus={(event) => handleFocus(node, event)}
+        onblur={handleBlur}
+        onkeydown={handleKeydown}
         role="img"
         aria-label={node.item.label}
+        tabindex="0"
+        style="--viz-series: {node.fill};"
       >
         <circle cx={node.x} cy={node.y} r={node.r} fill={node.fill} />
 
@@ -185,13 +239,21 @@
       {@render tooltip(tooltipArgs)}
     </div>
   {/if}
-</div>
+</figure>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-bubble-chart {
     position: relative;
     width: 100%;
     height: 100%;
+    margin: 0;
+    // Let the page scroll vertically over the chart while the bubbles own taps;
+    // suppress native tap highlight + selection during hover/scrub.
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 
     svg {
       display: block;
@@ -201,11 +263,27 @@
       cursor: pointer;
       transform-box: fill-box;
       transform-origin: center;
-      transition: transform var(--transition-increment) ease;
+      transition:
+        transform var(--transition-increment) ease,
+        filter var(--transition-increment) ease;
 
-      &:hover {
-        transform: scale(1.05);
+      &:hover,
+      &:focus-visible {
+        transform: scale(1.06);
+        @include viz-hover-active;
       }
+
+      outline: none;
+
+      &:focus-visible {
+        outline: var(--ni-2) solid var(--shade-10);
+        outline-offset: var(--ni-2);
+        border-radius: var(--border-radius-s);
+      }
+    }
+
+    .viz-caption {
+      @include visually-hidden;
     }
   }
 
