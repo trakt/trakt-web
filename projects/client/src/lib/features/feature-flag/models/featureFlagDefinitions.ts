@@ -2,6 +2,7 @@ import BrainIcon from '$lib/components/icons/BrainIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
+import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import SmartListIcon from '$lib/components/icons/SmartListIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
@@ -76,5 +77,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     icon: PeopleIcon,
     title: () => m.preview_feature_title_leaderboard(),
     description: () => m.preview_feature_description_leaderboard(),
+  },
+  [FeatureFlag.ParentalGuide]: {
+    icon: NoSpoilerIcon,
+    title: () => m.option_text_certification_parental_guidance(),
+    description: () => m.preview_feature_description_parental_guide(),
+    audience: 'director',
   },
 };

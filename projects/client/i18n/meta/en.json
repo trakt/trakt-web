@@ -8140,6 +8140,10 @@
       "default": "Rank the people you follow by watch time and see where you land among them.",
       "description": "Description for the Pantheon (follows watch-time ranking) preview feature."
     },
+    "preview_feature_description_parental_guide": {
+      "default": "Show content risk levels in the details drawer for movies, shows, and episodes.",
+      "description": "Description for the Parental Guidance preview feature."
+    },
     "header_official_links": {
       "default": "Official Links",
       "description": "Header for the official links section, with official links for a show or movie, like the official site, instagram, etc.."
@@ -9198,6 +9202,10 @@
     "error_text_sync_load_failed": {
       "default": "We couldn't load this right now. Please try again.",
       "description": "Inline error message shown when a streaming sync detail or its items fail to load."
+    },
+    "error_text_parental_guide_load_failed": {
+      "default": "Loading Error",
+      "description": "Short label shown in the parental guide when its content fails to load."
     },
     "text_streaming_tmdb_pill": {
       "default": "TMDB {id}",

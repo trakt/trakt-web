@@ -35,6 +35,7 @@ export function mapToEpisodeEntry(
 
   return {
     id: episode.ids.trakt,
+    imdbId: episode.ids.imdb,
     key: `episode-${episode.ids.trakt}`,
     type: episode.episode_type as EpisodeType ??
       EpisodeUnknownType.unknown,
