@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Betöltés...",
   "yir_title_year_in_review": "Éves összefoglaló",
   "yir_title_year_to_date": "Éves összesítés",
-  "yir_unit_comment": "{count, plural, one {hozzászólás} other {hozzászólás}}",
-  "yir_unit_episode": "{count, plural, one {epizód} other {epizód}}",
-  "yir_unit_hour": "{count, plural, one {óra} other {óra}}",
-  "yir_unit_list": "{count, plural, one {lista} other {lista}}",
-  "yir_unit_movie": "{count, plural, one {film} other {film}}",
-  "yir_unit_play": "{count, plural, one {lejátszás} other {lejátszás}}",
-  "yir_unit_rating": "{count, plural, one {értékelés} other {értékelés}}",
-  "yir_unit_show": "{count, plural, one {sorozat} other {sorozat}}",
   "yir_upgrade_message": "Válts VIP-re az örökranglistás és az éves évértékelő oldalaidért, plusz rengeteg más nagyszerű funkcióért!"
 }

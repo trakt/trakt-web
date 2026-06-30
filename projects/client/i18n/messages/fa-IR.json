@@ -1772,13 +1772,5 @@
   "yir_state_loading": "در حال بارگذاری...",
   "yir_title_year_in_review": "مرور سال",
   "yir_title_year_to_date": "سال تا به امروز",
-  "yir_unit_comment": "{count, plural, one {نظر} other {نظر}}",
-  "yir_unit_episode": "{count, plural, one {قسمت} other {قسمت}}",
-  "yir_unit_hour": "{count, plural, one {ساعت} other {ساعت}}",
-  "yir_unit_list": "{count, plural, one {لیست} other {لیست}}",
-  "yir_unit_movie": "{count, plural, one {فیلم} other {فیلم}}",
-  "yir_unit_play": "{count, plural, one {بازدید} other {بازدید}}",
-  "yir_unit_rating": "{count, plural, one {امتیاز} other {امتیاز}}",
-  "yir_unit_show": "{count, plural, one {برنامه} other {برنامه}}",
   "yir_upgrade_message": "به VIP ارتقا دهید و صفحات مرور سالانه و تمام دوران خود را، به همراه بسیاری از ویژگی‌های عالی دیگر، دریافت کنید!"
 }

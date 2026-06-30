@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Caricamento...",
   "yir_title_year_in_review": "Riepilogo dell'anno",
   "yir_title_year_to_date": "Dall'inizio dell'anno",
-  "yir_unit_comment": "{count, plural, one {commento} other {commenti}}",
-  "yir_unit_episode": "{count, plural, one {episodio} other {episodi}}",
-  "yir_unit_hour": "{count, plural, one {ora} other {ore}}",
-  "yir_unit_list": "{count, plural, one {lista} other {liste}}",
-  "yir_unit_movie": "{count, plural, one {film} other {film}}",
-  "yir_unit_play": "{count, plural, one {riproduzione} other {riproduzioni}}",
-  "yir_unit_rating": "{count, plural, one {valutazione} other {valutazioni}}",
-  "yir_unit_show": "{count, plural, one {serie} other {serie}}",
   "yir_upgrade_message": "Passa a VIP e ottieni le tue pagine di riepilogo dell'anno e di tutti i tempi, oltre a molte altre fantastiche funzionalità!"
 }

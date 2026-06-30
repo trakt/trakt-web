@@ -1772,13 +1772,5 @@
   "yir_state_loading": "読み込み中...",
   "yir_title_year_in_review": "年間レビュー",
   "yir_title_year_to_date": "今年これまでの統計",
-  "yir_unit_comment": "{count, plural, one {コメント} other {コメント}}",
-  "yir_unit_episode": "{count, plural, one {エピソード} other {エピソード}}",
-  "yir_unit_hour": "{count, plural, one {時間} other {時間}}",
-  "yir_unit_list": "{count, plural, one {リスト} other {リスト}}",
-  "yir_unit_movie": "{count, plural, one {映画} other {映画}}",
-  "yir_unit_play": "{count, plural, one {再生} other {再生}}",
-  "yir_unit_rating": "{count, plural, one {評価} other {評価}}",
-  "yir_unit_show": "{count, plural, one {番組} other {番組}}",
   "yir_upgrade_message": "VIPにアップグレードして、通算および年間の年次レビューページ、さらに多くの素晴らしい機能を手に入れましょう！"
 }

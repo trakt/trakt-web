@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Зареждане...",
   "yir_title_year_in_review": "Годишен преглед",
   "yir_title_year_to_date": "От началото на годината",
-  "yir_unit_comment": "{count, plural, one {коментар} other {коментара}}",
-  "yir_unit_episode": "{count, plural, one {епизод} other {епизода}}",
-  "yir_unit_hour": "{count, plural, one {час} other {часа}}",
-  "yir_unit_list": "{count, plural, one {списък} other {списъка}}",
-  "yir_unit_movie": "{count, plural, one {филм} other {филма}}",
-  "yir_unit_play": "{count, plural, one {гледане} other {гледания}}",
-  "yir_unit_rating": "{count, plural, one {оценка} other {оценки}}",
-  "yir_unit_show": "{count, plural, one {сериал} other {сериала}}",
   "yir_upgrade_message": "Надстройте до VIP и получете свои собствени страници за годишен преглед за всички времена и за годината, плюс много други страхотни функции!"
 }

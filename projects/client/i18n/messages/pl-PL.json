@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Ładowanie...",
   "yir_title_year_in_review": "Podsumowanie roku",
   "yir_title_year_to_date": "Od początku roku",
-  "yir_unit_comment": "{count, plural, one {komentarz} few {komentarze} many {komentarzy} other {komentarze}}",
-  "yir_unit_episode": "{count, plural, one {odcinek} few {odcinki} many {odcinków} other {odcinki}}",
-  "yir_unit_hour": "{count, plural, one {godzina} few {godziny} many {godzin} other {godziny}}",
-  "yir_unit_list": "{count, plural, one {lista} few {listy} many {list} other {listy}}",
-  "yir_unit_movie": "{count, plural, one {film} few {filmy} many {filmów} other {filmy}}",
-  "yir_unit_play": "{count, plural, one {odtworzenie} few {odtworzenia} many {odtworzeń} other {odtworzenia}}",
-  "yir_unit_rating": "{count, plural, one {ocena} few {oceny} many {ocen} other {oceny}}",
-  "yir_unit_show": "{count, plural, one {serial} few {seriale} many {seriali} other {seriale}}",
   "yir_upgrade_message": "Zostań VIP i zyskaj dostęp do corocznych podsumowań, a także wielu innych wspaniałych funkcji!"
 }

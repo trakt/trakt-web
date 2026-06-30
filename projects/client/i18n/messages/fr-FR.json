@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Chargement...",
   "yir_title_year_in_review": "Bilan annuel",
   "yir_title_year_to_date": "Année à ce jour",
-  "yir_unit_comment": "{count, plural, one {commentaire} other {commentaires}}",
-  "yir_unit_episode": "{count, plural, one {épisode} other {épisodes}}",
-  "yir_unit_hour": "{count, plural, one {heure} other {heures}}",
-  "yir_unit_list": "{count, plural, one {liste} other {listes}}",
-  "yir_unit_movie": "{count, plural, one {film} other {films}}",
-  "yir_unit_play": "{count, plural, one {visionnage} other {visionnages}}",
-  "yir_unit_rating": "{count, plural, one {note} other {notes}}",
-  "yir_unit_show": "{count, plural, one {série} other {séries}}",
   "yir_upgrade_message": "Passez au statut VIP et accédez à vos pages de bilan annuel et de tous les temps, ainsi qu'à de nombreuses autres fonctionnalités exceptionnelles!"
 }

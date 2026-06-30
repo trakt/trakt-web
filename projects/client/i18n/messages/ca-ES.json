@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Carregant...",
   "yir_title_year_in_review": "Resum de l'Any",
   "yir_title_year_to_date": "Acumulat de l'any",
-  "yir_unit_comment": "{count, plural, one {comentari} other {comentaris}}",
-  "yir_unit_episode": "{count, plural, one {episodi} other {episodis}}",
-  "yir_unit_hour": "{count, plural, one {hora} other {hores}}",
-  "yir_unit_list": "{count, plural, one {llista} other {llistes}}",
-  "yir_unit_movie": "{count, plural, one {pel·lícula} other {pel·lícules}}",
-  "yir_unit_play": "{count, plural, one {reproducció} other {reproduccions}}",
-  "yir_unit_rating": "{count, plural, one {valoració} other {valoracions}}",
-  "yir_unit_show": "{count, plural, one {sèrie} other {sèries}}",
   "yir_upgrade_message": "Actualitza a VIP i obtén les teves pròpies pàgines de resum de l'any de tots els temps i anuals, a més de moltes més funcions fantàstiques!"
 }

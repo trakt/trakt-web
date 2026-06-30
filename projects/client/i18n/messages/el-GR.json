@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Φόρτωση...",
   "yir_title_year_in_review": "Ετήσια Ανασκόπηση",
   "yir_title_year_to_date": "Έτος μέχρι σήμερα",
-  "yir_unit_comment": "{count, plural, one {σχόλιο} other {σχόλια}}",
-  "yir_unit_episode": "{count, plural, one {επεισόδιο} other {επεισόδια}}",
-  "yir_unit_hour": "{count, plural, one {ώρα} other {ώρες}}",
-  "yir_unit_list": "{count, plural, one {λίστα} other {λίστες}}",
-  "yir_unit_movie": "{count, plural, one {ταινία} other {ταινίες}}",
-  "yir_unit_play": "{count, plural, one {προβολή} other {προβολές}}",
-  "yir_unit_rating": "{count, plural, one {βαθμολογία} other {βαθμολογίες}}",
-  "yir_unit_show": "{count, plural, one {σειρά} other {σειρές}}",
   "yir_upgrade_message": "Αναβαθμίστε σε VIP και αποκτήστε τις δικές σας σελίδες Ετήσιας Ανασκόπησης για όλο το χρόνο και ανά έτος, καθώς και πολλές ακόμα εξαιρετικές λειτουργίες!"
 }

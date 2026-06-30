@@ -1772,13 +1772,5 @@
   "yir_state_loading": "Laster inn...",
   "yir_title_year_in_review": "Året i retrospekt",
   "yir_title_year_to_date": "År til dato",
-  "yir_unit_comment": "{count, plural, one {kommentar} other {kommentarer}}",
-  "yir_unit_episode": "{count, plural, one {episode} other {episoder}}",
-  "yir_unit_hour": "{count, plural, one {time} other {timer}}",
-  "yir_unit_list": "{count, plural, one {liste} other {lister}}",
-  "yir_unit_movie": "{count, plural, one {film} other {filmer}}",
-  "yir_unit_play": "{count, plural, one {avspilling} other {avspillinger}}",
-  "yir_unit_rating": "{count, plural, one {vurdering} other {vurderinger}}",
-  "yir_unit_show": "{count, plural, one {serie} other {serier}}",
   "yir_upgrade_message": "Oppgrader til VIP og få dine egne tilbakeblikkssider for alle tider og årlige, pluss mange flere flotte funksjoner!"
 }
