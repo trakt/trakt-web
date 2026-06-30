@@ -95,6 +95,11 @@
     $bg: var(--color-background-#{$color});
     $fg: var(--color-foreground-#{$color});
 
+    // Stable per-colour accent, immune to the hover fg/bg var-swap.
+    :global(#{$base}[data-color=#{$color}]) {
+      --accent-action-button: #{$bg};
+    }
+
     @include variant-styles($base, $color, primary, $bg, $fg);
     @include variant-styles($base, $color, secondary, $fg, $bg);
 
@@ -145,7 +150,7 @@
     align-items: center;
     flex-shrink: 0;
 
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-l);
     background-color: var(--color-background-action-button);
     color: var(--color-foreground-action-button);
 
@@ -177,18 +182,42 @@
     display: none;
   }
 
+  // Flat is an outline matching the labelled buttons: accent ring + accent
+  // icon, primary heavier than secondary, colour-shift hover, no glow.
+  :global(#{$b}[data-style=flat][data-variant=primary]#{$on}) {
+    background-color: color-mix(in srgb, var(--accent-action-button) 14%, transparent);
+    color: var(--accent-action-button);
+    border: var(--border-thickness-xs) solid
+      color-mix(in srgb, var(--accent-action-button) 65%, transparent);
+  }
+
+  :global(#{$b}[data-style=flat][data-variant=secondary]#{$on}) {
+    background-color: transparent;
+    color: var(--accent-action-button);
+    border: var(--border-thickness-xxs) solid
+      color-mix(in srgb, var(--accent-action-button) 30%, transparent);
+  }
+
   @include for-mouse {
-    :global(#{$b}:hover#{$on}) {
-      box-shadow: 0 var(--ni-2) var(--ni-8) var(--ni-neg-2)
-        color-mix(
-          in srgb,
-          var(--color-background-action-button) 50%,
-          transparent
-        );
+    :global(#{$b}[data-style=flat][data-variant=primary]:hover#{$on}) {
+      background-color: color-mix(in srgb, var(--accent-action-button) 26%, transparent);
+      border-color: color-mix(in srgb, var(--accent-action-button) 95%, transparent);
+    }
+
+    :global(#{$b}[data-style=flat][data-variant=secondary]:hover#{$on}) {
+      background-color: color-mix(in srgb, var(--accent-action-button) 16%, transparent);
+      border-color: color-mix(in srgb, var(--accent-action-button) 60%, transparent);
     }
   }
 
-  :global(#{$b}:active#{$on}) {
+  :global(#{$b}[data-style=flat]:active#{$on}) {
+    transform: scale(0.92);
+    background-color: color-mix(in srgb, var(--accent-action-button) 36%, transparent);
+    border-color: var(--accent-action-button);
+    box-shadow: none;
+  }
+
+  :global(#{$b}[data-style=ghost]:active#{$on}) {
     transform: scale(0.92);
     box-shadow: none;
   }
@@ -206,28 +235,6 @@
   :global(#{$b}[data-size=large]) {
     scale: 1.2;
     margin: var(--ni-4);
-  }
-
-  :global(#{$b}[data-variant=secondary]:not([data-style=ghost])#{$on}) {
-    background-color: color-mix(
-      in srgb,
-      var(--color-foreground-action-button) 5%,
-      transparent
-    );
-    border: var(--border-thickness-xxs) solid
-      color-mix(
-        in srgb,
-        var(--color-foreground-action-button) 50%,
-        transparent
-      );
-    color: var(--color-text-primary);
-  }
-
-  @include for-mouse {
-    :global(#{$b}[data-variant=secondary]:not([data-style=ghost])#{$on}:hover) {
-      background-color: var(--color-background-action-button);
-      color: var(--color-foreground-action-button);
-    }
   }
 
   :global(#{$b}[data-style=ghost]) {
