@@ -15,7 +15,7 @@
     display: inline-flex;
     align-items: center;
     gap: var(--gap-xs);
-    color: var(--purple-300);
+    color: var(--color-yir-text-accent);
 
     :global(svg) {
       width: var(--ni-28);

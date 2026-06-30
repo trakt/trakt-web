@@ -82,11 +82,7 @@
     overflow: hidden;
     padding: var(--panel-padding-y) var(--panel-padding-x);
     border-radius: var(--panel-radius);
-    background: radial-gradient(
-      50% 39.27% at 50% 0%,
-      color-mix(in srgb, var(--shade-950) 90%, var(--blue-500) 10%) 0%,
-      color-mix(in srgb, var(--shade-950) 70%, var(--shade-900) 30%) 100%
-    );
+    background: var(--color-yir-panel-background);
 
     @include for-mobile {
       --panel-padding-x: var(--ni-20);
@@ -107,7 +103,7 @@
     line-height: 1;
     white-space: nowrap;
     text-transform: lowercase;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
     opacity: 0.04;
     pointer-events: none;
     user-select: none;
@@ -138,7 +134,7 @@
     min-width: 0;
     font-size: clamp(var(--ni-32), 5vw, var(--ni-56));
     line-height: 1.05;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     @include for-mobile {
       font-size: var(--ni-28);

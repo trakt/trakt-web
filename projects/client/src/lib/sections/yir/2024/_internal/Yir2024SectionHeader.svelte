@@ -30,7 +30,7 @@
     font-size: var(--ni-24);
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     @include for-mobile {
       font-size: var(--ni-12);

@@ -120,7 +120,7 @@
 
   .yir-2024-companies-heading {
     font-size: clamp(var(--ni-32), 5vw, var(--ni-56));
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     @include for-mobile {
       font-size: var(--ni-28);

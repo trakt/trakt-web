@@ -33,7 +33,7 @@
 
 <CountryMap
   {data}
-  --color-map-chart-background="var(--shade-900)"
+  --color-map-chart-background="var(--color-yir-surface-raised)"
   --color-map-chart-highlight="var(--red-500)"
 >
   {#snippet tooltip({ code })}

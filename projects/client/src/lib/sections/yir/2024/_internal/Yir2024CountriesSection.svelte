@@ -92,7 +92,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
   }
 
   .yir-2024-countries-map {

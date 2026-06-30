@@ -122,7 +122,7 @@
     display: inline-flex;
     align-items: center;
     gap: var(--gap-m);
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     @include for-tablet-lg-and-below {
       gap: var(--gap-s);
@@ -141,7 +141,7 @@
   .yir-2024-stat-icon {
     display: inline-flex;
     align-items: center;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
     flex-shrink: 0;
 
     :global(svg) {
@@ -193,7 +193,7 @@
 
   .yir-2024-stat-label {
     font-size: var(--font-size-text);
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
     text-transform: uppercase;
 
     @include for-mobile {

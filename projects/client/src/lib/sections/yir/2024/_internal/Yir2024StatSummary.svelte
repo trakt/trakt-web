@@ -61,7 +61,7 @@
     align-items: center;
     gap: var(--ni-32);
     padding: var(--ni-16) 0;
-    border-bottom: var(--border-thickness-xxs) solid var(--shade-800);
+    border-bottom: var(--border-thickness-xxs) solid var(--color-yir-separator);
 
     &:last-child {
       border-bottom: none;
@@ -73,7 +73,7 @@
 
     dt {
       font-size: var(--font-size-title);
-      color: var(--shade-10);
+      color: var(--color-yir-text-primary);
     }
 
     dd {
@@ -81,7 +81,7 @@
       align-items: center;
       gap: var(--gap-xs);
       font-size: var(--font-size-title);
-      color: var(--shade-10);
+      color: var(--color-yir-text-primary);
       min-width: 0;
     }
   }
@@ -90,21 +90,21 @@
   // chart's highlight color (matches v2's link styling). Truncation handled
   // by the `.ellipsis` utility class on the markup.
   .yir-2024-stat-name {
-    color: var(--purple-300);
+    color: var(--color-yir-text-accent);
   }
 
   // Pill-shaped count badge with white background + dark text — matches the
   // v2 design. `--border-radius-xxl` is the established v3 token for
   // pill-shaped tags; `.tag` utility class handles font sizing.
   .yir-2024-stat-count {
-    background: var(--shade-10);
-    color: var(--shade-900);
+    background: var(--color-yir-badge-background);
+    color: var(--color-yir-badge-foreground);
     border-radius: var(--border-radius-xxl);
     padding: var(--ni-4) var(--ni-10);
     white-space: nowrap;
   }
 
   .yir-2024-stat-total {
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
   }
 </style>

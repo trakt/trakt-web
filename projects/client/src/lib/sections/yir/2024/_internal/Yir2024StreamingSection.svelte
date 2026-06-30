@@ -142,7 +142,7 @@
     font-size: var(--ni-24);
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     @include for-mobile {
       font-size: var(--ni-12);
@@ -153,7 +153,7 @@
     margin: 0;
     font-size: clamp(var(--ni-32), 5vw, var(--ni-56));
     line-height: 1.05;
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     @include for-mobile {
       font-size: var(--ni-28);
@@ -174,7 +174,7 @@
     align-items: center;
     gap: var(--ni-32);
     padding: var(--ni-16) 0;
-    border-bottom: var(--border-thickness-xxs) solid var(--shade-800);
+    border-bottom: var(--border-thickness-xxs) solid var(--color-yir-separator);
 
     &:last-child {
       border-bottom: none;
@@ -186,7 +186,7 @@
 
     dt {
       font-size: var(--font-size-title);
-      color: var(--shade-10);
+      color: var(--color-yir-text-primary);
       min-width: 0;
     }
 
@@ -194,13 +194,13 @@
       display: flex;
       align-items: center;
       font-size: var(--font-size-title);
-      color: var(--shade-10);
+      color: var(--color-yir-text-primary);
       white-space: nowrap;
     }
   }
 
   .yir-2024-streaming-name {
-    color: var(--purple-300);
+    color: var(--color-yir-text-accent);
   }
 
   // Shows and movies each get their own pill, laid out side by side.
@@ -211,8 +211,8 @@
   // Pill-shaped count badge matching Yir2024StatSummary's stat-count pill so
   // the streaming rows read like the genres / networks stat lists.
   .yir-2024-streaming-count-pill {
-    background: var(--shade-10);
-    color: var(--shade-900);
+    background: var(--color-yir-badge-background);
+    color: var(--color-yir-badge-foreground);
     border-radius: var(--border-radius-xxl);
     padding: var(--ni-4) var(--ni-10);
     white-space: nowrap;

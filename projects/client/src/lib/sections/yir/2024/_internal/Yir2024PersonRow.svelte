@@ -131,8 +131,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .yir-2024-person {
-    border-bottom: var(--border-thickness-xxs) solid
-      color-mix(in srgb, var(--shade-700) 60%, transparent);
+    border-bottom: var(--border-thickness-xxs) solid var(--color-yir-separator);
 
     &:last-child {
       border-bottom: none;
@@ -150,7 +149,7 @@
     flex: none;
     min-width: var(--ni-24);
     font-size: var(--ni-16);
-    color: var(--shade-500);
+    color: var(--color-yir-text-muted);
   }
 
   // Name on line 1, watched counts stacked beneath it on line 2. Flexes to
@@ -177,7 +176,7 @@
     height: var(--ni-40);
     border-radius: 50%;
     object-fit: cover;
-    background-color: var(--shade-800);
+    background-color: var(--color-yir-surface-chip);
   }
 
   .yir-2024-person-name {
@@ -193,7 +192,7 @@
     // `.yir-2024-person-name` is scoped to this component, so the global
     // `.trakt-link` hover only matches names rendered here.
     :global(.trakt-link:hover) .yir-2024-person-name {
-      color: var(--purple-300);
+      color: var(--color-yir-text-accent);
     }
   }
 
@@ -209,7 +208,7 @@
     font-family: inherit;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--shade-500);
+    color: var(--color-yir-text-muted);
     white-space: nowrap;
     cursor: pointer;
     transition: color 0.2s;
@@ -227,7 +226,7 @@
   }
 
   .yir-2024-person-counts:hover {
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
   }
 
   // Text dropped — a purple circle around the chevron keeps the button
@@ -286,20 +285,20 @@
     align-items: center;
     gap: var(--ni-8);
     text-decoration: none;
-    color: var(--shade-100);
+    color: var(--color-yir-text-primary);
     transition: color 0.2s;
   }
 
   @include for-mouse {
     .yir-2024-person-title :global(.trakt-link):hover {
-      color: var(--purple-300);
+      color: var(--color-yir-text-accent);
     }
   }
 
   .yir-2024-person-title-icon {
     flex: none;
     display: inline-flex;
-    color: var(--shade-400);
+    color: var(--color-yir-text-secondary);
 
     :global(svg) {
       width: var(--ni-16);

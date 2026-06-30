@@ -89,7 +89,7 @@
     border-radius: var(--border-radius-m);
     overflow: hidden;
     transition: transform 0.3s;
-    background-color: var(--shade-800);
+    background-color: var(--color-yir-surface-chip);
 
     &:hover {
       transform: scale(1.05);

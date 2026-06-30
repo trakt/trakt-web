@@ -39,7 +39,7 @@
     column-gap: var(--gap-m);
     width: 100%;
     margin-top: var(--ni-neg-24);
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
     box-sizing: border-box;
 
     // Tablet-sm-and-below: collapse to a centered flex row so the two
@@ -105,7 +105,7 @@
     :global(svg) {
       width: var(--ni-44);
       height: var(--ni-44);
-      color: var(--shade-300);
+      color: var(--color-yir-text-secondary);
     }
 
     @include for-mobile {
@@ -118,7 +118,7 @@
 
   .yir-2024-member-year {
     font-size: var(--ni-44);
-    color: var(--shade-300);
+    color: var(--color-yir-text-secondary);
     text-align: end;
 
     @include for-mobile {

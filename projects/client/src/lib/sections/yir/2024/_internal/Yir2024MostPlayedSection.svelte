@@ -52,7 +52,7 @@
   .yir-2024-most-played-heading {
     margin: 0;
     font-size: clamp(var(--ni-28), 3.5vw, var(--ni-44));
-    color: var(--shade-10);
+    color: var(--color-yir-text-primary);
 
     @include for-mobile {
       font-size: var(--ni-22);
