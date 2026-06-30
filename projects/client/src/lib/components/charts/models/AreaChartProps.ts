@@ -1,16 +1,20 @@
 import type { Snippet } from 'svelte';
+import type { VizPoint } from './VizPoint.ts';
+import type { VizTooltipArgs } from './VizTooltipArgs.ts';
 
-type AreaChartData = {
-  value: number;
-  label: string;
-};
+type AreaChartData = VizPoint;
 
-export type TooltipArgs = { value: number; label: string; index: number };
+export type TooltipArgs = VizTooltipArgs;
 
 export type AreaChartProps = {
   data: AreaChartData[];
   tooltip?: Snippet<[TooltipArgs]>;
-  /** CSS color used for the line stroke. */
+  /**
+   * Zero-based series slot driving color + hatch pattern via `--viz-*` tokens.
+   * Ignored for any color explicitly supplied below.
+   */
+  seriesIndex?: number;
+  /** CSS color used for the line stroke. Defaults to the seriesIndex token. */
   lineColor?: string;
   /** CSS color used to fill the area beneath the line. */
   fillColor?: string;
@@ -18,4 +22,8 @@ export type AreaChartProps = {
   dotColor?: string;
   /** CSS color used for the hover marker dot's outer halo. */
   dotHaloColor?: string;
+  /** Accessible chart summary; rendered as a screen-reader figcaption. */
+  label?: string;
+  /** CSS height for the plot. Defaults to `var(--height-area-chart)`. */
+  height?: string;
 };

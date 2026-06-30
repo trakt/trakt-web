@@ -15,4 +15,6 @@ export type BubbleChartTooltipArgs = {
 export type BubbleChartProps = {
   items: BubbleChartItem[];
   tooltip?: Snippet<[BubbleChartTooltipArgs]>;
+  /** Accessible chart summary; rendered as a screen-reader figcaption. */
+  label?: string;
 };
