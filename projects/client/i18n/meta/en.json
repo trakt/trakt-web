@@ -927,6 +927,19 @@
         }
       }
     },
+    "chart_label_other": {
+      "default": "Other",
+      "description": "Label for the segment that groups the smallest remaining categories in a segmented bar chart."
+    },
+    "chart_label_grouped_categories": {
+      "default": "{count} categories",
+      "description": "Sublabel for the grouped 'Other' segment in a segmented bar chart, stating how many categories it rolls up.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "header_premiered": {
       "default": "Premiered",
       "description": "Header for the premiered section."

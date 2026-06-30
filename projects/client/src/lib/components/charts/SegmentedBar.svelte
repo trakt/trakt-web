@@ -1,8 +1,13 @@
 <script lang="ts">
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { ratio } from "$lib/utils/number/ratio.ts";
   import { sum } from "$lib/utils/number/sum.ts";
-  import type { SegmentedBarProps } from "./models/SegmentedBarProps.ts";
+  import { collapseToOther } from "./collapseToOther.ts";
+  import type {
+    SegmentedBarItem,
+    SegmentedBarProps,
+  } from "./models/SegmentedBarProps.ts";
   import { vizSeriesSlot } from "./vizSeriesSlot.ts";
 
   // SOT for the single proportional segmented bar (e.g. a genre breakdown):
@@ -10,37 +15,71 @@
   // palette with the shared glossy fill + outer-corner rounding. Labels
   // alternate above/below so adjacent ones don't collide. Hovering a segment
   // dims the rest, lifts it, and reveals its share via the shared tooltip.
+  // When categories exceed `maxSegments`, the smallest collapse into a single
+  // "Other" bucket so the run never degrades into slivers; on mobile the
+  // beside-the-bar labels give way to a legend list under the bar.
   const {
-    items,
+    items = [],
     label = "Segmented distribution",
     minSegment = 0.04,
+    maxSegments = 8,
   }: SegmentedBarProps = $props();
 
-  const total = $derived(sum(items.map((item) => item.value)));
+  type DisplayItem = SegmentedBarItem & { isOther?: boolean };
 
-  const segments = $derived(
-    items.map((item, index) => {
+  const displayItems = $derived.by<DisplayItem[]>(() => {
+    const { visible, other } = collapseToOther(items, maxSegments);
+    if (!other) return visible;
+
+    return [
+      ...visible,
+      {
+        label: m.chart_label_other(),
+        value: other.value,
+        sublabel: m.chart_label_grouped_categories({ count: other.count }),
+        isOther: true,
+      },
+    ];
+  });
+
+  const total = $derived(sum(displayItems.map((item) => item.value)));
+
+  const segments = $derived.by(() => {
+    const base = displayItems.map((item, index) => {
       const share = ratio({ value: item.value, total });
+      const slot = vizSeriesSlot(item.seriesIndex ?? index);
       return {
         ...item,
         index,
-        slot: vizSeriesSlot(item.seriesIndex ?? index),
+        colorVar: item.isOther ? "--viz-neutral" : `--viz-${slot}`,
         percent: Math.round(share * 100),
         grow: item.value > 0 ? Math.max(share, minSegment) : minSegment,
       };
-    }),
-  );
+    });
+
+    // Labels alternate rows, so each only competes with the next same-row
+    // label (two segments over). Let a label span its own slot plus the
+    // opposite-row neighbour beside it, expressed as a multiple of its own
+    // width so the clamp tracks the real gap, not a flat 200%.
+    return base.map((segment, index) => {
+      const nextSameRow = index + 2;
+      const span = nextSameRow < base.length
+        ? segment.grow + (base.at(index + 1)?.grow ?? 0)
+        : sum(base.slice(index).map((s) => s.grow));
+      return { ...segment, labelMax: segment.grow > 0 ? span / segment.grow : 1 };
+    });
+  });
 </script>
 
 <figure class="trakt-segmented-bar" role="img" aria-label={label}>
   <figcaption class="viz-caption">{label}</figcaption>
 
   <div class="segmented-track">
-    {#each segments as segment (segment.label)}
+    {#each segments as segment (segment.index)}
       <div
         class="segment"
         class:is-below={segment.index % 2 === 1}
-        style="--seg-grow: {segment.grow}; --seg-color: var(--viz-{segment.slot}); --viz-series: var(--viz-{segment.slot}); --i: {segment.index};"
+        style="--seg-grow: {segment.grow}; --seg-label-max: {segment.labelMax}; --seg-color: var({segment.colorVar}); --viz-series: var({segment.colorVar}); --i: {segment.index};"
       >
         <span class="segment-label">
           <span class="segment-name bold ellipsis">{segment.label}</span>
@@ -56,6 +95,20 @@
       </div>
     {/each}
   </div>
+
+  <!-- Mobile fallback: beside-the-bar labels can't fit, so list shares here. -->
+  <ul class="segment-legend">
+    {#each segments as segment (segment.index)}
+      <li class="legend-row" style="--seg-color: var({segment.colorVar});">
+        <span class="legend-swatch"></span>
+        <span class="legend-name bold ellipsis">{segment.label}</span>
+        {#if segment.sublabel}
+          <span class="legend-sub tag secondary">{segment.sublabel}</span>
+        {/if}
+        <span class="legend-percent tag secondary">{segment.percent}%</span>
+      </li>
+    {/each}
+  </ul>
 </figure>
 
 <style lang="scss">
@@ -112,6 +165,15 @@
     .segment:hover .segment-fill {
       @include viz-hover-active;
     }
+
+    // Reveal the focused segment's full label over the dimmed neighbours.
+    .segment:hover {
+      z-index: 1;
+    }
+
+    .segment:hover .segment-label {
+      max-width: none;
+    }
   }
 
   // Round only the run's outer corners (logical, so they mirror under RTL).
@@ -131,7 +193,9 @@
     display: flex;
     flex-direction: column;
     gap: var(--ni-1);
-    max-width: 200%;
+    // Span own slot + opposite-row neighbour (see --seg-label-max), less a gap
+    // so the name only clips when it reaches the next same-row label.
+    max-width: calc(var(--seg-label-max, 2) * 100% - var(--ni-12));
     white-space: nowrap;
     // Colored tick tying the label to its segment (inline-start so it mirrors).
     padding-inline-start: var(--ni-6);
@@ -161,5 +225,64 @@
 
   .viz-caption {
     @include visually-hidden;
+  }
+
+  // Legend is the mobile-only fallback for the beside-the-bar labels.
+  .segment-legend {
+    display: none;
+    flex-direction: column;
+    gap: var(--ni-6);
+    margin: 0;
+    margin-block-start: var(--ni-12);
+    padding: 0;
+    list-style: none;
+  }
+
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: var(--ni-8);
+  }
+
+  .legend-swatch {
+    flex: none;
+    width: var(--ni-12);
+    height: var(--ni-12);
+    border-radius: var(--border-radius-xs);
+    background: var(--seg-color);
+  }
+
+  .legend-name {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: var(--font-size-text);
+    color: var(--color-text-primary);
+  }
+
+  .legend-sub {
+    flex: none;
+    color: var(--color-text-secondary);
+  }
+
+  .legend-percent {
+    flex: none;
+    color: var(--color-text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @include for-mobile {
+    // Beside-the-bar labels need horizontal room there isn't; drop them and
+    // reclaim the vertical padding they reserved, then surface the legend.
+    .trakt-segmented-bar {
+      padding-block: 0;
+    }
+
+    .segment-label {
+      display: none;
+    }
+
+    .segment-legend {
+      display: flex;
+    }
   }
 </style>
