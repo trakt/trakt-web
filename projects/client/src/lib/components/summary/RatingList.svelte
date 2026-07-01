@@ -133,7 +133,7 @@
     }
 
     @include for-mobile() {
-      gap: var(--gap-xs);
+      gap: var(--gap-xxs);
     }
   }
 </style>

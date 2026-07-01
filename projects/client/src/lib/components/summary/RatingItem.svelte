@@ -142,10 +142,10 @@
       // tabular-nums keeps digit changes (e.g. re-rating) from micro-shifting.
       font-variant-numeric: tabular-nums;
 
-      // Small screens hide the vote-count and don't animate, so reserve the
-      // full value width up front (skeleton == loaded value) - no load jump.
-      // "100%" is the widest value; with tabular-nums each digit is 1ch.
-      min-width: 4ch;
+      // Small screens hide the vote-count and don't animate. Floor the value
+      // at 2ch so short scores ("9") aren't cramped; percentages/decimals size
+      // to their own content, sitting snug next to the icon.
+      min-width: 2ch;
 
       @include for-desktop {
         // desktop animates the grow-in instead of reserving space
@@ -181,8 +181,9 @@
     .rating-skeleton {
       display: block;
 
-      // match the reserved value box on small screens; slimmer bar on desktop
-      width: 4ch;
+      // wider than the value floor so it reads as a bar, and ~matches a loaded
+      // percentage ("86%") for a near shift-free swap; slim bar on desktop
+      width: 3ch;
       height: var(--font-size-text);
 
       @include for-desktop {
