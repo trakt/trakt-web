@@ -41,6 +41,7 @@ export const mapToSeason = (item: SeasonsResponse[0]): Season => {
     },
     poster: poster ? mapToPoster(item.images) : undefined,
     airDate: new Date(item.first_aired ?? MAX_DATE),
+    overview: item.overview ?? null,
     rating: mapToTraktRating(item.rating),
     network: item.network,
     totalRuntime: item.total_runtime ?? NaN,
