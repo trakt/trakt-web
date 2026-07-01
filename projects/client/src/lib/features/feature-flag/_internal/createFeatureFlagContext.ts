@@ -1,22 +1,25 @@
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { FeatureFlag } from '../models/FeatureFlag.ts';
-import type { FeatureFlagContext } from './FeatureFlagContext.ts';
+import type {
+  FeatureFlagContext,
+  FeatureFlagOverrides,
+} from './FeatureFlagContext.ts';
 import { FEATURE_FLAG_CONTEXT_KEY } from './FeatureFlagContextKey.ts';
 
 export const FEATURE_FLAG_LOCAL_STORAGE_KEY = 'trakt-feature-flags';
 
-function initializeFlags() {
+function initializeOverrides(): FeatureFlagOverrides {
   const storedFlags = safeLocalStorage.getItem(FEATURE_FLAG_LOCAL_STORAGE_KEY);
-  const parsedFlags = storedFlags
-    ? JSON.parse(storedFlags) as Partial<Record<FeatureFlag, boolean>>
-    : {};
-  const featureFlags = Object.values(FeatureFlag);
+  if (!storedFlags) {
+    return {};
+  }
 
-  return Object.fromEntries(
-    featureFlags.map((flag) => [flag, parsedFlags[flag] ?? false]),
-  ) as Record<FeatureFlag, boolean>;
+  try {
+    return JSON.parse(storedFlags) as FeatureFlagOverrides;
+  } catch {
+    return {};
+  }
 }
 
 export function createFeatureFlagContext() {
@@ -24,7 +27,7 @@ export function createFeatureFlagContext() {
     FEATURE_FLAG_CONTEXT_KEY,
     getContext<FeatureFlagContext>(FEATURE_FLAG_CONTEXT_KEY) ??
       {
-        flags: new BehaviorSubject(initializeFlags()),
+        overrides: new BehaviorSubject(initializeOverrides()),
       },
   );
 
