@@ -8451,6 +8451,231 @@
     "button_label_related_smart": {
       "default": "Smart related",
       "description": "Aria-label for the related media toggle button to show smart related movies or shows. This should be as short and concise as possible."
+    },
+    "link_text_apps_settings": {
+      "default": "Apps",
+      "description": "Text for the link to the apps settings page, where users manage connected apps and their API applications."
+    },
+    "heading_connected_apps": {
+      "default": "Connected Apps",
+      "description": "Heading for the section listing third-party apps the user has authorized to access their Trakt account."
+    },
+    "description_connected_apps": {
+      "default": "Third-party apps you've authorized to access your Trakt account.",
+      "description": "Description shown under the Connected Apps heading explaining what the listed apps are."
+    },
+    "text_no_connected_apps": {
+      "default": "You haven't connected any apps.",
+      "description": "Empty-state text shown when the user has not authorized any third-party apps."
+    },
+    "heading_api_applications": {
+      "default": "API Applications",
+      "description": "Heading for the section listing OAuth applications the user has created as a developer."
+    },
+    "description_api_applications": {
+      "default": "OAuth applications you've registered as a developer.",
+      "description": "Description shown under the API Applications heading explaining what the listed applications are."
+    },
+    "text_no_api_applications": {
+      "default": "You haven't created any API applications.",
+      "description": "Empty-state text shown when the user has not created any API applications."
+    },
+    "label_app_permissions": {
+      "default": "Permissions",
+      "description": "Label preceding the list of permissions an API application has been granted."
+    },
+    "label_app_permission_scrobble": {
+      "default": "Scrobble",
+      "description": "Permission label indicating an app can scrobble playback activity."
+    },
+    "label_app_permission_checkin": {
+      "default": "Check in",
+      "description": "Permission label indicating an app can post check-ins."
+    },
+    "label_app_permission_account_create": {
+      "default": "Create accounts",
+      "description": "Permission label indicating an app can create user accounts."
+    },
+    "label_app_client_id": {
+      "default": "Client ID",
+      "description": "Label preceding an API application's OAuth client identifier."
+    },
+    "label_app_client_secret": {
+      "default": "Client secret",
+      "description": "Label preceding an API application's OAuth client secret."
+    },
+    "label_app_redirect_uri": {
+      "default": "Redirect URI",
+      "description": "Label preceding an API application's OAuth redirect URI."
+    },
+    "button_label_copy": {
+      "default": "Copy",
+      "description": "Accessible label for a button that copies a value to the clipboard."
+    },
+    "button_label_copied": {
+      "default": "Copied",
+      "description": "Accessible label shown briefly after a value has been copied to the clipboard."
+    },
+    "button_label_reveal_secret": {
+      "default": "Show client secret",
+      "description": "Accessible label for a button that reveals the hidden client secret."
+    },
+    "button_label_hide_secret": {
+      "default": "Hide client secret",
+      "description": "Accessible label for a button that hides the revealed client secret."
+    },
+    "text_app_connected_on": {
+      "default": "Connected {date}",
+      "description": "Shows the date a third-party app was first connected to the account."
+    },
+    "text_app_last_used": {
+      "default": "Last used {date}",
+      "description": "Shows the date a connected app was last used."
+    },
+    "text_app_created_on": {
+      "default": "Created {date}",
+      "description": "Shows the date an API application was created."
+    },
+    "button_text_revoke_access": {
+      "default": "Revoke access",
+      "description": "Button label for revoking a connected app's access to the user's account."
+    },
+    "button_label_revoke_app": {
+      "default": "Revoke access for {name}",
+      "description": "Accessible label for the button that revokes a specific connected app's access. {name} is the app's name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "confirmation_title_revoke_app": {
+      "default": "Revoke access?",
+      "description": "Title of the confirmation dialog shown before revoking a connected app's access."
+    },
+    "confirmation_message_revoke_app": {
+      "default": "This will revoke {name}'s access to your Trakt account. You can reconnect it at any time.",
+      "description": "Body of the confirmation dialog shown before revoking a connected app. {name} is the app's name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "heading_create_api_application": {
+      "default": "Create application",
+      "description": "Heading for the form used to register a new OAuth API application."
+    },
+    "description_create_api_application": {
+      "default": "Register a new OAuth application to access the Trakt API.",
+      "description": "Description shown under the Create application heading."
+    },
+    "link_text_create_api_application": {
+      "default": "Create application",
+      "description": "Link/button text that opens the form to create a new API application."
+    },
+    "label_app_name": {
+      "default": "Name",
+      "description": "Field label for an API application's name."
+    },
+    "input_placeholder_app_name": {
+      "default": "My application",
+      "description": "Placeholder for the API application name input."
+    },
+    "label_app_description": {
+      "default": "Description",
+      "description": "Field label for an API application's description."
+    },
+    "hint_app_description": {
+      "default": "This shows up in the Connected Apps section when a user grants access to your app.",
+      "description": "Helper text explaining where an API application's description is shown."
+    },
+    "label_app_redirect_uris": {
+      "default": "Redirect URIs",
+      "description": "Field label for the list of OAuth redirect URIs of an API application."
+    },
+    "input_placeholder_app_redirect_uris": {
+      "default": "https://example.com/callback",
+      "description": "Placeholder for the redirect URIs input."
+    },
+    "hint_app_redirect_uris": {
+      "default": "One URI per line. No query strings, just the full URI path. Use urn:ietf:wg:oauth:2.0:oob for device authentication.",
+      "description": "Helper text describing the format rules for redirect URIs."
+    },
+    "label_app_origins": {
+      "default": "JavaScript (CORS) origins",
+      "description": "Field label for the list of JavaScript (CORS) origins of an API application."
+    },
+    "input_placeholder_app_origins": {
+      "default": "https://example.com",
+      "description": "Placeholder for the JavaScript (CORS) origins input."
+    },
+    "hint_app_origins": {
+      "default": "One origin per line. No wildcards or paths.",
+      "description": "Helper text describing the format rules for JavaScript (CORS) origins."
+    },
+    "button_label_create_app": {
+      "default": "Create application",
+      "description": "Accessible label for the button that submits the create API application form."
+    },
+    "validation_text_app_name": {
+      "default": "Please enter an application name.",
+      "description": "Validation message shown when the API application name is empty."
+    },
+    "validation_text_app_redirect_uris": {
+      "default": "Add at least one redirect URI.",
+      "description": "Validation message shown when no redirect URI has been provided."
+    },
+    "heading_edit_api_application": {
+      "default": "Edit application",
+      "description": "Heading for the form used to edit an existing OAuth API application."
+    },
+    "description_edit_api_application": {
+      "default": "Update your OAuth application's details, redirect URIs and permissions.",
+      "description": "Supporting text under the edit API application form heading."
+    },
+    "button_label_save_app": {
+      "default": "Save application",
+      "description": "Accessible label for the button that submits the edit API application form."
+    },
+    "button_text_edit_app": {
+      "default": "Edit",
+      "description": "Text for the button that opens the edit form for an API application."
+    },
+    "button_label_edit_app": {
+      "default": "Edit {name}",
+      "description": "Accessible label for the button that opens the edit form for an API application. {name} is the app name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_delete_api_app": {
+      "default": "Delete",
+      "description": "Text for the button that deletes an API application."
+    },
+    "button_label_delete_api_app": {
+      "default": "Delete {name}",
+      "description": "Accessible label for the button that deletes an API application. {name} is the app name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "confirmation_title_delete_api_app": {
+      "default": "Delete application?",
+      "description": "Title of the confirmation dialog shown before deleting an API application."
+    },
+    "confirmation_message_delete_api_app": {
+      "default": "This permanently deletes {name} and revokes every token issued for it. This cannot be undone.",
+      "description": "Body of the confirmation dialog shown before deleting an API application. {name} is the app name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

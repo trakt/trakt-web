@@ -5,4 +5,5 @@ export type FormProps = {
   isCancelDisabled?: boolean;
   confirmButtonText: string;
   confirmButtonLabel: string;
+  inlineActions?: boolean;
 } & ChildrenProps;

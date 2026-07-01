@@ -102,6 +102,14 @@ interface ConfirmationParamsMap {
   [ConfirmationType.DisconnectPlex]: {
     type: ConfirmationType.DisconnectPlex;
   };
+  [ConfirmationType.RevokeApp]: {
+    type: ConfirmationType.RevokeApp;
+    name: string;
+  };
+  [ConfirmationType.DeleteApiApp]: {
+    type: ConfirmationType.DeleteApiApp;
+    name: string;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

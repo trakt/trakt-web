@@ -15,6 +15,7 @@
     label,
     navigationType,
     disabled,
+    activeMatch = "exact",
     ...props
   }: ChildrenProps &
     HTMLAnchorProps &
@@ -22,10 +23,13 @@
       color?: "default" | "classic" | "inherit";
       focusable?: boolean;
       navigationType?: DpadNavigationType;
+      activeMatch?: "exact" | "nested";
     } = $props();
 
   const { guardedHref, originalHref } = $derived(useGuardedHref(props.href));
-  const { isActive } = $derived(useActiveLink($originalHref));
+  const { isActive } = $derived(
+    useActiveLink($originalHref, { nested: activeMatch === "nested" }),
+  );
 
   const href = $derived($guardedHref);
 </script>

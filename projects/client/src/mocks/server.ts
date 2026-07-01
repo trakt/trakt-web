@@ -1,4 +1,5 @@
 import { setupServer } from 'msw/node';
+import { apps } from './handlers/apps.ts';
 import { calendars } from './handlers/calendars.ts';
 import { comments } from './handlers/comments.ts';
 import { intl } from './handlers/intl.ts';
@@ -16,6 +17,7 @@ import { users } from './handlers/users.ts';
 import { watchNow } from './handlers/watchNow.ts';
 
 const handlers = [
+  ...apps,
   ...users,
   ...movies,
   ...shows,
