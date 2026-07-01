@@ -17,8 +17,12 @@
     <Link href={UrlBuilder.vip()}>
       <span class="bold">VIP</span>
     </Link>
-    <Link href={UrlBuilder.branding()}>
-      <span class="bold">{m.link_text_branding()}</span>
+    <Link
+      href={UrlBuilder.docs.api()}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class="bold">{m.link_text_api()}</span>
     </Link>
   </div>
 
@@ -56,6 +60,9 @@
     </Link>
     <Link href={UrlBuilder.privacy()}>
       <span class="bold">{m.link_text_privacy()}</span>
+    </Link>
+    <Link href={UrlBuilder.branding()}>
+      <span class="bold">{m.link_text_branding()}</span>
     </Link>
   </div>
 </div>

@@ -273,6 +273,9 @@ export const UrlBuilder = {
     android: () => 'https://trakt.tv/a/trakt-android',
     ios: () => 'https://trakt.tv/a/trakt-ios',
   },
+  docs: {
+    api: () => 'https://docs.trakt.tv',
+  },
   github: {
     web: () => 'https://github.com/trakt/trakt-web',
     reportIssue: () => 'https://github.com/trakt/trakt-web/issues/new',
