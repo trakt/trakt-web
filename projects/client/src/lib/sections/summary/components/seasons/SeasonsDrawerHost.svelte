@@ -4,9 +4,12 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import type { MediaCrew } from "$lib/requests/models/MediaCrew.ts";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
@@ -15,24 +18,49 @@
   import SeasonPopupMenu from "$lib/sections/lists/season/_internal/SeasonPopupMenu.svelte";
   import { useShowWatchedEpisodes } from "$lib/sections/lists/season/_internal/useShowWatchedEpisodes";
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
+  import InlineComments from "$lib/sections/summary/components/comments/InlineComments.svelte";
   import SeasonProgressCard from "$lib/sections/summary/components/seasons/SeasonProgressCard.svelte";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import { fade } from "svelte/transition";
+  import SeasonInfoSection from "./_internal/SeasonInfoSection.svelte";
+
+  type SeasonTab = "episodes" | "info" | "reviews";
+
+  const tabOptions: ToggleOption<SeasonTab>[] = [
+    {
+      value: "episodes",
+      text: m.tab_text_seasons_episodes,
+      label: m.tab_label_seasons_episodes,
+    },
+    {
+      value: "info",
+      text: m.tab_text_seasons_info,
+      label: m.tab_label_seasons_info,
+    },
+    {
+      value: "reviews",
+      text: m.tab_text_seasons_reviews,
+      label: m.tab_label_seasons_reviews,
+    },
+  ];
 
   const {
     onClose,
     show,
     seasons,
     currentSeason,
+    crew,
   }: {
     show: ShowEntry;
     seasons: Season[];
     currentSeason: number;
+    crew: MediaCrew;
     onClose: () => void;
   } = $props();
 
   let isOpen = $state(false);
+  let activeTab = $state<SeasonTab>("episodes");
 
   const { list: episodes, isLoading } = $derived(
     useSeasonEpisodes(show.slug, currentSeason),
@@ -121,51 +149,77 @@
         </div>
       {/if}
 
-      <RenderFor audience="authenticated">
-        {#if currentSeasonData && currentSeasonData.episodes.count > 0}
-          <SeasonProgressCard
-            seasonNumber={currentSeason}
-            watched={currentSeasonWatched}
-            total={currentSeasonData.episodes.count}
-            totalRuntime={currentSeasonData.totalRuntime}
-            loading={$isWatchedLoading}
-          />
-        {/if}
-      </RenderFor>
-
-      <div class="episodes-section">
-        {#snippet metaInfo()}
-          <p class="secondary">
-            {m.tag_text_number_of_episodes({ count: $episodes.length })}
-          </p>
-        {/snippet}
-
-        {#if $isLoading}
-          <LoadingIndicator />
-        {:else}
-          <GridList
-            id={`season-episodes-${show.slug}-${currentSeason}`}
-            title={m.list_title_episodes()}
-            items={$episodes}
-            {metaInfo}
-            --width-item="var(--width-summary-card)"
-          >
-            {#snippet item(episode)}
-              <SeasonEpisodeItem
-                {show}
-                {episode}
-                {previousSeasons}
-                {hasUnseenEpisodes}
-                currentSeasonEpisodes={$episodes}
-                watchedBySeason={$watchedBySeason}
-                isWatchedLoading={$isWatchedLoading}
-                style="minimal"
-                source="seasons-drawer"
-              />
-            {/snippet}
-          </GridList>
-        {/if}
+      <div class="season-tabs">
+        <Toggler
+          value={activeTab}
+          onChange={(value) => (activeTab = value)}
+          options={tabOptions}
+          variant="text"
+        />
       </div>
+
+      {#if activeTab === "episodes"}
+        <div class="tab-content" transition:fade={{ duration: 150 }}>
+          <RenderFor audience="authenticated">
+            {#if currentSeasonData && currentSeasonData.episodes.count > 0}
+              <SeasonProgressCard
+                seasonNumber={currentSeason}
+                watched={currentSeasonWatched}
+                total={currentSeasonData.episodes.count}
+                totalRuntime={currentSeasonData.totalRuntime}
+                loading={$isWatchedLoading}
+              />
+            {/if}
+          </RenderFor>
+
+          <div class="episodes-section">
+            {#snippet metaInfo()}
+              <p class="secondary">
+                {m.tag_text_number_of_episodes({ count: $episodes.length })}
+              </p>
+            {/snippet}
+
+            {#if $isLoading}
+              <LoadingIndicator />
+            {:else}
+              <GridList
+                id={`season-episodes-${show.slug}-${currentSeason}`}
+                title={m.list_title_episodes()}
+                items={$episodes}
+                {metaInfo}
+                --width-item="var(--width-summary-card)"
+              >
+                {#snippet item(episode)}
+                  <SeasonEpisodeItem
+                    {show}
+                    {episode}
+                    {previousSeasons}
+                    {hasUnseenEpisodes}
+                    currentSeasonEpisodes={$episodes}
+                    watchedBySeason={$watchedBySeason}
+                    isWatchedLoading={$isWatchedLoading}
+                    style="minimal"
+                    source="seasons-drawer"
+                  />
+                {/snippet}
+              </GridList>
+            {/if}
+          </div>
+        </div>
+      {:else if activeTab === "info" && currentSeasonData}
+        <div class="tab-content" transition:fade={{ duration: 150 }}>
+          <SeasonInfoSection
+            season={currentSeasonData}
+            {crew}
+            type="show"
+            showTitle={show.title}
+          />
+        </div>
+      {:else if activeTab === "reviews"}
+        <div class="tab-content" transition:fade={{ duration: 150 }}>
+          <InlineComments media={show} type="show" />
+        </div>
+      {/if}
     </div>
   {/if}
 </Drawer>
@@ -213,6 +267,37 @@
       --container-width: calc(
         100dvw - 2 * var(--drawer-padding) - var(--list-gap)
       );
+    }
+  }
+
+  .tab-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+  }
+
+  .season-tabs {
+    :global(.trakt-toggler.text-variant) {
+      width: 100%;
+    }
+
+    :global(.tracker.text-variant) {
+      opacity: 0;
+    }
+
+    :global(.trakt-toggler-toggle.text-variant) {
+      flex: 1;
+      justify-content: center;
+      transition: none;
+    }
+
+    :global(.trakt-toggler-toggle.text-variant.is-pressed) {
+      background-color: var(--toggler-tracker-color);
+    }
+
+    :global(.trakt-toggler-toggle.text-variant p) {
+      opacity: 1;
+      transition: none;
     }
   }
 
