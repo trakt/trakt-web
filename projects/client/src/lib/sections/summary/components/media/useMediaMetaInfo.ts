@@ -46,5 +46,8 @@ export function useMediaMetaInfo(props: MetaInfoProps) {
     ratings: ratings.pipe(
       map(($ratings) => $ratings.data ?? EMPTY_RATINGS),
     ),
+    isLoading: ratings.pipe(
+      map(($ratings) => $ratings.isLoading),
+    ),
   };
 }

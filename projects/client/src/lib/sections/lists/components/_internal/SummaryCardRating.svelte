@@ -25,6 +25,10 @@
     align-items: center;
     gap: var(--gap-micro);
 
+    p {
+      font-variant-numeric: tabular-nums;
+    }
+
     :global(svg) {
       width: var(--ni-16);
       height: var(--ni-16);

@@ -50,7 +50,7 @@
     episode: episode.number,
   });
 
-  const { ratings } = $derived(
+  const { ratings, isLoading } = $derived(
     useMediaMetaInfo({ type, episode, media: show }),
   );
 
@@ -84,6 +84,7 @@
       ratings={$ratings}
       entry={episode}
       drilldown={ratingsDrawerLink}
+      isLoading={$isLoading}
     />
 
     <RenderFor audience="authenticated">

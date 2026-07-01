@@ -33,6 +33,7 @@
     entry: MediaEntry | EpisodeEntry;
     drilldown?: TraktRatingDrilldown;
     variant?: "all" | "external";
+    isLoading?: boolean;
   };
 
   const {
@@ -41,6 +42,7 @@
     entry,
     drilldown,
     variant = "all",
+    isLoading = false,
   }: RatingListProps = $props();
 
   const { trakt, imdb, rotten } = $derived(
@@ -55,6 +57,7 @@
 {#snippet traktItem()}
   <RatingItem
     rating={trakt?.rating && toTraktRating(trakt.rating, getLocale())}
+    {isLoading}
   >
     <RatingIcon style={toVotesBasedRating(trakt?.votes)} />
     {#snippet superscript()}
@@ -68,7 +71,7 @@
     {@render traktItem()}
   {/if}
 
-  <RatingItem rating={imdb?.rating} url={imdb?.url}>
+  <RatingItem rating={imdb?.rating} url={imdb?.url} {isLoading}>
     <IMDBIcon style={toVotesBasedRating(imdb?.votes)} />
     {#snippet superscript()}
       {i18n.voteText(imdb?.votes ?? 0)}
@@ -76,14 +79,22 @@
   </RatingItem>
 
   {#if isMediaEntry}
-    <RatingItem rating={toRottenPercentage(rotten?.critic)} url={rotten?.url}>
+    <RatingItem
+      rating={toRottenPercentage(rotten?.critic)}
+      url={rotten?.url}
+      {isLoading}
+    >
       <RottenIcon style={toRottenCriticRating(rotten?.critic)} />
       {#snippet superscript()}
         {toRottenCriticRating(rotten?.critic ?? 0)}
       {/snippet}
     </RatingItem>
 
-    <RatingItem rating={toRottenPercentage(rotten?.audience)} url={rotten?.url}>
+    <RatingItem
+      rating={toRottenPercentage(rotten?.audience)}
+      url={rotten?.url}
+      {isLoading}
+    >
       <PopcornIcon style={toRottenAudienceRating(rotten?.audience)} />
       {#snippet superscript()}
         {toRottenAudienceRating(rotten?.audience ?? 0)}
@@ -112,7 +123,7 @@
   .trakt-summary-ratings {
     display: flex;
     align-items: center;
-    gap: var(--gap-m);
+    gap: var(--gap-s);
 
     :global(.trakt-ratings-drilldown-button) {
       :global(svg) {
@@ -122,7 +133,7 @@
     }
 
     @include for-mobile() {
-      gap: var(--gap-s);
+      gap: var(--gap-xs);
     }
   }
 </style>
