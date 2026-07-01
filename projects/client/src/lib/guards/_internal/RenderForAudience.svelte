@@ -2,8 +2,13 @@
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { IS_DEV } from "$lib/utils/env";
+  import type { Snippet } from "svelte";
 
-  const { children, audience }: ChildrenProps & AudienceProps = $props();
+  type RenderForAudienceProps = ChildrenProps & AudienceProps & {
+    fallback?: Snippet;
+  };
+
+  const { children, audience, fallback }: RenderForAudienceProps = $props();
 
   const { isAuthorized } = useAuth();
   const { user } = useUser();
@@ -22,4 +27,6 @@
 
 {#if isAvailableForAudience}
   {@render children()}
+{:else}
+  {@render fallback?.()}
 {/if}
