@@ -39,7 +39,7 @@
 
   const media = $derived(target.media);
 
-  const { ratings } = $derived(useMediaMetaInfo(target));
+  const { ratings, isLoading } = $derived(useMediaMetaInfo(target));
   const title = $derived(intl?.title ?? media?.title ?? "");
   const { watchCount } = $derived(useWatchCount(target));
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
@@ -94,6 +94,7 @@
       ratings={$ratings}
       entry={media}
       drilldown={ratingsDrawerLink}
+      isLoading={$isLoading}
     />
 
     <RenderFor audience="authenticated">

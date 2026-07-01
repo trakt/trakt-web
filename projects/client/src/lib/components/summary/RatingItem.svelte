@@ -1,15 +1,21 @@
 <script lang="ts">
   import { type Snippet } from "svelte";
-  import { fade, slide } from "svelte/transition";
   import Link from "../link/Link.svelte";
 
   type RatingItemProps = {
     rating?: string | number | Nil;
     superscript: Snippet;
     url?: string | Nil;
+    isLoading?: boolean;
   } & ChildrenProps;
 
-  const { children, rating, superscript, url }: RatingItemProps = $props();
+  const {
+    children,
+    rating,
+    superscript,
+    url,
+    isLoading = false,
+  }: RatingItemProps = $props();
 
   const hasValidRating = $derived(rating !== undefined);
   const ratingLink = $derived(hasValidRating ? url : undefined);
@@ -21,20 +27,26 @@
       {@render children()}
       <div class="rating-info">
         <div class="rating-value">
-          {#if !hasValidRating}
-            <p class="bold" out:slide={{ duration: 150, axis: "x" }}>-</p>
+          {#if isLoading}
+            <span class="rating-skeleton" aria-hidden="true"></span>
+          {:else if hasValidRating}
+            <span class="rating-grow">
+              <span class="rating-grow-clip">
+                <p class="bold">{rating}</p>
+              </span>
+            </span>
           {:else}
-            <div in:fade={{ delay: 150, duration: 150 }}>
-              <p class="bold" in:slide={{ duration: 150, axis: "x" }}>
-                {rating}
-              </p>
-            </div>
+            <p class="bold">-</p>
           {/if}
         </div>
-        {#if hasValidRating}
-          <p class="bold uppercase secondary vote-count tag">
-            {@render superscript()}
-          </p>
+        {#if !isLoading && hasValidRating}
+          <span class="rating-grow has-underline">
+            <span class="rating-grow-clip">
+              <p class="bold uppercase secondary vote-count tag">
+                {@render superscript()}
+              </p>
+            </span>
+          </span>
         {/if}
       </div>
     </div>
@@ -43,6 +55,18 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  @keyframes rating-grow-in {
+    from {
+      grid-template-columns: 0fr;
+      opacity: 0;
+    }
+
+    to {
+      grid-template-columns: 1fr;
+      opacity: 1;
+    }
+  }
 
   rating {
     :global(.trakt-link) {
@@ -110,12 +134,70 @@
     }
 
     .rating-value {
-      position: relative;
-      min-width: var(--ni-6);
+      display: flex;
+      align-items: center;
 
-      :global(p[inert]) {
-        position: absolute;
+      min-height: var(--font-size-text);
+
+      // tabular-nums keeps digit changes (e.g. re-rating) from micro-shifting.
+      font-variant-numeric: tabular-nums;
+
+      // Small screens hide the vote-count and don't animate, so reserve the
+      // full value width up front (skeleton == loaded value) - no load jump.
+      // "100%" is the widest value; with tabular-nums each digit is 1ch.
+      min-width: 4ch;
+
+      @include for-desktop {
+        // desktop animates the grow-in instead of reserving space
+        min-width: 0;
       }
+    }
+
+    // CSS-only width grow-in. The 0fr -> 1fr column animation reflows for real
+    // (siblings glide, no jump). Gated to desktop: small screens hide the
+    // vote-count, so there is little to grow and the motion reads as jitter.
+    .rating-grow {
+      display: inline-grid;
+      grid-template-columns: 1fr;
+
+      @include for-desktop {
+        animation: rating-grow-in var(--transition-increment) ease-in-out;
+      }
+    }
+
+    .rating-grow-clip {
+      min-width: 0;
+
+      // clip the horizontal collapse; margin gives glyphs vertical breathing
+      overflow: clip;
+      overflow-clip-margin: var(--ni-2);
+    }
+
+    // extra clip margin keeps the vote-count underline visible
+    .rating-grow.has-underline .rating-grow-clip {
+      overflow-clip-margin: var(--ni-6);
+    }
+
+    .rating-skeleton {
+      display: block;
+
+      // match the reserved value box on small screens; slimmer bar on desktop
+      width: 4ch;
+      height: var(--font-size-text);
+
+      @include for-desktop {
+        width: var(--ni-24);
+      }
+
+      border-radius: var(--border-radius-xs);
+      background-color: color-mix(
+        in srgb,
+        var(--color-foreground) 20%,
+        transparent
+      );
+
+      animation: pulse calc(var(--transition-increment) * 6) ease-in-out
+        infinite alternate;
     }
   }
 </style>

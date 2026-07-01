@@ -44,7 +44,7 @@
     slug: media.slug,
   });
 
-  const { ratings } = $derived(useMediaMetaInfo(target));
+  const { ratings, isLoading } = $derived(useMediaMetaInfo(target));
   const { isDropped } = $derived(useIsDropped(media));
   const { isStarted } = $derived(useIsStarted(target));
 
@@ -90,6 +90,7 @@
         ratings={$ratings}
         entry={media}
         drilldown={ratingsDrawerLink}
+        isLoading={$isLoading}
       />
 
       <RenderFor audience="authenticated">

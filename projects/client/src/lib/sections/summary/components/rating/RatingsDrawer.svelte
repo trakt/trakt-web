@@ -25,7 +25,9 @@
     props.type === "episode" ? props.episode : props.media,
   );
 
-  const { ratings: rawRatings } = $derived(useMediaMetaInfo(metaInfoTarget));
+  const { ratings: rawRatings, isLoading } = $derived(
+    useMediaMetaInfo(metaInfoTarget),
+  );
 
   const ratings = $derived(
     getDisplayableRatings({ ratings: $rawRatings, entry }),
@@ -65,7 +67,7 @@
             {m.header_ratings_official()}
           </h3>
           <div class="official-row">
-            <RatingList {ratings} {entry} variant="external" />
+            <RatingList {ratings} {entry} variant="external" isLoading={$isLoading} />
           </div>
         </section>
       {/if}
