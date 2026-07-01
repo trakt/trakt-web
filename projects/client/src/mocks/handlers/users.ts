@@ -84,6 +84,12 @@ export const users = [
   http.get('http://localhost/users/me/watchlist/shows*', () => {
     return HttpResponse.json(WatchlistShowsResponseMock);
   }),
+  http.get('http://localhost/users/me/watchlist/movie,show*', () => {
+    return HttpResponse.json([
+      ...WatchlistMoviesResponseMock,
+      ...WatchlistShowsResponseMock,
+    ]);
+  }),
   http.get('http://localhost/v3/users/me/watchlist/minimal', () => {
     return HttpResponse.json(WatchlistMinimalResponseMock);
   }),
