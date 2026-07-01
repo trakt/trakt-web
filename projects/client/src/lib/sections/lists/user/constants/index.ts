@@ -38,3 +38,12 @@ export const LIST_SORT_OPTIONS: Sorting[] = [
     label: m.button_label_sort_title,
   },
 ] as const;
+
+export const WATCHLIST_SORT_OPTIONS: Sorting[] = [
+  ...LIST_SORT_OPTIONS,
+  {
+    value: 'rank',
+    text: m.button_text_sort_rank,
+    label: m.button_label_sort_rank,
+  },
+];

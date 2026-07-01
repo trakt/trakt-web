@@ -48,4 +48,19 @@ describe('watchlistQuery', () => {
 
     expect(result).to.deep.equal(WatchlistShowsMappedMock);
   });
+
+  it('should query all watchlist items in rank order', async () => {
+    const result = await runQuery({
+      factory: () =>
+        createTestBedInfiniteQuery(
+          watchlistQuery({ limit: 10, sortBy: 'rank', sortHow: 'asc' }),
+        ),
+      mapper: mapToEntries,
+    });
+
+    expect(result).to.deep.equal([
+      ...WatchlistMoviesMappedMock,
+      ...WatchlistShowsMappedMock,
+    ]);
+  });
 });

@@ -14,7 +14,7 @@
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";
-  import ListReorderDrawer from "./_internal/ListReorderDrawer.svelte";
+  import ListReorderDrawer from "./ListReorderDrawer.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import { useDeleteList } from "./_internal/useDeleteList";
   import { useLikeList } from "./_internal/useLikeList";

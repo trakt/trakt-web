@@ -9,20 +9,21 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
   import { reorderListRequest } from "$lib/requests/queries/users/reorderListRequest.ts";
+  import { reorderWatchlistRequest } from "$lib/requests/queries/users/reorderWatchlistRequest.ts";
   import { useInvalidator } from "$lib/stores/useInvalidator.ts";
   import { assertDefined } from "$lib/utils/assert/assertDefined.ts";
   import { MEDIA_POSTER_PLACEHOLDER } from "$lib/utils/assets.ts";
   import { flip } from "svelte/animate";
   import { cubicOut } from "svelte/easing";
-  import type { ReorderListSource } from "../models/ReorderListSource.ts";
-  import type { ReorderableListItem } from "./models/ReorderableListItem.ts";
-  import { type DragGhost, reorderDrag } from "./reorderDrag.ts";
+  import type { ReorderListSource } from "./models/ReorderListSource.ts";
+  import type { ReorderableListItem } from "./_internal/models/ReorderableListItem.ts";
+  import { type DragGhost, reorderDrag } from "./_internal/reorderDrag.ts";
   import {
     itemOrderSignature,
     listItemRankIds,
     sortReorderableItems,
-  } from "./reorderListItems.ts";
-  import { useReorderList } from "./useReorderList.ts";
+  } from "./_internal/reorderListItems.ts";
+  import { useReorderList } from "./_internal/useReorderList.ts";
 
   const {
     source,
@@ -162,6 +163,12 @@
   }
 
   async function requestReorder() {
+    if (source.type === "watchlist") {
+      return reorderWatchlistRequest({
+        rank: listItemRankIds(orderedItems),
+      });
+    }
+
     return reorderListRequest({
       userId: assertDefined(
         source.list.user.slug,
@@ -173,10 +180,17 @@
   }
 
   async function refreshReorderedItems() {
-    await invalidateAll([
-      InvalidateAction.Listed("movie"),
-      InvalidateAction.Listed("show"),
-    ]);
+    const invalidations = source.type === "watchlist"
+      ? [
+        InvalidateAction.Watchlisted("movie"),
+        InvalidateAction.Watchlisted("show"),
+      ]
+      : [
+        InvalidateAction.Listed("movie"),
+        InvalidateAction.Listed("show"),
+      ];
+
+    await invalidateAll(invalidations);
   }
 
   async function handleApply() {

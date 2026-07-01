@@ -4502,6 +4502,14 @@
       "default": "Sort alphabetically",
       "description": "Aria-label for the button that allows users to sort items alphabetically by title."
     },
+    "button_text_sort_rank": {
+      "default": "Rank",
+      "description": "Text for the button that allows users to sort items by their manual rank."
+    },
+    "button_label_sort_rank": {
+      "default": "Sort by rank",
+      "description": "Aria-label for the button that allows users to sort items by their manual rank."
+    },
     "button_label_sort_list": {
       "default": "Sort list",
       "description": "Aria-label for the button that allows users to sort items in their list."

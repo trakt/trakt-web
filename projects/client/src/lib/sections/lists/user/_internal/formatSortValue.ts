@@ -93,6 +93,10 @@ function getRating(item: SortInput): number | null | undefined {
   return getListItemEntry(item).rating;
 }
 
+function getRank(item: SortInput): number | undefined {
+  return 'rank' in item ? item.rank : undefined;
+}
+
 export function formatSortValue(
   item: SortInput,
   sortBy?: SortBy,
@@ -133,6 +137,10 @@ export function formatSortValue(
         : undefined;
     case 'title':
       return getTitle(item)[0]?.toUpperCase();
+    case 'rank': {
+      const rank = getRank(item);
+      return rank == null ? undefined : `#${rank}`;
+    }
   }
 }
 
