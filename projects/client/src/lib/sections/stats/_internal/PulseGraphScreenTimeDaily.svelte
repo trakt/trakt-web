@@ -1,9 +1,15 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
   import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
   import { getLocale, languageTag } from "$lib/features/i18n/index.ts";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration.ts";
   import { ratio } from "$lib/utils/number/ratio.ts";
+  import { time } from "$lib/utils/timing/time.ts";
   import type { ScreenTimeDailyData } from "./models/ScreenTimeDailyData";
+
+  // Grace period before the label glides back to the peak, so crossing the gap
+  // between two bars with a slow mouse doesn't snap it back mid-move.
+  const RETURN_GRACE = time.seconds(0.16);
 
   const { data }: { data: ScreenTimeDailyData } = $props();
 
@@ -31,8 +37,8 @@
   const hasPeak = $derived((data.minutesPerDay[peakIndex] ?? 0) > 0);
 
   // Only one value is ever labelled at a time: the peak by default, or the day
-  // the user hovers / focuses / taps. A single slot keeps long locales (e.g.
-  // pt "8 h 28 min") from overlapping across the narrow columns.
+  // the user hovers / focuses / taps. A single label glides between columns
+  // (see `.screen-time-value`) so it never overlaps in long locales.
   let activeIndex = $state<number | null>(null);
   const shownIndex = $derived(activeIndex ?? (hasPeak ? peakIndex : null));
 
@@ -43,6 +49,9 @@
       (minutes) => toHumanDuration({ minutes }, lang) || zeroMinutes,
     ),
   );
+  const shownDuration = $derived(
+    shownIndex == null ? "" : durations[shownIndex] ?? zeroMinutes,
+  );
 
   // Sequential brand-purple intensity ramp (light -> deep = more screen time),
   // premium and on-brand rather than a traffic-light rainbow.
@@ -52,17 +61,32 @@
     return "var(--viz-3)";
   }
 
-  const reveal = (index: number) => (activeIndex = index);
-  // Guard by index so a trailing leave/blur from the previous column can't wipe
-  // the state a fresh enter/focus just set.
-  const clear = (index: number) => {
-    if (activeIndex === index) {
-      activeIndex = null;
-    }
+  let returnTimer: ReturnType<typeof setTimeout> | undefined;
+
+  const reveal = (index: number) => {
+    clearTimeout(returnTimer);
+    activeIndex = index;
   };
+  // Defer the return so a fresh enter/focus during the grace window cancels it;
+  // only a genuine exit lets the label glide back to the peak.
+  const scheduleReturn = () => {
+    clearTimeout(returnTimer);
+    returnTimer = setTimeout(() => (activeIndex = null), RETURN_GRACE);
+  };
+
+  onDestroy(() => clearTimeout(returnTimer));
 </script>
 
-<div class="trakt-pulse-graph-screen-time-daily">
+<div
+  class="trakt-pulse-graph-screen-time-daily"
+  class:has-value={shownIndex != null}
+  style="--column-count: {data.labels.length}; --active-column: {shownIndex ??
+    0};"
+>
+  <div class="value-track" aria-hidden="true">
+    <span class="screen-time-value tag bold no-wrap">{shownDuration}</span>
+  </div>
+
   {#each data.labels as label, i (i)}
     {@const pct = data.percentages[i] ?? 0}
     {@const fraction = ratio({ value: pct, total: maxPct })}
@@ -72,14 +96,11 @@
       class="screen-time-column"
       aria-label="{label}: {duration}"
       onpointerenter={(e) => e.pointerType !== "touch" && reveal(i)}
-      onpointerleave={(e) => e.pointerType !== "touch" && clear(i)}
+      onpointerleave={(e) => e.pointerType !== "touch" && scheduleReturn()}
       onclick={() => reveal(i)}
       onfocus={() => reveal(i)}
-      onblur={() => clear(i)}
+      onblur={scheduleReturn}
     >
-      <span class="screen-time-value tag bold no-wrap">
-        {#if i === shownIndex}{duration}{/if}
-      </span>
       <div class="screen-time-bar-container" aria-hidden="true">
         <DistributionBar
           orientation="vertical"
@@ -101,10 +122,47 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-pulse-graph-screen-time-daily {
-    display: flex;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--column-count), 1fr);
     gap: var(--ni-8);
 
+    // Reserve one line above the bars for the sliding value label.
+    padding-block-start: calc(1lh + var(--ni-4));
+
     flex: 1;
+  }
+
+  // Overlay spanning the bars, so the single value label can sit over any
+  // column. `pointer-events: none` keeps hovers hitting the bars underneath.
+  .value-track {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 0;
+    pointer-events: none;
+  }
+
+  // One label, parked over the active column. Sliding (rather than teleporting)
+  // between columns removes the jump when hovering across the chart on desktop.
+  // Width is one column (same formula the bar grid uses), so `translateX` of
+  // `activeColumn` column-widths-plus-gaps lands it dead-centre on that column.
+  .screen-time-value {
+    display: block;
+    width: calc(
+      (100% - (var(--column-count) - 1) * var(--ni-8)) / var(--column-count)
+    );
+    text-align: center;
+    opacity: 0;
+    transform: translateX(
+      calc(var(--rtl-sign, 1) * var(--active-column, 0) * (100% + var(--ni-8)))
+    );
+    transition:
+      transform var(--transition-duration-short) var(--viz-enter-ease, ease),
+      opacity var(--transition-duration-short) ease;
+  }
+
+  .has-value .screen-time-value {
+    opacity: 1;
   }
 
   .screen-time-column {
@@ -114,7 +172,6 @@
     justify-content: flex-end;
     gap: var(--ni-4);
 
-    flex: 1;
     min-width: 0;
 
     // Reset native button chrome; the column stays a plain interactive stack.
@@ -147,14 +204,6 @@
 
   .screen-time-label {
     width: 100%;
-    text-align: center;
-  }
-
-  // Single value slot above the bars: reserves one line so bars stay aligned
-  // whether or not a value is shown, and only one column fills it at a time.
-  .screen-time-value {
-    width: 100%;
-    min-height: 1lh;
     text-align: center;
   }
 </style>
