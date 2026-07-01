@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForAudience from "$lib/guards/_internal/RenderForAudience.svelte";
   import type { Snippet } from "svelte";
 
   const {
@@ -19,10 +19,13 @@
   const isFlagEnabled = $derived(isEnabled(flag));
 </script>
 
-<RenderFor {audience}>
-  {#if $isFlagEnabled}
+{#if $isFlagEnabled}
+  <RenderForAudience {audience}>
     {@render enabled()}
-  {:else}
-    {@render children?.()}
-  {/if}
-</RenderFor>
+    {#snippet fallback()}
+      {@render children?.()}
+    {/snippet}
+  </RenderForAudience>
+{:else}
+  {@render children?.()}
+{/if}
