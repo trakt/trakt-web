@@ -1404,6 +1404,30 @@
       "default": "There are no aired episodes to rewatch yet.",
       "description": "Empty-state text shown in the rewatching drawer when no aired episodes are available."
     },
+    "tab_text_seasons_episodes": {
+      "default": "Episodes",
+      "description": "Label for the Episodes tab in the season drawer toggle."
+    },
+    "tab_label_seasons_episodes": {
+      "default": "Episodes tab",
+      "description": "Aria-label for the Episodes tab button in the season drawer."
+    },
+    "tab_text_seasons_info": {
+      "default": "Info",
+      "description": "Label for the Info tab in the season drawer toggle."
+    },
+    "tab_label_seasons_info": {
+      "default": "Season info tab",
+      "description": "Aria-label for the Info tab button in the season drawer."
+    },
+    "tab_text_seasons_reviews": {
+      "default": "Reviews",
+      "description": "Label for the Reviews tab in the season drawer toggle."
+    },
+    "tab_label_seasons_reviews": {
+      "default": "Reviews tab",
+      "description": "Aria-label for the Reviews tab button in the season drawer."
+    },
     "list_title_seasons": {
       "default": "Seasons",
       "description": "Title for lists containing seasons of a show. This title should be as short and concise as possible."
