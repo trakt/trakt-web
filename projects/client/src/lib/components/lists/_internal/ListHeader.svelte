@@ -90,7 +90,17 @@
       align-items: center;
     }
 
-    .trakt-list-title,
+    .trakt-list-title {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xxs);
+      min-width: 0;
+
+      .trakt-list-actions {
+        margin-inline-start: calc(var(--gap-s) - var(--gap-xxs));
+      }
+    }
+
     .trakt-list-header-content {
       display: flex;
       align-items: center;

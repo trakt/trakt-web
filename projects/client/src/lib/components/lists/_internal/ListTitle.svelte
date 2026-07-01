@@ -84,7 +84,7 @@
     :global(.trakt-link) {
       display: flex;
       align-items: center;
-      gap: var(--gap-xs);
+      gap: var(--gap-xxs);
       min-width: 0;
     }
 
