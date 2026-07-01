@@ -38,7 +38,10 @@ export function getGraphItems(
       key: 'peakHours',
       kind: 'peakHours',
       data: {
-        buckets: bucketByTimeOfDay(twAll),
+        buckets: bucketByTimeOfDay({
+          movieDates: thisWeek.movieDates,
+          showDates: thisWeek.showDates,
+        }),
       },
     },
   ];

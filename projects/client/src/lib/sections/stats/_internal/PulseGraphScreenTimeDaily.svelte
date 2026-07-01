@@ -5,6 +5,7 @@
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration.ts";
   import { ratio } from "$lib/utils/number/ratio.ts";
   import { time } from "$lib/utils/timing/time.ts";
+  import { STRENGTH_RAMP_COLOR } from "./strengthRampColor.ts";
   import type { ScreenTimeDailyData } from "./models/ScreenTimeDailyData";
 
   // Grace period before the label glides back to the peak, so crossing the gap
@@ -52,13 +53,6 @@
   const shownDuration = $derived(
     shownIndex == null ? "" : durations[shownIndex] ?? zeroMinutes,
   );
-
-  // Continuous brand-purple ramp: taller day -> deeper purple. The mix is
-  // resolved in CSS from each bar's `--daily-bar-strength` (0-1), so JS only
-  // forwards the numeric fraction. `clamp` keeps the color-mix percentage valid
-  // even if a stray value lands outside [0, 1].
-  const DAILY_BAR_COLOR =
-    "color-mix(in oklab, var(--viz-3), var(--viz-5) clamp(0%, calc(var(--daily-bar-strength) * 100%), 100%))";
 
   let returnTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -108,13 +102,13 @@
         <DistributionBar
           orientation="vertical"
           {fraction}
-          color={DAILY_BAR_COLOR}
+          color={STRENGTH_RAMP_COLOR}
           index={i}
           active={i === activeIndex}
           minVisible={0.03}
           label="{label}: {duration}"
           --distribution-bar-thickness="100%"
-          --daily-bar-strength={fraction}
+          --viz-bar-strength={fraction}
         />
       </div>
       <span class="screen-time-label tag ellipsis no-wrap">{label}</span>
