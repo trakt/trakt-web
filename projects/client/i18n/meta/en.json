@@ -6516,53 +6516,75 @@
       "default": "Charged <b>{amount}</b> via <b>{method}</b> for <b>{term}</b>",
       "description": "Payment-history sentence for a charge. The <b> tags wrap the amount, payment method, and term as bold highlights - keep them when translating. amount is a formatted price (e.g. $30), method is the payment provider, term is the plan length (e.g. 1 Year).",
       "variables": {
-        "amount": { "type": "string" },
-        "method": { "type": "string" },
-        "term": { "type": "string" }
+        "amount": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "term": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_charged_short": {
       "default": "Charged <b>{amount}</b> via <b>{method}</b>",
       "description": "Payment-history sentence for a charge with no known term. The <b> tags wrap the amount and payment method as bold highlights - keep them when translating.",
       "variables": {
-        "amount": { "type": "string" },
-        "method": { "type": "string" }
+        "amount": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_created": {
       "default": "Created a new <b>{method}</b> subscription",
       "description": "Payment-history sentence for a new subscription. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
       "variables": {
-        "method": { "type": "string" }
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_cancelled": {
       "default": "Cancelled a <b>{method}</b> subscription",
       "description": "Payment-history sentence for a cancellation. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
       "variables": {
-        "method": { "type": "string" }
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_refunded": {
       "default": "Refunded <b>{amount}</b> via <b>{method}</b>",
       "description": "Payment-history sentence for a refund. The <b> tags wrap the amount and payment method as bold highlights - keep them when translating.",
       "variables": {
-        "amount": { "type": "string" },
-        "method": { "type": "string" }
+        "amount": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_disputed": {
       "default": "Disputed a <b>{method}</b> charge",
       "description": "Payment-history sentence for a disputed charge. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
       "variables": {
-        "method": { "type": "string" }
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_plan_changed": {
       "default": "Changed your <b>{method}</b> plan",
       "description": "Payment-history sentence for a plan change. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
       "variables": {
-        "method": { "type": "string" }
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_complimentary": {
@@ -8447,6 +8469,22 @@
     "button_label_related_smart": {
       "default": "Smart related",
       "description": "Aria-label for the related media toggle button to show smart related movies or shows. This should be as short and concise as possible."
+    },
+    "header_genres_loved": {
+      "default": "Genres you love",
+      "description": "Section header for genres the user loves in settings."
+    },
+    "header_genres_hated": {
+      "default": "Genres you can live without",
+      "description": "Section header for genres the user dislikes in settings."
+    },
+    "button_label_edit_loved_genres": {
+      "default": "Edit genres you love",
+      "description": "Accessible label for the button that opens the loved genres drawer."
+    },
+    "button_label_edit_hated_genres": {
+      "default": "Edit genres you can live without",
+      "description": "Accessible label for the button that opens the disliked genres drawer."
     }
   }
 }

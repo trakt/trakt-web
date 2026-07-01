@@ -121,22 +121,27 @@ export function useSettings() {
       },
     }))),
     genres: user.pipe(map(($user) => ({
-      favorites: $user.genres ?? [],
-      set: async (genres: string[]) => {
-        const payload = {
-          browsing: {
-            genres: {
-              favorites: genres,
-            },
-          },
-        };
-
-        await handleSettingsChange({
-          request: () => saveSettingsRequest({ body: payload }),
-          action: 'genres',
-        });
-      },
+      loved: $user.genres.loved,
+      hated: $user.genres.hated,
     }))),
+    setLovedGenres: async (genres: string[]) => {
+      await handleSettingsChange({
+        request: () =>
+          saveSettingsRequest({
+            body: { browsing: { genres: { favorites: genres } } },
+          }),
+        action: 'genres',
+      });
+    },
+    setHatedGenres: async (genres: string[]) => {
+      await handleSettingsChange({
+        request: () =>
+          saveSettingsRequest({
+            body: { browsing: { genres: { disliked: genres } } },
+          }),
+        action: 'genres',
+      });
+    },
     theme: { set: setTheme },
     watchAgain: user.pipe(map(($user) => ({
       hasWatchAgain: $user.preferences.hasWatchAgain,

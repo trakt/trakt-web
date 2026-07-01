@@ -62,7 +62,10 @@
     border-radius: var(--border-radius-m);
     // Theme-aware neutral surface: very light gray in light mode, a subtle
     // raised surface in dark mode - so logos read in both themes.
-    background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+    background: var(
+      --badge-background,
+      color-mix(in srgb, var(--color-foreground) 8%, transparent)
+    );
 
     overflow: hidden;
 

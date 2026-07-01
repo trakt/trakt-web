@@ -55,7 +55,10 @@ export const UserSettingsSchema = z.object({
     hasWatchAgain: z.boolean(),
     showRatingPrompt: z.boolean(),
   }),
-  genres: genreOptionSchema.array(),
+  genres: z.object({
+    loved: genreOptionSchema.array(),
+    hated: genreOptionSchema.array(),
+  }),
   services: z.object({
     country: z.string().nullish(),
     favorites: z.array(z.string()).optional(),
@@ -156,7 +159,10 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       ]
         .some((topic) => topic?.includes('hide')),
     },
-    genres: browsing?.genres.favorites ?? [],
+    genres: {
+      loved: browsing?.genres?.favorites ?? [],
+      hated: browsing?.genres?.disliked ?? [],
+    },
     services: {
       country: browsing?.watchnow.country,
       favorites: browsing?.watchnow.favorites,

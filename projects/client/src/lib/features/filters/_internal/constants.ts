@@ -25,7 +25,7 @@ const GENRE_FILTER: Filter = {
       label: m.option_text_my_favorites,
       value: 'favorites',
       mapper: (settings: UserSettings) => {
-        return settings.genres.join(',');
+        return settings.genres.loved.join(',');
       },
     },
     ...GENRES
