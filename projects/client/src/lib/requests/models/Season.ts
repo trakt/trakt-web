@@ -12,6 +12,7 @@ export const SeasonSchema = z.object({
     url: ImageUrlsSchema,
   }).optional(),
   airDate: z.date(),
+  overview: z.string().nullish(),
   rating: z.number().nullish(),
   network: z.string().nullish(),
   totalRuntime: z.number(),

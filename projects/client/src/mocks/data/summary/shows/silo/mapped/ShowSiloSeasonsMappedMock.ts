@@ -18,6 +18,8 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
       },
     },
     'airDate': new Date('2023-05-05T01:00:00.000Z'),
+    'overview':
+      'In a bleak dystopian future, humanity clings to survival deep underground within the confines of a colossal silo. Juliette, an engineer tasked with unraveling the mystery behind the death of a colleague, uncovers startling secrets that threaten the very fabric of their enclosed world.',
     'rating': 0.8054,
     'network': 'Apple TV+',
     'totalRuntime': 600,
@@ -38,6 +40,8 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
       },
     },
     'airDate': new Date('2024-11-15T02:00:00.000Z'),
+    'overview':
+      'Stranded outside her silo with a failing suit, Juliette Nichols races against time, stunned to find another silo nearby that could be her only hope for survival. Meanwhile, unrest brews inside her original silo as Bernard Holland rallies citizens to maintain order amid rising questions about their world. As Juliette faces unexpected dangers near the new silo, hidden truths about the silos’ origins and the world beyond begin to surface, deepening the mystery.',
     'rating': 0.7406,
     'network': 'Apple TV+',
     'totalRuntime': 600,
@@ -51,6 +55,7 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     },
     'poster': undefined,
     'airDate': MAX_DATE,
+    'overview': null,
     'rating': 0.5,
     'network': 'Apple TV+',
     'totalRuntime': 60,
