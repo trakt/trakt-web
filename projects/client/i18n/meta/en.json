@@ -6497,6 +6497,10 @@
       "default": "About",
       "description": "Text for the about link in the footer."
     },
+    "link_text_api": {
+      "default": "API",
+      "description": "Text for the API documentation link in the footer."
+    },
     "link_text_branding": {
       "default": "Branding",
       "description": "Text for the branding link in the footer."
