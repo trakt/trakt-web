@@ -1,6 +1,7 @@
 import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import { userListItemsQuery } from '$lib/requests/queries/users/userListItemsQuery.ts';
+import { watchlistQuery } from '$lib/requests/queries/users/watchlistQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { map } from 'rxjs';
 import type { ReorderListSource } from '../models/ReorderListSource.ts';
@@ -18,14 +19,22 @@ function uniqueByKey(entries: ListItem[]): ListItem[] {
 }
 
 export function useReorderList(source: ReorderListSource) {
-  const query = useAllPagesInfiniteQuery(userListItemsQuery({
-    userId: assertDefined(
-      source.list.user.slug,
-      'Expected user list to have a user slug',
-    ),
-    listId: source.list.slug,
-    limit: reorderPageSize,
-  }));
+  const query = useAllPagesInfiniteQuery(
+    source.type === 'watchlist'
+      ? watchlistQuery({
+        limit: reorderPageSize,
+        sortBy: 'rank',
+        sortHow: 'asc',
+      })
+      : userListItemsQuery({
+        userId: assertDefined(
+          source.list.user.slug,
+          'Expected user list to have a user slug',
+        ),
+        listId: source.list.slug,
+        limit: reorderPageSize,
+      }),
+  );
 
   const isLoading = query.pipe(
     map(($query) =>

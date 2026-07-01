@@ -137,4 +137,14 @@ describe('formatSortValue', () => {
       expect(formatSortValue(seasonItem, 'title')).toBe('T');
     });
   });
+
+  describe('sortBy: rank', () => {
+    it('should return formatted rank', () => {
+      const listItem = {
+        rank: 3,
+      } as unknown as ListItem;
+
+      expect(formatSortValue(listItem, 'rank')).toBe('#3');
+    });
+  });
 });

@@ -29,17 +29,28 @@
   const reversedDirection = $derived(
     current.sortHow === "asc" ? "desc" : "asc",
   );
+  const usesWatchlistDirectionDefaults = $derived(
+    options.some((option) => option.value === "rank"),
+  );
 
-  function sortHowFor(optionValue: T | undefined): SortDirection {
-    return optionValue === current.sorting.value
-      ? reversedDirection
-      : current.sortHow;
+  function sortHowForOption(optionValue: T | undefined): SortDirection {
+    if (optionValue === current.sorting.value) {
+      return reversedDirection;
+    }
+
+    if (!usesWatchlistDirectionDefaults) {
+      return current.sortHow;
+    }
+
+    return optionValue === "rank" || optionValue === "title"
+      ? "asc"
+      : "desc";
   }
 </script>
 
 <Drawer {onClose} size="auto" title={m.drawer_title_sort()}>
   <div class="sort-buttons">
-    {#each options as option}
+    {#each options as option (option.value ?? "default")}
       {#snippet icon()}
         {#if option.value}
           <SortIcon sortBy={option.value} />
@@ -54,7 +65,7 @@
         replacestate
         style="flat"
         color="default"
-        href={`${urlBuilder({ sortHow: sortHowFor(option.value), sortBy: option.value })}`}
+        href={`${urlBuilder({ sortHow: sortHowForOption(option.value), sortBy: option.value })}`}
         label={option.label()}
         selected={option.value === current.sorting.value}
         icon={option.value ? icon : undefined}
@@ -62,7 +73,7 @@
         onclick={() => {
           track({
             sortBy: option.value ?? "default",
-            sortHow: sortHowFor(option.value),
+            sortHow: sortHowForOption(option.value),
           });
         }}
       >
