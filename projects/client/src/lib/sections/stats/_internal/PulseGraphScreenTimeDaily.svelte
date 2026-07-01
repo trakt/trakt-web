@@ -53,13 +53,12 @@
     shownIndex == null ? "" : durations[shownIndex] ?? zeroMinutes,
   );
 
-  // Sequential brand-purple intensity ramp (light -> deep = more screen time),
-  // premium and on-brand rather than a traffic-light rainbow.
-  function barColor(pct: number): string {
-    if (pct >= 30) return "var(--viz-5)";
-    if (pct >= 15) return "var(--viz-1)";
-    return "var(--viz-3)";
-  }
+  // Continuous brand-purple ramp: taller day -> deeper purple. The mix is
+  // resolved in CSS from each bar's `--daily-bar-strength` (0-1), so JS only
+  // forwards the numeric fraction. `clamp` keeps the color-mix percentage valid
+  // even if a stray value lands outside [0, 1].
+  const DAILY_BAR_COLOR =
+    "color-mix(in oklab, var(--viz-3), var(--viz-5) clamp(0%, calc(var(--daily-bar-strength) * 100%), 100%))";
 
   let returnTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -101,16 +100,21 @@
       onfocus={() => reveal(i)}
       onblur={scheduleReturn}
     >
-      <div class="screen-time-bar-container" aria-hidden="true">
+      <div
+        class="screen-time-bar-container"
+        class:is-active={i === activeIndex}
+        aria-hidden="true"
+      >
         <DistributionBar
           orientation="vertical"
           {fraction}
-          color={barColor(pct)}
+          color={DAILY_BAR_COLOR}
           index={i}
-          active={i === shownIndex}
+          active={i === activeIndex}
           minVisible={0.03}
           label="{label}: {duration}"
-          --distribution-bar-thickness="64%"
+          --distribution-bar-thickness="100%"
+          --daily-bar-strength={fraction}
         />
       </div>
       <span class="screen-time-label tag ellipsis no-wrap">{label}</span>
@@ -119,8 +123,6 @@
 </div>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-pulse-graph-screen-time-daily {
     position: relative;
     display: grid;
@@ -186,20 +188,27 @@
     // Let vertical page scroll pass through; drop the native tap highlight.
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
-
-    &:focus-visible {
-      @include viz-focus-ring;
-    }
+    // The bar ring below is the focus indicator; suppress the native outline so
+    // it doesn't double up with a mismatched box around the whole column.
+    outline: none;
   }
 
+  // The container is the bar's footprint, so the ring hugs the bar rather than
+  // boxing the whole column. Rings on hover / tap (is-active) and keyboard focus.
   .screen-time-bar-container {
-    width: 100%;
+    width: 64%;
     height: var(--ni-80);
     box-sizing: border-box;
 
-    // Center the single vertical bar within the column slot.
-    display: flex;
-    justify-content: center;
+    border-radius: var(--viz-bar-radius);
+    outline: var(--ni-2) solid transparent;
+    outline-offset: var(--ni-2);
+    transition: outline-color var(--transition-increment) ease;
+  }
+
+  .screen-time-bar-container.is-active,
+  .screen-time-column:focus-visible .screen-time-bar-container {
+    outline-color: var(--viz-1);
   }
 
   .screen-time-label {
