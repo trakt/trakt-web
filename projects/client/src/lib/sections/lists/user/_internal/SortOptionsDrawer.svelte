@@ -41,11 +41,13 @@
   <div class="sort-buttons">
     {#each options as option}
       {#snippet icon()}
-        {#if option.value === current.sorting.value}
-          <SortDirectionIcon direction={current.sortHow} />
-        {:else if option.value}
+        {#if option.value}
           <SortIcon sortBy={option.value} />
         {/if}
+      {/snippet}
+
+      {#snippet end()}
+        <SortDirectionIcon direction={current.sortHow} />
       {/snippet}
 
       <DropdownItem
@@ -55,9 +57,8 @@
         href={`${urlBuilder({ sortHow: sortHowFor(option.value), sortBy: option.value })}`}
         label={option.label()}
         selected={option.value === current.sorting.value}
-        icon={Boolean(option.value) || option.value === current.sorting.value
-          ? icon
-          : undefined}
+        icon={option.value ? icon : undefined}
+        end={option.value === current.sorting.value ? end : undefined}
         onclick={() => {
           track({
             sortBy: option.value ?? "default",
