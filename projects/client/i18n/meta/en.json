@@ -6802,6 +6802,18 @@
       "default": "Welcome",
       "description": "Page title for the Welcome page shown to new users."
     },
+    "welcome_banner_heading": {
+      "default": "Welcome to Trakt",
+      "description": "Heading on the welcome banner shown to brand new users with no activity yet."
+    },
+    "welcome_banner_description": {
+      "default": "New to Trakt? Check out our <a>welcome page</a>. Already tracking on another service? Bring your watch history, watchlist, and ratings with you in just a couple of minutes.",
+      "description": "Description on the welcome banner. Contains an inline link (wrapped in <a> tags) to the full welcome page, followed by an invitation to import data from another service."
+    },
+    "welcome_banner_action": {
+      "default": "Import your data",
+      "description": "Call-to-action on the welcome banner that takes the user to the data import settings page."
+    },
     "welcome_greeting": {
       "default": "Welcome to Trakt, {name}",
       "description": "Main heading on the Welcome page, greeting the signed-in user by name."
