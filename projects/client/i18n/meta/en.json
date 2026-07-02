@@ -47,6 +47,10 @@
       "default": "Filter streaming services",
       "description": "Placeholder for the streaming services filter input."
     },
+    "input_placeholder_filter": {
+      "default": "Filter",
+      "description": "Placeholder for a generic filter input."
+    },
     "text_services_selected": {
       "default": "{count} / {total} selected · {country}",
       "description": "Shows how many streaming services are selected out of the total available, and the detected country."

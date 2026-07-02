@@ -1,14 +1,29 @@
 <script lang="ts">
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import { Select } from "bits-ui";
+  import type { Snippet } from "svelte";
+  import type { SelectOption } from "../models/SelectOption.ts";
 
-  const { value, label }: { value: string; label: string } = $props();
+  const {
+    option,
+    leading,
+  }: {
+    option: SelectOption;
+    leading?: Snippet<[SelectOption]>;
+  } = $props();
 </script>
 
-<Select.Item {value} {label}>
+<Select.Item value={option.value} label={option.label}>
   {#snippet child({ props, selected })}
     <div {...props} class="trakt-select-item">
-      <span class="ellipsis capitalize">{label}</span>
+      {#if leading}
+        <span class="trakt-select-item-leading" aria-hidden="true">
+          {@render leading(option)}
+        </span>
+      {/if}
+      <span class="trakt-select-item-label ellipsis capitalize">
+        {option.label}
+      </span>
       {#if selected}
         <CheckIcon />
       {/if}
@@ -55,5 +70,22 @@
     &[data-highlighted] {
       background-color: var(--color-background-item-hover);
     }
+
+    :global(svg) {
+      flex-shrink: 0;
+    }
+  }
+
+  .trakt-select-item-label {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .trakt-select-item-leading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
   }
 </style>

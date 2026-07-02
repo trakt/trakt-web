@@ -9,6 +9,8 @@
     placeholder,
     disabled = false,
     autoWidth = false,
+    optionLeading,
+    hasOptionLeading = () => true,
     onChange,
   }: SingleSelectProps = $props();
 
@@ -31,6 +33,11 @@
   onValueChange={onChange}
 >
   {#each options as option (option.value)}
-    <SelectItem value={option.value} label={option.label} />
+    <SelectItem
+      {option}
+      leading={optionLeading && hasOptionLeading(option)
+        ? optionLeading
+        : undefined}
+    />
   {/each}
 </SelectBase>
