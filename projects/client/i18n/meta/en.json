@@ -4807,6 +4807,18 @@
         }
       }
     },
+    "import_status_matching": {
+      "default": "Matching movies {processed} / {total}…",
+      "description": "Status text shown while id-less movies are being resolved through the match endpoint, before syncing starts.",
+      "variables": {
+        "processed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
     "import_status_parsing": {
       "default": "Parsing your data…",
       "description": "Status text shown while the import file is being parsed."

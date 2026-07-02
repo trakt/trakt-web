@@ -184,6 +184,37 @@ describe('engine: resolveMovieIds', () => {
     expect(items[2]?.ids.trakt).toBe(1968);
   });
 
+  it('should report progress per batch resolved', async () => {
+    const match = vi.fn().mockResolvedValue([
+      matched(0, {
+        title: 'Split',
+        year: 2016,
+        score: 2582,
+        ids: { trakt: 247643, imdb: 'tt3315656', tmdb: 358364 },
+      }),
+    ]);
+    const onProgress = vi.fn();
+
+    await resolveMovieIds({ items: [movie()], match, onProgress });
+
+    expect(onProgress).toHaveBeenNthCalledWith(1, 0, 1);
+    expect(onProgress).toHaveBeenNthCalledWith(2, 1, 1);
+  });
+
+  it('should report a total of 0 when nothing needs resolution', async () => {
+    const match = vi.fn().mockResolvedValue([]);
+    const onProgress = vi.fn();
+
+    await resolveMovieIds({
+      items: [movie({ ids: { imdb: 'tt4972582' } })],
+      match,
+      onProgress,
+    });
+
+    expect(onProgress).toHaveBeenCalledWith(0, 0);
+    expect(onProgress).toHaveBeenCalledTimes(1);
+  });
+
   it('should not call match when the signal is already aborted', async () => {
     const match = vi.fn();
     const controller = new AbortController();

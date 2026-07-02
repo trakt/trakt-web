@@ -52,6 +52,8 @@
     unresolved: ReadonlyArray<UniversalImportItem>;
     ambiguous: ReadonlyArray<AmbiguousImportItem>;
     parseError: string | null;
+    matchProcessedCount: number;
+    matchTotalCount: number;
   };
 
   const state = $state<ImportUIState>({
@@ -64,6 +66,8 @@
     ambiguous: [],
     parseError: null,
     totalCount: 0,
+    matchProcessedCount: 0,
+    matchTotalCount: 0,
   });
 
   const counts = $derived<ImportCounts>({
@@ -121,6 +125,8 @@
     const startTime = Date.now();
     state.processedCount = 0;
     state.errorCount = 0;
+    state.matchProcessedCount = 0;
+    state.matchTotalCount = 0;
     state.status = "syncing";
 
     try {
@@ -128,7 +134,13 @@
         state.parsedItems,
         {
           signal: abortController.signal,
+          onMatchProgress: (processed, total) => {
+            state.matchProcessedCount = processed;
+            state.matchTotalCount = total;
+            state.status = total > 0 ? "matching" : "syncing";
+          },
           onProgress: (count) => {
+            state.status = "syncing";
             state.processedCount = count;
           },
           onError: (message) => {
@@ -211,6 +223,8 @@
     state.unresolved = [];
     state.ambiguous = [];
     state.parseError = null;
+    state.matchProcessedCount = 0;
+    state.matchTotalCount = 0;
   }
 
   $effect(() => {
@@ -243,7 +257,7 @@
 
 {#snippet importRow()}
   <NavigationGuard
-    isActive={state.status === "syncing"}
+    isActive={state.status === "matching" || state.status === "syncing"}
     confirmationParams={{ type: ConfirmationType.CancelImport }}
     onreset={reset}
   >
@@ -268,6 +282,15 @@
             source={state.selectedSource}
             onstart={startImport}
             onreset={reset}
+          />
+        {:else if state.status === "matching"}
+          <SyncProgress
+            processedCount={state.matchProcessedCount}
+            totalCount={state.matchTotalCount}
+            label={m.import_status_matching({
+              processed: state.matchProcessedCount,
+              total: state.matchTotalCount,
+            })}
           />
         {:else if state.status === "syncing"}
           <SyncProgress
