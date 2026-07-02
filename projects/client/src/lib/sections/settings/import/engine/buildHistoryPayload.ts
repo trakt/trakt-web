@@ -6,12 +6,14 @@ type HistoryMovie = NonNullable<HistoryAddRequest['movies']>[number];
 type HistoryShow = NonNullable<HistoryAddRequest['shows']>[number];
 type HistoryEpisode = NonNullable<HistoryAddRequest['episodes']>[number];
 
+// Movies never fall back to {title, year}: server-side text matching
+// is too fuzzy and mismatches pollute history. Unresolved movies are
+// dropped instead (resolveMovieIds runs before this).
 function toHistoryMovie(
-  { ids, title, year, watched_at }: UniversalImportItem,
+  { ids, watched_at }: UniversalImportItem,
 ): HistoryMovie | null {
   const resolvedIds = pickIds(ids, MOVIE_IDS);
   if (resolvedIds) return { ids: resolvedIds as never, watched_at };
-  if (title && year) return { title, year, watched_at };
   return null;
 }
 

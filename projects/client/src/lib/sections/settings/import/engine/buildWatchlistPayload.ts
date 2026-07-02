@@ -5,12 +5,14 @@ import { MOVIE_IDS, pickIds, SHOW_IDS } from './pickIds.ts';
 type WatchlistMovie = NonNullable<WatchlistRequest['movies']>[number];
 type WatchlistShow = NonNullable<WatchlistRequest['shows']>[number];
 
+// Movies never fall back to {title, year}: server-side text matching
+// is too fuzzy and mismatches pollute the watchlist. Unresolved movies
+// are dropped instead (resolveMovieIds runs before this).
 function toWatchlistMovie(
-  { ids, title, year }: UniversalImportItem,
+  { ids }: UniversalImportItem,
 ): WatchlistMovie | null {
   const resolvedIds = pickIds(ids, MOVIE_IDS);
   if (resolvedIds) return { ids: resolvedIds as never };
-  if (title && year) return { title, year };
   return null;
 }
 

@@ -24,7 +24,7 @@ describe('buildHistoryPayload', () => {
       expect(result.episodes).toHaveLength(0);
     });
 
-    it('should fall back to title+year when no ids resolve', () => {
+    it('should skip an unresolved movie instead of sending title+year', () => {
       const item: UniversalImportItem = {
         action: 'history',
         type: 'movie',
@@ -34,13 +34,7 @@ describe('buildHistoryPayload', () => {
         watched_at,
       };
 
-      const result = buildHistoryPayload([item]);
-
-      expect(result.movies).toEqual([{
-        title: 'Inception',
-        year: 2010,
-        watched_at,
-      }]);
+      expect(buildHistoryPayload([item]).movies).toHaveLength(0);
     });
 
     it('should skip a movie with no ids and no title/year', () => {

@@ -17,7 +17,7 @@ describe('buildWatchlistPayload', () => {
       expect(result.shows).toHaveLength(0);
     });
 
-    it('should fall back to title+year when no ids resolve', () => {
+    it('should skip an unresolved movie instead of sending title+year', () => {
       const item: UniversalImportItem = {
         action: 'watchlist',
         type: 'movie',
@@ -26,9 +26,7 @@ describe('buildWatchlistPayload', () => {
         year: 2021,
       };
 
-      expect(buildWatchlistPayload([item]).movies).toEqual([
-        { title: 'Dune', year: 2021 },
-      ]);
+      expect(buildWatchlistPayload([item]).movies).toHaveLength(0);
     });
 
     it('should skip a movie with no ids and no title/year', () => {

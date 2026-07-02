@@ -6,6 +6,8 @@ import type { SyncEngineCallbacks } from '../sync/models/SyncEngineCallbacks.ts'
 import { buildHistoryPayload } from './engine/buildHistoryPayload.ts';
 import { buildRatingsPayload } from './engine/buildRatingsPayload.ts';
 import { buildWatchlistPayload } from './engine/buildWatchlistPayload.ts';
+import { resolveMovieIds } from './engine/resolveMovieIds.ts';
+import { searchMovieCandidates } from './engine/searchMovieCandidates.ts';
 import type { UniversalImportItem } from './ImportTypes.ts';
 
 export async function syncToTrakt(
@@ -15,9 +17,17 @@ export async function syncToTrakt(
   onStart?.();
 
   try {
-    const historyItems = items.filter((i) => i.action === 'history');
-    const watchlistItems = items.filter((i) => i.action === 'watchlist');
-    const ratingItems = items.filter((i) => i.action === 'ratings');
+    const resolvedItems = await resolveMovieIds({
+      items,
+      search: searchMovieCandidates,
+      signal,
+    });
+
+    const historyItems = resolvedItems.filter((i) => i.action === 'history');
+    const watchlistItems = resolvedItems.filter((i) =>
+      i.action === 'watchlist'
+    );
+    const ratingItems = resolvedItems.filter((i) => i.action === 'ratings');
 
     const client = api();
     const { run, getErrorCount } = createSyncRunner({
