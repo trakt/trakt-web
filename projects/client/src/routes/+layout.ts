@@ -5,7 +5,13 @@ import { retryDelay } from '$lib/utils/retry/retryDelay.ts';
 import type { LayoutLoad } from '$types/$types.d.ts';
 import { QueryClient } from '@tanstack/query-core';
 
-const persister = browser ? createIdbPersister() : undefined;
+// IDB and structuredClone are missing on some restricted engines (PS4,
+// in-app WebViews); guard before touching idb-keyval so query init doesn't
+// crash. The query client falls back to an in-memory cache when unset.
+const canPersist = browser &&
+  typeof indexedDB !== 'undefined' &&
+  typeof structuredClone !== 'undefined';
+const persister = canPersist ? createIdbPersister() : undefined;
 
 export const load: LayoutLoad = ({ data }) => {
   const queryClient = new QueryClient({
