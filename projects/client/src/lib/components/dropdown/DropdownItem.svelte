@@ -8,6 +8,7 @@
     color?: "red" | "purple" | "blue" | "orange" | "default";
     tabindex?: number;
     icon?: Snippet;
+    end?: Snippet;
     style?: "ghost" | "flat";
     variant?: "primary" | "secondary";
     selected?: boolean;
@@ -23,6 +24,7 @@
     selected = false,
     children,
     icon,
+    end,
     ...props
   }: DropdownItemProps | DropdownItemAnchorProps = $props();
 
@@ -65,6 +67,11 @@
         </div>
       {/if}
       {@render text()}
+      {#if end}
+        <div class="item-end">
+          {@render end()}
+        </div>
+      {/if}
     </Link>
   {:else}
     {#if icon}
@@ -73,6 +80,11 @@
       </div>
     {/if}
     {@render text()}
+    {#if end}
+      <div class="item-end">
+        {@render end()}
+      </div>
+    {/if}
   {/if}
 </li>
 
@@ -107,6 +119,16 @@
 
     .item-icon {
       display: flex;
+
+      :global(svg) {
+        width: var(--ni-20);
+        height: var(--ni-20);
+      }
+    }
+
+    .item-end {
+      display: flex;
+      margin-inline-start: auto;
 
       :global(svg) {
         width: var(--ni-20);
