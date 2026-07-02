@@ -96,11 +96,24 @@
     padding: var(--landing-padding);
     padding-bottom: var(--popcorn-safe-area);
 
-    background: radial-gradient(
-      1000px 1000px at 50% 100%,
-      color-mix(in srgb, var(--purple-500) 30%, transparent) 0%,
-      transparent 100%
-    );
+    background-color: #14111b;
+    background-image:
+      radial-gradient(
+        72% 78% at 50% 110%,
+        rgba(159, 66, 198, 0.42),
+        transparent 70%
+      ),
+      radial-gradient(
+        110% 90% at 50% 42%,
+        rgba(20, 17, 27, 0.25),
+        rgba(20, 17, 27, 0.8)
+      ),
+      linear-gradient(
+        180deg,
+        #221f2b 0%,
+        #2a2336 45%,
+        #3a2352 100%
+      );
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: padding;
