@@ -4915,6 +4915,14 @@
       "default": "Don't import",
       "description": "Dropdown option to exclude an ambiguous movie match from the import."
     },
+    "import_tab_ambiguous": {
+      "default": "Multiple matches",
+      "description": "Tab label for the section listing movies that matched more than one catalog title."
+    },
+    "import_tab_unresolved": {
+      "default": "Skipped",
+      "description": "Tab label for the section listing movies that could not be matched and were skipped."
+    },
     "button_label_pick_match": {
       "default": "Import {option}.",
       "description": "Aria-label for a poster button that picks one of the possible movie matches.",

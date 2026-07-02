@@ -1,5 +1,6 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import TabView from "$lib/components/tabs/TabView.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { downloadFile } from "$lib/sections/settings/export/downloadFile.ts";
   import type {
@@ -34,9 +35,14 @@
     processedCount - errorCount - unresolved.length - ambiguous.length,
   );
 
+  const hasBothSections = $derived(
+    ambiguous.length > 0 && unresolved.length > 0,
+  );
+
   const SKIP = -1;
   const picks = $state<Record<number, number>>({});
   let isImporting = $state(false);
+  let activeTab = $state<"matches" | "skipped">("matches");
 
   function pickedCandidate(index: number) {
     const pick = picks[index] ?? 0;
@@ -76,6 +82,97 @@
   }
 </script>
 
+{#snippet ambiguousSection()}
+  <div class="import-complete-section">
+    <p class="secondary">
+      {m.import_complete_ambiguous({ count: ambiguous.length })}
+    </p>
+    <ul class="import-complete-ambiguous">
+      {#each ambiguous as entry, index (entry)}
+        <li>
+          <div class="ambiguous-title">
+            <span class="ellipsis item-title">{entry.item.title}</span>
+            {#if entry.item.year != null}
+              <span class="tag secondary">{entry.item.year}</span>
+            {/if}
+          </div>
+          <div class="ambiguous-candidates">
+            {#each entry.candidates as candidate, candidateIndex (candidate)}
+              <button
+                class="ambiguous-candidate"
+                class:is-selected={(picks[index] ?? 0) === candidateIndex}
+                aria-label={m.button_label_pick_match({
+                  option: toCandidateLabel(candidate),
+                })}
+                title={toCandidateLabel(candidate)}
+                onclick={() => (picks[index] = candidateIndex)}
+              >
+                <span class="candidate-poster">
+                  {#if candidate.poster}
+                    <img src={candidate.poster} alt="" loading="lazy" />
+                  {/if}
+                  <span class="tag candidate-year">{candidate.year ?? "?"}</span>
+                </span>
+                <span class="ellipsis candidate-title">{candidate.title}</span>
+              </button>
+            {/each}
+            <button
+              class="ambiguous-candidate is-skip"
+              class:is-selected={picks[index] === SKIP}
+              aria-label={m.import_ambiguous_skip()}
+              onclick={() => (picks[index] = SKIP)}
+            >
+              <span class="candidate-poster">
+                <span class="tag">{m.import_ambiguous_skip()}</span>
+              </span>
+            </button>
+          </div>
+        </li>
+      {/each}
+    </ul>
+    <div class="import-complete-actions">
+      <Button
+        label={m.button_label_import_selected()}
+        onclick={importPicked}
+        disabled={isImporting}
+        color="purple"
+        size="small"
+      >
+        {m.button_text_import_selected()}
+      </Button>
+    </div>
+  </div>
+{/snippet}
+
+{#snippet unresolvedSection()}
+  <div class="import-complete-section">
+    <p class="secondary">
+      {m.import_complete_unresolved({ count: unresolved.length })}
+    </p>
+    <ul class="import-complete-unresolved">
+      {#each unresolved as item (item)}
+        <li>
+          <span class="ellipsis item-title">{item.title}</span>
+          {#if item.year != null}
+            <span class="tag secondary">{item.year}</span>
+          {/if}
+        </li>
+      {/each}
+    </ul>
+    <div class="import-complete-actions">
+      <Button
+        label={m.button_label_download_unresolved()}
+        onclick={downloadUnresolved}
+        color="default"
+        variant="secondary"
+        size="small"
+      >
+        {m.button_text_download_unresolved()}
+      </Button>
+    </div>
+  </div>
+{/snippet}
+
 <div class="trakt-import-complete" transition:slide={{ duration: 150, axis: "y" }}>
   <div class="import-complete-summary">
     <p class="secondary">
@@ -86,81 +183,34 @@
         {m.import_complete_errors({ count: errorCount })}
       </p>
     {/if}
-    {#if ambiguous.length > 0}
-      <p class="secondary">
-        {m.import_complete_ambiguous({ count: ambiguous.length })}
-      </p>
-      <ul class="import-complete-ambiguous">
-        {#each ambiguous as entry, index (entry)}
-          <li>
-            <div class="ambiguous-title">
-              <span class="ellipsis">{entry.item.title}</span>
-              {#if entry.item.year != null}
-                <span class="tag secondary">{entry.item.year}</span>
-              {/if}
-            </div>
-            <div class="ambiguous-candidates">
-              {#each entry.candidates as candidate, candidateIndex (candidate)}
-                <button
-                  class="ambiguous-candidate"
-                  class:is-selected={(picks[index] ?? 0) === candidateIndex}
-                  aria-label={m.button_label_pick_match({
-                    option: toCandidateLabel(candidate),
-                  })}
-                  title={toCandidateLabel(candidate)}
-                  onclick={() => (picks[index] = candidateIndex)}
-                >
-                  {#if candidate.poster}
-                    <img
-                      class="candidate-poster"
-                      src={candidate.poster}
-                      alt=""
-                      loading="lazy"
-                    />
-                  {/if}
-                  <span class="tag">{candidate.year ?? "?"}</span>
-                </button>
-              {/each}
-              <button
-                class="ambiguous-candidate"
-                class:is-selected={picks[index] === SKIP}
-                onclick={() => (picks[index] = SKIP)}
-              >
-                <span class="tag">{m.import_ambiguous_skip()}</span>
-              </button>
-            </div>
-          </li>
-        {/each}
-      </ul>
-    {/if}
-    {#if unresolved.length > 0}
-      <p class="secondary">
-        {m.import_complete_unresolved({ count: unresolved.length })}
-      </p>
-      <ul class="import-complete-unresolved">
-        {#each unresolved as item (item)}
-          <li>
-            <span class="ellipsis">{item.title}</span>
-            {#if item.year != null}
-              <span class="tag secondary">{item.year}</span>
-            {/if}
-          </li>
-        {/each}
-      </ul>
-    {/if}
   </div>
+
+  {#if hasBothSections}
+    <TabView
+      value={activeTab}
+      onChange={(value) => {
+        if (value === "matches" || value === "skipped") activeTab = value;
+      }}
+      tabs={[
+        {
+          value: "matches",
+          label: m.import_tab_ambiguous(),
+          content: ambiguousSection,
+        },
+        {
+          value: "skipped",
+          label: m.import_tab_unresolved(),
+          content: unresolvedSection,
+        },
+      ]}
+    />
+  {:else if ambiguous.length > 0}
+    {@render ambiguousSection()}
+  {:else if unresolved.length > 0}
+    {@render unresolvedSection()}
+  {/if}
+
   <div class="import-complete-actions">
-    {#if ambiguous.length > 0}
-      <Button
-        label={m.button_label_import_selected()}
-        onclick={importPicked}
-        disabled={isImporting}
-        color="purple"
-        size="small"
-      >
-        {m.button_text_import_selected()}
-      </Button>
-    {/if}
     <Button
       label={m.button_label_import_more()}
       onclick={onreset}
@@ -169,17 +219,6 @@
     >
       {m.button_text_import_more()}
     </Button>
-    {#if unresolved.length > 0}
-      <Button
-        label={m.button_label_download_unresolved()}
-        onclick={downloadUnresolved}
-        color="default"
-        variant="secondary"
-        size="small"
-      >
-        {m.button_text_download_unresolved()}
-      </Button>
-    {/if}
   </div>
 </div>
 
@@ -194,6 +233,12 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
+  }
+
+  .import-complete-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
   }
 
   .import-complete-unresolved,
@@ -220,6 +265,7 @@
     max-height: var(--ni-480);
     list-style: none;
     padding-inline-start: 0;
+    gap: var(--gap-m);
   }
 
   .import-complete-ambiguous li {
@@ -234,38 +280,76 @@
     gap: var(--gap-xs);
   }
 
+  /* Parsed titles are de-slugged lowercase; capitalize for display only. */
+  .item-title {
+    text-transform: capitalize;
+  }
+
   .ambiguous-candidates {
     display: flex;
     flex-wrap: wrap;
-    align-items: stretch;
+    align-items: flex-start;
     gap: var(--gap-s);
   }
 
   .ambiguous-candidate {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
+    align-items: stretch;
     gap: var(--gap-xs);
 
-    padding: var(--gap-xs);
+    width: var(--ni-80);
+    padding: 0;
 
     background: none;
-    border: var(--border-thickness-xs) solid transparent;
-    border-radius: var(--border-radius-m);
+    border: none;
     cursor: pointer;
-  }
 
-  .ambiguous-candidate.is-selected {
-    border-color: var(--purple-500);
-    background: color-mix(in srgb, var(--purple-500) 12%, transparent);
+    color: var(--color-foreground);
+    font-family: inherit;
+    text-align: start;
   }
 
   .candidate-poster {
-    width: var(--ni-64);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
     aspect-ratio: 2 / 3;
+    overflow: hidden;
+
+    background: var(--color-tablist-background);
+    border: var(--border-thickness-m) solid transparent;
+    border-radius: var(--border-radius-m);
+
+    transition: border-color var(--transition-increment) ease-in-out;
+  }
+
+  .ambiguous-candidate.is-selected .candidate-poster {
+    border-color: var(--purple-500);
+  }
+
+  .candidate-poster img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: var(--border-radius-s);
+  }
+
+  .candidate-year {
+    position: relative;
+    margin-block-end: var(--gap-xxs);
+  }
+
+  .candidate-title {
+    text-transform: capitalize;
+    text-align: center;
+  }
+
+  .ambiguous-candidate.is-skip .candidate-poster {
+    align-items: center;
   }
 
   .import-complete-actions {
