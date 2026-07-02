@@ -32,7 +32,9 @@ import { UserFollowingResponseMock } from '../data/users/response/UserFollowingR
 import { UserMonthInReviewResponseMock } from '../data/users/response/UserMonthInReviewResponseMock.ts';
 import { UserPendingFollowsResponseMock } from '../data/users/response/UserPendingFollowsResponseMock.ts';
 import { UserWatchingResponseMock } from '../data/users/response/UserWatchingResponseMock.ts';
+import { WatchedMoviePlaysResponseMock } from '../data/users/response/WatchedMoviePlaysResponseMock.ts';
 import { WatchedMoviesResponseMock } from '../data/users/response/WatchedMoviesResponseMock.ts';
+import { WatchedShowPlaysResponseMock } from '../data/users/response/WatchedShowPlaysResponseMock.ts';
 import { WatchedShowsMinimalResponseMock } from '../data/users/response/WatchedShowsMinimalResponseMock.ts';
 import { WatchedShowsResponseMock } from '../data/users/response/WatchedShowsResponseMock.ts';
 import { WatchlistMinimalResponseMock } from '../data/users/response/WatchlistMinimalResponseMock.ts';
@@ -56,6 +58,12 @@ export const users = [
   }),
   http.get('http://localhost/users/hidden/progress_watched*', () => {
     return HttpResponse.json(HiddenShowProgressResponseMock);
+  }),
+  http.get('http://localhost/v3/users/me/watched/shows/plays', () => {
+    return HttpResponse.json(WatchedShowPlaysResponseMock);
+  }),
+  http.get('http://localhost/v3/users/me/watched/movies/plays', () => {
+    return HttpResponse.json(WatchedMoviePlaysResponseMock);
   }),
   http.get('http://localhost/users/me/watched/shows*', (response) => {
     const { searchParams } = new URL(response.request.url);

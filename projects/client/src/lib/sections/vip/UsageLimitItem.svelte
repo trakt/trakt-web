@@ -1,9 +1,9 @@
 <script lang="ts">
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { languageTag } from "$lib/features/i18n";
-  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-  import UsageBar from "./UsageBar.svelte";
-  import type { UsageCategoryItem } from "./utils/mapToUsageCategories";
+  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
+  import UsageBar from "./_internal/UsageBar.svelte";
+  import type { UsageCategoryItem } from "./_internal/utils/mapToUsageCategories.ts";
 
   const {
     item,
