@@ -4,10 +4,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
-  import {
-    summaryDrawerNavigation,
-    SummaryDrawers,
-  } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";

@@ -12,7 +12,7 @@
   import { useShowWatchedEpisodes } from "$lib/sections/lists/season/_internal/useShowWatchedEpisodes";
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
   import SeasonProgressCard from "$lib/sections/summary/components/seasons/SeasonProgressCard.svelte";
-  import { summaryDrawerNavigation } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import DrawerTabTitle from "$lib/sections/summary/components/_internal/DrawerTabTitle.svelte";
 

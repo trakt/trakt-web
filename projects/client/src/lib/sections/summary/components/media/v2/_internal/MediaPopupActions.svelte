@@ -16,10 +16,8 @@
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import RewatchingAction from "$lib/sections/media-actions/rewatching/RewatchingAction.svelte";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import HistoryButton from "$lib/sections/summary/components/history/HistoryButton.svelte";
   import SideActions from "./SideActions.svelte";
 

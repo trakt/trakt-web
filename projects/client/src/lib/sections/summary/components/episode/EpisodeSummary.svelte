@@ -5,10 +5,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import type { Snippet } from "svelte";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "../../_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import EpisodeTitle from "../_internal/EpisodeTitle.svelte";
   import SocialActivitiesButton from "../_internal/SocialActivitiesButton.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";

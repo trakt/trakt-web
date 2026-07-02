@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import { onMount } from "svelte";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
@@ -10,10 +11,8 @@
   import RewatchingDrawerHost from "$lib/sections/media-actions/rewatching/RewatchingDrawerHost.svelte";
   import WhereToWatchDrawerHost from "$lib/sections/lists/where-to-watch/_internal/WhereToWatchDrawerHost.svelte";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle.ts";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "./_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import CastDrawerHost from "./components/cast/CastDrawerHost.svelte";
   import type { CommentsProps } from "./components/comments/CommentsProps";
   import CommentsDrawerHost from "./components/comments/drawers/CommentsDrawerHost.svelte";
@@ -44,8 +43,36 @@
     currentSeason?: number;
   } & MediaDetailsProps = $props();
 
-  const { drawer, close, sourceCommentId, sourceEpisode } = $derived(
-    summaryDrawerNavigation(page.url.searchParams),
+  const {
+    drawer,
+    close,
+    closeCommentDrawer,
+    sourceCommentId,
+    sourceEpisode,
+  } = $derived(summaryDrawerNavigation(page.url.searchParams));
+
+  const navigationOnEntry = summaryDrawerNavigation(
+    new URLSearchParams(page.url.search),
+  );
+  const commentIdOnEntry = navigationOnEntry.drawer === SummaryDrawers.Comments
+    ? navigationOnEntry.sourceCommentId
+    : undefined;
+
+  let isResolvingEntryComment = $state(commentIdOnEntry != null);
+
+  onMount(async () => {
+    if (commentIdOnEntry == null) {
+      return;
+    }
+
+    await navigationOnEntry.openReviewDrawer(commentIdOnEntry);
+    isResolvingEntryComment = false;
+  });
+
+  const isSingleCommentOpen = $derived(
+    sourceCommentId != null &&
+      (drawer === SummaryDrawers.Review ||
+        drawer === SummaryDrawers.Episode),
   );
 
   const commentsProps = $derived.by((): CommentsProps => {
@@ -165,7 +192,7 @@
   />
 {/if}
 
-{#if drawer === SummaryDrawers.Comments}
+{#if drawer === SummaryDrawers.Comments && !isResolvingEntryComment}
   <CommentsDrawerHost
     {...commentsProps}
     source={sourceCommentId != null
@@ -175,11 +202,12 @@
   />
 {/if}
 
-{#if drawer === SummaryDrawers.Review && sourceCommentId != null}
+{#if isSingleCommentOpen && sourceCommentId != null}
   <ReviewDrawerHost
     {...commentsProps}
     commentId={sourceCommentId}
-    onClose={close}
+    elevated={drawer === SummaryDrawers.Episode}
+    onClose={closeCommentDrawer}
   />
 {/if}
 

@@ -4,10 +4,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "../../../_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import EpisodeTitle from "../../_internal/EpisodeTitle.svelte";
   import SocialActivitiesButton from "../../_internal/SocialActivitiesButton.svelte";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";

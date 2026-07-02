@@ -1,33 +1,16 @@
 import { DRAWER_VIEW_PARAM } from '$lib/components/drawer/constants/index.ts';
 import { drawerNavigation } from '$lib/components/drawer/drawerNavigation.ts';
-
-export enum SummaryDrawers {
-  Sentiment = 'sentiment',
-  Details = 'details',
-  Cast = 'cast',
-  Videos = 'videos',
-  Trivia = 'trivia',
-  Soundtrack = 'soundtrack',
-  History = 'history',
-  Social = 'social',
-  WhereToWatch = 'where-to-watch',
-  Seasons = 'seasons',
-  Episode = 'episode',
-  Notes = 'notes',
-  Comments = 'comments',
-  Review = 'review',
-  Ratings = 'ratings',
-  Rewatching = 'rewatching',
-}
-
-const commentIdParam = 'comment_id';
-const episodeParam = 'episode';
-const seasonParam = 'season';
+import { SummaryDrawers } from '$lib/sections/summary/SummaryDrawers.ts';
+import {
+  COMMENT_ID_PARAM,
+  EPISODE_PARAM,
+  SEASON_PARAM,
+} from '$lib/sections/summary/constants.ts';
 
 const summaryDrawerParams = {
-  [SummaryDrawers.Comments]: { [commentIdParam]: '' },
-  [SummaryDrawers.Review]: { [commentIdParam]: '' },
-  [SummaryDrawers.Episode]: { [episodeParam]: '', [seasonParam]: '' },
+  [SummaryDrawers.Comments]: { [COMMENT_ID_PARAM]: '' },
+  [SummaryDrawers.Review]: { [COMMENT_ID_PARAM]: '' },
+  [SummaryDrawers.Episode]: { [EPISODE_PARAM]: '', [SEASON_PARAM]: '' },
 } satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
 
 function mapToDrawer(value: string | Nil) {
@@ -73,13 +56,20 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
   // `season` is the show page's active-season tab state. The episode drawer
   // sets it on open, but closing must keep it: stripping it flips the page's
   // `currentSeason` to NaN, tearing down and remounting the whole page.
-  const { buildDrawerLink, close } = drawerNavigation(summaryDrawerParams, {
-    persistentKeys: [seasonParam],
-  });
+  const { buildDrawerLink, openDrawer, close, closeParams } = drawerNavigation(
+    summaryDrawerParams,
+    {
+      persistentKeys: [SEASON_PARAM],
+    },
+  );
   const drawer = mapToDrawer(searchParams?.get(DRAWER_VIEW_PARAM));
-  const commentId = searchParams?.get(commentIdParam);
-  const sourceCommentId = commentId != null ? Number(commentId) : undefined;
-  const episodeNumber = searchParams?.get(episodeParam);
+  const commentId = searchParams?.get(COMMENT_ID_PARAM);
+  const parsedCommentId = commentId != null ? Number(commentId) : undefined;
+  const sourceCommentId =
+    parsedCommentId != null && Number.isFinite(parsedCommentId)
+      ? parsedCommentId
+      : undefined;
+  const episodeNumber = searchParams?.get(EPISODE_PARAM);
   const parsedEpisode = episodeNumber != null
     ? Number(episodeNumber)
     : undefined;
@@ -92,23 +82,32 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
     sourceCommentId,
     sourceEpisode,
     close,
+    closeCommentDrawer: () =>
+      drawer === SummaryDrawers.Episode
+        ? closeParams(COMMENT_ID_PARAM)
+        : close(),
     buildDrawerLink,
     buildEpisodeDrawerLink: (
       { season, episode }: { season: number; episode: number },
     ) =>
       buildDrawerLink(
         SummaryDrawers.Episode,
-        { [episodeParam]: String(episode), [seasonParam]: String(season) },
+        { [EPISODE_PARAM]: String(episode), [SEASON_PARAM]: String(season) },
       ),
     buildCommentsDrawerLink: (id?: number) =>
       buildDrawerLink(
         SummaryDrawers.Comments,
-        id != null ? { [commentIdParam]: String(id) } : undefined,
+        id != null ? { [COMMENT_ID_PARAM]: String(id) } : undefined,
       ),
     buildReviewDrawerLink: (id: number) =>
       buildDrawerLink(
         SummaryDrawers.Review,
-        { [commentIdParam]: String(id) },
+        { [COMMENT_ID_PARAM]: String(id) },
+      ),
+    openReviewDrawer: (id: number) =>
+      openDrawer(
+        SummaryDrawers.Review,
+        { [COMMENT_ID_PARAM]: String(id) },
       ),
   };
 }

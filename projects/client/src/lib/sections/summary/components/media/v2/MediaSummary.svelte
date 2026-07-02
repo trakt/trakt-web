@@ -11,10 +11,8 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useIsWatchlisted } from "$lib/stores/useIsWatchlisted";
   import { useWatchCount } from "$lib/stores/useWatchCount";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "../../../_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import SocialActivitiesButton from "../../_internal/SocialActivitiesButton.svelte";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";

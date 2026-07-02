@@ -6,7 +6,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
-  import { summaryDrawerNavigation } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import CommentCard from "$lib/sections/summary/components/comments/CommentCard.svelte";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import CommentLanguageSelect from "./_internal/CommentLanguageSelect.svelte";

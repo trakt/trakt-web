@@ -5,6 +5,7 @@ import { EpisodeSiloCommentsMappedMock } from '$mocks/data/summary/episodes/silo
 import { EpisodeSiloCommentReplyResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloCommentReplyResponseMock.ts';
 import { EpisodeSiloCommentsResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloCommentsResponseMock.ts';
 import { MovieHereticCommentsResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticCommentsResponseMock.ts';
+import { MovieHereticResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
 import { EpisodeSiloCommentReactionsResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloCommentReactionsResponseMock.ts';
 
 const commentResponseMocks = [
@@ -13,6 +14,24 @@ const commentResponseMocks = [
 ];
 
 export const comments = [
+  http.get(
+    'http://localhost/comments/:id/item',
+    ({ params }) => {
+      const id = Number(params.id);
+      const hasComment = MovieHereticCommentsResponseMock.some((comment) =>
+        comment.id === id
+      );
+
+      if (!hasComment) {
+        return HttpResponse.json(null, { status: 404 });
+      }
+
+      return HttpResponse.json({
+        type: 'movie',
+        movie: MovieHereticResponseMock,
+      });
+    },
+  ),
   http.get(
     'http://localhost/comments/:id',
     ({ params }) => {

@@ -5,10 +5,8 @@
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "../../../_internal/summaryDrawerNavigation.ts";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import SentimentSummary from "./SentimentSummary.svelte";
 
   const { sentiment }: { sentiment: SentimentAnalysis } = $props();

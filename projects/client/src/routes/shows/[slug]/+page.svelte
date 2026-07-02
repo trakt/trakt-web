@@ -39,8 +39,9 @@
      */
     goto(
       UrlBuilder.show(slug, {
-        season: season,
+        ...Object.fromEntries(page.url.searchParams),
         ...Object.fromEntries($search),
+        season,
       }),
       {
         replaceState: true,

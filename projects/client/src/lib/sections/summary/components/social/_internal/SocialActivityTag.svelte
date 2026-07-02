@@ -6,7 +6,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toUserRating } from "$lib/utils/formatting/number/toUserRating";
-  import { summaryDrawerNavigation } from "../../../_internal/summaryDrawerNavigation";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import type { SocialActivityEntry } from "../models/SocialActivityEntry";
 
   const { activity }: { activity: SocialActivityEntry } = $props();

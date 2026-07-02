@@ -6,10 +6,8 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import type { Snippet } from "svelte";
   import SeasonEpisodeItem from "./SeasonEpisodeItem.svelte";
