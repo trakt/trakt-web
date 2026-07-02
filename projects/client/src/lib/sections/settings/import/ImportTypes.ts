@@ -128,8 +128,8 @@ export const IMPORT_SOURCE_CONFIGS: Record<
   tvtime: {
     id: 'tvtime',
     name: 'TV Time',
-    accept: '.csv',
-    maxFiles: 1,
+    accept: '.csv,.zip',
+    maxFiles: 5,
     guide: {
       title: "Your TV Time isn't lost in space! 🚀",
       steps: [
