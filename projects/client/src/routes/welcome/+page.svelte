@@ -1,6 +1,17 @@
 <script lang="ts">
-  import Redirect from "$lib/components/router/Redirect.svelte";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import TraktPage from "$lib/sections/layout/TraktPage.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import Welcome from "$lib/sections/welcome/Welcome.svelte";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 </script>
 
-<Redirect to={UrlBuilder.home()} />
+<TraktPage
+  audience="authenticated"
+  image={DEFAULT_SHARE_COVER}
+  title={m.page_title_welcome()}
+  mode="content-only"
+>
+  <NavbarStateSetter mode="hidden" />
+  <Welcome />
+</TraktPage>
