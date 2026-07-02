@@ -129,6 +129,12 @@
     $bg: var(--color-background-#{$color});
     $fg: var(--color-foreground-#{$color});
 
+    // Stable per-colour accent, immune to the hover fg/bg var-swap below.
+    // The outline flat style leans on this so its ring/text stay the accent.
+    :global(#{$base}[data-color=#{$color}]) {
+      --accent-button: #{$bg};
+    }
+
     @include variant-styles($base, $color, primary, $bg, $fg);
     @include variant-styles($base, $color, secondary, $fg, $bg);
 
@@ -251,7 +257,7 @@
   :global(#{$b}:active[disabled]) {
     height: var(--button-height);
     box-sizing: border-box;
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-l);
   }
 
   :global(#{$b}::before) {
@@ -344,16 +350,39 @@
     outline: var(--border-thickness-xxs) solid var(--color-foreground);
   }
 
+  // Flat is an outline: no heavy fill, accent ring + accent text. Primary
+  // leans heavier (thicker ring + a tint of fill); secondary is a quiet
+  // hairline ring. Hover/press are pure colour shifts - no lift, no glow.
+  :global(#{$b}[data-style=flat][data-variant=primary]#{$on}) {
+    background: color-mix(in srgb, var(--accent-button) 14%, transparent);
+    color: var(--accent-button);
+    border: var(--border-thickness-xs) solid
+      color-mix(in srgb, var(--accent-button) 65%, transparent);
+  }
+
+  :global(#{$b}[data-style=flat][data-variant=secondary]#{$on}) {
+    background: transparent;
+    color: var(--accent-button);
+    border: var(--border-thickness-xxs) solid
+      color-mix(in srgb, var(--accent-button) 30%, transparent);
+  }
+
   @include for-mouse {
-    :global(#{$b}[data-style=flat]:hover#{$on}) {
-      box-shadow: 0 var(--ni-4) var(--ni-12) var(--ni-neg-2)
-        color-mix(in srgb, var(--color-background-button) 45%, transparent);
-      transform: translateY(calc(var(--ni-1) * -1));
+    :global(#{$b}[data-style=flat][data-variant=primary]:hover#{$on}) {
+      background: color-mix(in srgb, var(--accent-button) 26%, transparent);
+      border-color: color-mix(in srgb, var(--accent-button) 95%, transparent);
+    }
+
+    :global(#{$b}[data-style=flat][data-variant=secondary]:hover#{$on}) {
+      background: color-mix(in srgb, var(--accent-button) 16%, transparent);
+      border-color: color-mix(in srgb, var(--accent-button) 60%, transparent);
     }
   }
 
   :global(#{$b}[data-style=flat]:active#{$on}) {
     transform: scale(calc(var(--scale-factor-button) * 0.97));
+    background: color-mix(in srgb, var(--accent-button) 36%, transparent);
+    border-color: var(--accent-button);
     box-shadow: none;
   }
 
