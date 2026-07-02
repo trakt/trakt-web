@@ -28,14 +28,15 @@
   .trakt-login-button :global(.trakt-button[data-size=small]) {
     gap: var(--ni-12);
     padding: var(--ni-14) var(--ni-18);
-    border: var(--ni-1) solid rgba(255, 255, 255, 0.14);
+    border: var(--ni-1) solid
+      color-mix(in srgb, var(--shade-10) 14%, transparent);
     border-radius: var(--ni-12);
-    background: rgba(255, 255, 255, 0.07);
+    background: color-mix(in srgb, var(--shade-10) 7%, transparent);
   }
 
   .trakt-login-button :global(.trakt-button[data-size=small]:hover) {
     --color-foreground-button: var(--color-foreground-default);
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.24);
+    background: color-mix(in srgb, var(--shade-10) 12%, transparent);
+    border-color: color-mix(in srgb, var(--shade-10) 24%, transparent);
   }
 </style>

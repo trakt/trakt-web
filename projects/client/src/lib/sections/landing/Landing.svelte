@@ -96,23 +96,23 @@
     padding: var(--landing-padding);
     padding-bottom: var(--popcorn-safe-area);
 
-    background-color: #14111b;
+    background-color: var(--shade-920);
     background-image:
       radial-gradient(
         72% 78% at 50% 110%,
-        rgba(159, 66, 198, 0.42),
+        color-mix(in srgb, var(--purple-500) 42%, transparent),
         transparent 70%
       ),
       radial-gradient(
         110% 90% at 50% 42%,
-        rgba(20, 17, 27, 0.25),
-        rgba(20, 17, 27, 0.8)
+        color-mix(in srgb, var(--shade-920) 25%, transparent),
+        color-mix(in srgb, var(--shade-920) 80%, transparent)
       ),
       linear-gradient(
         180deg,
-        #221f2b 0%,
-        #2a2336 45%,
-        #3a2352 100%
+        var(--shade-900) 0%,
+        var(--shade-800) 45%,
+        var(--purple-900) 100%
       );
 
     transition: var(--transition-increment) ease-in-out;
