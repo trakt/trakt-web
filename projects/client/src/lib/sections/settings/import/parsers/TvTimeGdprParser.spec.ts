@@ -294,22 +294,24 @@ describe('TvTimeGdprParser', () => {
       });
     });
 
-    it('should skip movies without a release year', async () => {
+    it('should keep movies without a release year for id resolution', async () => {
       const csv = toCsv(V1_HEADER, [v1MovieWatch({ release_date: '' })]);
 
       const result = await TvTimeGdprParser.parse([csvFile(csv)]);
 
-      expect(result).toHaveLength(0);
+      expect(result).toHaveLength(1);
+      expect(result[0]?.year).toBeUndefined();
     });
 
-    it('should skip movies with a zero release date', async () => {
+    it('should treat a zero release date as no release year', async () => {
       const csv = toCsv(V1_HEADER, [
         v1MovieWatch({ release_date: '0001-01-01 00:00:00' }),
       ]);
 
       const result = await TvTimeGdprParser.parse([csvFile(csv)]);
 
-      expect(result).toHaveLength(0);
+      expect(result).toHaveLength(1);
+      expect(result[0]?.year).toBeUndefined();
     });
 
     it('should ignore movie follows and aggregate rows', async () => {
