@@ -1,10 +1,8 @@
 <script lang="ts">
   import PosterTags from "$lib/components/media/tags/PosterTags.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "../../_internal/summaryDrawerNavigation.ts";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
 
   type SummaryPosterTagsProps = {
     postCreditsCount: number;

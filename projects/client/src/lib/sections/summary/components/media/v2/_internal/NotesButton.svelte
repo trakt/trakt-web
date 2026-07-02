@@ -4,10 +4,8 @@
   import NotesIcon from "$lib/components/icons/NotesIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "$lib/sections/summary/_internal/summaryDrawerNavigation.ts";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
 
   const {
     variant,

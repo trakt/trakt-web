@@ -18,7 +18,7 @@
   import type { Season } from "$lib/requests/models/Season.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import type { MediaSocialQueryTarget } from "$lib/requests/queries/media/mediaSocialQuery.ts";
-  import { summaryDrawerNavigation } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { mapToMainCredit } from "$lib/sections/summary/components/_internal/mapToMainCredit";
   import StemSwipeIndicator from "$lib/sections/media-actions/_internal/StemSwipeIndicator.svelte";
   import SocialActivitiesButton from "$lib/sections/summary/components/_internal/SocialActivitiesButton.svelte";

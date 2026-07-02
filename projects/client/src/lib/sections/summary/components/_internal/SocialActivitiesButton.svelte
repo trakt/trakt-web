@@ -3,10 +3,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaSocialQueryTarget } from "$lib/requests/queries/media/mediaSocialQuery.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "../../_internal/summaryDrawerNavigation.ts";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { useSocialActivities } from "./useSocialActivities.ts";
 
   const avatarDisplayLimit = 5;

@@ -3,10 +3,8 @@
   import { m } from "$lib/features/i18n/messages";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import SeasonPosterItem from "./SeasonPosterItem.svelte";
 

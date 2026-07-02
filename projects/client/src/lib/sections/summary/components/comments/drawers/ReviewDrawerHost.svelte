@@ -8,9 +8,16 @@
   type ReviewDrawerProps = {
     commentId: number;
     onClose: () => void;
+    elevated?: boolean;
   } & CommentsProps;
 
-  const { commentId, onClose, media, ...props }: ReviewDrawerProps = $props();
+  const {
+    commentId,
+    onClose,
+    elevated = false,
+    media,
+    ...props
+  }: ReviewDrawerProps = $props();
 
   const useList = $derived(useSingleReview({ commentId }));
 
@@ -22,6 +29,7 @@
   title={m.dialog_title_comment()}
   size="large"
   metaInfo={media.title}
+  {elevated}
   onOpened={() => (isOpened = true)}
 >
   {#if isOpened}

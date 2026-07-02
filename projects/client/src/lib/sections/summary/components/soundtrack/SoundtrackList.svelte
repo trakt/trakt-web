@@ -6,12 +6,10 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { slide } from "svelte/transition";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "../../_internal/summaryDrawerNavigation.ts";
   import SoundtrackBoard from "./_internal/SoundtrackBoard.svelte";
   import SoundtrackUpsell from "./_internal/SoundtrackUpsell.svelte";
   import { toSoundtrackSummary } from "./_internal/toSoundtrackSummary.ts";

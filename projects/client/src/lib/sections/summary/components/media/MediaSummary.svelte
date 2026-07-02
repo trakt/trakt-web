@@ -7,10 +7,8 @@
   import { useIsRewatching } from "$lib/sections/media-actions/rewatching/useIsRewatching";
   import { useIsWatchlisted } from "$lib/stores/useIsWatchlisted";
   import { useWatchCount } from "$lib/stores/useWatchCount";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "../../_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import SocialActivitiesButton from "../_internal/SocialActivitiesButton.svelte";
   import SummaryCover from "../_internal/SummaryCover.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";

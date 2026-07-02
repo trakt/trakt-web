@@ -3,10 +3,8 @@
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "$lib/sections/summary/_internal/summaryDrawerNavigation.ts";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
 
   const {
     variant = "primary",

@@ -3,10 +3,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "../summary/_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import CastMemberItem from "./components/CastMemberItem.svelte";
 
   type CastListProps = {

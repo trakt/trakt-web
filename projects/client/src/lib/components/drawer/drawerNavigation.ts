@@ -34,15 +34,28 @@ export function drawerNavigation<
     };
   };
 
-  const close = () => {
+  const openDrawer = <D extends T>(
+    drawer: D,
+    ...args: D extends keyof P ? [P[D]?] : []
+  ) =>
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
+    goto(buildDrawerLink(drawer, ...args).href, {
+      noScroll: true,
+      replaceState: true,
+    });
+
+  const closeParams = (...keys: string[]) => {
     const url = new URL(page.url);
-    url.searchParams.delete(DRAWER_VIEW_PARAM);
-    cleanupKeys.forEach((key) => url.searchParams.delete(key));
+    keys.forEach((key) => url.searchParams.delete(key));
     goto(url, { noScroll: true, replaceState: true });
   };
 
+  const close = () => closeParams(DRAWER_VIEW_PARAM, ...cleanupKeys);
+
   return {
     buildDrawerLink,
+    openDrawer,
     close,
+    closeParams,
   };
 }

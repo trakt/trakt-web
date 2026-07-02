@@ -27,6 +27,7 @@
   const { current, update, options, urlBuilder } = $derived(
     useListSorting({ list: $list, type: "user-list" }),
   );
+
 </script>
 
 {#snippet listActions()}
@@ -71,3 +72,4 @@
     />
   {/if}
 </TraktPage>
+

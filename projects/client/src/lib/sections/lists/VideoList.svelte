@@ -4,10 +4,8 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
-  import {
-    summaryDrawerNavigation,
-    SummaryDrawers,
-  } from "../summary/_internal/summaryDrawerNavigation";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import VideoItem from "./components/VideoItem.svelte";
   import VideoTypeDropdown from "./components/VideoTypeDropdown.svelte";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
