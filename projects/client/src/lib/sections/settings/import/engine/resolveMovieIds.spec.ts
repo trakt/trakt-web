@@ -62,12 +62,15 @@ describe('engine: resolveMovieIds', () => {
               title: 'Split',
               year: 2017,
               score: 21573,
+              poster:
+                'media.trakt.tv/images/movies/000/254/263/posters/medium/aaa0f03e5e.jpg.webp',
               ids: { trakt: 254263, imdb: 'tt4972582', tmdb: 381288 },
             },
             {
               title: 'Split',
               year: 2016,
               score: 2582,
+              poster: null,
               ids: { trakt: 247643, imdb: 'tt3315656', tmdb: 358364 },
             },
           ],
@@ -87,11 +90,14 @@ describe('engine: resolveMovieIds', () => {
       {
         title: 'Split',
         year: 2017,
+        poster:
+          'https://media.trakt.tv/images/movies/000/254/263/posters/medium/aaa0f03e5e.jpg.webp',
         ids: { trakt: 254263, imdb: 'tt4972582', tmdb: 381288 },
       },
       {
         title: 'Split',
         year: 2016,
+        poster: undefined,
         ids: { trakt: 247643, imdb: 'tt3315656', tmdb: 358364 },
       },
     ]);

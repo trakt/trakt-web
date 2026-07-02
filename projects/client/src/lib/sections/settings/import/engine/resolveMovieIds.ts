@@ -49,13 +49,19 @@ function toImportIds(result: MovieMatchResult): ImportIds | undefined {
   };
 }
 
+// The match endpoint returns scheme-less poster paths (media.trakt.tv/...).
+function toPosterUrl(poster?: string | null): string | undefined {
+  if (!poster) return undefined;
+  return poster.startsWith('http') ? poster : `https://${poster}`;
+}
+
 function toCandidates(
   result: MovieMatchResult,
 ): AmbiguousImportItem['candidates'] {
   return (result.candidates ?? []).map((candidate) => ({
     title: candidate.title,
     year: candidate.year ?? undefined,
-    poster: candidate.poster ?? undefined,
+    poster: toPosterUrl(candidate.poster),
     ids: {
       trakt: candidate.ids.trakt,
       imdb: candidate.ids.imdb ?? undefined,
