@@ -1,8 +1,6 @@
 <script lang="ts" generics="T extends SortBy | UpNextSortBy">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import SortDirectionIcon from "$lib/components/icons/SortDirectionIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
@@ -31,35 +29,20 @@
   const reversedDirection = $derived(
     current.sortHow === "asc" ? "desc" : "asc",
   );
+
+  function sortHowFor(optionValue: T | undefined): SortDirection {
+    return optionValue === current.sorting.value
+      ? reversedDirection
+      : current.sortHow;
+  }
 </script>
 
-{#snippet badge()}
-  <ActionButton
-    replacestate
-    style="ghost"
-    color="default"
-    size="small"
-    label={reversedDirection === "asc"
-      ? m.button_label_sort_ascending()
-      : m.button_label_sort_descending()}
-    href={`${urlBuilder({ sortHow: reversedDirection, sortBy: current.sorting.value })}`}
-    onclick={() => {
-      track({
-        sortBy: current.sorting.value ?? "default",
-        sortHow: reversedDirection,
-      });
-    }}
-  >
-    <SortDirectionIcon direction={current.sortHow} />
-  </ActionButton>
-{/snippet}
-
-<Drawer {onClose} {badge} size="auto" title={m.drawer_title_sort()}>
+<Drawer {onClose} size="auto" title={m.drawer_title_sort()}>
   <div class="sort-buttons">
     {#each options as option}
       {#snippet icon()}
         {#if option.value === current.sorting.value}
-          <CheckIcon />
+          <SortDirectionIcon direction={current.sortHow} />
         {:else if option.value}
           <SortIcon sortBy={option.value} />
         {/if}
@@ -69,16 +52,16 @@
         replacestate
         style="flat"
         color="default"
-        href={`${urlBuilder({ sortHow: current.sortHow, sortBy: option.value })}`}
+        href={`${urlBuilder({ sortHow: sortHowFor(option.value), sortBy: option.value })}`}
         label={option.label()}
-        disabled={option.value === current.sorting.value}
+        selected={option.value === current.sorting.value}
         icon={Boolean(option.value) || option.value === current.sorting.value
           ? icon
           : undefined}
         onclick={() => {
           track({
             sortBy: option.value ?? "default",
-            sortHow: current.sortHow,
+            sortHow: sortHowFor(option.value),
           });
         }}
       >
