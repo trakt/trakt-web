@@ -17,5 +17,10 @@ export function getOidcConfig(): UserManagerSettings {
     userStore: new WebStorageStateStore({
       store: safeLocalStorage,
     }),
+    // Set stateStore explicitly too: oidc-client-ts otherwise defaults it to
+    // raw window.localStorage, which throws SecurityError in sandboxed contexts.
+    stateStore: new WebStorageStateStore({
+      store: safeLocalStorage,
+    }),
   };
 }
