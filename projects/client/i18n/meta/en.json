@@ -8069,6 +8069,26 @@
         }
       }
     },
+    "header_history_analysis": {
+      "default": "History Analysis",
+      "description": "Header for the settings section that analyzes the user's watch history for duplicate plays."
+    },
+    "description_history_analysis": {
+      "default": "Find duplicate plays in your watch history and keep only the most recent watch of each item.",
+      "description": "Description for the history analysis settings section."
+    },
+    "text_duplicate_plays": {
+      "default": "duplicate plays",
+      "description": "Label shown under the duplicate play count in a history analysis card."
+    },
+    "text_unique_items": {
+      "default": "unique",
+      "description": "Label for the number of unique watched items in a history analysis card."
+    },
+    "text_total_plays": {
+      "default": "total plays",
+      "description": "Label for the total number of plays in a history analysis card."
+    },
     "tag_label_progress": {
       "default": "Progress",
       "description": "Label for the progress bar."
