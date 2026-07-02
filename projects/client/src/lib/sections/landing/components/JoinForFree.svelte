@@ -45,20 +45,22 @@
   .trakt-join-for-free {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-l);
 
     padding: var(--ni-24);
-    border-radius: var(--border-radius-xxl);
+    border: var(--ni-1) solid rgba(255, 255, 255, 0.09);
+    border-radius: var(--ni-24);
 
-    background-color: color-mix(
-      in srgb,
-      var(--purple-400) 10%,
-      transparent 90%
-    );
+    background: rgba(20, 16, 28, 0.72);
+    box-shadow: 0 var(--ni-30) var(--ni-80) rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(var(--ni-20));
+    -webkit-backdrop-filter: blur(var(--ni-20));
 
     @include for-tablet-lg-and-below() {
-      gap: var(--gap-s);
-      padding: var(--ni-12);
+      gap: var(--gap-m);
+      padding: var(--ni-24) var(--ni-22);
+      border-radius: var(--ni-22);
+      background: rgba(16, 12, 22, 0.78);
     }
   }
 
@@ -126,7 +128,7 @@
     }
 
     @include for-tablet-lg-and-below() {
-      gap: var(--gap-xxs);
+      gap: var(--gap-xs);
     }
   }
 </style>

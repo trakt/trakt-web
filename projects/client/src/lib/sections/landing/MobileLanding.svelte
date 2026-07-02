@@ -41,11 +41,24 @@
 
     overflow-x: hidden;
 
-    background: radial-gradient(
-      200dvw 200dvw at 50% 100%,
-      color-mix(in srgb, var(--purple-500) 50%, transparent) 0%,
-      transparent 100%
-    );
+    background-color: #14111b;
+    background-image:
+      linear-gradient(
+        0deg,
+        rgba(159, 66, 198, 0.3) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        110% 90% at 50% 42%,
+        rgba(20, 17, 27, 0.45),
+        rgba(20, 17, 27, 0.95)
+      ),
+      linear-gradient(
+        180deg,
+        #221f2b 0%,
+        #2a2336 45%,
+        #3a2352 100%
+      );
   }
 
   .trakt-landing-content {
