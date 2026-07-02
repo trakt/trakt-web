@@ -10,6 +10,7 @@
     UniversalImportItem,
   } from "$lib/sections/settings/import/ImportTypes.ts";
   import { toUnresolvedCsv } from "$lib/sections/settings/import/toUnresolvedCsv.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { slide } from "svelte/transition";
 
   type ImportCompleteProps = {
@@ -40,6 +41,8 @@
   const hasBothSections = $derived(
     ambiguous.length > 0 && unresolved.length > 0,
   );
+
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
   const SKIP = -1;
   const picks = $state<Record<number, number>>({});
@@ -84,57 +87,63 @@
   }
 </script>
 
+{#snippet candidateGrid()}
+  <ul class="import-complete-ambiguous">
+    {#each ambiguous as entry, index (entry)}
+      <li>
+        <div class="ambiguous-title">
+          <span class="ellipsis item-title">{entry.item.title}</span>
+          {#if entry.item.year != null}
+            <span class="tag secondary">{entry.item.year}</span>
+          {/if}
+        </div>
+        <div class="ambiguous-candidates">
+          {#each entry.candidates as candidate, candidateIndex (candidate)}
+            <Tooltip content={toCandidateLabel(candidate)} variant="compact">
+              <button
+                class="ambiguous-candidate"
+                class:is-selected={(picks[index] ?? 0) === candidateIndex}
+                aria-label={m.button_label_pick_match({
+                  option: toCandidateLabel(candidate),
+                })}
+                onclick={() => (picks[index] = candidateIndex)}
+              >
+                <span class="candidate-poster">
+                  {#if candidate.poster}
+                    <img src={candidate.poster} alt="" loading="lazy" />
+                  {/if}
+                  <span class="tag candidate-year">{candidate.year ?? "?"}</span>
+                </span>
+                <span class="ellipsis candidate-title">{candidate.title}</span>
+              </button>
+            </Tooltip>
+          {/each}
+          <button
+            class="ambiguous-candidate is-skip"
+            class:is-selected={picks[index] === SKIP}
+            aria-label={m.import_ambiguous_skip()}
+            onclick={() => (picks[index] = SKIP)}
+          >
+            <span class="candidate-poster">
+              <span class="tag">{m.import_ambiguous_skip()}</span>
+            </span>
+          </button>
+        </div>
+      </li>
+    {/each}
+  </ul>
+{/snippet}
+
 {#snippet ambiguousSection()}
   <div class="import-complete-section">
     <p class="secondary">
       {m.import_complete_ambiguous({ count: ambiguous.length })}
     </p>
-    <ShadowScroller>
-      <ul class="import-complete-ambiguous">
-        {#each ambiguous as entry, index (entry)}
-          <li>
-            <div class="ambiguous-title">
-              <span class="ellipsis item-title">{entry.item.title}</span>
-              {#if entry.item.year != null}
-                <span class="tag secondary">{entry.item.year}</span>
-              {/if}
-            </div>
-            <div class="ambiguous-candidates">
-              {#each entry.candidates as candidate, candidateIndex (candidate)}
-                <Tooltip content={toCandidateLabel(candidate)} variant="compact">
-                  <button
-                    class="ambiguous-candidate"
-                    class:is-selected={(picks[index] ?? 0) === candidateIndex}
-                    aria-label={m.button_label_pick_match({
-                      option: toCandidateLabel(candidate),
-                    })}
-                    onclick={() => (picks[index] = candidateIndex)}
-                  >
-                    <span class="candidate-poster">
-                      {#if candidate.poster}
-                        <img src={candidate.poster} alt="" loading="lazy" />
-                      {/if}
-                      <span class="tag candidate-year">{candidate.year ?? "?"}</span>
-                    </span>
-                    <span class="ellipsis candidate-title">{candidate.title}</span>
-                  </button>
-                </Tooltip>
-              {/each}
-              <button
-                class="ambiguous-candidate is-skip"
-                class:is-selected={picks[index] === SKIP}
-                aria-label={m.import_ambiguous_skip()}
-                onclick={() => (picks[index] = SKIP)}
-              >
-                <span class="candidate-poster">
-                  <span class="tag">{m.import_ambiguous_skip()}</span>
-                </span>
-              </button>
-            </div>
-          </li>
-        {/each}
-      </ul>
-    </ShadowScroller>
+    {#if $isMouse}
+      <ShadowScroller>{@render candidateGrid()}</ShadowScroller>
+    {:else}
+      {@render candidateGrid()}
+    {/if}
     <div class="import-complete-actions">
       <Button
         label={m.button_label_import_selected()}
