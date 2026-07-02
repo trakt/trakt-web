@@ -23,9 +23,11 @@ export const PLACEHOLDERS: string[] = [
 
 const generateShareCover = (type: 'show' | 'movie') =>
   assertDefined(
+    // Bracket access instead of .at(): this runs at module-eval on the boot
+    // path and Array.prototype.at throws on old/spoofed WebView engines.
     shuffle(
       [1, 2, 3, 4, 5].map((n) => `${assets}/trakt_share_${type}_${n}.webp`),
-    ).at(0),
+    )[0],
     `${type} share cover is required`,
   );
 
@@ -36,6 +38,6 @@ export const DEFAULT_SHARE_COVER = assertDefined(
   shuffle([
     DEFAULT_SHARE_SHOW_COVER,
     DEFAULT_SHARE_MOVIE_COVER,
-  ]).at(0),
+  ])[0],
   'Default share cover is required',
 );
