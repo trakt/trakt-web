@@ -25,6 +25,8 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-login-button :global(.trakt-button[data-size=small]) {
     gap: var(--ni-12);
     padding: var(--ni-14) var(--ni-18);
@@ -34,9 +36,11 @@
     background: color-mix(in srgb, var(--shade-10) 7%, transparent);
   }
 
-  .trakt-login-button :global(.trakt-button[data-size=small]:hover) {
-    --color-foreground-button: var(--color-foreground-default);
-    background: color-mix(in srgb, var(--shade-10) 12%, transparent);
-    border-color: color-mix(in srgb, var(--shade-10) 24%, transparent);
+  @include for-mouse {
+    .trakt-login-button :global(.trakt-button[data-size=small]:hover) {
+      --color-foreground-button: var(--color-foreground-default);
+      background: color-mix(in srgb, var(--shade-10) 12%, transparent);
+      border-color: color-mix(in srgb, var(--shade-10) 24%, transparent);
+    }
   }
 </style>
