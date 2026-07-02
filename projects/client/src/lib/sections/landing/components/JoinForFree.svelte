@@ -56,9 +56,9 @@
     @include backdrop-filter-blur(var(--ni-20));
 
     @include for-tablet-lg-and-below() {
-      gap: var(--gap-m);
-      padding: var(--ni-24) var(--ni-22);
-      border-radius: var(--ni-22);
+      gap: var(--gap-s);
+      padding: var(--ni-14) var(--ni-18);
+      border-radius: var(--ni-18);
       background: color-mix(in srgb, var(--shade-930) 78%, transparent);
     }
   }
