@@ -86,6 +86,21 @@
         {m.import_complete_errors({ count: errorCount })}
       </p>
     {/if}
+    {#if unresolved.length > 0}
+      <p class="secondary">
+        {m.import_complete_unresolved({ count: unresolved.length })}
+      </p>
+      <ul class="import-complete-unresolved">
+        {#each unresolved as item (item)}
+          <li>
+            <span class="ellipsis item-title">{item.title}</span>
+            {#if item.year != null}
+              <span class="tag secondary">{item.year}</span>
+            {/if}
+          </li>
+        {/each}
+      </ul>
+    {/if}
     {#if ambiguous.length > 0}
       <p class="secondary">
         {m.import_complete_ambiguous({ count: ambiguous.length })}
@@ -94,7 +109,7 @@
         {#each ambiguous as entry, index (entry)}
           <li>
             <div class="ambiguous-title">
-              <span class="ellipsis">{entry.item.title}</span>
+              <span class="ellipsis item-title">{entry.item.title}</span>
               {#if entry.item.year != null}
                 <span class="tag secondary">{entry.item.year}</span>
               {/if}
@@ -129,21 +144,6 @@
                 <span class="tag">{m.import_ambiguous_skip()}</span>
               </button>
             </div>
-          </li>
-        {/each}
-      </ul>
-    {/if}
-    {#if unresolved.length > 0}
-      <p class="secondary">
-        {m.import_complete_unresolved({ count: unresolved.length })}
-      </p>
-      <ul class="import-complete-unresolved">
-        {#each unresolved as item (item)}
-          <li>
-            <span class="ellipsis">{item.title}</span>
-            {#if item.year != null}
-              <span class="tag secondary">{item.year}</span>
-            {/if}
           </li>
         {/each}
       </ul>
@@ -234,6 +234,11 @@
     gap: var(--gap-xs);
   }
 
+  /* Parsed titles are de-slugged lowercase; capitalize for display only. */
+  .item-title {
+    text-transform: capitalize;
+  }
+
   .ambiguous-candidates {
     display: flex;
     flex-wrap: wrap;
@@ -254,6 +259,10 @@
     border: var(--border-thickness-xs) solid transparent;
     border-radius: var(--border-radius-m);
     cursor: pointer;
+
+    /* Buttons default to UA colors, not the theme foreground. */
+    color: var(--color-foreground);
+    font-family: inherit;
   }
 
   .ambiguous-candidate.is-selected {
