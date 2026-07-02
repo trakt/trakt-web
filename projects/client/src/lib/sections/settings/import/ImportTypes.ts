@@ -132,14 +132,20 @@ export const IMPORT_SOURCE_CONFIGS: Record<
     maxFiles: 5,
     guide: {
       title: "Your TV Time isn't lost in space! 🚀",
+      description:
+        'Two ways to get your data out. Pick whichever suits you and import one export at a time:',
       steps: [
-        [{
-          text: 'Send an email',
+        ['Fastest: export your data with the', {
+          text: 'TV Time Liberator extension',
           href:
-            'mailto:support@tvtime.com?subject=GDPR Data Request&body=Hi, I would like to receive a copy of my data according to GDPR laws.',
-        }, 'to TV Time support requesting your GDPR data export'],
-        ["Check your inbox in about 1\u20132 weeks. You'll get two emails: one with a .zip file and another with a password to unlock it."],
-        ["Once you have the unlocked file, upload the 'tracking-prod-records-v2.csv' file here. Note: only entries with an episode_id will be imported."],
+            'https://chromewebstore.google.com/detail/tv-time-liberator-extensi/pohobkcjhigehafgnhehkanhjakajhpm',
+        }, 'while your TV Time login still works, then upload the .csv here'],
+        ['Official: request your GDPR data export on the', {
+          text: 'TV Time privacy portal',
+          href: 'https://gdpr.tvtime.com/gdpr/self-service',
+        }],
+        ["Once the export is ready you'll get two emails: one with a .zip file and another with a password to unlock it."],
+        ['Upload the unlocked .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files instead.'],
       ],
     },
   },
