@@ -22,6 +22,7 @@ export enum ConfirmationType {
   CancelImport = 'cancel-import',
   CancelClear = 'cancel-clear',
   ClearData = 'clear-data',
+  CleanUpHistory = 'clean-up-history',
   HideRecommendation = 'hide-recommendation',
   UnlinkStreaming = 'unlink-streaming',
   UndoSync = 'undo-sync',
