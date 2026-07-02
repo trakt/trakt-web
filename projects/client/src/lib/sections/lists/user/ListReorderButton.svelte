@@ -6,10 +6,12 @@
   const {
     title,
     disabled,
+    text = m.button_text_reorder(),
     onclick,
   }: {
     title: string;
     disabled?: boolean;
+    text?: string;
     onclick: () => void;
   } = $props();
 </script>
@@ -22,7 +24,7 @@
   {disabled}
   {onclick}
 >
-  {m.button_text_reorder()}
+  {text}
 
   {#snippet icon()}
     <ReorderIcon />

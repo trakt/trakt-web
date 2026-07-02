@@ -267,8 +267,14 @@ export const UrlBuilder = {
         buildParamString(sanitizeParams(params))
       }`;
     },
-    all: (user: string, type: PersonalListType) =>
-      listsDrilldownFactory(user)(type),
+    all: (
+      user: string,
+      type: PersonalListType,
+      params: Pick<WellKnownQueryParams, 'sort_by' | 'sort_how'> = {},
+    ) =>
+      `${listsDrilldownFactory(user)(type)}${
+        buildParamString(sanitizeParams(params))
+      }`,
   },
   app: {
     android: () => 'https://trakt.tv/a/trakt-android',

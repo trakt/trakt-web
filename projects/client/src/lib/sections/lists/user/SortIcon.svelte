@@ -2,16 +2,21 @@
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
+  import ReorderIcon from "$lib/components/icons/ReorderIcon.svelte";
   import RemainingIcon from "$lib/components/icons/RemainingIcon.svelte";
   import SortAlphaIcon from "$lib/components/icons/SortAlphaIcon.svelte";
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
+  import type { UserListsSortBy } from "$lib/requests/models/UserListsSortBy.ts";
   import type { UpNextSortBy } from "$lib/sections/lists/progress/UpNextSortBy.ts";
   import type { SortBy } from "./models/SortBy.ts";
 
   const {
     sortBy,
     variant = "default",
-  }: { sortBy: SortBy | UpNextSortBy; variant?: "default" | "value" } =
+  }: {
+    sortBy: SortBy | UpNextSortBy | UserListsSortBy;
+    variant?: "default" | "value";
+  } =
     $props();
 </script>
 
@@ -33,10 +38,18 @@
   <CalendarIcon />
 {/if}
 
-{#if sortBy === "title"}
+{#if sortBy === "updated_at" || sortBy === "created_at"}
+  <CalendarIcon />
+{/if}
+
+{#if sortBy === "title" || sortBy === "name"}
   <SortAlphaIcon />
 {/if}
 
 {#if sortBy === "remaining"}
   <RemainingIcon />
+{/if}
+
+{#if sortBy === "rank"}
+  <ReorderIcon />
 {/if}
