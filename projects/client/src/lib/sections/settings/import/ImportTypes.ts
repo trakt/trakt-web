@@ -100,6 +100,30 @@ export const IMPORT_SOURCE_CONFIGS: Record<
   ImportSource,
   ImportSourceConfig
 > = {
+  tvtime: {
+    id: 'tvtime',
+    name: 'TV Time',
+    accept: '.csv,.zip',
+    maxFiles: 5,
+    guide: {
+      title: "Your TV Time isn't lost in space! 🚀",
+      description:
+        'Two ways to get your data out. Pick whichever suits you and import one export at a time:',
+      steps: [
+        ['Fastest: export your data with the', {
+          text: 'TV Time Liberator extension',
+          href:
+            'https://chromewebstore.google.com/detail/tv-time-liberator-extensi/pohobkcjhigehafgnhehkanhjakajhpm',
+        }, 'while your TV Time login still works, then upload the .csv here'],
+        ['Official: request your GDPR data export on the', {
+          text: 'TV Time privacy portal',
+          href: 'https://gdpr.tvtime.com/gdpr/self-service',
+        }],
+        ["Once the export is ready you'll get two emails: one with a .zip file and another with a password to unlock it."],
+        ['Upload the unlocked .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files instead.'],
+      ],
+    },
+  },
   imdb: {
     id: 'imdb',
     name: 'IMDb',
@@ -141,30 +165,6 @@ export const IMPORT_SOURCE_CONFIGS: Record<
           href: 'https://letterboxd.com/data/export/',
         }],
         ['Download your Letterboxd export data in a zip file and upload it here'],
-      ],
-    },
-  },
-  tvtime: {
-    id: 'tvtime',
-    name: 'TV Time',
-    accept: '.csv,.zip',
-    maxFiles: 5,
-    guide: {
-      title: "Your TV Time isn't lost in space! 🚀",
-      description:
-        'Two ways to get your data out. Pick whichever suits you and import one export at a time:',
-      steps: [
-        ['Fastest: export your data with the', {
-          text: 'TV Time Liberator extension',
-          href:
-            'https://chromewebstore.google.com/detail/tv-time-liberator-extensi/pohobkcjhigehafgnhehkanhjakajhpm',
-        }, 'while your TV Time login still works, then upload the .csv here'],
-        ['Official: request your GDPR data export on the', {
-          text: 'TV Time privacy portal',
-          href: 'https://gdpr.tvtime.com/gdpr/self-service',
-        }],
-        ["Once the export is ready you'll get two emails: one with a .zip file and another with a password to unlock it."],
-        ['Upload the unlocked .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files instead.'],
       ],
     },
   },
