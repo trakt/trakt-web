@@ -661,6 +661,7 @@
   "import_source_csv": "فایل CSV",
   "import_source_json": "فایل JSON",
   "import_status_error": "وارد کردن ناموفق بود: {message}",
+  "import_status_matching": "در حال تطبیق فیلم‌ها: {processed} از {total}...",
   "import_status_parsing": "در حال تجزیه داده‌های شما…",
   "import_status_syncing": "در حال همگام‌سازی {processed} / {total} آیتم…",
   "import_summary_history": "{count} آیتم برای تاریخچه",

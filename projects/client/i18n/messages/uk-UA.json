@@ -661,6 +661,7 @@
   "import_source_csv": "Файл CSV",
   "import_source_json": "Файл JSON",
   "import_status_error": "Помилка імпорту: {message}",
+  "import_status_matching": "Зіставлення фільмів {processed} / {total}…",
   "import_status_parsing": "Обробка ваших даних…",
   "import_status_syncing": "Синхронізація {processed} / {total} елементів…",
   "import_summary_history": "{count} елементів для Історії",

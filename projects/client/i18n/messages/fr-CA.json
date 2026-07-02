@@ -661,6 +661,7 @@
   "import_source_csv": "Fichier CSV",
   "import_source_json": "Fichier JSON",
   "import_status_error": "Échec de l'importation : {message}",
+  "import_status_matching": "Films correspondants {processed} / {total}…",
   "import_status_parsing": "Analyse de vos données…",
   "import_status_syncing": "Synchronisation de {processed} / {total} éléments…",
   "import_summary_history": "{count} éléments pour l'historique",

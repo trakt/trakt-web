@@ -661,6 +661,7 @@
   "import_source_csv": "CSV 文件",
   "import_source_json": "JSON 文件",
   "import_status_error": "导入失败：{message}",
+  "import_status_matching": "正在匹配电影 {processed} / {total}…",
   "import_status_parsing": "正在解析您的数据…",
   "import_status_syncing": "正在同步 {processed} / {total} 个项目…",
   "import_summary_history": "历史记录有 {count} 个项目",

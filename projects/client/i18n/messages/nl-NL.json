@@ -661,6 +661,7 @@
   "import_source_csv": "CSV-bestand",
   "import_source_json": "JSON-bestand",
   "import_status_error": "Importeren mislukt: {message}",
+  "import_status_matching": "Films matchen {processed} / {total}…",
   "import_status_parsing": "Uw gegevens worden geparst…",
   "import_status_syncing": "{processed} / {total} items worden gesynchroniseerd…",
   "import_summary_history": "{count} items voor geschiedenis",

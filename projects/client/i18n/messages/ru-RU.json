@@ -661,6 +661,7 @@
   "import_source_csv": "CSV-файл",
   "import_source_json": "JSON-файл",
   "import_status_error": "Импорт не удался: {message}",
+  "import_status_matching": "Сопоставление фильмов {processed} / {total}…",
   "import_status_parsing": "Обработка ваших данных…",
   "import_status_syncing": "Синхронизация {processed} / {total} элементов…",
   "import_summary_history": "{count} элементов для Истории",
