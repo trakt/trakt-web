@@ -50,6 +50,7 @@ type ImportCompletedType = {
   successCount: number;
   failedCount: number;
   unresolvedCount: number;
+  ambiguousCount: number;
   duration: number;
 };
 type ImportFailedType = { source: string; error: string };

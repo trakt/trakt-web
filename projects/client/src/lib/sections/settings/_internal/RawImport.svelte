@@ -15,6 +15,7 @@
   import { useInvalidator } from "$lib/stores/useInvalidator";
   import { slide } from "svelte/transition";
   import {
+    type AmbiguousImportItem,
     IMPORT_SOURCE_CONFIGS,
     type ImportCounts,
     type ImportSource,
@@ -49,6 +50,7 @@
     parsedItems: ReadonlyArray<UniversalImportItem>;
     errorCount: number;
     unresolved: ReadonlyArray<UniversalImportItem>;
+    ambiguous: ReadonlyArray<AmbiguousImportItem>;
     parseError: string | null;
   };
 
@@ -59,6 +61,7 @@
     processedCount: 0,
     errorCount: 0,
     unresolved: [],
+    ambiguous: [],
     parseError: null,
     totalCount: 0,
   });
@@ -100,6 +103,19 @@
     }
   }
 
+  async function invalidateImported(success: boolean) {
+    importInProgress.next(false);
+
+    if (success) {
+      await invalidate(InvalidateAction.Watchlisted("show"));
+      await invalidate(InvalidateAction.Watchlisted("movie"));
+      await invalidate(InvalidateAction.MarkAsWatched("show"));
+      await invalidate(InvalidateAction.MarkAsWatched("movie"));
+      await invalidate(InvalidateAction.Rated("show"));
+      await invalidate(InvalidateAction.Rated("movie"));
+    }
+  }
+
   async function startImport() {
     abortController = new AbortController();
     const startTime = Date.now();
@@ -108,37 +124,31 @@
     state.status = "syncing";
 
     try {
-      const { errorCount, unresolved } = await syncToTrakt(state.parsedItems, {
-        signal: abortController.signal,
-        onProgress: (count) => {
-          state.processedCount = count;
+      const { errorCount, unresolved, ambiguous } = await syncToTrakt(
+        state.parsedItems,
+        {
+          signal: abortController.signal,
+          onProgress: (count) => {
+            state.processedCount = count;
+          },
+          onError: (message) => {
+            // FIXME: properly deal with this when tackling https://github.com/trakt/trakt-web/issues/2055
+            console.error(message);
+          },
+          onStart: () => {
+            importInProgress.next(true);
+          },
+          onComplete: invalidateImported,
         },
-        onError: (message) => {
-          // FIXME: properly deal with this when tackling https://github.com/trakt/trakt-web/issues/2055
-          console.error(message);
-        },
-        onStart: () => {
-          importInProgress.next(true);
-        },
-        onComplete: async (success) => {
-          importInProgress.next(false);
-
-          if (success) {
-            await invalidate(InvalidateAction.Watchlisted("show"));
-            await invalidate(InvalidateAction.Watchlisted("movie"));
-            await invalidate(InvalidateAction.MarkAsWatched("show"));
-            await invalidate(InvalidateAction.MarkAsWatched("movie"));
-            await invalidate(InvalidateAction.Rated("show"));
-            await invalidate(InvalidateAction.Rated("movie"));
-          }
-        },
-      });
+      );
 
       const duration = Date.now() - startTime;
-      const successCount = state.totalCount - errorCount - unresolved.length;
+      const successCount = state.totalCount - errorCount - unresolved.length -
+        ambiguous.length;
 
       state.errorCount = errorCount;
       state.unresolved = unresolved;
+      state.ambiguous = ambiguous;
 
       record(AnalyticsEvent.ImportCompleted, {
         source: state.selectedSource,
@@ -149,6 +159,7 @@
         successCount,
         failedCount: errorCount,
         unresolvedCount: unresolved.length,
+        ambiguousCount: ambiguous.length,
         duration,
       });
 
@@ -165,6 +176,32 @@
     }
   }
 
+  async function importPicked(
+    picked: UniversalImportItem[],
+    skipped: UniversalImportItem[],
+  ) {
+    if (picked.length > 0) {
+      abortController = new AbortController();
+      const { errorCount } = await syncToTrakt(picked, {
+        signal: abortController.signal,
+        onProgress: () => {},
+        onError: (message) => {
+          // FIXME: properly deal with this when tackling https://github.com/trakt/trakt-web/issues/2055
+          console.error(message);
+        },
+        onStart: () => {
+          importInProgress.next(true);
+        },
+        onComplete: invalidateImported,
+      });
+
+      state.errorCount += errorCount;
+    }
+
+    state.unresolved = [...state.unresolved, ...skipped];
+    state.ambiguous = [];
+  }
+
   function reset() {
     abortController?.abort();
     state.status = "idle";
@@ -172,6 +209,7 @@
     state.processedCount = 0;
     state.errorCount = 0;
     state.unresolved = [];
+    state.ambiguous = [];
     state.parseError = null;
   }
 
@@ -245,6 +283,8 @@
             processedCount={state.processedCount}
             errorCount={state.errorCount}
             unresolved={state.unresolved}
+            ambiguous={state.ambiguous}
+            onimportpicked={importPicked}
             onreset={reset}
           />
         {:else if state.status === "error"}

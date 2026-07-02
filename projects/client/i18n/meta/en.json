@@ -4902,6 +4902,36 @@
         }
       }
     },
+    "import_complete_ambiguous": {
+      "default": "{count} movies matched more than one title. Pick the right ones and import them:",
+      "description": "Text shown at the end of an import introducing the list of movies with multiple possible catalog matches.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "import_ambiguous_skip": {
+      "default": "Don't import",
+      "description": "Dropdown option to exclude an ambiguous movie match from the import."
+    },
+    "button_label_pick_match": {
+      "default": "Import {option}.",
+      "description": "Aria-label for a poster button that picks one of the possible movie matches.",
+      "variables": {
+        "option": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_import_selected": {
+      "default": "Import selected",
+      "description": "Text for the button that imports the manually picked movie matches."
+    },
+    "button_label_import_selected": {
+      "default": "Import the movie matches you picked above.",
+      "description": "Aria-label for the import selected button."
+    },
     "button_text_download_unresolved": {
       "default": "Download skipped items",
       "description": "Text for the button that downloads a CSV of items skipped during import."
