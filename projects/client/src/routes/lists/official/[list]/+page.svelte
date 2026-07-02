@@ -61,9 +61,9 @@
     {/snippet}
   </ResponsiveNavbarStateSetter>
 
-  {#if !$isLoading}
+  {#if !$isLoading && $list}
     <UserListPaginatedList
-      list={$list!}
+      list={$list}
       type={$mode}
       sortBy={$current.sorting.value}
       sortHow={$current.sortHow}
