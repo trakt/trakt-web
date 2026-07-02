@@ -48,6 +48,7 @@
     selectedSource: ImportSource;
     parsedItems: ReadonlyArray<UniversalImportItem>;
     errorCount: number;
+    unresolved: ReadonlyArray<UniversalImportItem>;
     parseError: string | null;
   };
 
@@ -57,6 +58,7 @@
     parsedItems: [],
     processedCount: 0,
     errorCount: 0,
+    unresolved: [],
     parseError: null,
     totalCount: 0,
   });
@@ -106,7 +108,7 @@
     state.status = "syncing";
 
     try {
-      const failed = await syncToTrakt(state.parsedItems, {
+      const { errorCount, unresolved } = await syncToTrakt(state.parsedItems, {
         signal: abortController.signal,
         onProgress: (count) => {
           state.processedCount = count;
@@ -133,9 +135,10 @@
       });
 
       const duration = Date.now() - startTime;
-      const successCount = state.totalCount - failed;
+      const successCount = state.totalCount - errorCount - unresolved.length;
 
-      state.errorCount = failed;
+      state.errorCount = errorCount;
+      state.unresolved = unresolved;
 
       record(AnalyticsEvent.ImportCompleted, {
         source: state.selectedSource,
@@ -144,7 +147,8 @@
         watchlistCount: counts.watchlist,
         ratingsCount: counts.ratings,
         successCount,
-        failedCount: failed,
+        failedCount: errorCount,
+        unresolvedCount: unresolved.length,
         duration,
       });
 
@@ -167,6 +171,7 @@
     state.parsedItems = [];
     state.processedCount = 0;
     state.errorCount = 0;
+    state.unresolved = [];
     state.parseError = null;
   }
 
@@ -239,6 +244,7 @@
           <ImportComplete
             processedCount={state.processedCount}
             errorCount={state.errorCount}
+            unresolved={state.unresolved}
             onreset={reset}
           />
         {:else if state.status === "error"}

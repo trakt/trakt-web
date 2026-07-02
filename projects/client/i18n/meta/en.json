@@ -4893,6 +4893,23 @@
       "default": "Reset and start a new import.",
       "description": "Aria-label for the import more button."
     },
+    "import_complete_unresolved": {
+      "default": "{count} movies couldn't be matched and were skipped:",
+      "description": "Text shown at the end of an import introducing the list of movies that could not be matched to the catalog.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_download_unresolved": {
+      "default": "Download skipped items",
+      "description": "Text for the button that downloads a CSV of items skipped during import."
+    },
+    "button_label_download_unresolved": {
+      "default": "Download a CSV file listing the items that were skipped during the import.",
+      "description": "Aria-label for the download skipped items button."
+    },
     "header_clear_data": {
       "default": "Clear Data",
       "description": "Header for the settings section that allows users to clear their Trakt data."

@@ -6,14 +6,15 @@ import type { SyncEngineCallbacks } from '../sync/models/SyncEngineCallbacks.ts'
 import { buildHistoryPayload } from './engine/buildHistoryPayload.ts';
 import { buildRatingsPayload } from './engine/buildRatingsPayload.ts';
 import { buildWatchlistPayload } from './engine/buildWatchlistPayload.ts';
+import { MOVIE_IDS, pickIds } from './engine/pickIds.ts';
 import { resolveMovieIds } from './engine/resolveMovieIds.ts';
 import { searchMovieCandidates } from './engine/searchMovieCandidates.ts';
-import type { UniversalImportItem } from './ImportTypes.ts';
+import type { ImportSyncResult, UniversalImportItem } from './ImportTypes.ts';
 
 export async function syncToTrakt(
   items: ReadonlyArray<UniversalImportItem>,
   { onProgress, onError, onStart, onComplete, signal }: SyncEngineCallbacks,
-): Promise<number> {
+): Promise<ImportSyncResult> {
   onStart?.();
 
   try {
@@ -22,6 +23,10 @@ export async function syncToTrakt(
       search: searchMovieCandidates,
       signal,
     });
+
+    const unresolved = resolvedItems.filter(
+      (item) => item.type === 'movie' && !pickIds(item.ids, MOVIE_IDS),
+    );
 
     const historyItems = resolvedItems.filter((i) => i.action === 'history');
     const watchlistItems = resolvedItems.filter((i) =>
@@ -61,7 +66,7 @@ export async function syncToTrakt(
     }
 
     onComplete?.(!signal?.aborted);
-    return getErrorCount();
+    return { errorCount: getErrorCount(), unresolved };
   } catch (err) {
     onComplete?.(false);
     throw err;

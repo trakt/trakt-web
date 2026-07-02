@@ -49,6 +49,7 @@ type ImportCompletedType = {
   ratingsCount: number;
   successCount: number;
   failedCount: number;
+  unresolvedCount: number;
   duration: number;
 };
 type ImportFailedType = { source: string; error: string };
