@@ -21,7 +21,7 @@
   import type { ClearSource } from "./clear/models/ClearSource";
   import type { ClearSourceType } from "./clear/models/ClearSourceType";
   import SyncProgress from "./components/SyncProgress.svelte";
-  import SettingsBlock from "./SettingsBlock.svelte";
+  import SettingsSection from "./SettingsSection.svelte";
   import SettingsRow from "./SettingsRow.svelte";
 
   const { watchlist, ratings, history, collection } = useUser();
@@ -155,7 +155,7 @@
   confirmationParams={{ type: ConfirmationType.CancelClear }}
   onreset={stopClear}
 >
-  <SettingsBlock
+  <SettingsSection
     title={m.header_clear_data()}
     description={m.description_clear_data()}
   >
@@ -226,7 +226,7 @@
         </div>
       {/if}
     </div>
-  </SettingsBlock>
+  </SettingsSection>
 </NavigationGuard>
 
 <style>

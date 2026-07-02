@@ -23,17 +23,9 @@
 </RenderForFeature>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-streaming-services-settings {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xl);
-
-    max-width: var(--ni-640);
-
-    @include for-tablet-sm-and-below() {
-      max-width: 100%;
-    }
   }
 </style>

@@ -5,8 +5,8 @@
   import { syncPausedItemsQuery } from "$lib/requests/queries/streaming-sync/syncPausedItemsQuery.ts";
   import { syncSkippedItemsQuery } from "$lib/requests/queries/streaming-sync/syncSkippedItemsQuery.ts";
   import { firstValueFrom, map } from "rxjs";
-  import SettingsBlock from "../SettingsBlock.svelte";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
+  import SettingsSection from "../SettingsSection.svelte";
   import SyncItemRow from "./SyncItemRow.svelte";
   import SyncLoadError from "./SyncLoadError.svelte";
   import { toServiceInfo } from "./toServiceInfo.ts";
@@ -77,7 +77,7 @@
   );
 </script>
 
-<SettingsBlock {title} {description} indented>
+<SettingsSection {title} {description}>
   {#if $isError}
     <SyncLoadError onRetry={retry} />
   {:else if !$isLoading && $items.length === 0}
@@ -108,4 +108,4 @@
       </Button>
     {/if}
   {/if}
-</SettingsBlock>
+</SettingsSection>

@@ -7,16 +7,13 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import SettingsGroupCard from "./SettingsGroupCard.svelte";
   import SettingsGroupRow from "./SettingsGroupRow.svelte";
-  import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
   import { useSettings } from "./useSettings.ts";
 
   const { watchAgain, spoilers, ratingPrompt, isSavingSettings } =
     useSettings();
 </script>
 
-<SettingsSectionLabel title={m.header_behavior()} />
-
-<SettingsGroupCard>
+<SettingsGroupCard title={m.header_behavior()}>
   <SettingsGroupRow
     title={m.text_show_spoilers()}
     description={m.description_behavior()}

@@ -8977,6 +8977,14 @@
       "default": "Apps",
       "description": "Text for the link to the apps settings page, where users manage connected apps and their API applications."
     },
+    "heading_apps_settings": {
+      "default": "Apps",
+      "description": "Heading for the apps settings page where users manage connected apps and their API applications."
+    },
+    "description_apps_settings": {
+      "default": "Manage your connected apps and API applications.",
+      "description": "Description shown under the Apps settings heading explaining what can be managed on the page."
+    },
     "heading_connected_apps": {
       "default": "Connected Apps",
       "description": "Heading for the section listing third-party apps the user has authorized to access their Trakt account."

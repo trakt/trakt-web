@@ -20,7 +20,6 @@
   import SettingInputDrawer from "./SettingInputDrawer.svelte";
   import SettingsGroupCard from "./SettingsGroupCard.svelte";
   import SettingsGroupRow from "./SettingsGroupRow.svelte";
-  import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
   import { useSettings } from "./useSettings";
 
   const { user } = useUser();
@@ -124,39 +123,39 @@
   );
 </script>
 
-<div class="trakt-settings-profile-card">
-  <ProfileImage
-    isEditable
-    --image-size="var(--ni-56)"
-    --border-width="var(--border-thickness-xs)"
-    name={$user.name.first}
-    src={$user.avatar.url}
-    isVip={$user.isVip}
-  />
+<SettingsGroupCard>
+  <div class="trakt-settings-profile-card">
+    <ProfileImage
+      isEditable
+      --image-size="var(--ni-56)"
+      --border-width="var(--border-thickness-xs)"
+      name={$user.name.first}
+      src={$user.avatar.url}
+      isVip={$user.isVip}
+    />
 
-  <div class="trakt-settings-profile-info">
-    <span class="bold ellipsis title">
-      {$profile.displayName || $profile.username}
-    </span>
-    {#if $profile.location}
-      <p class="secondary small">{$profile.location}</p>
+    <div class="trakt-settings-profile-info">
+      <span class="bold ellipsis title">
+        {$profile.displayName || $profile.username}
+      </span>
+      {#if $profile.location}
+        <p class="secondary small">{$profile.location}</p>
+      {/if}
+    </div>
+
+    {#if $user.isVip}
+      <Link
+        href={UrlBuilder.vip()}
+        color="inherit"
+        label={m.button_label_manage_subscription()}
+      >
+        <VipBadge isDirector={$user.isDirector} />
+      </Link>
     {/if}
   </div>
+</SettingsGroupCard>
 
-  {#if $user.isVip}
-    <Link
-      href={UrlBuilder.vip()}
-      color="inherit"
-      label={m.button_label_manage_subscription()}
-    >
-      <VipBadge isDirector={$user.isDirector} />
-    </Link>
-  {/if}
-</div>
-
-<SettingsSectionLabel title={m.header_account_details()} />
-
-<SettingsGroupCard>
+<SettingsGroupCard title={m.header_account_details()}>
   <SettingsGroupRow
     title={m.text_display_name()}
     label={m.button_label_change_display_name()}
@@ -226,9 +225,7 @@
   </SettingsGroupRow>
 </SettingsGroupCard>
 
-<SettingsSectionLabel title={m.header_settings_privacy()} />
-
-<SettingsGroupCard>
+<SettingsGroupCard title={m.header_settings_privacy()}>
   <SettingsGroupRow title={m.text_private_account()} variant="custom">
     {#snippet icon()}<LockIcon />{/snippet}
     <Switch
@@ -258,23 +255,12 @@
 {/if}
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-settings-profile-card {
     display: flex;
     align-items: center;
     gap: var(--gap-m);
+
     padding: var(--gap-m);
-    border-radius: var(--border-radius-l);
-    background: var(--color-card-background);
-    max-width: var(--ni-640);
-    box-sizing: border-box;
-
-    box-shadow: var(--shadow-base);
-
-    @include for-tablet-sm-and-below() {
-      max-width: 100%;
-    }
 
     :global(.trakt-link) {
       display: inline-flex;

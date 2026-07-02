@@ -36,7 +36,7 @@
   import ImportError from "./import/ImportError.svelte";
   import ImportGuide from "./import/ImportGuide.svelte";
   import ImportSummary from "./import/ImportSummary.svelte";
-  import SettingsBlock from "./SettingsBlock.svelte";
+  import SettingsSection from "./SettingsSection.svelte";
 
   function toImportSource(value: string | null): ImportSource {
     if (value && value in IMPORT_SOURCE_CONFIGS) return value as ImportSource;
@@ -363,7 +363,10 @@
   </NavigationGuard>
 {/snippet}
 
-<SettingsBlock title={m.header_import()} description={m.description_import()}>
+<SettingsSection
+  title={m.header_import()}
+  description={m.description_import()}
+>
   <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
     <TabView
       value={state.selectedSource}
@@ -401,7 +404,7 @@
     </div>
     {@render importRow()}
   </RenderFor>
-</SettingsBlock>
+</SettingsSection>
 
 <style>
   .import-body {

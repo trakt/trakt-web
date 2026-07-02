@@ -5,7 +5,6 @@
   import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre";
   import type { Genre } from "@trakt/api";
   import SettingsGroupCard from "./SettingsGroupCard.svelte";
-  import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
   import { useSettings } from "./useSettings";
 
   const genreLimit = 5;
@@ -34,9 +33,7 @@
   };
 </script>
 
-<SettingsSectionLabel title={m.header_favorite_genres()} />
-
-<SettingsGroupCard>
+<SettingsGroupCard title={m.header_favorite_genres()}>
   <div class="genre-picker-row">
     <p class="small secondary">
       {m.description_genres({ limit: genreLimit })}

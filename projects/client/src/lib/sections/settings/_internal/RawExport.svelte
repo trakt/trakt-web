@@ -7,8 +7,8 @@
   import { time } from "$lib/utils/timing/time.ts";
   import { slide } from "svelte/transition";
   import { runRawExport } from "../export/runRawExport.ts";
-  import SettingsBlock from "./SettingsBlock.svelte";
   import SettingsRow from "./SettingsRow.svelte";
+  import SettingsSection from "./SettingsSection.svelte";
 
   const { user } = useUser();
   const { record } = useAnalytics();
@@ -87,7 +87,10 @@
   </p>
 {/snippet}
 
-<SettingsBlock title={m.header_export()} description={m.description_export()}>
+<SettingsSection
+  title={m.header_export()}
+  description={m.description_export()}
+>
   <SettingsRow title={m.text_raw_export()}>
     <div class="trakt-raw-export">
       <Button
@@ -109,7 +112,7 @@
       </div>
     </div>
   </SettingsRow>
-</SettingsBlock>
+</SettingsSection>
 
 <style>
   .trakt-raw-export {

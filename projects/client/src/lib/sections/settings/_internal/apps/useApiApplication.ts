@@ -1,15 +1,12 @@
-import { useQuery } from '$lib/features/query/useQuery.ts';
-import { apiApplicationsQuery } from '$lib/requests/queries/apps/apiApplicationsQuery.ts';
 import { combineLatest, map, type Observable } from 'rxjs';
+import { useApiApplications } from './useApiApplications.ts';
 
 export function useApiApplication(appId$: Observable<number>) {
-  const apiApplications = useQuery(apiApplicationsQuery()).pipe(
-    map((query) => query.data ?? []),
+  const { apps, isLoading } = useApiApplications();
+
+  const app = combineLatest([apps, appId$]).pipe(
+    map(([entries, appId]) => entries.find((entry) => entry.id === appId)),
   );
 
-  const app = combineLatest([apiApplications, appId$]).pipe(
-    map(([apps, appId]) => apps.find((entry) => entry.id === appId)),
-  );
-
-  return { app };
+  return { app, isLoading };
 }

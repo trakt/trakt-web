@@ -8,7 +8,6 @@
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName.ts";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
-  import SettingsSectionLabel from "../SettingsSectionLabel.svelte";
   import FavoriteServicesDrawerHost from "./FavoriteServicesDrawerHost.svelte";
   import ServiceLogoBox from "./ServiceLogoBox.svelte";
   import { useStreamingServices } from "./useStreamingServices.ts";
@@ -36,12 +35,10 @@
   let isDrawerOpen = $state(false);
 </script>
 
-<SettingsSectionLabel
+<SettingsGroupCard
   title={m.header_streaming_services()}
   description={m.description_streaming_services()}
-/>
-
-<SettingsGroupCard>
+>
   <SettingsGroupRow title={m.label_streaming_country()} variant="custom">
     {#snippet icon()}<GlobeIcon />{/snippet}
     <NativeSelect

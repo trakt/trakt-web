@@ -19,6 +19,8 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-settings {
+    --settings-content-max-width: var(--ni-640);
+
     display: grid;
     grid-template-columns: var(--ni-240) 1fr;
     gap: var(--gap-xxl);
@@ -44,5 +46,10 @@
       grid-template-rows: auto 1fr;
       gap: var(--gap-l);
     }
+  }
+
+  .trakt-settings-content {
+    min-width: 0;
+    max-width: var(--settings-content-max-width);
   }
 </style>
