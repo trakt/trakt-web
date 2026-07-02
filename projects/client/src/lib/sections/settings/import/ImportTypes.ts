@@ -5,6 +5,8 @@ export type ImportSource =
   | 'trakt-json'
   | 'trakt-csv';
 
+export const DEFAULT_IMPORT_SOURCE: ImportSource = 'tvtime';
+
 export type ImportAction = 'history' | 'watchlist' | 'ratings';
 
 export type ImportType = 'movie' | 'show' | 'episode';

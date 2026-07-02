@@ -16,6 +16,7 @@
   import { slide } from "svelte/transition";
   import {
     type AmbiguousImportItem,
+    DEFAULT_IMPORT_SOURCE,
     IMPORT_SOURCE_CONFIGS,
     type ImportCounts,
     type ImportSource,
@@ -36,7 +37,7 @@
 
   function toImportSource(value: string | null): ImportSource {
     if (value && value in IMPORT_SOURCE_CONFIGS) return value as ImportSource;
-    return "tvtime";
+    return DEFAULT_IMPORT_SOURCE;
   }
 
   const { importInProgress } = useImportInProgress();
@@ -57,7 +58,7 @@
   };
 
   const state = $state<ImportUIState>({
-    selectedSource: "tvtime",
+    selectedSource: DEFAULT_IMPORT_SOURCE,
     status: "idle",
     parsedItems: [],
     processedCount: 0,
