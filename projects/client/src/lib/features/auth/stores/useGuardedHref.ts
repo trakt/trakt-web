@@ -9,6 +9,7 @@ const whitelistedUrls = [
   UrlBuilder.app.android(),
   UrlBuilder.github.web(),
   UrlBuilder.socialMedia.reddit(),
+  UrlBuilder.status(),
 ] as const;
 
 const isWhitelistedUrl = (url: string) =>

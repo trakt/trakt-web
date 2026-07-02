@@ -289,10 +289,10 @@ export const UrlBuilder = {
   privacy: () => '/privacy',
   about: () => '/about',
   branding: () => '/branding',
+  status: () => 'https://status.trakt.tv',
   renewVip: () => 'vip/renew',
   og: {
     vip: () => 'https://trakt.tv/vip',
-    status: () => 'https://status.trakt.tv',
     about: () => 'https://trakt.tv/about',
     branding: () => 'https://trakt.tv/branding',
     privacy: () => 'https://trakt.tv/privacy',

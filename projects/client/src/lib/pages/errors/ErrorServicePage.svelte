@@ -15,7 +15,7 @@
     <p>{m.error_text_service_unavailable()}</p>
   {/if}
 
-  <Link href={UrlBuilder.og.status()} color="classic">
+  <Link href={UrlBuilder.status()} color="classic">
     {m.link_text_service_status()}
   </Link>
 
