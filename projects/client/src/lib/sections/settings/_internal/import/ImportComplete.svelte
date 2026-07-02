@@ -287,6 +287,10 @@
 
   .import-complete-section :global(.trakt-shadow-wrapper) {
     max-height: var(--ni-480);
+    padding: var(--ni-16);
+
+    background-color: var(--color-card-background);
+    border-radius: var(--border-radius-m);
   }
 
   .import-complete-ambiguous li {
