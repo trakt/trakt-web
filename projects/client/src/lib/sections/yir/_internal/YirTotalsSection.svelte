@@ -7,8 +7,9 @@
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
+  import type { YirYear } from "$lib/requests/models/YirYear";
   import { formatNumber } from "$lib/utils/format/formatNumber";
-  import { yirUnit } from "../../_internal/yirUnit.ts";
+  import { yirUnit } from "./yirUnit.ts";
   import YirPageInner from "./YirPageInner.svelte";
   import YirSectionHeader from "./YirSectionHeader.svelte";
 
@@ -21,16 +22,22 @@
     year,
   }: {
     stats: AllStats;
-    year: number;
+    year: YirYear;
   } = $props();
 
   const hoursWatched = $derived(Math.round(stats.minutes.total / 60));
+
+  const heading = $derived(
+    year === "all"
+      ? m.yir_section_title_all_time_totals()
+      : m.yir_section_title_totals({ year }),
+  );
 </script>
 
 <section class="trakt-yir-totals-section" id="section-totals">
   <YirPageInner>
     <YirSectionHeader>
-      {m.yir_section_title_totals({ year })}
+      {heading}
     </YirSectionHeader>
 
     <div class="yir-stats-row">

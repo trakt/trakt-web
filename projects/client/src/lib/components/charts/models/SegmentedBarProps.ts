@@ -7,6 +7,12 @@ export type SegmentedBarItem = {
   sublabel?: string;
   /** Palette slot override; defaults to the item's position. */
   seriesIndex?: number;
+  /**
+   * Explicit fill colour (any CSS colour value). Overrides the categorical
+   * palette slot — use for ordinal scales where a gradient encodes magnitude
+   * (e.g. a ratings distribution fading full-hue → gray).
+   */
+  color?: string;
 };
 
 export type SegmentedBarProps = {

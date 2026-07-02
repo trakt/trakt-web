@@ -238,6 +238,7 @@ export const UrlBuilder = {
         buildParamString({ ...sanitizeParams(params) })
       }`,
     yearToDate: (year: number) => `/users/${id}/year/${year}`,
+    allTime: () => `/users/${id}/year/all`,
     monthInReview: (year: number, month: number) =>
       `/users/${id}/mir/${year}/${month}`,
   }),

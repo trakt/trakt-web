@@ -3,9 +3,9 @@
   import { getLocale } from "$lib/features/i18n";
   import { m } from "$lib/paraglide/messages";
   import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek";
-  import { yirUnit } from "../../_internal/yirUnit.ts";
+  import { yirUnit } from "./yirUnit.ts";
   import { setDay } from "date-fns/setDay";
-  import YirTooltip from "../../_internal/YirTooltip.svelte";
+  import YirTooltip from "./YirTooltip.svelte";
 
   const { data }: { data: number[] } = $props();
 

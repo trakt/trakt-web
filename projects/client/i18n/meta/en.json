@@ -2633,6 +2633,10 @@
         }
       }
     },
+    "page_title_all_time_stats": {
+      "default": "All-Time Stats",
+      "description": "Title for the all-time stats (all-time year in review) page."
+    },
     "page_title_month_in_review": {
       "default": "Month in review",
       "description": "Title for the month in review page."
@@ -5052,6 +5056,145 @@
           "type": "number"
         }
       }
+    },
+    "yir_label_all_time": {
+      "default": "All Time",
+      "description": "Label for the all-time view, shown as the hero title and in the navigation header."
+    },
+    "yir_subtitle_all_time": {
+      "default": "Stats",
+      "description": "Subtitle shown beneath the 'All Time' hero title."
+    },
+    "yir_subtitle_all_time_range": {
+      "default": "{start} → {end} Stats",
+      "description": "All-time hero subtitle showing the user's watch-year span.",
+      "variables": {
+        "start": {
+          "type": "number"
+        },
+        "end": {
+          "type": "number"
+        }
+      }
+    },
+    "yir_section_title_all_time_totals": {
+      "default": "All-Time Totals",
+      "description": "Section title for the all-time totals overview."
+    },
+    "yir_section_title_show_release_years": {
+      "default": "TV Show Release Years",
+      "description": "Section title for the TV show release-years chart."
+    },
+    "yir_section_title_movie_release_years": {
+      "default": "Movie Release Years",
+      "description": "Section title for the movie release-years chart."
+    },
+    "yir_section_title_show_countries": {
+      "default": "TV Show Countries",
+      "description": "Section title for the TV show countries map."
+    },
+    "yir_section_title_movie_countries": {
+      "default": "Movie Countries",
+      "description": "Section title for the movie countries map."
+    },
+    "yir_section_title_list_progress": {
+      "default": "List Progress",
+      "description": "Section title for the curated-list completion progress."
+    },
+    "yir_top_your_title_shows": {
+      "default": "Your Top Shows",
+      "description": "Hero title over the user's most-watched show posters (all-time)."
+    },
+    "yir_top_your_title_movies": {
+      "default": "Your Top Movies",
+      "description": "Hero title over the user's most-watched movie posters (all-time)."
+    },
+    "yir_top_card_title_shows": {
+      "default": "Top Shows",
+      "description": "Title of the Trakt-community top-shows card (all-time)."
+    },
+    "yir_top_card_title_movies": {
+      "default": "Top Movies",
+      "description": "Title of the Trakt-community top-movies card (all-time)."
+    },
+    "yir_top_card_description": {
+      "default": "The most-watched {type} by the <b>Trakt community</b> of all time. The ones you've watched are highlighted.",
+      "description": "Description in the Trakt top-titles card; {type} is 'shows' or 'movies'.",
+      "variables": {
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_top_card_description_shows": {
+      "default": "The top shows watched by the <b>Trakt community</b> for all time. Shows that you watched in <b>{start} → {end}</b> are highlighted.",
+      "description": "Top-shows card description including the user's watch-year range.",
+      "variables": {
+        "start": {
+          "type": "number"
+        },
+        "end": {
+          "type": "number"
+        }
+      }
+    },
+    "yir_top_card_description_movies": {
+      "default": "The top movies watched by the <b>Trakt community</b> for all time. Movies that you watched in <b>{start} → {end}</b> are highlighted.",
+      "description": "Top-movies card description including the user's watch-year range.",
+      "variables": {
+        "start": {
+          "type": "number"
+        },
+        "end": {
+          "type": "number"
+        }
+      }
+    },
+    "yir_section_title_all_ratings": {
+      "default": "All Ratings",
+      "description": "Section title for the all-time ratings breakdown bar."
+    },
+    "yir_global_top_plays": {
+      "default": "{count} plays",
+      "description": "Global all-time play count label on a most-watched card.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_label_plays_by_year": {
+      "default": "{type} plays by year",
+      "description": "Label for the plays-by-year chart.",
+      "variables": {
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_label_watched_of": {
+      "default": "Watched {watched} of {total}",
+      "description": "Ratio label under a list-progress ring, e.g. 'Watched 120 of 250'.",
+      "variables": {
+        "watched": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_calendar_first_play_all_time": {
+      "default": "first play",
+      "description": "All-time calendar header for the user's first ever play."
+    },
+    "yir_calendar_last_play_all_time": {
+      "default": "your most recent play",
+      "description": "All-time calendar header for the user's most recent play."
+    },
+    "yir_share_text_all_time": {
+      "default": "Check out my all-time stats on Trakt",
+      "description": "Share text for the all-time stats page."
     },
     "yir_section_title_tv_shows": {
       "default": "TV Shows",

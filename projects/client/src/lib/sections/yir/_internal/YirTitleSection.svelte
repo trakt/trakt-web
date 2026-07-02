@@ -3,6 +3,7 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { useQuery } from "$lib/features/query/useQuery";
   import { m } from "$lib/paraglide/messages";
+  import type { YirYear } from "$lib/requests/models/YirYear";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
   import { DEFAULT_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -12,19 +13,28 @@
     slug,
     year,
     coverImage,
+    subtitleOverride,
   }: {
     slug: string;
-    year: number;
+    year: YirYear;
     coverImage: string | Nil;
+    /** Replaces the computed subtitle (e.g. the all-time year range). */
+    subtitleOverride?: string;
   } = $props();
 
   const profileQuery = $derived(useQuery(userProfileQuery({ slug })));
   const profile = $derived(profileQuery.pipe(map(($q) => $q.data)));
 
   const now = new Date();
+  const isAllTime = $derived(year === "all");
   const isCurrentYear = $derived(year === now.getFullYear());
   const subtitle = $derived(
-    isCurrentYear ? m.yir_title_year_to_date() : m.yir_title_year_in_review(),
+    subtitleOverride ??
+      (isAllTime
+        ? m.yir_subtitle_all_time()
+        : isCurrentYear
+          ? m.yir_title_year_to_date()
+          : m.yir_title_year_in_review()),
   );
 
   const coverSrc = $derived(
@@ -32,7 +42,7 @@
   );
 </script>
 
-<section class="trakt-yir-title-section">
+<section class="trakt-yir-title-section" class:is-all-time={isAllTime}>
   <div class="yir-cover-bg">
     <CrossOriginImage src={coverSrc} alt="" />
   </div>
@@ -59,7 +69,9 @@
         <div class="yir-under-user"></div>
       {/if}
 
-      <h1 class="yir-year">{year}</h1>
+      <h1 class="yir-year" class:is-text={isAllTime}>
+        {isAllTime ? m.yir_label_all_time() : year}
+      </h1>
       <h2 class="yir-subtitle">{subtitle}</h2>
     </div>
   </div>
@@ -194,6 +206,16 @@
     @include for-mobile {
       font-size: var(--ni-104);
     }
+
+    // The all-time view shows a word ("All Time") instead of a 4-digit year,
+    // so it needs a smaller size to avoid wrapping/overflow.
+    &.is-text {
+      font-size: var(--ni-104);
+
+      @include for-mobile {
+        font-size: var(--ni-60);
+      }
+    }
   }
 
   .yir-subtitle {
@@ -209,5 +231,72 @@
     font-size: var(--ni-18);
     font-weight: normal;
     line-height: 1;
+  }
+
+  // All-time hero matches the v2 cover: the title sits directly on the fanart
+  // (no dark box / divider / pill), with a heavier weight and plain-white
+  // subtitle. Text-shadow keeps everything legible without a scrim.
+  .is-all-time {
+    // Large soft radial scrim centered behind the title — darkens the middle
+    // for legibility while the fanart stays vivid toward the edges.
+    .yir-cover-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        ellipse at center,
+        color-mix(in srgb, var(--shade-1000) 62%, transparent) 0%,
+        color-mix(in srgb, var(--shade-1000) 28%, transparent) 45%,
+        transparent 72%
+      );
+    }
+
+    // No dark box / divider — the title sits directly on the fanart.
+    .yir-titles {
+      background: none;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    .yir-under-user {
+      display: none;
+    }
+
+    .yir-user {
+      margin-bottom: var(--ni-12);
+    }
+
+    .yir-display-name {
+      font-size: var(--ni-24);
+
+      @include for-mobile {
+        font-size: var(--ni-20);
+      }
+    }
+
+    .yir-display-name :global(.trakt-link),
+    .yir-year,
+    .yir-subtitle {
+      text-shadow: 0 var(--ni-2) var(--ni-16)
+        color-mix(in srgb, var(--shade-1000) 30%, transparent);
+    }
+
+    .yir-year {
+      font-size: clamp(var(--ni-52), 10vw, var(--ni-128));
+      letter-spacing: -1px;
+    }
+
+    .yir-subtitle {
+      background: none;
+      color: var(--shade-10);
+      padding: 0;
+      margin-top: var(--ni-12);
+      font-size: var(--ni-28);
+      letter-spacing: 2px;
+
+      @include for-mobile {
+        font-size: var(--ni-18);
+      }
+    }
   }
 </style>

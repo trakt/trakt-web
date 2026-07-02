@@ -7,6 +7,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ExternalLinkIcon from "../../../components/icons/ExternalLinkIcon.svelte";
+  import AllTimeLink from "./AllTimeLink.svelte";
 
   const {
     slug,
@@ -48,6 +49,10 @@
       </div>
     </div>
   </Link>
+
+  <div class="all-time-link">
+    <AllTimeLink {slug} source="profile" />
+  </div>
 </div>
 
 <style lang="scss">
@@ -102,5 +107,10 @@
     span.uppercase {
       font-size: var(--ni-24);
     }
+  }
+
+  .all-time-link {
+    // Push the secondary link to the bottom of the tall card.
+    margin-top: auto;
   }
 </style>
