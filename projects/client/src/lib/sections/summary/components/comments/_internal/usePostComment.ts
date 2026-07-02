@@ -1,7 +1,7 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
+import type { CommentableMediaType } from '$lib/requests/models/CommentableMediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { editCommentRequest } from '$lib/requests/queries/comments/editCommentRequest.ts';
 import { postCommentRequest } from '$lib/requests/queries/comments/postCommentRequest.ts';
@@ -18,7 +18,7 @@ import { mapToCommentError } from './mapToCommentError.ts';
 type ReplyProps = {
   id: number;
   commentType: 'reply';
-  type: ExtendedMediaType;
+  type: CommentableMediaType;
 };
 
 type PostProps = {
@@ -28,7 +28,7 @@ type PostProps = {
 type EditProps = {
   id: number;
   commentType: 'edit';
-  type: ExtendedMediaType;
+  type: CommentableMediaType;
 };
 
 export type UseAddCommentProps = ReplyProps | PostProps | EditProps;
@@ -38,7 +38,7 @@ type PostCommentProps = {
   isSpoiler: boolean;
 } & UseAddCommentProps;
 
-function toPostCommentPayload(type: ExtendedMediaType, id: number) {
+function toPostCommentPayload(type: CommentableMediaType, id: number) {
   const ids = { ids: { trakt: id } };
 
   switch (type) {
@@ -46,6 +46,8 @@ function toPostCommentPayload(type: ExtendedMediaType, id: number) {
       return { movie: ids };
     case 'show':
       return { show: ids };
+    case 'season':
+      return { season: ids };
     case 'episode':
       return { episode: ids };
   }
@@ -71,7 +73,9 @@ function addCommentRequest(props: PostCommentProps) {
     });
   }
 
-  const traktId = props.type === 'episode' ? props.id : props.media.id;
+  const traktId = props.type === 'episode' || props.type === 'season'
+    ? props.id
+    : props.media.id;
   // FIXME: remove cast after updating @trakt/api
   const body = {
     ...commonProps,

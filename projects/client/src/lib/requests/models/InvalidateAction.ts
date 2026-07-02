@@ -1,3 +1,4 @@
+import type { CommentableMediaType } from './CommentableMediaType.ts';
 import type { ExtendedMediaType } from './ExtendedMediaType.ts';
 import type { MediaType } from './MediaType.ts';
 
@@ -23,7 +24,7 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:check_in`
   | `${typeof INVALIDATION_ID}:list:${ListType}`
   | `${typeof INVALIDATION_ID}:smart_list:${ListType}`
-  | `${typeof INVALIDATION_ID}:commented:${ExtendedMediaType}`
+  | `${typeof INVALIDATION_ID}:commented:${CommentableMediaType}`
   | `${typeof INVALIDATION_ID}:notes:${MediaType}`
   | `${typeof INVALIDATION_ID}:notes_edit:${MediaType}`
   | `${typeof INVALIDATION_ID}:notes_delete:${MediaType}`
@@ -43,12 +44,12 @@ type TypeDataMap = {
   'dropped': MediaType;
   'restored': 'show';
   'react': 'comment';
-  'comment_reply': ExtendedMediaType;
+  'comment_reply': CommentableMediaType;
   'listed': MediaType;
   'user': UserType;
   'check_in': null;
   'favorited': MediaType;
-  'commented': ExtendedMediaType;
+  'commented': CommentableMediaType;
   'list': ListType;
   'smart_list': ListType;
   'notes': MediaType;
@@ -99,8 +100,9 @@ export const InvalidateAction = {
   React: buildInvalidationKey('react', 'comment'),
 
   Comment: {
-    Post: (type: ExtendedMediaType) => buildInvalidationKey('commented', type),
-    Reply: (type: ExtendedMediaType) =>
+    Post: (type: CommentableMediaType) =>
+      buildInvalidationKey('commented', type),
+    Reply: (type: CommentableMediaType) =>
       buildInvalidationKey('comment_reply', type),
   },
 

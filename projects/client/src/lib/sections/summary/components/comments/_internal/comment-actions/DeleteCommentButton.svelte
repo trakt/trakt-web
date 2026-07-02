@@ -4,12 +4,14 @@
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
+  import type { CommentableMediaType } from "$lib/requests/models/CommentableMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import { useDeleteComment } from "./useDeleteComment";
 
-  const { comment, type }: { comment: MediaComment; type: ExtendedMediaType } =
-    $props();
+  const {
+    comment,
+    type,
+  }: { comment: MediaComment; type: CommentableMediaType } = $props();
 
   const { confirm } = useConfirm();
   const { isDeleting, deleteComment } = $derived(

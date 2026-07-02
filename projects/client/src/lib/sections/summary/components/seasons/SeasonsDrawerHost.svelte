@@ -9,7 +9,6 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaCrew } from "$lib/requests/models/MediaCrew.ts";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
@@ -24,6 +23,7 @@
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import { fade } from "svelte/transition";
   import SeasonInfoSection from "./_internal/SeasonInfoSection.svelte";
+  import { useSeasonPeople } from "./_internal/useSeasonPeople";
 
   type SeasonTab = "episodes" | "info" | "reviews";
 
@@ -50,12 +50,10 @@
     show,
     seasons,
     currentSeason,
-    crew,
   }: {
     show: ShowEntry;
     seasons: Season[];
     currentSeason: number;
-    crew: MediaCrew;
     onClose: () => void;
   } = $props();
 
@@ -64,6 +62,10 @@
 
   const { list: episodes, isLoading } = $derived(
     useSeasonEpisodes(show.slug, currentSeason),
+  );
+
+  const { crew, isLoading: isCrewLoading } = $derived(
+    useSeasonPeople(show.slug, currentSeason),
   );
 
   const { history } = useUser();
@@ -208,16 +210,27 @@
         </div>
       {:else if activeTab === "info" && currentSeasonData}
         <div class="tab-content" transition:fade={{ duration: 150 }}>
-          <SeasonInfoSection
-            season={currentSeasonData}
-            {crew}
-            type="show"
-            showTitle={show.title}
-          />
+          {#if $isCrewLoading}
+            <LoadingIndicator />
+          {:else}
+            <SeasonInfoSection
+              season={currentSeasonData}
+              crew={$crew}
+              type="show"
+              showTitle={show.title}
+            />
+          {/if}
         </div>
-      {:else if activeTab === "reviews"}
+      {:else if activeTab === "reviews" && currentSeasonId != null}
         <div class="tab-content" transition:fade={{ duration: 150 }}>
-          <InlineComments media={show} type="show" />
+          {#key currentSeason}
+            <InlineComments
+              media={show}
+              type="season"
+              season={currentSeason}
+              id={currentSeasonId}
+            />
+          {/key}
         </div>
       {/if}
     </div>

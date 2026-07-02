@@ -9,17 +9,14 @@
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay.ts";
   import CommentActions from "../CommentActions.svelte";
-  import type {
-    EpisodeCommentProps,
-    MediaCommentProps,
-  } from "../CommentsProps.ts";
+  import type { CommentTypeProps } from "../CommentsProps.ts";
   import AddReviewDrawerHost from "../drawers/AddReviewDrawerHost.svelte";
   import CommenterRating from "./CommenterRating.svelte";
 
   type CommentHeaderProps = {
     comment: MediaComment;
     media: MediaEntry;
-  } & (MediaCommentProps | EpisodeCommentProps);
+  } & CommentTypeProps;
 
   const { comment, media, ...typeProps }: CommentHeaderProps = $props();
 

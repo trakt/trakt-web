@@ -2,18 +2,16 @@ import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
 import { episodeCommentsQuery } from '$lib/requests/queries/episode/episodeCommentsQuery.ts';
 import { movieCommentsQuery } from '$lib/requests/queries/movies/movieCommentsQuery.ts';
 import { showCommentsQuery } from '$lib/requests/queries/shows/showCommentsQuery.ts';
+import { showSeasonCommentsQuery } from '$lib/requests/queries/shows/showSeasonCommentsQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
-import type {
-  EpisodeCommentProps,
-  MediaCommentProps,
-} from '$lib/sections/summary/components/comments/CommentsProps.ts';
+import type { CommentTypeProps } from '$lib/sections/summary/components/comments/CommentsProps.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 
 type UseCommentsProps = {
   slug: string;
   limit?: number;
   sort: CommentSortType;
-} & (MediaCommentProps | EpisodeCommentProps);
+} & CommentTypeProps;
 
 function typeToCommentsQuery(props: UseCommentsProps) {
   const commonProps = {
@@ -27,6 +25,11 @@ function typeToCommentsQuery(props: UseCommentsProps) {
       return movieCommentsQuery(commonProps);
     case 'show':
       return showCommentsQuery(commonProps);
+    case 'season':
+      return showSeasonCommentsQuery({
+        ...commonProps,
+        season: props.season,
+      });
     case 'episode':
       return episodeCommentsQuery({
         ...commonProps,
