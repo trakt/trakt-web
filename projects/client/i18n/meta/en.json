@@ -6743,6 +6743,74 @@
       "default": "Follow friends, see what the team is watching, and discover shared favourites. Watching together is better.",
       "description": "Description for the social/community feature card on the About page."
     },
+    "page_title_welcome": {
+      "default": "Welcome",
+      "description": "Page title for the Welcome page shown to new users."
+    },
+    "welcome_greeting": {
+      "default": "Welcome to Trakt, {name}",
+      "description": "Main heading on the Welcome page, greeting the signed-in user by name."
+    },
+    "welcome_greeting_generic": {
+      "default": "Welcome to Trakt",
+      "description": "Fallback main heading on the Welcome page when the user's name is not yet available."
+    },
+    "welcome_intro": {
+      "default": "Your shows and movies, all in one place. Track what you watch, discover what's next, and pick up right where you left off; across every device you own.",
+      "description": "Intro paragraph on the Welcome page describing what Trakt offers new users."
+    },
+    "welcome_get_started": {
+      "default": "Start exploring",
+      "description": "Primary call-to-action on the Welcome page that takes the user to the home page."
+    },
+    "welcome_import_heading": {
+      "default": "Already tracking elsewhere?",
+      "description": "Heading for the data import section on the Welcome page."
+    },
+    "welcome_import_description": {
+      "default": "Bring your watch history, watchlist, and ratings with you. Importing takes just a couple of minutes.",
+      "description": "Description for the data import section on the Welcome page."
+    },
+    "welcome_import_imdb_description": {
+      "default": "Import your ratings and watchlist from an IMDb export.",
+      "description": "Description for the IMDb importer card on the Welcome page."
+    },
+    "welcome_import_letterboxd_description": {
+      "default": "Bring your films, ratings, and watchlist over from Letterboxd.",
+      "description": "Description for the Letterboxd importer card on the Welcome page."
+    },
+    "welcome_import_action": {
+      "default": "Import from {service}",
+      "description": "Call-to-action label on an importer card, where {service} is the source service name."
+    },
+    "welcome_import_browse_all": {
+      "default": "See all import options",
+      "description": "Link on the Welcome page to the full data import settings page."
+    },
+    "welcome_tvtime_badge": {
+      "default": "TV Time is shutting down",
+      "description": "Badge on the prominent TV Time notice highlighting that TV Time is closing."
+    },
+    "welcome_tvtime_heading": {
+      "default": "Coming from TV Time? You're home.",
+      "description": "Heading for the prominent TV Time welcome notice."
+    },
+    "welcome_tvtime_body": {
+      "default": "TV Time is closing its doors, but your watch history doesn't have to disappear with it. Bring everything over to Trakt and keep tracking without missing a beat.",
+      "description": "Body copy for the prominent TV Time welcome notice."
+    },
+    "welcome_tvtime_liberator_body": {
+      "default": "First, export your full history with the TV Time Liberator browser extension, then import the file here.",
+      "description": "Explanation of how to use the TV Time Liberator extension before importing, shown on the TV Time notice."
+    },
+    "welcome_tvtime_liberator_cta": {
+      "default": "Get TV Time Liberator",
+      "description": "Call-to-action linking to the TV Time Liberator browser extension."
+    },
+    "welcome_tvtime_import_cta": {
+      "default": "Import from TV Time",
+      "description": "Call-to-action on the TV Time notice that opens the TV Time importer."
+    },
     "page_title_branding": {
       "default": "Branding",
       "description": "Page title for the Branding page."
