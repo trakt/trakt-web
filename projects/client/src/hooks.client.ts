@@ -1,6 +1,7 @@
 import '$lib/polyfills/mapGroupBy.ts';
 import '$lib/polyfills/toSorted.ts';
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
+import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
 import * as Sentry from '@sentry/sveltekit';
 import { handleErrorWithSentry } from '@sentry/sveltekit';
 
@@ -150,9 +151,9 @@ function buildReloadUrl() {
 }
 
 function triggerReloadOnce(): void {
-  if (sessionStorage.getItem(DYNAMIC_IMPORT_RELOAD_KEY)) return;
+  if (safeSessionStorage.getItem(DYNAMIC_IMPORT_RELOAD_KEY)) return;
 
-  sessionStorage.setItem(DYNAMIC_IMPORT_RELOAD_KEY, '1');
+  safeSessionStorage.setItem(DYNAMIC_IMPORT_RELOAD_KEY, '1');
   window.location.replace(buildReloadUrl());
 }
 

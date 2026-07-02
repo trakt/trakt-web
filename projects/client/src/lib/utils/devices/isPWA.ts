@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
 
 export function isPWA() {
   if (!browser) {
@@ -6,7 +7,7 @@ export function isPWA() {
   }
 
   return (
-    sessionStorage.getItem('__trakt_pwa_simulator') === 'true' ||
+    safeSessionStorage.getItem('__trakt_pwa_simulator') === 'true' ||
     globalThis.matchMedia('(display-mode: standalone)').matches ||
     globalThis.matchMedia('(display-mode: fullscreen)').matches ||
     globalThis.matchMedia('(display-mode: minimal-ui)').matches
