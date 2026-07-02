@@ -2,6 +2,7 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import ShadowScroller from "$lib/sections/components/ShadowScroller.svelte";
   import { downloadFile } from "$lib/sections/settings/export/downloadFile.ts";
   import type {
     AmbiguousImportItem,
@@ -87,49 +88,51 @@
     <p class="secondary">
       {m.import_complete_ambiguous({ count: ambiguous.length })}
     </p>
-    <ul class="import-complete-ambiguous">
-      {#each ambiguous as entry, index (entry)}
-        <li>
-          <div class="ambiguous-title">
-            <span class="ellipsis item-title">{entry.item.title}</span>
-            {#if entry.item.year != null}
-              <span class="tag secondary">{entry.item.year}</span>
-            {/if}
-          </div>
-          <div class="ambiguous-candidates">
-            {#each entry.candidates as candidate, candidateIndex (candidate)}
+    <ShadowScroller>
+      <ul class="import-complete-ambiguous">
+        {#each ambiguous as entry, index (entry)}
+          <li>
+            <div class="ambiguous-title">
+              <span class="ellipsis item-title">{entry.item.title}</span>
+              {#if entry.item.year != null}
+                <span class="tag secondary">{entry.item.year}</span>
+              {/if}
+            </div>
+            <div class="ambiguous-candidates">
+              {#each entry.candidates as candidate, candidateIndex (candidate)}
+                <button
+                  class="ambiguous-candidate"
+                  class:is-selected={(picks[index] ?? 0) === candidateIndex}
+                  aria-label={m.button_label_pick_match({
+                    option: toCandidateLabel(candidate),
+                  })}
+                  title={toCandidateLabel(candidate)}
+                  onclick={() => (picks[index] = candidateIndex)}
+                >
+                  <span class="candidate-poster">
+                    {#if candidate.poster}
+                      <img src={candidate.poster} alt="" loading="lazy" />
+                    {/if}
+                    <span class="tag candidate-year">{candidate.year ?? "?"}</span>
+                  </span>
+                  <span class="ellipsis candidate-title">{candidate.title}</span>
+                </button>
+              {/each}
               <button
-                class="ambiguous-candidate"
-                class:is-selected={(picks[index] ?? 0) === candidateIndex}
-                aria-label={m.button_label_pick_match({
-                  option: toCandidateLabel(candidate),
-                })}
-                title={toCandidateLabel(candidate)}
-                onclick={() => (picks[index] = candidateIndex)}
+                class="ambiguous-candidate is-skip"
+                class:is-selected={picks[index] === SKIP}
+                aria-label={m.import_ambiguous_skip()}
+                onclick={() => (picks[index] = SKIP)}
               >
                 <span class="candidate-poster">
-                  {#if candidate.poster}
-                    <img src={candidate.poster} alt="" loading="lazy" />
-                  {/if}
-                  <span class="tag candidate-year">{candidate.year ?? "?"}</span>
+                  <span class="tag">{m.import_ambiguous_skip()}</span>
                 </span>
-                <span class="ellipsis candidate-title">{candidate.title}</span>
               </button>
-            {/each}
-            <button
-              class="ambiguous-candidate is-skip"
-              class:is-selected={picks[index] === SKIP}
-              aria-label={m.import_ambiguous_skip()}
-              onclick={() => (picks[index] = SKIP)}
-            >
-              <span class="candidate-poster">
-                <span class="tag">{m.import_ambiguous_skip()}</span>
-              </span>
-            </button>
-          </div>
-        </li>
-      {/each}
-    </ul>
+            </div>
+          </li>
+        {/each}
+      </ul>
+    </ShadowScroller>
     <div class="import-complete-actions">
       <Button
         label={m.button_label_import_selected()}
@@ -210,16 +213,18 @@
     {@render unresolvedSection()}
   {/if}
 
-  <div class="import-complete-actions">
-    <Button
-      label={m.button_label_import_more()}
-      onclick={onreset}
-      color="default"
-      size="small"
-    >
-      {m.button_text_import_more()}
-    </Button>
-  </div>
+  {#if ambiguous.length === 0}
+    <div class="import-complete-actions">
+      <Button
+        label={m.button_label_import_more()}
+        onclick={onreset}
+        color="default"
+        size="small"
+      >
+        {m.button_text_import_more()}
+      </Button>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -247,11 +252,13 @@
     flex-direction: column;
     gap: var(--gap-xs);
 
-    max-height: var(--ni-160);
-    overflow-y: auto;
-
     margin: 0;
     padding-inline-start: var(--gap-m);
+  }
+
+  .import-complete-unresolved {
+    max-height: var(--ni-160);
+    overflow-y: auto;
   }
 
   .import-complete-unresolved li {
@@ -262,10 +269,13 @@
   }
 
   .import-complete-ambiguous {
-    max-height: var(--ni-480);
     list-style: none;
     padding-inline-start: 0;
     gap: var(--gap-m);
+  }
+
+  .import-complete-section :global(.trakt-shadow-wrapper) {
+    max-height: var(--ni-480);
   }
 
   .import-complete-ambiguous li {

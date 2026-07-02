@@ -77,6 +77,10 @@
   });
 
   const sourceConfig = $derived(IMPORT_SOURCE_CONFIGS[state.selectedSource]);
+  const isGuideCollapsed = $derived(
+    state.status !== "idle" && state.status !== "reading" &&
+      state.status !== "error",
+  );
 
   function getDropPrompt(): string {
     if (sourceConfig.accept.includes(".zip")) return m.import_drop_zip();
@@ -262,7 +266,7 @@
     onreset={reset}
   >
     <div class="trakt-import-row">
-      <ImportGuide config={sourceConfig} />
+      <ImportGuide config={sourceConfig} collapsed={isGuideCollapsed} />
       <div class="import-body">
         {#if state.status === "parsing"}
           <p class="secondary" transition:slide={{ duration: 150, axis: "y" }}>
