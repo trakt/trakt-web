@@ -1,4 +1,5 @@
 <script lang="ts">
+  import LogoMarkCircle from "$lib/components/logo/LogoMarkCircle.svelte";
   import { useTraktTeam } from "$lib/features/team/useTraktTeam";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import JoinForFreeButton from "./JoinForFreeButton.svelte";
@@ -10,18 +11,15 @@
 
 <div class="trakt-join-for-free">
   <div class="trakt-landing-social-proof">
-    <div class="trakt-social-proof-stats">
-      <span class="bold trakt-social-proof-count">15</span>
-      <div class="trakt-social-proof-lines">
-        <p>years of watching together</p>
-        <p>mil. shows & movie lovers</p>
-        <p>mil. titles tracked weekly</p>
-      </div>
+    <div class="trakt-social-proof-copy">
+      <span class="bold title welcome-title">
+        Welcome to Trakt <LogoMarkCircle />
+      </span>
+      <p class="secondary">
+        Your new home, where your shows and movies are all in one place.
+      </p>
     </div>
-    <div
-      class="trakt-landing-profiles"
-      style="--profile-count: {profileCount}"
-    >
+    <div class="trakt-landing-profiles" style="--profile-count: {profileCount}">
       {#if !$isLoading}
         {#each $team as member, index (member.username)}
           <div class="trakt-team-member" style="--user-index: {index}">
@@ -66,6 +64,17 @@
     }
   }
 
+  .welcome-title {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+
+    :global(svg) {
+      width: var(--ni-18);
+      height: var(--ni-18);
+    }
+  }
+
   .trakt-landing-social-proof {
     display: flex;
     align-items: center;
@@ -74,28 +83,17 @@
     gap: var(--gap-s);
   }
 
-  .trakt-social-proof-stats {
+  .trakt-social-proof-copy {
     display: flex;
-    gap: var(--gap-xs);
+    flex-direction: column;
+    gap: var(--gap-xxs);
 
-    flex-shrink: 0;
-
-    .trakt-social-proof-count {
-      display: flex;
-      align-items: center;
-      font-size: var(--ni-52);
-      line-height: var(--ni-52);
-    }
-
-    .trakt-social-proof-lines {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+    flex: 1;
+    min-width: 0;
   }
 
   .trakt-landing-profiles {
-    --avatars-width: 100%;
+    --avatars-width: var(--ni-120);
     --avatar-size: var(--ni-52);
     --avatar-offset: calc(
       (var(--avatars-width) - var(--avatar-size)) / (var(--profile-count) - 1)
@@ -104,7 +102,7 @@
 
     display: flex;
     align-items: center;
-    flex: 1;
+    flex: 0 0 var(--avatars-width);
 
     height: 100%;
     width: var(--avatars-width);
