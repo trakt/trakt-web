@@ -16,6 +16,7 @@ export type MatchMovies = (
 type ResolveMovieIdsParams = {
   items: ReadonlyArray<UniversalImportItem>;
   match: MatchMovies;
+  onProgress?: (processed: number, total: number) => void;
   signal?: AbortSignal;
 };
 
@@ -67,7 +68,7 @@ function toCandidates(
 }
 
 export async function resolveMovieIds(
-  { items, match, signal }: ResolveMovieIdsParams,
+  { items, match, onProgress, signal }: ResolveMovieIdsParams,
 ): Promise<ResolvedMovies> {
   const queries = new Map<string, MovieMatchQuery>();
 
@@ -82,13 +83,20 @@ export async function resolveMovieIds(
     });
   });
 
+  const total = queries.size;
+  onProgress?.(0, total);
+
   const resultsByIndex = new Map<number, MovieMatchResult>();
+  let processed = 0;
 
   for (const batch of chunk([...queries.values()], MATCH_BATCH_SIZE)) {
     if (signal?.aborted) break;
 
     const results = await match(batch).catch(() => []);
     results.forEach((result) => resultsByIndex.set(result.index, result));
+
+    processed += batch.length;
+    onProgress?.(processed, total);
   }
 
   const resultFor = (item: UniversalImportItem) => {

@@ -14,6 +14,7 @@ export type ImportStatus =
   | 'reading'
   | 'parsing'
   | 'review'
+  | 'matching'
   | 'syncing'
   | 'complete'
   | 'error';

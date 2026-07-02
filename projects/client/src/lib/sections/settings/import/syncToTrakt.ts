@@ -11,9 +11,20 @@ import { MOVIE_IDS, pickIds } from './engine/pickIds.ts';
 import { resolveMovieIds } from './engine/resolveMovieIds.ts';
 import type { ImportSyncResult, UniversalImportItem } from './ImportTypes.ts';
 
+type SyncToTraktCallbacks = SyncEngineCallbacks & {
+  onMatchProgress?: (processed: number, total: number) => void;
+};
+
 export async function syncToTrakt(
   items: ReadonlyArray<UniversalImportItem>,
-  { onProgress, onError, onStart, onComplete, signal }: SyncEngineCallbacks,
+  {
+    onProgress,
+    onError,
+    onStart,
+    onComplete,
+    onMatchProgress,
+    signal,
+  }: SyncToTraktCallbacks,
 ): Promise<ImportSyncResult> {
   onStart?.();
 
@@ -21,6 +32,7 @@ export async function syncToTrakt(
     const { items: resolvedItems, ambiguous } = await resolveMovieIds({
       items,
       match: matchMovies,
+      onProgress: onMatchProgress,
       signal,
     });
 
