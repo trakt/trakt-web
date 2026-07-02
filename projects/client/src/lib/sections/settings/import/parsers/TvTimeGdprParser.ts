@@ -60,12 +60,18 @@ function toWatchedAt(row: TrackingV1Row): string | undefined {
   return toISOString(row.created_at);
 }
 
+// Year-less movies (TV Time zero release dates) are kept: the sync
+// engine resolves their ids via search before building payloads.
 function parseV1Movie(row: TrackingV1Row): UniversalImportItem | null {
   const title = toMovieTitle(row);
-  const year = toYear(row.release_date);
-  if (!title || !year) return null;
+  if (!title) return null;
 
-  const base = { type: 'movie' as const, ids: {}, title, year };
+  const base = {
+    type: 'movie' as const,
+    ids: {},
+    title,
+    year: toYear(row.release_date),
+  };
 
   if (row.type === 'watch') {
     return { ...base, action: 'history', watched_at: toWatchedAt(row) };
