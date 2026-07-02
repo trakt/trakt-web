@@ -53,8 +53,7 @@
     background: color-mix(in srgb, var(--shade-920) 72%, transparent);
     box-shadow: 0 var(--ni-30) var(--ni-80)
       color-mix(in srgb, var(--color-shadow) 50%, transparent);
-    backdrop-filter: blur(var(--ni-20));
-    -webkit-backdrop-filter: blur(var(--ni-20));
+    @include backdrop-filter-blur(var(--ni-20));
 
     @include for-tablet-lg-and-below() {
       gap: var(--gap-m);
