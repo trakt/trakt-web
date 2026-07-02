@@ -3,20 +3,15 @@
   import ClampedText from "$lib/components/text/ClampedText.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
-  import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { Season } from "$lib/requests/models/Season";
   import { toTraktRating } from "$lib/utils/formatting/number/toTraktRating.ts";
-  import SeasonCastSection from "./SeasonCastSection.svelte";
 
   type SeasonInfoSectionProps = {
     season: Season;
-    crew: MediaCrew;
-    type: ExtendedMediaType;
     showTitle: string;
   };
 
-  const { season, crew, type, showTitle }: SeasonInfoSectionProps = $props();
+  const { season, showTitle }: SeasonInfoSectionProps = $props();
 
   const traktRating = $derived(
     season.rating != null
@@ -41,8 +36,6 @@
       {season.overview}
     </ClampedText>
   {/if}
-
-  <SeasonCastSection {crew} {type} />
 </div>
 
 <style lang="scss">

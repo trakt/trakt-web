@@ -1,7 +1,6 @@
 <script lang="ts" generics="T">
   import BrainIcon from "$lib/components/icons/BrainIcon.svelte";
   import CastIcon from "$lib/components/icons/CastIcon.svelte";
-  import ShuffleIcon from "$lib/components/icons/ShuffleIcon.svelte";
   import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
   import CrewIcon from "$lib/components/icons/CrewIcon.svelte";
   import CustomLibraryIcon from "$lib/components/icons/CustomLibraryIcon.svelte";
@@ -19,6 +18,7 @@
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
+  import ShuffleIcon from "$lib/components/icons/ShuffleIcon.svelte";
   import SpoilerIcon from "$lib/components/icons/SpoilerIcon.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";

@@ -1,17 +1,16 @@
 <script lang="ts">
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
+  import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
-  import type {
-    CastMember,
-    CrewMember,
-    MediaCrew,
-  } from "$lib/requests/models/MediaCrew";
-  import { toTranslatedJob } from "$lib/utils/formatting/string/toTranslatedJob.ts";
+  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType.ts";
+  import type { MediaCrew } from "$lib/requests/models/MediaCrew.ts";
+  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CreditMemberItem from "$lib/sections/lists/components/CreditMemberItem.svelte";
   import type { CreditMember } from "$lib/sections/lists/models/CreditMember.ts";
+  import { toCreditMembers } from "$lib/sections/lists/toCreditMembers.ts";
+  import SeasonTabTitle from "./SeasonTabTitle.svelte";
 
   type CreditsType = "cast" | "crew";
 
@@ -31,9 +30,11 @@
   const {
     crew,
     type,
+    isLoading = false,
   }: {
     crew: MediaCrew;
     type: ExtendedMediaType;
+    isLoading?: boolean;
   } = $props();
 
   let searchTerm = $state("");
@@ -42,76 +43,14 @@
   const normalizedSearchTerm = $derived(searchTerm.trim().toLocaleLowerCase());
   const isSearching = $derived(normalizedSearchTerm.length > 0);
 
-  const castPositions = $derived(
-    type === "movie"
-      ? { movies: "acting" as const }
-      : { shows: "acting" as const },
-  );
-
-  const toCastDescriptionItems = (castMember: CastMember) =>
-    (castMember.characters ?? [castMember.characterName])
-      .filter(Boolean)
-      .map((character) => character.trim())
-      .filter(Boolean);
-
-  const toCastCreditMember = (castMember: CastMember): CreditMember => ({
-    description: toCastDescriptionItems(castMember).join(", "),
-    episodeCount: castMember.episodeCount,
-    headshot: castMember.headshot,
-    key: castMember.key,
-    name: castMember.name,
-    positions: castPositions,
+  const creditsMetaInfo = $derived.by(() => {
+    if (isSearching) return m.drawer_meta_info_cast_and_crew();
+    if (creditsType === "crew") return m.drawer_meta_info_crew();
+    return m.drawer_meta_info_cast();
   });
 
-  const toCrewCreditMember = (crewMember: CrewMember): CreditMember => {
-    const translatedJobs = crewMember.jobs.map((job) => toTranslatedJob(job));
-    return {
-      description: translatedJobs.join(", "),
-      episodeCount: crewMember.episodeCount,
-      key: crewMember.key,
-      name: crewMember.name,
-    };
-  };
-
-  const mergeCrewMembers = (
-    currentMember: CrewMember,
-    nextMember: CrewMember,
-  ): CrewMember => {
-    const episodeCounts = [
-      currentMember.episodeCount,
-      nextMember.episodeCount,
-    ].filter((count): count is number => count != null);
-    const episodeCount =
-      episodeCounts.length > 0 ? Math.max(...episodeCounts) : undefined;
-
-    return {
-      ...currentMember,
-      episodeCount,
-      jobs: [...new Set([...currentMember.jobs, ...nextMember.jobs])],
-    };
-  };
-
-  const uniqueCrewMembers = (members: CrewMember[]) => {
-    const membersByKey = members.reduce(
-      (map, member) => {
-        const currentMember = map.get(member.key);
-        return map.set(
-          member.key,
-          currentMember ? mergeCrewMembers(currentMember, member) : member,
-        );
-      },
-      new Map<string, CrewMember>(),
-    );
-    return [...membersByKey.values()];
-  };
-
-  const castMembers = $derived(crew.cast.map(toCastCreditMember));
-  const crewMembers = $derived(
-    uniqueCrewMembers([
-      ...crew.creators,
-      ...crew.directors,
-      ...crew.writers,
-    ]).map(toCrewCreditMember),
+  const { cast: castMembers, crew: crewMembers } = $derived(
+    toCreditMembers({ crew, type }),
   );
 
   const selectedCredits = $derived(
@@ -133,7 +72,25 @@
 </script>
 
 <div class="season-cast-section">
-  <div class="cast-header">
+  <SeasonTabTitle title={m.drawer_title_people()}>
+    {#snippet metaInfo()}
+      <ListMetaInfo text={creditsMetaInfo} />
+    {/snippet}
+
+    {#snippet actions()}
+      {#if !isLoading && !isSearching}
+        <Toggler
+          value={creditsType}
+          onChange={(value) => (creditsType = value)}
+          options={creditOptions}
+        />
+      {/if}
+    {/snippet}
+  </SeasonTabTitle>
+
+  {#if isLoading}
+    <LoadingIndicator />
+  {:else}
     <label class="credit-search">
       <SearchIcon />
       <input
@@ -144,27 +101,23 @@
       />
     </label>
 
-    {#if !isSearching}
-      <Toggler
-        value={creditsType}
-        onChange={(value) => (creditsType = value)}
-        options={creditOptions}
-      />
+    {#if visibleCredits.length > 0}
+      <div
+        id={`season-cast-list-${type}-${isSearching ? "search" : creditsType}`}
+        class="credit-list"
+        role="list"
+      >
+        {#each visibleCredits as item (toCreditMemberKey(item))}
+          <CreditMemberItem member={item} {type} />
+        {/each}
+      </div>
+    {:else}
+      <p class="credit-list-empty">
+        {isSearching
+          ? m.list_placeholder_no_filter_results()
+          : m.list_placeholder_empty()}
+      </p>
     {/if}
-  </div>
-
-  {#if visibleCredits.length > 0}
-    <div
-      id={`season-cast-list-${type}-${isSearching ? "search" : creditsType}`}
-      class="credit-list"
-      role="list"
-    >
-      {#each visibleCredits as item (toCreditMemberKey(item))}
-        <CreditMemberItem member={item} {type} />
-      {/each}
-    </div>
-  {:else}
-    <p class="credit-list-empty">{m.list_placeholder_empty()}</p>
   {/if}
 </div>
 
@@ -175,39 +128,37 @@
     gap: var(--gap-m);
   }
 
-  .cast-header {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-s);
-  }
-
   .credit-search {
     display: flex;
     align-items: center;
-    flex: 1;
+    gap: var(--gap-xs);
 
     min-height: var(--ni-48);
-    border-radius: var(--border-radius-xxl);
     padding: 0 var(--ni-16);
+    box-sizing: border-box;
 
-    background-color: var(--color-background-elevated);
+    border-radius: var(--border-radius-l);
+    background: var(--color-input-background);
+    outline: var(--border-thickness-xxs) solid var(--color-border);
+
+    transition: outline var(--transition-increment) ease-in-out;
+
+    &:focus-within {
+      outline: var(--border-thickness-xs) solid var(--purple-500);
+    }
 
     :global(svg) {
       flex-shrink: 0;
+      width: var(--ni-24);
+      height: var(--ni-24);
       color: var(--color-text-secondary);
-      margin-inline-end: var(--ni-8);
     }
 
     input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--color-text-primary);
-
-      &::placeholder {
-        color: var(--color-text-secondary);
-      }
+      all: unset;
+      min-width: 0;
+      width: 100%;
+      height: 100%;
     }
   }
 
