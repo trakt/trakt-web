@@ -1,3 +1,4 @@
+import '$lib/polyfills/at.ts';
 import '$lib/polyfills/mapGroupBy.ts';
 import '$lib/polyfills/toSorted.ts';
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
