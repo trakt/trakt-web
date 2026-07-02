@@ -36,7 +36,7 @@
 
   function toImportSource(value: string | null): ImportSource {
     if (value && value in IMPORT_SOURCE_CONFIGS) return value as ImportSource;
-    return "imdb";
+    return "tvtime";
   }
 
   const { importInProgress } = useImportInProgress();
@@ -57,7 +57,7 @@
   };
 
   const state = $state<ImportUIState>({
-    selectedSource: "imdb",
+    selectedSource: "tvtime",
     status: "idle",
     parsedItems: [],
     processedCount: 0,
