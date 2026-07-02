@@ -1,232 +1,118 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { TvTimeCsvParser } from './TvTimeCsvParser.ts';
-import { parseCsvFile } from './utils/parseCsvFile.ts';
 
-vi.mock('./utils/parseCsvFile.ts', () => ({ parseCsvFile: vi.fn() }));
+const LIBERATOR_CSV = [
+  'imdb_id,tvdb_id,type,title,season,episode,is_special,is_watched,watched_at,status,is_watchlisted,rating',
+  'tt0903747,3859781,episode,Breaking Bad,3,7,false,true,2023-06-01T12:00:00Z,ended,false',
+].join('\n');
 
-const mockParseCsvFile = vi.mocked(parseCsvFile);
+const NATIVE_CSV = [
+  'ts,show_name,episode_id,episode_season_number,episode_number,episode_name',
+  '1685620800,Breaking Bad,4325452,3,8,I See You',
+].join('\n');
 
-const dummyFile = new File([''], 'tvtime.csv', { type: 'text/csv' });
+const GDPR_V2_CSV = [
+  'ep_watch_count,updated_at,key,user_id,created_at,is_archived,is_for_later,s_id,series_name,is_followed,ep_no,ep_id,episode_number,rewatch_count,s_no,is_unitary,episode_id,season_number,gsi,is_special',
+  ',2021-10-10 11:49:11,watch-episode-02531a20-021e25cc,1,2021-10-10 11:49:11,,,82066,Fringe,,10,1331151,10,0,2,false,1331151,2,,',
+].join('\n');
 
-beforeEach(() => {
-  mockParseCsvFile.mockResolvedValue([]);
-});
+function csvFile(content: string, name: string): File {
+  return new File([content], name, { type: 'text/csv' });
+}
 
 describe('TvTimeCsvParser', () => {
   describe('canParse', () => {
-    it('accepts a single csv file', () => {
-      expect(TvTimeCsvParser.canParse([dummyFile])).toBe(true);
+    it('should accept csv and zip files', () => {
+      expect(TvTimeCsvParser.canParse([
+        csvFile('', 'liberator.csv'),
+        csvFile('', 'tracking-prod-records.csv'),
+        new File([''], 'gdpr-data.zip'),
+      ])).toBe(true);
     });
 
-    it('rejects multiple files', () => {
-      expect(TvTimeCsvParser.canParse([dummyFile, dummyFile])).toBe(false);
-    });
-
-    it('rejects non-csv files', () => {
+    it('should reject unsupported file types', () => {
       expect(TvTimeCsvParser.canParse([new File([''], 'data.json')])).toBe(
         false,
       );
     });
+
+    it('should reject an empty file list', () => {
+      expect(TvTimeCsvParser.canParse([])).toBe(false);
+    });
   });
 
-  describe('export format (imdb_id/tvdb_id columns)', () => {
-    it('adds a movie to history when is_watched=true', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt1375666',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'true',
-        watched_at: '2023-01-01T00:00:00Z',
-        is_watchlisted: 'false',
-      }]);
-
-      const result = await TvTimeCsvParser.parse([dummyFile]);
-
-      expect(result).toHaveLength(1);
-      expect(result[0]).toMatchObject({
-        action: 'history',
-        type: 'movie',
-        ids: { imdb: 'tt1375666', tvdb: 113 },
-        title: 'Inception',
-        watched_at: '2023-01-01T00:00:00.000Z',
-      });
-    });
-
-    it('adds a movie to watchlist when is_watchlisted=true', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt1375666',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'false',
-        watched_at: '',
-        is_watchlisted: 'true',
-      }]);
-
-      const result = await TvTimeCsvParser.parse([dummyFile]);
-
-      expect(result).toHaveLength(1);
-      expect(result[0]).toMatchObject({
-        action: 'watchlist',
-        type: 'movie',
-        ids: { imdb: 'tt1375666', tvdb: 113 },
-        title: 'Inception',
-      });
-    });
-
-    it('emits both history and watchlist when both flags are true', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt1375666',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'true',
-        watched_at: '2023-01-01T00:00:00Z',
-        is_watchlisted: 'true',
-      }]);
-
-      const result = await TvTimeCsvParser.parse([dummyFile]);
-
-      expect(result).toHaveLength(2);
-      expect(result.map((item) => item.action)).toEqual([
-        'history',
-        'watchlist',
+  describe('format dispatch', () => {
+    it('should route liberator files by their imdb_id column', async () => {
+      const result = await TvTimeCsvParser.parse([
+        csvFile(LIBERATOR_CSV, 'tv-time-liberator.csv'),
       ]);
-    });
-
-    it('skips rows where both flags are false', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt1375666',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'false',
-        is_watchlisted: 'false',
-      }]);
-
-      const result = await TvTimeCsvParser.parse([dummyFile]);
-
-      expect(result).toHaveLength(0);
-    });
-
-    it('treats imdb_id of -1 as absent', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: '-1',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'true',
-        watched_at: '2023-01-01T00:00:00Z',
-        is_watchlisted: 'false',
-      }]);
-
-      const result = await TvTimeCsvParser.parse([dummyFile]);
-
-      expect(result).toHaveLength(1);
-      expect(result[0]?.ids.imdb).toBeUndefined();
-      expect(result[0]?.ids.tvdb).toBe(113);
-    });
-
-    it('skips rows with no valid ids', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: '-1',
-        tvdb_id: '',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'true',
-        watched_at: '2023-01-01T00:00:00Z',
-        is_watchlisted: 'false',
-      }]);
-
-      const result = await TvTimeCsvParser.parse([dummyFile]);
-
-      expect(result).toHaveLength(0);
-    });
-
-    it('correctly parses season and episode for episodes', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt0903747',
-        tvdb_id: '81189',
-        type: 'episode',
-        title: 'Breaking Bad',
-        season: '3',
-        episode: '7',
-        is_watched: 'true',
-        watched_at: '2023-06-01T00:00:00Z',
-        is_watchlisted: 'false',
-      }]);
-
-      const result = await TvTimeCsvParser.parse([dummyFile]);
 
       expect(result).toHaveLength(1);
       expect(result[0]).toMatchObject({
         action: 'history',
         type: 'episode',
-        season: 3,
-        episode: 7,
+        ids: { imdb: 'tt0903747', tvdb: 3859781 },
+        title: 'Breaking Bad',
       });
     });
-  });
 
-  describe('native format (ts/show_name/episode_id columns)', () => {
-    it('adds an episode to history', async () => {
-      const ts = String(
-        Math.floor(new Date('2023-06-01T12:00:00Z').getTime() / 1000),
-      );
-      mockParseCsvFile.mockResolvedValue([{
-        ts,
-        show_name: 'Breaking Bad',
-        episode_id: '81189',
-        episode_season_number: '3',
-        episode_number: '7',
-        episode_name: 'One Minute',
-      }]);
-
-      const result = await TvTimeCsvParser.parse([dummyFile]);
+    it('should route gdpr tracking files by their ep_id column', async () => {
+      const result = await TvTimeCsvParser.parse([
+        csvFile(GDPR_V2_CSV, 'tracking-prod-records-v2.csv'),
+      ]);
 
       expect(result).toHaveLength(1);
       expect(result[0]).toMatchObject({
         action: 'history',
         type: 'episode',
-        ids: { tvdb: 81189 },
-        title: 'Breaking Bad',
-        season: 3,
-        episode: 7,
+        ids: { tvdb: 1331151 },
+        title: 'Fringe',
+        season: 2,
+        episode: 10,
       });
     });
 
-    it('skips rows without episode_id', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        ts: '1685620800',
-        show_name: 'Breaking Bad',
-        episode_id: '',
-        episode_season_number: '3',
-        episode_number: '7',
-      }]);
+    it('should route remaining csv files to the native parser', async () => {
+      const result = await TvTimeCsvParser.parse([
+        csvFile(NATIVE_CSV, 'seen_episode.csv'),
+      ]);
 
-      const result = await TvTimeCsvParser.parse([dummyFile]);
-
-      expect(result).toHaveLength(0);
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { tvdb: 4325452 },
+        title: 'Breaking Bad',
+      });
     });
 
-    it('skips rows with non-numeric episode_id', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        ts: '1685620800',
-        show_name: 'Breaking Bad',
-        episode_id: 'not-a-number',
-        episode_season_number: '3',
-        episode_number: '7',
-      }]);
-
-      const result = await TvTimeCsvParser.parse([dummyFile]);
-
+    it('should return an empty array when no files are provided', async () => {
+      const result = await TvTimeCsvParser.parse([]);
       expect(result).toHaveLength(0);
     });
   });
 
-  it('returns empty array when no files are provided', async () => {
-    const result = await TvTimeCsvParser.parse([]);
-    expect(result).toHaveLength(0);
+  describe('mixed uploads', () => {
+    it('should reject files from different export formats', async () => {
+      await expect(TvTimeCsvParser.parse([
+        csvFile(LIBERATOR_CSV, 'tv-time-liberator.csv'),
+        csvFile(GDPR_V2_CSV, 'tracking-prod-records-v2.csv'),
+      ])).rejects.toThrow(/not both at once/);
+    });
+
+    it('should parse both gdpr tracking files as one export', async () => {
+      const gdprV1Csv = [
+        'watch_count,uuid,type,series_name,type-uuid-n,updated_at,user_id,created_at,series_id,watches,runtime,release_date_range_key,release_date,alpha_range_key,movie_name,entity_type,follow_date_range_key,rewatch_count,watch_date,series_uuid,season_number,episode_number,episode_id,watch_date_range_key,country',
+        ',002e2d8f,watch,,watch-002e2d8f-0,2022-04-10 11:26:55,1,2022-04-10 11:26:55,,,,,2017-10-12,watch-alpha-what-happened-to-monday,What Happened to Monday,movie,,,,,,,,watch-date-1649590015,NL',
+      ].join('\n');
+
+      const result = await TvTimeCsvParser.parse([
+        csvFile(gdprV1Csv, 'tracking-prod-records.csv'),
+        csvFile(GDPR_V2_CSV, 'tracking-prod-records-v2.csv'),
+      ]);
+
+      expect(result.filter((item) => item.type === 'episode')).toHaveLength(1);
+      expect(result.filter((item) => item.type === 'movie')).toHaveLength(1);
+    });
   });
 });
