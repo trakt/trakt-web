@@ -7303,6 +7303,10 @@
       "default": "Use our next-gen engine to surface related movies and shows beyond the obvious.",
       "description": "Description for the Smart Related preview feature."
     },
+    "preview_feature_description_parental_guide": {
+      "default": "Show content risk levels in the details drawer for movies, shows, and episodes.",
+      "description": "Description for the Parental Guidance preview feature."
+    },
     "header_official_links": {
       "default": "Official Links",
       "description": "Header for the official links section, with official links for a show or movie, like the official site, instagram, etc.."
