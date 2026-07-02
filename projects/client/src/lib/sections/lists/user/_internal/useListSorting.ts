@@ -5,7 +5,10 @@ import { assertDefined } from '../../../../utils/assert/assertDefined.ts';
 import {
   getListUrl,
 } from '../../components/list-summary/_internal/getListUrl.ts';
-import { LIST_SORT_OPTIONS } from '../constants/index.ts';
+import {
+  LIST_SORT_OPTIONS,
+  WATCHLIST_SORT_OPTIONS,
+} from '../constants/index.ts';
 import type {
   ListUrlBuilder,
   ListUrlBuilderParams,
@@ -18,8 +21,11 @@ function mapToDirection(value: string | Nil): SortDirection | undefined {
   return value === 'asc' || value === 'desc' ? value : undefined;
 }
 
-function mapToSortBy(value: string | Nil): SortBy | undefined {
-  const sortBy = LIST_SORT_OPTIONS.find((option) => option.value === value);
+function mapToSortBy(
+  value: string | Nil,
+  options: Sorting[],
+): SortBy | undefined {
+  const sortBy = options.find((option) => option.value === value);
   return sortBy ? sortBy.value : undefined;
 }
 
@@ -55,8 +61,11 @@ function getDefaultSortBy(props: UseListSortingProps): SortBy | undefined {
 }
 
 function getDefaultDirection(props: UseListSortingProps): SortDirection {
+  if (props.type === 'watchlist') {
+    return 'desc';
+  }
+
   if (
-    props.type === 'watchlist' ||
     props.type === 'favorites' ||
     props.type === 'progress' ||
     !props.list
@@ -67,9 +76,22 @@ function getDefaultDirection(props: UseListSortingProps): SortDirection {
   return props.list.sortHow;
 }
 
+function getSortOptions(props: UseListSortingProps) {
+  if (props.type === 'watchlist') {
+    return WATCHLIST_SORT_OPTIONS;
+  }
+
+  if (props.type === 'favorites') {
+    return LIST_SORT_OPTIONS.filter((option) => option.value !== undefined);
+  }
+
+  return LIST_SORT_OPTIONS;
+}
+
 export function useListSorting(
   props: UseListSortingProps,
 ): ListSorting {
+  const options = getSortOptions(props);
   const params = new BehaviorSubject<Record<string, string | null>>({
     sort_by: null,
     sort_how: null,
@@ -81,16 +103,15 @@ export function useListSorting(
 
   return {
     update,
-    options: props.type === 'favorites'
-      ? LIST_SORT_OPTIONS.filter((option) => option.value !== undefined)
-      : LIST_SORT_OPTIONS,
+    options,
     current: params.pipe(
       map(($params) => {
         const defaultDirection = getDefaultDirection(props);
-        const sortBy = mapToSortBy($params.sort_by) ?? getDefaultSortBy(props);
+        const sortBy = mapToSortBy($params.sort_by, options) ??
+          getDefaultSortBy(props);
         const sortHow = mapToDirection($params.sort_how) ?? defaultDirection;
 
-        const sorting = LIST_SORT_OPTIONS.find(
+        const sorting = options.find(
           (option) => option.value === sortBy,
         );
 

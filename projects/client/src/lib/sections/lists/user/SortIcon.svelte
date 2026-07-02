@@ -2,6 +2,7 @@
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
+  import ReorderIcon from "$lib/components/icons/ReorderIcon.svelte";
   import RemainingIcon from "$lib/components/icons/RemainingIcon.svelte";
   import SortAlphaIcon from "$lib/components/icons/SortAlphaIcon.svelte";
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
@@ -35,6 +36,10 @@
 
 {#if sortBy === "title"}
   <SortAlphaIcon />
+{/if}
+
+{#if sortBy === "rank"}
+  <ReorderIcon />
 {/if}
 
 {#if sortBy === "remaining"}

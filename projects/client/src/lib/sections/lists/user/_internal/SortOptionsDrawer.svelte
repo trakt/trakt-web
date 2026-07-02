@@ -31,6 +31,19 @@
   const reversedDirection = $derived(
     current.sortHow === "asc" ? "desc" : "asc",
   );
+  const usesWatchlistDirectionDefaults = $derived(
+    options.some((option) => option.value === "rank"),
+  );
+
+  function sortHowForOption(
+    sortBy: SortBy | UpNextSortBy | undefined,
+  ): SortDirection {
+    if (!usesWatchlistDirectionDefaults) {
+      return current.sortHow;
+    }
+
+    return sortBy === "rank" || sortBy === "title" ? "asc" : "desc";
+  }
 </script>
 
 {#snippet badge()}
@@ -56,7 +69,7 @@
 
 <Drawer {onClose} {badge} size="auto" title={m.drawer_title_sort()}>
   <div class="sort-buttons">
-    {#each options as option}
+    {#each options as option (option.value ?? "default")}
       {#snippet icon()}
         {#if option.value === current.sorting.value}
           <CheckIcon />
@@ -69,7 +82,7 @@
         replacestate
         style="flat"
         color="default"
-        href={`${urlBuilder({ sortHow: current.sortHow, sortBy: option.value })}`}
+        href={`${urlBuilder({ sortHow: sortHowForOption(option.value), sortBy: option.value })}`}
         label={option.label()}
         disabled={option.value === current.sorting.value}
         icon={Boolean(option.value) || option.value === current.sorting.value
@@ -78,7 +91,7 @@
         onclick={() => {
           track({
             sortBy: option.value ?? "default",
-            sortHow: current.sortHow,
+            sortHow: sortHowForOption(option.value),
           });
         }}
       >
