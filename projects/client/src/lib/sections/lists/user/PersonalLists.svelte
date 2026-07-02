@@ -19,12 +19,19 @@
   import UserList from "./UserList.svelte";
 
   const previewLimit = 3;
+  type PersonalListsDisplay = "auto" | "compact";
 
   const {
     type,
     slug,
     mode,
-  }: { type: PersonalListType; slug: string; mode?: DiscoverMode } = $props();
+    display = "auto",
+  }: {
+    type: PersonalListType;
+    slug: string;
+    mode?: DiscoverMode;
+    display?: PersonalListsDisplay;
+  } = $props();
 
   const {
     list: lists,
@@ -35,13 +42,20 @@
   const { isMe } = $derived(useIsMe(slug));
 
   const variant = $derived.by(() => {
+    if (display === "compact") {
+      return "summary";
+    }
+
     const shouldShowSummary =
       $hasNextPage || $lists.length === 0 || $lists.length > previewLimit;
     return shouldShowSummary ? "summary" : "preview";
   });
 
   const isMine = $derived(type === "personal" && $isMe);
-  const isPresentable = $derived(isMine || (!$isLoading && $lists.length > 0));
+  const isPresentable = $derived(
+    (display === "compact" ? $isMe : isMine) ||
+      (!$isLoading && $lists.length > 0),
+  );
 
   const title = $derived.by(() => {
     switch (type) {
@@ -111,6 +125,7 @@
         href: UrlBuilder.lists.all(slug, type),
         label: m.button_label_view_all_lists(),
         source: { id: "personal-lists", type },
+        mode: "always",
       }}
       --height-list="var(--height-lists-list)"
       --height-override-list={$lists.length === 0
