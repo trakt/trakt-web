@@ -1,4 +1,5 @@
 import { getReferrer } from '$lib/utils/requests/getReferrer.ts';
+import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { type UserManagerSettings, WebStorageStateStore } from 'oidc-client-ts';
 import { resolveOidcAuthority } from './resolveOidcAuthority.ts';
 
@@ -14,7 +15,7 @@ export function getOidcConfig(): UserManagerSettings {
     scope: 'public openid profile email',
     automaticSilentRenew: true,
     userStore: new WebStorageStateStore({
-      store: globalThis.window.localStorage,
+      store: safeLocalStorage,
     }),
   };
 }
