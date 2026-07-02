@@ -10,6 +10,7 @@
     icon?: Snippet;
     style?: "ghost" | "flat";
     variant?: "primary" | "secondary";
+    selected?: boolean;
   } & ChildrenProps &
     HTMLElementProps;
 
@@ -19,6 +20,7 @@
     color = "purple",
     style = "ghost",
     variant = "primary",
+    selected = false,
     children,
     icon,
     ...props
@@ -52,6 +54,7 @@
   data-color={color}
   data-style={style}
   data-variant={variant}
+  class:is-selected={selected}
   {...props}
 >
   {#if href}
@@ -154,6 +157,11 @@
       }
 
       &[disabled="true"] {
+        background: var(--color-foreground-button-disabled);
+        color: var(--color-surface-button-disabled);
+      }
+
+      &.is-selected {
         background: var(--color-foreground-button-disabled);
         color: var(--color-surface-button-disabled);
       }
