@@ -3,12 +3,12 @@
   import PlusIcon from '$lib/components/icons/PlusIcon.svelte';
   import * as m from '$lib/features/i18n/messages';
   import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre';
+  import { genreIcons } from '$lib/components/icons/genres/genreIcons.ts';
   import type { Genre } from '@trakt/api';
   import GenresDrawer from './GenresDrawer.svelte';
   import SettingsGroupCard from './SettingsGroupCard.svelte';
   import SettingsSectionLabel from './SettingsSectionLabel.svelte';
   import { useSettings } from './useSettings';
-  import StreamingServiceBadge from './streaming-services/StreamingServiceBadge.svelte';
 
   const genreLimit = 5;
 
@@ -18,8 +18,8 @@
   let openDrawer: 'loved' | 'hated' | null = $state(null);
 
   const isSaving = $derived($isSavingSettings);
-  const loved = $derived($genres.loved);
-  const hated = $derived($genres.hated);
+  const loved = $derived($genres?.loved ?? []);
+  const hated = $derived($genres?.hated ?? []);
 
   function emptySlots(filled: Genre[]): number[] {
     return Array.from({ length: genreLimit - filled.length }, (_, i) => i);
@@ -34,11 +34,18 @@
 )}
   <SettingsSectionLabel {title} />
   <SettingsGroupCard>
-    <div class="trakt-genre-section">
+    <button
+      class="trakt-genre-section"
+      type="button"
+      aria-label={editLabel}
+      disabled={isSaving}
+      onclick={() => (openDrawer = list)}
+    >
       <div class="slots-row">
         {#each selected as genre (genre)}
           <div class="genre-slot" data-genre={genre}>
-            <StreamingServiceBadge name={toTranslatedGenre(genre)} />
+            {@html genreIcons[genre]}
+            <span class="genre-name">{toTranslatedGenre(genre)}</span>
           </div>
         {/each}
         {#each emptySlots(selected) as i (i)}
@@ -47,16 +54,10 @@
           </div>
         {/each}
       </div>
-      <button
-        class="edit-button"
-        type="button"
-        aria-label={editLabel}
-        disabled={isSaving}
-        onclick={() => (openDrawer = list)}
-      >
+      <span class="row-caret">
         <CaretRightIcon />
-      </button>
-    </div>
+      </span>
+    </button>
   </SettingsGroupCard>
 {/snippet}
 
@@ -77,6 +78,7 @@
 {#if openDrawer === 'loved'}
   <GenresDrawer
     title={m.header_genres_loved()}
+    subtitle={m.label_genres_drawer_subtitle_loved()}
     current={loved}
     other={hated}
     onSave={setLovedGenres}
@@ -85,6 +87,7 @@
 {:else if openDrawer === 'hated'}
   <GenresDrawer
     title={m.header_genres_hated()}
+    subtitle={m.label_genres_drawer_subtitle_hated()}
     current={hated}
     other={loved}
     onSave={setHatedGenres}
@@ -96,12 +99,49 @@
   @use '$style/scss/mixins/index' as *;
 
   .trakt-genre-section {
-    --genre-tile-size: 70px;
+    --genre-tile-size: 92px;
 
     display: flex;
     align-items: center;
     gap: var(--gap-m);
     padding: var(--gap-m);
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: start;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition-increment) ease-in-out;
+
+    @include for-mouse {
+      &:hover:not([disabled]) {
+        background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+      }
+    }
+
+    &:active:not([disabled]) {
+      background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+    }
+
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  .row-caret {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0.35;
+    color: var(--color-text-secondary);
+
+    :global(svg) {
+      width: var(--ni-16);
+      height: var(--ni-16);
+    }
   }
 
   .slots-row {
@@ -114,15 +154,35 @@
   }
 
   .genre-slot {
+    --stroke-0: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+
     width: var(--genre-tile-size);
     height: var(--genre-tile-size);
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-xs);
+    border-radius: var(--border-radius-m);
+    background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+    border: var(--border-thickness-xxs) solid
+      color-mix(in srgb, var(--color-foreground) 5%, transparent);
 
-    :global(.trakt-streaming-service-badge) {
-      width: 100%;
-      height: 100%;
-      aspect-ratio: 1;
+    :global(svg) {
+      width: var(--ni-36);
+      height: var(--ni-36);
     }
+  }
+
+  .genre-name {
+    font-size: var(--ni-12);
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+    text-align: center;
+    line-height: 1;
   }
 
   .genre-slot.is-empty {
@@ -140,104 +200,4 @@
     }
   }
 
-  .edit-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    padding: var(--gap-xs);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: var(--color-text-secondary);
-    border-radius: var(--border-radius-s);
-
-    :global(svg) {
-      width: var(--ni-20);
-      height: var(--ni-20);
-    }
-
-    &:disabled {
-      opacity: var(--de-emphasized-opacity);
-      cursor: not-allowed;
-    }
-
-    &:hover:not(:disabled) {
-      color: var(--color-text-primary);
-    }
-  }
-
-  /* Genre-specific gradient backgrounds */
-  .genre-slot[data-genre='action'] {
-    --badge-background: linear-gradient(135deg, var(--red-700), var(--red-900));
-  }
-  .genre-slot[data-genre='adventure'] {
-    --badge-background: linear-gradient(135deg, var(--blue-500), var(--blue-800));
-  }
-  .genre-slot[data-genre='animation'] {
-    --badge-background: linear-gradient(135deg, var(--purple-500), var(--purple-800));
-  }
-  .genre-slot[data-genre='anime'] {
-    --badge-background: linear-gradient(135deg, var(--purple-400), var(--purple-700));
-  }
-  .genre-slot[data-genre='biography'] {
-    --badge-background: linear-gradient(135deg, var(--shade-400), var(--shade-700));
-  }
-  .genre-slot[data-genre='children'] {
-    --badge-background: linear-gradient(135deg, var(--yellow-400), var(--orange-500));
-  }
-  .genre-slot[data-genre='comedy'] {
-    --badge-background: linear-gradient(135deg, var(--yellow-500), var(--yellow-700));
-  }
-  .genre-slot[data-genre='crime'] {
-    --badge-background: linear-gradient(135deg, var(--shade-600), var(--shade-900));
-  }
-  .genre-slot[data-genre='documentary'] {
-    --badge-background: linear-gradient(135deg, var(--green-500), var(--green-800));
-  }
-  .genre-slot[data-genre='drama'] {
-    --badge-background: linear-gradient(135deg, var(--purple-600), var(--purple-900));
-  }
-  .genre-slot[data-genre='family'] {
-    --badge-background: linear-gradient(135deg, var(--orange-400), var(--orange-700));
-  }
-  .genre-slot[data-genre='fantasy'] {
-    --badge-background: linear-gradient(135deg, var(--blue-600), var(--purple-700));
-  }
-  .genre-slot[data-genre='history'] {
-    --badge-background: linear-gradient(135deg, var(--orange-600), var(--red-800));
-  }
-  .genre-slot[data-genre='holiday'] {
-    --badge-background: linear-gradient(135deg, var(--green-400), var(--green-700));
-  }
-  .genre-slot[data-genre='horror'] {
-    --badge-background: linear-gradient(135deg, var(--red-800), var(--shade-900));
-  }
-  .genre-slot[data-genre='musical'] {
-    --badge-background: linear-gradient(135deg, var(--purple-500), var(--blue-700));
-  }
-  .genre-slot[data-genre='mystery'] {
-    --badge-background: linear-gradient(135deg, var(--blue-700), var(--shade-800));
-  }
-  .genre-slot[data-genre='romance'] {
-    --badge-background: linear-gradient(135deg, var(--red-500), var(--red-800));
-  }
-  .genre-slot[data-genre='science-fiction'] {
-    --badge-background: linear-gradient(135deg, var(--blue-500), var(--blue-900));
-  }
-  .genre-slot[data-genre='superhero'] {
-    --badge-background: linear-gradient(135deg, var(--blue-600), var(--red-700));
-  }
-  .genre-slot[data-genre='suspense'] {
-    --badge-background: linear-gradient(135deg, var(--purple-700), var(--shade-900));
-  }
-  .genre-slot[data-genre='thriller'] {
-    --badge-background: linear-gradient(135deg, var(--shade-700), var(--shade-900));
-  }
-  .genre-slot[data-genre='war'] {
-    --badge-background: linear-gradient(135deg, var(--yellow-700), var(--shade-800));
-  }
-  .genre-slot[data-genre='western'] {
-    --badge-background: linear-gradient(135deg, var(--orange-700), var(--red-900));
-  }
 </style>

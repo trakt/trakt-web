@@ -10,24 +10,26 @@
   import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre';
   import type { Genre } from '@trakt/api';
   import { SvelteSet } from 'svelte/reactivity';
-  import StreamingServiceBadge from './streaming-services/StreamingServiceBadge.svelte';
+  import { genreIcons } from '$lib/components/icons/genres/genreIcons.ts';
 
   const genreLimit = 5;
 
   type GenresDrawerProps = {
     title: string;
+    subtitle: string;
     current: Genre[];
     other: Genre[];
-    onSave: (genres: Genre[]) => Promise<void>;
+    onSave: (genres: Genre[]) => Promise<boolean>;
     onClose: () => void;
   };
 
-  const { title, current, other, onSave, onClose }: GenresDrawerProps = $props();
+  const { title, subtitle, current, other, onSave, onClose }: GenresDrawerProps = $props();
 
   const { confirm } = useConfirm();
 
   const selected = new SvelteSet<Genre>(current);
   let isSaving = $state(false);
+  let saveError = $state(false);
 
   const otherSet = $derived(new Set(other));
 
@@ -53,7 +55,6 @@
   const emptySlotCount = $derived(genreLimit - selected.size);
 
   function isSelectable(genre: Genre): boolean {
-    if (otherSet.has(genre)) return false;
     return selected.has(genre) || !isAtLimit;
   }
 
@@ -64,6 +65,7 @@
     } else {
       selected.add(genre);
     }
+    saveError = false;
   }
 
   function handleClose() {
@@ -79,9 +81,17 @@
 
   async function handleSave() {
     isSaving = true;
+    saveError = false;
     try {
-      await onSave([...selected]);
-      onClose();
+      const success = await onSave([...selected]);
+      if (success) {
+        onClose();
+      } else {
+        saveError = true;
+      }
+    } catch (e) {
+      console.error('[GenresDrawer] save failed:', e);
+      saveError = true;
     } finally {
       isSaving = false;
     }
@@ -89,6 +99,9 @@
 </script>
 
 {#snippet actions()}
+  {#if saveError}
+    <span class="save-error">{m.error_text_genres_save_failed()}</span>
+  {/if}
   <ActionButton
     label={m.button_label_apply()}
     color="purple"
@@ -107,7 +120,9 @@
   {actions}
 >
   <div class="trakt-genres-drawer-content">
+    <p class="secondary">{subtitle}</p>
     <div class="selections-sticky">
+      <p class="section-label">{m.label_genres_drawer_selected()}</p>
       <div class="selections-row">
         {#each selectedSorted as genre (genre)}
           <button
@@ -120,7 +135,8 @@
             })}
             onclick={() => toggle(genre)}
           >
-            <StreamingServiceBadge name={toTranslatedGenre(genre)} />
+            <span class="genre-icon">{@html genreIcons[genre]}</span>
+            <span class="genre-name">{toTranslatedGenre(genre)}</span>
             <span class="tile-check" aria-hidden="true">
               <CheckIcon />
             </span>
@@ -134,15 +150,14 @@
       </div>
     </div>
 
+    <p class="section-label catalog-label">{m.label_genres_drawer_all()}</p>
     <div class="genre-catalog">
-      {#each sortedGenres as genre (genre)}
+      {#each sortedGenres.filter((g) => !otherSet.has(g)) as genre (genre)}
         {@const isSelected = selected.has(genre)}
-        {@const isExcluded = otherSet.has(genre)}
         {@const disabled = !isSelectable(genre)}
         <button
           class="genre-tile"
           class:is-selected={isSelected}
-          class:is-excluded={isExcluded}
           type="button"
           data-genre={genre}
           aria-pressed={isSelected}
@@ -152,7 +167,8 @@
           {disabled}
           onclick={() => toggle(genre)}
         >
-          <StreamingServiceBadge name={toTranslatedGenre(genre)} />
+          <span class="genre-icon">{@html genreIcons[genre]}</span>
+          <span class="genre-name">{toTranslatedGenre(genre)}</span>
           {#if isSelected}
             <span class="tile-check" aria-hidden="true">
               <CheckIcon />
@@ -169,22 +185,41 @@
 
   :global(.trakt-drawer.trakt-genres-drawer) {
     --drawer-padding: var(--gap-s);
+    --drawer-gap: var(--gap-micro);
+  }
+
+  .save-error {
+    font-size: var(--font-size-tag);
+    color: var(--color-background-red);
+    padding-inline: var(--gap-s);
   }
 
   .trakt-genres-drawer-content {
-    --genre-tile-size: 70px;
+    --genre-tile-size: 92px;
 
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-xs);
     flex: 1;
     min-height: 0;
+  }
+
+  .section-label {
+    font-size: var(--ni-14);
+    color: var(--color-foreground);
+  }
+
+  .catalog-label {
+    margin-block-start: var(--gap-m);
   }
 
   .selections-sticky {
     position: sticky;
     top: 0;
     z-index: var(--layer-base);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
     margin-inline: calc(-1 * var(--drawer-padding));
     padding-block: var(--gap-s);
     padding-inline: var(--drawer-padding);
@@ -194,9 +229,9 @@
   }
 
   .selections-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, var(--genre-tile-size));
     gap: var(--gap-s);
-    align-items: stretch;
   }
 
   .genre-slot-empty {
@@ -219,47 +254,65 @@
 
   .genre-catalog {
     display: grid;
-    grid-template-columns: repeat(auto-fill, var(--genre-tile-size));
+    grid-template-columns: repeat(4, var(--genre-tile-size));
     gap: var(--gap-s);
     align-content: start;
   }
 
   .genre-tile {
+    --stroke-0: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-s);
     width: var(--genre-tile-size);
     height: var(--genre-tile-size);
-    padding: 0;
-    background: transparent;
-    border: none;
+    padding: var(--gap-s);
+    box-sizing: border-box;
+    background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+    border: var(--border-thickness-xxs) solid
+      color-mix(in srgb, var(--color-foreground) 5%, transparent);
+    border-radius: var(--border-radius-m);
     cursor: pointer;
     color: inherit;
-    border-radius: var(--border-radius-m);
-
-    :global(.trakt-streaming-service-badge) {
-      width: 100%;
-      height: 100%;
-      aspect-ratio: 1;
-      transition: var(--transition-increment) ease-in-out;
-      transition-property: opacity, border-color, background;
-    }
+    transition: border-color var(--transition-increment) ease-in-out;
 
     &:disabled {
       cursor: not-allowed;
     }
 
-    &.is-excluded {
-      :global(.trakt-streaming-service-badge) {
-        opacity: var(--de-emphasized-opacity);
-        filter: grayscale(0.4);
-      }
+    &.is-selected {
+      --stroke-0: var(--color-foreground);
+      border-color: var(--color-background-purple);
     }
 
-    &.is-selected {
-      :global(.trakt-streaming-service-badge) {
-        border-color: var(--color-background-purple);
+    @include for-mouse {
+      &:hover:not(:disabled):not(.is-excluded) {
+        border-color: color-mix(in srgb, var(--color-background-purple) 60%, transparent);
       }
     }
+  }
+
+  .genre-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--ni-36);
+    height: var(--ni-36);
+    flex-shrink: 0;
+  }
+
+  .genre-name {
+    font-size: var(--ni-12);
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+    text-align: center;
+    line-height: 1.25;
   }
 
   .tile-check {
@@ -285,77 +338,4 @@
     }
   }
 
-  /* Genre-specific gradient backgrounds via --badge-background inheritance */
-  .genre-tile[data-genre='action'] {
-    --badge-background: linear-gradient(135deg, var(--red-700), var(--red-900));
-  }
-  .genre-tile[data-genre='adventure'] {
-    --badge-background: linear-gradient(135deg, var(--blue-500), var(--blue-800));
-  }
-  .genre-tile[data-genre='animation'] {
-    --badge-background: linear-gradient(135deg, var(--purple-500), var(--purple-800));
-  }
-  .genre-tile[data-genre='anime'] {
-    --badge-background: linear-gradient(135deg, var(--purple-400), var(--purple-700));
-  }
-  .genre-tile[data-genre='biography'] {
-    --badge-background: linear-gradient(135deg, var(--shade-400), var(--shade-700));
-  }
-  .genre-tile[data-genre='children'] {
-    --badge-background: linear-gradient(135deg, var(--yellow-400), var(--orange-500));
-  }
-  .genre-tile[data-genre='comedy'] {
-    --badge-background: linear-gradient(135deg, var(--yellow-500), var(--yellow-700));
-  }
-  .genre-tile[data-genre='crime'] {
-    --badge-background: linear-gradient(135deg, var(--shade-600), var(--shade-900));
-  }
-  .genre-tile[data-genre='documentary'] {
-    --badge-background: linear-gradient(135deg, var(--green-500), var(--green-800));
-  }
-  .genre-tile[data-genre='drama'] {
-    --badge-background: linear-gradient(135deg, var(--purple-600), var(--purple-900));
-  }
-  .genre-tile[data-genre='family'] {
-    --badge-background: linear-gradient(135deg, var(--orange-400), var(--orange-700));
-  }
-  .genre-tile[data-genre='fantasy'] {
-    --badge-background: linear-gradient(135deg, var(--blue-600), var(--purple-700));
-  }
-  .genre-tile[data-genre='history'] {
-    --badge-background: linear-gradient(135deg, var(--orange-600), var(--red-800));
-  }
-  .genre-tile[data-genre='holiday'] {
-    --badge-background: linear-gradient(135deg, var(--green-400), var(--green-700));
-  }
-  .genre-tile[data-genre='horror'] {
-    --badge-background: linear-gradient(135deg, var(--red-800), var(--shade-900));
-  }
-  .genre-tile[data-genre='musical'] {
-    --badge-background: linear-gradient(135deg, var(--purple-500), var(--blue-700));
-  }
-  .genre-tile[data-genre='mystery'] {
-    --badge-background: linear-gradient(135deg, var(--blue-700), var(--shade-800));
-  }
-  .genre-tile[data-genre='romance'] {
-    --badge-background: linear-gradient(135deg, var(--red-500), var(--red-800));
-  }
-  .genre-tile[data-genre='science-fiction'] {
-    --badge-background: linear-gradient(135deg, var(--blue-500), var(--blue-900));
-  }
-  .genre-tile[data-genre='superhero'] {
-    --badge-background: linear-gradient(135deg, var(--blue-600), var(--red-700));
-  }
-  .genre-tile[data-genre='suspense'] {
-    --badge-background: linear-gradient(135deg, var(--purple-700), var(--shade-900));
-  }
-  .genre-tile[data-genre='thriller'] {
-    --badge-background: linear-gradient(135deg, var(--shade-700), var(--shade-900));
-  }
-  .genre-tile[data-genre='war'] {
-    --badge-background: linear-gradient(135deg, var(--yellow-700), var(--shade-800));
-  }
-  .genre-tile[data-genre='western'] {
-    --badge-background: linear-gradient(135deg, var(--orange-700), var(--red-900));
-  }
 </style>

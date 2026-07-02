@@ -1,0 +1,7 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ChildrenIcon">
+<path id="Vector" d="M18 25.2C23.4676 25.2 27.9 19.9617 27.9 13.5C27.9 7.03827 23.4676 1.8 18 1.8C12.5324 1.8 8.1 7.03827 8.1 13.5C8.1 19.9617 12.5324 25.2 18 25.2Z" stroke="var(--stroke-0, white)" stroke-width="1.8"/>
+<path id="Vector_2" d="M18 25.2C16.8 27.6 16.8 29.7 18 31.5C19.2 29.7 19.2 27.6 18 25.2Z" stroke="var(--stroke-0, white)" stroke-width="1.8" stroke-linecap="round"/>
+<path id="Vector_3" opacity="0.6" d="M13.5 11.7C14.4941 11.7 15.3 10.8941 15.3 9.9C15.3 8.90589 14.4941 8.1 13.5 8.1C12.5059 8.1 11.7 8.90589 11.7 9.9C11.7 10.8941 12.5059 11.7 13.5 11.7Z" fill="var(--fill-0, white)"/>
+</g>
+</svg>

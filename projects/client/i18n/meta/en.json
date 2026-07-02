@@ -8471,20 +8471,40 @@
       "description": "Aria-label for the related media toggle button to show smart related movies or shows. This should be as short and concise as possible."
     },
     "header_genres_loved": {
-      "default": "Genres you love",
-      "description": "Section header for genres the user loves in settings."
+      "default": "Genres you Like",
+      "description": "Section header for genres the user likes in settings."
     },
     "header_genres_hated": {
-      "default": "Genres you can live without",
+      "default": "Genres you Dislike",
       "description": "Section header for genres the user dislikes in settings."
     },
     "button_label_edit_loved_genres": {
-      "default": "Edit genres you love",
-      "description": "Accessible label for the button that opens the loved genres drawer."
+      "default": "Edit genres you like",
+      "description": "Accessible label for the button that opens the liked genres drawer."
     },
     "button_label_edit_hated_genres": {
-      "default": "Edit genres you can live without",
+      "default": "Edit genres you dislike",
       "description": "Accessible label for the button that opens the disliked genres drawer."
+    },
+    "error_text_genres_save_failed": {
+      "default": "Failed to save. Please try again.",
+      "description": "Error message shown in the genres drawer when saving fails."
+    },
+    "label_genres_drawer_subtitle_loved": {
+      "default": "Select up to 5 genres which you'd like to see more of.",
+      "description": "Subtitle shown under the loved genres drawer title."
+    },
+    "label_genres_drawer_subtitle_hated": {
+      "default": "Select up to 5 genres you'd like to avoid entirely.",
+      "description": "Subtitle shown under the hated genres drawer title."
+    },
+    "label_genres_drawer_selected": {
+      "default": "Selected",
+      "description": "Section label above the selected genres row in the genres drawer."
+    },
+    "label_genres_drawer_all": {
+      "default": "All Genres",
+      "description": "Section label above the full genre catalog in the genres drawer."
     }
   }
 }

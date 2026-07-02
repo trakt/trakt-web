@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="AnimeIcon">
+<path id="Vector" d="M2.7 18C6.9 10.2 12 6.3 18 6.3C24 6.3 29.1 10.2 33.3 18C29.1 25.8 24 29.7 18 29.7C12 29.7 6.9 25.8 2.7 18Z" stroke="var(--stroke-0, white)" stroke-width="1.8"/>
+<path id="Vector_2" d="M18 25.2C21.9764 25.2 25.2 21.9764 25.2 18C25.2 14.0235 21.9764 10.8 18 10.8C14.0235 10.8 10.8 14.0235 10.8 18C10.8 21.9764 14.0235 25.2 18 25.2Z" fill="var(--fill-0, white)"/>
+<path id="Vector_3" d="M18 22.05C20.2368 22.05 22.05 20.2368 22.05 18C22.05 15.7632 20.2368 13.95 18 13.95C15.7632 13.95 13.95 15.7632 13.95 18C13.95 20.2368 15.7632 22.05 18 22.05Z" fill="var(--fill-0, #1E1E22)"/>
+<path id="Vector_4" d="M20.25 17.55C21.2441 17.55 22.05 16.7441 22.05 15.75C22.05 14.7559 21.2441 13.95 20.25 13.95C19.2559 13.95 18.45 14.7559 18.45 15.75C18.45 16.7441 19.2559 17.55 20.25 17.55Z" fill="var(--fill-0, white)"/>
+<path id="Vector_5" d="M9 9.9L11.7 13.5" stroke="var(--stroke-0, white)" stroke-width="1.8" stroke-linecap="round"/>
+<path id="Vector_6" d="M15.3 7.2L16.2 10.8" stroke="var(--stroke-0, white)" stroke-width="1.8" stroke-linecap="round"/>
+<path id="Vector_7" d="M21.6 7.2L20.7 10.8" stroke="var(--stroke-0, white)" stroke-width="1.8" stroke-linecap="round"/>
+<path id="Vector_8" d="M27 9.9L24.3 13.5" stroke="var(--stroke-0, white)" stroke-width="1.8" stroke-linecap="round"/>
+</g>
+</svg>

@@ -1,0 +1,7 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="HistoryIcon">
+<path id="Vector" d="M9 3.6H27V5.4L19.8 16.2V19.8L27 30.6V32.4H9V30.6L16.2 19.8V16.2L9 5.4V3.6Z" stroke="var(--stroke-0, white)" stroke-width="1.8" stroke-linejoin="round"/>
+<path id="Vector_2" d="M12.6 30.6C16.2 27 19.8 27 23.4 30.6H12.6Z" fill="var(--fill-0, white)"/>
+<path id="Vector_3" d="M11.7 6.3L18 12.6L24.3 6.3H11.7Z" fill="var(--fill-0, white)"/>
+</g>
+</svg>
