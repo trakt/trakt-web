@@ -175,6 +175,7 @@ export const UrlBuilder = {
     `/users/${user}/start-watching${buildParamString(sanitizeParams(params))}`,
 
   home: () => '/',
+  welcome: () => '/welcome',
   shows: () => '/shows',
   discover: (params?: DiscoverUrlParams) => {
     const baseUrl = '/discover';
