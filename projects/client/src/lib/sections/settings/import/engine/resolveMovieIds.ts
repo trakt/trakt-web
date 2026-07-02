@@ -1,21 +1,26 @@
 import { chunk } from '$lib/utils/array/chunk.ts';
-import type { ImportIds, UniversalImportItem } from '../ImportTypes.ts';
-import type { MovieCandidate } from './searchMovieCandidates.ts';
+import type {
+  AmbiguousImportItem,
+  ImportIds,
+  UniversalImportItem,
+} from '../ImportTypes.ts';
+import type { MovieMatchQuery, MovieMatchResult } from './matchMovies.ts';
 
-const SEARCH_CONCURRENCY = 4;
+const MATCH_BATCH_SIZE = 500;
 
-// Release years differ by one between sources for festival or
-// end-of-year releases (e.g. Schindler's List 1993 vs 1994).
-const YEAR_TOLERANCE = 1;
-
-export type SearchMovieCandidates = (
-  title: string,
-) => Promise<MovieCandidate[]>;
+export type MatchMovies = (
+  queries: ReadonlyArray<MovieMatchQuery>,
+) => Promise<MovieMatchResult[]>;
 
 type ResolveMovieIdsParams = {
   items: ReadonlyArray<UniversalImportItem>;
-  search: SearchMovieCandidates;
+  match: MatchMovies;
   signal?: AbortSignal;
+};
+
+export type ResolvedMovies = {
+  items: UniversalImportItem[];
+  ambiguous: AmbiguousImportItem[];
 };
 
 function hasAnyId(ids: ImportIds): boolean {
@@ -29,48 +34,81 @@ function needsResolution(item: UniversalImportItem): boolean {
     Boolean(item.title);
 }
 
-function pickCandidate(
-  candidates: MovieCandidate[],
-  year?: number,
-): MovieCandidate | undefined {
-  if (year == null) return candidates.at(0);
+function toQueryKey(item: UniversalImportItem): string {
+  return `${item.title}:${item.year ?? ''}`;
+}
 
-  return candidates.find(
-    (candidate) =>
-      candidate.year != null &&
-      Math.abs(candidate.year - year) <= YEAR_TOLERANCE,
-  );
+function toImportIds(result: MovieMatchResult): ImportIds | undefined {
+  const ids = result.match?.ids;
+  if (!ids) return undefined;
+
+  return {
+    trakt: ids.trakt,
+    imdb: ids.imdb ?? undefined,
+    tmdb: ids.tmdb ?? undefined,
+  };
+}
+
+function toCandidates(
+  result: MovieMatchResult,
+): AmbiguousImportItem['candidates'] {
+  return (result.candidates ?? []).map((candidate) => ({
+    title: candidate.title,
+    year: candidate.year ?? undefined,
+    poster: candidate.poster ?? undefined,
+    ids: {
+      trakt: candidate.ids.trakt,
+      imdb: candidate.ids.imdb ?? undefined,
+      tmdb: candidate.ids.tmdb ?? undefined,
+    },
+  }));
 }
 
 export async function resolveMovieIds(
-  { items, search, signal }: ResolveMovieIdsParams,
-): Promise<UniversalImportItem[]> {
-  const titles = [
-    ...new Set(
-      items
-        .filter(needsResolution)
-        .map((item) => item.title)
-        .filter((title): title is string => Boolean(title)),
-    ),
-  ];
+  { items, match, signal }: ResolveMovieIdsParams,
+): Promise<ResolvedMovies> {
+  const queries = new Map<string, MovieMatchQuery>();
 
-  const candidatesByTitle = new Map<string, MovieCandidate[]>();
+  items.filter(needsResolution).forEach((item) => {
+    const key = toQueryKey(item);
+    if (queries.has(key) || !item.title) return;
 
-  for (const batch of chunk(titles, SEARCH_CONCURRENCY)) {
+    queries.set(key, {
+      index: queries.size,
+      title: item.title,
+      year: item.year,
+    });
+  });
+
+  const resultsByIndex = new Map<number, MovieMatchResult>();
+
+  for (const batch of chunk([...queries.values()], MATCH_BATCH_SIZE)) {
     if (signal?.aborted) break;
 
-    await Promise.all(batch.map(async (title) => {
-      const candidates = await search(title).catch(() => []);
-      candidatesByTitle.set(title, candidates);
-    }));
+    const results = await match(batch).catch(() => []);
+    results.forEach((result) => resultsByIndex.set(result.index, result));
   }
 
-  return items.map((item) => {
-    if (!needsResolution(item) || !item.title) return item;
+  const ambiguous: AmbiguousImportItem[] = [];
 
-    const candidates = candidatesByTitle.get(item.title) ?? [];
-    const match = pickCandidate(candidates, item.year);
+  const resolved = items.map((item) => {
+    if (!needsResolution(item)) return item;
 
-    return match && hasAnyId(match.ids) ? { ...item, ids: match.ids } : item;
+    const query = queries.get(toQueryKey(item));
+    const result = query && resultsByIndex.get(query.index);
+    if (!result) return item;
+
+    if (result.status === 'matched') {
+      const ids = toImportIds(result);
+      return ids ? { ...item, ids } : item;
+    }
+
+    if (result.status === 'ambiguous') {
+      ambiguous.push({ item, candidates: toCandidates(result) });
+    }
+
+    return item;
   });
+
+  return { items: resolved, ambiguous };
 }

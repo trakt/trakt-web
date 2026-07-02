@@ -44,9 +44,22 @@ export interface ImportCounts {
   ratings: number;
 }
 
+export interface MovieMatchCandidate {
+  title: string;
+  year?: number;
+  poster?: string;
+  ids: ImportIds;
+}
+
+export interface AmbiguousImportItem {
+  item: UniversalImportItem;
+  candidates: MovieMatchCandidate[];
+}
+
 export interface ImportSyncResult {
   errorCount: number;
   unresolved: UniversalImportItem[];
+  ambiguous: AmbiguousImportItem[];
 }
 
 export type StepSegment = string | { text: string; href: string };

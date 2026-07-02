@@ -6,9 +6,9 @@ import type { SyncEngineCallbacks } from '../sync/models/SyncEngineCallbacks.ts'
 import { buildHistoryPayload } from './engine/buildHistoryPayload.ts';
 import { buildRatingsPayload } from './engine/buildRatingsPayload.ts';
 import { buildWatchlistPayload } from './engine/buildWatchlistPayload.ts';
+import { matchMovies } from './engine/matchMovies.ts';
 import { MOVIE_IDS, pickIds } from './engine/pickIds.ts';
 import { resolveMovieIds } from './engine/resolveMovieIds.ts';
-import { searchMovieCandidates } from './engine/searchMovieCandidates.ts';
 import type { ImportSyncResult, UniversalImportItem } from './ImportTypes.ts';
 
 export async function syncToTrakt(
@@ -18,14 +18,18 @@ export async function syncToTrakt(
   onStart?.();
 
   try {
-    const resolvedItems = await resolveMovieIds({
+    const { items: resolvedItems, ambiguous } = await resolveMovieIds({
       items,
-      search: searchMovieCandidates,
+      match: matchMovies,
       signal,
     });
 
+    const ambiguousItems = new Set(ambiguous.map((entry) => entry.item));
     const unresolved = resolvedItems.filter(
-      (item) => item.type === 'movie' && !pickIds(item.ids, MOVIE_IDS),
+      (item) =>
+        item.type === 'movie' &&
+        !pickIds(item.ids, MOVIE_IDS) &&
+        !ambiguousItems.has(item),
     );
 
     const historyItems = resolvedItems.filter((i) => i.action === 'history');
@@ -66,7 +70,7 @@ export async function syncToTrakt(
     }
 
     onComplete?.(!signal?.aborted);
-    return { errorCount: getErrorCount(), unresolved };
+    return { errorCount: getErrorCount(), unresolved, ambiguous };
   } catch (err) {
     onComplete?.(false);
     throw err;
