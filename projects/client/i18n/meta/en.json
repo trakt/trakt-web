@@ -7994,6 +7994,10 @@
       "default": "GitHub",
       "description": "Text for the link to the Trakt GitHub page."
     },
+    "link_label_status": {
+      "default": "Trakt Status",
+      "description": "Text for the link to the Trakt status page."
+    },
     "link_label_ios_app": {
       "default": "iOS App",
       "description": "Text for the link to the Trakt iOS app page."
