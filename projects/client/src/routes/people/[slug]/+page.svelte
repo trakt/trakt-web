@@ -42,8 +42,8 @@
     <NavbarStateSetter mode={navbarMode} hasFilters />
   </RenderFor>
 
-  {#if !$isLoading}
-    <PeopleSummary person={$person!} {positions} />
+  {#if !$isLoading && $person}
+    <PeopleSummary person={$person} {positions} />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->
     <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
