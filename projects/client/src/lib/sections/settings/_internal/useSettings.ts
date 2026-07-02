@@ -124,24 +124,22 @@ export function useSettings() {
       loved: $user.genres.loved,
       hated: $user.genres.hated,
     }))),
-    setLovedGenres: async (genres: string[]) => {
-      await handleSettingsChange({
+    setLovedGenres: (genres: string[]) =>
+      handleSettingsChange({
         request: () =>
           saveSettingsRequest({
             body: { browsing: { genres: { favorites: genres } } },
           }),
         action: 'genres',
-      });
-    },
-    setHatedGenres: async (genres: string[]) => {
-      await handleSettingsChange({
+      }),
+    setHatedGenres: (genres: string[]) =>
+      handleSettingsChange({
         request: () =>
           saveSettingsRequest({
             body: { browsing: { genres: { disliked: genres } } },
           }),
         action: 'genres',
-      });
-    },
+      }),
     theme: { set: setTheme },
     watchAgain: user.pipe(map(($user) => ({
       hasWatchAgain: $user.preferences.hasWatchAgain,

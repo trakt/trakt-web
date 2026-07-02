@@ -16,18 +16,20 @@
 
   type GenresDrawerProps = {
     title: string;
+    subtitle: string;
     current: Genre[];
     other: Genre[];
-    onSave: (genres: Genre[]) => Promise<void>;
+    onSave: (genres: Genre[]) => Promise<boolean>;
     onClose: () => void;
   };
 
-  const { title, current, other, onSave, onClose }: GenresDrawerProps = $props();
+  const { title, subtitle, current, other, onSave, onClose }: GenresDrawerProps = $props();
 
   const { confirm } = useConfirm();
 
   const selected = new SvelteSet<Genre>(current);
   let isSaving = $state(false);
+  let saveError = $state(false);
 
   const otherSet = $derived(new Set(other));
 
@@ -64,6 +66,7 @@
     } else {
       selected.add(genre);
     }
+    saveError = false;
   }
 
   function handleClose() {
@@ -79,9 +82,17 @@
 
   async function handleSave() {
     isSaving = true;
+    saveError = false;
     try {
-      await onSave([...selected]);
-      onClose();
+      const success = await onSave([...selected]);
+      if (success) {
+        onClose();
+      } else {
+        saveError = true;
+      }
+    } catch (e) {
+      console.error('[GenresDrawer] save failed:', e);
+      saveError = true;
     } finally {
       isSaving = false;
     }
@@ -89,6 +100,9 @@
 </script>
 
 {#snippet actions()}
+  {#if saveError}
+    <span class="save-error">{m.error_text_genres_save_failed()}</span>
+  {/if}
   <ActionButton
     label={m.button_label_apply()}
     color="purple"
@@ -107,7 +121,9 @@
   {actions}
 >
   <div class="trakt-genres-drawer-content">
+    <p class="secondary">{subtitle}</p>
     <div class="selections-sticky">
+      <p class="section-label">{m.label_genres_drawer_selected()}</p>
       <div class="selections-row">
         {#each selectedSorted as genre (genre)}
           <button
@@ -134,6 +150,7 @@
       </div>
     </div>
 
+    <p class="section-label catalog-label">{m.label_genres_drawer_all()}</p>
     <div class="genre-catalog">
       {#each sortedGenres as genre (genre)}
         {@const isSelected = selected.has(genre)}
@@ -169,22 +186,41 @@
 
   :global(.trakt-drawer.trakt-genres-drawer) {
     --drawer-padding: var(--gap-s);
+    --drawer-gap: var(--gap-micro);
+  }
+
+  .save-error {
+    font-size: var(--font-size-tag);
+    color: var(--color-background-red);
+    padding-inline: var(--gap-s);
   }
 
   .trakt-genres-drawer-content {
-    --genre-tile-size: 70px;
+    --genre-tile-size: 92px;
 
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-xs);
     flex: 1;
     min-height: 0;
+  }
+
+  .section-label {
+    font-size: var(--ni-14);
+    color: var(--color-foreground);
+  }
+
+  .catalog-label {
+    margin-block-start: var(--gap-m);
   }
 
   .selections-sticky {
     position: sticky;
     top: 0;
     z-index: var(--layer-base);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
     margin-inline: calc(-1 * var(--drawer-padding));
     padding-block: var(--gap-s);
     padding-inline: var(--drawer-padding);
@@ -194,9 +230,9 @@
   }
 
   .selections-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, var(--genre-tile-size));
     gap: var(--gap-s);
-    align-items: stretch;
   }
 
   .genre-slot-empty {
@@ -219,7 +255,7 @@
 
   .genre-catalog {
     display: grid;
-    grid-template-columns: repeat(auto-fill, var(--genre-tile-size));
+    grid-template-columns: repeat(4, var(--genre-tile-size));
     gap: var(--gap-s);
     align-content: start;
   }
@@ -251,13 +287,15 @@
     &.is-excluded {
       :global(.trakt-streaming-service-badge) {
         opacity: var(--de-emphasized-opacity);
-        filter: grayscale(0.4);
+        filter: grayscale(1);
       }
     }
 
-    &.is-selected {
-      :global(.trakt-streaming-service-badge) {
-        border-color: var(--color-background-purple);
+    @include for-mouse {
+      &:hover:not(:disabled):not(.is-excluded) {
+        :global(.trakt-streaming-service-badge) {
+          border-color: var(--color-background-purple);
+        }
       }
     }
   }

@@ -34,7 +34,13 @@
 )}
   <SettingsSectionLabel {title} />
   <SettingsGroupCard>
-    <div class="trakt-genre-section">
+    <button
+      class="trakt-genre-section"
+      type="button"
+      aria-label={editLabel}
+      disabled={isSaving}
+      onclick={() => (openDrawer = list)}
+    >
       <div class="slots-row">
         {#each selected as genre (genre)}
           <div class="genre-slot" data-genre={genre}>
@@ -47,16 +53,10 @@
           </div>
         {/each}
       </div>
-      <button
-        class="edit-button"
-        type="button"
-        aria-label={editLabel}
-        disabled={isSaving}
-        onclick={() => (openDrawer = list)}
-      >
+      <span class="row-caret">
         <CaretRightIcon />
-      </button>
-    </div>
+      </span>
+    </button>
   </SettingsGroupCard>
 {/snippet}
 
@@ -77,6 +77,7 @@
 {#if openDrawer === 'loved'}
   <GenresDrawer
     title={m.header_genres_loved()}
+    subtitle={m.label_genres_drawer_subtitle_loved()}
     current={loved}
     other={hated}
     onSave={setLovedGenres}
@@ -85,6 +86,7 @@
 {:else if openDrawer === 'hated'}
   <GenresDrawer
     title={m.header_genres_hated()}
+    subtitle={m.label_genres_drawer_subtitle_hated()}
     current={hated}
     other={loved}
     onSave={setHatedGenres}
@@ -96,12 +98,49 @@
   @use '$style/scss/mixins/index' as *;
 
   .trakt-genre-section {
-    --genre-tile-size: 70px;
+    --genre-tile-size: 92px;
 
     display: flex;
     align-items: center;
     gap: var(--gap-m);
     padding: var(--gap-m);
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: start;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition-increment) ease-in-out;
+
+    @include for-mouse {
+      &:hover:not([disabled]) {
+        background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+      }
+    }
+
+    &:active:not([disabled]) {
+      background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+    }
+
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  .row-caret {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0.35;
+    color: var(--color-text-secondary);
+
+    :global(svg) {
+      width: var(--ni-16);
+      height: var(--ni-16);
+    }
   }
 
   .slots-row {
@@ -137,33 +176,6 @@
     :global(svg) {
       width: var(--ni-16);
       height: var(--ni-16);
-    }
-  }
-
-  .edit-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    padding: var(--gap-xs);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: var(--color-text-secondary);
-    border-radius: var(--border-radius-s);
-
-    :global(svg) {
-      width: var(--ni-20);
-      height: var(--ni-20);
-    }
-
-    &:disabled {
-      opacity: var(--de-emphasized-opacity);
-      cursor: not-allowed;
-    }
-
-    &:hover:not(:disabled) {
-      color: var(--color-text-primary);
     }
   }
 
