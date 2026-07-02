@@ -6867,8 +6867,8 @@
       "description": "Body copy for the prominent TV Time welcome notice."
     },
     "welcome_tvtime_liberator_body": {
-      "default": "First, export your full history with the TV Time Liberator browser extension, then import the file here.",
-      "description": "Explanation of how to use the TV Time Liberator extension before importing, shown on the TV Time notice."
+      "default": "Export your full history with the TV Time Liberator browser extension, or upload the official GDPR data export from TV Time's privacy portal. Either one works.",
+      "description": "Explanation of the two TV Time export routes (Liberator extension and GDPR data export) shown on the TV Time notice."
     },
     "welcome_tvtime_liberator_cta": {
       "default": "Get TV Time Liberator",
