@@ -1,3 +1,4 @@
+import { safeJsonParse } from '$lib/utils/json/safeJsonParse.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
 import { IS_PROD } from '../../utils/env/index.ts';
@@ -17,12 +18,12 @@ function coerceLegacyCookieConsent(
     return;
   }
 
-  const hasConsent = JSON.parse(cookieConsent ?? 'false');
+  const hasConsent = safeJsonParse<boolean>(cookieConsent, false);
   return hasConsent ? 'all' : 'none';
 }
 
 function coerceCookieConsent(cookieConsent: string | undefined): CookieConsent {
-  const cookie = JSON.parse(cookieConsent ?? '{}');
+  const cookie = safeJsonParse<{ categories?: unknown }>(cookieConsent, {});
   if (!Array.isArray(cookie.categories)) return 'none';
 
   const categories = cookie.categories;
@@ -43,9 +44,15 @@ export const handle: Handle = async ({ event, resolve }) => {
   setCookieConsent(legacyConsent ?? consent);
 
   if (event.url.pathname.startsWith(CookieConsentEndpoint.Consent)) {
-    const { consent } = await event.request.json() as {
-      consent: CookieConsent;
-    };
+    const payload = await event.request
+      .json()
+      .catch(() => null) as { consent?: CookieConsent } | null;
+
+    if (!payload?.consent) {
+      return new Response(null, { status: 400 });
+    }
+
+    const { consent } = payload;
     setCookieConsent(consent);
 
     const host = event.url.hostname;
