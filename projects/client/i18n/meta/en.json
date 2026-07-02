@@ -5223,6 +5223,23 @@
         }
       }
     },
+    "mir_banner_in_review": {
+      "default": "In Review",
+      "description": "Subtitle beneath the month name in the Month in Review banner pill."
+    },
+    "mir_banner_body": {
+      "default": "Your monthly recap is ready. See everything you watched in {month}.",
+      "description": "Body copy in the Month in Review banner. {month} is the formatted month name, e.g. 'June'.",
+      "variables": {
+        "month": {
+          "type": "string"
+        }
+      }
+    },
+    "mir_banner_explore": {
+      "default": "Explore",
+      "description": "Label for the explore link in the Month in Review banner."
+    },
     "mir_title_month_in_review": {
       "default": "Month in Review",
       "description": "Period label in the Month in Review header, shown beneath the month and year (the MIR equivalent of 'Year in Review')."
