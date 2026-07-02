@@ -165,6 +165,12 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.warning_prompt_clear_data({ source: props.sourceText }),
     operation: 'destructive',
   }),
+  [ConfirmationType.CleanUpHistory]: (props) => ({
+    title: m.confirmation_title_clean_up_history(),
+    buttonText: m.button_text_clean_up(),
+    message: m.warning_prompt_clean_up_history({ count: props.count }),
+    operation: 'destructive',
+  }),
   [ConfirmationType.HideRecommendation]: (props) => ({
     title: m.confirmation_title_hide_recommendation(),
     buttonText: m.button_text_hide_recommendation(),

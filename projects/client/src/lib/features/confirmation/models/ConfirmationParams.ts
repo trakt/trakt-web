@@ -89,6 +89,10 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.ClearData;
     sourceText: string;
   };
+  [ConfirmationType.CleanUpHistory]: {
+    type: ConfirmationType.CleanUpHistory;
+    count: number;
+  };
   [ConfirmationType.HideRecommendation]: {
     type: ConfirmationType.HideRecommendation;
     title: string;

@@ -7998,6 +7998,52 @@
       "default": "total plays",
       "description": "Label for the total number of plays in a history analysis card."
     },
+    "button_text_clean_up": {
+      "default": "Clean Up",
+      "description": "Text for the button that removes duplicate plays from the user's watch history."
+    },
+    "button_label_clean_up_movies": {
+      "default": "Remove duplicate movie plays from your history.",
+      "description": "Aria-label for the button that removes duplicate movie plays."
+    },
+    "button_label_clean_up_episodes": {
+      "default": "Remove duplicate episode plays from your history.",
+      "description": "Aria-label for the button that removes duplicate episode plays."
+    },
+    "confirmation_title_clean_up_history": {
+      "default": "Clean Up History",
+      "description": "Title of the confirmation dialog shown before removing duplicate plays from the watch history."
+    },
+    "warning_prompt_clean_up_history": {
+      "default": "This will permanently remove {count} duplicate plays, keeping only the most recent watch of each item. This cannot be undone.",
+      "description": "Warning prompt shown when a user is about to remove duplicate plays from their watch history.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "cleanup_status_removing": {
+      "default": "Removing {processed} / {total} duplicate plays…",
+      "description": "Status text shown while duplicate plays are being removed from the watch history.",
+      "variables": {
+        "processed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "cleanup_status_done": {
+      "default": "Removed {count} duplicate plays.",
+      "description": "Status text shown when a history clean up has completed successfully.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "tag_label_progress": {
       "default": "Progress",
       "description": "Label for the progress bar."
