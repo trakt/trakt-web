@@ -53,6 +53,8 @@
   .trakt-shadow-scroller {
     height: 100%;
     min-height: var(--mask-size);
+    /* height:100% can't resolve against an auto-height wrapper; max-height inherits as a literal length instead. */
+    max-height: inherit;
 
     overflow-y: auto;
     overflow-x: hidden;

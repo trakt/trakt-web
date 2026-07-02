@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import ShadowScroller from "$lib/sections/components/ShadowScroller.svelte";
   import { downloadFile } from "$lib/sections/settings/export/downloadFile.ts";
@@ -100,23 +101,24 @@
             </div>
             <div class="ambiguous-candidates">
               {#each entry.candidates as candidate, candidateIndex (candidate)}
-                <button
-                  class="ambiguous-candidate"
-                  class:is-selected={(picks[index] ?? 0) === candidateIndex}
-                  aria-label={m.button_label_pick_match({
-                    option: toCandidateLabel(candidate),
-                  })}
-                  title={toCandidateLabel(candidate)}
-                  onclick={() => (picks[index] = candidateIndex)}
-                >
-                  <span class="candidate-poster">
-                    {#if candidate.poster}
-                      <img src={candidate.poster} alt="" loading="lazy" />
-                    {/if}
-                    <span class="tag candidate-year">{candidate.year ?? "?"}</span>
-                  </span>
-                  <span class="ellipsis candidate-title">{candidate.title}</span>
-                </button>
+                <Tooltip content={toCandidateLabel(candidate)} variant="compact">
+                  <button
+                    class="ambiguous-candidate"
+                    class:is-selected={(picks[index] ?? 0) === candidateIndex}
+                    aria-label={m.button_label_pick_match({
+                      option: toCandidateLabel(candidate),
+                    })}
+                    onclick={() => (picks[index] = candidateIndex)}
+                  >
+                    <span class="candidate-poster">
+                      {#if candidate.poster}
+                        <img src={candidate.poster} alt="" loading="lazy" />
+                      {/if}
+                      <span class="tag candidate-year">{candidate.year ?? "?"}</span>
+                    </span>
+                    <span class="ellipsis candidate-title">{candidate.title}</span>
+                  </button>
+                </Tooltip>
               {/each}
               <button
                 class="ambiguous-candidate is-skip"
