@@ -7,16 +7,13 @@
   import { BehaviorSubject } from "rxjs";
   import { slide } from "svelte/transition";
   import CommentReply from "../_internal/CommentReply.svelte";
-  import type {
-    EpisodeCommentProps,
-    MediaCommentProps,
-  } from "../CommentsProps";
+  import type { CommentTypeProps } from "../CommentsProps";
   import { useCommentReplies } from "./useCommentReplies";
 
   type CommentRepliesProps = {
     comment: MediaComment;
     media: MediaEntry;
-  } & (MediaCommentProps | EpisodeCommentProps);
+  } & CommentTypeProps;
 
   const { comment, media, ...typeProps }: CommentRepliesProps = $props();
 

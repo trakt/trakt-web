@@ -8,10 +8,21 @@ export type EpisodeCommentProps = {
   id: number;
 };
 
+export type SeasonCommentProps = {
+  type: 'season';
+  season: number;
+  id: number;
+};
+
 export type MediaCommentProps = {
   type: MediaType;
 };
 
+export type CommentTypeProps =
+  | MediaCommentProps
+  | SeasonCommentProps
+  | EpisodeCommentProps;
+
 export type CommentsProps = {
   media: MediaEntry;
-} & (MediaCommentProps | EpisodeCommentProps);
+} & CommentTypeProps;

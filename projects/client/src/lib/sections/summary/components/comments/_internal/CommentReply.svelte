@@ -1,10 +1,7 @@
 <script lang="ts">
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import type {
-    EpisodeCommentProps,
-    MediaCommentProps,
-  } from "../CommentsProps";
+  import type { CommentTypeProps } from "../CommentsProps";
   import ReactAction from "./comment-actions/ReactAction.svelte";
   import CommentBody from "./CommentBody.svelte";
   import CommentFooter from "./CommentFooter.svelte";
@@ -13,7 +10,7 @@
   type CommentReplyProps = {
     media: MediaEntry;
     comment: MediaComment;
-  } & (MediaCommentProps | EpisodeCommentProps);
+  } & CommentTypeProps;
 
   const { comment, media, ...typeProps }: CommentReplyProps = $props();
 </script>

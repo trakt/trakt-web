@@ -1,6 +1,6 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
-import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
+import type { CommentableMediaType } from '$lib/requests/models/CommentableMediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaComment } from '$lib/requests/models/MediaComment.ts';
 import { deleteCommentRequest } from '$lib/requests/queries/comments/deleteCommentRequest.ts';
@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 
 type UseDeleteCommentProps = {
   comment: MediaComment;
-  type: ExtendedMediaType;
+  type: CommentableMediaType;
 };
 
 export function useDeleteComment(

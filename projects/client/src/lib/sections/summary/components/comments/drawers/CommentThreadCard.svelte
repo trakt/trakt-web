@@ -10,10 +10,7 @@
   import CommentBody from "../_internal/CommentBody.svelte";
   import CommentFooter from "../_internal/CommentFooter.svelte";
   import CommentHeader from "../_internal/CommentHeader.svelte";
-  import type {
-    EpisodeCommentProps,
-    MediaCommentProps,
-  } from "../CommentsProps";
+  import type { CommentTypeProps } from "../CommentsProps";
   import CommentReplies from "./CommentReplies.svelte";
   import { THREAD_LIST_CLASS } from "./constants";
   import { scrollActiveCommentIntoView } from "./scrollActiveCommentIntoView";
@@ -27,7 +24,7 @@
     shouldScrollIntoView: boolean;
     header?: Snippet;
     scrollContainerClass?: string;
-  } & (MediaCommentProps | EpisodeCommentProps);
+  } & CommentTypeProps;
 
   const {
     comment,

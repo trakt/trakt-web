@@ -184,6 +184,18 @@ export const shows = [
     },
   ),
   http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/comments/likes*`,
+    () => {
+      return HttpResponse.json(ShowSiloCommentsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/people`,
+    () => {
+      return HttpResponse.json(ShowSiloPeopleResponseMock);
+    },
+  ),
+  http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/comments/likes*`,
     () => {
       return HttpResponse.json(EpisodeSiloCommentsResponseMock);

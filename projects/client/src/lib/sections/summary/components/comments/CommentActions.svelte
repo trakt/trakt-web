@@ -1,7 +1,7 @@
 <script lang="ts">
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
+  import type { CommentableMediaType } from "$lib/requests/models/CommentableMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import DeleteCommentButton from "./_internal/comment-actions/DeleteCommentButton.svelte";
   import EditCommentButton from "./_internal/comment-actions/EditCommentButton.svelte";
@@ -9,7 +9,7 @@
 
   type CommentActionsProps = {
     comment: MediaComment;
-    type: ExtendedMediaType;
+    type: CommentableMediaType;
     isOwnComment: boolean;
     onEdit: () => void;
   };
