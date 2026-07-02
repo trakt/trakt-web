@@ -15,12 +15,7 @@ export function matchesServiceSlug(
     return false;
   }
 
-  return serviceKeys.some((key) =>
-    source === key ||
-    source.startsWith(`${key}_`) ||
-    source.endsWith(`_${key}`) ||
-    source.includes(`_${key}_`)
-  );
+  return serviceKeys.some((key) => source === key);
 }
 
 export function isWellKnownSource(source: string): boolean {
