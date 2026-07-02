@@ -91,7 +91,11 @@
     height: calc(2 * var(--height-portrait-card) + var(--gap-l));
   }
 
-  .trakt-item-wrapper.has-offset {
-    transform: translateY(var(--ni-32));
+  .trakt-item-wrapper {
+    pointer-events: none;
+
+    &.has-offset {
+      transform: translateY(var(--ni-32));
+    }
   }
 </style>
