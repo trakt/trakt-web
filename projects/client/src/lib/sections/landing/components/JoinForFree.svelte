@@ -48,11 +48,13 @@
     gap: var(--gap-l);
 
     padding: var(--ni-24);
-    border: var(--ni-1) solid rgba(255, 255, 255, 0.09);
+    border: var(--ni-1) solid
+      color-mix(in srgb, var(--shade-10) 9%, transparent);
     border-radius: var(--ni-24);
 
-    background: rgba(20, 16, 28, 0.72);
-    box-shadow: 0 var(--ni-30) var(--ni-80) rgba(0, 0, 0, 0.5);
+    background: color-mix(in srgb, var(--shade-920) 72%, transparent);
+    box-shadow: 0 var(--ni-30) var(--ni-80)
+      color-mix(in srgb, var(--color-shadow) 50%, transparent);
     backdrop-filter: blur(var(--ni-20));
     -webkit-backdrop-filter: blur(var(--ni-20));
 
@@ -60,7 +62,7 @@
       gap: var(--gap-m);
       padding: var(--ni-24) var(--ni-22);
       border-radius: var(--ni-22);
-      background: rgba(16, 12, 22, 0.78);
+      background: color-mix(in srgb, var(--shade-930) 78%, transparent);
     }
   }
 
