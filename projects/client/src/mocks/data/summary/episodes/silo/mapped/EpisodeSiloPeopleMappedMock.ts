@@ -94,6 +94,21 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
       'name': 'Tim Robbins',
     },
   ],
+  'guestStars': [
+    {
+      'characterName': 'Gloria Hildebrandt',
+      'headshot': {
+        'url': {
+          'thumb':
+            'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
+          'medium':
+            'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/medium/2e92bf71ee.jpg.webp',
+        },
+      },
+      'key': 'sophie-thompson',
+      'name': 'Sophie Thompson',
+    },
+  ],
   'creators': [],
   'directors': [
     {

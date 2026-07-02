@@ -1565,6 +1565,32 @@
       "default": "Cast & Crew",
       "description": "Subtitle for the people drawer when searching across cast and crew. This should be as short and concise as possible."
     },
+    "header_main_cast": {
+      "default": "Main Cast",
+      "description": "Header for the primary cast group in the people drawer. This should be as short and concise as possible."
+    },
+    "header_supporting_cast": {
+      "default": "Supporting Cast",
+      "description": "Header for the guest or supporting cast group in the people drawer. This should be as short and concise as possible."
+    },
+    "text_person_count": {
+      "default": "{count} person",
+      "description": "Text for a single person count.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_people_count": {
+      "default": "{count} people",
+      "description": "Text for a plural people count.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "button_label_view_all_trending_movies": {
       "default": "View all trending movies",
       "description": "Aria-label for the button that allows users to view all trending movies."
