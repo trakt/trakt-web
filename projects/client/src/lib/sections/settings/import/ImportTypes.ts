@@ -44,6 +44,11 @@ export interface ImportCounts {
   ratings: number;
 }
 
+export interface ImportSyncResult {
+  errorCount: number;
+  unresolved: UniversalImportItem[];
+}
+
 export type StepSegment = string | { text: string; href: string };
 export type ImportStep = StepSegment[];
 
