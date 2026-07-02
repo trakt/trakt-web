@@ -4,16 +4,18 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import { slide } from "svelte/transition";
-  import type { ImportCounts } from "../../import/ImportTypes.ts";
+  import type { ImportCounts, ImportSource } from "../../import/ImportTypes.ts";
 
   type ImportSummaryProps = {
     counts: ImportCounts;
     totalItems: number;
+    source: ImportSource;
     onstart: () => void;
     onreset: () => void;
   };
 
-  const { counts, totalItems, onstart, onreset }: ImportSummaryProps = $props();
+  const { counts, totalItems, source, onstart, onreset }: ImportSummaryProps =
+    $props();
 
   const { user, limits } = useUser();
 
@@ -21,8 +23,10 @@
     if ($user?.isVip) return false;
     if (!$limits) return false;
 
-    const watchlistFreeLimit = $limits.watchlistItems.free;
-    const historyFreeLimit = $limits.history.free;
+    // FIXME: revert when limits are changed
+    const limitMultiplier = source === "tvtime" ? 2 : 1;
+    const watchlistFreeLimit = $limits.watchlistItems.free * limitMultiplier;
+    const historyFreeLimit = $limits.history.free * limitMultiplier;
 
     return (
       counts.watchlist > watchlistFreeLimit || counts.history > historyFreeLimit
@@ -30,7 +34,10 @@
   });
 </script>
 
-<div class="trakt-import-summary" transition:slide={{ duration: 150, axis: "y" }}>
+<div
+  class="trakt-import-summary"
+  transition:slide={{ duration: 150, axis: "y" }}
+>
   <div class="import-summary-counts">
     {#if counts.history > 0}
       <p class="secondary">

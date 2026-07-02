@@ -222,6 +222,7 @@
           <ImportSummary
             {counts}
             totalItems={state.totalCount}
+            source={state.selectedSource}
             onstart={startImport}
             onreset={reset}
           />
