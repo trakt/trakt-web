@@ -440,6 +440,10 @@
   --color-review-accent: var(--purple-500);
   --color-review-base: var(--purple-700);
   --color-review-base-deep: var(--purple-800);
+  --color-mir-banner-base: var(--shade-900);
+  --color-mir-banner-foreground: var(--shade-10);
+  --color-mir-banner-pill: var(--purple-600);
+  --color-mir-banner-accent: var(--purple-200);
   // 2024 template: branded purple hero wordmark and blue-tinged stat panels
   // (charts themselves render through the shared --viz-* tokens).
   --color-yir-hero-gradient-start: var(--purple-400);
@@ -880,6 +884,10 @@
   --color-review-accent: var(--purple-500);
   --color-review-base: var(--shade-900);
   --color-review-base-deep: var(--shade-920);
+  --color-mir-banner-base: var(--shade-900);
+  --color-mir-banner-foreground: var(--shade-10);
+  --color-mir-banner-pill: var(--purple-600);
+  --color-mir-banner-accent: var(--purple-200);
   // 2024 template (see light-theme for the rationale)
   --color-yir-hero-gradient-start: color-mix(
     in srgb,
