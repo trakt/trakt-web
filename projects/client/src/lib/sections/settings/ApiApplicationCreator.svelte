@@ -2,11 +2,9 @@
   import { goto } from "$app/navigation";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import ApiApplicationForm from "./_internal/apps/ApiApplicationForm.svelte";
+  import ApiApplicationFormSection from "./_internal/apps/ApiApplicationFormSection.svelte";
   import type { ApiApplicationFormValues } from "./_internal/apps/ApiApplicationFormValues.ts";
   import { useCreateApiApplication } from "./_internal/apps/useCreateApiApplication.ts";
-  import SettingsBlock from "./_internal/SettingsBlock.svelte";
-  import SettingsCrumb from "./_internal/SettingsCrumb.svelte";
 
   const { createApplication, isCreating } = useCreateApiApplication();
 
@@ -25,37 +23,14 @@
   }
 </script>
 
-<div class="trakt-api-application-creator">
-  <SettingsBlock
-    title={m.heading_create_api_application()}
-    description={m.description_create_api_application()}
-  >
-    {#snippet titlePrefix()}
-      <SettingsCrumb
-        href={UrlBuilder.settings.appsApi()}
-        label={m.heading_api_applications()}
-      />
-    {/snippet}
-
-    <ApiApplicationForm
-      isBusy={$isCreating}
-      confirmButtonText={m.button_text_create()}
-      confirmButtonLabel={m.button_label_create_app()}
-      onSubmit={handleSubmit}
-      onCancel={handleCancel}
-    />
-  </SettingsBlock>
-</div>
-
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  .trakt-api-application-creator {
-    width: 100%;
-    max-width: var(--ni-640);
-
-    @include for-tablet-sm-and-below {
-      max-width: 100%;
-    }
-  }
-</style>
+<ApiApplicationFormSection
+  title={m.heading_create_api_application()}
+  description={m.description_create_api_application()}
+  crumbHref={UrlBuilder.settings.appsApi()}
+  crumbLabel={m.heading_api_applications()}
+  isBusy={$isCreating}
+  confirmButtonText={m.button_text_create()}
+  confirmButtonLabel={m.button_label_create_app()}
+  onSubmit={handleSubmit}
+  onCancel={handleCancel}
+/>

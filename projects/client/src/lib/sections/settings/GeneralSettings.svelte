@@ -26,7 +26,7 @@
   .trakt-general-settings {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
+    gap: var(--gap-xl);
     min-width: 0;
 
     @include for-tablet-sm-and-below {

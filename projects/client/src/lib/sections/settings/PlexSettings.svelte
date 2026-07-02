@@ -5,7 +5,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import SettingsGroupCard from "./_internal/SettingsGroupCard.svelte";
   import SettingsGroupRow from "./_internal/SettingsGroupRow.svelte";
-  import SettingsSectionLabel from "./_internal/SettingsSectionLabel.svelte";
   import PlexConnect from "./_internal/plex/PlexConnect.svelte";
   import PlexServerCard from "./_internal/plex/PlexServerCard.svelte";
   import PlexServers from "./_internal/plex/PlexServers.svelte";
@@ -31,9 +30,7 @@
 </script>
 
 <div class="trakt-plex-settings">
-  <SettingsSectionLabel title={m.header_plex_sync()} />
-
-  <SettingsGroupCard>
+  <SettingsGroupCard title={m.header_plex_sync()}>
     {#if $isConnected === null}
       <div class="loading-container">
         <LoadingIndicator />
@@ -115,7 +112,7 @@
   .trakt-plex-settings {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
+    gap: var(--gap-xl);
     min-width: 0;
 
     @include for-tablet-sm-and-below {

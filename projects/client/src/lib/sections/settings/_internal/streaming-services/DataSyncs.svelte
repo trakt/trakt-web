@@ -8,7 +8,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { firstValueFrom, map } from "rxjs";
   import DataSyncList from "../DataSyncList.svelte";
-  import SettingsBlock from "../SettingsBlock.svelte";
+  import SettingsSection from "../SettingsSection.svelte";
   import { toServiceInfo } from "./toServiceInfo.ts";
   import { useStreamingServiceLookup } from "./useStreamingServiceLookup.ts";
   import { useStreamingServicesActions } from "./useStreamingServicesActions.ts";
@@ -44,10 +44,9 @@
   };
 </script>
 
-<SettingsBlock
+<SettingsSection
   title={m.header_data_syncs()}
   description={m.description_data_syncs()}
-  indented
 >
   {#if $summary && $summary.count > 0 && $summary.latest}
     <div class="trakt-data-syncs-banner">
@@ -86,7 +85,7 @@
       getHref={(sync) => UrlBuilder.settings.streamingServicesDetail(sync.id)}
     />
   {/if}
-</SettingsBlock>
+</SettingsSection>
 
 <style lang="scss">
   .trakt-data-syncs-banner {

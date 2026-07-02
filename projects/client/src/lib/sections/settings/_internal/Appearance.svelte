@@ -6,12 +6,9 @@
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
   import SettingsGroupCard from "./SettingsGroupCard.svelte";
   import SettingsGroupRow from "./SettingsGroupRow.svelte";
-  import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
 </script>
 
-<SettingsSectionLabel title={m.header_appearance()} />
-
-<SettingsGroupCard>
+<SettingsGroupCard title={m.header_appearance()}>
   <SettingsGroupRow title={m.text_theme()} variant="custom">
     {#snippet icon()}<ThemeIcon />{/snippet}
     <ThemePicker />

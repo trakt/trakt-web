@@ -5,16 +5,13 @@
   import { map } from "rxjs";
   import BlockedUserRow from "./BlockedUserRow.svelte";
   import SettingsGroupCard from "./SettingsGroupCard.svelte";
-  import SettingsSectionLabel from "./SettingsSectionLabel.svelte";
 
   const blockedUsers = useQuery(blockedUsersQuery()).pipe(
     map((query) => query.data ?? []),
   );
 </script>
 
-<SettingsSectionLabel title={m.heading_blocked_users()} />
-
-<SettingsGroupCard>
+<SettingsGroupCard title={m.heading_blocked_users()}>
   {#if $blockedUsers.length === 0}
     <p class="empty-state small secondary">{m.text_no_blocked_users()}</p>
   {:else}

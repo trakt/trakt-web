@@ -50,18 +50,19 @@
   }
 </script>
 
-<Form
-  onSubmit={handleSubmit}
-  {onCancel}
-  disabled={isBusy || !isValid}
-  isCancelDisabled={isBusy}
-  {confirmButtonText}
-  {confirmButtonLabel}
-  inlineActions
->
-  <div class="fields">
+<div class="trakt-api-application-form">
+  <Form
+    onSubmit={handleSubmit}
+    {onCancel}
+    disabled={isBusy || !isValid}
+    isCancelDisabled={isBusy}
+    {confirmButtonText}
+    {confirmButtonLabel}
+    inlineActions
+  >
+    <div class="fields">
     <div class="field">
-      <span class="field-label">{m.label_app_name()}</span>
+      <span class="secondary tag">{m.label_app_name()}</span>
       <FormInput
         placeholder={m.input_placeholder_app_name()}
         onChange={(value) => (name = value)}
@@ -77,7 +78,7 @@
     </div>
 
     <div class="field">
-      <span class="field-label">{m.label_app_description()}</span>
+      <span class="secondary tag">{m.label_app_description()}</span>
       <FormTextArea
         placeholder=""
         onChange={(value) => (description = value)}
@@ -85,11 +86,11 @@
         value={description}
         rows={3}
       />
-      <span class="field-hint secondary">{m.hint_app_description()}</span>
+      <span class="field-hint secondary tag">{m.hint_app_description()}</span>
     </div>
 
     <div class="field">
-      <span class="field-label">{m.label_app_redirect_uris()}</span>
+      <span class="secondary tag">{m.label_app_redirect_uris()}</span>
       <FormTextArea
         placeholder={m.input_placeholder_app_redirect_uris()}
         onChange={(value) => (redirectUriText = value)}
@@ -102,11 +103,11 @@
           errorText: m.validation_text_app_redirect_uris(),
         }}
       />
-      <span class="field-hint secondary">{m.hint_app_redirect_uris()}</span>
+      <span class="field-hint secondary tag">{m.hint_app_redirect_uris()}</span>
     </div>
 
     <div class="field">
-      <span class="field-label">{m.label_app_origins()}</span>
+      <span class="secondary tag">{m.label_app_origins()}</span>
       <FormTextArea
         placeholder={m.input_placeholder_app_origins()}
         onChange={(value) => (originsText = value)}
@@ -114,12 +115,17 @@
         value={originsText}
         rows={3}
       />
-      <span class="field-hint secondary">{m.hint_app_origins()}</span>
+      <span class="field-hint secondary tag">{m.hint_app_origins()}</span>
     </div>
   </div>
-</Form>
+  </Form>
+</div>
 
 <style lang="scss">
+  .trakt-api-application-form {
+    padding: var(--gap-m);
+  }
+
   .fields {
     display: flex;
     flex-direction: column;
@@ -133,14 +139,7 @@
     min-width: 0;
   }
 
-  .field-label {
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-tag);
-    text-transform: uppercase;
-  }
-
   .field-hint {
     padding: 0 var(--ni-4);
-    font-size: var(--font-size-tag);
   }
 </style>

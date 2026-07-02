@@ -1,12 +1,11 @@
 <script lang="ts">
-  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useQuery } from "$lib/features/query/useQuery.ts";
   import { dataSyncQuery } from "$lib/requests/queries/streaming-sync/dataSyncQuery.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { firstValueFrom, map } from "rxjs";
-  import SettingsBlock from "./_internal/SettingsBlock.svelte";
   import SettingsGroupCard from "./_internal/SettingsGroupCard.svelte";
+  import SettingsSection from "./_internal/SettingsSection.svelte";
   import DataSyncRow from "./_internal/streaming-services/DataSyncRow.svelte";
   import SyncItemsSection from "./_internal/streaming-services/SyncItemsSection.svelte";
   import SyncLoadError from "./_internal/streaming-services/SyncLoadError.svelte";
@@ -33,20 +32,14 @@
 </script>
 
 <div class="trakt-streaming-services-detail">
-  <SettingsBlock
+  <SettingsSection
     title={m.header_sync_detail({ id: syncId })}
     description={m.description_sync_detail()}
-    indented
+    crumb={{
+      href: UrlBuilder.settings.streamingServices(),
+      label: m.link_text_streaming_sync_settings(),
+    }}
   >
-    {#snippet titlePrefix()}
-      <span class="title-prefix">
-        <Link href={UrlBuilder.settings.streamingServices()} color="inherit">
-          {m.link_text_streaming_sync_settings()}
-        </Link>
-        <span class="title-sep">/</span>
-      </span>
-    {/snippet}
-
     {#if $isError}
       <SyncLoadError onRetry={retry} />
     {:else if $sync}
@@ -62,7 +55,7 @@
         />
       </SettingsGroupCard>
     {/if}
-  </SettingsBlock>
+  </SettingsSection>
 
   {#if $sync && $sync.pausedCount > 0}
     <SyncItemsSection {syncId} kind="paused" count={$sync.pausedCount} />
@@ -74,34 +67,9 @@
 </div>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-streaming-services-detail {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xl);
-
-    max-width: var(--ni-640);
-
-    @include for-tablet-sm-and-below() {
-      max-width: 100%;
-    }
-  }
-
-  .title-prefix {
-    display: contents;
-
-    color: var(--color-text-secondary);
-
-    :global(.trakt-link) {
-      color: var(--color-text-secondary);
-      text-decoration: none;
-
-      transition: color var(--transition-increment) ease-in-out;
-    }
-
-    :global(.trakt-link:hover) {
-      color: var(--color-link-active);
-    }
   }
 </style>

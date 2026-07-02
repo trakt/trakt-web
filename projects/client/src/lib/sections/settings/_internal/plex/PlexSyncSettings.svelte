@@ -11,7 +11,6 @@
   import { map } from "rxjs";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
-  import SettingsSectionLabel from "../SettingsSectionLabel.svelte";
 
   const { invalidate } = useInvalidator();
 
@@ -42,13 +41,11 @@
   const skeletonRows = [{ tags: 3 }, { tags: 4 }, { tags: 2 }, { tags: 1 }];
 </script>
 
-<SettingsSectionLabel
-  title={m.header_plex_sync_settings()}
-  description={m.description_plex_sync_settings()}
-/>
-
 {#if $isLoading || !$settings}
-  <SettingsGroupCard>
+  <SettingsGroupCard
+    title={m.header_plex_sync_settings()}
+    description={m.description_plex_sync_settings()}
+  >
     {#each skeletonRows as row, i (i)}
       <div class="skeleton-row">
         <div class="skeleton skeleton-icon"></div>
@@ -63,7 +60,10 @@
   </SettingsGroupCard>
 {:else}
   {@const t = $settings}
-  <SettingsGroupCard>
+  <SettingsGroupCard
+    title={m.header_plex_sync_settings()}
+    description={m.description_plex_sync_settings()}
+  >
     <SettingsGroupRow title={m.button_text_browse_movies()} variant="custom">
       {#snippet icon()}<MovieIcon />{/snippet}
       <div class="plex-toggle-tags">

@@ -12,10 +12,10 @@
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { onDestroy } from "svelte";
+  import ApiApplicationDetailSkeleton from "./_internal/apps/ApiApplicationDetailSkeleton.svelte";
   import DeleteApiApplicationButton from "./_internal/apps/DeleteApiApplicationButton.svelte";
   import { useApiApplication } from "./_internal/apps/useApiApplication.ts";
-  import SettingsBlock from "./_internal/SettingsBlock.svelte";
-  import SettingsCrumb from "./_internal/SettingsCrumb.svelte";
+  import SettingsGroupCard from "./_internal/SettingsGroupCard.svelte";
 
   const { appId }: { appId: number } = $props();
 
@@ -25,7 +25,7 @@
   }
 
   const appId$ = fromRune(() => appId);
-  const { app: app$ } = useApiApplication(appId$);
+  const { app: app$, isLoading: isLoading$ } = useApiApplication(appId$);
   const app = $derived($app$);
 
   const COPIED_RESET_MS = 1500;
@@ -41,25 +41,25 @@
   const fields = $derived<CredentialField[]>(
     app
       ? [
-        {
-          key: "client-id",
-          label: m.label_app_client_id(),
-          value: app.clientId,
-          isSecret: false,
-        },
-        {
-          key: "client-secret",
-          label: m.label_app_client_secret(),
-          value: app.clientSecret,
-          isSecret: true,
-        },
-        {
-          key: "redirect-uri",
-          label: m.label_app_redirect_uri(),
-          value: app.redirectUris.join("\n"),
-          isSecret: false,
-        },
-      ]
+          {
+            key: "client-id",
+            label: m.label_app_client_id(),
+            value: app.clientId,
+            isSecret: false,
+          },
+          {
+            key: "client-secret",
+            label: m.label_app_client_secret(),
+            value: app.clientSecret,
+            isSecret: true,
+          },
+          {
+            key: "redirect-uri",
+            label: m.label_app_redirect_uri(),
+            value: app.redirectUris.join("\n"),
+            isSecret: false,
+          },
+        ]
       : [],
   );
 
@@ -72,7 +72,10 @@
 
     const result: PermissionLabel[] = [];
     if (app.permissions.canScrobble) {
-      result.push({ key: "scrobble", label: m.label_app_permission_scrobble() });
+      result.push({
+        key: "scrobble",
+        label: m.label_app_permission_scrobble(),
+      });
     }
     if (app.permissions.canCheckin) {
       result.push({ key: "checkin", label: m.label_app_permission_checkin() });
@@ -114,9 +117,9 @@
 {#snippet credentialField(field: CredentialField)}
   {@const isHidden = field.isSecret && !isSecretRevealed}
   <div class="field">
-    <span class="meta-label">{field.label}</span>
+    <span class="secondary small">{field.label}</span>
     <div class="value-row">
-      <code class="value" class:masked={isHidden}>
+      <code class="value small" class:masked={isHidden}>
         {#if isHidden}
           {SECRET_MASK}
         {:else}
@@ -131,8 +134,8 @@
             style="ghost"
             size="small"
             label={isSecretRevealed
-            ? m.button_label_hide_secret()
-            : m.button_label_reveal_secret()}
+              ? m.button_label_hide_secret()
+              : m.button_label_reveal_secret()}
             onclick={() => (isSecretRevealed = !isSecretRevealed)}
           >
             <VisibilityIcon state={isSecretRevealed ? "visible" : "hidden"} />
@@ -142,8 +145,8 @@
           style="ghost"
           size="small"
           label={copiedKey === field.key
-          ? m.button_label_copied()
-          : m.button_label_copy()}
+            ? m.button_label_copied()
+            : m.button_label_copy()}
           onclick={() => handleCopy(field)}
         >
           {#if copiedKey === field.key}
@@ -157,9 +160,16 @@
   </div>
 {/snippet}
 
-<div class="trakt-api-application-detail">
-  {#if app}
-    <div class="card-actions">
+{#if app}
+  <SettingsGroupCard
+    title={app.name}
+    description={app.description ?? ""}
+    crumb={{
+      href: UrlBuilder.settings.appsApi(),
+      label: m.heading_api_applications(),
+    }}
+  >
+    {#snippet action()}
       <ActionButton
         href={UrlBuilder.settings.appsApiEdit(app.id)}
         style="ghost"
@@ -171,60 +181,44 @@
       </ActionButton>
 
       <DeleteApiApplicationButton {app} onDeleted={handleDeleted} />
-    </div>
+    {/snippet}
 
-    <SettingsBlock title={app.name} description={app.description ?? ""}>
-      {#snippet titlePrefix()}
-        <SettingsCrumb
-          href={UrlBuilder.settings.appsApi()}
-          label={m.heading_api_applications()}
-        />
-      {/snippet}
-
-      <div class="credentials">
-        {#each fields as field (field.key)}
-          {@render credentialField(field)}
-        {/each}
-      </div>
-
-      {#if permissions.length > 0}
-        <div class="field">
-          <span class="meta-label">{m.label_app_permissions()}</span>
-          <div class="pills">
-            {#each permissions as permission (permission.key)}
-              <span class="pill">{permission.label}</span>
+    <div class="detail-body">
+          <div class="credentials">
+            {#each fields as field (field.key)}
+              {@render credentialField(field)}
             {/each}
           </div>
-        </div>
-      {/if}
 
-      <p class="created secondary">
-        {m.text_app_created_on({ date: createdOn })}
-      </p>
-    </SettingsBlock>
-  {/if}
-</div>
+          {#if permissions.length > 0}
+            <div class="field">
+              <span class="secondary small">
+                {m.label_app_permissions()}
+              </span>
+              <div class="pills">
+                {#each permissions as permission (permission.key)}
+                  <span class="pill small no-wrap">{permission.label}</span>
+                {/each}
+              </div>
+            </div>
+          {/if}
+
+          <p class="secondary small">
+            {m.text_app_created_on({ date: createdOn })}
+          </p>
+        </div>
+    </SettingsGroupCard>
+{:else if $isLoading$}
+  <ApiApplicationDetailSkeleton />
+{/if}
 
 <style lang="scss">
-  .trakt-api-application-detail {
-    position: relative;
-
-    width: 100%;
-    max-width: var(--ni-640);
-  }
-
-  .card-actions {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-
+  .detail-body {
     display: flex;
-    align-items: center;
-    gap: var(--gap-m);
-  }
+    flex-direction: column;
+    gap: var(--gap-l);
 
-  .trakt-api-application-detail :global(.trakt-settings-block-header) {
-    padding-inline-end: var(--ni-72);
+    padding: var(--gap-m);
   }
 
   .credentials {
@@ -238,12 +232,6 @@
     flex-direction: column;
     gap: var(--ni-4);
     min-width: 0;
-  }
-
-  .meta-label {
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-text-small);
-    text-transform: uppercase;
   }
 
   .value-row {
@@ -260,8 +248,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--ni-2);
-
-    font-size: var(--font-size-text-small);
 
     &.masked {
       letter-spacing: var(--ni-2);
@@ -314,12 +300,5 @@
       transparent
     );
     color: var(--color-link-active);
-
-    font-size: var(--font-size-text-small);
-    white-space: nowrap;
-  }
-
-  .created {
-    font-size: var(--font-size-text-small);
   }
 </style>

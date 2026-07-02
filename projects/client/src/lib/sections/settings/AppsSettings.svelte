@@ -8,7 +8,10 @@
 </script>
 
 <div class="trakt-apps-settings">
-  <SettingsGroupCard>
+  <SettingsGroupCard
+    title={m.heading_apps_settings()}
+    description={m.description_apps_settings()}
+  >
     <SettingsGroupRow
       title={m.heading_connected_apps()}
       description={m.description_connected_apps()}
@@ -34,14 +37,9 @@
 </div>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-apps-settings {
-    width: 100%;
-    max-width: var(--ni-640);
-
-    @include for-tablet-sm-and-below {
-      max-width: 100%;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xl);
   }
 </style>

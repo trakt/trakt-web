@@ -9,7 +9,7 @@
   import { useInvalidator } from "$lib/stores/useInvalidator.ts";
   import { firstValueFrom, map } from "rxjs";
   import DataSyncList from "../DataSyncList.svelte";
-  import SettingsSectionLabel from "../SettingsSectionLabel.svelte";
+  import SettingsSection from "../SettingsSection.svelte";
 
   const { invalidate } = useInvalidator();
 
@@ -57,8 +57,7 @@
 </script>
 
 {#if ($syncs ?? []).length > 0}
-  <SettingsSectionLabel title={m.header_plex_sync_history()} />
-  <div class="trakt-plex-sync-list">
+  <SettingsSection title={m.header_plex_sync_history()}>
     <DataSyncList
       syncs={$syncs ?? []}
       hasNextPage={$hasNextPage}
@@ -66,15 +65,5 @@
       onLoadMore={fetchNextPage}
       {getOnUndo}
     />
-  </div>
+  </SettingsSection>
 {/if}
-
-<style>
-  .trakt-plex-sync-list {
-    max-width: var(--ni-640);
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-s);
-  }
-</style>

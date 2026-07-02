@@ -26,7 +26,7 @@
     getPlaysSummary,
     type PlaysSummary,
   } from "./history-analysis/getPlaysSummary.ts";
-  import SettingsBlock from "./SettingsBlock.svelte";
+  import SettingsSection from "./SettingsSection.svelte";
 
   const { limits } = useUser();
   const { invalidateAll } = useInvalidator();
@@ -137,7 +137,7 @@
   confirmationParams={{ type: ConfirmationType.CancelClear }}
   onreset={stopCleanUp}
 >
-  <SettingsBlock
+  <SettingsSection
     title={m.header_history_analysis()}
     description={m.description_history_analysis()}
   >
@@ -242,7 +242,7 @@
         {/each}
       </div>
     </div>
-  </SettingsBlock>
+  </SettingsSection>
 </NavigationGuard>
 
 <style lang="scss">
