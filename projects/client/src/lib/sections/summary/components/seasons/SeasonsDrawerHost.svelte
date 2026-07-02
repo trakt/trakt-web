@@ -1,49 +1,23 @@
 <script lang="ts">
   import { page } from "$app/state";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
-  import GridList from "$lib/components/lists/grid-list/GridList.svelte";
+  import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
+  import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
+  import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
-  import { useUser } from "$lib/features/auth/stores/useUser";
+  import TabView from "$lib/components/tabs/TabView.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
   import SeasonDropdown from "$lib/sections/lists/season/_internal/SeasonDropdown.svelte";
-  import SeasonEpisodeItem from "$lib/sections/lists/season/_internal/SeasonEpisodeItem.svelte";
   import SeasonPopupMenu from "$lib/sections/lists/season/_internal/SeasonPopupMenu.svelte";
-  import { useShowWatchedEpisodes } from "$lib/sections/lists/season/_internal/useShowWatchedEpisodes";
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
-  import InlineComments from "$lib/sections/summary/components/comments/InlineComments.svelte";
-  import SeasonProgressCard from "$lib/sections/summary/components/seasons/SeasonProgressCard.svelte";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
-  import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import { fade } from "svelte/transition";
-  import SeasonInfoSection from "./_internal/SeasonInfoSection.svelte";
-  import { useSeasonPeople } from "./_internal/useSeasonPeople";
-
-  type SeasonTab = "episodes" | "info" | "reviews";
-
-  const tabOptions: ToggleOption<SeasonTab>[] = [
-    {
-      value: "episodes",
-      text: m.tab_text_seasons_episodes,
-      label: m.tab_label_seasons_episodes,
-    },
-    {
-      value: "info",
-      text: m.tab_text_seasons_info,
-      label: m.tab_label_seasons_info,
-    },
-    {
-      value: "reviews",
-      text: m.tab_text_seasons_reviews,
-      label: m.tab_label_seasons_reviews,
-    },
-  ];
+  import SeasonEpisodesTab from "./_internal/SeasonEpisodesTab.svelte";
+  import SeasonOverviewTab from "./_internal/SeasonOverviewTab.svelte";
+  import SeasonReviewsTab from "./_internal/SeasonReviewsTab.svelte";
 
   const {
     onClose,
@@ -58,30 +32,10 @@
   } = $props();
 
   let isOpen = $state(false);
-  let activeTab = $state<SeasonTab>("episodes");
+  let activeTab = $state("episodes");
 
   const { list: episodes, isLoading } = $derived(
     useSeasonEpisodes(show.slug, currentSeason),
-  );
-
-  const { crew, isLoading: isCrewLoading } = $derived(
-    useSeasonPeople(show.slug, currentSeason),
-  );
-
-  const { history } = useUser();
-
-  const showProgress = $derived($history?.shows.get(show.id));
-  const watchedEpisodeCount = $derived(
-    countWatchedEpisodes(showProgress?.playsPerSeason ?? new Map()),
-  );
-  const hasUnseenEpisodes = $derived(watchedEpisodeCount < show.episode.count);
-
-  const { watchedBySeason, isLoading: isWatchedLoading } = $derived(
-    useShowWatchedEpisodes({ showId: show.id }),
-  );
-
-  const previousSeasons = $derived(
-    seasons.filter((s) => s.number > 0 && s.number < currentSeason),
   );
 
   const currentSeasonId = $derived(
@@ -90,9 +44,6 @@
 
   const currentSeasonData = $derived(
     seasons.find((s) => s.number === currentSeason),
-  );
-  const currentSeasonWatched = $derived(
-    $watchedBySeason?.get(currentSeason)?.size ?? 0,
   );
 
   const buildSeasonLink = (seasonNumber: number) => {
@@ -117,6 +68,38 @@
     seasonId={currentSeasonId}
     disabled={$isLoading}
   />
+{/snippet}
+
+{#snippet episodesIcon()}
+  <PlayIcon />
+{/snippet}
+
+{#snippet overviewIcon()}
+  <InfoIcon />
+{/snippet}
+
+{#snippet reviewsIcon()}
+  <CommentIcon />
+{/snippet}
+
+{#snippet episodesContent()}
+  <SeasonEpisodesTab {show} {seasons} {currentSeason} />
+{/snippet}
+
+{#snippet overviewContent()}
+  {#if currentSeasonData}
+    <SeasonOverviewTab {show} season={currentSeasonData} />
+  {/if}
+{/snippet}
+
+{#snippet reviewsContent()}
+  {#if currentSeasonId != null}
+    <SeasonReviewsTab
+      {show}
+      season={currentSeason}
+      seasonId={currentSeasonId}
+    />
+  {/if}
 {/snippet}
 
 <Drawer
@@ -151,88 +134,30 @@
         </div>
       {/if}
 
-      <div class="season-tabs">
-        <Toggler
-          value={activeTab}
-          onChange={(value) => (activeTab = value)}
-          options={tabOptions}
-          variant="text"
-        />
-      </div>
-
-      {#if activeTab === "episodes"}
-        <div class="tab-content" transition:fade={{ duration: 150 }}>
-          <RenderFor audience="authenticated">
-            {#if currentSeasonData && currentSeasonData.episodes.count > 0}
-              <SeasonProgressCard
-                seasonNumber={currentSeason}
-                watched={currentSeasonWatched}
-                total={currentSeasonData.episodes.count}
-                totalRuntime={currentSeasonData.totalRuntime}
-                loading={$isWatchedLoading}
-              />
-            {/if}
-          </RenderFor>
-
-          <div class="episodes-section">
-            {#snippet metaInfo()}
-              <p class="secondary">
-                {m.tag_text_number_of_episodes({ count: $episodes.length })}
-              </p>
-            {/snippet}
-
-            {#if $isLoading}
-              <LoadingIndicator />
-            {:else}
-              <GridList
-                id={`season-episodes-${show.slug}-${currentSeason}`}
-                title={m.list_title_episodes()}
-                items={$episodes}
-                {metaInfo}
-                --width-item="var(--width-summary-card)"
-              >
-                {#snippet item(episode)}
-                  <SeasonEpisodeItem
-                    {show}
-                    {episode}
-                    {previousSeasons}
-                    {hasUnseenEpisodes}
-                    currentSeasonEpisodes={$episodes}
-                    watchedBySeason={$watchedBySeason}
-                    isWatchedLoading={$isWatchedLoading}
-                    style="minimal"
-                    source="seasons-drawer"
-                  />
-                {/snippet}
-              </GridList>
-            {/if}
-          </div>
-        </div>
-      {:else if activeTab === "info" && currentSeasonData}
-        <div class="tab-content" transition:fade={{ duration: 150 }}>
-          {#if $isCrewLoading}
-            <LoadingIndicator />
-          {:else}
-            <SeasonInfoSection
-              season={currentSeasonData}
-              crew={$crew}
-              type="show"
-              showTitle={show.title}
-            />
-          {/if}
-        </div>
-      {:else if activeTab === "reviews" && currentSeasonId != null}
-        <div class="tab-content" transition:fade={{ duration: 150 }}>
-          {#key currentSeason}
-            <InlineComments
-              media={show}
-              type="season"
-              season={currentSeason}
-              id={currentSeasonId}
-            />
-          {/key}
-        </div>
-      {/if}
+      <TabView
+        value={activeTab}
+        onChange={(value) => (activeTab = value)}
+        tabs={[
+          {
+            value: "episodes",
+            label: m.tab_text_seasons_episodes(),
+            icon: episodesIcon,
+            content: episodesContent,
+          },
+          {
+            value: "overview",
+            label: m.tab_text_seasons_info(),
+            icon: overviewIcon,
+            content: overviewContent,
+          },
+          {
+            value: "reviews",
+            label: m.tab_text_seasons_reviews(),
+            icon: reviewsIcon,
+            content: reviewsContent,
+          },
+        ]}
+      />
     </div>
   {/if}
 </Drawer>
@@ -243,12 +168,12 @@
   .seasons-drawer-content {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-l);
 
     padding-bottom: var(--ni-8);
 
     :global(.trakt-list-item-container) {
-      padding: 0;
+      padding-inline: 0;
     }
 
     :global(.trakt-grid-list-container) {
@@ -280,56 +205,6 @@
       --container-width: calc(
         100dvw - 2 * var(--drawer-padding) - var(--list-gap)
       );
-    }
-  }
-
-  .tab-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-m);
-  }
-
-  .season-tabs {
-    :global(.trakt-toggler.text-variant) {
-      width: 100%;
-    }
-
-    :global(.tracker.text-variant) {
-      opacity: 0;
-    }
-
-    :global(.trakt-toggler-toggle.text-variant) {
-      flex: 1;
-      justify-content: center;
-      transition: none;
-    }
-
-    :global(.trakt-toggler-toggle.text-variant.is-pressed) {
-      background-color: var(--toggler-tracker-color);
-    }
-
-    :global(.trakt-toggler-toggle.text-variant p) {
-      opacity: 1;
-      transition: none;
-    }
-  }
-
-  .episodes-section {
-    :global(.trakt-season-episode-item) {
-      min-width: 0;
-    }
-
-    :global(.trakt-list-items) {
-      grid-template-columns: 1fr;
-      grid-row-gap: var(--gap-s);
-    }
-
-    :global(.trakt-summary-card-minimal) {
-      --poster-aspect-ratio: 1.778;
-    }
-
-    :global(.trakt-list-inset-title) {
-      margin: 0;
     }
   }
 </style>

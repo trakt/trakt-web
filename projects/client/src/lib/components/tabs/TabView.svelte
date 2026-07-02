@@ -18,6 +18,11 @@
       <div class="trakt-tab-indicator"></div>
       {#each tabs as tab (tab.value)}
         <Tabs.Trigger class="trakt-tab-trigger" value={tab.value}>
+          {#if tab.icon}
+            <span class="trakt-tab-icon">
+              {@render tab.icon()}
+            </span>
+          {/if}
           <span class="capitalize ellipsis" use:lineClamp={{ lines: 2 }}>
             {tab.label}
           </span>
@@ -96,7 +101,12 @@
     :global(.trakt-tab-trigger) {
       -webkit-tap-highlight-color: transparent;
 
-      height: var(--ni-40);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--gap-xxs);
+
+      min-height: var(--ni-40);
       position: relative;
 
       border: none;
@@ -123,6 +133,16 @@
         outline: var(--border-thickness-xs) solid var(--shade-10);
         color: var(--shade-10);
         background-color: var(--shade-700);
+      }
+    }
+
+    .trakt-tab-icon {
+      display: flex;
+      flex-shrink: 0;
+
+      :global(svg) {
+        width: var(--ni-16);
+        height: var(--ni-16);
       }
     }
 
