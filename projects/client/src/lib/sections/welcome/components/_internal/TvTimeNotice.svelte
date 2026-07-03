@@ -6,6 +6,7 @@
 
   const TV_TIME_LIBERATOR_URL =
     "https://chromewebstore.google.com/detail/tv-time-liberator-extensi/pohobkcjhigehafgnhehkanhjakajhpm";
+  const TV_TIME_GDPR_URL = "https://gdpr.tvtime.com/gdpr/self-service";
 
   const importHref = importSourceHref("tvtime");
 </script>
@@ -46,6 +47,21 @@
         label={m.welcome_tvtime_liberator_cta()}
       >
         {m.welcome_tvtime_liberator_cta()}
+        {#snippet icon()}
+          <ExternalLinkIcon size="small" />
+        {/snippet}
+      </Button>
+
+      <Button
+        href={TV_TIME_GDPR_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        color="default"
+        variant="secondary"
+        style="flat"
+        label={m.welcome_tvtime_gdpr_cta()}
+      >
+        {m.welcome_tvtime_gdpr_cta()}
         {#snippet icon()}
           <ExternalLinkIcon size="small" />
         {/snippet}
