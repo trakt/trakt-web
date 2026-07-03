@@ -19,6 +19,7 @@ type TvTimeLiberatorRow = {
   watched_at?: string;
   status?: string;
   is_watchlisted?: string;
+  rating?: string;
 };
 
 function toInt(value?: string): number | undefined {
@@ -60,6 +61,13 @@ function parseLiberatorRow(row: TvTimeLiberatorRow): UniversalImportItem[] {
 
   if (row.is_watchlisted === 'true') {
     items.push({ ...base, action: 'watchlist' });
+  }
+
+  // Episode ratings are skipped: the ratings sync payload only carries
+  // movies and shows.
+  const rating = toInt(row.rating);
+  if (rating != null && base.type !== 'episode') {
+    items.push({ ...base, action: 'ratings', rating });
   }
 
   return items;
