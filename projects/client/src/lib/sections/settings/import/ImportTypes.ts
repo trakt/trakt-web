@@ -1,3 +1,5 @@
+import * as m from '$lib/features/i18n/messages.ts';
+
 export type ImportSource =
   | 'imdb'
   | 'letterboxd'
@@ -65,28 +67,41 @@ export interface ImportSyncResult {
   ambiguous: AmbiguousImportItem[];
 }
 
-export type StepSegment = string | { text: string; href: string };
-export type ImportStep = StepSegment[];
+/**
+ * Resolves a translatable message at render time. Stored as a reference (never
+ * called at module load) so the guide reacts to locale changes.
+ */
+type MessageGetter = () => string;
 
-export type ImportNote = string | { text: string; values: string[] };
+export interface GuideStep {
+  text: MessageGetter;
+  href?: string;
+}
+
+export interface StructuredImportNote {
+  text: MessageGetter;
+  values: string[];
+}
+
+export type ImportNote = MessageGetter | StructuredImportNote;
 
 export interface ImportGuidelineField {
   name: string;
-  description: string;
+  description: MessageGetter;
   note?: ImportNote;
   optional?: boolean;
 }
 
 export interface ImportGuidelines {
-  intro: string;
+  intro: MessageGetter;
   fields: ImportGuidelineField[];
   example: string;
 }
 
 export interface ImportSourceGuide {
-  title: string;
-  description?: string;
-  steps?: ImportStep[];
+  title: MessageGetter;
+  description?: MessageGetter;
+  steps?: GuideStep[];
   guidelines?: ImportGuidelines;
 }
 
@@ -97,6 +112,64 @@ export interface ImportSourceConfig {
   maxFiles: number;
   guide: ImportSourceGuide;
 }
+
+interface TraktFieldNames {
+  id: string;
+  type: string;
+  watchedAt: string;
+  watchlistedAt: string;
+  rating: string;
+  ratedAt: string;
+}
+
+/**
+ * JSON and CSV share identical field descriptions/notes - only the code field
+ * names and the example block differ. Build the field list from the shared
+ * messages, injecting the format-specific names.
+ */
+const buildTraktGuidelineFields = (
+  names: TraktFieldNames,
+): ImportGuidelineField[] => [
+  {
+    name: names.id,
+    description: m.import_guide_field_id_description,
+    note: {
+      text: m.import_guide_field_id_note,
+      values: ['trakt_id', 'imdb_id', 'tmdb_id', 'tvdb_id'],
+    },
+  },
+  {
+    name: names.type,
+    description: m.import_guide_field_type_description,
+    note: {
+      text: m.import_guide_field_type_note,
+      values: ['movie', 'episode', 'show', 'season'],
+    },
+  },
+  {
+    name: names.watchedAt,
+    description: m.import_guide_field_watched_at_description,
+    note: m.import_guide_field_watched_at_note,
+    optional: true,
+  },
+  {
+    name: names.watchlistedAt,
+    description: m.import_guide_field_watchlisted_at_description,
+    note: m.import_guide_field_watchlisted_at_note,
+    optional: true,
+  },
+  {
+    name: names.rating,
+    description: m.import_guide_field_rating_description,
+    optional: true,
+  },
+  {
+    name: names.ratedAt,
+    description: m.import_guide_field_rated_at_description,
+    note: m.import_guide_field_rated_at_note,
+    optional: true,
+  },
+];
 
 export const IMPORT_SOURCE_CONFIGS: Record<
   ImportSource,
@@ -110,25 +183,20 @@ export const IMPORT_SOURCE_CONFIGS: Record<
     // unrecognized files are filtered out by the parser.
     maxFiles: 50,
     guide: {
-      title: "Your TV Time isn't lost in space! 🚀",
-      description:
-        'Two ways to get your data out. Pick whichever suits you and import one export at a time:',
+      title: m.import_guide_tvtime_title,
+      description: m.import_guide_tvtime_description,
       steps: [
-        [
-          'Fastest: export your data with the',
-          {
-            text: 'TV Time Liberator extension',
-            href:
-              'https://chromewebstore.google.com/detail/tv-time-liberator-extensi/pohobkcjhigehafgnhehkanhjakajhpm',
-          },
-          'while your TV Time login still works, then upload the export .zip (or the activity_history.csv inside it) here',
-        ],
-        ['Official: request your GDPR data export on the', {
-          text: 'TV Time privacy portal',
+        {
+          text: m.import_guide_tvtime_step_1,
+          href:
+            'https://chromewebstore.google.com/detail/tv-time-liberator-extensi/pohobkcjhigehafgnhehkanhjakajhpm',
+        },
+        {
+          text: m.import_guide_tvtime_step_2,
           href: 'https://gdpr.tvtime.com/gdpr/self-service',
-        }],
-        ["Once the export is ready you'll get two emails: one with a .zip file and another with a password to unlock it."],
-        ['Upload the unlocked .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files (plus followed_tv_show.csv and ratings-live-votes.csv for your watchlist and ratings) instead.'],
+        },
+        { text: m.import_guide_tvtime_step_3 },
+        { text: m.import_guide_tvtime_step_4 },
       ],
     },
   },
@@ -138,22 +206,21 @@ export const IMPORT_SOURCE_CONFIGS: Record<
     accept: '.csv',
     maxFiles: 2,
     guide: {
-      title: 'IMDb on Trakt? Lights, camera, action! ✨',
-      description:
-        "Download your IMDb watchlist as a .csv and import it here in seconds. It's as easy as 1, 2, Trakt! Here's how to get your .csv file:",
+      title: m.import_guide_imdb_title,
+      description: m.import_guide_imdb_description,
       steps: [
-        ['Go to IMDb and login'],
-        ['Visit your', {
-          text: 'watchlist',
+        { text: m.import_guide_imdb_step_1 },
+        {
+          text: m.import_guide_imdb_step_2,
           href: 'https://www.imdb.com/list/watchlist',
-        }],
-        ['Click on Export'],
-        ['Visit your', {
-          text: 'ratings',
+        },
+        { text: m.import_guide_imdb_step_3 },
+        {
+          text: m.import_guide_imdb_step_4,
           href: 'https://www.imdb.com/list/ratings',
-        }],
-        ['Click on Export'],
-        ['Upload the .csv files here'],
+        },
+        { text: m.import_guide_imdb_step_5 },
+        { text: m.import_guide_imdb_step_6 },
       ],
     },
   },
@@ -163,16 +230,15 @@ export const IMPORT_SOURCE_CONFIGS: Record<
     accept: '.zip',
     maxFiles: 1,
     guide: {
-      title: 'Bring your Letterboxd diary to Trakt! 🎬',
-      description:
-        "It's just a hop, skip, and a .zip away! Download your Letterboxd data and import it here. Here's the lowdown on getting that .zip:",
+      title: m.import_guide_letterboxd_title,
+      description: m.import_guide_letterboxd_description,
       steps: [
-        ['Go to Letterboxd and login'],
-        ['Open your', {
-          text: 'Letterboxd Export settings',
+        { text: m.import_guide_letterboxd_step_1 },
+        {
+          text: m.import_guide_letterboxd_step_2,
           href: 'https://letterboxd.com/data/export/',
-        }],
-        ['Download your Letterboxd export data in a zip file and upload it here'],
+        },
+        { text: m.import_guide_letterboxd_step_3 },
       ],
     },
   },
@@ -182,57 +248,18 @@ export const IMPORT_SOURCE_CONFIGS: Record<
     accept: '.json,.zip',
     maxFiles: 1,
     guide: {
-      title: 'JSON aficionado? Perfect!',
-      description:
-        'Trakt welcomes your structured data with open arms. Upload your JSON file, making sure it follows our guidelines for a smooth and successful import.',
+      title: m.import_guide_json_title,
+      description: m.import_guide_json_description,
       guidelines: {
-        intro:
-          'Your JSON file should contain an array of objects. Each object represents an item to import.',
-        fields: [
-          {
-            name: '"id": "string"',
-            description:
-              'The ID can be a Trakt ID, IMDB ID, or TMDB ID. For TV shows it can also be a TVDB ID.',
-            note: {
-              text: 'Prefix with the service name:',
-              values: ['trakt_id', 'imdb_id', 'tmdb_id', 'tvdb_id'],
-            },
-          },
-          {
-            name: '"type": "string"',
-            description:
-              'Specifies what the ID refers to. Optional but recommended.',
-            note: {
-              text: 'Values:',
-              values: ['movie', 'episode', 'show', 'season'],
-            },
-          },
-          {
-            name: '"watched_at": "string"',
-            description: 'Date and time the item was watched. ISO 8601 format.',
-            note:
-              'Can be "unknown" to import with an unknown watch date. Omit if only adding to watchlist.',
-            optional: true,
-          },
-          {
-            name: '"watchlisted_at": "string"',
-            description:
-              'Date and time the item was added to your watchlist. ISO 8601 format.',
-            note: 'Omit if only marking as watched.',
-            optional: true,
-          },
-          {
-            name: '"rating": "number"',
-            description: 'Rating for the item. Must be a value from 1 to 10.',
-            optional: true,
-          },
-          {
-            name: '"rated_at": "string"',
-            description: 'Date and time the item was rated. ISO 8601 format.',
-            note: 'Only parsed if a rating is also present.',
-            optional: true,
-          },
-        ],
+        intro: m.import_guide_json_intro,
+        fields: buildTraktGuidelineFields({
+          id: '"id": "string"',
+          type: '"type": "string"',
+          watchedAt: '"watched_at": "string"',
+          watchlistedAt: '"watchlisted_at": "string"',
+          rating: '"rating": "number"',
+          ratedAt: '"rated_at": "string"',
+        }),
         example: `[
   {
     "imdb_id": "tt0068646",
@@ -264,57 +291,18 @@ export const IMPORT_SOURCE_CONFIGS: Record<
     accept: '.csv',
     maxFiles: 1,
     guide: {
-      title: "Data in a grid? We've got you covered!",
-      description:
-        'Upload your CSV file and let Trakt organize your movie and TV show universe. Make sure your CSV is properly formatted with the fields described in the guidelines.',
+      title: m.import_guide_csv_title,
+      description: m.import_guide_csv_description,
       guidelines: {
-        intro:
-          'Your CSV file should contain a header row followed by one row per item to import.',
-        fields: [
-          {
-            name: 'id',
-            description:
-              'The ID can be a Trakt ID, IMDB ID, or TMDB ID. For TV shows it can also be a TVDB ID.',
-            note: {
-              text: 'Prefix with the service name:',
-              values: ['trakt_id', 'imdb_id', 'tmdb_id', 'tvdb_id'],
-            },
-          },
-          {
-            name: 'type',
-            description:
-              'Specifies what the ID refers to. Optional but recommended.',
-            note: {
-              text: 'Values:',
-              values: ['movie', 'episode', 'show', 'season'],
-            },
-          },
-          {
-            name: 'watched_at',
-            description: 'Date and time the item was watched. ISO 8601 format.',
-            note:
-              'Can be "unknown" to import with an unknown watch date. Omit if only adding to watchlist.',
-            optional: true,
-          },
-          {
-            name: 'watchlisted_at',
-            description:
-              'Date and time the item was added to your watchlist. ISO 8601 format.',
-            note: 'Omit if only marking as watched.',
-            optional: true,
-          },
-          {
-            name: 'rating',
-            description: 'Rating for the item. Must be a value from 1 to 10.',
-            optional: true,
-          },
-          {
-            name: 'rated_at',
-            description: 'Date and time the item was rated. ISO 8601 format.',
-            note: 'Only parsed if a rating is also present.',
-            optional: true,
-          },
-        ],
+        intro: m.import_guide_csv_intro,
+        fields: buildTraktGuidelineFields({
+          id: 'id',
+          type: 'type',
+          watchedAt: 'watched_at',
+          watchlistedAt: 'watchlisted_at',
+          rating: 'rating',
+          ratedAt: 'rated_at',
+        }),
         example: `imdb_id,type,watched_at,watchlisted_at,rating,rated_at
 tt0068646,movie,2024-10-25T20:00:00Z,2024-10-01T10:00:00Z,7,2024-10-25T21:00:00Z
 tt15239678,movie,,2024-04-30T11:00:00Z,,

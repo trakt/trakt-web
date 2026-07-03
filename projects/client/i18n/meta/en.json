@@ -4822,6 +4822,154 @@
       "default": "CSV File",
       "description": "Import source label for a generic Trakt CSV export file."
     },
+    "import_guide_tvtime_title": {
+      "default": "Your TV Time isn't lost in space! 🚀",
+      "description": "Title of the TV Time import guide."
+    },
+    "import_guide_tvtime_description": {
+      "default": "Two ways to get your data out. Pick whichever suits you and import one export at a time:",
+      "description": "Intro paragraph of the TV Time import guide, shown above the steps."
+    },
+    "import_guide_tvtime_step_1": {
+      "default": "Fastest: export your data with the <a>TV Time Liberator extension</a> while your TV Time login still works, then upload the export .zip (or the activity_history.csv inside it) here",
+      "description": "TV Time import guide, step 1. The <a></a> wraps the link text to the browser extension; keep the tag around the same words."
+    },
+    "import_guide_tvtime_step_2": {
+      "default": "Official: request your GDPR data export on the <a>TV Time privacy portal</a>",
+      "description": "TV Time import guide, step 2. The <a></a> wraps the link text to the privacy portal; keep the tag."
+    },
+    "import_guide_tvtime_step_3": {
+      "default": "Once the export is ready you'll get two emails: one with a .zip file and another with a password to unlock it.",
+      "description": "TV Time import guide, step 3."
+    },
+    "import_guide_tvtime_step_4": {
+      "default": "Upload the unlocked .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files (plus followed_tv_show.csv and ratings-live-votes.csv for your watchlist and ratings) instead.",
+      "description": "TV Time import guide, step 4. Filenames stay verbatim."
+    },
+    "import_guide_imdb_title": {
+      "default": "IMDb on Trakt? Lights, camera, action! ✨",
+      "description": "Title of the IMDb import guide."
+    },
+    "import_guide_imdb_description": {
+      "default": "Download your IMDb watchlist as a .csv and import it here in seconds. It's as easy as 1, 2, Trakt! Here's how to get your .csv file:",
+      "description": "Intro paragraph of the IMDb import guide, shown above the steps."
+    },
+    "import_guide_imdb_step_1": {
+      "default": "Go to IMDb and login",
+      "description": "IMDb import guide, step 1."
+    },
+    "import_guide_imdb_step_2": {
+      "default": "Visit your <a>watchlist</a>",
+      "description": "IMDb import guide, step 2. The <a></a> wraps the link text to the IMDb watchlist page; keep the tag."
+    },
+    "import_guide_imdb_step_3": {
+      "default": "Click on Export",
+      "description": "IMDb import guide, step 3 (export the watchlist)."
+    },
+    "import_guide_imdb_step_4": {
+      "default": "Visit your <a>ratings</a>",
+      "description": "IMDb import guide, step 4. The <a></a> wraps the link text to the IMDb ratings page; keep the tag."
+    },
+    "import_guide_imdb_step_5": {
+      "default": "Click on Export",
+      "description": "IMDb import guide, step 5 (export the ratings)."
+    },
+    "import_guide_imdb_step_6": {
+      "default": "Upload the .csv files here",
+      "description": "IMDb import guide, final step."
+    },
+    "import_guide_letterboxd_title": {
+      "default": "Bring your Letterboxd diary to Trakt! 🎬",
+      "description": "Title of the Letterboxd import guide."
+    },
+    "import_guide_letterboxd_description": {
+      "default": "It's just a hop, skip, and a .zip away! Download your Letterboxd data and import it here. Here's the lowdown on getting that .zip:",
+      "description": "Intro paragraph of the Letterboxd import guide, shown above the steps."
+    },
+    "import_guide_letterboxd_step_1": {
+      "default": "Go to Letterboxd and login",
+      "description": "Letterboxd import guide, step 1."
+    },
+    "import_guide_letterboxd_step_2": {
+      "default": "Open your <a>Letterboxd Export settings</a>",
+      "description": "Letterboxd import guide, step 2. The <a></a> wraps the link text to the Letterboxd export settings page; keep the tag."
+    },
+    "import_guide_letterboxd_step_3": {
+      "default": "Download your Letterboxd export data in a zip file and upload it here",
+      "description": "Letterboxd import guide, final step."
+    },
+    "import_guide_json_title": {
+      "default": "JSON aficionado? Perfect!",
+      "description": "Title of the JSON import guide."
+    },
+    "import_guide_json_description": {
+      "default": "Trakt welcomes your structured data with open arms. Upload your JSON file, making sure it follows our guidelines for a smooth and successful import.",
+      "description": "Intro paragraph of the JSON import guide."
+    },
+    "import_guide_json_intro": {
+      "default": "Your JSON file should contain an array of objects. Each object represents an item to import.",
+      "description": "Intro line of the JSON import guidelines drawer, above the field list."
+    },
+    "import_guide_csv_title": {
+      "default": "Data in a grid? We've got you covered!",
+      "description": "Title of the CSV import guide."
+    },
+    "import_guide_csv_description": {
+      "default": "Upload your CSV file and let Trakt organize your movie and TV show universe. Make sure your CSV is properly formatted with the fields described in the guidelines.",
+      "description": "Intro paragraph of the CSV import guide."
+    },
+    "import_guide_csv_intro": {
+      "default": "Your CSV file should contain a header row followed by one row per item to import.",
+      "description": "Intro line of the CSV import guidelines drawer, above the field list."
+    },
+    "import_guide_field_id_description": {
+      "default": "The ID can be a Trakt ID, IMDB ID, or TMDB ID. For TV shows it can also be a TVDB ID.",
+      "description": "Import guidelines: description of the id field. Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_id_note": {
+      "default": "Prefix with the service name:",
+      "description": "Import guidelines: note before the list of id prefix values (trakt_id, imdb_id, …). Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_type_description": {
+      "default": "Specifies what the ID refers to. Optional but recommended.",
+      "description": "Import guidelines: description of the type field. Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_type_note": {
+      "default": "Values:",
+      "description": "Import guidelines: note before the list of allowed type values (movie, episode, …). Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_watched_at_description": {
+      "default": "Date and time the item was watched. ISO 8601 format.",
+      "description": "Import guidelines: description of the watched_at field. Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_watched_at_note": {
+      "default": "Can be \"unknown\" to import with an unknown watch date. Omit if only adding to watchlist.",
+      "description": "Import guidelines: note for the watched_at field. Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_watchlisted_at_description": {
+      "default": "Date and time the item was added to your watchlist. ISO 8601 format.",
+      "description": "Import guidelines: description of the watchlisted_at field. Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_watchlisted_at_note": {
+      "default": "Omit if only marking as watched.",
+      "description": "Import guidelines: note for the watchlisted_at field. Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_rating_description": {
+      "default": "Rating for the item. Must be a value from 1 to 10.",
+      "description": "Import guidelines: description of the rating field. Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_rated_at_description": {
+      "default": "Date and time the item was rated. ISO 8601 format.",
+      "description": "Import guidelines: description of the rated_at field. Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_rated_at_note": {
+      "default": "Only parsed if a rating is also present.",
+      "description": "Import guidelines: note for the rated_at field. Shared by the JSON and CSV guides."
+    },
+    "import_guide_field_optional": {
+      "default": "optional",
+      "description": "Badge shown next to an import guideline field that is not required."
+    },
     "import_drop_csv": {
       "default": "Drop CSV files here or click to upload.",
       "description": "Prompt shown in the dropzone to upload CSV files for import."

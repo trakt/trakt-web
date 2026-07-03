@@ -1,14 +1,10 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
-  import Link from "$lib/components/link/Link.svelte";
+  import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
-  import { EMPTY_SPACE } from "$lib/utils/constants.ts";
   import { slide } from "svelte/transition";
-  import type {
-    ImportSourceConfig,
-    StepSegment,
-  } from "../../import/ImportTypes.ts";
+  import type { ImportSourceConfig } from "../../import/ImportTypes.ts";
   import {
     ImportDrawers,
     importDrawerNavigation,
@@ -34,16 +30,6 @@
   });
 </script>
 
-{#snippet segment(stepSegment: StepSegment)}
-  {#if typeof stepSegment === "string"}
-    {stepSegment}
-  {:else}
-    <Link href={stepSegment.href} target="_blank" rel="noopener noreferrer">
-      {stepSegment.text}
-    </Link>
-  {/if}
-{/snippet}
-
 <div class="trakt-import-guide" class:is-collapsed={isCollapsed}>
   {#if collapsed}
     <button
@@ -53,13 +39,13 @@
       aria-controls="import-guide-body"
       onclick={() => (expanded = !expanded)}
     >
-      <span class="import-guide-title bold ellipsis">{config.guide.title}</span>
+      <span class="import-guide-title bold ellipsis">{config.guide.title()}</span>
       <span class="import-guide-caret" class:is-open={!isCollapsed}>
         <CaretRightIcon />
       </span>
     </button>
   {:else}
-    <p class="import-guide-title bold">{config.guide.title}</p>
+    <p class="import-guide-title bold">{config.guide.title()}</p>
   {/if}
 
   {#if !isCollapsed}
@@ -69,7 +55,7 @@
       transition:slide={{ duration: 150, axis: "y" }}
     >
       {#if config.guide.description != null}
-        <p class="secondary">{config.guide.description}</p>
+        <p class="secondary">{config.guide.description()}</p>
       {/if}
 
       {#if config.guide.steps != null}
@@ -77,10 +63,15 @@
           {#each config.guide.steps as step, i (i)}
             <li>
               <p class="secondary">
-                {#each step as stepSegment, j (j)}
-                  {#if j > 0}{EMPTY_SPACE}{/if}
-                  {@render segment(stepSegment)}
-                {/each}
+                {#if step.href != null}
+                  <MessageWithLink
+                    message={step.text()}
+                    href={step.href}
+                    target="_blank"
+                  />
+                {:else}
+                  {step.text()}
+                {/if}
               </p>
             </li>
           {/each}

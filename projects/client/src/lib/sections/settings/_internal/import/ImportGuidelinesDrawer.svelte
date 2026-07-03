@@ -5,11 +5,12 @@
     ImportGuidelineField,
     ImportGuidelines,
     ImportNote,
+    StructuredImportNote,
   } from "../../import/ImportTypes.ts";
 
   function isStructuredNote(
     note: ImportNote,
-  ): note is { text: string; values: string[] } {
+  ): note is StructuredImportNote {
     return typeof note === "object";
   }
 
@@ -28,23 +29,25 @@
     <div class="field-header">
       <code class="field-name bold">{field.name}</code>
       {#if field.optional}
-        <span class="field-badge secondary">optional</span>
+        <span class="field-badge secondary">
+          {m.import_guide_field_optional()}
+        </span>
       {/if}
     </div>
 
-    <p class="field-description">{field.description}</p>
+    <p class="field-description">{field.description()}</p>
 
     {#if field.note}
       {#if isStructuredNote(field.note)}
         <p class="italic secondary">
-          {field.note.text}
+          {field.note.text()}
           {#each field.note.values as value, i (i)}
             <code class="field-value">{value}</code>
             {#if i < field.note.values.length - 1},{/if}
           {/each}
         </p>
       {:else}
-        <p class="italic secondary">{field.note}</p>
+        <p class="italic secondary">{field.note()}</p>
       {/if}
     {/if}
   </div>
@@ -54,7 +57,7 @@
   {#if isOpen}
     <div class="guidelines-content">
       <section class="guidelines-section">
-        <p class="guidelines-intro">{guidelines.intro}</p>
+        <p class="guidelines-intro">{guidelines.intro()}</p>
       </section>
 
       <section class="guidelines-section">
