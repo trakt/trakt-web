@@ -1734,6 +1734,7 @@
   "welcome_intro": "Vos séries et films, tout en un seul endroit. Suivez ce que vous regardez, découvrez les nouveautés et reprenez là où vous vous étiez arrêté; sur tous vos appareils.",
   "welcome_tvtime_badge": "TV Time ferme ses portes",
   "welcome_tvtime_body": "TV Time ferme ses portes, mais votre historique de visionnage n'a pas à disparaître avec. Transférez tout sur Trakt et continuez à suivre sans rien manquer.",
+  "welcome_tvtime_gdpr_cta": "Demander l'exportation RGPD",
   "welcome_tvtime_heading": "Vous venez de TV Time? Vous êtes à la maison.",
   "welcome_tvtime_import_cta": "Importer de TV Time",
   "welcome_tvtime_liberator_body": "Exportez votre historique complet avec l'extension de navigateur TV Time Liberator, ou téléchargez l'exportation officielle des données RGPD depuis le portail de confidentialité de TV Time. Les deux options fonctionnent.",

@@ -1734,6 +1734,7 @@
   "welcome_intro": "Your shows and movies, all in one place. Track what you watch, discover what's next, and pick up right where you left off; across every device you own.",
   "welcome_tvtime_badge": "TV Time is shutting down",
   "welcome_tvtime_body": "TV Time is closing its doors, but your watch history doesn't have to disappear with it. Bring everything over to Trakt and keep tracking without missing a beat.",
+  "welcome_tvtime_gdpr_cta": "Request GDPR export",
   "welcome_tvtime_heading": "Coming from TV Time? You're home.",
   "welcome_tvtime_import_cta": "Import from TV Time",
   "welcome_tvtime_liberator_body": "Export your full history with the TV Time Liberator browser extension, or upload the official GDPR data export from TV Time's privacy portal. Either one works.",

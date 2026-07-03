@@ -1734,6 +1734,7 @@
   "welcome_intro": "あなたの番組や映画をすべて1か所に。視聴履歴を追跡し、次に見るものを発見し、所有するあらゆるデバイスで中断した場所から再開できます。",
   "welcome_tvtime_badge": "TV Timeは終了します",
   "welcome_tvtime_body": "TV Timeは終了しますが、あなたの視聴履歴が一緒に消える必要はありません。すべてをTraktに移行して、滞りなく追跡を続けましょう。",
+  "welcome_tvtime_gdpr_cta": "GDPRデータエクスポートをリクエスト",
   "welcome_tvtime_heading": "TV Timeから移行しましたか？ようこそ。",
   "welcome_tvtime_import_cta": "TV Timeからインポート",
   "welcome_tvtime_liberator_body": "TV Time Liberatorブラウザ拡張機能で完全な履歴をエクスポートするか、TV Timeのプライバシーポータルから公式のGDPRデータエクスポートをアップロードしてください。どちらの方法でも動作します。",

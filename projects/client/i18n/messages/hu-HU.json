@@ -1734,6 +1734,7 @@
   "welcome_intro": "Filmek és sorozatok, egy helyen. Kövesse nyomon, mit néz, fedezze fel, mi jön, és folytassa onnan, ahol abbahagyta; az összes eszközén.",
   "welcome_tvtime_badge": "A TV Time leáll",
   "welcome_tvtime_body": "A TV Time bezárja kapuit, de a nézési előzményei nem kell, hogy eltűnjenek vele. Hozzon át mindent a Trakt-ra, és folytassa a követést zökkenőmentesen.",
+  "welcome_tvtime_gdpr_cta": "GDPR export kérése",
   "welcome_tvtime_heading": "A TV Time-ról érkezik? Otthon van.",
   "welcome_tvtime_import_cta": "Importálás a TV Time-ról",
   "welcome_tvtime_liberator_body": "Exportálja teljes előzményeit a TV Time Liberator böngészőbővítménnyel, vagy töltse fel a hivatalos GDPR adatexportot a TV Time adatvédelmi portáljáról. Mindkét módszer működik.",

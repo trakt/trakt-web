@@ -1734,6 +1734,7 @@
   "welcome_intro": "Les teves sèries i pel·lícules, tot en un sol lloc. Fes un seguiment del que mires, descobreix el que ve després i reprèn on ho vas deixar; a tots els dispositius que tens.",
   "welcome_tvtime_badge": "TV Time tanca",
   "welcome_tvtime_body": "TV Time tanca les seves portes, però el teu historial de visualitzacions no ha de desaparèixer amb ella. Porta-ho tot a Trakt i segueix fent un seguiment sense perdre el ritme.",
+  "welcome_tvtime_gdpr_cta": "Sol·licitar exportació de dades RGPD",
   "welcome_tvtime_heading": "Véns de TV Time? Estàs a casa.",
   "welcome_tvtime_import_cta": "Importa des de TV Time",
   "welcome_tvtime_liberator_body": "Exporta el teu historial complet amb l'extensió de navegador TV Time Liberator, o puja l'exportació oficial de dades GDPR del portal de privadesa de TV Time. Qualsevol de les dues opcions funciona.",

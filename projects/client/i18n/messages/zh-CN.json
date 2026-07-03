@@ -1734,6 +1734,7 @@
   "welcome_intro": "您的节目和电影，尽在一处。追踪您观看的内容，发现接下来要看什么，并在您拥有的每台设备上从上次停止的地方继续。",
   "welcome_tvtime_badge": "TV Time 正在关闭",
   "welcome_tvtime_body": "TV Time 正在关闭，但您的观看历史记录不必随之消失。将所有内容导入 Trakt，持续追踪，不错过任何精彩。",
+  "welcome_tvtime_gdpr_cta": "请求 GDPR 导出",
   "welcome_tvtime_heading": "来自 TV Time？您到家了。",
   "welcome_tvtime_import_cta": "从 TV Time 导入",
   "welcome_tvtime_liberator_body": "使用 TV Time Liberator 浏览器扩展导出您的完整历史记录，或从 TV Time 的隐私门户上传官方 GDPR 数据导出。两者均可。",

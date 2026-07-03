@@ -1734,6 +1734,7 @@
   "welcome_intro": "I tuoi show e film, tutto in un unico posto. Tieni traccia di ciò che guardi, scopri cosa c'è dopo e riprendi esattamente da dove avevi interrotto; su ogni dispositivo che possiedi.",
   "welcome_tvtime_badge": "TV Time sta chiudendo",
   "welcome_tvtime_body": "TV Time sta chiudendo i battenti, ma la tua cronologia di visione non deve scomparire con esso. Porta tutto su Trakt e continua a tenere traccia senza perdere un colpo.",
+  "welcome_tvtime_gdpr_cta": "Richiedi esportazione GDPR",
   "welcome_tvtime_heading": "Vieni da TV Time? Sei a casa.",
   "welcome_tvtime_import_cta": "Importa da TV Time",
   "welcome_tvtime_liberator_body": "Esporta la tua cronologia completa con l'estensione browser TV Time Liberator, oppure carica l'esportazione ufficiale dei dati GDPR dal portale privacy di TV Time. Entrambe le opzioni funzionano.",

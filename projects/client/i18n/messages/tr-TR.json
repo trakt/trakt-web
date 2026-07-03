@@ -1734,6 +1734,7 @@
   "welcome_intro": "Dizileriniz ve filmleriniz tek bir yerde. İzlediklerinizi takip edin, sonraki ne izleyeceğinizi keşfedin ve kaldığınız yerden devam edin; tüm cihazlarınızda.",
   "welcome_tvtime_badge": "TV Time kapanıyor",
   "welcome_tvtime_body": "TV Time kapılarını kapatıyor, ancak izleme geçmişinizin onunla birlikte kaybolması gerekmiyor. Her şeyi Trakt'e taşıyın ve hiçbir şeyi kaçırmadan takip etmeye devam edin.",
+  "welcome_tvtime_gdpr_cta": "GDPR dışa aktarım isteği",
   "welcome_tvtime_heading": "TV Time'dan mı geliyorsunuz? Evinizdesiniz.",
   "welcome_tvtime_import_cta": "TV Time'dan içe aktar",
   "welcome_tvtime_liberator_body": "TV Time Liberator tarayıcı uzantısıyla tüm geçmişinizi dışa aktarın veya TV Time'ın gizlilik portalından resmi GDPR veri dışa aktarımını yükleyin. Her ikisi de çalışır.",
