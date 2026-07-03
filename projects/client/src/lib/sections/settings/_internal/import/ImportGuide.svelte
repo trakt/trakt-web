@@ -3,6 +3,7 @@
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
+  import { EMPTY_SPACE } from "$lib/utils/constants.ts";
   import { slide } from "svelte/transition";
   import type {
     ImportSourceConfig,
@@ -77,7 +78,7 @@
             <li>
               <p class="secondary">
                 {#each step as stepSegment, j (j)}
-                  {#if j > 0}" "{/if}
+                  {#if j > 0}{EMPTY_SPACE}{/if}
                   {@render segment(stepSegment)}
                 {/each}
               </p>
