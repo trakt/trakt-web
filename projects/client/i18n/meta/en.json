@@ -6965,6 +6965,10 @@
       "default": "Get TV Time Liberator",
       "description": "Call-to-action linking to the TV Time Liberator browser extension."
     },
+    "welcome_tvtime_gdpr_cta": {
+      "default": "Request GDPR export",
+      "description": "Call-to-action linking to TV Time's privacy portal where users request their official GDPR data export."
+    },
     "welcome_tvtime_import_cta": {
       "default": "Import from TV Time",
       "description": "Call-to-action on the TV Time notice that opens the TV Time importer."
