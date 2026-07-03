@@ -11,6 +11,8 @@ export const DEFAULT_IMPORT_SOURCE: ImportSource = 'tvtime';
 
 export type ImportAction = 'history' | 'watchlist' | 'ratings';
 
+export type ImportActionSelection = Record<ImportAction, boolean>;
+
 export type ImportType = 'movie' | 'show' | 'episode';
 
 export type ImportStatus =

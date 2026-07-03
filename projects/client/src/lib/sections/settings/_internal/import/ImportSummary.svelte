@@ -1,23 +1,61 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import Switch from "$lib/components/toggles/Switch.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import { slide } from "svelte/transition";
-  import type { ImportCounts, ImportSource } from "../../import/ImportTypes.ts";
+  import type {
+    ImportAction,
+    ImportActionSelection,
+    ImportCounts,
+    ImportSource,
+  } from "../../import/ImportTypes.ts";
 
   type ImportSummaryProps = {
     counts: ImportCounts;
-    totalItems: number;
+    selectedActions: ImportActionSelection;
     source: ImportSource;
+    onactionchange: (action: ImportAction, isIncluded: boolean) => void;
     onstart: () => void;
     onreset: () => void;
   };
 
-  const { counts, totalItems, source, onstart, onreset }: ImportSummaryProps =
-    $props();
+  const {
+    counts,
+    selectedActions,
+    source,
+    onactionchange,
+    onstart,
+    onreset,
+  }: ImportSummaryProps = $props();
 
   const { user, limits } = useUser();
+
+  const selectedCounts = $derived<ImportCounts>({
+    history: selectedActions.history ? counts.history : 0,
+    watchlist: selectedActions.watchlist ? counts.watchlist : 0,
+    ratings: selectedActions.ratings ? counts.ratings : 0,
+  });
+  const selectedTotalItems = $derived(
+    selectedCounts.history + selectedCounts.watchlist + selectedCounts.ratings,
+  );
+
+  const actionRows = $derived<
+    ReadonlyArray<{
+      action: ImportAction;
+      count: number;
+      label: (inputs: { count: number }) => string;
+    }>
+  >([
+    { action: "history", count: counts.history, label: m.import_summary_history },
+    {
+      action: "watchlist",
+      count: counts.watchlist,
+      label: m.import_summary_watchlist,
+    },
+    { action: "ratings", count: counts.ratings, label: m.import_summary_ratings },
+  ]);
 
   const isVipLimitExceeded = $derived.by(() => {
     if ($user?.isVip) return false;
@@ -29,7 +67,8 @@
     const historyFreeLimit = $limits.history.free * limitMultiplier;
 
     return (
-      counts.watchlist > watchlistFreeLimit || counts.history > historyFreeLimit
+      selectedCounts.watchlist > watchlistFreeLimit ||
+      selectedCounts.history > historyFreeLimit
     );
   });
 </script>
@@ -39,33 +78,37 @@
   transition:slide={{ duration: 150, axis: "y" }}
 >
   <div class="import-summary-counts">
-    {#if counts.history > 0}
-      <p class="secondary">
-        {m.import_summary_history({ count: counts.history })}
-      </p>
-    {/if}
-    {#if counts.watchlist > 0}
-      <p class="secondary">
-        {m.import_summary_watchlist({ count: counts.watchlist })}
-      </p>
-    {/if}
-    {#if counts.ratings > 0}
-      <p class="secondary">
-        {m.import_summary_ratings({ count: counts.ratings })}
-      </p>
-    {/if}
+    {#each actionRows as { action, count, label } (action)}
+      {#if count > 0}
+        <div
+          class="import-summary-action"
+          data-included={selectedActions[action] ? "true" : "false"}
+        >
+          <span class="import-summary-switch">
+            <Switch
+              label={label({ count })}
+              checked={selectedActions[action]}
+              onclick={() => onactionchange(action, !selectedActions[action])}
+            />
+          </span>
+          <p class="secondary" aria-hidden="true">
+            {label({ count })}
+          </p>
+        </div>
+      {/if}
+    {/each}
   </div>
 
   {#if isVipLimitExceeded}
     <UpsellCta source="import" variant="small">
-      {m.import_vip_limit_exceeded({ count: totalItems })}
+      {m.import_vip_limit_exceeded({ count: selectedTotalItems })}
     </UpsellCta>
   {/if}
 
   <div class="import-summary-actions">
     <Button
       label={m.button_label_start_import()}
-      disabled={isVipLimitExceeded || totalItems === 0}
+      disabled={isVipLimitExceeded || selectedTotalItems === 0}
       onclick={onstart}
       color="purple"
       size="small"
@@ -94,6 +137,40 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
+  }
+
+  .import-summary-action {
+    display: grid;
+    grid-template-columns: var(--ni-44) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--gap-xs);
+
+    p {
+      transition:
+        opacity var(--transition-increment) ease-in-out,
+        text-decoration-color var(--transition-increment) ease-in-out;
+    }
+
+    &[data-included="false"] {
+      p {
+        opacity: 0.55;
+        text-decoration: line-through;
+        text-decoration-color: currentColor;
+      }
+    }
+  }
+
+  .import-summary-switch {
+    display: flex;
+    align-items: center;
+    inline-size: var(--ni-44);
+
+    :global(.trakt-switch) {
+      --button-width: var(--ni-44);
+      --button-height: var(--ni-20);
+      --tick-size: var(--ni-14);
+      --tick-offset: var(--ni-3);
+    }
   }
 
   .import-summary-actions {
