@@ -8952,6 +8952,14 @@
           "type": "string"
         }
       }
+    },
+    "error_text_payment_other": {
+      "default": "There was an error while processing your payment. Please try again or contact support if needed.",
+      "description": "Generic payment error shown when a purchase fails for an unknown reason."
+    },
+    "error_text_payment_unavailable": {
+      "default": "There was an error while processing your payment. It looks like you're unable to make a payment at this time. Please try again.",
+      "description": "Payment error shown when the user is not permitted to make payments (e.g. parental controls, cloud service restrictions)."
     }
   }
 }
