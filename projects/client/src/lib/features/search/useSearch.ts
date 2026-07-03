@@ -1,10 +1,9 @@
 import { browser } from '$app/environment';
-import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
+import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { debounceTime, map, shareReplay, switchMap, tap } from 'rxjs/operators';
-import { createBulkMediaIntl } from '../intl-overlay/createBulkMediaIntl.ts';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
 import {
   searchListsQuery,
@@ -24,6 +23,7 @@ import { dedupe } from '../../utils/array/dedupe.ts';
 import { DEFAULT_SEARCH_LIMIT } from '../../utils/constants.ts';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
+import { createBulkMediaIntl } from '../intl-overlay/createBulkMediaIntl.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
 import { mapToSearchCover } from './_internal/mapToSearchCover.ts';
 import { postRecentSearch } from './_internal/postRecentSearch.ts';
@@ -88,7 +88,7 @@ export function useSearch() {
     searchTerm$,
     mode,
   ]).pipe(
-    debounceTime(150),
+    debounceTime(250),
     switchMap(([rawTerm, currentMode]) => {
       const term = rawTerm.toLowerCase().trim();
 
