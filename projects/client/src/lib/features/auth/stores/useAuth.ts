@@ -1,3 +1,4 @@
+import { getLocale } from '$lib/features/i18n/index.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';
@@ -31,9 +32,13 @@ export function useAuth() {
 
   const login = async () => {
     const manager = getUserManager();
+    const [language, region] = getLocale().split('-');
+    const lang = region ? `${language}-${region.toUpperCase()}` : language;
+
     await manager?.signinRedirect({
       extraQueryParams: {
         hide_email_form: 'true',
+        lang,
       },
     });
   };
