@@ -106,7 +106,9 @@ export const IMPORT_SOURCE_CONFIGS: Record<
     id: 'tvtime',
     name: 'TV Time',
     accept: '.csv,.zip',
-    maxFiles: 5,
+    // High enough to swallow a whole extracted GDPR folder (41 files);
+    // unrecognized files are filtered out by the parser.
+    maxFiles: 50,
     guide: {
       title: "Your TV Time isn't lost in space! 🚀",
       description:
