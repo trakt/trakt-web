@@ -86,6 +86,24 @@ describe('TvTimeCsvParser', () => {
       });
     });
 
+    it('should route followed show files by their notification_offset column', async () => {
+      const followedCsv = [
+        'user_id,tv_show_id,notification_type,notification_offset,created_at,updated_at,active,diffusion,folder_id,archived,tv_show_name',
+        '1,357864,2,1440,2021-03-15 20:42:59,2021-03-15 20:42:59,0,original,,0,Lovecraft Country',
+      ].join('\n');
+
+      const result = await TvTimeCsvParser.parse([
+        csvFile(followedCsv, 'followed_tv_show.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'watchlist',
+        type: 'show',
+        ids: { tvdb: 357864 },
+      });
+    });
+
     it('should route remaining csv files to the native parser', async () => {
       const result = await TvTimeCsvParser.parse([
         csvFile(NATIVE_CSV, 'seen_episode.csv'),
