@@ -4,6 +4,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { FilterOverrideParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
   import RecommendedListItem from "./RecommendedListItem.svelte";
@@ -23,6 +24,11 @@
     filterOverride,
   }: RecommendationListProps = $props();
   const { filterMap } = useFilter();
+
+  const cta = $derived({
+    type: "recommended" as const,
+    mediaType: type === "media" ? undefined : type,
+  });
 </script>
 
 <DrillableMediaList
@@ -50,5 +56,13 @@
       {media}
       mode={type === "media" ? "mixed" : "standalone"}
     />
+  {/snippet}
+
+  {#snippet ctaItem()}
+    <CtaItem {cta} variant="card" />
+  {/snippet}
+
+  {#snippet empty()}
+    <CtaItem {cta} variant="placeholder" />
   {/snippet}
 </DrillableMediaList>

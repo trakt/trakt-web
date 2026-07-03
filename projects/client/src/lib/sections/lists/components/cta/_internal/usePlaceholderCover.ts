@@ -70,6 +70,7 @@ function ctaToQuery(cta: MediaCta | ListCta) {
     case 'personal-list':
     case 'upcoming':
     case 'smart-list':
+    case 'recommended':
       return mediaTypeToQuery(cta.mediaType ?? 'show', cta.type === 'upcoming');
   }
 }
