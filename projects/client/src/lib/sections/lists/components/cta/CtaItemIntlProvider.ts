@@ -57,6 +57,8 @@ export const CtaItemIntlProvider: CtaItemIntl = {
       }
       case 'smart-list':
         return m.text_cta_smart_lists();
+      case 'recommended':
+        return m.text_cta_recommended();
       case 'personal-list': {
         return m.text_cta_personal_lists();
       }
