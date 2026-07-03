@@ -1,3 +1,4 @@
+import { zipSync } from 'fflate';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { TvTimeLiberatorParser } from './TvTimeLiberatorParser.ts';
 import { parseCsvFile } from './utils/parseCsvFile.ts';
@@ -18,13 +19,19 @@ describe('TvTimeLiberatorParser', () => {
       expect(TvTimeLiberatorParser.canParse([dummyFile])).toBe(true);
     });
 
+    it('accepts a single zip file', () => {
+      expect(
+        TvTimeLiberatorParser.canParse([new File([''], 'tv-time-export.zip')]),
+      ).toBe(true);
+    });
+
     it('rejects multiple files', () => {
       expect(TvTimeLiberatorParser.canParse([dummyFile, dummyFile])).toBe(
         false,
       );
     });
 
-    it('rejects non-csv files', () => {
+    it('rejects unsupported file types', () => {
       expect(
         TvTimeLiberatorParser.canParse([new File([''], 'data.json')]),
       ).toBe(false);
@@ -179,6 +186,42 @@ describe('TvTimeLiberatorParser', () => {
     it('returns empty array when no files provided', async () => {
       const result = await TvTimeLiberatorParser.parse([]);
       expect(result).toHaveLength(0);
+    });
+  });
+
+  describe('zip archives', () => {
+    it('parses activity_history.csv from a liberator zip', async () => {
+      const encoder = new TextEncoder();
+      const csv = [
+        'imdb_id,tvdb_id,type,title,season,episode,is_special,is_watched,watched_at,status,is_watchlisted,rating',
+        'tt1375666,113,movie,Inception,,,false,true,2023-01-01T00:00:00Z,,false,',
+      ].join('\n');
+      const zipped = zipSync({
+        'activity_history.csv': encoder.encode(csv),
+        'movies.json': encoder.encode('[]'),
+      });
+      const file = new File([zipped as BlobPart], 'tv-time-export.zip');
+
+      const result = await TvTimeLiberatorParser.parse([file]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'movie',
+        ids: { imdb: 'tt1375666', tvdb: 113 },
+        title: 'Inception',
+      });
+    });
+
+    it('raises a helpful error for unreadable zips', async () => {
+      const file = new File(
+        [new Uint8Array([1, 2, 3, 4]) as BlobPart],
+        'tv-time-export.zip',
+      );
+
+      await expect(TvTimeLiberatorParser.parse([file])).rejects.toThrow(
+        /activity_history.csv/,
+      );
     });
   });
 });

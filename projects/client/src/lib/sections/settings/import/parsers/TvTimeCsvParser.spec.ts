@@ -1,3 +1,4 @@
+import { zipSync } from 'fflate';
 import { describe, expect, it } from 'vitest';
 import { TvTimeCsvParser } from './TvTimeCsvParser.ts';
 
@@ -18,6 +19,19 @@ const GDPR_V2_CSV = [
 
 function csvFile(content: string, name: string): File {
   return new File([content], name, { type: 'text/csv' });
+}
+
+function zipFile(entries: Record<string, string>, name: string): File {
+  const encoder = new TextEncoder();
+  const zipped = zipSync(
+    Object.fromEntries(
+      Object.entries(entries).map(([path, content]) => [
+        path,
+        encoder.encode(content),
+      ]),
+    ),
+  );
+  return new File([zipped as BlobPart], name);
 }
 
 describe('TvTimeCsvParser', () => {
@@ -89,6 +103,64 @@ describe('TvTimeCsvParser', () => {
     it('should return an empty array when no files are provided', async () => {
       const result = await TvTimeCsvParser.parse([]);
       expect(result).toHaveLength(0);
+    });
+
+    it('should route liberator zips by their activity_history.csv entry', async () => {
+      const file = zipFile(
+        { 'activity_history.csv': LIBERATOR_CSV },
+        'tv-time-export.zip',
+      );
+
+      const result = await TvTimeCsvParser.parse([file]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { imdb: 'tt0903747', tvdb: 3859781 },
+        title: 'Breaking Bad',
+      });
+    });
+
+    it('should route gdpr zips by their tracking-prod-records entries', async () => {
+      const file = zipFile(
+        {
+          'gdpr-data/tracking-prod-records-v2.csv': GDPR_V2_CSV,
+          'gdpr-data/ip_address.csv': 'ip\n127.0.0.1',
+        },
+        'gdpr-data.zip',
+      );
+
+      const result = await TvTimeCsvParser.parse([file]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { tvdb: 1331151 },
+      });
+    });
+
+    it('should reject zips that match no known TV Time export', async () => {
+      const file = zipFile(
+        { 'random.csv': 'a,b\n1,2' },
+        'unknown.zip',
+      );
+
+      await expect(TvTimeCsvParser.parse([file])).rejects.toThrow(
+        /does not look like a TV Time export/,
+      );
+    });
+
+    it('should raise a helpful error for unreadable zips', async () => {
+      const file = new File(
+        [new Uint8Array([1, 2, 3, 4]) as BlobPart],
+        'gdpr-data.zip',
+      );
+
+      await expect(TvTimeCsvParser.parse([file])).rejects.toThrow(
+        /Could not read the .zip file/,
+      );
     });
   });
 
