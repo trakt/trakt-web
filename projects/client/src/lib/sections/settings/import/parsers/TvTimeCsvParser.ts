@@ -40,7 +40,7 @@ async function detectFormat(file: File): Promise<TvTimeFormat> {
   if ('imdb_id' in first) return 'liberator';
   if (
     'type-uuid-n' in first || 'ep_id' in first ||
-    'notification_offset' in first
+    'notification_offset' in first || 'vote_key' in first
   ) {
     return 'gdpr';
   }
