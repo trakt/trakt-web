@@ -29,6 +29,7 @@ jobs:
             api.github.com:443
             codeload.github.com:443
             deno.com:443
+            dl.deno.land:443
             github.com:443
             jsr.io:443
             npm.jsr.io:443
@@ -115,6 +116,7 @@ jobs:
             api.github.com:443
             codeload.github.com:443
             deno.com:443
+            dl.deno.land:443
             github.com:443
             jsr.io:443
             npm.jsr.io:443
