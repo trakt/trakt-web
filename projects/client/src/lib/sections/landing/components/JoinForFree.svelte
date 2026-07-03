@@ -1,5 +1,6 @@
 <script lang="ts">
   import LogoMarkCircle from "$lib/components/logo/LogoMarkCircle.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useTraktTeam } from "$lib/features/team/useTraktTeam";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import JoinForFreeButton from "./JoinForFreeButton.svelte";
@@ -13,10 +14,11 @@
   <div class="trakt-landing-social-proof">
     <div class="trakt-social-proof-copy">
       <span class="bold title welcome-title">
-        Welcome to Trakt <LogoMarkCircle />
+        {m.header_landing_welcome()}
+        <LogoMarkCircle />
       </span>
       <p class="secondary">
-        Your new home, where your shows and movies are all in one place.
+        {m.text_landing_welcome()}
       </p>
     </div>
     <div class="trakt-landing-profiles" style="--profile-count: {profileCount}">
@@ -32,7 +34,7 @@
   <div class="trakt-join-for-free-button">
     <JoinForFreeButton />
     <span class="secondary">
-      Track everything you watch, wherever you stream it.
+      {m.text_landing_join()}
     </span>
   </div>
 </div>
