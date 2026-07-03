@@ -154,6 +154,27 @@ function followedShow(
   };
 }
 
+const RATINGS_HEADER = [
+  'episode_id',
+  'movie_name',
+  'uuid',
+  'vote_key',
+  'user_id',
+];
+
+function ratingVote(
+  overrides: Record<string, string> = {},
+): Record<string, string> {
+  return {
+    episode_id: '0',
+    movie_name: 'What Happened to Monday',
+    uuid: '002e2d8f-aee0-40ce-aa39-1be952e2952a',
+    vote_key: '002e2d8f-aee0-40ce-aa39-1be952e2952a-36089951-3',
+    user_id: '36089951',
+    ...overrides,
+  };
+}
+
 function csvFile(content: string, name = 'tracking.csv'): File {
   return new File([content], name, { type: 'text/csv' });
 }
@@ -477,6 +498,100 @@ describe('TvTimeGdprParser', () => {
     });
   });
 
+  describe('ratings file', () => {
+    it('should map rating votes to 1-10 movie ratings', async () => {
+      const csv = toCsv(RATINGS_HEADER, [ratingVote()]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(csv, 'ratings-live-votes.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'ratings',
+        type: 'movie',
+        ids: {},
+        title: 'What Happened to Monday',
+        rating: 10,
+      });
+    });
+
+    it('should recover the english title and year from the v1 tracking rows', async () => {
+      const ratingsCsv = toCsv(RATINGS_HEADER, [
+        ratingVote({ movie_name: '승리호' }),
+      ]);
+      const v1Csv = toCsv(V1_HEADER, [v1MovieWatch({
+        movie_name: '승리호',
+        alpha_range_key: 'watch-alpha-space-sweepers',
+        release_date: '2021-02-05',
+      })]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(ratingsCsv, 'ratings-live-votes.csv'),
+        csvFile(v1Csv, 'tracking-prod-records.csv'),
+      ]);
+
+      const rating = result.find((item) => item.action === 'ratings');
+      expect(rating).toMatchObject({
+        title: 'space sweepers',
+        year: 2021,
+        rating: 10,
+      });
+    });
+
+    it('should skip votes with unknown rating ids', async () => {
+      const csv = toCsv(RATINGS_HEADER, [ratingVote({
+        vote_key: '002e2d8f-aee0-40ce-aa39-1be952e2952a-36089951-39',
+      })]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(csv, 'ratings-live-votes.csv'),
+      ]);
+
+      expect(result).toHaveLength(0);
+    });
+
+    it('should skip episode rating votes', async () => {
+      const csv = toCsv(RATINGS_HEADER, [ratingVote({
+        episode_id: '1331151',
+        movie_name: '',
+      })]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(csv, 'ratings-live-votes.csv'),
+      ]);
+
+      expect(result).toHaveLength(0);
+    });
+
+    it('should keep a single rating per movie', async () => {
+      const csv = toCsv(RATINGS_HEADER, [
+        ratingVote(),
+        ratingVote({
+          vote_key: '002e2d8f-aee0-40ce-aa39-1be952e2952a-36089951-27',
+        }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(csv, 'ratings-live-votes.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+    });
+
+    it('should ignore emotion votes despite the shared header', async () => {
+      const csv = toCsv(RATINGS_HEADER, [ratingVote({
+        vote_key: '002e2d8f-aee0-40ce-aa39-1be952e2952a-36089951-33',
+      })]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(csv, 'emotions-live-votes.csv'),
+      ]);
+
+      expect(result).toHaveLength(0);
+    });
+  });
+
   describe('zip archives', () => {
     it('should parse tracking files from a gdpr zip', async () => {
       const encoder = new TextEncoder();
@@ -490,16 +605,23 @@ describe('TvTimeGdprParser', () => {
         'gdpr-data/followed_tv_show.csv': encoder.encode(
           toCsv(FOLLOWED_HEADER, [followedShow()]),
         ),
+        'gdpr-data/ratings-live-votes.csv': encoder.encode(
+          toCsv(RATINGS_HEADER, [ratingVote()]),
+        ),
         'gdpr-data/ip_address.csv': encoder.encode('ip\n127.0.0.1'),
       });
       const file = new File([zipped as BlobPart], 'gdpr-data.zip');
 
       const result = await TvTimeGdprParser.parse([file]);
 
-      expect(result.filter((item) => item.type === 'movie')).toHaveLength(1);
-      expect(result.filter((item) => item.type === 'episode')).toHaveLength(1);
+      expect(result.filter((item) => item.action === 'history')).toHaveLength(
+        2,
+      );
       expect(result.filter((item) => item.action === 'watchlist'))
         .toHaveLength(1);
+      expect(result.filter((item) => item.action === 'ratings')).toHaveLength(
+        1,
+      );
     });
 
     it('should raise a helpful error for unreadable zips', async () => {

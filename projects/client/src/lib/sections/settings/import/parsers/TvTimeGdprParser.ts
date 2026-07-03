@@ -5,6 +5,7 @@ import { toISOString } from './utils/toISOString.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
 type TrackingV1Row = {
+  uuid?: string;
   type?: string;
   entity_type?: string;
   series_name?: string;
@@ -37,9 +38,31 @@ type FollowedShowRow = {
   archived?: string;
 };
 
+type RatingVoteRow = {
+  uuid?: string;
+  episode_id?: string;
+  movie_name?: string;
+  vote_key?: string;
+};
+
 const TRACKING_V1_MARKER = 'type-uuid-n';
 const TRACKING_V2_MARKER = 'ep_id';
 const FOLLOWED_SHOW_MARKER = 'notification_offset';
+
+// emotions-live-votes.csv shares this header, so rating votes are routed
+// by file name instead of a column marker.
+const RATINGS_CSV = 'ratings-live-votes.csv';
+
+// TV Time's stars_wording_scalev2 rating set: id -> star position, doubled
+// to Trakt's 1-10 scale. Stable since 2018 and frozen by the July 2026
+// shutdown; verified against msapi.tvtime.com/live/v1/ratings/sets.
+const RATING_ID_TO_SCORE: Record<number, number> = {
+  1: 2, // bad
+  27: 4, // ok
+  28: 6, // good
+  29: 8, // great
+  3: 10, // wow
+};
 
 function toInt(value?: string): number | undefined {
   if (!value) return undefined;
@@ -173,11 +196,53 @@ function parseFollowedShowWatchlist(
     });
 }
 
+// Vote rows only carry the localized movie_name; joining on uuid against
+// the v1 tracking rows recovers the English slug and release year.
+function parseRatingVotes(
+  ratingRows: RatingVoteRow[],
+  v1Rows: TrackingV1Row[],
+): UniversalImportItem[] {
+  const moviesByUuid = new Map(
+    v1Rows
+      .filter((row) => row.entity_type === 'movie' && row.uuid)
+      .map((row) => [row.uuid, row]),
+  );
+
+  const byUuid = new Map<string, UniversalImportItem>();
+
+  for (const row of ratingRows) {
+    if (!row.uuid) continue;
+    // Episode ratings are skipped: the ratings sync payload only carries
+    // movies and shows.
+    if (row.episode_id && row.episode_id !== '0') continue;
+
+    const ratingId = toInt(row.vote_key?.split('-').at(-1));
+    const rating = ratingId != null ? RATING_ID_TO_SCORE[ratingId] : undefined;
+    if (rating == null) continue;
+
+    const tracked = moviesByUuid.get(row.uuid);
+    const title = tracked ? toMovieTitle(tracked) : row.movie_name || undefined;
+    if (!title) continue;
+
+    byUuid.set(row.uuid, {
+      action: 'ratings',
+      type: 'movie',
+      ids: {},
+      title,
+      year: toYear(tracked?.release_date),
+      rating,
+    });
+  }
+
+  return [...byUuid.values()];
+}
+
 function parseGdprRows(
-  { v1Rows, v2Rows, followedRows }: {
+  { v1Rows, v2Rows, followedRows, ratingRows }: {
     v1Rows: TrackingV1Row[];
     v2Rows: TrackingV2Row[];
     followedRows: FollowedShowRow[];
+    ratingRows: RatingVoteRow[];
   },
 ): UniversalImportItem[] {
   const episodes = v2Rows.length > 0
@@ -213,7 +278,15 @@ function parseGdprRows(
     watchlistedShowIds,
   );
 
-  return [...episodes, ...movies, ...showWatchlist, ...followedWatchlist];
+  const ratings = parseRatingVotes(ratingRows, v1Rows);
+
+  return [
+    ...episodes,
+    ...movies,
+    ...showWatchlist,
+    ...followedWatchlist,
+    ...ratings,
+  ];
 }
 
 function isV1Row(row: Record<string, unknown>): boolean {
@@ -228,11 +301,12 @@ function isFollowedShowRow(row: Record<string, unknown>): boolean {
   return FOLLOWED_SHOW_MARKER in row;
 }
 
-function unzipGdprCsvTexts(buffer: ArrayBuffer): string[] {
+function unzipGdprCsvTexts(buffer: ArrayBuffer) {
   const isGdprCsv = (basename: string) =>
     (basename.startsWith('tracking-prod-records') &&
       basename.endsWith('.csv')) ||
-    basename === 'followed_tv_show.csv';
+    basename === 'followed_tv_show.csv' ||
+    basename === RATINGS_CSV;
 
   try {
     return unzipCsvTexts({ buffer, isMatch: isGdprCsv });
@@ -243,15 +317,15 @@ function unzipGdprCsvTexts(buffer: ArrayBuffer): string[] {
   }
 }
 
-async function collectCsvTexts(files: ReadonlyArray<File>): Promise<string[]> {
-  const texts = await Promise.all(files.map(async (file) => {
+async function collectCsvTexts(files: ReadonlyArray<File>) {
+  const entries = await Promise.all(files.map(async (file) => {
     if (file.name.endsWith('.zip')) {
       return unzipGdprCsvTexts(await file.arrayBuffer());
     }
-    return [await file.text()];
+    return [{ basename: file.name, text: await file.text() }];
   }));
 
-  return texts.flat();
+  return entries.flat();
 }
 
 export const TvTimeGdprParser: FileParser = {
@@ -265,23 +339,31 @@ export const TvTimeGdprParser: FileParser = {
   },
 
   async parse(files) {
-    const texts = await collectCsvTexts(files);
-    const parsed = await Promise.all(texts.map(parseCsvText));
+    const entries = await collectCsvTexts(files);
+    const parsed = await Promise.all(
+      entries.map(async (entry) => ({
+        basename: entry.basename,
+        rows: await parseCsvText(entry.text) as Record<string, unknown>[],
+      })),
+    );
 
     const v1Rows: TrackingV1Row[] = [];
     const v2Rows: TrackingV2Row[] = [];
     const followedRows: FollowedShowRow[] = [];
+    const ratingRows: RatingVoteRow[] = [];
 
-    for (const rows of parsed as Record<string, unknown>[][]) {
+    for (const { basename, rows } of parsed) {
       const [first] = rows;
       if (!first) continue;
-      if (isV2Row(first)) v2Rows.push(...(rows as TrackingV2Row[]));
+      if (basename === RATINGS_CSV) {
+        ratingRows.push(...(rows as RatingVoteRow[]));
+      } else if (isV2Row(first)) v2Rows.push(...(rows as TrackingV2Row[]));
       else if (isV1Row(first)) v1Rows.push(...(rows as TrackingV1Row[]));
       else if (isFollowedShowRow(first)) {
         followedRows.push(...(rows as FollowedShowRow[]));
       }
     }
 
-    return parseGdprRows({ v1Rows, v2Rows, followedRows });
+    return parseGdprRows({ v1Rows, v2Rows, followedRows, ratingRows });
   },
 };

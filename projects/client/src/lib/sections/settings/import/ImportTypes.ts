@@ -126,7 +126,7 @@ export const IMPORT_SOURCE_CONFIGS: Record<
           href: 'https://gdpr.tvtime.com/gdpr/self-service',
         }],
         ["Once the export is ready you'll get two emails: one with a .zip file and another with a password to unlock it."],
-        ['Upload the unlocked .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files (plus followed_tv_show.csv for your watchlist) instead.'],
+        ['Upload the unlocked .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files (plus followed_tv_show.csv and ratings-live-votes.csv for your watchlist and ratings) instead.'],
       ],
     },
   },

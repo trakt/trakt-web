@@ -5,13 +5,21 @@ interface UnzipCsvTextsParams {
   isMatch: (basename: string) => boolean;
 }
 
+interface CsvText {
+  basename: string;
+  text: string;
+}
+
 export function unzipCsvTexts(
   { buffer, isMatch }: UnzipCsvTextsParams,
-): string[] {
+): CsvText[] {
   const unzipped = unzipSync(new Uint8Array(buffer), {
     filter: (file) => isMatch(file.name.split('/').at(-1) ?? ''),
   });
 
   const decoder = new TextDecoder('utf-8');
-  return Object.values(unzipped).map((data) => decoder.decode(data));
+  return Object.entries(unzipped).map(([name, data]) => ({
+    basename: name.split('/').at(-1) ?? '',
+    text: decoder.decode(data),
+  }));
 }

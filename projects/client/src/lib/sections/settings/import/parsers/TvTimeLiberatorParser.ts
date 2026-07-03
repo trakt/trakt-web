@@ -82,7 +82,7 @@ async function unzipActivityHistoryRows(file: File): Promise<unknown[]> {
       return unzipCsvTexts({
         buffer,
         isMatch: (basename) => basename === ACTIVITY_HISTORY_CSV,
-      });
+      }).map((entry) => entry.text);
     } catch {
       throw new Error(
         `Could not read the .zip file. Extract it and upload ${ACTIVITY_HISTORY_CSV} instead.`,
