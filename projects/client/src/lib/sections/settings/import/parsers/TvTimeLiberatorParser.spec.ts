@@ -177,6 +177,67 @@ describe('TvTimeLiberatorParser', () => {
       });
     });
 
+    it('emits a rating alongside history for rated movies', async () => {
+      mockParseCsvFile.mockResolvedValue([{
+        imdb_id: 'tt1375666',
+        tvdb_id: '113',
+        type: 'movie',
+        title: 'Inception',
+        is_watched: 'true',
+        watched_at: '2023-01-01T00:00:00Z',
+        is_watchlisted: 'false',
+        rating: '8',
+      }]);
+
+      const result = await TvTimeLiberatorParser.parse([dummyFile]);
+
+      expect(result).toHaveLength(2);
+      expect(result[1]).toMatchObject({
+        action: 'ratings',
+        type: 'movie',
+        ids: { imdb: 'tt1375666', tvdb: 113 },
+        rating: 8,
+      });
+    });
+
+    it('skips episode ratings', async () => {
+      mockParseCsvFile.mockResolvedValue([{
+        imdb_id: 'tt0903747',
+        tvdb_id: '81189',
+        type: 'episode',
+        title: 'Breaking Bad',
+        season: '3',
+        episode: '7',
+        is_watched: 'true',
+        watched_at: '2023-06-01T00:00:00Z',
+        is_watchlisted: 'false',
+        rating: '9',
+      }]);
+
+      const result = await TvTimeLiberatorParser.parse([dummyFile]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]?.action).toBe('history');
+    });
+
+    it('ignores empty and invalid ratings', async () => {
+      mockParseCsvFile.mockResolvedValue([{
+        imdb_id: 'tt1375666',
+        tvdb_id: '113',
+        type: 'movie',
+        title: 'Inception',
+        is_watched: 'true',
+        watched_at: '2023-01-01T00:00:00Z',
+        is_watchlisted: 'false',
+        rating: '',
+      }]);
+
+      const result = await TvTimeLiberatorParser.parse([dummyFile]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]?.action).toBe('history');
+    });
+
     it('returns empty array for empty file', async () => {
       mockParseCsvFile.mockResolvedValue([]);
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
