@@ -124,6 +124,36 @@ function v2UserSeries(
   };
 }
 
+const FOLLOWED_HEADER = [
+  'user_id',
+  'tv_show_id',
+  'notification_type',
+  'notification_offset',
+  'created_at',
+  'updated_at',
+  'active',
+  'diffusion',
+  'folder_id',
+  'archived',
+  'tv_show_name',
+];
+
+function followedShow(
+  overrides: Record<string, string> = {},
+): Record<string, string> {
+  return {
+    user_id: '1',
+    tv_show_id: '357864',
+    notification_type: '2',
+    notification_offset: '1440',
+    created_at: '2021-03-15 20:42:59',
+    active: '0',
+    archived: '0',
+    tv_show_name: 'Lovecraft Country',
+    ...overrides,
+  };
+}
+
 function csvFile(content: string, name = 'tracking.csv'): File {
   return new File([content], name, { type: 'text/csv' });
 }
@@ -389,6 +419,64 @@ describe('TvTimeGdprParser', () => {
     });
   });
 
+  describe('followed shows file', () => {
+    it('should watchlist followed shows without watched episodes', async () => {
+      const csv = toCsv(FOLLOWED_HEADER, [followedShow()]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(csv, 'followed_tv_show.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'watchlist',
+        type: 'show',
+        ids: { tvdb: 357864 },
+        title: 'Lovecraft Country',
+      });
+    });
+
+    it('should not watchlist followed shows with watched episodes', async () => {
+      const followedCsv = toCsv(FOLLOWED_HEADER, [
+        followedShow({ tv_show_id: '82066' }),
+      ]);
+      const v2Csv = toCsv(V2_HEADER, [v2EpisodeWatch()]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(followedCsv, 'followed_tv_show.csv'),
+        csvFile(v2Csv, 'tracking-prod-records-v2.csv'),
+      ]);
+
+      expect(result.filter((item) => item.action === 'watchlist'))
+        .toHaveLength(0);
+    });
+
+    it('should not watchlist archived follows', async () => {
+      const csv = toCsv(FOLLOWED_HEADER, [followedShow({ archived: '1' })]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(csv, 'followed_tv_show.csv'),
+      ]);
+
+      expect(result).toHaveLength(0);
+    });
+
+    it('should not duplicate shows already watchlisted via tracking flags', async () => {
+      const followedCsv = toCsv(FOLLOWED_HEADER, [
+        followedShow({ tv_show_id: '353309', tv_show_name: 'Haunted' }),
+      ]);
+      const v2Csv = toCsv(V2_HEADER, [v2UserSeries({ is_for_later: 'true' })]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(followedCsv, 'followed_tv_show.csv'),
+        csvFile(v2Csv, 'tracking-prod-records-v2.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]?.ids.tvdb).toBe(353309);
+    });
+  });
+
   describe('zip archives', () => {
     it('should parse tracking files from a gdpr zip', async () => {
       const encoder = new TextEncoder();
@@ -399,6 +487,9 @@ describe('TvTimeGdprParser', () => {
         'gdpr-data/tracking-prod-records-v2.csv': encoder.encode(
           toCsv(V2_HEADER, [v2EpisodeWatch()]),
         ),
+        'gdpr-data/followed_tv_show.csv': encoder.encode(
+          toCsv(FOLLOWED_HEADER, [followedShow()]),
+        ),
         'gdpr-data/ip_address.csv': encoder.encode('ip\n127.0.0.1'),
       });
       const file = new File([zipped as BlobPart], 'gdpr-data.zip');
@@ -407,6 +498,8 @@ describe('TvTimeGdprParser', () => {
 
       expect(result.filter((item) => item.type === 'movie')).toHaveLength(1);
       expect(result.filter((item) => item.type === 'episode')).toHaveLength(1);
+      expect(result.filter((item) => item.action === 'watchlist'))
+        .toHaveLength(1);
     });
 
     it('should raise a helpful error for unreadable zips', async () => {

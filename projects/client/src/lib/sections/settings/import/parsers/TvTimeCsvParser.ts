@@ -38,7 +38,12 @@ async function detectFormat(file: File): Promise<TvTimeFormat> {
   const [first] = await parseCsvFile(file) as Record<string, unknown>[];
   if (!first) return 'native';
   if ('imdb_id' in first) return 'liberator';
-  if ('type-uuid-n' in first || 'ep_id' in first) return 'gdpr';
+  if (
+    'type-uuid-n' in first || 'ep_id' in first ||
+    'notification_offset' in first
+  ) {
+    return 'gdpr';
+  }
   return 'native';
 }
 

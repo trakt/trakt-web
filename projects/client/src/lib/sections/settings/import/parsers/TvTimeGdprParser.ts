@@ -31,8 +31,15 @@ type TrackingV2Row = {
   is_archived?: string;
 };
 
+type FollowedShowRow = {
+  tv_show_id?: string;
+  tv_show_name?: string;
+  archived?: string;
+};
+
 const TRACKING_V1_MARKER = 'type-uuid-n';
 const TRACKING_V2_MARKER = 'ep_id';
+const FOLLOWED_SHOW_MARKER = 'notification_offset';
 
 function toInt(value?: string): number | undefined {
   if (!value) return undefined;
@@ -143,8 +150,35 @@ function parseV2ShowWatchlist(
     });
 }
 
+// The v2 tracking flags miss follows that predate them, so
+// followed_tv_show.csv backfills the rest of the watchlist.
+function parseFollowedShowWatchlist(
+  rows: FollowedShowRow[],
+  watchedShowIds: ReadonlySet<number>,
+  seenShowIds: ReadonlySet<number>,
+): UniversalImportItem[] {
+  return rows
+    .filter((row) => row.archived !== '1')
+    .flatMap((row) => {
+      const tvdbId = toInt(row.tv_show_id);
+      if (tvdbId == null) return [];
+      if (watchedShowIds.has(tvdbId) || seenShowIds.has(tvdbId)) return [];
+
+      return [{
+        action: 'watchlist' as const,
+        type: 'show' as const,
+        ids: { tvdb: tvdbId },
+        title: row.tv_show_name || undefined,
+      }];
+    });
+}
+
 function parseGdprRows(
-  { v1Rows, v2Rows }: { v1Rows: TrackingV1Row[]; v2Rows: TrackingV2Row[] },
+  { v1Rows, v2Rows, followedRows }: {
+    v1Rows: TrackingV1Row[];
+    v2Rows: TrackingV2Row[];
+    followedRows: FollowedShowRow[];
+  },
 ): UniversalImportItem[] {
   const episodes = v2Rows.length > 0
     ? v2Rows
@@ -168,8 +202,18 @@ function parseGdprRows(
   );
 
   const showWatchlist = parseV2ShowWatchlist(v2Rows, watchedShowIds);
+  const watchlistedShowIds = new Set(
+    showWatchlist
+      .map((item) => item.ids.tvdb)
+      .filter((id): id is number => id != null),
+  );
+  const followedWatchlist = parseFollowedShowWatchlist(
+    followedRows,
+    watchedShowIds,
+    watchlistedShowIds,
+  );
 
-  return [...episodes, ...movies, ...showWatchlist];
+  return [...episodes, ...movies, ...showWatchlist, ...followedWatchlist];
 }
 
 function isV1Row(row: Record<string, unknown>): boolean {
@@ -180,12 +224,18 @@ function isV2Row(row: Record<string, unknown>): boolean {
   return TRACKING_V2_MARKER in row;
 }
 
-function unzipTrackingCsvTexts(buffer: ArrayBuffer): string[] {
-  const isTrackingCsv = (basename: string) =>
-    basename.startsWith('tracking-prod-records') && basename.endsWith('.csv');
+function isFollowedShowRow(row: Record<string, unknown>): boolean {
+  return FOLLOWED_SHOW_MARKER in row;
+}
+
+function unzipGdprCsvTexts(buffer: ArrayBuffer): string[] {
+  const isGdprCsv = (basename: string) =>
+    (basename.startsWith('tracking-prod-records') &&
+      basename.endsWith('.csv')) ||
+    basename === 'followed_tv_show.csv';
 
   try {
-    return unzipCsvTexts({ buffer, isMatch: isTrackingCsv });
+    return unzipCsvTexts({ buffer, isMatch: isGdprCsv });
   } catch {
     throw new Error(
       'Could not read the .zip file. If it is password protected, extract it first and upload the tracking-prod-records CSV files instead.',
@@ -196,7 +246,7 @@ function unzipTrackingCsvTexts(buffer: ArrayBuffer): string[] {
 async function collectCsvTexts(files: ReadonlyArray<File>): Promise<string[]> {
   const texts = await Promise.all(files.map(async (file) => {
     if (file.name.endsWith('.zip')) {
-      return unzipTrackingCsvTexts(await file.arrayBuffer());
+      return unzipGdprCsvTexts(await file.arrayBuffer());
     }
     return [await file.text()];
   }));
@@ -220,14 +270,18 @@ export const TvTimeGdprParser: FileParser = {
 
     const v1Rows: TrackingV1Row[] = [];
     const v2Rows: TrackingV2Row[] = [];
+    const followedRows: FollowedShowRow[] = [];
 
     for (const rows of parsed as Record<string, unknown>[][]) {
       const [first] = rows;
       if (!first) continue;
       if (isV2Row(first)) v2Rows.push(...(rows as TrackingV2Row[]));
       else if (isV1Row(first)) v1Rows.push(...(rows as TrackingV1Row[]));
+      else if (isFollowedShowRow(first)) {
+        followedRows.push(...(rows as FollowedShowRow[]));
+      }
     }
 
-    return parseGdprRows({ v1Rows, v2Rows });
+    return parseGdprRows({ v1Rows, v2Rows, followedRows });
   },
 };
