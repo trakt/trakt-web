@@ -18,12 +18,15 @@
     type AmbiguousImportItem,
     DEFAULT_IMPORT_SOURCE,
     IMPORT_SOURCE_CONFIGS,
+    type ImportAction,
+    type ImportActionSelection,
     type ImportCounts,
     type ImportSource,
     type ImportSourceConfig,
     type ImportStatus,
     type UniversalImportItem,
   } from "../import/ImportTypes.ts";
+  import { filterImportItemsByActionSelection } from "../import/filterImportItemsByActionSelection.ts";
   import { getParser } from "../import/parsers/getParser.ts";
   import { syncToTrakt } from "../import/syncToTrakt.ts";
   import type { SyncState } from "../sync/models/SyncState.ts";
@@ -40,6 +43,14 @@
     return DEFAULT_IMPORT_SOURCE;
   }
 
+  function defaultSelectedActions(): ImportActionSelection {
+    return {
+      history: true,
+      watchlist: true,
+      ratings: true,
+    };
+  }
+
   const { importInProgress } = useImportInProgress();
   const { invalidate } = useInvalidator();
   const { record } = useAnalytics();
@@ -48,6 +59,7 @@
 
   type ImportUIState = SyncState<ImportStatus> & {
     selectedSource: ImportSource;
+    selectedActions: ImportActionSelection;
     parsedItems: ReadonlyArray<UniversalImportItem>;
     errorCount: number;
     unresolved: ReadonlyArray<UniversalImportItem>;
@@ -59,6 +71,7 @@
 
   const state = $state<ImportUIState>({
     selectedSource: DEFAULT_IMPORT_SOURCE,
+    selectedActions: defaultSelectedActions(),
     status: "idle",
     parsedItems: [],
     processedCount: 0,
@@ -76,6 +89,18 @@
     watchlist: state.parsedItems.filter((i) => i.action === "watchlist").length,
     ratings: state.parsedItems.filter((i) => i.action === "ratings").length,
   });
+  const selectedItems = $derived(
+    filterImportItemsByActionSelection({
+      items: state.parsedItems,
+      selectedActions: state.selectedActions,
+    }),
+  );
+  const selectedCounts = $derived<ImportCounts>({
+    history: state.selectedActions.history ? counts.history : 0,
+    watchlist: state.selectedActions.watchlist ? counts.watchlist : 0,
+    ratings: state.selectedActions.ratings ? counts.ratings : 0,
+  });
+  const selectedTotalCount = $derived(selectedItems.length);
 
   const sourceConfig = $derived(IMPORT_SOURCE_CONFIGS[state.selectedSource]);
   const isGuideCollapsed = $derived(
@@ -94,6 +119,7 @@
     const parser = getParser(state.selectedSource);
 
     state.parseError = null;
+    state.selectedActions = defaultSelectedActions();
     state.status = "parsing";
 
     try {
@@ -126,6 +152,11 @@
   }
 
   async function startImport() {
+    const itemsToImport = selectedItems;
+    const countsToImport = selectedCounts;
+    const totalToImport = selectedTotalCount;
+    if (totalToImport === 0) return;
+
     abortController = new AbortController();
     const startTime = Date.now();
     state.processedCount = 0;
@@ -136,7 +167,7 @@
 
     try {
       const { errorCount, unresolved, ambiguous } = await syncToTrakt(
-        state.parsedItems,
+        itemsToImport,
         {
           signal: abortController.signal,
           onMatchProgress: (processed, total) => {
@@ -160,7 +191,7 @@
       );
 
       const duration = Date.now() - startTime;
-      const successCount = state.totalCount - errorCount - unresolved.length -
+      const successCount = totalToImport - errorCount - unresolved.length -
         ambiguous.length;
 
       state.errorCount = errorCount;
@@ -169,10 +200,10 @@
 
       record(AnalyticsEvent.ImportCompleted, {
         source: state.selectedSource,
-        totalItems: state.totalCount,
-        historyCount: counts.history,
-        watchlistCount: counts.watchlist,
-        ratingsCount: counts.ratings,
+        totalItems: totalToImport,
+        historyCount: countsToImport.history,
+        watchlistCount: countsToImport.watchlist,
+        ratingsCount: countsToImport.ratings,
         successCount,
         failedCount: errorCount,
         unresolvedCount: unresolved.length,
@@ -222,6 +253,7 @@
   function reset() {
     abortController?.abort();
     state.status = "idle";
+    state.selectedActions = defaultSelectedActions();
     state.parsedItems = [];
     state.processedCount = 0;
     state.errorCount = 0;
@@ -258,6 +290,13 @@
         return config.name;
     }
   };
+
+  function onActionChange(action: ImportAction, isIncluded: boolean) {
+    state.selectedActions = {
+      ...state.selectedActions,
+      [action]: isIncluded,
+    };
+  }
 </script>
 
 {#snippet importRow()}
@@ -283,8 +322,9 @@
         {:else if state.status === "review"}
           <ImportSummary
             {counts}
-            totalItems={state.totalCount}
+            selectedActions={state.selectedActions}
             source={state.selectedSource}
+            onactionchange={onActionChange}
             onstart={startImport}
             onreset={reset}
           />
@@ -300,10 +340,10 @@
         {:else if state.status === "syncing"}
           <SyncProgress
             processedCount={state.processedCount}
-            totalCount={state.totalCount}
+            totalCount={selectedTotalCount}
             label={m.import_status_syncing({
               processed: state.processedCount,
-              total: state.totalCount,
+              total: selectedTotalCount,
             })}
           />
         {:else if state.status === "complete"}
