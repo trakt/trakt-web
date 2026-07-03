@@ -733,6 +733,18 @@
       "default": "mil. titles tracked weekly",
       "description": "Part of the promotion text for welcoming a new user. Example: 15 mil. titles tracked weekly"
     },
+    "header_landing_welcome": {
+      "default": "Welcome to Trakt",
+      "description": "Heading welcoming a new user on the landing page. This should be short and concise."
+    },
+    "text_landing_welcome": {
+      "default": "Your new home, where your shows and movies are all in one place.",
+      "description": "Subheading on the landing page describing Trakt as a home for the user's shows and movies."
+    },
+    "text_landing_join": {
+      "default": "Track everything you watch, wherever you stream it.",
+      "description": "Supporting text under the join for free button on the landing page, encouraging users to track what they watch."
+    },
     "list_title_trending": {
       "default": "Trending",
       "description": "Title for lists containing trending movies or shows. This title should be as short and concise as possible."
