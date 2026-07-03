@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Konto użytkownika zostało zablokowane, ponieważ kolekcja przekroczyła limit. Skontaktuj się z <a>pomocą techniczną</a>, aby rozwiązać ten problem.",
   "error_text_locked_account_guide": "Zobacz <a>ustawienia zaawansowane</a>, aby przeanalizować historię i odblokować swoje konto.",
   "error_text_locked_account_persists": "Jeśli problem będzie się powtarzał, proszę <a>skontaktować się z pomocą techniczną</a>.",
+  "error_text_payment_other": "Wystąpił błąd podczas przetwarzania płatności. Spróbuj ponownie lub skontaktuj się z pomocą techniczną, jeśli to konieczne.",
+  "error_text_payment_unavailable": "Wystąpił błąd podczas przetwarzania płatności. Wygląda na to, że obecnie nie możesz dokonać płatności. Spróbuj ponownie.",
   "error_text_report_already_reported": "Już to zgłosiłeś.",
   "error_text_report_rate_limited": "Zbyt wiele zgłoszeń w krótkim czasie. Spróbuj ponownie później.",
   "error_text_report_unknown": "Coś poszło nie tak podczas wysyłania tego zgłoszenia. Jeśli problem będzie się powtarzał, prosimy o <a>zgłoszenie nowego problemu</a>.",

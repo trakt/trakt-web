@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Ez a felhasználói fiók zárolásra került, mert a gyűjtemény túllépte a limitet. Kérjük, <a>keresse fel az ügyfélszolgálatot</a> a probléma megoldásához.",
   "error_text_locked_account_guide": "Kérjük, keresd fel a <a>haladó beállítások</a> oldalt, az előzmények elemzéséhez és a fiók feloldásához.",
   "error_text_locked_account_persists": "Ha a probléma továbbra is fennáll, kérjük, <a>vedd fel a kapcsolatot az ügyfélszolgálattal</a> a probléma megoldásához.",
+  "error_text_payment_other": "Hiba történt a fizetés feldolgozása során. Kérjük, próbálja újra, vagy ha szükséges, lépjen kapcsolatba az ügyfélszolgálattal.",
+  "error_text_payment_unavailable": "Hiba történt a fizetés feldolgozása során. Úgy tűnik, jelenleg nem tud fizetést végrehajtani. Kérjük, próbálja újra.",
   "error_text_report_already_reported": "Ezt már jelentetted.",
   "error_text_report_rate_limited": "Túl sok jelentés rövid idő alatt. Kérjük, próbáld újra később.",
   "error_text_report_unknown": "Hiba történt a jelentés elküldésekor. Ha ez továbbra is fennáll, kérjük, <a>jelentsd be a problémát</a>.",

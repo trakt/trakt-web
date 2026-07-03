@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Esta cuenta de usuario ha sido bloqueada porque la colección ha excedido el límite. Por favor, <a>contacta a soporte</a> para resolver este problema.",
   "error_text_locked_account_guide": "Visita los <a>ajustes avanzados</a> para ejecutar un análisis del historial y desbloquear tu cuenta.",
   "error_text_locked_account_persists": "Si el problema persiste, <a>contacta a soporte</a> para resolver este problema.",
+  "error_text_payment_other": "Ocurrió un error al procesar tu pago. Intenta de nuevo o contacta a soporte si es necesario.",
+  "error_text_payment_unavailable": "Ocurrió un error al procesar tu pago. Parece que no puedes realizar un pago en este momento. Intenta de nuevo.",
   "error_text_report_already_reported": "Ya has reportado esto.",
   "error_text_report_rate_limited": "Demasiados reportes en un corto período. Por favor, inténtalo de nuevo más tarde.",
   "error_text_report_unknown": "Algo salió mal al enviar este reporte. Si esto sigue ocurriendo, por favor <a>envía un nuevo problema</a>.",

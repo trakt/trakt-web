@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Dit gebruikersaccount is vergrendeld omdat de collectie de limiet heeft overschreden. Neem alstublieft <a>contact op met de ondersteuning</a> om dit probleem op te lossen.",
   "error_text_locked_account_guide": "Bezoek de <a>geavanceerde instellingen</a> om een geschiedenisanalyse uit te voeren en je account te ontgrendelen.",
   "error_text_locked_account_persists": "Als het probleem aanhoudt, neem dan <a>contact op met de ondersteuning</a> om dit probleem op te lossen.",
+  "error_text_payment_other": "Er is een fout opgetreden bij het verwerken van uw betaling. Probeer het opnieuw of neem contact op met de ondersteuning indien nodig.",
+  "error_text_payment_unavailable": "Er is een fout opgetreden bij het verwerken van uw betaling. Het lijkt erop dat u op dit moment geen betaling kunt doen. Probeer het opnieuw.",
   "error_text_report_already_reported": "Dit is al door u gemeld.",
   "error_text_report_rate_limited": "Te veel meldingen in korte tijd. Probeer het later opnieuw.",
   "error_text_report_unknown": "Er ging iets mis tijdens het indienen van dit rapport. Als dit blijft gebeuren, kunt u alstublieft <a>een nieuw probleem indienen</a>.",

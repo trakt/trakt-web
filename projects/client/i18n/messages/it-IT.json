@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Questo account utente è stato bloccato perché la collezione ha superato il limite. Si prega di <a>contattare il supporto</a> per risolvere questo problema.",
   "error_text_locked_account_guide": "Visita le <a>impostazioni avanzate</a> per eseguire un'analisi della cronologia e sbloccare il tuo account.",
   "error_text_locked_account_persists": "Se il problema persiste, <a>contatta il supporto</a> per risolvere il problema.",
+  "error_text_payment_other": "Si è verificato un errore durante l'elaborazione del pagamento. Riprova o contatta il supporto se necessario.",
+  "error_text_payment_unavailable": "Si è verificato un errore durante l'elaborazione del pagamento. Sembra che tu non possa effettuare un pagamento in questo momento. Riprova.",
   "error_text_report_already_reported": "Hai già segnalato questo elemento.",
   "error_text_report_rate_limited": "Troppe segnalazioni in un breve periodo. Riprova più tardi.",
   "error_text_report_unknown": "Qualcosa è andato storto durante l'invio di questa segnalazione. Se il problema persiste, per favore <a>segnala un nuovo problema</a>.",

@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Aquest compte d'usuari s'ha bloquejat perquè la col·lecció ha superat el límit. Si us plau, <a>contacta amb el suport</a> per resoldre aquest problema.",
   "error_text_locked_account_guide": "Si us plau, visita la secció de <a>configuració avançada</a> per executar una anàlisi de l'historial i desbloquejar el teu compte.",
   "error_text_locked_account_persists": "Si el problema persisteix, si us plau, <a>contacta amb el suport</a> per resoldre'l.",
+  "error_text_payment_other": "Hi ha hagut un error en processar el pagament. Torna-ho a provar o contacta amb el suport si ho necessites.",
+  "error_text_payment_unavailable": "Hi ha hagut un error en processar el pagament. Sembla que no pots fer un pagament en aquest moment. Torna-ho a provar.",
   "error_text_report_already_reported": "Ja has informat d'això.",
   "error_text_report_rate_limited": "Massa informes en un curt període. Si us plau, torna-ho a provar més tard.",
   "error_text_report_unknown": "Alguna cosa ha anat malament en enviar aquest informe. Si això continua passant, si us plau, <a>envia un nou problema</a>.",

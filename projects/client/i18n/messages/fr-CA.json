@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Ce compte d'utilisateur a été verrouillé car la collection a dépassé la limite. Veuillez <a>contacter le support</a> pour résoudre ce problème.",
   "error_text_locked_account_guide": "Veuillez consulter les <a>paramètres avancés</a> pour effectuer une analyse de l'historique et déverrouiller votre compte.",
   "error_text_locked_account_persists": "Si le problème persiste, veuillez <a>contacter le support</a> pour le résoudre.",
+  "error_text_payment_other": "Une erreur s'est produite lors du traitement de votre paiement. Veuillez réessayer ou contacter le support si nécessaire.",
+  "error_text_payment_unavailable": "Une erreur s'est produite lors du traitement de votre paiement. Il semble que vous ne soyez pas en mesure d'effectuer un paiement pour le moment. Veuillez réessayer.",
   "error_text_report_already_reported": "Vous avez déjà signalé cet élément.",
   "error_text_report_rate_limited": "Trop de signalements en peu de temps. Veuillez réessayer plus tard.",
   "error_text_report_unknown": "Un problème est survenu lors de l'envoi de ce signalement. Si cela persiste, veuillez <a>soumettre un nouveau problème</a>.",

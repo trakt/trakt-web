@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Bu kullanıcı hesabı, koleksiyon limiti aşıldığı için kilitlenmiştir. Lütfen bu sorunu çözmek için <a>destek ile iletişime geçin</a>.",
   "error_text_locked_account_guide": "Bir geçmiş analizi yapmak ve hesabınızın kilidini açmak için lütfen <a>gelişmiş ayarlara</a> gidin.",
   "error_text_locked_account_persists": "Sorun devam ederse, lütfen bu sorunu çözmek için <a>destek ile iletişime geçin</a>.",
+  "error_text_payment_other": "Ödemeniz işlenirken bir hata oluştu. Lütfen tekrar deneyin veya gerekirse destek ile iletişime geçin.",
+  "error_text_payment_unavailable": "Ödemeniz işlenirken bir hata oluştu. Şu anda ödeme yapamıyor gibi görünüyorsunuz. Lütfen tekrar deneyin.",
   "error_text_report_already_reported": "Bunu zaten bildirdiniz.",
   "error_text_report_rate_limited": "Kısa sürede çok fazla rapor. Lütfen daha sonra tekrar deneyin.",
   "error_text_report_unknown": "Bu raporu gönderirken bir sorun oluştu. Bu durum devam ederse, lütfen <a>yeni bir sorun bildirin</a>.",

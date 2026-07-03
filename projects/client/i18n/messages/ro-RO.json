@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Acest cont de utilizator a fost blocat deoarece colecția a depășit limita. Vă rugăm să <a>contactați asistența</a> pentru a rezolva această problemă.",
   "error_text_locked_account_guide": "Te rugăm să vizitezi <a>setările avansate</a> pentru a rula o analiză a istoricului și a debloca contul.",
   "error_text_locked_account_persists": "Dacă problema persistă, te rugăm să <a>contactezi asistența</a> pentru a rezolva această problemă.",
+  "error_text_payment_other": "A apărut o eroare la procesarea plății. Vă rugăm să încercați din nou sau să contactați asistența, dacă este necesar.",
+  "error_text_payment_unavailable": "A apărut o eroare la procesarea plății. Se pare că nu puteți efectua o plată în acest moment. Vă rugăm să încercați din nou.",
   "error_text_report_already_reported": "Ați raportat deja acest lucru.",
   "error_text_report_rate_limited": "Prea multe rapoarte într-un interval scurt. Vă rugăm să încercați din nou mai târziu.",
   "error_text_report_unknown": "Ceva nu a mers bine la trimiterea acestui raport. Dacă acest lucru se tot întâmplă, vă rugăm să <a>trimiteți o nouă problemă</a>.",

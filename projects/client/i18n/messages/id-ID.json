@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Akun pengguna ini telah dikunci karena koleksi telah melampaui batas. Harap <a>hubungi dukungan</a> untuk menyelesaikan masalah ini.",
   "error_text_locked_account_guide": "Silakan kunjungi <a>pengaturan lanjutan</a> untuk menjalankan analisis riwayat dan membuka kunci akun Anda.",
   "error_text_locked_account_persists": "Jika masalah berlanjut, silakan <a>hubungi dukungan</a> untuk menyelesaikan masalah ini.",
+  "error_text_payment_other": "Terjadi kesalahan saat memproses pembayaran Anda. Silakan coba lagi atau hubungi dukungan jika diperlukan.",
+  "error_text_payment_unavailable": "Terjadi kesalahan saat memproses pembayaran Anda. Sepertinya Anda tidak dapat melakukan pembayaran saat ini. Silakan coba lagi.",
   "error_text_report_already_reported": "Anda sudah melaporkan ini.",
   "error_text_report_rate_limited": "Terlalu banyak laporan dalam waktu singkat. Harap coba lagi nanti.",
   "error_text_report_unknown": "Terjadi kesalahan saat mengirim laporan ini. Jika ini terus terjadi, silakan <a>laporkan masalah baru</a>.",

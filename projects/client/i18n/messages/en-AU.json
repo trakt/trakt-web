@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "This user account has been locked because the collection has exceeded the limit. Please <a>contact support</a> to resolve this issue.",
   "error_text_locked_account_guide": "Please visit the <a>advanced settings</a> to run a history analysis and unlock your account.",
   "error_text_locked_account_persists": "If the issue persists, please <a>contact support</a> to resolve this issue.",
+  "error_text_payment_other": "There was an error while processing your payment. Please try again or contact support if needed.",
+  "error_text_payment_unavailable": "There was an error while processing your payment. It looks like you're unable to make a payment at this time. Please try again.",
   "error_text_report_already_reported": "You've already reported this.",
   "error_text_report_rate_limited": "Too many reports in a short period. Please try again later.",
   "error_text_report_unknown": "Something went wrong while submitting this report. If this keeps happening, please <a>submit a new issue</a>.",

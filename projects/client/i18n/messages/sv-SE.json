@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Detta användarkonto har låsts eftersom samlingen har överskridit gränsen. Vänligen <a>kontakta supporten</a> för att lösa detta problem.",
   "error_text_locked_account_guide": "Besök <a>avancerade inställningarna</a> för att köra en historikanalys och låsa upp ditt konto.",
   "error_text_locked_account_persists": "Om problemet kvarstår, vänligen <a>kontakta support</a> för att lösa problemet.",
+  "error_text_payment_other": "Det uppstod ett fel vid behandlingen av din betalning. Försök igen eller kontakta support om det behövs.",
+  "error_text_payment_unavailable": "Det uppstod ett fel vid behandlingen av din betalning. Det verkar som att du inte kan göra en betalning just nu. Försök igen.",
   "error_text_report_already_reported": "Du har redan rapporterat detta.",
   "error_text_report_rate_limited": "För många rapporter på kort tid. Försök igen senare.",
   "error_text_report_unknown": "Något gick fel när denna rapport skickades. Om detta fortsätter att hända, vänligen <a>skicka in ett nytt ärende</a>.",

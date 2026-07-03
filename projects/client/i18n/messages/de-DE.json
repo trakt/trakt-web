@@ -528,6 +528,8 @@
   "error_text_locked_account_collection_limit": "Dieses Benutzerkonto wurde gesperrt, da die Sammlung das Limit überschritten hat. Bitte <a>kontaktieren Sie den Support</a>, um dieses Problem zu lösen.",
   "error_text_locked_account_guide": "Bitte besuchen Sie die <a>erweiterten Einstellungen</a>, um eine Historienanalyse durchzuführen und Ihr Konto zu entsperren.",
   "error_text_locked_account_persists": "Sollte das Problem weiterhin bestehen, bitte <a>kontaktieren Sie den Support</a>, um dieses Problem zu lösen.",
+  "error_text_payment_other": "Es gab einen Fehler bei der Bearbeitung Ihrer Zahlung. Bitte versuchen Sie es erneut oder kontaktieren Sie bei Bedarf den Support.",
+  "error_text_payment_unavailable": "Es gab einen Fehler bei der Bearbeitung Ihrer Zahlung. Es sieht so aus, als könnten Sie derzeit keine Zahlung vornehmen. Bitte versuchen Sie es erneut.",
   "error_text_report_already_reported": "Sie haben dies bereits gemeldet.",
   "error_text_report_rate_limited": "Zu viele Meldungen in kurzer Zeit. Bitte versuchen Sie es später erneut.",
   "error_text_report_unknown": "Beim Senden dieses Berichts ist etwas schiefgelaufen. Sollte dies weiterhin passieren, reichen Sie bitte <a>ein neues Problem ein</a>.",
