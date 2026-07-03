@@ -182,6 +182,47 @@ describe('TvTimeCsvParser', () => {
     });
   });
 
+  describe('whole-folder drops', () => {
+    it('should ignore unrecognized noise files next to gdpr data', async () => {
+      const result = await TvTimeCsvParser.parse([
+        csvFile('device_id,device_type\nabc,ios', 'device_data.csv'),
+        csvFile(
+          'user_id,tv_show_id,episode_id,created_at,updated_at,tv_show_name\n1,82066,1331151,2021-10-10,2021-10-10,Fringe',
+          'show_seen_episode_latest.csv',
+        ),
+        csvFile(GDPR_V2_CSV, 'tracking-prod-records-v2.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { tvdb: 1331151 },
+      });
+    });
+
+    it('should ignore json sidecars next to liberator csv files', async () => {
+      const result = await TvTimeCsvParser.parse([
+        new File(['[{"title":"Inception"}]'], 'movies.json'),
+        csvFile(LIBERATOR_CSV, 'activity_history.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { imdb: 'tt0903747' },
+      });
+    });
+
+    it('should reject uploads with no recognizable TV Time files', async () => {
+      await expect(TvTimeCsvParser.parse([
+        csvFile('device_id,device_type\nabc,ios', 'device_data.csv'),
+        csvFile('', 'empty.csv'),
+      ])).rejects.toThrow(/look like a TV Time export/);
+    });
+  });
+
   describe('mixed uploads', () => {
     it('should reject files from different export formats', async () => {
       await expect(TvTimeCsvParser.parse([
