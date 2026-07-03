@@ -7,7 +7,7 @@
 </script>
 
 <TraktPage
-  audience="authenticated"
+  audience="all"
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_welcome()}
   mode="content-only"
