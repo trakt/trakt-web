@@ -14,6 +14,12 @@ export const NOOP_FN = () => {
   // noop
 };
 
+/**
+ * Explicit space for template text joins, where a raw ' ' literal is
+ * easy to misquote and stray whitespace is collapsed by the compiler.
+ */
+export const EMPTY_SPACE = ' ';
+
 export const DEFAULT_PAGE_SIZE = 10;
 
 export const DEFAULT_DRILL_SIZE = 100;
