@@ -3,19 +3,25 @@
   import { useCover } from "./_internal/useCover";
 
   const { cover } = useCover();
+
+  // Narrow once so the {#if} guard and the reads below share a single
+  // reactive source. Reading $cover.data.src separately from the state guard
+  // let the image's onerror re-run the src getter mid-transition, when data
+  // is undefined.
+  const coverData = $derived($cover.state === "ready" ? $cover.data : undefined);
 </script>
 
-{#if $cover.state === "ready"}
+{#if coverData}
   <div
     class="trakt-background-cover-image"
-    data-cover-type={$cover.data.type}
-    style:--trakt-cover-primary-color={$cover.data.colors?.at(0)}
-    style:--trakt-cover-secondary-color={$cover.data.colors?.at(1)}
+    data-cover-type={coverData?.type}
+    style:--trakt-cover-primary-color={coverData?.colors?.at(0)}
+    style:--trakt-cover-secondary-color={coverData?.colors?.at(1)}
   >
     <CrossOriginImage
       loading="eager"
-      src={$cover.data.src}
-      alt={`Background for ${$cover.data.type}`}
+      src={coverData?.src}
+      alt={`Background for ${coverData?.type}`}
     />
   </div>
 {/if}
