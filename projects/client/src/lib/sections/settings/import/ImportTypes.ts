@@ -112,11 +112,15 @@ export const IMPORT_SOURCE_CONFIGS: Record<
       description:
         'Two ways to get your data out. Pick whichever suits you and import one export at a time:',
       steps: [
-        ['Fastest: export your data with the', {
-          text: 'TV Time Liberator extension',
-          href:
-            'https://chromewebstore.google.com/detail/tv-time-liberator-extensi/pohobkcjhigehafgnhehkanhjakajhpm',
-        }, 'while your TV Time login still works, then upload the .csv here'],
+        [
+          'Fastest: export your data with the',
+          {
+            text: 'TV Time Liberator extension',
+            href:
+              'https://chromewebstore.google.com/detail/tv-time-liberator-extensi/pohobkcjhigehafgnhehkanhjakajhpm',
+          },
+          'while your TV Time login still works, then upload the export .zip (or the activity_history.csv inside it) here',
+        ],
         ['Official: request your GDPR data export on the', {
           text: 'TV Time privacy portal',
           href: 'https://gdpr.tvtime.com/gdpr/self-service',

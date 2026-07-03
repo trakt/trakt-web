@@ -1,7 +1,11 @@
 import type { ImportType, UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvFile } from './utils/parseCsvFile.ts';
+import { parseCsvText } from './utils/parseCsvText.ts';
 import { toISOString } from './utils/toISOString.ts';
+import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
+
+const ACTIVITY_HISTORY_CSV = 'activity_history.csv';
 
 type TvTimeLiberatorRow = {
   imdb_id?: string;
@@ -61,19 +65,45 @@ function parseLiberatorRow(row: TvTimeLiberatorRow): UniversalImportItem[] {
   return items;
 }
 
+// The Liberator zip also holds movies.json/shows.json, but
+// activity_history.csv carries the same data plus watchlist flags.
+async function unzipActivityHistoryRows(file: File): Promise<unknown[]> {
+  const buffer = await file.arrayBuffer();
+  const texts = (() => {
+    try {
+      return unzipCsvTexts({
+        buffer,
+        isMatch: (basename) => basename === ACTIVITY_HISTORY_CSV,
+      });
+    } catch {
+      throw new Error(
+        `Could not read the .zip file. Extract it and upload ${ACTIVITY_HISTORY_CSV} instead.`,
+      );
+    }
+  })();
+
+  const parsed = await Promise.all(texts.map(parseCsvText));
+  return parsed.flat();
+}
+
 export const TvTimeLiberatorParser: FileParser = {
   name: 'TV Time Liberator',
 
   canParse(files) {
     const [file] = files;
-    return files.length === 1 && file?.name.endsWith('.csv') === true;
+    return files.length === 1 &&
+      (file?.name.endsWith('.csv') === true ||
+        file?.name.endsWith('.zip') === true);
   },
 
   async parse(files) {
     const [file] = files;
     if (!file) return [];
 
-    const rows = await parseCsvFile(file);
+    const rows = file.name.endsWith('.zip')
+      ? await unzipActivityHistoryRows(file)
+      : await parseCsvFile(file);
+
     return (rows as TvTimeLiberatorRow[]).flatMap(parseLiberatorRow);
   },
 };

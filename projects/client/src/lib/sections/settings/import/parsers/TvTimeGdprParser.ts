@@ -1,8 +1,8 @@
-import { unzipSync } from 'fflate';
 import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
 import { toISOString } from './utils/toISOString.ts';
+import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
 type TrackingV1Row = {
   type?: string;
@@ -181,26 +181,16 @@ function isV2Row(row: Record<string, unknown>): boolean {
 }
 
 function unzipTrackingCsvTexts(buffer: ArrayBuffer): string[] {
-  const isTrackingCsv = (filename: string) => {
-    const basename = filename.split('/').at(-1) ?? '';
-    return basename.startsWith('tracking-prod-records') &&
-      basename.endsWith('.csv');
-  };
+  const isTrackingCsv = (basename: string) =>
+    basename.startsWith('tracking-prod-records') && basename.endsWith('.csv');
 
-  const unzipped = (() => {
-    try {
-      return unzipSync(new Uint8Array(buffer), {
-        filter: (file) => isTrackingCsv(file.name),
-      });
-    } catch {
-      throw new Error(
-        'Could not read the .zip file. If it is password protected, extract it first and upload the tracking-prod-records CSV files instead.',
-      );
-    }
-  })();
-
-  const decoder = new TextDecoder('utf-8');
-  return Object.values(unzipped).map((data) => decoder.decode(data));
+  try {
+    return unzipCsvTexts({ buffer, isMatch: isTrackingCsv });
+  } catch {
+    throw new Error(
+      'Could not read the .zip file. If it is password protected, extract it first and upload the tracking-prod-records CSV files instead.',
+    );
+  }
 }
 
 async function collectCsvTexts(files: ReadonlyArray<File>): Promise<string[]> {

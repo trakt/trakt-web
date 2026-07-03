@@ -3,11 +3,37 @@ import { TvTimeGdprParser } from './TvTimeGdprParser.ts';
 import { TvTimeLiberatorParser } from './TvTimeLiberatorParser.ts';
 import { TvTimeNativeParser } from './TvTimeNativeParser.ts';
 import { parseCsvFile } from './utils/parseCsvFile.ts';
+import { zipEntryBasenames } from './utils/zipEntryBasenames.ts';
 
 type TvTimeFormat = 'gdpr' | 'liberator' | 'native';
 
+const GDPR_ZIP_MARKER = 'tracking-prod-records';
+const LIBERATOR_ZIP_MARKER = 'activity_history.csv';
+
+async function detectZipFormat(file: File): Promise<TvTimeFormat> {
+  const buffer = await file.arrayBuffer();
+  const basenames = (() => {
+    try {
+      return zipEntryBasenames(buffer);
+    } catch {
+      throw new Error(
+        'Could not read the .zip file. If it is password protected, extract it first and upload the CSV files inside instead.',
+      );
+    }
+  })();
+
+  if (basenames.some((name) => name.startsWith(GDPR_ZIP_MARKER))) {
+    return 'gdpr';
+  }
+  if (basenames.includes(LIBERATOR_ZIP_MARKER)) return 'liberator';
+
+  throw new Error(
+    'This .zip file does not look like a TV Time export. Upload the GDPR data export .zip or the Liberator export .zip.',
+  );
+}
+
 async function detectFormat(file: File): Promise<TvTimeFormat> {
-  if (file.name.endsWith('.zip')) return 'gdpr';
+  if (file.name.endsWith('.zip')) return detectZipFormat(file);
 
   const [first] = await parseCsvFile(file) as Record<string, unknown>[];
   if (!first) return 'native';
