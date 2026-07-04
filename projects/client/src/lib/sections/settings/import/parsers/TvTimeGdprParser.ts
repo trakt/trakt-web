@@ -46,7 +46,11 @@ type RatingVoteRow = {
 };
 
 const TRACKING_V1_MARKER = 'type-uuid-n';
-const TRACKING_V2_MARKER = 'ep_id';
+// Every v2 row is identified by its `key` (watch-episode-*, user-series-*,
+// tracking-stats) — it's the field the parser branches on. The episode
+// columns (ep_id, episode_id, ...) are pruned by TV Time when the account
+// has no watch history, so they can't be relied on to detect the format.
+const TRACKING_V2_MARKER = 'key';
 const FOLLOWED_SHOW_MARKER = 'notification_offset';
 
 // emotions-live-votes.csv shares this header, so rating votes are routed

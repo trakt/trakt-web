@@ -67,6 +67,27 @@ const V2_HEADER = [
   'is_special',
 ];
 
+// TV Time prunes every episode-level column (ep_id, episode_id, ...) when
+// the account has no watch history, leaving this series-only header.
+const V2_SLIM_HEADER = [
+  'movie_watch_count',
+  'series_follow_count',
+  'key',
+  'total_series_runtime',
+  'user_id',
+  'updated_at',
+  'ep_watch_count',
+  'total_movies_runtime',
+  'created_at',
+  'uuid',
+  's_id',
+  'followed_at',
+  'is_archived',
+  'series_name',
+  'is_for_later',
+  'is_followed',
+];
+
 function toCsv(
   header: string[],
   rows: Record<string, string>[],
@@ -286,6 +307,40 @@ describe('TvTimeGdprParser', () => {
       const result = await TvTimeGdprParser.parse([csvFile(csv)]);
 
       expect(result).toHaveLength(0);
+    });
+  });
+
+  // Accounts with no watch history export a series-only header with none of
+  // the episode columns, so the v2 format must be detected off s_id.
+  describe('v2 tracking file: slim header (no watch history)', () => {
+    it('should watchlist followed shows', async () => {
+      const csv = toCsv(V2_SLIM_HEADER, [
+        v2UserSeries({ is_followed: 'true' }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'watchlist',
+        type: 'show',
+        ids: { tvdb: 353309 },
+      });
+    });
+
+    it('should watchlist shows marked for later', async () => {
+      const csv = toCsv(V2_SLIM_HEADER, [
+        v2UserSeries({ is_for_later: 'true' }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'watchlist',
+        type: 'show',
+        ids: { tvdb: 353309 },
+      });
     });
   });
 
