@@ -64,7 +64,7 @@
     "npm:svelte-check@4.7.1": "4.7.1_svelte@5.56.4_typescript@5.8.3",
     "npm:svelte-confetti@2.3.2": "2.3.2_svelte@5.56.4",
     "npm:svelte@5.56.4": "5.56.4",
-    "npm:ts-retry@6.0.0": "6.0.0",
+    "npm:ts-retry@7.0.3": "7.0.3",
     "npm:typescript-eslint@8.62.1": "8.62.1_eslint@10.6.0_typescript@5.8.3",
     "npm:typescript@5.8.3": "5.8.3",
     "npm:typesense@3.0.6": "3.0.6_@babel+runtime@7.29.7",
@@ -7021,8 +7021,8 @@
     "ts-deepmerge@6.2.1": {
       "integrity": "sha512-8CYSLazCyj0DJDpPIxOFzJG46r93uh6EynYjuey+bxcLltBeqZL7DMfaE5ZPzZNFlav7wx+2TDa/mBl8gkTYzw=="
     },
-    "ts-retry@6.0.0": {
-      "integrity": "sha512-WsVRE/P+VNYbiQC3E6TeIXBRCQj7vzjN4MlXd84AC88K7WwuWShN7A3Q/QSV/yd1hjO8qn2Cevdqny2HMwKUaA=="
+    "ts-retry@7.0.3": {
+      "integrity": "sha512-sEaLD4RaKmEDvLeki2qQsJgqc50cdmBhQJ90I6V0ur/g1iO6P9PxU2dP52SF87dHEtb1jwb/BJWH5gCx6IfqgQ=="
     },
     "tslib@2.8.1": {
       "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
@@ -7803,7 +7803,7 @@
             "npm:svelte-check@4.7.1",
             "npm:svelte-confetti@2.3.2",
             "npm:svelte@5.56.4",
-            "npm:ts-retry@6.0.0",
+            "npm:ts-retry@7.0.3",
             "npm:typescript-eslint@8.62.1",
             "npm:typescript@5.8.3",
             "npm:typesense@3.0.6",

@@ -96,7 +96,7 @@
     "rxjs": "7.8.2",
     "svelte": "5.56.4",
     "svelte-confetti": "2.3.2",
-    "ts-retry": "6.0.0",
+    "ts-retry": "7.0.3",
     "typesense": "3.0.6",
     "workbox-expiration": "7.4.1",
     "workbox-precaching": "7.4.1",
