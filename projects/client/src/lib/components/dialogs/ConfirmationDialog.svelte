@@ -1,6 +1,8 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import FormInput from "$lib/components/form/FormInput.svelte";
   import type { ConfirmationAction } from "$lib/features/confirmation/models/ConfirmationAction";
+  import type { ConfirmationChallenge } from "$lib/features/confirmation/models/ConfirmationChallenge";
   import type { ConfirmationOperation } from "$lib/features/confirmation/models/ConfirmationOperation";
   import * as m from "$lib/features/i18n/messages.ts";
   import Modal from "./Modal.svelte";
@@ -13,6 +15,7 @@
     cancelText: externalCancelText,
     onAction,
     operation,
+    challenge,
   }: {
     title: string;
     message: string;
@@ -21,11 +24,18 @@
     cancelText?: string;
     operation: ConfirmationOperation;
     onAction: (action: ConfirmationAction) => void;
+    challenge?: ConfirmationChallenge;
   } = $props();
 
   const isDestructive = $derived(operation === "destructive");
   const isPreventative = $derived(operation === "preventative");
   const cancelText = $derived(externalCancelText ?? m.button_text_cancel());
+
+  let challengeInput = $state("");
+  const isConfirmDisabled = $derived(
+    challenge != null &&
+      challengeInput.trim().toLowerCase() !== challenge.value.toLowerCase(),
+  );
 </script>
 
 <Modal onClose={() => onAction("cancel")}>
@@ -34,6 +44,18 @@
     <p class="trakt-confirmation-message secondary">{message}</p>
     {#if detail}
       <p class="trakt-confirmation-message secondary">{detail}</p>
+    {/if}
+
+    {#if challenge}
+      <label class="trakt-confirmation-challenge">
+        <span class="small secondary">{challenge.label}</span>
+        <FormInput
+          placeholder={challenge.placeholder ?? ""}
+          onChange={(value) => (challengeInput = value)}
+          disabled={false}
+          autofocus
+        />
+      </label>
     {/if}
   </div>
 
@@ -54,6 +76,7 @@
         variant="primary"
         color="custom"
         label={buttonText}
+        disabled={isConfirmDisabled}
         onclick={() => onAction("confirm")}
       >
         {buttonText}
@@ -69,6 +92,14 @@
     display: flex;
     flex-direction: column;
     gap: var(--ni-8);
+  }
+
+  .trakt-confirmation-challenge {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-8);
+
+    margin-top: var(--ni-8);
   }
 
   .trakt-confirmation-actions {

@@ -30,4 +30,5 @@ export enum ConfirmationType {
   DisconnectPlex = 'disconnect-plex',
   RevokeApp = 'revoke-app',
   DeleteApiApp = 'delete-api-app',
+  DeleteAccount = 'delete-account',
 }

@@ -17,6 +17,7 @@
     buttonText={$activeConfirmation.buttonText}
     cancelText={$activeConfirmation.cancelText}
     operation={$activeConfirmation.operation}
+    challenge={$activeConfirmation.challenge}
     onAction={(action) => {
       if (action === "confirm") {
         $activeConfirmation.onConfirm();
