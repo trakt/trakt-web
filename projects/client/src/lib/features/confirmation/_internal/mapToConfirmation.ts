@@ -1,4 +1,5 @@
 import * as m from '$lib/features/i18n/messages.ts';
+import type { ConfirmationChallenge } from '../models/ConfirmationChallenge.ts';
 import type { ConfirmationOperation } from '../models/ConfirmationOperation.ts';
 import type { ConfirmationParams } from '../models/ConfirmationParams.ts';
 import { ConfirmationType } from '../models/ConfirmationType.ts';
@@ -11,6 +12,7 @@ type Confirmation = {
   buttonText: string;
   cancelText?: string;
   operation: ConfirmationOperation;
+  challenge?: ConfirmationChallenge;
 };
 
 type ConfirmationBuilder<T extends ConfirmationType> = (
@@ -133,6 +135,19 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     buttonText: m.button_text_logout(),
     message: m.warning_prompt_log_out(),
     operation: 'destructive',
+  }),
+  [ConfirmationType.DeleteAccount]: (props) => ({
+    title: m.confirmation_title_delete_account(),
+    buttonText: m.button_text_delete_account(),
+    message: m.warning_prompt_delete_account(),
+    operation: 'destructive',
+    challenge: {
+      label: m.confirmation_challenge_delete_account({
+        username: props.username,
+      }),
+      value: props.username,
+      placeholder: props.username,
+    },
   }),
   [ConfirmationType.SimpleFilters]: () => ({
     title: m.confirmation_title_reset_filters(),

@@ -118,6 +118,10 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.DeleteApiApp;
     name: string;
   };
+  [ConfirmationType.DeleteAccount]: {
+    type: ConfirmationType.DeleteAccount;
+    username: string;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

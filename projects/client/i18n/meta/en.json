@@ -5164,6 +5164,30 @@
       "default": "Permanently delete data from your Trakt account.",
       "description": "Description for the clear data settings section."
     },
+    "header_delete_account": {
+      "default": "Delete Account",
+      "description": "Header for the settings section that lets users permanently delete their Trakt account."
+    },
+    "description_delete_account": {
+      "default": "Your personal information will be removed and your statistical data will be anonymized.",
+      "description": "Description for the delete account settings section, warning that the action is irreversible."
+    },
+    "button_label_delete_account": {
+      "default": "Delete your Trakt account",
+      "description": "Aria-label for the delete account button."
+    },
+    "confirmation_title_delete_account": {
+      "default": "Delete account?",
+      "description": "Title of the confirmation dialog shown before permanently deleting the user's account."
+    },
+    "warning_prompt_delete_account": {
+      "default": "Are you sure you want to permanently delete your account? This will remove all of your data and cannot be undone.",
+      "description": "Confirmation prompt shown when a user attempts to permanently delete their account."
+    },
+    "error_text_delete_account": {
+      "default": "Something went wrong deleting your account. Please try again.",
+      "description": "Error message shown when permanent account deletion fails."
+    },
     "text_clear_watchlist": {
       "default": "Clear watchlist",
       "description": "Label for the row in clear data settings that allows users to clear their entire watchlist."
@@ -6834,53 +6858,75 @@
       "default": "Charged <b>{amount}</b> via <b>{method}</b> for <b>{term}</b>",
       "description": "Payment-history sentence for a charge. The <b> tags wrap the amount, payment method, and term as bold highlights - keep them when translating. amount is a formatted price (e.g. $30), method is the payment provider, term is the plan length (e.g. 1 Year).",
       "variables": {
-        "amount": { "type": "string" },
-        "method": { "type": "string" },
-        "term": { "type": "string" }
+        "amount": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "term": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_charged_short": {
       "default": "Charged <b>{amount}</b> via <b>{method}</b>",
       "description": "Payment-history sentence for a charge with no known term. The <b> tags wrap the amount and payment method as bold highlights - keep them when translating.",
       "variables": {
-        "amount": { "type": "string" },
-        "method": { "type": "string" }
+        "amount": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_created": {
       "default": "Created a new <b>{method}</b> subscription",
       "description": "Payment-history sentence for a new subscription. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
       "variables": {
-        "method": { "type": "string" }
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_cancelled": {
       "default": "Cancelled a <b>{method}</b> subscription",
       "description": "Payment-history sentence for a cancellation. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
       "variables": {
-        "method": { "type": "string" }
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_refunded": {
       "default": "Refunded <b>{amount}</b> via <b>{method}</b>",
       "description": "Payment-history sentence for a refund. The <b> tags wrap the amount and payment method as bold highlights - keep them when translating.",
       "variables": {
-        "amount": { "type": "string" },
-        "method": { "type": "string" }
+        "amount": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_disputed": {
       "default": "Disputed a <b>{method}</b> charge",
       "description": "Payment-history sentence for a disputed charge. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
       "variables": {
-        "method": { "type": "string" }
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_plan_changed": {
       "default": "Changed your <b>{method}</b> plan",
       "description": "Payment-history sentence for a plan change. The <b> tags wrap the payment method as a bold highlight - keep them when translating.",
       "variables": {
-        "method": { "type": "string" }
+        "method": {
+          "type": "string"
+        }
       }
     },
     "text_vip_transaction_complimentary": {
@@ -9285,6 +9331,19 @@
           "type": "string"
         }
       }
+    },
+    "confirmation_challenge_delete_account": {
+      "default": "To confirm, type your username {username} below.",
+      "description": "Instruction shown in the delete-account confirmation dialog telling the user to type their username to enable the delete button. {username} is the account's username.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "notice_delete_account_vip": {
+      "default": "Since you're an active Trakt VIP, please <a>cancel your VIP membership</a> before deleting your account.",
+      "description": "Info banner shown in the delete-account settings section when the user still has an active, cancellable VIP subscription. The <a> tag wraps the link to the VIP management page."
     }
   }
 }
