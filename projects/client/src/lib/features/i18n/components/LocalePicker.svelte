@@ -2,32 +2,28 @@
   import NativeSelect from "$lib/components/select/NativeSelect.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import { useAuth } from "$lib/features/auth/stores/useAuth";
   import {
     type AvailableLocale,
     availableLocales,
     getLocale,
   } from "$lib/features/i18n/index.ts";
-  import { WorkerMessage } from "$worker/WorkerMessage";
-  import { workerRequest } from "$worker/workerRequest";
-  import { LocaleEndpoint } from "../LocaleEndpoint";
+  import { useSettings } from "$lib/sections/settings/_internal/useSettings";
+  import { applyLocalePreference } from "../applyLocalePreference";
   import { useLocale } from "./useLocale";
 
   const locale = useLocale();
   const { track } = useTrack(AnalyticsEvent.Locale);
+  const { isAuthorized } = useAuth();
+  const { locale: localeSetting } = useSettings();
 
   async function submitLocale(value: string) {
     track({ locale: value });
-    locale.set(value);
+    await applyLocalePreference({ value, setLocale: locale.set });
 
-    await fetch(LocaleEndpoint.Set, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ locale: value }),
-    }).then((res) => res.text() as Promise<AvailableLocale>);
-
-    await workerRequest(WorkerMessage.CacheBust);
+    if ($isAuthorized) {
+      await localeSetting.set(value);
+    }
   }
 
   const localeToFlag: Record<AvailableLocale, string> = {

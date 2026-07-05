@@ -108,6 +108,7 @@ const ANONYMOUS_USER: UserSettings = {
     },
   },
   preferredTheme: Theme.Dark,
+  locale: undefined,
 };
 
 function definedData<T>(data: T | undefined): T {

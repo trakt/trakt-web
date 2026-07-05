@@ -68,6 +68,19 @@ export function useSettings() {
     });
   };
 
+  const setLocale = async (locale: string) => {
+    const payload = {
+      browsing: {
+        locale,
+      },
+    };
+
+    await handleSettingsChange({
+      request: () => saveSettingsRequest({ body: payload }),
+      action: 'locale',
+    });
+  };
+
   return {
     isSavingSettings: isSavingSettings.asObservable(),
     spoilers: user.pipe(map(($user) => ({
@@ -170,5 +183,6 @@ export function useSettings() {
         });
       },
     }))),
+    locale: { set: setLocale },
   };
 }

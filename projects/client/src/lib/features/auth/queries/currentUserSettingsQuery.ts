@@ -69,6 +69,7 @@ export const UserSettingsSchema = z.object({
     }),
   }),
   preferredTheme: z.nativeEnum(Theme),
+  locale: z.string().nullish(),
   birthday: z.date().nullish(),
 });
 
@@ -172,6 +173,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       },
     },
     preferredTheme: mapToPreferredTheme(browsing?.dark_knight),
+    locale: browsing?.locale,
     birthday: user.dob ? parseLocalDate(user.dob) : null,
   };
 }
