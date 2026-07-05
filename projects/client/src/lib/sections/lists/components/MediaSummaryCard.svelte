@@ -314,6 +314,23 @@
   @use "$style/scss/mixins/index" as *;
 
   :global(.trakt-summary-card) {
+    :global(.trakt-card-content) {
+      outline: var(--border-thickness-xs) solid transparent;
+      transition:
+        opacity var(--transition-increment) ease-in-out,
+        outline-color var(--transition-increment) ease-in-out;
+    }
+
+    @include for-mouse() {
+      :global(.trakt-card-content.is-visible:hover) {
+        outline-color: var(--color-card-border-hover);
+
+        :global(.trakt-card-cover) {
+          outline-color: transparent;
+        }
+      }
+    }
+
     :global(p.trakt-card-subtitle) {
       color: var(--color-text-secondary);
     }
@@ -327,17 +344,6 @@
 
     :global(.trakt-link) {
       width: 100%;
-
-      @include for-mouse() {
-        &:hover {
-          .trakt-card-title {
-            text-decoration: underline;
-            text-underline-offset: var(--ni-2);
-            text-decoration-thickness: var(--ni-2);
-            text-decoration-color: var(--color-link-active);
-          }
-        }
-      }
     }
   }
 
