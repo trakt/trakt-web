@@ -58,10 +58,17 @@ export const handle: Handle = async ({ event, resolve }) => {
   const isCacheableBot = event.locals.isLegitimateBot ||
     isBotAgent(event.request.headers.get('user-agent'));
 
-  const requestedLocale = event.cookies.get(LOCALE_COOKIE_NAME) ??
+  const cookieLocale = event.cookies.get(LOCALE_COOKIE_NAME);
+  const requestedLocale = cookieLocale ??
     getPreferredLocale(event.request.headers);
   const locale = setLocale(isCacheableBot ? defaultLocale : requestedLocale);
   const direction = getTextDirection(locale);
+
+  // TRANSITIONAL(locale-backfill): a cookie means the locale was a deliberate
+  // choice; the Accept-Language fallback is not. The client uses this to
+  // backfill the account setting for users who picked a locale before it was
+  // persisted server-side. Remove once existing users are synced.
+  event.locals.localeSource = cookieLocale ? 'cookie' : 'header';
 
   return localeStorage.run({ locale }, () =>
     resolve(event, {

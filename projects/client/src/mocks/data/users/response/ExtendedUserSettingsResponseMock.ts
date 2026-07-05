@@ -53,6 +53,7 @@ export const ExtendedUsersResponseMock: SettingsResponse & {
     'watch_after_rating': '',
     'watch_only_once': false,
     'show_rating_prompt': false,
+    'locale': 'fr-FR',
     'other_site_ratings': true,
     'release_date_ignore_runtime': false,
     'display_early_ratings': false,

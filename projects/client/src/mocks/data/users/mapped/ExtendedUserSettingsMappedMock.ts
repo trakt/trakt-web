@@ -55,4 +55,5 @@ export const ExtendedUserMappedMock: UserSettings = {
     },
   },
   'preferredTheme': Theme.Light,
+  'locale': 'fr-FR',
 };

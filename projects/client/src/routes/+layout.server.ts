@@ -30,6 +30,8 @@ export const load: LayoutServerLoad = (
     device: getDeviceType(request.headers.get('user-agent')),
     cookieConsent: locals.cookieConsent,
     typesense: locals.typesense,
+    // TRANSITIONAL(locale-backfill): remove once existing users are synced.
+    localeSource: locals.localeSource,
   };
 
   return defaultResponse;

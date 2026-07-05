@@ -17,6 +17,7 @@
   import FeatureFlagProvider from "$lib/features/feature-flag/FeatureFlagProvider.svelte";
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
+  import LocaleSettingSync from "$lib/features/i18n/components/LocaleSettingSync.svelte";
   import NavigationHistoryProvider from "$lib/features/navigation-history/NavigationHistoryProvider.svelte";
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import AddNoteDrawerProvider from "$lib/features/notes/AddNoteDrawerProvider.svelte";
@@ -163,6 +164,7 @@
                     <NavigationProvider>
                       <NavigationHistoryProvider>
                         <LocaleProvider>
+                          <LocaleSettingSync />
                           <SearchProvider config={data.typesense}>
                             <FilterProvider>
                               <CoverProvider>
