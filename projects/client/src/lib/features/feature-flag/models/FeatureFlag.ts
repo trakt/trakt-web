@@ -4,7 +4,6 @@ export enum FeatureFlag {
   EditMode = 'edit-mode',
   StreamingServices = 'streaming-services',
   ScopedFavorites = 'scoped-favorites',
-  SocialActivities = 'social-activities',
   PlexSync = 'plex-sync',
   SmartRelated = 'smart-related',
   Rewatching = 'rewatching',

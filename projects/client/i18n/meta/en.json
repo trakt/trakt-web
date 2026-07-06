@@ -7681,14 +7681,6 @@
       "default": "Time-box favorite lists by showing current-year favorites on profiles and grouping the full favorites list by year.",
       "description": "Description for the Scoped Favorites preview feature."
     },
-    "preview_feature_title_social_activities": {
-      "default": "Social Activities",
-      "description": "Title for the Social Activities preview feature."
-    },
-    "preview_feature_description_social_activities": {
-      "default": "Show who you follow has watched, watchlisted, commented on, or rated a movie, show, or episode directly on media pages.",
-      "description": "Description for the Social Activities preview feature."
-    },
     "preview_feature_title_plex_sync": {
       "default": "Plex Sync",
       "description": "Title for the Plex Sync preview feature."
