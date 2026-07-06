@@ -57,6 +57,11 @@
   // double-committing the pointer ones.
   let lastInputWasPointer = false;
 
+  // True only while a touch gesture is actively scrubbing. Mouse hover never
+  // sets it. Drives lifting the active star + tooltip clear of the thumb, which
+  // would otherwise sit right on top of them.
+  let isTouchScrub = $state(false);
+
   const displayStars = $derived(previewStars ?? committedStars);
   const isPreviewing = $derived(previewStars !== null);
   const highlightIndex = $derived(Math.ceil(displayStars) - 1);
@@ -186,17 +191,22 @@
     const down$ = fromEvent<PointerEvent>(el, "pointerdown", { capture: true });
     const key$ = fromEvent<KeyboardEvent>(el, "keydown", { capture: true });
 
+    const up$ = fromEvent<PointerEvent>(el, "pointerup");
+    const cancel$ = fromEvent<PointerEvent>(el, "pointercancel");
+    const leave$ = fromEvent<PointerEvent>(el, "pointerleave");
+
     const { preview$, commit$ } = createScrubInteraction({
       down$,
       move$: fromEvent<PointerEvent>(el, "pointermove"),
-      up$: fromEvent<PointerEvent>(el, "pointerup"),
-      cancel$: fromEvent<PointerEvent>(el, "pointercancel"),
-      leave$: fromEvent<PointerEvent>(el, "pointerleave"),
+      up$,
+      cancel$,
+      leave$,
     });
 
     merge(
       down$.pipe(tap((event) => {
         lastInputWasPointer = true;
+        isTouchScrub = event.pointerType === "touch";
         // Capture so a drag keeps scrubbing even if the pointer drifts off the
         // row. setPointerCapture can throw where unsupported (e.g. jsdom).
         try {
@@ -207,6 +217,7 @@
       })),
       preview$.pipe(tap(syncPreview)),
       commit$.pipe(tap(({ down, up }) => commitGesture(down, up))),
+      merge(up$, cancel$, leave$).pipe(tap(() => (isTouchScrub = false))),
       key$.pipe(tap(() => (lastInputWasPointer = false))),
     )
       .pipe(takeUntil(destroy$))
@@ -229,6 +240,7 @@
   class="trakt-rating-stars"
   data-variant={variant}
   class:is-previewing={isPreviewing}
+  class:is-touch-scrub={isTouchScrub && isPreviewing}
   bind:this={rootEl}
 >
   <span
@@ -279,6 +291,8 @@
     align-items: center;
     position: relative;
     touch-action: none;
+    // Suppress the grey flash the mobile browser paints on tap.
+    -webkit-tap-highlight-color: transparent;
 
     // Premium easing curves shared across the interaction.
     --ease-glide: cubic-bezier(0.16, 1, 0.3, 1);
@@ -354,6 +368,18 @@
 
       :global(.star-item:not([data-highlighted])) {
         opacity: 0.75;
+      }
+    }
+
+    // Touch scrub: the thumb sits on the active star, so lift it and the
+    // tooltip clear of the finger to keep both legible.
+    &.is-touch-scrub {
+      .rating-preview {
+        bottom: calc(100% + var(--gap-l));
+      }
+
+      :global(.star-item[data-highlighted]) {
+        transform: translateY(-0.75rem) scale(1.3);
       }
     }
 
