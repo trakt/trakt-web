@@ -1,4 +1,5 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import { resolveSlurm } from '$lib/features/webview/resolveSlurm.ts';
 import { yirPeopleQuery } from '$lib/requests/queries/users/yirPeopleQuery.ts';
 import type { YirPeopleType } from '$lib/requests/models/YirPerson.ts';
 import type { YirYear } from '$lib/requests/models/YirYear.ts';
@@ -12,7 +13,9 @@ type UseYirPeopleProps = {
 };
 
 export function useYirPeople(props: UseYirPeopleProps) {
-  const query = useQuery(yirPeopleQuery(props));
+  const query = useQuery(
+    yirPeopleQuery({ ...props, slurm: resolveSlurm() }),
+  );
 
   return {
     people: query.pipe(map(($query) => $query.data)),

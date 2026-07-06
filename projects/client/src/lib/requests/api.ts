@@ -8,6 +8,11 @@ type RawApiFetchParams = {
   fetch?: typeof fetch;
   path: string;
   init?: Omit<RequestInit, 'headers'> & { headers?: Record<string, string> };
+  // Defaults to true (attach the signed-in user's Bearer token). Pass false for
+  // requests authorized out-of-band (e.g. the WebView `slurm` token): no Bearer
+  // is sent, so a different account's token can never mix with the request, and
+  // a 401 cannot tear down the web session.
+  authenticated?: boolean;
 };
 
 export type ApiParams = Omit<TraktApiOptions, 'apiKey' | 'environment'> & {
@@ -55,10 +60,13 @@ export const rawApiFetch = ({
   fetch = globalThis.fetch,
   path,
   init,
+  authenticated = true,
 }: RawApiFetchParams) => {
   const { headers: additionalHeaders, ...restInit } = init ?? {};
-  const authenticatedFetch = createAuthenticatedFetch(fetch);
-  return authenticatedFetch(`${environment}${path}`, {
+  // Unauthenticated requests use the bare fetch: no Bearer token, and none of
+  // the 401 re-authentication side effects that would sign out a web session.
+  const baseFetch = authenticated ? createAuthenticatedFetch(fetch) : fetch;
+  return baseFetch(`${environment}${path}`, {
     ...restInit,
     headers: {
       'trakt-api-version': '2',

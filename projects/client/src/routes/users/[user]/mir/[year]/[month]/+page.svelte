@@ -3,6 +3,7 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useWebviewSession } from "$lib/features/webview/useWebviewSession";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
@@ -17,6 +18,15 @@
   const { isMe } = $derived(useIsMe(params.user));
   const audience = $derived($isMe ? "authenticated" : "all");
 
+  // Captures the WebView params on entry, strips them from the URL, and exposes
+  // them for the session. In standalone mode drop the app chrome so the page
+  // reads as a native screen; otherwise keep the minimal navbar. When a slurm
+  // token is present, render the native review directly (below): it authorizes
+  // via the token and paints on the first frame, skipping the async
+  // feature-flag/audience gate that would otherwise show the iframe first.
+  const webview = useWebviewSession();
+  const navbarMode = $derived(webview.isStandalone ? "hidden" : "minimal");
+
   const year = $derived(Number(params.year));
   const month = $derived(Number(params.month));
 </script>
@@ -27,27 +37,31 @@
   title={m.page_title_month_in_review()}
   mode="content-only"
 >
-  <NavbarStateSetter mode="minimal" sidebar={{ mode: "fixed" }} />
+  <NavbarStateSetter mode={navbarMode} sidebar={{ mode: "fixed" }} />
 
   <TraktPageCoverSetter />
 
-  <RenderForFeature flag={FeatureFlag.MonthInReview}>
-    {#snippet enabled()}
-      <MirPage slug={params.user} {year} {month} />
-    {/snippet}
+  {#if webview.slurm}
+    <MirPage slug={params.user} {year} {month} />
+  {:else}
+    <RenderForFeature flag={FeatureFlag.MonthInReview}>
+      {#snippet enabled()}
+        <MirPage slug={params.user} {year} {month} />
+      {/snippet}
 
-    <Frame
-      slug={params.user}
-      urlBuilder={(slug, token) =>
-        UrlBuilder.og.frame.monthInReview(
-          slug,
-          params.year,
-          params.month,
-          token,
-        )}
-      title={m.page_title_month_in_review()}
-      mode="cover"
-      source="mir"
-    />
-  </RenderForFeature>
+      <Frame
+        slug={params.user}
+        urlBuilder={(slug, token) =>
+          UrlBuilder.og.frame.monthInReview(
+            slug,
+            params.year,
+            params.month,
+            token,
+          )}
+        title={m.page_title_month_in_review()}
+        mode="cover"
+        source="mir"
+      />
+    </RenderForFeature>
+  {/if}
 </TraktPage>

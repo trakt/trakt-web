@@ -2,10 +2,17 @@ import '$lib/polyfills/at.ts';
 import '$lib/polyfills/mapGroupBy.ts';
 import '$lib/polyfills/randomUUID.ts';
 import '$lib/polyfills/toSorted.ts';
+import { captureWebviewSession } from '$lib/features/webview/captureWebviewSession.ts';
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
 import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
 import * as Sentry from '@sentry/sveltekit';
 import { handleErrorWithSentry } from '@sentry/sveltekit';
+
+// Must run before Sentry.init and before SvelteKit reads `location`: strips the
+// WebView params (slurm VIP token, standalone flag) from the URL and latches
+// them to sessionStorage, so page.url, Sentry tracing/replay and analytics never
+// see the token.
+captureWebviewSession();
 
 Sentry.init({
   dsn: SENTRY_DSN,
