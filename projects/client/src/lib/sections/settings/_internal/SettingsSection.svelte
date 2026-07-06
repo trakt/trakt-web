@@ -17,15 +17,17 @@
 </script>
 
 <section class="trakt-settings-section">
-  {#if title || crumb}
+  {#if title || crumb || description}
     <header class="settings-section-header">
       <div class="header-text">
-        <p class="settings-title bold" class:has-prefix={Boolean(crumb)}>
-          {#if crumb}<SettingsCrumb
-              href={crumb.href}
-              label={crumb.label}
-            />{/if}{title}
-        </p>
+        {#if title || crumb}
+          <p class="settings-title bold" class:has-prefix={Boolean(crumb)}>
+            {#if crumb}<SettingsCrumb
+                href={crumb.href}
+                label={crumb.label}
+              />{/if}{title}
+          </p>
+        {/if}
         {#if description}
           <p class="secondary">{description}</p>
         {/if}

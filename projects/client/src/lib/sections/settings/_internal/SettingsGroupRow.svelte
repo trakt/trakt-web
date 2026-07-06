@@ -54,7 +54,7 @@
     {@render rest.children()}
   {:else if rest.variant === "button" || rest.variant === "link"}
     {#if rest.variant === "button" && rest.value}
-      <span class="row-value secondary small">{rest.value}</span>
+      <span class="row-value secondary small ellipsis">{rest.value}</span>
     {/if}
 
     <span class="row-caret">
@@ -174,8 +174,7 @@
   }
 
   .row-value {
-    flex-shrink: 0;
-    white-space: nowrap;
+    min-width: 0;
     margin-inline-end: var(--gap-xxs);
   }
 

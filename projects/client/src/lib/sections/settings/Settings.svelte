@@ -21,6 +21,10 @@
   .trakt-settings {
     --settings-content-max-width: var(--ni-640);
 
+    /* Fill the flex-column page height so the sticky sidebar keeps a stable
+       resting position regardless of how much content the active page has. */
+    flex: 1;
+
     display: grid;
     grid-template-columns: var(--ni-240) 1fr;
     gap: var(--gap-xxl);
