@@ -8754,13 +8754,101 @@
       "default": "Plex",
       "description": "Text for the link to the Plex sync settings page."
     },
-    "header_plex_sync": {
-      "default": "Plex Sync",
-      "description": "Header for the Plex sync settings section."
-    },
     "description_plex_sync": {
       "default": "Connect your Plex account to sync watch history, ratings, and collections with Trakt.",
       "description": "Description for the Plex sync settings section."
+    },
+    "tab_text_plex_sync": {
+      "default": "Sync",
+      "description": "Label for the tab that shows Plex sync settings."
+    },
+    "tab_text_plex_webhook": {
+      "default": "Webhook",
+      "description": "Label for the tab that shows the Plex webhook URL."
+    },
+    "description_plex_webhook": {
+      "default": "Automatically scrobble what you're watching, rating, and adding to your library in real time.",
+      "description": "Description explaining what the Plex webhook does."
+    },
+    "label_plex_webhook_url": {
+      "default": "Webhook URL",
+      "description": "Label for the copyable Plex webhook URL field."
+    },
+    "label_plex_webhook_connect_hint": {
+      "default": "Connect your Plex account to get your webhook URL.",
+      "description": "Hint shown in the webhook tab when the user has no connected Plex account."
+    },
+    "header_plex_home_users": {
+      "default": "Plex Home Users",
+      "description": "Header for the Plex home users section in webhook settings."
+    },
+    "label_plex_home_users": {
+      "default": "Usernames",
+      "description": "Row label for the Plex home usernames setting."
+    },
+    "description_plex_home_users": {
+      "default": "Your own plays always sync. Add other Plex Home usernames to sync theirs too.",
+      "description": "Description explaining that the account owner's plays always sync, and listing additional Plex Home usernames syncs their activity too."
+    },
+    "validation_text_plex_home_users": {
+      "default": "Enter a comma-separated list of usernames, without spaces.",
+      "description": "Validation error shown when the Plex home usernames field is not a comma-separated list without spaces."
+    },
+    "button_label_change_plex_home_users": {
+      "default": "Change Plex home users",
+      "description": "Aria-label for the button that opens the Plex home users editor."
+    },
+    "header_plex_scrobbler_settings": {
+      "default": "Scrobbler Settings",
+      "description": "Header for the section that shows real-time scrobbler toggle settings for Plex."
+    },
+    "description_plex_scrobbler_settings": {
+      "default": "These settings control what gets scrobbled to Trakt in real time.",
+      "description": "Description under the Plex scrobbler settings section header."
+    },
+    "button_plex_toggle_scrobble": {
+      "default": "Scrobble",
+      "description": "Pill toggle button label for the real-time scrobble option in Plex scrobbler settings."
+    },
+    "button_label_plex_scrobble_movie_watching": {
+      "default": "Toggle scrobbling for movies",
+      "description": "Aria-label for the button that toggles real-time scrobbling for movies."
+    },
+    "button_label_plex_scrobble_movie_watched": {
+      "default": "Toggle watched scrobbling for movies",
+      "description": "Aria-label for the button that toggles watched scrobbling for movies."
+    },
+    "button_label_plex_scrobble_movie_rated": {
+      "default": "Toggle ratings scrobbling for movies",
+      "description": "Aria-label for the button that toggles ratings scrobbling for movies."
+    },
+    "button_label_plex_scrobble_movie_library": {
+      "default": "Toggle library scrobbling for movies",
+      "description": "Aria-label for the button that toggles library scrobbling for movies."
+    },
+    "button_label_plex_scrobble_show_rated": {
+      "default": "Toggle ratings scrobbling for shows",
+      "description": "Aria-label for the button that toggles ratings scrobbling for shows."
+    },
+    "button_label_plex_scrobble_season_rated": {
+      "default": "Toggle ratings scrobbling for seasons",
+      "description": "Aria-label for the button that toggles ratings scrobbling for seasons."
+    },
+    "button_label_plex_scrobble_episode_watching": {
+      "default": "Toggle scrobbling for episodes",
+      "description": "Aria-label for the button that toggles real-time scrobbling for episodes."
+    },
+    "button_label_plex_scrobble_episode_watched": {
+      "default": "Toggle watched scrobbling for episodes",
+      "description": "Aria-label for the button that toggles watched scrobbling for episodes."
+    },
+    "button_label_plex_scrobble_episode_rated": {
+      "default": "Toggle ratings scrobbling for episodes",
+      "description": "Aria-label for the button that toggles ratings scrobbling for episodes."
+    },
+    "button_label_plex_scrobble_episode_library": {
+      "default": "Toggle library scrobbling for episodes",
+      "description": "Aria-label for the button that toggles library scrobbling for episodes."
     },
     "label_plex_connection": {
       "default": "Connection",

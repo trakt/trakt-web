@@ -7,9 +7,9 @@
   import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { iffy } from "$lib/utils/function/iffy.ts";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
-  import { iffy } from "$lib/utils/function/iffy.ts";
   import { usePlexServer } from "./usePlexServer.ts";
 
   const {
@@ -108,7 +108,9 @@
   </SettingsGroupCard>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-plex-server-settings {
     display: flex;
     flex-direction: column;
@@ -120,7 +122,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--gap-m) var(--gap-m) var(--gap-xs);
+
+    padding: var(--gap-m) var(--ni-0) var(--gap-xs);
+
+    @include for-tablet-sm-and-below {
+      padding: var(--gap-m) var(--gap-m) var(--gap-xs);
+    }
   }
 
   .server-name {

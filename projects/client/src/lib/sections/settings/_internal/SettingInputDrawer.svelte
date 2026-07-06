@@ -7,6 +7,7 @@
   import FormTextArea from "$lib/components/form/FormTextArea.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { iffy } from "$lib/utils/function/iffy";
+  import type { ValidationProps } from "$lib/components/form/models/ValidationProps.ts";
 
   type SaveResult = void | { error: string };
 
@@ -22,6 +23,8 @@
     type: "input" | "textarea";
     currentValue: string;
     onSave: (value: string) => Promise<SaveResult>;
+    // When provided, replaces the default required-only validation.
+    customValidation?: ValidationProps;
   };
 
   type DateSettingProps = CommonProps & {
@@ -70,13 +73,19 @@
 
   const isDirty = $derived(rest.currentValue?.valueOf() !== value?.valueOf());
 
-  const validation = $derived(
+  const requiredValidation = $derived(
     isRequired
       ? {
           isValid: (val: string) => val.trim().length > 0,
           errorText: m.validation_text_settings_field({ name }),
         }
       : undefined,
+  );
+
+  const textValidation = $derived(
+    rest.type === "datepicker"
+      ? undefined
+      : rest.customValidation ?? requiredValidation,
   );
 
   const dateValidation = $derived(
@@ -107,7 +116,7 @@
           value={value as string}
           autofocus
           required={isRequired}
-          {validation}
+          validation={textValidation}
         />
       {:else if rest.type === "datepicker"}
         <FormDatePicker
@@ -126,7 +135,7 @@
           value={value as string}
           autofocus
           required={isRequired}
-          {validation}
+          validation={textValidation}
         />
       {/if}
 
