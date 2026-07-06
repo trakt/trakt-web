@@ -67,7 +67,7 @@
     color: $color,
     variant: isListed ? variant : "primary",
     onclick: handler,
-    disabled: $isListUpdating || !isBelowLimit,
+    disabled: $isListUpdating || (!isListed && !isBelowLimit),
     ...events,
   });
 </script>
