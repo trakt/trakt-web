@@ -64,6 +64,8 @@
 
   const displayStars = $derived(previewStars ?? committedStars);
   const isPreviewing = $derived(previewStars !== null);
+  // Previewing the "no rating" state - tint the row red to signal removal.
+  const isClearing = $derived(isPreviewing && displayStars <= 0);
   const highlightIndex = $derived(Math.ceil(displayStars) - 1);
 
   // Layout measured once per interaction and reused across pointermoves; reading
@@ -240,6 +242,7 @@
   class="trakt-rating-stars"
   data-variant={variant}
   class:is-previewing={isPreviewing}
+  class:is-clearing={isClearing}
   class:is-touch-scrub={isTouchScrub && isPreviewing}
   bind:this={rootEl}
 >
@@ -369,6 +372,11 @@
       :global(.star-item:not([data-highlighted])) {
         opacity: 0.75;
       }
+    }
+
+    // Hovering the "no rating" zone: recolor the row red to flag removal.
+    &.is-clearing :global(.star-item) {
+      color: var(--red-500);
     }
 
     // Touch scrub: the thumb sits on the active star, so lift it and the
