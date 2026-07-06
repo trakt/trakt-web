@@ -1,8 +1,6 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaSocialQueryTarget } from "$lib/requests/queries/media/mediaSocialQuery.ts";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
@@ -43,62 +41,55 @@
   const drawerLink = $derived(buildDrawerLink(SummaryDrawers.Social));
 </script>
 
-<RenderForFeature flag={FeatureFlag.SocialActivities}>
-  {#snippet enabled()}
-    <div class="trakt-social-activities-button-link-wrapper">
-      {#if isInitialLoading}
-        <div class="social-activities-skeleton" role="status" aria-busy="true">
-          <span class="skeleton-count"></span>
-          <span class="skeleton-label"></span>
-        </div>
-      {:else}
-        <Link
-          {...drawerLink}
-          color="inherit"
-          label={m.link_label_view_social_activities({ title })}
-        >
-          <span class="social-activities-content">
-            {#if hasWatchers}
-              <span
-                class="trakt-social-activities-avatar-stack"
-                aria-hidden="true"
-              >
-                {#each watchers as watcher, index (watcher.key)}
-                  <span
-                    class="trakt-social-activities-avatar"
-                    style:z-index={avatarStackCount - index}
-                  >
-                    <UserAvatar user={watcher.user} size="small" />
-                  </span>
-                {/each}
-              </span>
-            {/if}
-
-            <span
-              class="trakt-social-activities-label"
-              class:is-text-only={activityCount === 0}
-            >
-              {#if activityCount > 0}
-                <span class="trakt-social-activities-count bold">
-                  {activityCountLabel}
-                </span>
-                <span class="trakt-social-activities-text">
-                  {activityCount === 1
-                    ? m.text_social_activity()
-                    : m.text_social_activities()}
-                </span>
-              {:else}
-                <span class="trakt-social-activities-text">
-                  {m.text_no_activity()}
-                </span>
-              {/if}
-            </span>
-          </span>
-        </Link>
-      {/if}
+<div class="trakt-social-activities-button-link-wrapper">
+  {#if isInitialLoading}
+    <div class="social-activities-skeleton" role="status" aria-busy="true">
+      <span class="skeleton-count"></span>
+      <span class="skeleton-label"></span>
     </div>
-  {/snippet}
-</RenderForFeature>
+  {:else}
+    <Link
+      {...drawerLink}
+      color="inherit"
+      label={m.link_label_view_social_activities({ title })}
+    >
+      <span class="social-activities-content">
+        {#if hasWatchers}
+          <span class="trakt-social-activities-avatar-stack" aria-hidden="true">
+            {#each watchers as watcher, index (watcher.key)}
+              <span
+                class="trakt-social-activities-avatar"
+                style:z-index={avatarStackCount - index}
+              >
+                <UserAvatar user={watcher.user} size="small" />
+              </span>
+            {/each}
+          </span>
+        {/if}
+
+        <span
+          class="trakt-social-activities-label"
+          class:is-text-only={activityCount === 0}
+        >
+          {#if activityCount > 0}
+            <span class="trakt-social-activities-count bold">
+              {activityCountLabel}
+            </span>
+            <span class="trakt-social-activities-text">
+              {activityCount === 1
+                ? m.text_social_activity()
+                : m.text_social_activities()}
+            </span>
+          {:else}
+            <span class="trakt-social-activities-text">
+              {m.text_no_activity()}
+            </span>
+          {/if}
+        </span>
+      </span>
+    </Link>
+  {/if}
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
