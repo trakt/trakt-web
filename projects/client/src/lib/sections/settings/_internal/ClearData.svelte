@@ -214,7 +214,7 @@
         </div>
       </SettingsRow>
       {#if isClearing}
-        <div transition:slide={{ duration: 150, axis: "y" }}>
+        <div class="clear-progress" transition:slide={{ duration: 150, axis: "y" }}>
           <SyncProgress
             processedCount={syncState.processedCount}
             totalCount={syncState.totalCount}
@@ -229,11 +229,19 @@
   </SettingsSection>
 </NavigationGuard>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-clear-data {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
+  }
+
+  .clear-progress {
+    @include for-tablet-sm-and-below {
+      padding-inline: var(--gap-m);
+    }
   }
 
   .trakt-clear-data-row {

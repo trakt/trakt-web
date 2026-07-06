@@ -24,6 +24,10 @@
     align-items: center;
     gap: var(--gap-s);
 
+    @include for-tablet-sm-and-below {
+      padding-inline: var(--gap-m);
+    }
+
     .trakt-settings-row-content {
       display: flex;
       align-items: center;

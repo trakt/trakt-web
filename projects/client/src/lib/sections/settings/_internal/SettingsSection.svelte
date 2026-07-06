@@ -41,6 +41,8 @@
 </section>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-settings-section {
     display: flex;
     flex-direction: column;
@@ -53,6 +55,10 @@
     display: flex;
     align-items: flex-start;
     gap: var(--gap-s);
+
+    @include for-tablet-sm-and-below {
+      padding-inline: var(--gap-m);
+    }
   }
 
   .header-text {
