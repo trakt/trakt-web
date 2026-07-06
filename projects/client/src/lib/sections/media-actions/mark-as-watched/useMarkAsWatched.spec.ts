@@ -14,12 +14,21 @@ import {
 
 vi.mock('$lib/stores/useInvalidator.ts');
 
+const removeRatingSpy = vi.fn((_body?: unknown) => Promise.resolve(true));
+vi.mock('$lib/requests/sync/removeRatingRequest.ts', () => ({
+  removeRatingRequest: (body: unknown) => removeRatingSpy(body),
+}));
+vi.mock('$lib/requests/sync/removeWatchedRequest.ts', () => ({
+  removeWatchedRequest: () => Promise.resolve(true),
+}));
+
 describe('useMarkAsWatched', () => {
   const invalidate = vi.fn(function () {});
 
   beforeEach(() => {
     setAuthorization(true);
     invalidate.mockReset();
+    removeRatingSpy.mockClear();
 
     (useInvalidator as Mock)
       .mockReturnValueOnce({ invalidate }) // 1: useMarkAsWatched
@@ -115,6 +124,53 @@ describe('useMarkAsWatched', () => {
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(true);
+    });
+  });
+
+  describe('orphaned ratings on remove', () => {
+    it('should remove the rating when removing the last watch of a rated movie', async () => {
+      const { removeWatched } = await renderStore(() =>
+        useMarkAsWatched({
+          type: 'movie' as const,
+          // Heretic (916302): single play in history, carries a rating.
+          media: { id: 916302, effectiveReleaseDate: new Date('2020-01-01') },
+        })
+      );
+
+      await removeWatched();
+
+      expect(removeRatingSpy).toHaveBeenCalledWith({
+        body: { movies: [{ ids: { trakt: 916302 } }] },
+      });
+    });
+
+    it('should NOT remove a rating for an unrated movie', async () => {
+      const { removeWatched } = await renderStore(() =>
+        useMarkAsWatched({
+          type: 'movie' as const,
+          media: { id: 1, effectiveReleaseDate: new Date('2020-01-01') },
+        })
+      );
+
+      await removeWatched();
+
+      expect(removeRatingSpy).not.toHaveBeenCalled();
+    });
+
+    it('should remove the rating of a rated, watched show (all plays removed)', async () => {
+      const { removeWatched } = await renderStore(() =>
+        useMarkAsWatched({
+          type: 'show' as const,
+          // Silo (180770): watched + rated; the main action wipes all plays.
+          media: { id: 180770, effectiveReleaseDate: new Date('2020-01-01') },
+        })
+      );
+
+      await removeWatched();
+
+      expect(removeRatingSpy).toHaveBeenCalledWith({
+        body: { shows: [{ ids: { trakt: 180770 } }] },
+      });
     });
   });
 
