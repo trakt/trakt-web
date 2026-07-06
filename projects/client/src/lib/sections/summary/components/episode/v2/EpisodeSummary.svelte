@@ -88,8 +88,8 @@
     />
 
     <RenderFor audience="authenticated">
-      <SocialActivitiesButton target={socialTarget} {title} />
       <EpisodeActions {episode} {show} {title} {showTitle} />
+      <SocialActivitiesButton target={socialTarget} {title} />
     </RenderFor>
   {/snippet}
 

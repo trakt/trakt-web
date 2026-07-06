@@ -101,8 +101,8 @@
     />
 
     <RenderFor audience="authenticated">
-      <SocialActivitiesButton target={socialTarget} {title} />
       <MediaActions {media} {title} />
+      <SocialActivitiesButton target={socialTarget} {title} />
     </RenderFor>
   {/snippet}
 
