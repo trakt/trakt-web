@@ -32,6 +32,12 @@
       // resolve their assets. Synced additively from CI on every deploy.
       "binding": "R2_IMMUTABLE",
       "bucket_name": "trakt-web-immutable"
+    },
+    {
+      // Private bucket for user-submitted import issue reports (GDPR exports).
+      // Must NOT be public — contains personal viewing data.
+      "binding": "R2_IMPORT_REPORTS",
+      "bucket_name": "import-reports"
     }
   ]
 }

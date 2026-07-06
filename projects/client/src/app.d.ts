@@ -211,6 +211,9 @@ declare global {
       env: {
         R2_WALTER: import('@cloudflare/workers-types').R2Bucket;
         R2_IMMUTABLE: import('@cloudflare/workers-types').R2Bucket;
+        R2_IMPORT_REPORTS: import('@cloudflare/workers-types').R2Bucket;
+        IMPORT_REPORTS_TOKEN: string;
+        IMPORT_REPORTS_REPO: string;
       };
     }
   }
