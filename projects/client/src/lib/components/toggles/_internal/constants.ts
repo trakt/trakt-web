@@ -177,17 +177,17 @@ const library: ToggleDefinition<'library'> = {
 
 const related: ToggleDefinition<'related'> = {
   id: 'related',
-  default: 'standard',
+  default: 'smart',
   options: [
-    {
-      value: 'standard',
-      text: m.button_text_related_standard,
-      label: m.button_label_related_standard,
-    },
     {
       value: 'smart',
       text: m.button_text_related_smart,
       label: m.button_label_related_smart,
+    },
+    {
+      value: 'standard',
+      text: m.button_text_related_standard,
+      label: m.button_label_related_standard,
     },
   ],
 };

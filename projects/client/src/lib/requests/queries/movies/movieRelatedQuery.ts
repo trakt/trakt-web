@@ -22,7 +22,7 @@ const movieRelatedRequest = async (
     const response = await rawApiFetch({
       fetch,
       path:
-        `/movies/${slug}/related/nn?extended=full,images,colors&limit=${limit}&page=${page}`,
+        `/movies/${slug}/related/nn?extended=full,images,colors&limit=${limit}&page=${page}&version=2`,
     });
     return response.ok
       ? {
