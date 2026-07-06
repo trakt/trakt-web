@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { useSettings } from "$lib/sections/settings/_internal/useSettings";
@@ -17,16 +16,17 @@
    * settings load. The decision is pure (`resolveLocaleAction`); this effect
    * only executes it.
    *
-   * `hasReconciled` latches on the first real action, not on mount: while the
-   * decision is `none` (auth still resolving) we keep waiting, but once we act
-   * we stop. This is required because persisting the setting invalidates the
-   * user query, and the refetch re-emits `$user` with the saved locale still
-   * empty before the final value lands - without the latch that intermediate
-   * emission fires a second, duplicate write.
+   * The latch is keyed on the user id, not a plain boolean: this component
+   * lives in the root layout and survives logout/login, so a boolean would
+   * reconcile the first session and then never again. Keying on `$user.id`
+   * lets each session reconcile once, while still absorbing the duplicate
+   * emission from persisting the setting (the invalidated user query refetches
+   * and re-emits with the saved locale still empty - same id, so we skip it).
    */
-  let hasReconciled = false;
+  let reconciledUserId: string | number | undefined;
   $effect(() => {
-    if (hasReconciled) {
+    const userId = $user.id;
+    if (reconciledUserId === userId) {
       return;
     }
 
@@ -34,14 +34,13 @@
       saved: $user.locale,
       active: $locale,
       isAuthorized: $isAuthorized,
-      localeSource: page.data.localeSource,
     });
 
     if (action.type === "none") {
       return;
     }
 
-    hasReconciled = true;
+    reconciledUserId = userId;
 
     switch (action.type) {
       case "apply":
@@ -50,8 +49,6 @@
           setLocale: locale.set,
         });
         return;
-      // TRANSITIONAL(locale-backfill): drop this case once existing users are
-      // synced; `useAuth`/`useSettings`/`page` imports go with it.
       case "backfill":
         void localeSetting.set(action.value);
         return;

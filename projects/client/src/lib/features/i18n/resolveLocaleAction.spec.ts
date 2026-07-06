@@ -3,7 +3,6 @@ import { resolveLocaleAction } from './resolveLocaleAction.ts';
 
 const base = {
   isAuthorized: true,
-  localeSource: 'cookie' as const,
 };
 
 describe('util: resolveLocaleAction', () => {
@@ -14,23 +13,30 @@ describe('util: resolveLocaleAction', () => {
       ).to.deep.equal({ type: 'apply', value: 'fr-FR' });
     });
 
-    it('should apply regardless of authorization or locale source', () => {
+    it('should apply regardless of authorization', () => {
       expect(
         resolveLocaleAction({
           saved: 'fr-FR',
           active: 'en',
           isAuthorized: false,
-          localeSource: 'header',
         }),
       ).to.deep.equal({ type: 'apply', value: 'fr-FR' });
     });
   });
 
   describe('backfill', () => {
-    it('should backfill the active locale when it came from the cookie and nothing is saved', () => {
+    it('should backfill the active locale when nothing is saved', () => {
       expect(
         resolveLocaleAction({ ...base, saved: undefined, active: 'fr-FR' }),
       ).to.deep.equal({ type: 'backfill', value: 'fr-FR' });
+    });
+
+    it('should backfill regardless of how the active locale was derived', () => {
+      // Accept-Language defaults are captured too, so settings usage tracks
+      // the locales actually in use.
+      expect(
+        resolveLocaleAction({ ...base, saved: null, active: 'ja-JP' }),
+      ).to.deep.equal({ type: 'backfill', value: 'ja-JP' });
     });
 
     it('should not backfill for anonymous users', () => {
@@ -38,17 +44,6 @@ describe('util: resolveLocaleAction', () => {
         resolveLocaleAction({
           ...base,
           isAuthorized: false,
-          saved: undefined,
-          active: 'fr-FR',
-        }),
-      ).to.deep.equal({ type: 'none' });
-    });
-
-    it('should not backfill an Accept-Language fallback', () => {
-      expect(
-        resolveLocaleAction({
-          ...base,
-          localeSource: 'header',
           saved: undefined,
           active: 'fr-FR',
         }),

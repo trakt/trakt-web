@@ -5,7 +5,6 @@ type ResolveLocaleActionProps = {
   saved: string | null | undefined;
   active: string;
   isAuthorized: boolean;
-  localeSource: 'cookie' | 'header';
 };
 
 /**
@@ -14,33 +13,28 @@ type ResolveLocaleActionProps = {
  *
  * - `apply`: a saved account locale differs from the active one (a fresh,
  *   cookieless session fell back to Accept-Language) - apply it + persist.
- *   Permanent: this is the cross-device sync mechanism.
- * - `backfill`: TRANSITIONAL(locale-backfill) - the active locale was a
- *   deliberate cookie pick that predates the account setting; persist it so
- *   settings usage reflects the choice. Remove once existing users are synced,
- *   collapsing this back to `resolveLocaleSetting`.
+ *   This is the cross-device sync mechanism.
+ * - `backfill`: an authorized user has no saved locale yet (a new account, or
+ *   one who picked before it was stored server-side); persist whatever locale
+ *   is active so the account reflects what the user is actually served. This
+ *   intentionally captures Accept-Language defaults too, so settings usage
+ *   tracks the locales in real use.
  * - `none`: nothing to do.
  *
  * Both actions converge to `saved === active`, so re-running on the next
- * emission resolves to `none` - no loop, no latch needed.
+ * emission resolves to `none` - no loop.
  */
 export function resolveLocaleAction({
   saved,
   active,
   isAuthorized,
-  localeSource,
 }: ResolveLocaleActionProps) {
   const toApply = resolveLocaleSetting({ saved, active });
   if (toApply) {
     return { type: 'apply', value: toApply } as const;
   }
 
-  // TRANSITIONAL(locale-backfill): remove this branch once existing users are
-  // synced; the function then reduces to `resolveLocaleSetting`.
-  const canBackfill = isAuthorized &&
-    !saved &&
-    localeSource === 'cookie' &&
-    isAvailableLocale(active);
+  const canBackfill = isAuthorized && !saved && isAvailableLocale(active);
   if (canBackfill) {
     return { type: 'backfill', value: active } as const;
   }
