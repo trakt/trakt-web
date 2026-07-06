@@ -3,39 +3,43 @@ import {
   mapToYirDetail,
   type RawYirResponse,
 } from '$lib/requests/_internal/mapToYirDetail.ts';
-import { api, type ApiParams } from '$lib/requests/api.ts';
+import type { ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { fetchReviewResource } from '../../_internal/fetchReviewResource.ts';
 import { YirDetailSchema } from '../../models/YirDetail.ts';
 
 export type MirDetailParams = {
   slug: string;
   year: number;
   month: number;
+  slurm?: string;
 } & ApiParams;
 
-const mirDetailRequest = (
-  { fetch, slug, year, month }: MirDetailParams,
-) =>
-  api({ fetch })
-    .users
-    .month_in_review({
-      params: { id: slug, year, month },
-      query: { extended: 'images' },
-    });
+// MIR shares the YIR data shape. It uses rawApiFetch (not the typed SDK) so the
+// optional WebView `slurm` token can ride the query string; the endpoint
+// returns the same rich payload the YIR mapper consumes.
+const mirDetailRequest = async (
+  { fetch, slug, year, month, slurm }: MirDetailParams,
+) => {
+  const response = await fetchReviewResource({
+    fetch,
+    path: `/users/${slug}/mir/${year}/${month}`,
+    slurm,
+  });
+
+  return response.ok
+    ? { body: await response.json() as RawYirResponse, status: 200 }
+    : { body: null, status: response.status };
+};
 
 export const mirDetailQuery = defineQuery({
   key: 'mirDetail',
   invalidations: [],
-  dependencies: (params) => [params.slug, params.year, params.month],
+  dependencies: (
+    params,
+  ) => [params.slug, params.year, params.month, params.slurm],
   request: mirDetailRequest,
-  // The @trakt/api contract types month_in_review's body to a narrow subset,
-  // but the ts-rest client does not strip response fields - the full rich
-  // payload (most_watched, genres, distributions, ...) is present at runtime,
-  // so we reuse the YIR mapper by casting to its raw input shape.
-  mapper: (response) =>
-    response.body
-      ? mapToYirDetail(response.body as unknown as RawYirResponse)
-      : null,
+  mapper: (response) => response.body ? mapToYirDetail(response.body) : null,
   schema: YirDetailSchema.nullable(),
   ttl: time.hours(1),
 });

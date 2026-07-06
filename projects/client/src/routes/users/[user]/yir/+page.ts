@@ -6,7 +6,8 @@ import type { PageLoad } from './$types';
 // Short URL: /users/:user/yir redirects to that user's year in review.
 // During January and February the previous year is used, since the current
 // year has barely any data yet.
-// Query params (e.g. ?embedded_mode&slurm=1) are preserved across the redirect.
+// Query params (e.g. ?standalone_mode=1 for a mobile WebView) are preserved
+// across the redirect.
 export const load: PageLoad = ({ params, url }) => {
   const year = getYearInReviewYear(new Date());
 

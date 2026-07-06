@@ -4,7 +4,8 @@ import { subMonths } from 'date-fns/subMonths';
 import type { PageLoad } from './$types';
 
 // Short URL: /users/:user/mir (no year/month) redirects to the previous month's review.
-// Query params (e.g. ?embedded_mode&slurm=1) are preserved across the redirect.
+// Query params (e.g. ?standalone_mode=1 for a mobile WebView) are preserved
+// across the redirect.
 export const load: PageLoad = ({ params, url }) => {
   const previousMonth = subMonths(new Date(), 1);
   const target = UrlBuilder.users(params.user).monthInReview(
