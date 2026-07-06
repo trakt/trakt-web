@@ -406,7 +406,9 @@
   </RenderFor>
 </SettingsSection>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .import-body {
     display: flex;
     flex-direction: column;
@@ -419,11 +421,19 @@
     display: flex;
     gap: var(--gap-m);
     align-items: center;
+
+    @include for-tablet-sm-and-below {
+      padding-inline: var(--gap-m);
+    }
   }
 
   .trakt-import-row {
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
+
+    @include for-tablet-sm-and-below {
+      padding-inline: var(--gap-m);
+    }
   }
 </style>

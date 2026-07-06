@@ -8978,7 +8978,7 @@
       "description": "Text for the link to the apps settings page, where users manage connected apps and their API applications."
     },
     "heading_apps_settings": {
-      "default": "Apps",
+      "default": "Applications",
       "description": "Heading for the apps settings page where users manage connected apps and their API applications."
     },
     "description_apps_settings": {

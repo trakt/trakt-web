@@ -252,6 +252,10 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
+
+    @include for-tablet-sm-and-below {
+      padding-inline: var(--gap-m);
+    }
   }
 
   .analysis-grid {
