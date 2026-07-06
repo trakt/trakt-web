@@ -1,5 +1,6 @@
 <script lang="ts">
   import { appendClassList } from "$lib/utils/actions/appendClassList";
+  import { trackImageLoaded } from "$lib/utils/actions/trackImageLoaded.ts";
   import { PLACEHOLDERS } from "$lib/utils/assets";
   import { iffy } from "$lib/utils/function/iffy";
   import type { ImageProps } from "./ImageProps";
@@ -21,7 +22,6 @@
 
   $effect(() => {
     uri = src;
-    isImageLoaded = false;
   });
 
   const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
@@ -34,16 +34,14 @@
   class:image-animation-enabled={animate}
   class:image-placeholder={isPlaceholder}
   use:appendClassList={classList}
+  use:trackImageLoaded={{ src: uri, onLoaded: (loaded) => (isImageLoaded = loaded) }}
   src={uri}
   {alt}
   onerror={(ev) => {
     resolveEnvironmentUri(src).then((next) => (uri = next.uri));
     _onerror?.(ev);
   }}
-  onload={(ev) => {
-    isImageLoaded = true;
-    _onload?.(ev);
-  }}
+  onload={_onload}
   {...rest}
 />
 
