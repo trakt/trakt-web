@@ -74,10 +74,6 @@
           removeRating();
         }}
         onAddRating={(rating: number, ev?: MouseEvent) => {
-          if (rating === $current?.rating) {
-            return;
-          }
-
           onclick?.();
           setConfettiPosition(rating, ev);
           addRating(rating);

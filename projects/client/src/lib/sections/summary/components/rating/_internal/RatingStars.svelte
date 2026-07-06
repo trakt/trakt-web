@@ -128,6 +128,8 @@
     previewStars = null;
     clearLayout();
 
+    // Scrubbing (or clicking) to the leading edge yields 0, which clears the
+    // rating.
     if (stars <= 0) {
       onRemoveRating();
       return;
@@ -235,7 +237,7 @@
     aria-hidden="true"
     style={previewX !== null ? `--preview-x: ${previewX}px` : undefined}
   >
-    {displayStars.toFixed(1)}
+    {displayStars <= 0 ? m.text_no_rating() : displayStars.toFixed(1)}
   </span>
 
   <RatingGroup.Root
