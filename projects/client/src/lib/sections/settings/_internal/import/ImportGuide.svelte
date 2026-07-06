@@ -3,6 +3,7 @@
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { slide } from "svelte/transition";
   import type { ImportSourceConfig } from "../../import/ImportTypes.ts";
   import {
@@ -31,6 +32,10 @@
         return buildDrawerLink(ImportDrawers.CsvGuidelines);
     }
   });
+
+  const faqHref = $derived(
+    config.id === "tvtime" ? UrlBuilder.faq.tvTime() : undefined,
+  );
 </script>
 
 <div class="trakt-import-guide" class:is-collapsed={isCollapsed}>
@@ -93,6 +98,20 @@
             label={m.button_label_view_import_guidelines()}
           >
             {m.button_text_view_import_guidelines()}
+          </Button>
+        </div>
+      {/if}
+
+      {#if faqHref}
+        <div class="import-guide-action">
+          <Button
+            href={faqHref}
+            variant="primary"
+            color="default"
+            size="small"
+            label={m.button_label_tv_time_faq()}
+          >
+            {m.button_text_tv_time_faq()}
           </Button>
         </div>
       {/if}
