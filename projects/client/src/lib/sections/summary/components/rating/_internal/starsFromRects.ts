@@ -19,12 +19,14 @@ export function starsFromRects(
 ): number | null {
   if (rects.length === 0) return null;
 
-  const minStars = allowHalf ? 0.5 : 1;
   const inlineStart = Math.min(...rects.map((rect) => rect.left));
   const inlineEnd = Math.max(...rects.map((rect) => rect.right));
 
-  if (clientX <= inlineStart) return isRtl ? max : minStars;
-  if (clientX >= inlineEnd) return isRtl ? minStars : max;
+  // Past the leading edge clears the rating (0 stars); the trailing edge is
+  // the max. 0 is only reachable here - within the stars the fraction floors
+  // at a half (or whole) star.
+  if (clientX <= inlineStart) return isRtl ? max : 0;
+  if (clientX >= inlineEnd) return isRtl ? 0 : max;
 
   const hitIndex = rects
     .map((rect, index) => ({
@@ -43,7 +45,22 @@ export function starsFromRects(
     ? (rect.right - clientX) / rect.width
     : (clientX - rect.left) / rect.width;
   const whole = hitIndex + 1;
+  const isFirstStar = hitIndex === 0;
 
-  if (!allowHalf) return whole;
+  if (!allowHalf) {
+    // The first star clears to 0 on its leading half; the rest stay whole.
+    if (isFirstStar && fraction < 0.5) return 0;
+    return whole;
+  }
+
+  // The first star is split three ways so its leading region can clear the
+  // rating (0 | 0.5 | 1) without having to reach past the row's edge. Every
+  // other star keeps the standard near-half / far-whole split.
+  if (isFirstStar) {
+    if (fraction < 1 / 3) return 0;
+    if (fraction < 2 / 3) return 0.5;
+    return 1;
+  }
+
   return fraction < 0.5 ? whole - 0.5 : whole;
 }

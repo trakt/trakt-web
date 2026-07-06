@@ -27,8 +27,8 @@ describe('util: starsFromRects', () => {
   });
 
   describe('half ratings (LTR)', () => {
-    it('should clamp to a half star before the first star', () => {
-      expect(measure(-5)).toBe(0.5);
+    it('should clear (0) before the first star', () => {
+      expect(measure(-5)).toBe(0);
     });
 
     it('should clamp to the max past the last star', () => {
@@ -36,24 +36,40 @@ describe('util: starsFromRects', () => {
     });
 
     it('should return a half when the pointer is over a star left half', () => {
-      expect(measure(5)).toBe(0.5);
       expect(measure(25)).toBe(1.5);
     });
 
     it('should return a whole when the pointer is over a star right half', () => {
-      expect(measure(15)).toBe(1);
       expect(measure(38)).toBe(2);
+    });
+
+    describe('first star', () => {
+      it('should clear (0) over its leading third', () => {
+        expect(measure(2)).toBe(0);
+      });
+
+      it('should return a half over its middle third', () => {
+        expect(measure(10)).toBe(0.5);
+      });
+
+      it('should return a whole over its trailing third', () => {
+        expect(measure(18)).toBe(1);
+      });
     });
   });
 
   describe('whole-only ratings', () => {
     it('should never return a half when allowHalf is false', () => {
-      expect(measure(5, { allowHalf: false })).toBe(1);
+      expect(measure(15, { allowHalf: false })).toBe(1);
       expect(measure(25, { allowHalf: false })).toBe(2);
     });
 
-    it('should clamp to a whole star before the first star', () => {
-      expect(measure(-5, { allowHalf: false })).toBe(1);
+    it('should clear (0) before the first star', () => {
+      expect(measure(-5, { allowHalf: false })).toBe(0);
+    });
+
+    it('should clear (0) over the first star leading half', () => {
+      expect(measure(5, { allowHalf: false })).toBe(0);
     });
   });
 
@@ -97,14 +113,20 @@ describe('util: starsFromRects', () => {
   describe('RTL', () => {
     it('should flip the clamp ends', () => {
       expect(measure(-5, { isRtl: true })).toBe(5);
-      expect(measure(150, { isRtl: true })).toBe(0.5);
+      expect(measure(150, { isRtl: true })).toBe(0);
     });
 
     it('should read the half from the opposite side of the star', () => {
-      // clientX 15 sits in the right 25% of star 0; in RTL that is its near
+      // clientX 35 sits in the right 25% of star 1; in RTL that is its near
       // (low) half.
-      expect(measure(15, { isRtl: true })).toBe(0.5);
-      expect(measure(5, { isRtl: true })).toBe(1);
+      expect(measure(35, { isRtl: true })).toBe(1.5);
+      expect(measure(25, { isRtl: true })).toBe(2);
+    });
+
+    it('should clear (0) over the first star leading side in RTL', () => {
+      // In RTL the first star's leading side is its right; clientX 18 sits
+      // there, in the leading third.
+      expect(measure(18, { isRtl: true })).toBe(0);
     });
   });
 });
