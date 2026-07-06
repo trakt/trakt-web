@@ -7711,14 +7711,6 @@
       "default": "Enable controls for hiding or showing configurable sections across the app.",
       "description": "Description for the Edit Mode preview feature."
     },
-    "preview_feature_title_streaming_sync": {
-      "default": "Streaming Sync",
-      "description": "Title for the Streaming Sync preview feature."
-    },
-    "preview_feature_description_streaming_sync": {
-      "default": "Connect supported streaming services so watch history and ratings can sync back to Trakt automatically. The connection flow from web is still in beta.",
-      "description": "Description for the Streaming Sync preview feature."
-    },
     "preview_feature_title_scoped_favorites": {
       "default": "Scoped Favorites",
       "description": "Title for the Scoped Favorites preview feature."

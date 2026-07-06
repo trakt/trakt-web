@@ -26,7 +26,6 @@ export const settingsPages: ReadonlyArray<SettingsPage> = [
   {
     href: UrlBuilder.settings.streamingServices(),
     label: m.link_text_streaming_sync_settings,
-    flag: FeatureFlag.StreamingServices,
   },
   {
     href: UrlBuilder.settings.advanced(),

@@ -4,7 +4,6 @@ import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
 import PlexLibraryIcon from '$lib/components/icons/PlexLibraryIcon.svelte';
-import TrackIcon from '$lib/components/icons/TrackIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { Component } from 'svelte';
@@ -63,16 +62,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     icon: EditModeIcon,
     title: () => m.preview_feature_title_edit_mode(),
     description: () => m.preview_feature_description_edit_mode(),
-  },
-  [FeatureFlag.StreamingServices]: {
-    icon: TrackIcon,
-    title: () => m.preview_feature_title_streaming_sync(),
-    description: () => m.preview_feature_description_streaming_sync(),
-    featureLink: () =>
-      openFeatureLink(
-        UrlBuilder.settings.streamingServices(),
-        m.preview_feature_title_streaming_sync(),
-      ),
   },
   [FeatureFlag.ScopedFavorites]: {
     icon: FavoriteIcon,

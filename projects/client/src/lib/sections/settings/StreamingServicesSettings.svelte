@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import ConnectionResultHandler from "./_internal/streaming-services/ConnectionResultHandler.svelte";
   import DataSyncs from "./_internal/streaming-services/DataSyncs.svelte";
   import FavoriteServices from "./_internal/streaming-services/FavoriteServices.svelte";
@@ -9,18 +7,14 @@
   import StreamingServicesIntro from "./_internal/streaming-services/StreamingServicesIntro.svelte";
 </script>
 
-<RenderForFeature flag={FeatureFlag.StreamingServices}>
-  {#snippet enabled()}
-    <div class="trakt-streaming-services-settings">
-      <ConnectionResultHandler />
-      <FavoriteServices />
-      <StreamingServicesIntro />
-      <StreamingConnectionStatusSnackbar />
-      <StreamingServices />
-      <DataSyncs />
-    </div>
-  {/snippet}
-</RenderForFeature>
+<div class="trakt-streaming-services-settings">
+  <ConnectionResultHandler />
+  <FavoriteServices />
+  <StreamingServicesIntro />
+  <StreamingConnectionStatusSnackbar />
+  <StreamingServices />
+  <DataSyncs />
+</div>
 
 <style lang="scss">
   .trakt-streaming-services-settings {
