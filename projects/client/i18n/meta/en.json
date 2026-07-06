@@ -4866,6 +4866,86 @@
       "default": "Upload the unlocked .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files (plus followed_tv_show.csv and ratings-live-votes.csv for your watchlist and ratings) instead.",
       "description": "TV Time import guide, step 4. Filenames stay verbatim."
     },
+    "tv_time_faq_page_title": {
+      "default": "TV Time import FAQ",
+      "description": "Title of the TV Time import FAQ page (also used as the browser tab title)."
+    },
+    "tv_time_faq_page_description": {
+      "default": "Common questions about moving your TV Time data to Trakt. Still stuck? Send us your export and we'll take a look.",
+      "description": "Subtitle shown under the TV Time import FAQ page title."
+    },
+    "tv_time_faq_nothing_imported_question": {
+      "default": "Nothing was imported. Why?",
+      "description": "TV Time FAQ question about an import that imported nothing."
+    },
+    "tv_time_faq_nothing_imported_answer": {
+      "default": "Usually the wrong files were uploaded, or the export was empty. Double-check you uploaded the files listed above from a fresh export. If it still comes up empty, send it to us below.",
+      "description": "TV Time FAQ answer about an import that imported nothing."
+    },
+    "tv_time_faq_missing_ratings_question": {
+      "default": "My ratings didn't come across.",
+      "description": "TV Time FAQ question about ratings missing after import."
+    },
+    "tv_time_faq_missing_ratings_answer": {
+      "default": "Ratings live in ratings-live-votes.csv in the GDPR export, so make sure it's included. Episode ratings aren't supported, so only show and movie ratings are imported.",
+      "description": "TV Time FAQ answer about ratings missing after import. Filenames stay verbatim."
+    },
+    "tv_time_faq_dropped_shows_question": {
+      "default": "Do my dropped shows carry over?",
+      "description": "TV Time FAQ question about dropped shows after import."
+    },
+    "tv_time_faq_dropped_shows_answer": {
+      "default": "Dropped status is not imported, so any shows you dropped there need to be dropped again on Trakt after importing.",
+      "description": "TV Time FAQ answer explaining that dropped shows must be dropped again on Trakt."
+    },
+    "tv_time_report_heading": {
+      "default": "Still stuck? Send us your export",
+      "description": "Heading above the TV Time import issue-report form."
+    },
+    "tv_time_report_description": {
+      "default": "Attach your TV Time export and tell us what went wrong. Your files and Trakt account are sent privately to the team, never shared publicly.",
+      "description": "Explanatory text under the TV Time report form heading, including the privacy note."
+    },
+    "tv_time_report_message_placeholder": {
+      "default": "Tell us what happened…",
+      "description": "Placeholder for the TV Time report message textarea."
+    },
+    "tv_time_report_upload_prompt": {
+      "default": "Drop your TV Time export here, or click to choose files",
+      "description": "Prompt shown inside the TV Time report file dropzone."
+    },
+    "tv_time_report_submit_text": {
+      "default": "Send report",
+      "description": "Text for the TV Time report form submit button."
+    },
+    "tv_time_report_submit_label": {
+      "default": "Send TV Time import report",
+      "description": "Aria-label for the TV Time report form submit button."
+    },
+    "tv_time_report_remove_file_label": {
+      "default": "Remove file",
+      "description": "Aria-label for the button that removes an attached file from the TV Time report."
+    },
+    "tv_time_report_success": {
+      "default": "Thanks! Your report has been sent. We'll take a look.",
+      "description": "Success message shown after a TV Time report is submitted."
+    },
+    "tv_time_report_error_too_large": {
+      "default": "Those files are too large. Keep uploads under 25 MB in total.",
+      "description": "Error shown when the uploaded TV Time files exceed the size limit."
+    },
+    "tv_time_report_error_unknown": {
+      "default": "Something went wrong sending your report. Please try again.",
+      "description": "Generic error shown when submitting a TV Time report fails."
+    },
+    "button_text_tv_time_faq": {
+      "default": "FAQ & report an issue",
+      "description": "Text for the button in the TV Time import guide that opens the FAQ page."
+    },
+    "button_label_tv_time_faq": {
+      "default": "Open the TV Time import FAQ",
+      "description": "Aria-label for the button that opens the TV Time import FAQ page."
+    },
     "import_guide_imdb_title": {
       "default": "IMDb on Trakt? Lights, camera, action! ✨",
       "description": "Title of the IMDb import guide."

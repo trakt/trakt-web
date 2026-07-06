@@ -288,6 +288,9 @@ export const UrlBuilder = {
   terms: () => '/terms',
   privacy: () => '/privacy',
   about: () => '/about',
+  faq: {
+    tvTime: () => '/faq/tv-time',
+  },
   branding: () => '/branding',
   status: () => 'https://status.trakt.tv',
   renewVip: () => 'vip/renew',

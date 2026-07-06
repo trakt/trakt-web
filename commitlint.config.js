@@ -63,6 +63,7 @@ module.exports = {
         'episode',
         'errors',
         'favorite',
+        'faq',
         'filter',
         'footer',
         'form',

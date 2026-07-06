@@ -10,7 +10,10 @@
     importDrawerNavigation,
   } from "./importDrawerNavigation.ts";
 
-  const { config, collapsed = false }: {
+  const {
+    config,
+    collapsed = false,
+  }: {
     config: ImportSourceConfig;
     collapsed?: boolean;
   } = $props();
@@ -39,7 +42,9 @@
       aria-controls="import-guide-body"
       onclick={() => (expanded = !expanded)}
     >
-      <span class="import-guide-title bold ellipsis">{config.guide.title()}</span>
+      <span class="import-guide-title bold ellipsis"
+        >{config.guide.title()}</span
+      >
       <span class="import-guide-caret" class:is-open={!isCollapsed}>
         <CaretRightIcon />
       </span>
