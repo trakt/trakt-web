@@ -8,14 +8,13 @@
   import MonthToDate from "./MonthToDate.svelte";
   import ThisMonth from "./ThisMonth.svelte";
   import ThisYear from "./ThisYear.svelte";
-  import VipUpsell from "./VipUpsell.svelte";
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
   const { isMe } = $derived(useIsMe(slug));
 
-  const hasUpsell = $derived($isMe && !profile.isVip);
-  const isFreeOtherProfile = $derived(!$isMe && !profile.isVip);
+  const hasStats = $derived(profile.isVip || $isMe === true);
+  const isFreeOtherProfile = $derived($isMe === false && !profile.isVip);
 </script>
 
 {#snippet thisMonth()}
@@ -32,12 +31,12 @@
 
 <div
   class="trakt-profile-details"
-  class:is-vip={profile.isVip}
+  class:has-stats={hasStats}
   class:is-narrow={isFreeOtherProfile}
 >
   <ProfilePageBanner {profile} {slug} />
 
-  {#if profile.isVip}
+  {#if hasStats}
     <RenderFor audience="all" device={["desktop"]}>
       <div class="trakt-profile-details-item">
         {@render thisMonth()}
@@ -52,24 +51,10 @@
     </RenderFor>
   {/if}
 
-  <RenderFor audience="free" device={["desktop", "tablet-lg"]}>
-    {#if hasUpsell}
-      <div class="trakt-profile-details-item">
-        <VipUpsell />
-      </div>
-    {/if}
-  </RenderFor>
-
   <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-    {#if profile.isVip}
+    {#if hasStats}
       <MonthToDate {slug} />
     {/if}
-
-    <RenderFor audience="free">
-      {#if hasUpsell}
-        <VipUpsell />
-      {/if}
-    </RenderFor>
   </RenderFor>
 </div>
 
@@ -88,16 +73,6 @@
     grid-template-columns: repeat(var(--details-column-count), minmax(0, 1fr));
     gap: var(--profile-details-gap);
 
-    &:not(.is-vip) {
-      --details-column-count: 2;
-
-      .trakt-profile-details-item {
-        &::before {
-          display: none;
-        }
-      }
-    }
-
     &.is-narrow {
       --details-column-count: 1;
     }
@@ -107,13 +82,10 @@
     }
 
     @include for-tablet-sm-and-below {
+      --details-column-count: 1;
+
       overflow: visible;
       gap: var(--gap-s);
-
-      &:not(.is-vip),
-      & {
-        --details-column-count: 1;
-      }
     }
   }
 

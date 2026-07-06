@@ -6,7 +6,7 @@
     $props();
 
   const { isMe } = $derived(useIsMe(slug));
-  const isFreeOtherProfile = $derived(!$isMe && !profile.isVip);
+  const isFreeOtherProfile = $derived($isMe === false && !profile.isVip);
 </script>
 
 <div
