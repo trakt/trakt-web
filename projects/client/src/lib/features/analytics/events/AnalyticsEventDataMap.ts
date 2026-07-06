@@ -54,9 +54,13 @@ type ImportCompletedType = {
   duration: number;
 };
 type ImportFailedType = { source: string; error: string };
-type ExportInitiatedType = { isVip: string };
-type ExportCompletedType = { duration: number; endpointCount: number };
-type ExportFailedType = { error: string };
+type ExportFormatType = { format: 'json' | 'csv' };
+type ExportInitiatedType = { isVip: string } & ExportFormatType;
+type ExportCompletedType = {
+  duration: number;
+  endpointCount: number;
+} & ExportFormatType;
+type ExportFailedType = { error: string } & ExportFormatType;
 
 type ClearInitiatedType = { source: string };
 type ClearCompletedType = {

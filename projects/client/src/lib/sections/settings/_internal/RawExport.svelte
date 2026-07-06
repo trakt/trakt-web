@@ -1,11 +1,13 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useAnalytics } from "$lib/features/analytics/useAnalytics";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { slide } from "svelte/transition";
+  import type { RawExportFormat } from "../export/RawExportFormat.ts";
   import { runRawExport } from "../export/runRawExport.ts";
   import SettingsRow from "./SettingsRow.svelte";
   import SettingsSection from "./SettingsSection.svelte";
@@ -27,8 +29,17 @@
     endpointCount: 0,
   });
 
-  async function startExport() {
+  const exportFormats: ReadonlyArray<{
+    format: RawExportFormat;
+    label: () => string;
+  }> = [
+    { format: "json", label: m.export_format_json_files },
+    { format: "csv", label: m.export_format_csv_files },
+  ];
+
+  async function startExport(format: RawExportFormat) {
     if (!$user) return;
+    if (state.isExporting) return;
 
     const startTime = Date.now();
     state.isExporting = true;
@@ -36,10 +47,12 @@
 
     record(AnalyticsEvent.ExportInitiated, {
       isVip: $user.isVip ? "true" : "false",
+      format,
     });
 
     await runRawExport({
       user: { slug: $user.slug, isVip: $user.isVip },
+      format,
       onStatus: (status) => {
         switch (status.type) {
           case "complete":
@@ -62,6 +75,7 @@
         record(AnalyticsEvent.ExportCompleted, {
           duration: exportDuration,
           endpointCount: state.endpointCount,
+          format,
         });
 
         setTimeout(() => {
@@ -72,7 +86,7 @@
       },
       onError: (err) => {
         const errorMessage = err instanceof Error ? err.message : String(err);
-        record(AnalyticsEvent.ExportFailed, { error: errorMessage });
+        record(AnalyticsEvent.ExportFailed, { error: errorMessage, format });
 
         state.statusText = m.text_export_status_fail();
         state.isExporting = false;
@@ -93,15 +107,22 @@
 >
   <SettingsRow title={m.text_raw_export()}>
     <div class="trakt-raw-export">
-      <Button
+      <DropdownList
         label={m.button_label_raw_export()}
         disabled={state.isExporting}
-        onclick={startExport}
         color="default"
         size="small"
+        preferNative
       >
         {m.button_text_raw_export()}
-      </Button>
+        {#snippet items()}
+          {#each exportFormats as option (option.format)}
+            <DropdownItem onclick={() => startExport(option.format)}>
+              {option.label()}
+            </DropdownItem>
+          {/each}
+        {/snippet}
+      </DropdownList>
       <div>
         {#if state.isExporting}
           {@render exportLabel(m.text_exporting({ progress: state.progress }))}

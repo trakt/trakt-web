@@ -4788,6 +4788,14 @@
       "default": "Export a ZIP file containing your raw data.",
       "description": "Aria-label for the button that allows users to export their raw data."
     },
+    "export_format_json_files": {
+      "default": "JSON files",
+      "description": "Text for the raw export menu option that exports JSON files."
+    },
+    "export_format_csv_files": {
+      "default": "CSV files",
+      "description": "Text for the raw export menu option that exports CSV files."
+    },
     "text_exporting": {
       "default": "Exporting… {progress}",
       "description": "Text shown to indicate that the user's data export is in progress.",

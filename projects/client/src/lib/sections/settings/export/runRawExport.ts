@@ -1,7 +1,9 @@
 import { error } from '$lib/utils/console/print.ts';
 import { strToU8, zip, type Zippable } from 'fflate';
+import type { RawExportFormat } from './RawExportFormat.ts';
 import { downloadFile } from './downloadFile.ts';
 import { processEndpoint } from './processEndpoint.ts';
+import { toRawExportFileContent } from './toRawExportFileContent.ts';
 
 type UserLike = {
   slug: string;
@@ -22,6 +24,7 @@ type ExportStatus =
 
 interface ExportOptions {
   user: UserLike;
+  format: RawExportFormat;
   onStatus: (status: ExportStatus) => void;
   onProgress: (msg: string) => void;
   onComplete: () => void;
@@ -30,6 +33,7 @@ interface ExportOptions {
 
 export async function runRawExport({
   user,
+  format,
   onStatus,
   onProgress,
   onComplete,
@@ -187,11 +191,16 @@ export async function runRawExport({
       onProgress(`(${count}/${endpoints.length})`);
       onStatus({ type: 'fetch', item: endpoint.file });
 
-      await processEndpoint(endpoint.path, (data, { page, pageCount }) => {
-        const suffix = page > 1 || pageCount > 1 ? `-${page}` : '';
-        const filename = `${endpoint.file}${suffix}.json`;
-        files[filename] = strToU8(JSON.stringify(data, null, 2));
-      });
+      await processEndpoint(
+        endpoint.path,
+        async (data, { page, pageCount }) => {
+          const suffix = page > 1 || pageCount > 1 ? `-${page}` : '';
+          const filename = `${endpoint.file}${suffix}.${format}`;
+          files[filename] = strToU8(
+            await toRawExportFileContent(data, format),
+          );
+        },
+      );
     }
 
     onStatus({ type: 'zip' });
@@ -205,7 +214,8 @@ export async function runRawExport({
         type: 'application/zip',
       });
 
-      downloadFile(blob, `trakt-export-${slug}.zip`);
+      const archiveSuffix = format === 'csv' ? '-csv' : '';
+      downloadFile(blob, `trakt-export-${slug}${archiveSuffix}.zip`);
       onStatus({ type: 'complete' });
       onComplete();
     });
