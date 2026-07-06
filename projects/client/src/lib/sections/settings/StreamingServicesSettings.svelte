@@ -2,17 +2,20 @@
   import ConnectionResultHandler from "./_internal/streaming-services/ConnectionResultHandler.svelte";
   import DataSyncs from "./_internal/streaming-services/DataSyncs.svelte";
   import FavoriteServices from "./_internal/streaming-services/FavoriteServices.svelte";
+  import LockedStreamingServices from "./_internal/streaming-services/LockedStreamingServices.svelte";
   import StreamingConnectionStatusSnackbar from "./_internal/streaming-services/StreamingConnectionStatusSnackbar.svelte";
   import StreamingServices from "./_internal/streaming-services/StreamingServices.svelte";
-  import StreamingServicesIntro from "./_internal/streaming-services/StreamingServicesIntro.svelte";
+  import StreamingSyncSection from "./_internal/streaming-services/StreamingSyncSection.svelte";
 </script>
 
 <div class="trakt-streaming-services-settings">
   <ConnectionResultHandler />
   <FavoriteServices />
-  <StreamingServicesIntro />
-  <StreamingConnectionStatusSnackbar />
-  <StreamingServices />
+  <StreamingSyncSection>
+    <StreamingConnectionStatusSnackbar />
+    <StreamingServices />
+  </StreamingSyncSection>
+  <LockedStreamingServices />
   <DataSyncs />
 </div>
 

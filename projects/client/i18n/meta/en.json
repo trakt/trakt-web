@@ -23,6 +23,14 @@
       "default": "Your favorites make it easier to find content on the services you watch most.",
       "description": "Subtitle for the streaming services favorites section."
     },
+    "header_streaming_vip_services": {
+      "default": "Available with VIP",
+      "description": "Header for the section listing streaming services that require VIP to connect."
+    },
+    "description_streaming_vip_services": {
+      "default": "Upgrade to connect and sync these streaming services.",
+      "description": "Subtitle for the section listing streaming services that require VIP to connect."
+    },
     "label_favorites": {
       "default": "Favorites",
       "description": "Label for the favorite streaming services row."
