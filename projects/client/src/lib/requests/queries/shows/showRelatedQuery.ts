@@ -26,7 +26,7 @@ const showRelatedRequest = async (
     const response = await rawApiFetch({
       fetch,
       path:
-        `/shows/${slug}/related/nn?extended=full,images,colors&limit=${limit}&page=${page}`,
+        `/shows/${slug}/related/nn?extended=full,images,colors&limit=${limit}&page=${page}&version=2`,
     });
     return response.ok
       ? {

@@ -98,7 +98,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     icon: BrainIcon,
     title: () => m.preview_feature_title_smart_related(),
     description: () => m.preview_feature_description_smart_related(),
-    audience: 'director',
   },
   [FeatureFlag.Rewatching]: {
     icon: FastRewindIcon,
