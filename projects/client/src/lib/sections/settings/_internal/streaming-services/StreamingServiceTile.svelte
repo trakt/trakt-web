@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
   import Button from "$lib/components/buttons/Button.svelte";
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
@@ -7,7 +6,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { StreamingConnection } from "$lib/requests/models/StreamingConnection.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import StreamingServiceBadge from "./StreamingServiceBadge.svelte";
   import { useStreamingServicesActions } from "./useStreamingServicesActions.ts";
 
@@ -43,11 +41,6 @@
       isBusy = false;
     }
   }
-
-  function goToVip() {
-    // eslint-disable-next-line svelte/no-navigation-without-resolve
-    goto(UrlBuilder.vip());
-  }
 </script>
 
 {#snippet tileContent()}
@@ -63,8 +56,6 @@
       <span class="bold ellipsis">{connection.name}</span>
       {#if connection.isConnected && !connection.isActive}
         <span class="tag inactive">{m.tag_text_inactive()}</span>
-      {:else if !connection.isConnected && connection.isVip && !connection.isConnectable}
-        <span class="tag vip">{m.tag_text_vip()}</span>
       {/if}
     </div>
 
@@ -146,16 +137,6 @@
       <span class="connect-cue bold">
         {m.button_text_connect()}
       </span>
-    {:else}
-      <Button
-        size="small"
-        variant="primary"
-        color="purple"
-        label={m.button_text_upgrade()}
-        onclick={goToVip}
-      >
-        {m.button_text_upgrade()}
-      </Button>
     {/if}
   </div>
 {/snippet}
@@ -301,15 +282,6 @@
         transparent
       );
       color: var(--color-foreground-red);
-    }
-
-    &.vip {
-      background-color: color-mix(
-        in srgb,
-        var(--color-link-active) 16%,
-        transparent
-      );
-      color: var(--color-link-active);
     }
   }
 </style>

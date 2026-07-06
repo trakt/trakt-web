@@ -1,17 +1,17 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
-  import { useQuery } from "$lib/features/query/useQuery.ts";
-  import { streamingConnectionsQuery } from "$lib/requests/queries/streaming-sync/streamingConnectionsQuery.ts";
-  import { map } from "rxjs";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import StreamingServiceTile from "./StreamingServiceTile.svelte";
+  import { useStreamingConnections } from "./useStreamingConnections.ts";
 
-  const connections = useQuery(streamingConnectionsQuery()).pipe(
-    map((query) => query.data ?? []),
-  );
+  // Actionable services (connected, or connectable on the current plan - e.g.
+  // HBO Max for free users). VIP-gated services live in their own section
+  // (LockedStreamingServices) so the actionable ones are not buried among
+  // upgrade prompts.
+  const { available } = useStreamingConnections();
 
   const inactiveNames = $derived(
-    ($connections ?? [])
+    ($available ?? [])
       .filter((connection) => connection.isConnected && !connection.isActive)
       .map((connection) => connection.name),
   );
@@ -26,11 +26,13 @@
     </div>
   {/if}
 
-  <SettingsGroupCard>
-    {#each $connections ?? [] as connection (connection.key)}
-      <StreamingServiceTile {connection} />
-    {/each}
-  </SettingsGroupCard>
+  {#if ($available ?? []).length > 0}
+    <SettingsGroupCard>
+      {#each $available ?? [] as connection (connection.key)}
+        <StreamingServiceTile {connection} />
+      {/each}
+    </SettingsGroupCard>
+  {/if}
 </div>
 
 <style lang="scss">

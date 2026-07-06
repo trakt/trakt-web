@@ -7,12 +7,14 @@
     description,
     crumb,
     action,
+    badge,
     children,
   }: ChildrenProps & {
     title?: string;
     description?: string;
     crumb?: { href: string; label: string };
     action?: Snippet;
+    badge?: Snippet;
   } = $props();
 </script>
 
@@ -21,11 +23,15 @@
     <header class="settings-section-header">
       <div class="header-text">
         {#if title || crumb}
-          <p class="settings-title bold" class:has-prefix={Boolean(crumb)}>
+          <p
+            class="settings-title bold"
+            class:has-prefix={Boolean(crumb)}
+            class:has-badge={Boolean(badge)}
+          >
             {#if crumb}<SettingsCrumb
                 href={crumb.href}
                 label={crumb.label}
-              />{/if}{title}
+              />{/if}{title}{#if badge}{@render badge()}{/if}
           </p>
         {/if}
         {#if description}
@@ -88,11 +94,22 @@
       align-items: baseline;
       gap: var(--ni-6);
 
-      :global(span),
+      // Normalise only the crumb prefix to the title scale. Exclude .tag so a
+      // badge keeps its own (smaller) type scale when a section has both a
+      // crumb and a badge.
+      :global(span:not(.tag)),
       :global(.trakt-link) {
         font-size: inherit;
         font-weight: inherit;
       }
+    }
+
+    // Badge keeps its own (smaller) type scale, so it gets its own modifier
+    // rather than reusing has-prefix's font-size inheritance.
+    &.has-badge {
+      display: flex;
+      align-items: baseline;
+      gap: var(--gap-s);
     }
   }
 </style>
