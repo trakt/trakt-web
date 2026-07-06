@@ -5258,9 +5258,9 @@
       "default": "Enable or disable multiple watches",
       "description": "Aria-label for the switch that allows users to enable or disable multiple watches."
     },
-    "header_add_to_list": {
-      "default": "Add to list",
-      "description": "Header for the section that allows users to add/remove a movie or show to/from a list."
+    "header_manage_lists": {
+      "default": "Manage lists",
+      "description": "Header for the drawer that allows users to add/remove a movie or show to/from their lists."
     },
     "header_sentiment_highlight": {
       "default": "Highlight",

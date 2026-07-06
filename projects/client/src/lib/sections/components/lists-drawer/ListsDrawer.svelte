@@ -64,7 +64,7 @@
   });
 </script>
 
-<Drawer {onClose} title={m.header_add_to_list()} {metaInfo}>
+<Drawer {onClose} title={m.header_manage_lists()} {metaInfo}>
   <ul>
     <WatchlistButton
       title={title ?? media.title}
