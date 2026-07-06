@@ -201,8 +201,6 @@ declare global {
         | Nil;
       typesense: TypesenseConfig;
       isLegitimateBot: boolean;
-      // TRANSITIONAL(locale-backfill): remove once existing users are synced.
-      localeSource: 'cookie' | 'header';
     }
     // interface PageData {}
     interface PageState {
