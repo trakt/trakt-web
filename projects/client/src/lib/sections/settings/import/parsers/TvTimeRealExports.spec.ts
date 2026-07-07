@@ -46,6 +46,19 @@ function zipFixtures(names: string[], zipName: string): File {
   return new File([zipSync(entries) as BlobPart], zipName);
 }
 
+// Zip fixtures under explicit archive names (prefixed fixtures whose real
+// upload name differs, e.g. gdpr-v2-*.csv -> tracking-prod-records-v2.csv).
+function zipNamed(
+  pairs: ReadonlyArray<[fixtureName: string, entryName: string]>,
+  zipName: string,
+): File {
+  const encoder = new TextEncoder();
+  const entries = Object.fromEntries(
+    pairs.map(([name, entry]) => [entry, encoder.encode(fixture(name))]),
+  );
+  return new File([zipSync(entries) as BlobPart], zipName);
+}
+
 describe('TvTimeCsvParser: real anonymized exports', () => {
   it('imports a real GDPR v2 tracking file (ep_id episodes + watchlist)', async () => {
     const result = await TvTimeCsvParser.parse([
@@ -128,5 +141,32 @@ describe('TvTimeCsvParser: real anonymized exports', () => {
       'history:movie': 7,
     });
     expect(result.every((item) => item.ids.tvdb != null)).toBe(true);
+  });
+
+  it('imports custom lists from a real tvtime-lists export', async () => {
+    const result = await TvTimeCsvParser.parse([csvFile('tvtime-lists.csv')]);
+
+    expect(tally(result)).toEqual({ 'list:show': 10 });
+    expect(result.every((item) => item.listName === 'LIKE')).toBe(true);
+    expect(result.every((item) => item.ids.tvdb != null)).toBe(true);
+  });
+
+  it('imports custom lists from a real GDPR zip alongside tracking data', async () => {
+    const zip = zipNamed([
+      ['gdpr-v2-tracking-prod-records-v2.csv', 'tracking-prod-records-v2.csv'],
+      ['gdpr-lists-prod-lists.csv', 'lists-prod-lists.csv'],
+    ], 'gdpr-data.zip');
+
+    const result = await TvTimeCsvParser.parse([zip]);
+
+    const t = tally(result);
+    // 8 v2 episodes + 1 watchlist (the v2 fixture) plus the list items.
+    expect(t['history:episode']).toBe(8);
+    expect(t['list:show']).toBe(8);
+    expect(
+      result.filter((i) => i.action === 'list').every((i) =>
+        i.listName != null && i.ids.tvdb != null
+      ),
+    ).toBe(true);
   });
 });

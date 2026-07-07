@@ -5159,6 +5159,15 @@
         }
       }
     },
+    "import_summary_list": {
+      "default": "{count} list items",
+      "description": "Summary line showing the number of custom-list items found in the import file.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "import_complete_synced": {
       "default": "{count} items synced successfully.",
       "description": "Text shown at the end of a successful import showing the count of synced items.",

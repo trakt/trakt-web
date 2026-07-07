@@ -75,6 +75,15 @@ def anon_export_csv(text, kind):
         for r in rows:
             by_status.setdefault(r.get("status"), r)
         sample = list(by_status.values())
+    elif kind == "lists":
+        # a few items from up to two distinct lists
+        names, sample = set(), []
+        for r in rows:
+            names.add(r.get("list_name"))
+            if len(names) > 2:
+                break
+            sample.append(r)
+        sample = sample[:10]
     else:  # movies
         watched = [r for r in rows if r.get("is_watched") == "true"][:4]
         unwatched = [r for r in rows if r.get("is_watched") != "true"][:1]
@@ -122,11 +131,40 @@ def anon_json_movies(data):
     return json.dumps(out, ensure_ascii=False, indent=1)
 
 
+import re as _re
+
+
+# GDPR lists-prod-lists.csv: one row per list, items embedded in a Go-printed
+# `objects` field. Keep name/is_public/objects (public catalog ids), scrub the
+# per-user uuid tokens + user_id, and trim objects to a few items each.
+def anon_gdpr_lists(text):
+    rows = list(csv.DictReader(io.StringIO(text)))
+    header = list(rows[0].keys()) if rows else []
+    named = [r for r in rows if (r.get("name") or "").strip()][:2]
+    out = io.StringIO()
+    w = csv.DictWriter(out, fieldnames=header)
+    w.writeheader()
+    for i, r in enumerate(named):
+        row = dict(r)
+        if "user_id" in row:
+            row["user_id"] = "0"
+        if "s_key" in row:
+            row["s_key"] = SYNTH_UUID.format(i)
+        objects = row.get("objects", "")
+        maps = _re.findall(r"map\[[^\]]*\]", objects)[:4]
+        maps = [_re.sub(r"\s*uuid:[^\s\]]+", "", m) for m in maps]
+        row["objects"] = "[" + " ".join(maps) + "]"
+        w.writerow(row)
+    return out.getvalue().strip() + "\n"
+
+
 if __name__ == "__main__":
     mode, src, dst = sys.argv[1], sys.argv[2], sys.argv[3]
     text = open(src, encoding="utf-8", errors="replace").read()
     if mode == "v2":
         res = anon_v2(text)
+    elif mode == "gdpr-lists":
+        res = anon_gdpr_lists(text)
     elif mode.startswith("export-"):
         res = anon_export_csv(text, mode.split("-", 1)[1])
     elif mode == "json-series":

@@ -15,6 +15,7 @@ describe('ImportSummary', () => {
     history: 2,
     watchlist: 3,
     ratings: 1,
+    list: 1,
   };
 
   it('should show an enabled switch for every import action with items', () => {
@@ -24,6 +25,7 @@ describe('ImportSummary', () => {
         history: true,
         watchlist: true,
         ratings: true,
+        list: true,
       },
       source: 'tvtime',
       onactionchange: vi.fn(),
@@ -36,6 +38,8 @@ describe('ImportSummary', () => {
     expect(screen.getByRole('switch', { name: '3 items for Watchlist' }))
       .toBeChecked();
     expect(screen.getByRole('switch', { name: '1 ratings' })).toBeChecked();
+    expect(screen.getByRole('switch', { name: '1 list items' }))
+      .toBeChecked();
   });
 
   it('should request skipping an import action when its switch is clicked', async () => {
@@ -47,6 +51,7 @@ describe('ImportSummary', () => {
         history: true,
         watchlist: true,
         ratings: true,
+        list: true,
       },
       source: 'tvtime',
       onactionchange,
@@ -68,6 +73,7 @@ describe('ImportSummary', () => {
         history: false,
         watchlist: false,
         ratings: false,
+        list: false,
       },
       source: 'tvtime',
       onactionchange: vi.fn(),

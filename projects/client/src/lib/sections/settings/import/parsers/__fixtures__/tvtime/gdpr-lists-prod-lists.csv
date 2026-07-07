@@ -1,0 +1,3 @@
+ordering,s_key,name,type,description,is_public,user_id,objects,created_at,lists,list_count
+0,00000000-0000-0000-0000-000000000000,Slice of life,list,,true,0,[map[created_at:1.707766149e+09 id:422981 type:series] map[created_at:1.707766174e+09 id:80644 type:series] map[created_at:1.707766194e+09 id:402412 type:series] map[created_at:1.707766216e+09 id:354198 type:series]],2024-02-12 19:28:40,,
+0,00000000-0000-0000-0000-000000000001,Kdrama,list,,true,0,[map[created_at:1.710781645e+09 id:317220 type:series] map[created_at:1.710781665e+09 id:305327 type:series] map[created_at:1.710781688e+09 id:311297 type:series] map[created_at:1.71078178e+09 id:354403 type:series]],2024-03-18 17:07:05,,

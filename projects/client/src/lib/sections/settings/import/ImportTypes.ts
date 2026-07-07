@@ -9,7 +9,7 @@ export type ImportSource =
 
 export const DEFAULT_IMPORT_SOURCE: ImportSource = 'tvtime';
 
-export type ImportAction = 'history' | 'watchlist' | 'ratings';
+export type ImportAction = 'history' | 'watchlist' | 'ratings' | 'list';
 
 export type ImportActionSelection = Record<ImportAction, boolean>;
 
@@ -43,12 +43,17 @@ export interface UniversalImportItem {
   rated_at?: string;
   season?: number;
   episode?: number;
+  // For action 'list': the source list this item belongs to. Items are grouped
+  // by listName at sync time; listIsPublic maps to the created list's privacy.
+  listName?: string;
+  listIsPublic?: boolean;
 }
 
 export interface ImportCounts {
   history: number;
   watchlist: number;
   ratings: number;
+  list: number;
 }
 
 export interface MovieMatchCandidate {

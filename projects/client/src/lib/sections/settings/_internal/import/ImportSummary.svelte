@@ -36,9 +36,11 @@
     history: selectedActions.history ? counts.history : 0,
     watchlist: selectedActions.watchlist ? counts.watchlist : 0,
     ratings: selectedActions.ratings ? counts.ratings : 0,
+    list: selectedActions.list ? counts.list : 0,
   });
   const selectedTotalItems = $derived(
-    selectedCounts.history + selectedCounts.watchlist + selectedCounts.ratings,
+    selectedCounts.history + selectedCounts.watchlist +
+      selectedCounts.ratings + selectedCounts.list,
   );
 
   const actionRows = $derived<
@@ -55,6 +57,7 @@
       label: m.import_summary_watchlist,
     },
     { action: "ratings", count: counts.ratings, label: m.import_summary_ratings },
+    { action: "list", count: counts.list, label: m.import_summary_list },
   ]);
 
   const isVipLimitExceeded = $derived.by(() => {
@@ -65,10 +68,12 @@
     const limitMultiplier = source === "tvtime" ? 2 : 1;
     const watchlistFreeLimit = $limits.watchlistItems.free * limitMultiplier;
     const historyFreeLimit = $limits.history.free * limitMultiplier;
+    const listItemsFreeLimit = $limits.totalListItems.free * limitMultiplier;
 
     return (
       selectedCounts.watchlist > watchlistFreeLimit ||
-      selectedCounts.history > historyFreeLimit
+      selectedCounts.history > historyFreeLimit ||
+      selectedCounts.list > listItemsFreeLimit
     );
   });
 </script>
