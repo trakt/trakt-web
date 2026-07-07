@@ -88,9 +88,13 @@
       };
     }
 
+    const seasonPoster = rest.type === "season"
+      ? rest.season.poster?.url.thumb
+      : undefined;
+
     return {
       background: media.cover.url.thumb,
-      poster: media.poster.url.thumb,
+      poster: seasonPoster ?? media.poster.url.thumb,
       title: media.title,
     };
   });

@@ -2,16 +2,18 @@ import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
+import { mapToSeason } from '$lib/requests/_internal/mapToSeason.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
+import { SeasonSchema } from '$lib/requests/models/Season.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { RatedItemResponse } from '@trakt/api';
+import { type RatedItemResponse, seasonResponseSchema } from '@trakt/api';
 import { z } from 'zod';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
@@ -43,15 +45,26 @@ const EpisodeRatingEntrySchema = z.object({
   episode: EpisodeEntrySchema,
 });
 
+const SeasonRatingEntrySchema = z.object({
+  key: z.string(),
+  activityType: z.literal('ratings'),
+  ratedAt: z.date(),
+  rating: z.number(),
+  type: z.literal('season'),
+  show: ShowEntrySchema,
+  season: SeasonSchema,
+});
+
 export const UserRatingEntrySchema = z.discriminatedUnion('type', [
   MovieRatingEntrySchema,
   ShowRatingEntrySchema,
   EpisodeRatingEntrySchema,
+  SeasonRatingEntrySchema,
 ]);
 
 export type UserRatingEntry = z.infer<typeof UserRatingEntrySchema>;
 
-const SUPPORTED_RATING_TYPES = ['movie', 'show', 'episode'] as const;
+const SUPPORTED_RATING_TYPES = ['movie', 'show', 'episode', 'season'] as const;
 type SupportedRatingType = typeof SUPPORTED_RATING_TYPES[number];
 type SupportedRatingResponse = Extract<
   RatedItemResponse,
@@ -111,6 +124,23 @@ const mapToRatingEntry = (item: SupportedRatingResponse): UserRatingEntry => {
         episode,
       };
     }
+    case 'season': {
+      const show = mapToShowEntry(
+        assertDefined(item.show, 'Expected show in season rating'),
+      );
+      const season = mapToSeason(
+        seasonResponseSchema.parse(
+          assertDefined(item.season, 'Expected season in season rating'),
+        ),
+      );
+      return {
+        ...common,
+        key: `rating-season-${show.id}-${season.number}`,
+        type: 'season',
+        show,
+        season,
+      };
+    }
   }
 };
 
@@ -139,6 +169,7 @@ export const userRatingsQuery = defineInfiniteQuery({
   key: 'userRatings',
   invalidations: [
     InvalidateAction.Rated('episode'),
+    InvalidateAction.Rated('season'),
     InvalidateAction.Rated('show'),
     InvalidateAction.Rated('movie'),
   ],

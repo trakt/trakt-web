@@ -59,7 +59,8 @@ export function useMyActivityList(props: UseMyActivityListProps) {
 
       return $list.filter((entry) => {
         if (props.mode === 'show') {
-          return entry.type === 'show' || entry.type === 'episode';
+          return entry.type === 'show' || entry.type === 'episode' ||
+            entry.type === 'season';
         }
 
         return entry.type === 'movie';
