@@ -4,6 +4,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import PromotionBanners from "./_internal/PromotionBanners.svelte";
   import ReviewBanners from "./_internal/ReviewBanners.svelte";
+  import TvTimeBanner from "./tv-time/TvTimeBanner.svelte";
   import WelcomeBanner from "./welcome/WelcomeBanner.svelte";
 
   $effect.pre(() => initializePromotions());
@@ -12,6 +13,7 @@
 
 <RenderFor audience="authenticated">
   <WelcomeBanner />
+  <TvTimeBanner />
 </RenderFor>
 
 <RenderFor audience="vip">
