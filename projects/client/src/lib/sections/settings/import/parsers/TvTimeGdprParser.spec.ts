@@ -59,7 +59,6 @@ const V2_HEADER = [
   'rewatch_count',
   's_no',
   'is_unitary',
-  'episode_id',
   'season_number',
   'gsi',
   'runtime',
@@ -123,9 +122,9 @@ function v2EpisodeWatch(
     created_at: '2021-10-10 11:49:11',
     s_id: '82066',
     series_name: 'Fringe',
-    episode_id: '1331151',
-    season_number: '2',
-    episode_number: '10',
+    ep_id: '1331151',
+    s_no: '2',
+    ep_no: '10',
     ...overrides,
   };
 }
@@ -238,7 +237,7 @@ describe('TvTimeGdprParser', () => {
     });
 
     it('should skip episode rows without an episode id', async () => {
-      const csv = toCsv(V2_HEADER, [v2EpisodeWatch({ episode_id: '' })]);
+      const csv = toCsv(V2_HEADER, [v2EpisodeWatch({ ep_id: '' })]);
 
       const result = await TvTimeGdprParser.parse([csvFile(csv)]);
 
