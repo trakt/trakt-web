@@ -8,7 +8,8 @@ export function prependStorageHost(
     return '';
   }
 
-  const imageUrl = url.startsWith(WALTER) ? url as HttpsUrl : `${WALTER}${url}`;
+  const path = url.startsWith('/') ? url : `/${url}`;
+  const imageUrl = url.startsWith(WALTER) ? url as HttpsUrl : `${WALTER}${path}`;
 
   return `${imageUrl}${extension}` as HttpsUrl;
 }

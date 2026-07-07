@@ -1,3 +1,4 @@
+import { dev } from '$app/environment';
 import { env } from '$env/dynamic/private';
 import type { Handle } from '@sveltejs/kit';
 import { createSearcher } from '../../requests/search/createSearcher.ts';
@@ -52,5 +53,13 @@ export const handle: Handle = ({ event, resolve }) => {
     server: env.TYPESENSE_SERVER ?? '',
   };
 
-  return resolve(event);
+  const localServer = env.TYPESENSE_SERVER ?? '';
+  if (!dev || !localServer.includes('localhost')) {
+    return resolve(event);
+  }
+
+  return resolve(event, {
+    transformPageChunk: ({ html }) =>
+      html.replace('connect-src ', `connect-src ${localServer} `),
+  });
 };
