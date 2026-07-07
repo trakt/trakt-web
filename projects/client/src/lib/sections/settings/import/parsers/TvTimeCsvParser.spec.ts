@@ -223,7 +223,69 @@ describe('TvTimeCsvParser', () => {
     });
   });
 
+  describe('current export format (tvtime-*.csv / tvtime-export.zip)', () => {
+    const EPISODES_CSV = [
+      'series_tvdb_id,series_imdb_id,series_uuid,title,season,episode,tvdb_id,is_watched,watched_at,rewatch_count,special',
+      '346328,,uuid,Elite,1,1,6671792,true,2019-10-04 03:43:42,0,false',
+    ].join('\n');
+
+    it('should route tvtime-series-episodes csv to the export parser', async () => {
+      const result = await TvTimeCsvParser.parse([
+        csvFile(EPISODES_CSV, 'tvtime-series-episodes-2026-07-05.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { tvdb: 6671792 },
+        title: 'Elite',
+        season: 1,
+        episode: 1,
+      });
+    });
+
+    it('should route a tvtime-export zip to the export parser', async () => {
+      const file = zipFile(
+        {
+          'tvtime-series-episodes-2026-07-07.csv': EPISODES_CSV,
+          'tvtime-summary-2026-07-07.html': '<html></html>',
+        },
+        'tvtime-export-2026-07-07.zip',
+      );
+
+      const result = await TvTimeCsvParser.parse([file]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        type: 'episode',
+        ids: { tvdb: 6671792 },
+      });
+    });
+  });
+
   describe('mixed uploads', () => {
+    // A GDPR noise file (where-to-watch-prod-table.csv) carries episode_id +
+    // episode_number, which used to trip the native heuristic and reject the
+    // whole batch as "different exports". It must be ignored, not misdetected.
+    it('should not misdetect gdpr noise carrying episode_id as native', async () => {
+      const whereToWatch = [
+        'vote_type,hash_key,episode_id,type,id,created_at,range_key,user_id,network_platform,series_name,episode_number,season_number',
+        'watch,hk,1331151,ep,1,2021-10-10,rk,1,Netflix,Fringe,10,2',
+      ].join('\n');
+
+      const result = await TvTimeCsvParser.parse([
+        csvFile(whereToWatch, 'where-to-watch-prod-table.csv'),
+        csvFile(GDPR_V2_CSV, 'tracking-prod-records-v2.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        type: 'episode',
+        ids: { tvdb: 1331151 },
+      });
+    });
+
     it('should reject files from different export formats', async () => {
       await expect(TvTimeCsvParser.parse([
         csvFile(LIBERATOR_CSV, 'tv-time-liberator.csv'),
