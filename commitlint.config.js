@@ -42,6 +42,7 @@ module.exports = {
         'button',
         'calendar',
         'card',
+        'chart',
         'checkin',
         'client',
         'colors',
