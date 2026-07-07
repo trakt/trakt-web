@@ -242,7 +242,7 @@ describe('TvTimeExportParser', () => {
   });
 
   describe('mixed csv + json upload', () => {
-    it('should prefer csv and not double-count watches', async () => {
+    it('should de-duplicate watches present in both formats', async () => {
       const encoder = new TextEncoder();
       const csvZip = zipSync({
         'tvtime-series-episodes-2026-07-07.csv': encoder.encode(
@@ -268,6 +268,75 @@ describe('TvTimeExportParser', () => {
       ]);
 
       expect(result.filter((item) => item.type === 'episode')).toHaveLength(1);
+    });
+
+    it('should keep items only one format carries', async () => {
+      const encoder = new TextEncoder();
+      const csvZip = zipSync({
+        'tvtime-series-episodes-2026-07-07.csv': encoder.encode(
+          toCsv(EPISODES_HEADER, [episodeRow()]),
+        ),
+      });
+      // The JSON series export also carries the watchlist (not-started shows),
+      // which the episodes CSV does not. It must survive the merge.
+      const shows = [{
+        id: { tvdb: 111 },
+        title: 'Wanted',
+        status: 'not_started_yet',
+        seasons: [],
+      }];
+      const jsonZip = zipSync({
+        'tvtime-series-2026-07-07.json': encoder.encode(JSON.stringify(shows)),
+      });
+
+      const result = await TvTimeExportParser.parse([
+        new File([csvZip as BlobPart], 'tvtime-export-2026-07-07 (1).zip'),
+        new File([jsonZip as BlobPart], 'tvtime-export-2026-07-07 (2).zip'),
+      ]);
+
+      expect(result.filter((item) => item.type === 'episode')).toHaveLength(1);
+      expect(result).toContainEqual(
+        expect.objectContaining({
+          action: 'watchlist',
+          type: 'show',
+          ids: { tvdb: 111, imdb: undefined },
+        }),
+      );
+    });
+
+    it('should keep the watched_at from whichever format carries it', async () => {
+      const encoder = new TextEncoder();
+      // Same episode, but only the JSON export carries the timestamp.
+      const csvZip = zipSync({
+        'tvtime-series-episodes-2026-07-07.csv': encoder.encode(
+          toCsv(EPISODES_HEADER, [episodeRow({ watched_at: '' })]),
+        ),
+      });
+      const shows = [{
+        id: { tvdb: 346328 },
+        title: 'Elite',
+        status: 'continuing',
+        seasons: [{
+          number: 1,
+          episodes: [{
+            id: { tvdb: 6671792 },
+            number: 1,
+            is_watched: true,
+            watched_at: '2019-10-04T03:43:42Z',
+          }],
+        }],
+      }];
+      const jsonZip = zipSync({
+        'tvtime-series-2026-07-07.json': encoder.encode(JSON.stringify(shows)),
+      });
+
+      const result = await TvTimeExportParser.parse([
+        new File([csvZip as BlobPart], 'tvtime-export-2026-07-07 (1).zip'),
+        new File([jsonZip as BlobPart], 'tvtime-export-2026-07-07 (2).zip'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]?.watched_at).toBeDefined();
     });
   });
 });
