@@ -15,6 +15,10 @@
       "default": "Quick navigation",
       "description": "Accessible label for the spotlight quick-navigation dialog."
     },
+    "spotlight_section_pages": {
+      "default": "Pages",
+      "description": "Heading for the list of navigable pages in the spotlight quick-navigation dialog."
+    },
     "spotlight_input_placeholder": {
       "default": "Where to?",
       "description": "Placeholder for the spotlight search input where the user types a page to jump to."

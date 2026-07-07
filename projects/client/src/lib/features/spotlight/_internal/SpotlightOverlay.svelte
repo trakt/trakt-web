@@ -1,25 +1,42 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
+  import { afterNavigate, goto } from "$app/navigation";
+  import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
+  import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
+  import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
   import { Dialog } from "bits-ui";
   import { tick } from "svelte";
-  import type { SpotlightRoute } from "./models/SpotlightRoute.ts";
   import { filterSpotlightRoutes } from "./filterSpotlightRoutes.ts";
   import { getSpotlightContext } from "./getSpotlightContext.ts";
+  import type { SpotlightRoute } from "./models/SpotlightRoute.ts";
   import { spotlightRoutes } from "./spotlightRoutes.ts";
+  import { useSpotlightMedia } from "./useSpotlightMedia.ts";
 
   const { isOpen, close } = getSpotlightContext();
+  const {
+    media,
+    isSearching,
+    search: searchMedia,
+    clear: clearMedia,
+  } = useSpotlightMedia();
 
   let query = $state("");
   let selectedIndex = $state(0);
   let inputElement = $state<HTMLInputElement | null>(null);
 
-  const results = $derived(filterSpotlightRoutes(spotlightRoutes, query));
+  const pageResults = $derived(filterSpotlightRoutes(spotlightRoutes, query));
+  const movies = $derived($media?.movies ?? []);
+  const shows = $derived($media?.shows ?? []);
+
   const hasQuery = $derived(query.trim().length > 0);
-  const isEmpty = $derived(hasQuery && results.length === 0);
+  const hasResults = $derived(
+    pageResults.length > 0 || movies.length > 0 || shows.length > 0,
+  );
+  const isEmpty = $derived(hasQuery && !hasResults && !$isSearching);
   const activeIndex = $derived(
-    Math.min(selectedIndex, Math.max(0, results.length - 1)),
+    Math.min(selectedIndex, Math.max(0, pageResults.length - 1)),
   );
 
   function reset() {
@@ -34,6 +51,20 @@
     tick().then(() => inputElement?.focus());
   });
 
+  // Drive the debounced media search off the input.
+  $effect(() => {
+    const term = query.trim();
+    if (!term) {
+      clearMedia();
+      return;
+    }
+
+    searchMedia(term);
+  });
+
+  // Close when a media card link navigates away.
+  afterNavigate(() => close());
+
   function navigateTo(route: SpotlightRoute | Nil) {
     if (!route) return;
 
@@ -42,9 +73,10 @@
   }
 
   function moveSelection(delta: number) {
-    if (results.length === 0) return;
+    if (pageResults.length === 0) return;
 
-    const next = (activeIndex + delta + results.length) % results.length;
+    const next =
+      (activeIndex + delta + pageResults.length) % pageResults.length;
     selectedIndex = next;
   }
 
@@ -60,7 +92,7 @@
         return;
       case "Enter":
         event.preventDefault();
-        navigateTo(results.at(activeIndex));
+        navigateTo(pageResults.at(activeIndex));
         return;
     }
   }
@@ -102,35 +134,99 @@
         />
       </div>
 
-      <div
-        class="trakt-spotlight-results"
-        class:is-expanded={hasQuery}
-      >
+      <div class="trakt-spotlight-results" class:is-expanded={hasQuery}>
         <div class="trakt-spotlight-results-inner">
-          {#if isEmpty}
-            <p class="trakt-spotlight-empty">
-              {m.spotlight_no_results({ query: query.trim() })}
-            </p>
-          {:else}
-            <ul class="trakt-spotlight-list">
-              {#each results as route, index (route.id)}
-                <li>
-                  <button
-                    type="button"
-                    class="trakt-spotlight-item"
-                    class:is-active={index === activeIndex}
-                    onpointermove={() => (selectedIndex = index)}
-                    onclick={() => navigateTo(route)}
-                  >
-                    <span class="trakt-spotlight-item-label">
-                      {route.label()}
+          <div class="trakt-spotlight-scroll">
+            {#if isEmpty}
+              <p class="trakt-spotlight-empty">
+                {m.spotlight_no_results({ query: query.trim() })}
+              </p>
+            {:else}
+              {#if pageResults.length > 0}
+                <section class="trakt-spotlight-section">
+                  <h2 class="trakt-spotlight-section-title bold secondary">
+                    <span
+                      class="trakt-spotlight-section-icon"
+                      aria-hidden="true"
+                    >
+                      <DiscoverIcon />
                     </span>
-                    <span class="trakt-spotlight-item-url">{route.url}</span>
-                  </button>
-                </li>
-              {/each}
-            </ul>
-          {/if}
+                    {m.spotlight_section_pages()}
+                  </h2>
+                  <ul class="trakt-spotlight-list">
+                    {#each pageResults as route, index (route.id)}
+                      <li>
+                        <button
+                          type="button"
+                          class="trakt-spotlight-item"
+                          class:is-active={index === activeIndex}
+                          onpointermove={() => (selectedIndex = index)}
+                          onclick={() => navigateTo(route)}
+                        >
+                          <span class="trakt-spotlight-item-label">
+                            {route.label()}
+                          </span>
+                          <span class="trakt-spotlight-item-url"
+                            >{route.url}</span
+                          >
+                        </button>
+                      </li>
+                    {/each}
+                  </ul>
+                </section>
+              {/if}
+
+              {#if movies.length > 0}
+                <section class="trakt-spotlight-section">
+                  <h2 class="trakt-spotlight-section-title bold secondary">
+                    <span
+                      class="trakt-spotlight-section-icon"
+                      aria-hidden="true"
+                    >
+                      <MovieIcon />
+                    </span>
+                    {m.page_title_movies()}
+                  </h2>
+                  <div class="trakt-spotlight-media-list">
+                    {#each movies as movie (movie.slug)}
+                      <DefaultMediaItem
+                        type={movie.type}
+                        media={movie}
+                        style="compact"
+                        source="search"
+                        mode="mixed"
+                      />
+                    {/each}
+                  </div>
+                </section>
+              {/if}
+
+              {#if shows.length > 0}
+                <section class="trakt-spotlight-section">
+                  <h2 class="trakt-spotlight-section-title bold secondary">
+                    <span
+                      class="trakt-spotlight-section-icon"
+                      aria-hidden="true"
+                    >
+                      <ShowIcon />
+                    </span>
+                    {m.page_title_shows()}
+                  </h2>
+                  <div class="trakt-spotlight-media-list">
+                    {#each shows as show (show.slug)}
+                      <DefaultMediaItem
+                        type={show.type}
+                        media={show}
+                        style="compact"
+                        source="search"
+                        mode="mixed"
+                      />
+                    {/each}
+                  </div>
+                </section>
+              {/if}
+            {/if}
+          </div>
         </div>
       </div>
 
@@ -209,8 +305,7 @@
   @keyframes spotlightPanelIn {
     from {
       opacity: 0;
-      transform: translateX(-50%) translateY(calc(-1 * var(--ni-8)))
-        scale(0.98);
+      transform: translateX(-50%) translateY(calc(-1 * var(--ni-8))) scale(0.98);
     }
 
     to {
@@ -275,17 +370,63 @@
     min-height: 0;
   }
 
+  .trakt-spotlight-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-16);
+
+    max-height: 55dvh;
+    overflow-y: auto;
+    padding: var(--ni-4);
+    border-block-start: var(--border-thickness-xxs) solid
+      color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  }
+
+  .trakt-spotlight-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-8);
+  }
+
+  .trakt-spotlight-section + .trakt-spotlight-section {
+    padding-block-start: var(--ni-16);
+    border-block-start: var(--border-thickness-xxs) solid
+      color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+  }
+
+  .trakt-spotlight-section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--ni-8);
+    padding-inline: var(--ni-12);
+    font-size: var(--font-size-text);
+  }
+
+  .trakt-spotlight-section-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+
+    :global(svg) {
+      width: var(--ni-16);
+      height: var(--ni-16);
+    }
+  }
+
   .trakt-spotlight-list {
     list-style: none;
     margin: 0;
-    padding: var(--ni-4);
+    padding: 0;
     display: flex;
     flex-direction: column;
     gap: var(--ni-2);
-    max-height: 50dvh;
-    overflow-y: auto;
-    border-block-start: var(--border-thickness-xxs) solid
-      color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  }
+
+  .trakt-spotlight-media-list {
+    --width-summary-card-compact: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-4);
   }
 
   .trakt-spotlight-item {
@@ -322,11 +463,9 @@
 
   .trakt-spotlight-empty {
     margin: 0;
-    padding: var(--ni-16);
+    padding: var(--ni-12);
     font-size: var(--font-size-text);
     color: var(--color-text-secondary);
-    border-block-start: var(--border-thickness-xxs) solid
-      color-mix(in srgb, var(--color-text-primary) 8%, transparent);
   }
 
   .trakt-spotlight-hints {
