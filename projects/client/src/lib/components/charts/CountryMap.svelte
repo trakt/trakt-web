@@ -1,6 +1,8 @@
 <script lang="ts">
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { geoNaturalEarth1, geoPath } from "d3";
+  import { onMount } from "svelte";
+  import { createMapInteraction } from "./_internal/createMapInteraction.svelte.ts";
   import {
     type CountryFeature,
     loadCountryFeatures,
@@ -24,8 +26,11 @@
   const { observedDimension: observedHeight, observeDimension: observeHeight } =
     useDimensionObserver("height");
 
+  // World geometry is static and loaded once; onMount (not $effect) since there
+  // are no reactive deps, just a mount-time fetch. The guard drops a late
+  // resolution if we unmount first. loadCountryFeatures caches across instances.
   let features = $state<CountryFeature[]>([]);
-  $effect(() => {
+  onMount(() => {
     let active = true;
     loadCountryFeatures()
       .then((collection) => {
@@ -43,6 +48,10 @@
     fill: string;
     value: number | undefined;
     interactive: boolean;
+    // Projected centroid in svg-local px (viewBox is 1:1 with pixels), used to
+    // anchor the keyboard tooltip to the shape so it tracks the chart on scroll.
+    cx: number;
+    cy: number;
   };
 
   // Tint a watched country across the same 30%→90% highlight band the Carbon
@@ -73,54 +82,67 @@
       const code = feature.properties.code;
       const value = valueByCode.get(code);
       const interactive = value != null;
+      const [cx, cy] = toPath.centroid(feature);
       return {
         code,
         value,
         interactive,
+        cx,
+        cy,
         path: toPath(feature) ?? "",
         fill: interactive ? fillFor(value) : "var(--color-map-chart-missing)",
       };
     });
   });
 
-  let hovered = $state<RenderedCountry | null>(null);
-  let pointer = $state({ x: 0, y: 0 });
+  // Keyboard traversal stops: one per watched country, most-watched first, so
+  // arrows read the map the way users do rather than the asset's arbitrary
+  // geometry order. Deduped by code because some countries (e.g. Australia)
+  // ship as several geometries, and arrow nav should treat them as one stop.
+  const interactiveCountries = $derived(
+    [
+      ...new Map(
+        rendered
+          .filter((country) => country.interactive)
+          .map((country) => [country.code, country]),
+      ).values(),
+    ].toSorted((a, b) => (b.value ?? 0) - (a.value ?? 0)),
+  );
 
-  // Delegated from the figure so individual countries stay plain (non-focusable,
-  // non-interactive) SVG paths; only watched countries surface a tooltip.
-  function resolveCountry(event: PointerEvent): RenderedCountry | null {
-    const target = event.target;
-    if (!(target instanceof SVGPathElement)) return null;
-    const index = Number(target.dataset.index);
-    const country = rendered[index];
-    return country?.interactive ? country : null;
-  }
+  const interaction = createMapInteraction({
+    stops: () => interactiveCountries,
+    resolvePointer: (event) => {
+      const target = event.target;
+      if (!(target instanceof SVGPathElement)) return null;
+      const country = rendered.at(Number(target.dataset.index));
+      return country?.interactive ? country.code : null;
+    },
+    // Anchor keyboard tooltips at the country's projected centroid (svg-local,
+    // same space the pointer path resolves to).
+    centreOf: (code) => {
+      const country = rendered.find((entry) => entry.code === code);
+      return country ? { x: country.cx, y: country.cy } : null;
+    },
+  });
 
-  function trackPointer(event: PointerEvent) {
-    const country = resolveCountry(event);
-    if (!country) {
-      // Over a gap, the map background, or an unwatched country — drop the
-      // tooltip. Safe to always clear since the tooltip is pointer-events: none.
-      hovered = null;
-      return;
-    }
-    hovered = country;
-    pointer = { x: event.clientX, y: event.clientY };
-  }
-
-  function movePointer(event: PointerEvent) {
-    if (hovered) pointer = { x: event.clientX, y: event.clientY };
-  }
-
-  function clearPointer(event: PointerEvent) {
-    // Touch fires a synthetic leave right after a tap; keep the tooltip pinned
-    // there (mirrors the other charts' interaction).
-    if (event.pointerType !== "mouse") return;
-    hovered = null;
-  }
+  const activeCountry = $derived(
+    interaction.activeCode != null
+      ? rendered.find((country) => country.code === interaction.activeCode)
+      : undefined,
+  );
 
   const tooltipArgs = $derived<CountryMapTooltipArgs | null>(
-    hovered ? { code: hovered.code, value: hovered.value ?? 0 } : null,
+    activeCountry
+      ? { code: activeCountry.code, value: activeCountry.value ?? 0 }
+      : null,
+  );
+
+  // Visually-hidden readout for screen readers tracking the active country
+  // (mirrors BarChart's aria-live activeReadout).
+  const activeReadout = $derived(
+    activeCountry
+      ? `${activeCountry.code.toUpperCase()}: ${activeCountry.value ?? 0}`
+      : "",
   );
 </script>
 
@@ -128,25 +150,37 @@
   class="trakt-country-map"
   use:observeWidth
   use:observeHeight
-  onpointerover={trackPointer}
-  onpointerdown={trackPointer}
-  onpointermove={movePointer}
-  onpointerleave={clearPointer}
+  onpointerover={interaction.handlers.pointerover}
+  onpointerdown={interaction.handlers.pointerdown}
+  onpointermove={interaction.handlers.pointermove}
+  onpointerleave={interaction.handlers.pointerleave}
   role="presentation"
 >
   <figcaption class="viz-caption">{label}</figcaption>
+  <div class="viz-caption" aria-live="polite">{activeReadout}</div>
 
+  <!--
+    The map is one keyboard widget: the <svg> is focusable and arrow keys / Home
+    / End scrub between watched countries, reaching the same tooltip as pointer
+    users (nested <path>s aren't reliably tabbable).
+  -->
+  <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+  <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
   <svg
     width={$observedWidth}
     height={$observedHeight}
     viewBox={`0 0 ${$observedWidth} ${$observedHeight}`}
     role="img"
     aria-label={label}
+    tabindex="0"
+    onkeydown={interaction.handlers.keydown}
+    onblur={interaction.handlers.blur}
   >
     {#each rendered as country, index (index)}
       <path
         class="country"
         class:is-interactive={country.interactive}
+        class:is-active={country.code === interaction.activeCode}
         data-index={index}
         d={country.path}
         style:fill={country.fill}
@@ -154,11 +188,11 @@
     {/each}
   </svg>
 
-  {#if tooltip && tooltipArgs && hovered}
+  {#if tooltip && tooltipArgs}
     <div
       class="country-map-tooltip"
-      style:left="{pointer.x}px"
-      style:top="{pointer.y}px"
+      style:left="{interaction.pointer.x}px"
+      style:top="{interaction.pointer.y}px"
     >
       {@render tooltip(tooltipArgs)}
     </div>
@@ -176,6 +210,11 @@
 
     svg {
       display: block;
+      outline: none;
+    }
+
+    svg:focus-visible {
+      @include viz-focus-ring;
     }
 
     .country {
@@ -195,13 +234,17 @@
       }
     }
 
+    .country.is-active {
+      filter: brightness(1.4);
+    }
+
     .viz-caption {
       @include visually-hidden;
     }
   }
 
   .country-map-tooltip {
-    position: fixed;
+    position: absolute;
     pointer-events: none;
     transform: translate(-50%, calc(-100% - var(--ni-12)));
     z-index: var(--layer-top);
