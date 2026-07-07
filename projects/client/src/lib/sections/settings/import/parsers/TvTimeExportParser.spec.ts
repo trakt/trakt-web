@@ -239,6 +239,55 @@ describe('TvTimeExportParser', () => {
         ids: { tvdb: 1435, imdb: 'tt1396484' },
       });
     });
+
+    it('should tolerate null entries in malformed json', async () => {
+      const shows = [
+        null,
+        {
+          id: { tvdb: 346328 },
+          title: 'Elite',
+          status: 'continuing',
+          seasons: [
+            null,
+            {
+              number: 1,
+              episodes: [
+                null,
+                { id: { tvdb: 6671792 }, number: 1, is_watched: true },
+              ],
+            },
+          ],
+        },
+      ];
+
+      const result = await TvTimeExportParser.parse([
+        new File([JSON.stringify(shows)], 'tvtime-series-2026-07-07.json'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        type: 'episode',
+        ids: { tvdb: 6671792 },
+      });
+    });
+
+    it('should tolerate null entries in the movies json', async () => {
+      const movies = [
+        null,
+        {
+          id: { tvdb: 1435, imdb: 'tt1396484' },
+          title: 'It',
+          is_watched: true,
+        },
+      ];
+
+      const result = await TvTimeExportParser.parse([
+        new File([JSON.stringify(movies)], 'tvtime-movies-2026-07-07.json'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({ type: 'movie', ids: { tvdb: 1435 } });
+    });
   });
 
   describe('mixed csv + json upload', () => {
