@@ -18,6 +18,9 @@ export async function clearRatings(
     const shows = Array.from(ratings.shows.keys()).map((id) => ({
       ids: { trakt: id },
     }));
+    const seasons = Array.from(ratings.seasons.keys()).map((id) => ({
+      ids: { trakt: id },
+    }));
     const episodes = Array.from(ratings.episodes.keys()).map((id) => ({
       ids: { trakt: id },
     }));
@@ -38,6 +41,15 @@ export async function clearRatings(
         chunk(shows, SYNC_CHUNK_SIZE),
         (batch) => batch,
         (batch) => client.sync.ratings.remove({ body: { shows: [...batch] } }),
+      );
+    }
+
+    if (seasons.length > 0) {
+      await run(
+        chunk(seasons, SYNC_CHUNK_SIZE),
+        (batch) => batch,
+        (batch) =>
+          client.sync.ratings.remove({ body: { seasons: [...batch] } }),
       );
     }
 

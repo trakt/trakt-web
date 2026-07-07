@@ -47,6 +47,7 @@ function getRatingsInRange(
   return [
     ...data.movies.values(),
     ...data.shows.values(),
+    ...data.seasons.values(),
     ...data.episodes.values(),
   ].filter((e) => e.ratedAt >= range.start && e.ratedAt < range.end);
 }

@@ -2,6 +2,8 @@ import type { CommentableMediaType } from './CommentableMediaType.ts';
 import type { ExtendedMediaType } from './ExtendedMediaType.ts';
 import type { MediaType } from './MediaType.ts';
 
+export type RatedMediaType = ExtendedMediaType | 'season';
+
 type UserType = 'avatar' | 'settings' | 'follow' | 'cover' | 'block';
 type ListType = 'edited' | 'deleted' | 'created' | 'like';
 type VipType = 'canceled' | 'updated';
@@ -12,7 +14,7 @@ const INVALIDATION_ID = 'invalidate' as const;
 
 export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:auth`
-  | `${typeof INVALIDATION_ID}:rated:${ExtendedMediaType}`
+  | `${typeof INVALIDATION_ID}:rated:${RatedMediaType}`
   | `${typeof INVALIDATION_ID}:mark_as_watched:${ExtendedMediaType}`
   | `${typeof INVALIDATION_ID}:collected:${ExtendedMediaType}`
   | `${typeof INVALIDATION_ID}:watchlisted:${MediaType}`
@@ -41,7 +43,7 @@ export type InvalidateActionOptions =
 
 type TypeDataMap = {
   'auth': null;
-  'rated': ExtendedMediaType;
+  'rated': RatedMediaType;
   'mark_as_watched': ExtendedMediaType;
   'collected': ExtendedMediaType;
   'watchlisted': MediaType;
@@ -90,7 +92,7 @@ function buildInvalidationKey<T extends keyof TypeDataMap>(
 export const InvalidateAction = {
   Auth: buildInvalidationKey('auth'),
 
-  Rated: (type: ExtendedMediaType) => buildInvalidationKey('rated', type),
+  Rated: (type: RatedMediaType) => buildInvalidationKey('rated', type),
 
   MarkAsWatched: (type: ExtendedMediaType) =>
     buildInvalidationKey('mark_as_watched', type),

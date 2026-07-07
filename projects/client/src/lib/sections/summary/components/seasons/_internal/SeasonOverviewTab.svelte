@@ -23,7 +23,7 @@
 <div class="season-overview-tab">
   <div class="season-overview-block">
     <SeasonTabTitle title={m.section_title_seasons_overview()} />
-    <SeasonInfoSection {season} showTitle={show.title} />
+    <SeasonInfoSection {season} {show} />
   </div>
 
   <SeasonCastSection crew={$crew} type="show" isLoading={$isLoading} />

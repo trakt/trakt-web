@@ -163,6 +163,7 @@ function createUseUserInstance() {
           ratings: of<UserRatings>({
             episodes: new Map(),
             movies: new Map(),
+            seasons: new Map(),
             shows: new Map(),
           }),
           reactions: of<UserReactions>(new Map()),

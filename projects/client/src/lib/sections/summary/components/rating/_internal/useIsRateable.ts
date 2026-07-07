@@ -1,9 +1,9 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
+import type { ExtendedMediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { map } from 'rxjs';
 import { useIsWatched } from '../../../../media-actions/mark-as-watched/useIsWatched.ts';
 
-export type IsRateableProps = MediaStoreProps;
+export type IsRateableProps = ExtendedMediaStoreProps;
 
 export function useIsRateable(props: IsRateableProps) {
   const { type } = props;

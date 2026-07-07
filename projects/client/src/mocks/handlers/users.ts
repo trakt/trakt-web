@@ -22,6 +22,7 @@ import { MinimalLikedListsResponseMock } from '../data/users/response/MinimalLik
 import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
 import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesResponseMock.ts';
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
+import { RatedSeasonsResponseMock } from '../data/users/response/RatedSeasonsResponseMock.ts';
 import { RewatchingShowsResponseMock } from '../data/users/response/RewatchingShowsResponseMock.ts';
 import { ShowActivityHistoryResponseMock } from '../data/users/response/ShowActivityHistoryResponseMock.ts';
 import { SocialActivityResponseMock } from '../data/users/response/SocialActivityResponseMock.ts';
@@ -110,6 +111,9 @@ export const users = [
   }),
   http.get('http://localhost/users/me/ratings/shows', () => {
     return HttpResponse.json(RatedShowsResponseMock);
+  }),
+  http.get('http://localhost/users/me/ratings/seasons*', () => {
+    return HttpResponse.json(RatedSeasonsResponseMock);
   }),
   http.get('http://localhost/users/me/ratings/episodes', () => {
     return HttpResponse.json(RatedEpisodesResponseMock);
