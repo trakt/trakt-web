@@ -6,6 +6,7 @@
   import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
+  import { toIMDBRating } from "$lib/utils/formatting/number/toIMDBRating";
   import {
     toRottenAudienceRating,
     toRottenCriticRating,
@@ -20,7 +21,9 @@
   const traktRating = $derived(
     trakt?.rating ? toTraktRating(trakt.rating, "en") : undefined,
   );
-  const imdbRating = $derived(imdb?.rating);
+  const imdbRating = $derived(
+    imdb?.rating ? toIMDBRating(imdb.rating, "en") : undefined,
+  );
   const rottenCriticRating = $derived(
     rotten?.critic ? toTraktRating(rotten.critic, "en") : undefined,
   );

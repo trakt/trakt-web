@@ -5,6 +5,7 @@
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
+  import { toIMDBRating } from "$lib/utils/formatting/number/toIMDBRating";
   import {
     toRottenAudienceRating,
     toRottenCriticRating,
@@ -71,7 +72,11 @@
     {@render traktItem()}
   {/if}
 
-  <RatingItem rating={imdb?.rating} url={imdb?.url} {isLoading}>
+  <RatingItem
+    rating={imdb?.rating && toIMDBRating(imdb.rating, getLocale())}
+    url={imdb?.url}
+    {isLoading}
+  >
     <IMDBIcon style={toVotesBasedRating(imdb?.votes)} />
     {#snippet superscript()}
       {i18n.voteText(imdb?.votes ?? 0)}
