@@ -105,8 +105,6 @@
     "zod": "3.25.76",
     "zod-to-json-schema": "3.25.2",
     "papaparse": "5.5.4",
-    "@carbon/charts": "1.27.16",
-    "@carbon/charts-svelte": "1.27.16",
     "d3": "7.9.0"
   }
 }
