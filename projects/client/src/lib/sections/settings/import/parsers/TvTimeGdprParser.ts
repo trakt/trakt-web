@@ -24,9 +24,9 @@ type TrackingV2Row = {
   created_at?: string;
   s_id?: string;
   series_name?: string;
-  season_number?: string;
-  episode_number?: string;
-  episode_id?: string;
+  s_no?: string;
+  ep_no?: string;
+  ep_id?: string;
   is_followed?: string;
   is_for_later?: string;
   is_archived?: string;
@@ -138,7 +138,9 @@ function parseV1Episode(row: TrackingV1Row): UniversalImportItem | null {
 function parseV2Episode(row: TrackingV2Row): UniversalImportItem | null {
   if (!row.key?.startsWith('watch-episode-')) return null;
 
-  const tvdbId = toInt(row.episode_id);
+  // ep_id is the TVDB episode id (verified against the Trakt search API);
+  // there is no `episode_id` column in the real v2 export.
+  const tvdbId = toInt(row.ep_id);
   if (tvdbId == null) return null;
 
   return {
@@ -146,8 +148,8 @@ function parseV2Episode(row: TrackingV2Row): UniversalImportItem | null {
     type: 'episode',
     ids: { tvdb: tvdbId },
     title: row.series_name || undefined,
-    season: toInt(row.season_number),
-    episode: toInt(row.episode_number),
+    season: toInt(row.s_no),
+    episode: toInt(row.ep_no),
     watched_at: toISOString(row.created_at),
   };
 }
