@@ -85,6 +85,22 @@ function firstOf(...values: (string | undefined)[]): string | undefined {
   return values.find((value) => value != null && value !== '');
 }
 
+type GdprBucket = 'v1' | 'v2' | 'followed' | 'rating' | null;
+
+// Route a parsed GDPR file to its row bucket: ratings by filename (its header
+// is shared with emotions votes), everything else by the first row's marker.
+function classifyGdprFile(
+  { basename, rows }: { basename: string; rows: Record<string, unknown>[] },
+): GdprBucket {
+  const [first] = rows;
+  if (!first) return null;
+  if (basename === RATINGS_CSV) return 'rating';
+  if (isV2Row(first)) return 'v2';
+  if (isV1Row(first)) return 'v1';
+  if (isFollowedShowRow(first)) return 'followed';
+  return null;
+}
+
 // TV Time stores unknown release dates as the Go zero time (0001-01-01).
 function toYear(releaseDate?: string): number | undefined {
   const year = toInt(releaseDate?.slice(0, 4));
@@ -365,23 +381,19 @@ export const TvTimeGdprParser: FileParser = {
       })),
     );
 
-    const v1Rows: TrackingV1Row[] = [];
-    const v2Rows: TrackingV2Row[] = [];
-    const followedRows: FollowedShowRow[] = [];
-    const ratingRows: RatingVoteRow[] = [];
+    // flatMap concatenates the row arrays internally (no argument spread), so
+    // it stays safe on large accounts where `push(...rows)` would overflow the
+    // stack (100k+ watch rows).
+    const rowsOf = (bucket: GdprBucket) =>
+      parsed
+        .filter((file) => classifyGdprFile(file) === bucket)
+        .flatMap((file) => file.rows);
 
-    for (const { basename, rows } of parsed) {
-      const [first] = rows;
-      if (!first) continue;
-      if (basename === RATINGS_CSV) {
-        ratingRows.push(...(rows as RatingVoteRow[]));
-      } else if (isV2Row(first)) v2Rows.push(...(rows as TrackingV2Row[]));
-      else if (isV1Row(first)) v1Rows.push(...(rows as TrackingV1Row[]));
-      else if (isFollowedShowRow(first)) {
-        followedRows.push(...(rows as FollowedShowRow[]));
-      }
-    }
-
-    return parseGdprRows({ v1Rows, v2Rows, followedRows, ratingRows });
+    return parseGdprRows({
+      v1Rows: rowsOf('v1') as TrackingV1Row[],
+      v2Rows: rowsOf('v2') as TrackingV2Row[],
+      followedRows: rowsOf('followed') as FollowedShowRow[],
+      ratingRows: rowsOf('rating') as RatingVoteRow[],
+    });
   },
 };
