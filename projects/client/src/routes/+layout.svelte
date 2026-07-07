@@ -28,6 +28,7 @@
   import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
   import ReportDialogProvider from "$lib/features/report/ReportDialogProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
+  import SpotlightProvider from "$lib/features/spotlight/SpotlightProvider.svelte";
   import SeasonalFlair from "$lib/features/theme/components/SeasonalFlair.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import { initializeSeasonalThemes } from "$lib/features/theme/initializeSeasonalThemes.js";
@@ -178,6 +179,7 @@
                                     <EditModeProvider>
                                       <ThemeProvider theme={data.theme}>
                                         <ListScrollHistoryProvider>
+                                          <SpotlightProvider>
                                           <!--
                                         All navbars are added in the layout to make sure they can
                                         persist during navigation. The state is set on a page level.
@@ -212,6 +214,7 @@
                                             client={data.queryClient}
                                             buttonPosition="bottom-right"
                                           />
+                                          </SpotlightProvider>
                                         </ListScrollHistoryProvider>
                                       </ThemeProvider>
                                     </EditModeProvider>

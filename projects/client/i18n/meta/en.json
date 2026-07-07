@@ -11,6 +11,30 @@
     }
   },
   "messages": {
+    "spotlight_dialog_label": {
+      "default": "Quick navigation",
+      "description": "Accessible label for the spotlight quick-navigation dialog."
+    },
+    "spotlight_input_placeholder": {
+      "default": "Where to?",
+      "description": "Placeholder for the spotlight search input where the user types a page to jump to."
+    },
+    "spotlight_hint_navigate": {
+      "default": "Navigate",
+      "description": "Spotlight keyboard hint label for moving the selection up and down."
+    },
+    "spotlight_hint_select": {
+      "default": "Open",
+      "description": "Spotlight keyboard hint label for opening the highlighted result."
+    },
+    "spotlight_hint_dismiss": {
+      "default": "Close",
+      "description": "Spotlight keyboard hint label for dismissing the dialog."
+    },
+    "spotlight_no_results": {
+      "default": "No pages match \"{query}\"",
+      "description": "Message shown in spotlight when the typed query matches no pages."
+    },
     "link_text_streaming_sync_settings": {
       "default": "Streaming Services",
       "description": "Text for the link to the streaming services settings page."
