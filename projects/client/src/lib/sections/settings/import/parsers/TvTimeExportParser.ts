@@ -9,7 +9,9 @@ import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 // serialization: a per-episode watch log, a movie watch log, a series-status
 // list, and custom lists. Columns/fields carry TVDB ids directly, so no id
 // resolution is needed. When both serializations are uploaded together we
-// prefer the CSV to avoid importing every watch twice.
+// parse every file and de-duplicate, so overlapping watches aren't imported
+// twice and items only one format carries (e.g. a JSON-only watchlist) aren't
+// silently dropped.
 
 type EpisodeRow = {
   series_tvdb_id?: string;
@@ -249,6 +251,40 @@ async function collectEntries(files: ReadonlyArray<File>): Promise<Entry[]> {
   return entries.flat();
 }
 
+// A watch is identified by what it targets, not which file it came from, so
+// the same episode/movie present in both the CSV and JSON exports collapses to
+// one item.
+function itemKey(item: UniversalImportItem): string {
+  return [
+    item.action,
+    item.type,
+    item.ids.tvdb ?? '',
+    item.ids.imdb ?? '',
+    item.season ?? '',
+    item.episode ?? '',
+  ].join('-');
+}
+
+function dedupeItems(
+  items: ReadonlyArray<UniversalImportItem>,
+): UniversalImportItem[] {
+  const seen = new Map<string, UniversalImportItem>();
+  for (const item of items) {
+    const key = itemKey(item);
+    const existing = seen.get(key);
+    if (!existing) {
+      seen.set(key, item);
+      continue;
+    }
+    // The same watch can come from both formats with only one carrying the
+    // timestamp; keep it rather than whichever we happened to see first.
+    if (!existing.watched_at && item.watched_at) {
+      seen.set(key, { ...existing, watched_at: item.watched_at });
+    }
+  }
+  return Array.from(seen.values());
+}
+
 export const TvTimeExportParser: FileParser = {
   name: 'TV Time export',
 
@@ -262,15 +298,8 @@ export const TvTimeExportParser: FileParser = {
   async parse(files) {
     const entries = await collectEntries(files);
 
-    // Both serializations carry the same watches; prefer CSV when present so a
-    // combined CSV+JSON upload doesn't import everything twice.
-    const hasCsv = entries.some((entry) => entry.basename.endsWith('.csv'));
-    const useCsv = hasCsv;
-
     const results = await Promise.all(entries.map(async (entry) => {
-      const isCsv = entry.basename.endsWith('.csv');
-      if (isCsv !== useCsv) return [];
-      if (isCsv) {
+      if (entry.basename.endsWith('.csv')) {
         const rows = await parseCsvText(entry.text) as Record<
           string,
           unknown
@@ -280,6 +309,6 @@ export const TvTimeExportParser: FileParser = {
       return parseJson(entry.basename, entry.text);
     }));
 
-    return results.flat();
+    return dedupeItems(results.flat());
   },
 };
