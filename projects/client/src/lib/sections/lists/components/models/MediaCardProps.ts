@@ -6,8 +6,12 @@ import type { BaseItemProps } from './BaseItemProps.ts';
 
 export type MediaItemVariant<T> =
   | { variant?: Nil } & MediaInput<T>
-  | { variant: 'activity'; date: Date; activityType: ActivityType }
-    & MediaInput<T>
+  | {
+    variant: 'activity';
+    date: Date;
+    activityType: ActivityType;
+    subtitle?: string;
+  } & MediaInput<T>
   | { variant: 'next'; progress: number; minutesLeft: number } & MediaInput<T>
   | { variant: 'start' } & MediaInput<T>
   | { variant: 'progress' } & MediaInput<T>

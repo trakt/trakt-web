@@ -19,6 +19,12 @@ type RatingEpisode = {
   episode: { id: number; title: string };
 };
 
+type RatingSeason = {
+  activityType: 'ratings';
+  type: 'season';
+  show: { id: number; title: string };
+};
+
 type ReviewMovieOrShow = {
   activityType: 'reviews';
   type: 'movie' | 'show';
@@ -36,13 +42,14 @@ type ProfileActivity =
   | RatingMovie
   | RatingShow
   | RatingEpisode
+  | RatingSeason
   | ReviewMovieOrShow
   | ReviewEpisode;
 
 /**
  * Targets for profile activity entries (ratings + reviews).
  * Discriminates on `activityType` first, then `type`:
- * - ratings carry titles in `movie`, `show`, or `episode` fields.
+ * - ratings carry titles in `movie`, `show`, `season`, or `episode` fields.
  * - reviews carry the main entity title in `media` and optionally `episode`.
  */
 export const profileActivityTargets = <T extends ProfileActivity>(entry: T) =>
@@ -85,6 +92,16 @@ export const profileActivityTargets = <T extends ProfileActivity>(entry: T) =>
       patch: (e, title) =>
         e.activityType === 'ratings' && e.type === 'episode'
           ? ({ ...e, episode: { ...e.episode, title } } as T)
+          : e,
+    },
+    {
+      get: (e) =>
+        e.activityType === 'ratings' && e.type === 'season'
+          ? { id: e.show.id, type: 'show' }
+          : null,
+      patch: (e, title) =>
+        e.activityType === 'ratings' && e.type === 'season'
+          ? ({ ...e, show: { ...e.show, title } } as T)
           : e,
     },
     {

@@ -1,7 +1,7 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import type { ListedAllResponse } from '@trakt/api';
 import type { ListItem } from '../models/ListItem.ts';
-import { mapToSeason } from '../queries/shows/showSeasonsQuery.ts';
+import { mapToSeason } from './mapToSeason.ts';
 import { mapToEpisodeEntry } from './mapToEpisodeEntry.ts';
 import { mapToMovieEntry } from './mapToMovieEntry.ts';
 import { mapToShowEntry } from './mapToShowEntry.ts';

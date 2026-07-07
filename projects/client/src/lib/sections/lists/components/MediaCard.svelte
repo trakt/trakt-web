@@ -36,6 +36,10 @@
 
   const defaultVariant = $derived(useDefaultCardVariant(type));
   const variant = $derived(rest.variant ?? $defaultVariant);
+
+  const activitySubtitle = $derived(
+    "subtitle" in rest ? rest.subtitle : undefined,
+  );
 </script>
 
 {#snippet content(mediaCoverImageUrl: string, mediaCoverOverlay?: string)}
@@ -121,7 +125,7 @@
       </Link>
       <p class="trakt-card-subtitle ellipsis">
         {#if variant === "activity"}
-          {toTranslatedType(media.type)}
+          {activitySubtitle ?? toTranslatedType(media.type)}
         {:else}
           {toHumanDuration({ minutes: media.runtime }, languageTag())}
         {/if}

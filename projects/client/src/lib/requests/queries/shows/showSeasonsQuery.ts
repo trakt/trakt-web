@@ -1,13 +1,9 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { mapToSeason } from '$lib/requests/_internal/mapToSeason.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { SeasonsResponse } from '@trakt/api';
 import { z } from 'zod';
-import { MAX_DATE } from '../../../utils/constants.ts';
-import { findDefined } from '../../../utils/string/findDefined.ts';
-import { mapToPoster } from '../../_internal/mapToPoster.ts';
-import { mapToTraktRating } from '../../_internal/mapToTraktRating.ts';
-import { type Season, SeasonSchema } from '../../models/Season.ts';
+import { SeasonSchema } from '../../models/Season.ts';
 
 type ShowSeasonsParams = {
   slug: string;
@@ -26,27 +22,6 @@ const showSeasonsRequest = (
         extended: 'full,images',
       },
     });
-
-export const mapToSeason = (item: SeasonsResponse[0]): Season => {
-  const poster = findDefined(
-    ...(item.images?.poster ?? []),
-  );
-
-  return {
-    id: item.ids.trakt,
-    key: `season-${item.ids.trakt}`,
-    number: item.number,
-    episodes: {
-      count: item.episode_count ?? 0,
-    },
-    poster: poster ? mapToPoster(item.images) : undefined,
-    airDate: new Date(item.first_aired ?? MAX_DATE),
-    overview: item.overview ?? null,
-    rating: mapToTraktRating(item.rating),
-    network: item.network,
-    totalRuntime: item.total_runtime ?? NaN,
-  };
-};
 
 export const showSeasonsQuery = defineQuery({
   key: 'showSeasons',
