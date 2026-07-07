@@ -11,6 +11,7 @@
   import { m } from "$lib/paraglide/messages";
   import type { YirYear } from "$lib/requests/models/YirYear";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
+  import { createArrowNavTriggers } from "$lib/utils/events/createArrowNavTriggers";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
@@ -61,19 +62,6 @@
       : m.yir_share_text({ year: numericYear }),
   );
 
-  // Arrow-key navigation between years. Skip when the user is typing in an
-  // input/textarea/contenteditable so we don't hijack form-field navigation.
-  function isTextInputTarget(target: EventTarget | null): boolean {
-    if (!(target instanceof HTMLElement)) return false;
-    const tag = target.tagName;
-    return (
-      tag === "INPUT" ||
-      tag === "TEXTAREA" ||
-      tag === "SELECT" ||
-      target.isContentEditable
-    );
-  }
-
   const { share } = $derived(useShare({ id: "yir" }));
 
   const shareData = $derived({
@@ -89,27 +77,12 @@
 
 <svelte:window
   use:shortcut={{
-    trigger: [
-      {
-        key: "ArrowLeft",
-        modifier: false,
-        preventDefault: true,
-        callback: ({ originalEvent }) => {
-          if (isTextInputTarget(originalEvent.target)) return;
-          goto(prevYearUrl);
-        },
-      },
-      {
-        key: "ArrowRight",
-        modifier: false,
-        enabled: hasNext,
-        preventDefault: true,
-        callback: ({ originalEvent }) => {
-          if (isTextInputTarget(originalEvent.target)) return;
-          goto(nextYearUrl);
-        },
-      },
-    ],
+    trigger: createArrowNavTriggers({
+      prevUrl: prevYearUrl,
+      nextUrl: nextYearUrl,
+      canGoNext: hasNext,
+      goto,
+    }),
   }}
 />
 
@@ -182,9 +155,13 @@
     gap: var(--gap-m);
 
     padding: var(--ni-20) var(--ni-10);
+    padding-top: calc(var(--ni-20) + env(safe-area-inset-top, 0));
 
     background: transparent;
-    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
+    color: var(
+      --color-yir-header-foreground,
+      var(--color-yir-poster-foreground)
+    );
 
     transition:
       background-color 0.2s,
@@ -229,7 +206,10 @@
     padding: var(--ni-8);
     background: none;
     border: none;
-    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
+    color: var(
+      --color-yir-header-foreground,
+      var(--color-yir-poster-foreground)
+    );
     cursor: pointer;
     text-decoration: none;
     transition: color 0.2s;
@@ -264,7 +244,10 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
-    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
+    color: var(
+      --color-yir-header-foreground,
+      var(--color-yir-poster-foreground)
+    );
     text-decoration: none;
     min-width: 0;
   }
@@ -300,7 +283,10 @@
     padding: var(--ni-8);
     background: none;
     border: none;
-    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
+    color: var(
+      --color-yir-header-foreground,
+      var(--color-yir-poster-foreground)
+    );
     cursor: pointer;
     transition: color 0.2s;
 
@@ -327,6 +313,7 @@
   @include for-mobile {
     .yir-header {
       padding: var(--ni-8) var(--ni-12);
+      padding-top: calc(var(--ni-8) + env(safe-area-inset-top, 0));
       gap: var(--gap-xs);
     }
 
