@@ -1764,7 +1764,7 @@
   "translated_value_video_type_trailer": "Trailer",
   "tv_time_banner_action": "Abrir tvtime.trakt.tv",
   "tv_time_banner_description": "O TV Time será desativado em 15 de julho. Sinta-se em casa com nosso aplicativo complementar familiar, alimentado pela sua conta Trakt.",
-  "tv_time_banner_heading": "Vindo do TV Time?",
+  "tv_time_banner_heading": "Vens do TV Time?",
   "tv_time_faq_dropped_shows_answer": "As séries marcadas como deixadas de ver não são importadas, por isso terás de voltar a marcá-las dessa forma no Trakt após a importação.",
   "tv_time_faq_dropped_shows_question": "As séries que deixei de ver são importadas?",
   "tv_time_faq_missing_ratings_answer": "As classificações encontram-se no ficheiro ratings-live-votes.csv da exportação RGPD, por isso certifica-te de que ele está incluído. As classificações de episódios não são suportadas, pelo que apenas são importadas as classificações de filmes e séries.",
