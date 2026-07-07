@@ -1,0 +1,13 @@
+created_at,user_id,key,total_series_runtime,updated_at,total_movies_runtime,movie_watch_count,ep_watch_count,series_follow_count,uuid,is_archived,is_followed,s_id,is_for_later,most_recent_ep_watched,followed_at,runtime,bulk_type,s_no,ep_no,is_unitary,ep_id,rewatch_count,gsi,is_special,movie_name,series_name,season_number,episode_number
+2021-11-12 17:11:33,0,tracking-stats,13800540,2026-06-04 14:04:56,0,0,4868,200,,,,,,,,,,,,,,,,,,,,
+2024-11-02 11:53:58,0,watch-episode-00c28347-8469-4486-800c-ccd10581ac40-0697b0f5-3cd7-44d8-9919-0e50c941bc70,,2024-11-02 11:53:58,,,,,,,,413526,,,,2520,season,1,5,false,9476788,,,,,Treason,1,5
+2016-08-10 16:48:22,0,watch-episode-018d6f82-50c0-4a0d-89b5-5c7794a141a4-04b432b9-1fa3-4eb3-b0bd-6aecd55fd77c,,2016-08-10 16:48:22,,,,,,,,75707,,,,,,1,4,false,306587,0,,,,The Unit,1,4
+2021-02-04 22:11:37,0,watch-episode-01f07f9b-0ce3-4e48-8cb5-f1143182b2f5-3add888a-6c83-4a22-a019-dd0f91b9dc39,,2021-02-04 22:11:37,,,,,,,,349310,,,,,,1,6,false,6733513,0,,,,Bodyguard (2018),1,6
+2018-12-09 00:22:02,0,watch-episode-02595f9e-8696-4477-8621-87066f5346f5-0ee2a483-2575-4126-bc31-5765c35eb157,,2018-12-09 00:22:02,,,,,,,,304219,,,,,,2,13,true,6668403,0,,,,Marvel's Luke Cage,2,13
+2022-07-20 18:55:51,0,watch-episode-03d70a75-240e-4646-8682-ad27b3c5afa8-0c89b8ab-792c-457e-81b0-35f1f0da9462,,2022-07-20 18:55:51,,,,,,,,366524,,,,3060,season,1,8,false,8974646,,,,,Halo,1,8
+2019-10-10 23:02:35,0,watch-episode-071a4ee3-dbae-42e7-9c2f-69374d4ce177-008eb768-76ca-4827-9611-2eb75f7ee25c,,2019-10-10 23:02:35,,,,,,,,266189,,,,,,6,17,false,7104089,0,,,,The Blacklist,6,17
+2025-06-25 19:32:08,0,watch-episode-09138703-0970-46c1-a294-57636250fcc5-0c5ea156-db5e-4e9d-86be-fc05e16c618c,,2025-06-25 19:32:08,,,,,,,,427281,,,,3060,season,2,1,false,10226502,,,,,FUBAR,2,1
+2024-09-29 10:03:42,0,watch-episode-09eb65a2-b513-4aaa-b306-486492de039e-0ab1cfa9-d66f-4ee9-8dfb-273a42d25068,,2024-09-29 10:03:42,,,,,,,,446385,,,,3180,season,1,1,false,10320026,,,,,Crooks,1,1
+2020-03-22 00:18:25,0,user-series-0e6e73fa-0aa1-4a4d-9af6-685107ea3ae4,,2020-03-22 00:18:29,,,,,00000000-0000-0000-0000-000000000009,false,true,320724,true,,,,,,,,,,,,,Legion,,
+2024-11-02 11:53:56,0,user-series-00c28347-8469-4486-800c-ccd10581ac40,,2024-11-02 11:53:58,,,5,,00000000-0000-0000-0000-000000000010,false,true,413526,false,,,,,,,,,,,,,Treason,,
+2016-08-04 15:10:45,0,user-series-033cd47d-4f12-45e3-81c7-085e502e052a,,2016-12-04 21:28:38,,,,,00000000-0000-0000-0000-000000000011,true,true,259866,false,,,,,,,,,,,,,Ray Donovan,,
