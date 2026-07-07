@@ -236,6 +236,21 @@ describe('TvTimeGdprParser', () => {
       expect(result[0]?.watched_at).toBeDefined();
     });
 
+    it('should handle very large exports without overflowing the stack', async () => {
+      // Large TV Time accounts export 100k+ watch rows; spreading them into
+      // Array.push (`push(...rows)`) overflows the argument limit. Use a count
+      // safely above any engine's limit (~65k-125k).
+      const rows = Array.from(
+        { length: 200_000 },
+        (_, i) => v2EpisodeWatch({ ep_id: String(1_000_000 + i) }),
+      );
+      const csv = toCsv(V2_HEADER, rows);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(200_000);
+    });
+
     it('should skip episode rows without an episode id', async () => {
       const csv = toCsv(V2_HEADER, [v2EpisodeWatch({ ep_id: '' })]);
 
