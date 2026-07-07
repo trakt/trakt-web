@@ -1,21 +1,18 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { m } from "$lib/features/i18n/messages";
-  import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
-  import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
   import {
     SummaryDrawers,
     summaryDrawerNavigation,
   } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import SeasonPopupMenu from "../SeasonPopupMenu.svelte";
+  import SeasonPosterItem from "./SeasonPosterItem.svelte";
 
   type SeasonListProps = {
     show: ShowEntry;
     seasons: Season[];
-    episodes: EpisodeEntry[];
     title: string;
     subtitle: string;
     currentSeason: number;
@@ -24,17 +21,12 @@
   const {
     show,
     seasons,
-    episodes,
     title,
     subtitle,
     currentSeason,
   }: SeasonListProps = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
-
-  const currentSeasonId = $derived(
-    seasons.find((s) => s.number === currentSeason)?.id,
-  );
 </script>
 
 <SectionList
@@ -54,19 +46,11 @@
   --height-override-card="var(--height-portrait-card-sm)"
 >
   {#snippet item(season)}
-    <SeasonItem
-      media={show}
+    <SeasonPosterItem
+      {show}
       {season}
       isCurrentSeason={season.number === currentSeason}
       urlBuilder={() => UrlBuilder.show(show.slug, { season: season.number })}
-    />
-  {/snippet}
-  {#snippet actions()}
-    <SeasonPopupMenu
-      title={subtitle}
-      {episodes}
-      {show}
-      seasonId={currentSeasonId}
     />
   {/snippet}
 </SectionList>

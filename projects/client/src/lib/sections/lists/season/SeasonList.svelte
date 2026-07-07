@@ -48,7 +48,6 @@
     <SeasonPosterList
       {show}
       {seasons}
-      episodes={$episodes}
       {title}
       {subtitle}
       {currentSeason}
