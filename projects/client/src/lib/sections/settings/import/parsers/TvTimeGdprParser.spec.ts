@@ -244,6 +244,72 @@ describe('TvTimeGdprParser', () => {
       expect(result).toHaveLength(0);
     });
 
+    it('should fall back to legacy episode columns when ep_id is absent', async () => {
+      // Some v2 exports carry the episode fields only under the legacy
+      // episode_id/season_number/episode_number names.
+      const legacyHeader = [
+        'ep_watch_count',
+        'updated_at',
+        'key',
+        'user_id',
+        'created_at',
+        's_id',
+        'series_name',
+        'episode_id',
+        'season_number',
+        'episode_number',
+      ];
+      const csv = toCsv(legacyHeader, [{
+        key: 'watch-episode-02531a20-021e25cc',
+        created_at: '2021-10-10 11:49:11',
+        s_id: '82066',
+        series_name: 'Fringe',
+        episode_id: '1331151',
+        season_number: '2',
+        episode_number: '10',
+      }]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { tvdb: 1331151 },
+        season: 2,
+        episode: 10,
+      });
+    });
+
+    it('should prefer ep_id over a blank ep_id shadowing episode_id', async () => {
+      // ep_id column present but empty must not shadow a populated episode_id.
+      const bothHeader = [
+        ...V2_HEADER,
+        'episode_id',
+        'season_number',
+        'episode_number',
+      ];
+      const csv = toCsv(bothHeader, [
+        v2EpisodeWatch({
+          ep_id: '',
+          s_no: '',
+          ep_no: '',
+          episode_id: '1331151',
+          season_number: '2',
+          episode_number: '10',
+        }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        ids: { tvdb: 1331151 },
+        season: 2,
+        episode: 10,
+      });
+    });
+
     it('should watchlist shows marked for later', async () => {
       const csv = toCsv(V2_HEADER, [
         v2UserSeries({ is_for_later: 'true' }),

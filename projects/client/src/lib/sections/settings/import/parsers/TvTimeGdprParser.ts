@@ -27,6 +27,11 @@ type TrackingV2Row = {
   s_no?: string;
   ep_no?: string;
   ep_id?: string;
+  // Some v2 exports duplicate the episode columns under legacy names; kept as
+  // fallbacks so a variant that only populates these still imports.
+  season_number?: string;
+  episode_number?: string;
+  episode_id?: string;
   is_followed?: string;
   is_for_later?: string;
   is_archived?: string;
@@ -72,6 +77,12 @@ function toInt(value?: string): number | undefined {
   if (!value) return undefined;
   const n = parseInt(value, 10);
   return isNaN(n) ? undefined : n;
+}
+
+// First non-empty value — v2 exports vary in which of two column names carry
+// the episode fields, and a present-but-blank column must not shadow the other.
+function firstOf(...values: (string | undefined)[]): string | undefined {
+  return values.find((value) => value != null && value !== '');
 }
 
 // TV Time stores unknown release dates as the Go zero time (0001-01-01).
@@ -138,9 +149,10 @@ function parseV1Episode(row: TrackingV1Row): UniversalImportItem | null {
 function parseV2Episode(row: TrackingV2Row): UniversalImportItem | null {
   if (!row.key?.startsWith('watch-episode-')) return null;
 
-  // ep_id is the TVDB episode id (verified against the Trakt search API);
-  // there is no `episode_id` column in the real v2 export.
-  const tvdbId = toInt(row.ep_id);
+  // ep_id is the TVDB episode id (verified against the Trakt search API).
+  // Fall back to the legacy episode_id column for export variants that only
+  // populate that one.
+  const tvdbId = toInt(firstOf(row.ep_id, row.episode_id));
   if (tvdbId == null) return null;
 
   return {
@@ -148,8 +160,8 @@ function parseV2Episode(row: TrackingV2Row): UniversalImportItem | null {
     type: 'episode',
     ids: { tvdb: tvdbId },
     title: row.series_name || undefined,
-    season: toInt(row.s_no),
-    episode: toInt(row.ep_no),
+    season: toInt(firstOf(row.s_no, row.season_number)),
+    episode: toInt(firstOf(row.ep_no, row.episode_number)),
     watched_at: toISOString(row.created_at),
   };
 }
