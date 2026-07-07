@@ -33,6 +33,8 @@ export function getUserRatingForItem(
       return ratings.shows.get(item.entry.id)?.rating;
     case 'episode':
       return ratings.episodes.get(item.entry.episode.id)?.rating;
+    case 'season':
+      return ratings.seasons.get(item.entry.season.id)?.rating;
     default:
       return undefined;
   }

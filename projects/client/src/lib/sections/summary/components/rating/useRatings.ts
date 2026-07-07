@@ -2,8 +2,10 @@ import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { useLastWatched } from '$lib/features/toast/useLastWatched.ts';
-import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
-import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import {
+  InvalidateAction,
+  type RatedMediaType,
+} from '$lib/requests/models/InvalidateAction.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
 import { removeRatingRequest } from '$lib/requests/sync/removeRatingRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
@@ -21,7 +23,7 @@ import {
 
 const postDelay = time.seconds(0.5);
 
-type RateableType = ExtendedMediaType;
+type RateableType = RatedMediaType;
 
 export type WatchlistStoreProps = {
   type: RateableType;
@@ -65,6 +67,8 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
           return $ratings.movies.get(id);
         case 'show':
           return $ratings.shows.get(id);
+        case 'season':
+          return $ratings.seasons.get(id);
         case 'episode':
           return $ratings.episodes.get(id);
       }
@@ -82,6 +86,8 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
           return $favorites.movies.has(id);
         case 'show':
           return $favorites.shows.has(id);
+        case 'season':
+          return false;
         case 'episode':
           return false;
       }
@@ -122,6 +128,9 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
         case 'show':
           hasRating = currentRatings.shows.has(id);
           break;
+        case 'season':
+          hasRating = currentRatings.seasons.has(id);
+          break;
         case 'episode':
           hasRating = currentRatings.episodes.has(id);
           break;
@@ -135,7 +144,9 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
 
     pendingRating.next(null);
     isSubmitting.next(false);
-    dismiss(id, type, 'rating');
+    if (type !== 'season') {
+      dismiss(id, type, 'rating');
+    }
   });
 
   const addRating = (newRating: number) => {

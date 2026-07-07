@@ -80,7 +80,7 @@
         }}
       />
 
-      {#if props.type !== "episode"}
+      {#if props.type !== "episode" && props.type !== "season"}
         <div
           class="trakt-favorite-action"
           transition:slideFade={{ duration: 300, axis: "x" }}

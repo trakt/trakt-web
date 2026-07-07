@@ -1,7 +1,9 @@
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
+import { ShowSiloSeasonsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSeasonsMappedMock.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { waitForValue } from '$test/readable/waitForValue.ts';
@@ -62,6 +64,23 @@ describe('useRatings', () => {
     expect(value?.rating).toBe(10);
   });
 
+  it('should return the current season rating', async () => {
+    const season = assertDefined(ShowSiloSeasonsMappedMock.at(0));
+
+    const { current } = await renderStore(() =>
+      useRatings({
+        type: 'season',
+        id: season.id,
+      })
+    );
+
+    const value = await waitForValue(current, {
+      rating: 8,
+      isFavorited: false,
+    });
+    expect(value?.rating).toBe(8);
+  });
+
   it('should return undefined if there is no current rating', async () => {
     const { current } = await renderStore(() =>
       useRatings({
@@ -91,5 +110,24 @@ describe('useRatings', () => {
       .toHaveBeenCalledWith(InvalidateAction.Rated('movie'));
     expect(invalidate)
       .not.toHaveBeenNthCalledWith(2, InvalidateAction.Favorited('movie'));
+  });
+
+  it('should call invalidate after rating a season', async () => {
+    const season = assertDefined(ShowSiloSeasonsMappedMock.at(1));
+
+    const { addRating } = await renderStore(() =>
+      useRatings({
+        type: 'season',
+        id: season.id,
+      })
+    );
+
+    vi.useFakeTimers();
+    addRating(6);
+    await vi.advanceTimersByTimeAsync(500);
+    vi.useRealTimers();
+
+    expect(invalidate)
+      .toHaveBeenCalledWith(InvalidateAction.Rated('season'));
   });
 });
