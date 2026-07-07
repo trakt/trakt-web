@@ -48,6 +48,7 @@
       history: true,
       watchlist: true,
       ratings: true,
+      list: true,
     };
   }
 
@@ -88,6 +89,7 @@
     history: state.parsedItems.filter((i) => i.action === "history").length,
     watchlist: state.parsedItems.filter((i) => i.action === "watchlist").length,
     ratings: state.parsedItems.filter((i) => i.action === "ratings").length,
+    list: state.parsedItems.filter((i) => i.action === "list").length,
   });
   const selectedItems = $derived(
     filterImportItemsByActionSelection({
@@ -99,6 +101,7 @@
     history: state.selectedActions.history ? counts.history : 0,
     watchlist: state.selectedActions.watchlist ? counts.watchlist : 0,
     ratings: state.selectedActions.ratings ? counts.ratings : 0,
+    list: state.selectedActions.list ? counts.list : 0,
   });
   const selectedTotalCount = $derived(selectedItems.length);
 

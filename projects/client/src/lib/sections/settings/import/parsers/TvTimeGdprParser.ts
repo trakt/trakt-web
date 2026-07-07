@@ -50,6 +50,12 @@ type RatingVoteRow = {
   vote_key?: string;
 };
 
+type ListRow = {
+  name?: string;
+  is_public?: string;
+  objects?: string;
+};
+
 const TRACKING_V1_MARKER = 'type-uuid-n';
 // Every v2 row is identified by its `key` (watch-episode-*, user-series-*,
 // tracking-stats) — it's the field the parser branches on. The episode
@@ -61,6 +67,10 @@ const FOLLOWED_SHOW_MARKER = 'notification_offset';
 // emotions-live-votes.csv shares this header, so rating votes are routed
 // by file name instead of a column marker.
 const RATINGS_CSV = 'ratings-live-votes.csv';
+
+// Custom lists: one row per list, items embedded in the `objects` column as
+// Go-printed maps. Routed by filename.
+const LISTS_CSV = 'lists-prod-lists.csv';
 
 // TV Time's stars_wording_scalev2 rating set: id -> star position, doubled
 // to Trakt's 1-10 scale. Stable since 2018 and frozen by the July 2026
@@ -85,16 +95,17 @@ function firstOf(...values: (string | undefined)[]): string | undefined {
   return values.find((value) => value != null && value !== '');
 }
 
-type GdprBucket = 'v1' | 'v2' | 'followed' | 'rating' | null;
+type GdprBucket = 'v1' | 'v2' | 'followed' | 'rating' | 'list' | null;
 
-// Route a parsed GDPR file to its row bucket: ratings by filename (its header
-// is shared with emotions votes), everything else by the first row's marker.
+// Route a parsed GDPR file to its row bucket: ratings/lists by filename (their
+// headers are shared/ambiguous), everything else by the first row's marker.
 function classifyGdprFile(
   { basename, rows }: { basename: string; rows: Record<string, unknown>[] },
 ): GdprBucket {
   const [first] = rows;
   if (!first) return null;
   if (basename === RATINGS_CSV) return 'rating';
+  if (basename === LISTS_CSV) return 'list';
   if (isV2Row(first)) return 'v2';
   if (isV1Row(first)) return 'v1';
   if (isFollowedShowRow(first)) return 'followed';
@@ -271,12 +282,40 @@ function parseRatingVotes(
   return [...byUuid.values()];
 }
 
+// The `objects` column is a Go-printed map array:
+// `[map[created_at:.. id:75675 type:series uuid:..] map[.. id:367118 ..]]`.
+// Keys print alphabetically, so `id:<n> type:<t>` are always adjacent.
+const LIST_OBJECT_RE = /id:(\d+)\s+type:(\w+)/g;
+
+function parseListRows(listRows: ListRow[]): UniversalImportItem[] {
+  return listRows.flatMap((row) => {
+    const listName = row.name?.trim();
+    if (!listName || !row.objects) return [];
+
+    const listIsPublic = row.is_public === 'true';
+    return [...row.objects.matchAll(LIST_OBJECT_RE)].flatMap(
+      ([, id, type]): UniversalImportItem[] => {
+        const tvdbId = toInt(id);
+        if (tvdbId == null) return [];
+        return [{
+          action: 'list',
+          type: type === 'movie' ? 'movie' : 'show',
+          ids: { tvdb: tvdbId },
+          listName,
+          listIsPublic,
+        }];
+      },
+    );
+  });
+}
+
 function parseGdprRows(
-  { v1Rows, v2Rows, followedRows, ratingRows }: {
+  { v1Rows, v2Rows, followedRows, ratingRows, listRows }: {
     v1Rows: TrackingV1Row[];
     v2Rows: TrackingV2Row[];
     followedRows: FollowedShowRow[];
     ratingRows: RatingVoteRow[];
+    listRows: ListRow[];
   },
 ): UniversalImportItem[] {
   const episodes = v2Rows.length > 0
@@ -313,6 +352,7 @@ function parseGdprRows(
   );
 
   const ratings = parseRatingVotes(ratingRows, v1Rows);
+  const lists = parseListRows(listRows);
 
   return [
     ...episodes,
@@ -320,6 +360,7 @@ function parseGdprRows(
     ...showWatchlist,
     ...followedWatchlist,
     ...ratings,
+    ...lists,
   ];
 }
 
@@ -340,7 +381,8 @@ function unzipGdprCsvTexts(buffer: ArrayBuffer) {
     (basename.startsWith('tracking-prod-records') &&
       basename.endsWith('.csv')) ||
     basename === 'followed_tv_show.csv' ||
-    basename === RATINGS_CSV;
+    basename === RATINGS_CSV ||
+    basename === LISTS_CSV;
 
   try {
     return unzipCsvTexts({ buffer, isMatch: isGdprCsv });
@@ -394,6 +436,7 @@ export const TvTimeGdprParser: FileParser = {
       v2Rows: rowsOf('v2') as TrackingV2Row[],
       followedRows: rowsOf('followed') as FollowedShowRow[],
       ratingRows: rowsOf('rating') as RatingVoteRow[],
+      listRows: rowsOf('list') as ListRow[],
     });
   },
 };

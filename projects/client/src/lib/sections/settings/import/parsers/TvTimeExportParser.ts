@@ -39,6 +39,13 @@ type SeriesRow = {
   status?: string;
 };
 
+type ListRow = {
+  list_name?: string;
+  item_type?: string;
+  tvdb_id?: string;
+  name?: string;
+};
+
 type JsonId = { tvdb?: number | null; imdb?: string | null };
 type JsonEpisode = {
   id?: JsonId;
@@ -129,10 +136,31 @@ function parseSeriesRow(row: SeriesRow): UniversalImportItem | null {
   };
 }
 
+// Custom lists carry no privacy flag in this export, so they import as private.
+function parseListRow(row: ListRow): UniversalImportItem | null {
+  const listName = row.list_name?.trim();
+  const tvdbId = toInt(row.tvdb_id);
+  if (!listName || tvdbId == null) return null;
+
+  return {
+    action: 'list',
+    type: row.item_type === 'movie' ? 'movie' : 'show',
+    ids: { tvdb: tvdbId },
+    title: row.name || undefined,
+    listName,
+    listIsPublic: false,
+  };
+}
+
 function parseCsvRows(
   basename: string,
   rows: Record<string, unknown>[],
 ): UniversalImportItem[] {
+  if (basename.includes('lists')) {
+    return rows
+      .map((row) => parseListRow(row as ListRow))
+      .filter((item): item is UniversalImportItem => item !== null);
+  }
   // series-episodes must be checked before series (both start "tvtime-series").
   if (
     basename.includes('series-episodes') || 'series_tvdb_id' in (rows[0] ?? {})
@@ -151,7 +179,6 @@ function parseCsvRows(
       .map((row) => parseSeriesRow(row as SeriesRow))
       .filter((item): item is UniversalImportItem => item !== null);
   }
-  // tvtime-lists (custom lists) has no home in the import model — ignored.
   return [];
 }
 

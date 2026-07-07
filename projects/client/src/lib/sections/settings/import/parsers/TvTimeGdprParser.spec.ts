@@ -727,6 +727,51 @@ describe('TvTimeGdprParser', () => {
     });
   });
 
+  describe('custom lists file', () => {
+    const LISTS_HEADER = ['name', 'is_public', 'objects'];
+
+    it('should import list items from the go-map objects column', async () => {
+      const objects =
+        '[map[created_at:1.7e+09 id:253463 type:series uuid:abc] ' +
+        'map[created_at:1.7e+09 id:1435 type:movie uuid:def]]';
+      const csv = toCsv(LISTS_HEADER, [
+        { name: 'Favs', is_public: 'true', objects },
+      ]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(csv, 'lists-prod-lists.csv'),
+      ]);
+
+      expect(result).toHaveLength(2);
+      expect(result[0]).toMatchObject({
+        action: 'list',
+        type: 'show',
+        ids: { tvdb: 253463 },
+        listName: 'Favs',
+        listIsPublic: true,
+      });
+      expect(result[1]).toMatchObject({ type: 'movie', ids: { tvdb: 1435 } });
+    });
+
+    it('should map is_public false to a private list and skip unnamed lists', async () => {
+      const objects = '[map[created_at:1.7e+09 id:253463 type:series]]';
+      const csv = toCsv(LISTS_HEADER, [
+        { name: 'Private', is_public: 'false', objects },
+        { name: '', is_public: 'true', objects },
+      ]);
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(csv, 'lists-prod-lists.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        listName: 'Private',
+        listIsPublic: false,
+      });
+    });
+  });
+
   describe('zip archives', () => {
     it('should parse tracking files from a gdpr zip', async () => {
       const encoder = new TextEncoder();

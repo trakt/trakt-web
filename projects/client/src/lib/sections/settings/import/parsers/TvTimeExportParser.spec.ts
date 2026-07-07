@@ -147,10 +147,33 @@ describe('TvTimeExportParser', () => {
       });
     });
 
-    it('should ignore custom list files', async () => {
+    it('should import custom list items as list entries', async () => {
       const csv =
         'list_id,list_name,item_type,tvdb_id,uuid,name,custom_order\n' +
-        '1,Favs,series,346328,uuid,Elite,0';
+        '1,Favs,series,346328,uuid,Elite,0\n' +
+        '1,Favs,movie,1435,uuid,It,1';
+
+      const result = await TvTimeExportParser.parse([
+        csvFile(csv, 'tvtime-lists-2026-07-05.csv'),
+      ]);
+
+      expect(result).toHaveLength(2);
+      expect(result[0]).toMatchObject({
+        action: 'list',
+        type: 'show',
+        ids: { tvdb: 346328 },
+        title: 'Elite',
+        listName: 'Favs',
+        listIsPublic: false,
+      });
+      expect(result[1]).toMatchObject({ action: 'list', type: 'movie' });
+    });
+
+    it('should skip list rows without a list name or tvdb id', async () => {
+      const csv =
+        'list_id,list_name,item_type,tvdb_id,uuid,name,custom_order\n' +
+        '1,,series,346328,uuid,Elite,0\n' +
+        '1,Favs,series,,uuid,NoId,1';
 
       const result = await TvTimeExportParser.parse([
         csvFile(csv, 'tvtime-lists-2026-07-05.csv'),

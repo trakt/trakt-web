@@ -16,6 +16,8 @@ Consumed by `../../TvTimeRealExports.spec.ts`.
 | `gdpr-v2-tracking-prod-records-v2.csv`                                   | GDPR v2 tracking (episodes via `ep_id`, watchlist via `user-series-*`) | `TvTimeGdprParser`   |
 | `tvtime-series-episodes.csv` / `tvtime-movies.csv` / `tvtime-series.csv` | current "export my data" CSV                                           | `TvTimeExportParser` |
 | `tvtime-series.json` / `tvtime-movies.json`                              | current "export my data" JSON                                          | `TvTimeExportParser` |
+| `tvtime-lists.csv`                                                       | current export custom lists                                            | `TvTimeExportParser` |
+| `gdpr-lists-prod-lists.csv`                                              | GDPR custom lists (Go-map `objects` column)                            | `TvTimeGdprParser`   |
 
 ## Anonymization
 

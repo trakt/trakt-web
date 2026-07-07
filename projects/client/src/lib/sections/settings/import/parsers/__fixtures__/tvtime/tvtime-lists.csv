@@ -1,0 +1,11 @@
+list_id,list_name,item_type,tvdb_id,uuid,name,custom_order
+a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,253463,,Black Mirror,0
+a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,318366,,Brave Heart,1
+a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,334824,,Dark,2
+a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,121361,,Game of Thrones,3
+a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,360295,,His Dark Materials,4
+a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,270408,,Outlander,5
+a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,270915,,Peaky Blinders,6
+a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,265766,,Penny Dreadful,7
+a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,343391,,,8
+a8393dd9-e654-4890-ab8c-734d2c7ce337,LIKE,series,176941,,Sherlock,9
