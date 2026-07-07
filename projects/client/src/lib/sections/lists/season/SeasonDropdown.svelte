@@ -2,15 +2,8 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import type { Season } from "$lib/requests/models/Season";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-
-  type SeasonDropdownProps = {
-    showSlug: string;
-    seasons: Season[];
-    currentSeason: number;
-    urlBuilder?: (seasonNumber: number) => string;
-  };
+  import type { SeasonDropdownProps } from "./SeasonDropdownProps.ts";
 
   const { showSlug, seasons, currentSeason, urlBuilder }: SeasonDropdownProps =
     $props();

@@ -10,7 +10,7 @@
     summaryDrawerNavigation,
   } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import SeasonPopupMenu from "./SeasonPopupMenu.svelte";
+  import SeasonPopupMenu from "../SeasonPopupMenu.svelte";
 
   type SeasonListProps = {
     show: ShowEntry;

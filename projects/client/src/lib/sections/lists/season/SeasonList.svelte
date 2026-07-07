@@ -7,7 +7,7 @@
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
-  import SeasonDropdown from "./_internal/SeasonDropdown.svelte";
+  import SeasonDropdown from "./SeasonDropdown.svelte";
   import SeasonEpisodeList from "./_internal/SeasonEpisodeList.svelte";
   import SeasonPosterList from "./_internal/SeasonPosterList.svelte";
 
