@@ -6,11 +6,12 @@
   import { map } from "rxjs";
 
   import { useShare } from "$lib/components/buttons/share/useShare";
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { languageTag } from "$lib/features/i18n";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { useQuery } from "$lib/features/query/useQuery";
   import { m } from "$lib/paraglide/messages";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
+  import { createArrowNavTriggers } from "$lib/utils/events/createArrowNavTriggers";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
@@ -65,17 +66,6 @@
     UrlBuilder.users(slug).monthInReview(next.year, next.month),
   );
 
-  function isTextInputTarget(target: EventTarget | null): boolean {
-    if (!(target instanceof HTMLElement)) return false;
-    const tag = target.tagName;
-    return (
-      tag === "INPUT" ||
-      tag === "TEXTAREA" ||
-      tag === "SELECT" ||
-      target.isContentEditable
-    );
-  }
-
   const { share } = $derived(useShare({ id: "mir" }));
 
   const shareData = $derived({
@@ -91,29 +81,7 @@
 
 <svelte:window
   use:shortcut={{
-    trigger: [
-      {
-        key: "ArrowLeft",
-        modifier: false,
-        // preventDefault is handled inside the callback so we don't hijack
-        // cursor navigation while the user is typing in a text input.
-        callback: ({ originalEvent }) => {
-          if (isTextInputTarget(originalEvent.target)) return;
-          originalEvent.preventDefault();
-          goto(prevUrl);
-        },
-      },
-      {
-        key: "ArrowRight",
-        modifier: false,
-        enabled: canGoNext,
-        callback: ({ originalEvent }) => {
-          if (isTextInputTarget(originalEvent.target)) return;
-          originalEvent.preventDefault();
-          goto(nextUrl);
-        },
-      },
-    ],
+    trigger: createArrowNavTriggers({ prevUrl, nextUrl, canGoNext, goto }),
   }}
 />
 
@@ -162,9 +130,11 @@
     <button
       class="mir-header-share"
       onclick={() => share(shareData)}
-      aria-label={m.button_label_share({ title: m.mir_share_text({
-        month: shareLabel,
-      }) })}
+      aria-label={m.button_label_share({
+        title: m.mir_share_text({
+          month: shareLabel,
+        }),
+      })}
     >
       <ShareIcon />
     </button>
@@ -186,9 +156,13 @@
     gap: var(--gap-m);
 
     padding: var(--ni-20) var(--ni-10);
+    padding-top: calc(var(--ni-20) + env(safe-area-inset-top, 0));
 
     background: transparent;
-    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
+    color: var(
+      --color-yir-header-foreground,
+      var(--color-yir-poster-foreground)
+    );
 
     transition:
       background-color 0.2s,
@@ -231,7 +205,10 @@
     padding: var(--ni-8);
     background: none;
     border: none;
-    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
+    color: var(
+      --color-yir-header-foreground,
+      var(--color-yir-poster-foreground)
+    );
     cursor: pointer;
     text-decoration: none;
     transition: color 0.2s;
@@ -266,7 +243,10 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
-    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
+    color: var(
+      --color-yir-header-foreground,
+      var(--color-yir-poster-foreground)
+    );
     text-decoration: none;
     min-width: 0;
   }
@@ -302,7 +282,10 @@
     padding: var(--ni-8);
     background: none;
     border: none;
-    color: var(--color-yir-header-foreground, var(--color-yir-poster-foreground));
+    color: var(
+      --color-yir-header-foreground,
+      var(--color-yir-poster-foreground)
+    );
     cursor: pointer;
     transition: color 0.2s;
 
@@ -329,6 +312,7 @@
   @include for-mobile {
     .trakt-mir-header {
       padding: var(--ni-8) var(--ni-12);
+      padding-top: calc(var(--ni-8) + env(safe-area-inset-top, 0));
       gap: var(--gap-xs);
     }
 
