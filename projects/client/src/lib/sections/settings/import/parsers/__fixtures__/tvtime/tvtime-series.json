@@ -1,0 +1,86 @@
+[
+  {
+    "id": {
+      "tvdb": 455514,
+      "imdb": null
+    },
+    "title": "Hello, Nice to Meet You. Could You Please Divorce Me?",
+    "status": "continuing",
+    "seasons": [
+      {
+        "number": 1,
+        "episodes": [
+          {
+            "id": {
+              "tvdb": 10745456,
+              "imdb": null
+            },
+            "number": 1,
+            "is_watched": true,
+            "watched_at": "2025-05-13T00:37:58Z"
+          },
+          {
+            "id": {
+              "tvdb": 10805331,
+              "imdb": null
+            },
+            "number": 2,
+            "is_watched": true,
+            "watched_at": "2025-05-13T00:38:17Z"
+          },
+          {
+            "id": {
+              "tvdb": 10818837,
+              "imdb": null
+            },
+            "number": 3,
+            "is_watched": false,
+            "watched_at": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": {
+      "tvdb": 445878,
+      "imdb": null
+    },
+    "title": "Blue Moment",
+    "status": "up_to_date",
+    "seasons": [
+      {
+        "number": 0,
+        "episodes": [
+          {
+            "id": {
+              "tvdb": 10710219,
+              "imdb": null
+            },
+            "number": 1,
+            "is_watched": false,
+            "watched_at": null
+          },
+          {
+            "id": {
+              "tvdb": 10710220,
+              "imdb": null
+            },
+            "number": 2,
+            "is_watched": false,
+            "watched_at": null
+          },
+          {
+            "id": {
+              "tvdb": 10710221,
+              "imdb": null
+            },
+            "number": 3,
+            "is_watched": false,
+            "watched_at": null
+          }
+        ]
+      }
+    ]
+  }
+]

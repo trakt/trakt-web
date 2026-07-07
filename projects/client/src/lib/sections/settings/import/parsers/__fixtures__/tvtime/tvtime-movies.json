@@ -1,0 +1,32 @@
+[
+  {
+    "id": {
+      "tvdb": 135073,
+      "imdb": "tt10545296"
+    },
+    "title": "The Hunger Games: The Ballad of Songbirds & Snakes",
+    "year": 2023,
+    "is_watched": true,
+    "watched_at": "2026-06-03T13:02:31Z"
+  },
+  {
+    "id": {
+      "tvdb": 341914,
+      "imdb": "tt27554389"
+    },
+    "title": "Don’t Call it Mystery",
+    "year": 2023,
+    "is_watched": true,
+    "watched_at": "2025-02-11T17:34:58Z"
+  },
+  {
+    "id": {
+      "tvdb": 372439,
+      "imdb": "tt36642456"
+    },
+    "title": "Haq",
+    "year": 2025,
+    "is_watched": true,
+    "watched_at": "2026-01-17T12:16:08Z"
+  }
+]
