@@ -158,11 +158,13 @@ function parseCsvRows(
 // The JSON series export nests every watch inside show -> seasons -> episodes.
 function parseJsonShows(shows: JsonShow[]): UniversalImportItem[] {
   return shows.flatMap((show) => {
-    const episodes = (show.seasons ?? []).flatMap((season) =>
-      (season.episodes ?? [])
-        .filter((episode) => episode.is_watched === true)
+    if (!show) return [];
+    const episodes = (show.seasons ?? []).flatMap((season) => {
+      if (!season) return [];
+      return (season.episodes ?? [])
+        .filter((episode) => episode?.is_watched === true)
         .flatMap((episode): UniversalImportItem[] => {
-          const tvdbId = toTvdb(episode.id?.tvdb);
+          const tvdbId = toTvdb(episode?.id?.tvdb);
           if (tvdbId == null) return [];
           return [{
             action: 'history',
@@ -173,8 +175,8 @@ function parseJsonShows(shows: JsonShow[]): UniversalImportItem[] {
             episode: episode.number,
             watched_at: toISOString(episode.watched_at),
           }];
-        })
-    );
+        });
+    });
 
     if (show.status !== WATCHLIST_SERIES_STATUS) return episodes;
 
@@ -193,7 +195,7 @@ function parseJsonShows(shows: JsonShow[]): UniversalImportItem[] {
 
 function parseJsonMovies(movies: JsonMovie[]): UniversalImportItem[] {
   return movies
-    .filter((movie) => movie.is_watched === true)
+    .filter((movie) => movie?.is_watched === true)
     .flatMap((movie): UniversalImportItem[] => {
       const tvdbId = toTvdb(movie.id?.tvdb);
       const imdbId = toImdb(movie.id?.imdb);
