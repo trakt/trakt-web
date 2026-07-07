@@ -27,6 +27,7 @@
   <Link
     {href}
     {target}
+    color="inherit"
     onclick={() => track({ source, target: href ?? "banner-link" })}
   >
     <ExternalLinkIcon size="small" />
@@ -51,6 +52,7 @@
       border-radius: var(--border-radius-l);
       padding: var(--ni-8) var(--ni-12);
 
+      color: var(--shade-10);
       text-decoration: none;
 
       transition: padding var(--transition-increment) ease-in-out;

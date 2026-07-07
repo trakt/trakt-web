@@ -274,6 +274,7 @@ export const UrlBuilder = {
   app: {
     android: () => 'https://trakt.tv/a/trakt-android',
     ios: () => 'https://trakt.tv/a/trakt-ios',
+    tvTime: () => 'https://tvtime.trakt.tv',
   },
   docs: {
     api: () => 'https://docs.trakt.tv',
