@@ -91,7 +91,7 @@ describe('LetterboxdParser', () => {
       setupZip({
         'diary.csv': [],
         'watched.csv': [
-          { Name: 'The Matrix', Year: '1999' },
+          { Date: '2023-06-22', Name: 'The Matrix', Year: '1999' },
         ],
       });
 
@@ -103,6 +103,7 @@ describe('LetterboxdParser', () => {
         type: 'movie',
         title: 'The Matrix',
         year: 1999,
+        watched_at: '2023-06-22T00:00:00.000Z',
       });
     });
 

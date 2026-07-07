@@ -84,6 +84,7 @@ function parseWatchedRow(
     ids: {},
     title: row.Name,
     year: row.Year ? parseInt(row.Year, 10) : undefined,
+    watched_at: toISOString(row.Date),
   };
 }
 
