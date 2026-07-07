@@ -9,12 +9,9 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
-  import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
-  import SeasonDropdown from "$lib/sections/lists/season/_internal/SeasonDropdown.svelte";
-  import SeasonPopupMenu from "$lib/sections/lists/season/_internal/SeasonPopupMenu.svelte";
-  import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
-  import { seasonLabel } from "$lib/utils/intl/seasonLabel";
+  import SeasonDropdown from "$lib/sections/lists/season/SeasonDropdown.svelte";
   import { fade } from "svelte/transition";
+  import SeasonDrawerItem from "./_internal/SeasonDrawerItem.svelte";
   import SeasonEpisodesTab from "./_internal/SeasonEpisodesTab.svelte";
   import SeasonOverviewTab from "./_internal/SeasonOverviewTab.svelte";
   import SeasonReviewsTab from "./_internal/SeasonReviewsTab.svelte";
@@ -33,10 +30,6 @@
 
   let isOpen = $state(false);
   let activeTab = $state("episodes");
-
-  const { list: episodes, isLoading } = $derived(
-    useSeasonEpisodes(show.slug, currentSeason),
-  );
 
   const currentSeasonId = $derived(
     seasons.find((s) => s.number === currentSeason)?.id,
@@ -59,14 +52,6 @@
     {seasons}
     {currentSeason}
     urlBuilder={buildSeasonLink}
-  />
-
-  <SeasonPopupMenu
-    title={seasonLabel(currentSeason)}
-    episodes={$episodes}
-    {show}
-    seasonId={currentSeasonId}
-    disabled={$isLoading}
   />
 {/snippet}
 
@@ -123,8 +108,8 @@
             variant="inline"
           >
             {#snippet item(season)}
-              <SeasonItem
-                media={show}
+              <SeasonDrawerItem
+                {show}
                 {season}
                 isCurrentSeason={season.number === currentSeason}
                 urlBuilder={() => buildSeasonLink(season.number)}
