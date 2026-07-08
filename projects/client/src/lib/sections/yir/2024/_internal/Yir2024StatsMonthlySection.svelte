@@ -5,6 +5,7 @@
   import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
+  import { formatDecimal } from "$lib/utils/format/formatDecimal";
   import { formatNumber } from "$lib/utils/format/formatNumber";
   import { toHumanClockHour } from "$lib/utils/formatting/date/toHumanClockHour";
   import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime";
@@ -29,7 +30,6 @@
     year: number;
   } = $props();
 
-  const formatDecimal = (value: number) => value.toFixed(1);
 
   const itemsCount = $derived(stats.itemsCount ?? 0);
   const hoursTotal = $derived(Math.round(stats.minutes.total / 60));

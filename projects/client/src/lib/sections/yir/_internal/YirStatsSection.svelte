@@ -5,6 +5,7 @@
     YirStatsCategory,
     YirYearCount,
   } from "$lib/requests/models/YirDetail";
+  import { formatDecimal } from "$lib/utils/format/formatDecimal";
   import { formatNumber } from "$lib/utils/format/formatNumber";
   import { yirUnit } from "./yirUnit.ts";
   import YirDailyPlaysChart from "./YirDailyPlaysChart.svelte";
@@ -46,10 +47,6 @@
   const specificType = $derived(
     type === "shows" ? m.yir_unit_episode() : m.yir_unit_movie(),
   );
-
-  function formatDecimal(value: number): string {
-    return value.toFixed(1);
-  }
 
   const hoursTotal = $derived(Math.round(stats.minutes.total / 60));
   const hoursMonthly = $derived(stats.minutes.monthly / 60);
