@@ -18,6 +18,13 @@
   );
 
   const activities = $derived(mapToSocialActivityEntries(entry));
+
+  const ratingActivity = $derived(
+    activities.find((activity) => activity.type === "rating"),
+  );
+  const otherActivities = $derived(
+    activities.filter((activity) => activity.type !== "rating"),
+  );
 </script>
 
 <li class="trakt-social-activity-row">
@@ -34,9 +41,15 @@
       </Link>
 
       <div class="trakt-social-activity-pills">
-        {#each activities as activity (activity.key)}
+        {#each otherActivities as activity (activity.key)}
           <SocialActivityTag {activity} />
         {/each}
+
+        {#if ratingActivity}
+          <span class="trakt-social-activity-rating">
+            <SocialActivityTag activity={ratingActivity} />
+          </span>
+        {/if}
       </div>
     </div>
   </div>
@@ -61,6 +74,12 @@
     align-items: center;
     gap: var(--gap-s);
     min-width: 0;
+  }
+
+  .trakt-social-activity-rating {
+    display: inline-flex;
+    margin-inline-start: auto;
+    flex: 0 0 auto;
   }
 
   .trakt-social-activity-user-copy {
