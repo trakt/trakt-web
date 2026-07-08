@@ -165,7 +165,8 @@
     <YirCalendarSection how="last" item={detail.lastWatched} year="all" />
   {/if}
 
-  <YirUpgradeSection />
 {:else if isLoading}
   <YirTotalsSection stats={null} year="all" />
 {/if}
+
+<YirUpgradeSection {slug} />

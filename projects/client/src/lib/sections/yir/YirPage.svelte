@@ -1,13 +1,26 @@
 <script lang="ts">
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import type { YirYear } from "$lib/requests/models/YirYear";
-  import YirAllTime from "./all-time/YirAllTime.svelte";
+  import { of } from "rxjs";
   import YirHeader from "./_internal/YirHeader.svelte";
   import { useYirDetail } from "./_internal/useYirDetail";
+  import YirAllTime from "./all-time/YirAllTime.svelte";
   import { getYirTemplate } from "./getYirTemplate";
 
   const { slug, year }: { slug: string; year: YirYear } = $props();
 
-  const { detail, isLoading } = $derived(useYirDetail({ slug, year }));
+  const { user } = useUser();
+  const { isMe } = $derived(useIsMe(slug));
+
+  // The only case that reliably fails is your own page while non-VIP,
+  // so skip the query there and show the identity + upsell.
+  // Other profiles may be viewable, so let the query decide.
+  const { detail, isLoading } = $derived(
+    !$isMe || $user?.isVip
+      ? useYirDetail({ slug, year })
+      : { detail: of(null), isLoading: of(false) },
+  );
 </script>
 
 <div
@@ -23,12 +36,7 @@
     <YirAllTime detail={$detail ?? null} isLoading={$isLoading} {slug} />
   {:else}
     {@const Template = getYirTemplate(year)}
-    <Template
-      detail={$detail ?? null}
-      isLoading={$isLoading}
-      {slug}
-      {year}
-    />
+    <Template detail={$detail ?? null} isLoading={$isLoading} {slug} {year} />
   {/if}
 </div>
 
@@ -38,6 +46,8 @@
   .trakt-yir-page {
     display: flex;
     flex-direction: column;
+
+    min-height: 100dvh;
     background-color: var(--color-yir-background);
     color: var(--color-yir-text-primary);
     overflow-x: hidden;

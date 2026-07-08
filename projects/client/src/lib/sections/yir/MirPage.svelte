@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
+  import { useUser } from "$lib/features/auth/stores/useUser";
+  import { of } from "rxjs";
   import Yir2024 from "./2024/Yir2024.svelte";
   import MirHeader from "./_internal/MirHeader.svelte";
   import { useMirDetail } from "./_internal/useMirDetail";
@@ -14,7 +17,17 @@
     month: number;
   } = $props();
 
-  const { detail, isLoading } = $derived(useMirDetail({ slug, year, month }));
+  const { user } = useUser();
+  const { isMe } = $derived(useIsMe(slug));
+
+  // The only case that reliably fails is your own page while non-VIP,
+  // so skip the query there and show the identity + upsell.
+  // Other profiles may be viewable, so let the query decide.
+  const { detail, isLoading } = $derived(
+    !$isMe || $user?.isVip
+      ? useMirDetail({ slug, year, month })
+      : { detail: of(null), isLoading: of(false) },
+  );
 </script>
 
 <div class="trakt-mir-page" id="month-in-review">
@@ -38,6 +51,8 @@
   .trakt-mir-page {
     display: flex;
     flex-direction: column;
+
+    min-height: 100dvh;
     background-color: var(--color-yir-background);
     color: var(--color-yir-text-primary);
     overflow-x: hidden;
