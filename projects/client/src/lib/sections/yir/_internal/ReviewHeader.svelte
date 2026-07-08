@@ -6,17 +6,16 @@
   import { map } from "rxjs";
 
   import { useShare } from "$lib/components/buttons/share/useShare";
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { useQuery } from "$lib/features/query/useQuery";
   import { m } from "$lib/paraglide/messages";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
   import { createArrowNavTriggers } from "$lib/utils/events/createArrowNavTriggers";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
-  import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
+  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
 
   const {
@@ -66,52 +65,54 @@
   }}
 />
 
-<header class="trakt-period-header" use:trackWindowScroll={"scrolled"}>
-  <nav class="period-header-section period-header-center">
+<header class="trakt-review-header" use:trackWindowScroll={"scrolled"}>
+  <nav class="review-header-section review-header-center">
     <a
       href={prevUrl}
-      class="period-header-nav-btn"
+      class="review-header-nav-btn"
       aria-label={m.yir_button_previous()}
     >
       <CaretLeftIcon />
     </a>
-    <span class="period-header-label">
+    <span class="review-header-label">
       <strong>{title}</strong>
       {#if subtitle}
-        <span class="period-header-subtitle">{subtitle}</span>
+        <span class="review-header-subtitle">{subtitle}</span>
       {/if}
     </span>
     {#if canGoNext}
       <a
         href={nextUrl}
-        class="period-header-nav-btn"
+        class="review-header-nav-btn"
         aria-label={m.yir_button_next()}
       >
         <CaretRightIcon />
       </a>
     {:else}
-      <span class="period-header-nav-btn disabled" aria-hidden="true">
+      <span class="review-header-nav-btn disabled" aria-hidden="true">
         <CaretRightIcon />
       </span>
     {/if}
   </nav>
 
-  {#if $profile && ($profile.isVip || $profile.isDirector)}
-    <div class="period-header-vip">
-      <VipBadge isDirector={$profile.isDirector} />
-    </div>
-  {/if}
   {#if $profile}
-    <a href={UrlBuilder.profile.user(slug)} class="period-header-user">
-      <div class="period-header-avatar">
-        <CrossOriginImage src={$profile.avatar.url} alt="" />
-      </div>
-      <span class="period-header-username">{$profile.username}</span>
-    </a>
+    <div class="review-header-user">
+      <UserAvatar
+        user={{
+          ...$profile,
+          slug: $profile.slug ?? slug,
+          isVip: $profile.isVip || $profile.isDirector,
+        }}
+        size="small"
+      />
+      <a href={UrlBuilder.profile.user(slug)} class="review-header-username">
+        {$profile.username}
+      </a>
+    </div>
   {/if}
   {#if canShare}
     <button
-      class="period-header-share"
+      class="review-header-share"
       onclick={() => share(shareData)}
       aria-label={m.button_label_share({ title: shareText })}
     >
@@ -123,7 +124,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-period-header {
+  .trakt-review-header {
     position: fixed;
     top: 0;
     inset-inline: 0;
@@ -157,29 +158,29 @@
 
       color: var(--color-text-primary);
 
-      :global(.period-header-nav-btn),
-      :global(.period-header-user),
-      :global(.period-header-share) {
+      :global(.review-header-nav-btn),
+      :global(.review-header-user),
+      :global(.review-header-share) {
         color: var(--color-text-primary);
       }
     }
   }
 
-  .period-header-section {
+  .review-header-section {
     display: flex;
     align-items: center;
     gap: var(--gap-s);
     min-width: 0;
   }
 
-  .period-header-center {
+  .review-header-center {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     gap: var(--gap-s);
   }
 
-  .period-header-nav-btn {
+  .review-header-nav-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -209,7 +210,7 @@
     }
   }
 
-  .period-header-label {
+  .review-header-label {
     font-size: var(--font-size-text);
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -220,7 +221,7 @@
     }
   }
 
-  .period-header-user {
+  .review-header-user {
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
@@ -232,22 +233,9 @@
     min-width: 0;
   }
 
-  .period-header-avatar {
-    width: var(--ni-28);
-    height: var(--ni-28);
-    border-radius: 50%;
-    overflow: hidden;
-    background: var(--color-yir-surface-chip);
-    flex-shrink: 0;
-
-    :global(img) {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .period-header-username {
+  .review-header-username {
+    color: inherit;
+    text-decoration: none;
     font-size: var(--font-size-text);
     font-weight: 600;
     text-transform: uppercase;
@@ -256,7 +244,7 @@
     text-overflow: ellipsis;
   }
 
-  .period-header-share {
+  .review-header-share {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -281,27 +269,23 @@
   }
 
   @include for-tablet-sm-and-below {
-    .period-header-subtitle {
+    .review-header-subtitle {
       display: none;
     }
 
-    .period-header-username {
+    .review-header-username {
       display: none;
     }
   }
 
   @include for-mobile {
-    .trakt-period-header {
+    .trakt-review-header {
       padding: var(--ni-8) var(--ni-12);
       padding-top: calc(var(--ni-8) + env(safe-area-inset-top, 0));
       gap: var(--gap-xs);
     }
 
-    .period-header-vip {
-      display: none;
-    }
-
-    .period-header-user {
+    .review-header-user {
       margin-inline-end: auto;
     }
   }
