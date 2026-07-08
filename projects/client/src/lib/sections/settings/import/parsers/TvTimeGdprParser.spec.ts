@@ -251,8 +251,26 @@ describe('TvTimeGdprParser', () => {
       expect(result).toHaveLength(200_000);
     });
 
-    it('should skip episode rows without an episode id', async () => {
+    it('should resolve an episode with no episode id positionally', async () => {
+      // The show id + season/episode number recover the watch when the
+      // episode's own TVDB id is absent (many Trakt episodes have none).
       const csv = toCsv(V2_HEADER, [v2EpisodeWatch({ ep_id: '' })]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: {},
+        showTvdb: 82066,
+        season: 2,
+        episode: 10,
+      });
+    });
+
+    it('should skip episode rows with neither an episode id nor a show id', async () => {
+      const csv = toCsv(V2_HEADER, [v2EpisodeWatch({ ep_id: '', s_id: '' })]);
 
       const result = await TvTimeGdprParser.parse([csvFile(csv)]);
 

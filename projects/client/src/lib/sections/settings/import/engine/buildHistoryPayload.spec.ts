@@ -80,7 +80,153 @@ describe('buildHistoryPayload', () => {
   });
 
   describe('episodes', () => {
-    it('should add an episode by resolved episode ids', () => {
+    it('should resolve an episode positionally via show + season + number', () => {
+      const item: UniversalImportItem = {
+        action: 'history',
+        type: 'episode',
+        ids: {},
+        showTvdb: 9001,
+        season: 2,
+        episode: 1,
+        watched_at,
+      };
+
+      const result = buildHistoryPayload([item]);
+
+      expect(result.shows).toEqual([{
+        ids: { tvdb: 9001 },
+        seasons: [{ number: 2, episodes: [{ number: 1, watched_at }] }],
+      }]);
+      expect(result.episodes).toHaveLength(0);
+    });
+
+    it('should resolve positionally via show imdb when the show has no tvdb', () => {
+      const item: UniversalImportItem = {
+        action: 'history',
+        type: 'episode',
+        ids: {},
+        showImdb: 'tt1234567',
+        season: 1,
+        episode: 1,
+        watched_at,
+      };
+
+      const result = buildHistoryPayload([item]);
+
+      expect(result.shows).toEqual([{
+        ids: { imdb: 'tt1234567' },
+        seasons: [{ number: 1, episodes: [{ number: 1, watched_at }] }],
+      }]);
+      expect(result.episodes).toHaveLength(0);
+    });
+
+    it('should merge one show when items carry differing show ids', () => {
+      const items: UniversalImportItem[] = [
+        {
+          action: 'history',
+          type: 'episode',
+          ids: {},
+          showTvdb: 9001,
+          season: 1,
+          episode: 1,
+          watched_at,
+        },
+        {
+          action: 'history',
+          type: 'episode',
+          ids: {},
+          showTvdb: 9001,
+          showImdb: 'tt1234567',
+          season: 1,
+          episode: 2,
+          watched_at,
+        },
+      ];
+
+      const result = buildHistoryPayload(items);
+
+      expect(result.shows).toEqual([{
+        ids: { tvdb: 9001, imdb: 'tt1234567' },
+        seasons: [{
+          number: 1,
+          episodes: [
+            { number: 1, watched_at },
+            { number: 2, watched_at },
+          ],
+        }],
+      }]);
+    });
+
+    it('should group positional episodes by show and season', () => {
+      const items: UniversalImportItem[] = [
+        {
+          action: 'history',
+          type: 'episode',
+          ids: {},
+          showTvdb: 9001,
+          season: 1,
+          episode: 1,
+          watched_at,
+        },
+        {
+          action: 'history',
+          type: 'episode',
+          ids: {},
+          showTvdb: 9001,
+          season: 1,
+          episode: 2,
+          watched_at,
+        },
+        {
+          action: 'history',
+          type: 'episode',
+          ids: {},
+          showTvdb: 9001,
+          season: 2,
+          episode: 1,
+          watched_at,
+        },
+      ];
+
+      const result = buildHistoryPayload(items);
+
+      expect(result.shows).toEqual([{
+        ids: { tvdb: 9001 },
+        seasons: [
+          {
+            number: 1,
+            episodes: [
+              { number: 1, watched_at },
+              { number: 2, watched_at },
+            ],
+          },
+          { number: 2, episodes: [{ number: 1, watched_at }] },
+        ],
+      }]);
+      expect(result.episodes).toHaveLength(0);
+    });
+
+    it('should prefer positional resolution over the episode id', () => {
+      const item: UniversalImportItem = {
+        action: 'history',
+        type: 'episode',
+        ids: { tvdb: 4321 },
+        showTvdb: 9001,
+        season: 2,
+        episode: 1,
+        watched_at,
+      };
+
+      const result = buildHistoryPayload([item]);
+
+      expect(result.shows).toEqual([{
+        ids: { tvdb: 9001 },
+        seasons: [{ number: 2, episodes: [{ number: 1, watched_at }] }],
+      }]);
+      expect(result.episodes).toHaveLength(0);
+    });
+
+    it('should add an episode by its id when not positionally resolvable', () => {
       const item: UniversalImportItem = {
         action: 'history',
         type: 'episode',

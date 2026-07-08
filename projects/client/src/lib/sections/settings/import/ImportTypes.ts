@@ -43,6 +43,12 @@ export interface UniversalImportItem {
   rated_at?: string;
   season?: number;
   episode?: number;
+  // For episode items: ids of the parent show. Enable positional history
+  // resolution (show + season + episode number) when Trakt has no TVDB id on
+  // the episode; imdb is a fallback for shows also missing a TVDB id. See
+  // parsers/utils/toEpisodeIds.ts.
+  showTvdb?: number;
+  showImdb?: string;
   // For action 'list': the source list this item belongs to. Items are grouped
   // by listName at sync time; listIsPublic maps to the created list's privacy.
   listName?: string;
