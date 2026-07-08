@@ -5,6 +5,7 @@
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
   import { formatNumber } from "$lib/utils/format/formatNumber";
@@ -19,16 +20,21 @@
     stats,
     slug,
   }: {
-    stats: AllStats;
+    /** `null` renders the loading skeleton (icons stay, values shimmer). */
+    stats: AllStats | null;
     slug: string;
   } = $props();
 
-  const hours = $derived(Math.round(stats.minutes.total / 60));
+  const hours = $derived(stats ? Math.round(stats.minutes.total / 60) : 0);
   const historyUrl = $derived(UrlBuilder.profile.history(slug));
+
+  // The real row shows five stats; mirror that count while loading.
+  const SKELETON_STATS = Array.from({ length: 5 }, (_, index) => index);
 </script>
 
 <div class="trakt-yir-2024-watched-stats">
-  <span class="yir-2024-stat yir-2024-stat-link">
+  {#if stats}
+    <span class="yir-2024-stat yir-2024-stat-link">
     <Link href={historyUrl} color="inherit">
       <span class="yir-2024-stat-row">
         <span class="yir-2024-stat-icon">
@@ -91,6 +97,18 @@
       </span>
     </span>
   </span>
+  {:else}
+    {#each SKELETON_STATS as index (index)}
+      <span class="yir-2024-stat">
+        <span class="yir-2024-stat-icon">
+          <Skeleton width="var(--ni-36)" height="var(--ni-36)" radius="50%" />
+        </span>
+        <span class="yir-2024-stat-display">
+          <Skeleton width="var(--ni-64)" height="var(--ni-36)" />
+        </span>
+      </span>
+    {/each}
+  {/if}
 </div>
 
 <style lang="scss">

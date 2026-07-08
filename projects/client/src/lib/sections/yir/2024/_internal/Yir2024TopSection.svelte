@@ -8,12 +8,14 @@
 
   const {
     detail,
+    isLoading,
     slug,
     year,
     month = 1,
     mode = "yir",
   }: {
     detail: YirDetail | null;
+    isLoading: boolean;
     slug: string;
     year: number;
     /** 1-12. Only meaningful in MIR mode. */
@@ -27,10 +29,12 @@
 
   <Yir2024PageInner>
     <div class="yir-2024-top-stack">
-      <Yir2024Hero {slug} {year} {detail} {month} {mode} />
+      <Yir2024Hero {slug} {year} {detail} {isLoading} {month} {mode} />
 
       {#if detail}
         <Yir2024WatchedStats stats={detail.stats.all} {slug} />
+      {:else if isLoading}
+        <Yir2024WatchedStats stats={null} {slug} />
       {/if}
     </div>
   </Yir2024PageInner>

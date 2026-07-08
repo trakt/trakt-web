@@ -5,6 +5,7 @@
   import FavoriteIcon from "$lib/components/icons/FavoriteIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
   import type { YirYear } from "$lib/requests/models/YirYear";
@@ -21,17 +22,21 @@
     stats,
     year,
   }: {
-    stats: AllStats;
+    /** `null` renders the loading skeleton (heading stays, numbers shimmer). */
+    stats: AllStats | null;
     year: YirYear;
   } = $props();
 
-  const hoursWatched = $derived(Math.round(stats.minutes.total / 60));
+  const hoursWatched = $derived(stats ? Math.round(stats.minutes.total / 60) : 0);
 
   const heading = $derived(
     year === "all"
       ? m.yir_section_title_all_time_totals()
       : m.yir_section_title_totals({ year }),
   );
+
+  // The real grid renders six totals; mirror that count while loading.
+  const SKELETON_TOTALS = Array.from({ length: 6 }, (_, index) => index);
 </script>
 
 <section class="trakt-yir-totals-section" id="section-totals">
@@ -40,11 +45,21 @@
       {heading}
     </YirSectionHeader>
 
-    <div class="yir-stats-grid">
-      <div class="yir-stat">
-        <span class="yir-stat-number">
-          {formatNumber(stats.playCounts.total)}
-        </span>
+    {#if !stats}
+      <div class="yir-stats-grid">
+        {#each SKELETON_TOTALS as index (index)}
+          <div class="yir-stat yir-stat-skeleton">
+            <Skeleton width="var(--ni-96)" height="var(--ni-52)" />
+            <Skeleton width="var(--ni-56)" height="var(--font-size-text)" />
+          </div>
+        {/each}
+      </div>
+    {:else}
+      <div class="yir-stats-grid">
+        <div class="yir-stat">
+          <span class="yir-stat-number">
+            {formatNumber(stats.playCounts.total)}
+          </span>
         <span class="yir-stat-unit">
           <span class="yir-stat-icon">
             <TrackIcon state="unwatched" />
@@ -108,7 +123,8 @@
           {yirUnit(stats.listsCounts.total, m.yir_unit_list, m.yir_unit_lists)}
         </span>
       </div>
-    </div>
+      </div>
+    {/if}
   </YirPageInner>
 </section>
 
@@ -140,6 +156,13 @@
 
   .yir-stat {
     text-align: center;
+  }
+
+  .yir-stat-skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--ni-8);
   }
 
   .yir-stat-number {

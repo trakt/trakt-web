@@ -1,13 +1,20 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   const {
     entries,
+    isLoading = false,
   }: {
     entries: MediaEntry[];
+    /** Renders placeholder posters so the hero keeps its height while loading. */
+    isLoading?: boolean;
   } = $props();
+
+  // The real wave shows six posters; mirror that count in the skeleton.
+  const SKELETON_POSTERS = Array.from({ length: 6 }, (_, index) => index);
 </script>
 
 {#if entries.length > 0}
@@ -20,6 +27,14 @@
       >
         <CrossOriginImage src={entry.poster.url.medium} alt={entry.title} />
       </a>
+    {/each}
+  </div>
+{:else if isLoading}
+  <div class="trakt-yir-2024-posters-row">
+    {#each SKELETON_POSTERS as index (index)}
+      <span class="yir-2024-poster yir-2024-poster-skeleton">
+        <Skeleton width="100%" height="100%" radius="var(--border-radius-m)" />
+      </span>
     {/each}
   </div>
 {/if}
@@ -137,5 +152,11 @@
         transform: translateY(var(--ni-neg-10)) scale(1.05);
       }
     }
+  }
+
+  // Drop the chip fill for the loading placeholders: it's the same shade as the
+  // Skeleton, so the opacity pulse would be invisible over it.
+  .yir-2024-poster-skeleton {
+    background: none;
   }
 </style>
