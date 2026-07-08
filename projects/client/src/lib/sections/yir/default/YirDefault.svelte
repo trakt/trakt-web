@@ -9,19 +9,17 @@
   import YirStudiosSection from "../_internal/YirStudiosSection.svelte";
   import YirRatedSection from "../_internal/YirRatedSection.svelte";
   import YirPeopleSection from "../_internal/YirPeopleSection.svelte";
+  import YirLoading from "../_internal/YirLoading.svelte";
   import YirTitleSection from "../_internal/YirTitleSection.svelte";
   import YirUpgradeSection from "../_internal/YirUpgradeSection.svelte";
 
   const {
     detail,
+    isLoading,
     slug,
     year,
   }: {
     detail: YirDetail | null;
-    /**
-     * Accepted for prop-type compatibility with the template registry; the
-     * default template doesn't render an inline loading indicator.
-     */
     isLoading: boolean;
     slug: string;
     year: number;
@@ -89,4 +87,6 @@
   {/if}
 
   <YirUpgradeSection />
+{:else if isLoading}
+  <YirLoading />
 {/if}

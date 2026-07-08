@@ -1,8 +1,8 @@
 <script lang="ts">
-  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { m } from "$lib/paraglide/messages";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
   import type { ReviewMode } from "../ReviewMode";
+  import YirLoading from "../_internal/YirLoading.svelte";
   import Yir2024CompaniesSection from "./_internal/Yir2024CompaniesSection.svelte";
   import Yir2024CountriesSection from "./_internal/Yir2024CountriesSection.svelte";
   import Yir2024GenresSection from "./_internal/Yir2024GenresSection.svelte";
@@ -226,9 +226,7 @@
   {:else if isLoading}
     <!-- Detail query in flight: hero has already painted above; show a
          small inline indicator where the rest of the sections will mount. -->
-    <div class="yir-2024-loading">
-      <LoadingIndicator />
-    </div>
+    <YirLoading />
   {/if}
 </div>
 
@@ -255,10 +253,4 @@
     }
   }
 
-  .yir-2024-loading {
-    display: flex;
-    justify-content: center;
-    padding: var(--ni-72) 0;
-    color: var(--color-yir-text-secondary);
-  }
 </style>

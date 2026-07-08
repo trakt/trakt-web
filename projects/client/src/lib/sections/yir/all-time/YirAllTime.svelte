@@ -2,6 +2,7 @@
   import { m } from "$lib/paraglide/messages";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
   import YirCalendarSection from "../_internal/YirCalendarSection.svelte";
+  import YirLoading from "../_internal/YirLoading.svelte";
   import YirGenresSection from "../_internal/YirGenresSection.svelte";
   import YirNetworksSection from "../_internal/YirNetworksSection.svelte";
   import YirPeopleSection from "../_internal/YirPeopleSection.svelte";
@@ -18,14 +19,10 @@
 
   const {
     detail,
+    isLoading,
     slug,
   }: {
     detail: YirDetail | null;
-    /**
-     * Accepted for prop-type parity with the year-based templates; the all-time
-     * template progressively fills in as `detail` lands and doesn't render an
-     * inline loading indicator.
-     */
     isLoading: boolean;
     slug: string;
   } = $props();
@@ -170,4 +167,6 @@
   {/if}
 
   <YirUpgradeSection />
+{:else if isLoading}
+  <YirLoading />
 {/if}
