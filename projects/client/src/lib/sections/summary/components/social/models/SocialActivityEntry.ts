@@ -16,6 +16,7 @@ type RatingSocialActivityEntry = CommonSocialActivityEntry & {
 type WatchSocialActivityEntry = CommonSocialActivityEntry & {
   type: 'watch';
   playCount: number;
+  minutesWatched: number | null;
 };
 
 type WatchlistSocialActivityEntry = CommonSocialActivityEntry & {

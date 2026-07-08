@@ -80,6 +80,7 @@ const MediaSocialCommentResponseSchema = z.object({
 
 const MediaSocialWatchedResponseSchema = z.object({
   plays: z.number(),
+  minutes_watched: z.number().nullish(),
   last_watched_at: z.string().nullish(),
   last_updated_at: z.string().nullish(),
   rating: MediaSocialRatingResponseSchema.optional(),
@@ -198,6 +199,7 @@ function mapToSocialWatched(
 
   return {
     plays: watched.plays,
+    minutesWatched: watched.minutes_watched ?? null,
     lastWatchedAt: toDate(watched.last_watched_at),
     lastUpdatedAt: toDate(watched.last_updated_at),
     ...(rating && { rating }),

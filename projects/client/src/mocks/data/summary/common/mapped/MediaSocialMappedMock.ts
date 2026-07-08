@@ -29,6 +29,7 @@ export const MediaSocialMappedMock: MediaSocial[] = [
     },
     watched: {
       plays: 2,
+      minutesWatched: 210,
       lastWatchedAt: new Date('2026-06-01T20:15:00.000Z'),
       lastUpdatedAt: new Date('2026-06-01T20:16:00.000Z'),
       rating: {
