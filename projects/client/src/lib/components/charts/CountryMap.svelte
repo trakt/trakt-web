@@ -14,6 +14,14 @@
 
   const { data, tooltip, label = "Country map" }: CountryMapProps = $props();
 
+  // When the pointer is within this many px of the map's top edge, flip the
+  // tooltip below the pointer so it isn't clipped by the map's container.
+  const TOOLTIP_FLIP_THRESHOLD = 56;
+  // When the pointer is within this many px of a horizontal edge, anchor the
+  // tooltip by its near side so a wide tooltip grows inward instead of spilling
+  // past the (overflow-hidden) container.
+  const TOOLTIP_EDGE_THRESHOLD = 90;
+
   const valueByCode = $derived(
     new Map(data.map((datum) => [datum.code.toLowerCase(), datum.value])),
   );
@@ -191,8 +199,12 @@
   {#if tooltip && tooltipArgs}
     <div
       class="country-map-tooltip"
-      style:left="{interaction.pointer.x}px"
-      style:top="{interaction.pointer.y}px"
+      class:is-below={(interaction.pointer?.y ?? 0) < TOOLTIP_FLIP_THRESHOLD}
+      class:is-start={(interaction.pointer?.x ?? 0) < TOOLTIP_EDGE_THRESHOLD}
+      class:is-end={$observedWidth - (interaction.pointer?.x ?? 0) <
+        TOOLTIP_EDGE_THRESHOLD}
+      style:left="{interaction.pointer?.x ?? 0}px"
+      style:top="{interaction.pointer?.y ?? 0}px"
     >
       {@render tooltip(tooltipArgs)}
     </div>
@@ -246,7 +258,26 @@
   .country-map-tooltip {
     position: absolute;
     pointer-events: none;
-    transform: translate(-50%, calc(-100% - var(--ni-12)));
+    transform: translate(
+      var(--tt-x, -50%),
+      var(--tt-y, calc(-100% - var(--ni-12)))
+    );
     z-index: var(--layer-top);
+
+    // Pointer near the top edge: drop the tooltip below it so it stays inside
+    // the map's clipped container.
+    &.is-below {
+      --tt-y: var(--ni-12);
+    }
+
+    // Pointer near a horizontal edge: anchor the tooltip by its near side so it
+    // grows inward instead of spilling past the container.
+    &.is-start {
+      --tt-x: 0;
+    }
+
+    &.is-end {
+      --tt-x: -100%;
+    }
   }
 </style>
