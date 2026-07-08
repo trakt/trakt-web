@@ -113,6 +113,10 @@
     }
 
     &::before {
+      --nav-safe: env(safe-area-inset-top, 0px);
+      --nav-fade: calc(100% - var(--nav-safe));
+
+      top: calc(-1 * var(--nav-safe));
       backdrop-filter: blur(var(--ni-10));
       background: color-mix(
         in srgb,
@@ -121,16 +125,26 @@
       );
       mask-image: linear-gradient(
         to bottom,
-        black 0%,
-        color-mix(in srgb, black 99%, transparent) 10%,
-        color-mix(in srgb, black 95%, transparent) 20%,
-        color-mix(in srgb, black 89%, transparent) 30%,
-        color-mix(in srgb, black 81%, transparent) 40%,
-        color-mix(in srgb, black 71%, transparent) 50%,
-        color-mix(in srgb, black 59%, transparent) 60%,
-        color-mix(in srgb, black 45%, transparent) 70%,
-        color-mix(in srgb, black 31%, transparent) 80%,
-        color-mix(in srgb, black 16%, transparent) 90%,
+        black 0,
+        black var(--nav-safe),
+        color-mix(in srgb, black 99%, transparent)
+          calc(var(--nav-safe) + 0.1 * var(--nav-fade)),
+        color-mix(in srgb, black 95%, transparent)
+          calc(var(--nav-safe) + 0.2 * var(--nav-fade)),
+        color-mix(in srgb, black 89%, transparent)
+          calc(var(--nav-safe) + 0.3 * var(--nav-fade)),
+        color-mix(in srgb, black 81%, transparent)
+          calc(var(--nav-safe) + 0.4 * var(--nav-fade)),
+        color-mix(in srgb, black 71%, transparent)
+          calc(var(--nav-safe) + 0.5 * var(--nav-fade)),
+        color-mix(in srgb, black 59%, transparent)
+          calc(var(--nav-safe) + 0.6 * var(--nav-fade)),
+        color-mix(in srgb, black 45%, transparent)
+          calc(var(--nav-safe) + 0.7 * var(--nav-fade)),
+        color-mix(in srgb, black 31%, transparent)
+          calc(var(--nav-safe) + 0.8 * var(--nav-fade)),
+        color-mix(in srgb, black 16%, transparent)
+          calc(var(--nav-safe) + 0.9 * var(--nav-fade)),
         transparent 100%
       );
     }
