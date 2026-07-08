@@ -7375,6 +7375,18 @@
       "default": "Open tvtime.trakt.tv",
       "description": "Call-to-action link on the TV Time migration banner that opens the tvtime.trakt.tv companion app in a new tab."
     },
+    "tv_time_import_banner_heading": {
+      "default": "Your TV Time import, improved",
+      "description": "Heading on the banner shown to users who joined during the TV Time migration, telling them the importer has been upgraded."
+    },
+    "tv_time_import_banner_description": {
+      "default": "We've upgraded the importer. If some shows or episodes are missing, import your TV Time export again to pull them in. Still missing after that? Delete the old plays first, then import once more.",
+      "description": "Description on the TV Time importer-update banner explaining that re-importing now recovers missing show/episode data, and to delete old plays before re-importing if issues persist."
+    },
+    "tv_time_import_banner_action": {
+      "default": "Import again",
+      "description": "Call-to-action button on the TV Time importer-update banner that opens the data import settings page."
+    },
     "welcome_greeting": {
       "default": "Welcome to Trakt, {name}",
       "description": "Main heading on the Welcome page, greeting the signed-in user by name."
