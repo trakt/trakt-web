@@ -770,6 +770,7 @@
   "import_status_parsing": "Verileriniz ayrıştırılıyor…",
   "import_status_syncing": "{processed} / {total} öğe senkronize ediliyor…",
   "import_summary_history": "Geçmiş için {count} öğe",
+  "import_summary_list": "{count} liste öğesi",
   "import_summary_ratings": "{count} derecelendirme",
   "import_summary_watchlist": "İzleme listesi için {count} öğe",
   "import_tab_ambiguous": "Çoklu eşleşmeler",

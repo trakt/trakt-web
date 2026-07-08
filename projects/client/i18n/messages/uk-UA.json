@@ -770,6 +770,7 @@
   "import_status_parsing": "Обробка ваших даних…",
   "import_status_syncing": "Синхронізація {processed} / {total} елементів…",
   "import_summary_history": "{count} елементів для Історії",
+  "import_summary_list": "{count} елементів списку",
   "import_summary_ratings": "{count} оцінок",
   "import_summary_watchlist": "{count} елементів для Списку перегляду",
   "import_tab_ambiguous": "Кілька збігів",

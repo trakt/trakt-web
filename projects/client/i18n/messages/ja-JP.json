@@ -770,6 +770,7 @@
   "import_status_parsing": "データを解析中…",
   "import_status_syncing": "{processed} / {total}項目を同期中…",
   "import_summary_history": "履歴の{count}項目",
+  "import_summary_list": "{count}個のリストアイテム",
   "import_summary_ratings": "{count}件の評価",
   "import_summary_watchlist": "ウォッチリストの{count}項目",
   "import_tab_ambiguous": "複数の一致",

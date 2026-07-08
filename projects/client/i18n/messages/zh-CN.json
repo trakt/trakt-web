@@ -770,6 +770,7 @@
   "import_status_parsing": "正在解析您的数据…",
   "import_status_syncing": "正在同步 {processed} / {total} 个项目…",
   "import_summary_history": "历史记录有 {count} 个项目",
+  "import_summary_list": "{count} 个列表项",
   "import_summary_ratings": "{count} 个评分",
   "import_summary_watchlist": "待看列表有 {count} 个项目",
   "import_tab_ambiguous": "多重匹配",

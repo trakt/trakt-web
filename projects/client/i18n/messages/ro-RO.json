@@ -770,6 +770,7 @@
   "import_status_parsing": "Se analizează datele…",
   "import_status_syncing": "Se sincronizează {processed} / {total} elemente…",
   "import_summary_history": "{count} elemente pentru Istoric",
+  "import_summary_list": "{count} elemente listă",
   "import_summary_ratings": "{count} evaluări",
   "import_summary_watchlist": "{count} elemente pentru Lista de vizionare",
   "import_tab_ambiguous": "Potriviri multiple",

@@ -770,6 +770,7 @@
   "import_status_parsing": "Analitzant les teves dades…",
   "import_status_syncing": "Sincronitzant {processed} / {total} elements…",
   "import_summary_history": "{count} elements per a l'historial",
+  "import_summary_list": "{count} elements de la llista",
   "import_summary_ratings": "{count} valoracions",
   "import_summary_watchlist": "{count} elements per a la llista de seguiment",
   "import_tab_ambiguous": "Múltiples coincidències",

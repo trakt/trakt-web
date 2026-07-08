@@ -770,6 +770,7 @@
   "import_status_parsing": "Parsing your data…",
   "import_status_syncing": "Syncing {processed} / {total} items…",
   "import_summary_history": "{count} items for History",
+  "import_summary_list": "{count} list items",
   "import_summary_ratings": "{count} ratings",
   "import_summary_watchlist": "{count} items for Watchlist",
   "import_tab_ambiguous": "Multiple matches",

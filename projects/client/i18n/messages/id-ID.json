@@ -770,6 +770,7 @@
   "import_status_parsing": "Mengurai data Anda…",
   "import_status_syncing": "Menyinkronkan {processed} / {total} item…",
   "import_summary_history": "{count} item untuk Riwayat",
+  "import_summary_list": "{count} item daftar",
   "import_summary_ratings": "{count} penilaian",
   "import_summary_watchlist": "{count} item untuk Daftar Tontonan",
   "import_tab_ambiguous": "Beberapa kecocokan",

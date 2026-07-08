@@ -770,6 +770,7 @@
   "import_status_parsing": "Uw gegevens worden geparst…",
   "import_status_syncing": "{processed} / {total} items worden gesynchroniseerd…",
   "import_summary_history": "{count} items voor geschiedenis",
+  "import_summary_list": "{count} lijstitems",
   "import_summary_ratings": "{count} beoordelingen",
   "import_summary_watchlist": "{count} items voor kijklijst",
   "import_tab_ambiguous": "Meerdere overeenkomsten",

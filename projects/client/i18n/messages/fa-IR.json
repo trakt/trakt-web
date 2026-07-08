@@ -770,6 +770,7 @@
   "import_status_parsing": "در حال تجزیه داده‌های شما…",
   "import_status_syncing": "در حال همگام‌سازی {processed} / {total} آیتم…",
   "import_summary_history": "{count} آیتم برای تاریخچه",
+  "import_summary_list": "{count} مورد لیست",
   "import_summary_ratings": "{count} امتیاز",
   "import_summary_watchlist": "{count} آیتم برای لیست تماشا",
   "import_tab_ambiguous": "چندین مورد منطبق",

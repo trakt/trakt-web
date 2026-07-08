@@ -770,6 +770,7 @@
   "import_status_parsing": "Ihre Daten werden verarbeitet…",
   "import_status_syncing": "{processed} / {total} Elemente werden synchronisiert…",
   "import_summary_history": "{count} Einträge für die Historie",
+  "import_summary_list": "{count} Listenelemente",
   "import_summary_ratings": "{count} Bewertungen",
   "import_summary_watchlist": "{count} Einträge für die Merkliste",
   "import_tab_ambiguous": "Mehrere Übereinstimmungen",

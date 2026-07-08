@@ -770,6 +770,7 @@
   "import_status_parsing": "Adataid feldolgozása…",
   "import_status_syncing": "{processed} / {total} elem szinkronizálása...",
   "import_summary_history": "{count} elem az Előzményekhez",
+  "import_summary_list": "{count} lista elem",
   "import_summary_ratings": "{count} értékelés",
   "import_summary_watchlist": "{count} elem a Megnézendők listájához",
   "import_tab_ambiguous": "Több találat",

@@ -770,6 +770,7 @@
   "import_status_parsing": "Анализиране на данните ви…",
   "import_status_syncing": "Синхронизиране на {processed} / {total} елемента…",
   "import_summary_history": "{count} елемента за История",
+  "import_summary_list": "{count} елемента в списък",
   "import_summary_ratings": "{count} оценки",
   "import_summary_watchlist": "{count} елемента за Списък за гледане",
   "import_tab_ambiguous": "Множество съвпадения",

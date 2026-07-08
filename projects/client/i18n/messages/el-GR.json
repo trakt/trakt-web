@@ -770,6 +770,7 @@
   "import_status_parsing": "Ανάλυση των δεδομένων σας…",
   "import_status_syncing": "Συγχρονισμός {processed} / {total} στοιχείων…",
   "import_summary_history": "{count} στοιχεία για το Ιστορικό",
+  "import_summary_list": "{count} στοιχεία λίστας",
   "import_summary_ratings": "{count} αξιολογήσεις",
   "import_summary_watchlist": "{count} στοιχεία για τη Λίστα Παρακολούθησης",
   "import_tab_ambiguous": "Πολλαπλές αντιστοιχίσεις",

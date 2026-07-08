@@ -770,6 +770,7 @@
   "import_status_parsing": "Analizzo i tuoi dati…",
   "import_status_syncing": "Sincronizzazione {processed} / {total} elementi…",
   "import_summary_history": "{count} elementi per la Cronologia",
+  "import_summary_list": "{count} elementi della lista",
   "import_summary_ratings": "{count} valutazioni",
   "import_summary_watchlist": "{count} elementi per la Watchlist",
   "import_tab_ambiguous": "Corrispondenze multiple",

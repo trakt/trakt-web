@@ -770,6 +770,7 @@
   "import_status_parsing": "Analizowanie danych…",
   "import_status_syncing": "Synchronizowanie {processed} / {total} elementów…",
   "import_summary_history": "{count} elementów do Historii",
+  "import_summary_list": "{count} pozycji listy",
   "import_summary_ratings": "{count} ocen",
   "import_summary_watchlist": "{count} elementów do obserwowanych",
   "import_tab_ambiguous": "Wielokrotne dopasowania",

@@ -770,6 +770,7 @@
   "import_status_parsing": "Parser dataen din…",
   "import_status_syncing": "Synkroniserer {processed} / {total} elementer…",
   "import_summary_history": "{count} elementer for Historikk",
+  "import_summary_list": "{count} listeelementer",
   "import_summary_ratings": "{count} vurderinger",
   "import_summary_watchlist": "{count} elementer for Overvåkningsliste",
   "import_tab_ambiguous": "Flere treff",

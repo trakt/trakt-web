@@ -770,6 +770,7 @@
   "import_status_parsing": "Tolkar din data…",
   "import_status_syncing": "Synkroniserar {processed} / {total} objekt…",
   "import_summary_history": "{count} objekt för historik",
+  "import_summary_list": "{count} listobjekt",
   "import_summary_ratings": "{count} betyg",
   "import_summary_watchlist": "{count} objekt för bevakningslista",
   "import_tab_ambiguous": "Flera matchningar",
