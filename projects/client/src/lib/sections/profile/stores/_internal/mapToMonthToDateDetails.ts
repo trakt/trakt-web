@@ -1,7 +1,5 @@
 import type { EpisodeActivityHistory } from '$lib/requests/queries/users/episodeActivityHistoryQuery.ts';
-import {
-  type MovieActivityHistory,
-} from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
+import type { MovieActivityHistory } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import type { MonthToDateDetails } from '../../models/MonthToDateDetails.ts';
