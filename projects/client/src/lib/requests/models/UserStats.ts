@@ -49,8 +49,8 @@ export const UserStatsSchema = z.object({
     started: z.number(),
     finished: z.number(),
     dropped: z.number(),
-  }),
-  lists: z.number(),
+  }).nullable(),
+  lists: z.number().nullable(),
   totalMinutes: z.number(),
   totalPlays: z.number(),
 });

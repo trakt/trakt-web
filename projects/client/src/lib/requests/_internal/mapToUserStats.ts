@@ -34,13 +34,17 @@ export function mapToUserStats(response: UserStatsResponse): UserStats {
       total: response.ratings.total,
       distribution: response.ratings.distribution,
     },
-    progress: {
-      started: response.progress.started,
-      finished: response.progress.finished,
-      dropped: response.progress.dropped,
-    },
-    lists: response.lists,
-    totalMinutes: response.total_minutes,
-    totalPlays: response.total_plays,
+    progress: response.progress
+      ? {
+        started: response.progress.started,
+        finished: response.progress.finished,
+        dropped: response.progress.dropped,
+      }
+      : null,
+    lists: response.lists ?? null,
+    totalMinutes: response.total_minutes ??
+      response.movies.minutes + response.episodes.minutes,
+    totalPlays: response.total_plays ??
+      response.movies.plays + response.episodes.plays,
   };
 }

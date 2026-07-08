@@ -8,6 +8,7 @@ export enum ProfileDrawers {
   ScreenTime = 'screen-time',
   Match = 'match',
   Leaderboard = 'leaderboard',
+  AllTimeStats = 'all-time-stats',
 }
 
 const profileDrawerParams = {
@@ -24,6 +25,8 @@ function mapToDrawer(value: string | Nil) {
       return ProfileDrawers.Match;
     case ProfileDrawers.Leaderboard:
       return ProfileDrawers.Leaderboard;
+    case ProfileDrawers.AllTimeStats:
+      return ProfileDrawers.AllTimeStats;
     default:
       return null;
   }
@@ -48,5 +51,7 @@ export function profileDrawerNavigation(searchParams?: URLSearchParams) {
     buildMatchDrawerLink: () => buildDrawerLink(ProfileDrawers.Match),
     buildLeaderboardDrawerLink: () =>
       buildDrawerLink(ProfileDrawers.Leaderboard),
+    buildAllTimeStatsDrawerLink: () =>
+      buildDrawerLink(ProfileDrawers.AllTimeStats),
   };
 }

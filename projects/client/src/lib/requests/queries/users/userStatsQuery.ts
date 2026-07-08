@@ -39,19 +39,19 @@ export const UserStatsResponseSchema = z.object({
     started: z.number().int(),
     finished: z.number().int(),
     dropped: z.number().int(),
-  }),
-  lists: z.number().int(),
-  total_minutes: z.number().int(),
-  total_plays: z.number().int(),
+  }).optional(),
+  lists: z.number().int().optional(),
+  total_minutes: z.number().int().optional(),
+  total_plays: z.number().int().optional(),
 });
 
 export type UserStatsResponse = z.infer<typeof UserStatsResponseSchema>;
 
 type UserStatsParams = { slug: string } & ApiParams;
 
-// A `404` means the user has no precomputed stats row (free account) or a
-// hidden/private profile. That is expected, not an error, so short-circuit to
-// an empty body instead of letting `isValidResponse` throw a fetch error.
+// A `404` means a hidden/private profile. That is expected, not an error, so
+// short-circuit to an empty body instead of letting `isValidResponse` throw a
+// fetch error.
 const userStatsRequest = async (
   { fetch, slug }: UserStatsParams,
 ) => {

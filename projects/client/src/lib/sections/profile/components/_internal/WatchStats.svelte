@@ -1,21 +1,23 @@
 <script lang="ts">
-  import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
-  import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Stat from "$lib/components/stat/Stat.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-
-  type WatchStats = {
-    movieCount: number;
-    showCount: number;
-    episodeCount: number;
-  };
+  import StatIcon from "./StatIcon.svelte";
+  import type { StatIconKey } from "./StatIconKey.ts";
+  import type { StatsCardStats } from "./StatsCardProps.ts";
 
   type WatchStatsProps = {
-    stats: WatchStats;
+    stats: StatsCardStats;
     isLoading: boolean;
     size?: "normal" | "large";
+  };
+
+  type StatEntry = {
+    label: string;
+    tagLabel: string;
+    key: StatIconKey;
   };
 
   const { stats, isLoading, size = "normal" }: WatchStatsProps = $props();
@@ -30,34 +32,67 @@
     return size === "large" ? valueLabel : labelFn({ count: valueLabel });
   };
 
-  const watchStats = $derived([
+  const baseStats = $derived<StatEntry[]>([
     {
       label: getMainLabel(stats.episodeCount, m.text_episodes_watched),
       tagLabel: m.tag_text_episodes(),
-      icon: ShowIcon,
       key: "episodes",
     },
     {
       label: getMainLabel(stats.showCount, m.text_shows_watched),
       tagLabel: m.tag_text_shows(),
-      icon: ShowIcon,
       key: "shows",
     },
     {
       label: getMainLabel(stats.movieCount, m.text_movies_watched),
       tagLabel: m.tag_text_movies(),
-      icon: MovieIcon,
       key: "movies",
     },
-  ] as const);
+    {
+      label: getMainLabel(stats.playCount, m.text_plays_watched),
+      tagLabel: m.stat_text_plays(),
+      key: "plays",
+    },
+  ]);
+
+  const extraStats = $derived<StatEntry[]>(
+    size !== "large"
+      ? []
+      : (
+          [
+            {
+              present: stats.minuteCount != null,
+              label: toHumanDuration(
+                { minutes: stats.minuteCount ?? 0, clampAt: "hour" },
+                languageTag(),
+              ),
+              tagLabel: m.stat_text_time_watched(),
+              key: "hours",
+            },
+            {
+              present: stats.ratingCount != null,
+              label: toHumanNumber(stats.ratingCount ?? 0, languageTag()),
+              tagLabel: m.label_stats_ratings(),
+              key: "ratings",
+            },
+            {
+              present: stats.commentCount != null,
+              label: toHumanNumber(stats.commentCount ?? 0, languageTag()),
+              tagLabel: m.label_stats_comments(),
+              key: "comments",
+            },
+          ] satisfies Array<StatEntry & { present: boolean }>
+        ).filter((stat) => stat.present),
+  );
+
+  const watchStats = $derived([...baseStats, ...extraStats]);
 </script>
 
 <div class="trakt-watch-stats" data-size={size}>
   {#each watchStats as stat (stat.key)}
     <Stat {isLoading} variant={statVariant}>
       {#snippet icon()}
-        {@const Icon = stat.icon}
-        <Icon />
+        <StatIcon key={stat.key} />
       {/snippet}
 
       {stat.label}
@@ -85,7 +120,18 @@
     }
 
     &[data-size="large"] {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      justify-items: start;
+      align-items: center;
+      width: 100%;
       gap: var(--gap-m);
+
+      :global(.trakt-stat) {
+        width: 100%;
+        min-width: 0;
+        justify-content: flex-start;
+      }
 
       :global(svg) {
         width: var(--ni-32);
