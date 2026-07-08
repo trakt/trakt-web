@@ -3,15 +3,15 @@
 
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { useQuery } from "$lib/features/query/useQuery";
   import { m } from "$lib/paraglide/messages";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
-  import type { ReviewMode } from "../../ReviewMode";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
+  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { ReviewMode } from "../../ReviewMode";
 
   import Yir2024Membership from "./Yir2024Membership.svelte";
   import Yir2024PostersRow from "./Yir2024PostersRow.svelte";
@@ -45,8 +45,8 @@
     mode === "mir"
       ? toHumanMonth(new Date(year, month - 1, 1), languageTag())
       : isCurrentYear
-      ? m.yir_2024_huge_label_year_to_date()
-      : m.yir_2024_huge_label_year_in_review(),
+        ? m.yir_2024_huge_label_year_to_date()
+        : m.yir_2024_huge_label_year_in_review(),
   );
 
   // Posters need the YIR detail; render an empty list while it loads so the
@@ -55,9 +55,9 @@
   const heroPosters = $derived(
     detail
       ? [
-        ...detail.mostWatched.shows.slice(0, 3),
-        ...detail.mostWatched.movies.slice(0, 3),
-      ].map((item) => item.entry)
+          ...detail.mostWatched.shows.slice(0, 3),
+          ...detail.mostWatched.movies.slice(0, 3),
+        ].map((item) => item.entry)
       : [],
   );
 
@@ -81,15 +81,7 @@
   {#if $profile}
     <div class="yir-2024-directed-by">
       <div class="yir-2024-avatar-stack">
-        <Link
-          href={UrlBuilder.profile.user(slug)}
-          color="inherit"
-          label={displayName}
-        >
-          <span class="yir-2024-avatar">
-            <CrossOriginImage src={$profile.avatar.url} alt="" />
-          </span>
-        </Link>
+        <UserAvatar user={$profile} size="large" />
         {#if $profile.isVip || $profile.isDirector}
           <span class="yir-2024-vip">
             <VipBadge isDirector={$profile.isDirector} />
@@ -256,27 +248,19 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-  }
 
-  .yir-2024-avatar {
-    display: inline-flex;
-    width: var(--ni-64);
-    height: var(--ni-64);
-    border-radius: 50%;
-    border: var(--border-thickness-s) solid var(--color-yir-border);
-    background: var(--color-yir-surface-chip);
-    overflow: hidden;
-    box-sizing: content-box;
-
-    :global(img) {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    :global(.trakt-link) {
+      display: flex;
     }
 
-    @include for-mobile {
-      width: var(--ni-48);
-      height: var(--ni-48);
+    :global(.trakt-user-avatar) {
+      width: var(--ni-64);
+      height: var(--ni-64);
+
+      @include for-mobile {
+        width: var(--ni-48);
+        height: var(--ni-48);
+      }
     }
   }
 

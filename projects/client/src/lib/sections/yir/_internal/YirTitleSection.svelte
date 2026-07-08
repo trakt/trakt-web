@@ -5,6 +5,7 @@
   import { m } from "$lib/paraglide/messages";
   import type { YirYear } from "$lib/requests/models/YirYear";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
+  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { map } from "rxjs";
@@ -54,14 +55,7 @@
       {#if $profile}
         <div class="yir-user">
           <span class="yir-avatar-link">
-            <Link href={UrlBuilder.profile.user(slug)} color="inherit">
-              <div class="yir-avatar">
-                <CrossOriginImage
-                  src={$profile.avatar.url}
-                  alt={$profile.name.full ?? slug}
-                />
-              </div>
-            </Link>
+            <UserAvatar user={$profile} size="large" />
           </span>
           <span class="yir-display-name">
             <Link href={UrlBuilder.profile.user(slug)} color="inherit">
@@ -195,26 +189,15 @@
       display: flex;
       text-decoration: none;
     }
-  }
 
-  .yir-avatar {
-    width: var(--ni-40);
-    height: var(--ni-40);
-    border-radius: 50%;
-    border: var(--border-thickness-xs) solid var(--color-yir-poster-foreground);
-    background-color: var(--color-yir-poster-foreground);
-    overflow: hidden;
+    :global(.trakt-user-avatar) {
+      width: var(--ni-40);
+      height: var(--ni-40);
 
-    :global(img) {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    @include for-mobile {
-      width: var(--ni-30);
-      height: var(--ni-30);
+      @include for-mobile {
+        width: var(--ni-30);
+        height: var(--ni-30);
+      }
     }
   }
 
