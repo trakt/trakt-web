@@ -81,8 +81,9 @@ export function useLeaderboard({ slug, limit }: UseLeaderboardProps) {
   const { isAuthorized } = useAuth();
 
   // Only VIP viewers are woven into the ranking - their minutes come from their
-  // own `/stats` (the same metric the leaderboard ranks by). Free viewers 404
-  // there and are surfaced via the pinned card (`useLeaderboardViewer`) instead.
+  // own `/stats` (the same metric the leaderboard ranks by). Free viewers are
+  // absent from the ranked set, so they are surfaced via the pinned card
+  // (`useLeaderboardViewer`) instead.
   const ownStats = useQuery(userStatsQuery({ slug: 'me' }));
 
   const listWithViewer = combineLatest([list, user, isAuthorized, ownStats])
@@ -96,7 +97,7 @@ export function useLeaderboard({ slug, limit }: UseLeaderboardProps) {
         }
 
         const viewer: LeaderboardEntry | null =
-          authorized && currentUser && stats.data
+          authorized && currentUser?.isVip && stats.data
             ? {
               key: 'leaderboard-viewer',
               rank: null,

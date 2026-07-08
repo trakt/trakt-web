@@ -9,6 +9,7 @@
     profileDrawerNavigation,
   } from "./_internal/profileDrawerNavigation.ts";
   import ActivityDrawerHost from "./components/_internal/drawers/ActivityDrawerHost.svelte";
+  import AllTimeStatsDrawerHost from "./components/_internal/drawers/AllTimeStatsDrawerHost.svelte";
   import LeaderboardDrawerHost from "./leaderboard/LeaderboardDrawerHost.svelte";
   import type { DisplayableProfileProps } from "./DisplayableProfileProps.ts";
 
@@ -30,4 +31,6 @@
   <MatchDrawerHost {slug} {profile} onClose={close} />
 {:else if drawer === ProfileDrawers.Leaderboard && $leaderboardEnabled}
   <LeaderboardDrawerHost {slug} onClose={close} />
+{:else if drawer === ProfileDrawers.AllTimeStats}
+  <AllTimeStatsDrawerHost onClose={close} />
 {/if}

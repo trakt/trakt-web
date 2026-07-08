@@ -31,7 +31,7 @@
     // independent of overflow.
     overflow: visible;
 
-    align-self: center;
+    align-self: flex-start;
 
     border-radius: var(--border-radius-l);
     @include muted-card;

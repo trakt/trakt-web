@@ -8,6 +8,7 @@
   import { getPreviousMonth } from "$lib/utils/date/getPreviousMonth";
   import { useAllTimeStats } from "../stores/useAllTimeStats";
   import { useMonthToDate } from "../stores/useMonthToDate";
+  import AllTimeStatsDrawerLink from "./_internal/AllTimeStatsDrawerLink.svelte";
   import WatchStats from "./_internal/WatchStats.svelte";
   import AllTimeLink from "./AllTimeLink.svelte";
   import SwipeCarousel from "./SwipeCarousel.svelte";
@@ -84,20 +85,37 @@
     {/if}
 
     {#snippet footer()}
-      <div
-        class="trakt-mtd-footer"
-        class:is-dragging={isDragging}
-        style:opacity={$isMe ? slideMonthToDate : 1}
-      >
-        <MonthInReviewLink {slug} date={mirDate} {source} />
-      </div>
       {#if $isMe}
+        <div class="trakt-mtd-footer-stack">
+          <div
+            class="trakt-mtd-footer"
+            class:is-dragging={isDragging}
+            style:opacity={slideMonthToDate}
+            style:pointer-events={slideMonthToDate === 0 ? "none" : "auto"}
+          >
+            <MonthInReviewLink {slug} date={mirDate} {source} />
+          </div>
+          <div
+            class="trakt-mtd-footer"
+            class:is-dragging={isDragging}
+            style:opacity={slideAllTime}
+            style:pointer-events={slideAllTime === 0 ? "none" : "auto"}
+          >
+            <AllTimeStatsDrawerLink variant="link" />
+          </div>
+        </div>
+
         <div
           class="trakt-mtd-footer"
           class:is-dragging={isDragging}
-          style:opacity={$isMe ? slideAllTime : 1}
+          style:opacity={slideAllTime}
+          style:pointer-events={slideAllTime === 0 ? "none" : "auto"}
         >
           <AllTimeLink {slug} {source} />
+        </div>
+      {:else}
+        <div class="trakt-mtd-footer">
+          <MonthInReviewLink {slug} date={mirDate} {source} />
         </div>
       {/if}
     {/snippet}
@@ -139,6 +157,15 @@
 
     &.is-dragging {
       transition: none;
+    }
+  }
+
+  .trakt-mtd-footer-stack {
+    display: grid;
+    justify-items: start;
+
+    > * {
+      grid-area: 1 / 1;
     }
   }
 </style>

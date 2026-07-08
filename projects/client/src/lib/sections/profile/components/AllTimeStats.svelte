@@ -1,28 +1,27 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import { useAllTimeStats } from "../stores/useAllTimeStats.ts";
+  import AllTimeStatsDrawerLink from "./_internal/AllTimeStatsDrawerLink.svelte";
   import StatsCard from "./_internal/StatsCard.svelte";
-  import AllTimeLink from "./AllTimeLink.svelte";
-  import YearToDateLink from "./YearToDateLink.svelte";
 
   const { stats, isLoading } = useAllTimeStats();
 </script>
 
 <StatsCard title={m.text_all_time()} stats={$stats} isLoading={$isLoading}>
   {#snippet footer()}
-    <div class="year-link">
-      <YearToDateLink slug="me" source="profile" />
-      <AllTimeLink slug="me" source="profile" />
+    <div class="all-time-footer">
+      <AllTimeStatsDrawerLink />
     </div>
   {/snippet}
 </StatsCard>
 
-<style>
-  .year-link {
-    height: var(--ni-40);
+<style lang="scss">
+  .all-time-footer {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: var(--gap-m);
+
+    :global(.trakt-all-time-stats-drawer-link),
+    :global(.trakt-button-link) {
+      width: 100%;
+    }
   }
 </style>

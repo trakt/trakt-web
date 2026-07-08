@@ -55,7 +55,9 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-month-in-review-link {
     :global(.trakt-link) {
       text-decoration: none;
@@ -76,8 +78,6 @@
       height: var(--ni-18);
     }
 
-    :global(.trakt-button-link) {
-      border: var(--ni-1) solid var(--color-text-primary);
-    }
+    @include card-outline-button(".trakt-button-link");
   }
 </style>
