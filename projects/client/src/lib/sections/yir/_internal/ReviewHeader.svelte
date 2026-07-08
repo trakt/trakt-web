@@ -12,6 +12,7 @@
   import { createArrowNavTriggers } from "$lib/utils/events/createArrowNavTriggers";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
+  import Link from "$lib/components/link/Link.svelte";
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
@@ -67,13 +68,9 @@
 
 <header class="trakt-review-header" use:trackWindowScroll={"scrolled"}>
   <nav class="review-header-section review-header-center">
-    <a
-      href={prevUrl}
-      class="review-header-nav-btn"
-      aria-label={m.yir_button_previous()}
-    >
+    <Link href={prevUrl} color="inherit" label={m.yir_button_previous()}>
       <CaretLeftIcon />
-    </a>
+    </Link>
     <span class="review-header-label">
       <strong>{title}</strong>
       {#if subtitle}
@@ -81,13 +78,9 @@
       {/if}
     </span>
     {#if canGoNext}
-      <a
-        href={nextUrl}
-        class="review-header-nav-btn"
-        aria-label={m.yir_button_next()}
-      >
+      <Link href={nextUrl} color="inherit" label={m.yir_button_next()}>
         <CaretRightIcon />
-      </a>
+      </Link>
     {:else}
       <span class="review-header-nav-btn disabled" aria-hidden="true">
         <CaretRightIcon />
@@ -105,9 +98,11 @@
         }}
         size="small"
       />
-      <a href={UrlBuilder.profile.user(slug)} class="review-header-username">
-        {$profile.username}
-      </a>
+      <span class="review-header-username">
+        <Link href={UrlBuilder.profile.user(slug)} color="inherit">
+          {$profile.username}
+        </Link>
+      </span>
     </div>
   {/if}
   {#if canShare}
@@ -159,6 +154,7 @@
       color: var(--color-text-primary);
 
       :global(.review-header-nav-btn),
+      :global(.review-header-center .trakt-link),
       :global(.review-header-user),
       :global(.review-header-share) {
         color: var(--color-text-primary);
@@ -180,7 +176,10 @@
     gap: var(--gap-s);
   }
 
-  .review-header-nav-btn {
+  // Nav buttons are <Link>s (their own component scope); the disabled variant
+  // is a plain <span>. Style both.
+  .review-header-nav-btn,
+  .review-header-center :global(.trakt-link) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -194,20 +193,20 @@
     cursor: pointer;
     text-decoration: none;
     transition: color 0.2s;
+  }
 
-    &:hover:not(.disabled) {
-      color: var(--color-yir-text-accent);
-    }
+  .review-header-center :global(.trakt-link):hover {
+    color: var(--color-yir-text-accent);
+  }
 
-    &.disabled {
-      opacity: 0.3;
-      cursor: default;
-    }
+  .review-header-nav-btn.disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
 
-    :global(svg) {
-      width: var(--ni-14);
-      height: var(--ni-14);
-    }
+  .review-header-center :global(svg) {
+    width: var(--ni-14);
+    height: var(--ni-14);
   }
 
   .review-header-label {
@@ -234,14 +233,18 @@
   }
 
   .review-header-username {
-    color: inherit;
-    text-decoration: none;
     font-size: var(--font-size-text);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    // Inner <Link> renders in its own scope.
+    :global(.trakt-link) {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 
   .review-header-share {
