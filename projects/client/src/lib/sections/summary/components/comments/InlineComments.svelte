@@ -1,15 +1,16 @@
 <script lang="ts">
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
   import type { CommentSortType } from "$lib/requests/models/CommentSortType.ts";
   import { COMMENTS_DRILL_SIZE } from "$lib/utils/constants";
   import type { CommentsProps } from "./CommentsProps.ts";
+  import { commentsPlaceholder } from "./_internal/commentsPlaceholder.ts";
   import { useComments } from "./_internal/useComments.ts";
   import { useActiveComment } from "./drawers/useActiveComment.ts";
   import CommentThreadCard from "./drawers/CommentThreadCard.svelte";
 
-  const { media, sort, ...props }: CommentsProps & { sort: CommentSortType } =
-    $props();
+  const { media, sort, language, ...props }:
+    & CommentsProps
+    & { sort: CommentSortType; language?: string } = $props();
 
   const { reset, setReplying, activeComment } = useActiveComment();
 
@@ -19,20 +20,21 @@
 
 <div class="trakt-comment-threads-list">
   <PaginatedList
-    type={`inline-comments-${sort}`}
+    type={`inline-comments-${sort}-${language ?? "all"}`}
     target="default"
     useList={() =>
       useComments({
         slug: media.slug,
         limit: COMMENTS_DRILL_SIZE,
         sort,
+        language,
         ...props,
       })}
   >
     {#snippet items(items, isLoading)}
       {#if items.length === 0 && !isLoading}
         <p class="inline-comments-empty">
-          {m.list_placeholder_comments()}
+          {commentsPlaceholder(language)}
         </p>
       {:else}
         {#each items as comment (comment.id)}

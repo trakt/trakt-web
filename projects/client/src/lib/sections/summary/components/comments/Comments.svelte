@@ -9,7 +9,10 @@
   import { summaryDrawerNavigation } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import CommentCard from "$lib/sections/summary/components/comments/CommentCard.svelte";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
+  import CommentLanguageSelect from "./_internal/CommentLanguageSelect.svelte";
   import AddCommentAction from "./_internal/comment-actions/AddCommentAction.svelte";
+  import { commentsPlaceholder } from "./_internal/commentsPlaceholder.ts";
+  import { useCommentLanguage } from "./_internal/useCommentLanguage.svelte.ts";
   import type { ActiveComment } from "./_internal/models/ActiveComment";
   import { useComments } from "./_internal/useComments";
   import type { CommentsProps } from "./CommentsProps";
@@ -19,10 +22,13 @@
 
   const { current: sortType, set, options } = useToggler("comment");
 
+  const commentLanguage = useCommentLanguage();
+
   const { isLoading, list: comments } = $derived(
     useComments({
       slug: media.slug,
       sort: $sortType.value,
+      language: commentLanguage.filter,
       ...props,
     }),
   );
@@ -49,7 +55,7 @@
   <SectionList
     id={{
       scope: `comments-list-${props.type}`,
-      key: `${media.slug}-${$sortType.value}`,
+      key: `${media.slug}-${$sortType.value}-${commentLanguage.value}`,
     }}
     items={$comments}
     title={m.list_title_comments()}
@@ -67,7 +73,7 @@
 
     {#snippet empty()}
       {#if !$isLoading}
-        <p>{m.list_placeholder_comments()}</p>
+        <p>{commentsPlaceholder(commentLanguage.value)}</p>
       {/if}
     {/snippet}
 
@@ -78,6 +84,11 @@
           set(value);
         }}
         {options}
+      />
+
+      <CommentLanguageSelect
+        value={commentLanguage.value}
+        onChange={commentLanguage.set}
       />
 
       <AddCommentAction

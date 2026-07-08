@@ -1809,6 +1809,10 @@
       "default": "No reviews yet.",
       "description": "Placeholder text shown when there are no reviews in a list."
     },
+    "list_placeholder_comments_language": {
+      "default": "No {language} reviews yet.",
+      "description": "Placeholder text shown when there are no reviews in a specific language. {language} is the localized language name, e.g. 'Dutch'."
+    },
     "text_review_by": {
       "default": "Review by",
       "description": "Text used to indicate the author of a review."
@@ -2448,6 +2452,10 @@
     "option_text_all": {
       "default": "All",
       "description": "Text for the 'All' option in dropdowns or filters."
+    },
+    "option_text_comment_language_all": {
+      "default": "All languages",
+      "description": "Option in the comment language filter that shows comments written in any language."
     },
     "header_display": {
       "default": "Display",

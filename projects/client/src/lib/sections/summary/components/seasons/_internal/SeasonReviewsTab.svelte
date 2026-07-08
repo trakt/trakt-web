@@ -3,6 +3,8 @@
   import { useToggler } from "$lib/components/toggles/useToggler";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
+  import CommentLanguageSelect from "$lib/sections/summary/components/comments/_internal/CommentLanguageSelect.svelte";
+  import { useCommentLanguage } from "$lib/sections/summary/components/comments/_internal/useCommentLanguage.svelte.ts";
   import AddCommentAction from "$lib/sections/summary/components/comments/_internal/comment-actions/AddCommentAction.svelte";
   import AddReviewDrawerHost from "$lib/sections/summary/components/comments/drawers/AddReviewDrawerHost.svelte";
   import InlineComments from "$lib/sections/summary/components/comments/InlineComments.svelte";
@@ -22,6 +24,8 @@
 
   const { current: sort, set: setSort, options } = useToggler("comment");
 
+  const commentLanguage = useCommentLanguage();
+
   const isPostReviewOpen = writable(false);
 </script>
 
@@ -33,6 +37,10 @@
 
     {#snippet actions()}
       <Toggler value={$sort.value} onChange={setSort} {options} />
+      <CommentLanguageSelect
+        value={commentLanguage.value}
+        onChange={commentLanguage.set}
+      />
       <AddCommentAction onclick={() => isPostReviewOpen.set(true)} />
     {/snippet}
   </SeasonTabTitle>
@@ -44,6 +52,7 @@
       {season}
       id={seasonId}
       sort={$sort.value}
+      language={commentLanguage.filter}
     />
   {/key}
 </div>

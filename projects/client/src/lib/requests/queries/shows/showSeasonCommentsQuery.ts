@@ -15,12 +15,14 @@ type ShowSeasonCommentsParams =
     slug: string;
     season: number;
     sort: CommentSortType;
+    language?: string;
   }
   & ApiParams
   & PaginationParams;
 
 const showSeasonCommentsRequest = (
-  { fetch, slug, season, limit, page, sort }: ShowSeasonCommentsParams,
+  { fetch, slug, season, limit, page, sort, language }:
+    ShowSeasonCommentsParams,
 ) =>
   api({ fetch })
     .shows
@@ -35,6 +37,7 @@ const showSeasonCommentsRequest = (
         extended: 'images',
         limit,
         page,
+        language,
       },
     });
 
@@ -50,6 +53,7 @@ export const showSeasonCommentsQuery = defineInfiniteQuery({
     params.page,
     params.limit,
     params.sort,
+    params.language,
   ],
   request: showSeasonCommentsRequest,
   mapper: (response) => ({
