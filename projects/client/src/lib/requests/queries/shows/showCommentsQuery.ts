@@ -10,12 +10,12 @@ import { PaginatableSchemaFactory } from '../../models/Paginatable.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
 type ShowCommentsParams =
-  & { slug: string; sort: CommentSortType }
+  & { slug: string; sort: CommentSortType; language?: string }
   & ApiParams
   & PaginationParams;
 
 const showCommentsRequest = (
-  { fetch, slug, limit, page, sort }: ShowCommentsParams,
+  { fetch, slug, limit, page, sort, language }: ShowCommentsParams,
 ) =>
   api({ fetch })
     .shows
@@ -28,6 +28,7 @@ const showCommentsRequest = (
         extended: 'images',
         page,
         limit,
+        language,
       },
     });
 
@@ -39,7 +40,7 @@ export const showCommentsQuery = defineInfiniteQuery({
   ],
   dependencies: (
     params,
-  ) => [params.slug, params.page, params.limit, params.sort],
+  ) => [params.slug, params.page, params.limit, params.sort, params.language],
   request: showCommentsRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToMediaComment),

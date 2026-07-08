@@ -11,12 +11,27 @@ import { PaginatableSchemaFactory } from '../../models/Paginatable.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
 type EpisodeCommentsParams =
-  & { slug: string; season: number; episode: number; sort: CommentSortType }
+  & {
+    slug: string;
+    season: number;
+    episode: number;
+    sort: CommentSortType;
+    language?: string;
+  }
   & ApiParams
   & PaginationParams;
 
 const showCommentsRequest = (
-  { fetch, slug, season, episode, limit, page, sort }: EpisodeCommentsParams,
+  {
+    fetch,
+    slug,
+    season,
+    episode,
+    limit,
+    page,
+    sort,
+    language,
+  }: EpisodeCommentsParams,
 ) =>
   api({ fetch })
     .shows
@@ -32,6 +47,7 @@ const showCommentsRequest = (
         extended: 'images',
         limit,
         page,
+        language,
       },
     });
 
@@ -50,6 +66,7 @@ export const episodeCommentsQuery = defineInfiniteQuery({
     params.page,
     params.limit,
     params.sort,
+    params.language,
   ],
   request: showCommentsRequest,
   mapper: (response) => ({

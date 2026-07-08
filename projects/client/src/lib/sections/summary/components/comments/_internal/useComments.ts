@@ -11,6 +11,7 @@ type UseCommentsProps = {
   slug: string;
   limit?: number;
   sort: CommentSortType;
+  language?: string;
 } & CommentTypeProps;
 
 function typeToCommentsQuery(props: UseCommentsProps) {
@@ -18,6 +19,7 @@ function typeToCommentsQuery(props: UseCommentsProps) {
     slug: props.slug,
     limit: props.limit ?? DEFAULT_PAGE_SIZE,
     sort: props.sort,
+    language: props.language,
   };
 
   switch (props.type) {

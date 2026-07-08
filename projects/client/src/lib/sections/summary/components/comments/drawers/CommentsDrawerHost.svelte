@@ -6,6 +6,8 @@
   import { COMMENTS_DRILL_SIZE } from "$lib/utils/constants";
   import { writable } from "svelte/store";
   import type { CommentsProps } from "../CommentsProps";
+  import CommentLanguageSelect from "../_internal/CommentLanguageSelect.svelte";
+  import { useCommentLanguage } from "../_internal/useCommentLanguage.svelte.ts";
   import type { ActiveComment } from "../_internal/models/ActiveComment";
   import { useComments } from "../_internal/useComments";
   import ReviewsDrawerShell from "./_internal/ReviewsDrawerShell.svelte";
@@ -18,6 +20,8 @@
   const { onClose, source, media, ...props }: CommentsDrawerProps = $props();
 
   const { current: sortType, set, options } = useToggler("comment");
+
+  const commentLanguage = useCommentLanguage();
 
   const isOpened = writable(false);
 </script>
@@ -37,6 +41,7 @@
           slug: media.slug,
           limit: COMMENTS_DRILL_SIZE,
           sort: $sortType.value,
+          language: commentLanguage.filter,
           ...props,
         })}
       {media}
@@ -46,5 +51,9 @@
 
   {#snippet badge()}
     <Toggler value={$sortType.value} onChange={set} {options} />
+    <CommentLanguageSelect
+      value={commentLanguage.value}
+      onChange={commentLanguage.set}
+    />
   {/snippet}
 </Drawer>
