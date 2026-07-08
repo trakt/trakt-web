@@ -12,6 +12,7 @@ export function mapToSocialActivityEntries(
       key: `${mediaSocial.key}-watched`,
       type: 'watch',
       playCount: mediaSocial.watched.plays,
+      minutesWatched: mediaSocial.watched.minutesWatched ?? null,
     });
   }
 

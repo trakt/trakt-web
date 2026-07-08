@@ -18,6 +18,7 @@ const MediaSocialCommentSchema = z.object({
 
 const MediaSocialWatchedSchema = z.object({
   plays: z.number(),
+  minutesWatched: z.number().nullish(),
   lastWatchedAt: z.date().nullish(),
   lastUpdatedAt: z.date().nullish(),
   rating: MediaSocialRatingSchema.optional(),

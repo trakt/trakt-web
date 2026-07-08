@@ -2,8 +2,9 @@
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import StemTag from "$lib/components/tags/StemTag.svelte";
-  import { getLocale } from "$lib/features/i18n";
+  import { getLocale, languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toUserRating } from "$lib/utils/formatting/number/toUserRating";
   import { summaryDrawerNavigation } from "../../../_internal/summaryDrawerNavigation";
   import type { SocialActivityEntry } from "../models/SocialActivityEntry";
@@ -11,6 +12,12 @@
   const { activity }: { activity: SocialActivityEntry } = $props();
 
   const { buildReviewDrawerLink } = summaryDrawerNavigation();
+
+  const watchTimeLabel = $derived(
+    activity.type === "watch" && activity.minutesWatched
+      ? toHumanDuration({ minutes: activity.minutesWatched }, languageTag())
+      : null,
+  );
 
   const tagText = $derived.by(() => {
     switch (activity.type) {
@@ -30,7 +37,14 @@
 
 {#snippet tag()}
   <StemTag>
-    <p class="bold capitalize no-wrap">{tagText}</p>
+    {#if watchTimeLabel}
+      <p class="bold no-wrap">{watchTimeLabel}</p>
+      <span class="trakt-social-activity-play-count capitalize tag no-wrap">
+        · {tagText}
+      </span>
+    {:else}
+      <p class="bold capitalize no-wrap">{tagText}</p>
+    {/if}
 
     {#if activity.type === "rating"}
       <span class="trakt-social-activity-icon">
@@ -61,6 +75,10 @@
     :global(.trakt-link) {
       text-decoration: none;
     }
+  }
+
+  .trakt-social-activity-play-count {
+    opacity: var(--de-emphasized-opacity);
   }
 
   .trakt-social-activity-icon {

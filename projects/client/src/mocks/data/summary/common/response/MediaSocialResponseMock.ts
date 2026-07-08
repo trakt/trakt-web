@@ -41,6 +41,7 @@ export const MediaSocialResponseMock: MediaSocialResponseInput = [
     user: HarryDuBoisResponseMock,
     watched: {
       plays: 2,
+      minutes_watched: 210,
       last_watched_at: '2026-06-01T20:15:00.000Z',
       last_updated_at: '2026-06-01T20:16:00.000Z',
       rating: {
