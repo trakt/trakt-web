@@ -12,8 +12,8 @@
   } = $props();
 </script>
 
-<div class="season-tab-title">
-  <div class="season-tab-title-main">
+<div class="drawer-tab-title">
+  <div class="drawer-tab-title-main">
     <span class="title ellipsis">{title}</span>
     {#if metaInfo}
       {@render metaInfo()}
@@ -21,21 +21,21 @@
   </div>
 
   {#if actions}
-    <div class="season-tab-title-actions">
+    <div class="drawer-tab-title-actions">
       {@render actions()}
     </div>
   {/if}
 </div>
 
 <style lang="scss">
-  .season-tab-title {
+  .drawer-tab-title {
     display: flex;
     align-items: center;
     gap: var(--gap-s);
     min-height: var(--ni-40);
   }
 
-  .season-tab-title-main {
+  .drawer-tab-title-main {
     display: flex;
     flex-direction: column;
     min-width: 0;
@@ -45,7 +45,7 @@
     }
   }
 
-  .season-tab-title-actions {
+  .drawer-tab-title-actions {
     display: flex;
     align-items: center;
     gap: var(--gap-xs);

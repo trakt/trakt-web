@@ -19,6 +19,7 @@
   import CommentsDrawerHost from "./components/comments/drawers/CommentsDrawerHost.svelte";
   import ReviewDrawerHost from "./components/comments/drawers/ReviewDrawerHost.svelte";
   import DetailsDrawer from "./components/details/DetailsDrawer.svelte";
+  import EpisodeDrawerHost from "./components/episode-drawer/EpisodeDrawerHost.svelte";
   import type { MediaDetailsProps } from "./components/details/MediaDetailsProps";
   import HistoryDrawerHost from "./components/history/HistoryDrawerHost.svelte";
   import NotesDrawerHost from "./components/notes/NotesDrawerHost.svelte";
@@ -42,7 +43,7 @@
     currentSeason?: number;
   } & MediaDetailsProps = $props();
 
-  const { drawer, close, sourceCommentId } = $derived(
+  const { drawer, close, sourceCommentId, sourceEpisode } = $derived(
     summaryDrawerNavigation(page.url.searchParams),
   );
 
@@ -141,6 +142,16 @@
     show={showEntry}
     {seasons}
     {currentSeason}
+    onClose={close}
+  />
+{/if}
+
+{#if drawer === SummaryDrawers.Episode && seasons && currentSeason != null && sourceEpisode != null && showEntry}
+  <EpisodeDrawerHost
+    show={showEntry}
+    {seasons}
+    season={currentSeason}
+    episode={sourceEpisode}
     onClose={close}
   />
 {/if}

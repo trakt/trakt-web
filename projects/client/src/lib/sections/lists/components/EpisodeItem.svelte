@@ -219,6 +219,7 @@
         },
       }}
       popupActions={props.popupActions}
+      urlOverride={props.urlOverride}
       layout={summaryCardLayout}
       badge={action}
       {sortTag}
