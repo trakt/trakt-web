@@ -4886,6 +4886,14 @@
       "default": "Usually the wrong files were uploaded, or the export was empty. Double-check you uploaded the files listed above from a fresh export. If it still comes up empty, send it to us below.",
       "description": "TV Time FAQ answer about an import that imported nothing."
     },
+    "tv_time_faq_missing_episodes_question": {
+      "default": "Some shows or episodes are missing or marked unwatched.",
+      "description": "TV Time FAQ question about shows or episodes missing / marked unwatched after import."
+    },
+    "tv_time_faq_missing_episodes_answer": {
+      "default": "As of July 8, 2026 we've improved how the importer matches episodes, so shows that previously came in incomplete should now import fully. Import your export again to pull in the missing episodes. If some are still missing after that, delete the old plays first, then import once more.",
+      "description": "TV Time FAQ answer explaining the improved importer (released July 8, 2026) recovers missing episodes on re-import, and to delete old plays before re-importing if issues persist. Keep the date aligned with the importer's actual release date."
+    },
     "tv_time_faq_missing_ratings_question": {
       "default": "My ratings didn't come across.",
       "description": "TV Time FAQ question about ratings missing after import."
