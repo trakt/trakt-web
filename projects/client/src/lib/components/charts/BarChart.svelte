@@ -13,6 +13,10 @@
   // When the active bar's top is within this many px of the plot top, flip the
   // tooltip below it so it isn't clipped by the chart's container.
   const TOOLTIP_FLIP_THRESHOLD = 52;
+  // When the active bar is within this many px of a horizontal edge, anchor the
+  // tooltip by its near side instead of centering it, so a wide tooltip doesn't
+  // spill past the chart's (scroll-clipped) container.
+  const TOOLTIP_EDGE_THRESHOLD = 80;
 
   const {
     data,
@@ -191,6 +195,8 @@
       class="bar-chart-tooltip"
       class:is-pinned={interaction.pinned}
       class:is-below={activeBar.y < TOOLTIP_FLIP_THRESHOLD}
+      class:is-start={activeBar.center < TOOLTIP_EDGE_THRESHOLD}
+      class:is-end={width - activeBar.center < TOOLTIP_EDGE_THRESHOLD}
       style:left="{activeBar.center}px"
       style:top="{activeBar.y}px"
     >
@@ -280,13 +286,23 @@
   .bar-chart-tooltip {
     position: absolute;
     pointer-events: none;
-    transform: translate(-50%, calc(-100% - var(--ni-8)));
+    transform: translate(var(--tt-x, -50%), var(--tt-y, calc(-100% - var(--ni-8))));
     z-index: var(--layer-top);
 
     // Tall bar near the top: anchor below the bar's top edge instead so the
     // tooltip stays inside the chart and isn't clipped.
     &.is-below {
-      transform: translate(-50%, var(--ni-8));
+      --tt-y: var(--ni-8);
+    }
+
+    // Edge bars: anchor the tooltip by its near side so a wide tooltip grows
+    // inward instead of spilling past the scroll-clipped container.
+    &.is-start {
+      --tt-x: 0;
+    }
+
+    &.is-end {
+      --tt-x: -100%;
     }
   }
 
