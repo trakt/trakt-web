@@ -9,7 +9,6 @@
   import YirStudiosSection from "../_internal/YirStudiosSection.svelte";
   import YirRatedSection from "../_internal/YirRatedSection.svelte";
   import YirPeopleSection from "../_internal/YirPeopleSection.svelte";
-  import YirLoading from "../_internal/YirLoading.svelte";
   import YirTitleSection from "../_internal/YirTitleSection.svelte";
   import YirUpgradeSection from "../_internal/YirUpgradeSection.svelte";
 
@@ -88,5 +87,5 @@
 
   <YirUpgradeSection />
 {:else if isLoading}
-  <YirLoading />
+  <YirTotalsSection stats={null} {year} />
 {/if}

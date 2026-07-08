@@ -2,7 +2,6 @@
   import { m } from "$lib/paraglide/messages";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
   import type { ReviewMode } from "../ReviewMode";
-  import YirLoading from "../_internal/YirLoading.svelte";
   import Yir2024CompaniesSection from "./_internal/Yir2024CompaniesSection.svelte";
   import Yir2024CountriesSection from "./_internal/Yir2024CountriesSection.svelte";
   import Yir2024GenresSection from "./_internal/Yir2024GenresSection.svelte";
@@ -53,7 +52,7 @@
   <!-- Top section paints immediately; the Hero core (year, name, label,
        membership) renders without the detail query, while the posters /
        watched-stats / first-play parts gate on `detail` being present. -->
-  <Yir2024TopSection {detail} {slug} {year} {month} {mode} />
+  <Yir2024TopSection {detail} {isLoading} {slug} {year} {month} {mode} />
 
   {#if detail}
     {#if detail.firstWatched}
@@ -223,10 +222,6 @@
         />
       </Yir2024PageInner>
     {/if}
-  {:else if isLoading}
-    <!-- Detail query in flight: hero has already painted above; show a
-         small inline indicator where the rest of the sections will mount. -->
-    <YirLoading />
   {/if}
 </div>
 

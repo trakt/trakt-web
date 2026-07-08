@@ -2,7 +2,6 @@
   import { m } from "$lib/paraglide/messages";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
   import YirCalendarSection from "../_internal/YirCalendarSection.svelte";
-  import YirLoading from "../_internal/YirLoading.svelte";
   import YirGenresSection from "../_internal/YirGenresSection.svelte";
   import YirNetworksSection from "../_internal/YirNetworksSection.svelte";
   import YirPeopleSection from "../_internal/YirPeopleSection.svelte";
@@ -168,5 +167,5 @@
 
   <YirUpgradeSection />
 {:else if isLoading}
-  <YirLoading />
+  <YirTotalsSection stats={null} year="all" />
 {/if}

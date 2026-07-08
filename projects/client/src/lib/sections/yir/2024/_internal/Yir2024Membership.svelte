@@ -38,7 +38,7 @@
     align-items: center;
     column-gap: var(--gap-m);
     width: 100%;
-    margin-top: var(--ni-neg-24);
+    margin-top: var(--ni-neg-12);
     color: var(--color-yir-text-secondary);
     box-sizing: border-box;
 

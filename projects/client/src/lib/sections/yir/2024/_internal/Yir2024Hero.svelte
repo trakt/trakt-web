@@ -21,12 +21,14 @@
     slug,
     year,
     detail,
+    isLoading = false,
     month = 1,
     mode = "yir",
   }: {
     slug: string;
     year: number;
     detail: YirDetail | null;
+    isLoading?: boolean;
     /** 1-12. Only meaningful in MIR mode. */
     month?: number;
     mode?: ReviewMode;
@@ -108,7 +110,7 @@
   {/if}
 
   <div class="yir-2024-posters-membership">
-    <Yir2024PostersRow entries={heroPosters} />
+    <Yir2024PostersRow entries={heroPosters} {isLoading} />
     <Yir2024Membership {joinYear} />
   </div>
 </header>
