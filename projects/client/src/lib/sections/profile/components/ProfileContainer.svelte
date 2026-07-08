@@ -27,7 +27,7 @@
 
     overflow: hidden;
 
-    align-self: center;
+    align-self: flex-start;
 
     border-radius: var(--border-radius-l);
     background: var(--background-profile-details);

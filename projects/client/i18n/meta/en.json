@@ -964,6 +964,35 @@
         }
       }
     },
+    "text_plays_watched": {
+      "default": "{count} plays",
+      "description": "Text for the total number of plays by a user. This should be as short and concise as possible.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "label_stats_finished": {
+      "default": "Finished",
+      "description": "Label for the number of shows a user has finished watching, shown in the all-time stats drawer."
+    },
+    "stat_text_time_watched": {
+      "default": "Watched",
+      "description": "Label for the total amount of time a user has spent watching, shown as a stat on the profile."
+    },
+    "button_text_all_time_stats": {
+      "default": "View All Stats",
+      "description": "Text for the button on the profile that opens the all-time stats drawer."
+    },
+    "button_label_all_time_stats": {
+      "default": "View all-time stats",
+      "description": "Aria-label for the button on the profile that opens the all-time stats drawer."
+    },
+    "text_vip_upsell_progress_stats": {
+      "default": "Unlock started and finished stats.",
+      "description": "Upsell prompt shown to free users for the VIP-only started and finished stats in the all-time stats drawer."
+    },
     "header_details": {
       "default": "Details",
       "description": "Header for a details section."
@@ -6612,7 +6641,7 @@
       "description": "Aria-label for the button that allows users to view more of their limits."
     },
     "button_text_month_in_review": {
-      "default": "{month} in review",
+      "default": "{month} in Review",
       "description": "Text for the button that allows users to view their month in review.",
       "variables": {
         "month": {
@@ -6628,6 +6657,32 @@
           "type": "string"
         }
       }
+    },
+    "button_text_year_in_review": {
+      "default": "{year} in Review",
+      "description": "Text for the button that allows users to view a past year in review.",
+      "variables": {
+        "year": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_year_in_review": {
+      "default": "View your {year} in review",
+      "description": "Aria-label for the button that allows users to view a past year in review.",
+      "variables": {
+        "year": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_year_to_date": {
+      "default": "Year to Date",
+      "description": "Text for the button that allows users to view their year-to-date stats."
+    },
+    "button_label_year_to_date": {
+      "default": "View your year to date",
+      "description": "Aria-label for the button that allows users to view their year-to-date stats."
     },
     "warning_prompt_remove_from_liked_lists": {
       "default": "Are you sure you want to remove \"{list}\" from your liked lists?",

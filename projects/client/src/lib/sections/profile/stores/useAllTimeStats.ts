@@ -1,58 +1,45 @@
-import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
-import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { chunkedReduce } from '$lib/utils/timing/chunkedReduce.ts';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import { personalListsCountQuery } from '$lib/requests/queries/users/personalListsCountQuery.ts';
+import { userStatsQuery } from '$lib/requests/queries/users/userStatsQuery.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
-import { from, map, Observable, of, startWith, switchMap } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 
 export type AllTimeStats = {
+  playCount: number;
   movieCount: number;
   showCount: number;
   episodeCount: number;
+  commentCount: number;
+  listCount: number;
 };
 
 const emptyStats: AllTimeStats = {
+  playCount: 0,
   movieCount: 0,
   showCount: 0,
   episodeCount: 0,
+  commentCount: 0,
+  listCount: 0,
 };
-
-type StatsState = {
-  stats: AllTimeStats;
-  isLoading: boolean;
-};
-
-const loadingState: StatsState = { stats: emptyStats, isLoading: true };
-
-function sumEpisodes(shows: UserHistory['shows']): Promise<number> {
-  return chunkedReduce(
-    shows.values(),
-    (sum, show) => sum + show.episodes.length,
-    0,
-  );
-}
-
-function computeStats(h: UserHistory): Observable<StatsState> {
-  return from(sumEpisodes(h.shows)).pipe(
-    map((episodeCount) => ({
-      stats: {
-        movieCount: h.movies.size,
-        showCount: h.shows.size,
-        episodeCount,
-      },
-      isLoading: false,
-    })),
-    startWith(loadingState),
-  );
-}
 
 export function useAllTimeStats() {
-  const { history } = useUser();
+  const stats = useQuery(userStatsQuery({ slug: 'me' }));
+  const lists = useQuery(personalListsCountQuery({ slug: 'me' }));
 
-  const state = history.pipe(
-    switchMap((h): Observable<StatsState> => {
-      if (!h) return of(loadingState);
-      return computeStats(h);
-    }),
+  const state = combineLatest([stats, lists]).pipe(
+    map(([$stats, $lists]) => ({
+      stats: $stats.data
+        ? {
+          playCount: $stats.data.playCount,
+          movieCount: $stats.data.movieCount,
+          showCount: $stats.data.showCount,
+          episodeCount: $stats.data.episodeCount,
+          commentCount: $stats.data.commentCount,
+          listCount: $lists.data?.count ?? 0,
+        }
+        : emptyStats,
+      isLoading: $stats.isLoading,
+    })),
     multicast(),
   );
 

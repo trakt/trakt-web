@@ -32,6 +32,7 @@ import { UserFollowRequestsResponseMock } from '../data/users/response/UserFollo
 import { UserFollowingResponseMock } from '../data/users/response/UserFollowingResponseMock.ts';
 import { UserMonthInReviewResponseMock } from '../data/users/response/UserMonthInReviewResponseMock.ts';
 import { UserPendingFollowsResponseMock } from '../data/users/response/UserPendingFollowsResponseMock.ts';
+import { UserStatsResponseMock } from '../data/users/response/UserStatsResponseMock.ts';
 import { UserWatchingResponseMock } from '../data/users/response/UserWatchingResponseMock.ts';
 import { WatchedMoviePlaysResponseMock } from '../data/users/response/WatchedMoviePlaysResponseMock.ts';
 import { WatchedMoviesResponseMock } from '../data/users/response/WatchedMoviesResponseMock.ts';
@@ -45,6 +46,9 @@ import { WatchlistShowsResponseMock } from '../data/users/response/WatchlistShow
 export const users = [
   http.get('http://localhost/users/settings', () => {
     return HttpResponse.json(ExtendedUsersResponseMock);
+  }),
+  http.get('http://localhost/users/me/stats', () => {
+    return HttpResponse.json(UserStatsResponseMock);
   }),
   http.get(
     `http://localhost/users/${
