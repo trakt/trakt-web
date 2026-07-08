@@ -4,7 +4,7 @@
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
-  import PeriodHeader from "./PeriodHeader.svelte";
+  import ReviewHeader from "./ReviewHeader.svelte";
 
   const {
     slug,
@@ -50,7 +50,7 @@
   const shareText = $derived(m.mir_share_text({ month: periodLabel }));
 </script>
 
-<PeriodHeader
+<ReviewHeader
   {slug}
   {prevUrl}
   {nextUrl}

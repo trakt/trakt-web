@@ -3,7 +3,7 @@
   import type { YirYear } from "$lib/requests/models/YirYear";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
-  import PeriodHeader from "./PeriodHeader.svelte";
+  import ReviewHeader from "./ReviewHeader.svelte";
 
   const {
     slug,
@@ -45,7 +45,7 @@
   );
 </script>
 
-<PeriodHeader
+<ReviewHeader
   {slug}
   prevUrl={prevYearUrl}
   nextUrl={nextYearUrl}
