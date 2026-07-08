@@ -10,6 +10,7 @@
     disabled = false,
     autoWidth = false,
     onChange,
+    trigger,
   }: SingleSelectProps = $props();
 
   const selectedLabel = $derived(
@@ -26,6 +27,7 @@
   {placeholder}
   {disabled}
   {autoWidth}
+  {trigger}
   triggerLabel={selectedLabel}
   hasValue={Boolean(value)}
   onValueChange={onChange}

@@ -24,6 +24,7 @@
     hasValue: boolean;
     children: Snippet;
     autoWidth?: boolean;
+    trigger?: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
   } & (SelectSingleProps | SelectMultipleProps);
 
   const {
@@ -33,6 +34,7 @@
     hasValue,
     children,
     autoWidth = false,
+    trigger,
     ...rest
   }: SelectBaseProps = $props();
 
@@ -42,15 +44,19 @@
 {#snippet shell()}
   <Select.Trigger>
     {#snippet child({ props })}
-      <button
-        {...props}
-        class="trakt-select-trigger"
-        aria-label={placeholder}
-        data-has-value={hasValue}
-      >
-        <span class="ellipsis capitalize">{triggerLabel}</span>
-        <DropdownCaretIcon {open} />
-      </button>
+      {#if trigger}
+        {@render trigger({ props, open })}
+      {:else}
+        <button
+          {...props}
+          class="trakt-select-trigger"
+          aria-label={placeholder}
+          data-has-value={hasValue}
+        >
+          <span class="ellipsis capitalize">{triggerLabel}</span>
+          <DropdownCaretIcon {open} />
+        </button>
+      {/if}
     {/snippet}
   </Select.Trigger>
   <Select.Portal>
