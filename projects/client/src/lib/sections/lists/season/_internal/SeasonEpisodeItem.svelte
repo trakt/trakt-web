@@ -10,6 +10,7 @@
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import type { BaseItemProps } from "$lib/sections/lists/components/models/BaseItemProps";
+  import type { EpisodeUrlOverride } from "$lib/sections/lists/components/models/EpisodeUrlOverride";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchedUntilHereDrawer from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/WatchedUntilHereDrawer.svelte";
   import { useWatchUntilHereEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/useWatchUntilHereEpisodes.ts";
@@ -27,6 +28,7 @@
     isCurrentEpisode?: boolean;
     style?: BaseItemProps["style"];
     source: string;
+    urlOverride?: EpisodeUrlOverride;
   };
 
   const {
@@ -40,6 +42,7 @@
     isCurrentEpisode = false,
     style,
     source,
+    urlOverride,
   }: SeasonEpisodeItemProps = $props();
 
   const isFuture = $derived(episode.effectiveReleaseDate > new Date());
@@ -119,6 +122,7 @@
     variant={isFuture ? "upcoming" : "default"}
     context="show"
     {source}
+    {urlOverride}
     coverUrl={$src}
   />
 {/snippet}

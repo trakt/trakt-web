@@ -11,18 +11,23 @@
   import { useShowWatchedEpisodes } from "$lib/sections/lists/season/_internal/useShowWatchedEpisodes";
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
   import SeasonProgressCard from "$lib/sections/summary/components/seasons/SeasonProgressCard.svelte";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
-  import SeasonTabTitle from "./SeasonTabTitle.svelte";
+  import DrawerTabTitle from "$lib/sections/summary/components/_internal/DrawerTabTitle.svelte";
 
   const {
     show,
     seasons,
     currentSeason,
+    currentEpisode,
   }: {
     show: ShowEntry;
     seasons: Season[];
     currentSeason: number;
+    currentEpisode?: number;
   } = $props();
+
+  const { buildEpisodeDrawerLink } = summaryDrawerNavigation();
 
   const { list: episodes, isLoading } = $derived(
     useSeasonEpisodes(show.slug, currentSeason),
@@ -65,7 +70,7 @@
     {/if}
   </RenderFor>
 
-  <SeasonTabTitle title={m.tab_text_seasons_episodes()}>
+  <DrawerTabTitle title={m.tab_text_seasons_episodes()}>
     {#snippet metaInfo()}
       {#if !$isLoading}
         <ListMetaInfo
@@ -73,7 +78,7 @@
         />
       {/if}
     {/snippet}
-  </SeasonTabTitle>
+  </DrawerTabTitle>
 
   {#if $isLoading}
     <LoadingIndicator />
@@ -92,6 +97,11 @@
           currentSeasonEpisodes={$episodes}
           watchedBySeason={$watchedBySeason}
           isWatchedLoading={$isWatchedLoading}
+          isCurrentEpisode={episode.number === currentEpisode}
+          urlOverride={buildEpisodeDrawerLink({
+            season: episode.season,
+            episode: episode.number,
+          })}
           style="minimal"
           source="seasons-drawer"
         />

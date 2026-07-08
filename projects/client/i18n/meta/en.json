@@ -1597,6 +1597,10 @@
       "default": "People",
       "description": "Title for the drawer containing people related to a movie, show, or episode. This title should be as short and concise as possible."
     },
+    "drawer_title_episode_information": {
+      "default": "Episode Information",
+      "description": "Title for the episode information drawer opened from an episode card on a summary page."
+    },
     "drawer_meta_info_cast": {
       "default": "Cast",
       "description": "Subtitle for the people drawer when cast members are selected. This should be as short and concise as possible."

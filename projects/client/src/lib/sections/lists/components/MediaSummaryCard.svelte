@@ -141,11 +141,17 @@
     };
   });
 
-  const href = $derived(
-    rest.type === "episode"
-      ? UrlBuilder.episode(media.slug, rest.episode.season, rest.episode.number)
-      : UrlBuilder.media(media.type, media.slug),
+  const urlOverride = $derived(
+    rest.type === "episode" ? rest.urlOverride : undefined,
   );
+
+  const href = $derived.by(() => {
+    if (urlOverride) return urlOverride.href;
+
+    return rest.type === "episode"
+      ? UrlBuilder.episode(media.slug, rest.episode.season, rest.episode.number)
+      : UrlBuilder.media(media.type, media.slug);
+  });
 
   const popupMenuTitle = $derived(
     rest.type === "episode" ? rest.episode.title : media.title,
@@ -281,6 +287,8 @@
 
   <Link
     {href}
+    noscroll={urlOverride?.noscroll}
+    replacestate={urlOverride?.replacestate}
     onclick={() => source && track({ source, type: rest.type })}
     color="inherit"
   >
