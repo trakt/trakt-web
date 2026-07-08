@@ -2,6 +2,7 @@ import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
 import { toISOString } from './utils/toISOString.ts';
+import { toEpisodeIds } from './utils/toEpisodeIds.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
 // The current TV Time "export my data" tool emits a set of tvtime-*.* files
@@ -90,16 +91,25 @@ function toTvdb(value?: number | null): number | undefined {
 function parseEpisodeRow(row: EpisodeRow): UniversalImportItem | null {
   if (row.is_watched !== 'true') return null;
 
-  const tvdbId = toInt(row.tvdb_id);
-  if (tvdbId == null) return null;
+  const showTvdb = toInt(row.series_tvdb_id);
+  const season = toInt(row.season);
+  const episode = toInt(row.episode);
+  const ids = toEpisodeIds({
+    tvdbId: toInt(row.tvdb_id),
+    showTvdb,
+    season,
+    episode,
+  });
+  if (ids == null) return null;
 
   return {
     action: 'history',
     type: 'episode',
-    ids: { tvdb: tvdbId },
+    ids,
+    showTvdb,
     title: row.title || undefined,
-    season: toInt(row.season),
-    episode: toInt(row.episode),
+    season,
+    episode,
     watched_at: toISOString(row.watched_at),
   };
 }
@@ -186,17 +196,27 @@ function parseCsvRows(
 function parseJsonShows(shows: JsonShow[]): UniversalImportItem[] {
   return shows.flatMap((show) => {
     if (!show) return [];
+    const showTvdb = toTvdb(show.id?.tvdb);
+    const showImdb = toImdb(show.id?.imdb);
     const episodes = (show.seasons ?? []).flatMap((season) => {
       if (!season) return [];
       return (season.episodes ?? [])
         .filter((episode) => episode?.is_watched === true)
         .flatMap((episode): UniversalImportItem[] => {
-          const tvdbId = toTvdb(episode?.id?.tvdb);
-          if (tvdbId == null) return [];
+          const ids = toEpisodeIds({
+            tvdbId: toTvdb(episode?.id?.tvdb),
+            showTvdb,
+            showImdb,
+            season: season.number,
+            episode: episode.number,
+          });
+          if (ids == null) return [];
           return [{
             action: 'history',
             type: 'episode',
-            ids: { tvdb: tvdbId },
+            ids,
+            showTvdb,
+            showImdb,
             title: show.title || undefined,
             season: season.number,
             episode: episode.number,
@@ -207,14 +227,12 @@ function parseJsonShows(shows: JsonShow[]): UniversalImportItem[] {
 
     if (show.status !== WATCHLIST_SERIES_STATUS) return episodes;
 
-    const tvdbId = toTvdb(show.id?.tvdb);
-    const imdbId = toImdb(show.id?.imdb);
-    if (tvdbId == null && !imdbId) return episodes;
+    if (showTvdb == null && !showImdb) return episodes;
 
     return [...episodes, {
       action: 'watchlist',
       type: 'show',
-      ids: { tvdb: tvdbId, imdb: imdbId },
+      ids: { tvdb: showTvdb, imdb: showImdb },
       title: show.title || undefined,
     }];
   });
@@ -284,6 +302,22 @@ async function collectEntries(files: ReadonlyArray<File>): Promise<Entry[]> {
 // the same episode/movie present in both the CSV and JSON exports collapses to
 // one item.
 function itemKey(item: UniversalImportItem): string {
+  // A positional episode is identified by show + season + episode alone; its
+  // own id must stay out of the key, or the same watch present in both
+  // serializations (one carrying the episode id, one not) fails to dedupe.
+  if (
+    item.type === 'episode' &&
+    (item.showTvdb != null || item.showImdb != null) &&
+    item.season != null && item.episode != null
+  ) {
+    // Prefer tvdb (else imdb) so a watch present in both serializations, one
+    // carrying imdb and one not, keys the same and dedupes.
+    const showKey = item.showTvdb != null
+      ? `tvdb-${item.showTvdb}`
+      : `imdb-${item.showImdb}`;
+    return [item.action, item.type, showKey, item.season, item.episode]
+      .join('-');
+  }
   return [
     item.action,
     item.type,

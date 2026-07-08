@@ -2,6 +2,7 @@ import { zipSync } from 'fflate';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { buildHistoryPayload } from '../engine/buildHistoryPayload.ts';
 import type { UniversalImportItem } from '../ImportTypes.ts';
 import { TvTimeCsvParser } from './TvTimeCsvParser.ts';
 
@@ -75,6 +76,39 @@ describe('TvTimeCsvParser: real anonymized exports', () => {
     // Every parsed item must resolve to a TVDB id - the v2 bug produced items
     // with no id (or none at all).
     expect(result.every((item) => item.ids.tvdb != null)).toBe(true);
+    // Episodes also carry the show's TVDB id, so history can resolve them
+    // positionally when Trakt has no TVDB id on the episode.
+    expect(
+      result
+        .filter((item) => item.type === 'episode')
+        .every((item) => item.showTvdb != null),
+    ).toBe(true);
+  });
+
+  it('routes real episode watches through positional history resolution', async () => {
+    // TV Time episodes carry a TVDB id, but many Trakt episodes have none, so
+    // id-based history drops them; they must be sent as show + season/episode
+    // number instead. Proven here end-to-end on a real export.
+    const result = await TvTimeCsvParser.parse([
+      csvFile(
+        'gdpr-v2-tracking-prod-records-v2.csv',
+        'tracking-prod-records-v2.csv',
+      ),
+    ]);
+
+    const payload = buildHistoryPayload([...result]);
+
+    // No episode goes out by its own id; all 8 route positionally under shows.
+    expect(payload.episodes).toHaveLength(0);
+    const positionalEpisodes = (payload.shows ?? [])
+      .flatMap((show) => ('seasons' in show ? show.seasons ?? [] : []))
+      .flatMap((season) => season.episodes ?? []);
+    expect(positionalEpisodes).toHaveLength(8);
+    expect(
+      (payload.shows ?? []).every((show) =>
+        'ids' in show && show.ids != null && 'tvdb' in show.ids
+      ),
+    ).toBe(true);
   });
 
   it('imports a real current-format export from loose tvtime-*.csv files', async () => {

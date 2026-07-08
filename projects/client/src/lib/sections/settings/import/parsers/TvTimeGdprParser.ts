@@ -2,6 +2,7 @@ import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
 import { toISOString } from './utils/toISOString.ts';
+import { toEpisodeIds } from './utils/toEpisodeIds.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
 type TrackingV1Row = {
@@ -176,19 +177,28 @@ function parseV1Episode(row: TrackingV1Row): UniversalImportItem | null {
 function parseV2Episode(row: TrackingV2Row): UniversalImportItem | null {
   if (!row.key?.startsWith('watch-episode-')) return null;
 
-  // ep_id is the TVDB episode id (verified against the Trakt search API).
-  // Fall back to the legacy episode_id column for export variants that only
-  // populate that one.
-  const tvdbId = toInt(firstOf(row.ep_id, row.episode_id));
-  if (tvdbId == null) return null;
+  // ep_id is the TVDB episode id (verified against the Trakt search API);
+  // legacy exports carry it under episode_id. s_id/s_no/ep_no back positional
+  // resolution when the episode's own id is absent.
+  const showTvdb = toInt(row.s_id);
+  const season = toInt(firstOf(row.s_no, row.season_number));
+  const episode = toInt(firstOf(row.ep_no, row.episode_number));
+  const ids = toEpisodeIds({
+    tvdbId: toInt(firstOf(row.ep_id, row.episode_id)),
+    showTvdb,
+    season,
+    episode,
+  });
+  if (ids == null) return null;
 
   return {
     action: 'history',
     type: 'episode',
-    ids: { tvdb: tvdbId },
+    ids,
+    showTvdb,
     title: row.series_name || undefined,
-    season: toInt(firstOf(row.s_no, row.season_number)),
-    episode: toInt(firstOf(row.ep_no, row.episode_number)),
+    season,
+    episode,
     watched_at: toISOString(row.created_at),
   };
 }
