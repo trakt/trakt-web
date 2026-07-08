@@ -103,12 +103,34 @@
   .yir-cover-bg {
     position: absolute;
     inset: 0;
+    // Own stacking context so the top scrim below can layer above the image
+    // (the image is a stacking context via `contain`, so a plain positioned
+    // ::before would otherwise paint under it). Stays below the titles.
+    isolation: isolate;
 
     :global(img) {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
+    }
+
+    // The fixed header's text is always light on this template, so darken the
+    // top of the cover behind it (fading to transparent) to keep it readable
+    // over bright posters. Height covers the header plus the safe-area inset.
+    &::before {
+      content: "";
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: var(--layer-base);
+      height: calc(var(--ni-160) + env(safe-area-inset-top, 0));
+      background: linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--shade-1000) 60%, transparent),
+        transparent
+      );
+      pointer-events: none;
     }
   }
 
