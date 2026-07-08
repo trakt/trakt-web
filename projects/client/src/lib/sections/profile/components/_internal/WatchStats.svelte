@@ -11,20 +11,10 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-
-  type WatchStats = {
-    playCount: number;
-    movieCount: number;
-    showCount: number;
-    episodeCount: number;
-    minuteCount?: number;
-    ratingCount?: number;
-    listCount?: number;
-    commentCount?: number;
-  };
+  import type { StatsCardStats } from "./StatsCardProps.ts";
 
   type WatchStatsProps = {
-    stats: WatchStats;
+    stats: StatsCardStats;
     isLoading: boolean;
     size?: "normal" | "large";
   };
