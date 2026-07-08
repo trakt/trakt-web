@@ -11,6 +11,7 @@ export enum SummaryDrawers {
   Social = 'social',
   WhereToWatch = 'where-to-watch',
   Seasons = 'seasons',
+  Episode = 'episode',
   Notes = 'notes',
   Comments = 'comments',
   Review = 'review',
@@ -19,10 +20,13 @@ export enum SummaryDrawers {
 }
 
 const commentIdParam = 'comment_id';
+const episodeParam = 'episode';
+const seasonParam = 'season';
 
 const summaryDrawerParams = {
   [SummaryDrawers.Comments]: { [commentIdParam]: '' },
   [SummaryDrawers.Review]: { [commentIdParam]: '' },
+  [SummaryDrawers.Episode]: { [episodeParam]: '' },
 } satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
 
 function mapToDrawer(value: string | Nil) {
@@ -45,6 +49,8 @@ function mapToDrawer(value: string | Nil) {
       return SummaryDrawers.WhereToWatch;
     case SummaryDrawers.Seasons:
       return SummaryDrawers.Seasons;
+    case SummaryDrawers.Episode:
+      return SummaryDrawers.Episode;
     case SummaryDrawers.Notes:
       return SummaryDrawers.Notes;
     case SummaryDrawers.Comments:
@@ -65,12 +71,28 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
   const drawer = mapToDrawer(searchParams?.get(DRAWER_VIEW_PARAM));
   const commentId = searchParams?.get(commentIdParam);
   const sourceCommentId = commentId != null ? Number(commentId) : undefined;
+  const episodeNumber = searchParams?.get(episodeParam);
+  const sourceEpisode = episodeNumber != null
+    ? Number(episodeNumber)
+    : undefined;
 
   return {
     drawer,
     sourceCommentId,
+    sourceEpisode,
     close,
     buildDrawerLink,
+    buildEpisodeDrawerLink: (
+      { season, episode }: { season: number; episode: number },
+    ) => {
+      const link = buildDrawerLink(
+        SummaryDrawers.Episode,
+        { [episodeParam]: String(episode) },
+      );
+      const url = new URL(link.href);
+      url.searchParams.set(seasonParam, String(season));
+      return { ...link, href: url.toString() };
+    },
     buildCommentsDrawerLink: (id?: number) =>
       buildDrawerLink(
         SummaryDrawers.Comments,

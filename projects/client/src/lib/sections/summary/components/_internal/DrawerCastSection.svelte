@@ -10,7 +10,7 @@
   import CreditMemberItem from "$lib/sections/lists/components/CreditMemberItem.svelte";
   import type { CreditMember } from "$lib/sections/lists/models/CreditMember.ts";
   import { toCreditMembers } from "$lib/sections/lists/toCreditMembers.ts";
-  import SeasonTabTitle from "./SeasonTabTitle.svelte";
+  import DrawerTabTitle from "./DrawerTabTitle.svelte";
 
   type CreditsType = "cast" | "crew";
 
@@ -71,8 +71,8 @@
   );
 </script>
 
-<div class="season-cast-section">
-  <SeasonTabTitle title={m.drawer_title_people()}>
+<div class="drawer-cast-section">
+  <DrawerTabTitle title={m.drawer_title_people()}>
     {#snippet metaInfo()}
       <ListMetaInfo text={creditsMetaInfo} />
     {/snippet}
@@ -86,7 +86,7 @@
         />
       {/if}
     {/snippet}
-  </SeasonTabTitle>
+  </DrawerTabTitle>
 
   {#if isLoading}
     <LoadingIndicator />
@@ -103,7 +103,7 @@
 
     {#if visibleCredits.length > 0}
       <div
-        id={`season-cast-list-${type}-${isSearching ? "search" : creditsType}`}
+        id={`drawer-cast-list-${type}-${isSearching ? "search" : creditsType}`}
         class="credit-list"
         role="list"
       >
@@ -122,7 +122,7 @@
 </div>
 
 <style lang="scss">
-  .season-cast-section {
+  .drawer-cast-section {
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);

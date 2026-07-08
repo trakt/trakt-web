@@ -39,6 +39,14 @@
     useEpisodeSpoilerImage({ episode, show, variant: rest.variant }),
   );
 
+  const episodeLink = $derived(
+    rest.urlOverride ?? {
+      href: UrlBuilder.episode(show.slug, episode.season, episode.number),
+      noscroll: undefined,
+      replacestate: undefined,
+    },
+  );
+
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 </script>
 
@@ -65,7 +73,9 @@
 
     <Link
       focusable={false}
-      href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
+      href={episodeLink.href}
+      noscroll={episodeLink.noscroll}
+      replacestate={episodeLink.replacestate}
       onclick={() => source && track({ source, type: "episode" })}
     >
       <CardCover
@@ -90,7 +100,9 @@
 
     <Link
       focusable={false}
-      href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
+      href={episodeLink.href}
+      noscroll={episodeLink.noscroll}
+      replacestate={episodeLink.replacestate}
       onclick={() => source && track({ source, type: "episode" })}
     >
       <CardCover

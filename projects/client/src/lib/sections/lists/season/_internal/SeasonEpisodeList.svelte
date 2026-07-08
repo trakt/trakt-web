@@ -47,7 +47,7 @@
     useShowWatchedEpisodes({ showId: show.id }),
   );
 
-  const { buildDrawerLink } = summaryDrawerNavigation();
+  const { buildDrawerLink, buildEpisodeDrawerLink } = summaryDrawerNavigation();
   const seasonDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Seasons));
 </script>
 
@@ -76,6 +76,10 @@
       watchedBySeason={$watchedBySeason}
       isWatchedLoading={$isWatchedLoading}
       isCurrentEpisode={episode.number === currentEpisode}
+      urlOverride={buildEpisodeDrawerLink({
+        season: episode.season,
+        episode: episode.number,
+      })}
       source="season-episode-list"
     />
   {/snippet}

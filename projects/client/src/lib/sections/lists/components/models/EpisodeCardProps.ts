@@ -3,6 +3,7 @@ import type { ShowInput } from '$lib/models/MediaInput.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry.ts';
 import type { BaseItemProps } from './BaseItemProps.ts';
+import type { EpisodeUrlOverride } from './EpisodeUrlOverride.ts';
 
 type EpisodeContext = 'show' | 'standalone';
 
@@ -29,6 +30,7 @@ export type EpisodeItemVariant =
 
 export type EpisodeCardProps = BaseItemProps & EpisodeItemVariant & {
   media: ShowInput;
+  urlOverride?: EpisodeUrlOverride;
   /**
    * FIXME: We should migrate these on the backend and remove from the client.
    */

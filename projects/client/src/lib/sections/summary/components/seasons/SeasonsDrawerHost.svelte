@@ -12,7 +12,7 @@
   import SeasonDropdown from "$lib/sections/lists/season/SeasonDropdown.svelte";
   import { fade } from "svelte/transition";
   import SeasonDrawerItem from "./_internal/SeasonDrawerItem.svelte";
-  import SeasonEpisodesTab from "./_internal/SeasonEpisodesTab.svelte";
+  import SeasonEpisodesTab from "./SeasonEpisodesTab.svelte";
   import SeasonOverviewTab from "./_internal/SeasonOverviewTab.svelte";
   import SeasonReviewsTab from "./_internal/SeasonReviewsTab.svelte";
 
