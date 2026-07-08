@@ -4,6 +4,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import PromotionBanners from "./_internal/PromotionBanners.svelte";
   import ReviewBanners from "./_internal/ReviewBanners.svelte";
+  import TvTimeImportBanner from "./tv-time-import/TvTimeImportBanner.svelte";
   import TvTimeBanner from "./tv-time/TvTimeBanner.svelte";
   import WelcomeBanner from "./welcome/WelcomeBanner.svelte";
 
@@ -14,6 +15,7 @@
 <RenderFor audience="authenticated">
   <WelcomeBanner />
   <TvTimeBanner />
+  <TvTimeImportBanner />
 </RenderFor>
 
 <RenderFor audience="vip">
