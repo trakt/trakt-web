@@ -14,6 +14,10 @@
       answer: m.tv_time_faq_nothing_imported_answer,
     },
     {
+      question: m.tv_time_faq_missing_episodes_question,
+      answer: m.tv_time_faq_missing_episodes_answer,
+    },
+    {
       question: m.tv_time_faq_missing_ratings_question,
       answer: m.tv_time_faq_missing_ratings_answer,
     },
