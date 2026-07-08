@@ -34,9 +34,9 @@
   const now = new Date();
   // In January the current year has no meaningful year-to-date yet, so treat
   // the previous year as the "current" review year (mirrors ThisYear.svelte).
-  const currentYear = now.getMonth() === 0
-    ? now.getFullYear() - 1
-    : now.getFullYear();
+  const currentYear = now.getUTCMonth() === 0
+    ? now.getUTCFullYear() - 1
+    : now.getUTCFullYear();
   const previousYear = currentYear - 1;
 
   const yearToDateHref = UrlBuilder.users("me").yearToDate(currentYear);
