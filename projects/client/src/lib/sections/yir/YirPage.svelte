@@ -47,7 +47,10 @@
     display: flex;
     flex-direction: column;
 
-    min-height: 100dvh;
+    // Pull up under the hidden navbar's safe-area spacer
+    margin-top: calc(-1 * env(safe-area-inset-top, 0));
+    min-height: calc(100dvh + env(safe-area-inset-top, 0));
+
     background-color: var(--color-yir-background);
     color: var(--color-yir-text-primary);
     overflow-x: hidden;

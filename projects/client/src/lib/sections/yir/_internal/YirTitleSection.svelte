@@ -117,14 +117,14 @@
 
     // The fixed header's text is always light on this template, so darken the
     // top of the cover behind it (fading to transparent) to keep it readable
-    // over bright posters. Height covers the header plus the safe-area inset.
+    // over bright posters.
     &::before {
       content: "";
       position: absolute;
       inset-block-start: 0;
       inset-inline: 0;
       z-index: var(--layer-base);
-      height: calc(var(--ni-160) + env(safe-area-inset-top, 0));
+      height: var(--ni-160);
       background: linear-gradient(
         to bottom,
         color-mix(in srgb, var(--shade-1000) 60%, transparent),
