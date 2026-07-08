@@ -16,6 +16,7 @@
   import Yir2024ThanksSection from "./_internal/Yir2024ThanksSection.svelte";
   import Yir2024TopSection from "./_internal/Yir2024TopSection.svelte";
   import Yir2024TrendsSection from "./_internal/Yir2024TrendsSection.svelte";
+  import YirUpgradeSection from "../_internal/YirUpgradeSection.svelte";
 
   const {
     detail,
@@ -223,6 +224,8 @@
       </Yir2024PageInner>
     {/if}
   {/if}
+
+  <YirUpgradeSection {slug} source={isMir ? "mir" : "yir"} />
 </div>
 
 <style lang="scss">
