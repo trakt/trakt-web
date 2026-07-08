@@ -1,6 +1,5 @@
 import type { EpisodeActivityHistory } from '$lib/requests/queries/users/episodeActivityHistoryQuery.ts';
 import type { MovieActivityHistory } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
-import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import type { MonthToDateDetails } from '../../models/MonthToDateDetails.ts';
 
@@ -19,9 +18,15 @@ function sumRuntime(
   movies: MovieActivityHistory[],
   episodes: EpisodeActivityHistory[],
 ): number {
-  const movieMinutes = movies.reduce((sum, m) => sum + m.movie.runtime, 0);
+  // Mappers default a missing runtime to NaN, so coerce to 0 before summing to
+  // keep the total a real number.
+  const runtimeOf = (value: number) => Number.isNaN(value) ? 0 : value;
+  const movieMinutes = movies.reduce(
+    (sum, m) => sum + runtimeOf(m.movie.runtime),
+    0,
+  );
   const episodeMinutes = episodes.reduce(
-    (sum, e) => sum + e.episode.runtime,
+    (sum, e) => sum + runtimeOf(e.episode.runtime),
     0,
   );
   return movieMinutes + episodeMinutes;
@@ -50,7 +55,7 @@ export function mapToMonthToDateDetails(
     minuteCount: sumRuntime(movies, episodes),
     ratingCount,
     coverUrl: firstWatchActivity
-      ? mapToCover(assertDefined(firstWatchActivity))
+      ? mapToCover(firstWatchActivity)
       : DEFAULT_COVER,
   };
 }
