@@ -5,5 +5,6 @@ export type RatingsDrawerProps =
   & {
     onClose: () => void;
     seasons?: Season[];
+    elevated?: boolean;
   }
   & MediaDetailsProps;

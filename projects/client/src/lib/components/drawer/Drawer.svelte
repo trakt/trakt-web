@@ -33,6 +33,9 @@
     variant?: "default" | "vip";
     drilldown?: ListDrilldownLinkProps;
     headerVariant?: "default" | "overlay";
+    // Raise this drawer (and its underlay) above a base-layer drawer, so a
+    // drawer stacked on top of another still closes on outside tap.
+    elevated?: boolean;
   };
 
   const {
@@ -50,12 +53,15 @@
     variant = "default",
     drilldown,
     headerVariant = "default",
+    elevated = false,
   }: DrawerProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const slideAxis = $derived($isMobile ? "y" : "x");
 
-  const { portal } = $derived(useDrawerPortal({ hasAutoClose, onClose }));
+  const { portal } = $derived(
+    useDrawerPortal({ hasAutoClose, onClose, elevated }),
+  );
 
   const trap = $derived((element: HTMLElement) => {
     if (trapSelector) {
@@ -94,6 +100,7 @@
 <div
   class={drawerClass}
   data-size={size}
+  data-elevated={elevated}
   data-header-variant={headerVariant}
   style:--drawer-header-overlay-opacity={headerOverlayOpacity}
   transition:slide={{ duration: 150, axis: slideAxis }}
@@ -193,6 +200,12 @@
     z-index: var(--layer-menu);
     position: fixed;
     box-sizing: border-box;
+
+    // Stacked above a base-layer drawer; its underlay (layer-menu + 2) must
+    // still sit below it so outside taps land on the underlay, not the drawer.
+    &[data-elevated="true"] {
+      z-index: calc(var(--layer-menu) + 3);
+    }
 
     top: 0;
     bottom: 0;

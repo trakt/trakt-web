@@ -3,8 +3,8 @@
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import TrackAction from "$lib/sections/media-actions/mark-as-watched/TrackAction.svelte";
-  import SummaryActionsBar from "../../../_internal/SummaryActionsBar.svelte";
-  import EpisodePopupActions from "./EpisodePopupActions.svelte";
+  import SummaryActionsBar from "../../_internal/SummaryActionsBar.svelte";
+  import EpisodePopupActions from "./_internal/EpisodePopupActions.svelte";
 
   const {
     episode,

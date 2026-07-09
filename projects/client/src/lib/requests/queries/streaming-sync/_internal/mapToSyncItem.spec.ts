@@ -38,7 +38,7 @@ describe('util: mapToSyncItem', () => {
         'The Last of Us S01E03: The Pollard Incident',
       );
       expect(result.traktItem?.url).to.equal(
-        '/shows/the-last-of-us/seasons/1/episodes/3',
+        '/shows/the-last-of-us?view=episode&season=1&episode=3',
       );
     });
   });

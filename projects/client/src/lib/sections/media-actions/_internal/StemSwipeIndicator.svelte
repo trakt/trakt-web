@@ -1,9 +1,16 @@
 <script lang="ts">
-  const { isActive, children }: { isActive: boolean } & ChildrenProps =
-    $props();
+  const {
+    isActive,
+    disabled = false,
+    children,
+  }: { isActive: boolean; disabled?: boolean } & ChildrenProps = $props();
 </script>
 
-<div class="trakt-gesture-indicator" class:trakt-gesture-active={isActive}>
+<div
+  class="trakt-gesture-indicator"
+  class:trakt-gesture-active={isActive && !disabled}
+  class:is-disabled={disabled}
+>
   {@render children()}
 </div>
 
@@ -31,6 +38,10 @@
     &.trakt-gesture-active {
       outline-color: var(--color-gesture-active);
       color: var(--color-gesture-active);
+    }
+
+    &.is-disabled {
+      opacity: 0.35;
     }
 
     :global(svg) {

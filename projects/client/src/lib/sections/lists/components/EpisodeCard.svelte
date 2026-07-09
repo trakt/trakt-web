@@ -41,7 +41,7 @@
 
   const episodeLink = $derived(
     rest.urlOverride ?? {
-      href: UrlBuilder.episode(show.slug, episode.season, episode.number),
+      href: UrlBuilder.episodeDrawer(show.slug, episode.season, episode.number),
       noscroll: undefined,
       replacestate: undefined,
     },

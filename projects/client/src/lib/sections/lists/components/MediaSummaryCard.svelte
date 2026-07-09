@@ -149,7 +149,11 @@
     if (urlOverride) return urlOverride.href;
 
     return rest.type === "episode"
-      ? UrlBuilder.episode(media.slug, rest.episode.season, rest.episode.number)
+      ? UrlBuilder.episodeDrawer(
+          media.slug,
+          rest.episode.season,
+          rest.episode.number,
+        )
       : UrlBuilder.media(media.type, media.slug);
   });
 
