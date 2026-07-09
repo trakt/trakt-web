@@ -851,7 +851,7 @@
       }
     },
     "button_text_logout": {
-      "default": "Log out",
+      "default": "Logout",
       "description": "Text for the logout button."
     },
     "button_label_logout": {
@@ -2654,11 +2654,11 @@
       "description": "Label for the button that expands the side navigation bar."
     },
     "text_show_spoilers": {
-      "default": "Show spoilers",
+      "default": "Show Spoilers",
       "description": "Text for the section that allows users to toggle spoilers."
     },
     "switch_label_spoilers": {
-      "default": "Show spoilers",
+      "default": "Show Spoilers",
       "description": "Aria-label for the switch that allows users to toggle spoilers on or off."
     },
     "button_text_save_filters": {
@@ -3138,7 +3138,7 @@
       "description": "Hint label in the profile photo crop dialog instructing users to drag to reposition."
     },
     "text_private_account": {
-      "default": "Private account",
+      "default": "Private Account",
       "description": "Text for the section that allows users to toggle privacy."
     },
     "switch_label_private": {
@@ -3234,7 +3234,7 @@
       "description": "Message for the prompt that allows users to specify their birthday."
     },
     "header_favorite_genres": {
-      "default": "Favorite genres",
+      "default": "Favorite Genres",
       "description": "Header for the section that allows users to change their favorite genres."
     },
     "button_label_toggle_genre": {
@@ -3715,7 +3715,7 @@
       "description": "Aria-label for the manage VIP subscription button."
     },
     "header_account_details": {
-      "default": "Account details",
+      "default": "Account Details",
       "description": "Header for the section that allows users to change their account details."
     },
     "header_settings_privacy": {
@@ -6740,7 +6740,7 @@
       "description": "Text for the description of the setting that allows users to adjust the delivery time of their notifications."
     },
     "text_settings_enable_multiple_plays": {
-      "default": "Enable Multiple Plays",
+      "default": "Multiple Plays",
       "description": "Text for the settings that allows users to mark movies and episodes as played more than once."
     },
     "text_settings_enable_multiple_plays_description": {
@@ -8809,7 +8809,7 @@
       "description": "Title of the confirmation dialog shown before suppressing future ratings prompts."
     },
     "confirmation_title_log_out": {
-      "default": "Log out?",
+      "default": "Logout?",
       "description": "Title of the confirmation dialog shown before logging the user out of their account."
     },
     "confirmation_title_reset_filters": {
