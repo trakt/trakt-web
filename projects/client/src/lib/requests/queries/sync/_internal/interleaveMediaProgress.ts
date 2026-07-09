@@ -2,6 +2,7 @@ import type { UpNextSortBy } from '$lib/sections/lists/progress/UpNextSortBy.ts'
 import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import type { MovieProgressEntry } from '../../../models/MovieProgressEntry.ts';
 import type { UpNextEntry } from '../../../models/UpNextEntry.ts';
+import { getMovieProgressSortValue } from './getMovieProgressSortValue.ts';
 import { sortMovieProgress } from './sortMovieProgress.ts';
 
 type SortMediaProgressProps = {
@@ -11,20 +12,29 @@ type SortMediaProgressProps = {
   sortHow?: SortDirection;
 };
 
+function getEpisodeSortValue(
+  episode: UpNextEntry,
+  sortBy: UpNextSortBy,
+): number {
+  switch (sortBy) {
+    case 'released':
+      return episode.effectiveReleaseDate.getTime();
+    case 'remaining':
+      return episode.remaining;
+    case 'smart':
+      return episode.lastWatchedAt?.getTime() ?? 0;
+  }
+}
+
 function getComparableValues(
   movie: MovieProgressEntry,
   episode: UpNextEntry,
   sortBy: UpNextSortBy,
 ): [number, number] {
-  switch (sortBy) {
-    case 'released':
-      return [
-        movie.effectiveReleaseDate.getTime(),
-        episode.effectiveReleaseDate.getTime(),
-      ];
-    case 'remaining':
-      return [0, episode.remaining];
-  }
+  return [
+    getMovieProgressSortValue(movie, sortBy),
+    getEpisodeSortValue(episode, sortBy),
+  ];
 }
 
 function shouldInsertBefore(

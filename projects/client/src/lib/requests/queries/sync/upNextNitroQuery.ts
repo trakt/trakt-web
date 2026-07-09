@@ -27,6 +27,11 @@ type UpNextParams =
     sortHow?: SortDirection;
   };
 
+function mapToNitroSortBy(sortBy: UpNextSortBy): string {
+  if (sortBy === 'released') return 'aired';
+  return sortBy;
+}
+
 export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   const show = mapToShowEntry(item.show);
   const episode = mapToEpisodeEntry(item.progress.next_episode);
@@ -66,9 +71,7 @@ export const upNextNitroRequest = (
         limit,
         intent: 'continue',
         ...filter,
-        ...(sortBy
-          ? { sort_by: sortBy === 'released' ? 'aired' : sortBy }
-          : {}),
+        ...(sortBy ? { sort_by: mapToNitroSortBy(sortBy) } : {}),
         ...(sortHow ? { sort_how: sortHow } : {}),
       },
     });

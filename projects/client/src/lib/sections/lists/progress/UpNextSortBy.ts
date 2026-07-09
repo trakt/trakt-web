@@ -1,1 +1,1 @@
-export type UpNextSortBy = 'released' | 'remaining';
+export type UpNextSortBy = 'released' | 'remaining' | 'smart';

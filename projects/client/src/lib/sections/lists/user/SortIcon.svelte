@@ -4,6 +4,7 @@
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import ReorderIcon from "$lib/components/icons/ReorderIcon.svelte";
   import RemainingIcon from "$lib/components/icons/RemainingIcon.svelte";
+  import SmartListIcon from "$lib/components/icons/SmartListIcon.svelte";
   import SortAlphaIcon from "$lib/components/icons/SortAlphaIcon.svelte";
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
   import type { UpNextSortBy } from "$lib/sections/lists/progress/UpNextSortBy.ts";
@@ -44,4 +45,8 @@
 
 {#if sortBy === "remaining"}
   <RemainingIcon />
+{/if}
+
+{#if sortBy === "smart"}
+  <SmartListIcon />
 {/if}

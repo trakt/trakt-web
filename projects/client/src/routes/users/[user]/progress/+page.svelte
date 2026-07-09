@@ -16,7 +16,7 @@
   const {
     current: currentSort,
     update,
-    options,
+    options: sortOptions,
     urlBuilder,
   } = useUpNextSorting(page.params.user ?? "me");
 </script>
@@ -34,7 +34,7 @@
   >
     {#snippet headerActions()}
       <ListSortActions
-        {options}
+        options={$sortOptions}
         {urlBuilder}
         current={$currentSort}
         onUpdate={update}
