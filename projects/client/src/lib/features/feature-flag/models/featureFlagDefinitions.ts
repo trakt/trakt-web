@@ -3,6 +3,7 @@ import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
+import SmartListIcon from '$lib/components/icons/SmartListIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { Component } from 'svelte';
@@ -55,6 +56,16 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     icon: BrainIcon,
     title: () => m.preview_feature_title_smart_recommendations(),
     description: () => m.preview_feature_description_smart_recommendations(),
+  },
+  [FeatureFlag.UpNextSmartSort]: {
+    icon: SmartListIcon,
+    title: () => m.preview_feature_title_up_next_smart_sort(),
+    description: () => m.preview_feature_description_up_next_smart_sort(),
+    featureLink: () =>
+      openFeatureLink(
+        UrlBuilder.progress('me', { sort_by: 'smart' }),
+        m.preview_feature_title_up_next_smart_sort(),
+      ),
   },
   [FeatureFlag.Rewatching]: {
     icon: FastRewindIcon,

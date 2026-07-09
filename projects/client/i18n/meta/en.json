@@ -4474,6 +4474,14 @@
       "default": "Sort by default order",
       "description": "Aria-label for the button that allows users to sort items by the default sorting method."
     },
+    "button_text_sort_smart": {
+      "default": "Smart",
+      "description": "Text for the button that allows users to sort up next items by the smart sorting method."
+    },
+    "button_label_sort_smart": {
+      "default": "Sort by smart order",
+      "description": "Aria-label for the button that allows users to sort up next items by the smart sorting method."
+    },
     "button_text_sort_added_date": {
       "default": "Date Added",
       "description": "Text for the button that allows users to sort items by the date they were added."
@@ -8002,6 +8010,14 @@
     "preview_feature_description_smart_recommendations": {
       "default": "Use our next-gen engine to surface recommended movies and shows beyond the obvious.",
       "description": "Description for the Smart Recommendations preview feature."
+    },
+    "preview_feature_title_up_next_smart_sort": {
+      "default": "Continue Watching Smart Sort",
+      "description": "Title for the Up Next Smart Sort preview feature."
+    },
+    "preview_feature_description_up_next_smart_sort": {
+      "default": "Test a smarter way to sort your Continue Watching.",
+      "description": "Description for the Up Next Smart Sort preview feature."
     },
     "preview_feature_title_rewatch": {
       "default": "Rewatch",

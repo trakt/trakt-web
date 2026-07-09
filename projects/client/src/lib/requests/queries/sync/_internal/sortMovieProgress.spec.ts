@@ -98,4 +98,18 @@ describe('sortMovieProgress', () => {
       expect(result).toHaveLength(2);
     });
   });
+
+  describe('sortBy smart', () => {
+    it('should keep movies on the default progress sort', () => {
+      const entries = [
+        createMovie('a', { lastWatchedAt: new Date('2024-01-01') }),
+        createMovie('b', { lastWatchedAt: new Date('2024-01-03') }),
+        createMovie('c', { lastWatchedAt: new Date('2024-01-02') }),
+      ];
+
+      const result = sortMovieProgress({ entries, sortBy: 'smart' });
+
+      expect(result.map((e) => e.key)).toEqual(['b', 'c', 'a']);
+    });
+  });
 });

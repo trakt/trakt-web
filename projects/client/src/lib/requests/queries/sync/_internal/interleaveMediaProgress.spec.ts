@@ -239,4 +239,46 @@ describe('interleaveMediaProgress', () => {
       expect(result[3]!.key).toBe('episode-2');
     });
   });
+
+  describe('sorting by smart', () => {
+    it('should interleave movies by progress date without reordering smart episodes', () => {
+      const episodes = [
+        createContinueEpisode(
+          'episode-smart-first',
+          new Date('2020-01-01'),
+          new Date('2024-01-05'),
+        ),
+        createContinueEpisode(
+          'episode-smart-second',
+          new Date('2020-01-01'),
+          new Date('2024-01-01'),
+        ),
+      ];
+      const movies = [
+        createContinueMovie(
+          'movie-first',
+          new Date('2020-01-01'),
+          new Date('2024-01-07'),
+        ),
+        createContinueMovie(
+          'movie-second',
+          new Date('2020-01-01'),
+          new Date('2024-01-03'),
+        ),
+      ];
+
+      const result = interleaveMediaProgress({
+        episodes,
+        movies,
+        sortBy: 'smart',
+      });
+
+      expect(result.map((e) => e.key)).toEqual([
+        'movie-first',
+        'episode-smart-first',
+        'movie-second',
+        'episode-smart-second',
+      ]);
+    });
+  });
 });
