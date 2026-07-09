@@ -31,6 +31,7 @@
     <NavbarStateSetter mode="minimal" />
   </RenderFor>
 
+  <!-- FIXME: clean up EpisodeSummary component and child components -->
   {#if !$isLoading && $show && $showIntl && $episode && $intl && $seasons && $crew}
     <EpisodeSummary
       show={$show}

@@ -33,6 +33,10 @@
     ratings: MediaRating;
     entry: MediaEntry | EpisodeEntry;
     drilldown?: TraktRatingDrilldown;
+    // Alternative to `drilldown`: open a locally-mounted drawer instead of
+    // navigating via a URL. Used by the episode drawer, which can't route to
+    // a `view=` drawer without replacing itself.
+    onDrilldown?: () => void;
     variant?: "all" | "external";
     isLoading?: boolean;
   };
@@ -42,6 +46,7 @@
     ratings,
     entry,
     drilldown,
+    onDrilldown,
     variant = "all",
     isLoading = false,
   }: RatingListProps = $props();
@@ -107,12 +112,13 @@
     </RatingItem>
   {/if}
 
-  {#if drilldown}
+  {#if onDrilldown || drilldown}
     <ActionButton
       classList="trakt-ratings-drilldown-button"
-      href={drilldown.href}
-      noscroll={drilldown.noscroll}
-      replacestate={drilldown.replacestate}
+      onclick={onDrilldown}
+      href={drilldown?.href}
+      noscroll={drilldown?.noscroll}
+      replacestate={drilldown?.replacestate}
       label={i18n.viewBreakdownLabel()}
       style="ghost"
       size="small"

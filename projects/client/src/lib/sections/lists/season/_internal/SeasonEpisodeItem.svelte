@@ -127,16 +127,17 @@
   />
 {/snippet}
 
-{#if isCurrentEpisode}
-  <div
-    use:scrollActiveItemIntoView={isCurrentEpisode}
-    class="trakt-season-episode-item"
-  >
-    {@render episodeItem()}
-  </div>
-{:else}
+<!--
+  Keep a single, stable render position for the episode item. Branching on
+  isCurrentEpisode would remount EpisodeItem (image reload/blink) whenever the
+  active episode changes. The scroll action is a no-op when not current.
+-->
+<div
+  use:scrollActiveItemIntoView={isCurrentEpisode}
+  class="trakt-season-episode-item"
+>
   {@render episodeItem()}
-{/if}
+</div>
 
 {#if isWatchUntilDrawerOpen && resolvedEpisodes}
   <WatchedUntilHereDrawer

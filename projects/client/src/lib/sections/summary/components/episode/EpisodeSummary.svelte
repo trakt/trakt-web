@@ -21,7 +21,7 @@
   import SummaryContainer from "./../summary/SummaryContainer.svelte";
   import SummaryHeader from "./../summary/SummaryHeader.svelte";
   import SummaryOverview from "./../summary/SummaryOverview.svelte";
-  import EpisodeActions from "./v2/_internal/EpisodeActions.svelte";
+  import EpisodeActions from "./v2/EpisodeActions.svelte";
 
   const {
     episode,

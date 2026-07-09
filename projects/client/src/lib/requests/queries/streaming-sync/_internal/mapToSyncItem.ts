@@ -39,7 +39,7 @@ function mapTraktReference(
           ? `${showTitle} ${code}: ${traktItem.title}`
           : `${code}: ${traktItem.title}`,
         url: traktItem.show
-          ? UrlBuilder.episode(
+          ? UrlBuilder.episodeDrawer(
             traktItem.show.ids.slug,
             traktItem.season,
             traktItem.number,

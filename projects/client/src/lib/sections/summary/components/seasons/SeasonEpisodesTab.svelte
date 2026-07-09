@@ -7,6 +7,7 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
+  import SeasonDropdown from "$lib/sections/lists/season/SeasonDropdown.svelte";
   import SeasonEpisodeItem from "$lib/sections/lists/season/_internal/SeasonEpisodeItem.svelte";
   import { useShowWatchedEpisodes } from "$lib/sections/lists/season/_internal/useShowWatchedEpisodes";
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
@@ -20,14 +21,21 @@
     seasons,
     currentSeason,
     currentEpisode,
+    showSeasonSelector = false,
   }: {
     show: ShowEntry;
     seasons: Season[];
     currentSeason: number;
     currentEpisode?: number;
+    showSeasonSelector?: boolean;
   } = $props();
 
   const { buildEpisodeDrawerLink } = summaryDrawerNavigation();
+
+  // Selecting a season jumps to its first episode, keeping the episode drawer
+  // open while the list and progress card follow along.
+  const buildSeasonLink = (seasonNumber: number) =>
+    buildEpisodeDrawerLink({ season: seasonNumber, episode: 1 }).href;
 
   const { list: episodes, isLoading } = $derived(
     useSeasonEpisodes(show.slug, currentSeason),
@@ -58,63 +66,86 @@
 </script>
 
 <div class="season-episodes-tab">
-  <RenderFor audience="authenticated">
-    {#if currentSeasonData && currentSeasonData.episodes.count > 0}
-      <SeasonProgressCard
-        seasonNumber={currentSeason}
-        watched={currentSeasonWatched}
-        total={currentSeasonData.episodes.count}
-        totalRuntime={currentSeasonData.totalRuntime}
-        loading={$isWatchedLoading}
-      />
+  <div class="season-episodes-tab-section">
+    {#if showSeasonSelector}
+      <DrawerTabTitle title={m.list_title_seasons()}>
+        {#snippet actions()}
+          <SeasonDropdown
+            showSlug={show.slug}
+            {seasons}
+            {currentSeason}
+            urlBuilder={buildSeasonLink}
+          />
+        {/snippet}
+      </DrawerTabTitle>
     {/if}
-  </RenderFor>
 
-  <DrawerTabTitle title={m.tab_text_seasons_episodes()}>
-    {#snippet metaInfo()}
-      {#if !$isLoading}
-        <ListMetaInfo
-          text={m.tag_text_number_of_episodes({ count: $episodes.length })}
+    <RenderFor audience="authenticated">
+      {#if currentSeasonData && currentSeasonData.episodes.count > 0}
+        <SeasonProgressCard
+          seasonNumber={currentSeason}
+          watched={currentSeasonWatched}
+          total={currentSeasonData.episodes.count}
+          totalRuntime={currentSeasonData.totalRuntime}
+          loading={$isWatchedLoading}
         />
       {/if}
-    {/snippet}
-  </DrawerTabTitle>
+    </RenderFor>
+  </div>
 
-  {#if $isLoading}
-    <LoadingIndicator />
-  {:else}
-    <GridList
-      id={`season-episodes-${show.slug}-${currentSeason}`}
-      items={$episodes}
-      --width-item="var(--width-summary-card)"
-    >
-      {#snippet item(episode)}
-        <SeasonEpisodeItem
-          {show}
-          {episode}
-          {previousSeasons}
-          {hasUnseenEpisodes}
-          currentSeasonEpisodes={$episodes}
-          watchedBySeason={$watchedBySeason}
-          isWatchedLoading={$isWatchedLoading}
-          isCurrentEpisode={episode.number === currentEpisode}
-          urlOverride={buildEpisodeDrawerLink({
-            season: episode.season,
-            episode: episode.number,
-          })}
-          style="minimal"
-          source="seasons-drawer"
-        />
+  <div class="season-episodes-tab-section">
+    <DrawerTabTitle title={m.tab_text_seasons_episodes()}>
+      {#snippet metaInfo()}
+        {#if !$isLoading}
+          <ListMetaInfo
+            text={m.tag_text_number_of_episodes({ count: $episodes.length })}
+          />
+        {/if}
       {/snippet}
-    </GridList>
-  {/if}
+    </DrawerTabTitle>
+
+    {#if $isLoading}
+      <LoadingIndicator />
+    {:else}
+      <GridList
+        id={`season-episodes-${show.slug}-${currentSeason}`}
+        items={$episodes}
+        --width-item="var(--width-summary-card)"
+      >
+        {#snippet item(episode)}
+          <SeasonEpisodeItem
+            {show}
+            {episode}
+            {previousSeasons}
+            {hasUnseenEpisodes}
+            currentSeasonEpisodes={$episodes}
+            watchedBySeason={$watchedBySeason}
+            isWatchedLoading={$isWatchedLoading}
+            isCurrentEpisode={episode.number === currentEpisode}
+            urlOverride={buildEpisodeDrawerLink({
+              season: episode.season,
+              episode: episode.number,
+            })}
+            style="minimal"
+            source="seasons-drawer"
+          />
+        {/snippet}
+      </GridList>
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
   .season-episodes-tab {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
+    gap: var(--gap-xl);
+
+    .season-episodes-tab-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-s);
+    }
 
     :global(.trakt-season-episode-item) {
       min-width: 0;

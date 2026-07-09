@@ -23,7 +23,7 @@
   let isDescriptionExpanded = $state(false);
 
   const episodeCount = $derived(
-    type === "movie" ? undefined : member.episodeCount,
+    type === "movie" || type === "episode" ? undefined : member.episodeCount,
   );
   const headshotUrl = $derived.by(() => {
     const url = member.headshot?.url.thumb;

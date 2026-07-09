@@ -9,7 +9,8 @@
   import type { RatingsDrawerProps } from "./_internal/RatingsDrawerProps.ts";
   import SeasonRatingsChart from "./_internal/SeasonRatingsChart.svelte";
 
-  const { onClose, seasons, ...props }: RatingsDrawerProps = $props();
+  const { onClose, seasons, elevated = false, ...props }: RatingsDrawerProps =
+    $props();
 
   const metaInfoTarget = $derived(
     props.type === "episode"
@@ -42,6 +43,7 @@
 
 <Drawer
   {onClose}
+  {elevated}
   onOpened={() => (isOpen = true)}
   title={m.header_ratings()}
   size="auto"

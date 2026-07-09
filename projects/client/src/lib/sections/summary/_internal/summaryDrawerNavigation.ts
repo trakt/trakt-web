@@ -26,7 +26,7 @@ const seasonParam = 'season';
 const summaryDrawerParams = {
   [SummaryDrawers.Comments]: { [commentIdParam]: '' },
   [SummaryDrawers.Review]: { [commentIdParam]: '' },
-  [SummaryDrawers.Episode]: { [episodeParam]: '' },
+  [SummaryDrawers.Episode]: { [episodeParam]: '', [seasonParam]: '' },
 } satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
 
 function mapToDrawer(value: string | Nil) {
@@ -72,8 +72,11 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
   const commentId = searchParams?.get(commentIdParam);
   const sourceCommentId = commentId != null ? Number(commentId) : undefined;
   const episodeNumber = searchParams?.get(episodeParam);
-  const sourceEpisode = episodeNumber != null
+  const parsedEpisode = episodeNumber != null
     ? Number(episodeNumber)
+    : undefined;
+  const sourceEpisode = parsedEpisode != null && !Number.isNaN(parsedEpisode)
+    ? parsedEpisode
     : undefined;
 
   return {
@@ -84,15 +87,11 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
     buildDrawerLink,
     buildEpisodeDrawerLink: (
       { season, episode }: { season: number; episode: number },
-    ) => {
-      const link = buildDrawerLink(
+    ) =>
+      buildDrawerLink(
         SummaryDrawers.Episode,
-        { [episodeParam]: String(episode) },
-      );
-      const url = new URL(link.href);
-      url.searchParams.set(seasonParam, String(season));
-      return { ...link, href: url.toString() };
-    },
+        { [episodeParam]: String(episode), [seasonParam]: String(season) },
+      ),
     buildCommentsDrawerLink: (id?: number) =>
       buildDrawerLink(
         SummaryDrawers.Comments,

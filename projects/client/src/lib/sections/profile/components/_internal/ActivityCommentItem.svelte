@@ -52,7 +52,7 @@
 
   const mediaLink = $derived(
     entry.type === "episode"
-      ? UrlBuilder.episode(
+      ? UrlBuilder.episodeDrawer(
           entry.media.slug,
           entry.episode.season,
           entry.episode.number,

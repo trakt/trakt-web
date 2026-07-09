@@ -1541,6 +1541,14 @@
       "default": "Episode Information",
       "description": "Title for the episode information drawer opened from an episode card on a summary page."
     },
+    "button_label_previous_episode": {
+      "default": "Previous episode",
+      "description": "Label for the button that navigates to the previous episode of the season in the episode information drawer."
+    },
+    "button_label_next_episode": {
+      "default": "Next episode",
+      "description": "Label for the button that navigates to the next episode of the season in the episode information drawer."
+    },
     "drawer_meta_info_cast": {
       "default": "Cast",
       "description": "Subtitle for the people drawer when cast members are selected. This should be as short and concise as possible."

@@ -1,8 +1,8 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType.ts";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew.ts";
@@ -68,9 +68,9 @@
     }
 
     return selectedCredits.filter(({ description, name }) =>
-      `${name} ${description}`.toLocaleLowerCase().includes(
-        normalizedSearchTerm,
-      )
+      `${name} ${description}`
+        .toLocaleLowerCase()
+        .includes(normalizedSearchTerm),
     );
   });
 </script>

@@ -20,7 +20,7 @@
 
 <Link
   focusable={false}
-  href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
+  href={UrlBuilder.episodeDrawer(show.slug, episode.season, episode.number)}
 >
   <CardCover
     {title}

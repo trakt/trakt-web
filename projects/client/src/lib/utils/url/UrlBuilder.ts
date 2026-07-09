@@ -4,6 +4,7 @@ import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import type { PersonalListType } from '$lib/sections/lists/user/models/PersonalListType.ts';
 import type { DiscoverMode } from '../../features/filters/models/DiscoverMode.ts';
 import type { CrewPositions } from '../../requests/models/CrewPosition.ts';
+import { DRAWER_VIEW_PARAM } from '$lib/components/drawer/constants/index.ts';
 import { SUPPORT_EMAIL } from '../constants.ts';
 import { buildParamString } from './buildParamString.ts';
 
@@ -203,6 +204,14 @@ export const UrlBuilder = {
     `/people/${id}${buildParamString(positions ?? {})}`,
   episode: (id: string, season: number, episode: number) =>
     `/shows/${id}/seasons/${season}/episodes/${episode}`,
+  // Opens the show summary page with the episode information drawer pre-opened.
+  // Param contract mirrors summaryDrawerNavigation (view/season/episode).
+  episodeDrawer: (id: string, season: number, episode: number) =>
+    UrlBuilder.show(id, {
+      [DRAWER_VIEW_PARAM]: 'episode',
+      season,
+      episode,
+    }),
   credits: {
     movies: (slug: string) => `/people/${slug}/movies`,
     shows: (slug: string) => `/people/${slug}/shows`,

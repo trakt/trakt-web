@@ -14,9 +14,15 @@
     target: MediaSocialQueryTarget;
     title: string;
     onClose: () => void;
+    elevated?: boolean;
   };
 
-  const { target, title, onClose }: SocialDrawerHostProps = $props();
+  const {
+    target,
+    title,
+    onClose,
+    elevated = false,
+  }: SocialDrawerHostProps = $props();
 
   const target$ = fromRune(() => target);
   const { entries: socialEntries, isLoading } = useSocialActivities(target$, {
@@ -36,6 +42,7 @@
 
 <Drawer
   {onClose}
+  {elevated}
   onOpened={() => (isOpen = true)}
   title={m.list_title_social_activity()}
   metaInfo={title}

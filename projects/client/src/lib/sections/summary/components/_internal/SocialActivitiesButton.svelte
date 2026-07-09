@@ -15,9 +15,13 @@
   type SocialActivitiesButtonProps = {
     target: MediaSocialQueryTarget;
     title: string;
+    // When provided, open a locally-mounted drawer instead of navigating to
+    // the `view=social` URL drawer (used by the episode drawer, which can't
+    // route without replacing itself).
+    onclick?: () => void;
   };
 
-  const { target, title }: SocialActivitiesButtonProps = $props();
+  const { target, title, onclick }: SocialActivitiesButtonProps = $props();
 
   const target$ = fromRune(() => target);
   const {
@@ -41,52 +45,65 @@
   const drawerLink = $derived(buildDrawerLink(SummaryDrawers.Social));
 </script>
 
+{#snippet content()}
+  <span class="social-activities-content">
+    {#if hasWatchers}
+      <span class="trakt-social-activities-avatar-stack" aria-hidden="true">
+        {#each watchers as watcher, index (watcher.key)}
+          <span
+            class="trakt-social-activities-avatar"
+            style:z-index={avatarStackCount - index}
+          >
+            <UserAvatar user={watcher.user} size="small" />
+          </span>
+        {/each}
+      </span>
+    {/if}
+
+    <span
+      class="trakt-social-activities-label"
+      class:is-text-only={activityCount === 0}
+    >
+      {#if activityCount > 0}
+        <span class="trakt-social-activities-count bold">
+          {activityCountLabel}
+        </span>
+        <span class="trakt-social-activities-text">
+          {activityCount === 1
+            ? m.text_social_activity()
+            : m.text_social_activities()}
+        </span>
+      {:else}
+        <span class="trakt-social-activities-text">
+          {m.text_no_activity()}
+        </span>
+      {/if}
+    </span>
+  </span>
+{/snippet}
+
 <div class="trakt-social-activities-button-link-wrapper">
   {#if isInitialLoading}
     <div class="social-activities-skeleton" role="status" aria-busy="true">
       <span class="skeleton-count"></span>
       <span class="skeleton-label"></span>
     </div>
+  {:else if onclick}
+    <button
+      type="button"
+      class="social-activities-trigger"
+      onclick={onclick}
+      aria-label={m.link_label_view_social_activities({ title })}
+    >
+      {@render content()}
+    </button>
   {:else}
     <Link
       {...drawerLink}
       color="inherit"
       label={m.link_label_view_social_activities({ title })}
     >
-      <span class="social-activities-content">
-        {#if hasWatchers}
-          <span class="trakt-social-activities-avatar-stack" aria-hidden="true">
-            {#each watchers as watcher, index (watcher.key)}
-              <span
-                class="trakt-social-activities-avatar"
-                style:z-index={avatarStackCount - index}
-              >
-                <UserAvatar user={watcher.user} size="small" />
-              </span>
-            {/each}
-          </span>
-        {/if}
-
-        <span
-          class="trakt-social-activities-label"
-          class:is-text-only={activityCount === 0}
-        >
-          {#if activityCount > 0}
-            <span class="trakt-social-activities-count bold">
-              {activityCountLabel}
-            </span>
-            <span class="trakt-social-activities-text">
-              {activityCount === 1
-                ? m.text_social_activity()
-                : m.text_social_activities()}
-            </span>
-          {:else}
-            <span class="trakt-social-activities-text">
-              {m.text_no_activity()}
-            </span>
-          {/if}
-        </span>
-      </span>
+      {@render content()}
     </Link>
   {/if}
 </div>
@@ -100,6 +117,18 @@
 
     :global(.trakt-link) {
       text-decoration: none;
+    }
+
+    .social-activities-trigger {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      text-align: start;
     }
 
     @include for-tablet-sm-and-below {

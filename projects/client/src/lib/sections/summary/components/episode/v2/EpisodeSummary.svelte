@@ -18,7 +18,7 @@
   import { useMediaMetaInfo } from "../../media/useMediaMetaInfo";
   import { useIsRateable } from "../../rating/_internal/useIsRateable";
   import type { EpisodeSummaryProps } from "./../../EpisodeSummaryProps";
-  import EpisodeActions from "./_internal/EpisodeActions.svelte";
+  import EpisodeActions from "./EpisodeActions.svelte";
   import EpisodeSideActions from "./_internal/EpisodeSideActions.svelte";
 
   const {
