@@ -3,6 +3,7 @@ import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
+import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import PlexLibraryIcon from '$lib/components/icons/PlexLibraryIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
@@ -97,5 +98,10 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     icon: FastRewindIcon,
     title: () => m.preview_feature_title_rewatch(),
     description: () => m.preview_feature_description_rewatch(),
+  },
+  [FeatureFlag.Leaderboard]: {
+    icon: PeopleIcon,
+    title: () => m.preview_feature_title_leaderboard(),
+    description: () => m.preview_feature_description_leaderboard(),
   },
 };

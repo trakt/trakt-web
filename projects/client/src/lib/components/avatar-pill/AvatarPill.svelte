@@ -79,11 +79,19 @@
 
   .trakt-avatar-pill {
     --height-pill-label: calc(var(--font-size-text) + var(--ni-2));
+    --pill-avatar-size: var(--ni-28);
+
+    // Preferred avatar overlap. Tightened by the container query below when the
+    // pill's container (opt-in via `container: avatar-pill / inline-size`) is
+    // too narrow to fit the pill at this spacing.
+    --avatar-overlap: calc(var(--pill-avatar-size) * -0.5);
 
     display: inline-flex;
     align-items: center;
     gap: var(--ni-4);
     height: var(--ni-36);
+    max-width: 100%;
+    min-width: 0;
     padding: 0 var(--ni-8);
     box-sizing: border-box;
     border-radius: var(--border-radius-xxl);
@@ -110,6 +118,7 @@
     display: inline-flex;
     align-items: center;
     pointer-events: none;
+    flex: 0 0 auto;
 
     margin-inline-end: var(--ni-4);
 
@@ -121,16 +130,43 @@
     }
   }
 
-  .avatar {
-    --pill-avatar-size: var(--ni-28);
+  // When the pill sits in an opted-in container, size it to the space
+  // available: `100cqi` is the container's inline size, minus any inline space
+  // the container reserves for siblings the pill must not sit under
+  // (`--avatar-pill-reserved-inline`). The avatar overlap then scales from the
+  // preferred 50% while there's room toward ~78% as the space narrows, so all
+  // avatars stay visible without overflowing. Inert when no `avatar-pill`
+  // container ancestor exists.
+  @container avatar-pill (min-width: 0px) {
+    .trakt-avatar-pill {
+      --pill-available: calc(
+        100cqi - var(--avatar-pill-reserved-inline, 0px)
+      );
 
+      max-width: var(--pill-available);
+    }
+
+    .avatar-stack {
+      --avatar-overlap: calc(
+        -1 *
+          clamp(
+            var(--pill-avatar-size) * 0.5,
+            var(--pill-avatar-size) * 0.78 -
+              (var(--pill-available) - 210px) * 0.5,
+            var(--pill-avatar-size) * 0.78
+          )
+      );
+    }
+  }
+
+  .avatar {
     position: relative;
 
     width: var(--pill-avatar-size);
     height: var(--pill-avatar-size);
     flex: 0 0 var(--pill-avatar-size);
 
-    margin-inline-start: calc(var(--pill-avatar-size) * -0.5);
+    margin-inline-start: var(--avatar-overlap);
 
     border-radius: 50%;
     overflow: hidden;
@@ -155,6 +191,8 @@
     align-items: center;
     gap: var(--ni-4);
     height: var(--height-pill-label);
+    min-width: 0;
+    flex: 0 1 auto;
     padding-inline-end: var(--ni-4);
 
     &.is-text-only {
@@ -164,15 +202,20 @@
 
   .pill-text {
     opacity: 0.85;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .pill-count {
+    flex: 0 0 auto;
     font-variant-numeric: tabular-nums;
   }
 
   .pill-caret {
     display: inline-flex;
     align-items: center;
+    flex: 0 0 auto;
 
     // Cancel the pill's flex gap so the caret sits flush against the label.
     margin-inline-start: calc(-1 * var(--ni-4));

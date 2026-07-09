@@ -7,4 +7,5 @@ export enum FeatureFlag {
   SmartRelated = 'smart-related',
   SmartRecommendations = 'smart-recommendations',
   Rewatching = 'rewatching',
+  Leaderboard = 'leaderboard',
 }
