@@ -1431,7 +1431,7 @@
   "text_settings_adjust_delivery": "通知时间",
   "text_settings_adjust_delivery_description": "选择何时收到通知。",
   "text_settings_clear_cover": "清除当前封面图片并恢复为默认。",
-  "text_settings_enable_multiple_plays": "启用多次播放",
+  "text_settings_enable_multiple_plays": "多次播放",
   "text_settings_enable_multiple_plays_description": "允许电影和剧集播放超过 1 次。",
   "text_settings_enable_notifications": "启用通知",
   "text_settings_notification_time_180_min": "提前 3 小时",

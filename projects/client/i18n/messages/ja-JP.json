@@ -1431,7 +1431,7 @@
   "text_settings_adjust_delivery": "通知時間",
   "text_settings_adjust_delivery_description": "通知を受け取るタイミングを選択します。",
   "text_settings_clear_cover": "現在のカバー画像をクリアして、デフォルトに戻します。",
-  "text_settings_enable_multiple_plays": "複数回再生を有効にする",
+  "text_settings_enable_multiple_plays": "複数回再生",
   "text_settings_enable_multiple_plays_description": "映画やエピソードを複数回再生としてマークすることを許可します。",
   "text_settings_enable_notifications": "通知を有効にする",
   "text_settings_notification_time_180_min": "3時間前",
