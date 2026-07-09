@@ -1,7 +1,12 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import { useToggler } from "$lib/components/toggles/useToggler";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { FilterOverrideParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
@@ -25,6 +30,11 @@
   }: RecommendationListProps = $props();
   const { filterMap } = useFilter();
 
+  const { current, set, options } = useToggler("recommendation");
+  const { isEnabled } = useFeatureFlag();
+  const isSmartEnabled = isEnabled(FeatureFlag.SmartRecommendations);
+  const isSmart = $derived($isSmartEnabled && $current.value === "smart");
+
   const cta = $derived({
     type: "recommended" as const,
     mediaType: type === "media" ? undefined : type,
@@ -47,9 +57,22 @@
     ...extractWatchWindowParam(page.url.searchParams),
   }}
   {filterOverride}
-  useList={useRecommendedList}
+  useList={(params) => useRecommendedList({ ...params, isSmart })}
   urlBuilder={() => UrlBuilder.recommended()}
 >
+  {#snippet actions()}
+    <RenderForFeature flag={FeatureFlag.SmartRecommendations}>
+      {#snippet enabled()}
+        <Toggler
+          value={$current.value}
+          onChange={set}
+          {options}
+          variant="icon"
+        />
+      {/snippet}
+    </RenderForFeature>
+  {/snippet}
+
   {#snippet item(media)}
     <RecommendedListItem
       type={media.type}

@@ -88,6 +88,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_smart_related(),
     description: () => m.preview_feature_description_smart_related(),
   },
+  [FeatureFlag.SmartRecommendations]: {
+    icon: BrainIcon,
+    title: () => m.preview_feature_title_smart_recommendations(),
+    description: () => m.preview_feature_description_smart_recommendations(),
+  },
   [FeatureFlag.Rewatching]: {
     icon: FastRewindIcon,
     title: () => m.preview_feature_title_rewatch(),
