@@ -89,6 +89,8 @@
   <Sentiment {sentiment} slug={media.slug} type="show" />
 </RenderFor>
 
+<SeasonList show={media} {seasons} {currentSeason} />
+
 <CastList
   title={m.list_title_actors()}
   cast={crew.cast}
@@ -97,8 +99,6 @@
 />
 
 <Comments {media} type="show" />
-
-<SeasonList show={media} {seasons} {currentSeason} />
 
 <VideoList slug={media.slug} {videos} type="show" />
 
