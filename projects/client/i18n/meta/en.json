@@ -870,66 +870,6 @@
       "default": "Related Shows",
       "description": "Title for lists containing related shows. This title should be as short and concise as possible."
     },
-    "text_about_placeholder_1": {
-      "default": "This user is a mystery, shrouded in enigma... (or maybe just lazy? Who knows, this is the internet.)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_2": {
-      "default": "Apparently, this user is too busy watching movies to write about themselves. (Fair enough, I can relate.)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_3": {
-      "default": "This user's profile is a blank canvas, a void of information... (much like my social life. sigh)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_4": {
-      "default": "Unravel the secrets of this user's identity... (if you dare)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_5": {
-      "default": "What hidden depths lie beneath this empty profile? (The truth is out there...)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_6": {
-      "default": "This user is a ghost in the machine, a digital phantom... (or maybe they just forgot to fill this out?)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_7": {
-      "default": "Help this user out! Tell them to complete their profile. (They might even reward you with a virtual high five!)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_8": {
-      "default": "This profile is begging for attention. Give it some love and tell the user to fill it out.",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_9": {
-      "default": "Don't be shy! Encourage this user to share their story. (Everyone has a story to tell, even if it's just about their favorite TV show.)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_10": {
-      "default": "This user is like a character in a David Lynch film: enigmatic, mysterious, and possibly a figment of their own imagination.",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_11": {
-      "default": "This profile is as empty as a Blockbuster video store on a Friday night. (Remember those? Good times.)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_12": {
-      "default": "This user is channeling their inner Tyler Durden: rejecting consumerism and embracing the void. (Or maybe they just haven't gotten around to filling this out yet.)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_13": {
-      "default": "A stylized image: A funny illustration of a detective scratching their head in confusion, or a tumbleweed rolling across an empty profile page.",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_14": {
-      "default": "An interactive element: A button that allows users to send a friendly nudge to the profile owner, encouraging them to complete their profile.",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
-    "text_about_placeholder_15": {
-      "default": "A personalized message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalized placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
-    },
     "button_text_find_movies": {
       "default": "Find Movies",
       "description": "Text for the button that allows users to find movies. This button is shown in some empty lists."

@@ -5,29 +5,10 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ShadowScroller from "$lib/sections/components/ShadowScroller.svelte";
 
-  import { shuffle } from "$lib/utils/array/shuffle";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import type { DisplayableProfileProps } from "../DisplayableProfileProps";
 
   const { profile, slug }: DisplayableProfileProps = $props();
-
-  const aboutMessages = [
-    m.text_about_placeholder_1(),
-    m.text_about_placeholder_2(),
-    m.text_about_placeholder_3(),
-    m.text_about_placeholder_4(),
-    m.text_about_placeholder_5(),
-    m.text_about_placeholder_6(),
-    m.text_about_placeholder_7(),
-    m.text_about_placeholder_8(),
-    m.text_about_placeholder_9(),
-    m.text_about_placeholder_10(),
-    m.text_about_placeholder_11(),
-    m.text_about_placeholder_12(),
-    m.text_about_placeholder_13(),
-    m.text_about_placeholder_14(),
-    m.text_about_placeholder_15(),
-  ];
 
   const { isMe } = $derived(useIsMe(slug));
   const aboutHeader = $derived(
@@ -36,23 +17,25 @@
       : m.text_about_user({ username: toDisplayableName(profile) }),
   );
 
-  const aboutText = $derived(profile.about || shuffle(aboutMessages).at(0));
+  const aboutText = $derived(profile.about);
 </script>
 
-<div class="trakt-profile-about">
-  <span class="secondary bold">{aboutHeader}</span>
-  <RenderFor audience="all" device={["desktop", "tablet-lg"]}>
-    <ShadowScroller>
-      <p>{aboutText}</p>
-    </ShadowScroller>
-  </RenderFor>
+{#if aboutText}
+  <div class="trakt-profile-about">
+    <span class="secondary bold">{aboutHeader}</span>
+    <RenderFor audience="all" device={["desktop", "tablet-lg"]}>
+      <ShadowScroller>
+        <p>{aboutText}</p>
+      </ShadowScroller>
+    </RenderFor>
 
-  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-    <ClampedText label={m.button_label_read_more()}>
-      {aboutText}
-    </ClampedText>
-  </RenderFor>
-</div>
+    <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+      <ClampedText label={m.button_label_read_more()}>
+        {aboutText}
+      </ClampedText>
+    </RenderFor>
+  </div>
+{/if}
 
 <style>
   .trakt-profile-about {
