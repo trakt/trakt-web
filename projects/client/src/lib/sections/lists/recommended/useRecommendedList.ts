@@ -26,18 +26,23 @@ export type RecommendedMediaList = Array<RecommendedEntry>;
 type RecommendationListStoreProps =
   & {
     type: DiscoverMode;
+    isSmart?: boolean;
   }
   & PaginationParams
   & FilterParams;
 
 function typeToQuery(
-  { type, filter, filterOverride }: Omit<RecommendationListStoreProps, 'page'>,
+  { type, filter, filterOverride, isSmart }: Omit<
+    RecommendationListStoreProps,
+    'page'
+  >,
 ) {
   /** Recommendations are calculated daily, so we load all of them. */
   const params = {
     limit: RECOMMENDED_UPPER_LIMIT,
     filter,
     filterOverride,
+    isSmart,
   };
 
   switch (type) {
@@ -57,20 +62,24 @@ function typeToQuery(
 }
 
 function getListKey(props: RecommendationListStoreProps) {
+  const suffix = props.isSmart ? '-smart' : '';
+
   if (props.filterOverride) {
-    return `${props.type}-overridden`;
+    return `${props.type}-overridden${suffix}`;
   }
 
   const filters = props.filter ?? {};
   const hasFilters = Object.keys(filters).length > 0;
 
-  return hasFilters
+  const baseKey = hasFilters
     ? `${props.type}-${
       Object.entries(filters)
         .map(([key, value]) => `${key}-${value}`)
         .join('-')
     }`
     : props.type;
+
+  return `${baseKey}${suffix}`;
 }
 
 export const useRecommendedList = (props: RecommendationListStoreProps) => {

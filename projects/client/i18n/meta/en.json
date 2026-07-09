@@ -7955,6 +7955,14 @@
       "default": "Use our next-gen engine to surface related movies and shows beyond the obvious.",
       "description": "Description for the Smart Related preview feature."
     },
+    "preview_feature_title_smart_recommendations": {
+      "default": "Smart Recommendations",
+      "description": "Title for the Smart Recommendations preview feature."
+    },
+    "preview_feature_description_smart_recommendations": {
+      "default": "Use our next-gen engine to surface recommended movies and shows beyond the obvious.",
+      "description": "Description for the Smart Recommendations preview feature."
+    },
     "preview_feature_title_rewatch": {
       "default": "Rewatch",
       "description": "Title for the Rewatch preview feature."
@@ -9269,6 +9277,22 @@
     "button_label_related_smart": {
       "default": "Smart related",
       "description": "Aria-label for the related media toggle button to show smart related movies or shows. This should be as short and concise as possible."
+    },
+    "button_text_recommendation_standard": {
+      "default": "Standard",
+      "description": "Text for the recommendations toggle button to show standard recommended movies or shows. This should be as short and concise as possible."
+    },
+    "button_label_recommendation_standard": {
+      "default": "Standard recommendations",
+      "description": "Aria-label for the recommendations toggle button to show standard recommended movies or shows. This should be as short and concise as possible."
+    },
+    "button_text_recommendation_smart": {
+      "default": "Smart",
+      "description": "Text for the recommendations toggle button to show smart recommended movies or shows. This should be as short and concise as possible."
+    },
+    "button_label_recommendation_smart": {
+      "default": "Smart recommendations",
+      "description": "Aria-label for the recommendations toggle button to show smart recommended movies or shows. This should be as short and concise as possible."
     },
     "text_list_private": {
       "default": "Private",
