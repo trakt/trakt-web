@@ -178,7 +178,9 @@
   </div>
 </Drawer>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-match-drawer {
     --stroke-width-match-gauge: var(--ni-3);
 
@@ -362,18 +364,7 @@
   }
 
   .trakt-match-drawer-chip[data-tier="rare"] {
-    background: linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--color-foreground) 22%, transparent),
-      color-mix(in srgb, var(--color-foreground) 10%, transparent)
-    );
-    border-color: color-mix(in srgb, var(--color-foreground) 40%, transparent);
-    box-shadow:
-      0 0 0 var(--ni-1)
-        color-mix(in srgb, var(--color-foreground) 14%, transparent),
-      0 var(--ni-2) var(--ni-12)
-        color-mix(in srgb, var(--color-foreground) 18%, transparent);
-    font-weight: 600;
+    @include flair-chip(var(--color-foreground));
   }
 
   .trakt-match-drawer-chip[data-tier="unicorn"] {
