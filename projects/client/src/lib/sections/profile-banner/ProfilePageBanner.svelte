@@ -2,10 +2,13 @@
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import SettingsButton from "$lib/components/buttons/settings/SettingsButton.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import LeaderboardPill from "$lib/sections/profile/leaderboard/LeaderboardPill.svelte";
   import MatchPill from "$lib/sections/profile/components/MatchPill.svelte";
   import ProfileAbout from "$lib/sections/profile/components/ProfileAbout.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
@@ -30,6 +33,9 @@
   const { user, blocked } = useUser();
   const { isMe } = $derived(useIsMe(slug));
   const { followStatus } = $derived(useFollowUserRequest(slug));
+
+  const { isEnabled } = useFeatureFlag();
+  const leaderboardEnabled = isEnabled(FeatureFlag.Leaderboard);
 
   const shareableSlug = $derived($isMe ? $user.slug : slug);
   const isBlocked = $derived($blocked.has(slug));
@@ -74,6 +80,8 @@
         <RenderFor audience="authenticated">
           <MatchPill {slug} />
         </RenderFor>
+      {:else if $isMe && $leaderboardEnabled}
+        <LeaderboardPill />
       {/if}
     </div>
     <div class="profile-actions">
@@ -137,6 +145,13 @@
     align-items: center;
     gap: var(--gap-s);
 
+    // Query container for the leaderboard pill. Its width is driven by layout
+    // (not the pill's content), so the pill can size to the space available
+    // without a feedback loop. The pill may use the whole row except the
+    // profile image and its gap, so reserve that inline space.
+    container: avatar-pill / inline-size;
+    --avatar-pill-reserved-inline: calc(var(--ni-64) + var(--gap-s));
+
     :global(.trakt-profile-image) {
       display: flex;
       flex-direction: column;
@@ -153,6 +168,8 @@
     @include for-tablet-sm-and-below {
       gap: var(--gap-xs);
       flex-wrap: wrap;
+
+      --avatar-pill-reserved-inline: calc(var(--ni-40) + var(--gap-xs));
 
       span.ellipsis {
         white-space: normal;
@@ -183,6 +200,10 @@
     align-items: center;
     gap: var(--gap-s);
     flex-shrink: 0;
+
+    // Pin to the top so the icons clear the taller details column (name +
+    // location + leaderboard/match pill) instead of overlapping it.
+    align-self: flex-start;
 
     position: relative;
     z-index: var(--layer-raised);

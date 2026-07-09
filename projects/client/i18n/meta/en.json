@@ -4395,6 +4395,38 @@
       "default": "All time",
       "description": "Text shown to indicate the users all-time stats."
     },
+    "stat_label_plays": {
+      "default": "plays",
+      "description": "Label for the number of plays in a stat row."
+    },
+    "stat_label_hours": {
+      "default": "hours",
+      "description": "Label for a watch-time value expressed in hours."
+    },
+    "text_following": {
+      "default": "Following",
+      "description": "Label for the follows pill on a profile that opens the leaderboard."
+    },
+    "text_leaderboard_free_section": {
+      "default": "Free members",
+      "description": "Divider label separating ranked VIP entries from unranked free members on the leaderboard."
+    },
+    "text_leaderboard_upsell_footer": {
+      "default": "Upgrade to VIP to see where you rank amongst your friends",
+      "description": "Upsell text on the pinned free-viewer card at the bottom of the leaderboard drawer."
+    },
+    "header_leaderboard": {
+      "default": "Pantheon",
+      "description": "Product feature name for the drawer that ranks the people a user follows by watch time. Keep as the loanword 'Pantheon' (transliterate if needed); do not translate literally to 'temple'."
+    },
+    "button_label_open_leaderboard": {
+      "default": "Open follows leaderboard",
+      "description": "Accessible label for the button that opens the leaderboard drawer."
+    },
+    "text_leaderboard_you": {
+      "default": "You",
+      "description": "Label marking the viewer's own entry in the leaderboard."
+    },
     "text_view_all": {
       "default": "View all",
       "description": "Text for the button that allows users to view all items in a list."
@@ -7982,6 +8014,14 @@
     "preview_feature_description_rewatch": {
       "default": "Start rewatching sessions for shows you've already seen, check in or mark watched episodes directly from the session drawer.",
       "description": "Description for the Rewatch preview feature."
+    },
+    "preview_feature_title_leaderboard": {
+      "default": "Pantheon",
+      "description": "Product feature name for the follows watch-time ranking preview feature. Keep as the loanword 'Pantheon' (transliterate if needed); do not translate literally to 'temple'."
+    },
+    "preview_feature_description_leaderboard": {
+      "default": "Rank the people you follow by watch time and see where you land among them.",
+      "description": "Description for the Pantheon (follows watch-time ranking) preview feature."
     },
     "header_official_links": {
       "default": "Official Links",
