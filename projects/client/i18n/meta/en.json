@@ -12,7 +12,7 @@
   },
   "messages": {
     "link_text_streaming_sync_settings": {
-      "default": "Streaming Services",
+      "default": "Streaming",
       "description": "Text for the link to the streaming services settings page."
     },
     "header_streaming_services": {

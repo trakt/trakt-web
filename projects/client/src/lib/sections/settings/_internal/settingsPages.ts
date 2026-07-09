@@ -28,16 +28,16 @@ export const settingsPages: ReadonlyArray<SettingsPage> = [
     label: m.link_text_streaming_sync_settings,
   },
   {
+    href: UrlBuilder.settings.plex(),
+    label: m.link_text_plex_settings,
+    flag: FeatureFlag.PlexSync,
+  },
+  {
     href: UrlBuilder.settings.advanced(),
     label: m.link_text_advanced_settings,
   },
   {
     href: UrlBuilder.settings.preview(),
     label: m.link_text_preview_settings,
-  },
-  {
-    href: UrlBuilder.settings.plex(),
-    label: m.link_text_plex_settings,
-    flag: FeatureFlag.PlexSync,
   },
 ];
