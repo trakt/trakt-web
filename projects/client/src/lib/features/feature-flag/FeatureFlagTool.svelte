@@ -48,7 +48,7 @@
     <Drawer
       {onClose}
       title={m.header_preview_features()}
-      hasAutoClose={false}
+      dismissal="escape-only"
       size="auto"
     >
       <div class="trakt-feature-flag-items">
