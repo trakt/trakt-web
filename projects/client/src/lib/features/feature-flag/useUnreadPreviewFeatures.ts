@@ -1,32 +1,11 @@
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { BehaviorSubject, map } from 'rxjs';
+import { map } from 'rxjs';
+import { READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY } from './_internal/createFeatureFlagContext.ts';
+import { getFeatureFlagContext } from './_internal/getFeatureFlagContext.ts';
 import { FeatureFlag } from './models/FeatureFlag.ts';
 
-export const READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY =
-  'trakt-read-preview-features';
-
-function initializeReadFeatures(): ReadonlyArray<string> {
-  const storedFeatures = safeLocalStorage.getItem(
-    READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY,
-  );
-  if (!storedFeatures) {
-    return [];
-  }
-
-  try {
-    const parsed: unknown = JSON.parse(storedFeatures);
-    return Array.isArray(parsed)
-      ? parsed.filter((id) => typeof id === 'string')
-      : [];
-  } catch {
-    return [];
-  }
-}
-
 export function useUnreadPreviewFeatures() {
-  const readFeatures = new BehaviorSubject<ReadonlyArray<string>>(
-    initializeReadFeatures(),
-  );
+  const { readFeatures } = getFeatureFlagContext();
 
   const unreadFeatures = readFeatures.pipe(
     map((read) =>

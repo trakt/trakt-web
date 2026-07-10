@@ -1,10 +1,9 @@
+import { renderStore } from '$test/beds/store/renderStore.ts';
 import { waitForValue } from '$test/readable/waitForValue.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY } from './_internal/createFeatureFlagContext.ts';
 import { FeatureFlag } from './models/FeatureFlag.ts';
-import {
-  READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY,
-  useUnreadPreviewFeatures,
-} from './useUnreadPreviewFeatures.ts';
+import { useUnreadPreviewFeatures } from './useUnreadPreviewFeatures.ts';
 
 describe('store: useUnreadPreviewFeatures', () => {
   beforeEach(() => {
@@ -12,7 +11,9 @@ describe('store: useUnreadPreviewFeatures', () => {
   });
 
   it('should report unread features for a first-time visitor', async () => {
-    const { hasUnreadFeatures } = useUnreadPreviewFeatures();
+    const { hasUnreadFeatures } = await renderStore(() =>
+      useUnreadPreviewFeatures()
+    );
 
     expect(await waitForValue(hasUnreadFeatures, true)).toBe(true);
   });
@@ -23,12 +24,14 @@ describe('store: useUnreadPreviewFeatures', () => {
       JSON.stringify(Object.values(FeatureFlag)),
     );
 
-    const { hasUnreadFeatures } = useUnreadPreviewFeatures();
+    const { hasUnreadFeatures } = await renderStore(() =>
+      useUnreadPreviewFeatures()
+    );
 
     expect(await waitForValue(hasUnreadFeatures, false)).toBe(false);
   });
 
-  it('should report unread features when a new feature shipped after the last acknowledgement', async () => {
+  it('should list only the features shipped after the last acknowledgement', async () => {
     const previouslyShippedFeatures = Object.values(FeatureFlag)
       .filter((feature) => feature !== FeatureFlag.Rewatching);
     localStorage.setItem(
@@ -36,21 +39,38 @@ describe('store: useUnreadPreviewFeatures', () => {
       JSON.stringify(previouslyShippedFeatures),
     );
 
-    const { hasUnreadFeatures } = useUnreadPreviewFeatures();
+    const { unreadFeatures } = await renderStore(() =>
+      useUnreadPreviewFeatures()
+    );
 
-    expect(await waitForValue(hasUnreadFeatures, true)).toBe(true);
+    expect(
+      await waitForValue(unreadFeatures, [FeatureFlag.Rewatching]),
+    ).toEqual([FeatureFlag.Rewatching]);
   });
 
   it('should clear the unread state when markAllRead is called', async () => {
-    const { hasUnreadFeatures, markAllRead } = useUnreadPreviewFeatures();
+    const { hasUnreadFeatures, markAllRead } = await renderStore(() =>
+      useUnreadPreviewFeatures()
+    );
 
     markAllRead();
 
     expect(await waitForValue(hasUnreadFeatures, false)).toBe(false);
   });
 
-  it('should persist read features to localStorage', () => {
-    const { markAllRead } = useUnreadPreviewFeatures();
+  it('should share the unread state between consumers of the same provider', async () => {
+    const { first, second } = await renderStore(() => ({
+      first: useUnreadPreviewFeatures(),
+      second: useUnreadPreviewFeatures(),
+    }));
+
+    first.markAllRead();
+
+    expect(await waitForValue(second.hasUnreadFeatures, false)).toBe(false);
+  });
+
+  it('should persist read features to localStorage', async () => {
+    const { markAllRead } = await renderStore(() => useUnreadPreviewFeatures());
 
     markAllRead();
 
@@ -62,12 +82,11 @@ describe('store: useUnreadPreviewFeatures', () => {
   });
 
   it('should treat malformed stored state as nothing read', async () => {
-    localStorage.setItem(
-      READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY,
-      'not-json{',
-    );
+    localStorage.setItem(READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY, 'not-json{');
 
-    const { hasUnreadFeatures } = useUnreadPreviewFeatures();
+    const { hasUnreadFeatures } = await renderStore(() =>
+      useUnreadPreviewFeatures()
+    );
 
     expect(await waitForValue(hasUnreadFeatures, true)).toBe(true);
   });
