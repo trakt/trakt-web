@@ -1,3 +1,4 @@
+import { safeJsonParse } from '$lib/utils/json/safeJsonParse.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
@@ -9,17 +10,27 @@ import { FEATURE_FLAG_CONTEXT_KEY } from './FeatureFlagContextKey.ts';
 
 export const FEATURE_FLAG_LOCAL_STORAGE_KEY = 'trakt-feature-flags';
 
+export const READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY =
+  'trakt-read-preview-features';
+
 function initializeOverrides(): FeatureFlagOverrides {
-  const storedFlags = safeLocalStorage.getItem(FEATURE_FLAG_LOCAL_STORAGE_KEY);
-  if (!storedFlags) {
-    return {};
+  return safeJsonParse<FeatureFlagOverrides>(
+    safeLocalStorage.getItem(FEATURE_FLAG_LOCAL_STORAGE_KEY),
+    {},
+  );
+}
+
+function initializeReadFeatures(): ReadonlyArray<string> {
+  const storedFeatures = safeJsonParse<unknown>(
+    safeLocalStorage.getItem(READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY),
+    [],
+  );
+
+  if (!Array.isArray(storedFeatures)) {
+    return [];
   }
 
-  try {
-    return JSON.parse(storedFlags) as FeatureFlagOverrides;
-  } catch {
-    return {};
-  }
+  return storedFeatures.filter((id): id is string => typeof id === 'string');
 }
 
 export function createFeatureFlagContext() {
@@ -28,6 +39,7 @@ export function createFeatureFlagContext() {
     getContext<FeatureFlagContext>(FEATURE_FLAG_CONTEXT_KEY) ??
       {
         overrides: new BehaviorSubject(initializeOverrides()),
+        readFeatures: new BehaviorSubject(initializeReadFeatures()),
       },
   );
 

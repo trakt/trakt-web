@@ -6,18 +6,28 @@
   import { m } from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
+  import { onMount } from "svelte";
   import { FeatureFlag } from "./models/FeatureFlag";
   import { featureFlagDefinitions } from "./models/featureFlagDefinitions";
   import { useFeatureFlag } from "./useFeatureFlag";
+  import { useUnreadPreviewFeatures } from "./useUnreadPreviewFeatures.ts";
 
-  const {
-    classList = "",
-    newFeatures = [],
-  }: { classList?: string; newFeatures?: ReadonlyArray<string> } = $props();
+  type FeatureFlagItemsProps = {
+    classList?: string;
+  };
+
+  const { classList = "" }: FeatureFlagItemsProps = $props();
 
   const { flags, setFlag } = useFeatureFlag();
+  const { acknowledgeUnread } = useUnreadPreviewFeatures();
   const featureFlags = Object.values(FeatureFlag);
   const hasFlags = featureFlags.length > 0;
+
+  let newFeatures = $state<ReadonlyArray<FeatureFlag>>([]);
+
+  onMount(() => {
+    newFeatures = acknowledgeUnread();
+  });
 </script>
 
 {#if hasFlags}
