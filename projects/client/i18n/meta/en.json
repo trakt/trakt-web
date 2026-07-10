@@ -7890,6 +7890,10 @@
       "default": "Preview Features",
       "description": "Header for the section that allows users to enable or disable preview features."
     },
+    "button_label_unread_preview_features": {
+      "default": "Preview Features (new features available)",
+      "description": "Aria-label for the preview features button when there are new preview features the user has not seen yet."
+    },
     "description_preview_features": {
       "default": "Try upcoming features before they’re broadly available. Preview Features may change as we refine them.",
       "description": "Description for the preview features section."
