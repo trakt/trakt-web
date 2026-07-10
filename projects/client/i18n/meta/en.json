@@ -75,6 +75,14 @@
       "default": "Streaming Sync",
       "description": "Header for the streaming sync settings section."
     },
+    "header_sync": {
+      "default": "Sync",
+      "description": "Header for the sync group on the mobile settings overview."
+    },
+    "header_more_settings": {
+      "default": "More",
+      "description": "Header for the additional settings group on the mobile settings overview."
+    },
     "description_streaming_sync": {
       "default": "Automatically sync your watched history and ratings.",
       "description": "Description for the streaming sync settings section."

@@ -1,7 +1,13 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import SettingsNavLinks from "./SettingsNavLinks.svelte";
   import SettingsNavMenu from "./SettingsNavMenu.svelte";
+
+  const isGeneralSettings = $derived(
+    page.url.pathname === UrlBuilder.settings.general(),
+  );
 </script>
 
 <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
@@ -10,8 +16,14 @@
   </nav>
 </RenderFor>
 
-<RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
+<RenderFor audience="authenticated" device={["tablet-sm"]}>
   <SettingsNavMenu />
+</RenderFor>
+
+<RenderFor audience="authenticated" device={["mobile"]}>
+  {#if !isGeneralSettings}
+    <SettingsNavMenu />
+  {/if}
 </RenderFor>
 
 <style lang="scss">

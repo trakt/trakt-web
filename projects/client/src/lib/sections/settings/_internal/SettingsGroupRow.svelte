@@ -5,7 +5,7 @@
   type CommonRowProps = {
     title: string;
     description?: string;
-    icon: Snippet;
+    icon?: Snippet;
     tag?: Snippet;
   };
 
@@ -34,9 +34,11 @@
 </script>
 
 {#snippet rowContent()}
-  <div class="row-icon-container">
-    {@render icon()}
-  </div>
+  {#if icon}
+    <div class="row-icon-container">
+      {@render icon()}
+    </div>
+  {/if}
 
   <div class="row-body">
     <div class="row-title-line">

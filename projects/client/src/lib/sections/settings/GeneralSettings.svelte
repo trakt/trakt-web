@@ -6,11 +6,22 @@
   import BlockedUsers from "./_internal/BlockedUsers.svelte";
   import Genres from "./_internal/Genres.svelte";
   import Profile from "./_internal/Profile.svelte";
+  import SettingsMobileOverview from "./_internal/SettingsMobileOverview.svelte";
 </script>
 
 <div class="trakt-general-settings">
   <Profile />
-  <Behavior />
+
+  <RenderFor audience="authenticated" device={["mobile"]}>
+    <SettingsMobileOverview />
+  </RenderFor>
+  <RenderFor
+    audience="authenticated"
+    device={["tablet-sm", "tablet-lg", "desktop"]}
+  >
+    <Behavior />
+  </RenderFor>
+
   <Genres />
   <BlockedUsers />
   <Appearance />
