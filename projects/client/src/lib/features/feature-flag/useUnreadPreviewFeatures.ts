@@ -1,55 +1,39 @@
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { BehaviorSubject, map } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs';
+import { READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY } from './_internal/createFeatureFlagContext.ts';
+import { getFeatureFlagContext } from './_internal/getFeatureFlagContext.ts';
 import { FeatureFlag } from './models/FeatureFlag.ts';
 
-export const READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY =
-  'trakt-read-preview-features';
+const allFeatureFlags: ReadonlyArray<FeatureFlag> = Object.values(FeatureFlag);
 
-function initializeReadFeatures(): ReadonlyArray<string> {
-  const storedFeatures = safeLocalStorage.getItem(
-    READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY,
-  );
-  if (!storedFeatures) {
-    return [];
-  }
-
-  try {
-    const parsed: unknown = JSON.parse(storedFeatures);
-    return Array.isArray(parsed)
-      ? parsed.filter((id) => typeof id === 'string')
-      : [];
-  } catch {
-    return [];
-  }
+function toUnreadFeatures(
+  readFeatures: ReadonlyArray<string>,
+): ReadonlyArray<FeatureFlag> {
+  return allFeatureFlags.filter((feature) => !readFeatures.includes(feature));
 }
 
 export function useUnreadPreviewFeatures() {
-  const readFeatures = new BehaviorSubject<ReadonlyArray<string>>(
-    initializeReadFeatures(),
+  const { readFeatures } = getFeatureFlagContext();
+
+  const hasUnreadFeatures = readFeatures.pipe(
+    map((read) => toUnreadFeatures(read).length > 0),
+    distinctUntilChanged(),
   );
 
-  const unreadFeatures = readFeatures.pipe(
-    map((read) =>
-      Object.values(FeatureFlag).filter((feature) => !read.includes(feature))
-    ),
-  );
+  const acknowledgeUnread = (): ReadonlyArray<FeatureFlag> => {
+    const unread = toUnreadFeatures(readFeatures.getValue());
 
-  const hasUnreadFeatures = unreadFeatures.pipe(
-    map((unread) => unread.length > 0),
-  );
-
-  const markAllRead = () => {
-    const allFeatures: ReadonlyArray<string> = Object.values(FeatureFlag);
     safeLocalStorage.setItem(
       READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY,
-      JSON.stringify(allFeatures),
+      JSON.stringify(allFeatureFlags),
     );
-    readFeatures.next(allFeatures);
+    readFeatures.next(allFeatureFlags);
+
+    return unread;
   };
 
   return {
     hasUnreadFeatures,
-    unreadFeatures,
-    markAllRead,
+    acknowledgeUnread,
   };
 }
