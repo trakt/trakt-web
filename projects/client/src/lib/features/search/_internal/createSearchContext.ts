@@ -24,7 +24,7 @@ export function createSearchContext(
         isSearching: new BehaviorSubject(false),
         pathName: UrlBuilder.search(),
         query: new BehaviorSubject(''),
-        config,
+        config: new BehaviorSubject(config),
       },
   );
 
