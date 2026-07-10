@@ -7890,6 +7890,10 @@
       "default": "Preview Features",
       "description": "Header for the section that allows users to enable or disable preview features."
     },
+    "tag_text_new_preview_feature": {
+      "default": "New",
+      "description": "Text for the tag shown next to a preview feature's name when the feature was recently added and the user has not seen it yet. This should be as short as possible."
+    },
     "button_label_unread_preview_features": {
       "default": "Preview Features (new features available)",
       "description": "Aria-label for the preview features button when there are new preview features the user has not seen yet."

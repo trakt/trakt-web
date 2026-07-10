@@ -1,6 +1,7 @@
 <script lang="ts">
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import StemTag from "$lib/components/tags/StemTag.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { m } from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -9,7 +10,10 @@
   import { featureFlagDefinitions } from "./models/featureFlagDefinitions";
   import { useFeatureFlag } from "./useFeatureFlag";
 
-  const { classList = "" }: { classList?: string } = $props();
+  const {
+    classList = "",
+    newFeatures = [],
+  }: { classList?: string; newFeatures?: ReadonlyArray<string> } = $props();
 
   const { flags, setFlag } = useFeatureFlag();
   const featureFlags = Object.values(FeatureFlag);
@@ -32,7 +36,17 @@
           </div>
 
           <div class="feature-flag-copy">
-            <span class="feature-flag-title bold">{title}</span>
+            <span class="feature-flag-title-row">
+              <span class="feature-flag-title bold">{title}</span>
+              {#if newFeatures.includes(key)}
+                <StemTag
+                  text={m.tag_text_new_preview_feature()}
+                  classList="feature-flag-new-tag"
+                  --color-background-stem-tag="var(--color-background-purple)"
+                  --color-foreground-stem-tag="var(--color-foreground-purple)"
+                />
+              {/if}
+            </span>
             {#if description}
               <p class="feature-flag-description secondary small">
                 {description}
@@ -119,6 +133,17 @@
       flex-direction: column;
       gap: var(--gap-xxs);
       min-width: 0;
+    }
+
+    .feature-flag-title-row {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xs);
+      min-width: 0;
+
+      :global(.feature-flag-new-tag) {
+        flex-shrink: 0;
+      }
     }
 
     .feature-flag-description {

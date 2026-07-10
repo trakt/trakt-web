@@ -28,10 +28,14 @@ export function useUnreadPreviewFeatures() {
     initializeReadFeatures(),
   );
 
-  const hasUnreadFeatures = readFeatures.pipe(
+  const unreadFeatures = readFeatures.pipe(
     map((read) =>
-      Object.values(FeatureFlag).some((feature) => !read.includes(feature))
+      Object.values(FeatureFlag).filter((feature) => !read.includes(feature))
     ),
+  );
+
+  const hasUnreadFeatures = unreadFeatures.pipe(
+    map((unread) => unread.length > 0),
   );
 
   const markAllRead = () => {
@@ -45,6 +49,7 @@ export function useUnreadPreviewFeatures() {
 
   return {
     hasUnreadFeatures,
+    unreadFeatures,
     markAllRead,
   };
 }
