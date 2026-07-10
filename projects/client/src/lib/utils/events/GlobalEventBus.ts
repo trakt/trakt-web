@@ -23,7 +23,7 @@ class GlobalEventBus {
   ): () => void {
     if (!this.handlers.has(eventType)) {
       this.handlers.set(eventType, new Set());
-      globalThis.addEventListener(eventType, this._dispatch.bind(this));
+      globalThis.addEventListener(eventType, this._dispatch);
     }
 
     const ref = assertDefined(
@@ -36,12 +36,10 @@ class GlobalEventBus {
     return () => this._unregister(eventType, handler);
   }
 
-  private _dispatch(event: Event): void {
+  private _dispatch = (event: Event): void => {
     const handlers = this.handlers.get(event.type);
-    if (handlers) {
-      handlers.forEach((handler) => handler(event));
-    }
-  }
+    handlers?.forEach((handler) => handler(event));
+  };
 
   private _unregister<Type extends keyof WindowEventMap>(
     eventType: Type,
@@ -56,7 +54,7 @@ class GlobalEventBus {
 
       if (handlers.size === 0) {
         this.handlers.delete(eventType);
-        globalThis.removeEventListener(eventType, this._dispatch.bind(this));
+        globalThis.removeEventListener(eventType, this._dispatch);
       }
     }
   }
