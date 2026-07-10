@@ -5,6 +5,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
+  import { onEscapeKey } from "$lib/utils/actions/onEscapeKey.ts";
   import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
   import { slide } from "svelte/transition";
@@ -99,6 +100,7 @@
   transition:slide={{ duration: 150, axis: slideAxis }}
   use:portal
   use:trap
+  use:onEscapeKey={onClose}
   use:appendClassList={classList}
   onintrostart={() => isOpening.set(true)}
   onintroend={() => {
