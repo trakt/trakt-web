@@ -39,6 +39,24 @@ describe('GlobalEventBus', () => {
     expect(handler).not.toHaveBeenCalled();
   });
 
+  it('should dispatch once per event after register/unregister cycles', () => {
+    const eventType = 'keydown';
+
+    // Each cycle drops the handler count to zero; a stale window listener
+    // left behind would stack an extra dispatch per cycle.
+    Array.from({ length: 3 }).forEach(() => {
+      const unregister = eventBus.register(eventType, vi.fn());
+      unregister();
+    });
+
+    const handler = vi.fn();
+    const unregister = eventBus.register(eventType, handler);
+    globalThis.dispatchEvent(new Event(eventType));
+
+    expect(handler).toHaveBeenCalledTimes(1);
+    unregister();
+  });
+
   it('should not trigger handler after unregistering', () => {
     const handler = vi.fn();
     const eventType = 'click';
