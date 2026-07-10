@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { shortcut } from "@svelte-put/shortcut";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { navigationTrap } from "$lib/features/navigation/navigationTrap";
@@ -14,6 +15,7 @@
   import type { ListDrilldownLinkProps } from "../lists/section-list/models/ListDrilldownLinkProps";
   import { useDrawerPortal } from "./_internal/useDrawerPortal";
   import { verticalDrag } from "./_internal/verticalDrag";
+  import { isTopmostDrawer } from "./isTopmostDrawer.ts";
 
   const drawerClass = "trakt-drawer";
   const HEADER_OVERLAY_FADE_DISTANCE = 16;
@@ -22,7 +24,7 @@
     children: Snippet;
     onClose: () => void;
     title?: string;
-    hasAutoClose?: boolean;
+    dismissal?: "auto" | "escape-only" | "manual";
     trapSelector?: string;
     size?: "normal" | "large" | "auto";
     badge?: Snippet;
@@ -42,7 +44,7 @@
     children,
     onClose,
     title,
-    hasAutoClose = true,
+    dismissal = "auto",
     trapSelector,
     size = "normal",
     badge,
@@ -60,7 +62,7 @@
   const slideAxis = $derived($isMobile ? "y" : "x");
 
   const { portal } = $derived(
-    useDrawerPortal({ hasAutoClose, onClose, elevated }),
+    useDrawerPortal({ hasAutoClose: dismissal === "auto", onClose, elevated }),
   );
 
   const trap = $derived((element: HTMLElement) => {
@@ -71,6 +73,19 @@
 
   const isOpening = writable(false);
   let headerOverlayOpacity = $state(0);
+  let drawerElement = $state<HTMLElement | null>(null);
+
+  const closeOnEscape = () => {
+    if (dismissal === "manual") {
+      return;
+    }
+
+    if (!drawerElement || !isTopmostDrawer(drawerElement)) {
+      return;
+    }
+
+    onClose();
+  };
 
   const updateHeaderOverlay = (event: Event) => {
     if (headerVariant !== "overlay") {
@@ -97,7 +112,17 @@
   });
 </script>
 
+<svelte:window
+  use:shortcut={{
+    trigger: {
+      key: "Escape",
+      callback: closeOnEscape,
+    },
+  }}
+/>
+
 <div
+  bind:this={drawerElement}
   class={drawerClass}
   data-size={size}
   data-elevated={elevated}

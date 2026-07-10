@@ -79,7 +79,7 @@
     title={m.header_create_smart_list()}
     onClose={goBack}
     size="normal"
-    hasAutoClose={false}
+    dismissal="manual"
   >
     {#if isAtLimit}
       <LimitWarning />
