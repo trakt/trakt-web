@@ -6,5 +6,5 @@ export type SearchContext = {
   isSearching: BehaviorSubject<boolean>;
   pathName: string;
   query: BehaviorSubject<string>;
-  config: TypesenseConfig;
+  config: BehaviorSubject<TypesenseConfig>;
 };

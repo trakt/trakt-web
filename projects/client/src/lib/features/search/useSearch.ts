@@ -2,8 +2,15 @@ import { browser } from '$app/environment';
 import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
 import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
-import { BehaviorSubject, combineLatest, of } from 'rxjs';
-import { debounceTime, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, from, of } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  map,
+  shareReplay,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
 import {
   searchListsQuery,
@@ -27,6 +34,7 @@ import { createBulkMediaIntl } from '../intl-overlay/createBulkMediaIntl.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
 import { mapToSearchCover } from './_internal/mapToSearchCover.ts';
 import { postRecentSearch } from './_internal/postRecentSearch.ts';
+import { ensureFreshSearchKeys } from './ensureFreshSearchKeys.ts';
 import type { SearchResponse } from './models/SearchResponse.ts';
 
 function modeToQuery(
@@ -92,38 +100,46 @@ export function useSearch() {
     switchMap(([rawTerm, currentMode]) => {
       const term = rawTerm.toLowerCase().trim();
 
-      if (term.trim().length === 0) {
+      if (term.length === 0) {
         return of(null);
       }
 
       isSearching.next(true);
       track({ mode: currentMode });
 
-      const searchQuery = client.fetchQuery(
-        modeToQuery(term, currentMode, config, false),
-      );
+      return from(ensureFreshSearchKeys(config)).pipe(
+        switchMap((freshConfig) => {
+          const searchQuery = client.fetchQuery(
+            modeToQuery(term, currentMode, freshConfig, false),
+          );
 
-      if (currentMode === 'people' || currentMode === 'lists') {
-        return searchQuery;
-      }
+          if (currentMode === 'people' || currentMode === 'lists') {
+            return searchQuery;
+          }
 
-      const trendingQuery = client.fetchQuery(
-        modeToTrendingQuery(term, currentMode),
-      );
+          const trendingQuery = client.fetchQuery(
+            modeToTrendingQuery(term, currentMode),
+          );
 
-      const exactQuery = client.fetchQuery(
-        modeToQuery(term, currentMode, config, true),
-      );
-      return combineLatest([exactQuery, searchQuery, trendingQuery]).pipe(
-        map(([exactResults, searchResults, trendingResults]) => ({
-          type: 'media' as const,
-          items: dedupe(
-            (item) => item.key,
-            (exactResults as MediaSearchResult).items,
-            trendingResults?.items ?? [],
-            (searchResults as MediaSearchResult).items,
-          ),
-        })),
+          const exactQuery = client.fetchQuery(
+            modeToQuery(term, currentMode, freshConfig, true),
+          );
+          return combineLatest([exactQuery, searchQuery, trendingQuery]).pipe(
+            map(([exactResults, searchResults, trendingResults]) => ({
+              type: 'media' as const,
+              items: dedupe(
+                (item) => item.key,
+                (exactResults as MediaSearchResult).items,
+                trendingResults?.items ?? [],
+                (searchResults as MediaSearchResult).items,
+              ),
+            })),
+          );
+        }),
+        // Contain a failed lookup to this search. Without this the error
+        // propagates through switchMap and terminates the whole stream, so
+        // every later search silently returns nothing until remount.
+        catchError(() => of(null)),
       );
     }),
     tap(() => isSearching.next(false)),
