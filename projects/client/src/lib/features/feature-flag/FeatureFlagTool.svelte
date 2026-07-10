@@ -12,10 +12,16 @@
   const isOpen = writable(false);
   const onClose = () => isOpen.set(false);
 
-  const { hasUnreadFeatures, markAllRead } = useUnreadPreviewFeatures();
+  const { hasUnreadFeatures, unreadFeatures, markAllRead } =
+    useUnreadPreviewFeatures();
+
+  // Snapshot of the unread ids taken when the drawer opens, so the NEW
+  // tags stay visible for the session in which the user first sees them.
+  let newFeatures = $state<ReadonlyArray<string>>([]);
 
   const onToggle = () => {
     if (!$isOpen) {
+      newFeatures = $unreadFeatures;
       markAllRead();
     }
     isOpen.set(!$isOpen);
@@ -52,7 +58,7 @@
       size="auto"
     >
       <div class="trakt-feature-flag-items">
-        <FeatureFlagItems />
+        <FeatureFlagItems {newFeatures} />
       </div>
     </Drawer>
   {/if}
