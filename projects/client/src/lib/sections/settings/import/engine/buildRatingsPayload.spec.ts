@@ -21,6 +21,24 @@ describe('buildRatingsPayload', () => {
       expect(result.shows).toHaveLength(0);
     });
 
+    it('should preserve rated_at date for movies', () => {
+      const item: UniversalImportItem = {
+        action: 'ratings',
+        type: 'movie',
+        ids: { imdb: 'tt1234567' },
+        rating: 8,
+        rated_at: '2022-09-18T00:00:00.000Z',
+      };
+
+      const result = buildRatingsPayload([item]);
+
+      expect(result.movies).toEqual([{
+        rating: 8,
+        ids: { imdb: 'tt1234567' },
+        rated_at: '2022-09-18T00:00:00.000Z',
+      }]);
+    });
+
     it('should skip a movie with no resolvable ids', () => {
       const item: UniversalImportItem = {
         action: 'ratings',
@@ -56,6 +74,24 @@ describe('buildRatingsPayload', () => {
 
       expect(result.shows).toEqual([{ rating: 10, ids: { tvdb: 81189 } }]);
       expect(result.movies).toHaveLength(0);
+    });
+
+    it('should preserve rated_at date for shows', () => {
+      const item: UniversalImportItem = {
+        action: 'ratings',
+        type: 'show',
+        ids: { tvdb: 81189 },
+        rating: 10,
+        rated_at: '2022-09-18T00:00:00.000Z',
+      };
+
+      const result = buildRatingsPayload([item]);
+
+      expect(result.shows).toEqual([{
+        rating: 10,
+        ids: { tvdb: 81189 },
+        rated_at: '2022-09-18T00:00:00.000Z',
+      }]);
     });
   });
 
