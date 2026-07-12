@@ -10,21 +10,29 @@ function clampRating(rating: number): number {
 }
 
 function toRatingsMovie(
-  { ids, rating }: UniversalImportItem,
+  { ids, rating, rated_at }: UniversalImportItem,
 ): RatingsMovie | null {
   if (rating == null) return null;
   const resolvedIds = pickIds(ids, MOVIE_IDS);
   if (!resolvedIds) return null;
-  return { rating: clampRating(rating), ids: resolvedIds as never };
+  return {
+    rating: clampRating(rating),
+    ids: resolvedIds as never,
+    ...(rated_at ? { rated_at } : {}),
+  };
 }
 
 function toRatingsShow(
-  { ids, rating }: UniversalImportItem,
+  { ids, rating, rated_at }: UniversalImportItem,
 ): RatingsShow | null {
   if (rating == null) return null;
   const resolvedIds = pickIds(ids, SHOW_IDS);
   if (!resolvedIds) return null;
-  return { rating: clampRating(rating), ids: resolvedIds as never };
+  return {
+    rating: clampRating(rating),
+    ids: resolvedIds as never,
+    ...(rated_at ? { rated_at } : {}),
+  };
 }
 
 export function buildRatingsPayload(
