@@ -221,6 +221,10 @@ export function useUser() {
 - Return `$derived` values, not raw observables
 - Do **not** import across feature boundaries - if sharing needed, expose via
   context or shared section
+- Hooks that fire user tracking mutations (history, watchlist, ratings,
+  favorites) route writes through `executeOrEnqueue` and overlay reads with
+  `findPendingOverride` so actions work offline - see "Pattern 5" in
+  `requests.md`
 
 ### Hooks that drive `useQuery` take `Observable<T>`, never a bare value
 
@@ -388,8 +392,12 @@ concatenation.
 ```
 
 ```scss
-button[data-variant='primary'] { … }
-button[data-style='filled'] { … }
+button[data-variant='primary'] {
+  …
+}
+button[data-style='filled'] {
+  …
+}
 ```
 
 Common attributes:
@@ -451,8 +459,12 @@ nests them under the root selector so the global namespace stays clean.
 
 ```scss
 .trakt-card {
-  .card-cover { … }
-  .card-title { … }
+  .card-cover {
+    …
+  }
+  .card-title {
+    …
+  }
 }
 ```
 
@@ -478,9 +490,15 @@ expressed as state classes prefixed `is-` or `has-`, toggled with Svelte's
 
 ```scss
 .trakt-drawer {
-  &.is-open { … }
-  &.is-loading { … }
-  &.has-error { … }
+  &.is-open {
+    …
+  }
+  &.is-loading {
+    …
+  }
+  &.has-error {
+    …
+  }
 }
 ```
 
@@ -504,13 +522,23 @@ components and are forbidden.
 
 ```scss
 // Good
-.trakt-button { … }
-.trakt-button[data-variant='primary'] { … }
-.trakt-button .button-label { … }
+.trakt-button {
+  …
+}
+.trakt-button[data-variant='primary'] {
+  …
+}
+.trakt-button .button-label {
+  …
+}
 
 // Bad
-button { … }                    // leaks globally
-.primary { … }                  // collides with utility
+button {
+  …
+} // leaks globally
+.primary {
+  …
+} // collides with utility
 .button[data-variant='primary'] // unprefixed, fragile
 ```
 

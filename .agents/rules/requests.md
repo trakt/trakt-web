@@ -11,8 +11,10 @@ applyTo: 'projects/client/src/lib/requests/**'
 
 `lib/requests/` integrates with two sources:
 
-- **`@trakt/api`** - Typed SDK for Trakt v2 REST API. Use `api({ fetch })` to call it.
-- **`v3/` endpoints** - Untyped internal endpoints accessed via `rawApiFetch`. Always define a local Zod schema for their response.
+- **`@trakt/api`** - Typed SDK for Trakt v2 REST API. Use `api({ fetch })` to
+  call it.
+- **`v3/` endpoints** - Untyped internal endpoints accessed via `rawApiFetch`.
+  Always define a local Zod schema for their response.
 
 ---
 
@@ -69,8 +71,10 @@ export const someQuery = defineQuery({
 - `request` receives full `params` object - destructure only what you need.
 - `mapper` transforms `response.body` (typed by SDK) into domain model.
 - `schema` is Zod schema for **output** - validates what `mapper` returns.
-- `dependencies` must list every param that, when changed, should refetch. Use spread helpers for filters/search (see below).
-- `invalidations` lists `InvalidateAction.*` tokens that bust this cache when mutations fire.
+- `dependencies` must list every param that, when changed, should refetch. Use
+  spread helpers for filters/search (see below).
+- `invalidations` lists `InvalidateAction.*` tokens that bust this cache when
+  mutations fire.
 
 ---
 
@@ -123,7 +127,9 @@ export const someListQuery = defineInfiniteQuery({
 
 ## Pattern 3 - `v3/` Endpoint Query
 
-`v3/` endpoints not covered by `@trakt/api`'s type system. **Always** define a Zod schema locally for their response, parse with it before returning from request function.
+`v3/` endpoints not covered by `@trakt/api`'s type system. **Always** define a
+Zod schema locally for their response, parse with it before returning from
+request function.
 
 ```ts
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
@@ -174,15 +180,19 @@ export const someV3Query = defineQuery({
 ### Key rules
 
 - **Always** `.parse()` raw JSON - never trust unvalidated `v3/` responses.
-- If endpoint can return empty/error body, guard with `response.ok` and return `{ body: undefined, status: 200 }` as fallback so `mapper` receives `undefined` and handles it gracefully.
+- If endpoint can return empty/error body, guard with `response.ok` and return
+  `{ body: undefined, status: 200 }` as fallback so `mapper` receives
+  `undefined` and handles it gracefully.
 - Export `ResponseSchema` when other files need to reference it.
-- Keep raw response schema (`...ResponseSchema`) and domain schema (`...Schema`) separate.
+- Keep raw response schema (`...ResponseSchema`) and domain schema (`...Schema`)
+  separate.
 
 ---
 
 ## Pattern 4 - Mutation Request
 
-Use for write operations (add, remove, update). Plain async functions - not queries.
+Use for write operations (add, remove, update). Plain async functions - not
+queries.
 
 ```ts
 import { api, type ApiParams } from '$lib/requests/api.ts';
@@ -202,7 +212,60 @@ export function someActionRequest(
 }
 ```
 
-For `v3/` mutations use `rawApiFetch` with `method: 'POST'` / `'DELETE'` and validate with Zod if response body matters.
+For `v3/` mutations use `rawApiFetch` with `method: 'POST'` / `'DELETE'` and
+validate with Zod if response body matters.
+
+---
+
+## Pattern 5 - Offline-Aware Tracking Mutation
+
+User tracking mutations (history, watchlist, ratings, favorites) must survive a
+dead connection: they queue in IndexedDB and replay when connectivity returns.
+The infrastructure lives in `lib/features/offline/`.
+
+**Hooks never call these request functions directly.** They go through
+`executeOrEnqueue`, which runs the request when online and queues it (deduped by
+media key set, latest intent wins) on network failure:
+
+```ts
+import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
+import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
+
+await executeOrEnqueue({
+  endpoint: 'watchlist:add',
+  keys: media.map((item) => toMediaKey(type, item.id)),
+  body,
+  invalidations: [InvalidateAction.Watchlisted(type)],
+});
+await invalidate(InvalidateAction.Watchlisted(type));
+```
+
+The matching read store overlays the pending queue so the UI reflects the action
+while offline (see `useIsWatched` / `useIsWatchlisted`):
+
+```ts
+const pending = findPendingOverride({ actions: $actions, domain, keys });
+if (pending) return isAddEndpoint(pending.endpoint);
+// ...fall through to server state
+```
+
+### Adding a new offline-queueable action
+
+1. Add the endpoint to `OfflineActionEndpointSchema`
+   (`offline/models/OfflineActionEndpoint.ts`) - format `{domain}:{add|remove}`.
+2. Map its body type in `offline/models/OfflineActionBody.ts`.
+3. Register the executor in `offline/_internal/executeOfflineAction.ts`
+   (endpoint -> existing `*Request` function).
+4. Route the hook's write through `executeOrEnqueue` with `toMediaKey` keys and
+   the same `InvalidateAction` tokens the hook already fires.
+5. Overlay the read store with `findPendingOverride` + `isAddEndpoint`.
+6. If replaying the action can duplicate server-side effects (like extra history
+   plays), extend the reconcile step
+   (`offline/_internal/findDuplicateWatch.ts`); idempotent actions (watchlist,
+   ratings, favorites) skip it.
+
+Keep real-time actions (e.g. check-in) out of the queue - replaying them after
+the fact is semantically wrong.
 
 ---
 
@@ -210,8 +273,10 @@ For `v3/` mutations use `rawApiFetch` with `method: 'POST'` / `'DELETE'` and val
 
 - Pure functions - no side effects, no API calls.
 - Named `mapTo{DomainType}(apiResponse): DomainType`.
-- Live in `_internal/` if reused across queries; inline or exported from query file if used only once or twice.
-- When extending existing mapper (e.g., adding a field), prefer `.extend()` on schema rather than duplicating.
+- Live in `_internal/` if reused across queries; inline or exported from query
+  file if used only once or twice.
+- When extending existing mapper (e.g., adding a field), prefer `.extend()` on
+  schema rather than duplicating.
 
 ```ts
 // _internal/mapToEntry.ts
@@ -229,7 +294,8 @@ export function mapToEntry(response: EntryResponse): Entry {
 ## Models
 
 - Define Zod schema first; derive TypeScript type with `z.infer`.
-- Use `.nullish()` for optional nullable fields, `.optional()` for fields that may be absent.
+- Use `.nullish()` for optional nullable fields, `.optional()` for fields that
+  may be absent.
 - Export both schema (`EntitySchema`) and type (`Entity`) from same file.
 
 ```ts
@@ -281,7 +347,8 @@ Leave `invalidations: []` for queries that never need external cache busting.
 
 ## Filter & Search Dependencies
 
-When a query accepts `FilterParams` or `SearchParams`, spread the helper functions in `dependencies`:
+When a query accepts `FilterParams` or `SearchParams`, spread the helper
+functions in `dependencies`:
 
 ```ts
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
@@ -335,3 +402,5 @@ Before submitting a new query or request, verify:
 - [ ] `invalidations` lists relevant `InvalidateAction.*` tokens
 - [ ] Mapper is pure function - no side effects
 - [ ] `ttl` is appropriate for data's freshness requirements
+- [ ] Tracking mutation: hook routes through `executeOrEnqueue` (Pattern 5),
+      read store overlays the pending queue via `findPendingOverride`
