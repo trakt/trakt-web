@@ -37,6 +37,26 @@ A few guidelines to keep things smooth:
 - Don't worry about getting it perfect on the first try. We'll work through it
   together in the review.
 
+### Commit messages
+
+We use [Conventional Commits](https://www.conventionalcommits.org/), enforced by
+`commitlint`. One thing that trips people up: the **scope** (the bit in
+parentheses, e.g. `fix(settings):`) is not free-form - it's a fixed list. If you
+pick a scope that isn't on the list, the `commitlint` check fails.
+
+The full list lives in [`commitlint.config.js`](../commitlint.config.js) under
+`scope-enum`. Pick the closest existing scope to what you touched, or open the
+PR and we'll help you land on the right one - it's an easy fix.
+
+### The red checks on your PR are probably fine 🙂
+
+If you're contributing from a fork, you'll likely see a few checks go red:
+**Enable Auto Merge**, **E2E**, and **DeepSource: Test coverage**. These need
+repository secrets that GitHub - correctly - never shares with fork PRs, so they
+can't pass from a fork no matter how good your change is. They're not caused by
+your diff. A maintainer takes care of them when merging, so don't let them worry
+you.
+
 ## i18n Contributions
 
 Helping make trakt-web available in more languages is a fantastic way to
