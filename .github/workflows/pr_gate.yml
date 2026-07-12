@@ -27,7 +27,9 @@ jobs:
           skip-checkout: true
 
   merge:
-    if: github.event.pull_request.draft == false && github.event.pull_request.base.ref == 'main' && github.head_ref != 'i18n_crowdin_updates'
+    # Skip on fork PRs: they can't read GH_APP_ID/GH_APP_PRIVATE_KEY, so the
+    # token step hard-fails. A maintainer enables auto-merge manually instead.
+    if: github.event.pull_request.draft == false && github.event.pull_request.base.ref == 'main' && github.head_ref != 'i18n_crowdin_updates' && github.event.pull_request.head.repo.full_name == github.repository
     name: The Convergence of Realms (Enable Auto Merge)
     runs-on: ubuntu-latest
     steps:
