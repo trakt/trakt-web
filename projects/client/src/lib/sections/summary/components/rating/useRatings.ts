@@ -1,13 +1,18 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
+import type { RatedEntry } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
+import { findPendingOverride } from '$lib/features/offline/findPendingOverride.ts';
+import { isAddEndpoint } from '$lib/features/offline/isAddEndpoint.ts';
+import type { OfflineAction } from '$lib/features/offline/models/OfflineAction.ts';
+import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
+import { useOfflineActions } from '$lib/features/offline/useOfflineActions.ts';
 import { useLastWatched } from '$lib/features/toast/useLastWatched.ts';
 import {
   InvalidateAction,
   type RatedMediaType,
 } from '$lib/requests/models/InvalidateAction.ts';
-import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
-import { removeRatingRequest } from '$lib/requests/sync/removeRatingRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { RatingsSyncRequest, RemoveRatingsParams } from '@trakt/api';
@@ -49,6 +54,25 @@ function toRemovePayload(
   return { [key]: [payload] };
 }
 
+function toPendingRatedEntry(
+  pending: OfflineAction,
+  type: RateableType,
+  id: number,
+): RatedEntry | undefined {
+  if (!isAddEndpoint(pending.endpoint)) {
+    return undefined;
+  }
+
+  const body = pending.body as RatingsSyncRequest;
+  const rating = body[`${type}s`]?.at(0)?.rating;
+
+  if (rating == null) {
+    return undefined;
+  }
+
+  return { id, rating, ratedAt: new Date(pending.queuedAt) };
+}
+
 export function useRatings({ type, id }: WatchlistStoreProps) {
   const pendingRating = new BehaviorSubject<null | number>(null);
   const { ratings, favorites } = useUser();
@@ -56,8 +80,20 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
   const { track } = useTrack(AnalyticsEvent.Rate);
   const { dismiss } = useLastWatched();
 
-  const rating = ratings.pipe(
-    map(($ratings) => {
+  const { actions } = useOfflineActions();
+
+  const rating = combineLatest([ratings, actions]).pipe(
+    map(([$ratings, $actions]) => {
+      const pending = findPendingOverride({
+        actions: $actions,
+        domain: 'rating',
+        keys: [toMediaKey(type, id)],
+      });
+
+      if (pending) {
+        return toPendingRatedEntry(pending, type, id);
+      }
+
       if (!$ratings) {
         return;
       }
@@ -139,13 +175,19 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
 
     track({ action: hasRating ? 'changed' : 'added', rating: newRating });
 
-    await addRatingRequest({ body: toAddPayload(type, id, newRating) });
-    await invalidate(InvalidateAction.Rated(type));
-
-    pendingRating.next(null);
-    isSubmitting.next(false);
-    if (type !== 'season') {
-      dismiss(id, type, 'rating');
+    const addResult = await executeOrEnqueue({
+      endpoint: 'rating:add',
+      keys: [toMediaKey(type, id)],
+      body: toAddPayload(type, id, newRating),
+      invalidations: [InvalidateAction.Rated(type)],
+    });
+    if (addResult === 'executed') {
+      await invalidate(InvalidateAction.Rated(type));
+      pendingRating.next(null);
+      isSubmitting.next(false);
+      if (type !== 'season') {
+        dismiss(id, type, 'rating');
+      }
     }
   });
 
@@ -159,11 +201,16 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     pendingRating.next(0);
 
     track({ action: 'removed' });
-    await removeRatingRequest({
+    const removeResult = await executeOrEnqueue({
+      endpoint: 'rating:remove',
+      keys: [toMediaKey(type, id)],
       body: toRemovePayload(type, id),
+      invalidations: [InvalidateAction.Rated(type)],
     });
-    await invalidate(InvalidateAction.Rated(type));
-    pendingRating.next(null);
+    if (removeResult === 'executed') {
+      await invalidate(InvalidateAction.Rated(type));
+      pendingRating.next(null);
+    }
   };
 
   return {

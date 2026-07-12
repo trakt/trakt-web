@@ -1,9 +1,9 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
+import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
+import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { addToWatchlistRequest } from '$lib/requests/sync/addToWatchlistRequest.ts';
-import { removeFromWatchlistRequest } from '$lib/requests/sync/removeFromWatchlistRequest.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { useIsWatchlisted } from '$lib/stores/useIsWatchlisted.ts';
@@ -29,13 +29,17 @@ export function useWatchlist(props: MediaStoreProps) {
     isWatchlistUpdating.next(true);
     track({ action: 'add' });
 
-    await addToWatchlistRequest({
+    const addResult = await executeOrEnqueue({
+      endpoint: 'watchlist:add',
+      keys: ids.map((id) => toMediaKey(type, id)),
       body,
+      invalidations: [InvalidateAction.Watchlisted(type)],
     });
 
-    await invalidate(InvalidateAction.Watchlisted(type));
-
-    isWatchlistUpdating.next(false);
+    if (addResult === 'executed') {
+      await invalidate(InvalidateAction.Watchlisted(type));
+      isWatchlistUpdating.next(false);
+    }
   };
 
   const removeFromWatchlist = async () => {
@@ -46,13 +50,17 @@ export function useWatchlist(props: MediaStoreProps) {
     isWatchlistUpdating.next(true);
     track({ action: 'remove' });
 
-    await removeFromWatchlistRequest({
+    const removeResult = await executeOrEnqueue({
+      endpoint: 'watchlist:remove',
+      keys: ids.map((id) => toMediaKey(type, id)),
       body,
+      invalidations: [InvalidateAction.Watchlisted(type)],
     });
 
-    await invalidate(InvalidateAction.Watchlisted(type));
-
-    isWatchlistUpdating.next(false);
+    if (removeResult === 'executed') {
+      await invalidate(InvalidateAction.Watchlisted(type));
+      isWatchlistUpdating.next(false);
+    }
   };
 
   return {
