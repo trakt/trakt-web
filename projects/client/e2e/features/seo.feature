@@ -32,6 +32,7 @@ Feature: SEO meta tags
     And the description should be "Browse trending, popular, and highly anticipated movies on Trakt Web. Find your next watch and keep track of everything you've seen."
     And the canonical path should be "/discover"
 
+  @live-data
   Scenario: Show summary page has complete SEO meta tags
     When I view the show summary of "silo"
     Then the page should meet core SEO requirements
@@ -46,6 +47,7 @@ Feature: SEO meta tags
     And the JSON-LD name should match the og:title
     And the JSON-LD should include genre and year
 
+  @live-data
   Scenario: Movie summary page has complete SEO meta tags
     When I view the movie summary of "heretic-2024"
     Then the page should meet core SEO requirements

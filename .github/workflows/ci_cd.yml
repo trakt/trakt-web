@@ -109,7 +109,7 @@ jobs:
       needs.files-changed.outputs.client_source == 'true' ||
       needs.files-changed.outputs.workflows == 'true'
       }}
-    name: "The Interrogation Room (Shard) [${{ matrix.shard }}/4]"
+    name: 'The Interrogation Room (Shard) [${{ matrix.shard }}/4]'
     runs-on: ubuntu-latest
     concurrency:
       group: ci-test-${{ github.ref }}-${{ matrix.shard }}
@@ -267,7 +267,7 @@ jobs:
         uses: nick-fields/retry@v3
         with:
           timeout_seconds: 60
-          max_attempts: 10
+          max_attempts: 2
           command: |
             cd projects/client
             deno task test:e2e
@@ -275,6 +275,9 @@ jobs:
         env:
           E2E_HEADLESS: 'true'
           E2E_BASE_URL: 'http://localhost:4173/'
+          # Forks have no Trakt API secret, so the preview can't load summary
+          # data. Skip @live-data scenarios there; static ones still run.
+          E2E_SKIP_LIVE_DATA: ${{ secrets.TRAKT_CLIENT_ID == '' }}
 
       - name: Witnessing the Premonition's Demise aka Kill Preview
         working-directory: projects/client
@@ -314,7 +317,7 @@ jobs:
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      
+
       # Add this new step to copy the .npmrc file
       - name: The Ancient Scroll of JSR aka Copy .npmrc
         run: |
