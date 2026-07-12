@@ -54,6 +54,8 @@ masterpiece.
 - **test:** Adding missing tests or correcting existing tests
 - **chore:** Changes to the build process or auxiliary tools and libraries such as documentation generation
 
+**A note on scope:** the scope in parentheses (e.g. `fix(settings):`) is enforced against a fixed list in [`commitlint.config.js`](../commitlint.config.js) (`scope-enum`). Pick the closest existing scope - an off-list scope fails the `commitlint` check.
+
 By following these guidelines, you'll ensure your pull request is a cinematic
 triumph, a contribution worthy of a place in the trakt-web hall of fame. Now,
 let the show begin!
