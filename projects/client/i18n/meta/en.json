@@ -8978,6 +8978,58 @@
       "default": "your streaming service",
       "description": "Generic fallback name used when a streaming service name can't be resolved."
     },
+    "text_offline_queued_title": {
+      "default": "Saved while offline",
+      "description": "Title of the snackbar shown when a tracking action is queued because there is no connection."
+    },
+    "text_offline_queued_message": {
+      "default": "We'll sync your activity with Trakt once you're back online.",
+      "description": "Message of the snackbar shown when a tracking action is queued because there is no connection."
+    },
+    "text_offline_synced_title": {
+      "default": "Back online",
+      "description": "Title of the snackbar shown after queued offline actions were synced."
+    },
+    "text_offline_synced_message_one": {
+      "default": "Your offline action has been synced.",
+      "description": "Message shown after exactly one queued offline action was synced."
+    },
+    "text_offline_synced_message_other": {
+      "default": "{count} offline actions have been synced.",
+      "description": "Message shown after multiple queued offline actions were synced."
+    },
+    "text_offline_sync_failed_title": {
+      "default": "Some actions didn't sync",
+      "description": "Title of the snackbar shown when the server rejected queued offline actions."
+    },
+    "text_offline_sync_failed_message_one": {
+      "default": "An offline action was rejected by the server and removed.",
+      "description": "Message shown when the server rejected exactly one queued offline action."
+    },
+    "text_offline_sync_failed_message_other": {
+      "default": "{count} offline actions were rejected by the server and removed.",
+      "description": "Message shown when the server rejected multiple queued offline actions."
+    },
+    "text_offline_duplicate_title": {
+      "default": "Already synced elsewhere",
+      "description": "Title of the snackbar asking whether to replay offline watches that were already recorded from another device."
+    },
+    "text_offline_duplicate_message_one": {
+      "default": "An item you tracked offline was already marked as watched from another device. Add the extra play?",
+      "description": "Prompt shown when exactly one queued offline watch was already recorded from another device."
+    },
+    "text_offline_duplicate_message_other": {
+      "default": "{count} items you tracked offline were already marked as watched from another device. Add the extra plays?",
+      "description": "Prompt shown when multiple queued offline watches were already recorded from another device."
+    },
+    "button_text_sync_anyway": {
+      "default": "Add anyway",
+      "description": "Button text confirming that duplicate offline watches should be replayed as extra plays."
+    },
+    "button_label_sync_anyway": {
+      "default": "Add the offline plays anyway",
+      "description": "Accessible label for the button confirming that duplicate offline watches should be replayed."
+    },
     "error_text_sync_load_failed": {
       "default": "We couldn't load this right now. Please try again.",
       "description": "Inline error message shown when a streaming sync detail or its items fail to load."

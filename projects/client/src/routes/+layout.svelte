@@ -21,6 +21,7 @@
   import NavigationHistoryProvider from "$lib/features/navigation-history/NavigationHistoryProvider.svelte";
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import AddNoteDrawerProvider from "$lib/features/notes/AddNoteDrawerProvider.svelte";
+  import OfflineSync from "$lib/features/offline/OfflineSync.svelte";
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
   import PlayerProvider from "$lib/features/player/YoutubePlayerProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
@@ -207,6 +208,10 @@
 
                                           <RenderFor audience="authenticated">
                                             <NavbarToastContent />
+                                          </RenderFor>
+
+                                          <RenderFor audience="authenticated">
+                                            <OfflineSync />
                                           </RenderFor>
                                           <QueryDevtools
                                             client={data.queryClient}
