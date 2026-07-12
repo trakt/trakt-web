@@ -1,12 +1,11 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
+import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
-import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
-import { removeRatingRequest } from '$lib/requests/sync/removeRatingRequest.ts';
-import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
 import { toRemoveRatingsPayload } from '$lib/requests/sync/toRemoveRatingsPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { hasAired } from '$lib/utils/media/hasAired.ts';
@@ -25,6 +24,7 @@ export function useMarkAsWatched(
 ) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
+  const mediaKeys = media.map((item) => toMediaKey(type, item.id));
   const isMarkingAsWatched = new BehaviorSubject(false);
   const { user, history, ratings } = useUser();
   const { invalidate } = useInvalidator();
@@ -44,13 +44,17 @@ export function useMarkAsWatched(
     isMarkingAsWatched.next(true);
     track({ action: 'add' });
 
-    await markAsWatchedRequest({
+    const result = await executeOrEnqueue({
+      endpoint: 'history:add',
+      keys: mediaKeys,
       body: toMarkAsWatchedPayload(props, watchedAtDate),
+      invalidations: [InvalidateAction.MarkAsWatched(type)],
     });
 
-    await invalidate(InvalidateAction.MarkAsWatched(type));
-
-    isMarkingAsWatched.next(false);
+    if (result === 'executed') {
+      await invalidate(InvalidateAction.MarkAsWatched(type));
+      isMarkingAsWatched.next(false);
+    }
   };
 
   // Ids whose rating this removal orphans. The main action removes *every*
@@ -97,20 +101,29 @@ export function useMarkAsWatched(
 
     const orphanedRatingIds = await getOrphanedRatingIds();
 
-    await removeWatchedRequest({
+    const removeResult = await executeOrEnqueue({
+      endpoint: 'history:remove',
+      keys: mediaKeys,
       body: toMarkAsWatchedPayload(props),
+      invalidations: [InvalidateAction.MarkAsWatched(type)],
     });
 
     if (orphanedRatingIds.length > 0) {
-      await removeRatingRequest({
+      const ratingResult = await executeOrEnqueue({
+        endpoint: 'rating:remove',
+        keys: orphanedRatingIds.map((id) => toMediaKey(type, id)),
         body: toRemoveRatingsPayload(type, orphanedRatingIds),
+        invalidations: [InvalidateAction.Rated(type)],
       });
-      await invalidate(InvalidateAction.Rated(type));
+      if (ratingResult === 'executed') {
+        await invalidate(InvalidateAction.Rated(type));
+      }
     }
 
-    await invalidate(InvalidateAction.MarkAsWatched(type));
-
-    isMarkingAsWatched.next(false);
+    if (removeResult === 'executed') {
+      await invalidate(InvalidateAction.MarkAsWatched(type));
+      isMarkingAsWatched.next(false);
+    }
   };
 
   const isWatchable = media.every((item) => {

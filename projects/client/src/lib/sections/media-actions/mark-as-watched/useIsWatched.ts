@@ -1,5 +1,10 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { map, shareReplay } from 'rxjs';
+import { findPendingOverride } from '$lib/features/offline/findPendingOverride.ts';
+import { isAddEndpoint } from '$lib/features/offline/isAddEndpoint.ts';
+import type { OfflineAction } from '$lib/features/offline/models/OfflineAction.ts';
+import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
+import { useOfflineActions } from '$lib/features/offline/useOfflineActions.ts';
+import { combineLatest, map, shareReplay } from 'rxjs';
 import type { ExtendedMediaStoreProps } from '../../../models/MediaStoreProps.ts';
 
 export type IsWatchedProps = ExtendedMediaStoreProps;
@@ -8,6 +13,32 @@ export function useIsWatched(props: IsWatchedProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const { history } = useUser();
+  const { actions } = useOfflineActions();
+
+  // Offline actions are queued per movie/show/episode; season marks are
+  // enqueued as their show payload, so seasons keep the plain server state.
+  const findPendingWatchState = (
+    $actions: OfflineAction[],
+  ): { isWatched: boolean; isPartiallyWatched: boolean } | null => {
+    if (type === 'season') {
+      return null;
+    }
+
+    const pending = findPendingOverride({
+      actions: $actions,
+      domain: 'history',
+      keys: media.map((item) => toMediaKey(type, item.id)),
+    });
+
+    if (!pending) {
+      return null;
+    }
+
+    return {
+      isWatched: isAddEndpoint(pending.endpoint),
+      isPartiallyWatched: false,
+    };
+  };
 
   const episodes = props.type === 'episode'
     ? Array.isArray(props.media) ? props.media : [props.media]
@@ -20,8 +51,14 @@ export function useIsWatched(props: IsWatchedProps) {
     ? Array.isArray(props.media) ? props.media : [props.media]
     : [];
 
-  const watchState = history.pipe(
-    map(($history) => {
+  const watchState = combineLatest([history, actions]).pipe(
+    map(([$history, $actions]) => {
+      const pendingState = findPendingWatchState($actions);
+
+      if (pendingState) {
+        return pendingState;
+      }
+
       if (!$history) {
         return { isWatched: false, isPartiallyWatched: false };
       }
