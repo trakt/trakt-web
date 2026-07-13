@@ -54,10 +54,6 @@ export function decodeRecord(
   }
 }
 
-function sanitizeOgSettingsSection(section?: string) {
-  return section === 'advanced' ? '/advanced' : '';
-}
-
 function sanitizeParams(
   params: Omit<WellKnownQueryParams, 'search'> & SearchParams,
 ): WellKnownQueryParams {
@@ -106,12 +102,6 @@ const ogIframeFactory = (url: HttpsUrl): HttpsUrl => {
 const ogIframeSlurmFactory = (url: HttpsUrl, token: string | Nil): HttpsUrl => {
   const tokenParam = token ? `&slurm=${token}` : '';
   return `${ogIframeFactory(url)}${tokenParam}`;
-};
-
-const ogIframeAccessTokenFactory = (url: HttpsUrl, token: string): HttpsUrl => {
-  return `${
-    ogIframeFactory(url)
-  }&access_token=${token}&client_id=${TRAKT_CLIENT_ID}`;
 };
 
 const ogSupportFactory = (username?: string): HttpsUrl | MailToUrl => {
@@ -324,11 +314,6 @@ export const UrlBuilder = {
         `https://widgets.trakt.tv/users/${slug}/yir.jpg?year=${year}`,
     },
     frame: {
-      settings: (token: string, section?: string) =>
-        ogIframeAccessTokenFactory(
-          `https://trakt.tv/settings${sanitizeOgSettingsSection(section)}`,
-          token,
-        ),
       yearToDate: (slug: string, year: string, token: string | Nil) =>
         ogIframeSlurmFactory(
           `https://trakt.tv/users/${slug}/year/${year}`,
@@ -355,8 +340,7 @@ export const UrlBuilder = {
     appsApiNew: () => '/settings/apps/api/new',
     appsApiDetail: (id: number | string) => `/settings/apps/api/${id}`,
     appsApiEdit: (id: number | string) => `/settings/apps/api/${id}/edit`,
-    advanced: (params: Pick<WellKnownQueryParams, 'section'> = {}) =>
-      `/settings/advanced${buildParamString(sanitizeParams(params))}`,
+    advanced: () => '/settings/advanced',
     preview: () => '/settings/preview',
     streamingServices: (
       params: { connection?: string; service?: string | null } = {},
