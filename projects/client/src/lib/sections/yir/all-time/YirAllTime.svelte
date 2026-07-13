@@ -40,20 +40,14 @@
       : undefined,
   );
 
-  function hasGlobalTop(items: YirDetail["globalTop"]): items is NonNullable<
-    YirDetail["globalTop"]
-  > {
+  function hasGlobalTop(
+    items: YirDetail["globalTop"],
+  ): items is NonNullable<YirDetail["globalTop"]> {
     return items != null;
   }
 </script>
 
-<!-- Title paints immediately; detail-gated sections fill in once loaded. -->
-<YirTitleSection
-  {slug}
-  year="all"
-  coverImage={detail?.images.cover}
-  subtitleOverride={titleSubtitle}
-/>
+<YirTitleSection {slug} year="all" subtitleOverride={titleSubtitle} />
 
 {#if detail}
   <YirTotalsSection stats={detail.stats.all} year="all" />
@@ -164,7 +158,6 @@
   {#if detail.lastWatched}
     <YirCalendarSection how="last" item={detail.lastWatched} year="all" />
   {/if}
-
 {:else if isLoading}
   <YirTotalsSection stats={null} year="all" />
 {/if}

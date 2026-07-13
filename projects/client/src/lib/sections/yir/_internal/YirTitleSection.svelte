@@ -6,19 +6,17 @@
   import type { YirYear } from "$lib/requests/models/YirYear";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
-  import { DEFAULT_COVER } from "$lib/utils/constants";
+  import { toLoadingState } from "$lib/utils/requests/toLoadingState";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { map } from "rxjs";
 
   const {
     slug,
     year,
-    coverImage,
     subtitleOverride,
   }: {
     slug: string;
     year: YirYear;
-    coverImage: string | Nil;
     /** Replaces the computed subtitle (e.g. the all-time year range). */
     subtitleOverride?: string;
   } = $props();
@@ -38,15 +36,17 @@
           : m.yir_title_year_in_review()),
   );
 
-  const hasCover = $derived(!!$profile?.cover?.url || !!coverImage);
-  const coverSrc = $derived(
-    $profile?.cover?.url || coverImage || DEFAULT_COVER,
+  const isProfilePending = $derived(
+    profileQuery.pipe(map(($q) => toLoadingState($q))),
   );
+
+  const hasGradient = $derived(!$isProfilePending && !$profile?.cover?.url);
+  const coverSrc = $derived($profile?.cover?.url);
 </script>
 
 <section class="trakt-yir-title-section" class:is-all-time={isAllTime}>
-  <div class="yir-cover-bg" class:has-cover={hasCover}>
-    {#if hasCover}
+  <div class="yir-cover-bg" class:has-gradient={hasGradient}>
+    {#if coverSrc}
       <CrossOriginImage src={coverSrc} alt="" />
     {/if}
   </div>
@@ -100,23 +100,25 @@
   .yir-cover-bg {
     position: absolute;
     inset: 0;
-    // Default (no cover image): gradient background.
-    background:
-      radial-gradient(
-        ellipse 70% 65% at 25% 52%,
-        var(--purple-700) 0%,
-        transparent 65%
-      ),
-      radial-gradient(
-        ellipse 50% 45% at 72% 50%,
-        var(--blue-800) 0%,
-        transparent 65%
-      ),
-      var(--color-yir-poster-background);
+
+    // When explicitly set (no cover, not loading): gradient background.
+    &.has-gradient {
+      background:
+        radial-gradient(
+          ellipse 70% 65% at 25% 52%,
+          var(--purple-700) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 50% 45% at 72% 50%,
+          var(--blue-800) 0%,
+          transparent 65%
+        ),
+        var(--color-yir-poster-background);
+    }
 
     // When a cover image is present, render it and add the top scrim.
-    &.has-cover {
-      background: none;
+    &:not(.has-gradient) {
       // Own stacking context so the top scrim below can layer above the image
       // (the image is a stacking context via `contain`, so a plain positioned
       // ::before would otherwise paint under it). Stays below the titles.
