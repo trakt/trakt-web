@@ -47,8 +47,8 @@
   const shareData = $derived({
     title: shareText,
     text: shareText,
-    // page.url is clean by now: useWebviewSession strips the WebView params on
-    // entry, and share only fires on user tap, long after that has run.
+    // page.url is clean by now: captureWebviewSession strips the WebView params
+    // on entry, and share only fires on user tap, long after that has run.
     url: browser ? page.url.toString() : "",
   });
 
