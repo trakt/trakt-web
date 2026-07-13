@@ -8,7 +8,6 @@
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import { toLoadingState } from "$lib/utils/requests/toLoadingState";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { map } from "rxjs";
 
   const {
     slug,
@@ -22,7 +21,7 @@
   } = $props();
 
   const profileQuery = $derived(useQuery(userProfileQuery({ slug })));
-  const profile = $derived(profileQuery.pipe(map(($q) => $q.data)));
+  const profile = $derived($profileQuery.data);
 
   const now = new Date();
   const isAllTime = $derived(year === "all");
@@ -36,12 +35,10 @@
           : m.yir_title_year_in_review()),
   );
 
-  const isProfilePending = $derived(
-    profileQuery.pipe(map(($q) => toLoadingState($q))),
-  );
+  const isProfilePending = $derived(toLoadingState($profileQuery));
 
-  const hasGradient = $derived(!$isProfilePending && !$profile?.cover?.url);
-  const coverSrc = $derived($profile?.cover?.url);
+  const hasGradient = $derived(!isProfilePending && !profile?.cover?.url);
+  const coverSrc = $derived(profile?.cover?.url);
 </script>
 
 <section class="trakt-yir-title-section" class:is-all-time={isAllTime}>
@@ -52,19 +49,19 @@
   </div>
   <div class="yir-titles-wrapper">
     <div class="yir-titles">
-      {#if $profile}
-        <div class="yir-user">
+      <div class="yir-user">
+        {#if profile}
           <span class="yir-avatar-link">
-            <UserAvatar user={$profile} size="large" />
+            <UserAvatar user={profile} size="large" />
           </span>
           <span class="yir-display-name">
             <Link href={UrlBuilder.profile.user(slug)} color="inherit">
-              {$profile.name.full || $profile.username}
+              {profile.name.full || profile.username}
             </Link>
           </span>
-        </div>
-        <div class="yir-under-user"></div>
-      {/if}
+        {/if}
+      </div>
+      <div class="yir-under-user"></div>
 
       <h1 class="yir-year" class:is-text={isAllTime}>
         {isAllTime ? m.yir_label_all_time() : year}
@@ -181,6 +178,11 @@
     display: inline-flex;
     align-items: center;
     gap: var(--ni-10);
+    min-height: var(--ni-40);
+
+    @include for-mobile {
+      min-height: var(--ni-30);
+    }
   }
 
   .yir-avatar-link {
