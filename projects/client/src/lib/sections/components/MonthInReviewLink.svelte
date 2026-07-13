@@ -55,7 +55,9 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-month-in-review-link {
     :global(.trakt-link) {
       text-decoration: none;
@@ -78,6 +80,25 @@
 
     :global(.trakt-button-link) {
       border: var(--ni-1) solid var(--color-text-primary);
+    }
+
+    // Match the card hover: recolor the stroke to purple and drop the flat
+    // button's lift (transform + raised shadow).
+    @include for-mouse {
+      :global(
+          .trakt-button-link[data-style="flat"]:hover:not([disabled]):not(
+              [aria-disabled="true"]
+            )
+        ),
+      :global(
+          .trakt-button-link[data-style="flat"]:focus-visible:not(
+              [disabled]
+            ):not([aria-disabled="true"])
+        ) {
+        transform: none;
+        box-shadow: none;
+        border-color: var(--color-card-border-hover);
+      }
     }
   }
 </style>
