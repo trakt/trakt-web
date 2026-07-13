@@ -3,6 +3,7 @@ import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
+import { useIsQueued } from '$lib/features/offline/useIsQueued.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
@@ -31,6 +32,7 @@ export function useMarkAsWatched(
   const { track } = useTrack(AnalyticsEvent.MarkAsWatched);
 
   const { isWatched } = useIsWatched(props);
+  const { isQueued } = useIsQueued({ domain: 'history', keys: mediaKeys });
 
   const markAsWatched = async (watchedAt?: MarkAsWatchedAt) => {
     const current = await resolve(user);
@@ -53,8 +55,11 @@ export function useMarkAsWatched(
 
     if (result === 'executed') {
       await invalidate(InvalidateAction.MarkAsWatched(type));
-      isMarkingAsWatched.next(false);
     }
+
+    // Always clear: a queued action stays flagged via isQueued, and leaving
+    // this pinned would re-disable the button once it syncs and dequeues.
+    isMarkingAsWatched.next(false);
   };
 
   // Ids whose rating this removal orphans. The main action removes *every*
@@ -122,8 +127,9 @@ export function useMarkAsWatched(
 
     if (removeResult === 'executed') {
       await invalidate(InvalidateAction.MarkAsWatched(type));
-      isMarkingAsWatched.next(false);
     }
+
+    isMarkingAsWatched.next(false);
   };
 
   const isWatchable = media.every((item) => {
@@ -138,6 +144,7 @@ export function useMarkAsWatched(
     removeWatched,
     isWatched,
     isMarkingAsWatched,
+    isQueued,
     isWatchable,
   };
 }

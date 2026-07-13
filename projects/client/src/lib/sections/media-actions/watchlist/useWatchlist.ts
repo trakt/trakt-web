@@ -2,6 +2,7 @@ import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
+import { useIsQueued } from '$lib/features/offline/useIsQueued.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
@@ -19,6 +20,10 @@ export function useWatchlist(props: MediaStoreProps) {
   const ids = media.map(({ id }) => id);
 
   const { isWatchlisted } = useIsWatchlisted(props);
+  const { isQueued } = useIsQueued({
+    domain: 'watchlist',
+    keys: ids.map((id) => toMediaKey(type, id)),
+  });
   const body = toBulkPayload(type, ids);
 
   const addToWatchlist = async () => {
@@ -38,8 +43,11 @@ export function useWatchlist(props: MediaStoreProps) {
 
     if (addResult === 'executed') {
       await invalidate(InvalidateAction.Watchlisted(type));
-      isWatchlistUpdating.next(false);
     }
+
+    // Always clear: a queued action stays flagged via isQueued, and leaving
+    // this pinned would re-disable the button once it syncs and dequeues.
+    isWatchlistUpdating.next(false);
   };
 
   const removeFromWatchlist = async () => {
@@ -59,13 +67,15 @@ export function useWatchlist(props: MediaStoreProps) {
 
     if (removeResult === 'executed') {
       await invalidate(InvalidateAction.Watchlisted(type));
-      isWatchlistUpdating.next(false);
     }
+
+    isWatchlistUpdating.next(false);
   };
 
   return {
     isWatchlistUpdating,
     isWatchlisted,
+    isQueued,
     addToWatchlist,
     removeFromWatchlist,
   };
