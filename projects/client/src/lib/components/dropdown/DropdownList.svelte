@@ -39,6 +39,10 @@
         item.innerText.charAt(0).toUpperCase() +
         item.innerText.toLowerCase().slice(1);
 
+      // Mirror the selected item so the native picker highlights the current
+      // choice instead of defaulting to the first option.
+      option.selected = item.classList.contains("is-selected");
+
       return option;
     });
   }
@@ -88,7 +92,14 @@
       appendOptions();
     });
 
-    observer.observe(container, { childList: true, subtree: true });
+    observer.observe(container, {
+      childList: true,
+      subtree: true,
+      // Rebuild when an item's selected state (is-selected class) toggles so
+      // the native picker reflects the current choice.
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
     element.appendChild(select);
 
