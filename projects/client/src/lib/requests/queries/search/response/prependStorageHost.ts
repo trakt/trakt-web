@@ -1,3 +1,5 @@
+import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+
 const STORAGE_HOST = 'media.trakt.tv';
 
 export function prependStorageHost(
@@ -8,11 +10,6 @@ export function prependStorageHost(
     return '';
   }
 
-  const hasHost = url.startsWith('http') || url.includes('.trakt.tv');
   const path = url.startsWith('/') ? url : `/${url}`;
-  const imageUrl = hasHost ? url : `${STORAGE_HOST}${path}`;
-
-  return imageUrl.endsWith(extension)
-    ? imageUrl as HttpsUrl
-    : `${imageUrl}${extension}` as HttpsUrl;
+  return prependHttps(`${STORAGE_HOST}${path}${extension}`);
 }
