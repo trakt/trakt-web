@@ -1,15 +1,15 @@
 <script lang="ts">
   import type { YirDetail } from "$lib/requests/models/YirDetail";
-  import YirTotalsSection from "../_internal/YirTotalsSection.svelte";
   import YirCalendarSection from "../_internal/YirCalendarSection.svelte";
-  import YirStatsSection from "../_internal/YirStatsSection.svelte";
-  import YirMostWatchedSection from "../_internal/YirMostWatchedSection.svelte";
   import YirGenresSection from "../_internal/YirGenresSection.svelte";
+  import YirMostWatchedSection from "../_internal/YirMostWatchedSection.svelte";
   import YirNetworksSection from "../_internal/YirNetworksSection.svelte";
-  import YirStudiosSection from "../_internal/YirStudiosSection.svelte";
-  import YirRatedSection from "../_internal/YirRatedSection.svelte";
   import YirPeopleSection from "../_internal/YirPeopleSection.svelte";
+  import YirRatedSection from "../_internal/YirRatedSection.svelte";
+  import YirStatsSection from "../_internal/YirStatsSection.svelte";
+  import YirStudiosSection from "../_internal/YirStudiosSection.svelte";
   import YirTitleSection from "../_internal/YirTitleSection.svelte";
+  import YirTotalsSection from "../_internal/YirTotalsSection.svelte";
   import YirUpgradeSection from "../_internal/YirUpgradeSection.svelte";
 
   const {
@@ -25,9 +25,7 @@
   } = $props();
 </script>
 
-<!-- Title section paints immediately (cover image falls back to the
-     DEFAULT_COVER constant inside the component when unavailable). -->
-<YirTitleSection {slug} {year} coverImage={detail?.images.cover} />
+<YirTitleSection {slug} {year} />
 
 {#if detail}
   <YirTotalsSection stats={detail.stats.all} {year} />
@@ -84,7 +82,6 @@
   {#if detail.lastWatched}
     <YirCalendarSection how="last" item={detail.lastWatched} {year} />
   {/if}
-
 {:else if isLoading}
   <YirTotalsSection stats={null} {year} />
 {/if}
