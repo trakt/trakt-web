@@ -3,11 +3,10 @@
   import { page } from "$app/state";
   import TabView from "$lib/components/tabs/TabView.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import PlexSync from "./_internal/plex/PlexSync.svelte";
+  import PlexVipUpsell from "./_internal/plex/PlexVipUpsell.svelte";
   import PlexWebhook from "./_internal/plex/PlexWebhook.svelte";
-  import { usePlexSync } from "./_internal/plex/usePlexSync.ts";
-
-  const plex = usePlexSync();
 
   const TAB_PARAM = "tab";
 
@@ -26,11 +25,31 @@
 </script>
 
 {#snippet syncTab()}
-  <PlexSync {plex} />
+  <RenderFor audience="free">
+    <PlexVipUpsell
+      title={m.header_plex_vip_upsell_sync()}
+      description={m.description_plex_vip_upsell_sync()}
+      source="plex-settings-sync"
+    />
+  </RenderFor>
+
+  <RenderFor audience="vip">
+    <PlexSync />
+  </RenderFor>
 {/snippet}
 
 {#snippet webhookTab()}
-  <PlexWebhook />
+  <RenderFor audience="free">
+    <PlexVipUpsell
+      title={m.header_plex_vip_upsell_webhook()}
+      description={m.description_plex_vip_upsell_webhook()}
+      source="plex-settings-webhook"
+    />
+  </RenderFor>
+
+  <RenderFor audience="vip">
+    <PlexWebhook />
+  </RenderFor>
 {/snippet}
 
 <TabView

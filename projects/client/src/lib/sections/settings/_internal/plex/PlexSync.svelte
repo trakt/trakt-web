@@ -11,9 +11,7 @@
   import PlexServers from "./PlexServers.svelte";
   import PlexSyncHistory from "./PlexSyncHistory.svelte";
   import PlexSyncSettings from "./PlexSyncSettings.svelte";
-  import type { usePlexSync } from "./usePlexSync.ts";
-
-  const { plex }: { plex: ReturnType<typeof usePlexSync> } = $props();
+  import { usePlexSync } from "./usePlexSync.ts";
 
   const {
     isConnected,
@@ -25,7 +23,7 @@
     disconnect,
     selectServer,
     syncNow,
-  } = iffy(() => plex);
+  } = iffy(() => usePlexSync());
 
   const selectedServer = $derived(
     $servers.find((s) => s.id === $selectedServerId) ?? null,
