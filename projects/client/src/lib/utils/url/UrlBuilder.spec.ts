@@ -17,4 +17,18 @@ describe('util: UrlBuilder', () => {
       expect(url).to.equal('/shows/silo?view=episode&season=0&episode=1');
     });
   });
+
+  describe('seasonDrawer', () => {
+    it('should point at the show summary page with the seasons drawer params', () => {
+      const url = UrlBuilder.seasonDrawer('breaking-bad', 2);
+
+      expect(url).to.equal('/shows/breaking-bad?view=seasons&season=2');
+    });
+
+    it('should support specials (season 0)', () => {
+      const url = UrlBuilder.seasonDrawer('silo', 0);
+
+      expect(url).to.equal('/shows/silo?view=seasons&season=0');
+    });
+  });
 });

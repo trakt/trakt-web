@@ -212,6 +212,13 @@ export const UrlBuilder = {
       season,
       episode,
     }),
+  // Opens the show summary page with the seasons drawer pre-opened, focused on
+  // a specific season. Param contract mirrors summaryDrawerNavigation.
+  seasonDrawer: (id: string, season: number) =>
+    UrlBuilder.show(id, {
+      [DRAWER_VIEW_PARAM]: 'seasons',
+      season,
+    }),
   credits: {
     movies: (slug: string) => `/people/${slug}/movies`,
     shows: (slug: string) => `/people/${slug}/shows`,
