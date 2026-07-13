@@ -29,7 +29,7 @@
     <p>
       <MessageWithLink
         message={m.error_text_locked_account_guide()}
-        href={UrlBuilder.settings.advanced({ section: "advanced" })}
+        href={UrlBuilder.settings.advanced()}
         target="_self"
       />
     </p>
