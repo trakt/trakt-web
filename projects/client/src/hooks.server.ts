@@ -8,6 +8,7 @@ import { handle as handleDeployment } from '$lib/features/deployment/handle.ts';
 import { handle as handleDevice } from '$lib/features/devices/handle.ts';
 import { handle as handleLocale } from '$lib/features/i18n/handle.ts';
 import { handle as handleImage } from '$lib/features/image/handle.ts';
+import { handle as handleLegacyRedirect } from '$lib/features/legacy-redirects/handle.ts';
 import { handle as handleMobileOperatingSystem } from '$lib/features/mobile-os/handle.ts';
 import { handle as handleSearchConfig } from '$lib/features/search/handle.ts';
 import { handle as handleTheme } from '$lib/features/theme/handle.ts';
@@ -78,6 +79,8 @@ export const handle: Handle = sequence(
     ],
   }),
   sentryHandle(),
+  // Retire legacy trakt.tv paths with a 301 before any routing/auth/i18n work.
+  handleLegacyRedirect,
   // Must run before any feature that touches `event.locals` or session
   // state so missing-asset requests (which carry no user context) skip the
   // rest of the pipeline entirely.
