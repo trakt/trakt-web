@@ -61,6 +61,13 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
   }
 
   function toCacheControl() {
+    // A WebView request carries the viewer's VIP token in the URL. Never let a
+    // spoofed bot User-Agent promote the response to a public CDN entry (keyed
+    // by the token), which would cache one viewer's review for others.
+    if (hasWebviewParam(event.url)) {
+      return 'private, no-store, no-cache, must-revalidate';
+    }
+
     // Verified search engine crawlers (via Cloudflare), full CDN caching for SEO
     if (event.locals.isLegitimateBot) {
       return 'public, max-age=3600, s-maxage=3600';
