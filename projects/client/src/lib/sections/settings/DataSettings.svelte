@@ -2,7 +2,6 @@
   import ClearData from "./_internal/ClearData.svelte";
   import RawExport from "./_internal/RawExport.svelte";
   import RawImport from "./_internal/RawImport.svelte";
-  import HistoryAnalysis from "./_internal/HistoryAnalysis.svelte";
   import SettingsDrawer from "./SettingsDrawer.svelte";
 </script>
 
@@ -11,7 +10,6 @@
   <RawImport />
   <RawExport />
   <ClearData />
-  <HistoryAnalysis />
 </div>
 
 <style>
