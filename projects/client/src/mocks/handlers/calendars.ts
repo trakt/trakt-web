@@ -37,4 +37,13 @@ export const calendars = [
       ]);
     },
   ),
+  http.get(
+    'http://localhost/calendars/:target/media/*',
+    () => {
+      return HttpResponse.json([
+        ...UpcomingEpisodesResponseMock,
+        ...UpcomingMoviesResponseMock,
+      ]);
+    },
+  ),
 ];
