@@ -44,7 +44,7 @@
 </script>
 
 <trakt-cta-button>
-  <Button {href} {size} {icon} variant="primary" style="flat" {...buttonProps}>
+  <Button {href} {size} {icon} variant="primary" style="outline" {...buttonProps}>
     {intl.cta.text({ cta })}
   </Button>
 </trakt-cta-button>
@@ -53,6 +53,11 @@
   trakt-cta-button {
     :global(.trakt-button) {
       flex-direction: row-reverse;
+    }
+
+    /* Extra breathing room on the inline edges (2 increments up from small) */
+    :global(.trakt-button[data-size="small"]) {
+      padding-inline: var(--ni-20);
     }
   }
 </style>
