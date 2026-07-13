@@ -29,7 +29,12 @@
   {seasonText(currentSeason)}
   {#snippet items()}
     {#each seasons as season (season.id)}
-      <DropdownItem color="blue" href={buildUrl(season.number)} noscroll>
+      <DropdownItem
+        color="blue"
+        href={buildUrl(season.number)}
+        noscroll
+        selected={season.number === currentSeason}
+      >
         {seasonText(season.number)}
       </DropdownItem>
     {/each}
