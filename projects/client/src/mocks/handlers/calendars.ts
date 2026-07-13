@@ -28,4 +28,13 @@ export const calendars = [
       return HttpResponse.json(UpcomingMoviesResponseMock);
     },
   ),
+  http.get(
+    'http://localhost/calendars/releases/hot/*',
+    () => {
+      return HttpResponse.json([
+        ...UpcomingEpisodesResponseMock,
+        ...UpcomingMoviesResponseMock,
+      ]);
+    },
+  ),
 ];
