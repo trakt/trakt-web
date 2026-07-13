@@ -14,8 +14,6 @@ import type { FilterParams } from '../../../requests/models/FilterParams.ts';
 import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
 import type { Calendar } from '../models/Calendar.ts';
 
-const releasesCalendarSourceLimit = 50;
-
 type UseReleasesCalendarParams = {
   start: Date;
   days: number;
@@ -43,7 +41,6 @@ export function useReleasesCalendar(
       type: props.type,
       filter: props.filter,
       filterOverride: props.filterOverride,
-      sourceLimit: releasesCalendarSourceLimit,
     }),
   );
 

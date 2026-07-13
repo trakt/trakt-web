@@ -18,7 +18,6 @@ type UseReleasesItemsProps = {
 } & FilterParams;
 
 const daysToFetch = 30;
-const releasesSourceLimit = 20;
 
 export function useReleasesItems(props: UseReleasesItemsProps) {
   const [yyyyMmDd] = new Date().toISOString().split('T');
@@ -34,7 +33,6 @@ export function useReleasesItems(props: UseReleasesItemsProps) {
       type: props.type,
       filter: props.filter,
       filterOverride: props.filterOverride,
-      sourceLimit: releasesSourceLimit,
     }),
   );
 

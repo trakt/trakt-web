@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { releasesCalendarQuery } from './releasesCalendarQuery.ts';
 
 describe('releasesCalendarQuery', () => {
-  it('should query all calendar entries that are in releases source lists', async () => {
+  it('should merge the hot releases feed into mapped calendar entries', async () => {
     const result = await runQuery({
       factory: () =>
         createTestBedQuery(
@@ -15,7 +15,6 @@ describe('releasesCalendarQuery', () => {
             startDate: new Date(Date.now() - time.days(1)).toISOString(),
             days: 30,
             type: 'media',
-            sourceLimit: 10,
           }),
         ),
       mapper: (response) => response?.data,

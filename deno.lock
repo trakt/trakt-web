@@ -13,7 +13,7 @@
     "npm:@ethercorps/sveltekit-og@4.3.0": "4.3.0_@sveltejs+kit@2.69.2__@sveltejs+vite-plugin-svelte@7.2.0___svelte@5.56.4___vite@8.1.4____esbuild@0.28.1____sass-embedded@1.100.0___esbuild@0.28.1___sass-embedded@1.100.0__svelte@5.56.4__typescript@5.8.3__vite@8.1.4___esbuild@0.28.1___sass-embedded@1.100.0__esbuild@0.28.1__sass-embedded@1.100.0_esbuild@0.28.1_sass-embedded@1.100.0_vite@8.1.4__esbuild@0.28.1__sass-embedded@1.100.0",
     "npm:@inlang/paraglide-js@2.21.0": "2.21.0_typescript@5.8.3",
     "npm:@jsr/libn__fuzzy@0.4.0": "0.4.0",
-    "npm:@jsr/trakt__api@0.4.21": "0.4.21_openapi3-ts@4.6.0",
+    "npm:@jsr/trakt__api@0.4.22": "0.4.22_openapi3-ts@4.6.0",
     "npm:@playwright/test@1.61.1": "1.61.1",
     "npm:@sentry/sveltekit@10.65.0": "10.65.0_@sveltejs+kit@2.69.2__@sveltejs+vite-plugin-svelte@7.2.0___svelte@5.56.4___vite@8.1.4____esbuild@0.28.1____sass-embedded@1.100.0___esbuild@0.28.1___sass-embedded@1.100.0__svelte@5.56.4__typescript@5.8.3__vite@8.1.4___esbuild@0.28.1___sass-embedded@1.100.0__esbuild@0.28.1__sass-embedded@1.100.0_vite@8.1.4__esbuild@0.28.1__sass-embedded@1.100.0_esbuild@0.28.1_sass-embedded@1.100.0",
     "npm:@svelte-put/shortcut@4.2.0": "4.2.0_svelte@5.56.4",
@@ -2084,14 +2084,14 @@
       "integrity": "sha512-aD9yjW6CMt37S3AMTc95LeuRXcKor69Zkr0aWOhYvinTOEAhEIuaJhP4pQqyQGaAC9HIrQcKh1PtRTK85kkVjA==",
       "tarball": "https://npm.jsr.io/~/11/@jsr/libn__fuzzy/0.4.0.tgz"
     },
-    "@jsr/trakt__api@0.4.21_openapi3-ts@4.6.0": {
-      "integrity": "sha512-CTb+n4kQAslcetVrxFdWT+7MIX6P4FuYFADhmTlYHB3UNWoDDlzZu/bZuxmxJuUWNx+bjvEPfEoPh374/ZxnPA==",
+    "@jsr/trakt__api@0.4.22_openapi3-ts@4.6.0": {
+      "integrity": "sha512-uCbJgsY8RErQuc7Pb1Q1ujqoX4PGNDubCiGNpjhQq3yjYztsl7o7fsiDG6ZZ04ulQv11xHnKMlwa65DVLLFkuQ==",
       "dependencies": [
         "@anatine/zod-openapi",
         "@ts-rest/core",
         "zod"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.4.21.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.4.22.tgz"
     },
     "@lix-js/sdk@0.4.10": {
       "integrity": "sha512-0dMInAJK/67guTG5rRZaCEhvzC5cCXENOjaePA5AqMXrCE97kaY7SRor9e2vnoGsFIiGqXKlT0MCIoZj36G0gg==",
@@ -3369,6 +3369,22 @@
         "kolorist",
         "tinyglobby",
         "vite-plugin-pwa"
+      ]
+    },
+    "@vitest/coverage-istanbul@4.1.10_vitest@4.1.10_@opentelemetry+api@1.9.1_jsdom@29.1.1_vite@8.1.4__esbuild@0.28.1__sass-embedded@1.100.0": {
+      "integrity": "sha512-AyNJ5pQRFqCX7pwB9PSTmoVKPaZ4H5IEVJfJsT+q1DYkXvZMEFYgJlyk5sfStmt9rVYRyYYRRsuBeImCOc39ww==",
+      "dependencies": [
+        "@babel/core",
+        "@istanbuljs/schema",
+        "@jridgewell/gen-mapping",
+        "@jridgewell/trace-mapping@0.3.31",
+        "istanbul-lib-coverage",
+        "istanbul-lib-report",
+        "istanbul-reports",
+        "magicast",
+        "obug",
+        "tinyrainbow",
+        "vitest"
       ]
     },
     "@vitest/coverage-istanbul@4.1.10_vitest@4.1.10_esbuild@0.28.1_sass-embedded@1.100.0_typescript@5.8.3_vite@8.1.4__esbuild@0.28.1__sass-embedded@1.100.0": {
@@ -7063,7 +7079,7 @@
       "integrity": "sha512-R9jUTe5S4Qb0HCd4TNqpC7oGcrMssMRGXLW80ubjWsW9VH5GF8y1Y0SFLY9AbqSk6nt0PnOx4H4WNJYZ13GUPw==",
       "dependencies": [
         "@opentelemetry/api",
-        "@vitest/coverage-istanbul",
+        "@vitest/coverage-istanbul@4.1.10_vitest@4.1.10_@opentelemetry+api@1.9.1_jsdom@29.1.1_vite@8.1.4__esbuild@0.28.1__sass-embedded@1.100.0",
         "@vitest/expect",
         "@vitest/mocker",
         "@vitest/pretty-format",
@@ -7088,7 +7104,7 @@
       ],
       "optionalPeers": [
         "@opentelemetry/api",
-        "@vitest/coverage-istanbul",
+        "@vitest/coverage-istanbul@4.1.10_vitest@4.1.10_@opentelemetry+api@1.9.1_jsdom@29.1.1_vite@8.1.4__esbuild@0.28.1__sass-embedded@1.100.0",
         "jsdom"
       ],
       "bin": true
@@ -7529,7 +7545,7 @@
             "npm:@ethercorps/sveltekit-og@4.3.0",
             "npm:@inlang/paraglide-js@2.21.0",
             "npm:@jsr/libn__fuzzy@0.4.0",
-            "npm:@jsr/trakt__api@0.4.21",
+            "npm:@jsr/trakt__api@0.4.22",
             "npm:@playwright/test@1.61.1",
             "npm:@sentry/sveltekit@10.65.0",
             "npm:@svelte-put/shortcut@4.2.0",
