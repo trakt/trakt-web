@@ -10,8 +10,6 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
 import { movieAnticipatedRequest } from '$lib/requests/queries/movies/movieAnticipatedQuery.ts';
 import { movieTrendingRequest } from '$lib/requests/queries/movies/movieTrendingQuery.ts';
-import { recommendedMoviesRequest } from '$lib/requests/queries/recommendations/recommendedMoviesQuery.ts';
-import { recommendedShowsRequest } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
 import { showAnticipatedRequest } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
 import { showTrendingRequest } from '$lib/requests/queries/shows/showTrendingQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -140,19 +138,13 @@ async function fetchMovieTopLists(
     sourceLimit,
   }: ReleasesCalendarParams,
 ): Promise<TopListResult<MovieTopListItem>> {
-  const [trending, recommended, anticipated] = await Promise.all([
+  const [trending, anticipated] = await Promise.all([
     movieTrendingRequest({
       fetch,
       filter,
       filterOverride,
       limit: sourceLimit,
       page: 1,
-    }),
-    recommendedMoviesRequest({
-      fetch,
-      filter,
-      filterOverride,
-      limit: sourceLimit,
     }),
     movieAnticipatedRequest({
       fetch,
@@ -164,10 +156,9 @@ async function fetchMovieTopLists(
   ]);
 
   return {
-    responses: [trending, recommended, anticipated],
+    responses: [trending, anticipated],
     lists: [
       toList(trending.body, isMovieTopListItem),
-      toList(recommended.body, isMovieTopListItem),
       toList(anticipated.body, isMovieTopListItem),
     ],
   };
@@ -181,19 +172,13 @@ async function fetchShowTopLists(
     sourceLimit,
   }: ReleasesCalendarParams,
 ): Promise<TopListResult<ShowTopListItem>> {
-  const [trending, recommended, anticipated] = await Promise.all([
+  const [trending, anticipated] = await Promise.all([
     showTrendingRequest({
       fetch,
       filter,
       filterOverride,
       limit: sourceLimit,
       page: 1,
-    }),
-    recommendedShowsRequest({
-      fetch,
-      filter,
-      filterOverride,
-      limit: sourceLimit,
     }),
     showAnticipatedRequest({
       fetch,
@@ -205,10 +190,9 @@ async function fetchShowTopLists(
   ]);
 
   return {
-    responses: [trending, recommended, anticipated],
+    responses: [trending, anticipated],
     lists: [
       toList(trending.body, isShowTopListItem),
-      toList(recommended.body, isShowTopListItem),
       toList(anticipated.body, isShowTopListItem),
     ],
   };
@@ -302,8 +286,6 @@ export const releasesCalendarQuery = defineQuery({
     InvalidateAction.Drop('show'),
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
-    InvalidateAction.HideRecommended('show'),
-    InvalidateAction.HideRecommended('movie'),
   ],
   dependencies: (
     params: ReleasesCalendarParams,
