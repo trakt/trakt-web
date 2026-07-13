@@ -4,7 +4,6 @@ import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
-import PlexLibraryIcon from '$lib/components/icons/PlexLibraryIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { Component } from 'svelte';
@@ -72,16 +71,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
       openFeatureLink(
         UrlBuilder.profile.favorites('me'),
         m.preview_feature_title_scoped_favorites(),
-      ),
-  },
-  [FeatureFlag.PlexSync]: {
-    icon: PlexLibraryIcon,
-    title: () => m.preview_feature_title_plex_sync(),
-    description: () => m.preview_feature_description_plex_sync(),
-    featureLink: () =>
-      openFeatureLink(
-        UrlBuilder.settings.plex(),
-        m.preview_feature_title_plex_sync(),
       ),
   },
   [FeatureFlag.SmartRelated]: {

@@ -7983,14 +7983,6 @@
       "default": "Time-box favorite lists by showing current-year favorites on profiles and grouping the full favorites list by year.",
       "description": "Description for the Scoped Favorites preview feature."
     },
-    "preview_feature_title_plex_sync": {
-      "default": "Plex Sync",
-      "description": "Title for the Plex Sync preview feature."
-    },
-    "preview_feature_description_plex_sync": {
-      "default": "Connect Plex to sync your watch history, ratings, and library to Trakt. Includes connection, server selection, and sync tools.",
-      "description": "Description for the Plex Sync preview feature."
-    },
     "preview_feature_title_smart_related": {
       "default": "Smart Related",
       "description": "Title for the Smart Related preview feature."

@@ -30,7 +30,6 @@ export const settingsPages: ReadonlyArray<SettingsPage> = [
   {
     href: UrlBuilder.settings.plex(),
     label: m.link_text_plex_settings,
-    flag: FeatureFlag.PlexSync,
   },
   {
     href: UrlBuilder.settings.advanced(),
