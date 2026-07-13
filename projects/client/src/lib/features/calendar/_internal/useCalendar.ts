@@ -8,6 +8,7 @@ import {
   type UpcomingEpisodeEntry,
   upcomingEpisodesQuery,
 } from '$lib/requests/queries/calendars/upcomingEpisodesQuery.ts';
+import { upcomingMediaQuery } from '$lib/requests/queries/calendars/upcomingMediaQuery.ts';
 import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMoviesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
@@ -51,8 +52,7 @@ function typeToQueries({ start, days, type, filter }: UseCalendarParams) {
       ];
     case 'media':
       return [
-        upcomingMoviesQuery(params) as CreateQueryOptions<CalendarItems>,
-        upcomingEpisodesQuery(params) as CreateQueryOptions<CalendarItems>,
+        upcomingMediaQuery(params) as CreateQueryOptions<CalendarItems>,
       ];
   }
 }
