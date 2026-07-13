@@ -1,12 +1,12 @@
-import {
-  isStandaloneValue,
-  setStandalone,
-} from '$lib/features/standalone/standaloneFlag.ts';
+import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
 import { WEBVIEW_PARAMS } from '$lib/utils/url/webviewParams.ts';
-import { setSlurm } from './slurmToken.ts';
+import type { WebviewParam } from './WebviewParam.ts';
+import { webviewStorageKey } from './webviewStorageKey.ts';
+
+const WEBVIEW_PARAM_KEYS = Object.keys(WEBVIEW_PARAMS) as WebviewParam[];
 
 // Runs once at client boot (from hooks.client), before Sentry.init and before
-// SvelteKit reads `location` to build `page.url`. It latches the WebView params
+// SvelteKit reads `location` to build `page.url`. It latches every WebView param
 // into sessionStorage and strips them from the URL with a raw History replace.
 //
 // Doing it this early is the whole point: SvelteKit then builds `page.url` from
@@ -21,22 +21,21 @@ export function captureWebviewSession(): void {
 
   const url = new URL(window.location.href);
 
-  const slurm = url.searchParams.get(WEBVIEW_PARAMS.slurm);
-  if (slurm) {
-    setSlurm(slurm);
-  }
-
-  if (isStandaloneValue(url.searchParams.get(WEBVIEW_PARAMS.standaloneMode))) {
-    setStandalone();
-  }
-
-  const present = Object.values(WEBVIEW_PARAMS).filter((param) =>
-    url.searchParams.has(param)
+  const present = WEBVIEW_PARAM_KEYS.filter((param) =>
+    url.searchParams.has(WEBVIEW_PARAMS[param])
   );
   if (present.length === 0) {
     return;
   }
 
-  present.forEach((param) => url.searchParams.delete(param));
+  present.forEach((param) => {
+    const name = WEBVIEW_PARAMS[param];
+    const value = url.searchParams.get(name);
+    if (value) {
+      safeSessionStorage.setItem(webviewStorageKey(param), value);
+    }
+    url.searchParams.delete(name);
+  });
+
   window.history.replaceState(window.history.state, '', url);
 }

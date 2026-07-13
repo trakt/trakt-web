@@ -1,9 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { resolveSlurm } from './resolveSlurm.ts';
-import { setSlurm } from './slurmToken.ts';
+import { webviewStorageKey } from './webviewStorageKey.ts';
 
 function setLocation(search: string): void {
   window.history.replaceState({}, '', `/users/me/year/2025${search}`);
+}
+
+function latchSlurm(token: string): void {
+  window.sessionStorage.setItem(webviewStorageKey('slurm'), token);
 }
 
 describe('util: resolveSlurm', () => {
@@ -16,7 +20,7 @@ describe('util: resolveSlurm', () => {
   });
 
   it('should read the latched token from storage (client)', () => {
-    setSlurm('stored');
+    latchSlurm('stored');
     setLocation('');
 
     expect(resolveSlurm()).to.equal('stored');
@@ -29,7 +33,7 @@ describe('util: resolveSlurm', () => {
   });
 
   it('should yield the same value from storage and URL', () => {
-    setSlurm('tok');
+    latchSlurm('tok');
     setLocation('?slurm=tok');
     const fromStorage = resolveSlurm();
 

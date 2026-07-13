@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { captureWebviewSession } from './captureWebviewSession.ts';
-import { getSlurm } from './slurmToken.ts';
-import { getStandalone } from '$lib/features/standalone/standaloneFlag.ts';
+import { resolveSlurm } from './resolveSlurm.ts';
+import { resolveStandalone } from './resolveStandalone.ts';
 
 function setLocation(search: string): void {
   window.history.replaceState({}, '', `/users/me/year/2025${search}`);
@@ -16,20 +16,20 @@ describe('util: captureWebviewSession', () => {
     window.history.replaceState({}, '', '/');
   });
 
-  it('should latch the slurm token to storage', () => {
+  it('should latch the slurm token so it survives the URL strip', () => {
     setLocation('?slurm=secret');
 
     captureWebviewSession();
 
-    expect(getSlurm()).to.equal('secret');
+    expect(resolveSlurm()).to.equal('secret');
   });
 
-  it('should latch the standalone flag to storage', () => {
+  it('should latch the standalone flag', () => {
     setLocation('?standalone_mode=1');
 
     captureWebviewSession();
 
-    expect(getStandalone()).to.equal(true);
+    expect(resolveStandalone()).to.equal(true);
   });
 
   it('should strip every WebView param from the address bar', () => {
@@ -57,7 +57,7 @@ describe('util: captureWebviewSession', () => {
 
     captureWebviewSession();
 
-    expect(getSlurm()).to.equal(null);
+    expect(resolveSlurm()).to.equal(undefined);
     expect(window.location.pathname).to.equal('/users/me/year/2025');
   });
 });
