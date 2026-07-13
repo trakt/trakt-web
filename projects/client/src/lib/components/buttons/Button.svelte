@@ -113,11 +113,14 @@
     }
 
     @include for-mouse {
+      // `ghost` and `outline` manage their own hover/focus and rely on the
+      // colour tokens staying put (outline's stroke falls back to
+      // --color-background-button), so exclude them from the fg/bg inversion.
       :global(
-          #{$base}[data-color=#{$color}][data-variant=#{$variant}]:not([data-style=ghost]):hover
+          #{$base}[data-color=#{$color}][data-variant=#{$variant}]:not([data-style=ghost]):not([data-style=outline]):hover
         ),
       :global(
-          #{$base}[data-color=#{$color}][data-variant=#{$variant}]:not([data-style=ghost]):focus-visible
+          #{$base}[data-color=#{$color}][data-variant=#{$variant}]:not([data-style=ghost]):not([data-style=outline]):focus-visible
         ) {
         --color-foreground-button: #{$bg};
         --color-background-button: #{$fg};
@@ -388,5 +391,52 @@
         white 20%
       );
     }
+  }
+
+  // Softer alternative to `flat`: transparent fill with a coloured stroke.
+  // The stroke defaults to the button's own colour token; text defaults to the
+  // page foreground (like `ghost`) so it stays legible on any surface. Both can
+  // be overridden per-instance via `--color-outline-stroke` / `--color-outline-text`.
+  :global(#{$b}[data-style=outline]) {
+    --color-button-stroke: var(
+      --color-outline-stroke,
+      var(--color-background-button)
+    );
+
+    background: transparent;
+    color: var(--color-outline-text, var(--color-foreground));
+    box-shadow: inset 0 0 0 var(--border-thickness-xs)
+      var(--color-button-stroke);
+  }
+
+  // Secondary flips the accent from the stroke to the text: the border is the
+  // faint foreground tint and the label carries the saturated colour (which the
+  // variant swap parks in --color-foreground-button), so secondaries stay
+  // distinct per colour. Declared before the disabled rule so disabled wins.
+  :global(#{$b}[data-style=outline][data-variant=secondary]) {
+    color: var(--color-outline-text, var(--color-foreground-button));
+  }
+
+  // Mute the disabled outline: stroke drops to the flat button's disabled
+  // surface tone so the border recedes (a brighter grey would read louder than
+  // the enabled state), text to the disabled foreground. The outline `color`
+  // rule above would otherwise win on source order, so set it explicitly here.
+  :global(#{$b}[data-style=outline][disabled]),
+  :global(#{$b}[data-style=outline][aria-disabled=true]) {
+    --color-button-stroke: var(--color-surface-button-disabled);
+
+    color: var(--color-foreground-button-disabled);
+  }
+
+  @include for-mouse {
+    :global(#{$b}[data-style=outline]:hover#{$on}) {
+      background: color-mix(in srgb, var(--color-button-stroke) 18%, transparent);
+    }
+  }
+
+  // Press feedback to match `flat`/`ghost`; keep the stroke (unlike `flat`,
+  // whose box-shadow is a hover lift, outline's box-shadow is the border).
+  :global(#{$b}[data-style=outline]:active#{$on}) {
+    transform: scale(calc(var(--scale-factor-button) * 0.97));
   }
 </style>
