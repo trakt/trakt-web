@@ -3,6 +3,7 @@ import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { findPendingOverride } from '$lib/features/offline/findPendingOverride.ts';
 import { isAddEndpoint } from '$lib/features/offline/isAddEndpoint.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
+import { useIsQueued } from '$lib/features/offline/useIsQueued.ts';
 import { useOfflineActions } from '$lib/features/offline/useOfflineActions.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
@@ -31,6 +32,10 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
   const { favorites } = useUser();
   const { invalidate } = useInvalidator();
   const { actions } = useOfflineActions();
+  const { isQueued } = useIsQueued({
+    domain: 'favorites',
+    keys: [toMediaKey(type, id)],
+  });
 
   const isFavorited = combineLatest([favorites, actions]).pipe(
     map(([$favorites, $actions]) => {
@@ -71,13 +76,17 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
 
     if (result === 'executed') {
       await invalidate(InvalidateAction.Favorited(type));
-      isUpdatingFavorite.next(false);
     }
+
+    // Always clear: a queued action stays flagged via isQueued, and leaving
+    // this pinned would re-disable the button once it syncs and dequeues.
+    isUpdatingFavorite.next(false);
   };
 
   return {
     isUpdatingFavorite,
     isFavorited,
+    isQueued,
     addToFavorites: async () => await addOrRemoveFavorite('add'),
     removeFromFavorites: async () => await addOrRemoveFavorite('remove'),
   };

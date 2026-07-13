@@ -7,6 +7,7 @@ import { findPendingOverride } from '$lib/features/offline/findPendingOverride.t
 import { isAddEndpoint } from '$lib/features/offline/isAddEndpoint.ts';
 import type { OfflineAction } from '$lib/features/offline/models/OfflineAction.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
+import { useIsQueued } from '$lib/features/offline/useIsQueued.ts';
 import { useOfflineActions } from '$lib/features/offline/useOfflineActions.ts';
 import { useLastWatched } from '$lib/features/toast/useLastWatched.ts';
 import {
@@ -81,6 +82,10 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
   const { dismiss } = useLastWatched();
 
   const { actions } = useOfflineActions();
+  const { isQueued } = useIsQueued({
+    domain: 'rating',
+    keys: [toMediaKey(type, id)],
+  });
 
   const rating = combineLatest([ratings, actions]).pipe(
     map(([$ratings, $actions]) => {
@@ -183,12 +188,15 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     });
     if (addResult === 'executed') {
       await invalidate(InvalidateAction.Rated(type));
-      pendingRating.next(null);
-      isSubmitting.next(false);
       if (type !== 'season') {
         dismiss(id, type, 'rating');
       }
     }
+
+    // Always clear: a queued rating stays flagged via isQueued, and leaving
+    // these pinned would re-disable the stars once it syncs and dequeues.
+    pendingRating.next(null);
+    isSubmitting.next(false);
   });
 
   const addRating = (newRating: number) => {
@@ -216,6 +224,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
   return {
     pendingRating,
     isSubmitting,
+    isQueued,
     current,
     addRating,
     removeRating,
