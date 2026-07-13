@@ -16,6 +16,7 @@ import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
 
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
 import { stripWebviewParams } from '$lib/utils/url/stripWebviewParams.ts';
+import { WEBVIEW_PARAMS } from '$lib/utils/url/webviewParams.ts';
 import {
   handleErrorWithSentry,
   initCloudflareSentryHandle,
@@ -29,6 +30,28 @@ const WHITELISTED_HEADERS = new Set([
   'x-pagination-page',
   'x-pagination-page-count',
 ]);
+
+function hasWebviewParam(url: URL): boolean {
+  return Object.values(WEBVIEW_PARAMS).some((param) =>
+    url.searchParams.has(param)
+  );
+}
+
+// The slurm VIP token rides the URL on WebView entry. A strict referrer policy
+// stops the browser leaking it in a Referer header on the same-origin
+// subresources the page fires before captureWebviewSession strips the URL
+// (the browser default keeps the full URL, query included, for same-origin).
+// strict-origin keeps the bare origin so analytics still works, but drops the
+// path and query that carry the token.
+export const handleReferrerPolicy: Handle = async ({ event, resolve }) => {
+  const response = await resolve(event);
+
+  if (hasWebviewParam(event.url)) {
+    response.headers.set('Referrer-Policy', 'strict-origin');
+  }
+
+  return response;
+};
 
 export const handleCacheControl: Handle = async ({ event, resolve }) => {
   const response = await resolve(event);
@@ -115,6 +138,7 @@ export const handle: Handle = sequence(
   handleAuth,
   handleImage,
   handleCacheBust,
+  handleReferrerPolicy,
   ({ event, resolve }) => {
     return resolve(event, {
       filterSerializedResponseHeaders: (name) => WHITELISTED_HEADERS.has(name),
