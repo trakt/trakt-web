@@ -6,6 +6,7 @@ export type FavoriteButtonProps = {
   title: string;
   isFavoriteUpdating: boolean;
   isFavorited: boolean;
+  isQueued?: boolean;
   style: 'action' | 'normal' | 'dropdown-item';
   size?: 'small' | 'normal';
   onAdd: () => void;

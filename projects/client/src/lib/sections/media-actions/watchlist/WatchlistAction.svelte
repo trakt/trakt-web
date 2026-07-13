@@ -16,6 +16,7 @@
     addToWatchlist,
     isWatchlistUpdating,
     isWatchlisted,
+    isQueued,
     removeFromWatchlist,
   } = $derived(useWatchlist(target));
 
@@ -35,6 +36,7 @@
   {size}
   isWatchlisted={$isWatchlisted}
   isWatchlistUpdating={$isWatchlistUpdating}
+  isQueued={$isQueued}
   onAdd={addToWatchlist}
   onRemove={confirmRemove}
 />

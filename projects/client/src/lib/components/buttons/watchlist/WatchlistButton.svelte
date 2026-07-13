@@ -1,4 +1,7 @@
 <script lang="ts">
+  import QueuedIndicator from "$lib/components/badge/QueuedIndicator.svelte";
+  import QueuedTag from "$lib/components/badge/QueuedTag.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import Button from "$lib/components/buttons/Button.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
@@ -14,6 +17,7 @@
     title,
     isWatchlistUpdating,
     isWatchlisted,
+    isQueued = false,
     type,
     onAdd,
     onRemove,
@@ -31,10 +35,18 @@
   );
   const state = $derived(isWatchlisted ? "added" : "missing");
 
+  const label = $derived(
+    isQueued
+      ? `${i18n.label({ isWatchlisted, title })} (${m.label_queued_action()})`
+      : i18n.label({ isWatchlisted, title }),
+  );
+
   const actionProps = $derived({
-    label: i18n.label({ isWatchlisted, title }),
+    label,
     onclick: handler,
-    disabled: isWatchlistUpdating,
+    // A queued action stays disabled so it can't be re-triggered while it
+    // waits to sync - the pending pill signals it's already been actioned.
+    disabled: isWatchlistUpdating || isQueued,
     ...events,
   });
 
@@ -53,6 +65,7 @@
       navigationType={DpadNavigationType.Item}
     >
       {i18n.text({ isWatchlisted, title })}
+      {#if isQueued}<QueuedTag />{/if}
       {#snippet icon()}
         <BookmarkIcon {state} size="normal" />
       {/snippet}
@@ -61,17 +74,20 @@
 {/if}
 
 {#if type === "action"}
-  <ActionButton style="ghost" {...actionProps} {...props}>
-    <BookmarkIcon {state} />
-  </ActionButton>
+  <QueuedIndicator {isQueued}>
+    <ActionButton style="ghost" {...actionProps} {...props}>
+      <BookmarkIcon {state} />
+    </ActionButton>
+  </QueuedIndicator>
 {/if}
 
 {#if type === "dropdown-item"}
   <DropdownItem {...commonProps} style="flat">
     {i18n.text({ isWatchlisted, title })}
+    {#if isQueued}<QueuedTag />{/if}
     {#snippet icon()}
       <!-- FIXME: generalize this and do this for all applicable buttons/items  -->
-      {#if isWatchlistUpdating}
+      {#if isWatchlistUpdating && !isQueued}
         <LoadingIndicator />
       {:else}
         <BookmarkIcon {state} size="normal" />
