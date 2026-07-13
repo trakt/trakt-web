@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { useAllTimeStats } from "../stores/useAllTimeStats.ts";
   import StatsCard from "./_internal/StatsCard.svelte";
   import AllTimeLink from "./AllTimeLink.svelte";
@@ -14,11 +12,7 @@
   {#snippet footer()}
     <div class="year-link">
       <YearToDateLink slug="me" source="profile" />
-      <RenderForFeature flag={FeatureFlag.YearInReview}>
-        {#snippet enabled()}
-          <AllTimeLink slug="me" source="profile" />
-        {/snippet}
-      </RenderForFeature>
+      <AllTimeLink slug="me" source="profile" />
     </div>
   {/snippet}
 </StatsCard>

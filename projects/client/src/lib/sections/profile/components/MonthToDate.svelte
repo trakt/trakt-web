@@ -2,9 +2,7 @@
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import MonthInReviewLink from "$lib/sections/components/MonthInReviewLink.svelte";
   import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
   import { getPreviousMonth } from "$lib/utils/date/getPreviousMonth";
@@ -93,19 +91,15 @@
       >
         <MonthInReviewLink {slug} date={mirDate} {source} />
       </div>
-      <RenderForFeature flag={FeatureFlag.YearInReview}>
-        {#snippet enabled()}
-          {#if $isMe}
-            <div
-              class="trakt-mtd-footer"
-              class:is-dragging={isDragging}
-              style:opacity={$isMe ? slideAllTime : 1}
-            >
-              <AllTimeLink {slug} {source} />
-            </div>
-          {/if}
-        {/snippet}
-      </RenderForFeature>
+      {#if $isMe}
+        <div
+          class="trakt-mtd-footer"
+          class:is-dragging={isDragging}
+          style:opacity={$isMe ? slideAllTime : 1}
+        >
+          <AllTimeLink {slug} {source} />
+        </div>
+      {/if}
     {/snippet}
   </ReviewContent>
 </div>
