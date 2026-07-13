@@ -95,15 +95,6 @@ const listsDrilldownFactory = (user: string) => (type: PersonalListType) => {
   }
 };
 
-const ogIframeFactory = (url: HttpsUrl): HttpsUrl => {
-  return `${url}/?embedded_mode=true`;
-};
-
-const ogIframeSlurmFactory = (url: HttpsUrl, token: string | Nil): HttpsUrl => {
-  const tokenParam = token ? `&slurm=${token}` : '';
-  return `${ogIframeFactory(url)}${tokenParam}`;
-};
-
 const ogSupportFactory = (username?: string): HttpsUrl | MailToUrl => {
   const page = globalThis.location?.href ?? 'https://app.trakt.tv';
   const supportSubject = 'Trakt Support Request';
@@ -312,23 +303,6 @@ export const UrlBuilder = {
     widgets: {
       yir: (slug: string, year: string) =>
         `https://widgets.trakt.tv/users/${slug}/yir.jpg?year=${year}`,
-    },
-    frame: {
-      yearToDate: (slug: string, year: string, token: string | Nil) =>
-        ogIframeSlurmFactory(
-          `https://trakt.tv/users/${slug}/year/${year}`,
-          token,
-        ),
-      monthInReview: (
-        slug: string,
-        year: string,
-        month: string,
-        token: string | Nil,
-      ) =>
-        ogIframeSlurmFactory(
-          `https://trakt.tv/users/${slug}/mir/${year}/${month}`,
-          token,
-        ),
     },
   },
   settings: {

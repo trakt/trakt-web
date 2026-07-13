@@ -1,5 +1,4 @@
 import BrainIcon from '$lib/components/icons/BrainIcon.svelte';
-import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
@@ -26,38 +25,12 @@ type FeatureFlagDefinitions = Readonly<
   Record<FeatureFlag, FeatureFlagDefinition>
 >;
 
-const currentDate = () => new Date();
-
-const currentYear = () => currentDate().getFullYear();
-
-const currentMonth = () => currentDate().getMonth() + 1;
-
 const openFeatureLink = (href: string, title: string): FeatureFlagLink => ({
   href,
   label: () => m.link_label_open_preview_feature({ title }),
 });
 
 export const featureFlagDefinitions: FeatureFlagDefinitions = {
-  [FeatureFlag.YearInReview]: {
-    icon: CalendarIcon,
-    title: () => m.preview_feature_title_year_in_review(),
-    description: () => m.preview_feature_description_year_in_review(),
-    featureLink: () =>
-      openFeatureLink(
-        UrlBuilder.users('me').yearToDate(currentYear()),
-        m.preview_feature_title_year_in_review(),
-      ),
-  },
-  [FeatureFlag.MonthInReview]: {
-    icon: CalendarIcon,
-    title: () => m.preview_feature_title_month_in_review(),
-    description: () => m.preview_feature_description_month_in_review(),
-    featureLink: () =>
-      openFeatureLink(
-        UrlBuilder.users('me').monthInReview(currentYear(), currentMonth()),
-        m.preview_feature_title_month_in_review(),
-      ),
-  },
   [FeatureFlag.EditMode]: {
     icon: EditModeIcon,
     title: () => m.preview_feature_title_edit_mode(),

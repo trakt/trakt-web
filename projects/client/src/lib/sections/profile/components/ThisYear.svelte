@@ -4,9 +4,7 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ExternalLinkIcon from "../../../components/icons/ExternalLinkIcon.svelte";
   import AllTimeLink from "./AllTimeLink.svelte";
@@ -52,13 +50,9 @@
     </div>
   </Link>
 
-  <RenderForFeature flag={FeatureFlag.YearInReview}>
-    {#snippet enabled()}
-      <div class="all-time-link">
-        <AllTimeLink {slug} source="profile" />
-      </div>
-    {/snippet}
-  </RenderForFeature>
+  <div class="all-time-link">
+    <AllTimeLink {slug} source="profile" />
+  </div>
 </div>
 
 <style lang="scss">
