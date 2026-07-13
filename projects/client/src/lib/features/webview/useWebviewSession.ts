@@ -5,7 +5,7 @@ import {
   isStandaloneValue,
 } from '$lib/features/standalone/standaloneFlag.ts';
 import { WEBVIEW_PARAMS } from '$lib/utils/url/webviewParams.ts';
-import { getSlurm } from './slurmToken.ts';
+import { resolveSlurm } from './resolveSlurm.ts';
 
 // Exposes the WebView session params for a page. Capture + URL strip already
 // happened at client boot (captureWebviewSession, from hooks.client), so on the
@@ -13,9 +13,7 @@ import { getSlurm } from './slurmToken.ts';
 // (no storage) they read the URL params that are still present during SSR. Both
 // yield the same values, so the first client render matches SSR.
 export function useWebviewSession() {
-  const slurm = browser
-    ? getSlurm() ?? undefined
-    : page.url.searchParams.get(WEBVIEW_PARAMS.slurm) ?? undefined;
+  const slurm = resolveSlurm();
 
   const isStandalone = browser ? getStandalone() : isStandaloneValue(
     page.url.searchParams.get(WEBVIEW_PARAMS.standaloneMode),
