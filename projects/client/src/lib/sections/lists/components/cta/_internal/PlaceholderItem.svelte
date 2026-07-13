@@ -18,6 +18,22 @@
 
   const defaultVariant = $derived(useCtaCardVariant(cta));
   const { cover } = $derived(usePlaceholderCover(cta));
+
+  // Keep the first two (short) sentences on one row and the remainder on the
+  // next. Locales that don't use ". " sentence breaks fall back to one line.
+  const text = $derived.by(() => {
+    const copy = intl.text({ cta });
+    const sentences = copy.split(/(?<=\.)\s+/);
+
+    if (sentences.length < 3) {
+      return copy;
+    }
+
+    const firstRow = sentences.slice(0, 2).join(" ");
+    const secondRow = sentences.slice(2).join(" ");
+
+    return `${firstRow}\n${secondRow}`;
+  });
 </script>
 
 {#snippet buttonIcon()}
@@ -32,7 +48,7 @@
   <div class="trakt-cta-placeholder">
     <div class="trakt-cta-description">
       <div class="trakt-cta-list-text">
-        <p>{intl.text({ cta })}</p>
+        <p>{text}</p>
       </div>
 
       <CtaButton {cta} {intl} icon={buttonIcon} size="small" />
@@ -51,11 +67,19 @@
     height: 100%;
 
     gap: var(--gap-m);
+
+    padding-inline-start: var(--gap-xl);
+
+    @include for-mobile {
+      padding-inline-start: 0;
+    }
   }
 
   .trakt-cta-description {
     display: flex;
     flex-direction: column;
+
+    flex-grow: 1;
 
     gap: var(--gap-m);
 
@@ -83,6 +107,10 @@
 
     max-width: var(--ni-520);
     gap: var(--gap-m);
+
+    p {
+      white-space: pre-line;
+    }
 
     :global(svg) {
       width: var(--ni-80);

@@ -115,7 +115,13 @@
 
       object-fit: cover;
 
-      mask: linear-gradient(var(--cta-mask-dir), transparent 0%, black 30%);
+      mask: linear-gradient(
+        var(--cta-mask-dir),
+        transparent 0%,
+        rgba(0, 0, 0, 0.2) 30%,
+        rgba(0, 0, 0, 0.6) 55%,
+        black 85%
+      );
     }
   }
 </style>

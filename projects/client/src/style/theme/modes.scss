@@ -61,8 +61,10 @@
    */
   --color-cta-background-gradient: linear-gradient(
     260deg,
-    color-mix(in srgb, var(--shade-10) 60%, transparent) 0%,
-    var(--shade-10) 65%
+    color-mix(in srgb, var(--shade-10) 45%, transparent) 0%,
+    color-mix(in srgb, var(--shade-10) 68%, transparent) 40%,
+    color-mix(in srgb, var(--shade-10) 88%, transparent) 72%,
+    var(--shade-10) 100%
   );
 
   /*
@@ -505,8 +507,10 @@
    */
   --color-cta-background-gradient: linear-gradient(
     260deg,
-    color-mix(in srgb, var(--shade-900) 60%, transparent) 0%,
-    var(--shade-900) 65%
+    color-mix(in srgb, var(--shade-900) 45%, transparent) 0%,
+    color-mix(in srgb, var(--shade-900) 68%, transparent) 40%,
+    color-mix(in srgb, var(--shade-900) 88%, transparent) 72%,
+    var(--shade-900) 100%
   );
 
   /*
