@@ -1,5 +1,4 @@
 <script lang="ts">
-  import ClearData from "./_internal/ClearData.svelte";
   import RawExport from "./_internal/RawExport.svelte";
   import RawImport from "./_internal/RawImport.svelte";
   import SettingsDrawer from "./SettingsDrawer.svelte";
@@ -9,7 +8,6 @@
   <SettingsDrawer />
   <RawImport />
   <RawExport />
-  <ClearData />
 </div>
 
 <style>
