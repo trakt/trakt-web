@@ -1,4 +1,4 @@
-const WALTER = 'walter-r2.trakt.tv';
+const STORAGE_HOST = 'media.trakt.tv';
 
 export function prependStorageHost(
   url: string | Nil,
@@ -8,7 +8,11 @@ export function prependStorageHost(
     return '';
   }
 
-  const imageUrl = url.startsWith(WALTER) ? url as HttpsUrl : `${WALTER}${url}`;
+  const hasHost = url.startsWith('http') || url.includes('.trakt.tv');
+  const path = url.startsWith('/') ? url : `/${url}`;
+  const imageUrl = hasHost ? url : `${STORAGE_HOST}${path}`;
 
-  return `${imageUrl}${extension}` as HttpsUrl;
+  return imageUrl.endsWith(extension)
+    ? imageUrl as HttpsUrl
+    : `${imageUrl}${extension}` as HttpsUrl;
 }
