@@ -9156,6 +9156,22 @@
       "default": "Connect your Plex account to get your webhook URL.",
       "description": "Hint shown in the webhook tab when the user has no connected Plex account."
     },
+    "header_plex_vip_upsell_sync": {
+      "default": "Plex Sync is a VIP feature",
+      "description": "Heading on the upsell card shown to free members in the Plex sync tab."
+    },
+    "description_plex_vip_upsell_sync": {
+      "default": "Upgrade to VIP to keep your Plex watch history, ratings, and collections synced with Trakt.",
+      "description": "Body copy on the upsell card shown to free members in the Plex sync tab."
+    },
+    "header_plex_vip_upsell_webhook": {
+      "default": "Plex scrobbling is a VIP feature",
+      "description": "Heading on the upsell card shown to free members in the Plex webhook tab."
+    },
+    "description_plex_vip_upsell_webhook": {
+      "default": "Upgrade to VIP to automatically scrobble what you're watching in real time with Plex webhooks.",
+      "description": "Body copy on the upsell card shown to free members in the Plex webhook tab."
+    },
     "header_plex_home_users": {
       "default": "Plex Home Users",
       "description": "Header for the Plex home users section in webhook settings."
