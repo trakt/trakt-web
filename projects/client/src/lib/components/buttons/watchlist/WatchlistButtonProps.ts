@@ -5,6 +5,7 @@ export type WatchlistButtonProps = {
   title: string;
   isWatchlistUpdating: boolean;
   isWatchlisted: boolean;
+  isQueued?: boolean;
   type: 'action' | 'normal' | 'dropdown-item';
   size: 'small' | 'normal';
   onAdd: () => void;

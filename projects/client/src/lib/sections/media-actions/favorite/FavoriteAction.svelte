@@ -35,6 +35,7 @@
   const {
     isUpdatingFavorite,
     isFavorited,
+    isQueued,
     addToFavorites: doAddToFavorites,
     removeFromFavorites,
   } = $derived(useFavorites({ type, id, title }));
@@ -91,6 +92,7 @@
     {size}
     isFavorited={$isFavorited}
     isFavoriteUpdating={$isUpdatingFavorite}
+    isQueued={$isQueued}
     onAdd={() => handler("add")}
     onRemove={() => handler("remove")}
   />

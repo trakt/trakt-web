@@ -9070,6 +9070,14 @@
       "default": "Add the offline plays anyway",
       "description": "Accessible label for the button confirming that duplicate offline watches should be replayed."
     },
+    "tag_text_queued": {
+      "default": "Queued",
+      "description": "Pill label on a tracking action (watched, watchlist, rating, favorite) that was saved offline and is waiting to sync."
+    },
+    "label_queued_action": {
+      "default": "Saved offline, waiting to sync",
+      "description": "Accessible label / tooltip for the queued indicator shown on an action that was saved offline."
+    },
     "error_text_sync_load_failed": {
       "default": "We couldn't load this right now. Please try again.",
       "description": "Inline error message shown when a streaming sync detail or its items fail to load."

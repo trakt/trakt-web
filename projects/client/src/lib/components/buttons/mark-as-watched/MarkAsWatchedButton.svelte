@@ -1,4 +1,7 @@
 <script lang="ts">
+  import QueuedIndicator from "$lib/components/badge/QueuedIndicator.svelte";
+  import QueuedTag from "$lib/components/badge/QueuedTag.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
@@ -18,6 +21,7 @@
     onAsk,
     isMarkingAsWatched,
     isWatched,
+    isQueued = false,
     isLoading = false,
     style,
     mode = "hybrid",
@@ -52,12 +56,20 @@
   );
   const state = $derived(isRemovable ? "watched" : "unwatched");
 
+  const label = $derived(
+    isQueued
+      ? `${i18n.label({ title, isWatched, isRewatching })} (${m.label_queued_action()})`
+      : i18n.label({ title, isWatched, isRewatching }),
+  );
+
   const commonProps: Omit<ButtonProps, "children"> = $derived({
-    label: i18n.label({ title, isWatched, isRewatching }),
+    label,
     color: $color,
     variant: mode === "ask" ? "primary" : variant,
     onclick: handler,
-    disabled: isMarkingAsWatched || isLoading,
+    // A queued action stays disabled so it can't be re-triggered while it
+    // waits to sync - the pending pill signals it's already been actioned.
+    disabled: isMarkingAsWatched || isQueued || isLoading,
     ...events,
   });
 
@@ -92,6 +104,7 @@
         navigationType={DpadNavigationType.Item}
       >
         {buttonText}
+        {#if isQueued}<QueuedTag />{/if}
         {#snippet icon()}
           {@render watchIcon()}
         {/snippet}
@@ -100,14 +113,17 @@
   {/if}
 
   {#if style === "action"}
-    <ActionButton style="ghost" {...commonProps} {...props}>
-      {@render watchIcon("small")}
-    </ActionButton>
+    <QueuedIndicator {isQueued}>
+      <ActionButton style="ghost" {...commonProps} {...props}>
+        {@render watchIcon("small")}
+      </ActionButton>
+    </QueuedIndicator>
   {/if}
 
   {#if style === "dropdown-item"}
     <DropdownItem {...commonProps} style="flat">
       {buttonText}
+      {#if isQueued}<QueuedTag />{/if}
       {#snippet icon()}
         {@render watchIcon()}
       {/snippet}

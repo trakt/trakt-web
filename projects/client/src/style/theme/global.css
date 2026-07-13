@@ -35,6 +35,10 @@
   --color-text-preview-tag: var(--shade-10);
   --color-background-preview-tag: var(--orange-600);
 
+  /* Offline queued action flag - dark text on yellow reads in both themes */
+  --color-text-queued-tag: var(--shade-900);
+  --color-background-queued-tag: var(--yellow-600);
+
   --color-text-indicator-tag: var(--shade-10);
   --color-background-indicator-tag: var(--shade-800);
 

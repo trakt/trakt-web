@@ -1,4 +1,5 @@
 <script lang="ts">
+  import QueuedTag from "$lib/components/badge/QueuedTag.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
@@ -23,13 +24,19 @@
   const type = $derived(props.type);
   const id = $derived(props.media.id);
 
-  const { pendingRating, isSubmitting, current, addRating, removeRating } =
-    $derived(
-      useRatings({
-        type,
-        id,
-      }),
-    );
+  const {
+    pendingRating,
+    isSubmitting,
+    isQueued,
+    current,
+    addRating,
+    removeRating,
+  } = $derived(
+    useRatings({
+      type,
+      id,
+    }),
+  );
 
   const confettiPosition = writable<{ x: number; y: number } | null>(null);
   const setConfettiPosition = (rating: number, ev?: MouseEvent) => {
@@ -68,7 +75,7 @@
     >
       <RatingStars
         rating={$pendingRating ?? $current?.rating}
-        isRating={$isSubmitting}
+        isRating={$isSubmitting || $isQueued}
         onRemoveRating={() => {
           onclick?.();
           removeRating();
@@ -79,6 +86,8 @@
           addRating(rating);
         }}
       />
+
+      {#if $isQueued}<QueuedTag />{/if}
 
       {#if props.type !== "episode" && props.type !== "season"}
         <div

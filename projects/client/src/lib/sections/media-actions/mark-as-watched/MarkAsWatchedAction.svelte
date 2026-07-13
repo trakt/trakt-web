@@ -19,6 +19,7 @@
   const {
     isMarkingAsWatched,
     isWatched,
+    isQueued,
     markAsWatched,
     removeWatched,
     isWatchable,
@@ -59,6 +60,7 @@
     {isLoading}
     isWatched={$isWatched}
     isMarkingAsWatched={$isMarkingAsWatched}
+    isQueued={$isQueued}
     onWatch={confirmMarkAsWatched}
     onRemove={confirmRemoveFromWatched}
     {onAsk}
