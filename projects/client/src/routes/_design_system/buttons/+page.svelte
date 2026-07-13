@@ -7,7 +7,12 @@
   import type { TraktActionButtonProps } from "$lib/components/buttons/TraktActionButtonProps";
   import type { TraktButtonProps } from "$lib/components/buttons/TraktButtonProps";
 
-  const styles: TraktButtonProps["style"][] = ["flat", "ghost", "underlined"];
+  const styles: TraktButtonProps["style"][] = [
+    "flat",
+    "outline",
+    "ghost",
+    "underlined",
+  ];
   const colors: TraktActionButtonProps["color"][] = [
     "purple",
     "red",
