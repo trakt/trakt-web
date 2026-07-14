@@ -206,7 +206,7 @@ describe('buildHistoryPayload', () => {
       expect(result.episodes).toHaveLength(0);
     });
 
-    it('should prefer positional resolution over the episode id', () => {
+    it('should prefer the episode id over positional resolution', () => {
       const item: UniversalImportItem = {
         action: 'history',
         type: 'episode',
@@ -219,11 +219,8 @@ describe('buildHistoryPayload', () => {
 
       const result = buildHistoryPayload([item]);
 
-      expect(result.shows).toEqual([{
-        ids: { tvdb: 9001 },
-        seasons: [{ number: 2, episodes: [{ number: 1, watched_at }] }],
-      }]);
-      expect(result.episodes).toHaveLength(0);
+      expect(result.episodes).toEqual([{ ids: { tvdb: 4321 }, watched_at }]);
+      expect(result.shows).toHaveLength(0);
     });
 
     it('should add an episode by its id when not positionally resolvable', () => {

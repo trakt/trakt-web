@@ -85,10 +85,11 @@ describe('TvTimeCsvParser: real anonymized exports', () => {
     ).toBe(true);
   });
 
-  it('routes real episode watches through positional history resolution', async () => {
-    // TV Time episodes carry a TVDB id, but many Trakt episodes have none, so
-    // id-based history drops them; they must be sent as show + season/episode
-    // number instead. Proven here end-to-end on a real export.
+  it('routes real episode watches by their own TVDB id', async () => {
+    // TV Time episodes carry a TVDB id (the exact identity of what was
+    // watched); with episode tvdb_id now backfilled on Trakt it resolves
+    // directly and survives season/episode renumbering divergence. Positional
+    // is the fallback only for episodes carrying no own id.
     const result = await TvTimeCsvParser.parse([
       csvFile(
         'gdpr-v2-tracking-prod-records-v2.csv',
@@ -98,17 +99,17 @@ describe('TvTimeCsvParser: real anonymized exports', () => {
 
     const payload = buildHistoryPayload([...result]);
 
-    // No episode goes out by its own id; all 8 route positionally under shows.
-    expect(payload.episodes).toHaveLength(0);
+    // All 8 go out by their own episode TVDB id, none positionally under shows.
+    expect(payload.episodes).toHaveLength(8);
+    expect(
+      payload.episodes?.every((episode) =>
+        'ids' in episode && episode.ids != null && 'tvdb' in episode.ids
+      ),
+    ).toBe(true);
     const positionalEpisodes = (payload.shows ?? [])
       .flatMap((show) => ('seasons' in show ? show.seasons ?? [] : []))
       .flatMap((season) => season.episodes ?? []);
-    expect(positionalEpisodes).toHaveLength(8);
-    expect(
-      (payload.shows ?? []).every((show) =>
-        'ids' in show && show.ids != null && 'tvdb' in show.ids
-      ),
-    ).toBe(true);
+    expect(positionalEpisodes).toHaveLength(0);
   });
 
   it('imports a real current-format export from loose tvtime-*.csv files', async () => {
