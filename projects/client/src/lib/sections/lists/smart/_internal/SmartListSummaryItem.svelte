@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Card from "$lib/components/card/Card.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { SmartList } from "$lib/requests/queries/users/smartListQuery.ts";
+  import ListSummaryCard from "$lib/sections/lists/components/ListSummaryCard.svelte";
   import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import SmartListActions from "./SmartListActions.svelte";
@@ -144,76 +144,46 @@
   }
 </script>
 
-<Card
-  --width-card="min(var(--width-list-card), 85vw)"
-  --height-card="var(--height-list-card)"
->
-  <div class="trakt-smart-list-summary">
-    <div class="trakt-smart-list-header">
-      <div class="trakt-smart-list-icon" aria-hidden="true">
-        {#if list.type === "movie"}
-          <MovieIcon />
-        {:else}
-          <ShowIcon />
-        {/if}
-      </div>
-
-      <div class="trakt-smart-list-title">
-        <Link {href}>
-          <p class="secondary bold ellipsis">{list.title}</p>
-        </Link>
-        <p class="secondary small ellipsis">
-          {filterSummary}
-        </p>
-      </div>
-
-      <SmartListActions {list} />
+<ListSummaryCard>
+  <div class="trakt-smart-list-header">
+    <div class="trakt-smart-list-icon" aria-hidden="true">
+      {#if list.type === "movie"}
+        <MovieIcon />
+      {:else}
+        <ShowIcon />
+      {/if}
     </div>
 
-    <Link {href} color="inherit">
-      <div
-        class="trakt-smart-list-posters"
-        style="--poster-count: {$posters.length}"
-      >
-        {#each $posters as poster, index (`${list.id}_poster_${index}`)}
-          <div class="poster-wrapper" style="--poster-index: {index}">
-            <CrossOriginImage
-              src={poster}
-              alt={m.image_alt_list_preview_poster({ title: list.title })}
-            />
-          </div>
-        {/each}
-      </div>
-    </Link>
+    <div class="trakt-smart-list-title">
+      <Link {href}>
+        <p class="secondary bold ellipsis">{list.title}</p>
+      </Link>
+      <p class="secondary small ellipsis">
+        {filterSummary}
+      </p>
+    </div>
+
+    <SmartListActions {list} />
   </div>
-</Card>
+
+  <Link {href} color="inherit">
+    <div
+      class="trakt-smart-list-posters"
+      style="--poster-count: {$posters.length}"
+    >
+      {#each $posters as poster, index (`${list.id}_poster_${index}`)}
+        <div class="poster-wrapper" style="--poster-index: {index}">
+          <CrossOriginImage
+            src={poster}
+            alt={m.image_alt_list_preview_poster({ title: list.title })}
+          />
+        </div>
+      {/each}
+    </div>
+  </Link>
+</ListSummaryCard>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  .trakt-smart-list-summary {
-    --smart-list-summary-background: color-mix(
-      in srgb,
-      var(--color-card-background) 88%,
-      var(--color-foreground)
-    );
-
-    height: var(--height-list-card);
-    box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-m);
-
-    padding: var(--ni-12);
-
-    outline: var(--border-thickness-xs) solid transparent;
-    transition: outline-color var(--transition-increment) ease-in-out;
-
-    background-color: var(--smart-list-summary-background);
-    border-radius: var(--border-radius-m);
-  }
-
   .trakt-smart-list-header {
     display: flex;
     align-items: center;
@@ -297,12 +267,6 @@
     :global(img) {
       width: 100%;
       height: 100%;
-    }
-  }
-
-  @include for-mouse() {
-    :global(.trakt-card-content:hover) .trakt-smart-list-summary {
-      outline-color: var(--color-card-border-hover);
     }
   }
 </style>
