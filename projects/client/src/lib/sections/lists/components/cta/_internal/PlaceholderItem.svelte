@@ -21,16 +21,18 @@
 
   // Keep the first two (short) sentences on one row and the remainder on the
   // next. Locales that don't use ". " sentence breaks fall back to one line.
+  // Plain string split avoids a lookbehind regex, which throws on iOS Safari
+  // <= 16.3.
   const text = $derived.by(() => {
     const copy = intl.text({ cta });
-    const sentences = copy.split(/(?<=\.)\s+/);
+    const sentences = copy.split(". ");
 
     if (sentences.length < 3) {
       return copy;
     }
 
-    const firstRow = sentences.slice(0, 2).join(" ");
-    const secondRow = sentences.slice(2).join(" ");
+    const firstRow = `${sentences.slice(0, 2).join(". ")}.`;
+    const secondRow = sentences.slice(2).join(". ");
 
     return `${firstRow}\n${secondRow}`;
   });
