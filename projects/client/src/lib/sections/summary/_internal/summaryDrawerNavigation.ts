@@ -67,7 +67,12 @@ function mapToDrawer(value: string | Nil) {
 }
 
 export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
-  const { buildDrawerLink, close } = drawerNavigation(summaryDrawerParams);
+  // `season` is the show page's active-season tab state. The episode drawer
+  // sets it on open, but closing must keep it: stripping it flips the page's
+  // `currentSeason` to NaN, tearing down and remounting the whole page.
+  const { buildDrawerLink, close } = drawerNavigation(summaryDrawerParams, {
+    persistentKeys: [seasonParam],
+  });
   const drawer = mapToDrawer(searchParams?.get(DRAWER_VIEW_PARAM));
   const commentId = searchParams?.get(commentIdParam);
   const sourceCommentId = commentId != null ? Number(commentId) : undefined;

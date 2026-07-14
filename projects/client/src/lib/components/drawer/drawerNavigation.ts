@@ -5,11 +5,15 @@ import { DRAWER_VIEW_PARAM } from '$lib/components/drawer/constants/index.ts';
 export function drawerNavigation<
   T extends string,
   P extends Partial<Record<T, Record<string, string>>> = Record<never, never>,
->(params?: P) {
+>(params?: P, options?: { persistentKeys?: readonly string[] }) {
+  // Params a drawer may set when opening but must NOT strip when closing,
+  // because they double as page-owned state (e.g. the active season tab).
+  // Removing them on close would tear down the underlying page.
+  const persistentKeys = new Set(options?.persistentKeys ?? []);
   const cleanupKeys = params
-    ? Object.values(params).flatMap((p) =>
-      Object.keys(p as Record<string, string>)
-    )
+    ? Object.values(params)
+      .flatMap((p) => (p ? Object.keys(p) : []))
+      .filter((key) => !persistentKeys.has(key))
     : [];
 
   const buildDrawerLink = <D extends T>(
