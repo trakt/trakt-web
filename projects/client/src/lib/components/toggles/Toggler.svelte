@@ -27,16 +27,12 @@
   let trackerElement: HTMLDivElement;
   let pending = $state<{ index: number; href?: string } | null>(null);
 
-  const handleChange = (index: number, href?: string) => {
-    pending = { index, href };
-    trackerIndex.set(index);
-    trackerElement?.classList.add("moving");
-  };
+  const prefersReducedMotion = () =>
+    globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ??
+    false;
 
-  const handleTransitionEnd = (event: TransitionEvent) => {
-    if (event.propertyName === "opacity" || !pending) return;
-
-    (event.currentTarget as HTMLDivElement).classList.remove("moving");
+  const commit = () => {
+    if (!pending) return;
 
     const { index, href } = pending;
     pending = null;
@@ -47,6 +43,27 @@
       // eslint-disable-next-line svelte/no-navigation-without-resolve
       goto(href, { replaceState: true, keepFocus: true, noScroll: true });
     }
+  };
+
+  const handleChange = (index: number, href?: string) => {
+    pending = { index, href };
+    trackerIndex.set(index);
+
+    // With reduced motion the tracker transition is 0ms, so transitionend
+    // never fires - commit immediately instead of waiting for it.
+    if (prefersReducedMotion()) {
+      commit();
+      return;
+    }
+
+    trackerElement?.classList.add("moving");
+  };
+
+  const handleTransitionEnd = (event: TransitionEvent) => {
+    if (event.propertyName === "opacity" || !pending) return;
+
+    (event.currentTarget as HTMLDivElement).classList.remove("moving");
+    commit();
   };
 
   const getTriggerProps = (option: ToggleOption<T>, index: number) => {
@@ -131,7 +148,9 @@
       var(--toggler-animation-duration) + var(--toggle-animation-delay)
     );
 
-    inset-inline-start: calc(var(--tracker-inline-start) + var(--tracker-offset));
+    inset-inline-start: calc(
+      var(--tracker-inline-start) + var(--tracker-offset)
+    );
     margin-inline-start: var(--ni-4);
 
     position: absolute;
