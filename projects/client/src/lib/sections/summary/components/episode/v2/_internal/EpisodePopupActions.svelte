@@ -17,11 +17,13 @@
     show,
     title,
     showTitle,
+    onHistoryOpen,
   }: {
     episode: EpisodeEntry;
     show: ShowEntry;
     title: string;
     showTitle: string;
+    onHistoryOpen?: () => void;
   } = $props();
 
   const { isWatched } = $derived(
@@ -56,7 +58,7 @@
   variant="primary"
 />
 
-<HistoryButton />
+<HistoryButton onclick={onHistoryOpen} />
 
 <RenderFor audience="authenticated">
   <ReportButton

@@ -45,6 +45,7 @@
     socialTitle,
     onRatingsOpen,
     onSocialOpen,
+    onHistoryOpen,
   }: {
     show: ShowEntry;
     seasons: Season[];
@@ -57,6 +58,7 @@
     socialTitle: string;
     onRatingsOpen: () => void;
     onSocialOpen: () => void;
+    onHistoryOpen: () => void;
   } = $props();
 
   // The ratings query only needs the slug/season/episode numbers, so it can
@@ -287,6 +289,7 @@
             {show}
             title={entry.title}
             showTitle={show.title}
+            {onHistoryOpen}
           />
         </RenderFor>
 

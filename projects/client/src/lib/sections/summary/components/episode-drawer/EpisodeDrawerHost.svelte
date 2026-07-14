@@ -10,13 +10,13 @@
   import DrawerCastSection from "$lib/sections/summary/components/_internal/DrawerCastSection.svelte";
   import MediaStats from "$lib/sections/summary/components/details/_internal/MediaStats.svelte";
   import MediaStatsSkeleton from "$lib/sections/summary/components/details/_internal/MediaStatsSkeleton.svelte";
+  import HistoryDrawerHost from "$lib/sections/summary/components/history/HistoryDrawerHost.svelte";
   import RatingsDrawer from "$lib/sections/summary/components/rating/RatingsDrawer.svelte";
   import SeasonEpisodesTab from "$lib/sections/summary/components/seasons/SeasonEpisodesTab.svelte";
   import SocialDrawerHost from "$lib/sections/summary/components/social/SocialDrawerHost.svelte";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle.ts";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
-  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import EpisodeInfoHeader from "./_internal/EpisodeInfoHeader.svelte";
@@ -42,11 +42,12 @@
   let isOpen = $state(false);
   let activeTab = $state("info");
 
-  // Ratings distribution and social activities open as drawers stacked on top
-  // of this one, mounted locally (not via the `view=` URL param, which would
+  // Ratings, social activities and history open as drawers stacked on top of
+  // this one, mounted locally (not via the `view=` URL param, which would
   // replace this drawer and resolve show-scoped data instead of the episode).
-  const isRatingsOpen = writable(false);
-  const isSocialOpen = writable(false);
+  let isRatingsOpen = $state(false);
+  let isSocialOpen = $state(false);
+  let isHistoryOpen = $state(false);
 
   const socialTarget = $derived({
     type: "episode" as const,
@@ -181,8 +182,9 @@
         isCrewLoading={$isPeopleLoading}
         {socialTarget}
         {socialTitle}
-        onRatingsOpen={() => isRatingsOpen.set(true)}
-        onSocialOpen={() => isSocialOpen.set(true)}
+        onRatingsOpen={() => (isRatingsOpen = true)}
+        onSocialOpen={() => (isSocialOpen = true)}
+        onHistoryOpen={() => (isHistoryOpen = true)}
       />
 
       <TabView
@@ -213,7 +215,7 @@
   {/if}
 </Drawer>
 
-{#if $isRatingsOpen && $episodeEntry}
+{#if isRatingsOpen && $episodeEntry}
   <RatingsDrawer
     type="episode"
     episode={$episodeEntry}
@@ -221,16 +223,27 @@
     crew={$crew}
     {seasons}
     elevated
-    onClose={() => isRatingsOpen.set(false)}
+    onClose={() => (isRatingsOpen = false)}
   />
 {/if}
 
-{#if $isSocialOpen}
+{#if isSocialOpen}
   <SocialDrawerHost
     target={socialTarget}
     title={socialTitle}
     elevated
-    onClose={() => isSocialOpen.set(false)}
+    onClose={() => (isSocialOpen = false)}
+  />
+{/if}
+
+{#if isHistoryOpen && $episodeEntry}
+  <HistoryDrawerHost
+    type="episode"
+    episode={$episodeEntry}
+    {show}
+    crew={$crew}
+    elevated
+    onClose={() => (isHistoryOpen = false)}
   />
 {/if}
 
