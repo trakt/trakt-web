@@ -15,6 +15,14 @@
     const options: Plyr.Options = {
       controls: ["play", "progress", "current-time", "mute", "fullscreen"],
       iconUrl: asset("/plyr/plyr.svg"),
+      /**
+       * Reference the icon sprite via an external `<use>` instead of letting
+       * Plyr XHR-fetch and inline it. Plyr's sprite loader throws
+       * `new Error(xhr.status)` from the XHR `error` listener (uncaught, outside
+       * its own try/catch), so any network-layer failure surfaces as an
+       * uncaught `Error: 0` and escalates to the full-page error screen.
+       */
+      loadSprite: false,
       autoplay,
       fullscreen: {
         enabled: true,
