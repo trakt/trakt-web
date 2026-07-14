@@ -61,7 +61,15 @@
       // browser extensions as a second copy alongside Plyr's own instance.
       // When the iframe is torn down during SPA navigation the orphaned
       // API copy accesses stale registry entries; not actionable for us.
-      error.stack?.includes("www-widgetapi.js");
+      error.stack?.includes("www-widgetapi.js") ||
+      // Plyr's own scripts throw from an XHR error listener on network-layer
+      // failures (e.g. Error: 0). Sentry wraps XMLHttpRequest and injects an
+      // app-origin frame, so the hostname check above lets these through even
+      // though the originating frame is third-party. A cosmetic player hiccup
+      // must not escalate to the full-page error screen. Match both the CDN
+      // host and the bare filename so self-hosted/bundled Plyr is covered too.
+      error.stack?.includes("cdn.plyr.io") ||
+      error.stack?.includes("plyr.js");
 
     if (isExternalNoise) return;
 
