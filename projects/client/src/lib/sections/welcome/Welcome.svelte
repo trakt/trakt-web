@@ -2,6 +2,7 @@
   import WelcomeBackdrop from "./components/WelcomeBackdrop.svelte";
   import WelcomeImport from "./components/WelcomeImport.svelte";
   import WelcomeIntro from "./components/WelcomeIntro.svelte";
+  import WelcomeOutro from "./components/WelcomeOutro.svelte";
 </script>
 
 <WelcomeBackdrop />
@@ -9,6 +10,7 @@
 <div class="trakt-welcome">
   <WelcomeIntro />
   <WelcomeImport />
+  <WelcomeOutro />
 </div>
 
 <style lang="scss">

@@ -7427,6 +7427,18 @@
       "default": "See all import options",
       "description": "Link on the Welcome page to the full data import settings page."
     },
+    "welcome_vip_upsell_heading": {
+      "default": "Become a VIP",
+      "description": "Heading on the compact VIP upsell shown to free members on the Welcome page."
+    },
+    "welcome_vip_upsell_description": {
+      "default": "Want to support our community or get more from Trakt?",
+      "description": "Body copy on the compact VIP upsell shown to free members on the Welcome page, inviting them to upgrade and support the team."
+    },
+    "welcome_outro_heading": {
+      "default": "Now the fun begins.",
+      "description": "Closing heading at the bottom of the Welcome page, above the start exploring button."
+    },
     "welcome_tvtime_badge": {
       "default": "TV Time is shutting down",
       "description": "Badge on the prominent TV Time notice highlighting that TV Time is closing."

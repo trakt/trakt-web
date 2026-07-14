@@ -1,10 +1,7 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
-  import PopcornIcon from "$lib/components/icons/PopcornIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
 
   const { user } = useUser();
 
@@ -22,22 +19,6 @@
 <section class="trakt-welcome-intro">
   <h1 class="welcome-intro-heading">{heading}</h1>
   <p class="secondary welcome-intro-description">{m.welcome_intro()}</p>
-
-  <div class="welcome-intro-actions">
-    <Button
-      href={UrlBuilder.home()}
-      color="purple"
-      variant="primary"
-      style="flat"
-      size="small"
-      label={m.welcome_get_started()}
-    >
-      {m.welcome_get_started()}
-      {#snippet icon()}
-        <PopcornIcon />
-      {/snippet}
-    </Button>
-  </div>
 </section>
 
 <style lang="scss">
@@ -83,12 +64,5 @@
     @include for-mobile {
       font-size: var(--font-size-text);
     }
-  }
-
-  .welcome-intro-actions {
-    display: flex;
-    justify-content: center;
-
-    margin-block-start: var(--gap-s);
   }
 </style>
