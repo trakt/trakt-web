@@ -11,16 +11,18 @@
     show,
     title,
     showTitle,
+    onHistoryOpen,
   }: {
     episode: EpisodeEntry;
     show: ShowEntry;
     title: string;
     showTitle: string;
+    onHistoryOpen?: () => void;
   } = $props();
 </script>
 
 {#snippet popupActions()}
-  <EpisodePopupActions {episode} {show} {title} {showTitle} />
+  <EpisodePopupActions {episode} {show} {title} {showTitle} {onHistoryOpen} />
 {/snippet}
 
 <SummaryActionsBar

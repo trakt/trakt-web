@@ -10,8 +10,11 @@
   import HistoryList from "../details/_internal/HistoryList.svelte";
   import type { MediaDetailsProps } from "../details/MediaDetailsProps.ts";
 
-  const { onClose, ...props }: { onClose: () => void } & MediaDetailsProps =
-    $props();
+  const {
+    onClose,
+    elevated = false,
+    ...props
+  }: { onClose: () => void; elevated?: boolean } & MediaDetailsProps = $props();
 
   const { list, isLoading, hasNextPage } = $derived(
     useRecentlyWatchedList({
@@ -62,6 +65,7 @@
   onOpened={() => (isOpen = true)}
   title={m.list_title_history()}
   size="auto"
+  {elevated}
   {drilldown}
 >
   {#if isOpen}
