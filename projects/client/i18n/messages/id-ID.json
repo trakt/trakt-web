@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "Setelah ekspor siap, Anda akan menerima dua email: satu dengan file .zip dan satu lagi dengan kata sandi untuk membukanya.",
   "import_guide_tvtime_step_4": "Unggah .zip yang sudah dibuka di sini. Jika .zip tidak diterima, ekstrak dan unggah dua file .csv tracking-prod-records (ditambah followed_tv_show.csv dan ratings-live-votes.csv untuk daftar tontonan dan peringkat Anda) sebagai gantinya.",
   "import_guide_tvtime_title": "TV Time Anda tidak hilang di angkasa! 🚀",
+  "import_match_toggle_hint": "Kami merekomendasikan default (cocokkan berdasarkan ID TVDB). Aktifkan ini hanya jika beberapa episode masuk ke entri yang salah - hasilnya bervariasi dari satu acara ke acara lain.",
+  "import_match_toggle_label": "Cocokkan episode berdasarkan musim dan nomor episode",
   "import_max_files": "(maks. {count} berkas diizinkan)",
   "import_source_csv": "Berkas CSV",
   "import_source_json": "Berkas JSON",

@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "След като експортът е готов, ще получите два имейла: един с .zip файл и друг с парола за отключването му.",
   "import_guide_tvtime_step_4": "Качете отключения .zip файл тук. Ако .zip файлът не бъде приет, разархивирайте го и качете двата файла tracking-prod-records .csv (плюс followed_tv_show.csv и ratings-live-votes.csv за вашия списък за гледане и оценки) вместо това.",
   "import_guide_tvtime_title": "Вашият TV Time не е изгубен в космоса! 🚀",
+  "import_match_toggle_hint": "Препоръчваме настройките по подразбиране (съпоставяне по TVDB ID). Включете тази опция, само ако някои епизоди попаднат на грешен запис – резултатите варират според сериала.",
+  "import_match_toggle_label": "Съпоставяне на епизоди по сезон и номер на епизод",
   "import_max_files": "(допускат се максимум {count} файла)",
   "import_source_csv": "CSV файл",
   "import_source_json": "JSON файл",

@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "Zodra de export gereed is, ontvang je twee e-mails: één met een .zip-bestand en één met een wachtwoord om het te ontgrendelen.",
   "import_guide_tvtime_step_4": "Upload de ontgrendelde .zip hier. Als de .zip niet wordt geaccepteerd, pak deze dan uit en upload in plaats daarvan de twee tracking-prod-records .csv-bestanden (plus followed_tv_show.csv en ratings-live-votes.csv voor je volglijst en beoordelingen).",
   "import_guide_tvtime_title": "Je TV Time is niet verloren in de ruimte! 🚀",
+  "import_match_toggle_hint": "We raden de standaardinstelling aan (matchen op TVDB id). Schakel dit alleen in als sommige afleveringen op de verkeerde vermelding terechtkomen - de resultaten variëren per serie.",
+  "import_match_toggle_label": "Afleveringen matchen op seizoen en afleveringnummer",
   "import_max_files": "(max. {count} bestanden toegestaan)",
   "import_source_csv": "CSV-bestand",
   "import_source_json": "JSON-bestand",

@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "Dışa aktarım hazır olduğunda iki e-posta alacaksınız: biri .zip dosyasıyla, diğeri ise onu açmak için bir şifreyle.",
   "import_guide_tvtime_step_4": "Kilidi açılmış .zip dosyasını buraya yükleyin. Eğer .zip kabul edilmezse, dosyayı çıkarın ve bunun yerine iki tracking-prod-records .csv dosyasını (izleme listeniz ve puanlarınız için ayrıca followed_tv_show.csv ve ratings-live-votes.csv) yükleyin.",
   "import_guide_tvtime_title": "TV Zamanınız uzayda kaybolmadı! 🚀",
+  "import_match_toggle_hint": "Varsayılanı (TVDB kimliğine göre eşleştir) öneriyoruz. Bunu yalnızca bazı bölümler yanlış girişe düşerse açın - sonuçlar diziden diziye değişir.",
+  "import_match_toggle_label": "Bölümleri sezon ve bölüm numarasına göre eşleştir",
   "import_max_files": "(en fazla {count} dosyaya izin verilir)",
   "import_source_csv": "CSV Dosyası",
   "import_source_json": "JSON Dosyası",

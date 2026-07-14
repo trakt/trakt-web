@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "Amint az export elkészült, két e-mailt kap: egyet egy .zip fájllal, egy másikat pedig a feloldásához szükséges jelszóval.",
   "import_guide_tvtime_step_4": "Töltse fel a feloldott .zip fájlt ide. Ha a .zip nem fogadható el, bontsa ki, és töltse fel helyette a két tracking-prod-records .csv fájlt (valamint a followed_tv_show.csv és ratings-live-votes.csv fájlokat a figyelőlistájához és értékeléseihez).",
   "import_guide_tvtime_title": "A TV Time adataid nincsenek elveszve az űrben! 🚀",
+  "import_match_toggle_hint": "Az alapértelmezettet javasoljuk (egyeztetés TVDB azonosító alapján). Csak akkor kapcsolja be, ha egyes epizódok rossz bejegyzéshez kerülnek – az eredmények sorozatonként eltérőek lehetnek.",
+  "import_match_toggle_label": "Epizódok egyeztetése évad és epizódszám alapján",
   "import_max_files": "(max. {count} fájl engedélyezett)",
   "import_source_csv": "CSV fájl",
   "import_source_json": "JSON fájl",

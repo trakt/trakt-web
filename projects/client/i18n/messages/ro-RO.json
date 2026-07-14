@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "Odată ce exportul este gata, vei primi două e-mailuri: unul cu un fișier .zip și altul cu o parolă pentru a-l debloca.",
   "import_guide_tvtime_step_4": "Încarcă fișierul .zip deblocat aici. Dacă fișierul .zip nu este acceptat, extrage-l și încarcă în schimb cele două fișiere .csv tracking-prod-records (plus followed_tv_show.csv și ratings-live-votes.csv pentru lista ta de vizionare și evaluări).",
   "import_guide_tvtime_title": "Timpul tău la TV nu este pierdut în spațiu! 🚀",
+  "import_match_toggle_hint": "Recomandăm setarea implicită (potrivire după ID-ul TVDB). Activează această opțiune doar dacă unele episoade ajung la intrarea greșită - rezultatele variază de la un serial la altul.",
+  "import_match_toggle_label": "Potrivește episoadele după sezon și numărul episodului",
   "import_max_files": "(maxim {count} fișiere permise)",
   "import_source_csv": "Fișier CSV",
   "import_source_json": "Fișier JSON",

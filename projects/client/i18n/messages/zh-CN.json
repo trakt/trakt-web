@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "导出准备好后，您会收到两封电子邮件：一封包含 .zip 文件，另一封包含解锁密码。",
   "import_guide_tvtime_step_4": "在此处上传已解锁的 .zip 文件。如果 .zip 文件不被接受，请解压缩它，并上传两个 tracking-prod-records .csv 文件（以及用于您的关注列表和评分的 followed_tv_show.csv 和 ratings-live-votes.csv）替代。",
   "import_guide_tvtime_title": "您的 TV Time 没有迷失在宇宙中！🚀",
+  "import_match_toggle_hint": "我们推荐默认设置（按TVDB ID匹配）。仅当某些剧集匹配到错误条目时才启用此功能 - 结果因节目而异。",
+  "import_match_toggle_label": "按季数和集数匹配剧集",
   "import_max_files": "（最多允许 {count} 个文件）",
   "import_source_csv": "CSV 文件",
   "import_source_json": "JSON 文件",

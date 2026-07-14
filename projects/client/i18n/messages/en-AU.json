@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "Once the export is ready you'll get two emails: one with a .zip file and another with a password to unlock it.",
   "import_guide_tvtime_step_4": "Upload the unlocked .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files (plus followed_tv_show.csv and ratings-live-votes.csv for your watchlist and ratings) instead.",
   "import_guide_tvtime_title": "Your TV Time isn't lost in space! 🚀",
+  "import_match_toggle_hint": "We recommend the default (match by TVDB id). Turn this on only if some episodes land on the wrong entry - results vary from show to show.",
+  "import_match_toggle_label": "Match episodes by season and episode number",
   "import_max_files": "(max {count} files allowed)",
   "import_source_csv": "CSV File",
   "import_source_json": "JSON File",

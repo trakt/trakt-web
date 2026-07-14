@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "Når eksporten er klar, modtager du to e-mails: en med en .zip-fil og en anden med et kodeord for at låse den op.",
   "import_guide_tvtime_step_4": "Upload den ulåste .zip her. Hvis .zip-filen ikke accepteres, skal du udpakke den og i stedet uploade de to tracking-prod-records .csv-filer (plus followed_tv_show.csv og ratings-live-votes.csv for din overvågningsliste og vurderinger).",
   "import_guide_tvtime_title": "Din TV Time er ikke tabt i rummet! 🚀",
+  "import_match_toggle_hint": "Vi anbefaler standardindstillingen (match efter TVDB id). Slå dette til kun hvis nogle afsnit havner på den forkerte post - resultaterne varierer fra serie til serie.",
+  "import_match_toggle_label": "Match afsnit efter sæson og afsnitsnummer",
   "import_max_files": "(maks. {count} filer tilladt)",
   "import_source_csv": "CSV-fil",
   "import_source_json": "JSON-fil",

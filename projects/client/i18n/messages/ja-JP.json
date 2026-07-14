@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "エクスポートの準備が完了すると、2通のメールが届きます。1通は.zipファイル、もう1通はそのロックを解除するためのパスワードです。",
   "import_guide_tvtime_step_4": "ロック解除された.zipファイルをここにアップロードしてください。.zipが受け付けられない場合は、展開して2つのtracking-prod-records .csvファイル（ウォッチリストと評価のためにfollowed_tv_show.csvとratings-live-votes.csvも追加）をアップロードしてください。",
   "import_guide_tvtime_title": "あなたのTV Timeは迷子になりません！🚀",
+  "import_match_toggle_hint": "デフォルト（TVDB IDで照合）を推奨します。一部のエピソードが間違ったエントリに割り当てられた場合にのみこれをオンにしてください。結果は番組によって異なります。",
+  "import_match_toggle_label": "エピソードをシーズンとエピソード番号で照合",
   "import_max_files": "(最大{count}ファイルまで許可)",
   "import_source_csv": "CSVファイル",
   "import_source_json": "JSONファイル",

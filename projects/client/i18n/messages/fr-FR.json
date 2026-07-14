@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "Une fois l'exportation prête, vous recevrez deux e-mails : un avec un fichier .zip et un autre avec un mot de passe pour le déverrouiller.",
   "import_guide_tvtime_step_4": "Téléchargez le .zip déverrouillé ici. Si le .zip n'est pas accepté, extrayez-le et téléchargez plutôt les deux fichiers .csv tracking-prod-records (plus followed_tv_show.csv et ratings-live-votes.csv pour votre liste de suivi et vos notes).",
   "import_guide_tvtime_title": "Votre TV Time n'est pas perdu dans l'espace ! 🚀",
+  "import_match_toggle_hint": "Nous recommandons le réglage par défaut (correspondance par identifiant TVDB). Activez ceci uniquement si certains épisodes sont associés à la mauvaise entrée - les résultats varient d'une série à l'autre.",
+  "import_match_toggle_label": "Faire correspondre les épisodes par saison et numéro d'épisode",
   "import_max_files": "(max. {count} fichiers autorisés)",
   "import_source_csv": "Fichier CSV",
   "import_source_json": "Fichier JSON",

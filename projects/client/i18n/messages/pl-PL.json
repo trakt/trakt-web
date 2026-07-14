@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "Gdy eksport będzie gotowy, otrzymasz dwa e-maile: jeden z plikiem .zip, a drugi z hasłem do jego odblokowania.",
   "import_guide_tvtime_step_4": "Prześlij odblokowany plik .zip tutaj. Jeśli plik .zip nie zostanie zaakceptowany, rozpakuj go i zamiast tego prześlij dwa pliki .csv tracking-prod-records (plus followed_tv_show.csv i ratings-live-votes.csv dla Twojej listy do obejrzenia i ocen).",
   "import_guide_tvtime_title": "Twój TV Time nie zgubił się w kosmosie! 🚀",
+  "import_match_toggle_hint": "Zalecamy domyślne dopasowanie (według identyfikatora TVDB). Włącz tę opcję tylko, jeśli niektóre odcinki pojawiają się w niewłaściwej pozycji – wyniki różnią się w zależności od serialu.",
+  "import_match_toggle_label": "Dopasuj odcinki według numeru sezonu i odcinka",
   "import_max_files": "(maks. {count} dozwolonych plików)",
   "import_source_csv": "Plik CSV",
   "import_source_json": "Plik JSON",

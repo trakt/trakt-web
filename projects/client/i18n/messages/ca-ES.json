@@ -777,6 +777,8 @@
   "import_guide_tvtime_step_3": "Un cop l'exportació estigui llesta, rebràs dos correus electrònics: un amb un fitxer .zip i un altre amb una contrasenya per desbloquejar-lo.",
   "import_guide_tvtime_step_4": "Puja el fitxer .zip desbloquejat aquí. Si el fitxer .zip no s'accepta, extreu-lo i puja els dos fitxers .csv tracking-prod-records (més followed_tv_show.csv i ratings-live-votes.csv per a la teva llista i valoracions) en el seu lloc.",
   "import_guide_tvtime_title": "El teu TV Time no s'ha perdut a l'espai! 🚀",
+  "import_match_toggle_hint": "Recomanem la configuració predeterminada (coincidència per ID de TVDB). Activa-ho només si alguns episodis apareixen a l'entrada incorrecta: els resultats varien segons la sèrie.",
+  "import_match_toggle_label": "Fes coincidir els episodis per temporada i número d'episodi",
   "import_max_files": "(màxim {count} fitxers permesos)",
   "import_source_csv": "Fitxer CSV",
   "import_source_json": "Fitxer JSON",
