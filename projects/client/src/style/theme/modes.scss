@@ -2,6 +2,10 @@
 
 // Define theme variables for light mode
 @mixin light-theme {
+  // Match native UI (scrollbars, form controls) to the theme, so the browser
+  // does not paint a light scrollbar over a themed page.
+  color-scheme: light;
+
   /**
    * Theme-able variables
    */
@@ -437,6 +441,10 @@
 
 // Define theme variables for dark mode
 @mixin dark-theme {
+  // Match native UI (scrollbars, form controls) to the theme, so the browser
+  // does not paint a light scrollbar over a themed page.
+  color-scheme: dark;
+
   --color-floating-background: var(--shade-930);
   --color-shadow: var(--shade-940);
 
