@@ -1,8 +1,9 @@
-import type { EpisodeResponse, MovieResponse } from '@trakt/api';
 import type { PostCredits } from '../models/PostCreditsSchema.ts';
 
 export function mapToPostCredits(
-  response: EpisodeResponse | MovieResponse | Nil,
+  response:
+    | { during_credits?: boolean | null; after_credits?: boolean | null }
+    | Nil,
 ): PostCredits[] {
   const postCredits: PostCredits[] = [];
 

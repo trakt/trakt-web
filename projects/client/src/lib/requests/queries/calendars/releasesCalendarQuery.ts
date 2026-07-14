@@ -1,6 +1,5 @@
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToUpcomingEpisodeEntry } from '$lib/requests/_internal/mapToUpcomingEpisodeEntry.ts';
@@ -53,6 +52,7 @@ const releasesCalendarRequest = (
     .releasesHot({
       query: {
         extended: 'full,images',
+        group: 'day',
         ...filter,
         ...(type === 'media' ? {} : { type }),
       },
@@ -87,11 +87,9 @@ export const releasesCalendarQuery = defineQuery({
       .filter(isCalendarMovie)
       .map((entry) => mapToMovieEntry(entry.movie));
 
-    const episodes = coalesceEpisodes(
-      response.body
-        .filter(isCalendarShow)
-        .map(mapToUpcomingEpisodeEntry),
-    );
+    const episodes = response.body
+      .filter(isCalendarShow)
+      .map(mapToUpcomingEpisodeEntry);
 
     return [...episodes, ...movies]
       .toSorted((a, b) =>

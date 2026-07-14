@@ -1,5 +1,4 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
 import { mapToUpcomingEpisodeEntry } from '$lib/requests/_internal/mapToUpcomingEpisodeEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -35,6 +34,7 @@ export const upcomingEpisodesRequest = (
     .shows({
       query: {
         extended: 'full,images',
+        group: 'day',
         ...filterParams,
       },
       params: {
@@ -64,8 +64,7 @@ export const upcomingEpisodesQuery = defineQuery({
     ),
   ],
   request: upcomingEpisodesRequest,
-  mapper: (response) =>
-    coalesceEpisodes(response.body.map(mapToUpcomingEpisodeEntry)),
+  mapper: (response) => response.body.map(mapToUpcomingEpisodeEntry),
   schema: UpcomingEpisodeEntrySchema.array(),
   ttl: time.minutes(30),
   refetchOnWindowFocus: true,
