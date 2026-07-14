@@ -73,6 +73,7 @@ module.exports = {
         'gestures',
         'guards',
         'i18n',
+        'import',
         'landing',
         'layout',
         'legal',
