@@ -1,5 +1,4 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
 import { mapToUpcomingEpisodeEntry } from '$lib/requests/_internal/mapToUpcomingEpisodeEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -66,6 +65,7 @@ export const upcomingMediaQuery = defineQuery({
       .media({
         query: {
           extended: 'full,images',
+          group: 'day',
           ...filter,
         },
         params: {
@@ -75,11 +75,9 @@ export const upcomingMediaQuery = defineQuery({
         },
       }),
   mapper: (response) => {
-    const episodes = coalesceEpisodes(
-      response.body
-        .filter(isCalendarShow)
-        .map(mapToUpcomingEpisodeEntry),
-    );
+    const episodes = response.body
+      .filter(isCalendarShow)
+      .map(mapToUpcomingEpisodeEntry);
 
     const movies = response.body
       .filter(isCalendarMovie)

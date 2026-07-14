@@ -13,7 +13,7 @@
     "npm:@ethercorps/sveltekit-og@4.3.0": "4.3.0_@sveltejs+kit@2.69.2__@sveltejs+vite-plugin-svelte@7.2.0___svelte@5.56.4___vite@8.1.4____esbuild@0.28.1____sass-embedded@1.100.0___esbuild@0.28.1___sass-embedded@1.100.0__svelte@5.56.4__typescript@5.8.3__vite@8.1.4___esbuild@0.28.1___sass-embedded@1.100.0__esbuild@0.28.1__sass-embedded@1.100.0_esbuild@0.28.1_sass-embedded@1.100.0_vite@8.1.4__esbuild@0.28.1__sass-embedded@1.100.0",
     "npm:@inlang/paraglide-js@2.21.0": "2.21.0_typescript@5.8.3",
     "npm:@jsr/libn__fuzzy@0.4.0": "0.4.0",
-    "npm:@jsr/trakt__api@0.4.23": "0.4.23_openapi3-ts@4.6.0",
+    "npm:@jsr/trakt__api@0.4.25": "0.4.25_openapi3-ts@4.6.0",
     "npm:@playwright/test@1.61.1": "1.61.1",
     "npm:@sentry/sveltekit@10.65.0": "10.65.0_@sveltejs+kit@2.69.2__@sveltejs+vite-plugin-svelte@7.2.0___svelte@5.56.4___vite@8.1.4____esbuild@0.28.1____sass-embedded@1.100.0___esbuild@0.28.1___sass-embedded@1.100.0__svelte@5.56.4__typescript@5.8.3__vite@8.1.4___esbuild@0.28.1___sass-embedded@1.100.0__esbuild@0.28.1__sass-embedded@1.100.0_vite@8.1.4__esbuild@0.28.1__sass-embedded@1.100.0_esbuild@0.28.1_sass-embedded@1.100.0",
     "npm:@svelte-put/shortcut@4.2.0": "4.2.0_svelte@5.56.4",
@@ -2084,14 +2084,14 @@
       "integrity": "sha512-aD9yjW6CMt37S3AMTc95LeuRXcKor69Zkr0aWOhYvinTOEAhEIuaJhP4pQqyQGaAC9HIrQcKh1PtRTK85kkVjA==",
       "tarball": "https://npm.jsr.io/~/11/@jsr/libn__fuzzy/0.4.0.tgz"
     },
-    "@jsr/trakt__api@0.4.23_openapi3-ts@4.6.0": {
-      "integrity": "sha512-djeYLwUy5Gi7fmwqUpaHsFgKX8EoxfPRRbuU6oE1afeHY4/WVzuw6xMA/TW84Kmn2bid10ncRbshC3cZvDf4Kw==",
+    "@jsr/trakt__api@0.4.25_openapi3-ts@4.6.0": {
+      "integrity": "sha512-sbJ8gqRfGYjBaxZWQAWra4OFfCA+zqWBsVitPTYDNSqysBIOIek2INkXavtKDEG6AkWXIpf6yaaqj+NkZu/Eog==",
       "dependencies": [
         "@anatine/zod-openapi",
         "@ts-rest/core",
         "zod"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.4.23.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.4.25.tgz"
     },
     "@lix-js/sdk@0.4.10": {
       "integrity": "sha512-0dMInAJK/67guTG5rRZaCEhvzC5cCXENOjaePA5AqMXrCE97kaY7SRor9e2vnoGsFIiGqXKlT0MCIoZj36G0gg==",
@@ -7529,7 +7529,7 @@
             "npm:@ethercorps/sveltekit-og@4.3.0",
             "npm:@inlang/paraglide-js@2.21.0",
             "npm:@jsr/libn__fuzzy@0.4.0",
-            "npm:@jsr/trakt__api@0.4.23",
+            "npm:@jsr/trakt__api@0.4.25",
             "npm:@playwright/test@1.61.1",
             "npm:@sentry/sveltekit@10.65.0",
             "npm:@svelte-put/shortcut@4.2.0",
