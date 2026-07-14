@@ -223,6 +223,40 @@ describe('buildHistoryPayload', () => {
       expect(result.shows).toHaveLength(0);
     });
 
+    it('should resolve positionally over the episode id in positional mode', () => {
+      const item: UniversalImportItem = {
+        action: 'history',
+        type: 'episode',
+        ids: { tvdb: 4321 },
+        showTvdb: 9001,
+        season: 2,
+        episode: 1,
+        watched_at,
+      };
+
+      const result = buildHistoryPayload([item], 'positional');
+
+      expect(result.episodes).toHaveLength(0);
+      expect(result.shows).toEqual([{
+        ids: { tvdb: 9001 },
+        seasons: [{ number: 2, episodes: [{ number: 1, watched_at }] }],
+      }]);
+    });
+
+    it('should fall back to the episode id in positional mode when no positional key', () => {
+      const item: UniversalImportItem = {
+        action: 'history',
+        type: 'episode',
+        ids: { tvdb: 4321 },
+        watched_at,
+      };
+
+      const result = buildHistoryPayload([item], 'positional');
+
+      expect(result.episodes).toEqual([{ ids: { tvdb: 4321 }, watched_at }]);
+      expect(result.shows).toHaveLength(0);
+    });
+
     it('should add an episode by its id when not positionally resolvable', () => {
       const item: UniversalImportItem = {
         action: 'history',

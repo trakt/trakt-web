@@ -1,5 +1,9 @@
 import type { HistoryAddRequest } from '@trakt/api';
-import type { UniversalImportItem } from '../ImportTypes.ts';
+import {
+  DEFAULT_EPISODE_MATCH_MODE,
+  type EpisodeMatchMode,
+  type UniversalImportItem,
+} from '../ImportTypes.ts';
 import { EPISODE_IDS, MOVIE_IDS, pickIds, SHOW_IDS } from './pickIds.ts';
 
 type HistoryMovie = NonNullable<HistoryAddRequest['movies']>[number];
@@ -87,13 +91,25 @@ function toPositionalShows(
 
 export function buildHistoryPayload(
   items: UniversalImportItem[],
+  episodeMatch: EpisodeMatchMode = DEFAULT_EPISODE_MATCH_MODE,
 ): HistoryAddRequest {
   const episodeItems = items.filter((item) => item.type === 'episode');
-  const idEpisodes = episodeItems.filter(hasEpisodeId);
-  const nonIdEpisodes = episodeItems.filter((item) => !hasEpisodeId(item));
 
-  const positionalEpisodes = nonIdEpisodes.filter(isPositional);
-  const leftoverEpisodes = nonIdEpisodes.filter((item) => !isPositional(item));
+  // 'id' (default): the episode's own id wins; positional is the fallback for
+  // episodes that carry no own id. 'positional': every episode with a
+  // positional key resolves by show + season/number (incl. id-carrying ones),
+  // and only episodes lacking a positional key fall back to their id.
+  const preferPositional = episodeMatch === 'positional';
+  const positionalEpisodes = episodeItems
+    .filter(isPositional)
+    .filter((item) => preferPositional || !hasEpisodeId(item));
+  const positionalSet = new Set<UniversalImportItem>(positionalEpisodes);
+  const idEpisodes = episodeItems.filter((item) =>
+    !positionalSet.has(item) && hasEpisodeId(item)
+  );
+  const leftoverEpisodes = episodeItems.filter((item) =>
+    !positionalSet.has(item) && !hasEpisodeId(item)
+  );
 
   const movies = items
     .filter((item) => item.type === 'movie')
