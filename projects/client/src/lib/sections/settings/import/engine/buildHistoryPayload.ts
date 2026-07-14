@@ -26,9 +26,14 @@ function toHistoryShow(
   return null;
 }
 
-// Prefer positional resolution (show id + season/episode number) over the
-// episode's own id: many Trakt episodes have no TVDB id, while the show does,
-// and (show, season, number) identifies an episode unambiguously.
+// Prefer the episode's own id (tvdb/trakt) over positional resolution: the
+// export's episode id is the exact identity of what was watched and survives
+// season/episode renumbering divergence between TVDB and Trakt. Positional
+// (show id + season/number) is the fallback for episodes carrying no own id.
+function hasEpisodeId(item: UniversalImportItem): boolean {
+  return pickIds(item.ids, EPISODE_IDS) != null;
+}
+
 function isPositional(
   item: UniversalImportItem,
 ): item is UniversalImportItem & { season: number; episode: number } {
@@ -84,8 +89,11 @@ export function buildHistoryPayload(
   items: UniversalImportItem[],
 ): HistoryAddRequest {
   const episodeItems = items.filter((item) => item.type === 'episode');
-  const positionalEpisodes = episodeItems.filter(isPositional);
-  const idEpisodes = episodeItems.filter((item) => !isPositional(item));
+  const idEpisodes = episodeItems.filter(hasEpisodeId);
+  const nonIdEpisodes = episodeItems.filter((item) => !hasEpisodeId(item));
+
+  const positionalEpisodes = nonIdEpisodes.filter(isPositional);
+  const leftoverEpisodes = nonIdEpisodes.filter((item) => !isPositional(item));
 
   const movies = items
     .filter((item) => item.type === 'movie')
@@ -103,12 +111,9 @@ export function buildHistoryPayload(
       .filter((item) => item.type === 'show')
       .flatMap((item) => toHistoryShow(item) ?? []),
     ...toPositionalShows(positionalEpisodes),
-    ...idEpisodes.flatMap(({ ids, watched_at }) => {
-      const resolvedIds = pickIds(ids, EPISODE_IDS);
-      return !resolvedIds && ids.imdb
-        ? [{ ids: { imdb: ids.imdb } as never, watched_at }]
-        : [];
-    }),
+    ...leftoverEpisodes.flatMap(({ ids, watched_at }) =>
+      ids.imdb ? [{ ids: { imdb: ids.imdb } as never, watched_at }] : []
+    ),
   ];
 
   return { movies, shows, episodes };
