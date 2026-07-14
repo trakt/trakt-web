@@ -5168,6 +5168,14 @@
         }
       }
     },
+    "import_match_toggle_label": {
+      "default": "Match episodes by season and episode number",
+      "description": "Label for the import toggle that switches episode matching from the episode's TVDB id (default) to show + season/episode number."
+    },
+    "import_match_toggle_hint": {
+      "default": "We recommend the default (match by TVDB id). Turn this on only if some episodes land on the wrong entry - results vary from show to show.",
+      "description": "Helper text under the episode-match toggle explaining the default is recommended and that positional matching results vary."
+    },
     "import_complete_synced": {
       "default": "{count} items synced successfully.",
       "description": "Text shown at the end of a successful import showing the count of synced items.",

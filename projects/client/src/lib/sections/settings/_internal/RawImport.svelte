@@ -16,7 +16,9 @@
   import { slide } from "svelte/transition";
   import {
     type AmbiguousImportItem,
+    DEFAULT_EPISODE_MATCH_MODE,
     DEFAULT_IMPORT_SOURCE,
+    type EpisodeMatchMode,
     IMPORT_SOURCE_CONFIGS,
     type ImportAction,
     type ImportActionSelection,
@@ -61,6 +63,7 @@
   type ImportUIState = SyncState<ImportStatus> & {
     selectedSource: ImportSource;
     selectedActions: ImportActionSelection;
+    episodeMatch: EpisodeMatchMode;
     parsedItems: ReadonlyArray<UniversalImportItem>;
     errorCount: number;
     unresolved: ReadonlyArray<UniversalImportItem>;
@@ -73,6 +76,7 @@
   const state = $state<ImportUIState>({
     selectedSource: DEFAULT_IMPORT_SOURCE,
     selectedActions: defaultSelectedActions(),
+    episodeMatch: DEFAULT_EPISODE_MATCH_MODE,
     status: "idle",
     parsedItems: [],
     processedCount: 0,
@@ -104,6 +108,9 @@
     list: state.selectedActions.list ? counts.list : 0,
   });
   const selectedTotalCount = $derived(selectedItems.length);
+  const hasEpisodes = $derived(
+    state.parsedItems.some((item) => item.type === "episode"),
+  );
 
   const sourceConfig = $derived(IMPORT_SOURCE_CONFIGS[state.selectedSource]);
   const isGuideCollapsed = $derived(
@@ -123,6 +130,7 @@
 
     state.parseError = null;
     state.selectedActions = defaultSelectedActions();
+    state.episodeMatch = DEFAULT_EPISODE_MATCH_MODE;
     state.status = "parsing";
 
     try {
@@ -173,6 +181,7 @@
         itemsToImport,
         {
           signal: abortController.signal,
+          episodeMatch: state.episodeMatch,
           onMatchProgress: (processed, total) => {
             state.matchProcessedCount = processed;
             state.matchTotalCount = total;
@@ -235,6 +244,7 @@
       abortController = new AbortController();
       const { errorCount } = await syncToTrakt(picked, {
         signal: abortController.signal,
+        episodeMatch: state.episodeMatch,
         onProgress: () => {},
         onError: (message) => {
           // FIXME: properly deal with this when tackling https://github.com/trakt/trakt-web/issues/2055
@@ -257,6 +267,7 @@
     abortController?.abort();
     state.status = "idle";
     state.selectedActions = defaultSelectedActions();
+    state.episodeMatch = DEFAULT_EPISODE_MATCH_MODE;
     state.parsedItems = [];
     state.processedCount = 0;
     state.errorCount = 0;
@@ -300,6 +311,10 @@
       [action]: isIncluded,
     };
   }
+
+  function onMatchChange(mode: EpisodeMatchMode) {
+    state.episodeMatch = mode;
+  }
 </script>
 
 {#snippet importRow()}
@@ -327,7 +342,10 @@
             {counts}
             selectedActions={state.selectedActions}
             source={state.selectedSource}
+            episodeMatch={state.episodeMatch}
+            showMatchToggle={hasEpisodes}
             onactionchange={onActionChange}
+            onmatchchange={onMatchChange}
             onstart={startImport}
             onreset={reset}
           />

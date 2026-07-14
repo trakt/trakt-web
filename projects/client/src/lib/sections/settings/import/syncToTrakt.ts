@@ -9,10 +9,16 @@ import { buildWatchlistPayload } from './engine/buildWatchlistPayload.ts';
 import { matchMovies } from './engine/matchMovies.ts';
 import { MOVIE_IDS, pickIds } from './engine/pickIds.ts';
 import { resolveMovieIds } from './engine/resolveMovieIds.ts';
-import type { ImportSyncResult, UniversalImportItem } from './ImportTypes.ts';
+import {
+  DEFAULT_EPISODE_MATCH_MODE,
+  type EpisodeMatchMode,
+  type ImportSyncResult,
+  type UniversalImportItem,
+} from './ImportTypes.ts';
 
 type SyncToTraktCallbacks = SyncEngineCallbacks & {
   onMatchProgress?: (processed: number, total: number) => void;
+  episodeMatch?: EpisodeMatchMode;
 };
 
 type TraktClient = ReturnType<typeof api>;
@@ -110,6 +116,7 @@ export async function syncToTrakt(
     onStart,
     onComplete,
     onMatchProgress,
+    episodeMatch = DEFAULT_EPISODE_MATCH_MODE,
     signal,
   }: SyncToTraktCallbacks,
 ): Promise<ImportSyncResult> {
@@ -148,7 +155,7 @@ export async function syncToTrakt(
     if (historyItems.length > 0) {
       await run(
         chunk(historyItems, SYNC_CHUNK_SIZE),
-        (batch) => buildHistoryPayload([...batch]),
+        (batch) => buildHistoryPayload([...batch], episodeMatch),
         (payload) => client.sync.history.add({ body: payload }),
       );
     }

@@ -6,6 +6,7 @@
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import { slide } from "svelte/transition";
   import type {
+    EpisodeMatchMode,
     ImportAction,
     ImportActionSelection,
     ImportCounts,
@@ -16,7 +17,10 @@
     counts: ImportCounts;
     selectedActions: ImportActionSelection;
     source: ImportSource;
+    episodeMatch: EpisodeMatchMode;
+    showMatchToggle: boolean;
     onactionchange: (action: ImportAction, isIncluded: boolean) => void;
+    onmatchchange: (mode: EpisodeMatchMode) => void;
     onstart: () => void;
     onreset: () => void;
   };
@@ -25,7 +29,10 @@
     counts,
     selectedActions,
     source,
+    episodeMatch,
+    showMatchToggle,
     onactionchange,
+    onmatchchange,
     onstart,
     onreset,
   }: ImportSummaryProps = $props();
@@ -104,6 +111,23 @@
     {/each}
   </div>
 
+  {#if showMatchToggle}
+    <div class="import-summary-match">
+      <span class="import-summary-switch">
+        <Switch
+          label={m.import_match_toggle_label()}
+          checked={episodeMatch === "positional"}
+          onclick={() =>
+          onmatchchange(episodeMatch === "positional" ? "id" : "positional")}
+        />
+      </span>
+      <div class="match-copy">
+        <p aria-hidden="true">{m.import_match_toggle_label()}</p>
+        <p class="secondary match-hint">{m.import_match_toggle_hint()}</p>
+      </div>
+    </div>
+  {/if}
+
   {#if isVipLimitExceeded}
     <UpsellCta source="import" variant="small">
       {m.import_vip_limit_exceeded({ count: selectedTotalItems })}
@@ -176,6 +200,23 @@
       --tick-size: var(--ni-14);
       --tick-offset: var(--ni-3);
     }
+  }
+
+  .import-summary-match {
+    display: grid;
+    grid-template-columns: var(--ni-44) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--gap-xs);
+  }
+
+  .match-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+  }
+
+  .match-hint {
+    font-size: var(--font-size-tag);
   }
 
   .import-summary-actions {
