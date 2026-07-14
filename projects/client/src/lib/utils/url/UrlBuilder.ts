@@ -313,6 +313,7 @@ export const UrlBuilder = {
   },
   settings: {
     general: () => '/settings',
+    generalDetail: () => '/settings/general',
     data: () => '/settings/data',
     apps: () => '/settings/apps',
     appsConnected: () => '/settings/apps/connected',

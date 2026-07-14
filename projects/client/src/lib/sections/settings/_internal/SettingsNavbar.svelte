@@ -1,7 +1,7 @@
 <script lang="ts">
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import SettingsMobileBackBar from "./SettingsMobileBackBar.svelte";
   import SettingsNavLinks from "./SettingsNavLinks.svelte";
-  import SettingsNavMenu from "./SettingsNavMenu.svelte";
 </script>
 
 <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
@@ -11,7 +11,7 @@
 </RenderFor>
 
 <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
-  <SettingsNavMenu />
+  <SettingsMobileBackBar />
 </RenderFor>
 
 <style lang="scss">

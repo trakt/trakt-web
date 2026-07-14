@@ -55,5 +55,9 @@
   .trakt-settings-content {
     min-width: 0;
     max-width: var(--settings-content-max-width);
+
+    @include for-tablet-sm-and-below {
+      max-width: none;
+    }
   }
 </style>
