@@ -1,6 +1,7 @@
 import '$lib/polyfills/at.ts';
 import '$lib/polyfills/mapGroupBy.ts';
 import '$lib/polyfills/randomUUID.ts';
+import '$lib/polyfills/toReversed.ts';
 import '$lib/polyfills/toSorted.ts';
 import { captureWebviewSession } from '$lib/features/webview/captureWebviewSession.ts';
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
