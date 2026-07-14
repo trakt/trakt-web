@@ -1,5 +1,6 @@
 <script lang="ts">
   import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
@@ -11,7 +12,9 @@
 </script>
 
 {#snippet headerActions()}
-  <LogoutButton style="action" />
+  <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
+    <LogoutButton style="action" />
+  </RenderFor>
 {/snippet}
 
 <TraktPage
