@@ -8,6 +8,7 @@
   import * as Sentry from "@sentry/sveltekit";
   import { onMount } from "svelte";
   import { isErrorExempt } from "./_internal/errorExemptions.ts";
+  import { isInjectedScriptError } from "./_internal/isInjectedScriptError.ts";
   import { mapToWellKnownError } from "./_internal/mapToWellKnownError";
   import { FETCH_ERROR_EVENT } from "./constants";
   import { EXTENSION_PROTOCOLS } from "./constants/index.ts";
@@ -56,6 +57,12 @@
     // Filter out extension noise and third-party scripts
     const isExternalNoise =
       !error.stack?.includes(window.location.hostname) ||
+      // Scripts injected into the page (e.g. the iOS app's WKWebView
+      // evaluateJavaScript scrolling to a YIR anchor that does not exist
+      // for this year) throw as `global code` attributed to the document
+      // URL. Nothing the page can act on — ignore instead of replacing
+      // the page with the full-screen error.
+      isInjectedScriptError(error) ||
       EXTENSION_PROTOCOLS.some((protocol) => error.stack?.includes(protocol)) ||
       // YouTube IFrame API (www-widgetapi.js) can be injected by
       // browser extensions as a second copy alongside Plyr's own instance.
