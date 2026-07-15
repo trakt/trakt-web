@@ -1,10 +1,9 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { iffy } from "$lib/utils/function/iffy.ts";
@@ -32,6 +31,20 @@
     toggleLibrary,
     selectAccount,
   } = usePlexServer({ serverId: iffy(() => serverId) });
+
+  const noneAccount = "__none__";
+
+  const accountOptions = $derived([
+    { value: noneAccount, label: "—" },
+    ...($serverAccounts?.accounts ?? []).map((account) => ({
+      value: String(account.id),
+      label: account.name,
+    })),
+  ]);
+
+  const selectedAccountValue = $derived(
+    $selectedUserId === "" ? noneAccount : $selectedUserId,
+  );
 </script>
 
 <div class="trakt-plex-server-settings">
@@ -57,35 +70,14 @@
       {#if $serverAccounts.accounts.length > 0}
         <SettingsGroupRow title={m.label_plex_sync_as()} variant="custom">
           {#snippet icon()}<ProfileIcon />{/snippet}
-          <DropdownList
-            size="small"
-            color="default"
-            style="flat"
-            preferNative
-            label={m.label_plex_sync_as()}
-          >
-            {$serverAccounts.accounts.find(
-              (a) => String(a.id) === $selectedUserId,
-            )?.name ?? "—"}
-            {#snippet items()}
-              <DropdownItem
-                color="default"
-                disabled={$selectedUserId === ""}
-                onclick={() => selectAccount("")}
-              >
-                —
-              </DropdownItem>
-              {#each $serverAccounts.accounts as account (account.id)}
-                <DropdownItem
-                  color="default"
-                  disabled={String(account.id) === $selectedUserId}
-                  onclick={() => selectAccount(String(account.id))}
-                >
-                  {account.name}
-                </DropdownItem>
-              {/each}
-            {/snippet}
-          </DropdownList>
+          <SingleSelect
+            options={accountOptions}
+            value={selectedAccountValue}
+            placeholder={m.label_plex_sync_as()}
+            autoWidth
+            onChange={(value) =>
+              selectAccount(value === noneAccount ? "" : value)}
+          />
         </SettingsGroupRow>
       {/if}
 

@@ -1,9 +1,8 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import NavigationGuard from "$lib/components/NavigationGuard.svelte";
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useAnalytics } from "$lib/features/analytics/useAnalytics";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
@@ -148,6 +147,13 @@
       (source) => source.type === activeSource.type,
     )?.label() ?? activeSource.type,
   );
+
+  const sourceOptions = $derived(
+    CLEAR_DATA_SOURCES.map((source) => ({
+      value: source.type,
+      label: source.label(),
+    })),
+  );
 </script>
 
 <NavigationGuard
@@ -162,26 +168,13 @@
     <div class="trakt-clear-data">
       <SettingsRow title={m.text_source()}>
         <div class="trakt-clear-source">
-          <DropdownList
-            label={m.dropdown_label_clear_source()}
-            style="flat"
-            size="small"
-            variant="secondary"
-            color="default"
-            preferNative
-          >
-            {currentSourceText}
-            {#snippet items()}
-              {#each CLEAR_DATA_SOURCES as source (source.type)}
-                <DropdownItem
-                  disabled={source.type === activeSource.type}
-                  onclick={() => onSourceChange(source.type)}
-                >
-                  {source.label()}
-                </DropdownItem>
-              {/each}
-            {/snippet}
-          </DropdownList>
+          <SingleSelect
+            options={sourceOptions}
+            value={activeSource.type}
+            placeholder={m.dropdown_label_clear_source()}
+            autoWidth
+            onChange={(value) => onSourceChange(value as ClearSourceType)}
+          />
 
           {#snippet loadingIcon()}
             <LoadingIndicator />

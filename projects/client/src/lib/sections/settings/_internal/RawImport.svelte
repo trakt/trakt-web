@@ -1,9 +1,8 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import NavigationGuard from "$lib/components/NavigationGuard.svelte";
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useAnalytics } from "$lib/features/analytics/useAnalytics";
@@ -305,6 +304,13 @@
     }
   };
 
+  const sourceOptions = $derived(
+    Object.values(IMPORT_SOURCE_CONFIGS).map((config) => ({
+      value: config.id,
+      label: getTabLabel(config),
+    })),
+  );
+
   function onActionChange(action: ImportAction, isIncluded: boolean) {
     state.selectedActions = {
       ...state.selectedActions,
@@ -402,26 +408,13 @@
   <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
     <div class="trakt-import-source">
       <span>{m.text_source()}</span>
-      <DropdownList
-        label={m.dropdown_label_import_source()}
-        style="flat"
-        size="small"
-        variant="secondary"
-        color="default"
-        preferNative
-      >
-        {getTabLabel(sourceConfig)}
-        {#snippet items()}
-          {#each Object.values(IMPORT_SOURCE_CONFIGS) as config (config.id)}
-            <DropdownItem
-              disabled={config.id === state.selectedSource}
-              onclick={() => onSourceChange(config.id)}
-            >
-              {getTabLabel(config)}
-            </DropdownItem>
-          {/each}
-        {/snippet}
-      </DropdownList>
+      <SingleSelect
+        options={sourceOptions}
+        value={state.selectedSource}
+        placeholder={m.dropdown_label_import_source()}
+        autoWidth
+        onChange={onSourceChange}
+      />
     </div>
     {@render importRow()}
   </RenderFor>
