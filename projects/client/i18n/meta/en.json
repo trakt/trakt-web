@@ -6963,6 +6963,75 @@
         }
       }
     },
+    "list_summary_range_up_to": {
+      "default": "Up to {value}",
+      "description": "Smart list filter summary for an upper-bound-only range, e.g. 'Up to 90'.",
+      "variables": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "list_summary_range_labeled_up_to": {
+      "default": "{label} up to {value}",
+      "description": "Smart list filter summary for a labeled upper-bound-only range, e.g. 'Trakt up to 80%'.",
+      "variables": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "list_summary_range_between": {
+      "default": "{min} to {max}",
+      "description": "Smart list filter summary for a range with both bounds, e.g. '60 to 80'.",
+      "variables": {
+        "min": {
+          "type": "string"
+        },
+        "max": {
+          "type": "string"
+        }
+      }
+    },
+    "list_summary_range_labeled_between": {
+      "default": "{label} {min} to {max}",
+      "description": "Smart list filter summary for a labeled range with both bounds, e.g. 'Trakt 60% to 80%'.",
+      "variables": {
+        "label": {
+          "type": "string"
+        },
+        "min": {
+          "type": "string"
+        },
+        "max": {
+          "type": "string"
+        }
+      }
+    },
+    "list_summary_range_from": {
+      "default": "{value} and up",
+      "description": "Smart list filter summary for a lower-bound-only range, e.g. '60 and up'.",
+      "variables": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "list_summary_range_labeled_from": {
+      "default": "{label} {value} and up",
+      "description": "Smart list filter summary for a labeled lower-bound-only range, e.g. 'Trakt 60% and up'.",
+      "variables": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
     "warning_smart_lists_limit": {
       "default": "You've reached your smart list limit",
       "description": "Warning text shown when a user has reached their smart list limit and attempts to create a new smart list."
