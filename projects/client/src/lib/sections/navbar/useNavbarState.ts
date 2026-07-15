@@ -8,6 +8,7 @@ import {
 } from 'rxjs';
 import type { Snippet } from 'svelte';
 import { isShallowEqual } from '$lib/utils/object/isShallowEqual.ts';
+import type { NavbarHeaderState } from './models/NavbarHeaderState.ts';
 
 export type NavbarMode = 'full' | 'minimal' | 'hidden';
 
@@ -17,11 +18,7 @@ type NavbarState = {
   hasFilters: boolean;
   showFilters: boolean;
   headerActions?: Snippet;
-  header?: {
-    title: string;
-    metaInfo?: string | Snippet;
-    actions?: Snippet;
-  };
+  header?: NavbarHeaderState;
   sidebar: {
     mode: 'default' | 'fixed';
   };

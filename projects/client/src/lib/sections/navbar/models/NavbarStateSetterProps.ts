@@ -1,5 +1,6 @@
 import type { NavbarMode } from '$lib/sections/navbar/useNavbarState.ts';
 import type { Snippet } from 'svelte';
+import type { NavbarHeaderState } from './NavbarHeaderState.ts';
 
 export type NavbarStateSetterProps = {
   actions?: Snippet;
@@ -9,11 +10,7 @@ export type NavbarStateSetterProps = {
   hasFilters?: boolean;
   showFilters?: boolean;
   headerActions?: Snippet;
-  header?: {
-    title: string;
-    metaInfo?: string | Snippet;
-    actions?: Snippet;
-  };
+  header?: NavbarHeaderState;
   sidebar?: {
     mode: 'default' | 'fixed';
   };
