@@ -41,25 +41,25 @@ function movieOn(day: number, id: number): ReleasesCalendarEntry {
 }
 
 describe('filterReleasesItems', () => {
-  it('should keep only future items and the next episode per show', () => {
-    const pastEpisode = episodeOn(1, 100);
-    const movie = movieOn(2, 200);
+  it('should keep today and future items and the next episode per show', () => {
+    const yesterdayEpisode = episodeOn(1, 100);
+    const todayMovie = movieOn(2, 200);
     const firstShowEpisode = episodeOn(3, 101);
     const secondShowEpisode = episodeOn(4, 102);
 
     const result = filterReleasesItems({
       entries: [
         secondShowEpisode,
-        pastEpisode,
-        movie,
+        yesterdayEpisode,
+        todayMovie,
         firstShowEpisode,
       ],
       limit: 10,
-      now: releaseDate(1),
+      now: releaseDate(2),
     });
 
     expect(result).to.deep.equal([
-      movie,
+      todayMovie,
       firstShowEpisode,
     ]);
   });

@@ -1,5 +1,6 @@
 import type { ReleasesCalendarEntry } from '$lib/requests/queries/calendars/releasesCalendarQuery.ts';
 import type { UpcomingEpisodeEntry } from '$lib/requests/queries/calendars/upcomingEpisodesQuery.ts';
+import { getStartOfDay } from '$lib/utils/date/getStartOfDay.ts';
 
 type FilterReleasesItemsParams = {
   entries: readonly ReleasesCalendarEntry[];
@@ -23,10 +24,10 @@ export function filterReleasesItems({
   }
 
   const seenShowIds = new Set<number>();
-  const nowTime = now.getTime();
+  const startOfToday = getStartOfDay(now).getTime();
 
   return entries
-    .filter((entry) => entry.effectiveReleaseDate.getTime() > nowTime)
+    .filter((entry) => entry.effectiveReleaseDate.getTime() >= startOfToday)
     .toSorted((a, b) =>
       a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime()
     )
