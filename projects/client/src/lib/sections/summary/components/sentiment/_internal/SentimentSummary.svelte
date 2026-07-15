@@ -60,8 +60,9 @@
   }
 
   .trakt-sentiment-aspects {
-    display: flex;
-    gap: var(--gap-s);
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
 
     color: var(--color-text-primary);
   }
