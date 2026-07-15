@@ -66,6 +66,7 @@
   {videos}
   {seasons}
   {currentSeason}
+  hostsEpisode={false}
   type="show"
 />
 

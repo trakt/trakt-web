@@ -34,6 +34,7 @@
   import { useEpisodeRating } from "./useEpisodeRating.ts";
 
   const {
+    slug,
     show,
     seasons,
     season,
@@ -47,8 +48,9 @@
     onSocialOpen,
     onHistoryOpen,
   }: {
-    show: ShowEntry;
-    seasons: Season[];
+    slug: string;
+    show?: ShowEntry;
+    seasons?: Season[];
     season: number;
     episode: number;
     entry: EpisodeEntry | Nil;
@@ -64,7 +66,7 @@
   // The ratings query only needs the slug/season/episode numbers, so it can
   // resolve independently of the episode summary entry.
   const params$ = fromRune(() => ({
-    slug: show.slug,
+    slug,
     season,
     episode,
   }));
@@ -76,7 +78,7 @@
   // Seasons that actually have episodes, ordered so previous/next can
   // cross season boundaries instead of clamping to the current season.
   const orderedSeasons = $derived(
-    seasons
+    (seasons ?? [])
       .filter((s) => s.episodes.count > 0)
       .sort((a, b) => a.number - b.number),
   );
@@ -124,14 +126,14 @@
     nextTarget ? buildEpisodeDrawerLink(nextTarget) : undefined,
   );
 
-  const genre = $derived(show.genres.at(0));
+  const genre = $derived(show?.genres?.at(0));
 
   const subtitle = $derived(
     entry
       ? [
           toHumanDate(new Date(), entry.airDate, getLocale()),
           toHumanDuration({ minutes: entry.runtime }, languageTag()),
-          show.certification,
+          show?.certification,
           genre ? toTranslatedGenre(genre) : undefined,
         ]
           .filter(Boolean)
@@ -160,7 +162,7 @@
 </script>
 
 {#snippet cover()}
-  {#if entry}
+  {#if entry && show}
     <EpisodeInfoPoster {show} episode={entry} />
   {:else}
     <div class="skeleton-cover">
@@ -281,7 +283,7 @@
   </div>
 
   <div class="episode-info-actions">
-    {#if entry}
+    {#if entry && show}
       <div class="episode-info-actions-content" in:fade={fadeIn}>
         <RenderFor audience="authenticated">
           <EpisodeActions
@@ -315,7 +317,7 @@
   </div>
 
   <div class="episode-info-overview">
-    {#if entry}
+    {#if entry && show}
       {#if entry.overview}
         <div in:fade={fadeIn}>
           <SpoilerSection media={entry} {show} type="episode">

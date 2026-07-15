@@ -7,6 +7,11 @@
   import { useUserSeason } from "$lib/sections/lists/stores/useUserSeason";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
+  import {
+    SummaryDrawers,
+    summaryDrawerNavigation,
+  } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
+  import EpisodeDrawerHost from "$lib/sections/summary/components/episode-drawer/EpisodeDrawerHost.svelte";
   import { findActiveSeason } from "$lib/utils/media/findActiveSeason";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -66,6 +71,13 @@
       $seasons != null,
   );
   const isReady = $derived(!$isLoading && !isNaN(currentSeason) && hasCoreData);
+
+  // The episode drawer only needs slug + season + episode (all from the URL),
+  // so it mounts independently of the show summary's loading gate above and
+  // fills in show/seasons-dependent bits progressively as they resolve.
+  const { drawer, close, sourceEpisode } = $derived(
+    summaryDrawerNavigation(page.url.searchParams),
+  );
 </script>
 
 <TraktPage
@@ -97,5 +109,16 @@
     <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
       <div style="height: 100dvh; display:flex"></div>
     </RenderFor>
+  {/if}
+
+  {#if drawer === SummaryDrawers.Episode && !isNaN(currentSeason) && sourceEpisode != null}
+    <EpisodeDrawerHost
+      slug={params.slug}
+      show={$show}
+      seasons={$seasons}
+      season={currentSeason}
+      episode={sourceEpisode}
+      onClose={close}
+    />
   {/if}
 </TraktPage>

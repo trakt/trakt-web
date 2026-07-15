@@ -35,12 +35,14 @@
     videos,
     seasons,
     currentSeason,
+    hostsEpisode = true,
     ...details
   }: {
     sentiment?: SentimentAnalysis | null | undefined;
     videos?: MediaVideo[];
     seasons?: Season[];
     currentSeason?: number;
+    hostsEpisode?: boolean;
   } & MediaDetailsProps = $props();
 
   const { drawer, close, sourceCommentId, sourceEpisode } = $derived(
@@ -146,8 +148,9 @@
   />
 {/if}
 
-{#if drawer === SummaryDrawers.Episode && seasons && currentSeason != null && sourceEpisode != null && showEntry}
+{#if hostsEpisode && drawer === SummaryDrawers.Episode && seasons && currentSeason != null && sourceEpisode != null && showEntry}
   <EpisodeDrawerHost
+    slug={showEntry.slug}
     show={showEntry}
     {seasons}
     season={currentSeason}

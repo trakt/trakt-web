@@ -2,6 +2,7 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
   import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -27,13 +28,15 @@
 
   const {
     onClose,
+    slug,
     show,
     seasons,
     season,
     episode,
   }: {
-    show: ShowEntry;
-    seasons: Season[];
+    slug: string;
+    show?: ShowEntry;
+    seasons?: Season[];
     season: number;
     episode: number;
     onClose: () => void;
@@ -51,13 +54,13 @@
 
   const socialTarget = $derived({
     type: "episode" as const,
-    slug: show.slug,
+    slug,
     season,
     episode,
   });
 
   const params$ = fromRune(() => ({
-    slug: show.slug,
+    slug,
     season,
     episode,
   }));
@@ -107,7 +110,7 @@
   });
 
   const socialTitle = $derived(
-    $episodeEntry ? episodeActivityTitle($episodeEntry, show) : show.title,
+    $episodeEntry ? episodeActivityTitle($episodeEntry, show) : (show?.title ?? ""),
   );
 </script>
 
@@ -125,7 +128,7 @@
 
 {#snippet infoContent()}
   <div class="episode-info-content">
-    {#if $episodeEntry}
+    {#if $episodeEntry && show}
       <MediaStats type="episode" episode={$episodeEntry} {show} crew={$crew} />
     {:else}
       <MediaStatsSkeleton />
@@ -140,28 +143,32 @@
 {/snippet}
 
 {#snippet reviewsContent()}
-  {#if $episodeEntry}
+  {#if $episodeEntry && show}
     <EpisodeReviewsTab {show} episode={$episodeEntry} />
-  {:else if $isLoading}
+  {:else if $isLoading || !show}
     <EpisodeReviewsTabSkeleton />
   {/if}
 {/snippet}
 
 {#snippet episodesContent()}
-  <SeasonEpisodesTab
-    {show}
-    {seasons}
-    currentSeason={season}
-    currentEpisode={episode}
-    showSeasonSelector
-  />
+  {#if show && seasons}
+    <SeasonEpisodesTab
+      {show}
+      {seasons}
+      currentSeason={season}
+      currentEpisode={episode}
+      showSeasonSelector
+    />
+  {:else}
+    <LoadingIndicator />
+  {/if}
 {/snippet}
 
 <Drawer
   {onClose}
   onOpened={() => (isOpen = true)}
   // title={m.drawer_title_episode_information()}
-  title={show.title}
+  title={show?.title ?? ""}
   metaInfo={episodeTitle}
   size="large"
   classList="trakt-episode-drawer"
@@ -173,6 +180,7 @@
       {/key}
 
       <EpisodeInfoHeader
+        {slug}
         {show}
         {seasons}
         {season}
@@ -215,7 +223,7 @@
   {/if}
 </Drawer>
 
-{#if isRatingsOpen && $episodeEntry}
+{#if isRatingsOpen && $episodeEntry && show}
   <RatingsDrawer
     type="episode"
     episode={$episodeEntry}
@@ -236,7 +244,7 @@
   />
 {/if}
 
-{#if isHistoryOpen && $episodeEntry}
+{#if isHistoryOpen && $episodeEntry && show}
   <HistoryDrawerHost
     type="episode"
     episode={$episodeEntry}
