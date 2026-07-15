@@ -2,10 +2,12 @@
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { languageTag } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { SmartList } from "$lib/requests/queries/users/smartListQuery.ts";
   import ListSummaryCard from "$lib/sections/lists/components/ListSummaryCard.svelte";
+  import { toPercentage } from "$lib/utils/formatting/number/toPercentage.ts";
   import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import SmartListActions from "./SmartListActions.svelte";
@@ -65,33 +67,53 @@
     const [min, max] = value.split("-");
 
     if (min && max) {
-      return `${min}-${max}`;
+      return m.list_summary_range_between({ min, max });
     }
 
     if (min) {
-      return `${min}+`;
+      return m.list_summary_range_from({ value: min });
     }
 
     if (max) {
-      return `Up to ${max}`;
+      return m.list_summary_range_up_to({ value: max });
     }
 
     return value;
+  }
+
+  function toRatingPercentage(value: string): string {
+    const numeric = Number(value);
+
+    if (Number.isNaN(numeric)) {
+      return value;
+    }
+
+    return toPercentage(numeric / 100, languageTag());
   }
 
   function formatPercentRange(value: string, label: string): string {
     const [min, max] = value.split("-");
 
     if (min && max) {
-      return `${label} ${min}-${max}%`;
+      return m.list_summary_range_labeled_between({
+        label,
+        min: toRatingPercentage(min),
+        max: toRatingPercentage(max),
+      });
     }
 
     if (min) {
-      return `${label} ${min}%+`;
+      return m.list_summary_range_labeled_from({
+        label,
+        value: toRatingPercentage(min),
+      });
     }
 
     if (max) {
-      return `${label} up to ${max}%`;
+      return m.list_summary_range_labeled_up_to({
+        label,
+        value: toRatingPercentage(max),
+      });
     }
 
     return `${label} ${value}`;
