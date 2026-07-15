@@ -5395,6 +5395,10 @@
       "default": "Upgrade to VIP to unlock more insights.",
       "description": "Text shown to encourage non-VIP users to subscribe to explore a more detailed sentiment analysis of a movie or show."
     },
+    "text_vip_upsell_smart_recommendations": {
+      "default": "Get Smart Recs. Built on your stats, not the crowd.",
+      "description": "Heading on the upsell card shown to free users in place of the fourth recommendation on the dashboard, encouraging them to subscribe to VIP for personalized smart recommendations."
+    },
     "text_sentiment_example": {
       "default": "Example from \"{title}\"",
       "description": "Text used to indicate that a sentiment analysis example is from a specific movie or show.",
