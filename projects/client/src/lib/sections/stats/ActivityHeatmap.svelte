@@ -153,6 +153,7 @@
   .trakt-heatmap-cell {
     width: 100%;
     aspect-ratio: 1;
+    box-sizing: border-box;
     border-radius: var(--border-radius-s);
     transition: transform calc(0.5 * var(--transition-increment)) ease-in-out;
     cursor: default;
@@ -173,9 +174,10 @@
       background: var(--color-heatmap-l4);
     }
 
-    &[data-future] {
-      background: var(--color-heatmap-empty);
-      opacity: 0.35;
+    &[data-future],
+    &[data-today][data-intensity="0"] {
+      background: transparent;
+      border: var(--border-thickness-xxs) solid var(--color-heatmap-empty);
     }
 
     &[data-today] {
