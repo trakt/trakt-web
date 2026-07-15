@@ -189,10 +189,6 @@
   --width-sentiment-card: min(var(--preferred-sentiment-card-width), 85vw);
   --height-sentiment-card: var(--ni-188);
 
-  @include for-mobile {
-    --height-sentiment-card: var(--ni-160);
-  }
-
   /**
    * Pulse card dimensions
    */
