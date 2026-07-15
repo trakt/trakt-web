@@ -10,6 +10,7 @@
     disabled = false,
     autoWidth = false,
     onChange,
+    icon,
     trigger,
   }: SingleSelectProps = $props();
 
@@ -27,6 +28,7 @@
   {placeholder}
   {disabled}
   {autoWidth}
+  {icon}
   {trigger}
   triggerLabel={selectedLabel}
   hasValue={Boolean(value)}

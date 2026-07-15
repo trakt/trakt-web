@@ -1,8 +1,6 @@
 <script lang="ts">
-  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import { toTranslatedVideoType } from "$lib/utils/formatting/string/toTranslatedVideoType";
 
@@ -13,25 +11,21 @@
   };
 
   const { types, active, onchange }: VideoTypeDropdownProps = $props();
+
+  const options = $derived(
+    types.map((type) => ({
+      value: type,
+      label: toTranslatedVideoType(type),
+    })),
+  );
 </script>
 
 {#if types.length > 1}
-  <DropdownList
-    preferNative
-    label={m.dropdown_label_extras()}
-    style="flat"
-    variant="primary"
-    color="blue"
-    size="small"
-    navigationType={DpadNavigationType.Item}
-  >
-    {toTranslatedVideoType(active)}
-    {#snippet items()}
-      {#each types as type}
-        <DropdownItem color="blue" onclick={() => onchange(type)}>
-          {toTranslatedVideoType(type)}
-        </DropdownItem>
-      {/each}
-    {/snippet}
-  </DropdownList>
+  <SingleSelect
+    {options}
+    value={active}
+    placeholder={m.dropdown_label_extras()}
+    autoWidth
+    onChange={(value) => onchange(value as MediaVideo["type"])}
+  />
 {/if}

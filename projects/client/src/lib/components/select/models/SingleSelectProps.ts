@@ -8,5 +8,6 @@ export type SingleSelectProps = {
   disabled?: boolean;
   autoWidth?: boolean;
   onChange: (value: string) => void;
+  icon?: Snippet;
   trigger?: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
 };
