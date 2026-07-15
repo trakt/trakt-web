@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { CtaItemIntl } from "../CtaItemIntl";
   import type { ListCta } from "../models/Cta";
+  import { shrinkTextOnOverflow } from "$lib/utils/actions/shrinkTextOnOverflow";
   import CtaCard from "./CtaCard.svelte";
   import { useCtaCardVariant } from "./useCtaCardVariant";
   import { usePlaceholderCover } from "./usePlaceholderCover";
@@ -12,5 +13,5 @@
 </script>
 
 <CtaCard variant={$defaultVariant} src={$cover?.url.medium}>
-  <p>{intl.text({ cta })}</p>
+  <p use:shrinkTextOnOverflow>{intl.text({ cta })}</p>
 </CtaCard>
