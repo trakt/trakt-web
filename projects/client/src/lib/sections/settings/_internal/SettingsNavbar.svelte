@@ -1,6 +1,5 @@
 <script lang="ts">
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import SettingsMobileBackBar from "./SettingsMobileBackBar.svelte";
   import SettingsNavLinks from "./SettingsNavLinks.svelte";
 </script>
 
@@ -8,10 +7,6 @@
   <nav class="trakt-settings-navbar">
     <SettingsNavLinks />
   </nav>
-</RenderFor>
-
-<RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
-  <SettingsMobileBackBar />
 </RenderFor>
 
 <style lang="scss">

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -6,9 +7,21 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import Settings from "$lib/sections/settings/Settings.svelte";
+  import { settingsNavbarHeader } from "$lib/sections/settings/settingsNavbarHeader.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   const { children } = $props();
+
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const isTabletSmall = useMedia(WellKnownMediaQuery.tabletSmall);
+
+  const header = $derived(
+    settingsNavbarHeader({
+      pathname: page.url.pathname,
+      isCompact: $isMobile || $isTabletSmall,
+    }),
+  );
 </script>
 
 {#snippet headerActions()}
@@ -22,11 +35,7 @@
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_settings()}
 >
-  <NavbarStateSetter
-    showFilters={false}
-    {headerActions}
-    header={{ title: m.page_title_settings() }}
-  />
+  <NavbarStateSetter showFilters={false} {headerActions} {header} />
   <TraktPageCoverSetter />
 
   <Settings>
