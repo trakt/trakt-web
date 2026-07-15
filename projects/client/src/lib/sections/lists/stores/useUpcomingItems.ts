@@ -13,6 +13,7 @@ import {
 import { upcomingMediaQuery } from '$lib/requests/queries/calendars/upcomingMediaQuery.ts';
 import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMoviesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { getStartOfDay } from '$lib/utils/date/getStartOfDay.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { map } from 'rxjs';
 
@@ -64,11 +65,12 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
   const baseLoading = query.pipe(map(($query) => $query.isLoading));
 
   const list = query.pipe(
-    map(($query) =>
-      ($query.data ?? [])
-        .filter((d) => d.effectiveReleaseDate.getTime() > Date.now())
-        .slice(0, props.limit)
-    ),
+    map(($query) => {
+      const startOfToday = getStartOfDay(new Date()).getTime();
+      return ($query.data ?? [])
+        .filter((d) => d.effectiveReleaseDate.getTime() >= startOfToday)
+        .slice(0, props.limit);
+    }),
     overlay.operator,
   );
 
