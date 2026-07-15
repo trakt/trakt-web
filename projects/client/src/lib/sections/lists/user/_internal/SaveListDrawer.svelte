@@ -3,6 +3,7 @@
   import Form from "$lib/components/form/Form.svelte";
   import FormInput from "$lib/components/form/FormInput.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ListPrivacy } from "$lib/requests/models/ListPrivacy";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
@@ -31,12 +32,14 @@
 
   const isOpen = writable(true);
 
+  const { user } = useUser();
+
   const defaultValues = iffy(() => {
     if (props.type === "create") {
       return {
         name: "",
         description: "",
-        privacy: "public" as const,
+        privacy: ($user?.isPrivate ? "private" : "public") as ListPrivacy,
       };
     }
 
