@@ -7,7 +7,7 @@
   import CardCover from "$lib/components/card/CardCover.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
-  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import { CalendarTagIntlProvider } from "./_internal/CalendarTagIntlProvider";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaCardProps } from "$lib/sections/lists/components/models/MediaCardProps";
@@ -42,7 +42,7 @@
 
 {#snippet tag()}
   <div class="trakt-media-tag">
-    <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} type="tag" />
+    <AirDateTag i18n={CalendarTagIntlProvider} airDate={media.airDate} type="tag" />
   </div>
 {/snippet}
 
