@@ -1,6 +1,5 @@
 <script lang="ts">
-  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import ServerIcon from "$lib/components/icons/ServerIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { PlexServer } from "$lib/requests/plex/plexServersQuery.ts";
@@ -16,8 +15,8 @@
     onSelectServer: (id: string) => void;
   } = $props();
 
-  const selectedServer = $derived(
-    servers.find((s) => s.id === selectedServerId),
+  const options = $derived(
+    servers.map((server) => ({ value: server.id, label: server.name })),
   );
 </script>
 
@@ -25,26 +24,13 @@
   <SettingsGroupRow title={m.label_plex_server()} variant="custom">
     {#snippet icon()}<ServerIcon />{/snippet}
     <div class="trakt-server-controls">
-      <DropdownList
-        size="small"
-        color="default"
-        style="flat"
-        preferNative
-        label={m.label_plex_server()}
-      >
-        {selectedServer?.name ?? "—"}
-        {#snippet items()}
-          {#each servers as server (server.id)}
-            <DropdownItem
-              color="default"
-              disabled={server.id === selectedServerId}
-              onclick={() => onSelectServer(server.id)}
-            >
-              {server.name}
-            </DropdownItem>
-          {/each}
-        {/snippet}
-      </DropdownList>
+      <SingleSelect
+        {options}
+        value={selectedServerId}
+        placeholder={m.label_plex_server()}
+        autoWidth
+        onChange={onSelectServer}
+      />
     </div>
   </SettingsGroupRow>
 {/if}

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
+  import { goto } from "$app/navigation";
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { CrewPosition } from "$lib/requests/models/CrewPosition";
   import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
@@ -16,23 +16,25 @@
     allPositions,
     buildPositionHref,
   }: CreditsPositionDropdownProps = $props();
+
+  const options = $derived(
+    allPositions.map((position) => ({
+      value: position,
+      label: toTranslatedPosition(position),
+    })),
+  );
+
+  const onPositionChange = (value: string) => {
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
+    goto(buildPositionHref(value as CrewPosition), { noScroll: true });
+  };
 </script>
 
-<DropdownList
-  label={m.dropdown_label_person_position()}
-  preferNative
-  style="flat"
-  variant="primary"
-  color="blue"
-  size="small"
+<SingleSelect
+  {options}
+  value={selectedPosition}
+  placeholder={m.dropdown_label_person_position()}
   disabled={allPositions.length <= 1}
->
-  {toTranslatedPosition(selectedPosition)}
-  {#snippet items()}
-    {#each allPositions as position (position)}
-      <DropdownItem color="blue" href={buildPositionHref(position)} noscroll>
-        {toTranslatedPosition(position)}
-      </DropdownItem>
-    {/each}
-  {/snippet}
-</DropdownList>
+  autoWidth
+  onChange={onPositionChange}
+/>
