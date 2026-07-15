@@ -1,4 +1,5 @@
 <script lang="ts">
+  import AddIcon from "$lib/components/icons/AddIcon.svelte";
   import AndroidIcon from "$lib/components/icons/AndroidIcon.svelte";
   import AnticipatedIcon from "$lib/components/icons/AnticipatedIcon.svelte";
   import AppleIcon from "$lib/components/icons/AppleIcon.svelte";
@@ -218,6 +219,7 @@
         <IconTile name="ReactionIcon edit">
           <ReactionIcon state="edit" />
         </IconTile>
+        <IconTile name="AddIcon"><AddIcon /></IconTile>
         <IconTile name="RemoveIcon"><RemoveIcon /></IconTile>
         <IconTile name="RenameIcon"><RenameIcon /></IconTile>
         <IconTile name="ReplyIcon"><ReplyIcon /></IconTile>

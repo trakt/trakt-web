@@ -1,11 +1,14 @@
 <script lang="ts">
   import MultiSelect from "$lib/components/select/MultiSelect.svelte";
-  import { type AdvancedMultiSelectFilter } from "$lib/features/filters/models/Filter";
-  import { FilterMode } from "$lib/features/filters/models/FilterMode";
-  import { useFilter } from "$lib/features/filters/useFilter";
+  import type { MultiSelectSelection } from "$lib/components/select/models/MultiSelectSelection.ts";
+  import { type AdvancedMultiSelectFilter } from "$lib/features/filters/models/Filter.ts";
+  import { FilterMode } from "$lib/features/filters/models/FilterMode.ts";
+  import { fromMultiSelectSelection } from "$lib/features/filters/fromMultiSelectSelection.ts";
+  import { toMultiSelectSelection } from "$lib/features/filters/toMultiSelectSelection.ts";
+  import { useFilter } from "$lib/features/filters/useFilter.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import Filter from "./Filter.svelte";
-  import { useFilterSetter } from "./useFilterSetter";
+  import { useFilterSetter } from "./useFilterSetter.ts";
 
   const resetValue = "__reset_filter__";
 
@@ -17,17 +20,15 @@
   const { getFilterValue } = useFilter();
   const currentValueRaw = $derived(getFilterValue(filter.key));
 
-  const selectedValues = $derived(
-    $currentValueRaw ? $currentValueRaw.split(",") : [],
-  );
+  const selection = $derived(toMultiSelectSelection($currentValueRaw));
 
   const { gotoFilteredState } = useFilterSetter();
 
-  const onChange = (values: string[]) => {
-    const hasReset = values.includes(resetValue);
-    const hasValues = values.length > 0;
+  const onChange = (next: MultiSelectSelection) => {
+    const hasReset = next.included.includes(resetValue) ||
+      next.excluded.includes(resetValue);
 
-    const value = !hasReset && hasValues ? values.join(",") : null;
+    const value = hasReset ? null : fromMultiSelectSelection(next);
 
     gotoFilteredState({
       value,
@@ -40,13 +41,15 @@
     (filter.advanced.options ?? filter.options).map((option) => ({
       label: option.label(),
       value: option.value,
+      // "My Favorites" expands to a saved set; excluding it is not meaningful.
+      excludable: option.value !== "favorites",
     })),
   );
 
   // FIXME: this is a temporary solution, to be followed up by
   // making this a feature of the MultiSelect
   const optionsWithAll = $derived([
-    { label: m.button_label_reset_filter(), value: resetValue },
+    { label: m.button_label_reset_filter(), value: resetValue, excludable: false },
     ...advancedOptions,
   ]);
 </script>
@@ -54,7 +57,8 @@
 <Filter title={filter.advanced.label?.() ?? filter.label()}>
   <MultiSelect
     options={optionsWithAll}
-    value={selectedValues}
+    included={selection.included}
+    excluded={selection.excluded}
     placeholder={m.option_text_all()}
     {disabled}
     {onChange}

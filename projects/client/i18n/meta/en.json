@@ -2405,6 +2405,42 @@
       "default": "All",
       "description": "Text for the 'All' option in dropdowns or filters."
     },
+    "option_label_excluded": {
+      "default": "{label} (excluded from results)",
+      "description": "Aria-label for a multi-select filter option that is currently excluded. {label} is the option name, e.g. a genre.",
+      "variables": {
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "option_text_excluded": {
+      "default": "-{label}",
+      "description": "Trigger label for a multi-select filter option that is currently excluded. {label} is the option name, e.g. a genre.",
+      "variables": {
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_include_option": {
+      "default": "Include {label}",
+      "description": "Aria-label for the button that includes a multi-select filter option. {label} is the option name, e.g. a genre.",
+      "variables": {
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_exclude_option": {
+      "default": "Exclude {label}",
+      "description": "Aria-label for the button that excludes a multi-select filter option. {label} is the option name, e.g. a genre.",
+      "variables": {
+        "label": {
+          "type": "string"
+        }
+      }
+    },
     "option_text_comment_language_all": {
       "default": "All languages",
       "description": "Option in the comment language filter that shows comments written in any language."

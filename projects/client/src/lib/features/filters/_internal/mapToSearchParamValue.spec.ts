@@ -102,6 +102,26 @@ describe('mapToSearchParamValue', () => {
       expect(result).toBe('action,comedy,drama,action');
     });
 
+    it('should keep the exclusion prefix on plain excluded values', () => {
+      const result = mapToSearchParamValue({
+        filter: listFilter,
+        value: 'action,-comedy',
+        user: mockUser,
+      });
+
+      expect(result).toBe('action,-comedy');
+    });
+
+    it('should expand a mapper and prefix each expanded excluded token', () => {
+      const result = mapToSearchParamValue({
+        filter: listFilter,
+        value: '-favorites',
+        user: mockUser,
+      });
+
+      expect(result).toBe('-action,-comedy,-drama');
+    });
+
     it('should throw error when value is undefined for list filter', () => {
       expect(() => {
         mapToSearchParamValue({
