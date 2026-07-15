@@ -1,5 +1,5 @@
 import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { hasAired } from './hasAired.ts';
 
 function addDays(date: Date, days: number): Date {
@@ -9,6 +9,16 @@ function addDays(date: Date, days: number): Date {
 }
 
 describe('hasAired', () => {
+  beforeEach(() => {
+    // Freeze time to keep buffer boundary assertions deterministic.
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2024-01-15T12:00:00Z'));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   describe('for movies', () => {
     it('returns true for movies with status "released"', () => {
       expect(
@@ -94,10 +104,19 @@ describe('hasAired', () => {
       ).toBe(true);
     });
 
-    it('returns false for items that will air tomorrow', () => {
-      const tomorrow = addDays(new Date(), 1);
+    if (type !== 'episode') {
+      it('returns false for items that will air tomorrow', () => {
+        const tomorrow = addDays(new Date(), 1);
+        expect(
+          hasAired({ effectiveReleaseDate: tomorrow, type }),
+        ).toBe(false);
+      });
+    }
+
+    it('returns false for items that will air in 2 days', () => {
+      const inTwoDays = addDays(new Date(), 2);
       expect(
-        hasAired({ effectiveReleaseDate: tomorrow, type }),
+        hasAired({ effectiveReleaseDate: inTwoDays, type }),
       ).toBe(false);
     });
 
@@ -122,5 +141,49 @@ describe('hasAired', () => {
 
   describe('for episodes', () => {
     runCommonTests('episode');
+  });
+
+  describe('episode air buffer', () => {
+    const DAY_MS = 24 * 60 * 60 * 1000;
+
+    it('treats an episode airing within 24h as aired', () => {
+      const inTwelveHours = new Date(Date.now() + DAY_MS / 2);
+      expect(
+        hasAired({
+          effectiveReleaseDate: inTwelveHours,
+          type: 'episode',
+        }),
+      ).toBe(true);
+    });
+
+    it('does not treat an episode airing beyond 24h as aired', () => {
+      const inTwoDays = new Date(Date.now() + DAY_MS * 2);
+      expect(
+        hasAired({
+          effectiveReleaseDate: inTwoDays,
+          type: 'episode',
+        }),
+      ).toBe(false);
+    });
+
+    it('does not apply the buffer to shows', () => {
+      const inTwelveHours = new Date(Date.now() + DAY_MS / 2);
+      expect(
+        hasAired({
+          effectiveReleaseDate: inTwelveHours,
+          type: 'show',
+        }),
+      ).toBe(false);
+    });
+
+    it('does not apply the buffer to movies', () => {
+      const inTwelveHours = new Date(Date.now() + DAY_MS / 2);
+      expect(
+        hasAired({
+          effectiveReleaseDate: inTwelveHours,
+          type: 'movie',
+        }),
+      ).toBe(false);
+    });
   });
 });
