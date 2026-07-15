@@ -24,6 +24,7 @@
     hasValue: boolean;
     children: Snippet;
     autoWidth?: boolean;
+    icon?: Snippet;
     trigger?: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
   } & (SelectSingleProps | SelectMultipleProps);
 
@@ -34,6 +35,7 @@
     hasValue,
     children,
     autoWidth = false,
+    icon,
     trigger,
     ...rest
   }: SelectBaseProps = $props();
@@ -53,7 +55,10 @@
           aria-label={placeholder}
           data-has-value={hasValue}
         >
-          <span class="ellipsis capitalize">{triggerLabel}</span>
+          {#if icon}
+            <span class="trigger-icon">{@render icon()}</span>
+          {/if}
+          <span class="trigger-label ellipsis capitalize">{triggerLabel}</span>
           <DropdownCaretIcon {open} />
         </button>
       {/if}
@@ -134,9 +139,21 @@
     overflow: hidden;
     min-width: 0;
 
-    span {
+    .trigger-label {
       flex: 1;
       min-width: 0;
+    }
+
+    .trigger-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      :global(svg) {
+        width: var(--ni-16);
+        height: var(--ni-16);
+      }
     }
 
     padding: var(--ni-12);

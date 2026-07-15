@@ -1,5 +1,5 @@
 <script lang="ts">
-  import NativeSelect from "$lib/components/select/NativeSelect.svelte";
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
@@ -8,6 +8,7 @@
     availableLocales,
     getLocale,
   } from "$lib/features/i18n/index.ts";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useSettings } from "$lib/sections/settings/_internal/useSettings";
   import { applyLocalePreference } from "../applyLocalePreference";
   import { useLocale } from "./useLocale";
@@ -96,23 +97,17 @@
     return availableLocales
       .map((option) => ({
         value: option,
-        text: `${localeToFlag[option]} ${localeToTitle[option]}`,
-        label: localeToTitle[option],
+        label: `${localeToFlag[option]} ${localeToTitle[option]}`,
         sortKey: displayNames.of(option) ?? option,
       }))
       .sort((a, b) => collator.compare(a.sortKey, b.sortKey));
   });
-
-  const displayText = (value: AvailableLocale) => localeToTitle[value];
 </script>
 
-<NativeSelect
+<SingleSelect
   value={$locale}
-  onChange={submitLocale}
   {options}
-  getDisplayText={displayText}
->
-  {#snippet icon()}
-    {localeToFlag[$locale]}
-  {/snippet}
-</NativeSelect>
+  placeholder={m.text_language()}
+  autoWidth
+  onChange={submitLocale}
+/>

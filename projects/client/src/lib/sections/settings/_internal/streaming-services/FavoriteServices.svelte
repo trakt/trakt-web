@@ -2,7 +2,7 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import FavoriteIcon from "$lib/components/icons/FavoriteIcon.svelte";
   import GlobeIcon from "$lib/components/icons/GlobeIcon.svelte";
-  import NativeSelect from "$lib/components/select/NativeSelect.svelte";
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName.ts";
@@ -19,15 +19,11 @@
 
   const countryOptions = $derived(
     ($availableCountries ?? [])
-      .map((code) => {
-        const name = countryName(code);
-        return {
-          value: code,
-          text: name,
-          label: name,
-        };
-      })
-      .toSorted((a, b) => a.text.localeCompare(b.text, languageTag())),
+      .map((code) => ({
+        value: code,
+        label: countryName(code),
+      }))
+      .toSorted((a, b) => a.label.localeCompare(b.label, languageTag())),
   );
 
   const favorites = $derived($favoriteSources ?? []);
@@ -41,11 +37,12 @@
 >
   <SettingsGroupRow title={m.label_streaming_country()} variant="custom">
     {#snippet icon()}<GlobeIcon />{/snippet}
-    <NativeSelect
+    <SingleSelect
       value={$country}
       options={countryOptions}
+      placeholder={m.label_streaming_country()}
+      autoWidth
       onChange={(value) => setCountry(value)}
-      getDisplayText={(value) => countryName(value)}
     />
   </SettingsGroupRow>
 
