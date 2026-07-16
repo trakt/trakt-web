@@ -35,7 +35,7 @@
         <div
           {...props}
           class="trakt-tooltip-trigger"
-          onclick={!$isMouse ? () => (open = !open) : undefined}
+          onclick={!$isMouse && !disabled ? () => (open = !open) : undefined}
         >
           {@render children()}
         </div>

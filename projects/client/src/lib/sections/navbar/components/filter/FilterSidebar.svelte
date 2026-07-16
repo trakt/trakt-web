@@ -35,6 +35,7 @@
           label={m.button_label_reset_all_filters()}
           style="ghost"
           color="red"
+          tooltip={false}
           disabled={!$hasActiveFilter}
           onclick={resetFilters}
         >
@@ -49,6 +50,7 @@
         <ActionButton
           label={m.button_label_save_filters()}
           style="ghost"
+          tooltip={false}
           onclick={() => {
             saveFilters();
             onClose();
