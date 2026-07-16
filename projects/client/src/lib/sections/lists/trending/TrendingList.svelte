@@ -16,6 +16,7 @@
     search?: Record<string, string>;
     filterOverride?: FilterOverrideParams;
     actions?: Snippet;
+    metaInfo?: Snippet;
     scope?: string;
   } & Partial<DrillListProps<DiscoverMode>>;
 
@@ -26,6 +27,7 @@
     search,
     filterOverride,
     actions,
+    metaInfo,
     urlBuilder,
     scope,
   }: TrendingListProps = $props();
@@ -46,6 +48,7 @@
   filter={$filterMap}
   {filterOverride}
   {actions}
+  {metaInfo}
   useList={(params) =>
     useTrendingList({
       ...params,

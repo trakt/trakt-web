@@ -3,12 +3,13 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
+  import ListMeta from "$lib/sections/lists/components/ListMeta.svelte";
   import { useListItems } from "$lib/sections/lists/user/useListItems";
   import type { Snippet } from "svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import UserListItem from "./_internal/UserListItem.svelte";
-  import ListActions from "./ListActions.svelte";
+  import ListPopupMenu from "./ListPopupMenu.svelte";
 
   type UserListProps = {
     list: MediaListSummary;
@@ -33,6 +34,10 @@
   });
 </script>
 
+{#snippet listMetaInfo()}
+  <ListMeta {list} showOwner={false} />
+{/snippet}
+
 <DrillableMediaList
   --height-override-card="var(--height-portrait-card-sm)"
   --height-override-list="var(--height-poster-list-sm)"
@@ -47,6 +52,7 @@
   useList={(params) => useListItems({ list, ...params })}
   urlBuilder={() => getListUrl({ type: "user-list", list })}
   title={list.name}
+  metaInfo={listMetaInfo}
   {titleAction}
 >
   {#snippet item(media)}
@@ -54,7 +60,7 @@
   {/snippet}
 
   {#snippet actions()}
-    <ListActions {list} />
+    <ListPopupMenu {list} />
   {/snippet}
 
   {#snippet empty()}
