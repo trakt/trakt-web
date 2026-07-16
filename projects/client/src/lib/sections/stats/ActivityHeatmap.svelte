@@ -62,6 +62,7 @@
                 locale,
                 now,
               })}
+              disableHoverableContent
               --cell-col={cell.col + 1}
               --cell-row={cell.row + 2}
             >
