@@ -9,12 +9,12 @@
   {@const header = $state.header}
   <div class="trakt-navbar-header">
     {#snippet titleContent()}
-      {#if header.back}
+      {#if header?.back}
         <span class="header-back-caret"><CaretLeftIcon /></span>
       {/if}
       <div class="trakt-navbar-header-title">
-        <h1 class="ellipsis">{header.title}</h1>
-        {#if header.metaInfo}
+        <h1 class="ellipsis">{header?.title}</h1>
+        {#if header?.metaInfo}
           {#if typeof header.metaInfo === "string"}
             <span class="ellipsis bold meta-info">{header.metaInfo}</span>
           {:else}
@@ -24,7 +24,7 @@
       </div>
     {/snippet}
 
-    {#if header.back}
+    {#if header?.back}
       <a
         class="trakt-navbar-header-back"
         href={header.back.href}
@@ -36,7 +36,7 @@
       {@render titleContent()}
     {/if}
 
-    {#if header.actions}
+    {#if header?.actions}
       <div class="trakt-navbar-header-actions">
         {@render header.actions()}
       </div>
