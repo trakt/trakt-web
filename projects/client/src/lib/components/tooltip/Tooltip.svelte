@@ -11,6 +11,7 @@
     delayDuration = 150,
     sideOffset = 8,
     disabled = false,
+    disableHoverableContent = false,
   }: TooltipProps & ChildrenProps = $props();
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
@@ -23,7 +24,12 @@
 </script>
 
 <Tooltip.Provider>
-  <Tooltip.Root {delayDuration} bind:open disabled={disabled ?? false}>
+  <Tooltip.Root
+    {delayDuration}
+    bind:open
+    disabled={disabled ?? false}
+    {disableHoverableContent}
+  >
     <Tooltip.Trigger>
       {#snippet child({ props })}
         <div
