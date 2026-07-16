@@ -61,12 +61,10 @@
     height: var(--ni-32);
 
     border-radius: var(--border-radius-s);
-    background: transparent;
-    border: var(--ni-1) solid var(--color-streak-day);
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: transform, opacity;
-
-    opacity: 0.5;
+    background: var(--color-heatmap-empty);
+    border: var(--ni-1) solid transparent;
+    transition: transform calc(0.5 * var(--transition-increment)) ease-in-out,
+      opacity var(--transition-increment) ease-in-out;
 
     @include for-tablet-sm-and-below {
       height: var(--ni-18);
@@ -75,17 +73,22 @@
     @include for-mouse {
       &:hover {
         transform: scaleX(1.5) scaleY(1.2);
-        opacity: 1;
       }
     }
 
     &[data-active] {
       background: var(--color-streak-day);
       border-color: transparent;
+      opacity: 0.5;
+    }
+
+    &[data-future],
+    &[data-today]:not([data-active]) {
+      background: transparent;
+      border-color: var(--color-heatmap-empty);
     }
 
     &[data-today] {
-      border-color: var(--color-streak-day);
       outline: var(--ni-1) solid var(--color-streak-day);
       outline-offset: var(--ni-1);
       opacity: 1;
