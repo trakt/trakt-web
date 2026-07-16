@@ -28,6 +28,7 @@
         type={media.type}
         {media}
         source="smart-list"
+        style="summary"
         mode={type === "media" ? "mixed" : "standalone"}
         canDeemphasize
       />
