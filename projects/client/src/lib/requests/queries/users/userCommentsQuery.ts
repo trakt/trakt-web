@@ -5,6 +5,7 @@ import { mapToMediaComment } from '$lib/requests/_internal/mapToMediaComment.ts'
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MediaCommentSchema } from '$lib/requests/models/MediaComment.ts';
@@ -48,10 +49,12 @@ export type UserCommentEntry = z.infer<typeof UserCommentEntrySchema>;
 
 const SUPPORTED_COMMENT_TYPES = ['movie', 'show', 'episode'] as const;
 type SupportedCommentType = typeof SUPPORTED_COMMENT_TYPES[number];
-type SupportedCommentResponse = Extract<
-  UserCommentResponse,
-  { type: SupportedCommentType }
->;
+// 0.4.27 flattened the discriminated comment union into one flat object with
+// nullish media fields, so narrow the `type` via intersection (Extract would
+// collapse a non-union object to `never`); guard the nullish fields at use.
+type SupportedCommentResponse =
+  & UserCommentResponse
+  & { type: SupportedCommentType };
 
 const isSupportedComment = (
   item: UserCommentResponse,
@@ -70,14 +73,26 @@ const mapToCommentEntry = (
 
   switch (item.type) {
     case 'movie':
-      return { ...common, media: mapToMovieEntry(item.movie), type: 'movie' };
+      return {
+        ...common,
+        media: mapToMovieEntry(
+          assertDefined(item.movie, 'Comment movie missing'),
+        ),
+        type: 'movie',
+      };
     case 'show':
-      return { ...common, media: mapToShowEntry(item.show), type: 'show' };
+      return {
+        ...common,
+        media: mapToShowEntry(assertDefined(item.show, 'Comment show missing')),
+        type: 'show',
+      };
     case 'episode': {
       return {
         ...common,
-        media: mapToShowEntry(item.show),
-        episode: mapToEpisodeEntry(item.episode),
+        media: mapToShowEntry(assertDefined(item.show, 'Comment show missing')),
+        episode: mapToEpisodeEntry(
+          assertDefined(item.episode, 'Comment episode missing'),
+        ),
         type: 'episode',
       };
     }
