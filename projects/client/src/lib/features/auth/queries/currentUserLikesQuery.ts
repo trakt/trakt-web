@@ -41,7 +41,7 @@ export const currentUserLikesQuery = defineQuery({
       ),
       (entry) => ({
         id: assertDefined(
-          'id' in entry.list ? entry.list.id : undefined,
+          entry.list != null && 'id' in entry.list ? entry.list.id : undefined,
           'List id is missing in likes response.',
         ),
       }),
