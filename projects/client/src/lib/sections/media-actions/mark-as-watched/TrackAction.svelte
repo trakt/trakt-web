@@ -67,6 +67,12 @@
     display: flex;
     flex-grow: 1;
 
+    /* ActionButton renders a wrapper around its button, so stretch the direct
+       child to keep the grow chain intact down to the button. */
+    > :global(*) {
+      flex-grow: 1;
+    }
+
     :global(.trakt-action-button) {
       flex-grow: 1;
 

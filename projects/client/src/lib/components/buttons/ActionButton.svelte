@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { Button } from "bits-ui";
   import { useGuardedHref } from "../../features/auth/stores/useGuardedHref";
@@ -16,9 +18,16 @@
     style = "flat",
     navigationType,
     disabled,
+    tooltip = true,
     classList = "",
     ...props
   }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
+
+  // Icon-only buttons carry no visible text, so their required `label` doubles
+  // as a hover tooltip - a pointer-only affordance, gated on mouse so touch is
+  // untouched (tap just fires the action). Opt out with `tooltip={false}` where
+  // the caller supplies its own tooltip (e.g. custom copy/side).
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
   const { guardedHref, originalHref } = $derived(
     useGuardedHref((props as TraktActionButtonAnchorProps).href),
@@ -61,9 +70,11 @@
   });
 </script>
 
-<Button.Root {...host.rootProps}>
-  {@render children()}
-</Button.Root>
+<Tooltip content={label} variant="compact" disabled={!tooltip || !$isMouse}>
+  <Button.Root {...host.rootProps}>
+    {@render children()}
+  </Button.Root>
+</Tooltip>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

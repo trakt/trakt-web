@@ -1,6 +1,8 @@
 <script lang="ts" generics="T">
   import { goto } from "$app/navigation";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import Toggle from "./_internal/Toggle.svelte";
   import ToggleIcon from "./_internal/ToggleIcon.svelte";
@@ -15,6 +17,10 @@
   }
 
   const { value, onChange, options, variant = "icon" }: TogglerProps = $props();
+
+  // Tooltips are a pointer affordance only - on touch the tap selects the
+  // option, so gating on mouse keeps the tooltip from firing on tap.
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
   const trackerIndex = $derived(
     writable(options.findIndex((option) => value === option.value)),
@@ -95,22 +101,28 @@
     ontransitionend={handleTransitionEnd}
   ></div>
   {#each options as option, index (option.value)}
-    <Toggle
-      isPressed={$trackerIndex === index}
-      label={option.label()}
-      {variant}
-      {...getTriggerProps(option, index)}
+    <Tooltip
+      content={option.text()}
+      variant="compact"
+      disabled={!$isMouse || variant === "text"}
     >
-      {#snippet icon()}
-        <ToggleIcon {option} />
-      {/snippet}
+      <Toggle
+        isPressed={$trackerIndex === index}
+        label={option.label()}
+        {variant}
+        {...getTriggerProps(option, index)}
+      >
+        {#snippet icon()}
+          <ToggleIcon {option} />
+        {/snippet}
 
-      {#if option.content}
-        {@render option.content()}
-      {:else}
-        {option.text()}
-      {/if}
-    </Toggle>
+        {#if option.content}
+          {@render option.content()}
+        {:else}
+          {option.text()}
+        {/if}
+      </Toggle>
+    </Tooltip>
   {/each}
 </div>
 
