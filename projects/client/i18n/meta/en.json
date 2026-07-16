@@ -1867,6 +1867,10 @@
       "default": "by",
       "description": "Text used to indicate the creator of a list."
     },
+    "label_list_item_count": {
+      "default": "{count} items",
+      "description": "Accessible label / tooltip for the item count shown next to a list."
+    },
     "image_alt_user_avatar": {
       "default": "{username}'s avatar",
       "description": "Alt text for a user's avatar image.",
@@ -10491,6 +10495,14 @@
     "preview_feature_description_soundtrack": {
       "default": "Adds a soundtrack section to movie and show pages, with playback where a track can be matched.",
       "description": "Description for the soundtrack preview feature."
+    },
+    "preview_feature_title_list_counts": {
+      "default": "List Counts",
+      "description": "Title for the List Counts preview feature."
+    },
+    "preview_feature_description_list_counts": {
+      "default": "Shows how many items a list holds, and how many lists a section has.",
+      "description": "Description for the List Counts preview feature."
     },
     "page_title_widget_background": {
       "default": "Background",

@@ -1,6 +1,7 @@
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
+import ListIcon from '$lib/components/icons/mobile/ListIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
@@ -79,6 +80,12 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_soundtrack(),
     addedAt: new Date('2026-08-03'),
     description: () => m.preview_feature_description_soundtrack(),
+  },
+  [FeatureFlag.ListCounts]: {
+    icon: ListIcon,
+    title: () => m.preview_feature_title_list_counts(),
+    addedAt: new Date('2026-08-21'),
+    description: () => m.preview_feature_description_list_counts(),
   },
   [FeatureFlag.ParentalGuide]: {
     icon: NoSpoilerIcon,

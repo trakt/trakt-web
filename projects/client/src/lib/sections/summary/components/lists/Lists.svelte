@@ -47,7 +47,7 @@
     --height-list="var(--height-lists-list)"
   >
     {#snippet item(list)}
-      <ListSummaryItem {list} {type} />
+      <ListSummaryItem {list} />
     {/snippet}
 
     {#snippet empty()}

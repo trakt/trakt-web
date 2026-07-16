@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import ListSummaryCard from "../ListSummaryCard.svelte";
   import ListHeader from "./_internal/ListHeader.svelte";
@@ -7,22 +8,26 @@
 
   const {
     list,
-    type,
     source,
     onclick,
   }: {
     list: MediaListSummary;
-    type?: DiscoverMode;
     source?: string;
     onclick?: (list: MediaListSummary) => void;
   } = $props();
 
+  const { track } = useTrack(AnalyticsEvent.Drilldown);
+
   const handler = () => {
     onclick?.(list);
+
+    if (source) {
+      track({ source, type: "list" });
+    }
   };
 </script>
 
 <ListSummaryCard variant={list.type === "official" ? "official" : "default"}>
-  <ListHeader {list} {type} {source} onclick={handler} />
-  <ListPosters {list} {type} {source} onclick={handler} />
+  <ListHeader {list} onclick={handler} />
+  <ListPosters {list} onclick={handler} />
 </ListSummaryCard>
