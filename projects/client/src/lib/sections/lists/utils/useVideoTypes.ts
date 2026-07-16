@@ -1,5 +1,5 @@
-import type { MediaVideo } from '../../../requests/models/MediaVideo.ts';
-import { assertDefined } from '../../../utils/assert/assertDefined.ts';
+import type { MediaVideo } from '$lib/requests/models/MediaVideo';
+import { assertDefined } from '$lib/utils/assert/assertDefined';
 import { writable } from '$lib/utils/store/WritableSubject.ts';
 
 export function useVideoTypes(videos: MediaVideo[]) {

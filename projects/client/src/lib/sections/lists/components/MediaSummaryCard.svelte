@@ -14,6 +14,7 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
+  import { toHumanTime } from "$lib/utils/formatting/date/toHumanTime.ts";
   import { toRelativeHumanDay } from "$lib/utils/formatting/date/toRelativeHumanDay";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
@@ -88,9 +89,8 @@
       };
     }
 
-    const seasonPoster = rest.type === "season"
-      ? rest.season.poster?.url.thumb
-      : undefined;
+    const seasonPoster =
+      rest.type === "season" ? rest.season.poster?.url.thumb : undefined;
 
     return {
       background: media.cover.url.thumb,
@@ -203,13 +203,21 @@
           {media.title}
         </p>
       {/if}
-      <p class="trakt-card-subtitle small secondary ellipsis capitalize">
-        {#if rest.activityType === "social"}
+      <p
+        class="trakt-card-subtitle small secondary ellipsis capitalize"
+        title={toHumanDate(new Date(), rest.date, getLocale())}
+      >
+        {#if rest.activityType === "social" || hasMultiLineTitles}
           {toRelativeHumanDay(new Date(), rest.date, getLocale())}
         {:else}
           {toHumanDate(new Date(), rest.date, getLocale())}
         {/if}
       </p>
+      {#if rest.activityType === "personal" && hasMultiLineTitles}
+        <p class="trakt-card-subtitle small secondary ellipsis capitalize">
+          {toHumanTime({ date: rest.date, locale: getLocale() })}
+        </p>
+      {/if}
     {:else if isShowContext && rest.type === "episode"}
       <p class="trakt-card-title ellipsis">
         <Spoiler media={rest.episode} show={media} type="episode">

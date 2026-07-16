@@ -64,10 +64,14 @@
     entry.type === "episode"
       ? entry.media.title +
           " - " +
-          `<bdi dir="ltr">${episodeNumberLabel({
+          // U+2066 (LRI) … U+2069 (PDI) isolate the LTR episode code so it
+          // renders correctly when embedded in an RTL paragraph. <bdi> cannot
+          // be used here because this value is interpolated via {mediaTitle}
+          // and Svelte would escape the angle brackets as literal text.
+          `\u2066${episodeNumberLabel({
             seasonNumber: entry.episode.season,
             episodeNumber: entry.episode.number,
-          })}</bdi>`
+          })}\u2069`
       : entry.media.title,
   );
 

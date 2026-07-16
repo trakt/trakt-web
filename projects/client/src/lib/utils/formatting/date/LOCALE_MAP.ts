@@ -1,5 +1,6 @@
 import type { Locale } from 'date-fns/locale';
 import {
+  arSA,
   bg,
   ca,
   da,
@@ -26,7 +27,6 @@ import {
   tr,
   uk,
   zhCN,
-  arSA,
 } from 'date-fns/locale';
 
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';

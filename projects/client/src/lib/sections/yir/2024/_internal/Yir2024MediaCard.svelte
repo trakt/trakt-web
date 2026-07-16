@@ -24,10 +24,13 @@
 
   const episodeCode = $derived(
     item.type === "episode"
-      ? `<bdi dir="ltr">${episodeNumberLabel({
-        seasonNumber: item.episode.season,
-        episodeNumber: item.episode.number,
-      })}</bdi>`
+      ? // U+2066 (LRI) … U+2069 (PDI) wrap the LTR episode code so it renders
+        // correctly when embedded inside an RTL text run. <bdi> cannot be used
+        // here because this is a JS string interpolated via {episodeCode}.
+        `\u2066${episodeNumberLabel({
+          seasonNumber: item.episode.season,
+          episodeNumber: item.episode.number,
+        })}\u2069`
       : null,
   );
 </script>

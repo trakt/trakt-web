@@ -1,4 +1,4 @@
-import { m } from '../../../paraglide/messages.js';
+import { m } from '$lib/paraglide/messages';
 import { yirUnit } from './yirUnit.ts';
 
 /**

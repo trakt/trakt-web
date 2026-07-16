@@ -1,4 +1,4 @@
-import type { YirDetail } from '../../requests/models/YirDetail.ts';
+import type { YirDetail } from '$lib/requests/models/YirDetail';
 import type { Component } from 'svelte';
 import Yir2024 from './2024/Yir2024.svelte';
 import YirDefault from './default/YirDefault.svelte';
