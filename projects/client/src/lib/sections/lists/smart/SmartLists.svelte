@@ -4,13 +4,14 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
+  import ListsCount from "../components/ListsCount.svelte";
   import CreateSmartListButton from "./_internal/CreateSmartListButton.svelte";
   import SmartListSummaryItem from "./_internal/SmartListSummaryItem.svelte";
   import { useSmartLists } from "./useSmartLists";
 
   const { mode }: { mode: DiscoverMode } = $props();
 
-  const { list, isLoading } = $derived(useSmartLists({ mode }));
+  const { list, isLoading, count } = $derived(useSmartLists({ mode }));
 
   const drilldown = $derived({
     href: UrlBuilder.lists.smart.all(),
@@ -24,12 +25,17 @@
   <CreateSmartListButton />
 {/snippet}
 
+{#snippet listsCountMeta()}
+  <ListsCount count={$count} />
+{/snippet}
+
 <SectionList
   id={{
     scope: "smart-lists",
   }}
   items={$list}
   title={m.list_title_smart_lists()}
+  metaInfo={$count > 0 ? listsCountMeta : undefined}
   --height-list="var(--height-lists-list)"
   --height-override-list={$list.length === 0
     ? "var(--height-poster-list-sm)"

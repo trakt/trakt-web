@@ -1739,6 +1739,14 @@
       "default": "by",
       "description": "Text used to indicate the creator of a list."
     },
+    "text_list_item_count": {
+      "default": "{count} items",
+      "description": "Number of items contained in a list."
+    },
+    "text_list_count": {
+      "default": "{count} lists",
+      "description": "Number of lists in a group of lists."
+    },
     "image_alt_user_avatar": {
       "default": "{username}'s avatar",
       "description": "Alt text for a user's avatar image.",
