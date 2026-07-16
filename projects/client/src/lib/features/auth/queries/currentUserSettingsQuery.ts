@@ -173,7 +173,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       },
     },
     preferredTheme: mapToPreferredTheme(browsing?.dark_knight),
-    locale: browsing?.locale,
+    locale: browsing?.locale?.startsWith('ar-') ? 'ar' : browsing?.locale,
     birthday: user.dob ? parseLocalDate(user.dob) : null,
   };
 }

@@ -69,9 +69,13 @@ export function useSettings() {
   };
 
   const setLocale = async (locale: string) => {
+    // Map generic Arabic to ar-SA since the backend requires a region for Arabic
+    // to correctly return RTL metadata
+    const apiLocale = locale === 'ar' ? 'ar-SA' : locale;
+
     const payload = {
       browsing: {
-        locale,
+        locale: apiLocale,
       },
     };
 

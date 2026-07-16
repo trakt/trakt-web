@@ -1,4 +1,7 @@
-import type { AvailableLanguage } from '$lib/features/i18n/index.ts';
+import {
+  type AvailableLanguage,
+  getIntlLocale,
+} from '$lib/features/i18n/index.ts';
 
 export type Duration = {
   days: number;
@@ -55,17 +58,17 @@ export function toHumanDuration({
   const { days: d, hours: h, minutes: m } = getDuration();
 
   const formatters = {
-    day: new Intl.NumberFormat(locale, {
+    day: new Intl.NumberFormat(getIntlLocale(locale), {
       style: 'unit',
       unit: 'day',
       unitDisplay,
     }),
-    hour: new Intl.NumberFormat(locale, {
+    hour: new Intl.NumberFormat(getIntlLocale(locale), {
       style: 'unit',
       unit: 'hour',
       unitDisplay,
     }),
-    minute: new Intl.NumberFormat(locale, {
+    minute: new Intl.NumberFormat(getIntlLocale(locale), {
       style: 'unit',
       unit: 'minute',
       unitDisplay,

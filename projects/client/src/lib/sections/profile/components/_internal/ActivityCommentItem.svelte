@@ -64,10 +64,10 @@
     entry.type === "episode"
       ? entry.media.title +
           " - " +
-          episodeNumberLabel({
+          `<bdi dir="ltr">${episodeNumberLabel({
             seasonNumber: entry.episode.season,
             episodeNumber: entry.episode.number,
-          })
+          })}</bdi>`
       : entry.media.title,
   );
 

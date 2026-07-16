@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatNumber } from './formatNumber';
+import { formatNumber } from './formatNumber.ts';
 
 describe('formatNumber', () => {
   it('formats whole numbers with thousand separators', () => {

@@ -26,6 +26,7 @@ import {
   tr,
   uk,
   zhCN,
+  arSA,
 } from 'date-fns/locale';
 
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';
@@ -58,4 +59,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'pt-PT': pt,
   'ca-ES': ca,
   'id-ID': id,
+  ar: arSA,
 };

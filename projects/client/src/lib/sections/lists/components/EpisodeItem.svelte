@@ -183,10 +183,10 @@
           />
           <TextTag>
             <p class="bold capitalize no-wrap">
-              {episodeNumberLabel({
+              <bdi dir="ltr">{episodeNumberLabel({
                 seasonNumber: props.episode.season,
                 episodeNumber: props.episode.number,
-              })}
+              })}</bdi>
             </p>
           </TextTag>
         </TagBar>

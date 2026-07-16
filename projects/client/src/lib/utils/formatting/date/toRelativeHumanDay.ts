@@ -1,4 +1,5 @@
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';
+import { getIntlLocale } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { differenceInCalendarDays } from 'date-fns/differenceInCalendarDays';
 import { format } from 'date-fns/format';
@@ -12,15 +13,18 @@ function formatRelativeDay(
 ) {
   const dayDiff = differenceInCalendarDays(date, today);
 
-  const relativeFormatter = new Intl.RelativeTimeFormat(localeKey, {
-    numeric: 'auto',
-  });
+  const relativeFormatter = new Intl.RelativeTimeFormat(
+    getIntlLocale(localeKey),
+    {
+      numeric: 'auto',
+    },
+  );
 
   if (dayDiff >= -1 && dayDiff <= 1) {
     return relativeFormatter.format(dayDiff, 'day');
   }
 
-  const weekdayFormatter = new Intl.DateTimeFormat(localeKey, {
+  const weekdayFormatter = new Intl.DateTimeFormat(getIntlLocale(localeKey), {
     weekday: 'long',
   });
 

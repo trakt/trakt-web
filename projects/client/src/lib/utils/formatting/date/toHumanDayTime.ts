@@ -7,12 +7,17 @@ const DAYS_INDEX: Record<string, number> = {
   Friday: 5,
   Saturday: 6,
 };
+import { getIntlLocale } from '$lib/features/i18n/index.ts';
+import type {
+  AvailableLanguage,
+  AvailableLocale,
+} from '$lib/features/i18n/index.ts';
 
 type ToHumanDayTimeProps = {
   day: string;
   time: string;
   timezone: string;
-  locale: string;
+  locale: AvailableLocale | AvailableLanguage | string;
   now?: Date;
 };
 
@@ -81,12 +86,18 @@ export function toHumanDayTime(
 
   const utcDate = new Date(refUtcMs + offsetMs);
 
-  const dayStr = new Intl.DateTimeFormat(locale, { weekday: 'long' })
+  const dayStr = new Intl.DateTimeFormat(
+    getIntlLocale(locale as AvailableLanguage),
+    { weekday: 'long' },
+  )
     .format(utcDate);
-  const timeStr = new Intl.DateTimeFormat(locale, {
-    hour: 'numeric',
-    minute: '2-digit',
-  }).format(utcDate);
+  const timeStr = new Intl.DateTimeFormat(
+    getIntlLocale(locale as AvailableLanguage),
+    {
+      hour: 'numeric',
+      minute: '2-digit',
+    },
+  ).format(utcDate);
 
   return { day: dayStr, time: timeStr };
 }

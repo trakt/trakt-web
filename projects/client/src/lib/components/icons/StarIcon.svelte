@@ -58,4 +58,8 @@
   .trakt-star-fill {
     transition: width var(--transition-increment) ease-in-out;
   }
+
+  :global([dir="rtl"]) svg {
+    transform: scaleX(-1);
+  }
 </style>

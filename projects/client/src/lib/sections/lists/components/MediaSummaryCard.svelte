@@ -14,7 +14,6 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
-  import { toHumanTime } from "$lib/utils/formatting/date/toHumanTime.ts";
   import { toRelativeHumanDay } from "$lib/utils/formatting/date/toRelativeHumanDay";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
@@ -89,8 +88,9 @@
       };
     }
 
-    const seasonPoster =
-      rest.type === "season" ? rest.season.poster?.url.thumb : undefined;
+    const seasonPoster = rest.type === "season"
+      ? rest.season.poster?.url.thumb
+      : undefined;
 
     return {
       background: media.cover.url.thumb,
@@ -191,7 +191,7 @@
     {:else if rest.variant === "activity"}
       {#if rest.type === "episode"}
         <p class="trakt-card-title ellipsis">
-          {episodeSubtitle(rest.episode)}
+          <bdi dir="ltr">{episodeSubtitle(rest.episode)}</bdi>
           {#if !["multiple_episodes", "full_season"].includes(rest.episode.type)}
             <Spoiler media={rest.episode} show={media} type="episode">
               - {rest.episode.title}
@@ -203,21 +203,13 @@
           {media.title}
         </p>
       {/if}
-      <p
-        class="trakt-card-subtitle small secondary ellipsis capitalize"
-        title={toHumanDate(new Date(), rest.date, getLocale())}
-      >
-        {#if rest.activityType === "social" || hasMultiLineTitles}
+      <p class="trakt-card-subtitle small secondary ellipsis capitalize">
+        {#if rest.activityType === "social"}
           {toRelativeHumanDay(new Date(), rest.date, getLocale())}
         {:else}
           {toHumanDate(new Date(), rest.date, getLocale())}
         {/if}
       </p>
-      {#if rest.activityType === "personal" && hasMultiLineTitles}
-        <p class="trakt-card-subtitle small secondary ellipsis capitalize">
-          {toHumanTime({ date: rest.date, locale: getLocale() })}
-        </p>
-      {/if}
     {:else if isShowContext && rest.type === "episode"}
       <p class="trakt-card-title ellipsis">
         <Spoiler media={rest.episode} show={media} type="episode">
@@ -225,17 +217,17 @@
         </Spoiler>
       </p>
       <p class="trakt-card-subtitle small secondary ellipsis">
-        {episodeSubtitle(rest.episode)}
+        <bdi dir="ltr">{episodeSubtitle(rest.episode)}</bdi>
       </p>
     {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
       <p class="trakt-card-title ellipsis">
         {media.title}
       </p>
       <p class="trakt-card-subtitle small secondary ellipsis">
-        {episodeNumberLabel({
+        <bdi dir="ltr">{episodeNumberLabel({
           seasonNumber: rest.episode.season,
           episodeNumber: rest.episode.number,
-        })}
+        })}</bdi>
         {#if rest.variant !== "start"}
           <Spoiler media={rest.episode} show={media} type="episode">
             - {rest.episode.title}

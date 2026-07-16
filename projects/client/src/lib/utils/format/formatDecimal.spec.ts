@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatDecimal } from './formatDecimal';
+import { formatDecimal } from './formatDecimal.ts';
 
 describe('formatDecimal', () => {
   it('formats a number to a single decimal place', () => {

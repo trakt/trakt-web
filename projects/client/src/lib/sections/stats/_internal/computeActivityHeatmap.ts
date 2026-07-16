@@ -1,4 +1,5 @@
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';
+import { getIntlLocale } from '$lib/features/i18n/index.ts';
 import { HEATMAP_MAX_INTENSITY_COUNT } from '$lib/sections/stats/_internal/constants/index.ts';
 import { addDays } from '$lib/utils/date/addDays.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
@@ -71,7 +72,7 @@ export function computeActivityHeatmap(
   const totalRows = (cells.at(-1)?.row ?? -1) + 1;
 
   const monthLabel = period === 'month'
-    ? new Intl.DateTimeFormat(locale, {
+    ? new Intl.DateTimeFormat(getIntlLocale(locale), {
       month: 'long',
       year: 'numeric',
     }).format(new Date(year, month, 1))
@@ -80,9 +81,10 @@ export function computeActivityHeatmap(
   const dayLabels = Array.from(
     { length: 7 },
     (_, i) =>
-      new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(
-        addDays(gridStart, i),
-      ),
+      new Intl.DateTimeFormat(getIntlLocale(locale), { weekday: 'short' })
+        .format(
+          addDays(gridStart, i),
+        ),
   );
 
   return { cells, monthLabel, dayLabels, totalRows };

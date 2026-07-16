@@ -24,10 +24,10 @@
 
   const episodeCode = $derived(
     item.type === "episode"
-      ? episodeNumberLabel({
+      ? `<bdi dir="ltr">${episodeNumberLabel({
         seasonNumber: item.episode.season,
         episodeNumber: item.episode.number,
-      })
+      })}</bdi>`
       : null,
   );
 </script>

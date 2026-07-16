@@ -40,7 +40,7 @@ function splitLanguageTag(languageTag: Locale): {
     'Language code is required.',
   ) as AvailableLanguage;
   const region = assertDefined(
-    language === 'en' ? DEFAULT_REGION_EN : parts.at(1),
+    parts.at(1) ?? (language === 'en' ? DEFAULT_REGION_EN : language),
     'Region code is required.',
   ) as AvailableRegion;
 
@@ -62,6 +62,21 @@ export function languageTag() {
   return getLanguageAndRegion().language;
 }
 
+/**
+ * Returns a locale string suitable for `Intl.*` constructors.
+ * For Arabic, forces Gregorian calendar and Latin numerals so that
+ * numeric output (years, durations, ratings) stays in the Latin script
+ * that the rest of the UI uses. All other locales pass through unchanged.
+ */
+export function getIntlLocale(
+  locale: AvailableLocale | AvailableLanguage = languageTag(),
+) {
+  if (locale === 'ar' || locale.startsWith('ar-')) {
+    return 'ar-u-ca-gregory-nu-latn';
+  }
+  return locale;
+}
+
 export const setLocale = (locale: string): AvailableLocale => {
   const sanitizedLocale = sanitizeLocale(locale);
 
@@ -69,7 +84,7 @@ export const setLocale = (locale: string): AvailableLocale => {
   return sanitizedLocale;
 };
 
-const RTL_LOCALES = new Set<AvailableLocale>(['fa-IR']);
+const RTL_LOCALES = new Set<AvailableLocale>(['fa-IR', 'ar']);
 
 export const getTextDirection = (locale: AvailableLocale) =>
   RTL_LOCALES.has(locale) ? 'rtl' : 'ltr';

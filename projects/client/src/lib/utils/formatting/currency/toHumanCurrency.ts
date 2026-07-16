@@ -1,4 +1,7 @@
-import { type AvailableLanguage } from '$lib/features/i18n/index.ts';
+import {
+  type AvailableLanguage,
+  getIntlLocale,
+} from '$lib/features/i18n/index.ts';
 
 type ToHumanCurrencyProps = {
   price: number;
@@ -13,7 +16,7 @@ export function toHumanCurrency({
 }: ToHumanCurrencyProps): string {
   const hasDecimals = price % 1 !== 0;
 
-  const inf = new Intl.NumberFormat(locale, {
+  const inf = new Intl.NumberFormat(getIntlLocale(locale), {
     style: 'currency',
     currency: currency.toUpperCase(),
     minimumFractionDigits: hasDecimals ? 2 : 0,
