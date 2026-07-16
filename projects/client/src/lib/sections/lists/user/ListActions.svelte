@@ -37,14 +37,14 @@
     getListUrl({ type: "user-list", list }) === page.url.pathname,
   );
 
-  const handleLike = $derived(() => {
+  function handleLike() {
     if ($isLiked) {
       unlikeList();
       return;
     }
 
     likeList();
-  });
+  }
 
   const isDisabled = $derived($isUpdating || isListOwner);
 </script>

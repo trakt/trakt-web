@@ -2,6 +2,7 @@
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
+  import ListMeta from "$lib/sections/lists/components/ListMeta.svelte";
   import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting.ts";
   import ListActions from "$lib/sections/lists/user/ListActions.svelte";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
@@ -27,12 +28,21 @@
   const { current, options, urlBuilder } = $derived(
     useListSorting({ list: $list, type: "user-list" }),
   );
-
 </script>
 
 {#snippet listActions()}
   {#if $list}
     <ListActions list={$list} />
+  {/if}
+{/snippet}
+
+{#snippet listMetaInfo()}
+  {#if $list}
+    <ListMeta
+      list={$list}
+      metaText={$currentDiscoverMode.text()}
+      showOwner={false}
+    />
   {/if}
 {/snippet}
 
@@ -46,7 +56,7 @@
     hasFilters
     header={{
       title: listName,
-      metaInfo: $currentDiscoverMode.text(),
+      metaInfo: $list ? listMetaInfo : $currentDiscoverMode.text(),
       actions: listActions,
     }}
   >

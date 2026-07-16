@@ -133,7 +133,7 @@
         : undefined}
     >
       {#snippet item(list)}
-        <ListSummaryItem {list} type={mode} />
+        <ListSummaryItem {list} />
       {/snippet}
 
       {#snippet empty()}
