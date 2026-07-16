@@ -16,9 +16,10 @@ import { EpisodeActivityHistoryResponseMock } from '../data/users/response/Episo
 import { ExtendedUsersResponseMock } from '../data/users/response/ExtendedUserSettingsResponseMock.ts';
 import { FavoritedMoviesResponseMock } from '../data/users/response/FavoritedMoviesResponseMock.ts';
 import { FavoritedShowsResponseMock } from '../data/users/response/FavoritedShowsResponseMock.ts';
-import { FilterResponseMock } from '../data/users/response/FilterResponseMock.ts';
 import { HiddenShowProgressResponseMock } from '../data/users/response/HiddenShowProgressResponseMock.ts';
 import { MinimalLikedListsResponseMock } from '../data/users/response/MinimalLikedListsResponseMock.ts';
+import { SmartListDefinitionsResponseMock } from '../data/users/response/SmartListDefinitionsResponseMock.ts';
+import { SmartListItemsResponseMock } from '../data/smart-lists/response/SmartListItemsResponseMock.ts';
 import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
 import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesResponseMock.ts';
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
@@ -217,14 +218,26 @@ export const users = [
       return HttpResponse.json(UserFollowersResponseMock);
     },
   ),
+  http.get('http://localhost/users/:id/smart-lists', () => {
+    return HttpResponse.json(SmartListDefinitionsResponseMock);
+  }),
+  http.post('http://localhost/users/:id/smart-lists', () => {
+    return HttpResponse.json({
+      ids: { trakt: 99999, slug: 'new-smart-list' },
+    }, { status: 201 });
+  }),
+  http.delete('http://localhost/users/:id/smart-lists/:list_id/', () => {
+    return new HttpResponse(null, { status: 204 });
+  }),
   http.get(
-    'http://localhost/users/saved_filters/:section',
-    (req) => {
-      return HttpResponse.json(
-        FilterResponseMock.filter((f) => f.section === req.params.section),
-      );
+    'http://localhost/smart-lists/:list_id/items/:type/:sort_by/:sort_how',
+    () => {
+      return HttpResponse.json(SmartListItemsResponseMock);
     },
   ),
+  http.get('http://localhost/smart-lists/:list_id', () => {
+    return HttpResponse.json(SmartListDefinitionsResponseMock.at(0));
+  }),
   http.get('http://localhost/users/me/likes/lists', () => {
     return HttpResponse.json(MinimalLikedListsResponseMock);
   }),

@@ -247,7 +247,7 @@ export const UrlBuilder = {
     smart: {
       create: () => '/lists/smart/create',
       all: () => '/lists/smart/view',
-      view: (id: number) => `/lists/smart/view/${id}`,
+      view: (slug: string) => `/lists/smart/view/${slug}`,
     },
     official: (slug: string, params: Record<string, string | number> = {}) =>
       `/lists/official/${slug}${

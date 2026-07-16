@@ -15,25 +15,23 @@
 
   const { list }: { list: SmartList } = $props();
 
-  const href = $derived(UrlBuilder.lists.smart.view(list.id));
+  const href = $derived(UrlBuilder.lists.smart.view(list.slug));
   const { posters } = $derived(useSmartListPreview(list));
   const filterSummary = $derived(getFilterSummary(list));
 
-  function targetLabel(target: SmartList["target"]) {
-    switch (target) {
+  function sourceLabel(source: SmartList["source"]) {
+    switch (source) {
       case "trending":
         return m.list_title_trending();
       case "popular":
         return m.list_title_most_popular();
       case "anticipated":
         return m.list_title_most_anticipated();
-      case "unknown":
-        return m.list_title_smart_lists();
+      case "recommendations":
+        return m.list_title_recommended();
+      case "discover":
+        return m.button_label_discover();
     }
-  }
-
-  function splitValues(value: string): string[] {
-    return value.split(",").map((item) => item.trim()).filter(Boolean);
   }
 
   function toTitleCase(value: string): string {
@@ -43,58 +41,56 @@
       .replace(/\b\w/g, (character) => character.toUpperCase());
   }
 
-  function formatRange(
-    value: string,
-    formatter: (range: { min: number; max: number }) => string,
+  function toRatingPercentage(value: number): string {
+    return toPercentage(value / 100, languageTag());
+  }
+
+  function formatNumberRange(
+    range: number[],
+    formatter: (value: { min: number; max: number }) => string,
   ): string {
-    const [minValue, maxValue] = value.split("-");
+    const [min, max] = range;
 
-    if (!minValue || !maxValue) {
-      return formatPlainRange(value);
+    if (min != null && max != null) {
+      return formatter({ min, max });
     }
 
-    const min = Number(minValue);
-    const max = Number(maxValue);
-
-    if (Number.isNaN(min) || Number.isNaN(max)) {
-      return value;
+    if (min != null) {
+      return m.list_summary_range_from({ value: String(min) });
     }
 
-    return formatter({ min, max });
+    if (max != null) {
+      return m.list_summary_range_up_to({ value: String(max) });
+    }
+
+    return "";
   }
 
-  function formatPlainRange(value: string): string {
-    const [min, max] = value.split("-");
+  function formatPlainRange(range: number[]): string {
+    const [min, max] = range;
 
-    if (min && max) {
-      return m.list_summary_range_between({ min, max });
+    if (min != null && max != null) {
+      return m.list_summary_range_between({
+        min: String(min),
+        max: String(max),
+      });
     }
 
-    if (min) {
-      return m.list_summary_range_from({ value: min });
+    if (min != null) {
+      return m.list_summary_range_from({ value: String(min) });
     }
 
-    if (max) {
-      return m.list_summary_range_up_to({ value: max });
+    if (max != null) {
+      return m.list_summary_range_up_to({ value: String(max) });
     }
 
-    return value;
+    return "";
   }
 
-  function toRatingPercentage(value: string): string {
-    const numeric = Number(value);
+  function formatPercentRange(range: number[], label: string): string {
+    const [min, max] = range;
 
-    if (Number.isNaN(numeric)) {
-      return value;
-    }
-
-    return toPercentage(numeric / 100, languageTag());
-  }
-
-  function formatPercentRange(value: string, label: string): string {
-    const [min, max] = value.split("-");
-
-    if (min && max) {
+    if (min != null && max != null) {
       return m.list_summary_range_labeled_between({
         label,
         min: toRatingPercentage(min),
@@ -102,74 +98,85 @@
       });
     }
 
-    if (min) {
+    if (min != null) {
       return m.list_summary_range_labeled_from({
         label,
         value: toRatingPercentage(min),
       });
     }
 
-    if (max) {
+    if (max != null) {
       return m.list_summary_range_labeled_up_to({
         label,
         value: toRatingPercentage(max),
       });
     }
 
-    return `${label} ${value}`;
+    return label;
   }
 
-  function formatFilter(key: string, value: string): string[] {
-    if (value.length === 0) {
-      return [];
-    }
-
+  function formatList(key: string, values: string[]): string[] {
     switch (key) {
       case "genres":
       case "subgenres":
-        return splitValues(value).map((genre) => toTranslatedGenre(genre));
-      case "years":
-        return [formatRange(value, m.advanced_filter_label_release_year)];
-      case "runtimes":
-        return [formatRange(value, m.advanced_filter_label_runtime)];
-      case "ratings":
-        return [formatPercentRange(value, "Trakt")];
-      case "imdb_ratings":
-        return [`IMDb ${formatPlainRange(value)}`];
-      case "rt_meters":
-        return [formatPercentRange(value, "RT")];
-      case "rt_user_meters":
-        return [formatPercentRange(value, "RT Audience")];
+        return values.map((genre) => toTranslatedGenre(genre));
       case "certifications":
-        return splitValues(value).map((certification) =>
-          certification.toUpperCase()
-        );
       case "countries":
-        return splitValues(value).map((country) => country.toUpperCase());
-      case "statuses":
-      case "watchnow":
-        return splitValues(value).map(toTitleCase);
-      case "ignore_watched":
-        return value === "true" ? [m.header_hide_watched()] : [];
-      case "ignore_watchlisted":
-        return value === "true" ? [m.header_hide_watchlisted()] : [];
+        return values.map((value) => value.toUpperCase());
       default:
-        return [`${toTitleCase(key)} ${value}`];
+        return values.map(toTitleCase);
     }
   }
 
+  function formatRange(key: string, range: number[]): string[] {
+    switch (key) {
+      case "years":
+        return [formatNumberRange(range, m.advanced_filter_label_release_year)];
+      case "runtimes":
+        return [formatNumberRange(range, m.advanced_filter_label_runtime)];
+      case "ratings":
+        return [formatPercentRange(range, "Trakt")];
+      case "imdb_ratings":
+        return [`IMDb ${formatPlainRange(range)}`];
+      case "rt_meters":
+        return [formatPercentRange(range, "RT")];
+      case "rt_user_meters":
+        return [formatPercentRange(range, "RT Audience")];
+      default:
+        return [];
+    }
+  }
+
+  function formatFilter(key: string, value: unknown): string[] {
+    if (Array.isArray(value)) {
+      return value.every((item) => typeof item === "string")
+        ? formatList(key, value as string[])
+        : formatRange(key, value as number[]);
+    }
+
+    if (value === true && key === "ignore_watched") {
+      return [m.header_hide_watched()];
+    }
+
+    if (value === true && key === "ignore_watchlisted") {
+      return [m.header_hide_watchlisted()];
+    }
+
+    return [];
+  }
+
   function getFilterSummary(list: SmartList): string {
-    const filters = Object.entries(list.params)
+    const filters = Object.entries(list.filters)
       .flatMap(([key, value]) => formatFilter(key, value));
 
-    return [targetLabel(list.target), ...filters].join(", ");
+    return [sourceLabel(list.source), ...filters].join(", ");
   }
 </script>
 
 <ListSummaryCard>
   <div class="trakt-smart-list-header">
     <div class="trakt-smart-list-icon" aria-hidden="true">
-      {#if list.type === "movie"}
+      {#if list.mediaType === "movies"}
         <MovieIcon />
       {:else}
         <ShowIcon />
@@ -193,7 +200,7 @@
       class="trakt-smart-list-posters"
       style="--poster-count: {$posters.length}"
     >
-      {#each $posters as poster, index (`${list.id}_poster_${index}`)}
+      {#each $posters as poster, index (`${list.slug}_poster_${index}`)}
         <div class="poster-wrapper" style="--poster-index: {index}">
           <CrossOriginImage
             src={poster}

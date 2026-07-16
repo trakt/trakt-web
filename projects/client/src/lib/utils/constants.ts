@@ -44,7 +44,6 @@ export const RECOMMENDED_DEFAULT_WATCH_WINDOW = 25;
 export const RECOMMENDED_DEFAULT_MIN_YEAR = 1990;
 
 export const DEFAULT_SMART_LIST_LIMIT = 5;
-export const UPPER_SMART_LIST_LIMIT = 100;
 
 export const SUPPORT_EMAIL = 'support@trakt.tv';
 export const COPYRIGHT_EMAIL = 'copyright@trakt.tv';
