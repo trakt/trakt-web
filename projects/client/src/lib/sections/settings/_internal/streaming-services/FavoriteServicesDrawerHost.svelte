@@ -11,7 +11,7 @@
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName.ts";
   import { SvelteSet } from "svelte/reactivity";
   import FavoriteServiceTile from "./FavoriteServiceTile.svelte";
-  import { toCountrySlugs } from "./toCountrySlugs.ts";
+  import { filterActiveFavorites } from "./filterActiveFavorites.ts";
   import { useStreamingServices } from "./useStreamingServices.ts";
 
   const { onClose }: { onClose: () => void } = $props();
@@ -31,7 +31,15 @@
   const countryCode = $country;
   const countryName = toCountryName(countryCode, languageTag());
 
-  const initialSlugs = toCountrySlugs($favorites, countryCode);
+  // The drawer only opens once streaming sources have loaded (the Manage button
+  // is disabled until then), so filtering out inactive favorites here is
+  // synchronous and final - no reactive cleanup needed.
+  // FIXME: filtering can be removed when cleanup happens server side
+  const initialSlugs = filterActiveFavorites({
+    favorites: $favorites,
+    country: countryCode,
+    activeSources: $countrySources,
+  });
 
   const selected = new SvelteSet<string>(initialSlugs);
   // Snapshot of the slugs that were already favorites when the drawer opened,

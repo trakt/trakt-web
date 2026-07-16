@@ -1,6 +1,5 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { StreamingSource } from '$lib/requests/models/StreamingSource.ts';
 import { saveStreamingPreferencesRequest } from '$lib/requests/queries/services/saveStreamingPreferencesRequest.ts';
 import { streamingSourcesQuery } from '$lib/requests/queries/services/streamingSourcesQuery.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
@@ -13,19 +12,22 @@ export function useStreamingServices() {
   const { invalidate } = useInvalidator();
 
   const sources = useQuery(streamingSourcesQuery()).pipe(
-    map((query) => query.data ?? new Map<string, StreamingSource[]>()),
+    map((query) => query.data),
   );
 
   const availableCountries = sources.pipe(
-    map((sourceMap) => [...sourceMap.keys()]),
+    map((sourceMap) => sourceMap ? [...sourceMap.keys()] : undefined),
   );
 
   const countrySources = combineLatest([country, sources]).pipe(
-    map(([countryCode, sourceMap]) => sourceMap.get(countryCode) ?? []),
+    map(([countryCode, sourceMap]) =>
+      sourceMap ? (sourceMap.get(countryCode) ?? []) : undefined
+    ),
   );
 
   const favoriteSources = combineLatest([country, favorites, sources]).pipe(
     map(([countryCode, favoriteIds, sourceMap]) => {
+      if (!sourceMap) return undefined;
       const favoriteSet = new Set(favoriteIds);
       return (sourceMap.get(countryCode) ?? []).filter((source) =>
         favoriteSet.has(toFavoriteId(countryCode, source.source))
