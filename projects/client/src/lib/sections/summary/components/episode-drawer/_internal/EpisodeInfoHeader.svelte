@@ -1,5 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import { shortcut } from "@svelte-put/shortcut";
+  import { isTopmostDrawer } from "$lib/components/drawer/isTopmostDrawer.ts";
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
@@ -27,6 +29,7 @@
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre";
+  import { createArrowNavTriggers } from "$lib/utils/events/createArrowNavTriggers.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { fade } from "svelte/transition";
@@ -60,6 +63,8 @@
     onSocialOpen: () => void;
     onHistoryOpen: () => void;
   } = $props();
+
+  let headerElement = $state<HTMLElement>();
 
   // The ratings query only needs the slug/season/episode numbers, so it can
   // resolve independently of the episode summary entry.
@@ -146,6 +151,23 @@
 
   const isTouch = useMedia(WellKnownMediaQuery.touch);
 
+  const navigateToEpisode = (url: string) => {
+    goto(url, { replaceState: true, noScroll: true, keepFocus: true });
+  };
+
+  const arrowNavigationTriggers = $derived(
+    createArrowNavTriggers({
+      prevUrl: previousEpisodeLink?.href,
+      nextUrl: nextEpisodeLink?.href,
+      modifier: false,
+      // Only steer episode navigation while this drawer is on top; a stacked
+      // ratings/social/history drawer keeps the arrow keys for itself.
+      canNavigate: () =>
+        headerElement != null && isTopmostDrawer(headerElement),
+      goto: navigateToEpisode,
+    }),
+  );
+
   // Touch devices: swiping the cover mirrors the prev/next buttons. Swipe right ->
   // previous episode, swipe left -> next. Missing targets are a no-op and the
   // indicator stays inactive so the swipe reads as disabled.
@@ -155,9 +177,15 @@
       return;
     }
 
-    goto(link.href, { replaceState: true, noScroll: true });
+    navigateToEpisode(link.href);
   };
 </script>
+
+<svelte:window
+  use:shortcut={{
+    trigger: arrowNavigationTriggers,
+  }}
+/>
 
 {#snippet cover()}
   {#if entry}
@@ -171,7 +199,7 @@
   {/if}
 {/snippet}
 
-<div class="episode-info-header">
+<div class="episode-info-header" bind:this={headerElement}>
   <div class="episode-info-poster-ratings">
     {#if $isTouch}
       <SwipeX
