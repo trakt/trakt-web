@@ -19,7 +19,7 @@
     <DeleteSmartListButton
       {list}
       isDeleting={$isDeleting}
-      onDelete={() => deleteList({ id: list.id })}
+      onDelete={() => deleteList({ slug: list.slug })}
     />
   {/snippet}
 </PopupMenu>

@@ -6,7 +6,7 @@ import { AnalyticsEvent } from '../../../../features/analytics/events/AnalyticsE
 import { useTrack } from '../../../../features/analytics/useTrack.ts';
 
 type DeleteListProps = {
-  id: number;
+  slug: string;
 };
 
 export function useDeleteSmartList() {
@@ -16,13 +16,13 @@ export function useDeleteSmartList() {
   const { track } = useTrack(AnalyticsEvent.SmartListDelete);
 
   const deleteList = async (
-    { id }: DeleteListProps,
+    { slug }: DeleteListProps,
   ) => {
     isDeleting.next(true);
     track();
 
     await deleteSmartListRequest({
-      id,
+      slug,
     });
 
     await invalidate(InvalidateAction.SmartList.Deleted);

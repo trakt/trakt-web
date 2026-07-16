@@ -2,12 +2,12 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { createSmartListRequest } from '$lib/requests/queries/users/createSmartListRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import type { SmartListWriteRequest } from '@trakt/api';
 import { BehaviorSubject } from 'rxjs';
 import { AnalyticsEvent } from '../../features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../../features/analytics/useTrack.ts';
 import type { ListTarget } from './models/ListTarget.ts';
-
-const ORIGIN = 'https://app.trakt.tv';
+import { toSmartListFilters } from './toSmartListFilters.ts';
 
 type CreateListProps = {
   name: string;
@@ -16,12 +16,14 @@ type CreateListProps = {
   filterMap: Record<string, string>;
 };
 
-function toPayload({ name, type, target, filterMap }: CreateListProps) {
-  const params = new URLSearchParams(filterMap).toString();
-
+function toPayload(
+  { name, type, target, filterMap }: CreateListProps,
+): SmartListWriteRequest {
   return {
     name,
-    url: `${ORIGIN}/${type}s/${target}?${params}`,
+    source: target as SmartListWriteRequest['source'],
+    media_type: type === 'movie' ? 'movies' : 'shows',
+    filters: toSmartListFilters(filterMap),
   };
 }
 
@@ -35,8 +37,8 @@ export function useCreateSmartList() {
     isCreating.next(true);
     track();
 
-    const payload = toPayload(props);
-    await createSmartListRequest(payload);
+    const body = toPayload(props);
+    await createSmartListRequest({ body });
 
     await invalidate(InvalidateAction.SmartList.Created);
 

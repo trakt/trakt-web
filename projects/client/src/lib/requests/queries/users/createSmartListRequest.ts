@@ -1,23 +1,23 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import type { SmartListWriteRequest } from '@trakt/api';
 
 type CreateSmartListRequestParams =
   & {
-    name: string;
-    url: string;
+    body: SmartListWriteRequest;
   }
   & ApiParams;
 
 export function createSmartListRequest(
-  { name, url, fetch }: CreateSmartListRequestParams,
+  { body, fetch }: CreateSmartListRequestParams,
 ): Promise<boolean> {
   return api({ fetch })
     .users
-    .filters
-    .add({
-      body: [{
-        name,
-        url,
-      }],
+    .smartLists
+    .create({
+      params: {
+        id: 'me',
+      },
+      body,
     })
     .then(({ status }) => status === 201);
 }
