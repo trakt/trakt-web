@@ -21,7 +21,7 @@
   import { useCollapsedList } from "./_internal/useCollapsedList";
   import CollapseIcon from "./CollapseIcon.svelte";
   import type { ListVariant } from "./ListVariant";
-  import type { ListDrilldownLinkProps } from "./models/ListDrilldownLinkProps";
+  import type { ListDrilldownProps } from "./models/ListDrilldownProps";
   import type { SectionListId } from "./models/SectionListId";
 
   const emptyStateClass = "section-list-empty-state";
@@ -35,7 +35,7 @@
     subtitle?: string;
     variant?: ListVariant;
     titleAction?: Snippet;
-    drilldown?: ListDrilldownLinkProps;
+    drilldown?: ListDrilldownProps;
     contentHash?: string;
   };
 
@@ -243,8 +243,7 @@
       }
 
       .trakt-list-item-container {
-        padding-inline-start: var(--ni-2);
-        padding-inline-end: var(--ni-2);
+        padding-inline: var(--inset-override-list-item, var(--ni-2));
       }
 
       .section-list-empty-state {

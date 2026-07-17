@@ -3,7 +3,7 @@
   import type { DeviceProps } from "$lib/guards/_internal/DeviceProps";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
-  import type { ListDrilldownLinkProps } from "../section-list/models/ListDrilldownLinkProps";
+  import type { ListDrilldownProps } from "../section-list/models/ListDrilldownProps";
   import ListTitle from "./ListTitle.svelte";
 
   type ListHeaderProps = {
@@ -14,7 +14,7 @@
     actions?: Snippet;
     listActions?: Snippet;
     navigationType?: DpadNavigationType;
-    drilldown?: ListDrilldownLinkProps;
+    drilldown?: ListDrilldownProps;
   } & HTMLElementProps;
 
   const {

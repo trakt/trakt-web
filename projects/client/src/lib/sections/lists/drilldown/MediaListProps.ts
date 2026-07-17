@@ -1,4 +1,4 @@
-import type { ListDrilldownLinkProps } from '$lib/components/lists/section-list/models/ListDrilldownLinkProps.ts';
+import type { ListDrilldownProps } from '$lib/components/lists/section-list/models/ListDrilldownProps.ts';
 import type { SectionListId } from '$lib/components/lists/section-list/models/SectionListId.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { Snippet } from 'svelte';
@@ -15,7 +15,7 @@ export type MediaListProps<T, M> = {
   actions?: Snippet<[T[], M]>;
   empty?: Snippet;
   metaInfo?: Snippet;
-  drilldown?: ListDrilldownLinkProps;
+  drilldown?: ListDrilldownProps;
   variant?: 'portrait' | 'landscape';
   titleAction?: Snippet;
   contentKey?: string;

@@ -7,19 +7,21 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
-  import { getGroupedServices } from "./getGroupedServices";
-  import type { CostType } from "./getMediaCost";
-  import { StreamingGroup } from "./models/StreamingGroup";
-  import { useAllStreamOn } from "./useAllStreamOn";
-  import WhereToWatchCategory from "./WhereToWatchCategory.svelte";
-  import WhereToWatchItem from "./WhereToWatchItem.svelte";
-  import WhereToWatchLogo from "./WhereToWatchLogo.svelte";
+  import { getGroupedServices } from "./_internal/getGroupedServices";
+  import type { CostType } from "./_internal/getMediaCost";
+  import { StreamingGroup } from "./_internal/models/StreamingGroup";
+  import { useAllStreamOn } from "./_internal/useAllStreamOn";
+  import WhereToWatchCategory from "./_internal/WhereToWatchCategory.svelte";
+  import WhereToWatchItem from "./_internal/WhereToWatchItem.svelte";
+  import WhereToWatchLogo from "./_internal/WhereToWatchLogo.svelte";
 
   const {
     onClose,
+    elevated = false,
     ...target
   }: MetaInfoProps & {
     onClose: () => void;
+    elevated?: boolean;
   } = $props();
 
   const { list, isLoading } = $derived(useAllStreamOn(target));
@@ -60,7 +62,7 @@
   };
 </script>
 
-<Drawer {onClose} title={m.list_title_where_to_watch()} size="large">
+<Drawer {onClose} title={m.list_title_where_to_watch()} size="large" {elevated}>
   <RenderFor audience="authenticated" device={["mobile"]}>
     {#if $plexServices.length > 0}
       <WhereToWatchCategory>
