@@ -13,11 +13,10 @@
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
-  import LikeListAction from "./_internal/LikeListAction.svelte";
+  import LikeButton from "./_internal/LikeButton.svelte";
   import ListReorderDrawer from "./ListReorderDrawer.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import { useDeleteList } from "./_internal/useDeleteList";
-  import { useLikeList } from "./_internal/useLikeList";
   import ListReorderButton from "./ListReorderButton.svelte";
 
   const { list }: { list: MediaListSummary } = $props();
@@ -28,38 +27,19 @@
   let showReorderList = $state(false);
 
   const { user } = useUser();
-  const { likeList, unlikeList, isUpdating, isLiked } = $derived(
-    useLikeList(list),
-  );
 
-  const isListOwner = $derived($user.slug === list.user?.slug);
+  const isListOwner = $derived($user?.slug === list.user?.slug);
   const isOnListPage = $derived(
     getListUrl({ type: "user-list", list }) === page.url.pathname,
   );
-
-  const handleLike = $derived(() => {
-    if ($isLiked) {
-      unlikeList();
-      return;
-    }
-
-    likeList();
-  });
-
-  const isDisabled = $derived($isUpdating || isListOwner);
 </script>
+
+<LikeButton {list} />
 
 <RenderFor audience="authenticated">
   {#if $isDeleted && isOnListPage}
     <Redirect to={UrlBuilder.lists.user("me")} />
   {/if}
-
-  <LikeListAction
-    onToggle={handleLike}
-    disabled={isDisabled}
-    state={$isLiked ? "liked" : "unliked"}
-    {list}
-  />
 
   <PopupMenu
     label={m.button_label_popup_menu({ title: list.name })}
