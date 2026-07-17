@@ -1,3 +1,6 @@
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { filterWatchedCalendarItems } from '$lib/features/calendar/filterWatchedCalendarItems.ts';
+import { filterWatchlistedCalendarItems } from '$lib/features/calendar/filterWatchlistedCalendarItems.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
@@ -58,19 +61,35 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
   );
 
   const query = useQuery(getUpcomingCalendarQuery(startDate, props));
+  const { history, watchlist } = useUser();
   const overlay = createBulkIntlOverlay<MediaEntry | UpcomingEpisodeEntry>({
     getTargets: episodeWithShowOrMovieTargets,
   });
 
   const baseLoading = query.pipe(map(($query) => $query.isLoading));
 
-  const list = query.pipe(
+  const entries = query.pipe(
     map(($query) => {
       const startOfToday = getStartOfDay(new Date()).getTime();
       return ($query.data ?? [])
-        .filter((d) => d.effectiveReleaseDate.getTime() >= startOfToday)
-        .slice(0, props.limit);
+        .filter((d) => d.effectiveReleaseDate.getTime() >= startOfToday);
     }),
+  );
+
+  const unwatchedEntries = filterWatchedCalendarItems({
+    items: entries,
+    history,
+    filter: props.filter,
+  });
+
+  const visibleEntries = filterWatchlistedCalendarItems({
+    items: unwatchedEntries,
+    watchlist,
+    filter: props.filter,
+  });
+
+  const list = visibleEntries.pipe(
+    map(($entries) => $entries.slice(0, props.limit)),
     overlay.operator,
   );
 

@@ -1,3 +1,4 @@
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
 import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
@@ -13,6 +14,8 @@ import { map, type Observable } from 'rxjs';
 import type { FilterParams } from '../../../requests/models/FilterParams.ts';
 import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
 import type { Calendar } from '../models/Calendar.ts';
+import { filterWatchedCalendarItems } from '../filterWatchedCalendarItems.ts';
+import { filterWatchlistedCalendarItems } from '../filterWatchlistedCalendarItems.ts';
 
 type UseReleasesCalendarParams = {
   start: Date;
@@ -44,6 +47,8 @@ export function useReleasesCalendar(
     }),
   );
 
+  const { history, watchlist } = useUser();
+
   const baseLoading = query.pipe(
     map(toLoadingState),
   );
@@ -52,11 +57,26 @@ export function useReleasesCalendar(
     getTargets: episodeWithShowOrMovieTargets,
   });
 
+  const allItems = query.pipe(
+    map(($query) => $query.data ?? []),
+    overlay.operator,
+  );
+
+  const unwatchedItems = filterWatchedCalendarItems({
+    items: allItems,
+    history,
+    filter: props.filter,
+  });
+
+  const visibleItems = filterWatchlistedCalendarItems({
+    items: unwatchedItems,
+    watchlist,
+    filter: props.filter,
+  });
+
   return {
     isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
-    calendar: query.pipe(
-      map(($query) => $query.data ?? []),
-      overlay.operator,
+    calendar: visibleItems.pipe(
       map(($items) =>
         Array.from({ length: props.days }, (_, i) => {
           const date = new Date(props.start);
