@@ -4,13 +4,14 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
+  import type { DrilldownSource } from "$lib/sections/lists/components/models/DrilldownSource.ts";
   import type { Snippet } from "svelte";
-  import type { ListDrilldownLinkProps } from "../section-list/models/ListDrilldownLinkProps";
+  import type { ListDrilldownProps } from "../section-list/models/ListDrilldownProps";
 
   type ListTitleProps = {
     title: string;
     metaInfo?: Snippet;
-    drilldown?: ListDrilldownLinkProps;
+    drilldown?: ListDrilldownProps;
     subtitle?: string;
     disabled?: boolean;
   } & HTMLElementProps;
@@ -26,7 +27,20 @@
 
   const { isEditMode } = useEditMode();
   const { track } = useTrack(AnalyticsEvent.Drilldown);
+
+  const isDrilldownActive = $derived(Boolean(drilldown) && !$isEditMode);
+  const isDrilldownDisabled = $derived(
+    disabled || drilldown?.mode === "disabled",
+  );
+
+  const trackDrilldown = (source: DrilldownSource) =>
+    track({ source: source.id, type: source.type });
 </script>
+
+{#snippet drilldownContent()}
+  {@render content()}
+  <CaretRightIcon />
+{/snippet}
 
 {#snippet content()}
   <div class="trakt-list-title-wrapper">
@@ -46,22 +60,33 @@
 
 <div
   class="trakt-list-title"
-  data-drilldown={drilldown && !$isEditMode ? "" : undefined}
+  data-drilldown={isDrilldownActive ? "" : undefined}
   {...props}
 >
-  {#if drilldown && !$isEditMode}
+  {#if isDrilldownActive && drilldown?.onClick}
+    <button
+      type="button"
+      class="trakt-list-title-action"
+      aria-label={drilldown.label}
+      disabled={isDrilldownDisabled}
+      onclick={() => {
+        trackDrilldown(drilldown.source);
+        drilldown.onClick();
+      }}
+    >
+      {@render drilldownContent()}
+    </button>
+  {:else if isDrilldownActive && drilldown}
     <Link
       href={drilldown.href}
       label={drilldown.label}
       noscroll={drilldown.noscroll}
       replacestate={drilldown.replacestate}
-      disabled={disabled || drilldown.mode === "disabled"}
+      disabled={isDrilldownDisabled}
       color="inherit"
-      onclick={() =>
-        track({ source: drilldown.source.id, type: drilldown.source.type })}
+      onclick={() => trackDrilldown(drilldown.source)}
     >
-      {@render content()}
-      <CaretRightIcon />
+      {@render drilldownContent()}
     </Link>
   {:else}
     {@render content()}
@@ -81,6 +106,7 @@
     min-width: 0;
 
     .trakt-list-title-wrapper,
+    .trakt-list-title-action,
     :global(.trakt-link) {
       display: flex;
       align-items: center;
@@ -92,7 +118,19 @@
       text-decoration: none;
     }
 
+    .trakt-list-title-action {
+      appearance: none;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
     &[data-drilldown] {
+      .trakt-list-title-action,
       :global(.trakt-link) {
         :global(svg) {
           flex-shrink: 0;
@@ -113,6 +151,14 @@
               color: var(--color-link-active);
             }
           }
+        }
+      }
+
+      .trakt-list-title-action:disabled {
+        cursor: default;
+
+        :global(svg) {
+          color: var(--color-foreground-button-disabled);
         }
       }
 

@@ -1,13 +1,13 @@
 <script lang="ts">
   import ListTitle from "$lib/components/lists/_internal/ListTitle.svelte";
-  import type { ListDrilldownLinkProps } from "$lib/components/lists/section-list/models/ListDrilldownLinkProps";
+  import type { ListDrilldownProps } from "$lib/components/lists/section-list/models/ListDrilldownProps";
   import type { Snippet } from "svelte";
 
   type ListsHeaderProps = {
     title: string;
     icon?: Snippet;
     actions?: Snippet;
-    drilldown?: ListDrilldownLinkProps;
+    drilldown?: ListDrilldownProps;
   };
 
   const { title, icon, actions, drilldown }: ListsHeaderProps = $props();

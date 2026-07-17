@@ -7,6 +7,9 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
+  import WhereToWatchList from "$lib/sections/lists/where-to-watch/WhereToWatchList.svelte";
+  import WhereToWatchDrawerHost from "$lib/sections/lists/where-to-watch/WhereToWatchDrawerHost.svelte";
+  import WhereToWatchListSkeleton from "$lib/sections/lists/where-to-watch/WhereToWatchListSkeleton.svelte";
   import DrawerCastSection from "$lib/sections/summary/components/_internal/DrawerCastSection.svelte";
   import MediaStats from "$lib/sections/summary/components/details/_internal/MediaStats.svelte";
   import MediaStatsSkeleton from "$lib/sections/summary/components/details/_internal/MediaStatsSkeleton.svelte";
@@ -22,7 +25,9 @@
   import EpisodeInfoHeader from "./_internal/EpisodeInfoHeader.svelte";
   import EpisodeReviewsTab from "./_internal/EpisodeReviewsTab.svelte";
   import EpisodeReviewsTabSkeleton from "./_internal/EpisodeReviewsTabSkeleton.svelte";
+  import { useEpisodeAired } from "./_internal/useEpisodeAired.ts";
   import { useEpisodePeople } from "./_internal/useEpisodePeople.ts";
+  import { useEpisodeStreamOn } from "./_internal/useEpisodeStreamOn.ts";
   import { useEpisodeSummary } from "./_internal/useEpisodeSummary.ts";
 
   const {
@@ -42,12 +47,21 @@
   let isOpen = $state(false);
   let activeTab = $state("info");
 
-  // Ratings, social activities and history open as drawers stacked on top of
-  // this one, mounted locally (not via the `view=` URL param, which would
-  // replace this drawer and resolve show-scoped data instead of the episode).
-  let isRatingsOpen = $state(false);
-  let isSocialOpen = $state(false);
-  let isHistoryOpen = $state(false);
+  type StackedDrawer = "ratings" | "social" | "history" | "where-to-watch";
+
+  const episodeKey = $derived(`${season}-${episode}`);
+
+  let opened = $state<{ key: string; drawer: StackedDrawer }>();
+  const openDrawer = $derived(
+    opened?.key === episodeKey ? opened.drawer : undefined,
+  );
+
+  const openStacked = (drawer: StackedDrawer) => {
+    opened = { key: episodeKey, drawer };
+  };
+  const closeStacked = () => {
+    opened = undefined;
+  };
 
   const socialTarget = $derived({
     type: "episode" as const,
@@ -64,6 +78,10 @@
 
   const { episode: episodeEntry, isLoading } = useEpisodeSummary(params$);
   const { crew, isLoading: isPeopleLoading } = useEpisodePeople(params$);
+  const { streamOn, isLoading: isStreamOnLoading } = useEpisodeStreamOn(
+    params$,
+  );
+  const { isAired } = useEpisodeAired(params$);
 
   // Reset the drawer scroll to the top. Attached to a {#key} anchor so it
   // runs once per episode (the keyed block remounts on change). Deferred a
@@ -131,6 +149,26 @@
       <MediaStatsSkeleton />
     {/if}
 
+    {#if $episodeEntry}
+      <WhereToWatchList
+        type="episode"
+        episode={$episodeEntry}
+        media={show}
+        streamOn={$streamOn}
+        isLoading={$isStreamOnLoading}
+        variant="inline"
+        onDrilldown={() => openStacked("where-to-watch")}
+        --inset-override-list-item="0"
+      />
+    {:else if $isAired}
+      <WhereToWatchListSkeleton
+        type="episode"
+        slug={show.slug}
+        variant="inline"
+        --inset-override-list-item="0"
+      />
+    {/if}
+
     <DrawerCastSection
       crew={$crew}
       type="episode"
@@ -182,9 +220,9 @@
         isCrewLoading={$isPeopleLoading}
         {socialTarget}
         {socialTitle}
-        onRatingsOpen={() => (isRatingsOpen = true)}
-        onSocialOpen={() => (isSocialOpen = true)}
-        onHistoryOpen={() => (isHistoryOpen = true)}
+        onRatingsOpen={() => openStacked("ratings")}
+        onSocialOpen={() => openStacked("social")}
+        onHistoryOpen={() => openStacked("history")}
       />
 
       <TabView
@@ -215,7 +253,7 @@
   {/if}
 </Drawer>
 
-{#if isRatingsOpen && $episodeEntry}
+{#if openDrawer === "ratings" && $episodeEntry}
   <RatingsDrawer
     type="episode"
     episode={$episodeEntry}
@@ -223,27 +261,37 @@
     crew={$crew}
     {seasons}
     elevated
-    onClose={() => (isRatingsOpen = false)}
+    onClose={closeStacked}
   />
 {/if}
 
-{#if isSocialOpen}
+{#if openDrawer === "social"}
   <SocialDrawerHost
     target={socialTarget}
     title={socialTitle}
     elevated
-    onClose={() => (isSocialOpen = false)}
+    onClose={closeStacked}
   />
 {/if}
 
-{#if isHistoryOpen && $episodeEntry}
+{#if openDrawer === "history" && $episodeEntry}
   <HistoryDrawerHost
     type="episode"
     episode={$episodeEntry}
     {show}
     crew={$crew}
     elevated
-    onClose={() => (isHistoryOpen = false)}
+    onClose={closeStacked}
+  />
+{/if}
+
+{#if openDrawer === "where-to-watch" && $episodeEntry}
+  <WhereToWatchDrawerHost
+    type="episode"
+    episode={$episodeEntry}
+    media={show}
+    elevated
+    onClose={closeStacked}
   />
 {/if}
 

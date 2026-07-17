@@ -12,7 +12,7 @@
   import ActionButton from "../buttons/ActionButton.svelte";
   import CloseIcon from "../icons/CloseIcon.svelte";
   import ListTitle from "../lists/_internal/ListTitle.svelte";
-  import type { ListDrilldownLinkProps } from "../lists/section-list/models/ListDrilldownLinkProps";
+  import type { ListDrilldownProps } from "../lists/section-list/models/ListDrilldownProps";
   import { useDrawerPortal } from "./_internal/useDrawerPortal";
   import { verticalDrag } from "./_internal/verticalDrag";
   import { isTopmostDrawer } from "./isTopmostDrawer.ts";
@@ -33,7 +33,7 @@
     onOpened?: () => void;
     classList?: string;
     variant?: "default" | "vip";
-    drilldown?: ListDrilldownLinkProps;
+    drilldown?: ListDrilldownProps;
     headerVariant?: "default" | "overlay";
     // Raise this drawer (and its underlay) above a base-layer drawer, so a
     // drawer stacked on top of another still closes on outside tap.

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { ListDrilldownProps } from "$lib/components/lists/section-list/models/ListDrilldownProps";
   import type { ListVariant } from "$lib/components/lists/section-list/ListVariant";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -13,18 +14,38 @@
   import { slide } from "svelte/transition";
   import JustWatchInfo from "./_internal/JustWatchInfo.svelte";
   import { mapToServices } from "./_internal/mapToServices";
+  import { whereToWatchListScope } from "./_internal/whereToWatchListScope.ts";
   import WhereToWatchItem from "./_internal/WhereToWatchItem.svelte";
+  import WhereToWatchSkeletonItems from "./_internal/WhereToWatchSkeletonItems.svelte";
 
   const {
     streamOn,
     variant,
+    onDrilldown,
+    isLoading = false,
     ...target
   }: MetaInfoProps & {
     streamOn?: StreamOn;
     variant?: ListVariant;
+    onDrilldown?: () => void;
+    isLoading?: boolean;
   } = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
+
+  const drilldown = $derived.by<ListDrilldownProps>(() => {
+    const shared = {
+      source: { id: "where-to-watch" },
+      label: m.button_label_view_all_where_to_watch(),
+      mode: "always",
+    } as const;
+
+    if (onDrilldown) {
+      return { ...shared, onClick: onDrilldown };
+    }
+
+    return { ...shared, ...buildDrawerLink(SummaryDrawers.WhereToWatch) };
+  });
   const justWatchServices = $derived(mapToServices(streamOn));
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
 
@@ -59,17 +80,12 @@
   <div transition:slide={{ duration: 150 }} class="trakt-where-to-watch-list">
     <SectionList
       id={{
-        scope: `where-to-watch-list-${target.type}`,
+        scope: whereToWatchListScope(target.type),
         key: target.media.slug,
       }}
       items={services}
       title={m.list_title_where_to_watch()}
-      drilldown={{
-        ...buildDrawerLink(SummaryDrawers.WhereToWatch),
-        source: { id: "where-to-watch" },
-        label: m.button_label_view_all_where_to_watch(),
-        mode: "always",
-      }}
+      {drilldown}
       {metaInfo}
       {variant}
       --height-list="var(--height-where-to-watch-list)"
@@ -79,7 +95,11 @@
       {/snippet}
 
       {#snippet empty()}
-        <p class="secondary">{m.button_text_no_services()}</p>
+        {#if isLoading}
+          <WhereToWatchSkeletonItems />
+        {:else}
+          <p class="secondary">{m.button_text_no_services()}</p>
+        {/if}
       {/snippet}
     </SectionList>
   </div>
