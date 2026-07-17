@@ -103,7 +103,7 @@
 
   {#if expanded}
     <ul id="titles-{person.id}" class="yir-2024-person-titles" role="list">
-      {#each person.titles as title (title.traktId)}
+      {#each person.titles as title (title.key)}
         {@const meta = titleMeta(title)}
         <li class="yir-2024-person-title" role="listitem">
           <Link

@@ -121,7 +121,7 @@
             side="top"
           >
             {#snippet content()}
-              {#each person.titles as title (title.traktId)}
+              {#each person.titles as title (title.key)}
                 <div class="yir-tooltip-title">
                   {#if title.type === "show" && title.episodeCount}
                     <span>{title.title} —</span>

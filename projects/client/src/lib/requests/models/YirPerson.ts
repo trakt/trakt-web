@@ -2,6 +2,11 @@ import { z } from 'zod';
 import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
 
 const YirPersonTitleSchema = z.object({
+  /**
+   * Composite `type-traktId` key. A trakt id is only unique within a media
+   * type, so a movie and a show can share the same numeric id.
+   */
+  key: z.string(),
   title: z.string(),
   type: z.enum(['show', 'movie']),
   traktId: z.number(),
