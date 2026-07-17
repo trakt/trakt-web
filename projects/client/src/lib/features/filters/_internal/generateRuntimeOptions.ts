@@ -2,7 +2,9 @@ import type { FilterOption } from '$lib/features/filters/models/FilterOptions.ts
 import * as m from '$lib/features/i18n/messages.ts';
 
 const RUNTIME_RANGES = [
-  { value: '0-90', label: () => m.filter_label_runtime({ range: '0-90' }) },
+  { value: '0-30', label: () => m.filter_label_runtime({ range: '0-30' }) },
+  { value: '31-60', label: () => m.filter_label_runtime({ range: '31-60' }) },
+  { value: '61-90', label: () => m.filter_label_runtime({ range: '61-90' }) },
   { value: '91-120', label: () => m.filter_label_runtime({ range: '91-120' }) },
   { value: '121-', label: () => m.filter_label_runtime({ range: '121+' }) },
 ];
