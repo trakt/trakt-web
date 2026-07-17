@@ -1,3 +1,4 @@
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { makeTargets } from '$lib/features/intl-overlay/makeTargets.ts';
@@ -11,6 +12,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { personMovieCreditsQuery } from '$lib/requests/queries/people/personMovieCreditsQuery.ts';
 import { personShowCreditsQuery } from '$lib/requests/queries/people/personShowCreditsQuery.ts';
 import { combineLatest, map, type Observable, of, switchMap } from 'rxjs';
+import { isCreditHidden } from './_internal/isCreditHidden.ts';
 
 type UseCreditsListProps = {
   type$: Observable<MediaType>;
@@ -94,21 +96,40 @@ export function useCreditsList(
     getTargets: flatCreditTargets,
   });
 
+  const { history, watchlist } = useUser();
+
   // switchMap keeps the flatten -> overlay -> rebuild chain bound to the
   // same `query` emission so navigating between credits pages can never
   // pair fresh credits with stale localized titles.
-  const credits = combineLatest([query, mode$]).pipe(
-    switchMap(([$query, mode]) =>
-      of(
-        flattenCredits($query.data).filter(
-          ({ credit }) => mode === 'media' || credit.media.type === mode,
-        ),
-      ).pipe(
-        overlay.operator,
-        map(($flat) => rebuildCredits($query.data, $flat)),
-      )
-    ),
-  );
+  const credits = combineLatest([query, mode$, filter$, history, watchlist])
+    .pipe(
+      switchMap(([$query, mode, $filter, $history, $watchlist]) => {
+        // The credits endpoint ignores these filters server-side, so honor the
+        // "Display Watched" / "Display Watchlisted" toggles here.
+        const ignoreWatched = `${$filter.ignore_watched ?? ''}` === 'true';
+        const ignoreWatchlisted = `${$filter.ignore_watchlisted ?? ''}` ===
+          'true';
+
+        return of(
+          flattenCredits($query.data)
+            .filter(({ credit }) =>
+              mode === 'media' || credit.media.type === mode
+            )
+            .filter(({ credit }) =>
+              !isCreditHidden({
+                media: credit.media,
+                history: $history,
+                watchlist: $watchlist,
+                ignoreWatched,
+                ignoreWatchlisted,
+              })
+            ),
+        ).pipe(
+          overlay.operator,
+          map(($flat) => rebuildCredits($query.data, $flat)),
+        );
+      }),
+    );
 
   return {
     credits,

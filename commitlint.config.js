@@ -89,6 +89,7 @@ module.exports = {
         'notes',
         'out-now',
         'parameter',
+        'person',
         'player',
         'popover',
         'popular',
