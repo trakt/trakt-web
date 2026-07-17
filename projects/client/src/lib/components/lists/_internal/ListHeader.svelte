@@ -15,6 +15,7 @@
     listActions?: Snippet;
     navigationType?: DpadNavigationType;
     drilldown?: ListDrilldownLinkProps;
+    onDrilldown?: () => void;
   } & HTMLElementProps;
 
   const {
@@ -25,6 +26,7 @@
     actions,
     navigationType,
     drilldown,
+    onDrilldown,
     listActions,
     disabled,
     ...props
@@ -45,7 +47,14 @@
       <div class="trakt-list-title">
         {@render titleAction({ device: ["desktop", "tablet-lg"] })}
 
-        <ListTitle {title} {drilldown} {metaInfo} {disabled} {subtitle} />
+        <ListTitle
+          {title}
+          {drilldown}
+          {onDrilldown}
+          {metaInfo}
+          {disabled}
+          {subtitle}
+        />
 
         {#if actions}
           <div class="trakt-list-actions" data-dpad-navigation={navigationType}>

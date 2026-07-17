@@ -7,6 +7,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
+  import WhereToWatchList from "$lib/sections/lists/where-to-watch/WhereToWatchList.svelte";
+  import WhereToWatchDrawerHost from "$lib/sections/lists/where-to-watch/_internal/WhereToWatchDrawerHost.svelte";
   import DrawerCastSection from "$lib/sections/summary/components/_internal/DrawerCastSection.svelte";
   import MediaStats from "$lib/sections/summary/components/details/_internal/MediaStats.svelte";
   import MediaStatsSkeleton from "$lib/sections/summary/components/details/_internal/MediaStatsSkeleton.svelte";
@@ -23,6 +25,7 @@
   import EpisodeReviewsTab from "./_internal/EpisodeReviewsTab.svelte";
   import EpisodeReviewsTabSkeleton from "./_internal/EpisodeReviewsTabSkeleton.svelte";
   import { useEpisodePeople } from "./_internal/useEpisodePeople.ts";
+  import { useEpisodeStreamOn } from "./_internal/useEpisodeStreamOn.ts";
   import { useEpisodeSummary } from "./_internal/useEpisodeSummary.ts";
 
   const {
@@ -48,6 +51,7 @@
   let isRatingsOpen = $state(false);
   let isSocialOpen = $state(false);
   let isHistoryOpen = $state(false);
+  let isWhereToWatchOpen = $state(false);
 
   const socialTarget = $derived({
     type: "episode" as const,
@@ -64,6 +68,7 @@
 
   const { episode: episodeEntry, isLoading } = useEpisodeSummary(params$);
   const { crew, isLoading: isPeopleLoading } = useEpisodePeople(params$);
+  const { streamOn } = useEpisodeStreamOn(params$);
 
   // Reset the drawer scroll to the top. Attached to a {#key} anchor so it
   // runs once per episode (the keyed block remounts on change). Deferred a
@@ -187,6 +192,17 @@
         onHistoryOpen={() => (isHistoryOpen = true)}
       />
 
+      {#if $episodeEntry}
+        <WhereToWatchList
+          type="episode"
+          episode={$episodeEntry}
+          media={show}
+          streamOn={$streamOn}
+          variant="inline"
+          onDrilldown={() => (isWhereToWatchOpen = true)}
+        />
+      {/if}
+
       <TabView
         value={activeTab}
         onChange={(value) => (activeTab = value)}
@@ -247,6 +263,16 @@
   />
 {/if}
 
+{#if isWhereToWatchOpen && $episodeEntry}
+  <WhereToWatchDrawerHost
+    type="episode"
+    episode={$episodeEntry}
+    media={show}
+    elevated
+    onClose={() => (isWhereToWatchOpen = false)}
+  />
+{/if}
+
 <style lang="scss">
   :global(.trakt-drawer.trakt-episode-drawer) {
     gap: var(--ni-0);
@@ -275,6 +301,27 @@
 
     :global(.trakt-grid-list-container) {
       overflow-x: visible;
+    }
+
+    // The where-to-watch list sits outside the tab content, so inset it to
+    // line its title and cards up with the tab titles (e.g. People), which
+    // are padded --ni-8 inside the drawer.
+    :global(.trakt-where-to-watch-list) {
+      padding-inline: var(--ni-8);
+
+      // Tighten the container's --gap-l down to --gap-xs between the overview
+      // above and this section.
+      margin-top: calc(var(--gap-xs) - var(--gap-l));
+    }
+
+    // Drop the inline variant's 2px item inset so the cards stay flush with
+    // the title on that same edge.
+    :global(
+      .trakt-where-to-watch-list
+        .section-list-container[data-variant="inline"]
+        .trakt-list-item-container
+    ) {
+      padding-inline: 0;
     }
   }
 </style>
