@@ -91,7 +91,7 @@
   />
   <link rel="preconnect" href="https://cdn.plyr.io" crossorigin="anonymous" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&family=Roboto+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&family=Roboto+Mono:wght@400;600&family=Tajawal:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
   <!-- Plyr CSS - loaded async so it does not block first paint -->
