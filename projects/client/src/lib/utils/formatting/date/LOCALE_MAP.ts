@@ -59,5 +59,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'pt-PT': pt,
   'ca-ES': ca,
   'id-ID': id,
-  ar: arSA,
+  'ar-SA': arSA,
 };

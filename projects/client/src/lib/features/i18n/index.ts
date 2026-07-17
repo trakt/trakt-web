@@ -23,40 +23,10 @@ export type AvailableRegion = ExtractRegion<AvailableLocale>;
 export const availableLocales = locales;
 export const defaultLocale = baseLocale;
 
-/**
- * Maps the canonical BCP-47 form that `splitLanguageTag` produces back to the
- * `AvailableLocale` it came from.  For locales that are stored without a
- * region (e.g. `ar`), `splitLanguageTag` uses the language code as the region
- * fallback (e.g. `ar-ar`).  Without this map, `sanitizeLocale('ar-ar')` would
- * not find `ar` in `availableLocales` and would fall back to `en`.
- */
-const canonicalLocaleMap = new Map<string, AvailableLocale>(
-  locales.map((locale) => {
-    const { language, region } = splitLanguageTagRaw(locale);
-    return [`${language}-${region}`, locale];
-  }),
-);
-
 function sanitizeLocale(locale: string): AvailableLocale {
-  if (availableLocales.includes(locale as AvailableLocale)) {
-    return locale as AvailableLocale;
-  }
-  // Try the canonical BCP-47 form in case e.g. `ar` was expanded to `ar-ar`
-  const canonical = canonicalLocaleMap.get(locale.toLowerCase());
-  return canonical ?? defaultLocale;
-}
-
-function splitLanguageTagRaw(tag: string): {
-  language: string;
-  region: string;
-} {
-  const parts = tag.split('-');
-  const language = assertDefined(
-    parts.at(0),
-    'Language code is required.',
-  );
-  const region = parts.at(1) ?? language;
-  return { language, region };
+  return availableLocales.includes(locale as AvailableLocale)
+    ? locale as AvailableLocale
+    : defaultLocale;
 }
 
 function splitLanguageTag(languageTag: Locale): {
@@ -94,15 +64,19 @@ export function languageTag() {
 
 /**
  * Returns a locale string suitable for `Intl.*` constructors.
- * For Arabic, forces Gregorian calendar and Latin numerals so that
- * numeric output (years, durations, ratings) stays in the Latin script
- * that the rest of the UI uses. All other locales pass through unchanged.
+ *
+ * For Arabic (`ar-SA`), forces Gregorian calendar (`ca-gregory`) and Latin
+ * numerals (`nu-latn`).  The Trakt UI displays years, durations, and ratings
+ * as Latin digits everywhere; without the `nu-latn` override, `Intl`
+ * formatters would emit Eastern Arabic-Indic numerals (٠١٢…) which would
+ * clash with the rest of the interface.  All other locales pass through
+ * unchanged.
  */
 export function getIntlLocale(
   locale: AvailableLocale | AvailableLanguage = languageTag(),
 ) {
-  if (locale === 'ar' || locale.startsWith('ar-')) {
-    return 'ar-u-ca-gregory-nu-latn';
+  if (locale === 'ar-SA' || locale === 'ar' || locale.startsWith('ar-')) {
+    return 'ar-SA-u-ca-gregory-nu-latn';
   }
   return locale;
 }
@@ -114,14 +88,14 @@ export const setLocale = (locale: string): AvailableLocale => {
   return sanitizedLocale;
 };
 
-const RTL_LOCALES = new Set<AvailableLocale>(['fa-IR', 'ar']);
+const RTL_LOCALES = new Set<AvailableLocale>(['fa-IR', 'ar-SA']);
 
 export const getTextDirection = (locale: AvailableLocale) =>
   RTL_LOCALES.has(locale) ? 'rtl' : 'ltr';
 
 export const getPreferredLocale = (headers: Headers): AvailableLocale => {
   const localeIdentifiers = availableLocales.map((locale) => {
-    const { language, region } = splitLanguageTagRaw(locale);
+    const { language, region } = splitLanguageTag(locale);
     return `${language}-${region}`;
   });
 

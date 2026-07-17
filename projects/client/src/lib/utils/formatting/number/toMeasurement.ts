@@ -21,9 +21,6 @@ export function toMeasurement(
   value: number,
   locale: AvailableLocale | AvailableLanguage | string = 'en',
 ): string {
-  // Wait until we have a proper locale set
-  if (!locale) return '';
-
   const isMetric = detectRegionalMetricSystem();
   const selectedUnit = isMetric ? 'meter' : 'foot';
   const convertedValue = isMetric ? value : metersToFeet(value);
