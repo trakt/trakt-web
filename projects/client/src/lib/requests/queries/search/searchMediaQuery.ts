@@ -60,7 +60,7 @@ function mapToSearchResultEntry(
   }
 }
 
-const searchRequest = async (
+const searchRequest = (
   { query, type, config, limit, exact }: SearchParams,
 ) => {
   const queryParams = {
@@ -70,25 +70,12 @@ const searchRequest = async (
 
   const types = type ?? 'movie,show';
 
-  const response = await getMedia({
-    ...queryParams,
-    config,
-    types: types.split(',') as MediaType[],
-    exact,
-  })
-    .then((body) => ({
-      body,
-      status: 200,
-    }))
-    .catch(() => {
-      const searchApi = api({
-        fetch,
-      })
-        .search;
-
-      const searchQuery = exact ? searchApi.exact : searchApi.query;
-
-      return searchQuery({
+  // Exact matches are served by the API's exact endpoint. The fuzzy pass keeps
+  // querying the search index directly and falls back to the API on failure.
+  if (exact) {
+    return api({ fetch })
+      .search
+      .exact({
         query: {
           ...queryParams,
           extended: 'full,images',
@@ -97,9 +84,30 @@ const searchRequest = async (
           type: types,
         },
       });
-    });
+  }
 
-  return response;
+  return getMedia({
+    ...queryParams,
+    config,
+    types: types.split(',') as MediaType[],
+  })
+    .then((body) => ({
+      body,
+      status: 200,
+    }))
+    .catch(() =>
+      api({ fetch })
+        .search
+        .query({
+          query: {
+            ...queryParams,
+            extended: 'full,images',
+          },
+          params: {
+            type: types,
+          },
+        })
+    );
 };
 
 export const searchMediaQuery = defineQuery({

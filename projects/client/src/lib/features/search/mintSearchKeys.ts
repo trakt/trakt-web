@@ -36,7 +36,6 @@ export function mintSearchKeys(
     keys: {
       media: {
         default: scope('search:media'),
-        exact: scope('search:media:exact'),
       },
       people: scope('search:people'),
     },

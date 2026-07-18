@@ -20,7 +20,6 @@ describe('searchMediaQuery', () => {
               keys: {
                 media: {
                   default: '',
-                  exact: '',
                 },
                 people: '',
               },
