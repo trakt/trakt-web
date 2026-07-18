@@ -1,7 +1,10 @@
 <script lang="ts">
   import "../style";
 
+  import { goto } from "$app/navigation";
   import { page } from "$app/state";
+  import { shortcut } from "@svelte-put/shortcut";
+
   import CoverImage from "$lib/components/background/CoverImage.svelte";
   import CoverProvider from "$lib/components/background/CoverProvider.svelte";
   import ListScrollHistoryProvider from "$lib/components/lists/section-list/ListScrollHistoryProvider.svelte";
@@ -41,6 +44,8 @@
   import TopNavbar from "$lib/sections/navbar/TopNavbar.svelte";
   import NavbarToastContent from "$lib/sections/toast/NavbarToastContent.svelte";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
+  import { isTextInputTarget } from "$lib/utils/events/isTextInputTarget";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { retry } from "$lib/utils/retry/retry.js";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
@@ -144,6 +149,20 @@
     }
   </style>
 </svelte:head>
+
+<svelte:window
+  use:shortcut={{
+    trigger: {
+      key: "/",
+      callback: ({ originalEvent }) => {
+        if (isTextInputTarget(originalEvent.target)) return;
+        originalEvent.preventDefault();
+        // eslint-disable-next-line svelte/no-navigation-without-resolve
+        goto(UrlBuilder.search());
+      },
+    },
+  }}
+/>
 
 <ErrorProvider>
   <QueryClientProvider client={data.queryClient}>
