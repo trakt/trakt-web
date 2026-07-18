@@ -44,8 +44,8 @@
   import TopNavbar from "$lib/sections/navbar/TopNavbar.svelte";
   import NavbarToastContent from "$lib/sections/toast/NavbarToastContent.svelte";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
-  import { isTextInputTarget } from "$lib/utils/events/isTextInputTarget";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { isTextInputTarget } from "$lib/utils/events/isTextInputTarget.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { retry } from "$lib/utils/retry/retry.js";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
