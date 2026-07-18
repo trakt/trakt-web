@@ -156,6 +156,7 @@
       key: "/",
       callback: ({ originalEvent }) => {
         if (isTextInputTarget(originalEvent.target)) return;
+        if (originalEvent.ctrlKey || originalEvent.metaKey || originalEvent.altKey) return;
         originalEvent.preventDefault();
         // eslint-disable-next-line svelte/no-navigation-without-resolve
         goto(UrlBuilder.search());
