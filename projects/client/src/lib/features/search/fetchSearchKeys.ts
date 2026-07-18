@@ -9,7 +9,6 @@ const TypesenseConfigSchema = z.object({
   keys: z.object({
     media: z.object({
       default: z.string(),
-      exact: z.string(),
     }),
     people: z.string(),
   }),

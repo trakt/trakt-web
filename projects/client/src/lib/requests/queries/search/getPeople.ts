@@ -21,7 +21,6 @@ export async function getPeople({
     query,
     limit,
     types: [type],
-    exact: false,
   });
 
   return hits

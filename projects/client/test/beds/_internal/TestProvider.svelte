@@ -27,7 +27,6 @@
             keys: {
               media: {
                 default: "",
-                exact: "",
               },
               people: "",
             },

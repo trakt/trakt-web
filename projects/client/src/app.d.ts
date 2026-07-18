@@ -184,7 +184,6 @@ declare global {
     keys: {
       media: {
         default: string;
-        exact: string;
       };
       people: string;
     };
