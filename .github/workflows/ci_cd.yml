@@ -27,7 +27,7 @@ jobs:
       workflows: ${{ steps.changes.outputs.workflows }}
     steps:
       - name: Unveiling the Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: The Chronicle of Alterations
         uses: dorny/paths-filter@v3
@@ -60,7 +60,7 @@ jobs:
     continue-on-error: true
     steps:
       - name: Secure the Evidence aka Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
@@ -94,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Secure the Evidence aka Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
@@ -121,7 +121,7 @@ jobs:
 
     steps:
       - name: Secure the Evidence aka Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
@@ -172,7 +172,7 @@ jobs:
 
     steps:
       - name: Secure the Evidence aka Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
@@ -197,7 +197,7 @@ jobs:
 
     steps:
       - name: Secure the Evidence aka Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
@@ -238,7 +238,7 @@ jobs:
 
     steps:
       - name: Secure the Evidence aka Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
@@ -301,7 +301,7 @@ jobs:
 
     steps:
       - name: Secure the Evidence aka Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno

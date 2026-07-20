@@ -12,7 +12,7 @@ runs:
   steps:
     - name: Secure the Evidence aka Checkout Code
       id: checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Summon the Digital Oracle aka Install Deno
       uses: denoland/setup-deno@v2
