@@ -12,5 +12,6 @@ export function mapToConnectedApp(
     scopes: response.scopes,
     connectedAt: new Date(response.connected_at),
     lastUsedAt: new Date(response.last_used_at),
+    category: response.category,
   };
 }

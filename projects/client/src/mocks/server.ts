@@ -14,6 +14,7 @@ import { streamingSync } from './handlers/streamingSync.ts';
 import { sync } from './handlers/sync.ts';
 import { team } from './handlers/team.ts';
 import { users } from './handlers/users.ts';
+import { vip } from './handlers/vip.ts';
 import { watchNow } from './handlers/watchNow.ts';
 
 const handlers = [
@@ -33,6 +34,7 @@ const handlers = [
   ...comments,
   ...team,
   ...intl,
+  ...vip,
 ];
 
 export const server = setupServer(...handlers);

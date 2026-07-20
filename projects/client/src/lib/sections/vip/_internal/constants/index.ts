@@ -43,4 +43,5 @@ export const USER_LIMITS_PLACEHOLDER: UserLimits = {
   dynamicLists: emptyLimit,
   digitalLibrary: emptyLimit,
   totalNotes: emptyLimit,
+  connectedApps: emptyLimit,
 };

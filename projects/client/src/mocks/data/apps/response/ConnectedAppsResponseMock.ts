@@ -8,6 +8,7 @@ export const ConnectedAppsResponseMock: ConnectedAppResponse[] = [
     scopes: ['public', 'scrobble'],
     connected_at: '2024-01-15T10:30:00.000Z',
     last_used_at: '2025-06-01T18:42:00.000Z',
+    category: 'premium',
   },
   {
     id: 47,
@@ -16,5 +17,6 @@ export const ConnectedAppsResponseMock: ConnectedAppResponse[] = [
     scopes: ['public'],
     connected_at: '2025-03-22T08:00:00.000Z',
     last_used_at: '2025-05-28T21:15:00.000Z',
+    category: 'community',
   },
 ];

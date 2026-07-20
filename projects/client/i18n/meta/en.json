@@ -6619,6 +6619,10 @@
       "default": "Library",
       "description": "Title for the section that shows a user's library usage, such as their library item counts and limits."
     },
+    "usage_title_connected_apps": {
+      "default": "Connected Apps",
+      "description": "Title for the section that shows a user's connected community apps usage and limit."
+    },
     "limit_title_smart_lists": {
       "default": "Smart Lists",
       "description": "Title for the progress bar that shows a user's smart lists usage. This should be as short as possible."
@@ -6638,6 +6642,10 @@
     "limit_title_digital_library": {
       "default": "Digital Library",
       "description": "Title for the progress bar that shows a user's digital library usage. This should be as short as possible."
+    },
+    "limit_title_connected_apps": {
+      "default": "Connected Apps",
+      "description": "Title for the progress bar that shows a user's connected community apps usage. This should be as short as possible."
     },
     "text_vip_track_more": {
       "default": "Track more, list more, rate more.",
@@ -9591,6 +9599,18 @@
     "text_no_connected_apps": {
       "default": "You haven't connected any apps.",
       "description": "Empty-state text shown when the user has not authorized any third-party apps."
+    },
+    "heading_community_apps": {
+      "default": "Community Apps",
+      "description": "Heading for the section listing community-built third-party apps, which count toward the connected-apps limit."
+    },
+    "warning_connected_apps_limit": {
+      "default": "You've reached your connected apps limit. Upgrade to VIP to connect more.",
+      "description": "Upsell copy shown to free users who have reached their connected-apps limit, encouraging them to upgrade to VIP for a higher limit."
+    },
+    "warning_connected_apps_limit_vip": {
+      "default": "You've reached your connected apps limit",
+      "description": "Warning text shown to VIP users who have reached their connected-apps limit."
     },
     "heading_api_applications": {
       "default": "API Applications",
