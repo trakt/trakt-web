@@ -23,6 +23,7 @@
 
 <div
   class="trakt-streaming-service-logo"
+  class:has-logo={!!$logo?.url}
   class:has-channel-logo={!!$logo?.channelUrl}
 >
   {#if $logo?.url}

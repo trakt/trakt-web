@@ -23,6 +23,7 @@
     triggerLabel: string;
     hasValue: boolean;
     children: Snippet;
+    header?: Snippet;
     autoWidth?: boolean;
     icon?: Snippet;
     trigger?: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
@@ -34,6 +35,7 @@
     triggerLabel,
     hasValue,
     children,
+    header,
     autoWidth = false,
     icon,
     trigger,
@@ -70,6 +72,10 @@
         {#if contentOpen}
           <div {...wrapperProps}>
             <div {...props} class="trakt-select-content" data-auto-width={autoWidth}>
+              {#if header}
+                {@render header()}
+              {/if}
+
               <Select.ScrollUpButton>
                 {#snippet child({ props: scrollProps })}
                   <div {...scrollProps} class="trakt-select-scroll-button">
