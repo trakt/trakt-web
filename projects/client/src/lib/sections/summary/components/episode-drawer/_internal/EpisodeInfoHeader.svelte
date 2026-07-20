@@ -25,6 +25,7 @@
   import SpoilerSection from "$lib/sections/summary/components/_internal/SpoilerSection.svelte";
   import EpisodeActions from "$lib/sections/summary/components/episode/v2/EpisodeActions.svelte";
   import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
+  import { useIsRateable } from "$lib/sections/summary/components/rating/_internal/useIsRateable.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
@@ -32,7 +33,8 @@
   import { createArrowNavTriggers } from "$lib/utils/events/createArrowNavTriggers.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { fade } from "svelte/transition";
+  import { of } from "rxjs";
+  import { fade, slide } from "svelte/transition";
   import EpisodeInfoPoster from "./EpisodeInfoPoster.svelte";
   import { useEpisodeRating } from "./useEpisodeRating.ts";
 
@@ -75,6 +77,16 @@
   }));
 
   const { ratings, isLoading: isRatingLoading } = useEpisodeRating(params$);
+
+  // Drives the rate control. Computed in this long-lived header (not a
+  // short-lived child) so toggling `$isRateable` plays the rate control's intro
+  // transition when the entry resolves, instead of it being suppressed as part
+  // of a freshly mounted child's first render.
+  const { isRateable } = $derived(
+    entry
+      ? useIsRateable({ type: "episode", media: entry, show })
+      : { isRateable: of(false) },
+  );
 
   const { buildEpisodeDrawerLink } = summaryDrawerNavigation();
 
@@ -308,10 +320,10 @@
     </div>
   </div>
 
-  <div class="episode-info-actions">
-    {#if entry}
-      <div class="episode-info-actions-content" in:fade={fadeIn}>
-        <RenderFor audience="authenticated">
+  <RenderFor audience="authenticated">
+    <div class="episode-info-actions">
+      {#if entry}
+        <div class="episode-info-actions-content" in:fade={fadeIn}>
           <EpisodeActions
             episode={entry}
             {show}
@@ -319,28 +331,39 @@
             showTitle={show.title}
             {onHistoryOpen}
           />
-        </RenderFor>
-
-        <div class="episode-info-secondary">
-          <RenderFor audience="authenticated">
-            <SocialActivitiesButton
-              target={socialTarget}
-              title={socialTitle}
-              onclick={onSocialOpen}
-            />
-          </RenderFor>
-
-          <RateNow type="episode" media={entry} {show} />
         </div>
+      {:else}
+        <Skeleton
+          height="var(--ni-56)"
+          radius="var(--border-radius-xl)"
+          width="var(--ni-280)"
+        />
+      {/if}
+
+      <!-- Social pill + rate control. The social query resolves independently of
+           the episode summary, so this row renders immediately (skeleton and all)
+           to reserve its height - otherwise it would pop in once `entry` loads
+           and shove the tabs below it. The rate control only mounts once the
+           episode is rateable, so the pill stays centered on its own until then
+           (see .episode-info-secondary). -->
+      <div class="episode-info-secondary">
+        <SocialActivitiesButton
+          target={socialTarget}
+          title={socialTitle}
+          onclick={onSocialOpen}
+        />
+
+        {#if entry && $isRateable}
+          <div
+            class="episode-info-rate"
+            transition:slide={{ axis: "x", duration: 150 }}
+          >
+            <RateNow type="episode" media={entry} {show} />
+          </div>
+        {/if}
       </div>
-    {:else}
-      <Skeleton
-        height="var(--ni-56)"
-        radius="var(--border-radius-xl)"
-        width="var(--ni-280)"
-      />
-    {/if}
-  </div>
+    </div>
+  </RenderFor>
 
   <div class="episode-info-overview">
     {#if entry}
@@ -499,6 +522,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: var(--gap-s);
 
     // Match the skeleton / actions-bar height so the area never collapses
     // below it while the entry loads or when there are no actions to show.
@@ -518,13 +542,20 @@
     }
   }
 
-  // Social activities pill + rate control, inline under the actions bar.
+  // Social activities pill + rate control, centered together as one group
+  // under the actions bar. The rate control only renders when the episode is
+  // rateable, so an absent rate control leaves the pill centered on its own
+  // rather than nudged off-centre by an empty slot.
   .episode-info-secondary {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: var(--gap-s);
+    gap: var(--gap-m);
+
+    // Match the rate control's height so the row keeps the same height whether
+    // or not the rate stars are present.
+    min-height: var(--ni-40);
 
     // The social pill defaults to a top margin / flex-start; neutralise it so
     // it sits centered inline with the rate control.
@@ -532,7 +563,9 @@
       align-self: center;
       margin-top: 0;
     }
+  }
 
+  .episode-info-rate {
     :global(.trakt-rate-now) {
       gap: var(--gap-xxs);
     }
