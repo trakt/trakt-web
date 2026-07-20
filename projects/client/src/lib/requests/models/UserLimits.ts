@@ -15,6 +15,7 @@ export const UserLimitsSchema = z.object({
   dynamicLists: LimitsSchema,
   digitalLibrary: LimitsSchema,
   totalNotes: LimitsSchema,
+  connectedApps: LimitsSchema,
 });
 
 export type UserLimits = z.infer<

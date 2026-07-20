@@ -8,6 +8,7 @@ export const ConnectedAppSchema = z.object({
   scopes: z.array(z.string()),
   connectedAt: z.date(),
   lastUsedAt: z.date(),
+  category: z.enum(['community', 'premium']),
 });
 
 export type ConnectedApp = z.infer<typeof ConnectedAppSchema>;

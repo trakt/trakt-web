@@ -7,6 +7,7 @@ export const ConnectedAppResponseSchema = z.object({
   scopes: z.array(z.string()),
   connected_at: z.string(),
   last_used_at: z.string(),
+  category: z.enum(['community', 'premium']),
 });
 
 export type ConnectedAppResponse = z.infer<typeof ConnectedAppResponseSchema>;

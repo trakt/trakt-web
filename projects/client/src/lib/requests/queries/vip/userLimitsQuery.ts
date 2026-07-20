@@ -20,6 +20,7 @@ export const UserLimitsResponseSchema = z.object({
   dynamic_lists: LimitsSchema,
   digital_library: LimitsSchema,
   total_notes: LimitsSchema,
+  connected_apps: LimitsSchema,
 });
 
 type UserLimitsResponse = z.infer<
@@ -42,6 +43,7 @@ function mapToUserLimits(
     dynamicLists: response.dynamic_lists,
     digitalLibrary: response.digital_library,
     totalNotes: response.total_notes,
+    connectedApps: response.connected_apps,
   };
 }
 
@@ -77,6 +79,7 @@ export const userLimitsQuery = defineQuery({
     InvalidateAction.List.Deleted,
     InvalidateAction.SmartList.Created,
     InvalidateAction.SmartList.Deleted,
+    InvalidateAction.App.Revoke,
   ],
   dependencies: [],
   request: userLimitsRequest,

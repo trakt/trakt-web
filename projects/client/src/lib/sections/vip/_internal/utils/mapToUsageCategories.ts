@@ -52,5 +52,14 @@ export function mapToUsageCategories(
         },
       ],
     },
+    {
+      title: m.usage_title_connected_apps,
+      items: [
+        {
+          title: m.limit_title_connected_apps,
+          limits: limits.connectedApps,
+        },
+      ],
+    },
   ];
 }
