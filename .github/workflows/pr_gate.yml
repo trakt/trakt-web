@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Unveiling the Code Codex
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -41,7 +41,7 @@ jobs:
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
       - name: Unveiling the Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Use the Power of GitHub CLI
         run: gh pr merge --rebase --auto ${{ github.event.pull_request.number }}

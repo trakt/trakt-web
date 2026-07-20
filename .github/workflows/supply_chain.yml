@@ -37,7 +37,7 @@ jobs:
             release-assets.githubusercontent.com:443
 
       - name: Secure the Evidence aka Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -125,7 +125,7 @@ jobs:
             www-api.ibm.com:443
 
       - name: Secure the Evidence aka Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Scrutinizing the Lockfile Delta aka Dependency Review
         uses: actions/dependency-review-action@v4
