@@ -201,7 +201,7 @@
 
 {#snippet cover()}
   {#if entry}
-    <EpisodeInfoPoster {show} episode={entry} />
+    <EpisodeInfoPoster {show} episode={entry} {onHistoryOpen} />
   {:else}
     <div class="skeleton-cover">
       <div class="skeleton-cover-inner">
