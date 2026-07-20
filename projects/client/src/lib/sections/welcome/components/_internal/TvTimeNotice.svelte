@@ -1,12 +1,7 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import ExternalLinkIcon from "$lib/components/icons/ExternalLinkIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { importSourceHref } from "./importSourceHref.ts";
-
-  const TV_TIME_LIBERATOR_URL =
-    "https://chromewebstore.google.com/detail/tv-time-liberator-extensi/pohobkcjhigehafgnhehkanhjakajhpm";
-  const TV_TIME_GDPR_URL = "https://gdpr.tvtime.com/gdpr/self-service";
 
   const importHref = importSourceHref("tvtime");
 </script>
@@ -22,10 +17,6 @@
       <p class="tv-time-body">{m.welcome_tvtime_body()}</p>
     </div>
 
-    <p class="secondary tv-time-liberator-note">
-      {m.welcome_tvtime_liberator_body()}
-    </p>
-
     <div class="tv-time-actions">
       <Button
         href={importHref}
@@ -35,36 +26,6 @@
         label={m.welcome_tvtime_import_cta()}
       >
         {m.welcome_tvtime_import_cta()}
-      </Button>
-
-      <Button
-        href={TV_TIME_LIBERATOR_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        color="default"
-        variant="secondary"
-        style="flat"
-        label={m.welcome_tvtime_liberator_cta()}
-      >
-        {m.welcome_tvtime_liberator_cta()}
-        {#snippet icon()}
-          <ExternalLinkIcon size="small" />
-        {/snippet}
-      </Button>
-
-      <Button
-        href={TV_TIME_GDPR_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        color="default"
-        variant="secondary"
-        style="flat"
-        label={m.welcome_tvtime_gdpr_cta()}
-      >
-        {m.welcome_tvtime_gdpr_cta()}
-        {#snippet icon()}
-          <ExternalLinkIcon size="small" />
-        {/snippet}
       </Button>
     </div>
   </div>
@@ -152,11 +113,6 @@
 
   .tv-time-body {
     font-size: var(--ni-16);
-    line-height: 1.6;
-  }
-
-  .tv-time-liberator-note {
-    font-size: var(--font-size-text);
     line-height: 1.6;
   }
 
