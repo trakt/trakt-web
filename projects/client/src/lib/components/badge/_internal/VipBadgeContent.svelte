@@ -1,9 +1,12 @@
 <script lang="ts">
+  import BadgeSparkle from "./BadgeSparkle.svelte";
+
   const { children, size }: { size?: "normal" | "large" } & ChildrenProps =
     $props();
 </script>
 
 <div class="trakt-vip-badge" data-size={size}>
+  <BadgeSparkle />
   <p class="uppercase">
     {@render children()}
   </p>
@@ -20,8 +23,21 @@
     box-sizing: border-box;
 
     border-radius: var(--border-radius-xl);
-    background: var(--color-background-vip-badge);
+    /* Same design language as VipUpsellBadge: purple gradient + soft glow,
+       replacing the legacy flat red pill. The gradient range is wider and a
+       glossy top edge is added because the pill is small and often sits on a
+       purple VIP card, where the upsell recipe reads flat. */
+    background: linear-gradient(
+      135deg,
+      var(--purple-300),
+      var(--purple-600)
+    );
     color: var(--color-foreground-vip-badge);
+    box-shadow:
+      inset 0 var(--ni-1) 0
+        color-mix(in srgb, var(--purple-100) 45%, transparent),
+      0 var(--ni-2) var(--ni-12)
+        color-mix(in srgb, var(--purple-500) 55%, transparent);
 
     p {
       font-weight: 700;
@@ -34,6 +50,10 @@
 
       p {
         font-size: var(--font-size-title);
+      }
+
+      :global(.trakt-badge-sparkle) {
+        --badge-sparkle-size: var(--ni-20);
       }
     }
   }

@@ -64,12 +64,9 @@
     flex-direction: column;
     gap: var(--gap-m);
 
-    background: var(--background-usage-limits-card);
-    box-shadow: var(--shadow-base);
+    @include vip-glow-card;
 
     border-radius: var(--border-radius-xxl);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--color-border) 50%, transparent);
 
     /* Match the account card's padding so the row icons line up with it. */
     padding: var(--ni-24);
@@ -80,6 +77,14 @@
 
     :global(.trakt-tab-view) {
       width: 100%;
+
+      // The default gray tab chrome clashes with the purple VIP surface;
+      // recess the tab list into the card, give the active pill the VIP badge
+      // gradient, and swap the gray hover for a purple tint.
+      --color-tablist-background: var(--color-vip-tablist-background);
+      --color-tab-background: var(--background-vip-tab);
+      --color-tab-hover-background: var(--color-vip-tab-hover-background);
+      --color-tab-active-text: var(--color-foreground-vip-badge);
     }
   }
 </style>

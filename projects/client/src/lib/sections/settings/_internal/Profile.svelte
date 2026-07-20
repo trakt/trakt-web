@@ -13,6 +13,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import GetVIPLink from "$lib/sections/navbar/components/GetVIPLink.svelte";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
   import { formatLocalDate } from "$lib/utils/date/formatLocalDate";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
@@ -123,7 +124,7 @@
   );
 </script>
 
-<SettingsGroupCard>
+<SettingsGroupCard variant={$user.isVip ? "vip" : "muted"}>
   <div class="trakt-settings-profile-card">
     <ProfileImage
       isEditable
@@ -151,6 +152,8 @@
       >
         <VipBadge isDirector={$user.isDirector} />
       </Link>
+    {:else}
+      <GetVIPLink source="profile-settings" />
     {/if}
   </div>
 </SettingsGroupCard>

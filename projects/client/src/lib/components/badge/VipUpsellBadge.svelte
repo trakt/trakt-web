@@ -1,12 +1,10 @@
 <script lang="ts">
-  import SparkleStarIcon from "$lib/components/icons/SparkleStarIcon.svelte";
+  import BadgeSparkle from "./_internal/BadgeSparkle.svelte";
   import * as m from "$lib/features/i18n/messages";
 </script>
 
 <div class="trakt-vip-upsell-badge">
-  <span class="upsell-sparkle" aria-hidden="true">
-    <SparkleStarIcon />
-  </span>
+  <BadgeSparkle />
   <p class="uppercase">{m.badge_text_get_vip()}</p>
 </div>
 
@@ -35,15 +33,6 @@
     p {
       font-weight: 700;
       white-space: nowrap;
-    }
-
-    .upsell-sparkle {
-      display: inline-flex;
-
-      :global(svg) {
-        width: var(--ni-16);
-        height: var(--ni-16);
-      }
     }
   }
 </style>

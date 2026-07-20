@@ -259,7 +259,7 @@
     }
 
     &[data-variant="elevated"] {
-      background: var(--red-500);
+      background: var(--purple-500);
       color: var(--shade-10);
       border: none;
     }

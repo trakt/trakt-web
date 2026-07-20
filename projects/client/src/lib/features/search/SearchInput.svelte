@@ -137,7 +137,7 @@
     }
 
     &:focus-within {
-      outline: var(--border-thickness-xs) solid var(--purple-500);
+      outline: var(--border-thickness-xs) solid var(--color-input-focus);
     }
 
     .trakt-search-icon {

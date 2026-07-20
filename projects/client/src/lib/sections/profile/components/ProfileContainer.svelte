@@ -30,8 +30,7 @@
     align-self: center;
 
     border-radius: var(--border-radius-l);
-    background: var(--background-profile-details);
-    box-shadow: var(--shadow-raised);
+    @include muted-card;
 
     display: grid;
     grid-template-columns: 1fr;
@@ -44,7 +43,7 @@
     transition: padding var(--transition-increment) ease-in-out;
 
     &.is-vip {
-      background: var(--background-vip-profile-details);
+      @include vip-glow-card;
     }
 
     &.is-narrow {
@@ -56,6 +55,7 @@
       border-radius: 0;
 
       background: none;
+      border: none;
       box-shadow: none;
 
       height: auto;
@@ -63,6 +63,8 @@
 
       &.is-vip {
         background: none;
+        border: none;
+        box-shadow: none;
       }
     }
   }

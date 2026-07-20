@@ -6,7 +6,6 @@
   /**
    * Badge
    */
-  --color-background-vip-border: var(--red-500);
   --color-background-vip-badge: var(--red-500);
   --color-foreground-vip-badge: var(--shade-10);
 
@@ -46,7 +45,7 @@
    * Avatar
    */
   --color-border-avatar: var(--shade-50);
-  --color-border-vip-avatar: var(--red-500);
+  --color-border-vip-avatar: var(--purple-400);
 
   /**
    * Buttons
@@ -107,7 +106,7 @@
   /**
    * Inputs
    */
-  --color-input-focus: var(--purple-500);
+  --color-input-focus: var(--blue-500);
   --color-input-error: var(--red-600);
 
   /**
