@@ -10,7 +10,11 @@
     summaryDrawerNavigation,
   } from "../../_internal/summaryDrawerNavigation.ts";
 
-  const { count, i18n }: { count: number; i18n: TagIntl } = $props();
+  const {
+    count,
+    i18n,
+    onclick,
+  }: { count: number; i18n: TagIntl; onclick?: () => void } = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
 
@@ -18,38 +22,54 @@
   // FIXME: replace the one in the tags folder when new design is leading
 </script>
 
-<watch-count-tag>
-  <Link {...buildDrawerLink(SummaryDrawers.History)}>
-    <StemTag
-      --color-background-stem-tag="var(--color-background-indicator-tag)"
-      --color-foreground-stem-tag="var(--color-text-indicator-tag)"
-    >
-      <TrackIcon />
+{#snippet tag()}
+  <StemTag
+    --color-background-stem-tag="var(--color-background-indicator-tag)"
+    --color-foreground-stem-tag="var(--color-text-indicator-tag)"
+  >
+    <TrackIcon />
 
-      <p class="bold uppercase no-wrap">{i18n.watchedLabel()}</p>
-      {#if count > 1}
-        <p class="bold">·</p>
-        <div transition:slide={{ axis: "x", duration: 150 }}>
-          {#key count}
-            <p
-              class="bold uppercase no-wrap counter"
-              transition:slide={{
-                easing: linear,
-                axis: "y",
-                duration: transitionDuration,
-              }}
-            >
-              {count}
-            </p>
-          {/key}
-        </div>
-      {/if}
-    </StemTag>
-  </Link>
+    <p class="bold uppercase no-wrap">{i18n.watchedLabel()}</p>
+    {#if count > 1}
+      <p class="bold">·</p>
+      <div transition:slide={{ axis: "x", duration: 150 }}>
+        {#key count}
+          <p
+            class="bold uppercase no-wrap counter"
+            transition:slide={{
+              easing: linear,
+              axis: "y",
+              duration: transitionDuration,
+            }}
+          >
+            {count}
+          </p>
+        {/key}
+      </div>
+    {/if}
+  </StemTag>
+{/snippet}
+
+<watch-count-tag>
+  {#if onclick}
+    <button type="button" class="watch-count-trigger" {onclick}>
+      {@render tag()}
+    </button>
+  {:else}
+    <Link {...buildDrawerLink(SummaryDrawers.History)}>
+      {@render tag()}
+    </Link>
+  {/if}
 </watch-count-tag>
 
 <style>
   watch-count-tag {
+    .watch-count-trigger {
+      all: unset;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+    }
+
     :global(.trakt-tag) {
       position: relative;
 

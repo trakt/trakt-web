@@ -14,6 +14,7 @@
     isDropped?: boolean;
     isStarted?: boolean;
     isRewatching?: boolean;
+    onWatchCountClick?: () => void;
   };
 
   const {
@@ -22,6 +23,7 @@
     isDropped,
     isStarted,
     isRewatching,
+    onWatchCountClick,
   }: SummaryPosterTagsProps = $props();
 
   const { isEnabled } = useFeatureFlag();
@@ -42,7 +44,11 @@
 {/if}
 
 {#if !showRewatching && watchCount > 0}
-  <WatchCountTag count={watchCount} i18n={TagIntlProvider} />
+  <WatchCountTag
+    count={watchCount}
+    i18n={TagIntlProvider}
+    onclick={onWatchCountClick}
+  />
 {/if}
 
 {#if !showRewatching && isStarted && watchCount === 0 && !isDropped}

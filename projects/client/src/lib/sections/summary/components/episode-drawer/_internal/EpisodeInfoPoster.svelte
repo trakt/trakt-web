@@ -10,9 +10,11 @@
   const {
     show,
     episode,
+    onHistoryOpen,
   }: {
     show: ShowEntry;
     episode: EpisodeEntry;
+    onHistoryOpen?: () => void;
   } = $props();
 
   const src = $derived(
@@ -26,7 +28,11 @@
 </script>
 
 {#snippet posterTags()}
-  <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
+  <SummaryPosterTags
+    {postCreditsCount}
+    watchCount={$watchCount}
+    onWatchCountClick={onHistoryOpen}
+  />
 {/snippet}
 
 <SummaryPoster
