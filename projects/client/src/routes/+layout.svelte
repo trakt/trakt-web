@@ -2,6 +2,7 @@
   import "../style";
 
   import { page } from "$app/state";
+
   import CoverImage from "$lib/components/background/CoverImage.svelte";
   import CoverProvider from "$lib/components/background/CoverProvider.svelte";
   import ListScrollHistoryProvider from "$lib/components/lists/section-list/ListScrollHistoryProvider.svelte";
@@ -28,6 +29,7 @@
   import QueryDevtools from "$lib/features/query/QueryDevtools.svelte";
   import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
   import ReportDialogProvider from "$lib/features/report/ReportDialogProvider.svelte";
+  import SearchShortcut from "$lib/features/search/SearchShortcut.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import SeasonalFlair from "$lib/features/theme/components/SeasonalFlair.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
@@ -153,6 +155,7 @@
           isAuthorized={data.oidcAuth.isAuthorized}
           accessToken={data.oidcAuth.token}
         >
+          <SearchShortcut />
           <WSInvalidator />
           <FeatureFlagProvider>
             <CookieConsentProvider
