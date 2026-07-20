@@ -1,5 +1,6 @@
 import type { Locale } from 'date-fns/locale';
 import {
+  arSA,
   bg,
   ca,
   da,
@@ -58,4 +59,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'pt-PT': pt,
   'ca-ES': ca,
   'id-ID': id,
+  'ar-SA': arSA,
 };

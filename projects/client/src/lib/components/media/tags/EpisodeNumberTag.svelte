@@ -10,6 +10,6 @@
 
 <TextTag>
   <p class="bold capitalize no-wrap">
-    {episodeNumberLabel({ seasonNumber, episodeNumber })}
+    <bdi dir="ltr">{episodeNumberLabel({ seasonNumber, episodeNumber })}</bdi>
   </p>
 </TextTag>

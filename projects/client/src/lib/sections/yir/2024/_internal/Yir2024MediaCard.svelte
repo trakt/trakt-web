@@ -7,6 +7,7 @@
   import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate.ts";
   import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime.ts";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
+  import { isolateLtr } from "$lib/utils/string/isolateLtr.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
 
   type Yir2024MediaCardProps = {
@@ -24,10 +25,10 @@
 
   const episodeCode = $derived(
     item.type === "episode"
-      ? episodeNumberLabel({
-        seasonNumber: item.episode.season,
-        episodeNumber: item.episode.number,
-      })
+      ? isolateLtr(episodeNumberLabel({
+          seasonNumber: item.episode.season,
+          episodeNumber: item.episode.number,
+        }))
       : null,
   );
 </script>

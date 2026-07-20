@@ -191,7 +191,7 @@
     {:else if rest.variant === "activity"}
       {#if rest.type === "episode"}
         <p class="trakt-card-title ellipsis">
-          {episodeSubtitle(rest.episode)}
+          <bdi dir="ltr">{episodeSubtitle(rest.episode)}</bdi>
           {#if !["multiple_episodes", "full_season"].includes(rest.episode.type)}
             <Spoiler media={rest.episode} show={media} type="episode">
               - {rest.episode.title}
@@ -225,17 +225,17 @@
         </Spoiler>
       </p>
       <p class="trakt-card-subtitle small secondary ellipsis">
-        {episodeSubtitle(rest.episode)}
+        <bdi dir="ltr">{episodeSubtitle(rest.episode)}</bdi>
       </p>
     {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
       <p class="trakt-card-title ellipsis">
         {media.title}
       </p>
       <p class="trakt-card-subtitle small secondary ellipsis">
-        {episodeNumberLabel({
+        <bdi dir="ltr">{episodeNumberLabel({
           seasonNumber: rest.episode.season,
           episodeNumber: rest.episode.number,
-        })}
+        })}</bdi>
         {#if rest.variant !== "start"}
           <Spoiler media={rest.episode} show={media} type="episode">
             - {rest.episode.title}

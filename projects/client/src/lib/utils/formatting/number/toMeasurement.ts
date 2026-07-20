@@ -1,3 +1,9 @@
+import { getIntlLocale } from '$lib/features/i18n/index.ts';
+import type {
+  AvailableLanguage,
+  AvailableLocale,
+} from '$lib/features/i18n/index.ts';
+
 const IMPERIAL_REGIONS = ['US', 'LR', 'MM'];
 
 function detectRegionalMetricSystem(): boolean {
@@ -12,20 +18,23 @@ function metersToFeet(meters: number): number {
 }
 
 export function toMeasurement(
-  meters: number,
-  locale: string,
+  value: number,
+  locale: AvailableLocale | AvailableLanguage | string = 'en',
 ): string {
   const isMetric = detectRegionalMetricSystem();
   const selectedUnit = isMetric ? 'meter' : 'foot';
-  const convertedValue = isMetric ? meters : metersToFeet(meters);
+  const convertedValue = isMetric ? value : metersToFeet(value);
 
-  const formatter = new Intl.NumberFormat(locale, {
-    style: 'unit',
-    unit: selectedUnit,
-    unitDisplay: 'short',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+  const formatter = new Intl.NumberFormat(
+    getIntlLocale(locale as AvailableLanguage),
+    {
+      style: 'unit',
+      unit: selectedUnit,
+      unitDisplay: 'short',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    },
+  );
 
   return formatter.format(convertedValue);
 }

@@ -17,7 +17,7 @@
 
 {#snippet content()}
   <p class="bold capitalize no-wrap">
-    {i18n.toDuration(runtime)}
+    <bdi dir="auto">{i18n.toDuration(runtime)}</bdi>
   </p>
 {/snippet}
 

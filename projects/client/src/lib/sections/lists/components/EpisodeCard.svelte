@@ -128,10 +128,10 @@
           </Spoiler>
         </p>
         <p class="trakt-card-subtitle ellipsis">
-          {episodeNumberLabel({
+          <bdi dir="ltr">{episodeNumberLabel({
             seasonNumber: episode.season,
             episodeNumber: episode.number,
-          })}
+          })}</bdi>
         </p>
       {/if}
 
@@ -142,7 +142,7 @@
           </p>
         </Link>
         <p class="trakt-card-subtitle ellipsis">
-          {episodeSubtitle(episode)}
+          <bdi dir="ltr">{episodeSubtitle(episode)}</bdi>
           {#if !["multiple_episodes", "full_season"].includes(episode.type)}
             <Spoiler media={episode} {show} type="episode">
               - {episode.title}

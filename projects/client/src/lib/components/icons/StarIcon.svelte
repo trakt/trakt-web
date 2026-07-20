@@ -58,4 +58,15 @@
   .trakt-star-fill {
     transition: width var(--transition-increment) ease-in-out;
   }
+
+  /**
+   * In RTL layouts the star row is visually reversed, but the SVG fill rect
+   * still grows from x=0 (left). Mirror the rect about the SVG center so
+   * the partial fill faces toward the full stars — the correct reading
+   * direction. RTL-generic; no locale-specific code.
+   */
+  :global([dir="rtl"]) .trakt-star-fill {
+    transform: scaleX(-1);
+    transform-origin: center;
+  }
 </style>

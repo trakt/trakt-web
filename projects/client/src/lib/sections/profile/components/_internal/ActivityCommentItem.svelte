@@ -13,6 +13,7 @@
   import CommentThreadCard from "$lib/sections/summary/components/comments/drawers/CommentThreadCard.svelte";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay.ts";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
+  import { isolateLtr } from "$lib/utils/string/isolateLtr.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { ACTIVITY_LIST_CLASS } from "./drawers/constants.ts";
 
@@ -64,10 +65,10 @@
     entry.type === "episode"
       ? entry.media.title +
           " - " +
-          episodeNumberLabel({
+          isolateLtr(episodeNumberLabel({
             seasonNumber: entry.episode.season,
             episodeNumber: entry.episode.number,
-          })
+          }))
       : entry.media.title,
   );
 

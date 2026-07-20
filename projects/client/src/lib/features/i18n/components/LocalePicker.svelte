@@ -29,6 +29,7 @@
 
   const localeToFlag: Record<AvailableLocale, string> = {
     en: "🇺🇸",
+    "ar-SA": "🇸🇦",
     "en-AU": "🇦🇺",
     "fr-FR": "🇫🇷",
     "fr-CA": "🇨🇦",
@@ -59,6 +60,7 @@
 
   const localeToTitle: Record<AvailableLocale, string> = {
     en: "English",
+    "ar-SA": "العربية",
     "en-AU": "English (Australia)",
     "fr-FR": "Français",
     "fr-CA": "Français (Canada)",

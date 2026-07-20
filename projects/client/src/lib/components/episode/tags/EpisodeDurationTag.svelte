@@ -12,6 +12,6 @@
 
 <TextTag>
   <p class="bold capitalize ellipsis">
-    {i18n.durationText(minutesLeft)}
+    <bdi dir="auto">{i18n.durationText(minutesLeft)}</bdi>
   </p>
 </TextTag>

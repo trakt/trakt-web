@@ -1,4 +1,7 @@
-import type { AvailableLocale } from '$lib/features/i18n/index.ts';
+import {
+  type AvailableLocale,
+  getIntlLocale,
+} from '$lib/features/i18n/index.ts';
 
 export function toHumanETA(
   today: Date,
@@ -15,8 +18,10 @@ export function toHumanETA(
 
   const isPastDate = timeDiff < 0;
 
-  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
-  const narrowRtf = new Intl.RelativeTimeFormat(locale, {
+  const rtf = new Intl.RelativeTimeFormat(getIntlLocale(locale), {
+    numeric: 'auto',
+  });
+  const narrowRtf = new Intl.RelativeTimeFormat(getIntlLocale(locale), {
     numeric: 'auto',
     style: 'narrow',
   });

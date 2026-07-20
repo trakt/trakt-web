@@ -144,10 +144,10 @@
         </p>
         <p class="trakt-card-subtitle ellipsis">
           {#if "episode" in rest}
-            {episodeNumberLabel({
+            <bdi dir="ltr">{episodeNumberLabel({
               seasonNumber: rest.episode.season,
               episodeNumber: rest.episode.number,
-            })}
+            })}</bdi>
           {:else}
             {toHumanDuration({ minutes: media.runtime }, languageTag())}
           {/if}

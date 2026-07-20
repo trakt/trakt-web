@@ -193,10 +193,10 @@
           <li class="preview-row">
             <div class="preview-row-label">
               <p class="bold no-wrap">
-                {episodeNumberLabel({
+                <bdi dir="ltr">{episodeNumberLabel({
                   seasonNumber: episode.season,
                   episodeNumber: episode.number,
-                })}
+                })}</bdi>
               </p>
             </div>
             <TextTag classList="preview-row-tag">
