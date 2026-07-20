@@ -9,9 +9,8 @@ const formatterCache = new Map<string, Intl.NumberFormat>();
 function getFormatter(
   locale: AvailableLocale | AvailableLanguage | string,
 ): Intl.NumberFormat {
-  if (formatterCache.has(locale)) {
-    return formatterCache.get(locale)!;
-  }
+  const cached = formatterCache.get(locale);
+  if (cached) return cached;
 
   const formatter = new Intl.NumberFormat(
     getIntlLocale(locale as AvailableLanguage),
