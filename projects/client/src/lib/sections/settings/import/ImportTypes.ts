@@ -208,17 +208,8 @@ export const IMPORT_SOURCE_CONFIGS: Record<
       title: m.import_guide_tvtime_title,
       description: m.import_guide_tvtime_description,
       steps: [
-        {
-          text: m.import_guide_tvtime_step_1,
-          href:
-            'https://chromewebstore.google.com/detail/tv-time-liberator-extensi/pohobkcjhigehafgnhehkanhjakajhpm',
-        },
-        {
-          text: m.import_guide_tvtime_step_2,
-          href: 'https://gdpr.tvtime.com/gdpr/self-service',
-        },
-        { text: m.import_guide_tvtime_step_3 },
-        { text: m.import_guide_tvtime_step_4 },
+        { text: m.import_guide_tvtime_step_1 },
+        { text: m.import_guide_tvtime_step_2 },
       ],
     },
   },

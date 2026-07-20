@@ -4887,24 +4887,16 @@
       "description": "Title of the TV Time import guide."
     },
     "import_guide_tvtime_description": {
-      "default": "Two ways to get your data out. Pick whichever suits you and import one export at a time:",
+      "default": "Here's how to bring your TV Time data into Trakt:",
       "description": "Intro paragraph of the TV Time import guide, shown above the steps."
     },
     "import_guide_tvtime_step_1": {
-      "default": "Fastest: export your data with the <a>TV Time Liberator extension</a> while your TV Time login still works, then upload the export .zip (or the activity_history.csv inside it) here",
-      "description": "TV Time import guide, step 1. The <a></a> wraps the link text to the browser extension; keep the tag around the same words."
+      "default": "If you saved your TV Time data export before the service shut down, you can still bring it to Trakt.",
+      "description": "TV Time import guide, step 1. TV Time has shut down, so this covers users who already have their export saved; no link."
     },
     "import_guide_tvtime_step_2": {
-      "default": "Official: request your GDPR data export on the <a>TV Time privacy portal</a>",
-      "description": "TV Time import guide, step 2. The <a></a> wraps the link text to the privacy portal; keep the tag."
-    },
-    "import_guide_tvtime_step_3": {
-      "default": "Once the export is ready you'll get two emails: one with a .zip file and another with a password to unlock it.",
-      "description": "TV Time import guide, step 3."
-    },
-    "import_guide_tvtime_step_4": {
-      "default": "Upload the unlocked .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files (plus followed_tv_show.csv and ratings-live-votes.csv for your watchlist and ratings) instead.",
-      "description": "TV Time import guide, step 4. Filenames stay verbatim."
+      "default": "Upload the export .zip here. If the .zip is not accepted, extract it and upload the two tracking-prod-records .csv files (plus followed_tv_show.csv and ratings-live-votes.csv for your watchlist and ratings) instead.",
+      "description": "TV Time import guide, step 2. Filenames stay verbatim."
     },
     "tv_time_faq_page_title": {
       "default": "TV Time import FAQ",
@@ -7561,28 +7553,16 @@
       "description": "Closing heading at the bottom of the Welcome page, above the start exploring button."
     },
     "welcome_tvtime_badge": {
-      "default": "TV Time is shutting down",
-      "description": "Badge on the prominent TV Time notice highlighting that TV Time is closing."
+      "default": "TV Time has shut down",
+      "description": "Badge on the prominent TV Time notice highlighting that TV Time has closed."
     },
     "welcome_tvtime_heading": {
       "default": "Coming from TV Time? You're home.",
       "description": "Heading for the prominent TV Time welcome notice."
     },
     "welcome_tvtime_body": {
-      "default": "TV Time is closing its doors, but your watch history doesn't have to disappear with it. Bring everything over to Trakt and keep tracking without missing a beat.",
+      "default": "TV Time has closed its doors, but your watch history doesn't have to disappear with it. If you saved your data before it shut down, bring it over to Trakt and keep tracking without missing a beat.",
       "description": "Body copy for the prominent TV Time welcome notice."
-    },
-    "welcome_tvtime_liberator_body": {
-      "default": "Export your full history with the TV Time Liberator browser extension, or upload the official GDPR data export from TV Time's privacy portal. Either one works.",
-      "description": "Explanation of the two TV Time export routes (Liberator extension and GDPR data export) shown on the TV Time notice."
-    },
-    "welcome_tvtime_liberator_cta": {
-      "default": "Get TV Time Liberator",
-      "description": "Call-to-action linking to the TV Time Liberator browser extension."
-    },
-    "welcome_tvtime_gdpr_cta": {
-      "default": "Request GDPR export",
-      "description": "Call-to-action linking to TV Time's privacy portal where users request their official GDPR data export."
     },
     "welcome_tvtime_import_cta": {
       "default": "Import from TV Time",
