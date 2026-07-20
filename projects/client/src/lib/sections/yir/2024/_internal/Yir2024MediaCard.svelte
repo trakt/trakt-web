@@ -7,6 +7,7 @@
   import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate.ts";
   import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime.ts";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
+  import { isolateLtr } from "$lib/utils/string/isolateLtr.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
 
   type Yir2024MediaCardProps = {
@@ -24,13 +25,10 @@
 
   const episodeCode = $derived(
     item.type === "episode"
-      ? // U+2066 (LRI) … U+2069 (PDI) wrap the LTR episode code so it renders
-        // correctly when embedded inside an RTL text run. <bdi> cannot be used
-        // here because this is a JS string interpolated via {episodeCode}.
-        `\u2066${episodeNumberLabel({
+      ? isolateLtr(episodeNumberLabel({
           seasonNumber: item.episode.season,
           episodeNumber: item.episode.number,
-        })}\u2069`
+        }))
       : null,
   );
 </script>

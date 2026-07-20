@@ -40,7 +40,7 @@ function splitLanguageTag(languageTag: Locale): {
     'Language code is required.',
   ) as AvailableLanguage;
   const region = assertDefined(
-    parts.at(1) ?? (language === 'en' ? DEFAULT_REGION_EN : language),
+    language === 'en' ? DEFAULT_REGION_EN : parts.at(1),
     'Region code is required.',
   ) as AvailableRegion;
 
