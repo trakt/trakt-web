@@ -90,7 +90,8 @@
         )
       );
 
-      background-color: var(--color-tab-background);
+      /* Shorthand so consumers can supply a gradient via the token. */
+      background: var(--color-tab-background);
       border-radius: var(--tab-border-radius);
 
       transition: transform var(--transition-increment) ease-in-out;

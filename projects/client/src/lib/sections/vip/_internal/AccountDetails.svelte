@@ -75,15 +75,12 @@
     width: 100%;
     max-width: var(--ni-768);
 
-    background-color: var(--color-card-background);
+    @include vip-glow-card;
 
-    border: 1px solid var(--color-border);
     border-radius: var(--border-radius-xxl);
 
     padding: var(--ni-24);
     box-sizing: border-box;
-
-    box-shadow: var(--shadow-raised);
 
     :global(.trakt-link) {
       text-decoration: none;

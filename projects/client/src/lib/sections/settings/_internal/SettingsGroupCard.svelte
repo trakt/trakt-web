@@ -7,22 +7,26 @@
     description,
     crumb,
     action,
+    variant,
     children,
   }: ChildrenProps & {
     title?: string;
     description?: string;
     crumb?: { href: string; label: string };
     action?: Snippet;
+    variant?: "vip" | "muted";
   } = $props();
 </script>
 
 <SettingsSection {title} {description} {crumb} {action}>
-  <div class="trakt-settings-group-card">
+  <div class="trakt-settings-group-card" data-variant={variant}>
     {@render children()}
   </div>
 </SettingsSection>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-settings-group-card {
     overflow: hidden;
 
@@ -33,6 +37,14 @@
     > :global(* + *) {
       border-top: var(--border-thickness-xxs) solid
         color-mix(in srgb, var(--color-foreground) 8%, transparent);
+    }
+
+    &[data-variant="vip"] {
+      @include vip-glow-card;
+    }
+
+    &[data-variant="muted"] {
+      @include muted-card;
     }
   }
 </style>

@@ -35,7 +35,7 @@
 <style>
   trakt-vip-upgrade-button {
     :global(.trakt-button) {
-      --color-background-custom: var(--red-500);
+      --color-background-custom: var(--purple-500);
       --color-foreground-custom: var(--shade-10);
       --button-height: var(--ni-40);
 

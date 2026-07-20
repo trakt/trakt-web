@@ -190,6 +190,13 @@
 
     &.is-vip {
       --color-border-avatar: var(--color-border-vip-avatar);
+
+      .profile-image {
+        box-shadow:
+          0 0 var(--ni-8) color-mix(in srgb, var(--purple-400) 60%, transparent),
+          0 0 var(--ni-20)
+          color-mix(in srgb, var(--purple-500) 50%, transparent);
+      }
     }
 
     :global(.vip-badge) {

@@ -172,6 +172,37 @@
   }
 }
 
+// Deliberately bland counterpart to vip-glow-card for non-VIP surfaces: a
+// flat gray-tinted background with a hairline border and no elevation.
+// Theme-aware via color-mix with the foreground color.
+@mixin muted-card {
+  background: color-mix(
+    in srgb,
+    var(--color-foreground) 4%,
+    var(--color-card-background)
+  );
+  border: var(--ni-1) solid
+    color-mix(in srgb, var(--color-foreground) 12%, transparent);
+  box-shadow: none;
+}
+
+// VIP card treatment: a purple surface (theme-defined via
+// --background-vip-card in modes.scss), a faint sheen at the top, a visible
+// purple hairline border, and a restrained glow.
+@mixin vip-glow-card {
+  background:
+    radial-gradient(
+      120% 100% at 50% 0%,
+      color-mix(in srgb, var(--purple-400) 6%, transparent),
+      transparent 55%
+    ),
+    var(--background-vip-card);
+  border: var(--ni-1) solid
+    color-mix(in srgb, var(--purple-400) 32%, transparent);
+  box-shadow: 0 var(--ni-2) var(--ni-16)
+    color-mix(in srgb, var(--purple-500) 15%, transparent);
+}
+
 // Premium "rare/tier" chip decoration: a diagonal tint gradient, a hairline
 // ring, and a soft drop glow, all keyed off a single colour. Extracted from
 // the match-drawer chips so rank medals and other accents share one look.

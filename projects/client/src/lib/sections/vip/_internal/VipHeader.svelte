@@ -36,7 +36,9 @@
 
     text-align: center;
 
-    :global(svg) {
+    // Size only the hero icon snippet (rendered as a direct child); a blanket
+    // svg selector would also hit the sparkle inside nested VIP badges.
+    > :global(svg) {
       width: var(--ni-48);
       height: var(--ni-48);
     }
