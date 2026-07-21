@@ -14,6 +14,8 @@
   import { toTraktRating } from "$lib/utils/formatting/number/toTraktRating";
   import { toVotesBasedRating } from "$lib/utils/formatting/number/toVotesBasedRating";
   import ActionButton from "../buttons/ActionButton.svelte";
+  import LetterboxdIcon from "../icons/LetterboxdIcon.svelte";
+  import MALIcon from "../icons/MALIcon.svelte";
   import PopcornIcon from "../icons/PopcornIcon.svelte";
   import RatingIcon from "../icons/RatingIcon.svelte";
   import RottenIcon from "../icons/RottenIcon.svelte";
@@ -51,13 +53,26 @@
     isLoading = false,
   }: RatingListProps = $props();
 
-  const { trakt, imdb, rotten } = $derived(
+  const { trakt, imdb, rotten, mal, letterboxd } = $derived(
     getDisplayableRatings({ ratings, entry }),
   );
 
   const isMediaEntry = $derived(
     entry.type === "show" || entry.type === "movie",
   );
+
+  // Letterboxd is films-only and lives only in the ratings breakdown, never the
+  // compact summary row. MAL (anime-only) shows wherever externals render.
+  const showLetterboxd = $derived(
+    variant === "external" && entry.type === "movie" &&
+      letterboxd?.rating != null,
+  );
+
+  // Reserve the MAL slot in the skeleton for anime movies/shows, so the row
+  // does not shift when the (anime-only) MAL rating lands. Episodes never carry
+  // a MAL rating, so they are excluded from the reserve.
+  const isAnime = $derived(isMediaEntry && entry.genres.includes("anime"));
+  const showMal = $derived(mal?.rating != null || (isLoading && isAnime));
 </script>
 
 {#snippet traktItem()}
@@ -88,6 +103,21 @@
     {/snippet}
   </RatingItem>
 
+  {#if showMal}
+    <RatingItem
+      rating={mal?.rating != null
+      ? toIMDBRating(mal.rating, getLocale())
+      : undefined}
+      url={mal?.url}
+      {isLoading}
+    >
+      <MALIcon style={toVotesBasedRating(mal?.votes ?? undefined)} />
+      {#snippet superscript()}
+        {i18n.voteText(mal?.votes ?? 0)}
+      {/snippet}
+    </RatingItem>
+  {/if}
+
   {#if isMediaEntry}
     <RatingItem
       rating={toRottenPercentage(rotten?.critic)}
@@ -108,6 +138,19 @@
       <PopcornIcon style={toRottenAudienceRating(rotten?.audience)} />
       {#snippet superscript()}
         {toRottenAudienceRating(rotten?.audience ?? 0)}
+      {/snippet}
+    </RatingItem>
+  {/if}
+
+  {#if showLetterboxd && letterboxd}
+    <RatingItem
+      rating={toIMDBRating(letterboxd.rating, getLocale())}
+      url={letterboxd.url}
+      {isLoading}
+    >
+      <LetterboxdIcon style={toVotesBasedRating(letterboxd.votes ?? undefined)} />
+      {#snippet superscript()}
+        {i18n.voteText(letterboxd.votes ?? 0)}
       {/snippet}
     </RatingItem>
   {/if}
@@ -134,7 +177,15 @@
   .trakt-summary-ratings {
     display: flex;
     align-items: center;
+    // wrap instead of shrinking items: a shrunk RatingItem clips its value and
+    // vote-count under `overflow: clip`. Keeps the row intact as sources grow
+    // (e.g. MAL joining for anime).
+    flex-wrap: wrap;
     gap: var(--gap-s);
+
+    :global(> rating) {
+      flex: 0 0 auto;
+    }
 
     :global(.trakt-ratings-drilldown-button) {
       :global(svg) {

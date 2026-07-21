@@ -27,4 +27,6 @@ export const ShowSiloRatingsMappedMock: MediaRating = {
     'votes': 144574,
     'url': 'https://www.imdb.com/title/tt14688458',
   },
+  'mal': undefined,
+  'letterboxd': undefined,
 };

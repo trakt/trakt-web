@@ -20,6 +20,18 @@ export const MediaRatingSchema = z.object({
     votes: z.number(),
     url: HttpsUrlSchema.nullish(),
   }).optional(),
+  // MyAnimeList audience rating on a 0-10 scale. Anime only.
+  mal: z.object({
+    rating: z.number(),
+    votes: z.number().nullish(),
+    url: HttpsUrlSchema.nullish(),
+  }).optional(),
+  // Letterboxd audience rating on a 0-5 scale. Films only.
+  letterboxd: z.object({
+    rating: z.number(),
+    votes: z.number().nullish(),
+    url: HttpsUrlSchema.nullish(),
+  }).optional(),
 });
 
 export type MediaRating = z.infer<typeof MediaRatingSchema>;

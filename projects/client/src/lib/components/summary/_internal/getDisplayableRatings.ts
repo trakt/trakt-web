@@ -12,6 +12,8 @@ export const EMPTY_RATINGS = Object.freeze({
   trakt: undefined,
   rotten: undefined,
   imdb: undefined,
+  mal: undefined,
+  letterboxd: undefined,
 });
 
 export function getDisplayableRatings({

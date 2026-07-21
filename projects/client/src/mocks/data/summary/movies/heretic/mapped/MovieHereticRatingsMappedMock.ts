@@ -23,4 +23,6 @@ export const MovieHereticRatingsMappedMock: MediaRating = {
     'votes': 49905,
     'url': 'https://www.imdb.com/title/tt28015403',
   },
+  'mal': undefined,
+  'letterboxd': undefined,
 };

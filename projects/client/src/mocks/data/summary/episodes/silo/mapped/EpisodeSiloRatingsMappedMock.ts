@@ -27,4 +27,6 @@ export const EpisodeSiloRatingsMappedMock: MediaRating = {
     'votes': 144574,
     'url': 'https://www.imdb.com/title/tt14693272',
   },
+  'mal': undefined,
+  'letterboxd': undefined,
 };

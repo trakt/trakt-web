@@ -35,7 +35,8 @@
   );
 
   const hasAnyRating = $derived(
-    ratings.trakt != null || ratings.imdb != null || ratings.rotten != null,
+    ratings.trakt != null || ratings.imdb != null || ratings.rotten != null ||
+      ratings.mal != null || ratings.letterboxd != null,
   );
 
   let isOpen = $state(false);
@@ -110,13 +111,13 @@
   .official-row {
     --color-link-active: var(--color-text-primary);
 
-    display: flex;
-    justify-content: center;
-
     :global(.trakt-summary-ratings) {
+      /* fixed 3-up grid: equal columns align the sources into tidy rows
+         regardless of how many render, instead of a lopsided space-between wrap */
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       width: 100%;
-      justify-content: space-between;
-      gap: 0;
+      gap: var(--gap-l) var(--gap-m);
     }
   }
 </style>
