@@ -3,8 +3,23 @@ import type { RatingsResponse } from '@trakt/api';
 import type { MediaRating } from '../models/MediaRating.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
 
+// The movie/show ratings endpoints return extra source blocks under
+// `extended=all` (Letterboxd for films, MyAnimeList for anime). The SDK infers
+// these per-endpoint but does not export dedicated types, so widen the shared
+// `RatingsResponse` with the optional blocks this mapper knows how to read.
+type ExternalRatingBlock = {
+  rating?: number | Nil;
+  votes?: number | Nil;
+  link?: string | Nil;
+};
+
+type RatingsResponseWithExternal = RatingsResponse & {
+  letterboxd?: ExternalRatingBlock | Nil;
+  mal?: ExternalRatingBlock | Nil;
+};
+
 export function mapToMediaRating(
-  ratings: RatingsResponse,
+  ratings: RatingsResponseWithExternal,
 ): MediaRating {
   const mapImdbRating = () => {
     const { imdb } = ratings;
@@ -32,6 +47,32 @@ export function mapToMediaRating(
     };
   };
 
+  const mapMalRating = () => {
+    const { mal } = ratings;
+    if (mal?.rating == null) {
+      return;
+    }
+
+    return {
+      rating: mal.rating,
+      votes: mal.votes,
+      url: prependHttps(mal.link),
+    };
+  };
+
+  const mapLetterboxdRating = () => {
+    const { letterboxd } = ratings;
+    if (letterboxd?.rating == null) {
+      return;
+    }
+
+    return {
+      rating: letterboxd.rating,
+      votes: letterboxd.votes,
+      url: prependHttps(letterboxd.link),
+    };
+  };
+
   return {
     trakt: {
       rating: mapToTraktRating(ratings.trakt.rating),
@@ -40,5 +81,7 @@ export function mapToMediaRating(
     },
     imdb: mapImdbRating(),
     rotten: mapRottenRating(),
+    mal: mapMalRating(),
+    letterboxd: mapLetterboxdRating(),
   };
 }
