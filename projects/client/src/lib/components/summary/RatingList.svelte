@@ -41,6 +41,10 @@
     onDrilldown?: () => void;
     variant?: "all" | "external";
     isLoading?: boolean;
+    // "minimal" (the default, matching the compact summary row) drops the
+    // vote-count superscripts; "default" renders them, used by the ratings
+    // drawer.
+    style?: "default" | "minimal";
   };
 
   const {
@@ -51,6 +55,7 @@
     onDrilldown,
     variant = "all",
     isLoading = false,
+    style = "minimal",
   }: RatingListProps = $props();
 
   const { trakt, imdb, rotten, mal, letterboxd } = $derived(
@@ -79,6 +84,7 @@
   <RatingItem
     rating={trakt?.rating && toTraktRating(trakt.rating, getLocale())}
     {isLoading}
+    {style}
   >
     <RatingIcon style={toVotesBasedRating(trakt?.votes)} />
     {#snippet superscript()}
@@ -96,6 +102,7 @@
     rating={imdb?.rating && toIMDBRating(imdb.rating, getLocale())}
     url={imdb?.url}
     {isLoading}
+    {style}
   >
     <IMDBIcon style={toVotesBasedRating(imdb?.votes)} />
     {#snippet superscript()}
@@ -110,6 +117,7 @@
       : undefined}
       url={mal?.url}
       {isLoading}
+      {style}
     >
       <MALIcon style={toVotesBasedRating(mal?.votes ?? undefined)} />
       {#snippet superscript()}
@@ -123,6 +131,7 @@
       rating={toRottenPercentage(rotten?.critic)}
       url={rotten?.url}
       {isLoading}
+      {style}
     >
       <RottenIcon style={toRottenCriticRating(rotten?.critic)} />
       {#snippet superscript()}
@@ -134,6 +143,7 @@
       rating={toRottenPercentage(rotten?.audience)}
       url={rotten?.url}
       {isLoading}
+      {style}
     >
       <PopcornIcon style={toRottenAudienceRating(rotten?.audience)} />
       {#snippet superscript()}
@@ -147,6 +157,7 @@
       rating={toIMDBRating(letterboxd.rating, getLocale())}
       url={letterboxd.url}
       {isLoading}
+      {style}
     >
       <LetterboxdIcon style={toVotesBasedRating(letterboxd.votes ?? undefined)} />
       {#snippet superscript()}
@@ -192,10 +203,6 @@
         width: var(--ni-20);
         height: var(--ni-20);
       }
-    }
-
-    @include for-mobile() {
-      gap: var(--gap-xxs);
     }
   }
 </style>

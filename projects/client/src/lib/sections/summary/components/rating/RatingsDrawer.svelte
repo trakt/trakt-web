@@ -70,7 +70,13 @@
             {m.header_ratings_official()}
           </h3>
           <div class="official-row">
-            <RatingList {ratings} {entry} variant="external" isLoading={$isLoading} />
+            <RatingList
+              {ratings}
+              {entry}
+              variant="external"
+              style="default"
+              isLoading={$isLoading}
+            />
           </div>
         </section>
       {/if}
