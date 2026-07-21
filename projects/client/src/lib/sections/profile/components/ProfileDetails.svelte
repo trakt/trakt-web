@@ -67,7 +67,9 @@
 
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    // Visible so the VIP avatar glow isn't clipped: the avatar sits flush in
+    // the top-inline-start grid cell, so hidden overflow would cut the glow.
+    overflow: visible;
 
     display: grid;
     grid-template-columns: repeat(var(--details-column-count), minmax(0, 1fr));
@@ -84,7 +86,6 @@
     @include for-tablet-sm-and-below {
       --details-column-count: 1;
 
-      overflow: visible;
       gap: var(--gap-s);
     }
   }
