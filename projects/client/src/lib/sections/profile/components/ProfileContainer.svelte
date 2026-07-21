@@ -25,7 +25,11 @@
     max-width: var(--ni-1280);
     height: var(--ni-232);
 
-    overflow: hidden;
+    // Keep visible so the VIP avatar's glow can bleed past the card edge
+    // instead of being clipped near the top-inline-start corner. The card's
+    // own background/border stay rounded via border-radius, which is
+    // independent of overflow.
+    overflow: visible;
 
     align-self: center;
 
@@ -59,7 +63,6 @@
       box-shadow: none;
 
       height: auto;
-      overflow: visible;
 
       &.is-vip {
         background: none;
