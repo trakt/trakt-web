@@ -34,6 +34,20 @@ export function mapToMediaRating(
     };
   };
 
+  // TMDB, MAL and Letterboxd share one 0-10 shape: a rating, optional votes and
+  // a link. Map them through a single helper keyed on the source block.
+  const mapExternalRating = (block: ExternalRatingBlock | Nil) => {
+    if (block?.rating == null) {
+      return;
+    }
+
+    return {
+      rating: block.rating,
+      votes: block.votes,
+      url: prependHttps(block.link),
+    };
+  };
+
   const mapRottenRating = () => {
     const { rotten_tomatoes: rotten } = ratings;
     if (!rotten?.rating) {
@@ -47,32 +61,6 @@ export function mapToMediaRating(
     };
   };
 
-  const mapMalRating = () => {
-    const { mal } = ratings;
-    if (mal?.rating == null) {
-      return;
-    }
-
-    return {
-      rating: mal.rating,
-      votes: mal.votes,
-      url: prependHttps(mal.link),
-    };
-  };
-
-  const mapLetterboxdRating = () => {
-    const { letterboxd } = ratings;
-    if (letterboxd?.rating == null) {
-      return;
-    }
-
-    return {
-      rating: letterboxd.rating,
-      votes: letterboxd.votes,
-      url: prependHttps(letterboxd.link),
-    };
-  };
-
   return {
     trakt: {
       rating: mapToTraktRating(ratings.trakt.rating),
@@ -80,8 +68,9 @@ export function mapToMediaRating(
       distribution: ratings.trakt.distribution,
     },
     imdb: mapImdbRating(),
+    tmdb: mapExternalRating(ratings.tmdb),
     rotten: mapRottenRating(),
-    mal: mapMalRating(),
-    letterboxd: mapLetterboxdRating(),
+    mal: mapExternalRating(ratings.mal),
+    letterboxd: mapExternalRating(ratings.letterboxd),
   };
 }

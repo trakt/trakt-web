@@ -19,6 +19,7 @@
   import PopcornIcon from "../icons/PopcornIcon.svelte";
   import RatingIcon from "../icons/RatingIcon.svelte";
   import RottenIcon from "../icons/RottenIcon.svelte";
+  import TMDBIcon from "../icons/TMDBIcon.svelte";
   import type { RatingIntl } from "./RatingIntl";
   import { RatingIntlProvider } from "./RatingIntlProvider";
   import RatingItem from "./RatingItem.svelte";
@@ -58,7 +59,7 @@
     style = "minimal",
   }: RatingListProps = $props();
 
-  const { trakt, imdb, rotten, mal, letterboxd } = $derived(
+  const { trakt, imdb, tmdb, rotten, mal, letterboxd } = $derived(
     getDisplayableRatings({ ratings, entry }),
   );
 
@@ -78,6 +79,9 @@
   // a MAL rating, so they are excluded from the reserve.
   const isAnime = $derived(isMediaEntry && entry.genres.includes("anime"));
   const showMal = $derived(mal?.rating != null || (isLoading && isAnime));
+
+  // TMDB lives only in the ratings breakdown, never the compact summary row.
+  const showTmdb = $derived(variant === "external" && tmdb?.rating != null);
 </script>
 
 {#snippet traktItem()}
@@ -162,6 +166,20 @@
       <LetterboxdIcon style={toVotesBasedRating(letterboxd.votes ?? undefined)} />
       {#snippet superscript()}
         {i18n.voteText(letterboxd.votes ?? 0)}
+      {/snippet}
+    </RatingItem>
+  {/if}
+
+  {#if showTmdb && tmdb}
+    <RatingItem
+      rating={toIMDBRating(tmdb.rating, getLocale())}
+      url={tmdb.url}
+      {isLoading}
+      {style}
+    >
+      <TMDBIcon />
+      {#snippet superscript()}
+        {i18n.voteText(tmdb.votes ?? 0)}
       {/snippet}
     </RatingItem>
   {/if}

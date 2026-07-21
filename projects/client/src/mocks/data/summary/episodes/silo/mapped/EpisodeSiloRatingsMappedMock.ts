@@ -27,6 +27,11 @@ export const EpisodeSiloRatingsMappedMock: MediaRating = {
     'votes': 144574,
     'url': 'https://www.imdb.com/title/tt14693272',
   },
+  'tmdb': {
+    'rating': 8.2,
+    'votes': 1181,
+    'url': 'https://www.themoviedb.org/tv/125988/season/1/episode/1',
+  },
   'mal': undefined,
   'letterboxd': undefined,
 };
