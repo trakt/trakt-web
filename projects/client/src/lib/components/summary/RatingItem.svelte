@@ -7,6 +7,10 @@
     superscript: Snippet;
     url?: string | Nil;
     isLoading?: boolean;
+    // "minimal" drops the vote-count superscript, showing the score alone;
+    // "default" renders it. The compact summary row is minimal, the ratings
+    // drawer is default.
+    style?: "default" | "minimal";
   } & ChildrenProps;
 
   const {
@@ -15,6 +19,7 @@
     superscript,
     url,
     isLoading = false,
+    style = "default",
   }: RatingItemProps = $props();
 
   const hasValidRating = $derived(rating !== undefined);
@@ -39,7 +44,7 @@
             <p class="bold">-</p>
           {/if}
         </div>
-        {#if !isLoading && hasValidRating}
+        {#if style === "default" && !isLoading && hasValidRating}
           <span class="rating-grow has-underline">
             <span class="rating-grow-clip">
               <p class="bold uppercase secondary vote-count tag">
