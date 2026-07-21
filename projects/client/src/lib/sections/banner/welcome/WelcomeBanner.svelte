@@ -3,15 +3,17 @@
   import SparkleStarIcon from "$lib/components/icons/SparkleStarIcon.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import LogoMarkCircle from "$lib/components/logo/LogoMarkCircle.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import GetVIPLink from "$lib/sections/navbar/components/GetVIPLink.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import BannerContainer from "../_internal/BannerContainer.svelte";
   import DismissButton from "../_internal/DismissButton.svelte";
   import { useWelcomeBanner } from "./_internal/useWelcomeBanner.ts";
 
   const { isVisible, dismiss } = useWelcomeBanner();
+  const { track } = useTrack(AnalyticsEvent.VipUpsell);
 </script>
 
 {#if $isVisible}
@@ -48,7 +50,7 @@
           href={UrlBuilder.settings.data()}
           color="purple"
           variant="primary"
-          style="flat"
+          style="outline"
           size="small"
           label={m.welcome_banner_action()}
         >
@@ -72,7 +74,20 @@
           </div>
 
           <div class="upsell-cta">
-            <GetVIPLink source="welcome-banner" />
+            <Button
+              href={UrlBuilder.vip()}
+              color="purple"
+              variant="primary"
+              style="outline"
+              size="small"
+              label={m.link_label_get_vip()}
+              onclick={() => track({ source: "welcome-banner" })}
+            >
+              {#snippet icon()}
+                <SparkleStarIcon />
+              {/snippet}
+              {m.badge_text_get_vip()}
+            </Button>
           </div>
         </div>
       </RenderFor>
@@ -126,6 +141,12 @@
     @include for-tablet-sm-and-below {
       padding: var(--gap-l);
       padding-inline-end: var(--ni-48);
+    }
+
+    /* Uniform CTA width across the intro banners (EN reference:
+       "Import your data") so the stacked buttons don't zigzag. */
+    :global(.trakt-button) {
+      min-width: var(--ni-132);
     }
   }
 
@@ -258,5 +279,16 @@
     display: flex;
     align-items: center;
     flex-shrink: 0;
+
+    /* Sparkle leads the label as a tight cluster (like the old badge),
+       instead of the default label-start / icon-end spread. */
+    :global(.trakt-button) {
+      justify-content: center;
+      gap: var(--gap-xs);
+    }
+
+    :global(.trakt-button .button-icon) {
+      order: -1;
+    }
   }
 </style>

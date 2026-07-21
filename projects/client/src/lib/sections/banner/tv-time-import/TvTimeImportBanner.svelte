@@ -38,7 +38,7 @@
         href={UrlBuilder.settings.data()}
         color="purple"
         variant="primary"
-        style="flat"
+        style="outline"
         size="small"
         label={m.tv_time_import_banner_action()}
       >
@@ -97,6 +97,12 @@
 
       padding: var(--gap-l);
       padding-inline-end: var(--ni-48);
+    }
+
+    /* Uniform CTA width across the intro banners (EN reference:
+       "Import your data") so the stacked buttons don't zigzag. */
+    :global(.trakt-button) {
+      min-width: var(--ni-132);
     }
   }
 

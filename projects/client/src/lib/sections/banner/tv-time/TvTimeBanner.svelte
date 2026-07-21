@@ -1,15 +1,19 @@
 <script lang="ts">
-  import LogoMarkCircle from "$lib/components/logo/LogoMarkCircle.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
+  import ExternalLinkIcon from "$lib/components/icons/ExternalLinkIcon.svelte";
+  import TvTimeIcon from "$lib/components/icons/TvTimeIcon.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import BannerContainer from "../_internal/BannerContainer.svelte";
-  import BannerLink from "../_internal/BannerLink.svelte";
   import DismissButton from "../_internal/DismissButton.svelte";
   import { useTvTimeBanner } from "./_internal/useTvTimeBanner.ts";
   import { TV_TIME_BANNER_ID } from "./constants/index.ts";
 
   const { isVisible, dismiss } = useTvTimeBanner();
+  const { track } = useTrack(AnalyticsEvent.Link);
 </script>
 
 {#if $isVisible}
@@ -21,7 +25,7 @@
 
       <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
         <div class="tv-time-banner-icon" aria-hidden="true">
-          <LogoMarkCircle />
+          <TvTimeIcon />
         </div>
       </RenderFor>
 
@@ -29,19 +33,31 @@
         <h2 class="bold tv-time-banner-title">
           {m.tv_time_banner_heading()}
           <RenderFor audience="all" device={["tablet-sm", "mobile"]}>
-            <LogoMarkCircle />
+            <TvTimeIcon />
           </RenderFor>
         </h2>
         <p class="secondary">{m.tv_time_banner_description()}</p>
       </div>
 
-      <BannerLink
+      <Button
         href={UrlBuilder.app.tvTime()}
         target="_blank"
-        source={TV_TIME_BANNER_ID}
+        color="purple"
+        variant="primary"
+        style="outline"
+        size="small"
+        label={m.tv_time_banner_action()}
+        onclick={() =>
+          track({
+            source: TV_TIME_BANNER_ID,
+            target: UrlBuilder.app.tvTime(),
+          })}
       >
+        {#snippet icon()}
+          <ExternalLinkIcon size="small" />
+        {/snippet}
         {m.tv_time_banner_action()}
-      </BannerLink>
+      </Button>
     </section>
   </BannerContainer>
 {/if}
@@ -95,6 +111,27 @@
 
       padding: var(--gap-l);
       padding-inline-end: var(--ni-48);
+    }
+
+    /* Uniform CTA width across the intro banners (EN reference:
+       "Import your data") so the stacked buttons don't zigzag. Label and
+       arrow sit as a tight centered cluster, mirroring the VIP CTA. */
+    :global(.trakt-button) {
+      min-width: var(--ni-132);
+      justify-content: center;
+      gap: var(--gap-xs);
+    }
+
+    /* The external-link glyph fills its viewBox, so at the shared icon size
+       it reads oversized next to the welcome banner's sparkle — pull it in. */
+    :global(.trakt-button .button-icon svg) {
+      height: var(--ni-14);
+    }
+
+    /* The label is a bare domain — undo the button's default first-letter
+       capitalisation ("Tvtime…" reads wrong for a URL). */
+    :global(.trakt-button .button-label p::first-letter) {
+      text-transform: none;
     }
   }
 
