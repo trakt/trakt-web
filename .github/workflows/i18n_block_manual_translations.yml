@@ -1,0 +1,89 @@
+name: The Translation Warden aka Block Manual Message Edits
+
+# The translated catalogs under projects/client/i18n/messages/ are generated:
+# they are the translations CrowdIn owns and writes back via the daily sync.
+# Editing them by hand does nothing durable - the next CrowdIn export
+# (export_only_approved) overwrites them with CrowdIn's real state, silently
+# wiping the hand edits. (This is how ar-SA collapsed from 2077 keys to 100.)
+#
+# Strings are authored in projects/client/i18n/meta/en.json (the source). This
+# guard leaves the source untouched. It also allows the one legitimate way a
+# PR may change the catalogs: removing a key from the source prunes it from
+# every locale via `deno task client:i18n:resolve`, which is a deletion-only
+# change. Anything that adds or modifies a translation value is blocked.
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  block-manual-translations:
+    # Skip CrowdIn's own sync PR (head branch i18n_crowdin_updates) - it is the
+    # one sanctioned editor of the catalogs - and any bot-authored PR.
+    if: >-
+      github.event.pull_request.draft == false &&
+      github.head_ref != 'i18n_crowdin_updates' &&
+      !endsWith(github.actor, '[bot]')
+    name: Guarding the Translation Catalogs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Unveiling the Repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Warding off manual catalog edits
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          # Translated catalogs only. messages/en.json is the generated base
+          # (1:1 with the meta source, not owned by CrowdIn); it legitimately
+          # changes whenever meta/en.json does, so it is not policed here.
+          CATALOGS=(
+            'projects/client/i18n/messages/'
+            ':(exclude)projects/client/i18n/messages/en.json'
+          )
+
+          CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- "${CATALOGS[@]}")
+          if [ -z "$CHANGED" ]; then
+            echo "No translated-catalog changes. 👌"
+            exit 0
+          fi
+
+          # Any added or modified line (a '+' that is not the '+++' file header)
+          # is a hand-authored translation value - the thing CrowdIn owns.
+          ADDED=$(git diff "$BASE_SHA" "$HEAD_SHA" -- "${CATALOGS[@]}" \
+            | grep -E '^\+' | grep -vE '^\+\+\+' || true)
+
+          # A source key removal is the only legitimate catalog change in a PR.
+          META_CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- \
+            'projects/client/i18n/meta/en.json')
+
+          if [ -z "$ADDED" ] && [ -n "$META_CHANGED" ]; then
+            echo "Deletion-only prune driven by a meta/en.json change. Allowed. 👌"
+            echo "Pruned in:"
+            echo "$CHANGED" | sed 's/^/  - /'
+            exit 0
+          fi
+
+          echo "::error::Manual edits to CrowdIn-managed translation catalogs are not allowed."
+          echo ""
+          echo "Changed translated catalogs:"
+          echo "$CHANGED" | sed 's/^/  - /'
+          echo ""
+          if [ -n "$ADDED" ]; then
+            echo "Reason: the diff adds or modifies translation values, which CrowdIn owns."
+          else
+            echo "Reason: catalogs were pruned without a matching meta/en.json source change."
+          fi
+          echo ""
+          echo "What to do instead:"
+          echo "  - Add or change strings in projects/client/i18n/meta/en.json (the source)."
+          echo "  - Removing a key? Do it there and run 'deno task client:i18n:resolve' to prune locales."
+          echo "  - Adding a new locale? Add its code to i18n/project.inlang/settings.json only."
+          echo "  - Translations flow back automatically via the CrowdIn sync (branch i18n_crowdin_updates)."
+          exit 1
