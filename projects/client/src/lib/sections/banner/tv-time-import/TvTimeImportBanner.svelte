@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
   import LogoMarkCircle from "$lib/components/logo/LogoMarkCircle.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import BannerContainer from "../_internal/BannerContainer.svelte";
+  import BannerCta from "../_internal/BannerCta.svelte";
   import DismissButton from "../_internal/DismissButton.svelte";
   import { useTvTimeImportBanner } from "./_internal/useTvTimeImportBanner.ts";
 
@@ -34,16 +34,12 @@
         <p class="secondary">{m.tv_time_import_banner_description()}</p>
       </div>
 
-      <Button
+      <BannerCta
         href={UrlBuilder.settings.data()}
-        color="purple"
-        variant="primary"
-        style="flat"
-        size="small"
         label={m.tv_time_import_banner_action()}
       >
         {m.tv_time_import_banner_action()}
-      </Button>
+      </BannerCta>
     </section>
   </BannerContainer>
 {/if}

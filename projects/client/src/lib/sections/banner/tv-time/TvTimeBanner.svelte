@@ -1,15 +1,21 @@
 <script lang="ts">
-  import LogoMarkCircle from "$lib/components/logo/LogoMarkCircle.svelte";
+  import ExternalLinkIcon from "$lib/components/icons/ExternalLinkIcon.svelte";
+  import TvTimeIcon from "$lib/components/icons/TvTimeIcon.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import BannerContainer from "../_internal/BannerContainer.svelte";
-  import BannerLink from "../_internal/BannerLink.svelte";
+  import BannerCta from "../_internal/BannerCta.svelte";
   import DismissButton from "../_internal/DismissButton.svelte";
   import { useTvTimeBanner } from "./_internal/useTvTimeBanner.ts";
   import { TV_TIME_BANNER_ID } from "./constants/index.ts";
 
   const { isVisible, dismiss } = useTvTimeBanner();
+  const { track } = useTrack(AnalyticsEvent.Link);
+
+  const tvTimeUrl = UrlBuilder.app.tvTime();
 </script>
 
 {#if $isVisible}
@@ -21,7 +27,7 @@
 
       <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
         <div class="tv-time-banner-icon" aria-hidden="true">
-          <LogoMarkCircle />
+          <TvTimeIcon />
         </div>
       </RenderFor>
 
@@ -29,19 +35,24 @@
         <h2 class="bold tv-time-banner-title">
           {m.tv_time_banner_heading()}
           <RenderFor audience="all" device={["tablet-sm", "mobile"]}>
-            <LogoMarkCircle />
+            <TvTimeIcon />
           </RenderFor>
         </h2>
         <p class="secondary">{m.tv_time_banner_description()}</p>
       </div>
 
-      <BannerLink
-        href={UrlBuilder.app.tvTime()}
+      <BannerCta
+        href={tvTimeUrl}
         target="_blank"
-        source={TV_TIME_BANNER_ID}
+        text="none"
+        label={m.tv_time_banner_action()}
+        onclick={() => track({ source: TV_TIME_BANNER_ID, target: tvTimeUrl })}
       >
+        {#snippet icon()}
+          <ExternalLinkIcon size="small" />
+        {/snippet}
         {m.tv_time_banner_action()}
-      </BannerLink>
+      </BannerCta>
     </section>
   </BannerContainer>
 {/if}
@@ -95,6 +106,10 @@
 
       padding: var(--gap-l);
       padding-inline-end: var(--ni-48);
+    }
+
+    :global(.trakt-button .button-icon svg) {
+      height: var(--ni-14);
     }
   }
 
