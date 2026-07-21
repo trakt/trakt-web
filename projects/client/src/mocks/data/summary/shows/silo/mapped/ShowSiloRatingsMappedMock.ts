@@ -27,6 +27,11 @@ export const ShowSiloRatingsMappedMock: MediaRating = {
     'votes': 144574,
     'url': 'https://www.imdb.com/title/tt14688458',
   },
+  'tmdb': {
+    'rating': 8.2,
+    'votes': 1181,
+    'url': 'https://www.themoviedb.org/tv/125988',
+  },
   'mal': undefined,
   'letterboxd': undefined,
 };

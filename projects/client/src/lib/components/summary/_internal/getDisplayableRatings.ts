@@ -12,6 +12,7 @@ export const EMPTY_RATINGS = Object.freeze({
   trakt: undefined,
   rotten: undefined,
   imdb: undefined,
+  tmdb: undefined,
   mal: undefined,
   letterboxd: undefined,
 });

@@ -35,8 +35,9 @@
   );
 
   const hasAnyRating = $derived(
-    ratings.trakt != null || ratings.imdb != null || ratings.rotten != null ||
-      ratings.mal != null || ratings.letterboxd != null,
+    ratings.trakt != null || ratings.imdb != null || ratings.tmdb != null ||
+      ratings.rotten != null || ratings.mal != null ||
+      ratings.letterboxd != null,
   );
 
   let isOpen = $state(false);
