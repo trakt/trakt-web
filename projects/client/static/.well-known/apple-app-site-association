@@ -1,0 +1,25 @@
+{
+    "activitycontinuation": {
+        "apps": [
+            "GZG6JGPM44.tv.trakt.trakt"
+        ]
+    },
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "GZG6JGPM44.tv.trakt.trakt",
+                "paths": [
+                    "NOT /movies/*/?*",
+                    "/movies/?*",
+                    "NOT /shows/*/seasons/*/episodes/*/?*",
+                    "/shows/*/seasons/*/episodes/?*",
+                    "NOT /shows/*/?*",
+                    "/shows/?*",
+                    "NOT /people/*/?*",
+                    "/people/?*"
+                ]
+            }
+        ]
+    }
+}
