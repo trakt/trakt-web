@@ -35,23 +35,24 @@
           {#if isLoading}
             <span class="rating-skeleton" aria-hidden="true"></span>
           {:else if hasValidRating}
-            <span class="rating-grow">
-              <span class="rating-grow-clip">
-                <p class="bold">{rating}</p>
-              </span>
-            </span>
+            <p class="bold">{rating}</p>
           {:else}
             <p class="bold">-</p>
           {/if}
         </div>
-        {#if style === "default" && !isLoading && hasValidRating}
-          <span class="rating-grow has-underline">
-            <span class="rating-grow-clip">
+        {#if style === "default"}
+          <div class="rating-votes">
+            {#if isLoading}
+              <span
+                class="rating-skeleton rating-skeleton-votes"
+                aria-hidden="true"
+              ></span>
+            {:else if hasValidRating}
               <p class="bold uppercase secondary vote-count tag">
                 {@render superscript()}
               </p>
-            </span>
-          </span>
+            {/if}
+          </div>
         {/if}
       </div>
     </div>
@@ -60,18 +61,6 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-
-  @keyframes rating-grow-in {
-    from {
-      grid-template-columns: 0fr;
-      opacity: 0;
-    }
-
-    to {
-      grid-template-columns: 1fr;
-      opacity: 1;
-    }
-  }
 
   rating {
     :global(.trakt-link) {
@@ -138,62 +127,36 @@
       line-height: 90%;
     }
 
-    .rating-value {
+    // Value and vote-count slots reserve a fixed width so the skeleton and the
+    // loaded content occupy the same space: content swaps in place, no slide,
+    // no jump. tabular-nums keeps digit changes (e.g. re-rating) from shifting.
+    .rating-value,
+    .rating-votes {
       display: flex;
       align-items: center;
 
       min-height: var(--font-size-text);
 
-      // tabular-nums keeps digit changes (e.g. re-rating) from micro-shifting.
       font-variant-numeric: tabular-nums;
-
-      // Small screens hide the vote-count and don't animate. Floor the value
-      // at 2ch so short scores ("9") aren't cramped; percentages/decimals size
-      // to their own content, sitting snug next to the icon.
-      min-width: 2ch;
-
-      @include for-desktop {
-        // desktop animates the grow-in instead of reserving space
-        min-width: 0;
-      }
     }
 
-    // CSS-only width grow-in. The 0fr -> 1fr column animation reflows for real
-    // (siblings glide, no jump). Gated to desktop: small screens hide the
-    // vote-count, so there is little to grow and the motion reads as jitter.
-    .rating-grow {
-      display: inline-grid;
-      grid-template-columns: 1fr;
-
-      @include for-desktop {
-        animation: rating-grow-in var(--transition-increment) ease-in-out;
-      }
+    // fits the common 3-char score ("87%", "8.6") snug; the rare 4-char score
+    // ("100%", "10.0") grows a hair, which is imperceptible and unusual.
+    .rating-value {
+      min-width: 3ch;
     }
 
-    .rating-grow-clip {
-      min-width: 0;
-
-      // clip the horizontal collapse; margin gives glyphs vertical breathing
-      overflow: clip;
-      overflow-clip-margin: var(--ni-2);
-    }
-
-    // extra clip margin keeps the vote-count underline visible
-    .rating-grow.has-underline .rating-grow-clip {
-      overflow-clip-margin: var(--ni-6);
+    // fits the widest vote-count ("359.7K"); the drawer is the only place these
+    // render, so reserving here keeps the row from growing once votes land.
+    .rating-votes {
+      min-width: 6ch;
     }
 
     .rating-skeleton {
       display: block;
 
-      // wider than the value floor so it reads as a bar, and ~matches a loaded
-      // percentage ("86%") for a near shift-free swap; slim bar on desktop
       width: 3ch;
       height: var(--font-size-text);
-
-      @include for-desktop {
-        width: var(--ni-24);
-      }
 
       border-radius: var(--border-radius-xs);
       background-color: color-mix(
@@ -204,6 +167,10 @@
 
       animation: pulse calc(var(--transition-increment) * 6) ease-in-out
         infinite alternate;
+    }
+
+    .rating-skeleton-votes {
+      width: 6ch;
     }
   }
 </style>
