@@ -8,6 +8,6 @@ export type TraktButtonProps = ButtonProps & {
   icon?: Snippet;
   subtitle?: Snippet;
   size?: 'normal' | 'small' | 'tag';
-  text?: 'capitalize' | 'uppercase';
+  text?: 'capitalize' | 'uppercase' | 'none';
   navigationType?: DpadNavigationType;
 };
