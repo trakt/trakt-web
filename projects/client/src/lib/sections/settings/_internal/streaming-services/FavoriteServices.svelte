@@ -12,7 +12,7 @@
   import ServiceLogoBox from "./ServiceLogoBox.svelte";
   import { useStreamingServices } from "./useStreamingServices.ts";
 
-  const { country, favoriteSources, availableCountries, setCountry } =
+  const { country, favoriteSources, availableCountries, countrySources, setCountry } =
     useStreamingServices();
 
   const countryName = (code: string) => toCountryName(code, languageTag());
@@ -53,6 +53,7 @@
       variant="primary"
       color="purple"
       label={m.button_text_manage()}
+      disabled={$countrySources == null}
       onclick={() => (isDrawerOpen = true)}
     >
       {m.button_text_manage()}
