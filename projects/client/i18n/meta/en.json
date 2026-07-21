@@ -7525,11 +7525,11 @@
       "description": "Heading on the banner shown to users who joined Trakt around the TV Time shutdown announcement, promoting the TV Time-style companion app."
     },
     "tv_time_banner_description": {
-      "default": "TV Time is shutting down on July 15. Feel right at home with our familiar companion app, powered by your Trakt account.",
+      "default": "Feel right at home with our familiar companion app, powered by your Trakt account.",
       "description": "Description on the TV Time migration banner explaining that tvtime.trakt.tv is a familiar companion app backed by Trakt."
     },
     "tv_time_banner_action": {
-      "default": "Open tvtime.trakt.tv",
+      "default": "tvtime.trakt.tv",
       "description": "Call-to-action link on the TV Time migration banner that opens the tvtime.trakt.tv companion app in a new tab."
     },
     "tv_time_import_banner_heading": {
