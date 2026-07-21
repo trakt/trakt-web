@@ -3173,6 +3173,15 @@
         }
       }
     },
+    "button_label_reorder_item": {
+      "default": "Reorder {title}",
+      "description": "Aria-label for the button that opens a menu with actions to move a list item to a different position.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "button_text_continue": {
       "default": "Continue",
       "description": "Text for the button that allows users to continue to next screen etc."

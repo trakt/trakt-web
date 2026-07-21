@@ -8,14 +8,20 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { MEDIA_POSTER_PLACEHOLDER } from "$lib/utils/assets.ts";
+  import { clamp } from "$lib/utils/number/clamp.ts";
+  import { time } from "$lib/utils/timing/time.ts";
+  import { onDestroy, tick } from "svelte";
   import { flip } from "svelte/animate";
   import { cubicOut } from "svelte/easing";
   import type { ReorderableListItem } from "./models/ReorderableListItem.ts";
+  import { moveReorderableItem } from "./moveReorderableItem.ts";
+  import RankEditor from "./RankEditor.svelte";
   import { type DragGhost, reorderDrag } from "./reorderDrag.ts";
   import {
     itemOrderSignature,
     sortReorderableItems,
   } from "./reorderListItems.ts";
+  import { scrollIntoViewWhen } from "./scrollIntoViewWhen.ts";
 
   const {
     items,
@@ -37,6 +43,8 @@
 
   const { confirm } = useConfirm();
 
+  const flashDuration = time.seconds(1.5);
+
   let localOrder = $state<{
     signature: string;
     items: ReorderableListItem[];
@@ -46,6 +54,8 @@
   let instantPosterKeys = $state<readonly string[]>([]);
   let placeholderIndex = $state<number | null>(null);
   let dragGhost = $state<DragGhost | null>(null);
+  let flashKey = $state<string | null>(null);
+  let flashTimeout: ReturnType<typeof setTimeout> | null = null;
 
   const rankOrderedItems = $derived(sortReorderableItems(items));
   const rankSignature = $derived(itemOrderSignature(rankOrderedItems));
@@ -135,30 +145,70 @@
     cancelled: boolean,
   ) {
     if (!cancelled && key != null && finalIndex != null) {
-      const item = orderedItems.find((i) => i.key === key);
-
-      if (item) {
-        const visible = orderedItems.filter((i) => i.key !== key);
-
-        localOrder = {
-          signature: rankSignature,
-          items: [
-            ...visible.slice(0, finalIndex),
-            item,
-            ...visible.slice(finalIndex),
-          ],
-        };
-      }
-
-      if (!instantPosterKeys.includes(key)) {
-        instantPosterKeys = [...instantPosterKeys, key];
-      }
+      moveItemToIndex(key, finalIndex);
     }
 
     draggedKey = null;
     placeholderIndex = null;
     dragGhost = null;
+
+    if (!cancelled && key != null) {
+      highlightMovedRow(key);
+    }
   }
+
+  function moveItemToIndex(key: string, targetIndex: number) {
+    const items = moveReorderableItem({
+      items: orderedItems,
+      key,
+      targetIndex,
+    });
+
+    if (items === orderedItems) {
+      return;
+    }
+
+    localOrder = { signature: rankSignature, items };
+
+    if (!instantPosterKeys.includes(key)) {
+      instantPosterKeys = [...instantPosterKeys, key];
+    }
+  }
+
+  function moveItemToRank(key: string, targetRank: number) {
+    const currentIndex = orderedItems.findIndex((item) => item.key === key);
+    const targetIndex =
+      clamp({ value: targetRank, min: 1, max: orderedItems.length }) - 1;
+
+    if (currentIndex < 0 || targetIndex === currentIndex) {
+      return;
+    }
+
+    moveItemToIndex(key, targetIndex);
+    highlightMovedRow(key);
+  }
+
+  async function highlightMovedRow(key: string) {
+    if (flashTimeout != null) {
+      clearTimeout(flashTimeout);
+    }
+
+    flashKey = null;
+
+    await tick();
+
+    flashKey = key;
+    flashTimeout = setTimeout(() => {
+      flashKey = null;
+      flashTimeout = null;
+    }, flashDuration);
+  }
+
+  onDestroy(() => {
+    if (flashTimeout != null) {
+      clearTimeout(flashTimeout);
+    }
+  });
 
   async function handleApply() {
     if (!canApply) {
@@ -253,7 +303,10 @@
     </ActionButton>
   {/snippet}
 
-  <div class="reorder-drawer">
+  <div
+    class="reorder-drawer"
+    style="--reorder-flash-duration: {flashDuration}ms"
+  >
     {#if !isLoaded}
       <div class="reorder-loading" role="status" aria-live="polite">
         <LoadingIndicator />
@@ -274,14 +327,24 @@
           class:has-active-drag={draggedKey != null}
         >
           {#each renderRows as row (row.key)}
+            {@const isFlashing = row.type === "item" &&
+            row.item.key === flashKey}
             <tr
               data-reorder-key={row.type === "item" ? row.item.key : undefined}
               class:drag-placeholder={row.type === "placeholder"}
+              class:is-flashing={isFlashing}
+              use:scrollIntoViewWhen={isFlashing}
               animate:flip={{ duration: 220, easing: cubicOut }}
             >
               <td class="rank-cell">
                 {#if row.type === "item"}
-                  <span class="bold">#{row.rank}</span>
+                  <RankEditor
+                    rank={row.rank}
+                    total={orderedItems.length}
+                    title={row.item.title}
+                    onMove={(targetRank) =>
+                    moveItemToRank(row.item.key, targetRank)}
+                  />
                 {/if}
               </td>
               <td>
@@ -365,6 +428,9 @@
 
   tbody {
     tr {
+      scroll-margin-block-start: var(--drawer-header-overlay-height);
+      scroll-margin-block-end: var(--gap-m);
+
       cursor: default;
       filter: drop-shadow(
         var(--ni-1) var(--ni-1) var(--ni-4)
@@ -432,12 +498,54 @@
     }
   }
 
+  .is-flashing td {
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: var(--color-background-purple);
+      opacity: 0;
+      animation: reorder-flash var(--reorder-flash-duration) ease-out;
+    }
+
+    &:first-child::after {
+      border-start-start-radius: var(--border-radius-m);
+      border-end-start-radius: var(--border-radius-m);
+    }
+
+    &:last-child::after {
+      border-start-end-radius: var(--border-radius-m);
+      border-end-end-radius: var(--border-radius-m);
+    }
+  }
+
+  @keyframes reorder-flash {
+    0% {
+      opacity: 0.28;
+    }
+
+    35% {
+      opacity: 0.28;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .is-flashing td::after {
+      animation: none;
+    }
+  }
+
   .placeholder-space {
     min-height: calc(var(--ni-40) * 1.5);
   }
 
   .rank-cell {
-    width: var(--ni-56);
+    width: var(--ni-72);
     text-align: center;
     font-variant-numeric: tabular-nums;
   }
@@ -474,7 +582,8 @@
   .reorder-actions {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    gap: var(--ni-2);
   }
 
   .drag-handle {
@@ -506,7 +615,7 @@
     pointer-events: none;
 
     display: grid;
-    grid-template-columns: var(--ni-56) minmax(0, 1fr) var(--ni-56);
+    grid-template-columns: var(--ni-72) minmax(0, 1fr) var(--ni-56);
     align-items: center;
     box-sizing: border-box;
 

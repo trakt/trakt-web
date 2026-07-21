@@ -258,7 +258,6 @@
     backdrop-filter: blur(var(--ni-12));
 
     &[data-header-variant="overlay"] {
-      z-index: calc(var(--layer-menu) + 1);
       gap: 0;
       padding-top: 0;
       padding-bottom: 0;

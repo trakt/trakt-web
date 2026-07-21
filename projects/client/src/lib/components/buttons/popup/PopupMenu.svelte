@@ -5,6 +5,7 @@
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { slide } from "svelte/transition";
   import type { PopupMenuProps } from "./PopupMenuProps";
+  import { closeOnSelect } from "./_internal/closeOnSelect";
   import { usePopupMenu } from "./_internal/usePopupMenu";
 
   const {
@@ -50,8 +51,8 @@
 
 {#if variant === "drawer"}
   {#if $isOpened}
-    <Drawer onClose={close} {title} size="auto">
-      <ul class="popup-menu-drawer-item">
+    <Drawer onClose={close} {title} size="auto" elevated>
+      <ul class="popup-menu-drawer-item" use:closeOnSelect={close}>
         {@render items()}
       </ul>
     </Drawer>
