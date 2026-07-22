@@ -88,6 +88,16 @@
   --color-switch-background-orange: var(--orange-800);
 
   /**
+   * Segmented select
+   */
+  --color-segmented-selector-background: linear-gradient(
+    180deg,
+    var(--purple-400) 0%,
+    var(--purple-600) 100%
+  );
+  --color-segmented-selector-foreground: var(--shade-10);
+
+  /**
    * Poster overlay
    */
   --color-overlay-foreground: var(--shade-10);

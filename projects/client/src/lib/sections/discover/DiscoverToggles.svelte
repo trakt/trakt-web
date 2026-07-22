@@ -1,23 +1,33 @@
 <script lang="ts">
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
+  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
+  import type { SelectVariant } from "$lib/components/select/models/SelectVariant.ts";
+  import ToggleIcon from "$lib/components/toggles/ToggleIcon.svelte";
   import { DISCOVER_MODE_PARAM } from "$lib/features/filters/_internal/constants";
+  import { discoverModeOptions } from "$lib/features/filters/discoverModeOptions.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import GlobalParameterSetter from "$lib/features/parameters/GlobalParameterSetter.svelte";
-  import { buildParamString } from "$lib/utils/url/buildParamString";
+
+  type DiscoverTogglesProps = {
+    variant?: SelectVariant;
+  };
+
+  const { variant = "selected-label" }: DiscoverTogglesProps = $props();
 
   const { mode: selectedType, onModeChange, options } = useDiscover();
 
-  const optionsWithHref = options.map((option) => ({
-    ...option,
-    href: buildParamString({ [DISCOVER_MODE_PARAM]: option.value }),
-  }));
+  const segmentedOptions = $derived(discoverModeOptions(options));
 </script>
 
 <GlobalParameterSetter parameter={DISCOVER_MODE_PARAM}>
-  <Toggler
+  <SegmentedSelect
+    {variant}
     value={$selectedType}
-    variant="text"
+    options={segmentedOptions}
     onChange={onModeChange}
-    options={optionsWithHref}
-  />
+  >
+    {#snippet icon(option: SelectOption)}
+      <ToggleIcon {option} />
+    {/snippet}
+  </SegmentedSelect>
 </GlobalParameterSetter>

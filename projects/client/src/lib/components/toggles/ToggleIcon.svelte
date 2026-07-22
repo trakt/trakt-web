@@ -22,10 +22,9 @@
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import SpoilerIcon from "$lib/components/icons/SpoilerIcon.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
-  import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
 
   interface ToggleIconProps {
-    option: ToggleOption<T>;
+    option: { value: T };
   }
 
   const { option }: ToggleIconProps = $props();
