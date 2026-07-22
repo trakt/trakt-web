@@ -3202,7 +3202,7 @@
       "description": "Text for the section that allows users to view all settings."
     },
     "text_display_name": {
-      "default": "Display name",
+      "default": "Display Name",
       "description": "Text for the section that allows users to change their display name."
     },
     "text_username": {
@@ -3234,7 +3234,7 @@
       "description": "Aria-label for the button that allows users to change their location."
     },
     "text_about": {
-      "default": "About me",
+      "default": "About Me",
       "description": "Text for the section that allows users to change their 'about me' description."
     },
     "text_birthday": {
