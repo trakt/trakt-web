@@ -162,6 +162,7 @@
   onOpened={() => (isOpen = true)}
   // title={m.drawer_title_episode_information()}
   title={show.title}
+  titleStyle="prominent"
   metaInfo={episodeTitle}
   size="large"
   classList="trakt-episode-drawer"

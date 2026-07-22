@@ -20,21 +20,25 @@ const upNextSortOptions: Sorting<UpNextSortBy>[] = [
     value: undefined,
     text: m.button_text_sort_default,
     label: m.button_label_sort_default,
+    description: m.button_description_sort_default,
   },
   {
     value: 'smart',
     text: m.button_text_sort_smart,
     label: m.button_label_sort_smart,
+    description: m.button_description_sort_smart,
   },
   {
     value: 'released',
     text: m.button_text_sort_release_date,
     label: m.button_label_sort_release_date,
+    description: m.button_description_sort_release_date,
   },
   {
     value: 'remaining',
     text: m.button_text_sort_remaining,
     label: m.button_label_sort_remaining,
+    description: m.button_description_sort_remaining,
   },
 ];
 
