@@ -1,4 +1,5 @@
 import type { SearchResultResponse } from '@trakt/api';
+import { hasSlug } from '../../search/hasSlug.ts';
 import { lookup } from '../../search/lookup.ts';
 import { toPerson } from './response/toPerson.ts';
 
@@ -24,9 +25,17 @@ export async function getPeople({
   });
 
   return hits
-    .map((hit) => ({
-      score: Number(hit.text_match_info?.score ?? -1),
-      type,
-      [type]: toPerson(hit.document),
-    }));
+    .flatMap((hit) => {
+      const { document } = hit;
+
+      if (!hasSlug(document)) {
+        return [];
+      }
+
+      return [{
+        score: Number(hit.text_match_info?.score ?? -1),
+        type,
+        [type]: toPerson(document),
+      }];
+    });
 }
