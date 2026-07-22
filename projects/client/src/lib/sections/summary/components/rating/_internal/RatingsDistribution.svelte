@@ -79,7 +79,7 @@
   .trakt-ratings-distribution {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
+    gap: var(--gap-m);
 
     padding: var(--ni-12) var(--ni-16);
     border-radius: var(--border-radius-l);
