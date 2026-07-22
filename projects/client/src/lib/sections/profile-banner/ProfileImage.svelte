@@ -194,7 +194,7 @@
       .profile-image {
         box-shadow:
           0 0 var(--ni-8) color-mix(in srgb, var(--purple-400) 60%, transparent),
-          0 0 var(--ni-20)
+          0 0 var(--ni-16)
           color-mix(in srgb, var(--purple-500) 50%, transparent);
       }
     }
