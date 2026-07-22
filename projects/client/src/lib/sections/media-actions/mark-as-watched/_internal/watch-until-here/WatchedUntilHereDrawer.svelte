@@ -2,8 +2,10 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import DateTimePicker from "$lib/components/date-time/DateTimePicker.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
+  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
@@ -99,7 +101,11 @@
 
 <Drawer {onClose} {title} {metaInfo} size="large">
   <div class="watch-until-here-drawer">
-    <div class="mode-options">
+    {#snippet activeCheck()}
+      <CheckIcon />
+    {/snippet}
+
+    <DropdownGroup>
       <DropdownItem
         onclick={() => handleModeChange("just-now")}
         label={m.button_label_mark_as_watched_now()}
@@ -107,6 +113,7 @@
         color="default"
         variant={mode === "just-now" ? "primary" : "secondary"}
         disabled={mode === "just-now"}
+        end={mode === "just-now" ? activeCheck : undefined}
       >
         {m.button_text_mark_as_watched_now()}
         {#snippet icon()}
@@ -123,6 +130,7 @@
         color="default"
         variant={isCustom ? "primary" : "secondary"}
         disabled={isCustom}
+        end={isCustom ? activeCheck : undefined}
       >
         {m.button_text_mark_as_watched_other_date()}
         {#snippet icon()}
@@ -139,6 +147,7 @@
         color="default"
         variant={mode === "released" ? "primary" : "secondary"}
         disabled={mode === "released"}
+        end={mode === "released" ? activeCheck : undefined}
       >
         {m.button_text_mark_as_watched_release_date()}
         {#snippet icon()}
@@ -147,7 +156,7 @@
           </IconWrapper>
         {/snippet}
       </DropdownItem>
-    </div>
+    </DropdownGroup>
 
     {#if isCustom}
       <div class="custom-anchor">
@@ -241,12 +250,6 @@
     height: 100%;
     max-height: inherit;
     min-height: 0;
-  }
-
-  .mode-options {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xxs);
   }
 
   .custom-anchor {
