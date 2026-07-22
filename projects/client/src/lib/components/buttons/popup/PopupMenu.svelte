@@ -52,7 +52,7 @@
 {#if variant === "drawer"}
   {#if $isOpened}
     <Drawer onClose={close} {title} size="auto" elevated>
-      <ul class="popup-menu-drawer-item" use:closeOnSelect={close}>
+      <ul class="popup-menu-card" use:closeOnSelect={close}>
         {@render items()}
       </ul>
     </Drawer>
@@ -65,7 +65,7 @@
       transition:slide={{ duration: 150 }}
     >
       <div class="spacer"></div>
-      <ul>
+      <ul class="popup-menu-card">
         {@render items()}
       </ul>
     </div>
@@ -184,27 +184,13 @@
 
     min-width: var(--ni-156);
     max-width: var(--ni-240);
-    padding: var(--list-padding);
-
-    border-radius: var(--border-radius-m);
-    background-color: var(--shade-10);
 
     position: absolute;
-    box-shadow: var(--shadow-menu);
 
-    ul {
-      all: unset;
-
-      display: grid;
-      grid-template-columns: 100%;
-      gap: var(--gap-xxs);
+    .popup-menu-card {
       max-height: var(--ni-220);
       overflow-y: auto;
-
-      :global(li) {
-        width: 100%;
-        box-sizing: border-box;
-      }
+      box-shadow: var(--shadow-menu);
     }
 
     div.spacer {
@@ -212,16 +198,51 @@
     }
   }
 
-  .popup-menu-drawer-item {
+  // Grouped card: one elevated surface with hairline-divided rows, shared by
+  // the mobile drawer and the desktop portal. PopupMenu receives its items as
+  // an opaque snippet, so the child DropdownItems are flattened from filled
+  // pills into flush rows via scoped overrides here.
+  .popup-menu-card {
     all: unset;
 
     display: grid;
     grid-template-columns: 100%;
-    gap: var(--gap-xxs);
+
+    background: var(--color-option-list-background);
+    border-radius: var(--border-radius-l);
+    overflow: hidden;
 
     :global(li) {
       width: 100%;
       box-sizing: border-box;
+
+      // Neutralise the filled-pill look; rows sit flush inside the card with
+      // a single neutral foreground instead of the inverted flat-pill fill.
+      background: transparent !important;
+      border-radius: 0 !important;
+      height: auto !important;
+      padding: var(--ni-14) var(--ni-16) !important;
+      color: var(--color-text-primary) !important;
+    }
+
+    // Destructive actions keep their red as a safety cue.
+    :global(li[data-color="red"]) {
+      color: var(--red-600) !important;
+    }
+
+    :global(li:not(:last-child)) {
+      border-block-end: var(--ni-1) solid var(--color-option-list-separator);
+    }
+
+    // Subtle highlight on hover/press, matching the selected-row treatment.
+    @include for-mouse {
+      :global(li:hover) {
+        background: var(--color-option-list-highlight) !important;
+      }
+    }
+
+    :global(li:active) {
+      background: var(--color-option-list-highlight) !important;
     }
   }
 </style>
