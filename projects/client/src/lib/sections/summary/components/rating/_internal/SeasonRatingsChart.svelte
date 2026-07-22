@@ -47,10 +47,11 @@
 
 {#if points.length >= 2}
   <section class="trakt-season-ratings-chart">
-    <div class="header">
-      <h3 class="card-title bold secondary">
-        {m.header_ratings_quality_over_time()}
-      </h3>
+    <h3 class="bold secondary small">
+      {m.header_ratings_quality_over_time()}
+    </h3>
+
+    <div class="chart-card">
       {#if peak && trough}
         <span class="meta tag secondary">
           {m.text_ratings_season_extremes({
@@ -61,9 +62,8 @@
           })}
         </span>
       {/if}
-    </div>
 
-    <div class="chart">
+      <div class="chart">
       <LineChart
         {data}
         {tickLabels}
@@ -82,6 +82,7 @@
           </span>
         {/snippet}
       </LineChart>
+      </div>
     </div>
   </section>
 {/if}
@@ -91,23 +92,15 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
+  }
+
+  .chart-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
     padding: var(--ni-12) var(--ni-16);
     border-radius: var(--border-radius-l);
     background: var(--color-card-background);
-  }
-
-  .header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--gap-s);
-    flex-wrap: wrap;
-  }
-
-  .card-title {
-    color: var(--color-text-secondary);
-    margin: 0;
-    font-size: var(--font-size-text-small);
   }
 
   .meta {

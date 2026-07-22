@@ -67,7 +67,7 @@
         {/if}
 
         <section class="official-section">
-          <h3 class="card-title bold secondary">
+          <h3 class="bold secondary small">
             {m.header_ratings_official()}
           </h3>
           <div class="official-grid">
@@ -90,17 +90,11 @@
   .trakt-ratings-drawer-content {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-l);
   }
 
   .ratings-empty {
     color: var(--color-text-secondary);
-  }
-
-  .card-title {
-    color: var(--color-text-secondary);
-    margin: 0;
-    font-size: var(--font-size-text-small);
   }
 
   .official-section {
