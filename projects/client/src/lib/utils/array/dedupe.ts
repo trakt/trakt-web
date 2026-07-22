@@ -9,7 +9,10 @@ export function dedupe<T>(
 
   sourceArrays.forEach((arr) => {
     arr.forEach((item) => {
-      map.set(keygen(item), item);
+      const key = keygen(item);
+      if (!map.has(key)) {
+        map.set(key, item);
+      }
     });
   });
 
