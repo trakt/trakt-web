@@ -5,7 +5,7 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import Toggle from "./_internal/Toggle.svelte";
-  import ToggleIcon from "./_internal/ToggleIcon.svelte";
+  import ToggleIcon from "./ToggleIcon.svelte";
   import type { ToggleOption } from "./ToggleOption.ts";
 
   interface TogglerProps {

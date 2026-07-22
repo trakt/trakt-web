@@ -25,4 +25,6 @@
   --dialog-height: 100dvh;
 
   --toggle-small-width: var(--ni-30);
+
+  --segmented-select-extension-height: calc(var(--ni-40) + var(--ni-4));
 }
