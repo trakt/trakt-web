@@ -16,7 +16,7 @@
 
   const { current } = useDiscover();
   const { isMe } = $derived(useIsMe(params.user));
-  const { current: sorting, update, options, urlBuilder } =
+  const { current: sorting, options, urlBuilder } =
     $derived(useUserListsSorting({ slug: params.user }));
 </script>
 
@@ -49,7 +49,6 @@
         {options}
         {urlBuilder}
         current={$sorting}
-        onUpdate={update}
       />
     {/snippet}
   </ResponsiveNavbarStateSetter>

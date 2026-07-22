@@ -15,7 +15,6 @@
 
   const {
     current: currentSort,
-    update,
     options: sortOptions,
     urlBuilder,
   } = useUpNextSorting(page.params.user ?? "me");
@@ -37,7 +36,6 @@
         options={$sortOptions}
         {urlBuilder}
         current={$currentSort}
-        onUpdate={update}
       />
     {/snippet}
   </ResponsiveNavbarStateSetter>

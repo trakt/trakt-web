@@ -2,12 +2,16 @@ import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
 import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
 import { filter, firstValueFrom, map, take } from 'rxjs';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { useUpNextSorting } from './useUpNextSorting.ts';
 
 describe('useUpNextSorting', () => {
   beforeEach(() => {
     localStorage.clear();
+  });
+
+  afterEach(() => {
+    history.replaceState(null, '', '/');
   });
 
   it('should hide smart sorting until the preview flag is enabled', async () => {
@@ -38,6 +42,8 @@ describe('useUpNextSorting', () => {
   });
 
   it('should ignore smart sorting from the URL until the preview flag is enabled', async () => {
+    history.replaceState(null, '', '/?sort_by=smart');
+
     const { sorting, featureFlag } = await renderStore(() => ({
       sorting: useUpNextSorting('me'),
       featureFlag: useFeatureFlag(),
@@ -46,8 +52,6 @@ describe('useUpNextSorting', () => {
       firstValueFrom(
         sorting.current.pipe(map((current) => current.sorting.value)),
       );
-
-    sorting.update({ sort_by: 'smart' });
 
     expect(await currentSortBy()).toBeUndefined();
 

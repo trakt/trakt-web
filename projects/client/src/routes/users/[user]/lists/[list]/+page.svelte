@@ -24,7 +24,7 @@
 
   const listName = $derived($list?.name ?? "");
 
-  const { current, update, options, urlBuilder } = $derived(
+  const { current, options, urlBuilder } = $derived(
     useListSorting({ list: $list, type: "user-list" }),
   );
 
@@ -55,7 +55,6 @@
         {options}
         {urlBuilder}
         current={$current}
-        onUpdate={update}
         disabled={$isLoading}
       />
     {/snippet}

@@ -11,7 +11,7 @@
 
   const { mode, current: currentDiscoverMode } = useDiscover();
 
-  const { current, update, options, urlBuilder } = useListSorting({
+  const { current, options, urlBuilder } = useListSorting({
     type: "watchlist",
     intent: "start",
   });
@@ -36,7 +36,6 @@
         {options}
         {urlBuilder}
         current={$current}
-        onUpdate={update}
       />
     {/snippet}
   </ResponsiveNavbarStateSetter>

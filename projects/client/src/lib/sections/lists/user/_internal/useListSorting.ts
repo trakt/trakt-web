@@ -1,6 +1,7 @@
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import type { WatchListIntent } from '$lib/requests/models/WatchListIntent.ts';
-import { BehaviorSubject, map, type Observable } from 'rxjs';
+import { useSortParams } from '$lib/sections/lists/stores/useSortParams.ts';
+import { map, type Observable } from 'rxjs';
 import { assertDefined } from '../../../../utils/assert/assertDefined.ts';
 import {
   getListUrl,
@@ -35,7 +36,6 @@ type ListSorting = {
     sortHow: SortDirection;
   }>;
   options: Sorting[];
-  update: (params: Record<string, string>) => void;
   urlBuilder: ListUrlBuilder;
 };
 
@@ -92,24 +92,15 @@ export function useListSorting(
   props: UseListSortingProps,
 ): ListSorting {
   const options = getSortOptions(props);
-  const params = new BehaviorSubject<Record<string, string | null>>({
-    sort_by: null,
-    sort_how: null,
-  });
-
-  function update(newParams: Record<string, string>) {
-    params.next({ ...newParams });
-  }
 
   return {
-    update,
     options,
-    current: params.pipe(
+    current: useSortParams().pipe(
       map(($params) => {
         const defaultDirection = getDefaultDirection(props);
-        const sortBy = mapToSortBy($params.sort_by, options) ??
+        const sortBy = mapToSortBy($params.sortBy, options) ??
           getDefaultSortBy(props);
-        const sortHow = mapToDirection($params.sort_how) ?? defaultDirection;
+        const sortHow = mapToDirection($params.sortHow) ?? defaultDirection;
 
         const sorting = options.find(
           (option) => option.value === sortBy,

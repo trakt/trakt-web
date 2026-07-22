@@ -14,7 +14,7 @@
 
   const { mode, current: currentDiscoverMode } = useDiscover();
 
-  const { current, update, options, urlBuilder } = $derived(
+  const { current, options, urlBuilder } = $derived(
     useListSorting({ type: "favorites", slug: params.slug }),
   );
 </script>
@@ -37,7 +37,6 @@
         {options}
         {urlBuilder}
         current={$current}
-        onUpdate={update}
       />
     {/snippet}
   </ResponsiveNavbarStateSetter>

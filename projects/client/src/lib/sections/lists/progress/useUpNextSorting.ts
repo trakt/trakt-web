@@ -2,18 +2,13 @@ import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
 import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { UpNextSortBy } from '$lib/sections/lists/progress/UpNextSortBy.ts';
+import { useSortParams } from '$lib/sections/lists/stores/useSortParams.ts';
 import type { ListUrlBuilder } from '$lib/sections/lists/user/models/ListUrlBuilder.ts';
 import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import type { Sorting } from '$lib/sections/lists/user/models/Sorting.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
-import {
-  BehaviorSubject,
-  combineLatest,
-  map,
-  type Observable,
-  startWith,
-} from 'rxjs';
+import { combineLatest, map, type Observable, startWith } from 'rxjs';
 
 const upNextSortOptions: Sorting<UpNextSortBy>[] = [
   {
@@ -44,7 +39,6 @@ type UpNextSorting = {
     sortHow: SortDirection;
   }>;
   options: Observable<Sorting<UpNextSortBy>[]>;
-  update: (params: Record<string, string>) => void;
   urlBuilder: ListUrlBuilder<UpNextSortBy>;
 };
 
@@ -74,22 +68,12 @@ export function useUpNextSorting(user: string): UpNextSorting {
     startWith(getSortOptions(false)),
   );
 
-  const params = new BehaviorSubject<Record<string, string | null>>({
-    sort_by: null,
-    sort_how: null,
-  });
-
-  function update(newParams: Record<string, string>) {
-    params.next({ ...newParams });
-  }
-
   return {
-    update,
     options,
-    current: combineLatest([params, options]).pipe(
+    current: combineLatest([useSortParams(), options]).pipe(
       map(([$params, $options]) => {
-        const sortBy = mapToSortBy($params.sort_by, $options);
-        const sortHow = mapToDirection($params.sort_how);
+        const sortBy = mapToSortBy($params.sortBy, $options);
+        const sortHow = mapToDirection($params.sortHow);
 
         const sorting = $options.find(
           (option) => option.value === sortBy,
