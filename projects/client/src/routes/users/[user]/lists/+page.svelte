@@ -4,7 +4,6 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import SmartLists from "$lib/sections/lists/smart/SmartLists.svelte";
@@ -42,11 +41,7 @@
 
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter hasFilters>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-  </NavbarStateSetter>
+  <NavbarStateSetter hasFilters />
 
   <WatchList
     drilldownLabel={m.button_label_view_all_watchlist_items()}

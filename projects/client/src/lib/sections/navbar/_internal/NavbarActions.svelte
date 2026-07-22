@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import EditModeBar from "$lib/features/edit-mode/EditModeBar.svelte";
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
@@ -10,17 +11,23 @@
   import GetVIPLink from "../components/GetVIPLink.svelte";
   import JoinTraktButton from "../components/JoinTraktButton.svelte";
   import { useNavbarState } from "../useNavbarState";
+  import NavbarContentToggle from "./NavbarContentToggle.svelte";
   import NavbarHeader from "./NavbarHeader.svelte";
+  import { resolveContentToggle } from "./resolveContentToggle.ts";
 
   const { state } = useNavbarState();
 
   const { isEditMode } = useEditMode();
+
+  const hasContentToggle = $derived(
+    resolveContentToggle(page.route.id) !== null,
+  );
 </script>
 
 <div
   class="trakt-navbar-actions"
   class:is-hidden={$state.mode === "minimal" && !$isEditMode}
-  class:has-actions={Boolean($state.actions)}
+  class:has-actions={Boolean($state.actions) || hasContentToggle}
   use:trackElementBottom={"--navbar-actions-bottom"}
   use:trackWindowScroll={"trakt-navbar-actions-scroll"}
 >
@@ -28,15 +35,14 @@
     <NavbarHeader />
   </div>
 
-  {#if $state.actions || $isEditMode}
-    <div class="trakt-navbar-actions-center">
-      {#if $isEditMode}
-        <EditModeBar />
-      {:else}
-        {@render $state.actions?.()}
-      {/if}
-    </div>
-  {/if}
+  <div class="trakt-navbar-actions-center">
+    {#if $isEditMode}
+      <EditModeBar />
+    {:else}
+      <NavbarContentToggle />
+      {@render $state.actions?.()}
+    {/if}
+  </div>
 
   <div class="trakt-navbar-actions-right">
     <RenderFor audience="authenticated">
@@ -101,6 +107,7 @@
     padding-inline-start: calc(
       var(--layout-distance-side) + var(--layout-sidebar-distance)
     );
+    padding-inline-end: var(--layout-distance-side);
 
     &::before {
       content: "";

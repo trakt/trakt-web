@@ -3,10 +3,7 @@
   import { useIsFollowing } from "$lib/features/auth/stores/useIsFollowing.ts";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
   import Profile from "$lib/sections/profile/Profile.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
@@ -44,14 +41,6 @@
   hasDynamicContent={true}
   filterScope="global"
 >
-  <RenderFor audience="authenticated">
-    <NavbarStateSetter>
-      {#snippet actions()}
-        <DiscoverToggles />
-      {/snippet}
-    </NavbarStateSetter>
-  </RenderFor>
-
   {#if !$isLoading && $user}
     <CoverImageSetter src={$user.cover?.url} type="main" />
     {#if isPrivateProfile}

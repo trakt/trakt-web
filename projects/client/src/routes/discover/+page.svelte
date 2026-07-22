@@ -3,7 +3,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import SeasonalToggle from "$lib/features/theme/components/SeasonalToggle.svelte";
   import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
@@ -57,10 +56,6 @@
   <TraktPageCoverSetter />
 
   <NavbarStateSetter hasFilters={!$useSeasonalFilters}>
-    {#snippet actions()}
-      <DiscoverToggles />
-    {/snippet}
-
     {#snippet headerActions()}
       <SeasonalToggle />
     {/snippet}

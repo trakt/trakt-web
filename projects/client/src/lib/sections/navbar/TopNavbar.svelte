@@ -4,6 +4,7 @@
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
+  import NavbarContentToggleMobile from "./_internal/NavbarContentToggleMobile.svelte";
   import NavbarHeader from "./_internal/NavbarHeader.svelte";
   import FilterButton from "./components/filter/FilterButton.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
@@ -28,6 +29,7 @@
         {#if $isEditMode}
           <EditModeBar />
         {:else}
+          <NavbarContentToggleMobile />
           {@render $state.actions?.()}
         {/if}
       </div>

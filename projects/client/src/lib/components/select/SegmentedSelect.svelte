@@ -194,7 +194,10 @@
 
     padding: var(--segment-inset);
     border-radius: var(--track-radius);
-    background-color: var(--color-segmented-track-background);
+    background-color: var(
+      --segmented-select-background,
+      var(--color-segmented-track-background)
+    );
     backdrop-filter: blur(var(--ni-8));
     overflow: hidden;
 

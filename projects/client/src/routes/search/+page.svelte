@@ -4,7 +4,7 @@
   import { page } from "$app/state";
   import type { SearchItem } from "$lib/features/search/models/SearchItem";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
-  import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
+  import SearchModePanel from "$lib/features/search/SearchModePanel.svelte";
   import SearchPlaceHolder from "$lib/features/search/SearchPlaceHolder.svelte";
   import SearchResultsGrid from "$lib/features/search/SearchResultsGrid.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
@@ -51,33 +51,24 @@
   title={pageTitle}
 >
   <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
-    <NavbarStateSetter mode="full">
-      {#snippet actions()}
-        <SearchModeToggles />
-      {/snippet}
-    </NavbarStateSetter>
-
-    <div role="search" class="trakt-search-container">
-      <SearchInput />
-    </div>
+    <NavbarStateSetter mode="full" />
   </RenderFor>
 
   <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
     {#if isMobileApple}
+      <NavbarStateSetter mode="full">
+        {#snippet actions()}
+          <SearchModePanel withSearchInput={false} />
+        {/snippet}
+      </NavbarStateSetter>
+
       <div role="search" class="trakt-search-container">
         <SearchInput />
       </div>
-
-      <NavbarStateSetter mode="full">
-        {#snippet actions()}
-          <SearchModeToggles />
-        {/snippet}
-      </NavbarStateSetter>
     {:else}
       <NavbarStateSetter mode="minimal">
         {#snippet contextualActions()}
-          <SearchModeToggles />
-          <SearchInput />
+          <SearchModePanel />
         {/snippet}
       </NavbarStateSetter>
     {/if}
@@ -100,6 +91,20 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  .trakt-search-results-container {
+    --results-clearance: calc(
+      var(--segmented-select-extension-height) + var(--gap-m)
+    );
+
+    @include for-tablet-lg {
+      padding-top: var(--results-clearance);
+    }
+
+    @include for-desktop {
+      padding-top: var(--results-clearance);
+    }
+  }
 
   .trakt-search-container {
     display: flex;

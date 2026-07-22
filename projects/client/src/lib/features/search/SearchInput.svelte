@@ -9,6 +9,12 @@
   import { onMount } from "svelte";
   import { useSearch } from "./useSearch";
 
+  type SearchInputProps = {
+    variant?: "default" | "embedded";
+  };
+
+  const { variant = "default" }: SearchInputProps = $props();
+
   const { clear, isSearching, pathName, mode, query } = useSearch();
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
@@ -83,6 +89,7 @@
 <div
   class="trakt-search"
   class:search-is-loading={$isSearching}
+  data-variant={variant}
   data-hj-suppress
   data-sentry-mask
 >
@@ -138,6 +145,39 @@
 
     &:focus-within {
       outline: var(--border-thickness-xs) solid var(--color-input-focus);
+    }
+
+    &[data-variant="embedded"] {
+      --search-input-width: 100%;
+      --search-input-height: var(--ni-32);
+      --search-icon-size: var(--ni-16);
+
+      outline: none;
+
+      &:focus-within {
+        outline: none;
+      }
+
+      &,
+      .trakt-search-input {
+        border-radius: var(--border-radius-s);
+      }
+
+      .trakt-search-input {
+        background: transparent;
+        backdrop-filter: none;
+      }
+
+      .trakt-search-icon :global(svg) {
+        display: block;
+        width: var(--search-icon-size);
+        height: var(--search-icon-size);
+      }
+
+      &.search-is-loading::after {
+        bottom: calc(-1 * var(--ni-4));
+        height: var(--ni-1);
+      }
     }
 
     .trakt-search-icon {
