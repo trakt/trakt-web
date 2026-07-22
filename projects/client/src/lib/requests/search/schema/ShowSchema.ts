@@ -1,7 +1,8 @@
 export interface ShowSchema {
   air_day: string;
   air_time: string;
-  aired_episode_count: number;
+  // not populated on live Typesense documents, prefer episode_count
+  aired_episode_count: number | undefined;
   aliases: string[];
   available_translations: string[];
   banner_url: string;

@@ -8,7 +8,7 @@ export function toShow(input: ShowSchema) {
   return {
     ...common,
     first_aired: unixToDateTime(input.first_aired),
-    aired_episodes: input.aired_episode_count,
+    aired_episodes: input.aired_episode_count ?? input.episode_count,
     certification: input.certification?.toUpperCase(),
     airs: {
       day: input.air_day,
