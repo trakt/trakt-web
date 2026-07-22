@@ -1,5 +1,4 @@
 import type { Season } from '$lib/requests/models/Season.ts';
-import { EMPTY_SEASON_INFO } from '$lib/sections/lists/stores/useUserSeason.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 
 const FIRST_SEASON = 1;
@@ -19,20 +18,25 @@ export function findActiveSeason({
   seasons,
   lastWatchedSeason,
 }: FindActiveSeasonProps) {
-  if (lastWatchedSeason === EMPTY_SEASON_INFO) {
-    return FIRST_SEASON;
+  const ordered = [...seasons].sort((a, b) => a.number - b.number);
+
+  const fallbackSeason = ordered.find((s) => s.number === FIRST_SEASON) ??
+    ordered.find((s) => s.number !== SPECIAL_SEASON) ??
+    ordered.at(0);
+
+  const hasWatchedHistory = lastWatchedSeason.number >= SPECIAL_SEASON &&
+    lastWatchedSeason.episodes.count > 0;
+
+  if (!hasWatchedHistory) {
+    return fallbackSeason?.number ?? FIRST_SEASON;
   }
 
-  const lastWatched = seasons.find((s) =>
+  const lastWatched = ordered.find((s) =>
     s.number === lastWatchedSeason.number
-  );
-  const firstSeason = seasons.find((s) => s.number === FIRST_SEASON);
-  const firstNonSpecialSeason = seasons.find((s) =>
-    s.number !== SPECIAL_SEASON
   );
 
   const active = assertDefined(
-    lastWatched ?? firstSeason ?? firstNonSpecialSeason,
+    lastWatched ?? fallbackSeason,
     'Active season not found',
   );
 
@@ -41,7 +45,7 @@ export function findActiveSeason({
     active.number === lastWatchedSeason.number;
 
   const maxSeason = assertDefined(
-    seasons.at(-1),
+    ordered.at(-1),
     'Could not find last season',
   ).number;
   const nextSeason = Math.min(active.number + 1, maxSeason);
