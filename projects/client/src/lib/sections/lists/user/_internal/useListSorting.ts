@@ -1,3 +1,4 @@
+import { page } from '$app/state';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import type { WatchListIntent } from '$lib/requests/models/WatchListIntent.ts';
 import { BehaviorSubject, map, type Observable } from 'rxjs';
@@ -92,9 +93,10 @@ export function useListSorting(
   props: UseListSortingProps,
 ): ListSorting {
   const options = getSortOptions(props);
+  // Seeded from the URL so the first fetch already uses the requested sort.
   const params = new BehaviorSubject<Record<string, string | null>>({
-    sort_by: null,
-    sort_how: null,
+    sort_by: page.url.searchParams.get('sort_by'),
+    sort_how: page.url.searchParams.get('sort_how'),
   });
 
   function update(newParams: Record<string, string>) {
