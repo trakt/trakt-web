@@ -2,7 +2,6 @@
   lang="ts"
   generics="T extends SortBy | UpNextSortBy | UserListsSortBy"
 >
-  import { page } from "$app/state";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import SortIcon from "$lib/components/icons/SortIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -19,25 +18,13 @@
     options,
     current,
     urlBuilder,
-    onUpdate,
     disabled,
   }: {
     options: Sorting<T>[];
     current: { sortHow: SortDirection; sorting: Sorting<T> };
     urlBuilder: ListUrlBuilder<T>;
-    onUpdate: (params: Record<string, string>) => void;
     disabled?: boolean;
   } = $props();
-
-  const sortHowParam = $derived(page.url.searchParams.get("sort_how"));
-  const sortByParam = $derived(page.url.searchParams.get("sort_by"));
-
-  $effect(() => {
-    const params: Record<string, string> = {};
-    if (sortHowParam) params.sort_how = sortHowParam;
-    if (sortByParam) params.sort_by = sortByParam;
-    onUpdate(params);
-  });
 
   const isOpen = writable(false);
 </script>

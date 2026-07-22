@@ -1,7 +1,8 @@
 import type { UserListsSortBy } from '$lib/requests/models/UserListsSortBy.ts';
+import { useSortParams } from '$lib/sections/lists/stores/useSortParams.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
-import { BehaviorSubject, map, type Observable } from 'rxjs';
+import { map, type Observable } from 'rxjs';
 import { userListsSortOptions } from './constants/userListsSortOptions.ts';
 import type {
   ListUrlBuilder,
@@ -16,7 +17,6 @@ type UserListsSorting = {
     sortHow: SortDirection;
   }>;
   options: Sorting<UserListsSortBy>[];
-  update: (params: Record<string, string>) => void;
   urlBuilder: ListUrlBuilder<UserListsSortBy>;
 };
 
@@ -40,22 +40,12 @@ function defaultDirection(sortBy: UserListsSortBy): SortDirection {
 export function useUserListsSorting(
   props: UseUserListsSortingProps,
 ): UserListsSorting {
-  const params = new BehaviorSubject<Record<string, string | null>>({
-    sort_by: null,
-    sort_how: null,
-  });
-
-  function update(newParams: Record<string, string>) {
-    params.next({ ...newParams });
-  }
-
   return {
-    update,
     options: userListsSortOptions,
-    current: params.pipe(
+    current: useSortParams().pipe(
       map(($params) => {
-        const sortBy = mapToSortBy($params.sort_by) ?? 'rank';
-        const sortHow = mapToDirection($params.sort_how) ??
+        const sortBy = mapToSortBy($params.sortBy) ?? 'rank';
+        const sortHow = mapToDirection($params.sortHow) ??
           defaultDirection(sortBy);
         const sorting = userListsSortOptions.find(
           (option) => option.value === sortBy,

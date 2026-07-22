@@ -22,7 +22,6 @@
 
   const {
     current: currentSort,
-    update,
     options: sortOptions,
     urlBuilder,
   } = $derived(useListSorting({ type: "progress", slug: params.slug }));
@@ -59,7 +58,6 @@
             options={progressSortOptions}
             {urlBuilder}
             current={$currentSort}
-            onUpdate={update}
           />
         {/if}
       {/snippet}
