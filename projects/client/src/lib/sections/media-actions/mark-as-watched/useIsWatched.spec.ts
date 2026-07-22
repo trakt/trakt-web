@@ -3,7 +3,7 @@ import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import { server } from '$mocks/server.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { http, HttpResponse } from 'msw';
-import { firstValueFrom } from 'rxjs';
+import { filter, firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { useIsWatched } from './useIsWatched.ts';
 
@@ -57,6 +57,34 @@ describe('store: useIsWatched', () => {
       );
 
       expect(await firstValueFrom(isWatched)).toBe(false);
+    });
+  });
+
+  describe('show: unknown episode count', () => {
+    // show 147971 has season 1 plays in WatchedShowPlaysResponseMock
+    const SHOW_ID = 147971;
+
+    it('should not report partial progress when the episode count is unknown', async () => {
+      const { control, isWatched, isPartiallyWatched } = await renderStore(
+        () => {
+          const finite = useIsWatched({
+            type: 'show',
+            media: { id: SHOW_ID, episode: { count: 1000 } },
+          });
+          const unknown = useIsWatched({
+            type: 'show',
+            media: { id: SHOW_ID, episode: { count: NaN } },
+          });
+
+          return { control: finite.isPartiallyWatched, ...unknown };
+        },
+      );
+
+      // the finite-count store proves history has loaded with plays
+      expect(await firstValueFrom(control.pipe(filter(Boolean)))).toBe(true);
+
+      expect(await firstValueFrom(isWatched)).toBe(false);
+      expect(await firstValueFrom(isPartiallyWatched)).toBe(false);
     });
   });
 });

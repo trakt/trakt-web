@@ -122,7 +122,10 @@ export function useIsWatched(props: IsWatchedProps) {
           const isPartiallyWatched = !isWatched && shows.some((show) => {
             const watchedShow = $history.shows.get(show.id);
 
-            if (!watchedShow) {
+            // Without a finite episode count (e.g. unmapped search results),
+            // plays cannot distinguish in-progress from completed - claim
+            // neither.
+            if (!watchedShow || !Number.isFinite(show.episode?.count)) {
               return false;
             }
 
