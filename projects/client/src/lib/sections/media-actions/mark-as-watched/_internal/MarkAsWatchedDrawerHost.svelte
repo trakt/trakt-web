@@ -1,5 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
@@ -134,7 +135,7 @@
 </script>
 
 <Drawer {onClose} {title} {metaInfo}>
-  <div class="mark-as-watched-buttons">
+  <DropdownGroup>
     {#if isSingleMedia}
       <CheckInAction
         {...target}
@@ -198,7 +199,7 @@
         </IconWrapper>
       {/snippet}
     </DropdownItem>
-  </div>
+  </DropdownGroup>
 </Drawer>
 
 {#if showHistoryPicker}
@@ -212,11 +213,3 @@
     }}
   />
 {/if}
-
-<style>
-  .mark-as-watched-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xxs);
-  }
-</style>
