@@ -1,6 +1,8 @@
+import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { movieListsQuery } from '$lib/requests/queries/movies/movieListsQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
+import { useStableArray } from '$lib/sections/lists/stores/useStableArray.ts';
 import { combineLatest, map } from 'rxjs';
 import { showListsQuery } from '../../../../requests/queries/shows/showListsQuery.ts';
 import { MAX_LISTS } from './_internal/constants.ts';
@@ -26,6 +28,9 @@ function typeToQuery(
   }
 }
 
+const isSameList = (left: MediaListSummary, right: MediaListSummary) =>
+  left.key === right.key;
+
 export function useListSummary(
   { slug, type, limit = MAX_LISTS }: ListSummaryProps,
 ) {
@@ -43,7 +48,16 @@ export function useListSummary(
     map(($states) => $states.some(Boolean)),
   );
 
-  const list = combineLatest([personalLists.list, officialLists.list]).pipe(
+  const { list: stablePersonalList } = useStableArray(
+    isSameList,
+    personalLists.list,
+  );
+  const { list: stableOfficialList } = useStableArray(
+    isSameList,
+    officialLists.list,
+  );
+
+  const list = combineLatest([stablePersonalList, stableOfficialList]).pipe(
     map(([$personal, $official]) => [...$official, ...$personal]),
   );
 
