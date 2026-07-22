@@ -1,5 +1,6 @@
 import type { SearchResultResponse } from '@trakt/api';
 import type { MediaType } from '../../models/MediaType.ts';
+import { hasSlug } from '../../search/hasSlug.ts';
 import { lookup } from '../../search/lookup.ts';
 import { toMedia } from './response/toMedia.ts';
 
@@ -25,13 +26,19 @@ export async function getMedia({
   });
 
   return hits
-    .map((hit) => {
-      const type = 'episode_count' in hit.document ? 'show' : 'movie';
+    .flatMap((hit) => {
+      const { document } = hit;
 
-      return {
+      if (!hasSlug(document)) {
+        return [];
+      }
+
+      const type = 'episode_count' in document ? 'show' : 'movie';
+
+      return [{
         score: Number(hit.text_match_info?.score ?? -1),
         type,
-        [type]: toMedia(type, hit.document),
-      };
+        [type]: toMedia(type, document),
+      }];
     });
 }
