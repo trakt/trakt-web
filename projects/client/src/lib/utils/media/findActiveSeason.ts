@@ -19,20 +19,22 @@ export function findActiveSeason({
   seasons,
   lastWatchedSeason,
 }: FindActiveSeasonProps) {
+  const firstSeason = seasons.find((s) => s.number === FIRST_SEASON);
+  const firstNonSpecialSeason = seasons.find((s) =>
+    s.number !== SPECIAL_SEASON
+  );
+  const fallbackSeason = firstSeason ?? firstNonSpecialSeason ?? seasons.at(0);
+
   if (lastWatchedSeason === EMPTY_SEASON_INFO) {
-    return FIRST_SEASON;
+    return fallbackSeason?.number ?? FIRST_SEASON;
   }
 
   const lastWatched = seasons.find((s) =>
     s.number === lastWatchedSeason.number
   );
-  const firstSeason = seasons.find((s) => s.number === FIRST_SEASON);
-  const firstNonSpecialSeason = seasons.find((s) =>
-    s.number !== SPECIAL_SEASON
-  );
 
   const active = assertDefined(
-    lastWatched ?? firstSeason ?? firstNonSpecialSeason,
+    lastWatched ?? fallbackSeason,
     'Active season not found',
   );
 
