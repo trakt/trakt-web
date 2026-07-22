@@ -2,7 +2,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
+  import DiscoverTogglesMobile from "$lib/sections/discover/DiscoverTogglesMobile.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
@@ -22,7 +22,7 @@
   <RenderFor audience="authenticated">
     <NavbarStateSetter>
       {#snippet actions()}
-        <DiscoverToggles />
+        <DiscoverTogglesMobile />
       {/snippet}
     </NavbarStateSetter>
   </RenderFor>

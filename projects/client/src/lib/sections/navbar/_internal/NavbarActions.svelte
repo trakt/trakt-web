@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import EditModeBar from "$lib/features/edit-mode/EditModeBar.svelte";
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
@@ -10,17 +11,26 @@
   import GetVIPLink from "../components/GetVIPLink.svelte";
   import JoinTraktButton from "../components/JoinTraktButton.svelte";
   import { useNavbarState } from "../useNavbarState";
+  import NavbarContentToggle from "./NavbarContentToggle.svelte";
   import NavbarHeader from "./NavbarHeader.svelte";
+  import { resolveContentToggle } from "./resolveContentToggle.ts";
 
   const { state } = useNavbarState();
 
   const { isEditMode } = useEditMode();
+
+  // Whether the persistent content toggle claims the center this route. Drives
+  // the has-actions layout so covered routes keep centering the toggle exactly
+  // as the old per-page DiscoverToggles did.
+  const hasContentToggle = $derived(
+    resolveContentToggle(page.route.id) !== null,
+  );
 </script>
 
 <div
   class="trakt-navbar-actions"
   class:is-hidden={$state.mode === "minimal" && !$isEditMode}
-  class:has-actions={Boolean($state.actions)}
+  class:has-actions={Boolean($state.actions) || hasContentToggle}
   use:trackElementBottom={"--navbar-actions-bottom"}
   use:trackWindowScroll={"trakt-navbar-actions-scroll"}
 >
@@ -28,15 +38,21 @@
     <NavbarHeader />
   </div>
 
-  {#if $state.actions || $isEditMode}
-    <div class="trakt-navbar-actions-center">
-      {#if $isEditMode}
-        <EditModeBar />
-      {:else}
-        {@render $state.actions?.()}
-      {/if}
-    </div>
-  {/if}
+  <!--
+    The center region renders unconditionally so the persistent content toggle
+    survives every client-side navigation (a per-page/actions-gated slot would
+    unmount it on actionless routes and bring back the jump-cut). It stays empty
+    when neither the toggle nor page actions apply. Edit mode still swaps in the
+    edit bar.
+  -->
+  <div class="trakt-navbar-actions-center">
+    {#if $isEditMode}
+      <EditModeBar />
+    {:else}
+      <NavbarContentToggle />
+      {@render $state.actions?.()}
+    {/if}
+  </div>
 
   <div class="trakt-navbar-actions-right">
     <RenderFor audience="authenticated">
@@ -101,6 +117,12 @@
     padding-inline-start: calc(
       var(--layout-distance-side) + var(--layout-sidebar-distance)
     );
+    /* Mirror the page grid's inline padding so this bar's content box is
+       concentric with the page content below - the flex-centered toggle then
+       shares an axis with centered page content (e.g. the search field).
+       Without this, the (--layout-distance-side - --gap-m) asymmetry skews
+       the center by 4px. */
+    padding-inline-end: var(--layout-distance-side);
 
     &::before {
       content: "";
