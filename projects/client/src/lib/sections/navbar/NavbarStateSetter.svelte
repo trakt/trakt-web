@@ -6,6 +6,7 @@
   const {
     actions,
     contextualActions,
+    contentToggle,
     toastActions,
     mode,
     hasFilters,
@@ -21,6 +22,7 @@
     set({
       actions,
       contextualActions,
+      contentToggle,
       hasFilters,
       showFilters,
       headerActions,

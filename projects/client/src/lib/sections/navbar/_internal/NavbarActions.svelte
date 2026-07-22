@@ -10,6 +10,7 @@
   import GetVIPLink from "../components/GetVIPLink.svelte";
   import JoinTraktButton from "../components/JoinTraktButton.svelte";
   import { useNavbarState } from "../useNavbarState";
+  import NavbarContentToggle from "./NavbarContentToggle.svelte";
   import NavbarHeader from "./NavbarHeader.svelte";
 
   const { state } = useNavbarState();
@@ -20,7 +21,7 @@
 <div
   class="trakt-navbar-actions"
   class:is-hidden={$state.mode === "minimal" && !$isEditMode}
-  class:has-actions={Boolean($state.actions)}
+  class:has-actions={Boolean($state.actions) || Boolean($state.contentToggle)}
   use:trackElementBottom={"--navbar-actions-bottom"}
   use:trackWindowScroll={"trakt-navbar-actions-scroll"}
 >
@@ -28,15 +29,16 @@
     <NavbarHeader />
   </div>
 
-  {#if $state.actions || $isEditMode}
-    <div class="trakt-navbar-actions-center">
-      {#if $isEditMode}
-        <EditModeBar />
-      {:else}
-        {@render $state.actions?.()}
+  <div class="trakt-navbar-actions-center">
+    {#if $isEditMode}
+      <EditModeBar />
+    {:else}
+      {#if $state.contentToggle}
+        <NavbarContentToggle surface={$state.contentToggle} />
       {/if}
-    </div>
-  {/if}
+      {@render $state.actions?.()}
+    {/if}
+  </div>
 
   <div class="trakt-navbar-actions-right">
     <RenderFor audience="authenticated">
@@ -101,6 +103,7 @@
     padding-inline-start: calc(
       var(--layout-distance-side) + var(--layout-sidebar-distance)
     );
+    padding-inline-end: var(--layout-distance-side);
 
     &::before {
       content: "";

@@ -20,7 +20,7 @@
 >
   <TraktPageCoverSetter />
 
-  <ResponsiveNavbarStateSetter
+  <ResponsiveNavbarStateSetter contentToggle="discover"
     header={{ title: m.list_title_history(), metaInfo: $current.text() }}
   />
 
