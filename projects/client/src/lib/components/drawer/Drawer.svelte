@@ -329,7 +329,9 @@
       padding-top: 0;
 
       &[data-header-variant="overlay"] {
-        --drawer-drag-handle-height: calc(var(--ni-18) * 2 + var(--ni-4));
+        --drawer-drag-handle-height: calc(
+          var(--ni-12) + var(--ni-4) + var(--ni-16)
+        );
 
         .trakt-drawer-drag-handle {
           margin-bottom: 0;
@@ -382,7 +384,7 @@
 
     margin-bottom: calc(-1 * var(--drawer-gap));
     padding-top: var(--ni-12);
-    padding-bottom: var(--ni-4);
+    padding-bottom: var(--ni-16);
 
     .drag-indicator {
       width: var(--ni-36);

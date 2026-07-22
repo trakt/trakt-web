@@ -188,10 +188,9 @@
     position: absolute;
 
     // The grouped card floats free here (no drawer behind it), so it carries
-    // the menu shadow and caps its own height for long lists.
+    // the menu shadow. No height cap — a dropdown always shows every option
+    // rather than scrolling inside itself.
     :global(.trakt-dropdown-group) {
-      max-height: var(--ni-220);
-      overflow-y: auto;
       box-shadow: var(--shadow-menu);
     }
 
