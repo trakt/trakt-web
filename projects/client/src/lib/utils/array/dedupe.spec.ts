@@ -13,7 +13,7 @@ describe('dedupe', () => {
 
     expect(result).toHaveLength(2);
     expect(result).toEqual([
-      { id: 'a', value: 3 },
+      { id: 'a', value: 1 },
       { id: 'b', value: 2 },
     ]);
   });
@@ -29,7 +29,7 @@ describe('dedupe', () => {
 
     expect(result).toHaveLength(2);
     expect(result).toEqual([
-      { id: 1, name: 'third' },
+      { id: 1, name: 'first' },
       { id: 2, name: 'second' },
     ]);
   });
@@ -49,7 +49,7 @@ describe('dedupe', () => {
     expect(result).toHaveLength(3);
     expect(result).toEqual([
       { id: 'a', value: 1 },
-      { id: 'b', value: 3 },
+      { id: 'b', value: 2 },
       { id: 'c', value: 4 },
     ]);
   });
@@ -77,7 +77,7 @@ describe('dedupe', () => {
     expect(result).toEqual([]);
   });
 
-  it('should preserve the last occurrence of duplicate items', () => {
+  it('should preserve the first occurrence of duplicate items', () => {
     const items = [
       { id: 'x', order: 1 },
       { id: 'x', order: 2 },
@@ -87,7 +87,7 @@ describe('dedupe', () => {
     const result = dedupe((item) => item.id, items);
 
     expect(result).toHaveLength(1);
-    expect(result.at(0)?.order).toBe(3);
+    expect(result.at(0)?.order).toBe(1);
   });
 
   it('should work with primitive values', () => {
