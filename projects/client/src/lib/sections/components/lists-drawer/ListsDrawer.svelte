@@ -1,6 +1,7 @@
 <script lang="ts">
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -65,45 +66,39 @@
 </script>
 
 <Drawer {onClose} title={m.header_manage_lists()} {metaInfo}>
-  <ul>
-    <WatchlistButton
-      title={title ?? media.title}
-      type="dropdown-item"
-      size="normal"
-      isWatchlistUpdating={$isWatchlistUpdating}
-      isWatchlisted={$isWatchlisted}
-      onAdd={addToWatchlist}
-      onRemove={confirmRemove}
-    />
+  <div class="lists-layout">
+    <DropdownGroup>
+      <WatchlistButton
+        title={title ?? media.title}
+        type="dropdown-item"
+        size="normal"
+        isWatchlistUpdating={$isWatchlistUpdating}
+        isWatchlisted={$isWatchlisted}
+        onAdd={addToWatchlist}
+        onRemove={confirmRemove}
+      />
 
-    {#if isEmpty && isLoading}
-      <LoadingIndicator />
-    {:else}
-      {#each sortedLists as list (list.id)}
-        <ListDropdownItem
-          title={title ?? media.title}
-          {list}
-          {onLoading}
-          {media}
-          isListed={listedOnIdsSet.has(list.id)}
-        />
-      {/each}
-    {/if}
-  </ul>
+      {#if isEmpty && isLoading}
+        <LoadingIndicator />
+      {:else}
+        {#each sortedLists as list (list.id)}
+          <ListDropdownItem
+            title={title ?? media.title}
+            {list}
+            {onLoading}
+            {media}
+            isListed={listedOnIdsSet.has(list.id)}
+          />
+        {/each}
+      {/if}
+    </DropdownGroup>
+  </div>
 </Drawer>
 
 <style>
-  ul {
-    all: unset;
-
-    display: grid;
-    grid-template-columns: 100%;
-
-    gap: var(--gap-xxs);
-
-    :global(li) {
-      flex-direction: row-reverse;
-      justify-content: space-between;
-    }
+  /* Bookmark toggle sits at the trailing edge; label starts inline. */
+  .lists-layout :global(li) {
+    flex-direction: row-reverse;
+    justify-content: space-between;
   }
 </style>
