@@ -1,5 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
 
   const {
     children,
@@ -19,16 +20,8 @@
 
 {#if isOpen}
   <Drawer {onClose} {title} {metaInfo} size="auto">
-    <div class="trakt-media-actions">
+    <DropdownGroup>
       {@render children()}
-    </div>
+    </DropdownGroup>
   </Drawer>
 {/if}
-
-<style>
-  .trakt-media-actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xxs);
-  }
-</style>
