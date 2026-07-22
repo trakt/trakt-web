@@ -55,7 +55,7 @@
     padding: var(--ni-10) var(--ni-0);
     box-sizing: border-box;
 
-    overflow: hidden;
+    overflow: visible;
 
     &[data-navigation-type="dpad"] {
       &:focus-within {

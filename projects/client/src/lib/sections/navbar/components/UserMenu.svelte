@@ -151,7 +151,7 @@
       width: 100%;
       border-radius: 0;
       padding: 0 calc(var(--ni-16) * 0.5);
-      overflow: hidden;
+      overflow: visible;
       background-color: transparent;
       box-shadow: none;
     }
