@@ -5,7 +5,6 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { mapToMediaListSummary } from '../../_internal/mapToMediaListSummary.ts';
-import { InvalidateAction } from '../../models/InvalidateAction.ts';
 import { MediaListSummarySchema } from '../../models/MediaListSummary.ts';
 
 type MovieListsParams =
@@ -33,7 +32,7 @@ const movieListsRequest = (
 
 export const movieListsQuery = defineInfiniteQuery({
   key: 'movieLists',
-  invalidations: [InvalidateAction.List.Like],
+  invalidations: [],
   dependencies: (
     params,
   ) => [params.slug, params.limit, params.page, params.type],
