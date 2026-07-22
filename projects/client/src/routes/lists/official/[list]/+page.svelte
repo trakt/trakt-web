@@ -42,7 +42,7 @@
 >
   <TraktPageCoverSetter />
 
-  <ResponsiveNavbarStateSetter
+  <ResponsiveNavbarStateSetter contentToggle="discover"
     hasFilters
     header={{
       title: listName,

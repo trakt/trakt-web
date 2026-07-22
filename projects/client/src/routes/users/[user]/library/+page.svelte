@@ -24,7 +24,7 @@
   image={DEFAULT_SHARE_MOVIE_COVER}
   title={m.page_title_library()}
 >
-  <ResponsiveNavbarStateSetter
+  <ResponsiveNavbarStateSetter contentToggle="discover"
     header={{
       title: m.list_title_library(),
       metaInfo: toTranslatedLibrary(library),

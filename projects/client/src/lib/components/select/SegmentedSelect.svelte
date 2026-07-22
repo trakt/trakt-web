@@ -204,7 +204,10 @@
 
     padding: var(--segment-inset);
     border-radius: var(--track-radius);
-    background-color: var(--color-segmented-track-background);
+    background-color: var(
+      --segmented-select-background,
+      var(--color-segmented-track-background)
+    );
     backdrop-filter: blur(var(--ni-8));
     overflow: hidden;
 
@@ -393,6 +396,7 @@
       width: var(--selector-w, 0);
       transform: translateX(var(--selector-x, 0));
       opacity: 0;
+      transition: none;
     }
 
     .segment.is-selected {
@@ -490,29 +494,35 @@
   }
 
   .extension-content {
+    position: relative;
     flex: 1;
     min-height: 0;
 
     display: flex;
     align-items: flex-end;
 
-    padding-inline: var(--ni-8);
-    border-radius: var(--segment-radius);
+    &::after {
+      content: "";
 
-    box-shadow: 0 0 0 var(--border-thickness-xxs) transparent;
-    transition: box-shadow var(--transition-increment) ease-in-out;
+      position: absolute;
+      inset-inline: calc(-1 * var(--segment-inset));
+      bottom: calc(-1 * var(--segment-inset));
+      height: var(--ni-2);
 
-    &:focus-within {
-      box-shadow: 0 0 0 var(--border-thickness-xxs) var(--color-input-focus);
+      background: var(--color-input-focus);
 
-      @media (forced-colors: active) {
-        outline: var(--border-thickness-xxs) solid Highlight;
-        outline-offset: var(--border-thickness-xxs);
-      }
+      transform: scaleX(0);
+      transition: transform var(--transition-increment) ease-in-out;
+    }
+
+    &:focus-within::after {
+      transform: scaleX(1);
     }
 
     @media (prefers-reduced-motion: reduce) {
-      transition: none;
+      &::after {
+        transition: none;
+      }
     }
   }
 </style>
