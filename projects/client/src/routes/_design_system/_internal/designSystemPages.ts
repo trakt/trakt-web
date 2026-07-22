@@ -92,6 +92,13 @@ export const DESIGN_SYSTEM_GROUPS: DesignSystemGroup[] = [
         kind: 'Component',
       },
       {
+        title: 'Select',
+        href: '/_design_system/select',
+        description:
+          'Inline segmented select with a sliding purple selector, in regular, compact (icon-only), selected-label and expandable variants.',
+        kind: 'Component',
+      },
+      {
         title: 'Share Card',
         href: '/_design_system/share-card',
         description: 'Share-card layouts for social previews and exports.',
