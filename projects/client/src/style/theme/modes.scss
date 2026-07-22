@@ -211,7 +211,7 @@
   --color-option-list-background: color-mix(
     in srgb,
     var(--color-text-primary) 5%,
-    transparent
+    var(--shade-70)
   );
   --color-option-list-separator: color-mix(
     in srgb,
@@ -702,7 +702,7 @@
   --color-option-list-background: color-mix(
     in srgb,
     var(--color-text-primary) 6%,
-    transparent
+    var(--shade-920)
   );
   --color-option-list-separator: color-mix(
     in srgb,

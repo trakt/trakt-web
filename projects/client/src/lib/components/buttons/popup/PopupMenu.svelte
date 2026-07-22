@@ -1,5 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
   import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
@@ -52,9 +53,13 @@
 {#if variant === "drawer"}
   {#if $isOpened}
     <Drawer onClose={close} {title} size="auto" elevated>
-      <ul class="popup-menu-card" use:closeOnSelect={close}>
-        {@render items()}
-      </ul>
+      <!-- closeOnSelect listens for bubbled item clicks; DropdownGroup owns
+           the <ul>, so the action sits on a layout-neutral wrapper. -->
+      <div style="display: contents" use:closeOnSelect={close}>
+        <DropdownGroup>
+          {@render items()}
+        </DropdownGroup>
+      </div>
     </Drawer>
   {/if}
 {:else}
@@ -65,9 +70,9 @@
       transition:slide={{ duration: 150 }}
     >
       <div class="spacer"></div>
-      <ul class="popup-menu-card">
+      <DropdownGroup>
         {@render items()}
-      </ul>
+      </DropdownGroup>
     </div>
   {/if}
 {/if}
@@ -187,7 +192,9 @@
 
     position: absolute;
 
-    .popup-menu-card {
+    // The grouped card floats free here (no drawer behind it), so it carries
+    // the menu shadow and caps its own height for long lists.
+    :global(.trakt-dropdown-group) {
       max-height: var(--ni-220);
       overflow-y: auto;
       box-shadow: var(--shadow-menu);
@@ -195,54 +202,6 @@
 
     div.spacer {
       height: calc($button-size + $button-padding * 2 + var(--list-padding));
-    }
-  }
-
-  // Grouped card: one elevated surface with hairline-divided rows, shared by
-  // the mobile drawer and the desktop portal. PopupMenu receives its items as
-  // an opaque snippet, so the child DropdownItems are flattened from filled
-  // pills into flush rows via scoped overrides here.
-  .popup-menu-card {
-    all: unset;
-
-    display: grid;
-    grid-template-columns: 100%;
-
-    background: var(--color-option-list-background);
-    border-radius: var(--border-radius-l);
-    overflow: hidden;
-
-    :global(li) {
-      width: 100%;
-      box-sizing: border-box;
-
-      // Neutralise the filled-pill look; rows sit flush inside the card with
-      // a single neutral foreground instead of the inverted flat-pill fill.
-      background: transparent !important;
-      border-radius: 0 !important;
-      height: auto !important;
-      padding: var(--ni-14) var(--ni-16) !important;
-      color: var(--color-text-primary) !important;
-    }
-
-    // Destructive actions keep their red as a safety cue.
-    :global(li[data-color="red"]) {
-      color: var(--red-600) !important;
-    }
-
-    :global(li:not(:last-child)) {
-      border-block-end: var(--ni-1) solid var(--color-option-list-separator);
-    }
-
-    // Subtle highlight on hover/press, matching the selected-row treatment.
-    @include for-mouse {
-      :global(li:hover) {
-        background: var(--color-option-list-highlight) !important;
-      }
-    }
-
-    :global(li:active) {
-      background: var(--color-option-list-highlight) !important;
     }
   }
 </style>
