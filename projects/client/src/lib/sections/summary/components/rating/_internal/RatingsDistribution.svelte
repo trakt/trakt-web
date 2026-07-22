@@ -36,39 +36,41 @@
 </script>
 
 <section class="trakt-ratings-distribution">
-  <h3 class="card-title bold secondary">{m.header_ratings_trakt()}</h3>
+  <h3 class="bold secondary small">{m.header_ratings_trakt()}</h3>
 
-  <div class="ratings-row">
-    <div class="trakt-display">
-      <p class="trakt-rating-value bold">{traktPercent}</p>
-      <p class="trakt-rating-votes secondary uppercase tag">
-        {m.text_ratings_votes({ count: voteCountText })}
-      </p>
-    </div>
+  <div class="ratings-card">
+    <div class="ratings-row">
+      <div class="trakt-display">
+        <p class="trakt-rating-value bold">{traktPercent}</p>
+        <p class="trakt-rating-votes secondary capitalize tag">
+          {m.text_ratings_votes({ count: voteCountText })}
+        </p>
+      </div>
 
-    <div class="trakt-histogram">
-      {#each buckets as bucket, i (bucket.star)}
-        <Tooltip
-          content={toHumanNumber(bucket.value, getLocale())}
-          variant="compact"
-          sideOffset={4}
-        >
-          <div class="histogram-column">
-            <div class="histogram-bar">
-              <DistributionBar
-                orientation="vertical"
-                fraction={ratio({ value: bucket.value, total: maxValue })}
-                active={bucket.value === maxValue && maxValue > 0}
-                minVisible={0.04}
-                index={i}
-                label="{bucket.star}: {toHumanNumber(bucket.value, getLocale())}"
-                --distribution-bar-thickness="100%"
-              />
+      <div class="trakt-histogram">
+        {#each buckets as bucket, i (bucket.star)}
+          <Tooltip
+            content={toHumanNumber(bucket.value, getLocale())}
+            variant="compact"
+            sideOffset={4}
+          >
+            <div class="histogram-column">
+              <div class="histogram-bar">
+                <DistributionBar
+                  orientation="vertical"
+                  fraction={ratio({ value: bucket.value, total: maxValue })}
+                  active={bucket.value === maxValue && maxValue > 0}
+                  minVisible={0.04}
+                  index={i}
+                  label="{bucket.star}: {toHumanNumber(bucket.value, getLocale())}"
+                  --distribution-bar-thickness="100%"
+                />
+              </div>
+              <span class="histogram-label tag secondary">{bucket.star}</span>
             </div>
-            <span class="histogram-label tag secondary">{bucket.star}</span>
-          </div>
-        </Tooltip>
-      {/each}
+          </Tooltip>
+        {/each}
+      </div>
     </div>
   </div>
 </section>
@@ -79,17 +81,13 @@
   .trakt-ratings-distribution {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-s);
+  }
 
+  .ratings-card {
     padding: var(--ni-12) var(--ni-16);
     border-radius: var(--border-radius-l);
     background: var(--color-card-background);
-  }
-
-  .card-title {
-    color: var(--color-text-secondary);
-    margin: 0;
-    font-size: var(--font-size-text-small);
   }
 
   .ratings-row {
