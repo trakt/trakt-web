@@ -11,6 +11,10 @@
     // "default" renders it. The compact summary row is minimal, the ratings
     // drawer is default.
     style?: "default" | "minimal";
+    // "row" (default) is the compact inline logo → value → votes layout.
+    // "tile" stacks a large logo above the value and sublabel inside a
+    // full-height clickable card, used by the ratings drawer grid.
+    layout?: "row" | "tile";
   } & ChildrenProps;
 
   const {
@@ -20,15 +24,20 @@
     url,
     isLoading = false,
     style = "default",
+    layout = "row",
   }: RatingItemProps = $props();
 
   const hasValidRating = $derived(rating !== undefined);
   const ratingLink = $derived(hasValidRating ? url : undefined);
 </script>
 
-<rating>
+<rating data-layout={layout}>
   <Link href={ratingLink} target="_blank">
-    <div class="rating-item" class:has-valid-rating={hasValidRating}>
+    <div
+      class="rating-item"
+      data-layout={layout}
+      class:has-valid-rating={hasValidRating}
+    >
       {@render children()}
       <div class="rating-info">
         <div class="rating-value">
@@ -48,7 +57,7 @@
                 aria-hidden="true"
               ></span>
             {:else if hasValidRating}
-              <p class="bold uppercase secondary vote-count tag">
+              <p class="bold secondary vote-count tag">
                 {@render superscript()}
               </p>
             {/if}
@@ -61,6 +70,25 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  rating[data-layout="tile"] {
+    display: block;
+    height: 100%;
+
+    :global(.trakt-link),
+    :global(.trakt-no-link) {
+      display: block;
+      height: 100%;
+    }
+
+    :global(.vote-count)::after {
+      display: none;
+    }
+
+    :global(.vote-count) {
+      color: var(--color-text-secondary);
+    }
+  }
 
   rating {
     :global(.trakt-link) {
@@ -85,7 +113,7 @@
 
       &:hover {
         :global(svg) {
-          transform: scale(1.15);
+          transform: scale(1.1);
         }
       }
     }
@@ -116,6 +144,26 @@
         filter: grayscale(0);
       }
     }
+
+    &[data-layout="tile"] {
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--gap-s);
+
+      height: 100%;
+      box-sizing: border-box;
+      padding: var(--ni-16) var(--ni-12);
+
+      background: var(--color-card-background);
+      border-radius: var(--border-radius-m);
+      text-align: center;
+
+      // Direct-child only: the source logo. Scoped so nested glyphs (e.g. the
+      // vote-count person icon) keep their own smaller size.
+      > :global(svg) {
+        height: var(--ni-28);
+      }
+    }
   }
 
   .rating-info {
@@ -125,6 +173,37 @@
 
     p {
       line-height: 90%;
+    }
+
+    [data-layout="tile"] & {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--gap-xs);
+
+      .rating-value,
+      .rating-votes {
+        justify-content: center;
+      }
+
+      .rating-value :global(p) {
+        font-size: var(--ni-20);
+      }
+
+      :global(.vote-count) {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--gap-xxs);
+
+        // ::first-letter (the .capitalize utility) doesn't apply to this
+        // inline-flex box, so capitalize the enum labels (fresh/hot/…) here.
+        text-transform: capitalize;
+
+        :global(svg) {
+          height: var(--font-size-tag);
+          width: auto;
+          filter: none;
+        }
+      }
     }
 
     // Value and vote-count slots reserve a fixed width so the skeleton and the

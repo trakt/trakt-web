@@ -20,6 +20,7 @@
   import RatingIcon from "../icons/RatingIcon.svelte";
   import RottenIcon from "../icons/RottenIcon.svelte";
   import TMDBIcon from "../icons/TMDBIcon.svelte";
+  import WatchersIcon from "../icons/WatchersIcon.svelte";
   import type { RatingIntl } from "./RatingIntl";
   import { RatingIntlProvider } from "./RatingIntlProvider";
   import RatingItem from "./RatingItem.svelte";
@@ -46,6 +47,9 @@
     // vote-count superscripts; "default" renders them, used by the ratings
     // drawer.
     style?: "default" | "minimal";
+    // "row" (default) lays sources out inline; "tile" renders each source as a
+    // card in a grid, used by the ratings drawer.
+    layout?: "row" | "tile";
   };
 
   const {
@@ -57,6 +61,7 @@
     variant = "all",
     isLoading = false,
     style = "minimal",
+    layout = "row",
   }: RatingListProps = $props();
 
   const { trakt, imdb, tmdb, rotten, mal, letterboxd } = $derived(
@@ -84,20 +89,28 @@
   const showTmdb = $derived(variant === "external" && tmdb?.rating != null);
 </script>
 
+{#snippet voteCount(votes: number | Nil)}
+  {#if layout === "tile"}
+    <WatchersIcon />
+  {/if}
+  {i18n.voteText(votes ?? 0)}
+{/snippet}
+
 {#snippet traktItem()}
   <RatingItem
     rating={trakt?.rating && toTraktRating(trakt.rating, getLocale())}
     {isLoading}
     {style}
+    {layout}
   >
     <RatingIcon style={toVotesBasedRating(trakt?.votes)} />
     {#snippet superscript()}
-      {i18n.voteText(trakt?.votes ?? 0)}
+      {@render voteCount(trakt?.votes)}
     {/snippet}
   </RatingItem>
 {/snippet}
 
-<div class="trakt-summary-ratings">
+<div class="trakt-summary-ratings" data-layout={layout}>
   {#if variant === "all"}
     {@render traktItem()}
   {/if}
@@ -107,10 +120,11 @@
     url={imdb?.url}
     {isLoading}
     {style}
+    {layout}
   >
     <IMDBIcon style={toVotesBasedRating(imdb?.votes)} />
     {#snippet superscript()}
-      {i18n.voteText(imdb?.votes ?? 0)}
+      {@render voteCount(imdb?.votes)}
     {/snippet}
   </RatingItem>
 
@@ -122,10 +136,11 @@
       url={mal?.url}
       {isLoading}
       {style}
+      {layout}
     >
       <MALIcon style={toVotesBasedRating(mal?.votes ?? undefined)} />
       {#snippet superscript()}
-        {i18n.voteText(mal?.votes ?? 0)}
+        {@render voteCount(mal?.votes)}
       {/snippet}
     </RatingItem>
   {/if}
@@ -136,6 +151,7 @@
       url={rotten?.url}
       {isLoading}
       {style}
+      {layout}
     >
       <RottenIcon style={toRottenCriticRating(rotten?.critic)} />
       {#snippet superscript()}
@@ -148,6 +164,7 @@
       url={rotten?.url}
       {isLoading}
       {style}
+      {layout}
     >
       <PopcornIcon style={toRottenAudienceRating(rotten?.audience)} />
       {#snippet superscript()}
@@ -162,10 +179,11 @@
       url={letterboxd.url}
       {isLoading}
       {style}
+      {layout}
     >
       <LetterboxdIcon style={toVotesBasedRating(letterboxd.votes ?? undefined)} />
       {#snippet superscript()}
-        {i18n.voteText(letterboxd.votes ?? 0)}
+        {@render voteCount(letterboxd.votes)}
       {/snippet}
     </RatingItem>
   {/if}
@@ -176,10 +194,11 @@
       url={tmdb.url}
       {isLoading}
       {style}
+      {layout}
     >
       <TMDBIcon />
       {#snippet superscript()}
-        {i18n.voteText(tmdb.votes ?? 0)}
+        {@render voteCount(tmdb.votes)}
       {/snippet}
     </RatingItem>
   {/if}
@@ -214,6 +233,18 @@
 
     :global(> rating) {
       flex: 0 0 auto;
+    }
+
+    // Tile layout: equal-column grid of source cards, matching the drawer's
+    // stat-tile surfaces. Overrides the inline flex row above.
+    &[data-layout="tile"] {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap-s);
+
+      :global(> rating) {
+        flex: initial;
+      }
     }
 
     :global(.trakt-ratings-drilldown-button) {

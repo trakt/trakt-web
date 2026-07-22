@@ -66,16 +66,17 @@
           <SeasonRatingsChart {seasons} />
         {/if}
 
-        <section class="ratings-card official-card">
+        <section class="official-section">
           <h3 class="card-title bold secondary">
             {m.header_ratings_official()}
           </h3>
-          <div class="official-row">
+          <div class="official-grid">
             <RatingList
               {ratings}
               {entry}
               variant="external"
               style="default"
+              layout="tile"
               isLoading={$isLoading}
             />
           </div>
@@ -96,35 +97,19 @@
     color: var(--color-text-secondary);
   }
 
-  .ratings-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-s);
-    padding: var(--ni-12) var(--ni-16);
-    border-radius: var(--border-radius-l);
-    background: var(--color-card-background);
-  }
-
   .card-title {
     color: var(--color-text-secondary);
     margin: 0;
     font-size: var(--font-size-text-small);
   }
 
-  .official-card {
-    padding-block: var(--ni-16);
+  .official-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
   }
 
-  .official-row {
+  .official-grid {
     --color-link-active: var(--color-text-primary);
-
-    :global(.trakt-summary-ratings) {
-      /* fixed 3-up grid: equal columns align the sources into tidy rows
-         regardless of how many render, instead of a lopsided space-between wrap */
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      width: 100%;
-      gap: var(--gap-l) var(--gap-m);
-    }
   }
 </style>
