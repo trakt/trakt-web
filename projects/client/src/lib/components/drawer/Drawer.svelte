@@ -32,6 +32,9 @@
     classList?: string;
     variant?: "default" | "vip";
     drilldown?: ListDrilldownLinkProps;
+    // "eyebrow" (default): compact uppercase label. "prominent": large title,
+    // for drawers whose title is a content name (a movie/show title, etc.).
+    titleStyle?: "eyebrow" | "prominent";
     headerVariant?: "default" | "overlay";
     // Raise this drawer (and its underlay) above a base-layer drawer, so a
     // drawer stacked on top of another still closes on outside tap.
@@ -52,9 +55,13 @@
     classList = "",
     variant = "default",
     drilldown,
+    titleStyle = "eyebrow",
     headerVariant = "default",
     elevated = false,
   }: DrawerProps = $props();
+
+  // A drilldown title is a clickable content name — always render it prominent.
+  const effectiveTitleStyle = $derived(drilldown ? "prominent" : titleStyle);
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const slideAxis = $derived($isMobile ? "y" : "x");
@@ -135,6 +142,7 @@
   <div
     class="trakt-drawer-header"
     class:has-title={!!title}
+    data-title-style={effectiveTitleStyle}
     data-dpad-navigation={DpadNavigationType.List}
   >
     {#if title}
@@ -373,14 +381,15 @@
     touch-action: none;
 
     margin-bottom: calc(-1 * var(--drawer-gap));
-    padding: var(--ni-18) 0;
+    padding-top: var(--ni-12);
+    padding-bottom: var(--ni-4);
 
     .drag-indicator {
-      width: var(--ni-32);
+      width: var(--ni-36);
       height: var(--ni-4);
-      border-radius: var(--ni-2);
+      border-radius: var(--ni-4);
 
-      background: var(--color-text-secondary);
+      background: var(--color-drawer-drag-handle);
     }
   }
 
@@ -412,6 +421,15 @@
 
     &.has-title {
       justify-content: space-between;
+    }
+
+    // Compact uppercase eyebrow label — the default drawer title treatment.
+    &[data-title-style="eyebrow"] .trakt-drawer-title h1 {
+      font-size: var(--font-size-text-small);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-secondary);
     }
   }
 

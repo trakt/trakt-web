@@ -3,8 +3,10 @@
   generics="T extends SortBy | UpNextSortBy | UserListsSortBy"
 >
   import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import ReorderIcon from "$lib/components/icons/ReorderIcon.svelte";
   import SortDirectionIcon from "$lib/components/icons/SortDirectionIcon.svelte";
+  import OptionList from "$lib/components/option-list/OptionList.svelte";
+  import OptionListItem from "$lib/components/option-list/OptionListItem.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { m } from "$lib/features/i18n/messages";
@@ -53,11 +55,13 @@
 </script>
 
 <Drawer {onClose} size="auto" title={m.drawer_title_sort()}>
-  <div class="sort-buttons">
+  <OptionList>
     {#each options as option (option.value ?? "default")}
       {#snippet icon()}
         {#if option.value}
           <SortIcon sortBy={option.value} />
+        {:else}
+          <ReorderIcon />
         {/if}
       {/snippet}
 
@@ -65,14 +69,13 @@
         <SortDirectionIcon direction={current.sortHow} />
       {/snippet}
 
-      <DropdownItem
+      <OptionListItem
         replacestate
-        style="flat"
-        color="default"
         href={`${urlBuilder({ sortHow: sortHowForOption(option.value), sortBy: option.value })}`}
-        label={option.label()}
+        title={option.text()}
+        description={option.description?.()}
         selected={option.value === current.sorting.value}
-        icon={option.value ? icon : undefined}
+        {icon}
         end={option.value === current.sorting.value ? end : undefined}
         onclick={() => {
           track({
@@ -80,17 +83,7 @@
             sortHow: sortHowForOption(option.value),
           });
         }}
-      >
-        {option.text()}
-      </DropdownItem>
+      />
     {/each}
-  </div>
+  </OptionList>
 </Drawer>
-
-<style>
-  .sort-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xxs);
-  }
-</style>
