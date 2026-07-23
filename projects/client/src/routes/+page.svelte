@@ -5,7 +5,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Banner from "$lib/sections/banner/Banner.svelte";
   import DashboardDrawer from "$lib/sections/dashboard/DashboardDrawer.svelte";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
+  import DiscoverTogglesMobile from "$lib/sections/discover/DiscoverTogglesMobile.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
   import MobileLanding from "$lib/sections/landing/MobileLanding.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
@@ -41,7 +41,7 @@
 
     <NavbarStateSetter hasFilters>
       {#snippet actions()}
-        <DiscoverToggles />
+        <DiscoverTogglesMobile />
       {/snippet}
     </NavbarStateSetter>
 

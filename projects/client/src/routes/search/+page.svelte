@@ -3,8 +3,7 @@
 
   import { page } from "$app/state";
   import type { SearchItem } from "$lib/features/search/models/SearchItem";
-  import SearchInput from "$lib/features/search/SearchInput.svelte";
-  import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
+  import SearchModePanel from "$lib/features/search/SearchModePanel.svelte";
   import SearchPlaceHolder from "$lib/features/search/SearchPlaceHolder.svelte";
   import SearchResultsGrid from "$lib/features/search/SearchResultsGrid.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
@@ -51,33 +50,25 @@
   title={pageTitle}
 >
   <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
-    <NavbarStateSetter mode="full">
-      {#snippet actions()}
-        <SearchModeToggles />
-      {/snippet}
-    </NavbarStateSetter>
-
-    <div role="search" class="trakt-search-container">
-      <SearchInput />
-    </div>
+    <!-- On large screens both the search toggle AND the search field live in
+         the persistent NavbarContentToggle panel; keep mode="full" so the
+         actions bar stays visible. -->
+    <NavbarStateSetter mode="full" />
   </RenderFor>
 
   <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
     {#if isMobileApple}
-      <div role="search" class="trakt-search-container">
-        <SearchInput />
+      <!-- iOS keeps the panel in page flow so the on-screen keyboard never
+           covers a bottom-anchored input. -->
+      <div class="trakt-search-container">
+        <SearchModePanel />
       </div>
 
-      <NavbarStateSetter mode="full">
-        {#snippet actions()}
-          <SearchModeToggles />
-        {/snippet}
-      </NavbarStateSetter>
+      <NavbarStateSetter mode="full" />
     {:else}
       <NavbarStateSetter mode="minimal">
         {#snippet contextualActions()}
-          <SearchModeToggles />
-          <SearchInput />
+          <SearchModePanel />
         {/snippet}
       </NavbarStateSetter>
     {/if}
@@ -100,6 +91,20 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  .trakt-search-results-container {
+    // On large screens the search field lives in the fixed navbar panel, which
+    // overhangs the actions bar (~40px extension + 20px shift) instead of
+    // occupying page flow like the old standalone field did - clear it so the
+    // results grid doesn't start underneath.
+    @include for-tablet-lg {
+      padding-top: calc(var(--ni-40) + var(--ni-4) + var(--gap-m));
+    }
+
+    @include for-desktop {
+      padding-top: calc(var(--ni-40) + var(--ni-4) + var(--gap-m));
+    }
+  }
 
   .trakt-search-container {
     display: flex;

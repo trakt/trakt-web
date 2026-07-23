@@ -4,7 +4,7 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
+  import DiscoverTogglesMobile from "$lib/sections/discover/DiscoverTogglesMobile.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
@@ -47,7 +47,7 @@
   <RenderFor audience="authenticated">
     <NavbarStateSetter>
       {#snippet actions()}
-        <DiscoverToggles />
+        <DiscoverTogglesMobile />
       {/snippet}
     </NavbarStateSetter>
   </RenderFor>

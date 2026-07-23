@@ -1,5 +1,9 @@
 <script lang="ts">
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import DropIcon from "$lib/components/icons/DropIcon.svelte";
+  import HourglassIcon from "$lib/components/icons/HourglassIcon.svelte";
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
+  import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
+  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { m } from "$lib/features/i18n/messages.ts";
@@ -15,6 +19,10 @@
 
   const { current, set, options } = useToggler("progress");
 
+  const progressOptions = $derived(
+    options.map((option) => ({ value: option.value, label: option.text() })),
+  );
+
   const cta = $derived(
     $current.value === "in-progress" || $current.value === "completed"
       ? {
@@ -27,6 +35,12 @@
 
 {#snippet metaInfo()}
   <ListMetaInfo text={$current.text()} />
+{/snippet}
+
+{#snippet progressIcon(option: SelectOption)}
+  {#if option.value === "completed"}<TrackIcon />{/if}
+  {#if option.value === "in-progress"}<HourglassIcon />{/if}
+  {#if option.value === "dropped"}<DropIcon />{/if}
 {/snippet}
 
 {#if mode !== "movie"}
@@ -51,7 +65,14 @@
       {/snippet}
 
       {#snippet actions()}
-        <Toggler value={$current.value} onChange={set} {options} />
+        <SegmentedSelect
+          variant="compact"
+          options={progressOptions}
+          value={$current.value}
+          ariaLabel={m.list_title_progress()}
+          icon={progressIcon}
+          onChange={(value) => set(value as Parameters<typeof set>[0])}
+        />
       {/snippet}
 
       {#snippet ctaItem()}

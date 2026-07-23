@@ -7054,6 +7054,18 @@
         }
       }
     },
+    "filter_toggle_state_default": {
+      "default": "Default",
+      "description": "Label for the neutral, unset position of a display filter toggle (e.g. Watched, Watchlisted) in the filters panel. Selecting it clears the filter so the app default applies."
+    },
+    "filter_toggle_state_on": {
+      "default": "On",
+      "description": "Label for the enabled position of a display filter toggle (e.g. Watched, Watchlisted) in the filters panel."
+    },
+    "filter_toggle_state_off": {
+      "default": "Off",
+      "description": "Label for the disabled position of a display filter toggle (e.g. Watched, Watchlisted) in the filters panel."
+    },
     "advanced_filter_label_ratings": {
       "default": "Rating of {min} to {max}",
       "description": "Label for the 'ratings' filter which filters items that have ratings falling in the range.",

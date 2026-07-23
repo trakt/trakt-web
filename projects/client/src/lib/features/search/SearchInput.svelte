@@ -9,6 +9,11 @@
   import { onMount } from "svelte";
   import { useSearch } from "./useSearch";
 
+  // "embedded" strips the standalone field chrome (outline, height, background)
+  // for rendering inside another surface, e.g. the navbar content toggle panel.
+  const { variant = "default" }: { variant?: "default" | "embedded" } =
+    $props();
+
   const { clear, isSearching, pathName, mode, query } = useSearch();
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
@@ -83,6 +88,7 @@
 <div
   class="trakt-search"
   class:search-is-loading={$isSearching}
+  data-variant={variant}
   data-hj-suppress
   data-sentry-mask
 >
@@ -138,6 +144,48 @@
 
     &:focus-within {
       outline: var(--border-thickness-xs) solid var(--color-input-focus);
+    }
+
+    // Embedded in another surface (e.g. the navbar content toggle panel): the
+    // host provides the chrome, so drop the outline/height/background and
+    // shrink the icon to match the row.
+    &[data-variant="embedded"] {
+      --search-input-width: 100%;
+      --search-input-height: var(--ni-32);
+      --search-icon-size: var(--ni-16);
+
+      outline: none;
+
+      &:focus-within {
+        outline: none;
+      }
+
+      &,
+      .trakt-search-input {
+        border-radius: var(--border-radius-s);
+      }
+
+      .trakt-search-input {
+        background: transparent;
+        backdrop-filter: none;
+      }
+
+      // The default field relies on the icon's intrinsic 24px size matching
+      // its offset math; the embedded row runs the math at 16px, so size the
+      // svg to match or it hangs below the text's vertical center.
+      .trakt-search-icon :global(svg) {
+        display: block;
+        width: var(--search-icon-size);
+        height: var(--search-icon-size);
+      }
+
+      // Ride the loading glint on the host panel's bottom edge (the field
+      // sits 4px - the panel inset - above it) instead of under the field,
+      // and keep it hairline-thin to match the panel's border weight.
+      &.search-is-loading::after {
+        bottom: calc(-1 * var(--ni-4));
+        height: var(--ni-1);
+      }
     }
 
     .trakt-search-icon {

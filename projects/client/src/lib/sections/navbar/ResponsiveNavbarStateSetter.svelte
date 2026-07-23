@@ -1,22 +1,11 @@
 <script lang="ts">
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import DiscoverToggles from "../discover/DiscoverToggles.svelte";
   import type { NavbarStateSetterProps } from "./models/NavbarStateSetterProps";
   import NavbarStateSetter from "./NavbarStateSetter.svelte";
 
-  const { actions: _externalActions, ...rest }: NavbarStateSetterProps =
-    $props();
-
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
-  const hasActions = $derived($isDesktop || Boolean(_externalActions));
+  // The desktop Media/Shows/Movies toggle this wrapper used to inject now lives
+  // as one persistent, route-driven instance in NavbarActions, so this is a thin
+  // passthrough - kept to avoid churning its 16 call sites.
+  const props: NavbarStateSetterProps = $props();
 </script>
 
-{#snippet actions()}
-  {@render _externalActions?.()}
-
-  {#if $isDesktop}
-    <DiscoverToggles />
-  {/if}
-{/snippet}
-
-<NavbarStateSetter actions={hasActions ? actions : undefined} {...rest} />
+<NavbarStateSetter {...props} />

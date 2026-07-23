@@ -79,6 +79,13 @@ export const DESIGN_SYSTEM_GROUPS: DesignSystemGroup[] = [
         kind: 'Component',
       },
       {
+        title: 'Select',
+        href: '/_design_system/select',
+        description:
+          'Inline segmented select with a sliding purple selector, in regular (icon + label) and compact (icon-only) variants.',
+        kind: 'Component',
+      },
+      {
         title: 'Links',
         href: '/_design_system/links',
         description: 'Inline and navigational link styling.',
