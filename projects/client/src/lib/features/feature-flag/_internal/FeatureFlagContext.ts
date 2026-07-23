@@ -5,4 +5,5 @@ export type FeatureFlagOverrides = Partial<Record<FeatureFlag, boolean>>;
 
 export type FeatureFlagContext = {
   overrides: BehaviorSubject<FeatureFlagOverrides>;
+  readFeatures: BehaviorSubject<ReadonlyArray<string>>;
 };
