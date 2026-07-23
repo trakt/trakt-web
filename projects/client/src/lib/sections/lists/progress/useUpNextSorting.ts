@@ -1,3 +1,4 @@
+import { page } from '$app/state';
 import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
 import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
 import * as m from '$lib/features/i18n/messages.ts';
@@ -74,9 +75,10 @@ export function useUpNextSorting(user: string): UpNextSorting {
     startWith(getSortOptions(false)),
   );
 
+  // Seeded from the URL so the first fetch already uses the requested sort.
   const params = new BehaviorSubject<Record<string, string | null>>({
-    sort_by: null,
-    sort_how: null,
+    sort_by: page.url.searchParams.get('sort_by'),
+    sort_how: page.url.searchParams.get('sort_how'),
   });
 
   function update(newParams: Record<string, string>) {

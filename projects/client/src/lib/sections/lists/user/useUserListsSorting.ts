@@ -1,3 +1,4 @@
+import { page } from '$app/state';
 import type { UserListsSortBy } from '$lib/requests/models/UserListsSortBy.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
@@ -40,9 +41,10 @@ function defaultDirection(sortBy: UserListsSortBy): SortDirection {
 export function useUserListsSorting(
   props: UseUserListsSortingProps,
 ): UserListsSorting {
+  // Seeded from the URL so the first fetch already uses the requested sort.
   const params = new BehaviorSubject<Record<string, string | null>>({
-    sort_by: null,
-    sort_how: null,
+    sort_by: page.url.searchParams.get('sort_by'),
+    sort_how: page.url.searchParams.get('sort_how'),
   });
 
   function update(newParams: Record<string, string>) {
