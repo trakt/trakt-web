@@ -11,6 +11,10 @@
     title: string;
     metaInfo?: Snippet;
     drilldown?: ListDrilldownLinkProps;
+    // Alternative to navigating via `drilldown.href`: invoke a callback so the
+    // owner can open a locally-mounted drawer instead. Used by the episode
+    // drawer, which can't route to a `view=` drawer without replacing itself.
+    onDrilldown?: () => void;
     subtitle?: string;
     disabled?: boolean;
   } & HTMLElementProps;
@@ -20,6 +24,7 @@
     metaInfo,
     subtitle,
     drilldown,
+    onDrilldown,
     disabled,
     ...props
   }: ListTitleProps = $props();
@@ -46,10 +51,26 @@
 
 <div
   class="trakt-list-title"
-  data-drilldown={drilldown && !$isEditMode ? "" : undefined}
+  data-drilldown={(drilldown || onDrilldown) && !$isEditMode ? "" : undefined}
   {...props}
 >
-  {#if drilldown && !$isEditMode}
+  {#if onDrilldown && !$isEditMode}
+    <button
+      type="button"
+      class="trakt-list-title-action"
+      aria-label={drilldown?.label}
+      disabled={disabled || drilldown?.mode === "disabled"}
+      onclick={() => {
+        if (drilldown) {
+          track({ source: drilldown.source.id, type: drilldown.source.type });
+        }
+        onDrilldown();
+      }}
+    >
+      {@render content()}
+      <CaretRightIcon />
+    </button>
+  {:else if drilldown && !$isEditMode}
     <Link
       href={drilldown.href}
       label={drilldown.label}
@@ -81,6 +102,7 @@
     min-width: 0;
 
     .trakt-list-title-wrapper,
+    .trakt-list-title-action,
     :global(.trakt-link) {
       display: flex;
       align-items: center;
@@ -92,7 +114,19 @@
       text-decoration: none;
     }
 
+    .trakt-list-title-action {
+      appearance: none;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
     &[data-drilldown] {
+      .trakt-list-title-action,
       :global(.trakt-link) {
         :global(svg) {
           flex-shrink: 0;
@@ -113,6 +147,14 @@
               color: var(--color-link-active);
             }
           }
+        }
+      }
+
+      .trakt-list-title-action:disabled {
+        cursor: default;
+
+        :global(svg) {
+          color: var(--color-foreground-button-disabled);
         }
       }
 

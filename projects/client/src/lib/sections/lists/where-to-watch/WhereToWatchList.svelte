@@ -20,10 +20,16 @@
   const {
     streamOn,
     variant,
+    onDrilldown,
     ...target
   }: MetaInfoProps & {
     streamOn?: StreamOn;
     variant?: ListVariant;
+    // When provided, the "view all" drilldown opens a locally-mounted drawer
+    // instead of navigating to the `view=where-to-watch` URL. The episode
+    // drawer uses this so its "view all" stays episode-scoped and stacks on
+    // top instead of replacing the drawer.
+    onDrilldown?: () => void;
   } = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
@@ -72,6 +78,7 @@
         label: m.button_label_view_all_where_to_watch(),
         mode: "always",
       }}
+      {onDrilldown}
       {metaInfo}
       {variant}
       --height-list="var(--height-where-to-watch-list)"

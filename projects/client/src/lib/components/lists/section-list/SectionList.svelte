@@ -36,6 +36,7 @@
     variant?: ListVariant;
     titleAction?: Snippet;
     drilldown?: ListDrilldownLinkProps;
+    onDrilldown?: () => void;
     contentHash?: string;
   };
 
@@ -49,6 +50,7 @@
     metaInfo,
     actions: _externalActions,
     drilldown,
+    onDrilldown,
     headerNavigationType,
     subtitle,
     variant = "default",
@@ -155,6 +157,7 @@
           actions={isCollapsed ? undefined : actions}
           navigationType={headerNavigationType}
           drilldown={isCollapsed ? undefined : drilldown}
+          onDrilldown={isCollapsed ? undefined : onDrilldown}
           disabled={items.length === 0 && drilldown?.mode !== "always"}
         />
       {/if}

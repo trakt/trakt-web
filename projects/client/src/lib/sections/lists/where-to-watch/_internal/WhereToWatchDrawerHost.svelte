@@ -17,9 +17,11 @@
 
   const {
     onClose,
+    elevated = false,
     ...target
   }: MetaInfoProps & {
     onClose: () => void;
+    elevated?: boolean;
   } = $props();
 
   const { list, isLoading } = $derived(useAllStreamOn(target));
@@ -60,7 +62,7 @@
   };
 </script>
 
-<Drawer {onClose} title={m.list_title_where_to_watch()} size="large">
+<Drawer {onClose} title={m.list_title_where_to_watch()} size="large" {elevated}>
   <RenderFor audience="authenticated" device={["mobile"]}>
     {#if $plexServices.length > 0}
       <WhereToWatchCategory>
