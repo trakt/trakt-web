@@ -1,4 +1,6 @@
+import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { m } from '$lib/features/i18n/messages.ts';
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { findPendingOverride } from '$lib/features/offline/findPendingOverride.ts';
 import { isAddEndpoint } from '$lib/features/offline/isAddEndpoint.ts';
@@ -27,10 +29,11 @@ function getFavoritesPayload(
   }
 }
 
-export function useFavorites({ type, id }: FavoritesStoreProps) {
+export function useFavorites({ type, id, title }: FavoritesStoreProps) {
   const isUpdatingFavorite = new BehaviorSubject(false);
   const { favorites } = useUser();
   const { invalidate } = useInvalidator();
+  const { notify } = useActionToast();
   const { actions } = useOfflineActions();
   const { isQueued } = useIsQueued({
     domain: 'favorites',
@@ -77,6 +80,19 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
     if (result === 'executed') {
       await invalidate(InvalidateAction.Favorited(type));
     }
+
+    notify({
+      message: action === 'add'
+        ? m.action_toast_added_to_favorites({ title })
+        : m.action_toast_removed_from_favorites({ title }),
+      action: {
+        text: m.button_text_undo(),
+        label: m.action_toast_label_undo(),
+        style: 'outline',
+        onAction: () =>
+          addOrRemoveFavorite(action === 'add' ? 'remove' : 'add'),
+      },
+    });
 
     // Always clear: a queued action stays flagged via isQueued, and leaving
     // this pinned would re-disable the button once it syncs and dequeues.

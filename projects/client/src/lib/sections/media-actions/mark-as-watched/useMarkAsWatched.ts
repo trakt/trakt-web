@@ -1,6 +1,8 @@
+import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { m } from '$lib/features/i18n/messages.ts';
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import { useIsQueued } from '$lib/features/offline/useIsQueued.ts';
@@ -20,6 +22,16 @@ export type MarkAsWatchedStoreProps = MediaStoreProps<
   { id: number; effectiveReleaseDate: Date; status?: MediaStatus }
 >;
 
+/**
+ * History mutations run on a minimal media shape; a full entry carried at
+ * runtime still lets the confirmation toast name the item, otherwise it stays
+ * generic.
+ */
+function toOptionalTitle(item: { id: number }): string | undefined {
+  const candidate = item as { title?: unknown };
+  return typeof candidate.title === 'string' ? candidate.title : undefined;
+}
+
 export function useMarkAsWatched(
   props: MarkAsWatchedStoreProps,
 ) {
@@ -30,6 +42,10 @@ export function useMarkAsWatched(
   const { user, history, ratings } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.MarkAsWatched);
+  const { notify } = useActionToast();
+
+  const soleItem = media.length === 1 ? media.at(0) : undefined;
+  const toastTitle = soleItem ? toOptionalTitle(soleItem) : undefined;
 
   const { isWatched } = useIsWatched(props);
   const { isQueued } = useIsQueued({ domain: 'history', keys: mediaKeys });
@@ -56,6 +72,10 @@ export function useMarkAsWatched(
     if (result === 'executed') {
       await invalidate(InvalidateAction.MarkAsWatched(type));
     }
+
+    // No confirmation toast on add: marking as watched surfaces the rate-now
+    // prompt, and a second overlapping banner is noise. The "marked by
+    // mistake?" undo lives inside that prompt instead (see RateNowContent).
 
     // Always clear: a queued action stays flagged via isQueued, and leaving
     // this pinned would re-disable the button once it syncs and dequeues.
@@ -128,6 +148,20 @@ export function useMarkAsWatched(
     if (removeResult === 'executed') {
       await invalidate(InvalidateAction.MarkAsWatched(type));
     }
+
+    notify({
+      message: toastTitle
+        ? m.action_toast_removed_from_history({ title: toastTitle })
+        : m.action_toast_removed_from_history_generic(),
+      // Best-effort undo: re-marks as watched at "now". It does not restore
+      // original play timestamps or a rating this removal may have orphaned.
+      action: {
+        text: m.button_text_undo(),
+        label: m.action_toast_label_undo(),
+        style: 'outline',
+        onAction: () => markAsWatched(),
+      },
+    });
 
     isMarkingAsWatched.next(false);
   };

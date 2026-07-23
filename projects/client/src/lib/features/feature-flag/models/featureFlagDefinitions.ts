@@ -1,3 +1,4 @@
+import CheckIcon from '$lib/components/icons/CheckIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
@@ -86,5 +87,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     addedAt: new Date('2026-06-30'),
     description: () => m.preview_feature_description_parental_guide(),
     audience: 'director',
+  },
+  [FeatureFlag.ActionConfirmations]: {
+    icon: CheckIcon,
+    title: () => m.preview_feature_title_action_confirmations(),
+    addedAt: new Date('2026-07-23'),
+    description: () => m.preview_feature_description_action_confirmations(),
   },
 };
