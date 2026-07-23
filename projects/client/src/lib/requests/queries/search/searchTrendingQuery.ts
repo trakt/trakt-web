@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type {
@@ -21,7 +22,16 @@ export const TrendingSearchesSchema = z.object({
 type TrendingSearchEntry = z.infer<typeof TrendingSearchEntrySchema>;
 export type TrendingSearchesResult = z.infer<typeof TrendingSearchesSchema>;
 
-type SearchTrendingParams = { limit?: number; query?: string } & ApiParams;
+type SearchTrendingParams = {
+  limit?: number;
+  query?: string;
+  type?: MediaType;
+} & ApiParams;
+
+const TYPE_TO_ENDPOINT: Record<MediaType, 'movies' | 'shows'> = {
+  movie: 'movies',
+  show: 'shows',
+};
 
 export function mapToTrendingSearchedMovie({
   count,
@@ -67,14 +77,18 @@ const searchTrendingRequest = (
 export const searchTrendingQuery = defineQuery({
   key: 'searchTrending',
   invalidations: [],
-  dependencies: (params) => [params.limit, params.query],
-  request: (params: SearchTrendingParams) =>
-    Promise.all([
-      searchTrendingRequest(params, 'movies'),
-      searchTrendingRequest(params, 'shows'),
-    ]),
-  mapper: ([moviesResponse, showsResponse]) => {
-    const data = [...moviesResponse.body, ...showsResponse.body];
+  dependencies: (params) => [params.limit, params.query, params.type],
+  request: (params: SearchTrendingParams) => {
+    const endpoints = params.type
+      ? [TYPE_TO_ENDPOINT[params.type]]
+      : [TYPE_TO_ENDPOINT.movie, TYPE_TO_ENDPOINT.show];
+
+    return Promise.all(
+      endpoints.map((endpoint) => searchTrendingRequest(params, endpoint)),
+    );
+  },
+  mapper: (responses) => {
+    const data = responses.flatMap((response) => response.body);
     const allItems = data.map((item) => {
       if (item.type === 'person') {
         throw new Error('Unsupported type for trending media search');
