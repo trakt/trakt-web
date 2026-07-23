@@ -197,19 +197,16 @@
     var(--color-text-primary) 20%,
     transparent
   );
-  --color-option-list-background: color-mix(
-    in srgb,
-    var(--color-text-primary) 5%,
-    var(--shade-70)
-  );
+  --color-option-list-background: var(--shade-30);
+  --color-option-list-border: var(--shade-100);
   --color-option-list-separator: color-mix(
     in srgb,
-    var(--color-text-primary) 8%,
+    var(--color-text-primary) 12%,
     transparent
   );
   --color-option-list-highlight: color-mix(
     in srgb,
-    var(--color-text-primary) 8%,
+    var(--color-text-primary) 10%,
     transparent
   );
 
@@ -676,6 +673,11 @@
     in srgb,
     var(--color-text-primary) 6%,
     var(--shade-920)
+  );
+  --color-option-list-border: color-mix(
+    in srgb,
+    var(--color-text-primary) 8%,
+    transparent
   );
   --color-option-list-separator: color-mix(
     in srgb,

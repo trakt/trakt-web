@@ -74,5 +74,6 @@
      card. */
   .trakt-summary-actions :global(.trakt-dropdown-group) {
     background: transparent;
+    border: none;
   }
 </style>
