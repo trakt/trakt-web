@@ -48,11 +48,7 @@
 
     padding: var(--gap-l);
 
-    background: color-mix(
-      in srgb,
-      var(--color-card-background) 80%,
-      transparent
-    );
+    background: var(--color-translucent-card-background);
     border: var(--border-thickness-xxs) solid
       color-mix(in srgb, var(--color-border) 50%, transparent);
     border-radius: var(--border-radius-xl);
@@ -87,5 +83,15 @@
   .importer-card-description {
     font-size: var(--ni-12);
     line-height: 1.6;
+  }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-importer-card {
+    border-color: var(--color-flat-surface-border);
+
+    @include for-mouse {
+      &:hover {
+        border-color: var(--color-flat-surface-border);
+      }
+    }
   }
 </style>

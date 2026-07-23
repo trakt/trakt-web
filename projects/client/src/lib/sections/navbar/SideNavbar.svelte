@@ -117,6 +117,10 @@
     &:has(.is-expanded) {
       width: var(--side-navbar-width-expanded);
     }
+
+    :global(:root[data-reduced-width]) & {
+      inset-inline-start: var(--layout-page-inset);
+    }
   }
 
   .trakt-side-navbar-top,

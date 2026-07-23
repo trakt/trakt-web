@@ -223,4 +223,18 @@
   .yir-2024-media-episode-title {
     color: var(--shade-300);
   }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .trakt-yir-2024-media-card {
+      box-sizing: border-box;
+      background: var(--color-yir-poster-surface-raised);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+    }
+
+    .yir-2024-media-cover,
+    .yir-2024-media-shade {
+      display: none;
+    }
+  }
 </style>

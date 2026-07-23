@@ -55,7 +55,7 @@
       aspect-ratio: 2 / 3;
       border-radius: var(--border-radius-s, var(--ni-8));
       object-fit: cover;
-      background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+      background: var(--color-subtle-surface-background);
       transition: transform 200ms ease-out;
     }
 
@@ -74,6 +74,6 @@
     width: 100%;
     aspect-ratio: 2 / 3;
     border-radius: var(--border-radius-s, var(--ni-8));
-    background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+    background: var(--color-subtle-surface-background);
   }
 </style>

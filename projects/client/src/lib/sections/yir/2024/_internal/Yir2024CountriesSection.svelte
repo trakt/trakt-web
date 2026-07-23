@@ -151,4 +151,10 @@
       font-size: var(--ni-28);
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) .yir-2024-countries-map {
+    box-sizing: border-box;
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-surface-border);
+  }
 </style>

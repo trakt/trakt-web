@@ -1,8 +1,10 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import { useCover } from "./_internal/useCover";
 
   const { cover } = useCover();
+  const { reduceVisualNoise } = useAppearance();
 
   // Narrow once so the {#if} guard and the reads below share a single
   // reactive source. Reading $cover.data.src separately from the state guard
@@ -11,7 +13,7 @@
   const coverData = $derived($cover.state === "ready" ? $cover.data : undefined);
 </script>
 
-{#if coverData}
+{#if coverData && !$reduceVisualNoise}
   <div
     class="trakt-background-cover-image"
     data-cover-type={coverData?.type}
@@ -149,7 +151,7 @@
       }
 
       &::after {
-        backdrop-filter: blur(var(--ni-2));
+        backdrop-filter: var(--filter-surface-blur, blur(var(--ni-2)));
       }
     }
   }

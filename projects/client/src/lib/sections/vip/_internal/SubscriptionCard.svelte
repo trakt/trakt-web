@@ -131,11 +131,17 @@
 
     background: var(--background-subscription-card);
 
-    box-shadow: var(--shadow-floating);
+    box-shadow: var(
+      --shadow-decorative-bordered-surface,
+      var(--shadow-floating)
+    );
 
     border-radius: var(--border-radius-xxl);
     border: var(--ni-1) solid
-      color-mix(in srgb, var(--shade-10) 10%, transparent);
+      var(
+        --color-flat-border-if-reduced,
+        color-mix(in srgb, var(--shade-10) 10%, transparent)
+      );
 
     transform: scale(1);
     transition:
@@ -148,7 +154,10 @@
       transform: scale(1.1);
       border: var(--ni-1) solid var(--shade-10);
       background: var(--background-vip-elevated-card);
-      box-shadow: var(--shadow-raised);
+      box-shadow: var(
+        --shadow-decorative-bordered-surface,
+        var(--shadow-raised)
+      );
     }
   }
 
@@ -190,7 +199,7 @@
     .original-price {
       font-size: var(--font-size-body);
       text-decoration: line-through;
-      opacity: 0.6;
+      opacity: var(--opacity-deemphasized, 0.6);
     }
 
     .discount-pill {
@@ -227,7 +236,7 @@
     .billed-text {
       margin-top: var(--ni-8);
       font-size: var(--ni-14);
-      opacity: 0.7;
+      opacity: var(--opacity-deemphasized, 0.7);
     }
 
     @include for-tablet-sm-and-below {

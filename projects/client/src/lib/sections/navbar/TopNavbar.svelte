@@ -103,7 +103,7 @@
     border-end-end-radius: var(--border-radius-xxl);
 
     transition: calc(2 * var(--transition-increment)) ease-in-out;
-    transition-property: width, background-color, box-shadow, top, opacity;
+    transition-property: width, top, opacity;
 
     .trakt-navbar-left {
       min-width: 0;
@@ -117,10 +117,31 @@
     }
 
     &:global(.trakt-navbar-scroll) {
-      background-color: var(--color-background-navbar);
-      box-shadow: var(--shadow-navbar);
+      &::before {
+        content: "";
+        position: absolute;
+        inset-block: 0;
+        left: 50%;
+        z-index: -1;
 
-      backdrop-filter: blur(var(--ni-8));
+        width: 100dvw;
+        transform: translateX(-50%);
+
+        border-end-start-radius: var(--border-radius-xxl);
+        border-end-end-radius: var(--border-radius-xxl);
+        background-color: var(--color-background-navbar);
+        box-shadow: var(--shadow-navbar);
+        backdrop-filter: var(--filter-surface-blur, blur(var(--ni-8)));
+
+        transition: calc(2 * var(--transition-increment)) ease-in-out;
+        transition-property: background-color, box-shadow;
+      }
+    }
+
+    :global(:root[data-reduced-visual-noise])
+      &:global(.trakt-navbar-scroll)::before {
+      background-color: var(--color-background-top-navbar);
+      backdrop-filter: var(--filter-background-top-navbar);
     }
 
     &.is-hidden {
@@ -131,6 +152,12 @@
 
     &.is-edit-mode {
       justify-content: center;
+    }
+
+    :global(:root[data-reduced-width]) & {
+      inset-inline: 0;
+      width: min(100dvw, var(--layout-page-max-width));
+      margin-inline: auto;
     }
 
     @include for-mobile {

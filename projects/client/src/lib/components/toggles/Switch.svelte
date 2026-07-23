@@ -115,8 +115,11 @@
     width: var(--button-width);
     height: var(--button-height);
 
-    box-shadow: var(--ni-0) var(--ni-4) var(--ni-4) var(--ni-0)
-      color-mix(in srgb, var(--color-shadow) 25%, transparent) inset;
+    box-shadow: var(
+      --shadow-decorative-surface,
+      var(--ni-0) var(--ni-4) var(--ni-4) var(--ni-0)
+        color-mix(in srgb, var(--color-shadow) 25%, transparent) inset
+    );
 
     box-sizing: border-box;
     padding: var(--ni-4);
@@ -260,10 +263,12 @@
 
         border-radius: 50%;
 
-        box-shadow:
+        box-shadow: var(
+          --shadow-decorative-surface,
           0px -2px 4px 0px rgba(0, 0, 0, 0.25) inset,
           0px 1px 2px 0px rgba(255, 255, 255, 0.44) inset,
-          var(--ni-0) var(--ni-2) var(--ni-8) var(--ni-0) rgba(0, 0, 0, 0.16);
+          var(--ni-0) var(--ni-2) var(--ni-8) var(--ni-0) rgba(0, 0, 0, 0.16)
+        );
       }
     }
   }
@@ -288,6 +293,21 @@
 
       &::before {
         display: none;
+      }
+    }
+  }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .trakt-switch {
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      box-shadow: none;
+
+      .trakt-switch-tick::before {
+        border: var(--border-thickness-xxs) solid
+          var(--color-flat-surface-border);
+        box-sizing: border-box;
+        box-shadow: none;
       }
     }
   }

@@ -207,7 +207,14 @@
       var(--section-list-height) + var(--ni-40) + var(--list-header-gap)
     );
 
-    --list-mask-offset: var(--layout-distance-side);
+    /*
+      The visible cards end at the content boundary. Clip halfway through the
+      following gap so the final card's edge treatment remains visible without
+      revealing part of the next card.
+    */
+    --list-mask-offset: calc(
+      var(--layout-distance-side) - var(--list-gap) * 0.5
+    );
 
     contain: layout;
 
@@ -272,9 +279,9 @@
   }
 
   .section-list-empty-state:not(:has(:global(.trakt-skeleton-list))) {
-    width: calc(
-      100dvw - var(--layout-distance-side) * 2 - var(--layout-sidebar-distance)
-    );
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -313,8 +320,14 @@
 
     padding-top: var(--shadow-spacing);
 
-    &[data-navigation-type="dpad"] {
-      gap: var(--gap-xxs);
+    @include list-mask(var(--list-mask-offset));
+
+    @include for-tablet-sm-and-below {
+      mask-image: none;
+    }
+
+    @include for-touch {
+      mask-image: none;
     }
   }
 
@@ -322,27 +335,13 @@
   .section-list-has-multiple-items:has(:global(.trakt-view-all-button)) {
     .section-list-horizontal-scroll {
       overflow-x: hidden;
-      @include list-mask(var(--list-mask-offset));
-
-      @supports (-moz-appearance: none) {
-        overflow-x: auto;
-        mask-image: none;
-      }
-
-      @include for-tablet-lg {
-        --list-mask-offset: calc(
-          var(--layout-distance-side) - var(--list-gap) * 0.5
-        );
-      }
 
       @include for-tablet-sm-and-below {
         overflow-x: auto;
-        mask-image: none;
       }
 
       @include for-touch {
         overflow-x: auto;
-        mask-image: none;
       }
     }
   }

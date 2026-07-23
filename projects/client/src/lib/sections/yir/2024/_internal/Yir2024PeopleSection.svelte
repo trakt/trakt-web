@@ -133,4 +133,9 @@
       padding-top: var(--ni-32);
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-yir-2024-people {
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-surface-border);
+  }
 </style>

@@ -117,7 +117,7 @@
       --nav-fade: calc(100% - var(--nav-safe));
 
       top: calc(-1 * var(--nav-safe));
-      backdrop-filter: blur(var(--ni-10));
+      backdrop-filter: var(--filter-surface-blur, blur(var(--ni-10)));
       background: color-mix(
         in srgb,
         var(--color-background-navbar) 75%,
@@ -149,6 +149,12 @@
       );
     }
 
+    :global(:root[data-reduced-visual-noise]) &::before {
+      background: var(--color-background-top-navbar);
+      backdrop-filter: var(--filter-background-top-navbar);
+      mask-image: none;
+    }
+
     &:global(.trakt-navbar-actions-scroll)::before {
       opacity: 1;
     }
@@ -158,6 +164,14 @@
       opacity: 0;
       padding-block: 0;
       pointer-events: none;
+    }
+
+    :global(:root[data-reduced-width]) & {
+      padding-inline-start: calc(
+        var(--layout-page-inset) + var(--layout-distance-side) +
+          var(--layout-sidebar-distance)
+      );
+      padding-inline-end: calc(var(--layout-page-inset) + var(--gap-m));
     }
   }
 

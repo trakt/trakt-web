@@ -1,6 +1,7 @@
 <script lang="ts">
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
@@ -11,6 +12,7 @@
 
   const { month, onDismiss }: { month: Date; onDismiss: () => void } = $props();
   const { user } = useUser();
+  const { reduceVisualNoise } = useAppearance();
 
   const { review, isLoading } = $derived(
     useMonthInReview({
@@ -23,7 +25,9 @@
 
 <div class="trakt-month-in-review">
   <ReviewContent
-    coverSrc={$review?.firstPlay?.cover.url.medium ?? DEFAULT_COVER}
+    coverSrc={$reduceVisualNoise
+      ? undefined
+      : ($review?.firstPlay?.cover.url.medium ?? DEFAULT_COVER)}
     variant="gradient"
   >
     {#snippet header()}
@@ -104,5 +108,18 @@
     display: flex;
     align-items: center;
     gap: var(--gap-m);
+  }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-month-in-review {
+    :global(.trakt-review-content) {
+      background: var(--color-review-base);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      box-shadow: none;
+    }
+
+    :global(.trakt-review-content-cover-image) {
+      display: none;
+    }
   }
 </style>

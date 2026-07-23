@@ -1,10 +1,13 @@
 <script lang="ts">
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import { time } from "$lib/utils/timing/time";
   import { Confetti } from "svelte-confetti";
 
   const { position }: { position: { x: number; y: number } } = $props();
+  const { reduceVisualNoise } = useAppearance();
 </script>
 
+{#if !$reduceVisualNoise}
 <div
   class="trakt-stars-confetti"
   style="left: {position.x}px; top: {position.y}px;"
@@ -19,6 +22,7 @@
     ]}
   />
 </div>
+{/if}
 
 <style>
   .trakt-stars-confetti {

@@ -224,8 +224,11 @@
     color: var(--color-yir-poster-foreground);
     font-size: clamp(var(--ni-32), 4vw, var(--ni-52));
     line-height: 1;
-    text-shadow: 0 var(--ni-2) var(--ni-12)
-      color-mix(in srgb, var(--color-yir-poster-surface) 75%, transparent);
+    text-shadow: var(
+      --shadow-decorative-text,
+      0 var(--ni-2) var(--ni-12)
+        color-mix(in srgb, var(--color-yir-poster-surface) 75%, transparent)
+    );
 
     @include for-mobile {
       font-size: var(--ni-24);
@@ -303,8 +306,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-shadow: 0 var(--ni-1) var(--ni-6)
-      color-mix(in srgb, var(--color-yir-poster-surface) 85%, transparent);
+    text-shadow: var(
+      --shadow-decorative-text,
+      0 var(--ni-1) var(--ni-6)
+        color-mix(in srgb, var(--color-yir-poster-surface) 85%, transparent)
+    );
     transition: opacity 0.6s ease;
   }
 
@@ -433,5 +439,35 @@
   // `:global` in the middle) keeps it above the rule above.
   .yir-top-list li.is-watched .yir-top-plays {
     color: var(--color-yir-poster-foreground);
+  }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .yir-top-bg,
+    .yir-top-shade {
+      display: none;
+    }
+
+    .yir-top-user,
+    .yir-top-card {
+      box-sizing: border-box;
+      padding: var(--ni-24);
+      background: var(--color-yir-poster-surface);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      border-radius: var(--border-radius-xl);
+    }
+
+    .yir-top-posters:hover li:not(:hover) {
+      .yir-top-poster :global(img),
+      .yir-top-watch-time {
+        opacity: 1;
+      }
+    }
+
+    .yir-top-poster {
+      box-sizing: border-box;
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+    }
   }
 </style>

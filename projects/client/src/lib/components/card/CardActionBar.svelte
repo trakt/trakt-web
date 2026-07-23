@@ -1,20 +1,23 @@
 <script lang="ts">
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { Snippet } from "svelte";
-
-  type CardActionBarProps = {
-    actions: Snippet;
-    variant?: "default" | "standalone";
-  };
+  import type { CardActionBarProps } from "./CardActionBarProps";
 
   const { isEditMode } = useEditMode();
-  const { actions, variant = "default" }: CardActionBarProps = $props();
+  const {
+    actions,
+    variant = "default",
+    surface = "plain",
+  }: CardActionBarProps = $props();
 </script>
 
 {#if !$isEditMode}
   <RenderFor audience="authenticated">
-    <div class="trakt-card-action-bar" data-variant={variant}>
+    <div
+      class="trakt-card-action-bar"
+      data-variant={variant}
+      data-surface={surface}
+    >
       {@render actions()}
     </div>
   </RenderFor>
@@ -80,5 +83,22 @@
     &:has(:global(.image-loaded)) :global(.trakt-card-action-bar)::before {
       opacity: 1;
     }
+  }
+
+  :global(:root[data-reduced-visual-noise])
+    .trakt-card-action-bar[data-variant="default"][data-surface="plain"]::before {
+    background-image: none;
+  }
+
+  :global(:root[data-reduced-visual-noise])
+    :global(.trakt-card):not(
+      :has(
+        :global(
+          img.trakt-card-cover-image.image-loaded:not(.image-placeholder)
+        )
+      )
+    )
+    .trakt-card-action-bar[data-variant="default"][data-surface="image"]::before {
+    background-image: none;
   }
 </style>

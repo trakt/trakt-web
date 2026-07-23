@@ -42,7 +42,7 @@
     inset: 0;
     z-index: calc(var(--layer-top) - 1);
 
-    backdrop-filter: blur(var(--ni-8));
+    backdrop-filter: var(--filter-surface-blur, blur(var(--ni-8)));
     opacity: 0;
     will-change: opacity;
   }
@@ -100,6 +100,16 @@
       bottom: calc(var(--dialog-offset) + env(safe-area-inset-bottom, 0));
       transform: translateX(-50%);
     }
+  }
+
+  :global(:root[data-reduced-visual-noise] .trakt-modal) {
+    border-color: var(--color-flat-surface-border);
+    box-shadow: none;
+  }
+
+  :global(:root[data-reduced-visual-noise] .trakt-modal-overlay) {
+    background: var(--color-modal-underlay);
+    backdrop-filter: none;
   }
 
   :global(.trakt-modal-footer) {

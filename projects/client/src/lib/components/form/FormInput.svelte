@@ -82,7 +82,7 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: outline;
 
-    backdrop-filter: blur(var(--ni-8));
+    backdrop-filter: var(--filter-surface-blur, blur(var(--ni-8)));
 
     &:placeholder-shown {
       text-overflow: ellipsis;
@@ -98,7 +98,7 @@
     }
 
     &:disabled {
-      opacity: 0.6;
+      opacity: var(--opacity-disabled-control, 0.6);
       cursor: not-allowed;
     }
   }

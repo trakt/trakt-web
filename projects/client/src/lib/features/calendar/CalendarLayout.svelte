@@ -170,7 +170,7 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: gap, top;
 
-    backdrop-filter: blur(var(--ni-8));
+    backdrop-filter: var(--filter-surface-blur, blur(var(--ni-8)));
 
     @include for-mobile {
       --sticky-top: calc(env(safe-area-inset-top, 0) + var(--ni-4));

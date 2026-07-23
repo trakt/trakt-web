@@ -701,6 +701,10 @@
       "default": "Hand crafted around the world.",
       "description": "Additional detail for the copyright notice indicating that the project is developed by a global team."
     },
+    "button_label_open_appearance_settings": {
+      "default": "Open appearance settings",
+      "description": "Aria-label for the footer button that opens the appearance settings drawer."
+    },
     "button_text_join_trakt_for_free": {
       "default": "Join Trakt for Free",
       "description": "Text for the button that takes users to the Trakt login page, keep the text as short as possible (always as short or shorter than the english version)."
@@ -4262,6 +4266,42 @@
     "text_language": {
       "default": "Language",
       "description": "Text for the section that allows users to change the language."
+    },
+    "text_settings_reduce_visual_noise": {
+      "default": "Reduce visual effects",
+      "description": "Title for the appearance setting that simplifies decorative visuals."
+    },
+    "text_settings_reduce_visual_noise_description": {
+      "default": "Hide decorative imagery, remove shadows and gradients, reduce blur, and redact hidden spoilers.",
+      "description": "Description for the appearance setting that simplifies decorative visuals."
+    },
+    "switch_label_reduce_visual_noise": {
+      "default": "Reduce visual effects",
+      "description": "Aria-label for the switch that simplifies decorative visuals."
+    },
+    "text_settings_reduce_width": {
+      "default": "Reduce width",
+      "description": "Title for the appearance setting that limits the width of pages."
+    },
+    "text_settings_reduce_width_description": {
+      "default": "Limit page content to 1,280 pixels wide.",
+      "description": "Description for the appearance setting that limits the width of pages."
+    },
+    "switch_label_reduce_width": {
+      "default": "Reduce width",
+      "description": "Aria-label for the switch that limits the width of pages."
+    },
+    "text_settings_center_drawers": {
+      "default": "Center drawers",
+      "description": "Title for the appearance setting that centers drawers."
+    },
+    "text_settings_center_drawers_description": {
+      "default": "Display wider drawers in the center of the screen.",
+      "description": "Description for the appearance setting that centers and widens drawers."
+    },
+    "switch_label_center_drawers": {
+      "default": "Center drawers",
+      "description": "Aria-label for the switch that centers and widens drawers."
     },
     "switch_label_toggle_halloween_filters": {
       "default": "Toggle halloween filters",

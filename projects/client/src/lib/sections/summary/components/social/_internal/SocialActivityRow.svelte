@@ -60,7 +60,7 @@
     padding: var(--gap-xs) var(--gap-s);
     border-radius: var(--border-radius-m);
 
-    background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+    background: var(--color-subtle-surface-background);
 
     :global(.trakt-link) {
       text-decoration: none;

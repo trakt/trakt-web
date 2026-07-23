@@ -106,7 +106,7 @@
   }
 
   .scroll-button:disabled {
-    opacity: 0.2;
+    opacity: var(--opacity-disabled-control, 0.2);
     cursor: unset;
   }
 </style>

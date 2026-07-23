@@ -184,7 +184,10 @@
 
   .yir-card-title {
     font-size: var(--ni-32);
-    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2) var(--color-yir-scrim);
+    text-shadow: var(
+      --shadow-decorative-text,
+      var(--ni-1) var(--ni-1) var(--ni-2) var(--color-yir-scrim)
+    );
     margin: 0;
 
     @include for-mobile {
@@ -221,7 +224,10 @@
     border-radius: var(--border-radius-s);
     // Drop-shadow follows the alpha outline (incl. the first/last thumbs'
     // rounded corners), so the strip reads as floating above the fanart.
-    filter: drop-shadow(0 var(--ni-4) var(--ni-12) var(--color-yir-scrim));
+    filter: var(
+      --filter-decorative-shadow,
+      drop-shadow(0 var(--ni-4) var(--ni-12) var(--color-yir-scrim))
+    );
 
     &:hover {
       .yir-grid-item {
@@ -323,5 +329,42 @@
     display: block;
     aspect-ratio: 16 / 9;
     object-fit: cover;
+  }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .yir-fanart-bg {
+      background-image: none !important;
+    }
+
+    .yir-shade {
+      display: none;
+    }
+
+    .yir-card-media,
+    .yir-card-stats {
+      box-sizing: border-box;
+      max-width: calc(100% - 2 * var(--ni-24));
+      padding: var(--ni-16) var(--ni-24);
+      background: var(--color-yir-poster-surface-raised);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      border-radius: var(--border-radius-l);
+
+      @include for-mobile {
+        max-width: calc(100% - 2 * var(--ni-16));
+        padding: var(--ni-12) var(--ni-16);
+      }
+    }
+
+    .yir-most-watched-grid {
+      box-sizing: border-box;
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      filter: none;
+
+      &:hover .yir-grid-item {
+        opacity: 1;
+      }
+    }
   }
 </style>

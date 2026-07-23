@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
 
   const {
@@ -7,10 +8,12 @@
   }: {
     src?: string | Nil;
   } & ChildrenProps = $props();
+
+  const { reduceVisualNoise } = useAppearance();
 </script>
 
 <div class="trakt-cta-container">
-  {#if src}
+  {#if src && !$reduceVisualNoise}
     <div class="trakt-cta-cover">
       <CrossOriginImage {src} alt="Background" />
     </div>

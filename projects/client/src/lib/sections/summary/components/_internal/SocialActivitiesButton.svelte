@@ -108,7 +108,7 @@
       color-mix(in srgb, var(--color-border) 40%, transparent);
 
     cursor: default;
-    background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+    background: var(--color-subtle-surface-background);
 
     .skeleton-count {
       width: 3.5ch;
@@ -122,7 +122,13 @@
       display: inline-block;
       height: var(--height-watched-by-label);
       border-radius: var(--border-radius-xs, var(--ni-4));
-      background: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+      background: var(
+        --color-skeleton-background,
+        color-mix(in srgb, var(--color-foreground) 12%, transparent)
+      );
+      outline: var(--border-thickness-xxs) solid
+        var(--color-skeleton-outline, transparent);
+      outline-offset: calc(-1 * var(--border-thickness-xxs));
 
       position: relative;
       overflow: hidden;
@@ -138,7 +144,10 @@
 
         transform: translateX(100%);
 
-        animation: slide calc(8 * var(--transition-increment)) infinite;
+        animation: var(
+          --animation-decorative,
+          slide calc(8 * var(--transition-increment)) infinite
+        );
 
         background: linear-gradient(
           110deg,

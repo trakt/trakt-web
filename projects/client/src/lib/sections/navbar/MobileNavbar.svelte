@@ -117,7 +117,12 @@
       gap: var(--gap-m);
     }
 
-    backdrop-filter: blur(var(--ni-8));
+    :global(:root[data-reduced-width]) & {
+      width: min(100dvw, var(--layout-page-max-width));
+      margin-inline: auto;
+    }
+
+    backdrop-filter: var(--filter-surface-blur, blur(var(--ni-8)));
   }
 
   .trakt-mobile-navbar-links {

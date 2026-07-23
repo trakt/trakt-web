@@ -1,8 +1,13 @@
 <script lang="ts">
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import { snowRenderer } from "./snowRenderer";
+
+  const { reduceVisualNoise } = useAppearance();
 </script>
 
-<canvas use:snowRenderer class="trakt-snow-canvas" aria-hidden="true"></canvas>
+{#if !$reduceVisualNoise}
+  <canvas use:snowRenderer class="trakt-snow-canvas" aria-hidden="true"></canvas>
+{/if}
 
 <style>
   .trakt-snow-canvas {

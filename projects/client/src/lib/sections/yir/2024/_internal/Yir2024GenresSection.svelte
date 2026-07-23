@@ -178,4 +178,16 @@
       margin-top: var(--ni-20);
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .yir-2024-genres-panel {
+      box-sizing: border-box;
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+    }
+
+    .yir-2024-genres-watermark {
+      display: none;
+    }
+  }
 </style>

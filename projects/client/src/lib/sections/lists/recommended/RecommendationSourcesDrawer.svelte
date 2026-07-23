@@ -220,6 +220,23 @@
     background: color-mix(in srgb, var(--color-text-primary) 4%, transparent);
   }
 
+  :global(:root[data-reduced-visual-noise]) {
+    .recommendation-sources-section-header {
+      background: color-mix(
+        in srgb,
+        var(--section-accent, var(--color-text-primary)) 8%,
+        var(--color-card-background)
+      );
+      border-color: var(--color-flat-surface-border);
+    }
+
+    .recommendation-sources-subgenre-group {
+      background: var(--color-card-background);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+    }
+  }
+
   .recommendation-sources-subgenre-group-tags {
     display: flex;
     gap: var(--gap-xs);

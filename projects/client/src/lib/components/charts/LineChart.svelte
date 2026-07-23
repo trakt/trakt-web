@@ -288,9 +288,12 @@
     stroke-linejoin: round;
     // Soft bloom in the series hue gives the line presence over flat strokes;
     // the percentage is theme-driven and drops to 0 in high-contrast mode.
-    filter: drop-shadow(
-      0 1px var(--viz-glow-blur)
-        color-mix(in srgb, var(--viz-series) var(--viz-glow-percent), transparent)
+    filter: var(
+      --filter-decorative-shadow,
+      drop-shadow(
+        0 1px var(--viz-glow-blur)
+          color-mix(in srgb, var(--viz-series) var(--viz-glow-percent), transparent)
+      )
     );
     transition:
       d var(--viz-morph-duration) ease,

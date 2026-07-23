@@ -93,7 +93,10 @@
 
     transform: translateX(100%);
 
-    animation: slide var(--animation-duration) infinite;
+    animation: var(
+      --animation-decorative,
+      slide var(--animation-duration) infinite
+    );
     animation-delay: calc(var(--start-delay) + var(--animation-loop-delay));
 
     background: linear-gradient(

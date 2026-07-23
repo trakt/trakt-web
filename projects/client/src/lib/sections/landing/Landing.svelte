@@ -8,6 +8,7 @@
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import AppStoreBadge from "./assets/AppStoreBadge.svelte";
@@ -16,6 +17,8 @@
   import ExploreLabels from "./components/ExploreLabels.svelte";
   import LandingColumns from "./components/LandingColumns.svelte";
   import TrendingItems from "./components/TrendingItems.svelte";
+
+  const { reduceVisualNoise } = useAppearance();
 </script>
 
 <div class="trakt-landing">
@@ -24,10 +27,12 @@
       <div class="trakt-landing-logo">
         <Logo />
       </div>
-      <TrendingItems type="show">
-        <ExploreLabels text="shows" />
-        <ShowIcon />
-      </TrendingItems>
+      {#if !$reduceVisualNoise}
+        <TrendingItems type="show">
+          <ExploreLabels text="shows" />
+          <ShowIcon />
+        </TrendingItems>
+      {/if}
     {/snippet}
 
     <Steps />
@@ -37,10 +42,12 @@
       <div class="trakt-landing-login">
         <LoginButton />
       </div>
-      <TrendingItems type="movie">
-        <MovieIcon />
-        <ExploreLabels text="movies" />
-      </TrendingItems>
+      {#if !$reduceVisualNoise}
+        <TrendingItems type="movie">
+          <MovieIcon />
+          <ExploreLabels text="movies" />
+        </TrendingItems>
+      {/if}
     {/snippet}
   </LandingColumns>
 
@@ -64,7 +71,9 @@
     {/snippet}
   </LandingColumns>
 
-  <img src={popcorn} class="trakt-popcorn" alt="" />
+  {#if !$reduceVisualNoise}
+    <img src={popcorn} class="trakt-popcorn" alt="" />
+  {/if}
 </div>
 
 <style lang="scss">
@@ -81,7 +90,8 @@
     inset-inline-start: 0;
     top: 0;
     width: calc(
-      100dvw - 2 * var(--landing-padding) - var(--layout-scrollbar-width)
+      var(--layout-page-width) - 2 * var(--landing-padding) -
+        var(--layout-page-scrollbar-width)
     );
     min-height: calc(
       100dvh - var(--landing-padding) - var(--popcorn-safe-area)
@@ -164,5 +174,11 @@
 
     width: var(--ni-640);
     height: var(--popcorn-height);
+  }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-landing {
+    --popcorn-safe-area: var(--ni-0);
+
+    background-image: none;
   }
 </style>

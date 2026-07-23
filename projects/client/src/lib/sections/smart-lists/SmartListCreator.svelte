@@ -123,6 +123,10 @@
     display: grid;
     grid-template-columns: 1fr var(--ni-380);
 
+    :global(:root[data-centered-drawers]) & {
+      grid-template-columns: 1fr;
+    }
+
     @include for-tablet-sm-and-below {
       grid-template-columns: 1fr;
     }

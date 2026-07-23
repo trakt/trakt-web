@@ -282,17 +282,19 @@
 
 <FilterScopeSetter {filterScope}>
   <RenderFor {audience}>
-    {#if mode === "default"}
-      <NavbarStateSetter mode="full" />
-    {/if}
+    <div class="trakt-page">
+      {#if mode === "default"}
+        <NavbarStateSetter mode="full" />
+      {/if}
 
-    <main class="trakt-content" data-mode={mode} {...dynamicContentProps}>
-      {@render children()}
-    </main>
+      <main class="trakt-content" data-mode={mode} {...dynamicContentProps}>
+        {@render children()}
+      </main>
 
-    {#if mode === "default"}
-      <Footer />
-    {/if}
+      {#if mode === "default"}
+        <Footer />
+      {/if}
+    </div>
   </RenderFor>
 
   {#if audience === "authenticated"}
@@ -304,6 +306,17 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  .trakt-page {
+    width: 100%;
+    box-sizing: border-box;
+
+    :global(:root[data-reduced-width]) & {
+      position: relative;
+      max-width: var(--layout-page-max-width);
+      margin-inline: auto;
+    }
+  }
 
   .trakt-content {
     --content-gap: var(--gap-m);

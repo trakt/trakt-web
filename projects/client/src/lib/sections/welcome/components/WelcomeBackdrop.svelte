@@ -91,11 +91,13 @@
       object-fit: cover;
 
       border-radius: var(--border-radius-l);
-      box-shadow:
+      box-shadow: var(
+        --shadow-decorative-surface,
         0 var(--ni-24) var(--ni-56)
           color-mix(in srgb, var(--color-background) 60%, transparent),
         0 0 0 var(--border-thickness-xxs)
-          color-mix(in srgb, var(--color-foreground) 6%, transparent);
+          color-mix(in srgb, var(--color-foreground) 6%, transparent)
+      );
     }
 
     &:nth-child(1) {

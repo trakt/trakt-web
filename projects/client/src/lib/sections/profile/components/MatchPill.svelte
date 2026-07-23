@@ -139,7 +139,7 @@
   }
 
   .trakt-match-pill-suffix {
-    opacity: 0.7;
+    opacity: var(--opacity-deemphasized, 0.7);
     margin-inline-start: var(--ni-1);
   }
 
@@ -152,7 +152,7 @@
   .trakt-match-pill-caret {
     display: inline-flex;
     align-items: center;
-    opacity: 0.55;
+    opacity: var(--opacity-deemphasized, 0.55);
     margin-inline-start: var(--ni-6);
     font-size: var(--font-size-tag);
     transition:
@@ -173,7 +173,13 @@
     display: inline-block;
     height: var(--height-match-label);
     border-radius: var(--border-radius-xs, var(--ni-4));
-    background: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+    background: var(
+      --color-skeleton-background,
+      color-mix(in srgb, var(--color-foreground) 12%, transparent)
+    );
+    outline: var(--border-thickness-xxs) solid
+      var(--color-skeleton-outline, transparent);
+    outline-offset: calc(-1 * var(--border-thickness-xxs));
 
     position: relative;
     overflow: hidden;
@@ -189,7 +195,10 @@
 
       transform: translateX(100%);
 
-      animation: slide calc(8 * var(--transition-increment)) infinite;
+      animation: var(
+        --animation-decorative,
+        slide calc(8 * var(--transition-increment)) infinite
+      );
 
       background: linear-gradient(
         110deg,

@@ -242,12 +242,14 @@
 
     @include for-mouse {
       .country.is-interactive:hover {
-        filter: brightness(1.4);
+        filter: var(--viz-map-active-filter);
+        stroke-width: var(--viz-active-stroke-width);
       }
     }
 
     .country.is-active {
-      filter: brightness(1.4);
+      filter: var(--viz-map-active-filter);
+      stroke-width: var(--viz-active-stroke-width);
     }
 
     .viz-caption {

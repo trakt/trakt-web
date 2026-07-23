@@ -101,15 +101,11 @@
       align-items: center;
 
       padding-inline-start: var(--ni-12);
-      background: color-mix(
-        in srgb,
-        var(--color-card-background) 50%,
-        transparent
-      );
+      background: var(--color-translucent-card-background-soft);
       border-radius: var(--border-radius-l);
       overflow: hidden;
 
-      backdrop-filter: blur(var(--ni-8));
+      backdrop-filter: var(--filter-surface-blur, blur(var(--ni-8)));
     }
 
     :global(.trakt-link) {

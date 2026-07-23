@@ -44,7 +44,7 @@
 
     &.is-dimmed {
       filter: grayscale(1);
-      opacity: 0.55;
+      opacity: var(--opacity-deemphasized, 0.55);
     }
 
     &.is-selected {

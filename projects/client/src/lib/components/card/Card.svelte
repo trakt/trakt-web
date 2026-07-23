@@ -113,9 +113,12 @@
       }
 
       :global(.trakt-action-button svg) {
-        filter: drop-shadow(
-          var(--ni-2) var(--ni-2) var(--ni-2)
-            color-mix(in srgb, var(--color-shadow) 25%, transparent)
+        filter: var(
+          --filter-decorative-shadow,
+          drop-shadow(
+            var(--ni-2) var(--ni-2) var(--ni-2)
+              color-mix(in srgb, var(--color-shadow) 25%, transparent)
+          )
         );
       }
     }

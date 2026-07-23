@@ -28,7 +28,7 @@
 
     :global(.trakt-action-button[disabled]) {
       background-color: transparent;
-      opacity: 0.3;
+      opacity: var(--opacity-subtle-indicator, 0.3);
     }
   }
 </style>

@@ -76,7 +76,9 @@
     text-decoration-thickness: var(--ni-2);
 
     &:focus-visible {
-      outline: none;
+      outline: var(--border-thickness-xxs) solid var(--color-focus-ring);
+      outline-offset: var(--ni-2);
+      border-radius: var(--border-radius-xs);
       position: relative;
     }
 

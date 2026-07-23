@@ -18,6 +18,10 @@
 
   let open = $state(false);
 
+  $effect(() => {
+    if (disabled) open = false;
+  });
+
   const tooltipClass = $derived(
     variant === "compact" ? "trakt-tooltip-compact" : "trakt-tooltip",
   );
@@ -41,17 +45,19 @@
         </div>
       {/snippet}
     </Tooltip.Trigger>
-    <Tooltip.Portal>
-      <Tooltip.Content class={tooltipClass} {side} {sideOffset}>
-        {#if typeof content === "function"}
-          {@render content()}
-        {:else if variant === "default"}
-          <p>{content}</p>
-        {:else}
-          {content}
-        {/if}
-      </Tooltip.Content>
-    </Tooltip.Portal>
+    {#if !disabled}
+      <Tooltip.Portal>
+        <Tooltip.Content class={tooltipClass} {side} {sideOffset}>
+          {#if typeof content === "function"}
+            {@render content()}
+          {:else if variant === "default"}
+            <p>{content}</p>
+          {:else}
+            {content}
+          {/if}
+        </Tooltip.Content>
+      </Tooltip.Portal>
+    {/if}
   </Tooltip.Root>
 </Tooltip.Provider>
 

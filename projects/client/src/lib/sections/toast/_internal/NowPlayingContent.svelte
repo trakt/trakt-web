@@ -143,8 +143,11 @@
   .post-credits-count {
     width: var(--ni-20);
     height: var(--ni-20);
+    box-sizing: border-box;
 
     border-radius: 50%;
-    background-color: rgba(254, 254, 254, 0.35);
+    background-color: var(--color-muted-surface-background);
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-border-if-reduced, transparent);
   }
 </style>

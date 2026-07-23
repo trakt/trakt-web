@@ -92,7 +92,7 @@
     &.trakt-card-cover-loading {
       .trakt-card-cover-image {
         opacity: 0;
-        filter: blur(var(--ni-4));
+        filter: var(--filter-decorative-blur, blur(var(--ni-4)));
       }
     }
 
@@ -162,8 +162,11 @@
 
       z-index: var(--layer-raised);
 
-      filter: drop-shadow(
-        var(--ni-1) var(--ni-1) var(--ni-2) rgba(0, 0, 0, 0.25)
+      filter: var(
+        --filter-decorative-shadow,
+        drop-shadow(
+          var(--ni-1) var(--ni-1) var(--ni-2) rgba(0, 0, 0, 0.25)
+        )
       );
     }
 
@@ -222,11 +225,20 @@
       width: 100%;
       height: 75%;
 
-      background: linear-gradient(
-        180deg,
-        transparent 0%,
-        var(--color-card-cover-shadow, var(--shade-940)) 100%
+      background: var(
+        --background-card-cover-overlay,
+        linear-gradient(
+          180deg,
+          transparent 0%,
+          var(--color-card-cover-shadow, var(--shade-940)) 100%
+        )
       );
+
+      :global(:root[data-reduced-visual-noise]) & {
+        height: 45%;
+        border-top: var(--border-thickness-xxs) solid
+          var(--color-flat-surface-border);
+      }
     }
   }
 </style>

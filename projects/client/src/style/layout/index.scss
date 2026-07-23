@@ -5,7 +5,8 @@
    * Dynamic card size config
    */
   --list-inner-width: calc(
-    100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance)
+    var(--layout-page-width) - 2 * var(--layout-distance-side) -
+      var(--layout-sidebar-distance) - var(--layout-page-scrollbar-width)
   );
   --max-list-item-count: 10;
   --max-list-landscape-item-count: 7;
@@ -145,12 +146,10 @@
   --height-cta-portrait-card: var(--height-portrait-card-sm);
   --height-cta-portrait-card-cover: var(--height-portrait-card-cover);
 
-  --width-cta-activity-card: var(--ni-340);
+  --width-cta-activity-card: var(--width-landscape-card);
   --height-cta-activity-card: var(--height-landscape-card-cover);
 
-  --width-cta-list-placeholder-card: calc(
-    100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance)
-  );
+  --width-cta-list-placeholder-card: var(--list-inner-width);
 
   --min-profile-item-width: var(--ni-80);
   --max-list-profile-item-count: 20;
@@ -159,14 +158,14 @@
     Profile items use gap: 0, so item count and width are calculated
     without subtracting list-gap (unlike media card lists).
   */
-  --list-profile-item-count: clamp(
-    1,
-    round(down, var(--list-inner-width) / var(--min-profile-item-width), 1),
-    var(--max-list-profile-item-count)
-  );
+  --list-profile-item-count: var(--max-list-profile-item-count);
 
-  @supports (-moz-appearance: none) {
-    --list-profile-item-count: var(--max-list-profile-item-count);
+  @supports (width: calc(round(down, 1px / 1px, 1) * 1px)) {
+    --list-profile-item-count: clamp(
+      1,
+      round(down, var(--list-inner-width) / var(--min-profile-item-width), 1),
+      var(--max-list-profile-item-count)
+    );
   }
 
   --width-profile-item: max(
@@ -197,26 +196,28 @@
 
   /*
     The item sequence is: graph (2 slots), cell (1 slot), graph (2 slots), cells.
-    We can't round to the nearest even count, since a count of 4 would show 
+    We can't round to the nearest even count, since a count of 4 would show
     the second graph half-cut, so we skip 4.
   */
-  --pulse-item-max-count: round(
-    down,
-    var(--list-inner-width) / (var(--min-pulse-card-width) + var(--list-gap)),
-    1
-  );
-  --pulse-item-count-corrected: calc(
-    var(--pulse-item-max-count) - clamp(0, var(--pulse-item-max-count) - 3, 1)
-      + clamp(0, var(--pulse-item-max-count) - 4, 1)
-  );
-  --pulse-item-count: clamp(
-    2,
-    var(--pulse-item-count-corrected),
-    var(--max-pulse-item-count)
-  );
+  --pulse-item-count: var(--max-pulse-item-count);
 
-  @supports (-moz-appearance: none) {
-    --pulse-item-count: var(--max-pulse-item-count);
+  @supports (width: calc(round(down, 1px / 1px, 1) * 1px)) {
+    --pulse-item-max-count: round(
+      down,
+      (var(--list-inner-width) + var(--list-gap)) /
+        (var(--min-pulse-card-width) + var(--list-gap)),
+      1
+    );
+    --pulse-item-count-corrected: calc(
+      var(--pulse-item-max-count) -
+        clamp(0, var(--pulse-item-max-count) - 3, 1) +
+        clamp(0, var(--pulse-item-max-count) - 4, 1)
+    );
+    --pulse-item-count: clamp(
+      2,
+      var(--pulse-item-count-corrected),
+      var(--max-pulse-item-count)
+    );
   }
 
   @include dynamic-card-width(
@@ -299,7 +300,7 @@
   --summary-poster-gap: var(--gap-s);
   --summary-poster-width: min(
     calc(
-      100dvw
+      var(--layout-page-width)
         - 2
         * (
         var(--layout-distance-side) + var(--summary-side-action-bar-width)

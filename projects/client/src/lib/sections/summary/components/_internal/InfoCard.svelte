@@ -27,7 +27,7 @@
     box-sizing: border-box;
     padding: var(--ni-20) var(--ni-24);
 
-    background: color-mix(in srgb, var(--color-text-primary) 4%, transparent);
+    background: var(--color-subtle-surface-background);
     border-radius: var(--border-radius-m);
 
     :global(.trakt-spoiler) {
@@ -60,8 +60,16 @@
         );
 
         transform: translateX(-100%);
-        animation: slide calc(5 * var(--transition-increment)) ease-in-out;
+        animation: var(
+          --animation-decorative,
+          slide calc(5 * var(--transition-increment)) ease-in-out
+        );
       }
     }
+  }
+
+  :global(:root[data-reduced-visual-noise])
+    .trakt-info-container[data-variant="highlight"]::before {
+    display: none;
   }
 </style>

@@ -87,7 +87,12 @@
     // glossy highlight, the full hue carries the saturation.
     background: linear-gradient(
       var(--fill-angle),
-      color-mix(in srgb, var(--viz-series) 78%, white) 0%,
+      color-mix(
+          in srgb,
+          var(--viz-series) var(--viz-highlight-mix),
+          white
+        )
+        0%,
       var(--viz-series) 70%
     );
   }

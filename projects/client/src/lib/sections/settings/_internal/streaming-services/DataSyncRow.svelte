@@ -165,12 +165,12 @@
 
     @include for-mouse {
       &:hover {
-        background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+        background: var(--color-subtle-surface-background);
       }
     }
 
     &.is-undone {
-      opacity: 0.6;
+      opacity: var(--opacity-deemphasized, 0.6);
     }
   }
 

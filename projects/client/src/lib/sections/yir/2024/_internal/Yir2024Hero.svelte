@@ -276,4 +276,16 @@
     width: 100%;
     margin-top: var(--ni-16);
   }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .trakt-yir-2024-hero::before {
+      content: none;
+    }
+
+    .yir-2024-huge-label {
+      background: none;
+      color: var(--color-yir-text-primary);
+      -webkit-text-fill-color: currentColor;
+    }
+  }
 </style>

@@ -138,7 +138,10 @@
 
   .yir-calendar-title {
     font-size: var(--ni-40);
-    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2) var(--color-yir-scrim);
+    text-shadow: var(
+      --shadow-decorative-text,
+      var(--ni-1) var(--ni-1) var(--ni-2) var(--color-yir-scrim)
+    );
     margin: 0;
 
     @include for-mobile {
@@ -148,7 +151,10 @@
   }
 
   .yir-calendar-episode {
-    text-shadow: var(--ni-1) var(--ni-1) var(--ni-2) var(--color-yir-scrim);
+    text-shadow: var(
+      --shadow-decorative-text,
+      var(--ni-1) var(--ni-1) var(--ni-2) var(--color-yir-scrim)
+    );
     margin: var(--ni-10) 0 0 0;
     font-size: var(--ni-22);
 
@@ -192,5 +198,40 @@
     font-size: var(--ni-18);
     text-align: start;
     padding-top: 2px;
+  }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .yir-calendar-bg,
+    .yir-calendar-shade {
+      display: none;
+    }
+
+    .yir-calendar-media {
+      box-sizing: border-box;
+      display: inline-block;
+      width: min(var(--ni-520), calc(100% - 2 * var(--ni-24)));
+      padding: var(--ni-24);
+      background: var(--color-yir-poster-surface-raised);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      border-radius: var(--border-radius-l);
+
+      @include for-mobile {
+        width: calc(100% - 2 * var(--ni-16));
+        padding: var(--ni-20);
+      }
+    }
+
+    .yir-calendar-date {
+      padding: var(--ni-12) var(--ni-16);
+      background: var(--color-yir-poster-surface);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      border-radius: var(--border-radius-l);
+    }
+
+    .yir-calendar-icon {
+      opacity: 1;
+    }
   }
 </style>

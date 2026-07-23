@@ -256,11 +256,7 @@
   .sentiment-card {
     border: var(--border-thickness-xxs) solid var(--color-border);
     border-radius: var(--border-radius-m);
-    background: color-mix(
-      in srgb,
-      var(--color-card-background) 80%,
-      transparent
-    );
+    background: var(--color-translucent-card-background);
   }
 
   .metric-row {

@@ -28,7 +28,15 @@
     &:global(:not(:empty):not(:has(*))),
     :global(p:not(button p):not(a p)),
     :global(.trakt-comment p),
-    :global(span:not(button span):not(a span)) {
+    :global(span:not(button span):not(a span)),
+    :global(li),
+    :global(h1),
+    :global(h2),
+    :global(h3),
+    :global(h4),
+    :global(h5),
+    :global(h6),
+    :global(blockquote) {
       transition: var(--transition-increment) ease-in-out;
       transition-property: filter, padding;
     }
@@ -39,7 +47,15 @@
       &:global(:not(:empty):not(:has(*))),
       :global(p:not(button p):not(a p)),
       :global(.trakt-comment p),
-      :global(span:not(button span):not(a span)) {
+      :global(span:not(button span):not(a span)),
+      :global(li),
+      :global(h1),
+      :global(h2),
+      :global(h3),
+      :global(h4),
+      :global(h5),
+      :global(h6),
+      :global(blockquote) {
         pointer-events: none;
 
         @include spoiler-blur();

@@ -106,6 +106,13 @@
         0%,
       var(--color-card-background) 60%
     );
+
+    :global(:root[data-reduced-visual-noise]) & {
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      background-image: none;
+      background-color: var(--color-card-background);
+    }
   }
 
   .banner-icon {

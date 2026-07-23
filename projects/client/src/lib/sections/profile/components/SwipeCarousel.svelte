@@ -112,11 +112,11 @@
     align-items: center;
     justify-content: center;
     color: inherit;
-    opacity: 0.6;
+    opacity: var(--opacity-deemphasized, 0.6);
     transition: opacity var(--transition-increment) ease-in-out;
 
     &:disabled {
-      opacity: 0.2;
+      opacity: var(--opacity-faint-indicator, 0.2);
       cursor: default;
     }
 

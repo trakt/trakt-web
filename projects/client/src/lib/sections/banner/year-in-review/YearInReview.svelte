@@ -120,4 +120,13 @@
       line-height: var(--font-size-tag);
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-year-in-review {
+    :global(.trakt-review-content) {
+      background: var(--color-review-base-deep);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      box-shadow: none;
+    }
+  }
 </style>

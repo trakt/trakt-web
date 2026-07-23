@@ -21,18 +21,23 @@
 
     // Inviting purple gradient + soft glow instead of the flat red - the upsell
     // should feel aspirational, not like a paywall.
-    background: linear-gradient(
-      135deg,
-      var(--purple-400),
-      var(--purple-600)
-    );
+    background: var(--background-vip-badge);
     color: var(--color-foreground-vip-badge);
-    box-shadow: 0 var(--ni-2) var(--ni-12)
-      color-mix(in srgb, var(--purple-500) 45%, transparent);
+    box-shadow: var(
+      --shadow-decorative-surface,
+      0 var(--ni-2) var(--ni-12)
+        color-mix(in srgb, var(--purple-500) 45%, transparent)
+    );
 
     p {
       font-weight: 700;
       white-space: nowrap;
+    }
+
+    :global(:root[data-reduced-visual-noise]) & {
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      box-shadow: none;
     }
   }
 </style>

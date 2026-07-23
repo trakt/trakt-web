@@ -129,7 +129,7 @@
     background-color: var(--color-modal-background);
     border-radius: var(--border-radius-l);
     box-shadow: var(--shadow-raised);
-    backdrop-filter: blur(var(--ni-16));
+    backdrop-filter: var(--filter-surface-blur, blur(var(--ni-16)));
 
     margin-bottom: var(--ni-24);
 
@@ -141,6 +141,20 @@
 
     &[data-variant="error"] {
       border: var(--ni-1) solid var(--red-500);
+      box-shadow: var(
+        --shadow-decorative-bordered-surface,
+        var(--shadow-raised)
+      );
+    }
+
+    :global(:root[data-reduced-visual-noise]) & {
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      box-shadow: none;
+
+      &[data-variant="error"] {
+        border-color: var(--red-500);
+      }
     }
 
     @include for-tablet-sm-and-below {

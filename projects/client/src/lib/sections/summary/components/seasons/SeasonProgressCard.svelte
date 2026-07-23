@@ -129,7 +129,13 @@
     position: relative;
     overflow: hidden;
     border-radius: var(--border-radius-s);
-    background: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+    background: var(
+      --color-skeleton-background,
+      color-mix(in srgb, var(--color-text-primary) 8%, transparent)
+    );
+    outline: var(--border-thickness-xxs) solid
+      var(--color-skeleton-outline, transparent);
+    outline-offset: calc(-1 * var(--border-thickness-xxs));
   }
 
   .skeleton::after {
@@ -144,7 +150,10 @@
 
     transform: translateX(100%);
 
-    animation: slide calc(10 * var(--transition-increment)) infinite;
+    animation: var(
+      --animation-decorative,
+      slide calc(10 * var(--transition-increment)) infinite
+    );
 
     background: linear-gradient(
       110deg,

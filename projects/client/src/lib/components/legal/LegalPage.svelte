@@ -74,7 +74,10 @@
   .legal-summary {
     background-color: var(--color-card-background);
     border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-base);
+    box-shadow: var(
+      --shadow-decorative-bordered-surface,
+      var(--shadow-base)
+    );
     border-radius: var(--border-radius-s);
     padding: var(--gap-l);
     margin: var(--gap-xl) 0;

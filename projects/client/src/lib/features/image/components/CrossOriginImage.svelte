@@ -64,5 +64,9 @@
 
   img.image-placeholder {
     background-color: var(--shade-800);
+
+    :global(:root[data-reduced-visual-noise]) & {
+      visibility: hidden;
+    }
   }
 </style>

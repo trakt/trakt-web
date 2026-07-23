@@ -88,4 +88,19 @@
       height: 100%;
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .trakt-stream-on-overlay::before {
+      background: none;
+    }
+
+    .trakt-stream-on-source {
+      margin-top: var(--ni-8);
+      padding: var(--ni-6) var(--ni-10);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      border-radius: var(--border-radius-m);
+      background: var(--shade-900);
+    }
+  }
 </style>

@@ -115,7 +115,12 @@
 
     &[disabled] {
       cursor: not-allowed;
-      opacity: 0.3;
+      opacity: var(--opacity-disabled-control, 0.3);
+    }
+
+    &:focus-visible {
+      outline: var(--border-thickness-xs) solid var(--color-focus-ring);
+      outline-offset: var(--ni-2);
     }
 
     &:not(:disabled) {
@@ -186,7 +191,7 @@
     padding: var(--list-padding);
 
     border-radius: var(--border-radius-m);
-    background-color: var(--shade-10);
+    background-color: var(--color-menu-background);
 
     position: absolute;
     box-shadow: var(--shadow-menu);

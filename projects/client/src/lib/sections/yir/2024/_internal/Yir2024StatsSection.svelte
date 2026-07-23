@@ -544,4 +544,16 @@
       font-weight: inherit;
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .yir-2024-stats-panel {
+      box-sizing: border-box;
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+    }
+
+    .yir-2024-stats-watermark-clip {
+      display: none;
+    }
+  }
 </style>

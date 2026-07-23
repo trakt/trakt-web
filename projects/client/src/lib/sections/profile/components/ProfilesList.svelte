@@ -67,9 +67,7 @@
 
 <style>
   .trakt-profiles-list {
-    :global(.trakt-list-item-container) {
-      gap: var(--ni-0);
-    }
+    --list-gap: var(--ni-0);
 
     :global(.trakt-cta-list-card) {
       --height-override-card: var(--height-list);

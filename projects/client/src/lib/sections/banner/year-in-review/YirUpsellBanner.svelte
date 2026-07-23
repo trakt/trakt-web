@@ -87,4 +87,10 @@
       flex-direction: row-reverse;
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-yir-upsell-banner {
+    background: var(--color-review-base-deep);
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-surface-border);
+  }
 </style>

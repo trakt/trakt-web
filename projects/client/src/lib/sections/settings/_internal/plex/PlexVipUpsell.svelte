@@ -39,9 +39,8 @@
     padding: var(--gap-m);
     border-radius: var(--border-radius-l);
 
-    background: color-mix(in srgb, var(--purple-500) 14%, transparent);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--purple-500) 45%, transparent);
+    background: var(--color-accent-surface-background);
+    border: var(--ni-1) solid var(--color-accent-surface-border);
   }
 
   .upsell-main {
@@ -63,9 +62,8 @@
     border-radius: var(--border-radius-m);
 
     color: var(--color-foreground);
-    background: color-mix(in srgb, var(--purple-500) 22%, transparent);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--purple-500) 45%, transparent);
+    background: var(--color-accent-cue-background);
+    border: var(--ni-1) solid var(--color-accent-surface-border);
 
     :global(svg) {
       width: auto;
@@ -86,7 +84,7 @@
 
   .upsell-divider {
     height: var(--ni-1);
-    background: color-mix(in srgb, var(--purple-500) 30%, transparent);
+    background: var(--color-accent-divider);
   }
 
   .upsell-cta {

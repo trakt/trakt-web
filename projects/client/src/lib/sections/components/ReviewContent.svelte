@@ -1,5 +1,6 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import type { Snippet } from "svelte";
   import { fade } from "svelte/transition";
 
@@ -15,10 +16,12 @@
     footer: Snippet;
     variant?: "default" | "gradient";
   } & ChildrenProps = $props();
+
+  const { reduceVisualNoise } = useAppearance();
 </script>
 
 <div class="trakt-review-content" data-variant={variant}>
-  {#if coverSrc}
+  {#if coverSrc && !$reduceVisualNoise}
     {#key coverSrc}
       <div
         class="trakt-review-content-cover-image"
@@ -102,6 +105,13 @@
       object-position: center;
       opacity: 0.2;
     }
+  }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-review-content {
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-surface-border);
+    background: var(--color-review-base);
+    box-shadow: none;
   }
 
   .trakt-review-content-header,

@@ -90,4 +90,15 @@
       }
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) cta-card-content {
+    :global(.trakt-cta-container) {
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+
+      &::after {
+        background: var(--color-card-background);
+      }
+    }
+  }
 </style>

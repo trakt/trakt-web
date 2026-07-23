@@ -1,5 +1,6 @@
 <script lang="ts">
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
 
@@ -8,6 +9,8 @@
     src,
     colors,
   }: { type: MediaType; src: string; colors?: [string, string] } = $props();
+
+  const { reduceVisualNoise } = useAppearance();
 </script>
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
@@ -17,11 +20,13 @@
 <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
   <CoverImageSetter src={null} {type} />
 
-  <div
-    class="trakt-media-summary-spotlight-gradient"
-    style="--trakt-cover-primary-color: {colors?.at(0) ??
-      'var(--color-background-purple)'};"
-  ></div>
+  {#if !$reduceVisualNoise}
+    <div
+      class="trakt-media-summary-spotlight-gradient"
+      style="--trakt-cover-primary-color: {colors?.at(0) ??
+        'var(--color-background-purple)'};"
+    ></div>
+  {/if}
 </RenderFor>
 
 <style>

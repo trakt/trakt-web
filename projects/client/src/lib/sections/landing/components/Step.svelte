@@ -59,6 +59,11 @@
     font-size: var(--ni-96);
   }
 
+  :global(:root[data-reduced-visual-noise])
+    .trakt-landing-step-label-shadow {
+    display: none;
+  }
+
   .trakt-landing-step-description {
     max-width: var(--ni-320);
     text-align: center;

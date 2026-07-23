@@ -45,6 +45,10 @@
       rgba(19, 21, 23, 0.64) 100%
     );
 
+    :global(:root[data-reduced-visual-noise]) & {
+      background: #131517;
+    }
+
     :global(svg) {
       max-width: 100vw;
       max-height: 100vh;

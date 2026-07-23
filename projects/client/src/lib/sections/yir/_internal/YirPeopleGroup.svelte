@@ -283,7 +283,10 @@
     @include for-mouse {
       &:hover {
         .yir-headshot {
-          box-shadow: 0 0 var(--ni-20) var(--color-yir-accent);
+          box-shadow: var(
+            --shadow-decorative-surface,
+            0 0 var(--ni-20) var(--color-yir-accent)
+          );
 
           &::after {
             border-color: var(--color-yir-accent);
@@ -317,7 +320,10 @@
     font-weight: bold;
     font-size: var(--ni-12);
     z-index: 2;
-    text-shadow: 0 var(--ni-1) var(--ni-2) var(--color-yir-scrim);
+    text-shadow: var(
+      --shadow-decorative-text,
+      0 var(--ni-1) var(--ni-2) var(--color-yir-scrim)
+    );
   }
 
   .yir-headshot {
@@ -393,5 +399,25 @@
 
   .yir-episode-count {
     font-style: italic;
+  }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .yir-people-loading {
+      opacity: var(--opacity-deemphasized);
+    }
+
+    .yir-people-wrapper:hover
+      :global(.trakt-tooltip-trigger:not(:hover) .yir-person) {
+      opacity: 1;
+    }
+
+    .yir-rank {
+      padding: var(--ni-2) var(--ni-6);
+      background: var(--color-yir-surface-raised);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      border-radius: var(--border-radius-m);
+      text-shadow: none;
+    }
   }
 </style>

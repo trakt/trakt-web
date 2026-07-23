@@ -71,6 +71,25 @@
     pointer-events: none;
   }
 
+  :global(:root[data-reduced-visual-noise]) {
+    .trakt-tv-time-notice {
+      border-color: var(--color-flat-surface-border);
+      box-shadow: none;
+    }
+
+    .tv-time-glow {
+      display: none;
+    }
+
+    .tv-time-badge {
+      background: color-mix(
+        in srgb,
+        var(--purple-500) 30%,
+        var(--color-card-background)
+      );
+    }
+  }
+
   .tv-time-content {
     position: relative;
 

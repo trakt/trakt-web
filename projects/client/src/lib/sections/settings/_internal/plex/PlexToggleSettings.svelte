@@ -89,10 +89,19 @@
   }
 
   .skeleton {
-    background-color: color-mix(in srgb, var(--color-border) 80%, transparent);
+    background-color: var(
+      --color-skeleton-background,
+      color-mix(in srgb, var(--color-border) 80%, transparent)
+    );
     border-radius: var(--border-radius-s);
-    animation: pulse calc(5 * var(--transition-increment)) ease-in-out infinite
-      alternate;
+    outline: var(--border-thickness-xxs) solid
+      var(--color-skeleton-outline, transparent);
+    outline-offset: calc(-1 * var(--border-thickness-xxs));
+    animation: var(
+      --animation-decorative,
+      pulse calc(5 * var(--transition-increment)) ease-in-out infinite
+        alternate
+    );
   }
 
   .skeleton-icon {

@@ -107,20 +107,16 @@
 
       @include for-mouse {
         &:hover:not([disabled]) {
-          background: color-mix(
-            in srgb,
-            var(--color-foreground) 5%,
-            transparent
-          );
+          background: var(--color-subtle-surface-background);
         }
       }
 
       &:active:not([disabled]) {
-        background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+        background: var(--color-muted-surface-background);
       }
 
       &[disabled] {
-        opacity: 0.5;
+        opacity: var(--opacity-disabled-control, 0.5);
         cursor: not-allowed;
         pointer-events: none;
       }
@@ -132,7 +128,9 @@
     width: var(--ni-36);
     height: var(--ni-36);
     border-radius: var(--border-radius-m);
-    background: color-mix(in srgb, var(--purple-500) 15%, transparent);
+    background: var(--color-accent-icon-background);
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-border-if-reduced, transparent);
     color: var(--purple-500);
     display: flex;
     align-items: center;
@@ -182,7 +180,7 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    opacity: 0.35;
+    opacity: var(--opacity-deemphasized, 0.35);
     color: var(--color-text-secondary);
   }
 </style>

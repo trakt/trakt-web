@@ -48,10 +48,10 @@
     --column-count: #{$columnCount};
 
     --total-side-spacing: calc(
-      var(--layout-distance-side) * 2 + var(--layout-scrollbar-width) +
+      var(--layout-distance-side) * 2 + var(--layout-page-scrollbar-width) +
         var(--layout-sidebar-distance)
     );
-    --container-width: calc(100dvw - var(--total-side-spacing));
+    --container-width: calc(var(--layout-page-width) - var(--total-side-spacing));
 
     --total-gap-width: calc(#{$gap} * (var(--column-count) - 1));
     --available-width: calc(var(--container-width) - var(--total-gap-width));
