@@ -9869,6 +9869,117 @@
     "notice_delete_account_vip": {
       "default": "Since you're an active Trakt VIP, please <a>cancel your VIP membership</a> before deleting your account.",
       "description": "Info banner shown in the delete-account settings section when the user still has an active, cancellable VIP subscription. The <a> tag wraps the link to the VIP management page."
+    },
+    "action_toast_added_to_watchlist": {
+      "default": "<b>{title}</b> was added to your watchlist",
+      "description": "Confirmation toast shown after adding a title to the watchlist. {title} is the movie or show title.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "action_toast_added_to_watchlist_generic": {
+      "default": "Added to your watchlist",
+      "description": "Confirmation toast shown after adding to the watchlist when no single title is available (e.g. bulk actions)."
+    },
+    "action_toast_removed_from_watchlist": {
+      "default": "<b>{title}</b> was removed from your watchlist",
+      "description": "Confirmation toast shown after removing a title from the watchlist. {title} is the movie or show title.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "action_toast_removed_from_watchlist_generic": {
+      "default": "Removed from your watchlist",
+      "description": "Confirmation toast shown after removing from the watchlist when no single title is available."
+    },
+    "action_toast_action_change_list": {
+      "default": "Change list",
+      "description": "Inline link in the watchlist confirmation toast that opens the manage-lists drawer to move the item to a different list."
+    },
+    "action_toast_label_change_list": {
+      "default": "Change the lists {title} belongs to",
+      "description": "Accessible label for the 'change list' link in the watchlist confirmation toast. {title} is the movie or show title.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "action_toast_label_undo": {
+      "default": "Undo the last change",
+      "description": "Accessible label for the 'Undo' button in an action-confirmation toast."
+    },
+    "action_toast_added_to_favorites": {
+      "default": "<b>{title}</b> was added to your favorites",
+      "description": "Confirmation toast shown after adding a title to favorites. {title} is the movie or show title.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "action_toast_removed_from_favorites": {
+      "default": "<b>{title}</b> was removed from your favorites",
+      "description": "Confirmation toast shown after removing a title from favorites. {title} is the movie or show title.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "action_toast_rated": {
+      "default": "You rated <b>{title}</b> {rating}/10",
+      "description": "Confirmation toast shown after rating a title. {title} is the movie or show title, {rating} is the score out of 10.",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number"
+        }
+      }
+    },
+    "action_toast_rated_generic": {
+      "default": "Rated {rating}/10",
+      "description": "Confirmation toast shown after rating when no single title is available. {rating} is the score out of 10.",
+      "variables": {
+        "rating": {
+          "type": "number"
+        }
+      }
+    },
+    "action_toast_rating_removed": {
+      "default": "Rating removed",
+      "description": "Confirmation toast shown after removing a rating."
+    },
+    "text_marked_by_mistake": {
+      "default": "Marked by mistake?",
+      "description": "Label preceding the Undo link in the rate-now prompt, offering to remove an item that was just marked as watched."
+    },
+    "action_toast_removed_from_history": {
+      "default": "<b>{title}</b> was removed from your history",
+      "description": "Confirmation toast shown after removing a title from watch history. {title} is the movie, show, or episode title.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "action_toast_removed_from_history_generic": {
+      "default": "Removed from your history",
+      "description": "Confirmation toast shown after removing from watch history when no single title is available."
+    },
+    "preview_feature_title_action_confirmations": {
+      "default": "Action confirmations",
+      "description": "Title for the action-confirmations preview feature toggle in settings."
+    },
+    "preview_feature_description_action_confirmations": {
+      "default": "Show a confirmation toast with a quick undo when you add, remove, rate, or mark something as watched.",
+      "description": "Description for the action-confirmations preview feature toggle in settings."
     }
   }
 }

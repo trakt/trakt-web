@@ -6,6 +6,7 @@
   import CoverImage from "$lib/components/background/CoverImage.svelte";
   import CoverProvider from "$lib/components/background/CoverProvider.svelte";
   import ListScrollHistoryProvider from "$lib/components/lists/section-list/ListScrollHistoryProvider.svelte";
+  import ActionToastHost from "$lib/features/action-toast/ActionToastHost.svelte";
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
@@ -37,6 +38,7 @@
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
   import WSInvalidator from "$lib/features/websocket/WSInvalidator.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import ManageListsDrawerProvider from "$lib/sections/components/lists-drawer/ManageListsDrawerProvider.svelte";
   import MarkAsWatchedDrawerProvider from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedDrawerProvider.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
@@ -175,6 +177,8 @@
                                 <ToastProvider>
                                   <ConfirmationProvider>
                                     <MarkAsWatchedDrawerProvider />
+                                    <ManageListsDrawerProvider />
+                                    <ActionToastHost />
                                     <AddNoteDrawerProvider />
                                     <ReportDialogProvider />
                                     <CoverImage />

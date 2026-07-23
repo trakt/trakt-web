@@ -23,6 +23,9 @@
 
   const type = $derived(props.type);
   const id = $derived(props.media.id);
+  // Seasons have no title of their own, so the toast falls back to a generic
+  // "Rated {rating}/10" message.
+  const title = $derived("title" in props.media ? props.media.title : undefined);
 
   const {
     pendingRating,
@@ -35,6 +38,7 @@
     useRatings({
       type,
       id,
+      title,
     }),
   );
 

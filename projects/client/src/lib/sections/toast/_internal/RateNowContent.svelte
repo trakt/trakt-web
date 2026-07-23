@@ -7,6 +7,7 @@
   import { m } from "$lib/features/i18n/messages";
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import { useLastWatched } from "$lib/features/toast/useLastWatched";
+  import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
   import { shuffle } from "$lib/utils/array/shuffle";
   import { time } from "$lib/utils/timing/time.ts";
@@ -41,8 +42,17 @@
   const title = $derived(getToastTitle(lastWatched));
   const ratingPrompt = $derived(shuffle(ratingPrompts).at(0));
 
+  // The prompt only appears right after marking as watched, so it doubles as
+  // the "marked by mistake?" escape hatch - undoing removes it from history.
+  const { removeWatched } = $derived(useMarkAsWatched(lastWatched));
+
   const handleDismiss = () => {
     dismiss(lastWatched.media.id, lastWatched.type, "manual");
+  };
+
+  const handleMarkedByMistake = () => {
+    void removeWatched();
+    handleDismiss();
   };
 </script>
 
@@ -90,6 +100,18 @@
         style="minimal"
         onclick={() => (interactionCounter += 1)}
       />
+    </div>
+
+    <div class="trakt-marked-by-mistake">
+      <span class="secondary">{m.text_marked_by_mistake()}</span>
+      <button
+        type="button"
+        class="mistake-undo-link"
+        aria-label={m.action_toast_label_undo()}
+        onclick={handleMarkedByMistake}
+      >
+        {m.button_text_undo()}
+      </button>
     </div>
   </div>
 </div>
@@ -140,6 +162,35 @@
 
     :global(.is-current-rating svg) {
       --icon-fill-color: var(--color-foreground);
+    }
+  }
+
+  .trakt-marked-by-mistake {
+    display: flex;
+    align-items: baseline;
+    gap: var(--gap-xxs);
+
+    font-size: var(--font-size-text-small);
+  }
+
+  .mistake-undo-link {
+    all: unset;
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    color: var(--color-link-active);
+    font-weight: 600;
+
+    text-decoration-line: underline;
+    text-underline-offset: var(--ni-2);
+    text-decoration-thickness: var(--border-thickness-xs);
+
+    border-radius: var(--border-radius-xs);
+
+    &:focus-visible {
+      outline: var(--border-thickness-xs) solid var(--color-link-active);
+      outline-offset: var(--ni-2);
     }
   }
 </style>
