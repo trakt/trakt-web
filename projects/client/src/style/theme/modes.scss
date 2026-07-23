@@ -43,6 +43,7 @@
   );
   --color-foreground-navbar: var(--color-foreground);
   --color-border: var(--shade-200);
+  --color-snackbar-action-stroke: var(--purple-500);
   --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*
@@ -543,6 +544,7 @@
   );
   --color-foreground-navbar: var(--shade-10);
   --color-border: var(--shade-700);
+  --color-snackbar-action-stroke: var(--purple-300);
   --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*

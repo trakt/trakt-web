@@ -4,6 +4,8 @@ import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
+import { lastActionToast } from '$test/beds/action-toast/lastActionToast.ts';
+import { captureRequests } from '$test/beds/request/captureRequests.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { firstValueFrom } from 'rxjs';
@@ -12,12 +14,18 @@ import { useWatchlist } from './useWatchlist.ts';
 
 vi.mock('$lib/stores/useInvalidator.ts');
 
+const { notify } = vi.hoisted(() => ({ notify: vi.fn() }));
+vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
+  useActionToast: () => ({ notify, dismiss: vi.fn() }),
+}));
+
 describe('useWatchlist', () => {
   const invalidate = vi.fn(function () {});
 
   beforeEach(() => {
     setAuthorization(true);
     invalidate.mockReset();
+    notify.mockReset();
 
     (useInvalidator as Mock)
       .mockReturnValueOnce({ invalidate }) // 1: in useWatchlist
@@ -132,6 +140,43 @@ describe('useWatchlist', () => {
       );
 
       expect(await waitForEmission(isWatchlisted, 2)).toBe(false);
+    });
+  });
+
+  describe('lists drawer', () => {
+    it('should NOT raise an action toast when toasts are disabled', async () => {
+      const { addToWatchlist, removeFromWatchlist } = await renderStore(() =>
+        useWatchlist({
+          type: 'movie',
+          media: MovieMatrixMappedMock,
+          isToastEnabled: false,
+        })
+      );
+
+      await addToWatchlist();
+      await removeFromWatchlist();
+
+      expect(notify).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('action confirmation undo', () => {
+    it('should re-add to the watchlist when the removal toast Undo runs', async () => {
+      const { removeFromWatchlist } = await renderStore(() =>
+        useWatchlist({ type: 'movie', media: MovieMatrixMappedMock })
+      );
+
+      const removeRequests = await captureRequests(() => removeFromWatchlist());
+      expect(removeRequests).toContain('POST /sync/watchlist/remove');
+
+      const toast = lastActionToast(notify);
+      expect(toast?.action).toBeDefined();
+
+      const undoRequests = await captureRequests(async () => {
+        await toast?.action?.onAction();
+      });
+      expect(undoRequests).toContain('POST /sync/watchlist');
+      expect(undoRequests).not.toContain('POST /sync/watchlist/remove');
     });
   });
 });

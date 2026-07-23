@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ReleasesCalendarEntry } from "$lib/requests/queries/calendars/releasesCalendarQuery";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
+  import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
@@ -19,8 +19,6 @@
   }: ReleasesCalendarItemProps = $props();
 
   const listTarget = $derived("show" in item ? item.show : item);
-
-  let isListsDrawerOpen = $state(false);
 </script>
 
 {#snippet popupActions()}
@@ -56,7 +54,11 @@
       style="dropdown-item"
       media={listTarget}
       title={listTarget.title}
-      onClick={() => (isListsDrawerOpen = true)}
+      onClick={() =>
+        manageListsDrawerStore.open({
+          media: listTarget,
+          metaInfo: listTarget.title,
+        })}
     />
   </RenderFor>
 {/snippet}
@@ -67,11 +69,3 @@
   source="releases"
   {popupActions}
 />
-
-{#if isListsDrawerOpen}
-  <ListsDrawer
-    media={listTarget}
-    onClose={() => (isListsDrawerOpen = false)}
-    metaInfo={listTarget.title}
-  />
-{/if}

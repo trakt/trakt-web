@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { isToastEnabledForStyle } from "../_internal/isToastEnabledForStyle";
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -18,7 +19,12 @@
     isWatchlisted,
     isQueued,
     removeFromWatchlist,
-  } = $derived(useWatchlist(target));
+  } = $derived(
+    useWatchlist({
+      ...target,
+      isToastEnabled: isToastEnabledForStyle(style),
+    }),
+  );
 
   const { confirm } = useConfirm();
   const confirmRemove = $derived(

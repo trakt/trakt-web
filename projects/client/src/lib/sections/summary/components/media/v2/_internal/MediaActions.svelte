@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
+  import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import TrackAction from "$lib/sections/media-actions/mark-as-watched/TrackAction.svelte";
   import SummaryActionsBar from "../../../_internal/SummaryActionsBar.svelte";
   import BookmarkAction from "./BookmarkAction.svelte";
@@ -8,8 +8,6 @@
   import TrailerButton from "./TrailerButton.svelte";
 
   const { media, title }: { media: MediaEntry; title: string } = $props();
-
-  let isListsDrawerOpen = $state(false);
 
   const targetProps = $derived({
     title: media.title,
@@ -22,7 +20,7 @@
   <MediaPopupActions
     {media}
     {title}
-    onListAction={() => (isListsDrawerOpen = true)}
+    onListAction={() => manageListsDrawerStore.open({ media, title })}
   />
 {/snippet}
 
@@ -31,7 +29,3 @@
   <BookmarkAction {media} />
   <TrailerButton slug={media.slug} trailer={media.trailer} style="action" />
 </SummaryActionsBar>
-
-{#if isListsDrawerOpen}
-  <ListsDrawer onClose={() => (isListsDrawerOpen = false)} {media} {title} />
-{/if}

@@ -9,7 +9,7 @@
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
-  import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
+  import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { useIsRewatching } from "$lib/sections/media-actions/rewatching/useIsRewatching";
@@ -45,7 +45,6 @@
 
   const isSummary = $derived(style === "summary");
 
-  let isListsDrawerOpen = $state(false);
 </script>
 
 {#snippet contextualTag()}
@@ -108,7 +107,8 @@
   {:else}
     <DefaultMediaPopupActions
       {media}
-      onListAction={() => (isListsDrawerOpen = true)}
+      onListAction={() =>
+        manageListsDrawerStore.open({ media, metaInfo: media.title })}
     />
   {/if}
 {/snippet}
@@ -131,14 +131,6 @@
     />
   </trakt-default-media-item>
 </MediaSwipe>
-
-{#if isListsDrawerOpen}
-  <ListsDrawer
-    {media}
-    onClose={() => (isListsDrawerOpen = false)}
-    metaInfo={media.title}
-  />
-{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
