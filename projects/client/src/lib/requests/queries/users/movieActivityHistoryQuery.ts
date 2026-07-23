@@ -18,6 +18,7 @@ type MovieActivityHistoryParams =
     startDate?: Date;
     endDate?: Date;
     id?: number;
+    syncId?: number;
   }
   & ApiParams
   & PaginationParams
@@ -33,7 +34,7 @@ export const MovieActivityHistorySchema = z.object({
 export type MovieActivityHistory = z.infer<typeof MovieActivityHistorySchema>;
 
 export const movieActivityHistoryRequest = (
-  { fetch, slug, startDate, endDate, limit, id, page, filter }:
+  { fetch, slug, startDate, endDate, limit, id, page, filter, syncId }:
     MovieActivityHistoryParams,
 ) => {
   const queryParams = {
@@ -42,6 +43,7 @@ export const movieActivityHistoryRequest = (
     end_at: endDate?.toISOString(),
     limit,
     page,
+    sync_id: syncId,
     ...filter,
   };
 
@@ -76,6 +78,7 @@ export const movieActivityHistoryQuery = defineInfiniteQuery({
     params.page,
     params.id,
     params.slug,
+    params.syncId,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: movieActivityHistoryRequest,

@@ -227,6 +227,37 @@
       "default": "Undone",
       "description": "Shown when a data sync has been undone."
     },
+    "text_history_sync_filter": {
+      "default": "Sync ID {id}",
+      "description": "Subtitle shown in the history page header when the list is scoped to one data sync. {id} is the numeric data sync id.",
+      "variables": {
+        "id": {
+          "type": "number",
+          "description": "The data sync id the history is filtered by.",
+          "required": true
+        }
+      }
+    },
+    "text_history_sync_filter_with_source": {
+      "default": "Sync ID {id} ({source})",
+      "description": "Subtitle shown in the history page header when the list is scoped to one data sync whose source is known. {id} is the numeric data sync id; {source} is the source/service brand name (e.g. Apple TV).",
+      "variables": {
+        "id": {
+          "type": "number",
+          "description": "The data sync id the history is filtered by.",
+          "required": true
+        },
+        "source": {
+          "type": "string",
+          "description": "The data sync source brand name, e.g. Apple TV.",
+          "required": true
+        }
+      }
+    },
+    "link_label_history_all": {
+      "default": "Back to full history",
+      "description": "Accessible label for the history header link that clears the data-sync filter and shows the full history."
+    },
     "header_data_syncs": {
       "default": "Data Syncs",
       "description": "Header for the list of recent data syncs."

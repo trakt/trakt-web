@@ -36,6 +36,7 @@ type RecentlyWatchedListStoreProps =
     limit?: number;
     slug?: string;
     page?: number;
+    syncId?: number;
   }
   & FilterParams
   & (SpecificHistory | MediaHistory);
@@ -48,6 +49,7 @@ function typeToQuery(
     slug: props.slug ?? 'me',
     page: props.page ?? 1,
     filter: props.filter,
+    syncId: props.syncId,
   };
 
   switch (props.type) {

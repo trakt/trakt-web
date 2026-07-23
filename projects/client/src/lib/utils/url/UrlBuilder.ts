@@ -117,6 +117,8 @@ const ogSupportFactory = (username?: string): HttpsUrl | MailToUrl => {
 export const UrlBuilder = {
   history: {
     home: () => '/history',
+    sync: (syncId: number) =>
+      `/history${buildParamString({ sync_id: syncId })}`,
     category: (params: UrlBuilderParams) => {
       return categoryDrilldownFactory('history')(params);
     },

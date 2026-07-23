@@ -8,7 +8,7 @@
   import { toRecentlyWatchedType } from "./_internal/toRecentlyWatchedType";
   import RecentlyWatchedItem from "./RecentlyWatchedItem.svelte";
 
-  const { mode }: { mode?: DiscoverMode } = $props();
+  const { mode, syncId }: { mode?: DiscoverMode; syncId?: number } = $props();
 
   const order = "reverse-chronological" as const;
 
@@ -24,6 +24,7 @@
       slug: "me",
       limit: HISTORY_UPPER_LIMIT,
       filter: $filterMap,
+      syncId,
     }),
   );
 

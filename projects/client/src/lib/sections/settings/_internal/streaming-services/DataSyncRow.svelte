@@ -5,6 +5,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { DataSync } from "$lib/requests/models/DataSync.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import StreamingServiceBadge from "./StreamingServiceBadge.svelte";
   import type { ServiceInfo } from "./toServiceInfo.ts";
   import {
@@ -68,6 +69,8 @@
   });
 
   const hasBreakdown = $derived(groups.length > 0 || flags.length > 0);
+
+  const hasHistory = $derived(toSyncCountLabels(sync.items.history).length > 0);
 </script>
 
 {#snippet pill(label: string, kind: "added" | "flag")}
@@ -138,15 +141,28 @@
         {/if}
       </div>
     {:else}
-      <Button
-        size="small"
-        variant="secondary"
-        color="default"
-        label={m.button_text_undo()}
-        onclick={onUndo}
-      >
-        {m.button_text_undo()}
-      </Button>
+      <div class="actions">
+        {#if hasHistory}
+          <Button
+            size="small"
+            variant="secondary"
+            color="default"
+            label={m.list_title_history()}
+            href={UrlBuilder.history.sync(sync.id)}
+          >
+            {m.list_title_history()}
+          </Button>
+        {/if}
+        <Button
+          size="small"
+          variant="secondary"
+          color="default"
+          label={m.button_text_undo()}
+          onclick={onUndo}
+        >
+          {m.button_text_undo()}
+        </Button>
+      </div>
     {/if}
   </div>
 </div>
@@ -246,6 +262,12 @@
 
   .action {
     flex-shrink: 0;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: var(--ni-8);
   }
 
   .undone-state {
