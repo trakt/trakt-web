@@ -366,9 +366,12 @@
   tbody {
     tr {
       cursor: default;
-      filter: drop-shadow(
-        var(--ni-1) var(--ni-1) var(--ni-4)
-          color-mix(in srgb, var(--color-shadow) 10%, transparent)
+      filter: var(
+        --filter-decorative-shadow,
+        drop-shadow(
+          var(--ni-1) var(--ni-1) var(--ni-4)
+            color-mix(in srgb, var(--color-shadow) 10%, transparent)
+        )
       );
       transition: opacity var(--transition-increment) ease-in-out;
     }

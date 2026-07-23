@@ -182,7 +182,7 @@
 
     &[data-included="false"] {
       p {
-        opacity: 0.55;
+        opacity: var(--opacity-deemphasized, 0.55);
         text-decoration: line-through;
         text-decoration-color: currentColor;
       }

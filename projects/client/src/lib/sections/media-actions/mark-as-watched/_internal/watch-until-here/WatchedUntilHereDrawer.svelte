@@ -256,7 +256,9 @@
 
     padding: var(--ni-12);
     border-radius: var(--border-radius-l);
-    background: var(--color-surface-subtle, transparent);
+    background: var(--color-subtle-surface-background);
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-border-if-reduced, transparent);
   }
 
   .anchor-kind {
@@ -302,7 +304,9 @@
 
     padding: var(--ni-8) var(--ni-12);
     border-radius: var(--border-radius-m);
-    background: var(--color-surface-subtle, transparent);
+    background: var(--color-subtle-surface-background);
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-border-if-reduced, transparent);
 
     :global(.preview-row-tag) {
       flex-shrink: 0;

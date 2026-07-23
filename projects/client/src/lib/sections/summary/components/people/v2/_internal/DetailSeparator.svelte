@@ -6,6 +6,6 @@
     align-self: stretch;
 
     background-color: var(--color-text-secondary);
-    opacity: 0.25;
+    opacity: var(--opacity-subtle-indicator, 0.25);
   }
 </style>

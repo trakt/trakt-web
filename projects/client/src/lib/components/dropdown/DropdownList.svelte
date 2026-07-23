@@ -260,7 +260,7 @@
     padding: var(--list-padding);
 
     border-radius: var(--border-radius-m);
-    background-color: var(--shade-10);
+    background-color: var(--color-menu-background);
     box-shadow: var(--shadow-menu);
 
     div.spacer {
@@ -285,7 +285,7 @@
         &::-webkit-scrollbar-thumb {
           background-color: var(--shade-300);
           border-radius: var(--border-radius-xs);
-          backdrop-filter: blur(var(--ni-4));
+          backdrop-filter: var(--filter-surface-blur, blur(var(--ni-4)));
         }
       }
     }

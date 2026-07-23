@@ -139,7 +139,7 @@
     // Hovering one segment dims the rest so the focused share stands out.
     @include for-mouse {
       &:hover .segment:not(:hover) {
-        opacity: 0.45;
+        opacity: var(--viz-dim-opacity);
       }
     }
   }
@@ -161,7 +161,12 @@
     // Glossy sheen -> full hue, opaque, matching the rest of the suite.
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--seg-color) 80%, white) 0%,
+      color-mix(
+          in srgb,
+          var(--seg-color) var(--viz-segment-highlight-mix),
+          white
+        )
+        0%,
       var(--seg-color) 70%
     );
     // Square inner seams so the run reads as one bar; only the ends round.

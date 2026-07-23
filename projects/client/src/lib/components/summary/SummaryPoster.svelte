@@ -127,6 +127,12 @@
     }
   }
 
+  :global(:root[data-reduced-visual-noise]) .has-active-overlay:hover {
+    :global(img) {
+      filter: none;
+    }
+  }
+
   .trakt-summary-poster-tags {
     display: flex;
     align-items: center;

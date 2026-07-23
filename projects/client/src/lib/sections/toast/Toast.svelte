@@ -50,7 +50,10 @@
     align-items: center;
     gap: var(--toast-gap);
 
-    box-shadow: var(--shadow-raised);
+    box-shadow: var(
+      --shadow-decorative-bordered-surface,
+      var(--shadow-raised)
+    );
 
     background-color: var(--color-toast-background);
     border: var(--border-thickness-xxs) solid var(--color-toast-border);
@@ -58,6 +61,6 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: padding, gap;
 
-    backdrop-filter: blur(var(--ni-16));
+    backdrop-filter: var(--filter-surface-blur, blur(var(--ni-16)));
   }
 </style>

@@ -31,7 +31,10 @@
     padding: var(--ni-8) var(--ni-12);
     color: var(--color-yir-text-primary);
     font-family: inherit;
-    box-shadow: 0 var(--ni-2) var(--ni-8) var(--color-yir-scrim);
+    box-shadow: var(
+      --shadow-decorative-bordered-surface,
+      0 var(--ni-2) var(--ni-8) var(--color-yir-scrim)
+    );
     text-align: center;
     white-space: nowrap;
   }

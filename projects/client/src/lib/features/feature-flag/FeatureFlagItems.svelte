@@ -104,7 +104,9 @@
       width: var(--ni-36);
       height: var(--ni-36);
       border-radius: var(--border-radius-m);
-      background: color-mix(in srgb, var(--purple-500) 15%, transparent);
+      background: var(--color-accent-icon-background);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-border-if-reduced, transparent);
       color: var(--purple-500);
 
       :global(svg) {
@@ -139,7 +141,7 @@
       justify-content: center;
       width: var(--ni-28);
       height: var(--ni-28);
-      opacity: 0.35;
+      opacity: var(--opacity-deemphasized, 0.35);
       color: var(--color-text-secondary);
       text-decoration: none;
 

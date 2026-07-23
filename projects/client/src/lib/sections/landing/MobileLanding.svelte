@@ -1,11 +1,14 @@
 <script lang="ts">
   import Logo from "$lib/components/logo/Logo.svelte";
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import JoinForFree from "./components/JoinForFree.svelte";
   import LoginButton from "./components/LoginButton.svelte";
   import Steps from "./components/Steps.svelte";
   import TraktApps from "./components/TraktApps.svelte";
 
   import popcorn from "./assets/popcorn.png";
+
+  const { reduceVisualNoise } = useAppearance();
 </script>
 
 <div class="trakt-landing">
@@ -22,7 +25,9 @@
 
   <TraktApps />
 
-  <img src={popcorn} class="trakt-popcorn" alt="" />
+  {#if !$reduceVisualNoise}
+    <img src={popcorn} class="trakt-popcorn" alt="" />
+  {/if}
 </div>
 
 <style>
@@ -99,5 +104,11 @@
 
     width: var(--ni-520);
     height: var(--popcorn-height);
+  }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-landing {
+    --popcorn-height: var(--ni-0);
+
+    background-image: none;
   }
 </style>

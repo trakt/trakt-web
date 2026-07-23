@@ -243,7 +243,7 @@
 
   .trakt-match-drawer-suffix {
     font-size: var(--font-size-separator);
-    opacity: 0.6;
+    opacity: var(--opacity-deemphasized, 0.6);
     margin-inline-start: var(--ni-2);
   }
 
@@ -355,7 +355,7 @@
   }
 
   .trakt-match-drawer-chip[data-tier="common"] {
-    opacity: 0.75;
+    opacity: var(--opacity-deemphasized, 0.75);
   }
 
   .trakt-match-drawer-chip[data-tier="notable"] {
@@ -376,16 +376,35 @@
       color-mix(in srgb, var(--chip-unicorn) 14%, transparent)
     );
     border-color: color-mix(in srgb, var(--chip-unicorn) 60%, transparent);
-    box-shadow:
+    box-shadow: var(
+      --shadow-decorative-bordered-surface,
       0 0 0 var(--ni-1) color-mix(in srgb, var(--chip-unicorn) 28%, transparent),
       0 var(--ni-2) var(--ni-14)
-        color-mix(in srgb, var(--chip-unicorn) 40%, transparent);
+        color-mix(in srgb, var(--chip-unicorn) 40%, transparent)
+    );
     font-weight: 600;
 
     .trakt-match-drawer-sparkle {
       color: var(--chip-unicorn);
       opacity: 1;
     }
+  }
+
+  :global(:root[data-reduced-visual-noise])
+    .trakt-match-drawer-chip[data-tier="unicorn"] {
+    background: color-mix(
+      in srgb,
+      var(--chip-unicorn) 18%,
+      var(--color-card-background)
+    );
+    border-color: var(--color-flat-surface-border);
+    box-shadow: none;
+  }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-match-drawer-chip {
+    background: var(--color-subtle-surface-background);
+    border-color: var(--color-flat-surface-border);
+    opacity: 1;
   }
 
   .trakt-match-drawer-sparkle {

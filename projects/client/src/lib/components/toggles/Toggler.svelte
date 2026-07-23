@@ -139,6 +139,8 @@
     gap: var(--gap-xxs);
 
     border-radius: var(--border-radius-xxl);
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-border-if-reduced, transparent);
     padding: var(--ni-4);
     background-color: var(--toggler-background-color);
 

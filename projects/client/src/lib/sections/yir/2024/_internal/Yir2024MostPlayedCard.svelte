@@ -273,8 +273,11 @@
     // Matches the summary-page poster corner (SummaryPoster.svelte), shared
     // with the highest-rated section poster.
     border-radius: var(--border-radius-xxl);
-    box-shadow: 0 var(--ni-16) var(--ni-48)
-      color-mix(in srgb, var(--shade-1000) 50%, transparent);
+    box-shadow: var(
+      --shadow-decorative-surface,
+      0 var(--ni-16) var(--ni-48)
+        color-mix(in srgb, var(--shade-1000) 50%, transparent)
+    );
     transition: transform 0.25s var(--transition-increment) ease-out;
 
     &:hover {
@@ -294,6 +297,31 @@
 
     @include for-mobile {
       width: var(--ni-160);
+    }
+  }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .trakt-yir-2024-most-played-card {
+      box-sizing: border-box;
+      background: var(--color-yir-poster-surface-raised);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+    }
+
+    .yir-2024-most-played-cover,
+    .yir-2024-most-played-shade {
+      display: none;
+    }
+
+    .yir-2024-most-played-rank {
+      color: var(--shade-300);
+    }
+
+    .yir-2024-most-played-poster {
+      box-sizing: border-box;
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      box-shadow: none;
     }
   }
 </style>

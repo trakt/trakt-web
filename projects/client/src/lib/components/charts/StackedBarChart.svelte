@@ -280,7 +280,7 @@
       height var(--viz-morph-duration) ease,
       fill-opacity var(--transition-increment) ease,
       filter var(--transition-increment) ease;
-    fill-opacity: 0.78;
+    fill-opacity: var(--viz-stack-rest-opacity);
   }
 
   .segment-pattern {

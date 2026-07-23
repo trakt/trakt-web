@@ -23,10 +23,18 @@
     height: var(--skeleton-height, var(--ni-16));
 
     border-radius: var(--skeleton-radius, var(--border-radius-s));
-    background-color: color-mix(in srgb, var(--color-border) 80%, transparent);
+    outline: var(--border-thickness-xxs) solid var(--color-skeleton-outline);
+    outline-offset: calc(-1 * var(--border-thickness-xxs));
+    background-color: var(
+      --color-skeleton-background,
+      color-mix(in srgb, var(--color-border) 80%, transparent)
+    );
 
-    animation: pulse calc(5 * var(--transition-increment)) ease-in-out infinite
-      alternate;
+    animation: var(
+      --animation-decorative,
+      pulse calc(5 * var(--transition-increment)) ease-in-out infinite
+        alternate
+    );
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -103,4 +103,14 @@
       font-size: var(--ni-28);
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-welcome-outro {
+    &::before {
+      background: var(--color-flat-surface-border);
+    }
+
+    &::after {
+      display: none;
+    }
+  }
 </style>

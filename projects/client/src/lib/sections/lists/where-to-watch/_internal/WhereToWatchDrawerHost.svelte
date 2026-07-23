@@ -152,9 +152,34 @@
   }
 
   .trakt-service-countries {
+    --where-to-watch-item-count: 2;
+    --where-to-watch-rail-width: calc(100cqi - 2 * var(--ni-2));
+    --width-where-to-watch-item: calc(
+      (
+          var(--where-to-watch-rail-width) -
+            (var(--where-to-watch-item-count) - 1) *
+            var(--list-gap)
+        ) /
+        var(--where-to-watch-item-count)
+    );
+
     flex: 1;
     min-width: 0;
     align-self: center;
     height: var(--height-where-to-watch-list);
+    container-type: inline-size;
+
+    @supports (width: calc(round(down, 1px / 1px, 1) * 1px)) {
+      --where-to-watch-item-count: clamp(
+        1,
+        round(
+          down,
+          (var(--where-to-watch-rail-width) + var(--list-gap)) /
+            (var(--ni-96) + var(--list-gap)),
+          1
+        ),
+        5
+      );
+    }
   }
 </style>

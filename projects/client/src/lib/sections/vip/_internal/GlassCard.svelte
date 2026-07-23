@@ -15,18 +15,25 @@
 
     padding: var(--ni-24);
 
-    backdrop-filter: blur(var(--ni-24));
+    backdrop-filter: var(--filter-surface-blur, blur(var(--ni-24)));
     background: var(--background-vip-glass-card);
 
     border: var(--ni-1) solid
-      color-mix(in srgb, var(--shade-10) 15%, transparent);
+      var(
+        --color-flat-border-if-reduced,
+        color-mix(in srgb, var(--shade-10) 15%, transparent)
+      );
     border-radius: var(--border-radius-xl);
 
-    box-shadow: var(--shadow-base);
+    box-shadow: var(
+      --shadow-decorative-bordered-surface,
+      var(--shadow-base)
+    );
 
     &[data-variant="plain"] {
       border: none;
-      backdrop-filter: blur(var(--ni-10));
+      box-shadow: var(--shadow-base);
+      backdrop-filter: var(--filter-surface-blur, blur(var(--ni-10)));
       background: var(--background-vip-plain-glass-card);
       padding: var(--ni-16);
     }

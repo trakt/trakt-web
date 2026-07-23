@@ -167,7 +167,10 @@
     padding-inline: var(--ni-20);
     padding-block: calc(var(--ni-20) * 1.3);
     border-radius: var(--border-radius-l);
-    box-shadow: 0 0 var(--ni-52) var(--color-yir-poster-surface);
+    box-shadow: var(
+      --shadow-decorative-surface,
+      0 0 var(--ni-52) var(--color-yir-poster-surface)
+    );
 
     @include for-mobile {
       max-width: 80%;
@@ -315,8 +318,11 @@
     .yir-display-name :global(.trakt-link),
     .yir-year,
     .yir-subtitle {
-      text-shadow: 0 var(--ni-2) var(--ni-16)
-        color-mix(in srgb, var(--shade-1000) 30%, transparent);
+      text-shadow: var(
+        --shadow-decorative-text,
+        0 var(--ni-2) var(--ni-16)
+          color-mix(in srgb, var(--shade-1000) 30%, transparent)
+      );
     }
 
     .yir-year {
@@ -337,6 +343,35 @@
       @include for-mobile {
         font-size: var(--ni-18);
       }
+    }
+  }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .yir-cover-bg {
+      display: none;
+    }
+
+    .yir-titles,
+    .is-all-time .yir-titles {
+      box-sizing: border-box;
+      max-width: calc(100% - 2 * var(--ni-24));
+      padding: var(--ni-24);
+      background: var(--color-yir-poster-surface-raised);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      box-shadow: none;
+
+      @include for-mobile {
+        max-width: calc(100% - 2 * var(--ni-16));
+        padding: var(--ni-20);
+      }
+    }
+
+    .is-all-time .yir-subtitle {
+      padding: var(--ni-8) var(--ni-16);
+      background: var(--color-yir-poster-surface);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
     }
   }
 </style>

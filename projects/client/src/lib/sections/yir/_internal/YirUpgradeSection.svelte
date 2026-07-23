@@ -83,7 +83,10 @@
         var(--red-950) 0deg 6deg,
         color-mix(in srgb, var(--red-800) 45%, var(--red-950)) 6deg 12deg
       );
-    box-shadow: 0 0 var(--ni-52) var(--color-yir-upgrade-glow);
+    box-shadow: var(
+      --shadow-decorative-surface,
+      0 0 var(--ni-52) var(--color-yir-upgrade-glow)
+    );
 
     @include for-mobile {
       border-radius: var(--border-radius-xl);
@@ -112,5 +115,17 @@
   .yir-upgrade-cta {
     margin-top: var(--gap-s);
     color: var(--color-text-primary);
+  }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .yir-upgrade-card {
+      background-image: none;
+      border-color: var(--color-vip-border-accent);
+      box-shadow: none;
+    }
+
+    .yir-upgrade-message {
+      color: var(--shade-10);
+    }
   }
 </style>

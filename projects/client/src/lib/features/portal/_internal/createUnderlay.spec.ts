@@ -16,4 +16,10 @@ describe('util: createUnderlay', () => {
 
     expect(underlay.id).toEqual(PORTAL_UNDERLAY_ID);
   });
+
+  it('should create a translucent underlay', () => {
+    const underlay = createUnderlay({ appearance: 'translucent' });
+
+    expect(underlay.dataset.appearance).toEqual('translucent');
+  });
 });

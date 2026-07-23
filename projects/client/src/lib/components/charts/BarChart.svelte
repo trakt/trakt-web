@@ -243,7 +243,7 @@
       height var(--viz-morph-duration) ease,
       fill-opacity var(--transition-increment) ease,
       filter var(--transition-increment) ease;
-    fill-opacity: 0.62;
+    fill-opacity: var(--viz-bar-rest-opacity);
     // Rise from the baseline on first paint, staggered left-to-right.
     transform-box: fill-box;
     transform-origin: bottom;

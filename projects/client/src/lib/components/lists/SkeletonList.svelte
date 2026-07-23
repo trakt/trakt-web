@@ -24,7 +24,7 @@
 
     padding-inline-start: var(--layout-distance-side);
 
-    @include list-mask(var(--layout-distance-side));
+    @include list-mask(var(--list-mask-offset));
 
     @supports (-moz-appearance: none) {
       mask-image: none;

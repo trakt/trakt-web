@@ -129,4 +129,11 @@
       gap: var(--ni-20) var(--ni-12);
     }
   }
+
+  :global(:root[data-reduced-visual-noise])
+    .trakt-yir-2024-trends-section {
+    background: var(--purple-900);
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-surface-border);
+  }
 </style>

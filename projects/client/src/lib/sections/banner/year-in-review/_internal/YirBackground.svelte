@@ -50,4 +50,9 @@
       font-size: var(--ni-260);
     }
   }
+
+  :global(:root[data-reduced-visual-noise])
+    .trakt-year-in-review-background {
+    display: none;
+  }
 </style>

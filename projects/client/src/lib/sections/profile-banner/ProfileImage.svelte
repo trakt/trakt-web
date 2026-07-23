@@ -192,10 +192,13 @@
       --color-border-avatar: var(--color-border-vip-avatar);
 
       .profile-image {
-        box-shadow:
-          0 0 var(--ni-8) color-mix(in srgb, var(--purple-400) 60%, transparent),
+        box-shadow: var(
+          --shadow-decorative-surface,
+          0 0 var(--ni-8)
+            color-mix(in srgb, var(--purple-400) 60%, transparent),
           0 0 var(--ni-20)
-          color-mix(in srgb, var(--purple-500) 50%, transparent);
+            color-mix(in srgb, var(--purple-500) 50%, transparent)
+        );
       }
     }
 
@@ -209,6 +212,14 @@
       inset-inline-end: var(--ni-neg-8);
 
       z-index: var(--layer-raised);
+    }
+  }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-profile-image.is-vip {
+    --color-border-avatar: var(--color-flat-surface-border);
+
+    .profile-image {
+      box-shadow: none;
     }
   }
 

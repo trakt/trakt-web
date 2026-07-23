@@ -198,7 +198,10 @@
     border-radius: var(--border-radius-m);
     overflow: hidden;
     background-color: var(--color-yir-poster-surface);
-    box-shadow: 0 0 var(--ni-20) var(--color-yir-poster-surface);
+    box-shadow: var(
+      --shadow-decorative-surface,
+      0 0 var(--ni-20) var(--color-yir-poster-surface)
+    );
     position: relative;
 
     .yir-poster-img {
@@ -221,5 +224,33 @@
     margin-top: var(--ni-8);
     color: var(--color-yir-poster-foreground);
     transition: all 0.5s;
+  }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .yir-fanart-bg {
+      display: none;
+    }
+
+    .yir-rated-inner,
+    .yir-rated-inner.has-ratings {
+      background-color: var(--color-yir-poster-surface-raised);
+      background-image: none;
+      border-block: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+    }
+
+    .yir-posters:hover .yir-grid-item:not(:hover) {
+      .yir-poster-img,
+      .yir-rating {
+        opacity: 1;
+      }
+    }
+
+    .yir-poster {
+      box-sizing: border-box;
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      box-shadow: none;
+    }
   }
 </style>

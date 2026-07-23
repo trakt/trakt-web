@@ -1,6 +1,12 @@
 @use '$style/scss/mixins/index' as *;
 
 :root {
+  --layout-page-width: 100dvw;
+  --layout-page-max-width: 1280px;
+  --layout-page-inset: calc(
+    (100% - min(100%, var(--layout-page-max-width))) / 2
+  );
+  --layout-page-scrollbar-width: var(--layout-scrollbar-width);
   --layout-distance-side: var(--ni-24);
   --layout-sidebar-distance: calc(var(--side-navbar-width) + var(--ni-16));
 
@@ -10,5 +16,19 @@
 
   @include for-tablet-sm-and-below {
     --layout-sidebar-distance: var(--ni-0);
+  }
+
+  &[data-reduced-width] {
+    --layout-page-width: min(100dvw, var(--layout-page-max-width));
+  }
+
+  /*
+    Once the capped page fits beside the document scrollbar, the scrollbar is
+    outside the 1280px content box and must not be reserved a second time.
+  */
+  @media (min-width: 1296px) {
+    &[data-reduced-width] {
+      --layout-page-scrollbar-width: 0px;
+    }
   }
 }

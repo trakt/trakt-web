@@ -113,4 +113,16 @@
       top: var(--ni-32);
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .trakt-black-friday-banner {
+      background: var(--shade-920);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+    }
+
+    .trakt-black-friday-gift {
+      display: none;
+    }
+  }
 </style>

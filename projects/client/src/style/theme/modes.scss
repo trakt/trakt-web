@@ -43,12 +43,17 @@
   );
   --color-foreground-navbar: var(--color-foreground);
   --color-border: var(--shade-200);
+  --color-flat-surface-border: color-mix(
+    in srgb,
+    var(--color-border) 80%,
+    var(--shade-10)
+  );
   --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*
    * Card
    */
-  --color-card-background: var(--color-floating-background);
+  --color-card-background: var(--shade-50);
   --color-official-list-background: var(--purple-200);
 
   /*
@@ -112,6 +117,8 @@
    */
   --color-tooltip-background: var(--shade-10);
   --color-tooltip-text: var(--shade-800);
+  --color-menu-background: var(--shade-10);
+  --color-focus-ring: var(--purple-700);
 
   /*
    * Overrides
@@ -191,7 +198,12 @@
     transparent
   );
   --color-dialog-background: var(--color-drawer-background);
-  --color-modal-background: var(--color-card-background);
+  --color-modal-background: var(--color-floating-background);
+  --color-modal-underlay: color-mix(
+    in srgb,
+    var(--color-shadow) 55%,
+    transparent
+  );
 
   /*
    * Sentiment
@@ -306,6 +318,7 @@
    */
   --color-heatmap-empty: var(--shade-200);
   --color-heatmap-l1: var(--purple-100);
+  --color-heatmap-l1-reduced: var(--purple-100);
   --color-heatmap-l2: var(--purple-300);
   --color-heatmap-l3: var(--purple-500);
   --color-heatmap-l4: var(--purple-700);
@@ -499,12 +512,17 @@
   );
   --color-foreground-navbar: var(--shade-10);
   --color-border: var(--shade-700);
+  --color-flat-surface-border: color-mix(
+    in srgb,
+    var(--shade-1000) 85%,
+    var(--color-border)
+  );
   --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*
    * Card
    */
-  --color-card-background: var(--color-floating-background);
+  --color-card-background: var(--shade-900);
   --color-official-list-background: var(--purple-800);
 
   /*
@@ -566,6 +584,8 @@
    */
   --color-tooltip-background: var(--shade-800);
   --color-tooltip-text: var(--shade-10);
+  --color-menu-background: var(--shade-900);
+  --color-focus-ring: var(--purple-300);
 
   /**
    * Tags
@@ -646,7 +666,12 @@
     transparent
   );
   --color-dialog-background: var(--color-drawer-background);
-  --color-modal-background: var(--color-card-background);
+  --color-modal-background: var(--color-floating-background);
+  --color-modal-underlay: color-mix(
+    in srgb,
+    var(--color-shadow) 55%,
+    transparent
+  );
 
   /*
    * Sentiment
@@ -761,6 +786,7 @@
    */
   --color-heatmap-empty: var(--shade-800);
   --color-heatmap-l1: color-mix(in srgb, var(--purple-900) 80%, transparent);
+  --color-heatmap-l1-reduced: var(--purple-900);
   --color-heatmap-l2: var(--purple-700);
   --color-heatmap-l3: var(--purple-500);
   --color-heatmap-l4: var(--purple-300);

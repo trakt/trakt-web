@@ -334,7 +334,7 @@
 
     @include for-mouse {
       .logo-preview:hover & {
-        opacity: 0.6;
+        opacity: var(--opacity-deemphasized, 0.6);
       }
 
       &:hover {
@@ -344,7 +344,7 @@
 
     // Always visible on touch
     @include for-touch {
-      opacity: 0.6;
+      opacity: var(--opacity-deemphasized, 0.6);
     }
   }
 </style>

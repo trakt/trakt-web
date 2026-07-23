@@ -50,7 +50,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-filter-button {
-    opacity: 0.25;
+    opacity: var(--opacity-subtle-indicator, 0.25);
     transition: opacity var(--transition-increment) ease-in-out;
 
     &.has-filter-support {

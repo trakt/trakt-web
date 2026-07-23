@@ -32,7 +32,7 @@
 // shadow (kept per-segment shadows from stacking) and no transform (never fights
 // the bars' entrance animations). Add `transition: filter` for a smooth in/out.
 @mixin viz-hover-active {
-  filter: brightness(1.16) saturate(1.22);
+  filter: var(--viz-active-filter);
 }
 
 @mixin for-touch {
@@ -49,7 +49,7 @@
 
 @mixin for-tablet-sm {
   @media (min-width: $breakpoint-tablet-sm-min)
-      and (max-width: $breakpoint-tablet-sm-max) {
+    and (max-width: $breakpoint-tablet-sm-max) {
     @content;
   }
 }
@@ -62,7 +62,7 @@
 
 @mixin for-tablet-lg {
   @media (min-width: $breakpoint-tablet-lg-min)
-      and (max-width: $breakpoint-tablet-lg-max) {
+    and (max-width: $breakpoint-tablet-lg-max) {
     @content;
   }
 }
@@ -96,10 +96,13 @@
 }
 
 @mixin backdrop-filter-blur($blur) {
-  backdrop-filter: blur($blur);
+  backdrop-filter: var(--filter-surface-blur, blur($blur));
 
   @-moz-document url-prefix() {
-    backdrop-filter: url('#trakt-firefox-blur');
+    backdrop-filter: var(
+      --filter-surface-blur,
+      url('#trakt-firefox-blur')
+    );
   }
 }
 
@@ -115,6 +118,18 @@
   --blur-size: calc(var(--ni-2) * 1.5);
   filter: blur(var(--blur-size));
   padding: 0 var(--blur-size);
+
+  :global(:root[data-reduced-visual-noise]) & {
+    filter: none;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    text-decoration-line: line-through;
+    text-decoration-color: var(--color-text-primary);
+    text-decoration-style: solid;
+    text-decoration-thickness: 0.75em;
+    caret-color: transparent;
+    user-select: none;
+  }
 }
 
 @mixin adaptive-gap($property: gap) {
@@ -132,18 +147,18 @@
 @mixin dynamic-item-count($itemCountVariable, $minCardWidth, $maxItemCount) {
   $calculatedItemCount: round(
     down,
-    var(--list-inner-width) / ($minCardWidth + var(--list-gap)),
+    (var(--list-inner-width) + var(--list-gap)) /
+    ($minCardWidth + var(--list-gap)),
     1
   );
 
-  #{$itemCountVariable}: clamp(1, $calculatedItemCount, $maxItemCount);
-
   /*
-    Firefox does not properly strip units, for now we fall back
-    to the max item count and allow users to scroll
+    Keep the declared max count as the fallback for engines without typed
+    arithmetic. Modern engines, including Firefox, use the actual container
+    width instead of being forced to the maximum count.
   */
-  @supports (-moz-appearance: none) {
-    #{$itemCountVariable}: $maxItemCount;
+  @supports (width: calc(round(down, 1px / 1px, 1) * 1px)) {
+    #{$itemCountVariable}: clamp(1, $calculatedItemCount, $maxItemCount);
   }
 }
 
@@ -162,7 +177,11 @@
 }
 
 @mixin dynamic-card-width($widthVariable, $minCardWidth, $itemCount) {
-  $listGaps: calc($itemCount * var(--list-gap));
+  /*
+    Distribute the available width across complete cards and only the gaps
+    between them. The rail mask adds visual clearance after the final card.
+  */
+  $listGaps: calc(($itemCount - 1) * var(--list-gap));
   $listUsableWidth: calc(var(--list-inner-width) - $listGaps);
 
   #{$widthVariable}: max(calc($listUsableWidth / $itemCount), #{$minCardWidth});
@@ -192,15 +211,21 @@
 @mixin vip-glow-card {
   background:
     radial-gradient(
-      120% 100% at 50% 0%,
-      color-mix(in srgb, var(--purple-400) 6%, transparent),
-      transparent 55%
-    ),
+    120% 100% at 50% 0%,
+    color-mix(in srgb, var(--purple-400) 6%, transparent),
+    transparent 55%
+  ),
     var(--background-vip-card);
   border: var(--ni-1) solid
     color-mix(in srgb, var(--purple-400) 32%, transparent);
   box-shadow: 0 var(--ni-2) var(--ni-16)
     color-mix(in srgb, var(--purple-500) 15%, transparent);
+
+  :global(:root[data-reduced-visual-noise]) & {
+    background: var(--background-vip-card);
+    border-color: var(--color-flat-surface-border);
+    box-shadow: none;
+  }
 }
 
 // Premium "rare/tier" chip decoration: a diagonal tint gradient, a hairline
@@ -213,8 +238,20 @@
     color-mix(in srgb, #{$color} 10%, transparent)
   );
   border: var(--ni-1) solid color-mix(in srgb, #{$color} 40%, transparent);
-  box-shadow:
+  box-shadow: var(
+    --shadow-decorative-surface,
     0 0 0 var(--ni-1) color-mix(in srgb, #{$color} 14%, transparent),
-    0 var(--ni-2) var(--ni-12) color-mix(in srgb, #{$color} 18%, transparent);
+    0 var(--ni-2) var(--ni-12) color-mix(in srgb, #{$color} 18%, transparent)
+  );
   font-weight: 600;
+
+  :global(:root[data-reduced-visual-noise]) & {
+    background: color-mix(
+      in srgb,
+      #{$color} 10%,
+      var(--color-card-background)
+    );
+    border-color: var(--color-flat-surface-border);
+    box-shadow: none;
+  }
 }

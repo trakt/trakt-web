@@ -121,12 +121,12 @@
       --color-background-action-button: var(--color-foreground);
     }
 
-    @include for-mouse {
-      :global(#{$base}[data-color=#{$color}]:focus-visible) {
-        outline: var(--border-thickness-xs) solid
-          var(--color-background-action-button);
-      }
+    :global(#{$base}[data-color=#{$color}]:focus-visible) {
+      outline: var(--border-thickness-xs) solid var(--color-focus-ring);
+      outline-offset: var(--ni-2);
+    }
 
+    @include for-mouse {
       :global(
           #{$base}[data-color=#{$color}][data-style=ghost][data-variant=secondary]:hover
         ),
@@ -190,18 +190,35 @@
 
   @include for-mouse {
     :global(#{$b}:hover#{$on}) {
-      box-shadow: 0 var(--ni-2) var(--ni-8) var(--ni-neg-2)
-        color-mix(
-          in srgb,
-          var(--color-background-action-button) 50%,
-          transparent
-        );
+      box-shadow: var(
+        --shadow-decorative-surface,
+        0 var(--ni-2) var(--ni-8) var(--ni-neg-2)
+          color-mix(
+            in srgb,
+            var(--color-background-action-button) 50%,
+            transparent
+          )
+      );
     }
   }
 
   :global(#{$b}:active#{$on}) {
     transform: scale(0.92);
+    box-shadow: var(--shadow-decorative-surface, none);
+  }
+
+  :global(:root[data-reduced-visual-noise] #{$b}[data-style=flat]) {
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-surface-border);
     box-shadow: none;
+  }
+
+  @include for-mouse {
+    :global(
+        :root[data-reduced-visual-noise] #{$b}[data-style=flat]:hover#{$on}
+      ) {
+      box-shadow: none;
+    }
   }
 
   :global(#{$b}:active[disabled]),

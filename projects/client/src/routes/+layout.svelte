@@ -8,6 +8,7 @@
   import ListScrollHistoryProvider from "$lib/components/lists/section-list/ListScrollHistoryProvider.svelte";
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import PageView from "$lib/features/analytics/PageView.svelte";
+  import AppearanceSettingSync from "$lib/features/appearance/AppearanceSettingSync.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import BotProvider from "$lib/features/bot-verification/BotProvider.svelte";
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
@@ -148,6 +149,7 @@
 </svelte:head>
 
 <ErrorProvider>
+  <AppearanceSettingSync />
   <QueryClientProvider client={data.queryClient}>
     <GlobalParameterProvider>
       <BotProvider isLegitimateBot={data.isLegitimateBot}>
@@ -280,7 +282,7 @@
       border-radius: var(--border-radius-xs);
       opacity: 0;
 
-      backdrop-filter: blur(var(--ni-4));
+      backdrop-filter: var(--filter-surface-blur, blur(var(--ni-4)));
     }
 
     :global(:hover::-webkit-scrollbar-thumb) {
@@ -314,6 +316,14 @@
   :global([data-mobile-os="android"] body.trakt-pwa) {
     &::after {
       @include pwa-navbar-shadow(fixed);
+    }
+  }
+
+  :global(
+      [data-reduced-visual-noise][data-mobile-os="android"] body.trakt-pwa
+    ) {
+    &::after {
+      background: var(--color-background-navbar-base);
     }
   }
 

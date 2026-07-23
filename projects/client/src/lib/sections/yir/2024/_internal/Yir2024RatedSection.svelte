@@ -284,8 +284,11 @@
     overflow: hidden;
     // Matches the summary-page poster corner (SummaryPoster.svelte).
     border-radius: var(--border-radius-xxl);
-    box-shadow: 0 var(--ni-16) var(--ni-48)
-      color-mix(in srgb, var(--shade-1000) 50%, transparent);
+    box-shadow: var(
+      --shadow-decorative-surface,
+      0 var(--ni-16) var(--ni-48)
+        color-mix(in srgb, var(--shade-1000) 50%, transparent)
+    );
     transition: transform 0.25s var(--transition-increment) ease-out;
 
     &:hover {
@@ -312,6 +315,35 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+  }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .yir-2024-rated-panel {
+      box-sizing: border-box;
+      background: var(--color-yir-poster-surface-raised);
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+    }
+
+    .yir-2024-rated-covers,
+    .yir-2024-rated-shade {
+      display: none;
+    }
+
+    .yir-2024-rated-list:hover .yir-2024-rated-row:not(:hover) {
+      opacity: 1;
+    }
+
+    .yir-2024-rated-row :global(.trakt-link) {
+      border-bottom-color: var(--color-flat-surface-border);
+    }
+
+    .yir-2024-rated-poster {
+      box-sizing: border-box;
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      box-shadow: none;
     }
   }
 </style>

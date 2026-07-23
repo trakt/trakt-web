@@ -79,7 +79,7 @@
 
     transition: border-color var(--transition-increment) ease-in-out;
 
-    backdrop-filter: blur(var(--ni-4));
+    backdrop-filter: var(--filter-surface-blur, blur(var(--ni-4)));
 
     &::-webkit-scrollbar-corner {
       background-color: transparent;
@@ -94,7 +94,7 @@
     }
 
     &:disabled {
-      opacity: 0.6;
+      opacity: var(--opacity-disabled-control, 0.6);
       cursor: not-allowed;
     }
   }

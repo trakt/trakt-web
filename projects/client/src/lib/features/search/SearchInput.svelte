@@ -167,7 +167,7 @@
         border-color, background-color, padding, width, top, inset-inline-start,
         opacity;
 
-      backdrop-filter: blur(var(--ni-8));
+      backdrop-filter: var(--filter-surface-blur, blur(var(--ni-8)));
 
       &:placeholder-shown {
         text-overflow: ellipsis;
@@ -232,8 +232,11 @@
           transparent 100%
         );
         background-size: 200% 100%;
-        animation: slide-left-to-right calc(var(--transition-increment) * 10)
-          linear infinite;
+        animation: var(
+          --animation-decorative,
+          slide-left-to-right calc(var(--transition-increment) * 10) linear
+            infinite
+        );
       }
 
       @include for-mobile {
@@ -248,6 +251,12 @@
             );
           }
         }
+      }
+
+      :global(:root[data-reduced-visual-noise]) &::after {
+        background: var(--color-link-active);
+        background-size: 100% 100%;
+        animation: none;
       }
     }
   }

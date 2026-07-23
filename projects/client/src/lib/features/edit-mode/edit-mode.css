@@ -12,7 +12,7 @@
 
   &.is-hidden {
     opacity: 0.3;
-    filter: blur(var(--ni-2));
+    filter: var(--filter-decorative-blur, blur(var(--ni-2)));
     transform: scale(0.97);
   }
 }

@@ -378,7 +378,7 @@
     }
 
     &:disabled {
-      opacity: 0.3;
+      opacity: var(--opacity-disabled-control, 0.3);
       cursor: not-allowed;
     }
   }

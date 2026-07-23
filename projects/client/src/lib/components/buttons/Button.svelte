@@ -349,15 +349,33 @@
 
   @include for-mouse {
     :global(#{$b}[data-style=flat]:hover#{$on}) {
-      box-shadow: 0 var(--ni-4) var(--ni-12) var(--ni-neg-2)
-        color-mix(in srgb, var(--color-background-button) 45%, transparent);
+      box-shadow: var(
+        --shadow-decorative-surface,
+        0 var(--ni-4) var(--ni-12) var(--ni-neg-2)
+          color-mix(in srgb, var(--color-background-button) 45%, transparent)
+      );
       transform: translateY(calc(var(--ni-1) * -1));
     }
   }
 
   :global(#{$b}[data-style=flat]:active#{$on}) {
     transform: scale(calc(var(--scale-factor-button) * 0.97));
+    box-shadow: var(--shadow-decorative-surface, none);
+  }
+
+  :global(:root[data-reduced-visual-noise] #{$b}[data-style=flat]) {
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-surface-border);
     box-shadow: none;
+  }
+
+  @include for-mouse {
+    :global(
+        :root[data-reduced-visual-noise] #{$b}[data-style=flat]:hover#{$on}
+      ) {
+      box-shadow: none;
+      transform: none;
+    }
   }
 
   :global(#{$b}[data-style=underlined]) {

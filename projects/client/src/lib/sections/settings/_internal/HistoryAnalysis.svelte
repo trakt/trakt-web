@@ -276,9 +276,13 @@
     padding: var(--ni-20) var(--ni-24);
     border-radius: var(--border-radius-m);
     background-color: var(--color-card-background);
-    box-shadow: var(--shadow-base);
+    box-shadow: var(
+      --shadow-decorative-bordered-surface,
+      var(--shadow-base)
+    );
 
-    border: var(--border-thickness-xxs) solid transparent;
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-border-if-reduced, transparent);
     transition: border-color var(--transition-increment) ease;
 
     &.has-duplicates {

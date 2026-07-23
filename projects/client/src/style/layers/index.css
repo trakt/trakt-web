@@ -60,4 +60,209 @@
     var(--color-shadow) 30%,
     transparent
   );
+
+  /*
+   * Shared translucent surfaces. Components consume these instead of baking
+   * transparency into their own backgrounds so reduced visual effects can
+   * make the same surfaces opaque without changing their visual hierarchy.
+   */
+  --color-translucent-card-background: color-mix(
+    in srgb,
+    var(--color-card-background) 80%,
+    transparent
+  );
+  --color-translucent-card-background-soft: color-mix(
+    in srgb,
+    var(--color-card-background) 50%,
+    transparent
+  );
+  --color-subtle-surface-background: color-mix(
+    in srgb,
+    var(--color-foreground) 5%,
+    transparent
+  );
+  --color-muted-surface-background: color-mix(
+    in srgb,
+    var(--color-foreground) 10%,
+    transparent
+  );
+  --color-accent-surface-background: color-mix(
+    in srgb,
+    var(--purple-500) 14%,
+    transparent
+  );
+  --color-accent-cue-background: color-mix(
+    in srgb,
+    var(--purple-500) 22%,
+    transparent
+  );
+  --color-accent-icon-background: color-mix(
+    in srgb,
+    var(--purple-500) 15%,
+    transparent
+  );
+  --color-accent-surface-border: color-mix(
+    in srgb,
+    var(--purple-500) 45%,
+    transparent
+  );
+  --color-accent-divider: color-mix(
+    in srgb,
+    var(--purple-500) 30%,
+    transparent
+  );
+  --background-vip-badge: linear-gradient(
+    135deg,
+    var(--purple-300),
+    var(--purple-600)
+  );
+  --color-skeleton-outline: transparent;
+  --color-tag-outline: transparent;
+
+  /*
+   * Chart effects stay semantic so the same data remains distinguishable when
+   * reduced effects replaces sheen and bloom with crisp fills and patterns.
+   */
+  --viz-bar-rest-opacity: 0.62;
+  --viz-stack-rest-opacity: 0.78;
+  --viz-dim-opacity: 0.45;
+  --viz-active-filter: brightness(1.16) saturate(1.22);
+  --viz-map-active-filter: brightness(1.4);
+  --viz-active-stroke-width: 0.5;
+  --viz-highlight-mix: 78%;
+  --viz-segment-highlight-mix: 80%;
+  --viz-sheen-start-opacity: 0.22;
+  --viz-sheen-mid-opacity: 0.04;
+  --viz-area-start-opacity: 0.55;
+  --viz-area-mid-opacity: 0.2;
+  --opacity-subtle-indicator: 0.25;
+  --opacity-faint-indicator: 0.2;
+}
+
+:root[data-reduced-visual-noise] {
+  /*
+   * Opaque surfaces carry hierarchy through contrast and borders instead of
+   * whatever happens to sit behind them.
+   */
+  --color-background-navbar: var(--color-background-navbar-base);
+  --color-background-mobile-navbar: var(--color-background-navbar-base);
+  --color-background-top-navbar: var(--color-background-navbar-base);
+  --color-calendar-background: var(--color-background-navbar-base);
+  --color-input-background: var(--color-card-background);
+  --color-toast-background: var(--color-floating-background);
+  --color-drawer-background: var(--color-background);
+  --color-dialog-background: var(--color-background);
+  --color-modal-background: var(--color-background);
+
+  --color-translucent-card-background: var(--color-card-background);
+  --color-translucent-card-background-soft: var(--color-card-background);
+  --color-subtle-surface-background: color-mix(
+    in srgb,
+    var(--color-foreground) 5%,
+    var(--color-card-background)
+  );
+  --color-muted-surface-background: color-mix(
+    in srgb,
+    var(--color-foreground) 10%,
+    var(--color-card-background)
+  );
+  --color-accent-surface-background: color-mix(
+    in srgb,
+    var(--purple-500) 14%,
+    var(--color-card-background)
+  );
+  --color-accent-cue-background: color-mix(
+    in srgb,
+    var(--purple-500) 22%,
+    var(--color-card-background)
+  );
+  --color-accent-icon-background: color-mix(
+    in srgb,
+    var(--purple-500) 15%,
+    var(--color-card-background)
+  );
+  --color-accent-surface-border: var(--color-flat-surface-border);
+  --color-accent-divider: color-mix(
+    in srgb,
+    var(--purple-500) 45%,
+    var(--color-card-background)
+  );
+  --background-vip-badge: var(--purple-600);
+  --background-card-cover-overlay: var(--shade-900);
+  --color-background-cover-tag: var(--shade-900);
+  --color-heatmap-l1: var(--color-heatmap-l1-reduced);
+  --color-flat-border-if-reduced: var(--color-flat-surface-border);
+  --color-skeleton-background: var(--color-border);
+  --color-skeleton-outline: var(--color-flat-surface-border);
+  --color-tag-outline: var(--color-flat-surface-border);
+  --opacity-disabled-control: 0.7;
+  --opacity-deemphasized: 0.75;
+  --opacity-subtle-indicator: 0.6;
+  --opacity-faint-indicator: 0.5;
+
+  /*
+   * Keep a restrained top-bar blur for spatial context, but remove blur from
+   * every other glass surface that opts into the shared filter.
+   */
+  --filter-background-top-navbar: blur(var(--ni-2));
+  --filter-surface-blur: none;
+  --filter-decorative-blur: none;
+  --filter-decorative-shadow: none;
+
+  /* Decorative motion and image overlays become stable, flat surfaces. */
+  --animation-decorative: none;
+  --color-cta-background-gradient: var(--color-card-background);
+  --background-vip-drawer: var(--color-card-background);
+  --background-vip-content: var(--color-background);
+  --background-usage-limits-card: var(--color-card-background);
+  --background-vip-glass-card: var(--color-card-background);
+  --background-vip-plain-glass-card: var(--color-card-background);
+  --background-subscription-card: var(--color-card-background);
+  --background-popular-subscription-card: var(--color-vip-surface-muted);
+  --background-vip-elevated-card: var(--color-card-background);
+  --background-vip-card: var(--color-vip-surface-muted);
+  --background-vip-tab: var(--color-vip-border-accent);
+  --color-streak-surface: var(--color-card-background);
+  --color-yir-title-chip-background: var(--color-yir-surface-chip);
+  --color-yir-tooltip-background: var(--color-yir-surface-raised);
+  --color-yir-list-logo-backdrop: var(--color-yir-poster-surface);
+  --color-yir-panel-background: var(--color-yir-surface-raised);
+  --color-yir-hero-gradient-start: var(--color-yir-surface-raised);
+  --color-yir-hero-gradient-end: var(--color-yir-surface-raised);
+
+  --viz-bar-rest-opacity: 1;
+  --viz-stack-rest-opacity: 1;
+  --viz-dim-opacity: 0.75;
+  --viz-active-filter: none;
+  --viz-map-active-filter: none;
+  --viz-active-stroke-width: 2;
+  --viz-highlight-mix: 100%;
+  --viz-segment-highlight-mix: 100%;
+  --viz-sheen-start-opacity: 0;
+  --viz-sheen-mid-opacity: 0;
+  --viz-area-start-opacity: var(--viz-fade-floor);
+  --viz-area-mid-opacity: var(--viz-fade-floor);
+  --viz-glow-percent: 0%;
+  --viz-pattern-opacity: 1;
+  --toggler-background-color: var(--color-card-background);
+
+  /* A zero-offset stroke keeps elevated surfaces flat without changing layout. */
+  --flat-surface-stroke: 0 0 0 var(--border-thickness-xxs)
+    var(--color-flat-surface-border);
+
+  --shadow-base: var(--flat-surface-stroke);
+  --shadow-floating: var(--flat-surface-stroke);
+  --shadow-raised: var(--flat-surface-stroke);
+  --shadow-menu: var(--flat-surface-stroke);
+  --shadow-dialog: var(--flat-surface-stroke);
+  --shadow-navbar: var(--flat-surface-stroke);
+
+  --shadow-decorative-surface: var(--flat-surface-stroke);
+  --shadow-decorative-bordered-surface: none;
+  --shadow-decorative-text: none;
+  --list-shadow: none;
+}
+
+#trakt-portal-underlay[data-appearance='translucent'] {
+  background: var(--color-modal-underlay);
 }

@@ -118,7 +118,7 @@
     border-radius: var(--date-time-border-radius);
 
     &:disabled {
-      opacity: 0.5;
+      opacity: var(--opacity-disabled-control, 0.5);
       pointer-events: none;
     }
   }
@@ -137,7 +137,7 @@
 
     &.is-disabled {
       cursor: default;
-      opacity: 0.5;
+      opacity: var(--opacity-disabled-control, 0.5);
     }
   }
 </style>

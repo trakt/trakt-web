@@ -114,7 +114,7 @@
     padding: var(--gap-xs) var(--gap-s);
     border-radius: var(--border-radius-m);
 
-    background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+    background: var(--color-subtle-surface-background);
 
     &.is-viewer {
       background: color-mix(in srgb, var(--purple-500) 12%, transparent);
@@ -125,7 +125,7 @@
     // Free members read as a lesser tier: flat, dimmed, desaturated avatar.
     &.is-free {
       background: none;
-      opacity: 0.55;
+      opacity: var(--opacity-deemphasized, 0.55);
 
       .item-copy :global(p) {
         color: var(--color-text-secondary);
@@ -187,8 +187,18 @@
     color: var(--shade-950);
     background: var(--medal-color);
     border-color: var(--medal-color);
-    box-shadow: 0 0 var(--ni-12)
-      color-mix(in srgb, var(--medal-color) 55%, transparent);
+    box-shadow: var(
+      --shadow-decorative-bordered-surface,
+      0 0 var(--ni-12)
+        color-mix(in srgb, var(--medal-color) 55%, transparent)
+    );
+  }
+
+  :global(:root[data-reduced-visual-noise])
+    .trakt-leaderboard-item.is-viewer
+    .item-rank[data-medal]
+    .rank-badge {
+    border-color: var(--color-flat-surface-border);
   }
 
   .item-copy {
@@ -231,5 +241,27 @@
     filter: blur(var(--ni-4));
     user-select: none;
     pointer-events: none;
+  }
+
+  :global(:root[data-reduced-visual-noise]) .is-blurred {
+    filter: none;
+    position: relative;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+
+    :global(*) {
+      visibility: hidden;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      top: 50%;
+      height: 0.7em;
+      transform: translateY(-50%);
+      border-radius: var(--border-radius-xs);
+      background: var(--color-text-primary);
+    }
   }
 </style>

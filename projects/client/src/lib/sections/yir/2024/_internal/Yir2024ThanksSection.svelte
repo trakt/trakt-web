@@ -124,4 +124,10 @@
       }
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) .yir-2024-thanks-title {
+    background: none;
+    color: var(--color-yir-text-primary);
+    -webkit-text-fill-color: currentColor;
+  }
 </style>

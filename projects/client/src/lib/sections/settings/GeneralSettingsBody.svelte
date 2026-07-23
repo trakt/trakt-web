@@ -1,7 +1,7 @@
 <script lang="ts">
   import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import Appearance from "./_internal/Appearance.svelte";
+  import AppearanceSettings from "./AppearanceSettings.svelte";
   import Behavior from "./_internal/Behavior.svelte";
   import BlockedUsers from "./_internal/BlockedUsers.svelte";
   import Genres from "./_internal/Genres.svelte";
@@ -11,7 +11,7 @@
   <Behavior />
   <Genres />
   <BlockedUsers />
-  <Appearance />
+  <AppearanceSettings />
 
   <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
     <LogoutButton />

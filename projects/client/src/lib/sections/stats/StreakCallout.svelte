@@ -134,7 +134,10 @@
       width: 300%;
       height: 100%;
       transform: translateX(100%);
-      animation: slide calc(20 * var(--transition-increment)) infinite;
+      animation: var(
+        --animation-decorative,
+        slide calc(20 * var(--transition-increment)) infinite
+      );
       background: linear-gradient(
         110deg,
         var(--color-streak-surface) 0%,

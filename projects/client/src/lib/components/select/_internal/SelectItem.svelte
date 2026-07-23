@@ -148,7 +148,7 @@
       cursor: pointer;
 
       color: var(--shade-500);
-      opacity: 0.35;
+      opacity: var(--opacity-deemphasized, 0.35);
 
       transition: var(--transition-increment) ease-in-out;
       transition-property: background-color, color, opacity;

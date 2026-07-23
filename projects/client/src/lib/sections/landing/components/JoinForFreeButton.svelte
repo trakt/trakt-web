@@ -60,4 +60,10 @@
       }
     }
   }
+
+  :global(:root[data-reduced-visual-noise])
+    trakt-join-for-free-button
+    :global(.trakt-button)::before {
+    display: none;
+  }
 </style>

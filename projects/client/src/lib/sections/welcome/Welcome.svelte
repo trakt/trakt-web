@@ -1,11 +1,16 @@
 <script lang="ts">
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import WelcomeBackdrop from "./components/WelcomeBackdrop.svelte";
   import WelcomeImport from "./components/WelcomeImport.svelte";
   import WelcomeIntro from "./components/WelcomeIntro.svelte";
   import WelcomeOutro from "./components/WelcomeOutro.svelte";
+
+  const { reduceVisualNoise } = useAppearance();
 </script>
 
-<WelcomeBackdrop />
+{#if !$reduceVisualNoise}
+  <WelcomeBackdrop />
+{/if}
 
 <div class="trakt-welcome">
   <WelcomeIntro />

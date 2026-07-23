@@ -25,8 +25,12 @@
 
     width: calc(var(--indicator-width, 0) + calc(var(--border-radius-m) * 2));
 
-    backdrop-filter: blur(var(--ni-8)) brightness(0.85);
-    color: var(--color-inactive-gesture);
+    backdrop-filter: var(
+      --filter-surface-blur,
+      blur(var(--ni-8)) brightness(0.85)
+    );
+    background: var(--color-translucent-card-background-soft);
+    color: var(--color-gesture-inactive);
 
     display: flex;
     align-items: center;
@@ -41,7 +45,7 @@
     }
 
     &.is-disabled {
-      opacity: 0.35;
+      opacity: var(--opacity-disabled-control, 0.35);
     }
 
     :global(svg) {

@@ -58,7 +58,11 @@
 {/snippet}
 
 {#if isAired}
-  <div transition:slide={{ duration: 150 }} class="trakt-where-to-watch-list">
+  <div
+    transition:slide={{ duration: 150 }}
+    class="trakt-where-to-watch-list"
+    class:is-inline={variant === "inline"}
+  >
     <SectionList
       id={{
         scope: `where-to-watch-list-${target.type}`,
@@ -92,6 +96,26 @@
     /* The default is overridden because the meta info has an icon and needs a bigger gap */
     :global(.trakt-list-title) {
       gap: var(--gap-xs);
+    }
+
+    &.is-inline {
+      container-type: inline-size;
+
+      /*
+       * The desktop summary column is a fixed-width inline rail. Fit exactly
+       * three services inside it so a fourth card never peeks through the
+       * unmasked inline scroller.
+       */
+      --where-to-watch-item-count: 3;
+      --where-to-watch-rail-width: calc(100cqi - 2 * var(--ni-2));
+      --width-where-to-watch-item: calc(
+        (
+            var(--where-to-watch-rail-width) -
+              (var(--where-to-watch-item-count) - 1) *
+              var(--list-gap)
+          ) /
+          var(--where-to-watch-item-count)
+      );
     }
   }
 </style>

@@ -1,10 +1,12 @@
 <script lang="ts">
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import { useSeasonalTheme } from "../useSeasonalTheme";
 
   const { activeTheme, actionBarImageSrc } = useSeasonalTheme();
+  const { reduceVisualNoise } = useAppearance();
 </script>
 
-{#if $activeTheme && $actionBarImageSrc}
+{#if $activeTheme && $actionBarImageSrc && !$reduceVisualNoise}
   <img
     src={$actionBarImageSrc}
     alt={`${$activeTheme} seasonal action bar image`}

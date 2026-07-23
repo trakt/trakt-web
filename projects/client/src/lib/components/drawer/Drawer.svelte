@@ -2,12 +2,13 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { navigationTrap } from "$lib/features/navigation/navigationTrap";
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
-  import { slide } from "svelte/transition";
+  import { fly, slide, type TransitionConfig } from "svelte/transition";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CloseIcon from "../icons/CloseIcon.svelte";
   import ListTitle from "../lists/_internal/ListTitle.svelte";
@@ -58,10 +59,31 @@
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const slideAxis = $derived($isMobile ? "y" : "x");
+  const { centerDrawers } = useAppearance();
+  const isCentered = $derived($centerDrawers && !$isMobile);
 
-  const { portal } = $derived(
-    useDrawerPortal({ hasAutoClose, onClose, elevated }),
-  );
+  const { portal } = useDrawerPortal({
+    getHasAutoClose: () => hasAutoClose,
+    getOnClose: () => onClose,
+    getElevated: () => elevated,
+  });
+
+  const drawerTransition = (
+    node: Element,
+    { centered, axis }: { centered: boolean; axis: "x" | "y" },
+  ): TransitionConfig => {
+    if (!centered) return slide(node, { duration: 150, axis });
+
+    const distance = getComputedStyle(node).getPropertyValue("--ni-48");
+    const reduceMotion =
+      globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches ??
+        false;
+
+    return fly(node, {
+      duration: reduceMotion ? 0 : 150,
+      y: distance,
+    });
+  };
 
   const trap = $derived((element: HTMLElement) => {
     if (trapSelector) {
@@ -99,12 +121,13 @@
 
 <div
   class={drawerClass}
+  class:is-centered={isCentered}
   data-size={size}
   data-elevated={elevated}
   data-header-variant={headerVariant}
   style:--drawer-header-overlay-opacity={headerOverlayOpacity}
-  transition:slide={{ duration: 150, axis: slideAxis }}
-  use:portal
+  transition:drawerTransition={{ centered: isCentered, axis: slideAxis }}
+  use:portal={isCentered}
   use:trap
   use:appendClassList={classList}
   onintrostart={() => isOpening.set(true)}
@@ -185,6 +208,42 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  @mixin centered-drawer {
+    --color-drawer-background: var(--color-background);
+    --drawer-size: min(
+      var(--ni-640),
+      calc(100dvw - 2 * var(--gap-m))
+    );
+
+    top: calc(var(--gap-m) + env(safe-area-inset-top, 0px));
+    bottom: calc(var(--gap-m) + env(safe-area-inset-bottom, 0px));
+    inset-inline-start: 0;
+    margin-inline: auto;
+
+    border-radius: var(--drawer-border-radius);
+    border: var(--ni-1) solid var(--color-drawer-border);
+    background: var(--color-background);
+    backdrop-filter: none;
+
+    &[data-header-variant="overlay"] {
+      .trakt-drawer-header::before {
+        background: var(--color-background);
+        backdrop-filter: none;
+      }
+    }
+
+    .trakt-drawer-vip-background {
+      display: none;
+    }
+
+    &[data-size="large"] {
+      --drawer-size: min(
+        var(--ni-768),
+        calc(100dvw - 2 * var(--gap-m))
+      );
+    }
+  }
+
   .trakt-drawer {
     --drawer-size: var(--ni-380);
     --drawer-padding: var(--ni-16);
@@ -230,7 +289,7 @@
     border-end-start-radius: var(--drawer-border-radius);
     border-inline-start: var(--ni-1) solid var(--color-drawer-border);
 
-    backdrop-filter: blur(var(--ni-12));
+    backdrop-filter: var(--filter-surface-blur, blur(var(--ni-12)));
 
     &[data-header-variant="overlay"] {
       z-index: calc(var(--layer-menu) + 1);
@@ -264,7 +323,7 @@
             var(--color-drawer-background) 75%,
             transparent
           );
-          backdrop-filter: blur(var(--ni-10));
+          backdrop-filter: var(--filter-surface-blur, blur(var(--ni-10)));
           mask-image: linear-gradient(
             to bottom,
             black 0%,
@@ -317,6 +376,24 @@
       --drawer-size: var(--ni-480);
     }
 
+    @include for-tablet-sm {
+      &.is-centered {
+        @include centered-drawer;
+      }
+    }
+
+    @include for-tablet-lg {
+      &.is-centered {
+        @include centered-drawer;
+      }
+    }
+
+    @include for-desktop {
+      &.is-centered {
+        @include centered-drawer;
+      }
+    }
+
     &:has(.trakt-drawer-drag-handle) {
       padding-top: 0;
 
@@ -362,6 +439,23 @@
 
         &:global(.is-dragging) {
           --drawer-size: var(--initial-height);
+        }
+      }
+    }
+
+    :global(:root[data-reduced-visual-noise]) & {
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+      box-shadow: none;
+
+      &[data-header-variant="overlay"] {
+        .trakt-drawer-header::before {
+          opacity: 1;
+          background: var(--color-drawer-background);
+          backdrop-filter: none;
+          mask-image: none;
+          border-bottom: var(--border-thickness-xxs) solid
+            var(--color-flat-surface-border);
         }
       }
     }

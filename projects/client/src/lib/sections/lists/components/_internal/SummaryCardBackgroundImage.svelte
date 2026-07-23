@@ -1,12 +1,16 @@
 <script lang="ts">
+  import { useAppearance } from "$lib/features/appearance/useAppearance.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
 
   const { src, alt }: { src: string; alt: string } = $props();
+  const { reduceVisualNoise } = useAppearance();
 </script>
 
-<div class="trakt-summary-card-background">
-  <CrossOriginImage loading="eager" {src} {alt} />
-</div>
+{#if !$reduceVisualNoise}
+  <div class="trakt-summary-card-background">
+    <CrossOriginImage loading="eager" {src} {alt} />
+  </div>
+{/if}
 
 <style>
   .trakt-summary-card-background {

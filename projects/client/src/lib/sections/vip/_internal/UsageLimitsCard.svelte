@@ -65,14 +65,20 @@
     &[data-style="default"] {
       background: var(--background-usage-limits-card);
 
-      box-shadow: var(--shadow-base);
+      box-shadow: var(
+        --shadow-decorative-bordered-surface,
+        var(--shadow-base)
+      );
 
       padding: var(--ni-32);
       box-sizing: border-box;
 
       border-radius: var(--border-radius-xxl);
       border: var(--ni-1) solid
-        color-mix(in srgb, var(--color-border) 50%, transparent);
+        var(
+          --color-flat-border-if-reduced,
+          color-mix(in srgb, var(--color-border) 50%, transparent)
+        );
     }
 
     &[data-variant="free"] {

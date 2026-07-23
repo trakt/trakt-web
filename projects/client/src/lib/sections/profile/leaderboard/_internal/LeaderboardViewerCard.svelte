@@ -53,9 +53,8 @@
     padding: var(--gap-s);
     border-radius: var(--border-radius-l);
 
-    background: color-mix(in srgb, var(--purple-500) 14%, transparent);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--purple-500) 45%, transparent);
+    background: var(--color-accent-surface-background);
+    border: var(--ni-1) solid var(--color-accent-surface-border);
   }
 
   .viewer-main {
@@ -96,6 +95,10 @@
     filter: blur(var(--ni-8));
   }
 
+  :global(:root[data-reduced-visual-noise]) .viewer-glow {
+    display: none;
+  }
+
   .viewer-copy {
     display: flex;
     flex-direction: column;
@@ -116,7 +119,9 @@
     padding: 0 var(--ni-6);
     border-radius: var(--border-radius-xxl);
 
-    background: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+    background: var(--color-muted-surface-background);
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-border-if-reduced, transparent);
     color: var(--color-text-primary);
     font-size: var(--font-size-tag);
   }
@@ -136,9 +141,8 @@
     border-radius: 50%;
 
     color: var(--purple-200);
-    background: color-mix(in srgb, var(--purple-500) 22%, transparent);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--purple-500) 45%, transparent);
+    background: var(--color-accent-cue-background);
+    border: var(--ni-1) solid var(--color-accent-surface-border);
 
     :global(svg) {
       width: var(--ni-18);
@@ -148,7 +152,7 @@
 
   .viewer-divider {
     height: var(--ni-1);
-    background: color-mix(in srgb, var(--purple-500) 30%, transparent);
+    background: var(--color-accent-divider);
   }
 
   .viewer-upsell {

@@ -10,6 +10,30 @@
 >
   <head>
     <meta charset="utf-8" />
+    <script>
+      try {
+        const appearance = JSON.parse(
+          localStorage.getItem("trakt_appearance") ?? "{}",
+        );
+        const root = document.documentElement;
+
+        root.toggleAttribute(
+          "data-reduced-visual-noise",
+          appearance.reduceVisualNoise === true ||
+            appearance.reduceBackgroundImages === true,
+        );
+        root.toggleAttribute(
+          "data-reduced-width",
+          appearance.reduceWidth === true,
+        );
+        root.toggleAttribute(
+          "data-centered-drawers",
+          appearance.centerDrawers === true,
+        );
+      } catch {
+        // Invalid or unavailable storage keeps the default appearance.
+      }
+    </script>
     <!-- CSP -->
     <meta
       http-equiv="Content-Security-Policy"

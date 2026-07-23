@@ -59,4 +59,13 @@
     align-items: center;
     flex-shrink: 0;
   }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-welcome-vip-upsell {
+    background: color-mix(
+      in srgb,
+      var(--purple-500) 14%,
+      var(--color-card-background)
+    );
+    border-color: var(--color-flat-surface-border);
+  }
 </style>

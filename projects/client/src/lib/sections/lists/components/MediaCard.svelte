@@ -44,7 +44,7 @@
 
 {#snippet content(mediaCoverImageUrl: string, mediaCoverOverlay?: string)}
   {#if popupActions}
-    <CardActionBar>
+    <CardActionBar surface="image">
       {#snippet actions()}
         <PopupMenu
           label={m.button_label_popup_menu({ title: media.title })}

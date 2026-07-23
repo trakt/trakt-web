@@ -24,7 +24,7 @@
     <linearGradient id={`${prefix}-fill-${slot}`} x1="0" y1="0" x2="0" y2="1">
       <stop
         offset="0%"
-        style={`stop-color: color-mix(in srgb, var(--viz-${slot}) 78%, white); stop-opacity: 1;`}
+        style={`stop-color: color-mix(in srgb, var(--viz-${slot}) var(--viz-highlight-mix), white); stop-opacity: 1;`}
       />
       <stop
         offset="100%"
@@ -53,15 +53,27 @@
   <!-- Single top-down sheen, overlaid once across a whole stacked column so it
        reads as one lit unit rather than per-segment self-lit slices. -->
   <linearGradient id={`${prefix}-sheen`} x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" style="stop-color: #fff; stop-opacity: 0.22;" />
-    <stop offset="45%" style="stop-color: #fff; stop-opacity: 0.04;" />
+    <stop
+      offset="0%"
+      style="stop-color: #fff; stop-opacity: var(--viz-sheen-start-opacity);"
+    />
+    <stop
+      offset="45%"
+      style="stop-color: #fff; stop-opacity: var(--viz-sheen-mid-opacity);"
+    />
     <stop offset="100%" style="stop-color: #fff; stop-opacity: 0;" />
   </linearGradient>
 
   <!-- Generic area fade keyed off the referencing element's `color`. -->
   <linearGradient id={`${prefix}-area`} x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" style="stop-color: currentColor; stop-opacity: 0.55;" />
-    <stop offset="60%" style="stop-color: currentColor; stop-opacity: 0.2;" />
+    <stop
+      offset="0%"
+      style="stop-color: currentColor; stop-opacity: var(--viz-area-start-opacity);"
+    />
+    <stop
+      offset="60%"
+      style="stop-color: currentColor; stop-opacity: var(--viz-area-mid-opacity);"
+    />
     <stop
       offset="100%"
       style="stop-color: currentColor; stop-opacity: var(--viz-fade-floor);"

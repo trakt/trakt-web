@@ -159,4 +159,16 @@
   .yir-2024-poster-skeleton {
     background: none;
   }
+
+  :global(:root[data-reduced-visual-noise]) {
+    .trakt-yir-2024-posters-row:hover .yir-2024-poster :global(img) {
+      filter: none;
+    }
+
+    .yir-2024-poster {
+      box-sizing: border-box;
+      border: var(--border-thickness-xxs) solid
+        var(--color-flat-surface-border);
+    }
+  }
 </style>

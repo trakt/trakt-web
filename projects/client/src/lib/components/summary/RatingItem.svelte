@@ -159,14 +159,19 @@
       height: var(--font-size-text);
 
       border-radius: var(--border-radius-xs);
-      background-color: color-mix(
-        in srgb,
-        var(--color-foreground) 20%,
-        transparent
+      background-color: var(
+        --color-skeleton-background,
+        color-mix(in srgb, var(--color-foreground) 20%, transparent)
       );
+      outline: var(--border-thickness-xxs) solid
+        var(--color-skeleton-outline, transparent);
+      outline-offset: calc(-1 * var(--border-thickness-xxs));
 
-      animation: pulse calc(var(--transition-increment) * 6) ease-in-out
-        infinite alternate;
+      animation: var(
+        --animation-decorative,
+        pulse calc(var(--transition-increment) * 6) ease-in-out infinite
+          alternate
+      );
     }
 
     .rating-skeleton-votes {

@@ -118,4 +118,10 @@
       height: var(--ni-12);
     }
   }
+
+  :global(:root[data-reduced-visual-noise]) .yir-2024-trend-poster {
+    box-sizing: border-box;
+    border: var(--border-thickness-xxs) solid
+      var(--color-flat-surface-border);
+  }
 </style>

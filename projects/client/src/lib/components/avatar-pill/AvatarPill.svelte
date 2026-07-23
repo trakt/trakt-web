@@ -96,7 +96,7 @@
     box-sizing: border-box;
     border-radius: var(--border-radius-xxl);
 
-    background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+    background: var(--color-subtle-surface-background);
 
     border: var(--ni-1) solid
       color-mix(in srgb, var(--color-border) 40%, transparent);
@@ -219,7 +219,7 @@
 
     // Cancel the pill's flex gap so the caret sits flush against the label.
     margin-inline-start: calc(-1 * var(--ni-4));
-    opacity: 0.55;
+    opacity: var(--opacity-deemphasized, 0.55);
 
     transition:
       transform var(--transition-increment) ease-out,

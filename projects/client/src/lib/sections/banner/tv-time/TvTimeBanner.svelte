@@ -63,11 +63,7 @@
     padding: var(--gap-l) var(--gap-xl);
     padding-inline-end: var(--ni-48);
 
-    background: color-mix(
-      in srgb,
-      var(--color-card-background) 80%,
-      transparent
-    );
+    background: var(--color-translucent-card-background);
     border: var(--border-thickness-xxs) solid
       color-mix(in srgb, var(--color-border) 50%, transparent);
     border-radius: var(--border-radius-xl);
@@ -144,6 +140,14 @@
     :global(svg) {
       width: var(--ni-18);
       height: var(--ni-18);
+    }
+  }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-tv-time-banner {
+    border-color: var(--color-flat-surface-border);
+
+    &::before {
+      display: none;
     }
   }
 </style>

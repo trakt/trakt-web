@@ -43,4 +43,20 @@
       border-color: color-mix(in srgb, var(--shade-10) 24%, transparent);
     }
   }
+
+  :global(:root[data-reduced-visual-noise])
+    .trakt-login-button
+    :global(.trakt-button[data-size=small]) {
+    background: var(--shade-900);
+    border-color: var(--color-flat-surface-border);
+  }
+
+  @include for-mouse {
+    :global(:root[data-reduced-visual-noise])
+      .trakt-login-button
+      :global(.trakt-button[data-size=small]:hover) {
+      background: var(--shade-800);
+      border-color: var(--color-flat-surface-border);
+    }
+  }
 </style>

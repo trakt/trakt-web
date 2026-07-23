@@ -60,12 +60,17 @@
   .team-member-skeleton {
     height: var(--ni-160);
     border-radius: var(--border-radius-xl);
-    background: color-mix(
-      in srgb,
-      var(--color-card-background) 60%,
-      transparent
+    background: var(
+      --color-skeleton-background,
+      color-mix(in srgb, var(--color-card-background) 60%, transparent)
     );
-    animation: pulse 1.5s ease-in-out infinite;
+    outline: var(--border-thickness-xxs) solid
+      var(--color-skeleton-outline, transparent);
+    outline-offset: calc(-1 * var(--border-thickness-xxs));
+    animation: var(
+      --animation-decorative,
+      pulse 1.5s ease-in-out infinite
+    );
   }
 
   @keyframes pulse {

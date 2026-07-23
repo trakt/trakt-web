@@ -151,7 +151,7 @@
     &:global(.scrolled) {
       background: var(--color-background-mobile-navbar);
       box-shadow: var(--shadow-navbar);
-      backdrop-filter: blur(var(--ni-8));
+      backdrop-filter: var(--filter-surface-blur, blur(var(--ni-8)));
 
       color: var(--color-text-primary);
 
@@ -161,6 +161,12 @@
       :global(.review-header-share) {
         color: var(--color-text-primary);
       }
+    }
+
+    :global(:root[data-reduced-visual-noise]) &:hover,
+    :global(:root[data-reduced-visual-noise]) &:global(.scrolled) {
+      background: var(--color-background-top-navbar);
+      backdrop-filter: var(--filter-background-top-navbar);
     }
   }
 
@@ -202,7 +208,7 @@
   }
 
   .review-header-nav-btn.disabled {
-    opacity: 0.3;
+    opacity: var(--opacity-disabled-control, 0.3);
     cursor: default;
   }
 

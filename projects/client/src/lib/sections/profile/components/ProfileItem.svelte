@@ -134,4 +134,15 @@
     padding: 0 var(--ni-4);
     box-sizing: border-box;
   }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-profile-item {
+    :global(.trakt-profile-image) {
+      box-shadow: none;
+    }
+
+    :global(.trakt-profile-image.is-vip)::before {
+      display: none;
+      animation: none;
+    }
+  }
 </style>

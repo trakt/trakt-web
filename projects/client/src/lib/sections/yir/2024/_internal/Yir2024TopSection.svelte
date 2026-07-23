@@ -73,4 +73,8 @@
     flex-direction: column;
     gap: var(--content-gap);
   }
+
+  :global(:root[data-reduced-visual-noise]) .yir-2024-top-gradient {
+    display: none;
+  }
 </style>

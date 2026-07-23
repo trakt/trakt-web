@@ -49,12 +49,18 @@
 
     padding: var(--ni-24);
     border: var(--ni-1) solid
-      color-mix(in srgb, var(--shade-10) 9%, transparent);
+      var(
+        --color-flat-border-if-reduced,
+        color-mix(in srgb, var(--shade-10) 9%, transparent)
+      );
     border-radius: var(--ni-24);
 
     background: color-mix(in srgb, var(--shade-920) 72%, transparent);
-    box-shadow: 0 var(--ni-30) var(--ni-80)
-      color-mix(in srgb, var(--color-shadow) 50%, transparent);
+    box-shadow: var(
+      --shadow-decorative-bordered-surface,
+      0 var(--ni-30) var(--ni-80)
+        color-mix(in srgb, var(--color-shadow) 50%, transparent)
+    );
     @include backdrop-filter-blur(var(--ni-20));
 
     @include for-tablet-lg-and-below() {
@@ -131,5 +137,9 @@
     @include for-tablet-lg-and-below() {
       gap: var(--gap-xs);
     }
+  }
+
+  :global(:root[data-reduced-visual-noise]) .trakt-join-for-free {
+    background: var(--shade-920);
   }
 </style>
