@@ -9,6 +9,7 @@
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import CtaItem from "../components/cta/CtaItem.svelte";
+  import ListsCount from "../components/ListsCount.svelte";
   import type { Cta } from "../components/cta/models/Cta.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import CreateListAction from "./_internal/CreateListAction.svelte";
@@ -37,7 +38,12 @@
     list: lists,
     isLoading,
     hasNextPage,
+    itemCount,
   } = $derived(usePersonalListsSummary({ type, slug }));
+
+  const listsCount = $derived(
+    $itemCount ?? ($hasNextPage ? undefined : $lists.length),
+  );
 
   const { isMe } = $derived(useIsMe(slug));
 
@@ -114,6 +120,10 @@
   {/if}
 
   {#if variant === "summary"}
+    {#snippet listsCountMeta()}
+      <ListsCount count={listsCount} />
+    {/snippet}
+
     <SectionList
       id={{
         scope: "personal-lists-list",
@@ -121,6 +131,7 @@
       }}
       items={$lists}
       {title}
+      metaInfo={(listsCount ?? 0) > 0 ? listsCountMeta : undefined}
       drilldown={{
         href: UrlBuilder.lists.all(slug, type),
         label: m.button_label_view_all_lists(),
