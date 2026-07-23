@@ -27,6 +27,7 @@ type ActivityHistoryParams =
     slug: string;
     startDate?: Date;
     endDate?: Date;
+    syncId?: number;
   }
   & ApiParams
   & PaginationParams
@@ -39,7 +40,7 @@ const HistorySchema = z.discriminatedUnion('type', [
 export type ActivityHistory = z.infer<typeof HistorySchema>;
 
 export function activityHistoryRequest(
-  { fetch, slug, startDate, endDate, limit, page, filter }:
+  { fetch, slug, startDate, endDate, limit, page, filter, syncId }:
     ActivityHistoryParams,
 ) {
   const queryParams = {
@@ -48,6 +49,7 @@ export function activityHistoryRequest(
     end_at: endDate?.toISOString(),
     limit,
     page,
+    sync_id: syncId,
     ...filter,
   };
 
@@ -81,6 +83,7 @@ export const activityHistoryQuery = defineInfiniteQuery({
     params.limit,
     params.page,
     params.slug,
+    params.syncId,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: activityHistoryRequest,

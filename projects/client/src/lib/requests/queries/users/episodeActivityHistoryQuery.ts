@@ -20,6 +20,7 @@ type EpisodeActivityHistoryParams =
     startDate?: Date;
     endDate?: Date;
     id?: number;
+    syncId?: number;
   }
   & ApiParams
   & PaginationParams
@@ -38,7 +39,7 @@ export type EpisodeActivityHistory = z.infer<
 >;
 
 export function episodeActivityHistoryRequest(
-  { fetch, slug, startDate, endDate, limit, id, page, filter }:
+  { fetch, slug, startDate, endDate, limit, id, page, filter, syncId }:
     EpisodeActivityHistoryParams,
 ) {
   const queryParams = {
@@ -47,6 +48,7 @@ export function episodeActivityHistoryRequest(
     end_at: endDate?.toISOString(),
     limit,
     page,
+    sync_id: syncId,
     ...filter,
   };
 
@@ -87,6 +89,7 @@ export const episodeActivityHistoryQuery = defineInfiniteQuery({
     params.page,
     params.id,
     params.slug,
+    params.syncId,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: episodeActivityHistoryRequest,

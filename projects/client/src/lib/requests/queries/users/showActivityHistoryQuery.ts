@@ -21,6 +21,7 @@ type ShowActivityHistoryParams =
     startDate?: Date;
     endDate?: Date;
     id?: number;
+    syncId?: number;
   }
   & ApiParams
   & PaginationParams
@@ -30,7 +31,7 @@ type ShowActivityHistoryParams =
 export type ShowActivityHistory = EpisodeActivityHistory;
 
 const showHistoryRequest = (
-  { fetch, slug, startDate, endDate, limit, id, page, filter }:
+  { fetch, slug, startDate, endDate, limit, id, page, filter, syncId }:
     ShowActivityHistoryParams,
 ) => {
   const queryParams = {
@@ -39,6 +40,7 @@ const showHistoryRequest = (
     end_at: endDate?.toISOString(),
     limit,
     page,
+    sync_id: syncId,
     ...filter,
   };
 
@@ -77,6 +79,7 @@ export const showActivityHistoryQuery = defineInfiniteQuery({
     params.page,
     params.id,
     params.slug,
+    params.syncId,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: showHistoryRequest,
