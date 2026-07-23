@@ -17,6 +17,7 @@
     padding: 0;
 
     background: var(--color-option-list-background);
+    border: var(--ni-1) solid var(--color-option-list-border);
     border-radius: var(--border-radius-l);
     overflow: hidden;
   }
