@@ -88,6 +88,7 @@
         action={{
           label: "Undo the progress update",
           text: "Undo",
+          style: "outline",
           onAction: closeTitled,
         }}
       />

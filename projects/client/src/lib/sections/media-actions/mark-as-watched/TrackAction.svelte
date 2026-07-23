@@ -23,7 +23,7 @@
   }: TrackButtonProps = $props();
 
   const { isMarkingAsWatched, isWatchable, isWatched, removeWatched } =
-    $derived(useMarkAsWatched(target));
+    $derived(useMarkAsWatched({ ...target, isToastEnabled: false }));
 
   const { confirm } = useConfirm();
   const openMarkAsWatchedDrawer = $derived(() => {

@@ -9,4 +9,5 @@ export enum FeatureFlag {
   ListCounts = 'list-counts',
   ReviewerStats = 'reviewer-stats',
   GenrePicker = 'genre-picker',
+  ActionConfirmations = 'action-confirmations',
 }

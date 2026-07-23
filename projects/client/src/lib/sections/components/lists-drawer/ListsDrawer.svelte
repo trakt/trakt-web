@@ -46,7 +46,9 @@
     isWatchlistUpdating,
     isWatchlisted,
     removeFromWatchlist,
-  } = $derived(useWatchlist({ media, type: media.type }));
+  } = $derived(
+    useWatchlist({ media, type: media.type, isToastEnabled: false }),
+  );
 
   const { confirm } = useConfirm();
   const confirmRemove = $derived(
