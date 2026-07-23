@@ -1,108 +1,159 @@
 <script lang="ts">
-  import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
-  import { useUser } from "$lib/features/auth/stores/useUser";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
-  import { DEFAULT_COVER } from "$lib/utils/constants";
-  import MonthInReviewLink from "../../components/MonthInReviewLink.svelte";
+  import { languageTag } from "$lib/features/i18n";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import DismissButton from "../_internal/DismissButton.svelte";
-  import MonthInReviewStats from "./_internal/MonthInReviewStats.svelte";
-  import { useMonthInReview } from "./_internal/useMonthInReview";
+  import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
 
   const { month, onDismiss }: { month: Date; onDismiss: () => void } = $props();
   const { user } = useUser();
 
-  const { review, isLoading } = $derived(
-    useMonthInReview({
-      slug: $user.slug,
-      month: month.getMonth() + 1,
-      year: month.getFullYear(),
-    }),
+  const monthName = $derived(toHumanMonth(month, languageTag()));
+  const href = $derived(
+    UrlBuilder.users($user.slug).monthInReview(
+      month.getFullYear(),
+      month.getMonth() + 1,
+    ),
   );
 </script>
 
 <div class="trakt-month-in-review">
-  <ReviewContent
-    coverSrc={$review?.firstPlay?.cover.url.medium ?? DEFAULT_COVER}
-    variant="gradient"
-  >
-    {#snippet header()}
-      <div class="trakt-mir-header-container">
-        <div class="trakt-mir-header">
-          <CalendarIcon />
-          <p class="bold uppercase">Month in review</p>
-        </div>
+  <div class="mir-pill">
+    <span class="mir-month bold">{monthName}</span>
+    <span class="mir-in-review">{m.mir_banner_in_review()}</span>
+  </div>
 
-        <RenderFor audience="vip" device={["mobile", "tablet-sm"]}>
-          <DismissButton {onDismiss} />
-        </RenderFor>
-      </div>
-    {/snippet}
+  <p class="mir-body ellipsis">{m.mir_banner_body({ month: monthName })}</p>
 
-    <MonthInReviewStats review={$review} isLoading={$isLoading} />
-
-    {#snippet footer()}
-      <div class="trakt-mir-footer">
-        <MonthInReviewLink slug={$user.slug} date={month} source="mir-banner" />
-        <RenderFor audience="vip" device={["tablet-lg", "desktop"]}>
-          <DismissButton {onDismiss} />
-        </RenderFor>
-      </div>
-    {/snippet}
-  </ReviewContent>
+  <div class="mir-actions">
+    <a class="mir-explore bold" {href}>
+      <span class="explore-label-desktop">{m.mir_banner_explore()}</span>
+      <span class="explore-label-mobile">{m.mir_banner_explore_now()}</span>
+    </a>
+    <DismissButton {onDismiss} />
+  </div>
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
   .trakt-month-in-review {
-    :global(.trakt-review-content) {
-      --review-content-height: var(--ni-56);
-      flex-direction: row;
-    }
-
-    :global(.trakt-review-content-cover-image) {
-      width: 25%;
-      mask-image: linear-gradient(90deg, #000 0%, #000 75%, transparent 100%);
-    }
-
-    :global(.trakt-review-content-footer) {
-      margin-inline-start: auto;
-    }
-
-    @include for-tablet-sm-and-below {
-      :global(.trakt-review-content-cover-image) {
-        width: 100%;
-        mask-image: none;
-      }
-
-      :global(.trakt-review-content-footer) {
-        margin-inline-start: 0;
-      }
-
-      :global(.trakt-review-content) {
-        --review-content-height: var(--ni-148);
-        flex-direction: column;
-
-        background: radial-gradient(
-          78.23% 78.23% at 0% 100%,
-          var(--color-review-accent) 0%,
-          var(--color-review-base) 100%
-        );
-      }
-    }
-  }
-
-  .trakt-mir-header-container {
     display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
+    align-items: center;
+    width: 100%;
+    max-width: var(--ni-920);
+    height: var(--ni-52);
+
+    background: var(--color-mir-banner-base);
+    border: 1px solid
+      color-mix(in srgb, var(--color-review-foreground) 8%, transparent);
+    border-radius: var(--border-radius-l);
+    box-shadow: 0 var(--ni-4) var(--ni-24) rgba(0, 0, 0, 0.4);
+    overflow: hidden;
   }
 
-  .trakt-mir-header,
-  .trakt-mir-footer {
+  .mir-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ni-1);
+
+    flex-shrink: 0;
+    align-self: stretch;
+    min-width: var(--ni-80);
+    padding-inline: var(--gap-s);
+
+    background: var(--purple-600);
+  }
+
+  .mir-month {
+    font-size: var(--font-size-text);
+    line-height: 1.1;
+    color: var(--color-review-foreground);
+    white-space: nowrap;
+  }
+
+  .mir-in-review {
+    font-size: var(--font-size-text-small);
+    color: color-mix(in srgb, var(--color-review-foreground) 60%, transparent);
+    white-space: nowrap;
+  }
+
+  .mir-body {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: var(--gap-m);
+
+    font-size: var(--font-size-text);
+    color: color-mix(in srgb, var(--color-review-foreground) 85%, transparent);
+    text-align: center;
+  }
+
+  .mir-actions {
     display: flex;
     align-items: center;
     gap: var(--gap-m);
+
+    flex-shrink: 0;
+    align-self: stretch;
+    padding-inline: var(--gap-m);
+  }
+
+  // Ghost-outlined CTA: transparent fill, subtle light stroke, accent label.
+  .mir-explore {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--gap-xs) var(--gap-m);
+
+    color: var(--purple-300);
+    text-decoration: none;
+    font-size: var(--font-size-text);
+    white-space: nowrap;
+
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--purple-300) 45%, transparent);
+    border-radius: var(--border-radius-s);
+    transition: background 150ms ease, border-color 150ms ease;
+
+    &:hover {
+      background: color-mix(in srgb, var(--purple-300) 12%, transparent);
+      border-color: color-mix(in srgb, var(--purple-300) 70%, transparent);
+    }
+  }
+
+  .mir-actions :global(trakt-banner-dismiss-button) {
+    opacity: 0.5;
+    transition: opacity 150ms ease;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .explore-label-mobile {
+    display: none;
+  }
+
+  // Mobile has no room for the recap copy, so drop it entirely and keep just
+  // the month chip and the actions, which sit at the end. The CTA also gets
+  // the more emphatic "Explore Now" label here.
+  @include for-tablet-sm-and-below {
+    .mir-body {
+      display: none;
+    }
+
+    .mir-actions {
+      margin-inline-start: auto;
+    }
+
+    .explore-label-desktop {
+      display: none;
+    }
+
+    .explore-label-mobile {
+      display: inline;
+    }
   }
 </style>
