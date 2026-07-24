@@ -1,6 +1,8 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import ArrowDownToLineIcon from "$lib/components/icons/ArrowDownToLineIcon.svelte";
+  import ArrowUpToLineIcon from "$lib/components/icons/ArrowUpToLineIcon.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
@@ -8,9 +10,11 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { MEDIA_POSTER_PLACEHOLDER } from "$lib/utils/assets.ts";
+  import { onDestroy, tick } from "svelte";
   import { flip } from "svelte/animate";
   import { cubicOut } from "svelte/easing";
   import type { ReorderableListItem } from "./models/ReorderableListItem.ts";
+  import RankEditor from "./RankEditor.svelte";
   import { type DragGhost, reorderDrag } from "./reorderDrag.ts";
   import {
     itemOrderSignature,
@@ -37,6 +41,8 @@
 
   const { confirm } = useConfirm();
 
+  const FLASH_DURATION_MS = 1500;
+
   let localOrder = $state<{
     signature: string;
     items: ReorderableListItem[];
@@ -46,6 +52,9 @@
   let instantPosterKeys = $state<readonly string[]>([]);
   let placeholderIndex = $state<number | null>(null);
   let dragGhost = $state<DragGhost | null>(null);
+  let tableBody = $state<HTMLTableSectionElement | null>(null);
+  let flashKey = $state<string | null>(null);
+  let flashTimeout: ReturnType<typeof setTimeout> | null = null;
 
   const rankOrderedItems = $derived(sortReorderableItems(items));
   const rankSignature = $derived(itemOrderSignature(rankOrderedItems));
@@ -158,7 +167,76 @@
     draggedKey = null;
     placeholderIndex = null;
     dragGhost = null;
+
+    if (!cancelled && key != null) {
+      highlightMovedRow(key);
+    }
   }
+
+  function moveItemToRank(key: string, targetRank: number) {
+    const index = orderedItems.findIndex((item) => item.key === key);
+    if (index < 0) {
+      return;
+    }
+
+    const item = orderedItems.at(index);
+    if (item == null) {
+      return;
+    }
+
+    const targetIndex = Math.min(Math.max(targetRank, 1), orderedItems.length) -
+      1;
+    if (targetIndex === index) {
+      return;
+    }
+
+    const withoutItem = orderedItems.filter((entry) => entry.key !== key);
+
+    localOrder = {
+      signature: rankSignature,
+      items: [
+        ...withoutItem.slice(0, targetIndex),
+        item,
+        ...withoutItem.slice(targetIndex),
+      ],
+    };
+
+    if (!instantPosterKeys.includes(key)) {
+      instantPosterKeys = [...instantPosterKeys, key];
+    }
+
+    highlightMovedRow(key);
+  }
+
+  async function highlightMovedRow(key: string) {
+    if (flashTimeout != null) {
+      clearTimeout(flashTimeout);
+    }
+
+    // Clear first so re-moving the same row restarts the flash animation.
+    flashKey = null;
+
+    // Wait for the reordered rows to land in the DOM before scrolling to the
+    // moved row and flashing it, so the user can see where it went.
+    await tick();
+
+    const movedRow = tableBody?.querySelector<HTMLElement>(
+      `[data-reorder-key="${CSS.escape(key)}"]`,
+    );
+    movedRow?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+
+    flashKey = key;
+    flashTimeout = setTimeout(() => {
+      flashKey = null;
+      flashTimeout = null;
+    }, FLASH_DURATION_MS);
+  }
+
+  onDestroy(() => {
+    if (flashTimeout != null) {
+      clearTimeout(flashTimeout);
+    }
+  });
 
   async function handleApply() {
     if (!canApply) {
@@ -235,6 +313,38 @@
   </div>
 {/snippet}
 
+{#snippet rowActions(
+  item: ReorderableListItem,
+  rank: number,
+  interactive: boolean,
+)}
+  <div class="reorder-actions">
+    <button
+      class="move-button"
+      type="button"
+      aria-label={m.button_text_move_to_top()}
+      disabled={interactive && rank === 1}
+      tabindex={interactive ? 0 : -1}
+      onclick={interactive ? () => moveItemToRank(item.key, 1) : undefined}
+    >
+      <ArrowUpToLineIcon />
+    </button>
+    <button
+      class="move-button"
+      type="button"
+      aria-label={m.button_text_move_to_bottom()}
+      disabled={interactive && rank === orderedItems.length}
+      tabindex={interactive ? 0 : -1}
+      onclick={interactive
+        ? () => moveItemToRank(item.key, orderedItems.length)
+        : undefined}
+    >
+      <ArrowDownToLineIcon />
+    </button>
+    {@render dragHandle()}
+  </div>
+{/snippet}
+
 <Drawer
   onClose={handleClose}
   title={m.drawer_title_reorder_list()}
@@ -264,6 +374,7 @@
     {:else}
       <table class="reorder-table">
         <tbody
+          bind:this={tableBody}
           use:reorderDrag={{
             getItems: () => orderedItems,
             onDragStart,
@@ -277,11 +388,18 @@
             <tr
               data-reorder-key={row.type === "item" ? row.item.key : undefined}
               class:drag-placeholder={row.type === "placeholder"}
+              class:is-flashing={row.type === "item" && row.item.key === flashKey}
               animate:flip={{ duration: 220, easing: cubicOut }}
             >
               <td class="rank-cell">
                 {#if row.type === "item"}
-                  <span class="bold">#{row.rank}</span>
+                  <RankEditor
+                    rank={row.rank}
+                    total={orderedItems.length}
+                    title={row.item.title}
+                    onMove={(targetRank) =>
+                    moveItemToRank(row.item.key, targetRank)}
+                  />
                 {/if}
               </td>
               <td>
@@ -293,9 +411,7 @@
               </td>
               <td class="actions-cell">
                 {#if row.type === "item"}
-                  <div class="reorder-actions">
-                    {@render dragHandle()}
-                  </div>
+                  {@render rowActions(row.item, row.rank, true)}
                 {/if}
               </td>
             </tr>
@@ -313,21 +429,21 @@
       use:dragGhostPortal
     >
       <div class="ghost-cell rank-cell">
-        <span class="bold">#{draggedItemRank}</span>
+        <span class="rank-display bold">#{draggedItemRank}</span>
       </div>
       <div class="ghost-cell">
         {@render itemSummary(draggedItem, false)}
       </div>
       <div class="ghost-cell actions-cell">
-        <div class="reorder-actions">
-          {@render dragHandle()}
-        </div>
+        {@render rowActions(draggedItem, draggedItemRank, false)}
       </div>
     </div>
   {/if}
 </Drawer>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .reorder-drawer {
     --reorder-row-background: var(--color-card-background);
     --reorder-placeholder-border: var(--border-thickness-xxs) dashed
@@ -432,18 +548,69 @@
     }
   }
 
+  .is-flashing td {
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: var(--color-background-purple);
+      opacity: 0;
+      animation: reorder-flash 1.5s ease-out;
+    }
+
+    &:first-child::after {
+      border-start-start-radius: var(--border-radius-m);
+      border-end-start-radius: var(--border-radius-m);
+    }
+
+    &:last-child::after {
+      border-start-end-radius: var(--border-radius-m);
+      border-end-end-radius: var(--border-radius-m);
+    }
+  }
+
+  @keyframes reorder-flash {
+    0% {
+      opacity: 0.28;
+    }
+
+    35% {
+      opacity: 0.28;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .is-flashing td::after {
+      animation: none;
+    }
+  }
+
   .placeholder-space {
     min-height: calc(var(--ni-40) * 1.5);
   }
 
   .rank-cell {
-    width: var(--ni-56);
+    width: var(--ni-72);
     text-align: center;
+    font-variant-numeric: tabular-nums;
+
+    // Ancestor `user-select: none` (set on cells to prevent drag text
+    // selection) otherwise suppresses the inline rank input's select().
+    user-select: text;
+    -webkit-user-select: text;
+  }
+
+  .rank-display {
     font-variant-numeric: tabular-nums;
   }
 
   .actions-cell {
-    width: var(--ni-56);
+    width: var(--ni-112);
   }
 
   .item-summary {
@@ -474,7 +641,50 @@
   .reorder-actions {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    gap: var(--ni-2);
+  }
+
+  .move-button {
+    all: unset;
+    box-sizing: border-box;
+    width: var(--ni-28);
+    height: var(--ni-28);
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    border-radius: var(--border-radius-m);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: color, background-color;
+
+    :global(svg) {
+      width: var(--ni-18);
+      height: var(--ni-18);
+    }
+
+    &:disabled {
+      opacity: var(--de-emphasized-opacity);
+      cursor: not-allowed;
+    }
+
+    @include for-mouse {
+      &:not(:disabled):hover {
+        color: var(--color-text-primary);
+        background-color: color-mix(
+          in srgb,
+          var(--color-foreground) 10%,
+          transparent
+        );
+      }
+    }
+
+    &:focus-visible {
+      outline: var(--border-thickness-xxs) solid var(--color-input-focus);
+      outline-offset: calc(-1 * var(--border-thickness-xxs));
+    }
   }
 
   .drag-handle {
@@ -506,7 +716,7 @@
     pointer-events: none;
 
     display: grid;
-    grid-template-columns: var(--ni-56) minmax(0, 1fr) var(--ni-56);
+    grid-template-columns: var(--ni-72) minmax(0, 1fr) var(--ni-112);
     align-items: center;
     box-sizing: border-box;
 
