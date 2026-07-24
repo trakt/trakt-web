@@ -4,6 +4,7 @@ import { isAddEndpoint } from '$lib/features/offline/isAddEndpoint.ts';
 import type { OfflineAction } from '$lib/features/offline/models/OfflineAction.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import { useOfflineActions } from '$lib/features/offline/useOfflineActions.ts';
+import { getShowWatchState } from '$lib/utils/media/getShowWatchState.ts';
 import { combineLatest, map, shareReplay } from 'rxjs';
 import type { ExtendedMediaStoreProps } from '../../../models/MediaStoreProps.ts';
 
@@ -100,35 +101,18 @@ export function useIsWatched(props: IsWatchedProps) {
           };
         }
         case 'show': {
-          const isWatched = shows.every((show) => {
-            const watchedShow = $history.shows.get(show.id);
-            const episodeCount = show.episode?.count;
+          const states = shows.map((show) =>
+            getShowWatchState({
+              watchedShow: $history.shows.get(show.id),
+              episodeCount: show.episode?.count,
+            })
+          );
 
-            if (!watchedShow || !episodeCount) {
-              return false;
-            }
-
-            const watchedEpisodeCount = [
-              ...watchedShow.playsPerSeason.entries(),
-            ]
-              .filter(([season]) =>
-                season !== 0
-              )
-              .reduce((sum, [, count]) => sum + count, 0);
-
-            return watchedEpisodeCount >= episodeCount;
-          });
-
-          const isPartiallyWatched = !isWatched && shows.some((show) => {
-            const watchedShow = $history.shows.get(show.id);
-
-            if (!watchedShow) {
-              return false;
-            }
-
-            return [...watchedShow.playsPerSeason.entries()]
-              .some(([season, count]) => season !== 0 && count > 0);
-          });
+          const isWatched = states.every((state) =>
+            state.isWatched
+          );
+          const isPartiallyWatched = !isWatched &&
+            states.some((state) => state.isStarted);
 
           return { isWatched, isPartiallyWatched };
         }
