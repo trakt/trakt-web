@@ -1340,6 +1340,7 @@
   "text_footer_category_legal": "Juridisch",
   "text_footer_category_platform": "Platform",
   "text_history_sync_filter": "Synchronisatie-ID {id}",
+  "text_history_sync_filter_with_source": "Sync ID {id} ({source})",
   "text_hours_watched": "{count} uur",
   "text_info_blocked": "{username} is geblokkeerd.",
   "text_info_cover_removed": "Omslagafbeelding is gewist.",
