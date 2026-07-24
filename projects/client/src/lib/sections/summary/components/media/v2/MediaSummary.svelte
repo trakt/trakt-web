@@ -9,6 +9,7 @@
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import { useIsRewatching } from "$lib/sections/media-actions/rewatching/useIsRewatching";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import { useIsWatchlisted } from "$lib/stores/useIsWatchlisted";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import {
     SummaryDrawers,
@@ -53,6 +54,7 @@
   const { isDropped } = $derived(useIsDropped(media));
   const { isStarted } = $derived(useIsStarted(target));
   const { isRewatching } = $derived(useIsRewatching(target));
+  const { isWatchlisted } = $derived(useIsWatchlisted(target));
 
   const { buildDrawerLink } = summaryDrawerNavigation();
   const ratingsDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Ratings));
@@ -65,6 +67,7 @@
     isDropped={$isDropped}
     isStarted={$isStarted}
     isRewatching={$isRewatching}
+    isWatchlisted={$isWatchlisted}
   />
 {/snippet}
 

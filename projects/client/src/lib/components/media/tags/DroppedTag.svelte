@@ -1,16 +1,27 @@
 <script lang="ts">
+  import DropIcon from "$lib/components/icons/DropIcon.svelte";
+  import IndicatorTag from "$lib/components/media/tags/IndicatorTag.svelte";
   import StemLinkTag from "$lib/components/media/tags/StemLinkTag.svelte";
   import type { TagIntl } from "$lib/components/media/tags/TagIntl.ts";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider.ts";
 
   const {
-    count = 0,
+    variant = "default",
     i18n = TagIntlProvider,
   }: {
     variant?: "default" | "full";
-    count?: number;
     i18n?: TagIntl;
   } = $props();
 </script>
 
-<StemLinkTag label={i18n.postCredits(count)} />
+{#if variant === "full"}
+  <StemLinkTag label={i18n.droppedLabel()}>
+    {#snippet icon()}
+      <DropIcon />
+    {/snippet}
+  </StemLinkTag>
+{:else}
+  <IndicatorTag>
+    <DropIcon />
+  </IndicatorTag>
+{/if}

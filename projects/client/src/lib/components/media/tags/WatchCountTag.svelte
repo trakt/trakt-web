@@ -1,70 +1,93 @@
 <script lang="ts">
+  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
+  import Link from "$lib/components/link/Link.svelte";
+  import type { DrawerLinkProps } from "$lib/components/media/tags/DrawerLinkProps.ts";
+  import type { TagIntl } from "$lib/components/media/tags/TagIntl";
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import { linear } from "svelte/easing";
   import { slide } from "svelte/transition";
-  import type { TagIntl } from "./TagIntl";
 
-  const { i18n, count }: { i18n: TagIntl; count: number } = $props();
+  const {
+    count,
+    i18n,
+    link,
+    onclick,
+  }: {
+    count: number;
+    i18n: TagIntl;
+    link?: DrawerLinkProps;
+    onclick?: () => void;
+  } = $props();
 
   const transitionDuration = 300;
 </script>
 
-<watch-count-tag>
+{#snippet tag()}
   <StemTag
-    --color-background-stem-tag="var(--color-background-watch-count-tag)"
-    --color-foreground-stem-tag="var(--color-text-watch-count-tag)"
-    classList="trakt-tag-label"
+    --color-background-stem-tag="var(--color-background-indicator-tag)"
+    --color-foreground-stem-tag="var(--color-text-indicator-tag)"
   >
-    <p class="bold uppercase no-wrap">
-      {i18n.watchCountLabel()}
-    </p>
-  </StemTag>
+    <TrackIcon />
 
-  <StemTag
-    --color-background-stem-tag="var(--color-background-watch-count-tag)"
-    --color-foreground-stem-tag="var(--color-text-watch-count-tag)"
-    classList="trakt-tag-count"
-  >
-    {#key count}
-      <p
-        class="bold uppercase no-wrap counter"
-        transition:slide={{
-          easing: linear,
-          axis: "y",
-          duration: transitionDuration,
-        }}
-      >
-        {count}
-      </p>
-    {/key}
+    <p class="bold uppercase no-wrap">{i18n.watchedLabel()}</p>
+    {#if count > 1}
+      <p class="bold">·</p>
+      <div transition:slide={{ axis: "x", duration: 150 }}>
+        {#key count}
+          <p
+            class="bold uppercase no-wrap counter"
+            transition:slide={{
+              easing: linear,
+              axis: "y",
+              duration: transitionDuration,
+            }}
+          >
+            {count}
+          </p>
+        {/key}
+      </div>
+    {/if}
   </StemTag>
+{/snippet}
+
+<watch-count-tag>
+  {#if onclick}
+    <button type="button" class="watch-count-trigger" {onclick}>
+      {@render tag()}
+    </button>
+  {:else if link}
+    <Link {...link}>
+      {@render tag()}
+    </Link>
+  {:else}
+    {@render tag()}
+  {/if}
 </watch-count-tag>
 
 <style>
   watch-count-tag {
-    display: flex;
-    align-items: center;
-
-    gap: var(--ni-1);
-
-    :global(.trakt-tag-label .trakt-tag) {
-      border-start-end-radius: 0;
-      border-end-end-radius: 0;
+    .watch-count-trigger {
+      all: unset;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
     }
 
-    :global(.trakt-tag-count .trakt-tag) {
-      border-start-start-radius: 0;
-      border-end-start-radius: 0;
+    :global(.trakt-tag) {
+      position: relative;
 
-      min-width: var(--ni-12);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      :global(svg) {
+        width: var(--ni-12);
+        height: var(--ni-12);
+      }
     }
-  }
 
-  .counter:nth-child(2) {
-    position: fixed;
+    :global(.counter[inert]) {
+      position: absolute;
+      inset-inline-start: var(--ni-20);
+    }
+
+    :global(.trakt-link) {
+      text-decoration: none;
+    }
   }
 </style>
