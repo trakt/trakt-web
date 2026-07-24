@@ -1,27 +1,32 @@
 <script lang="ts">
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import type { DrawerLinkProps } from "$lib/components/media/tags/DrawerLinkProps.ts";
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import {
-    SummaryDrawers,
-    summaryDrawerNavigation,
-  } from "../../_internal/summaryDrawerNavigation.ts";
 
-  const { buildDrawerLink } = summaryDrawerNavigation();
+  const { link }: { link?: DrawerLinkProps } = $props();
 </script>
 
-<started-tag>
-  <Link {...buildDrawerLink(SummaryDrawers.Seasons)}>
-    <StemTag
-      --color-background-stem-tag="var(--color-background-indicator-tag)"
-      --color-foreground-stem-tag="var(--color-text-indicator-tag)"
-    >
-      <TrackIcon />
+{#snippet tag()}
+  <StemTag
+    --color-background-stem-tag="var(--color-background-indicator-tag)"
+    --color-foreground-stem-tag="var(--color-text-indicator-tag)"
+  >
+    <TrackIcon />
 
-      <p class="bold uppercase no-wrap">{m.tag_text_started()}</p>
-    </StemTag>
-  </Link>
+    <p class="bold uppercase no-wrap">{m.tag_text_started()}</p>
+  </StemTag>
+{/snippet}
+
+<started-tag>
+  {#if link}
+    <Link {...link}>
+      {@render tag()}
+    </Link>
+  {:else}
+    {@render tag()}
+  {/if}
 </started-tag>
 
 <style>

@@ -20,7 +20,7 @@
   import EpisodeCard from "./EpisodeCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
-  import StatusIndicators from "./StatusIndicators.svelte";
+  import PosterTags from "$lib/components/media/tags/PosterTags.svelte";
 
   const { sortTag, ...props }: EpisodeCardProps & { sortTag?: Snippet } =
     $props();
@@ -74,7 +74,7 @@
 </script>
 
 {#snippet indicatorTags()}
-  <StatusIndicators isWatched={$isWatched} isWatchlisted={false} />
+  <PosterTags isWatched={$isWatched} isWatchlisted={false} />
 {/snippet}
 
 {#snippet action()}
