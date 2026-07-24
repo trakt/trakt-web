@@ -76,7 +76,8 @@ function modeToTrendingQuery(query: string, mode: SearchMode) {
     case 'media':
     case 'movie':
     case 'show': {
-      return searchTrendingQuery({ query }) as CreateQueryOptions<
+      const type = mode !== 'media' ? mode : undefined;
+      return searchTrendingQuery({ query, type }) as CreateQueryOptions<
         TrendingSearchesResult
       >;
     }
