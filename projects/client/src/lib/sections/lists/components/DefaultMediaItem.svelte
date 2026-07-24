@@ -4,11 +4,13 @@
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import MediaIconTag from "$lib/components/media/tags/MediaIconTag.svelte";
+  import PosterTags from "$lib/components/media/tags/PosterTags.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import ListsDrawer from "$lib/sections/components/lists-drawer/ListsDrawer.svelte";
+  import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { useIsRewatching } from "$lib/sections/media-actions/rewatching/useIsRewatching";
   import { useIsWatchlisted } from "$lib/stores/useIsWatchlisted";
@@ -17,7 +19,6 @@
   import DefaultMediaPopupActions from "./DefaultMediaPopupActions.svelte";
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
-  import StatusIndicators from "./StatusIndicators.svelte";
 
   const {
     type,
@@ -38,6 +39,7 @@
   );
   const { isRewatching } = $derived(useIsRewatching({ type, media }));
   const { isWatchlisted } = $derived(useIsWatchlisted({ type, media }));
+  const { isDropped } = $derived(useIsDropped(media));
 
   const isDeemphasized = $derived(canDeemphasize && $isWatched);
 
@@ -69,11 +71,12 @@
 {/snippet}
 
 {#snippet indicatorTags()}
-  <StatusIndicators
+  <PosterTags
     isRewatching={$isRewatching}
     isWatched={$isWatched}
     isPartiallyWatched={$isPartiallyWatched}
     isWatchlisted={$isWatchlisted}
+    isDropped={$isDropped}
   />
 {/snippet}
 

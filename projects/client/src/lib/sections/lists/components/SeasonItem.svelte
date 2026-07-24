@@ -18,7 +18,7 @@
   import type { Snippet } from "svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { SeasonCardProps } from "./models/SeasonCardProps";
-  import StatusIndicators from "./StatusIndicators.svelte";
+  import PosterTags from "$lib/components/media/tags/PosterTags.svelte";
 
   const {
     season,
@@ -49,7 +49,7 @@
 </script>
 
 {#snippet indicatorTags()}
-  <StatusIndicators
+  <PosterTags
     isWatched={$isWatched}
     isPartiallyWatched={$isPartiallyWatched}
     isWatchlisted={false}

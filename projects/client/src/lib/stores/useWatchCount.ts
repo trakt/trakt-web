@@ -2,6 +2,7 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
+import { getShowWatchState } from '$lib/utils/media/getShowWatchState.ts';
 import { combineLatest, map } from 'rxjs';
 
 export type UseWatchCountProps =
@@ -24,17 +25,12 @@ export function useWatchCount(props: UseWatchCountProps) {
         case 'movie':
           return $history.movies.get(mediaId)?.plays ?? 0;
         case 'show': {
-          const watchedShow = $history.shows.get(mediaId);
-          if (!watchedShow) return 0;
+          const { isWatched, minPlays } = getShowWatchState({
+            watchedShow: $history.shows.get(mediaId),
+            episodeCount: props.media.episode.count,
+          });
 
-          const episodeCount = props.media.episode.count;
-          const regularEpisodes = watchedShow.episodes.filter(
-            (e) => e.season !== 0,
-          );
-
-          if (regularEpisodes.length < episodeCount) return 0;
-
-          return Math.min(...regularEpisodes.map((e) => e.plays));
+          return isWatched ? minPlays : 0;
         }
         case 'episode': {
           const show = $history.shows.get(showId);
