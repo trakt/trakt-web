@@ -1,7 +1,7 @@
 export interface ShowSchema {
   air_day: string;
   air_time: string;
-  aired_episode_count: number;
+  aired_episode_count: number | undefined;
   aliases: string[];
   available_translations: string[];
   banner_url: string;
