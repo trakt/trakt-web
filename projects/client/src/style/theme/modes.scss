@@ -192,6 +192,23 @@
   );
   --color-dialog-background: var(--color-drawer-background);
   --color-modal-background: var(--color-card-background);
+  --color-drawer-drag-handle: color-mix(
+    in srgb,
+    var(--color-text-primary) 20%,
+    transparent
+  );
+  --color-option-list-background: var(--shade-30);
+  --color-option-list-border: var(--shade-100);
+  --color-option-list-separator: color-mix(
+    in srgb,
+    var(--color-text-primary) 12%,
+    transparent
+  );
+  --color-option-list-highlight: color-mix(
+    in srgb,
+    var(--color-text-primary) 10%,
+    transparent
+  );
 
   /*
    * Sentiment
@@ -647,6 +664,31 @@
   );
   --color-dialog-background: var(--color-drawer-background);
   --color-modal-background: var(--color-card-background);
+  --color-drawer-drag-handle: color-mix(
+    in srgb,
+    var(--color-text-primary) 20%,
+    transparent
+  );
+  --color-option-list-background: color-mix(
+    in srgb,
+    var(--color-text-primary) 6%,
+    var(--shade-920)
+  );
+  --color-option-list-border: color-mix(
+    in srgb,
+    var(--color-text-primary) 8%,
+    transparent
+  );
+  --color-option-list-separator: color-mix(
+    in srgb,
+    var(--color-text-primary) 7%,
+    transparent
+  );
+  --color-option-list-highlight: color-mix(
+    in srgb,
+    var(--color-text-primary) 6%,
+    transparent
+  );
 
   /*
    * Sentiment

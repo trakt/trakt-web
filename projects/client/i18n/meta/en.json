@@ -4545,6 +4545,10 @@
       "default": "Sort by default order",
       "description": "Aria-label for the button that allows users to sort items by the default sorting method."
     },
+    "button_description_sort_default": {
+      "default": "Original order",
+      "description": "Subtitle describing the default sorting method, shown beneath the option label in the sort drawer."
+    },
     "button_text_sort_smart": {
       "default": "Smart",
       "description": "Text for the button that allows users to sort up next items by the smart sorting method."
@@ -4552,6 +4556,10 @@
     "button_label_sort_smart": {
       "default": "Sort by smart order",
       "description": "Aria-label for the button that allows users to sort up next items by the smart sorting method."
+    },
+    "button_description_sort_smart": {
+      "default": "Recommended for you",
+      "description": "Subtitle describing the smart sorting method, shown beneath the option label in the sort drawer."
     },
     "button_text_sort_rank": {
       "default": "Rank",
@@ -4609,6 +4617,10 @@
       "default": "Sort by release date",
       "description": "Aria-label for the button that allows users to sort items by their release date."
     },
+    "button_description_sort_release_date": {
+      "default": "Newest first",
+      "description": "Subtitle describing the release-date sorting method, shown beneath the option label in the sort drawer."
+    },
     "button_text_sort_updated_date": {
       "default": "Updated Date",
       "description": "Text for the button that allows users to sort lists by the date they were last updated."
@@ -4660,6 +4672,10 @@
     "button_label_sort_remaining": {
       "default": "Sort by remaining episodes or movies",
       "description": "Aria-label for the button that allows users to sort shows by the number of remaining episodes or movies to watch."
+    },
+    "button_description_sort_remaining": {
+      "default": "Least episodes left",
+      "description": "Subtitle describing the remaining-episodes sorting method, shown beneath the option label in the sort drawer."
     },
     "text_about_user": {
       "default": "About {username}",

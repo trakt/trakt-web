@@ -1,4 +1,5 @@
 <script lang="ts">
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { fade, slide } from "svelte/transition";
 
@@ -31,7 +32,9 @@
       in:fade={{ duration: transitionDuration, delay: halfDuration }}
       out:fade={{ duration: transitionDuration }}
     >
-      {@render children()}
+      <DropdownGroup>
+        {@render children()}
+      </DropdownGroup>
     </div>
   </div>
 {/if}
@@ -66,9 +69,11 @@
     box-sizing: border-box;
   }
 
-  .trakt-summary-actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-8);
+  /* The slider panel already provides the surface; the grouped list flattens
+     onto it (transparent) so items read as flush divided rows, not a nested
+     card. */
+  .trakt-summary-actions :global(.trakt-dropdown-group) {
+    background: transparent;
+    border: none;
   }
 </style>
