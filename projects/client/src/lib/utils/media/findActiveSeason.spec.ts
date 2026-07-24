@@ -106,6 +106,35 @@ describe('findActiveSeason', () => {
     expect(result).toBe(2);
   });
 
+  it('should fallback to specials for a specials-only show with no watched season', () => {
+    const specialsOnly = createSeasons([
+      { number: 0, episodeCount: 1 },
+    ]);
+
+    const result = findActiveSeason({
+      seasons: specialsOnly,
+      lastWatchedSeason: EMPTY_SEASON_INFO,
+    });
+
+    expect(result).toBe(0);
+  });
+
+  it('should fallback to specials for a specials-only show', () => {
+    const specialsOnly = createSeasons([
+      { number: 0, episodeCount: 1 },
+    ]);
+
+    const result = findActiveSeason({
+      seasons: specialsOnly,
+      lastWatchedSeason: {
+        number: -1,
+        episodes: { count: 1 },
+      },
+    });
+
+    expect(result).toBe(0);
+  });
+
   it('should handle seasons not starting from 1', () => {
     const weirdSeason = createSeasons([
       { number: 3, episodeCount: 10 },
