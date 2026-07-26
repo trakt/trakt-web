@@ -6431,7 +6431,7 @@
       "description": "Title for the VIP feature that expands watchlist capacity."
     },
     "vip_feature_description_bigger_watchlist": {
-      "default": "Expand your watchlist capacity to keep track of everything you want to watch without limits.",
+      "default": "Expand your watchlist capacity to keep track of everything you want to watch.",
       "description": "Description for the VIP feature that expands watchlist capacity."
     },
     "vip_feature_title_bigger_library": {
@@ -6475,7 +6475,7 @@
       "description": "Description for the VIP feature that provides sentiment analysis and trivia."
     },
     "vip_feature_title_api_apps": {
-      "default": "More API Apps Connected",
+      "default": "More Apps Connected",
       "description": "Title for the VIP feature that allows connecting more API apps."
     },
     "vip_feature_description_api_apps": {
@@ -6687,7 +6687,7 @@
       "description": "Title for the section that shows a user's library usage, such as their library item counts and limits."
     },
     "usage_title_connected_apps": {
-      "default": "Connected Apps",
+      "default": "Apps",
       "description": "Title for the section that shows a user's connected community apps usage and limit."
     },
     "limit_title_smart_lists": {
@@ -7492,7 +7492,7 @@
       "description": "Title for the scrobbling/tracking feature card on the About page."
     },
     "about_feature_description_scrobble": {
-      "default": "Automatically scrobble what you watch across hundreds of apps and media servers. Never lose track of your progress.",
+      "default": "Automatically scrobble what you watch across streaming apps and media servers. Never lose track of your progress.",
       "description": "Description for the scrobbling/tracking feature card on the About page."
     },
     "about_feature_title_any_device": {
