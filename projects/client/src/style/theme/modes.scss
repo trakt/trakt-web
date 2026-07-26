@@ -43,6 +43,9 @@
   );
   --color-foreground-navbar: var(--color-foreground);
   --color-border: var(--shade-200);
+  // Confirmation-toast action pill stroke: a saturated purple keeps contrast
+  // on the light toast surface (the lighter --purple-300 washes out on white).
+  --color-snackbar-action-stroke: var(--purple-500);
   --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*
@@ -499,6 +502,9 @@
   );
   --color-foreground-navbar: var(--shade-10);
   --color-border: var(--shade-700);
+  // Confirmation-toast action pill stroke: the lighter --purple-300 reads as a
+  // crisp accent against the dark toast surface.
+  --color-snackbar-action-stroke: var(--purple-300);
   --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*

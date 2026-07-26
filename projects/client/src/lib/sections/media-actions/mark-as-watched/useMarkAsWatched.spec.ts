@@ -1,6 +1,8 @@
+import type { ActionToast } from '$lib/features/action-toast/models/ActionToast.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
+import { server } from '$mocks/server.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
@@ -22,6 +24,29 @@ vi.mock('$lib/requests/sync/removeWatchedRequest.ts', () => ({
   removeWatchedRequest: () => Promise.resolve(true),
 }));
 
+// Capture what the hook hands to the toast engine so the test can invoke the
+// "Undo" action exactly as the toast host would.
+const { notify } = vi.hoisted(() => ({ notify: vi.fn() }));
+vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
+  useActionToast: () => ({ notify, dismiss: vi.fn() }),
+}));
+
+/** Records request method + path for every request MSW handles during `run`. */
+async function captureRequests(run: () => Promise<void>): Promise<string[]> {
+  const requests: string[] = [];
+  const record = ({ request }: { request: Request }) => {
+    requests.push(`${request.method} ${new URL(request.url).pathname}`);
+  };
+
+  server.events.on('request:start', record);
+  try {
+    await run();
+  } finally {
+    server.events.removeListener('request:start', record);
+  }
+  return requests;
+}
+
 describe('useMarkAsWatched', () => {
   const invalidate = vi.fn(function () {});
 
@@ -29,6 +54,7 @@ describe('useMarkAsWatched', () => {
     setAuthorization(true);
     invalidate.mockReset();
     removeRatingSpy.mockClear();
+    notify.mockReset();
 
     (useInvalidator as Mock)
       .mockReturnValueOnce({ invalidate }) // 1: useMarkAsWatched
@@ -349,6 +375,30 @@ describe('useMarkAsWatched', () => {
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(true);
+    });
+  });
+
+  describe('action confirmation undo', () => {
+    it('should re-mark as watched when the removal toast Undo runs', async () => {
+      const { removeWatched } = await renderStore(() =>
+        useMarkAsWatched({
+          type: 'movie',
+          media: { id: 1, effectiveReleaseDate: new Date() },
+        })
+      );
+
+      await removeWatched();
+
+      const toast = notify.mock.calls.at(-1)?.[0] as
+        | Omit<ActionToast, 'id'>
+        | undefined;
+      expect(toast?.action).toBeDefined();
+
+      // Undo re-marks as watched - a real write to the history endpoint.
+      const undoRequests = await captureRequests(async () => {
+        await toast?.action?.onAction();
+      });
+      expect(undoRequests).toContain('POST /sync/history');
     });
   });
 });
