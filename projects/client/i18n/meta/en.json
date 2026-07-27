@@ -9900,6 +9900,10 @@
     "notice_delete_account_vip": {
       "default": "Since you're an active Trakt VIP, please <a>cancel your VIP membership</a> before deleting your account.",
       "description": "Info banner shown in the delete-account settings section when the user still has an active, cancellable VIP subscription. The <a> tag wraps the link to the VIP management page."
+    },
+    "text_info_report_sent": {
+      "default": "Report has been submitted.",
+      "description": "Text shown in a snackbar after a user successfully submits a report."
     }
   }
 }
