@@ -3,6 +3,7 @@ import GearIcon from '$lib/components/icons/GearIcon.svelte';
 import LibraryIcon from '$lib/components/icons/LibraryIcon.svelte';
 import PlexLibraryIcon from '$lib/components/icons/PlexLibraryIcon.svelte';
 import PlugIcon from '$lib/components/icons/PlugIcon.svelte';
+import ProfileIcon from '$lib/components/icons/ProfileIcon.svelte';
 import ServerIcon from '$lib/components/icons/ServerIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
@@ -18,8 +19,9 @@ type SettingsPage = {
   flag?: FeatureFlag;
   /**
    * Destination for the mobile settings hub, when it differs from the desktop
-   * sidebar `href`. General surfaces its account details on the hub itself, so
-   * its drill-down row targets the standalone `/settings/general` route.
+   * sidebar `href`. General's `href` is the settings root, which the mobile
+   * hub already renders directly, so its drill-down row instead targets the
+   * standalone `/settings/general` route.
    */
   hubHref?: string;
 };
@@ -30,6 +32,11 @@ export const settingsPages: ReadonlyArray<SettingsPage> = [
     hubHref: UrlBuilder.settings.generalDetail(),
     label: m.link_text_general_settings,
     icon: GearIcon,
+  },
+  {
+    href: UrlBuilder.settings.account(),
+    label: m.link_text_account_settings,
+    icon: ProfileIcon,
   },
   {
     href: UrlBuilder.settings.data(),
