@@ -1,3 +1,5 @@
+import { oidcUserStoreKey } from './oidcUserStoreKey.ts';
+
 type SessionStore = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
 
 type PortWorkerAuthSessionProps = {
@@ -6,9 +8,6 @@ type PortWorkerAuthSessionProps = {
   fromAuthority: string;
   toAuthority: string;
 };
-
-const userStoreKey = (authority: string, clientId: string) =>
-  `oidc.user:${authority}:${clientId}`;
 
 // oidc-client-ts keys the stored session by authority. When the authority
 // changes, the session is orphaned under the old key and the user is logged
@@ -20,17 +19,18 @@ export function portWorkerAuthSession(
     return false;
   }
 
-  const toKey = userStoreKey(toAuthority, clientId);
+  const toKey = oidcUserStoreKey({ authority: toAuthority, clientId });
   if (store.getItem(toKey) != null) {
     return false;
   }
 
-  const stored = store.getItem(userStoreKey(fromAuthority, clientId));
+  const fromKey = oidcUserStoreKey({ authority: fromAuthority, clientId });
+  const stored = store.getItem(fromKey);
   if (stored == null) {
     return false;
   }
 
   store.setItem(toKey, stored);
-  store.removeItem(userStoreKey(fromAuthority, clientId));
+  store.removeItem(fromKey);
   return true;
 }
