@@ -34,6 +34,7 @@ import { createBulkMediaIntl } from '../intl-overlay/createBulkMediaIntl.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
 import { mapToSearchCover } from './_internal/mapToSearchCover.ts';
 import { postRecentSearch } from './_internal/postRecentSearch.ts';
+import { splitExactByConfidence } from './_internal/splitExactByConfidence.ts';
 import { ensureFreshSearchKeys } from './ensureFreshSearchKeys.ts';
 import type { SearchResponse } from './models/SearchResponse.ts';
 
@@ -125,15 +126,24 @@ export function useSearch() {
             modeToQuery(term, currentMode, freshConfig, true),
           );
           return combineLatest([exactQuery, searchQuery, trendingQuery]).pipe(
-            map(([exactResults, searchResults, trendingResults]) => ({
-              type: 'media' as const,
-              items: dedupe(
-                (item) => item.key,
+            map(([exactResults, searchResults, trendingResults]) => {
+              // Only unambiguous exact hits lead; the deep catalog tail trails
+              // the fuzzy results instead of displacing them.
+              const { confident, deep } = splitExactByConfidence(
                 (exactResults as MediaSearchResult).items,
-                trendingResults?.items ?? [],
-                (searchResults as MediaSearchResult).items,
-              ),
-            })),
+              );
+
+              return {
+                type: 'media' as const,
+                items: dedupe(
+                  (item) => item.key,
+                  confident,
+                  trendingResults?.items ?? [],
+                  (searchResults as MediaSearchResult).items,
+                  deep,
+                ),
+              };
+            }),
           );
         }),
         // Contain a failed lookup to this search. Without this the error
