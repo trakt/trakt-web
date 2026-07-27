@@ -12,6 +12,7 @@
   import ClampedText from "$lib/components/text/ClampedText.svelte";
   import { getLocale, languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry.ts";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew.ts";
@@ -86,6 +87,12 @@
     entry
       ? useIsRateable({ type: "episode", media: entry, show })
       : { isRateable: of(false) },
+  );
+
+  const spoilerFreeTitle = $derived(
+    entry
+      ? useSpoilerFreeEpisodeTitle({ episode: entry, show })
+      : of(""),
   );
 
   const { buildEpisodeDrawerLink } = summaryDrawerNavigation();
@@ -327,7 +334,7 @@
           <EpisodeActions
             episode={entry}
             {show}
-            title={entry.title}
+            title={$spoilerFreeTitle}
             showTitle={show.title}
             {onHistoryOpen}
           />

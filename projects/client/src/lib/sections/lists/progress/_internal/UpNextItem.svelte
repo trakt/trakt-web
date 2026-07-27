@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
   import type { MovieProgressEntry } from "$lib/requests/models/MovieProgressEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import RestoreAction from "$lib/sections/media-actions/restore/RestoreAction.svelte";
+  import { of } from "rxjs";
   import DropAction from "../../../media-actions/drop/DropAction.svelte";
   import MarkAsWatchedAction from "../../../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeItem from "../../components/EpisodeItem.svelte";
@@ -26,6 +28,15 @@
   };
 
   const { style, ...props }: UpNextProps = $props();
+
+  const spoilerFreeTitle = $derived(
+    "episode" in props
+      ? useSpoilerFreeEpisodeTitle({
+          episode: props.episode,
+          show: props.show,
+        })
+      : of(""),
+  );
 </script>
 
 {#if "episode" in props}
@@ -47,7 +58,7 @@
           <MarkAsWatchedAction
             style="dropdown-item"
             type="episode"
-            title={props.episode.title}
+            title={$spoilerFreeTitle}
             show={props.show}
             media={props.episode}
           />
