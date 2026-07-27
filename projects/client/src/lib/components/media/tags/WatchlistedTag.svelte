@@ -14,7 +14,5 @@
     {/snippet}
   </StemLinkTag>
 {:else}
-  <IndicatorTag>
-    <BookmarkIcon state="added" />
-  </IndicatorTag>
+  <IndicatorTag indicator="watchlisted" />
 {/if}

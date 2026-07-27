@@ -196,8 +196,9 @@
         { name: "Progress text", token: "--color-text-progress-tag" },
         { name: "Preview background", token: "--color-background-preview-tag" },
         { name: "Preview text", token: "--color-text-preview-tag" },
-        { name: "Watch count background", token: "--color-background-watch-count-tag" },
-        { name: "Watch count text", token: "--color-text-watch-count-tag" },
+        { name: "Indicator background", token: "--color-background-indicator-tag" },
+        { name: "Indicator text", token: "--color-text-indicator-tag" },
+        { name: "Indicator remainder", token: "--color-background-indicator-remainder-tag" },
       ],
     },
     {

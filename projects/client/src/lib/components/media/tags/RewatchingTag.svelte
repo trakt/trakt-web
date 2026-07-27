@@ -21,7 +21,5 @@
     {/snippet}
   </StemLinkTag>
 {:else}
-  <IndicatorTag>
-    <FastRewindIcon />
-  </IndicatorTag>
+  <IndicatorTag indicator="rewatching" />
 {/if}
