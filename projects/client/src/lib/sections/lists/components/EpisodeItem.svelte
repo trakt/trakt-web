@@ -11,6 +11,7 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
+  import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
@@ -54,6 +55,13 @@
     useIsWatched({ type: "episode", media: props.episode, show: props.media }),
   );
 
+  const spoilerFreeTitle = $derived(
+    useSpoilerFreeEpisodeTitle({
+      episode: props.episode,
+      show: props.media,
+    }),
+  );
+
   const hasMarkAsWatched = $derived.by(() => {
     if (isListItem || isFuture || isHidden || isActivity) {
       return false;
@@ -90,7 +98,7 @@
           style="action"
           type="episode"
           size="small"
-          title={props.episode.title}
+          title={$spoilerFreeTitle}
           media={props.episode}
           show={props.media}
         />

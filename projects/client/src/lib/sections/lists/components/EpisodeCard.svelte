@@ -12,6 +12,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
+  import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
   import {
     EPISODE_COVER_PLACEHOLDER,
     MEDIA_POSTER_PLACEHOLDER,
@@ -39,6 +40,10 @@
     useEpisodeSpoilerImage({ episode, show, variant: rest.variant }),
   );
 
+  const spoilerFreeTitle = $derived(
+    useSpoilerFreeEpisodeTitle({ episode, show }),
+  );
+
   const episodeLink = $derived(
     rest.urlOverride ?? {
       href: UrlBuilder.episodeDrawer(show.slug, episode.season, episode.number),
@@ -55,8 +60,8 @@
     <CardActionBar>
       {#snippet actions()}
         <PopupMenu
-          label={m.button_label_popup_menu({ title: episode.title })}
-          title={episode.title}
+          label={m.button_label_popup_menu({ title: $spoilerFreeTitle })}
+          title={$spoilerFreeTitle}
         >
           {#snippet items()}
             {@render externalPopupActions()}
@@ -81,7 +86,7 @@
       <CardCover
         title={show.title}
         src={show.poster.url.thumb ?? MEDIA_POSTER_PLACEHOLDER}
-        alt={`${show.title} - ${episode.title}`}
+        alt={`${show.title} - ${$spoilerFreeTitle}`}
         {badge}
       />
 
@@ -108,7 +113,7 @@
       <CardCover
         title={show.title}
         src={$src ?? EPISODE_COVER_PLACEHOLDER}
-        alt={`${show.title} - ${episode.title}`}
+        alt={`${show.title} - ${$spoilerFreeTitle}`}
         {badge}
         {tag}
       />

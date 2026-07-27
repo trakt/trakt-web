@@ -11,6 +11,7 @@
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
+  import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
@@ -20,6 +21,7 @@
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { of } from "rxjs";
   import type { Snippet } from "svelte";
   import SummaryCardBackgroundImage from "./_internal/SummaryCardBackgroundImage.svelte";
   import SummaryCardBottomBar from "./_internal/SummaryCardBottomBar.svelte";
@@ -77,6 +79,15 @@
     rest.type === "episode" && "context" in rest && rest.context === "show",
   );
 
+  const spoilerFreeTitle = $derived(
+    rest.type === "episode"
+      ? useSpoilerFreeEpisodeTitle({
+          episode: rest.episode,
+          show: media,
+        })
+      : of(media.title),
+  );
+
   const coverData = $derived.by(() => {
     if (rest.type === "episode") {
       const episodeCover = rest.episode.cover.url ?? EPISODE_COVER_PLACEHOLDER;
@@ -85,7 +96,7 @@
       return {
         background: !isMinimal ? episodeCover : undefined,
         poster: posterOverride ?? media.poster.url.thumb,
-        title: rest.episode.title,
+        title: $spoilerFreeTitle,
       };
     }
 
@@ -156,10 +167,6 @@
         )
       : UrlBuilder.media(media.type, media.slug);
   });
-
-  const popupMenuTitle = $derived(
-    rest.type === "episode" ? rest.episode.title : media.title,
-  );
 </script>
 
 {#snippet cardContent()}
@@ -278,7 +285,7 @@
     <CardActionBar variant={isCompact || isMinimal ? "standalone" : "default"}>
       {#snippet actions()}
         <PopupMenu
-          label={m.button_label_popup_menu({ title: popupMenuTitle })}
+          label={m.button_label_popup_menu({ title: $spoilerFreeTitle })}
           mode="standalone"
           title={media.title}
         >
