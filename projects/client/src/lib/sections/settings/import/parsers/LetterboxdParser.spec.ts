@@ -103,7 +103,7 @@ describe('LetterboxdParser', () => {
         type: 'movie',
         title: 'The Matrix',
         year: 1999,
-        watched_at: '2023-06-22T00:00:00.000Z',
+        watched_at: '2023-06-22T12:00:00.000Z',
       });
     });
 
@@ -157,7 +157,7 @@ describe('LetterboxdParser', () => {
         title: 'Inception',
         year: 2010,
         rating: 8,
-        rated_at: '2024-01-15T00:00:00.000Z',
+        rated_at: '2024-01-15T12:00:00.000Z',
       });
     });
 

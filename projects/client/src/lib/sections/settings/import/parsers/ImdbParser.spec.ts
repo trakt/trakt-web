@@ -144,8 +144,8 @@ describe('ImdbParser', () => {
 
       const result = await ImdbParser.parse([dummyFile]);
 
-      expect(result[0].rated_at).toBe(new Date('2024-09-02').toISOString());
-      expect(result[1].watched_at).toBe(new Date('2024-09-02').toISOString());
+      expect(result[0].rated_at).toBe('2024-09-02T12:00:00.000Z');
+      expect(result[1].watched_at).toBe('2024-09-02T12:00:00.000Z');
     });
 
     it('handles missing Date Rated gracefully', async () => {
