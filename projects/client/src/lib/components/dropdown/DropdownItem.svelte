@@ -9,6 +9,7 @@
     tabindex?: number;
     icon?: Snippet;
     end?: Snippet;
+    subtitle?: Snippet;
     style?: "ghost" | "flat";
     variant?: "primary" | "secondary";
     selected?: boolean;
@@ -25,6 +26,7 @@
     children,
     icon,
     end,
+    subtitle,
     ...props
   }: DropdownItemProps | DropdownItemAnchorProps = $props();
 
@@ -44,7 +46,12 @@
 </script>
 
 {#snippet text()}
-  <p class="bold capitalize ellipsis">{@render children()}</p>
+  <div class="item-label">
+    <p class="bold capitalize ellipsis">{@render children()}</p>
+    {#if subtitle}
+      <p class="small ellipsis">{@render subtitle()}</p>
+    {/if}
+  </div>
 {/snippet}
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
@@ -57,6 +64,7 @@
   data-style={style}
   data-variant={variant}
   class:is-selected={selected}
+  class:has-subtitle={subtitle != null}
   {...props}
 >
   {#if href}
@@ -116,6 +124,15 @@
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: background, color;
+
+    &.has-subtitle {
+      height: auto;
+      padding-block: var(--ni-8);
+    }
+
+    .item-label {
+      min-width: 0;
+    }
 
     .item-icon {
       display: flex;

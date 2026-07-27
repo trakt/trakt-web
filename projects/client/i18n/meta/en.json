@@ -4276,6 +4276,19 @@
         }
       }
     },
+    "button_subtitle_cover_image_selected": {
+      "default": "Current cover",
+      "description": "Sub-label under the set cover image button, indicating the movie, show, or episode is already set as the users cover image. This must be as short as possible."
+    },
+    "button_label_cover_image_selected": {
+      "default": "\"{title}\" is your cover image.",
+      "description": "Aria-label for the button that indicates the movie, show, or episode is already set as the users cover image.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "page_title_start_watching": {
       "default": "Start Watching",
       "description": "Title for the Start Watching page, which shows the movies or shows a user should start watching."
