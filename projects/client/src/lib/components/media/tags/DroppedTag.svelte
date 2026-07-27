@@ -21,7 +21,5 @@
     {/snippet}
   </StemLinkTag>
 {:else}
-  <IndicatorTag>
-    <DropIcon />
-  </IndicatorTag>
+  <IndicatorTag indicator="dropped" />
 {/if}

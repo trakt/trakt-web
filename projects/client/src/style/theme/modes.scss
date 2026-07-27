@@ -88,6 +88,13 @@
   --color-surface-button-disabled: var(--shade-200);
   --color-foreground-button-disabled: var(--shade-400);
 
+  /**
+   * Tags
+   */
+  --color-text-indicator-tag: var(--shade-10);
+  --color-background-indicator-tag: var(--shade-800);
+  --color-background-indicator-remainder-tag: var(--shade-500);
+
   /*
    * Select
    */
@@ -591,6 +598,10 @@
 
   --color-text-duration-tag: var(--shade-800);
   --color-background-duration-tag: var(--shade-10);
+
+  --color-text-indicator-tag: var(--shade-900);
+  --color-background-indicator-tag: var(--shade-10);
+  --color-background-indicator-remainder-tag: var(--shade-300);
 
   /**
    * Toasts

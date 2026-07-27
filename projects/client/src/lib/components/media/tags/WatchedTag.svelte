@@ -1,5 +1,4 @@
 <script lang="ts">
-  import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import type { DrawerLinkProps } from "$lib/components/media/tags/DrawerLinkProps.ts";
   import IndicatorTag from "$lib/components/media/tags/IndicatorTag.svelte";
   import type { TagIntl } from "$lib/components/media/tags/TagIntl.ts";
@@ -24,7 +23,5 @@
 {#if variant === "full"}
   <WatchCountTag {count} {i18n} {link} {onclick} />
 {:else}
-  <IndicatorTag variant="full">
-    <TrackIcon />
-  </IndicatorTag>
+  <IndicatorTag variant="full" indicator="watched" />
 {/if}

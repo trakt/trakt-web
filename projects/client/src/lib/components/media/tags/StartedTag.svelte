@@ -21,7 +21,5 @@
     {/snippet}
   </StemLinkTag>
 {:else}
-  <IndicatorTag variant="partial">
-    <TrackIcon />
-  </IndicatorTag>
+  <IndicatorTag variant="partial" indicator="watched" />
 {/if}

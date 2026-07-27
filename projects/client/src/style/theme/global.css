@@ -23,9 +23,6 @@
     transparent
   );
 
-  --color-text-watch-count-tag: var(--shade-10);
-  --color-background-watch-count-tag: var(--purple-500);
-
   --color-text-trend-tag: var(--shade-10);
   --color-background-trend-neutral-background-tag: var(--color-text-secondary);
   --color-background-trend-down-background-tag: var(--red-500);
@@ -37,9 +34,6 @@
   /* Offline queued action flag - dark text on yellow reads in both themes */
   --color-text-queued-tag: var(--shade-900);
   --color-background-queued-tag: var(--yellow-600);
-
-  --color-text-indicator-tag: var(--shade-10);
-  --color-background-indicator-tag: var(--shade-800);
 
   /**
    * Avatar
