@@ -1,7 +1,9 @@
 import * as m from '$lib/features/i18n/messages.ts';
+import { toCanonicalEntry } from '$lib/features/intl-overlay/toCanonicalEntry.ts';
 import type { FavoritedEntry } from '$lib/requests/models/FavoritedEntry.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import type { ProgressEntry } from '$lib/requests/models/ProgressEntry.ts';
+import { toSortableTitle } from '$lib/utils/formatting/string/toSortableTitle.ts';
 import { getLocale, languageTag } from '../../../../features/i18n/index.ts';
 import { isMaxDate } from '../../../../utils/date/isMaxDate.ts';
 import { toHumanDay } from '../../../../utils/formatting/date/toHumanDay.ts';
@@ -136,7 +138,9 @@ export function formatSortValue(
         ? toUserRating(userRating, getLocale())
         : undefined;
     case 'title':
-      return getTitle(item)[0]?.toUpperCase();
+      return toSortableTitle(
+        getTitle(toCanonicalEntry(item)),
+      )[0]?.toUpperCase();
     case 'rank': {
       const rank = getRank(item);
       return rank == null ? undefined : `#${rank}`;

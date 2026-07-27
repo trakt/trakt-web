@@ -1,7 +1,24 @@
+import { mergeOverlay } from '$lib/features/intl-overlay/_internal/mergeOverlay.ts';
+import { listItemTargets } from '$lib/features/intl-overlay/listItemTargets.ts';
+import type { BulkIntl } from '$lib/requests/models/BulkIntl.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import { describe, expect, it } from 'vitest';
 import { MAX_DATE } from '../../../../utils/constants.ts';
-import { formatSortValue, groupByReleased } from './formatSortValue.ts';
+import {
+  formatSortValue,
+  groupByReleased,
+  type SortInput,
+} from './formatSortValue.ts';
+
+function localize(item: ListItem, intl: Partial<BulkIntl>) {
+  const [localized] = mergeOverlay(
+    [item],
+    { movie: new Map(), show: new Map(), episode: new Map(), ...intl },
+    { getTargets: listItemTargets },
+  );
+
+  return localized;
+}
 
 describe('formatSortValue', () => {
   describe('sortBy: added', () => {
@@ -126,7 +143,7 @@ describe('formatSortValue', () => {
       expect(formatSortValue(episodeItem, 'title')).toBe('O');
     });
 
-    it('should return first letter of show title for season', () => {
+    it('should ignore a leading article for season show titles', () => {
       const seasonItem = {
         type: 'season',
         entry: {
@@ -134,7 +151,73 @@ describe('formatSortValue', () => {
           show: { title: 'The Wire' },
         },
       } as unknown as ListItem;
-      expect(formatSortValue(seasonItem, 'title')).toBe('T');
+      expect(formatSortValue(seasonItem, 'title')).toBe('W');
+    });
+
+    it('should ignore a leading article for show titles', () => {
+      const showItem = {
+        type: 'show',
+        entry: { title: 'The Boys' },
+      } as unknown as ListItem;
+      expect(formatSortValue(showItem, 'title')).toBe('B');
+    });
+
+    it('should group a localized item by its canonical title', () => {
+      const showItem = {
+        type: 'show',
+        id: 1,
+        entry: { id: 1, title: 'The Boys' },
+      } as unknown as ListItem;
+
+      const localized = localize(showItem, {
+        show: new Map([[1, 'Los Muchachos']]),
+      });
+
+      expect(formatSortValue(localized, 'title')).toBe('B');
+    });
+
+    it('should not strip a leading article from a localized title', () => {
+      const movieItem = {
+        type: 'movie',
+        id: 2,
+        entry: { id: 2, title: 'Blindsided' },
+      } as unknown as ListItem;
+
+      const localized = localize(movieItem, {
+        movie: new Map([[2, 'A ciegas']]),
+      });
+
+      expect(formatSortValue(localized, 'title')).toBe('B');
+    });
+
+    it('should ignore a leading article for episode titles', () => {
+      const episodeItem = {
+        type: 'episode',
+        entry: {
+          episode: { title: 'The Blackout' },
+          show: { title: 'Friends' },
+        },
+      } as unknown as ListItem;
+
+      expect(formatSortValue(episodeItem, 'title')).toBe('B');
+    });
+
+    it('should ignore a leading article for favorited items', () => {
+      const favoritedItem = {
+        favoritedAt: new Date('2023-01-01T00:00:00.000Z'),
+        item: { title: 'The Wire' },
+      } as unknown as SortInput;
+
+      expect(formatSortValue(favoritedItem, 'title')).toBe('W');
+    });
+
+    it('should ignore a leading article for progress entries', () => {
+      const progressItem = {
+        type: 'watched',
+        show: { title: 'The Boys' },
+      } as unknown as SortInput;
+
+      expect(formatSortValue(progressItem, 'title')).toBe('B');
     });
   });
 

@@ -48,17 +48,23 @@
     return items.filter(({ key }) => !seenKeys.has(key) && seenKeys.add(key));
   });
 
+  type ItemGroup = { id: string; key: string; groupItems: T[] };
+
   const groupedItems = $derived.by(() => {
     if (!groupBy) return null;
 
-    const groups = uniqueItems.reduce((acc, item) => {
+    return uniqueItems.reduce<ItemGroup[]>((acc, item) => {
       const key = groupBy(item);
-      const group = acc.get(key) ?? [];
-      group.push(item);
-      acc.set(key, group);
+      const openGroup = acc.at(-1);
+
+      if (openGroup?.key === key) {
+        openGroup.groupItems.push(item);
+        return acc;
+      }
+
+      acc.push({ id: item.key, key, groupItems: [item] });
       return acc;
-    }, new Map<string, T[]>());
-    return Array.from(groups, ([key, groupItems]) => ({ key, groupItems }));
+    }, []);
   });
 </script>
 
@@ -77,7 +83,7 @@
         {@render item(i)}
       {/each}
       {#if groupedItems}
-        {#each groupedItems as group (group.key)}
+        {#each groupedItems as group (group.id)}
           <div class="group-header">
             {#if groupHeader}
               {@render groupHeader(group.key)}
