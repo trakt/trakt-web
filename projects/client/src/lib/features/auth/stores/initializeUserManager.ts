@@ -6,6 +6,7 @@ import { workerRequest } from '$worker/workerRequest.ts';
 import { type User, UserManager } from 'oidc-client-ts';
 import { BehaviorSubject, of } from 'rxjs';
 import { onMount } from 'svelte';
+import { writeAuthMarker } from '../authMarker.ts';
 import { deriveStandardAuthority } from '../deriveStandardAuthority.ts';
 import { getOidcConfig } from '../getOidcConfig.ts';
 import { portWorkerAuthSession } from '../portWorkerAuthSession.ts';
@@ -28,10 +29,12 @@ function mapToToken(user: User | null): Token {
 type InitializeUserManagerParams = {
   ctx: AuthContextType;
   tokenFromServer?: string | null;
+  /** Skip the `manager.getUser()` gate when the caller already seeded `ctx`. */
+  isResolved?: boolean;
 };
 
 export function initializeUserManager(
-  { ctx, tokenFromServer }: InitializeUserManagerParams,
+  { ctx, tokenFromServer, isResolved = false }: InitializeUserManagerParams,
 ) {
   if (!browser) {
     return {
@@ -39,7 +42,7 @@ export function initializeUserManager(
     };
   }
 
-  const isInitializing = new BehaviorSubject(true);
+  const isInitializing = new BehaviorSubject(!isResolved);
 
   onMount(() => {
     // Carry an existing session across an authority change so it is kept
@@ -69,15 +72,15 @@ export function initializeUserManager(
       ctx.token.next(token);
 
       const nextIsAuthorized = !isExpired;
-      // Client auth resolved differently than the SSR-seeded value the cached
-      // navigation document was rendered with. Evict it so the next load isn't
-      // served a stale unauthorized shell that flickers into the dashboard.
-      // Mirrors the logout-time bust in useAuth.
       const didAuthorizationChange =
         ctx.isAuthorized.value !== nextIsAuthorized;
 
       ctx.isAuthorized.next(nextIsAuthorized);
       isInitializing.next(false);
+
+      // Written on every resolution, not just on change, so the worker stays
+      // correct after a cache eviction or a fresh install.
+      void writeAuthMarker(nextIsAuthorized);
 
       if (didAuthorizationChange) {
         // Best-effort: the SW may be unavailable (private mode, blocked).

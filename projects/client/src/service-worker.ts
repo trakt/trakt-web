@@ -13,6 +13,7 @@ import {
   NetworkFirst,
   StaleWhileRevalidate,
 } from 'workbox-strategies';
+import { readAuthMarker } from './lib/features/auth/authMarker.ts';
 import { LOCALE_COOKIE_NAME } from './lib/features/i18n/constants.ts';
 import { time } from './lib/utils/timing/time.ts';
 import { CacheKey } from './worker/CacheKey.ts';
@@ -108,33 +109,34 @@ self.addEventListener('message', (event) => {
 // Precache static assets
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Vary the navigation cache key by locale so a document rendered for one
-// locale is never served to a request for another (the SSR HTML is
-// locale-specific). Falls back to the plain key where the Cookie Store API is
-// unavailable (Safari/Firefox), which stay covered by the CacheBust message
-// and the activate-time purge.
-const localeAwareCacheKey = {
+// `+layout.server.ts` bakes both locale and `oidcAuth.isAuthorized` into the
+// SSR payload, so a cached document must only be replayed to a request it was
+// rendered for. Auth has no safe fallback (an unkeyed document is the bug), so
+// an unreadable marker keys as signed-out and the viewer misses the cache.
+const documentCacheKey = {
   cacheKeyWillBeUsed: async ({ request }: { request: Request }) => {
-    const cookie = await self.cookieStore?.get(LOCALE_COOKIE_NAME).catch(
-      () => null,
-    );
+    const url = new URL(request.url);
 
-    if (!cookie?.value) {
-      return request;
+    const [locale, isAuthorized] = await Promise.all([
+      self.cookieStore?.get(LOCALE_COOKIE_NAME).catch(() => null),
+      readAuthMarker(),
+    ]);
+
+    if (locale?.value) {
+      url.searchParams.set('__locale', locale.value);
     }
 
-    const url = new URL(request.url);
-    url.searchParams.set('__locale', cookie.value);
+    url.searchParams.set('__auth', String(isAuthorized));
+
     return url.href;
   },
 };
 
-// Navigation routes: StaleWhileRevalidate for fast cold loads, keyed per locale
-// to avoid cross-locale poisoning.
+// StaleWhileRevalidate for fast cold loads.
 const navigationHandler = new StaleWhileRevalidate({
   cacheName: CacheKey.navigation,
   plugins: [
-    localeAwareCacheKey,
+    documentCacheKey,
     expiration(time.hours(12)),
   ],
 });
