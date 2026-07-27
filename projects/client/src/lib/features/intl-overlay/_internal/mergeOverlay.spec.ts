@@ -82,4 +82,20 @@ describe('util: mergeOverlay', () => {
     expect(result.at(0)?.show.title).to.equal('ES show');
     expect(result.at(0)?.title).to.equal('ES episode');
   });
+
+  it('should not expose the canonical entry as enumerable key', () => {
+    const entries: MediaShape[] = [{ id: 1, type: 'movie', title: 'EN A' }];
+
+    const result = mergeOverlay(
+      entries,
+      {
+        movie: new Map([[1, 'ES A']]),
+        show: new Map(),
+        episode: new Map(),
+      },
+      mediaOptions,
+    );
+
+    expect(result).to.deep.equal([{ id: 1, type: 'movie', title: 'ES A' }]);
+  });
 });
