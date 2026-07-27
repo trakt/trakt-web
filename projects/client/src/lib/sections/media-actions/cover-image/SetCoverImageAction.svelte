@@ -5,6 +5,7 @@
   import * as m from "$lib/features/i18n/messages";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import { useCoverImage } from "./useCoverImage";
+  import { useIsCover } from "./useIsCover";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
 
   type SetCoverImageActionProps = {
@@ -26,11 +27,18 @@
   const { isSettingCoverImage, setCoverImage } = $derived(
     useCoverImage({ type, id }),
   );
+  const { isCover } = $derived(useIsCover({ type, id }));
+
+  const label = $derived(
+    $isCover
+      ? m.button_label_cover_image_selected({ title })
+      : m.button_label_set_cover_image({ title }),
+  );
 
   const commonProps = $derived({
     onclick: setCoverImage,
-    label: m.button_label_set_cover_image({ title }),
-    disabled: $isSettingCoverImage,
+    label,
+    disabled: $isSettingCoverImage || $isCover,
   });
 </script>
 
@@ -42,6 +50,10 @@
   {/if}
 {/snippet}
 
+{#snippet coverSubtitle()}
+  {m.button_subtitle_cover_image_selected()}
+{/snippet}
+
 {#if style === "action"}
   <ActionButton style="ghost" {...commonProps}>
     {@render icon()}
@@ -49,7 +61,14 @@
 {/if}
 
 {#if style === "dropdown-item"}
-  <DropdownItem color="default" style="flat" {variant} {...commonProps} {icon}>
+  <DropdownItem
+    color="default"
+    style="flat"
+    {variant}
+    subtitle={$isCover ? coverSubtitle : undefined}
+    {...commonProps}
+    {icon}
+  >
     {m.button_text_set_cover_image()}
   </DropdownItem>
 {/if}

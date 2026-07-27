@@ -1,8 +1,17 @@
 import { time } from '$lib/utils/timing/time.ts';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { isRecentlyAddedFeature } from './isRecentlyAddedFeature.ts';
 
 describe('util: isRecentlyAddedFeature', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2024-02-21T12:00:00Z'));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   describe('past 1-day window', () => {
     it('should return true for a feature added within the last day', () => {
       const anHourAgo = new Date(Date.now() - time.hours(1));
