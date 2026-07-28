@@ -113,7 +113,11 @@
         {...getTriggerProps(option, index)}
       >
         {#snippet icon()}
-          <ToggleIcon {option} />
+          {#if option.icon}
+            {@render option.icon()}
+          {:else}
+            <ToggleIcon {option} />
+          {/if}
         {/snippet}
 
         {#if option.content}

@@ -17,6 +17,8 @@ import { combineLatest, map, type Observable } from 'rxjs';
 import type { FilterParams } from '../../../requests/models/FilterParams.ts';
 import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
 import type { Calendar } from '../models/Calendar.ts';
+import { matchesEpisodeTypeFilter } from '../matchesEpisodeTypeFilter.ts';
+import type { EpisodeTypeFilter } from '../models/EpisodeTypeFilter.ts';
 
 export type CalendarItem = UpcomingEpisodeEntry | MediaEntry;
 type CalendarItems = CalendarItem[];
@@ -25,11 +27,13 @@ type UseCalendarParams = {
   start: Date;
   days: number;
   type: DiscoverMode;
+  episodeType: Observable<EpisodeTypeFilter>;
 } & FilterParams;
 
 type CalendarResult = {
   isLoading: Observable<boolean>;
   calendar: Observable<Calendar<CalendarItem>>;
+  hasUpstreamItems: Observable<boolean>;
 };
 
 function typeToQueries({ start, days, type, filter }: UseCalendarParams) {
@@ -71,18 +75,25 @@ export function useCalendar(
     getTargets: episodeWithShowOrMovieTargets,
   });
 
-  const allItems = combineLatest(queries).pipe(
+  const sorted = combineLatest(queries).pipe(
     map(($queries) => {
       return $queries.flatMap((query) => query.data ?? []).toSorted((a, b) => {
         return a.effectiveReleaseDate.getTime() -
           b.effectiveReleaseDate.getTime();
       });
     }),
+  );
+
+  const allItems = combineLatest([sorted, props.episodeType]).pipe(
+    map(([$sorted, $episodeType]) =>
+      $sorted.filter((item) => matchesEpisodeTypeFilter(item, $episodeType))
+    ),
     overlay.operator,
   );
 
   return {
     isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
+    hasUpstreamItems: sorted.pipe(map(($sorted) => $sorted.length > 0)),
     calendar: allItems.pipe(
       map(($allItems) => {
         return Array.from({ length: props.days }, (_, i) => {

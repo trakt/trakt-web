@@ -1,3 +1,4 @@
+import type { EpisodeTypeFilter } from '$lib/features/calendar/models/EpisodeTypeFilter.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
@@ -10,7 +11,8 @@ export type TogglerId =
   | 'trivia'
   | 'progress'
   | 'activity'
-  | 'library';
+  | 'library'
+  | 'episodeType';
 
 type DiscoverToggleType = DiscoverMode;
 type SocialToggleType = 'following' | 'followers' | 'requests';
@@ -19,6 +21,7 @@ type TriviaToggleType = 'spoilers' | 'no-spoilers';
 type ProgressToggleType = 'in-progress' | 'dropped' | 'completed';
 type ActivityToggleType = 'reviews' | 'ratings';
 type LibraryToggleType = 'plex' | 'other';
+type EpisodeTypeToggleType = EpisodeTypeFilter;
 
 type Toggler<T, K> = {
   id: T;
@@ -34,6 +37,7 @@ export type TogglerValueMap = {
   progress: ProgressToggleType;
   activity: ActivityToggleType;
   library: LibraryToggleType;
+  episodeType: EpisodeTypeToggleType;
 };
 
 type ToggleDefinition<K extends TogglerId> = Toggler<K, TogglerValueMap[K]>;
@@ -172,6 +176,28 @@ const library: ToggleDefinition<'library'> = {
   ],
 };
 
+const episodeType: ToggleDefinition<'episodeType'> = {
+  id: 'episodeType',
+  default: 'all',
+  options: [
+    {
+      value: 'all',
+      text: m.button_text_episode_type_all,
+      label: m.button_label_episode_type_all,
+    },
+    {
+      value: 'premieres',
+      text: m.button_text_episode_type_premieres,
+      label: m.button_label_episode_type_premieres,
+    },
+    {
+      value: 'finales',
+      text: m.button_text_episode_type_finales,
+      label: m.button_label_episode_type_finales,
+    },
+  ],
+};
+
 export const TOGGLERS: {
   [K in TogglerId]: Toggler<K, TogglerValueMap[K]>;
 } = {
@@ -182,4 +208,5 @@ export const TOGGLERS: {
   progress,
   activity,
   library,
+  episodeType,
 } as const;

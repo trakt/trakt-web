@@ -1560,6 +1560,30 @@
       "default": "Status",
       "description": "Header for the status section."
     },
+    "button_text_episode_type_all": {
+      "default": "All",
+      "description": "Text for the toggle that shows every upcoming release, rather than only premieres or only finales. This should be as short as possible."
+    },
+    "button_label_episode_type_all": {
+      "default": "Show all releases",
+      "description": "Accessible label for the toggle that shows every upcoming release, rather than only premieres or only finales."
+    },
+    "button_text_episode_type_premieres": {
+      "default": "Premieres",
+      "description": "Text for the toggle that shows only premiere episodes: series, season and mid-season premieres. This should be as short as possible."
+    },
+    "button_label_episode_type_premieres": {
+      "default": "Show only premieres",
+      "description": "Accessible label for the toggle that shows only premiere episodes: series, season and mid-season premieres."
+    },
+    "button_text_episode_type_finales": {
+      "default": "Finales",
+      "description": "Text for the toggle that shows only finale episodes: series, season and mid-season finales. This should be as short as possible."
+    },
+    "button_label_episode_type_finales": {
+      "default": "Show only finales",
+      "description": "Accessible label for the toggle that shows only finale episodes: series, season and mid-season finales."
+    },
     "translated_value_status_released": {
       "default": "Released",
       "description": "Status value for released media items. The value is sent back from the Trakt API."
