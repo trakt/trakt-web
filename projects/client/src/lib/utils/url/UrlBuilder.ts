@@ -305,7 +305,6 @@ export const UrlBuilder = {
     vip: () => 'https://trakt.tv/vip',
     about: () => 'https://trakt.tv/about',
     branding: () => 'https://trakt.tv/branding',
-    privacy: () => 'https://trakt.tv/privacy',
     support: (username?: string) => ogSupportFactory(username),
     forums: () => 'https://forums.trakt.tv/c/trakt',
     widgets: {
