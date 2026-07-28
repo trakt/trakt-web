@@ -192,6 +192,26 @@ const rules: ReadonlyArray<LegacyRule> = [
     pattern: /^\/officiallist\/([^/]+)\/?$/,
     to: (m) => `/lists/official/${m[1]}`,
   },
+  {
+    pattern: /^\/oauth\/applications\/new\/?$/,
+    to: () => UrlBuilder.settings.appsApiNew(),
+  },
+  {
+    pattern: /^\/oauth\/applications\/(\d+)\/edit\/?$/,
+    to: (m) => UrlBuilder.settings.appsApiEdit(m[1]),
+  },
+  {
+    pattern: /^\/oauth\/applications\/(\d+)\/?$/,
+    to: (m) => UrlBuilder.settings.appsApiDetail(m[1]),
+  },
+  {
+    pattern: /^\/oauth\/authorized_applications\/?$/,
+    to: () => UrlBuilder.settings.appsConnected(),
+  },
+  {
+    pattern: /^\/oauth\/applications\/?$/,
+    to: () => UrlBuilder.settings.appsApi(),
+  },
 
   // --- No sensible target -> nearest-section fallback (home) ---
   // Bare `/seasons/:id` and `/episodes/:id` are v2 API endpoints with no show
