@@ -79,6 +79,8 @@ const STREAMING_FILTER: Filter = {
   ],
   advanced: {
     type: 'multi-select',
+    // FIXME: re-enable when supported in API
+    hasExclusion: false,
   },
 };
 

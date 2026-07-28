@@ -44,13 +44,15 @@
     });
   };
 
+  const hasExclusion = $derived(filter.advanced.hasExclusion ?? true);
+
   const advancedOptions = $derived(
     (filter.advanced.options ?? filter.options).map((option) => ({
       label: option.label(),
       value: option.value,
       icon: option.icon,
       // "My Favorites" expands to a saved set; excluding it is not meaningful.
-      excludable: option.value !== "favorites",
+      excludable: hasExclusion && option.value !== "favorites",
     })),
   );
 
