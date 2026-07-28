@@ -273,14 +273,6 @@
             </td>
             <td>Functionality</td>
           </tr>
-          <tr>
-            <td>
-              Firebase
-              <span class="helper">_ga*</span>
-            </td>
-            <td>Internal metrics to help improve Trakt.</td>
-            <td>Analytics</td>
-          </tr>
         </tbody>
       </table>
     </div>
