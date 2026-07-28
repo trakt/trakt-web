@@ -168,6 +168,43 @@ describe('util: resolveLegacyRedirect', () => {
         '/lists/official/best-of-2024',
       );
     });
+
+    it('should map oauth app management to the apps settings', () => {
+      expect(resolveLegacyRedirect('/oauth/applications')).toBe(
+        '/settings/apps/api',
+      );
+      expect(resolveLegacyRedirect('/oauth/authorized_applications')).toBe(
+        '/settings/apps/connected',
+      );
+    });
+
+    it('should map oauth app pages to their settings equivalent', () => {
+      expect(resolveLegacyRedirect('/oauth/applications/new')).toBe(
+        '/settings/apps/api/new',
+      );
+      expect(resolveLegacyRedirect('/oauth/applications/901')).toBe(
+        '/settings/apps/api/901',
+      );
+      expect(resolveLegacyRedirect('/oauth/applications/901/edit')).toBe(
+        '/settings/apps/api/901/edit',
+      );
+    });
+  });
+
+  describe('live oauth endpoints are never hijacked', () => {
+    it.each([
+      '/oauth/authorize',
+      '/oauth/authorize/native',
+      '/oauth/token',
+      '/oauth/token/info',
+      '/oauth/revoke',
+      '/oauth/introspect',
+      '/oauth/userinfo',
+      '/oauth/consent',
+      '/oauth/device/code',
+    ])('should return null for %s', (path) => {
+      expect(resolveLegacyRedirect(path)).toBeNull();
+    });
   });
 
   describe('no sensible target falls back to home', () => {
