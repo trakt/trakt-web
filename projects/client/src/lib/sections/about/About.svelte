@@ -1,10 +1,17 @@
 <script lang="ts">
+  import { useRegisteredMemberCount } from "$lib/features/member-count/useRegisteredMemberCount.svelte.ts";
   import MeetTheTeam from "./components/MeetTheTeam.svelte";
+  import MemberCountHero from "./components/MemberCountHero.svelte";
   import WhatIsTrakt from "./components/WhatIsTrakt.svelte";
+
+  // Owned here so the page polls once, not once per presentation.
+  const count = useRegisteredMemberCount();
 </script>
 
 <div class="trakt-about">
   <WhatIsTrakt />
+  <div class="trakt-about-divider"></div>
+  <MemberCountHero {count} />
   <div class="trakt-about-divider"></div>
   <MeetTheTeam />
 </div>

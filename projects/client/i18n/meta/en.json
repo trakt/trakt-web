@@ -7539,6 +7539,18 @@
       "default": "Follow friends, see what the team is watching, and discover shared favourites. Watching together is better.",
       "description": "Description for the social/community feature card on the About page."
     },
+    "label_registered_accounts": {
+      "default": "Registered accounts",
+      "description": "Label above the live registered-account counter on the About page."
+    },
+    "text_member_count_tagline": {
+      "default": "people tracking what they watch, and counting",
+      "description": "Caption under the live registered-account counter on the About page."
+    },
+    "text_member_count_accessible": {
+      "default": "Over {count} registered Trakt accounts",
+      "description": "Screen-reader label for the live member counter. Uses a rounded value so it does not change as the counter ticks."
+    },
     "page_title_welcome": {
       "default": "Welcome",
       "description": "Page title for the Welcome page shown to new users."
