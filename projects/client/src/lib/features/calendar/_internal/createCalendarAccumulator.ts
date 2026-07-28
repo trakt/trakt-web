@@ -21,6 +21,7 @@ function sortPeriods<T>(
 type AccumulatorParams<T> = {
   calendar: Calendar<T>;
   fingerprint: string;
+  isEmpty?: boolean;
 };
 
 export function createCalendarAccumulator(order: CalendarOrder) {
@@ -47,6 +48,7 @@ export function createCalendarAccumulator(order: CalendarOrder) {
   function accumulate<T>({
     calendar,
     fingerprint,
+    isEmpty = calendar.every((day) => day.items.length === 0),
   }: AccumulatorParams<T>): CalendarPeriod<T>[] {
     if (fingerprint != null && fingerprint !== lastFingerprint) {
       accumulatedMap.clear();
@@ -69,8 +71,6 @@ export function createCalendarAccumulator(order: CalendarOrder) {
       }
 
       clearedToKey = undefined;
-
-      const isEmpty = calendar.every((day) => day.items.length === 0);
 
       if (!accumulatedMap.has(key) || !isEmpty) {
         setPeriodCount(isEmpty);

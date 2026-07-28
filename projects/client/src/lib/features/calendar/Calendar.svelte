@@ -2,6 +2,7 @@
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import { getDaysDifference } from "$lib/utils/date/getDaysDifference";
   import { useFilter } from "../filters/useFilter";
+  import { useEpisodeType } from "./useEpisodeType";
   import {
     useCalendar,
     type CalendarItem as CalendarItemEntry,
@@ -29,19 +30,23 @@
 
   const { filterMap } = useFilter();
 
-  const { isLoading, calendar } = $derived(
+  const { episodeType } = useEpisodeType();
+
+  const { isLoading, calendar, hasUpstreamItems } = $derived(
     useCalendar({
       start: $startDate,
       days,
       type: $mode,
       filter: $filterMap,
+      episodeType,
     }),
   );
 
   const periods: CalendarPeriod<CalendarItemEntry>[] = $derived(
     accumulate({
       calendar: $calendar,
-      fingerprint: `${$mode}:${JSON.stringify($filterMap)}`,
+      fingerprint: `${$mode}:${JSON.stringify($filterMap)}:${$episodeType}`,
+      isEmpty: !$hasUpstreamItems,
     }),
   );
 

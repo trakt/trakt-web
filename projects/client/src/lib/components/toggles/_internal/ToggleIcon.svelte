@@ -5,6 +5,7 @@
   import CrewIcon from "$lib/components/icons/CrewIcon.svelte";
   import CustomLibraryIcon from "$lib/components/icons/CustomLibraryIcon.svelte";
   import DropIcon from "$lib/components/icons/DropIcon.svelte";
+  import FinaleIcon from "$lib/components/icons/FinaleIcon.svelte";
   import FollowersIcon from "$lib/components/icons/FollowersIcon.svelte";
   import FollowingIcon from "$lib/components/icons/FollowingIcon.svelte";
   import HourglassIcon from "$lib/components/icons/HourglassIcon.svelte";
@@ -15,6 +16,7 @@
   import PeopleIcon from "$lib/components/icons/PeopleIcon.svelte";
   import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import PopularIcon from "$lib/components/icons/PopularIcon.svelte";
+  import PremiereIcon from "$lib/components/icons/PremiereIcon.svelte";
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
@@ -30,7 +32,7 @@
   // FIXME: make the icon a prop of ToggleOption
 </script>
 
-{#if option.value === "all" || option.value === "media"}
+{#if option.value === "media"}
   <MediaIcon />
 {/if}
 
@@ -120,4 +122,12 @@
 
 {#if option.value === "smart"}
   <BrainIcon />
+{/if}
+
+{#if option.value === "premieres"}
+  <PremiereIcon />
+{/if}
+
+{#if option.value === "finales"}
+  <FinaleIcon />
 {/if}

@@ -250,6 +250,37 @@ describe('createCalendarAccumulator', () => {
       expect(canLoadMore()).toBe(true);
     });
 
+    it('should keep loading when a period is only empty after client side filtering', () => {
+      const { accumulate, canLoadMore } = createCalendarAccumulator(
+        'chronological',
+      );
+
+      for (let i = 0; i < 5; i++) {
+        const emptyPeriod = mockCalendar(`2024-01-0${i + 1}`, 1);
+        accumulate({
+          calendar: emptyPeriod,
+          fingerprint: 'a',
+          isEmpty: false,
+        });
+      }
+
+      expect(canLoadMore()).toBe(true);
+    });
+
+    it('should stop loading when the upstream period is empty', () => {
+      const { accumulate, canLoadMore } = createCalendarAccumulator(
+        'chronological',
+      );
+
+      for (let i = 0; i < 5; i++) {
+        const period = mockCalendar(`2024-01-0${i + 1}`, 1);
+        period[0]?.items.push({ key: 'item' });
+        accumulate({ calendar: period, fingerprint: 'a', isEmpty: true });
+      }
+
+      expect(canLoadMore()).toBe(false);
+    });
+
     it('should reset consecutive empty periods counter upon clearing', () => {
       const { accumulate, clear, canLoadMore } = createCalendarAccumulator(
         'chronological',
