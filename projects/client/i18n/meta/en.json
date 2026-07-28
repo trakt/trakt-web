@@ -7591,17 +7591,17 @@
       "default": "Connect Your Services",
       "description": "Call-to-action button on the home screen automatic tracking card that opens the streaming services connection flow."
     },
-    "dialog_title_hide_auto_tracking": {
-      "default": "Confirm Hide",
-      "description": "Title of the confirmation dialog shown when hiding the home screen automatic tracking card."
-    },
     "dialog_prompt_hide_auto_tracking": {
       "default": "You can always access Automatic Tracking from the settings.",
       "description": "Message in the confirmation dialog shown when hiding the home screen automatic tracking card."
     },
-    "button_text_hide_auto_tracking": {
+    "confirmation_title_hide": {
+      "default": "Confirm Hide",
+      "description": "Generic confirmation dialog title shown before hiding dismissible elements (e.g. Year in Review, Month in Review, streaming scrobbler CTA)."
+    },
+    "button_text_hide": {
       "default": "Hide",
-      "description": "Destructive action in the confirmation dialog that hides the home screen automatic tracking card."
+      "description": "Generic destructive action label for hiding dismissible elements."
     },
     "welcome_greeting": {
       "default": "Welcome to Trakt, {name}",
