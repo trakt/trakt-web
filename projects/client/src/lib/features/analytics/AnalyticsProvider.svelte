@@ -1,13 +1,20 @@
 <script lang="ts">
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { setContext } from "svelte";
   import { createHalEngine } from "./_internal/createHalEngine";
+  import { getUserAnalyticsData } from "./_internal/getUserAnalyticsData";
   import { ANALYTICS_CONTEXT } from "./useAnalytics";
 
   const { children }: ChildrenProps = $props();
 
-  // No consent gate: HAL stores no identifier, no IP and no user id, so there is
-  // nothing here for a cookie banner to gate.
-  setContext(ANALYTICS_CONTEXT, createHalEngine());
+  const { user } = useUser();
+
+  // Enriched here, not in `useTrack`: callers that record straight through
+  // `useAnalytics` would otherwise carry no user context.
+  setContext(
+    ANALYTICS_CONTEXT,
+    createHalEngine({ enrich: () => getUserAnalyticsData($user) }),
+  );
 </script>
 
 {@render children()}
