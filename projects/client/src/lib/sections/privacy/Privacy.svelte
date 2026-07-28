@@ -204,9 +204,15 @@
         on the Services or on social media or other platforms that you use,
         according to your stated preferences (see
         <Link href="#section-8">Your Privacy Rights</Link>
-        for more information). We collect and process this information to achieve
-        our legitimate interests of providing you with the Services to which you subscribe
-        and improving our technology and the Services we offer.
+        for more information). We also measure how the Services are used through
+        our own first-party systems, which record events such as which pages are
+        viewed and which features are opened. These records describe what
+        happened, not who did it: no account identifier, cookie, or device
+        identifier is attached, we do not retain your IP address with them, and
+        they cannot be traced back to you or your account. We collect and process
+        this information to achieve our legitimate interests of providing you with
+        the Services to which you subscribe and improving our technology and the
+        Services we offer.
       </li>
     </ol>
     <p>
