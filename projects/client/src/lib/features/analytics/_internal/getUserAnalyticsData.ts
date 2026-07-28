@@ -2,7 +2,6 @@ import type { UserSettings } from '$lib/features/auth/queries/currentUserSetting
 
 type UserAnalyticsData = {
   user_type: 'anonymous' | 'standard' | 'vip';
-  user_joined_at?: string;
 };
 
 export function getUserAnalyticsData(user?: UserSettings): UserAnalyticsData {
@@ -13,8 +12,9 @@ export function getUserAnalyticsData(user?: UserSettings): UserAnalyticsData {
     };
   }
 
+  // No join timestamp: a millisecond-precision date is near-unique per account,
+  // which would make it a stable cross-session key.
   return {
     user_type: user.isVip ? 'vip' : 'standard',
-    user_joined_at: user.joinedAt?.toISOString(),
   };
 }

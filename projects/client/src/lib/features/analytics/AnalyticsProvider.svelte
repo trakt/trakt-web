@@ -1,16 +1,13 @@
 <script lang="ts">
-  import { useCookieConsent } from "../cookie-consent/useCookieConsent";
-  import FirebaseSetup from "./FirebaseSetup.svelte";
+  import { setContext } from "svelte";
+  import { createHalEngine } from "./_internal/createHalEngine";
+  import { ANALYTICS_CONTEXT } from "./useAnalytics";
 
   const { children }: ChildrenProps = $props();
 
-  const { consent } = useCookieConsent();
+  // No consent gate: HAL stores no identifier, no IP and no user id, so there is
+  // nothing here for a cookie banner to gate.
+  setContext(ANALYTICS_CONTEXT, createHalEngine());
 </script>
 
-{#if $consent === "all"}
-  <FirebaseSetup>
-    {@render children()}
-  </FirebaseSetup>
-{:else}
-  {@render children()}
-{/if}
+{@render children()}
