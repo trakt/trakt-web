@@ -18,6 +18,9 @@ export type DefineQueryProps<
   schema: TOutput;
   ttl: number | Nil;
   refetchOnWindowFocus?: boolean;
+  // Poll cadence for endpoints whose value moves on its own. Paused while the
+  // tab is backgrounded by TanStack's `refetchIntervalInBackground: false`.
+  refetchInterval?: number;
   retry?: number;
   enabled?: (params: TRequestParams) => boolean;
 };

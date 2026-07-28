@@ -4,6 +4,7 @@ export function buildCommonOptions<TRequestParams extends ApiParams>(
   params: {
     ttl: number | Nil;
     refetchOnWindowFocus?: boolean;
+    refetchInterval?: number;
     retry?: number;
     enabled?: (params: TRequestParams) => boolean;
   },
@@ -12,6 +13,7 @@ export function buildCommonOptions<TRequestParams extends ApiParams>(
   return {
     staleTime: params.ttl == null ? undefined : params.ttl,
     refetchOnWindowFocus: params.refetchOnWindowFocus,
+    refetchInterval: params.refetchInterval,
     retry: params.retry,
     enabled: params.enabled?.(requestParams) ?? true,
   };
