@@ -212,6 +212,7 @@
   .trakt-select-content[data-auto-width="true"] {
     width: max-content;
     min-width: var(--bits-select-anchor-width);
+    max-width: min(var(--ni-240), var(--bits-floating-available-width));
   }
 
   .trakt-select-content {
