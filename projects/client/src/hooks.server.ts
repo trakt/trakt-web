@@ -3,7 +3,6 @@ import { handle as handleAssetFallback } from '$lib/features/asset-fallback/hand
 import { handle as handleAuth } from '$lib/features/auth/handle.ts';
 import { handle as handleBotVerification } from '$lib/features/bot-verification/handle.ts';
 import { handle as handleCacheBust } from '$lib/features/cache-bust/handle.ts';
-import { handle as handleCookieConsent } from '$lib/features/cookie-consent/handle.ts';
 import { handle as handleDeployment } from '$lib/features/deployment/handle.ts';
 import { handle as handleDevice } from '$lib/features/devices/handle.ts';
 import { handle as handleLocale } from '$lib/features/i18n/handle.ts';
@@ -154,7 +153,6 @@ export const handle: Handle = sequence(
   handleCacheControl,
   handleMobileOperatingSystem,
   handleDeployment,
-  handleCookieConsent,
   handleSearchConfig,
 );
 

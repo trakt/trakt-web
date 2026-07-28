@@ -1,7 +1,6 @@
 Feature: Basic navigation
 
   Scenario: Public static pages
-    When I click on the "consent-button" button
     Then I should see "Home" in the page title
 
     When I open the shows section
@@ -12,8 +11,7 @@ Feature: Basic navigation
 
   @live-data
   Scenario: Public live-data pages
-    When I click on the "consent-button" button
-    And I view the show summary of "silo"
+    When I view the show summary of "silo"
     Then I should see the "summary-media-title" element on the page
 
     When I view the movie summary of "heretic-2024"

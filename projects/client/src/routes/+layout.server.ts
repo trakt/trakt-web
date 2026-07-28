@@ -28,7 +28,6 @@ export const load: LayoutServerLoad = (
     isLegitimateBot: locals.isLegitimateBot,
     isBot: isBotAgent(request.headers.get('user-agent')),
     device: getDeviceType(request.headers.get('user-agent')),
-    cookieConsent: locals.cookieConsent,
     typesense: locals.typesense,
   };
 

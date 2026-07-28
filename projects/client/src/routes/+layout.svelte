@@ -10,7 +10,6 @@
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import BotProvider from "$lib/features/bot-verification/BotProvider.svelte";
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
-  import CookieConsentProvider from "$lib/features/cookie-consent/CookieConsentProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
   import EditModeProvider from "$lib/features/edit-mode/EditModeProvider.svelte";
   import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
@@ -157,89 +156,84 @@
           <SearchShortcut />
           <WSInvalidator />
           <FeatureFlagProvider>
-            <CookieConsentProvider
-              consent={data.cookieConsent}
-              isBot={data.isBot}
-            >
-              <PlayerProvider>
-                <AnalyticsProvider>
-                  <RedirectProvider>
-                    <NavigationProvider>
-                      <NavigationHistoryProvider>
-                        <LocaleProvider>
-                          <LocaleSettingSync />
-                          <SearchProvider config={data.typesense}>
-                            <FilterProvider>
-                              <CoverProvider>
-                                <ToastProvider>
-                                  <ConfirmationProvider>
-                                    <MarkAsWatchedDrawerProvider />
-                                    <AddNoteDrawerProvider />
-                                    <ReportDialogProvider />
-                                    <CoverImage />
-                                    <SeasonalFlair />
-                                    <EditModeProvider>
-                                      <ThemeProvider theme={data.theme}>
-                                        <ListScrollHistoryProvider>
-                                          <!--
-                                        All navbars are added in the layout to make sure they can
-                                        persist during navigation. The state is set on a page level.
-                                      -->
-                                          <RenderFor
-                                            audience="all"
-                                            device={["mobile", "tablet-sm"]}
-                                          >
-                                            <TopNavbar />
-                                          </RenderFor>
+            <PlayerProvider>
+              <AnalyticsProvider>
+                <RedirectProvider>
+                  <NavigationProvider>
+                    <NavigationHistoryProvider>
+                      <LocaleProvider>
+                        <LocaleSettingSync />
+                        <SearchProvider config={data.typesense}>
+                          <FilterProvider>
+                            <CoverProvider>
+                              <ToastProvider>
+                                <ConfirmationProvider>
+                                  <MarkAsWatchedDrawerProvider />
+                                  <AddNoteDrawerProvider />
+                                  <ReportDialogProvider />
+                                  <CoverImage />
+                                  <SeasonalFlair />
+                                  <EditModeProvider>
+                                    <ThemeProvider theme={data.theme}>
+                                      <ListScrollHistoryProvider>
+                                        <!--
+                                      All navbars are added in the layout to make sure they can
+                                      persist during navigation. The state is set on a page level.
+                                    -->
+                                        <RenderFor
+                                          audience="all"
+                                          device={["mobile", "tablet-sm"]}
+                                        >
+                                          <TopNavbar />
+                                        </RenderFor>
 
-                                          <RenderFor
-                                            audience="all"
-                                            device={["desktop", "tablet-lg"]}
-                                          >
-                                            <SideNavbar />
-                                          </RenderFor>
+                                        <RenderFor
+                                          audience="all"
+                                          device={["desktop", "tablet-lg"]}
+                                        >
+                                          <SideNavbar />
+                                        </RenderFor>
 
-                                          {@render children()}
+                                        {@render children()}
 
-                                          <RenderFor
-                                            audience="all"
-                                            device={["mobile", "tablet-sm"]}
-                                          >
-                                            <MobileNavbar />
-                                          </RenderFor>
+                                        <RenderFor
+                                          audience="all"
+                                          device={["mobile", "tablet-sm"]}
+                                        >
+                                          <MobileNavbar />
+                                        </RenderFor>
 
-                                          <RenderFor audience="authenticated">
-                                            <NavbarToastContent />
-                                          </RenderFor>
+                                        <RenderFor audience="authenticated">
+                                          <NavbarToastContent />
+                                        </RenderFor>
 
-                                          <RenderFor audience="authenticated">
-                                            <OfflineSync />
-                                          </RenderFor>
-                                          <QueryDevtools
-                                            client={data.queryClient}
-                                            buttonPosition="bottom-right"
-                                          />
-                                        </ListScrollHistoryProvider>
-                                      </ThemeProvider>
-                                    </EditModeProvider>
-                                  </ConfirmationProvider>
-                                </ToastProvider>
-                              </CoverProvider>
-                            </FilterProvider>
-                          </SearchProvider>
-                        </LocaleProvider>
-                      </NavigationHistoryProvider>
-                    </NavigationProvider>
+                                        <RenderFor audience="authenticated">
+                                          <OfflineSync />
+                                        </RenderFor>
+                                        <QueryDevtools
+                                          client={data.queryClient}
+                                          buttonPosition="bottom-right"
+                                        />
+                                      </ListScrollHistoryProvider>
+                                    </ThemeProvider>
+                                  </EditModeProvider>
+                                </ConfirmationProvider>
+                              </ToastProvider>
+                            </CoverProvider>
+                          </FilterProvider>
+                        </SearchProvider>
+                      </LocaleProvider>
+                    </NavigationHistoryProvider>
+                  </NavigationProvider>
 
-                    <!-- Keyed on the pathname, not `route.id`: two pages sharing
-                         a template are still distinct page views. -->
-                    {#key page.url.pathname}
-                      <PageView />
-                    {/key}
-                  </RedirectProvider>
-                </AnalyticsProvider>
-              </PlayerProvider>
-            </CookieConsentProvider>
+                  <!-- Keyed on the pathname, not `route.id`: two pages sharing
+                       a template are still distinct page views. -->
+                  {#key page.url.pathname}
+                    <PageView />
+                  {/key}
+                </RedirectProvider>
+              </AnalyticsProvider>
+            </PlayerProvider>
           </FeatureFlagProvider>
         </AuthProvider>
       </BotProvider>

@@ -3,7 +3,6 @@
 /// <reference lib="dom" />
 /// <reference types="plyr" />
 
-import type { CookieConsent } from '$lib/features/cookie-consent/models/CookieConsent.ts';
 import { Environment } from '@trakt/api';
 declare global {
   // Only way to declare globalThis.install
@@ -188,7 +187,6 @@ declare global {
     // interface Error {}
     interface Locals {
       theme: import('$lib/features/theme/models/Theme.ts').Theme;
-      cookieConsent: CookieConsent;
       oidcAuth:
         | import('$lib/features/auth/models/OidcAuthToken.ts').OidcAuthToken
         | Nil;

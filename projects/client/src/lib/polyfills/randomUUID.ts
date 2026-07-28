@@ -2,7 +2,7 @@
 // Sentry: TRAKT-WEB-9J7, TRAKT-WEB-9J8, TRAKT-WEB-AH1, TRAKT-WEB-AGV,
 // TRAKT-WEB-AGT — older mobile browsers (e.g. Chrome Mobile 90 / Android 10)
 // reach the app and crash on `crypto.randomUUID()`, used in SVG icon `<defs>`
-// ids, form element ids and the cookie-consent id. `crypto.getRandomValues` is
+// ids and form element ids. `crypto.getRandomValues` is
 // universally supported, so build an RFC4122 v4 UUID from it.
 
 type UUID = `${string}-${string}-${string}-${string}-${string}`;
