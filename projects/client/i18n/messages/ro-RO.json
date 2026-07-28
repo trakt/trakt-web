@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Nu mai urmărești pe {username}.",
   "text_info_reply_added": "Răspunsul a fost adăugat.",
   "text_info_reply_deleted": "Răspunsul a fost șters.",
+  "text_info_report_sent": "Raportul a fost trimis.",
   "text_info_review_added": "Recenzia a fost adăugată.",
   "text_info_review_deleted": "Recenzia a fost ștearsă.",
   "text_info_show_dropped": "Serialul a fost abandonat.",

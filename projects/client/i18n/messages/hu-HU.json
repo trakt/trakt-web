@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Már nem követed {username}.",
   "text_info_reply_added": "Válasz hozzáadva.",
   "text_info_reply_deleted": "Válasz törölve.",
+  "text_info_report_sent": "Jelentés elküldve.",
   "text_info_review_added": "Értékelés hozzáadva.",
   "text_info_review_deleted": "Értékelés törölve.",
   "text_info_show_dropped": "A sorozat félbehagyva.",

@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Você não está mais seguindo {username}.",
   "text_info_reply_added": "Resposta adicionada.",
   "text_info_reply_deleted": "Resposta excluída.",
+  "text_info_report_sent": "Relatório enviado.",
   "text_info_review_added": "Avaliação adicionada.",
   "text_info_review_deleted": "Avaliação excluída.",
   "text_info_show_dropped": "Série abandonada.",

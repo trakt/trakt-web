@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Δεν ακολουθείτε πλέον τον/την {username}.",
   "text_info_reply_added": "Η απάντηση έχει προστεθεί.",
   "text_info_reply_deleted": "Η απάντηση έχει διαγραφεί.",
+  "text_info_report_sent": "Η αναφορά έχει υποβληθεί.",
   "text_info_review_added": "Η κριτική έχει προστεθεί.",
   "text_info_review_deleted": "Η κριτική έχει διαγραφεί.",
   "text_info_show_dropped": "Η σειρά έχει εγκαταλειφθεί.",

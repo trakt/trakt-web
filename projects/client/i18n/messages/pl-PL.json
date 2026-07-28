@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Nie obserwujesz już {username}.",
   "text_info_reply_added": "Odpowiedź została dodana.",
   "text_info_reply_deleted": "Odpowiedź została usunięta.",
+  "text_info_report_sent": "Zgłoszenie zostało wysłane.",
   "text_info_review_added": "Recenzja została dodana.",
   "text_info_review_deleted": "Recenzja została usunięta.",
   "text_info_show_dropped": "Serial został porzucony.",

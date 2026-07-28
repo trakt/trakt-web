@@ -1365,6 +1365,7 @@
   "text_info_not_following": "You are no longer following {username}.",
   "text_info_reply_added": "Reply has been added.",
   "text_info_reply_deleted": "Reply has been deleted.",
+  "text_info_report_sent": "Report has been submitted.",
   "text_info_review_added": "Review has been added.",
   "text_info_review_deleted": "Review has been deleted.",
   "text_info_show_dropped": "Show has been dropped.",

@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Du följer inte längre {username}.",
   "text_info_reply_added": "Svar har lagts till.",
   "text_info_reply_deleted": "Svar har tagits bort.",
+  "text_info_report_sent": "Rapport har skickats in.",
   "text_info_review_added": "Recension har lagts till.",
   "text_info_review_deleted": "Recension har tagits bort.",
   "text_info_show_dropped": "Serien har avbrutits.",

@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Вече не следвате {username}.",
   "text_info_reply_added": "Добавен е отговор.",
   "text_info_reply_deleted": "Отговорът е изтрит.",
+  "text_info_report_sent": "Сигналът е изпратен.",
   "text_info_review_added": "Добавен е отзив.",
   "text_info_review_deleted": "Отзивът е изтрит.",
   "text_info_show_dropped": "Сериалът е спрян.",

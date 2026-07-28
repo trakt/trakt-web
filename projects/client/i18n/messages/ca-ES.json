@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Ja no segueixes {username}.",
   "text_info_reply_added": "La resposta ha estat afegida.",
   "text_info_reply_deleted": "La resposta ha estat suprimida.",
+  "text_info_report_sent": "L'informe s'ha enviat.",
   "text_info_review_added": "La ressenya ha estat afegida.",
   "text_info_review_deleted": "La ressenya ha estat suprimida.",
   "text_info_show_dropped": "La sèrie ha estat abandonada.",

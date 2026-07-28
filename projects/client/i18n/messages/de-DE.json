@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Sie folgen {username} nicht mehr.",
   "text_info_reply_added": "Antwort wurde hinzugefügt.",
   "text_info_reply_deleted": "Antwort wurde gelöscht.",
+  "text_info_report_sent": "Bericht wurde eingereicht.",
   "text_info_review_added": "Rezension wurde hinzugefügt.",
   "text_info_review_deleted": "Rezension wurde gelöscht.",
   "text_info_show_dropped": "Serie wurde abgebrochen.",

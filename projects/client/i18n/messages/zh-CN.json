@@ -1365,6 +1365,7 @@
   "text_info_not_following": "您已取消关注 {username}。",
   "text_info_reply_added": "回复已添加。",
   "text_info_reply_deleted": "回复已删除。",
+  "text_info_report_sent": "报告已提交。",
   "text_info_review_added": "评论已添加。",
   "text_info_review_deleted": "评论已删除。",
   "text_info_show_dropped": "节目已被弃看。",

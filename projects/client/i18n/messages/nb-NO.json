@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Du følger ikke lenger {username}.",
   "text_info_reply_added": "Svaret er lagt til.",
   "text_info_reply_deleted": "Svaret er slettet.",
+  "text_info_report_sent": "Rapporten er sendt inn.",
   "text_info_review_added": "Anmeldelsen er lagt til.",
   "text_info_review_deleted": "Anmeldelsen er slettet.",
   "text_info_show_dropped": "Serien er droppet.",

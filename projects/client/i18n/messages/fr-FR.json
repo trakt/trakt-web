@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Vous ne suivez plus {username}.",
   "text_info_reply_added": "La réponse a été ajoutée.",
   "text_info_reply_deleted": "La réponse a été supprimée.",
+  "text_info_report_sent": "Le rapport a été soumis.",
   "text_info_review_added": "L'avis a été ajouté.",
   "text_info_review_deleted": "L'avis a été supprimé.",
   "text_info_show_dropped": "La série a été abandonnée.",

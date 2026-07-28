@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Вы больше не подписаны на {username}.",
   "text_info_reply_added": "Ответ был добавлен.",
   "text_info_reply_deleted": "Ответ был удален.",
+  "text_info_report_sent": "Отчет был отправлен.",
   "text_info_review_added": "Отзыв был добавлен.",
   "text_info_review_deleted": "Отзыв был удален.",
   "text_info_show_dropped": "Сериал был заброшен.",

@@ -1365,6 +1365,7 @@
   "text_info_not_following": "Ви більше не стежите за {username}.",
   "text_info_reply_added": "Відповідь додано.",
   "text_info_reply_deleted": "Відповідь видалено.",
+  "text_info_report_sent": "Звіт надіслано.",
   "text_info_review_added": "Відгук додано.",
   "text_info_review_deleted": "Відгук видалено.",
   "text_info_show_dropped": "Серіал покинуто.",

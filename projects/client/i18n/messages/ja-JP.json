@@ -1365,6 +1365,7 @@
   "text_info_not_following": "{username}のフォローを解除しました。",
   "text_info_reply_added": "返信が追加されました。",
   "text_info_reply_deleted": "返信が削除されました。",
+  "text_info_report_sent": "レポートが提出されました。",
   "text_info_review_added": "レビューが追加されました。",
   "text_info_review_deleted": "レビューが削除されました。",
   "text_info_show_dropped": "番組は視聴中止されました。",

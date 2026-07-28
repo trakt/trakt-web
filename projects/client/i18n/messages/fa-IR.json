@@ -1365,6 +1365,7 @@
   "text_info_not_following": "شما دیگر {username} را دنبال نمی‌کنید.",
   "text_info_reply_added": "پاسخ اضافه شد.",
   "text_info_reply_deleted": "پاسخ حذف شد.",
+  "text_info_report_sent": "گزارش ارسال شد.",
   "text_info_review_added": "بازخورد اضافه شد.",
   "text_info_review_deleted": "بازخورد حذف شد.",
   "text_info_show_dropped": "برنامه رها شده است.",
