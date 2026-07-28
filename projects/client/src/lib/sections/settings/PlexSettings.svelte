@@ -30,18 +30,7 @@
 {/snippet}
 
 {#snippet syncTab()}
-  <RenderFor audience="free">
-    <SettingsVipUpsell
-      icon={plexIcon}
-      title={m.header_plex_vip_upsell_sync()}
-      description={m.description_plex_vip_upsell_sync()}
-      source="plex-settings-sync"
-    />
-  </RenderFor>
-
-  <RenderFor audience="vip">
-    <PlexSync />
-  </RenderFor>
+  <PlexSync />
 {/snippet}
 
 {#snippet webhookTab()}

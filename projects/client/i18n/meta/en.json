@@ -9695,13 +9695,13 @@
       "default": "Connect your Plex account to get your webhook URL.",
       "description": "Hint shown in the webhook tab when the user has no connected Plex account."
     },
-    "header_plex_vip_upsell_sync": {
-      "default": "Plex Sync is a VIP feature",
-      "description": "Heading on the upsell card shown to free members in the Plex sync tab."
+    "header_plex_sync_free_limits": {
+      "default": "Plex Sync on the free plan",
+      "description": "Heading on the tier limits card shown to free members in the Plex sync tab."
     },
-    "description_plex_vip_upsell_sync": {
-      "default": "Upgrade to VIP to keep your Plex watch history, ratings, and collections synced with Trakt.",
-      "description": "Body copy on the upsell card shown to free members in the Plex sync tab."
+    "description_plex_sync_free_limits": {
+      "default": "Free accounts sync 1 Plex server once a day. Upgrade to VIP to sync unlimited servers, refreshed every hour.",
+      "description": "Body copy explaining the free vs VIP Plex Sync limits (server count and sync frequency) on the card shown to free members in the Plex sync tab."
     },
     "header_plex_vip_upsell_webhook": {
       "default": "Plex scrobbling is a VIP feature",
@@ -9811,6 +9811,36 @@
       "default": "This will stop syncing your Plex library. You can reconnect at any time.",
       "description": "Body of the confirmation dialog shown before disconnecting Plex."
     },
+    "confirmation_title_plex_remove_server": {
+      "default": "Remove {server}?",
+      "description": "Title of the confirmation dialog shown before removing a Plex server from the sync selection. {server} is the server name.",
+      "variables": {
+        "server": {
+          "type": "string"
+        }
+      }
+    },
+    "confirmation_message_plex_remove_server": {
+      "default": "This will stop syncing this server's libraries. You can add it back at any time.",
+      "description": "Body of the confirmation dialog shown before removing a Plex server from the sync selection."
+    },
+    "button_text_plex_remove_server": {
+      "default": "Remove",
+      "description": "Text for the button that confirms removing a Plex server from the sync selection."
+    },
+    "text_plex_library_required": {
+      "default": "Select at least one library to sync, or remove this server.",
+      "description": "Hint shown in the Plex server drawer when no library is selected, explaining why the apply button is unavailable."
+    },
+    "button_label_plex_remove_server": {
+      "default": "Remove {server}",
+      "description": "Accessible label for the button that removes a Plex server from the sync selection. {server} is the server name.",
+      "variables": {
+        "server": {
+          "type": "string"
+        }
+      }
+    },
     "button_plex_authorized": {
       "default": "I've connected Plex",
       "description": "Button shown while waiting for the user to complete Plex authorization in a new tab."
@@ -9847,12 +9877,60 @@
       "default": "Server",
       "description": "Label for the Plex server row in settings."
     },
+    "tag_plex_syncing": {
+      "default": "Syncing",
+      "description": "Badge shown next to each Plex server that has libraries selected for sync."
+    },
+    "header_plex_synced_servers": {
+      "default": "Synced Servers",
+      "description": "Title of the settings card listing the Plex servers currently syncing."
+    },
+    "description_plex_synced_servers": {
+      "default": "Automatically sync your watched history, library, ratings and watchlist.",
+      "description": "Subtitle under the Synced Servers section title."
+    },
+    "button_plex_add_server": {
+      "default": "Add Server",
+      "description": "Button text to add a Plex server to the synced servers list."
+    },
+    "button_label_plex_add_server": {
+      "default": "Add a Plex server",
+      "description": "Accessible label for the add Plex server button."
+    },
+    "button_plex_manage_server": {
+      "default": "Manage",
+      "description": "Button text on a synced Plex server row that opens the drawer with the server's account and library switches."
+    },
+    "button_label_plex_manage_server": {
+      "default": "Manage server libraries",
+      "description": "Accessible label for the manage button on a synced Plex server row."
+    },
+    "header_plex_no_synced_servers": {
+      "default": "No synced servers yet",
+      "description": "Heading of the empty state in the synced servers card when no Plex server has been added."
+    },
+    "description_plex_no_synced_servers": {
+      "default": "Add your Plex server to start syncing your libraries with Trakt.",
+      "description": "Body copy of the empty state in the synced servers card when no Plex server has been added."
+    },
+    "description_plex_sync_history": {
+      "default": "Recent data syncs from your Plex Media Servers.",
+      "description": "Subtitle under the Plex sync history section header."
+    },
+    "header_plex_vip_upsell_add_server": {
+      "default": "Multiple servers is a VIP feature",
+      "description": "Heading on the upsell card shown when a free member tries to add a second Plex server."
+    },
+    "description_plex_vip_upsell_add_server": {
+      "default": "Free accounts sync 1 Plex server once a day. Upgrade to VIP to sync unlimited servers, refreshed every hour.",
+      "description": "Body copy on the upsell card shown when a free member tries to add a second Plex server."
+    },
     "header_plex_sync_settings": {
       "default": "Plex Sync Settings",
       "description": "Header for the section that shows sync toggle settings for Plex."
     },
     "description_plex_sync_settings": {
-      "default": "These settings control which data types sync to Trakt.",
+      "default": "Choose what each media type syncs to your Trakt account.",
       "description": "Description under the Plex sync settings section header."
     },
     "label_plex_sync_as": {
@@ -9874,10 +9952,6 @@
     "text_plex_synced_summary": {
       "default": "Data has synced {count} times. Your most recent sync was {date}.",
       "description": "Summary text showing total sync count and last sync date in Plex sync history."
-    },
-    "header_plex_sync_history": {
-      "default": "Sync History",
-      "description": "Header for the Plex sync history section."
     },
     "label_plex_history_date": {
       "default": "Date",

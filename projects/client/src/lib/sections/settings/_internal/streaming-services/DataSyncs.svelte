@@ -1,13 +1,12 @@
 <script lang="ts">
-  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useInfiniteQuery, useQuery } from "$lib/features/query/useQuery.ts";
   import { dataSyncsQuery } from "$lib/requests/queries/streaming-sync/dataSyncsQuery.ts";
   import { dataSyncsSummaryQuery } from "$lib/requests/queries/streaming-sync/dataSyncsSummaryQuery.ts";
-  import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { firstValueFrom, map } from "rxjs";
   import DataSyncList from "../DataSyncList.svelte";
+  import DataSyncsBanner from "../DataSyncsBanner.svelte";
   import SettingsSection from "../SettingsSection.svelte";
   import { toServiceInfo } from "./toServiceInfo.ts";
   import { useStreamingServiceLookup } from "./useStreamingServiceLookup.ts";
@@ -49,22 +48,10 @@
   description={m.description_data_syncs()}
 >
   {#if $summary && $summary.count > 0 && $summary.latest}
-    <div class="trakt-data-syncs-banner">
-      <span class="banner-icon" aria-hidden="true">👾</span>
-      <div class="banner-text">
-        <p class="banner-line">
-          {m.text_data_syncs_count_before()}
-          <strong>{$summary.count}</strong>
-          {m.text_data_syncs_count_after()}
-        </p>
-        <p class="banner-line subtle">
-          {m.text_data_syncs_recent_before()}
-          <strong>
-            {toHumanDate(new Date(), $summary.latest.createdAt, getLocale())}
-          </strong>
-        </p>
-      </div>
-    </div>
+    <DataSyncsBanner
+      count={$summary.count}
+      latestAt={$summary.latest.createdAt}
+    />
   {/if}
 
   {#if !$isLoading && ($syncs ?? []).length === 0}
@@ -86,48 +73,3 @@
     />
   {/if}
 </SettingsSection>
-
-<style lang="scss">
-  .trakt-data-syncs-banner {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-m);
-
-    padding: var(--ni-16) var(--ni-20);
-
-    border-radius: var(--border-radius-l);
-    background-image: linear-gradient(
-      120deg,
-      color-mix(
-          in srgb,
-          var(--color-link-active) 22%,
-          var(--color-card-background)
-        )
-        0%,
-      var(--color-card-background) 60%
-    );
-  }
-
-  .banner-icon {
-    flex-shrink: 0;
-
-    font-size: var(--ni-28);
-    line-height: 1;
-  }
-
-  .banner-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-2);
-  }
-
-  .banner-line {
-    margin: 0;
-  }
-
-  .banner-line.subtle {
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-tag);
-  }
-
-</style>

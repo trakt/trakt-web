@@ -11,6 +11,8 @@
   import DataSyncList from "../DataSyncList.svelte";
   import SettingsSection from "../SettingsSection.svelte";
 
+  const PLEX_SERVICE = { source: "plex", name: "Plex" } as const;
+
   const { invalidate } = useInvalidator();
 
   const syncsResult = useInfiniteQuery(plexDataSyncsQuery());
@@ -57,13 +59,17 @@
 </script>
 
 {#if ($syncs ?? []).length > 0}
-  <SettingsSection title={m.header_plex_sync_history()}>
+  <SettingsSection
+    title={m.header_data_syncs()}
+    description={m.description_plex_sync_history()}
+  >
     <DataSyncList
       syncs={$syncs ?? []}
       hasNextPage={$hasNextPage}
       isFetchingNextPage={$isFetchingNextPage}
       onLoadMore={fetchNextPage}
       {getOnUndo}
+      getService={() => PLEX_SERVICE}
     />
   </SettingsSection>
 {/if}

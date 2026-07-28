@@ -14,7 +14,7 @@
     description?: string;
     crumb?: { href: string; label: string };
     action?: Snippet;
-    variant?: "vip" | "muted";
+    variant?: "vip" | "muted" | "bare";
   } = $props();
 </script>
 
@@ -45,6 +45,14 @@
 
     &[data-variant="muted"] {
       @include muted-card;
+    }
+
+    &[data-variant="bare"] {
+      --settings-group-row-padding-inline: 0;
+
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
     }
   }
 </style>
