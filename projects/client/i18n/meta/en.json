@@ -171,6 +171,10 @@
       "default": "VIP",
       "description": "Tag indicating a streaming service requires Trakt VIP. Keep short."
     },
+    "tag_text_vip_preview": {
+      "default": "VIP Preview",
+      "description": "Tag shown on a VIP feature card to a non-VIP user previewing what the feature looks like. Keep short."
+    },
     "text_streaming_profile": {
       "default": "Profile",
       "description": "Label for the streaming service profile name."
@@ -7571,6 +7575,34 @@
       "default": "Import again",
       "description": "Call-to-action button on the TV Time importer-update banner that opens the data import settings page."
     },
+    "auto_tracking_card_heading": {
+      "default": "Automatically track across your streaming services",
+      "description": "Heading on the home screen card promoting automatic tracking of streaming services."
+    },
+    "auto_tracking_card_detail_sync": {
+      "default": "Sync your existing watched history and ratings.",
+      "description": "First detail line on the home screen automatic tracking card."
+    },
+    "auto_tracking_card_detail_scrobble": {
+      "default": "Automatic scrobbling when you watch and rate new things.",
+      "description": "Second detail line on the home screen automatic tracking card."
+    },
+    "auto_tracking_card_action": {
+      "default": "Connect Your Services",
+      "description": "Call-to-action button on the home screen automatic tracking card that opens the streaming services connection flow."
+    },
+    "dialog_title_hide_auto_tracking": {
+      "default": "Confirm Hide",
+      "description": "Title of the confirmation dialog shown when hiding the home screen automatic tracking card."
+    },
+    "dialog_prompt_hide_auto_tracking": {
+      "default": "You can always access Automatic Tracking from the settings.",
+      "description": "Message in the confirmation dialog shown when hiding the home screen automatic tracking card."
+    },
+    "button_text_hide_auto_tracking": {
+      "default": "Hide",
+      "description": "Destructive action in the confirmation dialog that hides the home screen automatic tracking card."
+    },
     "welcome_greeting": {
       "default": "Welcome to Trakt, {name}",
       "description": "Main heading on the Welcome page, greeting the signed-in user by name."
@@ -9900,6 +9932,18 @@
     "text_info_report_sent": {
       "default": "Report has been submitted.",
       "description": "Text shown in a snackbar after a user successfully submits a report."
+    },
+    "screen_account_settings_language_system_message_tvos": {
+      "default": "Trakt uses your Apple TV language settings. To update it, go to:\n\nApple TV Settings > General > Apple TV Languages",
+      "description": "Explanatory message shown in the tvOS account settings language info alert, directing users to the system Settings app since tvOS has no in-app language override."
+    },
+    "action_open_system_settings_tvos": {
+      "default": "Open Settings",
+      "description": "Button in the tvOS account settings language info alert that opens the tvOS system Settings app (not app-specific settings, since tvOS has no per-app settings page)."
+    },
+    "error_search_partial_results": {
+      "default": "Some results may be missing",
+      "description": "Shown below search results when the fuzzy search pass failed but exact results still loaded, alongside a retry action."
     }
   }
 }
