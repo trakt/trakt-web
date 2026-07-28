@@ -38,6 +38,7 @@ export type MultiSelectOption = {
   type: 'multi-select';
   label?: () => string;
   options?: ReadonlyArray<FilterOption>;
+  hasExclusion?: boolean;
 };
 
 export type AdvancedOption = AdvancedSliderOption | MultiSelectOption;
