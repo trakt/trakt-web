@@ -9671,6 +9671,26 @@
       "default": "Community Apps",
       "description": "Heading for the section listing community-built third-party apps, which count toward the connected-apps limit."
     },
+    "heading_official_apps": {
+      "default": "Official Apps",
+      "description": "Heading for the catalog of official Trakt apps."
+    },
+    "description_official_apps": {
+      "default": "Discover apps created and maintained by the Trakt team.",
+      "description": "Description shown under the Official Apps heading explaining who creates and maintains the apps."
+    },
+    "tab_text_official_apps_apple": {
+      "default": "Apple",
+      "description": "Tab label for official apps available on Apple platforms."
+    },
+    "tab_text_official_apps_android": {
+      "default": "Android",
+      "description": "Tab label for official apps available on Android."
+    },
+    "tab_text_official_apps_web": {
+      "default": "Web",
+      "description": "Tab label for official apps available on the web."
+    },
     "warning_connected_apps_limit": {
       "default": "You've reached your connected apps limit. Upgrade to VIP to connect more.",
       "description": "Upsell copy shown to free users who have reached their connected-apps limit, encouraging them to upgrade to VIP for a higher limit."
@@ -9686,6 +9706,14 @@
     "description_api_applications": {
       "default": "OAuth applications you've registered as a developer.",
       "description": "Description shown under the API Applications heading explaining what the listed applications are."
+    },
+    "heading_public_api_docs": {
+      "default": "Public API Docs",
+      "description": "Title for the row linking to the public Trakt API documentation."
+    },
+    "description_public_api_docs": {
+      "default": "Build apps and integrations with the Trakt API.",
+      "description": "Subtitle for the row linking to the public Trakt API documentation."
     },
     "text_no_api_applications": {
       "default": "You haven't created any API applications.",

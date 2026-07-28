@@ -20,6 +20,7 @@
   type LinkRowProps = {
     variant: "link";
     href: string;
+    target?: "_blank";
   };
 
   type CustomRowProps = {
@@ -64,7 +65,12 @@
 {/snippet}
 
 {#if rest.variant === "link"}
-  <a class="trakt-settings-group-row" href={rest.href}>
+  <a
+    class="trakt-settings-group-row"
+    href={rest.href}
+    target={rest.target}
+    rel={rest.target === "_blank" ? "noopener noreferrer" : undefined}
+  >
     {@render rowContent()}
   </a>
 {:else if rest.variant === "button"}
