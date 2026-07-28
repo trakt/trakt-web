@@ -1,11 +1,12 @@
 <script lang="ts">
   import "../style";
 
-
+  import { page } from "$app/state";
   import CoverImage from "$lib/components/background/CoverImage.svelte";
   import CoverProvider from "$lib/components/background/CoverProvider.svelte";
   import ListScrollHistoryProvider from "$lib/components/lists/section-list/ListScrollHistoryProvider.svelte";
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
+  import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import BotProvider from "$lib/features/bot-verification/BotProvider.svelte";
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
@@ -229,6 +230,12 @@
                         </LocaleProvider>
                       </NavigationHistoryProvider>
                     </NavigationProvider>
+
+                    <!-- Keyed on the pathname, not `route.id`: two pages sharing
+                         a template are still distinct page views. -->
+                    {#key page.url.pathname}
+                      <PageView />
+                    {/key}
                   </RedirectProvider>
                 </AnalyticsProvider>
               </PlayerProvider>
