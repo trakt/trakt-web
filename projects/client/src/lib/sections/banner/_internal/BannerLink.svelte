@@ -17,6 +17,8 @@
       tag?: Snippet;
     } = $props();
   const { track } = useTrack(AnalyticsEvent.Link);
+
+  const isExternal = $derived(target === "_blank");
 </script>
 
 <div class="trakt-banner-link">
@@ -30,7 +32,9 @@
     color="inherit"
     onclick={() => track({ source, target: href ?? "banner-link" })}
   >
-    <ExternalLinkIcon size="small" />
+    {#if isExternal}
+      <ExternalLinkIcon size="small" />
+    {/if}
     <span class="no-wrap">{@render children()}</span>
   </Link>
 </div>
