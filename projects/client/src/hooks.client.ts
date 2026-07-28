@@ -18,7 +18,9 @@ captureWebviewSession();
 Sentry.init({
   dsn: SENTRY_DSN,
 
-  tracesSampleRate: 1.0,
+  // Matches the server rate. Client navigations are the higher-volume side, so
+  // sampling them harder than the server made the asymmetry backwards.
+  tracesSampleRate: 0.1,
 
   // Enable logs to be sent to Sentry
   enableLogs: true,
