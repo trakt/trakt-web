@@ -108,6 +108,7 @@ module.exports = {
         'safari',
         'share',
         'search',
+        'select',
         'sentiment',
         'seo',
         'settings',

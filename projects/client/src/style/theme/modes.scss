@@ -92,6 +92,10 @@
    * Select
    */
   --color-background-select: var(--shade-50);
+  --color-select-item-hover: var(--shade-60);
+  --color-select-muted-foreground: var(--shade-700);
+  --color-select-raised-background: var(--shade-50);
+  --color-select-logo-border: var(--shade-100);
 
   /*
    * Link
@@ -546,6 +550,10 @@
    * Select
    */
   --color-background-select: var(--color-background);
+  --color-select-item-hover: var(--shade-910);
+  --color-select-muted-foreground: var(--shade-200);
+  --color-select-raised-background: var(--shade-920);
+  --color-select-logo-border: var(--shade-800);
 
   /**
    * Link

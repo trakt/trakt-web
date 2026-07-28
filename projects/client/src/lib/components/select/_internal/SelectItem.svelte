@@ -78,8 +78,8 @@
   @use "$style/scss/mixins/index.scss" as *;
 
   .trakt-select-item {
-    --color-background-item-hover: var(--shade-60);
-    --color-foreground-item: var(--shade-700);
+    --color-background-item-hover: var(--color-select-item-hover);
+    --color-foreground-item: var(--color-select-muted-foreground);
     --select-item-height: var(--ni-40);
     --select-item-toggle-size: var(--ni-24);
 

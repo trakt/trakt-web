@@ -221,7 +221,7 @@
     max-height: min(var(--ni-276), var(--bits-floating-available-height));
 
     border-radius: var(--border-radius-m);
-    background-color: var(--shade-10);
+    background-color: var(--color-modal-background);
     box-shadow: var(--shadow-menu);
 
     padding: var(--ni-8);
@@ -243,7 +243,7 @@
       width: var(--ni-12);
       height: var(--ni-12);
 
-      color: var(--shade-700);
+      color: var(--color-select-muted-foreground);
     }
   }
 </style>
