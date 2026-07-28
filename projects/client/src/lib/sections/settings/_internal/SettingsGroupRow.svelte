@@ -90,7 +90,8 @@
     display: flex;
     align-items: center;
     gap: var(--gap-m);
-    padding: var(--gap-s) var(--gap-m);
+    padding: var(--gap-s)
+      var(--settings-group-row-padding-inline, var(--gap-m));
     min-height: var(--ni-64);
     width: 100%;
     box-sizing: border-box;

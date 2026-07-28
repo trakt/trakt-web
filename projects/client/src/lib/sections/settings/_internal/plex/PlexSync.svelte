@@ -1,36 +1,52 @@
 <script lang="ts">
-  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { iffy } from "$lib/utils/function/iffy.ts";
+  import { map } from "rxjs";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
+  import SettingsStatusBadge from "../SettingsStatusBadge.svelte";
+  import SettingsVipUpsell from "../SettingsVipUpsell.svelte";
   import PlexConnect from "./PlexConnect.svelte";
-  import PlexServerCard from "./PlexServerCard.svelte";
-  import PlexServers from "./PlexServers.svelte";
+  import PlexSyncedServers from "./PlexSyncedServers.svelte";
   import PlexSyncHistory from "./PlexSyncHistory.svelte";
   import PlexSyncSettings from "./PlexSyncSettings.svelte";
+  import { usePlexSelectedLibraries } from "./usePlexSelectedLibraries.ts";
   import { usePlexSync } from "./usePlexSync.ts";
 
   const {
     isConnected,
     servers,
     authState,
-    selectedServerId,
     isSyncing,
     startAuth,
     disconnect,
-    selectServer,
     syncNow,
   } = iffy(() => usePlexSync());
 
-  const selectedServer = $derived(
-    $servers.find((s) => s.id === $selectedServerId) ?? null,
+  const hasSyncedServers = usePlexSelectedLibraries().pipe(
+    map((libraries) => libraries.length > 0),
   );
 </script>
 
+{#snippet plexIcon()}
+  <PlexLogo />
+{/snippet}
+
 <div class="trakt-plex-settings">
+  {#if $isConnected === false}
+    <RenderFor audience="free">
+      <SettingsVipUpsell
+        icon={plexIcon}
+        title={m.header_plex_sync_free_limits()}
+        description={m.description_plex_sync_free_limits()}
+        source="plex-settings-sync"
+      />
+    </RenderFor>
+  {/if}
+
   <SettingsGroupCard>
     {#if $isConnected === null}
       <div class="loading-container">
@@ -45,10 +61,7 @@
         {#snippet icon()}<PlexLogo />{/snippet}
         {#snippet tag()}
           {#if $isConnected}
-            <span class="connected-badge bold tag">
-              <CheckIcon />
-              {m.label_plex_connected()}
-            </span>
+            <SettingsStatusBadge label={m.label_plex_connected()} />
           {/if}
         {/snippet}
         <PlexConnect
@@ -58,30 +71,20 @@
           onDisconnect={disconnect}
         />
       </SettingsGroupRow>
-
-      {#if $isConnected && $servers.length > 1}
-        <PlexServers
-          servers={$servers}
-          selectedServerId={$selectedServerId}
-          onSelectServer={selectServer}
-        />
-      {/if}
     {/if}
   </SettingsGroupCard>
 
-  {#if $isConnected && selectedServer}
-    {#key selectedServer.id}
-      <PlexServerCard
-        serverId={selectedServer.id}
-        serverName={selectedServer.name}
-        isSyncing={$isSyncing}
-        onSyncNow={syncNow}
-      />
-    {/key}
-  {/if}
-
   {#if $isConnected}
-    <PlexSyncSettings />
+    <PlexSyncedServers
+      servers={$servers}
+      isSyncing={$isSyncing}
+      onSyncNow={syncNow}
+    />
+
+    {#if $hasSyncedServers}
+      <PlexSyncSettings />
+    {/if}
+
     <PlexSyncHistory />
   {/if}
 </div>
@@ -91,23 +94,6 @@
 
   .loading-container {
     padding: var(--gap-l);
-  }
-
-  .connected-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--gap-xxs);
-
-    padding: var(--ni-2) var(--ni-8);
-    border-radius: var(--border-radius-xl);
-
-    background: color-mix(in srgb, var(--green-500) 10%, transparent);
-    color: var(--green-500);
-
-    :global(svg) {
-      width: var(--ni-10);
-      height: var(--ni-10);
-    }
   }
 
   .trakt-plex-settings {

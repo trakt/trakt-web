@@ -14,14 +14,12 @@ export function usePlexSync() {
   const isConnected = new BehaviorSubject<boolean | null>(null);
   const servers = new BehaviorSubject<PlexServer[]>([]);
   const authState = new BehaviorSubject<PlexAuthState>('idle');
-  const selectedServerId = new BehaviorSubject<string | null>(null);
   const isSyncing = new BehaviorSubject(false);
 
   onDestroy(() => {
     isConnected.complete();
     servers.complete();
     authState.complete();
-    selectedServerId.complete();
     isSyncing.complete();
   });
 
@@ -41,13 +39,7 @@ export function usePlexSync() {
     }
 
     isConnected.next(true);
-
-    const serverList = result ?? [];
-    servers.next(serverList);
-
-    if (serverList.length > 0 && !selectedServerId.getValue()) {
-      selectedServerId.next(serverList.at(0)?.id ?? null);
-    }
+    servers.next(result ?? []);
   }
 
   function cleanPlexStatusParam() {
@@ -66,7 +58,6 @@ export function usePlexSync() {
     isConnected: isConnected.asObservable(),
     servers: servers.asObservable(),
     authState: authState.asObservable(),
-    selectedServerId: selectedServerId.asObservable(),
     isSyncing: isSyncing.asObservable(),
 
     startAuth: async () => {
@@ -95,18 +86,10 @@ export function usePlexSync() {
 
       isConnected.next(false);
       servers.next([]);
-      selectedServerId.next(null);
       authState.next('idle');
     },
 
-    selectServer: (serverId: string) => {
-      selectedServerId.next(serverId);
-    },
-
-    syncNow: async () => {
-      const serverId = selectedServerId.getValue();
-      if (!serverId) return;
-
+    syncNow: async (serverId: string) => {
       isSyncing.next(true);
       try {
         await plexSyncRequest({ serverId });

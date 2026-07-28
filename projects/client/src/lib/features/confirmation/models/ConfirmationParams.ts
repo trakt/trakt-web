@@ -111,6 +111,10 @@ interface ConfirmationParamsMap {
   [ConfirmationType.DisconnectPlex]: {
     type: ConfirmationType.DisconnectPlex;
   };
+  [ConfirmationType.RemovePlexServer]: {
+    type: ConfirmationType.RemovePlexServer;
+    server: string;
+  };
   [ConfirmationType.RevokeApp]: {
     type: ConfirmationType.RevokeApp;
     name: string;

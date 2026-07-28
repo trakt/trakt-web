@@ -1,8 +1,16 @@
 import { time } from '$lib/utils/timing/time.ts';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { getMediaStatus } from './getMediaStatus.ts';
 
 describe('getMediaStatus', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   describe('released-in-future window', () => {
     it('returns "new" when status is released and effectiveReleaseDate is in the future', () => {
       const tomorrow = new Date(Date.now() + time.days(1));

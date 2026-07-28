@@ -1,3 +1,4 @@
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { PlexErrorCode } from '$lib/requests/plex/PlexErrorCode.ts';
 import { plexServerAccountsQuery } from '$lib/requests/plex/plexServerAccountsQuery.ts';
@@ -15,6 +16,12 @@ import {
   map,
 } from 'rxjs';
 
+type PlexSelectionUpdate = NonNullable<
+  NonNullable<
+    Parameters<typeof plexUpdateSettingsRequest>[0]['settings']['sync']
+  >['selection']
+>;
+
 const UNRECOVERABLE_ERROR_CODES = new Set<PlexErrorCode>([
   'missing_token',
   'bad_auth',
@@ -24,6 +31,7 @@ const UNRECOVERABLE_ERROR_CODES = new Set<PlexErrorCode>([
 
 export function usePlexServer({ serverId }: { serverId: string }) {
   const { invalidate } = useInvalidator();
+  const { user } = useUser();
 
   const accountsQuery = useQuery(plexServerAccountsQuery({ serverId }));
   const retryAccounts = () => refetchQuery(accountsQuery);
@@ -58,7 +66,6 @@ export function usePlexServer({ serverId }: { serverId: string }) {
 
   const plexSettings = useQuery(plexSettingsQuery()).pipe(map((q) => q.data));
 
-  // Optimistic overrides: uuid → isSelected (persist until component unmounts)
   const libraryOverrides = new BehaviorSubject<ReadonlyMap<string, boolean>>(
     new Map(),
   );
@@ -87,70 +94,105 @@ export function usePlexServer({ serverId }: { serverId: string }) {
       ),
     );
 
+  const hasSelection = libraries.pipe(
+    map((libs) => libs.some((lib) => lib.isSelected)),
+  );
+
+  const hasChanges = combineLatest([
+    serverAccounts.pipe(map((data) => data?.libraries ?? [])),
+    libraryOverrides,
+    plexSettings,
+    selectedUserIdOverride,
+  ]).pipe(
+    map(([base, overrides, settings, userOverride]) => {
+      const isLibraryChanged = [...overrides.entries()].some(
+        ([uuid, isSelected]) =>
+          (base.find((lib) => lib.uuid === uuid)?.isSelected ?? false) !==
+            isSelected,
+      );
+
+      const baseUserId = settings?.sync.selection.userIds.at(0) ?? '';
+      const isUserChanged = userOverride != null && userOverride !== baseUserId;
+
+      return isLibraryChanged || isUserChanged;
+    }),
+  );
+
   async function toggleLibrary(uuid: string) {
     const currentLibraries = await firstValueFrom(libraries);
     const lib = currentLibraries.find((l) => l.uuid === uuid);
     if (!lib) return;
 
-    const newValue = !lib.isSelected;
-
     const newOverrides = new Map(libraryOverrides.getValue());
-    newOverrides.set(uuid, newValue);
+    newOverrides.set(uuid, !lib.isSelected);
     libraryOverrides.next(newOverrides);
-
-    try {
-      const settings = await firstValueFrom(
-        plexSettings.pipe(filter((s) => s != null)),
-      );
-
-      const otherServerLibs = settings.sync.selection.libraryIds
-        .filter((l) => l.serverId !== serverId)
-        .map((l) => ({ server_id: l.serverId, uuid: l.uuid }));
-
-      const thisServerLibs = currentLibraries
-        .map((l) => ({
-          uuid: l.uuid,
-          isSelected: l.uuid === uuid ? newValue : l.isSelected,
-        }))
-        .filter((l) => l.isSelected)
-        .map((l) => ({ server_id: serverId, uuid: l.uuid }));
-
-      const success = await plexUpdateSettingsRequest({
-        settings: {
-          sync: {
-            selection: { library_ids: [...otherServerLibs, ...thisServerLibs] },
-          },
-        },
-      });
-
-      if (!success) {
-        throw new Error('Failed to update library settings');
-      }
-
-      await invalidate(InvalidateAction.Plex.Settings);
-    } catch {
-      const revertedOverrides = new Map(libraryOverrides.getValue());
-      revertedOverrides.delete(uuid);
-      libraryOverrides.next(revertedOverrides);
-    }
   }
 
-  async function selectAccount(userId: string) {
-    const previous = selectedUserIdOverride.getValue();
+  function selectAccount(userId: string) {
     selectedUserIdOverride.next(userId);
-    try {
-      const success = await plexUpdateSettingsRequest({
-        settings: {
-          sync: { selection: { user_ids: userId ? [userId] : [] } },
-        },
-      });
-      if (!success) {
-        throw new Error('Failed to update account settings');
-      }
-      await invalidate(InvalidateAction.Plex.Settings);
-    } catch {
-      selectedUserIdOverride.next(previous);
+  }
+
+  function toOtherServerLibraries(
+    libraryIds: ReadonlyArray<{ serverId: string; uuid: string }>,
+  ) {
+    return libraryIds
+      .filter((l) => l.serverId !== serverId)
+      .map((l) => ({ server_id: l.serverId, uuid: l.uuid }));
+  }
+
+  async function writeSelection(
+    selection: PlexSelectionUpdate,
+  ): Promise<boolean> {
+    const success = await plexUpdateSettingsRequest({
+      settings: { sync: { selection } },
+    }).catch(() => false);
+
+    if (!success) {
+      return false;
     }
+
+    await invalidate(InvalidateAction.Plex.Settings);
+    return true;
+  }
+
+  async function saveChanges(): Promise<boolean> {
+    const currentLibraries = await firstValueFrom(libraries);
+    const settings = await firstValueFrom(
+      plexSettings.pipe(filter((s) => s != null)),
+    );
+
+    const currentUser = await firstValueFrom(user);
+
+    if (currentUser == null) {
+      return false;
+    }
+
+    const otherServerLibs = currentUser.isVip
+      ? toOtherServerLibraries(settings.sync.selection.libraryIds)
+      : [];
+
+    const thisServerLibs = currentLibraries
+      .filter((l) => l.isSelected)
+      .map((l) => ({ server_id: serverId, uuid: l.uuid }));
+
+    const userId = await firstValueFrom(selectedUserId);
+
+    return writeSelection({
+      library_ids: [...otherServerLibs, ...thisServerLibs],
+      user_ids: userId ? [userId] : [],
+    });
+  }
+
+  async function removeServer(): Promise<boolean> {
+    const settings = await firstValueFrom(
+      plexSettings.pipe(filter((s) => s != null)),
+    );
+
+    return writeSelection({
+      server_ids: settings.sync.selection.serverIds
+        .filter((id) => id !== serverId),
+      library_ids: toOtherServerLibraries(settings.sync.selection.libraryIds),
+    });
   }
 
   return {
@@ -159,7 +201,11 @@ export function usePlexServer({ serverId }: { serverId: string }) {
     accountsError,
     libraries,
     selectedUserId,
+    hasSelection,
+    hasChanges,
     toggleLibrary,
     selectAccount,
+    saveChanges,
+    removeServer,
   };
 }
