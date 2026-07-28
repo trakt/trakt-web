@@ -1,3 +1,6 @@
+// Far below anything a rendered integer can show, so snapping is invisible.
+const SETTLE_EPSILON = 0.001;
+
 type ApproachTargetParams = {
   current: number;
   target: number;
@@ -18,6 +21,9 @@ export function approachTarget(
   if (halfLifeMs <= 0) return target;
 
   const factor = 1 - Math.pow(2, -deltaMs / halfLifeMs);
+  const next = current + (target - current) * factor;
 
-  return current + (target - current) * factor;
+  // Exponential easing only approaches its target, so a target that stops
+  // moving is never actually reached and the rendered integer settles one short.
+  return Math.abs(target - next) < SETTLE_EPSILON ? target : next;
 }
