@@ -147,10 +147,10 @@
 
 <style lang="scss">
   .trakt-select-search {
-    --color-select-search-background: var(--shade-50);
-    --color-select-search-border: var(--shade-200);
-    --color-select-search-foreground: var(--shade-920);
-    --color-select-search-placeholder: var(--shade-700);
+    --color-select-search-background: var(--color-select-raised-background);
+    --color-select-search-border: var(--color-border);
+    --color-select-search-foreground: var(--color-foreground);
+    --color-select-search-placeholder: var(--color-select-muted-foreground);
 
     padding: var(--ni-4) var(--ni-4) var(--ni-8);
 
@@ -168,7 +168,6 @@
 
       background: var(--color-select-search-background);
       color: var(--color-select-search-foreground);
-      color-scheme: light;
       outline: none;
 
       transition: border-color var(--transition-increment) ease-in-out;
@@ -187,7 +186,7 @@
     margin: 0;
     padding: var(--ni-12) var(--ni-8);
     font-size: var(--font-size-tag);
-    color: var(--shade-700);
+    color: var(--color-select-muted-foreground);
     text-align: center;
   }
 </style>

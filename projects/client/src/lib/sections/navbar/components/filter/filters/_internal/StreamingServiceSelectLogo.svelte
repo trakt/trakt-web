@@ -24,9 +24,9 @@
     box-sizing: border-box;
     flex-shrink: 0;
 
-    border: var(--border-thickness-xxs) solid var(--shade-100);
+    border: var(--border-thickness-xxs) solid var(--color-select-logo-border);
     border-radius: var(--border-radius-s);
-    background: color-mix(in srgb, var(--shade-900) 4%, transparent);
+    background: color-mix(in srgb, var(--color-text-primary) 4%, transparent);
 
     :global(.trakt-streaming-service-logo) {
       width: 100%;
@@ -34,7 +34,7 @@
 
       justify-content: center;
       text-align: center;
-      color: var(--shade-900);
+      color: var(--color-text-primary);
     }
 
     :global(.trakt-streaming-service-logo img),
