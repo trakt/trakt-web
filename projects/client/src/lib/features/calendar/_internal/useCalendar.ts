@@ -1,3 +1,4 @@
+import type { MultiSelectSelection } from '$lib/components/select/models/MultiSelectSelection.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
 import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
@@ -17,6 +18,7 @@ import { combineLatest, map, type Observable } from 'rxjs';
 import type { FilterParams } from '../../../requests/models/FilterParams.ts';
 import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
 import type { Calendar } from '../models/Calendar.ts';
+import { matchesEpisodeTypeFilter } from './matchesEpisodeTypeFilter.ts';
 
 export type CalendarItem = UpcomingEpisodeEntry | MediaEntry;
 type CalendarItems = CalendarItem[];
@@ -25,6 +27,12 @@ type UseCalendarParams = {
   start: Date;
   days: number;
   type: DiscoverMode;
+  /*
+    An Observable so that changing the selection does not re-instantiate the
+    hook, and with it the whole QueryObserver chain - this filter narrows what
+    already arrived, it never triggers a fetch.
+  */
+  episodeTypes: Observable<MultiSelectSelection>;
 } & FilterParams;
 
 type CalendarResult = {
@@ -71,13 +79,24 @@ export function useCalendar(
     getTargets: episodeWithShowOrMovieTargets,
   });
 
-  const allItems = combineLatest(queries).pipe(
+  const sorted = combineLatest(queries).pipe(
     map(($queries) => {
       return $queries.flatMap((query) => query.data ?? []).toSorted((a, b) => {
         return a.effectiveReleaseDate.getTime() -
           b.effectiveReleaseDate.getTime();
       });
     }),
+  );
+
+  /*
+    The calendar endpoints take no episode role parameter, so the narrowing
+    happens here. Ahead of the intl overlay, so we do not fetch translations
+    for entries that are about to be dropped.
+  */
+  const allItems = combineLatest([sorted, props.episodeTypes]).pipe(
+    map(([$sorted, $episodeTypes]) =>
+      $sorted.filter((item) => matchesEpisodeTypeFilter(item, $episodeTypes))
+    ),
     overlay.operator,
   );
 

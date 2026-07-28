@@ -49,7 +49,6 @@
     <div
       {...props}
       class="trakt-select-item"
-      class:is-excluded={state === "excluded"}
       data-state={state ?? "none"}
       aria-label={state === "excluded"
         ? m.option_label_excluded({ label: option.label })
@@ -115,7 +114,12 @@
       background-color: var(--color-background-item-hover);
     }
 
-    &.is-excluded .trakt-select-item-label {
+    /* the label carries the same colour as the toggle that set it */
+    &[data-state="included"] .trakt-select-item-label {
+      color: var(--purple-500);
+    }
+
+    &[data-state="excluded"] .trakt-select-item-label {
       color: var(--red-500);
       text-decoration: line-through;
     }

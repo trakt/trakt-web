@@ -1,7 +1,7 @@
 <script lang="ts">
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { FilterKey } from "$lib/features/filters/models/Filter.ts";
-  import { useFilter } from "$lib/features/filters/useFilter";
+  import { useVisibleFilters } from "$lib/features/filters/useVisibleFilters";
   import FilterGroup from "./_internal/FilterGroup.svelte";
   import { isMultiSelectFilter } from "./_internal/isMultiSelectFilter";
   import { isSliderFilter } from "./_internal/isSliderFilter";
@@ -9,10 +9,12 @@
   import StreamingServicesFilter from "./_internal/StreamingServicesFilter.svelte";
   import SliderFilter from "./SliderFilter.svelte";
 
-  const { filters } = useFilter();
+  const visibleFilters = useVisibleFilters();
 
-  const sliderFilters = $derived(filters.filter(isSliderFilter));
-  const multiSelectFilters = $derived(filters.filter(isMultiSelectFilter));
+  const sliderFilters = $derived($visibleFilters.filter(isSliderFilter));
+  const multiSelectFilters = $derived(
+    $visibleFilters.filter(isMultiSelectFilter),
+  );
 </script>
 
 <FilterGroup>

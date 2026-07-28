@@ -7,6 +7,7 @@ import {
   map,
 } from 'rxjs';
 import type { Snippet } from 'svelte';
+import type { FilterSurface } from '$lib/features/filters/models/FilterSurface.ts';
 import { isShallowEqual } from '$lib/utils/object/isShallowEqual.ts';
 import type { NavbarHeaderState } from './models/NavbarHeaderState.ts';
 
@@ -17,6 +18,7 @@ type NavbarState = {
   contextualActions: Snippet | undefined;
   hasFilters: boolean;
   showFilters: boolean;
+  filterSurface: FilterSurface | undefined;
   headerActions?: Snippet;
   header?: NavbarHeaderState;
   sidebar: {
@@ -39,6 +41,7 @@ const initialNavbarState: NavbarState = {
   contextualActions: undefined,
   hasFilters: false,
   showFilters: true,
+  filterSurface: undefined,
   headerActions: undefined,
   header: undefined,
   sidebar: {

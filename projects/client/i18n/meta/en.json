@@ -1503,6 +1503,18 @@
       "default": "Status",
       "description": "Header for the status section."
     },
+    "header_episode_types": {
+      "default": "Episode Type",
+      "description": "Header for the calendar filter that narrows results to a role an episode plays in its show or season, such as a premiere or a finale."
+    },
+    "option_text_premieres": {
+      "default": "Premieres",
+      "description": "Filter option that keeps every kind of premiere episode: series, season and mid-season premieres."
+    },
+    "option_text_finales": {
+      "default": "Finales",
+      "description": "Filter option that keeps every kind of finale episode: series, season and mid-season finales."
+    },
     "translated_value_status_released": {
       "default": "Released",
       "description": "Status value for released media items. The value is sent back from the Trakt API."

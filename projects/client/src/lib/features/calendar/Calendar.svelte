@@ -1,6 +1,9 @@
 <script lang="ts">
+  import { FilterKey } from "$lib/features/filters/models/Filter";
+  import { toMultiSelectSelection } from "$lib/features/filters/toMultiSelectSelection";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import { getDaysDifference } from "$lib/utils/date/getDaysDifference";
+  import { map } from "rxjs";
   import { useFilter } from "../filters/useFilter";
   import {
     useCalendar,
@@ -27,7 +30,12 @@
 
   const days = $derived(getDaysDifference($startDate, $endDate));
 
-  const { filterMap } = useFilter();
+  const { filterMap, getFilterValue } = useFilter();
+
+  // Kept out of `$derived` so a selection change narrows the entries already
+  // in hand instead of rebuilding the query chain.
+  const episodeTypeValue = getFilterValue(FilterKey.EpisodeTypes);
+  const episodeTypes = episodeTypeValue.pipe(map(toMultiSelectSelection));
 
   const { isLoading, calendar } = $derived(
     useCalendar({
@@ -35,13 +43,16 @@
       days,
       type: $mode,
       filter: $filterMap,
+      episodeTypes,
     }),
   );
 
   const periods: CalendarPeriod<CalendarItemEntry>[] = $derived(
     accumulate({
       calendar: $calendar,
-      fingerprint: `${$mode}:${JSON.stringify($filterMap)}`,
+      fingerprint: `${$mode}:${JSON.stringify($filterMap)}:${
+        $episodeTypeValue ?? ""
+      }`,
     }),
   );
 

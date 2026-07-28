@@ -227,6 +227,48 @@ const STATUS_FILTER: Filter = {
   },
 };
 
+const PREMIERE_TYPES = [
+  'series_premiere',
+  'season_premiere',
+  'mid_season_premiere',
+] as const;
+
+const FINALE_TYPES = [
+  'mid_season_finale',
+  'season_finale',
+  'series_finale',
+] as const;
+
+const EPISODE_TYPE_FILTER: Filter = {
+  label: m.header_episode_types,
+  key: FilterKey.EpisodeTypes,
+  type: 'list',
+  // Episode roles only exist on the calendar feeds; every other filterable
+  // surface lists shows and movies, which carry no role to narrow by.
+  surfaces: ['calendar'],
+  // A movie has no episode role, so the filter has nothing to narrow there.
+  modes: ['show', 'media'],
+  // The calendar endpoints take no episode role parameter, so the calendar
+  // narrows the fetched entries itself - see `matchesEpisodeTypeFilter`.
+  isClientSide: true,
+  options: [
+    { label: m.option_text_premieres, value: PREMIERE_TYPES.join(',') },
+    { label: m.option_text_finales, value: FINALE_TYPES.join(',') },
+    { label: m.tag_text_series_premiere, value: 'series_premiere' },
+  ],
+  advanced: {
+    type: 'multi-select',
+    options: [
+      { label: m.tag_text_series_premiere, value: 'series_premiere' },
+      { label: m.tag_text_season_premiere, value: 'season_premiere' },
+      { label: m.tag_text_mid_season_premiere, value: 'mid_season_premiere' },
+      { label: m.tag_text_mid_season_finale, value: 'mid_season_finale' },
+      { label: m.tag_text_season_finale, value: 'season_finale' },
+      { label: m.tag_text_series_finale, value: 'series_finale' },
+    ],
+  },
+};
+
 export const FILTERS = [
   GENRE_FILTER,
   STREAMING_FILTER,
@@ -236,6 +278,7 @@ export const FILTERS = [
   CERTIFICATION_FILTER,
   COUNTRY_FILTER,
   STATUS_FILTER,
+  EPISODE_TYPE_FILTER,
   IGNORE_WATCHED_FILTER,
   IGNORE_WATCHLISTED_FILTER,
 ] as const;

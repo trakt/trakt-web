@@ -1,19 +1,19 @@
 <script lang="ts">
   import { FilterKey } from "$lib/features/filters/models/Filter.ts";
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
-  import { useFilter } from "$lib/features/filters/useFilter";
+  import { useVisibleFilters } from "$lib/features/filters/useVisibleFilters";
   import FilterGroup from "./_internal/FilterGroup.svelte";
   import StreamingAvailabilityFilter from "./_internal/StreamingAvailabilityFilter.svelte";
   import ListFilter from "./ListFilter.svelte";
   import SliderFilter from "./SliderFilter.svelte";
 
-  const { filters } = useFilter();
+  const visibleFilters = useVisibleFilters();
 
   const listTypeFilters = $derived(
-    filters.filter((filter) => filter.type === "list"),
+    $visibleFilters.filter((filter) => filter.type === "list"),
   );
   const ratingTypeFilters = $derived(
-    filters.filter((filter) => filter.type === "slider"),
+    $visibleFilters.filter((filter) => filter.type === "slider"),
   );
 </script>
 

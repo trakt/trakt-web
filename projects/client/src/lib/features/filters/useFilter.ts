@@ -16,6 +16,11 @@ export function useFilter() {
   const { state } = useNavbarState();
 
   return {
+    /*
+      The complete set - URL and stored-filter plumbing has to recognise every
+      key regardless of which page or mode it landed from. `useVisibleFilters`
+      is what the panel renders.
+    */
     filters: FILTERS,
     getFilterValue: (key: FilterKey) => {
       return search.pipe(
@@ -72,6 +77,8 @@ export function useFilter() {
         }
 
         return FILTERS
+          // Client-side filters are applied to the response, never requested.
+          .filter((filter) => !filter.isClientSide)
           .filter((filter) => Boolean($search.get(filter.key)))
           .reduce((filterMap, filter) => {
             filterMap[filter.key] = mapToSearchParamValue({

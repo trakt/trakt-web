@@ -25,4 +25,15 @@ describe('processFilterParams', () => {
 
     expect(callback).not.toHaveBeenCalled();
   });
+
+  it('should not call callback for surface restricted filter keys', () => {
+    const callback = vi.fn();
+    const params: Array<[string, string]> = [
+      [FilterKey.EpisodeTypes, 'season_finale'],
+    ];
+
+    processFilterParams(params, callback);
+
+    expect(callback).not.toHaveBeenCalled();
+  });
 });

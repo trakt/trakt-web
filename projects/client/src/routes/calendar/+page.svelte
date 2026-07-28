@@ -20,6 +20,7 @@
 
   <ResponsiveNavbarStateSetter
     hasFilters
+    filterSurface="calendar"
     header={{ title: m.header_calendar(), metaInfo: $current.text() }}
   />
 

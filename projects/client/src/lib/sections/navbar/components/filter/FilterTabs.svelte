@@ -6,6 +6,7 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import { useVisibleFilters } from "$lib/features/filters/useVisibleFilters";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
   import { useFilterSetter } from "./filters/_internal/useFilterSetter";
@@ -25,10 +26,11 @@
     tabPosition?: "top" | "bottom";
   } = $props();
 
-  const { filters, hasAnyAdvancedFilter, filterMap } = useFilter();
+  const { hasAnyAdvancedFilter, filterMap } = useFilter();
+  const visibleFilters = useVisibleFilters();
 
   const toggleTypeFilters = $derived(
-    filters.filter((filter) => filter.type === "toggle"),
+    $visibleFilters.filter((filter) => filter.type === "toggle"),
   );
 
   const { confirm } = useConfirm();
