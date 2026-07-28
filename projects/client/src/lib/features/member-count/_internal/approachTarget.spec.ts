@@ -46,12 +46,21 @@ describe('util: approachTarget', () => {
     })).toBe(42);
   });
 
-  it('should approach without ever overshooting the target', () => {
+  it('should not overshoot the target', () => {
     expect(approachTarget({
       current: 0,
       target: 100,
       deltaMs: 10_000,
       halfLifeMs: 500,
-    })).toBeLessThan(100);
+    })).toBeLessThanOrEqual(100);
+  });
+
+  it('should settle exactly on a target it has all but reached', () => {
+    expect(approachTarget({
+      current: 17_002_053.9999,
+      target: 17_002_054,
+      deltaMs: 16,
+      halfLifeMs: 300,
+    })).toBe(17_002_054);
   });
 });
