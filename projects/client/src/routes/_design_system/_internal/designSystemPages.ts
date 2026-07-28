@@ -79,6 +79,13 @@ export const DESIGN_SYSTEM_GROUPS: DesignSystemGroup[] = [
         kind: 'Component',
       },
       {
+        title: 'Member Counter',
+        href: '/_design_system/member-counter',
+        description:
+          'Live registered-account counter: hero, odometer, and ambient presentations.',
+        kind: 'Component',
+      },
+      {
         title: 'Links',
         href: '/_design_system/links',
         description: 'Inline and navigational link styling.',
