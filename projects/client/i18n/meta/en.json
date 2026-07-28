@@ -2675,26 +2675,6 @@
         }
       }
     },
-    "text_cookie_notice": {
-      "default": "Trakt uses C🍪🍪KIES in order to enhance your overall experience. You can <a>read more information</a> here.",
-      "description": "Text for the cookie notice shown to users when they first visit the site. This should be a short and concise message that informs users about the use of cookies."
-    },
-    "button_text_cookie_accept": {
-      "default": "Accept all",
-      "description": "Text for the button that accepts all cookies."
-    },
-    "button_label_cookie_accept": {
-      "default": "Accept all cookies",
-      "description": "Aria-label for the button that accepts all cookies."
-    },
-    "button_text_cookie_accept_functional_only": {
-      "default": "Functional only",
-      "description": "Text for the button that accepts function cookies only."
-    },
-    "button_label_cookie_accept_functional_only": {
-      "default": "Accept functional cookies only",
-      "description": "Aria-label for the button that accepts function cookies only."
-    },
     "page_title_year_to_date": {
       "default": "Year to date",
       "description": "Title for the year to date page."

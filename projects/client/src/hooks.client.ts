@@ -11,8 +11,8 @@ import { handleErrorWithSentry } from '@sentry/sveltekit';
 
 // Must run before Sentry.init and before SvelteKit reads `location`: strips the
 // WebView params (slurm VIP token, standalone flag) from the URL and latches
-// them to sessionStorage, so page.url, Sentry tracing/replay and analytics never
-// see the token.
+// them to sessionStorage, so page.url, Sentry tracing and analytics never see
+// the token.
 captureWebviewSession();
 
 Sentry.init({
@@ -23,12 +23,8 @@ Sentry.init({
   // Enable logs to be sent to Sentry
   enableLogs: true,
 
-  // Replay is only loaded for REPLAY_LOAD_SAMPLE of users (see below). For
-  // the sampled cohort, capture both session and on-error replays fully.
-  replaysSessionSampleRate: 1.0,
-  replaysOnErrorSampleRate: 1.0,
-
-  // Replay integration is added post-load to keep hydration light. See below.
+  // No session replay: it persists a replay id in sessionStorage, which is the
+  // non-essential device storage a cookie banner would have to ask about.
   integrations: [],
   // Strings for partial matches. Regex patterns for exact matches.
   ignoreErrors: [
@@ -41,7 +37,7 @@ Sentry.init({
     'error loading dynamically imported module',
     'Importing a module script failed',
     'Unable to preload CSS for',
-    // Sentry's own replay integration touches cross-origin frames
+    // Cross-origin frames we cannot reach into: embedded players, plus frames
     // injected by ad-blockers / privacy extensions.
     'Blocked a frame with origin',
     "Failed to read a named property 'Element' from 'Window'",
@@ -176,40 +172,9 @@ function reloadOnceFromClientEvent(
   triggerReloadOnce();
 }
 
-// Fraction of users that download and initialize Sentry's replay integration.
-// Sampling at the loader keeps the chunk + init cost off the other (1 - x) of
-// users entirely, while the sampled cohort still gets full session + on-error
-// replay coverage.
-const REPLAY_LOAD_SAMPLE = 0.1;
-
 if (typeof window !== 'undefined') {
   window.addEventListener('error', reloadOnceFromClientEvent);
   window.addEventListener('unhandledrejection', reloadOnceFromClientEvent);
-
-  const shouldLoadReplay = Math.random() < REPLAY_LOAD_SAMPLE;
-
-  const loadReplay = () => {
-    const schedule = window.requestIdleCallback?.bind(window) ??
-      ((cb: IdleRequestCallback) =>
-        window.setTimeout(() => cb({} as IdleDeadline), 0));
-    schedule(() => {
-      import('@sentry/sveltekit').then(({ replayIntegration }) => {
-        Sentry.addIntegration(replayIntegration({
-          maskAllInputs: false,
-          maskAllText: false,
-          blockAllMedia: false,
-        }));
-      });
-    }, { timeout: 5000 });
-  };
-
-  if (shouldLoadReplay) {
-    if (document.readyState === 'complete') {
-      loadReplay();
-    } else {
-      window.addEventListener('load', loadReplay, { once: true });
-    }
-  }
 }
 
 // If you have a custom error handler, pass it to `handleErrorWithSentry`
