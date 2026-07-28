@@ -1,7 +1,7 @@
 import { getIntlLocale } from '$lib/features/i18n/index.ts';
 import type { AvailableLanguage } from '$lib/features/i18n/index.ts';
 
-export type OdometerCell =
+type OdometerCell =
   // `place` is the power of ten this column renders, so a cell derives its own
   // roll offset from the raw value without being told its digit.
   | { kind: 'digit'; place: number }
@@ -19,30 +19,21 @@ export function toOdometerCells(
     { maximumFractionDigits: 0 },
   ).formatToParts(Math.floor(Math.max(0, value)));
 
-  const digitCount = parts
-    .filter((part) => part.type === 'integer')
-    .reduce((total, part) => total + part.value.length, 0);
+  // Digits split per character so each gets its own column; anything else stays
+  // whole, since a separator is one cell however many characters it is.
+  const chars = parts.flatMap((part) =>
+    part.type === 'integer'
+      ? [...part.value].map((char) => ({ char, isDigit: true }))
+      : [{ char: part.value, isDigit: false }]
+  );
 
-  return parts.reduce<{ cells: OdometerCell[]; place: number }>(
-    ({ cells, place }, part) => {
-      if (part.type !== 'integer') {
-        return {
-          place,
-          cells: [...cells, { kind: 'separator', text: part.value }],
-        };
+  return chars.map(({ char, isDigit }, index) =>
+    isDigit
+      // A digit's place is however many digits follow it.
+      ? {
+        kind: 'digit',
+        place: chars.slice(index + 1).filter((entry) => entry.isDigit).length,
       }
-
-      return {
-        place: place - part.value.length,
-        cells: [
-          ...cells,
-          ...[...part.value].map((_, index) => ({
-            kind: 'digit' as const,
-            place: place - 1 - index,
-          })),
-        ],
-      };
-    },
-    { cells: [], place: digitCount },
-  ).cells;
+      : { kind: 'separator', text: char }
+  );
 }
