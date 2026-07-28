@@ -34,9 +34,7 @@
     state.isExporting = true;
     state.endpointCount = 0;
 
-    record(AnalyticsEvent.ExportInitiated, {
-      isVip: $user.isVip ? "true" : "false",
-    });
+    record(AnalyticsEvent.ExportInitiated, {});
 
     await runRawExport({
       user: { slug: $user.slug, isVip: $user.isVip },

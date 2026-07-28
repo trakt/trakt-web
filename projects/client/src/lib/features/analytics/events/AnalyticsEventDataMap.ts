@@ -54,7 +54,6 @@ type ImportCompletedType = {
   duration: number;
 };
 type ImportFailedType = { source: string; error: string };
-type ExportInitiatedType = { isVip: string };
 type ExportCompletedType = { duration: number; endpointCount: number };
 type ExportFailedType = { error: string };
 
@@ -138,7 +137,8 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.ImportFailed]: ImportFailedType;
 
   // Data Export
-  [AnalyticsEvent.ExportInitiated]: ExportInitiatedType;
+  // No `isVip`: redundant with `user_type`, which rides on every event.
+  [AnalyticsEvent.ExportInitiated]: never;
   [AnalyticsEvent.ExportCompleted]: ExportCompletedType;
   [AnalyticsEvent.ExportFailed]: ExportFailedType;
 
