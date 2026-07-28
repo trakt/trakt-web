@@ -4,9 +4,9 @@ import { createHalEngine } from './createHalEngine.ts';
 
 const ENDPOINT = 'https://hal.test/e';
 
-function setup() {
+function setup(enrich?: () => Record<string, string | number>) {
   const send = vi.fn();
-  const engine = createHalEngine({ endpoint: ENDPOINT, send });
+  const engine = createHalEngine({ endpoint: ENDPOINT, send, enrich });
   return { engine, send };
 }
 
@@ -79,6 +79,24 @@ describe('store: createHalEngine', () => {
     window.dispatchEvent(new Event('pagehide'));
 
     expect(send).toHaveBeenCalledTimes(1);
+  });
+
+  it('should merge enriched dims into every event', () => {
+    const { engine, send } = setup(() => ({ user_type: 'vip' }));
+
+    engine.record(AnalyticsEvent.ExportInitiated, {});
+    vi.runOnlyPendingTimers();
+
+    expect(send.mock.calls[0][1][0].dims).toEqual({ user_type: 'vip' });
+  });
+
+  it('should not let an event payload shadow an enriched dim', () => {
+    const { engine, send } = setup(() => ({ user_type: 'anonymous' }));
+
+    engine.record(AnalyticsEvent.Theme, { theme: 'dark', user_type: 'vip' });
+    vi.runOnlyPendingTimers();
+
+    expect(send.mock.calls[0][1][0].dims.user_type).toBe('anonymous');
   });
 
   it('should never emit a user identifier', () => {

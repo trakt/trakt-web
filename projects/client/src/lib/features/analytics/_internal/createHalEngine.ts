@@ -40,12 +40,15 @@ function sendBatch(endpoint: string, events: ReadonlyArray<HalEvent>) {
 type CreateHalEngineProps = {
   endpoint?: string;
   send?: (endpoint: string, events: ReadonlyArray<HalEvent>) => void;
+  // Dims merged into every event, whoever recorded it.
+  enrich?: () => AnalyticsData;
 };
 
 export function createHalEngine(
   {
     endpoint = `${HAL_ENDPOINT}?trakt-api-key=${TRAKT_CLIENT_ID}`,
     send = sendBatch,
+    enrich = () => ({}),
   }: CreateHalEngineProps = {},
 ): AnalyticsEngine {
   let buffered: ReadonlyArray<HalEvent> = [];
@@ -94,9 +97,14 @@ export function createHalEngine(
         return;
       }
 
+      // Enriched dims last so an event payload cannot shadow them.
       buffered = [
         ...buffered,
-        { event: key, at: Date.now(), ...splitEventPayload(data) },
+        {
+          event: key,
+          at: Date.now(),
+          ...splitEventPayload({ ...data, ...enrich() }),
+        },
       ];
 
       if (buffered.length >= MAX_EVENTS_PER_BATCH) {
