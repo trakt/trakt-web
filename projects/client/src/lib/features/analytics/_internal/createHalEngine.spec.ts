@@ -42,7 +42,7 @@ describe('store: createHalEngine', () => {
   it('should drop an event name absent from the allowlist', () => {
     const { engine, send } = setup();
 
-    engine.record('page_view', { page_path: '/' });
+    engine.record('not-a-real-event', { source: 'somewhere' });
     vi.runOnlyPendingTimers();
 
     expect(send).not.toHaveBeenCalled();

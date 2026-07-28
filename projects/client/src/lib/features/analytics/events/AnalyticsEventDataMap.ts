@@ -11,6 +11,11 @@ import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
 type SourceType = { source: string };
 
+// The SvelteKit route template (`/movies/[slug]`), never a resolved path. HAL
+// cannot tell a template from a real path shaped like one, so a `pathname` here
+// would write user slugs into the dataset.
+type PageViewType = { route: string };
+
 type ActionType = { action: 'add' | 'remove' };
 type RatingType = { action: 'added' | 'changed'; rating: number } | {
   action: 'removed';
@@ -68,6 +73,7 @@ type ClearCompletedType = {
 type ClearFailedType = { source: string; error: string };
 
 export type AnalyticsEventDataMap = {
+  [AnalyticsEvent.PageView]: PageViewType;
   [AnalyticsEvent.EnterLite]: never;
   [AnalyticsEvent.PublicRedirect]: never;
   [AnalyticsEvent.NonVipRedirect]: never;
