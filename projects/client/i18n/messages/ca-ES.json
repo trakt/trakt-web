@@ -808,6 +808,7 @@
   "input_placeholder_app_name": "La meva aplicació",
   "input_placeholder_app_origins": "https://example.com",
   "input_placeholder_app_redirect_uris": "https://example.com/callback",
+  "input_placeholder_filter": "Filtre",
   "input_placeholder_filter_services": "Filtrar serveis de streaming",
   "input_placeholder_lists_description": "Descripció (opcional)",
   "input_placeholder_lists_name": "Nom",

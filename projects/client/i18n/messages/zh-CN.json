@@ -808,6 +808,7 @@
   "input_placeholder_app_name": "我的应用程序",
   "input_placeholder_app_origins": "https://example.com",
   "input_placeholder_app_redirect_uris": "https://example.com/callback",
+  "input_placeholder_filter": "筛选器",
   "input_placeholder_filter_services": "筛选流媒体服务",
   "input_placeholder_lists_description": "描述（可选）",
   "input_placeholder_lists_name": "名称",

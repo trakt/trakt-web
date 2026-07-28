@@ -808,6 +808,7 @@
   "input_placeholder_app_name": "Моя програма",
   "input_placeholder_app_origins": "https://example.com",
   "input_placeholder_app_redirect_uris": "https://example.com/callback",
+  "input_placeholder_filter": "Фільтр",
   "input_placeholder_filter_services": "Фільтрувати потокові сервіси",
   "input_placeholder_lists_description": "Опис (необов'язково)",
   "input_placeholder_lists_name": "Назва",

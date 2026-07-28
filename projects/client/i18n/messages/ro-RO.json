@@ -808,6 +808,7 @@
   "input_placeholder_app_name": "Aplicația mea",
   "input_placeholder_app_origins": "https://example.com",
   "input_placeholder_app_redirect_uris": "https://example.com/callback",
+  "input_placeholder_filter": "Filtru",
   "input_placeholder_filter_services": "Filtrează serviciile de streaming",
   "input_placeholder_lists_description": "Descriere (opțional)",
   "input_placeholder_lists_name": "Nume",

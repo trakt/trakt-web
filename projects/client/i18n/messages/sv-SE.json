@@ -808,6 +808,7 @@
   "input_placeholder_app_name": "Min applikation",
   "input_placeholder_app_origins": "https://example.com",
   "input_placeholder_app_redirect_uris": "https://example.com/callback",
+  "input_placeholder_filter": "Filter",
   "input_placeholder_filter_services": "Filtrera streamingtjänster",
   "input_placeholder_lists_description": "Beskrivning (valfritt)",
   "input_placeholder_lists_name": "Namn",

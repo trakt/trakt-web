@@ -808,6 +808,7 @@
   "input_placeholder_app_name": "طلبي",
   "input_placeholder_app_origins": "https://example.com",
   "input_placeholder_app_redirect_uris": "https://example.com/callback",
+  "input_placeholder_filter": "تصفية",
   "input_placeholder_filter_services": "تصفية خدمات البث",
   "input_placeholder_lists_description": "الوصف (اختياري)",
   "input_placeholder_lists_name": "الاسم",

@@ -808,6 +808,7 @@
   "input_placeholder_app_name": "Мое приложение",
   "input_placeholder_app_origins": "https://example.com",
   "input_placeholder_app_redirect_uris": "https://example.com/callback",
+  "input_placeholder_filter": "Фильтр",
   "input_placeholder_filter_services": "Фильтровать стриминговые сервисы",
   "input_placeholder_lists_description": "Описание (необязательно)",
   "input_placeholder_lists_name": "Название",

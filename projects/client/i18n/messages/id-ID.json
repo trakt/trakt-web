@@ -808,6 +808,7 @@
   "input_placeholder_app_name": "Aplikasi saya",
   "input_placeholder_app_origins": "https://example.com",
   "input_placeholder_app_redirect_uris": "https://example.com/callback",
+  "input_placeholder_filter": "Filter",
   "input_placeholder_filter_services": "Saring layanan streaming",
   "input_placeholder_lists_description": "Deskripsi (opsional)",
   "input_placeholder_lists_name": "Nama",

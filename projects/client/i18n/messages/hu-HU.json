@@ -808,6 +808,7 @@
   "input_placeholder_app_name": "Az én alkalmazásom",
   "input_placeholder_app_origins": "https://example.com",
   "input_placeholder_app_redirect_uris": "https://example.com/callback",
+  "input_placeholder_filter": "Szűrő",
   "input_placeholder_filter_services": "Streaming szolgáltatások szűrése",
   "input_placeholder_lists_description": "Leírás (opcionális)",
   "input_placeholder_lists_name": "Név",
