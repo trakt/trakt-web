@@ -8,7 +8,7 @@
   const { promotion }: { promotion: Promotion } = $props();
 </script>
 
-<BannerLink href={UrlBuilder.og.vip()} target="_blank" source={promotion.id}>
+<BannerLink href={UrlBuilder.vip()} source={promotion.id}>
   {#snippet tag()}
     <RenderFor audience="all" device={["desktop", "tablet-lg"]}>
       <DealEnd endDate={promotion.end} />
