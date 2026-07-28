@@ -6,6 +6,7 @@
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { iffy } from "$lib/utils/function/iffy.ts";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
@@ -50,15 +51,17 @@
 <div class="trakt-plex-server-settings">
   <div class="plex-server-header">
     <span class="server-name">{serverName}</span>
-    <Button
-      size="small"
-      color="purple"
-      label={m.button_label_plex_sync_now()}
-      onclick={onSyncNow}
-      disabled={isSyncing}
-    >
-      {m.button_plex_sync_now()}
-    </Button>
+    <RenderFor audience="vip">
+      <Button
+        size="small"
+        color="purple"
+        label={m.button_label_plex_sync_now()}
+        onclick={onSyncNow}
+        disabled={isSyncing}
+      >
+        {m.button_plex_sync_now()}
+      </Button>
+    </RenderFor>
   </div>
 
   <SettingsGroupCard>

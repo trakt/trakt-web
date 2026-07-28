@@ -1,3 +1,4 @@
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { plexServerAccountsQuery } from '$lib/requests/plex/plexServerAccountsQuery.ts';
 import { plexSettingsQuery } from '$lib/requests/plex/plexSettingsQuery.ts';
@@ -14,6 +15,7 @@ import {
 
 export function usePlexServer({ serverId }: { serverId: string }) {
   const { invalidate } = useInvalidator();
+  const { user } = useUser();
 
   const accountsQuery = useQuery(plexServerAccountsQuery({ serverId }));
   const isLoadingAccounts = accountsQuery.pipe(map((q) => q.isLoading));
@@ -66,9 +68,19 @@ export function usePlexServer({ serverId }: { serverId: string }) {
         plexSettings.pipe(filter((s) => s != null)),
       );
 
-      const otherServerLibs = settings.sync.selection.libraryIds
-        .filter((l) => l.serverId !== serverId)
-        .map((l) => ({ server_id: l.serverId, uuid: l.uuid }));
+      // Free accounts sync a single server (the API clamps the selection to
+      // the first server it references) — keep only the current server's
+      // libraries so the sync moves with the server being configured instead
+      // of the save being silently dropped.
+      const isVip = (await firstValueFrom(
+        user.pipe(filter((u) => u != null)),
+      )).isVip;
+
+      const otherServerLibs = isVip
+        ? settings.sync.selection.libraryIds
+          .filter((l) => l.serverId !== serverId)
+          .map((l) => ({ server_id: l.serverId, uuid: l.uuid }))
+        : [];
 
       const thisServerLibs = currentLibraries
         .map((l) => ({

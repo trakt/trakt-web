@@ -9524,13 +9524,13 @@
       "default": "Connect your Plex account to get your webhook URL.",
       "description": "Hint shown in the webhook tab when the user has no connected Plex account."
     },
-    "header_plex_vip_upsell_sync": {
-      "default": "Plex Sync is a VIP feature",
-      "description": "Heading on the upsell card shown to free members in the Plex sync tab."
+    "header_plex_sync_free_limits": {
+      "default": "Plex Sync on the free plan",
+      "description": "Heading on the tier limits card shown to free members in the Plex sync tab."
     },
-    "description_plex_vip_upsell_sync": {
-      "default": "Upgrade to VIP to keep your Plex watch history, ratings, and collections synced with Trakt.",
-      "description": "Body copy on the upsell card shown to free members in the Plex sync tab."
+    "description_plex_sync_free_limits": {
+      "default": "Free accounts sync 1 Plex server once a day. Upgrade to VIP to sync unlimited servers, refreshed every hour.",
+      "description": "Body copy explaining the free vs VIP Plex Sync limits (server count and sync frequency) on the card shown to free members in the Plex sync tab."
     },
     "header_plex_vip_upsell_webhook": {
       "default": "Plex scrobbling is a VIP feature",
