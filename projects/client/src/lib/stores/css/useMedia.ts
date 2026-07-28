@@ -19,6 +19,7 @@ export const WellKnownMediaQuery = {
   desktop: `(min-width: ${breakpointDesktop})`,
   mouse: '(hover: hover) and (pointer: fine)',
   touch: '(hover: none) and (pointer: coarse)',
+  reducedMotion: '(prefers-reduced-motion: reduce)',
 };
 
 class MediaQueryManager {
