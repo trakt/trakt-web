@@ -1,9 +1,10 @@
 <script lang="ts">
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
-  import { getLocale } from "$lib/features/i18n";
+  import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/features/i18n/messages";
   import { type VipSubscription } from "$lib/requests/models/VipSubscription";
-  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
+  import { getStartOfDay } from "$lib/utils/date/getStartOfDay";
+  import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate";
   import CrownIcon from "./icons/CrownIcon.svelte";
   import PaymentMethodDetail from "./PaymentMethodDetail.svelte";
   import SubscriptionDetail from "./SubscriptionDetail.svelte";
@@ -18,23 +19,45 @@
       toVipDurationLabel(subscription?.type) ??
       undefined,
   );
+
+  const paidUntil = $derived.by(() => {
+    if (!subscription?.renewsAt || !subscription.expiresAt) {
+      return null;
+    }
+
+    const paidThroughDay = getStartOfDay(subscription.expiresAt);
+    const renewalDay = getStartOfDay(subscription.renewsAt);
+
+    return paidThroughDay.getTime() > renewalDay.getTime()
+      ? subscription.expiresAt
+      : null;
+  });
 </script>
 
 {#if subscription}
   <div class="trakt-vip-subscription-details">
+    {#if paidUntil}
+      <SubscriptionDetail title={m.header_paid_until()}>
+        {#snippet icon()}
+          <CalendarIcon />
+        {/snippet}
+        {toHumanLongDate(paidUntil, languageTag())}
+      </SubscriptionDetail>
+    {/if}
+
     {#if subscription.renewsAt}
       <SubscriptionDetail title={m.header_renewal_date()}>
         {#snippet icon()}
           <CalendarIcon />
         {/snippet}
-        {toHumanDay({ date: subscription.renewsAt, locale: getLocale() })}
+        {toHumanLongDate(subscription.renewsAt, languageTag())}
       </SubscriptionDetail>
     {:else if subscription.expiresAt}
       <SubscriptionDetail title={m.header_expiration_date()}>
         {#snippet icon()}
           <CalendarIcon />
         {/snippet}
-        {toHumanDay({ date: subscription.expiresAt, locale: getLocale() })}
+        {toHumanLongDate(subscription.expiresAt, languageTag())}
       </SubscriptionDetail>
     {/if}
 

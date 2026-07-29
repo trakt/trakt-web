@@ -1,11 +1,11 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { getLocale } from "$lib/features/i18n";
+  import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/features/i18n/messages";
   import { type VipSubscription } from "$lib/requests/models/VipSubscription";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
-  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
+  import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import LifetimeBadge from "./LifetimeBadge.svelte";
   import SubscriptionActions from "./SubscriptionActions.svelte";
@@ -38,10 +38,7 @@
           {#if subscription?.memberSince}
             <p>
               {m.text_member_since({
-                date: toHumanDay({
-                  date: subscription.memberSince,
-                  locale: getLocale(),
-                }),
+                date: toHumanLongDate(subscription.memberSince, languageTag()),
               })}
             </p>
           {/if}

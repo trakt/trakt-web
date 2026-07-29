@@ -7476,6 +7476,10 @@
         }
       }
     },
+    "header_paid_until": {
+      "default": "Paid Until",
+      "description": "Header for the paid until section, which indicates the date the VIP subscription is already paid through when it extends past the next renewal date."
+    },
     "header_renewal_date": {
       "default": "Renewal Date",
       "description": "Header for the renewal date section, which indicates the date on when a VIP subscription renews."
