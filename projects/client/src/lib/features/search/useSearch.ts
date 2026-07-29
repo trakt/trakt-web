@@ -7,6 +7,7 @@ import { BehaviorSubject, combineLatest, from, merge, of } from 'rxjs';
 import {
   catchError,
   debounceTime,
+  distinctUntilChanged,
   filter,
   ignoreElements,
   map,
@@ -109,15 +110,26 @@ export function useSearch() {
     multicast(),
   );
 
+  // `mode` is a shared context subject, so `searchIntent$` republishes the
+  // current term whenever it re-emits, even carrying the same value. Without
+  // the dedupe that counts as another search with nobody typing. `multicast`
+  // keeps the tap off the per-subscriber path so the count cannot scale with
+  // consumers.
   const trackedSearch$ = searchIntent$.pipe(
     map(([rawTerm, currentMode]) => ({
       term: rawTerm.toLowerCase().trim(),
       mode: currentMode,
     })),
-    filter(({ term }) => term.length > 0),
     debounceTime(TRACK_DEBOUNCE),
+    distinctUntilChanged((previous, next) =>
+      previous.term === next.term && previous.mode === next.mode
+    ),
+    // After the dedupe, not before: clearing the box has to reach
+    // `distinctUntilChanged` so searching the same term again still counts.
+    filter(({ term }) => term.length > 0),
     tap(({ mode: currentMode }) => track({ mode: currentMode })),
     ignoreElements(),
+    multicast(),
   );
 
   const searchResults$ = client == null ? of(null) : searchIntent$.pipe(
