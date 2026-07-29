@@ -1,6 +1,6 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { setContext } from "svelte";
+  import { onDestroy, setContext } from "svelte";
   import { createHalEngine } from "./_internal/createHalEngine";
   import { getUserAnalyticsData } from "./_internal/getUserAnalyticsData";
   import { ANALYTICS_CONTEXT } from "./useAnalytics";
@@ -11,10 +11,13 @@
 
   // Enriched here, not in `useTrack`: callers that record straight through
   // `useAnalytics` would otherwise carry no user context.
-  setContext(
-    ANALYTICS_CONTEXT,
-    createHalEngine({ enrich: () => getUserAnalyticsData($user) }),
-  );
+  const engine = createHalEngine({
+    enrich: () => getUserAnalyticsData($user),
+  });
+
+  setContext(ANALYTICS_CONTEXT, engine);
+
+  onDestroy(engine.destroy);
 </script>
 
 {@render children()}

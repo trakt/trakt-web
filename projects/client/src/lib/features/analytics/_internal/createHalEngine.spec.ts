@@ -4,9 +4,14 @@ import { createHalEngine } from './createHalEngine.ts';
 
 const ENDPOINT = 'https://hal.test/e';
 
+// Each engine attaches window listeners, so they have to be disposed between
+// tests or a later `pagehide` reaches every engine the file ever created.
+let engines: ReadonlyArray<{ destroy: () => void }> = [];
+
 function setup(enrich?: () => Record<string, string | number>) {
   const send = vi.fn();
   const engine = createHalEngine({ endpoint: ENDPOINT, send, enrich });
+  engines = [...engines, engine];
   return { engine, send };
 }
 
@@ -16,6 +21,8 @@ describe('store: createHalEngine', () => {
   });
 
   afterEach(() => {
+    engines.forEach((engine) => engine.destroy());
+    engines = [];
     vi.useRealTimers();
   });
 
@@ -79,6 +86,27 @@ describe('store: createHalEngine', () => {
     window.dispatchEvent(new Event('pagehide'));
 
     expect(send).toHaveBeenCalledTimes(1);
+  });
+
+  it('should send the buffer when destroyed', () => {
+    const { engine, send } = setup();
+
+    engine.record(AnalyticsEvent.Theme, { theme: 'dark' });
+    engine.destroy();
+
+    expect(send).toHaveBeenCalledTimes(1);
+  });
+
+  it('should stop reacting to page teardown once destroyed', () => {
+    const { engine, send } = setup();
+
+    engine.record(AnalyticsEvent.Theme, { theme: 'dark' });
+    engine.destroy();
+    send.mockClear();
+
+    window.dispatchEvent(new Event('pagehide'));
+
+    expect(send).not.toHaveBeenCalled();
   });
 
   it('should merge enriched dims into every event', () => {
