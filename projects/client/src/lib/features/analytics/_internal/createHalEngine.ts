@@ -1,5 +1,7 @@
 import { chunk } from '$lib/utils/array/chunk.ts';
+import { info } from '$lib/utils/console/print.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
+import { IS_DEV, IS_TEST } from '$lib/utils/env/index.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { AnalyticsData } from '../AnalyticsData.ts';
 import type { AnalyticsEngine } from './AnalyticsEngine.ts';
@@ -37,6 +39,15 @@ function sendBatch(endpoint: string, events: ReadonlyArray<HalEvent>) {
   fetch(endpoint, { method: 'POST', body, keepalive: true }).catch(NOOP_FN);
 }
 
+const IS_REPORTING_ENABLED = !IS_DEV && !IS_TEST;
+
+function logBatch(endpoint: string, events: ReadonlyArray<HalEvent>) {
+  info(
+    `Analytics: would send ${events.length} event(s) to ${endpoint}`,
+    events,
+  );
+}
+
 type CreateHalEngineProps = {
   endpoint?: string;
   send?: (endpoint: string, events: ReadonlyArray<HalEvent>) => void;
@@ -47,7 +58,7 @@ type CreateHalEngineProps = {
 export function createHalEngine(
   {
     endpoint = `${HAL_ENDPOINT}?trakt-api-key=${TRAKT_CLIENT_ID}`,
-    send = sendBatch,
+    send = IS_REPORTING_ENABLED ? sendBatch : logBatch,
     enrich = () => ({}),
   }: CreateHalEngineProps = {},
 ): AnalyticsEngine & { destroy: () => void } {
