@@ -49,7 +49,7 @@
 
 @mixin for-tablet-sm {
   @media (min-width: $breakpoint-tablet-sm-min)
-      and (max-width: $breakpoint-tablet-sm-max) {
+    and (max-width: $breakpoint-tablet-sm-max) {
     @content;
   }
 }
@@ -62,7 +62,7 @@
 
 @mixin for-tablet-lg {
   @media (min-width: $breakpoint-tablet-lg-min)
-      and (max-width: $breakpoint-tablet-lg-max) {
+    and (max-width: $breakpoint-tablet-lg-max) {
     @content;
   }
 }
@@ -192,10 +192,10 @@
 @mixin vip-glow-card {
   background:
     radial-gradient(
-      120% 100% at 50% 0%,
-      color-mix(in srgb, var(--purple-400) 6%, transparent),
-      transparent 55%
-    ),
+    120% 100% at 50% 0%,
+    color-mix(in srgb, var(--purple-400) 6%, transparent),
+    transparent 55%
+  ),
     var(--background-vip-card);
   border: var(--ni-1) solid
     color-mix(in srgb, var(--purple-400) 32%, transparent);

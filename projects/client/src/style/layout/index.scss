@@ -197,7 +197,7 @@
 
   /*
     The item sequence is: graph (2 slots), cell (1 slot), graph (2 slots), cells.
-    We can't round to the nearest even count, since a count of 4 would show 
+    We can't round to the nearest even count, since a count of 4 would show
     the second graph half-cut, so we skip 4.
   */
   --pulse-item-max-count: round(
