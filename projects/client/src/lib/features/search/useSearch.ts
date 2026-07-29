@@ -2,10 +2,13 @@ import { browser } from '$app/environment';
 import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
 import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
-import { BehaviorSubject, combineLatest, from, of } from 'rxjs';
+import { time } from '$lib/utils/timing/time.ts';
+import { BehaviorSubject, combineLatest, from, merge, of } from 'rxjs';
 import {
   catchError,
   debounceTime,
+  filter,
+  ignoreElements,
   map,
   shareReplay,
   switchMap,
@@ -37,6 +40,11 @@ import { postRecentSearch } from './_internal/postRecentSearch.ts';
 import { splitExactByConfidence } from './_internal/splitExactByConfidence.ts';
 import { ensureFreshSearchKeys } from './ensureFreshSearchKeys.ts';
 import type { SearchResponse } from './models/SearchResponse.ts';
+
+const QUERY_DEBOUNCE = 250;
+// Deliberately longer than the query debounce: a keystroke gap on a touch
+// keyboard exceeds 250ms, so sharing one reports a search per character.
+const TRACK_DEBOUNCE = time.seconds(1);
 
 function modeToQuery(
   query: string,
@@ -93,11 +101,26 @@ export function useSearch() {
 
   const searchTerm$ = new BehaviorSubject<string>('');
 
-  const results = client == null ? of(null) : combineLatest([
+  const searchIntent$ = combineLatest([
     searchTerm$,
     mode,
   ]).pipe(
-    debounceTime(250),
+    debounceTime(QUERY_DEBOUNCE),
+    multicast(),
+  );
+
+  const trackedSearch$ = searchIntent$.pipe(
+    map(([rawTerm, currentMode]) => ({
+      term: rawTerm.toLowerCase().trim(),
+      mode: currentMode,
+    })),
+    filter(({ term }) => term.length > 0),
+    debounceTime(TRACK_DEBOUNCE),
+    tap(({ mode: currentMode }) => track({ mode: currentMode })),
+    ignoreElements(),
+  );
+
+  const searchResults$ = client == null ? of(null) : searchIntent$.pipe(
     switchMap(([rawTerm, currentMode]) => {
       const term = rawTerm.toLowerCase().trim();
 
@@ -106,7 +129,6 @@ export function useSearch() {
       }
 
       isSearching.next(true);
-      track({ mode: currentMode });
 
       return from(ensureFreshSearchKeys(config)).pipe(
         switchMap((freshConfig) => {
@@ -155,6 +177,9 @@ export function useSearch() {
     tap(() => isSearching.next(false)),
     multicast(),
   );
+
+  // Tracking rides the results subscription, so it needs no separate teardown.
+  const results = merge(searchResults$, trackedSearch$);
 
   const overlay = createBulkMediaIntl<MediaSearchResult['items'][number]>();
 
