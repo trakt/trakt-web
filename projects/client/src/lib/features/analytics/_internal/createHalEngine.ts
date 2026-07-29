@@ -50,7 +50,7 @@ export function createHalEngine(
     send = sendBatch,
     enrich = () => ({}),
   }: CreateHalEngineProps = {},
-): AnalyticsEngine {
+): AnalyticsEngine & { destroy: () => void } {
   let buffered: ReadonlyArray<HalEvent> = [];
   let flushTimer: ReturnType<typeof setTimeout> | Nil = null;
 
@@ -80,16 +80,29 @@ export function createHalEngine(
     flushTimer = setTimeout(flush, FLUSH_DELAY);
   };
 
+  const flushOnHide = () => {
+    if (document.visibilityState === 'hidden') {
+      flush();
+    }
+  };
+
   // `pagehide` and a hidden `visibilitychange` are the only teardown signals
   // mobile Safari fires reliably; `beforeunload`/`unload` are not.
-  if (typeof window !== 'undefined') {
+  const listen = () => {
+    if (typeof window === 'undefined') {
+      return NOOP_FN;
+    }
+
     window.addEventListener('pagehide', flush);
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden') {
-        flush();
-      }
-    });
-  }
+    document.addEventListener('visibilitychange', flushOnHide);
+
+    return () => {
+      window.removeEventListener('pagehide', flush);
+      document.removeEventListener('visibilitychange', flushOnHide);
+    };
+  };
+
+  const unlisten = listen();
 
   return {
     record: (key: string, data: AnalyticsData) => {
@@ -113,6 +126,11 @@ export function createHalEngine(
       }
 
       scheduleFlush();
+    },
+    // Unlisten first, then flush, so the buffer is not sent twice.
+    destroy: () => {
+      unlisten();
+      flush();
     },
   };
 }
