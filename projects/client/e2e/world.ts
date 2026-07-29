@@ -1,7 +1,8 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import type { ITestCaseHookParameter } from '@cucumber/cucumber';
 import { After, Before, setWorldConstructor, World } from '@cucumber/cucumber';
-import { Browser, BrowserContext, chromium, Page } from '@playwright/test';
+import type { Browser, BrowserContext, Page } from '@playwright/test';
+import { chromium } from '@playwright/test';
 import { E2E_BASE_URL, E2E_HEADLESS } from './constants/constants.ts';
 
 export class TraktWorld extends World {
