@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaType } from "$lib/requests/models/MediaType";
 
@@ -24,7 +24,7 @@
 </script>
 
 <div class="trakt-media-type-toggler">
-  <Toggler value={type} variant="text" {onChange} {options} />
+  <TogglePills value={type} {onChange} {options} />
 </div>
 
 <style>

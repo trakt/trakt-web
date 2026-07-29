@@ -1,9 +1,8 @@
 <script lang="ts">
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { m } from "$lib/features/i18n/messages.ts";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import DrillableMediaList from "$lib/sections/lists/drilldown/DrillableMediaList.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
@@ -25,8 +24,8 @@
   );
 </script>
 
-{#snippet metaInfo()}
-  <ListMetaInfo text={$current.text()} />
+{#snippet subHeader()}
+  <TogglePills value={$current.value} onChange={set} {options} />
 {/snippet}
 
 {#if mode !== "movie"}
@@ -44,14 +43,10 @@
       type="show"
       useList={() => useProgressList({ type: $current.value })}
       urlBuilder={() => UrlBuilder.profile.progress("me")}
-      {metaInfo}
+      {subHeader}
     >
       {#snippet item(entry)}
         <ProgressItem {entry} type={$current.value} />
-      {/snippet}
-
-      {#snippet actions()}
-        <Toggler value={$current.value} onChange={set} {options} />
       {/snippet}
 
       {#snippet ctaItem()}

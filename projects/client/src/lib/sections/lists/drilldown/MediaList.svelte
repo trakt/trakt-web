@@ -21,6 +21,7 @@
     filter,
     filterOverride,
     metaInfo,
+    subHeader,
     drilldown,
     variant: externalVariant,
     titleAction,
@@ -70,6 +71,7 @@
   {item}
   {title}
   {metaInfo}
+  {subHeader}
   {drilldown}
   {titleAction}
   actions={externalActions ? actions : undefined}

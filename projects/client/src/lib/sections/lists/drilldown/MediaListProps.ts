@@ -15,6 +15,7 @@ export type MediaListProps<T, M> = {
   actions?: Snippet<[T[], M]>;
   empty?: Snippet;
   metaInfo?: Snippet;
+  subHeader?: Snippet;
   drilldown?: ListDrilldownLinkProps;
   variant?: 'portrait' | 'landscape';
   titleAction?: Snippet;

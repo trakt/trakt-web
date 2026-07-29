@@ -2,12 +2,11 @@
   import { goto } from "$app/navigation";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { m } from "$lib/features/i18n/messages.ts";
   import type { UserRatingEntry } from "$lib/requests/queries/users/userRatingsQuery.ts";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { profileDrawerNavigation } from "../_internal/profileDrawerNavigation.ts";
@@ -62,8 +61,8 @@
   );
 </script>
 
-{#snippet metaInfo()}
-  <ListMetaInfo text={$activityType.text()} />
+{#snippet subHeader()}
+  <TogglePills value={$activityType.value} onChange={set} {options} />
 {/snippet}
 
 <SectionList
@@ -73,7 +72,7 @@
   }}
   items={$list}
   title={m.list_title_activity()}
-  {metaInfo}
+  {subHeader}
   --height-list={heightList}
   {drilldown}
 >
@@ -100,7 +99,4 @@
     {/if}
   {/snippet}
 
-  {#snippet actions()}
-    <Toggler value={$activityType.value} onChange={set} {options} />
-  {/snippet}
 </SectionList>

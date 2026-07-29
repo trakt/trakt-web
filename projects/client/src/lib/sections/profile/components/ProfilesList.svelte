@@ -1,9 +1,8 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import * as m from "$lib/features/i18n/messages.ts";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { getProfileSocialPlaceholder } from "../_internal/getProfileSocialPlaceholder";
@@ -25,8 +24,8 @@
   const { isMe } = $derived(useIsMe(slug));
 </script>
 
-{#snippet metaInfo()}
-  <ListMetaInfo text={$current.text()} />
+{#snippet subHeader()}
+  <TogglePills value={$current.value} onChange={set} options={$options} />
 {/snippet}
 
 <div class="trakt-profiles-list">
@@ -43,7 +42,7 @@
       label: m.button_label_view_all_social(),
       source: { id: "social" },
     }}
-    {metaInfo}
+    {subHeader}
   >
     {#snippet empty()}
       {#if !$isLoading}
@@ -57,10 +56,6 @@
 
     {#snippet item(profile)}
       <ProfileItem {profile} />
-    {/snippet}
-
-    {#snippet actions()}
-      <Toggler value={$current.value} onChange={set} options={$options} />
     {/snippet}
   </SectionList>
 </div>

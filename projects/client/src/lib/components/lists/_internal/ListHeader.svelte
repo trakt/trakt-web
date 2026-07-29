@@ -59,7 +59,9 @@
   </div>
 
   {#if listActions}
-    {@render listActions()}
+    <div class="trakt-list-sub-header">
+      {@render listActions()}
+    </div>
   {/if}
 </div>
 
@@ -67,6 +69,17 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-list-inset-title {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+
+    // Bottom breathing room for the sub-header row (sub-section pills) so it
+    // sits evenly between the title above and the list below. Height is
+    // reserved for in SectionList's --sub-header-height.
+    .trakt-list-sub-header {
+      margin-block-end: var(--gap-xs);
+    }
+
     margin: 0;
     margin-inline-start: var(--layout-distance-side);
     margin-inline-end: var(--layout-distance-side);

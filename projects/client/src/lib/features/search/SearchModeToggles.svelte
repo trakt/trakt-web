@@ -2,7 +2,7 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useSearch } from "$lib/features/search/useSearch";
   import type { SearchMode } from "$lib/requests/queries/search/models/SearchMode";
@@ -56,7 +56,7 @@
 </script>
 
 <div class="trakt-search-mode-toggles" role="group">
-  <Toggler value={$selectedType} variant="text" {onChange} {options} />
+  <TogglePills value={$selectedType} {onChange} {options} />
 </div>
 
 <style lang="scss">

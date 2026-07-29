@@ -1,7 +1,6 @@
 <script lang="ts">
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import { m } from "$lib/features/i18n/messages";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
@@ -18,11 +17,7 @@
 </script>
 
 {#snippet actions()}
-  <Toggler value={$current.value} onChange={set} options={$options} />
-{/snippet}
-
-{#snippet metaInfo()}
-  <ListMetaInfo text={$current.text()} />
+  <TogglePills value={$current.value} onChange={set} options={$options} />
 {/snippet}
 
 <TraktPage
@@ -36,7 +31,6 @@
     header={{
       title: m.list_title_social(),
       actions,
-      metaInfo,
     }}
   />
 

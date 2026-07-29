@@ -1,11 +1,10 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { summaryDrawerNavigation } from "$lib/sections/summary/_internal/summaryDrawerNavigation";
   import CommentCard from "$lib/sections/summary/components/comments/CommentCard.svelte";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
@@ -47,8 +46,8 @@
   };
 </script>
 
-{#snippet metaInfo()}
-  <ListMetaInfo text={$sortType.text()} />
+{#snippet subHeader()}
+  <TogglePills value={$sortType.value} onChange={set} {options} />
 {/snippet}
 
 <RenderFor audience="all">
@@ -60,7 +59,7 @@
     items={$comments}
     title={m.list_title_comments()}
     --height-list="var(--height-comments-list)"
-    {metaInfo}
+    {subHeader}
     drilldown={{
       ...buildCommentsDrawerLink(),
       label: m.button_label_view_all_comments(),
@@ -78,14 +77,6 @@
     {/snippet}
 
     {#snippet actions()}
-      <Toggler
-        value={$sortType.value}
-        onChange={(value) => {
-          set(value);
-        }}
-        {options}
-      />
-
       <CommentLanguageSelect
         value={commentLanguage.value}
         onChange={commentLanguage.set}

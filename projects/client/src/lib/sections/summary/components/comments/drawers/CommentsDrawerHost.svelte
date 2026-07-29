@@ -1,6 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
   import { COMMENTS_DRILL_SIZE } from "$lib/utils/constants";
@@ -28,9 +28,8 @@
 
 <Drawer
   {onClose}
-  title={m.dialog_title_comment()}
+  title={m.list_title_comments()}
   size="large"
-  metaInfo={$sortType.text()}
   onOpened={() => isOpened.set(true)}
 >
   {#if $isOpened}
@@ -50,10 +49,13 @@
   {/if}
 
   {#snippet badge()}
-    <Toggler value={$sortType.value} onChange={set} {options} />
     <CommentLanguageSelect
       value={commentLanguage.value}
       onChange={commentLanguage.set}
     />
+  {/snippet}
+
+  {#snippet subHeader()}
+    <TogglePills value={$sortType.value} onChange={set} {options} />
   {/snippet}
 </Drawer>

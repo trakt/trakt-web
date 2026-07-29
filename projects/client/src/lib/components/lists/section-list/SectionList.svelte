@@ -31,6 +31,7 @@
     id: SectionListId;
     empty?: Snippet;
     metaInfo?: Snippet;
+    subHeader?: Snippet;
     headerNavigationType?: DpadNavigationType;
     subtitle?: string;
     variant?: ListVariant;
@@ -47,6 +48,7 @@
     ctaItem,
     empty,
     metaInfo,
+    subHeader,
     actions: _externalActions,
     drilldown,
     headerNavigationType,
@@ -140,6 +142,8 @@
     class:section-list-container-collapsed={isCollapsed}
     class:section-list-container-mounted={$isMounted}
     class:section-list-container-no-header={!isHeaderVisible}
+    class:section-list-container-has-sub-header={Boolean(subHeader) &&
+      !isCollapsed}
     class:section-list-has-drilldown={Boolean(drilldown)}
     class:section-list-has-multiple-items={items.length > 1}
     data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
@@ -153,6 +157,7 @@
           {titleAction}
           {metaInfo}
           actions={isCollapsed ? undefined : actions}
+          listActions={isCollapsed ? undefined : subHeader}
           navigationType={headerNavigationType}
           drilldown={isCollapsed ? undefined : drilldown}
           disabled={items.length === 0 && drilldown?.mode !== "always"}
@@ -203,8 +208,10 @@
     --section-list-height: calc(
       var(--height-override-list, var(--height-list)) + var(--shadow-spacing)
     );
+    --sub-header-height: 0px;
     --height-container: calc(
-      var(--section-list-height) + var(--ni-40) + var(--list-header-gap)
+      var(--section-list-height) + var(--ni-40) + var(--list-header-gap) +
+        var(--sub-header-height)
     );
 
     --list-mask-offset: var(--layout-distance-side);
@@ -220,6 +227,16 @@
       --height-container: var(--section-list-height);
       --height-min-container: 0;
       gap: 0;
+    }
+
+    &.section-list-container-has-sub-header {
+      // Reserve room for the extra header row (sub-section pills) beneath the
+      // title on every viewport: pill height (--ni-32 = 14px line + block
+      // padding) + the gap above it (--gap-xxs) + the pill row's bottom margin
+      // (--gap-xs).
+      --sub-header-height: calc(
+        var(--ni-32) + var(--gap-xxs) + var(--gap-xs)
+      );
     }
 
     &.section-list-container-mounted {

@@ -1,12 +1,11 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { FilterOverrideParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
@@ -41,6 +40,10 @@
   });
 </script>
 
+{#snippet subHeader()}
+  <TogglePills value={$current.value} onChange={set} {options} />
+{/snippet}
+
 <DrillableMediaList
   --height-override-card="var(--height-portrait-card-sm)"
   --height-override-list="var(--height-poster-list-sm)"
@@ -59,20 +62,8 @@
   {filterOverride}
   useList={(params) => useRecommendedList({ ...params, isSmart })}
   urlBuilder={() => UrlBuilder.recommended()}
+  subHeader={$isSmartEnabled ? subHeader : undefined}
 >
-  {#snippet actions()}
-    <RenderForFeature flag={FeatureFlag.SmartRecommendations}>
-      {#snippet enabled()}
-        <Toggler
-          value={$current.value}
-          onChange={set}
-          {options}
-          variant="icon"
-        />
-      {/snippet}
-    </RenderForFeature>
-  {/snippet}
-
   {#snippet item(media)}
     <RecommendedListItem
       type={media.type}

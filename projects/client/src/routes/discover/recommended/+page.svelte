@@ -1,5 +1,5 @@
 <script>
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { useDiscover } from "$lib/features/filters/useDiscover";
@@ -24,11 +24,10 @@
 {#snippet actions()}
   <RenderForFeature flag={FeatureFlag.SmartRecommendations}>
     {#snippet enabled()}
-      <Toggler
+      <TogglePills
         value={$recommendation.value}
         onChange={setRecommendation}
         options={recommendationOptions}
-        variant="icon"
       />
     {/snippet}
   </RenderForFeature>

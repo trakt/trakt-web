@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import type { Library } from "../models/Library";
@@ -26,7 +26,7 @@
   );
 </script>
 
-<Toggler
+<TogglePills
   value={activeValue}
   onChange={set}
   options={togglerOptions}

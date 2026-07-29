@@ -26,6 +26,7 @@
     trapSelector?: string;
     size?: "normal" | "large" | "auto";
     badge?: Snippet;
+    subHeader?: Snippet;
     actions?: Snippet;
     metaInfo?: string | Snippet;
     onOpened?: () => void;
@@ -46,6 +47,7 @@
     trapSelector,
     size = "normal",
     badge,
+    subHeader,
     actions,
     metaInfo,
     onOpened,
@@ -176,6 +178,12 @@
       </RenderFor>
     </div>
   </div>
+
+  {#if subHeader}
+    <div class="trakt-drawer-sub-header">
+      {@render subHeader()}
+    </div>
+  {/if}
 
   <div class="trakt-drawer-content" onscroll={updateHeaderOverlay}>
     {@render children()}
@@ -413,6 +421,13 @@
     &.has-title {
       justify-content: space-between;
     }
+  }
+
+  // Own row under the title (e.g. sub-section pills). Pulled up close to the
+  // header so it reads as belonging to the title rather than the content.
+  .trakt-drawer-sub-header {
+    padding-inline: var(--drawer-padding);
+    margin-block-start: calc(var(--gap-xs) - var(--drawer-gap));
   }
 
   .trakt-drawer-actions {

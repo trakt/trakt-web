@@ -1,6 +1,6 @@
 <script lang="ts">
   import Redirect from "$lib/components/router/Redirect.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import TogglePills from "$lib/components/toggles/TogglePills.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import { m } from "$lib/features/i18n/messages.ts";
@@ -33,7 +33,7 @@
 </script>
 
 {#snippet actions()}
-  <Toggler value={$current.value} onChange={set} {options} />
+  <TogglePills value={$current.value} onChange={set} {options} />
 {/snippet}
 
 {#if !$isMe}
@@ -49,7 +49,6 @@
     <ResponsiveNavbarStateSetter
       header={{
         title: m.list_title_progress(),
-        metaInfo: $current.text(),
         actions,
       }}
     >
