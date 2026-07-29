@@ -277,8 +277,8 @@ export const UrlBuilder = {
       }`,
   },
   app: {
-    android: () => 'https://trakt.tv/a/trakt-android',
-    ios: () => 'https://trakt.tv/a/trakt-ios',
+    android: () => 'https://play.google.com/store/apps/details?id=tv.trakt.trakt',
+    ios: () => 'https://apps.apple.com/us/app/trakt/id1514873602',
     tvTime: () => 'https://tvtime.trakt.tv',
   },
   docs: {
