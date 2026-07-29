@@ -10,7 +10,11 @@ describe('showSentimentQuery', () => {
     const result = await runQuery({
       factory: () =>
         createTestBedQuery(
-          showSentimentQuery({ slug: ShowSiloMappedMock.slug, enabled: true }),
+          showSentimentQuery({
+            slug: ShowSiloMappedMock.slug,
+            locale: 'en',
+            enabled: true,
+          }),
         ),
       mapper: (response) => response?.data,
     });

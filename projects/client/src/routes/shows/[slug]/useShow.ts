@@ -1,5 +1,9 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
-import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
+import {
+  getLanguageAndRegion,
+  getLocale,
+  languageTag,
+} from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
@@ -36,12 +40,18 @@ export function useShow(slug$: Observable<string>) {
     ),
   );
 
+  const activeLocale = getLocale();
+
   const sentiment = combineLatest([
     isAuthorized,
     useQuery(
       combineLatest([slug$, isAuthorized]).pipe(
         map(([slug, authorized]) =>
-          showSentimentQuery({ slug, enabled: authorized })
+          showSentimentQuery({
+            slug,
+            locale: activeLocale,
+            enabled: authorized,
+          })
         ),
       ),
     ),

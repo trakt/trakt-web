@@ -1,5 +1,9 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
-import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
+import {
+  getLanguageAndRegion,
+  getLocale,
+  languageTag,
+} from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
@@ -30,12 +34,18 @@ export function useMovie(slug$: Observable<string>) {
   );
   const crew = useQuery(slug$.pipe(map((slug) => moviePeopleQuery({ slug }))));
 
+  const activeLocale = getLocale();
+
   const sentiment = combineLatest([
     isAuthorized,
     useQuery(
       combineLatest([slug$, isAuthorized]).pipe(
         map(([slug, authorized]) =>
-          movieSentimentQuery({ slug, enabled: authorized })
+          movieSentimentQuery({
+            slug,
+            locale: activeLocale,
+            enabled: authorized,
+          })
         ),
       ),
     ),

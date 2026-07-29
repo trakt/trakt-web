@@ -1,4 +1,5 @@
 import { combineLatest, map } from 'rxjs';
+import { getLocale } from '../../../../features/i18n/index.ts';
 import { useQuery } from '../../../../features/query/useQuery.ts';
 import type { MediaType } from '../../../../requests/models/MediaType.ts';
 import { movieTriviaQuery } from '../../../../requests/queries/movies/movieTriviaQuery.ts';
@@ -11,7 +12,7 @@ type UseTriviaProps = {
 };
 
 function toQuery(props: UseTriviaProps) {
-  const params = { slug: props.slug };
+  const params = { slug: props.slug, locale: getLocale() };
 
   switch (props.type) {
     case 'movie':
