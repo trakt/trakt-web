@@ -1,10 +1,14 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import CodeIcon from "$lib/components/icons/CodeIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import ApiApplicationFormSection from "./_internal/apps/ApiApplicationFormSection.svelte";
   import type { ApiApplicationFormValues } from "./_internal/apps/ApiApplicationFormValues.ts";
   import { useCreateApiApplication } from "./_internal/apps/useCreateApiApplication.ts";
+  import SettingsSection from "./_internal/SettingsSection.svelte";
+  import SettingsVipUpsell from "./_internal/SettingsVipUpsell.svelte";
 
   const { createApplication, isCreating } = useCreateApiApplication();
 
@@ -23,14 +27,38 @@
   }
 </script>
 
-<ApiApplicationFormSection
-  title={m.heading_create_api_application()}
-  description={m.description_create_api_application()}
-  crumbHref={UrlBuilder.settings.appsApi()}
-  crumbLabel={m.heading_api_applications()}
-  isBusy={$isCreating}
-  confirmButtonText={m.button_text_create()}
-  confirmButtonLabel={m.button_label_create_app()}
-  onSubmit={handleSubmit}
-  onCancel={handleCancel}
-/>
+{#snippet codeIcon()}
+  <CodeIcon />
+{/snippet}
+
+<RenderFor audience="vip">
+  <ApiApplicationFormSection
+    title={m.heading_create_api_application()}
+    description={m.description_create_api_application()}
+    crumbHref={UrlBuilder.settings.appsApi()}
+    crumbLabel={m.heading_api_applications()}
+    isBusy={$isCreating}
+    confirmButtonText={m.button_text_create()}
+    confirmButtonLabel={m.button_label_create_app()}
+    onSubmit={handleSubmit}
+    onCancel={handleCancel}
+  />
+</RenderFor>
+
+<RenderFor audience="free">
+  <SettingsSection
+    title={m.heading_create_api_application()}
+    description={m.description_create_api_application()}
+    crumb={{
+      href: UrlBuilder.settings.appsApi(),
+      label: m.heading_api_applications(),
+    }}
+  >
+    <SettingsVipUpsell
+      icon={codeIcon}
+      title={m.heading_api_application_vip_only()}
+      description={m.text_api_application_vip_only()}
+      source="api-applications"
+    />
+  </SettingsSection>
+</RenderFor>
