@@ -5,6 +5,7 @@
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
+  import { hasSeasonTitles } from "$lib/utils/media/hasSeasonTitles.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import SeasonPosterItem from "./SeasonPosterItem.svelte";
 
@@ -25,6 +26,8 @@
   }: SeasonListProps = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
+
+  const hasTitles = $derived(hasSeasonTitles(seasons));
 </script>
 
 <SectionList
@@ -40,8 +43,12 @@
     source: { id: "seasons" },
     label: m.button_text_view_all(),
   }}
-  --height-list="var(--height-poster-list-sm)"
-  --height-override-card="var(--height-portrait-card-sm)"
+  --height-list={hasTitles
+    ? "var(--height-poster-list)"
+    : "var(--height-poster-list-sm)"}
+  --height-override-card={hasTitles
+    ? "var(--height-portrait-card)"
+    : "var(--height-portrait-card-sm)"}
 >
   {#snippet item(season)}
     <SeasonPosterItem

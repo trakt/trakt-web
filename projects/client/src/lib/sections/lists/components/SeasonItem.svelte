@@ -5,6 +5,7 @@
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
+  import PosterTags from "$lib/components/media/tags/PosterTags.svelte";
   import SeasonLabelTag from "$lib/components/media/tags/SeasonLabelTag.svelte";
   import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
   import TagBar from "$lib/components/tags/TagBar.svelte";
@@ -18,7 +19,6 @@
   import type { Snippet } from "svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { SeasonCardProps } from "./models/SeasonCardProps";
-  import PosterTags from "$lib/components/media/tags/PosterTags.svelte";
 
   const {
     season,
@@ -41,6 +41,8 @@
   const { isWatched, isPartiallyWatched } = $derived(
     useIsWatched({ type: "season", media: season, show: media }),
   );
+
+  const isEmphasized = $derived(isCurrentSeason && !season.title);
 
   const scrollToItem = (element: HTMLElement, active: boolean) => {
     if (variant === "list-item") return;
@@ -108,11 +110,16 @@
           <p
             use:lineClamp={{ lines: 2 }}
             class="trakt-season-title"
-            class:trakt-card-title={isCurrentSeason}
-            class:trakt-card-subtitle={!isCurrentSeason}
+            class:trakt-card-title={isEmphasized}
+            class:trakt-card-subtitle={!isEmphasized}
           >
             {seasonLabel(season.number)}
           </p>
+          {#if season.title}
+            <p class="trakt-season-subtitle trakt-card-subtitle ellipsis">
+              {season.title}
+            </p>
+          {/if}
         {/if}
       </CardFooter>
     </PortraitCard>
@@ -146,6 +153,16 @@
     transition: opacity var(--transition-increment) ease-in-out;
 
     &[data-variant="default"] {
+      :global(.trakt-card-footer) {
+        align-items: flex-start;
+      }
+
+      &.is-current-season {
+        p.trakt-season-title {
+          color: var(--color-text-primary);
+        }
+      }
+
       &:not(.is-current-season) {
         opacity: var(--de-emphasized-opacity);
 

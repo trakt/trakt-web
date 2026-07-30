@@ -5,6 +5,7 @@ export const SeasonSchema = z.object({
   id: z.number(),
   key: z.string(),
   number: z.number(),
+  title: z.string().nullish(),
   episodes: z.object({
     count: z.number(),
   }),

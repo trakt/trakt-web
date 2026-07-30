@@ -2,6 +2,7 @@
   import { goto } from "$app/navigation";
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import type { Season } from "$lib/requests/models/Season.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { SeasonDropdownProps } from "./SeasonDropdownProps.ts";
 
@@ -12,14 +13,22 @@
     urlBuilder ?? ((n: number) => UrlBuilder.show(showSlug, { season: n })),
   );
 
-  const seasonText = (seasonNumber: number) => {
-    return seasonNumber === 0 ? m.text_season_specials() : `${seasonNumber}`;
+  const seasonText = (season: Season) => {
+    if (season.number === 0) return m.text_season_specials();
+    if (season.title) {
+      return m.text_season_number_with_title({
+        number: season.number,
+        title: season.title,
+      });
+    }
+
+    return `${season.number}`;
   };
 
   const options = $derived(
     seasons.map((season) => ({
       value: `${season.number}`,
-      label: seasonText(season.number),
+      label: seasonText(season),
     })),
   );
 
