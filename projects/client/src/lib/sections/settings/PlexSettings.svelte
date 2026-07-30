@@ -1,12 +1,13 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
+  import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import PlexSync from "./_internal/plex/PlexSync.svelte";
-  import PlexVipUpsell from "./_internal/plex/PlexVipUpsell.svelte";
   import PlexWebhook from "./_internal/plex/PlexWebhook.svelte";
+  import SettingsVipUpsell from "./_internal/SettingsVipUpsell.svelte";
 
   const TAB_PARAM = "tab";
 
@@ -24,9 +25,14 @@
   }
 </script>
 
+{#snippet plexIcon()}
+  <PlexLogo />
+{/snippet}
+
 {#snippet syncTab()}
   <RenderFor audience="free">
-    <PlexVipUpsell
+    <SettingsVipUpsell
+      icon={plexIcon}
       title={m.header_plex_vip_upsell_sync()}
       description={m.description_plex_vip_upsell_sync()}
       source="plex-settings-sync"
@@ -40,7 +46,8 @@
 
 {#snippet webhookTab()}
   <RenderFor audience="free">
-    <PlexVipUpsell
+    <SettingsVipUpsell
+      icon={plexIcon}
       title={m.header_plex_vip_upsell_webhook()}
       description={m.description_plex_vip_upsell_webhook()}
       source="plex-settings-webhook"

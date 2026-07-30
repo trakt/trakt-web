@@ -9734,6 +9734,14 @@
       "default": "OAuth applications you've registered as a developer.",
       "description": "Description shown under the API Applications heading explaining what the listed applications are."
     },
+    "heading_api_application_vip_only": {
+      "default": "Creating new apps requires Trakt VIP",
+      "description": "Heading of the upsell shown to free users on the API applications list and in place of the create-application form."
+    },
+    "text_api_application_vip_only": {
+      "default": "VIP members can register unlimited OAuth applications.",
+      "description": "Body copy of the upsell shown to free users in place of creating an API application."
+    },
     "text_no_api_applications": {
       "default": "You haven't created any API applications.",
       "description": "Empty-state text shown when the user has not created any API applications."
