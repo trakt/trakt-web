@@ -10,6 +10,7 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import SeasonDropdown from "$lib/sections/lists/season/SeasonDropdown.svelte";
+  import { hasSeasonTitles } from "$lib/utils/media/hasSeasonTitles.ts";
   import { fade } from "svelte/transition";
   import SeasonDrawerItem from "./_internal/SeasonDrawerItem.svelte";
   import SeasonEpisodesTab from "./SeasonEpisodesTab.svelte";
@@ -38,6 +39,8 @@
   const currentSeasonData = $derived(
     seasons.find((s) => s.number === currentSeason),
   );
+
+  const hasTitles = $derived(hasSeasonTitles(seasons));
 
   const buildSeasonLink = (seasonNumber: number) => {
     const url = new URL(page.url);
@@ -97,7 +100,7 @@
   {#if isOpen}
     <div class="seasons-drawer-content" transition:fade={{ duration: 150 }}>
       {#if seasons.length > 1}
-        <div class="seasons-section">
+        <div class="seasons-section" class:has-season-titles={hasTitles}>
           <SectionList
             id={{
               scope: "season-poster-list",
@@ -168,6 +171,11 @@
 
   .seasons-section {
     --column-count: 4;
+    --season-card-footer-height: var(--height-card-footer-sm);
+
+    &.has-season-titles {
+      --season-card-footer-height: var(--height-card-footer);
+    }
 
     --container-width: calc(
       var(--drawer-size) - 2 * var(--drawer-padding) - var(--list-gap)
@@ -178,7 +186,7 @@
     );
     --height-override-card-cover: calc(var(--width-override-card) * 1.5);
     --height-override-card: calc(
-      var(--height-override-card-cover) + var(--height-card-footer-sm)
+      var(--height-override-card-cover) + var(--season-card-footer-height)
     );
 
     --height-list: calc(

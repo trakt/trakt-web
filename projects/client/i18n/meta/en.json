@@ -1502,6 +1502,18 @@
         }
       }
     },
+    "text_season_number_with_title": {
+      "default": "{number} - {title}",
+      "description": "Compact dropdown label combining a season number with its custom season title, e.g. '1: Murder House'.",
+      "variables": {
+        "number": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "text_season_specials": {
       "default": "Specials",
       "description": "Text for the specials season of a show. This should be as short and concise as possible."

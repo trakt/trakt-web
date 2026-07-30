@@ -6,6 +6,7 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     'id': 257490,
     'key': 'season-257490',
     'number': 1,
+    'title': null,
     'episodes': {
       'count': 10,
     },
@@ -28,6 +29,7 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     'id': 402288,
     'key': 'season-402288',
     'number': 2,
+    'title': null,
     'episodes': {
       'count': 10,
     },
@@ -50,6 +52,7 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     'id': 456019,
     'key': 'season-456019',
     'number': 3,
+    'title': null,
     'episodes': {
       'count': 1,
     },
