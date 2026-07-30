@@ -1,6 +1,6 @@
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { api, type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -11,7 +11,6 @@ import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 type ShowRelatedParams =
   & {
     slug: string;
-    isSmart?: boolean;
   }
   & PaginationParams
   & ApiParams;
@@ -19,25 +18,10 @@ type ShowRelatedParams =
 const RelatedShowSchema = ShowEntrySchema;
 export type RelatedShow = z.infer<typeof RelatedShowSchema>;
 
-const showRelatedRequest = async (
-  { fetch, slug, limit, page, isSmart }: ShowRelatedParams,
-) => {
-  if (isSmart) {
-    const response = await rawApiFetch({
-      fetch,
-      path:
-        `/shows/${slug}/related/smart?extended=full,images,colors&limit=${limit}&page=${page}&version=2`,
-    });
-    return response.ok
-      ? {
-        body: await response.json(),
-        headers: response.headers,
-        status: 200,
-      }
-      : { body: [], headers: response.headers, status: 200 };
-  }
-
-  return api({ fetch })
+const showRelatedRequest = (
+  { fetch, slug, limit, page }: ShowRelatedParams,
+) =>
+  api({ fetch })
     .shows
     .related({
       query: {
@@ -49,14 +33,13 @@ const showRelatedRequest = async (
         id: slug,
       },
     });
-};
 
 export const showRelatedQuery = defineInfiniteQuery({
   key: 'showRelated',
   invalidations: [],
   dependencies: (
     params,
-  ) => [params.slug, params.page, params.limit, params.isSmart],
+  ) => [params.slug, params.page, params.limit],
   request: showRelatedRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToShowEntry),

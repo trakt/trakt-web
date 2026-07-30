@@ -7,16 +7,15 @@
   type RelatedPaginatedListProps = {
     type: MediaType;
     slug: string;
-    isSmart?: boolean;
   };
 
-  const { type, slug, isSmart }: RelatedPaginatedListProps = $props();
+  const { type, slug }: RelatedPaginatedListProps = $props();
 </script>
 
 <DrilledMediaList
   id={`related-list-${type}-${slug}`}
   {type}
-  useList={(params) => useRelatedList({ ...params, slug, isSmart })}
+  useList={(params) => useRelatedList({ ...params, slug })}
 >
   {#snippet item(media)}
     <DefaultMediaItem

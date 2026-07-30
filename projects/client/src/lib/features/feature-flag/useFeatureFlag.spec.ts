@@ -37,7 +37,7 @@ describe('store: useFeatureFlag', () => {
     expect(await waitForValue(isEnabled(FeatureFlag.EditMode), true)).toBe(
       true,
     );
-    expect(await waitForValue(isEnabled(FeatureFlag.SmartRelated), true))
+    expect(await waitForValue(isEnabled(FeatureFlag.ScopedFavorites), true))
       .toBe(true);
     expect(await waitForValue(isEnabled(FeatureFlag.UpNextSmartSort), true))
       .toBe(true);

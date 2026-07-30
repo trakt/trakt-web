@@ -19,20 +19,19 @@ export const RecommendedMovieSchema = MovieEntrySchema.extend({
 export type RecommendedMovie = z.infer<typeof RecommendedMovieSchema>;
 
 type RecommendedMoviesParams =
-  & { isSmart?: boolean }
   & LimitParams
   & ApiParams
   & FilterParams;
 
 export const recommendedMoviesRequest = async (
-  { fetch, limit, filter, filterOverride, isSmart }: RecommendedMoviesParams,
+  { fetch, limit, filter, filterOverride }: RecommendedMoviesParams,
 ) => {
   const filterParams = filterOverride?.movie ?? filter;
   const searchParams = getRecommendedSearchParams({ limit, filterParams });
 
   const response = await rawApiFetch({
     fetch,
-    path: `/movies/recommendations${isSmart ? '/smart' : ''}?${searchParams}`,
+    path: `/movies/recommendations?${searchParams}`,
   });
 
   return response.ok
@@ -54,7 +53,6 @@ export const recommendedMoviesQuery = defineQuery({
     params,
   ) => [
     params.limit,
-    params.isSmart,
     params.filter?.watch_window,
     ...getGlobalFilterDependencies(
       params.filterOverride?.movie ?? params.filter,

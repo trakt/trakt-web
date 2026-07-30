@@ -8151,22 +8151,6 @@
       "default": "Time-box favorite lists by showing current-year favorites on profiles and grouping the full favorites list by year.",
       "description": "Description for the Scoped Favorites preview feature."
     },
-    "preview_feature_title_smart_related": {
-      "default": "Smart Related",
-      "description": "Title for the Smart Related preview feature."
-    },
-    "preview_feature_description_smart_related": {
-      "default": "Use our next-gen engine to surface related movies and shows beyond the obvious.",
-      "description": "Description for the Smart Related preview feature."
-    },
-    "preview_feature_title_smart_recommendations": {
-      "default": "Smart Recommendations",
-      "description": "Title for the Smart Recommendations preview feature."
-    },
-    "preview_feature_description_smart_recommendations": {
-      "default": "Use our next-gen engine to surface recommended movies and shows beyond the obvious.",
-      "description": "Description for the Smart Recommendations preview feature."
-    },
     "preview_feature_title_up_next_smart_sort": {
       "default": "Continue Watching Smart Sort",
       "description": "Title for the Up Next Smart Sort preview feature."
@@ -9565,38 +9549,6 @@
           "type": "string"
         }
       }
-    },
-    "button_text_related_standard": {
-      "default": "Standard",
-      "description": "Text for the related media toggle button to show standard related movies or shows. This should be as short and concise as possible."
-    },
-    "button_label_related_standard": {
-      "default": "Standard related",
-      "description": "Aria-label for the related media toggle button to show standard related movies or shows. This should be as short and concise as possible."
-    },
-    "button_text_related_smart": {
-      "default": "Smart",
-      "description": "Text for the related media toggle button to show smart related movies or shows. This should be as short and concise as possible."
-    },
-    "button_label_related_smart": {
-      "default": "Smart related",
-      "description": "Aria-label for the related media toggle button to show smart related movies or shows. This should be as short and concise as possible."
-    },
-    "button_text_recommendation_standard": {
-      "default": "Standard",
-      "description": "Text for the recommendations toggle button to show standard recommended movies or shows. This should be as short and concise as possible."
-    },
-    "button_label_recommendation_standard": {
-      "default": "Standard recommendations",
-      "description": "Aria-label for the recommendations toggle button to show standard recommended movies or shows. This should be as short and concise as possible."
-    },
-    "button_text_recommendation_smart": {
-      "default": "Smart",
-      "description": "Text for the recommendations toggle button to show smart recommended movies or shows. This should be as short and concise as possible."
-    },
-    "button_label_recommendation_smart": {
-      "default": "Smart recommendations",
-      "description": "Aria-label for the recommendations toggle button to show smart recommended movies or shows. This should be as short and concise as possible."
     },
     "text_list_private": {
       "default": "Private",

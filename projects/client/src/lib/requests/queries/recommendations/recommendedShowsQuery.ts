@@ -19,20 +19,19 @@ export const RecommendedShowSchema = ShowEntrySchema.extend({
 export type RecommendedShow = z.infer<typeof RecommendedShowSchema>;
 
 type RecommendedShowsParams =
-  & { isSmart?: boolean }
   & LimitParams
   & ApiParams
   & FilterParams;
 
 export const recommendedShowsRequest = async (
-  { fetch, limit, filter, filterOverride, isSmart }: RecommendedShowsParams,
+  { fetch, limit, filter, filterOverride }: RecommendedShowsParams,
 ) => {
   const filterParams = filterOverride?.show ?? filter;
   const searchParams = getRecommendedSearchParams({ limit, filterParams });
 
   const response = await rawApiFetch({
     fetch,
-    path: `/shows/recommendations${isSmart ? '/smart' : ''}?${searchParams}`,
+    path: `/shows/recommendations?${searchParams}`,
   });
 
   return response.ok
@@ -55,7 +54,6 @@ export const recommendedShowsQuery = defineQuery({
     params,
   ) => [
     params.limit,
-    params.isSmart,
     params.filter?.watch_window,
     ...getGlobalFilterDependencies(
       params.filterOverride?.show ?? params.filter,
