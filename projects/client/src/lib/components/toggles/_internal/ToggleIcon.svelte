@@ -18,7 +18,6 @@
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
-  import ShuffleIcon from "$lib/components/icons/ShuffleIcon.svelte";
   import SpoilerIcon from "$lib/components/icons/SpoilerIcon.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
@@ -113,10 +112,6 @@
 
 {#if option.value === "crew"}
   <CrewIcon />
-{/if}
-
-{#if option.value === "standard"}
-  <ShuffleIcon />
 {/if}
 
 {#if option.value === "smart"}

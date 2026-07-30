@@ -1,4 +1,3 @@
-import BrainIcon from '$lib/components/icons/BrainIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
@@ -47,16 +46,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
         UrlBuilder.profile.favorites('me'),
         m.preview_feature_title_scoped_favorites(),
       ),
-  },
-  [FeatureFlag.SmartRelated]: {
-    icon: BrainIcon,
-    title: () => m.preview_feature_title_smart_related(),
-    description: () => m.preview_feature_description_smart_related(),
-  },
-  [FeatureFlag.SmartRecommendations]: {
-    icon: BrainIcon,
-    title: () => m.preview_feature_title_smart_recommendations(),
-    description: () => m.preview_feature_description_smart_recommendations(),
   },
   [FeatureFlag.UpNextSmartSort]: {
     icon: SmartListIcon,

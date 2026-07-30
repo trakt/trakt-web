@@ -19,7 +19,6 @@ import {
 } from '../recommendations/recommendedShowsQuery.ts';
 
 type RecommendedMediaParams =
-  & { isSmart?: boolean }
   & LimitParams
   & ApiParams
   & FilterParams;
@@ -30,7 +29,7 @@ const RecommendedMediaSchema = z.union([
 ]);
 
 const recommendedMediaRequest = async (
-  { fetch, limit, filter, filterOverride, isSmart }: RecommendedMediaParams,
+  { fetch, limit, filter, filterOverride }: RecommendedMediaParams,
 ) => {
   const filterParams = filterOverride?.movie ?? filterOverride?.show ?? filter;
   const searchParams = getRecommendedSearchParams({ limit, filterParams });
@@ -38,7 +37,7 @@ const recommendedMediaRequest = async (
   // FIXME: move to @trakt/api when we drop support for legacy recommendations
   const response = await rawApiFetch({
     fetch,
-    path: `/media/recommendations${isSmart ? '/smart' : ''}?${searchParams}`,
+    path: `/media/recommendations?${searchParams}`,
   });
 
   return response.ok
@@ -64,7 +63,6 @@ export const recommendedMediaQuery = defineQuery({
     params: RecommendedMediaParams,
   ) => [
     params.limit,
-    params.isSmart,
     params.filter?.watch_window,
     ...getGlobalFilterDependencies(
       params.filterOverride?.movie ?? params.filter,
