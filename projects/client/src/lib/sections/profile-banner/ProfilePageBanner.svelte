@@ -4,6 +4,9 @@
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
+  import AchievementsAnchorHost from "$lib/features/vip-achievements/AchievementsAnchorHost.svelte";
   import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
   import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
   import { useVipVeteran } from "$lib/features/vip-veteran/stores/useVipVeteran.ts";
@@ -41,6 +44,9 @@
   const { veteran } = useVipVeteran(fromRune(() => slug));
   const shownVeteran = $derived(profile.isVip ? $veteran : null);
   const ringTone = $derived(toVipVeteranRingTone(shownVeteran));
+
+  const { isEnabled } = useFeatureFlag();
+  const vipAchievementsEnabled = isEnabled(FeatureFlag.VipAchievements);
 
   const shareableSlug = $derived($isMe ? $user.slug : slug);
   const isBlocked = $derived($blocked.has(slug));
@@ -99,6 +105,9 @@
         </RenderFor>
       {:else if $isMe}
         <LeaderboardPill />
+      {/if}
+      {#if $isMe && profile.isDirector && $vipAchievementsEnabled}
+        <AchievementsAnchorHost {profile} />
       {/if}
     </div>
     <div class="profile-actions">
@@ -207,6 +216,8 @@
     grid-area: 2 / 2 / auto / -1;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-xxs);
     min-width: 0;
 
     container: avatar-pill / inline-size;

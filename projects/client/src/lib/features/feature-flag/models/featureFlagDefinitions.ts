@@ -107,4 +107,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     addedAt: new Date('2026-10-16'),
     description: () => m.preview_feature_description_show_ending(),
   },
+  [FeatureFlag.VipAchievements]: {
+    icon: SparkleIcon,
+    title: () => m.preview_feature_title_vip_achievements(),
+    addedAt: new Date('2026-07-31'),
+    description: () => m.preview_feature_description_vip_achievements(),
+    audience: 'director',
+  },
 };
