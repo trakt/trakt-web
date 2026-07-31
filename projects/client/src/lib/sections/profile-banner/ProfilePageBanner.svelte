@@ -7,6 +7,7 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
+  import AchievementsAnchorHost from "$lib/features/vip-achievements/AchievementsAnchorHost.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import LeaderboardPill from "$lib/sections/profile/leaderboard/LeaderboardPill.svelte";
   import MatchPill from "$lib/sections/profile/components/MatchPill.svelte";
@@ -36,6 +37,7 @@
 
   const { isEnabled } = useFeatureFlag();
   const leaderboardEnabled = isEnabled(FeatureFlag.Leaderboard);
+  const vipAchievementsEnabled = isEnabled(FeatureFlag.VipAchievements);
 
   const shareableSlug = $derived($isMe ? $user.slug : slug);
   const isBlocked = $derived($blocked.has(slug));
@@ -76,13 +78,18 @@
       {#if isPublic}
         <span class="user-location ellipsis">{profile.location}</span>
       {/if}
-      {#if !$isMe && !isBlocked}
-        <RenderFor audience="authenticated">
-          <MatchPill {slug} />
-        </RenderFor>
-      {:else if $isMe && $leaderboardEnabled}
-        <LeaderboardPill />
-      {/if}
+      <div class="profile-identity-pills">
+        {#if !$isMe && !isBlocked}
+          <RenderFor audience="authenticated">
+            <MatchPill {slug} />
+          </RenderFor>
+        {:else if $isMe && $leaderboardEnabled}
+          <LeaderboardPill />
+        {/if}
+        {#if $isMe && profile.isDirector && $vipAchievementsEnabled}
+          <AchievementsAnchorHost {profile} />
+        {/if}
+      </div>
     </div>
     <div class="profile-actions">
       <div class="profile-icon-actions">
@@ -192,6 +199,21 @@
 
     .user-location {
       color: var(--color-text-secondary);
+    }
+  }
+
+  // Pantheon / match pill on top, achievements anchor stacked beneath it -
+  // each gets its own full-width row under the handle so neither is cramped.
+  .profile-identity-pills {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-xxs);
+    min-width: 0;
+
+    :global(.trakt-leaderboard-pill),
+    :global(.trakt-match-pill) {
+      margin-top: 0;
     }
   }
 

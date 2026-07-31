@@ -264,6 +264,9 @@
   --color-soundtrack-play-foreground: var(--shade-10);
 
   --color-vip-popular-tag: #fdc700;
+  // Purple accent for VIP achievements, matching the VIP surfaces. A deeper
+  // purple in the light theme so it stays legible on light backgrounds.
+  --color-achievement-accent: var(--purple-600);
   --color-vip-border-accent: var(--purple-600);
   --color-vip-surface-muted: var(--purple-50);
   --background-vip-elevated-card: radial-gradient(
@@ -739,6 +742,8 @@
   --color-soundtrack-play-foreground: var(--shade-10);
 
   --color-vip-popular-tag: #fdc700;
+  // Purple accent for VIP achievements. See the light-theme note.
+  --color-achievement-accent: var(--purple-400);
   --color-vip-border-accent: var(--purple-500);
   --color-vip-surface-muted: var(--purple-950);
   --background-vip-elevated-card: radial-gradient(

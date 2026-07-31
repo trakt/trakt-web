@@ -27,12 +27,14 @@
   }
 
   const { option }: ToggleIconProps = $props();
-  // FIXME: make the icon a prop of ToggleOption
 </script>
 
-{#if option.value === "all" || option.value === "media"}
-  <MediaIcon />
-{/if}
+{#if option.icon}
+  {@render option.icon()}
+{:else}
+  {#if option.value === "all" || option.value === "media"}
+    <MediaIcon />
+  {/if}
 
 {#if option.value === "movie"}
   <MovieIcon />
@@ -118,6 +120,7 @@
   <CrewIcon />
 {/if}
 
-{#if option.value === "smart"}
-  <BrainIcon />
+  {#if option.value === "smart"}
+    <BrainIcon />
+  {/if}
 {/if}

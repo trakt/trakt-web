@@ -6,4 +6,5 @@ export enum FeatureFlag {
   Leaderboard = 'leaderboard',
   ParentalGuide = 'parental-guide',
   Soundtrack = 'soundtrack',
+  VipAchievements = 'vip-achievements',
 }

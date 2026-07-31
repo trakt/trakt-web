@@ -5,6 +5,7 @@ import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import SmartListIcon from '$lib/components/icons/SmartListIcon.svelte';
+import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { Component } from 'svelte';
@@ -85,6 +86,12 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.option_text_certification_parental_guidance(),
     addedAt: new Date('2026-06-30'),
     description: () => m.preview_feature_description_parental_guide(),
+    audience: 'director',
+  },
+  [FeatureFlag.VipAchievements]: {
+    icon: SparkleIcon,
+    title: () => m.preview_feature_title_vip_achievements(),
+    description: () => m.preview_feature_description_vip_achievements(),
     audience: 'director',
   },
 };
