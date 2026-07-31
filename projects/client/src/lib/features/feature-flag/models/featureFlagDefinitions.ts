@@ -17,6 +17,7 @@ type FeatureFlagLink = {
 type FeatureFlagDefinition = {
   icon: Component;
   title: () => string;
+  addedAt: Date;
   description?: (() => string | null) | null;
   featureLink?: (() => FeatureFlagLink | null) | null;
   audience?: 'director' | 'vip';
@@ -35,11 +36,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
   [FeatureFlag.EditMode]: {
     icon: EditModeIcon,
     title: () => m.preview_feature_title_edit_mode(),
+    addedAt: new Date('2026-04-30'),
     description: () => m.preview_feature_description_edit_mode(),
   },
   [FeatureFlag.ScopedFavorites]: {
     icon: FavoriteIcon,
     title: () => m.preview_feature_title_scoped_favorites(),
+    addedAt: new Date('2026-06-11'),
     description: () => m.preview_feature_description_scoped_favorites(),
     featureLink: () =>
       openFeatureLink(
@@ -50,6 +53,7 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
   [FeatureFlag.UpNextSmartSort]: {
     icon: SmartListIcon,
     title: () => m.preview_feature_title_up_next_smart_sort(),
+    addedAt: new Date('2026-07-09'),
     description: () => m.preview_feature_description_up_next_smart_sort(),
     featureLink: () =>
       openFeatureLink(
@@ -60,16 +64,19 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
   [FeatureFlag.Rewatching]: {
     icon: FastRewindIcon,
     title: () => m.preview_feature_title_rewatch(),
+    addedAt: new Date('2026-06-19'),
     description: () => m.preview_feature_description_rewatch(),
   },
   [FeatureFlag.Leaderboard]: {
     icon: PeopleIcon,
     title: () => m.preview_feature_title_leaderboard(),
+    addedAt: new Date('2026-07-09'),
     description: () => m.preview_feature_description_leaderboard(),
   },
   [FeatureFlag.ParentalGuide]: {
     icon: NoSpoilerIcon,
     title: () => m.option_text_certification_parental_guidance(),
+    addedAt: new Date('2026-06-30'),
     description: () => m.preview_feature_description_parental_guide(),
     audience: 'director',
   },
