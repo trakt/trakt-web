@@ -136,9 +136,16 @@
     border: var(--ni-1) solid
       color-mix(in srgb, var(--color-achievement-accent) 22%, transparent);
 
-    // Tier-scaled purple bloom behind the content. A single symmetric (RTL-safe)
-    // gradient whose opacity rides `--tier-strength`, kept faint so a grid of
-    // cards reads as a purple accent rather than a purple wash.
+    // Tier-scaled purple lift, borrowed from the header's VIP dazzle: the glow
+    // blur widens with `--tier-strength`, so higher tiers carry a broader,
+    // softer halo while Tier 1 stays tight and quiet.
+    box-shadow: 0 var(--ni-2)
+      calc(var(--ni-6) + var(--tier-strength, 0) * var(--ni-20))
+      color-mix(in srgb, var(--purple-500) 13%, transparent);
+
+    // Companion inner sheen behind the content. A single symmetric (RTL-safe)
+    // gradient whose opacity also rides `--tier-strength`, kept faint so a grid
+    // of cards reads as a purple accent rather than a purple wash.
     &::before {
       content: "";
       position: absolute;
@@ -148,15 +155,16 @@
 
       background: radial-gradient(
         120% 90% at 50% 0%,
-        color-mix(in srgb, var(--color-achievement-accent) 14%, transparent),
+        color-mix(in srgb, var(--color-achievement-accent) 16%, transparent),
         transparent 65%
       );
-      opacity: calc(var(--tier-strength, 0) * 0.3);
+      opacity: calc(var(--tier-strength, 0) * 0.4);
     }
 
     &.is-locked {
       background: var(--color-background);
       border-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+      box-shadow: none;
       opacity: 0.7;
     }
   }
