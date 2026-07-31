@@ -7,6 +7,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { onMount } from "svelte";
+  import { isRecentlyAddedFeature } from "./isRecentlyAddedFeature.ts";
   import { FeatureFlag } from "./models/FeatureFlag";
   import { featureFlagDefinitions } from "./models/featureFlagDefinitions";
   import { useFeatureFlag } from "./useFeatureFlag";
@@ -39,6 +40,8 @@
       {@const title = definition.title()}
       {@const description = definition.description?.() ?? ""}
       {@const featureLink = definition.featureLink?.()}
+      {@const isNew = newFeatures.includes(key) ||
+        isRecentlyAddedFeature(definition.addedAt)}
       <RenderFor audience={definition.audience ?? "vip"}>
         <div class="feature-flag-item">
           <div class="feature-flag-icon">
@@ -48,7 +51,7 @@
           <div class="feature-flag-copy">
             <span class="feature-flag-title-row">
               <span class="feature-flag-title bold">{title}</span>
-              {#if newFeatures.includes(key)}
+              {#if isNew}
                 <StemTag
                   text={m.tag_text_new_preview_feature()}
                   classList="feature-flag-new-tag"
