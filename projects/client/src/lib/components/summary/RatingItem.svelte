@@ -252,4 +252,10 @@
       width: 6ch;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rating-info .rating-skeleton {
+      animation: none;
+    }
+  }
 </style>

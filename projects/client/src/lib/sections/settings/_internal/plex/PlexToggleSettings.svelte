@@ -112,4 +112,10 @@
     height: var(--ni-28);
     border-radius: var(--border-radius-s);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton {
+      animation: none;
+    }
+  }
 </style>

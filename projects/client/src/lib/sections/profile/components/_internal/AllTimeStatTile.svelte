@@ -59,4 +59,10 @@
     animation: pulse calc(var(--transition-increment) * 6) ease-in-out infinite
       alternate;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stat-tile-skeleton {
+      animation: none;
+    }
+  }
 </style>
