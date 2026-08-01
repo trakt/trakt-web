@@ -6,12 +6,14 @@ export const PersonFergusonShowCreditsMappedMock: MediaCredits = new Map([
     type: 'cast',
     media: ShowSiloMappedMock,
     key: ShowSiloMappedMock.key,
+    episodeCount: 20,
     character: 'Juliette Nichols',
   }]],
   ['production', [{
     type: 'crew',
     media: ShowSiloMappedMock,
     key: ShowSiloMappedMock.key,
+    episodeCount: 20,
     job: 'Executive Producer',
   }]],
 ]);
