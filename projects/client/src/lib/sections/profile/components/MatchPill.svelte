@@ -48,7 +48,7 @@
     >
       <span
         class="trakt-match-pill"
-        data-band={band}
+        data-band={$band}
         style:--fill={`${score}%`}
       >
         <span class="trakt-match-pill-anchor">{m.match_pill_anchor()}</span>
