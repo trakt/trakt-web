@@ -59,13 +59,9 @@ export function dpadController(_: HTMLElement) {
   onMount(() => {
     focusSomething(true);
 
-    const destroy = GlobalEventBus.getInstance().register('keydown', (ev) => {
+    return GlobalEventBus.getInstance().register('keydown', (ev) => {
       handler({ ev, leaveNavbar, enterNavbar });
     });
-
-    return {
-      destroy,
-    };
   });
 
   afterNavigate((nav) => {
