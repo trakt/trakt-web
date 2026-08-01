@@ -1,16 +1,14 @@
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
-import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import {
   type EpisodeActivityHistory,
   EpisodeActivityHistorySchema,
+  mapToEpisodeActivityHistory,
 } from '$lib/requests/queries/users/episodeActivityHistoryQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { ShowActivityHistoryResponse } from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
@@ -55,17 +53,6 @@ const showHistoryRequest = (
     });
 };
 
-const mapToShowActivityHistory = (
-  historyShow: ShowActivityHistoryResponse,
-) => ({
-  id: historyShow.id,
-  key: `episode-${historyShow.id}`,
-  watchedAt: new Date(historyShow.watched_at),
-  episode: mapToEpisodeEntry(historyShow.episode),
-  show: mapToShowEntry(historyShow.show),
-  type: 'episode' as const,
-});
-
 export const showActivityHistoryQuery = defineInfiniteQuery({
   key: 'showActivityHistory',
   invalidations: [
@@ -84,7 +71,7 @@ export const showActivityHistoryQuery = defineInfiniteQuery({
   ],
   request: showHistoryRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapToShowActivityHistory),
+    entries: response.body.map(mapToEpisodeActivityHistory),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(EpisodeActivityHistorySchema),
