@@ -1,15 +1,11 @@
 import { genreOptionSchema } from '@trakt/api';
 import { z } from 'zod';
 import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
+import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
 import { MediaStatusSchema } from './MediaStatus.ts';
 import { MediaTypeSchema } from './MediaType.ts';
 import { PostCreditsSchema } from './PostCreditsSchema.ts';
 import { socialMediaSchema } from './SocialMedia.ts';
-
-const ImageUrlsSchema = z.object({
-  medium: HttpsUrlSchema,
-  thumb: HttpsUrlSchema,
-});
 
 export const MediaEntrySchema = z.object({
   id: z.number(),
