@@ -5,14 +5,12 @@
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toHumanETA } from "$lib/utils/formatting/date/toHumanETA";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
-  import {
-    FormatSection,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-  } from "../../_internal/table";
+  import FormatSection from "../../_internal/table/FormatSection.svelte";
+  import Table from "../../_internal/table/Table.svelte";
+  import TableBody from "../../_internal/table/TableBody.svelte";
+  import TableCell from "../../_internal/table/TableCell.svelte";
+  import TableHead from "../../_internal/table/TableHead.svelte";
+  import TableRow from "../../_internal/table/TableRow.svelte";
 
   // Svelte 5 runes
   const today = $state(new Date());
