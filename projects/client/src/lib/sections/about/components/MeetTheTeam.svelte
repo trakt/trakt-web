@@ -77,4 +77,10 @@
       opacity: 0.4;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .team-member-skeleton {
+      animation: none;
+    }
+  }
 </style>
