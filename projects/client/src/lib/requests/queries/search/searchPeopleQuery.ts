@@ -52,7 +52,7 @@ function mapToSearchResultEntry(
 }
 
 const searchRequest = async (
-  { query, config, limit }: SearchParams,
+  { query, config, limit, fetch }: SearchParams,
 ) => {
   const queryParams = {
     query,
