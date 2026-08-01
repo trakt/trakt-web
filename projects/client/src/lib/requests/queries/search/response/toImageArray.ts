@@ -1,4 +1,4 @@
-import { mediumUrl } from './mediumUrl.ts';
+import { mediumUrl } from '$lib/requests/_internal/mediumUrl.ts';
 import { prependStorageHost } from './prependStorageHost.ts';
 
 export const toImageArray = (url: string | Nil) => {
