@@ -14,5 +14,5 @@ export function removeFromFavoritesRequest(
     .remove({
       body,
     })
-    .then(({ status }) => status === 201);
+    .then(({ status }) => status === 200);
 }
