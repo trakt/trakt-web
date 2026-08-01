@@ -16,7 +16,7 @@
 
 <StemTag
   --color-background-stem-tag="var(--color-background-trend-{trendDirection}-background-tag)"
-  --color-text-stem-tag="var(--color-text-trend-tag)"
+  --color-foreground-stem-tag="var(--color-text-trend-tag)"
 >
   <div class="trend-tag-container">
     {#if trendDirection !== "neutral"}
