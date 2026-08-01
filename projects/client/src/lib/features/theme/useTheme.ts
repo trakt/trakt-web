@@ -9,10 +9,26 @@ import { THEME_COOKIE_NAME } from './constants.ts';
 import { Theme } from './models/Theme.ts';
 import { ThemeEndpoint } from './ThemeEndpoint.ts';
 
+/*
+  One subject and one media-query listener for the whole app - every
+  `useTheme()` call used to register its own, and none of them were ever
+  removed.
+*/
+const systemTheme = new BehaviorSubject<Theme | undefined>(undefined);
+
+if (browser) {
+  globalThis.matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener(
+      'change',
+      (e) => {
+        systemTheme.next(e.matches ? Theme.Dark : Theme.Light);
+      },
+    );
+}
+
 export function useTheme() {
   const theme: BehaviorSubject<Theme> = getContext(THEME_COOKIE_NAME);
   const { track } = useTrack(AnalyticsEvent.Theme);
-  const systemTheme = new BehaviorSubject<Theme | undefined>(undefined);
 
   async function set(value: Theme) {
     globalThis.document.documentElement.dataset.theme = value;
@@ -41,17 +57,6 @@ export function useTheme() {
       // empty or non-JSON body (e.g., an HTML error page from an
       // intermediary CDN) is safe to swallow.
     }
-  }
-
-  if (browser) {
-    globalThis.matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener(
-        'change',
-        (e) => {
-          const system = e.matches ? Theme.Dark : Theme.Light;
-          systemTheme.next(system);
-        },
-      );
   }
 
   return {
