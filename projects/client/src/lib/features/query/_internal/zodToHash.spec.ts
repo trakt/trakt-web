@@ -15,6 +15,16 @@ describe('zodToHash', () => {
     expect(hash1).toBe(hash2);
   });
 
+  it('should generate the same hash for two structurally equal schemas', () => {
+    const shape = () =>
+      z.object({
+        name: z.string(),
+        age: z.number(),
+      });
+
+    expect(zodToHash(shape())).toBe(zodToHash(shape()));
+  });
+
   it('should generate different hashes for different schemas', () => {
     const schema1 = z.object({
       name: z.string(),
