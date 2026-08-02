@@ -2,7 +2,6 @@ import { approachTarget } from '$lib/features/member-count/_internal/approachTar
 import type { LocalAnchor } from '$lib/features/member-count/_internal/LocalAnchor.ts';
 import { resolveProjection } from '$lib/features/member-count/_internal/resolveProjection.ts';
 import type { RegisteredMemberCount } from '$lib/requests/models/RegisteredMemberCount.ts';
-import { useMedia, WellKnownMediaQuery } from '$lib/stores/css/useMedia.ts';
 
 // Long enough to read as motion, short enough that a correction lands quickly.
 const REANCHOR_HALF_LIFE = 300;
@@ -24,13 +23,9 @@ export function useProjectedCount(anchor: () => RegisteredMemberCount) {
     rendered = floor;
   };
 
-  let isReduced = $state(false);
-  $effect(() => {
-    const subscription = useMedia(WellKnownMediaQuery.reducedMotion)
-      .subscribe((matches) => isReduced = matches);
-
-    return () => subscription.unsubscribe();
-  });
+  // Forced true: prefers-reduced-motion is always treated as active, so the
+  // frame-loop animation below never runs.
+  let isReduced = $state(true);
 
   // Reduced motion: no frame loop, so the value only moves when a poll lands.
   $effect(() => {

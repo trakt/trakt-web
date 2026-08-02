@@ -1,6 +1,5 @@
 <script lang="ts">
   import { getLocale } from "$lib/features/i18n";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { toGroupedNumber } from "$lib/utils/formatting/number/toGroupedNumber.ts";
   import type { OdometerNumberProps } from "./_internal/OdometerNumberProps.ts";
   import { toDigitPosition } from "./_internal/toDigitPosition.ts";
@@ -10,7 +9,8 @@
   const { value, accessibleLabel, reserveFor = value }: OdometerNumberProps =
     $props();
 
-  const isReduced = useMedia(WellKnownMediaQuery.reducedMotion);
+  // Forced true: prefers-reduced-motion is always treated as active.
+  const isReduced = true;
 
   const locale = $derived(getLocale());
   // Deriving off the floored value keeps `Intl` out of the frame loop; the roll
@@ -31,7 +31,7 @@
 <span class="trakt-odometer-number" style="--character-count: {reserved}">
   <span class="odometer-label">{accessibleLabel}</span>
 
-  {#if $isReduced}
+  {#if isReduced}
     <span class="odometer-static" aria-hidden="true" aria-live="off">
       {text}
     </span>
