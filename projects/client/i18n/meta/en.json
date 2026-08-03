@@ -10005,6 +10005,62 @@
     "error_search_partial_results": {
       "default": "Some results may be missing",
       "description": "Shown below search results when the fuzzy search pass failed but exact results still loaded, alongside a retry action."
+    },
+    "list_title_soundtrack": {
+      "default": "Soundtrack",
+      "description": "Title for the section listing the music credited in a movie or show. This title should be as short and concise as possible."
+    },
+    "text_soundtrack_music_by": {
+      "default": "Music by",
+      "description": "Small label above the name of the composer who wrote most of a soundtrack."
+    },
+    "text_soundtrack_playable_ratio": {
+      "default": "{playable} of {total} playable",
+      "description": "Shows how many of a soundtrack's credited tracks can be played. 'playable' is the number that can be played, 'total' is the number of credited tracks."
+    },
+    "text_soundtrack_pick_a_track": {
+      "default": "Pick a track to play it here.",
+      "description": "Hint shown in the empty soundtrack player before the reader has chosen a track."
+    },
+    "text_soundtrack_unmatched": {
+      "default": "Not available to play",
+      "description": "Accessible label for a soundtrack track that is credited but cannot be played."
+    },
+    "text_soundtrack_upsell": {
+      "default": "Hear the score.",
+      "description": "Headline inviting a non-VIP reader to unlock the soundtrack section."
+    },
+    "button_label_play_track": {
+      "default": "Play {title}",
+      "description": "Aria-label for the button that plays a soundtrack track. 'title' is the name of the track."
+    },
+    "button_label_pause_track": {
+      "default": "Pause {title}",
+      "description": "Aria-label for the button that pauses a playing soundtrack track. 'title' is the name of the track."
+    },
+    "button_label_view_soundtrack": {
+      "default": "View soundtrack",
+      "description": "Aria-label for the link that opens the full soundtrack listing."
+    },
+    "iframe_title_spotify_player": {
+      "default": "Spotify player for {title}",
+      "description": "Accessible title for the embedded Spotify player. 'title' is the name of the track being played."
+    },
+    "vip_feature_title_soundtrack": {
+      "default": "Soundtrack",
+      "description": "Title for the Soundtrack VIP feature."
+    },
+    "vip_feature_description_soundtrack": {
+      "default": "See every track credited in a movie or show, and play the ones we can match.",
+      "description": "Description for the Soundtrack VIP feature."
+    },
+    "preview_feature_title_soundtrack": {
+      "default": "Soundtrack",
+      "description": "Product feature name for the soundtrack preview feature."
+    },
+    "preview_feature_description_soundtrack": {
+      "default": "Adds a soundtrack section to movie and show pages, with playback where a track can be matched.",
+      "description": "Description for the soundtrack preview feature."
     }
   }
 }
