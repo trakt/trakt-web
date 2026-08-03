@@ -11,10 +11,11 @@ import {
 
 export type ParameterContextData = {
   parameters: BehaviorSubject<Map<string, ParameterType>>;
+  url: BehaviorSubject<URL>;
 };
 
 export function useParameters() {
-  const { parameters, override, isEscaped } = createParameterContext();
+  const { parameters, url, override, isEscaped } = createParameterContext();
 
   function update(params: Record<string, ParameterType>) {
     const current = parameters.value;
@@ -56,5 +57,7 @@ export function useParameters() {
     update,
     override,
     isEscaped,
+    url: url.asObservable(),
+    setUrl: (next: URL) => url.next(next),
   };
 }

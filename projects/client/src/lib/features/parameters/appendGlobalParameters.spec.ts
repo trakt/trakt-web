@@ -5,11 +5,12 @@ import { filterScopeStore } from '$lib/features/filters/filterScopeStore.ts';
 import { appendGlobalParameters } from './appendGlobalParameters.ts';
 import {
   PARAMETER_CONTEXT_KEY,
+  PARAMETER_SETTER_CONTEXT_KEY,
   type ParameterType,
 } from './_internal/createParameterContext.ts';
 
 let pageUrl = new URL('https://app.trakt.tv/profile/userA');
-let afterNavigateCallback: (() => void) | undefined;
+let urlSubject = new BehaviorSubject(pageUrl);
 
 vi.mock('$app/state', () => ({
   page: {
@@ -19,12 +20,6 @@ vi.mock('$app/state', () => ({
     get url() {
       return pageUrl;
     },
-  },
-}));
-
-vi.mock('$app/navigation', () => ({
-  afterNavigate: (cb: () => void) => {
-    afterNavigateCallback = cb;
   },
 }));
 
@@ -43,13 +38,13 @@ vi.mock('svelte', async (importOriginal) => {
 });
 
 /**
- * Changes jsdom's window.location.href (which appendGlobalParameters resolves
- * relative hrefs against) and fires any afterNavigate callback.
+ * Mimics a navigation: moves jsdom's location and publishes the new URL on the
+ * shared context subject, the way GlobalParameterProvider does.
  */
 function navigate(pathname: string) {
   globalThis.window.history.pushState({}, '', pathname);
   pageUrl = new URL(pathname, globalThis.window.location.href);
-  afterNavigateCallback?.();
+  urlSubject.next(pageUrl);
 }
 
 function makeAnchor(href: string): HTMLAnchorElement {
@@ -63,9 +58,10 @@ function makeAnchor(href: string): HTMLAnchorElement {
  * Seeds the live parameter context so useParameters().search emits the given
  * filters, mimicking filters currently applied to the page.
  */
-function seedLiveParams(params: Record<string, ParameterType>) {
+function seedLiveParams(params: Record<string, ParameterType> = {}) {
   mockSvelteContextStore.set(PARAMETER_CONTEXT_KEY, {
     parameters: new BehaviorSubject(new Map(Object.entries(params))),
+    url: urlSubject,
   });
 }
 
@@ -74,7 +70,8 @@ describe('appendGlobalParameters', () => {
     mockSvelteContextStore.clear();
     globalThis.window.history.pushState({}, '', '/profile/userA');
     pageUrl = new URL('/profile/userA', globalThis.window.location.href);
-    afterNavigateCallback = undefined;
+    urlSubject = new BehaviorSubject(pageUrl);
+    seedLiveParams();
     // Default to global scope; local-scope tests opt in explicitly.
     filterScopeStore.next(null);
   });
@@ -185,6 +182,23 @@ describe('appendGlobalParameters', () => {
     );
   });
 
+  it('picks up local sort params applied after mount (same-path mode toggle)', () => {
+    mockSvelteContextStore.set(
+      PARAMETER_SETTER_CONTEXT_KEY,
+      new BehaviorSubject('mode'),
+    );
+
+    const anchor = makeAnchor('?mode=movie');
+    appendGlobalParameters(anchor, '?mode=movie');
+
+    navigate('/profile/userA?sort_by=rank&sort_how=asc');
+
+    const params = new URL(anchor.href).searchParams;
+    expect(params.get('sort_by')).toBe('rank');
+    expect(params.get('sort_how')).toBe('asc');
+    expect(params.get('mode')).toBe('movie');
+  });
+
   it('unsubscribes from the RxJS stream on destroy', () => {
     const anchor = makeAnchor('/profile/userA');
     const action = appendGlobalParameters(anchor, '/profile/userA');
@@ -192,13 +206,8 @@ describe('appendGlobalParameters', () => {
     const hrefAfterMount = anchor.href;
     action.destroy();
 
-    // After destroy the subscription is gone. navigate() fires afterNavigate
-    // which would update the BehaviorSubjects inside createParameterContext,
-    // potentially re-triggering applyParams via the subscription, but it won't
-    // because the subscription has been torn down.
     navigate('/profile/userB');
 
-    // href must not have been mutated by the subscription firing
     expect(anchor.href).toBe(hrefAfterMount);
   });
 });
