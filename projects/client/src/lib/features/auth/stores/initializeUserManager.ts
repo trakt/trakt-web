@@ -1,6 +1,5 @@
 import { browser } from '$app/environment';
 import { FETCH_ERROR_EVENT } from '$lib/features/errors/constants.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';
 import { workerRequest } from '$worker/workerRequest.ts';
 import { type User, UserManager } from 'oidc-client-ts';
@@ -9,22 +8,14 @@ import { onMount } from 'svelte';
 import { writeAuthMarker } from '../authMarker.ts';
 import { deriveStandardAuthority } from '../deriveStandardAuthority.ts';
 import { getOidcConfig } from '../getOidcConfig.ts';
+import { mapToToken } from '../mapToToken.ts';
 import { portWorkerAuthSession } from '../portWorkerAuthSession.ts';
+import { postToken } from '../postToken.ts';
 import { resolveOidcAuthority } from '../resolveOidcAuthority.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { setToken, type Token } from '../token/index.ts';
-import { postToken } from './_internal/postToken.ts';
 import type { AuthContextType } from './createAuthContext.ts';
 import { setUserManager } from './userManager.ts';
-
-function mapToToken(user: User | null): Token {
-  const expiresAt = user?.expires_at ? time.seconds(user.expires_at) : null;
-
-  return {
-    value: user?.access_token ?? null,
-    expiresAt,
-  };
-}
 
 type InitializeUserManagerParams = {
   ctx: AuthContextType;
@@ -121,8 +112,18 @@ export function initializeUserManager(
         return;
       }
 
+      if (!user) {
+        if (tokenFromServer) {
+          handleUserEvent(null);
+          return;
+        }
+
+        setAuthState({ token: mapToToken(null), isExpired: true });
+        return;
+      }
+
       const token = mapToToken(user);
-      setAuthState({ token, isExpired: user?.expired ?? true });
+      setAuthState({ token, isExpired: user.expired ?? true });
       syncToken(user);
     };
 

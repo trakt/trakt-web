@@ -53,7 +53,7 @@ export const manifest: Partial<ManifestOptions> = {
       purpose: 'any',
     },
   ],
-  start_url: '/',
+  start_url: '/home',
   display: 'standalone',
   theme_color: '#131517',
   background_color: '#131517',

@@ -140,6 +140,18 @@
 
   const robots = $derived(AUDIENCE_ROBOTS[audience]);
 
+  const AUDIENCE_REDIRECTS: Partial<
+    Record<
+      AudienceProps["audience"],
+      { viewer: AudienceProps["audience"]; to: string }
+    >
+  > = {
+    authenticated: { viewer: "public", to: UrlBuilder.landing() },
+    public: { viewer: "authenticated", to: UrlBuilder.home() },
+  };
+
+  const audienceRedirect = $derived(AUDIENCE_REDIRECTS[audience]);
+
   const isMediaPage = $derived(type === "movie" || type === "show");
 
   const createWebsiteLd = (url: string) => {
@@ -295,9 +307,9 @@
     {/if}
   </RenderFor>
 
-  {#if audience === "authenticated"}
-    <RenderFor audience="public">
-      <Redirect to={UrlBuilder.home()} />
+  {#if audienceRedirect}
+    <RenderFor audience={audienceRedirect.viewer}>
+      <Redirect to={audienceRedirect.to} />
     </RenderFor>
   {/if}
 </FilterScopeSetter>

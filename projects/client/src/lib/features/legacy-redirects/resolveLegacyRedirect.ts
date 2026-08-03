@@ -223,11 +223,11 @@ const rules: ReadonlyArray<LegacyRule> = [
   // home rather than 404.
   {
     pattern: /^\/seasons\/[^/]+\/?$/,
-    to: () => UrlBuilder.home(),
+    to: () => UrlBuilder.landing(),
   },
   {
     pattern: /^\/episodes\/[^/]+\/?$/,
-    to: () => UrlBuilder.home(),
+    to: () => UrlBuilder.landing(),
   },
   // Numeric-id public list / watchlist: slug can't be reconstructed, so fall
   // back to the signed-in user's lists landing (holds the watchlist and every
@@ -238,15 +238,15 @@ const rules: ReadonlyArray<LegacyRule> = [
   },
   {
     pattern: /^\/comments\/[^/]+\/[^/]+\/?$/,
-    to: () => UrlBuilder.home(),
+    to: () => UrlBuilder.landing(),
   },
   {
     pattern: /^\/share\/[^/]+\/?$/,
-    to: () => UrlBuilder.home(),
+    to: () => UrlBuilder.landing(),
   },
   {
     pattern: /^\/tmdb(?:\/.*)?$/,
-    to: () => UrlBuilder.home(),
+    to: () => UrlBuilder.landing(),
   },
 ];
 

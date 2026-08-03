@@ -159,8 +159,8 @@ describe('util: resolveLegacyRedirect', () => {
 
   describe('top-level pages', () => {
     it('should map dashboard to home', () => {
-      expect(resolveLegacyRedirect('/dashboard')).toBe('/');
-      expect(resolveLegacyRedirect('/dashboard/on_deck')).toBe('/');
+      expect(resolveLegacyRedirect('/dashboard')).toBe('/home');
+      expect(resolveLegacyRedirect('/dashboard/on_deck')).toBe('/home');
     });
 
     it('should map official lists', () => {
@@ -230,14 +230,14 @@ describe('util: resolveLegacyRedirect', () => {
     });
   });
 
-  describe('no sensible target falls back to home', () => {
+  describe('no sensible target falls back to the landing page', () => {
     it.each([
       '/seasons/12345',
       '/episodes/67890',
       '/comments/all/movies',
       '/share/abc123',
       '/tmdb/updates',
-    ])('should redirect %s to home', (path) => {
+    ])('should redirect %s to the landing page', (path) => {
       expect(resolveLegacyRedirect(path)).toBe('/');
     });
   });
@@ -271,6 +271,7 @@ describe('util: resolveLegacyRedirect', () => {
       '/search',
       '/settings/advanced',
       '/',
+      '/home',
     ])('should return null for %s', (path) => {
       expect(resolveLegacyRedirect(path)).toBeNull();
     });
