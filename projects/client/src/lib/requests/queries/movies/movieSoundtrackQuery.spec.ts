@@ -18,6 +18,24 @@ function query(locale: 'en' | 'pt-BR' = 'en') {
 }
 
 describe('movieSoundtrackQuery', () => {
+  it('should keep the tracklist when the matcher reports an unknown tier', async () => {
+    server.use(
+      http.get(path, () =>
+        HttpResponse.json(
+          MovieHereticSoundtrackResponseMock.map((entry, index) =>
+            index === 0 ? { ...entry, matched_on: 'writer' } : entry
+          ),
+        )),
+    );
+
+    const result = await runQuery({
+      factory: () => query(),
+      mapper: (response) => response?.data,
+    });
+
+    expect(result).to.have.length(MovieHereticSoundtrackResponseMock.length);
+  });
+
   it('should query for the movie soundtrack', async () => {
     const result = await runQuery({
       factory: () => query(),
