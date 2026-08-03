@@ -326,15 +326,42 @@
     margin: 0;
   }
 
+  /* Above the list rather than beside it, so it has to survive the list
+     scrolling past. */
+  @mixin sticky-bar {
+    position: sticky;
+    inset-block-start: var(--ni-8);
+    z-index: var(--layer-base);
+  }
+
   .trakt-soundtrack-panel[data-layout="stacked"] {
-    height: var(--height-soundtrack-panel-compact);
+    height: auto;
+    /* Flush to the top of the scrollport and opaque edge to edge: it floats
+       over the list, so a rounded corner, a shadow or an offset band all read
+       as rows sliding through the bar. */
     padding: 0;
 
-    background-color: transparent;
+    background-color: var(--color-background);
     box-shadow: none;
+
+    @include sticky-bar;
+
+    inset-block-start: 0;
+
+    .panel-media,
+    .media-overlay {
+      height: var(--height-soundtrack-panel-compact);
+    }
 
     .media-overlay {
       background-color: var(--color-card-background);
+      /* Square against the top edge. The lift is cast downward only - the
+         negative spread cancels the offset, so nothing paints above the bar
+         where the list would show through it. */
+      border-start-start-radius: 0;
+      border-start-end-radius: 0;
+      box-shadow: 0 var(--ni-8) var(--ni-16) calc(-1 * var(--ni-8))
+        color-mix(in srgb, var(--color-shadow) 45%, transparent);
     }
 
     /* The compact card draws a smaller glyph. */
@@ -347,11 +374,11 @@
     }
   }
 
+  /* Below desktop the split board stacks too, so the panel becomes a bar
+     there without the prop changing. */
   @include for-tablet-lg-and-below {
-    .trakt-soundtrack-panel {
-      position: sticky;
-      inset-block-start: var(--ni-8);
-      z-index: var(--layer-base);
+    .trakt-soundtrack-panel[data-layout="split"] {
+      @include sticky-bar;
     }
   }
 </style>

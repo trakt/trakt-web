@@ -3,13 +3,17 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { SoundtrackTrack } from "$lib/requests/models/SoundtrackTrack";
+  import { whenInViewport } from "$lib/utils/actions/whenInViewport.ts";
   import SoundtrackPanel from "./SoundtrackPanel.svelte";
   import SoundtrackTrackRow from "./SoundtrackTrackRow.svelte";
   import type { SoundtrackSummary } from "./toSoundtrackSummary.ts";
 
-  // Below this the list is too short to sit beside a player without the two
-  // columns disagreeing on height, so the panel becomes a bar instead.
-  const minimumSplitRows = 5;
+  // The player needs more height than a short tracklist provides, so the split
+  // board is floored at this many rows rather than dropping the player.
+  const panelMinimumRows = 5;
+  // A show aggregates every episode, so this list runs to several hundred
+  // rows. Reveal it in chunks as the reader reaches the end of one.
+  const chunkSize = 50;
 
   const {
     media,
@@ -32,6 +36,14 @@
   let selectedKey = $state<string | null>(null);
   let playToken = $state(0);
   let isPlaying = $state(false);
+  let revealedCount = $state(chunkSize);
+
+  const visibleTracks = $derived(tracks.slice(0, revealedCount));
+  const hasHiddenTracks = $derived(revealedCount < tracks.length);
+
+  function revealNextChunk() {
+    revealedCount = Math.min(revealedCount + chunkSize, tracks.length);
+  }
 
   // Only the rows on screen are clickable, so a match further down the full
   // list does not earn a player.
@@ -40,11 +52,6 @@
   );
   const selected = $derived(
     tracks.find((track) => track.key === selectedKey) ?? null,
-  );
-  const effectiveLayout = $derived(
-    layout === "split" && tracks.length >= minimumSplitRows
-      ? "split"
-      : "stacked",
   );
 
   function onPlay(track: SoundtrackTrack) {
@@ -64,8 +71,8 @@
 <div
   class="trakt-soundtrack-board"
   class:has-player={hasPlayableRow}
-  data-layout={effectiveLayout}
-  style="--rows-shown: {tracks.length}"
+  data-layout={layout}
+  style="--rows-shown: {visibleTracks.length}; --min-rows: {panelMinimumRows}"
 >
   {#if hasPlayableRow}
     <SoundtrackPanel
@@ -75,13 +82,13 @@
       playable={summary.playable}
       track={selected}
       {playToken}
-      layout={effectiveLayout}
+      {layout}
       onPlayingChange={(value) => (isPlaying = value)}
     />
   {/if}
 
   <ul class="board-list">
-    {#each tracks as track (track.key)}
+    {#each visibleTracks as track (track.key)}
       <SoundtrackTrackRow
         {track}
         isPlaying={isPlaying && selectedKey === track.key}
@@ -90,18 +97,31 @@
       />
     {/each}
   </ul>
+
+  {#if hasHiddenTracks}
+    <!-- Outside the list so the list box stays exactly as tall as its rows,
+         and keyed so each chunk gets a fresh element: `whenInViewport` is
+         one-shot and stops observing after it fires. -->
+    {#key revealedCount}
+      <div class="board-sentinel" use:whenInViewport={revealNextChunk}></div>
+    {/key}
+  {/if}
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  /* One token sizes both columns: the row count drives the list height and the
-     panel stretches to it, so the two never disagree. */
+  /* Flex rather than grid so the sticky panel's containing block is the whole
+     board: a sticky grid item cannot leave its own row. */
   .trakt-soundtrack-board {
-    display: grid;
-    grid-auto-rows: min-content;
-    grid-template-columns: minmax(0, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: var(--ni-8);
+  }
+
+  .board-sentinel {
+    flex: none;
+    height: 1px;
   }
 
   .board-list {
@@ -123,13 +143,19 @@
     box-shadow: var(--shadow-base);
   }
 
+  /* Side by side, and only here: one token sizes both columns so the list and
+     the player beside it can never disagree on height. */
   .trakt-soundtrack-board[data-layout="split"] {
     @include for-desktop {
+      display: grid;
       grid-auto-rows: auto;
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--ni-12);
       align-items: stretch;
 
-      height: calc(var(--rows-shown) * var(--height-soundtrack-row));
+      height: calc(
+        max(var(--rows-shown), var(--min-rows)) * var(--height-soundtrack-row)
+      );
 
       /* Nothing resolved: the panel is dropped and the credit list runs the
          full width. */
