@@ -154,5 +154,6 @@ export function groupByAdded(item: SortInput): string {
 }
 
 export function groupByReleased(item: SortInput): string {
-  return String(getAirDate(item).getFullYear());
+  const airDate = getAirDate(item);
+  return isMaxDate(airDate) ? m.tag_text_tba() : String(airDate.getFullYear());
 }
