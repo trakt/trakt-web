@@ -7,8 +7,9 @@ import { buildHistoryPayload } from './engine/buildHistoryPayload.ts';
 import { buildRatingsPayload } from './engine/buildRatingsPayload.ts';
 import { buildWatchlistPayload } from './engine/buildWatchlistPayload.ts';
 import { matchMovies } from './engine/matchMovies.ts';
-import { MOVIE_IDS, pickIds } from './engine/pickIds.ts';
 import { resolveMovieIds } from './engine/resolveMovieIds.ts';
+import { type SyncOutcome, toSyncOutcome } from './engine/toSyncOutcome.ts';
+import { toUnsyncableItems } from './engine/toUnsyncableItems.ts';
 import {
   DEFAULT_EPISODE_MATCH_MODE,
   type EpisodeMatchMode,
@@ -22,7 +23,18 @@ type SyncToTraktCallbacks = SyncEngineCallbacks & {
 };
 
 type TraktClient = ReturnType<typeof api>;
-type SyncRunner = ReturnType<typeof createSyncRunner>['run'];
+
+type SyncResponse = { status: number; body: unknown };
+
+type SyncActionParams<TPayload, TResponse> = {
+  items: ReadonlyArray<UniversalImportItem>;
+  buildPayload: (batch: ReadonlyArray<UniversalImportItem>) => TPayload;
+  send: (payload: TPayload) => Promise<TResponse>;
+};
+
+type SyncAction = <TPayload, TResponse extends SyncResponse>(
+  params: SyncActionParams<TPayload, TResponse>,
+) => Promise<ReadonlyArray<SyncOutcome>>;
 
 // Personal lists are few; one large page covers reuse-by-name lookup.
 const ALL_LISTS_PAGE_SIZE = 1000;
@@ -46,17 +58,23 @@ function groupByList(
   }, new Map<string, ListGroup>());
 }
 
+type SyncListsParams = {
+  listItems: ReadonlyArray<UniversalImportItem>;
+  client: TraktClient;
+  syncAction: SyncAction;
+  onError?: (message: string) => void;
+};
+
 // TV Time custom lists -> Trakt personal lists. Reuse an existing list with the
 // same name so re-importing doesn't duplicate it; otherwise create it. Items
 // are added with the watchlist (bulk media) payload shape.
 async function syncLists(
-  listItems: ReadonlyArray<UniversalImportItem>,
-  client: TraktClient,
-  run: SyncRunner,
-  onError?: (message: string) => void,
-): Promise<void> {
+  { listItems, client, syncAction, onError }: SyncListsParams,
+): Promise<ReadonlyArray<SyncOutcome>> {
   const groups = groupByList(listItems);
-  if (groups.size === 0) return;
+  if (groups.size === 0) return [];
+
+  const outcomes: SyncOutcome[] = [];
 
   const slugByName = new Map<string, string>();
   try {
@@ -96,16 +114,20 @@ async function syncLists(
     }
 
     const listSlug = slug;
-    await run(
-      chunk(items, SYNC_CHUNK_SIZE),
-      (batch) => buildWatchlistPayload([...batch]),
-      (payload) =>
-        client.users.lists.list.add({
-          params: { id: 'me', list_id: listSlug },
-          body: payload,
-        }),
+    outcomes.push(
+      ...await syncAction({
+        items,
+        buildPayload: (batch) => buildWatchlistPayload([...batch]),
+        send: (payload) =>
+          client.users.lists.list.add({
+            params: { id: 'me', list_id: listSlug },
+            body: payload,
+          }),
+      }),
     );
   }
+
+  return outcomes;
 }
 
 export async function syncToTrakt(
@@ -131,19 +153,19 @@ export async function syncToTrakt(
     });
 
     const ambiguousItems = new Set(ambiguous.map((entry) => entry.item));
-    const unresolved = resolvedItems.filter(
-      (item) =>
-        item.type === 'movie' &&
-        !pickIds(item.ids, MOVIE_IDS) &&
-        !ambiguousItems.has(item),
+
+    const unsyncable = new Set(toUnsyncableItems(resolvedItems, episodeMatch));
+    const unresolved = [...unsyncable].filter((item) =>
+      !ambiguousItems.has(item)
     );
 
-    const historyItems = resolvedItems.filter((i) => i.action === 'history');
-    const watchlistItems = resolvedItems.filter((i) =>
+    const syncableItems = resolvedItems.filter((item) => !unsyncable.has(item));
+    const historyItems = syncableItems.filter((i) => i.action === 'history');
+    const watchlistItems = syncableItems.filter((i) =>
       i.action === 'watchlist'
     );
-    const ratingItems = resolvedItems.filter((i) => i.action === 'ratings');
-    const listItems = resolvedItems.filter((i) => i.action === 'list');
+    const ratingItems = syncableItems.filter((i) => i.action === 'ratings');
+    const listItems = syncableItems.filter((i) => i.action === 'list');
 
     const client = api();
     const { run, getErrorCount } = createSyncRunner({
@@ -152,36 +174,59 @@ export async function syncToTrakt(
       signal,
     });
 
-    if (historyItems.length > 0) {
-      await run(
-        chunk(historyItems, SYNC_CHUNK_SIZE),
-        (batch) => buildHistoryPayload([...batch], episodeMatch),
-        (payload) => client.sync.history.add({ body: payload }),
-      );
-    }
+    const syncAction: SyncAction = async (
+      { items: actionItems, buildPayload, send },
+    ) => {
+      if (actionItems.length === 0) return [];
 
-    if (watchlistItems.length > 0) {
-      await run(
-        chunk(watchlistItems, SYNC_CHUNK_SIZE),
-        (batch) => buildWatchlistPayload([...batch]),
-        (payload) => client.sync.watchlist.add({ body: payload }),
+      const completed = await run(
+        chunk(actionItems, SYNC_CHUNK_SIZE),
+        buildPayload,
+        send,
       );
-    }
 
-    if (ratingItems.length > 0) {
-      await run(
-        chunk(ratingItems, SYNC_CHUNK_SIZE),
-        (batch) => buildRatingsPayload([...batch]),
-        (payload) => client.sync.ratings.add({ body: payload }),
+      return completed.map(({ items: batch, response }) =>
+        toSyncOutcome({
+          items: batch,
+          status: response.status,
+          body: response.body,
+        })
       );
-    }
+    };
 
-    if (listItems.length > 0) {
-      await syncLists(listItems, client, run, onError);
-    }
+    const outcomes = [
+      ...await syncAction({
+        items: historyItems,
+        buildPayload: (batch) => buildHistoryPayload([...batch], episodeMatch),
+        send: (payload) => client.sync.history.add({ body: payload }),
+      }),
+      ...await syncAction({
+        items: watchlistItems,
+        buildPayload: (batch) => buildWatchlistPayload([...batch]),
+        send: (payload) => client.sync.watchlist.add({ body: payload }),
+      }),
+      ...await syncAction({
+        items: ratingItems,
+        buildPayload: (batch) => buildRatingsPayload([...batch]),
+        send: (payload) => client.sync.ratings.add({ body: payload }),
+      }),
+      ...await syncLists({ listItems, client, syncAction, onError }),
+    ];
+
+    const syncedCount = outcomes.reduce(
+      (total, outcome) => total + outcome.synced,
+      0,
+    );
+    const rejected = outcomes.flatMap((outcome) => outcome.rejected);
 
     onComplete?.(!signal?.aborted);
-    return { errorCount: getErrorCount(), unresolved, ambiguous };
+    return {
+      syncedCount,
+      errorCount: getErrorCount(),
+      unresolved,
+      rejected,
+      ambiguous,
+    };
   } catch (err) {
     onComplete?.(false);
     throw err;

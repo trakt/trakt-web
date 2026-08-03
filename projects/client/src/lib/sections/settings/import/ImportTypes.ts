@@ -84,8 +84,10 @@ export interface AmbiguousImportItem {
 }
 
 export interface ImportSyncResult {
+  syncedCount: number;
   errorCount: number;
-  unresolved: UniversalImportItem[];
+  unresolved: ReadonlyArray<UniversalImportItem>;
+  rejected: ReadonlyArray<UniversalImportItem>;
   ambiguous: AmbiguousImportItem[];
 }
 

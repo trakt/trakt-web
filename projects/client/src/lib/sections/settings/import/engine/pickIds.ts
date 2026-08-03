@@ -2,6 +2,7 @@ import type { ImportIds } from '../ImportTypes.ts';
 
 export type IdPriority = ReadonlyArray<keyof ImportIds>;
 
+export const ALL_IDS: IdPriority = ['imdb', 'tmdb', 'tvdb', 'trakt'];
 export const MOVIE_IDS: IdPriority = ['imdb', 'tmdb', 'trakt'];
 export const SHOW_IDS: IdPriority = ['imdb', 'tvdb', 'trakt'];
 export const EPISODE_IDS: IdPriority = ['tvdb', 'trakt'];
