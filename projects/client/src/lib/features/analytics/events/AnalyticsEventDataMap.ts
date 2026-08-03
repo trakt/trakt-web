@@ -63,6 +63,7 @@ type ImportCompletedType = {
   successCount: number;
   failedCount: number;
   unresolvedCount: number;
+  rejectedCount: number;
   ambiguousCount: number;
   duration: number;
 };

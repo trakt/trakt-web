@@ -64,8 +64,10 @@
     selectedActions: ImportActionSelection;
     episodeMatch: EpisodeMatchMode;
     parsedItems: ReadonlyArray<UniversalImportItem>;
+    syncedCount: number;
     errorCount: number;
     unresolved: ReadonlyArray<UniversalImportItem>;
+    rejected: ReadonlyArray<UniversalImportItem>;
     ambiguous: ReadonlyArray<AmbiguousImportItem>;
     parseError: string | null;
     matchProcessedCount: number;
@@ -79,8 +81,10 @@
     status: "idle",
     parsedItems: [],
     processedCount: 0,
+    syncedCount: 0,
     errorCount: 0,
     unresolved: [],
+    rejected: [],
     ambiguous: [],
     parseError: null,
     totalCount: 0,
@@ -170,13 +174,15 @@
     abortController = new AbortController();
     const startTime = Date.now();
     state.processedCount = 0;
+    state.syncedCount = 0;
     state.errorCount = 0;
     state.matchProcessedCount = 0;
     state.matchTotalCount = 0;
     state.status = "syncing";
 
     try {
-      const { errorCount, unresolved, ambiguous } = await syncToTrakt(
+      const { syncedCount, errorCount, unresolved, rejected, ambiguous } =
+        await syncToTrakt(
         itemsToImport,
         {
           signal: abortController.signal,
@@ -202,11 +208,11 @@
       );
 
       const duration = Date.now() - startTime;
-      const successCount = totalToImport - errorCount - unresolved.length -
-        ambiguous.length;
 
+      state.syncedCount = syncedCount;
       state.errorCount = errorCount;
       state.unresolved = unresolved;
+      state.rejected = rejected;
       state.ambiguous = ambiguous;
 
       record(AnalyticsEvent.ImportCompleted, {
@@ -215,9 +221,10 @@
         historyCount: countsToImport.history,
         watchlistCount: countsToImport.watchlist,
         ratingsCount: countsToImport.ratings,
-        successCount,
+        successCount: syncedCount,
         failedCount: errorCount,
         unresolvedCount: unresolved.length,
+        rejectedCount: rejected.length,
         ambiguousCount: ambiguous.length,
         duration,
       });
@@ -241,21 +248,25 @@
   ) {
     if (picked.length > 0) {
       abortController = new AbortController();
-      const { errorCount } = await syncToTrakt(picked, {
-        signal: abortController.signal,
-        episodeMatch: state.episodeMatch,
-        onProgress: () => {},
-        onError: (message) => {
-          // FIXME: properly deal with this when tackling https://github.com/trakt/trakt-web/issues/2055
-          console.error(message);
-        },
-        onStart: () => {
-          importInProgress.next(true);
-        },
-        onComplete: invalidateImported,
-      });
+      const { syncedCount, errorCount, unresolved, rejected } =
+        await syncToTrakt(picked, {
+          signal: abortController.signal,
+          episodeMatch: state.episodeMatch,
+          onProgress: () => {},
+          onError: (message) => {
+            // FIXME: properly deal with this when tackling https://github.com/trakt/trakt-web/issues/2055
+            console.error(message);
+          },
+          onStart: () => {
+            importInProgress.next(true);
+          },
+          onComplete: invalidateImported,
+        });
 
+      state.syncedCount += syncedCount;
       state.errorCount += errorCount;
+      state.unresolved = [...state.unresolved, ...unresolved];
+      state.rejected = [...state.rejected, ...rejected];
     }
 
     state.unresolved = [...state.unresolved, ...skipped];
@@ -269,8 +280,10 @@
     state.episodeMatch = DEFAULT_EPISODE_MATCH_MODE;
     state.parsedItems = [];
     state.processedCount = 0;
+    state.syncedCount = 0;
     state.errorCount = 0;
     state.unresolved = [];
+    state.rejected = [];
     state.ambiguous = [];
     state.parseError = null;
     state.matchProcessedCount = 0;
@@ -375,9 +388,10 @@
           />
         {:else if state.status === "complete"}
           <ImportComplete
-            processedCount={state.processedCount}
+            syncedCount={state.syncedCount}
             errorCount={state.errorCount}
             unresolved={state.unresolved}
+            rejected={state.rejected}
             ambiguous={state.ambiguous}
             onimportpicked={importPicked}
             onreset={reset}

@@ -9,14 +9,16 @@
     AmbiguousImportItem,
     UniversalImportItem,
   } from "$lib/sections/settings/import/ImportTypes.ts";
+  import { toImportItemLabel } from "$lib/sections/settings/import/toImportItemLabel.ts";
   import { toUnresolvedCsv } from "$lib/sections/settings/import/toUnresolvedCsv.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { slide } from "svelte/transition";
 
   type ImportCompleteProps = {
-    processedCount: number;
+    syncedCount: number;
     errorCount: number;
     unresolved: ReadonlyArray<UniversalImportItem>;
+    rejected: ReadonlyArray<UniversalImportItem>;
     ambiguous: ReadonlyArray<AmbiguousImportItem>;
     onimportpicked: (
       picked: UniversalImportItem[],
@@ -26,20 +28,19 @@
   };
 
   const {
-    processedCount,
+    syncedCount,
     errorCount,
     unresolved,
+    rejected,
     ambiguous,
     onimportpicked,
     onreset,
   }: ImportCompleteProps = $props();
 
-  const successCount = $derived(
-    processedCount - errorCount - unresolved.length - ambiguous.length,
-  );
+  const skipped = $derived([...unresolved, ...rejected]);
 
   const hasBothSections = $derived(
-    ambiguous.length > 0 && unresolved.length > 0,
+    ambiguous.length > 0 && skipped.length > 0,
   );
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
@@ -80,7 +81,7 @@
   }
 
   function downloadUnresolved() {
-    const blob = new Blob([toUnresolvedCsv(unresolved)], {
+    const blob = new Blob([toUnresolvedCsv(skipped)], {
       type: "text/csv",
     });
     downloadFile(blob, "trakt-import-skipped.csv");
@@ -161,12 +162,12 @@
 {#snippet unresolvedSection()}
   <div class="import-complete-section">
     <p class="secondary">
-      {m.import_complete_unresolved({ count: unresolved.length })}
+      {m.import_complete_unresolved({ count: skipped.length })}
     </p>
     <ul class="import-complete-unresolved">
-      {#each unresolved as item (item)}
+      {#each skipped as item (item)}
         <li>
-          <span class="ellipsis item-title">{item.title}</span>
+          <span class="ellipsis item-title">{toImportItemLabel(item)}</span>
           {#if item.year != null}
             <span class="tag secondary">{item.year}</span>
           {/if}
@@ -190,7 +191,7 @@
 <div class="trakt-import-complete" transition:slide={{ duration: 150, axis: "y" }}>
   <div class="import-complete-summary">
     <p class="secondary">
-      {m.import_complete_synced({ count: successCount })}
+      {m.import_complete_synced({ count: syncedCount })}
     </p>
     {#if errorCount > 0}
       <p class="secondary">
@@ -220,7 +221,7 @@
     />
   {:else if ambiguous.length > 0}
     {@render ambiguousSection()}
-  {:else if unresolved.length > 0}
+  {:else if skipped.length > 0}
     {@render unresolvedSection()}
   {/if}
 

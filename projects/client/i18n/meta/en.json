@@ -5347,8 +5347,8 @@
       "description": "Aria-label for the import more button."
     },
     "import_complete_unresolved": {
-      "default": "{count} movies couldn't be matched and were skipped:",
-      "description": "Text shown at the end of an import introducing the list of movies that could not be matched to the catalog.",
+      "default": "{count} items couldn't be matched and were skipped:",
+      "description": "Text shown at the end of an import introducing the list of items that could not be matched to the catalog.",
       "variables": {
         "count": {
           "type": "number"
