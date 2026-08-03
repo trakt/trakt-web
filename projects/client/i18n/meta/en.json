@@ -10043,9 +10043,75 @@
       "default": "Please enter an application name.",
       "description": "Validation message shown when the API application name is empty."
     },
+    "validation_text_app_name_too_long": {
+      "default": "Keep the name to {count} characters or fewer.",
+      "description": "Validation message shown when the API application name exceeds the maximum length the server accepts.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "validation_text_app_description_too_long": {
+      "default": "Keep the description to {count} characters or fewer.",
+      "description": "Validation message shown when the API application description exceeds the maximum length the server accepts.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "validation_text_app_redirect_uris": {
       "default": "Add at least one redirect URI.",
       "description": "Validation message shown when no redirect URI has been provided."
+    },
+    "validation_text_app_redirect_uris_invalid": {
+      "default": "Enter one full redirect URI per line, without a query string or fragment.",
+      "description": "Validation message shown when a redirect URI is not a full URI or carries a query string or fragment."
+    },
+    "validation_text_app_redirect_uris_too_many": {
+      "default": "Add at most {count} redirect URIs.",
+      "description": "Validation message shown when more redirect URIs are listed than the server accepts.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "validation_text_app_redirect_uris_too_long": {
+      "default": "Redirect URIs must total {count} characters or fewer.",
+      "description": "Validation message shown when the combined length of all redirect URIs exceeds what the server accepts.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "validation_text_app_origins_too_many": {
+      "default": "Add at most {count} origins.",
+      "description": "Validation message shown when more JavaScript (CORS) origins are listed than the server accepts.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "validation_text_app_origins_too_long": {
+      "default": "Origins must total {count} characters or fewer.",
+      "description": "Validation message shown when the combined length of all JavaScript (CORS) origins exceeds what the server accepts.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "validation_text_app_origins": {
+      "default": "Enter one origin per line, like https://example.com. No wildcards or paths.",
+      "description": "Validation message shown when a JavaScript (CORS) origin is not a bare http(s) origin."
+    },
+    "error_text_app_save_failed": {
+      "default": "Saving the application failed. Please try again.",
+      "description": "Generic error shown when creating or updating an API application fails unexpectedly."
     },
     "heading_edit_api_application": {
       "default": "Edit application",
