@@ -1,7 +1,7 @@
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import { describe, expect, it } from 'vitest';
 import { MAX_DATE } from '../../../../utils/constants.ts';
-import { formatSortValue } from './formatSortValue.ts';
+import { formatSortValue, groupByReleased } from './formatSortValue.ts';
 
 describe('formatSortValue', () => {
   describe('sortBy: added', () => {
@@ -135,6 +135,24 @@ describe('formatSortValue', () => {
         },
       } as unknown as ListItem;
       expect(formatSortValue(seasonItem, 'title')).toBe('T');
+    });
+  });
+
+  describe('groupByReleased', () => {
+    it('should return release year if valid date', () => {
+      const validDateItem = {
+        type: 'movie',
+        entry: { airDate: new Date('2023-02-01') },
+      } as unknown as ListItem;
+      expect(groupByReleased(validDateItem)).toBe('2023');
+    });
+
+    it('should return TBA if max date', () => {
+      const maxDateItem = {
+        type: 'movie',
+        entry: { airDate: MAX_DATE },
+      } as unknown as ListItem;
+      expect(groupByReleased(maxDateItem)).toBe('TBA');
     });
   });
 
