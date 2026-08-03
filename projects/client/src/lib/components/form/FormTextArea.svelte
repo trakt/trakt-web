@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { onMount } from "svelte";
+  import { createValidationState } from "./_internal/createValidationState.ts";
   import FormElementWrapper from "./_internal/FormElementWrapper.svelte";
   import type { FormInputProps } from "./models/FormInputProps";
 
@@ -22,32 +22,29 @@
 
   let textAreaElement: HTMLTextAreaElement;
 
-  const errorText = writable<string | undefined>(undefined);
+  const { hasError, validate } = createValidationState(() => validation);
 
   const handleInput = (e: Event) => {
     const newValue = (e.target as HTMLInputElement).value;
 
-    if (validation) {
-      const isValid = validation.isValid(newValue);
-      errorText.set(isValid ? undefined : validation.errorText);
-      textAreaElement.setCustomValidity(!isValid ? validation.errorText : "");
-    }
-
+    validate(textAreaElement, newValue);
     onChange(newValue);
   };
 
   onMount(() => {
+    if (value) {
+      validate(textAreaElement, value);
+    }
+
     if (!autofocus) return;
 
     requestAnimationFrame(() => {
       textAreaElement.focus();
     });
   });
-
-  const hasError = $derived(Boolean($errorText));
 </script>
 
-<FormElementWrapper {validation} {hasError}>
+<FormElementWrapper {validation} hasError={$hasError} {errorLabelId}>
   <textarea
     bind:this={textAreaElement}
     {disabled}
@@ -56,8 +53,8 @@
     {rows}
     {required}
     oninput={handleInput}
-    aria-invalid={hasError ? "true" : "false"}
-    aria-describedby={hasError ? errorLabelId : undefined}
+    aria-invalid={$hasError ? "true" : "false"}
+    aria-describedby={$hasError ? errorLabelId : undefined}
     class="trakt-form-textarea"
   ></textarea>
 </FormElementWrapper>

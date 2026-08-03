@@ -8,6 +8,8 @@ export type ApiApplicationFormProps = {
     originsText: string;
   };
   isBusy?: boolean;
+  errorMessage: string | Nil;
+  onDismissError: () => void;
   confirmButtonText: string;
   confirmButtonLabel: string;
   onSubmit: (values: ApiApplicationFormValues) => void;

@@ -10,10 +10,13 @@ type CreateApiApplicationParams = {
   origins: ReadonlyArray<string>;
 } & ApiParams;
 
+export type CreateApiApplicationResult =
+  | { ok: true; application?: ApiApplication }
+  | { ok: false };
+
 /**
  * Registers a new OAuth application for the authenticated user. Resolves to the
- * created {@link ApiApplication} (including its client id/secret) on success, or
- * `null` when the request fails.
+ * created {@link ApiApplication} (including its client id/secret) on success.
  */
 export async function createApiApplicationRequest(
   {
@@ -23,7 +26,7 @@ export async function createApiApplicationRequest(
     redirectUris,
     origins,
   }: CreateApiApplicationParams,
-): Promise<ApiApplication | null> {
+): Promise<CreateApiApplicationResult> {
   const response = await rawApiFetch({
     fetch,
     path: '/v3/users/me/applications',
@@ -40,10 +43,12 @@ export async function createApiApplicationRequest(
   });
 
   if (!response.ok) {
-    return null;
+    return { ok: false };
   }
 
-  return mapToApiApplication(
-    ApiApplicationResponseSchema.parse(await response.json()),
-  );
+  const parsed = ApiApplicationResponseSchema.safeParse(await response.json());
+
+  return parsed.success
+    ? { ok: true, application: mapToApiApplication(parsed.data) }
+    : { ok: true };
 }

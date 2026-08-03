@@ -1,33 +1,37 @@
-import type { ApiApplication } from '$lib/requests/models/ApiApplication.ts';
+import * as m from '$lib/features/i18n/messages.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { createApiApplicationRequest } from '$lib/requests/queries/apps/createApiApplicationRequest.ts';
+import {
+  createApiApplicationRequest,
+  type CreateApiApplicationResult,
+} from '$lib/requests/queries/apps/createApiApplicationRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { BehaviorSubject } from 'rxjs';
-
-type CreateApiApplicationInput = {
-  name: string;
-  description?: string;
-  redirectUris: ReadonlyArray<string>;
-  origins: ReadonlyArray<string>;
-};
+import type { ApiApplicationFormValues } from './ApiApplicationFormValues.ts';
 
 export function useCreateApiApplication() {
   const isCreating = new BehaviorSubject(false);
+  const error = new BehaviorSubject<string | null>(null);
   const { invalidate } = useInvalidator();
 
   const createApplication = async (
-    input: CreateApiApplicationInput,
-  ): Promise<ApiApplication | null> => {
+    input: ApiApplicationFormValues,
+  ): Promise<CreateApiApplicationResult> => {
     isCreating.next(true);
+    error.next(null);
 
     try {
-      const created = await createApiApplicationRequest(input);
+      const result = await createApiApplicationRequest(input);
 
-      if (created) {
-        await invalidate(InvalidateAction.App.Create);
+      if (!result.ok) {
+        error.next(m.error_text_app_save_failed());
+        return result;
       }
 
-      return created;
+      await invalidate(InvalidateAction.App.Create);
+      return result;
+    } catch {
+      error.next(m.error_text_app_save_failed());
+      return { ok: false };
     } finally {
       isCreating.next(false);
     }
@@ -35,6 +39,8 @@ export function useCreateApiApplication() {
 
   return {
     isCreating: isCreating.asObservable(),
+    error: error.asObservable(),
+    dismissError: () => error.next(null),
     createApplication,
   };
 }

@@ -10,15 +10,22 @@
   import SettingsSection from "./_internal/SettingsSection.svelte";
   import SettingsVipUpsell from "./_internal/SettingsVipUpsell.svelte";
 
-  const { createApplication, isCreating } = useCreateApiApplication();
+  const { createApplication, isCreating, error, dismissError } =
+    useCreateApiApplication();
 
   async function handleSubmit(values: ApiApplicationFormValues) {
-    const created = await createApplication(values);
+    const result = await createApplication(values);
 
-    if (created) {
-      // eslint-disable-next-line svelte/no-navigation-without-resolve
-      goto(UrlBuilder.settings.appsApiDetail(created.id));
+    if (!result.ok) {
+      return;
     }
+
+    const destination = result.application
+      ? UrlBuilder.settings.appsApiDetail(result.application.id)
+      : UrlBuilder.settings.appsApi();
+
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
+    goto(destination);
   }
 
   function handleCancel() {
@@ -38,6 +45,8 @@
     crumbHref={UrlBuilder.settings.appsApi()}
     crumbLabel={m.heading_api_applications()}
     isBusy={$isCreating}
+    errorMessage={$error}
+    onDismissError={dismissError}
     confirmButtonText={m.button_text_create()}
     confirmButtonLabel={m.button_label_create_app()}
     onSubmit={handleSubmit}
