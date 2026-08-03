@@ -34,6 +34,7 @@ export const EpisodeIntlProvider: EpisodeIntl = {
   premiereText: () => m.tag_text_premiere(),
   finaleText: () => m.tag_text_finale(),
   newText: () => m.tag_text_new(),
+  newSeasonText: () => m.tag_text_new_season(),
   episodeTypeText,
   timestampText: ({ date, type }) => {
     const now = new Date();

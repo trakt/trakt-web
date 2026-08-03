@@ -382,6 +382,10 @@
       "default": "New",
       "description": "Text for the tag that indicates a recently released episode (within the last 7 days). This should be as short as possible."
     },
+    "tag_text_new_season": {
+      "default": "New Season",
+      "description": "Text for the tag that indicates a release that starts a new season, whether it is a single episode, several episodes on the same day, or a full season drop. This should be as short as possible."
+    },
     "tag_text_series_premiere": {
       "default": "Series Premiere",
       "description": "Text for the tag that indicates the first ever episode of a show. Shown on episode detail surfaces."

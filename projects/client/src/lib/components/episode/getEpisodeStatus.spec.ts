@@ -8,13 +8,74 @@ import { getEpisodeStatus } from './getEpisodeStatus.ts';
 
 describe('getEpisodeStatus', () => {
   describe('premiere', () => {
+    it('returns "premiere" for mid_season_premiere', () => {
+      expect(getEpisodeStatus(EpisodePremiereType.mid_season_premiere))
+        .toBe('premiere');
+    });
+  });
+
+  describe('new season', () => {
     it.each([
       EpisodePremiereType.series_premiere,
       EpisodePremiereType.season_premiere,
-      EpisodePremiereType.mid_season_premiere,
-    ])('returns "premiere" for %s', (type) => {
-      expect(getEpisodeStatus(type)).toBe('premiere');
+    ])('returns "new-season" for %s', (type) => {
+      expect(getEpisodeStatus(type)).toBe('new-season');
     });
+
+    it.each(['full_season', 'multiple_episodes'] as const)(
+      'returns "new-season" for %s coalescing a season premiere',
+      (type) => {
+        expect(
+          getEpisodeStatus(type, {
+            episodes: [
+              { type: EpisodePremiereType.season_premiere },
+              { type: 'standard' },
+            ],
+          }),
+        ).toBe('new-season');
+      },
+    );
+
+    it('returns undefined for coalesced episodes without a season premiere', () => {
+      expect(
+        getEpisodeStatus('multiple_episodes', {
+          episodes: [
+            { type: 'standard' },
+            { type: EpisodeFinaleType.season_finale },
+          ],
+        }),
+      ).toBeUndefined();
+    });
+
+    it('returns "new-season" for a future season premiere', () => {
+      const tomorrow = new Date(Date.now() + time.days(1));
+
+      expect(
+        getEpisodeStatus('multiple_episodes', {
+          releaseDate: tomorrow,
+          episodes: [{ type: EpisodePremiereType.season_premiere }],
+        }),
+      ).toBe('new-season');
+    });
+
+    it('does not treat a mid-season premiere as a new season', () => {
+      expect(
+        getEpisodeStatus('multiple_episodes', {
+          episodes: [{ type: EpisodePremiereType.mid_season_premiere }],
+        }),
+      ).toBeUndefined();
+    });
+
+    it.each(['standard', 'unknown'] as const)(
+      'ignores coalesced episodes for non-computed type %s',
+      (type) => {
+        expect(
+          getEpisodeStatus(type, {
+            episodes: [{ type: EpisodePremiereType.season_premiere }],
+          }),
+        ).toBeUndefined();
+      },
+    );
   });
 
   describe('finale', () => {
@@ -66,7 +127,7 @@ describe('getEpisodeStatus', () => {
       EpisodePremiereType.season_premiere,
     ])('does not gate non-mid-season %s', (type) => {
       expect(getEpisodeStatus(type, { isLatestAired: false }))
-        .toBe(type.endsWith('finale') ? 'finale' : 'premiere');
+        .toBe(type.endsWith('finale') ? 'finale' : 'new-season');
     });
   });
 
@@ -110,7 +171,7 @@ describe('getEpisodeStatus', () => {
         getEpisodeStatus(EpisodePremiereType.season_premiere, {
           releaseDate: threeDaysAgo,
         }),
-      ).toBe('premiere');
+      ).toBe('new-season');
     });
   });
 });
