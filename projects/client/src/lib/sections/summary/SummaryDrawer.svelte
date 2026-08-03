@@ -27,6 +27,7 @@
   import SeasonsDrawerHost from "./components/seasons/SeasonsDrawerHost.svelte";
   import SentimentDrawer from "./components/sentiment/SentimentDrawer.svelte";
   import SocialDrawerHost from "./components/social/SocialDrawerHost.svelte";
+  import SoundtrackDrawerHost from "./components/soundtrack/SoundtrackDrawerHost.svelte";
   import TriviaDrawerHost from "./components/trivia/TriviaDrawerHost.svelte";
   import VideoDrawerHost from "./components/videos/VideoDrawerHost.svelte";
 
@@ -119,6 +120,14 @@
 
 {#if drawer === SummaryDrawers.Trivia && media}
   <TriviaDrawerHost {media} onClose={close} />
+{/if}
+
+{#if drawer === SummaryDrawers.Soundtrack && media}
+  <RenderForFeature flag={FeatureFlag.Soundtrack}>
+    {#snippet enabled()}
+      <SoundtrackDrawerHost {media} onClose={close} />
+    {/snippet}
+  </RenderForFeature>
 {/if}
 
 {#if drawer === SummaryDrawers.History}

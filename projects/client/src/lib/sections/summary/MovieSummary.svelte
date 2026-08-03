@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
 
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
@@ -16,6 +18,7 @@
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
   import Sentiment from "./components/sentiment/Sentiment.svelte";
+  import SoundtrackList from "./components/soundtrack/SoundtrackList.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
   import SummaryDrawer from "./SummaryDrawer.svelte";
@@ -76,6 +79,12 @@
 <Comments {media} type="movie" />
 
 <VideoList slug={media.slug} {videos} type="movie" />
+
+<RenderForFeature flag={FeatureFlag.Soundtrack}>
+  {#snippet enabled()}
+    <SoundtrackList {media} />
+  {/snippet}
+</RenderForFeature>
 
 <RelatedList
   title={m.list_title_related_movies()}
