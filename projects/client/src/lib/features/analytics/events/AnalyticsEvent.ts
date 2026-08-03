@@ -50,6 +50,7 @@ export const AnalyticsEvent = {
   CheckIn: buildEventKey(MEDIA_ACTION_PREFIX, 'check-in'),
   Extras: buildEventKey(MEDIA_ACTION_PREFIX, 'extras'),
   Trailer: buildEventKey(MEDIA_ACTION_PREFIX, 'trailer'),
+  Soundtrack: buildEventKey(MEDIA_ACTION_PREFIX, 'soundtrack'),
   StreamOn: buildEventKey(MEDIA_ACTION_PREFIX, 'stream-on'),
   HideRecommendation: buildEventKey(MEDIA_ACTION_PREFIX, 'hide-recommendation'),
 
