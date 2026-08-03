@@ -28,6 +28,13 @@ type FollowType = {
 };
 type BlockType = { action: 'block' | 'unblock' };
 type ExtrasType = { slug: string; type: MediaVideoType };
+// `matched_on` records which rewording resolved the track. It is deliberately
+// absent from the UI and reported here instead, so match quality can be
+// measured against how often a track actually gets played.
+type SoundtrackType = SourceType & {
+  position: number;
+  matched_on: 'credit' | 'title' | 'artist' | 'both';
+};
 type CommentType = { action: 'post' | 'reply' | 'edit' };
 type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
 type CalendarType = { action: 'reset' | 'next' | 'previous' };
@@ -103,6 +110,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.CheckIn]: CheckInType;
   [AnalyticsEvent.Extras]: ExtrasType;
   [AnalyticsEvent.Trailer]: { slug: string };
+  [AnalyticsEvent.Soundtrack]: SoundtrackType;
   [AnalyticsEvent.StreamOn]: StreamOnType;
   [AnalyticsEvent.HideRecommendation]: { type: MediaType };
 
