@@ -5,15 +5,16 @@ type MediaInfoPathParams = {
   type: MediaType;
   slug: string;
   infoType: number;
+  infoVersion?: number;
   locale: AvailableLocale;
 };
 
 // `locale` carries the full tag; the API resolves it to an exact, same-language,
 // or English row, so every info query must send it or readers get English.
 export function toMediaInfoPath(
-  { type, slug, infoType, locale }: MediaInfoPathParams,
+  { type, slug, infoType, infoVersion = 1, locale }: MediaInfoPathParams,
 ) {
   const params = new URLSearchParams({ locale });
 
-  return `/v3/media/${type}/${slug}/info/${infoType}/version/1?${params.toString()}`;
+  return `/v3/media/${type}/${slug}/info/${infoType}/version/${infoVersion}?${params.toString()}`;
 }
