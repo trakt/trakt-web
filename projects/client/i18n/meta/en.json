@@ -10016,7 +10016,15 @@
     },
     "text_soundtrack_playable_ratio": {
       "default": "{playable} of {total} playable",
-      "description": "Shows how many of a soundtrack's credited tracks can be played. 'playable' is the number that can be played, 'total' is the number of credited tracks."
+      "description": "Shows how many of a soundtrack's credited tracks can be played. 'playable' is the number that can be played, 'total' is the number of credited tracks.",
+      "variables": {
+        "playable": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
     },
     "text_soundtrack_pick_a_track": {
       "default": "Pick a track to play it here.",
