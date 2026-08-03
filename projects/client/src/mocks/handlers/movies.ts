@@ -3,6 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { OfficialListsResponseMock } from '$mocks/data/lists/response/OfficialListsResponseMock.ts';
 import { MovieHereticCommentsResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticCommentsResponseMock.ts';
 import { MovieHereticSentimentResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticSentimentResponseMock.ts';
+import { MovieHereticSoundtrackResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticSoundtrackResponseMock.ts';
 import { MoviesAnticipatedResponseMock } from '../data/movies/response/MoviesAnticipatedResponseMock.ts';
 import { MoviesPopularResponseMock } from '../data/movies/response/MoviesPopularResponseMock.ts';
 import { MoviesTrendingResponseMock } from '../data/movies/response/MoviesTrendingResponseMock.ts';
@@ -146,6 +147,12 @@ export const movies = [
     `http://localhost/v3/media/movie/${MovieHereticResponseMock.ids.slug}/info/0/version/1`,
     () => {
       return HttpResponse.json(MovieHereticSentimentResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/v3/media/movie/${MovieHereticResponseMock.ids.slug}/info/15/version/1`,
+    () => {
+      return HttpResponse.json(MovieHereticSoundtrackResponseMock);
     },
   ),
   http.get(

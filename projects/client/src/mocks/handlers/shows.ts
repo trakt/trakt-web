@@ -7,6 +7,7 @@ import { EpisodeSiloPeopleResponseMock } from '$mocks/data/summary/episodes/silo
 import { EpisodeSiloWatchNowResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloWatchNowResponseMock.ts';
 import { ShowSiloCommentsResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloCommentsResponseMock.ts';
 import { ShowSiloSentimentResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloSentimentResponseMock.ts';
+import { ShowSiloSoundtrackResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloSoundtrackResponseMock.ts';
 import { ShowsAnticipatedResponseMock } from '../data/shows/response/ShowsAnticipatedResponseMock.ts';
 import { ShowsPopularResponseMock } from '../data/shows/response/ShowsPopularResponseMock.ts';
 import { ShowsTrendingResponseMock } from '../data/shows/response/ShowsTrendingResponseMock.ts';
@@ -273,6 +274,12 @@ export const shows = [
     `http://localhost/v3/media/show/${ShowSiloResponseMock.ids.slug}/info/0/version/1`,
     () => {
       return HttpResponse.json(ShowSiloSentimentResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/v3/media/show/${ShowSiloResponseMock.ids.slug}/info/15/version/1`,
+    () => {
+      return HttpResponse.json(ShowSiloSoundtrackResponseMock);
     },
   ),
   http.get(
