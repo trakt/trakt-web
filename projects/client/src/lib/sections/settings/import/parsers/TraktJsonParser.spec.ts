@@ -231,6 +231,23 @@ describe('TraktJsonParser', () => {
       expect(result).toHaveLength(1);
       expect(result[0]?.watched_at).toBe('2024-01-19T19:14:43.000Z');
     });
+
+    it('honours an explicit episode type', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          type: 'episode',
+          id: { tvdb: 3485337 },
+          watched_at: '2022-07-31T23:57:00Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result[0]).toMatchObject({
+        type: 'episode',
+        ids: { tvdb: 3485337 },
+      });
+    });
   });
 
   describe('parse – flat *_id format', () => {
@@ -327,6 +344,35 @@ describe('TraktJsonParser', () => {
       const result = await TraktJsonParser.parse([makeFile('movies.json')]);
 
       expect(result).toHaveLength(0);
+    });
+
+    it('honours an explicit episode type', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          type: 'episode',
+          tmdb_id: 3485337,
+          watched_at: '2022-07-31T23:57:00Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { tmdb: 3485337 },
+      });
+    });
+
+    it('honours an explicit show type', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        { type: 'series', tmdb_id: 1396, title: 'Breaking Bad' },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result[0]).toMatchObject({ type: 'show', ids: { tmdb: 1396 } });
     });
   });
 

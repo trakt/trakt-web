@@ -83,22 +83,40 @@ function toWatchedAt(value?: string): string | undefined {
   return toISOString(value);
 }
 
-function isFlatEntry(entry: TraktJsonEntry): boolean {
-  return (
-    entry.id !== undefined &&
-    entry.movie === undefined &&
-    entry.show === undefined &&
-    entry.episode === undefined
-  );
+function hasNestedMedia(entry: TraktJsonEntry): boolean {
+  return entry.movie !== undefined ||
+    entry.show !== undefined ||
+    entry.episode !== undefined;
 }
 
-function parseFlatEntry(entry: TraktJsonEntry): UniversalImportItem | null {
-  const ids = entry.id ?? {};
-  const action = inferAction(entry);
+function toFlatIds(entry: TraktJsonEntry): TraktJsonIds | undefined {
+  if (hasNestedMedia(entry)) return undefined;
+  if (entry.id !== undefined) return entry.id;
 
+  if (
+    entry.trakt_id !== undefined ||
+    entry.imdb_id !== undefined ||
+    entry.tmdb_id !== undefined ||
+    entry.tvdb_id !== undefined
+  ) {
+    return {
+      trakt: entry.trakt_id,
+      imdb: entry.imdb_id,
+      tmdb: entry.tmdb_id,
+      tvdb: entry.tvdb_id,
+    };
+  }
+
+  return undefined;
+}
+
+function parseFlatEntry(
+  entry: TraktJsonEntry,
+  ids: TraktJsonIds,
+): UniversalImportItem {
   return {
-    action,
-    type: 'movie',
+    action: inferAction(entry),
+    type: entry.type ? toType(entry.type) : 'movie',
     ids: {
       trakt: ids.trakt,
       imdb: ids.imdb,
@@ -115,47 +133,9 @@ function parseFlatEntry(entry: TraktJsonEntry): UniversalImportItem | null {
   };
 }
 
-function isMultiIdFlatEntry(entry: TraktJsonEntry): boolean {
-  return (
-    (entry.imdb_id !== undefined ||
-      entry.tvdb_id !== undefined ||
-      entry.tmdb_id !== undefined ||
-      entry.trakt_id !== undefined) &&
-    entry.movie === undefined &&
-    entry.show === undefined &&
-    entry.episode === undefined
-  );
-}
-
-function parseMultiIdFlatEntry(
-  entry: TraktJsonEntry,
-): UniversalImportItem | null {
-  const action = inferAction(entry);
-
-  return {
-    action,
-    type: 'movie',
-    ids: {
-      trakt: entry.trakt_id,
-      imdb: entry.imdb_id,
-      tmdb: entry.tmdb_id,
-      tvdb: entry.tvdb_id,
-    },
-    title: entry.title,
-    year: entry.year,
-    watched_at: toWatchedAt(
-      entry.watched_at ?? entry.date_watched ?? entry.created_at,
-    ),
-    rating: entry.rating,
-    rated_at: toISOString(entry.rated_at),
-  };
-}
-
-function parseTraktJsonEntry(
-  entry: TraktJsonEntry,
-): UniversalImportItem | null {
-  if (isFlatEntry(entry)) return parseFlatEntry(entry);
-  if (isMultiIdFlatEntry(entry)) return parseMultiIdFlatEntry(entry);
+function parseTraktJsonEntry(entry: TraktJsonEntry): UniversalImportItem {
+  const flatIds = toFlatIds(entry);
+  if (flatIds) return parseFlatEntry(entry, flatIds);
 
   const type = entry.type ? toType(entry.type) : inferType(entry);
   const action = inferAction(entry);
@@ -187,7 +167,6 @@ function parseTraktJsonEntry(
 function parseEntries(entries: TraktJsonEntry[]): UniversalImportItem[] {
   return entries
     .map(parseTraktJsonEntry)
-    .filter((item): item is UniversalImportItem => item !== null)
     .filter(isValidItem);
 }
 
