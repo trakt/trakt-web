@@ -41,7 +41,7 @@ export function useGuardedHref(href: string | Nil) {
          * TODO: when we have v3 auth flow we can improve by having a returnUrl
          * this would return real users to what they wanted to access instead of home page after login
          */
-        return authorized ? href : UrlBuilder.home();
+        return authorized ? href : UrlBuilder.landing();
       }),
     );
 

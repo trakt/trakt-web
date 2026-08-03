@@ -1,10 +1,21 @@
 <script lang="ts">
+  import { mapToToken } from "$lib/features/auth/mapToToken";
+  import { postToken } from "$lib/features/auth/postToken";
   import { getUserManager } from "$lib/features/auth/stores/userManager";
   import { FETCH_ERROR_EVENT } from "$lib/features/errors/constants";
   import { error as printError } from "$lib/utils/console/print.ts";
   import { setCacheBuster } from "$lib/utils/url/setCacheBuster";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { User } from "oidc-client-ts";
   import { onMount } from "svelte";
+
+  const storeSession = async (user: User | Nil) => {
+    if (!user) {
+      return;
+    }
+
+    await postToken(mapToToken(user));
+  };
 
   const navigateToHome = () => {
     const homeUrl = new URL(
@@ -17,6 +28,7 @@
   onMount(() => {
     getUserManager()
       ?.signinCallback()
+      .then(storeSession)
       .then(navigateToHome)
       .catch((error) => {
         printError("Error during sign-in callback:", error);

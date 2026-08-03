@@ -158,7 +158,8 @@ export const UrlBuilder = {
   startWatching: (user: string, params: Record<string, string | number> = {}) =>
     `/users/${user}/start-watching${buildParamString(sanitizeParams(params))}`,
 
-  home: () => '/',
+  landing: () => '/',
+  home: () => '/home',
   welcome: () => '/welcome',
   shows: () => '/shows',
   discover: (params?: DiscoverUrlParams) => {
