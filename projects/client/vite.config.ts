@@ -38,7 +38,7 @@ function getGitCommitHash() {
 
 const GIT_COMMIT_HASH = getGitCommitHash();
 
-const MONOREPO_ROOT = findGitRoot(__dirname);
+const MONOREPO_ROOT = findGitRoot(import.meta.dirname);
 
 const TRAKT_TARGET_ENVIRONMENT = (() => {
   if (process.env.IS_CONTRIB) {
