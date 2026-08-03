@@ -126,6 +126,12 @@
   --width-trivia-card: min(var(--ni-480), 85vw);
   --height-trivia-card: var(--ni-308);
 
+  --height-soundtrack-row: var(--ni-44);
+  // Spotify's 152px embed lays out artwork, progress and Save side by side and
+  // clips itself under roughly 20rem of width.
+  --width-soundtrack-panel: var(--ni-340);
+  --height-soundtrack-panel-compact: var(--ni-80);
+
   --width-comment-thread-card: var(--width-comment-card);
   --height-comment-thread-card: var(--ni-480);
 

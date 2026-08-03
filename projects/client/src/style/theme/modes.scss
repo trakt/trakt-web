@@ -252,6 +252,10 @@
     var(--shade-20) 0%,
     color-mix(in srgb, var(--purple-950) 10%, var(--shade-10)) 100%
   );
+  --color-soundtrack-row-active-background: var(--purple-50);
+  --color-soundtrack-play-background: var(--purple-600);
+  --color-soundtrack-play-foreground: var(--shade-10);
+
   --color-vip-popular-tag: #fdc700;
   --color-vip-border-accent: var(--purple-600);
   --color-vip-surface-muted: var(--purple-50);
@@ -715,6 +719,14 @@
     var(--purple-950) 0%,
     var(--shade-1000) 100%
   );
+  --color-soundtrack-row-active-background: color-mix(
+    in srgb,
+    var(--purple-950) 45%,
+    transparent
+  );
+  --color-soundtrack-play-background: var(--purple-500);
+  --color-soundtrack-play-foreground: var(--shade-10);
+
   --color-vip-popular-tag: #fdc700;
   --color-vip-border-accent: var(--purple-500);
   --color-vip-surface-muted: var(--purple-950);
