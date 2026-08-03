@@ -106,6 +106,42 @@ describe('processChunks', () => {
     });
   });
 
+  describe('completed', () => {
+    it('pairs each response with the items that produced it', async () => {
+      const chunks = [[1, 2], [3]];
+
+      const result = await processChunks(
+        chunks,
+        identity,
+        succeed('ok'),
+        { onProgress: vi.fn(), onError: vi.fn() },
+      );
+
+      expect(result.completed).toEqual([
+        { items: [1, 2], response: 'ok' },
+        { items: [3], response: 'ok' },
+      ]);
+    });
+
+    it('omits chunks whose request failed', async () => {
+      const chunks = [[1], [2]];
+      let callCount = 0;
+      const sendRequest = () => {
+        callCount++;
+        return callCount === 1
+          ? Promise.reject(new Error('fail'))
+          : Promise.resolve('ok');
+      };
+
+      const result = await processChunks(chunks, identity, sendRequest, {
+        onProgress: vi.fn(),
+        onError: vi.fn(),
+      });
+
+      expect(result.completed).toEqual([{ items: [2], response: 'ok' }]);
+    });
+  });
+
   describe('initialProcessed offset', () => {
     it('starts progress count from initialProcessed', async () => {
       const chunks = [[1, 2]];
@@ -145,7 +181,7 @@ describe('processChunks', () => {
         { onProgress: vi.fn(), onError: vi.fn() },
       );
 
-      expect(result).toEqual({ processed: 0, errors: 0 });
+      expect(result).toEqual({ processed: 0, errors: 0, completed: [] });
     });
 
     it('passes the built payload to sendRequest', async () => {

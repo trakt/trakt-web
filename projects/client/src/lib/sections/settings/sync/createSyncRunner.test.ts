@@ -32,6 +32,33 @@ describe('createSyncRunner', () => {
     });
   });
 
+  describe('completed chunks', () => {
+    it('returns each response paired with the items that produced it', async () => {
+      const { run } = createSyncRunner({
+        onProgress: vi.fn(),
+        onError: vi.fn(),
+      });
+
+      const completed = await run([[1, 2], [3]], identity, succeed);
+
+      expect(completed).toEqual([
+        { items: [1, 2], response: 'ok' },
+        { items: [3], response: 'ok' },
+      ]);
+    });
+
+    it('omits chunks whose request failed', async () => {
+      const { run } = createSyncRunner({
+        onProgress: vi.fn(),
+        onError: vi.fn(),
+      });
+
+      const completed = await run([[1]], identity, fail('nope'));
+
+      expect(completed).toEqual([]);
+    });
+  });
+
   describe('error counting', () => {
     it('getErrorCount returns 0 when no errors occur', async () => {
       const { run, getErrorCount } = createSyncRunner({
