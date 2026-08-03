@@ -132,13 +132,26 @@ const documentCacheKey = {
   },
 };
 
-// StaleWhileRevalidate for fast cold loads.
-const navigationHandler = new StaleWhileRevalidate({
+const skipRedirectedDocuments = {
+  cacheWillUpdate: ({ response }: { response: Response }) =>
+    Promise.resolve(response.redirected ? null : response),
+};
+
+const navigationOptions = {
   cacheName: CacheKey.navigation,
   plugins: [
     documentCacheKey,
+    skipRedirectedDocuments,
     expiration(time.hours(12)),
   ],
+};
+
+// StaleWhileRevalidate for fast cold loads.
+const navigationHandler = new StaleWhileRevalidate(navigationOptions);
+
+const landingHandler = new NetworkFirst({
+  ...navigationOptions,
+  networkTimeoutSeconds: 3,
 });
 
 registerRoute(
@@ -153,6 +166,10 @@ registerRoute(
       // Remove _cb param and redirect
       url.searchParams.delete('_cb');
       return Response.redirect(url.toString(), 302);
+    }
+
+    if (url.pathname === '/') {
+      return await landingHandler.handle(context);
     }
 
     return await navigationHandler.handle(context);
