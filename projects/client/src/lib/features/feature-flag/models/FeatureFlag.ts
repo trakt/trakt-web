@@ -5,4 +5,5 @@ export enum FeatureFlag {
   Rewatching = 'rewatching',
   Leaderboard = 'leaderboard',
   ParentalGuide = 'parental-guide',
+  Soundtrack = 'soundtrack',
 }
