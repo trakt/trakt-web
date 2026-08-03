@@ -5,7 +5,7 @@ export const SoundtrackTrackSchema = z.object({
   title: z.string(),
   performer: z.string().nullish(),
   spotifyId: z.string().nullish(),
-  matchedOn: z.enum(['credit', 'title', 'artist', 'both']).nullish(),
+  matchedOn: z.string().nullish(),
   position: z.number(),
 });
 

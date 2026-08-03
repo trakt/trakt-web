@@ -30,10 +30,11 @@ type BlockType = { action: 'block' | 'unblock' };
 type ExtrasType = { slug: string; type: MediaVideoType };
 // `matched_on` records which rewording resolved the track. It is deliberately
 // absent from the UI and reported here instead, so match quality can be
-// measured against how often a track actually gets played.
+// measured against how often a track actually gets played. Left an open string
+// so a tier added upstream arrives as itself rather than as a neighbour.
 type SoundtrackType = SourceType & {
   position: number;
-  matched_on: 'credit' | 'title' | 'artist' | 'both';
+  matched_on: string;
 };
 type CommentType = { action: 'post' | 'reply' | 'edit' };
 type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
