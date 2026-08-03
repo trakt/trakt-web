@@ -3859,6 +3859,10 @@
       "default": "Personal",
       "description": "Text for the button that allows users to view their own activity."
     },
+    "button_text_smart_lists": {
+      "default": "Smart",
+      "description": "Text for the button that allows users to view their 'smart' lists."
+    },
     "page_title_unexpected_error": {
       "default": "Something went wrong",
       "description": "Title for the unexpected error page."
