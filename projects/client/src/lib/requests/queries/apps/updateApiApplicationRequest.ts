@@ -8,10 +8,14 @@ type UpdateApiApplicationParams = {
   origins: ReadonlyArray<string>;
 } & ApiParams;
 
+export type UpdateApiApplicationResult = {
+  ok: boolean;
+};
+
 /**
- * Updates the editable fields of an OAuth application the user owns. Resolves
- * to `true` when the update succeeds (HTTP 2xx). Credentials (`client_id`,
- * `client_secret`) and the approval state are never changed by this request.
+ * Updates the editable fields of an OAuth application the user owns.
+ * Credentials (`client_id`, `client_secret`) and the approval state are never
+ * changed by this request.
  */
 export async function updateApiApplicationRequest(
   {
@@ -22,7 +26,7 @@ export async function updateApiApplicationRequest(
     redirectUris,
     origins,
   }: UpdateApiApplicationParams,
-): Promise<boolean> {
+): Promise<UpdateApiApplicationResult> {
   const response = await rawApiFetch({
     fetch,
     path: `/v3/users/me/applications/${id}`,
@@ -38,5 +42,5 @@ export async function updateApiApplicationRequest(
     },
   });
 
-  return response.ok;
+  return { ok: response.ok };
 }

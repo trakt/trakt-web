@@ -11,7 +11,8 @@
 
   const { appId }: { appId: number } = $props();
 
-  const { updateApplication, isUpdating } = useUpdateApiApplication();
+  const { updateApplication, isUpdating, error, dismissError } =
+    useUpdateApiApplication();
 
   const appId$ = fromRune(() => appId);
   const { app: app$, isLoading: isLoading$ } = useApiApplication(appId$);
@@ -26,6 +27,10 @@
           originsText: app.origins.join("\n"),
         }
       : undefined,
+  );
+
+  const errorMessage = $derived(
+    $error?.id === appId ? $error.message : undefined,
   );
 
   async function handleSubmit(values: ApiApplicationFormValues) {
@@ -44,18 +49,22 @@
 </script>
 
 {#if app && initial}
-  <ApiApplicationFormSection
-    title={m.heading_edit_api_application()}
-    description={m.description_edit_api_application()}
-    crumbHref={UrlBuilder.settings.appsApiDetail(appId)}
-    crumbLabel={app.name}
-    {initial}
-    isBusy={$isUpdating}
-    confirmButtonText={m.button_text_save()}
-    confirmButtonLabel={m.button_label_save_app()}
-    onSubmit={handleSubmit}
-    onCancel={handleCancel}
-  />
+  {#key appId}
+    <ApiApplicationFormSection
+      title={m.heading_edit_api_application()}
+      description={m.description_edit_api_application()}
+      crumbHref={UrlBuilder.settings.appsApiDetail(appId)}
+      crumbLabel={app.name}
+      {initial}
+      isBusy={$isUpdating}
+      {errorMessage}
+      onDismissError={dismissError}
+      confirmButtonText={m.button_text_save()}
+      confirmButtonLabel={m.button_label_save_app()}
+      onSubmit={handleSubmit}
+      onCancel={handleCancel}
+    />
+  {/key}
 {:else if $isLoading$}
   <ApiApplicationFormSkeleton
     title={m.heading_edit_api_application()}

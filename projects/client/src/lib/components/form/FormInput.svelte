@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount } from "svelte";
+  import { createValidationState } from "./_internal/createValidationState.ts";
   import FormElementWrapper from "./_internal/FormElementWrapper.svelte";
   import type { FormInputProps } from "./models/FormInputProps";
 
@@ -19,21 +19,20 @@
 
   let inputElement: HTMLInputElement;
 
-  const errorText = writable<string | undefined>(undefined);
+  const { hasError, validate } = createValidationState(() => validation);
 
   const handleInput = (e: Event) => {
     const newValue = (e.target as HTMLInputElement).value;
 
-    if (validation) {
-      const isValid = validation.isValid(newValue);
-      errorText.set(isValid ? undefined : validation.errorText);
-      inputElement.setCustomValidity(!isValid ? validation.errorText : "");
-    }
-
+    validate(inputElement, newValue);
     onChange(newValue);
   };
 
   onMount(() => {
+    if (value) {
+      validate(inputElement, value);
+    }
+
     if (!autofocus) return;
 
     requestAnimationFrame(() => {
@@ -43,23 +42,21 @@
       inputElement.focus({ preventScroll: true });
     });
   });
-
-  const hasError = $derived(Boolean($errorText));
 </script>
 
-<FormElementWrapper {validation} {hasError}>
+<FormElementWrapper {validation} hasError={$hasError} {errorLabelId}>
   <input
     bind:this={inputElement}
     class="trakt-form-input"
-    class:has-error={hasError}
+    class:has-error={$hasError}
     type="text"
     {placeholder}
     {disabled}
     {required}
     {value}
     oninput={handleInput}
-    aria-invalid={hasError ? "true" : "false"}
-    aria-describedby={hasError ? errorLabelId : undefined}
+    aria-invalid={$hasError ? "true" : "false"}
+    aria-describedby={$hasError ? errorLabelId : undefined}
   />
 </FormElementWrapper>
 
