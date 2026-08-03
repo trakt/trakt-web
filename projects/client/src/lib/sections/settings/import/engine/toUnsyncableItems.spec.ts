@@ -3,13 +3,22 @@ import type { UniversalImportItem } from '../ImportTypes.ts';
 import { toUnsyncableItems } from './toUnsyncableItems.ts';
 
 describe('util: toUnsyncableItems', () => {
-  it('should skip an episode carrying only a tmdb id', () => {
-    // Trakt accepts trakt or tvdb ids for episodes, never tmdb, and this entry
-    // has no season/number to fall back on.
+  it('should keep an episode carrying only a tmdb id', () => {
     const item: UniversalImportItem = {
       action: 'history',
       type: 'episode',
       ids: { tmdb: 3485337 },
+      watched_at: '2022-07-31T23:57:00.000Z',
+    };
+
+    expect(toUnsyncableItems([item])).toEqual([]);
+  });
+
+  it('should skip an episode with no ids and no position', () => {
+    const item: UniversalImportItem = {
+      action: 'history',
+      type: 'episode',
+      ids: {},
       watched_at: '2022-07-31T23:57:00.000Z',
     };
 
@@ -73,7 +82,6 @@ describe('util: toUnsyncableItems', () => {
   });
 
   it('should skip an episode rating', () => {
-    // Ratings payloads only carry movies and shows.
     const item: UniversalImportItem = {
       action: 'ratings',
       type: 'episode',
@@ -113,7 +121,7 @@ describe('util: toUnsyncableItems', () => {
     const skipped: UniversalImportItem = {
       action: 'history',
       type: 'episode',
-      ids: { tmdb: 3485337 },
+      ids: {},
     };
 
     expect(toUnsyncableItems([sendable, skipped])).toEqual([skipped]);

@@ -288,6 +288,67 @@ describe('buildHistoryPayload', () => {
       }]);
     });
 
+    it('should send a tmdb episode id when nothing else identifies it', () => {
+      const item: UniversalImportItem = {
+        action: 'history',
+        type: 'episode',
+        ids: { tmdb: 3485337 },
+        watched_at,
+      };
+
+      const result = buildHistoryPayload([item]);
+
+      expect(result.episodes).toEqual([{ ids: { tmdb: 3485337 }, watched_at }]);
+      expect(result.shows).toHaveLength(0);
+    });
+
+    it('should prefer a tvdb episode id over a tmdb one', () => {
+      const item: UniversalImportItem = {
+        action: 'history',
+        type: 'episode',
+        ids: { tvdb: 4321, tmdb: 3485337 },
+        watched_at,
+      };
+
+      const result = buildHistoryPayload([item]);
+
+      expect(result.episodes).toEqual([{ ids: { tvdb: 4321 }, watched_at }]);
+    });
+
+    it('should send an episode once when it carries both tmdb and imdb', () => {
+      const item: UniversalImportItem = {
+        action: 'history',
+        type: 'episode',
+        ids: { tmdb: 3485337, imdb: 'tt9999999' },
+        watched_at,
+      };
+
+      const result = buildHistoryPayload([item]);
+
+      expect(result.episodes).toEqual([{ ids: { tmdb: 3485337 }, watched_at }]);
+      expect(result.shows).toHaveLength(0);
+    });
+
+    it('should resolve positionally before falling back to a tmdb id', () => {
+      const item: UniversalImportItem = {
+        action: 'history',
+        type: 'episode',
+        ids: { tmdb: 3485337 },
+        showTvdb: 121361,
+        season: 1,
+        episode: 1,
+        watched_at,
+      };
+
+      const result = buildHistoryPayload([item]);
+
+      expect(result.episodes).toHaveLength(0);
+      expect(result.shows).toEqual([{
+        ids: { tvdb: 121361 },
+        seasons: [{ number: 1, episodes: [{ number: 1, watched_at }] }],
+      }]);
+    });
+
     it('should skip an episode with no usable ids', () => {
       const item: UniversalImportItem = {
         action: 'history',

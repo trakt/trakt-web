@@ -27,15 +27,6 @@ function isRepresented(payload: Record<string, unknown>): boolean {
   );
 }
 
-/**
- * Items the payload builders cannot express, and which would therefore never
- * reach Trakt: a movie with no usable id, an episode whose id Trakt does not
- * accept and that carries no positional fallback, an episode rating (ratings
- * and watchlist payloads only carry movies and shows).
- *
- * Asking the real builders keeps this in step with them - there is no second
- * copy of the rules to drift.
- */
 export function toUnsyncableItems(
   items: ReadonlyArray<UniversalImportItem>,
   episodeMatch: EpisodeMatchMode = DEFAULT_EPISODE_MATCH_MODE,

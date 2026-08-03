@@ -115,21 +115,31 @@ export function buildHistoryPayload(
     .filter((item) => item.type === 'movie')
     .flatMap((item) => toHistoryMovie(item) ?? []);
 
-  const episodes: HistoryEpisode[] = idEpisodes.flatMap(
-    ({ ids, watched_at }) => {
+  const tmdbEpisodes = leftoverEpisodes.filter((item) => item.ids.tmdb != null);
+  const imdbFallbackEpisodes = leftoverEpisodes.filter(
+    (item) => item.ids.tmdb == null && item.ids.imdb != null,
+  );
+
+  const episodes: HistoryEpisode[] = [
+    ...idEpisodes.flatMap(({ ids, watched_at }) => {
       const resolvedIds = pickIds(ids, EPISODE_IDS);
       return resolvedIds ? [{ ids: resolvedIds as never, watched_at }] : [];
-    },
-  );
+    }),
+    ...tmdbEpisodes.map(({ ids, watched_at }) => ({
+      ids: { tmdb: ids.tmdb } as never,
+      watched_at,
+    })),
+  ];
 
   const shows: HistoryShow[] = [
     ...items
       .filter((item) => item.type === 'show')
       .flatMap((item) => toHistoryShow(item) ?? []),
     ...toPositionalShows(positionalEpisodes),
-    ...leftoverEpisodes.flatMap(({ ids, watched_at }) =>
-      ids.imdb ? [{ ids: { imdb: ids.imdb } as never, watched_at }] : []
-    ),
+    ...imdbFallbackEpisodes.map(({ ids, watched_at }) => ({
+      ids: { imdb: ids.imdb } as never,
+      watched_at,
+    })),
   ];
 
   return { movies, shows, episodes };
