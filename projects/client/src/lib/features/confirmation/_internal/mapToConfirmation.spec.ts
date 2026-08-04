@@ -33,4 +33,33 @@ describe('mapToConfirmation', () => {
     expect(result.buttonText).toBeTruthy();
     expect(result.message).toBeTruthy();
   });
+
+  describe('for CleanUpHistory', () => {
+    const cleanUpHistory = (keeps: 'oldest' | 'newest') =>
+      mapToConfirmation({
+        type: ConfirmationType.CleanUpHistory,
+        count: 12,
+        keeps,
+      });
+
+    it.each<'oldest' | 'newest'>(['oldest', 'newest'])(
+      'should spell out that the %s play is kept',
+      (keeps) => {
+        const result = cleanUpHistory(keeps);
+
+        expect(result.operation).toBe('destructive');
+        expect(result.message).toContain('12');
+        expect(result.message).toContain(keeps);
+      },
+    );
+
+    it('should warn differently depending on which play is kept', () => {
+      const oldest = cleanUpHistory('oldest');
+      const newest = cleanUpHistory('newest');
+
+      expect(oldest.message).not.toBe(newest.message);
+      expect(oldest.title).toBe(newest.title);
+      expect(oldest.buttonText).toBe(newest.buttonText);
+    });
+  });
 });

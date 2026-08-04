@@ -58,6 +58,10 @@
   <HourglassIcon />
 {/if}
 
+{#if option.value === "oldest"}
+  <HourglassIcon />
+{/if}
+
 {#if option.value === "newest"}
   <RecentIcon />
 {/if}

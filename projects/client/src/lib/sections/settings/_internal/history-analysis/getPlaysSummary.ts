@@ -1,4 +1,5 @@
 import type { MediaPlays } from '$lib/requests/models/MediaPlays.ts';
+import type { PlayRetention } from './PlayRetention.ts';
 
 export type PlaysSummary = {
   unique: number;
@@ -7,18 +8,27 @@ export type PlaysSummary = {
   duplicateIds: number[];
 };
 
+type GetPlaysSummaryProps = {
+  entries: ReadonlyArray<MediaPlays>;
+  keep: PlayRetention;
+};
+
 export function getPlaysSummary(
-  entries: ReadonlyArray<MediaPlays>,
+  { entries, keep }: GetPlaysSummaryProps,
 ): PlaysSummary {
   const duplicateIds = entries.flatMap(({ plays }) => {
     if (plays.length <= 1) {
       return [];
     }
 
-    const [, ...olderPlays] = [...plays].sort(
-      (a, b) => b.watchedAt.getTime() - a.watchedAt.getTime(),
+    const chronological = [...plays].sort(
+      (a, b) => a.watchedAt.getTime() - b.watchedAt.getTime(),
     );
-    return olderPlays.map((play) => play.id);
+    const removable = keep === 'oldest'
+      ? chronological.slice(1)
+      : chronological.slice(0, -1);
+
+    return removable.map((play) => play.id);
   });
 
   const total = entries.reduce((sum, { plays }) => sum + plays.length, 0);
