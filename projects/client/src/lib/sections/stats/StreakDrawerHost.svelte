@@ -33,7 +33,6 @@
 
     {#if $stats}
       <section class="trakt-monthly-stats">
-        <span class="bold">{m.header_stats_monthly()}</span>
         {#snippet statCard(
           value: number,
           label: string,
@@ -57,15 +56,20 @@
           {@render statCard(
             $stats.currentStreak,
             m.label_stats_current_streak(),
-            m.text_this_month(),
+            m.text_stats_keep_it_going(),
             toGroupedNumber,
           )}
           {@render statCard(
             $stats.previousStreak,
             m.label_stats_previous_streak(),
-            m.text_stats_keep_it_going(),
+            m.text_this_month(),
             toGroupedNumber,
           )}
+        </div>
+
+        <span class="bold monthly-stats-header">{m.header_stats_monthly()}</span>
+
+        <div class="trakt-monthly-stats-grid">
           {@render statCard(
             $stats.droppedStreaksThisMonth,
             m.label_stats_dropped_streaks(),
@@ -99,13 +103,17 @@
   .trakt-streak-drawer-content {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-xl);
   }
 
   .trakt-monthly-stats {
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
+  }
+
+  .monthly-stats-header {
+    margin-top: var(--gap-xs);
   }
 
   .trakt-monthly-stats-grid {
