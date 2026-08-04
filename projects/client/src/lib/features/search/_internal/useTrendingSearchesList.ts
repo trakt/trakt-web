@@ -39,7 +39,10 @@ function modeToQuery(
         TrendingSearches
       >;
     default:
-      return searchTrendingQuery({ limit: LIST_LIMIT }) as CreateQueryOptions<
+      return searchTrendingQuery({
+        limit: LIST_LIMIT,
+        type: mode !== 'media' ? mode : undefined,
+      }) as CreateQueryOptions<
         TrendingSearches
       >;
   }
