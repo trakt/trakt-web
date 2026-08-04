@@ -7,19 +7,19 @@ import { EpisodeFinaleType } from '$lib/requests/models/EpisodeType.ts';
 
 type IsShowRatingCandidateProps = {
   episode: EpisodeEntry;
-  watchDates: Date[];
+  episodeWatchDates: Date[];
   now: Date;
 };
 
 export function isShowRatingCandidate(
-  { episode, watchDates, now }: IsShowRatingCandidateProps,
+  { episode, episodeWatchDates, now }: IsShowRatingCandidateProps,
 ) {
   const bingeStart = now.getTime() - SHOW_BINGE_WINDOW;
 
   const isFinale = Object.values(EpisodeFinaleType).includes(
     episode.type as EpisodeFinaleType,
   );
-  const isBinge = watchDates.filter(
+  const isBinge = episodeWatchDates.filter(
     (date) => date.getTime() >= bingeStart,
   ).length >= SHOW_BINGE_EPISODE_THRESHOLD;
 

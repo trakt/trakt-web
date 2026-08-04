@@ -41,7 +41,7 @@ describe('isShowRatingCandidate', () => {
             ...EpisodeSiloMappedMock,
             type: EpisodeFinaleType.series_finale,
           },
-          watchDates: [],
+          episodeWatchDates: [],
           now,
         }),
       ).toBe(true);
@@ -54,7 +54,7 @@ describe('isShowRatingCandidate', () => {
             ...EpisodeSiloMappedMock,
             type: EpisodeFinaleType.season_finale,
           },
-          watchDates: [],
+          episodeWatchDates: [],
           now,
         }),
       ).toBe(true);
@@ -67,7 +67,7 @@ describe('isShowRatingCandidate', () => {
             ...EpisodeSiloMappedMock,
             type: EpisodeFinaleType.mid_season_finale,
           },
-          watchDates: [],
+          episodeWatchDates: [],
           now,
         }),
       ).toBe(true);
@@ -77,7 +77,7 @@ describe('isShowRatingCandidate', () => {
       expect(
         isShowRatingCandidate({
           episode: standardEpisode,
-          watchDates: [],
+          episodeWatchDates: [],
           now,
         }),
       ).toBe(false);
@@ -89,7 +89,7 @@ describe('isShowRatingCandidate', () => {
       expect(
         isShowRatingCandidate({
           episode: standardEpisode,
-          watchDates: recentDates(SHOW_BINGE_EPISODE_THRESHOLD),
+          episodeWatchDates: recentDates(SHOW_BINGE_EPISODE_THRESHOLD),
           now,
         }),
       ).toBe(true);
@@ -99,7 +99,7 @@ describe('isShowRatingCandidate', () => {
       expect(
         isShowRatingCandidate({
           episode: standardEpisode,
-          watchDates: recentDates(SHOW_BINGE_EPISODE_THRESHOLD + 2),
+          episodeWatchDates: recentDates(SHOW_BINGE_EPISODE_THRESHOLD + 2),
           now,
         }),
       ).toBe(true);
@@ -109,7 +109,7 @@ describe('isShowRatingCandidate', () => {
       expect(
         isShowRatingCandidate({
           episode: standardEpisode,
-          watchDates: recentDates(SHOW_BINGE_EPISODE_THRESHOLD - 1),
+          episodeWatchDates: recentDates(SHOW_BINGE_EPISODE_THRESHOLD - 1),
           now,
         }),
       ).toBe(false);
@@ -125,7 +125,7 @@ describe('isShowRatingCandidate', () => {
       expect(
         isShowRatingCandidate({
           episode: standardEpisode,
-          watchDates: oldDates,
+          episodeWatchDates: oldDates,
           now,
         }),
       ).toBe(false);
@@ -142,7 +142,7 @@ describe('isShowRatingCandidate', () => {
       expect(
         isShowRatingCandidate({
           episode: standardEpisode,
-          watchDates: [recentOne, ...oldOnes],
+          episodeWatchDates: [recentOne, ...oldOnes],
           now,
         }),
       ).toBe(false);
@@ -154,7 +154,7 @@ describe('isShowRatingCandidate', () => {
       expect(
         isShowRatingCandidate({
           episode: finaleEpisode,
-          watchDates: [],
+          episodeWatchDates: [],
           now,
         }),
       ).toBe(true);
@@ -164,7 +164,7 @@ describe('isShowRatingCandidate', () => {
       expect(
         isShowRatingCandidate({
           episode: finaleEpisode,
-          watchDates: recentDates(SHOW_BINGE_EPISODE_THRESHOLD),
+          episodeWatchDates: recentDates(SHOW_BINGE_EPISODE_THRESHOLD),
           now,
         }),
       ).toBe(true);
