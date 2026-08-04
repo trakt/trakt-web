@@ -74,10 +74,12 @@ export function useCurrentUserLastWatched() {
                   return !$ratings.movies.has(activity.movie.id);
                 case 'episode': {
                   const showHistory = $history?.shows.get(activity.show.id);
-                  const showWatchDates = showHistory?.watchedDates ?? [];
+                  const episodeWatchDates = showHistory?.episodes.map(
+                    (episode) => episode.watchedAt,
+                  ) ?? [];
                   const isRatingCandidate = isShowRatingCandidate({
                     episode: activity.episode,
-                    watchDates: showWatchDates,
+                    episodeWatchDates,
                     now: new Date(),
                   });
 
