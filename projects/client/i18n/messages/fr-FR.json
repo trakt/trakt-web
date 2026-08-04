@@ -178,6 +178,7 @@
   "button_label_remove_from_watchlist": "Retirer \"{title}\" de votre liste de suivi",
   "button_label_remove_photo": "Retirer votre photo de profil",
   "button_label_renew_vip": "Renouveler l'abonnement",
+  "button_label_reorder_item": "Réorganiser {title}",
   "button_label_reorder_list": "Réorganiser {name}",
   "button_label_report_comment": "Signaler un avis",
   "button_label_report_list": "Signaler {name}",
