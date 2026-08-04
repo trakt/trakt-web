@@ -8,17 +8,18 @@
     CrewPosition,
     CrewPositions,
   } from "$lib/requests/models/CrewPosition";
-  import type { MediaCredits } from "$lib/requests/models/MediaCredits";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import { buildParamString } from "$lib/utils/url/buildParamString";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CreditMediaItem from "./components/CreditMediaItem.svelte";
   import CreditsPositionDropdown from "./components/CreditsPositionDropdown.svelte";
   import NoFilterResultsPlaceholder from "./drilldown/_internal/NoFilterResultsPlaceholder.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
+  import { resolveSelectedPosition } from "./utils/resolveSelectedPosition";
 
   type CreditsListProps = {
     title: string;
@@ -34,13 +35,6 @@
   const { filterMap, hasActiveFilter } = useFilter();
   const { mode } = useDiscover();
 
-  const selectedPosition = $derived.by(() => {
-    const defaultPosition = person.knownFor ?? "acting";
-    const position = positions?.[`${type}s`];
-
-    return position ?? defaultPosition;
-  });
-
   const {
     credits,
     isLoading,
@@ -52,16 +46,22 @@
     mode$: mode,
   });
 
-  const getPositionList = (mediaCredits?: MediaCredits) => {
-    if (!mediaCredits) return [];
-    return mediaCredits.get(selectedPosition) ?? [];
-  };
+  const requestedPosition = $derived(
+    positions?.[`${type}s`] ?? person.knownFor ?? "acting",
+  );
+  const selectedPosition = $derived(
+    resolveSelectedPosition({ requested: requestedPosition, credits: $credits }),
+  );
 
-  const list = $derived(getPositionList($credits));
+  const list = $derived($credits?.get(selectedPosition) ?? []);
   const defaultVariant = $derived(useDefaultCardVariant(type));
 
   const drilldownHref = $derived(
-    drilldownLink ? `${drilldownLink}?${type}s=${selectedPosition}` : undefined,
+    drilldownLink
+      ? `${drilldownLink}${
+          buildParamString({ [`${type}s`]: selectedPosition })
+        }`
+      : undefined,
   );
 
   const buildPositionHref = (position: CrewPosition) => {
