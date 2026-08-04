@@ -55,15 +55,15 @@
 
         <div class="trakt-monthly-stats-grid">
           {@render statCard(
-            $stats.previousStreak,
-            m.label_stats_previous_streak(),
-            m.text_stats_keep_it_going(),
-            toGroupedNumber,
-          )}
-          {@render statCard(
             $stats.currentStreak,
             m.label_stats_current_streak(),
             m.text_this_month(),
+            toGroupedNumber,
+          )}
+          {@render statCard(
+            $stats.previousStreak,
+            m.label_stats_previous_streak(),
+            m.text_stats_keep_it_going(),
             toGroupedNumber,
           )}
           {@render statCard(
