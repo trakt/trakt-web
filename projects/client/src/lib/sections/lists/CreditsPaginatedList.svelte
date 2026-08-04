@@ -3,16 +3,13 @@
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import {
-    crewPositionSchema,
-    type CrewPosition,
-  } from "$lib/requests/models/CrewPosition";
-  import type { MediaCredits } from "$lib/requests/models/MediaCredits";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import CreditMediaItem from "./components/CreditMediaItem.svelte";
   import NoFilterResultsPlaceholder from "./drilldown/_internal/NoFilterResultsPlaceholder.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
+  import { parseRequestedPosition } from "./utils/parseRequestedPosition";
+  import { resolveSelectedPosition } from "./utils/resolveSelectedPosition";
 
   type CreditsPaginatedListProps = {
     slug: string;
@@ -24,12 +21,6 @@
   const { filterMap, hasActiveFilter } = useFilter();
   const { mode } = useDiscover();
 
-  const selectedPosition = $derived<CrewPosition>(
-    crewPositionSchema.safeParse(
-      page.url.searchParams.get(`${type}s`)?.toLowerCase(),
-    ).data ?? "acting",
-  );
-
   const { credits, isLoading } = useCreditsList({
     type$: fromRune(() => type),
     slug$: fromRune(() => slug),
@@ -37,12 +28,12 @@
     mode$: mode,
   });
 
-  const getPositionList = (mediaCredits?: MediaCredits) => {
-    if (!mediaCredits) return [];
-    return mediaCredits.get(selectedPosition) ?? [];
-  };
+  const requestedPosition = $derived(parseRequestedPosition(page.url, type));
+  const selectedPosition = $derived(
+    resolveSelectedPosition({ requested: requestedPosition, credits: $credits }),
+  );
 
-  const list = $derived(getPositionList($credits));
+  const list = $derived($credits?.get(selectedPosition) ?? []);
   const hasMatchingType = $derived($mode === "media" || $mode === type);
 </script>
 

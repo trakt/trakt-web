@@ -2,13 +2,12 @@
   import { page } from "$app/state";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import {
-    crewPositionSchema,
-    type CrewPosition,
-  } from "$lib/requests/models/CrewPosition";
+  import type { CrewPosition } from "$lib/requests/models/CrewPosition";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { useCreditsList } from "../stores/useCreditsList";
+  import { parseRequestedPosition } from "../utils/parseRequestedPosition";
+  import { resolveSelectedPosition } from "../utils/resolveSelectedPosition";
   import CreditsPositionDropdown from "./CreditsPositionDropdown.svelte";
 
   type CreditsPositionSelectorProps = {
@@ -18,21 +17,20 @@
 
   const { slug, type }: CreditsPositionSelectorProps = $props();
 
-  const selectedPosition = $derived<CrewPosition>(
-    crewPositionSchema.safeParse(
-      page.url.searchParams.get(`${type}s`)?.toLowerCase(),
-    ).data ?? "acting",
-  );
-
   const { filterMap } = useFilter();
   const { mode } = useDiscover();
 
-  const { positions: allPositions } = useCreditsList({
+  const { credits, positions: allPositions } = useCreditsList({
     type$: fromRune(() => type),
     slug$: fromRune(() => slug),
     filter$: filterMap,
     mode$: mode,
   });
+
+  const requestedPosition = $derived(parseRequestedPosition(page.url, type));
+  const selectedPosition = $derived(
+    resolveSelectedPosition({ requested: requestedPosition, credits: $credits }),
+  );
 
   const buildPositionHref = (position: CrewPosition) => {
     const url = new URL(page.url.toString());
