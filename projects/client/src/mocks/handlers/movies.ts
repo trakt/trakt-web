@@ -42,21 +42,14 @@ export const movies = [
     },
   ),
   http.get(
-    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/translations/en`,
-    () => {
-      return HttpResponse.json(MovieHereticTranslationsResponseMock.get('en'));
-    },
-  ),
-  http.get(
-    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/translations/nl`,
-    () => {
-      return HttpResponse.json(MovieHereticTranslationsResponseMock.get('nl'));
-    },
-  ),
-  http.get(
-    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/translations/pt`,
-    () => {
-      return HttpResponse.json(MovieHereticTranslationsResponseMock.get('pt'));
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/translations`,
+    ({ request }) => {
+      const { searchParams } = new URL(request.url);
+      return HttpResponse.json(
+        MovieHereticTranslationsResponseMock.get(
+          searchParams.get('language') ?? '',
+        ),
+      );
     },
   ),
   http.get(
