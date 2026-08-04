@@ -56,7 +56,11 @@ export function mapWatchedShowResponse(
     new Map<number, number>(),
   );
 
-  const watchedDates = episodes.map((episode) => episode.watchedAt);
+  const watchedDates = Object.values(seasons)
+    .flatMap((episodeMap) => Object.values(episodeMap))
+    .flatMap((timestamps) =>
+      timestamps.map((timestamp) => new Date(timestamp))
+    );
   const watchedAt = watchedDates.reduce(
     (max, date) => date > max ? date : max,
     new Date(0),
