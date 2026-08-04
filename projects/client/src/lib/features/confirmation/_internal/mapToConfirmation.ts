@@ -183,7 +183,9 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   [ConfirmationType.CleanUpHistory]: (props) => ({
     title: m.confirmation_title_clean_up_history(),
     buttonText: m.button_text_clean_up(),
-    message: m.warning_prompt_clean_up_history({ count: props.count }),
+    message: props.keeps === 'oldest'
+      ? m.warning_prompt_clean_up_history({ count: props.count })
+      : m.warning_prompt_clean_up_history_newest({ count: props.count }),
     operation: 'destructive',
   }),
   [ConfirmationType.HideRecommendation]: (props) => ({

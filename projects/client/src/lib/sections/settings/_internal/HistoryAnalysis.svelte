@@ -26,6 +26,8 @@
     getPlaysSummary,
     type PlaysSummary,
   } from "./history-analysis/getPlaysSummary.ts";
+  import type { PlayRetention } from "./history-analysis/PlayRetention.ts";
+  import PlayRetentionToggler from "./history-analysis/PlayRetentionToggler.svelte";
   import SettingsSection from "./SettingsSection.svelte";
 
   const { limits } = useUser();
@@ -48,12 +50,17 @@
     invalidations: InvalidateActionOptions[];
   };
 
+  let retention = $state<PlayRetention>("oldest");
+
   const categories = $derived<AnalysisCategory[]>([
     {
       target: "movies",
       label: m.tag_text_movies(),
       buttonLabel: m.button_label_clean_up_movies(),
-      summary: getPlaysSummary($moviePlays?.data ?? []),
+      summary: getPlaysSummary({
+        entries: $moviePlays?.data ?? [],
+        keep: retention,
+      }),
       isLoading: $moviePlays?.isPending ?? true,
       invalidations: [InvalidateAction.MarkAsWatched("movie")],
     },
@@ -61,7 +68,10 @@
       target: "episodes",
       label: m.tag_text_episodes(),
       buttonLabel: m.button_label_clean_up_episodes(),
-      summary: getPlaysSummary($showPlays?.data ?? []),
+      summary: getPlaysSummary({
+        entries: $showPlays?.data ?? [],
+        keep: retention,
+      }),
       isLoading: $showPlays?.isPending ?? true,
       invalidations: [
         InvalidateAction.MarkAsWatched("show"),
@@ -152,6 +162,11 @@
         />
       {/if}
 
+      <PlayRetentionToggler
+        value={retention}
+        onChange={(value) => (retention = value)}
+      />
+
       <div class="analysis-grid">
         {#each categories as category (category.target)}
           <div
@@ -208,6 +223,7 @@
                     onclick={confirm({
                       type: ConfirmationType.CleanUpHistory,
                       count: category.summary.duplicates,
+                      keeps: retention,
                       onConfirm: () => startCleanUp(category),
                     })}
                   >

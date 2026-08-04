@@ -92,6 +92,7 @@ interface ConfirmationParamsMap {
   [ConfirmationType.CleanUpHistory]: {
     type: ConfirmationType.CleanUpHistory;
     count: number;
+    keeps: 'oldest' | 'newest';
   };
   [ConfirmationType.HideRecommendation]: {
     type: ConfirmationType.HideRecommendation;

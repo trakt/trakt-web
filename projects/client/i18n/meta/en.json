@@ -8862,8 +8862,28 @@
       "description": "Header for the settings section that analyzes the user's watch history for duplicate plays."
     },
     "description_history_analysis": {
-      "default": "Find duplicate plays in your watch history and keep only the most recent watch of each item.",
+      "default": "Find duplicate plays in your watch history and keep only one watch of each item.",
       "description": "Description for the history analysis settings section."
+    },
+    "label_keep_play": {
+      "default": "Keep",
+      "description": "Label for the toggle that picks which play of a duplicate set is kept during history clean up."
+    },
+    "button_text_keep_oldest_play": {
+      "default": "Oldest",
+      "description": "Text for the toggle option that keeps the oldest play of each item. This title should be as short and concise as possible."
+    },
+    "button_label_keep_oldest_play": {
+      "default": "Keep the oldest play of each item",
+      "description": "Aria-label for the toggle option that keeps the oldest play of each item."
+    },
+    "button_text_keep_newest_play": {
+      "default": "Newest",
+      "description": "Text for the toggle option that keeps the newest play of each item. This title should be as short and concise as possible."
+    },
+    "button_label_keep_newest_play": {
+      "default": "Keep the newest play of each item",
+      "description": "Aria-label for the toggle option that keeps the newest play of each item."
     },
     "text_duplicate_plays": {
       "default": "duplicate plays",
@@ -8894,8 +8914,17 @@
       "description": "Title of the confirmation dialog shown before removing duplicate plays from the watch history."
     },
     "warning_prompt_clean_up_history": {
-      "default": "This will permanently remove {count} duplicate plays, keeping only the most recent watch of each item. This cannot be undone.",
-      "description": "Warning prompt shown when a user is about to remove duplicate plays from their watch history.",
+      "default": "This will permanently remove {count} duplicate plays, keeping only the oldest watch of each item. This cannot be undone.",
+      "description": "Warning prompt shown when a user is about to remove duplicate plays from their watch history, keeping the oldest watch.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "warning_prompt_clean_up_history_newest": {
+      "default": "This will permanently remove {count} duplicate plays, keeping only the newest watch of each item. This cannot be undone.",
+      "description": "Warning prompt shown when a user is about to remove duplicate plays from their watch history, keeping the newest watch.",
       "variables": {
         "count": {
           "type": "number"
