@@ -4,6 +4,7 @@
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import { languageTag } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { toGroupedNumber } from "$lib/utils/formatting/number/toGroupedNumber.ts";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage.ts";
   import ActivityHeatmap from "./ActivityHeatmap.svelte";
@@ -33,15 +34,18 @@
     {#if $stats}
       <section class="trakt-monthly-stats">
         <span class="bold">{m.header_stats_monthly()}</span>
-        {#snippet statCard(value: string | number, label: string, sub: string)}
+        {#snippet statCard(
+          value: number,
+          label: string,
+          sub: string,
+          format: (value: number, locale: string) => string = toHumanNumber,
+        )}
           <div class="trakt-monthly-stat-card">
             {#if $isLoading}
               <LoadingIndicator />
             {:else}
               <p class="trakt-monthly-stat-value bold">
-                {typeof value === "number"
-                  ? toHumanNumber(value, languageTag())
-                  : value}
+                {format(value, languageTag())}
               </p>
             {/if}
             <p class="bold">{label}</p>
@@ -54,11 +58,13 @@
             $stats.previousStreak,
             m.label_stats_previous_streak(),
             m.text_stats_keep_it_going(),
+            toGroupedNumber,
           )}
           {@render statCard(
             $stats.currentStreak,
             m.label_stats_current_streak(),
             m.text_this_month(),
+            toGroupedNumber,
           )}
           {@render statCard(
             $stats.droppedStreaksThisMonth,
@@ -76,14 +82,12 @@
             m.text_this_year(),
           )}
           {@render statCard(
-            toPercentage(
-              $stats.totalElapsedDaysThisMonth > 0
-                ? $stats.activeDaysThisMonth / $stats.totalElapsedDaysThisMonth
-                : 0,
-              languageTag(),
-            ),
+            $stats.totalElapsedDaysThisMonth > 0
+              ? $stats.activeDaysThisMonth / $stats.totalElapsedDaysThisMonth
+              : 0,
             m.label_stats_days_active(),
             m.text_this_month(),
+            toPercentage,
           )}
         </div>
       </section>
