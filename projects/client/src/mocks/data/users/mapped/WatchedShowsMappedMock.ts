@@ -21,7 +21,7 @@ export const WatchedShowsMappedMock: WatchedShow[] = [
         season: 1,
         episodeId: 2,
         watchedAt: new Date('2024-12-27T16:28:32.000Z'),
-        plays: 1,
+        plays: 3,
       },
       {
         season: 1,
@@ -63,6 +63,8 @@ export const WatchedShowsMappedMock: WatchedShow[] = [
     watchedDates: [
       new Date('2024-12-27T16:28:32.000Z'),
       new Date('2024-12-27T16:28:32.000Z'),
+      new Date('2024-11-15T20:00:00.000Z'),
+      new Date('2024-12-01T20:00:00.000Z'),
       new Date('2024-12-27T16:28:32.000Z'),
       new Date('2024-12-27T16:28:32.000Z'),
       new Date('2024-12-27T16:28:32.000Z'),
