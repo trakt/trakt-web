@@ -8460,7 +8460,11 @@
     },
     "text_stats_keep_it_going": {
       "default": "Keep it going!",
-      "description": "Motivational sub-label shown below the previous streak stat."
+      "description": "Motivational sub-label shown below the current streak stat."
+    },
+    "text_stats_ended": {
+      "default": "Ended",
+      "description": "Sub-label shown below the previous streak stat, indicating that streak is no longer active."
     },
     "text_stats_out_of": {
       "default": "Out of {count}",

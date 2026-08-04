@@ -62,7 +62,7 @@
           {@render statCard(
             $stats.previousStreak,
             m.label_stats_previous_streak(),
-            m.text_this_month(),
+            m.text_stats_ended(),
             toGroupedNumber,
           )}
         </div>
