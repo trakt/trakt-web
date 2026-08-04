@@ -30,11 +30,13 @@
   };
 </script>
 
-<SingleSelect
-  {options}
-  value={selectedPosition}
-  placeholder={m.dropdown_label_person_position()}
-  disabled={allPositions.length <= 1}
-  autoWidth
-  onChange={onPositionChange}
-/>
+{#if allPositions.length > 0}
+  <SingleSelect
+    {options}
+    value={selectedPosition}
+    placeholder={m.dropdown_label_person_position()}
+    disabled={allPositions.length <= 1}
+    autoWidth
+    onChange={onPositionChange}
+  />
+{/if}
