@@ -10202,30 +10202,6 @@
       "default": "Nothing here yet.",
       "description": "Empty-state message shown in a VIP achievements bucket that currently has no achievements to display."
     },
-    "vip_achievements_bucket_volume": {
-      "default": "Volume",
-      "description": "Name of the 'Volume' VIP achievements bucket (archetype). Keep short."
-    },
-    "vip_achievements_bucket_binge": {
-      "default": "Binge",
-      "description": "Name of the 'Binge' VIP achievements bucket (archetype). Keep short."
-    },
-    "vip_achievements_bucket_timing": {
-      "default": "Timing",
-      "description": "Name of the 'Timing' VIP achievements bucket (archetype). Keep short."
-    },
-    "vip_achievements_bucket_ratings": {
-      "default": "Ratings",
-      "description": "Name of the 'Ratings' VIP achievements bucket (archetype). Keep short."
-    },
-    "vip_achievements_bucket_curation": {
-      "default": "Curation",
-      "description": "Name of the 'Curation' VIP achievements bucket (archetype). Keep short."
-    },
-    "vip_achievements_bucket_prestige": {
-      "default": "Prestige",
-      "description": "Name of the 'Prestige' VIP achievements bucket (archetype). Keep short."
-    },
     "vip_achievements_tier_label": {
       "default": "Tier {tier} / {total}",
       "description": "Tier indicator on a VIP achievement card showing the reached tier out of the total.",
@@ -10430,10 +10406,6 @@
       "default": "You are a Trakt director.",
       "description": "Description of the 'Director's Cut' VIP achievement."
     },
-    "vip_achievements_bucket_all": {
-      "default": "All",
-      "description": "Filter option in the achievements drawer that shows achievements from every bucket. Keep short."
-    },
     "vip_achievements_tier_short": {
       "default": "Tier {tier}",
       "description": "Short tier label used in the achievement tier-goals tooltip, e.g. 'Tier 3'.",
@@ -10444,8 +10416,8 @@
       }
     },
     "vip_achievements_anchor_label": {
-      "default": "{unlocked} / {total} Achievements",
-      "description": "Label on the compact achievements anchor pill in the profile banner, showing unlocked count out of total. Tapping it opens the achievements drawer.",
+      "default": "{unlocked}/{total}",
+      "description": "Compact count on the achievements anchor pill in the profile banner (unlocked out of total), shown next to a trophy icon. Tapping the pill opens the achievements drawer.",
       "variables": {
         "unlocked": {
           "type": "number"
