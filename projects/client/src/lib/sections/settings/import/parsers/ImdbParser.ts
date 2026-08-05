@@ -2,7 +2,7 @@ import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { isValidItem } from './utils/isValidItem.ts';
 import { parseCsvFile } from './utils/parseCsvFile.ts';
-import { toISOString } from './utils/toISOString.ts';
+import { toImportISOString } from './utils/toImportISOString.ts';
 
 type ImdbRatingsRow = {
   Const?: string;
@@ -39,7 +39,7 @@ function parseRatingsRow(row: ImdbRatingsRow): UniversalImportItem[] {
 
   const type = toImportType(row['Title Type']);
   const rating = row['Your Rating'] ? Number(row['Your Rating']) : undefined;
-  const ratedAt = toISOString(row['Date Rated']);
+  const ratedAt = toImportISOString(row['Date Rated']);
 
   const ratingItem: UniversalImportItem = {
     action: 'ratings',

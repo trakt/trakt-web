@@ -7,7 +7,7 @@ import type {
 import type { FileParser } from './ParserInterface.ts';
 import { isValidItem } from './utils/isValidItem.ts';
 import { parseJsonFile } from './utils/parseJsonFile.ts';
-import { toISOString } from './utils/toISOString.ts';
+import { toImportISOString } from './utils/toImportISOString.ts';
 
 type TraktJsonIds = {
   trakt?: number;
@@ -80,7 +80,7 @@ function toType(value: string): ImportType {
 
 function toWatchedAt(value?: string): string | undefined {
   if (value === 'unknown') return 'unknown';
-  return toISOString(value);
+  return toImportISOString(value);
 }
 
 function isFlatEntry(entry: TraktJsonEntry): boolean {
@@ -111,7 +111,7 @@ function parseFlatEntry(entry: TraktJsonEntry): UniversalImportItem | null {
       entry.watched_at ?? entry.date_watched ?? entry.created_at,
     ),
     rating: entry.rating,
-    rated_at: toISOString(entry.rated_at),
+    rated_at: toImportISOString(entry.rated_at),
   };
 }
 
@@ -147,7 +147,7 @@ function parseMultiIdFlatEntry(
       entry.watched_at ?? entry.date_watched ?? entry.created_at,
     ),
     rating: entry.rating,
-    rated_at: toISOString(entry.rated_at),
+    rated_at: toImportISOString(entry.rated_at),
   };
 }
 
@@ -178,7 +178,7 @@ function parseTraktJsonEntry(
     year: media?.year,
     watched_at: toWatchedAt(entry.watched_at),
     rating: entry.rating,
-    rated_at: toISOString(entry.rated_at),
+    rated_at: toImportISOString(entry.rated_at),
     season: episodeData?.season,
     episode: episodeData?.number,
   };

@@ -1,7 +1,7 @@
 import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
-import { toISOString } from './utils/toISOString.ts';
+import { toImportISOString } from './utils/toImportISOString.ts';
 import { toEpisodeIds } from './utils/toEpisodeIds.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
@@ -110,7 +110,7 @@ function parseEpisodeRow(row: EpisodeRow): UniversalImportItem | null {
     title: row.title || undefined,
     season,
     episode,
-    watched_at: toISOString(row.watched_at),
+    watched_at: toImportISOString(row.watched_at),
   };
 }
 
@@ -127,7 +127,7 @@ function parseMovieRow(row: MovieRow): UniversalImportItem | null {
     ids: { tvdb: tvdbId, imdb: imdbId },
     title: row.title || undefined,
     year: toInt(row.year),
-    watched_at: toISOString(row.watched_at),
+    watched_at: toImportISOString(row.watched_at),
   };
 }
 
@@ -220,7 +220,7 @@ function parseJsonShows(shows: JsonShow[]): UniversalImportItem[] {
             title: show.title || undefined,
             season: season.number,
             episode: episode.number,
-            watched_at: toISOString(episode.watched_at),
+            watched_at: toImportISOString(episode.watched_at),
           }];
         });
     });
@@ -251,7 +251,7 @@ function parseJsonMovies(movies: JsonMovie[]): UniversalImportItem[] {
         ids: { tvdb: tvdbId, imdb: imdbId },
         title: movie.title || undefined,
         year: movie.year,
-        watched_at: toISOString(movie.watched_at),
+        watched_at: toImportISOString(movie.watched_at),
       }];
     });
 }

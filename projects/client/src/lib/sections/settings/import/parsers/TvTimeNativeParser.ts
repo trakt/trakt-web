@@ -1,7 +1,7 @@
 import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvFile } from './utils/parseCsvFile.ts';
-import { toISOString } from './utils/toISOString.ts';
+import { toImportISOString } from './utils/toImportISOString.ts';
 
 type TvTimeNativeRow = {
   ts?: string;
@@ -18,7 +18,7 @@ function parseWatchedAt(row: TvTimeNativeRow): string | undefined {
     return new Date(Number(row.ts) * 1000).toISOString();
   }
 
-  return toISOString(row.created_at);
+  return toImportISOString(row.created_at);
 }
 
 function parseNativeRow(row: TvTimeNativeRow): UniversalImportItem | null {

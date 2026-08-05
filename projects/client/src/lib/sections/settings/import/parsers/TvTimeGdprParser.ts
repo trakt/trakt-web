@@ -1,7 +1,7 @@
 import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
-import { toISOString } from './utils/toISOString.ts';
+import { toImportISOString } from './utils/toImportISOString.ts';
 import { toEpisodeIds } from './utils/toEpisodeIds.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
@@ -130,7 +130,7 @@ function toMovieTitle(row: TrackingV1Row): string | undefined {
 function toWatchedAt(row: TrackingV1Row): string | undefined {
   const [, epoch] = row.watch_date_range_key?.match(/watch-date-(\d+)/) ?? [];
   if (epoch) return new Date(Number(epoch) * 1000).toISOString();
-  return toISOString(row.created_at);
+  return toImportISOString(row.created_at);
 }
 
 // Year-less movies (TV Time zero release dates) are kept: the sync
@@ -199,7 +199,7 @@ function parseV2Episode(row: TrackingV2Row): UniversalImportItem | null {
     title: row.series_name || undefined,
     season,
     episode,
-    watched_at: toISOString(row.created_at),
+    watched_at: toImportISOString(row.created_at),
   };
 }
 
