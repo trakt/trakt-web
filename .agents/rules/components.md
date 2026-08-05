@@ -105,6 +105,63 @@ Key runes:
 
 ---
 
+## Headless Primitives: bits-ui
+
+Interactive primitives are standardising on [bits-ui](https://bits-ui.com)
+(`bits-ui` in `projects/client/package.json`). It supplies behaviour,
+accessibility, and focus management; we supply the styling. **Reach for a
+bits-ui primitive before hand-rolling an interactive surface** - portals, focus
+traps, roving focus, typeahead, and ARIA wiring are exactly what it exists to
+provide.
+
+Already wrapped - use the app wrapper, not bits-ui directly:
+
+| Surface             | App component                                   | bits-ui       |
+| ------------------- | ----------------------------------------------- | ------------- |
+| Buttons             | `components/buttons/Button`, `ActionButton`     | `Button`      |
+| Single/multi select | `components/select/SingleSelect`, `MultiSelect` | `Select`      |
+| Popovers            | `components/popover/Popover`                    | `Popover`     |
+| Modals              | `components/dialogs/Modal`                      | `Dialog`      |
+| Tooltips            | `components/tooltip/Tooltip`                    | `Tooltip`     |
+| Tabs                | `components/tabs/TabView`                       | `Tabs`        |
+| Sliders             | `components/slider/Slider`                      | `Slider`      |
+| Star ratings        | `sections/summary/.../RatingStars`              | `RatingGroup` |
+
+Not yet migrated (hand-rolled - do not copy these as patterns):
+`components/buttons/popup/PopupMenu` and `components/drawer/Drawer`. bits-ui
+ships `DropdownMenu`, `ContextMenu`, and `Menubar`, which `PopupMenu` should
+eventually be built on; until then, style menu rows via `DropdownGroup` +
+`DropdownItem` rather than adding another bespoke menu implementation.
+
+When adding a new interactive surface:
+
+1. Check whether bits-ui already has the primitive; if so, wrap it in
+   `lib/components/{domain}/` and keep bits-ui imports inside that wrapper.
+2. If a wrapper already exists, extend it instead of introducing a sibling.
+3. Only hand-roll when bits-ui has no equivalent - and say so in the PR.
+
+### Configure children with tokens, never `!important`
+
+A container that restyles slotted children (which arrive as an opaque `Snippet`,
+so their props cannot be changed) must not reach in with
+`:global(...) { … !important }`. Instead the child exposes configuration custom
+properties with fallbacks, and the container sets them - custom properties
+inherit, so no specificity war is needed.
+
+```scss
+// Child (DropdownItem): every themeable value resolves through a token
+border-radius: var(--dropdown-item-radius, var(--border-radius-m));
+background: var(--dropdown-item-background, #{$color});
+
+// Container (DropdownGroup): configures the children by setting the tokens
+.trakt-dropdown-group {
+  --dropdown-item-radius: 0;
+  --dropdown-item-background: transparent;
+}
+```
+
+---
+
 ## Props Type Files
 
 For components with 3+ props, define separate `ComponentNameProps.ts` file
@@ -763,6 +820,10 @@ property (`inset-inline-start`, not `left`), or the animation silently dies.
 
 - [ ] Correct layer: primitive → `components`, stateful/context → `features`,
       composition → `sections`
+- [ ] New interactive surfaces build on a bits-ui primitive (wrapped in
+      `lib/components/`) instead of hand-rolling portals/focus/ARIA
+- [ ] Containers restyle slotted children via configuration custom properties,
+      never `:global(...) !important`
 - [ ] Never import from another folder's `_internal/` - uplift if needed
 - [ ] Using Svelte 5 runes (`$props`, `$derived`, `$effect`) - no `export let`
       or `$:`
