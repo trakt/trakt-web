@@ -26,10 +26,6 @@
   canDeemphasize
 >
   {#snippet popupActions()}
-    <DefaultMediaPopupActions
-      {media}
-      onListAction={() => (isListsDrawerOpen = true)}
-    />
     <DropdownItem
       onclick={() => (isSourcesDrawerOpen = true)}
       style="flat"
@@ -42,6 +38,10 @@
         <SparkleIcon />
       {/snippet}
     </DropdownItem>
+    <DefaultMediaPopupActions
+      {media}
+      onListAction={() => (isListsDrawerOpen = true)}
+    />
     <HideRecommendationAction {media} />
   {/snippet}
 </DefaultMediaItem>
