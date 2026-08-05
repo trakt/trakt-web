@@ -1,8 +1,23 @@
-import type { StreamOnDemand } from '$lib/requests/models/StreamingServiceOptions.ts';
+import type {
+  StreamNow,
+  StreamOnDemand,
+} from '$lib/requests/models/StreamingServiceOptions.ts';
 import { describe, expect, it } from 'vitest';
 import { getMediaCost } from './getMediaCost.ts';
 
 describe('getMediaCost', () => {
+  it('should return an empty string for services that are not on-demand', () => {
+    const streamingService: StreamNow = {
+      link: 'https://example.com',
+      source: 'source',
+      is4k: false,
+      type: 'streaming',
+      key: 'streaming-example',
+    };
+
+    expect(getMediaCost(streamingService, 'any')).toEqual('');
+  });
+
   it('should return an empty string if there are no rent or purchase prices', () => {
     const onDemandService: StreamOnDemand = {
       link: 'https://example.com',

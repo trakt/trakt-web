@@ -1,5 +1,8 @@
 import { languageTag } from '$lib/features/i18n/index.ts';
-import type { StreamOnDemand } from '$lib/requests/models/StreamingServiceOptions.ts';
+import type {
+  StreamingServiceOption,
+  StreamOnDemand,
+} from '$lib/requests/models/StreamingServiceOptions.ts';
 import { toHumanCurrency } from '$lib/utils/formatting/currency/toHumanCurrency.ts';
 
 export type CostType = 'rent' | 'purchase' | 'any';
@@ -14,17 +17,21 @@ function resolvePrice(
 }
 
 export function getMediaCost(
-  onDemandService: StreamOnDemand,
+  service: StreamingServiceOption,
   type: CostType,
 ): string {
-  const price = resolvePrice(onDemandService.prices, type);
-  if (!price || !onDemandService.currency) {
+  if (service.type !== 'on-demand') {
+    return '';
+  }
+
+  const price = resolvePrice(service.prices, type);
+  if (!price || !service.currency) {
     return '';
   }
 
   return toHumanCurrency({
     price,
-    currency: onDemandService.currency,
+    currency: service.currency,
     locale: languageTag(),
   });
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
+  import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -85,15 +85,11 @@
 >
   {#if isOpen}
     <div class="cast-drawer-content" transition:fade={{ duration: 150 }}>
-      <label class="credit-search">
-        <SearchIcon />
-        <input
-          bind:value={searchTerm}
-          type="search"
-          aria-label={m.input_label_search_credit_members()}
-          placeholder={m.input_placeholder_search_credit_members()}
-        />
-      </label>
+      <DrawerSearchInput
+        bind:value={searchTerm}
+        label={m.input_label_search_credit_members()}
+        placeholder={m.input_placeholder_search_credit_members()}
+      />
 
       {#if visibleCredits.length > 0}
         <div
@@ -127,40 +123,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
-
-    .credit-search {
-      display: flex;
-      align-items: center;
-      gap: var(--gap-xs);
-
-      min-height: var(--ni-48);
-      padding: 0 var(--ni-16);
-      box-sizing: border-box;
-
-      border-radius: var(--border-radius-l);
-      background: var(--color-input-background);
-      outline: var(--border-thickness-xxs) solid var(--color-border);
-
-      transition: outline var(--transition-increment) ease-in-out;
-
-      &:focus-within {
-        outline: var(--border-thickness-xs) solid var(--color-input-focus);
-      }
-
-      :global(svg) {
-        flex-shrink: 0;
-        width: var(--ni-24);
-        height: var(--ni-24);
-        color: var(--color-text-secondary);
-      }
-
-      input {
-        all: unset;
-        min-width: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
 
     .credit-list {
       display: flex;
