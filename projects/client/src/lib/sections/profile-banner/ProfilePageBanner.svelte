@@ -238,21 +238,22 @@
       display: none;
     }
 
-    // Percentages need a definite width to resolve against. Every box between
-    // this slot and the pill is otherwise shrink-to-fit, so a percentage
-    // max-width on the pill would resolve against its own content width and
-    // constrain nothing - it would keep its intrinsic width and spill over the
-    // anchor. Anchoring each step to the slot's resolved width fixes that, and
-    // lets the pill ellipsise its label the way it is built to.
+    // Cap each box between this slot and the pill, so the pill can never grow
+    // past the slot and paint over the anchor beside it. `max-width` rather
+    // than `width`: a percentage width would also collapse the slot's
+    // intrinsic size, shrinking the pill to just its avatars and cutting the
+    // label off entirely. The link needs a block display for the cap to apply
+    // at all - `max-width` does nothing on an inline box.
     :global(.trakt-leaderboard-pill),
     :global(.trakt-match-pill) {
-      width: 100%;
+      max-width: 100%;
       min-width: 0;
       margin-top: 0;
     }
 
     :global(.trakt-link) {
-      width: 100%;
+      display: block;
+      max-width: 100%;
       min-width: 0;
     }
 
