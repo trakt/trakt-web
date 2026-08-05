@@ -49,7 +49,7 @@
   <div class="item-label">
     <p class="bold capitalize ellipsis">{@render children()}</p>
     {#if subtitle}
-      <p class="small ellipsis">{@render subtitle()}</p>
+      <p class="small secondary ellipsis">{@render subtitle()}</p>
     {/if}
   </div>
 {/snippet}
