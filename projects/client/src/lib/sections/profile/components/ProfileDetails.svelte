@@ -62,7 +62,6 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-profile-details {
-    --details-column-count: 3;
     --profile-details-gap: var(--gap-l);
 
     width: 100%;
@@ -72,19 +71,23 @@
     overflow: visible;
 
     display: grid;
-    grid-template-columns: repeat(var(--details-column-count), minmax(0, 1fr));
+    // The banner column carries the whole identity block - avatar, name,
+    // location, pills, about - while the stat columns only hold a couple of
+    // figures each and have room to spare, so it gets the larger share rather
+    // than an even third.
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--profile-details-gap);
 
     &.is-narrow {
-      --details-column-count: 1;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     @include for-tablet-lg {
-      --details-column-count: 2;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
     }
 
     @include for-tablet-sm-and-below {
-      --details-column-count: 1;
+      grid-template-columns: minmax(0, 1fr);
 
       gap: var(--gap-s);
     }

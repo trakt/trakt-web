@@ -208,16 +208,28 @@
   // the handle, never stacking: the pill absorbs any shrinking (it ellipsises
   // its label and tightens its avatar overlap) while the anchor keeps its
   // content width.
+  // Pantheon / match pill and the achievements anchor always sit side by side,
+  // both at their natural width so neither label is cut short. The row is
+  // allowed to run past this (content-width) details column into the space
+  // beneath the pinned action buttons - the same overflow the pill already
+  // relied on when it had the row to itself.
   .profile-identity-pills {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: var(--gap-xs);
     flex-wrap: nowrap;
-    min-width: 0;
 
     :global(.trakt-achievements-anchor) {
       flex: 0 0 auto;
+    }
+  }
+
+  // Below the width where both fit on one line, drop the anchor underneath
+  // rather than let the row spill past the edge of the banner card.
+  @container avatar-pill (max-width: 380px) {
+    .profile-identity-pills {
+      flex-wrap: wrap;
     }
   }
 
@@ -225,40 +237,23 @@
   // anchor. Deliberately NOT an `avatar-pill` container: `container-type:
   // inline-size` makes a box ignore its own content when sizing, which
   // collapses a content-width flex item to nothing.
+  // Own box for the Pantheon / match pill, sitting beside the achievements
+  // anchor. Sized by its content and never shrunk: constraining the pill from
+  // out here only ever collapsed it to its avatars, because it measures itself
+  // against the banner row via a container query and every box in between is
+  // shrink-to-fit. Letting it keep its width and wrapping the row instead
+  // keeps the label readable at every viewport size.
   .identity-pill-slot {
     display: flex;
-    flex: 0 1 auto;
-    min-width: 0;
-
-    // Belt and braces: even if the pill inside still wants to be wider than
-    // the slot, it can never paint over the anchor sitting next to it.
-    overflow: hidden;
+    flex: 0 0 auto;
 
     &:empty {
       display: none;
     }
 
-    // Cap each box between this slot and the pill, so the pill can never grow
-    // past the slot and paint over the anchor beside it. `max-width` rather
-    // than `width`: a percentage width would also collapse the slot's
-    // intrinsic size, shrinking the pill to just its avatars and cutting the
-    // label off entirely. The link needs a block display for the cap to apply
-    // at all - `max-width` does nothing on an inline box.
     :global(.trakt-leaderboard-pill),
     :global(.trakt-match-pill) {
-      max-width: 100%;
-      min-width: 0;
       margin-top: 0;
-    }
-
-    :global(.trakt-link) {
-      display: block;
-      max-width: 100%;
-      min-width: 0;
-    }
-
-    :global(.trakt-avatar-pill) {
-      max-width: 100%;
     }
   }
 
