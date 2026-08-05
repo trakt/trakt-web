@@ -684,6 +684,7 @@
   "header_official_links": "Official Links",
   "header_original_title": "Original Title",
   "header_other_links": "Other Links",
+  "header_paid_until": "Paid Until",
   "header_paused_items": "{count} Paused Items",
   "header_payment_method": "Payment",
   "header_player_audio": "Audio",
