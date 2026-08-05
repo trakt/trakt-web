@@ -215,11 +215,6 @@
     var(--color-text-primary) 12%,
     transparent
   );
-  --color-option-list-highlight: color-mix(
-    in srgb,
-    var(--color-text-primary) 10%,
-    transparent
-  );
 
   /*
    * Sentiment
@@ -709,11 +704,6 @@
   --color-option-list-separator: color-mix(
     in srgb,
     var(--color-text-primary) 7%,
-    transparent
-  );
-  --color-option-list-highlight: color-mix(
-    in srgb,
-    var(--color-text-primary) 6%,
     transparent
   );
 

@@ -3,10 +3,10 @@
   generics="T extends SortBy | UpNextSortBy | UserListsSortBy"
 >
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import ReorderIcon from "$lib/components/icons/ReorderIcon.svelte";
   import SortDirectionIcon from "$lib/components/icons/SortDirectionIcon.svelte";
-  import OptionList from "$lib/components/option-list/OptionList.svelte";
-  import OptionListItem from "$lib/components/option-list/OptionListItem.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { m } from "$lib/features/i18n/messages";
@@ -55,8 +55,10 @@
 </script>
 
 <Drawer {onClose} size="auto" title={m.drawer_title_sort()}>
-  <OptionList>
+  <DropdownGroup>
     {#each options as option (option.value ?? "default")}
+      {@const description = option.description?.()}
+
       {#snippet icon()}
         {#if option.value}
           <SortIcon sortBy={option.value} />
@@ -69,13 +71,18 @@
         <SortDirectionIcon direction={current.sortHow} />
       {/snippet}
 
-      <OptionListItem
+      {#snippet subtitle()}
+        {description}
+      {/snippet}
+
+      <DropdownItem
         replacestate
+        color="default"
         href={`${urlBuilder({ sortHow: sortHowForOption(option.value), sortBy: option.value })}`}
-        title={option.text()}
-        description={option.description?.()}
+        label={option.label()}
         selected={option.value === current.sorting.value}
         {icon}
+        subtitle={description ? subtitle : undefined}
         end={option.value === current.sorting.value ? end : undefined}
         onclick={() => {
           track({
@@ -83,7 +90,9 @@
             sortHow: sortHowForOption(option.value),
           });
         }}
-      />
+      >
+        {option.text()}
+      </DropdownItem>
     {/each}
-  </OptionList>
+  </DropdownGroup>
 </Drawer>
