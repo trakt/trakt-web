@@ -76,24 +76,16 @@
                 {@render header()}
               {/if}
 
-              <Select.ScrollUpButton>
-                {#snippet child({ props: scrollProps })}
-                  <div {...scrollProps} class="trakt-select-scroll-button">
-                    <ScrollUpIcon />
-                  </div>
-                {/snippet}
+              <Select.ScrollUpButton class="trakt-select-scroll-button">
+                <ScrollUpIcon />
               </Select.ScrollUpButton>
 
               <Select.Viewport>
                 {@render children()}
               </Select.Viewport>
 
-              <Select.ScrollDownButton>
-                {#snippet child({ props: scrollProps })}
-                  <div {...scrollProps} class="trakt-select-scroll-button">
-                    <ScrollDownIcon />
-                  </div>
-                {/snippet}
+              <Select.ScrollDownButton class="trakt-select-scroll-button">
+                <ScrollDownIcon />
               </Select.ScrollDownButton>
             </div>
           </div>
@@ -232,7 +224,7 @@
     }
   }
 
-  .trakt-select-scroll-button {
+  :global(.trakt-select-scroll-button) {
     display: flex;
     align-items: center;
     justify-content: center;
