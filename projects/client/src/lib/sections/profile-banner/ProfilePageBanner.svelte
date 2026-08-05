@@ -79,13 +79,15 @@
         <span class="user-location ellipsis">{profile.location}</span>
       {/if}
       <div class="profile-identity-pills">
-        {#if !$isMe && !isBlocked}
-          <RenderFor audience="authenticated">
-            <MatchPill {slug} />
-          </RenderFor>
-        {:else if $isMe && $leaderboardEnabled}
-          <LeaderboardPill />
-        {/if}
+        <div class="identity-pill-slot">
+          {#if !$isMe && !isBlocked}
+            <RenderFor audience="authenticated">
+              <MatchPill {slug} />
+            </RenderFor>
+          {:else if $isMe && $leaderboardEnabled}
+            <LeaderboardPill />
+          {/if}
+        </div>
         {#if $isMe && profile.isDirector && $vipAchievementsEnabled}
           <AchievementsAnchorHost {profile} />
         {/if}
@@ -159,15 +161,6 @@
     container: avatar-pill / inline-size;
     --avatar-pill-reserved-inline: calc(var(--ni-64) + var(--gap-s));
 
-    // When the achievements anchor shares the pill row, reserve its inline
-    // space too - otherwise the leaderboard pill sizes itself to the whole
-    // remaining row and pushes the anchor out of it.
-    &:has(:global(.trakt-achievements-anchor)) {
-      --avatar-pill-reserved-inline: calc(
-        var(--ni-64) + var(--gap-s) + var(--ni-96) + var(--gap-xs)
-      );
-    }
-
     :global(.trakt-profile-image) {
       display: flex;
       flex-direction: column;
@@ -186,12 +179,6 @@
       flex-wrap: wrap;
 
       --avatar-pill-reserved-inline: calc(var(--ni-40) + var(--gap-xs));
-
-      &:has(:global(.trakt-achievements-anchor)) {
-        --avatar-pill-reserved-inline: calc(
-          var(--ni-40) + var(--gap-xs) + var(--ni-96) + var(--gap-xs)
-        );
-      }
 
       span.ellipsis {
         white-space: normal;
@@ -218,25 +205,59 @@
   }
 
   // Pantheon / match pill and the achievements anchor share one row beneath
-  // the handle. The pill shrinks to the space the container reserves for the
-  // anchor (see `--avatar-pill-reserved-inline` above); the anchor keeps its
-  // content width. They wrap only when the row genuinely runs out of room.
+  // the handle, never stacking: the pill absorbs any shrinking (it ellipsises
+  // its label and tightens its avatar overlap) while the anchor keeps its
+  // content width.
   .profile-identity-pills {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: var(--gap-xs);
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     min-width: 0;
 
+    :global(.trakt-achievements-anchor) {
+      flex: 0 0 auto;
+    }
+  }
+
+  // Own box for the Pantheon / match pill, sitting beside the achievements
+  // anchor. Deliberately NOT an `avatar-pill` container: `container-type:
+  // inline-size` makes a box ignore its own content when sizing, which
+  // collapses a content-width flex item to nothing.
+  .identity-pill-slot {
+    display: flex;
+    flex: 0 1 auto;
+    min-width: 0;
+
+    // Belt and braces: even if the pill inside still wants to be wider than
+    // the slot, it can never paint over the anchor sitting next to it.
+    overflow: hidden;
+
+    &:empty {
+      display: none;
+    }
+
+    // Percentages need a definite width to resolve against. Every box between
+    // this slot and the pill is otherwise shrink-to-fit, so a percentage
+    // max-width on the pill would resolve against its own content width and
+    // constrain nothing - it would keep its intrinsic width and spill over the
+    // anchor. Anchoring each step to the slot's resolved width fixes that, and
+    // lets the pill ellipsise its label the way it is built to.
     :global(.trakt-leaderboard-pill),
     :global(.trakt-match-pill) {
+      width: 100%;
       min-width: 0;
       margin-top: 0;
     }
 
-    :global(.trakt-achievements-anchor) {
-      flex: 0 0 auto;
+    :global(.trakt-link) {
+      width: 100%;
+      min-width: 0;
+    }
+
+    :global(.trakt-avatar-pill) {
+      max-width: 100%;
     }
   }
 
