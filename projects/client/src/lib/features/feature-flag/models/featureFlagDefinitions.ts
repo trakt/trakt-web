@@ -91,6 +91,7 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
   [FeatureFlag.VipAchievements]: {
     icon: SparkleIcon,
     title: () => m.preview_feature_title_vip_achievements(),
+    addedAt: new Date('2026-07-31'),
     description: () => m.preview_feature_description_vip_achievements(),
     audience: 'director',
   },

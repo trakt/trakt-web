@@ -96,7 +96,7 @@ export const achievementCatalog: ReadonlyArray<VipAchievementDefinition> = [
     description: m.vip_achievement_show_completionist_description,
     thresholds: [10, 50, 100, 250],
     freezable: false,
-    metric: ({ stats }) => stats?.progress.finished ?? 0,
+    metric: ({ stats }) => stats?.progress?.finished ?? 0,
   },
   {
     id: 're-watcher',
