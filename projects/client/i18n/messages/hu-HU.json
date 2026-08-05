@@ -1519,6 +1519,7 @@
   "text_season_episode_number": "{season} évad • {number} epizód",
   "text_season_not_started": "Nem kezdődött el",
   "text_season_number": "{number}. évad",
+  "text_season_number_with_title": "{number} - {title}",
   "text_season_specials": "Különkiadások",
   "text_sentiment_example": "Példa: „{title}”",
   "text_services_selected": "{count} / {total} kiválasztva · {country}",

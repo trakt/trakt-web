@@ -1519,6 +1519,7 @@
   "text_season_episode_number": "シーズン{season} • エピソード{number}",
   "text_season_not_started": "未開始",
   "text_season_number": "シーズン{number}",
+  "text_season_number_with_title": "{number}：{title}",
   "text_season_specials": "スペシャル",
   "text_sentiment_example": "「{title}」からの例",
   "text_services_selected": "{count} / {total} 選択済み · {country}",

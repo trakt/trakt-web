@@ -1519,6 +1519,7 @@
   "text_season_episode_number": "Sezonul {season} • Episodul {number}",
   "text_season_not_started": "Nînceput",
   "text_season_number": "Sezonul {number}",
+  "text_season_number_with_title": "{number} - {title}",
   "text_season_specials": "Speciale",
   "text_sentiment_example": "Exemplu din „{title}”",
   "text_services_selected": "{count} / {total} selectate · {country}",

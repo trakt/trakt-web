@@ -1519,6 +1519,7 @@
   "text_season_episode_number": "Sezon {season} • Bölüm {number}",
   "text_season_not_started": "Başlamadı",
   "text_season_number": "Sezon {number}",
+  "text_season_number_with_title": "{number}: {title}",
   "text_season_specials": "Özel Bölümler",
   "text_sentiment_example": "\"{title}\" örneği",
   "text_services_selected": "{count} / {total} seçili · {country}",

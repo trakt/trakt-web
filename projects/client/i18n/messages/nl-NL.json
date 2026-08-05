@@ -1519,6 +1519,7 @@
   "text_season_episode_number": "S{season} • Afl. {number}",
   "text_season_not_started": "Niet gestart",
   "text_season_number": "Seizoen {number}",
+  "text_season_number_with_title": "{number}: {title}",
   "text_season_specials": "Specials",
   "text_sentiment_example": "Voorbeeld van \"{title}\"",
   "text_services_selected": "{count} / {total} geselecteerd · {country}",

@@ -1519,6 +1519,7 @@
   "text_season_episode_number": "فصل {season} • اپیزود {number}",
   "text_season_not_started": "شروع نشده",
   "text_season_number": "فصل {number}",
+  "text_season_number_with_title": "{number} : {title}",
   "text_season_specials": "ویژه‌ها",
   "text_sentiment_example": "مثالی از \"{title}\"",
   "text_services_selected": "{count} / {total} انتخاب شده · {country}",
