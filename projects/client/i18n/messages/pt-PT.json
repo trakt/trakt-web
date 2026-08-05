@@ -67,7 +67,7 @@
   "button_label_connect_streaming_service": "Associar {service}",
   "button_label_copied": "Copiado",
   "button_label_copy": "Copiar",
-  "button_label_cover_image_selected": "\" {title} \" é a tua imagem de capa",
+  "button_label_cover_image_selected": "\"{title}\" é a tua imagem de capa.",
   "button_label_create_app": "Criar aplicação",
   "button_label_create_list": "Criar lista",
   "button_label_delete_account": "Eliminar a tua conta Trakt",
