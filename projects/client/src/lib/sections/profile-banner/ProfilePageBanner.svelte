@@ -159,6 +159,15 @@
     container: avatar-pill / inline-size;
     --avatar-pill-reserved-inline: calc(var(--ni-64) + var(--gap-s));
 
+    // When the achievements anchor shares the pill row, reserve its inline
+    // space too - otherwise the leaderboard pill sizes itself to the whole
+    // remaining row and pushes the anchor out of it.
+    &:has(:global(.trakt-achievements-anchor)) {
+      --avatar-pill-reserved-inline: calc(
+        var(--ni-64) + var(--gap-s) + var(--ni-96) + var(--gap-xs)
+      );
+    }
+
     :global(.trakt-profile-image) {
       display: flex;
       flex-direction: column;
@@ -177,6 +186,12 @@
       flex-wrap: wrap;
 
       --avatar-pill-reserved-inline: calc(var(--ni-40) + var(--gap-xs));
+
+      &:has(:global(.trakt-achievements-anchor)) {
+        --avatar-pill-reserved-inline: calc(
+          var(--ni-40) + var(--gap-xs) + var(--ni-96) + var(--gap-xs)
+        );
+      }
 
       span.ellipsis {
         white-space: normal;
@@ -202,18 +217,26 @@
     }
   }
 
-  // Pantheon / match pill on top, achievements anchor stacked beneath it -
-  // each gets its own full-width row under the handle so neither is cramped.
+  // Pantheon / match pill and the achievements anchor share one row beneath
+  // the handle. The pill shrinks to the space the container reserves for the
+  // anchor (see `--avatar-pill-reserved-inline` above); the anchor keeps its
+  // content width. They wrap only when the row genuinely runs out of room.
   .profile-identity-pills {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--gap-xxs);
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-xs);
+    flex-wrap: wrap;
     min-width: 0;
 
     :global(.trakt-leaderboard-pill),
     :global(.trakt-match-pill) {
+      min-width: 0;
       margin-top: 0;
+    }
+
+    :global(.trakt-achievements-anchor) {
+      flex: 0 0 auto;
     }
   }
 

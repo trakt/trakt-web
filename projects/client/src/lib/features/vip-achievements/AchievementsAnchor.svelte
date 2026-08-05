@@ -90,13 +90,27 @@
     display: inline-flex;
   }
 
+  // Mirrors the avatar pill's caret: fades in and nudges along the reading
+  // direction on hover. `--rtl-sign` keeps the nudge direction-aware, since
+  // transforms are not.
   .anchor-caret {
     display: inline-flex;
-    opacity: 0.7;
+    opacity: 0.55;
+
+    transition:
+      transform var(--transition-increment) ease-out,
+      opacity var(--transition-increment) ease-out;
 
     :global(svg) {
       width: var(--ni-14);
       height: var(--ni-14);
+    }
+  }
+
+  @include for-mouse {
+    .trakt-achievements-anchor:hover .anchor-caret {
+      opacity: 0.9;
+      transform: translateX(calc(var(--rtl-sign) * var(--ni-2)));
     }
   }
 </style>
