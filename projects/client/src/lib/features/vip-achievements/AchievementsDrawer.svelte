@@ -15,10 +15,20 @@
 
   let showLocked = $state(false);
 
+  const unlocked = $derived(
+    achievements.filter((achievement) => achievement.isUnlocked),
+  );
+
+  // Revealing the locked ones appends them after the unlocked list rather than
+  // slotting them back into catalog order, so the cards already on screen stay
+  // exactly where they were when the switch is flipped.
   const visible = $derived(
     showLocked
-      ? achievements
-      : achievements.filter((achievement) => achievement.isUnlocked),
+      ? [
+        ...unlocked,
+        ...achievements.filter((achievement) => !achievement.isUnlocked),
+      ]
+      : unlocked,
   );
 </script>
 
