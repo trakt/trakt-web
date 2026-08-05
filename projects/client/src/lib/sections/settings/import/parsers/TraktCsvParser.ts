@@ -6,7 +6,7 @@ import type {
 import type { FileParser } from './ParserInterface.ts';
 import { isValidItem } from './utils/isValidItem.ts';
 import { parseCsvFile } from './utils/parseCsvFile.ts';
-import { toISOString } from './utils/toISOString.ts';
+import { toImportISOString } from './utils/toImportISOString.ts';
 
 type TraktCsvRow = {
   type?: string;
@@ -44,7 +44,7 @@ function normalizeRowKeys(row: Record<string, unknown>): TraktCsvRow {
 
 function toWatchedAt(value?: string): string | undefined {
   if (value === 'unknown') return 'unknown';
-  return toISOString(value);
+  return toImportISOString(value);
 }
 
 function inferAction(row: TraktCsvRow): ImportAction {
@@ -168,7 +168,7 @@ function parseTraktCsvRow(
     row,
     watchedAt: toWatchedAt(row.watched_at ?? row.date_watched),
     rating: row.rating ? parseInt(row.rating, 10) : undefined,
-    ratedAt: toISOString(row.rated_at),
+    ratedAt: toImportISOString(row.rated_at),
     listedAt: row.listed_at ?? row.watchlisted_at,
   };
 

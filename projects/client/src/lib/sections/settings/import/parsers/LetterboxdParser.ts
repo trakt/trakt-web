@@ -3,7 +3,7 @@ import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { isValidItem } from './utils/isValidItem.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
-import { toISOString } from './utils/toISOString.ts';
+import { toImportISOString } from './utils/toImportISOString.ts';
 
 type LetterboxdDiaryRow = {
   Date?: string;
@@ -41,7 +41,7 @@ function parseDiaryRow(row: LetterboxdDiaryRow): UniversalImportItem | null {
   if (!row.Name) return null;
 
   const year = row.Year ? parseInt(row.Year, 10) : undefined;
-  const watchedAt = toISOString(row['Watched Date']);
+  const watchedAt = toImportISOString(row['Watched Date']);
   const rating = row.Rating ? parseFloat(row.Rating) * 2 : undefined;
 
   return {
@@ -69,7 +69,7 @@ function parseRatingsRow(
     title: row.Name,
     year: row.Year ? parseInt(row.Year, 10) : undefined,
     rating: rating && rating >= 1 ? Math.round(rating) : undefined,
-    rated_at: toISOString(row.Date),
+    rated_at: toImportISOString(row.Date),
   };
 }
 
@@ -84,7 +84,7 @@ function parseWatchedRow(
     ids: {},
     title: row.Name,
     year: row.Year ? parseInt(row.Year, 10) : undefined,
-    watched_at: toISOString(row.Date),
+    watched_at: toImportISOString(row.Date),
   };
 }
 

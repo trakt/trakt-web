@@ -2,7 +2,7 @@ import type { ImportType, UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvFile } from './utils/parseCsvFile.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
-import { toISOString } from './utils/toISOString.ts';
+import { toImportISOString } from './utils/toImportISOString.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
 const ACTIVITY_HISTORY_CSV = 'activity_history.csv';
@@ -55,7 +55,7 @@ function parseLiberatorRow(row: TvTimeLiberatorRow): UniversalImportItem[] {
     items.push({
       ...base,
       action: 'history',
-      watched_at: toISOString(row.watched_at),
+      watched_at: toImportISOString(row.watched_at),
     });
   }
 

@@ -1,6 +1,6 @@
 const DATE_ONLY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
-export function toISOString(value?: string): string | undefined {
+export function toImportISOString(value?: string): string | undefined {
   if (!value) return undefined;
 
   const normalized = DATE_ONLY_PATTERN.test(value)
