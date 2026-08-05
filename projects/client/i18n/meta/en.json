@@ -8224,6 +8224,10 @@
       "default": "Drag to reorder",
       "description": "Title for the drawer containing controls to reorder list items by dragging."
     },
+    "drawer_title_reorder_list_more": {
+      "default": "Drag to reorder, tap for more options",
+      "description": "Title for the drawer containing controls to reorder list items by dragging or tapping for more options."
+    },
     "header_sentiment_positive": {
       "default": "Positive",
       "description": "Text for the header that indicates a positive sentiment."
