@@ -720,6 +720,18 @@
       "default": "Search people",
       "description": "Aria-label for the people drawer search input."
     },
+    "input_placeholder_search_streaming_services": {
+      "default": "Search streaming service or country...",
+      "description": "Placeholder text for the where-to-watch drawer search input. This should be short and indicate users can search locally by country name or streaming service name."
+    },
+    "input_label_search_streaming_services": {
+      "default": "Search streaming services",
+      "description": "Aria-label for the where-to-watch drawer search input."
+    },
+    "button_label_toggle_streaming_countries": {
+      "default": "Toggle countries for {service}",
+      "description": "Aria-label for the button that expands or collapses the list of countries a streaming service is available in."
+    },
     "button_text_join_trakt": {
       "default": "Join Trakt",
       "description": "Text for the Trakt login button. This should be a short and concise message that indicates what users can do."
@@ -4692,11 +4704,11 @@
     },
     "button_text_sort_rank": {
       "default": "Rank",
-      "description": "Text for the button that allows users to sort lists by their custom rank order."
+      "description": "Text for the button that allows users to sort items by their manual rank."
     },
     "button_label_sort_rank": {
       "default": "Sort by rank",
-      "description": "Aria-label for the button that allows users to sort lists by their custom rank order."
+      "description": "Aria-label for the button that allows users to sort items by their manual rank."
     },
     "button_text_sort_name": {
       "default": "Name",
