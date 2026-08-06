@@ -49,7 +49,7 @@
   <div class="item-label">
     <p class="bold capitalize ellipsis">{@render children()}</p>
     {#if subtitle}
-      <p class="small ellipsis">{@render subtitle()}</p>
+      <p class="small secondary ellipsis">{@render subtitle()}</p>
     {/if}
   </div>
 {/snippet}
@@ -106,11 +106,15 @@
     list-style-type: none;
     user-select: none;
 
-    padding: 0 var(--ni-12);
-    height: calc(var(--ni-20) + var(--ni-12) * 2);
+    // Layout and surface resolve through configuration tokens so a container
+    // (e.g. DropdownGroup) can render items as flush rows by setting these on
+    // the list, instead of fighting these rules from the outside.
+    padding: var(--dropdown-item-padding-block, 0)
+      var(--dropdown-item-padding-inline, var(--ni-12));
+    height: var(--dropdown-item-height, calc(var(--ni-20) + var(--ni-12) * 2));
     width: 100%;
     box-sizing: border-box;
-    border-radius: var(--border-radius-m);
+    border-radius: var(--dropdown-item-radius, var(--border-radius-m));
 
     align-content: center;
     justify-self: center;
@@ -126,8 +130,8 @@
     transition-property: background, color;
 
     &.has-subtitle {
-      height: auto;
-      padding-block: var(--ni-8);
+      height: var(--dropdown-item-height, auto);
+      padding-block: var(--dropdown-item-padding-block, var(--ni-8));
     }
 
     .item-label {
@@ -175,34 +179,46 @@
     }
 
     @mixin variant($color, $bg-color) {
-      color: $color;
+      color: var(--dropdown-item-foreground, #{$color});
 
       @include for-mouse {
         &:hover:not([disabled="true"]) {
-          background: $bg-color;
+          background: var(--dropdown-item-background-hover, #{$bg-color});
         }
       }
 
       &[data-style="flat"] {
-        background: $color;
-        color: $bg-color;
+        background: var(--dropdown-item-background, #{$color});
+        color: var(--dropdown-item-foreground, #{$bg-color});
 
         @include for-mouse {
           &:hover:not([disabled="true"]) {
-            background: $bg-color;
-            color: $color;
+            background: var(--dropdown-item-background-hover, #{$bg-color});
+            color: var(--dropdown-item-foreground, #{$color});
           }
         }
       }
 
       &[disabled="true"] {
-        background: var(--color-foreground-button-disabled);
-        color: var(--color-surface-button-disabled);
+        background: var(
+          --dropdown-item-background,
+          var(--color-foreground-button-disabled)
+        );
+        color: var(
+          --dropdown-item-foreground,
+          var(--color-surface-button-disabled)
+        );
       }
 
       &.is-selected {
-        background: var(--color-foreground-button-disabled);
-        color: var(--color-surface-button-disabled);
+        background: var(
+          --dropdown-item-background-selected,
+          var(--color-foreground-button-disabled)
+        );
+        color: var(
+          --dropdown-item-foreground,
+          var(--color-surface-button-disabled)
+        );
       }
     }
 
@@ -216,7 +232,7 @@
       }
 
       &:active {
-        background: $active-bg;
+        background: var(--dropdown-item-background-active, #{$active-bg});
       }
 
       &:focus-visible,

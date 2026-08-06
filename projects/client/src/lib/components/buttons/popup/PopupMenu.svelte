@@ -1,5 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
   import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
@@ -52,9 +53,13 @@
 {#if variant === "drawer"}
   {#if $isOpened}
     <Drawer onClose={close} {title} size="auto" elevated>
-      <ul class="popup-menu-drawer-item" use:closeOnSelect={close}>
-        {@render items()}
-      </ul>
+      <!-- closeOnSelect listens for bubbled item clicks; DropdownGroup owns
+           the <ul>, so the action sits on a layout-neutral wrapper. -->
+      <div style="display: contents" use:closeOnSelect={close}>
+        <DropdownGroup>
+          {@render items()}
+        </DropdownGroup>
+      </div>
     </Drawer>
   {/if}
 {:else}
@@ -65,9 +70,9 @@
       transition:slide={{ duration: 150 }}
     >
       <div class="spacer"></div>
-      <ul>
+      <DropdownGroup>
         {@render items()}
-      </ul>
+      </DropdownGroup>
     </div>
   {/if}
 {/if}
@@ -184,44 +189,18 @@
 
     min-width: var(--ni-156);
     max-width: var(--ni-240);
-    padding: var(--list-padding);
-
-    border-radius: var(--border-radius-m);
-    background-color: var(--shade-10);
 
     position: absolute;
-    box-shadow: var(--shadow-menu);
 
-    ul {
-      all: unset;
-
-      display: grid;
-      grid-template-columns: 100%;
-      gap: var(--gap-xxs);
-      max-height: var(--ni-220);
-      overflow-y: auto;
-
-      :global(li) {
-        width: 100%;
-        box-sizing: border-box;
-      }
+    // The grouped card floats free here (no drawer behind it), so it carries
+    // the menu shadow. No height cap — a dropdown always shows every option
+    // rather than scrolling inside itself.
+    :global(.trakt-dropdown-group) {
+      box-shadow: var(--shadow-menu);
     }
 
     div.spacer {
       height: calc($button-size + $button-padding * 2 + var(--list-padding));
-    }
-  }
-
-  .popup-menu-drawer-item {
-    all: unset;
-
-    display: grid;
-    grid-template-columns: 100%;
-    gap: var(--gap-xxs);
-
-    :global(li) {
-      width: 100%;
-      box-sizing: border-box;
     }
   }
 </style>

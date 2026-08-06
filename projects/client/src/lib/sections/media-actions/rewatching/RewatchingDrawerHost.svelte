@@ -65,6 +65,7 @@
   {onClose}
   onOpened={() => (isOpen = true)}
   title={drawerTitle}
+  titleStyle="prominent"
   metaInfo={m.text_rewatching_next_episode_prompt()}
   size="large"
 >
