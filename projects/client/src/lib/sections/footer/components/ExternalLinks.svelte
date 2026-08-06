@@ -87,7 +87,9 @@
   </Link>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-external-links {
     --external-link-size: var(--ni-30);
 
@@ -114,8 +116,10 @@
       transition: color var(--transition-increment) ease;
     }
 
-    :global(.trakt-link:hover svg) {
-      color: var(--color-text-primary);
+    @include for-mouse {
+      :global(.trakt-link:hover svg) {
+        color: var(--color-text-primary);
+      }
     }
   }
 </style>
