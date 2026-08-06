@@ -2,11 +2,15 @@
   import LockIcon from "$lib/components/icons/LockIcon.svelte";
   import KpiTile from "$lib/components/kpi/KpiTile.svelte";
   import { languageTag } from "$lib/features/i18n";
-  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
+  import { toHumanCount } from "$lib/utils/formatting/number/toHumanCount.ts";
   import type { AllTimeStatTileProps } from "./AllTimeStatTileProps.ts";
   import StatIcon from "./StatIcon.svelte";
 
   const { stat, label, value, isLoading }: AllTimeStatTileProps = $props();
+
+  const displayValue = $derived(
+    value == null ? undefined : toHumanCount(value, languageTag()),
+  );
 </script>
 
 <div class="trakt-all-time-stat-tile" class:is-locked={value == null}>
@@ -20,7 +24,7 @@
     {:else if value == null}
       <LockIcon />
     {:else}
-      <p>{toHumanNumber(value, languageTag())}</p>
+      <p>{displayValue}</p>
     {/if}
   </KpiTile>
 </div>
