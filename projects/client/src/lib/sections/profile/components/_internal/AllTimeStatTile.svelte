@@ -2,7 +2,7 @@
   import LockIcon from "$lib/components/icons/LockIcon.svelte";
   import KpiTile from "$lib/components/kpi/KpiTile.svelte";
   import { languageTag } from "$lib/features/i18n";
-  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
+  import { toHumanCount } from "$lib/utils/formatting/number/toHumanCount.ts";
   import type { AllTimeStatTileProps } from "./AllTimeStatTileProps.ts";
   import StatIcon from "./StatIcon.svelte";
 
@@ -20,7 +20,7 @@
     {:else if value == null}
       <LockIcon />
     {:else}
-      <p>{toHumanNumber(value, languageTag())}</p>
+      <p>{toHumanCount(value, languageTag())}</p>
     {/if}
   </KpiTile>
 </div>

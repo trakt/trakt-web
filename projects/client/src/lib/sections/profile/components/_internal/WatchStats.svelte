@@ -2,8 +2,8 @@
   import Stat from "$lib/components/stat/Stat.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
-  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
+  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration.ts";
+  import { toHumanCount } from "$lib/utils/formatting/number/toHumanCount.ts";
   import StatIcon from "./StatIcon.svelte";
   import type { StatIconKey } from "./StatIconKey.ts";
   import type { StatsCardStats } from "./StatsCardProps.ts";
@@ -28,7 +28,7 @@
     value: number,
     labelFn: ({ count }: { count: string }) => string,
   ) => {
-    const valueLabel = toHumanNumber(value, languageTag());
+    const valueLabel = toHumanCount(value, languageTag());
     return size === "large" ? valueLabel : labelFn({ count: valueLabel });
   };
 
@@ -71,13 +71,13 @@
             },
             {
               present: stats.ratingCount != null,
-              label: toHumanNumber(stats.ratingCount ?? 0, languageTag()),
+              label: toHumanCount(stats.ratingCount ?? 0, languageTag()),
               tagLabel: m.label_stats_ratings(),
               key: "ratings",
             },
             {
               present: stats.commentCount != null,
-              label: toHumanNumber(stats.commentCount ?? 0, languageTag()),
+              label: toHumanCount(stats.commentCount ?? 0, languageTag()),
               tagLabel: m.label_stats_comments(),
               key: "comments",
             },

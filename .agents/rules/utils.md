@@ -95,6 +95,7 @@ toRelativeHumanDay(today, date, localeKey);
 
 // number
 toHumanNumber(value, locale); // compact notation: 1.2k, 4.5M
+toHumanCount(value, locale); // counts: grouped below 100K (1,234), compact above
 toPercentage(value, locale); // 0.75 -> "75%"
 toTraktRating(rating, locale); // alias for toPercentage
 toHumanCurrency({ price, currency, locale });
