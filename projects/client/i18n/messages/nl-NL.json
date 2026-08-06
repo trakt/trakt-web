@@ -1576,6 +1576,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "Geen verandering",
   "text_stats_delta_up": "+{count}",
+  "text_stats_ended": "Beëindigd",
   "text_stats_episodes_count": "{count} afleveringen",
   "text_stats_keep_it_going": "Blijf doorgaan!",
   "text_stats_movies_count": "{count} films",

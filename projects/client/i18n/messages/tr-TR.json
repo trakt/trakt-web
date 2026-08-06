@@ -1576,6 +1576,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "Değişiklik yok",
   "text_stats_delta_up": "+{count}",
+  "text_stats_ended": "Bitti",
   "text_stats_episodes_count": "{count} bölüm",
   "text_stats_keep_it_going": "Devam edin!",
   "text_stats_movies_count": "{count} film",

@@ -1576,6 +1576,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "変更なし",
   "text_stats_delta_up": "+{count}",
+  "text_stats_ended": "終了",
   "text_stats_episodes_count": "{count}話",
   "text_stats_keep_it_going": "続けていこう!",
   "text_stats_movies_count": "{count}本",

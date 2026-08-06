@@ -1576,6 +1576,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "无变化",
   "text_stats_delta_up": "+{count}",
+  "text_stats_ended": "已完结",
   "text_stats_episodes_count": "{count} 集",
   "text_stats_keep_it_going": "继续保持！",
   "text_stats_movies_count": "{count} 部电影",

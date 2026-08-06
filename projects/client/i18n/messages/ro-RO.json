@@ -1576,6 +1576,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "Nicio modificare",
   "text_stats_delta_up": "+{count}",
+  "text_stats_ended": "Încheiat",
   "text_stats_episodes_count": "{count} episoade",
   "text_stats_keep_it_going": "Menține ritmul!",
   "text_stats_movies_count": "{count} filme",

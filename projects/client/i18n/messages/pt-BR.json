@@ -1576,6 +1576,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "Sem alteração",
   "text_stats_delta_up": "+{count}",
+  "text_stats_ended": "Encerrada",
   "text_stats_episodes_count": "{count} episódios",
   "text_stats_keep_it_going": "Mantenha a sequência!",
   "text_stats_movies_count": "{count} filmes",

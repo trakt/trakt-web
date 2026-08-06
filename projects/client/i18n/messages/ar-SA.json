@@ -1576,6 +1576,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "لا تغيير",
   "text_stats_delta_up": "+{count}",
+  "text_stats_ended": "منتهٍ",
   "text_stats_episodes_count": "الحلقات: {count}",
   "text_stats_keep_it_going": "استمر في ذلك!",
   "text_stats_movies_count": "الأفلام: {count}",

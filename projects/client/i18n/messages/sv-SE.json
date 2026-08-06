@@ -1576,6 +1576,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "Ingen ändring",
   "text_stats_delta_up": "+{count}",
+  "text_stats_ended": "Avslutad",
   "text_stats_episodes_count": "{count} avsnitt",
   "text_stats_keep_it_going": "Fortsätt så!",
   "text_stats_movies_count": "{count} filmer",

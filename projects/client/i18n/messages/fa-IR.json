@@ -1576,6 +1576,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "بدون تغییر",
   "text_stats_delta_up": "+{count}",
+  "text_stats_ended": "پایان یافته",
   "text_stats_episodes_count": "{count} اپیزود",
   "text_stats_keep_it_going": "ادامه دهید!",
   "text_stats_movies_count": "{count} فیلم",

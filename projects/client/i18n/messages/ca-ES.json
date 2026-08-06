@@ -1576,6 +1576,7 @@
   "text_stats_delta_down": "-{count}",
   "text_stats_delta_same": "Sense canvis",
   "text_stats_delta_up": "+{count}",
+  "text_stats_ended": "Finalitzat",
   "text_stats_episodes_count": "{count} episodis",
   "text_stats_keep_it_going": "Que no pari!",
   "text_stats_movies_count": "{count} pel·lícules",
