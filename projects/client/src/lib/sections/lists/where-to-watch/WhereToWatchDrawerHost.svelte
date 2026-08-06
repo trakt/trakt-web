@@ -9,13 +9,13 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
-  import { filterGroupedServices } from "./filterGroupedServices";
-  import { getGroupedServices } from "./getGroupedServices";
-  import { StreamingGroup } from "./models/StreamingGroup";
-  import { useAllStreamOn } from "./useAllStreamOn";
-  import WhereToWatchCategory from "./WhereToWatchCategory.svelte";
-  import WhereToWatchItem from "./WhereToWatchItem.svelte";
-  import WhereToWatchServiceSection from "./WhereToWatchServiceSection.svelte";
+  import { filterGroupedServices } from "./_internal/filterGroupedServices";
+  import { getGroupedServices } from "./_internal/getGroupedServices";
+  import { StreamingGroup } from "./_internal/models/StreamingGroup";
+  import { useAllStreamOn } from "./_internal/useAllStreamOn";
+  import WhereToWatchCategory from "./_internal/WhereToWatchCategory.svelte";
+  import WhereToWatchItem from "./_internal/WhereToWatchItem.svelte";
+  import WhereToWatchServiceSection from "./_internal/WhereToWatchServiceSection.svelte";
 
   const {
     onClose,
