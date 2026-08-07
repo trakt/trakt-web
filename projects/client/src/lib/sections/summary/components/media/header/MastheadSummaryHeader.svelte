@@ -340,7 +340,12 @@
         towards a straight line. Keep `spread` at or above 100% or the top corners
         start fading too (see the note on the mask).
     */
-    --masthead-poster-width: var(--ni-220);
+    /*
+      Fluid, and the derived geometry below follows for free - which is the whole
+      reason the band and overlap are computed from this rather than hardcoded. A
+      fixed 220px poster on a phone left the backdrop band taller than the screen.
+    */
+    --masthead-poster-width: clamp(var(--ni-132), 18vw, var(--ni-220));
     --masthead-poster-height: calc(var(--masthead-poster-width) * 1.5);
     --masthead-rhythm: var(--gap-l);
     --masthead-backdrop-reveal: var(--masthead-rhythm);
@@ -514,8 +519,12 @@
     /* The same rhythm as the frame insets, so every gap in the card matches. */
     gap: var(--masthead-rhythm);
 
-    /* The generous side padding is load-bearing: it sets the centred measure. */
-    padding: 0 var(--ni-120) var(--ni-44);
+    /*
+      The side padding sets the centred measure, so it has to scale rather than sit
+      at the 120px it was drawn with - at 1024px that alone ate a quarter of the
+      window and squeezed the strip below into unreadable columns.
+    */
+    padding: 0 clamp(var(--gap-m), 8vw, var(--ni-120)) var(--ni-44);
     /*
       Matches the poster height, so the poster's base lands exactly where the
       band ends and the dissolve completes. Change this and the band height
@@ -523,10 +532,14 @@
     */
     margin-top: var(--backdrop-overlap);
 
-    /* One step larger than the anchored direction, on a tighter measure. */
-    --title-size-large: var(--ni-66);
-    --title-size-medium: var(--ni-56);
-    --title-size-small: var(--ni-48);
+    /*
+      One step larger than the anchored direction, on a tighter measure. Fluid for
+      the same reason the anchored title is - the length bucket picks WHICH size,
+      the viewport decides how big it renders.
+    */
+    --title-size-large: clamp(var(--ni-32), 5.2vw, var(--ni-66));
+    --title-size-medium: clamp(var(--ni-28), 4.4vw, var(--ni-56));
+    --title-size-small: clamp(var(--ni-24), 3.8vw, var(--ni-48));
     --title-measure: 20ch;
 
     /*
@@ -552,8 +565,8 @@
       }
     }
 
-    @include for-tablet-lg {
-      padding: 0 var(--gap-l) var(--ni-28);
+    @include for-tablet-sm-and-below {
+      padding-bottom: var(--ni-28);
     }
   }
 
@@ -585,18 +598,33 @@
       visitor), and this keeps the remaining columns equal and full-width instead
       of leaving an empty cell behind.
     */
+    /*
+      `auto-fit` + `minmax`, which solves two problems with one rule.
+
+      Column COUNT is not fixed: sentiment, social activity and trivia each drop out
+      when there is nothing to show, and auto-fit keeps whatever survives equal and
+      full-width rather than leaving a dead cell.
+
+      Column WIDTH now has a floor. The previous `auto-flow: column` could not wrap,
+      so five columns stayed five columns however narrow the window got - at 1024px
+      that was 109px each. With a floor they wrap onto as many rows as they need,
+      which is the behaviour that holds from a phone to an ultrawide without a
+      breakpoint per case.
+    */
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(var(--strip-column-min, var(--ni-200)), 1fr)
+    );
     gap: var(--ni-32);
 
     /* The composition centres; the data does not. */
     text-align: start;
 
-    @include for-tablet-lg {
-      grid-auto-flow: row;
-      grid-auto-columns: auto;
+    @include for-tablet-sm-and-below {
       gap: var(--gap-l);
+      /* One column: below this even two columns cannot hold a provider row. */
+      --strip-column-min: 100%;
     }
   }
 

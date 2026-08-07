@@ -215,16 +215,34 @@
       transparent
     );
 
+    /*
+      Fluid rather than fixed, because the fixed version only ever worked at the
+      width it was drawn at. The rails were pinned at 264 and 300px with 40px gaps
+      and padding, which at 1024px left the main column 188px to hold a 64px title.
+      Sizing them from the viewport means every width in between is accounted for
+      without a breakpoint per case.
+
+      `vw` and not `%` deliberately: the sidebar can expand, so the header's own
+      width changes at a fixed viewport width, and percentages would feed that
+      change back into the rails.
+    */
+    --header-poster-rail: clamp(var(--ni-160), 19vw, var(--ni-264));
+    --header-info-rail: clamp(var(--ni-240), 22vw, var(--ni-300));
+    --header-gutter: clamp(var(--ni-20), 2.6vw, var(--ni-40));
+
     display: grid;
-    grid-template-columns: var(--ni-264) minmax(0, 1fr) var(--ni-300);
-    gap: var(--ni-40);
+    grid-template-columns:
+      var(--header-poster-rail)
+      minmax(0, 1fr)
+      var(--header-info-rail);
+    gap: var(--header-gutter);
     align-items: start;
 
     box-sizing: border-box;
     /* Matches the measure the lists below use, so the edges line up. */
     max-width: var(--list-inner-width);
     margin: var(--gap-m) var(--layout-distance-side);
-    padding: var(--ni-40);
+    padding: var(--header-gutter);
 
     border-radius: var(--border-radius-xl);
     background: color-mix(
@@ -235,13 +253,28 @@
     @include backdrop-filter-blur(var(--header-surface-blur));
 
     /*
-      Below desktop the info rail drops under the main column as a two-up row;
-      the poster rail and main column keep their relationship.
+      Three columns need roughly 1200px before the main column stops being the
+      narrowest thing on screen. Below that the info rail drops beneath the main
+      column and splits two-up, which buys the title and synopsis the full width.
+
+      A raw query rather than a device mixin on purpose: this is a property of THIS
+      layout's column budget, not of a device class, and the nearest mixin
+      boundary (1023px) is far too late - the layout has already collapsed by then.
     */
-    @include for-tablet-lg {
-      grid-template-columns: var(--ni-200) minmax(0, 1fr);
-      gap: var(--ni-28);
-      padding: var(--ni-28);
+    @media (max-width: 1200px) {
+      grid-template-columns: var(--header-poster-rail) minmax(0, 1fr);
+    }
+
+    /*
+      One column: below this the poster rail and the main column are competing for
+      a width that cannot hold both.
+    */
+    @include for-tablet-sm-and-below {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+
+      margin-inline: var(--layout-distance-side);
+      padding: var(--gap-m);
     }
   }
 
@@ -253,6 +286,15 @@
     /* Fills the rail column and takes the design's tighter poster radius. */
     --summary-poster-width: 100%;
     --summary-poster-radius: var(--border-radius-m);
+
+    /*
+      Once the grid is a single column the rail would stretch to the full width and
+      the poster would tower over everything, so it is capped and centred instead.
+    */
+    @include for-tablet-sm-and-below {
+      width: min(100%, var(--ni-200));
+      align-items: center;
+    }
   }
 
   .rail-actions {
@@ -282,6 +324,7 @@
     gap: var(--ni-28);
 
     min-width: 0;
+    width: 100%;
 
     /*
       The column's reading measure, shared by the prose and by the facts strip's
@@ -356,17 +399,32 @@
     position: sticky;
     top: var(--gap-l);
 
-    @include for-tablet-lg {
+    /*
+      Matches the root's column-budget breakpoint: when the third column is
+      dropped, the rail moves under the full width of the grid and its two sections
+      sit side by side. Sticky has to go with it - the rail is no longer a column
+      alongside the content, it is a row beneath it.
+    */
+    @media (max-width: 1200px) {
       position: static;
 
       grid-column: 1 / -1;
       flex-direction: row;
       align-items: flex-start;
+      gap: var(--header-gutter);
 
       > :global(*) {
         flex: 1;
         min-width: 0;
       }
+    }
+
+    /* Two sections side by side stop fitting well before the grid does. */
+    @include for-tablet-sm-and-below {
+      flex-direction: column;
+      gap: var(--ni-28);
+
+      width: 100%;
     }
   }
 
