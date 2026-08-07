@@ -10234,6 +10234,14 @@
     "preview_feature_description_summary_header_masthead": {
       "default": "Rebuilds the movie and show header as a magazine cover, with a backdrop band and centred title over a strip of credits, scores and listings.",
       "description": "Description for the masthead summary header preview feature."
+    },
+    "preview_feature_title_people_header_masthead": {
+      "default": "Masthead person header",
+      "description": "Product feature name for the masthead people header preview feature."
+    },
+    "preview_feature_description_people_header_masthead": {
+      "default": "Rebuilds the person page as a magazine cover, with the headshot centre stage and their birth, age, height and socials centred beneath.",
+      "description": "Description for the masthead people header preview feature."
     }
   }
 }

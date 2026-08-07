@@ -8,4 +8,5 @@ export enum FeatureFlag {
   Soundtrack = 'soundtrack',
   SummaryHeaderAnchored = 'summary-header-anchored',
   SummaryHeaderMasthead = 'summary-header-masthead',
+  PeopleHeaderMasthead = 'people-header-masthead',
 }
