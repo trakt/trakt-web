@@ -1,7 +1,9 @@
 <script lang="ts">
   import LineChart from "$lib/components/charts/LineChart.svelte";
+  import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Season } from "$lib/requests/models/Season.ts";
+  import { toPercentage } from "$lib/utils/formatting/number/toPercentage.ts";
 
   type SeasonPoint = { season: number; rating: number };
 
@@ -56,9 +58,9 @@
         <span class="meta tag secondary">
           {m.text_ratings_season_extremes({
             peak: seasonLabel(peak.season),
-            peakRating: String(peak.rating),
+            peakRating: toPercentage(peak.rating / 100, languageTag()),
             low: seasonLabel(trough.season),
-            lowRating: String(trough.rating),
+            lowRating: toPercentage(trough.rating / 100, languageTag()),
           })}
         </span>
       {/if}
@@ -77,7 +79,7 @@
           <span class="season-tooltip">
             {m.text_ratings_season_point({
               season: label,
-              rating: String(value),
+              rating: toPercentage(value / 100, languageTag()),
             })}
           </span>
         {/snippet}
