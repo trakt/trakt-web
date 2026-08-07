@@ -201,6 +201,80 @@ describe('extractPageMeta', () => {
     });
   });
 
+  it('should extract item count when header is present', () => {
+    const headers = new Headers({
+      'x-pagination-page': '1',
+      'x-pagination-page-count': '10',
+      'x-pagination-item-count': '250',
+    });
+
+    const result = extractPageMeta(headers);
+
+    expect(result).toEqual({
+      type: 'paginated',
+      current: 1,
+      total: 10,
+      itemCount: 250,
+    });
+  });
+
+  it('should leave item count undefined when header is missing', () => {
+    const headers = new Headers({
+      'x-pagination-page': '1',
+      'x-pagination-page-count': '10',
+    });
+
+    const result = extractPageMeta(headers);
+
+    expect(result.type === 'paginated' && result.itemCount).toBeUndefined();
+  });
+
+  it('should leave item count undefined when header is invalid', () => {
+    const headers = new Headers({
+      'x-pagination-page': '1',
+      'x-pagination-page-count': '10',
+      'x-pagination-item-count': 'invalid',
+    });
+
+    const result = extractPageMeta(headers);
+
+    expect(result.type === 'paginated' && result.itemCount).toBeUndefined();
+  });
+
+  it('should allow an item count of zero', () => {
+    const headers = new Headers({
+      'x-pagination-page': '1',
+      'x-pagination-page-count': '1',
+      'x-pagination-item-count': '0',
+    });
+
+    const result = extractPageMeta(headers);
+
+    expect(result).toEqual({
+      type: 'paginated',
+      current: 1,
+      total: 1,
+      itemCount: 0,
+    });
+  });
+
+  it('should handle negative item count by converting to 0', () => {
+    const headers = new Headers({
+      'x-pagination-page': '1',
+      'x-pagination-page-count': '1',
+      'x-pagination-item-count': '-5',
+    });
+
+    const result = extractPageMeta(headers);
+
+    expect(result).toEqual({
+      type: 'paginated',
+      current: 1,
+      total: 1,
+      itemCount: 0,
+    });
+  });
+
   it('should handle mismatching counts', () => {
     const headers = new Headers({
       'x-pagination-page': '123',

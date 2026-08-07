@@ -4,6 +4,7 @@ export const PaginatedPageMetaSchema = z.object({
   type: z.literal('paginated'),
   current: z.number(),
   total: z.number(),
+  itemCount: z.number().optional(),
 });
 
 export const InfinitePageMetaSchema = z.object({

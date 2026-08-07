@@ -1,81 +1,86 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
-  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
-  import * as m from "$lib/features/i18n/messages.ts";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
+  import ListMeta from "$lib/sections/lists/components/ListMeta.svelte";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
-  import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
-  import ListActions from "$lib/sections/lists/user/ListActions.svelte";
-  import { getListUrl } from "./getListUrl";
+  import ListPopupMenu from "$lib/sections/lists/user/ListPopupMenu.svelte";
+  import { getListUrl } from "./getListUrl.ts";
 
   const {
     list,
-    type,
     source,
     onclick,
   }: {
     list: MediaListSummary;
-    type?: DiscoverMode;
     source?: string;
     onclick?: () => void;
   } = $props();
 
   // In list summaries, clicking on the header is considered a drilldown action
   const { track } = useTrack(AnalyticsEvent.Drilldown);
+
+  const handleDrilldown = () => {
+    onclick?.();
+
+    if (source) {
+      track({ source, type: "list" });
+    }
+  };
 </script>
 
 <div class="trakt-list-header">
   <UserAvatar user={list.user} />
 
-  <div class="list-name-and-creator">
-    <Link
-      href={getListUrl({ type: "user-list", list })}
-      onclick={() => {
-        onclick?.();
-        source && track({ source, type: "list" });
-      }}
-    >
+  <div class="list-content">
+    <Link href={getListUrl({ type: "user-list", list })} onclick={handleDrilldown}>
       <p class="secondary bold ellipsis">
         {list.name}
       </p>
     </Link>
-    <div class="list-credits">
-      <p class="secondary">{m.text_by()}</p>
-      <UserProfileLink user={list.user} />
-    </div>
+
+    <ListMeta
+      {list}
+      countUrl={getListUrl({ type: "user-list", list })}
+      onCountClick={handleDrilldown}
+    />
   </div>
 
-  <ListActions {list} />
+  <ListPopupMenu {list} />
 </div>
 
-<style>
+<style lang="scss">
   .trakt-list-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
     width: 100%;
+    min-width: 0;
 
     gap: var(--gap-xs);
-  }
 
-  .list-name-and-creator {
-    display: grid;
-    min-width: 0;
-    flex-grow: 1;
+    > :global(.trakt-link),
+    > :global(.trakt-user-avatar) {
+      display: flex;
+      flex-shrink: 0;
 
-    :global(.trakt-link) {
-      min-width: 0;
+      margin-inline-end: var(--ni-2);
     }
   }
 
-  .list-credits {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
+  .list-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
 
     gap: var(--gap-xxs);
+
+    > :global(.trakt-link) {
+      min-width: 0;
+      max-width: 100%;
+      align-self: flex-start;
+    }
   }
 </style>

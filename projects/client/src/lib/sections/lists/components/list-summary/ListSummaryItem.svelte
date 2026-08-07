@@ -23,6 +23,6 @@
 </script>
 
 <ListSummaryCard variant={list.type === "official" ? "official" : "default"}>
-  <ListHeader {list} {type} {source} onclick={handler} />
+  <ListHeader {list} {source} onclick={handler} />
   <ListPosters {list} {type} {source} onclick={handler} />
 </ListSummaryCard>

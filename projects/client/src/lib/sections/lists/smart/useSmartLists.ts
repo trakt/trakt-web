@@ -31,14 +31,20 @@ export function useSmartLists({ mode, limit }: UseSmartListsProps) {
     smartListQuery({}),
   );
 
-  const list = baseList.pipe(
+  const matching = baseList.pipe(
     map((lists) =>
       lists
         .filter((entry) => matchesMode(entry, mode))
         .toSorted((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
-        .slice(0, effectiveLimit)
     ),
   );
 
-  return { list, isLoading };
+  const list = matching.pipe(
+    map((lists) => lists.slice(0, effectiveLimit)),
+  );
+
+  // Total matching smart lists, uncapped by `limit`, for the lists-page count.
+  const count = matching.pipe(map((lists) => lists.length));
+
+  return { list, isLoading, count };
 }

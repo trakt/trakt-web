@@ -4,6 +4,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import SmartListActions from "$lib/sections/lists/smart/_internal/SmartListActions.svelte";
+  import { getSmartListFilterSummary } from "$lib/sections/lists/smart/getSmartListFilterSummary.ts";
   import SmartListPaginatedRenderer from "$lib/sections/lists/smart/SmartListPaginatedRenderer.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
@@ -33,6 +34,7 @@
   <NavbarStateSetter
     header={{
       title: $list?.title ?? "",
+      metaInfo: $list ? getSmartListFilterSummary($list) : undefined,
       actions,
     }}
   />
