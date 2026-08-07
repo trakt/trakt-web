@@ -26,6 +26,10 @@
     PERSON_STATS_PARAM,
     toPersonStatsLayout,
   } from "./_internal/PersonStatsLayout.ts";
+  import {
+    PERSON_STATS_FRAME_PARAM,
+    toPersonStatsFrame,
+  } from "./_internal/PersonStatsFrame.ts";
   import PersonMastheadStats from "./_internal/PersonMastheadStats.svelte";
   /*
     Imported the same way this folder's sibling PeopleSummary already imports them.
@@ -83,6 +87,11 @@
   );
   const isFlanked = $derived(statsLayout === "flank" && stats.length > 0);
 
+  /* How the stats are framed - `?statframe=glass|ghost`. See PersonStatsFrame. */
+  const statsFrame = $derived(
+    toPersonStatsFrame(page.url.searchParams.get(PERSON_STATS_FRAME_PARAM)),
+  );
+
   /*
     Whether a band is actually drawn. Without one there is nothing to overlap, so
     the content must not be pulled upwards - it would leave the card entirely.
@@ -122,6 +131,7 @@
             stats={stats.slice(0, 1)}
             name={person.name}
             orientation="stacked"
+            frame={statsFrame}
           />
         </div>
       {/if}
@@ -140,6 +150,7 @@
             stats={stats.slice(1)}
             name={person.name}
             orientation="stacked"
+            frame={statsFrame}
           />
         </div>
       {/if}
@@ -198,7 +209,7 @@
   </div>
 
   {#if !isFlanked}
-    <PersonMastheadStats {stats} name={person.name} />
+    <PersonMastheadStats {stats} name={person.name} frame={statsFrame} />
   {/if}
 
   {#if person.biography}
