@@ -3,4 +3,5 @@ import type { MoreButtonIntl } from './MoreButtonIntl.ts';
 
 export const MoreButtonIntlProvider: MoreButtonIntl = {
   more: (count: number | Nil) => m.button_text_more({ count: count ?? '' }),
+  less: () => m.button_text_less(),
 };

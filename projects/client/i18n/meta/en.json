@@ -10246,6 +10246,10 @@
     "link_label_view_person_credits": {
       "default": "View all {credits} for {name}",
       "description": "Aria-label for the linked credit counts in the person header. 'credits' is a category such as Movies or Shows; 'name' is the person."
+    },
+    "button_text_less": {
+      "default": "less",
+      "description": "Text for the control that collapses expanded content back down, the counterpart to '{count} more'."
     }
   }
 }
