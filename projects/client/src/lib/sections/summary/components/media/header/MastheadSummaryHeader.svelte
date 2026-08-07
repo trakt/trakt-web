@@ -18,6 +18,7 @@
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import { useIsStarted } from "../../_internal/useIsStarted";
   import { useSocialActivities } from "../../_internal/useSocialActivities";
+  import { useTrivia } from "../../trivia/useTrivia";
   import RateNow from "../../rating/RateNow.svelte";
   import SummaryOverview from "../../summary/SummaryOverview.svelte";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
@@ -29,6 +30,7 @@
   import SummaryHeaderSentiment from "./_internal/SummaryHeaderSentiment.svelte";
   import SummaryHeaderSocialActivity from "./_internal/SummaryHeaderSocialActivity.svelte";
   import SummaryHeaderTitle from "./_internal/SummaryHeaderTitle.svelte";
+  import SummaryHeaderTrivia from "./_internal/SummaryHeaderTrivia.svelte";
   import SummaryHeaderWatchOptions from "./_internal/SummaryHeaderWatchOptions.svelte";
   import { mapToSummaryHeaderFacts } from "./_internal/mapToSummaryHeaderFacts.ts";
   import { mapToSummaryHeaderKicker } from "./_internal/mapToSummaryHeaderKicker.ts";
@@ -73,6 +75,22 @@
   const providers = $derived(toHeaderProviders(streamOn, 2));
   const headerSentiment = $derived(toSummarySentiment(sentiment));
 
+  /*
+    Trivia is surfaced here rather than only at the foot of the page. Two facts,
+    matching the other columns' density; the chevron opens the full drawer.
+    Spoiler-flagged facts are excluded - the header is not somewhere a reader
+    opts in to them.
+  */
+  const HEADER_TRIVIA_LIMIT = 2;
+  const { summary: triviaSummary } = $derived(
+    useTrivia({
+      slug: media.slug,
+      type: target.type,
+      variant: "no-spoilers",
+    }),
+  );
+  const triviaFacts = $derived($triviaSummary.slice(0, HEADER_TRIVIA_LIMIT));
+
   const { ratings, isLoading: isRatingsLoading } = $derived(
     useMediaMetaInfo(target),
   );
@@ -104,6 +122,7 @@
   );
   const sentimentLink = $derived(buildDrawerLink(SummaryDrawers.Sentiment));
   const socialLink = $derived(buildDrawerLink(SummaryDrawers.Social));
+  const triviaLink = $derived(buildDrawerLink(SummaryDrawers.Trivia));
   /*
     Keeps the affordance the live header has as an "i" next to the genre: the
     details drawer holds studios, networks, languages, links and the rest, none of
@@ -159,13 +178,19 @@
     -->
     <RenderFor audience="authenticated">
       <div class="masthead-actions">
+        <!--
+          Stars and favourite sit ABOVE the action bar, not beside it. The rate row
+          only appears once a title is rateable, so as a sibling it pushed the
+          action bar off the composition's centre exactly when it showed up - the
+          bar has to hold the centre line whether or not it is there.
+        -->
+        <div class="actions-rate">
+          <RateNow type={target.type} {media} style="minimal" />
+        </div>
+
         <SummaryActionsBar>
           <MediaActions {media} {title} />
         </SummaryActionsBar>
-
-        <div class="actions-secondary">
-          <RateNow type={target.type} {media} style="minimal" />
-        </div>
       </div>
     </RenderFor>
 
@@ -233,6 +258,19 @@
             }}
           />
           <SummaryHeaderSentiment sentiment={headerSentiment} />
+        </div>
+      {/if}
+
+      {#if triviaFacts.length > 0}
+        <div class="strip-column">
+          <SummaryHeaderSectionHeader
+            title={m.list_title_trivia()}
+            drilldown={{
+              ...triviaLink,
+              label: m.button_label_view_trivia(),
+            }}
+          />
+          <SummaryHeaderTrivia facts={triviaFacts} />
         </div>
       {/if}
     </div>
@@ -581,16 +619,17 @@
 
   .masthead-actions {
     /*
-      Centred, and with no rule above it. Both were right when this row closed the
-      card - `space-between` pushed the clusters to the card's edges and the rule
-      separated it from the strip. Sitting mid-composition now, edge-spread
-      clusters and a horizontal rule would both cut across the centred masthead.
+      Stacked and centred, with no rule above it.
+
+      A row with `space-between` was right when this closed the card; sitting
+      mid-composition, edge-spread clusters and a horizontal rule both cut across
+      the centred masthead. Stacking also keeps the action bar on the centre line
+      regardless of whether the rate row above it is present.
     */
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: var(--gap-l);
-    flex-wrap: wrap;
+    gap: var(--gap-m);
 
     margin-top: var(--gap-xxs);
 
@@ -598,14 +637,10 @@
     --summary-actions-bar-height: var(--ni-56);
   }
 
-  .actions-secondary {
+  .actions-rate {
     display: flex;
     align-items: center;
-    gap: var(--gap-m);
-
-    :global(.trakt-social-activities-button-link-wrapper) {
-      align-self: center;
-      margin-top: 0;
-    }
+    justify-content: center;
   }
+
 </style>
