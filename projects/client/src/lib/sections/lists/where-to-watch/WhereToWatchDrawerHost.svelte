@@ -19,9 +19,11 @@
 
   const {
     onClose,
+    elevated = false,
     ...target
   }: MetaInfoProps & {
     onClose: () => void;
+    elevated?: boolean;
   } = $props();
 
   const { list, isLoading } = $derived(useAllStreamOn(target));
@@ -70,7 +72,12 @@
 
 </script>
 
-<Drawer {onClose} title={m.list_title_where_to_watch()} size="large">
+<Drawer
+  {onClose}
+  {elevated}
+  title={m.list_title_where_to_watch()}
+  size="large"
+>
   <label class="where-to-watch-search">
     <SearchIcon />
     <input
