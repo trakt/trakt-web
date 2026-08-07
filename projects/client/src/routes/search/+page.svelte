@@ -50,8 +50,10 @@
   image={DEFAULT_SHARE_COVER}
   title={pageTitle}
 >
+  <NavbarStateSetter contentToggle="search" />
+
   <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
-    <NavbarStateSetter mode="full" contentToggle="search" />
+    <NavbarStateSetter mode="full" />
   </RenderFor>
 
   <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
