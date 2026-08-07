@@ -58,8 +58,6 @@
       height: var(--ni-10);
       line-height: var(--ni-10);
 
-      scale: 1.15;
-
       :global(trakt-tag-icon svg) {
         width: var(--ni-10);
         height: var(--ni-10);
