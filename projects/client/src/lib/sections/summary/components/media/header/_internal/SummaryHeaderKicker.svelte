@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SummaryHeaderLabel from "./SummaryHeaderLabel.svelte";
+  import SummaryHeaderLabel from "../../../header-kit/SummaryHeaderLabel.svelte";
 
   /*
     "Movie · Comedy" above the title.
