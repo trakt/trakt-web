@@ -1,13 +1,7 @@
 <script lang="ts">
-  import { page } from "$app/state";
-  import { useToggler } from "$lib/components/toggles/useToggler";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage";
-  import { firstValueFrom } from "rxjs";
   import { onMount } from "svelte";
-  import {
-    DISCOVER_MODE_PARAM,
-    SEASONAL_STORAGE_KEY,
-  } from "./_internal/constants";
+  import { SEASONAL_STORAGE_KEY } from "./_internal/constants";
   import { createDiscoverContext } from "./_internal/createDiscoverContext";
   import { useStoredFilters } from "./useStoredFilters";
 
@@ -26,17 +20,7 @@
     SearchParamProvider that can be used by both Discover, Filters, and possible
     future features that rely on search params.
   */
-  onMount(async () => {
-    const hasDiscoverParam = page.url.searchParams.has(DISCOVER_MODE_PARAM);
-    if (hasDiscoverParam) {
-      restoreFilters();
-      return;
-    }
-
-    const { current } = useToggler("discover");
-    const { value: initialMode } = await firstValueFrom(current);
-    restoreFilters(initialMode);
-  });
+  onMount(() => restoreFilters());
 </script>
 
 {@render children()}
