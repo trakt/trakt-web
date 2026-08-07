@@ -1,6 +1,8 @@
+import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
+import IdIcon from '$lib/components/icons/IdIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
@@ -79,6 +81,20 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_soundtrack(),
     addedAt: new Date('2026-08-03'),
     description: () => m.preview_feature_description_soundtrack(),
+  },
+  [FeatureFlag.SummaryHeaderAnchored]: {
+    icon: IdIcon,
+    title: () => m.preview_feature_title_summary_header_anchored(),
+    addedAt: new Date('2026-08-06'),
+    description: () => m.preview_feature_description_summary_header_anchored(),
+    audience: 'director',
+  },
+  [FeatureFlag.SummaryHeaderMasthead]: {
+    icon: CoverImageIcon,
+    title: () => m.preview_feature_title_summary_header_masthead(),
+    addedAt: new Date('2026-08-06'),
+    description: () => m.preview_feature_description_summary_header_masthead(),
+    audience: 'director',
   },
   [FeatureFlag.ParentalGuide]: {
     icon: NoSpoilerIcon,

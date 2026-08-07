@@ -139,7 +139,11 @@
   }
 
   :global(#{$b}) {
-    --button-size: var(--ni-40);
+    // Configurable by an ancestor container (e.g. the summary header's action
+    // tray, which raises its controls to the 48px hit-target floor). Declared
+    // with a fallback rather than a bare value so setting the token upstream
+    // wins without a specificity fight.
+    --button-size: var(--action-button-size, var(--ni-40));
 
     all: unset;
 

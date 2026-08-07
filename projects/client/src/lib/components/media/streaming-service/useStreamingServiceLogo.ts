@@ -3,7 +3,7 @@ import type { StreamingSource } from '$lib/requests/models/StreamingSource.ts';
 import { streamingSourcesQuery } from '$lib/requests/queries/services/streamingSourcesQuery.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { combineLatest, map, Observable, of } from 'rxjs';
-import { cleanStreamingServiceName } from './cleanStreamingServiceName.ts';
+import { cleanStreamingServiceName } from './_internal/cleanStreamingServiceName.ts';
 
 type UseStreamingServicesProps = {
   source: string;

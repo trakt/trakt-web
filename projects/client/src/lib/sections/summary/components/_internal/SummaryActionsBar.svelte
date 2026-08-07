@@ -48,8 +48,10 @@
 
     position: relative;
 
-    height: var(--ni-56);
-    width: var(--ni-280);
+    height: var(--summary-actions-bar-height, var(--ni-56));
+    // Configurable so a container can stretch the tray to its own measure - the
+    // revamped header's poster rail fills its 264px column.
+    width: var(--summary-actions-bar-width, var(--ni-280));
 
     padding: var(--ni-8) var(--ni-10);
     box-sizing: border-box;
