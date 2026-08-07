@@ -2,9 +2,10 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import GlobeIcon from "$lib/components/icons/GlobeIcon.svelte";
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
-  import { availableLocales, getLocale } from "$lib/features/i18n/index.ts";
+  import { getLocale } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { COMMENT_LANGUAGE_ALL } from "./commentLanguageAll.ts";
+  import { commentLanguageCodes } from "./commentLanguageCodes.ts";
   import type { CommentLanguageSelectProps } from "./CommentLanguageSelectProps.ts";
 
   const { value, onChange }: CommentLanguageSelectProps = $props();
@@ -16,11 +17,7 @@
     });
     const collator = new Intl.Collator(currentLocale, { sensitivity: "base" });
 
-    const languageOptions = [
-      ...new Set(
-        availableLocales.map((locale) => locale.split("-").at(0) ?? locale),
-      ),
-    ]
+    const languageOptions = [...commentLanguageCodes]
       .map((code) => ({
         value: code,
         label: displayNames.of(code) ?? code,
