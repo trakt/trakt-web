@@ -55,7 +55,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter hasFilters={!$useSeasonalFilters}>
+  <NavbarStateSetter contentToggle="discover" hasFilters={!$useSeasonalFilters}>
     {#snippet headerActions()}
       <SeasonalToggle />
     {/snippet}

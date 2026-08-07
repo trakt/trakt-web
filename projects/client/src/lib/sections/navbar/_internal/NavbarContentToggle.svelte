@@ -12,13 +12,11 @@
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import { searchModeOptions } from "$lib/features/search/searchModeOptions.ts";
   import { useSearchMode } from "$lib/features/search/useSearchMode";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { buildParamString } from "$lib/utils/url/buildParamString";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { resolveContentToggle } from "./resolveContentToggle.ts";
+  import type { ContentToggleSurface } from "./ContentToggleSurface.ts";
 
-  const config = $derived(resolveContentToggle(page.route.id));
-  const surface = $derived(config?.surface ?? null);
+  const { surface }: { surface: ContentToggleSurface } = $props();
 
   const {
     mode: discoverMode,
@@ -59,28 +57,24 @@
   };
 </script>
 
-{#if config}
-  <RenderFor audience={config.audience}>
-    <GlobalParameterSetter parameter={DISCOVER_MODE_PARAM}>
-      <div
-        class="trakt-navbar-content-toggle"
-        class:is-open={surface === "search"}
-        role={surface === "search" ? "search" : undefined}
-      >
-        <SegmentedSelect
-          expandable
-          collapsedCount={2}
-          expanded={surface === "search"}
-          {options}
-          {value}
-          icon={contentIcon}
-          extension={searchExtension}
-          {onChange}
-        />
-      </div>
-    </GlobalParameterSetter>
-  </RenderFor>
-{/if}
+<GlobalParameterSetter parameter={DISCOVER_MODE_PARAM}>
+  <div
+    class="trakt-navbar-content-toggle"
+    class:is-open={surface === "search"}
+    role={surface === "search" ? "search" : undefined}
+  >
+    <SegmentedSelect
+      expandable
+      collapsedCount={2}
+      expanded={surface === "search"}
+      {options}
+      {value}
+      icon={contentIcon}
+      extension={searchExtension}
+      {onChange}
+    />
+  </div>
+</GlobalParameterSetter>
 
 {#snippet contentIcon(option: SelectOption)}
   <ToggleIcon {option} />

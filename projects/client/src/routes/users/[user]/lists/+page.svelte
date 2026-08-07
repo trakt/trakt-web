@@ -41,7 +41,7 @@
 
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter hasFilters />
+  <NavbarStateSetter contentToggle="discover" hasFilters />
 
   <WatchList
     drilldownLabel={m.button_label_view_all_watchlist_items()}

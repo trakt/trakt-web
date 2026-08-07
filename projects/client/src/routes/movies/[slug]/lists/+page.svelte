@@ -14,7 +14,7 @@
   title={m.list_title_popular_lists()}
   image={DEFAULT_SHARE_MOVIE_COVER}
 >
-  <ResponsiveNavbarStateSetter
+  <ResponsiveNavbarStateSetter contentToggle="discover"
     header={{
       title: m.list_title_popular_lists(),
     }}

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import EditModeBar from "$lib/features/edit-mode/EditModeBar.svelte";
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
@@ -13,21 +12,16 @@
   import { useNavbarState } from "../useNavbarState";
   import NavbarContentToggle from "./NavbarContentToggle.svelte";
   import NavbarHeader from "./NavbarHeader.svelte";
-  import { resolveContentToggle } from "./resolveContentToggle.ts";
 
   const { state } = useNavbarState();
 
   const { isEditMode } = useEditMode();
-
-  const hasContentToggle = $derived(
-    resolveContentToggle(page.route.id) !== null,
-  );
 </script>
 
 <div
   class="trakt-navbar-actions"
   class:is-hidden={$state.mode === "minimal" && !$isEditMode}
-  class:has-actions={Boolean($state.actions) || hasContentToggle}
+  class:has-actions={Boolean($state.actions) || Boolean($state.contentToggle)}
   use:trackElementBottom={"--navbar-actions-bottom"}
   use:trackWindowScroll={"trakt-navbar-actions-scroll"}
 >
@@ -39,7 +33,9 @@
     {#if $isEditMode}
       <EditModeBar />
     {:else}
-      <NavbarContentToggle />
+      {#if $state.contentToggle}
+        <NavbarContentToggle surface={$state.contentToggle} />
+      {/if}
       {@render $state.actions?.()}
     {/if}
   </div>

@@ -51,7 +51,7 @@
   title={pageTitle}
 >
   <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
-    <NavbarStateSetter mode="full" />
+    <NavbarStateSetter mode="full" contentToggle="search" />
   </RenderFor>
 
   <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>

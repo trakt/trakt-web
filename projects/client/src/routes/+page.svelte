@@ -38,7 +38,7 @@
   <RenderFor audience="authenticated">
     <TraktPageCoverSetter />
 
-    <NavbarStateSetter hasFilters />
+    <NavbarStateSetter contentToggle="discover" hasFilters />
 
     <Banner />
     <UpNextList />
