@@ -499,7 +499,5 @@
 
     display: flex;
     align-items: flex-end;
-
-    padding-inline: var(--ni-8);
   }
 </style>

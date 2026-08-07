@@ -135,9 +135,7 @@
 
     position: relative;
 
-    transition:
-      outline var(--transition-increment) ease-in-out,
-      box-shadow var(--transition-increment) ease-in-out;
+    transition: outline var(--transition-increment) ease-in-out;
     outline: var(--border-thickness-xxs) solid var(--color-border);
 
     &,
@@ -155,15 +153,40 @@
       --search-icon-size: var(--ni-16);
 
       outline: none;
-      box-shadow: 0 0 0 var(--border-thickness-xxs) transparent;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset-inline: 0;
+        bottom: 0;
+        height: var(--ni-2);
+
+        border-radius: var(--ni-2);
+        background: var(--color-input-focus);
+
+        transform: scaleX(0);
+        transition: transform var(--transition-increment) ease-in-out;
+      }
 
       &:focus-within {
         outline: none;
-        box-shadow: 0 0 0 var(--border-thickness-xxs) var(--color-input-focus);
+
+        &::before {
+          transform: scaleX(1);
+        }
+
+        .trakt-search-icon {
+          color: var(--color-input-focus);
+        }
 
         @media (forced-colors: active) {
           outline: var(--border-thickness-xxs) solid Highlight;
-          outline-offset: var(--border-thickness-xxs);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        &::before {
+          transition: none;
         }
       }
 
