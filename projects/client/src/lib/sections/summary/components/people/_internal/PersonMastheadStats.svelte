@@ -1,6 +1,7 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import { riseFade } from "$lib/utils/transitions/riseFade";
   import SummaryHeaderLabel from "../../header-kit/SummaryHeaderLabel.svelte";
   import type { PersonStat } from "./PersonStat.ts";
   import type { PersonStatsFrame } from "./PersonStatsFrame.ts";
@@ -39,8 +40,14 @@
     data-orientation={orientation}
     data-frame={frame}
   >
-    {#each stats as stat (stat.key)}
-      <li>
+    {#each stats as stat, index (stat.key)}
+      <!--
+        These arrive after everything around them - the counts come from the credit
+        queries - so they surface rather than appearing from nowhere. Staggered just
+        enough to read as two things rather than one block; see riseFade for why the
+        travel is only a few pixels.
+      -->
+      <li in:riseFade={{ delay: index * 70 }}>
         <Link
           href={stat.href}
           target="_self"
