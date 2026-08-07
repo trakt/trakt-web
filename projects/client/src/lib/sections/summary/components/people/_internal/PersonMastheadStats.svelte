@@ -18,14 +18,20 @@
   const {
     stats,
     name,
+    orientation = "row",
   }: {
     stats: ReadonlyArray<PersonStat>;
     name: string;
+    /*
+      `row` sits them side by side on their own line; `stacked` is a single column,
+      used when they flank the portrait and each side holds one.
+    */
+    orientation?: "row" | "stacked";
   } = $props();
 </script>
 
 {#if stats.length > 0}
-  <ul class="trakt-person-masthead-stats">
+  <ul class="trakt-person-masthead-stats" data-orientation={orientation}>
     {#each stats as stat (stat.key)}
       <li>
         <Link
@@ -58,6 +64,11 @@
     margin: 0;
     padding: 0;
     list-style: none;
+
+    &[data-orientation="stacked"] {
+      flex-direction: column;
+      gap: var(--gap-m);
+    }
 
     :global(a) {
       display: flex;
