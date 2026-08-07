@@ -12,6 +12,14 @@
   import SummaryHeaderFacts from "../header-kit/SummaryHeaderFacts.svelte";
   import SummaryHeaderTitle from "../header-kit/SummaryHeaderTitle.svelte";
   import { mapToPersonFacts } from "./_internal/mapToPersonFacts.ts";
+  import { page } from "$app/state";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import PersonMastheadBackdrop from "./_internal/PersonMastheadBackdrop.svelte";
+  import {
+    PERSON_BACKDROP_PARAM,
+    toPersonBackdropVariant,
+  } from "./_internal/PersonBackdropVariant.ts";
+  import { usePersonBackdropMedia } from "./_internal/usePersonBackdropMedia.ts";
   /*
     Imported the same way this folder's sibling PeopleSummary already imports them.
     If this treatment graduates, these three belong one level up in `people/` -
@@ -28,10 +36,9 @@
 
     Two deliberate departures from the media masthead:
 
-    - No backdrop band. A person has a headshot and nothing else; there is no
-      16:9 artwork to dissolve, and stretching a portrait into a band looked
-      exactly as bad as it sounds. The composition carries itself on the centred
-      stack instead.
+    - The backdrop is borrowed, not owned. A person carries no artwork of their
+      own, so what sits behind them is an open question - three candidates are
+      wired up behind `?backdrop=`, see PersonBackdropVariant. Default is none.
     - The facts sit in ONE centred row rather than a left-aligned strip. On a
       title the strip earns its left alignment by holding four or five columns of
       different kinds of data; a person has three short facts, and centring them
@@ -40,6 +47,19 @@
   const { person }: { person: PersonSummary } = $props();
 
   const facts = $derived(mapToPersonFacts({ person, now: new Date() }));
+
+  /*
+    Which backdrop treatment to show, from the URL - `?backdrop=credit|headshot|
+    colors`, defaulting to none. A search param rather than a flag because these
+    are three candidates being compared rather than a feature being shipped: it
+    switches without a rebuild and the comparison is shareable as a link.
+  */
+  const backdropVariant = $derived(
+    toPersonBackdropVariant(page.url.searchParams.get(PERSON_BACKDROP_PARAM)),
+  );
+
+  const slug$ = fromRune(() => person.slug);
+  const backdropMedia = usePersonBackdropMedia(slug$);
 </script>
 
 {#snippet tags()}
@@ -49,6 +69,12 @@
 {/snippet}
 
 <article class="trakt-people-masthead-header">
+  <PersonMastheadBackdrop
+    variant={backdropVariant}
+    {person}
+    media={$backdropMedia}
+  />
+
   <div class="masthead-portrait">
     <SummaryPoster
       src={person.headshot.url.medium}
@@ -150,6 +176,13 @@
     text-align: center;
     gap: var(--masthead-rhythm);
 
+    /*
+      Anchors the backdrop, and isolates it so its negative z-index stays behind
+      this header's content rather than falling behind the page itself.
+    */
+    position: relative;
+    isolation: isolate;
+
     box-sizing: border-box;
     /* Matches the measure the lists below use, so the edges line up. */
     max-width: var(--list-inner-width);
@@ -158,7 +191,14 @@
       media masthead between 1024px and its design width, so this starts fluid.
     */
     margin: var(--masthead-rhythm) var(--layout-distance-side);
-    padding: var(--ni-40) clamp(var(--gap-m), 8vw, var(--ni-120));
+    /*
+      Top inset is the rhythm, not 40px, so the portrait sits exactly as high as
+      the media masthead's poster does - that one clears the card's top edge by the
+      backdrop's reveal, which is also the rhythm. At 40px this sat 16px lower with
+      nothing in the gap to justify it.
+    */
+    padding: var(--masthead-rhythm) clamp(var(--gap-m), 8vw, var(--ni-120))
+      var(--ni-40);
 
     /*
       The gap already spaces the stack evenly, but a large name's line box carries
@@ -190,8 +230,30 @@
     flex-wrap: wrap;
     gap: var(--gap-s);
 
-    /* Matches the header's inline meta line, so nothing here sets its own scale. */
-    --action-button-size: var(--ni-40);
+    /*
+      One size for the whole row, set here rather than left to each child.
+
+      The facts line defaults to 14px, which is right in the masthead's credits
+      column where a label sits above it, but on a shared row it reads smaller than
+      everything beside it. Both the row and the facts resolve through this, so
+      nothing in here can end up on its own scale.
+    */
+    font-size: var(--ni-16);
+    --facts-inline-size: var(--ni-16);
+
+    --action-button-size: var(--ni-32);
+
+    /*
+      Every icon in the row to one size. ActionButton sizes the button, not its
+      contents, and these icons disagree about their own: ShareIcon declares 40px
+      where the social marks declare 24, so it rendered half again as large in an
+      identical button and overflowed its content box - which is also what pulled
+      the row out of alignment.
+    */
+    :global(.trakt-action-button svg) {
+      width: var(--ni-20);
+      height: var(--ni-20);
+    }
   }
 
   .meta-divider {
