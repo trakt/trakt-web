@@ -10376,6 +10376,146 @@
     "preview_feature_description_summary_header_masthead": {
       "default": "Rebuilds the movie and show header as a magazine cover, with a backdrop band and centred title over a strip of credits, scores and listings.",
       "description": "Description for the masthead summary header preview feature."
+    },
+    "reaction_forum_composer_add_gif": {
+      "default": "Add GIF",
+      "description": "Label for the button that attaches a GIF to a reaction forum post."
+    },
+    "reaction_forum_composer_locked": {
+      "default": "Free-form posts are rolling out soon.",
+      "description": "Notice shown when the reaction forum composer is behind a feature flag."
+    },
+    "reaction_forum_composer_placeholder": {
+      "default": "Share your raw reaction…",
+      "description": "Placeholder text for the reaction forum post composer textarea."
+    },
+    "reaction_forum_composer_remove_gif": {
+      "default": "Remove GIF",
+      "description": "Label for the button that removes the attached GIF from a reaction forum post."
+    },
+    "reaction_forum_composer_submit": {
+      "default": "Post",
+      "description": "Label for the button that submits a reaction forum post."
+    },
+    "reaction_forum_empty": {
+      "default": "No posts yet. Start the thread.",
+      "description": "Empty state shown when a reaction forum has no posts."
+    },
+    "reaction_forum_gif_alt": {
+      "default": "Reaction GIF",
+      "description": "Alt text for a GIF attached to a reaction forum post."
+    },
+    "reaction_forum_like_count": {
+      "default": "{count} likes",
+      "description": "Number of likes on a reaction forum post."
+    },
+    "reaction_forum_meta": {
+      "default": "{count} posts",
+      "description": "Count of posts shown at the top of the reaction forum drawer."
+    },
+    "reaction_sentiment_bored": {
+      "default": "Bored stiff",
+      "description": "Label for the 'bored' reaction sentiment."
+    },
+    "reaction_sentiment_cringe": {
+      "default": "Cringe",
+      "description": "Label for the 'cringe' reaction sentiment. Second-hand embarrassment."
+    },
+    "reaction_sentiment_enraged": {
+      "default": "Enraged",
+      "description": "Label for the 'enraged' reaction sentiment. Anger."
+    },
+    "reaction_sentiment_love": {
+      "default": "Obsessed",
+      "description": "Label for the 'love' reaction sentiment. Should read as intense adoration."
+    },
+    "reaction_sentiment_mindblown": {
+      "default": "Mind blown",
+      "description": "Label for the 'mindblown' reaction sentiment."
+    },
+    "reaction_sentiment_moved": {
+      "default": "Moved to tears",
+      "description": "Label for the 'moved' reaction sentiment. Emotional, tearful."
+    },
+    "reaction_sentiment_shook": {
+      "default": "Shook",
+      "description": "Label for the 'shook' reaction sentiment. Shocked or rattled."
+    },
+    "reaction_sentiment_thrilled": {
+      "default": "Thrilled",
+      "description": "Label for the 'thrilled' reaction sentiment."
+    },
+    "reaction_sentiment_vomit": {
+      "default": "Sick to my stomach",
+      "description": "Label for the visceral 'vomit' reaction sentiment. Nauseated, repulsed."
+    },
+    "reactions_chip_label": {
+      "default": "Open the {sentiment} forum, {count} reactions",
+      "description": "Accessible label for a reaction chip that opens the forum for a sentiment."
+    },
+    "reactions_cta_chosen_label": {
+      "default": "Your reaction: {sentiment}. Tap to change.",
+      "description": "Accessible label for the reactions call-to-action once the user has picked a reaction."
+    },
+    "reactions_cta_label": {
+      "default": "React",
+      "description": "Label on the reactions call-to-action shown in the media summary before the user has picked a reaction."
+    },
+    "reactions_pick_hint": {
+      "default": "Pick a reaction to see how it landed.",
+      "description": "Hint shown in the reactions drawer before a reaction is selected."
+    },
+    "reactions_read_more": {
+      "default": "Read more",
+      "description": "Label for the button that expands a clamped reaction forum post body."
+    },
+    "reactions_section_subtitle": {
+      "default": "How did this land? Tap a reaction to open the forum.",
+      "description": "Subtitle for the reactions section prompting users to open the forum."
+    },
+    "reactions_section_title": {
+      "default": "Reactions",
+      "description": "Heading for the reactions section on a movie or show page."
+    },
+    "preview_feature_title_reactions": {
+      "default": "Reactions",
+      "description": "Title for the Reactions preview feature."
+    },
+    "preview_feature_description_reactions": {
+      "default": "React to movies and shows beyond a thumbs up, then jump into the forum for each reaction.",
+      "description": "Description for the Reactions preview feature."
+    },
+    "preview_feature_title_reaction_forum": {
+      "default": "Reaction Forum",
+      "description": "Title for the Reaction Forum preview feature."
+    },
+    "preview_feature_description_reaction_forum": {
+      "default": "Unlock free-form posts, GIFs and reply threads inside each reaction.",
+      "description": "Description for the Reaction Forum preview feature."
+    },
+    "preview_feature_title_summary_awards": {
+      "default": "Awards",
+      "description": "Product feature name for the summary awards preview feature."
+    },
+    "preview_feature_description_summary_awards": {
+      "default": "Surfaces awards and nominations in the movie and show header, alongside credits and sentiment.",
+      "description": "Description for the summary awards preview feature."
+    },
+    "header_awards": {
+      "default": "Awards",
+      "description": "Section label for the awards column in the summary header."
+    },
+    "text_award_won": {
+      "default": "Won",
+      "description": "Qualifier marking an award the title won, shown before the category."
+    },
+    "text_award_nominated": {
+      "default": "Nominated",
+      "description": "Qualifier marking an award the title was nominated for but did not win."
+    },
+    "button_label_view_awards": {
+      "default": "View all awards for {title}",
+      "description": "Aria-label for the control that opens the full awards view."
     }
   }
 }

@@ -17,6 +17,10 @@
   import { useIsStarted } from "../../_internal/useIsStarted";
   import RateNow from "../../rating/RateNow.svelte";
   import SummaryOverview from "../../summary/SummaryOverview.svelte";
+  import { useMediaAwards } from "../../awards/useMediaAwards";
+  import MediaReactions from "$lib/features/media-reactions/MediaReactions.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import DetailsButton from "../v2/_internal/DetailsButton.svelte";
   import MediaActions from "../v2/_internal/MediaActions.svelte";
@@ -26,6 +30,7 @@
   import SummaryHeaderSectionHeader from "./_internal/SummaryHeaderSectionHeader.svelte";
   import SummaryHeaderSentiment from "./_internal/SummaryHeaderSentiment.svelte";
   import SummaryHeaderTitle from "./_internal/SummaryHeaderTitle.svelte";
+  import SummaryHeaderAwards from "./_internal/SummaryHeaderAwards.svelte";
   import SummaryHeaderWatchOptions from "./_internal/SummaryHeaderWatchOptions.svelte";
   import { mapToSummaryHeaderFacts } from "./_internal/mapToSummaryHeaderFacts.ts";
   import { mapToSummaryHeaderKicker } from "./_internal/mapToSummaryHeaderKicker.ts";
@@ -52,6 +57,11 @@
   const facts = $derived(mapToSummaryHeaderFacts(target));
   const providers = $derived(toHeaderProviders(streamOn));
   const headerSentiment = $derived(toSummarySentiment(sentiment));
+
+  /* Two, matching the rail's other sections - wins first, see useMediaAwards. */
+  const HEADER_AWARDS_LIMIT = 2;
+  const { awards } = $derived(useMediaAwards({ slug: media.slug }));
+  const headerAwards = $derived(awards.slice(0, HEADER_AWARDS_LIMIT));
 
   const { ratings, isLoading: isRatingsLoading } = $derived(
     useMediaMetaInfo(target),
@@ -151,6 +161,20 @@
       </Spoiler>
     </div>
 
+    <!--
+      Reactions live in the main column, not the info rail: the rail is read-only
+      reference material, and this is something to act on. It also sits below the
+      synopsis so it reads as a response to the title rather than as another fact
+      about it.
+    -->
+    <RenderForFeature flag={FeatureFlag.Reactions} audience="director">
+      {#snippet enabled()}
+        <div class="header-reactions">
+          <MediaReactions type={target.type} slug={media.slug} {title} />
+        </div>
+      {/snippet}
+    </RenderForFeature>
+
   </div>
 
   <aside class="header-info-rail">
@@ -180,6 +204,17 @@
         <SummaryHeaderSentiment sentiment={headerSentiment} />
       </section>
     {/if}
+
+    <RenderForFeature flag={FeatureFlag.SummaryAwards} audience="director">
+      {#snippet enabled()}
+        {#if headerAwards.length > 0}
+          <section class="rail-section">
+            <SummaryHeaderSectionHeader title={m.header_awards()} />
+            <SummaryHeaderAwards awards={headerAwards} />
+          </section>
+        {/if}
+      {/snippet}
+    </RenderForFeature>
   </aside>
 </article>
 
@@ -459,6 +494,10 @@
     framed panels read as two hard cards competing with the poster, which is what
     made the rail feel heavier than everything around it.
   */
+  .header-reactions {
+    display: flex;
+  }
+
   .rail-section {
     display: flex;
     flex-direction: column;

@@ -1,3 +1,4 @@
+import CommentIcon from '$lib/components/icons/CommentIcon.svelte';
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
@@ -6,7 +7,9 @@ import IdIcon from '$lib/components/icons/IdIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
+import ReactionsIcon from '$lib/components/icons/ReactionsIcon.svelte';
 import SmartListIcon from '$lib/components/icons/SmartListIcon.svelte';
+import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { Component } from 'svelte';
@@ -94,6 +97,27 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_summary_header_masthead(),
     addedAt: new Date('2026-08-06'),
     description: () => m.preview_feature_description_summary_header_masthead(),
+    audience: 'director',
+  },
+  [FeatureFlag.Reactions]: {
+    icon: ReactionsIcon,
+    title: () => m.preview_feature_title_reactions(),
+    addedAt: new Date('2026-08-07'),
+    description: () => m.preview_feature_description_reactions(),
+    audience: 'director',
+  },
+  [FeatureFlag.ReactionForum]: {
+    icon: CommentIcon,
+    title: () => m.preview_feature_title_reaction_forum(),
+    addedAt: new Date('2026-08-07'),
+    description: () => m.preview_feature_description_reaction_forum(),
+    audience: 'director',
+  },
+  [FeatureFlag.SummaryAwards]: {
+    icon: SparkleStarIcon,
+    title: () => m.preview_feature_title_summary_awards(),
+    addedAt: new Date('2026-08-07'),
+    description: () => m.preview_feature_description_summary_awards(),
     audience: 'director',
   },
   [FeatureFlag.ParentalGuide]: {
