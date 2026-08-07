@@ -4,6 +4,7 @@ import {
 } from '$lib/features/filters/filterScopeStore.ts';
 import {
   LOCAL_PARAMS,
+  OUTBOUND_PARAMS,
   WHITE_LISTED_PARAMS,
 } from '$lib/features/parameters/_internal/constants.ts';
 import { FILTER_KEYS } from '$lib/features/filters/filterKeys.ts';
@@ -19,7 +20,7 @@ type ParameterSnapshot = [
   URL,
 ];
 
-function buildEffectiveSearch({
+function buildOutboundSearch({
   search,
   filterScope,
   overrideKey,
@@ -28,9 +29,13 @@ function buildEffectiveSearch({
   filterScope: FilterScopeValue;
   overrideKey: string;
 }): URLSearchParams {
-  if (!filterScope) return search;
+  const result = new URLSearchParams(
+    Array.from(search.entries())
+      .filter(([key]) => OUTBOUND_PARAMS.includes(key)),
+  );
 
-  const result = new URLSearchParams(search);
+  if (!filterScope) return result;
+
   for (const key of FILTER_KEYS) {
     result.delete(key);
   }
@@ -77,7 +82,7 @@ export function appendGlobalParameters(
     // Same-path navigation (type/sort toggles, etc.) must reflect the user's
     // live filter edits. Only outbound (different-path) links fall back to the
     // frozen local snapshot, so navigating away restores the global filters.
-    const effectiveSearch = isSamePath ? $search : buildEffectiveSearch({
+    const effectiveSearch = isSamePath ? $search : buildOutboundSearch({
       search: $search,
       filterScope: $filterScope,
       overrideKey: $override,
