@@ -7,6 +7,13 @@ import { combineLatest, map, type Observable, switchMap } from 'rxjs';
 export type PersonCreditCounts = {
   movies: number;
   shows: number;
+  /*
+    Exposed so the header can hold the stats' space while they load. Without it the
+    grid restructured the moment they arrived - the crown went from one column to
+    three and the portrait re-laid-out beneath it, which is what made their arrival
+    look like a glitch rather than a load.
+  */
+  isLoading: boolean;
 };
 
 /**
@@ -51,6 +58,7 @@ export function usePersonCreditCounts(
     map(([$movies, $shows]) => ({
       movies: countDistinctTitles($movies.data),
       shows: countDistinctTitles($shows.data),
+      isLoading: $movies.isLoading || $shows.isLoading,
     })),
   );
 }
