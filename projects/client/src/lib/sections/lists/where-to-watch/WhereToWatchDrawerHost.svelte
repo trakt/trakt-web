@@ -1,19 +1,21 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
+  import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import { useStreamingServiceNames } from "$lib/components/media/streaming-service/useStreamingServiceNames";
   import * as m from "$lib/features/i18n/messages.ts";
   import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
+  import { filterGroupedServices } from "./_internal/filterGroupedServices";
   import { getGroupedServices } from "./_internal/getGroupedServices";
-  import type { CostType } from "./_internal/getMediaCost";
   import { StreamingGroup } from "./_internal/models/StreamingGroup";
   import { useAllStreamOn } from "./_internal/useAllStreamOn";
   import WhereToWatchCategory from "./_internal/WhereToWatchCategory.svelte";
   import WhereToWatchItem from "./_internal/WhereToWatchItem.svelte";
-  import WhereToWatchLogo from "./_internal/WhereToWatchLogo.svelte";
+  import WhereToWatchServiceSection from "./_internal/WhereToWatchServiceSection.svelte";
 
   const {
     onClose,
@@ -28,6 +30,11 @@
   const { plexServices } = $derived(usePlexLibrary(target));
 
   const { country, favorites } = useStreamingPreferences();
+  const serviceNames = useStreamingServiceNames();
+
+  let searchTerm = $state("");
+  const normalizedSearchTerm = $derived(searchTerm.trim().toLocaleLowerCase());
+  const isSearching = $derived(normalizedSearchTerm.length > 0);
 
   const groupedList = $derived(
     getGroupedServices({
@@ -35,6 +42,16 @@
       userCountry: $country,
       favoriteSources: $favorites,
     }),
+  );
+
+  const visibleList = $derived(
+    isSearching
+      ? filterGroupedServices({
+        grouped: groupedList,
+        term: normalizedSearchTerm,
+        names: $serviceNames,
+      })
+      : groupedList,
   );
 
   const groupLabels: Record<StreamingGroup, string> = {
@@ -45,26 +62,34 @@
     [StreamingGroup.Rent]: m.list_title_streaming_rent(),
   };
 
-  const hasAnyResults = $derived(
-    $plexServices.length > 0 ||
-      Object.values(groupedList).some((rows) => rows.length > 0),
+  const hasStreamingResults = $derived(
+    Object.values(visibleList).some((rows) => rows.length > 0),
   );
 
-  const getCostType = (group: StreamingGroup): CostType => {
-    switch (group) {
-      case StreamingGroup.Rent:
-        return "rent";
-      case StreamingGroup.Purchase:
-        return "purchase";
-      default:
-        return "any";
-    }
-  };
+  const hasAnyResults = $derived(
+    ($plexServices.length > 0 && !isSearching) || hasStreamingResults,
+  );
+
 </script>
 
-<Drawer {onClose} title={m.list_title_where_to_watch()} size="large" {elevated}>
+<Drawer
+  {onClose}
+  {elevated}
+  title={m.list_title_where_to_watch()}
+  size="large"
+>
+  <label class="where-to-watch-search">
+    <SearchIcon />
+    <input
+      bind:value={searchTerm}
+      type="search"
+      aria-label={m.input_label_search_streaming_services()}
+      placeholder={m.input_placeholder_search_streaming_services()}
+    />
+  </label>
+
   <RenderFor audience="authenticated" device={["mobile"]}>
-    {#if $plexServices.length > 0}
+    {#if $plexServices.length > 0 && !isSearching}
       <WhereToWatchCategory>
         <SectionList
           id={{
@@ -84,79 +109,79 @@
     {/if}
   </RenderFor>
 
-  {#each Object.entries(groupedList) as [group, rows] (group)}
-    {#if rows.length > 0}
-      {@const streamingGroup = group as StreamingGroup}
-      {@const label = groupLabels[streamingGroup]}
-      <WhereToWatchCategory title={label}>
-        {#each rows as row (row.key)}
-          <div class="trakt-service-row">
-            <div class="trakt-service-logo-card">
-              <WhereToWatchLogo source={row.source} />
-            </div>
-
-            <div class="trakt-service-countries">
-              <SectionList
-                id={{
-                  scope: `where-to-watch-drawer-list-${streamingGroup}-${row.source}`,
-                  key: target.media.slug,
-                }}
-                items={row.countries}
-                title={null}
-                variant="inline"
-                --height-list="var(--height-where-to-watch-list)"
-              >
-                {#snippet item(entry)}
-                  <WhereToWatchItem
-                    service={entry.service}
-                    country={entry.country}
-                    countryName={entry.countryName}
-                    variant="country"
-                    type={getCostType(streamingGroup)}
-                  />
-                {/snippet}
-              </SectionList>
-            </div>
-          </div>
-        {/each}
-      </WhereToWatchCategory>
-    {/if}
-  {/each}
+  <div class="trakt-where-to-watch-categories">
+    {#each Object.entries(visibleList) as [group, rows] (group)}
+      {#if rows.length > 0}
+        {@const streamingGroup = group as StreamingGroup}
+        {@const label = groupLabels[streamingGroup]}
+        <WhereToWatchCategory title={label}>
+          {#each rows as row (row.key)}
+            <WhereToWatchServiceSection
+              source={row.source}
+              countries={row.countries}
+              group={streamingGroup}
+              {isSearching}
+            />
+          {/each}
+        </WhereToWatchCategory>
+      {/if}
+    {/each}
+  </div>
 
   {#if $isLoading}
     <LoadingIndicator />
   {/if}
 
   {#if !$isLoading && !hasAnyResults}
-    <p class="secondary">{m.button_text_no_services()}</p>
+    <p class="secondary">
+      {isSearching
+        ? m.list_placeholder_no_filter_results()
+        : m.button_text_no_services()}
+    </p>
   {/if}
 </Drawer>
 
 <style lang="scss">
-  .trakt-service-row {
-    display: flex;
-    gap: var(--gap-s);
-  }
-
-  .trakt-service-logo-card {
-    margin-top: var(--ni-2);
-
-    flex-shrink: 0;
-    width: var(--ni-96);
-    height: var(--ni-96);
-
+  .where-to-watch-search {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: var(--gap-xs);
 
-    border-radius: var(--border-radius-m);
-    border: var(--ni-1) solid var(--color-border);
+    margin-block-start: var(--ni-4);
+    margin-block-end: var(--gap-s);
+    min-height: var(--ni-48);
+    padding: 0 var(--ni-16);
+    box-sizing: border-box;
+
+    border-radius: var(--border-radius-l);
+    background: var(--color-input-background);
+    outline: var(--border-thickness-xxs) solid var(--color-border);
+
+    transition: outline var(--transition-increment) ease-in-out;
+
+    &:focus-within {
+      outline: var(--border-thickness-xs) solid var(--purple-500);
+    }
+
+    :global(svg) {
+      flex-shrink: 0;
+      width: var(--ni-24);
+      height: var(--ni-24);
+      color: var(--color-text-secondary);
+    }
+
+    input {
+      all: unset;
+      min-width: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 
-  .trakt-service-countries {
-    flex: 1;
-    min-width: 0;
-    align-self: center;
-    height: var(--height-where-to-watch-list);
+  .trakt-where-to-watch-categories {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xl);
   }
 </style>
+

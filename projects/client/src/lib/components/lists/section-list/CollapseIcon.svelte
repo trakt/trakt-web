@@ -1,14 +1,17 @@
 <script lang="ts">
-  const { state }: { state: "collapsed" | "expanded" } = $props();
+  const { state, size = 24 }: {
+    state: "collapsed" | "expanded";
+    size?: number;
+  } = $props();
 </script>
 
 <svg
   class="trakt-collapse-icon"
   class:is-collapsed={state === "collapsed"}
   xmlns="http://www.w3.org/2000/svg"
-  height="24px"
+  height="{size}px"
   viewBox="0 -960 960 960"
-  width="24px"
+  width="{size}px"
   fill="currentColor"
 >
   <path
