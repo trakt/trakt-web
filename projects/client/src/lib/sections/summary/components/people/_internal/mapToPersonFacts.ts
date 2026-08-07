@@ -18,8 +18,9 @@ type MapToPersonFactsProps = {
  *
  * Both forms matter here. `value` is the bare figure for the labelled layout;
  * `inlineValue` has to stand alone, because the single-row layout drops the
- * labels and "51" on its own says nothing. Height needs no help - its unit
- * already identifies it - but age and dates do.
+ * labels. Only what is genuinely ambiguous gets a qualifier: height is carried by
+ * its unit and a birth date by being a date, but "51" on its own says nothing, and
+ * a death date needs distinguishing from the birth date beside it.
  *
  * Age is omitted once someone has died: their age at death is not the same fact
  * as a living person's age, and showing a number that keeps counting up would be
@@ -47,7 +48,13 @@ export function mapToPersonFacts(
       key: 'birthday',
       label: m.header_birthday(),
       value: birthday,
-      inlineValue: `${m.header_birthday()} ${birthday}`,
+      /*
+        Bare, unlike the other dated facts: a date sitting beside a height and an
+        age is legibly a birth date without being told. The death date keeps its
+        qualifier, because for someone who has died two bare dates in a row would
+        be genuinely ambiguous.
+      */
+      inlineValue: birthday,
     });
   }
 
