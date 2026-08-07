@@ -1,7 +1,6 @@
 import { goto } from '$app/navigation';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
-import { waitFor } from '@testing-library/svelte';
-import { createRawSnippet } from 'svelte';
+import { createRawSnippet, tick } from 'svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FilterProvider from './FilterProvider.svelte';
 import { DISCOVER_MODE_PARAM } from './_internal/constants.ts';
@@ -13,8 +12,16 @@ const children = createRawSnippet(() => ({
 }));
 
 describe('FilterProvider', () => {
-  const renderProvider = () =>
+  const renderProvider = async () => {
     renderComponent(FilterProvider, { props: { children } });
+    await tick();
+  };
+
+  const storeFilters = (filters: Record<string, string>) =>
+    localStorage.setItem(STORED_FILTERS_KEY, JSON.stringify(filters));
+
+  const targetUrl = () =>
+    new URL(vi.mocked(goto).mock.calls.at(0)?.[0] ?? '', 'http://localhost');
 
   beforeEach(() => {
     localStorage.clear();
@@ -22,51 +29,42 @@ describe('FilterProvider', () => {
   });
 
   it('should restore stored filters into the URL on mount', async () => {
-    localStorage.setItem(
-      STORED_FILTERS_KEY,
-      JSON.stringify({ [FilterKey.Genres]: 'action' }),
-    );
+    storeFilters({ [FilterKey.Genres]: 'action' });
 
-    renderProvider();
+    await renderProvider();
 
-    await waitFor(() => expect(goto).toHaveBeenCalledTimes(1));
-
-    const target = new URL(vi.mocked(goto).mock.calls.at(0)?.[0] ?? '');
-    expect(target.searchParams.get(FilterKey.Genres)).toBe('action');
+    expect(goto).toHaveBeenCalledTimes(1);
+    expect(targetUrl().searchParams.get(FilterKey.Genres)).toBe('action');
   });
 
-  it('should set discover mode when there are no stored filters', async () => {
-    renderProvider();
+  it('should not add the discover mode when restoring stored filters', async () => {
+    storeFilters({ [FilterKey.Genres]: 'action' });
 
-    await waitFor(() => expect(goto).toHaveBeenCalledTimes(1));
+    await renderProvider();
 
-    const target = new URL(vi.mocked(goto).mock.calls.at(0)?.[0] ?? '');
-    expect(target.searchParams.get(DISCOVER_MODE_PARAM)).toBe('media');
+    expect(targetUrl().searchParams.has(DISCOVER_MODE_PARAM)).toBe(false);
   });
 
-  it('should set discover mode when stored filters are empty', async () => {
-    localStorage.setItem(STORED_FILTERS_KEY, JSON.stringify({}));
+  it('should not navigate when there are no stored filters', async () => {
+    await renderProvider();
 
-    renderProvider();
+    expect(goto).not.toHaveBeenCalled();
+  });
 
-    await waitFor(() => expect(goto).toHaveBeenCalledTimes(1));
+  it('should not navigate when stored filters are empty', async () => {
+    storeFilters({});
 
-    const target = new URL(vi.mocked(goto).mock.calls.at(0)?.[0] ?? '');
-    expect(target.searchParams.get(DISCOVER_MODE_PARAM)).toBe('media');
+    await renderProvider();
+
+    expect(goto).not.toHaveBeenCalled();
   });
 
   it('should not override filters already present in the URL', async () => {
     window.history.replaceState({}, '', `/movies?${FilterKey.Genres}=comedy`);
-    localStorage.setItem(
-      STORED_FILTERS_KEY,
-      JSON.stringify({ [FilterKey.Genres]: 'action' }),
-    );
+    storeFilters({ [FilterKey.Genres]: 'action' });
 
-    renderProvider();
+    await renderProvider();
 
-    await waitFor(() => expect(goto).toHaveBeenCalledTimes(1));
-
-    const target = new URL(vi.mocked(goto).mock.calls.at(0)?.[0] ?? '');
-    expect(target.searchParams.get(FilterKey.Genres)).toBe('comedy');
+    expect(goto).not.toHaveBeenCalled();
   });
 });
