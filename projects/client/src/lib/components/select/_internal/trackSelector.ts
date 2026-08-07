@@ -1,31 +1,28 @@
+import { WellKnownMediaQuery } from '$lib/stores/css/useMedia';
 import { time } from '$lib/utils/timing/time.ts';
 
 export type TrackSelectorParams = {
   isFluid: boolean;
   shouldMorph: boolean;
-  value: string;
-  expanded: boolean;
-  optionCount: number;
+  selector: HTMLElement | Nil;
+  target: HTMLElement | Nil;
 };
 
 const morphDuration = time.seconds(0.3);
 
 const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3);
 
+const prefersReducedMotion = () =>
+  globalThis.matchMedia?.(WellKnownMediaQuery.reducedMotion).matches ?? false;
+
 export function trackSelector(
-  track: HTMLElement,
+  row: HTMLElement,
   initial: TrackSelectorParams,
 ) {
-  const row = track.querySelector<HTMLElement>('.segment-row');
-  if (!row) return;
-
   let params = initial;
   let isMorphing = false;
   let morphFrame = 0;
   let settleFrame = 0;
-
-  const getSelected = () =>
-    row.querySelector<HTMLElement>('.segment[aria-checked="true"]');
 
   const offsetOf = (element: HTMLElement) => {
     const rowRect = row.getBoundingClientRect();
@@ -40,25 +37,27 @@ export function trackSelector(
   };
 
   const measure = () => {
-    if (isMorphing || !row.isConnected) return;
+    const { target } = params;
+    if (isMorphing || !target || !row.isConnected) return;
 
-    const selected = getSelected();
-    if (!selected) return;
-
-    write(offsetOf(selected));
-    track.classList.add('is-measured');
+    write(offsetOf(target));
+    row.dataset.measured = '';
   };
 
   const stopMorph = () => {
     cancelAnimationFrame(morphFrame);
     isMorphing = false;
-    track.classList.remove('is-tracking');
+    delete row.dataset.tracking;
   };
 
   const morph = () => {
-    const selected = getSelected();
-    const selector = row.querySelector<HTMLElement>('.segment-selector');
-    if (!selected || !selector) return;
+    const { selector, target } = params;
+    if (!selector || !target) return;
+
+    if (prefersReducedMotion()) {
+      measure();
+      return;
+    }
 
     stopMorph();
 
@@ -66,10 +65,10 @@ export function trackSelector(
     const startedAt = performance.now();
 
     isMorphing = true;
-    track.classList.add('is-tracking');
+    row.dataset.tracking = '';
 
     const step = () => {
-      const to = offsetOf(selected);
+      const to = offsetOf(target);
       const progress = easeOutCubic(
         Math.min((performance.now() - startedAt) / morphDuration, 1),
       );
@@ -95,9 +94,9 @@ export function trackSelector(
     measure();
     document.fonts?.ready.then(measure);
 
-    settleFrame = requestAnimationFrame(() =>
-      track.classList.add('is-settled')
-    );
+    settleFrame = requestAnimationFrame(() => {
+      row.dataset.settled = '';
+    });
     observer.observe(row);
   };
 
@@ -121,20 +120,12 @@ export function trackSelector(
         return;
       }
 
-      const hasNewValue = next.value !== previous.value;
-
-      if (next.shouldMorph && hasNewValue) {
+      if (next.shouldMorph && next.target !== previous.target) {
         morph();
         return;
       }
 
-      if (
-        hasNewValue ||
-        next.expanded !== previous.expanded ||
-        next.optionCount !== previous.optionCount
-      ) {
-        measure();
-      }
+      measure();
     },
     destroy() {
       cancelAnimationFrame(settleFrame);

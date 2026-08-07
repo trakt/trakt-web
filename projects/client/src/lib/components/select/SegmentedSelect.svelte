@@ -85,12 +85,14 @@
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
   const isLabelHidden = $derived(variant === "compact" && Boolean(icon));
 
+  let selectorEl = $state<HTMLElement>();
+  let segmentEls = $state<Array<HTMLElement | undefined>>([]);
+
   const selectorParams = $derived<TrackSelectorParams>({
     isFluid: expandable || variant === "selected-label",
     shouldMorph: variant === "selected-label",
-    value,
-    expanded,
-    optionCount: options.length,
+    selector: selectorEl,
+    target: segmentEls[selectedIndex],
   });
 </script>
 
@@ -98,6 +100,7 @@
   {@const collapsed = isCollapsed(index)}
   {#if option.href}
     <a
+      bind:this={segmentEls[index]}
       {...segmentProps({ option, index, collapsed })}
       aria-disabled={disabled ? "true" : undefined}
       href={option.href}
@@ -114,6 +117,7 @@
     </a>
   {:else}
     <button
+      bind:this={segmentEls[index]}
       type="button"
       {...segmentProps({ option, index, collapsed })}
       disabled={collapsed || disabled}
@@ -137,7 +141,6 @@
 
 <div
   class="trakt-segmented-select"
-  use:trackSelector={selectorParams}
   role="radiogroup"
   aria-label={ariaLabel}
   data-variant={variant}
@@ -145,8 +148,13 @@
   style:--segment-count={options.length}
   style:--selected-index={selectedIndex}
 >
-  <div class="segment-row" data-dpad-navigation={DpadNavigationType.List}>
-    <div class="segment-selector" aria-hidden="true"></div>
+  <div
+    class="segment-row"
+    use:trackSelector={selectorParams}
+    data-dpad-navigation={DpadNavigationType.List}
+  >
+    <div class="segment-selector" bind:this={selectorEl} aria-hidden="true">
+    </div>
 
     {#each options as option, index (option.value)}
       {#if isLabelHidden}
@@ -413,29 +421,30 @@
         color-mix(in srgb, var(--color-shadow) 30%, transparent);
     }
 
-    &:global(.is-measured) .segment-selector {
+    .segment-row:global([data-measured]) .segment-selector {
       opacity: 1;
     }
 
-    &:global(.is-measured) .segment.is-selected {
+    .segment-row:global([data-measured]) .segment.is-selected {
       background: none;
       box-shadow: none;
     }
 
-    &:global(.is-settled) .segment-selector {
+    .segment-row:global([data-settled]) .segment-selector {
       transition:
         transform var(--expand-slide) var(--selector-ease),
         width var(--expand-slide) var(--selector-ease),
         opacity var(--transition-increment) ease-in-out;
     }
 
-    &:global(.is-tracking) .segment-selector {
+    .segment-row:global([data-tracking]) .segment-selector {
       transition: opacity var(--transition-increment) ease-in-out;
     }
 
     @media (prefers-reduced-motion: reduce) {
       .segment,
-      .segment-selector {
+      .segment-row:global([data-settled]) .segment-selector,
+      .segment-row:global([data-tracking]) .segment-selector {
         transition: none;
       }
     }
