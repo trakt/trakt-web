@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { PlexServer } from "$lib/requests/plex/plexServersQuery.ts";
   import { iffy } from "$lib/utils/function/iffy.ts";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
@@ -14,14 +14,18 @@
   const {
     serverId,
     serverName,
-    isSyncing,
-    onSyncNow,
+    servers,
+    onSelectServer,
   }: {
     serverId: string;
     serverName: string;
-    isSyncing: boolean;
-    onSyncNow: () => void;
+    servers: PlexServer[];
+    onSelectServer: (id: string) => void;
   } = $props();
+
+  const serverOptions = $derived(
+    servers.map((server) => ({ value: server.id, label: server.name })),
+  );
 
   const {
     isLoadingAccounts,
@@ -47,21 +51,26 @@
   );
 </script>
 
-<div class="trakt-plex-server-settings">
-  <div class="plex-server-header">
-    <span class="server-name">{serverName}</span>
-    <Button
-      size="small"
-      color="purple"
-      label={m.button_label_plex_sync_now()}
-      onclick={onSyncNow}
-      disabled={isSyncing}
-    >
-      {m.button_plex_sync_now()}
-    </Button>
-  </div>
+{#snippet serverPicker()}
+  {#if servers.length > 1}
+    <SingleSelect
+      options={serverOptions}
+      value={serverId}
+      placeholder={m.label_plex_server()}
+      autoWidth
+      onChange={onSelectServer}
+    />
+  {:else}
+    <span class="secondary">{serverName}</span>
+  {/if}
+{/snippet}
 
-  <SettingsGroupCard>
+<div class="trakt-plex-server-settings">
+  <SettingsGroupCard
+    title={m.header_plex_server_settings()}
+    description={m.description_plex_server()}
+    action={serverPicker}
+  >
     {#if $isLoadingAccounts}
       <div class="loading-container">
         <LoadingIndicator />
@@ -101,31 +110,11 @@
 </div>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-plex-server-settings {
     display: flex;
     flex-direction: column;
     gap: 0;
     max-width: var(--ni-640);
-  }
-
-  .plex-server-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: var(--gap-m) var(--ni-0) var(--gap-xs);
-
-    @include for-tablet-sm-and-below {
-      padding: var(--gap-m) var(--gap-m) var(--gap-xs);
-    }
-  }
-
-  .server-name {
-    font-size: var(--font-size-title);
-    font-weight: bold;
-    color: var(--color-text-primary);
   }
 
   .loading-container {

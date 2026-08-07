@@ -8,7 +8,7 @@
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
   import PlexConnect from "./PlexConnect.svelte";
   import PlexServerCard from "./PlexServerCard.svelte";
-  import PlexServers from "./PlexServers.svelte";
+  import PlexSyncedServers from "./PlexSyncedServers.svelte";
   import PlexSyncHistory from "./PlexSyncHistory.svelte";
   import PlexSyncSettings from "./PlexSyncSettings.svelte";
   import { usePlexSync } from "./usePlexSync.ts";
@@ -58,24 +58,24 @@
           onDisconnect={disconnect}
         />
       </SettingsGroupRow>
-
-      {#if $isConnected && $servers.length > 1}
-        <PlexServers
-          servers={$servers}
-          selectedServerId={$selectedServerId}
-          onSelectServer={selectServer}
-        />
-      {/if}
     {/if}
   </SettingsGroupCard>
+
+  {#if $isConnected}
+    <PlexSyncedServers
+      servers={$servers}
+      isSyncing={$isSyncing}
+      onSyncNow={syncNow}
+    />
+  {/if}
 
   {#if $isConnected && selectedServer}
     {#key selectedServer.id}
       <PlexServerCard
         serverId={selectedServer.id}
         serverName={selectedServer.name}
-        isSyncing={$isSyncing}
-        onSyncNow={syncNow}
+        servers={$servers}
+        onSelectServer={selectServer}
       />
     {/key}
   {/if}

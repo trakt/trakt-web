@@ -103,8 +103,7 @@ export function usePlexSync() {
       selectedServerId.next(serverId);
     },
 
-    syncNow: async () => {
-      const serverId = selectedServerId.getValue();
+    syncNow: async (serverId: string) => {
       if (!serverId) return;
 
       isSyncing.next(true);

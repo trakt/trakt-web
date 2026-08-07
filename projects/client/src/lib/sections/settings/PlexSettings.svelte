@@ -30,18 +30,18 @@
 {/snippet}
 
 {#snippet syncTab()}
-  <RenderFor audience="free">
-    <SettingsVipUpsell
-      icon={plexIcon}
-      title={m.header_plex_vip_upsell_sync()}
-      description={m.description_plex_vip_upsell_sync()}
-      source="plex-settings-sync"
-    />
-  </RenderFor>
+  <div class="plex-sync-tab">
+    <RenderFor audience="free">
+      <SettingsVipUpsell
+        icon={plexIcon}
+        title={m.header_plex_sync_free_limits()}
+        description={m.description_plex_sync_free_limits()}
+        source="plex-settings-sync"
+      />
+    </RenderFor>
 
-  <RenderFor audience="vip">
     <PlexSync />
-  </RenderFor>
+  </div>
 {/snippet}
 
 {#snippet webhookTab()}
@@ -75,3 +75,11 @@
   ]}
   {onChange}
 />
+
+<style lang="scss">
+  .plex-sync-tab {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xl);
+  }
+</style>
