@@ -60,6 +60,16 @@
 
   const slug$ = fromRune(() => person.slug);
   const backdropMedia = usePersonBackdropMedia(slug$);
+
+  /*
+    Whether a band is actually drawn. Without one there is nothing to overlap, so
+    the content must not be pulled upwards - it would leave the card entirely.
+  */
+  const hasBackdrop = $derived.by(() => {
+    if (backdropVariant === "headshot") return true;
+    if (backdropVariant === "none") return false;
+    return $backdropMedia != null;
+  });
 </script>
 
 {#snippet tags()}
@@ -68,13 +78,21 @@
   {/if}
 {/snippet}
 
-<article class="trakt-people-masthead-header">
-  <PersonMastheadBackdrop
-    variant={backdropVariant}
-    {person}
-    media={$backdropMedia}
-  />
+<article
+  class="trakt-people-masthead-header"
+  data-has-backdrop={hasBackdrop}
+>
+  {#if hasBackdrop}
+    <div class="masthead-backdrop">
+      <PersonMastheadBackdrop
+        variant={backdropVariant}
+        {person}
+        media={$backdropMedia}
+      />
+    </div>
+  {/if}
 
+  <div class="masthead-content">
   <div class="masthead-portrait">
     <SummaryPoster
       src={person.headshot.url.medium}
@@ -140,6 +158,7 @@
       <SummaryOverview title={person.name} overview={person.biography} />
     </div>
   {/if}
+  </div>
 </article>
 
 <style lang="scss">
@@ -152,6 +171,22 @@
     */
     --masthead-rhythm: var(--gap-l);
     --portrait-width: clamp(var(--ni-132), 17vw, var(--ni-220));
+
+    /*
+      The same derivation the media masthead uses, and for the same reason: the
+      band's height and the content's overlap both come from the portrait, so the
+      portrait's base lands exactly where the band ends and the dissolve completes
+      there. Resize the portrait and both follow.
+
+      This is what was wrong before. The band was an absolutely positioned 480px
+      slab with no overlap, so the portrait sat in normal flow BELOW the card's top
+      padding while the band ran on past its base - which is why the whole
+      composition read as sitting lower than the media masthead's.
+    */
+    --portrait-height: calc(var(--portrait-width) * 1.5);
+    --backdrop-reveal: var(--masthead-rhythm);
+    --backdrop-height: calc(var(--portrait-height) + var(--backdrop-reveal));
+    --backdrop-overlap: calc(-1 * var(--portrait-height));
 
     /*
       Same size range the media masthead gives its title, so a person's name and a
@@ -170,18 +205,7 @@
       transparent
     );
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--masthead-rhythm);
-
-    /*
-      Anchors the backdrop, and isolates it so its negative z-index stays behind
-      this header's content rather than falling behind the page itself.
-    */
     position: relative;
-    isolation: isolate;
 
     box-sizing: border-box;
     /* Matches the measure the lists below use, so the edges line up. */
@@ -191,14 +215,7 @@
       media masthead between 1024px and its design width, so this starts fluid.
     */
     margin: var(--masthead-rhythm) var(--layout-distance-side);
-    /*
-      Top inset is the rhythm, not 40px, so the portrait sits exactly as high as
-      the media masthead's poster does - that one clears the card's top edge by the
-      backdrop's reveal, which is also the rhythm. At 40px this sat 16px lower with
-      nothing in the gap to justify it.
-    */
-    padding: var(--masthead-rhythm) clamp(var(--gap-m), 8vw, var(--ni-120))
-      var(--ni-40);
+    padding: 0 clamp(var(--gap-m), 8vw, var(--ni-120)) var(--ni-40);
 
     /*
       The gap already spaces the stack evenly, but a large name's line box carries
@@ -261,6 +278,36 @@
     height: var(--ni-14);
 
     background: var(--summary-header-hairline, var(--color-border));
+  }
+
+  .masthead-backdrop {
+    /* Ends exactly at the portrait's base - see the geometry block above. */
+    height: var(--backdrop-height);
+    /* Full-bleed within the card, as the media masthead's band is. */
+    margin-inline: calc(-1 * clamp(var(--gap-m), 8vw, var(--ni-120)));
+  }
+
+  .masthead-content {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--masthead-rhythm);
+  }
+
+  /*
+    With a band above, the content is pulled back up over it so the portrait clears
+    the card's top edge by the reveal alone. Without one there is nothing to overlap,
+    so it simply takes the reveal as padding.
+  */
+  .trakt-people-masthead-header[data-has-backdrop="true"] .masthead-content {
+    margin-top: var(--backdrop-overlap);
+  }
+
+  .trakt-people-masthead-header[data-has-backdrop="false"] .masthead-content {
+    padding-top: var(--masthead-rhythm);
   }
 
   .masthead-portrait {
