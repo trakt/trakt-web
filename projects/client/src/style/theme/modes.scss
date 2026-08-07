@@ -52,6 +52,15 @@
   --color-official-list-background: var(--purple-200);
 
   /*
+   * Footer
+   *
+   * The surface the footer appears to rest on. Light theme deliberately uses a
+   * soft riser rather than near-black: the footer's own text is dark here, so a
+   * black plinth behind it would leave the links unreadable.
+   */
+  --color-footer-plinth: var(--shade-100);
+
+  /*
    * Actions bar
    */
   --color-actions-bar-background: var(--color-floating-background);
@@ -530,6 +539,16 @@
    * Actions bar
    */
   --color-actions-bar-background: var(--color-floating-background);
+
+  /*
+   * Footer
+   *
+   * The surface the footer appears to rest on. A measured step below the page
+   * (which sits around --shade-920) rather than the deepest shade - at near-black
+   * the contrast was strong enough that the arch read as a hole in the page
+   * instead of something the footer rests on.
+   */
+  --color-footer-plinth: var(--shade-940);
 
   /*
    * Cta
