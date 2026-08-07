@@ -22,12 +22,7 @@
 </script>
 
 {#snippet spoiler()}
-  <CollapsableContent
-    {labels}
-    variant="contain"
-    isCollapsed={$isCollapsed}
-    {toggle}
-  >
+  <CollapsableContent {labels} isCollapsed={$isCollapsed} {toggle}>
     {@render children()}
     {#snippet headerContent()}
       <p class="bold trakt-spoiler-alert">

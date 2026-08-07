@@ -590,7 +590,7 @@
     // height and the tabs below never jump.
     min-height: calc(3 * var(--font-size-text) * 1.5);
 
-    :global(.trakt-collapsable-content-button) {
+    :global(.trakt-collapsable-content-container) {
       width: 100%;
       box-sizing: border-box;
     }
