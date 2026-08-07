@@ -21,6 +21,7 @@
   import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
   import SummaryDrawer from "./SummaryDrawer.svelte";
+  import { useIsRevampedSummaryHeader } from "./components/media/header/useIsRevampedSummaryHeader.ts";
 
   const {
     media,
@@ -36,6 +37,13 @@
     videos: MediaVideo[];
     sentiment: SentimentAnalysis | Nil;
   } & CommonMediaSummaryProps = $props();
+
+  /*
+    The revamped headers carry trivia themselves, at desktop only. Rendering the
+    section as well showed a title's trivia twice, so it stands down exactly where
+    the header covers it - see useIsRevampedSummaryHeader.
+  */
+  const isRevampedHeader = useIsRevampedSummaryHeader();
 
   const relatedLink = $derived(UrlBuilder.related.movie(media.slug));
   const listsLink = $derived(UrlBuilder.popularLists.movie(media.slug));
@@ -97,4 +105,10 @@
   drilldownLink={listsLink}
 />
 
-<TriviaList {media} />
+{#if $isRevampedHeader}
+  <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
+    <TriviaList {media} />
+  </RenderFor>
+{:else}
+  <TriviaList {media} />
+{/if}
