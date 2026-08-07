@@ -58,7 +58,8 @@
       height: var(--ni-10);
       line-height: var(--ni-10);
 
-      scale: 1.15;
+      /* The pill keeps TagContent's own box - 22 x 18px - so it stays the size it
+         has always been. Only the glyph inside is corrected, via --glyph-scale. */
 
       :global(trakt-tag-icon svg) {
         width: var(--ni-10);

@@ -31,7 +31,10 @@
 <style>
   :global(.trakt-card-transparent) {
     .trakt-card-footer {
-      padding: var(--ni-10) 0 0;
+      /* Clear the indicator tag hanging over the cover's bottom edge, plus a
+         gap. Derived from the tag's own height so resizing it keeps this honest
+         - see --indicator-tag-overhang in style/layout. */
+      padding: calc(var(--indicator-tag-overhang) + var(--gap-xs)) 0 0;
     }
   }
 
