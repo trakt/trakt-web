@@ -43,6 +43,7 @@ export function useToggler<T extends TogglerId, K = TogglerValueMap[T]>(id: T) {
 
   return {
     options: toggler.options,
+    default: toggler.default as K,
     current: current.pipe(
       map(($current) => {
         const option = toggler.options.find((o) => o.value === $current) ??
