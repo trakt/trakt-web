@@ -9,7 +9,15 @@ type AdditionalPerson = {
 };
 
 type MainCredit = {
+  /** Full sentence with the name embedded as a link, e.g. `Directed by <a>…</a>`. */
   text: string;
+  /**
+   * The role on its own ("Directed by" / "Created by"), for layouts that set the
+   * label and the name on separate lines instead of in one sentence.
+   */
+  label: string;
+  /** The credited person's name, unwrapped from {@link MainCredit.text}. */
+  name: string;
   key: string;
   positions?: CrewPositions;
   others?: ReadonlyArray<AdditionalPerson>;
@@ -27,6 +35,8 @@ function mapToCreator(crew: MediaCrew): MainCredit | null {
 
   return {
     text: m.text_created_by({ name: first.name }),
+    label: m.text_created_by_short(),
+    name: first.name,
     key: first.key,
     positions: { shows: 'created by' },
     others: rest.length > 0 ? mapToOthers(rest) : undefined,
@@ -50,6 +60,8 @@ function mapToDirector(
 
   return {
     text: m.text_directed_by({ name: first.name }),
+    label: m.text_directed_by_short(),
+    name: first.name,
     key: first.key,
     positions,
     others: rest.length > 0 ? mapToOthers(rest) : undefined,

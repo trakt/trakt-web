@@ -6,4 +6,6 @@ export enum FeatureFlag {
   Leaderboard = 'leaderboard',
   ParentalGuide = 'parental-guide',
   Soundtrack = 'soundtrack',
+  SummaryHeaderAnchored = 'summary-header-anchored',
+  SummaryHeaderMasthead = 'summary-header-masthead',
 }

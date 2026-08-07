@@ -17,7 +17,7 @@
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
-  import MediaSummary from "./components/media/MediaSummary.svelte";
+  import MediaSummaryHeader from "./components/media/header/MediaSummaryHeader.svelte";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
   import Sentiment from "./components/sentiment/Sentiment.svelte";
   import SoundtrackList from "./components/soundtrack/SoundtrackList.svelte";
@@ -76,16 +76,14 @@
   <MediaSummaryV2 {media} {studios} {intl} {crew} type="show" />
 </RenderFor>
 
-<RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-  <MediaSummary {media} {intl} {crew} {streamOn} type="show">
-    {#snippet contextualContent()}
-      <RenderFor audience="all" device={["desktop"]}>
-        <WhereToWatchList type="show" {media} {streamOn} variant="inline" />
-        <Sentiment {sentiment} slug={media.slug} variant="inline" type="show" />
-      </RenderFor>
-    {/snippet}
-  </MediaSummary>
-</RenderFor>
+<MediaSummaryHeader {media} {intl} {crew} {streamOn} {sentiment} type="show">
+  {#snippet contextualContent()}
+    <RenderFor audience="all" device={["desktop"]}>
+      <WhereToWatchList type="show" {media} {streamOn} variant="inline" />
+      <Sentiment {sentiment} slug={media.slug} variant="inline" type="show" />
+    </RenderFor>
+  {/snippet}
+</MediaSummaryHeader>
 
 <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="show" {media} {streamOn} />

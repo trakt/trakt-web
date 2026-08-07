@@ -1,7 +1,7 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import ServiceLogo from "./_internal/ServiceLogo.svelte";
-  import { useStreamingServiceLogo } from "./_internal/useStreamingServiceLogo";
+  import { useStreamingServiceLogo } from "./useStreamingServiceLogo";
   import type { StreamingServiceLogoIntl } from "./StreamingServiceLogoIntl";
 
   type StreamingServiceLogoProps = {

@@ -10190,6 +10190,50 @@
     "preview_feature_description_soundtrack": {
       "default": "Adds a soundtrack section to movie and show pages, with playback where a track can be matched.",
       "description": "Description for the soundtrack preview feature."
+    },
+    "header_year": {
+      "default": "Year",
+      "description": "Field label for the release year in the summary header facts strip."
+    },
+    "header_credits": {
+      "default": "Credits",
+      "description": "Section label above the director or creator credit in the summary header."
+    },
+    "header_credits_and_details": {
+      "default": "Credits & Details",
+      "description": "Section label in the summary header for the column holding the main credit and release facts. Its chevron opens the full media details drawer."
+    },
+    "label_rating_source_audience": {
+      "default": "Audience",
+      "description": "Source label for the Rotten Tomatoes audience score in the summary header scores plate."
+    },
+    "text_just_watch_rank": {
+      "default": "JustWatch · rank {rank}",
+      "description": "Attribution subhead for the where-to-watch section. 'JustWatch' is the data provider's brand name and must not be translated; 'rank' is the title's popularity position."
+    },
+    "text_not_available_to_stream": {
+      "default": "Not available to stream",
+      "description": "Empty state shown in the summary header when no streaming provider carries the title in the user's region."
+    },
+    "text_included": {
+      "default": "included",
+      "description": "Qualifier after a streaming offer, meaning the title is part of the subscription at no extra cost. Shown as 'Stream · included'."
+    },
+    "preview_feature_title_summary_header_anchored": {
+      "default": "Anchored header",
+      "description": "Product feature name for the anchored summary header preview feature."
+    },
+    "preview_feature_description_summary_header_anchored": {
+      "default": "Rebuilds the movie and show header around one left edge, with facts in a ruled strip and actions rooted under the poster.",
+      "description": "Description for the anchored summary header preview feature."
+    },
+    "preview_feature_title_summary_header_masthead": {
+      "default": "Masthead header",
+      "description": "Product feature name for the masthead summary header preview feature."
+    },
+    "preview_feature_description_summary_header_masthead": {
+      "default": "Rebuilds the movie and show header as a magazine cover, with a backdrop band and centred title over a strip of credits, scores and listings.",
+      "description": "Description for the masthead summary header preview feature."
     }
   }
 }

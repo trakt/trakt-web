@@ -73,7 +73,7 @@
   .trakt-summary-poster :global(img),
   .trakt-summary-poster-overlay {
     overflow: hidden;
-    border-radius: var(--border-radius-xxl);
+    border-radius: var(--summary-poster-radius, var(--border-radius-xxl));
   }
 
   .trakt-summary-poster {
