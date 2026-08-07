@@ -209,28 +209,11 @@
     backdrop-filter: blur(var(--ni-8));
     overflow: hidden;
 
-    box-shadow: 0 0 0 var(--border-thickness-xs) transparent;
-
-    transition: box-shadow var(--transition-increment) ease-in-out;
-
-    &:has(.segment-extension :focus-within) {
-      box-shadow: 0 0 0 var(--border-thickness-xs) var(--color-input-focus);
-
-      @media (forced-colors: active) {
-        outline: var(--border-thickness-xs) solid Highlight;
-        outline-offset: var(--border-thickness-xs);
-      }
-    }
-
     &[data-variant="compact"] {
       --track-base-radius: var(
         --segmented-select-radius,
         var(--border-radius-m)
       );
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
     }
 
     .segment-row {
@@ -518,5 +501,22 @@
     align-items: flex-end;
 
     padding-inline: var(--ni-8);
+    border-radius: var(--segment-radius);
+
+    box-shadow: 0 0 0 var(--border-thickness-xxs) transparent;
+    transition: box-shadow var(--transition-increment) ease-in-out;
+
+    &:focus-within {
+      box-shadow: 0 0 0 var(--border-thickness-xxs) var(--color-input-focus);
+
+      @media (forced-colors: active) {
+        outline: var(--border-thickness-xxs) solid Highlight;
+        outline-offset: var(--border-thickness-xxs);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 </style>
