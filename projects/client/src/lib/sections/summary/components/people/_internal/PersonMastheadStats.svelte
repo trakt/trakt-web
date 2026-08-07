@@ -1,6 +1,7 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { riseFade } from "$lib/utils/transitions/riseFade";
   import SummaryHeaderLabel from "../../header-kit/SummaryHeaderLabel.svelte";
   import type { PersonStat } from "./PersonStat.ts";
@@ -22,10 +23,14 @@
     name,
     orientation = "row",
     frame = "none",
+    isLoading = false,
   }: {
     stats: ReadonlyArray<PersonStat>;
     name: string;
     frame?: PersonStatsFrame;
+    /* Renders a placeholder of the same size, so nothing moves when the real
+       figures arrive. */
+    isLoading?: boolean;
     /*
       `row` sits them side by side on their own line; `stacked` is a single column,
       used when they flank the portrait and each side holds one.
@@ -34,7 +39,16 @@
   } = $props();
 </script>
 
-{#if stats.length > 0}
+{#if isLoading}
+  <ul class="trakt-person-masthead-stats" data-orientation={orientation}>
+    <li aria-hidden="true">
+      <span class="stat-placeholder">
+        <Skeleton width="var(--ni-40)" height="var(--ni-24)" />
+        <Skeleton width="var(--ni-56)" height="var(--ni-10)" />
+      </span>
+    </li>
+  </ul>
+{:else if stats.length > 0}
   <ul
     class="trakt-person-masthead-stats"
     data-orientation={orientation}
@@ -42,12 +56,12 @@
   >
     {#each stats as stat, index (stat.key)}
       <!--
-        These arrive after everything around them - the counts come from the credit
-        queries - so they surface rather than appearing from nowhere. Staggered just
-        enough to read as two things rather than one block; see riseFade for why the
-        travel is only a few pixels.
+        A placeholder has already held this space, so the figures only need to resolve
+        into it - hence barely any travel. The earlier, larger movement was
+        compensating for a layout that shifted underneath them, which is fixed at the
+        source now. Staggered just enough to read as two things rather than one block.
       -->
-      <li in:riseFade={{ delay: index * 70 }}>
+      <li in:riseFade={{ delay: index * 60, distance: 3 }}>
         <Link
           href={stat.href}
           target="_self"
@@ -147,6 +161,19 @@
       border: var(--ni-1) solid
         color-mix(in srgb, var(--color-foreground) 22%, transparent);
     }
+  }
+
+  /*
+    Sized to the figure and label it stands in for, and padded to match the link,
+    so swapping one for the other moves nothing.
+  */
+  .stat-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--ni-2);
+
+    padding: var(--gap-xs) var(--gap-m);
   }
 
   .stat-value {
