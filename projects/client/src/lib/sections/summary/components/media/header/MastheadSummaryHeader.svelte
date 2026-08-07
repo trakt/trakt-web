@@ -661,8 +661,22 @@
 
     margin-top: var(--gap-xxs);
 
-    --action-button-size: var(--ni-48);
     --summary-actions-bar-height: var(--ni-56);
+    /*
+      The tray hugs its controls instead of holding a fixed 280px width. At a fixed
+      width `space-between` spread four controls across it, which read as dead space
+      beside the primary action rather than as a tray around it.
+
+      Padding is symmetric and equal to the tray's own radius minus the control's:
+      56px tray, 48px controls, so 4px a side. That is what makes the watched
+      button's corners sit concentrically inside the tray's instead of floating in it.
+    */
+    --summary-actions-bar-width: fit-content;
+    --summary-actions-bar-padding: var(--ni-4);
+    /* Flat, not floating - the raised shadow read as a halo on this surface. */
+    --summary-actions-bar-shadow: none;
+    /* Raises the tray's controls to the 48px hit-target floor. */
+    --action-button-size: var(--ni-48);
   }
 
   .actions-rate {
