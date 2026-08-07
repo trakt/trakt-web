@@ -37,33 +37,36 @@
     text-wrap: balance;
     max-width: var(--title-measure, 22ch);
 
+    /*
+      Two independent axes, and they must not be confused:
+
+      - WHICH bucket applies comes from the title's length (see toTitleSizeBucket).
+      - How large that bucket renders comes from the viewport, via clamp.
+
+      The length buckets alone were not enough: a short title still took its full
+      64px on a phone. And a viewport clamp alone cannot express the length axis at
+      all. Each bucket therefore carries its own fluid range, so a long title stays
+      the smallest option at every width rather than only at the design width.
+    */
     &[data-size="large"] {
-      font-size: var(--title-size-large, var(--ni-64));
+      font-size: var(--title-size-large, clamp(var(--ni-32), 5vw, var(--ni-64)));
       line-height: 1.02;
     }
 
     &[data-size="medium"] {
-      font-size: var(--title-size-medium, var(--ni-52));
+      font-size: var(
+        --title-size-medium,
+        clamp(var(--ni-28), 4.2vw, var(--ni-52))
+      );
       line-height: 1.03;
     }
 
     &[data-size="small"] {
-      font-size: var(--title-size-small, var(--ni-44));
+      font-size: var(
+        --title-size-small,
+        clamp(var(--ni-24), 3.6vw, var(--ni-44))
+      );
       line-height: 1.04;
-    }
-
-    @include for-tablet-lg {
-      &[data-size="large"] {
-        font-size: var(--ni-48);
-      }
-
-      &[data-size="medium"] {
-        font-size: var(--ni-40);
-      }
-
-      &[data-size="small"] {
-        font-size: var(--ni-32);
-      }
     }
   }
 </style>

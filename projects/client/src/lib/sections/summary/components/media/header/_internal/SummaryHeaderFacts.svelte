@@ -52,7 +52,12 @@
     &[data-variant="strip"] {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--gap-xxl);
+      /*
+        Fluid, so the facts stay one row for as long as they can and then wrap on
+        their own. The 44px gap they were drawn with forced a wrap early on narrow
+        screens, which read as two half-empty rows.
+      */
+      gap: clamp(var(--gap-m), 3vw, var(--gap-xxl));
 
       padding: var(--ni-18) 0;
 
@@ -79,11 +84,6 @@
       text-wrap: pretty;
     }
 
-    @include for-tablet-lg {
-      &[data-variant="strip"] {
-        gap: var(--gap-l);
-      }
-    }
   }
 
   .fact {

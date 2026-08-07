@@ -16,7 +16,6 @@
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummaryHeader from "./components/media/header/MediaSummaryHeader.svelte";
-  import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
   import Sentiment from "./components/sentiment/Sentiment.svelte";
   import SoundtrackList from "./components/soundtrack/SoundtrackList.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
@@ -44,15 +43,12 @@
 
 <SummaryDrawer {sentiment} {studios} {crew} {media} {videos} type="movie" />
 
-<RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-  <MediaSummaryV2 {media} {studios} {crew} {intl} type="movie" />
-</RenderFor>
-
 <MediaSummaryHeader
   {media}
   {intl}
   {streamOn}
   {crew}
+  {studios}
   {sentiment}
   type="movie"
 >

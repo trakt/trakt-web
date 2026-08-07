@@ -18,7 +18,6 @@
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummaryHeader from "./components/media/header/MediaSummaryHeader.svelte";
-  import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
   import Sentiment from "./components/sentiment/Sentiment.svelte";
   import SoundtrackList from "./components/soundtrack/SoundtrackList.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
@@ -72,11 +71,15 @@
   type="show"
 />
 
-<RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-  <MediaSummaryV2 {media} {studios} {intl} {crew} type="show" />
-</RenderFor>
-
-<MediaSummaryHeader {media} {intl} {crew} {streamOn} {sentiment} type="show">
+<MediaSummaryHeader
+  {media}
+  {intl}
+  {crew}
+  {streamOn}
+  {studios}
+  {sentiment}
+  type="show"
+>
   {#snippet contextualContent()}
     <RenderFor audience="all" device={["desktop"]}>
       <WhereToWatchList type="show" {media} {streamOn} variant="inline" />
