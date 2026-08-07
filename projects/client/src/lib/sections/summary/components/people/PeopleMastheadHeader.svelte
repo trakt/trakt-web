@@ -9,13 +9,15 @@
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
   import SummaryOverview from "../summary/SummaryOverview.svelte";
+  import SummaryHeaderFacts from "../header-kit/SummaryHeaderFacts.svelte";
+  import SummaryHeaderTitle from "../header-kit/SummaryHeaderTitle.svelte";
+  import { mapToPersonFacts } from "./_internal/mapToPersonFacts.ts";
   /*
     Imported the same way this folder's sibling PeopleSummary already imports them.
     If this treatment graduates, these three belong one level up in `people/` -
     they are shared by three headers now, not private to v2.
   */
   import ImdbLink from "./v2/_internal/ImdbLink.svelte";
-  import PersonDetails from "./v2/_internal/PersonDetails.svelte";
   import SocialMediaLinks from "./v2/_internal/SocialMediaLinks.svelte";
   import { hasSocialMediaLinks } from "./v2/_internal/hasSocialMediaLinks";
 
@@ -36,6 +38,8 @@
       keeps them part of the masthead rather than a data table under it.
   */
   const { person }: { person: PersonSummary } = $props();
+
+  const facts = $derived(mapToPersonFacts({ person, now: new Date() }));
 </script>
 
 {#snippet tags()}
@@ -57,29 +61,27 @@
     <span class="masthead-kicker">{toTranslatedPosition(person.knownFor)}</span>
   {/if}
 
-  <h1 class="masthead-name">{person.name}</h1>
+  <SummaryHeaderTitle title={person.name} />
 
-  <div class="masthead-facts">
-    <PersonDetails
-      birthday={person.birthday}
-      deathDate={person.deathDate}
-      height={person.height}
-    />
-  </div>
+  <!--
+    Facts, socials and the actions share ONE row. Stacked, they read as four
+    separate bands under the name and pushed the biography off the fold; the facts
+    also wrapped mid-row, leaving a separator with nothing after it.
 
-  {#if hasSocialMediaLinks(person)}
-    <div class="masthead-socials">
+    The facts use the summary header's own fact component in its inline form, so
+    the type scale is inherited rather than restated - and inline means no labels,
+    which is why mapToPersonFacts makes each value self-describing.
+  -->
+  <div class="masthead-meta">
+    <SummaryHeaderFacts {facts} variant="inline" />
+
+    {#if hasSocialMediaLinks(person)}
+      <span class="meta-divider" aria-hidden="true"></span>
       <SocialMediaLinks {person} />
-    </div>
-  {/if}
+    {/if}
 
-  {#if person.biography}
-    <div class="masthead-deck">
-      <SummaryOverview title={person.name} overview={person.biography} />
-    </div>
-  {/if}
+    <span class="meta-divider" aria-hidden="true"></span>
 
-  <div class="masthead-actions">
     <ShareButton
       title={person.name}
       textFactory={({ title: name }) => m.text_share_person({ name })}
@@ -106,6 +108,12 @@
       </PopupMenu>
     </RenderFor>
   </div>
+
+  {#if person.biography}
+    <div class="masthead-deck">
+      <SummaryOverview title={person.name} overview={person.biography} />
+    </div>
+  {/if}
 </article>
 
 <style lang="scss">
@@ -118,6 +126,23 @@
     */
     --masthead-rhythm: var(--gap-l);
     --portrait-width: clamp(var(--ni-132), 17vw, var(--ni-220));
+
+    /*
+      Same size range the media masthead gives its title, so a person's name and a
+      title's name are the same weight of statement. Names have nothing like the
+      length spread of media titles, so every bucket takes the same range.
+    */
+    --title-size-large: clamp(var(--ni-32), 5.2vw, var(--ni-66));
+    --title-size-medium: clamp(var(--ni-32), 5.2vw, var(--ni-66));
+    --title-size-small: clamp(var(--ni-28), 4.4vw, var(--ni-56));
+    --title-measure: 20ch;
+
+    /* Shared with the header primitives - the meta row's dividers resolve here. */
+    --summary-header-hairline: color-mix(
+      in srgb,
+      var(--color-foreground) 12%,
+      transparent
+    );
 
     display: flex;
     flex-direction: column;
@@ -141,7 +166,7 @@
       Trimming to the cap edge makes the gap the space you actually see.
     */
     @supports (text-box-trim: trim-both) {
-      .masthead-name,
+      :global(.trakt-summary-header-title),
       .masthead-deck {
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
@@ -151,6 +176,29 @@
     @include for-tablet-sm-and-below {
       padding: var(--ni-28) var(--gap-m);
     }
+  }
+
+  /*
+    One centred row for the facts, socials and actions. It wraps as a whole rather
+    than letting the facts wrap inside themselves, which is what produced a
+    stranded separator with nothing after it.
+  */
+  .masthead-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--gap-s);
+
+    /* Matches the header's inline meta line, so nothing here sets its own scale. */
+    --action-button-size: var(--ni-40);
+  }
+
+  .meta-divider {
+    width: var(--ni-1);
+    height: var(--ni-14);
+
+    background: var(--summary-header-hairline, var(--color-border));
   }
 
   .masthead-portrait {
@@ -166,40 +214,8 @@
     color: var(--purple-300);
   }
 
-  .masthead-name {
-    /*
-      Fluid rather than fixed. Names have nothing like the length spread of media
-      titles, so this needs no length buckets - only a range.
-    */
-    font-size: clamp(var(--ni-32), 5.2vw, var(--ni-66));
-    font-weight: 700;
-    line-height: 1.03;
-    letter-spacing: -0.03em;
-    color: var(--color-text-primary);
 
-    text-wrap: balance;
-    max-width: 20ch;
-    margin: 0;
-  }
 
-  .masthead-facts {
-    display: flex;
-    justify-content: center;
-
-    /*
-      PersonDetails lays its facts out as a row with separators, which is already
-      what this needs - it only has to be centred rather than left-aligned.
-    */
-    :global(.trakt-person-details) {
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-  }
-
-  .masthead-socials {
-    display: flex;
-    justify-content: center;
-  }
 
   .masthead-deck {
     max-width: 62ch;
@@ -210,12 +226,4 @@
     text-wrap: pretty;
   }
 
-  .masthead-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--gap-s);
-
-    --action-button-size: var(--ni-48);
-  }
 </style>

@@ -5,7 +5,7 @@ import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
 import { toTranslatedStatus } from '$lib/utils/formatting/string/toTranslatedStatus.ts';
 import type { MediaSummaryEntry } from '../../models/MediaSummaryEntry.ts';
-import type { SummaryHeaderFact } from './SummaryHeaderFact.ts';
+import type { SummaryHeaderFact } from '../../../header-kit/SummaryHeaderFact.ts';
 
 /**
  * The ruled facts strip (1a) and the single meta line (1b) render the same
