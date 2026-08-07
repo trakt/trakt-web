@@ -6,7 +6,7 @@ import type { NavbarHeaderState } from './NavbarHeaderState.ts';
 export type NavbarStateSetterProps = {
   actions?: Snippet;
   contextualActions?: Snippet;
-  contentToggle?: ContentToggleSurface;
+  contentToggle?: ContentToggleSurface | Nil;
   toastActions?: Snippet | Nil;
   mode?: NavbarMode;
   hasFilters?: boolean;

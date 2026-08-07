@@ -404,6 +404,7 @@
       width: var(--selector-w, 0);
       transform: translateX(var(--selector-x, 0));
       opacity: 0;
+      transition: none;
     }
 
     .segment.is-selected {

@@ -6,11 +6,6 @@
   const { contentToggle, ...props }: NavbarStateSetterProps = $props();
 
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
-  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
-  const isLargeScreen = $derived($isDesktop || $isTabletLarge);
 </script>
 
-<NavbarStateSetter
-  {...props}
-  contentToggle={isLargeScreen ? contentToggle : undefined}
-/>
+<NavbarStateSetter {...props} contentToggle={$isDesktop ? contentToggle : null} />

@@ -16,7 +16,7 @@ export type NavbarMode = 'full' | 'minimal' | 'hidden';
 type NavbarState = {
   actions: Snippet | undefined;
   contextualActions: Snippet | undefined;
-  contentToggle: ContentToggleSurface | undefined;
+  contentToggle: ContentToggleSurface | Nil;
   hasFilters: boolean;
   showFilters: boolean;
   headerActions?: Snippet;
