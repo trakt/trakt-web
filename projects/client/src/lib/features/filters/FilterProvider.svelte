@@ -1,13 +1,9 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage";
   import { firstValueFrom } from "rxjs";
   import { onMount } from "svelte";
-  import {
-    DISCOVER_MODE_PARAM,
-    SEASONAL_STORAGE_KEY,
-  } from "./_internal/constants";
+  import { SEASONAL_STORAGE_KEY } from "./_internal/constants";
   import { createDiscoverContext } from "./_internal/createDiscoverContext";
   import { useStoredFilters } from "./useStoredFilters";
 
@@ -18,6 +14,7 @@
   );
 
   const { restoreFilters } = useStoredFilters();
+  const { current, default: defaultMode } = useToggler("discover");
   createDiscoverContext(useSeasonalFilters);
 
   /*
@@ -27,15 +24,8 @@
     future features that rely on search params.
   */
   onMount(async () => {
-    const hasDiscoverParam = page.url.searchParams.has(DISCOVER_MODE_PARAM);
-    if (hasDiscoverParam) {
-      restoreFilters();
-      return;
-    }
-
-    const { current } = useToggler("discover");
-    const { value: initialMode } = await firstValueFrom(current);
-    restoreFilters(initialMode);
+    const { value: mode } = await firstValueFrom(current);
+    restoreFilters(mode === defaultMode ? undefined : mode);
   });
 </script>
 

@@ -59,21 +59,17 @@ export function useStoredFilters() {
   const { search } = useParameters();
   const { track } = useTrack(AnalyticsEvent.Filters);
 
-  const goToStoredFilters = (
-    filters: StoredFilter,
-    baseUrl: URL,
-  ) => {
-    const url = new URL(baseUrl);
-
+  const applyFilters = (url: URL, filters: StoredFilter) => {
     processFilterParams(
       Object.entries(filters),
       (key, value) => {
         url.searchParams.set(key, String(value));
       },
     );
+  };
 
-    // No-op navigations (e.g. empty stored filters) would otherwise loop
-    // forever under afterNavigate, since the URL never changes.
+  const goToUrl = (url: URL) => {
+    // goto still navigates when the target is identical, so skip it.
     if (url.href === page.url.href) {
       return;
     }
@@ -107,24 +103,16 @@ export function useStoredFilters() {
   const restoreFilters = (mode?: DiscoverMode) => {
     const url = new URL(page.url);
 
-    if (mode) {
+    if (mode && !url.searchParams.has(DISCOVER_MODE_PARAM)) {
       url.searchParams.set(DISCOVER_MODE_PARAM, mode);
     }
 
-    const hasParams = hasFilter(page.url.searchParams);
     const defaultFilters = getDefaultFilters();
-    const shouldRestoreFilters = !hasParams && defaultFilters;
-
-    if (mode && !shouldRestoreFilters) {
-      if (url.href !== page.url.href) {
-        goto(url, { replaceState: true, keepFocus: true, noScroll: true });
-      }
-      return;
+    if (!hasFilter(page.url.searchParams) && defaultFilters) {
+      applyFilters(url, defaultFilters);
     }
 
-    if (shouldRestoreFilters) {
-      goToStoredFilters(defaultFilters, url);
-    }
+    goToUrl(url);
   };
 
   const resetFilters = () => {
@@ -138,7 +126,8 @@ export function useStoredFilters() {
 
     const url = new URL(page.url);
     FILTERS.forEach((filter) => url.searchParams.delete(filter.key));
-    goToStoredFilters(defaultFilters, url);
+    applyFilters(url, defaultFilters);
+    goToUrl(url);
   };
 
   const setActiveMode = (mode: string) => {
