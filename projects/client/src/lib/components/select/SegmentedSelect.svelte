@@ -494,10 +494,35 @@
   }
 
   .extension-content {
+    position: relative;
     flex: 1;
     min-height: 0;
 
     display: flex;
     align-items: flex-end;
+
+    &::after {
+      content: "";
+
+      position: absolute;
+      inset-inline: calc(-1 * var(--segment-inset));
+      bottom: calc(-1 * var(--segment-inset));
+      height: var(--ni-2);
+
+      background: var(--color-input-focus);
+
+      transform: scaleX(0);
+      transition: transform var(--transition-increment) ease-in-out;
+    }
+
+    &:focus-within::after {
+      transform: scaleX(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &::after {
+        transition: none;
+      }
+    }
   }
 </style>

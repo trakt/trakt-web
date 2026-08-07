@@ -154,26 +154,8 @@
 
       outline: none;
 
-      &::before {
-        content: "";
-        position: absolute;
-        inset-inline: 0;
-        bottom: 0;
-        height: var(--ni-2);
-
-        border-radius: var(--ni-2);
-        background: var(--color-input-focus);
-
-        transform: scaleX(0);
-        transition: transform var(--transition-increment) ease-in-out;
-      }
-
       &:focus-within {
         outline: none;
-
-        &::before {
-          transform: scaleX(1);
-        }
 
         .trakt-search-icon {
           color: var(--color-input-focus);
@@ -181,12 +163,6 @@
 
         @media (forced-colors: active) {
           outline: var(--border-thickness-xxs) solid Highlight;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        &::before {
-          transition: none;
         }
       }
 
