@@ -24,12 +24,12 @@
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "../v2/_internal/MediaActions.svelte";
   import SummaryHeaderByline from "./_internal/SummaryHeaderByline.svelte";
-  import SummaryHeaderFacts from "./_internal/SummaryHeaderFacts.svelte";
+  import SummaryHeaderFacts from "../../header-kit/SummaryHeaderFacts.svelte";
   import SummaryHeaderKicker from "./_internal/SummaryHeaderKicker.svelte";
   import SummaryHeaderSectionHeader from "./_internal/SummaryHeaderSectionHeader.svelte";
   import SummaryHeaderSentiment from "./_internal/SummaryHeaderSentiment.svelte";
   import SummaryHeaderSocialActivity from "./_internal/SummaryHeaderSocialActivity.svelte";
-  import SummaryHeaderTitle from "./_internal/SummaryHeaderTitle.svelte";
+  import SummaryHeaderTitle from "../../header-kit/SummaryHeaderTitle.svelte";
   import SummaryHeaderTrivia from "./_internal/SummaryHeaderTrivia.svelte";
   import SummaryHeaderWatchOptions from "./_internal/SummaryHeaderWatchOptions.svelte";
   import { mapToSummaryHeaderFacts } from "./_internal/mapToSummaryHeaderFacts.ts";

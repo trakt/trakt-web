@@ -2,7 +2,7 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import type { Snippet } from "svelte";
-  import SummaryHeaderLabel from "./SummaryHeaderLabel.svelte";
+  import SummaryHeaderLabel from "../../../header-kit/SummaryHeaderLabel.svelte";
 
   /*
     Header for the two side sections (where to watch, sentiment): a label row with
