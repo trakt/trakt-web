@@ -30,8 +30,20 @@
   /**
    * Card dimensions
    */
+  /*
+    An indicator tag is centred on the cover's bottom edge, so half its height
+    hangs into the footer below. Derive that overhang from the tag's own box
+    (IndicatorTag pins --ni-10, TagContent pads --ni-4) instead of hand-tuning
+    the footer to match - the two live in different components and drifted apart
+    every time the tag was resized.
+  */
+  --indicator-tag-overhang: calc((var(--ni-10) + 2 * var(--ni-4)) / 2);
+
   --height-card-footer: var(--ni-40);
-  --height-card-footer-sm: var(--ni-28);
+  /* Must clear the overhang plus the gap CardFooter adds, with room left for the
+     info row itself. At 28px the two collided. Every poster list height derives
+     from this. */
+  --height-card-footer-sm: var(--ni-36);
 
   --width-portrait-card: var(--min-portrait-card-width);
   @include dynamic-card-width(
