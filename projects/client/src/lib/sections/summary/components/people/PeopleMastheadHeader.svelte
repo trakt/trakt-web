@@ -22,6 +22,10 @@
   import { usePersonBackdropMedia } from "./_internal/usePersonBackdropMedia.ts";
   import { usePersonCreditCounts } from "./_internal/usePersonCreditCounts.ts";
   import { mapToPersonStats } from "./_internal/mapToPersonStats.ts";
+  import {
+    PERSON_STATS_PARAM,
+    toPersonStatsLayout,
+  } from "./_internal/PersonStatsLayout.ts";
   import PersonMastheadStats from "./_internal/PersonMastheadStats.svelte";
   /*
     Imported the same way this folder's sibling PeopleSummary already imports them.
@@ -50,10 +54,12 @@
   const { person }: { person: PersonSummary } = $props();
 
   /*
-    Which backdrop treatment to show, from the URL - `?backdrop=credit|headshot|
-    colors`, defaulting to none. A search param rather than a flag because these
-    are three candidates being compared rather than a feature being shipped: it
-    switches without a rebuild and the comparison is shareable as a link.
+    Which backdrop treatment to show. Defaults to the headshot - the chosen option,
+    and the only one that cannot fail, since a person always has one where the
+    others depend on their credits carrying artwork.
+
+    The param stays so `?backdrop=credit|colors|none` still reaches the alternatives:
+    the comparison that settled this remains one URL away rather than deleted.
   */
   const backdropVariant = $derived(
     toPersonBackdropVariant(page.url.searchParams.get(PERSON_BACKDROP_PARAM)),
@@ -67,6 +73,15 @@
   const stats = $derived(
     mapToPersonStats({ slug: person.slug, credits: $creditCounts }),
   );
+
+  /*
+    Where the stats sit - `?stats=below` returns them to their own line. Flanking
+    the portrait costs no height and uses the band's empty sides, so it leads.
+  */
+  const statsLayout = $derived(
+    toPersonStatsLayout(page.url.searchParams.get(PERSON_STATS_PARAM)),
+  );
+  const isFlanked = $derived(statsLayout === "flank" && stats.length > 0);
 
   /*
     Whether a band is actually drawn. Without one there is nothing to overlap, so
@@ -100,13 +115,35 @@
   {/if}
 
   <div class="masthead-content">
-  <div class="masthead-portrait">
-    <SummaryPoster
-      src={person.headshot.url.medium}
-      alt={person.name}
-      {tags}
-    />
-  </div>
+    <div class="masthead-crown" data-flanked={isFlanked}>
+      {#if isFlanked}
+        <div class="crown-flank" data-side="start">
+          <PersonMastheadStats
+            stats={stats.slice(0, 1)}
+            name={person.name}
+            orientation="stacked"
+          />
+        </div>
+      {/if}
+
+      <div class="masthead-portrait">
+        <SummaryPoster
+          src={person.headshot.url.medium}
+          alt={person.name}
+          {tags}
+        />
+      </div>
+
+      {#if isFlanked}
+        <div class="crown-flank" data-side="end">
+          <PersonMastheadStats
+            stats={stats.slice(1)}
+            name={person.name}
+            orientation="stacked"
+          />
+        </div>
+      {/if}
+    </div>
 
   {#if person.knownFor}
     <span class="masthead-kicker">{toTranslatedPosition(person.knownFor)}</span>
@@ -160,7 +197,9 @@
     </RenderFor>
   </div>
 
-  <PersonMastheadStats {stats} name={person.name} />
+  {#if !isFlanked}
+    <PersonMastheadStats {stats} name={person.name} />
+  {/if}
 
   {#if person.biography}
     <div class="masthead-deck">
@@ -336,6 +375,71 @@
 
   .trakt-people-masthead-header[data-has-backdrop="false"] .masthead-content {
     padding-top: var(--masthead-rhythm);
+  }
+
+  /*
+    Portrait with the stats either side of it. The side cells are equal `1fr`, so the
+    portrait stays dead centre whatever the flanks hold - including nothing, when a
+    person has credits of only one kind.
+  */
+  .masthead-crown {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--ni-32);
+
+    width: 100%;
+  }
+
+  .masthead-crown[data-flanked="false"] {
+    /* Nothing to flank with - collapse to the portrait alone. */
+    grid-template-columns: auto;
+    justify-content: center;
+  }
+
+  .crown-flank {
+    display: flex;
+
+    &[data-side="start"] {
+      justify-content: flex-end;
+    }
+
+    &[data-side="end"] {
+      justify-content: flex-start;
+    }
+  }
+
+  /*
+    Below desktop the portrait needs the full width, and the flanks would squeeze it
+    rather than fill space that no longer exists. They move under it instead.
+  */
+  @include for-tablet-sm-and-below {
+    .masthead-crown {
+      /*
+        Two columns, but the portrait spans both and the flanks share the row
+        beneath it. Collapsing to a single column instead would auto-place one stat
+        ABOVE the portrait, which is why the columns stay.
+      */
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      justify-items: center;
+      gap: var(--masthead-rhythm) var(--ni-32);
+    }
+
+    .masthead-portrait {
+      grid-column: 1 / -1;
+    }
+
+    .crown-flank {
+      grid-row: 2;
+
+      &[data-side="start"] {
+        justify-content: flex-end;
+      }
+
+      &[data-side="end"] {
+        justify-content: flex-start;
+      }
+    }
   }
 
   .masthead-portrait {
