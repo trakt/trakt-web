@@ -73,7 +73,8 @@ describe('CastDrawerHost', () => {
     expect(screen.getByText('Juliette Nichols (voice)')).toBeInTheDocument();
     expect(screen.getByText('Juliette Nichols (archive footage)'))
       .toBeInTheDocument();
-    expect(moreCharactersButton).toHaveTextContent(/-\s*2 more/);
+    // Collapsing reads "less", not "- 2 more" - see MoreButtonIntl.
+    expect(moreCharactersButton).toHaveTextContent(/less/);
 
     const searchInput = screen.getByRole('searchbox', {
       name: 'Search people',

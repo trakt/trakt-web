@@ -37,6 +37,9 @@
   size="tag"
   color="purple"
 >
-  {$expanded ? "-" : "+"}
-  {i18n.more(count)}
+  {#if $expanded}
+    {i18n.less()}
+  {:else}
+    +{i18n.more(count)}
+  {/if}
 </Button>

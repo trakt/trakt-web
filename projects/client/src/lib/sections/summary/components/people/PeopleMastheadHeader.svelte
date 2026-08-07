@@ -162,13 +162,13 @@
   -->
   <div class="masthead-meta">
     <SummaryHeaderFacts {facts} variant="inline" />
+  </div>
 
+  <div class="masthead-links">
     {#if hasSocialMediaLinks(person)}
-      <span class="meta-divider" aria-hidden="true"></span>
       <SocialMediaLinks {person} />
+      <span class="meta-divider" aria-hidden="true"></span>
     {/if}
-
-    <span class="meta-divider" aria-hidden="true"></span>
 
     <ShareButton
       title={person.name}
@@ -298,12 +298,24 @@
     than letting the facts wrap inside themselves, which is what produced a
     stranded separator with nothing after it.
   */
+  /*
+    The person's own facts on one line, their links on the next, and the two pulled
+    snug under the name. As a single row it held five different kinds of thing -
+    measurements, a date, an age, brand marks and controls - and read as a toolbar
+    rather than as a caption to the name.
+
+    Negative margins rather than a smaller `gap`, because the stack's gap is the
+    shared rhythm and these two rows are the exception to it: they belong to the
+    name above them, not to the blocks around it.
+  */
   .masthead-meta {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     gap: var(--gap-s);
+
+    margin-top: calc(-1 * var(--gap-s));
 
     /*
       One size for the whole row, set here rather than left to each child.
@@ -325,6 +337,24 @@
       identical button and overflowed its content box - which is also what pulled
       the row out of alignment.
     */
+    :global(.trakt-action-button svg) {
+      width: var(--ni-20);
+      height: var(--ni-20);
+    }
+  }
+
+  .masthead-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--gap-s);
+
+    /* Snug to the facts line above rather than a full rhythm away. */
+    margin-top: calc(-1 * var(--gap-s));
+
+    --action-button-size: var(--ni-32);
+
     :global(.trakt-action-button svg) {
       width: var(--ni-20);
       height: var(--ni-20);
@@ -459,6 +489,16 @@
 
 
   .masthead-deck {
+    /*
+      ClampedText lays its text and its more/less control out as a ROW, which off-centres
+      the whole block by the width of the control - the text is no longer centred on
+      the name above it. Stacked, the control sits under its own text and centred.
+    */
+    :global(.trakt-clamped-text) {
+      flex-direction: column;
+      align-items: center;
+    }
+
     max-width: 62ch;
 
     font-size: var(--ni-16);
