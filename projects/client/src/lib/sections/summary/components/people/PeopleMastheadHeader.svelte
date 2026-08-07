@@ -163,6 +163,7 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+  @use "../header-kit/backdropDissolve" as dissolve;
 
   .trakt-people-masthead-header {
     /*
@@ -206,6 +207,15 @@
     );
 
     position: relative;
+
+    /*
+      The same card surface the media masthead has: rounded, on the page background,
+      with a stroke that fades out downward. Deliberately NOT `overflow: hidden` -
+      the overflow menu opens downward out of this card, and clipping here crops it.
+      The band clips itself to the top corners instead.
+    */
+    border-radius: var(--border-radius-xl);
+    background: var(--color-background);
 
     box-sizing: border-box;
     /* Matches the measure the lists below use, so the edges line up. */
@@ -280,9 +290,18 @@
     background: var(--summary-header-hairline, var(--color-border));
   }
 
+  .trakt-people-masthead-header::before {
+    @include dissolve.masthead-stroke;
+  }
+
   .masthead-backdrop {
     /* Ends exactly at the portrait's base - see the geometry block above. */
     height: var(--backdrop-height);
+
+    /* Clips the artwork to the card's top corners, as the media band does. */
+    overflow: hidden;
+    border-start-start-radius: var(--border-radius-xl);
+    border-start-end-radius: var(--border-radius-xl);
     /* Full-bleed within the card, as the media masthead's band is. */
     margin-inline: calc(-1 * clamp(var(--gap-m), 8vw, var(--ni-120)));
   }

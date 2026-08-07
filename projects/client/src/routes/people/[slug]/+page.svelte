@@ -5,6 +5,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PeopleSummary from "$lib/sections/summary/PeopleSummary.svelte";
+  import { useIsPeopleMastheadHeader } from "$lib/sections/summary/components/people/useIsPeopleMastheadHeader.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { PageProps } from "./$types";
@@ -28,8 +29,16 @@
   const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
+  const isMastheadHeader = useIsPeopleMastheadHeader();
+
+  /*
+    The masthead header is a full-bleed composition that has to start high on the
+    page, so it asks for the minimal navbar the movie and show pages use. The full
+    navbar is taller, and that height - not anything inside the header - is what
+    made the person masthead sit lower than the media one.
+  */
   const navbarMode = $derived(
-    $isTabletLarge || $isDesktop ? "full" : "minimal",
+    ($isTabletLarge || $isDesktop) && !$isMastheadHeader ? "full" : "minimal",
   );
 </script>
 

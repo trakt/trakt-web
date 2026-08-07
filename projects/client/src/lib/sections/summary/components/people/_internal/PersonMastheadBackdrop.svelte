@@ -63,6 +63,8 @@
     portrait's base rather than somewhere below it.
   */
   .trakt-person-backdrop {
+    position: relative;
+
     width: 100%;
     height: 100%;
 
@@ -70,6 +72,18 @@
     pointer-events: none;
 
     @include dissolve.backdrop-dissolve;
+
+    /*
+      The same scrim the media band carries, laid over the artwork. Without it a
+      light backdrop leaves the kicker and name sitting on near-white.
+    */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      @include dissolve.backdrop-veil;
+    }
 
     :global(img) {
       width: 100%;

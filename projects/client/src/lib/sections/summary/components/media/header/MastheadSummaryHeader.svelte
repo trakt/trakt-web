@@ -399,32 +399,7 @@
     where it vanishes with --header-stroke-fade.
   */
   .trakt-masthead-summary-header::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-    z-index: var(--layer-raised);
-
-    border-radius: inherit;
-    padding: var(--ni-1);
-
-    background: linear-gradient(
-      180deg,
-      var(--color-border) 0%,
-      transparent var(--header-stroke-fade, 65%)
-    );
-
-    /* Punches out the interior, leaving only the 1px edge painted. */
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask-composite: exclude;
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-
-    pointer-events: none;
+    @include dissolve.masthead-stroke;
   }
 
   .masthead-backdrop {
@@ -480,32 +455,7 @@
     position: absolute;
     inset: 0;
 
-    /*
-      Legibility only - the image's mask handles the dissolve now.
-
-      Shares the mask's elliptical geometry rather than fading `to bottom`: a linear
-      scrim over a curved dissolve would put its own straight edge back on the band.
-
-      It also eases out on the same curve and lands on zero at the same 94% as the
-      mask. That alignment is the fix for the bright arc: previously the scrim
-      cleared at 82% while the artwork was still fully opaque, so the image's real
-      brightness was revealed in one sweep. Now the scrim lifts exactly as the
-      artwork dims, and both reach nothing together - so there is no moment where
-      undimmed artwork appears, and no leftover tint on the bare card.
-    */
-    background: radial-gradient(
-      var(--backdrop-fade-spread, 100%) var(--backdrop-fade-depth, 105%) at 50% 0%,
-      color-mix(in srgb, var(--shade-950) 28%, transparent) 0%,
-      color-mix(in srgb, var(--shade-950) 28%, transparent) 40%,
-      color-mix(in srgb, var(--shade-950) 25%, transparent) 51%,
-      color-mix(in srgb, var(--shade-950) 18%, transparent) 61%,
-      color-mix(in srgb, var(--shade-950) 14%, transparent) 67%,
-      color-mix(in srgb, var(--shade-950) 10%, transparent) 72%,
-      color-mix(in srgb, var(--shade-950) 6%, transparent) 78%,
-      color-mix(in srgb, var(--shade-950) 3%, transparent) 83%,
-      color-mix(in srgb, var(--shade-950) 1%, transparent) 89%,
-      transparent 94%
-    );
+    @include dissolve.backdrop-veil;
   }
 
   .masthead-content {
