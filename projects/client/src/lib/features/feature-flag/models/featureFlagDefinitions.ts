@@ -1,5 +1,6 @@
 import CommentIcon from '$lib/components/icons/CommentIcon.svelte';
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
+import CrewIcon from '$lib/components/icons/CrewIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
@@ -118,6 +119,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_summary_awards(),
     addedAt: new Date('2026-08-07'),
     description: () => m.preview_feature_description_summary_awards(),
+    audience: 'director',
+  },
+  [FeatureFlag.PeopleHeaderMasthead]: {
+    icon: CrewIcon,
+    title: () => m.preview_feature_title_people_header_masthead(),
+    addedAt: new Date('2026-08-07'),
+    description: () => m.preview_feature_description_people_header_masthead(),
     audience: 'director',
   },
   [FeatureFlag.ParentalGuide]: {

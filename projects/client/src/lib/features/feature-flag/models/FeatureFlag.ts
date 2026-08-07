@@ -11,4 +11,5 @@ export enum FeatureFlag {
   Reactions = 'reactions',
   ReactionForum = 'reaction-forum',
   SummaryAwards = 'summary-awards',
+  PeopleHeaderMasthead = 'people-header-masthead',
 }

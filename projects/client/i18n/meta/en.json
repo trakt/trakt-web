@@ -10374,6 +10374,14 @@
     "button_label_view_awards": {
       "default": "View all awards for {title}",
       "description": "Aria-label for the control that opens the full awards view."
+    },
+    "preview_feature_title_people_header_masthead": {
+      "default": "Masthead person header",
+      "description": "Product feature name for the masthead people header preview feature."
+    },
+    "preview_feature_description_people_header_masthead": {
+      "default": "Rebuilds the person page as a magazine cover, with the headshot centre stage and their birth, age, height and socials centred beneath.",
+      "description": "Description for the masthead people header preview feature."
     }
   }
 }
