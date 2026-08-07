@@ -218,7 +218,7 @@
         </div>
       </div>
 
-      <div class="strip-column">
+      <div class="strip-column strip-column-borrowed">
         <SummaryHeaderSectionHeader
           title={m.list_title_where_to_watch()}
           detail={justWatchDetail}
@@ -235,7 +235,7 @@
 
       <RenderFor audience="authenticated">
         {#if headerSocialEntries.length > 0}
-          <div class="strip-column">
+          <div class="strip-column strip-column-borrowed">
             <SummaryHeaderSectionHeader
               title={m.list_title_social_activity()}
               drilldown={{
@@ -249,7 +249,7 @@
       </RenderFor>
 
       {#if headerSentiment}
-        <div class="strip-column">
+        <div class="strip-column strip-column-borrowed">
           <SummaryHeaderSectionHeader
             title={m.header_community_sentiment()}
             drilldown={{
@@ -262,7 +262,7 @@
       {/if}
 
       {#if triviaFacts.length > 0}
-        <div class="strip-column">
+        <div class="strip-column strip-column-borrowed">
           <SummaryHeaderSectionHeader
             title={m.list_title_trivia()}
             drilldown={{
@@ -625,6 +625,22 @@
       gap: var(--gap-l);
       /* One column: below this even two columns cannot hold a provider row. */
       --strip-column-min: 100%;
+    }
+  }
+
+  /*
+    Every strip column except credits also exists as a section further down the
+    page, and those sections render at tablet-lg and below. Showing both is how a
+    narrow window ended up with where-to-watch, sentiment and trivia twice.
+
+    Rather than redesign those sections to work inside the strip at every width,
+    the header yields: below desktop it keeps only credits - the one thing with no
+    equivalent elsewhere - and the page's own sections do the rest. The two gates
+    are exact complements, so nothing is shown twice and nothing goes missing.
+  */
+  .strip-column-borrowed {
+    @include for-tablet-lg-and-below {
+      display: none;
     }
   }
 

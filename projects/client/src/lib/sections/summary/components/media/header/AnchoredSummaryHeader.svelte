@@ -411,6 +411,17 @@
     flex-direction: column;
     gap: var(--ni-40);
 
+    /*
+      The rail's sections - where to watch, sentiment - also exist further down the
+      page, and those render at tablet-lg and below. Showing both is how a narrow
+      window ended up with each of them twice. Below desktop the rail yields
+      entirely and the page's own sections carry them; the two gates are exact
+      complements.
+    */
+    @include for-tablet-lg-and-below {
+      display: none;
+    }
+
     position: sticky;
     top: var(--gap-l);
 
