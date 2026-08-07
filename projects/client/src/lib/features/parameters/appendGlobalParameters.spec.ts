@@ -171,6 +171,37 @@ describe('appendGlobalParameters', () => {
     });
   });
 
+  describe('store-backed params', () => {
+    it('drops the discover mode from outbound links', () => {
+      seedLiveParams({ mode: 'movie' });
+
+      const anchor = makeAnchor('/about');
+      appendGlobalParameters(anchor, '/about');
+
+      expect(new URL(anchor.href).searchParams.has('mode')).toBe(false);
+    });
+
+    it('keeps the discover mode on same-path links', () => {
+      seedLiveParams({ mode: 'movie' });
+
+      const anchor = makeAnchor('/profile/userA');
+      appendGlobalParameters(anchor, '/profile/userA');
+
+      expect(new URL(anchor.href).searchParams.get('mode')).toBe('movie');
+    });
+
+    it('keeps filters on outbound links', () => {
+      seedLiveParams({ mode: 'movie', [FilterKey.Genres]: 'comedy' });
+
+      const anchor = makeAnchor('/movies/heretic');
+      appendGlobalParameters(anchor, '/movies/heretic');
+
+      const params = new URL(anchor.href).searchParams;
+      expect(params.get(FilterKey.Genres)).toBe('comedy');
+      expect(params.has('mode')).toBe(false);
+    });
+  });
+
   it('passes live filters through unchanged under global scope', () => {
     seedLiveParams({ [FilterKey.Genres]: 'comedy' });
 
