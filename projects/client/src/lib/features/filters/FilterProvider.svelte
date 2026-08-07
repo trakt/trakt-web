@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage";
   import { onMount } from "svelte";
   import { SEASONAL_STORAGE_KEY } from "./_internal/constants";
   import { createDiscoverContext } from "./_internal/createDiscoverContext";
+  import { syncDiscoverMode } from "./_internal/syncDiscoverMode";
   import { useStoredFilters } from "./useStoredFilters";
 
   const { children }: ChildrenProps = $props();
@@ -21,6 +23,10 @@
     future features that rely on search params.
   */
   onMount(() => restoreFilters());
+
+  $effect(() => {
+    syncDiscoverMode(page.url.searchParams);
+  });
 </script>
 
 {@render children()}

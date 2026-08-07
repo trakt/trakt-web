@@ -1,5 +1,10 @@
 import { goto } from '$app/navigation';
+import {
+  resetGlobalStore,
+  useToggler,
+} from '$lib/components/toggles/useToggler.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
+import { firstValueFrom } from 'rxjs';
 import { createRawSnippet, tick } from 'svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FilterProvider from './FilterProvider.svelte';
@@ -25,6 +30,7 @@ describe('FilterProvider', () => {
 
   beforeEach(() => {
     localStorage.clear();
+    resetGlobalStore();
     window.history.replaceState({}, '', '/movies');
   });
 
@@ -57,6 +63,15 @@ describe('FilterProvider', () => {
     await renderProvider();
 
     expect(goto).not.toHaveBeenCalled();
+  });
+
+  it('should adopt the discover mode carried by the URL', async () => {
+    window.history.replaceState({}, '', '/movies?mode=movie');
+
+    await renderProvider();
+
+    const { value } = await firstValueFrom(useToggler('discover').current);
+    expect(value).toBe('movie');
   });
 
   it('should not override filters already present in the URL', async () => {
