@@ -20,6 +20,9 @@
     toPersonBackdropVariant,
   } from "./_internal/PersonBackdropVariant.ts";
   import { usePersonBackdropMedia } from "./_internal/usePersonBackdropMedia.ts";
+  import { usePersonCreditCounts } from "./_internal/usePersonCreditCounts.ts";
+  import { mapToPersonStats } from "./_internal/mapToPersonStats.ts";
+  import PersonMastheadStats from "./_internal/PersonMastheadStats.svelte";
   /*
     Imported the same way this folder's sibling PeopleSummary already imports them.
     If this treatment graduates, these three belong one level up in `people/` -
@@ -46,8 +49,6 @@
   */
   const { person }: { person: PersonSummary } = $props();
 
-  const facts = $derived(mapToPersonFacts({ person, now: new Date() }));
-
   /*
     Which backdrop treatment to show, from the URL - `?backdrop=credit|headshot|
     colors`, defaulting to none. A search param rather than a flag because these
@@ -60,6 +61,12 @@
 
   const slug$ = fromRune(() => person.slug);
   const backdropMedia = usePersonBackdropMedia(slug$);
+  const creditCounts = usePersonCreditCounts(slug$);
+
+  const facts = $derived(mapToPersonFacts({ person, now: new Date() }));
+  const stats = $derived(
+    mapToPersonStats({ slug: person.slug, credits: $creditCounts }),
+  );
 
   /*
     Whether a band is actually drawn. Without one there is nothing to overlap, so
@@ -152,6 +159,8 @@
       </PopupMenu>
     </RenderFor>
   </div>
+
+  <PersonMastheadStats {stats} name={person.name} />
 
   {#if person.biography}
     <div class="masthead-deck">

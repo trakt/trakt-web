@@ -10524,6 +10524,10 @@
     "preview_feature_description_people_header_masthead": {
       "default": "Rebuilds the person page as a magazine cover, with the headshot centre stage and their birth, age, height and socials centred beneath.",
       "description": "Description for the masthead people header preview feature."
+    },
+    "link_label_view_person_credits": {
+      "default": "View all {credits} for {name}",
+      "description": "Aria-label for the linked credit counts in the person header. 'credits' is a category such as Movies or Shows; 'name' is the person."
     }
   }
 }
