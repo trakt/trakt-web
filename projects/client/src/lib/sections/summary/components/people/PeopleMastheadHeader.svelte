@@ -219,6 +219,17 @@
       between portrait, name, facts and deck all resolve here so they cannot drift.
     */
     --masthead-rhythm: var(--gap-l);
+    /*
+      The gap inside the name's cluster - name, facts, links - and from that cluster
+      down to the biography. Tighter than the stack's rhythm because these belong to
+      the name rather than being blocks in their own right.
+
+      All three boundaries take the same value, which is what makes the facts-to-links
+      and links-to-biography gaps read as equal. They already balance optically: the
+      social buttons carry ~6px of padding inside their box, and exactly one button
+      edge borders each of those two gaps, so equal CSS gaps land as equal ink.
+    */
+    --meta-gap: var(--gap-s);
     --portrait-width: clamp(var(--ni-132), 17vw, var(--ni-220));
 
     /*
@@ -315,7 +326,7 @@
     flex-wrap: wrap;
     gap: var(--gap-s);
 
-    margin-top: calc(-1 * var(--gap-s));
+    margin-top: calc(var(--meta-gap) - var(--masthead-rhythm));
 
     /*
       One size for the whole row, set here rather than left to each child.
@@ -351,7 +362,7 @@
     gap: var(--gap-s);
 
     /* Snug to the facts line above rather than a full rhythm away. */
-    margin-top: calc(-1 * var(--gap-s));
+    margin-top: calc(var(--meta-gap) - var(--masthead-rhythm));
 
     --action-button-size: var(--ni-32);
 
@@ -489,6 +500,9 @@
 
 
   .masthead-deck {
+    /* Same distance below the links as the links sit below the facts. */
+    margin-top: calc(var(--meta-gap) - var(--masthead-rhythm));
+
     /*
       ClampedText lays its text and its more/less control out as a ROW, which off-centres
       the whole block by the width of the control - the text is no longer centred on
