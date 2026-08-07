@@ -53,12 +53,21 @@
     // revamped header's poster rail fills its 264px column.
     width: var(--summary-actions-bar-width, var(--ni-280));
 
-    padding: var(--ni-8) var(--ni-10);
+    /*
+      Configurable, so a container can nest its controls concentrically. The
+      default is asymmetric (8 vertical, 10 horizontal) which reads as extra room
+      down one side once the controls fill the tray's height.
+    */
+    padding: var(--summary-actions-bar-padding, var(--ni-8) var(--ni-10));
     box-sizing: border-box;
 
     background-color: var(--color-actions-bar-background);
     border-radius: var(--border-radius-l);
-    box-shadow: var(--shadow-raised);
+    /*
+      Configurable so a caller can opt out of the lift. On a flat surface the raised
+      shadow reads as a halo around the tray rather than as elevation.
+    */
+    box-shadow: var(--summary-actions-bar-shadow, var(--shadow-raised));
 
     transition: border-radius var(--popup-transition-duration) ease-in-out;
     transition-delay: calc(var(--popup-transition-duration) / 2);
