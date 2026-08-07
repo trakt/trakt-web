@@ -25,7 +25,7 @@ type MapToPersonStatsProps = {
 export function mapToPersonStats(
   { slug, credits }: MapToPersonStatsProps,
 ): ReadonlyArray<PersonStat> {
-  if (!credits) {
+  if (!credits || credits.isLoading) {
     return [];
   }
 

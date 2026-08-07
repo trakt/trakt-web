@@ -85,7 +85,16 @@
   const statsLayout = $derived(
     toPersonStatsLayout(page.url.searchParams.get(PERSON_STATS_PARAM)),
   );
-  const isFlanked = $derived(statsLayout === "flank" && stats.length > 0);
+  const isStatsLoading = $derived($creditCounts?.isLoading ?? true);
+
+  /*
+    Depends on the LAYOUT only, never on whether the data has arrived. It used to
+    include `stats.length > 0`, which meant the crown restructured from one column
+    to three the moment the counts landed - the portrait re-laid-out beneath them and
+    their arrival read as a glitch. The columns are now reserved from the first paint
+    and a placeholder holds them.
+  */
+  const isFlanked = $derived(statsLayout === "flank");
 
   /* How the stats are framed - `?statframe=glass|ghost`. See PersonStatsFrame. */
   const statsFrame = $derived(
@@ -132,6 +141,7 @@
             name={person.name}
             orientation="stacked"
             frame={statsFrame}
+            isLoading={isStatsLoading}
           />
         </div>
       {/if}
@@ -151,6 +161,7 @@
             name={person.name}
             orientation="stacked"
             frame={statsFrame}
+            isLoading={isStatsLoading}
           />
         </div>
       {/if}
@@ -209,7 +220,12 @@
   </div>
 
   {#if !isFlanked}
-    <PersonMastheadStats {stats} name={person.name} frame={statsFrame} />
+    <PersonMastheadStats
+      {stats}
+      name={person.name}
+      frame={statsFrame}
+      isLoading={isStatsLoading}
+    />
   {/if}
 
   {#if person.biography}
