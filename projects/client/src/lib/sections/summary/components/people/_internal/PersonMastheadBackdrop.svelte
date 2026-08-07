@@ -56,18 +56,15 @@
 <style lang="scss">
   @use "../../header-kit/backdropDissolve" as dissolve;
 
+  /*
+    Fills the band it is given rather than sizing itself. The band is a flow
+    element in the header, sized to the portrait - see PeopleMastheadHeader - which
+    is how the media masthead does it and the only way the dissolve lands on the
+    portrait's base rather than somewhere below it.
+  */
   .trakt-person-backdrop {
-    position: absolute;
-    inset-inline: 0;
-    top: 0;
-    /*
-      Deep enough to sit behind the portrait and the name, which is where the
-      atmosphere is wanted. Below that the dissolve has already finished.
-    */
-    height: var(--person-backdrop-height, var(--ni-480));
-
-    /* Behind the header's content, above the page. */
-    z-index: -1;
+    width: 100%;
+    height: 100%;
 
     overflow: hidden;
     pointer-events: none;
