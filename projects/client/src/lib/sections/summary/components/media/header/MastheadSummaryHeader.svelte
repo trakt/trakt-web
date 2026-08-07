@@ -19,6 +19,10 @@
   import { useIsStarted } from "../../_internal/useIsStarted";
   import { useSocialActivities } from "../../_internal/useSocialActivities";
   import { useTrivia } from "../../trivia/useTrivia";
+  import { useMediaAwards } from "../../awards/useMediaAwards";
+  import MediaReactions from "$lib/features/media-reactions/MediaReactions.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import RateNow from "../../rating/RateNow.svelte";
   import SummaryOverview from "../../summary/SummaryOverview.svelte";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
@@ -31,6 +35,7 @@
   import SummaryHeaderSocialActivity from "./_internal/SummaryHeaderSocialActivity.svelte";
   import SummaryHeaderTitle from "./_internal/SummaryHeaderTitle.svelte";
   import SummaryHeaderTrivia from "./_internal/SummaryHeaderTrivia.svelte";
+  import SummaryHeaderAwards from "./_internal/SummaryHeaderAwards.svelte";
   import SummaryHeaderWatchOptions from "./_internal/SummaryHeaderWatchOptions.svelte";
   import { mapToSummaryHeaderFacts } from "./_internal/mapToSummaryHeaderFacts.ts";
   import { mapToSummaryHeaderKicker } from "./_internal/mapToSummaryHeaderKicker.ts";
@@ -90,6 +95,11 @@
     }),
   );
   const triviaFacts = $derived($triviaSummary.slice(0, HEADER_TRIVIA_LIMIT));
+
+  /* Same density as the other columns - wins first, see useMediaAwards. */
+  const HEADER_AWARDS_LIMIT = 2;
+  const { awards } = $derived(useMediaAwards({ slug: media.slug }));
+  const headerAwards = $derived(awards.slice(0, HEADER_AWARDS_LIMIT));
 
   const { ratings, isLoading: isRatingsLoading } = $derived(
     useMediaMetaInfo(target),
@@ -273,7 +283,32 @@
           <SummaryHeaderTrivia facts={triviaFacts} />
         </div>
       {/if}
+
+      <RenderForFeature flag={FeatureFlag.SummaryAwards} audience="director">
+        {#snippet enabled()}
+          {#if headerAwards.length > 0}
+            <div class="strip-column">
+              <SummaryHeaderSectionHeader title={m.header_awards()} />
+              <SummaryHeaderAwards awards={headerAwards} />
+            </div>
+          {/if}
+        {/snippet}
+      </RenderForFeature>
     </div>
+
+    <!--
+      Reactions close the card rather than joining the strip: the strip is a set of
+      read-only data columns, and this is the one interactive thing among them. It
+      also needs the full width to lay its chips out, which a strip column cannot
+      give it.
+    -->
+    <RenderForFeature flag={FeatureFlag.Reactions} audience="director">
+      {#snippet enabled()}
+        <div class="masthead-reactions">
+          <MediaReactions type={target.type} slug={media.slug} {title} />
+        </div>
+      {/snippet}
+    </RenderForFeature>
 
   </div>
 </article>
@@ -663,6 +698,17 @@
 
     --action-button-size: var(--ni-48);
     --summary-actions-bar-height: var(--ni-56);
+  }
+
+  .masthead-reactions {
+    width: 100%;
+    margin-top: var(--masthead-rhythm);
+    padding-top: var(--ni-24);
+
+    border-top: var(--ni-1) solid var(--summary-header-hairline);
+
+    display: flex;
+    justify-content: center;
   }
 
   .actions-rate {
