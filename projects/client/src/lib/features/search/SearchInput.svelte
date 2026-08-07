@@ -135,7 +135,9 @@
 
     position: relative;
 
-    transition: outline var(--transition-increment) ease-in-out;
+    transition:
+      outline var(--transition-increment) ease-in-out,
+      box-shadow var(--transition-increment) ease-in-out;
     outline: var(--border-thickness-xxs) solid var(--color-border);
 
     &,
@@ -153,9 +155,16 @@
       --search-icon-size: var(--ni-16);
 
       outline: none;
+      box-shadow: 0 0 0 var(--border-thickness-xxs) transparent;
 
       &:focus-within {
         outline: none;
+        box-shadow: 0 0 0 var(--border-thickness-xxs) var(--color-input-focus);
+
+        @media (forced-colors: active) {
+          outline: var(--border-thickness-xxs) solid Highlight;
+          outline-offset: var(--border-thickness-xxs);
+        }
       }
 
       &,
