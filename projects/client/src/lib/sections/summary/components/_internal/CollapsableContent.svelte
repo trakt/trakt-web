@@ -20,6 +20,23 @@
   const label = $derived(isCollapsed ? labels.view : labels.hide);
 </script>
 
+{#snippet header()}
+  <button
+    class="trakt-collapsable-content-button"
+    aria-label={label}
+    aria-expanded={!isCollapsed}
+    onclick={toggle}
+  >
+    <div class="trakt-collapsable-content-header">
+      <p>{label}</p>
+
+      {#if headerContent}
+        {@render headerContent()}
+      {/if}
+    </div>
+  </button>
+{/snippet}
+
 {#snippet content()}
   {#if !isCollapsed}
     <div
@@ -31,27 +48,16 @@
   {/if}
 {/snippet}
 
-<button
-  class="trakt-collapsable-content-button"
-  aria-label={label}
-  onclick={toggle}
-  class:is-expanded={!isCollapsed}
-  class:is-contained={variant === "contain"}
->
-  <div class="trakt-collapsable-content-header">
-    <p>{label}</p>
-
-    {#if headerContent}
-      {@render headerContent()}
-    {/if}
-  </div>
-
-  {#if variant === "contain"}
+{#if variant === "contain"}
+  <div
+    class="trakt-collapsable-content-container"
+    class:is-expanded={!isCollapsed}
+  >
+    {@render header()}
     {@render content()}
-  {/if}
-</button>
-
-{#if variant === "sibling"}
+  </div>
+{:else}
+  {@render header()}
   {@render content()}
 {/if}
 
@@ -86,16 +92,34 @@
     }
   }
 
-  .trakt-collapsable-content-button.is-contained {
+  .trakt-collapsable-content-container {
+    display: flex;
     flex-direction: column;
 
     color: var(--color-foreground-red);
     background-color: var(--red-900);
 
+    border-radius: var(--border-radius-xxl);
     border: var(--ni-2) solid var(--color-background-red);
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: background-color, color, border-color, border-radius;
+
+    .trakt-collapsable-content-button {
+      border: none;
+      border-radius: inherit;
+
+      .trakt-collapsable-content-header {
+        flex: 1;
+      }
+    }
+
+    /* Content used to sit inside the padded header button; these values keep
+       the combined inset (button padding + content padding) unchanged. */
+    .trakt-collapsable-content {
+      padding-block: 0 var(--ni-12);
+      padding-inline: var(--ni-18) var(--ni-12);
+    }
 
     &.is-expanded {
       background-color: transparent;
