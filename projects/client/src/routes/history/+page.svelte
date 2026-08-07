@@ -70,7 +70,7 @@
 >
   <TraktPageCoverSetter />
 
-  <ResponsiveNavbarStateSetter hasFilters {header} />
+  <ResponsiveNavbarStateSetter contentToggle="discover" hasFilters {header} />
 
   <CalendarProvider>
     <PersonalHistoryPaginatedList mode={$mode} {syncId} />

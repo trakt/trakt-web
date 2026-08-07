@@ -60,7 +60,7 @@
         </ActionButton>
       </Tooltip>
     </div>
-    <DiscoverToggles />
+    <DiscoverToggles variant="compact" />
   </div>
 {/snippet}
 

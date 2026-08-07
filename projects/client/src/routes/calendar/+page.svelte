@@ -25,7 +25,7 @@
 >
   <TraktPageCoverSetter />
 
-  <ResponsiveNavbarStateSetter
+  <ResponsiveNavbarStateSetter contentToggle="discover"
     hasFilters
     header={{
       title: m.header_calendar(),

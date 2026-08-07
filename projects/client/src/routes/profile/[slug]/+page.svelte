@@ -4,7 +4,6 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
@@ -45,11 +44,7 @@
   filterScope="global"
 >
   <RenderFor audience="authenticated">
-    <NavbarStateSetter>
-      {#snippet actions()}
-        <DiscoverToggles />
-      {/snippet}
-    </NavbarStateSetter>
+    <NavbarStateSetter contentToggle="discover" />
   </RenderFor>
 
   {#if !$isLoading && $user}

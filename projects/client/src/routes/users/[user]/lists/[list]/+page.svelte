@@ -42,7 +42,7 @@
   title={listName}
   hasDynamicContent={true}
 >
-  <ResponsiveNavbarStateSetter
+  <ResponsiveNavbarStateSetter contentToggle="discover"
     hasFilters
     header={{
       title: listName,

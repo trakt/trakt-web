@@ -24,7 +24,7 @@
 >
   <TraktPageCoverSetter />
 
-  <ResponsiveNavbarStateSetter
+  <ResponsiveNavbarStateSetter contentToggle="discover"
     hasFilters
     header={{
       title: m.list_title_start_watching(),

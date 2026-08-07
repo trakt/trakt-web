@@ -186,6 +186,16 @@
   --toggle-background-color: var(--shade-400);
   --toggle-background-hover-color: var(--shade-800);
   --toggle-foreground-color: var(--shade-50);
+  --color-segmented-track-background: color-mix(
+    in srgb,
+    var(--shade-900) 10%,
+    transparent
+  );
+  --color-segmented-track-border: color-mix(
+    in srgb,
+    var(--shade-900) 14%,
+    transparent
+  );
 
   /*
    * Where to watch
@@ -657,6 +667,16 @@
   --toggle-background-color: var(--shade-700);
   --toggle-background-hover-color: var(--shade-600);
   --toggle-foreground-color: var(--shade-50);
+  --color-segmented-track-background: color-mix(
+    in srgb,
+    var(--shade-10) 6%,
+    transparent
+  );
+  --color-segmented-track-border: color-mix(
+    in srgb,
+    var(--shade-10) 8%,
+    transparent
+  );
 
   /*
    * Where to watch
