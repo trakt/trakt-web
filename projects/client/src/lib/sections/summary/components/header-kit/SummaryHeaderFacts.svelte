@@ -79,7 +79,12 @@
     }
 
     &[data-variant="inline"] {
-      font-size: var(--font-size-text);
+      /*
+        Configurable, so a caller can put this line on the same scale as whatever
+        sits beside it. The 14px default suits the masthead's credits column, where
+        it sits under a label; on a row shared with other text it reads small.
+      */
+      font-size: var(--facts-inline-size, var(--font-size-text));
       color: var(--color-text-secondary);
       text-wrap: pretty;
     }

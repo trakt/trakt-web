@@ -280,36 +280,7 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-
-  /*
-    Eased alpha ramps for the backdrop dissolve.
-
-    A gradient with only a handful of stops interpolates linearly between them, so
-    the RATE of change jumps at every stop and at both ends. The eye reads those
-    jumps as banding - a visible crease where the artwork starts fading and an arc
-    where it stops. Both showed up on light artwork.
-
-    These follow a smoothstep curve (3t^2 - 2t^3) sampled at ten points, which has
-    zero derivative at each end. The fade therefore eases out of full opacity and
-    into full transparency instead of starting and stopping abruptly.
-
-    Positions are percentages of the radial field, matching the mask's ellipse, and
-    both ramps land on zero at the same point - see the veil for why that matters.
-
-    Black here is alpha data for a mask, not a themeable colour.
-  */
-  $backdrop-mask-stops:
-    rgba(0, 0, 0, 1) 58%,
-    rgba(0, 0, 0, 0.97) 62%,
-    rgba(0, 0, 0, 0.9) 65%,
-    rgba(0, 0, 0, 0.78) 69%,
-    rgba(0, 0, 0, 0.65) 72%,
-    rgba(0, 0, 0, 0.5) 76%,
-    rgba(0, 0, 0, 0.35) 80%,
-    rgba(0, 0, 0, 0.22) 83%,
-    rgba(0, 0, 0, 0.1) 87%,
-    rgba(0, 0, 0, 0.03) 90%,
-    rgba(0, 0, 0, 0) 94%;
+  @use "../../header-kit/backdropDissolve" as dissolve;
 
   .trakt-masthead-summary-header {
     position: relative;
@@ -464,16 +435,7 @@
         is what guarantees full artwork at the top and no reachable cut at the
         bottom.
       */
-      mask-image: radial-gradient(
-        var(--backdrop-fade-spread, 100%) var(--backdrop-fade-depth, 105%) at 50%
-          0%,
-        #{$backdrop-mask-stops}
-      );
-      -webkit-mask-image: radial-gradient(
-        var(--backdrop-fade-spread, 100%) var(--backdrop-fade-depth, 105%) at 50%
-          0%,
-        #{$backdrop-mask-stops}
-      );
+      @include dissolve.backdrop-dissolve;
     }
   }
 

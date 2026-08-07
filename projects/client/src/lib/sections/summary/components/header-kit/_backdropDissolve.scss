@@ -1,0 +1,56 @@
+/*
+  The masthead backdrop's dissolve, shared so the media and person headers cannot
+  drift apart on it.
+
+  Why a mask rather than an overlay: an opaque gradient has to reach exactly the
+  card's background colour before the image's bottom edge, and how much coverage
+  that takes depends on how bright the artwork is - it held up on dark backdrops
+  and fell apart on light ones. A mask has no colour to match; the pixels go
+  transparent and the card shows through, whatever the artwork.
+
+  Why radial rather than `to bottom`: a linear fade dissolves along a perfectly
+  horizontal line, and however soft it is, a straight edge spanning the full width
+  still reads as a seam. Anchored at top-centre, the fade lands lower in the middle
+  than at the sides - a broad rounded V that dips behind the poster - so there is
+  no straight boundary for the eye to catch.
+
+  Why so many stops: with only a handful, interpolation is linear between them and
+  the RATE of change jumps at each one. The eye reads those jumps as banding. These
+  follow a smoothstep curve (3t^2 - 2t^3) sampled at ten points, which has zero
+  derivative at both ends, so the artwork eases out of full opacity instead of
+  starting to fade on a crease.
+
+  Black here is alpha data for a mask, not a themeable colour.
+*/
+$backdrop-mask-stops:
+  rgba(0, 0, 0, 1) 58%,
+  rgba(0, 0, 0, 0.97) 62%,
+  rgba(0, 0, 0, 0.9) 65%,
+  rgba(0, 0, 0, 0.78) 69%,
+  rgba(0, 0, 0, 0.65) 72%,
+  rgba(0, 0, 0, 0.5) 76%,
+  rgba(0, 0, 0, 0.35) 80%,
+  rgba(0, 0, 0, 0.22) 83%,
+  rgba(0, 0, 0, 0.1) 87%,
+  rgba(0, 0, 0, 0.03) 90%,
+  rgba(0, 0, 0, 0) 94%;
+
+/*
+  The ellipse is as wide as the band and slightly deeper. That keeps the top
+  corners inside the opaque stop - their normalised distance from top-centre is
+  0.5, under `fade-start` - while the bottom edge sits past `fade-end` everywhere.
+  Narrowing the spread deepens the V but starts fading those corners, so keep it at
+  or above 100%.
+*/
+@mixin backdrop-dissolve {
+  mask-image: radial-gradient(
+    var(--backdrop-fade-spread, 100%) var(--backdrop-fade-depth, 105%) at 50%
+    0%,
+    #{$backdrop-mask-stops}
+  );
+  -webkit-mask-image: radial-gradient(
+    var(--backdrop-fade-spread, 100%) var(--backdrop-fade-depth, 105%) at 50%
+    0%,
+    #{$backdrop-mask-stops}
+  );
+}
