@@ -95,6 +95,7 @@ toRelativeHumanDay(today, date, localeKey);
 
 // number
 toHumanNumber(value, locale); // compact notation: 1.2k, 4.5M
+toHumanCount(value, locale); // grouped digits below 100K (1,234), compact above it - use for user-driven counts (plays, ratings, ...) that realistically stay under 100K, since compact notation is wider than the full number in some locales at that range
 toPercentage(value, locale); // 0.75 -> "75%"
 toTraktRating(rating, locale); // alias for toPercentage
 toHumanCurrency({ price, currency, locale });
