@@ -11,6 +11,8 @@ export type ApiApplicationFormSectionProps =
     ApiApplicationFormProps,
     | 'initial'
     | 'isBusy'
+    | 'errorMessage'
+    | 'onDismissError'
     | 'confirmButtonText'
     | 'confirmButtonLabel'
     | 'onSubmit'

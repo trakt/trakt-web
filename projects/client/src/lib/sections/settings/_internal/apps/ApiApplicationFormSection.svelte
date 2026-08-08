@@ -10,6 +10,8 @@
     crumbLabel,
     initial,
     isBusy = false,
+    errorMessage,
+    onDismissError,
     confirmButtonText,
     confirmButtonLabel,
     onSubmit,
@@ -25,6 +27,8 @@
   <ApiApplicationForm
     {initial}
     {isBusy}
+    {errorMessage}
+    {onDismissError}
     {confirmButtonText}
     {confirmButtonLabel}
     {onSubmit}

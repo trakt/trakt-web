@@ -1,15 +1,16 @@
 <script lang="ts">
   import type { ValidationProps } from "../models/ValidationProps";
 
-  const randomId = crypto.randomUUID().slice(0, 8);
-  const errorLabelId = `trakt-input-error-${randomId}`;
-
   const {
     children,
     validation,
     hasError,
-  }: { validation?: ValidationProps; hasError: boolean } & ChildrenProps =
-    $props();
+    errorLabelId,
+  }: {
+    validation?: ValidationProps;
+    hasError: boolean;
+    errorLabelId: string;
+  } & ChildrenProps = $props();
 </script>
 
 <div class="trakt-form-element-container">

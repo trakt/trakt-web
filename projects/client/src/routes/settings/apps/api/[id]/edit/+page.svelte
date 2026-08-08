@@ -8,5 +8,8 @@
 </script>
 
 {#if Number.isFinite(appId)}
-  <ApiApplicationEditor {appId} />
+  <!-- Keyed so same-route navigation rebuilds the form and error state. -->
+  {#key appId}
+    <ApiApplicationEditor {appId} />
+  {/key}
 {/if}

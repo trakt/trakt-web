@@ -11,7 +11,8 @@
 
   const { appId }: { appId: number } = $props();
 
-  const { updateApplication, isUpdating } = useUpdateApiApplication();
+  const { updateApplication, isUpdating, error, dismissError } =
+    useUpdateApiApplication();
 
   const appId$ = fromRune(() => appId);
   const { app: app$, isLoading: isLoading$ } = useApiApplication(appId$);
@@ -51,6 +52,8 @@
     crumbLabel={app.name}
     {initial}
     isBusy={$isUpdating}
+    errorMessage={$error}
+    onDismissError={dismissError}
     confirmButtonText={m.button_text_save()}
     confirmButtonLabel={m.button_label_save_app()}
     onSubmit={handleSubmit}
