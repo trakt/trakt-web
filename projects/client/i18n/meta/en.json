@@ -9504,6 +9504,10 @@
       "default": "We couldn't load this right now. Please try again.",
       "description": "Inline error message shown when a streaming sync detail or its items fail to load."
     },
+    "error_text_plex_server_unreachable": {
+      "default": "Trakt can't reach this Plex media server. Make sure remote access is enabled and port 32400 is open.",
+      "description": "Inline error on the Plex settings server card when Trakt cannot reach the user's Plex media server over the network."
+    },
     "error_text_parental_guide_load_failed": {
       "default": "Loading Error",
       "description": "Short label shown in the parental guide when its content fails to load."

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { findQueryId } from './findQueryId.ts';
-import { queryId } from './queryId.ts';
+import { queryId } from '../queryId.ts';
 
 describe('findQueryId', () => {
   it('should find query id in array', () => {

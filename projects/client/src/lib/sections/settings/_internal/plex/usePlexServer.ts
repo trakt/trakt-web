@@ -2,6 +2,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { plexServerAccountsQuery } from '$lib/requests/plex/plexServerAccountsQuery.ts';
 import { plexSettingsQuery } from '$lib/requests/plex/plexSettingsQuery.ts';
 import { plexUpdateSettingsRequest } from '$lib/requests/plex/plexUpdateSettingsRequest.ts';
+import { toPlexErrorCode } from '$lib/requests/plex/toPlexErrorCode.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import {
@@ -18,6 +19,15 @@ export function usePlexServer({ serverId }: { serverId: string }) {
   const accountsQuery = useQuery(plexServerAccountsQuery({ serverId }));
   const isLoadingAccounts = accountsQuery.pipe(map((q) => q.isLoading));
   const serverAccounts = accountsQuery.pipe(map((q) => q.data));
+  const isAccountsError = accountsQuery.pipe(map((q) => q.isError));
+  const accountsErrorCode = accountsQuery.pipe(
+    map((q) => toPlexErrorCode(q.error)),
+  );
+
+  async function retryAccounts() {
+    const queryState = await firstValueFrom(accountsQuery);
+    await queryState.refetch();
+  }
 
   const plexSettings = useQuery(plexSettingsQuery()).pipe(map((q) => q.data));
 
@@ -119,6 +129,9 @@ export function usePlexServer({ serverId }: { serverId: string }) {
   return {
     isLoadingAccounts,
     serverAccounts,
+    isAccountsError,
+    accountsErrorCode,
+    retryAccounts,
     libraries,
     selectedUserId,
     toggleLibrary,

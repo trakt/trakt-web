@@ -27,7 +27,16 @@
   onMount(() => {
     const handler = (event: Event) => {
       const errorEvent = event as CustomEvent<CustomFetchError>;
-      fetchError = mapToWellKnownError(errorEvent.detail);
+      const error = mapToWellKnownError(errorEvent.detail);
+
+      // Drop exempt errors at capture: a route handles them inline, and
+      // storing one would overwrite (and thereby dismiss) a non-exempt
+      // error that is legitimately showing the global page.
+      if (isErrorExempt(error, page.route.id)) {
+        return;
+      }
+
+      fetchError = error;
     };
 
     globalThis.window.addEventListener(FETCH_ERROR_EVENT, handler);
@@ -43,7 +52,6 @@
     sessionId = undefined;
   });
 
-  const hasExemption = $derived(isErrorExempt(fetchError, page.route.id));
   const hasError = $derived(fetchError || unexpectedError);
 </script>
 
@@ -106,28 +114,26 @@
   }}
 />
 
-{#if !hasExemption}
-  {#if unexpectedError}
-    <UnexpectedErrorPage error={unexpectedError} {sessionId} />
-  {/if}
-
-  {#if fetchError?.type === WellKnownErrorType.LockedAccountError}
-    <ErrorLockedAccountPage message={fetchError.message} />
-  {/if}
-
-  {#if fetchError?.type === WellKnownErrorType.RateLimitError}
-    <ErrorServicePage message={fetchError.message} />
-  {/if}
-
-  {#if fetchError?.type === WellKnownErrorType.ServerError}
-    <ErrorServicePage message={fetchError.message} />
-  {/if}
-
-  {#if fetchError?.type === WellKnownErrorType.NotFoundError}
-    <Error404Page />
-  {/if}
+{#if unexpectedError}
+  <UnexpectedErrorPage error={unexpectedError} {sessionId} />
 {/if}
 
-{#if !hasError || hasExemption}
+{#if fetchError?.type === WellKnownErrorType.LockedAccountError}
+  <ErrorLockedAccountPage message={fetchError.message} />
+{/if}
+
+{#if fetchError?.type === WellKnownErrorType.RateLimitError}
+  <ErrorServicePage message={fetchError.message} />
+{/if}
+
+{#if fetchError?.type === WellKnownErrorType.ServerError}
+  <ErrorServicePage message={fetchError.message} />
+{/if}
+
+{#if fetchError?.type === WellKnownErrorType.NotFoundError}
+  <Error404Page />
+{/if}
+
+{#if !hasError}
   {@render children()}
 {/if}

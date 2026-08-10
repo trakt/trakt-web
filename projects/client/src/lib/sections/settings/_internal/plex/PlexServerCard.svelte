@@ -26,11 +26,20 @@
   const {
     isLoadingAccounts,
     serverAccounts,
+    isAccountsError,
+    accountsErrorCode,
+    retryAccounts,
     libraries,
     selectedUserId,
     toggleLibrary,
     selectAccount,
   } = usePlexServer({ serverId: iffy(() => serverId) });
+
+  const accountsErrorText = $derived(
+    $accountsErrorCode === "invalid_server_url"
+      ? m.error_text_plex_server_unreachable()
+      : m.error_text_sync_load_failed(),
+  );
 
   const noneAccount = "__none__";
 
@@ -65,6 +74,19 @@
     {#if $isLoadingAccounts}
       <div class="loading-container">
         <LoadingIndicator />
+      </div>
+    {:else if $isAccountsError}
+      <div class="accounts-error" role="alert">
+        <p class="secondary">{accountsErrorText}</p>
+        <Button
+          size="small"
+          variant="secondary"
+          color="default"
+          label={m.button_text_retry()}
+          onclick={retryAccounts}
+        >
+          {m.button_text_retry()}
+        </Button>
       </div>
     {:else if $serverAccounts}
       {#if $serverAccounts.accounts.length > 0}
@@ -129,6 +151,15 @@
   }
 
   .loading-container {
+    padding: var(--gap-l);
+  }
+
+  .accounts-error {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-s);
+
     padding: var(--gap-l);
   }
 </style>

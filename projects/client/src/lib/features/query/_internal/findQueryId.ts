@@ -1,4 +1,4 @@
-import { queryId } from './queryId.ts';
+import { queryId } from '../queryId.ts';
 
 export function findQueryId(queryKey: readonly unknown[]): string | Nil {
   return queryKey.find((key) =>

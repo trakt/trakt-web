@@ -32,5 +32,6 @@ export function mapToWellKnownError(
   return {
     type: errorType,
     message: error.message,
+    source: error.source,
   };
 }

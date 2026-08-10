@@ -2,7 +2,7 @@ import type { ZodType } from 'zod';
 import type { ApiParams } from '../../../requests/api.ts';
 import type { DefineQueryProps } from '../models/DefineQueryProps.ts';
 import { dependencyId } from './dependencyId.ts';
-import { queryId } from './queryId.ts';
+import { queryId } from '../queryId.ts';
 
 type BuildQueryKeyParams<
   TInput,
