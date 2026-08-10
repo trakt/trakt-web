@@ -515,12 +515,7 @@
     */
     @supports (text-box-trim: trim-both) {
       :global(.trakt-summary-header-title),
-      .masthead-scores {
-    /* Belongs to the kicker line above, not to the column's full beat. */
-    margin-top: calc(var(--gap-xs) - var(--masthead-rhythm));
-  }
-
-  .masthead-deck {
+      .masthead-deck {
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
       }
@@ -643,12 +638,12 @@
     margin-top: var(--gap-xxs);
 
     /*
-      Centred and reversed, so the rate row sits above the bar - see the markup for
-      why. Done here rather than by rebuilding SummaryActions, which is deliberately
-      start-aligned for the rail it was written for.
+      Centred, in source order: the bar first, the rate-and-react row beneath
+      it. Done here rather than by rebuilding SummaryActions, which is
+      deliberately start-aligned for the rail it was written for.
     */
     :global(.trakt-summary-actions) {
-      flex-direction: column-reverse;
+      flex-direction: column;
       align-items: center;
       gap: var(--gap-m);
     }
