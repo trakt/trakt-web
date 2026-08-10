@@ -1,5 +1,8 @@
 <script lang="ts">
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
+  import Link from "$lib/components/link/Link.svelte";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
+  import { riseFade } from "$lib/utils/transitions/riseFade";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -95,6 +98,7 @@
     and a placeholder holds them.
   */
   const isFlanked = $derived(statsLayout === "flank");
+  const isInlineStats = $derived(statsLayout === "inline");
 
   /* How the stats are framed - `?statframe=glass|ghost`. See PersonStatsFrame. */
   const statsFrame = $derived(
@@ -111,12 +115,6 @@
     return $backdropMedia != null;
   });
 </script>
-
-{#snippet tags()}
-  {#if person.imdb}
-    <ImdbLink imdbId={person.imdb} />
-  {/if}
-{/snippet}
 
 <article
   class="trakt-people-masthead-header"
@@ -147,11 +145,7 @@
       {/if}
 
       <div class="masthead-portrait">
-        <SummaryPoster
-          src={person.headshot.url.medium}
-          alt={person.name}
-          {tags}
-        />
+        <SummaryPoster src={person.headshot.url.medium} alt={person.name} />
       </div>
 
       {#if isFlanked}
@@ -187,8 +181,36 @@
   </div>
 
   <div class="masthead-links">
-    {#if hasSocialMediaLinks(person)}
-      <SocialMediaLinks {person} />
+    {#if isInlineStats}
+      {#if isStatsLoading}
+        <!-- Holds the counts' place so the row doesn't reflow when they land. -->
+        <Skeleton width="var(--ni-120)" height="var(--ni-14)" />
+        <span class="meta-divider" aria-hidden="true"></span>
+      {:else if stats.length > 0}
+        <span class="links-stats" in:riseFade>
+          {#each stats as stat, index (stat.key)}
+            {#if index > 0}
+              <span aria-hidden="true">&middot;</span>
+            {/if}
+            <Link href={stat.href} color="inherit">
+              <span class="links-stat">
+                <span class="bold">{stat.value}</span>
+                {stat.label}
+              </span>
+            </Link>
+          {/each}
+        </span>
+        <span class="meta-divider" aria-hidden="true"></span>
+      {/if}
+    {/if}
+
+    {#if hasSocialMediaLinks(person) || person.imdb}
+      {#if hasSocialMediaLinks(person)}
+        <SocialMediaLinks {person} />
+      {/if}
+      {#if person.imdb}
+        <ImdbLink imdbId={person.imdb} />
+      {/if}
       <span class="meta-divider" aria-hidden="true"></span>
     {/if}
 
@@ -219,7 +241,7 @@
     </RenderFor>
   </div>
 
-  {#if !isFlanked}
+  {#if statsLayout === "below"}
     <PersonMastheadStats
       {stats}
       name={person.name}
@@ -390,6 +412,36 @@
       width: var(--ni-20);
       height: var(--ni-20);
     }
+
+    /*
+      The IMDb wordmark declares 32px for its life as a poster tag; on this row it
+      matches the social marks' 20px so the cluster reads as one set of links.
+    */
+    :global(.trakt-person-imdb-link svg) {
+      height: var(--ni-20);
+    }
+  }
+
+  /*
+    The counts as a whisper: text-sized, secondary, bold figures only. Discreet is
+    the brief - these must read as a footnote to the person, not as the plinth the
+    flanked layout gives them.
+  */
+  .links-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+
+    font-size: var(--font-size-text);
+    color: var(--color-text-secondary);
+
+    .links-stat {
+      transition: color var(--transition-increment) ease-in-out;
+    }
+
+    :global(a:hover .links-stat) {
+      color: var(--color-text-primary);
+    }
   }
 
   .meta-divider {
@@ -514,6 +566,18 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--purple-300);
+
+    /*
+      The kicker and the name belong to the portrait, not to the column's beat. At
+      the full rhythm each sat a band apart and the identity read as three items in
+      a list; pulled in, portrait-kicker-name reads as one unit.
+    */
+    margin-top: calc(var(--gap-m) - var(--masthead-rhythm));
+
+    /* The name follows its kicker at a breath, not a band. */
+    + :global(.trakt-summary-header-title) {
+      margin-top: calc(var(--gap-xxs) - var(--masthead-rhythm));
+    }
   }
 
 

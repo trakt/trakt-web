@@ -9,10 +9,15 @@
  *
  * `below` is the stacked line it replaced, kept reachable so the two can be
  * compared rather than argued about.
+ *
+ * `inline` folds the counts into the links row as quiet text before the socials.
+ * The flanks were read as a silly pair of ears on the portrait, and this is the
+ * counter-proposal: no crown columns at all, the portrait alone, and the work
+ * summarized in a whisper rather than on a plinth.
  */
-export type PersonStatsLayout = 'flank' | 'below';
+export type PersonStatsLayout = 'flank' | 'below' | 'inline';
 
-const LAYOUTS: ReadonlyArray<PersonStatsLayout> = ['flank', 'below'];
+const LAYOUTS: ReadonlyArray<PersonStatsLayout> = ['flank', 'below', 'inline'];
 
 const DEFAULT_LAYOUT: PersonStatsLayout = 'flank';
 
