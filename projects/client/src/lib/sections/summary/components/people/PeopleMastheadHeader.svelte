@@ -1,5 +1,10 @@
 <script lang="ts">
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
+  import TrophyIcon from "$lib/components/icons/TrophyIcon.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import PersonAwardsDrawer from "./_internal/PersonAwardsDrawer.svelte";
+  import { usePersonAwards } from "./_internal/usePersonAwards.ts";
   import Link from "$lib/components/link/Link.svelte";
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { riseFade } from "$lib/utils/transitions/riseFade";
@@ -89,6 +94,27 @@
     toPersonStatsLayout(page.url.searchParams.get(PERSON_STATS_PARAM)),
   );
   const isStatsLoading = $derived($creditCounts?.isLoading ?? true);
+
+  /*
+    Wins lead, nominations understudy: the pill counts awards when there are
+    any, and falls back to counting nominations - "3 Awards" beats "5
+    Nominations" beats silence, and silence only when there is neither.
+  */
+  const { awards: personAwards } = $derived(
+    usePersonAwards({ slug: person.slug }),
+  );
+  const awardWins = $derived(
+    personAwards.filter((award) => award.isWinner).length,
+  );
+  const awardsPill = $derived.by(() => {
+    if (awardWins > 0) return m.text_person_awards_count({ count: awardWins });
+    if (personAwards.length > 0) {
+      return m.text_person_nominations_count({ count: personAwards.length });
+    }
+    return null;
+  });
+
+  let isAwardsOpen = $state(false);
 
   /*
     Depends on the LAYOUT only, never on whether the data has arrived. It used to
@@ -203,6 +229,27 @@
               </span>
             </Link>
           {/each}
+
+          <RenderForFeature
+            flag={FeatureFlag.SummaryAwards}
+            audience="director"
+          >
+            {#snippet enabled()}
+              {#if awardsPill}
+                <button
+                  type="button"
+                  class="links-stat award-pill"
+                  aria-label={m.button_label_view_awards({
+                    title: person.name,
+                  })}
+                  onclick={() => (isAwardsOpen = true)}
+                >
+                  <span class="award-pill-mark"><TrophyIcon /></span>
+                  {awardsPill}
+                </button>
+              {/if}
+            {/snippet}
+          </RenderForFeature>
         </span>
       {/if}
       <span class="meta-divider work-divider" aria-hidden="true"></span>
@@ -262,6 +309,13 @@
       name={person.name}
       frame={statsFrame}
       isLoading={isStatsLoading}
+    />
+  {/if}
+
+  {#if isAwardsOpen}
+    <PersonAwardsDrawer
+      awards={personAwards}
+      onClose={() => (isAwardsOpen = false)}
     />
   {/if}
 
