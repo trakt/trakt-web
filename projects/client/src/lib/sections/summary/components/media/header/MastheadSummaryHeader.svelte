@@ -170,6 +170,7 @@
   const ratingsLink = $derived(buildDrawerLink(SummaryDrawers.Ratings));
   const glanceLink = $derived(buildDrawerLink(SummaryDrawers.Glance));
   const reactionsLink = $derived(buildDrawerLink(SummaryDrawers.Reactions));
+  const awardsLink = $derived(buildDrawerLink(SummaryDrawers.Awards));
   const whereToWatchLink = $derived(
     buildDrawerLink(SummaryDrawers.WhereToWatch),
   );
@@ -365,7 +366,7 @@
           whereToWatch: whereToWatchLink.href,
           social: socialLink.href,
           sentiment: sentimentLink.href,
-          awards: glanceLink.href,
+          awards: awardsLink.href,
           reactions: reactionsLink.href,
           trivia: triviaLink.href,
         }}

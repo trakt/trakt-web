@@ -15,6 +15,7 @@
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import CastDrawerHost from "./components/cast/CastDrawerHost.svelte";
+  import AwardsDrawerHost from "./components/media/header/AwardsDrawerHost.svelte";
   import GlanceDrawerHost from "./components/media/header/GlanceDrawerHost.svelte";
   import MediaReactionsDrawerHost from "$lib/features/media-reactions/MediaReactionsDrawerHost.svelte";
   import type { CommentsProps } from "./components/comments/CommentsProps";
@@ -226,6 +227,14 @@
     {streamOn}
     onClose={close}
   />
+{/if}
+
+{#if drawer === SummaryDrawers.Awards && details.type !== "episode"}
+  <RenderForFeature flag={FeatureFlag.SummaryAwards} audience="director">
+    {#snippet enabled()}
+      <AwardsDrawerHost slug={details.media.slug} onClose={close} />
+    {/snippet}
+  </RenderForFeature>
 {/if}
 
 {#if drawer === SummaryDrawers.Reactions && details.type !== "episode"}

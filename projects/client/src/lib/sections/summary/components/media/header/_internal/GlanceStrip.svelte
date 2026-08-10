@@ -249,7 +249,7 @@
 
     :global(svg),
     :global(img) {
-      height: var(--ni-16);
+      height: var(--ni-24);
       width: auto;
     }
   }
