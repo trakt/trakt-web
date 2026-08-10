@@ -11,9 +11,18 @@ import type { SummarySentiment } from './toSummarySentiment.ts';
  * are totals (how much a drilldown holds), not the header's display limits.
  */
 export type GlanceStripProps = {
-  /** Opens the at-a-glance drawer. */
-  href: string;
-  label: string;
+  /** Each segment roots straight to its section's own drawer. */
+  links: {
+    details: string;
+    whereToWatch: string;
+    social: string;
+    sentiment: string;
+    awards: string;
+    reactions: string;
+    trivia: string;
+  };
+  /** For the per-segment aria labels. */
+  title: string;
   /** e.g. "2025 · 9 episodes" - year plus length, pre-joined. */
   release: string | null;
   /** The lead provider - the same first pick the watch list leads with. */

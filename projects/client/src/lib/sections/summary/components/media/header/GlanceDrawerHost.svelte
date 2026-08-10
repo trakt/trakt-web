@@ -89,6 +89,7 @@
   const socialLink = $derived(buildDrawerLink(SummaryDrawers.Social));
   const sentimentLink = $derived(buildDrawerLink(SummaryDrawers.Sentiment));
   const triviaLink = $derived(buildDrawerLink(SummaryDrawers.Trivia));
+  const reactionsLink = $derived(buildDrawerLink(SummaryDrawers.Reactions));
 </script>
 
 <Drawer
@@ -166,7 +167,13 @@
     <RenderForFeature flag={FeatureFlag.Reactions} audience="director">
       {#snippet enabled()}
         <section class="glance-section">
-          <SummaryHeaderSectionHeader title={m.header_reactions()} />
+          <SummaryHeaderSectionHeader
+            title={m.header_reactions()}
+            drilldown={{
+              ...reactionsLink,
+              label: m.button_label_view_reactions({ title: media.title }),
+            }}
+          />
           <MediaReactions {type} slug={media.slug} title={media.title} />
         </section>
       {/snippet}
