@@ -10375,6 +10375,22 @@
       "default": "View all awards for {title}",
       "description": "Aria-label for the control that opens the full awards view."
     },
+    "drawer_title_at_a_glance": {
+      "default": "{title} — at a glance",
+      "description": "Title of the side drawer summarizing every header section for a movie or show."
+    },
+    "button_label_at_a_glance": {
+      "default": "At a glance — everything about {title}",
+      "description": "Aria-label for the compact header strip that opens the at-a-glance drawer."
+    },
+    "text_glance_drill_hint": {
+      "default": "Tap a section to drill down",
+      "description": "Hint at the foot of the at-a-glance drawer explaining that sections open detailed views."
+    },
+    "header_reactions": {
+      "default": "Reactions",
+      "description": "Section label for audience emoji reactions."
+    },
     "preview_feature_title_people_header_masthead": {
       "default": "Masthead person header",
       "description": "Product feature name for the masthead people header preview feature."

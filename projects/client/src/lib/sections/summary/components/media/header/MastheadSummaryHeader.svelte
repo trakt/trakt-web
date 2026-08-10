@@ -19,6 +19,7 @@
   import { useSocialActivities } from "../../_internal/useSocialActivities";
   import { useTrivia } from "../../trivia/useTrivia";
   import { useMediaAwards } from "../../awards/useMediaAwards";
+  import { useMediaReactions } from "$lib/features/media-reactions/stores/useMediaReactions.ts";
   import MediaReactions from "$lib/features/media-reactions/MediaReactions.svelte";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
@@ -27,16 +28,9 @@
   import SummaryOverview from "../../summary/SummaryOverview.svelte";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "../v2/_internal/MediaActions.svelte";
-  import SummaryHeaderByline from "./_internal/SummaryHeaderByline.svelte";
-  import SummaryHeaderFacts from "../../header-kit/SummaryHeaderFacts.svelte";
+  import GlanceStrip from "./_internal/GlanceStrip.svelte";
   import SummaryHeaderKicker from "./_internal/SummaryHeaderKicker.svelte";
-  import SummaryHeaderSectionHeader from "./_internal/SummaryHeaderSectionHeader.svelte";
-  import SummaryHeaderSentiment from "./_internal/SummaryHeaderSentiment.svelte";
-  import SummaryHeaderSocialActivity from "./_internal/SummaryHeaderSocialActivity.svelte";
   import SummaryHeaderTitle from "../../header-kit/SummaryHeaderTitle.svelte";
-  import SummaryHeaderTrivia from "./_internal/SummaryHeaderTrivia.svelte";
-  import SummaryHeaderAwards from "./_internal/SummaryHeaderAwards.svelte";
-  import SummaryHeaderWatchOptions from "./_internal/SummaryHeaderWatchOptions.svelte";
   import { mapToSummaryHeaderFacts } from "./_internal/mapToSummaryHeaderFacts.ts";
   import { mapToSummaryHeaderKicker } from "./_internal/mapToSummaryHeaderKicker.ts";
   import { toHeaderProviders } from "./_internal/toHeaderProviders.ts";
@@ -63,21 +57,8 @@
   const status = $derived(toTranslatedStatus(media.status));
   const facts = $derived(mapToSummaryHeaderFacts(target));
 
-  /*
-    The credits column reads as two meta lines rather than one long run: the
-    release facts, then what the title is and where it stands. That gives the
-    column the vertical lines it needs to sit level with the other two.
-  */
-  const RELEASE_FACT_KEYS = ["year", "length", "certification"];
-  const releaseFacts = $derived(
-    facts.filter((fact) => RELEASE_FACT_KEYS.includes(fact.key)),
-  );
-  const classificationFacts = $derived(
-    facts.filter((fact) => !RELEASE_FACT_KEYS.includes(fact.key)),
-  );
-
-  /* Two, not three - see toHeaderProviders. The chevron opens the rest. */
-  const providers = $derived(toHeaderProviders(streamOn, 2));
+  /* The strip leads with one provider; the glance drawer holds the rest. */
+  const glanceProvider = $derived(toHeaderProviders(streamOn, 1).at(0) ?? null);
   const headerSentiment = $derived(toSummarySentiment(sentiment));
 
   /*
@@ -86,7 +67,6 @@
     Spoiler-flagged facts are excluded - the header is not somewhere a reader
     opts in to them.
   */
-  const HEADER_TRIVIA_LIMIT = 2;
   const { summary: triviaSummary } = $derived(
     useTrivia({
       slug: media.slug,
@@ -94,12 +74,8 @@
       variant: "no-spoilers",
     }),
   );
-  const triviaFacts = $derived($triviaSummary.slice(0, HEADER_TRIVIA_LIMIT));
 
-  /* Same density as the other columns - wins first, see useMediaAwards. */
-  const HEADER_AWARDS_LIMIT = 2;
   const { awards } = $derived(useMediaAwards({ slug: media.slug }));
-  const headerAwards = $derived(awards.slice(0, HEADER_AWARDS_LIMIT));
 
   const { ratings, isLoading: isRatingsLoading } = $derived(
     useMediaMetaInfo(target),
@@ -117,33 +93,41 @@
   const socialTarget$ = fromRune(() => socialTarget);
   const { entries: socialEntries } = useSocialActivities(socialTarget$);
 
-  /* Enough to give the column body without unbalancing the strip. */
-  const HEADER_SOCIAL_LIMIT = 3;
-  const headerSocialEntries = $derived(
-    $socialEntries.slice(0, HEADER_SOCIAL_LIMIT),
+  /* Three overlapped avatars; the count beside them carries the total. */
+  const GLANCE_AVATAR_LIMIT = 3;
+  const glanceSocial = $derived({
+    users: $socialEntries
+      .slice(0, GLANCE_AVATAR_LIMIT)
+      .map((entryItem) => entryItem.user),
+    count: $socialEntries.length,
+  });
+
+  const { summary: reactionSummary } = $derived(
+    useMediaReactions({ type: target.type, slug: media.slug }),
   );
+  const GLANCE_REACTION_GLYPHS = 3;
+  const glanceReactions = $derived({
+    top: [...reactionSummary.metrics]
+      .sort((a, b) => b.count - a.count)
+      .slice(0, GLANCE_REACTION_GLYPHS)
+      .map((metric) => metric.sentiment),
+    total: reactionSummary.totalCount,
+  });
+
+  /* "2025 · 9 episodes" - the release facts pre-joined for the strip. */
+  const glanceRelease = $derived.by(() => {
+    const parts = ["year", "length"]
+      .map((key) => facts.find((fact) => fact.key === key))
+      .map((fact) => fact?.inlineValue ?? fact?.value)
+      .filter(Boolean);
+    return parts.length > 0 ? parts.join(" · ") : null;
+  });
 
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
 
   const { buildDrawerLink } = summaryDrawerNavigation();
   const ratingsLink = $derived(buildDrawerLink(SummaryDrawers.Ratings));
-  const whereToWatchLink = $derived(
-    buildDrawerLink(SummaryDrawers.WhereToWatch),
-  );
-  const sentimentLink = $derived(buildDrawerLink(SummaryDrawers.Sentiment));
-  const socialLink = $derived(buildDrawerLink(SummaryDrawers.Social));
-  const triviaLink = $derived(buildDrawerLink(SummaryDrawers.Trivia));
-  /*
-    Keeps the affordance the live header has as an "i" next to the genre: the
-    details drawer holds studios, networks, languages, links and the rest, none of
-    which fits in the header itself.
-  */
-  const detailsLink = $derived(buildDrawerLink(SummaryDrawers.Details));
-
-  const justWatchDetail = $derived.by(() => {
-    const rank = streamOn?.services?.streamingRank?.current;
-    return rank ? m.text_just_watch_rank({ rank }) : null;
-  });
+  const glanceLink = $derived(buildDrawerLink(SummaryDrawers.Glance));
 </script>
 
 {#snippet tags()}
@@ -238,94 +222,26 @@
     </RenderFor>
 
 
-    <div class="masthead-strip">
-      <div class="strip-column">
-        <SummaryHeaderSectionHeader
-          title={m.header_credits_and_details()}
-          drilldown={{
-            ...detailsLink,
-            label: m.button_label_details({ title }),
-          }}
-        />
-        <div class="strip-credits">
-          <SummaryHeaderByline type={target.type} {crew} layout="stacked" />
-          <SummaryHeaderFacts facts={releaseFacts} variant="inline" />
-          <SummaryHeaderFacts facts={classificationFacts} variant="inline" />
-        </div>
-      </div>
-
-      <div class="strip-column strip-column-borrowed">
-        <SummaryHeaderSectionHeader
-          title={m.list_title_where_to_watch()}
-          detail={justWatchDetail}
-          drilldown={{
-            ...whereToWatchLink,
-            label: m.button_label_view_all_where_to_watch(),
-          }}
-        />
-        <SummaryHeaderWatchOptions
-          {providers}
-          country={$country}
-        />
-      </div>
-
-      <RenderFor audience="authenticated">
-        {#if headerSocialEntries.length > 0}
-          <div class="strip-column strip-column-borrowed">
-            <SummaryHeaderSectionHeader
-              title={m.list_title_social_activity()}
-              drilldown={{
-                ...socialLink,
-                label: m.button_label_view_all_social_activity(),
-              }}
-            />
-            <SummaryHeaderSocialActivity entries={headerSocialEntries} />
-          </div>
-        {/if}
-      </RenderFor>
-
-      {#if headerSentiment}
-        <div class="strip-column strip-column-borrowed">
-          <SummaryHeaderSectionHeader
-            title={m.header_community_sentiment()}
-            drilldown={{
-              ...sentimentLink,
-              label: m.button_label_view_sentiment_analysis(),
-            }}
-          />
-          <SummaryHeaderSentiment sentiment={headerSentiment} />
-        </div>
-      {/if}
-
-      {#if triviaFacts.length > 0}
-        <div class="strip-column strip-column-borrowed">
-          <SummaryHeaderSectionHeader
-            title={m.list_title_trivia()}
-            drilldown={{
-              ...triviaLink,
-              label: m.button_label_view_trivia(),
-            }}
-          />
-          <SummaryHeaderTrivia facts={triviaFacts} />
-        </div>
-      {/if}
-
-      <!--
-        Deliberately NOT marked `strip-column-borrowed`, unlike its neighbours. Those
-        hide below desktop because they duplicate a section further down the page;
-        awards exist nowhere else, so hiding them would not de-duplicate anything - it
-        would simply make awards invisible on a phone.
-      -->
-      <RenderForFeature flag={FeatureFlag.SummaryAwards} audience="director">
-        {#snippet enabled()}
-          {#if headerAwards.length > 0}
-            <div class="strip-column">
-              <SummaryHeaderSectionHeader title={m.header_awards()} />
-              <SummaryHeaderAwards awards={headerAwards} />
-            </div>
-          {/if}
-        {/snippet}
-      </RenderForFeature>
+    <!--
+      The strip, folded to one line. Everything the five columns said is still
+      referenced - release, listings, follows, sentiment, awards, reactions,
+      trivia - but as tokens, because a full column of each right at the top of
+      the page outweighed the page. The pill opens the at-a-glance drawer, where
+      the sections appear at their old density and drill into their full views.
+    -->
+    <div class="masthead-glance">
+      <GlanceStrip
+        {...glanceLink}
+        label={m.button_label_at_a_glance({ title })}
+        release={glanceRelease}
+        provider={glanceProvider}
+        country={$country}
+        social={glanceSocial}
+        sentiment={headerSentiment}
+        awardsCount={awards.length}
+        reactions={glanceReactions}
+        triviaCount={$triviaSummary.length}
+      />
     </div>
 
   </div>
@@ -546,80 +462,15 @@
     text-wrap: pretty;
   }
 
-  .masthead-strip {
+  .masthead-glance {
     width: 100%;
     margin-top: var(--gap-xs);
     padding-top: var(--ni-24);
 
     border-top: var(--ni-1) solid var(--color-hairline);
 
-    /*
-      Auto-flow rather than a fixed column count: sentiment and social activity
-      both drop out when there is nothing to show (no analysis, or a signed-out
-      visitor), and this keeps the remaining columns equal and full-width instead
-      of leaving an empty cell behind.
-    */
-    /*
-      `auto-fit` + `minmax`, which solves two problems with one rule.
-
-      Column COUNT is not fixed: sentiment, social activity and trivia each drop out
-      when there is nothing to show, and auto-fit keeps whatever survives equal and
-      full-width rather than leaving a dead cell.
-
-      Column WIDTH now has a floor. The previous `auto-flow: column` could not wrap,
-      so five columns stayed five columns however narrow the window got - at 1024px
-      that was 109px each. With a floor they wrap onto as many rows as they need,
-      which is the behaviour that holds from a phone to an ultrawide without a
-      breakpoint per case.
-    */
-    display: grid;
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(var(--strip-column-min, var(--ni-200)), 1fr)
-    );
-    gap: var(--ni-32);
-
-    /* The composition centres; the data does not. */
-    text-align: start;
-
-    @include for-tablet-sm-and-below {
-      gap: var(--gap-l);
-      /* One column: below this even two columns cannot hold a provider row. */
-      --strip-column-min: 100%;
-    }
-  }
-
-  /*
-    Every strip column except credits also exists as a section further down the
-    page, and those sections render at tablet-lg and below. Showing both is how a
-    narrow window ended up with where-to-watch, sentiment and trivia twice.
-
-    Rather than redesign those sections to work inside the strip at every width,
-    the header yields: below desktop it keeps only credits - the one thing with no
-    equivalent elsewhere - and the page's own sections do the rest. The two gates
-    are exact complements, so nothing is shown twice and nothing goes missing.
-  */
-  .strip-column-borrowed {
-    @include for-tablet-lg-and-below {
-      display: none;
-    }
-  }
-
-  .strip-column {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--ni-14);
-
-    min-width: 0;
-
-    --sentiment-bullet-gap: var(--gap-xs);
-  }
-
-  .strip-credits {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-6);
+    justify-content: center;
   }
 
   .masthead-actions {

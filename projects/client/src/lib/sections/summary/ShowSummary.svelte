@@ -68,6 +68,7 @@
 </script>
 
 <SummaryDrawer
+  {streamOn}
   {sentiment}
   {studios}
   {crew}
