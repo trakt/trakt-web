@@ -285,13 +285,6 @@
     --title-size-small: clamp(var(--ni-28), 4.4vw, var(--ni-56));
     --title-measure: 20ch;
 
-    /* Shared with the header primitives - the meta row's dividers resolve here. */
-    --summary-header-hairline: color-mix(
-      in srgb,
-      var(--color-foreground) 12%,
-      transparent
-    );
-
     position: relative;
 
     /*
@@ -403,7 +396,7 @@
     width: var(--ni-1);
     height: var(--ni-14);
 
-    background: var(--summary-header-hairline, var(--color-border));
+    background: var(--color-hairline);
   }
 
   .trakt-people-masthead-header::before {
