@@ -4,16 +4,13 @@ import { destroySocket } from './destroySocket.ts';
 
 export function createConnection(
   previous: WebSocket | Nil,
-  token: string | null | undefined,
+  token: string | Nil,
 ) {
   if (!browser) return;
 
-  if (!token) {
-    destroySocket(previous);
-    return;
-  }
+  destroySocket(previous);
 
-  const connection = createSocket(token);
+  if (!token) return;
 
-  return connection;
+  return createSocket(token);
 }
