@@ -39,7 +39,7 @@
     If this treatment graduates, these three belong one level up in `people/` -
     they are shared by three headers now, not private to v2.
   */
-  import ImdbLink from "./v2/_internal/ImdbLink.svelte";
+  import ExternalLinkAction from "../_internal/ExternalLinkAction.svelte";
   import SocialMediaLinks from "./v2/_internal/SocialMediaLinks.svelte";
   import { hasSocialMediaLinks } from "./v2/_internal/hasSocialMediaLinks";
 
@@ -82,8 +82,8 @@
   );
 
   /*
-    Where the stats sit - `?stats=below` returns them to their own line. Flanking
-    the portrait costs no height and uses the band's empty sides, so it leads.
+    Where the stats sit - inline with the links row by default; `?stats=flank`
+    and `?stats=below` keep the flanked and stacked alternatives reachable.
   */
   const statsLayout = $derived(
     toPersonStatsLayout(page.url.searchParams.get(PERSON_STATS_PARAM)),
@@ -209,7 +209,11 @@
         <SocialMediaLinks {person} />
       {/if}
       {#if person.imdb}
-        <ImdbLink imdbId={person.imdb} />
+        <ExternalLinkAction
+          id={person.imdb}
+          type="imdb-person"
+          source="person-summary"
+        />
       {/if}
       <span class="meta-divider" aria-hidden="true"></span>
     {/if}
@@ -368,7 +372,11 @@
     flex-wrap: wrap;
     gap: var(--gap-s);
 
-    margin-top: calc(var(--meta-gap) - var(--masthead-rhythm));
+    /*
+      A breath more than the shared meta distance: the name is set large enough
+      that its descenders reach almost to this row's caps without it.
+    */
+    margin-top: calc(var(--meta-gap) + var(--gap-xxs) - var(--masthead-rhythm));
 
     /*
       One size for the whole row, set here rather than left to each child.
@@ -410,14 +418,6 @@
 
     :global(.trakt-action-button svg) {
       width: var(--ni-20);
-      height: var(--ni-20);
-    }
-
-    /*
-      The IMDb wordmark declares 32px for its life as a poster tag; on this row it
-      matches the social marks' 20px so the cluster reads as one set of links.
-    */
-    :global(.trakt-person-imdb-link svg) {
       height: var(--ni-20);
     }
   }
