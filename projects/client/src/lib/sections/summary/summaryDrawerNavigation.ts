@@ -49,6 +49,8 @@ function mapToDrawer(value: string | Nil) {
       return SummaryDrawers.Rewatching;
     case SummaryDrawers.Glance:
       return SummaryDrawers.Glance;
+    case SummaryDrawers.Reactions:
+      return SummaryDrawers.Reactions;
     default:
       return null;
   }
