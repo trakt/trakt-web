@@ -90,6 +90,7 @@
   const sentimentLink = $derived(buildDrawerLink(SummaryDrawers.Sentiment));
   const triviaLink = $derived(buildDrawerLink(SummaryDrawers.Trivia));
   const reactionsLink = $derived(buildDrawerLink(SummaryDrawers.Reactions));
+  const awardsLink = $derived(buildDrawerLink(SummaryDrawers.Awards));
 </script>
 
 <Drawer
@@ -157,7 +158,13 @@
       {#snippet enabled()}
         {#if awards.length > 0}
           <section class="glance-section">
-            <SummaryHeaderSectionHeader title={m.header_awards()} />
+            <SummaryHeaderSectionHeader
+              title={m.header_awards()}
+              drilldown={{
+                ...awardsLink,
+                label: m.button_label_view_awards({ title: media.title }),
+              }}
+            />
             <SummaryHeaderAwards {awards} />
           </section>
         {/if}
