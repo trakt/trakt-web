@@ -15,6 +15,7 @@
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import { useIsStarted } from "../../_internal/useIsStarted";
   import RateNow from "../../rating/RateNow.svelte";
+  import SummaryActions from "../../summary/SummaryActions.svelte";
   import SummaryOverview from "../../summary/SummaryOverview.svelte";
   import { useMediaAwards } from "../../awards/useMediaAwards";
   import MediaReactions from "$lib/features/media-reactions/MediaReactions.svelte";
@@ -105,19 +106,24 @@
   <div class="header-rail">
     <SummaryPoster src={media.poster.url.medium} alt={title} {tags} />
 
+    <!--
+      The live summary page's own composition: SummaryActions stacks the action bar
+      with the rate row as its contextual actions. Reused rather than restated, so
+      the two headers cannot drift from the shipped one on spacing or order.
+
+      MediaActions brings its own SummaryActionsBar, popup and all - it was once
+      wrapped in a second one here, which stacked two pill surfaces and left the
+      visible bar at its default width while the tokens configured the wrapper.
+    -->
     <RenderFor audience="authenticated">
       <div class="rail-actions">
-        <!--
-          MediaActions renders the action bar itself, popup and all. It used to be
-          wrapped in a second SummaryActionsBar here, which stacked two pill
-          surfaces - two backgrounds, two shadows - and left the visible one at its
-          default fixed width while the tokens below configured the wrapper instead.
-        -->
-        <MediaActions {media} {title} />
-      </div>
+        <SummaryActions>
+          <MediaActions {media} {title} />
 
-      <div class="rail-rate">
-        <RateNow type={target.type} {media} />
+          {#snippet contextualActions()}
+            <RateNow type={target.type} {media} />
+          {/snippet}
+        </SummaryActions>
       </div>
     </RenderFor>
   </div>
@@ -241,17 +247,6 @@
     --header-surface-opacity: 85%;
     --header-surface-blur: var(--ni-20);
 
-    /*
-      Every rule inside this header - the facts strip's two, the scores plate's
-      cell dividers - resolves through this one value, so they stay in step. Well
-      below --color-border on purpose: these separate content, they should not
-      compete with it. Raise the percentage to make the structure more explicit.
-    */
-    --summary-header-hairline: color-mix(
-      in srgb,
-      var(--color-foreground) 7%,
-      transparent
-    );
 
     /*
       Fluid rather than fixed, because the fixed version only ever worked at the
@@ -339,6 +334,16 @@
     display: flex;
     justify-content: center;
 
+    /* The rate row spans the rail rather than hugging its own content. */
+    :global(.trakt-summary-actions) {
+      width: 100%;
+    }
+
+    :global(.trakt-rate-now) {
+      width: 100%;
+      justify-content: space-between;
+    }
+
     /*
       The tray hugs its controls instead of holding a fixed 280px width. At a fixed
       width `space-between` spread four controls across it, which read as dead space
@@ -356,15 +361,6 @@
     --action-button-size: var(--ni-48);
   }
 
-  .rail-rate {
-    display: flex;
-    padding: 0 var(--gap-xxs);
-
-    :global(.trakt-rate-now) {
-      width: 100%;
-      justify-content: space-between;
-    }
-  }
 
   .header-main {
     display: flex;

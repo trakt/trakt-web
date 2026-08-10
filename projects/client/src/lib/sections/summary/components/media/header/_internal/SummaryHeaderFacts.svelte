@@ -72,10 +72,10 @@
         Deliberately fainter than --color-border. These two rules are structural,
         not decorative - they only need to suggest where the facts begin and end.
         At full border strength they read as a table and dominate the data they are
-        meant to frame. Tune via --summary-header-hairline on the header root.
+        meant to frame. It resolves through --color-hairline; see style/theme/global.css.
       */
-      border-top: var(--ni-1) solid var(--summary-header-hairline);
-      border-bottom: var(--ni-1) solid var(--summary-header-hairline);
+      border-top: var(--ni-1) solid var(--color-hairline);
+      border-bottom: var(--ni-1) solid var(--color-hairline);
     }
 
     &[data-variant="inline"] {
