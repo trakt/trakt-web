@@ -1,8 +1,9 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { PlexErrorCodeSchema } from '$lib/requests/plex/PlexErrorCode.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { plexAccountSchema } from '@trakt/api';
+import { plexAccountSchema, plexErrorResponseSchema } from '@trakt/api';
 import { z } from 'zod';
 
 type PlexServerAccountsParams = {
@@ -20,17 +21,28 @@ const PlexLibrarySchema = z.object({
   url: z.string(),
 });
 
-const PlexServerAccountsSchema = z.object({
-  accounts: z.array(plexAccountSchema),
-  libraries: z.array(PlexLibrarySchema),
-});
+const PlexServerAccountsSchema = z.union([
+  z.object({
+    accounts: z.array(plexAccountSchema),
+    libraries: z.array(PlexLibrarySchema),
+  }),
+  z.object({
+    errorCode: PlexErrorCodeSchema,
+  }),
+]);
 
-const plexServerAccountsRequest = (
+const plexServerAccountsRequest = async (
   { serverId, fetch }: PlexServerAccountsParams,
-) =>
-  api({ fetch }).users.plex.serverAccounts({
+) => {
+  const response = await api({ fetch }).users.plex.serverAccounts({
     params: { server_id: serverId },
   });
+
+  const plexError = plexErrorResponseSchema.safeParse(response.body);
+  return plexError.success
+    ? { status: 200 as const, body: { error: plexError.data } }
+    : response;
+};
 
 export const plexServerAccountsQuery = defineQuery({
   key: 'plexServerAccounts',
@@ -38,19 +50,26 @@ export const plexServerAccountsQuery = defineQuery({
   dependencies: (params) => [params.serverId],
   enabled: (params) => Boolean(params.serverId),
   request: plexServerAccountsRequest,
-  mapper: (response) => ({
-    accounts: response.body.accounts,
-    libraries: response.body.libraries.map((lib) => ({
-      id: lib.id,
-      uuid: lib.uuid,
-      type: lib.type,
-      title: lib.title,
-      agent: lib.agent,
-      scanner: lib.scanner,
-      isSelected: lib.selected,
-      url: lib.url,
-    })),
-  }),
+  mapper: (response) =>
+    'error' in response.body
+      ? {
+        errorCode: PlexErrorCodeSchema
+          .catch('unknown')
+          .parse(response.body.error.error_code),
+      }
+      : {
+        accounts: response.body.accounts,
+        libraries: response.body.libraries.map((lib) => ({
+          id: lib.id,
+          uuid: lib.uuid,
+          type: lib.type,
+          title: lib.title,
+          agent: lib.agent,
+          scanner: lib.scanner,
+          isSelected: lib.selected,
+          url: lib.url,
+        })),
+      },
   schema: PlexServerAccountsSchema,
   ttl: time.minutes(5),
 });

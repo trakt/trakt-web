@@ -8,7 +8,7 @@
   import SettingsSection from "./_internal/SettingsSection.svelte";
   import DataSyncRow from "./_internal/streaming-services/DataSyncRow.svelte";
   import SyncItemsSection from "./_internal/streaming-services/SyncItemsSection.svelte";
-  import SyncLoadError from "./_internal/streaming-services/SyncLoadError.svelte";
+  import SyncLoadError from "./_internal/SyncLoadError.svelte";
   import { toServiceInfo } from "./_internal/streaming-services/toServiceInfo.ts";
   import { useStreamingServiceLookup } from "./_internal/streaming-services/useStreamingServiceLookup.ts";
   import { useStreamingServicesActions } from "./_internal/streaming-services/useStreamingServicesActions.ts";
