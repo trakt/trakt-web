@@ -1,5 +1,6 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages";
   import SparkleIcon from "$lib/components/icons/SparkleIcon.svelte";
   import TrophyIcon from "$lib/components/icons/TrophyIcon.svelte";
@@ -47,77 +48,87 @@
 <div class="trakt-glance-strip">
   <span class="strip-surface">
     {#if release}
-      <Link href={links.details} color="inherit" label={m.button_label_details({ title })}>
-        <span class="glance-segment glance-release">{release}</span>
-      </Link>
+      <Tooltip content={m.button_label_details({ title })} variant="compact">
+        <Link href={links.details} color="inherit" label={m.button_label_details({ title })}>
+          <span class="glance-segment glance-release">{release}</span>
+        </Link>
+      </Tooltip>
     {/if}
 
     {#if provider}
-      <Link
-        href={links.whereToWatch}
-        color="inherit"
-        label={m.button_label_view_all_where_to_watch()}
-      >
-        <span class="glance-segment">
-          <span class="glance-provider-logo">
-            <StreamingServiceLogo
-              source={provider.source}
-              {country}
-              i18n={StreamingServiceLogoIntlProvider}
-            />
+      <Tooltip content={m.button_label_view_all_where_to_watch()} variant="compact">
+        <Link
+          href={links.whereToWatch}
+          color="inherit"
+          label={m.button_label_view_all_where_to_watch()}
+        >
+          <span class="glance-segment">
+            <span class="glance-provider-logo">
+              <StreamingServiceLogo
+                source={provider.source}
+                {country}
+                i18n={StreamingServiceLogoIntlProvider}
+              />
+            </span>
           </span>
-        </span>
-      </Link>
+        </Link>
+      </Tooltip>
     {/if}
 
     {#if social && social.count > 0}
       <RenderFor audience="authenticated">
-        <Link
-          href={links.social}
-          color="inherit"
-          label={m.button_label_view_all_social_activity()}
-        >
-          <span class="glance-segment">
-            <span class="glance-avatars">
-              {#each social.users as user (user.slug)}
-                <span class="glance-avatar">
-                  <UserAvatar {user} size="small" />
-                </span>
-              {/each}
+        <Tooltip content={m.button_label_view_all_social_activity()} variant="compact">
+          <Link
+            href={links.social}
+            color="inherit"
+            label={m.button_label_view_all_social_activity()}
+          >
+            <span class="glance-segment">
+              <span class="glance-avatars">
+                {#each social.users as user (user.slug)}
+                  <span class="glance-avatar">
+                    <UserAvatar {user} size="small" />
+                  </span>
+                {/each}
+              </span>
+              {social.count}
             </span>
-            {social.count}
-          </span>
-        </Link>
+          </Link>
+        </Tooltip>
       </RenderFor>
     {/if}
 
     {#if sentiment}
-      <Link
-        href={links.sentiment}
-        color="inherit"
-        label={m.button_label_view_sentiment_analysis()}
-      >
-        <span class="glance-segment">
-          <span class="glance-sentiment" data-verdict={sentiment.verdict}>
-            {sentiment.label}
+      <Tooltip content={m.button_label_view_sentiment_analysis()} variant="compact">
+        <Link
+          href={links.sentiment}
+          color="inherit"
+          label={m.button_label_view_sentiment_analysis()}
+        >
+          <span class="glance-segment">
+            <span class="glance-sentiment" data-verdict={sentiment.verdict}>
+              {sentiment.label}
+            </span>
           </span>
-        </span>
-      </Link>
+        </Link>
+      </Tooltip>
     {/if}
 
     {#if awardsCount > 0}
       <RenderForFeature flag={FeatureFlag.SummaryAwards} audience="director">
         {#snippet enabled()}
-          <Link
-            href={links.awards}
-            color="inherit"
-            label={m.button_label_view_awards({ title })}
-          >
-            <span class="glance-segment">
-              <span class="glance-icon"><TrophyIcon /></span>
-              {awardsCount}
-            </span>
-          </Link>
+          <Tooltip content={m.button_label_view_awards({ title })} variant="compact">
+            <Link
+              href={links.awards}
+              color="inherit"
+              label={m.button_label_view_awards({ title })}
+            >
+              <span class="glance-segment">
+                <span class="glance-icon"><TrophyIcon /></span>
+                {awardsCount}
+              </span>
+            </Link>
+          </Tooltip>
         {/snippet}
       </RenderForFeature>
     {/if}
@@ -125,38 +136,42 @@
     {#if reactions && reactions.total > 0}
       <RenderForFeature flag={FeatureFlag.Reactions} audience="director">
         {#snippet enabled()}
-          <Link
-            href={links.reactions}
-            color="inherit"
-            label={m.button_label_view_reactions({ title })}
-          >
-            <span class="glance-segment">
-              <span class="glance-glyphs">
-                {#each topReactionGlyphs as definition, index (definition.glyph)}
-                  <span
-                    class="glance-glyph"
-                    style:z-index={topReactionGlyphs.length - index}
-                    role="img"
-                    aria-label={definition.label()}
-                  >
-                    {definition.glyph}
-                  </span>
-                {/each}
+          <Tooltip content={m.button_label_view_reactions({ title })} variant="compact">
+            <Link
+              href={links.reactions}
+              color="inherit"
+              label={m.button_label_view_reactions({ title })}
+            >
+              <span class="glance-segment">
+                <span class="glance-glyphs">
+                  {#each topReactionGlyphs as definition, index (definition.glyph)}
+                    <span
+                      class="glance-glyph"
+                      style:z-index={topReactionGlyphs.length - index}
+                      role="img"
+                      aria-label={definition.label()}
+                    >
+                      {definition.glyph}
+                    </span>
+                  {/each}
+                </span>
+                {reactions.total}
               </span>
-              {reactions.total}
-            </span>
-          </Link>
+            </Link>
+          </Tooltip>
         {/snippet}
       </RenderForFeature>
     {/if}
 
     {#if triviaCount > 0}
-      <Link href={links.trivia} color="inherit" label={m.button_label_view_trivia()}>
-        <span class="glance-segment">
-          <span class="glance-icon glance-icon-trivia"><SparkleIcon /></span>
-          {m.text_glance_fact_count({ count: triviaCount })}
-        </span>
-      </Link>
+      <Tooltip content={m.button_label_view_trivia()} variant="compact">
+        <Link href={links.trivia} color="inherit" label={m.button_label_view_trivia()}>
+          <span class="glance-segment">
+            <span class="glance-icon glance-icon-trivia"><SparkleIcon /></span>
+            {m.text_glance_fact_count({ count: triviaCount })}
+          </span>
+        </Link>
+      </Tooltip>
     {/if}
   </span>
 </div>
@@ -193,6 +208,10 @@
       Kills Link's prose underline - nothing in here is running text, and the
       anchor's decoration painted under every segment, separators included.
     */
+    :global(.trakt-tooltip-trigger) {
+      display: inline-flex;
+    }
+
     :global(a) {
       text-decoration: none;
       display: inline-flex;
@@ -217,7 +236,9 @@
       between neighbouring links - a segment that does not render never strands
       one at an edge. It keeps the surface's colour, not the hovered anchor's.
     */
-    :global(a + a .glance-segment::before) {
+    :global(
+      .trakt-tooltip-trigger + .trakt-tooltip-trigger .glance-segment::before
+    ) {
       content: "";
       align-self: center;
       width: var(--ni-1);
