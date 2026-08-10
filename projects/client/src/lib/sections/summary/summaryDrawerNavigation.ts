@@ -47,6 +47,8 @@ function mapToDrawer(value: string | Nil) {
       return SummaryDrawers.Ratings;
     case SummaryDrawers.Rewatching:
       return SummaryDrawers.Rewatching;
+    case SummaryDrawers.Glance:
+      return SummaryDrawers.Glance;
     default:
       return null;
   }

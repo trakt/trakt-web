@@ -49,7 +49,7 @@
   const listsLink = $derived(UrlBuilder.popularLists.movie(media.slug));
 </script>
 
-<SummaryDrawer {sentiment} {studios} {crew} {media} {videos} type="movie" />
+<SummaryDrawer {streamOn} {sentiment} {studios} {crew} {media} {videos} type="movie" />
 
 <MediaSummaryHeader
   {media}

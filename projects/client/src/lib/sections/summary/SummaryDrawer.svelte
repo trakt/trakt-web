@@ -6,6 +6,7 @@
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
+  import type { StreamOn } from "$lib/requests/models/StreamOn";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import type { MediaSocialQueryTarget } from "$lib/requests/queries/media/mediaSocialQuery.ts";
   import RewatchingDrawerHost from "$lib/sections/media-actions/rewatching/RewatchingDrawerHost.svelte";
@@ -14,6 +15,7 @@
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import CastDrawerHost from "./components/cast/CastDrawerHost.svelte";
+  import GlanceDrawerHost from "./components/media/header/GlanceDrawerHost.svelte";
   import type { CommentsProps } from "./components/comments/CommentsProps";
   import CommentsDrawerHost from "./components/comments/drawers/CommentsDrawerHost.svelte";
   import ReviewDrawerHost from "./components/comments/drawers/ReviewDrawerHost.svelte";
@@ -35,12 +37,14 @@
     videos,
     seasons,
     currentSeason,
+    streamOn,
     ...details
   }: {
     sentiment?: SentimentAnalysis | null | undefined;
     videos?: MediaVideo[];
     seasons?: Season[];
     currentSeason?: number;
+    streamOn?: StreamOn;
   } & MediaDetailsProps = $props();
 
   const {
@@ -208,6 +212,18 @@
     commentId={sourceCommentId}
     elevated={drawer === SummaryDrawers.Episode}
     onClose={closeCommentDrawer}
+  />
+{/if}
+
+{#if drawer === SummaryDrawers.Glance && details.type !== "episode"}
+  <GlanceDrawerHost
+    entry={details.type === "show"
+      ? { type: "show", media: details.media }
+      : { type: "movie", media: details.media }}
+    crew={details.crew}
+    {sentiment}
+    {streamOn}
+    onClose={close}
   />
 {/if}
 
