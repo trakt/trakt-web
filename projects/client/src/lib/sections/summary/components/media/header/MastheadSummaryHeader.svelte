@@ -628,8 +628,11 @@
   .masthead-glance {
     width: 100%;
 
-    /* Snug under the score row - the two read as one "how it stands" block. */
-    margin-top: calc(-1 * var(--gap-xs));
+    /*
+      No pull-up: the score row sits centred between the action tray above and
+      this pill below when both gaps keep the column's full rhythm. The old
+      snug margin made the lower gap visibly shorter than the upper one.
+    */
 
     display: flex;
     justify-content: center;

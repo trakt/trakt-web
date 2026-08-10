@@ -353,24 +353,40 @@
 
   .rail-actions {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 
-    /* The rate row spans the rail rather than hugging its own content. */
+    /*
+      One line: the bar first, the stars, heart and react pill to its right.
+      The row hugs its content and is allowed to run past the rail's edge -
+      the space to the right of the bar is empty at this height, and using it
+      buys back two stacked rows.
+    */
     :global(.trakt-summary-actions) {
-      width: 100%;
+      width: max-content;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--gap-m);
     }
 
     .rate-and-react {
-      width: 100%;
       display: flex;
       align-items: center;
-      /* Stars and heart cluster at the start, the react pill holds the end. */
-      justify-content: space-between;
-      /* Wraps in the narrow rail rather than squeezing the stars. */
-      flex-wrap: wrap;
-      gap: var(--gap-xs) var(--gap-s);
+      gap: var(--gap-s) var(--gap-m);
     }
 
+    /*
+      Below tablet-sm the rail spans the page - there is no empty right to
+      borrow, so the cluster wraps back under the bar, centred.
+    */
+    @include for-tablet-sm-and-below {
+      justify-content: center;
+
+      :global(.trakt-summary-actions) {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
   }
 
 
