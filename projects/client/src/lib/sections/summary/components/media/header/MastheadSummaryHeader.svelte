@@ -173,6 +173,20 @@
     </div>
 
     <SummaryHeaderKicker {kicker} {status} variant="inline" />
+
+    <!--
+      The scores read as part of the kicker's classification line - what it is,
+      then how it stands - before the title takes over. Logos over
+      dot-and-label, matching the anchored direction.
+    -->
+    <div class="masthead-scores">
+      <RatingList
+        ratings={$ratings}
+        entry={media}
+        drilldown={ratingsLink}
+        isLoading={$isRatingsLoading}
+      />
+    </div>
     <SummaryHeaderTitle {title} />
 
     <div class="masthead-deck">
@@ -223,13 +237,6 @@
       </div>
     </RenderFor>
 
-    <!-- Logos over dot-and-label, matching the anchored direction. -->
-    <RatingList
-      ratings={$ratings}
-      entry={media}
-      drilldown={ratingsLink}
-      isLoading={$isRatingsLoading}
-    />
 
     <div class="masthead-strip">
       <div class="strip-column">
@@ -508,7 +515,12 @@
     */
     @supports (text-box-trim: trim-both) {
       :global(.trakt-summary-header-title),
-      .masthead-deck {
+      .masthead-scores {
+    /* Belongs to the kicker line above, not to the column's full beat. */
+    margin-top: calc(var(--gap-xs) - var(--masthead-rhythm));
+  }
+
+  .masthead-deck {
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
       }
@@ -522,6 +534,11 @@
   .masthead-poster {
     --summary-poster-width: var(--masthead-poster-width);
     --summary-poster-radius: var(--border-radius-m);
+  }
+
+  .masthead-scores {
+    /* Belongs to the kicker line above, not to the column's full beat. */
+    margin-top: calc(var(--gap-xs) - var(--masthead-rhythm));
   }
 
   .masthead-deck {
