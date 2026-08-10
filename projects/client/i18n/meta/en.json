@@ -10395,6 +10395,18 @@
       "default": "View reactions for {title}",
       "description": "Aria-label for the control that opens the reactions drawer."
     },
+    "header_nominations": {
+      "default": "Nominations",
+      "description": "Section label for award nominations that did not win."
+    },
+    "text_person_awards_count": {
+      "default": "{count} Awards",
+      "description": "Golden pill on the person page counting awards won."
+    },
+    "text_person_nominations_count": {
+      "default": "{count} Nominations",
+      "description": "Golden pill on the person page counting nominations, shown when there are no wins."
+    },
     "header_reactions": {
       "default": "Reactions",
       "description": "Section label for audience emoji reactions."
