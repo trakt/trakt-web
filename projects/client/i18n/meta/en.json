@@ -10529,6 +10529,10 @@
       "default": "Tap a section to drill down",
       "description": "Hint at the foot of the at-a-glance drawer explaining that sections open detailed views."
     },
+    "text_glance_fact_count": {
+      "default": "{count} facts",
+      "description": "Compact header token: how many trivia facts the drilldown holds."
+    },
     "button_label_view_reactions": {
       "default": "View reactions for {title}",
       "description": "Aria-label for the control that opens the reactions drawer."

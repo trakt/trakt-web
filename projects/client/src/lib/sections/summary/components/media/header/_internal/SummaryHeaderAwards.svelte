@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SparkleStarIcon from "$lib/components/icons/SparkleStarIcon.svelte";
+  import TrophyIcon from "$lib/components/icons/TrophyIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { MediaAward } from "../../../awards/MediaAward.ts";
 
@@ -18,7 +18,7 @@
   {#each awards as award (award.key)}
     <li data-outcome={award.isWinner ? "won" : "nominated"}>
       <span class="award-marker" aria-hidden="true">
-        <SparkleStarIcon />
+        <TrophyIcon />
       </span>
 
       <span class="award-body">
