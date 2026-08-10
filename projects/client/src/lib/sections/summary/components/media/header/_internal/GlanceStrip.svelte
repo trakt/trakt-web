@@ -2,7 +2,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
   import SparkleIcon from "$lib/components/icons/SparkleIcon.svelte";
-  import SparkleStarIcon from "$lib/components/icons/SparkleStarIcon.svelte";
+  import TrophyIcon from "$lib/components/icons/TrophyIcon.svelte";
   import StreamingServiceLogo from "$lib/components/media/streaming-service/StreamingServiceLogo.svelte";
   import { StreamingServiceLogoIntlProvider } from "$lib/components/media/streaming-service/StreamingServiceLogoIntlProvider";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
@@ -47,7 +47,7 @@
 <div class="trakt-glance-strip">
   <span class="strip-surface">
     {#if release}
-      <Link href={links.details} label={m.button_label_details({ title })}>
+      <Link href={links.details} color="inherit" label={m.button_label_details({ title })}>
         <span class="glance-segment glance-release">{release}</span>
       </Link>
     {/if}
@@ -55,6 +55,7 @@
     {#if provider}
       <Link
         href={links.whereToWatch}
+        color="inherit"
         label={m.button_label_view_all_where_to_watch()}
       >
         <span class="glance-segment">
@@ -73,6 +74,7 @@
       <RenderFor audience="authenticated">
         <Link
           href={links.social}
+          color="inherit"
           label={m.button_label_view_all_social_activity()}
         >
           <span class="glance-segment">
@@ -92,6 +94,7 @@
     {#if sentiment}
       <Link
         href={links.sentiment}
+        color="inherit"
         label={m.button_label_view_sentiment_analysis()}
       >
         <span class="glance-segment">
@@ -107,10 +110,11 @@
         {#snippet enabled()}
           <Link
             href={links.awards}
+            color="inherit"
             label={m.button_label_view_awards({ title })}
           >
             <span class="glance-segment">
-              <span class="glance-icon"><SparkleStarIcon /></span>
+              <span class="glance-icon"><TrophyIcon /></span>
               {awardsCount}
             </span>
           </Link>
@@ -123,6 +127,7 @@
         {#snippet enabled()}
           <Link
             href={links.reactions}
+            color="inherit"
             label={m.button_label_view_reactions({ title })}
           >
             <span class="glance-segment">
@@ -146,10 +151,10 @@
     {/if}
 
     {#if triviaCount > 0}
-      <Link href={links.trivia} label={m.button_label_view_trivia()}>
+      <Link href={links.trivia} color="inherit" label={m.button_label_view_trivia()}>
         <span class="glance-segment">
           <span class="glance-icon glance-icon-trivia"><SparkleIcon /></span>
-          {triviaCount}
+          {m.text_glance_fact_count({ count: triviaCount })}
         </span>
       </Link>
     {/if}
@@ -161,37 +166,6 @@
 
   .trakt-glance-strip {
     display: block;
-
-    /*
-      Kills Link's prose underline for the whole strip - nothing in here is
-      running text, and the anchor's decoration painted under every segment,
-      separator bars included.
-    */
-    :global(a) {
-      text-decoration: none;
-      display: inline-flex;
-    }
-
-    /*
-      The separator is the header's thin vertical bar, owned by the boundary
-      between neighbouring links - a segment that does not render never strands
-      one at an edge.
-    */
-    :global(a + a .glance-segment::before) {
-      content: "";
-      align-self: center;
-      width: var(--ni-1);
-      height: var(--ni-14);
-      background: var(--color-hairline);
-
-      margin-inline-end: var(--gap-s);
-    }
-
-    /* Each token lifts alone - they are separate destinations. */
-    :global(a:hover .glance-segment),
-    :global(a:focus-visible .glance-segment) {
-      color: var(--color-text-primary);
-    }
   }
 
   .strip-surface {
@@ -214,6 +188,44 @@
 
     font-size: var(--font-size-text);
     color: var(--color-text-secondary);
+
+    /*
+      Kills Link's prose underline - nothing in here is running text, and the
+      anchor's decoration painted under every segment, separators included.
+    */
+    :global(a) {
+      text-decoration: none;
+      display: inline-flex;
+      color: inherit;
+      transition: color var(--transition-increment) ease-in-out;
+    }
+
+    /*
+      The hover lives on the ANCHOR, not the segment: Link pins every inner
+      span to `color: inherit` at higher specificity than a scoped class, so
+      the only reliable way to recolour a token is to recolour its anchor and
+      let that rule do the delivering. Each token lifts alone - they are
+      separate destinations.
+    */
+    :global(a:hover),
+    :global(a:focus-visible) {
+      color: var(--color-text-primary);
+    }
+
+    /*
+      The separator is the header's thin vertical bar, owned by the boundary
+      between neighbouring links - a segment that does not render never strands
+      one at an edge. It keeps the surface's colour, not the hovered anchor's.
+    */
+    :global(a + a .glance-segment::before) {
+      content: "";
+      align-self: center;
+      width: var(--ni-1);
+      height: var(--ni-14);
+      background: var(--color-hairline);
+
+      margin-inline-end: var(--gap-s);
+    }
   }
 
   .glance-segment {
@@ -262,8 +274,11 @@
     }
   }
 
-  /* The sentiment section's own verdict pill, unchanged - one system. */
-  .glance-sentiment {
+  /*
+    The sentiment section's own verdict pill, unchanged - one system. Nested
+    under the segment so the colour outranks Link's inner-span inherit rule.
+  */
+  .glance-segment .glance-sentiment {
     font-size: var(--font-size-tag);
     font-weight: 700;
     letter-spacing: 0.13em;
@@ -298,8 +313,8 @@
     }
   }
 
-  /* Trivia's mark is the purple sparkle - the count says the rest. */
-  .glance-icon-trivia {
+  /* Trivia's mark is the purple sparkle. Nested to outrank the inherit rule. */
+  .glance-segment .glance-icon-trivia {
     color: var(--purple-300);
   }
 
