@@ -104,7 +104,15 @@
 
 <article class="trakt-anchored-summary-header">
   <div class="header-rail">
-    <SummaryPoster src={media.poster.url.medium} alt={title} {tags} />
+    <!--
+      The poster's sizing tokens live on this wrapper, not on the rail. On the rail
+      they reached the action bar too, which sizes itself from --summary-poster-width
+      below tablet-sm - so the bar inherited `100%` and grew as the window shrank
+      while hugging its content on desktop. Backwards, and invisible on desktop.
+    -->
+    <div class="rail-poster">
+      <SummaryPoster src={media.poster.url.medium} alt={title} {tags} />
+    </div>
 
     <!--
       The live summary page's own composition: SummaryActions stacks the action bar
@@ -316,17 +324,28 @@
     flex-direction: column;
     gap: var(--ni-14);
 
-    /* Fills the rail column and takes the design's tighter poster radius. */
-    --summary-poster-width: 100%;
-    --summary-poster-radius: var(--border-radius-m);
-
     /*
       Once the grid is a single column the rail would stretch to the full width and
       the poster would tower over everything, so it is capped and centred instead.
     */
     @include for-tablet-sm-and-below {
-      width: min(100%, var(--ni-200));
+      /*
+        The rail keeps the full width and centres its contents; only the poster is
+        capped. Capping the rail itself squeezed the action bar with it.
+      */
+      width: 100%;
       align-items: center;
+    }
+  }
+
+  .rail-poster {
+    /* Fills the rail column and takes the design's tighter poster radius. */
+    --summary-poster-width: 100%;
+    --summary-poster-radius: var(--border-radius-m);
+
+    /* Once the grid is one column, the poster would otherwise tower over everything. */
+    @include for-tablet-sm-and-below {
+      width: min(100%, var(--ni-200));
     }
   }
 
