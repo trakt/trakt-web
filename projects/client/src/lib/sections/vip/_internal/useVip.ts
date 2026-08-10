@@ -67,8 +67,9 @@ export function useVip() {
 
       isFetching.next(true);
       try {
-        await cancelSubscriptionQuery();
+        const isCancelled = await cancelSubscriptionQuery();
         await invalidate(InvalidateAction.Vip.Canceled);
+        return isCancelled;
       } finally {
         isFetching.next(false);
       }

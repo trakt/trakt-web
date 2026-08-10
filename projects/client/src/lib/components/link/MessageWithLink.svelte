@@ -13,4 +13,8 @@
   );
 </script>
 
-{beforeText}<Link {href} {target} {color}>{linkText}</Link>{afterText}
+{#if linkText}
+  {beforeText}<Link {href} {target} {color}>{linkText}</Link>{afterText}
+{:else}
+  {message}
+{/if}

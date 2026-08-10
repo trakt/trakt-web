@@ -79,10 +79,6 @@
     padding: var(--ni-24);
     box-sizing: border-box;
 
-    :global(.trakt-link) {
-      text-decoration: none;
-    }
-
     transition: var(--transition-increment) ease-in-out;
     transition-property: padding;
 

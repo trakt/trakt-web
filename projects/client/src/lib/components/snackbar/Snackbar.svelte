@@ -1,6 +1,7 @@
 <script lang="ts">
   import AutoCloseButton from "$lib/components/buttons/AutoCloseButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
+  import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
   import { onMount } from "svelte";
   import { fly } from "svelte/transition";
@@ -16,6 +17,7 @@
     onDismiss: () => void;
     title?: string;
     message: string;
+    href?: string;
     action?: SnackbarAction;
     variant?: "default" | "error";
     dismissDurationMs?: number;
@@ -26,6 +28,7 @@
     onDismiss,
     title,
     message,
+    href,
     action,
     variant = "default",
     dismissDurationMs,
@@ -98,7 +101,13 @@
     {/if}
 
     <div class="snackbar-content">
-      <p class="snackbar-message">{message}</p>
+      <p class="snackbar-message">
+        {#if href}
+          <MessageWithLink {message} {href} target="_blank" />
+        {:else}
+          {message}
+        {/if}
+      </p>
       {@render actionButton()}
       <AutoCloseButton
         onclick={onDismiss}

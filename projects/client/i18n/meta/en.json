@@ -7595,6 +7595,14 @@
       "default": "Manage Subscription",
       "description": "Aria-label for the button that allows users to manage their VIP subscription."
     },
+    "text_vip_subscription_missing_title": {
+      "default": "No active subscription",
+      "description": "Title of the snackbar shown when a VIP subscription can no longer be managed or cancelled because the payment provider has no active subscription for the account."
+    },
+    "text_vip_subscription_missing_message": {
+      "default": "We couldn't find an active subscription to manage. It may have already been cancelled. <a>Contact support</a> if you think something's wrong.",
+      "description": "Message of the snackbar shown when a VIP subscription can no longer be managed or cancelled because the payment provider has no active subscription for the account. The text wrapped in <a></a> becomes a link to support and must be kept."
+    },
     "button_text_history": {
       "default": "History",
       "description": "Short text for a button that reveals the VIP payment history. This should be as short as possible."
