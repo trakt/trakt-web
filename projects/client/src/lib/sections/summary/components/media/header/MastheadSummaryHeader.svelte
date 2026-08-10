@@ -394,6 +394,7 @@
           trivia: triviaLink.href,
         }}
         {title}
+        labeled={stripVariant === "labeled"}
         release={glanceRelease}
         provider={glanceProvider}
         country={$country}

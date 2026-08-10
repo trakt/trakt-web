@@ -1,14 +1,19 @@
 /**
  * Which form the masthead's data strip takes.
  *
- * `glance` is the default: one compact pill referencing every section, opening
- * the at-a-glance drawer. `columns` is the five-column strip it replaced - the
- * full sections spread across the card - kept reachable so the two directions
- * can be compared on the spot rather than by switching branches.
+ * `glance` is the default: one compact pill referencing every section, each
+ * token drilling into its own drawer. `labeled` is the same pill with each
+ * token naming itself underneath. `columns` is the five-column strip they
+ * replaced - kept reachable so the directions can be compared on the spot
+ * rather than by switching branches.
  */
-export type HeaderStripVariant = 'glance' | 'columns';
+export type HeaderStripVariant = 'glance' | 'labeled' | 'columns';
 
-const VARIANTS: ReadonlyArray<HeaderStripVariant> = ['glance', 'columns'];
+const VARIANTS: ReadonlyArray<HeaderStripVariant> = [
+  'glance',
+  'labeled',
+  'columns',
+];
 
 const DEFAULT_VARIANT: HeaderStripVariant = 'glance';
 
