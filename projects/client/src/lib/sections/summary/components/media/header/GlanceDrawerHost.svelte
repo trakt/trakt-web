@@ -194,6 +194,16 @@
     display: flex;
     flex-direction: column;
     gap: var(--ni-24);
+
+    /*
+      Link underlines every anchor by default - right for prose, wrong for a
+      panel of rows and chevrons where everything is a link and the underlines
+      read as noise. The section components are shared with the header, so the
+      kill lives on this container rather than inside each of them.
+    */
+    :global(a) {
+      text-decoration: none;
+    }
   }
 
   .glance-section {
