@@ -2,6 +2,7 @@ import { http, HttpResponse } from 'msw';
 
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { OfficialListsResponseMock } from '$mocks/data/lists/response/OfficialListsResponseMock.ts';
+import { UserShowListIdsResponseMock } from '$mocks/data/lists/response/UserShowListIdsResponseMock.ts';
 import { EpisodeSiloCommentsResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloCommentsResponseMock.ts';
 import { EpisodeSiloPeopleResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloPeopleResponseMock.ts';
 import { EpisodeSiloWatchNowResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloWatchNowResponseMock.ts';
@@ -295,6 +296,12 @@ export const shows = [
         ...ShowSiloVideoSeason1ResponseMock,
         ...ShowSiloVideoSeason2ResponseMock,
       ]);
+    },
+  ),
+  http.get(
+    `http://localhost/v3/shows/${ShowSiloResponseMock.ids.slug}/me/lists`,
+    () => {
+      return HttpResponse.json(UserShowListIdsResponseMock);
     },
   ),
 ];
