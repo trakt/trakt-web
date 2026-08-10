@@ -18,6 +18,7 @@
     | "instagram"
     | "wikipedia"
     | "imdb-media"
+    | "imdb-person"
     | "homepage";
 
   type ExternalLinkActionProps = {
@@ -42,6 +43,8 @@
         return UrlBuilder.external.wikipedia(id);
       case "imdb-media":
         return UrlBuilder.external.imdb.media(id);
+      case "imdb-person":
+        return UrlBuilder.external.imdb.person(id);
       case "tmdb-media":
         return UrlBuilder.external.tmdb.media(
           id,
@@ -79,7 +82,7 @@
     <WikipediaIcon />
   {/if}
 
-  {#if type === "imdb-media"}
+  {#if type === "imdb-media" || type === "imdb-person"}
     <IMDBSquareIcon />
   {/if}
 
