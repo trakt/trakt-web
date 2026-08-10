@@ -464,10 +464,15 @@
 
   .masthead-glance {
     width: 100%;
-    margin-top: var(--gap-xs);
-    padding-top: var(--ni-24);
 
-    border-top: var(--ni-1) solid var(--color-hairline);
+    /*
+      Snug under the score row - the two read as one "how it stands" block. The
+      hairline closes the card BELOW the pill instead of separating it from the
+      scores above.
+    */
+    margin-top: calc(-1 * var(--gap-xs));
+    padding-bottom: var(--ni-24);
+    border-bottom: var(--ni-1) solid var(--color-hairline);
 
     display: flex;
     justify-content: center;

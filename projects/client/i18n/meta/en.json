@@ -10387,6 +10387,10 @@
       "default": "Tap a section to drill down",
       "description": "Hint at the foot of the at-a-glance drawer explaining that sections open detailed views."
     },
+    "text_glance_trivia_count": {
+      "default": "{count} trivia facts",
+      "description": "Compact header token stating how many trivia facts the drilldown holds."
+    },
     "header_reactions": {
       "default": "Reactions",
       "description": "Section label for audience emoji reactions."

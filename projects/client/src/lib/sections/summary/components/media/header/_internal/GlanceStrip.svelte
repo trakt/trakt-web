@@ -1,10 +1,9 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
-  import SparkleIcon from "$lib/components/icons/SparkleIcon.svelte";
+  import * as m from "$lib/features/i18n/messages";
   import SparkleStarIcon from "$lib/components/icons/SparkleStarIcon.svelte";
   import StreamingServiceLogo from "$lib/components/media/streaming-service/StreamingServiceLogo.svelte";
   import { StreamingServiceLogoIntlProvider } from "$lib/components/media/streaming-service/StreamingServiceLogoIntlProvider";
-  import { useStreamingServiceLogo } from "$lib/components/media/streaming-service/useStreamingServiceLogo";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { reactionSentimentDefinitions } from "$lib/features/media-reactions/reactionSentimentDefinitions.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -37,12 +36,6 @@
     triviaCount,
   }: GlanceStripProps = $props();
 
-  const providerLogo = $derived(
-    provider
-      ? useStreamingServiceLogo({ source: provider.source, country })
-      : null,
-  );
-
   const topReactionGlyphs = $derived(
     (reactions?.top ?? []).map(
       (sentimentKey) => reactionSentimentDefinitions[sentimentKey],
@@ -65,11 +58,6 @@
             i18n={StreamingServiceLogoIntlProvider}
           />
         </span>
-        {#if providerLogo}
-          <span class="glance-provider-name">
-            {$providerLogo?.name ?? provider.source}
-          </span>
-        {/if}
       </span>
     {/if}
 
@@ -132,8 +120,7 @@
 
     {#if triviaCount > 0}
       <span class="glance-segment">
-        <span class="glance-icon glance-icon-trivia"><SparkleIcon /></span>
-        {triviaCount}
+        {m.text_glance_trivia_count({ count: triviaCount })}
       </span>
     {/if}
   </span>
@@ -142,7 +129,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  :global(a:has(> .trakt-glance-strip)) {
+  :global(a:has(.trakt-glance-strip)) {
     text-decoration: none;
     border-radius: var(--border-radius-xl);
   }
@@ -243,19 +230,29 @@
     }
   }
 
+  /* The sentiment section's own verdict pill, unchanged - one system. */
   .glance-sentiment {
-    font-weight: 600;
+    font-size: var(--font-size-tag);
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+
+    padding: var(--ni-4) var(--ni-10);
+    border-radius: 999px;
+
+    color: var(--sentiment-color);
+    background: color-mix(in srgb, var(--sentiment-color) 16%, transparent);
 
     &[data-verdict="positive"] {
-      color: var(--green-400);
+      --sentiment-color: var(--green-400);
     }
 
     &[data-verdict="mixed"] {
-      color: var(--yellow-400);
+      --sentiment-color: var(--yellow-400);
     }
 
     &[data-verdict="negative"] {
-      color: var(--red-400);
+      --sentiment-color: var(--red-400);
     }
   }
 
