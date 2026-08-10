@@ -91,7 +91,13 @@
     }
 
     @include for-tablet-sm-and-below {
-      width: var(--summary-poster-width);
+      /*
+        The configured width must keep winning here. Without it, a caller that
+        configures the tray (e.g. fit-content) got the poster width only below
+        tablet-sm - wider than its desktop size, so the tray grew as the window
+        shrank. Unconfigured callers keep matching the poster, as shipped.
+      */
+      width: var(--summary-actions-bar-width, var(--summary-poster-width));
       &:global(:has(.trakt-media-actions-popup-button.is-opened)) {
         border-radius: var(--border-radius-l);
       }
