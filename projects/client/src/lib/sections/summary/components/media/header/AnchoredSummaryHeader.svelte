@@ -129,7 +129,23 @@
           <MediaActions {media} {title} />
 
           {#snippet contextualActions()}
-            <RateNow type={target.type} {media} />
+            <!--
+              Reactions share the line with the stars and the heart: rating, faving
+              and reacting are the same gesture - a one-tap response to the title -
+              so they read as one row of responses rather than as separate features.
+            -->
+            <div class="rate-and-react">
+              <RateNow type={target.type} {media} />
+
+              <RenderForFeature
+                flag={FeatureFlag.Reactions}
+                audience="director"
+              >
+                {#snippet enabled()}
+                  <MediaReactions type={target.type} slug={media.slug} {title} />
+                {/snippet}
+              </RenderForFeature>
+            </div>
           {/snippet}
         </SummaryActions>
       </div>
@@ -177,20 +193,6 @@
         <SummaryOverview {title} {overview} />
       </Spoiler>
     </div>
-
-    <!--
-      Reactions live in the main column, not the info rail: the rail is read-only
-      reference material, and this is something to act on. It also sits below the
-      synopsis so it reads as a response to the title rather than as another fact
-      about it.
-    -->
-    <RenderForFeature flag={FeatureFlag.Reactions} audience="director">
-      {#snippet enabled()}
-        <div class="header-reactions">
-          <MediaReactions type={target.type} slug={media.slug} {title} />
-        </div>
-      {/snippet}
-    </RenderForFeature>
 
   </div>
 
@@ -358,9 +360,15 @@
       width: 100%;
     }
 
-    :global(.trakt-rate-now) {
+    .rate-and-react {
       width: 100%;
+      display: flex;
+      align-items: center;
+      /* Stars and heart cluster at the start, the react pill holds the end. */
       justify-content: space-between;
+      /* Wraps in the narrow rail rather than squeezing the stars. */
+      flex-wrap: wrap;
+      gap: var(--gap-xs) var(--gap-s);
     }
 
   }
@@ -490,15 +498,6 @@
 
       width: 100%;
     }
-  }
-
-  /*
-    Unboxed, matching the masthead's strip: a label row, then the content. The
-    framed panels read as two hard cards competing with the poster, which is what
-    made the rail feel heavier than everything around it.
-  */
-  .header-reactions {
-    display: flex;
   }
 
   .rail-section {
