@@ -201,7 +201,23 @@
           <MediaActions {media} {title} />
 
           {#snippet contextualActions()}
-            <RateNow type={target.type} {media} style="minimal" />
+            <!--
+              Reactions share the line with the stars and the heart: rating, faving
+              and reacting are the same gesture - a one-tap response to the title -
+              so they read as one row of responses rather than as separate features.
+            -->
+            <div class="rate-and-react">
+              <RateNow type={target.type} {media} style="minimal" />
+
+              <RenderForFeature
+                flag={FeatureFlag.Reactions}
+                audience="director"
+              >
+                {#snippet enabled()}
+                  <MediaReactions type={target.type} slug={media.slug} {title} />
+                {/snippet}
+              </RenderForFeature>
+            </div>
           {/snippet}
         </SummaryActions>
       </div>
@@ -304,20 +320,6 @@
         {/snippet}
       </RenderForFeature>
     </div>
-
-    <!--
-      Reactions close the card rather than joining the strip: the strip is a set of
-      read-only data columns, and this is the one interactive thing among them. It
-      also needs the full width to lay its chips out, which a strip column cannot
-      give it.
-    -->
-    <RenderForFeature flag={FeatureFlag.Reactions} audience="director">
-      {#snippet enabled()}
-        <div class="masthead-reactions">
-          <MediaReactions type={target.type} slug={media.slug} {title} />
-        </div>
-      {/snippet}
-    </RenderForFeature>
 
   </div>
 </article>
@@ -722,17 +724,14 @@
       gap: var(--gap-m);
     }
 
-  }
-
-  .masthead-reactions {
-    width: 100%;
-    margin-top: var(--masthead-rhythm);
-    padding-top: var(--ni-24);
-
-    border-top: var(--ni-1) solid var(--color-hairline);
-
-    display: flex;
-    justify-content: center;
+    .rate-and-react {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Wraps on narrow widths - the pill drops under the stars, still centred. */
+      flex-wrap: wrap;
+      gap: var(--gap-s) var(--gap-m);
+    }
   }
 
 
