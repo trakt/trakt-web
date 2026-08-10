@@ -12,7 +12,6 @@
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import SocialActivitiesButton from "../../_internal/SocialActivitiesButton.svelte";
-  import SummaryActionsBar from "../../_internal/SummaryActionsBar.svelte";
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import { useIsStarted } from "../../_internal/useIsStarted";
   import RateNow from "../../rating/RateNow.svelte";
@@ -108,9 +107,13 @@
 
     <RenderFor audience="authenticated">
       <div class="rail-actions">
-        <SummaryActionsBar>
-          <MediaActions {media} {title} />
-        </SummaryActionsBar>
+        <!--
+          MediaActions renders the action bar itself, popup and all. It used to be
+          wrapped in a second SummaryActionsBar here, which stacked two pill
+          surfaces - two backgrounds, two shadows - and left the visible one at its
+          default fixed width while the tokens below configured the wrapper instead.
+        -->
+        <MediaActions {media} {title} />
       </div>
 
       <div class="rail-rate">
