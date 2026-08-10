@@ -1,4 +1,5 @@
-import { BehaviorSubject, type Observable } from 'rxjs';
+import { multicast } from '$lib/utils/store/multicast.ts';
+import { type Observable, scan, startWith } from 'rxjs';
 
 export function useStableArray<T>(
   compareFn: (left: T, right: T) => boolean,
@@ -32,20 +33,11 @@ export function useStableArray<T>(
     return updatedList;
   };
 
-  const list = new BehaviorSubject<T[]>([]);
-  let previous: Array<T> = [];
-
-  source.subscribe({
-    next: (update) => {
-      const updated = updateList(previous, update);
-      previous = updated;
-      list.next(updated);
-    },
-    error: (err) => list.error(err),
-    complete: () => list.complete(),
-  });
-
   return {
-    list: list.asObservable(),
+    list: source.pipe(
+      scan(updateList, [] as Array<T>),
+      startWith([] as Array<T>),
+      multicast(),
+    ),
   };
 }
