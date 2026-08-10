@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} cada mes després",
   "text_vip_recurring_yearly": "{price} cada any després",
   "text_vip_subscription": "subscripció",
+  "text_vip_subscription_missing_message": "No hem pogut trobar cap subscripció activa per gestionar. Pot ser que ja s'hagi cancel·lat. <a>Contacta amb el servei d'assistència</a> si creus que hi ha algun problema.",
+  "text_vip_subscription_missing_title": "Sense subscripció activa",
   "text_vip_track_more": "Fes més seguiment, crea més llistes, valora més.",
   "text_vip_transaction_cancelled": "S'ha cancel·lat una subscripció amb <b>{method}</b>",
   "text_vip_transaction_charged": "S'han carregat <b>{amount}</b> mitjançant <b>{method}</b> per a <b>{term}</b>",

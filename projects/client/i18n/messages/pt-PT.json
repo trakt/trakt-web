@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} por mês a partir daí",
   "text_vip_recurring_yearly": "{price} por ano a partir daí",
   "text_vip_subscription": "subscrição",
+  "text_vip_subscription_missing_message": "Não conseguimos encontrar uma subscrição ativa para gerir. Pode já ter sido cancelada. <a>Contactar o suporte</a> se achar que algo está errado.",
+  "text_vip_subscription_missing_title": "Nenhuma subscrição ativa",
   "text_vip_track_more": "Regista mais, cria mais listas, classifica mais.",
   "text_vip_transaction_cancelled": "Cancelaste uma subscrição através de <b>{method}</b>",
   "text_vip_transaction_charged": "Foi-te cobrado <b>{amount}</b> através de <b>{method}</b> por <b>{term}</b>",

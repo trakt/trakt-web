@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} varje månad därefter",
   "text_vip_recurring_yearly": "{price} varje år därefter",
   "text_vip_subscription": "prenumeration",
+  "text_vip_subscription_missing_message": "Vi kunde inte hitta en aktiv prenumeration att hantera. Den kan redan ha sagts upp. <a>Kontakta supporten</a> om du tror att något är fel.",
+  "text_vip_subscription_missing_title": "Ingen aktiv prenumeration",
   "text_vip_track_more": "Spåra mer, lista mer, betygsätt mer.",
   "text_vip_transaction_cancelled": "Avbröt en <b>{method}</b> prenumeration",
   "text_vip_transaction_charged": "Debiterades <b>{amount}</b> via <b>{method}</b> för <b>{term}</b>",

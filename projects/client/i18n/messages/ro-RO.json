@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} în fiecare lună după aceea",
   "text_vip_recurring_yearly": "{price} în fiecare an după aceea",
   "text_vip_subscription": "abonament",
+  "text_vip_subscription_missing_message": "Nu am putut găsi un abonament activ de gestionat. Este posibil să fi fost deja anulat. <a>Contactează asistența</a> dacă crezi că ceva nu este în regulă.",
+  "text_vip_subscription_missing_title": "Abonament inactiv",
   "text_vip_track_more": "Urmărește mai mult, listează mai mult, evaluează mai mult.",
   "text_vip_transaction_cancelled": "S-a anulat un abonament prin <b>{method}</b>",
   "text_vip_transaction_charged": "Ai fost taxat cu <b>{amount}</b> prin <b>{method}</b> pentru <b>{term}</b>",

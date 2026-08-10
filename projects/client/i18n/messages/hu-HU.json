@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} minden hónapban utána",
   "text_vip_recurring_yearly": "{price} minden évben utána",
   "text_vip_subscription": "előfizetés",
+  "text_vip_subscription_missing_message": "Nem találtunk aktív előfizetést, amit kezelhetnénk. Lehet, hogy már lemondásra került. <a>Kapcsolatfelvétel az ügyfélszolgálattal</a>, ha úgy gondolja, valami probléma van.",
+  "text_vip_subscription_missing_title": "Nincs aktív előfizetés",
   "text_vip_track_more": "Több nyomon követése, több lista, több értékelés.",
   "text_vip_transaction_cancelled": "Egy <b>{method}</b> előfizetés lemondva",
   "text_vip_transaction_charged": "Terhelve <b>{amount}</b> <b>{method}</b> segítségével <b>{term}</b> időszakra",

@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} ogni mese successivo",
   "text_vip_recurring_yearly": "{price} ogni anno successivo",
   "text_vip_subscription": "abbonamento",
+  "text_vip_subscription_missing_message": "Non siamo riusciti a trovare un abbonamento attivo da gestire. Potrebbe essere già stato annullato. <a>Contatta l'assistenza</a> se pensi che ci sia qualcosa che non va.",
+  "text_vip_subscription_missing_title": "Nessun abbonamento attivo",
   "text_vip_track_more": "Traccia di più, crea più liste, valuta di più.",
   "text_vip_transaction_cancelled": "Annullata una sottoscrizione <b>{method}</b>",
   "text_vip_transaction_charged": "Addebitato <b>{amount}</b> tramite <b>{method}</b> per <b>{term}</b>",

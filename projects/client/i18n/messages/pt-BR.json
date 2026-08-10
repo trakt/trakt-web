@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} a cada mês a partir daí",
   "text_vip_recurring_yearly": "{price} a cada ano a partir daí",
   "text_vip_subscription": "assinatura",
+  "text_vip_subscription_missing_message": "Não conseguimos encontrar uma assinatura ativa para gerenciar. Ela pode já ter sido cancelada. <a>Entre em contato com o suporte</a> se você acha que há algo errado.",
+  "text_vip_subscription_missing_title": "Nenhuma assinatura ativa",
   "text_vip_track_more": "Rastreie mais, liste mais, avalie mais.",
   "text_vip_transaction_cancelled": "Assinatura <b>{method}</b> cancelada",
   "text_vip_transaction_charged": "Cobrado <b>{amount}</b> via <b>{method}</b> por <b>{term}</b>",

@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} elke maand daarna",
   "text_vip_recurring_yearly": "{price} elk jaar daarna",
   "text_vip_subscription": "abonnement",
+  "text_vip_subscription_missing_message": "We konden geen actief abonnement vinden om te beheren. Het is mogelijk al opgezegd. <a>Neem contact op met de ondersteuning</a> als u denkt dat er iets mis is.",
+  "text_vip_subscription_missing_title": "Geen actief abonnement",
   "text_vip_track_more": "Meer bijhouden, meer lijsten, meer beoordelen.",
   "text_vip_transaction_cancelled": "Een <b>{method}</b>-abonnement geannuleerd",
   "text_vip_transaction_charged": "<b>{amount}</b> afgeschreven via <b>{method}</b> voor <b>{term}</b>",

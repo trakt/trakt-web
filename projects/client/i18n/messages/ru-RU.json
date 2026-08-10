@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} каждый месяц после этого",
   "text_vip_recurring_yearly": "{price} каждый год после этого",
   "text_vip_subscription": "подписка",
+  "text_vip_subscription_missing_message": "Нам не удалось найти активную подписку для управления. Возможно, она уже была отменена. <a>Свяжитесь со службой поддержки</a>, если считаете, что что-то не так.",
+  "text_vip_subscription_missing_title": "Нет активной подписки",
   "text_vip_track_more": "Отслеживайте больше, составляйте больше списков, оценивайте больше.",
   "text_vip_transaction_cancelled": "Отменена подписка <b>{method}</b>",
   "text_vip_transaction_charged": "Списано <b>{amount}</b> через <b>{method}</b> за <b>{term}</b>",

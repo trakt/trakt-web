@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "その後は毎月{price}",
   "text_vip_recurring_yearly": "その後は毎年{price}",
   "text_vip_subscription": "サブスクリプション",
+  "text_vip_subscription_missing_message": "管理できる有効なサブスクリプションが見つかりませんでした。すでにキャンセルされている可能性があります。問題があると思われる場合は<a>サポートにお問い合わせください</a>。",
+  "text_vip_subscription_missing_title": "有効なサブスクリプションがありません",
   "text_vip_track_more": "もっと追跡し、もっとリストに入れ、もっと評価しましょう。",
   "text_vip_transaction_cancelled": "<b>{method}</b>サブスクリプションがキャンセルされました",
   "text_vip_transaction_charged": "<b>{term}</b>の料金として、<b>{method}</b>経由で<b>{amount}</b>が請求されました",

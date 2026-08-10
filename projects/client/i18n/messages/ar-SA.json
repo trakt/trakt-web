@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} كل شهر بعد ذلك",
   "text_vip_recurring_yearly": "{price} كل سنة بعد ذلك",
   "text_vip_subscription": "الاشتراك",
+  "text_vip_subscription_missing_message": "لم نتمكن من العثور على اشتراك نشط لإدارته. قد يكون قد تم إلغاؤه بالفعل. <a>اتصل بالدعم</a> إذا كنت تعتقد أن هناك خطأ ما.",
+  "text_vip_subscription_missing_title": "لا يوجد اشتراك نشط",
   "text_vip_track_more": "تتبع المزيد، أدرج المزيد، قيم أكثر.",
   "text_vip_transaction_cancelled": "تم إلغاء اشتراك <b>{method}</b>",
   "text_vip_transaction_charged": "تم خصم <b>{amount}</b> عبر <b>{method}</b> لمدة <b>{term}</b>",

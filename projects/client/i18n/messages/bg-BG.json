@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} всеки месец след това",
   "text_vip_recurring_yearly": "{price} всяка година след това",
   "text_vip_subscription": "абонамент",
+  "text_vip_subscription_missing_message": "Не успяхме да намерим активен абонамент за управление. Може вече да е бил анулиран. <a>Свържете се с поддръжката</a>, ако смятате, че нещо не е наред.",
+  "text_vip_subscription_missing_title": "Няма активен абонамент",
   "text_vip_track_more": "Проследявайте повече, създавайте повече списъци, оценявайте повече.",
   "text_vip_transaction_cancelled": "Отменен <b>{method}</b> абонамент",
   "text_vip_transaction_charged": "Начислена сума <b>{amount}</b> чрез <b>{method}</b> за <b>{term}</b>",

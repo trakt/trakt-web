@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} κάθε μήνα μετά από αυτό",
   "text_vip_recurring_yearly": "{price} κάθε χρόνο μετά από αυτό",
   "text_vip_subscription": "συνδρομή",
+  "text_vip_subscription_missing_message": "Δεν μπορέσαμε να βρούμε ενεργή συνδρομή για διαχείριση. Ίσως έχει ήδη ακυρωθεί. <a>Επικοινωνήστε με την υποστήριξη</a> αν πιστεύετε ότι κάτι δεν πάει καλά.",
+  "text_vip_subscription_missing_title": "Καμία ενεργή συνδρομή",
   "text_vip_track_more": "Παρακολουθήστε περισσότερα, καταχωρίστε περισσότερα, βαθμολογήστε περισσότερα.",
   "text_vip_transaction_cancelled": "Ακυρώθηκε μια συνδρομή <b>{method}</b>",
   "text_vip_transaction_charged": "Χρεώθηκε <b>{amount}</b> μέσω <b>{method}</b> για <b>{term}</b>",

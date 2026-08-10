@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} cada mes después",
   "text_vip_recurring_yearly": "{price} cada año después",
   "text_vip_subscription": "suscripción",
+  "text_vip_subscription_missing_message": "No pudimos encontrar una suscripción activa para administrar. Puede que ya haya sido cancelada. <a>Contactar a soporte</a> si crees que algo anda mal.",
+  "text_vip_subscription_missing_title": "No hay suscripción activa",
   "text_vip_track_more": "Rastrea más, lista más, califica más.",
   "text_vip_transaction_cancelled": "Se canceló una suscripción de <b>{method}</b>",
   "text_vip_transaction_charged": "Se cargaron <b>{amount}</b> vía <b>{method}</b> por <b>{term}</b>",

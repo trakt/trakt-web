@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} chaque mois ensuite",
   "text_vip_recurring_yearly": "{price} chaque année ensuite",
   "text_vip_subscription": "abonnement",
+  "text_vip_subscription_missing_message": "Nous n'avons pas trouvé d'abonnement actif à gérer. Il a peut-être déjà été annulé. <a>Contacter le support</a> si vous pensez qu'il y a un problème.",
+  "text_vip_subscription_missing_title": "Aucun abonnement actif",
   "text_vip_track_more": "Suivez plus, listez plus, notez plus.",
   "text_vip_transaction_cancelled": "Abonnement <b>{method}</b> annulé",
   "text_vip_transaction_charged": "Facturé <b>{amount}</b> via <b>{method}</b> pour <b>{term}</b>",

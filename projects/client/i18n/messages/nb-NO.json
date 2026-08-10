@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} hver måned etter det",
   "text_vip_recurring_yearly": "{price} hvert år etter det",
   "text_vip_subscription": "abonnement",
+  "text_vip_subscription_missing_message": "Vi fant ingen aktivt abonnement å administrere. Det kan ha blitt kansellert allerede. <a>Kontakt kundestøtte</a> hvis du tror noe er galt.",
+  "text_vip_subscription_missing_title": "Ingen aktivt abonnement",
   "text_vip_track_more": "Spor mer, list mer, vurder mer.",
   "text_vip_transaction_cancelled": "Avbrøt et <b>{method}</b>-abonnement",
   "text_vip_transaction_charged": "Belastet <b>{amount}</b> via <b>{method}</b> for <b>{term}</b>",

@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "之后每月 {price}",
   "text_vip_recurring_yearly": "之后每年 {price}",
   "text_vip_subscription": "订阅",
+  "text_vip_subscription_missing_message": "我们找不到可管理的有效订阅。它可能已被取消。<a>联系支持</a>如果您认为有问题。",
+  "text_vip_subscription_missing_title": "没有有效订阅",
   "text_vip_track_more": "追踪更多，列出更多，评分更多。",
   "text_vip_transaction_cancelled": "取消了<b>{method}</b>订阅",
   "text_vip_transaction_charged": "通过<b>{method}</b>收取<b>{amount}</b>，时长<b>{term}</b>",

@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} هر ماه پس از آن",
   "text_vip_recurring_yearly": "{price} هر سال پس از آن",
   "text_vip_subscription": "اشتراک",
+  "text_vip_subscription_missing_message": "نتوانستیم اشتراک فعالی برای مدیریت پیدا کنیم. ممکن است قبلاً لغو شده باشد. اگر فکر می‌کنید مشکلی وجود دارد، <a>با پشتیبانی تماس بگیرید</a>.",
+  "text_vip_subscription_missing_title": "اشتراک فعالی وجود ندارد",
   "text_vip_track_more": "بیشتر ردیابی کنید، بیشتر لیست کنید، بیشتر امتیاز دهید.",
   "text_vip_transaction_cancelled": "اشتراک <b>{method}</b> لغو شد",
   "text_vip_transaction_charged": "<b>{amount}</b> از طریق <b>{method}</b> برای <b>{term}</b> دریافت شد",

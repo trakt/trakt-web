@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} щомісяця після цього",
   "text_vip_recurring_yearly": "{price} щороку після цього",
   "text_vip_subscription": "підписка",
+  "text_vip_subscription_missing_message": "Нам не вдалося знайти активну підписку для керування. Можливо, її вже було скасовано. <a>Зв'яжіться зі службою підтримки</a>, якщо вважаєте, що щось не так.",
+  "text_vip_subscription_missing_title": "Немає активної підписки",
   "text_vip_track_more": "Відстежуйте більше, створюйте більше списків, оцінюйте більше.",
   "text_vip_transaction_cancelled": "Скасовано підписку через <b>{method}</b>",
   "text_vip_transaction_charged": "Списано <b>{amount}</b> через <b>{method}</b> за <b>{term}</b>",

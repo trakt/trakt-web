@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} jeden Monat danach",
   "text_vip_recurring_yearly": "{price} jedes Jahr danach",
   "text_vip_subscription": "Abonnement",
+  "text_vip_subscription_missing_message": "Wir konnten kein aktives Abonnement zur Verwaltung finden. Es wurde möglicherweise bereits gekündigt. <a>Kontaktieren Sie den Support</a>, wenn Sie der Meinung sind, dass etwas nicht stimmt.",
+  "text_vip_subscription_missing_title": "Kein aktives Abonnement",
   "text_vip_track_more": "Mehr verfolgen, mehr listen, mehr bewerten.",
   "text_vip_transaction_cancelled": "<b>{method}</b>-Abonnement gekündigt",
   "text_vip_transaction_charged": "Abgebucht: <b>{amount}</b> über <b>{method}</b> für <b>{term}</b>",

@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "{price} setiap bulan setelah itu",
   "text_vip_recurring_yearly": "{price} setiap tahun setelah itu",
   "text_vip_subscription": "langganan",
+  "text_vip_subscription_missing_message": "Kami tidak dapat menemukan langganan aktif untuk dikelola. Mungkin sudah dibatalkan. <a>Hubungi dukungan</a> jika Anda merasa ada yang salah.",
+  "text_vip_subscription_missing_title": "Tidak ada langganan aktif",
   "text_vip_track_more": "Lacak lebih banyak, daftar lebih banyak, nilai lebih banyak.",
   "text_vip_transaction_cancelled": "Membatalkan langganan <b>{method}</b>",
   "text_vip_transaction_charged": "Ditagih <b>{amount}</b> melalui <b>{method}</b> untuk <b>{term}</b>",

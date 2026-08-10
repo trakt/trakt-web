@@ -1659,6 +1659,8 @@
   "text_vip_recurring_monthly": "sonraki her ay {price}",
   "text_vip_recurring_yearly": "sonraki her yıl {price}",
   "text_vip_subscription": "abonelik",
+  "text_vip_subscription_missing_message": "Yönetecek aktif bir abonelik bulamadık. Zaten iptal edilmiş olabilir. Bir sorun olduğunu düşünüyorsanız <a>destekle iletişime geçin</a>.",
+  "text_vip_subscription_missing_title": "Aktif abonelik yok",
   "text_vip_track_more": "Daha fazla takip et, daha fazla listele, daha fazla derecelendir.",
   "text_vip_transaction_cancelled": "Bir <b>{method}</b> aboneliği iptal edildi",
   "text_vip_transaction_charged": "<b>{amount}</b> tutarı <b>{method}</b> aracılığıyla <b>{term}</b> için tahsil edildi",
