@@ -23,6 +23,7 @@
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import RateNow from "../../rating/RateNow.svelte";
+  import SummaryActions from "../../summary/SummaryActions.svelte";
   import SummaryOverview from "../../summary/SummaryOverview.svelte";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "../v2/_internal/MediaActions.svelte";
@@ -186,24 +187,23 @@
       under the fold.
     -->
     <RenderFor audience="authenticated">
-      <div class="masthead-actions">
-        <!--
-          Stars and favourite sit ABOVE the action bar, not beside it. The rate row
-          only appears once a title is rateable, so as a sibling it pushed the
-          action bar off the composition's centre exactly when it showed up - the
-          bar has to hold the centre line whether or not it is there.
-        -->
-        <div class="actions-rate">
-          <RateNow type={target.type} {media} style="minimal" />
-        </div>
+      <!--
+        The live summary page's own composition - SummaryActions stacking the bar with
+        the rate row as its contextual actions - reused rather than restated.
 
-        <!--
-          MediaActions renders the action bar itself, popup and all. It used to be
-          wrapped in a second SummaryActionsBar here, which stacked two pill
-          surfaces - two backgrounds, two shadows - and left the visible one at its
-          default fixed width while the tokens below configured the wrapper instead.
-        -->
-        <MediaActions {media} {title} />
+        Two departures, both set in CSS rather than by rebuilding it: the stack is
+        centred instead of start-aligned, and reversed so the rate row sits ABOVE the
+        bar. The rate row only renders for rateable titles, so below the bar it pushed
+        it off the centre line exactly when it appeared.
+      -->
+      <div class="masthead-actions">
+        <SummaryActions>
+          <MediaActions {media} {title} />
+
+          {#snippet contextualActions()}
+            <RateNow type={target.type} {media} style="minimal" />
+          {/snippet}
+        </SummaryActions>
       </div>
     </RenderFor>
 
@@ -399,15 +399,6 @@
       var(--masthead-poster-height) + var(--masthead-backdrop-reveal)
     );
 
-    /*
-      Shared by the strip's rules and the scores dividers, matching the anchored
-      direction so both read at the same weight.
-    */
-    --summary-header-hairline: color-mix(
-      in srgb,
-      var(--color-foreground) 7%,
-      transparent
-    );
 
     box-sizing: border-box;
     /* Matches the measure the lists below use, so the edges line up. */
@@ -634,7 +625,7 @@
     margin-top: var(--gap-xs);
     padding-top: var(--ni-24);
 
-    border-top: var(--ni-1) solid var(--summary-header-hairline);
+    border-top: var(--ni-1) solid var(--color-hairline);
 
     /*
       Auto-flow rather than a fixed column count: sentiment and social activity
@@ -717,9 +708,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--gap-m);
 
     margin-top: var(--gap-xxs);
+
+    /*
+      Centred and reversed, so the rate row sits above the bar - see the markup for
+      why. Done here rather than by rebuilding SummaryActions, which is deliberately
+      start-aligned for the rail it was written for.
+    */
+    :global(.trakt-summary-actions) {
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: var(--gap-m);
+    }
 
     --summary-actions-bar-height: var(--ni-56);
     /*
@@ -744,16 +745,11 @@
     margin-top: var(--masthead-rhythm);
     padding-top: var(--ni-24);
 
-    border-top: var(--ni-1) solid var(--summary-header-hairline);
+    border-top: var(--ni-1) solid var(--color-hairline);
 
     display: flex;
     justify-content: center;
   }
 
-  .actions-rate {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
 </style>

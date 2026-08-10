@@ -4,6 +4,28 @@
    */
 
   /**
+   * Separator
+   *
+   * The thin rule used to divide content without framing it: the summary headers'
+   * facts strip, the rules above their action and data bands, the dividers between
+   * their score sources, and the vertical ticks in the person header's meta row.
+   *
+   * Deliberately far lighter than --color-border. A separator's job is to suggest
+   * where one thing ends and the next begins; at full border weight it reads as a
+   * table or a box and competes with the content it is meant to organise. Every
+   * framed surface in those headers was removed for exactly that reason, so the
+   * rules that stayed had to get quieter.
+   *
+   * Derived from --color-foreground rather than fixed, so it follows light and dark
+   * without a theme-conditional value - which is why it lives here rather than in
+   * modes.scss.
+   *
+   * Use this for any new hairline. Reach for --color-border only when the intent is
+   * genuinely a border: something enclosed, with an inside and an outside.
+   */
+  --color-hairline: color-mix(in srgb, var(--color-foreground) 7%, transparent);
+
+  /**
    * Badge
    */
   --color-background-vip-badge: var(--red-500);
