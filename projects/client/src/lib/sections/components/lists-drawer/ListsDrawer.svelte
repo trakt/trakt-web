@@ -9,6 +9,7 @@
   import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
   import { useAllPersonalLists } from "$lib/stores/useAllPersonalLists";
   import { useListedOnIds } from "$lib/stores/useListedOnIds";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import ListDropdownItem from "./ListDropdownItem.svelte";
 
   const {
@@ -26,9 +27,8 @@
   } = $props();
 
   const { lists, isLoading: isLoadingLists } = useAllPersonalLists();
-  const { listedOnIds, isLoading: isLoadingIds } = $derived(
-    useListedOnIds({ media }),
-  );
+  const media$ = fromRune(() => media);
+  const { listedOnIds, isLoading: isLoadingIds } = useListedOnIds({ media$ });
 
   const listedOnIdsSet = $derived(new Set($listedOnIds));
   const sortedLists = $derived(
