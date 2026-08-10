@@ -135,7 +135,7 @@
               so they read as one row of responses rather than as separate features.
             -->
             <div class="rate-and-react">
-              <RateNow type={target.type} {media} />
+              <RateNow type={target.type} {media} style="minimal" />
 
               <RenderForFeature
                 flag={FeatureFlag.Reactions}
