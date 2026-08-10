@@ -4,8 +4,10 @@
   import GearIcon from "$lib/components/icons/GearIcon.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import SkullIcon from "$lib/components/icons/SkullIcon.svelte";
+  import Snackbar from "$lib/components/snackbar/Snackbar.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { getLocale } from "$lib/features/i18n";
@@ -20,15 +22,27 @@
 
   const { manageSubscription, cancelSubscription, isFetching } = useVip();
   const { track } = useTrack(AnalyticsEvent.VipManage);
+  const { user } = useUser();
 
   const isStripe = $derived(subscription?.gateway === "stripe");
 
+  let isMissingSubscription = $state(false);
+
   const onManage = async () => {
     track();
-    const url = await manageSubscription();
-    if (url) {
-      globalThis.window.location.href = url;
+    const result = await manageSubscription();
+
+    if (result.kind === "redirect") {
+      globalThis.window.location.href = result.url;
+      return;
     }
+
+    isMissingSubscription = result.kind === "missing-subscription";
+  };
+
+  const onCancel = async () => {
+    const isCancelled = await cancelSubscription();
+    isMissingSubscription = !isCancelled;
   };
 
   const renewsOn = $derived(
@@ -43,7 +57,7 @@
     confirm({
       type: ConfirmationType.CancelVip,
       renewsOn,
-      onConfirm: cancelSubscription,
+      onConfirm: onCancel,
     }),
   );
 </script>
@@ -116,3 +130,12 @@
     {/if}
   {/snippet}
 </PopupMenu>
+
+<Snackbar
+  open={isMissingSubscription}
+  onDismiss={() => (isMissingSubscription = false)}
+  title={m.text_vip_subscription_missing_title()}
+  message={m.text_vip_subscription_missing_message()}
+  href={UrlBuilder.og.support($user?.slug)}
+  variant="error"
+/>

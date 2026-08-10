@@ -1,6 +1,8 @@
 import { rawApiFetch } from '$lib/requests/api.ts';
+import type { ManageSubscriptionResult } from '$lib/requests/models/ManageSubscriptionResult.ts';
 import z from 'zod';
 import { isValidResponse } from '../../features/query/_internal/isValidResponse.ts';
+import { isMissingSubscription } from './_internal/isMissingSubscription.ts';
 import { isStripeUrl } from './_internal/isStripeUrl.ts';
 
 type ManageSubscriptionParams = {
@@ -15,20 +17,25 @@ const ManageSubscriptionResponseSchema = z.object({
 
 export async function manageSubscriptionQuery(
   { returnUrl }: ManageSubscriptionParams,
-): Promise<string | Nil> {
-  const url = encodeURIComponent(returnUrl);
+): Promise<ManageSubscriptionResult> {
+  const encodedUrl = encodeURIComponent(returnUrl);
 
   const response = await rawApiFetch({
-    path: `/vip/stripe/update?success_url=${url}&cancel_url=${url}`,
+    path:
+      `/vip/stripe/update?success_url=${encodedUrl}&cancel_url=${encodedUrl}`,
     init: {
       method: 'POST',
     },
   });
 
+  if (isMissingSubscription(response)) {
+    return { kind: 'missing-subscription' };
+  }
+
   if (!isValidResponse(response, 'manageSubscription')) {
-    return;
+    return { kind: 'unavailable' };
   }
 
   const body = ManageSubscriptionResponseSchema.parse(await response.json());
-  return body.checkout_url;
+  return { kind: 'redirect', url: body.checkout_url };
 }
