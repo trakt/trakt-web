@@ -5,7 +5,8 @@
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import { useIsListed } from "$lib/stores/useIsListed";
+  import { useListedOnIds } from "$lib/stores/useListedOnIds";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
 
   type ListActionProps = {
     size?: "normal" | "small";
@@ -27,7 +28,8 @@
     disabled,
   }: ListActionProps = $props();
 
-  const { isLoading } = $derived(useIsListed(media));
+  const media$ = fromRune(() => media);
+  const { isLoading } = useListedOnIds({ media$ });
 
   const isDisabled = $derived(disabled || $isLoading);
 </script>
