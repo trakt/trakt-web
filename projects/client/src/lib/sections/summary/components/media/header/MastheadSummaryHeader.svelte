@@ -14,7 +14,6 @@
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
-  import SummaryActionsBar from "../../_internal/SummaryActionsBar.svelte";
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import { useIsStarted } from "../../_internal/useIsStarted";
   import { useSocialActivities } from "../../_internal/useSocialActivities";
@@ -198,9 +197,13 @@
           <RateNow type={target.type} {media} style="minimal" />
         </div>
 
-        <SummaryActionsBar>
-          <MediaActions {media} {title} />
-        </SummaryActionsBar>
+        <!--
+          MediaActions renders the action bar itself, popup and all. It used to be
+          wrapped in a second SummaryActionsBar here, which stacked two pill
+          surfaces - two backgrounds, two shadows - and left the visible one at its
+          default fixed width while the tokens below configured the wrapper instead.
+        -->
+        <MediaActions {media} {title} />
       </div>
     </RenderFor>
 
