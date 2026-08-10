@@ -1,9 +1,12 @@
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import type { PlexErrorCode } from '$lib/requests/plex/PlexErrorCode.ts';
 import { plexServerAccountsQuery } from '$lib/requests/plex/plexServerAccountsQuery.ts';
 import { plexSettingsQuery } from '$lib/requests/plex/plexSettingsQuery.ts';
 import { plexUpdateSettingsRequest } from '$lib/requests/plex/plexUpdateSettingsRequest.ts';
+import { refetchQuery } from '$lib/features/query/refetchQuery.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import {
   BehaviorSubject,
   combineLatest,
@@ -12,12 +15,46 @@ import {
   map,
 } from 'rxjs';
 
+const UNRECOVERABLE_ERROR_CODES = new Set<PlexErrorCode>([
+  'missing_token',
+  'bad_auth',
+  'missing_server_id',
+  'invalid_server_id',
+]);
+
 export function usePlexServer({ serverId }: { serverId: string }) {
   const { invalidate } = useInvalidator();
 
   const accountsQuery = useQuery(plexServerAccountsQuery({ serverId }));
-  const isLoadingAccounts = accountsQuery.pipe(map((q) => q.isLoading));
-  const serverAccounts = accountsQuery.pipe(map((q) => q.data));
+  const retryAccounts = () => refetchQuery(accountsQuery);
+
+  const accountsResult = accountsQuery.pipe(
+    map((q) => {
+      const accounts = q.data && !('errorCode' in q.data) ? q.data : undefined;
+      const code = q.data && 'errorCode' in q.data
+        ? q.data.errorCode
+        : undefined;
+
+      return {
+        accounts,
+        error: accounts == null && (code != null || q.isError)
+          ? {
+            code,
+            retry: code && UNRECOVERABLE_ERROR_CODES.has(code)
+              ? undefined
+              : retryAccounts,
+          }
+          : undefined,
+        isLoading: toLoadingState(q),
+      };
+    }),
+  );
+
+  const serverAccounts = accountsResult.pipe(map((r) => r.accounts));
+  const accountsError = accountsResult.pipe(map((r) => r.error));
+  const isLoadingAccounts = accountsResult.pipe(
+    map((r) => r.isLoading && r.accounts == null),
+  );
 
   const plexSettings = useQuery(plexSettingsQuery()).pipe(map((q) => q.data));
 
@@ -119,6 +156,7 @@ export function usePlexServer({ serverId }: { serverId: string }) {
   return {
     isLoadingAccounts,
     serverAccounts,
+    accountsError,
     libraries,
     selectedUserId,
     toggleLibrary,

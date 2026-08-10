@@ -9,6 +9,8 @@
   import { iffy } from "$lib/utils/function/iffy.ts";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
+  import SyncLoadError from "../SyncLoadError.svelte";
+  import { toPlexErrorCopy } from "./toPlexErrorCopy.ts";
   import { usePlexServer } from "./usePlexServer.ts";
 
   const {
@@ -26,11 +28,14 @@
   const {
     isLoadingAccounts,
     serverAccounts,
+    accountsError,
     libraries,
     selectedUserId,
     toggleLibrary,
     selectAccount,
   } = usePlexServer({ serverId: iffy(() => serverId) });
+
+  const accountsErrorCopy = $derived(toPlexErrorCopy($accountsError?.code));
 
   const noneAccount = "__none__";
 
@@ -66,6 +71,12 @@
       <div class="loading-container">
         <LoadingIndicator />
       </div>
+    {:else if $accountsError}
+      <SyncLoadError
+        {...accountsErrorCopy}
+        variant="plain"
+        onRetry={$accountsError.retry}
+      />
     {:else if $serverAccounts}
       {#if $serverAccounts.accounts.length > 0}
         <SettingsGroupRow title={m.label_plex_sync_as()} variant="custom">

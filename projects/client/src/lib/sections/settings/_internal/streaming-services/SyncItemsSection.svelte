@@ -8,7 +8,7 @@
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsSection from "../SettingsSection.svelte";
   import SyncItemRow from "./SyncItemRow.svelte";
-  import SyncLoadError from "./SyncLoadError.svelte";
+  import SyncLoadError from "../SyncLoadError.svelte";
   import { toServiceInfo } from "./toServiceInfo.ts";
   import { useStreamingServiceLookup } from "./useStreamingServiceLookup.ts";
 

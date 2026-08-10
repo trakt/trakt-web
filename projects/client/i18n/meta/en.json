@@ -9504,6 +9504,70 @@
       "default": "We couldn't load this right now. Please try again.",
       "description": "Inline error message shown when a streaming sync detail or its items fail to load."
     },
+    "error_text_plex_server_unreachable": {
+      "default": "Trakt can't reach this Plex media server.",
+      "description": "Inline error on the Plex settings server card when Trakt cannot reach the user's Plex media server over the network."
+    },
+    "error_text_plex_server_unreachable_hint": {
+      "default": "Make sure remote access is enabled and port 32400 is open.",
+      "description": "Secondary guidance line under the unreachable Plex server error explaining how to fix it."
+    },
+    "error_text_plex_bad_auth": {
+      "default": "Your Plex connection is no longer valid.",
+      "description": "Inline error on the Plex settings server card when the stored Plex authorization is missing or has been revoked."
+    },
+    "error_text_plex_bad_auth_hint": {
+      "default": "Disconnect and reconnect Plex, then try again.",
+      "description": "Secondary guidance line under the invalid Plex authorization error, telling the user to disconnect and reconnect Plex."
+    },
+    "error_text_plex_no_server_selected": {
+      "default": "No Plex media server selected.",
+      "description": "Inline error on the Plex settings server card when the request reached Trakt without a Plex server to look up."
+    },
+    "error_text_plex_no_server_selected_hint": {
+      "default": "Choose a server, then save your settings.",
+      "description": "Secondary guidance line under the no-server-selected error, telling the user to pick a server and save."
+    },
+    "error_text_plex_server_missing": {
+      "default": "This Plex media server is no longer available.",
+      "description": "Inline error on the Plex settings server card when the selected server no longer exists on the user's Plex account."
+    },
+    "error_text_plex_server_missing_hint": {
+      "default": "Refresh, then choose an active server and save your settings.",
+      "description": "Secondary guidance line under the unavailable Plex server error, telling the user to pick a different server."
+    },
+    "error_text_plex_not_found": {
+      "default": "Plex couldn't find this media server's details.",
+      "description": "Inline error on the Plex settings server card when Plex itself reports the requested resource as missing."
+    },
+    "error_text_plex_not_found_hint": {
+      "default": "Refresh and try again.",
+      "description": "Secondary guidance line under the Plex not-found error suggesting the user refreshes and retries."
+    },
+    "error_text_plex_server_timeout": {
+      "default": "Timed out while connecting to Plex.",
+      "description": "Inline error on the Plex settings server card when the request to the user's Plex media server timed out."
+    },
+    "error_text_plex_server_timeout_hint": {
+      "default": "Try again in a few minutes.",
+      "description": "Secondary guidance line under the Plex server timeout error suggesting the user retries shortly."
+    },
+    "error_text_plex_unavailable": {
+      "default": "Plex is currently unavailable.",
+      "description": "Inline error on the Plex settings server card when Plex is down or replies with something Trakt cannot read."
+    },
+    "error_text_plex_unavailable_hint": {
+      "default": "Try again in a few minutes.",
+      "description": "Secondary guidance line under the Plex unavailable error suggesting the user retries shortly."
+    },
+    "error_text_plex_rejected": {
+      "default": "Plex rejected this request.",
+      "description": "Inline error on the Plex settings server card when Plex refuses the request as unprocessable."
+    },
+    "error_text_plex_rejected_hint": {
+      "default": "Try again. If this keeps happening, reconnect Plex.",
+      "description": "Secondary guidance line under the Plex rejected-request error suggesting a retry then reconnecting Plex."
+    },
     "error_text_parental_guide_load_failed": {
       "default": "Loading Error",
       "description": "Short label shown in the parental guide when its content fails to load."
