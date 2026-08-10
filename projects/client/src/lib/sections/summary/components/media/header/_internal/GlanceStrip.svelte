@@ -224,9 +224,14 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: var(--gap-xs) var(--gap-s);
+    /*
+      A full gap-m of air either side of each boundary bar - at gap-s the
+      tokens huddled against their fences and the line read as cramped rather
+      than as one calm row.
+    */
+    gap: var(--gap-xs) var(--gap-m);
 
-    padding: var(--ni-12) var(--ni-24);
+    padding: var(--ni-12) var(--ni-28);
     border-radius: var(--border-radius-xl);
 
     /* The header's glass recipe - permanent, since the surface itself is inert. */
@@ -284,7 +289,8 @@
       height: var(--glance-divider-height, var(--ni-14));
       background: var(--color-hairline);
 
-      margin-inline-end: var(--gap-s);
+      /* Matches the surface gap, so both sides of a bar breathe equally. */
+      margin-inline-end: var(--gap-m);
     }
   }
 
