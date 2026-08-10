@@ -38,6 +38,10 @@
   import SummaryHeaderAwards from "./_internal/SummaryHeaderAwards.svelte";
   import SummaryHeaderWatchOptions from "./_internal/SummaryHeaderWatchOptions.svelte";
   import {
+    HEADER_ACTIONS_PARAM,
+    toHeaderActionsVariant,
+  } from "./_internal/toHeaderActionsVariant.ts";
+  import {
     HEADER_STRIP_PARAM,
     toHeaderStripVariant,
   } from "./_internal/toHeaderStripVariant.ts";
@@ -75,6 +79,11 @@
   */
   const stripVariant = $derived(
     toHeaderStripVariant(page.url.searchParams.get(HEADER_STRIP_PARAM)),
+  );
+
+  /* `?actions=fused` seats the stars on the action tray's own surface. */
+  const actionsVariant = $derived(
+    toHeaderActionsVariant(page.url.searchParams.get(HEADER_ACTIONS_PARAM)),
   );
 
   /* The pill leads with one provider; the columns show two. */
@@ -250,13 +259,27 @@
         it off the centre line exactly when it appeared.
       -->
       <div class="masthead-actions">
-        <SummaryActions>
-          <MediaActions {media} {title} />
-
-          {#snippet contextualActions()}
+        {#if actionsVariant === "fused"}
+          <!--
+            One tray: the stars share the action bar's dark surface, a hairline
+            bar between them. The bar inside is still the stock component - only
+            its shadow is suppressed, since a shadow inside a same-colour tray
+            reads as a smudge.
+          -->
+          <div class="fused-tray">
             <RateNow type={target.type} {media} style="minimal" />
-          {/snippet}
-        </SummaryActions>
+            <span class="fused-divider" aria-hidden="true"></span>
+            <MediaActions {media} {title} />
+          </div>
+        {:else}
+          <SummaryActions>
+            <MediaActions {media} {title} />
+
+            {#snippet contextualActions()}
+              <RateNow type={target.type} {media} style="minimal" />
+            {/snippet}
+          </SummaryActions>
+        {/if}
       </div>
     </RenderFor>
 
@@ -604,14 +627,8 @@
   .masthead-glance {
     width: 100%;
 
-    /*
-      Snug under the score row - the two read as one "how it stands" block. The
-      hairline closes the card BELOW the pill instead of separating it from the
-      scores above.
-    */
+    /* Snug under the score row - the two read as one "how it stands" block. */
     margin-top: calc(-1 * var(--gap-xs));
-    padding-bottom: var(--ni-24);
-    border-bottom: var(--ni-1) solid var(--color-hairline);
 
     display: flex;
     justify-content: center;
@@ -717,6 +734,31 @@
       flex-direction: column;
       align-items: center;
       gap: var(--gap-m);
+    }
+
+    .fused-tray {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-s);
+
+      /* The stock bar's own surface and radius, stretched around both halves. */
+      background-color: var(--color-actions-bar-background);
+      border-radius: var(--border-radius-l);
+      padding-inline-start: var(--ni-20);
+
+      /* Inside a same-colour tray the bar's lift reads as a smudge. */
+      --summary-actions-bar-shadow: none;
+    }
+
+    .fused-divider {
+      width: var(--ni-1);
+      height: var(--ni-24);
+      background: var(--color-hairline);
+
+      /* An unrateable title renders no stars - no stars, no divider. */
+      &:first-child {
+        display: none;
+      }
     }
   }
 
