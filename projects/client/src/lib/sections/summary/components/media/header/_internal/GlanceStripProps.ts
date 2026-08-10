@@ -23,6 +23,8 @@ export type GlanceStripProps = {
   };
   /** For the per-segment aria labels. */
   title: string;
+  /** Each token names itself underneath - the `?strip=labeled` comparison. */
+  labeled?: boolean;
   /** e.g. "2025 · 9 episodes" - year plus length, pre-joined. */
   release: string | null;
   /** The lead provider - the same first pick the watch list leads with. */

@@ -28,6 +28,7 @@
   const {
     links,
     title,
+    labeled = false,
     release,
     provider,
     country,
@@ -50,7 +51,12 @@
     {#if release}
       <Tooltip content={m.button_label_details({ title })} variant="compact">
         <Link href={links.details} color="inherit" label={m.button_label_details({ title })}>
-          <span class="glance-segment glance-release">{release}</span>
+          <span class="glance-segment" data-labeled={labeled}>
+            <span class="segment-value glance-release">{release}</span>
+            {#if labeled}
+              <span class="segment-label">{m.header_details()}</span>
+            {/if}
+          </span>
         </Link>
       </Tooltip>
     {/if}
@@ -62,14 +68,19 @@
           color="inherit"
           label={m.button_label_view_all_where_to_watch()}
         >
-          <span class="glance-segment">
-            <span class="glance-provider-logo">
-              <StreamingServiceLogo
-                source={provider.source}
-                {country}
-                i18n={StreamingServiceLogoIntlProvider}
-              />
+          <span class="glance-segment" data-labeled={labeled}>
+            <span class="segment-value">
+              <span class="glance-provider-logo">
+                <StreamingServiceLogo
+                  source={provider.source}
+                  {country}
+                  i18n={StreamingServiceLogoIntlProvider}
+                />
+              </span>
             </span>
+            {#if labeled}
+              <span class="segment-label">{m.list_title_where_to_watch()}</span>
+            {/if}
           </span>
         </Link>
       </Tooltip>
@@ -83,15 +94,20 @@
             color="inherit"
             label={m.button_label_view_all_social_activity()}
           >
-            <span class="glance-segment">
-              <span class="glance-avatars">
-                {#each social.users as user (user.slug)}
-                  <span class="glance-avatar">
-                    <UserAvatar {user} size="small" />
-                  </span>
-                {/each}
+            <span class="glance-segment" data-labeled={labeled}>
+              <span class="segment-value">
+                <span class="glance-avatars">
+                  {#each social.users as user (user.slug)}
+                    <span class="glance-avatar">
+                      <UserAvatar {user} size="small" />
+                    </span>
+                  {/each}
+                </span>
+                {social.count}
               </span>
-              {social.count}
+              {#if labeled}
+                <span class="segment-label">{m.list_title_social_activity()}</span>
+              {/if}
             </span>
           </Link>
         </Tooltip>
@@ -105,10 +121,15 @@
           color="inherit"
           label={m.button_label_view_sentiment_analysis()}
         >
-          <span class="glance-segment">
-            <span class="glance-sentiment" data-verdict={sentiment.verdict}>
-              {sentiment.label}
+          <span class="glance-segment" data-labeled={labeled}>
+            <span class="segment-value">
+              <span class="glance-sentiment" data-verdict={sentiment.verdict}>
+                {sentiment.label}
+              </span>
             </span>
+            {#if labeled}
+              <span class="segment-label">{m.header_community_sentiment()}</span>
+            {/if}
           </span>
         </Link>
       </Tooltip>
@@ -123,9 +144,14 @@
               color="inherit"
               label={m.button_label_view_awards({ title })}
             >
-              <span class="glance-segment">
-                <span class="glance-icon"><TrophyIcon /></span>
-                {awardsCount}
+              <span class="glance-segment" data-labeled={labeled}>
+                <span class="segment-value">
+                  <span class="glance-icon"><TrophyIcon /></span>
+                  {awardsCount}
+                </span>
+                {#if labeled}
+                  <span class="segment-label">{m.header_awards()}</span>
+                {/if}
               </span>
             </Link>
           </Tooltip>
@@ -142,20 +168,25 @@
               color="inherit"
               label={m.button_label_view_reactions({ title })}
             >
-              <span class="glance-segment">
-                <span class="glance-glyphs">
-                  {#each topReactionGlyphs as definition, index (definition.glyph)}
-                    <span
-                      class="glance-glyph"
-                      style:z-index={topReactionGlyphs.length - index}
-                      role="img"
-                      aria-label={definition.label()}
-                    >
-                      {definition.glyph}
-                    </span>
-                  {/each}
+              <span class="glance-segment" data-labeled={labeled}>
+                <span class="segment-value">
+                  <span class="glance-glyphs">
+                    {#each topReactionGlyphs as definition, index (definition.glyph)}
+                      <span
+                        class="glance-glyph"
+                        style:z-index={topReactionGlyphs.length - index}
+                        role="img"
+                        aria-label={definition.label()}
+                      >
+                        {definition.glyph}
+                      </span>
+                    {/each}
+                  </span>
+                  {reactions.total}
                 </span>
-                {reactions.total}
+                {#if labeled}
+                  <span class="segment-label">{m.header_reactions()}</span>
+                {/if}
               </span>
             </Link>
           </Tooltip>
@@ -166,9 +197,14 @@
     {#if triviaCount > 0}
       <Tooltip content={m.button_label_view_trivia()} variant="compact">
         <Link href={links.trivia} color="inherit" label={m.button_label_view_trivia()}>
-          <span class="glance-segment">
-            <span class="glance-icon glance-icon-trivia"><SparkleIcon /></span>
-            {m.text_glance_fact_count({ count: triviaCount })}
+          <span class="glance-segment" data-labeled={labeled}>
+            <span class="segment-value">
+              <span class="glance-icon glance-icon-trivia"><SparkleIcon /></span>
+              {m.text_glance_fact_count({ count: triviaCount })}
+            </span>
+            {#if labeled}
+              <span class="segment-label">{m.list_title_trivia()}</span>
+            {/if}
           </span>
         </Link>
       </Tooltip>
@@ -204,6 +240,11 @@
     font-size: var(--font-size-text);
     color: var(--color-text-secondary);
 
+    /* Labeled tokens are taller - the boundary bars keep up. */
+    &:has(.glance-segment[data-labeled="true"]) {
+      --glance-divider-height: var(--ni-30);
+    }
+
     /*
       Kills Link's prose underline - nothing in here is running text, and the
       anchor's decoration painted under every segment, separators included.
@@ -236,13 +277,11 @@
       between neighbouring links - a segment that does not render never strands
       one at an edge. It keeps the surface's colour, not the hovered anchor's.
     */
-    :global(
-      .trakt-tooltip-trigger + .trakt-tooltip-trigger .glance-segment::before
-    ) {
+    :global(.trakt-tooltip-trigger + .trakt-tooltip-trigger::before) {
       content: "";
       align-self: center;
       width: var(--ni-1);
-      height: var(--ni-14);
+      height: var(--glance-divider-height, var(--ni-14));
       background: var(--color-hairline);
 
       margin-inline-end: var(--gap-s);
@@ -255,6 +294,26 @@
     gap: var(--gap-xxs);
 
     transition: color var(--transition-increment) ease-in-out;
+
+    /* The labeled comparison: value over name, and a taller bar to match. */
+    &[data-labeled="true"] {
+      flex-direction: column;
+      gap: var(--ni-4);
+    }
+  }
+
+  .segment-value {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-xxs);
+  }
+
+  .segment-label {
+    font-size: var(--ni-10);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
   }
 
   .glance-release {
