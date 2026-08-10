@@ -548,6 +548,50 @@
       );
       color: var(--color-text-primary);
     }
+
+    /*
+      The award pill is the same glass as its neighbours, poured in gold - a
+      win deserves to glint. It shares .links-stat for the geometry; `font:
+      inherit` matters because it is a button, and the UA font made it run
+      smaller than the anchor pills beside it.
+    */
+    .award-pill {
+      font: inherit;
+      cursor: pointer;
+
+      color: var(--yellow-300);
+      background-color: color-mix(in srgb, var(--yellow-500) 14%, transparent);
+      border-color: color-mix(in srgb, var(--yellow-400) 28%, transparent);
+
+      @include for-mouse {
+        &:hover {
+          color: var(--yellow-200);
+          background-color: color-mix(
+            in srgb,
+            var(--yellow-500) 22%,
+            transparent
+          );
+        }
+      }
+
+      &:focus-visible {
+        color: var(--yellow-200);
+        background-color: color-mix(
+          in srgb,
+          var(--yellow-500) 22%,
+          transparent
+        );
+      }
+    }
+
+    .award-pill-mark {
+      display: inline-flex;
+
+      :global(svg) {
+        width: var(--ni-14);
+        height: var(--ni-14);
+      }
+    }
   }
 
   .meta-divider {
