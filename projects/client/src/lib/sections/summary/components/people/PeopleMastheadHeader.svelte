@@ -188,13 +188,18 @@
         <span class="meta-divider" aria-hidden="true"></span>
       {:else if stats.length > 0}
         <span class="links-stats" in:riseFade>
-          {#each stats as stat, index (stat.key)}
-            {#if index > 0}
-              <span aria-hidden="true">&middot;</span>
-            {/if}
-            <Link href={stat.href} color="inherit">
+          {#each stats as stat (stat.key)}
+            <Link
+              href={stat.href}
+              target="_self"
+              color="inherit"
+              label={m.link_label_view_person_credits({
+                credits: stat.label,
+                name: person.name,
+              })}
+            >
               <span class="links-stat">
-                <span class="bold">{stat.value}</span>
+                <span class="stat-value bold">{stat.value}</span>
                 {stat.label}
               </span>
             </Link>
@@ -423,9 +428,14 @@
   }
 
   /*
-    The counts as a whisper: text-sized, secondary, bold figures only. Discreet is
-    the brief - these must read as a footnote to the person, not as the plinth the
-    flanked layout gives them.
+    The counts as glass pills - the flanked stats' glass frame recycled at chip
+    scale. Discreet is still the brief, but discreet meant quiet, not undressed:
+    the first pass was Link's underlined grey prose, which read as lazy rather
+    than as restrained.
+
+    The surface is permanent where the big stats only wore it on hover; hover
+    lifts it one step and brings the label to primary. Same recipe, same
+    numbers - 6% resting, 10% raised - so the two layouts stay one family.
   */
   .links-stats {
     display: flex;
@@ -433,13 +443,54 @@
     gap: var(--gap-xs);
 
     font-size: var(--font-size-text);
-    color: var(--color-text-secondary);
 
-    .links-stat {
-      transition: color var(--transition-increment) ease-in-out;
+    :global(a) {
+      text-decoration: none;
+      border-radius: var(--border-radius-l);
     }
 
-    :global(a:hover .links-stat) {
+    .links-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--gap-xxs);
+
+      padding: var(--ni-6) var(--ni-14);
+      border-radius: var(--border-radius-l);
+
+      background-color: color-mix(
+        in srgb,
+        var(--color-foreground) 6%,
+        transparent
+      );
+      border: var(--ni-1) solid var(--color-hairline);
+
+      color: var(--color-text-secondary);
+
+      transition: var(--transition-increment) ease-in-out;
+      transition-property: background-color, color;
+    }
+
+    .stat-value {
+      color: var(--color-text-primary);
+    }
+
+    @include for-mouse {
+      :global(a:hover .links-stat) {
+        background-color: color-mix(
+          in srgb,
+          var(--color-foreground) 10%,
+          transparent
+        );
+        color: var(--color-text-primary);
+      }
+    }
+
+    :global(a:focus-visible .links-stat) {
+      background-color: color-mix(
+        in srgb,
+        var(--color-foreground) 10%,
+        transparent
+      );
       color: var(--color-text-primary);
     }
   }
