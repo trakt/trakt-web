@@ -181,12 +181,11 @@
   </div>
 
   <div class="masthead-links">
-    {#if isInlineStats}
+    {#if isInlineStats && (isStatsLoading || stats.length > 0)}
       {#if isStatsLoading}
         <!-- Holds the counts' place so the row doesn't reflow when they land. -->
         <Skeleton width="var(--ni-120)" height="var(--ni-14)" />
-        <span class="meta-divider" aria-hidden="true"></span>
-      {:else if stats.length > 0}
+      {:else}
         <span class="links-stats" in:riseFade>
           {#each stats as stat (stat.key)}
             <Link
@@ -205,25 +204,31 @@
             </Link>
           {/each}
         </span>
+      {/if}
+      <span class="meta-divider work-divider" aria-hidden="true"></span>
+    {/if}
+
+    <!--
+      One atomic cluster. As loose children of the wrapping row these broke apart
+      mid-cluster on resize - a divider stranded at a row's end, the share split
+      from its menu. Wrapping now only ever happens between the counts and this.
+    -->
+    <div class="links-cluster">
+      {#if hasSocialMediaLinks(person) || person.imdb}
+        {#if hasSocialMediaLinks(person)}
+          <SocialMediaLinks {person} />
+        {/if}
+        {#if person.imdb}
+          <ExternalLinkAction
+            id={person.imdb}
+            type="imdb-person"
+            source="person-summary"
+          />
+        {/if}
         <span class="meta-divider" aria-hidden="true"></span>
       {/if}
-    {/if}
 
-    {#if hasSocialMediaLinks(person) || person.imdb}
-      {#if hasSocialMediaLinks(person)}
-        <SocialMediaLinks {person} />
-      {/if}
-      {#if person.imdb}
-        <ExternalLinkAction
-          id={person.imdb}
-          type="imdb-person"
-          source="person-summary"
-        />
-      {/if}
-      <span class="meta-divider" aria-hidden="true"></span>
-    {/if}
-
-    <ShareButton
+      <ShareButton
       title={person.name}
       textFactory={({ title: name }) => m.text_share_person({ name })}
       source={{ id: "person" }}
@@ -247,7 +252,8 @@
           />
         {/snippet}
       </PopupMenu>
-    </RenderFor>
+      </RenderFor>
+    </div>
   </div>
 
   {#if statsLayout === "below"}
@@ -335,7 +341,6 @@
       media masthead between 1024px and its design width, so this starts fluid.
     */
     margin: var(--masthead-rhythm) var(--layout-distance-side);
-    padding: 0 clamp(var(--gap-m), 8vw, var(--ni-120)) var(--ni-40);
 
     /*
       The gap already spaces the stack evenly, but a large name's line box carries
@@ -348,10 +353,6 @@
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
       }
-    }
-
-    @include for-tablet-sm-and-below {
-      padding: var(--ni-28) var(--gap-m);
     }
   }
 
@@ -502,6 +503,30 @@
     background: var(--color-hairline);
   }
 
+  .links-cluster {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-s);
+  }
+
+  /*
+    Stacked deliberately below tablet-sm: the counts take a row, the socials take
+    the next. Left to flex-wrap, the row broke wherever it happened to run out of
+    width. The divider between them marks a boundary that stacking already draws,
+    so it goes.
+  */
+  @include for-tablet-sm-and-below {
+    .masthead-links {
+      flex-direction: column;
+      gap: var(--gap-m);
+    }
+
+    .work-divider {
+      display: none;
+    }
+  }
+
   .trakt-people-masthead-header::before {
     @include dissolve.masthead-stroke;
   }
@@ -514,8 +539,6 @@
     overflow: hidden;
     border-start-start-radius: var(--border-radius-xl);
     border-start-end-radius: var(--border-radius-xl);
-    /* Full-bleed within the card, as the media masthead's band is. */
-    margin-inline: calc(-1 * clamp(var(--gap-m), 8vw, var(--ni-120)));
   }
 
   .masthead-content {
@@ -526,6 +549,19 @@
     align-items: center;
     text-align: center;
     gap: var(--masthead-rhythm);
+
+    /*
+      The fluid measure lives HERE, not on the card - the media masthead's
+      arrangement. With the padding on the card, the band needed a negative margin
+      to bleed back out, and the two drifted apart the moment a breakpoint
+      overrode one without the other: the stroke floated above the band and the
+      band poked past the card's sides on mobile.
+    */
+    padding: 0 clamp(var(--gap-m), 8vw, var(--ni-120)) var(--ni-40);
+
+    @include for-tablet-sm-and-below {
+      padding: 0 var(--gap-m) var(--ni-28);
+    }
   }
 
   /*
