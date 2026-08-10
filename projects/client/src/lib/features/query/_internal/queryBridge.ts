@@ -17,6 +17,7 @@ import {
   type QueryObserverResult,
 } from '@tanstack/query-core';
 import { Observable, type Subscriber } from 'rxjs';
+import { untrack } from 'svelte';
 
 /**
  * Drive query-core's `QueryObserver` / `InfiniteQueryObserver` directly from
@@ -128,10 +129,12 @@ function bridge<TResult>(
     return NOOP_FN;
   }
 
+  const emit = (result: TResult) => untrack(() => subscriber.next(result));
+
   // Emit current state synchronously so consumers reading immediately after
   // subscribing get a value, matching prior Svelte-store behaviour.
-  subscriber.next(observer.getCurrentResult());
-  const unsubscribe = observer.subscribe((result) => subscriber.next(result));
+  emit(observer.getCurrentResult());
+  const unsubscribe = observer.subscribe(emit);
   // Force a recompute now that a listener is attached. Matches
   // createBaseQuery's post-subscribe `updateResult` - without it, optimistic
   // -> hydrated transitions that resolve synchronously can land before any
