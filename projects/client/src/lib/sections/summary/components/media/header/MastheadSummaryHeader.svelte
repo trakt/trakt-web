@@ -284,6 +284,12 @@
         </div>
       {/if}
 
+      <!--
+        Deliberately NOT marked `strip-column-borrowed`, unlike its neighbours. Those
+        hide below desktop because they duplicate a section further down the page;
+        awards exist nowhere else, so hiding them would not de-duplicate anything - it
+        would simply make awards invisible on a phone.
+      -->
       <RenderForFeature flag={FeatureFlag.SummaryAwards} audience="director">
         {#snippet enabled()}
           {#if headerAwards.length > 0}
