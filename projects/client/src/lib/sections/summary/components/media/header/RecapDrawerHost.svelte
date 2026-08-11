@@ -244,21 +244,6 @@
           {/each}
         </section>
       {/if}
-
-      {#if lastEpisode}
-        <section class="recap-section">
-          <h3 class="recap-section-title">{m.text_recap_last_seen()}</h3>
-          <p class="recap-episode-line">
-            <span class="recap-episode-marker">
-              {episodeNumberLabel({
-                seasonNumber: lastEpisode.season,
-                episodeNumber: lastEpisode.number,
-              })}
-            </span>
-            <span class="bold">{lastEpisode.title}</span>
-          </p>
-        </section>
-      {/if}
     {/if}
 
     {#if recentHistory.length > 0}
