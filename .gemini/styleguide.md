@@ -266,6 +266,25 @@ function useFeatureFlag(flag: FeatureFlag) {
 const { isEnabled } = $derived(useFeatureFlag(flag));
 ```
 
+#### Hooks that drive `useQuery`
+
+The pattern above is fine for cheap hooks. A hook that calls `useQuery` takes
+its reactive input as `Observable<T>` and is called once at component setup,
+never wrapped in `$derived`. See `.agents/rules/components.md` for the rationale.
+
+**Bad:**
+
+```typescript
+const { listedOnIds } = $derived(useListedOnIds({ media }));
+```
+
+**Good:**
+
+```typescript
+const media$ = fromRune(() => media);
+const { listedOnIds } = useListedOnIds({ media$ });
+```
+
 ## Styling
 
 ### SCSS with Scoped Styles
