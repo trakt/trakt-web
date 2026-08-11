@@ -10411,6 +10411,14 @@
       "default": "View your recap for {title}",
       "description": "Aria-label for the control that opens the recap drawer."
     },
+    "text_recap_coming_up": {
+      "default": "Coming up",
+      "description": "Recap drawer heading for the next episode when it has not aired yet."
+    },
+    "text_recap_airs": {
+      "default": "Out {eta}",
+      "description": "When the next unaired episode becomes available, e.g. Out tomorrow."
+    },
     "header_recap": {
       "default": "Recap",
       "description": "Section label for the viewer's own progress through a show - last seen episode, standing and time left."
