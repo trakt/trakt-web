@@ -2,26 +2,20 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-  import type { Snippet } from "svelte";
 
   type MediaStatProps = {
     value: number;
     text: string;
     isLoading: boolean;
-    icon: Snippet;
   };
 
-  const { value, text, isLoading, icon }: MediaStatProps = $props();
+  const { value, text, isLoading }: MediaStatProps = $props();
 </script>
 
 <div class="trakt-media-stat">
-  <div class="stat-icon">
-    {@render icon()}
-  </div>
+  <span class="stat-label">{text}</span>
 
-  <span class="secondary">{text}</span>
-
-  <span class="bold">
+  <span class="stat-value bold">
     {#if isLoading}
       <div class="stat-loading-indicator">
         <LoadingIndicator />
@@ -33,21 +27,25 @@
 </div>
 
 <style>
+  /* A figure over its name - the chrome is the drawer's bands, not a card. */
   .trakt-media-stat {
-    box-shadow: var(--shadow-base);
-
-    background-color: var(--color-card-background);
-
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: var(--gap-xxs);
-
-    border-radius: var(--border-radius-m);
-
-    padding: var(--ni-12);
+    gap: var(--ni-4);
 
     flex: 1;
+  }
+
+  .stat-label {
+    font-size: var(--font-size-tag);
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .stat-value {
+    font-size: var(--ni-20);
   }
 
   .stat-loading-indicator {
@@ -59,13 +57,4 @@
     }
   }
 
-  .stat-icon {
-    display: flex;
-    color: var(--color-text-secondary);
-
-    :global(svg) {
-      width: var(--ni-12);
-      height: var(--ni-12);
-    }
-  }
 </style>

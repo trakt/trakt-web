@@ -62,29 +62,40 @@
   </div>
 </div>
 
-<style>
-  .trakt-collapsable-values,
-  .trakt-collapsable-values-content {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
+<style lang="scss">
+  /* Label at the start, its values ranged at the end - one row per fact. */
+  .trakt-collapsable-values {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--gap-m);
 
-    gap: var(--gap-xxs);
+    min-width: 0;
   }
 
   .trakt-collapsable-values-content {
-    .is-hidden {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: end;
+    min-width: 0;
+
+    gap: var(--gap-xxs);
+
+    &.is-hidden {
       display: none;
     }
   }
 
   .trakt-displayable-value {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
 
-    gap: var(--gap-xxs);
+    gap: var(--gap-xs);
 
     min-height: var(--ni-18);
+    min-width: 0;
 
     :global(.trakt-link) {
       min-width: 0;

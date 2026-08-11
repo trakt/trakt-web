@@ -28,7 +28,7 @@
   <div class="trakt-media-links">
     {#if hasOfficialLinks}
       <div class="trakt-media-links-group">
-        <span class="bold secondary">{m.header_official_links()}</span>
+        <span class="links-label">{m.header_official_links()}</span>
         <div class="trakt-media-links-list">
           {#if media.homepage}
             <ExternalLinkAction
@@ -63,7 +63,7 @@
 
     {#if hasOtherLinks}
       <div class="trakt-media-links-group">
-        <span class="bold secondary">{m.header_other_links()}</span>
+        <span class="links-label">{m.header_other_links()}</span>
 
         <div class="trakt-media-links-list">
           {#if media.imdbId}
@@ -97,15 +97,19 @@
 {/if}
 
 <style>
+  /* The drawer rules the bands - no borders of its own. Icons stay icons. */
   .trakt-media-links {
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
+  }
 
-    padding: var(--ni-24) 0;
-
-    border-top: var(--ni-1) solid var(--color-border);
-    border-bottom: var(--ni-1) solid var(--color-border);
+  .links-label {
+    font-size: var(--font-size-tag);
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
   }
 
   .trakt-media-links-group {
