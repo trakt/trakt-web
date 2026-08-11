@@ -8,7 +8,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
-  import { Marked } from "marked";
+  import { createSafeMarked } from "$lib/utils/markdown/createSafeMarked.ts";
 
   const {
     summary,
@@ -16,7 +16,7 @@
     summary: ReadonlyArray<string>;
   } = $props();
 
-  const marked = new Marked();
+  const marked = createSafeMarked();
   const { buildDrawerLink } = summaryDrawerNavigation();
   const { track } = useTrack(AnalyticsEvent.Drilldown);
 </script>

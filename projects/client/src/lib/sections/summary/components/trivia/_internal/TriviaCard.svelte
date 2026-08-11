@@ -2,7 +2,7 @@
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaTrivia } from "$lib/requests/models/MediaTrivia";
-  import { Marked } from "marked";
+  import { createSafeMarked } from "$lib/utils/markdown/createSafeMarked.ts";
   import InfoCard from "../../_internal/InfoCard.svelte";
 
   const {
@@ -13,7 +13,7 @@
     media: MediaEntry;
   } = $props();
 
-  const marked = new Marked();
+  const marked = createSafeMarked();
 </script>
 
 {#snippet parsedContent()}
