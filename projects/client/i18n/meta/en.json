@@ -10566,8 +10566,8 @@
       "description": "Heading over the recap drawer's memory-jogging section, naming the show."
     },
     "text_recap_previously": {
-      "default": "Previously on {season}",
-      "description": "Label introducing the just-finished season's overview when the viewer sits between seasons."
+      "default": "{season} Recap",
+      "description": "Label for a season's overview in the recap - e.g. Season 2 Recap - used for the between-seasons blurb and the collapsible earlier-season rows."
     },
     "text_recap_behind": {
       "default": "{count} behind",
