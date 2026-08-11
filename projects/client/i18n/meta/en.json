@@ -10553,6 +10553,14 @@
       "default": "Reactions",
       "description": "Section label for audience emoji reactions."
     },
+    "preview_feature_title_summary_glance_strip": {
+      "default": "At-a-glance strip",
+      "description": "Product feature name for the compact glance strip in the masthead summary header."
+    },
+    "preview_feature_description_summary_glance_strip": {
+      "default": "Folds the masthead's credits, listings, sentiment, awards, reactions and trivia columns into one compact pill that opens a drill-down drawer. Turn off to keep the full columns in the header.",
+      "description": "Description for the glance strip preview feature."
+    },
     "preview_feature_title_people_header_masthead": {
       "default": "Masthead person header",
       "description": "Product feature name for the masthead people header preview feature."

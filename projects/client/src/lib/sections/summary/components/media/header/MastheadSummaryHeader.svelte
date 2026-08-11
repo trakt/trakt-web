@@ -22,6 +22,7 @@
   import { useMediaReactions } from "$lib/features/media-reactions/stores/useMediaReactions.ts";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import RateNow from "../../rating/RateNow.svelte";
   import SummaryActions from "../../summary/SummaryActions.svelte";
   import SummaryOverview from "../../summary/SummaryOverview.svelte";
@@ -74,12 +75,17 @@
   const facts = $derived(mapToSummaryHeaderFacts(target));
 
   /*
-    Which strip renders - `?strip=columns` restores the five-column spread for
-    comparison against the glance pill.
+    Which strip renders. The SummaryGlanceStrip preview flag is the switch -
+    on for the compact pill, off for the five-column spread - and `?strip=`
+    overrides it for on-the-spot comparisons (including the labeled pill).
   */
-  const stripVariant = $derived(
-    toHeaderStripVariant(page.url.searchParams.get(HEADER_STRIP_PARAM)),
-  );
+  const { isEnabled } = useFeatureFlag();
+  const isGlanceStripEnabled = isEnabled(FeatureFlag.SummaryGlanceStrip);
+  const stripVariant = $derived.by(() => {
+    const requested = page.url.searchParams.get(HEADER_STRIP_PARAM);
+    if (requested != null) return toHeaderStripVariant(requested);
+    return $isGlanceStripEnabled ? "glance" : "columns";
+  });
 
   /* `?actions=fused` seats the stars on the action tray's own surface. */
   const actionsVariant = $derived(
