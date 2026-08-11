@@ -16,20 +16,21 @@
   .trakt-summary-details-grid {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
-
-    @include for-mobile {
-      gap: var(--gap-s);
-    }
   }
 
+  /*
+    One fact per ruled row - label at the start, values at the end - instead
+    of the two-column card grid. The rows read top to bottom like a spec
+    sheet, which is what this data is.
+  */
   .trakt-summary-details-grid-content {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, var(--ni-320)));
-    gap: var(--gap-m);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-12);
 
-    @include for-mobile {
-      gap: var(--gap-s);
+    > :global(* + *) {
+      padding-top: var(--ni-12);
+      border-top: var(--ni-1) solid var(--color-hairline);
     }
   }
 </style>

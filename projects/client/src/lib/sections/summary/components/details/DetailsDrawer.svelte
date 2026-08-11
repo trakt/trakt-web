@@ -47,20 +47,23 @@
   {/if}
 </Drawer>
 
-<style>
+<style lang="scss">
   .trakt-details-drawer-content {
-    --details-gap: var(--gap-l);
-
     display: flex;
     flex-direction: column;
-    gap: var(--details-gap);
-  }
+    gap: var(--ni-20);
 
-  .trakt-details-drawer-content :global(
-    .trakt-media-links + .trakt-media-parental-guide
-  ) {
-    margin-top: calc(-1 * var(--details-gap));
+    /* The redesigned drawers' shared supplemental inset. */
+    padding: var(--gap-xs) var(--gap-s) var(--gap-s);
 
-    border-top: none;
+    /*
+      One rule draws every band boundary, so no child needs its own borders
+      - which is what previously forced the negative-margin handshake between
+      the links block and the parental guide.
+    */
+    > :global(* + *) {
+      padding-top: var(--ni-20);
+      border-top: var(--ni-1) solid var(--color-hairline);
+    }
   }
 </style>
