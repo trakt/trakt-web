@@ -62,6 +62,13 @@
     flex-direction: column;
     gap: var(--ni-24);
 
+    /*
+      The drawer's own 16px inset is tuned for lists; prose against it reads
+      edgy. A supplemental inset here rather than on --drawer-padding, so
+      the other drawers keep their tuning.
+    */
+    padding: var(--gap-xs) var(--gap-s) var(--gap-s);
+
     font-size: var(--font-size-text);
   }
 
