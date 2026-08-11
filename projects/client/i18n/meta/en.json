@@ -10549,6 +10549,10 @@
       "default": "{count} Nominations",
       "description": "Golden pill on the person page counting nominations, shown when there are no wins."
     },
+    "button_label_view_recap": {
+      "default": "View your recap for {title}",
+      "description": "Aria-label for the control that opens the recap drawer."
+    },
     "header_recap": {
       "default": "Recap",
       "description": "Section label for the viewer's own progress through a show - last seen episode, standing and time left."

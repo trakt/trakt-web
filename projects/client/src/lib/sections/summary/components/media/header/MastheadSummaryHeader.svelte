@@ -222,7 +222,7 @@
   const socialLink = $derived(buildDrawerLink(SummaryDrawers.Social));
   const triviaLink = $derived(buildDrawerLink(SummaryDrawers.Trivia));
   const detailsLink = $derived(buildDrawerLink(SummaryDrawers.Details));
-  const historyLink = $derived(buildDrawerLink(SummaryDrawers.History));
+  const recapLink = $derived(buildDrawerLink(SummaryDrawers.Recap));
 
   const justWatchDetail = $derived.by(() => {
     const rank = streamOn?.services?.streamingRank?.current;
@@ -355,8 +355,9 @@
       <!--
         The viewer's own standing with the show. Not marked borrowed: no other
         section on the page says where YOU are, so hiding it below desktop
-        would remove it entirely rather than de-duplicate it. History is the
-        deepest existing view of your watching, so the chevron goes there.
+        would remove it entirely rather than de-duplicate it. The chevron opens
+        the recap drawer: up next, the full description, your standing, and
+        recent history.
       -->
       <RenderFor audience="authenticated">
         {#if $progress$ && $progress$.completed > 0}
@@ -364,8 +365,8 @@
             <SummaryHeaderSectionHeader
               title={m.header_recap()}
               drilldown={{
-                ...historyLink,
-                label: m.button_label_view_all_history(),
+                ...recapLink,
+                label: m.button_label_view_recap({ title }),
               }}
             />
             <SummaryHeaderRecap
