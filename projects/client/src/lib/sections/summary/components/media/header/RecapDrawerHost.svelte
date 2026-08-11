@@ -136,7 +136,7 @@
   const notesLink = $derived(buildDrawerLink(SummaryDrawers.Notes));
 </script>
 
-<Drawer title={m.header_recap()} {onClose}>
+<Drawer title={m.header_recap()} metaInfo={show.title} {onClose}>
   <div class="trakt-recap-drawer">
     {#if $progress}
       {#if $progress.number > 0}
@@ -213,6 +213,9 @@
       -->
       {#if previouslyBlurb}
         <section class="recap-section">
+          <h3 class="recap-section-title">
+            {m.text_recap_previously_on({ title: show.title })}
+          </h3>
           {#if previouslyCaption}
             <p class="recap-caption">{previouslyCaption}</p>
           {/if}

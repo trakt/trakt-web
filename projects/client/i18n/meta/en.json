@@ -10561,6 +10561,10 @@
       "default": "Last seen",
       "description": "Label preceding the last watched episode marker in the recap section."
     },
+    "text_recap_previously_on": {
+      "default": "Previously on {title}",
+      "description": "Heading over the recap drawer's memory-jogging section, naming the show."
+    },
     "text_recap_previously": {
       "default": "Previously on {season}",
       "description": "Label introducing the just-finished season's overview when the viewer sits between seasons."
