@@ -43,20 +43,14 @@
 
   {#if pros.length > 0}
     <section class="sentiment-band">
-      <h3 class="band-label band-label-good">
-        {m.header_sentiment_working()}
-        <span class="band-count">{pros.length}</span>
-      </h3>
+      <h3 class="band-label band-label-good">{m.header_sentiment_working()}</h3>
       {@render aspects(pros, "good")}
     </section>
   {/if}
 
   {#if cons.length > 0}
     <section class="sentiment-band">
-      <h3 class="band-label band-label-bad">
-        {m.header_sentiment_not_working()}
-        <span class="band-count">{cons.length}</span>
-      </h3>
+      <h3 class="band-label band-label-bad">{m.header_sentiment_not_working()}</h3>
       {@render aspects(cons, "bad")}
     </section>
   {/if}
@@ -102,10 +96,6 @@
     &.band-label-bad {
       color: var(--red-400);
     }
-  }
-
-  .band-count {
-    color: var(--color-text-secondary);
   }
 
   .band-prose {
@@ -166,5 +156,11 @@
 
   .aspect-text {
     color: var(--color-text-secondary);
+    /*
+      Matches the marker box height (1.5 x font size) so the dot centres on
+      the first line exactly - unset, the line box ran shorter than the
+      marker and the dots sat visibly low.
+    */
+    line-height: 1.5;
   }
 </style>
