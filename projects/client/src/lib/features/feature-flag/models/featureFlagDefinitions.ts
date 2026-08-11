@@ -128,6 +128,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     description: () => m.preview_feature_description_people_header_masthead(),
     audience: 'director',
   },
+  [FeatureFlag.SummaryGlanceStrip]: {
+    icon: SparkleStarIcon,
+    title: () => m.preview_feature_title_summary_glance_strip(),
+    addedAt: new Date('2026-08-11'),
+    description: () => m.preview_feature_description_summary_glance_strip(),
+    audience: 'director',
+  },
   [FeatureFlag.ParentalGuide]: {
     icon: NoSpoilerIcon,
     title: () => m.option_text_certification_parental_guidance(),
