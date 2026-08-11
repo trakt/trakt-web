@@ -4,7 +4,7 @@
   import { spoilMeAnyway } from "$lib/features/spoilers/components/spoilMeAnyway";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import { Marked } from "marked";
+  import { createSafeMarked } from "$lib/utils/markdown/createSafeMarked.ts";
   import CommentGif from "./CommentGif.svelte";
   import { createHeadingRenderer } from "./marked/createHeadingRenderer";
   import { createParagraphRenderer } from "./marked/createParagraphRenderer";
@@ -25,7 +25,7 @@
   const hasText = $derived(comment.comment.trim().length > 0);
 
   const marked = $derived(
-    new Marked({
+    createSafeMarked({
       extensions: [spoilerExtension()],
       renderer: {
         paragraph: createParagraphRenderer(comment.isSpoiler),
