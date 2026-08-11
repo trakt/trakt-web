@@ -1,9 +1,10 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import { refetchQuery } from "$lib/features/query/refetchQuery.ts";
   import { useQuery } from "$lib/features/query/useQuery.ts";
   import { dataSyncQuery } from "$lib/requests/queries/streaming-sync/dataSyncQuery.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { firstValueFrom, map } from "rxjs";
+  import { map } from "rxjs";
   import SettingsGroupCard from "./_internal/SettingsGroupCard.svelte";
   import SettingsSection from "./_internal/SettingsSection.svelte";
   import DataSyncRow from "./_internal/streaming-services/DataSyncRow.svelte";
@@ -25,10 +26,7 @@
     syncQuery.pipe(map((queryState) => queryState.isError)),
   );
 
-  const retry = async () => {
-    const queryState = await firstValueFrom(syncQuery);
-    await queryState.refetch();
-  };
+  const retry = () => refetchQuery(syncQuery);
 </script>
 
 <div class="trakt-streaming-services-detail">
