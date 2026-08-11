@@ -1,7 +1,7 @@
 import type { ReactionSentiment } from '$lib/requests/models/ReactionSentiment.ts';
 import type { StreamingServiceOption } from '$lib/requests/models/StreamingServiceOptions.ts';
 import type { UserProfile } from '$lib/requests/models/UserProfile.ts';
-import type { SummarySentiment } from './toSummarySentiment.ts';
+import type { SummarySentiment } from '../../../header-kit/toSummarySentiment.ts';
 
 /**
  * One compact line referencing every header section that has something to say.

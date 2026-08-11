@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { SummarySentiment } from "./toSummarySentiment.ts";
+  import type { SummarySentiment } from "../../../header-kit/toSummarySentiment.ts";
 
   /*
     Verdict pill plus up to three single-clause bullets, unboxed in both

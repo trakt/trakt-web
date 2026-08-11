@@ -25,7 +25,7 @@
   import SummaryHeaderWatchOptions from "./_internal/SummaryHeaderWatchOptions.svelte";
   import { mapToSummaryHeaderFacts } from "./_internal/mapToSummaryHeaderFacts.ts";
   import { toHeaderProviders } from "./_internal/toHeaderProviders.ts";
-  import { toSummarySentiment } from "./_internal/toSummarySentiment.ts";
+  import { toSummarySentiment } from "../../header-kit/toSummarySentiment.ts";
   import type { MediaSummaryEntry } from "../models/MediaSummaryEntry.ts";
 
   /*

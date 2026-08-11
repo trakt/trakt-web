@@ -35,7 +35,7 @@
   import { mapToSummaryHeaderFacts } from "./_internal/mapToSummaryHeaderFacts.ts";
   import { mapToSummaryHeaderKicker } from "./_internal/mapToSummaryHeaderKicker.ts";
   import { toHeaderProviders } from "./_internal/toHeaderProviders.ts";
-  import { toSummarySentiment } from "./_internal/toSummarySentiment.ts";
+  import { toSummarySentiment } from "../../header-kit/toSummarySentiment.ts";
   import type { SummaryHeaderProps } from "./SummaryHeaderProps.ts";
 
   /*
