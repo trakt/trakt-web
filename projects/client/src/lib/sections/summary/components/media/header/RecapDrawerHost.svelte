@@ -15,9 +15,11 @@
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
-  import { toHumanETA } from "$lib/utils/formatting/date/toHumanETA";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import RecapProgress from "./_internal/RecapProgress.svelte";
   import SummaryHeaderSectionHeader from "./_internal/SummaryHeaderSectionHeader.svelte";
 
@@ -70,6 +72,24 @@
     } · ${lastEpisode.title}`;
   });
 
+  /*
+    The seasons before the one the blurb covers, oldest last, each a collapsed
+    row - the deep memory. Only seasons that have something to say appear.
+  */
+  const earlierSeasons = $derived(
+    (seasons ?? [])
+      .filter(
+        (season) =>
+          season.number > 0 &&
+          season.number < (lastEpisode?.season ?? 0) &&
+          Boolean(season.overview),
+      )
+      .sort((a, b) => b.number - a.number),
+  );
+
+  /* One open at a time - these are refreshers, not reading material. */
+  let openSeason = $state<number | null>(null);
+
   const previouslyBlurb = $derived.by(() => {
     if (isBetweenSeasons) {
       const finished = seasons?.find(
@@ -89,11 +109,6 @@
     $progress != null &&
       $progress.effectiveReleaseDate.getTime() <= Date.now(),
   );
-  const nextEta = $derived(
-    $progress != null && !isNextOut
-      ? toHumanETA(new Date(), $progress.effectiveReleaseDate)
-      : null,
-  );
 
   const { buildDrawerLink } = summaryDrawerNavigation();
   const historyLink = $derived(buildDrawerLink(SummaryDrawers.History));
@@ -106,9 +121,7 @@
     {#if $progress}
       {#if $progress.number > 0}
         <section class="recap-section">
-          <h3 class="recap-section-title">
-            {isNextOut ? m.list_title_up_next() : m.text_recap_coming_up()}
-          </h3>
+          <h3 class="recap-section-title">{m.list_title_up_next()}</h3>
           <p class="recap-episode-line">
             <span class="recap-episode-marker">
               {episodeNumberLabel({
@@ -119,16 +132,24 @@
             <span class="bold">{$progress.title}</span>
           </p>
 
-          {#if !isNextOut && nextEta}
+          <!--
+            Not out yet: the same two tags the season cards and the calendar
+            wear - "Tomorrow" and "Premiere" - reused whole, so the recap says
+            it in exactly the words the rest of the app uses.
+          -->
+          {#if !isNextOut}
             <p class="recap-airing">
+              <AirDateTag
+                i18n={TagIntlProvider}
+                airDate={$progress.effectiveReleaseDate}
+                type="tag"
+              />
               <EpisodeStatusTag
                 i18n={EpisodeIntlProvider}
                 episodeType={$progress.type}
                 releaseDate={$progress.effectiveReleaseDate}
+                type="tag"
               />
-              <span class="recap-airing-eta">
-                {m.text_recap_airs({ eta: nextEta })}
-              </span>
             </p>
           {/if}
 
@@ -153,6 +174,10 @@
         </section>
       {/if}
 
+      <section class="recap-section">
+        <RecapProgress progress={$progress} />
+      </section>
+
       <!--
         The memory-jogger: the description the header's column clamps, in
         full. Unguarded on purpose - the viewer has watched what it describes.
@@ -163,12 +188,37 @@
             <p class="recap-caption">{previouslyCaption}</p>
           {/if}
           <p class="recap-blurb">{previouslyBlurb}</p>
+
+          {#each earlierSeasons as season (season.number)}
+            <div class="recap-earlier-season">
+              <button
+                type="button"
+                class="recap-season-toggle"
+                aria-expanded={openSeason === season.number}
+                onclick={() =>
+                  (openSeason = openSeason === season.number
+                    ? null
+                    : season.number)}
+              >
+                <span class="recap-caption">
+                  {m.text_recap_previously({
+                    season: seasonLabel(season.number),
+                  })}
+                </span>
+                <span
+                  class="season-toggle-caret"
+                  class:is-open={openSeason === season.number}
+                >
+                  <CaretRightIcon />
+                </span>
+              </button>
+              {#if openSeason === season.number}
+                <p class="recap-blurb">{season.overview}</p>
+              {/if}
+            </div>
+          {/each}
         </section>
       {/if}
-
-      <section class="recap-section">
-        <RecapProgress progress={$progress} />
-      </section>
 
       {#if lastEpisode}
         <section class="recap-section">
@@ -291,11 +341,51 @@
 
     display: flex;
     align-items: center;
-    gap: var(--gap-s);
+    gap: var(--gap-xs);
   }
 
-  .recap-airing-eta {
+  .recap-earlier-season {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-8);
+  }
+
+  .recap-season-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-s);
+
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+
     color: var(--color-text-secondary);
+
+    transition: color var(--transition-increment) ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-text-primary);
+    }
+  }
+
+  .season-toggle-caret {
+    display: inline-flex;
+
+    transition: transform var(--transition-increment) ease-in-out;
+
+    :global(svg) {
+      width: var(--ni-12);
+      height: var(--ni-12);
+    }
+
+    &.is-open {
+      transform: rotate(calc(var(--rtl-sign, 1) * 90deg));
+    }
   }
 
   .recap-caption {
