@@ -72,6 +72,14 @@ function mapShowProgressResponse(
     //  completed) is 1 or less. Replace once the API surfaces an absolute "latest aired
     //  episode" reference.
     isLatestAired: (item.aired - item.completed) <= 1,
+    lastEpisode: item.last_episode
+      ? {
+        season: item.last_episode.season ?? -1,
+        number: item.last_episode.number ?? -1,
+        title: item.last_episode.title ?? '',
+        overview: item.last_episode.overview ?? '',
+      }
+      : null,
     type: episode?.episode_type as EpisodeType ?? EpisodeUnknownType.unknown,
     genres: [],
     overview: episode?.overview ?? '',

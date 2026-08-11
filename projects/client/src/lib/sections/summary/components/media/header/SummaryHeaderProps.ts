@@ -1,5 +1,6 @@
 import type { MediaCrew } from '$lib/requests/models/MediaCrew.ts';
 import type { MediaIntl } from '$lib/requests/models/MediaIntl.ts';
+import type { Season } from '$lib/requests/models/Season.ts';
 import type { SentimentAnalysis } from '$lib/requests/models/SentimentAnalysis.ts';
 import type { StreamOn } from '$lib/requests/models/StreamOn.ts';
 import type { MediaSummaryEntry } from '../models/MediaSummaryEntry.ts';
@@ -13,4 +14,6 @@ export type SummaryHeaderProps = {
   crew: MediaCrew;
   streamOn?: StreamOn;
   sentiment?: SentimentAnalysis | Nil;
+  /** Show pages pass these so the recap can name a finished season. */
+  seasons?: Season[];
 } & MediaSummaryEntry;

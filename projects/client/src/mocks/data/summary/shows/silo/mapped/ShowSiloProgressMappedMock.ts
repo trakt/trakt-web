@@ -23,6 +23,13 @@ export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
   'remaining': 6,
   'minutesLeft': 301,
   'isLatestAired': false,
+  'lastEpisode': {
+    'season': 2,
+    'number': 1,
+    'title': 'The Engineer',
+    'overview':
+      "Juliette finds sanctuary in a silo long ago destroyed by war, thinking she's alone.",
+  },
   'type': EpisodeStandardType.standard,
   'year': 2024,
   'postCredits': [],

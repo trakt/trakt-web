@@ -87,6 +87,7 @@
   {streamOn}
   {studios}
   {sentiment}
+  {seasons}
   type="show"
 >
   {#snippet contextualContent()}

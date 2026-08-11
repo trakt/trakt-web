@@ -13,6 +13,8 @@
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
+  import { untrack } from "svelte";
+  import { of } from "rxjs";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import { useIsStarted } from "../../_internal/useIsStarted";
@@ -32,6 +34,8 @@
   import SummaryHeaderByline from "./_internal/SummaryHeaderByline.svelte";
   import SummaryHeaderFacts from "../../header-kit/SummaryHeaderFacts.svelte";
   import SummaryHeaderKicker from "./_internal/SummaryHeaderKicker.svelte";
+  import SummaryHeaderRecap from "./_internal/SummaryHeaderRecap.svelte";
+  import { useShowProgress } from "$lib/stores/useShowProgress";
   import SummaryHeaderSectionHeader from "./_internal/SummaryHeaderSectionHeader.svelte";
   import SummaryHeaderSentiment from "./_internal/SummaryHeaderSentiment.svelte";
   import SummaryHeaderSocialActivity from "./_internal/SummaryHeaderSocialActivity.svelte";
@@ -63,8 +67,8 @@
     listings and sentiment strip is left-aligned, because it reads as a ruled
     data strip rather than more centred prose.
   */
-  const { intl, crew, streamOn, sentiment, ...target }: SummaryHeaderProps =
-    $props();
+  const { intl, crew, streamOn, sentiment, seasons, ...target }:
+    SummaryHeaderProps = $props();
 
   const media = $derived(target.media);
   const title = $derived(intl?.title ?? media?.title ?? "");
@@ -140,6 +144,31 @@
 
   const { country } = useStreamingPreferences();
 
+  /*
+    Where the viewer stands with the show. Initialized once per mount - the
+    movie and show routes mount separate pages, so the type cannot flip under
+    a live component. Movies get no query at all.
+  */
+  const showProgress = untrack(() => target.type) === "show"
+    ? useShowProgress(fromRune(() => media.slug))
+    : null;
+  const progress$ = showProgress?.progress ?? of(undefined);
+
+  /*
+    Between seasons: the next episode opens a season the last one closed. The
+    finished season's overview then takes the recap's blurb slot - the memory
+    to jog is the season, not one episode.
+  */
+  const previousSeasonOverview = $derived.by(() => {
+    const lastEpisode = $progress$?.lastEpisode;
+    if (!$progress$ || !lastEpisode) return null;
+    if (lastEpisode.season <= 0) return null;
+    if ($progress$.season <= lastEpisode.season) return null;
+
+    return seasons?.find((season) => season.number === lastEpisode.season)
+      ?.overview ?? null;
+  });
+
   const socialTarget = $derived({ type: target.type, slug: media.slug });
   const socialTarget$ = fromRune(() => socialTarget);
   const { entries: socialEntries } = useSocialActivities(socialTarget$);
@@ -193,6 +222,7 @@
   const socialLink = $derived(buildDrawerLink(SummaryDrawers.Social));
   const triviaLink = $derived(buildDrawerLink(SummaryDrawers.Trivia));
   const detailsLink = $derived(buildDrawerLink(SummaryDrawers.Details));
+  const historyLink = $derived(buildDrawerLink(SummaryDrawers.History));
 
   const justWatchDetail = $derived.by(() => {
     const rank = streamOn?.services?.streamingRank?.current;
@@ -321,6 +351,30 @@
           country={$country}
         />
       </div>
+
+      <!--
+        The viewer's own standing with the show. Not marked borrowed: no other
+        section on the page says where YOU are, so hiding it below desktop
+        would remove it entirely rather than de-duplicate it. History is the
+        deepest existing view of your watching, so the chevron goes there.
+      -->
+      <RenderFor audience="authenticated">
+        {#if $progress$ && $progress$.completed > 0}
+          <div class="strip-column">
+            <SummaryHeaderSectionHeader
+              title={m.header_recap()}
+              drilldown={{
+                ...historyLink,
+                label: m.button_label_view_all_history(),
+              }}
+            />
+            <SummaryHeaderRecap
+              progress={$progress$}
+              {previousSeasonOverview}
+            />
+          </div>
+        {/if}
+      </RenderFor>
 
       <RenderFor audience="authenticated">
         {#if headerSocialEntries.length > 0}
