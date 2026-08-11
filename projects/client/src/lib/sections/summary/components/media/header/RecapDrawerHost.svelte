@@ -1,5 +1,10 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import Link from "$lib/components/link/Link.svelte";
+  import NotesIcon from "$lib/components/icons/NotesIcon.svelte";
+  import RemoveFromHistoryAction from "$lib/sections/media-actions/remove-from-history/RemoveFromHistoryAction.svelte";
+  import SpoilerSection from "../../_internal/SpoilerSection.svelte";
+  import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle.ts";
   import * as m from "$lib/features/i18n/messages";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
@@ -74,6 +79,8 @@
 
   const { buildDrawerLink } = summaryDrawerNavigation();
   const historyLink = $derived(buildDrawerLink(SummaryDrawers.History));
+  /* Notes are media-level today, so the note lands on the show. */
+  const notesLink = $derived(buildDrawerLink(SummaryDrawers.Notes));
 </script>
 
 <Drawer title={m.header_recap()} {onClose}>
@@ -93,15 +100,36 @@
           </p>
 
           <!--
-            The description the header's column clamps, in full - under the
-            upcoming episode, since it is the run-up to exactly that.
+            The NEXT episode's description - what the viewer is about to
+            watch, so it earns the top slot but arrives spoiler-guarded: they
+            have not seen it yet, which is the whole point of the guard.
           -->
-          {#if previouslyBlurb}
-            {#if previouslyCaption}
-              <p class="recap-caption">{previouslyCaption}</p>
-            {/if}
-            <p class="recap-blurb">{previouslyBlurb}</p>
+          {#if $progress.overview}
+            <SpoilerSection
+              type="episode"
+              media={{
+                id: $progress.id,
+                season: $progress.season,
+                number: $progress.number,
+              }}
+              show={{ id: show.id, title: show.title }}
+            >
+              <p class="recap-blurb">{$progress.overview}</p>
+            </SpoilerSection>
           {/if}
+        </section>
+      {/if}
+
+      <!--
+        The memory-jogger: the description the header's column clamps, in
+        full. Unguarded on purpose - the viewer has watched what it describes.
+      -->
+      {#if previouslyBlurb}
+        <section class="recap-section">
+          {#if previouslyCaption}
+            <p class="recap-caption">{previouslyCaption}</p>
+          {/if}
+          <p class="recap-blurb">{previouslyBlurb}</p>
         </section>
       {/if}
 
@@ -152,6 +180,21 @@
                     month: "short",
                     day: "numeric",
                   })}
+                </span>
+                <span class="history-actions">
+                  <Link
+                    href={notesLink.href}
+                    color="inherit"
+                    label={m.button_label_add_note({ title: show.title })}
+                  >
+                    <NotesIcon />
+                  </Link>
+                  <RemoveFromHistoryAction
+                    {entry}
+                    style="action"
+                    size="small"
+                    title={episodeActivityTitle(entry.episode, show)}
+                  />
                 </span>
               </li>
             {/if}
@@ -254,5 +297,30 @@
 
     color: var(--color-text-secondary);
     white-space: nowrap;
+  }
+
+  .history-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-xxs);
+
+    color: var(--color-text-secondary);
+
+    :global(a) {
+      display: inline-flex;
+      padding: var(--ni-4);
+
+      transition: color var(--transition-increment) ease-in-out;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--color-text-primary);
+      }
+    }
+
+    :global(svg) {
+      width: var(--ni-16);
+      height: var(--ni-16);
+    }
   }
 </style>
