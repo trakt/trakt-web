@@ -189,6 +189,10 @@ const rules: ReadonlyArray<LegacyRule> = [
     to: () => UrlBuilder.home(),
   },
   {
+    pattern: /^\/watchnow\/(\d+)\/?$/,
+    to: (m) => UrlBuilder.og.watchnow(m[1]),
+  },
+  {
     pattern: /^\/officiallist\/([^/]+)\/?$/,
     to: (m) => `/lists/official/${m[1]}`,
   },

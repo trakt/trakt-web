@@ -306,6 +306,7 @@ export const UrlBuilder = {
   og: {
     support: (username?: string) => ogSupportFactory(username),
     forums: () => 'https://forums.trakt.tv/c/trakt',
+    watchnow: (id: string) => `https://watchnow.trakt.tv/watchnow/${id}`,
     widgets: {
       yir: (slug: string, year: string) =>
         `https://widgets.trakt.tv/users/${slug}/yir.jpg?year=${year}`,
