@@ -5583,6 +5583,18 @@
       "default": "Manage lists",
       "description": "Header for the drawer that allows users to add/remove a movie or show to/from their lists."
     },
+    "text_sentiment_the_verdict": {
+      "default": "The verdict",
+      "description": "Band label over the sentiment analysis prose in the sentiment drawer."
+    },
+    "header_sentiment_working": {
+      "default": "Working",
+      "description": "Band label over what reviewers praise, in the sentiment drawer."
+    },
+    "header_sentiment_not_working": {
+      "default": "Not working",
+      "description": "Band label over what reviewers criticize, in the sentiment drawer."
+    },
     "header_sentiment_highlight": {
       "default": "Highlight",
       "description": "Header for the section that displays the highlight of a movie or show sentiment analysis."
