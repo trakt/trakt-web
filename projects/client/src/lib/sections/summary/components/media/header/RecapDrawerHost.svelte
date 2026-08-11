@@ -87,8 +87,27 @@
       .sort((a, b) => b.number - a.number),
   );
 
-  /* One open at a time - these are refreshers, not reading material. */
-  let openSeason = $state<number | null>(null);
+  /*
+    All rows can be open at once; until the reader touches any of them, the
+    most recent earlier season starts expanded - the freshest memory leads.
+  */
+  let openSeasons = $state<ReadonlySet<number> | null>(null);
+  const effectiveOpenSeasons = $derived(
+    openSeasons ??
+      new Set(
+        earlierSeasons.length > 0 ? [earlierSeasons[0]?.number ?? -1] : [],
+      ),
+  );
+
+  const toggleSeason = (seasonNumber: number) => {
+    const next = new Set(effectiveOpenSeasons);
+    if (next.has(seasonNumber)) {
+      next.delete(seasonNumber);
+    } else {
+      next.add(seasonNumber);
+    }
+    openSeasons = next;
+  };
 
   const previouslyBlurb = $derived.by(() => {
     if (isBetweenSeasons) {
@@ -194,11 +213,8 @@
               <button
                 type="button"
                 class="recap-season-toggle"
-                aria-expanded={openSeason === season.number}
-                onclick={() =>
-                  (openSeason = openSeason === season.number
-                    ? null
-                    : season.number)}
+                aria-expanded={effectiveOpenSeasons.has(season.number)}
+                onclick={() => toggleSeason(season.number)}
               >
                 <span class="recap-caption">
                   {m.text_recap_previously({
@@ -207,12 +223,12 @@
                 </span>
                 <span
                   class="season-toggle-caret"
-                  class:is-open={openSeason === season.number}
+                  class:is-open={effectiveOpenSeasons.has(season.number)}
                 >
                   <CaretRightIcon />
                 </span>
               </button>
-              {#if openSeason === season.number}
+              {#if effectiveOpenSeasons.has(season.number)}
                 <p class="recap-blurb">{season.overview}</p>
               {/if}
             </div>
@@ -376,6 +392,11 @@
   .season-toggle-caret {
     display: inline-flex;
 
+    /*
+      Disclosure, not navigation: down when closed, up when open. Vertical
+      carets carry no reading direction, so no RTL flip is needed.
+    */
+    transform: rotate(90deg);
     transition: transform var(--transition-increment) ease-in-out;
 
     :global(svg) {
@@ -384,7 +405,7 @@
     }
 
     &.is-open {
-      transform: rotate(calc(var(--rtl-sign, 1) * 90deg));
+      transform: rotate(-90deg);
     }
   }
 
