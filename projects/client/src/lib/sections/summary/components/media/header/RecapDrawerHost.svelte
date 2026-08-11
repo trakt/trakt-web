@@ -16,6 +16,7 @@
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
@@ -150,6 +151,15 @@
             </span>
             <span class="bold">{$progress.title}</span>
           </p>
+
+          {#if $progress.cover.url}
+            <div class="recap-still">
+              <CrossOriginImage
+                src={$progress.cover.url}
+                alt={$progress.title}
+              />
+            </div>
+          {/if}
 
           <!--
             Not out yet: the same two tags the season cards and the calendar
@@ -350,6 +360,21 @@
     color: var(--purple-300);
 
     white-space: nowrap;
+  }
+
+  .recap-still {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+
+    border-radius: var(--border-radius-m);
+    overflow: hidden;
+
+    :global(img) {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
   }
 
   .recap-airing {
