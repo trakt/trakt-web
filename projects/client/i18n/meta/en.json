@@ -10549,6 +10549,34 @@
       "default": "{count} Nominations",
       "description": "Golden pill on the person page counting nominations, shown when there are no wins."
     },
+    "header_recap": {
+      "default": "Recap",
+      "description": "Section label for the viewer's own progress through a show - last seen episode, standing and time left."
+    },
+    "text_recap_last_seen": {
+      "default": "Last seen",
+      "description": "Label preceding the last watched episode marker in the recap section."
+    },
+    "text_recap_previously": {
+      "default": "Previously on {season}",
+      "description": "Label introducing the just-finished season's overview when the viewer sits between seasons."
+    },
+    "text_recap_behind": {
+      "default": "{count} behind",
+      "description": "How many aired episodes the viewer has not watched yet."
+    },
+    "text_recap_caught_up": {
+      "default": "Caught up",
+      "description": "Shown in place of the behind-count when the viewer has watched every aired episode."
+    },
+    "text_recap_of_total": {
+      "default": "{completed} of {total}",
+      "description": "Watched episodes out of aired episodes, e.g. 16 of 26."
+    },
+    "text_recap_time_left": {
+      "default": "{duration} left",
+      "description": "Remaining watch time for the show, e.g. 8h 20m left."
+    },
     "header_reactions": {
       "default": "Reactions",
       "description": "Section label for audience emoji reactions."
