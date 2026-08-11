@@ -132,7 +132,7 @@
   const notesLink = $derived(buildDrawerLink(SummaryDrawers.Notes));
 </script>
 
-<Drawer title={m.header_recap()} metaInfo={show.title} {onClose}>
+<Drawer title={m.header_recap()} {onClose}>
   <div class="trakt-recap-drawer">
     {#if $progress}
       {#if $progress.number > 0}

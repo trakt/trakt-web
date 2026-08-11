@@ -22,7 +22,7 @@
   const verdict = $derived(toSummarySentiment(sentiment));
 </script>
 
-{#snippet badge()}
+{#snippet metaInfo()}
   {#if verdict}
     <span class="sentiment-verdict" data-verdict={verdict.verdict}>
       {verdict.label}
@@ -34,7 +34,7 @@
   {onClose}
   onOpened={() => (isOpen = true)}
   title={m.header_community_sentiment()}
-  {badge}
+  {metaInfo}
   variant="vip"
   size="auto"
 >
@@ -52,22 +52,31 @@
 </Drawer>
 
 <style lang="scss">
+  /* The summary screen's own verdict pill - one system, everywhere. */
   .sentiment-verdict {
+    align-self: flex-start;
+
     font-size: var(--font-size-tag);
     font-weight: 700;
     letter-spacing: 0.13em;
     text-transform: uppercase;
 
+    padding: var(--ni-4) var(--ni-10);
+    border-radius: 999px;
+
+    color: var(--sentiment-color);
+    background: color-mix(in srgb, var(--sentiment-color) 16%, transparent);
+
     &[data-verdict="positive"] {
-      color: var(--green-400);
+      --sentiment-color: var(--green-400);
     }
 
     &[data-verdict="mixed"] {
-      color: var(--yellow-400);
+      --sentiment-color: var(--yellow-400);
     }
 
     &[data-verdict="negative"] {
-      color: var(--red-400);
+      --sentiment-color: var(--red-400);
     }
   }
 </style>
