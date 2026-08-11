@@ -55,6 +55,10 @@
   /* The summary screen's own verdict pill - one system, everywhere. */
   .sentiment-verdict {
     align-self: flex-start;
+    display: inline-flex;
+
+    /* A breath below the title - flush against it, it read as a subtitle. */
+    margin-top: var(--gap-xs);
 
     font-size: var(--font-size-tag);
     font-weight: 700;
