@@ -191,6 +191,29 @@ describe('util: resolveLegacyRedirect', () => {
     });
   });
 
+  describe('watch now deep links hop to the v2 host', () => {
+    it('should map a watch now link to the watchnow host', () => {
+      expect(resolveLegacyRedirect('/watchnow/265852339')).toBe(
+        'https://watchnow.trakt.tv/watchnow/265852339',
+      );
+    });
+
+    it('should tolerate a trailing slash', () => {
+      expect(resolveLegacyRedirect('/watchnow/265852339/')).toBe(
+        'https://watchnow.trakt.tv/watchnow/265852339',
+      );
+    });
+
+    it.each([
+      '/watchnow',
+      '/watchnow/sources',
+      '/watchnow/sources/us',
+      '/watchnow/movie/1390/justwatch/us/netflix',
+    ])('should leave the rest of the namespace alone: %s', (path) => {
+      expect(resolveLegacyRedirect(path)).toBeNull();
+    });
+  });
+
   describe('live oauth endpoints are never hijacked', () => {
     it.each([
       '/oauth/authorize',
