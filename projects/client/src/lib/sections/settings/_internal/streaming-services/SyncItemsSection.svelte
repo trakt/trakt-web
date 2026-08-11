@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { refetchQuery } from "$lib/features/query/refetchQuery.ts";
   import { useInfiniteQuery } from "$lib/features/query/useQuery.ts";
   import { syncPausedItemsQuery } from "$lib/requests/queries/streaming-sync/syncPausedItemsQuery.ts";
   import { syncSkippedItemsQuery } from "$lib/requests/queries/streaming-sync/syncSkippedItemsQuery.ts";
@@ -57,10 +58,7 @@
     await queryState.fetchNextPage();
   };
 
-  const retry = async () => {
-    const queryState = await firstValueFrom(query);
-    await queryState.refetch();
-  };
+  const retry = () => refetchQuery(query);
 
   const title = $derived(
     kind === "paused"
