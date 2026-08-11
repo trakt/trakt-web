@@ -89,19 +89,15 @@
   );
 
   /*
-    All rows can be open at once; until the reader touches any of them, the
-    most recent earlier season starts expanded - the freshest memory leads.
+    All rows can be open at once, and all start closed: knee-deep in a season,
+    last season's synopsis is noise. The one moment an old season matters -
+    finished it, not yet started the next - is exactly when the main blurb
+    above already shows it, so the collapsed rows are pure opt-in memory.
   */
-  let openSeasons = $state<ReadonlySet<number> | null>(null);
-  const effectiveOpenSeasons = $derived(
-    openSeasons ??
-      new Set(
-        earlierSeasons.length > 0 ? [earlierSeasons[0]?.number ?? -1] : [],
-      ),
-  );
+  let openSeasons = $state<ReadonlySet<number>>(new Set());
 
   const toggleSeason = (seasonNumber: number) => {
-    const next = new Set(effectiveOpenSeasons);
+    const next = new Set(openSeasons);
     if (next.has(seasonNumber)) {
       next.delete(seasonNumber);
     } else {
@@ -226,7 +222,7 @@
               <button
                 type="button"
                 class="recap-season-toggle"
-                aria-expanded={effectiveOpenSeasons.has(season.number)}
+                aria-expanded={openSeasons.has(season.number)}
                 onclick={() => toggleSeason(season.number)}
               >
                 <span class="recap-caption">
@@ -236,12 +232,12 @@
                 </span>
                 <span
                   class="season-toggle-caret"
-                  class:is-open={effectiveOpenSeasons.has(season.number)}
+                  class:is-open={openSeasons.has(season.number)}
                 >
                   <CaretRightIcon />
                 </span>
               </button>
-              {#if effectiveOpenSeasons.has(season.number)}
+              {#if openSeasons.has(season.number)}
                 <p class="recap-blurb">{season.overview}</p>
               {/if}
             </div>
