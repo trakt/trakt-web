@@ -7,6 +7,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
+  import { escapeJsonForScriptTag } from "$lib/utils/json/escapeJsonForScriptTag.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Redirect from "../../components/router/Redirect.svelte";
   import Footer from "../footer/Footer.svelte";
@@ -195,7 +196,9 @@
     });
   });
 
-  const escapedJsonLd = $derived(jsonLd?.replaceAll("<", "\\u003c"));
+  const escapedJsonLd = $derived(
+    jsonLd == null ? null : escapeJsonForScriptTag(jsonLd),
+  );
 
   const dynamicContentProps = $derived(
     hasDynamicContent
