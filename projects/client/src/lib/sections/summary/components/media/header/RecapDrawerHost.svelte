@@ -15,6 +15,9 @@
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
+  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
+  import { toHumanETA } from "$lib/utils/formatting/date/toHumanETA";
   import RecapProgress from "./_internal/RecapProgress.svelte";
   import SummaryHeaderSectionHeader from "./_internal/SummaryHeaderSectionHeader.svelte";
 
@@ -77,6 +80,21 @@
     return lastEpisode?.overview ?? "";
   });
 
+  /*
+    Whether the next episode is actually OUT. The calendar and the premiere
+    tags know this; a recap that presents an unaired premiere as "continue
+    watching" is lying about the one thing it exists to say.
+  */
+  const isNextOut = $derived(
+    $progress != null &&
+      $progress.effectiveReleaseDate.getTime() <= Date.now(),
+  );
+  const nextEta = $derived(
+    $progress != null && !isNextOut
+      ? toHumanETA(new Date(), $progress.effectiveReleaseDate)
+      : null,
+  );
+
   const { buildDrawerLink } = summaryDrawerNavigation();
   const historyLink = $derived(buildDrawerLink(SummaryDrawers.History));
   /* Notes are media-level today, so the note lands on the show. */
@@ -88,7 +106,9 @@
     {#if $progress}
       {#if $progress.number > 0}
         <section class="recap-section">
-          <h3 class="recap-section-title">{m.list_title_up_next()}</h3>
+          <h3 class="recap-section-title">
+            {isNextOut ? m.list_title_up_next() : m.text_recap_coming_up()}
+          </h3>
           <p class="recap-episode-line">
             <span class="recap-episode-marker">
               {episodeNumberLabel({
@@ -98,6 +118,19 @@
             </span>
             <span class="bold">{$progress.title}</span>
           </p>
+
+          {#if !isNextOut && nextEta}
+            <p class="recap-airing">
+              <EpisodeStatusTag
+                i18n={EpisodeIntlProvider}
+                episodeType={$progress.type}
+                releaseDate={$progress.effectiveReleaseDate}
+              />
+              <span class="recap-airing-eta">
+                {m.text_recap_airs({ eta: nextEta })}
+              </span>
+            </p>
+          {/if}
 
           <!--
             The NEXT episode's description - what the viewer is about to
@@ -251,6 +284,18 @@
     color: var(--purple-300);
 
     white-space: nowrap;
+  }
+
+  .recap-airing {
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap-s);
+  }
+
+  .recap-airing-eta {
+    color: var(--color-text-secondary);
   }
 
   .recap-caption {
