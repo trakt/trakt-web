@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
@@ -8,12 +8,9 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { TriviaCategory } from "$lib/requests/models/MediaTrivia";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { fade } from "svelte/transition";
   import TriviaCard from "./_internal/TriviaCard.svelte";
   import { useTrivia } from "./useTrivia";
-
-  const characterWidthFactor = 0.85;
 
   const { media, onClose }: { media: MediaEntry; onClose: () => void } =
     $props();
@@ -22,10 +19,6 @@
   let activeCategory = $state<TriviaCategory | "all">("all");
 
   const { current: triviaType, set, options } = useToggler("trivia");
-
-  const longestOptionLength = $derived(
-    Math.max(...options.map((option) => option.text().length)),
-  );
 
   const { list, hasSpoilers, categories } = $derived(
     useTrivia({
@@ -73,33 +66,13 @@
   }
 </script>
 
-{#snippet metaInfo()}
-  <ListMetaInfo
-    text={$triviaType.text()}
-    --meta-info-width={`${longestOptionLength * characterWidthFactor}ch`}
-  />
-{/snippet}
-
 {#snippet badge()}
-  {#if $hasSpoilers || $categories.length > 1}
-    <div class="trivia-controls">
-      {#if $hasSpoilers}
-        <Toggler value={$triviaType.value} onChange={set} {options} />
-      {/if}
-      {#if $categories.length > 1}
-        <div class="category-filter">
-          <SingleSelect
-            options={categoryOptions}
-            value={effectiveCategory === "all" ? null : effectiveCategory}
-            placeholder={m.option_text_trivia_category_all()}
-            autoWidth
-            onChange={(value) =>
-              (activeCategory = value as TriviaCategory | "all")}
-          />
-        </div>
-      {/if}
-    </div>
-  {/if}
+  <div class="trivia-badge">
+    <span class="trivia-count">{$list.length}</span>
+    {#if $hasSpoilers}
+      <Toggler value={$triviaType.value} onChange={set} {options} />
+    {/if}
+  </div>
 {/snippet}
 
 <Drawer
@@ -108,15 +81,38 @@
   title={m.list_title_trivia()}
   variant="vip"
   size="auto"
-  metaInfo={$hasSpoilers ? metaInfo : undefined}
   {badge}
 >
   {#if isOpen}
     <div transition:fade={{ duration: 150 }}>
       <RenderFor audience="vip">
+        {#if $categories.length > 1}
+          <div class="category-pills">
+            {#each categoryOptions as option (option.value)}
+              <Button
+                color={effectiveCategory === option.value ||
+                    (option.value === "all" && effectiveCategory === "all")
+                  ? "purple"
+                  : "default"}
+                style={effectiveCategory === option.value ? "flat" : "outline"}
+                size="small"
+                label={option.label}
+                onclick={() =>
+                  (activeCategory = option.value as TriviaCategory | "all")}
+              >
+                {option.label}
+              </Button>
+            {/each}
+          </div>
+        {/if}
+
         <div class="trivia-drawer-list">
           {#each filteredList as trivia (trivia.key)}
-            <TriviaCard {trivia} {media} />
+            <TriviaCard
+              {trivia}
+              {media}
+              categoryLabel={categoryLabel(trivia.category)}
+            />
           {/each}
         </div>
       </RenderFor>
@@ -130,26 +126,42 @@
   {/if}
 </Drawer>
 
-<style>
-  .trivia-controls {
+<style lang="scss">
+  .trivia-badge {
     display: flex;
     align-items: center;
-    gap: var(--gap-xs);
-    flex: 1;
-    min-width: 0;
+    gap: var(--gap-s);
   }
 
-  .category-filter {
+  .trivia-count {
+    font-size: var(--font-size-tag);
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    color: var(--color-text-secondary);
+  }
+
+  .category-pills {
     display: flex;
-    margin-inline-start: auto;
-    min-width: 0;
+    flex-wrap: wrap;
+    gap: var(--gap-s);
+
+    /* The pills rule off from the facts below, as the header does its bands. */
+    padding: var(--gap-xs) var(--gap-s) var(--ni-20);
+    margin-bottom: var(--ni-20);
+    border-bottom: var(--ni-1) solid var(--color-hairline);
   }
 
   .trivia-drawer-list {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--ni-20);
 
-    padding: var(--ni-2);
+    /* The sentiment drawer's supplemental prose inset - one tuning. */
+    padding: 0 var(--gap-s) var(--gap-s);
+
+    :global(.trakt-trivia-card + .trakt-trivia-card) {
+      padding-top: var(--ni-20);
+      border-top: var(--ni-1) solid var(--color-hairline);
+    }
   }
 </style>
