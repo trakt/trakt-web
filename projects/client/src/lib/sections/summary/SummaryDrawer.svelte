@@ -17,6 +17,7 @@
   import CastDrawerHost from "./components/cast/CastDrawerHost.svelte";
   import AwardsDrawerHost from "./components/media/header/AwardsDrawerHost.svelte";
   import GlanceDrawerHost from "./components/media/header/GlanceDrawerHost.svelte";
+  import RecapDrawerHost from "./components/media/header/RecapDrawerHost.svelte";
   import MediaReactionsDrawerHost from "$lib/features/media-reactions/MediaReactionsDrawerHost.svelte";
   import type { CommentsProps } from "./components/comments/CommentsProps";
   import CommentsDrawerHost from "./components/comments/drawers/CommentsDrawerHost.svelte";
@@ -227,6 +228,10 @@
     {streamOn}
     onClose={close}
   />
+{/if}
+
+{#if drawer === SummaryDrawers.Recap && showEntry}
+  <RecapDrawerHost show={showEntry} {seasons} onClose={close} />
 {/if}
 
 {#if drawer === SummaryDrawers.Awards && details.type !== "episode"}
