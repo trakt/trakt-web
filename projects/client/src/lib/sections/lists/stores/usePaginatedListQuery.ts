@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from '$lib/features/query/useQuery.ts';
+import { rethrowUnlessCancelled } from '$lib/features/query/rethrowUnlessCancelled.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import type { CreateInfiniteQueryOptions } from '$lib/features/query/types.ts';
@@ -46,7 +47,7 @@ export function usePaginatedListQuery<
 
   const fetchNextPage = async () => {
     const { fetchNextPage } = await firstValueFrom(query);
-    await fetchNextPage();
+    await fetchNextPage().catch(rethrowUnlessCancelled);
   };
 
   return {
