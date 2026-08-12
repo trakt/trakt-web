@@ -37,19 +37,9 @@
     ratings: MediaRating;
     entry: MediaEntry | EpisodeEntry;
     drilldown?: TraktRatingDrilldown;
-    // Alternative to `drilldown`: open a locally-mounted drawer instead of
-    // navigating via a URL. Used by the episode drawer, which can't route to
-    // a `view=` drawer without replacing itself.
     onDrilldown?: () => void;
-    variant?: "all" | "external";
+    variant?: "summary" | "breakdown";
     isLoading?: boolean;
-    // "minimal" (the default, matching the compact summary row) drops the
-    // vote-count superscripts; "default" renders them, used by the ratings
-    // drawer.
-    style?: "default" | "minimal";
-    // "row" (default) lays sources out inline; "tile" renders each source as a
-    // card in a grid, used by the ratings drawer.
-    layout?: "row" | "tile";
   };
 
   const {
@@ -58,71 +48,60 @@
     entry,
     drilldown,
     onDrilldown,
-    variant = "all",
+    variant = "summary",
     isLoading = false,
-    style = "minimal",
-    layout = "row",
   }: RatingListProps = $props();
 
   const { trakt, imdb, tmdb, rotten, mal, letterboxd } = $derived(
     getDisplayableRatings({ ratings, entry }),
   );
 
+  const isBreakdown = $derived(variant === "breakdown");
+  const isDrilldown = $derived(drilldown != null || onDrilldown != null);
+
+  const itemProps = $derived({
+    isLoading,
+    variant: isBreakdown ? ("tile" as const) : ("row" as const),
+  });
+
   const isMediaEntry = $derived(
     entry.type === "show" || entry.type === "movie",
   );
 
-  // Letterboxd is films-only and lives only in the ratings breakdown, never the
-  // compact summary row. MAL (anime-only) shows wherever externals render.
   const showLetterboxd = $derived(
-    variant === "external" && entry.type === "movie" &&
-      letterboxd?.rating != null,
+    isBreakdown && entry.type === "movie" && letterboxd?.rating != null,
   );
 
-  // Reserve the MAL slot in the skeleton for anime movies/shows, so the row
-  // does not shift when the (anime-only) MAL rating lands. Episodes never carry
-  // a MAL rating, so they are excluded from the reserve.
   const isAnime = $derived(isMediaEntry && entry.genres.includes("anime"));
   const showMal = $derived(mal?.rating != null || (isLoading && isAnime));
 
-  // TMDB lives only in the ratings breakdown, never the compact summary row.
-  const showTmdb = $derived(variant === "external" && tmdb?.rating != null);
-
-  const isDrilldown = $derived(drilldown != null || onDrilldown != null);
+  const showTmdb = $derived(isBreakdown && tmdb?.rating != null);
 </script>
 
 {#snippet voteCount(votes: number | Nil)}
-  {#if layout === "tile"}
+  {#if isBreakdown}
     <WatchersIcon />
   {/if}
   {i18n.voteText(votes ?? 0)}
 {/snippet}
 
-{#snippet traktItem()}
-  <RatingItem
-    rating={trakt?.rating && toTraktRating(trakt.rating, getLocale())}
-    {isLoading}
-    {style}
-    {layout}
-  >
-    <RatingIcon style={toVotesBasedRating(trakt?.votes)} />
-    {#snippet superscript()}
-      {@render voteCount(trakt?.votes)}
-    {/snippet}
-  </RatingItem>
-{/snippet}
-
 {#snippet sources()}
-  {#if variant === "all"}
-    {@render traktItem()}
+  {#if !isBreakdown}
+    <RatingItem
+      rating={trakt?.rating && toTraktRating(trakt.rating, getLocale())}
+      {...itemProps}
+    >
+      <RatingIcon style={toVotesBasedRating(trakt?.votes)} />
+      {#snippet superscript()}
+        {@render voteCount(trakt?.votes)}
+      {/snippet}
+    </RatingItem>
   {/if}
 
   <RatingItem
     rating={imdb?.rating && toIMDBRating(imdb.rating, getLocale())}
     url={imdb?.url}
-    {isLoading}
-    {style}
-    {layout}
+    {...itemProps}
   >
     <IMDBIcon style={toVotesBasedRating(imdb?.votes)} />
     {#snippet superscript()}
@@ -136,9 +115,7 @@
       ? toIMDBRating(mal.rating, getLocale())
       : undefined}
       url={mal?.url}
-      {isLoading}
-      {style}
-      {layout}
+      {...itemProps}
     >
       <MALIcon style={toVotesBasedRating(mal?.votes ?? undefined)} />
       {#snippet superscript()}
@@ -151,9 +128,7 @@
     <RatingItem
       rating={toRottenPercentage(rotten?.critic)}
       url={rotten?.url}
-      {isLoading}
-      {style}
-      {layout}
+      {...itemProps}
     >
       <RottenIcon style={toRottenCriticRating(rotten?.critic)} />
       {#snippet superscript()}
@@ -164,9 +139,7 @@
     <RatingItem
       rating={toRottenPercentage(rotten?.audience)}
       url={rotten?.url}
-      {isLoading}
-      {style}
-      {layout}
+      {...itemProps}
     >
       <PopcornIcon style={toRottenAudienceRating(rotten?.audience)} />
       {#snippet superscript()}
@@ -179,9 +152,7 @@
     <RatingItem
       rating={toIMDBRating(letterboxd.rating, getLocale())}
       url={letterboxd.url}
-      {isLoading}
-      {style}
-      {layout}
+      {...itemProps}
     >
       <LetterboxdIcon style={toVotesBasedRating(letterboxd.votes ?? undefined)} />
       {#snippet superscript()}
@@ -194,9 +165,7 @@
     <RatingItem
       rating={toIMDBRating(tmdb.rating, getLocale())}
       url={tmdb.url}
-      {isLoading}
-      {style}
-      {layout}
+      {...itemProps}
     >
       <TMDBIcon />
       {#snippet superscript()}
@@ -206,7 +175,7 @@
   {/if}
 {/snippet}
 
-<div class="trakt-summary-ratings" data-layout={layout}>
+<div class="trakt-summary-ratings" data-variant={itemProps.variant}>
   {#if isDrilldown}
     <ActionButton
       classList="ratings-drilldown"
@@ -233,9 +202,6 @@
   .trakt-summary-ratings :global(.ratings-drilldown) {
     display: flex;
     align-items: center;
-    // wrap instead of shrinking items: a shrunk RatingItem clips its value and
-    // vote-count under `overflow: clip`. Keeps the row intact as sources grow
-    // (e.g. MAL joining for anime).
     flex-wrap: wrap;
     gap: var(--gap-s);
   }
@@ -245,9 +211,7 @@
       flex: 0 0 auto;
     }
 
-    // Tile layout: equal-column grid of source cards, matching the drawer's
-    // stat-tile surfaces. Overrides the inline flex row above.
-    &[data-layout="tile"] {
+    &[data-variant="tile"] {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: var(--gap-s);
@@ -257,7 +221,7 @@
       }
     }
 
-    &[data-layout="row"] {
+    &[data-variant="row"] {
       :global(.ratings-drilldown) {
         width: auto;
         height: auto;
