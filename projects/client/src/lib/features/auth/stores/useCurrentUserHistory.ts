@@ -1,3 +1,5 @@
+import { flattenQueryPages } from '$lib/features/query/flattenQueryPages.ts';
+import { isQuerySettled } from '$lib/features/query/isQuerySettled.ts';
 import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { combineLatest, distinctUntilChanged, map, Observable } from 'rxjs';
@@ -24,18 +26,6 @@ function toWatchedMap<T extends { id: number }>(
   return new Map(entries.map((entry) => [entry.id, entry]));
 }
 
-function toQueryMap<T extends { id: number }>(
-  query: { data?: { pages: Array<{ entries: T[] }> } },
-): Map<number, T> {
-  return toWatchedMap(query.data?.pages.flatMap((p) => p.entries) ?? []);
-}
-
-function isSettled(
-  query: { isPending: boolean; isFetchingNextPage: boolean },
-): boolean {
-  return !query.isPending && !query.isFetchingNextPage;
-}
-
 type UseCurrentUserHistoryResult = {
   history: Observable<UserHistory | null>;
   isLoading: Observable<boolean>;
@@ -51,16 +41,13 @@ export function useCurrentUserHistory(): UseCurrentUserHistoryResult {
 
   const history = combineLatest([moviesQuery, showsQuery]).pipe(
     map(([movies, shows]) => {
-      if (!isSettled(movies) || !isSettled(shows)) {
+      if (!isQuerySettled(movies) || !isQuerySettled(shows)) {
         return null;
       }
 
-      const moviesMap = toQueryMap(movies);
-      const showsMap = toQueryMap(shows);
-
       return {
-        movies: moviesMap,
-        shows: showsMap,
+        movies: toWatchedMap(flattenQueryPages(movies)),
+        shows: toWatchedMap(flattenQueryPages(shows)),
       };
     }),
     distinctUntilChanged((prev, curr) => prev === null && curr === null),
@@ -68,7 +55,7 @@ export function useCurrentUserHistory(): UseCurrentUserHistoryResult {
   );
 
   const isLoading = combineLatest([moviesQuery, showsQuery]).pipe(
-    map(([movies, shows]) => !isSettled(movies) || !isSettled(shows)),
+    map(([movies, shows]) => !isQuerySettled(movies) || !isQuerySettled(shows)),
   );
 
   return { history, isLoading };

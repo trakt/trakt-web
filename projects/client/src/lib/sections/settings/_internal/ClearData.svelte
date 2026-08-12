@@ -42,7 +42,7 @@
       case "history":
         return { type: activeSourceType, input: $history ?? undefined };
       case "library":
-        return { type: activeSourceType, input: $collection };
+        return { type: activeSourceType, input: $collection ?? undefined };
     }
   });
 

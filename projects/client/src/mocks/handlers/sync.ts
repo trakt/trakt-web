@@ -1,3 +1,7 @@
+import type {
+  CollectionMinimalResponse,
+  CollectionMinimalShowResponse,
+} from '@trakt/api';
 import { http, HttpResponse } from 'msw';
 
 import { MediaLibraryResponseMock } from '../data/sync/response/MediaLibraryResponseMock.ts';
@@ -5,6 +9,22 @@ import { UpNextResponseMock } from '../data/sync/response/UpNextResponseMock.ts'
 import { UserPlexEpisodeLibraryResponseMock } from '../data/users/response/UserPlexEpisodeLibraryResponseMock.ts';
 import { UserPlexMovieLibraryResponseMock } from '../data/users/response/UserPlexMovieLibraryResponseMock.ts';
 import { UserPlexShowLibraryResponseMock } from '../data/users/response/UserPlexShowLibraryResponseMock.ts';
+
+function paginatedCollection(
+  request: Request,
+  items: CollectionMinimalResponse | CollectionMinimalShowResponse,
+) {
+  const { searchParams } = new URL(request.url);
+  const page = Number(searchParams.get('page') ?? 1);
+  const limit = searchParams.get('limit');
+
+  return HttpResponse.json(page > 1 ? {} : items, {
+    headers: limit == null ? undefined : {
+      'x-pagination-page': `${page}`,
+      'x-pagination-limit': limit,
+    },
+  });
+}
 
 export const sync = [
   http.post(
@@ -101,20 +121,17 @@ export const sync = [
   ),
   http.get(
     'http://localhost/sync/collection/minimal/movies',
-    () => {
-      return HttpResponse.json(UserPlexMovieLibraryResponseMock);
-    },
+    ({ request }) =>
+      paginatedCollection(request, UserPlexMovieLibraryResponseMock),
   ),
   http.get(
     'http://localhost/sync/collection/minimal/episodes',
-    () => {
-      return HttpResponse.json(UserPlexEpisodeLibraryResponseMock);
-    },
+    ({ request }) =>
+      paginatedCollection(request, UserPlexEpisodeLibraryResponseMock),
   ),
   http.get(
     'http://localhost/sync/collection/minimal/shows',
-    () => {
-      return HttpResponse.json(UserPlexShowLibraryResponseMock);
-    },
+    ({ request }) =>
+      paginatedCollection(request, UserPlexShowLibraryResponseMock),
   ),
 ];
