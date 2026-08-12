@@ -895,13 +895,15 @@
     }
 
     /*
-      Prose rewards width. Trivia closes the list and may grow into whatever
-      a short page leaves over, up to half the viewport - on a full page
-      there is nothing left over and it holds the quarter like everyone else.
+      Prose rewards width - in moderation. Trivia closes the list and may
+      grow into a short page's leftover room, capped at a third of the
+      viewport: enough for the facts to breathe, not enough to read as a
+      different species of column. Half was tried and was way too much. On a
+      full page nothing is left over and it holds the quarter.
     */
     > .strip-column-stretch {
       flex-grow: 1;
-      max-width: calc((100% - var(--ni-32)) / 2);
+      max-width: calc((100% - 2 * var(--ni-32)) / 3);
     }
   }
 
