@@ -107,9 +107,15 @@
     personAwards.filter((award) => award.isWinner).length,
   );
   const awardsPill = $derived.by(() => {
-    if (awardWins > 0) return m.text_person_awards_count({ count: awardWins });
+    if (awardWins > 0) {
+      return awardWins === 1
+        ? m.text_person_awards_count_one({ count: awardWins })
+        : m.text_person_awards_count({ count: awardWins });
+    }
     if (personAwards.length > 0) {
-      return m.text_person_nominations_count({ count: personAwards.length });
+      return personAwards.length === 1
+        ? m.text_person_nominations_count_one({ count: personAwards.length })
+        : m.text_person_nominations_count({ count: personAwards.length });
     }
     return null;
   });
