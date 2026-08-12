@@ -778,6 +778,35 @@
 
     /* The composition centres; the data does not. */
     text-align: start;
+
+    /*
+      Wider gutters than the profile header gives its carousel - there the
+      carets frame a small card, here they frame a 1280px page and read as
+      glued to the columns without the extra air.
+    */
+    :global(.trakt-swipe-carousel) {
+      gap: var(--ni-32);
+    }
+
+    /*
+      A longer, decelerating glide for the page turn. The profile's 250ms
+      symmetric ease suits its small card; over a full-width page it reads
+      as a snap.
+    */
+    :global(.swipe-carousel-track:not(.is-dragging)) {
+      transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    :global(.swipe-carousel-item:not(.is-dragging)) {
+      transition: opacity 480ms ease-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :global(.swipe-carousel-track),
+      :global(.swipe-carousel-item) {
+        transition: none;
+      }
+    }
   }
 
   /*
