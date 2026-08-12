@@ -875,16 +875,16 @@
   }
 
   /*
-    One carousel page: however many sections it holds, dealt as equal columns
-    across the full width - four reads as quarters, a three-section second
-    page as thirds. Fixed four-wide tracks left short pages huddled at the
-    start with a dead zone beside them, and the section titles visibly
-    shifting position between pages.
+    One carousel page: four fixed quarter tracks on every page, so a section
+    on page two stands exactly where its page-one counterpart stood - titles
+    hold their positions through the turn. A short page's trailing track
+    stays honestly empty: the list ends there. (Spreading short pages to
+    thirds was tried; the titles shifting between pages read worse than the
+    empty slot.)
   */
   .strip-page {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--ni-32);
   }
 
