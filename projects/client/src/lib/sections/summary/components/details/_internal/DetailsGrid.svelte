@@ -19,18 +19,19 @@
   }
 
   /*
-    One fact per ruled row - label at the start, values at the end - instead
-    of the two-column card grid. The rows read top to bottom like a spec
-    sheet, which is what this data is.
+    Two facts per row, label over values, no rules - the ruled one-per-row
+    spec sheet doubled the drawer's height and the hairlines read as clutter
+    at this density. Half the height, and the caps labels alone carry the
+    structure.
   */
   .trakt-summary-details-grid-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-12);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--ni-16) var(--gap-m);
 
-    > :global(* + *) {
-      padding-top: var(--ni-12);
-      border-top: var(--ni-1) solid var(--color-hairline);
+    @include for-mobile {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--ni-12);
     }
   }
 </style>
