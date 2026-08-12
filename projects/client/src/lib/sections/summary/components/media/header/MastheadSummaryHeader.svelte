@@ -906,6 +906,15 @@
     > .strip-column-stretch {
       flex-grow: 1.4;
       max-width: calc((100% - 2 * var(--ni-32)) / 3);
+
+      /*
+        Alone on its page, the third-cap left one tight column adrift in an
+        empty viewport, three words a line. With the page to itself it takes
+        a real prose measure instead - still centred, finally readable.
+      */
+      &:only-child {
+        max-width: min(72ch, 100%);
+      }
     }
   }
 
