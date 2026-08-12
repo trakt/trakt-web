@@ -311,7 +311,14 @@
     -->
     <div class="masthead-deck">
       <Spoiler {media} type={target.type}>
-        <p class="deck-text">{overview}</p>
+        <!-- The clamp promises more; clicking the text delivers it. -->
+        <Link
+          href={detailsLink.href}
+          color="inherit"
+          label={m.button_label_details({ title })}
+        >
+          <p class="deck-text">{overview}</p>
+        </Link>
       </Spoiler>
     </div>
 
@@ -806,6 +813,11 @@
       text-decoration: none;
       color: inherit;
     }
+  }
+
+  .masthead-deck :global(a) {
+    text-decoration: none;
+    color: inherit;
   }
 
   .deck-text {
