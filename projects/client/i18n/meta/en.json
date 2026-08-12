@@ -10444,7 +10444,7 @@
       "description": "How many aired episodes the viewer has not watched yet."
     },
     "text_recap_caught_up": {
-      "default": "Caught up",
+      "default": "Up to date",
       "description": "Shown in place of the behind-count when the viewer has watched every aired episode."
     },
     "text_recap_of_total": {
