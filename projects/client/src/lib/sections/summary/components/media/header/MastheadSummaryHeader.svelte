@@ -889,20 +889,22 @@
     justify-content: center;
     gap: var(--ni-32);
 
+    /*
+      Weighted, not fixed: columns share the page by growth weight, so the
+      section mix can vary - and it will, a lot - without any one combination
+      going lopsided. Ordinary columns cap near a quarter; trivia carries 1.4x
+      the weight and caps at a third, because its prose goes tall and upright
+      in a quarter and that unbalances the whole band. Half was tried and was
+      way too much.
+    */
     > .strip-column {
-      flex: 0 0 calc((100% - 3 * var(--ni-32)) / 4);
+      flex: 1 1 0;
       min-width: 0;
+      max-width: calc((100% - 3 * var(--ni-32)) / 4);
     }
 
-    /*
-      Prose rewards width - in moderation. Trivia closes the list and may
-      grow into a short page's leftover room, capped at a third of the
-      viewport: enough for the facts to breathe, not enough to read as a
-      different species of column. Half was tried and was way too much. On a
-      full page nothing is left over and it holds the quarter.
-    */
     > .strip-column-stretch {
-      flex-grow: 1;
+      flex-grow: 1.4;
       max-width: calc((100% - 2 * var(--ni-32)) / 3);
     }
   }
