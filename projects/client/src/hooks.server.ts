@@ -11,6 +11,7 @@ import { handle as handleLegacyRedirect } from '$lib/features/legacy-redirects/h
 import { handle as handleMobileOperatingSystem } from '$lib/features/mobile-os/handle.ts';
 import { handle as handleSearchConfig } from '$lib/features/search/handle.ts';
 import { handle as handleTheme } from '$lib/features/theme/handle.ts';
+import { isAuthorizedToken } from '$lib/features/auth/isAuthorizedToken.ts';
 import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
 
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
@@ -29,6 +30,10 @@ const WHITELISTED_HEADERS = new Set([
   'x-pagination-page',
   'x-pagination-page-count',
 ]);
+
+const NO_STORE = 'private, no-store, no-cache, must-revalidate';
+
+const REDIRECT_STATUSES = new Set([301, 302, 303, 307, 308]);
 
 function hasWebviewParam(url: URL): boolean {
   return Object.values(WEBVIEW_PARAMS).some((param) =>
@@ -55,16 +60,24 @@ export const handleReferrerPolicy: Handle = async ({ event, resolve }) => {
 export const handleCacheControl: Handle = async ({ event, resolve }) => {
   const response = await resolve(event);
 
-  if (!response.headers.get('content-type')?.includes('text/html')) {
+  const isHtml = response.headers.get('content-type')?.includes('text/html') ??
+    false;
+  const isRedirect = REDIRECT_STATUSES.has(response.status);
+
+  if (!isHtml && !isRedirect) {
     return response;
   }
 
   function toCacheControl() {
+    if (isRedirect) {
+      return NO_STORE;
+    }
+
     // A WebView request carries the viewer's VIP token in the URL. Never let a
     // spoofed bot User-Agent promote the response to a public CDN entry (keyed
     // by the token), which would cache one viewer's review for others.
     if (hasWebviewParam(event.url)) {
-      return 'private, no-store, no-cache, must-revalidate';
+      return NO_STORE;
     }
 
     // Verified search engine crawlers (via Cloudflare), full CDN caching for SEO
@@ -76,13 +89,13 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
     // Only cache publicly for unauthenticated requests to prevent cache poisoning via spoofed User-Agent
     if (
       isBotAgent(event.request.headers.get('user-agent')) &&
-      !event.locals.oidcAuth
+      !isAuthorizedToken(event.locals.oidcAuth)
     ) {
       // 120 seconds is enough to satisfy Discord without heavily caching stale content
       return 'public, max-age=120, s-maxage=120';
     }
 
-    return 'private, no-store, no-cache, must-revalidate';
+    return NO_STORE;
   }
 
   const clonedHeaders = new Headers(response.headers);
