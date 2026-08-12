@@ -422,7 +422,7 @@
     {/snippet}
 
     {#snippet triviaColumn()}
-      <div class="strip-column strip-column-borrowed">
+      <div class="strip-column strip-column-borrowed strip-column-stretch">
         <SummaryHeaderSectionHeader
           title={m.list_title_trivia()}
           drilldown={{
@@ -451,11 +451,11 @@
       ...(headerSentiment
         ? [{ key: "sentiment", column: sentimentColumn }]
         : []),
-      ...(triviaFacts.length > 0
-        ? [{ key: "trivia", column: triviaColumn }]
-        : []),
       ...($isAwardsEnabled && isDirector && headerAwards.length > 0
         ? [{ key: "awards", column: awardsColumn }]
+        : []),
+      ...(triviaFacts.length > 0
+        ? [{ key: "trivia", column: triviaColumn }]
         : []),
     ]}
     {@const hasRecap = Boolean(
@@ -892,6 +892,16 @@
     > .strip-column {
       flex: 0 0 calc((100% - 3 * var(--ni-32)) / 4);
       min-width: 0;
+    }
+
+    /*
+      Prose rewards width. Trivia closes the list and may grow into whatever
+      a short page leaves over, up to half the viewport - on a full page
+      there is nothing left over and it holds the quarter like everyone else.
+    */
+    > .strip-column-stretch {
+      flex-grow: 1;
+      max-width: calc((100% - var(--ni-32)) / 2);
     }
   }
 
