@@ -43,10 +43,18 @@
     text-transform: uppercase;
     color: var(--color-text-secondary);
 
-    white-space: nowrap;
+    /*
+      Must be allowed to wrap: nowrap was right when labels sat beside their
+      values on one row, but in a half-width cell a long label ran clean
+      across the neighbouring column.
+    */
+    overflow-wrap: anywhere;
   }
 
   .details-value {
     color: var(--color-text-primary);
+
+    /* Long unbroken values - original titles, names - wrap, never overlap. */
+    overflow-wrap: anywhere;
   }
 </style>
