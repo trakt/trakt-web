@@ -18,12 +18,12 @@
         {#snippet value(value)}
           {#if typeof value === "object"}
             <Link href={value.link}>
-              <p class="details-value bold capitalize ellipsis">
+              <p class="details-value capitalize ellipsis">
                 {value.label}
               </p>
             </Link>
           {:else}
-            <p class="details-value bold capitalize">{value}</p>
+            <p class="details-value capitalize">{value}</p>
           {/if}
         {/snippet}
       </CollapsableValues>
