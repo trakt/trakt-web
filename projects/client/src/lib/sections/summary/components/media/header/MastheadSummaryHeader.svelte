@@ -129,7 +129,7 @@
     Spoiler-flagged facts are excluded - the header is not somewhere a reader
     opts in to them.
   */
-  const { summary: triviaSummary } = $derived(
+  const { summary: triviaSummary, list: triviaList } = $derived(
     useTrivia({
       slug: media.slug,
       type: target.type,
@@ -525,7 +525,7 @@
             sentiment={headerSentiment}
             awardsCount={awards.length}
             reactions={glanceReactions}
-            triviaCount={$triviaSummary.length}
+            triviaCount={$triviaList.length}
             recap={hasRecap && $progress$
               ? { remaining: $progress$.remaining }
               : null}
@@ -586,7 +586,7 @@
         sentiment={headerSentiment}
         awardsCount={awards.length}
         reactions={glanceReactions}
-        triviaCount={$triviaSummary.length}
+        triviaCount={$triviaList.length}
       />
     </div>
     {/if}
