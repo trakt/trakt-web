@@ -30,6 +30,7 @@
   import SummaryOverview from "../../summary/SummaryOverview.svelte";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "../v2/_internal/MediaActions.svelte";
+  import GlanceDock from "./_internal/GlanceDock.svelte";
   import GlanceStrip from "./_internal/GlanceStrip.svelte";
   import SummaryHeaderByline from "./_internal/SummaryHeaderByline.svelte";
   import SummaryHeaderFacts from "../../header-kit/SummaryHeaderFacts.svelte";
@@ -108,6 +109,9 @@
   const isAwardsEnabled = isEnabled(FeatureFlag.SummaryAwards);
 
   const STRIP_PAGE_SIZE = 4;
+
+  /* Which carousel page is on screen - the dock's dots follow it. */
+  let activeStripPage = $state(0);
 
   /* `?actions=fused` seats the stars on the action tray's own surface. */
   const actionsVariant = $derived(
@@ -439,15 +443,19 @@
     {/snippet}
 
     {@const otherColumns = [
-      creditsColumn,
-      watchColumn,
+      { key: "details", column: creditsColumn },
+      { key: "watch", column: watchColumn },
       ...($isAuthorized && headerSocialEntries.length > 0
-        ? [socialColumn]
+        ? [{ key: "social", column: socialColumn }]
         : []),
-      ...(headerSentiment ? [sentimentColumn] : []),
-      ...(triviaFacts.length > 0 ? [triviaColumn] : []),
+      ...(headerSentiment
+        ? [{ key: "sentiment", column: sentimentColumn }]
+        : []),
+      ...(triviaFacts.length > 0
+        ? [{ key: "trivia", column: triviaColumn }]
+        : []),
       ...($isAwardsEnabled && isDirector && headerAwards.length > 0
-        ? [awardsColumn]
+        ? [{ key: "awards", column: awardsColumn }]
         : []),
     ]}
     {@const hasRecap = Boolean(
@@ -457,25 +465,31 @@
     {@const stripColumns = hasRecap
       ? [
         ...otherColumns.slice(0, STRIP_PAGE_SIZE - 1),
-        recapColumn,
+        { key: "recap", column: recapColumn },
         ...otherColumns.slice(STRIP_PAGE_SIZE - 1),
       ]
       : otherColumns}
     {@const firstPage = stripColumns.slice(0, STRIP_PAGE_SIZE)}
     {@const secondPage = stripColumns.slice(STRIP_PAGE_SIZE)}
 
+    {@const visibleKeys = new Set(
+      (activeStripPage === 0 ? firstPage : secondPage).map(
+        (entry) => entry.key,
+      ),
+    )}
+
     {#snippet stripPageOne()}
       <div class="strip-page">
-        {#each firstPage as column (column)}
-          {@render column()}
+        {#each firstPage as entry (entry.key)}
+          {@render entry.column()}
         {/each}
       </div>
     {/snippet}
 
     {#snippet stripPageTwo()}
       <div class="strip-page">
-        {#each secondPage as column (column)}
-          {@render column()}
+        {#each secondPage as entry (entry.key)}
+          {@render entry.column()}
         {/each}
       </div>
     {/snippet}
@@ -488,6 +502,38 @@
       -->
       <RenderFor audience="all" device={["desktop"]}>
         <!--
+          The dock stands where the divider ruled: everything the title has,
+          at a glimpse, dots under whatever the carousel is showing beneath.
+        -->
+        <div class="masthead-dock">
+          <GlanceDock
+            links={{
+              details: detailsLink.href,
+              whereToWatch: whereToWatchLink.href,
+              social: socialLink.href,
+              sentiment: sentimentLink.href,
+              awards: awardsLink.href,
+              reactions: reactionsLink.href,
+              trivia: triviaLink.href,
+              recap: recapLink.href,
+            }}
+            {title}
+            release={glanceRelease}
+            provider={glanceProvider}
+            country={$country}
+            social={glanceSocial}
+            sentiment={headerSentiment}
+            awardsCount={awards.length}
+            reactions={glanceReactions}
+            triviaCount={$triviaSummary.length}
+            recap={hasRecap && $progress$
+              ? { remaining: $progress$.remaining }
+              : null}
+            {visibleKeys}
+          />
+        </div>
+
+        <!--
           Keyed by page count: the carousel captures its slide count once at
           mount, but the async sections land after mount and can grow one page
           into two - which left the next-arrow lit yet inert, stepping toward
@@ -498,14 +544,16 @@
             slides={secondPage.length > 0
               ? [stripPageOne, stripPageTwo]
               : [stripPageOne]}
+            onSlideProgress={(progress) =>
+              (activeStripPage = Math.round(progress))}
           />
         {/key}
       </RenderFor>
 
       <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
         <div class="strip-stack">
-          {#each stripColumns as column (column)}
-            {@render column()}
+          {#each stripColumns as entry (entry.key)}
+            {@render entry.column()}
           {/each}
         </div>
       </RenderFor>
@@ -788,9 +836,6 @@
   .masthead-strip {
     width: 100%;
     margin-top: var(--gap-xs);
-    padding-top: var(--ni-24);
-
-    border-top: var(--ni-1) solid var(--color-hairline);
 
     /* The composition centres; the data does not. */
     text-align: start;
@@ -825,6 +870,10 @@
     }
   }
 
+  .masthead-dock {
+    margin-bottom: var(--ni-24);
+  }
+
   /*
     One carousel page: exactly four equal columns. The page is the unit that
     swipes, so a fixed count is finally correct here - variable sections now
@@ -841,6 +890,10 @@
     width floor, one column on the narrowest screens.
   */
   .strip-stack {
+    /* No dock below desktop - the rule keeps its old job here. */
+    padding-top: var(--ni-24);
+    border-top: var(--ni-1) solid var(--color-hairline);
+
     display: grid;
     grid-template-columns: repeat(
       auto-fit,
