@@ -55,7 +55,7 @@
   const variant = $derived(externalVariant ?? $defaultVariant);
   const height = $derived(mediaListHeightResolver(variant));
 
-  const { hasActiveFilter } = useFilter();
+  const { hasActiveFilter, isFiltered } = useFilter();
 </script>
 
 {#snippet actions()}
@@ -79,7 +79,7 @@
   {#snippet empty()}
     {#if $isLoading}
       <SkeletonList id={id.scope} {variant} />
-    {:else if $hasActiveFilter}
+    {:else if $isFiltered}
       <NoFilterResultsPlaceholder />
     {:else}
       {@render externalEmpty?.()}

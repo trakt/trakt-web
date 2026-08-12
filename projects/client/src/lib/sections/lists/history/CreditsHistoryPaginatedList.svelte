@@ -16,7 +16,7 @@
 
   const { slug, name }: CreditsHistoryPaginatedListProps = $props();
 
-  const { filterMap, hasActiveFilter } = useFilter();
+  const { filterMap, isFiltered } = useFilter();
   const { mode } = useDiscover();
 
   const { list, isLoading } = useHistoryCreditsList({
@@ -42,7 +42,7 @@
   {/snippet}
 
   {#snippet empty()}
-    {#if $hasActiveFilter && !$isLoading}
+    {#if $isFiltered && !$isLoading}
       <NoFilterResultsPlaceholder />
     {:else if $isLoading}
       <LoadingIndicator />

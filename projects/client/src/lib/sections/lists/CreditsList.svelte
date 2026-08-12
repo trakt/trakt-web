@@ -32,7 +32,7 @@
   const { title, type, person, positions, drilldownLink }: CreditsListProps =
     $props();
 
-  const { filterMap, hasActiveFilter } = useFilter();
+  const { filterMap, isFiltered } = useFilter();
   const { mode } = useDiscover();
 
   const {
@@ -96,7 +96,7 @@
   {#snippet empty()}
     {#if $isLoading}
       <SkeletonList id={`credits-list-${type}`} variant={$defaultVariant} />
-    {:else if $hasActiveFilter}
+    {:else if $isFiltered}
       <NoFilterResultsPlaceholder />
     {/if}
   {/snippet}
