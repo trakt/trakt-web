@@ -10411,9 +10411,17 @@
       "default": "Nominations",
       "description": "Section label for award nominations that did not win."
     },
+    "text_person_awards_count_one": {
+      "default": "{count} Award",
+      "description": "Golden pill on the person page when exactly one award was won."
+    },
     "text_person_awards_count": {
       "default": "{count} Awards",
       "description": "Golden pill on the person page counting awards won."
+    },
+    "text_person_nominations_count_one": {
+      "default": "{count} Nomination",
+      "description": "Golden pill on the person page when there is exactly one nomination and no wins."
     },
     "text_person_nominations_count": {
       "default": "{count} Nominations",
