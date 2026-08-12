@@ -650,9 +650,25 @@
       reason the band and overlap are computed from this rather than hardcoded. A
       fixed 220px poster on a phone left the backdrop band taller than the screen.
     */
-    --masthead-poster-width: clamp(var(--ni-132), 18vw, var(--ni-220));
+    /*
+      The height term is the fold at work: on a 1080-tall screen min() hands
+      the poster ~205px of width (~308 tall) where 18vw alone gave it the
+      full 220x330. Wide AND tall monitors still get the ceiling.
+    */
+    --masthead-poster-width: clamp(
+      var(--ni-132),
+      min(18vw, 19vh),
+      var(--ni-220)
+    );
     --masthead-poster-height: calc(var(--masthead-poster-width) * 1.5);
-    --masthead-rhythm: var(--gap-l);
+    /*
+      gap-m, not gap-l: the fold audit. At 1920x1080 the header runs on this
+      one token six times over, and 24px beats read as looseness rather than
+      air. 16px keeps every block distinct while pulling ~48px of intel back
+      above the fold. Pure spacing - no font, line-height (WCAG 1.4.12) or
+      target size (WCAG 2.5.8: controls stay 40-48px) gives anything up.
+    */
+    --masthead-rhythm: var(--gap-m);
     --masthead-backdrop-reveal: var(--masthead-rhythm);
 
     --backdrop-overlap: calc(-1 * var(--masthead-poster-height));
@@ -772,7 +788,7 @@
       at the 120px it was drawn with - at 1024px that alone ate a quarter of the
       window and squeezed the strip below into unreadable columns.
     */
-    padding: 0 clamp(var(--gap-m), 8vw, var(--ni-120)) var(--ni-44);
+    padding: 0 clamp(var(--gap-m), 8vw, var(--ni-120)) var(--ni-28);
     /*
       Matches the poster height, so the poster's base lands exactly where the
       band ends and the dissolve completes. Change this and the band height
@@ -870,7 +886,6 @@
 
   .masthead-strip {
     width: 100%;
-    margin-top: var(--gap-xs);
 
     /* The composition centres; the data does not. */
     text-align: start;
@@ -906,7 +921,7 @@
   }
 
   .masthead-dock {
-    margin-bottom: var(--ni-24);
+    margin-bottom: var(--gap-m);
   }
 
   /*
