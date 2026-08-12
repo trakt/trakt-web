@@ -150,7 +150,7 @@
     &[data-variant="embedded"] {
       --search-input-width: 100%;
       --search-input-height: var(--ni-32);
-      --search-icon-size: var(--ni-16);
+      --search-icon-size: var(--ni-18);
 
       outline: none;
 
@@ -193,7 +193,7 @@
 
       position: absolute;
       z-index: calc(var(--layer-top) + var(--layer-overlay));
-      top: var(--search-icon-offset);
+      top: calc((var(--search-input-height) - var(--search-icon-size)) / 2);
       inset-inline-start: var(--search-icon-offset);
     }
 

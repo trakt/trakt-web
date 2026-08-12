@@ -26,5 +26,10 @@
 
   --toggle-small-width: var(--ni-30);
 
-  --segmented-select-extension-height: calc(var(--ni-40) + var(--ni-4));
+  --segmented-select-segment-height: var(--ni-32);
+  --segmented-select-extension-inset: var(--gap-xs);
+  --segmented-select-extension-height: calc(
+    var(--segmented-select-segment-height) + 2 *
+      var(--segmented-select-extension-inset) + var(--border-thickness-xxs)
+  );
 }
