@@ -18,6 +18,11 @@
   const imdbId = $derived(
     props.type === "episode" ? props.episode.imdbId : props.media.imdbId,
   );
+
+  /* The header clamps the description to two lines; this is where it unrolls. */
+  const overview = $derived(
+    props.type === "episode" ? props.episode.overview : props.media.overview,
+  );
 </script>
 
 <Drawer
@@ -31,6 +36,10 @@
       class="trakt-details-drawer-content"
       transition:fade={{ duration: 150 }}
     >
+      {#if overview}
+        <p class="details-overview">{overview}</p>
+      {/if}
+
       <MediaStats {...props} />
       <MediaDetails {...props} />
 
@@ -48,6 +57,14 @@
 </Drawer>
 
 <style lang="scss">
+  .details-overview {
+    margin: 0;
+
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-text);
+    line-height: 1.6;
+  }
+
   .trakt-details-drawer-content {
     display: flex;
     flex-direction: column;

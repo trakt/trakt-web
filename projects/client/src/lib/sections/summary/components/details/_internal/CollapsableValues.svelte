@@ -103,6 +103,12 @@
     min-width: 0;
     max-width: 100%;
 
+    :global(.trakt-tooltip-trigger) {
+      display: flex;
+      min-width: 0;
+      max-width: 100%;
+    }
+
     :global(.trakt-link) {
       min-width: 0;
     }
