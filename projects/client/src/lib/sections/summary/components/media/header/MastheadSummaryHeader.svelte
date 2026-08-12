@@ -30,7 +30,6 @@
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "../v2/_internal/MediaActions.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import GlanceDock from "./_internal/GlanceDock.svelte";
   import GlanceStrip from "./_internal/GlanceStrip.svelte";
   import SummaryHeaderByline from "./_internal/SummaryHeaderByline.svelte";
   import SummaryHeaderFacts from "../../header-kit/SummaryHeaderFacts.svelte";
@@ -109,9 +108,6 @@
   const isAwardsEnabled = isEnabled(FeatureFlag.SummaryAwards);
 
   const STRIP_PAGE_SIZE = 4;
-
-  /* Which carousel page is on screen - the dock's dots follow it. */
-  let activeStripPage = $state(0);
 
   /* `?actions=fused` seats the stars on the action tray's own surface. */
   const actionsVariant = $derived(
@@ -490,12 +486,6 @@
     {@const firstPage = stripColumns.slice(0, STRIP_PAGE_SIZE)}
     {@const secondPage = stripColumns.slice(STRIP_PAGE_SIZE)}
 
-    {@const visibleKeys = new Set(
-      (activeStripPage === 0 ? firstPage : secondPage).map(
-        (entry) => entry.key,
-      ),
-    )}
-
     {#snippet stripPageOne()}
       <div class="strip-page">
         {#each firstPage as entry (entry.key)}
@@ -520,38 +510,6 @@
       -->
       <RenderFor audience="all" device={["desktop"]}>
         <!--
-          The dock stands where the divider ruled: everything the title has,
-          at a glimpse, dots under whatever the carousel is showing beneath.
-        -->
-        <div class="masthead-dock">
-          <GlanceDock
-            links={{
-              details: detailsLink.href,
-              whereToWatch: whereToWatchLink.href,
-              social: socialLink.href,
-              sentiment: sentimentLink.href,
-              awards: awardsLink.href,
-              reactions: reactionsLink.href,
-              trivia: triviaLink.href,
-              recap: recapLink.href,
-            }}
-            {title}
-            release={glanceRelease}
-            provider={glanceProvider}
-            country={$country}
-            social={glanceSocial}
-            sentiment={headerSentiment}
-            awardsCount={awards.length}
-            reactions={glanceReactions}
-            triviaCount={$triviaList.length}
-            recap={hasRecap && $progress$
-              ? { remaining: $progress$.remaining }
-              : null}
-            {visibleKeys}
-          />
-        </div>
-
-        <!--
           Keyed by page count: the carousel captures its slide count once at
           mount, but the async sections land after mount and can grow one page
           into two - which left the next-arrow lit yet inert, stepping toward
@@ -562,8 +520,6 @@
             slides={secondPage.length > 0
               ? [stripPageOne, stripPageTwo]
               : [stripPageOne]}
-            onSlideProgress={(progress) =>
-              (activeStripPage = Math.round(progress))}
           />
         {/key}
       </RenderFor>
@@ -651,14 +607,15 @@
       fixed 220px poster on a phone left the backdrop band taller than the screen.
     */
     /*
-      The height term is the fold at work: on a 1080-tall screen min() hands
-      the poster ~205px of width (~308 tall) where 18vw alone gave it the
-      full 220x330. Wide AND tall monitors still get the ceiling.
+      The dock's exit paid for this: the poster steps PAST its old 220 ceiling
+      to 240 - the hero the composition deserves - and the height term keeps
+      it honest on short screens (26vh at 1080 clears the new cap, so a
+      1920x1080 viewer gets the full 240x360).
     */
     --masthead-poster-width: clamp(
       var(--ni-132),
-      min(18vw, 19vh),
-      var(--ni-220)
+      min(19vw, 26vh),
+      var(--ni-240)
     );
     --masthead-poster-height: calc(var(--masthead-poster-width) * 1.5);
     /*
@@ -886,6 +843,9 @@
 
   .masthead-strip {
     width: 100%;
+    padding-top: var(--ni-20);
+
+    border-top: var(--ni-1) solid var(--color-hairline);
 
     /* The composition centres; the data does not. */
     text-align: start;
@@ -918,10 +878,6 @@
         transition: none;
       }
     }
-  }
-
-  .masthead-dock {
-    margin-bottom: var(--gap-m);
   }
 
   /*
@@ -973,10 +929,6 @@
     width floor, one column on the narrowest screens.
   */
   .strip-stack {
-    /* No dock below desktop - the rule keeps its old job here. */
-    padding-top: var(--ni-24);
-    border-top: var(--ni-1) solid var(--color-hairline);
-
     display: grid;
     grid-template-columns: repeat(
       auto-fit,
