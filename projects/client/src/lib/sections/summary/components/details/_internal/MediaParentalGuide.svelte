@@ -55,7 +55,7 @@
     <ul class="guide-list">
       {#each $categories as category (category.key)}
         <li class="guide-row" data-severity={category.severityTone}>
-          <span class="guide-label bold">{category.label}</span>
+          <span class="guide-label">{category.label}</span>
           <span class="severity-meter" aria-hidden="true">
             <span class="severity-meter-fill"></span>
           </span>
