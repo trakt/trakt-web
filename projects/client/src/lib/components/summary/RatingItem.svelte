@@ -28,44 +28,54 @@
   }: RatingItemProps = $props();
 
   const hasValidRating = $derived(rating !== undefined);
-  const ratingLink = $derived(hasValidRating ? url : undefined);
+  const ratingLink = $derived(
+    hasValidRating && layout === "tile" ? url : undefined,
+  );
 </script>
 
-<rating data-layout={layout}>
-  <Link href={ratingLink} target="_blank">
-    <div
-      class="rating-item"
-      data-layout={layout}
-      class:has-valid-rating={hasValidRating}
-    >
-      {@render children()}
-      <div class="rating-info">
-        <div class="rating-value">
-          {#if isLoading}
-            <span class="rating-skeleton" aria-hidden="true"></span>
-          {:else if hasValidRating}
-            <p class="bold">{rating}</p>
-          {:else}
-            <p class="bold">-</p>
-          {/if}
-        </div>
-        {#if style === "default"}
-          <div class="rating-votes">
-            {#if isLoading}
-              <span
-                class="rating-skeleton rating-skeleton-votes"
-                aria-hidden="true"
-              ></span>
-            {:else if hasValidRating}
-              <p class="bold secondary vote-count tag">
-                {@render superscript()}
-              </p>
-            {/if}
-          </div>
+{#snippet item()}
+  <div
+    class="rating-item"
+    data-layout={layout}
+    class:has-valid-rating={hasValidRating}
+  >
+    {@render children()}
+    <div class="rating-info">
+      <div class="rating-value">
+        {#if isLoading}
+          <span class="rating-skeleton" aria-hidden="true"></span>
+        {:else if hasValidRating}
+          <p class="bold">{rating}</p>
+        {:else}
+          <p class="bold">-</p>
         {/if}
       </div>
+      {#if style === "default"}
+        <div class="rating-votes">
+          {#if isLoading}
+            <span
+              class="rating-skeleton rating-skeleton-votes"
+              aria-hidden="true"
+            ></span>
+          {:else if hasValidRating}
+            <p class="bold secondary vote-count tag">
+              {@render superscript()}
+            </p>
+          {/if}
+        </div>
+      {/if}
     </div>
-  </Link>
+  </div>
+{/snippet}
+
+<rating data-layout={layout}>
+  {#if ratingLink}
+    <Link href={ratingLink} target="_blank">
+      {@render item()}
+    </Link>
+  {:else}
+    {@render item()}
+  {/if}
 </rating>
 
 <style lang="scss">
@@ -75,8 +85,7 @@
     display: block;
     height: 100%;
 
-    :global(.trakt-link),
-    :global(.trakt-no-link) {
+    :global(.trakt-link) {
       display: block;
       height: 100%;
     }

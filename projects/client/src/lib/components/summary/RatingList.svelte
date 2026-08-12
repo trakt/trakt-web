@@ -87,6 +87,8 @@
 
   // TMDB lives only in the ratings breakdown, never the compact summary row.
   const showTmdb = $derived(variant === "external" && tmdb?.rating != null);
+
+  const isDrilldown = $derived(drilldown != null || onDrilldown != null);
 </script>
 
 {#snippet voteCount(votes: number | Nil)}
@@ -110,7 +112,7 @@
   </RatingItem>
 {/snippet}
 
-<div class="trakt-summary-ratings" data-layout={layout}>
+{#snippet sources()}
   {#if variant === "all"}
     {@render traktItem()}
   {/if}
@@ -202,27 +204,33 @@
       {/snippet}
     </RatingItem>
   {/if}
+{/snippet}
 
-  {#if onDrilldown || drilldown}
+<div class="trakt-summary-ratings" data-layout={layout}>
+  {#if isDrilldown}
     <ActionButton
-      classList="trakt-ratings-drilldown-button"
+      classList="ratings-drilldown"
       onclick={onDrilldown}
       href={drilldown?.href}
       noscroll={drilldown?.noscroll}
       replacestate={drilldown?.replacestate}
       label={i18n.viewBreakdownLabel()}
       style="ghost"
-      size="small"
+      tooltip={false}
     >
+      {@render sources()}
       <CaretRightIcon />
     </ActionButton>
+  {:else}
+    {@render sources()}
   {/if}
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-summary-ratings {
+  .trakt-summary-ratings,
+  .trakt-summary-ratings :global(.ratings-drilldown) {
     display: flex;
     align-items: center;
     // wrap instead of shrinking items: a shrunk RatingItem clips its value and
@@ -230,8 +238,10 @@
     // (e.g. MAL joining for anime).
     flex-wrap: wrap;
     gap: var(--gap-s);
+  }
 
-    :global(> rating) {
+  .trakt-summary-ratings {
+    :global(rating) {
       flex: 0 0 auto;
     }
 
@@ -242,15 +252,34 @@
       grid-template-columns: repeat(3, 1fr);
       gap: var(--gap-s);
 
-      :global(> rating) {
+      :global(rating) {
         flex: initial;
       }
     }
 
-    :global(.trakt-ratings-drilldown-button) {
-      :global(svg) {
-        width: var(--ni-20);
-        height: var(--ni-20);
+    &[data-layout="row"] {
+      :global(.ratings-drilldown) {
+        width: auto;
+        height: auto;
+        min-height: var(--ni-28);
+
+        flex-shrink: 1;
+
+        padding-inline: var(--ni-8);
+        margin-inline: var(--ni-neg-8);
+
+        > :global(svg) {
+          height: var(--font-size-text);
+          width: auto;
+        }
+      }
+
+      :global(.ratings-drilldown:hover) {
+        box-shadow: none;
+      }
+
+      :global(.ratings-drilldown:active) {
+        transform: scale(0.98);
       }
     }
   }
