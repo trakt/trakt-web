@@ -75,7 +75,14 @@
   .trakt-collapsable-values-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    /*
+      Stretch, never flex-start: a start-aligned column sizes each row to its
+      CONTENT width, so a long value's box simply grew past the cell and over
+      the neighbouring column - unconstrained boxes neither wrap nor
+      ellipsize. Stretched, the row is the cell's width and the text handling
+      inside can finally do its job.
+    */
+    align-items: stretch;
     text-align: start;
     min-width: 0;
 
@@ -94,6 +101,7 @@
 
     min-height: var(--ni-18);
     min-width: 0;
+    max-width: 100%;
 
     :global(.trakt-link) {
       min-width: 0;
