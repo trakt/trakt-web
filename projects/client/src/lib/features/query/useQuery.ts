@@ -30,6 +30,7 @@ import {
   type QueryOptionsRef,
   reactiveQueryBridge,
 } from './_internal/queryBridge.ts';
+import { rethrowUnlessCancelled } from './rethrowUnlessCancelled.ts';
 
 /**
  * Tracks query invalidation requests.
@@ -202,7 +203,7 @@ export function useAllPagesInfiniteQuery<
         query.hasNextPage &&
         client.getQueryState(props.queryKey)?.fetchStatus === 'idle'
       ) {
-        query.fetchNextPage();
+        query.fetchNextPage().catch(rethrowUnlessCancelled);
       }
     }),
     multicast(),
