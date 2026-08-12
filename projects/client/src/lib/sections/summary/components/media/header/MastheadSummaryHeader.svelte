@@ -875,17 +875,24 @@
   }
 
   /*
-    One carousel page: four fixed quarter tracks on every page, so a section
-    on page two stands exactly where its page-one counterpart stood - titles
-    hold their positions through the turn. A short page's trailing track
-    stays honestly empty: the list ends there. (Spreading short pages to
-    thirds was tried; the titles shifting between pages read worse than the
-    empty slot.)
+    One carousel page: every section is a fixed quarter-width column, and the
+    page CENTRES whatever it holds. Full pages are indistinguishable from the
+    old grid; short pages sit balanced in the middle of the viewport instead
+    of hugging the start with a dead zone - the masthead is a centred
+    composition, and a left-hugging page fought it. Column widths never
+    change between pages, so the turn reads as one uniform slide.
+    (Spreading short pages to full width was tried; the titles resizing
+    between pages read worse.)
   */
   .strip-page {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    display: flex;
+    justify-content: center;
     gap: var(--ni-32);
+
+    > .strip-column {
+      flex: 0 0 calc((100% - 3 * var(--ni-32)) / 4);
+      min-width: 0;
+    }
   }
 
   /*
