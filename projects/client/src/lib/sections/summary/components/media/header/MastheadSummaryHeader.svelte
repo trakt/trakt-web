@@ -875,13 +875,16 @@
   }
 
   /*
-    One carousel page: exactly four equal columns. The page is the unit that
-    swipes, so a fixed count is finally correct here - variable sections now
-    change the PAGE COUNT, not the column width.
+    One carousel page: however many sections it holds, dealt as equal columns
+    across the full width - four reads as quarters, a three-section second
+    page as thirds. Fixed four-wide tracks left short pages huddled at the
+    start with a dead zone beside them, and the section titles visibly
+    shifting position between pages.
   */
   .strip-page {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
     gap: var(--ni-32);
   }
 
