@@ -5,6 +5,7 @@ import { getAdditionalKeys } from '../../sections/navbar/components/filter/filte
 import { useNavbarState } from '../../sections/navbar/useNavbarState.ts';
 import { useUser } from '../auth/stores/useUser.ts';
 import { FILTERS } from './_internal/constants.ts';
+import { getAppliedFilters } from './_internal/getAppliedFilters.ts';
 import { isDifferentFilterSet } from './_internal/isDifferentFilterSet.ts';
 import { mapToSearchParamValue } from './_internal/mapToSearchParamValue.ts';
 import { useStoredFilters } from './useStoredFilters.ts';
@@ -50,6 +51,17 @@ export function useFilter() {
         return isDifferentFilterSet(defaultFilters, $search);
       }),
     ),
+    isFiltered: combineLatest(
+      [search, state],
+    ).pipe(
+      map(([$search, $state]) => {
+        if (!$state.hasFilters) {
+          return false;
+        }
+
+        return getAppliedFilters($search).length > 0;
+      }),
+    ),
     hasAnyAdvancedFilter: combineLatest(
       [search, state],
     ).pipe(
@@ -71,8 +83,7 @@ export function useFilter() {
           return {};
         }
 
-        return FILTERS
-          .filter((filter) => Boolean($search.get(filter.key)))
+        return getAppliedFilters($search)
           .reduce((filterMap, filter) => {
             filterMap[filter.key] = mapToSearchParamValue({
               filter,

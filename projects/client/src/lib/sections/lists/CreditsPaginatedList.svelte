@@ -18,7 +18,7 @@
 
   const { slug, type }: CreditsPaginatedListProps = $props();
 
-  const { filterMap, hasActiveFilter } = useFilter();
+  const { filterMap, isFiltered } = useFilter();
   const { mode } = useDiscover();
 
   const { credits, isLoading } = useCreditsList({
@@ -53,7 +53,7 @@
   {/snippet}
 
   {#snippet empty()}
-    {#if ($hasActiveFilter || !hasMatchingType) && !$isLoading}
+    {#if ($isFiltered || !hasMatchingType) && !$isLoading}
       <NoFilterResultsPlaceholder />
     {/if}
   {/snippet}

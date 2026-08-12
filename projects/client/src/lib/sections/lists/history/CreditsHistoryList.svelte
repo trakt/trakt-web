@@ -16,7 +16,7 @@
     drilldownLink,
   }: { person: PersonSummary; drilldownLink?: string } = $props();
 
-  const { filterMap, hasActiveFilter } = useFilter();
+  const { filterMap, isFiltered } = useFilter();
   const { mode } = useDiscover();
 
   const { list, isLoading } = useHistoryCreditsList({
@@ -53,7 +53,7 @@
   {#snippet empty()}
     {#if $isLoading}
       <SkeletonList id="credits-history-list" variant="portrait" />
-    {:else if $hasActiveFilter}
+    {:else if $isFiltered}
       <NoFilterResultsPlaceholder />
     {:else}
       <p class="secondary">
