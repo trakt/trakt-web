@@ -1,3 +1,4 @@
+import { DISCOVER_MODE_PARAM } from '$lib/features/filters/_internal/constants.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { PersonStat } from './PersonStat.ts';
@@ -31,12 +32,18 @@ export function mapToPersonStats(
 
   const stats: PersonStat[] = [];
 
+  /*
+    Each drilldown pins the discover mode to its own medium. The mode is a
+    global parameter that rides along on navigation - so a viewer browsing in
+    show mode who taps "5 Movies" otherwise lands on a movie list that
+    filters every movie out against mode=show and reads as empty.
+  */
   if (credits.movies > 0) {
     stats.push({
       key: 'movies',
       label: m.list_title_movie_credits(),
       value: credits.movies.toString(),
-      href: UrlBuilder.credits.movies(slug),
+      href: `${UrlBuilder.credits.movies(slug)}?${DISCOVER_MODE_PARAM}=movie`,
     });
   }
 
@@ -45,7 +52,7 @@ export function mapToPersonStats(
       key: 'shows',
       label: m.list_title_show_credits(),
       value: credits.shows.toString(),
-      href: UrlBuilder.credits.shows(slug),
+      href: `${UrlBuilder.credits.shows(slug)}?${DISCOVER_MODE_PARAM}=show`,
     });
   }
 
