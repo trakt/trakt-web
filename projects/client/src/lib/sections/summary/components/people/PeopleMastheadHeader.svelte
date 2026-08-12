@@ -586,10 +586,15 @@
 
     .award-pill-mark {
       display: inline-flex;
+      align-items: center;
+
+      /* Spans the text line, no taller - the icon was stretching the pill
+         past its movie/show neighbours. */
+      height: calc(var(--font-size-text) * 1.2);
 
       :global(svg) {
-        width: var(--ni-14);
-        height: var(--ni-14);
+        width: var(--ni-12);
+        height: var(--ni-12);
       }
     }
   }
@@ -759,9 +764,13 @@
     */
     margin-top: calc(var(--gap-m) - var(--masthead-rhythm));
 
-    /* The name follows its kicker at a breath, not a band. */
+    /*
+      The name follows its kicker at a breath - a slightly fuller one than
+      before: tall ascenders (a capital name right under the tag) crowded the
+      kicker at 4px.
+    */
     + :global(.trakt-summary-header-title) {
-      margin-top: calc(var(--gap-xxs) - var(--masthead-rhythm));
+      margin-top: calc(var(--gap-xs) - var(--masthead-rhythm));
     }
   }
 
