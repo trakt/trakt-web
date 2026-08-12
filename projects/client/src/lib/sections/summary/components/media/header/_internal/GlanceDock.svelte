@@ -219,7 +219,13 @@
 
   .dock-surface {
     display: inline-flex;
-    align-items: center;
+    /*
+      Stretch, not center: tokens of different content heights (a sentiment
+      pill vs a line of text) get one shared height, so every token's bottom
+      is flush - and the running-app dots land on one baseline instead of
+      wobbling with each token's own edge.
+    */
+    align-items: stretch;
     gap: var(--gap-xxs);
 
     padding: var(--ni-6);
@@ -235,9 +241,14 @@
     font-size: var(--font-size-text);
     color: var(--color-text-secondary);
 
+    /* Every layer of the wrapper chain passes the stretch down. */
+    :global(.trakt-tooltip-trigger) {
+      display: flex;
+    }
+
     :global(a) {
       text-decoration: none;
-      display: inline-flex;
+      display: flex;
       color: inherit;
     }
 
