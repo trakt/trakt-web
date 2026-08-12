@@ -36,6 +36,10 @@
   import SummaryHeaderKicker from "./_internal/SummaryHeaderKicker.svelte";
   import SummaryHeaderRecap from "./_internal/SummaryHeaderRecap.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
+  import { useAuth } from "$lib/features/auth/stores/useAuth";
+  import { useUser } from "$lib/features/auth/stores/useUser";
+  import { IS_DEV } from "$lib/utils/env";
+  import SwipeCarousel from "$lib/sections/profile/components/SwipeCarousel.svelte";
   import SummaryHeaderSectionHeader from "./_internal/SummaryHeaderSectionHeader.svelte";
   import SummaryHeaderSentiment from "./_internal/SummaryHeaderSentiment.svelte";
   import SummaryHeaderSocialActivity from "./_internal/SummaryHeaderSocialActivity.svelte";
@@ -90,6 +94,20 @@
     if (requested != null) return toHeaderStripVariant(requested);
     return $isGlanceStripEnabled ? "glance" : "columns";
   });
+
+  /*
+    The strip carousel builds its pages in script, so the audience and flag
+    guards the columns used to wear as components become plain conditions -
+    the same checks RenderFor/RenderForFeature make internally.
+  */
+  const { isAuthorized } = useAuth();
+  const { user } = useUser();
+  const isDirector = $derived(
+    $isAuthorized && (($user?.isDirector ?? false) || IS_DEV),
+  );
+  const isAwardsEnabled = isEnabled(FeatureFlag.SummaryAwards);
+
+  const STRIP_PAGE_SIZE = 4;
 
   /* `?actions=fused` seats the stars on the action tray's own surface. */
   const actionsVariant = $derived(
@@ -321,7 +339,7 @@
 
 
     {#if stripVariant === "columns"}
-    <div class="masthead-strip">
+    {#snippet creditsColumn()}
       <div class="strip-column">
         <SummaryHeaderSectionHeader
           title={m.header_credits_and_details()}
@@ -336,7 +354,9 @@
           <SummaryHeaderFacts facts={classificationFacts} variant="inline" />
         </div>
       </div>
+    {/snippet}
 
+    {#snippet watchColumn()}
       <div class="strip-column strip-column-borrowed">
         <SummaryHeaderSectionHeader
           title={m.list_title_where_to_watch()}
@@ -346,52 +366,43 @@
             label: m.button_label_view_all_where_to_watch(),
           }}
         />
-        <SummaryHeaderWatchOptions
-          {providers}
-          country={$country}
-        />
+        <SummaryHeaderWatchOptions {providers} country={$country} />
       </div>
+    {/snippet}
 
-      <!--
-        The viewer's own standing with the show. Not marked borrowed: no other
-        section on the page says where YOU are, so hiding it below desktop
-        would remove it entirely rather than de-duplicate it. The chevron opens
-        the recap drawer: up next, the full description, your standing, and
-        recent history.
-      -->
-      <RenderFor audience="authenticated">
-        {#if $progress$ && $progress$.completed > 0}
-          <div class="strip-column">
-            <SummaryHeaderSectionHeader
-              title={m.header_recap()}
-              drilldown={{
-                ...recapLink,
-                label: m.button_label_view_recap({ title }),
-              }}
-            />
-            <SummaryHeaderRecap
-              progress={$progress$}
-              {previousSeasonOverview}
-            />
-          </div>
-        {/if}
-      </RenderFor>
+    <!--
+      The viewer's own standing. Not marked borrowed: no other section on the
+      page says where YOU are. The chevron opens the recap drawer.
+    -->
+    {#snippet recapColumn()}
+      {#if $progress$}
+        <div class="strip-column">
+          <SummaryHeaderSectionHeader
+            title={m.header_recap()}
+            drilldown={{
+              ...recapLink,
+              label: m.button_label_view_recap({ title }),
+            }}
+          />
+          <SummaryHeaderRecap progress={$progress$} {previousSeasonOverview} />
+        </div>
+      {/if}
+    {/snippet}
 
-      <RenderFor audience="authenticated">
-        {#if headerSocialEntries.length > 0}
-          <div class="strip-column strip-column-borrowed">
-            <SummaryHeaderSectionHeader
-              title={m.list_title_social_activity()}
-              drilldown={{
-                ...socialLink,
-                label: m.button_label_view_all_social_activity(),
-              }}
-            />
-            <SummaryHeaderSocialActivity entries={headerSocialEntries} />
-          </div>
-        {/if}
-      </RenderFor>
+    {#snippet socialColumn()}
+      <div class="strip-column strip-column-borrowed">
+        <SummaryHeaderSectionHeader
+          title={m.list_title_social_activity()}
+          drilldown={{
+            ...socialLink,
+            label: m.button_label_view_all_social_activity(),
+          }}
+        />
+        <SummaryHeaderSocialActivity entries={headerSocialEntries} />
+      </div>
+    {/snippet}
 
+    {#snippet sentimentColumn()}
       {#if headerSentiment}
         <div class="strip-column strip-column-borrowed">
           <SummaryHeaderSectionHeader
@@ -404,36 +415,84 @@
           <SummaryHeaderSentiment sentiment={headerSentiment} />
         </div>
       {/if}
+    {/snippet}
 
-      {#if triviaFacts.length > 0}
-        <div class="strip-column strip-column-borrowed">
-          <SummaryHeaderSectionHeader
-            title={m.list_title_trivia()}
-            drilldown={{
-              ...triviaLink,
-              label: m.button_label_view_trivia(),
-            }}
-          />
-          <SummaryHeaderTrivia facts={triviaFacts} />
-        </div>
-      {/if}
+    {#snippet triviaColumn()}
+      <div class="strip-column strip-column-borrowed">
+        <SummaryHeaderSectionHeader
+          title={m.list_title_trivia()}
+          drilldown={{
+            ...triviaLink,
+            label: m.button_label_view_trivia(),
+          }}
+        />
+        <SummaryHeaderTrivia facts={triviaFacts} />
+      </div>
+    {/snippet}
 
+    <!-- Awards is not borrowed: it exists nowhere else on the page. -->
+    {#snippet awardsColumn()}
+      <div class="strip-column">
+        <SummaryHeaderSectionHeader title={m.header_awards()} />
+        <SummaryHeaderAwards awards={headerAwards} />
+      </div>
+    {/snippet}
+
+    {@const stripColumns = [
+      creditsColumn,
+      watchColumn,
+      ...($isAuthorized && $progress$ && $progress$.completed > 0
+        ? [recapColumn]
+        : []),
+      ...($isAuthorized && headerSocialEntries.length > 0
+        ? [socialColumn]
+        : []),
+      ...(headerSentiment ? [sentimentColumn] : []),
+      ...(triviaFacts.length > 0 ? [triviaColumn] : []),
+      ...($isAwardsEnabled && isDirector && headerAwards.length > 0
+        ? [awardsColumn]
+        : []),
+    ]}
+    {@const firstPage = stripColumns.slice(0, STRIP_PAGE_SIZE)}
+    {@const secondPage = stripColumns.slice(STRIP_PAGE_SIZE)}
+
+    {#snippet stripPageOne()}
+      <div class="strip-page">
+        {#each firstPage as column (column)}
+          {@render column()}
+        {/each}
+      </div>
+    {/snippet}
+
+    {#snippet stripPageTwo()}
+      <div class="strip-page">
+        {#each secondPage as column (column)}
+          {@render column()}
+        {/each}
+      </div>
+    {/snippet}
+
+    <div class="masthead-strip">
       <!--
-        Deliberately NOT marked `strip-column-borrowed`, unlike its neighbours. Those
-        hide below desktop because they duplicate a section further down the page;
-        awards exist nowhere else, so hiding them would not de-duplicate anything - it
-        would simply make awards invisible on a phone.
+        Four columns per view on desktop, the profile header's own swipe
+        carousel paging the rest. Below desktop the carousel would cram four
+        sections into a phone, so the columns stack as before.
       -->
-      <RenderForFeature flag={FeatureFlag.SummaryAwards} audience="director">
-        {#snippet enabled()}
-          {#if headerAwards.length > 0}
-            <div class="strip-column">
-              <SummaryHeaderSectionHeader title={m.header_awards()} />
-              <SummaryHeaderAwards awards={headerAwards} />
-            </div>
-          {/if}
-        {/snippet}
-      </RenderForFeature>
+      <RenderFor audience="all" device={["desktop"]}>
+        <SwipeCarousel
+          slides={secondPage.length > 0
+            ? [stripPageOne, stripPageTwo]
+            : [stripPageOne]}
+        />
+      </RenderFor>
+
+      <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
+        <div class="strip-stack">
+          {#each stripColumns as column (column)}
+            {@render column()}
+          {/each}
+        </div>
+      </RenderFor>
     </div>
     {:else}
     <!--
@@ -617,12 +676,12 @@
 
     /*
       The CARD stays fluid; the CONTENT does not follow it forever. On big
-      screens everything inside caps at 960 and centres, so lines, strips and
+      screens everything inside caps at 1280 and centres, so lines, strips and
       rows keep a readable measure however wide the window - and the gap this
       opens beside the content is where differently sized cards go next.
     */
     width: 100%;
-    max-width: var(--ni-960);
+    max-width: var(--ni-1280);
     margin-inline: auto;
     box-sizing: border-box;
 
@@ -717,25 +776,26 @@
 
     border-top: var(--ni-1) solid var(--color-hairline);
 
-    /*
-      Auto-flow rather than a fixed column count: sentiment and social activity
-      both drop out when there is nothing to show (no analysis, or a signed-out
-      visitor), and this keeps the remaining columns equal and full-width instead
-      of leaving an empty cell behind.
-    */
-    /*
-      `auto-fit` + `minmax`, which solves two problems with one rule.
+    /* The composition centres; the data does not. */
+    text-align: start;
+  }
 
-      Column COUNT is not fixed: sentiment, social activity and trivia each drop out
-      when there is nothing to show, and auto-fit keeps whatever survives equal and
-      full-width rather than leaving a dead cell.
+  /*
+    One carousel page: exactly four equal columns. The page is the unit that
+    swipes, so a fixed count is finally correct here - variable sections now
+    change the PAGE COUNT, not the column width.
+  */
+  .strip-page {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--ni-32);
+  }
 
-      Column WIDTH now has a floor. The previous `auto-flow: column` could not wrap,
-      so five columns stayed five columns however narrow the window got - at 1024px
-      that was 109px each. With a floor they wrap onto as many rows as they need,
-      which is the behaviour that holds from a phone to an ultrawide without a
-      breakpoint per case.
-    */
+  /*
+    Below desktop the columns stack as they always have - auto-fit with a
+    width floor, one column on the narrowest screens.
+  */
+  .strip-stack {
     display: grid;
     grid-template-columns: repeat(
       auto-fit,
@@ -743,12 +803,8 @@
     );
     gap: var(--ni-32);
 
-    /* The composition centres; the data does not. */
-    text-align: start;
-
     @include for-tablet-sm-and-below {
       gap: var(--gap-l);
-      /* One column: below this even two columns cannot hold a provider row. */
       --strip-column-min: 100%;
     }
   }
