@@ -616,6 +616,17 @@
     gap: var(--masthead-rhythm);
 
     /*
+      The CARD stays fluid; the CONTENT does not follow it forever. On big
+      screens everything inside caps at 960 and centres, so lines, strips and
+      rows keep a readable measure however wide the window - and the gap this
+      opens beside the content is where differently sized cards go next.
+    */
+    width: 100%;
+    max-width: var(--ni-960);
+    margin-inline: auto;
+    box-sizing: border-box;
+
+    /*
       The side padding sets the centred measure, so it has to scale rather than sit
       at the 120px it was drawn with - at 1024px that alone ate a quarter of the
       window and squeezed the strip below into unreadable columns.
