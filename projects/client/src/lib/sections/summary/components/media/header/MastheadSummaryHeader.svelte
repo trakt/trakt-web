@@ -438,12 +438,9 @@
       </div>
     {/snippet}
 
-    {@const stripColumns = [
+    {@const otherColumns = [
       creditsColumn,
       watchColumn,
-      ...($isAuthorized && $progress$ && $progress$.completed > 0
-        ? [recapColumn]
-        : []),
       ...($isAuthorized && headerSocialEntries.length > 0
         ? [socialColumn]
         : []),
@@ -453,6 +450,17 @@
         ? [awardsColumn]
         : []),
     ]}
+    {@const hasRecap = Boolean(
+      $isAuthorized && $progress$ && $progress$.completed > 0,
+    )}
+    <!-- The recap closes the first page - your own standing sits by the turn. -->
+    {@const stripColumns = hasRecap
+      ? [
+        ...otherColumns.slice(0, STRIP_PAGE_SIZE - 1),
+        recapColumn,
+        ...otherColumns.slice(STRIP_PAGE_SIZE - 1),
+      ]
+      : otherColumns}
     {@const firstPage = stripColumns.slice(0, STRIP_PAGE_SIZE)}
     {@const secondPage = stripColumns.slice(STRIP_PAGE_SIZE)}
 
@@ -479,11 +487,19 @@
         sections into a phone, so the columns stack as before.
       -->
       <RenderFor audience="all" device={["desktop"]}>
-        <SwipeCarousel
-          slides={secondPage.length > 0
-            ? [stripPageOne, stripPageTwo]
-            : [stripPageOne]}
-        />
+        <!--
+          Keyed by page count: the carousel captures its slide count once at
+          mount, but the async sections land after mount and can grow one page
+          into two - which left the next-arrow lit yet inert, stepping toward
+          a page the store never learned about. A count change remounts it.
+        -->
+        {#key stripColumns.length > STRIP_PAGE_SIZE}
+          <SwipeCarousel
+            slides={secondPage.length > 0
+              ? [stripPageOne, stripPageTwo]
+              : [stripPageOne]}
+          />
+        {/key}
       </RenderFor>
 
       <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
