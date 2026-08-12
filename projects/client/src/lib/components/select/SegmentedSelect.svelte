@@ -34,6 +34,8 @@
     ),
   );
 
+  const hasExtension = $derived(expandable && Boolean(extension) && expanded);
+
   const collapseFrom = $derived(
     expandable ? options.length - collapsedCount : options.length,
   );
@@ -141,6 +143,7 @@
 
 <div
   class="trakt-segmented-select"
+  class:has-extension={hasExtension}
   role="radiogroup"
   aria-label={ariaLabel}
   data-variant={variant}
@@ -170,11 +173,11 @@
     {/each}
   </div>
 
-  {#if expandable && extension && expanded}
+  {#if hasExtension}
     <div class="segment-extension">
       <div class="extension-divider"></div>
       <div class="extension-content">
-        {@render extension()}
+        {@render extension?.()}
       </div>
     </div>
   {/if}
@@ -184,9 +187,10 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-segmented-select {
-    --segment-height: var(--ni-32);
+    --segment-height: var(--segmented-select-segment-height);
     --segment-inset: var(--ni-4);
-    --segment-gap: var(--ni-2);
+    --segment-block-inset: var(--segment-inset);
+    --segment-gap: var(--gap-xs);
     --track-base-radius: var(--segmented-select-radius, var(--border-radius-l));
     --track-radius: var(--track-base-radius);
     --segment-radius: calc(var(--track-base-radius) - var(--segment-inset));
@@ -202,7 +206,7 @@
     display: flex;
     flex-direction: column;
 
-    padding: var(--segment-inset);
+    padding: var(--segment-block-inset) var(--segment-inset);
     border-radius: var(--track-radius);
     background-color: var(
       --segmented-select-background,
@@ -216,6 +220,10 @@
         --segmented-select-radius,
         var(--border-radius-m)
       );
+    }
+
+    &.has-extension {
+      --segment-block-inset: var(--segmented-select-extension-inset);
     }
 
     .segment-row {
@@ -298,8 +306,8 @@
 
       :global(svg) {
         display: block;
-        width: var(--ni-16);
-        height: var(--ni-16);
+        width: var(--ni-18);
+        height: var(--ni-18);
       }
     }
 
@@ -357,6 +365,7 @@
     .segment-row {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0;
     }
 
@@ -489,7 +498,7 @@
   .extension-divider {
     flex-shrink: 0;
     height: var(--border-thickness-xxs);
-    margin-block-start: var(--segment-inset);
+    margin-block-start: var(--segment-block-inset);
     background: var(--color-segmented-track-border);
   }
 
