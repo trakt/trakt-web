@@ -7,14 +7,7 @@
     superscript: Snippet;
     url?: string | Nil;
     isLoading?: boolean;
-    // "minimal" drops the vote-count superscript, showing the score alone;
-    // "default" renders it. The compact summary row is minimal, the ratings
-    // drawer is default.
-    style?: "default" | "minimal";
-    // "row" (default) is the compact inline logo → value → votes layout.
-    // "tile" stacks a large logo above the value and sublabel inside a
-    // full-height clickable card, used by the ratings drawer grid.
-    layout?: "row" | "tile";
+    variant?: "row" | "tile";
   } & ChildrenProps;
 
   const {
@@ -23,20 +16,18 @@
     superscript,
     url,
     isLoading = false,
-    style = "default",
-    layout = "row",
+    variant = "row",
   }: RatingItemProps = $props();
 
   const hasValidRating = $derived(rating !== undefined);
-  const ratingLink = $derived(
-    hasValidRating && layout === "tile" ? url : undefined,
-  );
+  const isTile = $derived(variant === "tile");
+  const ratingLink = $derived(hasValidRating && isTile ? url : undefined);
 </script>
 
 {#snippet item()}
   <div
     class="rating-item"
-    data-layout={layout}
+    data-variant={variant}
     class:has-valid-rating={hasValidRating}
   >
     {@render children()}
@@ -50,7 +41,7 @@
           <p class="bold">-</p>
         {/if}
       </div>
-      {#if style === "default"}
+      {#if isTile}
         <div class="rating-votes">
           {#if isLoading}
             <span
@@ -68,7 +59,7 @@
   </div>
 {/snippet}
 
-<rating data-layout={layout}>
+<rating data-variant={variant}>
   {#if ratingLink}
     <Link href={ratingLink} target="_blank">
       {@render item()}
@@ -81,7 +72,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  rating[data-layout="tile"] {
+  rating[data-variant="tile"] {
     display: block;
     height: 100%;
 
@@ -154,7 +145,7 @@
       }
     }
 
-    &[data-layout="tile"] {
+    &[data-variant="tile"] {
       flex-direction: column;
       justify-content: center;
       gap: var(--gap-s);
@@ -184,7 +175,7 @@
       line-height: 90%;
     }
 
-    [data-layout="tile"] & {
+    [data-variant="tile"] & {
       flex-direction: column;
       align-items: center;
       gap: var(--gap-xs);

@@ -74,9 +74,7 @@
             <RatingList
               {ratings}
               {entry}
-              variant="external"
-              style="default"
-              layout="tile"
+              variant="breakdown"
               isLoading={$isLoading}
             />
           </div>
