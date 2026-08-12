@@ -27,9 +27,9 @@
   import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import RateNow from "../../rating/RateNow.svelte";
   import SummaryActions from "../../summary/SummaryActions.svelte";
-  import SummaryOverview from "../../summary/SummaryOverview.svelte";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "../v2/_internal/MediaActions.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import GlanceDock from "./_internal/GlanceDock.svelte";
   import GlanceStrip from "./_internal/GlanceStrip.svelte";
   import SummaryHeaderByline from "./_internal/SummaryHeaderByline.svelte";
@@ -293,11 +293,29 @@
         isLoading={$isRatingsLoading}
       />
     </div>
-    <SummaryHeaderTitle {title} />
+    <!--
+      The title is the biggest touch target on the page, so it earns the most
+      wanted destination: the details drawer, where the full description now
+      lives. Same target as the credits chevron and the glance release token.
+    -->
+    <div class="masthead-title-link">
+      <Link
+        href={detailsLink.href}
+        color="inherit"
+        label={m.button_label_details({ title })}
+      >
+        <SummaryHeaderTitle {title} />
+      </Link>
+    </div>
 
+    <!--
+      Two lines, then an ellipsis - the full text is one tap away in the
+      details drawer (title, chevron or glance token). The old inline "+ more"
+      expanded the card downward and pushed the actions off the fold.
+    -->
     <div class="masthead-deck">
       <Spoiler {media} type={target.type}>
-        <SummaryOverview {title} {overview} />
+        <p class="deck-text">{overview}</p>
       </Spoiler>
     </div>
 
@@ -808,6 +826,23 @@
   .masthead-scores {
     /* Belongs to the kicker line above, not to the column's full beat. */
     margin-top: calc(var(--gap-xs) - var(--masthead-rhythm));
+  }
+
+  .masthead-title-link {
+    :global(a) {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  .deck-text {
+    margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
   }
 
   .masthead-deck {
