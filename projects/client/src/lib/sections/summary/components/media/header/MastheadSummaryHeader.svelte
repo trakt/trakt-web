@@ -1046,7 +1046,8 @@
     :global(.trakt-summary-actions) {
       flex-direction: column;
       align-items: center;
-      gap: var(--gap-m);
+      /* The stars belong to the bar - half a beat, not a full one. */
+      gap: var(--gap-s);
     }
 
     .fused-tray {
