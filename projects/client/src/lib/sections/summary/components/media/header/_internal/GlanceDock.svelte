@@ -297,7 +297,7 @@
     */
     .dock-dot {
       position: absolute;
-      bottom: var(--ni-1);
+      bottom: calc(-1 * var(--ni-2));
       left: 50%;
       transform: translateX(-50%);
 
