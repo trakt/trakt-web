@@ -1,4 +1,4 @@
-import type { UserCollection } from '$lib/features/auth/queries/currentUserCollectionQuery.ts';
+import type { UserCollection } from '$lib/features/auth/stores/useCurrentUserCollection.ts';
 import { rawApiFetch } from '$lib/requests/api.ts';
 import { SYNC_CHUNK_SIZE } from '$lib/sections/settings/sync/constants/index.ts';
 import { chunk } from '$lib/utils/array/chunk.ts';

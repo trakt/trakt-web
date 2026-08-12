@@ -7,10 +7,6 @@ import { multicast } from '$lib/utils/store/multicast.ts';
 import { map, of, switchMap } from 'rxjs';
 import { getContext, setContext } from 'svelte';
 import {
-  currentUserCollectionQuery,
-  type UserCollection,
-} from '../queries/currentUserCollectionQuery.ts';
-import {
   currentUserCommentReactionsQuery,
   type UserReactions,
 } from '../queries/currentUserCommentReactionsQuery.ts';
@@ -52,6 +48,10 @@ import {
   type UserWatchlist,
 } from '../queries/currentUserWatchlistQuery.ts';
 import { useAuth } from './useAuth.ts';
+import {
+  useCurrentUserCollection,
+  type UserCollection,
+} from './useCurrentUserCollection.ts';
 import {
   useCurrentUserHistory,
   type UserHistory,
@@ -125,7 +125,7 @@ function createUseUserInstance() {
   const userQuerySignal = useQuery(currentUserSettingsQuery());
   const { history: historySignal } = useCurrentUserHistory();
   const watchlistQuerySignal = useQuery(currentUserWatchlistQuery());
-  const collectionQuerySignal = useQuery(currentUserCollectionQuery());
+  const collectionSignal = useCurrentUserCollection();
   const ratingsQuerySignal = useQuery(currentUserRatingsQuery());
   const commentReactionsQuerySignal = useQuery(
     currentUserCommentReactionsQuery(),
@@ -205,9 +205,7 @@ function createUseUserInstance() {
         watchlist: watchlistQuerySignal.pipe(
           map((watchlist) => watchlist.data),
         ),
-        collection: collectionQuerySignal.pipe(
-          map((collection) => collection.data),
-        ),
+        collection: collectionSignal,
         ratings: ratingsQuerySignal.pipe(
           map((ratings) => ratings.data),
         ),

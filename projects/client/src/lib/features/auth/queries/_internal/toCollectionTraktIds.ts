@@ -6,5 +6,7 @@ import type {
 export function toCollectionTraktIds(
   response: CollectionMinimalResponse | CollectionMinimalShowResponse | Nil,
 ): number[] {
-  return Object.keys(response ?? {}).map((key) => parseInt(key, 10));
+  return Object.keys(response ?? {})
+    .map((key) => parseInt(key, 10))
+    .filter((id) => Number.isInteger(id));
 }

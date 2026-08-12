@@ -1,44 +1,54 @@
-import z from 'zod';
-import { api, type ApiParams } from '../../../requests/api.ts';
-import { InvalidateAction } from '../../../requests/models/InvalidateAction.ts';
-import { time } from '../../../utils/timing/time.ts';
-import { defineQuery } from '../../query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
+import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
+import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
+import { time } from '$lib/utils/timing/time.ts';
+import type { CollectionMinimalResponse } from '@trakt/api';
+import { z } from 'zod';
 import { toCollectionTraktIds } from './_internal/toCollectionTraktIds.ts';
 
-const UserCollectionSchema = z.object({
-  movies: z.set(z.number()),
-  episodes: z.set(z.number()),
-});
+type CurrentUserCollectionParams =
+  & {
+    type: 'movies' | 'episodes';
+  }
+  & PaginationParams
+  & ApiParams;
 
-export type UserCollection = z.infer<typeof UserCollectionSchema>;
+// FIXME: use api().sync.collection.minimal[type] once @trakt/api types page & limit
+const currentUserCollectionRequest = async (
+  { fetch, type, page = 1, limit }: CurrentUserCollectionParams,
+) => {
+  const query = new URLSearchParams({
+    page: `${page}`,
+    limit: `${limit}`,
+  });
 
-const currentUserCollectionRequest = (
-  { fetch }: ApiParams,
-  type: 'movies' | 'episodes',
-) =>
-  api({ fetch })
-    .sync
-    .collection
-    .minimal[type]({
-      query: {},
-    });
+  const response = await rawApiFetch({
+    fetch,
+    path: `/sync/collection/minimal/${type}?${query}`,
+  });
 
-export const currentUserCollectionQuery = defineQuery({
+  const body: CollectionMinimalResponse = response.ok
+    ? await response.json()
+    : {};
+
+  return { body, headers: response.headers, status: response.status };
+};
+
+export const currentUserCollectionQuery = defineInfiniteQuery({
   key: 'currentUserCollection',
-  request: (params) =>
-    Promise.all([
-      currentUserCollectionRequest(params, 'movies'),
-      currentUserCollectionRequest(params, 'episodes'),
-    ]),
+  request: currentUserCollectionRequest,
   invalidations: [
     InvalidateAction.Collected('movie'),
     InvalidateAction.Collected('episode'),
   ],
-  dependencies: [],
-  mapper: ([moviesResponse, episodesResponse]) => ({
-    movies: new Set(toCollectionTraktIds(moviesResponse.body)),
-    episodes: new Set(toCollectionTraktIds(episodesResponse.body)),
+  dependencies: (params) => [params.type, params.limit],
+  mapper: (response, { page = 1 }) => ({
+    entries: toCollectionTraktIds(response.body),
+    page: extractPageMeta(response.headers, page),
   }),
-  schema: UserCollectionSchema,
+  schema: PaginatableSchemaFactory(z.number()),
   ttl: time.hours(3),
 });
