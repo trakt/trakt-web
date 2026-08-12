@@ -5588,11 +5588,11 @@
       "description": "Band label over the sentiment analysis prose in the sentiment drawer."
     },
     "header_sentiment_working": {
-      "default": "Working",
+      "default": "Pros",
       "description": "Band label over what reviewers praise, in the sentiment drawer."
     },
     "header_sentiment_not_working": {
-      "default": "Not working",
+      "default": "Cons",
       "description": "Band label over what reviewers criticize, in the sentiment drawer."
     },
     "header_sentiment_highlight": {
@@ -10420,11 +10420,11 @@
       "description": "Golden pill on the person page counting nominations, shown when there are no wins."
     },
     "button_label_view_recap": {
-      "default": "View your recap for {title}",
+      "default": "View your progress for {title}",
       "description": "Aria-label for the control that opens the recap drawer."
     },
     "header_recap": {
-      "default": "Recap",
+      "default": "Progress",
       "description": "Section label for the viewer's own progress through a show - last seen episode, standing and time left."
     },
     "text_recap_last_seen": {

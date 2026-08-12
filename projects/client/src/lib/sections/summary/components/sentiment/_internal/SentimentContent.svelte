@@ -49,7 +49,7 @@
   {/if}
 
   {#if cons.length > 0}
-    <section class="sentiment-band">
+    <section class="sentiment-band band-joined">
       <h3 class="band-label band-label-bad">{m.header_sentiment_not_working()}</h3>
       {@render aspects(cons, "bad")}
     </section>
@@ -80,6 +80,12 @@
     &:not(:first-child) {
       padding-top: var(--ni-24);
       border-top: var(--ni-1) solid var(--color-hairline);
+    }
+
+    /* Pros and cons are one conversation - no rule between them. */
+    &.band-joined {
+      padding-top: var(--ni-8);
+      border-top: none;
     }
   }
 

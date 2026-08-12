@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
@@ -72,6 +72,16 @@
     {#if $hasSpoilers}
       <Toggler value={$triviaType.value} onChange={set} {options} />
     {/if}
+    {#if $categories.length > 1}
+      <SingleSelect
+        options={categoryOptions}
+        value={effectiveCategory === "all" ? null : effectiveCategory}
+        placeholder={m.option_text_trivia_category_all()}
+        autoWidth
+        onChange={(value) =>
+          (activeCategory = value as TriviaCategory | "all")}
+      />
+    {/if}
   </div>
 {/snippet}
 
@@ -86,26 +96,6 @@
   {#if isOpen}
     <div transition:fade={{ duration: 150 }}>
       <RenderFor audience="vip">
-        {#if $categories.length > 1}
-          <div class="category-pills">
-            {#each categoryOptions as option (option.value)}
-              <Button
-                color={effectiveCategory === option.value ||
-                    (option.value === "all" && effectiveCategory === "all")
-                  ? "purple"
-                  : "default"}
-                style={effectiveCategory === option.value ? "flat" : "outline"}
-                size="small"
-                label={option.label}
-                onclick={() =>
-                  (activeCategory = option.value as TriviaCategory | "all")}
-              >
-                {option.label}
-              </Button>
-            {/each}
-          </div>
-        {/if}
-
         <div class="trivia-drawer-list">
           {#each filteredList as trivia (trivia.key)}
             <TriviaCard
@@ -138,17 +128,6 @@
     font-weight: 700;
     letter-spacing: 0.13em;
     color: var(--color-text-secondary);
-  }
-
-  .category-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--gap-s);
-
-    /* The pills rule off from the facts below, as the header does its bands. */
-    padding: var(--gap-xs) var(--gap-s) var(--ni-20);
-    margin-bottom: var(--ni-20);
-    border-bottom: var(--ni-1) solid var(--color-hairline);
   }
 
   .trivia-drawer-list {

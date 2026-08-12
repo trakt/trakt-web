@@ -63,12 +63,11 @@
 </div>
 
 <style lang="scss">
-  /* Label at the start, its values ranged at the end - one row per fact. */
+  /* Caps label over its values - one compact cell per fact. */
   .trakt-collapsable-values {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: baseline;
-    gap: var(--gap-m);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-4);
 
     min-width: 0;
   }
@@ -76,11 +75,11 @@
   .trakt-collapsable-values-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    text-align: end;
+    align-items: flex-start;
+    text-align: start;
     min-width: 0;
 
-    gap: var(--gap-xxs);
+    gap: var(--ni-2);
 
     &.is-hidden {
       display: none;
@@ -89,7 +88,6 @@
 
   .trakt-displayable-value {
     display: flex;
-    justify-content: flex-end;
     align-items: baseline;
 
     gap: var(--gap-xs);
