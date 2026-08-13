@@ -61,6 +61,27 @@
     var(--height-landscape-card-cover) + var(--height-card-footer-sm)
   );
 
+  --min-recommended-card-width: var(--ni-240);
+  --max-list-recommended-item-count: 8;
+
+  --list-recommended-item-count: var(--max-list-recommended-item-count);
+  @include dynamic-item-count(
+    --list-recommended-item-count,
+    var(--min-recommended-card-width),
+    var(--max-list-recommended-item-count),
+  );
+
+  --width-recommended-card: var(--min-recommended-card-width);
+  @include dynamic-card-width(
+    --width-recommended-card,
+    var(--min-recommended-card-width),
+    var(--list-recommended-item-count),
+  );
+  --height-recommended-card-cover: calc(var(--width-recommended-card) * 1.5);
+  --height-recommended-card: calc(
+    var(--height-recommended-card-cover) + var(--height-card-footer-sm)
+  );
+
   --min-person-card-width: var(--ni-120);
   --max-list-person-item-count: 15;
 
@@ -250,6 +271,9 @@
   );
   --height-poster-list-sm: calc(
     var(--height-portrait-card-sm) + var(--layout-scrollbar-width)
+  );
+  --height-recommended-list: calc(
+    var(--height-recommended-card) + var(--layout-scrollbar-width)
   );
   --height-lists-list: calc(
     var(--height-list-card) + var(--layout-scrollbar-width)

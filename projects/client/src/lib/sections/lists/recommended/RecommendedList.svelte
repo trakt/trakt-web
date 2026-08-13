@@ -32,8 +32,12 @@
 </script>
 
 <DrillableMediaList
-  --height-override-card="var(--height-portrait-card-sm)"
-  --height-override-list="var(--height-poster-list-sm)"
+  --width-portrait-card="var(--width-recommended-card)"
+  --height-portrait-card-cover="var(--height-recommended-card-cover)"
+  --width-override-card="var(--width-recommended-card)"
+  --height-override-card="var(--height-recommended-card)"
+  --height-override-card-cover="var(--height-recommended-card-cover)"
+  --height-override-list="var(--height-recommended-list)"
   id={{
     scope: "recommended-list",
     key: type,
