@@ -5,7 +5,8 @@
   const { to }: { to: string } = $props();
 
   onMount(() => {
-    if (page.url.pathname === to) return;
+    const target = new URL(to, page.url.origin);
+    if (page.url.pathname === target.pathname) return;
     goto(to, {
       replaceState: true,
     });
