@@ -1,7 +1,10 @@
 import { error } from '$lib/utils/console/print.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { strToU8, zip, type Zippable } from 'fflate';
 import { downloadFile } from './downloadFile.ts';
-import { processEndpoint } from './processEndpoint.ts';
+import { type Pagination, processEndpoint } from './processEndpoint.ts';
+
+const FETCH_TIME_BUDGET = time.hours(2);
 
 type UserLike = {
   slug: string;
@@ -15,9 +18,17 @@ interface TraktList {
   };
 }
 
+type ExportFailure = {
+  endpoint: string;
+  error: string;
+  fetchedPages: number;
+  totalPages: number;
+};
+
 type ExportStatus =
   | { type: 'fetch'; item: string }
   | { type: 'zip' }
+  | { type: 'partial'; failed: number }
   | { type: 'complete' };
 
 interface ExportOptions {
@@ -167,11 +178,54 @@ export async function runRawExport({
     { path: `users/${slug}/lists`, file: 'lists-lists' },
   ];
 
+  const failures: Array<ExportFailure> = [];
+
+  const fetchDeadline = Date.now() + FETCH_TIME_BUDGET;
+  const assertWithinBudget = () => {
+    if (Date.now() < fetchDeadline) {
+      return;
+    }
+
+    throw new Error(
+      `Export exceeded its ${
+        FETCH_TIME_BUDGET / time.minutes(1)
+      } minute fetch budget`,
+    );
+  };
+
+  const collectEndpoint = async (
+    path: string,
+    onPage: (data: unknown, pagination: Pagination) => void,
+  ) => {
+    const progress = { fetchedPages: 0, totalPages: 0 };
+
+    try {
+      assertWithinBudget();
+
+      await processEndpoint(path, (data, pagination) => {
+        progress.fetchedPages = pagination.page;
+        progress.totalPages = pagination.pageCount;
+        onPage(data, pagination);
+
+        if (pagination.page < pagination.pageCount) {
+          assertWithinBudget();
+        }
+      });
+    } catch (e) {
+      error(`Export failed for ${path}`, e);
+      failures.push({
+        endpoint: path,
+        error: e instanceof Error ? e.message : String(e),
+        ...progress,
+      });
+    }
+  };
+
   try {
     // Fetch dynamic list endpoints
     onStatus({ type: 'fetch', item: 'lists' });
 
-    await processEndpoint(`users/${slug}/lists`, (data) => {
+    await collectEndpoint(`users/${slug}/lists`, (data) => {
       const lists = data as TraktList[];
       for (const list of lists) {
         endpoints.push({
@@ -187,11 +241,19 @@ export async function runRawExport({
       onProgress(`(${count}/${endpoints.length})`);
       onStatus({ type: 'fetch', item: endpoint.file });
 
-      await processEndpoint(endpoint.path, (data, { page, pageCount }) => {
-        const suffix = page > 1 || pageCount > 1 ? `-${page}` : '';
+      await collectEndpoint(endpoint.path, (data, { page, pageCount }) => {
+        const isPaginated = page > 1 || pageCount > 1;
+        if (isPaginated) {
+          onProgress(`(${count}/${endpoints.length} · ${page})`);
+        }
+        const suffix = isPaginated ? `-${page}` : '';
         const filename = `${endpoint.file}${suffix}.json`;
-        files[filename] = strToU8(JSON.stringify(data, null, 2));
+        files[filename] = strToU8(JSON.stringify(data));
       });
+    }
+
+    if (failures.length > 0) {
+      files['_errors.json'] = strToU8(JSON.stringify(failures));
     }
 
     onStatus({ type: 'zip' });
@@ -206,7 +268,11 @@ export async function runRawExport({
       });
 
       downloadFile(blob, `trakt-export-${slug}.zip`);
-      onStatus({ type: 'complete' });
+      onStatus(
+        failures.length > 0
+          ? { type: 'partial', failed: failures.length }
+          : { type: 'complete' },
+      );
       onComplete();
     });
   } catch (e) {

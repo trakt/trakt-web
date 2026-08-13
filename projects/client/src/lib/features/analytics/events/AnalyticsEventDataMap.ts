@@ -67,7 +67,11 @@ type ImportCompletedType = {
   duration: number;
 };
 type ImportFailedType = { source: string; error: string };
-type ExportCompletedType = { duration: number; endpointCount: number };
+type ExportCompletedType = {
+  duration: number;
+  endpointCount: number;
+  failedCount: number;
+};
 type ExportFailedType = { error: string };
 
 type ClearInitiatedType = { source: string };
