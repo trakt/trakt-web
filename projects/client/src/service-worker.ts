@@ -151,7 +151,7 @@ const navigationHandler = new StaleWhileRevalidate(navigationOptions);
 
 const landingHandler = new NetworkFirst({
   ...navigationOptions,
-  networkTimeoutSeconds: 3,
+  networkTimeoutSeconds: 1.5,
 });
 
 registerRoute(

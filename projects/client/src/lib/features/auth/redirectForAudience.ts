@@ -7,11 +7,16 @@ type RedirectForAudienceParams = {
   audience: 'authenticated' | 'public';
   oidcAuth: Nil | OidcAuthToken;
   search: string;
+  isDataRequest: boolean;
 };
 
 export function redirectForAudience(
-  { audience, oidcAuth, search }: RedirectForAudienceParams,
+  { audience, oidcAuth, search, isDataRequest }: RedirectForAudienceParams,
 ) {
+  if (isDataRequest) {
+    return;
+  }
+
   const isAuthorized = isAuthorizedToken(oidcAuth);
 
   if (audience === 'authenticated' && !isAuthorized) {

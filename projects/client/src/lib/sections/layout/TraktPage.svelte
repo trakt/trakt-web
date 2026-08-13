@@ -143,14 +143,32 @@
   const AUDIENCE_REDIRECTS: Partial<
     Record<
       AudienceProps["audience"],
-      { viewer: AudienceProps["audience"]; to: string }
+      {
+        viewer: AudienceProps["audience"];
+        to: string;
+        preservesSearch: boolean;
+      }
     >
   > = {
-    authenticated: { viewer: "public", to: UrlBuilder.landing() },
-    public: { viewer: "authenticated", to: UrlBuilder.home() },
+    authenticated: {
+      viewer: "public",
+      to: UrlBuilder.landing(),
+      preservesSearch: false,
+    },
+    public: {
+      viewer: "authenticated",
+      to: UrlBuilder.home(),
+      preservesSearch: true,
+    },
   };
 
   const audienceRedirect = $derived(AUDIENCE_REDIRECTS[audience]);
+
+  const audienceRedirectTo = $derived(
+    audienceRedirect?.preservesSearch
+      ? `${audienceRedirect.to}${page.url.search}`
+      : audienceRedirect?.to,
+  );
 
   const isMediaPage = $derived(type === "movie" || type === "show");
 
@@ -307,9 +325,9 @@
     {/if}
   </RenderFor>
 
-  {#if audienceRedirect}
+  {#if audienceRedirect && audienceRedirectTo}
     <RenderFor audience={audienceRedirect.viewer}>
-      <Redirect to={audienceRedirect.to} />
+      <Redirect to={audienceRedirectTo} />
     </RenderFor>
   {/if}
 </FilterScopeSetter>
