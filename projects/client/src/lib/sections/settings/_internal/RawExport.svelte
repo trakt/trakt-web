@@ -33,6 +33,9 @@
     const startTime = Date.now();
     state.isExporting = true;
     state.endpointCount = 0;
+    state.statusText = "";
+    state.progress = "";
+    let failedCount = 0;
 
     record(AnalyticsEvent.ExportInitiated, {});
 
@@ -42,6 +45,15 @@
         switch (status.type) {
           case "complete":
             state.statusText = m.text_export_status_complete();
+            break;
+          case "partial":
+            failedCount = status.failed;
+            state.statusText = status.failed === 1
+              ? m.text_export_status_partial_one({ total: state.endpointCount })
+              : m.text_export_status_partial_other({
+                failed: status.failed,
+                total: state.endpointCount,
+              });
             break;
           case "zip":
             state.statusText = m.text_export_status_zipping();
@@ -60,7 +72,14 @@
         record(AnalyticsEvent.ExportCompleted, {
           duration: exportDuration,
           endpointCount: state.endpointCount,
+          failedCount,
         });
+
+        if (failedCount > 0) {
+          state.isExporting = false;
+          state.progress = "";
+          return;
+        }
 
         setTimeout(() => {
           state.isExporting = false;

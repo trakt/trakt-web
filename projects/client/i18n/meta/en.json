@@ -5034,6 +5034,27 @@
       "default": "Export complete.",
       "description": "Text shown to indicate that the user's data export is complete."
     },
+    "text_export_status_partial_one": {
+      "default": "Export complete, but 1 of {total} sections failed. See _errors.json in the zip.",
+      "description": "Text shown when the user's data export finished but exactly one section could not be fetched.",
+      "variables": {
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "text_export_status_partial_other": {
+      "default": "Export complete, but {failed} of {total} sections failed. See _errors.json in the zip.",
+      "description": "Text shown when the user's data export finished but multiple sections could not be fetched.",
+      "variables": {
+        "failed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
     "header_import": {
       "default": "Import",
       "description": "Header for the settings section that allows users to import their data from third-party services."

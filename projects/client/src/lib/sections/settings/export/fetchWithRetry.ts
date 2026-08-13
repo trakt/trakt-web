@@ -1,12 +1,41 @@
 import { rawApiFetch } from '$lib/requests/api.ts';
-import { retryAsync } from 'ts-retry';
+import { error } from '$lib/utils/console/print.ts';
+import { time } from '$lib/utils/timing/time.ts';
+import { isAbortError, retryAsync } from 'ts-retry';
 
-export function fetchWithRetry(
-  url: string,
+type FetchWithRetryParams = {
+  url: string;
+  page?: number;
+  timeout?: number;
+  retryDelay?: number;
+  maxTry?: number;
+};
+
+const REQUEST_TIMEOUT_STATUS = 408;
+
+class PermanentHttpError extends Error {
+  constructor(status: number) {
+    super(`HTTP ${status}`);
+    this.name = 'PermanentHttpError';
+  }
+}
+
+function toHttpError(status: number) {
+  const isTransient = status >= 500 || status === REQUEST_TIMEOUT_STATUS;
+
+  return isTransient
+    ? new Error(`HTTP ${status}`)
+    : new PermanentHttpError(status);
+}
+
+export function fetchWithRetry({
+  url,
   page = 1,
-): Promise<{
+  timeout = time.minutes(1),
+  retryDelay = time.seconds(10),
+  maxTry = 10,
+}: FetchWithRetryParams): Promise<{
   json: unknown;
-  paginationPage: number;
   paginationPageCount: number;
 }> {
   return retryAsync(
@@ -15,39 +44,41 @@ export function fetchWithRetry(
         ? `${url}&page=${page}&limit=250`
         : `${url}?page=${page}&limit=250`;
 
-      const response = await rawApiFetch({ path: `/${pageUrl}` });
+      const response = await rawApiFetch({
+        path: `/${pageUrl}`,
+        init: { signal: AbortSignal.timeout(timeout) },
+      });
 
       if (response.status === 429) {
         throw new Error('RateLimited');
       }
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
+        throw toHttpError(response.status);
       }
 
       const json = await response.json();
-      const headers = response.headers;
 
-      const paginationPage = parseInt(
-        headers.get('X-Pagination-Page') || '1',
-      );
-      const paginationPageCount = parseInt(
-        headers.get('X-Pagination-Page-Count') || '1',
+      const pageCount = Number.parseInt(
+        response.headers.get('X-Pagination-Page-Count') ?? '',
       );
 
-      return { json, paginationPage, paginationPageCount };
+      return { json, paginationPageCount: pageCount || 1 };
     },
     {
-      delay: 10000,
-      maxTry: 10,
+      delay: retryDelay,
+      maxTry,
       onError: (err) => {
-        if (err.message === 'RateLimited') {
-          // already updated status
-        } else {
-          console.error('Fetch failed, retrying...', err);
+        if (err instanceof PermanentHttpError) {
+          error('Fetch failed, giving up', err);
+          return false;
         }
+
+        error('Fetch failed, retrying...', err);
         return undefined;
       },
     },
-  );
+  ).catch((err: unknown) => {
+    throw isAbortError(err) ? err.getError() : err;
+  });
 }
