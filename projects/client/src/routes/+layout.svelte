@@ -152,6 +152,7 @@
         <AuthProvider
           isAuthorized={data.oidcAuth.isAuthorized}
           accessToken={data.oidcAuth.token}
+          hasServerSession={data.oidcAuth.hasSession}
         >
           <SearchShortcut />
           <WSInvalidator />

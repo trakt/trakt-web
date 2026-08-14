@@ -20,12 +20,19 @@ import { setUserManager } from './userManager.ts';
 type InitializeUserManagerParams = {
   ctx: AuthContextType;
   tokenFromServer?: string | null;
+  /** Whether a session cookie reached the server, valid or lapsed. */
+  hasServerSession?: boolean;
   /** Skip the `manager.getUser()` gate when the caller already seeded `ctx`. */
   isResolved?: boolean;
 };
 
 export function initializeUserManager(
-  { ctx, tokenFromServer, isResolved = false }: InitializeUserManagerParams,
+  {
+    ctx,
+    tokenFromServer,
+    hasServerSession = false,
+    isResolved = false,
+  }: InitializeUserManagerParams,
 ) {
   if (!browser) {
     return {
@@ -113,7 +120,9 @@ export function initializeUserManager(
       }
 
       if (!user) {
-        if (tokenFromServer) {
+        // A cookie the client cannot back with a session keeps the server
+        // routing this viewer as signed in, and nothing else clears it.
+        if (hasServerSession) {
           handleUserEvent(null);
           return;
         }

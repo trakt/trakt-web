@@ -19,6 +19,7 @@
   <AuthProvider
     isAuthorized={$isAuthorized}
     accessToken={OidcUserMock.access_token}
+    hasServerSession={$isAuthorized}
   >
     <FeatureFlagProvider>
       <ToastProvider>
