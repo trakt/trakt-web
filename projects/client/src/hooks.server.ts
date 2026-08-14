@@ -3,6 +3,7 @@ import { handle as handleAssetFallback } from '$lib/features/asset-fallback/hand
 import { handle as handleAuth } from '$lib/features/auth/handle.ts';
 import { handle as handleBotVerification } from '$lib/features/bot-verification/handle.ts';
 import { handle as handleCacheBust } from '$lib/features/cache-bust/handle.ts';
+import { resolveCacheControl } from '$lib/features/cache-control/resolveCacheControl.ts';
 import { handle as handleDeployment } from '$lib/features/deployment/handle.ts';
 import { handle as handleDevice } from '$lib/features/devices/handle.ts';
 import { handle as handleLocale } from '$lib/features/i18n/handle.ts';
@@ -30,8 +31,6 @@ const WHITELISTED_HEADERS = new Set([
   'x-pagination-page',
   'x-pagination-page-count',
 ]);
-
-const NO_STORE = 'private, no-store, no-cache, must-revalidate';
 
 const REDIRECT_STATUSES = new Set([301, 302, 303, 307, 308]);
 
@@ -68,38 +67,15 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
     return response;
   }
 
-  function toCacheControl() {
-    if (isRedirect) {
-      return NO_STORE;
-    }
-
-    // A WebView request carries the viewer's VIP token in the URL. Never let a
-    // spoofed bot User-Agent promote the response to a public CDN entry (keyed
-    // by the token), which would cache one viewer's review for others.
-    if (hasWebviewParam(event.url)) {
-      return NO_STORE;
-    }
-
-    // Verified search engine crawlers (via Cloudflare), full CDN caching for SEO
-    if (event.locals.isLegitimateBot) {
-      return 'public, max-age=3600, s-maxage=3600';
-    }
-
-    // Social bots (Discord, Slack, etc.), allow a short cache so strict crawlers (Discord) will render embeds
-    // Only cache publicly for unauthenticated requests to prevent cache poisoning via spoofed User-Agent
-    if (
-      isBotAgent(event.request.headers.get('user-agent')) &&
-      !hasAuthSession(event.locals.oidcAuth)
-    ) {
-      // 120 seconds is enough to satisfy Discord without heavily caching stale content
-      return 'public, max-age=120, s-maxage=120';
-    }
-
-    return NO_STORE;
-  }
-
   const clonedHeaders = new Headers(response.headers);
-  const cacheControl = toCacheControl();
+  const cacheControl = resolveCacheControl({
+    pathname: event.url.pathname,
+    isRedirect,
+    hasWebviewParam: hasWebviewParam(event.url),
+    isLegitimateBot: event.locals.isLegitimateBot,
+    isSocialBot: isBotAgent(event.request.headers.get('user-agent')),
+    hasSession: hasAuthSession(event.locals.oidcAuth),
+  });
   clonedHeaders.set('Cache-Control', cacheControl);
 
   return new Response(response.body, {
