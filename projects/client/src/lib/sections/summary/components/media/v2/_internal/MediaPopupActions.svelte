@@ -91,6 +91,7 @@
   style="dropdown-item"
   type={media.type}
   id={media.id}
+  coverUrl={media.cover.url.medium}
   variant="primary"
   {title}
 />

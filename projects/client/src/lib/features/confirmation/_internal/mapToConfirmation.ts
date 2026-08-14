@@ -13,6 +13,7 @@ type Confirmation = {
   cancelText?: string;
   operation: ConfirmationOperation;
   challenge?: ConfirmationChallenge;
+  previewUrl?: string | Nil;
 };
 
 type ConfirmationBuilder<T extends ConfirmationType> = (
@@ -225,6 +226,13 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     buttonText: m.button_text_reset_cover_image(),
     message: m.confirmation_message_reset_cover_image(),
     operation: 'destructive',
+  }),
+  [ConfirmationType.SetCoverImage]: (props) => ({
+    title: m.button_text_set_cover_image(),
+    buttonText: m.button_text_yes(),
+    message: m.warning_prompt_set_cover_image({ title: props.title }),
+    operation: 'affirmative',
+    previewUrl: props.previewUrl,
   }),
   [ConfirmationType.RevokeApp]: (props) => ({
     title: m.confirmation_title_revoke_app(),

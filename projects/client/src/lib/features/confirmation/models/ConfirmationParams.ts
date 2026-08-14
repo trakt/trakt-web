@@ -126,6 +126,11 @@ interface ConfirmationParamsMap {
   [ConfirmationType.ResetCoverImage]: {
     type: ConfirmationType.ResetCoverImage;
   };
+  [ConfirmationType.SetCoverImage]: {
+    type: ConfirmationType.SetCoverImage;
+    title: string;
+    previewUrl?: string | Nil;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =
