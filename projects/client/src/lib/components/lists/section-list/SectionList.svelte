@@ -37,6 +37,7 @@
     titleAction?: Snippet;
     drilldown?: ListDrilldownProps;
     contentHash?: string;
+    trailingItem?: Snippet;
   };
 
   const {
@@ -45,6 +46,7 @@
     title,
     item,
     ctaItem,
+    trailingItem,
     empty,
     metaInfo,
     actions: _externalActions,
@@ -171,6 +173,10 @@
               {#each items as i (i.key)}
                 {@render item(i)}
               {/each}
+
+              {#if trailingItem}
+                {@render trailingItem()}
+              {/if}
 
               {#if ctaItem && items.length <= ctaCutOff}
                 {#key `section-list-${listId}_cta`}
