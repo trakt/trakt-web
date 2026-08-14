@@ -32,19 +32,21 @@
   import Link from "$lib/components/link/Link.svelte";
   import GlanceStrip from "./_internal/GlanceStrip.svelte";
   import SummaryHeaderByline from "./_internal/SummaryHeaderByline.svelte";
-  import SummaryHeaderFacts from "../../header-kit/SummaryHeaderFacts.svelte";
   import SummaryHeaderKicker from "./_internal/SummaryHeaderKicker.svelte";
   import SummaryHeaderRecap from "./_internal/SummaryHeaderRecap.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { IS_DEV } from "$lib/utils/env";
-  import SwipeCarousel from "$lib/sections/profile/components/SwipeCarousel.svelte";
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
+  import MediaReactionsBadge from "$lib/features/media-reactions/MediaReactionsBadge.svelte";
+  import { mapToMainCredit } from "../../_internal/mapToMainCredit.ts";
   import SummaryHeaderSectionHeader from "./_internal/SummaryHeaderSectionHeader.svelte";
   import SummaryHeaderSentiment from "./_internal/SummaryHeaderSentiment.svelte";
   import SummaryHeaderSocialActivity from "./_internal/SummaryHeaderSocialActivity.svelte";
   import SummaryHeaderTrivia from "./_internal/SummaryHeaderTrivia.svelte";
-  import SummaryHeaderAwards from "./_internal/SummaryHeaderAwards.svelte";
+  import SummaryHeaderAwardsPill from "./_internal/SummaryHeaderAwardsPill.svelte";
   import SummaryHeaderWatchOptions from "./_internal/SummaryHeaderWatchOptions.svelte";
   import {
     HEADER_ACTIONS_PARAM,
@@ -107,8 +109,6 @@
   );
   const isAwardsEnabled = isEnabled(FeatureFlag.SummaryAwards);
 
-  const STRIP_PAGE_SIZE = 4;
-
   /* `?actions=fused` seats the stars on the action tray's own surface. */
   const actionsVariant = $derived(
     toHeaderActionsVariant(page.url.searchParams.get(HEADER_ACTIONS_PARAM)),
@@ -135,19 +135,25 @@
 
   const { awards } = $derived(useMediaAwards({ slug: media.slug }));
 
+  /* The poster's gold pill - same gate the awards column carried. */
+  const hasAwardsPill = $derived(
+    $isAwardsEnabled && isDirector && awards.length > 0,
+  );
+
   /* The columns' display limits - the pill shows totals instead. */
   const HEADER_TRIVIA_LIMIT = 2;
   const triviaFacts = $derived($triviaSummary.slice(0, HEADER_TRIVIA_LIMIT));
-  const HEADER_AWARDS_LIMIT = 2;
-  const headerAwards = $derived(awards.slice(0, HEADER_AWARDS_LIMIT));
 
-  /* The columns' two meta lines - the pill joins year and length instead. */
-  const RELEASE_FACT_KEYS = ["year", "length", "certification"];
-  const releaseFacts = $derived(
-    facts.filter((fact) => RELEASE_FACT_KEYS.includes(fact.key)),
-  );
-  const classificationFacts = $derived(
-    facts.filter((fact) => !RELEASE_FACT_KEYS.includes(fact.key)),
+  /*
+    The byline row under the title: who made it, when, how long - the credits
+    column's essentials, folded into one line so the strip below frees a slot.
+  */
+  const mainCredit = $derived(mapToMainCredit(target.type, crew));
+  const releaseParts = $derived(
+    ["year", "length"]
+      .map((key) => facts.find((fact) => fact.key === key))
+      .map((fact) => fact?.inlineValue ?? fact?.value)
+      .filter((part): part is string => Boolean(part)),
   );
 
   const { ratings, isLoading: isRatingsLoading } = $derived(
@@ -218,13 +224,9 @@
   });
 
   /* "2025 · 9 episodes" - the release facts pre-joined for the strip. */
-  const glanceRelease = $derived.by(() => {
-    const parts = ["year", "length"]
-      .map((key) => facts.find((fact) => fact.key === key))
-      .map((fact) => fact?.inlineValue ?? fact?.value)
-      .filter(Boolean);
-    return parts.length > 0 ? parts.join(" · ") : null;
-  });
+  const glanceRelease = $derived(
+    releaseParts.length > 0 ? releaseParts.join(" · ") : null,
+  );
 
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
 
@@ -259,6 +261,10 @@
   />
 {/snippet}
 
+{#snippet awardsPill()}
+  <SummaryHeaderAwardsPill {awards} link={awardsLink} {title} />
+{/snippet}
+
 <article class="trakt-masthead-summary-header">
   <div class="masthead-backdrop">
     <CrossOriginImage src={media.cover.url.medium} alt="" />
@@ -271,7 +277,12 @@
 
   <div class="masthead-content">
     <div class="masthead-poster">
-      <SummaryPoster src={media.poster.url.medium} alt={title} {tags} />
+      <SummaryPoster
+        src={media.poster.url.medium}
+        alt={title}
+        {tags}
+        topTags={hasAwardsPill ? awardsPill : undefined}
+      />
     </div>
 
     <SummaryHeaderKicker {kicker} {status} variant="inline" />
@@ -303,6 +314,40 @@
         <SummaryHeaderTitle {title} />
       </Link>
     </div>
+
+    <!--
+      The credits column's essentials, promoted to the masthead proper: the
+      main credit, the year, the length, dot-separated on one line. The info
+      mark at the row's end opens the details drawer, where everything the
+      old column said (and more) still lives.
+    -->
+    {#if mainCredit || releaseParts.length > 0}
+      <div class="masthead-byline">
+        {#if mainCredit}
+          <SummaryHeaderByline type={target.type} {crew} />
+        {/if}
+
+        {#each releaseParts as part, index (part)}
+          {#if index > 0 || mainCredit}
+            <span class="byline-dot" aria-hidden="true">•</span>
+          {/if}
+          <span class="byline-fact">{part}</span>
+        {/each}
+
+        <div class="byline-details">
+          <ActionButton
+            href={detailsLink.href}
+            noscroll={detailsLink.noscroll}
+            replacestate={detailsLink.replacestate}
+            label={m.button_label_details({ title })}
+            style="ghost"
+            size="small"
+          >
+            <InfoIcon />
+          </ActionButton>
+        </div>
+      </div>
+    {/if}
 
     <!--
       Two lines, then an ellipsis - the full text is one tap away in the
@@ -355,7 +400,28 @@
             <MediaActions {media} {title} />
 
             {#snippet contextualActions()}
-              <RateNow type={target.type} {media} style="minimal" />
+              <!--
+                The review card's react cluster joins the rate row: react (via
+                the drawer) on the left, rate on the right, one hairline
+                between them.
+              -->
+              <div class="rate-react-row">
+                <RenderForFeature
+                  flag={FeatureFlag.Reactions}
+                  audience="director"
+                >
+                  {#snippet enabled()}
+                    <MediaReactionsBadge
+                      type={target.type}
+                      slug={media.slug}
+                      link={reactionsLink}
+                    />
+                    <span class="rate-react-divider" aria-hidden="true"></span>
+                  {/snippet}
+                </RenderForFeature>
+
+                <RateNow type={target.type} {media} style="minimal" />
+              </div>
             {/snippet}
           </SummaryActions>
         {/if}
@@ -364,23 +430,6 @@
 
 
     {#if stripVariant === "columns"}
-    {#snippet creditsColumn()}
-      <div class="strip-column">
-        <SummaryHeaderSectionHeader
-          title={m.header_credits_and_details()}
-          drilldown={{
-            ...detailsLink,
-            label: m.button_label_details({ title }),
-          }}
-        />
-        <div class="strip-credits">
-          <SummaryHeaderByline type={target.type} {crew} layout="stacked" />
-          <SummaryHeaderFacts facts={releaseFacts} variant="inline" />
-          <SummaryHeaderFacts facts={classificationFacts} variant="inline" />
-        </div>
-      </div>
-    {/snippet}
-
     {#snippet watchColumn()}
       <div class="strip-column strip-column-borrowed">
         <SummaryHeaderSectionHeader
@@ -455,16 +504,16 @@
       </div>
     {/snippet}
 
-    <!-- Awards is not borrowed: it exists nowhere else on the page. -->
-    {#snippet awardsColumn()}
-      <div class="strip-column">
-        <SummaryHeaderSectionHeader title={m.header_awards()} />
-        <SummaryHeaderAwards awards={headerAwards} />
-      </div>
-    {/snippet}
-
-    {@const otherColumns = [
-      { key: "details", column: creditsColumn },
+    {@const hasRecap = Boolean(
+      $isAuthorized && $progress$ && $progress$.completed > 0,
+    )}
+    <!--
+      Five sections at most - watch, social, sentiment, trivia, progress -
+      which is exactly one row now that credits moved under the title and
+      awards onto the poster. No more paging: the strip IS the page.
+      Progress closes the row: the viewer's own standing reads last.
+    -->
+    {@const stripColumns = [
       { key: "watch", column: watchColumn },
       ...($isAuthorized && headerSocialEntries.length > 0
         ? [{ key: "social", column: socialColumn }]
@@ -472,63 +521,19 @@
       ...(headerSentiment
         ? [{ key: "sentiment", column: sentimentColumn }]
         : []),
-      ...($isAwardsEnabled && isDirector && headerAwards.length > 0
-        ? [{ key: "awards", column: awardsColumn }]
-        : []),
       ...(triviaFacts.length > 0
         ? [{ key: "trivia", column: triviaColumn }]
         : []),
+      ...(hasRecap ? [{ key: "recap", column: recapColumn }] : []),
     ]}
-    {@const hasRecap = Boolean(
-      $isAuthorized && $progress$ && $progress$.completed > 0,
-    )}
-    <!-- The recap closes the first page - your own standing sits by the turn. -->
-    {@const stripColumns = hasRecap
-      ? [
-        ...otherColumns.slice(0, STRIP_PAGE_SIZE - 1),
-        { key: "recap", column: recapColumn },
-        ...otherColumns.slice(STRIP_PAGE_SIZE - 1),
-      ]
-      : otherColumns}
-    {@const firstPage = stripColumns.slice(0, STRIP_PAGE_SIZE)}
-    {@const secondPage = stripColumns.slice(STRIP_PAGE_SIZE)}
-
-    {#snippet stripPageOne()}
-      <div class="strip-page">
-        {#each firstPage as entry (entry.key)}
-          {@render entry.column()}
-        {/each}
-      </div>
-    {/snippet}
-
-    {#snippet stripPageTwo()}
-      <div class="strip-page">
-        {#each secondPage as entry (entry.key)}
-          {@render entry.column()}
-        {/each}
-      </div>
-    {/snippet}
 
     <div class="masthead-strip">
-      <!--
-        Four columns per view on desktop, the profile header's own swipe
-        carousel paging the rest. Below desktop the carousel would cram four
-        sections into a phone, so the columns stack as before.
-      -->
       <RenderFor audience="all" device={["desktop"]}>
-        <!--
-          Keyed by page count: the carousel captures its slide count once at
-          mount, but the async sections land after mount and can grow one page
-          into two - which left the next-arrow lit yet inert, stepping toward
-          a page the store never learned about. A count change remounts it.
-        -->
-        {#key stripColumns.length > STRIP_PAGE_SIZE}
-          <SwipeCarousel
-            slides={secondPage.length > 0
-              ? [stripPageOne, stripPageTwo]
-              : [stripPageOne]}
-          />
-        {/key}
+        <div class="strip-page">
+          {#each stripColumns as entry (entry.key)}
+            {@render entry.column()}
+          {/each}
+        </div>
       </RenderFor>
 
       <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
@@ -815,6 +820,44 @@
     }
   }
 
+  .masthead-byline {
+    /* Belongs to the title above, not to the column's full beat. */
+    margin-top: calc(var(--gap-xs) - var(--masthead-rhythm));
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--gap-xs);
+
+    color: var(--color-text-secondary);
+    font-size: var(--ni-16);
+
+    .byline-dot {
+      color: var(--color-text-secondary);
+      opacity: 0.6;
+    }
+
+    .byline-fact {
+      white-space: nowrap;
+    }
+
+    /*
+      The small ActionButton pads itself out to its 40px target; pulling the
+      visual back in keeps the mark on the row's text rhythm without giving
+      up the target size.
+    */
+    .byline-details {
+      display: inline-flex;
+      align-items: center;
+
+      :global(svg) {
+        width: var(--ni-18);
+        height: var(--ni-18);
+      }
+    }
+  }
+
   .masthead-deck :global(a) {
     text-decoration: none;
     color: inherit;
@@ -861,46 +904,13 @@
 
     /* The composition centres; the data does not. */
     text-align: start;
-
-    /*
-      Wider gutters than the profile header gives its carousel - there the
-      carets frame a small card, here they frame a 1280px page and read as
-      glued to the columns without the extra air.
-    */
-    :global(.trakt-swipe-carousel) {
-      gap: var(--ni-32);
-    }
-
-    /*
-      A longer, decelerating glide for the page turn. The profile's 250ms
-      symmetric ease suits its small card; over a full-width page it reads
-      as a snap.
-    */
-    :global(.swipe-carousel-track:not(.is-dragging)) {
-      transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    :global(.swipe-carousel-item:not(.is-dragging)) {
-      transition: opacity 480ms ease-out;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      :global(.swipe-carousel-track),
-      :global(.swipe-carousel-item) {
-        transition: none;
-      }
-    }
   }
 
   /*
-    One carousel page: every section is a fixed quarter-width column, and the
-    page CENTRES whatever it holds. Full pages are indistinguishable from the
-    old grid; short pages sit balanced in the middle of the viewport instead
-    of hugging the start with a dead zone - the masthead is a centred
-    composition, and a left-hugging page fought it. Column widths never
-    change between pages, so the turn reads as one uniform slide.
-    (Spreading short pages to full width was tried; the titles resizing
-    between pages read worse.)
+    The one row: every section is a fixed fifth-width column, and the row
+    CENTRES whatever it holds. Anonymous movie pages run three columns, a
+    signed-in show all five; the centring keeps every mix balanced instead
+    of hugging the start with a dead zone.
   */
   .strip-page {
     display: flex;
@@ -908,26 +918,25 @@
     gap: var(--ni-32);
 
     /*
-      Weighted, not fixed: columns share the page by growth weight, so the
+      Weighted, not fixed: columns share the row by growth weight, so the
       section mix can vary - and it will, a lot - without any one combination
-      going lopsided. Ordinary columns cap near a quarter; trivia carries 1.4x
-      the weight and caps at a third, because its prose goes tall and upright
-      in a quarter and that unbalances the whole band. Half was tried and was
-      way too much.
+      going lopsided. Ordinary columns cap near a fifth; trivia carries 1.4x
+      the weight and caps at a quarter, because its prose goes tall and
+      upright in a fifth and that unbalances the whole band.
     */
     > .strip-column {
       flex: 1 1 0;
       min-width: 0;
-      max-width: calc((100% - 3 * var(--ni-32)) / 4);
+      max-width: calc((100% - 4 * var(--ni-32)) / 5);
     }
 
     > .strip-column-stretch {
       flex-grow: 1.4;
-      max-width: calc((100% - 2 * var(--ni-32)) / 3);
+      max-width: calc((100% - 3 * var(--ni-32)) / 4);
 
       /*
-        Alone on its page, the third-cap left one tight column adrift in an
-        empty viewport, three words a line. With the page to itself it takes
+        Alone in its row, the quarter-cap left one tight column adrift in an
+        empty viewport, three words a line. With the row to itself it takes
         a real prose measure instead - still centred, finally readable.
       */
       &:only-child {
@@ -981,12 +990,6 @@
     --sentiment-bullet-gap: var(--gap-xs);
   }
 
-  .strip-credits {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-6);
-  }
-
   .masthead-actions {
     /*
       Stacked and centred, with no rule above it.
@@ -1035,6 +1038,23 @@
 
       /* An unrateable title renders no stars - no stars, no divider. */
       &:first-child {
+        display: none;
+      }
+    }
+
+    .rate-react-row {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-s);
+    }
+
+    .rate-react-divider {
+      width: var(--ni-1);
+      height: var(--ni-24);
+      background: var(--color-hairline);
+
+      /* An unrateable title renders no stars - nothing to divide from. */
+      &:last-child {
         display: none;
       }
     }

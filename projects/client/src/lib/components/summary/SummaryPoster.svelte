@@ -12,6 +12,7 @@
     hoverOverlay?: Snippet;
     actions?: Snippet;
     tags?: Snippet;
+    topTags?: Snippet;
     variant?: "portrait" | "landscape";
   };
 
@@ -23,6 +24,7 @@
     hoverOverlay,
     target = "_blank",
     tags,
+    topTags,
     variant = "portrait",
   }: SummaryPosterProps = $props();
 
@@ -47,6 +49,15 @@
   {#if tags}
     <div class="trakt-summary-poster-tags" transition:fade={{ duration: 150 }}>
       {@render tags()}
+    </div>
+  {/if}
+
+  {#if topTags}
+    <div
+      class="trakt-summary-poster-tags trakt-summary-poster-top-tags"
+      transition:fade={{ duration: 150 }}
+    >
+      {@render topTags()}
     </div>
   {/if}
 </div>
@@ -140,5 +151,13 @@
     inset-inline: 0;
 
     transform: translateY(50%);
+  }
+
+  /* Same seat as the bottom tags, mirrored onto the poster's top edge. */
+  .trakt-summary-poster-top-tags {
+    bottom: auto;
+    top: 0;
+
+    transform: translateY(-50%);
   }
 </style>
