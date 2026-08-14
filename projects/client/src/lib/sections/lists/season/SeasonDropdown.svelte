@@ -13,8 +13,9 @@
     urlBuilder ?? ((n: number) => UrlBuilder.show(showSlug, { season: n })),
   );
 
-  const seasonText = (season: Season) => {
+  const seasonLabel = (season: Season) => {
     if (season.number === 0) return m.text_season_specials();
+
     if (season.title) {
       return m.text_season_number_with_title({
         number: season.number,
@@ -23,6 +24,14 @@
     }
 
     return `${season.number}`;
+  };
+
+  const seasonText = (season: Season) => {
+    const episodes = m.tag_text_number_of_episodes({
+      count: season.episodes.count,
+    });
+
+    return `${seasonLabel(season)} (${episodes})`;
   };
 
   const options = $derived(
