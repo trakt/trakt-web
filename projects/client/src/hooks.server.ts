@@ -11,7 +11,7 @@ import { handle as handleLegacyRedirect } from '$lib/features/legacy-redirects/h
 import { handle as handleMobileOperatingSystem } from '$lib/features/mobile-os/handle.ts';
 import { handle as handleSearchConfig } from '$lib/features/search/handle.ts';
 import { handle as handleTheme } from '$lib/features/theme/handle.ts';
-import { isAuthorizedToken } from '$lib/features/auth/isAuthorizedToken.ts';
+import { hasAuthSession } from '$lib/features/auth/hasAuthSession.ts';
 import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
 
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
@@ -89,7 +89,7 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
     // Only cache publicly for unauthenticated requests to prevent cache poisoning via spoofed User-Agent
     if (
       isBotAgent(event.request.headers.get('user-agent')) &&
-      !isAuthorizedToken(event.locals.oidcAuth)
+      !hasAuthSession(event.locals.oidcAuth)
     ) {
       // 120 seconds is enough to satisfy Discord without heavily caching stale content
       return 'public, max-age=120, s-maxage=120';

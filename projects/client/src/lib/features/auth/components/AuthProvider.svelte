@@ -9,12 +9,14 @@
   type AuthProviderProps = {
     isAuthorized: boolean;
     accessToken: string | null;
+    hasServerSession: boolean;
   } & ChildrenProps;
 
   const {
     children,
     isAuthorized: isAuthorizedOidc,
     accessToken,
+    hasServerSession,
   }: AuthProviderProps = $props();
 
   // The SSR flag describes the document, not the viewer: a cache-replayed
@@ -46,6 +48,7 @@
     initializeUserManager({
       ctx,
       tokenFromServer: accessToken,
+      hasServerSession,
       // Only skip the gate for a session we actually found. Ungating an
       // unauthorized tree renders children in this same cycle, and their
       // `onMount` runs before ours - so `/callback` would reach for

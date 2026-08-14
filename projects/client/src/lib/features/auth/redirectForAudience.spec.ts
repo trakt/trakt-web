@@ -2,8 +2,8 @@ import { isRedirect } from '@sveltejs/kit';
 import { describe, expect, it } from 'vitest';
 import { redirectForAudience } from './redirectForAudience.ts';
 
-const AUTHORIZED = { token: 'token', expiresAt: Date.now() + 60_000 };
-const EXPIRED = { token: 'token', expiresAt: Date.now() - 60_000 };
+const FRESH_SESSION = { token: 'token', expiresAt: 2_000_000 };
+const LAPSED_SESSION = { token: 'token', expiresAt: 1_000_000 };
 
 const captureRedirect = (params: Parameters<typeof redirectForAudience>[0]) => {
   try {
@@ -31,15 +31,15 @@ describe('util: redirectForAudience', () => {
       ).toEqual({ status: 307, location: '/' });
     });
 
-    it('should treat an expired token as unauthorized', () => {
+    it('should keep a viewer whose access token has lapsed', () => {
       expect(
         captureRedirect({
           audience: 'authenticated',
-          oidcAuth: EXPIRED,
+          oidcAuth: LAPSED_SESSION,
           search: '',
           isDataRequest: false,
         }),
-      ).toEqual({ status: 307, location: '/' });
+      ).toBeNull();
     });
 
     it('should preserve the query string', () => {
@@ -57,7 +57,7 @@ describe('util: redirectForAudience', () => {
       expect(
         captureRedirect({
           audience: 'authenticated',
-          oidcAuth: AUTHORIZED,
+          oidcAuth: FRESH_SESSION,
           search: '',
           isDataRequest: false,
         }),
@@ -70,7 +70,7 @@ describe('util: redirectForAudience', () => {
       expect(
         captureRedirect({
           audience: 'public',
-          oidcAuth: AUTHORIZED,
+          oidcAuth: FRESH_SESSION,
           search: '',
           isDataRequest: false,
         }),
@@ -81,7 +81,7 @@ describe('util: redirectForAudience', () => {
       expect(
         captureRedirect({
           audience: 'public',
-          oidcAuth: AUTHORIZED,
+          oidcAuth: FRESH_SESSION,
           search: '?utm_source=newsletter',
           isDataRequest: false,
         }),
@@ -99,11 +99,22 @@ describe('util: redirectForAudience', () => {
       ).toBeNull();
     });
 
-    it('should let a viewer with an expired token through', () => {
+    it('should send a viewer whose access token has lapsed to the dashboard', () => {
       expect(
         captureRedirect({
           audience: 'public',
-          oidcAuth: EXPIRED,
+          oidcAuth: LAPSED_SESSION,
+          search: '',
+          isDataRequest: false,
+        }),
+      ).toEqual({ status: 307, location: '/home' });
+    });
+
+    it('should let a viewer with no token through', () => {
+      expect(
+        captureRedirect({
+          audience: 'public',
+          oidcAuth: { token: null, expiresAt: null },
           search: '',
           isDataRequest: false,
         }),
@@ -127,7 +138,7 @@ describe('util: redirectForAudience', () => {
       expect(
         captureRedirect({
           audience: 'public',
-          oidcAuth: AUTHORIZED,
+          oidcAuth: FRESH_SESSION,
           search: '',
           isDataRequest: true,
         }),
