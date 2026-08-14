@@ -405,7 +405,7 @@
 
     background: transparent;
     color: var(--color-outline-text, var(--color-foreground));
-    box-shadow: inset 0 0 0 var(--border-thickness-xs)
+    box-shadow: inset 0 0 0 var(--border-thickness-xxs)
       var(--color-button-stroke);
   }
 

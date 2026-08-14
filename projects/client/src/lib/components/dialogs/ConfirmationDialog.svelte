@@ -65,8 +65,8 @@
     <div class="trakt-confirmation-actions" data-operation={operation}>
       <Button
         size="small"
-        style={isPreventative ? "flat" : "ghost"}
-        color={isPreventative ? "blue" : "custom"}
+        style={isPreventative ? "flat" : "outline"}
+        color={isPreventative ? "blue" : "default"}
         label={cancelText}
         onclick={() => onAction("cancel")}
       >
@@ -74,9 +74,9 @@
       </Button>
       <Button
         size="small"
-        style={isDestructive ? "flat" : "ghost"}
+        style={isPreventative ? "outline" : "flat"}
         variant="primary"
-        color="custom"
+        color={isDestructive ? "custom" : "default"}
         label={buttonText}
         disabled={isConfirmDisabled}
         onclick={() => onAction("confirm")}
@@ -117,30 +117,6 @@
   .trakt-confirmation-actions :global(.trakt-button) {
     padding-inline: var(--ni-10);
     justify-content: center;
-  }
-
-  /* FIXME: make this design leading for the new button styles */
-  .trakt-confirmation-actions :global(.trakt-button[data-style="ghost"]) {
-    transform: none;
-    margin: 0;
-
-    color: var(--color-text-secondary);
-    background: var(--color-confirmation-cancel-background);
-
-    border-radius: calc(var(--border-radius-m) * 0.8);
-  }
-
-  .trakt-confirmation-actions
-    :global(.trakt-button[data-style="ghost"]:hover:not([disabled])),
-  .trakt-confirmation-actions
-    :global(.trakt-button[data-style="ghost"]:focus-visible:not([disabled])) {
-    background: var(--color-confirmation-cancel-background-hover);
-    color: var(--color-text-primary);
-  }
-
-  .trakt-confirmation-actions
-    :global(.trakt-button[data-style="ghost"]:active:not([disabled])) {
-    transform: scale(0.97);
   }
 
   .trakt-confirmation-actions[data-operation="destructive"] {
