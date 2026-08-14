@@ -254,4 +254,7 @@ export const users = [
   http.delete('http://localhost/users/:id/block', () => {
     return new HttpResponse(null, { status: 204 });
   }),
+  http.put('http://localhost/users/set_cover', () => {
+    return new HttpResponse(null, { status: 204 });
+  }),
 ];

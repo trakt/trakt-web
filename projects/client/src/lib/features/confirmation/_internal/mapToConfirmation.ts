@@ -220,6 +220,12 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.confirmation_message_disconnect_plex(),
     operation: 'destructive',
   }),
+  [ConfirmationType.ResetCoverImage]: () => ({
+    title: m.confirmation_title_reset_cover_image(),
+    buttonText: m.button_text_reset_cover_image(),
+    message: m.confirmation_message_reset_cover_image(),
+    operation: 'destructive',
+  }),
   [ConfirmationType.RevokeApp]: (props) => ({
     title: m.confirmation_title_revoke_app(),
     buttonText: m.button_text_revoke_access(),

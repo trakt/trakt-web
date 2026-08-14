@@ -123,6 +123,9 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.DeleteAccount;
     username: string;
   };
+  [ConfirmationType.ResetCoverImage]: {
+    type: ConfirmationType.ResetCoverImage;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

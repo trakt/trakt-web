@@ -4403,6 +4403,34 @@
       "default": "Language",
       "description": "Text for the section that allows users to change the language."
     },
+    "text_settings_cover_image": {
+      "default": "Cover Image",
+      "description": "Title of the settings row that lets users reset the custom cover image shown behind their profile."
+    },
+    "text_settings_cover_image_description": {
+      "default": "Resetting restores the default artwork.",
+      "description": "Description of the settings row that lets users reset their custom cover image back to the default artwork."
+    },
+    "text_settings_no_cover_image_description": {
+      "default": "You have no cover image set.",
+      "description": "Description of the settings row that lets users reset their cover image, shown when the user has not set one and there is nothing to reset."
+    },
+    "button_text_reset_cover_image": {
+      "default": "Reset",
+      "description": "Text for the button that resets the user's custom cover image back to the default artwork. This must be as short as possible."
+    },
+    "button_label_reset_cover_image": {
+      "default": "Reset your cover image to the default artwork.",
+      "description": "Aria-label for the button that resets the user's custom cover image back to the default artwork."
+    },
+    "confirmation_title_reset_cover_image": {
+      "default": "Reset cover image?",
+      "description": "Title of the confirmation dialog shown before resetting the user's custom cover image."
+    },
+    "confirmation_message_reset_cover_image": {
+      "default": "This will remove your custom cover image and restore the default artwork. You can set a new one at any time.",
+      "description": "Body of the confirmation dialog shown before resetting the user's custom cover image."
+    },
     "switch_label_toggle_halloween_filters": {
       "default": "Toggle halloween filters",
       "description": "Aria-label for the switch that allows users to toggle halloween filters."

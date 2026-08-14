@@ -31,4 +31,5 @@ export enum ConfirmationType {
   RevokeApp = 'revoke-app',
   DeleteApiApp = 'delete-api-app',
   DeleteAccount = 'delete-account',
+  ResetCoverImage = 'reset-cover-image',
 }
