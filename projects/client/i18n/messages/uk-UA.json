@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Експорт завершено.",
   "text_export_status_fail": "Експорт не вдався. Перевірте консоль браузера для отримання додаткової інформації.",
   "text_export_status_fetching": "Завантаження {item}…",
+  "text_export_status_partial_one": "Експорт завершено, але 1 із {total} розділів не вдалося. Дивіться _errors.json в архіві.",
+  "text_export_status_partial_other": "Експорт завершено, але {failed} із {total} розділів не вдалося. Дивіться _errors.json в архіві.",
   "text_export_status_zipping": "Архівація файлів…",
   "text_exporting": "Експортування… {progress}",
   "text_favorites_limit_reached": "Ви можете вибрати до {limit} сервісів",

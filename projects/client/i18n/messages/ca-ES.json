@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Exportació completada.",
   "text_export_status_fail": "L'exportació ha fallat. Revisa la consola del teu navegador per a més detalls.",
   "text_export_status_fetching": "Cercant {item}...",
+  "text_export_status_partial_one": "Exportació completada, però 1 de {total} seccions ha fallat. Consulta _errors.json al fitxer zip.",
+  "text_export_status_partial_other": "Exportació completada, però {failed} de {total} seccions han fallat. Consulta _errors.json al fitxer zip.",
   "text_export_status_zipping": "Comprimint fitxers...",
   "text_exporting": "Exportant... {progress}",
   "text_favorites_limit_reached": "Pots seleccionar fins a {limit} serveis",

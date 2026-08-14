@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Export abgeschlossen.",
   "text_export_status_fail": "Export fehlgeschlagen. Überprüfen Sie Ihre Browser-Konsole für weitere Details.",
   "text_export_status_fetching": "Lade {item}…",
+  "text_export_status_partial_one": "Export abgeschlossen, aber 1 von {total} Abschnitten fehlgeschlagen. Siehe _errors.json im Zip.",
+  "text_export_status_partial_other": "Export abgeschlossen, aber {failed} von {total} Abschnitten fehlgeschlagen. Siehe _errors.json im Zip.",
   "text_export_status_zipping": "Dateien werden gezippt…",
   "text_exporting": "Exportiere… {progress}",
   "text_favorites_limit_reached": "Sie können bis zu {limit} Dienste auswählen",

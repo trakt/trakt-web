@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Exportación completa.",
   "text_export_status_fail": "La exportación falló. Revisa la consola de tu navegador para más detalles.",
   "text_export_status_fetching": "Obteniendo {item}…",
+  "text_export_status_partial_one": "Exportación completa, pero 1 de {total} secciones falló. Consulta _errors.json en el zip.",
+  "text_export_status_partial_other": "Exportación completa, pero {failed} de {total} secciones fallaron. Consulta _errors.json en el zip.",
   "text_export_status_zipping": "Comprimiendo archivos…",
   "text_exporting": "Exportando… {progress}",
   "text_favorites_limit_reached": "Puedes seleccionar hasta {limit} servicios",

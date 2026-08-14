@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Dışa aktarma tamamlandı.",
   "text_export_status_fail": "Dışa aktarma başarısız oldu. Daha fazla ayrıntı için tarayıcı konsolunuzu kontrol edin.",
   "text_export_status_fetching": "{item} getiriliyor…",
+  "text_export_status_partial_one": "Dışa aktarma tamamlandı, ancak {total} bölümden 1'i başarısız oldu. Zip dosyasındaki _errors.json dosyasına bakın.",
+  "text_export_status_partial_other": "Dışa aktarma tamamlandı, ancak {total} bölümden {failed}'i başarısız oldu. Zip dosyasındaki _errors.json dosyasına bakın.",
   "text_export_status_zipping": "Dosyalar sıkıştırılıyor…",
   "text_exporting": "Dışa aktarılıyor… {progress}",
   "text_favorites_limit_reached": "En fazla {limit} platform seçebilirsiniz",

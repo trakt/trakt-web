@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Η εξαγωγή ολοκληρώθηκε.",
   "text_export_status_fail": "Η εξαγωγή απέτυχε. Ελέγξτε την κονσόλα του προγράμματος περιήγησης για περισσότερες λεπτομέρειες.",
   "text_export_status_fetching": "Λήψη {item}…",
+  "text_export_status_partial_one": "Η εξαγωγή ολοκληρώθηκε, αλλά 1 από {total} ενότητες απέτυχαν. Δείτε το _errors.json στο zip.",
+  "text_export_status_partial_other": "Η εξαγωγή ολοκληρώθηκε, αλλά {failed} από {total} ενότητες απέτυχαν. Δείτε το _errors.json στο zip.",
   "text_export_status_zipping": "Συμπίεση αρχείων…",
   "text_exporting": "Εξαγωγή… {progress}",
   "text_favorites_limit_reached": "Μπορείτε να επιλέξετε έως και {limit} υπηρεσίες",

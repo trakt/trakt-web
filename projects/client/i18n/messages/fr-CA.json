@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Exportation terminée.",
   "text_export_status_fail": "Échec de l'exportation. Vérifiez la console de votre navigateur pour plus de détails.",
   "text_export_status_fetching": "Récupération de {item}…",
+  "text_export_status_partial_one": "Exportation termin\r\ne, mais 1 section sur {total} a \r\nchou\r\n. Voir _errors.json dans le fichier zip.",
+  "text_export_status_partial_other": "Exportation termin\r\ne, mais {failed} sections sur {total} ont \r\nchou\r\n. Voir _errors.json dans le fichier zip.",
   "text_export_status_zipping": "Compression des fichiers…",
   "text_exporting": "Exportation en cours… {progress}",
   "text_favorites_limit_reached": "Vous pouvez sélectionner jusqu'à {limit} services",

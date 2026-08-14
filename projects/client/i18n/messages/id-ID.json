@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Ekspor selesai.",
   "text_export_status_fail": "Ekspor gagal. Periksa konsol browser Anda untuk detail lebih lanjut.",
   "text_export_status_fetching": "Mengambil {item}…",
+  "text_export_status_partial_one": "Ekspor selesai, tetapi 1 dari {total} bagian gagal. Lihat _errors.json di dalam zip.",
+  "text_export_status_partial_other": "Ekspor selesai, tetapi {failed} dari {total} bagian gagal. Lihat _errors.json di dalam zip.",
   "text_export_status_zipping": "Mengompres file…",
   "text_exporting": "Mengekspor… {progress}",
   "text_favorites_limit_reached": "Anda dapat memilih hingga {limit} layanan",

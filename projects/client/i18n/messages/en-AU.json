@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Export complete.",
   "text_export_status_fail": "Export failed. Check your browser console for more details.",
   "text_export_status_fetching": "Fetching {item}…",
+  "text_export_status_partial_one": "Export complete, but 1 of {total} sections failed. See _errors.json in the zip.",
+  "text_export_status_partial_other": "Export complete, but {failed} of {total} sections failed. See _errors.json in the zip.",
   "text_export_status_zipping": "Zipping files…",
   "text_exporting": "Exporting… {progress}",
   "text_favorites_limit_reached": "You can select up to {limit} services",

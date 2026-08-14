@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Export voltooid.",
   "text_export_status_fail": "Export mislukt. Controleer uw browserconsole voor meer details.",
   "text_export_status_fetching": "{item} ophalen…",
+  "text_export_status_partial_one": "Export voltooid, maar 1 van de {total} secties is mislukt. Zie _errors.json in de zip.",
+  "text_export_status_partial_other": "Export voltooid, maar {failed} van de {total} secties zijn mislukt. Zie _errors.json in de zip.",
   "text_export_status_zipping": "Bestanden inpakken…",
   "text_exporting": "Exporteren… {progress}",
   "text_favorites_limit_reached": "Je kunt maximaal {limit} diensten selecteren",

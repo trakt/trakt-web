@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Esportazione completata.",
   "text_export_status_fail": "Esportazione fallita. Controlla la console del tuo browser per maggiori dettagli.",
   "text_export_status_fetching": "Recupero {item}…",
+  "text_export_status_partial_one": "Esportazione completata, ma 1 sezione su {total} non è riuscita. Vedi _errors.json nello zip.",
+  "text_export_status_partial_other": "Esportazione completata, ma {failed} sezioni su {total} non sono riuscite. Vedi _errors.json nello zip.",
   "text_export_status_zipping": "Compressione file in corso…",
   "text_exporting": "Esportazione in corso… {progress}",
   "text_favorites_limit_reached": "Puoi selezionare fino a {limit} servizi",

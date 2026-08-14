@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Експортирането е завършено.",
   "text_export_status_fail": "Експортирането не успя. Проверете конзолата на браузъра си за повече подробности.",
   "text_export_status_fetching": "Извличане на {item}…",
+  "text_export_status_partial_one": "Експортът завърши, но 1 от {total} секции не успя. Вижте _errors.json в архива.",
+  "text_export_status_partial_other": "Експортът завърши, но {failed} от {total} секции не успяха. Вижте _errors.json в архива.",
   "text_export_status_zipping": "Компресиране на файлове…",
   "text_exporting": "Експортиране… {progress}",
   "text_favorites_limit_reached": "Можете да изберете до {limit} услуги",

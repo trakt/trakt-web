@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Exportálás befejeződött.",
   "text_export_status_fail": "Az exportálás sikertelen. További részletekért ellenőrizd a böngésződ konzolját.",
   "text_export_status_fetching": " {item} lekérése…",
+  "text_export_status_partial_one": "Az exportálás befejeződött, de 1 a {total} szakaszból sikertelen volt. Lásd az _errors.json fájlt a zipben.",
+  "text_export_status_partial_other": "Az exportálás befejeződött, de {failed} a {total} szakaszból sikertelen volt. Lásd az _errors.json fájlt a zipben.",
   "text_export_status_zipping": "Fájlok tömörítése…",
   "text_exporting": "Exportálás… {progress}",
   "text_favorites_limit_reached": "Legfeljebb {limit} szolgáltatást választhat ki",

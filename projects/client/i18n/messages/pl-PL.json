@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Eksport zakończony.",
   "text_export_status_fail": "Eksport nie powiódł się. Sprawdź konsolę przeglądarki, aby uzyskać więcej szczegółów.",
   "text_export_status_fetching": "Pobieranie {item}…",
+  "text_export_status_partial_one": "Eksport zakończony, ale 1 z {total} sekcji nie powiodła się. Zobacz _errors.json w archiwum zip.",
+  "text_export_status_partial_other": "Eksport zakończony, ale {failed} z {total} sekcji nie powiodło się. Zobacz _errors.json w archiwum zip.",
   "text_export_status_zipping": "Kompresowanie plików…",
   "text_exporting": "Eksportowanie… {progress}",
   "text_favorites_limit_reached": "Możesz wybrać maksymalnie {limit} usług",

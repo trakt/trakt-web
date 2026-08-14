@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "خروجی کامل شد.",
   "text_export_status_fail": "خروجی ناموفق بود. برای جزئیات بیشتر کنسول مرورگر خود را بررسی کنید.",
   "text_export_status_fetching": "در حال دریافت {item}...",
+  "text_export_status_partial_one": "خروجی کامل شد، اما ۱ از {total} بخش با خطا مواجه شد. _errors.json را در فایل فشرده (zip) ببینید.",
+  "text_export_status_partial_other": "خروجی کامل شد، اما {failed} از {total} بخش با خطا مواجه شد. _errors.json را در فایل فشرده (zip) ببینید.",
   "text_export_status_zipping": "در حال فشرده‌سازی فایل‌ها...",
   "text_exporting": "در حال خروجی گرفتن... {progress}",
   "text_favorites_limit_reached": "شما می‌توانید تا {limit} سرویس را انتخاب کنید",

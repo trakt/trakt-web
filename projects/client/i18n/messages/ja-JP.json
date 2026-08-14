@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "エクスポートが完了しました。",
   "text_export_status_fail": "エクスポートに失敗しました。詳細はブラウザのコンソールをご確認ください。",
   "text_export_status_fetching": "{item}を取得中…",
+  "text_export_status_partial_one": "エクスポートは完了しましたが、{total}セクションのうち1つが失敗しました。zipファイル内の_errors.jsonを参照してください。",
+  "text_export_status_partial_other": "エクスポートは完了しましたが、{total}セクションのうち{failed}個が失敗しました。zipファイル内の_errors.jsonを参照してください。",
   "text_export_status_zipping": "ファイルを圧縮中…",
   "text_exporting": "エクスポート中… {progress}",
   "text_favorites_limit_reached": "最大{limit}個のサービスを選択できます",

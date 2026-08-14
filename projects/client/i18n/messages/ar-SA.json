@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "اكتمل التصدير.",
   "text_export_status_fail": "فشل التصدير. تحقق من وحدة تحكم المتصفح الخاص بك لمزيد من التفاصيل.",
   "text_export_status_fetching": "جلب {item}...",
+  "text_export_status_partial_one": "اكتمل التصدير، لكن قسمًا واحدًا من {total} قسمًا فشل. راجع _errors.json في الملف المضغوط.",
+  "text_export_status_partial_other": "اكتمل التصدير، لكن {failed} من أصل {total} قسمًا فشلت. راجع _errors.json في الملف المضغوط.",
   "text_export_status_zipping": "ضغط الملفات…",
   "text_exporting": "تصدير… {progress}",
   "text_favorites_limit_reached": "يمكنك اختيار ما يصل إلى {limit} من الخدمات",

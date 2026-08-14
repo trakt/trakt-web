@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Exporten slutförd.",
   "text_export_status_fail": "Exporten misslyckades. Kontrollera din webbläsarkonsol för mer information.",
   "text_export_status_fetching": "Hämtar {item}…",
+  "text_export_status_partial_one": "Exporten är klar, men 1 av {total} sektioner misslyckades. Se _errors.json i zip-filen.",
+  "text_export_status_partial_other": "Exporten är klar, men {failed} av {total} sektioner misslyckades. Se _errors.json i zip-filen.",
   "text_export_status_zipping": "Zippar filer…",
   "text_exporting": "Exporterar… {progress}",
   "text_favorites_limit_reached": "Du kan välja upp till {limit} tjänster",

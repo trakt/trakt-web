@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Export finalizat.",
   "text_export_status_fail": "Exportul a eșuat. Verifică consola browserului pentru mai multe detalii.",
   "text_export_status_fetching": "Se preiau {item}…",
+  "text_export_status_partial_one": "Export finalizat, dar 1 din {total} secțiuni a eșuat. Vezi _errors.json în arhivă.",
+  "text_export_status_partial_other": "Export finalizat, dar {failed} din {total} secțiuni au eșuat. Vezi _errors.json în arhivă.",
   "text_export_status_zipping": "Se arhivează fișierele…",
   "text_exporting": "Se exportă… {progress}",
   "text_favorites_limit_reached": "Poți selecta până la {limit} servicii",

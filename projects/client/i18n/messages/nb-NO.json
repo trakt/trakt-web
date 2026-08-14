@@ -1391,6 +1391,8 @@
   "text_export_status_complete": "Eksport fullført.",
   "text_export_status_fail": "Eksport mislyktes. Sjekk nettleserkonsollen for mer informasjon.",
   "text_export_status_fetching": "Henter {item}…",
+  "text_export_status_partial_one": "Eksport fullført, men 1 av {total} seksjoner mislyktes. Se _errors.json i zip-filen.",
+  "text_export_status_partial_other": "Eksport fullført, men {failed} av {total} seksjoner mislyktes. Se _errors.json i zip-filen.",
   "text_export_status_zipping": "Komprimerer filer…",
   "text_exporting": "Eksporterer… {progress}",
   "text_favorites_limit_reached": "Du kan velge opptil {limit} tjenester",
