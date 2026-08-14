@@ -821,8 +821,13 @@
   }
 
   .masthead-byline {
-    /* Belongs to the title above, not to the column's full beat. */
-    margin-top: calc(var(--gap-xs) - var(--masthead-rhythm));
+    /*
+      Positive air on top of the column's beat, not a pull-up. The title is
+      trimmed to its baseline (text-box-trim), so its descenders hang BELOW
+      its box - a "Trying" or "Fargo" reaches ~0.2em into whatever follows,
+      and the old negative margin put the byline right where they land.
+    */
+    margin-top: var(--gap-xs);
 
     display: flex;
     align-items: center;
