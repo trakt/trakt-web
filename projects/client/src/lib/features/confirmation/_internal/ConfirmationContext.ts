@@ -12,6 +12,7 @@ export type ConfirmationRequest = {
   cancelText?: string;
   operation: ConfirmationOperation;
   challenge?: ConfirmationChallenge;
+  previewUrl?: string | Nil;
 };
 
 export type ConfirmationContext = {

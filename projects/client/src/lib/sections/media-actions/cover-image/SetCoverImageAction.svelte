@@ -13,6 +13,7 @@
     id: number;
     type: ExtendedMediaType;
     title: string;
+    coverUrl?: string | Nil;
     variant?: "primary" | "secondary";
   };
 
@@ -21,11 +22,12 @@
     id,
     type,
     title,
+    coverUrl,
     variant = "secondary",
   }: SetCoverImageActionProps = $props();
 
   const { isSettingCoverImage, setCoverImage } = $derived(
-    useCoverImage({ type, id }),
+    useCoverImage({ type, id, title, coverUrl }),
   );
   const { isCover } = $derived(useIsCover({ type, id }));
 

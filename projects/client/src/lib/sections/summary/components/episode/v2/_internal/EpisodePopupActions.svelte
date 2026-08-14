@@ -54,6 +54,7 @@
   style="dropdown-item"
   type="episode"
   id={episode.id}
+  coverUrl={episode.cover.url}
   {title}
   variant="primary"
 />

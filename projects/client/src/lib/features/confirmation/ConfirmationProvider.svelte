@@ -18,6 +18,7 @@
     cancelText={$activeConfirmation.cancelText}
     operation={$activeConfirmation.operation}
     challenge={$activeConfirmation.challenge}
+    previewUrl={$activeConfirmation.previewUrl}
     onAction={(action) => {
       if (action === "confirm") {
         $activeConfirmation.onConfirm();
