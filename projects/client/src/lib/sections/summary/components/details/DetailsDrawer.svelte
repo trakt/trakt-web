@@ -82,5 +82,16 @@
       padding-top: var(--ni-20);
       border-top: var(--ni-1) solid var(--color-hairline);
     }
+
+    /*
+      The stats sit on their own panels, and the panels already do the
+      separating - a hairline on either side of them would double the chrome.
+      The bands resume from the section after the next.
+    */
+    > :global(.trakt-media-stats),
+    > :global(.trakt-media-stats + *) {
+      padding-top: 0;
+      border-top: none;
+    }
   }
 </style>
