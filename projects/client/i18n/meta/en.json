@@ -10332,6 +10332,34 @@
     "preview_feature_description_soundtrack": {
       "default": "Adds a soundtrack section to movie and show pages, with playback where a track can be matched.",
       "description": "Description for the soundtrack preview feature."
+    },
+    "page_title_widget_background": {
+      "default": "Background",
+      "description": "Title for the widget background settings page."
+    },
+    "text_info_widget_background": {
+      "default": "Set background transparency level.",
+      "description": "Info text explaining the widget background transparency setting."
+    },
+    "text_settings_background_none": {
+      "default": "None",
+      "description": "Widget background option: no background."
+    },
+    "text_settings_background_translucent": {
+      "default": "Translucent",
+      "description": "Widget background option: translucent background."
+    },
+    "text_settings_background_solid": {
+      "default": "Solid",
+      "description": "Widget background option: solid background."
+    },
+    "text_settings_widget_show_title": {
+      "default": "Header",
+      "description": "Label for the widget setting toggling the header bar."
+    },
+    "text_settings_widget_show_title_description": {
+      "default": "Enable/disable header bar visible at the top.",
+      "description": "Description for the widget setting toggling header bar visibility."
     }
   }
 }
