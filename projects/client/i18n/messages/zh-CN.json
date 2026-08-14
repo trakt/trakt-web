@@ -1549,7 +1549,6 @@
   "text_season_episode_number": "第 {season} 季 • 第 {number} 集",
   "text_season_not_started": "未开始",
   "text_season_number": "第 {number} 季",
-  "text_season_number_with_title": "{number}：{title}",
   "text_season_specials": "特别篇",
   "text_sentiment_example": "来自“{title}”的示例",
   "text_services_selected": "已选择 {count} / {total} · {country}",

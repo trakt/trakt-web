@@ -1549,7 +1549,6 @@
   "text_season_episode_number": "Musim {season} • Episode {number}",
   "text_season_not_started": "Belum ditonton",
   "text_season_number": "Musim {number}",
-  "text_season_number_with_title": "{number} - {title}",
   "text_season_specials": "Spesial",
   "text_sentiment_example": "Contoh dari \"{title}\"",
   "text_services_selected": "{count} / {total} dipilih · {country}",

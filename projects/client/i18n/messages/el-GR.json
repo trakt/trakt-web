@@ -1549,7 +1549,6 @@
   "text_season_episode_number": "Σεζόν {season} • Επεισόδιο {number}",
   "text_season_not_started": "Δεν έχει ξεκινήσει",
   "text_season_number": "Σεζόν {number}",
-  "text_season_number_with_title": "{number}: {title}",
   "text_season_specials": "Ειδικά",
   "text_sentiment_example": "Παράδειγμα από το \"{title}\"",
   "text_services_selected": "{count} / {total} επιλεγμένα · {country}",
