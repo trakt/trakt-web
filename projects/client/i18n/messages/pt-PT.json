@@ -1549,7 +1549,6 @@
   "text_season_episode_number": "Temporada {season} • Episódio {number}",
   "text_season_not_started": "Não iniciada",
   "text_season_number": "Temporada {number}",
-  "text_season_number_with_title": "{number} - {title}",
   "text_season_specials": "Especiais",
   "text_sentiment_example": "Exemplo de \"{title}\"",
   "text_services_selected": "{count} / {total} selecionados · {country}",

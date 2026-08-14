@@ -1502,21 +1502,45 @@
         }
       }
     },
-    "text_season_number_with_title": {
-      "default": "{number} - {title}",
-      "description": "Compact dropdown label combining a season number with its custom season title, e.g. '1: Murder House'.",
+    "text_season_specials": {
+      "default": "Specials",
+      "description": "Text for the specials season of a show. This should be as short and concise as possible."
+    },
+    "text_season_number_with_episodes": {
+      "default": "S{number} - {count} Eps",
+      "description": "Compact dropdown label for a season and its episode count, e.g. 'S1 - 10 Eps'. Keep the abbreviated season prefix so the number is not mistaken for an episode range.",
+      "variables": {
+        "number": {
+          "type": "number"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_season_number_with_title_and_episodes": {
+      "default": "S{number}: {title} - {count} Eps",
+      "description": "Compact dropdown label for a season with a custom title and its episode count, e.g. 'S1: Murder House - 9 Eps'.",
       "variables": {
         "number": {
           "type": "number"
         },
         "title": {
           "type": "string"
+        },
+        "count": {
+          "type": "number"
         }
       }
     },
-    "text_season_specials": {
-      "default": "Specials",
-      "description": "Text for the specials season of a show. This should be as short and concise as possible."
+    "text_season_specials_with_episodes": {
+      "default": "Specials - {count} Eps",
+      "description": "Compact dropdown label for the specials season and its episode count, e.g. 'Specials - 5 Eps'.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_label_expand_media_overview": {
       "default": "Expand \"{title}\" overview",
@@ -3503,6 +3527,40 @@
         },
         "endEpisode": {
           "type": "number"
+        }
+      }
+    },
+    "episode_footer_episode_range": {
+      "default": "E{startEpisode} – E{endEpisode}",
+      "description": "Footer text showing an episode range within a single season, e.g. 'E8 – E10'. The text should be as short and concise as possible, wherever possible use only the first letter.",
+      "variables": {
+        "startEpisode": {
+          "type": "number"
+        },
+        "endEpisode": {
+          "type": "number"
+        }
+      }
+    },
+    "text_more_episodes_count": {
+      "default": "+{count}",
+      "description": "Large counter on the overflow card at the end of the season episode strip, e.g. '+3'.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_more_episodes": {
+      "default": "more episodes",
+      "description": "Caption under the counter on the overflow card at the end of the season episode strip. Rendered in uppercase by CSS."
+    },
+    "text_duration_left": {
+      "default": "{duration} left",
+      "description": "Remaining runtime label, e.g. '2h 24m left'. The duration is a pre-formatted human-readable string.",
+      "variables": {
+        "duration": {
+          "type": "string"
         }
       }
     },

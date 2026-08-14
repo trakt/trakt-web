@@ -1549,7 +1549,6 @@
   "text_season_episode_number": "Сезон {season} • Епізод {number}",
   "text_season_not_started": "Не розпочато",
   "text_season_number": "Сезон {number}",
-  "text_season_number_with_title": "{number}: {title}",
   "text_season_specials": "Спеціальні випуски",
   "text_sentiment_example": "Приклад з \"{title}\"",
   "text_services_selected": "{count} / {total} вибрано · {country}",

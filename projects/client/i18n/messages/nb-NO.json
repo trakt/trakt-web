@@ -1549,7 +1549,6 @@
   "text_season_episode_number": "Sesong {season} • Episode {number}",
   "text_season_not_started": "Ikke startet",
   "text_season_number": "Sesong {number}",
-  "text_season_number_with_title": "{number}: {title}",
   "text_season_specials": "Spesialer",
   "text_sentiment_example": "Eksempel fra \"{title}\"",
   "text_services_selected": "{count} / {total} valgt · {country}",

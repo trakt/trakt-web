@@ -14,15 +14,24 @@
   );
 
   const seasonText = (season: Season) => {
-    if (season.number === 0) return m.text_season_specials();
+    const count = season.episodes.count;
+
+    if (season.number === 0) {
+      return m.text_season_specials_with_episodes({ count });
+    }
+
     if (season.title) {
-      return m.text_season_number_with_title({
+      return m.text_season_number_with_title_and_episodes({
         number: season.number,
         title: season.title,
+        count,
       });
     }
 
-    return `${season.number}`;
+    return m.text_season_number_with_episodes({
+      number: season.number,
+      count,
+    });
   };
 
   const options = $derived(
