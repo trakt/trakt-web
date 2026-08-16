@@ -10,13 +10,11 @@
     ImportAction,
     ImportActionSelection,
     ImportCounts,
-    ImportSource,
   } from "../../import/ImportTypes.ts";
 
   type ImportSummaryProps = {
     counts: ImportCounts;
     selectedActions: ImportActionSelection;
-    source: ImportSource;
     episodeMatch: EpisodeMatchMode;
     showMatchToggle: boolean;
     onactionchange: (action: ImportAction, isIncluded: boolean) => void;
@@ -28,7 +26,6 @@
   const {
     counts,
     selectedActions,
-    source,
     episodeMatch,
     showMatchToggle,
     onactionchange,
@@ -71,11 +68,9 @@
     if ($user?.isVip) return false;
     if (!$limits) return false;
 
-    // FIXME: revert when limits are changed
-    const limitMultiplier = source === "tvtime" ? 2 : 1;
-    const watchlistFreeLimit = $limits.watchlistItems.free * limitMultiplier;
-    const historyFreeLimit = $limits.history.free * limitMultiplier;
-    const listItemsFreeLimit = $limits.totalListItems.free * limitMultiplier;
+    const watchlistFreeLimit = $limits.watchlistItems.free;
+    const historyFreeLimit = $limits.history.free;
+    const listItemsFreeLimit = $limits.totalListItems.free;
 
     return (
       selectedCounts.watchlist > watchlistFreeLimit ||

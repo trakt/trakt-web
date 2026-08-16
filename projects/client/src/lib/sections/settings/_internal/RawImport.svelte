@@ -347,7 +347,6 @@
           <ImportSummary
             {counts}
             selectedActions={state.selectedActions}
-            source={state.selectedSource}
             episodeMatch={state.episodeMatch}
             showMatchToggle={hasEpisodes}
             onactionchange={onActionChange}
