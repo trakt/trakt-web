@@ -13,7 +13,9 @@
     aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: var(--border-radius-m);
+
     background-color: color-mix(in srgb, var(--color-border) 80%, transparent);
+    box-shadow: var(--shadow-base);
 
     :global(img.preview-image) {
       display: block;
