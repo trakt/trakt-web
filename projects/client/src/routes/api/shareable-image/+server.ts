@@ -9,8 +9,8 @@ import { ImageResponse } from '@ethercorps/sveltekit-og';
 import type { RequestHandler } from '@sveltejs/kit';
 import { buildImagePath } from './_internal/buildImagePath.ts';
 import { fetchMediaData } from './_internal/fetchMediaData.ts';
-import { fetchPosterDataUri } from './_internal/fetchPosterDataUri.ts';
 import { fetchWithUserAgent } from './_internal/fetchWithUserAgent.ts';
+import { resolvePosterDataUri } from './_internal/resolvePosterDataUri.ts';
 
 const cacheControl = 'public, max-age=604800';
 
@@ -78,15 +78,10 @@ export const GET: RequestHandler = async (
 
   const { media, ratings, crew } = mediaData;
 
-  const posterUrl = media.poster.url.medium.replace(/\.webp$/i, '');
-
-  let posterDataUri: string;
-  try {
-    posterDataUri = await fetchPosterDataUri({ posterUrl, fetch: fetchFn });
-  } catch (e) {
-    error('Failed to fetch poster:', e);
-    return new Response('Failed to fetch poster', { status: 500 });
-  }
+  const posterDataUri = await resolvePosterDataUri({
+    posterUrl: media.poster.url.medium,
+    fetch: fetchFn,
+  });
 
   const { width, height } = SHARE_TYPE_DIMENSIONS[shareType];
 

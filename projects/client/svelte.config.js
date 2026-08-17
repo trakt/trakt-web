@@ -46,6 +46,7 @@ const config = {
       '$worker': './src/worker',
       '$test': './test',
       '$style': 'src/style',
+      '$static': './static',
       '$e2e': './e2e',
       '$types': './.svelte-kit/types/src/routes',
     },
