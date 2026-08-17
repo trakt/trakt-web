@@ -32,8 +32,7 @@
     src={posterUrl}
     class="trakt-share-poster"
     alt="poster"
-    width={posterWidth}
-    height={posterHeight}
+    style="width: {posterWidth}px; height: {posterHeight}px;"
   />
 </div>
 
