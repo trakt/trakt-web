@@ -11,6 +11,7 @@ import { buildImageMetadata } from './_internal/buildImageMetadata.ts';
 import { buildImagePath } from './_internal/buildImagePath.ts';
 import { fetchMediaData } from './_internal/fetchMediaData.ts';
 import { fetchWithUserAgent } from './_internal/fetchWithUserAgent.ts';
+import { loadShareFonts } from './_internal/loadShareFonts.ts';
 import { resolvePosterDataUri } from './_internal/resolvePosterDataUri.ts';
 
 const cacheControl = 'public, max-age=604800';
@@ -85,6 +86,7 @@ export const GET: RequestHandler = async (
   });
 
   const { width, height } = SHARE_TYPE_DIMENSIONS[shareType];
+  const fonts = await loadShareFonts({ bucket: platform?.env?.R2_WALTER });
 
   try {
     const imageResponse = new ImageResponse(
@@ -92,6 +94,7 @@ export const GET: RequestHandler = async (
       {
         width,
         height,
+        fonts,
         debug: IS_DEV && url.searchParams.get('debug') === 'true',
       },
       { media, crew, ratings, posterUrl: posterDataUri, variant: shareType },
