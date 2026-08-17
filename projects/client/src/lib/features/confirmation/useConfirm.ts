@@ -25,6 +25,7 @@ export function useConfirm() {
         ...confirmation,
         onConfirm: props.onConfirm,
         onCancel: props.onCancel,
+        params: props,
       });
 
       // Mimic native confirm behavior

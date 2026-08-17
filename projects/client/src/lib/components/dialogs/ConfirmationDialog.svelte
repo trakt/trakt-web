@@ -1,11 +1,10 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import FormInput from "$lib/components/form/FormInput.svelte";
+  import type { Confirmation } from "$lib/features/confirmation/models/Confirmation";
   import type { ConfirmationAction } from "$lib/features/confirmation/models/ConfirmationAction";
-  import type { ConfirmationChallenge } from "$lib/features/confirmation/models/ConfirmationChallenge";
-  import type { ConfirmationOperation } from "$lib/features/confirmation/models/ConfirmationOperation";
   import * as m from "$lib/features/i18n/messages.ts";
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import type { Snippet } from "svelte";
   import Modal from "./Modal.svelte";
 
   const {
@@ -17,17 +16,11 @@
     onAction,
     operation,
     challenge,
-    previewUrl,
-  }: {
-    title: string;
+    content,
+  }: Omit<Confirmation, "message"> & {
     message: string;
-    detail?: string;
-    buttonText: string;
-    cancelText?: string;
-    operation: ConfirmationOperation;
+    content?: Snippet;
     onAction: (action: ConfirmationAction) => void;
-    challenge?: ConfirmationChallenge;
-    previewUrl?: string | Nil;
   } = $props();
 
   const isDestructive = $derived(operation === "destructive");
@@ -49,14 +42,9 @@
       <p class="trakt-confirmation-message secondary">{detail}</p>
     {/if}
 
-    {#if previewUrl}
-      <div class="trakt-confirmation-preview">
-        <CrossOriginImage
-          classList="confirmation-preview-image"
-          src={previewUrl}
-          alt=""
-          loading="eager"
-        />
+    {#if content}
+      <div class="trakt-confirmation-slot">
+        {@render content()}
       </div>
     {/if}
 
@@ -108,21 +96,8 @@
     gap: var(--ni-8);
   }
 
-  .trakt-confirmation-preview {
+  .trakt-confirmation-slot {
     margin-top: var(--ni-8);
-
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    border-radius: var(--border-radius-m);
-    background-color: color-mix(in srgb, var(--color-border) 80%, transparent);
-
-    :global(img.confirmation-preview-image) {
-      display: block;
-
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
   }
 
   .trakt-confirmation-challenge {

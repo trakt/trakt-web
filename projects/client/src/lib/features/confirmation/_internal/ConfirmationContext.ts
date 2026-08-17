@@ -1,18 +1,12 @@
 import { BehaviorSubject } from 'rxjs';
-import type { ConfirmationChallenge } from '../models/ConfirmationChallenge.ts';
-import type { ConfirmationOperation } from '../models/ConfirmationOperation.ts';
+import type { Confirmation } from '../models/Confirmation.ts';
+import type { ConfirmationParams } from '../models/ConfirmationParams.ts';
+import type { ConfirmationType } from '../models/ConfirmationType.ts';
 
-export type ConfirmationRequest = {
+export type ConfirmationRequest = Confirmation & {
   onConfirm: () => void;
   onCancel?: () => void;
-  title: string;
-  message: string | Nil;
-  detail?: string;
-  buttonText: string;
-  cancelText?: string;
-  operation: ConfirmationOperation;
-  challenge?: ConfirmationChallenge;
-  previewUrl?: string | Nil;
+  params: ConfirmationParams<ConfirmationType>;
 };
 
 export type ConfirmationContext = {

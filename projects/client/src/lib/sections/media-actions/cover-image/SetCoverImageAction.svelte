@@ -13,7 +13,7 @@
     id: number;
     type: ExtendedMediaType;
     title: string;
-    coverUrl?: string | Nil;
+    coverUrl?: HttpsUrl | Nil;
     variant?: "primary" | "secondary";
   };
 
