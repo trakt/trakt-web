@@ -18,6 +18,7 @@ export function handleDrag({ state, gesture }: HandleDragProps): DragState {
     return {
       ...state,
       dragOffset: movementY,
+      shouldClose: false,
     };
   }
 
@@ -28,13 +29,16 @@ export function handleDrag({ state, gesture }: HandleDragProps): DragState {
       ...state,
       isFullScreen: !exceedsThreshold,
       dragOffset: 0,
+      shouldClose: false,
     };
   }
 
+  const shouldClose = !isUpwardDrag && exceedsThreshold;
+
   return {
     ...state,
-    dragOffset: 0,
+    dragOffset: shouldClose ? movementY : 0,
     isFullScreen: isUpwardDrag && exceedsThreshold,
-    shouldClose: !isUpwardDrag && exceedsThreshold,
+    shouldClose,
   };
 }

@@ -135,7 +135,7 @@ describe('handleDrag', () => {
       expect(result).toEqual({
         ...state,
         isFullScreen: false,
-        dragOffset: 0,
+        dragOffset: 150,
         shouldClose: true,
       });
     });
@@ -178,6 +178,48 @@ describe('handleDrag', () => {
         dragOffset: 0,
         shouldClose: false,
       });
+    });
+  });
+
+  describe('when a close has already been requested', () => {
+    it('should not request a second close while dragging', () => {
+      const state = createDragState({ shouldClose: true });
+      const gesture = createGestureState({
+        movementY: 20,
+        isStoppingDrag: false,
+      });
+
+      const result = handleDrag({ state, gesture });
+
+      expect(result.shouldClose).toBe(false);
+    });
+
+    it('should not request a close when settling back below threshold', () => {
+      const state = createDragState({ shouldClose: true, threshold: 100 });
+      const gesture = createGestureState({
+        movementY: 20,
+        isStoppingDrag: true,
+      });
+
+      const result = handleDrag({ state, gesture });
+
+      expect(result.shouldClose).toBe(false);
+    });
+
+    it('should not request a close when settling out of full screen', () => {
+      const state = createDragState({
+        isFullScreen: true,
+        shouldClose: true,
+        threshold: 100,
+      });
+      const gesture = createGestureState({
+        movementY: 150,
+        isStoppingDrag: true,
+      });
+
+      const result = handleDrag({ state, gesture });
+
+      expect(result.shouldClose).toBe(false);
     });
   });
 });

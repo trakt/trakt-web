@@ -24,11 +24,25 @@ export function verticalDrag(
     'Drag handle must have a parent element',
   );
 
+  const currentThreshold = () =>
+    globalThis.window.innerHeight * STATE_CHANGE_THRESHOLD;
+
   let dragState: DragState = {
     isFullScreen: false,
     dragOffset: 0,
-    threshold: globalThis.window.innerHeight * STATE_CHANGE_THRESHOLD,
+    threshold: currentThreshold(),
     shouldClose: false,
+  };
+
+  const startGesture = () => {
+    dragState = { ...dragState, threshold: currentThreshold() };
+    parent.style.setProperty(offsetVariable, '0px');
+
+    if (dragState.isFullScreen) {
+      return;
+    }
+
+    parent.style.setProperty('--initial-height', `${parent.clientHeight}px`);
   };
 
   const gesture = new DragGesture(
@@ -41,11 +55,8 @@ export function verticalDrag(
         movement: [_, movementY],
       } = state;
 
-      if (first && !dragState.isFullScreen) {
-        parent.style.setProperty(
-          '--initial-height',
-          `${parent.clientHeight}px`,
-        );
+      if (first) {
+        startGesture();
       }
 
       const gestureState: GestureState = { isStoppingDrag: last, movementY };
@@ -53,10 +64,12 @@ export function verticalDrag(
       dragState = handleDrag({ state: dragState, gesture: gestureState });
 
       parent.classList.toggle(fullscreenClass, dragState.isFullScreen);
-      parent.classList.toggle(dragClass, active);
+      parent.classList.toggle(dragClass, active || dragState.shouldClose);
       parent.style.setProperty(offsetVariable, `${dragState.dragOffset}px`);
 
-      dragState.shouldClose && onClose();
+      if (dragState.shouldClose) {
+        onClose();
+      }
     },
     {
       axis: 'y',
