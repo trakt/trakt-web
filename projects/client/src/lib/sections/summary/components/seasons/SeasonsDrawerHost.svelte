@@ -32,10 +32,6 @@
   let isOpen = $state(false);
   let activeTab = $state("episodes");
 
-  const currentSeasonId = $derived(
-    seasons.find((s) => s.number === currentSeason)?.id,
-  );
-
   const currentSeasonData = $derived(
     seasons.find((s) => s.number === currentSeason),
   );
@@ -81,11 +77,12 @@
 {/snippet}
 
 {#snippet reviewsContent()}
-  {#if currentSeasonId != null}
+  {#if currentSeasonData}
     <SeasonReviewsTab
       {show}
       season={currentSeason}
-      seasonId={currentSeasonId}
+      seasonId={currentSeasonData.id}
+      episodeCount={currentSeasonData.episodes.count}
     />
   {/if}
 {/snippet}
