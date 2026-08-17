@@ -45,7 +45,7 @@ describe('handleDrag', () => {
       });
     });
 
-    it('should exit full screen when exceeding threshold', () => {
+    it('should close for downward drag exceeding threshold', () => {
       const state = createDragState({
         isFullScreen: true,
         threshold: 100,
@@ -59,8 +59,9 @@ describe('handleDrag', () => {
 
       expect(result).toEqual({
         ...state,
-        isFullScreen: false,
-        dragOffset: 0,
+        isFullScreen: true,
+        dragOffset: 150,
+        shouldClose: true,
       });
     });
 
@@ -181,6 +182,25 @@ describe('handleDrag', () => {
     });
   });
 
+  describe('when expanding then closing', () => {
+    it('should close without needing a collapse first', () => {
+      const expanded = handleDrag({
+        state: createDragState({ threshold: 100 }),
+        gesture: createGestureState({ movementY: -150, isStoppingDrag: true }),
+      });
+
+      expect(expanded.isFullScreen).toBe(true);
+      expect(expanded.shouldClose).toBe(false);
+
+      const closed = handleDrag({
+        state: expanded,
+        gesture: createGestureState({ movementY: 150, isStoppingDrag: true }),
+      });
+
+      expect(closed.shouldClose).toBe(true);
+    });
+  });
+
   describe('when a close has already been requested', () => {
     it('should not request a second close while dragging', () => {
       const state = createDragState({ shouldClose: true });
@@ -206,20 +226,21 @@ describe('handleDrag', () => {
       expect(result.shouldClose).toBe(false);
     });
 
-    it('should not request a close when settling out of full screen', () => {
+    it('should not request a close when settling back in full screen', () => {
       const state = createDragState({
         isFullScreen: true,
         shouldClose: true,
         threshold: 100,
       });
       const gesture = createGestureState({
-        movementY: 150,
+        movementY: 20,
         isStoppingDrag: true,
       });
 
       const result = handleDrag({ state, gesture });
 
       expect(result.shouldClose).toBe(false);
+      expect(result.isFullScreen).toBe(true);
     });
   });
 });
