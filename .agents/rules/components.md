@@ -175,6 +175,29 @@ gates behaviour rather than renders.
 
 ---
 
+## Restyling a Shared Component
+
+Do not restyle a shared component from its consumer. Use its props first
+(`style`, `variant`, `color`, `size`), then its documented CSS variable hooks.
+If the look you need does not exist, add it to the component so every caller
+gets it, instead of to one call site.
+
+```scss
+/* Bad - reimplements a stroke the button already ships as style="outline" */
+.my-row :global(.trakt-button) {
+  border: var(--border-thickness-xxs) solid var(--my-border);
+}
+```
+
+The tell is duplication: if the override reaches for the same tokens, or repeats
+the hover and disabled rules the component already has, the component already
+does it.
+
+One-off surfaces (landing, marketing pages) can override locally. Anything
+reused across the app should not.
+
+---
+
 ## Provider Pattern
 
 Feature providers are thin shells calling a context factory from `_internal/`.
@@ -787,6 +810,8 @@ property (`inset-inline-start`, not `left`), or the animation silently dies.
       or `$:`
 - [ ] Snippets used for slot-like composition, not legacy `<slot>`
 - [ ] Primitives extended with a `Snippet` slot, not a domain-shaped prop
+- [ ] Shared components styled via their props / CSS variable hooks, not
+      `:global()` overrides from the consumer
 - [ ] Props type file created for components with 3+ props
 - [ ] Provider delegates to `_internal/createXxxContext` via `iffy()`
 - [ ] `use*` hooks live in `features/{domain}/stores/` and return `$derived`
