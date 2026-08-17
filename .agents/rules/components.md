@@ -156,6 +156,25 @@ Use `{#snippet}` and `Snippet` type for flexible content injection.
 
 ---
 
+## Extending a Primitive: Slots, Not Domain Props
+
+`lib/components` primitives stay domain free when **modified**, not just when
+placed. If a feature needs one to render something new, add a `Snippet` slot and
+let the feature fill it, along with any styling specific to that content.
+
+```svelte
+<!-- Bad - the primitive now knows about one feature's data -->
+const { previewUrl }: { previewUrl?: HttpsUrl | Nil } = $props();
+
+<!-- Good - it renders whatever it is handed -->
+const { content }: { content?: Snippet } = $props();
+```
+
+Still props: generic options (`size`, `variant`, `aria-label`) and anything that
+gates behaviour rather than renders.
+
+---
+
 ## Provider Pattern
 
 Feature providers are thin shells calling a context factory from `_internal/`.
@@ -767,6 +786,7 @@ property (`inset-inline-start`, not `left`), or the animation silently dies.
 - [ ] Using Svelte 5 runes (`$props`, `$derived`, `$effect`) - no `export let`
       or `$:`
 - [ ] Snippets used for slot-like composition, not legacy `<slot>`
+- [ ] Primitives extended with a `Snippet` slot, not a domain-shaped prop
 - [ ] Props type file created for components with 3+ props
 - [ ] Provider delegates to `_internal/createXxxContext` via `iffy()`
 - [ ] `use*` hooks live in `features/{domain}/stores/` and return `$derived`
