@@ -1,7 +1,7 @@
 import type { ShareType } from '$lib/features/share/models/ShareType.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 
-const rootPath = 'images';
+const ROOT_PATH = 'images/share';
 
 type BuildImagePathProps = {
   shareType: ShareType;
@@ -33,5 +33,5 @@ export function buildImagePath({ shareType, slug, type }: BuildImagePathProps) {
   const shareTypePath = toShareTypePath(shareType);
   const mediaPath = toMediaPath(type, slug);
 
-  return `${rootPath}/${shareTypePath}/${mediaPath}/image.png`;
+  return `${ROOT_PATH}/${shareTypePath}/${mediaPath}/image.png`;
 }
