@@ -7,6 +7,7 @@ import { error } from '$lib/utils/console/print.ts';
 import { IS_DEV } from '$lib/utils/env/index.ts';
 import { ImageResponse } from '@ethercorps/sveltekit-og';
 import type { RequestHandler } from '@sveltejs/kit';
+import { buildImageMetadata } from './_internal/buildImageMetadata.ts';
 import { buildImagePath } from './_internal/buildImagePath.ts';
 import { fetchMediaData } from './_internal/fetchMediaData.ts';
 import { fetchWithUserAgent } from './_internal/fetchWithUserAgent.ts';
@@ -102,7 +103,7 @@ export const GET: RequestHandler = async (
       try {
         await platform.env.R2_WALTER.put(imagePath, buffer, {
           httpMetadata: { contentType: 'image/png' },
-          customMetadata: { cachedAt: String(Date.now()) },
+          customMetadata: buildImageMetadata({ media, cachedAt: new Date() }),
         });
       } catch (e) {
         error('Failed to cache image in R2:', e);
