@@ -12,7 +12,7 @@ type UseCoverImageProps = {
   type: ExtendedMediaType;
   id: number;
   title: string;
-  coverUrl?: string | Nil;
+  coverUrl?: HttpsUrl | Nil;
 };
 
 export function useCoverImage(

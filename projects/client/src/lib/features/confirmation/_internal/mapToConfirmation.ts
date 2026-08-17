@@ -1,20 +1,8 @@
 import * as m from '$lib/features/i18n/messages.ts';
-import type { ConfirmationChallenge } from '../models/ConfirmationChallenge.ts';
-import type { ConfirmationOperation } from '../models/ConfirmationOperation.ts';
+import type { Confirmation } from '../models/Confirmation.ts';
 import type { ConfirmationParams } from '../models/ConfirmationParams.ts';
 import { ConfirmationType } from '../models/ConfirmationType.ts';
 import { getWarningMessage } from './getWarningMessage.ts';
-
-type Confirmation = {
-  title: string;
-  message: string | Nil;
-  detail?: string;
-  buttonText: string;
-  cancelText?: string;
-  operation: ConfirmationOperation;
-  challenge?: ConfirmationChallenge;
-  previewUrl?: string | Nil;
-};
 
 type ConfirmationBuilder<T extends ConfirmationType> = (
   props: ConfirmationParams<T>,
@@ -232,7 +220,6 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     buttonText: m.button_text_yes(),
     message: m.warning_prompt_set_cover_image({ title: props.title }),
     operation: 'affirmative',
-    previewUrl: props.previewUrl,
   }),
   [ConfirmationType.RevokeApp]: (props) => ({
     title: m.confirmation_title_revoke_app(),

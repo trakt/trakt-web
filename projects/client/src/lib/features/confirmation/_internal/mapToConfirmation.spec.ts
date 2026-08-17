@@ -35,7 +35,7 @@ describe('mapToConfirmation', () => {
   });
 
   describe('for SetCoverImage', () => {
-    it('should ask affirmatively and carry the artwork through as the preview', () => {
+    it('should ask affirmatively and name the media', () => {
       const result = mapToConfirmation({
         type: ConfirmationType.SetCoverImage,
         title: 'Heretic',
@@ -44,7 +44,6 @@ describe('mapToConfirmation', () => {
 
       expect(result.operation).toBe('affirmative');
       expect(result.message).toContain('Heretic');
-      expect(result.previewUrl).toBe('https://example.com/heretic.jpg');
     });
 
     it('should still confirm when the media has no artwork to preview', () => {
@@ -54,7 +53,6 @@ describe('mapToConfirmation', () => {
       });
 
       expect(result.message).toBeTruthy();
-      expect(result.previewUrl).toBeUndefined();
     });
   });
 

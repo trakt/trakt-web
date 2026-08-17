@@ -129,7 +129,7 @@ interface ConfirmationParamsMap {
   [ConfirmationType.SetCoverImage]: {
     type: ConfirmationType.SetCoverImage;
     title: string;
-    previewUrl?: string | Nil;
+    previewUrl?: HttpsUrl | Nil;
   };
 }
 

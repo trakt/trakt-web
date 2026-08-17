@@ -1,13 +1,26 @@
 <script lang="ts">
   import ConfirmationDialog from "$lib/components/dialogs/ConfirmationDialog.svelte";
+  import { confirmationContent } from "./_internal/confirmationContent.ts";
   import { createConfirmationContext } from "./_internal/createConfirmationContext";
 
   const { children }: ChildrenProps = $props();
 
   const { activeConfirmation, hideConfirmation } = createConfirmationContext();
+
+  const ContentComponent = $derived(
+    $activeConfirmation
+      ? confirmationContent[$activeConfirmation.params.type]
+      : undefined,
+  );
 </script>
 
 {@render children()}
+
+{#snippet contentSlot()}
+  {#if ContentComponent && $activeConfirmation}
+    <ContentComponent params={$activeConfirmation.params} />
+  {/if}
+{/snippet}
 
 {#if $activeConfirmation?.message}
   <ConfirmationDialog
@@ -18,7 +31,7 @@
     cancelText={$activeConfirmation.cancelText}
     operation={$activeConfirmation.operation}
     challenge={$activeConfirmation.challenge}
-    previewUrl={$activeConfirmation.previewUrl}
+    content={ContentComponent ? contentSlot : undefined}
     onAction={(action) => {
       if (action === "confirm") {
         $activeConfirmation.onConfirm();
