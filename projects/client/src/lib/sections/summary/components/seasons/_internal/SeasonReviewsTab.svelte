@@ -1,7 +1,6 @@
 <script lang="ts">
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
-  import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CommentLanguageSelect from "$lib/sections/summary/components/comments/_internal/CommentLanguageSelect.svelte";
   import { useCommentLanguage } from "$lib/sections/summary/components/comments/_internal/useCommentLanguage.svelte.ts";
@@ -11,16 +10,14 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import DrawerTabTitle from "$lib/sections/summary/components/_internal/DrawerTabTitle.svelte";
+  import type { SeasonReviewsTabProps } from "./SeasonReviewsTabProps.ts";
 
   const {
     show,
     season,
     seasonId,
-  }: {
-    show: ShowEntry;
-    season: number;
-    seasonId: number;
-  } = $props();
+    episodeCount,
+  }: SeasonReviewsTabProps = $props();
 
   const { current: sort, set: setSort, options } = useToggler("comment");
 
@@ -51,6 +48,7 @@
       type="season"
       {season}
       id={seasonId}
+      {episodeCount}
       sort={$sort.value}
       language={commentLanguage.filter}
     />
@@ -66,6 +64,7 @@
     type="season"
     {season}
     id={seasonId}
+    {episodeCount}
   />
 {/if}
 

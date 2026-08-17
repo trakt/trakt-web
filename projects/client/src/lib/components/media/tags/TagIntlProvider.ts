@@ -13,8 +13,13 @@ export const TagIntlProvider: TagIntl = {
   toDuration: (duration) =>
     toHumanDuration({ minutes: duration }, languageTag()),
   toEpisodeCount: (count) => m.tag_text_number_of_episodes({ count }),
-  toPlayCount: (count) =>
-    m.tag_text_plays({ number: toHumanNumber(count, languageTag()) }),
+  toPlayCount: (count) => {
+    const number = toHumanNumber(count, languageTag());
+
+    return count === 1
+      ? m.tag_text_play({ number })
+      : m.tag_text_plays({ number });
+  },
   toWatcherCount: (count) => toHumanNumber(count, languageTag()),
   toReleaseEstimate: (airDate) => toHumanETA(new Date(), airDate, getLocale()),
   toActivityDate: (activityDate) =>
