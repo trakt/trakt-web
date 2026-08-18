@@ -4694,6 +4694,10 @@
       "default": "Sort by default order",
       "description": "Aria-label for the button that allows users to sort items by the default sorting method."
     },
+    "button_description_sort_default": {
+      "default": "Original order",
+      "description": "Subtitle describing the default sorting method, shown beneath the option label in the sort drawer."
+    },
     "button_text_sort_smart": {
       "default": "Smart",
       "description": "Text for the button that allows users to sort up next items by the smart sorting method."
@@ -4701,6 +4705,10 @@
     "button_label_sort_smart": {
       "default": "Sort by smart order",
       "description": "Aria-label for the button that allows users to sort up next items by the smart sorting method."
+    },
+    "button_description_sort_smart": {
+      "default": "Recommended for you",
+      "description": "Subtitle describing the smart sorting method, shown beneath the option label in the sort drawer."
     },
     "button_text_sort_rank": {
       "default": "Rank",
@@ -4758,6 +4766,14 @@
       "default": "Sort by release date",
       "description": "Aria-label for the button that allows users to sort items by their release date."
     },
+    "button_description_sort_release_date_desc": {
+      "default": "Newest first",
+      "description": "Subtitle shown beneath the release-date option in the sort drawer when the sort direction is descending."
+    },
+    "button_description_sort_release_date_asc": {
+      "default": "Oldest first",
+      "description": "Subtitle shown beneath the release-date option in the sort drawer when the sort direction is ascending."
+    },
     "button_text_sort_updated_date": {
       "default": "Updated Date",
       "description": "Text for the button that allows users to sort lists by the date they were last updated."
@@ -4801,6 +4817,14 @@
     "button_label_sort_remaining": {
       "default": "Sort by remaining episodes or movies",
       "description": "Aria-label for the button that allows users to sort shows by the number of remaining episodes or movies to watch."
+    },
+    "button_description_sort_remaining_desc": {
+      "default": "Most episodes left",
+      "description": "Subtitle shown beneath the remaining-episodes option in the sort drawer when the sort direction is descending."
+    },
+    "button_description_sort_remaining_asc": {
+      "default": "Fewest episodes left",
+      "description": "Subtitle shown beneath the remaining-episodes option in the sort drawer when the sort direction is ascending."
     },
     "text_about_user": {
       "default": "About {username}",

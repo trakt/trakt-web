@@ -3,7 +3,9 @@
   generics="T extends SortBy | UpNextSortBy | UserListsSortBy"
 >
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import ReorderIcon from "$lib/components/icons/ReorderIcon.svelte";
   import SortDirectionIcon from "$lib/components/icons/SortDirectionIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
@@ -53,11 +55,15 @@
 </script>
 
 <Drawer {onClose} size="auto" title={m.drawer_title_sort()}>
-  <div class="sort-buttons">
+  <DropdownGroup>
     {#each options as option (option.value ?? "default")}
+      {@const description = option.description?.(current.sortHow)}
+
       {#snippet icon()}
         {#if option.value}
           <SortIcon sortBy={option.value} />
+        {:else}
+          <ReorderIcon />
         {/if}
       {/snippet}
 
@@ -65,14 +71,18 @@
         <SortDirectionIcon direction={current.sortHow} />
       {/snippet}
 
+      {#snippet subtitle()}
+        {description}
+      {/snippet}
+
       <DropdownItem
         replacestate
-        style="flat"
         color="default"
         href={`${urlBuilder({ sortHow: sortHowForOption(option.value), sortBy: option.value })}`}
         label={option.label()}
         selected={option.value === current.sorting.value}
-        icon={option.value ? icon : undefined}
+        {icon}
+        subtitle={description ? subtitle : undefined}
         end={option.value === current.sorting.value ? end : undefined}
         onclick={() => {
           track({
@@ -84,13 +94,5 @@
         {option.text()}
       </DropdownItem>
     {/each}
-  </div>
+  </DropdownGroup>
 </Drawer>
-
-<style>
-  .sort-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xxs);
-  }
-</style>
