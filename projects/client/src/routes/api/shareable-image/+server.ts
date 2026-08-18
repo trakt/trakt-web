@@ -80,13 +80,15 @@ export const GET: RequestHandler = async (
 
   const { media, ratings, crew } = mediaData;
 
-  const posterDataUri = await resolvePosterDataUri({
-    posterUrl: media.poster.url.medium,
-    fetch: fetchFn,
-  });
+  const [posterDataUri, fonts] = await Promise.all([
+    resolvePosterDataUri({
+      posterUrl: media.poster.url.medium,
+      fetch: fetchFn,
+    }),
+    loadShareFonts({ bucket: platform?.env?.R2_WALTER }),
+  ]);
 
   const { width, height } = SHARE_TYPE_DIMENSIONS[shareType];
-  const fonts = await loadShareFonts({ bucket: platform?.env?.R2_WALTER });
 
   try {
     const imageResponse = new ImageResponse(
