@@ -144,17 +144,17 @@ const progress: ToggleDefinition<'progress'> = {
 
 const activity: ToggleDefinition<'activity'> = {
   id: 'activity',
-  default: 'reviews',
+  default: 'ratings',
   options: [
-    {
-      value: 'reviews',
-      text: m.button_text_activity_reviews,
-      label: m.button_label_activity_reviews,
-    },
     {
       value: 'ratings',
       text: m.button_text_activity_ratings,
       label: m.button_label_activity_ratings,
+    },
+    {
+      value: 'reviews',
+      text: m.button_text_activity_reviews,
+      label: m.button_label_activity_reviews,
     },
   ],
 };

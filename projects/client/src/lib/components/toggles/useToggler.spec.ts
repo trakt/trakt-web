@@ -20,7 +20,7 @@ describe('useToggler', () => {
 
       const value = await firstValueFrom(current);
 
-      expect(value.value).toBe('reviews');
+      expect(value.value).toBe('ratings');
     });
 
     it('uses the stored value when localStorage has a valid option', async () => {
@@ -39,7 +39,7 @@ describe('useToggler', () => {
 
       const value = await firstValueFrom(current);
 
-      expect(value.value).toBe('reviews');
+      expect(value.value).toBe('ratings');
     });
 
     it('falls back to default when stored value is invalid JSON', async () => {
@@ -49,7 +49,7 @@ describe('useToggler', () => {
 
       const value = await firstValueFrom(current);
 
-      expect(value.value).toBe('reviews');
+      expect(value.value).toBe('ratings');
     });
   });
 
@@ -59,7 +59,7 @@ describe('useToggler', () => {
 
       const emission = await firstValueFrom(current);
 
-      expect(emission.value).toBe('reviews');
+      expect(emission.value).toBe('ratings');
       expect(typeof emission.text).toBe('function');
     });
 
@@ -69,7 +69,7 @@ describe('useToggler', () => {
       (toggler.set as (v: unknown) => void)('stale-option');
       const value = await firstValueFrom(toggler.current);
 
-      expect(value.value).toBe('reviews');
+      expect(value.value).toBe('ratings');
     });
   });
 
@@ -98,7 +98,7 @@ describe('useToggler', () => {
     it('returns all available option values', async () => {
       const { options } = await renderStore(() => useToggler('activity'));
 
-      expect(options.map((o) => o.value)).toEqual(['reviews', 'ratings']);
+      expect(options.map((o) => o.value)).toEqual(['ratings', 'reviews']);
     });
   });
 
