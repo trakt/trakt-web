@@ -400,7 +400,7 @@
     padding: var(--ni-18) 0;
 
     .drag-indicator {
-      width: var(--ni-32);
+      width: var(--ni-36);
       height: var(--ni-4);
       border-radius: var(--ni-2);
 
