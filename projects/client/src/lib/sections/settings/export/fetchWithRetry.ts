@@ -2,6 +2,7 @@ import { rawApiFetch } from '$lib/requests/api.ts';
 import { error } from '$lib/utils/console/print.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { isAbortError, retryAsync } from 'ts-retry';
+import { PAGE_LIMIT } from './constants.ts';
 
 type FetchWithRetryParams = {
   url: string;
@@ -41,8 +42,8 @@ export function fetchWithRetry({
   return retryAsync(
     async () => {
       const pageUrl = url.includes('?')
-        ? `${url}&page=${page}&limit=250`
-        : `${url}?page=${page}&limit=250`;
+        ? `${url}&page=${page}&limit=${PAGE_LIMIT}`
+        : `${url}?page=${page}&limit=${PAGE_LIMIT}`;
 
       const response = await rawApiFetch({
         path: `/${pageUrl}`,

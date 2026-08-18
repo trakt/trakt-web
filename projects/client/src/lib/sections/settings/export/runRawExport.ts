@@ -207,7 +207,7 @@ export async function runRawExport({
         progress.totalPages = pagination.pageCount;
         onPage(data, pagination);
 
-        if (pagination.page < pagination.pageCount) {
+        if (pagination.hasMore) {
           assertWithinBudget();
         }
       });
