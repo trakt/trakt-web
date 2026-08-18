@@ -15,21 +15,31 @@ const upNextSortOptions: Sorting<UpNextSortBy>[] = [
     value: undefined,
     text: m.button_text_sort_default,
     label: m.button_label_sort_default,
+    description: m.button_description_sort_default,
   },
   {
     value: 'smart',
     text: m.button_text_sort_smart,
     label: m.button_label_sort_smart,
+    description: m.button_description_sort_smart,
   },
   {
     value: 'released',
     text: m.button_text_sort_release_date,
     label: m.button_label_sort_release_date,
+    description: (sortHow) =>
+      sortHow === 'asc'
+        ? m.button_description_sort_release_date_asc()
+        : m.button_description_sort_release_date_desc(),
   },
   {
     value: 'remaining',
     text: m.button_text_sort_remaining,
     label: m.button_label_sort_remaining,
+    description: (sortHow) =>
+      sortHow === 'asc'
+        ? m.button_description_sort_remaining_asc()
+        : m.button_description_sort_remaining_desc(),
   },
 ];
 
