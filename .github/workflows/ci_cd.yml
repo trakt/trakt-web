@@ -126,6 +126,19 @@ jobs:
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
 
+      - name: Summon a Typeface aka Ensure Fontconfig
+        timeout-minutes: 3
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          if fc-match sans-serif --format='%{file}' 2>/dev/null | grep -qiE '\.(ttf|otf)$'; then
+            echo "fontconfig already provides $(fc-match sans-serif --format='%{file}')"
+            exit 0
+          fi
+          sudo apt-get update -qq -o DPkg::Lock::Timeout=120
+          sudo apt-get install -y --no-install-recommends \
+            -o DPkg::Lock::Timeout=120 fontconfig fonts-dejavu-core
+
       - name: Forging the Artifacts aka Prebuild
         working-directory: projects/client
         run: 'deno task prebuild'
