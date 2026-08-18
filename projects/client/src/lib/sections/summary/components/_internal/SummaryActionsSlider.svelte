@@ -1,4 +1,5 @@
 <script lang="ts">
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { fade, slide } from "svelte/transition";
 
@@ -31,7 +32,9 @@
       in:fade={{ duration: transitionDuration, delay: halfDuration }}
       out:fade={{ duration: transitionDuration }}
     >
-      {@render children()}
+      <DropdownGroup style="flat">
+        {@render children()}
+      </DropdownGroup>
     </div>
   </div>
 {/if}
@@ -64,11 +67,5 @@
 
     padding: var(--ni-12);
     box-sizing: border-box;
-  }
-
-  .trakt-summary-actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-8);
   }
 </style>
