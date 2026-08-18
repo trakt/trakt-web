@@ -49,7 +49,7 @@
   <div class="item-label">
     <p class="bold capitalize ellipsis">{@render children()}</p>
     {#if subtitle}
-      <p class="small ellipsis">{@render subtitle()}</p>
+      <p class="small secondary ellipsis">{@render subtitle()}</p>
     {/if}
   </div>
 {/snippet}
@@ -106,17 +106,22 @@
     list-style-type: none;
     user-select: none;
 
-    padding: 0 var(--ni-12);
-    height: calc(var(--ni-20) + var(--ni-12) * 2);
+    --item-padding-block: var(--dropdown-item-padding-block, 0);
+    --item-padding-inline: var(--dropdown-item-padding-inline, var(--ni-12));
+
+    padding: var(--item-padding-block) var(--item-padding-inline);
+    height: var(--dropdown-item-height, calc(var(--ni-20) + var(--ni-12) * 2));
     width: 100%;
     box-sizing: border-box;
-    border-radius: var(--border-radius-m);
+    border-radius: var(--dropdown-item-radius, var(--border-radius-m));
 
     align-content: center;
     justify-self: center;
 
     display: flex;
+    flex-direction: var(--dropdown-item-direction, row);
     align-items: center;
+    justify-content: var(--dropdown-item-justify, flex-start);
     gap: var(--icon-gap);
 
     cursor: pointer;
@@ -126,8 +131,9 @@
     transition-property: background, color;
 
     &.has-subtitle {
-      height: auto;
-      padding-block: var(--ni-8);
+      --item-padding-block: var(--dropdown-item-padding-block, var(--ni-8));
+
+      height: var(--dropdown-item-height, auto);
     }
 
     .item-label {
@@ -161,11 +167,51 @@
       cursor: not-allowed;
     }
 
+    &:has(> :global(.trakt-link)) {
+      padding: 0;
+    }
+
+    :global(.trakt-dropdown-group) & {
+      --dropdown-item-radius: 0;
+      --dropdown-item-height: auto;
+      --dropdown-item-padding-block: var(--ni-14);
+      --dropdown-item-padding-inline: var(--ni-16);
+      --dropdown-item-background: transparent;
+      --dropdown-item-background-hover: var(--color-select-item-hover);
+      --dropdown-item-background-selected: var(--color-select-item-hover);
+      --dropdown-item-background-active: var(--color-select-item-hover);
+      --dropdown-item-foreground: var(--color-text-primary);
+
+      &.is-selected {
+        --dropdown-item-background-selected: var(--color-option-list-selected);
+        --dropdown-item-background-hover: var(
+          --color-option-list-selected-hover
+        );
+        --dropdown-item-background-active: var(
+          --color-option-list-selected-hover
+        );
+      }
+
+      &[data-color="red"] {
+        --dropdown-item-foreground: var(--red-600);
+      }
+
+      &[disabled="true"] {
+        --dropdown-item-foreground: var(--color-text-secondary);
+      }
+
+      &:not(:last-child) {
+        border-block-end: var(--ni-1) solid var(--color-option-list-separator);
+      }
+    }
+
     :global(.trakt-link) {
       color: inherit;
 
       width: 100%;
       height: 100%;
+      padding: var(--item-padding-block) var(--item-padding-inline);
+      box-sizing: border-box;
 
       display: flex;
       align-items: center;
@@ -175,34 +221,46 @@
     }
 
     @mixin variant($color, $bg-color) {
-      color: $color;
+      color: var(--dropdown-item-foreground, #{$color});
 
       @include for-mouse {
         &:hover:not([disabled="true"]) {
-          background: $bg-color;
+          background: var(--dropdown-item-background-hover, #{$bg-color});
         }
       }
 
       &[data-style="flat"] {
-        background: $color;
-        color: $bg-color;
+        background: var(--dropdown-item-background, #{$color});
+        color: var(--dropdown-item-foreground, #{$bg-color});
 
         @include for-mouse {
           &:hover:not([disabled="true"]) {
-            background: $bg-color;
-            color: $color;
+            background: var(--dropdown-item-background-hover, #{$bg-color});
+            color: var(--dropdown-item-foreground, #{$color});
           }
         }
       }
 
       &[disabled="true"] {
-        background: var(--color-foreground-button-disabled);
-        color: var(--color-surface-button-disabled);
+        background: var(
+          --dropdown-item-background,
+          var(--color-foreground-button-disabled)
+        );
+        color: var(
+          --dropdown-item-foreground,
+          var(--color-surface-button-disabled)
+        );
       }
 
       &.is-selected {
-        background: var(--color-foreground-button-disabled);
-        color: var(--color-surface-button-disabled);
+        background: var(
+          --dropdown-item-background-selected,
+          var(--color-foreground-button-disabled)
+        );
+        color: var(
+          --dropdown-item-foreground,
+          var(--color-surface-button-disabled)
+        );
       }
     }
 
@@ -216,7 +274,7 @@
       }
 
       &:active {
-        background: $active-bg;
+        background: var(--dropdown-item-background-active, #{$active-bg});
       }
 
       &:focus-visible,

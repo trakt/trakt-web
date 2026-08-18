@@ -1,5 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
   import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
@@ -52,9 +53,11 @@
 {#if variant === "drawer"}
   {#if $isOpened}
     <Drawer onClose={close} {title} size="auto" elevated>
-      <ul class="popup-menu-drawer-item" use:closeOnSelect={close}>
-        {@render items()}
-      </ul>
+      <div style="display: contents" use:closeOnSelect={close}>
+        <DropdownGroup>
+          {@render items()}
+        </DropdownGroup>
+      </div>
     </Drawer>
   {/if}
 {:else}
@@ -198,8 +201,6 @@
       display: grid;
       grid-template-columns: 100%;
       gap: var(--gap-xxs);
-      max-height: var(--ni-220);
-      overflow-y: auto;
 
       :global(li) {
         width: 100%;
@@ -209,19 +210,6 @@
 
     div.spacer {
       height: calc($button-size + $button-padding * 2 + var(--list-padding));
-    }
-  }
-
-  .popup-menu-drawer-item {
-    all: unset;
-
-    display: grid;
-    grid-template-columns: 100%;
-    gap: var(--gap-xxs);
-
-    :global(li) {
-      width: 100%;
-      box-sizing: border-box;
     }
   }
 </style>
