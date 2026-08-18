@@ -241,7 +241,7 @@
   "button_label_toggle_search_lists": "Pesquisar listas",
   "button_label_toggle_search_media": "Pesquisar conteúdo",
   "button_label_toggle_search_people": "Pesquisar pessoas",
-  "button_label_toggle_streaming_countries": "Alternar países para {service}",
+  "button_label_toggle_streaming_countries": "Mostrar/ocultar países onde {service} está disponível",
   "button_label_trivia_category_filter": "Filtrar curiosidades por categoria",
   "button_label_trivia_no_spoilers": "Sem spoilers",
   "button_label_trivia_spoilers": "Spoilers",
