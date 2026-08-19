@@ -831,6 +831,18 @@ property (`inset-inline-start`, not `left`), or the animation silently dies.
   `alt`. Decorative SVGs that are not directional need no label.
 - Respect `prefers-reduced-motion` for non-essential animation.
 
+## Head Content: `app.html` vs `<svelte:head>`
+
+Static head assets (fonts, preconnects, third-party CSS/JS, base styles) belong
+in `src/app.html`. Reserve `<svelte:head>` for head content that depends on
+component state: per-page `<title>`, OG/meta tags, theme colour.
+
+Svelte hydrates `<svelte:head>` by counting siblings (internal behaviour, not
+documented), so anything rewriting the HTML at the edge desyncs the walk and
+fails hydration for the whole app. A block with no event handlers and no
+reactive attributes emits no node references and is safe; adding either
+re-arms it.
+
 ## Where to Place a New Component
 
 | Question                                              | Place in                                     |
@@ -889,6 +901,8 @@ property (`inset-inline-start`, not `left`), or the animation silently dies.
       not
 - [ ] Physical `left`/`right` only for JS-measured coords, `left:50%` centering,
       off-screen hide, keyframes, or third-party JS keys
+- [ ] Static head assets live in `app.html`; `<svelte:head>` carries only
+      state-dependent head content
 - [ ] Icon-only buttons have an `aria-label` from a Paraglide message; native
       semantic elements used over click-handler `<div>`s; `:focus-visible`
       preserved
