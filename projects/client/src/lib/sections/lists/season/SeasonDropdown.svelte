@@ -6,8 +6,13 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { SeasonDropdownProps } from "./SeasonDropdownProps.ts";
 
-  const { showSlug, seasons, currentSeason, urlBuilder }: SeasonDropdownProps =
-    $props();
+  const {
+    showSlug,
+    seasons,
+    currentSeason,
+    variant = "default",
+    urlBuilder,
+  }: SeasonDropdownProps = $props();
 
   const buildUrl = $derived(
     urlBuilder ?? ((n: number) => UrlBuilder.show(showSlug, { season: n })),
@@ -27,6 +32,8 @@
   };
 
   const seasonText = (season: Season) => {
+    if (variant === "default") return seasonLabel(season);
+
     const episodes = m.tag_text_number_of_episodes({
       count: season.episodes.count,
     });
