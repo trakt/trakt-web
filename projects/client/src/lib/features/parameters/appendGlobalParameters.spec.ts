@@ -190,6 +190,15 @@ describe('appendGlobalParameters', () => {
       expect(new URL(anchor.href).searchParams.get('mode')).toBe('movie');
     });
 
+    it('keeps an explicit mode set by an outbound href', () => {
+      seedLiveParams({ mode: 'media' });
+
+      const anchor = makeAnchor('/discover/releases?mode=movie');
+      appendGlobalParameters(anchor, '/discover/releases?mode=movie');
+
+      expect(new URL(anchor.href).searchParams.get('mode')).toBe('movie');
+    });
+
     it('keeps filters on outbound links', () => {
       seedLiveParams({ mode: 'movie', [FilterKey.Genres]: 'comedy' });
 
@@ -199,6 +208,30 @@ describe('appendGlobalParameters', () => {
       const params = new URL(anchor.href).searchParams;
       expect(params.get(FilterKey.Genres)).toBe('comedy');
       expect(params.has('mode')).toBe(false);
+    });
+  });
+
+  describe('explicit href params', () => {
+    const href = `/movies/heretic?${FilterKey.Genres}=action`;
+
+    it('keeps a filter an outbound href sets when the page has none', () => {
+      const anchor = makeAnchor(href);
+      appendGlobalParameters(anchor, href);
+
+      expect(new URL(anchor.href).searchParams.get(FilterKey.Genres)).toBe(
+        'action',
+      );
+    });
+
+    it('lets the page filters win over the ones set by the href', () => {
+      seedLiveParams({ [FilterKey.Genres]: 'comedy' });
+
+      const anchor = makeAnchor(href);
+      appendGlobalParameters(anchor, href);
+
+      expect(new URL(anchor.href).searchParams.get(FilterKey.Genres)).toBe(
+        'comedy',
+      );
     });
   });
 

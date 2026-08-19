@@ -5,7 +5,6 @@ import {
 import {
   LOCAL_PARAMS,
   OUTBOUND_PARAMS,
-  WHITE_LISTED_PARAMS,
 } from '$lib/features/parameters/_internal/constants.ts';
 import { FILTER_KEYS } from '$lib/features/filters/filterKeys.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
@@ -91,9 +90,7 @@ export function appendGlobalParameters(
     const params = Object.fromEntries([
       ...localParams,
       ...Array.from(target.searchParams.entries())
-        .filter(([key]) =>
-          key === $override || !WHITE_LISTED_PARAMS.includes(key)
-        ),
+        .filter(([key]) => key === $override || !effectiveSearch.has(key)),
       ...effectiveSearch.entries(),
     ]);
 
