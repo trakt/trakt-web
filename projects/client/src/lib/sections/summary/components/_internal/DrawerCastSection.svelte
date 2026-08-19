@@ -1,6 +1,5 @@
 <script lang="ts">
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
-  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -10,6 +9,7 @@
   import CreditMemberItem from "$lib/sections/lists/components/CreditMemberItem.svelte";
   import type { CreditMember } from "$lib/sections/lists/models/CreditMember.ts";
   import { toCreditMembers } from "$lib/sections/lists/toCreditMembers.ts";
+  import DrawerCreditListSkeleton from "./DrawerCreditListSkeleton.svelte";
   import DrawerTabTitle from "./DrawerTabTitle.svelte";
 
   type CreditsType = "cast" | "crew";
@@ -78,7 +78,7 @@
     {/snippet}
 
     {#snippet actions()}
-      {#if !isLoading && !isSearching}
+      {#if !isSearching}
         <Toggler
           value={creditsType}
           onChange={(value) => (creditsType = value)}
@@ -88,32 +88,30 @@
     {/snippet}
   </DrawerTabTitle>
 
-  {#if isLoading}
-    <LoadingIndicator />
-  {:else}
-    <DrawerSearchInput
-      bind:value={searchTerm}
-      label={m.input_label_search_credit_members()}
-      placeholder={m.input_placeholder_search_credit_members()}
-    />
+  <DrawerSearchInput
+    bind:value={searchTerm}
+    label={m.input_label_search_credit_members()}
+    placeholder={m.input_placeholder_search_credit_members()}
+  />
 
-    {#if visibleCredits.length > 0}
-      <div
-        id={`drawer-cast-list-${type}-${isSearching ? "search" : creditsType}`}
-        class="credit-list"
-        role="list"
-      >
-        {#each visibleCredits as item (toCreditMemberKey(item))}
-          <CreditMemberItem member={item} {type} />
-        {/each}
-      </div>
-    {:else}
-      <p class="credit-list-empty">
-        {isSearching
-          ? m.list_placeholder_no_filter_results()
-          : m.list_placeholder_empty()}
-      </p>
-    {/if}
+  {#if isLoading}
+    <DrawerCreditListSkeleton />
+  {:else if visibleCredits.length > 0}
+    <div
+      id={`drawer-cast-list-${type}-${isSearching ? "search" : creditsType}`}
+      class="credit-list"
+      role="list"
+    >
+      {#each visibleCredits as item (toCreditMemberKey(item))}
+        <CreditMemberItem member={item} {type} />
+      {/each}
+    </div>
+  {:else}
+    <p class="credit-list-empty">
+      {isSearching
+        ? m.list_placeholder_no_filter_results()
+        : m.list_placeholder_empty()}
+    </p>
   {/if}
 </div>
 

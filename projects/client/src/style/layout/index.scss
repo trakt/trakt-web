@@ -330,6 +330,9 @@
 
   --width-summary-card-compact: 100%;
   --height-summary-card-cover-compact: var(--ni-88);
+  --width-summary-card-cover-compact: calc(
+    var(--height-summary-card-cover-compact) * 0.6667
+  );
   --height-summary-card-compact: var(--ni-96);
 
   @include for-tablet-sm-and-below {

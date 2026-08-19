@@ -137,6 +137,7 @@
             label: m.tab_text_seasons_info(),
             icon: overviewIcon,
             content: overviewContent,
+            keepMounted: true,
           },
           {
             value: "reviews",
