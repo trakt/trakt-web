@@ -75,7 +75,8 @@ export const DESIGN_SYSTEM_GROUPS: DesignSystemGroup[] = [
       {
         title: 'Dropdown',
         href: '/_design_system/dropdown',
-        description: 'Dropdown list colors, styles, variants, and item states.',
+        description:
+          'Grouped dropdown cards, row states, and standalone items.',
         kind: 'Component',
       },
       {
