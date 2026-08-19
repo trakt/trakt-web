@@ -4,6 +4,8 @@
   import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
+  import { lineClamp } from "$lib/components/text/lineClamp.ts";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
@@ -20,6 +22,7 @@
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle.ts";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import EpisodeInfoHeader from "./_internal/EpisodeInfoHeader.svelte";
@@ -124,10 +127,31 @@
       : numberLabel;
   });
 
+  const isEpisodeTitleClamped = writable(false);
+
   const socialTitle = $derived(
     $episodeEntry ? episodeActivityTitle($episodeEntry, show) : show.title,
   );
 </script>
+
+{#snippet episodeMetaInfo()}
+  <!-- Keyed so the clamp check re-runs when the episode (or its loaded
+       title) changes - the lineClamp action only re-measures on resize. -->
+  {#key episodeTitle}
+    <Tooltip
+      content={episodeTitle}
+      disabled={!$isEpisodeTitleClamped}
+      side="bottom"
+    >
+      <p
+        class="episode-title-meta-info bold"
+        use:lineClamp={{ lines: 3, isClamped: isEpisodeTitleClamped }}
+      >
+        {episodeTitle}
+      </p>
+    </Tooltip>
+  {/key}
+{/snippet}
 
 {#snippet infoIcon()}
   <InfoIcon />
@@ -198,9 +222,8 @@
 <Drawer
   {onClose}
   onOpened={() => (isOpen = true)}
-  // title={m.drawer_title_episode_information()}
   title={show.title}
-  metaInfo={episodeTitle}
+  metaInfo={episodeMetaInfo}
   size="large"
   classList="trakt-episode-drawer"
 >
@@ -298,6 +321,12 @@
 <style lang="scss">
   :global(.trakt-drawer.trakt-episode-drawer) {
     gap: var(--ni-0);
+  }
+
+  .episode-title-meta-info {
+    min-width: 0;
+
+    color: var(--list-meta-info-color);
   }
 
   .episode-scroll-anchor {

@@ -7,18 +7,22 @@
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
   import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
+  import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler.ts";
   import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
+  import { trackTextOverflow } from "$lib/utils/actions/trackTextOverflow.ts";
   import {
     EPISODE_COVER_PLACEHOLDER,
     MEDIA_POSTER_PLACEHOLDER,
   } from "$lib/utils/assets";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
 
@@ -44,6 +48,10 @@
     useSpoilerFreeEpisodeTitle({ episode, show }),
   );
 
+  const { isSpoilerHidden } = $derived(
+    useMediaSpoiler({ show, media: episode, type: "episode" }),
+  );
+
   const episodeLink = $derived(
     rest.urlOverride ?? {
       href: UrlBuilder.episodeDrawer(show.slug, episode.season, episode.number),
@@ -53,6 +61,8 @@
   );
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
+
+  const isTitleTruncated = writable(false);
 </script>
 
 {#snippet popupActions()}
@@ -127,11 +137,19 @@
 
     <CardFooter {action}>
       {#if isShowContext}
-        <p class="trakt-card-title ellipsis">
-          <Spoiler media={episode} {show} type="episode">
-            {episode.title}
-          </Spoiler>
-        </p>
+        <Tooltip
+          content={$spoilerFreeTitle}
+          disabled={!$isTitleTruncated || $isSpoilerHidden}
+        >
+          <p
+            class="trakt-card-title ellipsis"
+            use:trackTextOverflow={isTitleTruncated}
+          >
+            <Spoiler media={episode} {show} type="episode">
+              {episode.title}
+            </Spoiler>
+          </p>
+        </Tooltip>
         <p class="trakt-card-subtitle ellipsis">
           <bdi dir="ltr">{episodeNumberLabel({
             seasonNumber: episode.season,
@@ -158,3 +176,9 @@
     </CardFooter>
   </LandscapeCard>
 {/if}
+
+<style lang="scss">
+  .trakt-card-title {
+    min-width: 0;
+  }
+</style>
