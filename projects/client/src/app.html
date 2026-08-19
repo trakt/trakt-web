@@ -52,6 +52,14 @@
       href="%sveltekit.assets%/pwa/ios/apple-touch-icon.png"
     />
 
+    <!-- Plyr CSS - loaded async so it does not block first paint -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.plyr.io/3.8.3/plyr.css"
+      media="print"
+      onload="this.media='all'"
+    />
+
     %sveltekit.head%
   </head>
   <body>
