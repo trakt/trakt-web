@@ -23,7 +23,9 @@
   <div class="trakt-pulse-graph">
     <p class="small secondary">{title}</p>
 
-    {#if item.kind === "peakHours"}
+    {#if item.isEmpty}
+      <p class="graph-empty small secondary">{m.text_stats_no_screen_time()}</p>
+    {:else if item.kind === "peakHours"}
       <PulseGraphPeakHours data={item.data} />
     {:else if item.kind === "screenTimeDaily"}
       <PulseGraphScreenTimeDaily data={item.data} />
@@ -40,5 +42,14 @@
     overflow: hidden;
     height: 100%;
     box-sizing: border-box;
+  }
+
+  .graph-empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
   }
 </style>

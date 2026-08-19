@@ -2,13 +2,13 @@ import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts'
 import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { WAKING_HOURS_PER_DAY } from '$lib/sections/stats/_internal/constants/index.ts';
-import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 import { toPercentage } from '$lib/utils/formatting/number/toPercentage.ts';
 import type { PulseStat } from './models/PulseStat.ts';
 import type { PulseStatItem } from './models/PulseStatItem.ts';
 import type { WeekData } from './models/WeekData.ts';
 import { computeDelta } from './utils/computeDelta.ts';
 import { countUniqueDays } from './utils/countUniqueDays.ts';
+import { toScreenTimeDuration } from './utils/toScreenTimeDuration.ts';
 
 function allDates(week: WeekData): readonly Date[] {
   return [...week.movieDates, ...week.showDates];
@@ -49,7 +49,7 @@ export function getStatItems(
     {
       key: 'screenTimeTotal',
       rawValue: thisWeek.totalMinutes,
-      value: toHumanDuration({ minutes: thisWeek.totalMinutes }, languageTag()),
+      value: toScreenTimeDuration(thisWeek.totalMinutes, languageTag()),
       label: m.label_stats_screen_time_total(),
       tooltip: m.tooltip_stats_screen_time_total(),
       delta: computeDelta(thisWeek.totalMinutes, lastWeek.totalMinutes),
@@ -70,7 +70,7 @@ export function getStatItems(
     {
       key: 'avgPerDay',
       rawValue: avgMinutesPerDay,
-      value: toHumanDuration({ minutes: avgMinutesPerDay }, languageTag()),
+      value: toScreenTimeDuration(avgMinutesPerDay, languageTag()),
       label: m.label_stats_avg_per_day(),
       tooltip: m.tooltip_stats_avg_per_day(),
       delta: computeDelta(avgMinutesPerDay, lastWeekAvgMinutes),
@@ -82,7 +82,7 @@ export function getStatItems(
     {
       key: 'movieTime',
       rawValue: thisWeek.movieMinutes,
-      value: toHumanDuration({ minutes: thisWeek.movieMinutes }, languageTag()),
+      value: toScreenTimeDuration(thisWeek.movieMinutes, languageTag()),
       label: m.label_stats_movies(),
       tooltip: m.tooltip_stats_movies(),
       delta: computeDelta(thisWeek.movieMinutes, lastWeek.movieMinutes),
@@ -94,7 +94,7 @@ export function getStatItems(
     {
       key: 'showTime',
       rawValue: thisWeek.showMinutes,
-      value: toHumanDuration({ minutes: thisWeek.showMinutes }, languageTag()),
+      value: toScreenTimeDuration(thisWeek.showMinutes, languageTag()),
       label: m.label_stats_shows(),
       tooltip: m.tooltip_stats_shows(),
       delta: computeDelta(thisWeek.showMinutes, lastWeek.showMinutes),
