@@ -54,7 +54,7 @@
   "button_label_change_location": "Cambia posizione",
   "button_label_change_plex_home_users": "Modifica utenti Plex Home",
   "button_label_change_username": "Cambia nome utente",
-  "button_label_checkin": "Ora sto guardando \"{title}\"",
+  "button_label_checkin": "Guarda ora \"{title}\"",
   "button_label_clean_up_episodes": "Rimuovi le riproduzioni duplicate di episodi dalla tua cronologia.",
   "button_label_clean_up_movies": "Rimuovi le riproduzioni duplicate di film dalla tua cronologia.",
   "button_label_clear_now": "Svuota tutti gli elementi dalla tua {source}",
