@@ -42,6 +42,7 @@ function originalTitle(media: MediaEntry) {
 function mediaAirDate(media: MediaEntry) {
   if (isMaxDate(media.airDate)) {
     return {
+      key: 'air-date',
       title: m.header_expected_premiere(),
       values: [m.tag_text_tba()],
     };
@@ -49,6 +50,7 @@ function mediaAirDate(media: MediaEntry) {
 
   const isUpcomingItem = media.airDate > new Date();
   return {
+    key: 'air-date',
     title: isUpcomingItem ? m.header_expected_premiere() : m.header_premiered(),
     values: [toHumanDay({ date: media.airDate, locale: getLocale() })],
   };
@@ -56,6 +58,7 @@ function mediaAirDate(media: MediaEntry) {
 
 function mediaStatus(media: MediaEntry) {
   return {
+    key: 'status',
     title: m.header_status(),
     values: media.year && media.type === 'movie'
       ? undefined
@@ -67,6 +70,7 @@ function episodeType(episode: EpisodeEntry): MediaDetail {
   const label = EpisodeIntlProvider.episodeTypeText(episode.type);
 
   return {
+    key: 'episode-type',
     title: m.header_episode_type(),
     values: label ? [label] : undefined,
   };
@@ -77,6 +81,7 @@ function episodeAirDate(episode: EpisodeEntry) {
   const isTba = isMaxDate(episode.effectiveReleaseDate);
 
   return {
+    key: 'air-date',
     title: isUpcomingItem ? m.header_airs() : m.header_aired(),
     values: [
       isTba ? m.tag_text_tba() : toHumanDay({
@@ -90,6 +95,7 @@ function episodeAirDate(episode: EpisodeEntry) {
 
 function runtime(entry: MediaEntry | EpisodeEntry) {
   return {
+    key: 'runtime',
     title: m.header_runtime(),
     values: [toHumanDuration({ minutes: entry.runtime }, languageTag())],
   };
@@ -97,6 +103,7 @@ function runtime(entry: MediaEntry | EpisodeEntry) {
 
 function networks(entries: MediaNetwork[] | undefined) {
   return {
+    key: 'network',
     title: m.header_network(),
     values: entries?.map((network) => network.name),
   };
@@ -104,15 +111,16 @@ function networks(entries: MediaNetwork[] | undefined) {
 
 function showAirs(show: ShowEntry, now: Date): MediaDetail {
   if (!show.airs || !isCurrentlyAiring(show, now)) {
-    return { title: m.header_airs() };
+    return { key: 'airs', title: m.header_airs() };
   }
 
   const local = toHumanDayTime({ ...show.airs, locale: languageTag() });
   if (!local) {
-    return { title: m.header_airs() };
+    return { key: 'airs', title: m.header_airs() };
   }
 
   return {
+    key: 'airs',
     title: m.header_airs(),
     values: [m.text_airs_day_time(local)],
   };
@@ -122,7 +130,7 @@ function totalRuntime(show: ShowEntry): MediaDetail {
   const totalMinutes = show.totalRuntime;
 
   if (!Number.isFinite(totalMinutes) || totalMinutes <= 0) {
-    return { title: m.header_total_runtime() };
+    return { key: 'total-runtime', title: m.header_total_runtime() };
   }
 
   const duration = toHumanDuration({ minutes: totalMinutes }, languageTag());
@@ -130,6 +138,7 @@ function totalRuntime(show: ShowEntry): MediaDetail {
   const episodes = m.tag_text_number_of_episodes({ count });
 
   return {
+    key: 'total-runtime',
     title: m.header_total_runtime(),
     values: [`${duration} (${episodes})`],
   };
@@ -137,6 +146,7 @@ function totalRuntime(show: ShowEntry): MediaDetail {
 
 function postCredits(entry: MediaEntry | EpisodeEntry) {
   return {
+    key: 'post-credits',
     title: m.header_post_credits(),
     values: entry.postCredits
       .map((scene) => {
@@ -156,6 +166,7 @@ function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
       case 'movie':
       case 'episode':
         return {
+          key: 'creator-or-director',
           title: m.header_director(),
           values: crew.directors
             .filter((director) => onJob(director, 'Director'))
@@ -169,6 +180,7 @@ function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
         };
       case 'show':
         return {
+          key: 'creator-or-director',
           title: m.header_creator(),
           values: crew.creators
             .filter((creator) => onJob(creator, 'Creator'))
@@ -186,6 +198,7 @@ function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
   return [
     creatorOrDirector(),
     {
+      key: 'writer',
       title: m.header_writer(),
       values: crew.writers.map((writer) =>
         toCrewMemberWithJob({
@@ -204,26 +217,31 @@ function metaDetails(
 ) {
   return [
     {
+      key: 'country',
       title: m.header_country(),
       values: media.country
         ? [toCountryName(media.country, languageTag())]
         : undefined,
     },
     {
+      key: 'language',
       title: m.header_language(),
       values: media.languages?.map((language) =>
         toLanguageName(language, languageTag())
       ),
     },
     {
+      key: 'original-title',
       title: m.header_original_title(),
       values: originalTitle(media),
     },
     {
+      key: 'studio',
       title: m.header_studio(),
       values: studios.map((studio) => studio.name),
     },
     {
+      key: 'genre',
       title: m.header_genre(),
       values: media.genres.map(GenreIntlProvider.genre),
     },
@@ -231,6 +249,7 @@ function metaDetails(
 }
 
 type MediaDetail = {
+  key: string;
   title: string;
   values?: Array<string | { label: string; link: string }>;
 };
