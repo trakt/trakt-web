@@ -12,7 +12,7 @@
     seasonNumber: number;
     watched: number;
     total: number;
-    totalRuntime: number;
+    minutesLeft: number;
     loading?: boolean;
   };
 
@@ -20,7 +20,7 @@
     seasonNumber,
     watched,
     total,
-    totalRuntime,
+    minutesLeft,
     loading = false,
   }: SeasonProgressCardProps = $props();
 
@@ -37,17 +37,12 @@
   const remaining = $derived(Math.max(0, total - watched));
   const isComplete = $derived(total > 0 && watched >= total);
   const isStarted = $derived(watched > 0);
-  const minutesLeft = $derived(
-    !isNaN(totalRuntime) && remaining > 0 && total > 0
-      ? Math.round((totalRuntime / total) * remaining)
-      : 0,
-  );
 </script>
 
 {#snippet tags()}
   {#if !isComplete && remaining > 0}
     <EpisodeRemainingTag i18n={EpisodeIntlProvider} {remaining} />
-    {#if !isNaN(totalRuntime) && minutesLeft > 0}
+    {#if minutesLeft > 0}
       <EpisodeDurationTag i18n={EpisodeIntlProvider} {minutesLeft} />
     {/if}
   {/if}
