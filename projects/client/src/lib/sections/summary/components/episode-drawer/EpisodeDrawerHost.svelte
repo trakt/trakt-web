@@ -4,9 +4,10 @@
   import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
-  import { lineClamp } from "$lib/components/text/lineClamp.ts";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
+  import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler.ts";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import WhereToWatchList from "$lib/sections/lists/where-to-watch/WhereToWatchList.svelte";
@@ -19,6 +20,7 @@
   import RatingsDrawer from "$lib/sections/summary/components/rating/RatingsDrawer.svelte";
   import SeasonEpisodesTab from "$lib/sections/summary/components/seasons/SeasonEpisodesTab.svelte";
   import SocialDrawerHost from "$lib/sections/summary/components/social/SocialDrawerHost.svelte";
+  import { trackTextOverflow } from "$lib/utils/actions/trackTextOverflow.ts";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle.ts";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
@@ -116,18 +118,23 @@
     };
   });
 
-  const episodeTitle = $derived.by(() => {
-    const numberLabel = episodeNumberLabel({
-      seasonNumber: season,
-      episodeNumber: episode,
-    });
+  const numberLabel = $derived(
+    episodeNumberLabel({ seasonNumber: season, episodeNumber: episode }),
+  );
 
-    return $episodeEntry
-      ? `${numberLabel} - ${$episodeEntry.title}`
-      : numberLabel;
-  });
+  const episodeTitle = $derived(
+    $episodeEntry ? `${numberLabel} - ${$episodeEntry.title}` : numberLabel,
+  );
 
-  const isEpisodeTitleClamped = writable(false);
+  const isEpisodeTitleTruncated = writable(false);
+
+  const { isSpoilerHidden } = $derived(
+    useMediaSpoiler({
+      show,
+      media: $episodeEntry ? [$episodeEntry] : [],
+      type: "episode",
+    }),
+  );
 
   const socialTitle = $derived(
     $episodeEntry ? episodeActivityTitle($episodeEntry, show) : show.title,
@@ -135,22 +142,23 @@
 </script>
 
 {#snippet episodeMetaInfo()}
-  <!-- Keyed so the clamp check re-runs when the episode (or its loaded
-       title) changes - the lineClamp action only re-measures on resize. -->
-  {#key episodeTitle}
-    <Tooltip
-      content={episodeTitle}
-      disabled={!$isEpisodeTitleClamped}
-      side="bottom"
+  <Tooltip
+    content={episodeTitle}
+    disabled={!$isEpisodeTitleTruncated || $isSpoilerHidden}
+    side="bottom"
+  >
+    <p
+      class="episode-title-meta-info bold ellipsis"
+      use:trackTextOverflow={isEpisodeTitleTruncated}
     >
-      <p
-        class="episode-title-meta-info bold"
-        use:lineClamp={{ lines: 3, isClamped: isEpisodeTitleClamped }}
-      >
-        {episodeTitle}
-      </p>
-    </Tooltip>
-  {/key}
+      {numberLabel}
+      {#if $episodeEntry}
+        <Spoiler media={$episodeEntry} {show} type="episode">
+          - {$episodeEntry.title}
+        </Spoiler>
+      {/if}
+    </p>
+  </Tooltip>
 {/snippet}
 
 {#snippet infoIcon()}
