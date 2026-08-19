@@ -32,7 +32,7 @@
 </script>
 
 {#snippet mediaTag(item: MediaInputDefault)}
-  <AirDateTag i18n={TagIntlProvider} airDate={item.airDate} />
+  <AirDateTag i18n={TagIntlProvider} airDate={item.airDate} year={item.year} />
 
   {#if $mode === "movie"}
     <DurationTag i18n={TagIntlProvider} runtime={item.runtime} />
