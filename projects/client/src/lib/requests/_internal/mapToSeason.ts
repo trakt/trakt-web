@@ -21,13 +21,16 @@ export const mapToSeason = (item: SeasonsResponse[0]): Season => {
     ...(item.images?.poster ?? []),
   );
 
+  const episodeCount = item.episode_count ?? 0;
+
   return {
     id: item.ids.trakt,
     key: `season-${item.ids.trakt}`,
     number: item.number,
     title: toDistinctSeasonTitle(item),
     episodes: {
-      count: item.episode_count ?? 0,
+      count: episodeCount,
+      aired: Math.min(item.aired_episodes ?? episodeCount, episodeCount),
     },
     poster: poster ? mapToPoster(item.images) : undefined,
     airDate: new Date(item.first_aired ?? MAX_DATE),

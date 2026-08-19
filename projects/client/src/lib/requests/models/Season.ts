@@ -8,6 +8,7 @@ export const SeasonSchema = z.object({
   title: z.string().nullish(),
   episodes: z.object({
     count: z.number(),
+    aired: z.number(),
   }),
   poster: z.object({
     url: ImageUrlsSchema,

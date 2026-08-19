@@ -85,14 +85,15 @@ export function useIsWatched(props: IsWatchedProps) {
             new Map<number, number>();
 
           const watchedCount = seasons.filter((season) =>
-            (countBySeason.get(season.number) ?? 0) >= season.episodes.count
+            season.episodes.aired > 0 &&
+            (countBySeason.get(season.number) ?? 0) >= season.episodes.aired
           ).length;
 
           const hasSomeCompleteSeasons = watchedCount > 0 &&
             watchedCount < seasons.length;
           const hasSomePartialSeasons = seasons.some((season) => {
             const count = countBySeason.get(season.number) ?? 0;
-            return count > 0 && count < season.episodes.count;
+            return count > 0 && count < season.episodes.aired;
           });
 
           return {

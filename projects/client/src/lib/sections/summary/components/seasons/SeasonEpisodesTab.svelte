@@ -14,6 +14,7 @@
   import SeasonProgressCard from "$lib/sections/summary/components/seasons/SeasonProgressCard.svelte";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
+  import { sumRemainingRuntime } from "$lib/utils/media/sumRemainingRuntime.ts";
   import DrawerTabTitle from "$lib/sections/summary/components/_internal/DrawerTabTitle.svelte";
 
   const {
@@ -60,8 +61,16 @@
   const currentSeasonData = $derived(
     seasons.find((s) => s.number === currentSeason),
   );
-  const currentSeasonWatched = $derived(
-    $watchedBySeason?.get(currentSeason)?.size ?? 0,
+  const currentSeasonWatchedNumbers = $derived(
+    $watchedBySeason?.get(currentSeason) ?? new Set<number>(),
+  );
+  const currentSeasonWatched = $derived(currentSeasonWatchedNumbers.size);
+  const currentSeasonMinutesLeft = $derived(
+    sumRemainingRuntime({
+      episodes: $episodes,
+      airedCount: currentSeasonData?.episodes.aired ?? 0,
+      watchedEpisodeNumbers: currentSeasonWatchedNumbers,
+    }),
   );
 </script>
 
@@ -85,8 +94,8 @@
         <SeasonProgressCard
           seasonNumber={currentSeason}
           watched={currentSeasonWatched}
-          total={currentSeasonData.episodes.count}
-          totalRuntime={currentSeasonData.totalRuntime}
+          total={currentSeasonData.episodes.aired}
+          minutesLeft={currentSeasonMinutesLeft}
           loading={$isWatchedLoading}
         />
       {/if}

@@ -9,6 +9,7 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     'title': null,
     'episodes': {
       'count': 10,
+      'aired': 10,
     },
     'poster': {
       'url': {
@@ -32,6 +33,7 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     'title': null,
     'episodes': {
       'count': 10,
+      'aired': 10,
     },
     'poster': {
       'url': {
@@ -55,6 +57,7 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     'title': null,
     'episodes': {
       'count': 1,
+      'aired': 0,
     },
     'poster': undefined,
     'airDate': MAX_DATE,
