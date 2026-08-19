@@ -56,7 +56,12 @@
 </RenderFor>
 
 {#snippet headerActions()}
-  <SeasonDropdown showSlug={show.slug} {seasons} {currentSeason} />
+  <SeasonDropdown
+    showSlug={show.slug}
+    {seasons}
+    {currentSeason}
+    variant="detailed"
+  />
 {/snippet}
 
 <SeasonEpisodeList
