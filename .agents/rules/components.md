@@ -156,6 +156,48 @@ Use `{#snippet}` and `Snippet` type for flexible content injection.
 
 ---
 
+## Keying `{#each}` Blocks
+
+Key on identity the data owns, never on what the row renders.
+
+Display text is not an identifier. Translated strings collide per locale,
+formatted values collide after rounding, and titles collide by coincidence.
+Svelte throws `each_key_duplicate` and blanks the entire page, so the crash only
+reproduces in the locale or dataset where the collision happens - it will pass
+review and pass in English.
+
+```svelte
+<!-- Bad - i18n output, collides in some locales -->
+{#each rows as row (row.title)}
+
+<!-- Bad - formatted value, collides after rounding -->
+{#each buckets as bucket (bucket.formattedTotal)}
+
+<!-- Good - identity the row owns -->
+{#each rows as row (row.mediaKind)}
+{#each entries as entry (entry.id)}
+```
+
+When the data has no natural identifier, give it one at the source rather than
+reaching for the nearest string. A `key` field on the mapper output is cheaper
+than a production crash.
+
+Positional keys (`(index)`) are correct when the rendered array carries no
+identity of its own: skeleton placeholders, fixed-length layouts. Reach for
+them only when there is genuinely nothing to identify a row by. Where a row
+does map to a real datum, key on that datum even if it is positionally
+derived, so Svelte replaces the node instead of morphing one datum into
+another.
+
+Backend ids are only as unique as the endpoint guarantees. When an upstream list
+can repeat an id, dedupe in the mapper; do not key on something else to work
+around it.
+
+ESLint's `svelte/require-each-key` catches a missing key. Nothing catches an
+unstable one, so this is on the author.
+
+---
+
 ## Extending a Primitive: Slots, Not Domain Props
 
 `lib/components` primitives stay domain free when **modified**, not just when
@@ -809,6 +851,8 @@ property (`inset-inline-start`, not `left`), or the animation silently dies.
 - [ ] Using Svelte 5 runes (`$props`, `$derived`, `$effect`) - no `export let`
       or `$:`
 - [ ] Snippets used for slot-like composition, not legacy `<slot>`
+- [ ] `{#each}` keys are stable identifiers - never translated text, formatted
+      values, or any other rendered string
 - [ ] Primitives extended with a `Snippet` slot, not a domain-shaped prop
 - [ ] Shared components styled via their props / CSS variable hooks, not
       `:global()` overrides from the consumer

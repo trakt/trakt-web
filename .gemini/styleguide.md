@@ -253,6 +253,28 @@ const { isCollapsed, toggle } = $derived(useCollapsedList(id));
 {@render navbarState(true)}
 ```
 
+### Keying Each Blocks
+
+Key `{#each}` blocks on identity the data owns, never on what the row renders.
+Translated strings collide per locale, formatted values collide after rounding,
+and Svelte throws `each_key_duplicate` and blanks the page when they do.
+
+**Bad:**
+
+```svelte
+{#each rows as row (row.title)}
+{#each ticks as tick (tick.text)}
+```
+
+**Good:**
+
+```svelte
+{#each rows as row (row.mediaKind)}
+{#each entries as entry (entry.id)}
+```
+
+Positional keys (`(index)`) are correct only when the row carries no identity of its own, such as skeleton placeholders or fixed-length layouts. Where a row maps to a real datum, key on that datum. When the data has no natural identifier, add a `key` field at the mapper rather than keying on the nearest string.
+
 ### Custom Hooks Pattern
 
 ```typescript
