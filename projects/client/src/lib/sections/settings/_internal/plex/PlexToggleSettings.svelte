@@ -1,33 +1,16 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import type { Snippet } from "svelte";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
-
-  type ToggleChip = {
-    label: string;
-    ariaLabel: string;
-    isActive: boolean;
-    onToggle: () => void;
-  };
-
-  type ToggleRow = {
-    icon: Snippet;
-    title: string;
-    chips: ReadonlyArray<ToggleChip>;
-  };
+  import type { PlexToggleSettingsProps } from "./PlexToggleSettingsProps.ts";
 
   const {
     title,
     description,
     isLoading,
     rows,
-  }: {
-    title: string;
-    description: string;
-    isLoading: boolean;
-    rows: ReadonlyArray<ToggleRow>;
-  } = $props();
+    onToggle,
+  }: PlexToggleSettingsProps = $props();
 
   const skeletonRows = [{ tags: 4 }, { tags: 1 }, { tags: 1 }, { tags: 4 }];
 </script>
@@ -46,16 +29,21 @@
       </div>
     {/each}
   {:else}
-    {#each rows as row (row.title)}
+    {#each rows as row (row.mediaKind)}
       <SettingsGroupRow title={row.title} variant="custom">
         {#snippet icon()}{@render row.icon()}{/snippet}
         <div class="plex-toggle-tags">
-          {#each row.chips as chip (chip.ariaLabel)}
+          {#each row.chips as chip (chip.settingKey)}
             <Button
               size="tag"
               label={chip.ariaLabel}
               color={chip.isActive ? "purple" : "default"}
-              onclick={chip.onToggle}
+              onclick={() =>
+              onToggle({
+                mediaKind: row.mediaKind,
+                settingKey: chip.settingKey,
+                current: chip.isActive,
+              })}
             >
               {chip.label}
             </Button>
