@@ -34,7 +34,7 @@
 </script>
 
 {#snippet tag()}
-  <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
+  <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} year={media.year} />
 
   {#if media.type === "show" && mediaCredit.episodeCount}
     <EpisodeCountTag i18n={TagIntlProvider} count={mediaCredit.episodeCount} />

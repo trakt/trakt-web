@@ -73,7 +73,7 @@
 
 {#snippet summaryTag()}
   <TagBar>
-    <AirDateTag i18n={TagIntlProvider} airDate={entry.airDate} />
+    <AirDateTag i18n={TagIntlProvider} airDate={entry.airDate} year={entry.year} />
 
     {#if "episode" in entry}
       <EpisodeCountTag i18n={TagIntlProvider} count={entry.episode.count} />

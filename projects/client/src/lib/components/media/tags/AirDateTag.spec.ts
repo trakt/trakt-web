@@ -31,6 +31,34 @@ describe('AirDateTag', () => {
     expect(screen.getByText(`${currentYear - 1}`)).toBeDefined();
   });
 
+  it('should prefer the canonical year over the air date year once released', () => {
+    const airDate = new Date(Date.now() - time.years(1));
+
+    render(AirDateTag, {
+      props: {
+        airDate,
+        year: 1976,
+        i18n: TagIntlProvider,
+      },
+    });
+
+    expect(screen.getByText('1976')).toBeDefined();
+  });
+
+  it('should ignore the canonical year for an unreleased date', () => {
+    const airDate = new Date(new Date().getTime() + time.days(6));
+
+    render(AirDateTag, {
+      props: {
+        airDate,
+        year: new Date().getFullYear(),
+        i18n: TagIntlProvider,
+      },
+    });
+
+    expect(screen.getByText('in 6 days')).toBeDefined();
+  });
+
   it('should display relative date if it is released in the upcoming week', () => {
     const airDate = new Date(new Date().getTime() + time.days(6));
 
