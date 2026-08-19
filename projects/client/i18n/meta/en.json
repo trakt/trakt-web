@@ -8161,6 +8161,10 @@
       "default": "Today",
       "description": "Label for the current day in stats charts."
     },
+    "text_stats_no_screen_time": {
+      "default": "No screen time this week",
+      "description": "Empty-state text shown inside a Screen Time graph card when nothing was watched during the selected week."
+    },
     "text_stats_time_morning": {
       "default": "Morning",
       "description": "Label for morning time bucket (5am-12pm) in watch clock chart."

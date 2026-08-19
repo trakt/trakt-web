@@ -18,30 +18,39 @@ export function getGraphItems(
 
   const { labels } = countByCalendarDay({ dates: twAll, now, locale });
   const wakingMinutesPerDay = wakingHoursPerDay * 60;
-  const percentages = thisWeek.dailyMinutes.map((minutes) =>
-    Math.round((minutes / wakingMinutesPerDay) * 100)
-  );
+
+  const days = labels.map((label, index) => {
+    const minutes = thisWeek.dailyMinutes[index] ?? 0;
+
+    return {
+      label,
+      minutes,
+      percentage: Math.round((minutes / wakingMinutesPerDay) * 100),
+    };
+  });
+
+  const buckets = bucketByTimeOfDay({
+    movieDates: thisWeek.movieDates,
+    showDates: thisWeek.showDates,
+  });
 
   return [
     {
       type: 'graph',
       key: 'screenTimeDaily',
       kind: 'screenTimeDaily',
+      isEmpty: days.every((day) => day.minutes === 0),
       data: {
-        percentages,
-        minutesPerDay: thisWeek.dailyMinutes,
-        labels,
+        days,
       },
     },
     {
       type: 'graph',
       key: 'peakHours',
       kind: 'peakHours',
+      isEmpty: buckets.every((bucket) => bucket.count === 0),
       data: {
-        buckets: bucketByTimeOfDay({
-          movieDates: thisWeek.movieDates,
-          showDates: thisWeek.showDates,
-        }),
+        buckets,
       },
     },
   ];

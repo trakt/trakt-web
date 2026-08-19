@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
   import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
-  import { getLocale, languageTag } from "$lib/features/i18n/index.ts";
-  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration.ts";
+  import { languageTag } from "$lib/features/i18n/index.ts";
   import { ratio } from "$lib/utils/number/ratio.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { STRENGTH_RAMP_COLOR } from "./strengthRampColor.ts";
+  import { toScreenTimeDuration } from "./utils/toScreenTimeDuration.ts";
   import type { ScreenTimeDailyData } from "./models/ScreenTimeDailyData";
 
   // Grace period before the label glides back to the peak, so crossing the gap
@@ -14,28 +14,19 @@
 
   const { data }: { data: ScreenTimeDailyData } = $props();
 
-  const locale = $derived(getLocale());
   const lang = $derived(languageTag());
 
-  const maxPct = $derived(Math.max(...data.percentages, 1));
-
-  const zeroMinutes = $derived(
-    new Intl.NumberFormat(locale, {
-      style: "unit",
-      unit: "minute",
-      unitDisplay: "narrow",
-    }).format(0),
-  );
+  const maxPct = $derived(Math.max(...data.days.map((day) => day.percentage), 1));
 
   // Index of the day with the most screen time; label defaults to it. -1's
   // guard is `hasPeak`: nothing watched -> no default label.
   const peakIndex = $derived(
-    data.minutesPerDay.reduce(
-      (best, minutes, i, all) => (minutes > (all[best] ?? -1) ? i : best),
+    data.days.reduce(
+      (best, day, i, all) => (day.minutes > (all[best]?.minutes ?? -1) ? i : best),
       0,
     ),
   );
-  const hasPeak = $derived((data.minutesPerDay[peakIndex] ?? 0) > 0);
+  const hasPeak = $derived((data.days[peakIndex]?.minutes ?? 0) > 0);
 
   // Only one value is ever labelled at a time: the peak by default, or the day
   // the user hovers / focuses / taps. A single label glides between columns
@@ -43,15 +34,13 @@
   let activeIndex = $state<number | null>(null);
   const shownIndex = $derived(activeIndex ?? (hasPeak ? peakIndex : null));
 
-  // Cache the formatted durations so hover/focus re-renders don't rebuild an
-  // Intl.NumberFormat per column on every tick.
+  // Cache the formatted durations so hover/focus re-renders don't reformat every
+  // column on every tick.
   const durations = $derived(
-    data.minutesPerDay.map(
-      (minutes) => toHumanDuration({ minutes }, lang) || zeroMinutes,
-    ),
+    data.days.map((day) => toScreenTimeDuration(day.minutes, lang)),
   );
   const shownDuration = $derived(
-    shownIndex == null ? "" : durations[shownIndex] ?? zeroMinutes,
+    shownIndex == null ? "" : durations[shownIndex] ?? "",
   );
 
   let returnTimer: ReturnType<typeof setTimeout> | undefined;
@@ -73,21 +62,20 @@
 <div
   class="trakt-pulse-graph-screen-time-daily"
   class:has-value={shownIndex != null}
-  style="--column-count: {data.labels.length}; --active-column: {shownIndex ??
+  style="--column-count: {data.days.length}; --active-column: {shownIndex ??
     0};"
 >
   <div class="value-track" aria-hidden="true">
     <span class="screen-time-value tag bold no-wrap">{shownDuration}</span>
   </div>
 
-  {#each data.labels as label, i (i)}
-    {@const pct = data.percentages[i] ?? 0}
-    {@const fraction = ratio({ value: pct, total: maxPct })}
-    {@const duration = durations[i] ?? zeroMinutes}
+  {#each data.days as day, i (i)}
+    {@const fraction = ratio({ value: day.percentage, total: maxPct })}
+    {@const duration = durations[i] ?? ""}
     <button
       type="button"
       class="screen-time-column"
-      aria-label="{label}: {duration}"
+      aria-label="{day.label}: {duration}"
       onpointerenter={(e) => e.pointerType !== "touch" && reveal(i)}
       onpointerleave={(e) => e.pointerType !== "touch" && scheduleReturn()}
       onclick={() => reveal(i)}
@@ -106,12 +94,12 @@
           index={i}
           active={i === activeIndex}
           minVisible={0.03}
-          label="{label}: {duration}"
+          label="{day.label}: {duration}"
           --distribution-bar-thickness="100%"
           --viz-bar-strength={fraction}
         />
       </div>
-      <span class="screen-time-label tag ellipsis no-wrap">{label}</span>
+      <span class="screen-time-label tag ellipsis no-wrap">{day.label}</span>
     </button>
   {/each}
 </div>
