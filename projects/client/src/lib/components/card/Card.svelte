@@ -12,16 +12,20 @@
     variant = "opaque",
     classList = "",
     action,
+    eager = false,
   }: ChildrenProps & {
     variant?: "transparent" | "opaque";
     classList?: string;
     action?: (element: HTMLElement) => void;
+    eager?: boolean;
   } = $props();
 
   const isVisible = writable(false);
   const { navigation } = useNavigation();
 
   const customAction = $derived(action ? action : NOOP_FN);
+
+  const isRendered = $derived(eager || $isVisible);
 </script>
 
 <div
@@ -36,9 +40,9 @@
   <div
     class="trakt-card-content"
     class:trakt-card-transparent={variant === "transparent"}
-    class:is-visible={$isVisible}
+    class:is-visible={isRendered}
   >
-    {#if $isVisible}
+    {#if isRendered}
       {@render children()}
     {/if}
   </div>

@@ -33,7 +33,7 @@
     {#each tabs as tab (tab.value)}
       <Tabs.Content value={tab.value}>
         {#snippet child({ props })}
-          {#if tab.value === value}
+          {#if tab.value === value || tab.keepMounted}
             <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
             <div {...props} class="trakt-tab-content" tabindex={-1}>
               {@render tab.content()}

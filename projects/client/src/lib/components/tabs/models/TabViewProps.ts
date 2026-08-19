@@ -5,6 +5,7 @@ type TabView = {
   label: string;
   icon?: Snippet;
   content: Snippet;
+  keepMounted?: boolean;
 };
 
 export type TabViewProps = {

@@ -121,6 +121,7 @@
 <div class="trakt-credit-member-item" role="listitem">
   <Card
     classList="trakt-credit-member-card"
+    eager
     --height-card={cardHeight}
     --width-card="100%"
   >
@@ -209,13 +210,8 @@
   }
 
   .credit-member-avatar {
-    --credit-member-avatar-height: var(--height-summary-card-cover-compact);
-    --credit-member-avatar-width: calc(
-      var(--credit-member-avatar-height) * 0.6667
-    );
-
-    width: var(--credit-member-avatar-width);
-    height: var(--credit-member-avatar-height);
+    width: var(--width-summary-card-cover-compact);
+    height: var(--height-summary-card-cover-compact);
 
     flex-shrink: 0;
     overflow: hidden;

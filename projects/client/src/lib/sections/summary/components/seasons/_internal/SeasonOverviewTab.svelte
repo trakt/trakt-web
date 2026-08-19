@@ -5,7 +5,7 @@
   import DrawerCastSection from "$lib/sections/summary/components/_internal/DrawerCastSection.svelte";
   import SeasonInfoSection from "./SeasonInfoSection.svelte";
   import DrawerTabTitle from "$lib/sections/summary/components/_internal/DrawerTabTitle.svelte";
-  import { useSeasonPeople } from "./useSeasonPeople";
+  import { useSeasonPeople } from "./useSeasonPeople.ts";
 
   const {
     show,
