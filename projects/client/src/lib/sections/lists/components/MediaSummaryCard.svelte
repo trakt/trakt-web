@@ -6,13 +6,16 @@
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
+  import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler.ts";
   import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { trackTextOverflow } from "$lib/utils/actions/trackTextOverflow.ts";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { toHumanTime } from "$lib/utils/formatting/date/toHumanTime.ts";
@@ -20,6 +23,7 @@
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { of } from "rxjs";
   import type { Snippet } from "svelte";
@@ -86,6 +90,16 @@
           show: media,
         })
       : of(media.title),
+  );
+
+  const isTitleTruncated = writable(false);
+
+  const noSpoiler = { isSpoilerHidden: of(false) };
+
+  const { isSpoilerHidden } = $derived(
+    rest.type === "episode"
+      ? useMediaSpoiler({ show: media, media: rest.episode, type: "episode" })
+      : noSpoiler,
   );
 
   const coverData = $derived.by(() => {
@@ -226,11 +240,19 @@
         </p>
       {/if}
     {:else if isShowContext && rest.type === "episode"}
-      <p class="trakt-card-title ellipsis">
-        <Spoiler media={rest.episode} show={media} type="episode">
-          {rest.episode.title}
-        </Spoiler>
-      </p>
+      <Tooltip
+        content={$spoilerFreeTitle}
+        disabled={!$isTitleTruncated || $isSpoilerHidden}
+      >
+        <p
+          class="trakt-card-title ellipsis"
+          use:trackTextOverflow={isTitleTruncated}
+        >
+          <Spoiler media={rest.episode} show={media} type="episode">
+            {rest.episode.title}
+          </Spoiler>
+        </p>
+      </Tooltip>
       <p class="trakt-card-subtitle small secondary ellipsis">
         <bdi dir="ltr">{episodeSubtitle(rest.episode)}</bdi>
       </p>
@@ -404,6 +426,7 @@
   }
 
   .trakt-card-title {
+    min-width: 0;
     font-size: var(--font-size-text);
 
     @include for-tablet-sm-and-below {
