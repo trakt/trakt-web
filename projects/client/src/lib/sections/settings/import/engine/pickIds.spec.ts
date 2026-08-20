@@ -30,6 +30,18 @@ describe('pickIds', () => {
     it('should fall back to tvdb when imdb is absent', () => {
       expect(pickIds({ tvdb: 123 }, SHOW_IDS)).toEqual({ tvdb: 123 });
     });
+
+    it('should prefer tvdb over tmdb', () => {
+      expect(pickIds({ tvdb: 123, tmdb: 456 }, SHOW_IDS)).toEqual({
+        tvdb: 123,
+      });
+    });
+
+    it('should fall back to tmdb when imdb and tvdb are absent', () => {
+      expect(pickIds({ tmdb: 67324, trakt: 6 }, SHOW_IDS)).toEqual({
+        tmdb: 67324,
+      });
+    });
   });
 
   describe('with EPISODE_IDS priority', () => {
@@ -39,7 +51,19 @@ describe('pickIds', () => {
       });
     });
 
-    it('should fall back to trakt when tvdb is absent', () => {
+    it('should prefer tvdb over tmdb', () => {
+      expect(pickIds({ tvdb: 77, tmdb: 66452 }, EPISODE_IDS)).toEqual({
+        tvdb: 77,
+      });
+    });
+
+    it('should fall back to tmdb when tvdb is absent', () => {
+      expect(pickIds({ tmdb: 66452, trakt: 88 }, EPISODE_IDS)).toEqual({
+        tmdb: 66452,
+      });
+    });
+
+    it('should fall back to trakt when tvdb and tmdb are absent', () => {
       expect(pickIds({ trakt: 88 }, EPISODE_IDS)).toEqual({ trakt: 88 });
     });
 
