@@ -98,7 +98,7 @@ async function syncLists(
     const listSlug = slug;
     await run(
       chunk(items, SYNC_CHUNK_SIZE),
-      (batch) => buildWatchlistPayload([...batch]),
+      (batch) => buildWatchlistPayload(batch),
       (payload) =>
         client.users.lists.list.add({
           params: { id: 'me', list_id: listSlug },
@@ -155,7 +155,7 @@ export async function syncToTrakt(
     if (historyItems.length > 0) {
       await run(
         chunk(historyItems, SYNC_CHUNK_SIZE),
-        (batch) => buildHistoryPayload([...batch], episodeMatch),
+        (batch) => buildHistoryPayload(batch, episodeMatch),
         (payload) => client.sync.history.add({ body: payload }),
       );
     }
@@ -163,7 +163,7 @@ export async function syncToTrakt(
     if (watchlistItems.length > 0) {
       await run(
         chunk(watchlistItems, SYNC_CHUNK_SIZE),
-        (batch) => buildWatchlistPayload([...batch]),
+        (batch) => buildWatchlistPayload(batch),
         (payload) => client.sync.watchlist.add({ body: payload }),
       );
     }
@@ -171,7 +171,7 @@ export async function syncToTrakt(
     if (ratingItems.length > 0) {
       await run(
         chunk(ratingItems, SYNC_CHUNK_SIZE),
-        (batch) => buildRatingsPayload([...batch]),
+        (batch) => buildRatingsPayload(batch),
         (payload) => client.sync.ratings.add({ body: payload }),
       );
     }

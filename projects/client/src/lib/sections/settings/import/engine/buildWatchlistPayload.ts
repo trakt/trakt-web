@@ -1,72 +1,58 @@
 import type { WatchlistRequest } from '@trakt/api';
-import type { UniversalImportItem } from '../ImportTypes.ts';
+import type { ImportType, UniversalImportItem } from '../ImportTypes.ts';
 import {
-  EPISODE_IDS,
+  type IdPriority,
   MOVIE_IDS,
   pickIds,
+  type ResolvedIds,
   SEASON_IDS,
   SHOW_IDS,
+  toEpisodeIdPriority,
 } from './pickIds.ts';
 
-type WatchlistMovie = NonNullable<WatchlistRequest['movies']>[number];
-type WatchlistShow = NonNullable<WatchlistRequest['shows']>[number];
-type WatchlistSeason = NonNullable<WatchlistRequest['seasons']>[number];
-type WatchlistEpisode = NonNullable<WatchlistRequest['episodes']>[number];
+type WatchlistEntry =
+  | { ids: ResolvedIds }
+  | { title: string; year: number };
 
-// Movies never fall back to {title, year}: server-side text matching
-// is too fuzzy and mismatches pollute the watchlist. Unresolved movies
-// are dropped instead (resolveMovieIds runs before this).
-function toWatchlistMovie(
+function toWatchlistEntry(
   { ids }: UniversalImportItem,
-): WatchlistMovie | null {
-  const resolvedIds = pickIds(ids, MOVIE_IDS);
-  if (resolvedIds) return { ids: resolvedIds as never };
+  priority: IdPriority,
+): WatchlistEntry | null {
+  const resolvedIds = pickIds(ids, priority);
+  if (resolvedIds) return { ids: resolvedIds };
   return null;
 }
 
-function toWatchlistShow(
-  { ids, title, year }: UniversalImportItem,
-): WatchlistShow | null {
-  const resolvedIds = pickIds(ids, SHOW_IDS);
-  if (resolvedIds) return { ids: resolvedIds as never };
+// Only shows fall back to {title, year}: server-side text matching is too fuzzy
+// for movies and mismatches pollute the watchlist, so unresolved movies are
+// dropped instead (resolveMovieIds runs before this).
+function toWatchlistShow(item: UniversalImportItem): WatchlistEntry | null {
+  const entry = toWatchlistEntry(item, SHOW_IDS);
+  if (entry) return entry;
+
+  const { title, year } = item;
   if (title && year) return { title, year };
   return null;
 }
 
-function toWatchlistSeason(
-  { ids }: UniversalImportItem,
-): WatchlistSeason | null {
-  const resolvedIds = pickIds(ids, SEASON_IDS);
-  if (resolvedIds) return { ids: resolvedIds as never };
-  return null;
-}
-
-function toWatchlistEpisode(
-  { ids }: UniversalImportItem,
-): WatchlistEpisode | null {
-  const resolvedIds = pickIds(ids, EPISODE_IDS);
-  if (resolvedIds) return { ids: resolvedIds as never };
-  return null;
-}
-
 export function buildWatchlistPayload(
-  items: UniversalImportItem[],
+  items: ReadonlyArray<UniversalImportItem>,
 ): WatchlistRequest {
-  const movies = items
-    .filter((item) => item.type === 'movie')
-    .flatMap((item) => toWatchlistMovie(item) ?? []);
+  const collect = (
+    type: ImportType,
+    map: (item: UniversalImportItem) => WatchlistEntry | null,
+  ) =>
+    items
+      .filter((item) => item.type === type)
+      .flatMap((item) => map(item) ?? []);
 
-  const shows = items
-    .filter((item) => item.type === 'show')
-    .flatMap((item) => toWatchlistShow(item) ?? []);
-
-  const seasons = items
-    .filter((item) => item.type === 'season')
-    .flatMap((item) => toWatchlistSeason(item) ?? []);
-
-  const episodes = items
-    .filter((item) => item.type === 'episode')
-    .flatMap((item) => toWatchlistEpisode(item) ?? []);
-
-  return { movies, shows, seasons, episodes };
+  return {
+    movies: collect('movie', (item) => toWatchlistEntry(item, MOVIE_IDS)),
+    shows: collect('show', toWatchlistShow),
+    seasons: collect('season', (item) => toWatchlistEntry(item, SEASON_IDS)),
+    episodes: collect(
+      'episode',
+      (item) => toWatchlistEntry(item, toEpisodeIdPriority(item)),
+    ),
+  } as WatchlistRequest;
 }

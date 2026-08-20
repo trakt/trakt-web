@@ -127,14 +127,15 @@ describe('buildWatchlistPayload', () => {
       expect(result.episodes).toEqual([{ ids: { tmdb: 66452 } }]);
     });
 
-    it('should drop an episode carrying only an imdb id', () => {
+    it('should resolve an episode by imdb id', () => {
       const result = buildWatchlistPayload([{
         action: 'watchlist',
         type: 'episode',
         ids: { imdb: 'tt0306414' },
       }]);
 
-      expect(result.episodes).toEqual([]);
+      expect(result.episodes).toEqual([{ ids: { imdb: 'tt0306414' } }]);
+      expect(result.shows).toEqual([]);
     });
   });
 });
