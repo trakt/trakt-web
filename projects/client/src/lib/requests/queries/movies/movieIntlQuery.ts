@@ -20,6 +20,8 @@ const movieIntlRequest = (
     .translations({
       params: {
         id: slug,
+      },
+      query: {
         language,
       },
     });
