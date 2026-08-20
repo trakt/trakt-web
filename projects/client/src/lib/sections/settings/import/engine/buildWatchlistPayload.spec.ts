@@ -81,4 +81,27 @@ describe('buildWatchlistPayload', () => {
     expect(result.movies).toHaveLength(0);
     expect(result.shows).toHaveLength(0);
   });
+
+  describe('seasons', () => {
+    it('should map a season item into the seasons bucket', () => {
+      const result = buildWatchlistPayload([{
+        action: 'watchlist',
+        type: 'season',
+        ids: { tvdb: 12345 },
+      }]);
+
+      expect(result.seasons).toEqual([{ ids: { tvdb: 12345 } }]);
+      expect(result.shows).toEqual([]);
+    });
+
+    it('should drop a season carrying only an imdb id', () => {
+      const result = buildWatchlistPayload([{
+        action: 'watchlist',
+        type: 'season',
+        ids: { imdb: 'tt0306414' },
+      }]);
+
+      expect(result.seasons).toEqual([]);
+    });
+  });
 });

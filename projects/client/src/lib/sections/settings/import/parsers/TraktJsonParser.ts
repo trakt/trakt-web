@@ -34,6 +34,10 @@ type TraktJsonEntry = {
   rated_at?: string;
   movie?: { title?: string; year?: number; ids?: TraktJsonIds };
   show?: { title?: string; year?: number; ids?: TraktJsonIds };
+  season?: {
+    number?: number;
+    ids?: TraktJsonIds;
+  };
   episode?: {
     season?: number;
     number?: number;
@@ -54,6 +58,7 @@ type TraktJsonEntry = {
 
 function inferType(entry: TraktJsonEntry): ImportType {
   if (entry.episode) return 'episode';
+  if (entry.season) return 'season';
   if (entry.show && !entry.movie) return 'show';
   return 'movie';
 }
@@ -82,6 +87,7 @@ function inferAction(entry: TraktJsonEntry): ImportAction {
 function toType(value: string): ImportType {
   const normalized = value.toLowerCase();
   if (normalized === 'show' || normalized === 'series') return 'show';
+  if (normalized === 'season') return 'season';
   if (normalized === 'episode') return 'episode';
   return 'movie';
 }
@@ -143,14 +149,16 @@ function toNestedBase(entry: TraktJsonEntry): ImportItemBase {
   const type = resolveType(entry);
   const media = type === 'episode' ? entry.show : (entry.movie ?? entry.show);
   const episodeData = type === 'episode' ? entry.episode : undefined;
-  const ids: TraktJsonIds = episodeData?.ids ?? media?.ids ?? {};
+  const seasonData = type === 'season' ? entry.season : undefined;
+  const ids: TraktJsonIds = episodeData?.ids ?? seasonData?.ids ?? media?.ids ??
+    {};
 
   return {
     type,
     ids: toImportIds(ids),
     title: media?.title,
     year: media?.year,
-    season: episodeData?.season,
+    season: episodeData?.season ?? seasonData?.number,
     episode: episodeData?.number,
   };
 }

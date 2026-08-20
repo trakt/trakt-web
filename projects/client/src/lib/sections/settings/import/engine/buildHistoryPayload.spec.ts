@@ -302,4 +302,45 @@ describe('buildHistoryPayload', () => {
       expect(result.shows).toHaveLength(0);
     });
   });
+
+  describe('seasons', () => {
+    it('should map a season item into the seasons bucket', () => {
+      const result = buildHistoryPayload([{
+        action: 'history',
+        type: 'season',
+        ids: { tvdb: 12345 },
+        watched_at: '2026-08-14T10:47:49.000Z',
+      }]);
+
+      expect(result.seasons).toEqual([{
+        ids: { tvdb: 12345 },
+        watched_at: '2026-08-14T10:47:49.000Z',
+      }]);
+      expect(result.shows).toEqual([]);
+      expect(result.movies).toEqual([]);
+    });
+
+    it('should resolve a season by tmdb id', () => {
+      const result = buildHistoryPayload([{
+        action: 'history',
+        type: 'season',
+        ids: { tmdb: 67324 },
+      }]);
+
+      expect(result.seasons).toEqual([{
+        ids: { tmdb: 67324 },
+        watched_at: undefined,
+      }]);
+    });
+
+    it('should drop a season carrying only an imdb id', () => {
+      const result = buildHistoryPayload([{
+        action: 'history',
+        type: 'season',
+        ids: { imdb: 'tt0306414' },
+      }]);
+
+      expect(result.seasons).toEqual([]);
+    });
+  });
 });

@@ -4,6 +4,7 @@ export type IdPriority = ReadonlyArray<keyof ImportIds>;
 
 export const MOVIE_IDS: IdPriority = ['imdb', 'tmdb', 'trakt'];
 export const SHOW_IDS: IdPriority = ['imdb', 'tvdb', 'tmdb', 'trakt'];
+export const SEASON_IDS: IdPriority = ['tvdb', 'tmdb', 'trakt'];
 export const EPISODE_IDS: IdPriority = ['tvdb', 'tmdb', 'trakt'];
 
 export function pickIds(
