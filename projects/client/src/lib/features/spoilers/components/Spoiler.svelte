@@ -1,7 +1,7 @@
 <script lang="ts">
   import { type IsWatchedProps } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
-  import { NOOP_FN } from "$lib/utils/constants";
-  import { useSpoilerAction } from "../_internal/useSpoilerAction";
+  import { spoiler } from "../_internal/spoiler.ts";
+  import { useMediaSpoiler } from "../useMediaSpoiler.ts";
   import { spoilMeAnyway } from "./spoilMeAnyway";
 
   const {
@@ -11,13 +11,13 @@
   }: { variant?: "persistent" | "dismissible" } & ChildrenProps &
     IsWatchedProps = $props();
 
-  const { spoiler } = $derived(useSpoilerAction(rest));
-  const spoilAction = $derived(
-    variant === "persistent" ? NOOP_FN : spoilMeAnyway,
-  );
+  const { isSpoilerHidden } = $derived(useMediaSpoiler(rest));
 </script>
 
-<trakt-spoiler use:spoiler use:spoilAction>
+<trakt-spoiler
+  use:spoiler={isSpoilerHidden}
+  use:spoilMeAnyway={variant !== "persistent"}
+>
   {@render children()}
 </trakt-spoiler>
 

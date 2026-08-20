@@ -1,8 +1,10 @@
 import { SPOILER_CLASS_NAME } from '$lib/features/spoilers/constants.ts';
 
-export function spoilMeAnyway(node: HTMLElement) {
+export function spoilMeAnyway(node: HTMLElement, isDismissible = true) {
+  let canDismiss = isDismissible;
+
   function handleClick(e: MouseEvent) {
-    if (!(e.target instanceof HTMLElement)) {
+    if (!canDismiss || !(e.target instanceof HTMLElement)) {
       return;
     }
 
@@ -13,6 +15,9 @@ export function spoilMeAnyway(node: HTMLElement) {
   node.addEventListener('click', handleClick);
 
   return {
+    update(next = true) {
+      canDismiss = next;
+    },
     destroy() {
       node.removeEventListener('click', handleClick);
     },
