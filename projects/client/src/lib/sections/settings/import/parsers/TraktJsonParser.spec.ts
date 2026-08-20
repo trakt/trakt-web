@@ -256,6 +256,27 @@ describe('TraktJsonParser', () => {
       });
     });
 
+    it('coerces string numeric ids to numbers', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          tmdb_id: '67324',
+          tvdb_id: '79126',
+          trakt_id: '42',
+          watched_at: '2026-08-14T10:47:49.000Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]?.ids).toEqual({
+        trakt: 42,
+        imdb: undefined,
+        tmdb: 67324,
+        tvdb: 79126,
+      });
+    });
+
     it('parses a watchlist entry via is_watchlisted field', async () => {
       mockParseJsonFile.mockResolvedValue([
         {

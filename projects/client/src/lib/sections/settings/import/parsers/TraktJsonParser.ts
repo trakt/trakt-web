@@ -7,13 +7,14 @@ import type {
 import type { FileParser } from './ParserInterface.ts';
 import { isValidItem } from './utils/isValidItem.ts';
 import { parseJsonFile } from './utils/parseJsonFile.ts';
+import { toImportIds } from './utils/toImportIds.ts';
 import { toImportISOString } from './utils/toImportISOString.ts';
 
 type TraktJsonIds = {
-  trakt?: number;
+  trakt?: string | number;
   imdb?: string;
-  tmdb?: number;
-  tvdb?: number;
+  tmdb?: string | number;
+  tvdb?: string | number;
 };
 
 type TraktJsonEntry = {
@@ -37,9 +38,9 @@ type TraktJsonEntry = {
   id?: TraktJsonIds;
   // Flat format with *_id fields at root level (e.g. third-party exports)
   imdb_id?: string;
-  tvdb_id?: number;
-  tmdb_id?: number;
-  trakt_id?: number;
+  tvdb_id?: string | number;
+  tmdb_id?: string | number;
+  trakt_id?: string | number;
   title?: string;
   year?: number;
   created_at?: string;
@@ -99,12 +100,7 @@ function parseFlatEntry(entry: TraktJsonEntry): UniversalImportItem | null {
   return {
     action,
     type: 'movie',
-    ids: {
-      trakt: ids.trakt,
-      imdb: ids.imdb,
-      tmdb: ids.tmdb,
-      tvdb: ids.tvdb,
-    },
+    ids: toImportIds(ids),
     title: entry.title,
     year: entry.year,
     watched_at: toWatchedAt(
@@ -135,12 +131,12 @@ function parseMultiIdFlatEntry(
   return {
     action,
     type: 'movie',
-    ids: {
+    ids: toImportIds({
       trakt: entry.trakt_id,
       imdb: entry.imdb_id,
       tmdb: entry.tmdb_id,
       tvdb: entry.tvdb_id,
-    },
+    }),
     title: entry.title,
     year: entry.year,
     watched_at: toWatchedAt(
@@ -168,12 +164,7 @@ function parseTraktJsonEntry(
   return {
     action,
     type,
-    ids: {
-      trakt: ids.trakt,
-      imdb: ids.imdb,
-      tmdb: ids.tmdb,
-      tvdb: ids.tvdb,
-    },
+    ids: toImportIds(ids),
     title: media?.title,
     year: media?.year,
     watched_at: toWatchedAt(entry.watched_at),
