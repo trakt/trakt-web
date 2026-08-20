@@ -79,6 +79,10 @@ function toType(value: string): ImportType {
   return 'movie';
 }
 
+function resolveType(entry: TraktJsonEntry): ImportType {
+  return entry.type ? toType(entry.type) : inferType(entry);
+}
+
 function toWatchedAt(value?: string): string | undefined {
   if (value === 'unknown') return 'unknown';
   return toImportISOString(value);
@@ -99,7 +103,7 @@ function parseFlatEntry(entry: TraktJsonEntry): UniversalImportItem | null {
 
   return {
     action,
-    type: 'movie',
+    type: resolveType(entry),
     ids: toImportIds(ids),
     title: entry.title,
     year: entry.year,
@@ -130,7 +134,7 @@ function parseMultiIdFlatEntry(
 
   return {
     action,
-    type: 'movie',
+    type: resolveType(entry),
     ids: toImportIds({
       trakt: entry.trakt_id,
       imdb: entry.imdb_id,
@@ -153,7 +157,7 @@ function parseTraktJsonEntry(
   if (isFlatEntry(entry)) return parseFlatEntry(entry);
   if (isMultiIdFlatEntry(entry)) return parseMultiIdFlatEntry(entry);
 
-  const type = entry.type ? toType(entry.type) : inferType(entry);
+  const type = resolveType(entry);
   const action = inferAction(entry);
 
   const media = type === 'episode' ? entry.show : (entry.movie ?? entry.show);
