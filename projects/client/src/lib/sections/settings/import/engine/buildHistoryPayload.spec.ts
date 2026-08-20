@@ -271,7 +271,7 @@ describe('buildHistoryPayload', () => {
       expect(result.shows).toHaveLength(0);
     });
 
-    it('should fall back to show via imdb when no episode ids resolve', () => {
+    it('should resolve an episode carrying only an imdb id as an episode', () => {
       const item: UniversalImportItem = {
         action: 'history',
         type: 'episode',
@@ -281,11 +281,11 @@ describe('buildHistoryPayload', () => {
 
       const result = buildHistoryPayload([item]);
 
-      expect(result.episodes).toHaveLength(0);
-      expect(result.shows).toEqual([{
+      expect(result.episodes).toEqual([{
         ids: { imdb: 'tt9999999' },
         watched_at,
       }]);
+      expect(result.shows).toEqual([]);
     });
 
     it('should skip an episode with no usable ids', () => {

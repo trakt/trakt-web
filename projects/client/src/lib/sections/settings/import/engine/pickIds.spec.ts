@@ -91,8 +91,16 @@ describe('pickIds', () => {
       expect(pickIds({ trakt: 88 }, EPISODE_IDS)).toEqual({ trakt: 88 });
     });
 
-    it('should return null when only imdb is present (not in episode priority)', () => {
-      expect(pickIds({ imdb: 'tt0000000' }, EPISODE_IDS)).toBeNull();
+    it('should fall back to imdb when no other id is present', () => {
+      expect(pickIds({ imdb: 'tt0000000' }, EPISODE_IDS)).toEqual({
+        imdb: 'tt0000000',
+      });
+    });
+
+    it('should prefer trakt over imdb', () => {
+      expect(pickIds({ trakt: 88, imdb: 'tt0000000' }, EPISODE_IDS)).toEqual({
+        trakt: 88,
+      });
     });
   });
 });

@@ -14,10 +14,10 @@ export type ImportAction = 'history' | 'watchlist' | 'ratings' | 'list';
 export type ImportActionSelection = Record<ImportAction, boolean>;
 
 // How watched episodes are matched to Trakt on import:
-// - 'id' (default, recommended): the episode's own TVDB id - exact, survives
+// - 'id' (default, recommended): the episode's own id - exact, survives
 //   season/episode renumbering.
 // - 'positional': show + season/episode number - a fallback for episodes whose
-//   TVDB id Trakt doesn't have, at the cost of numbering-divergence mismatches.
+//   id Trakt doesn't have, at the cost of numbering-divergence mismatches.
 export type EpisodeMatchMode = 'id' | 'positional';
 
 export const DEFAULT_EPISODE_MATCH_MODE: EpisodeMatchMode = 'id';
