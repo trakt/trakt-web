@@ -446,6 +446,36 @@ describe('TraktJsonParser', () => {
     });
   });
 
+  describe('parse – numeric root id', () => {
+    it('does not read ids off an export play id', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          id: 14292717085,
+          type: 'movie',
+          title: 'Upside Down',
+          year: 2012,
+          watched_at: '2026-08-18T01:18:00.000Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'movie',
+        title: 'Upside Down',
+        year: 2012,
+      });
+      expect(result[0]?.ids).toEqual({
+        trakt: undefined,
+        imdb: undefined,
+        tmdb: undefined,
+        tvdb: undefined,
+      });
+    });
+  });
+
   describe('parse – nested season entries', () => {
     it('uses the season ids, not the parent show ids', async () => {
       mockParseJsonFile.mockResolvedValue([
@@ -660,6 +690,59 @@ describe('TraktJsonParser', () => {
         type: 'movie',
         title: 'Dune',
       });
+    });
+
+    it('parses history from an export using hyphenated file names', async () => {
+      setupZip({
+        'watched-history-1.json': [
+          {
+            watched_at: '2026-08-18T01:18:00.000Z',
+            action: 'watch',
+            type: 'movie',
+            movie: { title: 'The Bounty', year: 1984, ids: { trakt: 1800 } },
+          },
+        ],
+      });
+
+      const result = await TraktJsonParser.parse([makeFile('export.zip')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({ action: 'history', type: 'movie' });
+    });
+
+    it('parses ratings from an export using hyphenated file names', async () => {
+      setupZip({
+        'ratings-movies-1.json': [
+          {
+            rated_at: '2026-08-17T20:59:32.000Z',
+            rating: 8,
+            type: 'movie',
+            movie: { title: 'The Bounty', year: 1984, ids: { trakt: 1800 } },
+          },
+        ],
+      });
+
+      const result = await TraktJsonParser.parse([makeFile('export.zip')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({ action: 'ratings', rating: 8 });
+    });
+
+    it('parses the watchlist from an export using hyphenated file names', async () => {
+      setupZip({
+        'lists-watchlist.json': [
+          {
+            listed_at: '2026-08-01T00:00:00.000Z',
+            type: 'movie',
+            movie: { title: 'Dune', year: 2021, ids: { trakt: 1 } },
+          },
+        ],
+      });
+
+      const result = await TraktJsonParser.parse([makeFile('export.zip')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]?.action).toBe('watchlist');
     });
 
     it('parses ratings from zip', async () => {
