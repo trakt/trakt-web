@@ -95,7 +95,7 @@ describe('EpisodeStatusTag', () => {
       .not.toBeInTheDocument();
   });
 
-  test('it renders the season premiere tag', () => {
+  test('it renders the new season tag for a season premiere', () => {
     render(
       EpisodeStatusTag,
       {
@@ -107,7 +107,7 @@ describe('EpisodeStatusTag', () => {
     );
 
     const tagLabel = screen.getByText(
-      EpisodeIntlProvider.premiereText(),
+      EpisodeIntlProvider.newSeasonText(),
     );
     expect(tagLabel).toBeInTheDocument();
   });
@@ -129,7 +129,7 @@ describe('EpisodeStatusTag', () => {
     expect(tagLabel).toBeInTheDocument();
   });
 
-  test('it renders the series premiere tag', () => {
+  test('it renders the new season tag for a series premiere', () => {
     render(
       EpisodeStatusTag,
       {
@@ -141,7 +141,50 @@ describe('EpisodeStatusTag', () => {
     );
 
     const tagLabel = screen.getByText(
-      EpisodeIntlProvider.premiereText(),
+      EpisodeIntlProvider.newSeasonText(),
+    );
+    expect(tagLabel).toBeInTheDocument();
+  });
+
+  test('it renders the new season tag for a coalesced multi-episode premiere day', () => {
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: 'multiple_episodes',
+          releaseDate: new Date(Date.now() + time.days(1)),
+          episodes: [
+            { type: EpisodePremiereType.season_premiere },
+            { type: 'standard' },
+          ],
+        },
+      },
+    );
+
+    const tagLabel = screen.getByText(
+      EpisodeIntlProvider.newSeasonText(),
+    );
+    expect(tagLabel).toBeInTheDocument();
+  });
+
+  test('it renders the new season tag for a full season release', () => {
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: 'full_season',
+          episodes: [
+            { type: EpisodePremiereType.season_premiere },
+            { type: EpisodeFinaleType.season_finale },
+          ],
+        },
+      },
+    );
+
+    const tagLabel = screen.getByText(
+      EpisodeIntlProvider.newSeasonText(),
     );
     expect(tagLabel).toBeInTheDocument();
   });

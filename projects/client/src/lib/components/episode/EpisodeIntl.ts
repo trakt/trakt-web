@@ -9,6 +9,7 @@ export type EpisodeIntl = {
   premiereText: () => string;
   finaleText: () => string;
   newText: () => string;
+  newSeasonText: () => string;
   episodeTypeText: (type: EpisodeType) => string | Nil;
   timestampText: (metadata: TimestampMetaData) => string;
   durationText: (duration: number) => string;

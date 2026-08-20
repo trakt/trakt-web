@@ -48,6 +48,7 @@
       isLatestAired:
         props.variant === "next" ? props.episode.isLatestAired : undefined,
       releaseDate: props.episode.effectiveReleaseDate,
+      episodes: props.episode.episodes,
     }),
   );
 
@@ -125,6 +126,7 @@
           <EpisodeStatusTag
             i18n={EpisodeIntlProvider}
             episodeType={props.episode.type}
+            episodes={props.episode.episodes}
             isLatestAired={props.episode.isLatestAired}
             releaseDate={props.episode.effectiveReleaseDate}
           />
@@ -157,18 +159,13 @@
           airDate={props.episode.effectiveReleaseDate}
           type="tag"
         />
-        <EpisodeStatusTag
-          i18n={EpisodeIntlProvider}
-          episodeType={props.episode.type}
-          releaseDate={props.episode.effectiveReleaseDate}
-          type="tag"
-        />
       {/if}
 
-      {#if props.variant === "calendar"}
+      {#if ["upcoming", "calendar"].includes(props.variant)}
         <EpisodeStatusTag
           i18n={EpisodeIntlProvider}
           episodeType={props.episode.type}
+          episodes={props.episode.episodes}
           releaseDate={props.episode.effectiveReleaseDate}
           type="tag"
         />
