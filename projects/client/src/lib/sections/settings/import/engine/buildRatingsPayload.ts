@@ -1,10 +1,17 @@
 import type { RatingsSyncRequest } from '@trakt/api';
 import type { UniversalImportItem } from '../ImportTypes.ts';
-import { MOVIE_IDS, pickIds, SEASON_IDS, SHOW_IDS } from './pickIds.ts';
+import {
+  EPISODE_IDS,
+  MOVIE_IDS,
+  pickIds,
+  SEASON_IDS,
+  SHOW_IDS,
+} from './pickIds.ts';
 
 type RatingsMovie = NonNullable<RatingsSyncRequest['movies']>[number];
 type RatingsShow = NonNullable<RatingsSyncRequest['shows']>[number];
 type RatingsSeason = NonNullable<RatingsSyncRequest['seasons']>[number];
+type RatingsEpisode = NonNullable<RatingsSyncRequest['episodes']>[number];
 
 function clampRating(rating: number): number {
   return Math.min(10, Math.max(1, Math.round(rating)));
@@ -49,6 +56,19 @@ function toRatingsSeason(
   };
 }
 
+function toRatingsEpisode(
+  { ids, rating, rated_at }: UniversalImportItem,
+): RatingsEpisode | null {
+  if (rating == null) return null;
+  const resolvedIds = pickIds(ids, EPISODE_IDS);
+  if (!resolvedIds) return null;
+  return {
+    rating: clampRating(rating),
+    ids: resolvedIds as never,
+    ...(rated_at ? { rated_at } : {}),
+  };
+}
+
 export function buildRatingsPayload(
   items: UniversalImportItem[],
 ): RatingsSyncRequest {
@@ -64,5 +84,9 @@ export function buildRatingsPayload(
     .filter((item) => item.type === 'season')
     .flatMap((item) => toRatingsSeason(item) ?? []);
 
-  return { movies, shows, seasons };
+  const episodes = items
+    .filter((item) => item.type === 'episode')
+    .flatMap((item) => toRatingsEpisode(item) ?? []);
+
+  return { movies, shows, seasons, episodes };
 }
