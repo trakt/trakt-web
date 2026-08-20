@@ -256,6 +256,82 @@ describe('TraktJsonParser', () => {
       });
     });
 
+    it('respects an explicit show type', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          tmdb_id: '67324',
+          type: 'show',
+          watched_at: '2026-08-14T10:47:49.000Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'show',
+        ids: { tmdb: 67324 },
+      });
+    });
+
+    it('respects an explicit episode type', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          tmdb_id: '66452',
+          type: 'episode',
+          watched_at: '2026-08-15T08:20:22.419Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { tmdb: 66452 },
+      });
+    });
+
+    it('treats series as an alias for show', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        { imdb_id: 'tt0306414', type: 'series' },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result[0]).toMatchObject({ type: 'show' });
+    });
+
+    it('defaults to movie when no type is given', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        { imdb_id: 'tt1374992', watched_at: '2024-01-19T19:14:56Z' },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result[0]).toMatchObject({ type: 'movie' });
+    });
+
+    it('respects an explicit type in the nested id format', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          id: { tmdb: 1438 },
+          type: 'show',
+          watched_at: '2026-08-15T08:20:22.419Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'show',
+        ids: { tmdb: 1438 },
+      });
+    });
+
     it('coerces string numeric ids to numbers', async () => {
       mockParseJsonFile.mockResolvedValue([
         {
