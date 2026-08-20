@@ -427,6 +427,107 @@ describe('TraktJsonParser', () => {
     });
   });
 
+  describe('parse – multiple actions per entry', () => {
+    it('fans out an entry carrying both a watch and a rating', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          tmdb_id: 1438,
+          type: 'show',
+          watched_at: '2026-08-11T07:22:04.000Z',
+          rating: 8,
+          rated_at: '2026-08-11T07:22:03.000Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result).toHaveLength(2);
+      expect(result).toEqual([
+        expect.objectContaining({
+          action: 'history',
+          type: 'show',
+          watched_at: '2026-08-11T07:22:04.000Z',
+        }),
+        expect.objectContaining({
+          action: 'ratings',
+          type: 'show',
+          rating: 8,
+        }),
+      ]);
+    });
+
+    it('fans out the documented history, watchlist and rating example', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          imdb_id: 'tt0068646',
+          type: 'movie',
+          watched_at: '2024-10-25T20:00:00Z',
+          watchlisted_at: '2024-10-01T10:00:00Z',
+          rating: 6,
+          rated_at: '2024-10-26T21:00:00Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('export.json')]);
+
+      expect(result.map((item) => item.action)).toEqual([
+        'history',
+        'ratings',
+        'watchlist',
+      ]);
+    });
+
+    it('keeps a single item when the action is explicit', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          imdb_id: 'tt0068646',
+          action: 'ratings',
+          watched_at: '2024-10-25T20:00:00Z',
+          rating: 6,
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('ratings.json')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]?.action).toBe('ratings');
+    });
+
+    it('does not infer a watch from created_at alongside another action', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          imdb_id: 'tt0068646',
+          is_watchlisted: true,
+          created_at: '2024-10-01T10:00:00Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('watchlist.json')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]?.action).toBe('watchlist');
+      expect(result[0]?.watched_at).toBeUndefined();
+    });
+
+    it('emits one item per action for a nested entry', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          watched_at: '2026-08-15T08:20:22.419Z',
+          rating: 9,
+          show: { title: 'The Wire', year: 2002, ids: { imdb: 'tt0306414' } },
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('export.json')]);
+
+      expect(result.map((item) => item.action)).toEqual([
+        'history',
+        'ratings',
+      ]);
+      expect(result.every((item) => item.type === 'show')).toBe(true);
+    });
+  });
+
   describe('parse – ZIP export', () => {
     function setupZip(files: Record<string, unknown[]>) {
       const encoder = new TextEncoder();

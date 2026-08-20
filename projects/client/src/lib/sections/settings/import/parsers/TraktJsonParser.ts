@@ -17,6 +17,11 @@ type TraktJsonIds = {
   tvdb?: string | number;
 };
 
+type ImportItemBase = Omit<
+  UniversalImportItem,
+  'action' | 'watched_at' | 'rating' | 'rated_at'
+>;
+
 type TraktJsonEntry = {
   type?: string;
   action?: string;
@@ -53,6 +58,13 @@ function inferType(entry: TraktJsonEntry): ImportType {
   return 'movie';
 }
 
+function isWatchlisted(entry: TraktJsonEntry): boolean {
+  return entry.listed_at !== undefined ||
+    entry.watchlisted_at !== undefined ||
+    entry.is_watchlisted === true ||
+    entry.is_watchlisted === 'true';
+}
+
 function inferAction(entry: TraktJsonEntry): ImportAction {
   if (entry.action) {
     const normalized = entry.action.toLowerCase();
@@ -63,12 +75,7 @@ function inferAction(entry: TraktJsonEntry): ImportAction {
   if (entry.rated_at !== undefined || entry.rating !== undefined) {
     return 'ratings';
   }
-  if (
-    entry.listed_at !== undefined ||
-    entry.watchlisted_at !== undefined ||
-    entry.is_watchlisted === true ||
-    entry.is_watchlisted === 'true'
-  ) return 'watchlist';
+  if (isWatchlisted(entry)) return 'watchlist';
   return 'history';
 }
 
@@ -97,21 +104,12 @@ function isFlatEntry(entry: TraktJsonEntry): boolean {
   );
 }
 
-function parseFlatEntry(entry: TraktJsonEntry): UniversalImportItem | null {
-  const ids = entry.id ?? {};
-  const action = inferAction(entry);
-
+function toFlatBase(entry: TraktJsonEntry): ImportItemBase {
   return {
-    action,
     type: resolveType(entry),
-    ids: toImportIds(ids),
+    ids: toImportIds(entry.id ?? {}),
     title: entry.title,
     year: entry.year,
-    watched_at: toWatchedAt(
-      entry.watched_at ?? entry.date_watched ?? entry.created_at,
-    ),
-    rating: entry.rating,
-    rated_at: toImportISOString(entry.rated_at),
   };
 }
 
@@ -127,13 +125,8 @@ function isMultiIdFlatEntry(entry: TraktJsonEntry): boolean {
   );
 }
 
-function parseMultiIdFlatEntry(
-  entry: TraktJsonEntry,
-): UniversalImportItem | null {
-  const action = inferAction(entry);
-
+function toMultiIdFlatBase(entry: TraktJsonEntry): ImportItemBase {
   return {
-    action,
     type: resolveType(entry),
     ids: toImportIds({
       trakt: entry.trakt_id,
@@ -143,46 +136,75 @@ function parseMultiIdFlatEntry(
     }),
     title: entry.title,
     year: entry.year,
-    watched_at: toWatchedAt(
-      entry.watched_at ?? entry.date_watched ?? entry.created_at,
-    ),
-    rating: entry.rating,
-    rated_at: toImportISOString(entry.rated_at),
   };
 }
 
-function parseTraktJsonEntry(
-  entry: TraktJsonEntry,
-): UniversalImportItem | null {
-  if (isFlatEntry(entry)) return parseFlatEntry(entry);
-  if (isMultiIdFlatEntry(entry)) return parseMultiIdFlatEntry(entry);
-
+function toNestedBase(entry: TraktJsonEntry): ImportItemBase {
   const type = resolveType(entry);
-  const action = inferAction(entry);
-
   const media = type === 'episode' ? entry.show : (entry.movie ?? entry.show);
   const episodeData = type === 'episode' ? entry.episode : undefined;
-
   const ids: TraktJsonIds = episodeData?.ids ?? media?.ids ?? {};
 
   return {
-    action,
     type,
     ids: toImportIds(ids),
     title: media?.title,
     year: media?.year,
-    watched_at: toWatchedAt(entry.watched_at),
-    rating: entry.rating,
-    rated_at: toImportISOString(entry.rated_at),
     season: episodeData?.season,
     episode: episodeData?.number,
   };
 }
 
+function toEntryBase(entry: TraktJsonEntry): ImportItemBase {
+  if (isFlatEntry(entry)) return toFlatBase(entry);
+  if (isMultiIdFlatEntry(entry)) return toMultiIdFlatBase(entry);
+  return toNestedBase(entry);
+}
+
+function parseTraktJsonEntry(entry: TraktJsonEntry): UniversalImportItem[] {
+  const base = toEntryBase(entry);
+  const watchedAt = toWatchedAt(entry.watched_at ?? entry.date_watched);
+  const ratedAt = toImportISOString(entry.rated_at);
+
+  if (entry.action) {
+    return [{
+      ...base,
+      action: inferAction(entry),
+      watched_at: watchedAt ?? toWatchedAt(entry.created_at),
+      rating: entry.rating,
+      rated_at: ratedAt,
+    }];
+  }
+
+  const items: UniversalImportItem[] = [
+    ...watchedAt
+      ? [{ ...base, action: 'history' as const, watched_at: watchedAt }]
+      : [],
+    ...entry.rating != null
+      ? [{
+        ...base,
+        action: 'ratings' as const,
+        rating: entry.rating,
+        rated_at: ratedAt,
+      }]
+      : [],
+    ...isWatchlisted(entry) ? [{ ...base, action: 'watchlist' as const }] : [],
+  ];
+
+  if (items.length > 0) return items;
+
+  return [{
+    ...base,
+    action: inferAction(entry),
+    watched_at: toWatchedAt(entry.created_at),
+    rating: entry.rating,
+    rated_at: ratedAt,
+  }];
+}
+
 function parseEntries(entries: TraktJsonEntry[]): UniversalImportItem[] {
   return entries
-    .map(parseTraktJsonEntry)
-    .filter((item): item is UniversalImportItem => item !== null)
+    .flatMap(parseTraktJsonEntry)
     .filter(isValidItem);
 }
 
