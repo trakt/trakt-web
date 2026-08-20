@@ -4,7 +4,6 @@
   import { spoilMeAnyway } from "$lib/features/spoilers/components/spoilMeAnyway";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import { NOOP_FN } from "$lib/utils/constants";
   import { Marked } from "marked";
   import { createHeadingRenderer } from "./marked/createHeadingRenderer";
   import { createParagraphRenderer } from "./marked/createParagraphRenderer";
@@ -30,8 +29,6 @@
       },
     }),
   );
-
-  const spoilAction = $derived(type === "preview" ? NOOP_FN : spoilMeAnyway);
 </script>
 
 {#snippet commentText()}
@@ -47,7 +44,7 @@
     <div
       class="trakt-comment"
       class:trakt-spoiler={comment.isSpoiler}
-      use:spoilAction
+      use:spoilMeAnyway
     >
       {@render commentText()}
     </div>
@@ -60,7 +57,6 @@
         use:lineClamp={{ lines: maxPreviewLines }}
         style="--max-lines: {maxPreviewLines}"
         class:trakt-spoiler={comment.isSpoiler}
-        use:spoilAction
       >
         {@render commentText()}
       </div>

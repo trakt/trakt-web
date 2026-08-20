@@ -8,10 +8,12 @@ import { server } from '$mocks/server.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitFor } from '@testing-library/svelte';
 import { http, HttpResponse } from 'msw';
+import { BehaviorSubject } from 'rxjs';
 import { describe, expect, it } from 'vitest';
-import { useSpoilerAction } from './useSpoilerAction.ts';
+import { useMediaSpoiler } from '../useMediaSpoiler.ts';
+import { spoiler } from './spoiler.ts';
 
-describe('action: useSpoilerAction', () => {
+describe('action: spoiler', () => {
   it('should add spoiler class when isSpoilerHidden is true', async () => {
     setAuthorization(true);
 
@@ -38,14 +40,14 @@ describe('action: useSpoilerAction', () => {
     );
 
     const node = document.createElement('div');
-    const { spoiler } = await renderStore(() =>
-      useSpoilerAction({
+    const { isSpoilerHidden } = await renderStore(() =>
+      useMediaSpoiler({
         type: 'show',
         media: { id: 1337 },
       })
     );
 
-    spoiler(node);
+    spoiler(node, isSpoilerHidden);
 
     await waitFor(() =>
       expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(true)
@@ -56,15 +58,15 @@ describe('action: useSpoilerAction', () => {
     setAuthorization(true);
 
     const node = document.createElement('div');
-    const { spoiler } = await renderStore(() =>
-      useSpoilerAction({
+    const { isSpoilerHidden } = await renderStore(() =>
+      useMediaSpoiler({
         type: 'movie',
         media: { id: 1337 },
       })
     );
 
     node.classList.add(SPOILER_CLASS_NAME);
-    spoiler(node);
+    spoiler(node, isSpoilerHidden);
 
     expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(false);
   });
@@ -95,8 +97,8 @@ describe('action: useSpoilerAction', () => {
     );
 
     const node = document.createElement('div');
-    const { spoiler } = await renderStore(() =>
-      useSpoilerAction({
+    const { isSpoilerHidden } = await renderStore(() =>
+      useMediaSpoiler({
         type: 'movie',
         media: {
           id: Number(
@@ -106,15 +108,44 @@ describe('action: useSpoilerAction', () => {
       })
     );
 
-    // Attach the spoiler action
-    spoiler(node);
+    spoiler(node, isSpoilerHidden);
 
-    // Add the class to the node
     node.classList.add(SPOILER_CLASS_NAME);
 
-    // Then verify it is removed
     await waitFor(
       () => expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(false),
     );
+  });
+
+  it('should follow the new source when the media changes', () => {
+    const node = document.createElement('div');
+    const previous = new BehaviorSubject(false);
+    const next = new BehaviorSubject(true);
+
+    const action = spoiler(node, previous);
+    expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(false);
+
+    action.update(next);
+    expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(true);
+
+    next.next(false);
+    expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(false);
+
+    action.destroy();
+  });
+
+  it('should stop following the previous source after an update', () => {
+    const node = document.createElement('div');
+    const previous = new BehaviorSubject(false);
+    const next = new BehaviorSubject(false);
+
+    const action = spoiler(node, previous);
+    action.update(next);
+
+    previous.next(true);
+
+    expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(false);
+
+    action.destroy();
   });
 });

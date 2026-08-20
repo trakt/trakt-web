@@ -8,7 +8,7 @@ describe('action: spoilMeAnyway', () => {
     const commentNode = document.createElement('div');
     commentNode.classList.add(SPOILER_CLASS_NAME);
 
-    const component = await renderStore(() => spoilMeAnyway(commentNode));
+    const component = await renderStore(() => spoilMeAnyway(commentNode, true));
     commentNode.dispatchEvent(new Event('click'));
 
     expect(commentNode.classList).not.toContain(SPOILER_CLASS_NAME);
@@ -22,10 +22,24 @@ describe('action: spoilMeAnyway', () => {
     commentNode.appendChild(spoilerNode);
     spoilerNode.classList.add(SPOILER_CLASS_NAME);
 
-    const component = await renderStore(() => spoilMeAnyway(commentNode));
+    const component = await renderStore(() => spoilMeAnyway(commentNode, true));
     spoilerNode.dispatchEvent(new Event('click', { bubbles: true }));
 
     expect(spoilerNode.classList).not.toContain(SPOILER_CLASS_NAME);
+
+    component.destroy();
+  });
+
+  it('should keep spoilers when the variant is persistent', async () => {
+    const commentNode = document.createElement('div');
+    commentNode.classList.add(SPOILER_CLASS_NAME);
+
+    const component = await renderStore(() =>
+      spoilMeAnyway(commentNode, false)
+    );
+    commentNode.dispatchEvent(new Event('click'));
+
+    expect(commentNode.classList).toContain(SPOILER_CLASS_NAME);
 
     component.destroy();
   });
