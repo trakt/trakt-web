@@ -9,6 +9,7 @@
     tabindex?: number;
     icon?: Snippet;
     end?: Snippet;
+    action?: Snippet;
     subtitle?: Snippet;
     style?: "ghost" | "flat";
     variant?: "primary" | "secondary";
@@ -26,6 +27,7 @@
     children,
     icon,
     end,
+    action,
     subtitle,
     ...props
   }: DropdownItemProps | DropdownItemAnchorProps = $props();
@@ -41,6 +43,10 @@
     (props as DropdownItemAnchorProps).replacestate,
   );
   const target = $derived((props as DropdownItemAnchorProps).target);
+
+  // Keep the action segment's events from reaching the item, so the item's
+  // handler and hover state only respond to the main area.
+  const stopPropagation = (event: Event) => event.stopPropagation();
 
   // FIXME: use button when not href & update selectors in applicable icons
 </script>
@@ -94,6 +100,19 @@
       </div>
     {/if}
   {/if}
+  {#if action}
+    <!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events, a11y_mouse_events_have_key_events -->
+    <div
+      class="item-action"
+      onclick={stopPropagation}
+      onmouseover={stopPropagation}
+      onmouseout={stopPropagation}
+      onfocusin={stopPropagation}
+      onfocusout={stopPropagation}
+    >
+      {@render action()}
+    </div>
+  {/if}
 </li>
 
 <style lang="scss">
@@ -119,9 +138,7 @@
     justify-self: center;
 
     display: flex;
-    flex-direction: var(--dropdown-item-direction, row);
     align-items: center;
-    justify-content: var(--dropdown-item-justify, flex-start);
     gap: var(--icon-gap);
 
     cursor: pointer;
@@ -220,6 +237,52 @@
       text-decoration: none;
     }
 
+    .item-action {
+      display: flex;
+      align-items: stretch;
+      align-self: stretch;
+      margin-inline-start: auto;
+      margin-block: calc(-1 * var(--item-padding-block));
+      margin-inline-end: calc(-1 * var(--item-padding-inline));
+      border-inline-start: var(--ni-1) solid
+        var(--color-option-list-separator);
+
+      transition: var(--transition-increment) ease-in-out;
+      transition-property: background;
+
+      :global(.trakt-link) {
+        width: auto;
+        height: auto;
+        padding: 0 var(--item-padding-inline);
+
+        display: flex;
+        align-items: center;
+      }
+
+      @include for-mouse {
+        &:hover {
+          background: var(
+            --dropdown-item-background-hover,
+            var(--color-select-item-hover)
+          );
+        }
+      }
+    }
+
+    &:has(.item-action:hover) {
+      --dropdown-item-background-hover: var(
+        --dropdown-item-background,
+        transparent
+      );
+    }
+
+    &:has(.item-action:active) {
+      --dropdown-item-background-active: var(
+        --dropdown-item-background,
+        transparent
+      );
+    }
+
     @mixin variant($color, $bg-color) {
       color: var(--dropdown-item-foreground, #{$color});
 
@@ -280,6 +343,11 @@
       &:focus-visible,
       &:has(> :global(.trakt-link:focus-visible)) {
         outline: var(--border-thickness-xs) solid $outline-color;
+      }
+
+      .item-action:has(:global(.trakt-link:focus-visible)) {
+        outline: var(--border-thickness-xs) solid $outline-color;
+        outline-offset: calc(-1 * var(--border-thickness-xs));
       }
     }
 

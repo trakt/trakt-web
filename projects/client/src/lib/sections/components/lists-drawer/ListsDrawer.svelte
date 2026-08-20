@@ -11,6 +11,8 @@
   import { useAllPersonalLists } from "$lib/stores/useAllPersonalLists";
   import { useListedOnIds } from "$lib/stores/useListedOnIds";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import ViewListLink from "./_internal/ViewListLink.svelte";
   import ListDropdownItem from "./ListDropdownItem.svelte";
 
   const {
@@ -76,7 +78,15 @@
         isWatchlisted={$isWatchlisted}
         onAdd={addToWatchlist}
         onRemove={confirmRemove}
-      />
+      >
+        {#snippet action()}
+          <ViewListLink
+            href={UrlBuilder.lists.watchlist("me")}
+            label={m.link_label_view_watchlist()}
+            tooltip={m.tooltip_view_watchlist()}
+          />
+        {/snippet}
+      </WatchlistButton>
 
       {#if isEmpty && isLoading}
         <LoadingIndicator />
@@ -97,7 +107,9 @@
 
 <style>
   .lists-layout {
-    --dropdown-item-direction: row-reverse;
-    --dropdown-item-justify: space-between;
+    /* The group's list is overflow: hidden, which zeroes its automatic
+       min-size inside the drawer's scroll flexbox - without this wrapper the
+       group shrinks to fit and clips instead of letting the drawer scroll. */
+    flex-shrink: 0;
   }
 </style>
