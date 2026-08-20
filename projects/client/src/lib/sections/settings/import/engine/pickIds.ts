@@ -3,13 +3,16 @@ import type { ImportIds } from '../ImportTypes.ts';
 export type IdPriority = ReadonlyArray<keyof ImportIds>;
 
 export const MOVIE_IDS: IdPriority = ['imdb', 'tmdb', 'trakt'];
-export const SHOW_IDS: IdPriority = ['imdb', 'tvdb', 'trakt'];
-export const EPISODE_IDS: IdPriority = ['tvdb', 'trakt'];
+export const SHOW_IDS: IdPriority = ['imdb', 'tvdb', 'tmdb', 'trakt'];
+export const SEASON_IDS: IdPriority = ['tvdb', 'tmdb', 'trakt'];
+export const EPISODE_IDS: IdPriority = ['tvdb', 'tmdb', 'trakt', 'imdb'];
+
+export type ResolvedIds = Record<string, string | number>;
 
 export function pickIds(
   ids: ImportIds,
   priority: IdPriority,
-): Record<string, string | number> | null {
+): ResolvedIds | null {
   const key = priority.find((k) => ids[k] != null);
   if (!key) return null;
 

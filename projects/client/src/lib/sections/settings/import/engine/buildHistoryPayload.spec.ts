@@ -271,7 +271,7 @@ describe('buildHistoryPayload', () => {
       expect(result.shows).toHaveLength(0);
     });
 
-    it('should fall back to show via imdb when no episode ids resolve', () => {
+    it('should resolve an episode carrying only an imdb id as an episode', () => {
       const item: UniversalImportItem = {
         action: 'history',
         type: 'episode',
@@ -281,11 +281,11 @@ describe('buildHistoryPayload', () => {
 
       const result = buildHistoryPayload([item]);
 
-      expect(result.episodes).toHaveLength(0);
-      expect(result.shows).toEqual([{
+      expect(result.episodes).toEqual([{
         ids: { imdb: 'tt9999999' },
         watched_at,
       }]);
+      expect(result.shows).toEqual([]);
     });
 
     it('should skip an episode with no usable ids', () => {
@@ -300,6 +300,47 @@ describe('buildHistoryPayload', () => {
 
       expect(result.episodes).toHaveLength(0);
       expect(result.shows).toHaveLength(0);
+    });
+  });
+
+  describe('seasons', () => {
+    it('should map a season item into the seasons bucket', () => {
+      const result = buildHistoryPayload([{
+        action: 'history',
+        type: 'season',
+        ids: { tvdb: 12345 },
+        watched_at: '2026-08-14T10:47:49.000Z',
+      }]);
+
+      expect(result.seasons).toEqual([{
+        ids: { tvdb: 12345 },
+        watched_at: '2026-08-14T10:47:49.000Z',
+      }]);
+      expect(result.shows).toEqual([]);
+      expect(result.movies).toEqual([]);
+    });
+
+    it('should resolve a season by tmdb id', () => {
+      const result = buildHistoryPayload([{
+        action: 'history',
+        type: 'season',
+        ids: { tmdb: 67324 },
+      }]);
+
+      expect(result.seasons).toEqual([{
+        ids: { tmdb: 67324 },
+        watched_at: undefined,
+      }]);
+    });
+
+    it('should drop a season carrying only an imdb id', () => {
+      const result = buildHistoryPayload([{
+        action: 'history',
+        type: 'season',
+        ids: { imdb: 'tt0306414' },
+      }]);
+
+      expect(result.seasons).toEqual([]);
     });
   });
 });

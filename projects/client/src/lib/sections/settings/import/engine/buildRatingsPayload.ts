@@ -1,50 +1,51 @@
 import type { RatingsSyncRequest } from '@trakt/api';
-import type { UniversalImportItem } from '../ImportTypes.ts';
-import { MOVIE_IDS, pickIds, SHOW_IDS } from './pickIds.ts';
+import type { ImportType, UniversalImportItem } from '../ImportTypes.ts';
+import {
+  EPISODE_IDS,
+  type IdPriority,
+  MOVIE_IDS,
+  pickIds,
+  type ResolvedIds,
+  SEASON_IDS,
+  SHOW_IDS,
+} from './pickIds.ts';
 
-type RatingsMovie = NonNullable<RatingsSyncRequest['movies']>[number];
-type RatingsShow = NonNullable<RatingsSyncRequest['shows']>[number];
+type RatingsEntry = {
+  rating: number;
+  ids: ResolvedIds;
+  rated_at?: string;
+};
 
 function clampRating(rating: number): number {
   return Math.min(10, Math.max(1, Math.round(rating)));
 }
 
-function toRatingsMovie(
+function toRatingsEntry(
   { ids, rating, rated_at }: UniversalImportItem,
-): RatingsMovie | null {
+  priority: IdPriority,
+): RatingsEntry | null {
   if (rating == null) return null;
-  const resolvedIds = pickIds(ids, MOVIE_IDS);
+  const resolvedIds = pickIds(ids, priority);
   if (!resolvedIds) return null;
   return {
     rating: clampRating(rating),
-    ids: resolvedIds as never,
-    ...(rated_at ? { rated_at } : {}),
-  };
-}
-
-function toRatingsShow(
-  { ids, rating, rated_at }: UniversalImportItem,
-): RatingsShow | null {
-  if (rating == null) return null;
-  const resolvedIds = pickIds(ids, SHOW_IDS);
-  if (!resolvedIds) return null;
-  return {
-    rating: clampRating(rating),
-    ids: resolvedIds as never,
+    ids: resolvedIds,
     ...(rated_at ? { rated_at } : {}),
   };
 }
 
 export function buildRatingsPayload(
-  items: UniversalImportItem[],
+  items: ReadonlyArray<UniversalImportItem>,
 ): RatingsSyncRequest {
-  const movies = items
-    .filter((item) => item.type === 'movie')
-    .flatMap((item) => toRatingsMovie(item) ?? []);
+  const collect = (type: ImportType, priority: IdPriority) =>
+    items
+      .filter((item) => item.type === type)
+      .flatMap((item) => toRatingsEntry(item, priority) ?? []);
 
-  const shows = items
-    .filter((item) => item.type === 'show')
-    .flatMap((item) => toRatingsShow(item) ?? []);
-
-  return { movies, shows };
+  return {
+    movies: collect('movie', MOVIE_IDS),
+    shows: collect('show', SHOW_IDS),
+    seasons: collect('season', SEASON_IDS),
+    episodes: collect('episode', EPISODE_IDS),
+  } as RatingsSyncRequest;
 }

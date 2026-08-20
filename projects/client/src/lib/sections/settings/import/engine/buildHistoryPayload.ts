@@ -2,38 +2,48 @@ import type { HistoryAddRequest } from '@trakt/api';
 import {
   DEFAULT_EPISODE_MATCH_MODE,
   type EpisodeMatchMode,
+  type ImportType,
   type UniversalImportItem,
 } from '../ImportTypes.ts';
-import { EPISODE_IDS, MOVIE_IDS, pickIds, SHOW_IDS } from './pickIds.ts';
+import {
+  EPISODE_IDS,
+  type IdPriority,
+  MOVIE_IDS,
+  pickIds,
+  type ResolvedIds,
+  SEASON_IDS,
+  SHOW_IDS,
+} from './pickIds.ts';
 
-type HistoryMovie = NonNullable<HistoryAddRequest['movies']>[number];
-type HistoryShow = NonNullable<HistoryAddRequest['shows']>[number];
-type HistoryEpisode = NonNullable<HistoryAddRequest['episodes']>[number];
+type HistoryEntry =
+  | { ids: ResolvedIds; watched_at?: string }
+  | { title: string; year: number; watched_at?: string };
 
-// Movies never fall back to {title, year}: server-side text matching
-// is too fuzzy and mismatches pollute history. Unresolved movies are
-// dropped instead (resolveMovieIds runs before this).
-function toHistoryMovie(
+function toHistoryEntry(
   { ids, watched_at }: UniversalImportItem,
-): HistoryMovie | null {
-  const resolvedIds = pickIds(ids, MOVIE_IDS);
-  if (resolvedIds) return { ids: resolvedIds as never, watched_at };
+  priority: IdPriority,
+): HistoryEntry | null {
+  const resolvedIds = pickIds(ids, priority);
+  if (resolvedIds) return { ids: resolvedIds, watched_at };
   return null;
 }
 
-function toHistoryShow(
-  { ids, title, year, watched_at }: UniversalImportItem,
-): HistoryShow | null {
-  const resolvedIds = pickIds(ids, SHOW_IDS);
-  if (resolvedIds) return { ids: resolvedIds as never, watched_at };
+// Only shows fall back to {title, year}: server-side text matching is too fuzzy
+// for movies and mismatches pollute history, so unresolved movies are dropped
+// instead (resolveMovieIds runs before this).
+function toHistoryShow(item: UniversalImportItem): HistoryEntry | null {
+  const entry = toHistoryEntry(item, SHOW_IDS);
+  if (entry) return entry;
+
+  const { title, year, watched_at } = item;
   if (title && year) return { title, year, watched_at };
   return null;
 }
 
-// Prefer the episode's own id (tvdb/trakt) over positional resolution: the
-// export's episode id is the exact identity of what was watched and survives
-// season/episode renumbering divergence between TVDB and Trakt. Positional
-// (show id + season/number) is the fallback for episodes carrying no own id.
+// Prefer the episode's own id over positional resolution: the export's episode
+// id is the exact identity of what was watched and survives season/episode
+// renumbering divergence between TVDB and Trakt. Positional (show id +
+// season/number) is the fallback for episodes carrying no own id.
 function hasEpisodeId(item: UniversalImportItem): boolean {
   return pickIds(item.ids, EPISODE_IDS) != null;
 }
@@ -48,6 +58,10 @@ function isPositional(
 type PositionalEpisode = { number: number; watched_at?: string };
 type ShowIds = { tvdb?: number; imdb?: string };
 type ShowGroup = { ids: ShowIds; seasons: Map<number, PositionalEpisode[]> };
+type PositionalShow = {
+  ids: ShowIds;
+  seasons: Array<{ number: number; episodes: PositionalEpisode[] }>;
+};
 
 function toShowIds(item: UniversalImportItem): ShowIds {
   return {
@@ -65,7 +79,7 @@ function toPositionalShows(
   items: ReadonlyArray<
     UniversalImportItem & { season: number; episode: number }
   >,
-): HistoryShow[] {
+): PositionalShow[] {
   const byShow = items.reduce((shows, item) => {
     const key = item.showTvdb != null
       ? `tvdb:${item.showTvdb}`
@@ -86,11 +100,11 @@ function toPositionalShows(
   return [...byShow.values()].map(({ ids, seasons }) => ({
     ids,
     seasons: [...seasons].map(([number, episodes]) => ({ number, episodes })),
-  })) as unknown as HistoryShow[];
+  }));
 }
 
 export function buildHistoryPayload(
-  items: UniversalImportItem[],
+  items: ReadonlyArray<UniversalImportItem>,
   episodeMatch: EpisodeMatchMode = DEFAULT_EPISODE_MATCH_MODE,
 ): HistoryAddRequest {
   const episodeItems = items.filter((item) => item.type === 'episode');
@@ -107,30 +121,24 @@ export function buildHistoryPayload(
   const idEpisodes = episodeItems.filter((item) =>
     !positionalSet.has(item) && hasEpisodeId(item)
   );
-  const leftoverEpisodes = episodeItems.filter((item) =>
-    !positionalSet.has(item) && !hasEpisodeId(item)
-  );
 
-  const movies = items
-    .filter((item) => item.type === 'movie')
-    .flatMap((item) => toHistoryMovie(item) ?? []);
+  const collect = (
+    type: ImportType,
+    map: (item: UniversalImportItem) => HistoryEntry | null,
+  ) =>
+    items
+      .filter((item) => item.type === type)
+      .flatMap((item) => map(item) ?? []);
 
-  const episodes: HistoryEpisode[] = idEpisodes.flatMap(
-    ({ ids, watched_at }) => {
-      const resolvedIds = pickIds(ids, EPISODE_IDS);
-      return resolvedIds ? [{ ids: resolvedIds as never, watched_at }] : [];
-    },
-  );
-
-  const shows: HistoryShow[] = [
-    ...items
-      .filter((item) => item.type === 'show')
-      .flatMap((item) => toHistoryShow(item) ?? []),
-    ...toPositionalShows(positionalEpisodes),
-    ...leftoverEpisodes.flatMap(({ ids, watched_at }) =>
-      ids.imdb ? [{ ids: { imdb: ids.imdb } as never, watched_at }] : []
+  return {
+    movies: collect('movie', (item) => toHistoryEntry(item, MOVIE_IDS)),
+    shows: [
+      ...collect('show', toHistoryShow),
+      ...toPositionalShows(positionalEpisodes),
+    ],
+    seasons: collect('season', (item) => toHistoryEntry(item, SEASON_IDS)),
+    episodes: idEpisodes.flatMap((item) =>
+      toHistoryEntry(item, EPISODE_IDS) ?? []
     ),
-  ];
-
-  return { movies, shows, episodes };
+  } as HistoryAddRequest;
 }

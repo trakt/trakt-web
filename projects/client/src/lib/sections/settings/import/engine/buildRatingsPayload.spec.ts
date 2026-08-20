@@ -149,4 +149,62 @@ describe('buildRatingsPayload', () => {
     expect(result.movies).toHaveLength(0);
     expect(result.shows).toHaveLength(0);
   });
+
+  describe('seasons', () => {
+    it('should map a rated season into the seasons bucket', () => {
+      const result = buildRatingsPayload([{
+        action: 'ratings',
+        type: 'season',
+        ids: { tvdb: 12345 },
+        rating: 8,
+        rated_at: '2026-08-11T07:22:03.000Z',
+      }]);
+
+      expect(result.seasons).toEqual([{
+        rating: 8,
+        ids: { tvdb: 12345 },
+        rated_at: '2026-08-11T07:22:03.000Z',
+      }]);
+      expect(result.shows).toEqual([]);
+    });
+
+    it('should drop a season with no rating', () => {
+      const result = buildRatingsPayload([{
+        action: 'ratings',
+        type: 'season',
+        ids: { tvdb: 12345 },
+      }]);
+
+      expect(result.seasons).toEqual([]);
+    });
+  });
+
+  describe('episodes', () => {
+    it('should map a rated episode into the episodes bucket', () => {
+      const result = buildRatingsPayload([{
+        action: 'ratings',
+        type: 'episode',
+        ids: { tvdb: 7654321 },
+        rating: 9,
+        rated_at: '2026-08-11T07:22:03.000Z',
+      }]);
+
+      expect(result.episodes).toEqual([{
+        rating: 9,
+        ids: { tvdb: 7654321 },
+        rated_at: '2026-08-11T07:22:03.000Z',
+      }]);
+      expect(result.shows).toEqual([]);
+    });
+
+    it('should drop an episode with no rating', () => {
+      const result = buildRatingsPayload([{
+        action: 'ratings',
+        type: 'episode',
+        ids: { tvdb: 7654321 },
+      }]);
+
+      expect(result.episodes).toEqual([]);
+    });
+  });
 });
