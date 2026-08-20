@@ -275,6 +275,25 @@ describe('TraktJsonParser', () => {
       });
     });
 
+    it('respects an explicit season type', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          tvdb_id: '12345',
+          type: 'season',
+          watched_at: '2026-08-14T10:47:49.000Z',
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('history.json')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'season',
+        ids: { tvdb: 12345 },
+      });
+    });
+
     it('respects an explicit episode type', async () => {
       mockParseJsonFile.mockResolvedValue([
         {
@@ -424,6 +443,57 @@ describe('TraktJsonParser', () => {
       const result = await TraktJsonParser.parse([makeFile('movies.json')]);
 
       expect(result).toHaveLength(0);
+    });
+  });
+
+  describe('parse – nested season entries', () => {
+    it('uses the season ids, not the parent show ids', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          rated_at: '2025-09-29T21:35:25.000Z',
+          rating: 7,
+          type: 'season',
+          season: {
+            number: 1,
+            ids: { trakt: 279654, tvdb: 1967072, tmdb: 219370 },
+          },
+          show: {
+            title: 'Marvel Zombies',
+            year: 2025,
+            ids: { trakt: 191189, tvdb: 412428, imdb: 'tt16027014' },
+          },
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('ratings.json')]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'ratings',
+        type: 'season',
+        ids: { trakt: 279654, tvdb: 1967072, tmdb: 219370 },
+        title: 'Marvel Zombies',
+        year: 2025,
+        season: 1,
+        rating: 7,
+      });
+    });
+
+    it('infers the season type from a nested season object', async () => {
+      mockParseJsonFile.mockResolvedValue([
+        {
+          rating: 9,
+          season: { number: 4, ids: { trakt: 432076 } },
+          show: { title: 'The Bear', year: 2022, ids: { trakt: 1 } },
+        },
+      ]);
+
+      const result = await TraktJsonParser.parse([makeFile('ratings.json')]);
+
+      expect(result[0]).toMatchObject({
+        type: 'season',
+        ids: { trakt: 432076 },
+      });
     });
   });
 

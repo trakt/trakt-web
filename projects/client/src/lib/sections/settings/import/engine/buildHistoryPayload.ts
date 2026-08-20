@@ -4,10 +4,17 @@ import {
   type EpisodeMatchMode,
   type UniversalImportItem,
 } from '../ImportTypes.ts';
-import { EPISODE_IDS, MOVIE_IDS, pickIds, SHOW_IDS } from './pickIds.ts';
+import {
+  EPISODE_IDS,
+  MOVIE_IDS,
+  pickIds,
+  SEASON_IDS,
+  SHOW_IDS,
+} from './pickIds.ts';
 
 type HistoryMovie = NonNullable<HistoryAddRequest['movies']>[number];
 type HistoryShow = NonNullable<HistoryAddRequest['shows']>[number];
+type HistorySeason = NonNullable<HistoryAddRequest['seasons']>[number];
 type HistoryEpisode = NonNullable<HistoryAddRequest['episodes']>[number];
 
 // Movies never fall back to {title, year}: server-side text matching
@@ -27,6 +34,14 @@ function toHistoryShow(
   const resolvedIds = pickIds(ids, SHOW_IDS);
   if (resolvedIds) return { ids: resolvedIds as never, watched_at };
   if (title && year) return { title, year, watched_at };
+  return null;
+}
+
+function toHistorySeason(
+  { ids, watched_at }: UniversalImportItem,
+): HistorySeason | null {
+  const resolvedIds = pickIds(ids, SEASON_IDS);
+  if (resolvedIds) return { ids: resolvedIds as never, watched_at };
   return null;
 }
 
@@ -132,5 +147,9 @@ export function buildHistoryPayload(
     ),
   ];
 
-  return { movies, shows, episodes };
+  const seasons = items
+    .filter((item) => item.type === 'season')
+    .flatMap((item) => toHistorySeason(item) ?? []);
+
+  return { movies, shows, seasons, episodes };
 }

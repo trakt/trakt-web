@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { EPISODE_IDS, MOVIE_IDS, pickIds, SHOW_IDS } from './pickIds.ts';
+import {
+  EPISODE_IDS,
+  MOVIE_IDS,
+  pickIds,
+  SEASON_IDS,
+  SHOW_IDS,
+} from './pickIds.ts';
 
 describe('pickIds', () => {
   describe('with MOVIE_IDS priority', () => {
@@ -41,6 +47,24 @@ describe('pickIds', () => {
       expect(pickIds({ tmdb: 67324, trakt: 6 }, SHOW_IDS)).toEqual({
         tmdb: 67324,
       });
+    });
+  });
+
+  describe('with SEASON_IDS priority', () => {
+    it('should return tvdb first when available', () => {
+      expect(pickIds({ tvdb: 12, tmdb: 34, trakt: 56 }, SEASON_IDS)).toEqual({
+        tvdb: 12,
+      });
+    });
+
+    it('should fall back to tmdb when tvdb is absent', () => {
+      expect(pickIds({ tmdb: 34, trakt: 56 }, SEASON_IDS)).toEqual({
+        tmdb: 34,
+      });
+    });
+
+    it('should return null when only imdb is present (not in season priority)', () => {
+      expect(pickIds({ imdb: 'tt0000000' }, SEASON_IDS)).toBeNull();
     });
   });
 

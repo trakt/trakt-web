@@ -65,6 +65,7 @@ function toType(value?: string): ImportType {
     normalized === 'show' || normalized === 'series' ||
     normalized === 'tv series'
   ) return 'show';
+  if (normalized === 'season') return 'season';
   if (normalized === 'episode') return 'episode';
   return 'movie';
 }

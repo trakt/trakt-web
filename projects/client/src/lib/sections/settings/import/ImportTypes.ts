@@ -22,7 +22,7 @@ export type EpisodeMatchMode = 'id' | 'positional';
 
 export const DEFAULT_EPISODE_MATCH_MODE: EpisodeMatchMode = 'id';
 
-export type ImportType = 'movie' | 'show' | 'episode';
+export type ImportType = 'movie' | 'show' | 'season' | 'episode';
 
 export type ImportStatus =
   | 'idle'
