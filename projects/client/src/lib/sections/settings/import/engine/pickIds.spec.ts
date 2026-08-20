@@ -43,10 +43,14 @@ describe('pickIds', () => {
       });
     });
 
-    it('should fall back to tmdb when imdb and tvdb are absent', () => {
-      expect(pickIds({ tmdb: 67324, trakt: 6 }, SHOW_IDS)).toEqual({
-        tmdb: 67324,
+    it('should prefer trakt over tmdb', () => {
+      expect(pickIds({ trakt: 6, tmdb: 67324 }, SHOW_IDS)).toEqual({
+        trakt: 6,
       });
+    });
+
+    it('should fall back to tmdb when no other id is present', () => {
+      expect(pickIds({ tmdb: 67324 }, SHOW_IDS)).toEqual({ tmdb: 67324 });
     });
   });
 
@@ -57,9 +61,9 @@ describe('pickIds', () => {
       });
     });
 
-    it('should fall back to tmdb when tvdb is absent', () => {
-      expect(pickIds({ tmdb: 34, trakt: 56 }, SEASON_IDS)).toEqual({
-        tmdb: 34,
+    it('should prefer trakt over tmdb', () => {
+      expect(pickIds({ trakt: 56, tmdb: 34 }, SEASON_IDS)).toEqual({
+        trakt: 56,
       });
     });
 
@@ -81,18 +85,30 @@ describe('pickIds', () => {
       });
     });
 
-    it('should fall back to tmdb when tvdb is absent', () => {
-      expect(pickIds({ tmdb: 66452, trakt: 88 }, EPISODE_IDS)).toEqual({
-        tmdb: 66452,
+    it('should prefer trakt over tmdb', () => {
+      expect(pickIds({ trakt: 88, tmdb: 66452 }, EPISODE_IDS)).toEqual({
+        trakt: 88,
       });
+    });
+
+    it('should fall back to tmdb when tvdb and trakt are absent', () => {
+      expect(pickIds({ tmdb: 66452 }, EPISODE_IDS)).toEqual({ tmdb: 66452 });
     });
 
     it('should fall back to trakt when tvdb and tmdb are absent', () => {
       expect(pickIds({ trakt: 88 }, EPISODE_IDS)).toEqual({ trakt: 88 });
     });
 
-    it('should return null when only imdb is present (not in episode priority)', () => {
-      expect(pickIds({ imdb: 'tt0000000' }, EPISODE_IDS)).toBeNull();
+    it('should fall back to imdb when no other id is present', () => {
+      expect(pickIds({ imdb: 'tt0000000' }, EPISODE_IDS)).toEqual({
+        imdb: 'tt0000000',
+      });
+    });
+
+    it('should prefer trakt over imdb', () => {
+      expect(pickIds({ trakt: 88, imdb: 'tt0000000' }, EPISODE_IDS)).toEqual({
+        trakt: 88,
+      });
     });
   });
 });
