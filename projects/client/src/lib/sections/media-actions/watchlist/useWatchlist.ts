@@ -14,20 +14,14 @@ import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { useIsWatchlisted } from '$lib/stores/useIsWatchlisted.ts';
 import { BehaviorSubject } from 'rxjs';
 
-/**
- * The confirmation toast's "change list" link opens the manage-lists drawer,
- * which needs a full `MediaEntry` (slug/title). A watchlist mutation may run
- * on a minimal `{ id }` (bulk actions), so narrow to a listable entry and only
- * offer the link when the identity is actually present.
- */
-function toListableEntry(item: { id: number }): MediaEntry | undefined {
+// The "change list" drawer needs a full entry; bulk mutations may only carry
+// an `{ id }`.
+function isListableEntry(item: { id: number }): item is MediaEntry {
   const candidate = item as Partial<MediaEntry>;
-  const isListable = candidate.type === 'movie' || candidate.type === 'show';
-  const hasIdentity = typeof candidate.slug === 'string' &&
-    typeof candidate.title === 'string' &&
-    typeof candidate.id === 'number';
 
-  return isListable && hasIdentity ? candidate as MediaEntry : undefined;
+  return (candidate.type === 'movie' || candidate.type === 'show') &&
+    typeof candidate.slug === 'string' &&
+    typeof candidate.title === 'string';
 }
 
 export function useWatchlist(props: MediaStoreProps) {
@@ -40,10 +34,10 @@ export function useWatchlist(props: MediaStoreProps) {
 
   const ids = media.map(({ id }) => id);
 
-  // Toasts describe a single item: a full entry unlocks the "change list"
-  // link and names the item; bulk mutations fall back to a generic message.
   const soleItem = media.length === 1 ? media.at(0) : undefined;
-  const singleEntry = soleItem ? toListableEntry(soleItem) : undefined;
+  const singleEntry = soleItem && isListableEntry(soleItem)
+    ? soleItem
+    : undefined;
 
   const { isWatchlisted } = useIsWatchlisted(props);
   const { isQueued } = useIsQueued({
@@ -79,7 +73,6 @@ export function useWatchlist(props: MediaStoreProps) {
         ? {
           text: m.action_toast_action_change_list(),
           label: m.action_toast_label_change_list({ title: singleEntry.title }),
-          style: 'outline',
           onAction: () =>
             manageListsDrawerStore.open({
               media: singleEntry,
@@ -120,7 +113,6 @@ export function useWatchlist(props: MediaStoreProps) {
       action: {
         text: m.button_text_undo(),
         label: m.action_toast_label_undo(),
-        style: 'outline',
         onAction: addToWatchlist,
       },
     });

@@ -1,12 +1,12 @@
-import type { ActionToast } from '$lib/features/action-toast/models/ActionToast.ts';
 import { useAddNoteDrawer } from '$lib/features/notes/useAddNoteDrawer.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
-import { server } from '$mocks/server.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
+import { lastActionToast } from '$test/beds/action-toast/lastActionToast.ts';
+import { captureRequests } from '$test/beds/request/captureRequests.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { firstValueFrom } from 'rxjs';
@@ -16,28 +16,10 @@ import { type FavoritesStoreProps, useFavorites } from './useFavorites.ts';
 vi.mock('$lib/stores/useInvalidator.ts');
 vi.mock('$lib/features/notes/useAddNoteDrawer.ts');
 
-// Capture what the hook hands to the toast engine so the test can invoke the
-// "Undo" action exactly as the toast host would.
 const { notify } = vi.hoisted(() => ({ notify: vi.fn() }));
 vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
   useActionToast: () => ({ notify, dismiss: vi.fn() }),
 }));
-
-/** Records request method + path for every request MSW handles during `run`. */
-async function captureRequests(run: () => Promise<void>): Promise<string[]> {
-  const requests: string[] = [];
-  const record = ({ request }: { request: Request }) => {
-    requests.push(`${request.method} ${new URL(request.url).pathname}`);
-  };
-
-  server.events.on('request:start', record);
-  try {
-    await run();
-  } finally {
-    server.events.removeListener('request:start', record);
-  }
-  return requests;
-}
 
 describe('useFavorites', () => {
   const invalidate = vi.fn(function () {});
@@ -183,12 +165,9 @@ describe('useFavorites', () => {
       const removeRequests = await captureRequests(() => removeFromFavorites());
       expect(removeRequests).toContain('POST /sync/favorites/remove');
 
-      const toast = notify.mock.calls.at(-1)?.[0] as
-        | Omit<ActionToast, 'id'>
-        | undefined;
+      const toast = lastActionToast(notify);
       expect(toast?.action).toBeDefined();
 
-      // Undo must fire the *add* endpoint - the real reversal.
       const undoRequests = await captureRequests(async () => {
         await toast?.action?.onAction();
       });

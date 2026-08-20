@@ -4,6 +4,10 @@
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import MessageWithBold from "$lib/components/text/MessageWithBold.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
+  import {
+    useMedia,
+    WellKnownMediaQuery,
+  } from "$lib/stores/css/useMedia.ts";
   import { onMount } from "svelte";
   import { backOut, cubicIn } from "svelte/easing";
   import { fly } from "svelte/transition";
@@ -12,11 +16,7 @@
     text: string;
     label: string;
     onAction: () => void;
-    /**
-     * `outline` renders a purple outlined pill (confirmation toasts, e.g.
-     * "Undo" / "Change list"); `button` (default) is the filled call-to-action.
-     */
-    style?: "outline" | "button";
+    style?: "outline" | "flat";
   };
 
   type SnackbarProps = {
@@ -43,20 +43,19 @@
 
   let navbarHeight = $state(0);
 
-  // A cute bottom entrance: slide up from below the screen with a soft
-  // overshoot on the way in, then drop back down on the way out. Collapses to
-  // a quick fade when the viewer prefers reduced motion.
-  const prefersReducedMotion =
-    globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ??
-      false;
+  const prefersReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
 
-  const enterTransition = prefersReducedMotion
-    ? { y: 0, duration: 120 }
-    : { y: 150, duration: 400, easing: backOut };
+  const enterTransition = $derived(
+    $prefersReducedMotion
+      ? { y: 0, duration: 120 }
+      : { y: 150, duration: 400, easing: backOut },
+  );
 
-  const exitTransition = prefersReducedMotion
-    ? { y: 0, duration: 120 }
-    : { y: 150, duration: 250, easing: cubicIn };
+  const exitTransition = $derived(
+    $prefersReducedMotion
+      ? { y: 0, duration: 120 }
+      : { y: 150, duration: 250, easing: cubicIn },
+  );
 
   onMount(() => {
     let currentNavbar: Element | null = null;
@@ -96,27 +95,16 @@
 
 {#snippet actionButton()}
   {#if action}
-    {#if action.style === "outline"}
-      <Button
-        style="outline"
-        size="small"
-        color="purple"
-        label={action.label}
-        onclick={action.onAction}
-      >
-        {action.text}
-      </Button>
-    {:else}
-      <Button
-        size="small"
-        variant="primary"
-        color="purple"
-        label={action.label}
-        onclick={action.onAction}
-      >
-        {action.text}
-      </Button>
-    {/if}
+    <Button
+      size="small"
+      variant="primary"
+      color="purple"
+      style={action.style ?? "flat"}
+      label={action.label}
+      onclick={action.onAction}
+    >
+      {action.text}
+    </Button>
   {/if}
 {/snippet}
 
@@ -157,6 +145,8 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-snackbar {
+    --color-outline-stroke: var(--color-snackbar-action-stroke);
+
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
@@ -171,8 +161,6 @@
     gap: var(--gap-micro);
 
     background-color: var(--color-modal-background);
-    // The floating background can melt into a dark page, so a hairline border
-    // plus the raised shadow give the toast a defined, lifted edge.
     border: var(--ni-1) solid var(--color-border);
     border-radius: var(--border-radius-l);
     box-shadow: var(--shadow-raised);
@@ -184,16 +172,6 @@
       display: flex;
       align-items: center;
       gap: var(--ni-12);
-    }
-
-    // Toast action pill: a soft 1px purple stroke with plain foreground text
-    // (purple-on-purple read as garish). The stroke token adapts per theme so
-    // it stays crisp on both the light and dark toast surface. Scoped here on
-    // purpose; the shared outline Button still needs a global restyle (tracked
-    // separately).
-    :global(.trakt-button[data-style="outline"]) {
-      color: var(--color-foreground);
-      box-shadow: inset 0 0 0 var(--ni-1) var(--color-snackbar-action-stroke);
     }
 
     &[data-variant="error"] {

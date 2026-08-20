@@ -22,14 +22,13 @@ export type MarkAsWatchedStoreProps = MediaStoreProps<
   { id: number; effectiveReleaseDate: Date; status?: MediaStatus }
 >;
 
-/**
- * History mutations run on a minimal media shape; a full entry carried at
- * runtime still lets the confirmation toast name the item, otherwise it stays
- * generic.
- */
+// History mutations may run on a minimal `{ id }` shape.
 function toOptionalTitle(item: { id: number }): string | undefined {
-  const candidate = item as { title?: unknown };
-  return typeof candidate.title === 'string' ? candidate.title : undefined;
+  if (!('title' in item)) {
+    return undefined;
+  }
+
+  return typeof item.title === 'string' ? item.title : undefined;
 }
 
 export function useMarkAsWatched(
@@ -72,10 +71,6 @@ export function useMarkAsWatched(
     if (result === 'executed') {
       await invalidate(InvalidateAction.MarkAsWatched(type));
     }
-
-    // No confirmation toast on add: marking as watched surfaces the rate-now
-    // prompt, and a second overlapping banner is noise. The "marked by
-    // mistake?" undo lives inside that prompt instead (see RateNowContent).
 
     // Always clear: a queued action stays flagged via isQueued, and leaving
     // this pinned would re-disable the button once it syncs and dequeues.
@@ -153,12 +148,10 @@ export function useMarkAsWatched(
       message: toastTitle
         ? m.action_toast_removed_from_history({ title: toastTitle })
         : m.action_toast_removed_from_history_generic(),
-      // Best-effort undo: re-marks as watched at "now". It does not restore
-      // original play timestamps or a rating this removal may have orphaned.
+      // Best-effort: re-marks at "now", original play timestamps are lost.
       action: {
         text: m.button_text_undo(),
         label: m.action_toast_label_undo(),
-        style: 'outline',
         onAction: () => markAsWatched(),
       },
     });

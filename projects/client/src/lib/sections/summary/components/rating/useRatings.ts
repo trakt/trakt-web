@@ -36,7 +36,6 @@ type RateableType = RatedMediaType;
 export type WatchlistStoreProps = {
   type: RateableType;
   id: number;
-  /** Names the item in the confirmation toast; omitted for a generic message. */
   title?: string;
 };
 
@@ -205,7 +204,6 @@ export function useRatings({ type, id, title }: WatchlistStoreProps) {
       action: {
         text: m.button_text_undo(),
         label: m.action_toast_label_undo(),
-        style: 'outline',
         onAction: removeRating,
       },
     });
@@ -222,8 +220,6 @@ export function useRatings({ type, id, title }: WatchlistStoreProps) {
   };
 
   const removeRating = async () => {
-    // Snapshot the current rating before clearing it so "Undo" can restore
-    // the exact value.
     const previous = await firstValueFrom(rating);
 
     ratingSubject.next(null);
@@ -247,7 +243,6 @@ export function useRatings({ type, id, title }: WatchlistStoreProps) {
         ? {
           text: m.button_text_undo(),
           label: m.action_toast_label_undo(),
-          style: 'outline',
           onAction: () => addRating(previous.rating),
         }
         : undefined,

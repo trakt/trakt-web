@@ -10606,10 +10606,6 @@
       "default": "Rating removed",
       "description": "Confirmation toast shown after removing a rating."
     },
-    "text_marked_by_mistake": {
-      "default": "Marked by mistake?",
-      "description": "Label preceding the Undo link in the rate-now prompt, offering to remove an item that was just marked as watched."
-    },
     "action_toast_removed_from_history": {
       "default": "<b>{title}</b> was removed from your history",
       "description": "Confirmation toast shown after removing a title from watch history. {title} is the movie, show, or episode title.",

@@ -91,7 +91,7 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
   [FeatureFlag.ActionConfirmations]: {
     icon: CheckIcon,
     title: () => m.preview_feature_title_action_confirmations(),
-    addedAt: new Date('2026-07-23'),
+    addedAt: new Date('2026-08-20'),
     description: () => m.preview_feature_description_action_confirmations(),
   },
 };

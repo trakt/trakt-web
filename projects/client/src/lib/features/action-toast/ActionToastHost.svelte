@@ -10,8 +10,6 @@
     FeatureFlag.ActionConfirmations,
   );
 
-  // The store gates every `notify` on this flag, so mutation hooks can fire
-  // unconditionally and stay silent until the flag turns on.
   $effect(() => {
     actionToastStore.setEnabled($isActionConfirmationsEnabled);
   });
@@ -29,10 +27,9 @@
     return {
       text: action.text,
       label: action.label,
-      style: action.style,
+      style: "outline" as const,
       onAction: () => {
-        // Clear the toast up front so the tap feels instant; the handler
-        // (undo re-add, open drawer, …) may queue its own follow-up toast.
+        // Dismiss first: the handler may queue a follow-up toast.
         actionToastStore.dismiss(toast?.id);
         void action.onAction();
       },
@@ -41,13 +38,16 @@
 </script>
 
 {#if toast}
-  <Snackbar
-    open
-    onDismiss={dismiss}
-    title={toast.title}
-    message={toast.message}
-    action={snackbarAction}
-    variant={toast.variant}
-    dismissDurationMs={toast.durationMs ?? ACTION_TOAST_DURATION}
-  />
+  <!-- Keyed so a replacing toast gets a fresh auto-dismiss countdown. -->
+  {#key toast.id}
+    <Snackbar
+      open
+      onDismiss={dismiss}
+      title={toast.title}
+      message={toast.message}
+      action={snackbarAction}
+      variant={toast.variant}
+      dismissDurationMs={toast.durationMs ?? ACTION_TOAST_DURATION}
+    />
+  {/key}
 {/if}

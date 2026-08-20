@@ -88,7 +88,6 @@ export function useFavorites({ type, id, title }: FavoritesStoreProps) {
       action: {
         text: m.button_text_undo(),
         label: m.action_toast_label_undo(),
-        style: 'outline',
         onAction: () =>
           addOrRemoveFavorite(action === 'add' ? 'remove' : 'add'),
       },
