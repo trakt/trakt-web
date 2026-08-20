@@ -7,6 +7,8 @@
   import { useAllPersonalLists } from "$lib/stores/useAllPersonalLists";
   import { useListedOnIds } from "$lib/stores/useListedOnIds";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import ViewListLink from "./_internal/ViewListLink.svelte";
   import ListDropdownItem from "./ListDropdownItem.svelte";
   import WatchlistDropdownItem from "./_internal/WatchlistDropdownItem.svelte";
 
@@ -73,7 +75,9 @@
 
 <style>
   .lists-layout {
-    --dropdown-item-direction: row-reverse;
-    --dropdown-item-justify: space-between;
+    /* The group's list is overflow: hidden, which zeroes its automatic
+       min-size inside the drawer's scroll flexbox - without this wrapper the
+       group shrinks to fit and clips instead of letting the drawer scroll. */
+    flex-shrink: 0;
   }
 </style>

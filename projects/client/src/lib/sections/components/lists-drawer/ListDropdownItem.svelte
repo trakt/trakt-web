@@ -6,7 +6,10 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
+  import type { MediaType } from "$lib/requests/models/MediaType";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
+  import ViewListLink from "./_internal/ViewListLink.svelte";
   import { ListDropdownItemIntlProvider } from "./ListDropdownItemIntlProvider";
   import type { ListDropdownItemProps } from "./ListDropdownItemProps";
   import { useList } from "./useList";
@@ -50,6 +53,14 @@
     }),
   );
 
+  // Slugs are overlaid asynchronously from the list summaries; the numeric
+  // ids resolve to the same page until they land.
+  const listUrl = $derived(
+    list.ownerSlug && list.slug
+      ? UrlBuilder.users(list.ownerSlug).lists(list.slug)
+      : UrlBuilder.users(String(list.ownerId)).lists(String(list.id)),
+  );
+
   const handler = $derived(isListed ? confirmRemove : addToList);
   const { color, variant, ...events } = $derived(
     useDangerButton({ isActive: isListed, color: "default" }),
@@ -76,5 +87,13 @@
     {:else}
       <BookmarkIcon {state} size="normal" />
     {/if}
+  {/snippet}
+
+  {#snippet action()}
+    <ViewListLink
+      href={listUrl}
+      label={i18n.viewLabel({ isListed, listName: list.name, title })}
+      tooltip={i18n.viewTooltip()}
+    />
   {/snippet}
 </DropdownItem>
