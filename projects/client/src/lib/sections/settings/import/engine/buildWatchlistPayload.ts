@@ -1,10 +1,17 @@
 import type { WatchlistRequest } from '@trakt/api';
 import type { UniversalImportItem } from '../ImportTypes.ts';
-import { MOVIE_IDS, pickIds, SEASON_IDS, SHOW_IDS } from './pickIds.ts';
+import {
+  EPISODE_IDS,
+  MOVIE_IDS,
+  pickIds,
+  SEASON_IDS,
+  SHOW_IDS,
+} from './pickIds.ts';
 
 type WatchlistMovie = NonNullable<WatchlistRequest['movies']>[number];
 type WatchlistShow = NonNullable<WatchlistRequest['shows']>[number];
 type WatchlistSeason = NonNullable<WatchlistRequest['seasons']>[number];
+type WatchlistEpisode = NonNullable<WatchlistRequest['episodes']>[number];
 
 // Movies never fall back to {title, year}: server-side text matching
 // is too fuzzy and mismatches pollute the watchlist. Unresolved movies
@@ -34,6 +41,14 @@ function toWatchlistSeason(
   return null;
 }
 
+function toWatchlistEpisode(
+  { ids }: UniversalImportItem,
+): WatchlistEpisode | null {
+  const resolvedIds = pickIds(ids, EPISODE_IDS);
+  if (resolvedIds) return { ids: resolvedIds as never };
+  return null;
+}
+
 export function buildWatchlistPayload(
   items: UniversalImportItem[],
 ): WatchlistRequest {
@@ -49,5 +64,9 @@ export function buildWatchlistPayload(
     .filter((item) => item.type === 'season')
     .flatMap((item) => toWatchlistSeason(item) ?? []);
 
-  return { movies, shows, seasons };
+  const episodes = items
+    .filter((item) => item.type === 'episode')
+    .flatMap((item) => toWatchlistEpisode(item) ?? []);
+
+  return { movies, shows, seasons, episodes };
 }
