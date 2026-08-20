@@ -43,8 +43,9 @@ type TraktJsonEntry = {
     number?: number;
     ids?: TraktJsonIds;
   };
-  // Flat format with nested id object (e.g. shared list exports)
-  id?: TraktJsonIds;
+  // Flat format with nested id object (e.g. shared list exports). Exports put a
+  // numeric play id here instead, which is not an id block.
+  id?: TraktJsonIds | number;
   // Flat format with *_id fields at root level (e.g. third-party exports)
   imdb_id?: string;
   tvdb_id?: string | number;
@@ -110,10 +111,17 @@ function isFlatEntry(entry: TraktJsonEntry): boolean {
   );
 }
 
-function toFlatBase(entry: TraktJsonEntry): ImportItemBase {
+function toFlatIds(id: TraktJsonEntry['id']): TraktJsonIds {
+  return typeof id === 'object' && id !== null ? id : {};
+}
+
+function toFlatBase(
+  entry: TraktJsonEntry,
+  ids: TraktJsonIds,
+): ImportItemBase {
   return {
     type: resolveType(entry),
-    ids: toImportIds(entry.id ?? {}),
+    ids: toImportIds(ids),
     title: entry.title,
     year: entry.year,
   };
@@ -129,20 +137,6 @@ function isMultiIdFlatEntry(entry: TraktJsonEntry): boolean {
     entry.show === undefined &&
     entry.episode === undefined
   );
-}
-
-function toMultiIdFlatBase(entry: TraktJsonEntry): ImportItemBase {
-  return {
-    type: resolveType(entry),
-    ids: toImportIds({
-      trakt: entry.trakt_id,
-      imdb: entry.imdb_id,
-      tmdb: entry.tmdb_id,
-      tvdb: entry.tvdb_id,
-    }),
-    title: entry.title,
-    year: entry.year,
-  };
 }
 
 function toNestedBase(entry: TraktJsonEntry): ImportItemBase {
@@ -164,8 +158,15 @@ function toNestedBase(entry: TraktJsonEntry): ImportItemBase {
 }
 
 function toEntryBase(entry: TraktJsonEntry): ImportItemBase {
-  if (isFlatEntry(entry)) return toFlatBase(entry);
-  if (isMultiIdFlatEntry(entry)) return toMultiIdFlatBase(entry);
+  if (isFlatEntry(entry)) return toFlatBase(entry, toFlatIds(entry.id));
+  if (isMultiIdFlatEntry(entry)) {
+    return toFlatBase(entry, {
+      trakt: entry.trakt_id,
+      imdb: entry.imdb_id,
+      tmdb: entry.tmdb_id,
+      tvdb: entry.tvdb_id,
+    });
+  }
   return toNestedBase(entry);
 }
 
@@ -188,7 +189,7 @@ function parseTraktJsonEntry(entry: TraktJsonEntry): UniversalImportItem[] {
     ...watchedAt
       ? [{ ...base, action: 'history' as const, watched_at: watchedAt }]
       : [],
-    ...entry.rating != null
+    ...(entry.rating ?? 0) > 0
       ? [{
         ...base,
         action: 'ratings' as const,
@@ -216,15 +217,21 @@ function parseEntries(entries: TraktJsonEntry[]): UniversalImportItem[] {
     .filter(isValidItem);
 }
 
+function toComparablePath(filename: string): string {
+  return filename.replaceAll('/', '-');
+}
+
 function isRelevantJsonFile(filename: string): boolean {
-  return filename.startsWith('watched/history') ||
-    filename === 'lists/watchlist.json' ||
-    filename.startsWith('ratings/ratings');
+  const path = toComparablePath(filename);
+  return path.startsWith('watched-history') ||
+    path.startsWith('lists-watchlist') ||
+    path.startsWith('ratings-');
 }
 
 function inferActionFromPath(filename: string): ImportAction {
-  if (filename.startsWith('ratings/')) return 'ratings';
-  if (filename === 'lists/watchlist.json') return 'watchlist';
+  const path = toComparablePath(filename);
+  if (path.startsWith('ratings-')) return 'ratings';
+  if (path.startsWith('lists-watchlist')) return 'watchlist';
   return 'history';
 }
 

@@ -16,8 +16,12 @@ type RatingsEntry = {
   rated_at?: string;
 };
 
-function clampRating(rating: number): number {
-  return Math.min(10, Math.max(1, Math.round(rating)));
+// Trakt ratings are 1-10. A third party dump that writes 0 for "unrated" must
+// not be clamped up into a real 1/10 rating, so drop anything below the scale.
+function toRating(rating: number): number | null {
+  const rounded = Math.round(rating);
+  if (rounded < 1) return null;
+  return Math.min(10, rounded);
 }
 
 function toRatingsEntry(
@@ -25,10 +29,12 @@ function toRatingsEntry(
   priority: IdPriority,
 ): RatingsEntry | null {
   if (rating == null) return null;
+  const resolved = toRating(rating);
+  if (resolved == null) return null;
   const resolvedIds = pickIds(ids, priority);
   if (!resolvedIds) return null;
   return {
-    rating: clampRating(rating),
+    rating: resolved,
     ids: resolvedIds,
     ...(rated_at ? { rated_at } : {}),
   };

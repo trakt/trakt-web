@@ -109,7 +109,7 @@ describe('buildRatingsPayload', () => {
       ]);
     });
 
-    it('should clamp ratings below 1 to 1', () => {
+    it('should drop a rating of 0 rather than clamp it up to 1', () => {
       const item: UniversalImportItem = {
         action: 'ratings',
         type: 'movie',
@@ -117,9 +117,18 @@ describe('buildRatingsPayload', () => {
         rating: 0,
       };
 
-      expect(buildRatingsPayload([item]).movies).toEqual([
-        { rating: 1, ids: { imdb: 'tt0000002' } },
-      ]);
+      expect(buildRatingsPayload([item]).movies).toEqual([]);
+    });
+
+    it('should drop a negative rating', () => {
+      const item: UniversalImportItem = {
+        action: 'ratings',
+        type: 'movie',
+        ids: { imdb: 'tt0000002' },
+        rating: -3,
+      };
+
+      expect(buildRatingsPayload([item]).movies).toEqual([]);
     });
 
     it('should round fractional ratings', () => {
