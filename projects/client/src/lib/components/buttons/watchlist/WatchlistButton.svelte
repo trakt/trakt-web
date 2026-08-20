@@ -22,6 +22,7 @@
     onAdd,
     onRemove,
     action,
+    flash,
     ...props
   }: WatchlistButtonProps = $props();
 
@@ -83,7 +84,7 @@
 {/if}
 
 {#if type === "dropdown-item"}
-  <DropdownItem {...commonProps} style="flat" {action}>
+  <DropdownItem {...commonProps} style="flat" {action} {flash}>
     {i18n.text({ isWatchlisted, title })}
     {#if isQueued}<QueuedTag />{/if}
     {#snippet icon()}

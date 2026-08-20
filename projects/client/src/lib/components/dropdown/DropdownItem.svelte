@@ -3,6 +3,7 @@
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
   import type { Snippet } from "svelte";
   import Link from "../link/Link.svelte";
+  import type { DropdownItemFlash } from "./DropdownItemFlash";
 
   type DropdownItemProps = {
     color?: "red" | "purple" | "blue" | "orange" | "default";
@@ -14,6 +15,7 @@
     style?: "ghost" | "flat";
     variant?: "primary" | "secondary";
     selected?: boolean;
+    flash?: DropdownItemFlash | Nil;
   } & ChildrenProps &
     HTMLElementProps;
 
@@ -24,6 +26,7 @@
     style = "ghost",
     variant = "primary",
     selected = false,
+    flash,
     children,
     icon,
     end,
@@ -69,6 +72,7 @@
   data-color={color}
   data-style={style}
   data-variant={variant}
+  data-flash={flash}
   class:is-selected={selected}
   class:has-subtitle={subtitle != null}
   {...props}
@@ -281,6 +285,30 @@
         --dropdown-item-background,
         transparent
       );
+    }
+
+    &[data-flash] {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border-radius: inherit;
+
+        opacity: 0;
+        animation: background-flash var(--animation-duration-background-flash)
+          ease-out;
+      }
+    }
+
+    &[data-flash="purple"]::after {
+      background: var(--color-background-purple);
+    }
+
+    &[data-flash="red"]::after {
+      background: var(--color-background-red);
     }
 
     @mixin variant($color, $bg-color) {

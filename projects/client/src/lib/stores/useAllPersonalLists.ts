@@ -1,7 +1,4 @@
-import {
-  useAllPagesInfiniteQuery,
-  useQuery,
-} from '$lib/features/query/useQuery.ts';
+import { useInfiniteQuery, useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import { collaborationListsQuery } from '$lib/requests/queries/users/collaborationListsQuery.ts';
 import { personalListsQuery } from '$lib/requests/queries/users/personalListsQuery.ts';
@@ -32,10 +29,10 @@ function withListSlugs(
 
 export function useAllPersonalLists() {
   const lists = useQuery(userListsQuery());
-  const personal = useAllPagesInfiniteQuery(
+  const personal = useInfiniteQuery(
     personalListsQuery({ slug: 'me', limit: 1000 }),
   );
-  const collaborations = useAllPagesInfiniteQuery(
+  const collaborations = useInfiniteQuery(
     collaborationListsQuery({ slug: 'me' }),
   );
 
