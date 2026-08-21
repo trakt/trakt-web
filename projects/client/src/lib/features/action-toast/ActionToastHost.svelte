@@ -47,16 +47,14 @@
 </script>
 
 {#if toast}
-  <!-- Keyed so a replacing toast gets a fresh auto-dismiss countdown. -->
-  {#key toast.id}
-    <Snackbar
-      open
-      onDismiss={dismiss}
-      title={toast.title}
-      message={toast.message}
-      action={snackbarAction}
-      variant={toast.variant}
-      dismissDurationMs={toast.durationMs ?? ACTION_TOAST_DURATION}
-    />
-  {/key}
+  <Snackbar
+    open
+    onDismiss={dismiss}
+    title={toast.title}
+    message={toast.message}
+    action={snackbarAction}
+    variant={toast.variant}
+    dismissDurationMs={toast.durationMs ?? ACTION_TOAST_DURATION}
+    dismissResetKey={toast.id}
+  />
 {/if}

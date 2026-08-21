@@ -28,6 +28,7 @@
     action?: SnackbarAction;
     variant?: "default" | "error";
     dismissDurationMs?: number;
+    dismissResetKey?: unknown;
   };
 
   const {
@@ -39,6 +40,7 @@
     action,
     variant = "default",
     dismissDurationMs,
+    dismissResetKey,
   }: SnackbarProps = $props();
 
   let navbarHeight = $state(0);
@@ -136,6 +138,7 @@
         onclick={onDismiss}
         label={m.button_label_close()}
         durationMs={dismissDurationMs}
+        resetKey={dismissResetKey}
       />
     </div>
   </div>
