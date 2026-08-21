@@ -1,3 +1,4 @@
+import { undoToastAction } from '$lib/features/action-toast/undoToastAction.ts';
 import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { m } from '$lib/features/i18n/messages.ts';
@@ -85,12 +86,9 @@ export function useFavorites({ type, id, title }: FavoritesStoreProps) {
       message: action === 'add'
         ? m.action_toast_added_to_favorites({ title })
         : m.action_toast_removed_from_favorites({ title }),
-      action: {
-        text: m.button_text_undo(),
-        label: m.action_toast_label_undo(),
-        onAction: () =>
-          addOrRemoveFavorite(action === 'add' ? 'remove' : 'add'),
-      },
+      action: undoToastAction(() =>
+        addOrRemoveFavorite(action === 'add' ? 'remove' : 'add')
+      ),
     });
 
     // Always clear: a queued action stays flagged via isQueued, and leaving

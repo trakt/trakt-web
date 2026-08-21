@@ -1,3 +1,4 @@
+import { undoToastAction } from '$lib/features/action-toast/undoToastAction.ts';
 import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
@@ -201,11 +202,7 @@ export function useRatings({ type, id, title }: WatchlistStoreProps) {
       message: title
         ? m.action_toast_rated({ title, rating: newRating })
         : m.action_toast_rated_generic({ rating: newRating }),
-      action: {
-        text: m.button_text_undo(),
-        label: m.action_toast_label_undo(),
-        onAction: removeRating,
-      },
+      action: undoToastAction(removeRating),
     });
 
     // Always clear: a queued rating stays flagged via isQueued, and leaving
@@ -240,11 +237,7 @@ export function useRatings({ type, id, title }: WatchlistStoreProps) {
     notify({
       message: m.action_toast_rating_removed(),
       action: previous
-        ? {
-          text: m.button_text_undo(),
-          label: m.action_toast_label_undo(),
-          onAction: () => addRating(previous.rating),
-        }
+        ? undoToastAction(() => addRating(previous.rating))
         : undefined,
     });
   };

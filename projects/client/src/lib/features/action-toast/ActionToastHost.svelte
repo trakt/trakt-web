@@ -17,7 +17,7 @@
 
   const toast = $derived($actionToastStore);
 
-  const dismiss = () => actionToastStore.dismiss(toast?.id);
+  const dismiss = () => actionToastStore.dismiss();
 
   const snackbarAction = $derived.by(() => {
     const action = toast?.action;
@@ -31,7 +31,7 @@
       style: "outline" as const,
       onAction: async () => {
         // Dismiss first: the handler may queue a follow-up toast.
-        actionToastStore.dismiss(toast?.id);
+        actionToastStore.dismiss();
 
         try {
           await action.onAction();
@@ -50,11 +50,10 @@
   <Snackbar
     open
     onDismiss={dismiss}
-    title={toast.title}
     message={toast.message}
     action={snackbarAction}
     variant={toast.variant}
-    dismissDurationMs={toast.durationMs ?? ACTION_TOAST_DURATION}
+    dismissDurationMs={ACTION_TOAST_DURATION}
     dismissResetKey={toast.id}
   />
 {/if}

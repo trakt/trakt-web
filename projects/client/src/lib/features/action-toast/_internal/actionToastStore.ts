@@ -24,19 +24,7 @@ function createActionToastStore() {
       current.next({ ...toast, id: crypto.randomUUID() });
     },
 
-    dismiss: (id?: string) => {
-      const value = current.getValue();
-      if (!value) {
-        return;
-      }
-
-      // A stale auto-dismiss must not clear the toast that replaced it.
-      if (id && value.id !== id) {
-        return;
-      }
-
-      current.next(null);
-    },
+    dismiss: () => current.next(null),
   };
 }
 

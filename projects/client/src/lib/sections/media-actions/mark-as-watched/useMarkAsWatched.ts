@@ -1,3 +1,4 @@
+import { undoToastAction } from '$lib/features/action-toast/undoToastAction.ts';
 import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
@@ -224,11 +225,7 @@ export function useMarkAsWatched(
         ? m.action_toast_removed_from_history({ title: toastTitle })
         : m.action_toast_removed_from_history_generic(),
       action: isRestorable
-        ? {
-          text: m.button_text_undo(),
-          label: m.action_toast_label_undo(),
-          onAction: () => restoreWatched(snapshot),
-        }
+        ? undoToastAction(() => restoreWatched(snapshot))
         : undefined,
     });
 

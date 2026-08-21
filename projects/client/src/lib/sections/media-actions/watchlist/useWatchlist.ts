@@ -1,3 +1,4 @@
+import { undoToastAction } from '$lib/features/action-toast/undoToastAction.ts';
 import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
@@ -110,11 +111,7 @@ export function useWatchlist(props: MediaStoreProps) {
       message: singleEntry
         ? m.action_toast_removed_from_watchlist({ title: singleEntry.title })
         : m.action_toast_removed_from_watchlist_generic(),
-      action: {
-        text: m.button_text_undo(),
-        label: m.action_toast_label_undo(),
-        onAction: addToWatchlist,
-      },
+      action: undoToastAction(addToWatchlist),
     });
 
     isWatchlistUpdating.next(false);
