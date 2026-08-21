@@ -24,6 +24,11 @@ vi.mock('$lib/requests/sync/removeWatchedRequest.ts', () => ({
   removeWatchedRequest: () => Promise.resolve(true),
 }));
 
+const addWatchedSpy = vi.fn((_body?: unknown) => Promise.resolve(true));
+vi.mock('$lib/requests/sync/markAsWatchedRequest.ts', () => ({
+  markAsWatchedRequest: ({ body }: { body: unknown }) => addWatchedSpy(body),
+}));
+
 const { notify } = vi.hoisted(() => ({ notify: vi.fn() }));
 vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
   useActionToast: () => ({ notify, dismiss: vi.fn() }),
@@ -36,6 +41,7 @@ describe('useMarkAsWatched', () => {
     setAuthorization(true);
     invalidate.mockReset();
     removeRatingSpy.mockClear();
+    addWatchedSpy.mockClear();
     notify.mockReset();
 
     (useInvalidator as Mock)
@@ -361,23 +367,66 @@ describe('useMarkAsWatched', () => {
   });
 
   describe('action confirmation undo', () => {
-    it('should re-mark as watched when the removal toast Undo runs', async () => {
+    const watchedMovie = {
+      id: MovieHereticMappedMock.id,
+      effectiveReleaseDate: new Date(),
+    };
+
+    it('should offer an Undo action on the removal toast', async () => {
+      const { removeWatched } = await renderStore(() =>
+        useMarkAsWatched({ type: 'movie', media: watchedMovie })
+      );
+
+      await removeWatched();
+
+      expect(lastActionToast(notify)?.action).toBeDefined();
+    });
+
+    it('should restore the rating the removal orphaned', async () => {
+      const { removeWatched } = await renderStore(() =>
+        useMarkAsWatched({ type: 'movie', media: watchedMovie })
+      );
+
+      await removeWatched();
+
+      const undoRequests = await captureRequests(async () => {
+        await lastActionToast(notify)?.action?.onAction();
+      });
+      expect(undoRequests).toContain('POST /sync/ratings');
+    });
+
+    it('should restore the original play date, not "now"', async () => {
+      const { removeWatched } = await renderStore(() =>
+        useMarkAsWatched({ type: 'movie', media: watchedMovie })
+      );
+
+      await removeWatched();
+      await lastActionToast(notify)?.action?.onAction();
+
+      expect(addWatchedSpy).toHaveBeenCalledWith({
+        movies: [
+          {
+            ids: { trakt: watchedMovie.id },
+            watched_at: '2024-12-27T16:15:28.000Z',
+          },
+        ],
+      });
+    });
+
+    it('should offer no Undo when the play dates cannot be restored', async () => {
       const { removeWatched } = await renderStore(() =>
         useMarkAsWatched({
-          type: 'movie',
-          media: { id: 1, effectiveReleaseDate: new Date() },
+          type: 'show',
+          media: {
+            id: ShowSiloMappedMock.id,
+            effectiveReleaseDate: new Date(),
+          },
         })
       );
 
       await removeWatched();
 
-      const toast = lastActionToast(notify);
-      expect(toast?.action).toBeDefined();
-
-      const undoRequests = await captureRequests(async () => {
-        await toast?.action?.onAction();
-      });
-      expect(undoRequests).toContain('POST /sync/history');
+      expect(lastActionToast(notify)?.action).toBeUndefined();
     });
   });
 });
