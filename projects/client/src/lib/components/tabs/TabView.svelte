@@ -1,34 +1,93 @@
 <script lang="ts">
   import { Tabs } from "bits-ui";
-  import { lineClamp } from "../text/lineClamp";
+  import { languageTag } from "$lib/features/i18n/index.ts";
+  import { toHumanCount } from "$lib/utils/formatting/number/toHumanCount.ts";
   import type { TabViewProps } from "./models/TabViewProps";
 
   const { value, tabs, onChange, tabPosition = "top" }: TabViewProps = $props();
 
-  const activeIndex = $derived(tabs.findIndex((t) => t.value === value));
+  let rail = $state<HTMLElement>();
+  let underline = $state({ offset: 0, width: 0 });
+
+  const captureRail = (node: HTMLElement) => {
+    rail = node;
+    return () => (rail = undefined);
+  };
+
+  /*
+   * The underline hugs the active label instead of a fixed column, so its box
+   * has to be measured. The offset is taken from the rail's inline-start edge
+   * and replayed through --rtl-sign, keeping the slide direction-correct.
+   */
+  const measure = (node: HTMLElement) => {
+    const triggers = node.querySelectorAll<HTMLElement>(".trakt-tab-trigger");
+    const active = Array.from(triggers).find(
+      (trigger) => trigger.dataset.value === value,
+    );
+
+    if (!active) {
+      return;
+    }
+
+    const railBox = node.getBoundingClientRect();
+    const activeBox = active.getBoundingClientRect();
+    const isRtl = getComputedStyle(node).direction === "rtl";
+
+    underline = {
+      offset: isRtl
+        ? railBox.right - activeBox.right
+        : activeBox.left - railBox.left,
+      width: activeBox.width,
+    };
+  };
+
+  $effect(() => {
+    const node = rail;
+
+    if (!node) {
+      return;
+    }
+
+    measure(node);
+
+    /*
+     * Label widths move with font loading, container resizes and count
+     * updates - observing the triggers covers all three.
+     */
+    const observer = new ResizeObserver(() => measure(node));
+    observer.observe(node);
+    node
+      .querySelectorAll(".trakt-tab-trigger")
+      .forEach((trigger) => observer.observe(trigger));
+
+    return () => observer.disconnect();
+  });
 </script>
 
-<div
-  class="trakt-tab-view"
-  data-tab-position={tabPosition}
-  style="--tab-count: {tabs.length}; --active-index: {activeIndex}"
->
+<div class="trakt-tab-view" data-tab-position={tabPosition}>
   <Tabs.Root {value} onValueChange={onChange} class="trakt-tabs-root">
-    <Tabs.List class="trakt-tabs-list">
-      <div class="trakt-tab-indicator"></div>
-      {#each tabs as tab (tab.value)}
-        <Tabs.Trigger class="trakt-tab-trigger" value={tab.value}>
-          {#if tab.icon}
-            <span class="trakt-tab-icon">
-              {@render tab.icon()}
+    <div class="tab-rail" {@attach captureRail}>
+      <Tabs.List class="trakt-tabs-list">
+        {#each tabs as tab (tab.value)}
+          <Tabs.Trigger class="trakt-tab-trigger" value={tab.value}>
+            <span class="tab-label uppercase bold small ellipsis">
+              {tab.label}
             </span>
-          {/if}
-          <span class="capitalize ellipsis" use:lineClamp={{ lines: 2 }}>
-            {tab.label}
-          </span>
-        </Tabs.Trigger>
-      {/each}
-    </Tabs.List>
+            {#if tab.count != null}
+              <span class="tab-count">
+                {toHumanCount(tab.count, languageTag())}
+              </span>
+            {/if}
+          </Tabs.Trigger>
+        {/each}
+      </Tabs.List>
+
+      <div
+        class="tab-underline"
+        class:is-measured={underline.width > 0}
+        style="--tab-underline-offset: {underline.offset}px; --tab-underline-width: {underline.width}px"
+      ></div>
+    </div>
 
     {#each tabs as tab (tab.value)}
       <Tabs.Content value={tab.value}>
@@ -47,9 +106,13 @@
 
 <style>
   .trakt-tab-view {
-    --tab-list-padding: var(--ni-4);
-    --tab-list-gap: var(--gap-xxs);
-    --tab-border-radius: var(--border-radius-m);
+    --tab-rule-thickness: var(--border-thickness-xxs);
+    /*
+     * The label rides close to its underline; the slack that keeps the tap
+     * target at 40px is pushed to the far side of the label instead.
+     */
+    --tab-label-gap: var(--gap-xs);
+    --tab-label-inset: var(--ni-16);
 
     :global(.trakt-tabs-root) {
       display: flex;
@@ -57,103 +120,108 @@
       gap: var(--gap-m);
     }
 
-    :global(.trakt-tabs-list) {
-      background-color: var(--color-tablist-background);
-      padding: var(--tab-list-padding);
-      border-radius: var(--tab-border-radius);
-
-      display: grid;
-      grid-template-columns: repeat(var(--tab-count), minmax(0, 1fr));
-      gap: var(--tab-list-gap);
-
+    .tab-rail {
       position: relative;
+      border-block-end: var(--tab-rule-thickness) solid var(--color-tab-rule);
     }
 
-    .trakt-tab-indicator {
-      --horizontal-padding: calc(2 * var(--tab-list-padding));
-      --total-gap-size: calc((var(--tab-count) - 1) * var(--tab-list-gap));
-      --available-width: calc(
-        100% - var(--horizontal-padding) - var(--total-gap-size)
-      );
-      --tab-width: calc(var(--available-width) / var(--tab-count));
-
-      position: absolute;
-      margin-inline-start: var(--tab-list-padding);
-
-      top: var(--tab-list-padding);
-      bottom: var(--tab-list-padding);
-      inset-inline-start: 0;
-      width: var(--tab-width);
-      transform: translateX(
-        calc(
-          var(--rtl-sign) * var(--active-index) * (100% + var(--tab-list-gap))
-        )
-      );
-
-      /* Shorthand so consumers can supply a gradient via the token. */
-      background: var(--color-tab-background);
-      border-radius: var(--tab-border-radius);
-
-      transition: transform var(--transition-increment) ease-in-out;
-      will-change: transform;
-      pointer-events: none;
+    :global(.trakt-tabs-list) {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--gap-l);
     }
 
     :global(.trakt-tab-trigger) {
       -webkit-tap-highlight-color: transparent;
 
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: baseline;
       gap: var(--gap-xxs);
 
+      min-width: 0;
       min-height: var(--ni-40);
-      position: relative;
+      padding-block: var(--tab-label-inset) var(--tab-label-gap);
+      padding-inline: 0;
 
       border: none;
-      background-color: transparent;
+      background: none;
 
-      color: var(--color-text-primary);
-      border-radius: var(--tab-border-radius);
-
-      transition: background-color var(--transition-increment) ease-in-out;
+      color: var(--color-tab-text);
+      transition: color var(--transition-increment) ease-in-out;
 
       &[data-state="inactive"] {
         cursor: pointer;
       }
 
-      &[data-state="active"] {
+      &[data-state="active"],
+      &:hover {
         color: var(--color-tab-active-text);
       }
 
-      &:hover:not([data-state="active"]) {
-        background-color: var(--color-tab-hover-background);
-      }
-
       &:focus-visible {
-        outline: var(--border-thickness-xs) solid var(--shade-10);
-        color: var(--shade-10);
-        background-color: var(--shade-700);
+        outline: var(--border-thickness-xxs) solid var(--color-tab-indicator);
+        outline-offset: var(--ni-2);
+        border-radius: var(--border-radius-xs);
+
+        color: var(--color-tab-active-text);
       }
     }
 
-    .trakt-tab-icon {
-      display: flex;
-      flex-shrink: 0;
-
-      :global(svg) {
-        width: var(--ni-16);
-        height: var(--ni-16);
-      }
+    .tab-label {
+      /* Uppercase labels need the extra tracking to stay readable. */
+      letter-spacing: 0.08em;
     }
 
-    .trakt-tab-content {
-      padding: 0 var(--ni-8);
+    .tab-count {
+      color: var(--color-tab-count);
+    }
+
+    .tab-underline {
+      position: absolute;
+      inset-block-end: calc(-1 * var(--tab-rule-thickness));
+      inset-inline-start: 0;
+
+      width: var(--tab-underline-width);
+      height: var(--border-thickness-xs);
+      transform: translateX(
+        calc(var(--rtl-sign) * var(--tab-underline-offset))
+      );
+
+      background: var(--color-tab-indicator);
+      border-radius: var(--border-radius-xs);
+
+      /* Hidden until the first measurement lands, so it never flashes at 0. */
+      opacity: 0;
+      pointer-events: none;
+
+      transition:
+        transform var(--transition-increment) ease-in-out,
+        width var(--transition-increment) ease-in-out,
+        opacity var(--transition-increment) ease-in-out;
+
+      &.is-measured {
+        opacity: 1;
+      }
     }
 
     &[data-tab-position="bottom"] {
       :global(.trakt-tabs-root) {
         flex-direction: column-reverse;
+      }
+
+      .tab-rail {
+        border-block-end: none;
+        border-block-start: var(--tab-rule-thickness) solid
+          var(--color-tab-rule);
+      }
+
+      .tab-underline {
+        inset-block-end: auto;
+        inset-block-start: calc(-1 * var(--tab-rule-thickness));
+      }
+
+      :global(.trakt-tab-trigger) {
+        padding-block: var(--tab-label-gap) var(--tab-label-inset);
       }
     }
   }

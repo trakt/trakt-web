@@ -3,7 +3,7 @@ import type { Snippet } from 'svelte';
 type TabView = {
   value: string;
   label: string;
-  icon?: Snippet;
+  count?: number;
   content: Snippet;
   keepMounted?: boolean;
 };

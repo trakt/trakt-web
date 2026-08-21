@@ -77,14 +77,6 @@
 
     :global(.trakt-tab-view) {
       width: 100%;
-
-      // The default gray tab chrome clashes with the purple VIP surface;
-      // recess the tab list into the card, give the active pill the VIP badge
-      // gradient, and swap the gray hover for a purple tint.
-      --color-tablist-background: var(--color-vip-tablist-background);
-      --color-tab-background: var(--background-vip-tab);
-      --color-tab-hover-background: var(--color-vip-tab-hover-background);
-      --color-tab-active-text: var(--color-foreground-vip-badge);
     }
   }
 </style>

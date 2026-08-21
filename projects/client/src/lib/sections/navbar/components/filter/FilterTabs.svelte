@@ -106,18 +106,6 @@
 </div>
 
 <style>
-  .trakt-filter-tabs {
-    --color-tablist-background: var(--color-filter-tablist-background);
-    --color-tab-background: var(--color-filter-tab-background);
-    --color-tab-active-text: var(--color-filter-tab-active-text);
-    --tab-list-padding: 0;
-
-    :global(.trakt-tabs-list) {
-      width: 100%;
-      height: var(--ni-40);
-    }
-  }
-
   .trakt-filters-content {
     display: flex;
     flex-direction: column;

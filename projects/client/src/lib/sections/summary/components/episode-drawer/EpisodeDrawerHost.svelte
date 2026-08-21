@@ -1,8 +1,5 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
-  import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
-  import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -161,18 +158,6 @@
   </Tooltip>
 {/snippet}
 
-{#snippet infoIcon()}
-  <InfoIcon />
-{/snippet}
-
-{#snippet reviewsIcon()}
-  <CommentIcon />
-{/snippet}
-
-{#snippet episodesIcon()}
-  <PlayIcon />
-{/snippet}
-
 {#snippet infoContent()}
   <div class="episode-info-content">
     {#if $episodeEntry}
@@ -263,19 +248,16 @@
           {
             value: "info",
             label: m.tab_text_seasons_info(),
-            icon: infoIcon,
             content: infoContent,
           },
           {
             value: "reviews",
             label: m.tab_text_seasons_reviews(),
-            icon: reviewsIcon,
             content: reviewsContent,
           },
           {
             value: "episodes",
             label: m.tab_text_seasons_episodes(),
-            icon: episodesIcon,
             content: episodesContent,
           },
         ]}
