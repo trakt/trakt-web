@@ -2,6 +2,7 @@
   import Snackbar from "$lib/components/snackbar/Snackbar.svelte";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
+  import { m } from "$lib/features/i18n/messages.ts";
   import { actionToastStore } from "./_internal/actionToastStore.ts";
   import { ACTION_TOAST_DURATION } from "./constants/index.ts";
 
@@ -28,10 +29,18 @@
       text: action.text,
       label: action.label,
       style: "outline" as const,
-      onAction: () => {
+      onAction: async () => {
         // Dismiss first: the handler may queue a follow-up toast.
         actionToastStore.dismiss(toast?.id);
-        void action.onAction();
+
+        try {
+          await action.onAction();
+        } catch {
+          actionToastStore.notify({
+            message: m.action_toast_action_failed(),
+            variant: 'error',
+          });
+        }
       },
     };
   });

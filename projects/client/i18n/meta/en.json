@@ -10559,6 +10559,10 @@
         }
       }
     },
+    "action_toast_action_failed": {
+      "default": "That didn't work. Please try again.",
+      "description": "Confirmation toast shown when an action offered by a previous toast, such as Undo, fails."
+    },
     "action_toast_label_undo": {
       "default": "Undo the last change",
       "description": "Accessible label for the 'Undo' button in an action-confirmation toast."
