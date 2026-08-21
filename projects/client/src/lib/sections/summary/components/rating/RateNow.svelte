@@ -23,6 +23,10 @@
 
   const type = $derived(props.type);
   const id = $derived(props.media.id);
+  // Seasons carry no title of their own.
+  const title = $derived(
+    "title" in props.media ? props.media.title ?? undefined : undefined,
+  );
 
   const {
     pendingRating,
@@ -35,6 +39,7 @@
     useRatings({
       type,
       id,
+      title,
     }),
   );
 

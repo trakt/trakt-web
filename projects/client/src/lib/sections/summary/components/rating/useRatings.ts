@@ -1,6 +1,9 @@
+import { undoToastAction } from '$lib/features/action-toast/undoToastAction.ts';
+import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import type { RatedEntry } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
+import { m } from '$lib/features/i18n/messages.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { findPendingOverride } from '$lib/features/offline/findPendingOverride.ts';
@@ -34,6 +37,7 @@ type RateableType = RatedMediaType;
 export type WatchlistStoreProps = {
   type: RateableType;
   id: number;
+  title?: string;
 };
 
 function toAddPayload(
@@ -74,12 +78,13 @@ function toPendingRatedEntry(
   return { id, rating, ratedAt: new Date(pending.queuedAt) };
 }
 
-export function useRatings({ type, id }: WatchlistStoreProps) {
+export function useRatings({ type, id, title }: WatchlistStoreProps) {
   const pendingRating = new BehaviorSubject<null | number>(null);
   const { ratings, favorites } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Rate);
   const { dismiss } = useLastWatched();
+  const { notify } = useActionToast();
 
   const { actions } = useOfflineActions();
   const { isQueued } = useIsQueued({
@@ -193,6 +198,13 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
       }
     }
 
+    notify({
+      message: title
+        ? m.action_toast_rated({ title, rating: newRating })
+        : m.action_toast_rated_generic({ rating: newRating }),
+      action: undoToastAction(removeRating),
+    });
+
     // Always clear: a queued rating stays flagged via isQueued, and leaving
     // these pinned would re-disable the stars once it syncs and dequeues.
     pendingRating.next(null);
@@ -205,6 +217,8 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
   };
 
   const removeRating = async () => {
+    const previous = await firstValueFrom(rating);
+
     ratingSubject.next(null);
     pendingRating.next(0);
 
@@ -219,6 +233,13 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
       await invalidate(InvalidateAction.Rated(type));
       pendingRating.next(null);
     }
+
+    notify({
+      message: m.action_toast_rating_removed(),
+      action: previous
+        ? undoToastAction(() => addRating(previous.rating))
+        : undefined,
+    });
   };
 
   return {

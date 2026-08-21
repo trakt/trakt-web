@@ -5,6 +5,8 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
+import { lastActionToast } from '$test/beds/action-toast/lastActionToast.ts';
+import { captureRequests } from '$test/beds/request/captureRequests.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { firstValueFrom } from 'rxjs';
@@ -14,12 +16,18 @@ import { type FavoritesStoreProps, useFavorites } from './useFavorites.ts';
 vi.mock('$lib/stores/useInvalidator.ts');
 vi.mock('$lib/features/notes/useAddNoteDrawer.ts');
 
+const { notify } = vi.hoisted(() => ({ notify: vi.fn() }));
+vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
+  useActionToast: () => ({ notify, dismiss: vi.fn() }),
+}));
+
 describe('useFavorites', () => {
   const invalidate = vi.fn(function () {});
 
   beforeEach(() => {
     setAuthorization(true);
     invalidate.mockReset();
+    notify.mockReset();
 
     (useInvalidator as Mock)
       .mockReturnValueOnce({ invalidate }) // 1: useFavorites
@@ -145,6 +153,26 @@ describe('useFavorites', () => {
       );
 
       expect(await waitForEmission(isFavorited, 2)).toBe(false);
+    });
+  });
+
+  describe('action confirmation undo', () => {
+    it('should re-add to favorites when the removal toast Undo runs', async () => {
+      const { removeFromFavorites } = await renderStore(() =>
+        useFavorites({ type: 'movie', id: 1, title: 'Some Movie' })
+      );
+
+      const removeRequests = await captureRequests(() => removeFromFavorites());
+      expect(removeRequests).toContain('POST /sync/favorites/remove');
+
+      const toast = lastActionToast(notify);
+      expect(toast?.action).toBeDefined();
+
+      const undoRequests = await captureRequests(async () => {
+        await toast?.action?.onAction();
+      });
+      expect(undoRequests).toContain('POST /sync/favorites');
+      expect(undoRequests).not.toContain('POST /sync/favorites/remove');
     });
   });
 });

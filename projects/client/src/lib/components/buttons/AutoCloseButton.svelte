@@ -8,6 +8,7 @@
     onclick: () => void;
     label: string;
     durationMs?: number;
+    resetKey?: unknown;
   } & Pick<TraktActionButtonProps, "style" | "color">;
 
   const {
@@ -16,6 +17,7 @@
     style = "ghost",
     color,
     durationMs,
+    resetKey,
   }: AutoCloseButtonProps = $props();
 </script>
 
@@ -24,6 +26,7 @@
   use:autoDismiss={{
     onDismiss: onclick,
     durationMs,
+    resetKey,
   }}
 >
   <ActionButton {onclick} {label} {style} {color} size="small">

@@ -2,14 +2,21 @@
   import AutoCloseButton from "$lib/components/buttons/AutoCloseButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
+  import MessageWithBold from "$lib/components/text/MessageWithBold.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
+  import {
+    useMedia,
+    WellKnownMediaQuery,
+  } from "$lib/stores/css/useMedia.ts";
   import { onMount } from "svelte";
+  import { backOut, cubicIn } from "svelte/easing";
   import { fly } from "svelte/transition";
 
   type SnackbarAction = {
     text: string;
     label: string;
     onAction: () => void;
+    style?: "outline" | "flat";
   };
 
   type SnackbarProps = {
@@ -21,6 +28,7 @@
     action?: SnackbarAction;
     variant?: "default" | "error";
     dismissDurationMs?: number;
+    dismissResetKey?: unknown;
   };
 
   const {
@@ -32,9 +40,24 @@
     action,
     variant = "default",
     dismissDurationMs,
+    dismissResetKey,
   }: SnackbarProps = $props();
 
   let navbarHeight = $state(0);
+
+  const prefersReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
+
+  const enterTransition = $derived(
+    $prefersReducedMotion
+      ? { y: 0, duration: 120 }
+      : { y: 150, duration: 400, easing: backOut },
+  );
+
+  const exitTransition = $derived(
+    $prefersReducedMotion
+      ? { y: 0, duration: 120 }
+      : { y: 150, duration: 250, easing: cubicIn },
+  );
 
   onMount(() => {
     let currentNavbar: Element | null = null;
@@ -78,6 +101,7 @@
       size="small"
       variant="primary"
       color="purple"
+      style={action.style ?? "flat"}
       label={action.label}
       onclick={action.onAction}
     >
@@ -94,7 +118,8 @@
     aria-atomic="true"
     style="bottom: {navbarHeight}px;"
     data-variant={variant}
-    transition:fly={{ y: 20, duration: 200 }}
+    in:fly|global={enterTransition}
+    out:fly|global={exitTransition}
   >
     {#if title}
       <span class="bold">{title}</span>
@@ -105,7 +130,7 @@
         {#if href}
           <MessageWithLink {message} {href} target="_blank" />
         {:else}
-          {message}
+          <MessageWithBold {message} />
         {/if}
       </p>
       {@render actionButton()}
@@ -113,6 +138,7 @@
         onclick={onDismiss}
         label={m.button_label_close()}
         durationMs={dismissDurationMs}
+        resetKey={dismissResetKey}
       />
     </div>
   </div>
@@ -122,6 +148,8 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-snackbar {
+    --color-outline-stroke: var(--color-snackbar-action-stroke);
+
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
@@ -136,6 +164,7 @@
     gap: var(--gap-micro);
 
     background-color: var(--color-modal-background);
+    border: var(--ni-1) solid var(--color-border);
     border-radius: var(--border-radius-l);
     box-shadow: var(--shadow-raised);
     backdrop-filter: blur(var(--ni-16));
