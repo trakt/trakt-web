@@ -8,7 +8,7 @@ export function useConfirm() {
 
   const confirm = <T extends ConfirmationType>(
     props: ConfirmationParams<T> & {
-      onConfirm: () => void;
+      onConfirm: (isPreflightEnabled: boolean) => void;
       onCancel?: () => void;
     },
   ) => {
@@ -17,7 +17,7 @@ export function useConfirm() {
 
       // If there is no message, confirm immediately
       if (!confirmation.message) {
-        props.onConfirm();
+        props.onConfirm(confirmation.preflight?.isEnabledByDefault ?? false);
         return;
       }
 
