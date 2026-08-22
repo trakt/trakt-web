@@ -103,6 +103,32 @@ export default defineConfig(({ mode }) => ({
       manifestFilename: 'manifest.webmanifest',
       injectManifest: {
         injectionPoint: 'self.__WB_MANIFEST',
+        /**
+         * Precache the app shell only.
+         *
+         * The plugin default globs every `js,css,ico,png,svg,webp` file under
+         * `client/`, which swept in every `_app/immutable/` chunk (~630
+         * files) plus `pwa/screenshots` (1.2 MB) and `yir` (1.8 MB). Workbox
+         * caches precache entries strictly one at a time
+         * (GoogleChrome/workbox#2528), so install spent minutes on serialized
+         * requests -- and because precaching runs inside the install event's
+         * `waitUntil`, the worker could not activate (and therefore could not
+         * serve a single runtime cache) until it finished.
+         *
+         * Hashed build output does not need precaching: it is immutable by
+         * URL, so the `CacheFirst` static-asset route in `service-worker.ts`
+         * caches exactly the chunks the visitor actually loads, when they load
+         * them.
+         */
+        globPatterns: [
+          'client/*.{svg,ico,webmanifest}',
+          'client/pwa/{android,ios,shortcuts}/*.{png,svg}',
+          'client/placeholders/*.png',
+        ],
+        globIgnores: [
+          'server/**',
+          'client/_app/**',
+        ],
       },
       devOptions: {
         enabled: true,
