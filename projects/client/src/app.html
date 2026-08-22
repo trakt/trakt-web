@@ -28,7 +28,34 @@
     >
     <!-- PWA -->
     <link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest">
-    <script src="%sveltekit.assets%/register-install.js?v=%cache.timestamp%">
+    <!--
+      Inlined rather than fetched: as an external `<script>` in `<head>` with no
+      `defer` and a per-request cache-busting query, it blocked HTML parsing on
+      an uncacheable round trip on every single page load.
+    -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        /*
+          Registered at parse time, not inside the `load` callback:
+          `beforeinstallprompt` can fire before `load`, and the footer's
+          install button is gated on the stashed event, so a missed event
+          means the button never renders at all.
+
+          `preventDefault()` cancels the browser's own install UI and is the
+          documented precondition for calling `event.prompt()` later from a
+          user gesture.
+        */
+        globalThis.addEventListener('beforeinstallprompt', (event) => {
+          event.preventDefault();
+          globalThis.install = event;
+        });
+
+        globalThis.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js', {
+            type: 'module',
+          });
+        });
+      }
     </script>
     <meta name="mobile-web-app-capable" content="yes">
     <meta
@@ -70,21 +97,11 @@
       href="https://media.trakt.tv"
       crossorigin="anonymous"
     />
-    <link rel="preconnect" href="https://cdn.plyr.io" crossorigin="anonymous" />
     <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&family=Roboto+Mono:wght@400;600&family=Tajawal:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Plyr CSS - loaded async so it does not block first paint -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.plyr.io/3.8.3/plyr.css"
-      media="print"
-      onload="this.media='all'"
-    />
-    <!-- Plyr JS - deferred so it does not block first paint -->
-    <script src="https://cdn.plyr.io/3.8.3/plyr.js" defer></script>
     <!-- Base styles -->
     <style>
       html,
