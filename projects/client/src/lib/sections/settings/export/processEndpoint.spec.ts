@@ -25,8 +25,11 @@ describe('processEndpoint', () => {
     );
 
     const pages: Array<number> = [];
-    await processEndpoint(PATH, (_, { page }) => {
-      pages.push(page);
+    await processEndpoint({
+      path: PATH,
+      onPage: (_, { page }) => {
+        pages.push(page);
+      },
     });
 
     expect(pages).to.deep.equal([1, 2, 3]);
@@ -44,8 +47,11 @@ describe('processEndpoint', () => {
     );
 
     const pages: Array<number> = [];
-    await processEndpoint(PATH, (_, { page }) => {
-      pages.push(page);
+    await processEndpoint({
+      path: PATH,
+      onPage: (_, { page }) => {
+        pages.push(page);
+      },
     });
 
     expect(pages).to.deep.equal([1, 2, 3, 4]);
@@ -60,8 +66,11 @@ describe('processEndpoint', () => {
     );
 
     const pages: Array<number> = [];
-    await processEndpoint(PATH, (_, { page }) => {
-      pages.push(page);
+    await processEndpoint({
+      path: PATH,
+      onPage: (_, { page }) => {
+        pages.push(page);
+      },
     });
 
     expect(pages).to.deep.equal([1]);
@@ -85,8 +94,11 @@ describe('processEndpoint', () => {
     );
 
     const pages: Array<number> = [];
-    await processEndpoint(PATH, (_, { page }) => {
-      pages.push(page);
+    await processEndpoint({
+      path: PATH,
+      onPage: (_, { page }) => {
+        pages.push(page);
+      },
     });
 
     expect(pages).to.deep.equal([1, 2, 3]);
@@ -104,8 +116,11 @@ describe('processEndpoint', () => {
     );
 
     const pages: Array<number> = [];
-    await processEndpoint(PATH, (_, { page }) => {
-      pages.push(page);
+    await processEndpoint({
+      path: PATH,
+      onPage: (_, { page }) => {
+        pages.push(page);
+      },
     });
 
     expect(pages).to.deep.equal([1]);
@@ -119,17 +134,21 @@ describe('processEndpoint', () => {
         })),
     );
 
-    await expect(processEndpoint(PATH, () => {})).rejects.toThrow(
-      /past its reported page count/,
-    );
+    await expect(processEndpoint({ path: PATH, onPage: () => {} })).rejects
+      .toThrow(
+        /past its reported page count/,
+      );
   });
 
   it('should stop after a single page when there is nothing to paginate', async () => {
     server.use(http.get(ENDPOINT, () => HttpResponse.json([])));
 
     const pages: Array<number> = [];
-    await processEndpoint(PATH, (_, { page }) => {
-      pages.push(page);
+    await processEndpoint({
+      path: PATH,
+      onPage: (_, { page }) => {
+        pages.push(page);
+      },
     });
 
     expect(pages).to.deep.equal([1]);

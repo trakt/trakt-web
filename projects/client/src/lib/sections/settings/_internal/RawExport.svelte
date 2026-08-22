@@ -7,6 +7,7 @@
   import { time } from "$lib/utils/timing/time.ts";
   import { slide } from "svelte/transition";
   import { runRawExport } from "../export/runRawExport.ts";
+  import { toExportStatusText } from "../export/toExportStatusText.ts";
   import SettingsRow from "./SettingsRow.svelte";
   import SettingsSection from "./SettingsSection.svelte";
 
@@ -16,25 +17,29 @@
   type ExportState = {
     isExporting: boolean;
     statusText: string;
-    progress: string;
-    endpointCount: number;
+    processed: number;
+    total: number;
   };
 
   const state = $state<ExportState>({
     isExporting: false,
     statusText: "",
-    progress: "",
-    endpointCount: 0,
+    processed: 0,
+    total: 0,
   });
+
+  const progressText = $derived(
+    state.total > 0 ? `(${state.processed}/${state.total})` : "",
+  );
 
   async function startExport() {
     if (!$user) return;
 
     const startTime = Date.now();
     state.isExporting = true;
-    state.endpointCount = 0;
     state.statusText = "";
-    state.progress = "";
+    state.processed = 0;
+    state.total = 0;
     let failedCount = 0;
 
     record(AnalyticsEvent.ExportInitiated, {});
@@ -42,49 +47,34 @@
     await runRawExport({
       user: { slug: $user.slug, isVip: $user.isVip },
       onStatus: (status) => {
-        switch (status.type) {
-          case "complete":
-            state.statusText = m.text_export_status_complete();
-            break;
-          case "partial":
-            failedCount = status.failed;
-            state.statusText = status.failed === 1
-              ? m.text_export_status_partial_one({ total: state.endpointCount })
-              : m.text_export_status_partial_other({
-                failed: status.failed,
-                total: state.endpointCount,
-              });
-            break;
-          case "zip":
-            state.statusText = m.text_export_status_zipping();
-            break;
-          case "fetch":
-            state.statusText = m.text_export_status_fetching({ item: status.item });
-            state.endpointCount += 1;
-            break;
+        if (status.type === "partial") {
+          failedCount = status.failed;
         }
+
+        state.statusText = toExportStatusText({ status, total: state.total });
       },
-      onProgress: (msg) => {
-        state.progress = msg;
+      onProgress: ({ processed, total }) => {
+        state.processed = processed;
+        state.total = total;
       },
       onComplete: () => {
         const exportDuration = Date.now() - startTime;
         record(AnalyticsEvent.ExportCompleted, {
           duration: exportDuration,
-          endpointCount: state.endpointCount,
+          endpointCount: state.total,
           failedCount,
         });
 
         if (failedCount > 0) {
           state.isExporting = false;
-          state.progress = "";
           return;
         }
 
         setTimeout(() => {
           state.isExporting = false;
           state.statusText = "";
-          state.progress = "";
+          state.processed = 0;
+          state.total = 0;
         }, time.seconds(3));
       },
       onError: (err) => {
@@ -121,7 +111,7 @@
       </Button>
       <div>
         {#if state.isExporting}
-          {@render exportLabel(m.text_exporting({ progress: state.progress }))}
+          {@render exportLabel(m.text_exporting({ progress: progressText }))}
         {/if}
         {#if state.statusText}
           {@render exportLabel(state.statusText)}
