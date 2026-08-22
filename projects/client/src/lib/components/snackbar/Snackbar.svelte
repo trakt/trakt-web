@@ -3,7 +3,7 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
-  import { onMount } from "svelte";
+  import { onMount, type Snippet } from "svelte";
   import { fly } from "svelte/transition";
 
   type SnackbarAction = {
@@ -12,16 +12,22 @@
     onAction: () => void;
   };
 
-  type SnackbarProps = {
-    open: boolean;
-    onDismiss: () => void;
-    title?: string;
-    message: string;
-    href?: string;
-    action?: SnackbarAction;
-    variant?: "default" | "error";
-    dismissDurationMs?: number;
-  };
+  type SnackbarContent =
+    | { message: string; href?: string; children?: never }
+    | { message?: never; href?: never; children: Snippet };
+
+  type SnackbarProps =
+    & {
+      open: boolean;
+      onDismiss: () => void;
+      title?: string;
+      action?: SnackbarAction;
+      variant?: "default" | "error";
+      dismissDurationMs?: number;
+      persistent?: boolean;
+      dismissible?: boolean;
+    }
+    & SnackbarContent;
 
   const {
     open,
@@ -29,9 +35,12 @@
     title,
     message,
     href,
+    children,
     action,
     variant = "default",
     dismissDurationMs,
+    persistent,
+    dismissible = true,
   }: SnackbarProps = $props();
 
   let navbarHeight = $state(0);
@@ -101,19 +110,28 @@
     {/if}
 
     <div class="snackbar-content">
-      <p class="snackbar-message">
-        {#if href}
-          <MessageWithLink {message} {href} target="_blank" />
-        {:else}
-          {message}
-        {/if}
-      </p>
+      {#if children}
+        <div class="snackbar-message">
+          {@render children()}
+        </div>
+      {:else}
+        <p class="snackbar-message">
+          {#if href}
+            <MessageWithLink {message} {href} target="_blank" />
+          {:else}
+            {message}
+          {/if}
+        </p>
+      {/if}
       {@render actionButton()}
-      <AutoCloseButton
-        onclick={onDismiss}
-        label={m.button_label_close()}
-        durationMs={dismissDurationMs}
-      />
+      {#if dismissible}
+        <AutoCloseButton
+          onclick={onDismiss}
+          label={m.button_label_close()}
+          durationMs={dismissDurationMs}
+          {persistent}
+        />
+      {/if}
     </div>
   </div>
 {/if}
