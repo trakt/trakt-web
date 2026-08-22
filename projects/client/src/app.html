@@ -35,13 +35,24 @@
     -->
     <script>
       if ('serviceWorker' in navigator) {
+        /*
+          Registered at parse time, not inside the `load` callback:
+          `beforeinstallprompt` can fire before `load`, and the footer's
+          install button is gated on the stashed event, so a missed event
+          means the button never renders at all.
+
+          `preventDefault()` cancels the browser's own install UI and is the
+          documented precondition for calling `event.prompt()` later from a
+          user gesture.
+        */
+        globalThis.addEventListener('beforeinstallprompt', (event) => {
+          event.preventDefault();
+          globalThis.install = event;
+        });
+
         globalThis.addEventListener('load', () => {
           navigator.serviceWorker.register('/service-worker.js', {
             type: 'module',
-          });
-
-          globalThis.addEventListener('beforeinstallprompt', (event) => {
-            globalThis.install = event;
           });
         });
       }
