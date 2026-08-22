@@ -5143,6 +5143,21 @@
         }
       }
     },
+    "export_status_exporting_page": {
+      "default": "Exporting {processed} / {total} sections, page {page}…",
+      "description": "Status text shown while a raw data export works through a section that spans several pages.",
+      "variables": {
+        "processed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        },
+        "page": {
+          "type": "number"
+        }
+      }
+    },
     "header_exporting_data": {
       "default": "Exporting your data",
       "description": "Title of the notification shown while a raw data export runs ahead of a destructive action."

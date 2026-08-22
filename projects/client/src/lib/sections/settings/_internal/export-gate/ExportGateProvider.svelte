@@ -19,6 +19,7 @@
     isExporting: false,
     processed: 0,
     total: 0,
+    page: 0,
     statusText: "",
     hasFailed: false,
   });
@@ -29,6 +30,7 @@
     state.isExporting = false;
     state.processed = 0;
     state.total = 0;
+    state.page = 0;
     state.statusText = "";
     state.hasFailed = false;
   };
@@ -69,9 +71,10 @@
       onStatus: (status) => {
         state.statusText = toExportStatusText({ status, total: state.total });
       },
-      onProgress: ({ processed, total }) => {
+      onProgress: ({ processed, total, page }) => {
         state.processed = processed;
         state.total = total;
+        state.page = page ?? 0;
       },
     });
 

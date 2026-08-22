@@ -11,14 +11,17 @@
 
   const { state, onStop, onDismiss }: ExportGateSnackbarProps = $props();
 
-  const message = $derived(
-    state.isExporting && state.total > 0
-      ? m.export_status_exporting({
-        processed: state.processed,
-        total: state.total,
-      })
-      : state.statusText,
-  );
+  const message = $derived.by(() => {
+    if (!state.isExporting || state.total === 0) {
+      return state.statusText;
+    }
+
+    const counts = { processed: state.processed, total: state.total };
+
+    return state.page > 0
+      ? m.export_status_exporting_page({ ...counts, page: state.page })
+      : m.export_status_exporting(counts);
+  });
 
   const stopText = $derived(m.button_text_stop_export());
 </script>
