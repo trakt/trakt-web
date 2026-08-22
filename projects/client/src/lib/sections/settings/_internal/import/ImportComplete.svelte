@@ -342,7 +342,7 @@
     aspect-ratio: 2 / 3;
     overflow: hidden;
 
-    background: var(--color-tablist-background);
+    background: var(--color-card-background);
     border: var(--border-thickness-m) solid transparent;
     border-radius: var(--border-radius-m);
 

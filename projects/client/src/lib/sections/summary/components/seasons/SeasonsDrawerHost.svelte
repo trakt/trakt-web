@@ -1,9 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
-  import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
-  import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -56,18 +53,6 @@
     {currentSeason}
     urlBuilder={buildSeasonLink}
   />
-{/snippet}
-
-{#snippet episodesIcon()}
-  <PlayIcon />
-{/snippet}
-
-{#snippet overviewIcon()}
-  <InfoIcon />
-{/snippet}
-
-{#snippet reviewsIcon()}
-  <CommentIcon />
 {/snippet}
 
 {#snippet episodesContent()}
@@ -129,20 +114,17 @@
           {
             value: "episodes",
             label: m.tab_text_seasons_episodes(),
-            icon: episodesIcon,
             content: episodesContent,
           },
           {
             value: "overview",
             label: m.tab_text_seasons_info(),
-            icon: overviewIcon,
             content: overviewContent,
             keepMounted: true,
           },
           {
             value: "reviews",
             label: m.tab_text_seasons_reviews(),
-            icon: reviewsIcon,
             content: reviewsContent,
           },
         ]}

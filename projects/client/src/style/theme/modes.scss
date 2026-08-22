@@ -309,28 +309,15 @@
     var(--purple-60),
     var(--purple-90)
   );
-  --color-vip-tablist-background: color-mix(
-    in srgb,
-    var(--purple-900) 6%,
-    transparent
-  );
-  --background-vip-tab: linear-gradient(
-    135deg,
-    var(--purple-400),
-    var(--purple-600)
-  );
-  --color-vip-tab-hover-background: color-mix(
-    in srgb,
-    var(--purple-500) 10%,
-    transparent
-  );
   /*
    * Tab view
    */
-  --color-tablist-background: var(--shade-100);
-  --color-tab-background: var(--shade-10);
-  --color-tab-hover-background: var(--shade-70);
+  /* Lighter than --color-text-secondary so the active label reads as active. */
+  --color-tab-text: var(--shade-600);
   --color-tab-active-text: var(--color-text-primary);
+  --color-tab-count: var(--shade-600);
+  --color-tab-indicator: var(--purple-600);
+  --color-tab-rule: var(--shade-100);
 
   /*
    * Streak
@@ -369,13 +356,6 @@
    */
   --color-confirmation-destructive-background: var(--red-300);
   --color-confirmation-destructive-foreground: var(--red-1000);
-
-  /*
-   * Filters
-   */
-  --color-filter-tablist-background: var(--shade-100);
-  --color-filter-tab-background: var(--purple-700);
-  --color-filter-tab-active-text: var(--shade-10);
 
   /*
    * Data visualization
@@ -817,28 +797,14 @@
     color-mix(in srgb, var(--purple-500) 10%, var(--shade-910)),
     color-mix(in srgb, var(--purple-500) 7%, var(--shade-940))
   );
-  --color-vip-tablist-background: color-mix(
-    in srgb,
-    var(--shade-1000) 35%,
-    transparent
-  );
-  --background-vip-tab: linear-gradient(
-    135deg,
-    var(--purple-400),
-    var(--purple-600)
-  );
-  --color-vip-tab-hover-background: color-mix(
-    in srgb,
-    var(--purple-400) 10%,
-    transparent
-  );
   /*
    * Tab view
    */
-  --color-tablist-background: var(--shade-800);
-  --color-tab-background: var(--shade-500);
-  --color-tab-hover-background: var(--shade-700);
+  --color-tab-text: var(--color-text-secondary);
   --color-tab-active-text: var(--color-text-primary);
+  --color-tab-count: var(--color-text-secondary);
+  --color-tab-indicator: var(--purple-400);
+  --color-tab-rule: var(--shade-900);
 
   /*
    * Streak
@@ -877,13 +843,6 @@
    */
   --color-confirmation-destructive-background: var(--red-200);
   --color-confirmation-destructive-foreground: var(--red-1000);
-
-  /*
-   * Filters
-   */
-  --color-filter-tablist-background: var(--shade-910);
-  --color-filter-tab-background: var(--purple-700);
-  --color-filter-tab-active-text: var(--shade-10);
 
   /*
    * Data visualization (dark surfaces)
