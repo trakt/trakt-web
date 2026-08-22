@@ -4,9 +4,9 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
-  import type { ExportUser } from "../../export/models/ExportUser.ts";
   import { runExportGate } from "../../export/runExportGate.ts";
   import { toExportStatusText } from "../../export/toExportStatusText.ts";
+  import type { ExportGateContext } from "./ExportGateContext.ts";
   import { createExportGateContext } from "./createExportGateContext.ts";
   import ExportGateSnackbar from "./ExportGateSnackbar.svelte";
   import type { ExportGateState } from "./ExportGateState.ts";
@@ -49,12 +49,7 @@
       })();
     });
 
-  async function run(
-    { shouldExport, user }: {
-      shouldExport: boolean;
-      user: ExportUser | null | undefined;
-    },
-  ) {
+  const run: ExportGateContext["run"] = async ({ shouldExport, user }) => {
     if (!shouldExport || !user) {
       return true;
     }
@@ -107,7 +102,7 @@
     }
 
     return shouldProceed;
-  }
+  };
 
   createExportGateContext({ run, stop });
 </script>
