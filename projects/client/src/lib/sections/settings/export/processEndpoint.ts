@@ -1,21 +1,23 @@
-import { fetchWithRetry } from './fetchWithRetry.ts';
 import { PAGE_LIMIT } from './constants.ts';
+import { fetchWithRetry } from './fetchWithRetry.ts';
+import type { Pagination } from './models/Pagination.ts';
 
 const MAX_PAGES = 10_000;
 const MAX_UNREPORTED_PAGES = 100;
 
-export type Pagination = {
-  page: number;
-  pageCount: number;
-  hasMore: boolean;
+type ProcessEndpointOptions = {
+  path: string;
+  onPage: (data: unknown, pagination: Pagination) => Promise<void> | void;
+  signal?: AbortSignal;
 };
 
-export async function processEndpoint(
-  path: string,
-  onPage: (data: unknown, pagination: Pagination) => Promise<void> | void,
-): Promise<void> {
+export async function processEndpoint({
+  path,
+  onPage,
+  signal,
+}: ProcessEndpointOptions): Promise<void> {
   for (let page = 1; page <= MAX_PAGES; page++) {
-    const result = await fetchWithRetry({ url: path, page });
+    const result = await fetchWithRetry({ url: path, page, signal });
 
     const entries = Array.isArray(result.json) ? result.json : null;
     const hasMorePages = page < result.paginationPageCount;

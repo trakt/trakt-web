@@ -1,3 +1,4 @@
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import { server } from '$mocks/server.ts';
 import { unzipSync } from 'fflate';
 import { http, HttpResponse } from 'msw';
@@ -12,16 +13,20 @@ const FAILING_ENDPOINT = `http://localhost/users/${SLUG}/collection/shows`;
 
 async function exportFor(user = { slug: SLUG, isVip: false }) {
   const statuses: Array<{ type: string; failed?: number }> = [];
+  const failures: Array<unknown> = [];
 
-  await new Promise<void>((resolve, reject) => {
-    runRawExport({
-      user,
-      onStatus: (status) => statuses.push(status),
-      onProgress: () => {},
-      onComplete: resolve,
-      onError: reject,
-    });
+  await runRawExport({
+    user,
+    onStatus: (status) => statuses.push(status),
+    onProgress: NOOP_FN,
+    onComplete: NOOP_FN,
+    onError: (err) => failures.push(err),
   });
+
+  const failure = failures.at(0);
+  if (failure) {
+    throw failure;
+  }
 
   const [blob] = vi.mocked(downloadFile).mock.calls.at(-1) ?? [];
   const bytes = new Uint8Array(await (blob as Blob).arrayBuffer());
@@ -78,5 +83,43 @@ describe('runRawExport', () => {
 
     expect(statuses.at(-1)).to.deep.equal({ type: 'complete' });
     expect(files['_errors.json']).to.equal(undefined);
+  });
+
+  it('should resolve only once the archive has been downloaded', async () => {
+    await runRawExport({
+      user: { slug: SLUG, isVip: false },
+      onStatus: NOOP_FN,
+      onProgress: NOOP_FN,
+      onComplete: NOOP_FN,
+      onError: NOOP_FN,
+    });
+
+    expect(vi.mocked(downloadFile)).toHaveBeenCalledOnce();
+  });
+
+  it('should abandon an aborted export silently', async () => {
+    const controller = new AbortController();
+    const statuses: Array<{ type: string }> = [];
+    const failures: Array<unknown> = [];
+
+    server.use(
+      http.get('http://localhost/*', () => {
+        controller.abort();
+        return HttpResponse.json([]);
+      }),
+    );
+
+    await runRawExport({
+      user: { slug: SLUG, isVip: false },
+      signal: controller.signal,
+      onStatus: (status) => statuses.push(status),
+      onProgress: NOOP_FN,
+      onComplete: NOOP_FN,
+      onError: (err) => failures.push(err),
+    });
+
+    expect(failures).to.have.length(0);
+    expect(vi.mocked(downloadFile)).not.toHaveBeenCalled();
+    expect(statuses.some((status) => status.type === 'zip')).to.equal(false);
   });
 });
