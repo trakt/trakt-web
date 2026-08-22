@@ -21,6 +21,7 @@ function injectStylesheet() {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = PLYR_STYLESHEET_URL;
+  link.addEventListener('error', () => link.remove());
   document.head.appendChild(link);
 }
 
@@ -32,29 +33,30 @@ function injectScript(): Promise<PlyrConstructor> {
   }
 
   return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = PLYR_SCRIPT_URL;
+    script.async = true;
+
     const fail = () => {
-      clearTimeout(timeout);
+      script.remove();
       reject(new Error('Plyr failed to load'));
     };
 
     const timeout = setTimeout(fail, time.seconds(10));
 
-    const script = document.createElement('script');
-    script.src = PLYR_SCRIPT_URL;
-    script.async = true;
-
-    script.addEventListener('load', () => {
-      const PlyrClass = readGlobalPlyr();
+    const settle = (PlyrClass: PlyrConstructor | undefined) => {
+      clearTimeout(timeout);
 
       if (!PlyrClass) {
         fail();
         return;
       }
 
-      clearTimeout(timeout);
       resolve(PlyrClass);
-    });
-    script.addEventListener('error', fail);
+    };
+
+    script.addEventListener('load', () => settle(readGlobalPlyr()));
+    script.addEventListener('error', () => settle(undefined));
 
     document.head.appendChild(script);
   });
