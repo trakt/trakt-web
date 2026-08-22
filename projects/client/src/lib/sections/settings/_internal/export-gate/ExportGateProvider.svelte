@@ -80,8 +80,6 @@
       return false;
     }
 
-    // The export itself is over before anything is asked, so the snackbar
-    // stops offering to stop it.
     state.isExporting = false;
 
     if (result.outcome === "proceed") {
