@@ -4,7 +4,7 @@ import type { ConfirmationParams } from '../models/ConfirmationParams.ts';
 import type { ConfirmationType } from '../models/ConfirmationType.ts';
 
 export type ConfirmationRequest = Confirmation & {
-  onConfirm: () => void;
+  onConfirm: (isPreflightEnabled: boolean) => void;
   onCancel?: () => void;
   params: ConfirmationParams<ConfirmationType>;
 };
