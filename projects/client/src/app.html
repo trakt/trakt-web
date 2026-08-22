@@ -28,7 +28,18 @@
     >
     <!-- PWA -->
     <link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest">
-    <script src="%sveltekit.assets%/register-install.js?v=%cache.timestamp%">
+    <script>
+      if ('serviceWorker' in navigator) {
+        globalThis.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js', {
+            type: 'module',
+          });
+
+          globalThis.addEventListener('beforeinstallprompt', (event) => {
+            globalThis.install = event;
+          });
+        });
+      }
     </script>
     <meta name="mobile-web-app-capable" content="yes">
     <meta

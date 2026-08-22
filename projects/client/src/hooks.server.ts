@@ -2,7 +2,6 @@ import '$lib/polyfills/mapGroupBy.ts';
 import { handle as handleAssetFallback } from '$lib/features/asset-fallback/handle.ts';
 import { handle as handleAuth } from '$lib/features/auth/handle.ts';
 import { handle as handleBotVerification } from '$lib/features/bot-verification/handle.ts';
-import { handle as handleCacheBust } from '$lib/features/cache-bust/handle.ts';
 import { resolveCacheControl } from '$lib/features/cache-control/resolveCacheControl.ts';
 import { handle as handleDeployment } from '$lib/features/deployment/handle.ts';
 import { handle as handleDevice } from '$lib/features/devices/handle.ts';
@@ -132,7 +131,6 @@ export const handle: Handle = sequence(
   handleTheme,
   handleAuth,
   handleImage,
-  handleCacheBust,
   handleReferrerPolicy,
   ({ event, resolve }) => {
     return resolve(event, {
