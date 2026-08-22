@@ -31,10 +31,11 @@
     cancelText={$activeConfirmation.cancelText}
     operation={$activeConfirmation.operation}
     challenge={$activeConfirmation.challenge}
+    preflight={$activeConfirmation.preflight}
     content={ContentComponent ? contentSlot : undefined}
-    onAction={(action) => {
+    onAction={(action, isPreflightEnabled) => {
       if (action === "confirm") {
-        $activeConfirmation.onConfirm();
+        $activeConfirmation.onConfirm(isPreflightEnabled);
       }
 
       if (action === "cancel") {

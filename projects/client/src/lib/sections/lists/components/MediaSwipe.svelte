@@ -25,7 +25,7 @@
       type: ConfirmationType.MarkAsWatched,
       title: media.title,
       target,
-      onConfirm: markAsWatched,
+      onConfirm: () => markAsWatched(),
     }),
   );
 

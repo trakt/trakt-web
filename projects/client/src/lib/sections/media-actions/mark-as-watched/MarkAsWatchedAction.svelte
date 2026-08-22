@@ -31,7 +31,7 @@
       type: ConfirmationType.MarkAsWatched,
       title,
       target,
-      onConfirm: markAsWatched,
+      onConfirm: () => markAsWatched(),
     }),
   );
   const confirmRemoveFromWatched = $derived(
