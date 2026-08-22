@@ -21,6 +21,8 @@
     action?: SnackbarAction;
     variant?: "default" | "error";
     dismissDurationMs?: number;
+    persistent?: boolean;
+    dismissible?: boolean;
   };
 
   const {
@@ -32,6 +34,8 @@
     action,
     variant = "default",
     dismissDurationMs,
+    persistent,
+    dismissible = true,
   }: SnackbarProps = $props();
 
   let navbarHeight = $state(0);
@@ -109,11 +113,14 @@
         {/if}
       </p>
       {@render actionButton()}
-      <AutoCloseButton
-        onclick={onDismiss}
-        label={m.button_label_close()}
-        durationMs={dismissDurationMs}
-      />
+      {#if dismissible}
+        <AutoCloseButton
+          onclick={onDismiss}
+          label={m.button_label_close()}
+          durationMs={dismissDurationMs}
+          {persistent}
+        />
+      {/if}
     </div>
   </div>
 {/if}

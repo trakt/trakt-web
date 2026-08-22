@@ -8,26 +8,38 @@ export type AutoDismissProps = {
   onDismiss: () => void;
   durationMs?: number;
   now?: () => number;
+  persistent?: boolean;
 };
 
 export function autoDismiss(
   node: HTMLElement,
-  { onDismiss, durationMs = defaultDuration, now = Date.now }: AutoDismissProps,
+  {
+    onDismiss,
+    durationMs = defaultDuration,
+    now = Date.now,
+    persistent = false,
+  }: AutoDismissProps,
 ) {
-  let params = { onDismiss, durationMs, now };
+  let params = { onDismiss, durationMs, now, persistent };
   const startTime = now();
 
-  const subscription = interval(time.fps(fps)).subscribe(() => {
-    const elapsedMs = params.now() - startTime;
-    const progress = Math.min(elapsedMs / params.durationMs, 1);
+  const subscription = persistent
+    ? null
+    : interval(time.fps(fps)).subscribe(() => {
+      if (params.persistent) {
+        return;
+      }
 
-    node.style.setProperty('--progress', String(progress));
+      const elapsedMs = params.now() - startTime;
+      const progress = Math.min(elapsedMs / params.durationMs, 1);
 
-    if (progress >= 1) {
-      subscription.unsubscribe();
-      params.onDismiss();
-    }
-  });
+      node.style.setProperty('--progress', String(progress));
+
+      if (progress >= 1) {
+        subscription?.unsubscribe();
+        params.onDismiss();
+      }
+    });
 
   return {
     update(newParams: AutoDismissProps) {
@@ -35,10 +47,11 @@ export function autoDismiss(
         onDismiss: newParams.onDismiss,
         durationMs: newParams.durationMs ?? params.durationMs,
         now: newParams.now ?? params.now,
+        persistent: newParams.persistent ?? params.persistent,
       };
     },
     destroy() {
-      subscription.unsubscribe();
+      subscription?.unsubscribe();
     },
   };
 }
