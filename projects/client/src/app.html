@@ -30,13 +30,14 @@
     <link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest">
     <script>
       if ('serviceWorker' in navigator) {
+        globalThis.addEventListener('beforeinstallprompt', (event) => {
+          event.preventDefault();
+          globalThis.install = event;
+        });
+
         globalThis.addEventListener('load', () => {
           navigator.serviceWorker.register('/service-worker.js', {
             type: 'module',
-          });
-
-          globalThis.addEventListener('beforeinstallprompt', (event) => {
-            globalThis.install = event;
           });
         });
       }
