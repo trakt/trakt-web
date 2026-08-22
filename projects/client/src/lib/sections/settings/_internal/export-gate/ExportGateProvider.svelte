@@ -54,6 +54,10 @@
       return true;
     }
 
+    if (state.isExporting) {
+      return false;
+    }
+
     reset();
     abortController = new AbortController();
     const { signal } = abortController;
