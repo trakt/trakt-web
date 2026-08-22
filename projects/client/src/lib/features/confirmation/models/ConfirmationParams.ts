@@ -85,6 +85,14 @@ interface ConfirmationParamsMap {
   [ConfirmationType.CancelClear]: {
     type: ConfirmationType.CancelClear;
   };
+  [ConfirmationType.CancelExport]: {
+    type: ConfirmationType.CancelExport;
+  };
+  [ConfirmationType.ProceedAfterPartialExport]: {
+    type: ConfirmationType.ProceedAfterPartialExport;
+    failed: number;
+    total: number;
+  };
   [ConfirmationType.ClearData]: {
     type: ConfirmationType.ClearData;
     sourceText: string;

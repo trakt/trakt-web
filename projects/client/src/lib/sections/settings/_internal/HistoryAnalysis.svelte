@@ -22,6 +22,7 @@
   import { cleanUpHistoryPlays } from "../sync/cleanUpHistoryPlays.ts";
   import type { SyncState } from "../sync/models/SyncState.ts";
   import SyncProgress from "./components/SyncProgress.svelte";
+  import { useExportGate } from "./export-gate/useExportGate.ts";
   import {
     getPlaysSummary,
     type PlaysSummary,
@@ -30,10 +31,11 @@
   import PlayRetentionToggler from "./history-analysis/PlayRetentionToggler.svelte";
   import SettingsSection from "./SettingsSection.svelte";
 
-  const { limits } = useUser();
+  const { user, limits } = useUser();
   const { invalidateAll } = useInvalidator();
   const { clearInProgress } = useClearInProgress();
   const { confirm } = useConfirm();
+  const exportGate = useExportGate();
 
   const moviePlays = useQuery(currentUserWatchedMoviePlaysQuery({}));
   const showPlays = useQuery(currentUserWatchedShowPlaysQuery({}));
@@ -90,16 +92,31 @@
   let removedCount = $state(0);
 
   const isCleaning = $derived(syncState.status === "cleaning");
+  let isRunning = $state(false);
 
   let abortController: AbortController | null = null;
-  async function startCleanUp(category: AnalysisCategory) {
+  async function startCleanUp(
+    category: AnalysisCategory,
+    shouldExport: boolean,
+  ) {
     const { duplicateIds } = category.summary;
     if (duplicateIds.length === 0) return;
 
-    abortController = new AbortController();
+    isRunning = true;
     clearInProgress.next(true);
     activeTarget = category.target;
     doneTarget = null;
+
+    const canProceed = await exportGate.run({ shouldExport, user: $user });
+
+    if (!canProceed) {
+      isRunning = false;
+      clearInProgress.next(false);
+      activeTarget = null;
+      return;
+    }
+
+    abortController = new AbortController();
     syncState.status = "cleaning";
     syncState.processedCount = 0;
     syncState.totalCount = duplicateIds.length;
@@ -121,6 +138,7 @@
         removedCount = syncState.totalCount - failedCount;
         await invalidateAll(category.invalidations);
         clearInProgress.next(false);
+        isRunning = false;
         doneTarget = category.target;
         activeTarget = null;
         syncState.status = "done";
@@ -129,7 +147,9 @@
   }
 
   function stopCleanUp() {
+    exportGate.stop();
     abortController?.abort();
+    isRunning = false;
     clearInProgress.next(false);
     activeTarget = null;
     syncState.status = "idle";
@@ -217,14 +237,15 @@
                     variant="secondary"
                     disabled={$clearInProgress ||
                       category.summary.duplicates === 0}
-                    icon={isCleaning && activeTarget === category.target
+                    icon={isRunning && activeTarget === category.target
                       ? loadingIcon
                       : undefined}
                     onclick={confirm({
                       type: ConfirmationType.CleanUpHistory,
                       count: category.summary.duplicates,
                       keeps: retention,
-                      onConfirm: () => startCleanUp(category),
+                      onConfirm: (shouldExport) =>
+                        startCleanUp(category, shouldExport),
                     })}
                   >
                     {m.button_text_clean_up()}
