@@ -2,14 +2,11 @@ import { error } from '$lib/utils/console/print.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { strToU8, zip, type Zippable } from 'fflate';
 import { downloadFile } from './downloadFile.ts';
-import { type Pagination, processEndpoint } from './processEndpoint.ts';
+import type { ExportOptions } from './models/ExportOptions.ts';
+import type { Pagination } from './models/Pagination.ts';
+import { processEndpoint } from './processEndpoint.ts';
 
 const FETCH_TIME_BUDGET = time.hours(2);
-
-type UserLike = {
-  slug: string;
-  isVip: boolean;
-};
 
 interface TraktList {
   ids: {
@@ -25,22 +22,9 @@ type ExportFailure = {
   totalPages: number;
 };
 
-type ExportStatus =
-  | { type: 'fetch'; item: string }
-  | { type: 'zip' }
-  | { type: 'partial'; failed: number }
-  | { type: 'complete' };
-
-interface ExportOptions {
-  user: UserLike;
-  onStatus: (status: ExportStatus) => void;
-  onProgress: (msg: string) => void;
-  onComplete: () => void;
-  onError: (err: unknown) => void;
-}
-
 export async function runRawExport({
   user,
+  signal,
   onStatus,
   onProgress,
   onComplete,
@@ -181,7 +165,9 @@ export async function runRawExport({
   const failures: Array<ExportFailure> = [];
 
   const fetchDeadline = Date.now() + FETCH_TIME_BUDGET;
-  const assertWithinBudget = () => {
+  const assertCanContinue = () => {
+    signal?.throwIfAborted();
+
     if (Date.now() < fetchDeadline) {
       return;
     }
@@ -200,18 +186,26 @@ export async function runRawExport({
     const progress = { fetchedPages: 0, totalPages: 0 };
 
     try {
-      assertWithinBudget();
+      assertCanContinue();
 
-      await processEndpoint(path, (data, pagination) => {
-        progress.fetchedPages = pagination.page;
-        progress.totalPages = pagination.pageCount;
-        onPage(data, pagination);
+      await processEndpoint({
+        path,
+        signal,
+        onPage: (data, pagination) => {
+          progress.fetchedPages = pagination.page;
+          progress.totalPages = pagination.pageCount;
+          onPage(data, pagination);
 
-        if (pagination.hasMore) {
-          assertWithinBudget();
-        }
+          if (pagination.hasMore) {
+            assertCanContinue();
+          }
+        },
       });
     } catch (e) {
+      if (signal?.aborted) {
+        throw e;
+      }
+
       error(`Export failed for ${path}`, e);
       failures.push({
         endpoint: path,
@@ -238,13 +232,13 @@ export async function runRawExport({
     let count = 0;
     for (const endpoint of endpoints) {
       count++;
-      onProgress(`(${count}/${endpoints.length})`);
+      onProgress({ processed: count, total: endpoints.length });
       onStatus({ type: 'fetch', item: endpoint.file });
 
       await collectEndpoint(endpoint.path, (data, { page, pageCount }) => {
         const isPaginated = page > 1 || pageCount > 1;
         if (isPaginated) {
-          onProgress(`(${count}/${endpoints.length} · ${page})`);
+          onProgress({ processed: count, total: endpoints.length, page });
         }
         const suffix = isPaginated ? `-${page}` : '';
         const filename = `${endpoint.file}${suffix}.json`;
@@ -257,25 +251,34 @@ export async function runRawExport({
     }
 
     onStatus({ type: 'zip' });
-    zip(files, (err, out) => {
-      if (err) {
-        error('Zip failed', err);
-        onError(err);
-        return;
-      }
-      const blob = new Blob([out as unknown as BlobPart], {
-        type: 'application/zip',
-      });
 
-      downloadFile(blob, `trakt-export-${slug}.zip`);
-      onStatus(
-        failures.length > 0
-          ? { type: 'partial', failed: failures.length }
-          : { type: 'complete' },
-      );
-      onComplete();
+    const archive = await new Promise<Uint8Array>((resolve, reject) => {
+      zip(files, (err, out) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        resolve(out);
+      });
     });
+
+    const blob = new Blob([archive as unknown as BlobPart], {
+      type: 'application/zip',
+    });
+
+    downloadFile(blob, `trakt-export-${slug}.zip`);
+    onStatus(
+      failures.length > 0
+        ? { type: 'partial', failed: failures.length }
+        : { type: 'complete' },
+    );
+    onComplete();
   } catch (e) {
+    if (signal?.aborted) {
+      return;
+    }
+
     error('Export failed', e);
     onError(e);
   }

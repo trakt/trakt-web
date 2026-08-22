@@ -7,6 +7,7 @@ import { PAGE_LIMIT } from './constants.ts';
 type FetchWithRetryParams = {
   url: string;
   page?: number;
+  signal?: AbortSignal;
   timeout?: number;
   retryDelay?: number;
   maxTry?: number;
@@ -29,9 +30,20 @@ function toHttpError(status: number) {
     : new PermanentHttpError(status);
 }
 
+function toRequestSignal(timeout: number, signal?: AbortSignal) {
+  const timeoutSignal = AbortSignal.timeout(timeout);
+
+  if (!signal) {
+    return timeoutSignal;
+  }
+
+  return AbortSignal.any([signal, timeoutSignal]);
+}
+
 export function fetchWithRetry({
   url,
   page = 1,
+  signal,
   timeout = time.minutes(1),
   retryDelay = time.seconds(10),
   maxTry = 10,
@@ -41,13 +53,15 @@ export function fetchWithRetry({
 }> {
   return retryAsync(
     async () => {
+      signal?.throwIfAborted();
+
       const pageUrl = url.includes('?')
         ? `${url}&page=${page}&limit=${PAGE_LIMIT}`
         : `${url}?page=${page}&limit=${PAGE_LIMIT}`;
 
       const response = await rawApiFetch({
         path: `/${pageUrl}`,
-        init: { signal: AbortSignal.timeout(timeout) },
+        init: { signal: toRequestSignal(timeout, signal) },
       });
 
       if (response.status === 429) {
@@ -70,6 +84,10 @@ export function fetchWithRetry({
       delay: retryDelay,
       maxTry,
       onError: (err) => {
+        if (signal?.aborted) {
+          return false;
+        }
+
         if (err instanceof PermanentHttpError) {
           error('Fetch failed, giving up', err);
           return false;
