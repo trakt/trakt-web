@@ -1,19 +1,21 @@
-import { time } from '$lib/utils/timing/time.ts';
+import { browser } from '$app/environment';
+import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { BehaviorSubject } from 'rxjs';
+import { onDestroy } from 'svelte';
 
 export function useInstallPrompt() {
   const promptStore = new BehaviorSubject<BeforeInstallPromptEvent | null>(
     globalThis.install ?? null,
   );
 
-  const interval = setInterval(() => {
-    if (globalThis.install) {
-      promptStore.next(globalThis.install);
-      clearInterval(interval);
-    }
-  }, time.fps(30));
-
-  setTimeout(() => clearInterval(interval), time.seconds(2.5));
+  if (browser) {
+    onDestroy(
+      GlobalEventBus.getInstance().register(
+        'beforeinstallprompt',
+        (event) => promptStore.next(event),
+      ),
+    );
+  }
 
   return {
     subscribe: promptStore.subscribe.bind(promptStore),

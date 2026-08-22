@@ -24,6 +24,10 @@ declare global {
     prompt: () => Promise<{ outcome: 'accepted' | 'dismissed' }>;
   };
 
+  interface WindowEventMap {
+    beforeinstallprompt: BeforeInstallPromptEvent;
+  }
+
   type Nil = null | undefined;
 
   type HttpsUrl = `https://${string}`;
