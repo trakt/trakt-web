@@ -7,15 +7,24 @@
 
   let defaultOpen = $state(false);
   let titledOpen = $state(false);
+  let contentOpen = $state(false);
 
   const showDefault = () => {
     defaultOpen = true;
     titledOpen = false;
+    contentOpen = false;
   };
 
   const showTitled = () => {
     defaultOpen = false;
     titledOpen = true;
+    contentOpen = false;
+  };
+
+  const showContent = () => {
+    defaultOpen = false;
+    titledOpen = false;
+    contentOpen = true;
   };
 
   const closeDefault = () => {
@@ -24,6 +33,10 @@
 
   const closeTitled = () => {
     titledOpen = false;
+  };
+
+  const closeContent = () => {
+    contentOpen = false;
   };
 
   onMount(showDefault);
@@ -78,6 +91,37 @@
           onAction: closeTitled,
         }}
       />
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <h2>Custom content</h2>
+      </div>
+
+      <div class="anchor-demo">
+        <Button
+          color="blue"
+          label="Show snackbar with custom content"
+          onclick={showContent}
+        >
+          Show snackbar with custom content
+        </Button>
+      </div>
+
+      <Snackbar
+        open={contentOpen}
+        onDismiss={closeContent}
+        title="Exporting your data"
+        dismissDurationMs={demoDismissDurationMs}
+        action={{
+          label: "Stop exporting",
+          text: "Stop",
+          onAction: closeContent,
+        }}
+      >
+        <p>Exporting… (12/48 · 3)</p>
+        <p class="small secondary">Fetching collection-shows…</p>
+      </Snackbar>
     </section>
   </div>
 </main>
