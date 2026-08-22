@@ -34,4 +34,6 @@ export enum ConfirmationType {
   DeleteAccount = 'delete-account',
   ResetCoverImage = 'reset-cover-image',
   SetCoverImage = 'set-cover-image',
+  ProceedAfterPartialExport = 'proceed-after-partial-export',
+  CancelExport = 'cancel-export',
 }

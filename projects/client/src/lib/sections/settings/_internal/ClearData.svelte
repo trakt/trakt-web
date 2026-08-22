@@ -20,14 +20,16 @@
   import type { ClearSource } from "./clear/models/ClearSource";
   import type { ClearSourceType } from "./clear/models/ClearSourceType";
   import SyncProgress from "./components/SyncProgress.svelte";
+  import { useExportGate } from "./export-gate/useExportGate.ts";
   import SettingsSection from "./SettingsSection.svelte";
   import SettingsRow from "./SettingsRow.svelte";
 
-  const { watchlist, ratings, history, collection } = useUser();
+  const { user, watchlist, ratings, history, collection } = useUser();
   const { invalidateAll } = useInvalidator();
   const { clearInProgress } = useClearInProgress();
   const { confirm } = useConfirm();
   const { record } = useAnalytics();
+  const exportGate = useExportGate();
 
   type ClearStatus = "idle" | "clearing" | "done";
 
@@ -53,6 +55,7 @@
   });
 
   const isClearing = $derived(syncState.status === "clearing");
+  let isRunning = $state(false);
 
   const { totalCount, invalidations } = $derived(
     getClearProperties(activeSource),
@@ -63,14 +66,24 @@
   }
 
   let abortController: AbortController | null = null;
-  async function startClear() {
+  async function startClear(shouldExport: boolean) {
     const source = activeSource;
     if (!isClearDataInput(source)) return;
 
     record(AnalyticsEvent.ClearInitiated, { source: source.type });
 
-    abortController = new AbortController();
+    isRunning = true;
     clearInProgress.next(true);
+
+    const canProceed = await exportGate.run({ shouldExport, user: $user });
+
+    if (!canProceed) {
+      isRunning = false;
+      clearInProgress.next(false);
+      return;
+    }
+
+    abortController = new AbortController();
     syncState.status = "clearing";
     syncState.processedCount = 0;
     syncState.totalCount = totalCount;
@@ -89,6 +102,7 @@
       onComplete: async (success) => {
         if (!success) {
           clearInProgress.next(false);
+          isRunning = false;
           record(AnalyticsEvent.ClearFailed, {
             source: source.type,
             error: "aborted or fully failed",
@@ -109,14 +123,17 @@
 
         await invalidateAll(invalidations);
         clearInProgress.next(false);
+        isRunning = false;
         syncState.status = "done";
       },
     });
   }
 
   function stopClear() {
+    exportGate.stop();
     abortController?.abort();
     clearInProgress.next(false);
+    isRunning = false;
     syncState.status = "idle";
     syncState.processedCount = 0;
     syncState.totalCount = 0;
@@ -127,7 +144,7 @@
   };
 
   const onSourceChange = (type: ClearSourceType) => {
-    if (!isClearing) {
+    if (!isRunning) {
       applySourceChange(type);
       return;
     }
@@ -189,8 +206,8 @@
                 sourceText: currentSourceText,
                 onConfirm: startClear,
               })}
-              disabled={isLoading || isClearing || totalCount === 0}
-              icon={isLoading ? loadingIcon : undefined}
+              disabled={isLoading || $clearInProgress || totalCount === 0}
+              icon={isLoading || isRunning ? loadingIcon : undefined}
             >
               {m.button_text_clear_now()}
             </Button>
@@ -221,6 +238,7 @@
     </div>
   </SettingsSection>
 </NavigationGuard>
+
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

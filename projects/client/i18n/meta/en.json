@@ -5123,6 +5123,67 @@
         }
       }
     },
+    "switch_label_export_before_destructive": {
+      "default": "Export my data first",
+      "description": "Label for the switch, enabled by default, that runs a raw data export before a destructive action such as clearing data, cleaning up history or deleting an account."
+    },
+    "description_export_before_destructive": {
+      "default": "Downloads a ZIP of your data before anything is removed.",
+      "description": "Hint explaining what the export switch inside a destructive confirmation dialog does."
+    },
+    "export_status_exporting": {
+      "default": "Exporting {processed} / {total} sections…",
+      "description": "Status text shown while a raw data export runs ahead of a destructive action.",
+      "variables": {
+        "processed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "header_exporting_data": {
+      "default": "Exporting your data",
+      "description": "Title of the notification shown while a raw data export runs ahead of a destructive action."
+    },
+    "button_text_stop_export": {
+      "default": "Stop Exporting",
+      "description": "Text for the button that stops an in-progress data export."
+    },
+    "confirmation_title_proceed_after_partial_export": {
+      "default": "Export incomplete",
+      "description": "Title of the confirmation dialog shown when a data export finished with failures, asking whether the destructive action should still run."
+    },
+    "warning_prompt_partial_export_one": {
+      "default": "1 of {total} sections failed to export. Continue anyway?",
+      "description": "Warning prompt shown when exactly one section failed to export, asking whether the destructive action should still run.",
+      "variables": {
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "warning_prompt_partial_export_other": {
+      "default": "{failed} of {total} sections failed to export. Continue anyway?",
+      "description": "Warning prompt shown when several sections failed to export, asking whether the destructive action should still run.",
+      "variables": {
+        "failed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "confirmation_title_stop_export": {
+      "default": "Stop exporting?",
+      "description": "Title of the confirmation shown when navigating away while a data export is running."
+    },
+    "warning_prompt_cancel_export": {
+      "default": "Navigating away will stop exporting your data. Are you sure?",
+      "description": "Warning prompt shown when navigating away while a data export is running ahead of a destructive action."
+    },
     "header_import": {
       "default": "Import",
       "description": "Header for the settings section that allows users to import their data from third-party services."

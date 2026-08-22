@@ -1,10 +1,12 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import DeleteIcon from "$lib/components/icons/DeleteIcon.svelte";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import { useAuth } from "$lib/features/auth/stores/useAuth.ts";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
+  import { useClearInProgress } from "$lib/stores/useClearInProgress.ts";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
   import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -14,11 +16,14 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { map } from "rxjs";
   import { slide } from "svelte/transition";
+  import { useExportGate } from "./export-gate/useExportGate.ts";
   import SettingsGroupCard from "./SettingsGroupCard.svelte";
   import SettingsGroupRow from "./SettingsGroupRow.svelte";
 
   const { confirm } = useConfirm();
+  const exportGate = useExportGate();
   const { logout } = useAuth();
+  const { clearInProgress } = useClearInProgress();
   const { user } = useUser();
 
   const vipSubscription = useQuery(vipSubscriptionQuery()).pipe(
@@ -35,15 +40,25 @@
 
   let isDeleting = $state(false);
   let hasError = $state(false);
-
-  async function deleteAccount() {
+  async function deleteAccount(shouldExport: boolean) {
     isDeleting = true;
     hasError = false;
+
+    clearInProgress.next(true);
+
+    const canProceed = await exportGate.run({ shouldExport, user: $user });
+
+    if (!canProceed) {
+      clearInProgress.next(false);
+      isDeleting = false;
+      return;
+    }
 
     try {
       const success = await deleteAccountRequest();
 
       if (!success) {
+        clearInProgress.next(false);
         isDeleting = false;
         hasError = true;
         return;
@@ -52,62 +67,70 @@
       // Deletion revokes the account's authorizations server-side, so the
       // current token is already dead. Log out to clear local state and end the
       // session.
+      clearInProgress.next(false);
       await logout();
     } catch {
+      clearInProgress.next(false);
       isDeleting = false;
       hasError = true;
     }
   }
 </script>
 
+{#snippet loadingIcon()}
+  <LoadingIndicator />
+{/snippet}
+
 <SettingsGroupCard title={m.header_delete_account()}>
-  {#if hasActiveVip}
-    <div
-      class="trakt-delete-account-vip-notice"
-      transition:slide={{ duration: 150, axis: "y" }}
+    {#if hasActiveVip}
+      <div
+        class="trakt-delete-account-vip-notice"
+        transition:slide={{ duration: 150, axis: "y" }}
+      >
+        <span class="vip-notice-icon"><InfoIcon /></span>
+        <p class="vip-notice-text">
+          <MessageWithLink
+            message={m.notice_delete_account_vip()}
+            href={UrlBuilder.vip()}
+            target="_self"
+            color="inherit"
+          />
+        </p>
+      </div>
+    {/if}
+
+    <SettingsGroupRow
+      title={m.button_label_delete_account()}
+      description={m.description_delete_account()}
+      variant="custom"
     >
-      <span class="vip-notice-icon"><InfoIcon /></span>
-      <p class="vip-notice-text">
-        <MessageWithLink
-          message={m.notice_delete_account_vip()}
-          href={UrlBuilder.vip()}
-          target="_self"
-          color="inherit"
-        />
+      {#snippet icon()}<DeleteIcon />{/snippet}
+
+      <Button
+        label={m.button_label_delete_account()}
+        color="red"
+        size="small"
+        disabled={isDeleting || $clearInProgress ||
+          $vipSubscription === undefined || hasActiveVip}
+        icon={isDeleting ? loadingIcon : undefined}
+        onclick={confirm({
+          type: ConfirmationType.DeleteAccount,
+          username: $user?.username ?? "",
+          onConfirm: deleteAccount,
+        })}
+      >
+        {m.button_text_delete_account()}
+      </Button>
+    </SettingsGroupRow>
+
+    {#if hasError}
+      <p
+        class="trakt-delete-account-error small"
+        transition:slide={{ duration: 150, axis: "y" }}
+      >
+        {m.error_text_delete_account()}
       </p>
-    </div>
-  {/if}
-
-  <SettingsGroupRow
-    title={m.button_label_delete_account()}
-    description={m.description_delete_account()}
-    variant="custom"
-  >
-    {#snippet icon()}<DeleteIcon />{/snippet}
-
-    <Button
-      label={m.button_label_delete_account()}
-      color="red"
-      size="small"
-      disabled={isDeleting || $vipSubscription === undefined || hasActiveVip}
-      onclick={confirm({
-        type: ConfirmationType.DeleteAccount,
-        username: $user?.username ?? "",
-        onConfirm: deleteAccount,
-      })}
-    >
-      {m.button_text_delete_account()}
-    </Button>
-  </SettingsGroupRow>
-
-  {#if hasError}
-    <p
-      class="trakt-delete-account-error small"
-      transition:slide={{ duration: 150, axis: "y" }}
-    >
-      {m.error_text_delete_account()}
-    </p>
-  {/if}
+    {/if}
 </SettingsGroupCard>
 
 <style lang="scss">
