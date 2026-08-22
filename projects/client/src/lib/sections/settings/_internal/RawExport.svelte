@@ -19,6 +19,7 @@
     statusText: string;
     processed: number;
     total: number;
+    page: number;
   };
 
   const state = $state<ExportState>({
@@ -26,11 +27,18 @@
     statusText: "",
     processed: 0,
     total: 0,
+    page: 0,
   });
 
-  const progressText = $derived(
-    state.total > 0 ? `(${state.processed}/${state.total})` : "",
-  );
+  const progressText = $derived.by(() => {
+    if (state.total === 0) {
+      return "";
+    }
+
+    const counts = `${state.processed}/${state.total}`;
+
+    return state.page > 0 ? `(${counts} · ${state.page})` : `(${counts})`;
+  });
 
   async function startExport() {
     if (!$user) return;
@@ -40,6 +48,7 @@
     state.statusText = "";
     state.processed = 0;
     state.total = 0;
+    state.page = 0;
     let failedCount = 0;
 
     record(AnalyticsEvent.ExportInitiated, {});
@@ -53,9 +62,10 @@
 
         state.statusText = toExportStatusText({ status, total: state.total });
       },
-      onProgress: ({ processed, total }) => {
+      onProgress: ({ processed, total, page }) => {
         state.processed = processed;
         state.total = total;
+        state.page = page ?? 0;
       },
       onComplete: () => {
         const exportDuration = Date.now() - startTime;
@@ -75,6 +85,7 @@
           state.statusText = "";
           state.processed = 0;
           state.total = 0;
+          state.page = 0;
         }, time.seconds(3));
       },
       onError: (err) => {
