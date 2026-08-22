@@ -29,6 +29,11 @@ function injectStylesheet() {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = PLYR_STYLESHEET_URL;
+  /**
+   * A failed link left in the DOM would satisfy the presence check above
+   * forever, so the next open could never retry the stylesheet.
+   */
+  link.addEventListener('error', () => link.remove());
   document.head.appendChild(link);
 }
 
@@ -40,29 +45,32 @@ function injectScript(): Promise<PlyrConstructor> {
   }
 
   return new Promise((resolve, reject) => {
-    const fail = () => {
-      clearTimeout(timeout);
-      reject(new Error('Plyr failed to load'));
-    };
-
-    const timeout = setTimeout(fail, time.seconds(10));
-
     const script = document.createElement('script');
     script.src = PLYR_SCRIPT_URL;
     script.async = true;
 
-    script.addEventListener('load', () => {
-      const PlyrClass = readGlobalPlyr();
+    /**
+     * Every failure path removes the element, timeout included -- there the
+     * request may still be in flight and would otherwise resolve into a
+     * detached attempt. A failed tag left in the DOM would leak one element
+     * per retry and re-download on a flaky connection.
+     */
+    const settle = (PlyrClass: PlyrConstructor | undefined) => {
+      clearTimeout(timeout);
 
       if (!PlyrClass) {
-        fail();
+        script.remove();
+        reject(new Error('Plyr failed to load'));
         return;
       }
 
-      clearTimeout(timeout);
       resolve(PlyrClass);
-    });
-    script.addEventListener('error', fail);
+    };
+
+    const timeout = setTimeout(() => settle(undefined), time.seconds(10));
+
+    script.addEventListener('load', () => settle(readGlobalPlyr()));
+    script.addEventListener('error', () => settle(undefined));
 
     document.head.appendChild(script);
   });
