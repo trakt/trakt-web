@@ -1,4 +1,5 @@
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
+import EyeIcon from '$lib/components/icons/EyeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
 import ListIcon from '$lib/components/icons/mobile/ListIcon.svelte';
@@ -86,6 +87,12 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_list_counts(),
     addedAt: new Date('2026-08-21'),
     description: () => m.preview_feature_description_list_counts(),
+  },
+  [FeatureFlag.ReviewerStats]: {
+    icon: EyeIcon,
+    title: () => m.preview_feature_title_reviewer_stats(),
+    addedAt: new Date('2026-08-22'),
+    description: () => m.preview_feature_description_reviewer_stats(),
   },
   [FeatureFlag.ParentalGuide]: {
     icon: NoSpoilerIcon,

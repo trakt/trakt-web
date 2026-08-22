@@ -12,6 +12,7 @@ export type SeasonCommentProps = {
   type: 'season';
   season: number;
   id: number;
+  episodeCount: number;
 };
 
 export type MediaCommentProps = {

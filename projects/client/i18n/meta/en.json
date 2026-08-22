@@ -892,11 +892,32 @@
       "default": "Track your shows and movies with Trakt Web — discover what's trending, get personalized recommendations, and never miss what's next.",
       "description": "Meta description for the homepage."
     },
+    "tag_text_play": {
+      "default": "{number} play",
+      "description": "Text for the tag that shows a single play of a movie or episode. This should be as short as possible.",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
     "tag_text_plays": {
       "default": "{number} plays",
       "description": "Text for the tag that shows the number of plays of a movie or episode. This should be as short as possible.",
       "variables": {
         "number": {
+          "type": "number"
+        }
+      }
+    },
+    "tooltip_text_watched_episodes": {
+      "default": "Watched {completed} of {total} episodes",
+      "description": "Tooltip on the watched context tag of a review, showing how many episodes of the show or season the reviewer has watched.",
+      "variables": {
+        "completed": {
+          "type": "number"
+        },
+        "total": {
           "type": "number"
         }
       }
@@ -10503,6 +10524,14 @@
     "preview_feature_description_list_counts": {
       "default": "Shows how many items a list holds, and how many lists a section has.",
       "description": "Description for the List Counts preview feature."
+    },
+    "preview_feature_title_reviewer_stats": {
+      "default": "Reviewer Stats",
+      "description": "Title for the Reviewer Stats preview feature."
+    },
+    "preview_feature_description_reviewer_stats": {
+      "default": "Shows how much of a title a reviewer watched next to their rating.",
+      "description": "Description for the Reviewer Stats preview feature."
     },
     "page_title_widget_background": {
       "default": "Background",
