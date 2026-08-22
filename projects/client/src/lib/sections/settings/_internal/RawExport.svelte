@@ -1,66 +1,53 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import NavigationGuard from "$lib/components/NavigationGuard.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useAnalytics } from "$lib/features/analytics/useAnalytics";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { time } from "$lib/utils/timing/time.ts";
-  import { slide } from "svelte/transition";
   import { runRawExport } from "../export/runRawExport.ts";
-  import { toExportStatusText } from "../export/toExportStatusText.ts";
+  import { createExportProgressState } from "./export-progress/createExportProgressState.ts";
+  import ExportProgressSnackbar from "./export-progress/ExportProgressSnackbar.svelte";
   import SettingsRow from "./SettingsRow.svelte";
   import SettingsSection from "./SettingsSection.svelte";
 
   const { user } = useUser();
   const { record } = useAnalytics();
 
-  type ExportState = {
-    isExporting: boolean;
-    statusText: string;
-    processed: number;
-    total: number;
-    page: number;
-  };
+  const state = $state(createExportProgressState());
 
-  const state = $state<ExportState>({
-    isExporting: false,
-    statusText: "",
-    processed: 0,
-    total: 0,
-    page: 0,
-  });
+  let abortController: AbortController | null = null;
 
-  const progressText = $derived.by(() => {
-    if (state.total === 0) {
-      return "";
-    }
+  const reset = () => Object.assign(state, createExportProgressState());
 
-    const counts = `${state.processed}/${state.total}`;
-
-    return state.page > 0 ? `(${counts} · ${state.page})` : `(${counts})`;
-  });
+  function stopExport() {
+    abortController?.abort();
+    reset();
+  }
 
   async function startExport() {
     if (!$user) return;
 
     const startTime = Date.now();
+    reset();
     state.isExporting = true;
-    state.statusText = "";
-    state.processed = 0;
-    state.total = 0;
-    state.page = 0;
     let failedCount = 0;
 
     record(AnalyticsEvent.ExportInitiated, {});
 
+    abortController = new AbortController();
+
     await runRawExport({
       user: { slug: $user.slug, isVip: $user.isVip },
+      signal: abortController.signal,
       onStatus: (status) => {
         if (status.type === "partial") {
           failedCount = status.failed;
         }
 
-        state.statusText = toExportStatusText({ status, total: state.total });
+        state.status = status;
       },
       onProgress: ({ processed, total, page }) => {
         state.processed = processed;
@@ -75,42 +62,35 @@
           failedCount,
         });
 
+        state.isExporting = false;
+
         if (failedCount > 0) {
-          state.isExporting = false;
           return;
         }
 
-        setTimeout(() => {
-          state.isExporting = false;
-          state.statusText = "";
-          state.processed = 0;
-          state.total = 0;
-          state.page = 0;
-        }, time.seconds(3));
+        setTimeout(reset, time.seconds(3));
       },
       onError: (err) => {
         const errorMessage = err instanceof Error ? err.message : String(err);
         record(AnalyticsEvent.ExportFailed, { error: errorMessage });
 
-        state.statusText = m.text_export_status_fail();
+        state.hasFailed = true;
         state.isExporting = false;
       },
     });
   }
 </script>
 
-{#snippet exportLabel(message: string)}
-  <p class="secondary" transition:slide={{ duration: 150, axis: "y" }}>
-    {message}
-  </p>
-{/snippet}
-
-<SettingsSection
-  title={m.header_export()}
-  description={m.description_export()}
+<NavigationGuard
+  isActive={state.isExporting}
+  confirmationParams={{ type: ConfirmationType.CancelExport }}
+  onreset={stopExport}
 >
-  <SettingsRow title={m.text_raw_export()}>
-    <div class="trakt-raw-export">
+  <SettingsSection
+    title={m.header_export()}
+    description={m.description_export()}
+  >
+    <SettingsRow title={m.text_raw_export()}>
       <Button
         label={m.button_label_raw_export()}
         disabled={state.isExporting}
@@ -120,22 +100,8 @@
       >
         {m.button_text_raw_export()}
       </Button>
-      <div>
-        {#if state.isExporting}
-          {@render exportLabel(m.text_exporting({ progress: progressText }))}
-        {/if}
-        {#if state.statusText}
-          {@render exportLabel(state.statusText)}
-        {/if}
-      </div>
-    </div>
-  </SettingsRow>
-</SettingsSection>
+    </SettingsRow>
+  </SettingsSection>
+</NavigationGuard>
 
-<style>
-  .trakt-raw-export {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-s);
-  }
-</style>
+<ExportProgressSnackbar {state} onStop={stopExport} onDismiss={reset} />

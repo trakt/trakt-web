@@ -1,5 +1,6 @@
 import * as m from '$lib/features/i18n/messages.ts';
 import type { Confirmation } from '../models/Confirmation.ts';
+import type { ConfirmationPreflight } from '../models/ConfirmationPreflight.ts';
 import type { ConfirmationParams } from '../models/ConfirmationParams.ts';
 import { ConfirmationType } from '../models/ConfirmationType.ts';
 import { getWarningMessage } from './getWarningMessage.ts';
@@ -7,6 +8,12 @@ import { getWarningMessage } from './getWarningMessage.ts';
 type ConfirmationBuilder<T extends ConfirmationType> = (
   props: ConfirmationParams<T>,
 ) => Confirmation;
+
+const toExportFirstPreflight = (): ConfirmationPreflight => ({
+  label: m.switch_label_export_before_destructive(),
+  hint: m.description_export_before_destructive(),
+  isEnabledByDefault: true,
+});
 
 type ConfirmationBuilders = {
   [T in ConfirmationType]: ConfirmationBuilder<T>;
@@ -137,6 +144,7 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
       value: props.username,
       placeholder: props.username,
     },
+    preflight: toExportFirstPreflight(),
   }),
   [ConfirmationType.SimpleFilters]: () => ({
     title: m.confirmation_title_reset_filters(),
@@ -163,11 +171,29 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.warning_prompt_cancel_clear(),
     operation: 'destructive',
   }),
+  [ConfirmationType.CancelExport]: () => ({
+    title: m.confirmation_title_stop_export(),
+    buttonText: m.button_text_stop_export(),
+    message: m.warning_prompt_cancel_export(),
+    operation: 'destructive',
+  }),
+  [ConfirmationType.ProceedAfterPartialExport]: (props) => ({
+    title: m.confirmation_title_proceed_after_partial_export(),
+    buttonText: m.button_text_continue(),
+    message: props.failed === 1
+      ? m.warning_prompt_partial_export_one({ total: props.total })
+      : m.warning_prompt_partial_export_other({
+        failed: props.failed,
+        total: props.total,
+      }),
+    operation: 'destructive',
+  }),
   [ConfirmationType.ClearData]: (props) => ({
     title: m.confirmation_title_clear_data(),
     buttonText: m.button_text_clear_now(),
     message: m.warning_prompt_clear_data({ source: props.sourceText }),
     operation: 'destructive',
+    preflight: toExportFirstPreflight(),
   }),
   [ConfirmationType.CleanUpHistory]: (props) => ({
     title: m.confirmation_title_clean_up_history(),
@@ -176,6 +202,7 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
       ? m.warning_prompt_clean_up_history({ count: props.count })
       : m.warning_prompt_clean_up_history_newest({ count: props.count }),
     operation: 'destructive',
+    preflight: toExportFirstPreflight(),
   }),
   [ConfirmationType.HideRecommendation]: (props) => ({
     title: m.confirmation_title_hide_recommendation(),
