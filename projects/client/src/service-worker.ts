@@ -203,7 +203,7 @@ registerRoute(
   },
   new CacheFirst({
     cacheName: CacheKey.static,
-    plugins: [expiration(time.days(30))],
+    plugins: [expiration(time.days(30), 500)],
   }),
 );
 

@@ -103,6 +103,15 @@ export default defineConfig(({ mode }) => ({
       manifestFilename: 'manifest.webmanifest',
       injectManifest: {
         injectionPoint: 'self.__WB_MANIFEST',
+        globPatterns: [
+          'client/*.{svg,ico,webmanifest}',
+          'client/pwa/{android,ios,shortcuts}/*.{png,svg}',
+          'client/placeholders/*.png',
+        ],
+        globIgnores: [
+          'server/**',
+          'client/_app/**',
+        ],
       },
       devOptions: {
         enabled: true,
