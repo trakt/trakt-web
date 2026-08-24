@@ -24,6 +24,16 @@ import { setUserManager } from './userManager.ts';
 const renewCooldown = time.seconds(30);
 const maxRenewFailures = 3;
 const renewFailureReset = time.minutes(5);
+const renewLockName = 'trakt-auth-renew';
+
+async function withRenewLock(task: () => Promise<void>) {
+  if (!navigator.locks) {
+    await task();
+    return;
+  }
+
+  await navigator.locks.request(renewLockName, task);
+}
 
 type InitializeUserManagerParams = {
   ctx: AuthContextType;
@@ -141,9 +151,28 @@ export function initializeUserManager(
       isInitializing.next(false);
     };
 
+    const renewUnderLock = async () => {
+      await withRenewLock(async () => {
+        const current = await manager.getUser();
+
+        const expiringAt = Date.now() + time.seconds(
+          manager.settings.accessTokenExpiringNotificationTimeInSeconds,
+        );
+        const didAnotherTabRenew = current != null && !current.expired &&
+          time.seconds(current.expires_at ?? 0) > expiringAt;
+
+        if (didAnotherTabRenew) {
+          handleUserEvent(current);
+          return;
+        }
+
+        await manager.signinSilent();
+      });
+    };
+
     const renewSilently = () => {
       renewGuard
-        .renew(() => manager.signinSilent())
+        .renew(renewUnderLock)
         .catch(handleSilentRenewFailure);
     };
 
@@ -179,15 +208,28 @@ export function initializeUserManager(
       renewSilently();
     };
 
+    const disposeExpiring = manager.events.addAccessTokenExpiring(
+      renewSilently,
+    );
+    const disposeExpired = manager.events.addAccessTokenExpired(
+      renewSilently,
+    );
+    const disposeUserLoaded = manager.events.addUserLoaded(handleUserEvent);
+    const disposeUserUnloaded = manager.events.addUserUnloaded(
+      () => handleUserEvent(null),
+    );
+
     manager.getUser().then(initializeUser);
-    manager.events.addUserLoaded(handleUserEvent);
-    manager.events.addUserUnloaded(() => handleUserEvent(null));
 
     globalThis.window.addEventListener('focus', checkTokenOnFocus);
 
     setUserManager(manager);
 
     return () => {
+      disposeExpiring();
+      disposeExpired();
+      disposeUserLoaded();
+      disposeUserUnloaded();
       globalThis.window.removeEventListener('focus', checkTokenOnFocus);
       setUserManager(null);
     };

@@ -15,6 +15,8 @@ const mockUserManager = vi.fn(function () {
     signinRedirect: vi.fn().mockResolvedValue(undefined),
     signinRedirectCallback: vi.fn().mockResolvedValue(undefined),
     events: {
+      addAccessTokenExpiring: vi.fn().mockReturnValue(() => {}),
+      addAccessTokenExpired: vi.fn().mockReturnValue(() => {}),
       addUserLoaded: vi.fn().mockResolvedValue(OidcUserMock),
       addUserUnloaded: vi.fn(),
       addSilentRenewError: vi.fn(),

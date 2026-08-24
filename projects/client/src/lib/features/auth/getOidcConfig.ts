@@ -13,7 +13,7 @@ export function getOidcConfig(): UserManagerSettings {
     silent_redirect_uri: `${referrer}/silent-redirect`,
     response_type: 'code',
     scope: 'public openid profile email',
-    automaticSilentRenew: true,
+    automaticSilentRenew: false,
     userStore: new WebStorageStateStore({
       store: safeLocalStorage,
     }),
