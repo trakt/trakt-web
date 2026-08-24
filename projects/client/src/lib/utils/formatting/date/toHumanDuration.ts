@@ -20,6 +20,37 @@ type ToHumanDurationProps = {
   clampAt?: DurationUnit;
 };
 
+const FALLBACK_UNIT_SUFFIX = {
+  day: 'd',
+  hour: 'h',
+  minute: 'm',
+} as const;
+
+type FormattedUnit = keyof typeof FALLBACK_UNIT_SUFFIX;
+
+type CreateUnitFormatterProps = {
+  locale: string;
+  unit: FormattedUnit;
+  unitDisplay: Intl.NumberFormatOptions['unitDisplay'];
+};
+
+function createUnitFormatter({
+  locale,
+  unit,
+  unitDisplay,
+}: CreateUnitFormatterProps): { format: (value: number) => string } {
+  try {
+    return new Intl.NumberFormat(locale, { style: 'unit', unit, unitDisplay });
+  } catch {
+    const decimal = new Intl.NumberFormat(locale);
+
+    return {
+      format: (value) =>
+        `${decimal.format(value)}${FALLBACK_UNIT_SUFFIX[unit]}`,
+    };
+  }
+}
+
 export function toHumanDuration({
   days = 0,
   hours = 0,
@@ -57,19 +88,16 @@ export function toHumanDuration({
 
   const { days: d, hours: h, minutes: m } = getDuration();
 
+  const intlLocale = getIntlLocale(locale);
   const formatters = {
-    day: new Intl.NumberFormat(getIntlLocale(locale), {
-      style: 'unit',
-      unit: 'day',
-      unitDisplay,
-    }),
-    hour: new Intl.NumberFormat(getIntlLocale(locale), {
-      style: 'unit',
+    day: createUnitFormatter({ locale: intlLocale, unit: 'day', unitDisplay }),
+    hour: createUnitFormatter({
+      locale: intlLocale,
       unit: 'hour',
       unitDisplay,
     }),
-    minute: new Intl.NumberFormat(getIntlLocale(locale), {
-      style: 'unit',
+    minute: createUnitFormatter({
+      locale: intlLocale,
       unit: 'minute',
       unitDisplay,
     }),

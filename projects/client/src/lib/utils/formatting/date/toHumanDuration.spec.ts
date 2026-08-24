@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { toHumanDuration } from './toHumanDuration.ts';
 
 describe('toHumanDuration', () => {
@@ -100,5 +100,41 @@ describe('toHumanDuration', () => {
     expect(toHumanDuration({ minutes: 1530, unitDisplay: 'long' })).toBe(
       '1 day 1 hour 30 minutes',
     );
+  });
+
+  describe('when the unit style is unsupported', () => {
+    const NumberFormat = Intl.NumberFormat;
+
+    beforeEach(() => {
+      vi.spyOn(Intl, 'NumberFormat').mockImplementation(
+        function (locale?: string, options?: Intl.NumberFormatOptions) {
+          if (options?.style === 'unit') {
+            throw new RangeError(
+              'Value unit out of range for Intl.NumberFormat options property style',
+            );
+          }
+
+          return new NumberFormat(locale, options);
+        } as unknown as typeof Intl.NumberFormat,
+      );
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('should fall back to a plain number with a suffix', () => {
+      expect(toHumanDuration({ minutes: 1530 })).toBe('1d 1h 30m');
+    });
+
+    it('should keep honouring the separator', () => {
+      expect(toHumanDuration({ minutes: 1530, separator: ', ' })).toBe(
+        '1d, 1h, 30m',
+      );
+    });
+
+    it('should keep clamping', () => {
+      expect(toHumanDuration({ minutes: 300, clampAt: 'hour' })).toBe('5h');
+    });
   });
 });
