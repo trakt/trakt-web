@@ -53,6 +53,7 @@ Sentry.init({
     // identifies the same Sentry issue across browser error formats.
     'DA4BED8B-B90C-4112-BEB0-5293448AB67E',
     'Invalid call to runtime.sendMessage',
+    'btn-watch-now',
     'WKWebView API client did not respond',
     'Error invoking postEvent',
   ],
