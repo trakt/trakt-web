@@ -8,7 +8,7 @@ import { toIMDBRating } from './toIMDBRating.ts';
 const LETTERBOXD_MAX_RATING = 5;
 
 /**
- * Letterboxd scores run 0-5, while IMDB runs 0-10. 
+ * Letterboxd scores run 0-5, while IMDB runs 0-10.
  * A bare "4.1" next to an "8.2" reads as the worse film.
  */
 export function toLetterboxdRating(
