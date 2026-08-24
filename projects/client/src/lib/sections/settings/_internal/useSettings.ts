@@ -6,7 +6,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { changeEmailRequest } from '$lib/requests/queries/users/changeEmailRequest.ts';
 import { saveSettingsRequest } from '$lib/requests/queries/users/saveSettingsRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import type { SettingsRequest } from '@trakt/api';
+import type { Genre, SettingsRequest } from '@trakt/api';
 import { BehaviorSubject, map } from 'rxjs';
 
 type HandleSettingsProps = {
@@ -54,6 +54,19 @@ export function useSettings() {
     isSavingSettings.next(false);
     return true;
   };
+
+  const setLovedGenres = (genres: Genre[]) =>
+    handleSettingsChange({
+      request: () =>
+        saveSettingsRequest({
+          body: {
+            browsing: {
+              genres: { favorites: genres },
+            },
+          },
+        }),
+      action: 'genres',
+    });
 
   const setTheme = async (theme: Theme) => {
     const payload = {
@@ -134,22 +147,9 @@ export function useSettings() {
       },
     }))),
     genres: user.pipe(map(($user) => ({
-      favorites: $user.genres ?? [],
-      set: async (genres: string[]) => {
-        const payload = {
-          browsing: {
-            genres: {
-              favorites: genres,
-            },
-          },
-        };
-
-        await handleSettingsChange({
-          request: () => saveSettingsRequest({ body: payload }),
-          action: 'genres',
-        });
-      },
+      loved: $user?.genres?.loved ?? [],
     }))),
+    setLovedGenres,
     theme: { set: setTheme },
     watchAgain: user.pipe(map(($user) => ({
       hasWatchAgain: $user.preferences.hasWatchAgain,

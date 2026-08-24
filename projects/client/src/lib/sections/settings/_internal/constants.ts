@@ -3,3 +3,5 @@ export const SWITCH_OFF_LABEL = 'Off';
 
 export const SWITCH_YES_LABEL = 'Yes';
 export const SWITCH_NO_LABEL = 'No';
+
+export const GENRE_LIMIT = 5;

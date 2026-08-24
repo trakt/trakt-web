@@ -94,7 +94,7 @@ const ANONYMOUS_USER: UserSettings = {
     hasWatchAgain: false,
     showRatingPrompt: true,
   },
-  genres: [],
+  genres: { loved: [] },
   services: {
     country: undefined,
     favorites: [],

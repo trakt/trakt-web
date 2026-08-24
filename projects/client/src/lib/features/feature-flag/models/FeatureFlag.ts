@@ -8,4 +8,5 @@ export enum FeatureFlag {
   Soundtrack = 'soundtrack',
   ListCounts = 'list-counts',
   ReviewerStats = 'reviewer-stats',
+  GenrePicker = 'genre-picker',
 }

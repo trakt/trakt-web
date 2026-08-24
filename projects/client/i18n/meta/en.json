@@ -10517,6 +10517,14 @@
       "default": "Adds a soundtrack section to movie and show pages, with playback where a track can be matched.",
       "description": "Description for the soundtrack preview feature."
     },
+    "preview_feature_title_genre_picker": {
+      "default": "Genre Picker",
+      "description": "Title for the Genre Picker preview feature."
+    },
+    "preview_feature_description_genre_picker": {
+      "default": "Pick your favorite genres from a visual grid instead of a list of tags.",
+      "description": "Description for the Genre Picker preview feature."
+    },
     "preview_feature_title_list_counts": {
       "default": "List Counts",
       "description": "Title for the List Counts preview feature."
@@ -10560,6 +10568,30 @@
     "text_settings_widget_show_title_description": {
       "default": "Enable/disable header bar visible at the top.",
       "description": "Description for the widget setting toggling header bar visibility."
+    },
+    "header_genres_loved": {
+      "default": "Genres you Like",
+      "description": "Section header for genres the user likes in settings."
+    },
+    "button_label_edit_loved_genres": {
+      "default": "Edit genres you like",
+      "description": "Accessible label for the button that opens the liked genres drawer."
+    },
+    "error_text_genres_save_failed": {
+      "default": "Failed to save. Please try again.",
+      "description": "Error message shown in the genres drawer when saving fails."
+    },
+    "label_genres_drawer_subtitle_loved": {
+      "default": "Select up to 5 genres which you'd like to see more of.",
+      "description": "Subtitle shown under the loved genres drawer title."
+    },
+    "label_genres_drawer_selected": {
+      "default": "Selected",
+      "description": "Section label above the selected genres row in the genres drawer."
+    },
+    "label_genres_drawer_all": {
+      "default": "All Genres",
+      "description": "Section label above the full genre catalog in the genres drawer."
     }
   }
 }
