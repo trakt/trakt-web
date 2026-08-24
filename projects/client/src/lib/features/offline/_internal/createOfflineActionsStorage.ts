@@ -18,18 +18,25 @@ export function createOfflineActionsStorage(): OfflineActionsStorage {
   const store = createStore(DB_NAME, STORE_NAME);
 
   return {
-    read: () =>
-      get<unknown[]>(QUEUE_KEY, store)
-        .then((stored) =>
-          (stored ?? [])
-            .map((entry) => OfflineActionSchema.safeParse(entry))
-            .filter((result) => result.success)
-            .map((result) => result.data)
-        )
-        .catch((e) => {
-          handleError(e);
-          return [];
-        }),
-    write: (actions) => set(QUEUE_KEY, actions, store).catch(handleError),
+    read: async () => {
+      try {
+        const stored = await get<unknown[]>(QUEUE_KEY, store);
+
+        return (stored ?? [])
+          .map((entry) => OfflineActionSchema.safeParse(entry))
+          .filter((result) => result.success)
+          .map((result) => result.data);
+      } catch (e) {
+        handleError(e);
+        return [];
+      }
+    },
+    write: async (actions) => {
+      try {
+        await set(QUEUE_KEY, actions, store);
+      } catch (e) {
+        handleError(e);
+      }
+    },
   };
 }
