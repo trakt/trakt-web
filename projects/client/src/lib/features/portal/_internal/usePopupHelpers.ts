@@ -19,7 +19,6 @@ export function usePopupHelpers(placement?: PopupPlacement) {
   const isTargetContained = placement?.mode === 'contain';
   const underlay = new BehaviorSubject<HTMLElement | null>(null);
   const targetClone = new BehaviorSubject<HTMLElement | null>(null);
-  const area = getTargetArea();
 
   const removeCloneAfterContainer = (popupContainer: HTMLElement) => {
     const element = targetClone.value;
@@ -41,7 +40,12 @@ export function usePopupHelpers(placement?: PopupPlacement) {
       });
     });
 
-    observer.observe(area.target, { childList: true });
+    /*
+      Read the DOM here, not when the helpers are created: `usePortal` runs in
+      a component's script body, which also executes during SSR where
+      `document` does not exist.
+    */
+    observer.observe(getTargetArea().target, { childList: true });
   };
 
   const removeHelpers = (popupContainer: HTMLElement | null) => {

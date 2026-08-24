@@ -45,6 +45,18 @@ describe('usePopupHelpers', () => {
     expect(getTargetClone()).toBeNull();
   });
 
+  /*
+    Guards against SSR: `usePortal` calls this from a component's script body,
+    which also runs on the server where `document` does not exist.
+  */
+  it('should not read the DOM when created', () => {
+    const querySelector = vi.spyOn(document, 'querySelector');
+
+    usePopupHelpers(placement);
+
+    expect(querySelector).not.toHaveBeenCalled();
+  });
+
   it('should create a clone of the popup target', () => {
     const { addHelpers, removeHelpers } = usePopupHelpers(placement);
     addHelpers(target);
