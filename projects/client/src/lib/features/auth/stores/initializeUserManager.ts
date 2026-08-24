@@ -6,6 +6,7 @@ import { type User, UserManager } from 'oidc-client-ts';
 import { BehaviorSubject, of } from 'rxjs';
 import { onMount } from 'svelte';
 import { writeAuthMarker } from '../authMarker.ts';
+import { createSilentRenewGuard } from '../createSilentRenewGuard.ts';
 import { deriveStandardAuthority } from '../deriveStandardAuthority.ts';
 import { getOidcConfig } from '../getOidcConfig.ts';
 import { mapToToken } from '../mapToToken.ts';
@@ -13,9 +14,14 @@ import { portWorkerAuthSession } from '../portWorkerAuthSession.ts';
 import { postToken } from '../postToken.ts';
 import { resolveOidcAuthority } from '../resolveOidcAuthority.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { setToken, type Token } from '../token/index.ts';
 import type { AuthContextType } from './createAuthContext.ts';
 import { setUserManager } from './userManager.ts';
+
+const renewCooldown = time.seconds(30);
+const maxRenewFailures = 3;
+const renewFailureReset = time.minutes(5);
 
 type InitializeUserManagerParams = {
   ctx: AuthContextType;
@@ -55,6 +61,13 @@ export function initializeUserManager(
     const manager = new UserManager(
       getOidcConfig(),
     );
+
+    const renewGuard = createSilentRenewGuard({
+      now: () => Date.now(),
+      cooldownMs: renewCooldown,
+      maxConsecutiveFailures: maxRenewFailures,
+      failureResetMs: renewFailureReset,
+    });
 
     const syncToken = (user: User | null) => {
       if (!user) return;
@@ -113,9 +126,15 @@ export function initializeUserManager(
       handleUserEvent(null);
     };
 
+    const renewSilently = () => {
+      renewGuard
+        .renew(() => manager.signinSilent())
+        .catch(handleSilentRenewFailure);
+    };
+
     const initializeUser = (user: User | null) => {
       if (user?.expired) {
-        manager.signinSilent().catch(handleSilentRenewFailure);
+        renewSilently();
         return;
       }
 
@@ -142,7 +161,7 @@ export function initializeUserManager(
         return;
       }
 
-      manager.signinSilent().catch(handleSilentRenewFailure);
+      renewSilently();
     };
 
     manager.getUser().then(initializeUser);
