@@ -160,5 +160,6 @@ export const currentUserRatingsQuery = defineQuery({
     ),
   }),
   schema: UserRatingsSchema,
-  ttl: time.hours(12),
+  ttl: time.hours(3),
+  refetchOnWindowFocus: true,
 });
