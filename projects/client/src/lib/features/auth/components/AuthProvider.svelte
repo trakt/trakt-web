@@ -23,8 +23,9 @@
   // document was rendered for whoever populated the entry. Storage is truth.
   const clientAuth = iffy(resolveBrowserAuthState);
 
-  // Optimistic: an expired session still seeds authorized, since
-  // `automaticSilentRenew` almost always renews it before it matters.
+  // Optimistic: an expired session still seeds authorized, since the silent
+  // renew `initializeUserManager` fires on init almost always lands before it
+  // matters.
   const isAuthorized = iffy(() => clientAuth?.hasSession ?? isAuthorizedOidc);
 
   // `useUser` subscribes authorized queries during this first render, before
