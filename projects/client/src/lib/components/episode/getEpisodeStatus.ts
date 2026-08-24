@@ -12,16 +12,10 @@ type GetEpisodeStatusOptions = {
   releaseDate?: Date;
 };
 
-const MID_SEASON_TYPES: ReadonlySet<EpisodeType> = new Set([
-  EpisodeFinaleType.mid_season_finale,
-  EpisodePremiereType.mid_season_premiere,
-]);
-
-const NEW_EPISODE_WINDOW_MS = time.days(7);
-
 function isEpisodeNew(releaseDate: Date): boolean {
+  const newEpisodeWindowMs = time.days(7);
   const elapsed = Date.now() - releaseDate.getTime();
-  return elapsed >= 0 && elapsed <= NEW_EPISODE_WINDOW_MS;
+  return elapsed >= 0 && elapsed <= newEpisodeWindowMs;
 }
 
 export function getEpisodeStatus(
@@ -43,7 +37,8 @@ export function getEpisodeStatus(
     return;
   }
 
-  const isMidSeason = MID_SEASON_TYPES.has(type);
+  const isMidSeason = type === EpisodeFinaleType.mid_season_finale ||
+    type === EpisodePremiereType.mid_season_premiere;
   if (isMidSeason && options.isLatestAired === false) {
     return;
   }
