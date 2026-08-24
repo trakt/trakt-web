@@ -9,6 +9,7 @@ import { writeAuthMarker } from '../authMarker.ts';
 import { createSilentRenewGuard } from '../createSilentRenewGuard.ts';
 import { deriveStandardAuthority } from '../deriveStandardAuthority.ts';
 import { getOidcConfig } from '../getOidcConfig.ts';
+import { isFatalRenewError } from '../isFatalRenewError.ts';
 import { isRateLimitError } from '../isRateLimitError.ts';
 import { mapToToken } from '../mapToToken.ts';
 import { portWorkerAuthSession } from '../portWorkerAuthSession.ts';
@@ -120,11 +121,24 @@ export function initializeUserManager(
       );
     };
 
-    const handleSilentRenewFailure = (error: unknown) => {
-      if (isRateLimitError(error)) {
+    const handleSilentRenewFailure = async (error: unknown) => {
+      if (isRateLimitError(error) && isInitializing.value) {
         dispatchRateLimitError();
       }
-      handleUserEvent(null);
+
+      if (isFatalRenewError(error)) {
+        await manager.removeUser().catch(() => {});
+        handleUserEvent(null);
+        return;
+      }
+
+      const current = await manager.getUser().catch(() => null);
+      if (current?.expired ?? true) {
+        handleUserEvent(null);
+        return;
+      }
+
+      isInitializing.next(false);
     };
 
     const renewSilently = () => {
@@ -168,7 +182,6 @@ export function initializeUserManager(
     manager.getUser().then(initializeUser);
     manager.events.addUserLoaded(handleUserEvent);
     manager.events.addUserUnloaded(() => handleUserEvent(null));
-    manager.events.addSilentRenewError(() => handleUserEvent(null));
 
     globalThis.window.addEventListener('focus', checkTokenOnFocus);
 

@@ -5,7 +5,7 @@ import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { render } from '@testing-library/svelte';
 import { BehaviorSubject } from 'rxjs';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';
-import { type User, UserManager } from 'oidc-client-ts';
+import { ErrorResponse, type User, UserManager } from 'oidc-client-ts';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { getToken, type Token } from '../token/index.ts';
 import type { AuthContextType } from './createAuthContext.ts';
@@ -194,6 +194,17 @@ describe('initializeUserManager', () => {
       settle(makeFreshUser());
       await flush();
 
+      expect(isInitializing()).toBe(false);
+    });
+
+    it('should clear a refused grant out of storage', async () => {
+      const { stub } = stubUserManager(() =>
+        Promise.reject(new ErrorResponse({ error: 'invalid_grant' }))
+      );
+
+      const isInitializing = await renderGate();
+
+      expect(stub.removeUser).toHaveBeenCalledTimes(1);
       expect(isInitializing()).toBe(false);
     });
   });
