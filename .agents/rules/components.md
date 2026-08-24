@@ -183,11 +183,10 @@ reaching for the nearest string. A `key` field on the mapper output is cheaper
 than a production crash.
 
 Positional keys (`(index)`) are correct when the rendered array carries no
-identity of its own: skeleton placeholders, fixed-length layouts. Reach for
-them only when there is genuinely nothing to identify a row by. Where a row
-does map to a real datum, key on that datum even if it is positionally
-derived, so Svelte replaces the node instead of morphing one datum into
-another.
+identity of its own: skeleton placeholders, fixed-length layouts. Reach for them
+only when there is genuinely nothing to identify a row by. Where a row does map
+to a real datum, key on that datum even if it is positionally derived, so Svelte
+replaces the node instead of morphing one datum into another.
 
 Backend ids are only as unique as the endpoint guarantees. When an upstream list
 can repeat an id, dedupe in the mapper; do not key on something else to work
@@ -840,8 +839,14 @@ component state: per-page `<title>`, OG/meta tags, theme colour.
 Svelte hydrates `<svelte:head>` by counting siblings (internal behaviour, not
 documented), so anything rewriting the HTML at the edge desyncs the walk and
 fails hydration for the whole app. A block with no event handlers and no
-reactive attributes emits no node references and is safe; adding either
-re-arms it.
+reactive attributes emits no node references and is safe; adding either re-arms
+it.
+
+This is about `<svelte:head>`, not the head in general. A tag appended
+imperatively (`document.head.appendChild`) creates no Svelte head block, so
+there is no walk to desync. Use that to keep an asset only one feature needs off
+the boot path: memoize the injection at module scope, and remove a failed
+element before rejecting so a presence check cannot block a retry.
 
 ## Where to Place a New Component
 
@@ -901,8 +906,9 @@ re-arms it.
       not
 - [ ] Physical `left`/`right` only for JS-measured coords, `left:50%` centering,
       off-screen hide, keyframes, or third-party JS keys
-- [ ] Static head assets live in `app.html`; `<svelte:head>` carries only
-      state-dependent head content
+- [ ] Every-page head assets live in `app.html`; feature-scoped ones are
+      injected on first use; `<svelte:head>` carries only state-dependent
+      content
 - [ ] Icon-only buttons have an `aria-label` from a Paraglide message; native
       semantic elements used over click-handler `<div>`s; `:focus-visible`
       preserved
