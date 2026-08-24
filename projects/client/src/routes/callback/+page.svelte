@@ -6,6 +6,7 @@
   import { error as printError } from "$lib/utils/console/print.ts";
   import { setCacheBuster } from "$lib/utils/url/setCacheBuster";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { claimSigninCallback } from "./_internal/claimSigninCallback.ts";
   import type { User } from "oidc-client-ts";
   import { onMount } from "svelte";
 
@@ -26,8 +27,14 @@
   };
 
   onMount(() => {
-    getUserManager()
-      ?.signinCallback()
+    const manager = getUserManager();
+
+    if (!manager || !claimSigninCallback()) {
+      return;
+    }
+
+    manager
+      .signinCallback()
       .then(storeSession)
       .then(navigateToHome)
       .catch((error) => {
