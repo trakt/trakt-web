@@ -82,6 +82,7 @@ Sentry.init({
     // Browser extension / userscript / native bridge noise — not our code.
     'WebViewJavascriptBridge',
     'userScripts is not defined',
+    "Identifier 'nativeIframe' has already been declared",
     // Greasemonkey internal handle — the UUID is unique to GM and
     // identifies the same Sentry issue across browser error formats.
     'DA4BED8B-B90C-4112-BEB0-5293448AB67E',
