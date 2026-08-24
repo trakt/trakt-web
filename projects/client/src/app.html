@@ -38,7 +38,7 @@
         globalThis.addEventListener('load', () => {
           navigator.serviceWorker.register('/service-worker.js', {
             type: 'module',
-          });
+          }).catch(() => {});
         });
       }
     </script>
