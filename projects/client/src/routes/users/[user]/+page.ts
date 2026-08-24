@@ -8,7 +8,7 @@ import type { PageLoad } from './$types';
 // fires on first load, which aborts it and leaves a blank page.
 // Query params are preserved across the redirect.
 export const load: PageLoad = ({ params, url }) => {
-  const target = UrlBuilder.profile.user(params.user);
+  const target = UrlBuilder.profile.user(encodeURIComponent(params.user));
 
   return redirect(307, `${target}${url.search}`);
 };
