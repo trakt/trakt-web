@@ -13,10 +13,14 @@ export function toDisplayName({
   languageTag,
   type,
 }: ToDisplayNameProps) {
-  const displayNames = new Intl.DisplayNames(languageTag, { type });
-  const displayName = displayNames.of(
-    code.toUpperCase(),
-  );
+  try {
+    const displayNames = new Intl.DisplayNames(languageTag, { type });
+    const displayName = displayNames.of(
+      code.toUpperCase(),
+    );
 
-  return displayName ?? code;
+    return displayName ?? code;
+  } catch {
+    return code;
+  }
 }

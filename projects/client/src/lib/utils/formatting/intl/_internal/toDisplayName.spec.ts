@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { toDisplayName } from './toDisplayName.ts';
 
 describe('toDisplayName', () => {
@@ -62,13 +62,33 @@ describe('toDisplayName', () => {
     expect(displayName).toBe('Netherlands');
   });
 
-  it('will throw when using a non valid code', () => {
-    expect(() => {
-      toDisplayName({
-        code: 'my random value',
+  it('will fall back to the code when it is not a valid code', () => {
+    const displayName = toDisplayName({
+      code: 'my random value',
+      languageTag: 'en',
+      type: 'region',
+    });
+
+    expect(displayName).toBe('my random value');
+  });
+
+  describe('when Intl.DisplayNames is unavailable', () => {
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('will fall back to the code', () => {
+      vi.spyOn(Intl, 'DisplayNames').mockImplementation(() => {
+        throw new Error('Missing locale data for ');
+      });
+
+      const displayName = toDisplayName({
+        code: 'nl',
         languageTag: 'en',
         type: 'region',
       });
-    }).toThrowError();
+
+      expect(displayName).toBe('nl');
+    });
   });
 });
