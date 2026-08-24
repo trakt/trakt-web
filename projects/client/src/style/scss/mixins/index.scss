@@ -172,6 +172,24 @@
   }
 }
 
+@mixin genre-tile-surface {
+  --stroke-0: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xs);
+  width: 100%;
+  aspect-ratio: 1;
+  padding: var(--gap-xs);
+  box-sizing: border-box;
+  border-radius: var(--border-radius-m);
+  background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  border: var(--border-thickness-xxs) solid
+    color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+
 @mixin card-tile-surface {
   box-sizing: border-box;
   padding: var(--ni-12);
