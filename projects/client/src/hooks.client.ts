@@ -8,12 +8,44 @@ import { SENTRY_DSN } from '$lib/utils/constants.ts';
 import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
 import * as Sentry from '@sentry/sveltekit';
 import { handleErrorWithSentry } from '@sentry/sveltekit';
+import type { ErrorEvent as SentryErrorEvent } from '@sentry/sveltekit';
 
 // Must run before Sentry.init and before SvelteKit reads `location`: strips the
 // WebView params (slurm VIP token, standalone flag) from the URL and latches
 // them to sessionStorage, so page.url, Sentry tracing and analytics never see
 // the token.
 captureWebviewSession();
+
+const SAMPLED_ERROR_PATTERNS = [
+  /^Failed to fetch( \((app|media)\.trakt\.tv\))?$/,
+  /^Load failed( \((app|media)\.trakt\.tv\))?$/,
+  /^NetworkError when attempting to fetch resource\.( \((app|media)\.trakt\.tv\))?$/,
+  /^network error$/,
+  /^Internal error$/,
+  /^Non-Error promise rejection captured with value: undefined$/,
+];
+
+const SAMPLED_ERROR_RATE = 0.01;
+
+function isServiceWorkerRejection(event: SentryErrorEvent): boolean {
+  return event.exception?.values?.some(({ type, value, stacktrace }) => {
+    const isRejected = type === 'Rejected' || value === 'Rejected';
+    const isServiceWorker = stacktrace?.frames?.some(
+      (frame) =>
+        frame.filename?.includes('service-worker') ||
+        frame.function?.includes('navigator.serviceWorker.register') ||
+        frame.function?.includes('ServiceWorkerContainer.register'),
+    );
+
+    return isRejected && isServiceWorker;
+  }) ?? false;
+}
+
+function isSampledError(event: SentryErrorEvent): boolean {
+  return event.exception?.values?.some(({ value }) =>
+    SAMPLED_ERROR_PATTERNS.some((pattern) => pattern.test(value ?? ''))
+  ) ?? false;
+}
 
 Sentry.init({
   dsn: SENTRY_DSN,
@@ -39,6 +71,7 @@ Sentry.init({
     'error loading dynamically imported module',
     'Importing a module script failed',
     'Unable to preload CSS for',
+    /^Module load timeout: m_\d+$/,
     // Cross-origin frames we cannot reach into: embedded players, plus frames
     // injected by ad-blockers / privacy extensions.
     'Blocked a frame with origin',
@@ -58,21 +91,18 @@ Sentry.init({
     'Error invoking postEvent',
   ],
   beforeSend(event) {
-    const isWellKnownRejection = event.exception?.values?.some(
-      ({ type, value, stacktrace }) => {
-        const isRejected = type === 'Rejected' || value === 'Rejected';
-        const isServiceWorker = stacktrace?.frames?.some(
-          (frame) =>
-            frame.filename?.includes('service-worker') ||
-            frame.function?.includes('navigator.serviceWorker.register') ||
-            frame.function?.includes('ServiceWorkerContainer.register'),
-        );
+    if (isServiceWorkerRejection(event)) {
+      return null;
+    }
 
-        return isRejected && isServiceWorker;
-      },
-    );
+    if (
+      isSampledError(event) &&
+      Math.random() >= SAMPLED_ERROR_RATE
+    ) {
+      return null;
+    }
 
-    return isWellKnownRejection ? null : event;
+    return event;
   },
 });
 
