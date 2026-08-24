@@ -9,6 +9,7 @@ import { writeAuthMarker } from '../authMarker.ts';
 import { createSilentRenewGuard } from '../createSilentRenewGuard.ts';
 import { deriveStandardAuthority } from '../deriveStandardAuthority.ts';
 import { getOidcConfig } from '../getOidcConfig.ts';
+import { isRateLimitError } from '../isRateLimitError.ts';
 import { mapToToken } from '../mapToToken.ts';
 import { portWorkerAuthSession } from '../portWorkerAuthSession.ts';
 import { postToken } from '../postToken.ts';
@@ -120,7 +121,7 @@ export function initializeUserManager(
     };
 
     const handleSilentRenewFailure = (error: unknown) => {
-      if (error instanceof Error && error.message.includes('429')) {
+      if (isRateLimitError(error)) {
         dispatchRateLimitError();
       }
       handleUserEvent(null);

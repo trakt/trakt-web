@@ -10755,6 +10755,22 @@
     "preview_feature_description_action_confirmations": {
       "default": "Show a confirmation toast with a quick undo when you add, remove, rate, or mark something as watched.",
       "description": "Description for the action-confirmations preview feature toggle in settings."
+    },
+    "text_login_failed_title": {
+      "default": "Couldn't start sign in",
+      "description": "Snackbar title when the sign-in redirect fails before it leaves the app."
+    },
+    "text_login_failed_message": {
+      "default": "Check your connection and try again.",
+      "description": "Snackbar message when the sign-in redirect fails for an unknown reason."
+    },
+    "text_login_rate_limited_title": {
+      "default": "Too many sign in attempts",
+      "description": "Snackbar title when sign in is refused because the viewer is rate limited."
+    },
+    "text_login_rate_limited_message": {
+      "default": "Please wait a moment and try again.",
+      "description": "Snackbar message when sign in is refused because the viewer is rate limited."
     }
   }
 }
