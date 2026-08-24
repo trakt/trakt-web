@@ -8,10 +8,11 @@ import type { PageLoad } from './$types';
 // across the redirect.
 export const load: PageLoad = ({ params, url }) => {
   const previousMonth = subMonths(new Date(), 1);
-  const target = UrlBuilder.users(params.user).monthInReview(
-    previousMonth.getFullYear(),
-    previousMonth.getMonth() + 1,
-  );
+  const target = UrlBuilder.users(encodeURIComponent(params.user))
+    .monthInReview(
+      previousMonth.getFullYear(),
+      previousMonth.getMonth() + 1,
+    );
 
   return redirect(307, `${target}${url.search}`);
 };

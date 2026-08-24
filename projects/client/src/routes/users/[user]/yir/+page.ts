@@ -11,7 +11,9 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = ({ params, url }) => {
   const year = getYearInReviewYear(new Date());
 
-  const target = UrlBuilder.users(params.user).yearToDate(year);
+  const target = UrlBuilder.users(encodeURIComponent(params.user)).yearToDate(
+    year,
+  );
 
   return redirect(307, `${target}${url.search}`);
 };
