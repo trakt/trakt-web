@@ -9,6 +9,7 @@
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
+  import LoginErrorSnackbar from "$lib/features/auth/components/LoginErrorSnackbar.svelte";
   import BotProvider from "$lib/features/bot-verification/BotProvider.svelte";
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
@@ -140,6 +141,8 @@
                                         <RenderFor audience="authenticated">
                                           <OfflineSync />
                                         </RenderFor>
+
+                                        <LoginErrorSnackbar />
                                         <QueryDevtools
                                           client={data.queryClient}
                                           buttonPosition="bottom-right"

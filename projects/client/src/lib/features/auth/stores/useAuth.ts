@@ -1,9 +1,13 @@
 import { getLocale } from '$lib/features/i18n/index.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import { error as printError } from '$lib/utils/console/print.ts';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';
 import { workerRequest } from '$worker/workerRequest.ts';
+import { loginErrorStore } from '../_internal/loginErrorStore.ts';
 import { writeAuthMarker } from '../authMarker.ts';
+import { mapToLoginError } from '../mapToLoginError.ts';
+import { LoginErrorType } from '../models/LoginErrorType.ts';
 import { setToken } from '../token/index.ts';
 import { getAuthContext } from './getAuthContext.ts';
 import { getUserManager } from './userManager.ts';
@@ -36,15 +40,29 @@ export function useAuth() {
 
   const login = async () => {
     const manager = getUserManager();
+
+    loginErrorStore.clear();
+
+    if (!manager) {
+      printError('Failed to start sign-in: no user manager');
+      loginErrorStore.set(LoginErrorType.Unreachable);
+      return;
+    }
+
     const [language, region] = getLocale().split('-');
     const lang = region ? `${language}-${region.toUpperCase()}` : language;
 
-    await manager?.signinRedirect({
-      extraQueryParams: {
-        hide_email_form: 'true',
-        lang,
-      },
-    });
+    try {
+      await manager.signinRedirect({
+        extraQueryParams: {
+          hide_email_form: 'true',
+          lang,
+        },
+      });
+    } catch (error) {
+      printError('Failed to start sign-in:', error);
+      loginErrorStore.set(mapToLoginError(error));
+    }
   };
 
   return {
