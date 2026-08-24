@@ -15,6 +15,7 @@ import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { combineLatest, map } from 'rxjs';
 import { usePaginatedListQuery } from '../../lists/stores/usePaginatedListQuery.ts';
 import { isShowRatingCandidate } from './isShowRatingCandidate.ts';
+import { useFreshRatings } from './useFreshRatings.ts';
 
 function toLastWatchedMedia(
   activity: MovieActivityHistory | EpisodeActivityHistory,
@@ -33,6 +34,7 @@ function toLastWatchedMedia(
 export function useCurrentUserLastWatched() {
   const { ratings, history, user } = useUser();
   const { wasDismissed } = useDismissals();
+  const { hasCheckedRatingsSince } = useFreshRatings();
 
   const params = {
     slug: 'me',
@@ -91,7 +93,11 @@ export function useCurrentUserLastWatched() {
               }
             });
 
-          return unratedItem ? toLastWatchedMedia(unratedItem) : null;
+          if (!unratedItem || !hasCheckedRatingsSince(unratedItem.watchedAt)) {
+            return null;
+          }
+
+          return toLastWatchedMedia(unratedItem);
         },
       ),
     ),
