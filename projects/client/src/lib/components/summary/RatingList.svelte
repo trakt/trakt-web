@@ -6,6 +6,7 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
   import { toIMDBRating } from "$lib/utils/formatting/number/toIMDBRating";
+  import { toLetterboxdRating } from "$lib/utils/formatting/number/toLetterboxdRating";
   import {
     toRottenAudienceRating,
     toRottenCriticRating,
@@ -150,7 +151,7 @@
 
   {#if showLetterboxd && letterboxd}
     <RatingItem
-      rating={toIMDBRating(letterboxd.rating, getLocale())}
+      rating={toLetterboxdRating(letterboxd.rating, getLocale())}
       url={letterboxd.url}
       {...itemProps}
     >
