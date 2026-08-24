@@ -21,9 +21,17 @@ export function getDisplayableRatings({
   ratings,
   entry,
 }: GetDisplayableRatingsProps): MediaRating {
-  if (hasAired(entry)) {
-    return ratings;
+  if (!hasAired(entry)) {
+    return EMPTY_RATINGS;
   }
 
-  return EMPTY_RATINGS;
+  const { tmdb, trakt } = ratings;
+
+  // A TMDB score backed by fewer votes than our own is too low-confidence to
+  // sit next to the Trakt rating.
+  if (tmdb != null && (tmdb.votes ?? 0) < (trakt?.votes ?? 0)) {
+    return { ...ratings, tmdb: undefined };
+  }
+
+  return ratings;
 }

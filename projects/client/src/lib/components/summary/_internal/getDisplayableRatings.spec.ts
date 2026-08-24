@@ -53,4 +53,54 @@ describe('getDisplayableRatings', () => {
 
     expect(getDisplayableRatings({ ratings, entry })).to.deep.equal(ratings);
   });
+
+  describe('tmdb votes', () => {
+    const airedEntry = {
+      effectiveReleaseDate: new Date(Date.now() - time.years(1)),
+      type: 'movie',
+    } as unknown as MovieEntry;
+
+    const withTmdb = (tmdb: MediaRating['tmdb']): MediaRating => ({
+      ...ratings,
+      tmdb,
+    });
+
+    it('should hide tmdb when it has fewer votes than trakt', () => {
+      const tmdbRatings = withTmdb({ rating: 8, votes: 2 });
+
+      expect(getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }))
+        .to.deep.equal({ ...tmdbRatings, tmdb: undefined });
+    });
+
+    it('should get tmdb when it has more votes than trakt', () => {
+      const tmdbRatings = withTmdb({ rating: 8, votes: 10 });
+
+      expect(getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }))
+        .to.deep.equal(tmdbRatings);
+    });
+
+    it('should get tmdb when the vote counts are equal', () => {
+      const tmdbRatings = withTmdb({ rating: 8, votes: 3 });
+
+      expect(getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }))
+        .to.deep.equal(tmdbRatings);
+    });
+
+    it('should hide tmdb when its vote count is missing and trakt has votes', () => {
+      const tmdbRatings = withTmdb({ rating: 8 });
+
+      expect(getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }))
+        .to.deep.equal({ ...tmdbRatings, tmdb: undefined });
+    });
+
+    it('should get tmdb when there is no trakt rating', () => {
+      const tmdbRatings: MediaRating = {
+        ...withTmdb({ rating: 8, votes: 0 }),
+        trakt: undefined,
+      };
+
+      expect(getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }))
+        .to.deep.equal(tmdbRatings);
+    });
+  });
 });
