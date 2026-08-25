@@ -1,6 +1,5 @@
 <script lang="ts">
-  import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import { fade } from "svelte/transition";
+  import GlanceDrawer from "./_internal/GlanceDrawer.svelte";
   import MediaGlance from "./_internal/MediaGlance.svelte";
   import type { MediaGlanceTarget } from "./MediaGlanceTarget.ts";
 
@@ -8,19 +7,8 @@
     onClose,
     ...target
   }: { onClose: () => void } & MediaGlanceTarget = $props();
-
-  let isOpen = $state(false);
 </script>
 
-<Drawer
-  {onClose}
-  size="large"
-  classList="trakt-media-glance-drawer"
-  onOpened={() => (isOpen = true)}
->
-  {#if isOpen}
-    <div transition:fade={{ duration: 150 }}>
-      <MediaGlance {...target} />
-    </div>
-  {/if}
-</Drawer>
+<GlanceDrawer classList="trakt-media-glance-drawer" {onClose}>
+  <MediaGlance {...target} />
+</GlanceDrawer>

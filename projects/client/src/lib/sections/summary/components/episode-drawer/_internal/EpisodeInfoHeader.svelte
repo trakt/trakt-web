@@ -6,6 +6,7 @@
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import GlanceTitleLink from "../../_internal/GlanceTitleLink.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
@@ -40,8 +41,11 @@
   import { useEpisodeRating } from "./useEpisodeRating.ts";
 
   const {
+    slug,
     show,
     seasons,
+    hasEpisodeNavigation = true,
+    titleHref,
     season,
     episode,
     entry,
@@ -53,8 +57,11 @@
     onSocialOpen,
     onHistoryOpen,
   }: {
-    show: ShowEntry;
-    seasons: Season[];
+    slug: string;
+    show?: ShowEntry;
+    seasons?: Season[];
+    hasEpisodeNavigation?: boolean;
+    titleHref?: string;
     season: number;
     episode: number;
     entry: EpisodeEntry | Nil;
@@ -72,7 +79,7 @@
   // The ratings query only needs the slug/season/episode numbers, so it can
   // resolve independently of the episode summary entry.
   const params$ = fromRune(() => ({
-    slug: show.slug,
+    slug,
     season,
     episode,
   }));
@@ -84,13 +91,13 @@
   // transition when the entry resolves, instead of it being suppressed as part
   // of a freshly mounted child's first render.
   const { isRateable } = $derived(
-    entry
+    entry && show
       ? useIsRateable({ type: "episode", media: entry, show })
       : { isRateable: of(false) },
   );
 
   const spoilerFreeTitle = $derived(
-    entry
+    entry && show
       ? useSpoilerFreeEpisodeTitle({ episode: entry, show })
       : of(""),
   );
@@ -100,7 +107,7 @@
   // Seasons that actually have episodes, ordered so previous/next can
   // cross season boundaries instead of clamping to the current season.
   const orderedSeasons = $derived(
-    seasons
+    (seasons ?? [])
       .filter((s) => s.episodes.count > 0)
       .sort((a, b) => a.number - b.number),
   );
@@ -141,21 +148,25 @@
   });
 
   const previousEpisodeLink = $derived(
-    previousTarget ? buildEpisodeDrawerLink(previousTarget) : undefined,
+    hasEpisodeNavigation && previousTarget
+      ? buildEpisodeDrawerLink(previousTarget)
+      : undefined,
   );
 
   const nextEpisodeLink = $derived(
-    nextTarget ? buildEpisodeDrawerLink(nextTarget) : undefined,
+    hasEpisodeNavigation && nextTarget
+      ? buildEpisodeDrawerLink(nextTarget)
+      : undefined,
   );
 
-  const genre = $derived(show.genres.at(0));
+  const genre = $derived(show?.genres.at(0));
 
   const subtitle = $derived(
     entry
       ? [
           toHumanDate(new Date(), entry.airDate, getLocale()),
           toHumanDuration({ minutes: entry.runtime }, languageTag()),
-          show.certification,
+          show?.certification,
           genre ? toTranslatedGenre(genre) : undefined,
         ]
           .filter(Boolean)
@@ -207,7 +218,7 @@
 />
 
 {#snippet cover()}
-  {#if entry}
+  {#if entry && show}
     <EpisodeInfoPoster {show} episode={entry} {onHistoryOpen} />
   {:else}
     <div class="skeleton-cover">
@@ -220,7 +231,7 @@
 
 <div class="episode-info-header" bind:this={headerElement}>
   <div class="episode-info-poster-ratings">
-    {#if $isTouch}
+    {#if $isTouch && hasEpisodeNavigation}
       <SwipeX
         children={cover}
         directions={["left", "right"]}
@@ -273,25 +284,40 @@
     </div>
   </div>
 
-  <div class="episode-info-switcher">
-    {#if previousEpisodeLink}
-      <Link {...previousEpisodeLink} label={m.button_label_previous_episode()}>
-        <CaretLeftIcon />
-      </Link>
-    {:else}
-      <span class="episode-switcher-spacer"></span>
+  <div
+    class="episode-info-switcher"
+    class:is-static={!hasEpisodeNavigation}
+  >
+    {#if hasEpisodeNavigation}
+      {#if previousEpisodeLink}
+        <Link {...previousEpisodeLink} label={m.button_label_previous_episode()}>
+          <CaretLeftIcon />
+        </Link>
+      {:else}
+        <span class="episode-switcher-spacer"></span>
+      {/if}
     {/if}
 
-    <span class="bold">
-      {m.text_season_episode_number({ season, number: episode })}
-    </span>
-
-    {#if nextEpisodeLink}
-      <Link {...nextEpisodeLink} label={m.button_label_next_episode()}>
-        <CaretRightIcon />
-      </Link>
+    {#if titleHref}
+      <GlanceTitleLink href={titleHref}>
+        <span class="bold">
+          {m.text_season_episode_number({ season, number: episode })}
+        </span>
+      </GlanceTitleLink>
     {:else}
-      <span class="episode-switcher-spacer"></span>
+      <span class="bold">
+        {m.text_season_episode_number({ season, number: episode })}
+      </span>
+    {/if}
+
+    {#if hasEpisodeNavigation}
+      {#if nextEpisodeLink}
+        <Link {...nextEpisodeLink} label={m.button_label_next_episode()}>
+          <CaretRightIcon />
+        </Link>
+      {:else}
+        <span class="episode-switcher-spacer"></span>
+      {/if}
     {/if}
   </div>
 
@@ -329,7 +355,7 @@
 
   <RenderFor audience="authenticated">
     <div class="episode-info-actions">
-      {#if entry}
+      {#if entry && show}
         <div class="episode-info-actions-content" in:fade={fadeIn}>
           <EpisodeActions
             episode={entry}
@@ -360,7 +386,7 @@
           onclick={onSocialOpen}
         />
 
-        {#if entry && $isRateable}
+        {#if entry && show && $isRateable}
           <div
             class="episode-info-rate"
             transition:slide={{ axis: "x", duration: 150 }}
@@ -373,7 +399,7 @@
   </RenderFor>
 
   <div class="episode-info-overview">
-    {#if entry}
+    {#if entry && show}
       {#if entry.overview}
         <div in:fade={fadeIn}>
           <SpoilerSection media={entry} {show} type="episode">
@@ -486,6 +512,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    &.is-static {
+      justify-content: center;
+    }
+
     gap: var(--gap-s);
     align-self: stretch;
 
