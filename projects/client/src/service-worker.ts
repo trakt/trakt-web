@@ -82,8 +82,16 @@ const expiration = (maxAgeMs: number, maxEntries?: number) =>
     ...(maxEntries === undefined ? {} : { maxEntries }),
   });
 
+async function deleteCache(key: string) {
+  try {
+    return await caches.delete(key);
+  } catch {
+    return false;
+  }
+}
+
 function removeNavigationCache() {
-  return caches.delete(CacheKey.navigation);
+  return deleteCache(CacheKey.navigation);
 }
 
 // Force immediate activation for new service worker
@@ -92,12 +100,16 @@ self.addEventListener('install', () => {
 });
 
 // Claim clients and purge the navigation cache so stale locale-specific HTML
-// (e.g. a poisoned ru-RU document) is evicted on update.
+// (e.g. a poisoned ru-RU document) is evicted on update. A rejected
+// `waitUntil` fails activation, leaving a redundant worker that still controls
+// its clients and fails every request it intercepts.
 self.addEventListener('activate', (event) => {
-  event.waitUntil(Promise.all([
-    removeNavigationCache(),
-    self.clients.claim(),
-  ]));
+  event.waitUntil(
+    Promise.all([
+      removeNavigationCache(),
+      self.clients.claim(),
+    ]).catch(() => undefined),
+  );
 });
 
 self.addEventListener('message', (event) => {
@@ -160,7 +172,6 @@ registerRoute(
     const hasCacheParam = url.searchParams.has('_cb');
 
     if (hasCacheParam) {
-      // Delete the entire navigation cache
       await removeNavigationCache();
 
       // Remove _cb param and redirect
@@ -185,16 +196,35 @@ registerRoute(
   }),
 );
 
+function isSameOriginAsset(url: URL) {
+  // Skip caching for localhost
+  if (url.hostname === 'localhost') {
+    return false;
+  }
+  // Only cache same-origin assets to avoid intercepting third-party scripts,
+  // tracking pixels, etc. which fail CORS in strict browsers (e.g. Firefox).
+  return url.origin === self.location.origin;
+}
+
+// One build emits ~850 cacheable files, so a cap below that evicts forever,
+// and one under ~3400 evicts a build that is still in a user's tabs.
+const IMMUTABLE_CACHE_ENTRIES = 3500;
+
+registerRoute(
+  ({ url }) =>
+    isSameOriginAsset(url) &&
+    AssetPattern.immutable.test(url.pathname) &&
+    AssetPattern.static.test(url.pathname),
+  new CacheFirst({
+    cacheName: CacheKey.immutable,
+    plugins: [expiration(time.days(30), IMMUTABLE_CACHE_ENTRIES)],
+  }),
+);
+
 // Same-origin static assets, media and documents (CacheFirst)
 registerRoute(
   ({ url }) => {
-    // Skip caching for localhost
-    if (url.hostname === 'localhost') {
-      return false;
-    }
-    // Only cache same-origin assets to avoid intercepting third-party scripts,
-    // tracking pixels, etc. which fail CORS in strict browsers (e.g. Firefox).
-    if (url.origin !== self.location.origin) {
+    if (!isSameOriginAsset(url)) {
       return false;
     }
     return AssetPattern.static.test(url.pathname) ||
