@@ -146,6 +146,49 @@ describe('EpisodeStatusTag', () => {
     expect(tagLabel).toBeInTheDocument();
   });
 
+  test('it renders the premiere tag for a coalesced multi-episode premiere day', () => {
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: 'multiple_episodes',
+          releaseDate: new Date(Date.now() + time.days(1)),
+          episodes: [
+            { type: EpisodePremiereType.season_premiere },
+            { type: 'standard' },
+          ],
+        },
+      },
+    );
+
+    const tagLabel = screen.getByText(
+      EpisodeIntlProvider.premiereText(),
+    );
+    expect(tagLabel).toBeInTheDocument();
+  });
+
+  test('it renders the premiere tag for a full season release', () => {
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: 'full_season',
+          episodes: [
+            { type: EpisodePremiereType.season_premiere },
+            { type: EpisodeFinaleType.season_finale },
+          ],
+        },
+      },
+    );
+
+    const tagLabel = screen.getByText(
+      EpisodeIntlProvider.premiereText(),
+    );
+    expect(tagLabel).toBeInTheDocument();
+  });
+
   test('it renders the new tag when release date is within 7 days', () => {
     const threeDaysAgo = new Date(Date.now() - time.days(3));
 

@@ -87,6 +87,7 @@
         <EpisodeStatusTag
           i18n={EpisodeIntlProvider}
           episodeType={item.type}
+          episodes={item.episodes}
           releaseDate={item.effectiveReleaseDate}
           type="tag"
         />
