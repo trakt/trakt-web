@@ -3,6 +3,7 @@
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
   import { type EpisodeType } from "$lib/requests/models/EpisodeType";
+  import type { CoalescedEpisodes } from "../CoalescedEpisodes";
   import type { EpisodeIntl } from "../EpisodeIntl";
   import { getEpisodeStatus } from "../getEpisodeStatus";
 
@@ -12,6 +13,7 @@
     type?: TagType;
     isLatestAired?: boolean;
     releaseDate?: Date;
+    episodes?: CoalescedEpisodes;
   };
 
   const {
@@ -20,9 +22,12 @@
     type = "text",
     isLatestAired,
     releaseDate,
+    episodes,
   }: EpisodeStatusProps = $props();
 
-  const status = $derived(getEpisodeStatus(episodeType, { isLatestAired, releaseDate }));
+  const status = $derived(
+    getEpisodeStatus(episodeType, { isLatestAired, releaseDate, episodes }),
+  );
 </script>
 
 {#snippet tagContent(text: string)}
@@ -44,13 +49,9 @@
 
 {#if status === "finale"}
   {@render tag(i18n.finaleText())}
-{/if}
-
-{#if status === "premiere"}
+{:else if status === "premiere"}
   {@render tag(i18n.premiereText())}
-{/if}
-
-{#if status === "new"}
+{:else if status === "new"}
   {@render tag(i18n.newText())}
 {/if}
 

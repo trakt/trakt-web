@@ -1,8 +1,23 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
-import { EpisodeComputedType } from '../models/EpisodeType.ts';
+import {
+  EpisodeComputedType,
+  EpisodeFinaleType,
+  EpisodePremiereType,
+  type EpisodeType,
+} from '../models/EpisodeType.ts';
 import type { UpcomingEpisodeEntry } from '../queries/calendars/upcomingEpisodesQuery.ts';
+
+const FULL_SEASON_PREMIERE_TYPES: ReadonlyArray<EpisodeType> = [
+  EpisodePremiereType.series_premiere,
+  EpisodePremiereType.season_premiere,
+];
+
+const FULL_SEASON_FINALE_TYPES: ReadonlyArray<EpisodeType> = [
+  EpisodeFinaleType.series_finale,
+  EpisodeFinaleType.season_finale,
+];
 
 export function coalesceEpisodes(
   episodes: UpcomingEpisodeEntry[],
@@ -36,10 +51,10 @@ export function coalesceEpisodes(
     { episodes, show, season },
   ) => {
     const hasSeasonPremiere = episodes.some((ep) =>
-      ['season_premiere', 'series_premiere'].includes(ep.type)
+      FULL_SEASON_PREMIERE_TYPES.includes(ep.type)
     );
     const hasSeasonFinale = episodes.some((ep) =>
-      ['season_finale', 'series_finale'].includes(ep.type)
+      FULL_SEASON_FINALE_TYPES.includes(ep.type)
     );
 
     if (hasSeasonPremiere && hasSeasonFinale) {
@@ -48,6 +63,7 @@ export function coalesceEpisodes(
         type: EpisodeComputedType.full_season,
         season,
         show,
+        episodes,
       }];
     }
 

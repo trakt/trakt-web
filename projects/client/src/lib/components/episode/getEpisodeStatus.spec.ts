@@ -17,6 +17,77 @@ describe('getEpisodeStatus', () => {
     });
   });
 
+  describe('coalesced days', () => {
+    it.each(['full_season', 'multiple_episodes'] as const)(
+      'returns "premiere" for %s carrying a season premiere',
+      (type) => {
+        expect(
+          getEpisodeStatus(type, {
+            episodes: [
+              { type: EpisodePremiereType.season_premiere },
+              { type: 'standard' },
+            ],
+          }),
+        ).toBe('premiere');
+      },
+    );
+
+    it('returns "premiere" for a coalesced day that has not aired yet', () => {
+      const tomorrow = new Date(Date.now() + time.days(1));
+
+      expect(
+        getEpisodeStatus('multiple_episodes', {
+          releaseDate: tomorrow,
+          episodes: [
+            { type: EpisodePremiereType.season_premiere },
+            { type: 'standard' },
+          ],
+        }),
+      ).toBe('premiere');
+    });
+
+    it('returns "finale" for a coalesced day carrying a season finale', () => {
+      expect(
+        getEpisodeStatus('multiple_episodes', {
+          episodes: [
+            { type: 'standard' },
+            { type: EpisodeFinaleType.season_finale },
+          ],
+        }),
+      ).toBe('finale');
+    });
+
+    it('prefers the premiere when a full season carries both', () => {
+      expect(
+        getEpisodeStatus('full_season', {
+          episodes: [
+            { type: EpisodePremiereType.season_premiere },
+            { type: EpisodeFinaleType.series_finale },
+          ],
+        }),
+      ).toBe('premiere');
+    });
+
+    it('returns undefined for coalesced standard episodes', () => {
+      expect(
+        getEpisodeStatus('multiple_episodes', {
+          episodes: [{ type: 'standard' }, { type: 'standard' }],
+        }),
+      ).toBeUndefined();
+    });
+
+    it.each(['standard', 'unknown'] as const)(
+      'ignores coalesced episodes for non-computed type %s',
+      (type) => {
+        expect(
+          getEpisodeStatus(type, {
+            episodes: [{ type: EpisodePremiereType.season_premiere }],
+          }),
+        ).toBeUndefined();
+      },
+    );
+  });
+
   describe('finale', () => {
     it.each([
       EpisodeFinaleType.series_finale,

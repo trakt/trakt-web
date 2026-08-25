@@ -42,6 +42,7 @@ describe('coalesceEpisodes', () => {
         type: EpisodeComputedType.full_season,
         season: 1,
         show,
+        episodes,
       });
     });
 
@@ -144,12 +145,14 @@ describe('coalesceEpisodes', () => {
         type: EpisodeComputedType.full_season,
         season: 1,
         show: show1,
+        episodes: [assertDefined(episodes[0]), assertDefined(episodes[2])],
       });
       expect(result[1]).toEqual({
         ...episodes[1],
         type: EpisodeComputedType.full_season,
         season: 1,
         show: show2,
+        episodes: [assertDefined(episodes[1]), assertDefined(episodes[3])],
       });
     });
   };
