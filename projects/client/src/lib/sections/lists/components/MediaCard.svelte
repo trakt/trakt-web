@@ -40,6 +40,13 @@
   const activitySubtitle = $derived(
     "subtitle" in rest ? rest.subtitle : undefined,
   );
+
+  const urlOverride = $derived(rest.urlOverride);
+  const linkProps = $derived({
+    href: urlOverride?.href ?? UrlBuilder.media(type, media.slug),
+    noscroll: urlOverride?.noscroll,
+    replacestate: urlOverride?.replacestate,
+  });
 </script>
 
 {#snippet content(mediaCoverImageUrl: string, mediaCoverOverlay?: string)}
@@ -60,7 +67,7 @@
 
   <Link
     focusable={false}
-    href={UrlBuilder.media(type, media.slug)}
+    {...linkProps}
     onclick={() => {
       rest.onclick?.(media);
       source && track({ source, type: media.type });
@@ -102,7 +109,7 @@
   <PortraitCard>
     {@render content(media.poster.url.thumb)}
     <CardFooter {action} {tag}>
-      <Link href={UrlBuilder.media(type, media.slug)}>
+      <Link {...linkProps}>
         <p class="trakt-card-title ellipsis">
           {media.title}
         </p>
@@ -115,7 +122,7 @@
   <LandscapeCard>
     {@render content(media.thumb.url)}
     <CardFooter {action} {tag}>
-      <Link href={UrlBuilder.media(type, media.slug)}>
+      <Link {...linkProps}>
         <p
           class="trakt-card-title ellipsis"
           class:small={variant !== "activity"}
