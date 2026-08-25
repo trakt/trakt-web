@@ -7,6 +7,7 @@ function buildCacheKey(key: string) {
 export const CacheKey = {
   manifest: buildCacheKey('manifest'),
   static: buildCacheKey('static-assets'),
+  immutable: buildCacheKey('immutable-assets'),
   navigation: buildCacheKey('navigation'),
   external: buildCacheKey('external-resources'),
   images: buildCacheKey('images'),

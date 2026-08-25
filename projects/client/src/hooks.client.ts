@@ -7,6 +7,8 @@ import { captureWebviewSession } from '$lib/features/webview/captureWebviewSessi
 import { SentryEndpoint } from '$lib/features/sentry/SentryEndpoint.ts';
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
 import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
+import { delay } from '$lib/utils/timing/delay.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import * as Sentry from '@sentry/sveltekit';
 import { handleErrorWithSentry } from '@sentry/sveltekit';
 import type { ErrorEvent as SentryErrorEvent } from '@sentry/sveltekit';
@@ -164,24 +166,33 @@ function getRejectionUrl(reason: unknown): string | undefined {
   return String((reason as { url?: unknown }).url ?? '');
 }
 
-function shouldReloadForRejection(event: PromiseRejectionEvent): boolean {
-  if (isDynamicImportError(event.reason)) return true;
-  return hasChunkPath(getRejectionUrl(event.reason));
+type RecoveryAction = 'purge-and-reload' | 'reload';
+
+function getRecoveryForRejection(
+  event: PromiseRejectionEvent,
+): RecoveryAction | undefined {
+  if (isDynamicImportError(event.reason)) return 'purge-and-reload';
+  if (hasChunkPath(getRejectionUrl(event.reason))) return 'purge-and-reload';
+  return undefined;
 }
 
-function shouldReloadForError(event: ErrorEvent): boolean {
-  if (isDynamicImportError(event.error ?? event.message)) return true;
-  if (event.target instanceof HTMLScriptElement) {
-    return hasChunkPath(event.target.src);
+function getRecoveryForError(event: ErrorEvent): RecoveryAction | undefined {
+  if (isDynamicImportError(event.error ?? event.message)) {
+    return 'purge-and-reload';
   }
-  return hasChunkPath(event.filename);
+
+  if (event.target instanceof HTMLScriptElement) {
+    return hasChunkPath(event.target.src) ? 'purge-and-reload' : undefined;
+  }
+
+  return hasChunkPath(event.filename) ? 'reload' : undefined;
 }
 
-function shouldReloadForClientEvent(
+function getRecoveryForClientEvent(
   event: ErrorEvent | PromiseRejectionEvent,
-): boolean {
-  if ('reason' in event) return shouldReloadForRejection(event);
-  return shouldReloadForError(event);
+): RecoveryAction | undefined {
+  if ('reason' in event) return getRecoveryForRejection(event);
+  return getRecoveryForError(event);
 }
 
 function buildReloadUrl() {
@@ -190,27 +201,62 @@ function buildReloadUrl() {
   return url.toString();
 }
 
-function triggerReloadOnce(): void {
+async function purgeCaches(): Promise<void> {
+  if (!('caches' in window)) return;
+
+  const keys = await caches.keys();
+  await Promise.all(keys.map((key) => caches.delete(key)));
+}
+
+async function unregisterServiceWorkers(): Promise<void> {
+  if (!('serviceWorker' in navigator)) return;
+
+  const registrations = await navigator.serviceWorker.getRegistrations();
+  await Promise.all(
+    registrations.map((registration) => registration.unregister()),
+  );
+}
+
+const RECOVERY_CLEANUP_TIMEOUT_MS = time.seconds(3);
+
+function triggerReloadOnce(action: RecoveryAction): void {
+  if (!navigator.onLine) return;
   if (safeSessionStorage.getItem(DYNAMIC_IMPORT_RELOAD_KEY)) return;
 
   safeSessionStorage.setItem(DYNAMIC_IMPORT_RELOAD_KEY, '1');
-  window.location.replace(buildReloadUrl());
+
+  // `_cb` asks the worker to drop the navigation cache. The purge path
+  // unregisters it first, so that reload is uncontrolled: nothing would honour
+  // the param, and nothing would strip it back out of the URL.
+  if (action === 'reload') {
+    window.location.replace(buildReloadUrl());
+    return;
+  }
+
+  Promise.race([
+    Promise.allSettled([purgeCaches(), unregisterServiceWorkers()]),
+    delay(RECOVERY_CLEANUP_TIMEOUT_MS),
+  ]).then(() => window.location.reload());
 }
 
 function reloadOnceForStaleDeploy(error: unknown): void {
   if (!isDynamicImportError(error)) return;
-  triggerReloadOnce();
+  triggerReloadOnce('purge-and-reload');
 }
 
 function reloadOnceFromClientEvent(
   event: ErrorEvent | PromiseRejectionEvent,
 ): void {
-  if (!shouldReloadForClientEvent(event)) return;
-  triggerReloadOnce();
+  const action = getRecoveryForClientEvent(event);
+  if (action === undefined) return;
+  triggerReloadOnce(action);
 }
 
 if (typeof window !== 'undefined') {
-  window.addEventListener('error', reloadOnceFromClientEvent);
+  // Resource load errors do not bubble.
+  window.addEventListener('error', reloadOnceFromClientEvent, {
+    capture: true,
+  });
   window.addEventListener('unhandledrejection', reloadOnceFromClientEvent);
 }
 
