@@ -18,7 +18,7 @@
   <DrilledMediaList
     id={`view-all-up-next-${$mode}`}
     type={$mode}
-    cardOrientation="landscape"
+    variant="landscape"
     filter={$filterMap}
     useList={(listParams) =>
       useStablePaginated({
