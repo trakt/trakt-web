@@ -1,5 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
   import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
@@ -34,20 +35,45 @@
   import { useEpisodePeople } from "./_internal/useEpisodePeople.ts";
   import { useEpisodeStreamOn } from "./_internal/useEpisodeStreamOn.ts";
   import { useEpisodeSummary } from "./_internal/useEpisodeSummary.ts";
+  import { useQuery } from "$lib/features/query/useQuery.ts";
+  import { of } from "rxjs";
+  import { showSummaryQuery } from "$lib/requests/queries/shows/showSummaryQuery.ts";
+  import { filter, map } from "rxjs/operators";
 
   const {
     onClose,
+    slug,
     show,
     seasons,
+    variant = "default",
     season,
     episode,
   }: {
-    show: ShowEntry;
-    seasons: Season[];
+    slug: string;
+    show?: ShowEntry;
+    seasons?: Season[];
+    variant?: "default" | "glance";
     season: number;
     episode: number;
     onClose: () => void;
   } = $props();
+
+  const isDefined = (value: string | null): value is string =>
+    value != null;
+
+  const showQuery = useQuery(
+    fromRune(() => (show ? null : slug)).pipe(
+      filter(isDefined),
+      map(($slug) => showSummaryQuery({ slug: $slug })),
+    ),
+  );
+
+  const resolvedShow = $derived(show ?? $showQuery?.data);
+
+  const isGlance = $derived(variant === "glance");
+  const episodeHref = $derived(
+    UrlBuilder.episodeDrawer(slug, season, episode),
+  );
 
   let isOpen = $state(false);
   let activeTab = $state("info");
@@ -70,13 +96,13 @@
 
   const socialTarget = $derived({
     type: "episode" as const,
-    slug: show.slug,
+    slug,
     season,
     episode,
   });
 
   const params$ = fromRune(() => ({
-    slug: show.slug,
+    slug,
     season,
     episode,
   }));
@@ -129,16 +155,24 @@
   const isEpisodeTitleTruncated = writable(false);
 
   const { isSpoilerHidden } = $derived(
-    useMediaSpoiler({
-      show,
-      media: $episodeEntry ? [$episodeEntry] : [],
-      type: "episode",
-    }),
+    resolvedShow
+      ? useMediaSpoiler({
+        show: resolvedShow,
+        media: $episodeEntry ? [$episodeEntry] : [],
+        type: "episode",
+      })
+      : { isSpoilerHidden: of(false) },
   );
 
-  const socialTitle = $derived(
-    $episodeEntry ? episodeActivityTitle($episodeEntry, show) : show.title,
-  );
+  const socialTitle = $derived.by(() => {
+    if (!resolvedShow) {
+      return "";
+    }
+
+    return $episodeEntry
+      ? episodeActivityTitle($episodeEntry, resolvedShow)
+      : resolvedShow.title;
+  });
 </script>
 
 {#snippet episodeMetaInfo()}
@@ -152,8 +186,8 @@
       use:trackTextOverflow={isEpisodeTitleTruncated}
     >
       {numberLabel}
-      {#if $episodeEntry}
-        <Spoiler media={$episodeEntry} {show} type="episode">
+      {#if $episodeEntry && resolvedShow}
+        <Spoiler media={$episodeEntry} show={resolvedShow} type="episode">
           - {$episodeEntry.title}
         </Spoiler>
       {/if}
@@ -175,17 +209,22 @@
 
 {#snippet infoContent()}
   <div class="episode-info-content">
-    {#if $episodeEntry}
-      <MediaStats type="episode" episode={$episodeEntry} {show} crew={$crew} />
+    {#if $episodeEntry && resolvedShow}
+      <MediaStats
+        type="episode"
+        episode={$episodeEntry}
+        show={resolvedShow}
+        crew={$crew}
+      />
     {:else}
       <MediaStatsSkeleton />
     {/if}
 
-    {#if $episodeEntry}
+    {#if $episodeEntry && resolvedShow}
       <WhereToWatchList
         type="episode"
         episode={$episodeEntry}
-        media={show}
+        media={resolvedShow}
         streamOn={$streamOn}
         isLoading={$isStreamOnLoading}
         variant="inline"
@@ -195,7 +234,7 @@
     {:else if $isAired}
       <WhereToWatchListSkeleton
         type="episode"
-        slug={show.slug}
+        {slug}
         variant="inline"
         --inset-override-list-item="0"
       />
@@ -210,27 +249,29 @@
 {/snippet}
 
 {#snippet reviewsContent()}
-  {#if $episodeEntry}
-    <EpisodeReviewsTab {show} episode={$episodeEntry} />
+  {#if $episodeEntry && resolvedShow}
+    <EpisodeReviewsTab show={resolvedShow} episode={$episodeEntry} />
   {:else if $isLoading}
     <EpisodeReviewsTabSkeleton />
   {/if}
 {/snippet}
 
 {#snippet episodesContent()}
-  <SeasonEpisodesTab
-    {show}
-    {seasons}
-    currentSeason={season}
-    currentEpisode={episode}
-    showSeasonSelector
-  />
+  {#if resolvedShow && seasons}
+    <SeasonEpisodesTab
+      show={resolvedShow}
+      {seasons}
+      currentSeason={season}
+      currentEpisode={episode}
+      showSeasonSelector
+    />
+  {/if}
 {/snippet}
 
 <Drawer
   {onClose}
   onOpened={() => (isOpen = true)}
-  title={show.title}
+  title={resolvedShow?.title}
   metaInfo={episodeMetaInfo}
   size="large"
   classList="trakt-episode-drawer"
@@ -242,8 +283,11 @@
       {/key}
 
       <EpisodeInfoHeader
-        {show}
+        {slug}
+        show={resolvedShow}
         {seasons}
+        hasEpisodeNavigation={!isGlance}
+        titleHref={isGlance ? episodeHref : undefined}
         {season}
         {episode}
         entry={$episodeEntry}
@@ -256,41 +300,43 @@
         onHistoryOpen={() => openStacked("history")}
       />
 
-      <TabView
-        value={activeTab}
-        onChange={(value) => (activeTab = value)}
-        tabs={[
-          {
-            value: "info",
-            label: m.tab_text_seasons_info(),
-            icon: infoIcon,
-            content: infoContent,
-          },
-          {
-            value: "reviews",
-            label: m.tab_text_seasons_reviews(),
-            icon: reviewsIcon,
-            content: reviewsContent,
-          },
-          {
-            value: "episodes",
-            label: m.tab_text_seasons_episodes(),
-            icon: episodesIcon,
-            content: episodesContent,
-          },
-        ]}
-      />
+      {#if !isGlance}
+        <TabView
+          value={activeTab}
+          onChange={(value) => (activeTab = value)}
+          tabs={[
+            {
+              value: "info",
+              label: m.tab_text_seasons_info(),
+              icon: infoIcon,
+              content: infoContent,
+            },
+            {
+              value: "reviews",
+              label: m.tab_text_seasons_reviews(),
+              icon: reviewsIcon,
+              content: reviewsContent,
+            },
+            {
+              value: "episodes",
+              label: m.tab_text_seasons_episodes(),
+              icon: episodesIcon,
+              content: episodesContent,
+            },
+          ]}
+        />
+      {/if}
     </div>
   {/if}
 </Drawer>
 
-{#if openDrawer === "ratings" && $episodeEntry}
+{#if openDrawer === "ratings" && $episodeEntry && resolvedShow}
   <RatingsDrawer
     type="episode"
     episode={$episodeEntry}
-    {show}
+    show={resolvedShow}
     crew={$crew}
-    {seasons}
+    seasons={seasons ?? []}
     elevated
     onClose={closeStacked}
   />
@@ -305,22 +351,22 @@
   />
 {/if}
 
-{#if openDrawer === "history" && $episodeEntry}
+{#if openDrawer === "history" && $episodeEntry && resolvedShow}
   <HistoryDrawerHost
     type="episode"
     episode={$episodeEntry}
-    {show}
+    show={resolvedShow}
     crew={$crew}
     elevated
     onClose={closeStacked}
   />
 {/if}
 
-{#if openDrawer === "where-to-watch" && $episodeEntry}
+{#if openDrawer === "where-to-watch" && $episodeEntry && resolvedShow}
   <WhereToWatchDrawerHost
     type="episode"
     episode={$episodeEntry}
-    media={show}
+    media={resolvedShow}
     elevated
     onClose={closeStacked}
   />

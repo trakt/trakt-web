@@ -13,6 +13,7 @@
   import TextTag from "$lib/components/tags/TextTag.svelte";
   import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { mediaGlanceNavigation } from "$lib/sections/summary/components/glance/mediaGlanceNavigation.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
@@ -41,6 +42,17 @@
   );
   const summaryCardLayout = $derived(
     style === "compact" || style === "minimal" ? style : "default",
+  );
+
+  const { buildEpisodeGlanceLink } = mediaGlanceNavigation();
+  const urlOverride = $derived(
+    $isLargeScreenCards && style === "summary"
+      ? buildEpisodeGlanceLink({
+        slug: props.media.slug,
+        season: props.episode.season,
+        episode: props.episode.number,
+      })
+      : props.urlOverride,
   );
 
   const runtime = $derived(
@@ -232,7 +244,7 @@
         },
       }}
       popupActions={props.popupActions}
-      urlOverride={props.urlOverride}
+      {urlOverride}
       layout={summaryCardLayout}
       badge={action}
       {sortTag}
@@ -241,11 +253,12 @@
     />
   {/if}
 
-  {#if style === "cover"}
+  {#if resolvedStyle === "cover"}
     <EpisodeCard
       {...props}
       {tag}
       {action}
+      {urlOverride}
       indicators={hasIndicators ? indicatorTags : undefined}
     />
   {/if}
