@@ -31,10 +31,14 @@
 
 <style>
   .trakt-stem-tag {
+    min-width: 0;
+
     :global(.trakt-tag) {
       display: flex;
       align-items: center;
       gap: var(--gap-xxs);
+
+      min-width: 0;
 
       background: var(--color-background-stem-tag);
       color: var(--color-foreground-stem-tag);

@@ -6,8 +6,7 @@ import {
 } from '$lib/requests/models/EpisodeType.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { CoalescedEpisodes } from './CoalescedEpisodes.ts';
-
-type EpisodeStatus = 'premiere' | 'finale' | 'new';
+import type { EpisodeStatus } from './EpisodeStatus.ts';
 
 type GetEpisodeStatusOptions = {
   isLatestAired?: boolean;
@@ -33,6 +32,13 @@ const COALESCED_TYPES: ReadonlySet<EpisodeType> = new Set([
   EpisodeComputedType.multiple_episodes,
 ]);
 
+type EpisodeMilestone = Extract<EpisodeStatus, 'premiere' | 'finale'>;
+
+const NEW_MILESTONE_STATUS = {
+  premiere: 'new-premiere',
+  finale: 'new-finale',
+} as const satisfies Record<EpisodeMilestone, EpisodeStatus>;
+
 function isEpisodeNew(releaseDate: Date): boolean {
   const newEpisodeWindowMs = time.days(7);
   const elapsed = Date.now() - releaseDate.getTime();
@@ -54,26 +60,36 @@ function resolveEpisodeType(
     type;
 }
 
+function resolveMilestone(
+  type: EpisodeType,
+  isLatestAired?: boolean,
+): EpisodeMilestone | Nil {
+  const isPremiere = PREMIERE_TYPES.has(type);
+  const isFinale = FINALE_TYPES.has(type);
+
+  if (!isPremiere && !isFinale) {
+    return;
+  }
+
+  if (MID_SEASON_TYPES.has(type) && isLatestAired === false) {
+    return;
+  }
+
+  return isPremiere ? 'premiere' : 'finale';
+}
+
 export function getEpisodeStatus(
   type: EpisodeType,
   options: GetEpisodeStatusOptions = {},
 ): EpisodeStatus | Nil {
   const resolvedType = resolveEpisodeType(type, options.episodes);
+  const milestone = resolveMilestone(resolvedType, options.isLatestAired);
+  const isNew = options.releaseDate != null &&
+    isEpisodeNew(options.releaseDate);
 
-  const isPremiere = PREMIERE_TYPES.has(resolvedType);
-  const isFinale = FINALE_TYPES.has(resolvedType);
-
-  if (!isPremiere && !isFinale) {
-    if (options.releaseDate && isEpisodeNew(options.releaseDate)) {
-      return 'new';
-    }
-    return;
+  if (!isNew) {
+    return milestone;
   }
 
-  const isMidSeason = MID_SEASON_TYPES.has(resolvedType);
-  if (isMidSeason && options.isLatestAired === false) {
-    return;
-  }
-
-  return isPremiere ? 'premiere' : 'finale';
+  return milestone ? NEW_MILESTONE_STATUS[milestone] : 'new';
 }
