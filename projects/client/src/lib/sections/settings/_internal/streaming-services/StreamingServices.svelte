@@ -4,10 +4,6 @@
   import StreamingServiceTile from "./StreamingServiceTile.svelte";
   import { useStreamingConnections } from "./useStreamingConnections.ts";
 
-  // Actionable services (connected, or connectable on the current plan - e.g.
-  // HBO Max for free users). VIP-gated services live in their own section
-  // (LockedStreamingServices) so the actionable ones are not buried among
-  // upgrade prompts.
   const { available } = useStreamingConnections();
 
   const inactiveNames = $derived(

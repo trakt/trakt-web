@@ -4,12 +4,12 @@ export const StreamingConnectionsResponseMock: YounifyConnection[] = [
   {
     id: 'hbomax',
     name: 'HBO Max',
-    vip: false,
+    vip: true,
     color: '#5822b4',
     images: {
       logo: 'walter-r2.trakt.tv/images/younify/hbomax/logo.png',
     },
-    connectable: true,
+    connectable: false,
     connected: false,
     active: false,
     profile: null,
@@ -18,7 +18,7 @@ export const StreamingConnectionsResponseMock: YounifyConnection[] = [
   {
     id: 'amazon',
     name: 'Prime Video',
-    vip: true,
+    vip: false,
     color: '#00a8e1',
     images: {
       logo: 'walter-r2.trakt.tv/images/younify/amazon/logo.png',
@@ -32,7 +32,7 @@ export const StreamingConnectionsResponseMock: YounifyConnection[] = [
   {
     id: 'appletv',
     name: 'Apple TV',
-    vip: true,
+    vip: false,
     color: '#000000',
     images: {
       logo: 'walter-r2.trakt.tv/images/younify/appletv/logo.png',

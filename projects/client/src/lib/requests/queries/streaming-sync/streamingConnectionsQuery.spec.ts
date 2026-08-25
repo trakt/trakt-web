@@ -22,7 +22,6 @@ describe('streamingConnectionsQuery', () => {
     const prime = connections?.find((connection) => connection.id === 'amazon');
     expect(prime).to.include({
       name: 'Prime Video',
-      isVip: true,
       isConnected: true,
       isActive: true,
       profile: 'Justin',
