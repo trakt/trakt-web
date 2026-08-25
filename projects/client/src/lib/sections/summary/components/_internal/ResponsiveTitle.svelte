@@ -32,5 +32,9 @@
     @include for-tablet-sm-and-below {
       font-size: initial;
     }
+
+    :global(.trakt-summary[data-variant="drawer"]) & {
+      font-size: initial;
+    }
   }
 </style>

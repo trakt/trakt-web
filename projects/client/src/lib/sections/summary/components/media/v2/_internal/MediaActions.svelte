@@ -3,9 +3,9 @@
   import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import TrackAction from "$lib/sections/media-actions/mark-as-watched/TrackAction.svelte";
   import SummaryActionsBar from "../../../_internal/SummaryActionsBar.svelte";
-  import BookmarkAction from "./BookmarkAction.svelte";
+  import BookmarkAction from "../../../_internal/BookmarkAction.svelte";
   import MediaPopupActions from "./MediaPopupActions.svelte";
-  import TrailerButton from "./TrailerButton.svelte";
+  import TrailerButton from "../../../_internal/TrailerButton.svelte";
 
   const { media, title }: { media: MediaEntry; title: string } = $props();
 

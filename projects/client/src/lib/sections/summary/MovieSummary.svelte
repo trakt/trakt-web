@@ -45,7 +45,7 @@
 <SummaryDrawer {sentiment} {studios} {crew} {media} {videos} type="movie" />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-  <MediaSummaryV2 {media} {studios} {crew} {intl} type="movie" />
+  <MediaSummaryV2 {media} {crew} {intl} type="movie" />
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
