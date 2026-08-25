@@ -10,6 +10,8 @@
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import type { Snippet } from "svelte";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { resolveItemCardStyle } from "../../components/_internal/resolveItemCardStyle.ts";
   import MediaItem from "../../components/MediaItem.svelte";
   import UpNextSwipe from "../../progress/_internal/UpNextSwipe.svelte";
   import { mapToMarkAsWatchedTarget } from "./mapToMarkAsWatchedTarget";
@@ -24,6 +26,11 @@
     style: "summary" | "cover";
     sortTag?: Snippet;
   } = $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
+  const isSummary = $derived(
+    resolveItemCardStyle(style, $isLargeScreenCards) === "summary",
+  );
 
   const markAsWatchedTarget = $derived(mapToMarkAsWatchedTarget(entry));
   const mediaEntry = $derived.by(() => {
@@ -94,7 +101,7 @@
     {popupActions}
     {action}
     {sortTag}
-    tag={style === "summary" ? summaryTag : undefined}
+    tag={isSummary ? summaryTag : undefined}
     variant="start"
     source="start-watching"
   />

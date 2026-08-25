@@ -8,6 +8,7 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
@@ -17,6 +18,7 @@
   import type { Snippet } from "svelte";
   import type { MediaCardProps } from "../components/models/MediaCardProps";
   import DefaultMediaPopupActions from "./DefaultMediaPopupActions.svelte";
+  import { resolveItemCardStyle } from "./_internal/resolveItemCardStyle.ts";
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
 
@@ -43,7 +45,10 @@
 
   const isDeemphasized = $derived(canDeemphasize && $isWatched);
 
-  const isSummary = $derived(style === "summary");
+  const isLargeScreenCards = useLargeScreenCards();
+  const isSummary = $derived(
+    resolveItemCardStyle(style ?? "cover", $isLargeScreenCards) === "summary",
+  );
 
 </script>
 

@@ -1,6 +1,8 @@
 <script lang="ts">
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
+  import { drilldownGrid } from "$lib/sections/lists/utils/drilldownGrid.ts";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages";
@@ -24,13 +26,16 @@
     filter$: filterMap,
     mode$: mode,
   });
+
+  const isLargeScreenCards = useLargeScreenCards();
+  const grid = $derived(drilldownGrid($isLargeScreenCards));
 </script>
 
 <GridList
   id={`credits-history-list-${slug}`}
   items={$list}
-  sizing="auto"
-  --width-item="var(--width-summary-card)"
+  sizing={grid.sizing}
+  --width-item={grid.itemWidth}
 >
   {#snippet item(entry)}
     <CreditMediaItem

@@ -13,10 +13,12 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import type { Snippet } from "svelte";
+  import { resolveItemCardStyle } from "./_internal/resolveItemCardStyle.ts";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { SeasonCardProps } from "./models/SeasonCardProps";
 
@@ -44,6 +46,11 @@
 
   const isEmphasized = $derived(isCurrentSeason && !season.title);
 
+  const isLargeScreenCards = useLargeScreenCards();
+  const resolvedStyle = $derived(
+    resolveItemCardStyle(style, $isLargeScreenCards),
+  );
+
   const scrollToItem = (element: HTMLElement, active: boolean) => {
     if (variant === "list-item") return;
     return scrollActiveItemIntoView(element, active);
@@ -64,7 +71,7 @@
   data-variant={variant}
   use:scrollToItem={isCurrentSeason}
 >
-  {#if style === "cover"}
+  {#if resolvedStyle === "cover"}
     {#snippet tag()}
       <TagBar>
         <SeasonLabelTag seasonNumber={season.number} />
@@ -125,7 +132,7 @@
     </PortraitCard>
   {/if}
 
-  {#if style === "summary"}
+  {#if resolvedStyle === "summary"}
     <MediaSummaryCard
       type="season"
       {season}
