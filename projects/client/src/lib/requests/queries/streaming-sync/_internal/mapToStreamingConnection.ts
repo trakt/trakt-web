@@ -19,7 +19,6 @@ export function mapToStreamingConnection(
     id: connection.id,
     key: `streaming-connection-${connection.id}`,
     name: connection.name,
-    isVip: connection.vip,
     color: mapToColor(connection.color),
     logoUrl: prependHttps(connection.images?.logo),
     isConnectable: connection.connectable,
