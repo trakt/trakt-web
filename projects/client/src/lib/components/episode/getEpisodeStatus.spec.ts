@@ -144,7 +144,7 @@ describe('getEpisodeStatus', () => {
   describe('new status', () => {
     beforeEach(() => {
       vi.useFakeTimers();
-      vi.setSystemTime(new Date('2025-01-15T00:00:00Z'));
+      vi.setSystemTime(new Date('2026-08-25T12:00:00Z'));
     });
 
     afterEach(() => {
