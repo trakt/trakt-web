@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import RateAction from "$lib/sections/media-actions/rating/RateAction.svelte";
   import RemoveFromHistoryAction from "$lib/sections/media-actions/remove-from-history/RemoveFromHistoryAction.svelte";
@@ -6,6 +7,7 @@
   import type { RateNowProps } from "$lib/sections/summary/components/rating/models/RateNowProps";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import ActivityItem from "../components/ActivityItem.svelte";
+  import { resolveItemCardStyle } from "../components/_internal/resolveItemCardStyle.ts";
   import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
   import type { HistoryEntry } from "../stores/models/HistoryEntry";
 
@@ -20,6 +22,11 @@
     style = "cover",
     isActionable = false,
   }: RecentlyWatchedItemProps = $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
+  const resolvedStyle = $derived(
+    resolveItemCardStyle(style, $isLargeScreenCards),
+  );
 
   const rateTarget = $derived<RateNowProps>(
     activity.type === "episode"
@@ -75,9 +82,10 @@
   </RenderFor>
 {/snippet}
 
-{#if style === "cover"}
+{#if resolvedStyle === "cover"}
   <ActivityItem
     activityAt={activity.watchedAt}
+    {style}
     {activity}
     popupActions={isActionable ? popupActions : undefined}
     action={isActionable ? action : undefined}
@@ -86,7 +94,7 @@
   />
 {/if}
 
-{#if style === "summary"}
+{#if resolvedStyle === "summary"}
   <ActivitySummaryCard
     activityAt={activity.watchedAt}
     {activity}
