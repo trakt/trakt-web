@@ -1,8 +1,10 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import type { SocialActivity } from "$lib/requests/models/SocialActivity";
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import ActivityItem from "../../components/ActivityItem.svelte";
+  import { resolveItemCardStyle } from "../../components/_internal/resolveItemCardStyle.ts";
   import ActivitySummaryCard from "../../components/ActivitySummaryCard.svelte";
   import UserAvatar from "../../components/UserAvatar.svelte";
   import UserProfileLink from "../../components/UserProfileLink.svelte";
@@ -15,6 +17,11 @@
   };
 
   const { activity, style = "cover" }: SocialActivityItemProps = $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
+  const resolvedStyle = $derived(
+    resolveItemCardStyle(style, $isLargeScreenCards),
+  );
 
   const hasMultipleUsers = $derived(activity.users.length > 1);
   const cappedUsers = $derived(activity.users.slice(0, maxUsers));
@@ -57,9 +64,10 @@
   </div>
 {/snippet}
 
-{#if style === "cover"}
+{#if resolvedStyle === "cover"}
   <ActivityItem
     {activity}
+    {style}
     activityAt={activity.activityAt}
     badge={profileBadges}
     source="social-activity"
@@ -68,7 +76,7 @@
   />
 {/if}
 
-{#if style === "summary"}
+{#if resolvedStyle === "summary"}
   <ActivitySummaryCard
     {activity}
     activityAt={activity.activityAt}
