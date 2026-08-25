@@ -73,7 +73,7 @@
 />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-  <MediaSummaryV2 {media} {studios} {intl} {crew} type="show" />
+  <MediaSummaryV2 {media} {intl} {crew} type="show" />
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-lg", "desktop"]}>

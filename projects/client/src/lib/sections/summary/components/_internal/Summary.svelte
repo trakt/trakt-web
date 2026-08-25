@@ -9,26 +9,30 @@
     meta,
     sideActions,
     color,
+    variant = "page",
   }: {
     poster: Snippet;
     meta: Snippet;
-    sideActions: Snippet;
+    sideActions?: Snippet;
     color?: string;
+    variant?: "page" | "drawer";
   } & ChildrenProps = $props();
 
   const mainColor = $derived(color ?? "rgba(0, 0, 0, 0.56)");
 </script>
 
-<div class="trakt-summary">
+<div class="trakt-summary" data-variant={variant}>
   <div class="trakt-summary-main" style={`--main-color: ${mainColor}`}>
     <SummarySideActions>
-      <BackButton />
+      {#if variant === "page"}
+        <BackButton />
+      {/if}
     </SummarySideActions>
 
     {@render poster()}
 
     <SummarySideActions>
-      {@render sideActions()}
+      {@render sideActions?.()}
     </SummarySideActions>
   </div>
 
@@ -46,6 +50,23 @@
     gap: var(--gap-m);
 
     padding: var(--gap-m) var(--layout-distance-side);
+
+    &[data-variant="drawer"] {
+      --summary-poster-width: var(--ni-220);
+      --summary-side-action-bar-width: var(--ni-0);
+
+      --glance-line-height: var(--ni-16);
+      --glance-title-lines: 1;
+      --glance-ratings-height: var(--ni-24);
+      --glance-actions-height: var(--ni-56);
+      --glance-overview-lines: 3;
+      --glance-overview-height: calc(
+        var(--glance-overview-lines) * var(--font-size-text) * 1.5
+      );
+
+      padding-inline: 0;
+      padding-block-start: 0;
+    }
   }
 
   .trakt-summary-main {

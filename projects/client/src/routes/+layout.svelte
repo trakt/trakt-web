@@ -38,6 +38,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ManageListsDrawerProvider from "$lib/sections/components/lists-drawer/ManageListsDrawerProvider.svelte";
   import MarkAsWatchedDrawerProvider from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedDrawerProvider.svelte";
+  import MediaGlanceProvider from "$lib/sections/summary/components/glance/MediaGlanceProvider.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
   import TopNavbar from "$lib/sections/navbar/TopNavbar.svelte";
@@ -102,6 +103,7 @@
                                   <ActionToastHost />
                                   <AddNoteDrawerProvider />
                                   <ReportDialogProvider />
+                                  <MediaGlanceProvider />
                                   <CoverImage />
                                   <SeasonalFlair />
                                   <EditModeProvider>
