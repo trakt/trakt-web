@@ -12,6 +12,7 @@
 
 <DrilledMediaList
   id="recently-watched-list-paginated-{mode}-{slug}"
+  variant="landscape"
   type={mode}
   useList={({ limit }: { limit: number }) =>
     useRecentlyWatchedList({

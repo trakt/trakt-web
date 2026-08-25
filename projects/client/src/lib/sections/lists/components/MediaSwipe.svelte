@@ -1,5 +1,7 @@
 <script lang="ts">
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { swipeIndicatorHeight } from "./_internal/swipeIndicatorHeight.ts";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { BaseMediaInput } from "$lib/models/MediaInput";
@@ -14,6 +16,8 @@
     };
 
   const { type, media, style, children }: MediaSwipeProps = $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
 
   const target = $derived({ type, media });
 
@@ -51,7 +55,7 @@
         addToWatchlist();
       }
     }}
-    --indicator-height="var(--height-summary-card-cover)"
+    --indicator-height={swipeIndicatorHeight($isLargeScreenCards)}
   >
     {#snippet indicator({ isActive, direction })}
       {#if direction === "left"}

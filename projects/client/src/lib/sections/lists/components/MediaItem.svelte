@@ -3,7 +3,9 @@
   import MediaStatusTag from "$lib/components/media/tags/MediaStatusTag.svelte";
   import ProgressTag from "$lib/components/media/tags/ProgressTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import type { Snippet } from "svelte";
+  import { resolveItemCardStyle } from "./_internal/resolveItemCardStyle.ts";
   import MediaCard from "./MediaCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { MediaCardProps } from "./models/MediaCardProps";
@@ -14,9 +16,11 @@
     ...props
   }: MediaCardProps & { contextualTag?: Snippet; sortTag?: Snippet } = $props();
 
+  const isLargeScreenCards = useLargeScreenCards();
+
   const style = $derived(props.style ?? "cover");
-  const resolvedStyle = $derived<"cover" | "summary">(
-    style === "compact" || style === "minimal" ? "summary" : style,
+  const resolvedStyle = $derived(
+    resolveItemCardStyle(style, $isLargeScreenCards),
   );
   const summaryCardLayout = $derived(
     style === "compact" || style === "minimal" ? style : "default",

@@ -1,6 +1,8 @@
 <script lang="ts">
   import { page } from "$app/state";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
+  import { drilldownGrid } from "$lib/sections/lists/utils/drilldownGrid.ts";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
@@ -35,13 +37,16 @@
 
   const list = $derived($credits?.get(selectedPosition) ?? []);
   const hasMatchingType = $derived($mode === "media" || $mode === type);
+
+  const isLargeScreenCards = useLargeScreenCards();
+  const grid = $derived(drilldownGrid($isLargeScreenCards));
 </script>
 
 <GridList
   id={`credits-list-${slug}-${type}-${selectedPosition}`}
   items={list}
-  sizing="auto"
-  --width-item="var(--width-summary-card)"
+  sizing={grid.sizing}
+  --width-item={grid.itemWidth}
 >
   {#snippet item(entry)}
     <CreditMediaItem

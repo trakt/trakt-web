@@ -1,5 +1,7 @@
 <script lang="ts">
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { swipeIndicatorHeight } from "$lib/sections/lists/components/_internal/swipeIndicatorHeight.ts";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
@@ -16,6 +18,8 @@
 
   const { movie, playbackId, style, children }: UpNextMovieSwipeProps =
     $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
 
   const { markAsWatched } = $derived(
     useMarkAsWatched({
@@ -58,7 +62,7 @@
         confirmDrop();
       }
     }}
-    --indicator-height="var(--height-summary-card-cover)"
+    --indicator-height={swipeIndicatorHeight($isLargeScreenCards)}
   >
     {#snippet indicator({ isActive, direction })}
       {#if direction === "left"}
