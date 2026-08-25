@@ -209,6 +209,75 @@ describe('EpisodeStatusTag', () => {
     expect(tagLabel).toBeInTheDocument();
   });
 
+  test('it renders a single combined new premiere tag', () => {
+    const threeDaysAgo = new Date(Date.now() - time.days(3));
+
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: EpisodePremiereType.season_premiere,
+          releaseDate: threeDaysAgo,
+        },
+      },
+    );
+
+    expect(screen.getByText(EpisodeIntlProvider.newPremiereText()))
+      .toBeInTheDocument();
+    expect(screen.queryByText(EpisodeIntlProvider.newText()))
+      .not.toBeInTheDocument();
+    expect(screen.queryByText(EpisodeIntlProvider.premiereText()))
+      .not.toBeInTheDocument();
+  });
+
+  test('it renders a combined new premiere tag for a coalesced premiere day', () => {
+    const threeDaysAgo = new Date(Date.now() - time.days(3));
+
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: 'multiple_episodes',
+          releaseDate: threeDaysAgo,
+          episodes: [
+            { type: EpisodePremiereType.season_premiere },
+            { type: 'standard' },
+          ],
+        },
+      },
+    );
+
+    expect(screen.getByText(EpisodeIntlProvider.newPremiereText()))
+      .toBeInTheDocument();
+    expect(screen.queryByText(EpisodeIntlProvider.newText()))
+      .not.toBeInTheDocument();
+    expect(screen.queryByText(EpisodeIntlProvider.premiereText()))
+      .not.toBeInTheDocument();
+  });
+
+  test('it keeps the new tag when the mid season gate drops the premiere', () => {
+    const threeDaysAgo = new Date(Date.now() - time.days(3));
+
+    render(
+      EpisodeStatusTag,
+      {
+        props: {
+          i18n: EpisodeIntlProvider,
+          episodeType: EpisodePremiereType.mid_season_premiere,
+          releaseDate: threeDaysAgo,
+          isLatestAired: false,
+        },
+      },
+    );
+
+    expect(screen.getByText(EpisodeIntlProvider.newText()))
+      .toBeInTheDocument();
+    expect(screen.queryByText(EpisodeIntlProvider.premiereText()))
+      .not.toBeInTheDocument();
+  });
+
   test('it does not render the new tag when release date is older than 7 days', () => {
     const tenDaysAgo = new Date(Date.now() - time.days(10));
 

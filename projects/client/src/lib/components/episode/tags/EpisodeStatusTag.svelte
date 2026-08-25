@@ -5,6 +5,7 @@
   import { type EpisodeType } from "$lib/requests/models/EpisodeType";
   import type { CoalescedEpisodes } from "../CoalescedEpisodes";
   import type { EpisodeIntl } from "../EpisodeIntl";
+  import type { EpisodeStatus } from "../EpisodeStatus";
   import { getEpisodeStatus } from "../getEpisodeStatus";
 
   type EpisodeStatusProps = {
@@ -28,31 +29,38 @@
   const status = $derived(
     getEpisodeStatus(episodeType, { isLatestAired, releaseDate, episodes }),
   );
+
+  const labels: Record<EpisodeStatus, () => string> = $derived({
+    "new": i18n.newText,
+    "premiere": i18n.premiereText,
+    "finale": i18n.finaleText,
+    "new-premiere": i18n.newPremiereText,
+    "new-finale": i18n.newFinaleText,
+  });
 </script>
 
-{#snippet tagContent(text: string)}
+{#snippet tagContent(episodeStatus: EpisodeStatus)}
   <div class="trakt-episode-status">
-    <div class="trakt-episode-status-indicator" data-status={status}></div>
+    <div
+      class="trakt-episode-status-indicator"
+      data-status={episodeStatus}
+    ></div>
     <p class="bold capitalize ellipsis">
-      {text}
+      {labels[episodeStatus]()}
     </p>
   </div>
 {/snippet}
 
-{#snippet tag(text: string)}
+{#if status}
   {#if type === "text"}
-    <TextTag>{@render tagContent(text)}</TextTag>
+    <TextTag>
+      {@render tagContent(status)}
+    </TextTag>
   {:else}
-    <StemTag>{@render tagContent(text)}</StemTag>
+    <StemTag>
+      {@render tagContent(status)}
+    </StemTag>
   {/if}
-{/snippet}
-
-{#if status === "finale"}
-  {@render tag(i18n.finaleText())}
-{:else if status === "premiere"}
-  {@render tag(i18n.premiereText())}
-{:else if status === "new"}
-  {@render tag(i18n.newText())}
 {/if}
 
 <style>
@@ -60,20 +68,25 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xxs);
+
+    min-width: 0;
   }
 
   .trakt-episode-status-indicator {
     --indicator-size: var(--ni-6);
 
+    flex-shrink: 0;
     width: var(--indicator-size);
     height: var(--indicator-size);
     border-radius: 50%;
 
-    &[data-status="finale"] {
+    &[data-status="finale"],
+    &[data-status="new-finale"] {
       background-color: var(--red-500);
     }
 
-    &[data-status="premiere"] {
+    &[data-status="premiere"],
+    &[data-status="new-premiere"] {
       background-color: var(--green-500);
     }
 

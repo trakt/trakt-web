@@ -183,14 +183,49 @@ describe('getEpisodeStatus', () => {
       ).toBeUndefined();
     });
 
-    it('does not return "new" when episode is a premiere', () => {
+    it('combines into "new-premiere" rather than two statuses', () => {
       const threeDaysAgo = new Date(Date.now() - time.days(3));
 
       expect(
         getEpisodeStatus(EpisodePremiereType.season_premiere, {
           releaseDate: threeDaysAgo,
         }),
-      ).toBe('premiere');
+      ).toBe('new-premiere');
+    });
+
+    it('combines into "new-finale"', () => {
+      const threeDaysAgo = new Date(Date.now() - time.days(3));
+
+      expect(
+        getEpisodeStatus(EpisodeFinaleType.season_finale, {
+          releaseDate: threeDaysAgo,
+        }),
+      ).toBe('new-finale');
+    });
+
+    it('combines into "new-premiere" for a coalesced premiere day', () => {
+      const threeDaysAgo = new Date(Date.now() - time.days(3));
+
+      expect(
+        getEpisodeStatus('multiple_episodes', {
+          releaseDate: threeDaysAgo,
+          episodes: [
+            { type: EpisodePremiereType.season_premiere },
+            { type: 'standard' },
+          ],
+        }),
+      ).toBe('new-premiere');
+    });
+
+    it('keeps "new" when the mid-season gate drops the milestone', () => {
+      const threeDaysAgo = new Date(Date.now() - time.days(3));
+
+      expect(
+        getEpisodeStatus(EpisodePremiereType.mid_season_premiere, {
+          releaseDate: threeDaysAgo,
+          isLatestAired: false,
+        }),
+      ).toBe('new');
     });
   });
 });
