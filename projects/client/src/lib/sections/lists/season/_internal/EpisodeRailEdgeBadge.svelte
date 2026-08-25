@@ -1,7 +1,7 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { EpisodeUrlOverride } from "$lib/sections/lists/components/models/EpisodeUrlOverride";
+  import type { CardUrlOverride } from "$lib/sections/lists/components/models/CardUrlOverride";
 
   /*
     What the rail is hiding, docked to the edge of the still nearest it: the
@@ -19,7 +19,7 @@
   }: {
     side: "start" | "end";
     count: number;
-    link: EpisodeUrlOverride;
+    link: CardUrlOverride;
   } = $props();
 
   const label = $derived(

@@ -3,6 +3,7 @@ import type { MediaInput, MediaInputDefault } from '$lib/models/MediaInput.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Snippet } from 'svelte';
 import type { BaseItemProps } from './BaseItemProps.ts';
+import type { CardUrlOverride } from './CardUrlOverride.ts';
 
 export type MediaItemVariant<T> =
   | { variant?: Nil } & MediaInput<T>
@@ -21,6 +22,7 @@ type BaseMediaProps<T> = BaseItemProps & MediaItemVariant<T> & {
   coverTag?: Snippet;
   mode?: 'standalone' | 'mixed';
   onclick?: (item: T) => void;
+  urlOverride?: CardUrlOverride;
 };
 
 export type MediaCardProps<T = MediaInputDefault> =

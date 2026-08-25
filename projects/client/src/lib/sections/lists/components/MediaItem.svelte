@@ -4,6 +4,7 @@
   import ProgressTag from "$lib/components/media/tags/ProgressTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { mediaGlanceNavigation } from "$lib/sections/summary/components/glance/mediaGlanceNavigation.ts";
   import type { Snippet } from "svelte";
   import { resolveItemCardStyle } from "./_internal/resolveItemCardStyle.ts";
   import MediaCard from "./MediaCard.svelte";
@@ -22,6 +23,16 @@
   const resolvedStyle = $derived(
     resolveItemCardStyle(style, $isLargeScreenCards),
   );
+  const { buildMediaGlanceLink } = mediaGlanceNavigation();
+  const urlOverride = $derived(
+    $isLargeScreenCards && style === "summary"
+      ? buildMediaGlanceLink({
+        type: props.media.type,
+        slug: props.media.slug,
+      })
+      : undefined,
+  );
+
   const summaryCardLayout = $derived(
     style === "compact" || style === "minimal" ? style : "default",
   );
@@ -61,6 +72,7 @@
   <MediaCard
     {...props}
     {coverTag}
+    {urlOverride}
     style={resolvedStyle}
     action={props.action}
     popupActions={props.badge ? undefined : props.popupActions}
