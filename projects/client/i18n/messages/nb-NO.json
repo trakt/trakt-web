@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Koblet til {service}",
   "text_connection_status_error_message": "Noe gikk galt. Vennligst prøv igjen.",
   "text_connection_status_error_title": "Kunne ikke koble til {service}",
+  "text_connection_status_expired_message": "Økten din utløp. Prøv å koble til {service} igjen.",
+  "text_connection_status_expired_title": "Tilkoblingen utløp",
   "text_copyright_crafted_by": "Håndlaget rundt om i verden.",
   "text_copyright_notice": "Alle rettigheter forbeholdes.",
   "text_created_by": "Skapt av <a>{name}</a>",

@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Connecté à {service}",
   "text_connection_status_error_message": "Un problème est survenu. Veuillez réessayer.",
   "text_connection_status_error_title": "Impossible de se connecter à {service}",
+  "text_connection_status_expired_message": "Votre session a expiré. Essayez de vous connecter à {service} de nouveau.",
+  "text_connection_status_expired_title": "La connexion a expiré",
   "text_copyright_crafted_by": "Conçu avec soin partout dans le monde.",
   "text_copyright_notice": "Tous droits réservés.",
   "text_created_by": "Créé par <a>{name}</a>",

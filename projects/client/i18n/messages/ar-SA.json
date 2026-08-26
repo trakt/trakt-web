@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "متصل بـ {service}",
   "text_connection_status_error_message": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
   "text_connection_status_error_title": "تعذر توصيل {service}",
+  "text_connection_status_expired_message": "انتهت صلاحية جلستك. حاول الاتصال بـ {service} مرة أخرى.",
+  "text_connection_status_expired_title": "انتهت مهلة الاتصال",
   "text_copyright_crafted_by": "مصنوعة يدويًا في جميع أنحاء العالم.",
   "text_copyright_notice": "جميع الحقوق محفوظة.",
   "text_created_by": "إنشاء <a>{name}</a>",

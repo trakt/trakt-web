@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Підключено до {service}",
   "text_connection_status_error_message": "Щось пішло не так. Будь ласка, спробуйте ще раз.",
   "text_connection_status_error_title": "Не вдалося підключити {service}",
+  "text_connection_status_expired_message": "Ваш сеанс вичерпано. Спробуйте підключити {service} знову.",
+  "text_connection_status_expired_title": "Час з'єднання вичерпано",
   "text_copyright_crafted_by": "Створено вручну по всьому світу.",
   "text_copyright_notice": "Всі права захищено.",
   "text_created_by": "Створено <a>{name}</a>",

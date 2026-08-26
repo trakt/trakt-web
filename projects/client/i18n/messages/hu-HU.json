@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Csatlakoztatva a(z) {service} szolgáltatáshoz",
   "text_connection_status_error_message": "Valami hiba történt. Kérjük, próbálja újra.",
   "text_connection_status_error_title": "Nem sikerült csatlakozni a(z) {service} szolgáltatáshoz",
+  "text_connection_status_expired_message": "A munkamenet lejárt. Próbálja újra csatlakoztatni a {service} szolgáltatást.",
+  "text_connection_status_expired_title": "Kapcsolat időtúllépés",
   "text_copyright_crafted_by": "K\nTézzel k\nTész\nült vil\nTág szerte.",
   "text_copyright_notice": "Minden jog fenntartva.",
   "text_created_by": "Készítette: <a>{name}</a>",

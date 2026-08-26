@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Ansluten till {service}",
   "text_connection_status_error_message": "Något gick fel. Vänligen försök igen.",
   "text_connection_status_error_title": "Kunde inte ansluta {service}",
+  "text_connection_status_expired_message": "Din session har gått ut. Försök att ansluta {service} igen.",
+  "text_connection_status_expired_title": "Anslutningen gick ut",
   "text_copyright_crafted_by": "Handgjort runt om i världen.",
   "text_copyright_notice": "Alla rättigheter förbehålls.",
   "text_created_by": "Skapad av <a>{name}</a>",

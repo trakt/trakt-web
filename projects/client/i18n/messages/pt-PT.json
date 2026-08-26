@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Associado a {service}",
   "text_connection_status_error_message": "Ocorreu um erro. Tenta novamente.",
   "text_connection_status_error_title": "Não foi possível associar {service}",
+  "text_connection_status_expired_message": "Sua sessão expirou. Tente conectar {service} novamente.",
+  "text_connection_status_expired_title": "A conexão expirou",
   "text_copyright_crafted_by": "Criado com dedicação em todo o mundo.",
   "text_copyright_notice": "Todos os direitos reservados.",
   "text_created_by": "Criada por <a>{name}</a>",

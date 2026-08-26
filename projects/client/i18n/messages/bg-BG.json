@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Свързан с {service}",
   "text_connection_status_error_message": "Нещо се обърка. Моля, опитайте отново.",
   "text_connection_status_error_title": "Неуспешно свързване с {service}",
+  "text_connection_status_expired_message": "Сесията ви изтече. Опитайте да свържете {service} отново.",
+  "text_connection_status_expired_title": "Връзката изтече",
   "text_copyright_crafted_by": "Ръчно изработено по целия свят.",
   "text_copyright_notice": "Всички права запазени.",
   "text_created_by": "Създаден от <a>{name}</a>",

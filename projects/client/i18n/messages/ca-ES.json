@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Connectat a {service}",
   "text_connection_status_error_message": "Alguna cosa ha anat malament. Si us plau, torna a intentar-ho.",
   "text_connection_status_error_title": "No s'ha pogut connectar {service}",
+  "text_connection_status_expired_message": "La teva sessió ha caducat. Intenta connectar {service} de nou.",
+  "text_connection_status_expired_title": "Connexió esgotada",
   "text_copyright_crafted_by": "Fet a mà arreu del món.",
   "text_copyright_notice": "Tots els drets reservats.",
   "text_created_by": "Creada per <a>{name}</a>",

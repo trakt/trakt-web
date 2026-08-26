@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Συνδεδεμένο με {service}",
   "text_connection_status_error_message": "Κάτι πήγε στραβά. Παρακαλούμε δοκιμάστε ξανά.",
   "text_connection_status_error_title": "Δεν ήταν δυνατή η σύνδεση {service}",
+  "text_connection_status_expired_message": "Η συνεδρία σας έληξε. Δοκιμάστε να συνδέσετε ξανά το {service}.",
+  "text_connection_status_expired_title": "Η σύνδεση έληξε",
   "text_copyright_crafted_by": "Φτιαγμένο με μεράκι σε όλο τον κόσμο.",
   "text_copyright_notice": "Με την επιφύλαξη παντός δικαιώματος.",
   "text_created_by": "Δημιουργήθηκε από <a>{name}</a>",

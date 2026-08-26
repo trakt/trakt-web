@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Connesso a {service}",
   "text_connection_status_error_message": "Qualcosa è andato storto. Riprova.",
   "text_connection_status_error_title": "Impossibile connettere {service}",
+  "text_connection_status_expired_message": "La tua sessione è scaduta. Prova a connettere {service} di nuovo.",
+  "text_connection_status_expired_title": "Connessione scaduta",
   "text_copyright_crafted_by": "Realizzato con cura in tutto il mondo.",
   "text_copyright_notice": "Tutti i diritti riservati.",
   "text_created_by": "Creato da <a>{name}</a>",

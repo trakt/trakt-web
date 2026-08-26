@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "{service} ile bağlantı kuruldu",
   "text_connection_status_error_message": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
   "text_connection_status_error_title": "{service} bağlanılamadı",
+  "text_connection_status_expired_message": "Oturumunuzun süresi doldu. {service} bağlantısını tekrar deneyin.",
+  "text_connection_status_expired_title": "Bağlantı zaman aşımına uğradı",
   "text_copyright_crafted_by": "Dünyanın dört bir yanında özenle hazırlandı.",
   "text_copyright_notice": "Tüm hakları saklıdır.",
   "text_created_by": "Yaratan: <a>{name}</a>",

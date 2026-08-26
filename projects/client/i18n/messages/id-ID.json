@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Terhubung ke {service}",
   "text_connection_status_error_message": "Terjadi kesalahan. Harap coba lagi.",
   "text_connection_status_error_title": "Tidak dapat menghubungkan {service}",
+  "text_connection_status_expired_message": "Sesi Anda telah berakhir. Coba sambungkan {service} lagi.",
+  "text_connection_status_expired_title": "Waktu koneksi habis",
   "text_copyright_crafted_by": "Dibuat dengan tangan di seluruh dunia.",
   "text_copyright_notice": "Semua hak dilindungi.",
   "text_created_by": "Dibuat oleh <a>{name}</a>",

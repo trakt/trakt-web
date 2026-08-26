@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Conectado a {service}",
   "text_connection_status_error_message": "Algo salió mal. Intenta de nuevo.",
   "text_connection_status_error_title": "No se pudo conectar {service}",
+  "text_connection_status_expired_message": "Tu sesión ha caducado. Intenta conectar {service} de nuevo.",
+  "text_connection_status_expired_title": "Conexión agotada",
   "text_copyright_crafted_by": "Elaborado con dedicación global.",
   "text_copyright_notice": "Todos los derechos reservados.",
   "text_created_by": "Creado por <a>{name}</a>",

@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "已连接到 {service}",
   "text_connection_status_error_message": "发生了一些错误。请重试。",
   "text_connection_status_error_title": "无法连接 {service}",
+  "text_connection_status_expired_message": "您的会话已过期。请尝试重新连接 {service}。",
+  "text_connection_status_expired_title": "连接超时",
   "text_copyright_crafted_by": "全球匠心打造.",
   "text_copyright_notice": "版权所有。",
   "text_created_by": "创作者：<a>{name}</a>",

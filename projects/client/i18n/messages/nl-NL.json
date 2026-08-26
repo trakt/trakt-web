@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Verbonden met {service}",
   "text_connection_status_error_message": "Er is iets misgegaan. Probeer het opnieuw.",
   "text_connection_status_error_title": "Kon geen verbinding maken met {service}",
+  "text_connection_status_expired_message": "Je sessie is verlopen. Probeer opnieuw verbinding te maken met {service}.",
+  "text_connection_status_expired_title": "Verbinding verlopen",
   "text_copyright_crafted_by": "Handgemaakt over de hele wereld.",
   "text_copyright_notice": "Alle rechten voorbehouden.",
   "text_created_by": "Gemaakt door <a>{name}</a>",

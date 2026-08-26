@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "متصل به {service}",
   "text_connection_status_error_message": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
   "text_connection_status_error_title": "امکان اتصال به {service} وجود نداشت",
+  "text_connection_status_expired_message": "جلسه شما منقضی شد. دوباره برای اتصال به {service} تلاش کنید.",
+  "text_connection_status_expired_title": "زمان اتصال به پایان رسید",
   "text_copyright_crafted_by": "دست‌ساز در سراسر جهان.",
   "text_copyright_notice": "تمامی حقوق محفوظ است.",
   "text_created_by": "ایجاد شده توسط <a>{name}</a>",

@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Verbunden mit {service}",
   "text_connection_status_error_message": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
   "text_connection_status_error_title": "Verbindung zu {service} konnte nicht hergestellt werden",
+  "text_connection_status_expired_message": "Ihre Sitzung ist abgelaufen. Versuchen Sie, die Verbindung mit {service} erneut herzustellen.",
+  "text_connection_status_expired_title": "Verbindung fehlgeschlagen",
   "text_copyright_crafted_by": "Weltweit handgefertigt.",
   "text_copyright_notice": "Alle Rechte vorbehalten.",
   "text_created_by": "Erstellt von <a>{name}</a>",

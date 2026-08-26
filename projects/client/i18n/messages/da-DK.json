@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Forbundet til {service}",
   "text_connection_status_error_message": "Noget gik galt. Prøv venligst igen.",
   "text_connection_status_error_title": "Kunne ikke oprette forbindelse til {service}",
+  "text_connection_status_expired_message": "Din session er udløbet. Prøv at oprette forbindelse til {service} igen.",
+  "text_connection_status_expired_title": "Forbindelsen udløb",
   "text_copyright_crafted_by": "Håndlavet rundt om i verden.",
   "text_copyright_notice": "Alle rettigheder forbeholdes.",
   "text_created_by": "Skabt af <a>{name}</a>",

@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Подключено к {service}",
   "text_connection_status_error_message": "Что-то пошло не так. Пожалуйста, попробуйте еще раз.",
   "text_connection_status_error_title": "Не удалось подключить {service}",
+  "text_connection_status_expired_message": "Ваша сессия истекла. Попробуйте подключиться к {service} снова.",
+  "text_connection_status_expired_title": "Время ожидания соединения истекло",
   "text_copyright_crafted_by": "Сделано вручную по всему миру.",
   "text_copyright_notice": "Все права защищены.",
   "text_created_by": "Создан <a>{name}</a>",

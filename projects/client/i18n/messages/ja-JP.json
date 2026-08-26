@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "{service}に接続されました",
   "text_connection_status_error_message": "何らかの問題が発生しました。もう一度お試しください。",
   "text_connection_status_error_title": "{service}に接続できませんでした",
+  "text_connection_status_expired_message": "セッションの有効期限が切れました。{service} にもう一度接続してみてください。",
+  "text_connection_status_expired_title": "接続がタイムアウトしました",
   "text_copyright_crafted_by": "世界中で丁寧に作られています.",
   "text_copyright_notice": "無断転載を禁じます。",
   "text_created_by": "作成者: <a>{name}</a>",

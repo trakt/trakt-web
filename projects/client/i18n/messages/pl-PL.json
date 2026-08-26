@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Połączono z {service}",
   "text_connection_status_error_message": "Coś poszło nie tak. Spróbuj ponownie.",
   "text_connection_status_error_title": "Nie udało się połączyć z {service}",
+  "text_connection_status_expired_message": "Twoja sesja wygasła. Spróbuj ponownie połączyć się z {service}.",
+  "text_connection_status_expired_title": "Upłynął limit czasu połączenia",
   "text_copyright_crafted_by": "Tworzone z pasją na całym świecie.",
   "text_copyright_notice": "Wszystkie prawa zastrzeżone.",
   "text_created_by": "Stworzył(a): <a>{name}</a>",

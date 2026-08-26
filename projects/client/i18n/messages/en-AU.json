@@ -1403,6 +1403,8 @@
   "text_connection_status_connected_title": "Connected to {service}",
   "text_connection_status_error_message": "Something went wrong. Please try again.",
   "text_connection_status_error_title": "Couldn't connect {service}",
+  "text_connection_status_expired_message": "Your session expired. Try connecting {service} again.",
+  "text_connection_status_expired_title": "Connection timed out",
   "text_copyright_crafted_by": "Handcrafted around the world.",
   "text_copyright_notice": "All rights reserved.",
   "text_created_by": "Created by <a>{name}</a>",
