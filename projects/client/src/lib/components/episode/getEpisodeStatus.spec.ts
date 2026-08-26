@@ -3,7 +3,7 @@ import {
   EpisodePremiereType,
 } from '$lib/requests/models/EpisodeType.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { getEpisodeStatus } from './getEpisodeStatus.ts';
 
 describe('getEpisodeStatus', () => {
@@ -71,6 +71,15 @@ describe('getEpisodeStatus', () => {
   });
 
   describe('new status', () => {
+    beforeEach(() => {
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date('2025-01-15T00:00:00Z'));
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
     it('returns "new" for standard episodes released within 7 days', () => {
       const threeDaysAgo = new Date(Date.now() - time.days(3));
 
