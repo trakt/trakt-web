@@ -9599,6 +9599,14 @@
       "default": "You can connect {service} whenever you're ready.",
       "description": "Message shown when the user cancelled connecting a streaming service."
     },
+    "text_connection_status_expired_title": {
+      "default": "Connection timed out",
+      "description": "Title shown in the banner when the streaming service connect session expired before completing."
+    },
+    "text_connection_status_expired_message": {
+      "default": "Your session expired. Try connecting {service} again.",
+      "description": "Message shown when the streaming service connect session expired before completing."
+    },
     "text_streaming_service_fallback": {
       "default": "your streaming service",
       "description": "Generic fallback name used when a streaming service name can't be resolved."

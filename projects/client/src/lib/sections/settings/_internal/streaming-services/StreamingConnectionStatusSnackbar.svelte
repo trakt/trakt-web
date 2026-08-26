@@ -41,6 +41,13 @@
             service: serviceName,
           }),
         };
+      case "expired":
+        return {
+          title: `⌛ ${m.text_connection_status_expired_title()}`,
+          message: m.text_connection_status_expired_message({
+            service: serviceName,
+          }),
+        };
     }
   });
 
