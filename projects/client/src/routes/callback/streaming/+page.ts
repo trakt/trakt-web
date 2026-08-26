@@ -2,21 +2,32 @@ import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from '$types/callback/streaming/$types.d.ts';
 
-// Params younify appends to the return url in single-provider mode.
+// Younify appends these to the return url in single-provider mode. The beta and
+// release apps name both the service param and the statuses differently, so
+// accept either until the beta app is retired.
 const YC_STATUS_PARAM = 'yc_status';
-const YC_SERVICE_PARAM = 'yc_serviceId';
+const YC_SERVICE_PARAMS = ['yc_service_id', 'yc_serviceId'];
+
+const YC_CONNECTIONS: Record<string, string> = {
+  succeeded: 'connected',
+  connected: 'connected',
+  success: 'connected',
+  canceled: 'cancelled',
+  cancelled: 'cancelled',
+};
 
 function toConnection(status: string | null): string | undefined {
-  if (status === 'connected' || status === 'success') {
-    return 'connected';
+  if (!status) {
+    return undefined;
   }
-  if (status === 'cancelled') {
-    return 'cancelled';
-  }
-  if (status) {
-    return 'error';
-  }
-  return undefined;
+
+  return YC_CONNECTIONS[status] ?? 'error';
+}
+
+function toService(url: URL): string | null {
+  return YC_SERVICE_PARAMS
+    .map((param) => url.searchParams.get(param))
+    .find((value) => value != null) ?? null;
 }
 
 /**
@@ -27,9 +38,7 @@ function toConnection(status: string | null): string | undefined {
  */
 export const load: PageLoad = ({ url }) => {
   const connection = toConnection(url.searchParams.get(YC_STATUS_PARAM));
-  const service = connection
-    ? url.searchParams.get(YC_SERVICE_PARAM)
-    : undefined;
+  const service = connection ? toService(url) : undefined;
 
   redirect(303, UrlBuilder.settings.streamingServices({ connection, service }));
 };

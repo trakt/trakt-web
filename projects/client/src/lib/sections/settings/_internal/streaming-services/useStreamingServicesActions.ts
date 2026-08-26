@@ -14,9 +14,8 @@ export function useStreamingServicesActions() {
   const { invalidate } = useInvalidator();
   const { confirm } = useConfirm();
 
-  // Younify returns to the dedicated callback route with `yc_status` /
-  // `yc_serviceId` appended; that route applies the result, then redirects
-  // back to the settings page.
+  // Younify returns to the dedicated callback route, which normalises its
+  // result params before redirecting back to the settings page.
   const buildReturnUrl = () =>
     new URL(UrlBuilder.settings.streamingServicesCallback(), page.url.origin)
       .toString();
