@@ -1,8 +1,10 @@
 <script lang="ts">
   import { getLanguageAndRegion } from "$lib/features/i18n";
   import { parseLocalDate } from "$lib/utils/date/parseLocalDate.ts";
+  import { isValid } from "date-fns/isValid";
   import CalendarIcon from "../../icons/CalendarIcon.svelte";
   import type { DateInputProps } from "./DateInputProps.ts";
+  import { formatDateInputBound } from "./formatDateInputBound.ts";
   import { formatDateInputValue } from "./formatDateInputValue.ts";
 
   const {
@@ -19,6 +21,23 @@
   const { language } = getLanguageAndRegion();
 
   let inputElement: HTMLInputElement;
+
+  function handleChange() {
+    const raw = inputElement.value;
+
+    if (!raw) {
+      onChange();
+      return;
+    }
+
+    const parsed = type === "date" ? parseLocalDate(raw) : new Date(raw);
+
+    // Unsupported browsers degrade to a text input, so `raw` can be anything.
+    if (!isValid(parsed)) return;
+
+    onChange(parsed);
+  }
+
   function pickerOnClick(node: HTMLElement) {
     const handler = () => {
       if (disabled) return;
@@ -51,20 +70,10 @@
     {required}
     aria-label={label}
     value={formatDateInputValue(value, type)}
-    min={formatDateInputValue(minDate, type)}
-    max={formatDateInputValue(maxDate, type)}
+    min={formatDateInputBound({ date: minDate, type, edge: "min" })}
+    max={formatDateInputBound({ date: maxDate, type, edge: "max" })}
     lang={language}
-    onchange={(ev) => {
-      const target = ev.target as HTMLInputElement;
-      if (!target.value) {
-        onChange();
-        return;
-      }
-
-      onChange(
-        type === "date" ? parseLocalDate(target.value) : new Date(target.value),
-      );
-    }}
+    onchange={handleChange}
   />
 </div>
 
