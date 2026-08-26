@@ -1,7 +1,7 @@
 import { AssetPattern } from '$worker/AssetPattern.ts';
 import { Domain } from '$worker/Domain.ts';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';
-import { ExpirationPlugin } from 'workbox-expiration';
+import { CacheExpiration, ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute } from 'workbox-precaching';
 import {
   NavigationRoute,
@@ -15,6 +15,7 @@ import {
 } from 'workbox-strategies';
 import { readAuthMarker } from './lib/features/auth/authMarker.ts';
 import { LOCALE_COOKIE_NAME } from './lib/features/i18n/constants.ts';
+import { delay } from './lib/utils/timing/delay.ts';
 import { time } from './lib/utils/timing/time.ts';
 import { CacheKey } from './worker/CacheKey.ts';
 
@@ -83,6 +84,12 @@ const expiration = (maxAgeMs: number, maxEntries?: number) =>
   });
 
 async function deleteCache(key: string) {
+  // `caches.delete` leaves the expiration plugin's IndexedDB rows behind, and
+  // the sha in the cache name means a dead name every deploy.
+  await new CacheExpiration(key, { maxAgeSeconds: 1 })
+    .delete()
+    .catch(() => undefined);
+
   try {
     return await caches.delete(key);
   } catch {
@@ -90,8 +97,29 @@ async function deleteCache(key: string) {
   }
 }
 
+const navigationCacheName = `${CacheKey.navigation}-${TRAKT_GIT_SHA}`;
+
+const CLEANUP_TIMEOUT_MS = time.seconds(3);
+
+async function deleteNavigationCaches() {
+  const keys = await caches.keys().catch(() => []);
+
+  await Promise.all(
+    keys
+      .filter((key) => key.startsWith(CacheKey.navigation))
+      .map((key) => deleteCache(key)),
+  );
+}
+
+// The cache name is keyed to the build, so this is garbage collection, not
+// correctness. Broken storage can hang instead of rejecting, and every caller
+// sits on something a user is waiting for: activation, a `_cb` navigation, or
+// a CacheBust round trip.
 function removeNavigationCache() {
-  return deleteCache(CacheKey.navigation);
+  return Promise.race([
+    deleteNavigationCaches(),
+    delay(CLEANUP_TIMEOUT_MS),
+  ]);
 }
 
 // Force immediate activation for new service worker
@@ -99,15 +127,14 @@ self.addEventListener('install', () => {
   self.skipWaiting();
 });
 
-// Claim clients and purge the navigation cache so stale locale-specific HTML
-// (e.g. a poisoned ru-RU document) is evicted on update. A rejected
-// `waitUntil` fails activation, leaving a redundant worker that still controls
-// its clients and fails every request it intercepts.
+// Claim clients and evict old navigation caches. A `waitUntil` that rejects
+// fails activation, and one that never settles parks the worker in
+// `activating` while the spec queues every fetch behind it.
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     Promise.all([
-      removeNavigationCache(),
       self.clients.claim(),
+      removeNavigationCache(),
     ]).catch(() => undefined),
   );
 });
@@ -150,7 +177,7 @@ const skipRedirectedDocuments = {
 };
 
 const navigationOptions = {
-  cacheName: CacheKey.navigation,
+  cacheName: navigationCacheName,
   plugins: [
     documentCacheKey,
     skipRedirectedDocuments,
