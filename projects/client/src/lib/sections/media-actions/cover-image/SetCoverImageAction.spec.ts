@@ -8,7 +8,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import SetCoverImageAction from './SetCoverImageAction.svelte';
 
 const COVER_URL =
-  'https://walter.trakt.tv/images/movies/000/001/000/artwork.jpg';
+  'https://media.trakt.tv/images/movies/000/001/000/artwork.jpg';
 
 function trackCoverRequests() {
   const requests: unknown[] = [];

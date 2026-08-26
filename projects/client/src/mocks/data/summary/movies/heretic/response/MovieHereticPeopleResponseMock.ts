@@ -17,18 +17,18 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/004/705/headshots/thumb/55cd537cc1.jpg.webp',
+            'media.trakt.tv/images/people/000/004/705/headshots/thumb/55cd537cc1.jpg.webp',
             'image.tmdb.org/t/p/original/lzCB9YN6MjGosh8v27o6omhSmjL.jpg',
           ],
           'fanart': [
-            'walter-r2.trakt.tv/images/people/000/004/705/fanarts/medium/75cc921525.jpg.webp',
+            'media.trakt.tv/images/people/000/004/705/fanarts/medium/75cc921525.jpg.webp',
             'image.tmdb.org/t/p/w1280/dF4EwB8oyrgKQnjOwUWGbF3yNTH.jpg',
           ],
         },
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/004/705/headshots/thumb/55cd537cc1.jpg.webp',
+          'media.trakt.tv/images/people/000/004/705/headshots/thumb/55cd537cc1.jpg.webp',
           'image.tmdb.org/t/p/original/lzCB9YN6MjGosh8v27o6omhSmjL.jpg',
         ],
       },
@@ -48,7 +48,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/001/075/624/headshots/thumb/f25b061dd4.jpg.webp',
+            'media.trakt.tv/images/people/001/075/624/headshots/thumb/f25b061dd4.jpg.webp',
             'image.tmdb.org/t/p/original/3a8jTH1q4p9G4QHlLynFnNBbv57.jpg',
           ],
           'fanart': [],
@@ -56,7 +56,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/001/075/624/headshots/thumb/f25b061dd4.jpg.webp',
+          'media.trakt.tv/images/people/001/075/624/headshots/thumb/f25b061dd4.jpg.webp',
           'image.tmdb.org/t/p/original/3a8jTH1q4p9G4QHlLynFnNBbv57.jpg',
         ],
       },
@@ -76,7 +76,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/597/826/headshots/thumb/aa952fefe6.jpg.webp',
+            'media.trakt.tv/images/people/000/597/826/headshots/thumb/aa952fefe6.jpg.webp',
             'image.tmdb.org/t/p/original/7yFO6DB8O7FmkJpi2mBRJZApbiQ.jpg',
           ],
           'fanart': [],
@@ -84,7 +84,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/597/826/headshots/thumb/aa952fefe6.jpg.webp',
+          'media.trakt.tv/images/people/000/597/826/headshots/thumb/aa952fefe6.jpg.webp',
           'image.tmdb.org/t/p/original/7yFO6DB8O7FmkJpi2mBRJZApbiQ.jpg',
         ],
       },
@@ -104,18 +104,18 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/413/327/headshots/thumb/2a4168772c.jpg.webp',
+            'media.trakt.tv/images/people/000/413/327/headshots/thumb/2a4168772c.jpg.webp',
             'image.tmdb.org/t/p/original/tgF5PeH4xwz32FjB80n5aFiuHX.jpg',
           ],
           'fanart': [
-            'walter-r2.trakt.tv/images/people/000/413/327/fanarts/medium/01a9a86c38.jpg.webp',
+            'media.trakt.tv/images/people/000/413/327/fanarts/medium/01a9a86c38.jpg.webp',
             'image.tmdb.org/t/p/w1280/qFaDcKhndF2YsfOL1ywinoRfSAb.jpg',
           ],
         },
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/413/327/headshots/thumb/2a4168772c.jpg.webp',
+          'media.trakt.tv/images/people/000/413/327/headshots/thumb/2a4168772c.jpg.webp',
           'image.tmdb.org/t/p/original/tgF5PeH4xwz32FjB80n5aFiuHX.jpg',
         ],
       },
@@ -135,7 +135,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/001/119/654/headshots/thumb/bf246a5e3a.jpg.webp',
+            'media.trakt.tv/images/people/001/119/654/headshots/thumb/bf246a5e3a.jpg.webp',
             'image.tmdb.org/t/p/original/rEcGyAm06RMBgR8T7xPOjZNMElO.jpg',
           ],
           'fanart': [],
@@ -143,7 +143,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/001/119/654/headshots/thumb/bf246a5e3a.jpg.webp',
+          'media.trakt.tv/images/people/001/119/654/headshots/thumb/bf246a5e3a.jpg.webp',
           'image.tmdb.org/t/p/original/rEcGyAm06RMBgR8T7xPOjZNMElO.jpg',
         ],
       },
@@ -163,7 +163,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/918/391/headshots/thumb/9c6d5de83f.jpg.webp',
+            'media.trakt.tv/images/people/000/918/391/headshots/thumb/9c6d5de83f.jpg.webp',
             'image.tmdb.org/t/p/original/47bJBypW6YVBeQuTaaQQuusGRMm.jpg',
           ],
           'fanart': [],
@@ -171,7 +171,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/918/391/headshots/thumb/9c6d5de83f.jpg.webp',
+          'media.trakt.tv/images/people/000/918/391/headshots/thumb/9c6d5de83f.jpg.webp',
           'image.tmdb.org/t/p/original/47bJBypW6YVBeQuTaaQQuusGRMm.jpg',
         ],
       },
@@ -191,7 +191,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/004/119/501/headshots/thumb/3b3d999544.jpg.webp',
+            'media.trakt.tv/images/people/004/119/501/headshots/thumb/3b3d999544.jpg.webp',
             'image.tmdb.org/t/p/original/zrIAFLGWhpvCsKk5oQDUNgmQQcH.jpg',
           ],
           'fanart': [],
@@ -199,7 +199,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/004/119/501/headshots/thumb/3b3d999544.jpg.webp',
+          'media.trakt.tv/images/people/004/119/501/headshots/thumb/3b3d999544.jpg.webp',
           'image.tmdb.org/t/p/original/zrIAFLGWhpvCsKk5oQDUNgmQQcH.jpg',
         ],
       },
@@ -219,7 +219,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/776/688/headshots/thumb/d629e49aab.jpg.webp',
+            'media.trakt.tv/images/people/000/776/688/headshots/thumb/d629e49aab.jpg.webp',
             'image.tmdb.org/t/p/original/qBrsyaF4EM6cdBQfU7XnyFmx7Ym.jpg',
           ],
           'fanart': [],
@@ -227,7 +227,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/776/688/headshots/thumb/d629e49aab.jpg.webp',
+          'media.trakt.tv/images/people/000/776/688/headshots/thumb/d629e49aab.jpg.webp',
           'image.tmdb.org/t/p/original/qBrsyaF4EM6cdBQfU7XnyFmx7Ym.jpg',
         ],
       },
@@ -269,7 +269,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/310/402/headshots/thumb/b786a1fb1e.jpg.webp',
+            'media.trakt.tv/images/people/000/310/402/headshots/thumb/b786a1fb1e.jpg.webp',
             'image.tmdb.org/t/p/original/kMuEZEvppyRzsNV8uxpqfmOXdMY.jpg',
           ],
           'fanart': [],
@@ -277,7 +277,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/310/402/headshots/thumb/b786a1fb1e.jpg.webp',
+          'media.trakt.tv/images/people/000/310/402/headshots/thumb/b786a1fb1e.jpg.webp',
           'image.tmdb.org/t/p/original/kMuEZEvppyRzsNV8uxpqfmOXdMY.jpg',
         ],
       },
@@ -297,7 +297,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/002/195/383/headshots/thumb/dde9f0dc4e.jpg.webp',
+            'media.trakt.tv/images/people/002/195/383/headshots/thumb/dde9f0dc4e.jpg.webp',
             'image.tmdb.org/t/p/original/369PZgmVmiMMzlqfrxrjg1zb0xl.jpg',
           ],
           'fanart': [],
@@ -305,7 +305,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/002/195/383/headshots/thumb/dde9f0dc4e.jpg.webp',
+          'media.trakt.tv/images/people/002/195/383/headshots/thumb/dde9f0dc4e.jpg.webp',
           'image.tmdb.org/t/p/original/369PZgmVmiMMzlqfrxrjg1zb0xl.jpg',
         ],
       },
@@ -325,7 +325,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/996/294/headshots/thumb/bbb7d1275b.jpg.webp',
+            'media.trakt.tv/images/people/000/996/294/headshots/thumb/bbb7d1275b.jpg.webp',
             'image.tmdb.org/t/p/original/5hzt5EAtXZfZatJCFctVpLyOJ3A.jpg',
           ],
           'fanart': [],
@@ -333,7 +333,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/996/294/headshots/thumb/bbb7d1275b.jpg.webp',
+          'media.trakt.tv/images/people/000/996/294/headshots/thumb/bbb7d1275b.jpg.webp',
           'image.tmdb.org/t/p/original/5hzt5EAtXZfZatJCFctVpLyOJ3A.jpg',
         ],
       },
@@ -353,7 +353,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/003/058/237/headshots/thumb/bb81a3f466.jpg.webp',
+            'media.trakt.tv/images/people/003/058/237/headshots/thumb/bb81a3f466.jpg.webp',
             'image.tmdb.org/t/p/original/bm9kCJzFiOfiA9Tv84eKocvgS97.jpg',
           ],
           'fanart': [],
@@ -361,7 +361,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/003/058/237/headshots/thumb/bb81a3f466.jpg.webp',
+          'media.trakt.tv/images/people/003/058/237/headshots/thumb/bb81a3f466.jpg.webp',
           'image.tmdb.org/t/p/original/bm9kCJzFiOfiA9Tv84eKocvgS97.jpg',
         ],
       },
@@ -381,7 +381,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/003/335/090/headshots/thumb/d12413a443.jpg.webp',
+            'media.trakt.tv/images/people/003/335/090/headshots/thumb/d12413a443.jpg.webp',
             'image.tmdb.org/t/p/original/linaIZJqleeWHjonIdDtISzVYrX.jpg',
           ],
           'fanart': [],
@@ -389,7 +389,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/003/335/090/headshots/thumb/d12413a443.jpg.webp',
+          'media.trakt.tv/images/people/003/335/090/headshots/thumb/d12413a443.jpg.webp',
           'image.tmdb.org/t/p/original/linaIZJqleeWHjonIdDtISzVYrX.jpg',
         ],
       },
@@ -409,7 +409,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/197/574/headshots/thumb/80e3e863a0.jpg.webp',
+            'media.trakt.tv/images/people/000/197/574/headshots/thumb/80e3e863a0.jpg.webp',
             'image.tmdb.org/t/p/original/dffZ1aJIUuuEuilmtvTkoGvm95j.jpg',
           ],
           'fanart': [],
@@ -417,7 +417,7 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/197/574/headshots/thumb/80e3e863a0.jpg.webp',
+          'media.trakt.tv/images/people/000/197/574/headshots/thumb/80e3e863a0.jpg.webp',
           'image.tmdb.org/t/p/original/dffZ1aJIUuuEuilmtvTkoGvm95j.jpg',
         ],
       },

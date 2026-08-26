@@ -32,9 +32,6 @@
           <CircularProgressChart percentage={list.percentage}>
             <div class="list-progress-center">
               {#if list.logo}
-                <!-- media-og.trakt.tv (Cloudflare) hotlink-blocks non-trakt
-                     referrers, which 403s on localhost; sending no referrer
-                     is allowed in both dev and prod. -->
                 <img
                   class="list-logo"
                   src={list.logo}

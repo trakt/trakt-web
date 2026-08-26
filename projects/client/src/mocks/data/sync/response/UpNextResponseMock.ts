@@ -68,7 +68,7 @@ export const UpNextResponseMock: UpNextResponse[] = [
         'episode_type': 'season_premiere',
         'images': {
           'screenshot': [
-            'walter-r2.trakt.tv/images/episodes/012/105/047/screenshots/medium/bbe831c174.jpg.webp',
+            'media.trakt.tv/images/episodes/012/105/047/screenshots/medium/bbe831c174.jpg.webp',
             'image.tmdb.org/t/p/w1280/kB5wWdEknKlBJ8iGEYQyTJWTSZv.jpg',
           ],
         },

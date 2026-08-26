@@ -2,10 +2,10 @@
  * This cover is the Alien Isolation cover.
  */
 export const DEFAULT_COVER =
-  'https://walter-r2.trakt.tv/images/movies/000/759/944/fanarts/full/a12a59d031.jpg.webp';
+  'https://media.trakt.tv/images/movies/000/759/944/fanarts/full/a12a59d031.jpg.webp';
 
 export const DEFAULT_AVATAR =
-  'https://walter-r2.trakt.tv/hotlink-ok/placeholders/medium/zoidberg.png' as HttpsUrl;
+  'https://media.trakt.tv/hotlink-ok/placeholders/medium/zoidberg.png' as HttpsUrl;
 
 export const MAX_DATE = new Date('9999-12-31T23:59:59.999Z');
 export const MIN_DATE = new Date('0000-01-01T00:00:00.000Z');

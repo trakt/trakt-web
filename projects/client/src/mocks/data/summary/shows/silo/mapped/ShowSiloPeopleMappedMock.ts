@@ -8,9 +8,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
+            'https://media.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/447/271/headshots/medium/d7e3e2fc64.jpg.webp',
+            'https://media.trakt.tv/images/people/000/447/271/headshots/medium/d7e3e2fc64.jpg.webp',
         },
       },
       'key': 'rebecca-ferguson',
@@ -22,9 +22,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
+            'https://media.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/412/328/headshots/medium/35b36ce399.jpg.webp',
+            'https://media.trakt.tv/images/people/000/412/328/headshots/medium/35b36ce399.jpg.webp',
         },
       },
       'key': 'common',
@@ -36,9 +36,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
+            'https://media.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/016/797/headshots/medium/987b640c84.jpg.webp',
+            'https://media.trakt.tv/images/people/000/016/797/headshots/medium/987b640c84.jpg.webp',
         },
       },
       'key': 'harriet-walter',
@@ -50,9 +50,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
+            'https://media.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/748/739/headshots/medium/628b796714.jpg.webp',
+            'https://media.trakt.tv/images/people/000/748/739/headshots/medium/628b796714.jpg.webp',
         },
       },
       'key': 'chinaza-uche',
@@ -64,9 +64,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/627/038/headshots/thumb/ba0377d6b0.jpg.webp',
+            'https://media.trakt.tv/images/people/000/627/038/headshots/thumb/ba0377d6b0.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/627/038/headshots/medium/ba0377d6b0.jpg.webp',
+            'https://media.trakt.tv/images/people/000/627/038/headshots/medium/ba0377d6b0.jpg.webp',
         },
       },
       'key': 'avi-nash',
@@ -78,9 +78,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
+            'https://media.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/014/904/headshots/medium/d67b0392d8.jpg.webp',
+            'https://media.trakt.tv/images/people/000/014/904/headshots/medium/d67b0392d8.jpg.webp',
         },
       },
       'key': 'rick-gomez',
@@ -92,9 +92,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
+            'https://media.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/015/518/headshots/medium/7aa5eb6e65.jpg.webp',
+            'https://media.trakt.tv/images/people/000/015/518/headshots/medium/7aa5eb6e65.jpg.webp',
         },
       },
       'key': 'tim-robbins',
@@ -106,9 +106,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/431/779/headshots/thumb/d9ba2e0cd9.jpg.webp',
+            'https://media.trakt.tv/images/people/000/431/779/headshots/thumb/d9ba2e0cd9.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/431/779/headshots/medium/d9ba2e0cd9.jpg.webp',
+            'https://media.trakt.tv/images/people/000/431/779/headshots/medium/d9ba2e0cd9.jpg.webp',
         },
       },
       'key': 'shane-mcrae',
@@ -120,9 +120,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/668/720/headshots/thumb/f9a6bc12fd.jpg.webp',
+            'https://media.trakt.tv/images/people/000/668/720/headshots/thumb/f9a6bc12fd.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/668/720/headshots/medium/f9a6bc12fd.jpg.webp',
+            'https://media.trakt.tv/images/people/000/668/720/headshots/medium/f9a6bc12fd.jpg.webp',
         },
       },
       'key': 'billy-postlethwaite',
@@ -134,9 +134,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/001/477/761/headshots/thumb/32559bdf7c.jpg.webp',
+            'https://media.trakt.tv/images/people/001/477/761/headshots/thumb/32559bdf7c.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/001/477/761/headshots/medium/32559bdf7c.jpg.webp',
+            'https://media.trakt.tv/images/people/001/477/761/headshots/medium/32559bdf7c.jpg.webp',
         },
       },
       'key': 'remmie-milner',
@@ -148,9 +148,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/001/350/141/headshots/thumb/862651c2ae.jpg.webp',
+            'https://media.trakt.tv/images/people/001/350/141/headshots/thumb/862651c2ae.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/001/350/141/headshots/medium/862651c2ae.jpg.webp',
+            'https://media.trakt.tv/images/people/001/350/141/headshots/medium/862651c2ae.jpg.webp',
         },
       },
       'key': 'alexandria-riley',
@@ -162,9 +162,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/107/387/headshots/thumb/9f71e2f97c.jpg.webp',
+            'https://media.trakt.tv/images/people/000/107/387/headshots/thumb/9f71e2f97c.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/107/387/headshots/medium/9f71e2f97c.jpg.webp',
+            'https://media.trakt.tv/images/people/000/107/387/headshots/medium/9f71e2f97c.jpg.webp',
         },
       },
       'key': 'clare-perkins',
@@ -176,9 +176,9 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'headshot': {
         'url': {
           'thumb':
-            'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
+            'https://media.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
           'medium':
-            'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/medium/2e92bf71ee.jpg.webp',
+            'https://media.trakt.tv/images/people/000/014/103/headshots/medium/2e92bf71ee.jpg.webp',
         },
       },
       'key': 'steve-zahn',

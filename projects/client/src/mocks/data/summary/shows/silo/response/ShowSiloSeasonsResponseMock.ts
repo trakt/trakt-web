@@ -20,10 +20,10 @@ export const ShowSiloSeasonsResponseMock: SeasonsResponse = [
     'network': 'Apple TV+',
     'images': {
       'poster': [
-        'walter-r2.trakt.tv/images/seasons/000/257/490/posters/thumb/091450c60d.jpg.webp',
+        'media.trakt.tv/images/seasons/000/257/490/posters/thumb/091450c60d.jpg.webp',
       ],
       'thumb': [
-        'walter-r2.trakt.tv/images/seasons/000/257/490/thumbs/medium/ef1893a5e9.jpg.webp',
+        'media.trakt.tv/images/seasons/000/257/490/thumbs/medium/ef1893a5e9.jpg.webp',
       ],
     },
     'total_runtime': 600,
@@ -47,10 +47,10 @@ export const ShowSiloSeasonsResponseMock: SeasonsResponse = [
     'network': 'Apple TV+',
     'images': {
       'poster': [
-        'walter-r2.trakt.tv/images/seasons/000/402/288/posters/thumb/44533bd556.jpg.webp',
+        'media.trakt.tv/images/seasons/000/402/288/posters/thumb/44533bd556.jpg.webp',
       ],
       'thumb': [
-        'walter-r2.trakt.tv/images/seasons/000/402/288/thumbs/medium/7b1183feff.jpg.webp',
+        'media.trakt.tv/images/seasons/000/402/288/thumbs/medium/7b1183feff.jpg.webp',
       ],
     },
     'total_runtime': 600,

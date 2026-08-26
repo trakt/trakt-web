@@ -12,7 +12,7 @@ export const UserProfileHarryMappedMock: UserProfile = {
   'slug': 'harry_du_bois',
   'avatar': {
     'url':
-      'https://walter-r2.trakt.tv/images/users/014/366/083/avatars/large/disco_cop.png',
+      'https://media.trakt.tv/images/users/014/366/083/avatars/large/disco_cop.png',
   },
   'private': false,
   'isVip': true,

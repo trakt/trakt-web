@@ -7,6 +7,6 @@ export const ExtendedUserProfileHarryMappedMock: UserProfile = {
   about: 'I am a Lieutenant',
   cover: {
     url:
-      'https://walter.trakt.tv/images/users/014/366/083/headers/original/disco_cop.png',
+      'https://media.trakt.tv/images/users/014/366/083/headers/original/disco_cop.png',
   },
 };

@@ -56,7 +56,7 @@ export const EpisodeSiloResponseMock: EpisodeResponse = {
   'episode_type': 'series_premiere',
   'images': {
     'screenshot': [
-      'walter-r2.trakt.tv/images/episodes/005/165/667/screenshots/medium/e035db5f06.jpg.webp',
+      'media.trakt.tv/images/episodes/005/165/667/screenshots/medium/e035db5f06.jpg.webp',
       'image.tmdb.org/t/p/w1280/rpZhJcWPpyLvPC5Vid61GD6JHVu.jpg',
     ],
   },

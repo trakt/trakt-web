@@ -17,16 +17,16 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
+            'media.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
           ],
           'fanart': [
-            'walter-r2.trakt.tv/images/people/000/447/271/fanarts/medium/0b95a133bb.jpg.webp',
+            'media.trakt.tv/images/people/000/447/271/fanarts/medium/0b95a133bb.jpg.webp',
           ],
         },
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
+          'media.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
         ],
       },
     },
@@ -45,14 +45,14 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
+            'media.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
           ],
           'fanart': [],
         },
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
+          'media.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
         ],
       },
     },
@@ -71,14 +71,14 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
+            'media.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
           ],
           'fanart': [],
         },
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
+          'media.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
         ],
       },
     },
@@ -97,14 +97,14 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
+            'media.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
           ],
           'fanart': [],
         },
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
+          'media.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
         ],
       },
     },
@@ -123,14 +123,14 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/627/038/headshots/thumb/110e52f004.jpg.webp',
+            'media.trakt.tv/images/people/000/627/038/headshots/thumb/110e52f004.jpg.webp',
           ],
           'fanart': [],
         },
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/627/038/headshots/thumb/110e52f004.jpg.webp',
+          'media.trakt.tv/images/people/000/627/038/headshots/thumb/110e52f004.jpg.webp',
         ],
       },
     },
@@ -149,16 +149,16 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
+            'media.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
           ],
           'fanart': [
-            'walter-r2.trakt.tv/images/people/000/014/904/fanarts/medium/d1d079093c.jpg.webp',
+            'media.trakt.tv/images/people/000/014/904/fanarts/medium/d1d079093c.jpg.webp',
           ],
         },
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
+          'media.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
         ],
       },
     },
@@ -177,16 +177,16 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
+            'media.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
           ],
           'fanart': [
-            'walter-r2.trakt.tv/images/people/000/015/518/fanarts/medium/efd64dfbec.jpg.webp',
+            'media.trakt.tv/images/people/000/015/518/fanarts/medium/efd64dfbec.jpg.webp',
           ],
         },
       },
       'images': {
         'headshot': [
-          'walter-r2.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
+          'media.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
         ],
       },
     },
@@ -208,14 +208,14 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
           },
           'images': {
             'headshot': [
-              'walter-r2.trakt.tv/images/people/000/014/068/headshots/thumb/489ca705f5.jpg.webp',
+              'media.trakt.tv/images/people/000/014/068/headshots/thumb/489ca705f5.jpg.webp',
             ],
             'fanart': [],
           },
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/014/068/headshots/thumb/489ca705f5.jpg.webp',
+            'media.trakt.tv/images/people/000/014/068/headshots/thumb/489ca705f5.jpg.webp',
           ],
         },
       },
@@ -260,14 +260,14 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
           },
           'images': {
             'headshot': [
-              'walter-r2.trakt.tv/images/people/000/636/670/headshots/thumb/107fd4bccb.jpg.webp',
+              'media.trakt.tv/images/people/000/636/670/headshots/thumb/107fd4bccb.jpg.webp',
             ],
             'fanart': [],
           },
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/636/670/headshots/thumb/107fd4bccb.jpg.webp',
+            'media.trakt.tv/images/people/000/636/670/headshots/thumb/107fd4bccb.jpg.webp',
           ],
         },
       },
@@ -312,14 +312,14 @@ export const EpisodeSiloPeopleResponseMock: PeopleResponse = {
           },
           'images': {
             'headshot': [
-              'walter-r2.trakt.tv/images/people/000/066/685/headshots/thumb/f473afb895.jpg.webp',
+              'media.trakt.tv/images/people/000/066/685/headshots/thumb/f473afb895.jpg.webp',
             ],
             'fanart': [],
           },
         },
         'images': {
           'headshot': [
-            'walter-r2.trakt.tv/images/people/000/066/685/headshots/thumb/f473afb895.jpg.webp',
+            'media.trakt.tv/images/people/000/066/685/headshots/thumb/f473afb895.jpg.webp',
           ],
         },
       },

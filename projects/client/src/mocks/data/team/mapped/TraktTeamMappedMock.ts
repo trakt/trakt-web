@@ -5,7 +5,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'about': 'Do the truffle shuffle!!',
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/000/000/001/avatars/large/2e6df69058.jpg',
+        'https://media.trakt.tv/images/admins/000/000/001/avatars/large/2e6df69058.jpg',
     },
     'cover': undefined,
     'id': 1,
@@ -28,7 +28,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'about': 'Huge tv nerd',
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/000/000/002/avatars/large/0f9ac9e4e6.jpg',
+        'https://media.trakt.tv/images/admins/000/000/002/avatars/large/0f9ac9e4e6.jpg',
     },
     'cover': undefined,
     'id': 2,
@@ -51,7 +51,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'about': '',
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/001/393/401/avatars/large/10cc02b9d9.jpeg',
+        'https://media.trakt.tv/images/admins/001/393/401/avatars/large/10cc02b9d9.jpeg',
     },
     'cover': undefined,
     'id': 1393401,
@@ -74,7 +74,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'about': '',
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/011/635/632/avatars/large/b7177a5493.jpg',
+        'https://media.trakt.tv/images/admins/011/635/632/avatars/large/b7177a5493.jpg',
     },
     'cover': undefined,
     'id': 11635632,
@@ -98,7 +98,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
       "I watch a lot of things, mostly TV shows and anime. My favorite genres are adventure and fantasy, but I'll watch almost anything as long as it has characters I like.\r\nAlso play RPGs and farm games!",
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/008/891/809/avatars/large/548a08f62b.jpg',
+        'https://media.trakt.tv/images/admins/008/891/809/avatars/large/548a08f62b.jpg',
     },
     'cover': undefined,
     'id': 8891809,
@@ -121,7 +121,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'about': '',
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/000/410/291/avatars/large/348b7bf208.png',
+        'https://media.trakt.tv/images/admins/000/410/291/avatars/large/348b7bf208.png',
     },
     'cover': undefined,
     'id': 410291,
@@ -144,7 +144,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'about': 'Pricinple Product Designer at Trakt.tv',
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/013/948/040/avatars/large/3ed457f5a9.jpg',
+        'https://media.trakt.tv/images/admins/013/948/040/avatars/large/3ed457f5a9.jpg',
     },
     'cover': undefined,
     'id': 13948040,
@@ -167,7 +167,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'about': '',
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/014/975/346/avatars/large/0bff9d1dac.',
+        'https://media.trakt.tv/images/admins/014/975/346/avatars/large/0bff9d1dac.',
     },
     'cover': undefined,
     'id': 14975346,
@@ -190,7 +190,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'about': '',
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/000/465/110/avatars/large/343da0456b.',
+        'https://media.trakt.tv/images/admins/000/465/110/avatars/large/343da0456b.',
     },
     'cover': undefined,
     'id': 465110,
@@ -213,7 +213,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'about': '',
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/014/323/124/avatars/large/88318c4cc8.',
+        'https://media.trakt.tv/images/admins/014/323/124/avatars/large/88318c4cc8.',
     },
     'cover': undefined,
     'id': 14323124,
@@ -237,7 +237,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
       "I'm just your friendly neighborhood wannabe cinephile, navigating the vast and wonderful world of movies and TV shows. From heart-pounding thrillers to tear-jerking dramas (and yes, even the occasional guilty-pleasure rom-com), I devour it all (mostly movies though). I'm constantly on the lookout for hidden gems, cult classics, and anything with a killer plot twist.\r\n\r\nWhen I'm not glued to the screen, I'm probably reading reviews, or planning my next marathon binge. Join me on this cinematic journey—let's track, and obsess over everything film-related!\r\n\r\nLights, camera... action!",
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/001/167/028/avatars/large/04e5c7bc7f.jpg',
+        'https://media.trakt.tv/images/admins/001/167/028/avatars/large/04e5c7bc7f.jpg',
     },
     'cover': undefined,
     'id': 1167028,
@@ -260,7 +260,7 @@ export const TraktTeamMappedMock: UserProfile[] = [
     'about': '',
     'avatar': {
       'url':
-        'https://walter-r2.trakt.tv/images/admins/015/351/163/avatars/large/ab820d9514.',
+        'https://media.trakt.tv/images/admins/015/351/163/avatars/large/ab820d9514.',
     },
     'cover': undefined,
     'id': 15351163,

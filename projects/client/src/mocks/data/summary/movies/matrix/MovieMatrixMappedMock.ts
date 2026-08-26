@@ -24,30 +24,30 @@ export const MovieMatrixMappedMock: MovieEntry = {
   'poster': {
     'url': {
       'medium':
-        'https://walter-r2.trakt.tv/images/movies/000/000/481/posters/medium/373310d2ee.jpg.webp',
+        'https://media.trakt.tv/images/movies/000/000/481/posters/medium/373310d2ee.jpg.webp',
       'thumb':
-        'https://walter-r2.trakt.tv/images/movies/000/000/481/posters/thumb/373310d2ee.jpg.webp',
+        'https://media.trakt.tv/images/movies/000/000/481/posters/thumb/373310d2ee.jpg.webp',
     },
   },
   'cover': {
     'url': {
       'medium':
-        'https://walter-r2.trakt.tv/images/movies/000/000/481/fanarts/medium/c556867276.jpg.webp',
+        'https://media.trakt.tv/images/movies/000/000/481/fanarts/medium/c556867276.jpg.webp',
       'thumb':
-        'https://walter-r2.trakt.tv/images/movies/000/000/481/fanarts/thumb/c556867276.jpg.webp',
+        'https://media.trakt.tv/images/movies/000/000/481/fanarts/thumb/c556867276.jpg.webp',
     },
   },
   'logo': {
     'url': {
       'medium':
-        'https://walter-r2.trakt.tv/images/movies/000/000/481/logos/medium/f5e05ed291.png.webp',
+        'https://media.trakt.tv/images/movies/000/000/481/logos/medium/f5e05ed291.png.webp',
       'thumb':
-        'https://walter-r2.trakt.tv/images/movies/000/000/481/logos/thumb/f5e05ed291.png.webp',
+        'https://media.trakt.tv/images/movies/000/000/481/logos/thumb/f5e05ed291.png.webp',
     },
   },
   'thumb': {
     'url':
-      'https://walter-r2.trakt.tv/images/movies/000/000/481/fanarts/thumb/c556867276.jpg.webp',
+      'https://media.trakt.tv/images/movies/000/000/481/fanarts/thumb/c556867276.jpg.webp',
   },
   'genres': [
     'action',

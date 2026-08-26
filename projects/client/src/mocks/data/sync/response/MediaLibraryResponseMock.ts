@@ -33,7 +33,7 @@ export const MediaLibraryResponseMock: CollectionResponse[] = [
       'during_credits': false,
       'images': {
         'screenshot': [
-          'walter-r2.trakt.tv/images/episodes/013/352/063/screenshots/medium/60214573bb.jpg.webp',
+          'media.trakt.tv/images/episodes/013/352/063/screenshots/medium/60214573bb.jpg.webp',
         ],
       },
     },
@@ -131,22 +131,22 @@ export const MediaLibraryResponseMock: CollectionResponse[] = [
       'original_title': 'South Park',
       'images': {
         'fanart': [
-          'walter-r2.trakt.tv/images/shows/000/002/177/fanarts/medium/cb8901fce2.jpg.webp',
+          'media.trakt.tv/images/shows/000/002/177/fanarts/medium/cb8901fce2.jpg.webp',
         ],
         'poster': [
-          'walter-r2.trakt.tv/images/shows/000/002/177/posters/thumb/9cb5875b93.jpg.webp',
+          'media.trakt.tv/images/shows/000/002/177/posters/thumb/9cb5875b93.jpg.webp',
         ],
         'logo': [
-          'walter-r2.trakt.tv/images/shows/000/002/177/logos/medium/477fd31928.png.webp',
+          'media.trakt.tv/images/shows/000/002/177/logos/medium/477fd31928.png.webp',
         ],
         'clearart': [
-          'walter-r2.trakt.tv/images/shows/000/002/177/cleararts/medium/531c7fa397.png.webp',
+          'media.trakt.tv/images/shows/000/002/177/cleararts/medium/531c7fa397.png.webp',
         ],
         'banner': [
-          'walter-r2.trakt.tv/images/shows/000/002/177/banners/medium/561098c700.jpg.webp',
+          'media.trakt.tv/images/shows/000/002/177/banners/medium/561098c700.jpg.webp',
         ],
         'thumb': [
-          'walter-r2.trakt.tv/images/shows/000/002/177/thumbs/medium/0dee79e666.jpg.webp',
+          'media.trakt.tv/images/shows/000/002/177/thumbs/medium/0dee79e666.jpg.webp',
         ],
       },
     },
@@ -201,10 +201,10 @@ export const MediaLibraryResponseMock: CollectionResponse[] = [
       'during_credits': false,
       'images': {
         'fanart': [
-          'walter-r2.trakt.tv/images/movies/001/153/578/fanarts/medium/1ba6d95f18.jpg.webp',
+          'media.trakt.tv/images/movies/001/153/578/fanarts/medium/1ba6d95f18.jpg.webp',
         ],
         'poster': [
-          'walter-r2.trakt.tv/images/movies/001/153/578/posters/thumb/5084249a61.jpg.webp',
+          'media.trakt.tv/images/movies/001/153/578/posters/thumb/5084249a61.jpg.webp',
         ],
         'logo': [],
         'clearart': [],
@@ -306,22 +306,22 @@ export const MediaLibraryResponseMock: CollectionResponse[] = [
       'during_credits': false,
       'images': {
         'fanart': [
-          'walter-r2.trakt.tv/images/movies/000/000/007/fanarts/medium/4002770294.jpg.webp',
+          'media.trakt.tv/images/movies/000/000/007/fanarts/medium/4002770294.jpg.webp',
         ],
         'poster': [
-          'walter-r2.trakt.tv/images/movies/000/000/007/posters/thumb/a4f84e22e4.jpg.webp',
+          'media.trakt.tv/images/movies/000/000/007/posters/thumb/a4f84e22e4.jpg.webp',
         ],
         'logo': [
-          'walter-r2.trakt.tv/images/movies/000/000/007/logos/medium/933f4b8f31.png.webp',
+          'media.trakt.tv/images/movies/000/000/007/logos/medium/933f4b8f31.png.webp',
         ],
         'clearart': [
-          'walter-r2.trakt.tv/images/movies/000/000/007/cleararts/medium/c119c8fe8f.png.webp',
+          'media.trakt.tv/images/movies/000/000/007/cleararts/medium/c119c8fe8f.png.webp',
         ],
         'banner': [
-          'walter-r2.trakt.tv/images/movies/000/000/007/banners/medium/677812df75.jpg.webp',
+          'media.trakt.tv/images/movies/000/000/007/banners/medium/677812df75.jpg.webp',
         ],
         'thumb': [
-          'walter-r2.trakt.tv/images/movies/000/000/007/thumbs/medium/38866db6ff.jpg.webp',
+          'media.trakt.tv/images/movies/000/000/007/thumbs/medium/38866db6ff.jpg.webp',
         ],
       },
     },
@@ -363,7 +363,7 @@ export const MediaLibraryResponseMock: CollectionResponse[] = [
       'during_credits': false,
       'images': {
         'screenshot': [
-          'walter-r2.trakt.tv/images/episodes/000/298/461/screenshots/medium/d5459747f8.jpg.webp',
+          'media.trakt.tv/images/episodes/000/298/461/screenshots/medium/d5459747f8.jpg.webp',
         ],
       },
     },
@@ -447,22 +447,22 @@ export const MediaLibraryResponseMock: CollectionResponse[] = [
       'original_title': 'Married... with Children',
       'images': {
         'fanart': [
-          'walter-r2.trakt.tv/images/shows/000/004/215/fanarts/medium/f5631e4468.jpg.webp',
+          'media.trakt.tv/images/shows/000/004/215/fanarts/medium/f5631e4468.jpg.webp',
         ],
         'poster': [
-          'walter-r2.trakt.tv/images/shows/000/004/215/posters/thumb/703725c3a5.jpg.webp',
+          'media.trakt.tv/images/shows/000/004/215/posters/thumb/703725c3a5.jpg.webp',
         ],
         'logo': [
-          'walter-r2.trakt.tv/images/shows/000/004/215/logos/medium/9e761a7a93.png.webp',
+          'media.trakt.tv/images/shows/000/004/215/logos/medium/9e761a7a93.png.webp',
         ],
         'clearart': [
-          'walter-r2.trakt.tv/images/shows/000/004/215/cleararts/medium/9a68559ef2.png.webp',
+          'media.trakt.tv/images/shows/000/004/215/cleararts/medium/9a68559ef2.png.webp',
         ],
         'banner': [
-          'walter-r2.trakt.tv/images/shows/000/004/215/banners/medium/b66463845b.jpg.webp',
+          'media.trakt.tv/images/shows/000/004/215/banners/medium/b66463845b.jpg.webp',
         ],
         'thumb': [
-          'walter-r2.trakt.tv/images/shows/000/004/215/thumbs/medium/9ee028a03e.jpg.webp',
+          'media.trakt.tv/images/shows/000/004/215/thumbs/medium/9ee028a03e.jpg.webp',
         ],
       },
     },

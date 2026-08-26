@@ -57,7 +57,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'episode_type': 'series_premiere',
     'images': {
       'screenshot': [
-        'walter-r2.trakt.tv/images/episodes/005/165/667/screenshots/medium/e035db5f06.jpg.webp',
+        'media.trakt.tv/images/episodes/005/165/667/screenshots/medium/e035db5f06.jpg.webp',
         'image.tmdb.org/t/p/w1280/rpZhJcWPpyLvPC5Vid61GD6JHVu.jpg',
       ],
     },
@@ -118,7 +118,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'episode_type': 'standard',
     'images': {
       'screenshot': [
-        'walter-r2.trakt.tv/images/episodes/007/374/195/screenshots/medium/34fd1da36a.jpg.webp',
+        'media.trakt.tv/images/episodes/007/374/195/screenshots/medium/34fd1da36a.jpg.webp',
         'image.tmdb.org/t/p/w1280/bRYHFClG8YkTJTy8fx73hgCd8Ac.jpg',
       ],
     },
@@ -179,7 +179,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'episode_type': 'standard',
     'images': {
       'screenshot': [
-        'walter-r2.trakt.tv/images/episodes/007/374/298/screenshots/medium/ab930b719e.jpg.webp',
+        'media.trakt.tv/images/episodes/007/374/298/screenshots/medium/ab930b719e.jpg.webp',
         'image.tmdb.org/t/p/w1280/8hQB4jxk9ydj55Mrl9sY95smV7.jpg',
       ],
     },
@@ -240,7 +240,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'episode_type': 'standard',
     'images': {
       'screenshot': [
-        'walter-r2.trakt.tv/images/episodes/007/374/307/screenshots/medium/b1d7a96ac8.jpg.webp',
+        'media.trakt.tv/images/episodes/007/374/307/screenshots/medium/b1d7a96ac8.jpg.webp',
         'image.tmdb.org/t/p/w1280/x3fMuXhTx5f91tQgjXNzopo5B5g.jpg',
       ],
     },
@@ -301,7 +301,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'episode_type': 'standard',
     'images': {
       'screenshot': [
-        'walter-r2.trakt.tv/images/episodes/007/374/308/screenshots/medium/19c2c320bc.jpg.webp',
+        'media.trakt.tv/images/episodes/007/374/308/screenshots/medium/19c2c320bc.jpg.webp',
         'image.tmdb.org/t/p/w1280/yzLUNo2jU82N5rdRG0xZ2A2ed79.jpg',
       ],
     },
@@ -362,7 +362,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'episode_type': 'standard',
     'images': {
       'screenshot': [
-        'walter-r2.trakt.tv/images/episodes/007/374/309/screenshots/medium/8fd4b52a0a.jpg.webp',
+        'media.trakt.tv/images/episodes/007/374/309/screenshots/medium/8fd4b52a0a.jpg.webp',
         'image.tmdb.org/t/p/w1280/k5UxYAS4Xmcsn3GZdCklXGMIBMd.jpg',
       ],
     },
@@ -423,7 +423,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'episode_type': 'standard',
     'images': {
       'screenshot': [
-        'walter-r2.trakt.tv/images/episodes/007/374/310/screenshots/medium/daaa0c7509.jpg.webp',
+        'media.trakt.tv/images/episodes/007/374/310/screenshots/medium/daaa0c7509.jpg.webp',
         'image.tmdb.org/t/p/w1280/ukzV8BZbjlIU6WOKdoZqhHMg2yi.jpg',
       ],
     },
@@ -484,7 +484,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'episode_type': 'standard',
     'images': {
       'screenshot': [
-        'walter-r2.trakt.tv/images/episodes/007/374/312/screenshots/medium/0a23d84196.jpg.webp',
+        'media.trakt.tv/images/episodes/007/374/312/screenshots/medium/0a23d84196.jpg.webp',
         'image.tmdb.org/t/p/w1280/sZaeOvZYS4evALQtm2wfC3eJxit.jpg',
       ],
     },
@@ -545,7 +545,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'episode_type': 'standard',
     'images': {
       'screenshot': [
-        'walter-r2.trakt.tv/images/episodes/007/374/313/screenshots/medium/0671601160.jpg.webp',
+        'media.trakt.tv/images/episodes/007/374/313/screenshots/medium/0671601160.jpg.webp',
         'image.tmdb.org/t/p/w1280/mogTf95jiLdvSXwnjpQcIs6Wxh2.jpg',
       ],
     },
@@ -607,7 +607,7 @@ export const ShowSiloSeasonEpisodesResponseMock: EpisodeResponse[] = [
     'episode_type': 'season_finale',
     'images': {
       'screenshot': [
-        'walter-r2.trakt.tv/images/episodes/007/374/314/screenshots/medium/8f3f471d79.jpg.webp',
+        'media.trakt.tv/images/episodes/007/374/314/screenshots/medium/8f3f471d79.jpg.webp',
         'image.tmdb.org/t/p/w1280/qcqkEv0S8Re5V2UV9LFUWzHYyq3.jpg',
       ],
     },

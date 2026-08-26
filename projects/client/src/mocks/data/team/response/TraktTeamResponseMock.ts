@@ -22,7 +22,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/000/000/001/avatars/large/2e6df69058.jpg',
+            'https://media.trakt.tv/images/admins/000/000/001/avatars/large/2e6df69058.jpg',
         },
       },
     },
@@ -48,7 +48,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/000/000/002/avatars/large/0f9ac9e4e6.jpg',
+            'https://media.trakt.tv/images/admins/000/000/002/avatars/large/0f9ac9e4e6.jpg',
         },
       },
     },
@@ -74,7 +74,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/001/393/401/avatars/large/10cc02b9d9.jpeg',
+            'https://media.trakt.tv/images/admins/001/393/401/avatars/large/10cc02b9d9.jpeg',
         },
       },
     },
@@ -100,7 +100,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/011/635/632/avatars/large/b7177a5493.jpg',
+            'https://media.trakt.tv/images/admins/011/635/632/avatars/large/b7177a5493.jpg',
         },
       },
     },
@@ -127,7 +127,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/008/891/809/avatars/large/548a08f62b.jpg',
+            'https://media.trakt.tv/images/admins/008/891/809/avatars/large/548a08f62b.jpg',
         },
       },
     },
@@ -153,7 +153,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/000/410/291/avatars/large/348b7bf208.png',
+            'https://media.trakt.tv/images/admins/000/410/291/avatars/large/348b7bf208.png',
         },
       },
     },
@@ -179,7 +179,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/013/948/040/avatars/large/3ed457f5a9.jpg',
+            'https://media.trakt.tv/images/admins/013/948/040/avatars/large/3ed457f5a9.jpg',
         },
       },
     },
@@ -205,7 +205,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/014/975/346/avatars/large/0bff9d1dac.',
+            'https://media.trakt.tv/images/admins/014/975/346/avatars/large/0bff9d1dac.',
         },
       },
     },
@@ -231,7 +231,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/000/465/110/avatars/large/343da0456b.',
+            'https://media.trakt.tv/images/admins/000/465/110/avatars/large/343da0456b.',
         },
       },
     },
@@ -257,7 +257,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/014/323/124/avatars/large/88318c4cc8.',
+            'https://media.trakt.tv/images/admins/014/323/124/avatars/large/88318c4cc8.',
         },
       },
     },
@@ -284,7 +284,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/001/167/028/avatars/large/04e5c7bc7f.jpg',
+            'https://media.trakt.tv/images/admins/001/167/028/avatars/large/04e5c7bc7f.jpg',
         },
       },
     },
@@ -310,7 +310,7 @@ export const TraktTeamResponseMock: TeamMemberResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://walter-r2.trakt.tv/images/admins/015/351/163/avatars/large/ab820d9514.',
+            'https://media.trakt.tv/images/admins/015/351/163/avatars/large/ab820d9514.',
         },
       },
     },
