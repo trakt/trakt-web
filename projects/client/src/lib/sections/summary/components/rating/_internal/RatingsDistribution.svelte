@@ -7,7 +7,7 @@
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import { toTraktRating } from "$lib/utils/formatting/number/toTraktRating";
   import { ratio } from "$lib/utils/number/ratio.ts";
-  import { STAR_RATINGS } from "../constants/index.ts";
+  import { toDistributionBuckets } from "./toDistributionBuckets.ts";
 
   type RatingsDistributionProps = {
     trakt: NonNullable<MediaRating["trakt"]>;
@@ -15,18 +15,12 @@
 
   const { trakt }: RatingsDistributionProps = $props();
 
-  type DistributionKey =
-    & keyof NonNullable<typeof trakt.distribution>
-    & string;
-
   const buckets = $derived(
-    STAR_RATINGS.map((star) => {
-      const low = String(star.range.min + 1) as DistributionKey;
-      const high = String(star.range.max) as DistributionKey;
-      const value = (trakt.distribution?.[low] ?? 0) +
-        (trakt.distribution?.[high] ?? 0);
-      return { value, star: star.index };
-    }),
+    toDistributionBuckets(trakt.distribution).map((bucket) => ({
+      ...bucket,
+      starText: toHumanNumber(bucket.star, getLocale()),
+      valueText: toHumanNumber(bucket.value, getLocale()),
+    })),
   );
 
   const maxValue = $derived(Math.max(...buckets.map((b) => b.value), 1));
@@ -50,7 +44,7 @@
       <div class="trakt-histogram">
         {#each buckets as bucket, i (bucket.star)}
           <Tooltip
-            content={toHumanNumber(bucket.value, getLocale())}
+            content={bucket.valueText}
             variant="compact"
             sideOffset={4}
           >
@@ -62,11 +56,13 @@
                   active={bucket.value === maxValue && maxValue > 0}
                   minVisible={0.04}
                   index={i}
-                  label="{bucket.star}: {toHumanNumber(bucket.value, getLocale())}"
+                  label="{bucket.starText}: {bucket.valueText}"
                   --distribution-bar-thickness="100%"
                 />
               </div>
-              <span class="histogram-label tag secondary">{bucket.star}</span>
+              <span class="histogram-label tag secondary">
+                {bucket.starText}
+              </span>
             </div>
           </Tooltip>
         {/each}
@@ -117,7 +113,7 @@
     flex: 1;
     min-width: 0;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(10, 1fr);
     align-items: end;
     gap: var(--ni-4);
 
