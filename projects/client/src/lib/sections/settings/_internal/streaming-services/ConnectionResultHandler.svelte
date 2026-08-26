@@ -10,29 +10,25 @@
   import { firstValueFrom } from "rxjs";
   import { onMount } from "svelte";
   import { toFavoritesWithConnection } from "./toFavoritesWithConnection.ts";
-  import {
-    type StreamingConnectionStatusKind,
-    streamingConnectionStatus,
-  } from "./streamingConnectionStatus.ts";
+  import type { StreamingConnectionStatusKind } from "$lib/models/StreamingConnectionStatusKind.ts";
+  import { streamingConnectionStatus } from "./streamingConnectionStatus.ts";
 
   // Clean result params the connect callback route redirects here with.
   const CONNECTION_PARAM = "connection";
   const SERVICE_PARAM = "service";
 
-  const RESULT_KINDS = new Set<StreamingConnectionStatusKind>([
+  const RESULT_KINDS: readonly StreamingConnectionStatusKind[] = [
     "connected",
     "cancelled",
     "error",
-  ]);
+    "expired",
+  ];
 
   const { invalidate } = useInvalidator();
   const { favorites, country } = useStreamingPreferences();
 
-  function toKind(value: string | null): StreamingConnectionStatusKind | null {
-    if (value && RESULT_KINDS.has(value as StreamingConnectionStatusKind)) {
-      return value as StreamingConnectionStatusKind;
-    }
-    return null;
+  function toKind(value: string | null) {
+    return RESULT_KINDS.find((kind) => kind === value) ?? null;
   }
 
   // Mark the connected service as a watch-now favorite, mapping the younify id

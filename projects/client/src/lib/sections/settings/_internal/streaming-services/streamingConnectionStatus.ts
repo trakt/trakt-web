@@ -1,6 +1,5 @@
+import type { StreamingConnectionStatusKind } from '$lib/models/StreamingConnectionStatusKind.ts';
 import { writable } from '$lib/utils/store/WritableSubject.ts';
-
-export type StreamingConnectionStatusKind = 'connected' | 'error' | 'cancelled';
 
 export type StreamingConnectionStatus = {
   kind: StreamingConnectionStatusKind;

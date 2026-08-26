@@ -1,3 +1,4 @@
+import type { StreamingConnectionStatusKind } from '$lib/models/StreamingConnectionStatusKind.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from '$types/callback/streaming/$types.d.ts';
@@ -8,15 +9,18 @@ import type { PageLoad } from '$types/callback/streaming/$types.d.ts';
 const YC_STATUS_PARAM = 'yc_status';
 const YC_SERVICE_PARAMS = ['yc_service_id', 'yc_serviceId'];
 
-const YC_CONNECTIONS: Record<string, string> = {
+const YC_CONNECTIONS: Record<string, StreamingConnectionStatusKind> = {
   succeeded: 'connected',
   connected: 'connected',
   success: 'connected',
   canceled: 'cancelled',
   cancelled: 'cancelled',
+  expired: 'expired',
 };
 
-function toConnection(status: string | null): string | undefined {
+function toConnection(
+  status: string | null,
+): StreamingConnectionStatusKind | undefined {
   if (!status) {
     return undefined;
   }
