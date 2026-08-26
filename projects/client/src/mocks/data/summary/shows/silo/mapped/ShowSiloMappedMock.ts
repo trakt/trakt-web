@@ -4,9 +4,9 @@ export const ShowSiloMappedMock: ShowEntry = {
   'cover': {
     'url': {
       'medium':
-        'https://walter-r2.trakt.tv/images/shows/000/180/770/fanarts/medium/80d39f8578.jpg.webp',
+        'https://media.trakt.tv/images/shows/000/180/770/fanarts/medium/80d39f8578.jpg.webp',
       'thumb':
-        'https://walter-r2.trakt.tv/images/shows/000/180/770/fanarts/thumb/80d39f8578.jpg.webp',
+        'https://media.trakt.tv/images/shows/000/180/770/fanarts/thumb/80d39f8578.jpg.webp',
     },
   },
   colors: ['#D29D40', '#1E2E2F'],
@@ -21,17 +21,17 @@ export const ShowSiloMappedMock: ShowEntry = {
   'poster': {
     'url': {
       'medium':
-        'https://walter-r2.trakt.tv/images/shows/000/180/770/posters/medium/5312f1d1cf.jpg.webp',
+        'https://media.trakt.tv/images/shows/000/180/770/posters/medium/5312f1d1cf.jpg.webp',
       'thumb':
-        'https://walter-r2.trakt.tv/images/shows/000/180/770/posters/thumb/5312f1d1cf.jpg.webp',
+        'https://media.trakt.tv/images/shows/000/180/770/posters/thumb/5312f1d1cf.jpg.webp',
     },
   },
   'logo': {
     'url': {
       'medium':
-        'https://walter-r2.trakt.tv/images/shows/000/180/770/logos/medium/b0c9a10541.png.webp',
+        'https://media.trakt.tv/images/shows/000/180/770/logos/medium/b0c9a10541.png.webp',
       'thumb':
-        'https://walter-r2.trakt.tv/images/shows/000/180/770/logos/thumb/b0c9a10541.png.webp',
+        'https://media.trakt.tv/images/shows/000/180/770/logos/thumb/b0c9a10541.png.webp',
     },
   },
   'type': 'show',
@@ -44,7 +44,7 @@ export const ShowSiloMappedMock: ShowEntry = {
   'tagline': 'The truth will surface.',
   'thumb': {
     'url':
-      'https://walter-r2.trakt.tv/images/shows/000/180/770/thumbs/medium/dddaaead2f.jpg.webp',
+      'https://media.trakt.tv/images/shows/000/180/770/thumbs/medium/dddaaead2f.jpg.webp',
   },
   'title': 'Silo',
   'originalTitle': 'Silo',

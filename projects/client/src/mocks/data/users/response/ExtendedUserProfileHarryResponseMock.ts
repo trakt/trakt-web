@@ -6,5 +6,5 @@ export const ExtendedUserProfileHarryResponseMock: ProfileResponse = {
   location: 'San Francisco, CA',
   about: 'I am a Lieutenant',
   vip_cover_image:
-    'https://walter.trakt.tv/images/users/014/366/083/headers/original/disco_cop.png',
+    'https://media.trakt.tv/images/users/014/366/083/headers/original/disco_cop.png',
 };

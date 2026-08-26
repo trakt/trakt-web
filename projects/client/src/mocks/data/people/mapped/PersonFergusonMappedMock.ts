@@ -6,9 +6,9 @@ export const PersonFergusonMappedMock: PersonSummary = {
   headshot: {
     url: {
       thumb:
-        'https://walter-r2.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
+        'https://media.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
       medium:
-        'https://walter-r2.trakt.tv/images/people/000/447/271/headshots/medium/d7e3e2fc64.jpg.webp',
+        'https://media.trakt.tv/images/people/000/447/271/headshots/medium/d7e3e2fc64.jpg.webp',
     },
   },
   height: undefined,

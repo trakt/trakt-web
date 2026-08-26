@@ -4,9 +4,9 @@ export const MovieHereticMappedMock: MovieEntry = {
   'cover': {
     'url': {
       'medium':
-        'https://walter-r2.trakt.tv/images/movies/000/916/302/fanarts/medium/626327d7b4.jpg.webp',
+        'https://media.trakt.tv/images/movies/000/916/302/fanarts/medium/626327d7b4.jpg.webp',
       'thumb':
-        'https://walter-r2.trakt.tv/images/movies/000/916/302/fanarts/thumb/626327d7b4.jpg.webp',
+        'https://media.trakt.tv/images/movies/000/916/302/fanarts/thumb/626327d7b4.jpg.webp',
     },
   },
   'genres': [
@@ -26,17 +26,17 @@ export const MovieHereticMappedMock: MovieEntry = {
   'poster': {
     'url': {
       'medium':
-        'https://walter-r2.trakt.tv/images/movies/000/916/302/posters/medium/db9d66deb8.jpg.webp',
+        'https://media.trakt.tv/images/movies/000/916/302/posters/medium/db9d66deb8.jpg.webp',
       'thumb':
-        'https://walter-r2.trakt.tv/images/movies/000/916/302/posters/thumb/db9d66deb8.jpg.webp',
+        'https://media.trakt.tv/images/movies/000/916/302/posters/thumb/db9d66deb8.jpg.webp',
     },
   },
   'logo': {
     'url': {
       'medium':
-        'https://walter-r2.trakt.tv/images/movies/000/916/302/logos/medium/36726904e9.png.webp',
+        'https://media.trakt.tv/images/movies/000/916/302/logos/medium/36726904e9.png.webp',
       'thumb':
-        'https://walter-r2.trakt.tv/images/movies/000/916/302/logos/thumb/36726904e9.png.webp',
+        'https://media.trakt.tv/images/movies/000/916/302/logos/thumb/36726904e9.png.webp',
     },
   },
   'year': 2024,
@@ -47,7 +47,7 @@ export const MovieHereticMappedMock: MovieEntry = {
   'tagline': 'Question everything.',
   'thumb': {
     'url':
-      'https://walter-r2.trakt.tv/images/movies/000/916/302/fanarts/thumb/626327d7b4.jpg.webp',
+      'https://media.trakt.tv/images/movies/000/916/302/fanarts/thumb/626327d7b4.jpg.webp',
   },
   'title': 'Heretic',
   'originalTitle': 'Heretic',

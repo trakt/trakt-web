@@ -76,22 +76,22 @@ export const ShowDevsResponseMock: ShowResponse = {
   ],
   'images': {
     'fanart': [
-      'walter-r2.trakt.tv/images/shows/000/147/971/fanarts/medium/e9507d40da.jpg.webp',
+      'media.trakt.tv/images/shows/000/147/971/fanarts/medium/e9507d40da.jpg.webp',
     ],
     'poster': [
-      'walter-r2.trakt.tv/images/shows/000/147/971/posters/thumb/b5fe0d9957.jpg.webp',
+      'media.trakt.tv/images/shows/000/147/971/posters/thumb/b5fe0d9957.jpg.webp',
     ],
     'logo': [
-      'walter-r2.trakt.tv/images/shows/000/147/971/logos/medium/409bb7e516.png.webp',
+      'media.trakt.tv/images/shows/000/147/971/logos/medium/409bb7e516.png.webp',
     ],
     'clearart': [
-      'walter-r2.trakt.tv/images/shows/000/147/971/cleararts/medium/097852fbfd.png.webp',
+      'media.trakt.tv/images/shows/000/147/971/cleararts/medium/097852fbfd.png.webp',
     ],
     'banner': [
-      'walter-r2.trakt.tv/images/shows/000/147/971/banners/medium/c26f0754cf.jpg.webp',
+      'media.trakt.tv/images/shows/000/147/971/banners/medium/c26f0754cf.jpg.webp',
     ],
     'thumb': [
-      'walter-r2.trakt.tv/images/shows/000/147/971/thumbs/medium/7d0e3d4bbc.jpg.webp',
+      'media.trakt.tv/images/shows/000/147/971/thumbs/medium/7d0e3d4bbc.jpg.webp',
     ],
   },
   'colors': {

@@ -147,10 +147,10 @@ export const UserMonthInReviewResponseMock: MonthInReviewResponse = {
       },
       'images': {
         'fanart': [
-          'walter-r2.trakt.tv/images/movies/000/990/203/fanarts/medium/69f983936a.jpg.webp',
+          'media.trakt.tv/images/movies/000/990/203/fanarts/medium/69f983936a.jpg.webp',
         ],
         'poster': [
-          'walter-r2.trakt.tv/images/movies/000/990/203/posters/thumb/c724960a49.jpg.webp',
+          'media.trakt.tv/images/movies/000/990/203/posters/thumb/c724960a49.jpg.webp',
         ],
         'logo': [],
         'clearart': [],

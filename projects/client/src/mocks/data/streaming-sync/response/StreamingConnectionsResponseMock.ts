@@ -7,7 +7,7 @@ export const StreamingConnectionsResponseMock: YounifyConnection[] = [
     vip: true,
     color: '#5822b4',
     images: {
-      logo: 'walter-r2.trakt.tv/images/younify/hbomax/logo.png',
+      logo: 'media.trakt.tv/images/younify/hbomax/logo.png',
     },
     connectable: false,
     connected: false,
@@ -21,7 +21,7 @@ export const StreamingConnectionsResponseMock: YounifyConnection[] = [
     vip: false,
     color: '#00a8e1',
     images: {
-      logo: 'walter-r2.trakt.tv/images/younify/amazon/logo.png',
+      logo: 'media.trakt.tv/images/younify/amazon/logo.png',
     },
     connectable: true,
     connected: true,
@@ -35,7 +35,7 @@ export const StreamingConnectionsResponseMock: YounifyConnection[] = [
     vip: false,
     color: '#000000',
     images: {
-      logo: 'walter-r2.trakt.tv/images/younify/appletv/logo.png',
+      logo: 'media.trakt.tv/images/younify/appletv/logo.png',
     },
     connectable: true,
     connected: true,
@@ -49,7 +49,7 @@ export const StreamingConnectionsResponseMock: YounifyConnection[] = [
     vip: true,
     color: '#e50914',
     images: {
-      logo: 'walter-r2.trakt.tv/images/younify/netflix/logo.png',
+      logo: 'media.trakt.tv/images/younify/netflix/logo.png',
     },
     connectable: false,
     connected: false,

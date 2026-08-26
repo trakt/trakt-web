@@ -10,11 +10,11 @@ export const PersonGrantResponseMock: PersonResponse = {
   },
   'images': {
     'headshot': [
-      'walter-r2.trakt.tv/images/people/000/004/705/headshots/thumb/55cd537cc1.jpg.webp',
+      'media.trakt.tv/images/people/000/004/705/headshots/thumb/55cd537cc1.jpg.webp',
       'image.tmdb.org/t/p/original/lzCB9YN6MjGosh8v27o6omhSmjL.jpg',
     ],
     'fanart': [
-      'walter-r2.trakt.tv/images/people/000/004/705/fanarts/medium/75cc921525.jpg.webp',
+      'media.trakt.tv/images/people/000/004/705/fanarts/medium/75cc921525.jpg.webp',
       'image.tmdb.org/t/p/w1280/dF4EwB8oyrgKQnjOwUWGbF3yNTH.jpg',
     ],
   },

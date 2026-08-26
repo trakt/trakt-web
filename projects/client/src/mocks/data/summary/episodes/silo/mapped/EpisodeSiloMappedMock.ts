@@ -16,7 +16,7 @@ export const EpisodeSiloMappedMock: EpisodeEntry = {
   'rating': 0.7753,
   'cover': {
     'url':
-      'https://walter-r2.trakt.tv/images/episodes/005/165/667/screenshots/thumb/e035db5f06.jpg.webp',
+      'https://media.trakt.tv/images/episodes/005/165/667/screenshots/thumb/e035db5f06.jpg.webp',
   },
   'airDate': new Date('2023-05-05T01:00:00.000Z'),
   'releaseDate': new Date('2023-05-05T01:00:00.000Z'),
