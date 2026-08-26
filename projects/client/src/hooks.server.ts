@@ -10,6 +10,7 @@ import { handle as handleImage } from '$lib/features/image/handle.ts';
 import { handle as handleLegacyRedirect } from '$lib/features/legacy-redirects/handle.ts';
 import { handle as handleMobileOperatingSystem } from '$lib/features/mobile-os/handle.ts';
 import { handle as handleSearchConfig } from '$lib/features/search/handle.ts';
+import { handle as handleSentryTunnel } from '$lib/features/sentry/handle.ts';
 import { handle as handleTheme } from '$lib/features/theme/handle.ts';
 import { hasAuthSession } from '$lib/features/auth/hasAuthSession.ts';
 import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
@@ -118,6 +119,7 @@ export const handle: Handle = sequence(
     beforeSend: scrubWebviewParams,
     beforeSendTransaction: scrubWebviewParams,
   }),
+  handleSentryTunnel,
   sentryHandle(),
   // Retire legacy trakt.tv paths with a 301 before any routing/auth/i18n work.
   handleLegacyRedirect,

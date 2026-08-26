@@ -4,6 +4,7 @@ import '$lib/polyfills/randomUUID.ts';
 import '$lib/polyfills/toReversed.ts';
 import '$lib/polyfills/toSorted.ts';
 import { captureWebviewSession } from '$lib/features/webview/captureWebviewSession.ts';
+import { SentryEndpoint } from '$lib/features/sentry/SentryEndpoint.ts';
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
 import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
 import * as Sentry from '@sentry/sveltekit';
@@ -49,6 +50,8 @@ function isSampledError(event: SentryErrorEvent): boolean {
 
 Sentry.init({
   dsn: SENTRY_DSN,
+
+  tunnel: SentryEndpoint.Tunnel,
 
   // Matches the server rate. Client navigations are the higher-volume side, so
   // sampling them harder than the server made the asymmetry backwards.
