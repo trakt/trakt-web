@@ -34,7 +34,6 @@
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import { initializeSeasonalThemes } from "$lib/features/theme/initializeSeasonalThemes.js";
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
-  import WSInvalidator from "$lib/features/websocket/WSInvalidator.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ManageListsDrawerProvider from "$lib/sections/components/lists-drawer/ManageListsDrawerProvider.svelte";
   import MarkAsWatchedDrawerProvider from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedDrawerProvider.svelte";
@@ -84,7 +83,6 @@
           hasServerSession={data.oidcAuth.hasSession}
         >
           <SearchShortcut />
-          <WSInvalidator />
           <FeatureFlagProvider>
             <PlayerProvider>
               <AnalyticsProvider>
