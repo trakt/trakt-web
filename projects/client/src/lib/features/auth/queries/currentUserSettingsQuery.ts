@@ -203,5 +203,6 @@ export const currentUserSettingsQuery = defineQuery({
   request: currentUserRequest,
   mapper: (response) => mapUserSettingsResponse(response.body),
   schema: UserSettingsSchema,
-  ttl: time.hours(12),
+  ttl: time.hours(3),
+  refetchOnWindowFocus: true,
 });
