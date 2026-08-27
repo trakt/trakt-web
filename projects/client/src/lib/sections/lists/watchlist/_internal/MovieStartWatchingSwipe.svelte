@@ -1,6 +1,8 @@
 <script lang="ts">
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { hasSwipeGesture } from "$lib/sections/lists/components/_internal/hasSwipeGesture.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { swipeIndicatorHeight } from "$lib/sections/lists/components/_internal/swipeIndicatorHeight.ts";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -18,6 +20,15 @@
   const { media, style, children }: StartWatchingMovieProps = $props();
 
   const isLargeScreenCards = useLargeScreenCards();
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
+
+  const hasSwipe = $derived(
+    hasSwipeGesture({
+      style,
+      isLargeScreenCards: $isLargeScreenCards,
+      isMouse: $isMouse,
+    }),
+  );
 
   const { markAsWatched } = $derived(
     useMarkAsWatched({
@@ -40,7 +51,7 @@
   );
 </script>
 
-{#if style === "summary"}
+{#if hasSwipe}
   <SwipeX
     {children}
     directions={["left", "right"]}

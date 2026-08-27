@@ -3,7 +3,7 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import type { LibraryItem } from "$lib/requests/models/LibraryItem";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
-  import { resolveItemCardStyle } from "../../components/_internal/resolveItemCardStyle.ts";
+  import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import MediaItem from "../../components/MediaItem.svelte";
 
   const {

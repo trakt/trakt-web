@@ -14,7 +14,7 @@
   import { NOOP_FN } from "$lib/utils/constants";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import ActivityItem from "../components/ActivityItem.svelte";
-  import { resolveItemCardStyle } from "../components/_internal/resolveItemCardStyle.ts";
+  import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
   import type { HistoryEntry } from "../stores/models/HistoryEntry";
 

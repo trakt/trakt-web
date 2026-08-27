@@ -4,7 +4,7 @@
   import type { SocialActivity } from "$lib/requests/models/SocialActivity";
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import ActivityItem from "../../components/ActivityItem.svelte";
-  import { resolveItemCardStyle } from "../../components/_internal/resolveItemCardStyle.ts";
+  import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import ActivitySummaryCard from "../../components/ActivitySummaryCard.svelte";
   import UserAvatar from "../../components/UserAvatar.svelte";
   import UserProfileLink from "../../components/UserProfileLink.svelte";
