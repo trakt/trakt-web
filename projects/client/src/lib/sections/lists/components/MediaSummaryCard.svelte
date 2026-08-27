@@ -30,7 +30,7 @@
   import SummaryCardBackgroundImage from "./_internal/SummaryCardBackgroundImage.svelte";
   import SummaryCardBottomBar from "./_internal/SummaryCardBottomBar.svelte";
   import SummaryCardDetails from "./_internal/SummaryCardDetails.svelte";
-  import SummaryCardRating from "./_internal/SummaryCardRating.svelte";
+  import SummaryCardRating from "./SummaryCardRating.svelte";
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
   import type { MediaCardProps } from "./models/MediaCardProps";
   import type { SeasonCardProps } from "./models/SeasonCardProps";

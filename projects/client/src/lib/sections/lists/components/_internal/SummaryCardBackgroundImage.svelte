@@ -1,10 +1,14 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
 
-  const { src, alt }: { src: string; alt: string } = $props();
+  const { src, alt, align = "end" }: {
+    src: string;
+    alt: string;
+    align?: "start" | "end";
+  } = $props();
 </script>
 
-<div class="trakt-summary-card-background">
+<div class="trakt-summary-card-background" data-align={align}>
   <CrossOriginImage loading="eager" {src} {alt} />
 </div>
 
@@ -38,6 +42,19 @@
       width: 75%;
 
       object-fit: cover;
+    }
+
+    &[data-align="start"] {
+      --mask-angle: 120deg;
+
+      &:dir(rtl) {
+        --mask-angle: 240deg;
+      }
+
+      :global(img) {
+        inset-inline-end: auto;
+        inset-inline-start: 0;
+      }
     }
   }
 </style>
