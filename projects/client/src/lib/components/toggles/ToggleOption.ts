@@ -7,6 +7,5 @@ export interface ToggleOption<T> {
   text: IntlFn;
   label: IntlFn;
   icon?: Snippet;
-  content?: Snippet;
   href?: string;
 }

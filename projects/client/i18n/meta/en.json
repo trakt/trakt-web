@@ -3620,6 +3620,14 @@
       "default": "Media",
       "description": "Text for the button that allows users to toggle the search mode to media."
     },
+    "button_label_toggle_search_shows": {
+      "default": "Search for shows",
+      "description": "Aria-label for the button that allows users to toggle the search mode to shows."
+    },
+    "button_label_toggle_search_movies": {
+      "default": "Search for movies",
+      "description": "Aria-label for the button that allows users to toggle the search mode to movies."
+    },
     "button_label_toggle_search_people": {
       "default": "Search for people",
       "description": "Aria-label for the button that allows users to toggle the search mode to people."

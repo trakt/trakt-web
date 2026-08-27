@@ -1,6 +1,6 @@
 <script lang="ts">
   import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
-  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
+  import type { SegmentedSelectOption } from "$lib/components/select/models/SegmentedSelectOption.ts";
   import type { SelectVariant } from "$lib/components/select/models/SelectVariant.ts";
   import ToggleIcon from "$lib/components/toggles/ToggleIcon.svelte";
   import { DISCOVER_MODE_PARAM } from "$lib/features/filters/_internal/constants";
@@ -26,7 +26,7 @@
     options={segmentedOptions}
     onChange={onModeChange}
   >
-    {#snippet icon(option: SelectOption)}
+    {#snippet icon(option: SegmentedSelectOption)}
       <ToggleIcon {option} />
     {/snippet}
   </SegmentedSelect>

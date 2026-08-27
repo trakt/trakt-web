@@ -1,6 +1,6 @@
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
-import { fireEvent, screen, waitFor } from '@testing-library/svelte';
+import { screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import CastDrawerHost from './CastDrawerHost.svelte';
@@ -8,18 +8,6 @@ import CastDrawerHost from './CastDrawerHost.svelte';
 beforeAll(() => {
   Element.prototype.scrollTo = vi.fn();
 });
-
-async function finishToggleTransition() {
-  const tracker = document.querySelector('.tracker');
-  expect(tracker).toBeInTheDocument();
-
-  const transitionEnd = new Event('transitionend', { bubbles: true });
-  Object.defineProperty(transitionEnd, 'propertyName', {
-    value: 'left',
-  });
-
-  await fireEvent(tracker as Element, transitionEnd);
-}
 
 describe('CastDrawerHost', () => {
   it('filters credits and searches locally', async () => {
@@ -99,13 +87,12 @@ describe('CastDrawerHost', () => {
     expect(screen.getByAltText('Headshot of Rebecca Ferguson'))
       .toBeInTheDocument();
     expect(screen.queryByText('Graham Yost')).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Cast' }))
+    expect(screen.getByRole('radio', { name: 'Cast' }))
       .toHaveTextContent('');
-    expect(screen.getByRole('button', { name: 'Crew' }))
+    expect(screen.getByRole('radio', { name: 'Crew' }))
       .toHaveTextContent('');
 
-    await user.click(screen.getByRole('button', { name: 'Crew' }));
-    await finishToggleTransition();
+    await user.click(screen.getByRole('radio', { name: 'Crew' }));
 
     await waitFor(() => {
       expect(screen.getAllByText('Graham Yost')).not.toHaveLength(0);
@@ -125,9 +112,9 @@ describe('CastDrawerHost', () => {
       expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
     });
     expect(screen.getByText('Cast & Crew')).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Cast' })).not
+    expect(screen.queryByRole('radio', { name: 'Cast' })).not
       .toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Crew' })).not
+    expect(screen.queryByRole('radio', { name: 'Crew' })).not
       .toBeInTheDocument();
 
     await user.clear(search);
@@ -135,7 +122,7 @@ describe('CastDrawerHost', () => {
     await waitFor(() => {
       expect(screen.getByText('Crew')).toBeInTheDocument();
     });
-    expect(screen.getByRole('button', { name: 'Cast' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Crew' })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: 'Cast' })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: 'Crew' })).toBeInTheDocument();
   });
 });

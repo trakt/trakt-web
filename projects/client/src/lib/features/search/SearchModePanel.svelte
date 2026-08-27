@@ -1,6 +1,6 @@
 <script lang="ts">
   import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
-  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
+  import type { SegmentedSelectOption } from "$lib/components/select/models/SegmentedSelectOption.ts";
   import ToggleIcon from "$lib/components/toggles/ToggleIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { searchModeOptions } from "./searchModeOptions.ts";
@@ -36,7 +36,7 @@
   />
 </div>
 
-{#snippet modeIcon(option: SelectOption)}
+{#snippet modeIcon(option: SegmentedSelectOption)}
   <ToggleIcon {option} />
 {/snippet}
 

@@ -9,7 +9,8 @@ export function discoverModeOptions(
 ): SegmentedSelectOption<DiscoverMode>[] {
   return options.map((option) => ({
     value: option.value,
-    label: option.text(),
+    text: option.text(),
+    label: option.label(),
     href: buildParamString({ [DISCOVER_MODE_PARAM]: option.value }),
   }));
 }
