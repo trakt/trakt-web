@@ -13,9 +13,12 @@ const smartListSummaryRequest = (
   { fetch, listId }: SmartListSummaryParams,
 ) =>
   api({ fetch })
-    .smart_lists
+    .users
+    .smartLists
+    .smartList
     .summary({
       params: {
+        id: 'me',
         list_id: listId,
       },
     });
