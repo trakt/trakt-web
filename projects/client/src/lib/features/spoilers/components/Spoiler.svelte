@@ -17,6 +17,7 @@
 <trakt-spoiler
   use:spoiler={isSpoilerHidden}
   use:spoilMeAnyway={variant !== "persistent"}
+  data-variant={variant}
 >
   {@render children()}
 </trakt-spoiler>
@@ -40,9 +41,17 @@
       :global(p:not(button p):not(a p)),
       :global(.trakt-comment p),
       :global(span:not(button span):not(a span)) {
-        pointer-events: none;
-
         @include spoiler-blur();
+      }
+
+      :global(p:not(button p):not(a p)),
+      :global(.trakt-comment p),
+      :global(span:not(button span):not(a span)) {
+        pointer-events: none;
+      }
+
+      &[data-variant="dismissible"] {
+        cursor: pointer;
       }
     }
   }

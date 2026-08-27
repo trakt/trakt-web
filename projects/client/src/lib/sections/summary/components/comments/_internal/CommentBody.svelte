@@ -102,6 +102,11 @@
     :global(p.trakt-spoiler span) {
       pointer-events: none;
     }
+
+    &:global(.trakt-spoiler),
+    :global(p.trakt-spoiler) {
+      cursor: pointer;
+    }
   }
 
   .trakt-comment-preview {

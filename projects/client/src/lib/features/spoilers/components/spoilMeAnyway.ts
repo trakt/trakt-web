@@ -8,8 +8,18 @@ export function spoilMeAnyway(node: HTMLElement, isDismissible = true) {
       return;
     }
 
+    const { target } = e;
+    const isHidden = node.classList.contains(SPOILER_CLASS_NAME) ||
+      target.classList.contains(SPOILER_CLASS_NAME);
+
+    if (!isHidden) {
+      return;
+    }
+
+    e.preventDefault();
+
     node.classList.remove(SPOILER_CLASS_NAME);
-    e.target.classList.remove(SPOILER_CLASS_NAME);
+    target.classList.remove(SPOILER_CLASS_NAME);
   }
 
   node.addEventListener('click', handleClick);

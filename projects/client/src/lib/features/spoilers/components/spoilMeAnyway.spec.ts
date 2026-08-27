@@ -30,6 +30,31 @@ describe('action: spoilMeAnyway', () => {
     component.destroy();
   });
 
+  it('should prevent the default action when revealing', async () => {
+    const commentNode = document.createElement('div');
+    commentNode.classList.add(SPOILER_CLASS_NAME);
+
+    const component = await renderStore(() => spoilMeAnyway(commentNode, true));
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+    commentNode.dispatchEvent(event);
+
+    expect(event.defaultPrevented).toBe(true);
+
+    component.destroy();
+  });
+
+  it('should let the click through when nothing is hidden', async () => {
+    const commentNode = document.createElement('div');
+
+    const component = await renderStore(() => spoilMeAnyway(commentNode, true));
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+    commentNode.dispatchEvent(event);
+
+    expect(event.defaultPrevented).toBe(false);
+
+    component.destroy();
+  });
+
   it('should keep spoilers when the variant is persistent', async () => {
     const commentNode = document.createElement('div');
     commentNode.classList.add(SPOILER_CLASS_NAME);
