@@ -53,7 +53,7 @@
 <trakt-track-action class:is-watchable={isWatchable}>
   <ActionButton
     disabled={$isMarkingAsWatched || !isWatchable}
-    label={i18n.label({ title, isWatched: false, isRewatching: false })}
+    label={i18n.label({ title, isWatched: $isWatched, isRewatching: false })}
     onclick={handler}
     variant={$isWatched ? "primary" : "secondary"}
     color="purple"
