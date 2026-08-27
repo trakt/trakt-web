@@ -63,7 +63,7 @@
     role: collapsed ? undefined : "radio",
     "aria-checked": collapsed ? undefined : index === selectedIndex,
     "aria-hidden": collapsed || undefined,
-    "aria-label": option.label,
+    "aria-label": option.label ?? option.text,
     tabindex: collapsed || disabled ? -1 : undefined,
     "data-dpad-navigation": collapsed ? undefined : DpadNavigationType.Item,
   });
@@ -136,7 +136,7 @@
   {/if}
   {#if variant !== "compact" || !icon}
     <span class="segment-label">
-      <span class="label-text bold ellipsis capitalize">{option.label}</span>
+      <span class="label-text bold ellipsis capitalize">{option.text}</span>
     </span>
   {/if}
 {/snippet}
@@ -164,7 +164,7 @@
 
     {#each options as option, index (option.value)}
       {#if isLabelHidden}
-        <Tooltip content={option.label} variant="compact" disabled={!$isMouse}>
+        <Tooltip content={option.text} variant="compact" disabled={!$isMouse}>
           {@render segment(option, index)}
         </Tooltip>
       {:else}

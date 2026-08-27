@@ -1,6 +1,5 @@
 import type { Snippet } from 'svelte';
 import type { SegmentedSelectOption } from './SegmentedSelectOption.ts';
-import type { SelectOption } from './SelectOption.ts';
 import type { SelectVariant } from './SelectVariant.ts';
 
 export type SegmentedSelectProps<TValue extends string = string> = {
@@ -9,7 +8,7 @@ export type SegmentedSelectProps<TValue extends string = string> = {
   variant?: SelectVariant;
   disabled?: boolean;
   ariaLabel?: string;
-  icon?: Snippet<[SelectOption]>;
+  icon?: Snippet<[SegmentedSelectOption<TValue>]>;
   expandable?: boolean;
   collapsedCount?: number;
   expanded?: boolean;

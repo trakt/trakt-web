@@ -1,7 +1,5 @@
 <script lang="ts">
-  import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
-  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
-  import ToggleIcon from "$lib/components/toggles/ToggleIcon.svelte";
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { m } from "$lib/features/i18n/messages.ts";
@@ -17,10 +15,6 @@
 
   const { current, set, options } = useToggler("progress");
 
-  const progressOptions = $derived(
-    options.map((option) => ({ value: option.value, label: option.text() })),
-  );
-
   const cta = $derived(
     $current.value === "in-progress" || $current.value === "completed"
       ? {
@@ -33,10 +27,6 @@
 
 {#snippet metaInfo()}
   <ListMetaInfo text={$current.text()} />
-{/snippet}
-
-{#snippet progressIcon(option: SelectOption)}
-  <ToggleIcon {option} />
 {/snippet}
 
 {#if mode !== "movie"}
@@ -61,13 +51,11 @@
       {/snippet}
 
       {#snippet actions()}
-        <SegmentedSelect
-          variant="compact"
-          options={progressOptions}
+        <Toggler
           value={$current.value}
-          ariaLabel={m.list_title_progress()}
-          icon={progressIcon}
           onChange={set}
+          {options}
+          ariaLabel={m.list_title_progress()}
         />
       {/snippet}
 

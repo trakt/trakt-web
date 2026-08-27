@@ -2,7 +2,6 @@
   import { page } from "$app/state";
   import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
   import type { SegmentedSelectOption } from "$lib/components/select/models/SegmentedSelectOption.ts";
-  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
   import ToggleIcon from "$lib/components/toggles/ToggleIcon.svelte";
   import { DISCOVER_MODE_PARAM } from "$lib/features/filters/_internal/constants";
   import { discoverModeOptions } from "$lib/features/filters/discoverModeOptions.ts";
@@ -76,7 +75,7 @@
   </div>
 </GlobalParameterSetter>
 
-{#snippet contentIcon(option: SelectOption)}
+{#snippet contentIcon(option: SegmentedSelectOption)}
   <ToggleIcon {option} />
 {/snippet}
 

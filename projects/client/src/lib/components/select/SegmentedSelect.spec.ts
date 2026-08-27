@@ -8,9 +8,9 @@ import type { SegmentedSelectOption } from './models/SegmentedSelectOption.ts';
 
 describe('component: SegmentedSelect', () => {
   const options: SegmentedSelectOption[] = [
-    { value: 'media', label: 'Media' },
-    { value: 'show', label: 'Shows' },
-    { value: 'movie', label: 'Movies' },
+    { value: 'media', text: 'Media' },
+    { value: 'show', text: 'Shows' },
+    { value: 'movie', text: 'Movies' },
   ];
 
   const baseProps = {
@@ -87,11 +87,11 @@ describe('component: SegmentedSelect', () => {
 
   describe('expandable', () => {
     const searchOptions: SegmentedSelectOption[] = [
-      { value: 'media', label: 'Media' },
-      { value: 'show', label: 'Shows' },
-      { value: 'movie', label: 'Movies' },
-      { value: 'people', label: 'People' },
-      { value: 'lists', label: 'Lists' },
+      { value: 'media', text: 'Media' },
+      { value: 'show', text: 'Shows' },
+      { value: 'movie', text: 'Movies' },
+      { value: 'people', text: 'People' },
+      { value: 'lists', text: 'Lists' },
     ];
 
     const expandableProps = {
@@ -189,11 +189,11 @@ describe('component: SegmentedSelect', () => {
 
   describe('link segments', () => {
     const linkOptions: SegmentedSelectOption[] = [
-      { value: 'media', label: 'Media', href: '?mode=media' },
-      { value: 'show', label: 'Shows', href: '?mode=show' },
-      { value: 'movie', label: 'Movies', href: '?mode=movie' },
-      { value: 'people', label: 'People', href: '?m=people' },
-      { value: 'lists', label: 'Lists', href: '?m=lists' },
+      { value: 'media', text: 'Media', href: '?mode=media' },
+      { value: 'show', text: 'Shows', href: '?mode=show' },
+      { value: 'movie', text: 'Movies', href: '?mode=movie' },
+      { value: 'people', text: 'People', href: '?m=people' },
+      { value: 'lists', text: 'Lists', href: '?m=lists' },
     ];
 
     it('should keep collapsed link options out of the radio group and tab order', async () => {

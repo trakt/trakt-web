@@ -20,9 +20,9 @@
   const isInverted = $derived(filter.isInverted ?? false);
 
   const options: SegmentedSelectOption<ToggleFilterState>[] = [
-    { value: "default", label: m.filter_toggle_state_default() },
-    { value: "on", label: m.filter_toggle_state_on() },
-    { value: "off", label: m.filter_toggle_state_off() },
+    { value: "default", text: m.filter_toggle_state_default() },
+    { value: "on", text: m.filter_toggle_state_on() },
+    { value: "off", text: m.filter_toggle_state_off() },
   ];
 
   const state = $derived(
