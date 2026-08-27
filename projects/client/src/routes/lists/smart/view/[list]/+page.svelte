@@ -17,6 +17,8 @@
   const { list, isLoading } = $derived(
     useSmartListSummary({ listId: params.list }),
   );
+
+  // FIXME: split up (or add support) for public smart lists
 </script>
 
 {#snippet actions()}
