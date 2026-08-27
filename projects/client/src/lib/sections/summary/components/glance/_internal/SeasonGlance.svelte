@@ -4,7 +4,7 @@
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
-  import SummaryCardRating from "$lib/sections/lists/components/_internal/SummaryCardRating.svelte";
+  import SummaryCardRating from "$lib/sections/lists/components/SummaryCardRating.svelte";
   import Summary from "../../_internal/Summary.svelte";
   import SeasonEpisodesTab from "../../seasons/SeasonEpisodesTab.svelte";
   import { mediaGlanceNavigation } from "../mediaGlanceNavigation.ts";

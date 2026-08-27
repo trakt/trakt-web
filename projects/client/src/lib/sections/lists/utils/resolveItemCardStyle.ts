@@ -1,4 +1,4 @@
-import type { BaseItemProps } from '../models/BaseItemProps.ts';
+import type { BaseItemProps } from '../components/models/BaseItemProps.ts';
 
 export function resolveItemCardStyle(
   style: NonNullable<BaseItemProps['style']>,

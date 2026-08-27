@@ -11,7 +11,8 @@
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import type { Snippet } from "svelte";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
-  import { resolveItemCardStyle } from "../../components/_internal/resolveItemCardStyle.ts";
+  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
+  import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import MediaItem from "../../components/MediaItem.svelte";
   import UpNextSwipe from "../../progress/_internal/UpNextSwipe.svelte";
   import { mapToMarkAsWatchedTarget } from "./mapToMarkAsWatchedTarget";
@@ -51,6 +52,15 @@
       media: entry,
     };
   });
+
+  const hoverSubtitle = $derived(
+    mediaEntry.episode
+      ? episodeNumberLabel({
+        seasonNumber: mediaEntry.episode.season,
+        episodeNumber: mediaEntry.episode.number,
+      })
+      : undefined,
+  );
 
   const commonActionProps = $derived({
     style: "dropdown-item" as const,
@@ -102,6 +112,8 @@
     {action}
     {sortTag}
     tag={isSummary ? summaryTag : undefined}
+    hoverTag={summaryTag}
+    {hoverSubtitle}
     variant="start"
     source="start-watching"
   />
