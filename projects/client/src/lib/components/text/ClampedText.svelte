@@ -61,6 +61,10 @@
 
     @include for-tablet-sm-and-below {
       flex-direction: column;
+
+      .line-clamp-content {
+        width: 100%;
+      }
     }
   }
 
