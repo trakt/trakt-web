@@ -1325,6 +1325,8 @@
   "tag_text_most_popular": "Legnépszerűbb",
   "tag_text_movies": "Filmek",
   "tag_text_new": "Új",
+  "tag_text_new_finale": "Új finálé",
+  "tag_text_new_premiere": "Új premier",
   "tag_text_new_preview_feature": "Új",
   "tag_text_number_of_episodes": "{count} epizód",
   "tag_text_play": "{number} lejátszás",

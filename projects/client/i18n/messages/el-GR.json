@@ -1325,6 +1325,8 @@
   "tag_text_most_popular": "Πιο δημοφιλές",
   "tag_text_movies": "Ταινίες",
   "tag_text_new": "Νέο",
+  "tag_text_new_finale": "Νέο Φινάλε",
+  "tag_text_new_premiere": "Νέα Πρεμιέρα",
   "tag_text_new_preview_feature": "Νέο",
   "tag_text_number_of_episodes": "{count} επ.",
   "tag_text_play": "{number} προβολή",

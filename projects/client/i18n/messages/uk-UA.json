@@ -1325,6 +1325,8 @@
   "tag_text_most_popular": "Найпопулярніший",
   "tag_text_movies": "Фільми",
   "tag_text_new": "Нове",
+  "tag_text_new_finale": "Новий фінал",
+  "tag_text_new_premiere": "Нова прем'єра",
   "tag_text_new_preview_feature": "Нове",
   "tag_text_number_of_episodes": "{count} еп.",
   "tag_text_play": "{number} переглядів",

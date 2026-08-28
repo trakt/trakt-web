@@ -1325,6 +1325,8 @@
   "tag_text_most_popular": "Najpopularniejsze",
   "tag_text_movies": "Filmy",
   "tag_text_new": "Nowość",
+  "tag_text_new_finale": "Nowy Finał",
+  "tag_text_new_premiere": "Nowa Premiera",
   "tag_text_new_preview_feature": "Nowość",
   "tag_text_number_of_episodes": "{count} odc.",
   "tag_text_play": "{number} odtworzeń",
