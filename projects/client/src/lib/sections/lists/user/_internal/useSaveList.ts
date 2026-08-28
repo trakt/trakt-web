@@ -24,7 +24,9 @@ type UpdateListProps = {
 
 export type UseSaveListProps = CreateListProps | UpdateListProps;
 
-function saveRequest(props: UseSaveListProps & SaveListProps) {
+async function saveRequest(
+  props: UseSaveListProps & SaveListProps,
+): Promise<string | Nil> {
   const { type } = props;
 
   const payload = {
@@ -36,7 +38,8 @@ function saveRequest(props: UseSaveListProps & SaveListProps) {
 
   switch (type) {
     case 'create':
-      return createListRequest(payload);
+      await createListRequest(payload);
+      return undefined;
     case 'update':
       return updateListRequest({
         ...payload,
@@ -68,7 +71,7 @@ export function useSaveList(props: UseSaveListProps) {
     isSaving.next(true);
     track();
 
-    await saveRequest({
+    const slug = await saveRequest({
       ...props,
       name: newName,
       description,
@@ -78,6 +81,8 @@ export function useSaveList(props: UseSaveListProps) {
     await invalidate(invalidateAction);
 
     isSaving.next(false);
+
+    return slug;
   };
 
   return {
