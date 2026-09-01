@@ -50,7 +50,7 @@ function mapToType(value: string | Nil): MediaType | null {
 }
 
 function mapToNumber(value: string | Nil) {
-  if (value == null) {
+  if (value == null || value.trim() === '') {
     return null;
   }
 
