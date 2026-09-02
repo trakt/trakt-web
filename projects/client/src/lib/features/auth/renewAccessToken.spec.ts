@@ -15,16 +15,19 @@ function makeUser(expiresInSeconds: number): User {
 
 function makeManager(current: User | null, renewed: User | null = null) {
   const signinSilent = vi.fn().mockResolvedValue(renewed);
+  const load = vi.fn().mockResolvedValue(undefined);
 
   return {
     manager: {
       getUser: vi.fn().mockResolvedValue(current),
       signinSilent,
+      events: { load },
       settings: {
         accessTokenExpiringNotificationTimeInSeconds: notificationTimeSeconds,
       },
     } as unknown as UserManager,
     signinSilent,
+    load,
   };
 }
 
@@ -47,7 +50,7 @@ describe('renewAccessToken', () => {
     const result = await renewAccessToken(manager);
 
     expect(signinSilent).toHaveBeenCalledTimes(1);
-    expect(result).toEqual({ user: renewed, didAdopt: false });
+    expect(result).toBe(renewed);
   });
 
   it('should renew when there is no stored token', async () => {
@@ -57,7 +60,7 @@ describe('renewAccessToken', () => {
     const result = await renewAccessToken(manager);
 
     expect(signinSilent).toHaveBeenCalledTimes(1);
-    expect(result).toEqual({ user: renewed, didAdopt: false });
+    expect(result).toBe(renewed);
   });
 
   it('should adopt a token another holder just minted', async () => {
@@ -67,7 +70,37 @@ describe('renewAccessToken', () => {
     const result = await renewAccessToken(manager);
 
     expect(signinSilent).not.toHaveBeenCalled();
-    expect(result).toEqual({ user: current, didAdopt: true });
+    expect(result).toBe(current);
+  });
+
+  it('should renew a fresh token the server just rejected', async () => {
+    const current = makeUser(3600);
+    const renewed = makeUser(7200);
+    const { manager, signinSilent } = makeManager(current, renewed);
+
+    const result = await renewAccessToken(manager, current.access_token);
+
+    expect(signinSilent).toHaveBeenCalledTimes(1);
+    expect(result).toBe(renewed);
+  });
+
+  it('should adopt a fresh token when another holder minted it', async () => {
+    const current = makeUser(3600);
+    const { manager, signinSilent } = makeManager(current);
+
+    const result = await renewAccessToken(manager, 'a-token-since-replaced');
+
+    expect(signinSilent).not.toHaveBeenCalled();
+    expect(result).toBe(current);
+  });
+
+  it('should announce an adopted token so every holder writes it', async () => {
+    const current = makeUser(3600);
+    const { manager, load } = makeManager(current);
+
+    await renewAccessToken(manager);
+
+    expect(load).toHaveBeenCalledWith(current);
   });
 
   it('should renew a token already inside its expiring window', async () => {

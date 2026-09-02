@@ -143,18 +143,9 @@ export function initializeUserManager(
       }
     };
 
-    const renewUnderLock = async () => {
-      const { user, didAdopt } = await renewAccessToken(manager);
-
-      // `signinSilent` raises `userLoaded`; an adopted token does not.
-      if (didAdopt) {
-        handleUserEvent(user);
-      }
-    };
-
     const renewSilently = () => {
       renewGuard
-        .renew(renewUnderLock)
+        .renew(() => renewAccessToken(manager))
         .catch(handleSilentRenewFailure)
         // The guard resolves without attempting once its breaker is open, and
         // a gated tree that never hears back renders nothing at all.
